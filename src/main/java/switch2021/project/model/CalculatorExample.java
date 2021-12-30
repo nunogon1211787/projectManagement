@@ -1,4 +1,4 @@
-package lapr.project.model;
+package switch2021.project.model;
 
 /**
  * @author Nuno Bettencourt {@literal <nmb@isep.ipp.pt>} on 24/10/2021.
