@@ -8,6 +8,7 @@ public class Project {
     /**
      * Atributos da classe Projecto
      **/
+
     private char code;
 
     private String name;
@@ -26,6 +27,7 @@ public class Project {
     /**
      * Construtor de Projecto
      **/
+
     public Project(char code, String name, String description, String customer, String typology,
                    ArrayList<String> businessSector, CharSequence startDate, int numberOfSprints, int budget) {
 
@@ -47,6 +49,7 @@ public class Project {
     /**
      * Método que obtem a data actual no momento do uso do proprio metodo;
      **/
+
     public void setEndDate() {
 
         this.endDate = LocalDate.now();
