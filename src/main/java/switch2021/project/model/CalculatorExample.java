@@ -7,7 +7,7 @@ public class CalculatorExample {
 
 	/**
 	 * Calculate the sum of two int numbers.
-	 *
+	 *123
 	 * @param firstOperand First number to be added
 	 * @param secondOperand Second number to be added
 	 * @return Return the sum of both operands.
