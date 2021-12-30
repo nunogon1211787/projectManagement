@@ -9,7 +9,7 @@ public class Customer {
     private String description;
 
     /**
-     * Construtor de customer
+     * Construtor de  customer
      **/
 
     public Customer(String description) {
