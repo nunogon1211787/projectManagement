@@ -8,7 +8,7 @@ public class Company {
     /**
      * Classe de Company que contem listas de projectos e users
      * Será necessário adicionar aqui novas listas pertencentes a Company, nomedamente a dos users.
-     * Metodos necessarios da class Company
+     * Metodos possivelmente necessarios da class Company
      *      * getListOfProjects()
      *      * getListOfUsers()
      **/
