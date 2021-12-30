@@ -9,7 +9,7 @@ public class Typology {
     private String description;
 
     /**
-     * Constutor da Classe Typology
+     * Constutor da Classe  Typology
      **/
 
     public Typology(String description) {
