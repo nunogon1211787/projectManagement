@@ -9,7 +9,7 @@ public class ProjectStatus {
     private String description;
 
     /**
-     * Constutor da Classe ProjectStatus
+     * Constutor da Classe  ProjectStatus
      **/
 
     public ProjectStatus(String description) {
