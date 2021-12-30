@@ -8,7 +8,7 @@ public class ProjectSettings {
     /**
      * Classe ProjectSettings que vai conter as listas -
      * Atributos de ProjectSettings
-     * ** Metodos necessarios:
+     * ** Metodos possivelmente necessarios:
      *      * getProjectStatus()
      *      * getProjectTypology()
      *      * getProjectBusinessSector()
