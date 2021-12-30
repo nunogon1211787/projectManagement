@@ -11,6 +11,7 @@ public class Customer {
     /**
      * Construtor de customer
      **/
+
     public Customer(String description) {
         this.description = description;
     }

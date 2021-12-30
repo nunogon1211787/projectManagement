@@ -11,6 +11,7 @@ public class Typology {
     /**
      * Constutor da Classe Typology
      **/
+
     public Typology(String description) {
         this.description = description;
     }

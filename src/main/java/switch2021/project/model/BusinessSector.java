@@ -11,6 +11,7 @@ public class BusinessSector {
     /**
      * Constutor da Classe BusinessSector
      **/
+
     public BusinessSector(String description) {
         this.description = description;
     }
