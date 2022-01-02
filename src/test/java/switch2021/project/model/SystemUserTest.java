@@ -1,6 +1,10 @@
 package switch2021.project.model;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,4 +49,5 @@ class SystemUserTest {
         assertEquals(password,valuePassword);
         assertTrue(activateUser);
     }
+
 }

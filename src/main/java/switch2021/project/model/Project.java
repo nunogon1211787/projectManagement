@@ -9,8 +9,7 @@ public class Project {
      * Atributos da classe Projecto
      **/
 
-    private char code;
-
+    private String code;
     private String name;
     private String description;
     private String customer;
@@ -19,8 +18,9 @@ public class Project {
 
     private ArrayList<String> businessSector;
 
-    private LocalDate startDate;
+    private CharSequence startDate;  /** è necessario mudar as datas o mesmo formato(ver qual o melhor) **/
     private LocalDate endDate;
+
     private int numberOfSprints;
     private int budget;
 
@@ -28,20 +28,17 @@ public class Project {
      * Construtor de Projecto
      **/
 
-    public Project(char code, String name, String description, String customer, String typology,
+    public Project(String code, String name, String description, String customer, String typology,
                    ArrayList<String> businessSector, CharSequence startDate, int numberOfSprints, int budget) {
 
         this.code = code;
-
         this.name = name;
         this.description = description;
         this.customer = customer;
         this.typology = typology;
         this.ProjectStatus = "Status_0";
-
         this.businessSector = businessSector;
-
-        this.startDate = LocalDate.parse(startDate);
+        this.startDate = startDate;
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
     }
@@ -53,6 +50,52 @@ public class Project {
     public void setEndDate() {
 
         this.endDate = LocalDate.now();
+    }
+
+    /** Métodos "Getter" dos atributos **/
+
+    public String getCode() {
+        return code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getCustomer() {
+        return customer;
+    }
+
+    public String getTypology() {
+        return typology;
+    }
+
+    public String getProjectStatus() {
+        return ProjectStatus;
+    }
+
+    public ArrayList<String> getBusinessSector() {
+        return businessSector;
+    }
+
+    public CharSequence getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public int getNumberOfSprints() {
+        return numberOfSprints;
+    }
+
+    public int getBudget() {
+        return budget;
     }
 
 }
