@@ -18,7 +18,7 @@ public class Project {
 
     private ArrayList<String> businessSector;
 
-    private CharSequence startDate;  /** è necessario mudar as datas o mesmo formato(ver qual o melhor) **/
+    private CharSequence startDate;  /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
     private LocalDate endDate;
 
     private int numberOfSprints;
