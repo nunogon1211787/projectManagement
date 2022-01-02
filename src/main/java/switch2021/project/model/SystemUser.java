@@ -1,17 +1,19 @@
 package switch2021.project.model;
 
-import java.util.Arrays;
-
 public class SystemUser {
 
-    //atributes
+    /**
+     * Attributes of SystemUser´s Class
+     **/
     private String userName;
     private String email;
     private String photo;
     private String password;
     private boolean activateUser;
 
-    //contructor without photo
+    /**
+     * Contructor without photo
+     **/
     public SystemUser(String userName, String email, String password) {
         this.userName = userName;
         this.email = email;
@@ -20,7 +22,9 @@ public class SystemUser {
         this.activateUser = false;
     }
 
-
+    /**
+     * Contructor with photo
+     **/
     public SystemUser(String userName, String email, String photo, String password) {
         this.userName = userName;
         this.email = email;
@@ -29,6 +33,9 @@ public class SystemUser {
         this.activateUser = false;
     }
 
+    /**
+     * Getting and Setting Methods
+     **/
     public void setUserName(String userName) {
         this.userName = userName;
     }
