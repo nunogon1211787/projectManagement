@@ -21,7 +21,7 @@ class SystemUserTest {
         String password = ivan.getPassword();
         String valuePassword = "123456";
         boolean activateUser = ivan.activateUser();
-        //Result
+        //Results
         assertEquals(valueName, name);
         assertEquals(email,valueEmail);
         assertEquals(password,valuePassword);
