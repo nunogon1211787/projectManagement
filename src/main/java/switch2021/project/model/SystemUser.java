@@ -1,3 +1,5 @@
+package switch2021.project.model;
+
 import java.util.Arrays;
 
 public class SystemUser {

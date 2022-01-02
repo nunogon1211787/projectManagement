@@ -1,6 +1,8 @@
-package lapr.project.ui;
+package switch2021.project.ui;
 
-import lapr.project.model.CalculatorExample;
+//import lapr.project.model.CalculatorExample;
+
+import switch2021.project.model.CalculatorExample;
 
 import java.io.IOException;
 import java.sql.SQLException;
