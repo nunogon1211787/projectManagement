@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class SystemUser {
 
     /**
-     * Attributes of SystemUser´s Class
+     * Attributes of systemUser´s class
      **/
     private String userName;
     private String email;
@@ -74,12 +74,12 @@ public class SystemUser {
         return this.photo;
     }
 
-    public String getFunction() {
-        return this.function;
-    }
-
     public void setFunction(String function) {
         this.function = function;
+    }
+
+    public String getFunction() {
+        return this.function;
     }
 
     public void setPassword(String password) {

@@ -55,4 +55,15 @@ public class ProjectSettings {
         arrayTypology.add(typo);
         return true;
     }
+
+    /**
+     * CreateTypology
+     **/
+    public Typology createTypology(String description) {
+
+        Typology typo = new Typology(03, description);
+
+        return typo;
+    }
+
 }
