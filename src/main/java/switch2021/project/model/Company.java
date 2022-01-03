@@ -76,7 +76,7 @@ public class Company {
     /**
      * Método para validar se um projeto já existe (para que consiga associar uma US preciso
      * de validar que o projeto ao qual vou associar a US exista)
-     **/
+         **/
     public boolean checkProjectExists(String projectCode) {
 
         for (Project proj : this.arrayProj) {
