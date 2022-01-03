@@ -71,4 +71,9 @@ public class SystemUser {
     public boolean activateUser() {
         return true;
     }
+
+    /**
+     * Método para validar se o email é deste objeto.
+     */
+    public boolean checkEmail(String email){return this.email.equalsIgnoreCase(email);}
 }

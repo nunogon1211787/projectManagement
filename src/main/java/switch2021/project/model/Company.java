@@ -6,19 +6,18 @@ import java.util.List;
 public class Company {
 
     /**
-     * Classe de Company que contem listas de projectos e System users
-     * Será necessário adicionar aqui novas listas pertencentes a Company, nomedamente a dos System users.
+     * Classe de Company que contem listas de projectos e users
+     * Será necessário adicionar aqui novas listas pertencentes a Company, nomedamente a dos users.
      * Metodos possivelmente necessarios da class Company
      *      * getListOfProjects()
-     *      * getListOfSystemUsers()
+     *      * getListOfUsers()
      **/
 
 
     /**
      * Atrubutos da Classe
      **/
-    ArrayList<Project> arrayProj = new ArrayList<Project>();
-    ArrayList<SystemUser> arraySyUser = new ArrayList<SystemUser>();
+    List<Project> arrayProj = new ArrayList<Project>();
 
     /**
      * Método para adicionar projectos á lista.
@@ -28,32 +27,11 @@ public class Company {
         return true;
     }
 
-    public boolean add(SystemUser syUser) {
-        arraySyUser.add(syUser);
-        return true;
-    }
-
-    /**
-     * Getting and Setting Methods
-     **/
-
-    public ArrayList<Project> getArrayProj() {
-        return arrayProj;
-    }
-
-    public ArrayList<SystemUser> getArraySyUser() {
-        return arraySyUser;
-    }
-
     /**
      * Método para retornar instancia da lista atraves do indice
      **/
-    public Project getProj(int index) {
+    public Project get(int index) {
+
         return arrayProj.get(index);
     }
-
-    public SystemUser getSyUser(int email) {
-        return arraySyUser.get(email);
-    }
-
 }
