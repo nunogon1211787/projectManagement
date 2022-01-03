@@ -1,7 +1,6 @@
 package switch2021.project.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Company {
 
@@ -17,8 +16,8 @@ public class Company {
     /**
      * Atrubutos da Classe
      **/
-    ArrayList<Project> arrayProj = new ArrayList<Project>();
-    ArrayList<SystemUser> arraySyUser = new ArrayList<SystemUser>();
+    ArrayList<Project> arrayProj = new ArrayList<>();
+    ArrayList<SystemUser> arraySyUser = new ArrayList<>();
 
     /**
      * Método para adicionar projectos á lista.
@@ -56,4 +55,19 @@ public class Company {
         return arraySyUser.get(email);
     }
 
+    /**
+     * Método para validar se um projeto já existe (para que consiga associar uma US preciso
+     * de validar que o projeto ao qual vou associar a US exista)
+     **/
+
+
+    public boolean checkProjectExists(String projectCode) {
+
+        for (Project proj : arrayProj) {
+            if (proj.getCode().equalsIgnoreCase(projectCode)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

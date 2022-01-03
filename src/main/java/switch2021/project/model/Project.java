@@ -17,6 +17,7 @@ public class Project {
     private String ProjectStatus;
 
     private ArrayList<String> businessSector;
+    private ArrayList<UserStory> productBacklog;
 
     private CharSequence startDate;  /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
     private LocalDate endDate;
@@ -96,6 +97,19 @@ public class Project {
 
     public int getBudget() {
         return budget;
+    }
+
+    public ArrayList<UserStory> getProductBacklog() {
+        return productBacklog;
+    }
+
+    boolean checkUserStoryExists(String description){
+        for (UserStory userStory : productBacklog){
+            if(userStory.getDescription().trim().equalsIgnoreCase(description.trim())){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
