@@ -70,6 +70,21 @@ public class ProjectSettings {
         return typo;
     }
 
+    /** Métodos Getter e Setter **/
 
+    public List<ProjectStatus> getArrayProjectStatus() {
+        return arrayProjectStatus;
+    }
 
+    public List<Customer> getArrayCustomer() {
+        return arrayCustomer;
+    }
+
+    public List<Typology> getArrayTypology() {
+        return arrayTypology;
+    }
+
+    public List<BusinessSector> getArrayBusinessSector() {
+        return arrayBusinessSector;
+    }
 }
