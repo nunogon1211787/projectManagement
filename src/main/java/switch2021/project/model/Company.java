@@ -145,5 +145,21 @@ public class Company {
         return userWithProfile;
     }
 
+    /**
+     * Método para procurar um projeto com um dado código
+     */
+
+    public Project searchProject (String codeX){
+        int count = 0;
+        for (int i = 0; i < this.arrayProj.size(); i++) {
+
+            if(this.getProj(i).getCode() == codeX){
+                break;
+            }
+            count++;
+        }
+        return getProj(count);
+    }
+
 
 }
