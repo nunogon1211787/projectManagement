@@ -3,6 +3,7 @@ package switch2021.project.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,13 +16,15 @@ class ProjectTest {
     @Test
     @DisplayName("Teste de criação de projecto")
     public void createProject() {
-        //Input
+        //Arrange
         ArrayList<String> businessSector = new ArrayList<String>();
         businessSector.add("business_1");
         businessSector.add("business_2");
+        LocalDate date = LocalDate.of(2021,12,12);
 
+        //
         Project newProject = new Project("123testcode", "prototype", "test", "customer_0",
-                "typology_0", businessSector, "12-12-2021", 7, 5000 );
+                "typology_0", businessSector, date, 7, 5000 );
 
         // Expected
         String code = newProject.getCode();
@@ -41,8 +44,8 @@ class ProjectTest {
 
         ArrayList<String> businessSectorCheck = newProject.getBusinessSector();
 
-        CharSequence startDate = newProject.getStartDate();
-        CharSequence valueStarDate = "12-12-2021";
+        LocalDate startDate = newProject.getStartDate();
+        LocalDate valueStarDate = LocalDate.of(2021,12,12);
 
         int numberOfSprints = newProject.getNumberOfSprints();
         int valueNumberOfSprints = 7;
@@ -62,9 +65,9 @@ class ProjectTest {
         assertEquals(valueStarDate,startDate);
         assertEquals(valueNumberOfSprints,numberOfSprints);
         assertEquals(valueBudget,budget);
+        assertEquals(valueStatus,status);
 
         /*Assert.(businessSectorCheck,businessSector);*/ /** Colocar Método de comparar Arrays **/
-
     }
 
 }
