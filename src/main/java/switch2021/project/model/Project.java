@@ -31,7 +31,7 @@ public class Project {
      **/
 
     public Project(String code, String name, String description, String customer, String typology,
-                   ArrayList<String> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
+                   List<String> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         this.code = code;
         this.name = name;
