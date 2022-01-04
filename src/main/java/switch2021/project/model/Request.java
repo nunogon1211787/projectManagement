@@ -14,10 +14,10 @@ public class Request {
     private Integer id;
 
     /**
-    *construtor da classe "Request"
-    **/
+     * construtor da classe "Request"
+     **/
 
-    public Request (CharSequence requestDate , CharSequence requestTime,String email, int id ){
+    public Request(CharSequence requestDate, CharSequence requestTime, String email, int id) {
         this.requestDate = requestDate;
         this.requestTime = requestTime;
         this.email = email;
@@ -43,6 +43,7 @@ public class Request {
     public Integer getId() {
         return id;
     }
+
 
 
 
