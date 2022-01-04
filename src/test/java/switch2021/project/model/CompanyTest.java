@@ -35,6 +35,14 @@ class CompanyTest {
 
         //Results
         assertEquals(code, "001");
+        assertEquals(name, "XPTO2");
+        assertEquals(description, "Teste fixe");
+        assertEquals(customer, "ISEP");
+        assertEquals(typology, "cenas");
+        assertEquals(BSector, businesses);
+        assertEquals(date1, date);
+        assertEquals(sprints,7);
+        assertEquals(budget2, 3000);
 
     }
 
