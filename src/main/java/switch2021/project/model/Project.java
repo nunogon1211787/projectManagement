@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Project {
 
@@ -16,10 +17,10 @@ public class Project {
     private String typology;
     private String ProjectStatus;
 
-    private ArrayList<String> businessSector;
-    private ArrayList<UserStory> productBacklog;
+    private List<String> businessSector;
+    private List<UserStory> productBacklog;
 
-    private CharSequence startDate;  /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
+    private LocalDate startDate;  /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
     private LocalDate endDate;
 
     private int numberOfSprints;
@@ -30,7 +31,7 @@ public class Project {
      **/
 
     public Project(String code, String name, String description, String customer, String typology,
-                   ArrayList<String> businessSector, CharSequence startDate, int numberOfSprints, int budget) {
+                   List<String> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         this.code = code;
         this.name = name;
@@ -79,11 +80,11 @@ public class Project {
         return ProjectStatus;
     }
 
-    public ArrayList<String> getBusinessSector() {
+    public List<String> getBusinessSector() {
         return businessSector;
     }
 
-    public CharSequence getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
@@ -99,7 +100,7 @@ public class Project {
         return budget;
     }
 
-    public ArrayList<UserStory> getProductBacklog() {
+    public List<UserStory> getProductBacklog() {
         return productBacklog;
     }
 

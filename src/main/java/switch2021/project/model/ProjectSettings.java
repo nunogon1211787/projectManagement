@@ -49,6 +49,10 @@ public class ProjectSettings {
     }
 
     /**
+     * >>>>>TYPOLOGY´S METHODS<<<<<
+     **/
+
+    /**
      * Metodo adicionar Typology
      **/
     public boolean add(Typology typo) {
@@ -57,13 +61,30 @@ public class ProjectSettings {
     }
 
     /**
-     * CreateTypology
+     * Create Typology
      **/
     public Typology createTypology(String description) {
 
-        Typology typo = new Typology(03, description);
+        Typology typo = new Typology(description);
 
         return typo;
     }
 
+    /** Métodos Getter e Setter **/
+
+    public List<ProjectStatus> getArrayProjectStatus() {
+        return arrayProjectStatus;
+    }
+
+    public List<Customer> getArrayCustomer() {
+        return arrayCustomer;
+    }
+
+    public List<Typology> getArrayTypology() {
+        return arrayTypology;
+    }
+
+    public List<BusinessSector> getArrayBusinessSector() {
+        return arrayBusinessSector;
+    }
 }
