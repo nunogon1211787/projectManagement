@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SystemUser {
 
@@ -13,7 +14,7 @@ public class SystemUser {
     private String password;
     private String function;
     private boolean activateUser;
-    ArrayList<Profile> assignedProfileList;
+    private List<Profile> assignedProfileList = new ArrayList<>();
 
     /**
      * Contructor without photo
@@ -46,6 +47,21 @@ public class SystemUser {
         this.password = password;
         this.activateUser = false;
     }
+
+    /**
+     * Copy Constructor. Para criar um novo objeto, igual ao parâmetro, mas sem levar adiante as referências do objeto original.
+     */
+    public SystemUser(SystemUser originalUser){
+        this.userName = originalUser.userName;
+        this.email = originalUser.email;
+        this.photo = originalUser.photo;
+        this.function = originalUser.function;
+        this.password = originalUser.password;
+        this.activateUser = originalUser.activateUser;
+        this.assignedProfileList = deepCopyListProfile(originalUser.assignedProfileList);
+
+    }
+
 
     /**
      * Getting and Setting Methods
@@ -104,14 +120,23 @@ public class SystemUser {
     public String getAssignedProfile(int idx){return assignedProfileList.get(idx).getName();}
 
     /**
-     * Método para validar se o email é deste objeto.
+     * Método para validar se o email (ou parte dele) é deste objeto.
      */
-    public boolean checkEmail(String email){return this.email.equalsIgnoreCase(email);}
+    public boolean isYourEmail(String email){
+
+        boolean result = false;
+        int idxString = this.email.indexOf(email.toLowerCase());
+
+        if(idxString != -1){ result = true;}
+
+        return result;
+
+    }
 
     /**
      * Método para verificar se o profile recebido (by ID) está associado (tem na lista) ao objeto.
      */
-    public boolean checkProfile(int id){
+    public boolean isYourProfile(int id){
 
         boolean valid = false;
 
@@ -128,10 +153,21 @@ public class SystemUser {
     }
 
     /**
-     * Método para verificar quantos profiles estão associados (na lista) ao objeto.
+     * Método para criar uma Deep Copy da lista de profiles do user.
      */
 
-    public int countProfile(){return assignedProfileList.size();}
+    private List<Profile> deepCopyListProfile(List<Profile> originalList){
+
+        List<Profile> deepCopyList = new ArrayList<>();
+
+        for (int i = 0; i < originalList.size(); i++) {
+
+            deepCopyList.add(new Profile(originalList.get(i)));
+
+        }
+
+        return deepCopyList;
+    }
 
 
 }
