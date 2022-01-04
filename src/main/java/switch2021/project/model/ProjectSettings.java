@@ -49,10 +49,27 @@ public class ProjectSettings {
     }
 
     /**
+     * >>>>>TYPOLOGY´S METHODS<<<<<
+     **/
+
+    /**
      * Metodo adicionar Typology
      **/
     public boolean add(Typology typo) {
         arrayTypology.add(typo);
         return true;
     }
+
+    /**
+     * Create Typology
+     **/
+    public Typology createTypology(String description) {
+
+        Typology typo = new Typology(description);
+
+        return typo;
+    }
+
+
+
 }

@@ -8,19 +8,17 @@ public class UserStory {
 
 
     /**
-     *
      * Atributo da classe
      */
 
-    String projectCode;
-    UserStoryStatus userStoryStatus;
-    String description;
-    int priority;
-    int timeEstimate;
-    long id;
+    private String projectCode;
+    private UserStoryStatus userStoryStatus;
+    private String description;
+    private int priority;
+    private int timeEstimate;
+    private long id;
 
     /**
-     *
      * Construtor da classe
      */
 
@@ -33,10 +31,9 @@ public class UserStory {
     }
 
     /**
-     *
      * @return a junção entre o código do projeto e o ID que vai ser gerado automáticamente
      */
-    public String getUserStoryStringIdentifier(){
+    public String getUserStoryStringIdentifier() {
         return projectCode + "-" + id;
     }
 }

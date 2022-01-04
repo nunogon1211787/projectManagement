@@ -53,4 +53,14 @@ class SystemUserTest {
         assertTrue(activateUser);
     }
 
+    @Test
+    public void verifyEmailTest() {
+
+        //Input
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "1211768@isep.ipp.pt", "tester", "img_123456", "123456");
+        String emailCheck = "1211768";
+        //Result
+        assertTrue(ivan.isYourEmail(emailCheck));
+
+    }
 }
