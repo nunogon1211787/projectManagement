@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Company {
 
@@ -61,21 +62,23 @@ public class Company {
 
         SystemUser user;
 
-            if (index >= 0) {
-               user = new SystemUser(this.arraySyUser.get(index));
-            } else {
-                throw new IllegalArgumentException("Illegal index number.");
-            }
+        if (index >= 0) {
+            user = new SystemUser(this.arraySyUser.get(index));
+        } else {
+            throw new IllegalArgumentException("Illegal index number.");
+        }
 
         return user;
     }
 
-    public Profile getProfile(int index) { return new Profile(this.arrayProfile.get(index)); }
+    public Profile getProfile(int index) {
+        return new Profile(this.arrayProfile.get(index));
+    }
 
     /**
      * Método para validar se um projeto já existe (para que consiga associar uma US preciso
      * de validar que o projeto ao qual vou associar a US exista)
-         **/
+     **/
     public boolean checkProjectExists(String projectCode) {
 
         for (Project proj : this.arrayProj) {
@@ -89,13 +92,15 @@ public class Company {
     /**
      * Método para validar se um profile existe.
      **/
-    public boolean searchProfileById(int id){
+    public boolean searchProfileById(int id) {
 
         boolean valid = false;
 
         for (int i = 0; i < this.arrayProfile.size(); i++) {
 
-            if(this.arrayProfile.get(i).isValidId(id)){ valid = true; }
+            if (this.arrayProfile.get(i).isValidId(id)) {
+                valid = true;
+            }
 
         }
 
@@ -110,11 +115,11 @@ public class Company {
         int listSize = this.arraySyUser.size();
         List<SystemUser> foundUsersList = new ArrayList<>();
 
-        if(listSize != 0) {
+        if (listSize != 0) {
 
-            for (int i = 0; i <listSize; i++) {
+            for (int i = 0; i < listSize; i++) {
 
-                if(this.arraySyUser.get(i).isYourEmail(email)){
+                if (this.arraySyUser.get(i).isYourEmail(email)) {
                     foundUsersList.add(new SystemUser(this.arraySyUser.get(i)));
                 }
 
@@ -130,11 +135,11 @@ public class Company {
         List<SystemUser> userWithProfile = new ArrayList<>();
         int listSize = this.arraySyUser.size();
 
-        if(listSize != 0) {
+        if (listSize != 0) {
 
             for (int i = 0; i < listSize; i++) {
 
-                if(this.arraySyUser.get(i).isYourProfile(id)){
+                if (this.arraySyUser.get(i).isYourProfile(id)) {
                     userWithProfile.add(new SystemUser(this.arraySyUser.get(i)));
                 }
 
@@ -149,17 +154,16 @@ public class Company {
      * Método para procurar um projeto com um dado código
      */
 
-    public Project searchProject (String codeX){
+    public Project searchProject(String codeX) {
         int count = 0;
         for (int i = 0; i < this.arrayProj.size(); i++) {
 
-            if(this.getProj(i).getCode() == codeX){
+            if (Objects.equals(this.getProj(i).getCode(), codeX)) {
                 break;
             }
             count++;
         }
         return getProj(count);
     }
-
 
 }
