@@ -17,6 +17,7 @@ public class Company {
     List<Project> arrayProj = new ArrayList<>();
     List<SystemUser> arraySyUser = new ArrayList<>();
     List<Profile> arrayProfile = new ArrayList<>();
+    List<Request> arrayRequest = new ArrayList<>();
 
     /**
      * Método para adicionar objetos ás listas.
@@ -34,6 +35,12 @@ public class Company {
     public boolean add(Profile profile) {
         this.arrayProfile.add(profile);
         return true;
+    }
+
+    public boolean add (Request request){
+        this.arrayRequest.add(request);
+        return true;
+
     }
 
     /**
