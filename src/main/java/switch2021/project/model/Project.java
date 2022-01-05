@@ -20,61 +20,14 @@ public class Project {
     private List<UserStory> productBacklog;
     private List<Resource> projectTeam; /** lista de resources alocados ao projecto (Carolina) **/
 
-
-    private LocalDate startDate;  /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
+    private LocalDate startDate;
     private LocalDate endDate;
 
     private int numberOfSprints;
     private int budget;
 
-
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setCustomer(String customer) {
-        this.customer = customer;
-    }
-
-    public void setTypology(String typology) {
-        this.typology = typology;
-    }
-
-    public void setProjectStatus(String projectStatus) {
-        ProjectStatus = projectStatus;
-    }
-
-    public void setBusinessSector(List<String> businessSector) {
-        this.businessSector = businessSector;
-    }
-
-    public void setProductBacklog(List<UserStory> productBacklog) {
-        this.productBacklog = productBacklog;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setNumberOfSprints(int numberOfSprints) {
-        this.numberOfSprints = numberOfSprints;
-    }
-
-    public void setBudget(int budget) {
-        this.budget = budget;
-    }
-
     /**
-     * Construtor de Projecto
+     * Construtor de Projecto (Paulo)
      **/
 
     public Project(String code, String name, String description, String customer, String typology,
@@ -97,7 +50,7 @@ public class Project {
     }
 
     /**
-     * Método que obtem a data actual no momento do uso do proprio metodo;
+     * Método que obtem a data actual no momento do uso do proprio metodo; (Paulo)
      **/
 
     public void setEndDate() {
@@ -105,7 +58,7 @@ public class Project {
         this.endDate = LocalDate.now();
     }
 
-    /** Métodos "Getter" dos atributos **/
+    /** Métodos "Getter" dos atributos (Paulo, menos o productBacklog) **/
 
     public String getCode() {
         return code;
@@ -155,6 +108,55 @@ public class Project {
         return productBacklog;
     }
 
+    /** Metodos Setter de atributos **/
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
+
+    public void setTypology(String typology) {
+        this.typology = typology;
+    }
+
+    public void setProjectStatus(String projectStatus) {
+        ProjectStatus = projectStatus;
+    }
+
+    public void setBusinessSector(List<String> businessSector) {
+        this.businessSector = businessSector;
+    }
+
+    public void setProductBacklog(List<UserStory> productBacklog) {
+        this.productBacklog = productBacklog;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setNumberOfSprints(int numberOfSprints) {
+        this.numberOfSprints = numberOfSprints;
+    }
+
+    public void setBudget(int budget) {
+        this.budget = budget;
+    }
+
+
+    /** Metodo verificador de existencia de user story **/
+
     boolean checkUserStoryExists(String description){
         for (UserStory userStory : productBacklog){
             if(userStory.getDescription().trim().equalsIgnoreCase(description.trim())){
@@ -172,13 +174,12 @@ public class Project {
 
     }
 
-
-
     public void changeSprintDuration(int sprintDuration){
 
     }
 
     /** Método para ir buscar Project Team (Carolina) **/
+
     public List<Resource> getProjectTeam() {
         return projectTeam;
     }

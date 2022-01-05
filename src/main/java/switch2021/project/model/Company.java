@@ -8,24 +8,28 @@ import java.util.Objects;
 public class Company {
 
     /**
-     * Classe de Company que contém listas de projectos,  System users e Profiles.
-     **/
-
-
-    /**
      * Atrubutos da Classe
      **/
-    static List<Project> arrayProj = new ArrayList<>();
-    static List<SystemUser> arraySyUser = new ArrayList<>();
+
+    List<Project> arrayProj = new ArrayList<>();
+    List<SystemUser> arraySyUser = new ArrayList<>();
     List<Profile> arrayProfile = new ArrayList<>();
     List<Request> arrayRequest = new ArrayList<>();
 
-    public Company () {
+    /** Metodo create de Projectos (Paulo) **/
+
+    public Project createProject(String code, String name, String description, String customer, String typology,
+                                 List<String> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
+
+        return new Project(code,name, description, customer, typology, businessSector,
+                                    startDate,numberOfSprints, budget);
+
     }
 
     /**
      * Método para adicionar objetos ás listas.
      **/
+
     public boolean add(Project proj) {
         arrayProj.add(proj);
         return true;
@@ -50,8 +54,9 @@ public class Company {
     /**
      * Getting and Setting Methods
      **/
+
     public List<Project> getArrayProj() {
-        return arrayProj;
+        return this.arrayProj;
     }
 
     public List<SystemUser> getArraySyUser() {
@@ -62,9 +67,6 @@ public class Company {
         return this.arrayProfile;
     }
 
-    /**
-     * Método para retornar instancia/objeto da lista através do index.
-     **/
     public Project getProj(int index) {
         return arrayProj.get(index);
     }
@@ -90,6 +92,7 @@ public class Company {
      * Método para validar se um projeto já existe (para que consiga associar uma US preciso
      * de validar que o projeto ao qual vou associar a US exista)
      **/
+
     public boolean checkProjectExists(String projectCode) {
 
         for (Project proj : arrayProj) {
@@ -103,6 +106,7 @@ public class Company {
     /**
      * Método para validar se um profile existe.
      **/
+
     public boolean searchProfileById(int id) {
 
         boolean valid = false;
@@ -121,6 +125,7 @@ public class Company {
     /**
      * Métodos para localizar um ou mais system user na lista.
      */
+
     public List<SystemUser> searchUsersByEmail(String email) {
 
         int listSize = this.arraySyUser.size();
@@ -167,7 +172,7 @@ public class Company {
 
     public Project searchProject(String codeX) {
         int count = 0;
-        for (int i = 0; i < arrayProj.size(); i++) {
+        for (int i = 0; i < this.arrayProj.size(); i++) {
 
             if (Objects.equals(this.getProj(i).getCode(), codeX)) {
                 break;
@@ -193,9 +198,9 @@ public class Company {
      */
 
     public String [] getProjectIDList (){
-        String [] lista = new String[arrayProj.size()];
+        String [] lista = new String[this.arrayProj.size()];
 
-        for (int i = 0; i < arrayProj.size(); i++) {
+        for (int i = 0; i < this.arrayProj.size(); i++) {
 
             lista [i] = this.getProj(i).getCode();
         }
