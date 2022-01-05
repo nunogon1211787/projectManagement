@@ -2,8 +2,14 @@ package switch2021.project.model;
 
 
 import lombok.Getter;
+import lombok.Setter;
 
+/**
+ * Getters e Setters - com o lombok não preciso de escrever o método basta importar a biblioteca
+ */
 @Getter
+@Setter
+
 public class UserStory {
 
 

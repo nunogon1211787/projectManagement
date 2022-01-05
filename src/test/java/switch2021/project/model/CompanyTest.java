@@ -88,4 +88,28 @@ class CompanyTest {
 //                     o mesmo pode ser feito para SystemUser **/
 //    }
 
+    @Test
+    public void addNewProfileWithFailNameEmpty(){
+
+    }
+    @Test
+    public void addNewProfileWithFailTypeEmpty(){
+
+    }
+
+    @Test
+    public void addNewProfileWithInvalidProfileType(){
+
+    }
+
+    @Test
+    public void addNewProfileWithFailProfileAlreadyExist(){
+
+    }
+
+    @Test
+    public void addNewProfileWithSuccess(){
+
+    }
+
 }

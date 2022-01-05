@@ -16,6 +16,9 @@ public class Company {
     List<Profile> arrayProfile = new ArrayList<>();
     List<Request> arrayRequest = new ArrayList<>();
 
+    public Company() {
+    }
+
     /** Metodo create de Projectos (Paulo) **/
 
     public Project createProject(String code, String name, String description, String customer, String typology,
@@ -41,11 +44,28 @@ public class Company {
     }
 
     public boolean add(Profile profile) {
+
+        //Check empty fields on name and type
+        if(profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()){
+            return false;
+        }
+
+        //Check if the profile type is valid
+        if(!profile.getType().equalsIgnoreCase("SYSTEMUSER") && !profile.getType().equalsIgnoreCase("SPECIALPROFILE")){
+            return false;
+        }
+
+        //Check if profile already exist
+        for (Profile up : this.arrayProfile){
+            if(up.equals(profile)){
+                return false;
+            }
+        }
         this.arrayProfile.add(profile);
         return true;
     }
 
-    public boolean add (Request request){
+    public boolean add(Request request) {
         this.arrayRequest.add(request);
         return true;
 
@@ -84,6 +104,18 @@ public class Company {
         return user;
     }
 
+    public Profile createProfile(String name, String type) {
+        return new Profile(generateNewProfileID(), name, type);
+    }
+
+    private int generateNewProfileID() {
+        int lastIndex = 0;
+        for (Profile profile : this.arrayProfile) {
+            lastIndex = Math.max(profile.getId(), lastIndex);
+        }
+        return lastIndex + 1;
+    }
+
     public Profile getProfile(int index) {
         return new Profile(this.arrayProfile.get(index));
     }
@@ -92,11 +124,10 @@ public class Company {
      * Método para validar se um projeto já existe (para que consiga associar uma US preciso
      * de validar que o projeto ao qual vou associar a US exista)
      **/
-
-    public boolean checkProjectExists(String projectCode) {
+    public boolean checkProjectExists(String code) {
 
         for (Project proj : arrayProj) {
-            if (proj.getCode().equalsIgnoreCase(projectCode)) {
+            if (proj.getCode().equalsIgnoreCase(code)) {
                 return true;
             }
         }
@@ -186,7 +217,7 @@ public class Company {
      * Método para gravar informação editada de um projeto por cima INCOMPLETO
      */
 
-    public void overrideProject(Project x, String name, LocalDate startDate, LocalDate endDate, int numberOfSprints, String statusDescription, int sprintDuration){
+    public void overrideProject(Project x, String name, LocalDate startDate, LocalDate endDate, int numberOfSprints, String statusDescription, int sprintDuration) {
 
         x.saveProject(name, startDate, endDate, numberOfSprints);
 //        x.changeSprintDuration(sprintDuration);
@@ -197,8 +228,8 @@ public class Company {
      * Método para get lista de ID de todos os projects
      */
 
-    public String [] getProjectIDList (){
-        String [] lista = new String[this.arrayProj.size()];
+    public String[] getProjectIDList() {
+        String[] lista = new String[arrayProj.size()];
 
         for (int i = 0; i < this.arrayProj.size(); i++) {
 
