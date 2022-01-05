@@ -1,14 +1,16 @@
 package switch2021.project.model;
 
+import java.time.LocalDate;
+
 public class Resource {
     /**
      * Atributos da classe Resource
      **/
-    private String userEmail;
-    private String projectCode;
+    private SystemUser user;
+    private Project project;
 
-    private CharSequence startDate; /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
-    private CharSequence endDate; /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
+    private LocalDate startDate; /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
+    private LocalDate endDate; /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
 
     private double costPerHour;
     private double percentageOfAllocation;
@@ -17,10 +19,13 @@ public class Resource {
      * Construtor de Resource
      **/
 
-    public Resource(String userEmail, String projectCode, CharSequence startDate, CharSequence endDate, double costPerHour, double percentageOfAllocation){
+    public Resource(int userId, String projectCode, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
 
-        this.userEmail = userEmail;
-        this.projectCode = projectCode;
+        SystemUser userIdToAdd = new Company().getSyUser(userId);
+        Project projectCodeToAdd = new Company().searchProject(projectCode);
+
+        this.user = userIdToAdd;
+        this.project = projectCodeToAdd;
         this.startDate = startDate;
         this.endDate = endDate;
         this.costPerHour = costPerHour;
