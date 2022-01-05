@@ -20,6 +20,9 @@ public class Company {
     List<Profile> arrayProfile = new ArrayList<>();
     List<Request> arrayRequest = new ArrayList<>();
 
+    public Company () {
+    }
+
     /**
      * Método para adicionar objetos ás listas.
      **/

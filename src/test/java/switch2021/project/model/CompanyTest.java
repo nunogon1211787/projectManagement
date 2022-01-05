@@ -19,32 +19,23 @@ class CompanyTest {
         //Input
         List<String> businesses = new ArrayList<>();
         LocalDate date = LocalDate.now();
-        Project XPTO = new Project("001", "XPTO2", "Teste fixe", "ISEP", "cenas", businesses, date, 7, 3000);
+        Project XPTO = new Project("001", "XPTO1", "Teste fixe", "ISEP", "cenas", businesses, date
+                , 7, 3000);
+        Project XPTO_2 = new Project("002", "XPTO2", "Teste fixe_2", "ISEP_2", "cenas_2", businesses, date
+                , 9, 5000);
 
+        Company comp = new Company();
+        comp.add(XPTO);
+        comp.add(XPTO_2);
 
         //Expected
-        String code = XPTO.getCode();
-        String name = XPTO.getName();
-        String description = XPTO.getDescription();
-        String customer = XPTO.getCustomer();
-        String typology = XPTO.getTypology();
-        List<String> BSector = XPTO.getBusinessSector();
-        LocalDate date1 = XPTO.getStartDate();
-        int sprints = XPTO.getNumberOfSprints();
-        int budget2 = XPTO.getBudget();
+        String expected = comp.getProj(0).getName();
+        String expected_2 = comp.getProj(1).getName();
 
         //Results
-        assertEquals(code, "001");
-        assertEquals(name, "XPTO2");
-        assertEquals(description, "Teste fixe");
-        assertEquals(customer, "ISEP");
-        assertEquals(typology, "cenas");
-        assertEquals(BSector, businesses);
-        assertEquals(date1, date);
-        assertEquals(sprints,7);
-        assertEquals(budget2, 3000);
+        assertEquals(expected, "XPTO1");
+        assertEquals(expected_2, "XPTO2");
 
     }
-
 
 }
