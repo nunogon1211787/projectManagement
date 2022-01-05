@@ -19,59 +19,12 @@ public class Project {
 
     private List<String> businessSector;
     private List<UserStory> productBacklog;
-    private List<Resource> projectTeam; /** lista de resources alocados ao projecto (Carolina) **/
 
     private LocalDate startDate;  /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
     private LocalDate endDate;
 
     private int numberOfSprints;
     private int budget;
-
-
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setCustomer(String customer) {
-        this.customer = customer;
-    }
-
-    public void setTypology(String typology) {
-        this.typology = typology;
-    }
-
-    public void setProjectStatus(String projectStatus) {
-        ProjectStatus = projectStatus;
-    }
-
-    public void setBusinessSector(List<String> businessSector) {
-        this.businessSector = businessSector;
-    }
-
-    public void setProductBacklog(List<UserStory> productBacklog) {
-        this.productBacklog = productBacklog;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setNumberOfSprints(int numberOfSprints) {
-        this.numberOfSprints = numberOfSprints;
-    }
-
-    public void setBudget(int budget) {
-        this.budget = budget;
-    }
 
     /**
      * Construtor de Projecto
@@ -90,10 +43,6 @@ public class Project {
         this.startDate = startDate;
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     /**
@@ -162,30 +111,6 @@ public class Project {
             }
         }
         return false;
-    }
-
-    public void saveProject(String name, LocalDate startDate, LocalDate endDate,int numberOfSprints){
-        setName(name);
-        setStartDate(startDate);
-        setEndDate(endDate);
-        setNumberOfSprints(numberOfSprints);
-
-    }
-
-    public void changeSprintDuration(int sprintDuration){
-
-    }
-
-    /** Método para ir buscar Project Team (Carolina) **/
-    public List<Resource> getProjectTeam() {
-        return projectTeam;
-    }
-
-    /** Método para adicionar resource à Project Team (Carolina) **/
-
-    public boolean addResource(Resource toAdd){
-        this.projectTeam.add(toAdd);
-        return true;
     }
 
 }
