@@ -180,7 +180,7 @@ public class Company {
 
     public void overrideProject(Project x, String name, LocalDate startDate, LocalDate endDate, int numberOfSprints, String statusDescription, int sprintDuration){
 
-//        x.saveProject(name, startDate, endDate, numberOfSprints);
+        x.saveProject(name, startDate, endDate, numberOfSprints);
 //        x.changeSprintDuration(sprintDuration);
 //        x.changeStatus(statusDescription);
     }
