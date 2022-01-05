@@ -19,6 +19,8 @@ public class Project {
 
     private List<String> businessSector;
     private List<UserStory> productBacklog;
+    private List<Resource> projectTeam; /** lista de resources alocados ao projecto (Carolina) **/
+
 
     private LocalDate startDate;  /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
     private LocalDate endDate;
@@ -175,6 +177,18 @@ public class Project {
 
     public void changeSprintDuration(int sprintDuration){
 
+    }
+
+    /** Método para ir buscar Project Team (Carolina) **/
+    public List<Resource> getProjectTeam() {
+        return projectTeam;
+    }
+
+    /** Método para adicionar resource à Project Team (Carolina) **/
+
+    public boolean addResource(Resource toAdd){
+        this.projectTeam.add(toAdd);
+        return true;
     }
 }
 
