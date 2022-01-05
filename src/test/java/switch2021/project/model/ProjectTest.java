@@ -34,7 +34,7 @@ class ProjectTest {
         String code = newProject.getCode();
         String valueCode = "123testcode";
 
-        String name = newProject.getName();
+        String name = newProject.getProjectName();
         String valueName = "prototype";
 
         String description = newProject.getDescription();

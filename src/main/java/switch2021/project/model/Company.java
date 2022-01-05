@@ -15,8 +15,8 @@ public class Company {
     /**
      * Atrubutos da Classe
      **/
-    List<Project> arrayProj = new ArrayList<>();
-    List<SystemUser> arraySyUser = new ArrayList<>();
+    static List<Project> arrayProj = new ArrayList<>();
+    static List<SystemUser> arraySyUser = new ArrayList<>();
     List<Profile> arrayProfile = new ArrayList<>();
     List<Request> arrayRequest = new ArrayList<>();
 
@@ -27,7 +27,7 @@ public class Company {
      * Método para adicionar objetos ás listas.
      **/
     public boolean add(Project proj) {
-        this.arrayProj.add(proj);
+        arrayProj.add(proj);
         return true;
     }
 
@@ -51,7 +51,7 @@ public class Company {
      * Getting and Setting Methods
      **/
     public List<Project> getArrayProj() {
-        return this.arrayProj;
+        return arrayProj;
     }
 
     public List<SystemUser> getArraySyUser() {
@@ -66,7 +66,7 @@ public class Company {
      * Método para retornar instancia/objeto da lista através do index.
      **/
     public Project getProj(int index) {
-        return this.arrayProj.get(index);
+        return arrayProj.get(index);
     }
 
     public SystemUser getSyUser(int index) {
@@ -92,7 +92,7 @@ public class Company {
      **/
     public boolean checkProjectExists(String projectCode) {
 
-        for (Project proj : this.arrayProj) {
+        for (Project proj : arrayProj) {
             if (proj.getCode().equalsIgnoreCase(projectCode)) {
                 return true;
             }
@@ -167,7 +167,7 @@ public class Company {
 
     public Project searchProject(String codeX) {
         int count = 0;
-        for (int i = 0; i < this.arrayProj.size(); i++) {
+        for (int i = 0; i < arrayProj.size(); i++) {
 
             if (Objects.equals(this.getProj(i).getCode(), codeX)) {
                 break;
@@ -193,9 +193,9 @@ public class Company {
      */
 
     public String [] getProjectIDList (){
-        String [] lista = new String[this.arrayProj.size()];
+        String [] lista = new String[arrayProj.size()];
 
-        for (int i = 0; i < this.arrayProj.size(); i++) {
+        for (int i = 0; i < arrayProj.size(); i++) {
 
             lista [i] = this.getProj(i).getCode();
         }

@@ -1,7 +1,6 @@
 package switch2021.project.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Project {
@@ -11,7 +10,7 @@ public class Project {
      **/
 
     private String code;
-    private String name;
+    private String projectName;
     private String description;
     private String customer;
     private String typology;
@@ -30,8 +29,8 @@ public class Project {
 
 
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
     public void setDescription(String description) {
@@ -82,7 +81,7 @@ public class Project {
                    List<String> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         this.code = code;
-        this.name = name;
+        this.projectName = name;
         this.description = description;
         this.customer = customer;
         this.typology = typology;
@@ -112,8 +111,8 @@ public class Project {
         return code;
     }
 
-    public String getName() {
-        return name;
+    public String getProjectName() {
+        return projectName;
     }
 
     public String getDescription() {
@@ -166,7 +165,7 @@ public class Project {
     }
 
     public void saveProject(String name, LocalDate startDate, LocalDate endDate,int numberOfSprints){
-        setName(name);
+        setProjectName(name);
         setStartDate(startDate);
         setEndDate(endDate);
         setNumberOfSprints(numberOfSprints);
