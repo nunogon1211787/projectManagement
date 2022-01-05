@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class Sprint {
 
     /**
-     * Atributos da classe Resource
+     * Atributos da classe Sprint
      **/
     private int number;
     private int duration;
