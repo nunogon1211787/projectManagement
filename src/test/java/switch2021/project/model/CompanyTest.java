@@ -17,10 +17,10 @@ class CompanyTest {
     @Test
     void searchProject() {
         //Input
-        Typology cenas = new Typology("Fixe");
         List<String> businesses = new ArrayList<>();
         LocalDate date = LocalDate.now();
         Project XPTO = new Project("001", "XPTO2", "Teste fixe", "ISEP", "cenas", businesses, date, 7, 3000);
+
 
         //Expected
         String code = XPTO.getCode();

@@ -1,5 +1,6 @@
 package switch2021.project.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -164,6 +165,19 @@ public class Company {
             count++;
         }
         return getProj(count);
+    }
+
+    /**
+     * Método para gravar informação editada de um projeto por cima INCOMPLETO
+     */
+
+    public void overrideProject(Project x, String name, LocalDate startDate, LocalDate endDate, int numberOfSprints, String statusDescription, int sprintDuration){
+
+//        x.saveProject(name, startDate, endDate, numberOfSprints);
+//        x.changeSprintDuration(sprintDuration);
+//        x.changeStatus(statusDescription);
+
+
     }
 
 }
