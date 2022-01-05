@@ -183,8 +183,20 @@ public class Company {
 //        x.saveProject(name, startDate, endDate, numberOfSprints);
 //        x.changeSprintDuration(sprintDuration);
 //        x.changeStatus(statusDescription);
+    }
 
+    /**
+     * Método para get lista de ID de todos os projects
+     */
 
+    public String [] getProjectIDList (){
+        String [] lista = new String[this.arrayProj.size()];
+
+        for (int i = 0; i < this.arrayProj.size(); i++) {
+
+            lista [i] = this.getProj(i).getCode();
+        }
+        return lista;
     }
 
 }
