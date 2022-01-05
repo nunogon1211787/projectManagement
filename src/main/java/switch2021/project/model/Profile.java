@@ -66,8 +66,4 @@ public class Profile {
         return getId() == profile.getId() && Objects.equals(getName(), profile.getName()) && Objects.equals(getType(), profile.getType());
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getName(), getType());
-    }
 }
