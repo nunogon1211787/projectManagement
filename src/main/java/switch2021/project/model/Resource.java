@@ -19,13 +19,14 @@ public class Resource {
      * Construtor de Resource
      **/
 
+
     public Resource(int userId, String projectCode, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
 
-        SystemUser userIdToAdd = new Company().getSyUser(userId);
-        Project projectCodeToAdd = new Company().searchProject(projectCode);
+        SystemUser userToAdd = new Company().getSyUser(userId);
+        Project projectToAdd = new Company().searchProject(projectCode);
 
-        this.user = userIdToAdd;
-        this.project = projectCodeToAdd;
+        this.user = userToAdd;
+        this.project = projectToAdd;
         this.startDate = startDate;
         this.endDate = endDate;
         this.costPerHour = costPerHour;
