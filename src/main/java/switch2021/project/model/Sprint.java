@@ -30,6 +30,10 @@ public class Sprint {
 
     }
 
+    public void changeSprintDuration(int x){
+        this.duration = x;
+    }
+
 
 
 }

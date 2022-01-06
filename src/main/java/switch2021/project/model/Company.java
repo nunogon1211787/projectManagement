@@ -257,7 +257,7 @@ public class Company {
 
         x.saveProject(name, startDate, endDate, numberOfSprints);
 //        x.changeSprintDuration(sprintDuration);
-//        x.changeStatus(statusDescription);
+        x.changeProjectStatus(statusDescription);
     }
 
     /**
