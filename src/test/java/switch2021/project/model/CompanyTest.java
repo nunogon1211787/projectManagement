@@ -1,9 +1,7 @@
 package switch2021.project.model;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,7 +98,7 @@ class CompanyTest {
         Profile up = company.createProfile("", "System Profile");
 //Expected
         boolean expected = false;
-        boolean result = company.add(up);
+        boolean result = company.saveSystemUser(up);
 //Result
         assertFalse(result);
     }
@@ -112,7 +110,7 @@ class CompanyTest {
         Profile up = company.createProfile("Visitor", "");
 //Expected
         boolean expected = false;
-        boolean result = company.add(up);
+        boolean result = company.saveSystemUser(up);
 //Result
         assertFalse(result);
     }
@@ -124,7 +122,7 @@ class CompanyTest {
         Profile up = company.createProfile("", "");
 //Expected
         boolean expected = false;
-        boolean result = company.add(up);
+        boolean result = company.saveSystemUser(up);
 //Result
         assertFalse(result);
     }
@@ -136,7 +134,7 @@ class CompanyTest {
         Profile up = company.createProfile("Visitor", "Other Type Profile");
 //Expected
         boolean expected = false;
-        boolean result = company.add(up);
+        boolean result = company.saveSystemUser(up);
 //Result
         assertFalse(result);
     }
@@ -148,7 +146,7 @@ class CompanyTest {
         Profile up = company.createProfile("Visitor", "System Profile");
 //Expected
         boolean expected = false;
-        boolean result = company.add(up);
+        boolean result = company.saveSystemUser(up);
 //Result
         assertFalse(result);
     }
@@ -160,7 +158,7 @@ class CompanyTest {
 //Expected
         int inicialSize = Company.getArrayProfile().size();
         Profile up = company.createProfile("Cris", "System Profile");
-        company.add(up);
+        company.saveSystemUser(up);
 //Result
         assertEquals(Company.getArrayProfile().size(), inicialSize + 1);
     }
@@ -173,8 +171,8 @@ class CompanyTest {
         int inicialSize = Company.getArrayProfile().size();
         Profile up1 = company.createProfile("Cris", "System Profile");
         Profile up2 = company.createProfile("Cris_Dani", "System Profile");
-        company.add(up1);
-        company.add(up2);
+        company.saveSystemUser(up1);
+        company.saveSystemUser(up2);
 //Result
         assertEquals(Company.getArrayProfile().size(), inicialSize + 2);
     }

@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SystemUserTest {
-    @Test
+    /*@Test
     public void registerSystemUser() {
         //Input
         SystemUser ivan = new SystemUser("Ivan Aguiar", "1211768@isep.ipp.pt","tester", "123456");
@@ -148,5 +148,5 @@ class SystemUserTest {
         //Result
         assertTrue(joana.hasThisData(name, email, func, isActive, profiles));
 
-    }
+    }*/
 }

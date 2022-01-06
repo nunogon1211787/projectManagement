@@ -14,33 +14,35 @@ public class SystemUser {
     private String password;
     private String function;
     private boolean activateUser;
-    private List<Profile> assignedProfileList = new ArrayList<>();
+    private List<Profile> assignedProfileList;
 
     /**
      * Contructor without photo
      **/
 
-    public SystemUser(String userName, String email, String function, String password) {
+    public SystemUser(String userName, String email, String function, String password,Profile profile) {
         this.userName = userName;
         this.email = email;
         this.photo = "";
         this.function = function;
         this.password = encryptPassword(password);
         this.activateUser = false;
-        this.assignedProfileList.add(new Profile());
+        this.assignedProfileList = new ArrayList<>();
+        assignedProfileList.add(profile);
     }
 
     /**
      * Contructor with photo
      **/
-    public SystemUser(String userName, String email, String function, String photo, String password) {
+    public SystemUser(String userName, String email, String function, String photo, String password, Profile profile) {
         this.userName = userName;
         this.email = email;
         this.photo = photo;
         this.function = function;
         this.password = encryptPassword(password);
         this.activateUser = false;
-        this.assignedProfileList.add(new Profile());
+        this.assignedProfileList = new ArrayList<>();
+        this.assignedProfileList.add(profile);
     }
 
     /**

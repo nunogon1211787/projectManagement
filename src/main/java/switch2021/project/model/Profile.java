@@ -20,12 +20,12 @@ public class Profile {
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(001);
 
     //sem parâmetros = visitor profile (Nuno)
-    public Profile() {
+    /*public Profile() {
         this.id = ID_GENERATOR.getAndIncrement();
         this.type = "system_user";
         this.name = "visitor";
     }
-
+*/
     public Profile(int id, String name, String type) {
         this.id = id;
         this.name = name;
