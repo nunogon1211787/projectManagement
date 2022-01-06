@@ -105,11 +105,11 @@ class CompanyTest {
     }
 
     @Test
-    public void UserByEmail(){
+    public void UserByEmail() {
 
-        SystemUser ana = new SystemUser("", "1211748@isep.ipp.pt","", "",new Profile (0,"",""));
+        SystemUser ana = new SystemUser("", "1211748@isep.ipp.pt", "", "", new Profile("", ""));
         Company company = new Company(); // criar uma company
-        company.saveSystemUser (ana); //ana = objeto da classe SU
+        company.saveSystemUser(ana); //ana = objeto da classe SU
         //Expected
         SystemUser ana2 = company.getUserByEmail("1211748@isep.ipp.pt"); // estou a ir buscar um utilizador com o email etc
         //Result
@@ -121,11 +121,13 @@ class CompanyTest {
     public void verifyUpdatePassword() {
 
         //Input
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO");
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", tes);
         //RESULT
-        assertTrue(joana.updatePassword("HELLO", "GOODBYE"));
+        assertTrue(joana.updatePassword("png_123", "GOODBYE"));
         assertEquals("GOODBYE", joana.getPassword());
     }
+
     @Test
     public void addNewProfileWithFailTypeEmpty() {
         //Input
