@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Company {
 
     /**
-     * Atrubutos da Classe
+     * Atributos da Classe
      **/
 
     List<Project> arrayProj = new ArrayList<>();
@@ -238,4 +238,14 @@ public class Company {
         return lista;
     }
 
+    /**
+     * Method to Update User's List
+     */
+
+    public void updateUserList () {
+
+        for (SystemUser systemUser:arraySyUser) {
+            //if (systemUser.getuser )
+        }
+    }
 }

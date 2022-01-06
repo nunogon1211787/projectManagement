@@ -23,8 +23,8 @@ class SystemUserTest {
         boolean activateUser = ivan.activateUser();
         //Results
         assertEquals(valueName, name);
-        assertEquals(email,valueEmail);
-        assertEquals(password,valuePassword);
+        assertEquals(email, valueEmail);
+        assertEquals(password, valuePassword);
         assertTrue(activateUser);
     }
 
@@ -46,10 +46,10 @@ class SystemUserTest {
         boolean activateUser = ivan.activateUser();
         //Result
         assertEquals(valueName, name);
-        assertEquals(email,valueEmail);
-        assertEquals(function,valueFunction);
-        assertEquals(photo,valuePhoto);
-        assertEquals(password,valuePassword);
+        assertEquals(email, valueEmail);
+        assertEquals(function, valueFunction);
+        assertEquals(photo, valuePhoto);
+        assertEquals(password, valuePassword);
         assertTrue(activateUser);
     }
 
@@ -63,4 +63,16 @@ class SystemUserTest {
         assertTrue(ivan.isYourEmail(emailCheck));
 
     }
+
+    @Test
+    public void verifyUpdatePassword() {
+
+        //Input
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO");
+        //RESULT
+        assertTrue(joana.updatePassword("HELLO", "GOODBYE"));
+        assertEquals("GOODBYE", joana.getPassword());
+    }
+
+
 }
