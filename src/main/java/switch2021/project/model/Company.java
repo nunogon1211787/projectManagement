@@ -286,6 +286,16 @@ public class Company {
 
     }
 
+    /**
+     * Method to Validate Allocation (Caroli US007)
+     */
+
+//    public boolean checkAllocation(SystemUser user, double percentageOfAllocation){
+//        if()
+//
+//
+//    }
+
 
     
 }

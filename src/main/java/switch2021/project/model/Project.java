@@ -195,5 +195,38 @@ public class Project {
         this.projectTeam.add(toAdd);
         return true;
     }
-}
+
+    /** Método para criar resource (Carolina) **/
+
+    public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
+        Resource newResource = new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
+        //this.projectTeam.add(newResource);
+        //return this.projectTeam.contains(newResource);
+        return newResource;
+    }
+
+    /**
+     * Method to get Allocation (Caroli US007)
+     */
+
+    public double sumAllocation(SystemUser user, LocalDate startDate, LocalDate endDate){
+        double sum = 0;
+        for(int i = 0; i < this.projectTeam.size();i++){
+            if (this.projectTeam.get(i).isYourUser(user)) {
+                if (this.projectTeam.get(i).checkAllocationPeriod(startDate, endDate)) {
+                    sum = sum + this.projectTeam.get(i).getPercentageOfAllocation();
+                }
+            }
+        }
+        return sum;
+    }
+
+    public boolean validateAllocation(SystemUser user, LocalDate startDate, LocalDate endDate, double percentageOfAllocation){
+        boolean msg = true;
+        if(sumAllocation(user, startDate, endDate) + percentageOfAllocation > 1){
+            msg = false;
+        }
+        return msg;
+        }
+    }
 
