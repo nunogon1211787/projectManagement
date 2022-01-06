@@ -88,28 +88,121 @@ class CompanyTest {
 //                     o mesmo pode ser feito para SystemUser **/
 //    }
 
+    /**
+     * >>>>>> Testes de profile <<<<<<
+     **/
+
+
+    // Teste de adicionar profile em company (Cris)
     @Test
-    public void addNewProfileWithFailNameEmpty(){
-
-    }
-    @Test
-    public void addNewProfileWithFailTypeEmpty(){
-
-    }
-
-    @Test
-    public void addNewProfileWithInvalidProfileType(){
-
-    }
-
-    @Test
-    public void addNewProfileWithFailProfileAlreadyExist(){
-
-    }
-
-    @Test
-    public void addNewProfileWithSuccess(){
-
+    public void addNewProfileWithFailNameEmpty() {
+//Input
+        Company company = new Company();
+        Profile up = company.createProfile("", "System Profile");
+//Expected
+        boolean expected = false;
+        boolean result = company.add(up);
+//Result
+        assertFalse(result);
     }
 
+    @Test
+    public void addNewProfileWithFailTypeEmpty() {
+//Input
+        Company company = new Company();
+        Profile up = company.createProfile("Visitor", "");
+//Expected
+        boolean expected = false;
+        boolean result = company.add(up);
+//Result
+        assertFalse(result);
+    }
+
+    @Test
+    public void addNewProfileWithFailNameAndProfileEmpty() {
+//Input
+        Company company = new Company();
+        Profile up = company.createProfile("", "");
+//Expected
+        boolean expected = false;
+        boolean result = company.add(up);
+//Result
+        assertFalse(result);
+    }
+
+    @Test
+    public void addNewProfileWithInvalidProfileType() {
+//Input
+        Company company = new Company();
+        Profile up = company.createProfile("Visitor", "Other Type Profile");
+//Expected
+        boolean expected = false;
+        boolean result = company.add(up);
+//Result
+        assertFalse(result);
+    }
+
+    @Test
+    public void addNewProfileWithFailProfileAlreadyExist() {
+//Input
+        Company company = new Company();
+        Profile up = company.createProfile("Visitor", "System Profile");
+//Expected
+        boolean expected = false;
+        boolean result = company.add(up);
+//Result
+        assertFalse(result);
+    }
+
+    @Test
+    public void addNewProfileWithSuccess() {
+//Input
+        Company company = new Company();
+//Expected
+        int inicialSize = Company.getArrayProfile().size();
+        Profile up = company.createProfile("Cris", "System Profile");
+        company.add(up);
+//Result
+        assertEquals(Company.getArrayProfile().size(), inicialSize + 1);
+    }
+
+    @Test
+    public void addNewProfileWithSuccess2() {
+//Input
+        Company company = new Company();
+// Expected
+        int inicialSize = Company.getArrayProfile().size();
+        Profile up1 = company.createProfile("Cris", "System Profile");
+        Profile up2 = company.createProfile("Cris_Dani", "System Profile");
+        company.add(up1);
+        company.add(up2);
+//Result
+        assertEquals(Company.getArrayProfile().size(), inicialSize + 2);
+    }
+
+    // Teste de lista de profile em company (Ivan)
+
+    @Test
+    public void inicializeprofileslistwithdefaultprofiles() {
+//Input
+        Company.arrayProfile.add(new Profile(000, "Visitor", "System Profile"));
+        Company.arrayProfile.add(new Profile(001, "Administrator", "System Profile"));
+        Company.arrayProfile.add(new Profile(002, "Director", "System Profile"));
+        Company.arrayProfile.add(new Profile(003, "Project Manager", "Special Profile"));
+        Company.arrayProfile.add(new Profile(004, "Product Owner", "Special Profile"));
+        Company.arrayProfile.add(new Profile(005, "Scrum Master", "Special Profile"));
+        Company.arrayProfile.add(new Profile(006, "Project Team", "Special Profile"));
+        List<Profile> testProfileList = Company.getArrayProfile();
+//Expected
+        List<Profile> expected = new ArrayList<>();
+        expected.add(new Profile(000, "Visitor", "System Profile"));
+        expected.add(new Profile(001, "Administrator", "System Profile"));
+        expected.add(new Profile(002, "Director", "System Profile"));
+        expected.add(new Profile(003, "Project Manager", "Special Profile"));
+        expected.add(new Profile(004, "Product Owner", "Special Profile"));
+        expected.add(new Profile(005, "Scrum Master", "Special Profile"));
+        expected.add(new Profile(006, "Project Team", "Special Profile"));
+//Result
+        assertEquals(expected, testProfileList);
+    }
 }

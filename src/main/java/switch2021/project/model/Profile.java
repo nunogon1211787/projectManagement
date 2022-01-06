@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Profile {
 
     /**
-     * Atributos da Classe Profile.
+     * Attributes
      **/
     private int id;
     private String name;
@@ -14,7 +14,7 @@ public class Profile {
 
 
     /**
-     * Construtores.
+     * Constructors
      */
     //Create ID automatically (Nuno)
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(001);
@@ -22,7 +22,7 @@ public class Profile {
     //sem parâmetros = visitor profile (Nuno)
     public Profile() {
         this.id = ID_GENERATOR.getAndIncrement();
-        this.type = "system";
+        this.type = "system_user";
         this.name = "visitor";
     }
 
@@ -73,7 +73,7 @@ public class Profile {
         if (this == o) return true;
         if (!(o instanceof Profile)) return false;
         Profile profile = (Profile) o;
-        return getId() == profile.getId() && Objects.equals(getName(), profile.getName()) && Objects.equals(getType(), profile.getType());
+        return Objects.equals(getName(), profile.getName()) && Objects.equals(getType(), profile.getType());
     }
 
 }

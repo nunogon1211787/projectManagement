@@ -1,11 +1,12 @@
 package switch2021.project.model;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
- * Getters e Setters - com o lombok não preciso de escrever o método basta importar a biblioteca
+ * Getters e Setters - Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java.
  */
 @Getter
 @Setter
@@ -14,7 +15,7 @@ public class UserStory {
 
 
     /**
-     * Atributo da classe
+     * Attributes
      */
 
     private String projectCode;
@@ -22,13 +23,14 @@ public class UserStory {
     private String description;
     private int priority;
     private int timeEstimate;
-    private long id;
+    private long id_UserStory;
 
     /**
-     * Construtor da classe
+     * Constructors
      */
 
     public UserStory(String projectCode, UserStoryStatus userStoryStatus, String description, int priority, int timeEstimate) {
+        this.id_UserStory = ID_GENERATOR.getAndIncrement();
         this.projectCode = projectCode;
         this.userStoryStatus = userStoryStatus;
         this.description = description;
@@ -36,10 +38,14 @@ public class UserStory {
         this.timeEstimate = timeEstimate;
     }
 
+    //Create ID automatically
+    private static AtomicInteger ID_GENERATOR = new AtomicInteger(001);
+
     /**
-     * @return a junção entre o código do projeto e o ID que vai ser gerado automáticamente
+     * @return the join between the project code and the ID that will be generated automatically
      */
+
     public String getUserStoryStringIdentifier() {
-        return projectCode + "-" + id;
+        return projectCode + "-" + id_UserStory;
     }
 }

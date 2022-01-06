@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Company {
 
@@ -13,10 +14,21 @@ public class Company {
 
     List<Project> arrayProj = new ArrayList<>();
     List<SystemUser> arraySyUser = new ArrayList<>();
-    List<Profile> arrayProfile = new ArrayList<>();
+    static List<Profile> arrayProfile = new ArrayList<>();
     List<Request> arrayRequest = new ArrayList<>();
 
-    public Company() {
+    /**
+     * Constructors with data (Ivan)
+     **/
+    public Company(){
+
+        arrayProfile.add(new Profile(000,"Visitor","System Profile"));
+        arrayProfile.add(new Profile (001,"Administrator","System Profile"));
+        arrayProfile.add(new Profile(002,"Director","System Profile"));
+        arrayProfile.add(new Profile(003,"Project Manager", "Special Profile"));
+        arrayProfile.add(new Profile(004, "Product Owner", "Special Profile"));
+        arrayProfile.add(new Profile(005, "Scrum Master", "Special Profile"));
+        arrayProfile.add(new Profile(006, "Project Team", "Special Profile"));
     }
 
     /** Metodo create de Projectos (Paulo) **/
@@ -45,23 +57,10 @@ public class Company {
 
     public boolean add(Profile profile) {
 
-        //Check empty fields on name and type
-        if(profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()){
+        if(!validateProfile(profile)){
             return false;
         }
-
-        //Check if the profile type is valid
-        if(!profile.getType().equalsIgnoreCase("SYSTEMUSER") && !profile.getType().equalsIgnoreCase("SPECIALPROFILE")){
-            return false;
-        }
-
-        //Check if profile already exist
-        for (Profile up : this.arrayProfile){
-            if(up.equals(profile)){
-                return false;
-            }
-        }
-        this.arrayProfile.add(profile);
+        arrayProfile.add(profile);
         return true;
     }
 
@@ -83,8 +82,8 @@ public class Company {
         return this.arraySyUser;
     }
 
-    public List<Profile> getArrayProfile() {
-        return this.arrayProfile;
+    public static List<Profile> getArrayProfile() {
+        return arrayProfile;
     }
 
     public Project getProj(int index) {
@@ -117,26 +116,55 @@ public class Company {
 
         return user;
     }
+    public Profile getProfile(int index) {
+        return new Profile(arrayProfile.get(index));
+    }
+
+      /**
+     * Method to create a new profile (Cris-US013)
+     **/
 
     public Profile createProfile(String name, String type) {
         return new Profile(generateNewProfileID(), name, type);
     }
 
+    /**
+     * Method to generate a new ID for the profile - begin in number 1 (Cris-US013)
+     **/
     private int generateNewProfileID() {
-        int lastIndex = 0;
-        for (Profile profile : this.arrayProfile) {
+        int lastIndex = 001;
+        for (Profile profile : arrayProfile) {
             lastIndex = Math.max(profile.getId(), lastIndex);
         }
         return lastIndex + 1;
     }
 
-    public Profile getProfile(int index) {
-        return new Profile(this.arrayProfile.get(index));
+    /**
+     * Method to validate profile (Cris-US013)
+     **/
+
+    private boolean validateProfile(Profile profile) {
+        //Check empty fields on name and type
+        if(profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()){
+            return false;
+        }
+
+        //Check if the profile type is valid
+        if(!profile.getType().equalsIgnoreCase("System Profile") && !profile.getType().equalsIgnoreCase("Special Profile")){
+            return false;
+        }
+
+        //Check if profile already exist
+        for (Profile up : arrayProfile){
+            if(up.equals(profile)){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
-     * Método para validar se um projeto já existe (para que consiga associar uma US preciso
-     * de validar que o projeto ao qual vou associar a US exista)
+     * Method to validate if project exists (to associate US i need to validate that codeProject exists) (Cris-US009)
      **/
     public boolean checkProjectExists(String code) {
 
@@ -156,9 +184,9 @@ public class Company {
 
         boolean valid = false;
 
-        for (int i = 0; i < this.arrayProfile.size(); i++) {
+        for (int i = 0; i < arrayProfile.size(); i++) {
 
-            if (this.arrayProfile.get(i).isValidId(id)) {
+            if (arrayProfile.get(i).isValidId(id)) {
                 valid = true;
             }
 
