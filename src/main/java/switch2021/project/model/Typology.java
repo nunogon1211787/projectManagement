@@ -6,11 +6,16 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Typology {
+
+
+
     /** Typology attributes **/
+
     private int id_Typology;
     private String description;
 
     /** Constructors of typology´s class **/
+
     //Create ID automatically
     private static AtomicInteger ID_GENERATOR = new AtomicInteger();
 
@@ -38,6 +43,8 @@ public class Typology {
         this.description = description;
     }
 
+
+    /** Metodos Override  para comparar objectos diferentes **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

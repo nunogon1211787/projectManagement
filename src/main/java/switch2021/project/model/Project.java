@@ -6,7 +6,7 @@ import java.util.List;
 public class Project {
 
     /**
-     * Project Atributes
+     * Atributos da classe Projecto
      **/
 
     private String code;
@@ -17,9 +17,9 @@ public class Project {
     private Typology typology;
     private ProjectStatus projectStatus;
 
-    private List<BusinessSector> businessSector;
+    private BusinessSector businessSector;  // Para já coloquei em tipo Business Sector e não lista. Depois será para mudar.
     private List<UserStory> productBacklog;
-    private List<Resource> projectTeam; /** list of resources allocated to a project **/
+    private List<Resource> projectTeam; /** lista de resources alocados ao projecto (Carolina) **/
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -28,11 +28,11 @@ public class Project {
     private int budget;
 
     /**
-     * Project Constructor
+     * Construtor de Projecto (Paulo - US005)
      **/
 
     public Project(String code, String name, String description, Customer customer, Typology typology,
-                   List<BusinessSector> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
+                   BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         this.code = code;
         this.projectName = name;
@@ -51,13 +51,13 @@ public class Project {
     }
 
     /**
-     * Method to get atual data
-     * Método que obtem a data actual no momento do uso do proprio metodo; (Paulo)
+     * Método que obtem a data actual no momento do uso do proprio metodo; (Paulo - US005)
      **/
 
-    public void setEndDate() {
+    public boolean setEndDate() {
 
         this.endDate = LocalDate.now();
+        return true;
     }
 
     /** Métodos "Getter" dos atributos (Paulo, menos o productBacklog) **/
@@ -86,7 +86,7 @@ public class Project {
         return projectStatus;
     }
 
-    public List<BusinessSector> getBusinessSector() {
+    public BusinessSector getBusinessSector() {
         return businessSector;
     }
 
@@ -132,7 +132,7 @@ public class Project {
         this.projectStatus = projectStatus;
     }
 
-    public void setBusinessSector(List<BusinessSector> businessSector) {
+    public void setBusinessSector(BusinessSector businessSector) {
         this.businessSector = businessSector;
     }
 
@@ -197,37 +197,23 @@ public class Project {
         return true;
     }
 
-    /** Método para criar resource (Carolina) **/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Project that = (Project) o;
 
-    public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
-        Resource newResource = new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
-        //this.projectTeam.add(newResource);
-        //return this.projectTeam.contains(newResource);
-        return newResource;
+        return (       this.code.equals(that.code)
+                    && this.projectName.equals(that.projectName)
+                    && this.description.equals(that.description)
+                    && this.typology.equals(that.typology)
+                    && this.businessSector.equals(that.businessSector)
+                    && this.customer.equals(that.customer)
+                    && this.projectStatus.equals(that.projectStatus)
+                    && this.startDate.equals(that.startDate)
+                    && this.budget==that.budget
+                    && this.numberOfSprints== that.numberOfSprints);
     }
 
-    /**
-     * Method to get Allocation (Caroli US007)
-     */
-
-    public double sumAllocation(SystemUser user, LocalDate startDate, LocalDate endDate){
-        double sum = 0;
-        for(int i = 0; i < this.projectTeam.size();i++){
-            if (this.projectTeam.get(i).isYourUser(user)) {
-                if (this.projectTeam.get(i).checkAllocationPeriod(startDate, endDate)) {
-                    sum = sum + this.projectTeam.get(i).getPercentageOfAllocation();
-                }
-            }
-        }
-        return sum;
-    }
-
-    public boolean validateAllocation(SystemUser user, LocalDate startDate, LocalDate endDate, double percentageOfAllocation){
-        boolean msg = true;
-        if(sumAllocation(user, startDate, endDate) + percentageOfAllocation > 1){
-            msg = false;
-        }
-        return msg;
-        }
-    }
+}
 

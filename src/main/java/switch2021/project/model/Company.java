@@ -12,34 +12,31 @@ public class Company {
      * Atributos da Classe
      **/
 
-    List<Project> arrayProj;
-    List<SystemUser> arraySyUser;
+    List<Project> arrayProj = new ArrayList<>();
+    List<SystemUser> arraySyUser;// = new ArrayList<>();
     List<Profile> arrayProfile;
-    List<Request> arrayRequest;
+    List<Request> arrayRequest = new ArrayList<>();
 
     /**
      * Constructors with data (Ivan)
      **/
     public Company(){
-        this.arrayProj = new ArrayList<>();
         this.arraySyUser = new ArrayList<>();
-
         this.arrayProfile = new ArrayList<>();
-        this.arrayProfile.add(new Profile("Visitor","System Profile"));
-        this.arrayProfile.add(new Profile("Administrator","System Profile"));
-        this.arrayProfile.add(new Profile("Director","System Profile"));
-        this.arrayProfile.add(new Profile("Project Manager", "Special Profile"));
-        this.arrayProfile.add(new Profile("Product Owner", "Special Profile"));
-        this.arrayProfile.add(new Profile("Scrum Master", "Special Profile"));
-        this.arrayProfile.add(new Profile("Project Team", "Special Profile"));
 
-        this.arrayRequest = new ArrayList<>();
+        arrayProfile.add(new Profile(0,"Visitor","System Profile"));
+        arrayProfile.add(new Profile(1,"Administrator","System Profile"));
+        /*arrayProfile.add(new Profile(2,"Director","System Profile"));
+        arrayProfile.add(new Profile(3,"Project Manager", "Special Profile"));
+        arrayProfile.add(new Profile(4, "Product Owner", "Special Profile"));
+        arrayProfile.add(new Profile(5, "Scrum Master", "Special Profile"));
+        arrayProfile.add(new Profile(6, "Project Team", "Special Profile"));*/
     }
 
-    /** Metodo create de Projectos (Paulo) **/
+    /** Metodo create de Projectos (Paulo - US005) **/
 
     public Project createProject(String code, String name, String description, Customer customer, Typology typology,
-                                 List<BusinessSector> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
+                                 BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         return new Project(code,name, description, customer, typology, businessSector,
                                     startDate,numberOfSprints, budget);
@@ -55,13 +52,11 @@ public class Company {
         return new SystemUser(userName, email, password, function,photo, arrayProfile.get(0));
     }
 
-    //Nuno, alterei o método porque o anterior tinha um erro! (Joana)
-
     public boolean validateSystemUser(SystemUser user) {
-        if (user == null & this.arraySyUser.contains(user)) {
+        if (user == null) {
             return false;
         }
-        return true;
+        return this.arraySyUser.contains(user);
     }
 
     /**
@@ -69,15 +64,14 @@ public class Company {
      **/
 
     public boolean add(Project proj) {
-        arrayProj.add(proj);
+        this.arrayProj.add(proj);
         return true;
     }
-    /*
+
     public boolean saveSystemUser(SystemUser syUser) {
         this.arraySyUser.add(syUser);
         return true;
     }
-     */
 
     public boolean add(Profile profile) {
 
@@ -93,8 +87,6 @@ public class Company {
         return true;
 
     }
-
-
 
     /**
      * Getting and Setting Methods
@@ -142,7 +134,6 @@ public class Company {
 
         return user;
     }
-
     public Profile getProfile(int index) {
         return new Profile(arrayProfile.get(index));
     }
@@ -152,7 +143,7 @@ public class Company {
      **/
 
     public Profile createProfile(String name, String type) {
-        return new Profile(name, type);
+        return new Profile(generateNewProfileID(), name, type);
     }
 
     /**
@@ -190,6 +181,32 @@ public class Company {
         return true;
     }
 
+    /**
+     * Método para validar se um profile existe (Paulo - US005).
+     **/
+    public boolean validateProject(Project project) {
+        //Check empty fields on code, name and description
+        if(        project.getProjectName().trim().isEmpty()
+                || project.getCode().trim().isEmpty()
+                || project.getDescription().trim().isEmpty()){
+
+            return false;
+        }
+
+        //Check if the number of sprints and budget have valid input numbers
+        if(project.getNumberOfSprints() < 0 || project.getBudget() < 0) {
+
+            return false;
+        }
+
+        //Check if project already exists
+        for (Project up : arrayProj){
+            if(up.getCode().equals(project.getCode())){
+                return false;
+            }
+        }
+        return true;
+    }
     /**
      * Method to validate if project exists (to associate US i need to validate that codeProject exists) (Cris-US009)
      **/
@@ -266,7 +283,7 @@ public class Company {
 
         x.saveProject(name, startDate, endDate, numberOfSprints);
 //        x.changeSprintDuration(sprintDuration);
-        x.changeProjectStatus(statusDescription);
+//        x.changeStatus(statusDescription);
     }
 
     /**
@@ -284,25 +301,15 @@ public class Company {
     }
 
     /**
-     * Method to save system user (if this is in a valid state) in System User List
+     * Method to Update User's List
      */
 
-    public boolean saveSystemUser(SystemUser user) {
+    public void updateUserList () {
 
-        if (!validateSystemUser(user)) {
-            return false;
+        for (SystemUser systemUser : arraySyUser) {
+            //if (systemUser.getuser )
         }
-        return this.arraySyUser.add(user);
+
     }
-
-    /**
-     * Method to Validate Allocation (Caroli US007)
-     */
-
-//    public boolean checkAllocation(SystemUser user, double percentageOfAllocation){
-//        if()
-//
-//
-//    }
 
 }
