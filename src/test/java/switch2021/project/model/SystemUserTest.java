@@ -71,11 +71,11 @@ class SystemUserTest {
         String function = "jkl";
         String photo = "mno";
         Profile tes = new Profile("ddd","pro");
-        SystemUser newUser = new SystemUser(userName, email, password, function, photo,tes);
+        SystemUser newUser = new SystemUser(userName, email, function, photo, password, tes);
 
         String userNameExpected = "abc";
         String emailExpected = "def";
-        String passwordExpected = "ÐÑÒ";
+        String passwordExpected = "ÊËÌ";
         String functionExpected = "jkl";
         String photoExpected = "mno";
         Profile pro = new Profile("ddd","pro");
@@ -98,7 +98,7 @@ class SystemUserTest {
         assertEquals(functionExpected, functionResult);
         assertEquals(photoExpected, photoResult);
         assertFalse(activateUserResult);
-        assertNotEquals(assignedProfileExpected, assignedProfileResult);
+        assertEquals(assignedProfileExpected, assignedProfileResult);
     }
 
     @Test

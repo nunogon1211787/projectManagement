@@ -4,21 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SystemUser {
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SystemUser that = (SystemUser) o;
-        return (this.userName.equals(that.userName)) && (this.email.equals(that.email)) &&
-                (this.photo.equals(that.photo)) && (this.password.equals(that.password)) &&
-                (this.function.equals(that.function)) && (this.activateUser == that.activateUser)
-                && (this.assignedProfileList.equals(that.assignedProfileList));
-    }
-    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
-    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
-
-
     /**
      * Attributes of systemUser´s class
      **/
@@ -33,7 +18,6 @@ public class SystemUser {
     /**
      * Contructor without photo
      **/
-
     public SystemUser(String userName, String email, String function, String password, Profile profile) {
         this.userName = userName;
         this.email = email;
@@ -338,6 +322,19 @@ public class SystemUser {
     public boolean
 
      */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SystemUser that = (SystemUser) o;
+        return (this.userName.equals(that.userName)) && (this.email.equals(that.email)) &&
+                (this.photo.equals(that.photo)) && (this.password.equals(that.password)) &&
+                (this.function.equals(that.function)) && (this.activateUser == that.activateUser)
+                && (this.assignedProfileList.equals(that.assignedProfileList));
+    }
+    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
+    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
+
 
 
 }
