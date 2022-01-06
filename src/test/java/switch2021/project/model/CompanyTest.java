@@ -205,22 +205,22 @@ class CompanyTest {
         //Input
         Company comTest = new Company();
         List<Profile> testProfileList = comTest.getArrayProfile();
-        testProfileList.add(new Profile(000, "Visitor", "System Profile"));
-        testProfileList.add(new Profile(001, "Administrator", "System Profile"));
-        testProfileList.add(new Profile(002, "Director", "System Profile"));
-        testProfileList.add(new Profile(003, "Project Manager", "Special Profile"));
-        testProfileList.add(new Profile(004, "Product Owner", "Special Profile"));
-        testProfileList.add(new Profile(005, "Scrum Master", "Special Profile"));
-        testProfileList.add(new Profile(006, "Project Team", "Special Profile"));
+        testProfileList.add(new Profile("Visitor", "System Profile"));
+        testProfileList.add(new Profile("Administrator", "System Profile"));
+        testProfileList.add(new Profile("Director", "System Profile"));
+        testProfileList.add(new Profile("Project Manager", "Special Profile"));
+        testProfileList.add(new Profile("Product Owner", "Special Profile"));
+        testProfileList.add(new Profile("Scrum Master", "Special Profile"));
+        testProfileList.add(new Profile("Project Team", "Special Profile"));
         //Expected
         List<Profile> expected = new ArrayList<>();
-        expected.add(new Profile(000, "Visitor", "System Profile"));
-        expected.add(new Profile(001, "Administrator", "System Profile"));
-        expected.add(new Profile(002, "Director", "System Profile"));
-        expected.add(new Profile(003, "Project Manager", "Special Profile"));
-        expected.add(new Profile(004, "Product Owner", "Special Profile"));
-        expected.add(new Profile(005, "Scrum Master", "Special Profile"));
-        expected.add(new Profile(006, "Project Team", "Special Profile"));
+        expected.add(new Profile("Visitor", "System Profile"));
+        expected.add(new Profile("Administrator", "System Profile"));
+        expected.add(new Profile("Director", "System Profile"));
+        expected.add(new Profile("Project Manager", "Special Profile"));
+        expected.add(new Profile("Product Owner", "Special Profile"));
+        expected.add(new Profile("Scrum Master", "Special Profile"));
+        expected.add(new Profile("Project Team", "Special Profile"));
         //Result
         assertEquals(expected, testProfileList);
     }

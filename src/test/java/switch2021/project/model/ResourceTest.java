@@ -15,21 +15,17 @@ class ResourceTest {
     public void associateResource() {
         //Arrange
         /**user **/
-        String userName = "xyz";
-        String email = "fase";
-        String password = "des";
-        String function = "gth";
-        String photo = "mku";
-        SystemUser newUser = new SystemUser(userName, email, password, function, photo);
-        LocalDate startDate = LocalDate.of(2021,12,31);
-        LocalDate endDate = LocalDate.of(2022,01,05);
+        Profile pro = new Profile("mku","sss");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+       // LocalDate startDate = LocalDate.of(2021,12,31);
+      //  LocalDate endDate = LocalDate.of(2022,01,05);
 
         /** project **/
         String code = "opg";
         String projectName = "tre";
         String description = "hjgf";
-        String customer = "klf";
-        String typology = "wld";
+        Customer customer = new Customer("klf");
+        Typology typology = new Typology("ksa");
         List<BusinessSector> businessSector = new ProjectSettings().getArrayBusinessSector();
         LocalDate startDate = LocalDate.of(2021,12,31);
         LocalDate endDate = LocalDate.of(2022,01,05);

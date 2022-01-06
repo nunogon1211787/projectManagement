@@ -37,8 +37,8 @@ public class ProjectSettings {
         this.arrayTypology.add(new Typology("Fixed Cost"));
         this.arrayTypology.add(new Typology("Time and Materials"));
 
-        this.arrayCustomer.add(new Customer(1, "customer1@email.com"));
-        this.arrayCustomer.add(new Customer(2, "customer2@email.com"));
+        this.arrayCustomer.add(new Customer("customer1@email.com"));
+        this.arrayCustomer.add(new Customer("customer2@email.com"));
 
         this.arrayBusinessSector.add(new BusinessSector("Business_0"));
         this.arrayBusinessSector.add(new BusinessSector("Business_1"));
@@ -83,9 +83,9 @@ public class ProjectSettings {
      *       >>>>>CUSTOMER´S METHODS<<<<<
      *
      * Create Customer **/
-     public Customer createCustomer (int num, String email) {
+     public Customer createCustomer (String email) {
 
-     return new Customer(num,email);
+     return new Customer(email);
 
      }
 

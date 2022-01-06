@@ -12,25 +12,28 @@ public class Company {
      * Atributos da Classe
      **/
 
-    List<Project> arrayProj = new ArrayList<>();
-    List<SystemUser> arraySyUser;// = new ArrayList<>();
-    List<Profile> arrayProfile;// = new ArrayList<>();
-    List<Request> arrayRequest = new ArrayList<>();
+    List<Project> arrayProj;
+    List<SystemUser> arraySyUser;
+    List<Profile> arrayProfile;
+    List<Request> arrayRequest;
 
     /**
      * Constructors with data (Ivan)
      **/
     public Company(){
+        this.arrayProj = new ArrayList<>();
         this.arraySyUser = new ArrayList<>();
-        this.arrayProfile = new ArrayList<>();
 
-        arrayProfile.add(new Profile(0,"Visitor","System Profile"));
-        arrayProfile.add(new Profile(1,"Administrator","System Profile"));
-        /*arrayProfile.add(new Profile(2,"Director","System Profile"));
-        arrayProfile.add(new Profile(3,"Project Manager", "Special Profile"));
-        arrayProfile.add(new Profile(4, "Product Owner", "Special Profile"));
-        arrayProfile.add(new Profile(5, "Scrum Master", "Special Profile"));
-        arrayProfile.add(new Profile(6, "Project Team", "Special Profile"));*/
+        this.arrayProfile = new ArrayList<>();
+        this.arrayProfile.add(new Profile("Visitor","System Profile"));
+        this.arrayProfile.add(new Profile("Administrator","System Profile"));
+        this.arrayProfile.add(new Profile("Director","System Profile"));
+        this.arrayProfile.add(new Profile("Project Manager", "Special Profile"));
+        this.arrayProfile.add(new Profile("Product Owner", "Special Profile"));
+        this.arrayProfile.add(new Profile("Scrum Master", "Special Profile"));
+        this.arrayProfile.add(new Profile("Project Team", "Special Profile"));
+
+        this.arrayRequest = new ArrayList<>();
     }
 
     /** Metodo create de Projectos (Paulo) **/
@@ -139,6 +142,7 @@ public class Company {
 
         return user;
     }
+
     public Profile getProfile(int index) {
         return new Profile(arrayProfile.get(index));
     }
@@ -148,7 +152,7 @@ public class Company {
      **/
 
     public Profile createProfile(String name, String type) {
-        return new Profile(generateNewProfileID(), name, type);
+        return new Profile(name, type);
     }
 
     /**
@@ -262,7 +266,7 @@ public class Company {
 
         x.saveProject(name, startDate, endDate, numberOfSprints);
 //        x.changeSprintDuration(sprintDuration);
-//        x.changeStatus(statusDescription);
+        x.changeProjectStatus(statusDescription);
     }
 
     /**
