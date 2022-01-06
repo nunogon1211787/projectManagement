@@ -13,48 +13,40 @@ public class Company {
      **/
 
     List<Project> arrayProj = new ArrayList<>();
-    List<SystemUser> arraySyUser;// = new ArrayList<>();
-    static List<Profile> arrayProfile;// = new ArrayList<>();
+    List<SystemUser> arraySyUser = new ArrayList<>();
+    List<Profile> arrayProfile = new ArrayList<>();
     List<Request> arrayRequest = new ArrayList<>();
 
     /**
      * Constructors with data (Ivan)
      **/
-    public Company() {
-        this.arraySyUser = new ArrayList<>();
-        this.arrayProfile = new ArrayList<>();
-
-        arrayProfile.add(new Profile(000, "Visitor", "System Profile"));
-        arrayProfile.add(new Profile(001, "Administrator", "System Profile"));
-        /*arrayProfile.add(new Profile(002,"Director","System Profile"));
-        arrayProfile.add(new Profile(003,"Project Manager", "Special Profile"));
-        arrayProfile.add(new Profile(004, "Product Owner", "Special Profile"));
-        arrayProfile.add(new Profile(005, "Scrum Master", "Special Profile"));
-        arrayProfile.add(new Profile(006, "Project Team", "Special Profile"));*/
+    public Company(){
+        arrayProfile.add(new Profile(0,"Visitor","System Profile"));
+        arrayProfile.add(new Profile(1,"Administrator","System Profile"));
+        arrayProfile.add(new Profile(2,"Director","System Profile"));
+        arrayProfile.add(new Profile(3,"Project Manager", "Special Profile"));
+        arrayProfile.add(new Profile(4, "Product Owner", "Special Profile"));
+        arrayProfile.add(new Profile(5, "Scrum Master", "Special Profile"));
+        arrayProfile.add(new Profile(6, "Project Team", "Special Profile"));
     }
 
-    /**
-     * Metodo create de Projectos (Paulo)
-     **/
+    /** Metodo create de Projectos (Paulo) **/
 
     public Project createProject(String code, String name, String description, Customer customer, Typology typology,
                                  List<BusinessSector> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
-        return new Project(code, name, description, customer, typology, businessSector,
-                startDate, numberOfSprints, budget);
+        return new Project(code,name, description, customer, typology, businessSector,
+                                    startDate,numberOfSprints, budget);
 
     }
-
-    /**
-     * Metodo create de SystemUsers
-     **/
+    /** Metodo create de SystemUsers (Nuno) **/
 
     public SystemUser createSystemUser(String userName, String email, String password, String function) {
-        return new SystemUser(userName, email, password, function, arrayProfile.get(0));
+        return new SystemUser(userName, email, password, function);
     }
 
     public SystemUser createSystemUser(String userName, String email, String password, String function, String photo) {
-        return new SystemUser(userName, email, password, function, photo, arrayProfile.get(0));
+        return new SystemUser(userName, email, password, function, photo);
     }
 
     public boolean validateSystemUser(SystemUser user) {
@@ -73,21 +65,21 @@ public class Company {
         return true;
     }
 
-    public boolean saveSystemUser(SystemUser user) {
-        this.arraySyUser.add(user);
+    public boolean add(SystemUser syUser) {
+        this.arraySyUser.add(syUser);
         return true;
     }
 
-    public boolean saveSystemUser(Profile profile) {
+    public boolean add(Profile profile) {
 
-        if (!validateProfile(profile)) {
+        if(!validateProfile(profile)){
             return false;
         }
         arrayProfile.add(profile);
         return true;
     }
 
-    public boolean saveSystemUser(Request request) {
+    public boolean add(Request request) {
         this.arrayRequest.add(request);
         return true;
 
@@ -105,8 +97,8 @@ public class Company {
         return this.arraySyUser;
     }
 
-    public static List<Profile> getArrayProfile() {
-        return arrayProfile;
+    public List<Profile> getArrayProfile() {
+        return this.arrayProfile;
     }
 
     public Project getProj(int index) {
@@ -131,7 +123,7 @@ public class Company {
         SystemUser user = null;
 
         for (int i = 0; i < this.arraySyUser.size(); i++) {
-            if (this.arraySyUser.get(i).isYourEmail(email)) {
+            if(this.arraySyUser.get(i).isYourEmail(email)){
                 user = this.arraySyUser.get(i);
                 break;
             }
@@ -139,12 +131,11 @@ public class Company {
 
         return user;
     }
-
     public Profile getProfile(int index) {
         return new Profile(arrayProfile.get(index));
     }
 
-    /**
+      /**
      * Method to create a new profile (Cris-US013)
      **/
 
@@ -169,18 +160,18 @@ public class Company {
 
     private boolean validateProfile(Profile profile) {
         //Check empty fields on name and type
-        if (profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()) {
+        if(profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()){
             return false;
         }
 
         //Check if the profile type is valid
-        if (!profile.getType().equalsIgnoreCase("System Profile") && !profile.getType().equalsIgnoreCase("Special Profile")) {
+        if(!profile.getType().equalsIgnoreCase("System Profile") && !profile.getType().equalsIgnoreCase("Special Profile")){
             return false;
         }
 
         //Check if profile already exist
-        for (Profile up : arrayProfile) {
-            if (up.equals(profile)) {
+        for (Profile up : arrayProfile){
+            if(up.equals(profile)){
                 return false;
             }
         }
@@ -222,7 +213,7 @@ public class Company {
     /**
      * Métodos para localizar um ou mais system user na lista.
      */
-    public List<SystemUser> searchUsers(String name, String email, String function, int isActive, int[] profileList) {
+    public List<SystemUser> searchUsers(String name, String email, String function, int isActive, int [] profileList) {
 
         int listSize = this.arraySyUser.size();
         List<SystemUser> foundUsersList = new ArrayList<>();
@@ -275,7 +266,7 @@ public class Company {
 
         for (int i = 0; i < this.arrayProj.size(); i++) {
 
-            lista[i] = this.getProj(i).getCode();
+            lista [i] = this.getProj(i).getCode();
         }
         return lista;
     }
@@ -284,7 +275,7 @@ public class Company {
      * Method to Update User's List
      */
 
-    public void updateUserList() {
+    public void updateUserList () {
 
         for (SystemUser systemUser : arraySyUser) {
             //if (systemUser.getuser )
@@ -293,4 +284,5 @@ public class Company {
     }
 
 
+    
 }

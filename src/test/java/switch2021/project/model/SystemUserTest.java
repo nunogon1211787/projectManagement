@@ -13,59 +13,35 @@ class SystemUserTest {
     /*@Test
     public void registerSystemUser() {
         //Input
-        SystemUser ivan = new SystemUser("Ivan Aguiar", "1211768@isep.ipp.pt","tester", "123456");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456");
+        ivan.activateUser();
         //Expected
-        String name = ivan.getUserName();
-        String valueName = "Ivan Aguiar";
-        String email = ivan.getEmail();
-        String valueEmail = "1211768@isep.ipp.pt";
-        String function = ivan.getFunction();
-        String valueFunction = "tester";
-        String password = ivan.getPassword();
-        String valuePassword = "123456";
-        boolean activateUser = ivan.activateUser();
+        SystemUser expected = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456");
+        expected.activateUser();
         //Results
-        assertEquals(valueName, name);
-        assertEquals(email, valueEmail);
-        assertEquals(function, valueFunction);
-        assertEquals(password, valuePassword);
-        assertTrue(activateUser);
+        assertEquals(ivan, expected);
     }
 
     @Test
     public void registerSystemUserWithPhoto() {
         //Input
-        SystemUser ivan = new SystemUser("Ivan Aguiar", "1211768@isep.ipp.pt", "tester", "img_123456", "123456");
+        SystemUser ivan1 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456");
+        ivan1.activateUser();
         //Expected
-        String name = ivan.getUserName();
-        String valueName = "Ivan Aguiar";
-        String email = ivan.getEmail();
-        String valueEmail = "1211768@isep.ipp.pt";
-        String function = ivan.getFunction();
-        String valueFunction = "tester";
-        String photo = ivan.getPhoto();
-        String valuePhoto = "img_123456";
-        String password = ivan.getPassword();
-        String valuePassword = "123456";
-        boolean activateUser = ivan.activateUser();
+        SystemUser expexted2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456");
+        expexted2.activateUser();
         //Result
-        assertEquals(valueName, name);
-        assertEquals(email, valueEmail);
-        assertEquals(function, valueFunction);
-        assertEquals(photo, valuePhoto);
-        assertEquals(password, valuePassword);
-        assertTrue(activateUser);
+        assertEquals(ivan1, expexted2);
     }
 
     @Test
     public void verifyEmailTest() {
 
         //Input
-        SystemUser ivan = new SystemUser("Ivan Aguiar", "1211768@isep.ipp.pt", "tester", "img_123456", "123456");
-        String emailCheck = "1211768";
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456");
+        String emailCheck = "xxxx";
         //Result
         assertTrue(ivan.isYourEmail(emailCheck));
-
     }
 
     @Test
@@ -75,8 +51,9 @@ class SystemUserTest {
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO");
         //RESULT
         assertTrue(joana.updatePassword("HELLO", "GOODBYE"));
-        assertEquals("GOODBYE", joana.getPassword());
+        assertEquals("GOODBYE",joana.decryptPassword(joana.getPassword()));
     }
+
     @Test
     public void createSystemUserWithPhoto() {
         //Arrange
