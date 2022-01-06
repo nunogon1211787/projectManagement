@@ -10,13 +10,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SystemUserTest {
-    /*@Test
+    @Test
     public void registerSystemUser() {
         //Input
-        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456");
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         ivan.activateUser();
         //Expected
-        SystemUser expected = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456");
+        Profile tes = new Profile("ddd","pro");
+        SystemUser expected = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", tes);
         expected.activateUser();
         //Results
         assertEquals(ivan, expected);
@@ -25,10 +27,12 @@ class SystemUserTest {
     @Test
     public void registerSystemUserWithPhoto() {
         //Input
-        SystemUser ivan1 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456");
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan1 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456",pro);
         ivan1.activateUser();
         //Expected
-        SystemUser expexted2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456");
+        Profile tes = new Profile("ddd","pro");
+        SystemUser expexted2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456",tes);
         expexted2.activateUser();
         //Result
         assertEquals(ivan1, expexted2);
@@ -38,20 +42,24 @@ class SystemUserTest {
     public void verifyEmailTest() {
 
         //Input
-        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456");
+        Profile tes = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456",tes);
         String emailCheck = "xxxx";
         //Result
         assertTrue(ivan.isYourEmail(emailCheck));
     }
 
     @Test
-    public void verifyUpdatePassword() {
+    public void verifyUpdateAndEncryptationOfPassword() {
 
-        //Input
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO");
-        //RESULT
-        assertTrue(joana.updatePassword("HELLO", "GOODBYE"));
-        assertEquals("GOODBYE",joana.decryptPassword(joana.getPassword()));
+        //Arrange
+        Profile tes = new Profile("ddd","pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO", tes);
+        //Act
+        //assertTrue(joana.updatePassword("HELLO", "GOODBYE"));
+        joana.updatePassword("HELLO", "GOODBYE");
+        //Assert
+        assertEquals("GOODBYE",joana.getPassword());
     }
 
     @Test
@@ -62,15 +70,17 @@ class SystemUserTest {
         String password = "ghi";
         String function = "jkl";
         String photo = "mno";
-        SystemUser newUser = new SystemUser(userName, email, password, function, photo);
+        Profile tes = new Profile("ddd","pro");
+        SystemUser newUser = new SystemUser(userName, email, password, function, photo,tes);
 
         String userNameExpected = "abc";
         String emailExpected = "def";
-        String passwordExpected = "ÊËÌ";
+        String passwordExpected = "ÐÑÒ";
         String functionExpected = "jkl";
         String photoExpected = "mno";
+        Profile pro = new Profile("ddd","pro");
         List<Profile> assignedProfileExpected = new ArrayList<>();
-        assignedProfileExpected.add(new Profile());
+        assignedProfileExpected.add(pro);
 
         //Act
         String userNameResult = newUser.getUserName();
@@ -95,7 +105,8 @@ class SystemUserTest {
     public void encryptPassword() {
         //Arrange
         String password = "ghi";
-        SystemUser newUser = new SystemUser("abc", "def", "ghi", "jkl", "mno");
+        Profile pro = new Profile("mno","pro");
+        SystemUser newUser = new SystemUser("abc", "def", "ghi", "jkl", pro);
         //Act
         String result = newUser.encryptPassword(password);
         //Assert
@@ -106,7 +117,8 @@ class SystemUserTest {
     public void desencryptPassword() {
         //Arrange
         String password = "Ä\u0094Å\u0095Æ\u0096";
-        SystemUser newUser = new SystemUser("abc", "def", "ghi", "jkl", "mno");
+        Profile pro = new Profile("mno","pro");
+        SystemUser newUser = new SystemUser("abc", "def", "ghi", "jkl", pro);
         //Act
         String result = newUser.decryptPassword(password);
         //Assert
@@ -116,7 +128,8 @@ class SystemUserTest {
     @Test
     void hasThisDataTest() {
         //Input
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO");
+        Profile tes = new Profile("ddd","pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO", tes);
         String name = "";
         String email = "";
         String func = "";
@@ -125,5 +138,5 @@ class SystemUserTest {
         //Result
         assertTrue(joana.hasThisData(name, email, func, isActive, profiles));
 
-    }*/
+    }
 }
