@@ -28,6 +28,22 @@ public class Company {
                                     startDate,numberOfSprints, budget);
 
     }
+    /** Metodo create de SystemUsers (Nuno) **/
+
+    public SystemUser createSystemUser(String userName, String email, String password, String function) {
+        return new SystemUser(userName, email, password, function);
+    }
+
+    public SystemUser createSystemUser(String userName, String email, String password, String function, String photo) {
+        return new SystemUser(userName, email, password, function, photo);
+    }
+
+    public boolean validateSystemUser(SystemUser user) {
+        if (user == null) {
+            return false;
+        }
+        return this.arraySyUser.contains(user);
+    }
 
     /**
      * Método para adicionar objetos ás listas.
