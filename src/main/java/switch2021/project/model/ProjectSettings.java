@@ -101,6 +101,10 @@ public class ProjectSettings {
         return arrayCustomer;
     }
 
+    public void setArrayProjectStatus(List<ProjectStatus> arrayProjectStatus) {
+        this.arrayProjectStatus = arrayProjectStatus;
+    }
+
     public Customer getCustomerById(int index) {
         return arrayCustomer.get(index);
     }
