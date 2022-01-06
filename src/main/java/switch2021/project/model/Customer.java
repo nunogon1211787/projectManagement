@@ -6,13 +6,15 @@ public class Customer {
      * Classe de Customer -
      * Atributos da Classe
      **/
-    private String description;
+    private int id;
+    private String email;
 
     /**
      * Construtor de  customer
      **/
 
-    public Customer(String description) {
-        this.description = description;
+    public Customer(int id, String email) {
+        this.id = id;
+        this.email = email;
     }
 }

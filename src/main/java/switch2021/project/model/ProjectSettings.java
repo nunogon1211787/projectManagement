@@ -25,28 +25,49 @@ public class ProjectSettings {
     private List<BusinessSector> arrayBusinessSector;
 
     /**
-     * Initiate lists of class´s Constructor
+     * Initiate lists of class´s Constructor (Paulo & Ivan)
      **/
 
     public ProjectSettings() {
-        this.arrayProjectStatus = new ArrayList<ProjectStatus>();
-        this.arrayCustomer = new ArrayList<Customer>();
+        this.arrayTypology = new ArrayList<>();
+        this.arrayBusinessSector = new ArrayList<>();
+        this.arrayCustomer = new ArrayList<>();
+        this.arrayProjectStatus = new ArrayList<>();
 
-        this.arrayTypology = new ArrayList<Typology>();
         this.arrayTypology.add(new Typology("Fixed Cost"));
         this.arrayTypology.add(new Typology("Time and Materials"));
 
-        this.arrayBusinessSector = new ArrayList<BusinessSector>();
+        this.arrayCustomer.add(new Customer(1, "customer1@email.com"));
+        this.arrayCustomer.add(new Customer(2, "customer2@email.com"));
+
+        this.arrayBusinessSector.add(new BusinessSector("Business_0"));
+        this.arrayBusinessSector.add(new BusinessSector("Business_1"));
+        this.arrayBusinessSector.add(new BusinessSector("Business_2"));
+
+        this.arrayProjectStatus.add(new ProjectStatus("Planned"));
+        this.arrayProjectStatus.add(new ProjectStatus("Inception"));
+        this.arrayProjectStatus.add(new ProjectStatus("Elaboration"));
+        this.arrayProjectStatus.add(new ProjectStatus("Construction"));
+        this.arrayProjectStatus.add(new ProjectStatus("Transition"));
+        this.arrayProjectStatus.add(new ProjectStatus("Warranty"));
+        this.arrayProjectStatus.add(new ProjectStatus("Closed"));
     }
 
     /**
      *       >>>>>PROJECTSTATUS´S METHODS<<<<<
      *
-     *
+     * Create Project Status **/
+    public ProjectStatus createProjectStatus (String descritpion) {
+
+        return new ProjectStatus(descritpion);
+
+    }
+
+     /**
      * Metodo adicionar ProjectStatus
      **/
     public boolean add(ProjectStatus projStat) {
-        arrayProjectStatus.add(projStat);
+        this.arrayProjectStatus.add(projStat);
         return true;
     }
 
@@ -54,15 +75,24 @@ public class ProjectSettings {
     public List<ProjectStatus> getArrayProjectStatus() {
         return arrayProjectStatus;
     }
+    public ProjectStatus getProjectStatusById(int index) {
+        return arrayProjectStatus.get(index);
+    }
 
     /**
      *       >>>>>CUSTOMER´S METHODS<<<<<
      *
-     *
-     * Metodo adicionar Customer
+     * Create Customer **/
+     public Customer createCustomer (int num, String email) {
+
+     return new Customer(num,email);
+
+     }
+
+     /** Metodo adicionar Customer
      **/
     public boolean add(Customer cust) {
-        arrayCustomer.add(cust);
+        this.arrayCustomer.add(cust);
         return true;
     }
 
@@ -71,21 +101,34 @@ public class ProjectSettings {
         return arrayCustomer;
     }
 
+    public Customer getCustomerById(int index) {
+        return arrayCustomer.get(index);
+    }
+
     /**
      *       >>>>>TYPOLOGY´S METHODS<<<<<
      *
-     *
-     *Getter´s Method.**/
-    public List<Typology> getArrayTypology() {
-        return this.arrayTypology;
-    }
-
-    /**Create Typology.**/
+     *Create Typology.**/
     public Typology createTypology(String description) {
 
         Typology typo = new Typology(description);
 
         return typo;
+    }
+
+    /**Typology Add´s Method.**/
+    public boolean add(Typology typo) {
+        this.arrayTypology.add(typo);
+        return true;
+    }
+
+    /**Getter´s Method.**/
+    public List<Typology> getArrayTypology() {
+        return arrayTypology;
+    }
+
+    public Typology getTypologyById(int index) {
+        return arrayTypology.get(index);
     }
 
     /** Typology Validate´s Method**/
@@ -107,17 +150,28 @@ public class ProjectSettings {
     /**
      *       >>>>>BUSINESSSECTOR´S METHODS<<<<<
      *
-     *
-     * Metodo adicionar BusinessSector
+     * Create Business Sector **/
+    public BusinessSector createBusinessSector (String descritpion) {
+
+        return new BusinessSector(descritpion);
+
+    }
+
+     /** Metodo adicionar BusinessSector
      **/
 
     public boolean add(BusinessSector busSect) {
-        arrayBusinessSector.add(busSect);
+        this.arrayBusinessSector.add(busSect);
         return true;
     }
 
+    /** Metodos getter de BusinessSetcor **/
     public List<BusinessSector> getArrayBusinessSector() {
         return arrayBusinessSector;
+    }
+
+    public BusinessSector getBussinessSectorById(int index) {
+        return arrayBusinessSector.get(index);
     }
 
 

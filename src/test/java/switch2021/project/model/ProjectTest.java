@@ -20,14 +20,15 @@ class ProjectTest {
     @DisplayName("Teste de criação de projecto")
     public void createProject() {
         //Arrange
-        ArrayList<String> businessSector = new ArrayList<String>();
-        businessSector.add("business_1");
-        businessSector.add("business_2");
-        LocalDate date = LocalDate.of(2021, 12, 12);
+        List<BusinessSector> businessSector = new ProjectSettings().getArrayBusinessSector();
 
-        //
-        Project newProject = new Project("123testcode", "prototype", "test", "customer_0",
-                "typology_0", businessSector, date, 7, 5000);
+        LocalDate date = LocalDate.of(2021, 12, 12);
+        Typology typology = new ProjectSettings().getTypologyById(0);
+        Customer customer = new ProjectSettings().getCustomerById(0);
+
+        Project newProject = new Project("123testcode", "prototype", "test", customer,
+                typology, businessSector, date, 7, 5000);
+
         newProject.setEndDate();
 
         // Expected
@@ -40,13 +41,14 @@ class ProjectTest {
         String description = newProject.getDescription();
         String valueDescription = "test";
 
-        String customer = newProject.getCustomer();
-        String valueCustomer = "customer_0";
+        Customer customerCheck = newProject.getCustomer();
+        Customer valueCustomer = new Customer(1, "customer1@email.com");
 
-        String typology = newProject.getTypology();
-        String valueTypology = "typology_0";
+        Typology typologyCheck = newProject.getTypology();
+        Typology valueTypology = new Typology("Fixed Cost");
 
-        List<String> businessSectorCheck = newProject.getBusinessSector();
+        List<BusinessSector> businessSectorCheck = newProject.getBusinessSector();
+        List<BusinessSector> valueBusinessSector = new ProjectSettings().getArrayBusinessSector();
 
         LocalDate startDate = newProject.getStartDate();
         LocalDate valueStarDate = LocalDate.of(2021, 12, 12);
@@ -60,21 +62,21 @@ class ProjectTest {
         int budget = newProject.getBudget();
         int valueBudget = 5000;
 
-        String status = newProject.getProjectStatus();
-        String valueStatus = "Status_0";
+        ProjectStatus status = newProject.getProjectStatus();
+        ProjectStatus valueStatus = new ProjectStatus("Planned");
 
         // Result
         assertEquals(valueCode, code);
         assertEquals(valueName, name);
         assertEquals(valueDescription, description);
-        assertEquals(valueCustomer, customer);
-        assertEquals(valueTypology, typology);
+        assertEquals(valueCustomer, customerCheck);
+        assertEquals(valueTypology, typologyCheck);
         assertEquals(valueStarDate, startDate);
         assertEquals(valueEndDate, endDate);
         assertEquals(valueNumberOfSprints, numberOfSprints);
         assertEquals(valueBudget, budget);
         assertEquals(valueStatus, status);
-        assertTrue(businessSector.equals(businessSectorCheck));
+        assertEquals(valueBusinessSector, businessSectorCheck);
 
     }
 

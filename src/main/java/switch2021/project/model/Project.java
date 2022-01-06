@@ -12,11 +12,12 @@ public class Project {
     private String code;
     private String projectName;
     private String description;
-    private String customer;
-    private String typology;
-    private String ProjectStatus;
 
-    private List<String> businessSector;
+    private Customer customer;
+    private Typology typology;
+    private ProjectStatus projectStatus;
+
+    private List<BusinessSector> businessSector;
     private List<UserStory> productBacklog;
     private List<Resource> projectTeam; /** lista de resources alocados ao projecto (Carolina) **/
 
@@ -30,15 +31,15 @@ public class Project {
      * Construtor de Projecto (Paulo)
      **/
 
-    public Project(String code, String name, String description, String customer, String typology,
-                   List<String> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
+    public Project(String code, String name, String description, Customer customer, Typology typology,
+                   List<BusinessSector> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         this.code = code;
         this.projectName = name;
         this.description = description;
         this.customer = customer;
         this.typology = typology;
-        this.ProjectStatus = "Status_0";
+        this.projectStatus = new ProjectSettings().getProjectStatusById(0);
         this.businessSector = businessSector;
         this.startDate = startDate;
         this.numberOfSprints = numberOfSprints;
@@ -72,19 +73,19 @@ public class Project {
         return description;
     }
 
-    public String getCustomer() {
-        return customer;
+    public Customer getCustomer() {
+        return this.customer;
     }
 
-    public String getTypology() {
+    public Typology getTypology() {
         return typology;
     }
 
-    public String getProjectStatus() {
-        return ProjectStatus;
+    public ProjectStatus getProjectStatus() {
+        return projectStatus;
     }
 
-    public List<String> getBusinessSector() {
+    public List<BusinessSector> getBusinessSector() {
         return businessSector;
     }
 
@@ -118,19 +119,19 @@ public class Project {
         this.description = description;
     }
 
-    public void setCustomer(String customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
-    public void setTypology(String typology) {
+    public void setTypology(Typology typology) {
         this.typology = typology;
     }
 
-    public void setProjectStatus(String projectStatus) {
-        ProjectStatus = projectStatus;
+    public void setProjectStatus(ProjectStatus projectStatus) {
+        this.projectStatus = projectStatus;
     }
 
-    public void setBusinessSector(List<String> businessSector) {
+    public void setBusinessSector(List<BusinessSector> businessSector) {
         this.businessSector = businessSector;
     }
 

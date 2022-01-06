@@ -15,18 +15,17 @@ class CompanyTest {
      * Teste do searchProject, ainda acabar
      **/
 
-    @Test
-    @DisplayName("Teste de craição de projecto atraves de Company (Paulo)")
-    void searchProject() {
-        //Input
-        List<String> businesses = new ArrayList<>();
-        LocalDate date = LocalDate.now();
-        Company XPTO = new Company();
-
-        XPTO.add(XPTO.createProject("002", "XPTO2", "Teste fixe_2", "ISEP_2",
-                "cenas_2", businesses, date, 9, 5000));
-
-    }
+//    @Test
+//    @DisplayName("Teste de craição de projecto atraves de Company (Paulo)")
+//    void searchProject() {
+//      List<String> businesses = new ArrayList<>();
+//        LocalDate date = LocalDate.now();
+//        Company XPTO = new Company();
+//
+//        XPTO.add(XPTO.createProject("002", "XPTO2", "Teste fixe_2", "ISEP_2",
+//                "cenas_2", businesses, date, 9, 5000));
+//
+//    }
 
 //    @Test
 //    @DisplayName("teste com inicialização de instancia")

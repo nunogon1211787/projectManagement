@@ -33,8 +33,8 @@ public class Company {
 
     /** Metodo create de Projectos (Paulo) **/
 
-    public Project createProject(String code, String name, String description, String customer, String typology,
-                                 List<String> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
+    public Project createProject(String code, String name, String description, Customer customer, Typology typology,
+                                 List<BusinessSector> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         return new Project(code,name, description, customer, typology, businessSector,
                                     startDate,numberOfSprints, budget);
