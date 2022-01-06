@@ -14,6 +14,7 @@ public class BusinessSector {
      **/
 
     public BusinessSector(String description) {
+
         this.description = description;
     }
 }

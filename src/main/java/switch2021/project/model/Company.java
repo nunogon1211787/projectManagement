@@ -134,12 +134,11 @@ public class Company {
         SystemUser user = null;
 
         for (int i = 0; i < this.arraySyUser.size(); i++) {
-            if(this.arraySyUser.get(i).isYourEmail(email)){
+            if(this.arraySyUser.get(i).isYourEmail(email)){ //get i da lista arrayList (retorna obj) + metodo serve para validar o obj
                 user = this.arraySyUser.get(i);
                 break;
             }
         }
-
         return user;
     }
 

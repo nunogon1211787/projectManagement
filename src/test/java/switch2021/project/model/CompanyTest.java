@@ -110,7 +110,9 @@ class CompanyTest {
         SystemUser ana = new SystemUser("", "1211748@isep.ipp.pt","", "",new Profile (0,"",""));
         Company company = new Company(); // criar uma company
         company.saveSystemUser (ana); //ana = objeto da classe SU
+        //Expected
         SystemUser ana2 = company.getUserByEmail("1211748@isep.ipp.pt"); // estou a ir buscar um utilizador com o email etc
+        //Result
         assertEquals("1211748@isep.ipp.pt", ana2.getEmail());
     }
 
