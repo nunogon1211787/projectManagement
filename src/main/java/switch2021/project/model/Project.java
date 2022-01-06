@@ -172,11 +172,15 @@ public class Project {
         setStartDate(startDate);
         setEndDate(endDate);
         setNumberOfSprints(numberOfSprints);
-
     }
 
     public void changeSprintDuration(int sprintDuration){
 
+
+    }
+
+    public void changeProjectStatus(String status){
+        this.projectStatus = projectStatus.setDescription(status);
     }
 
     /** Método para ir buscar Project Team (Carolina) **/
