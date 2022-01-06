@@ -105,6 +105,26 @@ class CompanyTest {
     }
 
     @Test
+    public void UserByEmail(){
+
+        SystemUser ana = new SystemUser("", "1211748@isep.ipp.pt","", "",new Profile (0,"",""));
+        Company company = new Company(); // criar uma company
+        company.saveSystemUser (ana); //ana = objeto da classe SU
+        SystemUser ana2 = company.getUserByEmail("1211748@isep.ipp.pt"); // estou a ir buscar um utilizador com o email etc
+        assertEquals("1211748@isep.ipp.pt", ana2.getEmail());
+    }
+
+
+    @Test
+    public void verifyUpdatePassword() {
+
+        //Input
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO");
+        //RESULT
+        assertTrue(joana.updatePassword("HELLO", "GOODBYE"));
+        assertEquals("GOODBYE", joana.getPassword());
+    }
+    @Test
     public void addNewProfileWithFailTypeEmpty() {
         //Input
         Company company = new Company();
