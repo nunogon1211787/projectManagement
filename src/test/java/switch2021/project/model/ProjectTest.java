@@ -42,7 +42,7 @@ class ProjectTest {
         String valueDescription = "test";
 
         Customer customerCheck = newProject.getCustomer();
-        Customer valueCustomer = new Customer(1, "customer1@email.com");
+        Customer valueCustomer = new Customer("customer1@email.com");
 
         Typology typologyCheck = newProject.getTypology();
         Typology valueTypology = new Typology("Fixed Cost");

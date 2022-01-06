@@ -9,7 +9,7 @@ public class Profile {
      * Classe Profile Atributes
      * Attributes
      **/
-    private int id;
+    private int id_Profile;
     private String name;
     private String type;
 
@@ -19,17 +19,10 @@ public class Profile {
      * Constructors
      */
     //Create ID automatically
-    private static AtomicInteger ID_GENERATOR = new AtomicInteger(001);
+    private static AtomicInteger ID_GENERATOR = new AtomicInteger();
 
-    //sem parâmetros = visitor profile
-    /*public Profile() {
-        this.id = ID_GENERATOR.getAndIncrement();
-        this.type = "system_user";
-        this.name = "visitor";
-    }
-*/
-    public Profile(int id, String name, String type) {
-        this.id = id;
+    public Profile(String name, String type) {
+        this.id_Profile = ID_GENERATOR.getAndIncrement();
         this.name = name;
         this.type = type;
     }
@@ -39,7 +32,7 @@ public class Profile {
      */
 
     public Profile(Profile originalProfile) {
-        this.id = originalProfile.id;
+        this.id_Profile = originalProfile.id_Profile;
         this.name = originalProfile.name;
         this.type = originalProfile.type;
     }
@@ -53,7 +46,7 @@ public class Profile {
     }
 
     public int getId() {
-        return id;
+        return id_Profile;
     }
 
     public String getType() {
@@ -69,7 +62,7 @@ public class Profile {
      */
 
     public boolean isValidId(int x) {
-        return (x == this.id);
+        return (x == this.id_Profile);
     }
 
     @Override
