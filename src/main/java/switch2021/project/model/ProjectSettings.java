@@ -21,10 +21,22 @@ public class ProjectSettings {
 
     private List<ProjectStatus> arrayProjectStatus = new ArrayList<ProjectStatus>();
     private List<Customer> arrayCustomer = new ArrayList<Customer>();
-    private List<Typology> arrayTypology = new ArrayList<Typology>();
+    private final List<Typology> arrayTypology = new ArrayList<Typology>();
     private List<BusinessSector> arrayBusinessSector = new ArrayList<BusinessSector>();
 
     /**
+     * Initiate lists of class´s Constructor
+     **/
+
+    public ProjectSettings() {
+        this.arrayTypology.add(new Typology("Fixed Cost"));
+        this.arrayTypology.add(new Typology("Time and Materials"));
+    }
+
+    /**
+     *       >>>>>PROJECTSTATUS´S METHODS<<<<<
+     *
+     *
      * Metodo adicionar ProjectStatus
      **/
     public boolean add(ProjectStatus projStat) {
@@ -32,7 +44,15 @@ public class ProjectSettings {
         return true;
     }
 
+    /** Métodos Getter e Setter **/
+    public List<ProjectStatus> getArrayProjectStatus() {
+        return arrayProjectStatus;
+    }
+
     /**
+     *       >>>>>CUSTOMER´S METHODS<<<<<
+     *
+     *
      * Metodo adicionar Customer
      **/
     public boolean add(Customer cust) {
@@ -40,29 +60,21 @@ public class ProjectSettings {
         return true;
     }
 
-    /**
-     * Metodo adicionar BusinessSector
-     **/
-    public boolean add(BusinessSector busSect) {
-        arrayBusinessSector.add(busSect);
-        return true;
+    /** Métodos Getter e Setter **/
+    public List<Customer> getArrayCustomer() {
+        return arrayCustomer;
     }
 
     /**
-     * >>>>>TYPOLOGY´S METHODS<<<<<
-     **/
-
-    /**
-     * Metodo adicionar Typology
-     **/
-    public boolean add(Typology typo) {
-        arrayTypology.add(typo);
-        return true;
+     *       >>>>>TYPOLOGY´S METHODS<<<<<
+     *
+     *
+     *Getter´s Method.**/
+    public List<Typology> getArrayTypology() {
+        return arrayTypology;
     }
 
-    /**
-     * Create Typology
-     **/
+    /**Create Typology.**/
     public Typology createTypology(String description) {
 
         Typology typo = new Typology(description);
@@ -70,21 +82,43 @@ public class ProjectSettings {
         return typo;
     }
 
-    /** Métodos Getter e Setter **/
-
-    public List<ProjectStatus> getArrayProjectStatus() {
-        return arrayProjectStatus;
+    /**Typology Add´s Method.**/
+    public boolean add(Typology typo) {
+        arrayTypology.add(typo);
+        return true;
     }
 
-    public List<Customer> getArrayCustomer() {
-        return arrayCustomer;
+    /** Typology Validate´s Method**/
+    public boolean validateTypology(Typology typo) {
+        if(typo == null & this.arrayTypology.contains(typo)) {
+            return false;
+        }
+        return true;
     }
 
-    public List<Typology> getArrayTypology() {
-        return arrayTypology;
+    /** Save Typology at List**/
+    public boolean saveTypology(Typology typo){
+        if(!validateTypology(typo)) {
+            return false;
+        }
+        return this.arrayTypology.add(typo);
+    }
+
+    /**
+     *       >>>>>BUSINESSSECTOR´S METHODS<<<<<
+     *
+     *
+     * Metodo adicionar BusinessSector
+     **/
+
+    public boolean add(BusinessSector busSect) {
+        arrayBusinessSector.add(busSect);
+        return true;
     }
 
     public List<BusinessSector> getArrayBusinessSector() {
         return arrayBusinessSector;
     }
+
+
 }

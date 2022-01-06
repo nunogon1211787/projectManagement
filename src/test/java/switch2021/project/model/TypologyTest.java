@@ -64,5 +64,18 @@ public class TypologyTest {
         assertEquals(description, value_description);
     }
 
+    //Teste para mudar a descrição da Typology.
+    @Test
+    public void setDescriptionTest() {
+        //Input
+        Typology typo8 = new Typology("TestTypology8");
+        ArrayList<Typology> testList = new ArrayList<>();
+        testList.add(typo8);
+        typo8.setDescription("Update Description Test");
+        //Expected
+        Typology expected = new Typology("Update Description Test");
+        //Result
+        assertEquals(typo8.getDescription(),expected.getDescription());
+    }
 
 }
