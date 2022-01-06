@@ -6,7 +6,7 @@ import java.util.List;
 public class Project {
 
     /**
-     * Atributos da classe Projecto
+     * Project Atributes
      **/
 
     private String code;
@@ -19,7 +19,7 @@ public class Project {
 
     private List<BusinessSector> businessSector;
     private List<UserStory> productBacklog;
-    private List<Resource> projectTeam; /** lista de resources alocados ao projecto (Carolina) **/
+    private List<Resource> projectTeam; /** list of resources allocated to a project **/
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -28,7 +28,7 @@ public class Project {
     private int budget;
 
     /**
-     * Construtor de Projecto (Paulo)
+     * Project Constructor
      **/
 
     public Project(String code, String name, String description, Customer customer, Typology typology,
@@ -51,6 +51,7 @@ public class Project {
     }
 
     /**
+     * Method to get atual data
      * Método que obtem a data actual no momento do uso do proprio metodo; (Paulo)
      **/
 
@@ -195,5 +196,38 @@ public class Project {
         this.projectTeam.add(toAdd);
         return true;
     }
-}
+
+    /** Método para criar resource (Carolina) **/
+
+    public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
+        Resource newResource = new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
+        //this.projectTeam.add(newResource);
+        //return this.projectTeam.contains(newResource);
+        return newResource;
+    }
+
+    /**
+     * Method to get Allocation (Caroli US007)
+     */
+
+    public double sumAllocation(SystemUser user, LocalDate startDate, LocalDate endDate){
+        double sum = 0;
+        for(int i = 0; i < this.projectTeam.size();i++){
+            if (this.projectTeam.get(i).isYourUser(user)) {
+                if (this.projectTeam.get(i).checkAllocationPeriod(startDate, endDate)) {
+                    sum = sum + this.projectTeam.get(i).getPercentageOfAllocation();
+                }
+            }
+        }
+        return sum;
+    }
+
+    public boolean validateAllocation(SystemUser user, LocalDate startDate, LocalDate endDate, double percentageOfAllocation){
+        boolean msg = true;
+        if(sumAllocation(user, startDate, endDate) + percentageOfAllocation > 1){
+            msg = false;
+        }
+        return msg;
+        }
+    }
 

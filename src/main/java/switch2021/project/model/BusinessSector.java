@@ -3,13 +3,14 @@ package switch2021.project.model;
 public class BusinessSector {
 
     /**
-     * Classe BusinessSector -
-     * Atributos da Classe
+     * BusinessSector Class
+     * Class Atributes
      **/
+
     private String description;
 
     /**
-     * Constutor da Classe BusinessSector
+     * BusinessSector Constructor
      **/
 
     public BusinessSector(String description) {

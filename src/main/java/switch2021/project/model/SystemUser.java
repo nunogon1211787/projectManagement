@@ -4,6 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SystemUser {
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SystemUser that = (SystemUser) o;
+        return (this.userName.equals(that.userName)) && (this.email.equals(that.email)) &&
+                (this.photo.equals(that.photo)) && (this.password.equals(that.password)) &&
+                (this.function.equals(that.function)) && (this.activateUser == that.activateUser)
+                && (this.assignedProfileList.equals(that.assignedProfileList));
+    }
+    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
+    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
+
+
     /**
      * Attributes of systemUser´s class
      **/
@@ -284,7 +299,8 @@ public class SystemUser {
 
 
         if (validateOldPassword(oldpasswordUI) == true) {
-            setNewPassword(newpassword);
+            setPassword(newpassword);
+            encryptPassword(newpassword);
         }
         return true;
 
@@ -294,9 +310,11 @@ public class SystemUser {
      * Method to compare the oldpassword from de UI (oldpasswordUI) and the oldpassword saved in System User (oldpasswordSU)
      */
 
+    //Método para validar a passar que vem do UI encriptada, que irá ser comparada com a password, também
+    //encriptada, do SU.
     private boolean validateOldPassword(String oldpasswordUI) {
 
-        String oldpasswordSU = getPassword();
+        String oldpasswordSU = decryptPassword(getPassword());
 
         if (oldpasswordUI.equals(oldpasswordSU)) {
             return true;
@@ -320,19 +338,6 @@ public class SystemUser {
     public boolean
 
      */
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SystemUser that = (SystemUser) o;
-        return (this.userName.equals(that.userName)) && (this.email.equals(that.email)) &&
-                (this.photo.equals(that.photo)) && (this.password.equals(that.password)) &&
-                (this.function.equals(that.function)) && (this.activateUser == that.activateUser)
-                && (this.assignedProfileList.equals(that.assignedProfileList));
-    }
-    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
-    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
 
 
 }

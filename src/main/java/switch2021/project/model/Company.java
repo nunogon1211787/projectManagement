@@ -12,25 +12,28 @@ public class Company {
      * Atributos da Classe
      **/
 
-    List<Project> arrayProj = new ArrayList<>();
-    List<SystemUser> arraySyUser;// = new ArrayList<>();
-    List<Profile> arrayProfile;// = new ArrayList<>();
-    List<Request> arrayRequest = new ArrayList<>();
+    List<Project> arrayProj;
+    List<SystemUser> arraySyUser;
+    List<Profile> arrayProfile;
+    List<Request> arrayRequest;
 
     /**
      * Constructors with data (Ivan)
      **/
     public Company(){
+        this.arrayProj = new ArrayList<>();
         this.arraySyUser = new ArrayList<>();
-        this.arrayProfile = new ArrayList<>();
 
-        arrayProfile.add(new Profile(0,"Visitor","System Profile"));
-        arrayProfile.add(new Profile(1,"Administrator","System Profile"));
-        /*arrayProfile.add(new Profile(2,"Director","System Profile"));
-        arrayProfile.add(new Profile(3,"Project Manager", "Special Profile"));
-        arrayProfile.add(new Profile(4, "Product Owner", "Special Profile"));
-        arrayProfile.add(new Profile(5, "Scrum Master", "Special Profile"));
-        arrayProfile.add(new Profile(6, "Project Team", "Special Profile"));*/
+        this.arrayProfile = new ArrayList<>();
+        this.arrayProfile.add(new Profile("Visitor","System Profile"));
+        this.arrayProfile.add(new Profile("Administrator","System Profile"));
+        this.arrayProfile.add(new Profile("Director","System Profile"));
+        this.arrayProfile.add(new Profile("Project Manager", "Special Profile"));
+        this.arrayProfile.add(new Profile("Product Owner", "Special Profile"));
+        this.arrayProfile.add(new Profile("Scrum Master", "Special Profile"));
+        this.arrayProfile.add(new Profile("Project Team", "Special Profile"));
+
+        this.arrayRequest = new ArrayList<>();
     }
 
     /** Metodo create de Projectos (Paulo) **/
@@ -52,11 +55,13 @@ public class Company {
         return new SystemUser(userName, email, password, function,photo, arrayProfile.get(0));
     }
 
+    //Nuno, alterei o método porque o anterior tinha um erro! (Joana)
+
     public boolean validateSystemUser(SystemUser user) {
-        if (user == null) {
+        if (user == null & this.arraySyUser.contains(user)) {
             return false;
         }
-        return this.arraySyUser.contains(user);
+        return true;
     }
 
     /**
@@ -67,11 +72,12 @@ public class Company {
         arrayProj.add(proj);
         return true;
     }
-
-    public boolean add(SystemUser syUser) {
+    /*
+    public boolean saveSystemUser(SystemUser syUser) {
         this.arraySyUser.add(syUser);
         return true;
     }
+     */
 
     public boolean add(Profile profile) {
 
@@ -87,6 +93,8 @@ public class Company {
         return true;
 
     }
+
+
 
     /**
      * Getting and Setting Methods
@@ -134,6 +142,7 @@ public class Company {
 
         return user;
     }
+
     public Profile getProfile(int index) {
         return new Profile(arrayProfile.get(index));
     }
@@ -143,7 +152,7 @@ public class Company {
      **/
 
     public Profile createProfile(String name, String type) {
-        return new Profile(generateNewProfileID(), name, type);
+        return new Profile(name, type);
     }
 
     /**
@@ -275,17 +284,25 @@ public class Company {
     }
 
     /**
-     * Method to Update User's List
+     * Method to save system user (if this is in a valid state) in System User List
      */
 
-    public void updateUserList () {
+    public boolean saveSystemUser(SystemUser user) {
 
-        for (SystemUser systemUser : arraySyUser) {
-            //if (systemUser.getuser )
+        if (!validateSystemUser(user)) {
+            return false;
         }
-
+        return this.arraySyUser.add(user);
     }
 
+    /**
+     * Method to Validate Allocation (Caroli US007)
+     */
 
-    
+//    public boolean checkAllocation(SystemUser user, double percentageOfAllocation){
+//        if()
+//
+//
+//    }
+
 }
