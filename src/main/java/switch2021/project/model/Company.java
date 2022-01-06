@@ -104,7 +104,7 @@ public class Company {
         return user;
     }
 
-    public SystemUser getUserById(String email) {
+    public SystemUser getUserByEmail(String email) {
 
         SystemUser user = null;
 
@@ -261,5 +261,7 @@ public class Company {
         for (SystemUser systemUser:arraySyUser) {
             //if (systemUser.getuser )
         }
-    }
+
+
+    
 }
