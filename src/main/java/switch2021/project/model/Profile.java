@@ -16,10 +16,10 @@ public class Profile {
     /**
      * Constructors
      */
-    //Create ID automatically (Nuno)
+    //Create ID automatically
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(001);
 
-    //sem parâmetros = visitor profile (Nuno)
+    //sem parâmetros = visitor profile
     /*public Profile() {
         this.id = ID_GENERATOR.getAndIncrement();
         this.type = "system_user";

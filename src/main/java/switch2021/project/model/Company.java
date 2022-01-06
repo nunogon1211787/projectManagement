@@ -13,21 +13,24 @@ public class Company {
      **/
 
     List<Project> arrayProj = new ArrayList<>();
-    List<SystemUser> arraySyUser = new ArrayList<>();
-    List<Profile> arrayProfile = new ArrayList<>();
+    List<SystemUser> arraySyUser;// = new ArrayList<>();
+    List<Profile> arrayProfile;// = new ArrayList<>();
     List<Request> arrayRequest = new ArrayList<>();
 
     /**
      * Constructors with data (Ivan)
      **/
     public Company(){
+        this.arraySyUser = new ArrayList<>();
+        this.arrayProfile = new ArrayList<>();
+
         arrayProfile.add(new Profile(0,"Visitor","System Profile"));
         arrayProfile.add(new Profile(1,"Administrator","System Profile"));
-        arrayProfile.add(new Profile(2,"Director","System Profile"));
+        /*arrayProfile.add(new Profile(2,"Director","System Profile"));
         arrayProfile.add(new Profile(3,"Project Manager", "Special Profile"));
         arrayProfile.add(new Profile(4, "Product Owner", "Special Profile"));
         arrayProfile.add(new Profile(5, "Scrum Master", "Special Profile"));
-        arrayProfile.add(new Profile(6, "Project Team", "Special Profile"));
+        arrayProfile.add(new Profile(6, "Project Team", "Special Profile"));*/
     }
 
     /** Metodo create de Projectos (Paulo) **/
@@ -42,11 +45,11 @@ public class Company {
     /** Metodo create de SystemUsers (Nuno) **/
 
     public SystemUser createSystemUser(String userName, String email, String password, String function) {
-        return new SystemUser(userName, email, password, function);
+        return new SystemUser(userName, email, password, function, arrayProfile.get(0));
     }
 
     public SystemUser createSystemUser(String userName, String email, String password, String function, String photo) {
-        return new SystemUser(userName, email, password, function, photo);
+        return new SystemUser(userName, email, password, function,photo, arrayProfile.get(0));
     }
 
     public boolean validateSystemUser(SystemUser user) {
