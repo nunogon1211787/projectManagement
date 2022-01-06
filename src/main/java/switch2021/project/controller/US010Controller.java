@@ -13,8 +13,19 @@ public class US010Controller {
         this.user = user;
     }
 
+    public SystemUser getUser(String email) {
+            return this.company.getUserByEmail(email);
+        }
 
-    //fazer os três métodos do controller.
-    //Fazer os testes ao controller.
+        public SystemUser updateSystemUserData(String username, String function, String photo) {
+            this.user.setUserName(username);
+            this.user.setFunction(function);
+            this.user.setPhoto(photo);
+            return user;
+        }
+
+        public boolean saveSystemUser() {
+            return this.company.saveSystemUser(user);
+        }
 
 }
