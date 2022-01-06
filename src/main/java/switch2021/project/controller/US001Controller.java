@@ -15,7 +15,7 @@ public class US001Controller {
         this.visitor = null;
     }
 
-    public boolean createSystemUser(String userName, String email, String password, String function) {
+  /*  public boolean createSystemUser(String userName, String email, String password, String function) {
         this.user = this.company.createSystemUser(userName, email, password, function);
         return this.company.validateSystemUser(user);
     }
@@ -23,5 +23,5 @@ public class US001Controller {
     public boolean createSystemUser(String userName, String email, String password, String function, String photo) {
         this.user = this.company.createSystemUser(userName, email, password, function, photo);
         return this.company.validateSystemUser(user);
-    }
+    } */
 }
