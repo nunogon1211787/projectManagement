@@ -19,21 +19,15 @@ public class SystemUser {
     /**
      * Contructor without photo
      **/
-    public SystemUser(String userName, String email, String password) {
-        this.userName = userName;
-        this.email = email;
-        this.photo = "";
-        this.password = password;
-        this.activateUser = false;
-    }
 
     public SystemUser(String userName, String email, String function, String password) {
         this.userName = userName;
         this.email = email;
         this.photo = "";
         this.function = function;
-        this.password = password;
+        this.password = encryptPassword(password);
         this.activateUser = false;
+        this.assignedProfileList.add(new Profile());
     }
 
     /**
@@ -44,8 +38,9 @@ public class SystemUser {
         this.email = email;
         this.photo = photo;
         this.function = function;
-        this.password = password;
+        this.password = encryptPassword(password);
         this.activateUser = false;
+        this.assignedProfileList.add(new Profile());
     }
 
     /**
@@ -61,7 +56,30 @@ public class SystemUser {
         this.assignedProfileList = deepCopyListProfile(originalUser.assignedProfileList);
 
     }
+    //para encriptar (Nuno)
+    public String encryptPassword(String password) {
+        int codigoASCII;
+        String result = "";
 
+        for (int i = 0; i < password.length(); i++) {
+            codigoASCII = password.charAt(i) + 99;
+            result += (char) codigoASCII;
+        }
+
+        return result;
+    }
+    //para desencriptar (Nuno)
+    public String decryptPassword(String password) {
+        int codigoASCII;
+        String result = "";
+
+        for (int i = 0; i < password.length(); i++) {
+            codigoASCII = password.charAt(i) - 99;
+            result += (char) codigoASCII;
+        }
+
+        return result;
+    }
 
     /**
      * Getting and Setting Methods
@@ -106,7 +124,8 @@ public class SystemUser {
         return this.password;
     }
 
-    public String getActivateUser() {
+
+    public String getActivateUser() { //alguém está a usar??? (ver isUserActivated())
 
         String status = "inativo";
 
@@ -116,6 +135,15 @@ public class SystemUser {
 
         return status;
     }
+
+    public boolean isUserActivated() {
+        return this.activateUser;
+    }
+
+    public List<Profile> getAssignedProfileList() {
+        return this.assignedProfileList;
+    }
+
 
     public boolean activateUser() {
         return true;

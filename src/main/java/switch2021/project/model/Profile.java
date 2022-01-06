@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Profile {
 
@@ -15,6 +16,15 @@ public class Profile {
     /**
      * Construtores.
      */
+    //Create ID automatically (Nuno)
+    private static AtomicInteger ID_GENERATOR = new AtomicInteger(001);
+
+    //sem parâmetros = visitor profile (Nuno)
+    public Profile() {
+        this.id = ID_GENERATOR.getAndIncrement();
+        this.type = "system";
+        this.name = "visitor";
+    }
 
     public Profile(int id, String name, String type) {
         this.id = id;

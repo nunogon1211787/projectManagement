@@ -19,13 +19,15 @@ public class Company {
     public Company() {
     }
 
-    /** Metodo create de Projectos (Paulo) **/
+    /**
+     * Metodo create de Projectos (Paulo)
+     **/
 
     public Project createProject(String code, String name, String description, String customer, String typology,
                                  List<String> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
-        return new Project(code,name, description, customer, typology, businessSector,
-                                    startDate,numberOfSprints, budget);
+        return new Project(code, name, description, customer, typology, businessSector,
+                startDate, numberOfSprints, budget);
 
     }
 
@@ -38,6 +40,23 @@ public class Company {
         return true;
     }
 
+    //US001 criar SystemUser (sem foto)
+    public SystemUser createSystemUser(String userName, String email, String password, String function) {
+        return new SystemUser(userName, email, password, function);
+    }
+
+    //US001 criar SystemUser
+    public SystemUser createSystemUser(String userName, String email, String password, String function, String photo) {
+        return new SystemUser(userName, email, password, function, photo);
+    }
+
+    public boolean validateSystemUser(SystemUser user) {
+        if (user == null) {
+            return false;
+        }
+        return this.arraySyUser.contains(user);
+    }
+
     public boolean add(SystemUser syUser) {
         this.arraySyUser.add(syUser);
         return true;
@@ -46,18 +65,18 @@ public class Company {
     public boolean add(Profile profile) {
 
         //Check empty fields on name and type
-        if(profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()){
+        if (profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()) {
             return false;
         }
 
         //Check if the profile type is valid
-        if(!profile.getType().equalsIgnoreCase("SYSTEMUSER") && !profile.getType().equalsIgnoreCase("SPECIALPROFILE")){
+        if (!profile.getType().equalsIgnoreCase("SYSTEMUSER") && !profile.getType().equalsIgnoreCase("SPECIALPROFILE")) {
             return false;
         }
 
         //Check if profile already exist
-        for (Profile up : this.arrayProfile){
-            if(up.equals(profile)){
+        for (Profile up : this.arrayProfile) {
+            if (up.equals(profile)) {
                 return false;
             }
         }
@@ -109,7 +128,7 @@ public class Company {
         SystemUser user = null;
 
         for (int i = 0; i < this.arraySyUser.size(); i++) {
-            if(this.arraySyUser.get(i).isYourEmail(email)){
+            if (this.arraySyUser.get(i).isYourEmail(email)) {
                 user = this.arraySyUser.get(i);
                 break;
             }
@@ -247,7 +266,7 @@ public class Company {
 
         for (int i = 0; i < this.arrayProj.size(); i++) {
 
-            lista [i] = this.getProj(i).getCode();
+            lista[i] = this.getProj(i).getCode();
         }
         return lista;
     }
@@ -256,12 +275,11 @@ public class Company {
      * Method to Update User's List
      */
 
-    public void updateUserList () {
+    public void updateUserList() {
 
-        for (SystemUser systemUser:arraySyUser) {
+        for (SystemUser systemUser : arraySyUser) {
             //if (systemUser.getuser )
         }
 
-
-    
+    }
 }
