@@ -104,6 +104,20 @@ public class Company {
         return user;
     }
 
+    public SystemUser getUserById(String email) {
+
+        SystemUser user = null;
+
+        for (int i = 0; i < this.arraySyUser.size(); i++) {
+            if(this.arraySyUser.get(i).isYourEmail(email)){
+                user = this.arraySyUser.get(i);
+                break;
+            }
+        }
+
+        return user;
+    }
+
     public Profile createProfile(String name, String type) {
         return new Profile(generateNewProfileID(), name, type);
     }
