@@ -7,15 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Typology {
 
-   @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Typology that = (Typology) o;
-        return (this.description.equals(that.description));
-    }
-    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
-    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
+
 
     /** Typology attributes **/
 
@@ -50,4 +42,16 @@ public class Typology {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
+    /** Metodos Override  para comparar objectos diferentes **/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Typology that = (Typology) o;
+        return (this.description.equals(that.description));
+    }
+    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
+    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
 }

@@ -8,15 +8,6 @@ public class ProjectSettings {
     /**
      * Classe ProjectSettings que vai conter as listas -
      * Atributos de ProjectSettings
-     * ** Metodos possivelmente necessarios:
-     *      * getProjectStatus()
-     *      * getProjectTypology()
-     *      * getProjectBusinessSector()
-     *      * getProjectCustomer()
-     *      * getProjectTypologyByID()
-     *      * getProjectBusinessSectorByID
-     *      * getCustomerByID()
-     *      * getProjectStatusByID()
      **/
 
     private List<ProjectStatus> arrayProjectStatus;
@@ -25,7 +16,7 @@ public class ProjectSettings {
     private List<BusinessSector> arrayBusinessSector;
 
     /**
-     * Initiate lists of class´s Constructor (Paulo & Ivan)
+     * Initiate lists of class´s Constructor (Paulo - US005 & Ivan)
      **/
 
     public ProjectSettings() {
@@ -37,8 +28,8 @@ public class ProjectSettings {
         this.arrayTypology.add(new Typology("Fixed Cost"));
         this.arrayTypology.add(new Typology("Time and Materials"));
 
-        this.arrayCustomer.add(new Customer(1, "customer1@email.com"));
-        this.arrayCustomer.add(new Customer(2, "customer2@email.com"));
+        this.arrayCustomer.add(new Customer(0, "customer1@email.com"));  // estes parametros são para efeitos de testes
+        this.arrayCustomer.add(new Customer(1, "customer2@email.com"));
 
         this.arrayBusinessSector.add(new BusinessSector("Business_0"));
         this.arrayBusinessSector.add(new BusinessSector("Business_1"));
@@ -177,6 +168,5 @@ public class ProjectSettings {
     public BusinessSector getBussinessSectorById(int index) {
         return arrayBusinessSector.get(index);
     }
-
 
 }

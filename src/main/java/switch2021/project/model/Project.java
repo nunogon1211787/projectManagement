@@ -17,7 +17,7 @@ public class Project {
     private Typology typology;
     private ProjectStatus projectStatus;
 
-    private List<BusinessSector> businessSector;
+    private BusinessSector businessSector;  // Para já coloquei em tipo Business Sector e não lista. Depois será para mudar.
     private List<UserStory> productBacklog;
     private List<Resource> projectTeam; /** lista de resources alocados ao projecto (Carolina) **/
 
@@ -28,11 +28,11 @@ public class Project {
     private int budget;
 
     /**
-     * Construtor de Projecto (Paulo)
+     * Construtor de Projecto (Paulo - US005)
      **/
 
     public Project(String code, String name, String description, Customer customer, Typology typology,
-                   List<BusinessSector> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
+                   BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         this.code = code;
         this.projectName = name;
@@ -51,12 +51,13 @@ public class Project {
     }
 
     /**
-     * Método que obtem a data actual no momento do uso do proprio metodo; (Paulo)
+     * Método que obtem a data actual no momento do uso do proprio metodo; (Paulo - US005)
      **/
 
-    public void setEndDate() {
+    public boolean setEndDate() {
 
         this.endDate = LocalDate.now();
+        return true;
     }
 
     /** Métodos "Getter" dos atributos (Paulo, menos o productBacklog) **/
@@ -85,7 +86,7 @@ public class Project {
         return projectStatus;
     }
 
-    public List<BusinessSector> getBusinessSector() {
+    public BusinessSector getBusinessSector() {
         return businessSector;
     }
 
@@ -131,7 +132,7 @@ public class Project {
         this.projectStatus = projectStatus;
     }
 
-    public void setBusinessSector(List<BusinessSector> businessSector) {
+    public void setBusinessSector(BusinessSector businessSector) {
         this.businessSector = businessSector;
     }
 
@@ -195,5 +196,24 @@ public class Project {
         this.projectTeam.add(toAdd);
         return true;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Project that = (Project) o;
+
+        return (       this.code.equals(that.code)
+                    && this.projectName.equals(that.projectName)
+                    && this.description.equals(that.description)
+                    && this.typology.equals(that.typology)
+                    && this.businessSector.equals(that.businessSector)
+                    && this.customer.equals(that.customer)
+                    && this.projectStatus.equals(that.projectStatus)
+                    && this.startDate.equals(that.startDate)
+                    && this.budget==that.budget
+                    && this.numberOfSprints== that.numberOfSprints);
+    }
+
 }
 

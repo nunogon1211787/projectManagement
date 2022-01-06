@@ -14,7 +14,7 @@ public class Company {
 
     List<Project> arrayProj = new ArrayList<>();
     List<SystemUser> arraySyUser;// = new ArrayList<>();
-    List<Profile> arrayProfile;// = new ArrayList<>();
+    List<Profile> arrayProfile;
     List<Request> arrayRequest = new ArrayList<>();
 
     /**
@@ -33,10 +33,10 @@ public class Company {
         arrayProfile.add(new Profile(6, "Project Team", "Special Profile"));*/
     }
 
-    /** Metodo create de Projectos (Paulo) **/
+    /** Metodo create de Projectos (Paulo - US005) **/
 
     public Project createProject(String code, String name, String description, Customer customer, Typology typology,
-                                 List<BusinessSector> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
+                                 BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         return new Project(code,name, description, customer, typology, businessSector,
                                     startDate,numberOfSprints, budget);
@@ -64,7 +64,7 @@ public class Company {
      **/
 
     public boolean add(Project proj) {
-        arrayProj.add(proj);
+        this.arrayProj.add(proj);
         return true;
     }
 
@@ -182,6 +182,32 @@ public class Company {
     }
 
     /**
+     * Método para validar se um profile existe (Paulo - US005).
+     **/
+    public boolean validateProject(Project project) {
+        //Check empty fields on code, name and description
+        if(        project.getProjectName().trim().isEmpty()
+                || project.getCode().trim().isEmpty()
+                || project.getDescription().trim().isEmpty()){
+
+            return false;
+        }
+
+        //Check if the number of sprints and budget have valid input numbers
+        if(project.getNumberOfSprints() < 0 || project.getBudget() < 0) {
+
+            return false;
+        }
+
+        //Check if project already exists
+        for (Project up : arrayProj){
+            if(up.getCode().equals(project.getCode())){
+                return false;
+            }
+        }
+        return true;
+    }
+    /**
      * Method to validate if project exists (to associate US i need to validate that codeProject exists) (Cris-US009)
      **/
     public boolean checkProjectExists(String code) {
@@ -286,6 +312,4 @@ public class Company {
 
     }
 
-
-    
 }
