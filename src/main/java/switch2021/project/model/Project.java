@@ -6,7 +6,7 @@ import java.util.List;
 public class Project {
 
     /**
-     * Atributos da classe Projecto
+     * Project Atributes
      **/
 
     private String code;
@@ -19,7 +19,7 @@ public class Project {
 
     private List<BusinessSector> businessSector;
     private List<UserStory> productBacklog;
-    private List<Resource> projectTeam; /** lista de resources alocados ao projecto (Carolina) **/
+    private List<Resource> projectTeam; /** list of resources allocated to a project **/
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -28,7 +28,7 @@ public class Project {
     private int budget;
 
     /**
-     * Construtor de Projecto (Paulo)
+     * Project Constructor
      **/
 
     public Project(String code, String name, String description, Customer customer, Typology typology,
@@ -51,6 +51,7 @@ public class Project {
     }
 
     /**
+     * Method to get atual data
      * Método que obtem a data actual no momento do uso do proprio metodo; (Paulo)
      **/
 

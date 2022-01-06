@@ -45,13 +45,15 @@ class SystemUserTest {
     }
 
     @Test
-    public void verifyUpdatePassword() {
+    public void verifyUpdateAndEncryptationOfPassword() {
 
-        //Input
+        //Arrange
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO");
-        //RESULT
-        assertTrue(joana.updatePassword("HELLO", "GOODBYE"));
-        assertEquals("GOODBYE",joana.decryptPassword(joana.getPassword()));
+        //Act
+        //assertTrue(joana.updatePassword("HELLO", "GOODBYE"));
+        joana.updatePassword("HELLO", "GOODBYE");
+        //Assert
+        assertEquals("GOODBYE",joana.getPassword());
     }
 
     @Test

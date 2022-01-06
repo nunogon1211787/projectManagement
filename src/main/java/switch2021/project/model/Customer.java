@@ -3,14 +3,14 @@ package switch2021.project.model;
 public class Customer {
 
     /**
-     * Classe de Customer -
-     * Atributos da Classe
+     * Customer Class
+     * Class Atributes
      **/
     private int id;
     private String email;
 
     /**
-     * Construtor de  customer
+     * Costumer Constuctor
      **/
 
     public Customer(int id, String email) {

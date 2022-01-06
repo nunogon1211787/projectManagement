@@ -284,7 +284,8 @@ public class SystemUser {
 
 
         if (validateOldPassword(oldpasswordUI) == true) {
-            setNewPassword(newpassword);
+            setPassword(newpassword);
+            encryptPassword(newpassword);
         }
         return true;
 
@@ -294,9 +295,12 @@ public class SystemUser {
      * Method to compare the oldpassword from de UI (oldpasswordUI) and the oldpassword saved in System User (oldpasswordSU)
      */
 
+    //Método para validar a passar que vem do UI encriptada, que irá ser comparada com a password, também
+    //encriptada, do SU.
+
     private boolean validateOldPassword(String oldpasswordUI) {
 
-        String oldpasswordSU = getPassword();
+        String oldpasswordSU = decryptPassword(getPassword());
 
         if (oldpasswordUI.equals(oldpasswordSU)) {
             return true;

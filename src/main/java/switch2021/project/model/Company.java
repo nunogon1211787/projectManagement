@@ -52,11 +52,13 @@ public class Company {
         return new SystemUser(userName, email, password, function,photo, arrayProfile.get(0));
     }
 
+    //Nuno, alterei o método porque o anterior tinha um erro! (Joana)
+
     public boolean validateSystemUser(SystemUser user) {
-        if (user == null) {
+        if (user == null & this.arraySyUser.contains(user)) {
             return false;
         }
-        return this.arraySyUser.contains(user);
+        return true;
     }
 
     /**
@@ -67,11 +69,12 @@ public class Company {
         arrayProj.add(proj);
         return true;
     }
-
+    /*
     public boolean saveSystemUser(SystemUser syUser) {
         this.arraySyUser.add(syUser);
         return true;
     }
+     */
 
     public boolean add(Profile profile) {
 
@@ -87,6 +90,8 @@ public class Company {
         return true;
 
     }
+
+
 
     /**
      * Getting and Setting Methods
@@ -275,15 +280,15 @@ public class Company {
     }
 
     /**
-     * Method to Update User's List
+     * Method to save system user (if this is in a valid state) in System User List
      */
 
-    public void updateUserList () {
+    public boolean saveSystemUser(SystemUser user) {
 
-        for (SystemUser systemUser : arraySyUser) {
-            //if (systemUser.getuser )
+        if (!validateSystemUser(user)) {
+            return false;
         }
-
+        return this.arraySyUser.add(user);
     }
 
     /**
@@ -296,6 +301,4 @@ public class Company {
 //
 //    }
 
-
-    
 }

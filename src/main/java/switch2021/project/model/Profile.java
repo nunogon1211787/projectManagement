@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Profile {
 
     /**
+     * Classe Profile Atributes
      * Attributes
      **/
     private int id;
@@ -14,6 +15,7 @@ public class Profile {
 
 
     /**
+     * Profle Constructors
      * Constructors
      */
     //Create ID automatically
@@ -33,7 +35,7 @@ public class Profile {
     }
 
     /**
-     * Copy Constructor.
+     * Copy Constructor
      */
 
     public Profile(Profile originalProfile) {
@@ -43,8 +45,9 @@ public class Profile {
     }
 
     /**
-     * Getters e Setters.
+     * Getters e Setters
      */
+
     public String getName() {
         return this.name;
     }
@@ -62,8 +65,9 @@ public class Profile {
     }
 
     /**
-     * Método para verificar se o ID recebido corresponde ao ID do objeto.
+     * Method to verify if a given ID matches with object ID
      */
+
     public boolean isValidId(int x) {
         return (x == this.id);
     }
