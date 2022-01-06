@@ -8,6 +8,11 @@ public class ProjectStatus {
      **/
     private String description;
 
+    public ProjectStatus setDescription(String description) {
+        this.description = description;
+        return null;
+    }
+
     /**
      * Constutor da Classe  ProjectStatus
      **/
@@ -15,4 +20,8 @@ public class ProjectStatus {
     public ProjectStatus(String description) {
         this.description = description;
     }
+
+
+
+
 }
