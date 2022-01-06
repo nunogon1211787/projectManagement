@@ -75,4 +75,17 @@ class SystemUserTest {
     }
 
 
+    @Test
+    void hasThisDataTest() {
+        //Input
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO");
+        String name = "";
+        String email = "";
+        String func = "";
+        int isActive = -1;
+        int[] profiles = {};
+        //Result
+        assertTrue(joana.hasThisData(name, email, func, isActive, profiles));
+
+    }
 }
