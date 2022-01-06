@@ -24,9 +24,9 @@ class ResourceTest {
         String code = "opg";
         String projectName = "tre";
         String description = "hjgf";
-        Customer customer = new Customer("klf");
+        Customer customer = new Customer(01,"klf");
         Typology typology = new Typology("ksa");
-        List<BusinessSector> businessSector = new ProjectSettings().getArrayBusinessSector();
+        BusinessSector businessSector = new ProjectSettings().getBussinessSectorById(0);
         LocalDate startDate = LocalDate.of(2021,12,31);
         LocalDate endDate = LocalDate.of(2022,01,05);
         int numberOfSprints = 30;
@@ -36,8 +36,8 @@ class ResourceTest {
 
         //Resource newResource = new Resource(newUser, startDate, endDate, 100, 50)
         //
-        Resource newResource = newProject.createResource(newUser, startDate, endDate, 100, 50);
-        newProject.addResource(newResource);
+        //Resource newResource = newProject.createResource(newUser, startDate, endDate, 100, 50);
+        //newProject.addResource(newResource);
         //Act
 
         //Assert
