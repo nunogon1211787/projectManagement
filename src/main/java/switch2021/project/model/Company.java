@@ -104,7 +104,7 @@ public class Company {
         return user;
     }
 
-    public SystemUser getUserById(String email) {
+    public SystemUser getUserByEmail(String email) {
 
         SystemUser user = null;
 
@@ -170,45 +170,21 @@ public class Company {
     /**
      * Métodos para localizar um ou mais system user na lista.
      */
-
-    public List<SystemUser> searchUsersByEmail(String email) {
+    public List<SystemUser> searchUsers(String name, String email, String function, int isActive, int [] profileList) {
 
         int listSize = this.arraySyUser.size();
         List<SystemUser> foundUsersList = new ArrayList<>();
 
         if (listSize != 0) {
 
-            for (int i = 0; i < listSize; i++) {
-
-                if (this.arraySyUser.get(i).isYourEmail(email)) {
-                    foundUsersList.add(new SystemUser(this.arraySyUser.get(i)));
+            for (SystemUser systemUser : this.arraySyUser)
+                if (systemUser.hasThisData(name, email, function, isActive, profileList)) {
+                    foundUsersList.add(new SystemUser(systemUser));
                 }
-
-            }
 
         }
 
         return foundUsersList;
-    }
-
-    public List<SystemUser> searchUsersByProfile(int id) {
-
-        List<SystemUser> userWithProfile = new ArrayList<>();
-        int listSize = this.arraySyUser.size();
-
-        if (listSize != 0) {
-
-            for (int i = 0; i < listSize; i++) {
-
-                if (this.arraySyUser.get(i).isYourProfile(id)) {
-                    userWithProfile.add(new SystemUser(this.arraySyUser.get(i)));
-                }
-
-            }
-
-        }
-
-        return userWithProfile;
     }
 
     /**
@@ -258,8 +234,12 @@ public class Company {
 
     public void updateUserList () {
 
-        for (SystemUser systemUser:arraySyUser) {
+        for (SystemUser systemUser : arraySyUser) {
             //if (systemUser.getuser )
         }
+
     }
+
+
+    
 }

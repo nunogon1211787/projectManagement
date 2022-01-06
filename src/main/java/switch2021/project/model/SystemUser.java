@@ -19,21 +19,15 @@ public class SystemUser {
     /**
      * Contructor without photo
      **/
-    public SystemUser(String userName, String email, String password) {
-        this.userName = userName;
-        this.email = email;
-        this.photo = "";
-        this.password = password;
-        this.activateUser = false;
-    }
 
     public SystemUser(String userName, String email, String function, String password) {
         this.userName = userName;
         this.email = email;
         this.photo = "";
         this.function = function;
-        this.password = password;
+        this.password = encryptPassword(password);
         this.activateUser = false;
+        this.assignedProfileList.add(new Profile());
     }
 
     /**
@@ -44,8 +38,9 @@ public class SystemUser {
         this.email = email;
         this.photo = photo;
         this.function = function;
-        this.password = password;
+        this.password = encryptPassword(password);
         this.activateUser = false;
+        this.assignedProfileList.add(new Profile());
     }
 
     /**
@@ -61,7 +56,30 @@ public class SystemUser {
         this.assignedProfileList = deepCopyListProfile(originalUser.assignedProfileList);
 
     }
+    //para encriptar (Nuno)
+    public String encryptPassword(String password) {
+        int codigoASCII;
+        String result = "";
 
+        for (int i = 0; i < password.length(); i++) {
+            codigoASCII = password.charAt(i) + 99;
+            result += (char) codigoASCII;
+        }
+
+        return result;
+    }
+    //para desencriptar (Nuno)
+    public String decryptPassword(String password) {
+        int codigoASCII;
+        String result = "";
+
+        for (int i = 0; i < password.length(); i++) {
+            codigoASCII = password.charAt(i) - 99;
+            result += (char) codigoASCII;
+        }
+
+        return result;
+    }
 
     /**
      * Getting and Setting Methods
@@ -106,7 +124,8 @@ public class SystemUser {
         return this.password;
     }
 
-    public String getActivateUser() {
+
+    public String getActivateUser() { //alguém está a usar??? (ver isUserActivated())
 
         String status = "inativo";
 
@@ -116,6 +135,15 @@ public class SystemUser {
 
         return status;
     }
+
+    public boolean isUserActivated() {
+        return this.activateUser;
+    }
+
+    public List<Profile> getAssignedProfileList() {
+        return this.assignedProfileList;
+    }
+
 
     public boolean activateUser() {
         return true;
@@ -158,6 +186,60 @@ public class SystemUser {
         }
 
         return valid;
+    }
+
+    /**
+     * Método para verificar se os parâmetros recebidos são do objeto.
+     */
+
+    public boolean hasThisData(String userName, String email, String function, int isActive, int [] profilesId){
+
+        boolean result = true;
+
+        if(!userName.isEmpty()){
+            int idxString = this.userName.toLowerCase().indexOf(userName.toLowerCase());
+            if(idxString == -1){ result = false;}
+        }
+
+        if(!email.isEmpty()){
+            int idxString = this.email.toLowerCase().indexOf(email.toLowerCase());
+            if(idxString == -1){ result = false;}
+        }
+
+        if(!function.isEmpty()){
+            int idxString = this.function.toLowerCase().indexOf(function.toLowerCase());
+            if(idxString == -1){ result = false;}
+        }
+
+        if(isActive != -1){
+            if(isActive == 0){
+                if(this.activateUser) {result = false;}
+            } else if (isActive == 1) {
+                if(!this.activateUser) {result = false;}
+            }
+        }
+
+        if(profilesId.length != 0){
+
+            if(this.assignedProfileList.size() == 0) { result = false; } else {
+
+                int count = 0;
+
+                for (int k : profilesId) {
+                    for (Profile profile : this.assignedProfileList) {
+                        if (profile.isValidId(k)) {
+                            count++;
+                            break;
+                        }
+                    }
+                }
+
+                if(count != profilesId.length) { result = false;}
+
+            }
+        }
+
+        return result;
     }
 
     /**
