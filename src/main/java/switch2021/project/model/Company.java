@@ -312,4 +312,11 @@ public class Company {
 
     }
 
+    /**
+     * Method to Validate Allocation (Caroli US007)
+     */
+
+//    public boolean validateAllocation(SystemUser user, double percentageOfAllocation, LocalDate startDate, LocalDate endDate) {
+//        if()
+//    }
 }

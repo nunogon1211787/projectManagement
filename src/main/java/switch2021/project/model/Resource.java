@@ -1,8 +1,10 @@
 package switch2021.project.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Resource {
+
     /**
      * Atributos da classe Resource
      **/
@@ -13,9 +15,6 @@ public class Resource {
     private LocalDate endDate; /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
 
     private double costPerHour;
-
-
-
     private double percentageOfAllocation;
 
     private Profile profile;
@@ -34,7 +33,42 @@ public class Resource {
         this.percentageOfAllocation = percentageOfAllocation;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Resource)) return false;
+        Resource that = (Resource) o;
+        return
+                (this.user.equals(that.getUser())) &&
+                        (this.startDate.equals(that.getStartDate())) &&
+                        (this.endDate.equals(that.getEndDate())) &&
+                        (this.costPerHour == that.getCostPerHour()) &&
+                        (this.percentageOfAllocation == that.getPercentageOfAllocation());
+    }
+
+    public SystemUser getUser() {
+        return user;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public double getCostPerHour() {
+        return costPerHour;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
     /** Métodos "Getter" dos atributos **/
+
+
 
     public double getPercentageOfAllocation() {
         return percentageOfAllocation;
