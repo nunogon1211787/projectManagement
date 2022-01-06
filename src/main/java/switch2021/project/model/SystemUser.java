@@ -51,7 +51,7 @@ public class SystemUser {
     /**
      * Copy Constructor. Para criar um novo objeto, igual ao parâmetro, mas sem levar adiante as referências do objeto original.
      */
-    public SystemUser(SystemUser originalUser){
+    public SystemUser(SystemUser originalUser) {
         this.userName = originalUser.userName;
         this.email = originalUser.email;
         this.photo = originalUser.photo;
@@ -110,24 +110,32 @@ public class SystemUser {
 
         String status = "inativo";
 
-        if(this.activateUser) {status = "ativo";}
+        if (this.activateUser) {
+            status = "ativo";
+        }
 
         return status;
     }
 
-    public boolean activateUser() {return true;}
+    public boolean activateUser() {
+        return true;
+    }
 
-    public String getAssignedProfile(int idx){return assignedProfileList.get(idx).getName();}
+    public String getAssignedProfile(int idx) {
+        return assignedProfileList.get(idx).getName();
+    }
 
     /**
      * Método para validar se o email (ou parte dele) é deste objeto.
      */
-    public boolean isYourEmail(String email){
+    public boolean isYourEmail(String email) {
 
         boolean result = false;
         int idxString = this.email.indexOf(email.toLowerCase());
 
-        if(idxString != -1){ result = true;}
+        if (idxString != -1) {
+            result = true;
+        }
 
         return result;
 
@@ -136,13 +144,13 @@ public class SystemUser {
     /**
      * Método para verificar se o profile recebido (by ID) está associado (tem na lista) ao objeto.
      */
-    public boolean isYourProfile(int id){
+    public boolean isYourProfile(int id) {
 
         boolean valid = false;
 
         for (int i = 0; i < this.assignedProfileList.size(); i++) {
 
-            if(this.assignedProfileList.get(i).isValidId(id)){
+            if (this.assignedProfileList.get(i).isValidId(id)) {
                 valid = true;
                 break;
             }
@@ -156,7 +164,7 @@ public class SystemUser {
      * Método para criar uma Deep Copy da lista de profiles do user.
      */
 
-    private List<Profile> deepCopyListProfile(List<Profile> originalList){
+    private List<Profile> deepCopyListProfile(List<Profile> originalList) {
 
         List<Profile> deepCopyList = new ArrayList<>();
 
@@ -168,6 +176,52 @@ public class SystemUser {
 
         return deepCopyList;
     }
+
+    /**
+     * Method to update old password with the new password
+     */
+
+    public boolean updatePassword (String oldpasswordUI, String newpassword) {
+
+
+        if (validateOldPassword(oldpasswordUI) == true) {
+            setNewPassword(newpassword);
+        }
+        return true;
+
+    }
+
+    /**
+     * Method to compare the oldpassword from de UI (oldpasswordUI) and the oldpassword saved in System User (oldpasswordSU)
+     */
+
+    private boolean validateOldPassword(String oldpasswordUI) {
+
+        String oldpasswordSU = getPassword();
+
+        if (oldpasswordUI.equals(oldpasswordSU)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Method to set the new password
+     */
+
+    private void setNewPassword(String newpassword) {
+        this.password = newpassword;
+    }
+
+    /*
+    /**
+     * Method to update systemuser data in a systemuser
+
+
+    public boolean
+
+     */
+
 
 
 }
