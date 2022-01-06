@@ -19,18 +19,24 @@ public class ProjectSettings {
      *      * getProjectStatusByID()
      **/
 
-    private List<ProjectStatus> arrayProjectStatus = new ArrayList<ProjectStatus>();
-    private List<Customer> arrayCustomer = new ArrayList<Customer>();
-    private final List<Typology> arrayTypology = new ArrayList<Typology>();
-    private List<BusinessSector> arrayBusinessSector = new ArrayList<BusinessSector>();
+    private List<ProjectStatus> arrayProjectStatus;
+    private List<Customer> arrayCustomer;
+    private List<Typology> arrayTypology;
+    private List<BusinessSector> arrayBusinessSector;
 
     /**
      * Initiate lists of class´s Constructor
      **/
 
     public ProjectSettings() {
+        this.arrayProjectStatus = new ArrayList<ProjectStatus>();
+        this.arrayCustomer = new ArrayList<Customer>();
+
+        this.arrayTypology = new ArrayList<Typology>();
         this.arrayTypology.add(new Typology("Fixed Cost"));
         this.arrayTypology.add(new Typology("Time and Materials"));
+
+        this.arrayBusinessSector = new ArrayList<BusinessSector>();
     }
 
     /**
@@ -71,7 +77,7 @@ public class ProjectSettings {
      *
      *Getter´s Method.**/
     public List<Typology> getArrayTypology() {
-        return arrayTypology;
+        return this.arrayTypology;
     }
 
     /**Create Typology.**/
@@ -80,12 +86,6 @@ public class ProjectSettings {
         Typology typo = new Typology(description);
 
         return typo;
-    }
-
-    /**Typology Add´s Method.**/
-    public boolean add(Typology typo) {
-        arrayTypology.add(typo);
-        return true;
     }
 
     /** Typology Validate´s Method**/
