@@ -5,6 +5,19 @@ import java.util.List;
 
 public class SystemUser {
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SystemUser that = (SystemUser) o;
+        return (this.userName.equals(that.userName)) && (this.email.equals(that.email)) &&
+                (this.photo.equals(that.photo)) && (this.password.equals(that.password)) &&
+                (this.function.equals(that.function)) && (this.activateUser == that.activateUser)
+                && (this.assignedProfileList.equals(that.assignedProfileList));
+    }
+    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
+    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
+
     /**
      * Attributes of systemUser´s class
      **/
@@ -56,6 +69,7 @@ public class SystemUser {
         this.assignedProfileList = deepCopyListProfile(originalUser.assignedProfileList);
 
     }
+
     //para encriptar (Nuno)
     public String encryptPassword(String password) {
         int codigoASCII;
@@ -68,6 +82,7 @@ public class SystemUser {
 
         return result;
     }
+
     //para desencriptar (Nuno)
     public String decryptPassword(String password) {
         int codigoASCII;
@@ -192,36 +207,48 @@ public class SystemUser {
      * Método para verificar se os parâmetros recebidos são do objeto.
      */
 
-    public boolean hasThisData(String userName, String email, String function, int isActive, int [] profilesId){
+    public boolean hasThisData(String userName, String email, String function, int isActive, int[] profilesId) {
 
         boolean result = true;
 
-        if(!userName.isEmpty()){
+        if (!userName.isEmpty()) {
             int idxString = this.userName.toLowerCase().indexOf(userName.toLowerCase());
-            if(idxString == -1){ result = false;}
-        }
-
-        if(!email.isEmpty()){
-            int idxString = this.email.toLowerCase().indexOf(email.toLowerCase());
-            if(idxString == -1){ result = false;}
-        }
-
-        if(!function.isEmpty()){
-            int idxString = this.function.toLowerCase().indexOf(function.toLowerCase());
-            if(idxString == -1){ result = false;}
-        }
-
-        if(isActive != -1){
-            if(isActive == 0){
-                if(this.activateUser) {result = false;}
-            } else if (isActive == 1) {
-                if(!this.activateUser) {result = false;}
+            if (idxString == -1) {
+                result = false;
             }
         }
 
-        if(profilesId.length != 0){
+        if (!email.isEmpty()) {
+            int idxString = this.email.toLowerCase().indexOf(email.toLowerCase());
+            if (idxString == -1) {
+                result = false;
+            }
+        }
 
-            if(this.assignedProfileList.size() == 0) { result = false; } else {
+        if (!function.isEmpty()) {
+            int idxString = this.function.toLowerCase().indexOf(function.toLowerCase());
+            if (idxString == -1) {
+                result = false;
+            }
+        }
+
+        if (isActive != -1) {
+            if (isActive == 0) {
+                if (this.activateUser) {
+                    result = false;
+                }
+            } else if (isActive == 1) {
+                if (!this.activateUser) {
+                    result = false;
+                }
+            }
+        }
+
+        if (profilesId.length != 0) {
+
+            if (this.assignedProfileList.size() == 0) {
+                result = false;
+            } else {
 
                 int count = 0;
 
@@ -234,7 +261,9 @@ public class SystemUser {
                     }
                 }
 
-                if(count != profilesId.length) { result = false;}
+                if (count != profilesId.length) {
+                    result = false;
+                }
 
             }
         }
@@ -263,7 +292,7 @@ public class SystemUser {
      * Method to update old password with the new password
      */
 
-    public boolean updatePassword (String oldpasswordUI, String newpassword) {
+    public boolean updatePassword(String oldpasswordUI, String newpassword) {
 
 
         if (validateOldPassword(oldpasswordUI) == true) {
@@ -303,7 +332,6 @@ public class SystemUser {
     public boolean
 
      */
-
 
 
 }

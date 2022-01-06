@@ -14,21 +14,20 @@ public class Company {
 
     List<Project> arrayProj = new ArrayList<>();
     List<SystemUser> arraySyUser = new ArrayList<>();
-    static List<Profile> arrayProfile = new ArrayList<>();
+    List<Profile> arrayProfile = new ArrayList<>();
     List<Request> arrayRequest = new ArrayList<>();
 
     /**
      * Constructors with data (Ivan)
      **/
     public Company(){
-
-        arrayProfile.add(new Profile(000,"Visitor","System Profile"));
-        arrayProfile.add(new Profile (001,"Administrator","System Profile"));
-        arrayProfile.add(new Profile(002,"Director","System Profile"));
-        arrayProfile.add(new Profile(003,"Project Manager", "Special Profile"));
-        arrayProfile.add(new Profile(004, "Product Owner", "Special Profile"));
-        arrayProfile.add(new Profile(005, "Scrum Master", "Special Profile"));
-        arrayProfile.add(new Profile(006, "Project Team", "Special Profile"));
+        arrayProfile.add(new Profile(0,"Visitor","System Profile"));
+        arrayProfile.add(new Profile(1,"Administrator","System Profile"));
+        arrayProfile.add(new Profile(2,"Director","System Profile"));
+        arrayProfile.add(new Profile(3,"Project Manager", "Special Profile"));
+        arrayProfile.add(new Profile(4, "Product Owner", "Special Profile"));
+        arrayProfile.add(new Profile(5, "Scrum Master", "Special Profile"));
+        arrayProfile.add(new Profile(6, "Project Team", "Special Profile"));
     }
 
     /** Metodo create de Projectos (Paulo) **/
@@ -98,8 +97,8 @@ public class Company {
         return this.arraySyUser;
     }
 
-    public static List<Profile> getArrayProfile() {
-        return arrayProfile;
+    public List<Profile> getArrayProfile() {
+        return this.arrayProfile;
     }
 
     public Project getProj(int index) {
