@@ -68,7 +68,7 @@ public class Company {
         return true;
     }
 
-    public boolean add(SystemUser syUser) {
+    public boolean saveSystemUser(SystemUser syUser) {
         this.arraySyUser.add(syUser);
         return true;
     }
