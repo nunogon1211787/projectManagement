@@ -9,6 +9,7 @@ public class US008Controller {
 
     private Company company;
     private Project project;
+    private int index;
 
     public US008Controller(Company company, Project project){
         this.company = company;
@@ -16,7 +17,11 @@ public class US008Controller {
     }
 
     public Project getProjectRequested(int index){
-        return this.company.getProjByIndex(index);
+//        Project copia = this.company.getProjByIndex(index);
+//        this.project = copia;
+//        return copia;
+        this.index = index;
+        return this.project = this.company.getProjByIndex(index);
     }
 
     public Project editProject(String name, LocalDate startDate, LocalDate endDate, int numberOfSprints, int sprintDuration, String status, SystemUser scrumMaster, SystemUser productOwner){
@@ -31,8 +36,8 @@ public class US008Controller {
         return this.project;
     }
 
-    public boolean saveProject(Project project){
-        this.company.saveProject(project);
+    public boolean saveProject(Project proj){
+        this.company.saveProject(proj, this.index);
         return true;
     }
 
