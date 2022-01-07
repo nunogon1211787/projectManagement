@@ -69,7 +69,6 @@ public class Company {
         return true;
     }
 
-
     /**
      * Method to save system user data (username, function, photo) in System User List
      */
