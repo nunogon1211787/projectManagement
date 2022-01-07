@@ -289,13 +289,15 @@ public class Company {
     // PAULO FAVOR VERIFICAR ESSE MÉTODO. NÃO EXISTIA E SÓ CRIEI AQUI PARA NÃO DAR ERRO.
     public boolean validateProject(Project project) {
 
-        //Check empty fields on code, name and description
-        if (project.getProjectName().trim().isEmpty()
-                || project.getCode().trim().isEmpty()
-                || project.getDescription().trim().isEmpty()) {
+        //check if numbers in Number of Sprints and budget are valid
+        if(project.getBudget()<0 || project.getNumberOfSprints() <0) {
             return false;
         }
-        return true;
+
+        //Check empty fields on code, name and description
+        return !project.getProjectName().trim().isEmpty()
+                && !project.getCode().trim().isEmpty()
+                && !project.getDescription().trim().isEmpty();
     }
 
     /**

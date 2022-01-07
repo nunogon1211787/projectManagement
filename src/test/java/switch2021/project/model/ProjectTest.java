@@ -166,7 +166,7 @@ class ProjectTest {
         assertFalse(comp.validateProject(comp.createProject("123testcode", "prototype", "test", customer,
                 typology, businessSector, date, 7, -1)));
         assertFalse(comp.validateProject(comp.createProject("123testcode", "prototype", "test", customer,
-                typology, businessSector, date, -7, 5000)));
+               typology, businessSector, date, -7, 5000)));
         assertFalse(comp.validateProject(comp.createProject("", "prototype", "test", customer,
                 typology, businessSector, date, 7, 5000)));
         assertFalse(comp.validateProject(comp.createProject("123testcode", "", "test", customer,
