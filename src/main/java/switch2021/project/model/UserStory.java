@@ -20,8 +20,8 @@ public class UserStory {
 
     private String projectCode;
     private UserStoryStatus userStoryStatus;
-    private String description;
     private int priority;
+    private String description;
     private int timeEstimate;
     private long id_UserStory;
 
@@ -29,12 +29,12 @@ public class UserStory {
      * Constructors
      */
 
-    public UserStory(String projectCode, UserStoryStatus userStoryStatus, String description, int priority, int timeEstimate) {
+    public UserStory(String projectCode, UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
         this.id_UserStory = ID_GENERATOR.getAndIncrement();
         this.projectCode = projectCode;
         this.userStoryStatus = userStoryStatus;
-        this.description = description;
         this.priority = priority;
+        this.description = description;
         this.timeEstimate = timeEstimate;
     }
 

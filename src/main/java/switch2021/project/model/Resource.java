@@ -22,7 +22,7 @@ public class Resource {
     public Resource(int userId, String projectCode, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
 
         SystemUser userToAdd = new Company().getSyUser(userId);
-        Project projectToAdd = new Company().searchProject(projectCode);
+        Project projectToAdd = new Company().getProj(projectCode);
 
         this.user = userToAdd;
         this.project = projectToAdd;

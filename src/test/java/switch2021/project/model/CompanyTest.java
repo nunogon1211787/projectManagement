@@ -93,7 +93,7 @@ class CompanyTest {
      **/
 
 
-    // Teste de adicionar profile em company (Cris)
+    // Teste de adicionar profile em company (Cris US013)
     @Test
     public void addNewProfileWithFailNameEmpty() {
 //Input
@@ -205,4 +205,36 @@ class CompanyTest {
 //Result
         assertEquals(expected, testProfileList);
     }
+
+    /**
+     * >>>>>> Tests from project <<<<<<
+     **/
+
+    // Test to validate if there is project code (Cris US009)
+
+    @Test
+    public void getProjValidProjectCode() {
+        //arrange
+        Company company = new Company();
+        Project proj1=new Project("123","CDC","teste","LOJA","custo fixo",null,LocalDate.now(),5,555);
+        company.add(proj1);
+        //act
+        Project proj2= company.getProj("123");
+        // assert information
+        assertEquals(proj1,proj2);
+    }
+
+    @Test
+    public void getProjInvalidProjectCode() {
+        //arrange
+        Company company = new Company();
+        Project proj1=new Project("123","CDC","teste","LOJA","custo fixo",null,LocalDate.now(),5,555);
+        company.add(proj1);
+        //act
+        Project proj2= company.getProj("125");
+        // assert information
+        assertNull(proj2);
+    }
+
+
 }

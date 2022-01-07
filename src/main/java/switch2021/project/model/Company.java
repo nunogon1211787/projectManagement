@@ -3,8 +3,6 @@ package switch2021.project.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Company {
 
@@ -102,8 +100,18 @@ public class Company {
         return arrayProfile;
     }
 
-    public Project getProj(int index) {
-        return arrayProj.get(index);
+    /**
+     * Methods method to get the project from code (Cris US009)
+     **/
+
+    public Project getProj(String code) {
+
+        for (Project proj : arrayProj) {
+            if (proj.getCode().equalsIgnoreCase(code)) {
+                return proj;
+            }
+        }
+        return null;
     }
 
     public SystemUser getSyUser(int index) {
@@ -148,7 +156,7 @@ public class Company {
      * Method to generate a new ID for the profile - begin in number 1 (Cris-US013)
      **/
     private int generateNewProfileID() {
-        int lastIndex = 001;
+        int lastIndex = 000;
         for (Profile profile : arrayProfile) {
             lastIndex = Math.max(profile.getId(), lastIndex);
         }
@@ -178,23 +186,6 @@ public class Company {
         }
         return true;
     }
-
-    /**
-     * Method to validate if project exists (to associate US i need to validate that codeProject exists) (Cris-US009)
-     **/
-    public boolean checkProjectExists(String code) {
-
-        for (Project proj : arrayProj) {
-            if (proj.getCode().equalsIgnoreCase(code)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Método para validar se um profile existe.
-     **/
 
     public boolean searchProfileById(int id) {
 
@@ -232,22 +223,6 @@ public class Company {
     }
 
     /**
-     * Método para procurar um projeto com um dado código
-     */
-
-    public Project searchProject(String codeX) {
-        int count = 0;
-        for (int i = 0; i < this.arrayProj.size(); i++) {
-
-            if (Objects.equals(this.getProj(i).getCode(), codeX)) {
-                break;
-            }
-            count++;
-        }
-        return getProj(count);
-    }
-
-    /**
      * Método para gravar informação editada de um projeto por cima INCOMPLETO
      */
 
@@ -264,10 +239,8 @@ public class Company {
 
     public String[] getProjectIDList() {
         String[] lista = new String[arrayProj.size()];
-
         for (int i = 0; i < this.arrayProj.size(); i++) {
-
-            lista [i] = this.getProj(i).getCode();
+            lista [i] = this.arrayProj.get(i).getCode();
         }
         return lista;
     }
@@ -283,7 +256,4 @@ public class Company {
         }
 
     }
-
-
-    
 }

@@ -78,5 +78,121 @@ class ProjectTest {
 
     }
 
+    /**
+     * >>>>>> Tests from userStory <<<<<<
+     **/
 
+    // Test adding userStory to the project (Cris US009)
+    @Test
+    public void addUserStoryEmptyOrNullCode() {
+        //Arrange
+        Project project = new Project();
+        String code = "123d";
+        project.setCode(code);
+        UserStoryStatus status = UserStoryStatus.TODO;
+        int priority = 1;
+        String description = "teste";
+        int timeEstimate = 1;
+        UserStory userStory = new UserStory("", status, priority, description, timeEstimate);
+        UserStory userStory2 = new UserStory("  ", status, priority, description, timeEstimate);
+        UserStory userStory3 = new UserStory(null, status, priority, description, timeEstimate);
+        // Act
+        boolean isAdded = project.addUserStory(userStory);
+        boolean isAdded2 = project.addUserStory(userStory2);
+        boolean isAdded3 = project.addUserStory(userStory3);
+        //Assert
+        assertFalse(isAdded);
+        assertFalse(isAdded2);
+        assertFalse(isAdded3);
+    }
+
+    @Test
+    public void addUserStoryPriorityIsInvalid() {
+        //Arrange
+        Project project = new Project();
+        String code = "123d";
+        project.setCode(code);
+        UserStoryStatus status = UserStoryStatus.TODO;
+        int priority = -1;
+        String description = "teste";
+        int timeEstimate = 1;
+        UserStory userStory = new UserStory(code, status, priority, description, timeEstimate);
+        // Act
+        boolean isAdded = project.addUserStory(userStory);
+        //Assert
+        assertFalse(isAdded);
+    }
+
+    @Test
+    public void addUserStoryUserStoryAlreadyExist() {
+        //Arrange
+        Project project = new Project();
+        String code = "123d";
+        project.setCode(code);
+        UserStoryStatus status = UserStoryStatus.TODO;
+        int priority = 1;
+        String description = "teste";
+        int timeEstimate = 7;
+        UserStory userStory = new UserStory(code, status, priority, description, timeEstimate);
+        project.addUserStory(userStory);
+        // Act
+        UserStory userStory2 = new UserStory(code, UserStoryStatus.IN_TEST, 2, description, 8);
+        boolean isAdded = project.addUserStory(userStory2);
+        //Assert
+        assertFalse(isAdded);
+    }
+
+    @Test
+    public void addUserStoryTimeEstimateInvalid() {
+        //Arrange
+        Project project = new Project();
+        String code = "123d";
+        project.setCode(code);
+        UserStoryStatus status = UserStoryStatus.TODO;
+        int priority = 1;
+        String description = "teste";
+        int timeEstimate = -1;
+        UserStory userStory = new UserStory(code, status, priority, description, timeEstimate);
+        // Act
+        boolean isAdded = project.addUserStory(userStory);
+        //Assert
+        assertFalse(isAdded);
+    }
+
+    @Test
+    public void addUserStoryWithSuccess() {
+        //Arrange
+        Project project = new Project();
+        String code = "123d";
+        project.setCode(code);
+        UserStoryStatus status = UserStoryStatus.TODO;
+        int priority = 1;
+        String description = "teste";
+        int timeEstimate = 7;
+        UserStory userStory = new UserStory(code, status, priority, description, timeEstimate);
+        // Act
+        boolean isAdded = project.addUserStory(userStory);
+        //Assert
+        assertTrue(isAdded);
+    }
+
+    @Test
+    public void createNewUserStoryWithSuccess() {
+        //Arrange
+        Project project = new Project();
+        String code = "123d";
+        project.setCode(code);
+        UserStoryStatus status = UserStoryStatus.TODO;
+        int priority = 1;
+        String description = "teste";
+        int timeEstimate = 7;
+        // Act
+        UserStory userStory = project.createUserStory(status, priority, description, timeEstimate);
+        //Assert
+        assertEquals(code, userStory.getProjectCode());
+        assertEquals(status, userStory.getUserStoryStatus());
+        assertEquals(priority, userStory.getPriority());
+        assertEquals(description, userStory.getDescription());
+        assertEquals(timeEstimate, userStory.getTimeEstimate());
+    }
 }
