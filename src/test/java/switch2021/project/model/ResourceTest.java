@@ -42,6 +42,24 @@ class ResourceTest {
     }
 
 //    @Test
+//    @DisplayName("Teste para validar check Allocation Period")
+//    public void checkAllocationPeriod(){
+//        //Arrange
+//        LocalDate startDateAllo = new LocalDate(2021, 07,03);
+//        LocalDate endDateAllo = new LocalDate(2021, 07,04);
+//
+//        LocalDate startDate = new LocalDate(2021, 07,03);
+//        LocalDate endDate = new LocalDate(2021, 07,04);
+//
+//        /** user **/
+//        Profile pro = new Profile("mku","sss");
+//        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+//        Resource resAllo = new Resource (newUser, startDateAllo,endDateAllo,100,.5);
+//
+//        resAllo.checkAllocationPeriod(startDate,endDate);
+
+
+//    @Test
 //    @DisplayName("Teste de criação de Resource")
 //    public void associateResource() {
 //        //Arrange
