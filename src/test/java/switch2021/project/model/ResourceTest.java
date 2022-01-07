@@ -21,13 +21,13 @@ class ResourceTest {
        // LocalDate startDate = LocalDate.of(2021,12,31);
       //  LocalDate endDate = LocalDate.of(2022,01,05);
 
-        /** project **/
-        String code = "opg";
-        String projectName = "tre";
-        String description = "hjgf";
-        Customer customer = new Customer(01,"klf");
-        Typology typology = new Typology("ksa");
-        BusinessSector businessSector = new ProjectSettings().getBussinessSectorById(0);
+//        /** project **/
+//        String code = "opg";
+//        String projectName = "tre";
+//        String description = "hjgf";
+//        Customer customer = new Customer(01,"klf");
+//        Typology typology = new Typology("ksa");
+//        BusinessSector businessSector = new ProjectSettings().getBussinessSectorById(0);
         LocalDate startDate = LocalDate.of(2021,12,31);
         LocalDate endDate = LocalDate.of(2022,01,05);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
@@ -36,7 +36,7 @@ class ResourceTest {
         SystemUser newUser2 = new SystemUser("xyz", "fase", "des", "gth", iso);
         LocalDate startDate2 = LocalDate.of(2021,12,31);
         LocalDate endDate2 = LocalDate.of(2022,01,05);
-        Resource expected = new Resource(newUser2, startDate2, endDate2, 100, 50);
+        Resource expected = new Resource(newUser2, startDate2, endDate2, 100, .5);
         //Result
         assertEquals(input, expected);
     }

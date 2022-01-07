@@ -20,13 +20,9 @@ public class US005Controller {
         return this.company.validateProject(project);
     }
 
-    public boolean addProject(String code, String name, String description, Customer customer, Typology typology,
-                              BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
-
-        this.project = this.company.createProject(code,name,description,customer,typology,businessSector,
-                startDate,numberOfSprints,budget);
-
-        return this.company.add(project);
+    public boolean saveProject(Project project) {
+        int index = company.getArrayProj().size();
+        return this.company.saveProject(project, index); // confirmar se funciona, ou seja o set adiciona numa nova posição?
     }
 
 }

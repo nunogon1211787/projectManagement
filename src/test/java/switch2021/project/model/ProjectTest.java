@@ -21,6 +21,7 @@ class ProjectTest {
 
     static Project newProject = new Project("123testcode", "prototype", "test", customer,
             typology, businessSector, date, 7, 5000);
+    private Profile User;
 
     @Test
     @DisplayName("Teste de check Code")
@@ -142,6 +143,21 @@ class ProjectTest {
 
         //Results
         assertEquals(valueBusinessSector, businessSectorCheck);
+    }
+
+    @Test
+    @DisplayName("Teste de busca de projecto a pelo indice")
+    public void checkGetProjByIndex() {
+        Company comp = new Company();
+        comp.add(comp.createProject("123testcode", "prototype", "test", customer,
+                typology, businessSector, date, 7, 5000));
+        Project proj = new Project("123testcode_2", "prototype_2", "test_2", customer,
+                typology, businessSector, date, 7, 6000);
+        comp.add(proj);
+
+        //Result
+        assertEquals(comp.getProjByIndex(0), newProject);
+        assertEquals(comp.getProjByIndex(1), proj);
     }
 
     @Test
@@ -290,4 +306,38 @@ class ProjectTest {
         assertEquals(description, userStory.getDescription());
         assertEquals(timeEstimate, userStory.getTimeEstimate());
     }
+
+
+    @Test
+    public void editProjectSetsTest() {
+        //Arrange
+        Project project = new Project();
+        SystemUser scrumMaster = new SystemUser("Antonio","antonio@isep.ipp.pt", "Designer", "", User);
+        SystemUser productOwner = new SystemUser("Manuel","manuel@isep.ipp.pt", "Designer mini", "", User);
+        SystemUser user = new SystemUser("Antonio","antonio@isep.ipp.pt", "Designer", "", User);
+        SystemUser user2 = new SystemUser("Manuel","manuel@isep.ipp.pt", "Designer mini", "", User);
+        ProjectStatus status = new ProjectStatus("Planned");
+
+        // Act
+        project.setProjectName("XPTO9");
+        project.setStartDate(LocalDate.of(2022, 2,10));
+        project.setEndDate(LocalDate.of(2022,4,20));
+        project.setNumberOfSprints(5);
+        project.setProjectStatus(status);
+        project.setSprintDuration(2);
+        project.setScrumMaster(scrumMaster);
+        project.setProductOwner(productOwner);
+
+        //Assert
+        assertEquals("XPTO9", project.getProjectName());
+        assertEquals(LocalDate.of(2022,2,10), project.getStartDate());
+        assertEquals(LocalDate.of(2022,4,20), project.getEndDate());
+        assertEquals(5, project.getNumberOfSprints());
+        assertEquals(status, project.getProjectStatus());
+        assertEquals(2, project.getSprintDuration());
+        assertEquals(user, project.getScrumMaster());
+        assertEquals(user2, project.getProductOwner());
+
+    }
+
 }

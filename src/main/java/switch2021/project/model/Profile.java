@@ -1,5 +1,6 @@
 package switch2021.project.model;
 
+import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -69,15 +70,22 @@ public class Profile {
     }
 
     public boolean isValidName(String name) {
-        return (name == this.getName());
+        if(name.toUpperCase(Locale.ROOT) != this.getName().toUpperCase()) {
+            return false;
+        }
+        return true;
     }
+
+    public boolean hasType(String type){ return this.type.equalsIgnoreCase(type);}
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Profile)) return false;
-        Profile profile = (Profile) o;
-        return Objects.equals(getName(), profile.getName()) && Objects.equals(getType(), profile.getType());
+        if (o == null || getClass() != o.getClass()) return false;
+        Profile that = (Profile) o;
+        return (this.getName().equals(that.getName())) && (this.getType().equals(getType()));
     }
+    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
+    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
 
 }

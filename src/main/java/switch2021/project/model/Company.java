@@ -26,11 +26,11 @@ public class Company {
 
         arrayProfile.add(new Profile("Visitor", "System Profile"));
         arrayProfile.add(new Profile("Administrator", "System Profile"));
-        /*arrayProfile.add(new Profile(2,"Director","System Profile"));
-        arrayProfile.add(new Profile(3,"Project Manager", "Special Profile"));
-        arrayProfile.add(new Profile(4, "Product Owner", "Special Profile"));
-        arrayProfile.add(new Profile(5, "Scrum Master", "Special Profile"));
-        arrayProfile.add(new Profile(6, "Project Team", "Special Profile"));*/
+        arrayProfile.add(new Profile("Director","System Profile"));
+        arrayProfile.add(new Profile("Project Manager", "Special Profile"));
+        arrayProfile.add(new Profile("Product Owner", "Special Profile"));
+        arrayProfile.add(new Profile("Scrum Master", "Special Profile"));
+        arrayProfile.add(new Profile("Project Team", "Special Profile"));
     }
 
     /**
@@ -49,22 +49,22 @@ public class Company {
      * Metodo create de SystemUsers (Nuno)
      **/
 
-    public SystemUser createSystemUser(String userName, String email, String password, String function) {
-        return new SystemUser(userName, email, password, function, arrayProfile.get(0));
+    public SystemUser createSystemUser(String userName, String email, String function, String password) {
+        return new SystemUser(userName, email, function, password, arrayProfile.get(0));
     }
 
-    public SystemUser createSystemUser(String userName, String email, String password, String function, String photo) {
-        return new SystemUser(userName, email, password, function, photo, arrayProfile.get(0));
+    public SystemUser createSystemUser(String userName, String email, String function, String photo, String password) {
+        return new SystemUser(userName, email, function, photo, password, arrayProfile.get(0));
     }
 
-    //Método alterado porque estava com um erro (Joana).
 
-    /*public boolean validateSystemUser(SystemUser user) {
+    public boolean validateSystemUserData(SystemUser user) {
         if (user == null && this.arraySyUser.contains(user)) {
             return false;
         }
         return true;
-    }*/
+    }
+
     public boolean validateSystemUser(SystemUser user) {
         if (user == null) {
             return false;
@@ -81,6 +81,7 @@ public class Company {
         }
         return !this.arraySyUser.contains(user);
     }
+
 
     boolean hasEmail(String newUserEmail) {
         for (SystemUser newUser : arraySyUser) {
@@ -124,6 +125,23 @@ public class Company {
         return result;
     }
 
+    /**
+     * Method to save system user data (username, function, photo) in System User List
+     */
+
+    public boolean saveSystemUser(SystemUser user) {
+        boolean result = true;
+
+        if (!validateSystemUserData(user)) {
+            result = false;
+        } else {
+            this.arraySyUser.add(user);
+        }
+        return result;
+    }
+
+
+
     //este é igual ao de cima mas sem validação. É preciso?...(Nuno)
     public boolean addSystemUser(SystemUser syUser) {
         this.arraySyUser.add(syUser);
@@ -145,8 +163,34 @@ public class Company {
     }
 
     public boolean add(Request request) {
-        //this.arrayRequest.add(request);
+        this.arrayRequest.add(request);
         return true;
+
+    }
+
+    private boolean validateRequest(Request newRequest) {
+
+        //Check if request already exist
+        for (Request up : arrayRequest) {
+            if (up.equals(newRequest)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
+    public boolean saveRequest(Request newRequest){
+
+        boolean result = false;
+
+        if(validateRequest(newRequest)) {
+            add(newRequest);
+            result = true;
+        }
+
+        return result;
 
     }
 
@@ -164,6 +208,21 @@ public class Company {
 
     public List<Profile> getArrayProfile() {
         return this.arrayProfile;
+    }
+
+    public List<Profile> getArrayProfileWithType(String type) {
+
+        List<Profile> foundList = new ArrayList<>();
+
+        for (int i = 0; i < this.arrayProfile.size(); i++) {
+
+            if(this.arrayProfile.get(i).hasType(type)){
+                foundList.add(this.arrayProfile.get(i));
+            }
+
+        }
+
+        return foundList;
     }
 
     /**
@@ -287,8 +346,11 @@ public class Company {
     /**
      * Método para validar o projeto criado.
      */
-    // PAULO FAVOR VERIFICAR ESSE MÉTODO. NÃO EXISTIA E SÓ CRIEI AQUI PARA NÃO DAR ERRO.
     public boolean validateProject(Project project) {
+        // check if project exists
+        if(checkProjectExists(project.getCode())){
+            return false;
+        }
 
         //check if numbers in Number of Sprints and budget are valid
         if(project.getBudget()<0 || project.getNumberOfSprints() <0) {
@@ -366,7 +428,7 @@ public class Company {
             for (int j = 0; j < arrayProj.get(i).getProjectTeam().size(); j++) {
                 if (arrayProj.get(i).getTeamMemberByIndex(j).equals(user) &&
                         arrayProj.get(i).getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
-                    sum = +arrayProj.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();
+                    sum = sum + arrayProj.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();
                 }
             }
         }

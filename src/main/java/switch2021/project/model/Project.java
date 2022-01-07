@@ -22,10 +22,7 @@ public class Project {
 
     private BusinessSector businessSector;  // Para já coloquei em tipo Business Sector e não lista. Depois será para mudar.
     private List<UserStory> productBacklog;
-    private List<Resource> projectTeam;
-    /**
-     * lista de resources alocados ao projecto (Carolina)
-     **/
+    private List<Resource> projectTeam; //lista de resources alocados ao projecto (Carolina)
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -52,12 +49,11 @@ public class Project {
         this.startDate = startDate;
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
-        this.productOwner = productOwner;
-        this.scrumMaster = scrumMaster;
-        this.sprintDuration = sprintDuration;
 
-
+        this.productBacklog = new ArrayList<>();
+        this.projectTeam = new ArrayList<>();
     }
+
 
     public void setScrumMaster(SystemUser scrumMaster) {
         this.scrumMaster = scrumMaster;
@@ -97,9 +93,7 @@ public class Project {
         return projectName;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() {return description;}
 
     public Customer getCustomer() {
         return this.customer;
@@ -113,9 +107,7 @@ public class Project {
         return projectStatus;
     }
 
-    public BusinessSector getBusinessSector() {
-        return businessSector;
-    }
+    public BusinessSector getBusinessSector() {return businessSector;}
 
     public LocalDate getStartDate() {
         return startDate;
@@ -135,6 +127,18 @@ public class Project {
 
     public List<UserStory> getProductBacklog() {
         return productBacklog;
+    }
+
+    public SystemUser getScrumMaster() {
+        return scrumMaster;
+    }
+
+    public SystemUser getProductOwner() {
+        return productOwner;
+    }
+
+    public int getSprintDuration() {
+        return sprintDuration;
     }
 
     /**
@@ -263,12 +267,16 @@ public class Project {
      **/
 
     public boolean addResource(Resource toAdd) {
-        this.projectTeam.add(toAdd);
-        return true;
+        boolean msg = false;
+        if(validateResource(toAdd)) {
+            this.projectTeam.add(toAdd);
+            msg = true;
+        }
+        return msg;
     }
 
     /**
-     * Método para criar resource à Project Team (Carolina US007)
+     * Método para criar resource  (Carolina US007)
      **/
 
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {

@@ -47,7 +47,6 @@ public class Resource {
                         (this.percentageOfAllocation == that.getPercentageOfAllocation());
     }
 
-
     /** Métodos "Getter" dos atributos (Carolina US007) **/
 
     public SystemUser getUser() {
