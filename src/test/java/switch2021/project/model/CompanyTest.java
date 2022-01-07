@@ -583,10 +583,10 @@ class CompanyTest {
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
 
-        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .2);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
-        Resource resAllo2 = new Resource(newUser2, startDateToAllocate, endDateToAllocate, 100, .5);
+        Resource resAllo2 = new Resource(newUser2, startDateToAllocate, endDateToAllocate, 100, .2);
 
         /** project list **/
 
