@@ -26,21 +26,21 @@ public class TypologyTest {
         assertEquals(description, value_description);
     }
 
-    /*@Test
+    @Test
     public void contructorTypologyTestNotNull() {
         //Input
         Typology typo2 = new Typology("TestTypology");
         //Expected
         int id = typo2.getId_Typology();
-        int value_id = 001;
+        int value_id = 000;
         String description = typo2.getDescription();
         String value_description = "TestTypology";
         //Results
         assertEquals(id, value_id);
         assertEquals(description, value_description);
-    }*/
+    }
 
-    /*@Test
+    @Test
     public void contructorTypologyTestNotNull_ID() {
         //Input
         Typology typo3 = new Typology("TestTypology3");
@@ -56,13 +56,13 @@ public class TypologyTest {
         typologyArrayList.add(typo7);
         //Expected
         int id = typo6.getId_Typology();
-        int value_id = 004;//Inicialmente começa ao 01...
+        int value_id = 003;//Inicialmente começa ao 01...
         String description = typo6.getDescription();
         String value_description = "TestTypology6";
         //Results
         assertEquals(id, value_id);
         assertEquals(description, value_description);
-    }*/
+    }
 
     //Teste para mudar a descrição da Typology.
     @Test

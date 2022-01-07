@@ -30,16 +30,16 @@ class ProfileTest {
         assertEquals(expected, result);
     }
 
-   /*@Test
+   @Test
     void isValidIdwith1Profile() {
         //input
         Profile test = new Profile("admin", "system");
         int check = 0;
         //Result
         assertTrue(test.isValidId(check));
-    }*/
+    }
 
-    /*@Test
+    @Test
     void isValidIdwith5Profile() {
         //input
         Profile test1 = new Profile("admin", "system");
@@ -58,7 +58,7 @@ class ProfileTest {
         assertTrue(test3.isValidId(check3));
         assertTrue(test4.isValidId(check4));
         assertTrue(test5.isValidId(check5));
-    }*/
+    }
 
     @Test
     void copyConstructorTestName() {

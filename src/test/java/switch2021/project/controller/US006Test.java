@@ -26,7 +26,7 @@ public class US006Test {
         assertEquals(user, expected);
     }
 
-    /*@Test
+    @Test
     public void updateProfileTest() {
         //Arrange
         Company company = new Company();
@@ -36,9 +36,9 @@ public class US006Test {
         //Act
         SystemUser expected =  new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
                 "tester", "123456", company.getProfile("Visitor"));
-        controllerTest.updateProfile(company.getProfile("Administrator"), company.getProfile("Visitor"));
+        controllerTest.updateProfile(company.getProfile("Visitor"), company.getProfile("Administrator"));
 
         //Assert
         assertEquals(user, expected);
-    }*/
+    }
 }
