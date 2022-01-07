@@ -92,7 +92,7 @@ class CompanyTest {
 
         SystemUser ana = new SystemUser("", "1211748@isep.ipp.pt", "", "", new Profile("", ""));
         Company company = new Company(); // criar uma company
-        company.addSystemUser(ana); //ana = objeto da classe SU
+        company.saveSystemUser(ana); //ana = objeto da classe SU
         //Expected
         SystemUser ana2 = company.getUserByEmail("1211748@isep.ipp.pt"); // estou a ir buscar um utilizador com o email etc
         //Result
@@ -209,25 +209,13 @@ class CompanyTest {
     public void inicializeprofileslistwithdefaultprofiles() {
         //Input
         Company comTest = new Company();
-        List<Profile> testProfileList = comTest.getArrayProfile();
-        testProfileList.add(new Profile("Visitor", "System Profile"));
-        testProfileList.add(new Profile("Administrator", "System Profile"));
-        testProfileList.add(new Profile("Director", "System Profile"));
-        testProfileList.add(new Profile("Project Manager", "Special Profile"));
-        testProfileList.add(new Profile("Product Owner", "Special Profile"));
-        testProfileList.add(new Profile("Scrum Master", "Special Profile"));
-        testProfileList.add(new Profile("Project Team", "Special Profile"));
+
         //Expected
         List<Profile> expected = new ArrayList<>();
         expected.add(new Profile("Visitor", "System Profile"));
         expected.add(new Profile("Administrator", "System Profile"));
-        expected.add(new Profile("Director", "System Profile"));
-        expected.add(new Profile("Project Manager", "Special Profile"));
-        expected.add(new Profile("Product Owner", "Special Profile"));
-        expected.add(new Profile("Scrum Master", "Special Profile"));
-        expected.add(new Profile("Project Team", "Special Profile"));
         //Result
-        assertEquals(expected, testProfileList);
+        assertEquals(expected, comTest.getArrayProfile());
     }
 
     /**

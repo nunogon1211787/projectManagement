@@ -57,14 +57,14 @@ public class Company {
         return new SystemUser(userName, email, function, photo, password, arrayProfile.get(0));
     }
 
-    //Método alterado porque estava com um erro (Joana).
 
-    /*public boolean validateSystemUser(SystemUser user) {
+    public boolean validateSystemUserData(SystemUser user) {
         if (user == null && this.arraySyUser.contains(user)) {
             return false;
         }
         return true;
-    }*/
+    }
+
     public boolean validateSystemUser(SystemUser user) {
         if (user == null) {
             return false;
@@ -81,6 +81,7 @@ public class Company {
         }
         return !this.arraySyUser.contains(user);
     }
+
 
     boolean hasEmail(String newUserEmail) {
         for (SystemUser newUser : arraySyUser) {
@@ -123,6 +124,23 @@ public class Company {
         }
         return result;
     }
+
+    /**
+     * Method to save system user data (username, function, photo) in System User List
+     */
+
+    public boolean saveSystemUser(SystemUser user) {
+        boolean result = true;
+
+        if (!validateSystemUserData(user)) {
+            result = false;
+        } else {
+            this.arraySyUser.add(user);
+        }
+        return result;
+    }
+
+
 
     //este é igual ao de cima mas sem validação. É preciso?...(Nuno)
     public boolean addSystemUser(SystemUser syUser) {

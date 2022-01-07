@@ -16,7 +16,7 @@ public class US011Controller {
 
        SystemUser su = this.company.getUserByEmail(email);
        su.updatePassword(oldpasswordUI, newpassword);
-       return this.company.saveSystemUserData(su);
+       return this.company.saveSystemUser(su);
     }
 }
 
