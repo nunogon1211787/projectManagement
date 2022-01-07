@@ -58,6 +58,8 @@ public class Profile {
         this.name = newName;
     }
 
+    public void setType(String newType) { this.type = newType; }
+
     /**
      * Method to verify if a given ID matches with object ID
      */
