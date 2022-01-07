@@ -57,6 +57,20 @@ public class SystemUser {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SystemUser that = (SystemUser) o;
+        return (this.userName.equals(that.userName)) && (this.email.equals(that.email)) &&
+                (this.photo.equals(that.photo)) && (this.password.equals(that.password)) &&
+                (this.function.equals(that.function)) && (this.activateUser == that.activateUser)
+                && (this.assignedProfileList.equals(that.assignedProfileList));
+    }
+    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
+    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
+
+
     //para encriptar
     public String encryptPassword(String password) {
         int codigoASCII;
@@ -310,23 +324,14 @@ public class SystemUser {
      * Method to set the new password
      */
 
-    private void setNewPassword(String newpassword) {
-        this.password = newpassword;
+    public boolean updateProfile(Profile oldProfile, Profile newProfile) {
+        this.assignedProfileList.remove(oldProfile);
+        if(newProfile.isValidName(newProfile.toString())) {
+            this.assignedProfileList.add(newProfile);
+        } else {
+            return false;
+        }
+        return true;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SystemUser that = (SystemUser) o;
-        return (this.userName.equals(that.userName)) && (this.email.equals(that.email)) &&
-                (this.photo.equals(that.photo)) && (this.password.equals(that.password)) &&
-                (this.function.equals(that.function)) && (this.activateUser == that.activateUser)
-                && (this.assignedProfileList.equals(that.assignedProfileList));
-    }
-    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
-    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
-
-
 
 }

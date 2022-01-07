@@ -32,10 +32,10 @@ class SystemUserTest {
         ivan1.activateUser();
         //Expected
         Profile tes = new Profile("ddd","pro");
-        SystemUser expexted2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456",tes);
-        expexted2.activateUser();
+        SystemUser expected2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456",tes);
+        expected2.activateUser();
         //Result
-        assertEquals(ivan1, expexted2);
+        assertEquals(ivan1, expected2);
     }
 
     @Test

@@ -152,6 +152,16 @@ public class Company {
         return new Profile(arrayProfile.get(index));
     }
 
+    public Profile getProfile(String name) {
+        Profile pro = null;
+        for (int i = 0; i < arrayProfile.size(); i++) {
+            if(getProfile(i).getName() == name) {
+                pro = getProfile(i);
+                break;
+            }
+        }
+        return pro;
+    }
       /**
      * Method to create a new profile (Cris-US013)
      **/
@@ -164,7 +174,7 @@ public class Company {
      * Method to generate a new ID for the profile - begin in number 1 (Cris-US013)
      **/
     private int generateNewProfileID() {
-        int lastIndex = 001;
+        int lastIndex = 0;
         for (Profile profile : arrayProfile) {
             lastIndex = Math.max(profile.getId(), lastIndex);
         }
