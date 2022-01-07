@@ -14,11 +14,12 @@ public class US011Controller {
     }
 
     public boolean changePassword(String email, String oldpasswordUI, String newpassword) {
-        this.company.getUserByEmail(email);
-        this.user.updatePassword(oldpasswordUI, newpassword);
-        this.company.saveSystemUser(user);
-        return true;
+
+       this.company.getUserByEmail(email);
+       this.user.updatePassword(oldpasswordUI, newpassword);
+       this.company.saveSystemUser(user);
+       return true;
     }
-    }
+}
 
 

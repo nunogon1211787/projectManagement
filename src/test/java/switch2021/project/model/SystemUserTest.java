@@ -52,6 +52,9 @@ class SystemUserTest {
     @Test
     public void verifyUpdateAndEncryptationOfPassword() {
 
+        //Test to verify if the oldpassword is updated by the newpassword, and this last one is
+        // stored in system user with the encryptation method.
+
         //Arrange
         Profile tes = new Profile("ddd","pro");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO", tes);
@@ -60,6 +63,20 @@ class SystemUserTest {
         joana.updatePassword("HELLO", "GOODBYE");
         //Assert
         assertEquals("GOODBYE",joana.getPassword());
+    }
+
+    @Test
+    public void verifyOldPassword() {
+
+        //Test to verify if the oldpassword, stored in the system user, is equal or diferent from the
+        //password that came from User Interface (UI).
+
+        //Arrange
+        Profile tes = new Profile("ddd","pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO_01", tes);
+        //Act
+        assertFalse(joana.updatePassword("HELLO_02", "GOODBYE"));
+
     }
 
     @Test

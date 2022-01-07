@@ -282,12 +282,12 @@ public class SystemUser {
     public boolean updatePassword(String oldpasswordUI, String newpassword) {
 
 
-        if (validateOldPassword(oldpasswordUI) == true) {
+        if (validateOldPassword(oldpasswordUI)) {
             setPassword(newpassword);
             encryptPassword(newpassword);
+        } else { return false;
         }
-        return true;
-
+            return true;
     }
 
     /**
@@ -314,14 +314,6 @@ public class SystemUser {
         this.password = newpassword;
     }
 
-    /*
-    /**
-     * Method to update systemuser data in a systemuser
-
-
-    public boolean
-
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
