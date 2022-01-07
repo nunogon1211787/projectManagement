@@ -3,7 +3,6 @@ package switch2021.project.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Project {
 
@@ -14,11 +13,12 @@ public class Project {
     private String code;
     private String projectName;
     private String description;
-    private String customer;
-    private String typology;
-    private String ProjectStatus;
 
-    private List<String> businessSector;
+    private Customer customer;
+    private Typology typology;
+    private ProjectStatus projectStatus;
+
+    private BusinessSector businessSector;  // Para já coloquei em tipo Business Sector e não lista. Depois será para mudar.
     private List<UserStory> productBacklog;
     private List<Resource> projectTeam;
     /**
@@ -32,18 +32,19 @@ public class Project {
     private int budget;
 
     /**
-     * Construtor de Projecto (Paulo)
+     * Construtor de Projecto (Paulo - US005)
      **/
 
-    public Project(String code, String name, String description, String customer, String typology,
-                   List<String> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
+    public Project(String code, String name, String description, Customer customer, Typology typology,
+                   BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
+
         this();
         this.code = code;
         this.projectName = name;
         this.description = description;
         this.customer = customer;
         this.typology = typology;
-        this.ProjectStatus = "Status_0";
+        this.projectStatus = new ProjectSettings().getProjectStatusById(0);
         this.businessSector = businessSector;
         this.startDate = startDate;
         this.numberOfSprints = numberOfSprints;
@@ -60,12 +61,13 @@ public class Project {
     }
 
     /**
-     * Método que obtem a data actual no momento do uso do proprio metodo; (Paulo)
+     * Método que obtem a data actual no momento do uso do proprio metodo; (Paulo - US005)
      **/
 
-    public void setEndDate() {
+    public boolean setEndDate() {
 
         this.endDate = LocalDate.now();
+        return true;
     }
 
     /**
@@ -84,19 +86,19 @@ public class Project {
         return description;
     }
 
-    public String getCustomer() {
-        return customer;
+    public Customer getCustomer() {
+        return this.customer;
     }
 
-    public String getTypology() {
+    public Typology getTypology() {
         return typology;
     }
 
-    public String getProjectStatus() {
-        return ProjectStatus;
+    public ProjectStatus getProjectStatus() {
+        return projectStatus;
     }
 
-    public List<String> getBusinessSector() {
+    public BusinessSector getBusinessSector() {
         return businessSector;
     }
 
@@ -132,19 +134,19 @@ public class Project {
         this.description = description;
     }
 
-    public void setCustomer(String customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
-    public void setTypology(String typology) {
+    public void setTypology(Typology typology) {
         this.typology = typology;
     }
 
-    public void setProjectStatus(String projectStatus) {
-        ProjectStatus = projectStatus;
+    public void setProjectStatus(ProjectStatus projectStatus) {
+        this.projectStatus = projectStatus;
     }
 
-    public void setBusinessSector(List<String> businessSector) {
+    public void setBusinessSector(BusinessSector businessSector) {
         this.businessSector = businessSector;
     }
 
@@ -229,11 +231,13 @@ public class Project {
         setStartDate(startDate);
         setEndDate(endDate);
         setNumberOfSprints(numberOfSprints);
-
     }
 
     public void changeSprintDuration(int sprintDuration) {
+    }
 
+    public void changeProjectStatus(String status) {
+        this.projectStatus = projectStatus.setDescription(status);
     }
 
     /**
@@ -245,7 +249,7 @@ public class Project {
     }
 
     /**
-     * Método para adicionar resource à Project Team (Carolina)
+     * Método para adicionar resource à Project Team (Carolina US007)
      **/
 
     public boolean addResource(Resource toAdd) {
@@ -253,10 +257,42 @@ public class Project {
         return true;
     }
 
+    /**
+     * Método para criar resource à Project Team (Carolina US007)
+     **/
+
+    public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
+        Resource res = new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
+        return res;
+    }
+
+    /**
+     * Método para ir buscar Team Member a Project Team (Carolina)
+     **/
+
+    public Resource getTeamMemberByIndex(int index) {
+        Resource res = null;
+        for (int i = 0; i < projectTeam.size(); i++) {
+            if (projectTeam.get(i).equals(index)) {
+                res = projectTeam.get(i);
+            }
+        }
+        return res;
+    }
+
     @Override
     public boolean equals(Object o) {
-        Project project = (Project) o;
-        return getNumberOfSprints() == project.getNumberOfSprints() && getBudget() == project.getBudget() && Objects.equals(getCode(), project.getCode()) && Objects.equals(getProjectName(), project.getProjectName()) && Objects.equals(getDescription(), project.getDescription()) && Objects.equals(getCustomer(), project.getCustomer()) && Objects.equals(getTypology(), project.getTypology()) && Objects.equals(getProjectStatus(), project.getProjectStatus()) && Objects.equals(getBusinessSector(), project.getBusinessSector()) && Objects.equals(getProductBacklog(), project.getProductBacklog()) && Objects.equals(getProjectTeam(), project.getProjectTeam()) && Objects.equals(getStartDate(), project.getStartDate()) && Objects.equals(getEndDate(), project.getEndDate());
+        Project that = (Project) o;
+        return (this.code.equals(that.code)
+                && this.projectName.equals(that.projectName)
+                && this.description.equals(that.description)
+                && this.typology.equals(that.typology)
+                && this.businessSector.equals(that.businessSector)
+                && this.customer.equals(that.customer)
+                && this.projectStatus.equals(that.projectStatus)
+                && this.startDate.equals(that.startDate)
+                && this.budget == that.budget
+                && this.numberOfSprints == that.numberOfSprints);
     }
 
 }

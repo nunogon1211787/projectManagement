@@ -1,23 +1,23 @@
 package switch2021.project.model;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Typology {
 
-    /**
-     * Typology attributes
-     **/
+
+
+    /** Typology attributes **/
 
     private int id_Typology;
     private String description;
 
-    /**
-     * Constructors of typology´s class
-     **/
+    /** Constructors of typology´s class **/
 
     //Create ID automatically
-    private static AtomicInteger ID_GENERATOR = new AtomicInteger(001);
+    private static AtomicInteger ID_GENERATOR = new AtomicInteger();
 
     // Constructor with no parameters
     public Typology() {
@@ -29,9 +29,7 @@ public class Typology {
         this.description = description;
     }
 
-    /**
-     * Getters and Setters
-     */
+    /** Getters and Setters **/
 
     public int getId_Typology() {
         return id_Typology;
@@ -44,4 +42,16 @@ public class Typology {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
+    /** Metodos Override  para comparar objectos diferentes **/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Typology that = (Typology) o;
+        return (this.description.equals(that.description));
+    }
+    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
+    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
 }

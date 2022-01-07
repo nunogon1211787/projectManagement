@@ -3,6 +3,7 @@ package switch2021.project.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Company {
 
@@ -11,25 +12,27 @@ public class Company {
      **/
 
     List<Project> arrayProj = new ArrayList<>();
-    List<SystemUser> arraySyUser = new ArrayList<>();
-    static List<Profile> arrayProfile = new ArrayList<>();
+    List<SystemUser> arraySyUser;// = new ArrayList<>();
+    List<Profile> arrayProfile;
     List<Request> arrayRequest = new ArrayList<>();
 
     /**
      * Constructors with data (Ivan)
      **/
     public Company(){
+        this.arraySyUser = new ArrayList<>();
+        this.arrayProfile = new ArrayList<>();
 
-        arrayProfile.add(new Profile(000,"Visitor","System Profile"));
-        arrayProfile.add(new Profile (001,"Administrator","System Profile"));
-        arrayProfile.add(new Profile(002,"Director","System Profile"));
-        arrayProfile.add(new Profile(003,"Project Manager", "Special Profile"));
-        arrayProfile.add(new Profile(004, "Product Owner", "Special Profile"));
-        arrayProfile.add(new Profile(005, "Scrum Master", "Special Profile"));
-        arrayProfile.add(new Profile(006, "Project Team", "Special Profile"));
+        arrayProfile.add(new Profile("Visitor","System Profile"));
+        arrayProfile.add(new Profile("Administrator","System Profile"));
+        /*arrayProfile.add(new Profile(2,"Director","System Profile"));
+        arrayProfile.add(new Profile(3,"Project Manager", "Special Profile"));
+        arrayProfile.add(new Profile(4, "Product Owner", "Special Profile"));
+        arrayProfile.add(new Profile(5, "Scrum Master", "Special Profile"));
+        arrayProfile.add(new Profile(6, "Project Team", "Special Profile"));*/
     }
 
-    /** Metodo create de Projectos (Paulo) **/
+    /** Metodo create de Projectos (Paulo - US005) **/
 
     public Project createProject(String code, String name, String description, String customer, String typology,
                                  List<String> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
@@ -41,18 +44,20 @@ public class Company {
     /** Metodo create de SystemUsers (Nuno) **/
 
     public SystemUser createSystemUser(String userName, String email, String password, String function) {
-        return new SystemUser(userName, email, password, function);
+        return new SystemUser(userName, email, password, function, arrayProfile.get(0));
     }
 
     public SystemUser createSystemUser(String userName, String email, String password, String function, String photo) {
-        return new SystemUser(userName, email, password, function, photo);
+        return new SystemUser(userName, email, password, function,photo, arrayProfile.get(0));
     }
 
+    //Método alterado porque estava com um erro (Joana).
+
     public boolean validateSystemUser(SystemUser user) {
-        if (user == null) {
+        if (user == null && this.arraySyUser.contains(user)) {
             return false;
         }
-        return this.arraySyUser.contains(user);
+        return true;
     }
 
     /**
@@ -60,11 +65,24 @@ public class Company {
      **/
 
     public boolean add(Project proj) {
-        arrayProj.add(proj);
+        this.arrayProj.add(proj);
         return true;
     }
 
-    public boolean add(SystemUser syUser) {
+    /**
+     * Method to save system user data (username, function, photo) in System User List
+     */
+
+    public boolean saveSystemUserData(SystemUser user) {
+
+        if (!validateSystemUser(user)){
+            return false;
+        }else{
+            return this.arraySyUser.add(user);
+        }
+    }
+
+    public boolean addSystemUser(SystemUser syUser) {
         this.arraySyUser.add(syUser);
         return true;
     }
@@ -79,7 +97,7 @@ public class Company {
     }
 
     public boolean add(Request request) {
-        this.arrayRequest.add(request);
+        //this.arrayRequest.add(request);
         return true;
 
     }
@@ -96,8 +114,8 @@ public class Company {
         return this.arraySyUser;
     }
 
-    public static List<Profile> getArrayProfile() {
-        return arrayProfile;
+    public List<Profile> getArrayProfile() {
+        return this.arrayProfile;
     }
 
     /**
@@ -149,7 +167,7 @@ public class Company {
      **/
 
     public Profile createProfile(String name, String type) {
-        return new Profile(generateNewProfileID(), name, type);
+        return new Profile(name, type);
     }
 
     /**
@@ -186,6 +204,49 @@ public class Company {
         }
         return true;
     }
+
+    /**
+     * Método para validar se um profile existe (Paulo - US005).
+     **/
+    public boolean validateProject(Project project) {
+        //Check empty fields on code, name and description
+        if(        project.getProjectName().trim().isEmpty()
+                || project.getCode().trim().isEmpty()
+                || project.getDescription().trim().isEmpty()){
+
+            return false;
+        }
+
+        //Check if the number of sprints and budget have valid input numbers
+        if(project.getNumberOfSprints() < 0 || project.getBudget() < 0) {
+
+            return false;
+        }
+
+        //Check if project already exists
+        for (Project up : arrayProj){
+            if(up.getCode().equals(project.getCode())){
+                return false;
+            }
+        }
+        return true;
+    }
+    /**
+     * Method to validate if project exists (to associate US i need to validate that codeProject exists) (Cris-US009)
+     **/
+    public boolean checkProjectExists(String code) {
+
+        for (Project proj : arrayProj) {
+            if (proj.getCode().equalsIgnoreCase(code)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Método para validar se um profile existe.
+     **/
 
     public boolean searchProfileById(int id) {
 
@@ -246,14 +307,27 @@ public class Company {
     }
 
     /**
-     * Method to Update User's List
+     * Method to Validate Allocation (Caroli US007)
      */
 
-    public void updateUserList () {
+    public boolean validateAllocation(SystemUser user, double percentageOfAllocation, LocalDate startDate, LocalDate endDate) {
+        double sum = 0;
+        boolean msg = false;
 
-        for (SystemUser systemUser : arraySyUser) {
-            //if (systemUser.getuser )
+        for (int i = 0; i < arrayProj.size(); i++) {
+            for (int j = 0; j < arrayProj.get(i).getProjectTeam().size(); j++) {
+                if (arrayProj.get(i).getTeamMemberByIndex(j).equals(user) &&
+                        arrayProj.get(i).getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
+                        sum = +arrayProj.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();
+                }
+            }
         }
-
+        if(sum + percentageOfAllocation < 1){
+            msg = true;
+        }
+        return msg;
     }
+
+
+    
 }

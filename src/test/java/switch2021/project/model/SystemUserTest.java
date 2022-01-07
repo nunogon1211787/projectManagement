@@ -13,70 +13,72 @@ class SystemUserTest {
     @Test
     public void registerSystemUser() {
         //Input
-        SystemUser ivan = new SystemUser("Ivan Aguiar", "1211768@isep.ipp.pt","tester", "123456");
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        ivan.activateUser();
         //Expected
-        String name = ivan.getUserName();
-        String valueName = "Ivan Aguiar";
-        String email = ivan.getEmail();
-        String valueEmail = "1211768@isep.ipp.pt";
-        String function = ivan.getFunction();
-        String valueFunction = "tester";
-        String password = ivan.getPassword();
-        String valuePassword = "123456";
-        boolean activateUser = ivan.activateUser();
+        Profile tes = new Profile("ddd","pro");
+        SystemUser expected = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", tes);
+        expected.activateUser();
         //Results
-        assertEquals(valueName, name);
-        assertEquals(email, valueEmail);
-        assertEquals(function, valueFunction);
-        assertEquals(password, valuePassword);
-        assertTrue(activateUser);
+        assertEquals(ivan, expected);
     }
 
     @Test
     public void registerSystemUserWithPhoto() {
         //Input
-        SystemUser ivan = new SystemUser("Ivan Aguiar", "1211768@isep.ipp.pt", "tester", "img_123456", "123456");
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan1 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456",pro);
+        ivan1.activateUser();
         //Expected
-        String name = ivan.getUserName();
-        String valueName = "Ivan Aguiar";
-        String email = ivan.getEmail();
-        String valueEmail = "1211768@isep.ipp.pt";
-        String function = ivan.getFunction();
-        String valueFunction = "tester";
-        String photo = ivan.getPhoto();
-        String valuePhoto = "img_123456";
-        String password = ivan.getPassword();
-        String valuePassword = "123456";
-        boolean activateUser = ivan.activateUser();
+        Profile tes = new Profile("ddd","pro");
+        SystemUser expexted2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456",tes);
+        expexted2.activateUser();
         //Result
-        assertEquals(valueName, name);
-        assertEquals(email, valueEmail);
-        assertEquals(function, valueFunction);
-        assertEquals(photo, valuePhoto);
-        assertEquals(password, valuePassword);
-        assertTrue(activateUser);
+        assertEquals(ivan1, expexted2);
     }
 
     @Test
     public void verifyEmailTest() {
 
         //Input
-        SystemUser ivan = new SystemUser("Ivan Aguiar", "1211768@isep.ipp.pt", "tester", "img_123456", "123456");
-        String emailCheck = "1211768";
+        Profile tes = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456",tes);
+        String emailCheck = "xxxx";
         //Result
         assertTrue(ivan.isYourEmail(emailCheck));
-
     }
 
     @Test
-    public void verifyUpdatePassword() {
+    public void verifyUpdateAndEncryptationOfPassword() {
 
-        //Input
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO");
-        //RESULT
-        assertTrue(joana.updatePassword("HELLO", "GOODBYE"));
-        assertEquals("GOODBYE", joana.getPassword());
+        //Test to verify if the oldpassword is updated by the newpassword, and this last one is
+        // stored in system user with the encryptation method.
+
+        //Arrange
+        Profile tes = new Profile("ddd","pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO", tes);
+        //Act
+        //assertTrue(joana.updatePassword("HELLO", "GOODBYE"));
+        joana.updatePassword("HELLO", "GOODBYE");
+        //Assert
+        assertEquals("GOODBYE",joana.getPassword());
     }
+
+    @Test
+    public void verifyOldPassword() {
+
+        //Test to verify if the oldpassword, stored in the system user, is equal or diferent from the
+        //password that came from User Interface (UI).
+
+        //Arrange
+        Profile tes = new Profile("ddd","pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO_01", tes);
+        //Act
+        assertFalse(joana.updatePassword("HELLO_02", "GOODBYE"));
+
+    }
+
     @Test
     public void createSystemUserWithPhoto() {
         //Arrange
@@ -85,15 +87,17 @@ class SystemUserTest {
         String password = "ghi";
         String function = "jkl";
         String photo = "mno";
-        SystemUser newUser = new SystemUser(userName, email, password, function, photo);
+        Profile tes = new Profile("ddd","pro");
+        SystemUser newUser = new SystemUser(userName, email, function, photo, password, tes);
 
         String userNameExpected = "abc";
         String emailExpected = "def";
         String passwordExpected = "ÊËÌ";
         String functionExpected = "jkl";
         String photoExpected = "mno";
+        Profile pro = new Profile("ddd","pro");
         List<Profile> assignedProfileExpected = new ArrayList<>();
-        assignedProfileExpected.add(new Profile());
+        assignedProfileExpected.add(pro);
 
         //Act
         String userNameResult = newUser.getUserName();
@@ -111,14 +115,15 @@ class SystemUserTest {
         assertEquals(functionExpected, functionResult);
         assertEquals(photoExpected, photoResult);
         assertFalse(activateUserResult);
-        assertNotEquals(assignedProfileExpected, assignedProfileResult);
+        assertEquals(assignedProfileExpected, assignedProfileResult);
     }
 
     @Test
     public void encryptPassword() {
         //Arrange
         String password = "ghi";
-        SystemUser newUser = new SystemUser("abc", "def", "ghi", "jkl", "mno");
+        Profile pro = new Profile("mno","pro");
+        SystemUser newUser = new SystemUser("abc", "def", "ghi", "jkl", pro);
         //Act
         String result = newUser.encryptPassword(password);
         //Assert
@@ -129,7 +134,8 @@ class SystemUserTest {
     public void desencryptPassword() {
         //Arrange
         String password = "Ä\u0094Å\u0095Æ\u0096";
-        SystemUser newUser = new SystemUser("abc", "def", "ghi", "jkl", "mno");
+        Profile pro = new Profile("mno","pro");
+        SystemUser newUser = new SystemUser("abc", "def", "ghi", "jkl", pro);
         //Act
         String result = newUser.decryptPassword(password);
         //Assert
@@ -139,7 +145,8 @@ class SystemUserTest {
     @Test
     void hasThisDataTest() {
         //Input
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO");
+        Profile tes = new Profile("ddd","pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO", tes);
         String name = "";
         String email = "";
         String func = "";
