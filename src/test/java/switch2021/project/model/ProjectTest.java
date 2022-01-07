@@ -152,7 +152,25 @@ class ProjectTest {
                 typology, businessSector, date, 7, 5000));
 
         //Result
-        assertEquals(comp.getProj("0"), newProject);
+        assertEquals(comp.getProjByIndex(0), newProject);
+    }
+
+    @Test
+    @DisplayName("Teste de validação de projecto")
+    public void checkValidateProject() {
+        Company comp = new Company();
+
+        //Result
+        assertTrue(comp.validateProject(comp.createProject("123testcode", "prototype", "test", customer,
+                typology, businessSector, date, 7, 5000)));
+        assertFalse(comp.validateProject(comp.createProject("123testcode", "prototype", "test", customer,
+                typology, businessSector, date, 7, -1)));
+        assertFalse(comp.validateProject(comp.createProject("123testcode", "prototype", "test", customer,
+                typology, businessSector, date, -7, 5000)));
+        assertFalse(comp.validateProject(comp.createProject("", "prototype", "test", customer,
+                typology, businessSector, date, 7, 5000)));
+        assertFalse(comp.validateProject(comp.createProject("123testcode", "", "test", customer,
+                typology, businessSector, date, 7, 5000)));
     }
 
     /**
@@ -181,24 +199,6 @@ class ProjectTest {
         assertFalse(isAdded);
         assertFalse(isAdded2);
         assertFalse(isAdded3);
-    }
-
-    @Test
-    @DisplayName("Teste de validação de projecto")
-    public void checkValidateProject() {
-        Company comp = new Company();
-
-        //Result
-        assertTrue(comp.validateProject(comp.createProject("123testcode", "prototype", "test", customer,
-                typology, businessSector, date, 7, 5000)));
-        assertFalse(comp.validateProject(comp.createProject("123testcode", "prototype", "test", customer,
-                typology, businessSector, date, 7, -1)));
-        assertFalse(comp.validateProject(comp.createProject("123testcode", "prototype", "test", customer,
-                typology, businessSector, date, -7, 5000)));
-        assertFalse(comp.validateProject(comp.createProject("", "prototype", "test", customer,
-                typology, businessSector, date, -7, 5000)));
-        assertFalse(comp.validateProject(comp.createProject("123testcode", "", "test", customer,
-                typology, businessSector, date, -7, 5000)));
     }
 
     @Test

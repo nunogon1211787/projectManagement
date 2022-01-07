@@ -179,6 +179,11 @@ public class Company {
         return null;
     }
 
+    /** Metodo de get project do array de company atravez do seu indice (Paulo) **/
+    public Project getProjByIndex(int index) {
+        return arrayProj.get(index);
+    }
+
     public SystemUser getSyUser(int index) {
 
         SystemUser user;
@@ -264,6 +269,7 @@ public class Company {
         return true;
     }
 
+
     /**
      * Method to validate if project exists (to associate US i need to validate that codeProject exists) (Cris-US009)
      **/
@@ -281,8 +287,14 @@ public class Company {
      * Método para validar o projeto criado.
      */
     // PAULO FAVOR VERIFICAR ESSE MÉTODO. NÃO EXISTIA E SÓ CRIEI AQUI PARA NÃO DAR ERRO.
-    public boolean validateProject(Project proj) {
+    public boolean validateProject(Project project) {
 
+        //Check empty fields on code, name and description
+        if (project.getProjectName().trim().isEmpty()
+                || project.getCode().trim().isEmpty()
+                || project.getDescription().trim().isEmpty()) {
+            return false;
+        }
         return true;
     }
 
@@ -329,7 +341,8 @@ public class Company {
      * Método para gravar informação editada de um projeto por cima INCOMPLETO
      */
 
-    public void overrideProject(Project x, String name, LocalDate startDate, LocalDate endDate, int numberOfSprints, String statusDescription, int sprintDuration) {
+    public void overrideProject(Project x, String name, LocalDate startDate, LocalDate endDate,
+                                int numberOfSprints, String statusDescription, int sprintDuration) {
 
         x.saveProject(name, startDate, endDate, numberOfSprints);
 //        x.changeSprintDuration(sprintDuration);
@@ -352,7 +365,8 @@ public class Company {
      * Method to Validate Allocation (Caroli US007)
      */
 
-    public boolean validateAllocation(SystemUser user, double percentageOfAllocation, LocalDate startDate, LocalDate endDate) {
+    public boolean validateAllocation(SystemUser user, double percentageOfAllocation, LocalDate startDate, LocalDate
+            endDate) {
         double sum = 0;
         boolean msg = false;
 
