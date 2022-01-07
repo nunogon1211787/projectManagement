@@ -337,17 +337,6 @@ public class Company {
         return foundUsersList;
     }
 
-    /**
-     * Método para gravar informação editada de um projeto por cima INCOMPLETO
-     */
-
-    public void overrideProject(Project x, String name, LocalDate startDate, LocalDate endDate,
-                                int numberOfSprints, String statusDescription, int sprintDuration) {
-
-        x.saveProject(name, startDate, endDate, numberOfSprints);
-//        x.changeSprintDuration(sprintDuration);
-//        x.changeStatus(statusDescription);
-    }
 
     /**
      * Método para get lista de ID de todos os projects
@@ -382,5 +371,11 @@ public class Company {
             msg = true;
         }
         return msg;
+    }
+
+    public boolean saveProject(Project proj){
+        validateProject(proj);
+//        addProject(proj);
+        return true;
     }
 }
