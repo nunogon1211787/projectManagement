@@ -110,7 +110,7 @@ class CompanyTest {
 
         SystemUser ana = new SystemUser("", "1211748@isep.ipp.pt", "", "", new Profile("", ""));
         Company company = new Company(); // criar uma company
-        company.addSystemUser(ana); //ana = objeto da classe SU
+        company.saveSystemUserData(ana); //ana = objeto da classe SU
         //Expected
         SystemUser ana2 = company.getUserByEmail("1211748@isep.ipp.pt"); // estou a ir buscar um utilizador com o email etc
         //Result
@@ -409,7 +409,7 @@ class CompanyTest {
         Company company = new Company();
         int initialSize = company.getArraySyUser().size();
 
-        company.saveSystemUser(newUser);
+        company.saveSystemUserData(newUser);
         int expected = initialSize + 1;
         //Act
         int result = company.getArraySyUser().size();
@@ -428,12 +428,12 @@ class CompanyTest {
         Profile profileTest = new Profile("Visitor", "System Profile");
         SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
         Company company = new Company();
-        company.saveSystemUser(newUser);
+        company.saveSystemUserData(newUser);
 
         String userName2 = "maneloliveira";
         SystemUser newUser2 = new SystemUser(userName2, email, function, photo, password, profileTest);
         //Act
-        boolean result = company.saveSystemUser(newUser2);
+        boolean result = company.saveSystemUserData(newUser2);
         //Assert
         assertFalse(result);
     }
@@ -449,12 +449,12 @@ class CompanyTest {
         Profile profileTest = new Profile("Visitor", "System Profile");
         SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
         Company company = new Company();
-        company.saveSystemUser(newUser);
+        company.saveSystemUserData(newUser);
 
         String email2 = "maneloliveira@beaver.com";
         SystemUser newUser2 = new SystemUser(userName, email2, function, photo, password, profileTest);
         //Act
-        boolean result = company.saveSystemUser(newUser2);
+        boolean result = company.saveSystemUserData(newUser2);
         //Assert
         assertFalse(result);
     }
@@ -471,7 +471,7 @@ class CompanyTest {
         SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
         Company company = new Company();
         //Act
-        boolean result = company.saveSystemUser(newUser);
+        boolean result = company.saveSystemUserData(newUser);
         //Assert
         assertFalse(result);
     }

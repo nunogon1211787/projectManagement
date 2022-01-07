@@ -324,7 +324,7 @@ public class SystemUser {
     //encriptada, do SU.
     private boolean validateOldPassword(String oldpasswordUI) {
 
-        String oldpasswordSU = decryptPassword(getPassword());
+        String oldpasswordSU = decryptPassword(this.password);
 
         if (oldpasswordUI.equals(oldpasswordSU)) {
             return true;

@@ -53,7 +53,7 @@ class SystemUserTest {
     public void verifyUpdateAndEncryptationOfPassword() {
 
         //Test to verify if the oldpassword is updated by the newpassword, and this last one is
-        // stored in system user with the encryptation method.
+        //stored in system user with the encryptation method.
 
         //Arrange
         Profile tes = new Profile("ddd", "pro");
