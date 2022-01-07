@@ -266,9 +266,7 @@ public class Project {
         return res;
     }
 
-    /**
-     * Método para ir buscar Team Member a Project Team (Carolina)
-     **/
+    /** Método para ir buscar Team Member a Project Team (Carolina US007) **/
 
     public Resource getTeamMemberByIndex(int index) {
         Resource res = null;
@@ -278,6 +276,18 @@ public class Project {
             }
         }
         return res;
+    }
+
+    /** Método para Validar Resource (Carolina US007) **/
+
+    public boolean validateResource(Resource resource){
+        boolean msg = false;
+        for (int i = 0; i < projectTeam.size(); i++) {
+            if(projectTeam.get(i).equals(resource)){
+        msg = true;
+            }
+        }
+        return msg;
     }
 
     @Override

@@ -66,6 +66,10 @@ public class Profile {
         return (x == this.id_Profile);
     }
 
+    public boolean isValidName(String name) {
+        return (name == this.getName());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

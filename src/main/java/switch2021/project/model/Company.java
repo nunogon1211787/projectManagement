@@ -162,6 +162,16 @@ public class Company {
         return new Profile(arrayProfile.get(index));
     }
 
+    public Profile getProfile(String name) {
+        Profile pro = null;
+        for (int i = 0; i < arrayProfile.size(); i++) {
+            if(getProfile(i).getName() == name) {
+                pro = getProfile(i);
+                break;
+            }
+        }
+        return pro;
+    }
       /**
      * Method to create a new profile (Cris-US013)
      **/
@@ -174,7 +184,7 @@ public class Company {
      * Method to generate a new ID for the profile - begin in number 1 (Cris-US013)
      **/
     private int generateNewProfileID() {
-        int lastIndex = 000;
+        int lastIndex = 0;
         for (Profile profile : arrayProfile) {
             lastIndex = Math.max(profile.getId(), lastIndex);
         }
@@ -281,17 +291,24 @@ public class Company {
     }
 
     /**
-     * Method to Update User's List
+     * Method to Validate Allocation (Caroli US007)
      */
 
-    public void updateUserList () {
+    public boolean validateAllocation(SystemUser user, double percentageOfAllocation, LocalDate startDate, LocalDate endDate) {
+        double sum = 0;
+        boolean msg = false;
 
-        for (SystemUser systemUser : arraySyUser) {
-            //if (systemUser.getuser )
+        for (int i = 0; i < arrayProj.size(); i++) {
+            for (int j = 0; j < arrayProj.get(i).getProjectTeam().size(); j++) {
+                if (arrayProj.get(i).getTeamMemberByIndex(j).equals(user) &&
+                        arrayProj.get(i).getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
+                        sum = +arrayProj.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();
+                }
+            }
         }
-
+        if(sum + percentageOfAllocation < 1){
+            msg = true;
+        }
+        return msg;
     }
-
-
-
 }
