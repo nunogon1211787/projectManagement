@@ -54,6 +54,7 @@ public class Project {
         this.projectTeam = new ArrayList<>();
     }
 
+
     public void setScrumMaster(SystemUser scrumMaster) {
         this.scrumMaster = scrumMaster;
     }
@@ -126,6 +127,18 @@ public class Project {
 
     public List<UserStory> getProductBacklog() {
         return productBacklog;
+    }
+
+    public SystemUser getScrumMaster() {
+        return scrumMaster;
+    }
+
+    public SystemUser getProductOwner() {
+        return productOwner;
+    }
+
+    public int getSprintDuration() {
+        return sprintDuration;
     }
 
     /**
