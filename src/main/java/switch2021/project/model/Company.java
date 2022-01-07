@@ -112,7 +112,7 @@ public class Company {
      * Method to save system user data (username, function, photo) in System User List
      */
 
-    public boolean saveSystemUser(SystemUser user) {
+    public boolean saveSystemUserData(SystemUser user) {
         boolean result = true;
 
         if (!validateSystemUser(user)) {
