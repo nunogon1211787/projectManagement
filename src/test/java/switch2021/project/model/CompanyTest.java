@@ -88,22 +88,7 @@ class CompanyTest {
 //                     o mesmo pode ser feito para SystemUser **/
 //    }
 
-    /**
-     * >>>>>> Testes de profile <<<<<<
-     **/
 
-
-    // Teste de adicionar profile em company (Cris US013)
-    @Test
-    public void addNewProfileWithFailNameEmpty() {
-        //Input
-        Company company = new Company();
-        Profile up = company.createProfile("", "System Profile");
-        //Expected
-        boolean result = company.add(up);
-        //Result
-        assertFalse(result);
-    }
 
     @Test
     public void UserByEmail() {
@@ -127,6 +112,22 @@ class CompanyTest {
         //RESULT
         assertTrue(joana.updatePassword("png_123", "GOODBYE"));
         assertEquals("GOODBYE", joana.getPassword());
+    }
+    /**
+     * >>>>>> Testes de profile <<<<<<
+     **/
+
+
+    // Test add profile in company (Cris US013)
+    @Test
+    public void addNewProfileWithFailNameEmpty() {
+        //Input
+        Company company = new Company();
+        Profile up = company.createProfile("", "System Profile");
+        //Expected
+        boolean result = company.add(up);
+        //Result
+        assertFalse(result);
     }
 
     @Test

@@ -129,6 +129,11 @@ public class Company {
         return true;
     }
 
+    /**
+     * Method to add profile (Cris-US013)
+     **/
+
+
     public boolean add(Profile profile) {
 
         if (!validateProfile(profile)) {
