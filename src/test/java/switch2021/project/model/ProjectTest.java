@@ -152,7 +152,7 @@ class ProjectTest {
                 typology, businessSector, date, 7, 5000));
 
         //Result
-        assertEquals(comp.getProj(0), newProject);
+        assertEquals(comp.getProj("0"), newProject);
     }
 
     /**
