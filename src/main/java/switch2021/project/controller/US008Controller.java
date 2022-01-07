@@ -3,20 +3,25 @@ package switch2021.project.controller;
 import switch2021.project.model.*;
 
 import java.time.LocalDate;
-import java.util.List;
+
 
 public class US008Controller {
 
     private Company company;
     private Project project;
+    private int index;
 
     public US008Controller(Company company, Project project){
         this.company = company;
         this.project = project;
     }
 
-    public Project getProjectRequested(String code){
-        return this.company.getProj(code);
+    public Project getProjectRequested(int index){
+//        Project copia = this.company.getProjByIndex(index);
+//        this.project = copia;
+//        return copia;
+        this.index = index;
+        return this.project = this.company.getProjByIndex(index);
     }
 
     public Project editProject(String name, LocalDate startDate, LocalDate endDate, int numberOfSprints, int sprintDuration, String status, SystemUser scrumMaster, SystemUser productOwner){
@@ -24,15 +29,15 @@ public class US008Controller {
         this.project.setStartDate(startDate);
         this.project.setEndDate(endDate);
         this.project.setNumberOfSprints(numberOfSprints);
-//        this.sprint.setDuration(sprintDuration);
-//        this.status.setDescription(status);
-//        this.status.setScrumMaster(scrumMaster);
-//        this.status.setProductOwner(productOwner);
+        this.project.setProjectStatus(status);
+        this.project.setSprintDuration(sprintDuration);
+        this.project.setScrumMaster(scrumMaster);
+        this.project.setProductOwner(productOwner);
         return this.project;
     }
 
-    public boolean saveProject(Project project){
-//        this.project.saveProject(project);
+    public boolean saveProject(Project proj){
+        this.company.saveProject(proj, this.index);
         return true;
     }
 

@@ -11,7 +11,7 @@ public class Company {
      * Atributos da Classe
      **/
 
-    List<Project> arrayProj = new ArrayList<>();
+    List<Project> arrayProj; // = new ArrayList<>();
     List<SystemUser> arraySyUser;// = new ArrayList<>();
     List<Profile> arrayProfile;
     List<Request> arrayRequest = new ArrayList<>();
@@ -22,6 +22,7 @@ public class Company {
     public Company() {
         this.arraySyUser = new ArrayList<>();
         this.arrayProfile = new ArrayList<>();
+        this.arrayProj = new ArrayList<>();
 
         arrayProfile.add(new Profile("Visitor", "System Profile"));
         arrayProfile.add(new Profile("Administrator", "System Profile"));
@@ -289,13 +290,15 @@ public class Company {
     // PAULO FAVOR VERIFICAR ESSE MÉTODO. NÃO EXISTIA E SÓ CRIEI AQUI PARA NÃO DAR ERRO.
     public boolean validateProject(Project project) {
 
-        //Check empty fields on code, name and description
-        if (project.getProjectName().trim().isEmpty()
-                || project.getCode().trim().isEmpty()
-                || project.getDescription().trim().isEmpty()) {
+        //check if numbers in Number of Sprints and budget are valid
+        if(project.getBudget()<0 || project.getNumberOfSprints() <0) {
             return false;
         }
-        return true;
+
+        //Check empty fields on code, name and description
+        return !project.getProjectName().trim().isEmpty()
+                && !project.getCode().trim().isEmpty()
+                && !project.getDescription().trim().isEmpty();
     }
 
     /**
@@ -337,17 +340,6 @@ public class Company {
         return foundUsersList;
     }
 
-    /**
-     * Método para gravar informação editada de um projeto por cima INCOMPLETO
-     */
-
-    public void overrideProject(Project x, String name, LocalDate startDate, LocalDate endDate,
-                                int numberOfSprints, String statusDescription, int sprintDuration) {
-
-        x.saveProject(name, startDate, endDate, numberOfSprints);
-//        x.changeSprintDuration(sprintDuration);
-//        x.changeStatus(statusDescription);
-    }
 
     /**
      * Método para get lista de ID de todos os projects
@@ -382,5 +374,15 @@ public class Company {
             msg = true;
         }
         return msg;
+    }
+
+    public boolean saveProject(Project proj, int index){
+        validateProject(proj);
+        addProject(proj, index);
+        return true;
+    }
+
+    public void addProject (Project proj, int index){
+        this.arrayProj.set(index,proj);
     }
 }
