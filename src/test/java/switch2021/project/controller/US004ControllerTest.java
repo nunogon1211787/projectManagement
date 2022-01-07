@@ -28,11 +28,11 @@ class US004ControllerTest {
         SystemUser usr3 = new SystemUser("iiii", "jjjb", "kksk", "ltll", p3);
         SystemUser usr4 = new SystemUser("mmam", "fnnn", "oxoo", "ppdp", p4);
         SystemUser usr5 = new SystemUser("qmqe", "rjrr", "gsss", "ttth", p5);
-        co.saveSystemUser(usr1);
-        co.saveSystemUser(usr2);
-        co.saveSystemUser(usr3);
-        co.saveSystemUser(usr4);
-        co.saveSystemUser(usr5);
+        co.addSystemUser(usr1);
+        co.addSystemUser(usr2);
+        co.addSystemUser(usr3);
+        co.addSystemUser(usr4);
+        co.addSystemUser(usr5);
         //Expected
         int[] list = {};
         List<SystemUser> resultList = test.searchUsers("a", "", "", -1, list);
