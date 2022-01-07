@@ -433,7 +433,6 @@ class CompanyTest {
         assertEquals(assignedProfileExpected, assignedProfileResult);
     }
 
-    //commit
     @Test
     public void createSystemUserWithoutPhotoSuccess() {
         //Arrange

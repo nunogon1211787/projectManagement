@@ -12,11 +12,6 @@ public class US001Controller {
         this.user = null;
     }
 
-    public US001Controller(Company company) {
-        this.company = company;
-        this.user = null;
-    }
-
     public boolean createSystemUser(String userName, String email, String function, String password) {
         this.user = this.company.createSystemUser(userName, email, function, password);
         return this.company.validateSystemUser(user);
