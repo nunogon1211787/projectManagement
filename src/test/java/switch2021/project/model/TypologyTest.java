@@ -26,7 +26,7 @@ public class TypologyTest {
         assertEquals(description, value_description);
     }
 
-    @Test
+    /*@Test
     public void contructorTypologyTestNotNull() {
         //Input
         Typology typo2 = new Typology("TestTypology");
@@ -38,9 +38,9 @@ public class TypologyTest {
         //Results
         assertEquals(id, value_id);
         assertEquals(description, value_description);
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void contructorTypologyTestNotNull_ID() {
         //Input
         Typology typo3 = new Typology("TestTypology3");
@@ -62,7 +62,7 @@ public class TypologyTest {
         //Results
         assertEquals(id, value_id);
         assertEquals(description, value_description);
-    }
+    }*/
 
     //Teste para mudar a descrição da Typology.
     @Test
