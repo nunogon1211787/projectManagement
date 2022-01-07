@@ -51,11 +51,13 @@ public class Company {
         return new SystemUser(userName, email, password, function,photo, arrayProfile.get(0));
     }
 
+    //Método alterado porque estava com um erro (Joana).
+
     public boolean validateSystemUser(SystemUser user) {
-        if (user == null) {
+        if (user == null && this.arraySyUser.contains(user)) {
             return false;
         }
-        return this.arraySyUser.contains(user);
+        return true;
     }
 
     /**
@@ -67,7 +69,21 @@ public class Company {
         return true;
     }
 
-    public boolean saveSystemUser(SystemUser syUser) {
+
+    /**
+     * Method to save system user data (username, function, photo) in System User List
+     */
+
+    public boolean saveSystemUserData(SystemUser user) {
+
+        if (!validateSystemUser(user)){
+            return false;
+        }else{
+            return this.arraySyUser.add(user);
+        }
+    }
+
+    public boolean addSystemUser(SystemUser syUser) {
         this.arraySyUser.add(syUser);
         return true;
     }
@@ -82,7 +98,7 @@ public class Company {
     }
 
     public boolean add(Request request) {
-        this.arrayRequest.add(request);
+        //this.arrayRequest.add(request);
         return true;
 
     }
@@ -297,18 +313,6 @@ public class Company {
             lista [i] = this.getProj(i).getCode();
         }
         return lista;
-    }
-
-    /**
-     * Method to Update User's List
-     */
-
-    public void updateUserList () {
-
-        for (SystemUser systemUser : arraySyUser) {
-            //if (systemUser.getuser )
-        }
-
     }
 
     /**
