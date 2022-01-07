@@ -31,15 +31,13 @@ public class US006Test {
         //Arrange
         Company company = new Company();
         SystemUser user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
-                "tester", "123456", new Profile("sss", "sss"));
+                "tester", "123456", company.getProfile("Administrator"));
         US006Controller controllerTest = new US006Controller(company, user);
-        company.getArraySyUser().add(user);
         //Act
-        controllerTest.updateProfile(company.getProfile(user.getUserName()), company.getProfile("visitor"));
-        Company company2 = new Company();
-        US006Controller controllerTest2 = new US006Controller(company2, new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
-                "tester", "123456", new Profile("sss", "sss")));
-        SystemUser expected = controllerTest2.getUser("xxxx@isep.ipp.pt");
+        SystemUser expected =  new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
+                "tester", "123456", company.getProfile("Visitor"));
+        controllerTest.updateProfile(company.getProfile("Administrator"), company.getProfile("Visitor"));
+
         //Assert
         assertEquals(user, expected);
     }*/

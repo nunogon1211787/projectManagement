@@ -26,11 +26,11 @@ public class Company {
 
         arrayProfile.add(new Profile("Visitor", "System Profile"));
         arrayProfile.add(new Profile("Administrator", "System Profile"));
-        /*arrayProfile.add(new Profile(2,"Director","System Profile"));
-        arrayProfile.add(new Profile(3,"Project Manager", "Special Profile"));
-        arrayProfile.add(new Profile(4, "Product Owner", "Special Profile"));
-        arrayProfile.add(new Profile(5, "Scrum Master", "Special Profile"));
-        arrayProfile.add(new Profile(6, "Project Team", "Special Profile"));*/
+        arrayProfile.add(new Profile("Director","System Profile"));
+        arrayProfile.add(new Profile("Project Manager", "Special Profile"));
+        arrayProfile.add(new Profile("Product Owner", "Special Profile"));
+        arrayProfile.add(new Profile("Scrum Master", "Special Profile"));
+        arrayProfile.add(new Profile("Project Team", "Special Profile"));
     }
 
     /**
