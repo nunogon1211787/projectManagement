@@ -182,12 +182,12 @@ public class Project {
      * Methods for addUserStory to the productBacklog (Cris US009)
      **/
 
-    public boolean addUserStory(UserStory userStory) {
+    public boolean addUserStory(UserStory us) {
         //user story data validation
-        if (!isValidUserStory(userStory)) {
+        if (!isValidUserStory(us)) {
             return false;
         }
-        this.getProductBacklog().add(userStory);
+        this.getProductBacklog().add(us);
         return true;
     }
 

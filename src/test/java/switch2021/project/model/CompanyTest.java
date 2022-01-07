@@ -240,7 +240,7 @@ class CompanyTest {
     public void getProjValidProjectCode() {
         //arrange
         Company company = new Company();
-        Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"), new Typology("description"), null, LocalDate.now(), 5, 555);
+        Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"), new Typology("description"), new BusinessSector("ee"), LocalDate.now(), 5, 555);
         company.add(proj1);
         //act
         Project proj2 = company.getProj("123");
@@ -252,7 +252,7 @@ class CompanyTest {
     public void getProjInvalidProjectCode() {
         //arrange
         Company company = new Company();
-        Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"), new Typology("description"), null, LocalDate.now(), 5, 555);
+        Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"), new Typology("description"), new BusinessSector("ee"), LocalDate.now(), 5, 555);
         company.add(proj1);
         //act
         Project proj2 = company.getProj("125");
