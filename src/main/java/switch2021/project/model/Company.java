@@ -49,12 +49,12 @@ public class Company {
      * Metodo create de SystemUsers (Nuno)
      **/
 
-    public SystemUser createSystemUser(String userName, String email, String password, String function) {
-        return new SystemUser(userName, email, password, function, arrayProfile.get(0));
+    public SystemUser createSystemUser(String userName, String email, String function, String password) {
+        return new SystemUser(userName, email, function, password, arrayProfile.get(0));
     }
 
-    public SystemUser createSystemUser(String userName, String email, String password, String function, String photo) {
-        return new SystemUser(userName, email, password, function, photo, arrayProfile.get(0));
+    public SystemUser createSystemUser(String userName, String email, String function, String photo, String password) {
+        return new SystemUser(userName, email, function, photo, password, arrayProfile.get(0));
     }
 
     //Método alterado porque estava com um erro (Joana).

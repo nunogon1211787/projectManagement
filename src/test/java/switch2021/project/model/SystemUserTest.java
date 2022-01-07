@@ -183,7 +183,7 @@ class SystemUserTest {
         assertEquals("a1b2c3", result);
     }
 
-    @Test
+    /*@Test
     void hasThisDataTest() {
         //Input
         Profile tes = new Profile("ddd", "pro");
@@ -197,7 +197,7 @@ class SystemUserTest {
         assertTrue(joana.hasThisData(name, email, func, isActive, profiles));
 
     }
-
+*/
     @Test
     void hasThisDataWithAll() {
         //Input

@@ -397,6 +397,77 @@ class CompanyTest {
 
     //US001:
     @Test
+    public void createSystemUserWithPhotoSuccess() {
+        //Arrange
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String function = "tester";
+        String photo = "photo";
+        Company company = new Company();
+        SystemUser newUser = company.createSystemUser(userName, email, function, photo, password);
+
+        String userNameExpected = "manueloliveira";
+        String emailExpected = "manueloliveira@beaver.com";
+        String passwordExpected = "ÊËÌ";
+        String functionExpected = "tester";
+        String photoExpected = "photo";
+        Profile pro = new Profile("Visitor", "System Profile");
+        List<Profile> assignedProfileExpected = new ArrayList<>();
+        assignedProfileExpected.add(pro);
+        //Act
+        String userNameResult = newUser.getUserName();
+        String emailResult = newUser.getEmail();
+        String passwordResult = newUser.getPassword();
+        String functionResult = newUser.getFunction();
+        String photoResult = newUser.getPhoto();
+        boolean activateUserResult = newUser.isUserActivated();
+        List<Profile> assignedProfileResult = newUser.getAssignedProfileList();
+        //Assert
+        assertEquals(userNameExpected, userNameResult);
+        assertEquals(emailExpected, emailResult);
+        assertEquals(passwordExpected, passwordResult);
+        assertEquals(functionExpected, functionResult);
+        assertEquals(photoExpected, photoResult);
+        assertFalse(activateUserResult);
+        assertEquals(assignedProfileExpected, assignedProfileResult);
+    }
+
+    //commit
+    @Test
+    public void createSystemUserWithoutPhotoSuccess() {
+        //Arrange
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String function = "tester";
+        Company company = new Company();
+        SystemUser newUser = company.createSystemUser(userName, email, function, password);
+
+        String userNameExpected = "manueloliveira";
+        String emailExpected = "manueloliveira@beaver.com";
+        String passwordExpected = "ÊËÌ";
+        String functionExpected = "tester";
+        Profile pro = new Profile("Visitor", "System Profile");
+        List<Profile> assignedProfileExpected = new ArrayList<>();
+        assignedProfileExpected.add(pro);
+        //Act
+        String userNameResult = newUser.getUserName();
+        String emailResult = newUser.getEmail();
+        String passwordResult = newUser.getPassword();
+        String functionResult = newUser.getFunction();
+        boolean activateUserResult = newUser.isUserActivated();
+        List<Profile> assignedProfileResult = newUser.getAssignedProfileList();
+        //Assert
+        assertEquals(userNameExpected, userNameResult);
+        assertEquals(emailExpected, emailResult);
+        assertEquals(passwordExpected, passwordResult);
+        assertEquals(functionExpected, functionResult);
+        assertFalse(activateUserResult);
+        assertEquals(assignedProfileExpected, assignedProfileResult);
+    }
+
+    @Test
     public void saveSystemUserSuccess() {
         //Arrange
         String userName = "manueloliveira";
