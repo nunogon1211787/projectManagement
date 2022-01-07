@@ -17,6 +17,8 @@ public class Project {
     private Customer customer;
     private Typology typology;
     private ProjectStatus projectStatus;
+    private SystemUser scrumMaster;   /** Adicionado **/
+    private SystemUser productOwner;   /** Adicionado **/
 
     private BusinessSector businessSector;  // Para já coloquei em tipo Business Sector e não lista. Depois será para mudar.
     private List<UserStory> productBacklog;
@@ -30,6 +32,7 @@ public class Project {
 
     private int numberOfSprints;
     private int budget;
+    private int sprintDuration;   /** Adicionado **/
 
     /**
      * Construtor de Projecto (Paulo - US005)
@@ -49,7 +52,19 @@ public class Project {
         this.startDate = startDate;
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
+        this.productOwner = productOwner;
+        this.scrumMaster = scrumMaster;
+        this.sprintDuration = sprintDuration;
 
+
+    }
+
+    public void setScrumMaster(SystemUser scrumMaster) {
+        this.scrumMaster = scrumMaster;
+    }
+
+    public void setProductOwner(SystemUser productOwner) {
+        this.productOwner = productOwner;
     }
 
     public Project() {
@@ -226,17 +241,12 @@ public class Project {
         return true;
     }
 
-    public void saveProject(String name, LocalDate startDate, LocalDate endDate, int numberOfSprints) {
-        setProjectName(name);
-        setStartDate(startDate);
-        setEndDate(endDate);
-        setNumberOfSprints(numberOfSprints);
+
+    public void setSprintDuration(int sprintDuration) {
+        this.sprintDuration = sprintDuration;
     }
 
-    public void changeSprintDuration(int sprintDuration) {
-    }
-
-    public void changeProjectStatus(String status) {
+    public void setProjectStatus(String status) {
         this.projectStatus = projectStatus.setDescription(status);
     }
 
