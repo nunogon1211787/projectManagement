@@ -190,15 +190,29 @@ public class Project {
         return projectTeam;
     }
 
-    /** Método para adicionar resource à Project Team (Carolina) **/
+    /** Método para adicionar resource à Project Team (Carolina US007) **/
 
     public boolean addResource(Resource toAdd){
         this.projectTeam.add(toAdd);
         return true;
     }
 
+    /** Método para criar resource à Project Team (Carolina US007) **/
+
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
         Resource res = new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
+        return res;
+    }
+
+    /** Método para ir buscar Team Member a Project Team (Carolina) **/
+
+    public Resource getTeamMemberByIndex(int index) {
+        Resource res = null;
+        for (int i = 0; i < projectTeam.size(); i++) {
+            if(projectTeam.get(i).equals(index)){
+                res = projectTeam.get(i);
+            }
+        }
         return res;
     }
 
