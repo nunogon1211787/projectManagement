@@ -15,7 +15,7 @@ public class US005Controller {
     public boolean createProject(String code, String name, String description, Customer customer, Typology typology,
                                  BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
-        this.project = this.company.createProject(code,name,description,customer,typology,businessSector,
+        this.project = this.company.createProject(code,name,description, customer,typology,businessSector,
                                                     startDate,numberOfSprints,budget);
         return this.company.validateProject(project);
     }

@@ -34,8 +34,8 @@ public class Company {
 
     /** Metodo create de Projectos (Paulo - US005) **/
 
-    public Project createProject(String code, String name, String description, String customer, String typology,
-                                 List<String> businessSector, LocalDate startDate, int numberOfSprints, int budget) {
+    public Project createProject(String code, String name, String description, Customer customer, Typology typology,
+                                 BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         return new Project(code,name, description, customer, typology, businessSector,
                                     startDate,numberOfSprints, budget);
@@ -206,32 +206,6 @@ public class Company {
     }
 
     /**
-     * Método para validar se um profile existe (Paulo - US005).
-     **/
-    public boolean validateProject(Project project) {
-        //Check empty fields on code, name and description
-        if(        project.getProjectName().trim().isEmpty()
-                || project.getCode().trim().isEmpty()
-                || project.getDescription().trim().isEmpty()){
-
-            return false;
-        }
-
-        //Check if the number of sprints and budget have valid input numbers
-        if(project.getNumberOfSprints() < 0 || project.getBudget() < 0) {
-
-            return false;
-        }
-
-        //Check if project already exists
-        for (Project up : arrayProj){
-            if(up.getCode().equals(project.getCode())){
-                return false;
-            }
-        }
-        return true;
-    }
-    /**
      * Method to validate if project exists (to associate US i need to validate that codeProject exists) (Cris-US009)
      **/
     public boolean checkProjectExists(String code) {
@@ -301,33 +275,23 @@ public class Company {
     public String[] getProjectIDList() {
         String[] lista = new String[arrayProj.size()];
         for (int i = 0; i < this.arrayProj.size(); i++) {
-            lista [i] = this.arrayProj.get(i).getCode();
+            lista [i] =  this.arrayProj.get(i).getCode();
         }
         return lista;
     }
 
     /**
-     * Method to Validate Allocation (Caroli US007)
+     * Method to Update User's List
      */
 
-    public boolean validateAllocation(SystemUser user, double percentageOfAllocation, LocalDate startDate, LocalDate endDate) {
-        double sum = 0;
-        boolean msg = false;
+    public void updateUserList () {
 
-        for (int i = 0; i < arrayProj.size(); i++) {
-            for (int j = 0; j < arrayProj.get(i).getProjectTeam().size(); j++) {
-                if (arrayProj.get(i).getTeamMemberByIndex(j).equals(user) &&
-                        arrayProj.get(i).getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
-                        sum = +arrayProj.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();
-                }
-            }
+        for (SystemUser systemUser : arraySyUser) {
+            //if (systemUser.getuser )
         }
-        if(sum + percentageOfAllocation < 1){
-            msg = true;
-        }
-        return msg;
+
     }
 
 
-    
+
 }

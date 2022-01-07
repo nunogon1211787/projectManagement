@@ -23,7 +23,7 @@ public class US007Controller {
 
     public boolean associateResource(String email, String projectCode, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
         this.user = this.company.getUserByEmail(email);
-        this.company.searchProject(projectCode);
+        this.company.getProj(projectCode);
         //this.company.validateAllocation(user, percentageOfAllocation,startDate, endDate);
         this.resource = this.project.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);
         this.project.addResource(resource);

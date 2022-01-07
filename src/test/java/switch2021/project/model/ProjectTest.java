@@ -2,7 +2,9 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProjectTest {
@@ -150,7 +152,7 @@ class ProjectTest {
                 typology, businessSector, date, 7, 5000));
 
         //Result
-        assertEquals(comp.getProj(0),newProject);
+        assertEquals(comp.getProj(0), newProject);
     }
 
     /**
@@ -180,6 +182,7 @@ class ProjectTest {
         assertFalse(isAdded2);
         assertFalse(isAdded3);
     }
+
     @Test
     @DisplayName("Teste de validação de projecto")
     public void checkValidateProject() {
@@ -197,6 +200,7 @@ class ProjectTest {
         assertFalse(comp.validateProject(comp.createProject("123testcode", "", "test", customer,
                 typology, businessSector, date, -7, 5000)));
     }
+
     @Test
     public void addUserStoryPriorityIsInvalid() {
         //Arrange
