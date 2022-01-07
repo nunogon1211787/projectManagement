@@ -72,6 +72,8 @@ public class Profile {
         return (name == this.getName());
     }
 
+    public boolean hasType(String type){ return this.type.equalsIgnoreCase(type);}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

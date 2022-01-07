@@ -163,8 +163,34 @@ public class Company {
     }
 
     public boolean add(Request request) {
-        //this.arrayRequest.add(request);
+        this.arrayRequest.add(request);
         return true;
+
+    }
+
+    private boolean validateRequest(Request newRequest) {
+
+        //Check if request already exist
+        for (Request up : arrayRequest) {
+            if (up.equals(newRequest)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
+    public boolean saveRequest(Request newRequest){
+
+        boolean result = false;
+
+        if(validateRequest(newRequest)) {
+            add(newRequest);
+            result = true;
+        }
+
+        return result;
 
     }
 
@@ -182,6 +208,21 @@ public class Company {
 
     public List<Profile> getArrayProfile() {
         return this.arrayProfile;
+    }
+
+    public List<Profile> getArrayProfileWithType(String type) {
+
+        List<Profile> foundList = new ArrayList<>();
+
+        for (int i = 0; i < this.arrayProfile.size(); i++) {
+
+            if(this.arrayProfile.get(i).hasType(type)){
+                foundList.add(this.arrayProfile.get(i));
+            }
+
+        }
+
+        return foundList;
     }
 
     /**

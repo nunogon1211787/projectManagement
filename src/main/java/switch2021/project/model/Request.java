@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Request {
 
@@ -8,47 +9,55 @@ public class Request {
      * atributos da classe "Request"
      **/
 
-    private CharSequence requestDate;
-    private CharSequence requestTime;
-    private String email;
-    private Integer id;
+    private LocalDate requestDate;
+    private LocalDate requestTime;
+    private SystemUser user;
+    private Profile profileRequested;
 
     /**
      * construtor da classe "Request"
      **/
 
-    public Request(CharSequence requestDate, CharSequence requestTime, String email, int id) {
+    public Request(LocalDate requestDate, LocalDate requestTime, Profile profile, SystemUser user) {
         this.requestDate = requestDate;
         this.requestTime = requestTime;
-        this.email = email;
-        this.id = id;
+        this.user = user;
+        this.profileRequested = profile;
     }
 
     /**
      * getters da classe "Request"
      **/
 
-    public CharSequence getRequestDate() {
+    public LocalDate getRequestDate() {
         return requestDate;
     }
 
-    public CharSequence getRequestTime() {
+    public LocalDate getRequestTime() {
         return requestTime;
     }
 
-    public String getEmail() {
-        return email;
+    public SystemUser getUser() {
+        return user;
     }
 
-    public Integer getId() {
-        return id;
+    public Profile getProfile() {
+        return this.profileRequested;
     }
 
-
-
-
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Request request = (Request) o;
+        return Objects.equals(requestDate, request.requestDate) && Objects.equals(requestTime, request.requestTime) && Objects.equals(user, request.user) && Objects.equals(profileRequested, request.profileRequested);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(requestDate, requestTime, user, profileRequested);
+    }
+}
 
 
 
