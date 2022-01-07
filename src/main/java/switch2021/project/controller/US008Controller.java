@@ -10,28 +10,25 @@ public class US008Controller {
 
     private Company company;
     private Project project;
-    private Sprint sprint;
-    private ProjectStatus status;
 
-    public US008Controller(Company company, Project project, Sprint sprint){
+    public US008Controller(Company company, Project project){
         this.company = company;
         this.project = project;
-        this.sprint = sprint;
-        this.status = status;
-
     }
 
     public Project getProjectRequested(int index){
         return this.company.getProj(index);
     }
 
-    public Project editProject(String name, LocalDate startDate, LocalDate endDate, int numberOfSprints, int sprintDuration, String status){
+    public Project editProject(String name, LocalDate startDate, LocalDate endDate, int numberOfSprints, int sprintDuration, String status, SystemUser scrumMaster, SystemUser productOwner){
         this.project.setProjectName(name);
         this.project.setStartDate(startDate);
         this.project.setEndDate(endDate);
         this.project.setNumberOfSprints(numberOfSprints);
 //        this.sprint.setDuration(sprintDuration);
 //        this.status.setDescription(status);
+//        this.status.setScrumMaster(scrumMaster);
+//        this.status.setProductOwner(productOwner);
         return this.project;
     }
 
