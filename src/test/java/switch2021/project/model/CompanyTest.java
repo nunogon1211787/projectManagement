@@ -579,13 +579,14 @@ class CompanyTest {
         /** user **/
         Profile pro = new Profile("mku", "sss");
         SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        SystemUser newUser2 = new SystemUser("xyz", "fase", "des", "gth", pro);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
 
         Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
-        Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, 100, .5);
+        Resource resAllo2 = new Resource(newUser2, startDateToAllocate, endDateToAllocate, 100, .5);
 
         /** project list **/
 

@@ -276,7 +276,7 @@ public class Project {
     }
 
     /**
-     * Método para criar resource à Project Team (Carolina US007)
+     * Método para criar resource  (Carolina US007)
      **/
 
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
