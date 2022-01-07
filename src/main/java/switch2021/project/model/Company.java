@@ -366,7 +366,7 @@ public class Company {
             for (int j = 0; j < arrayProj.get(i).getProjectTeam().size(); j++) {
                 if (arrayProj.get(i).getTeamMemberByIndex(j).equals(user) &&
                         arrayProj.get(i).getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
-                    sum = +arrayProj.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();
+                    sum = sum + arrayProj.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();
                 }
             }
         }

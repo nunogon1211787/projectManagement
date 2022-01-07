@@ -476,4 +476,81 @@ class CompanyTest {
         //Assert
         assertFalse(result);
     }
+
+    @Test
+    @DisplayName("Validate Allocation True")
+    public void validateAllocationTrue() {
+        //Arrange
+        /** user **/
+        Profile pro = new Profile("mku", "sss");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
+        LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
+
+        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .2);
+        LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
+        LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
+        Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, 100, .2);
+
+        /** project list **/
+
+       Company comTest = new Company();
+       List<Project> testProjectList = comTest.getArrayProj();
+       LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
+       Customer cust = new Customer("ght@gmail.com");
+       Typology typo = new Typology("typo1");
+       BusinessSector busSector = new BusinessSector("busSec1");
+       Project proj1 = comTest.createProject("1", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
+       Project proj2 = comTest.createProject("2", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
+       Project proj3 = comTest.createProject("3", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
+       testProjectList.add(proj1);
+       testProjectList.add(proj2);
+       testProjectList.add(proj3);
+       proj1.addResource(resAllo1);
+       proj3.addResource(resAllo1);
+
+       //Act
+        boolean result = proj2.addResource(resAllo2);
+
+        //Assert
+        assertTrue(result);
+    }
+    @Test
+    @DisplayName("Validate Allocation False")
+    public void validateAllocationFalse() {
+        //Arrange
+        /** user **/
+        Profile pro = new Profile("mku", "sss");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
+        LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
+
+        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
+        LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
+        Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, 100, .5);
+
+        /** project list **/
+
+        Company comTest = new Company();
+        List<Project> testProjectList = comTest.getArrayProj();
+        LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
+        Customer cust = new Customer("ght@gmail.com");
+        Typology typo = new Typology("typo1");
+        BusinessSector busSector = new BusinessSector("busSec1");
+        Project proj1 = comTest.createProject("1", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
+        Project proj2 = comTest.createProject("2", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
+        Project proj3 = comTest.createProject("3", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
+        testProjectList.add(proj1);
+        testProjectList.add(proj2);
+        testProjectList.add(proj3);
+        proj1.addResource(resAllo1);
+        proj3.addResource(resAllo1);
+
+        //Act
+        boolean result = proj2.addResource(resAllo2);
+
+        //Assert
+        assertFalse(result);
+    }
 }

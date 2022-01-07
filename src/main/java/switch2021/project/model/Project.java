@@ -254,8 +254,12 @@ public class Project {
      **/
 
     public boolean addResource(Resource toAdd) {
-        this.projectTeam.add(toAdd);
-        return true;
+        boolean msg = false;
+        if(validateResource(toAdd)) {
+            this.projectTeam.add(toAdd);
+            msg = true;
+        }
+        return msg;
     }
 
     /**
