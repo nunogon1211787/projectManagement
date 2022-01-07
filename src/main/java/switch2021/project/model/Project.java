@@ -22,10 +22,7 @@ public class Project {
 
     private BusinessSector businessSector;  // Para já coloquei em tipo Business Sector e não lista. Depois será para mudar.
     private List<UserStory> productBacklog;
-    private List<Resource> projectTeam;
-    /**
-     * lista de resources alocados ao projecto (Carolina)
-     **/
+    private List<Resource> projectTeam; //lista de resources alocados ao projecto (Carolina)
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -52,11 +49,9 @@ public class Project {
         this.startDate = startDate;
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
-        this.productOwner = productOwner;
-        this.scrumMaster = scrumMaster;
-        this.sprintDuration = sprintDuration;
 
-
+        this.productBacklog = new ArrayList<>();
+        this.projectTeam = new ArrayList<>();
     }
 
     public void setScrumMaster(SystemUser scrumMaster) {
@@ -97,9 +92,7 @@ public class Project {
         return projectName;
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() {return description;}
 
     public Customer getCustomer() {
         return this.customer;
@@ -113,9 +106,7 @@ public class Project {
         return projectStatus;
     }
 
-    public BusinessSector getBusinessSector() {
-        return businessSector;
-    }
+    public BusinessSector getBusinessSector() {return businessSector;}
 
     public LocalDate getStartDate() {
         return startDate;

@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.controller.US008Controller;
 
 import java.time.LocalDate;
 
@@ -142,6 +143,20 @@ class ProjectTest {
 
         //Results
         assertEquals(valueBusinessSector, businessSectorCheck);
+    }
+
+    @Test
+    @DisplayName("Teste de busca de projecto a pelo indice")
+    public void checkGetProjByIndex() {
+        Company comp = new Company();
+        comp.add(comp.createProject("123testcode", "prototype", "test", customer,
+                typology, businessSector, date, 7, 5000));
+        Project proj = new Project("123testcode_2", "prototype_2", "test_2", customer,
+                typology, businessSector, date, 7, 6000);
+        comp.add(proj);
+        //Result
+        assertEquals(comp.getProjByIndex(0), newProject);
+        assertEquals(comp.getProjByIndex(1), proj);
     }
 
     @Test
