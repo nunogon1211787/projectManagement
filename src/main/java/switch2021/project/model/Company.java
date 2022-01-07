@@ -305,8 +305,11 @@ public class Company {
     /**
      * Método para validar o projeto criado.
      */
-    // PAULO FAVOR VERIFICAR ESSE MÉTODO. NÃO EXISTIA E SÓ CRIEI AQUI PARA NÃO DAR ERRO.
     public boolean validateProject(Project project) {
+        // check if project exists
+        if(checkProjectExists(project.getCode())){
+            return false;
+        }
 
         //check if numbers in Number of Sprints and budget are valid
         if(project.getBudget()<0 || project.getNumberOfSprints() <0) {
