@@ -6,13 +6,12 @@ import java.util.Objects;
 public class Resource {
 
     /**
-     * Atributos da classe Resource
+     * Atributos da classe Resource (Carolina US007)
      **/
     private SystemUser user;
-    //private Project project;
 
-    private LocalDate startDate; /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
-    private LocalDate endDate; /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     private double costPerHour;
     private double percentageOfAllocation;
@@ -20,7 +19,7 @@ public class Resource {
     private Profile profile;
 
     /**
-     * Construtor de Resource
+     * Construtor de Resource (Carolina US007)
      **/
 
     public Resource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
@@ -32,6 +31,8 @@ public class Resource {
         this.costPerHour = costPerHour;
         this.percentageOfAllocation = percentageOfAllocation;
     }
+
+    /** Override Equals (Carolina US007) **/
 
     @Override
     public boolean equals(Object o) {
@@ -45,6 +46,9 @@ public class Resource {
                         (this.costPerHour == that.getCostPerHour()) &&
                         (this.percentageOfAllocation == that.getPercentageOfAllocation());
     }
+
+
+    /** Métodos "Getter" dos atributos (Carolina US007) **/
 
     public SystemUser getUser() {
         return user;
@@ -66,22 +70,18 @@ public class Resource {
         return profile;
     }
 
-    /** Métodos "Getter" dos atributos **/
-
-
-
     public double getPercentageOfAllocation() {
         return percentageOfAllocation;
     }
 
+    /** Método check se o user é aquele que queremos (Carolina US007) **/
     public boolean isYourUser(SystemUser user){
         return this.user == user;
     }
 
+    /** Método check se o período que queremos alocar é coincidente com o período que o resource está alocado ao projecto (para depois podermos somar e confirmar que a alocação total não é maior que 1) (Carolina US007) **/
+
     public boolean checkAllocationPeriod(LocalDate startDate, LocalDate endDate){
-//        boolean checkstartDate = startDate.isAfter(this.startDate) || startDate.isEqual(this.startDate) || startDate.isBefore(this.endDate);
-//        boolean checkEndDate = endDate.isBefore(this.endDate) || endDate.isEqual(this.endDate);
-//        if(startDate.isAfter(){
         boolean msg = false;
         if(startDate.isAfter(this.endDate) || endDate.isBefore(this.startDate)){
             msg = false;
@@ -101,6 +101,6 @@ public class Resource {
 
 
 
-    //public ArrayList<Double> getAllocationList(){ return percentageOfAllocation};
+
 
 }
