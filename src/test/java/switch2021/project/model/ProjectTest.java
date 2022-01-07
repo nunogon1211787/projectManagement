@@ -2,7 +2,6 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.controller.US008Controller;
 
 import java.time.LocalDate;
 
@@ -155,6 +154,7 @@ class ProjectTest {
         Project proj = new Project("123testcode_2", "prototype_2", "test_2", customer,
                 typology, businessSector, date, 7, 6000);
         comp.add(proj);
+
         //Result
         assertEquals(comp.getProjByIndex(0), newProject);
         assertEquals(comp.getProjByIndex(1), proj);
@@ -337,7 +337,6 @@ class ProjectTest {
         assertEquals(2, project.getSprintDuration());
         assertEquals(user, project.getScrumMaster());
         assertEquals(user2, project.getProductOwner());
-
 
     }
 
