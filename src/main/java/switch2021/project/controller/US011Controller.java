@@ -8,7 +8,7 @@ public class US011Controller {
     private Company company;
     private SystemUser user;
 
-    public US011Controller (Company company, SystemUser user) {
+    public US011Controller(Company company, SystemUser user) {
         this.company = company;
         this.user = user;
     }
