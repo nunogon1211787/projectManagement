@@ -110,7 +110,7 @@ class CompanyTest {
 
         SystemUser ana = new SystemUser("", "1211748@isep.ipp.pt", "", "", new Profile("", ""));
         Company company = new Company(); // criar uma company
-        company.saveSystemUser(ana); //ana = objeto da classe SU
+        company.addSystemUser(ana); //ana = objeto da classe SU
         //Expected
         SystemUser ana2 = company.getUserByEmail("1211748@isep.ipp.pt"); // estou a ir buscar um utilizador com o email etc
         //Result
@@ -277,11 +277,11 @@ class CompanyTest {
         SystemUser usr3 = new SystemUser("iiii", "jjjj", "kkkk", "llll", p3);
         SystemUser usr4 = new SystemUser("mmmm", "nnnn", "oooo", "pppp", p4);
         SystemUser usr5 = new SystemUser("qqqq", "rrrr", "ssss", "tttt", p5);
-        co.saveSystemUser(usr1);
-        co.saveSystemUser(usr2);
-        co.saveSystemUser(usr3);
-        co.saveSystemUser(usr4);
-        co.saveSystemUser(usr5);
+        co.addSystemUser(usr1);
+        co.addSystemUser(usr2);
+        co.addSystemUser(usr3);
+        co.addSystemUser(usr4);
+        co.addSystemUser(usr5);
         //Expected
         int[] list = {};
         List<SystemUser> resultList = co.searchUsers("", "", "", 0, list);
@@ -304,11 +304,11 @@ class CompanyTest {
         SystemUser usr3 = new SystemUser("iiii", "jjjj", "kkkk", "llll", p3);
         SystemUser usr4 = new SystemUser("mmam", "nnnn", "oooo", "pppp", p4);
         SystemUser usr5 = new SystemUser("qmqe", "rrrr", "ssss", "tttt", p5);
-        co.saveSystemUser(usr1);
-        co.saveSystemUser(usr2);
-        co.saveSystemUser(usr3);
-        co.saveSystemUser(usr4);
-        co.saveSystemUser(usr5);
+        co.addSystemUser(usr1);
+        co.addSystemUser(usr2);
+        co.addSystemUser(usr3);
+        co.addSystemUser(usr4);
+        co.addSystemUser(usr5);
         //Expected
         int[] list = {};
         List<SystemUser> resultList = co.searchUsers("a", "", "", -1, list);
@@ -331,11 +331,11 @@ class CompanyTest {
         SystemUser usr3 = new SystemUser("iiii", "jjjb", "kkkk", "llll", p3);
         SystemUser usr4 = new SystemUser("mmam", "fnnn", "oooo", "pppp", p4);
         SystemUser usr5 = new SystemUser("qmqe", "rjrr", "ssss", "tttt", p5);
-        co.saveSystemUser(usr1);
-        co.saveSystemUser(usr2);
-        co.saveSystemUser(usr3);
-        co.saveSystemUser(usr4);
-        co.saveSystemUser(usr5);
+        co.addSystemUser(usr1);
+        co.addSystemUser(usr2);
+        co.addSystemUser(usr3);
+        co.addSystemUser(usr4);
+        co.addSystemUser(usr5);
         //Expected
         int[] list = {};
         List<SystemUser> resultList = co.searchUsers("", "b", "", -1, list);
@@ -358,11 +358,11 @@ class CompanyTest {
         SystemUser usr3 = new SystemUser("iiii", "jjjb", "kksk", "ltll", p3);
         SystemUser usr4 = new SystemUser("mmam", "fnnn", "oxoo", "ppdp", p4);
         SystemUser usr5 = new SystemUser("qmqe", "rjrr", "gsss", "ttth", p5);
-        co.saveSystemUser(usr1);
-        co.saveSystemUser(usr2);
-        co.saveSystemUser(usr3);
-        co.saveSystemUser(usr4);
-        co.saveSystemUser(usr5);
+        co.addSystemUser(usr1);
+        co.addSystemUser(usr2);
+        co.addSystemUser(usr3);
+        co.addSystemUser(usr4);
+        co.addSystemUser(usr5);
         //Expected
         int[] list = {};
         List<SystemUser> resultList = co.searchUsers("", "", "g", -1, list);
@@ -385,11 +385,11 @@ class CompanyTest {
         SystemUser usr3 = new SystemUser("iiii", "jjjb", "kkkk", "llll", p3);
         SystemUser usr4 = new SystemUser("mmam", "fnnn", "oooo", "pppp", p4);
         SystemUser usr5 = new SystemUser("qmqe", "rjrr", "ssss", "tttt", p5);
-        co.saveSystemUser(usr1);
-        co.saveSystemUser(usr2);
-        co.saveSystemUser(usr3);
-        co.saveSystemUser(usr4);
-        co.saveSystemUser(usr5);
+        co.addSystemUser(usr1);
+        co.addSystemUser(usr2);
+        co.addSystemUser(usr3);
+        co.addSystemUser(usr4);
+        co.addSystemUser(usr5);
         //Expected
         int[] list = {3};
         List<SystemUser> resultList = co.searchUsers("", "", "", -1, list);

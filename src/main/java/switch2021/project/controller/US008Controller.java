@@ -15,8 +15,8 @@ public class US008Controller {
         this.project = project;
     }
 
-    public Project getProjectRequested(int index){
-        return this.company.getProj(index);
+    public Project getProjectRequested(String code){
+        return this.company.getProj(code);
     }
 
     public Project editProject(String name, LocalDate startDate, LocalDate endDate, int numberOfSprints, int sprintDuration, String status, SystemUser scrumMaster, SystemUser productOwner){

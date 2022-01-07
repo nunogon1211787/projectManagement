@@ -21,7 +21,7 @@ public class US006Controller {
     public boolean updateProfile(Profile oldProfile, Profile newProfile) {
 
         this.user.updateProfile(oldProfile, newProfile);
-        this.company.saveSystemUser(user);
+        this.company.addSystemUser(user);
 
         return true;
     }

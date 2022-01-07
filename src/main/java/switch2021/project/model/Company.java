@@ -229,6 +229,15 @@ public class Company {
     }
 
     /**
+     * Método para validar o projeto criado.
+     */
+    // PAULO FAVOR VERIFICAR ESSE MÉTODO. NÃO EXISTIA E SÓ CRIEI AQUI PARA NÃO DAR ERRO.
+    public boolean validateProject(Project proj) {
+
+        return true;
+    }
+
+    /**
      * Método para validar se um profile existe.
      **/
 
