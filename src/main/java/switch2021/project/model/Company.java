@@ -11,7 +11,7 @@ public class Company {
      * Atributos da Classe
      **/
 
-    List<Project> arrayProj = new ArrayList<>();
+    List<Project> arrayProj; // = new ArrayList<>();
     List<SystemUser> arraySyUser;// = new ArrayList<>();
     List<Profile> arrayProfile;
     List<Request> arrayRequest = new ArrayList<>();
@@ -22,6 +22,7 @@ public class Company {
     public Company() {
         this.arraySyUser = new ArrayList<>();
         this.arrayProfile = new ArrayList<>();
+        this.arrayProj = new ArrayList<>();
 
         arrayProfile.add(new Profile("Visitor", "System Profile"));
         arrayProfile.add(new Profile("Administrator", "System Profile"));
@@ -375,9 +376,13 @@ public class Company {
         return msg;
     }
 
-    public boolean saveProject(Project proj){
+    public boolean saveProject(Project proj, int index){
         validateProject(proj);
-//        addProject(proj);
+        addProject(proj, index);
         return true;
+    }
+
+    public void addProject (Project proj, int index){
+        this.arrayProj.set(index,proj);
     }
 }
