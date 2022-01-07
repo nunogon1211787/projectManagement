@@ -25,7 +25,7 @@ public class US010Controller {
         }
 
         public boolean saveSystemUser() {
-            return this.company.saveSystemUserData(user);
+            return this.company.saveSystemUser(user);
         }
 
 }

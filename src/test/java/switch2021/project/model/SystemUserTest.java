@@ -13,11 +13,11 @@ class SystemUserTest {
     @Test
     public void registerSystemUser() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         ivan.activateUser();
         //Expected
-        Profile tes = new Profile("ddd","pro");
+        Profile tes = new Profile("ddd", "pro");
         SystemUser expected = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", tes);
         expected.activateUser();
         //Results
@@ -27,12 +27,12 @@ class SystemUserTest {
     @Test
     public void registerSystemUserWithPhoto() {
         //Input
-        Profile pro = new Profile("ddd","pro");
-        SystemUser ivan1 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456",pro);
+        Profile pro = new Profile("ddd", "pro");
+        SystemUser ivan1 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456", pro);
         ivan1.activateUser();
         //Expected
-        Profile tes = new Profile("ddd","pro");
-        SystemUser expected2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456",tes);
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser expected2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456", tes);
         expected2.activateUser();
         //Result
         assertEquals(ivan1, expected2);
@@ -42,8 +42,8 @@ class SystemUserTest {
     public void verifyEmailTest() {
 
         //Input
-        Profile tes = new Profile("ddd","pro");
-        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456",tes);
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456", tes);
         String emailCheck = "xxxx";
         //Result
         assertTrue(ivan.isYourEmail(emailCheck));
@@ -56,13 +56,13 @@ class SystemUserTest {
         // stored in system user with the encryptation method.
 
         //Arrange
-        Profile tes = new Profile("ddd","pro");
+        Profile tes = new Profile("ddd", "pro");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO", tes);
         //Act
         //assertTrue(joana.updatePassword("HELLO", "GOODBYE"));
         joana.updatePassword("HELLO", "GOODBYE");
         //Assert
-        assertEquals("GOODBYE",joana.getPassword());
+        assertEquals("GOODBYE", joana.getPassword());
     }
 
     @Test
@@ -72,7 +72,7 @@ class SystemUserTest {
         //password that came from User Interface (UI).
 
         //Arrange
-        Profile tes = new Profile("ddd","pro");
+        Profile tes = new Profile("ddd", "pro");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO_01", tes);
         //Act
         assertFalse(joana.updatePassword("HELLO_02", "GOODBYE"));
@@ -80,25 +80,24 @@ class SystemUserTest {
     }
 
     @Test
-    public void createSystemUserWithPhoto() {
+    public void createSystemUserWithPhotoSuccess() {
         //Arrange
-        String userName = "abc";
-        String email = "def";
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
         String password = "ghi";
-        String function = "jkl";
-        String photo = "mno";
-        Profile tes = new Profile("ddd","pro");
-        SystemUser newUser = new SystemUser(userName, email, function, photo, password, tes);
+        String function = "tester";
+        String photo = "photo";
+        Profile profileTest = new Profile("Visitor", "System Profile");
+        SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
 
-        String userNameExpected = "abc";
-        String emailExpected = "def";
+        String userNameExpected = "manueloliveira";
+        String emailExpected = "manueloliveira@beaver.com";
         String passwordExpected = "ÊËÌ";
-        String functionExpected = "jkl";
-        String photoExpected = "mno";
-        Profile pro = new Profile("ddd","pro");
+        String functionExpected = "tester";
+        String photoExpected = "photo";
+        Profile pro = new Profile("Visitor", "System Profile");
         List<Profile> assignedProfileExpected = new ArrayList<>();
         assignedProfileExpected.add(pro);
-
         //Act
         String userNameResult = newUser.getUserName();
         String emailResult = newUser.getEmail();
@@ -107,7 +106,6 @@ class SystemUserTest {
         String photoResult = newUser.getPhoto();
         boolean activateUserResult = newUser.isUserActivated();
         List<Profile> assignedProfileResult = newUser.getAssignedProfileList();
-
         //Assert
         assertEquals(userNameExpected, userNameResult);
         assertEquals(emailExpected, emailResult);
@@ -119,11 +117,48 @@ class SystemUserTest {
     }
 
     @Test
-    public void encryptPassword() {
+    public void createSystemUserWithoutPhotoSuccess() {
         //Arrange
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
         String password = "ghi";
-        Profile pro = new Profile("mno","pro");
-        SystemUser newUser = new SystemUser("abc", "def", "ghi", "jkl", pro);
+        String function = "tester";
+        Profile profileTest = new Profile("Visitor", "System Profile");
+        SystemUser newUser = new SystemUser(userName, email, function, password, profileTest);
+
+        String userNameExpected = "manueloliveira";
+        String emailExpected = "manueloliveira@beaver.com";
+        String passwordExpected = "ÊËÌ";
+        String functionExpected = "tester";
+        Profile pro = new Profile("Visitor", "System Profile");
+        List<Profile> assignedProfileExpected = new ArrayList<>();
+        assignedProfileExpected.add(pro);
+        //Act
+        String userNameResult = newUser.getUserName();
+        String emailResult = newUser.getEmail();
+        String passwordResult = newUser.getPassword();
+        String functionResult = newUser.getFunction();
+        boolean activateUserResult = newUser.isUserActivated();
+        List<Profile> assignedProfileResult = newUser.getAssignedProfileList();
+        //Assert
+        assertEquals(userNameExpected, userNameResult);
+        assertEquals(emailExpected, emailResult);
+        assertEquals(passwordExpected, passwordResult);
+        assertEquals(functionExpected, functionResult);
+        assertFalse(activateUserResult);
+        assertEquals(assignedProfileExpected, assignedProfileResult);
+    }
+
+    @Test
+    public void encryptPasswordSuccess() {
+        //Arrange
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String function = "tester";
+        String photo = "photo";
+        Profile profileTest = new Profile("Visitor", "System Profile");
+        SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
         //Act
         String result = newUser.encryptPassword(password);
         //Assert
@@ -131,13 +166,19 @@ class SystemUserTest {
     }
 
     @Test
-    public void desencryptPassword() {
+    public void decryptPasswordSuccess() {
         //Arrange
-        String password = "Ä\u0094Å\u0095Æ\u0096";
-        Profile pro = new Profile("mno","pro");
-        SystemUser newUser = new SystemUser("abc", "def", "ghi", "jkl", pro);
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "a1b2c3";
+        String function = "tester";
+        String photo = "photo";
+        Profile profileTest = new Profile("Visitor", "System Profile");
+        SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
+
+        String encryptedPassword = newUser.getPassword();//encryptedPassword = "Ä\u0094Å\u0095Æ\u0096";
         //Act
-        String result = newUser.decryptPassword(password);
+        String result = newUser.decryptPassword(encryptedPassword);
         //Assert
         assertEquals("a1b2c3", result);
     }
@@ -145,7 +186,7 @@ class SystemUserTest {
     @Test
     void hasThisDataTest() {
         //Input
-        Profile tes = new Profile("ddd","pro");
+        Profile tes = new Profile("ddd", "pro");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO", tes);
         String name = "";
         String email = "";
@@ -160,7 +201,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithAll() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "ivan";
         String email = "xxxx";
@@ -174,7 +215,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithoutAll() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "";
         String email = "";
@@ -188,7 +229,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithNameSuccess() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "ivan";
         String email = "";
@@ -202,7 +243,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithEmailSuccess() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "";
         String email = "xxxx";
@@ -216,7 +257,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithFunctionSuccess() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "";
         String email = "";
@@ -230,7 +271,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithStateSuccess() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "";
         String email = "";
@@ -244,7 +285,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithProfilesSuccess() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "";
         String email = "";
@@ -258,8 +299,8 @@ class SystemUserTest {
     @Test
     void hasThisDataWithTwoProfilesSuccess() {
         //Input
-        Profile pro = new Profile("ddd","pro");
-        Profile pre = new Profile("aaa","pre");
+        Profile pro = new Profile("ddd", "pro");
+        Profile pre = new Profile("aaa", "pre");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         ivan.addProfileToList(pre);
         String name = "";
@@ -274,7 +315,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithTwoParametersSuccess() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "ivan";
         String email = "xxxx";
@@ -288,7 +329,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithThreeParametersSuccess() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "ivan";
         String email = "xxxx";
@@ -302,7 +343,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithFourParametersSuccess() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "ivan";
         String email = "xxxx";
@@ -320,7 +361,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithAllFail() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "avan";
         String email = "xxxx";
@@ -334,7 +375,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithNameFail() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "avan";
         String email = "";
@@ -348,7 +389,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithEmailFail() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "";
         String email = "yxxx";
@@ -362,7 +403,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithFunctionFail() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "";
         String email = "";
@@ -376,7 +417,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithStateFail() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "";
         String email = "";
@@ -390,7 +431,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithProfilesFail() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "";
         String email = "";
@@ -404,8 +445,8 @@ class SystemUserTest {
     @Test
     void hasThisDataWithTwoProfilesFail() {
         //Input
-        Profile pro = new Profile("ddd","pro");
-        Profile pre = new Profile("aaa","pre");
+        Profile pro = new Profile("ddd", "pro");
+        Profile pre = new Profile("aaa", "pre");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         ivan.addProfileToList(pre);
         String name = "";
@@ -420,7 +461,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithTwoParametersFail() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "ivan";
         String email = "axxx";
@@ -434,7 +475,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithThreeParametersFail() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "ivan";
         String email = "xxxx";
@@ -448,7 +489,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithFourParametersFail() {
         //Input
-        Profile pro = new Profile("ddd","pro");
+        Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "ivan";
         String email = "xxxx";

@@ -19,12 +19,12 @@ public class Company {
     /**
      * Constructors with data (Ivan)
      **/
-    public Company(){
+    public Company() {
         this.arraySyUser = new ArrayList<>();
         this.arrayProfile = new ArrayList<>();
 
-        arrayProfile.add(new Profile("Visitor","System Profile"));
-        arrayProfile.add(new Profile("Administrator","System Profile"));
+        arrayProfile.add(new Profile("Visitor", "System Profile"));
+        arrayProfile.add(new Profile("Administrator", "System Profile"));
         /*arrayProfile.add(new Profile(2,"Director","System Profile"));
         arrayProfile.add(new Profile(3,"Project Manager", "Special Profile"));
         arrayProfile.add(new Profile(4, "Product Owner", "Special Profile"));
@@ -32,32 +32,71 @@ public class Company {
         arrayProfile.add(new Profile(6, "Project Team", "Special Profile"));*/
     }
 
-    /** Metodo create de Projectos (Paulo - US005) **/
+    /**
+     * Metodo create de Projectos (Paulo - US005)
+     **/
 
     public Project createProject(String code, String name, String description, Customer customer, Typology typology,
                                  BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
-        return new Project(code,name, description, customer, typology, businessSector,
-                                    startDate,numberOfSprints, budget);
+        return new Project(code, name, description, customer, typology, businessSector,
+                startDate, numberOfSprints, budget);
 
     }
-    /** Metodo create de SystemUsers (Nuno) **/
+
+    /**
+     * Metodo create de SystemUsers (Nuno)
+     **/
 
     public SystemUser createSystemUser(String userName, String email, String password, String function) {
         return new SystemUser(userName, email, password, function, arrayProfile.get(0));
     }
 
     public SystemUser createSystemUser(String userName, String email, String password, String function, String photo) {
-        return new SystemUser(userName, email, password, function,photo, arrayProfile.get(0));
+        return new SystemUser(userName, email, password, function, photo, arrayProfile.get(0));
     }
 
     //Método alterado porque estava com um erro (Joana).
 
-    public boolean validateSystemUser(SystemUser user) {
+    /*public boolean validateSystemUser(SystemUser user) {
         if (user == null && this.arraySyUser.contains(user)) {
             return false;
         }
         return true;
+    }*/
+    public boolean validateSystemUser(SystemUser user) {
+        if (user == null) {
+            return false;
+        }
+        if (user.getUserName().trim().isEmpty() || user.getEmail().trim().isEmpty() || user.getFunction().trim().isEmpty() ||
+                user.getPassword().trim().isEmpty() || user.getAssignedProfileList().isEmpty()) {
+            return false;
+        }
+        if (hasEmail(user.getEmail())) {
+            return false;
+        }
+        if (hasUserName(user.getUserName())) {
+            return false;
+        }
+        return !this.arraySyUser.contains(user);
+    }
+
+    boolean hasEmail(String newUserEmail) {
+        for (SystemUser newUser : arraySyUser) {
+            if (newUser.getEmail().trim().equalsIgnoreCase(newUserEmail.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    boolean hasUserName(String newUserName) {
+        for (SystemUser newUser : arraySyUser) {
+            if (newUser.getUserName().trim().equalsIgnoreCase(newUserName.trim())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -73,15 +112,18 @@ public class Company {
      * Method to save system user data (username, function, photo) in System User List
      */
 
-    public boolean saveSystemUserData(SystemUser user) {
+    public boolean saveSystemUser(SystemUser user) {
+        boolean result = true;
 
-        if (!validateSystemUser(user)){
-            return false;
-        }else{
-            return this.arraySyUser.add(user);
+        if (!validateSystemUser(user)) {
+            result = false;
+        } else {
+            this.arraySyUser.add(user);
         }
+        return result;
     }
 
+    //este é igual ao de cima mas sem validação. É preciso?...(Nuno)
     public boolean addSystemUser(SystemUser syUser) {
         this.arraySyUser.add(syUser);
         return true;
@@ -89,7 +131,7 @@ public class Company {
 
     public boolean add(Profile profile) {
 
-        if(!validateProfile(profile)){
+        if (!validateProfile(profile)) {
             return false;
         }
         arrayProfile.add(profile);
@@ -150,7 +192,7 @@ public class Company {
         SystemUser user = null;
 
         for (int i = 0; i < this.arraySyUser.size(); i++) {
-            if(this.arraySyUser.get(i).isYourEmail(email)){
+            if (this.arraySyUser.get(i).isYourEmail(email)) {
                 user = this.arraySyUser.get(i);
                 break;
             }
@@ -158,6 +200,7 @@ public class Company {
 
         return user;
     }
+
     public Profile getProfile(int index) {
         return new Profile(arrayProfile.get(index));
     }
@@ -165,14 +208,15 @@ public class Company {
     public Profile getProfile(String name) {
         Profile pro = null;
         for (int i = 0; i < arrayProfile.size(); i++) {
-            if(getProfile(i).getName() == name) {
+            if (getProfile(i).getName() == name) {
                 pro = getProfile(i);
                 break;
             }
         }
         return pro;
     }
-      /**
+
+    /**
      * Method to create a new profile (Cris-US013)
      **/
 
@@ -197,18 +241,18 @@ public class Company {
 
     private boolean validateProfile(Profile profile) {
         //Check empty fields on name and type
-        if(profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()){
+        if (profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()) {
             return false;
         }
 
         //Check if the profile type is valid
-        if(!profile.getType().equalsIgnoreCase("System Profile") && !profile.getType().equalsIgnoreCase("Special Profile")){
+        if (!profile.getType().equalsIgnoreCase("System Profile") && !profile.getType().equalsIgnoreCase("Special Profile")) {
             return false;
         }
 
         //Check if profile already exist
-        for (Profile up : arrayProfile){
-            if(up.equals(profile)){
+        for (Profile up : arrayProfile) {
+            if (up.equals(profile)) {
                 return false;
             }
         }
@@ -259,7 +303,7 @@ public class Company {
     /**
      * Métodos para localizar um ou mais system user na lista.
      */
-    public List<SystemUser> searchUsers(String name, String email, String function, int isActive, int [] profileList) {
+    public List<SystemUser> searchUsers(String name, String email, String function, int isActive, int[] profileList) {
 
         int listSize = this.arraySyUser.size();
         List<SystemUser> foundUsersList = new ArrayList<>();
@@ -294,7 +338,7 @@ public class Company {
     public String[] getProjectIDList() {
         String[] lista = new String[arrayProj.size()];
         for (int i = 0; i < this.arrayProj.size(); i++) {
-            lista [i] =  this.arrayProj.get(i).getCode();
+            lista[i] = this.arrayProj.get(i).getCode();
         }
         return lista;
     }
@@ -311,11 +355,11 @@ public class Company {
             for (int j = 0; j < arrayProj.get(i).getProjectTeam().size(); j++) {
                 if (arrayProj.get(i).getTeamMemberByIndex(j).equals(user) &&
                         arrayProj.get(i).getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
-                        sum = +arrayProj.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();
+                    sum = +arrayProj.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();
                 }
             }
         }
-        if(sum + percentageOfAllocation < 1){
+        if (sum + percentageOfAllocation < 1) {
             msg = true;
         }
         return msg;

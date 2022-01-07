@@ -212,32 +212,42 @@ public class SystemUser {
             int idxString = this.userName.toLowerCase().indexOf(userName.toLowerCase());
             if (idxString == -1) {
                 result = false;
-            } else { match++; }
+            } else {
+                match++;
+            }
         }
 
         if (!email.isEmpty()) {
             int idxString = this.email.toLowerCase().indexOf(email.toLowerCase());
             if (idxString == -1) {
                 result = false;
-            } else { match++; }
+            } else {
+                match++;
+            }
         }
 
         if (!function.isEmpty()) {
             int idxString = this.function.toLowerCase().indexOf(function.toLowerCase());
             if (idxString == -1) {
                 result = false;
-            } else { match++; }
+            } else {
+                match++;
+            }
         }
 
         if (isActive != -1) {
             if (isActive == 0) {
                 if (this.activateUser) {
                     result = false;
-                } else { match++; }
+                } else {
+                    match++;
+                }
             } else if (isActive == 1) {
                 if (!this.activateUser) {
                     result = false;
-                } else { match++; }
+                } else {
+                    match++;
+                }
             }
         }
 
@@ -266,7 +276,9 @@ public class SystemUser {
             }
         }
 
-        if (match == 0) { result = false; }
+        if (match == 0) {
+            result = false;
+        }
 
         return result;
     }
@@ -298,9 +310,10 @@ public class SystemUser {
         if (validateOldPassword(oldpasswordUI)) {
             setPassword(newpassword);
             encryptPassword(newpassword);
-        } else { return false;
+        } else {
+            return false;
         }
-            return true;
+        return true;
     }
 
     /**
@@ -325,7 +338,7 @@ public class SystemUser {
 
     public boolean updateProfile(Profile oldProfile, Profile newProfile) {
         this.assignedProfileList.remove(oldProfile);
-        if(newProfile.isValidName(newProfile.toString())) {
+        if (newProfile.isValidName(newProfile.toString())) {
             this.assignedProfileList.add(newProfile);
         } else {
             return false;

@@ -260,9 +260,6 @@ class CompanyTest {
     }
 
 
-
-
-
     @Test
     void searchUsersOnlyByStateSuccess() {
         //Input
@@ -398,4 +395,84 @@ class CompanyTest {
         assertEquals(expectedList, resultList);
     }
 
+    //US001:
+    @Test
+    public void saveSystemUserSuccess() {
+        //Arrange
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String function = "tester";
+        String photo = "photo";
+        Profile profileTest = new Profile("Visitor", "System Profile");
+        SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
+        Company company = new Company();
+        int initialSize = company.getArraySyUser().size();
+
+        company.saveSystemUser(newUser);
+        int expected = initialSize + 1;
+        //Act
+        int result = company.getArraySyUser().size();
+        //Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void saveSystemUserFailEmailAlreadyExists() {
+        //Arrange
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String function = "tester";
+        String photo = "photo";
+        Profile profileTest = new Profile("Visitor", "System Profile");
+        SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
+        Company company = new Company();
+        company.saveSystemUser(newUser);
+
+        String userName2 = "maneloliveira";
+        SystemUser newUser2 = new SystemUser(userName2, email, function, photo, password, profileTest);
+        //Act
+        boolean result = company.saveSystemUser(newUser2);
+        //Assert
+        assertFalse(result);
+    }
+
+    @Test
+    public void saveSystemUserFailUserNameAlreadyExists() {
+        //Arrange
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String function = "tester";
+        String photo = "photo";
+        Profile profileTest = new Profile("Visitor", "System Profile");
+        SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
+        Company company = new Company();
+        company.saveSystemUser(newUser);
+
+        String email2 = "maneloliveira@beaver.com";
+        SystemUser newUser2 = new SystemUser(userName, email2, function, photo, password, profileTest);
+        //Act
+        boolean result = company.saveSystemUser(newUser2);
+        //Assert
+        assertFalse(result);
+    }
+
+    @Test
+    public void saveSystemUserFailUserNameEmpty() {
+        //Arrange
+        String userName = "";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String function = "tester";
+        String photo = "photo";
+        Profile profileTest = new Profile("Visitor", "System Profile");
+        SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
+        Company company = new Company();
+        //Act
+        boolean result = company.saveSystemUser(newUser);
+        //Assert
+        assertFalse(result);
+    }
 }
