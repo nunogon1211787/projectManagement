@@ -140,18 +140,6 @@ public class SystemUser {
         return this.password;
     }
 
-
-    public String getActivateUser() { //alguém está a usar??? (ver isUserActivated())
-
-        String status = "inativo";
-
-        if (this.activateUser) {
-            status = "ativo";
-        }
-
-        return status;
-    }
-
     public boolean isUserActivated() {
         return this.activateUser;
     }
@@ -167,6 +155,13 @@ public class SystemUser {
 
     public String getAssignedProfile(int idx) {
         return assignedProfileList.get(idx).getName();
+    }
+
+    /**
+     * Método para adicionar um profile a lista de profiles do User.
+     */
+    public void addProfileToList(Profile p) {
+        this.assignedProfileList.add(p);
     }
 
     /**
@@ -211,37 +206,38 @@ public class SystemUser {
     public boolean hasThisData(String userName, String email, String function, int isActive, int[] profilesId) {
 
         boolean result = true;
+        int match = 0;
 
         if (!userName.isEmpty()) {
             int idxString = this.userName.toLowerCase().indexOf(userName.toLowerCase());
             if (idxString == -1) {
                 result = false;
-            }
+            } else { match++; }
         }
 
         if (!email.isEmpty()) {
             int idxString = this.email.toLowerCase().indexOf(email.toLowerCase());
             if (idxString == -1) {
                 result = false;
-            }
+            } else { match++; }
         }
 
         if (!function.isEmpty()) {
             int idxString = this.function.toLowerCase().indexOf(function.toLowerCase());
             if (idxString == -1) {
                 result = false;
-            }
+            } else { match++; }
         }
 
         if (isActive != -1) {
             if (isActive == 0) {
                 if (this.activateUser) {
                     result = false;
-                }
+                } else { match++; }
             } else if (isActive == 1) {
                 if (!this.activateUser) {
                     result = false;
-                }
+                } else { match++; }
             }
         }
 
@@ -257,6 +253,7 @@ public class SystemUser {
                     for (Profile profile : this.assignedProfileList) {
                         if (profile.isValidId(k)) {
                             count++;
+                            match++;
                             break;
                         }
                     }
@@ -268,6 +265,8 @@ public class SystemUser {
 
             }
         }
+
+        if (match == 0) { result = false; }
 
         return result;
     }

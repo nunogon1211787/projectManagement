@@ -156,4 +156,307 @@ class SystemUserTest {
         assertTrue(joana.hasThisData(name, email, func, isActive, profiles));
 
     }
+
+    @Test
+    void hasThisDataWithAll() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "ivan";
+        String email = "xxxx";
+        String func = "test";
+        int state = 0; // -1 == null / 0 == false / 1 == true
+        int[] profiles = {0}; // profileId
+        //Result
+        assertTrue(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithoutAll() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "";
+        String email = "";
+        String func = "";
+        int state = -1; //-1 == null / 0 == false / 1 == true
+        int[] profiles = {}; // profile Id
+        //Result
+        assertFalse(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithNameSuccess() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "ivan";
+        String email = "";
+        String func = "";
+        int state = -1; //-1 == null / 0 == false / 1 == true
+        int[] profiles = {}; // profile Id
+        //Result
+        assertTrue(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithEmailSuccess() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "";
+        String email = "xxxx";
+        String func = "";
+        int state = -1; //-1 == null / 0 == false / 1 == true
+        int[] profiles = {}; // profile Id
+        //Result
+        assertTrue(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithFunctionSuccess() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "";
+        String email = "";
+        String func = "test";
+        int state = -1; //-1 == null / 0 == false / 1 == true
+        int[] profiles = {}; // profile Id
+        //Result
+        assertTrue(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithStateSuccess() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "";
+        String email = "";
+        String func = "";
+        int state = 0; //isActiveUser : -1 == null / 0 == false / 1 == true
+        int[] profiles = {}; // profile Id
+        //Result
+        assertTrue(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithProfilesSuccess() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "";
+        String email = "";
+        String func = "";
+        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
+        int[] profiles = {0}; // profile Id
+        //Result
+        assertTrue(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithTwoProfilesSuccess() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        Profile pre = new Profile("aaa","pre");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        ivan.addProfileToList(pre);
+        String name = "";
+        String email = "";
+        String func = "";
+        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
+        int[] profiles = {1}; // profile Id
+        //Result
+        assertTrue(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithTwoParametersSuccess() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "ivan";
+        String email = "xxxx";
+        String func = "";
+        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
+        int[] profiles = {}; // profile Id
+        //Result
+        assertTrue(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithThreeParametersSuccess() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "ivan";
+        String email = "xxxx";
+        String func = "test";
+        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
+        int[] profiles = {}; // profile Id
+        //Result
+        assertTrue(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithFourParametersSuccess() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "ivan";
+        String email = "xxxx";
+        String func = "test";
+        int state = 0; //isActiveUser : -1 == null / 0 == false / 1 == true
+        int[] profiles = {}; // profile Id
+        //Result
+        assertTrue(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    /**
+     * FAIL TESTS
+     */
+
+    @Test
+    void hasThisDataWithAllFail() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "avan";
+        String email = "xxxx";
+        String func = "test";
+        int state = 0; // -1 == null / 0 == false / 1 == true
+        int[] profiles = {0}; // profileId
+        //Result
+        assertFalse(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithNameFail() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "avan";
+        String email = "";
+        String func = "";
+        int state = -1; //-1 == null / 0 == false / 1 == true
+        int[] profiles = {}; // profile Id
+        //Result
+        assertFalse(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithEmailFail() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "";
+        String email = "yxxx";
+        String func = "";
+        int state = -1; //-1 == null / 0 == false / 1 == true
+        int[] profiles = {}; // profile Id
+        //Result
+        assertFalse(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithFunctionFail() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "";
+        String email = "";
+        String func = "tesq";
+        int state = -1; //-1 == null / 0 == false / 1 == true
+        int[] profiles = {}; // profile Id
+        //Result
+        assertFalse(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithStateFail() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "";
+        String email = "";
+        String func = "";
+        int state = 1; //isActiveUser : -1 == null / 0 == false / 1 == true
+        int[] profiles = {}; // profile Id
+        //Result
+        assertFalse(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithProfilesFail() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "";
+        String email = "";
+        String func = "";
+        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
+        int[] profiles = {1}; // profile Id
+        //Result
+        assertFalse(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithTwoProfilesFail() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        Profile pre = new Profile("aaa","pre");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        ivan.addProfileToList(pre);
+        String name = "";
+        String email = "";
+        String func = "";
+        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
+        int[] profiles = {0, 2}; // profile Id
+        //Result
+        assertFalse(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithTwoParametersFail() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "ivan";
+        String email = "axxx";
+        String func = "";
+        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
+        int[] profiles = {}; // profile Id
+        //Result
+        assertFalse(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithThreeParametersFail() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "ivan";
+        String email = "xxxx";
+        String func = "aest";
+        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
+        int[] profiles = {}; // profile Id
+        //Result
+        assertFalse(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithFourParametersFail() {
+        //Input
+        Profile pro = new Profile("ddd","pro");
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        String name = "ivan";
+        String email = "xxxx";
+        String func = "test";
+        int state = 1; //isActiveUser : -1 == null / 0 == false / 1 == true
+        int[] profiles = {}; // profile Id
+        //Result
+        assertFalse(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
 }
