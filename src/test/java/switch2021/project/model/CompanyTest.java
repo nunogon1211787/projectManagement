@@ -100,7 +100,6 @@ class CompanyTest {
     }
 
 
-
     @Test
     public void verifyUpdatePassword() {
 
@@ -231,7 +230,7 @@ class CompanyTest {
         company.add(proj1);
         //act
         Project proj2 = company.getProj("123");
-        // assert information
+        //assert information
         assertEquals(proj1, proj2);
     }*/
 
@@ -243,7 +242,7 @@ class CompanyTest {
         company.add(proj1);
         //act
         Project proj2 = company.getProj("125");
-        // assert information
+        //assert information
         assertNull(proj2);
     }
 
