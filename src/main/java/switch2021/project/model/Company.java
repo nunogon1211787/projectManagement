@@ -26,7 +26,7 @@ public class Company {
 
         arrayProfile.add(new Profile("Visitor", "System Profile"));
         arrayProfile.add(new Profile("Administrator", "System Profile"));
-        arrayProfile.add(new Profile("Director","System Profile"));
+        arrayProfile.add(new Profile("Director", "System Profile"));
         arrayProfile.add(new Profile("Project Manager", "Special Profile"));
         arrayProfile.add(new Profile("Product Owner", "Special Profile"));
         arrayProfile.add(new Profile("Scrum Master", "Special Profile"));
@@ -141,7 +141,6 @@ public class Company {
     }
 
 
-
     //este é igual ao de cima mas sem validação. É preciso?...(Nuno)
     public boolean addSystemUser(SystemUser syUser) {
         this.arraySyUser.add(syUser);
@@ -180,12 +179,11 @@ public class Company {
     }
 
 
-
-    public boolean saveRequest(Request newRequest){
+    public boolean saveRequest(Request newRequest) {
 
         boolean result = false;
 
-        if(validateRequest(newRequest)) {
+        if (validateRequest(newRequest)) {
             add(newRequest);
             result = true;
         }
@@ -216,7 +214,7 @@ public class Company {
 
         for (int i = 0; i < this.arrayProfile.size(); i++) {
 
-            if(this.arrayProfile.get(i).hasType(type)){
+            if (this.arrayProfile.get(i).hasType(type)) {
                 foundList.add(this.arrayProfile.get(i));
             }
 
@@ -239,7 +237,9 @@ public class Company {
         return null;
     }
 
-    /** Metodo de get project do array de company atravez do seu indice (Paulo) **/
+    /**
+     * Metodo de get project do array de company atravez do seu indice (Paulo)
+     **/
     public Project getProjByIndex(int index) {
         return arrayProj.get(index);
     }
@@ -348,12 +348,12 @@ public class Company {
      */
     public boolean validateProject(Project project) {
         // check if project exists
-        if(checkProjectExists(project.getCode())){
+        if (checkProjectExists(project.getCode())) {
             return false;
         }
 
         //check if numbers in Number of Sprints and budget are valid
-        if(project.getBudget()<0 || project.getNumberOfSprints() <0) {
+        if (project.getBudget() < 0 || project.getNumberOfSprints() < 0) {
             return false;
         }
 
@@ -438,13 +438,26 @@ public class Company {
         return msg;
     }
 
-    public boolean saveProject(Project proj, int index){
+    public boolean saveProject(Project proj, int index) {
         validateProject(proj);
         addProject(proj, index);
         return true;
     }
 
-    public void addProject (Project proj, int index){
-        this.arrayProj.set(index,proj);
+    public void addProject(Project proj, int index) {
+        this.arrayProj.set(index, proj);
+    }
+
+    public List<Project> getProjectListWithPORight(String email) {
+        List<Project> projectList = new ArrayList<>();
+        if (email == null || email.trim().isEmpty()) {
+            return projectList;
+        }
+        for (Project project : arrayProj) {
+            if (project.getProductOwner() != null && email.equals(project.getProductOwner().getEmail())) {
+                projectList.add(project);
+            }
+        }
+        return projectList;
     }
 }
