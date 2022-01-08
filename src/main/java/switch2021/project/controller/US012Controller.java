@@ -11,8 +11,8 @@ public class US012Controller {
     private Typology typology;
 
 
-    public US012Controller(ProjectSettings projSettings, Typology typo) {
-        this.projectSettings = projSettings;
+    public US012Controller(ProjectSettings projectSettings, Typology typo) {
+        this.projectSettings = projectSettings;
         this.typology = typo;
     }
 

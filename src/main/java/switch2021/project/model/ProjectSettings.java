@@ -21,20 +21,19 @@ public class ProjectSettings {
 
     public ProjectSettings() {
         this.arrayTypology = new ArrayList<>();
-        this.arrayBusinessSector = new ArrayList<>();
-        this.arrayCustomer = new ArrayList<>();
-        this.arrayProjectStatus = new ArrayList<>();
-
         this.arrayTypology.add(new Typology("Fixed Cost"));
         this.arrayTypology.add(new Typology("Time and Materials"));
 
-        this.arrayCustomer.add(new Customer(0, "customer1@email.com"));  // estes parametros são para efeitos de testes
-        this.arrayCustomer.add(new Customer(1, "customer2@email.com"));
-
+        this.arrayBusinessSector = new ArrayList<>();
         this.arrayBusinessSector.add(new BusinessSector("Business_0"));
         this.arrayBusinessSector.add(new BusinessSector("Business_1"));
         this.arrayBusinessSector.add(new BusinessSector("Business_2"));
 
+        this.arrayCustomer = new ArrayList<>();
+        this.arrayCustomer.add(new Customer(0, "customer1@email.com"));  // estes parametros são para efeitos de testes
+        this.arrayCustomer.add(new Customer(1, "customer2@email.com"));
+
+        this.arrayProjectStatus = new ArrayList<>();
         this.arrayProjectStatus.add(new ProjectStatus("Planned"));
         this.arrayProjectStatus.add(new ProjectStatus("Inception"));
         this.arrayProjectStatus.add(new ProjectStatus("Elaboration"));
@@ -45,16 +44,17 @@ public class ProjectSettings {
     }
 
     /**
-     *       >>>>>PROJECTSTATUS´S METHODS<<<<<
-     *
-     * Create Project Status **/
-    public ProjectStatus createProjectStatus (String descritpion) {
+     * >>>>>PROJECTSTATUS´S METHODS<<<<<
+     * <p>
+     * Create Project Status
+     **/
+    public ProjectStatus createProjectStatus(String descritpion) {
 
         return new ProjectStatus(descritpion);
 
     }
 
-     /**
+    /**
      * Metodo adicionar ProjectStatus
      **/
     public boolean add(ProjectStatus projStat) {
@@ -62,32 +62,39 @@ public class ProjectSettings {
         return true;
     }
 
-    /** Métodos Getter e Setter **/
+    /**
+     * Métodos Getter e Setter
+     **/
     public List<ProjectStatus> getArrayProjectStatus() {
         return arrayProjectStatus;
     }
+
     public ProjectStatus getProjectStatusById(int index) {
         return arrayProjectStatus.get(index);
     }
 
     /**
-     *       >>>>>CUSTOMER´S METHODS<<<<<
-     *
-     * Create Customer **/
-     public Customer createCustomer (int num, String email) {
+     * >>>>>CUSTOMER´S METHODS<<<<<
+     * <p>
+     * Create Customer
+     **/
+    public Customer createCustomer(int num, String email) {
 
-     return new Customer(num,email);
+        return new Customer(num, email);
 
-     }
+    }
 
-     /** Metodo adicionar Customer
+    /**
+     * Metodo adicionar Customer
      **/
     public boolean add(Customer cust) {
         this.arrayCustomer.add(cust);
         return true;
     }
 
-    /** Métodos Getter e Setter **/
+    /**
+     * Métodos Getter e Setter
+     **/
     public List<Customer> getArrayCustomer() {
         return arrayCustomer;
     }
@@ -101,23 +108,31 @@ public class ProjectSettings {
     }
 
     /**
-     *       >>>>>TYPOLOGY´S METHODS<<<<<
-     *
-     *Create Typology.**/
+     * >>>>>TYPOLOGY´S METHODS<<<<<
+     * <p>
+     * Create Typology.
+     **/
     public Typology createTypology(String description) {
-
         Typology typo = new Typology(description);
 
         return typo;
     }
 
-    /**Typology Add´s Method.**/
+    /**
+     * Typology Add´s Method.
+     **/
     public boolean add(Typology typo) {
-        this.arrayTypology.add(typo);
+        if (validateTypology(typo)) {
+            this.arrayTypology.add(typo);
+        } else {
+            return false;
+        }
         return true;
     }
 
-    /**Getter´s Method.**/
+    /**
+     * Getter´s Method.
+     **/
     public List<Typology> getArrayTypology() {
         return arrayTypology;
     }
@@ -126,33 +141,39 @@ public class ProjectSettings {
         return arrayTypology.get(index);
     }
 
-    /** Typology Validate´s Method**/
+    /**
+     * Typology Validate´s Method
+     **/
     public boolean validateTypology(Typology typo) {
-        if(typo == null & this.arrayTypology.contains(typo)) {
+        if (typo.getDescription() == null || typo.getDescription() == "" || this.arrayTypology.contains(typo)) {
             return false;
         }
         return true;
     }
 
-    /** Save Typology at List**/
-    public boolean saveTypology(Typology typo){
-        if(!validateTypology(typo)) {
+    /**
+     * Save Typology at List
+     **/
+    public boolean saveTypology(Typology typo) {
+        if (!validateTypology(typo)) {
             return false;
         }
-        return this.arrayTypology.add(typo);
+        return add(typo);
     }
 
     /**
-     *       >>>>>BUSINESSSECTOR´S METHODS<<<<<
-     *
-     * Create Business Sector **/
-    public BusinessSector createBusinessSector (String descritpion) {
+     * >>>>>BUSINESSSECTOR´S METHODS<<<<<
+     * <p>
+     * Create Business Sector
+     **/
+    public BusinessSector createBusinessSector(String descritpion) {
 
         return new BusinessSector(descritpion);
 
     }
 
-     /** Metodo adicionar BusinessSector
+    /**
+     * Metodo adicionar BusinessSector
      **/
 
     public boolean add(BusinessSector busSect) {
@@ -160,7 +181,9 @@ public class ProjectSettings {
         return true;
     }
 
-    /** Metodos getter de BusinessSetcor **/
+    /**
+     * Metodos getter de BusinessSetcor
+     **/
     public List<BusinessSector> getArrayBusinessSector() {
         return arrayBusinessSector;
     }

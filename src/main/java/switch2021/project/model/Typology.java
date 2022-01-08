@@ -1,8 +1,5 @@
 package switch2021.project.model;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Typology {
@@ -14,20 +11,16 @@ public class Typology {
     private int id_Typology;
     private String description;
 
+    // Constructor with parameters
+    public Typology(String description) {
+        this.id_Typology = ID_TYPOLOGY_GENERATOR.getAndIncrement();
+        this.description = description;
+    }
+
     /** Constructors of typology´s class **/
 
     //Create ID automatically
-    private static AtomicInteger ID_GENERATOR = new AtomicInteger();
-
-    // Constructor with no parameters
-    public Typology() {
-    }
-
-    // Constructor with parameters
-    public Typology(String description) {
-        this.id_Typology = ID_GENERATOR.getAndIncrement();
-        this.description = description;
-    }
+    private static AtomicInteger ID_TYPOLOGY_GENERATOR = new AtomicInteger();
 
     /** Getters and Setters **/
 
@@ -39,12 +32,11 @@ public class Typology {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void updateDescription(String description) {
         this.description = description;
     }
 
-
-    /** Metodos Override  para comparar objectos diferentes **/
+    /** Metodos Override  para comparar Typologys diferentes **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
