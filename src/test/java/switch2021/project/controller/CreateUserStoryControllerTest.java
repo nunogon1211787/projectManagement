@@ -30,14 +30,16 @@ public class CreateUserStoryControllerTest {
     @Test
     public void createUserStorySuccessFull() {
         CreateUserStoryController createUserStoryController = new CreateUserStoryController();
-        boolean isUserStoryCreated = createUserStoryController.createUserStory(project.getCode(), UserStoryStatus.TODO.toString(), 12, "desc", 6);
+        boolean isUserStoryCreated = createUserStoryController.createUserStory(project.getCode(),
+                UserStoryStatus.TODO.toString(), 12, "desc", 6);
         assertTrue(isUserStoryCreated);
     }
 
     @Test
     public void createUserStoryInvalidDuplicatedUserStory() {
         CreateUserStoryController createUserStoryController = new CreateUserStoryController();
-        boolean isUserStoryCreated = createUserStoryController.createUserStory(project.getCode(), UserStoryStatus.IN_TEST.toString(), 1, "Default Story", 1);
+        boolean isUserStoryCreated = createUserStoryController.createUserStory(project.getCode(),
+                UserStoryStatus.IN_TEST.toString(), 1, "Default Story", 1);
         assertFalse(isUserStoryCreated);
     }
 
@@ -49,7 +51,8 @@ public class CreateUserStoryControllerTest {
         String description = "teste";
         int timeEstimate = -1;
         // Act
-        boolean isAdded = createUserStoryController.createUserStory(project.getCode(), UserStoryStatus.IN_TEST.toString(), priority, description, timeEstimate);
+        boolean isAdded = createUserStoryController.createUserStory(project.getCode(),
+                UserStoryStatus.IN_TEST.toString(), priority, description, timeEstimate);
         //Assert
         assertFalse(isAdded);
     }
@@ -62,7 +65,8 @@ public class CreateUserStoryControllerTest {
         String description = "teste";
         int timeEstimate = 1;
         // Act
-        boolean isAdded = createUserStoryController.createUserStory(project.getCode(), UserStoryStatus.IN_TEST.toString(), priority, description, timeEstimate);
+        boolean isAdded = createUserStoryController.createUserStory(project.getCode(),
+                UserStoryStatus.IN_TEST.toString(), priority, description, timeEstimate);
         //Assert
         assertFalse(isAdded);
     }
@@ -75,7 +79,8 @@ public class CreateUserStoryControllerTest {
         String description = "teste";
         int timeEstimate = 1;
         // Act
-        boolean isAdded = createUserStoryController.createUserStory(project.getCode(), "Erro", priority, description, timeEstimate);
+        boolean isAdded = createUserStoryController.createUserStory(project.getCode(),
+                "Erro", priority, description, timeEstimate);
         //Assert
         assertFalse(isAdded);
     }
@@ -88,34 +93,17 @@ public class CreateUserStoryControllerTest {
         int priority = 1;
         int timeEstimate = 1;
         // Act
-        boolean isAdded = createUserStoryController.createUserStory(project.getCode(), UserStoryStatus.IN_TEST.toString(), priority, null, timeEstimate);
-        boolean isAdded2 = createUserStoryController.createUserStory(project.getCode(), UserStoryStatus.IN_TEST.toString(), priority, "", timeEstimate);
-        boolean isAdded3 = createUserStoryController.createUserStory(project.getCode(), UserStoryStatus.IN_TEST.toString(), priority, "   ", timeEstimate);
+        boolean isAdded = createUserStoryController.createUserStory(project.getCode(),
+                UserStoryStatus.IN_TEST.toString(), priority, null, timeEstimate);
+        boolean isAdded2 = createUserStoryController.createUserStory(project.getCode(),
+                UserStoryStatus.IN_TEST.toString(), priority, "", timeEstimate);
+        boolean isAdded3 = createUserStoryController.createUserStory(project.getCode(),
+                UserStoryStatus.IN_TEST.toString(), priority, "   ", timeEstimate);
         //Assert
         assertFalse(isAdded);
         assertFalse(isAdded2);
         assertFalse(isAdded3);
     }
-
-    //test obter lista de projectos com alguma coisa
-
- /*   @Test
-    public void inicializeprofileslistwithdefaultprofiles() {
-        //Input
-        Company comTest = new Company();
-
-        //Expected
-        List<Profile> expected = new ArrayList<>();
-        expected.add(new Profile("Visitor", "System Profile"));
-        expected.add(new Profile("Administrator", "System Profile"));
-        //Result
-        assertEquals(expected, comTest.getArrayProfile());
-    }
-
-
-   //test obter lista de projectos vazia email nao existe
- */
-
 
     @Test
     public void getProjectListWithPORightEmptyList() {

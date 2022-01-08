@@ -228,7 +228,8 @@ class CompanyTest {
     public void getProjValidProjectCode() {
         //arrange
         Company company = new Company();
-        Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"), new Typology("description"), new BusinessSector("ee"), LocalDate.now(), 5, 555);
+        Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"),
+                new Typology("description"), new BusinessSector("ee"), LocalDate.now(), 5, 555);
         company.add(proj1);
         //act
         Project proj2 = company.getProj("123");
@@ -240,7 +241,8 @@ class CompanyTest {
     public void getProjInvalidProjectCode() {
         //arrange
         Company company = new Company();
-        Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"), new Typology("description"), new BusinessSector("ee"), LocalDate.now(), 5, 555);
+        Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"),
+                new Typology("description"), new BusinessSector("ee"), LocalDate.now(), 5, 555);
         company.add(proj1);
         //act
         Project proj2 = company.getProj("125");
@@ -614,11 +616,14 @@ class CompanyTest {
         assertFalse(result);
     }
 
+        // Test to validate if there is project code (Cris US009)
+
     @Test
     public void getProjectListWithPORightEmptyList() {
         //Arrange
         Company company = new Company();
-        Project project = company.createProject("TEST", "Projecto Test", "decricao", new Customer("marreta@email.pt"), new Typology("description"),
+        Project project = company.createProject("TEST", "Projecto Test", "decricao",
+                new Customer("marreta@email.pt"), new Typology("description"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         // Act
         List<Project> projectList = company.getProjectListWithPORight("email");
@@ -644,7 +649,8 @@ class CompanyTest {
     public void getProjectListWithPORighListWithResults() {
         //Arrange
         Company company = new Company();
-        Project project = company.createProject("TEST", "Projecto Test", "decricao", new Customer("marreta@email.pt"), new Typology("description"),
+        Project project = company.createProject("TEST", "Projecto Test", "decricao",
+                new Customer("marreta@email.pt"), new Typology("description"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.createUserStory(UserStoryStatus.TODO, 12, "Default Story", 6);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
