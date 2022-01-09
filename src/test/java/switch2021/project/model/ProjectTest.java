@@ -322,6 +322,8 @@ class ProjectTest {
         Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .2);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
+        Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, 100, .2);
+
 
         /** project list **/
 
@@ -333,7 +335,7 @@ class ProjectTest {
        Project proj2 = comTest.createProject("2", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
 
        //Act
-        boolean result = proj2.addResource(resAllo1);
+        boolean result = proj2.addResource(resAllo2);
 
         //Assert
         assertTrue(result);

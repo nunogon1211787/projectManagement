@@ -26,7 +26,6 @@ public class AssociateResourceController {
         this.user = this.company.getUserByEmail(email);
         if(this.company.validateAllocation(this.user, percentageOfAllocation, startDate,endDate)) {
             this.company.getProj(projectCode);
-            //this.company.validateAllocation(user, percentageOfAllocation,startDate, endDate);
             this.resource = this.project.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);
             this.project.addResource(resource);
             msg = true;
