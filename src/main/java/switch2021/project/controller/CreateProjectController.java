@@ -3,11 +3,11 @@ package switch2021.project.controller;
 import switch2021.project.model.*;
 import java.time.LocalDate;
 
-public class US005Controller {
+public class CreateProjectController {
     private Company company;
     private Project project;
 
-    public US005Controller(Company company) {
+    public CreateProjectController(Company company) {
         this.company = company;
         this.project = null;
     }
