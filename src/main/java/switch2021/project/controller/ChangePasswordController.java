@@ -3,11 +3,11 @@ package switch2021.project.controller;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser;
 
-public class US011Controller {
+public class ChangePasswordController {
 
     private Company company;
 
-    public US011Controller(Company company, SystemUser user) {
+    public ChangePasswordController(Company company, SystemUser user) {
         this.company = company;
     }
 

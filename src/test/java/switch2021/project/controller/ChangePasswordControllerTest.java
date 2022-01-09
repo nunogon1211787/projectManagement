@@ -8,7 +8,7 @@ import switch2021.project.model.SystemUser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class US011ControllerTest {
+public class ChangePasswordControllerTest {
 
         @Test
         public void changePasswordTestUS0011() {
@@ -16,7 +16,7 @@ public class US011ControllerTest {
             Company company = new Company();
             SystemUser user = new SystemUser("Joana", "123@isep.ipp.pt",
                     "Aluna", "AAA", company.getProfile("visitor"));
-            US011Controller controllerTest = new US011Controller(company, user);
+            ChangePasswordController controllerTest = new ChangePasswordController(company, user);
             company.addSystemUser(user);
             //Assert
             assertTrue(controllerTest.changePassword("123@isep.ipp.pt", "AAA", "BBB"));

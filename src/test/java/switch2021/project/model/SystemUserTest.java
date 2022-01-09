@@ -39,14 +39,27 @@ class SystemUserTest {
     }
 
     @Test
-    public void verifyEmailTest() {
+    public void verifyEmail() {
 
-        //Input
+        //Arrange
         Profile tes = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456", tes);
+        //Act
         String emailCheck = "xxxx";
-        //Result
+        //Assert
         assertTrue(ivan.isYourEmail(emailCheck));
+    }
+
+    @Test
+    public void verifyEmailFail() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "123_img", "abcde", tes);
+        //Act
+        String emailCheck = "4321@isep.ipp.pt";
+        //Assert
+        assertFalse(joana.isYourEmail(emailCheck));
     }
 
     @Test
@@ -59,7 +72,6 @@ class SystemUserTest {
         Profile tes = new Profile("ddd", "pro");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO", tes);
         //Act
-        //assertTrue(joana.updatePassword("HELLO", "GOODBYE"));
         joana.updatePassword("HELLO", "GOODBYE");
         //Assert
         assertEquals("GOODBYE", joana.getPassword());

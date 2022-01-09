@@ -97,7 +97,7 @@ public class Company {
     }
 
     /**
-     * Método para adicionar objetos ás listas.
+     * Método para adicionar objetos às listas.
      **/
 
     public boolean add(Project proj) {
@@ -121,7 +121,7 @@ public class Company {
     }
 
     /**
-     * Method to save system user data (username, function, photo) in System User List
+     * Method to save system user in System User List
      */
 
     public boolean saveSystemUser(SystemUser user) {

@@ -89,26 +89,54 @@ class CompanyTest {
 //                     o mesmo pode ser feito para SystemUser **/
 //    }
     @Test
-    public void UserByEmail() {
+    public void SearchUserByEmail() {
 
+        //Act
         SystemUser ana = new SystemUser("Ana", "1211748@isep.ipp.pt", "Developer", "12345", new Profile("Visit", "System"));
         Company company = new Company(); // criar uma company
         company.saveSystemUser(ana); //ana = objeto da classe SU
-        //Expected
+        //Arrange
         SystemUser ana2 = company.getUserByEmail("1211748@isep.ipp.pt"); // estou a ir buscar um utilizador com o email etc
-        //Result
+        //Assert
         assertEquals(ana, ana2);
+    }
+
+    @Test
+    public void SearchUserByPartiallySwitchedEmail() {
+
+        //Arrange
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", new Profile("XXX", "AAA"));
+        Company company = new Company();
+        company.saveSystemUser(joana);
+        //Act
+        SystemUser joanasilva = company.getUserByEmail("1235@isep.ipp.pt");
+        //Assert
+        assertNotEquals(joana, joanasilva);
+    }
+
+    @Test
+    public void SearchUserByWrongEmail() {
+
+        //Arrange
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", new Profile("XXX", "AAA"));
+        Company company = new Company();
+        company.saveSystemUser(joana);
+        //Act
+        SystemUser joanasilva = company.getUserByEmail("4321@isep.ipp.pt");
+        //Assert
+        assertNotEquals(joana, joanasilva);
     }
 
 
     @Test
     public void verifyUpdatePassword() {
 
-        //Input
+        //Arrange
         Profile tes = new Profile("ddd", "pro");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", tes);
-        //RESULT
+        //Act
         assertTrue(joana.updatePassword("png_123", "GOODBYE"));
+        //Assert
         assertEquals("GOODBYE", joana.getPassword());
     }
 
@@ -581,42 +609,65 @@ class CompanyTest {
     }
 
     @Test
+    public void saveSystemUser() {
+        //Arrange
+        String userName = "Joana Silva";
+        String email = "1234@isep.ipp.pt";
+        String password = "1234";
+        String function = "Aluna";
+        String photo = "123_img";
+        Company company = new Company();
+        SystemUser joana = company.createSystemUser(userName, email, function, photo, password);
+        int initialSize = company.getArraySyUser().size();
+        company.saveSystemUserData(joana);
+        int expected = initialSize +1 ;
+        //Act
+        int result = company.getArraySyUser().size();
+        //Assert
+        assertEquals(expected, result);
+    }
+
+
+    //@Test
+    //@DisplayName("Validate Allocation True")
+    /*public void validateAllocationTrue() {
+    @Test
     @DisplayName("Validate Allocation True")
     public void validateAllocationTrue() {
         //Arrange
         /** user **/
-        Profile pro = new Profile("mku", "sss");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
-        LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
-        LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
+        //Profile pro = new Profile("mku", "sss");
+        //SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        //LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
+        //LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
 
-        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .2);
-        LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
-        LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
-        Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, 100, .2);
+        //Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .2);
+        //LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
+        //LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
+        //Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, 100, .2);
 
         /** project list **/
-       Company comTest = new Company();
-       List<Project> testProjectList = comTest.getArrayProj();
-       LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
-       Customer cust = new Customer("ght@gmail.com");
-       Typology typo = new Typology("typo1");
-       BusinessSector busSector = new BusinessSector("busSec1");
-       Project proj1 = comTest.createProject("1", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
-       Project proj2 = comTest.createProject("2", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
-       Project proj3 = comTest.createProject("3", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
-       testProjectList.add(proj1);
-       testProjectList.add(proj2);
-       testProjectList.add(proj3);
-       proj1.addResource(resAllo1);
-       proj3.addResource(resAllo1);
+       //Company comTest = new Company();
+       //List<Project> testProjectList = comTest.getArrayProj();
+       //LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
+       //Customer cust = new Customer("ght@gmail.com");
+       //Typology typo = new Typology("typo1");
+       //BusinessSector busSector = new BusinessSector("busSec1");
+       //Project proj1 = comTest.createProject("1", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
+       //Project proj2 = comTest.createProject("2", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
+       //Project proj3 = comTest.createProject("3", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
+       //testProjectList.add(proj1);
+       //testProjectList.add(proj2);
+       //testProjectList.add(proj3);
+       //proj1.addResource(resAllo1);
+       //proj3.addResource(resAllo1);
 
        //Act
-        boolean result = proj2.addResource(resAllo1);
+       //boolean result = proj2.addResource(resAllo1);
 
         //Assert
-        assertTrue(result);
-    }
+        //assertTrue(result);
+    //}
 
     @Test
     @DisplayName("Validate Allocation False")
