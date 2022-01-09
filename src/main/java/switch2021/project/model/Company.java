@@ -420,13 +420,13 @@ public class Company {
 
         for (int i = 0; i < arrayProj.size(); i++) {
             for (int j = 0; j < arrayProj.get(i).getProjectTeam().size(); j++) {
-                if (arrayProj.get(i).getTeamMemberByIndex(j).equals(user) &&
+                if (arrayProj.get(i).getTeamMemberByIndex(j).getUser().equals(user) &&
                         arrayProj.get(i).getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
                     sum = sum + arrayProj.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();
                 }
             }
         }
-        if (sum + percentageOfAllocation < 1) {
+        if ((sum + percentageOfAllocation) <= 1) {
             msg = true;
         }
         return msg;

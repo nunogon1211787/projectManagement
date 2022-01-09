@@ -7,7 +7,7 @@ import switch2021.project.model.*;
 import java.time.LocalDate;
 import java.util.List;
 
-public class US007ControllerTest {
+public class AssociateResourceTest {
 
 //    @Test
 //    @DisplayName("Teste construtor de US007Controller")

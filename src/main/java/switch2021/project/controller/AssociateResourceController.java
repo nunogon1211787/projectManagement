@@ -7,14 +7,14 @@ import switch2021.project.model.SystemUser;
 
 import java.time.LocalDate;
 
-public class US007Controller {
+public class AssociateResourceController {
     private Company company;
     private SystemUser user;
     private Project project;
     private Resource resource;
 
 
-    public US007Controller(Company company, Project project){
+    public AssociateResourceController(Company company, Project project){
         this.company = company;
         this.project = project;
         this.user = null;

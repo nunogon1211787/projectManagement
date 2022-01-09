@@ -241,7 +241,7 @@ public class Project {
     public Resource getTeamMemberByIndex(int index) {
         Resource res = null;
         for (int i = 0; i < projectTeam.size(); i++) {
-            if (projectTeam.get(i).equals(index)) {
+            if (i == index) {
                 res = projectTeam.get(i);
             }
         }
@@ -251,10 +251,10 @@ public class Project {
     /** Método para Validar Resource (Carolina US007) **/
 
     public boolean validateResource(Resource resource){
-        boolean msg = false;
+        boolean msg = true;
         for (int i = 0; i < projectTeam.size(); i++) {
             if(projectTeam.get(i).equals(resource)){
-        msg = true;
+        msg = false;
             }
         }
         return msg;

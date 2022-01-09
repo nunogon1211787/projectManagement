@@ -309,4 +309,63 @@ class ProjectTest {
 
     }
 
+    @Test
+    @DisplayName("Teste add Resource")
+    public void addResource(){
+        //Arrange
+        /** user **/
+        Profile pro = new Profile("mku", "sss");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
+        LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
+
+        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .2);
+        LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
+        LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
+
+        /** project list **/
+
+       Company comTest = new Company();
+       LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
+       Customer cust = new Customer("ght@gmail.com");
+       Typology typo = new Typology("typo1");
+       BusinessSector busSector = new BusinessSector("busSec1");
+       Project proj2 = comTest.createProject("2", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
+
+       //Act
+        boolean result = proj2.addResource(resAllo1);
+
+        //Assert
+        assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Teste getTeamMemberByIndex")
+    public void getTeamMemberByIndex(){
+        //Arrange
+        /** user **/
+        Profile pro = new Profile("mku", "sss");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        SystemUser newUser2 = new SystemUser("xyz", "fase", "des", "gth", pro);
+        LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
+        LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
+        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+
+        /** project **/
+        Company comTest = new Company();
+        LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
+        Customer cust = new Customer("ght@gmail.com");
+        Typology typo = new Typology("typo1");
+        BusinessSector busSector = new BusinessSector("busSec1");
+        Project proj1 = comTest.createProject("1", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
+        Project proj3 = comTest.createProject("3", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
+        proj1.addResource(resAllo1);
+        proj3.addResource(resAllo1);
+
+        //Act
+        Resource result = proj1.getTeamMemberByIndex(0);
+        //Assert
+        assertEquals(resAllo1, result);
+    }
+
 }
