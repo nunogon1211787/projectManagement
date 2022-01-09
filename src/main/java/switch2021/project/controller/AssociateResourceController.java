@@ -7,14 +7,14 @@ import switch2021.project.model.SystemUser;
 
 import java.time.LocalDate;
 
-public class US007Controller {
+public class AssociateResourceController {
     private Company company;
     private SystemUser user;
     private Project project;
     private Resource resource;
 
 
-    public US007Controller(Company company, Project project){
+    public AssociateResourceController(Company company, Project project){
         this.company = company;
         this.project = project;
         this.user = null;
@@ -26,7 +26,6 @@ public class US007Controller {
         this.user = this.company.getUserByEmail(email);
         if(this.company.validateAllocation(this.user, percentageOfAllocation, startDate,endDate)) {
             this.company.getProj(projectCode);
-            //this.company.validateAllocation(user, percentageOfAllocation,startDate, endDate);
             this.resource = this.project.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);
             this.project.addResource(resource);
             msg = true;
