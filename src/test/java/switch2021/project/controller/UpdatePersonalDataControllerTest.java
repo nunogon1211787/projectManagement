@@ -11,7 +11,7 @@ public class UpdatePersonalDataControllerTest {
 
 
     @Test
-    public void getUserTest() {
+    public void getUser() {
         //Arrange
         Company company = new Company();
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company, new SystemUser("Joana", "123@isep.ipp.pt",

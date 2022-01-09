@@ -84,10 +84,110 @@ class SystemUserTest {
         //password that came from User Interface (UI).
         //Arrange
         Profile tes = new Profile("ddd", "pro");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO_01", tes);
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+                "png_123", "HELLO_01", tes);
         //Act
         assertFalse(joana.updatePassword("HELLO_02", "GOODBYE"));
 
+    }
+
+    @Test
+    public void setPasswordSucess() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", tes);
+        //Act
+        joana.setPassword("123");
+        //Assert
+        assertEquals(joana.getPassword(), "123");
+    }
+
+    @Test
+    public void setPasswordFail() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", tes);
+        //Act
+        joana.setPassword("123");
+        //Assert
+        assertNotEquals(joana.getPassword(), "321");
+    }
+
+
+    @Test
+    public void setUserNameSucess() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", tes);
+        //Act
+        joana.setUserName("Joana");
+        //Assert
+        assertEquals(joana.getUserName(), "Joana");
+    }
+
+    @Test
+    public void setUserNameFail() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", tes);
+        //Act
+        joana.setUserName("Joana");
+        //Assert
+        assertNotEquals(joana.getUserName(), "Isabel");
+    }
+
+    @Test
+    public void setFunctionSucess() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", tes);
+        //Act
+        joana.setFunction("Aluna_10");
+        //Assert
+        assertEquals(joana.getFunction(), "Aluna_10");
+    }
+
+    @Test
+    public void setFuncionFail() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", tes);
+        //Act
+        joana.setFunction("Aluna_10");
+        //Assert
+        assertNotEquals(joana.getFunction(), "Project Manager");
+    }
+
+    @Test
+    public void setPhotoSucess() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+                "img_789", "123", tes);
+        //Act
+        joana.setPhoto("img_789");
+        //Assert
+        assertEquals(joana.getPhoto(), "img_789");
+    }
+
+    @Test
+    public void setPhotoFail() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+                "img_789", "123", tes);
+        //Act
+        joana.setPhoto("img_789");
+        //Assert
+        assertNotEquals(joana.getPhoto(), "img_000");
     }
 
     @Test

@@ -5,13 +5,12 @@ import switch2021.project.model.Company;
 import switch2021.project.model.Profile;
 import switch2021.project.model.SystemUser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ChangePasswordControllerTest {
 
         @Test
-        public void changePasswordTestUS0011() {
+        public void changePassword() {
             //Arrange
             Company company = new Company();
             SystemUser user = new SystemUser("Joana", "123@isep.ipp.pt",
@@ -21,4 +20,16 @@ public class ChangePasswordControllerTest {
             //Assert
             assertTrue(controllerTest.changePassword("123@isep.ipp.pt", "AAA", "BBB"));
         }
+
+    @Test
+    public void changePasswordFail() {
+        //Arrange
+        Company company = new Company();
+        SystemUser user = new SystemUser("Joana", "123@isep.ipp.pt",
+                "Aluna", "AAA", company.getProfile("visitor"));
+        ChangePasswordController controllerTest = new ChangePasswordController(company, user);
+        company.addSystemUser(user);
+        //Assert
+        assertTrue(controllerTest.changePassword("123@isep.ipp.pt", "BBB", "CCC"));
+    }
     }
