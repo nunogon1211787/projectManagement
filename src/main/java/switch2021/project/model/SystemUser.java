@@ -176,6 +176,7 @@ public class SystemUser {
         return this.password;
     }
 
+    //seria mais intuitivo alterar para getUserActivated em x de isUserActivated
     public boolean isUserActivated() {
         return this.activateUser;
     }
@@ -186,7 +187,8 @@ public class SystemUser {
 
 
     public boolean activateUser() {
-        return true;
+
+        return this.activateUser= true;
     }
 
     public String getAssignedProfile(int idx) {

@@ -82,7 +82,6 @@ class SystemUserTest {
 
         //Test to verify if the oldpassword, stored in the system user, is equal or diferent from the
         //password that came from User Interface (UI).
-
         //Arrange
         Profile tes = new Profile("ddd", "pro");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO_01", tes);
@@ -608,6 +607,19 @@ class SystemUserTest {
         int[] profiles = {}; // profile Id
         //Result
         assertFalse(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    public void activationUser() {
+
+        //Test to activate the user
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser ana = new SystemUser("Ana", "1211748@isep.ipp.pt", "User_12", "png_234", "HELLO", tes);
+        //Act
+        ana.activateUser();
+        //Assert
+        assertTrue(ana.isUserActivated());
     }
 
 }
