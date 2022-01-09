@@ -14,6 +14,7 @@ public class Project {
     private String projectName;
     private String description;
 
+    private ProductBacklog productBacklog;
     private Customer customer;
     private Typology typology;
     private ProjectStatus projectStatus;
@@ -21,7 +22,6 @@ public class Project {
     private SystemUser productOwner;   /** Adicionado **/
 
     private BusinessSector businessSector;  // Para já coloquei em tipo Business Sector e não lista. Depois será para mudar.
-    private List<UserStory> productBacklog;
     private List<Resource> projectTeam; //lista de resources alocados ao projecto (Carolina)
 
     private LocalDate startDate;
@@ -49,8 +49,7 @@ public class Project {
         this.startDate = startDate;
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
-
-        this.productBacklog = new ArrayList<>();
+        this.productBacklog = new ProductBacklog();
         this.projectTeam = new ArrayList<>();
     }
 
@@ -64,7 +63,7 @@ public class Project {
     }
 
     public Project() {
-        this.productBacklog = new ArrayList<>();
+        this.productBacklog = new ProductBacklog();
     }
 
     public void setCode(String code) {
@@ -126,7 +125,7 @@ public class Project {
     }
 
     public List<UserStory> getProductBacklog() {
-        return productBacklog;
+        return productBacklog.getUserStoryList();
     }
 
     public SystemUser getScrumMaster() {
@@ -170,7 +169,7 @@ public class Project {
     }
 
     public void setProductBacklog(List<UserStory> productBacklog) {
-        this.productBacklog = productBacklog;
+        this.productBacklog.setUserStoryList(productBacklog);
     }
 
     public void setStartDate(LocalDate startDate) {
@@ -193,56 +192,9 @@ public class Project {
     /**
      * Methods for createUserStory (Cris US009)
      **/
-    public UserStory createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
-        return new UserStory(code, userStoryStatus, priority, description, timeEstimate);
-    }
-
-    /**
-     * Methods for addUserStory to the productBacklog (Cris US009)
-     **/
-
-    public boolean addUserStory(UserStory userStory) {
-        //user story data validation
-        if (!isValidUserStory(userStory)) {
-            return false;
-        }
-        this.getProductBacklog().add(userStory);
-        return true;
-    }
-
-    /**
-     * Methods for validate data (Cris US009)
-     **/
-
-    private boolean isValidUserStory(UserStory us) {
-        //check if priority is invalid
-        if (us.getPriority() < 0) {
-            return false;
-        }
-
-        //check if description is invalid
-        if (us.getDescription() == null || us.getDescription().trim().isEmpty()) {
-            return false;
-        }
-
-        // check duplicate story
-        for (UserStory userStory : productBacklog) {
-            if (us.getDescription().trim().equalsIgnoreCase(userStory.getDescription().trim()) && userStory.getProjectCode().equals(us.getProjectCode())) {
-                return false;
-            }
-        }
-
-        // check invalid project code
-        if (us.getProjectCode() == null || us.getProjectCode().trim().isEmpty()) {
-            return false;
-        }
-
-        // check estimated time is invalid
-        if (us.getTimeEstimate() < 0) {
-            return false;
-        }
-
-        return true;
+    public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
+        UserStory us = productBacklog.createUserStory(code, userStoryStatus, priority, description, timeEstimate);
+        return us == null ? false : productBacklog.addUserStory(us);
     }
 
 

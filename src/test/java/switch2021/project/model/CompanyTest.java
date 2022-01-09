@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.controller.CreateUserStoryController;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -100,7 +101,6 @@ class CompanyTest {
     }
 
 
-
     @Test
     public void verifyUpdatePassword() {
 
@@ -118,88 +118,89 @@ class CompanyTest {
 
 
     // Test add profile in company (Cris US013)
+
     @Test
     public void addNewProfileWithFailNameEmpty() {
-        //Input
+        //Arrange
         Company company = new Company();
         Profile up = company.createProfile("", "System Profile");
-        //Expected
+        // Act
         boolean result = company.add(up);
-        //Result
+        //Assert
         assertFalse(result);
     }
 
     @Test
     public void addNewProfileWithFailTypeEmpty() {
-        //Input
+        //Arrange
         Company company = new Company();
         Profile up = company.createProfile("Visitor", "");
-        //Expected
+        //Act
         boolean expected = false;
         boolean result = company.add(up);
-//Result
+        //Assert
         assertFalse(result);
     }
 
     @Test
     public void addNewProfileWithFailNameAndProfileEmpty() {
-//Input
+        //Arrange
         Company company = new Company();
         Profile up = company.createProfile("", "");
-//Expected
+        //Act
         boolean expected = false;
         boolean result = company.add(up);
-        //Result
+        //Assert
         assertFalse(result);
     }
 
     @Test
     public void addNewProfileWithInvalidProfileType() {
-//Input
+        //Arrange
         Company company = new Company();
         Profile up = company.createProfile("Visitor", "Other Type Profile");
-//Expected
+        //Act
         boolean expected = false;
         boolean result = company.add(up);
-//Result
+       //Assert
         assertFalse(result);
     }
 
     @Test
     public void addNewProfileWithFailProfileAlreadyExist() {
-//Input
+        //Arrange
         Company company = new Company();
         Profile up = company.createProfile("Visitor", "System Profile");
-//Expected
+        //Act
         boolean expected = false;
         boolean result = company.add(up);
-//Result
+        //Assert
         assertFalse(result);
     }
 
     @Test
     public void addNewProfileWithSuccess() {
-//Input
+        //Arrange
         Company company = new Company();
-//Expected
+        //Act
         int inicialSize = company.getArrayProfile().size();
         Profile up = company.createProfile("Cris", "System Profile");
         company.add(up);
-//Result
+        //Assert
         assertEquals(company.getArrayProfile().size(), inicialSize + 1);
     }
 
     @Test
     public void addNewProfileWithSuccess2() {
-//Input
+        //Arrange
         Company company = new Company();
-// Expected
+        //Act
         int inicialSize = company.getArrayProfile().size();
         Profile up1 = company.createProfile("Cris", "System Profile");
         Profile up2 = company.createProfile("Cris_Dani", "System Profile");
         company.add(up1);
         company.add(up2);
-//Result
+        //Assert
         assertEquals(company.getArrayProfile().size(), inicialSize + 2);
     }
 
@@ -223,27 +224,29 @@ class CompanyTest {
      **/
 
     // Test to validate if there is project code (Cris US009)
-    /*@Test
+    @Test
     public void getProjValidProjectCode() {
         //arrange
         Company company = new Company();
-        Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"), new Typology("description"), null, LocalDate.now(), 5, 555);
+        Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"),
+                new Typology("description"), new BusinessSector("ee"), LocalDate.now(), 5, 555);
         company.add(proj1);
         //act
         Project proj2 = company.getProj("123");
-        // assert information
+        //assert information
         assertEquals(proj1, proj2);
-    }*/
+    }
 
     @Test
     public void getProjInvalidProjectCode() {
         //arrange
         Company company = new Company();
-        Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"), new Typology("description"), null, LocalDate.now(), 5, 555);
+        Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"),
+                new Typology("description"), new BusinessSector("ee"), LocalDate.now(), 5, 555);
         company.add(proj1);
         //act
         Project proj2 = company.getProj("125");
-        // assert information
+        //assert information
         assertNull(proj2);
     }
 
@@ -611,5 +614,52 @@ class CompanyTest {
 
         //Assert
         assertFalse(result);
+    }
+
+        // Test to validate if there is project code (Cris US009)
+
+    @Test
+    public void getProjectListWithPORightEmptyList() {
+        //Arrange
+        Company company = new Company();
+        Project project = company.createProject("TEST", "Projecto Test", "decricao",
+                new Customer("marreta@email.pt"), new Typology("description"),
+                new BusinessSector("description"), LocalDate.now(), 10, 100000);
+        // Act
+        List<Project> projectList = company.getProjectListWithPORight("email");
+        //Assert
+        assertEquals(0, projectList.size());
+
+    }
+
+    @Test
+    public void getProjectListWithPORightWithEmptyEmailAndGetEmptyList() {
+        //Arrange
+        Company company = new Company();
+        // Act
+        List<Project> projectList = company.getProjectListWithPORight("");
+        List<Project> projectList2 = company.getProjectListWithPORight(null);
+        //Assert
+        assertEquals(0, projectList.size());
+        assertEquals(0, projectList2.size());
+
+    }
+
+    @Test
+    public void getProjectListWithPORighListWithResults() {
+        //Arrange
+        Company company = new Company();
+        Project project = company.createProject("TEST", "Projecto Test", "decricao",
+                new Customer("marreta@email.pt"), new Typology("description"),
+                new BusinessSector("description"), LocalDate.now(), 10, 100000);
+        project.createUserStory(UserStoryStatus.TODO, 12, "Default Story", 6);
+        project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
+                "Product Owner", "AAA", company.getProfile("Product Owne")));
+        company.add(project);
+        // Act
+        List<Project> projectList = company.getProjectListWithPORight("123@isep.ipp.pt");
+        //Assert
+        assertNotEquals(0, projectList.size());
+
     }
 }
