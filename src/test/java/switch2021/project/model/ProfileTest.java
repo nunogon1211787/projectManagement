@@ -1,5 +1,6 @@
 package switch2021.project.model;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,6 +39,17 @@ class ProfileTest {
         //Result
         assertTrue(test.isValidId(check));
     }
+
+    //achar uma alternativa para testar o erro
+   /* @Test
+    public void validateRequestTestOutOFBound () throws IndexOutOfBoundsException{
+       Company com = new Company();
+        Profile pro = com.arrayProfile.get(7);
+        Throwable exception = assertThrows(IndexOutOfBoundsException.class,
+                () -> { pro.isValidId(20); });
+        Assertions.assertTrue(true);
+    }*/
+
 
     @Test
     void isValidIdwith5Profile() {

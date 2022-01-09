@@ -7,6 +7,7 @@ public class SystemUser {
     /**
      * Attributes of systemUser´s class
      **/
+    private int userId;
     private String userName;
     private String email;
     private String photo;
@@ -179,6 +180,10 @@ public class SystemUser {
         return result;
 
     }
+
+    public boolean isYourID(int id){return this.userId == id ;}
+
+
 
     /**
      * Método para verificar se o profile recebido (by ID) está associado (tem na lista) ao objeto.

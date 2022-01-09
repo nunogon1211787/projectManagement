@@ -15,6 +15,15 @@ public class Profile {
     private String type;
 
 
+    /**
+     * Método para verificar se atributo "type" do objecto é igual a "type" do parâmetro.
+     *
+     */
+
+    public boolean hasEqualType (String type) {return this.type.equals(type);}
+
+
+
 
     /**
      * Profle Constructors
@@ -66,7 +75,14 @@ public class Profile {
      */
 
     public boolean isValidId(int x) {
-        return (x == this.id_Profile);
+        try {
+            if (x == this.id_Profile) {
+                return true;
+            }
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public boolean isValidName(String name) {
