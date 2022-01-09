@@ -24,6 +24,33 @@ class ProjectTest {
     private Profile User;
 
     @Test
+    @DisplayName("Teste do construtor de Project")
+    public void checkProject() {
+        //Arrange
+        LocalDate date = LocalDate.of(2021, 12, 12);
+        ProjectSettings test= new ProjectSettings();
+        Typology typology = test.getTypologyById(0);
+        Customer customer = test.getCustomerById(0);
+        BusinessSector businessSector = test.getBussinessSectorById(0);
+
+        Project newProject = new Project("123testcode", "Test_Project", "test", customer,
+                                            typology, businessSector, date, 7, 5000);
+
+        // Expected and results
+        assertEquals("123testcode", newProject.getCode());
+        assertEquals("Test_Project", newProject.getProjectName());
+        assertEquals("test", newProject.getDescription());
+        assertEquals(test.getCustomerById(0), newProject.getCustomer());
+        assertEquals(test.getTypologyById(0), newProject.getTypology());
+        assertEquals(test.getBussinessSectorById(0), newProject.getBusinessSector());
+        assertEquals(test.getProjectStatusById(0), newProject.getProjectStatus());
+        assertEquals(date, newProject.getStartDate());
+        assertEquals(7, newProject.getNumberOfSprints());
+        assertEquals(5000, newProject.getBudget());
+
+    }
+
+    @Test
     @DisplayName("Teste de check Code")
     public void checkCode() {
         // Expected
@@ -182,7 +209,7 @@ class ProjectTest {
         assertFalse(comp.validateProject(comp.createProject("123testcode", "prototype", "test", customer,
                 typology, businessSector, date, 7, -1)));
         assertFalse(comp.validateProject(comp.createProject("123testcode", "prototype", "test", customer,
-               typology, businessSector, date, -7, 5000)));
+                typology, businessSector, date, -7, 5000)));
         assertFalse(comp.validateProject(comp.createProject("", "prototype", "test", customer,
                 typology, businessSector, date, 7, 5000)));
         assertFalse(comp.validateProject(comp.createProject("123testcode", "", "test", customer,
@@ -194,7 +221,6 @@ class ProjectTest {
      **/
 
     // Test adding userStory to the project (Cris US009)
-
     @Test
     public void createUserStoryPriorityIsInvalid() {
         //Arrange
@@ -281,16 +307,16 @@ class ProjectTest {
     public void editProjectSetsTest() {
         //Arrange
         Project project = new Project();
-        SystemUser scrumMaster = new SystemUser("Antonio","antonio@isep.ipp.pt", "Designer", "123", User);
-        SystemUser productOwner = new SystemUser("Manuel","manuel@isep.ipp.pt", "Designer mini", "123", User);
-        SystemUser user = new SystemUser("Antonio","antonio@isep.ipp.pt", "Designer", "123", User);
-        SystemUser user2 = new SystemUser("Manuel","manuel@isep.ipp.pt", "Designer mini", "123", User);
+        SystemUser scrumMaster = new SystemUser("Antonio", "antonio@isep.ipp.pt", "Designer", "123", User);
+        SystemUser productOwner = new SystemUser("Manuel", "manuel@isep.ipp.pt", "Designer mini", "123", User);
+        SystemUser user = new SystemUser("Antonio", "antonio@isep.ipp.pt", "Designer", "123", User);
+        SystemUser user2 = new SystemUser("Manuel", "manuel@isep.ipp.pt", "Designer mini", "123", User);
         ProjectStatus status = new ProjectStatus("Planned");
 
         // Act
         project.setProjectName("XPTO9");
-        project.setStartDate(LocalDate.of(2022, 2,10));
-        project.setEndDate(LocalDate.of(2022,4,20));
+        project.setStartDate(LocalDate.of(2022, 2, 10));
+        project.setEndDate(LocalDate.of(2022, 4, 20));
         project.setNumberOfSprints(5);
         project.setProjectStatus(status);
         project.setSprintDuration(2);
@@ -299,8 +325,8 @@ class ProjectTest {
 
         //Assert
         assertEquals("XPTO9", project.getProjectName());
-        assertEquals(LocalDate.of(2022,2,10), project.getStartDate());
-        assertEquals(LocalDate.of(2022,4,20), project.getEndDate());
+        assertEquals(LocalDate.of(2022, 2, 10), project.getStartDate());
+        assertEquals(LocalDate.of(2022, 4, 20), project.getEndDate());
         assertEquals(5, project.getNumberOfSprints());
         assertEquals(status, project.getProjectStatus());
         assertEquals(2, project.getSprintDuration());
@@ -311,7 +337,7 @@ class ProjectTest {
 
     @Test
     @DisplayName("Teste add Resource")
-    public void addResource(){
+    public void addResource() {
         //Arrange
         /** user **/
         Profile pro = new Profile("mku", "sss");
@@ -327,14 +353,14 @@ class ProjectTest {
 
         /** project list **/
 
-       Company comTest = new Company();
-       LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
-       Customer cust = new Customer("ght@gmail.com");
-       Typology typo = new Typology("typo1");
-       BusinessSector busSector = new BusinessSector("busSec1");
-       Project proj2 = comTest.createProject("2", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
+        Company comTest = new Company();
+        LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
+        Customer cust = new Customer("ght@gmail.com");
+        Typology typo = new Typology("typo1");
+        BusinessSector busSector = new BusinessSector("busSec1");
+        Project proj2 = comTest.createProject("2", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
 
-       //Act
+        //Act
         boolean result = proj2.addResource(resAllo2);
 
         //Assert
@@ -343,7 +369,7 @@ class ProjectTest {
 
     @Test
     @DisplayName("Teste getTeamMemberByIndex")
-    public void getTeamMemberByIndex(){
+    public void getTeamMemberByIndex() {
         //Arrange
         /** user **/
         Profile pro = new Profile("mku", "sss");
