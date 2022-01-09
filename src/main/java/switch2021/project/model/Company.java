@@ -69,10 +69,6 @@ public class Company {
         if (user == null) {
             return false;
         }
-        if (user.getUserName().trim().isEmpty() || user.getEmail().trim().isEmpty() || user.getFunction().trim().isEmpty() ||
-                user.getPassword().trim().isEmpty() || user.getAssignedProfileList().isEmpty()) {
-            return false;
-        }
         if (hasEmail(user.getEmail())) {
             return false;
         }
@@ -81,7 +77,6 @@ public class Company {
         }
         return !this.arraySyUser.contains(user);
     }
-
 
     boolean hasEmail(String newUserEmail) {
         for (SystemUser newUser : arraySyUser) {
@@ -141,7 +136,6 @@ public class Company {
     }
 
 
-    //este é igual ao de cima mas sem validação. É preciso?...(Nuno)
     public boolean addSystemUser(SystemUser syUser) {
         this.arraySyUser.add(syUser);
         return true;

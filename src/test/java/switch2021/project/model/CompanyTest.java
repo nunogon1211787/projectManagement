@@ -91,7 +91,7 @@ class CompanyTest {
     @Test
     public void UserByEmail() {
 
-        SystemUser ana = new SystemUser("", "1211748@isep.ipp.pt", "", "", new Profile("", ""));
+        SystemUser ana = new SystemUser("Ana", "1211748@isep.ipp.pt", "Developer", "12345", new Profile("Visit", "System"));
         Company company = new Company(); // criar uma company
         company.saveSystemUser(ana); //ana = objeto da classe SU
         //Expected
@@ -118,7 +118,6 @@ class CompanyTest {
 
 
     // Test add profile in company (Cris US013)
-
     @Test
     public void addNewProfileWithFailNameEmpty() {
         //Arrange
@@ -162,7 +161,7 @@ class CompanyTest {
         //Act
         boolean expected = false;
         boolean result = company.add(up);
-       //Assert
+        //Assert
         assertFalse(result);
     }
 
@@ -458,16 +457,15 @@ class CompanyTest {
     }
 
     @Test
-    public void saveSystemUserSuccess() {
+    public void saveSystemUserWithPhotoSuccess() {
         //Arrange
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
         String password = "ghi";
         String function = "tester";
         String photo = "photo";
-        Profile profileTest = new Profile("Visitor", "System Profile");
-        SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
         Company company = new Company();
+        SystemUser newUser = company.createSystemUser(userName, email, function, photo, password);
         int initialSize = company.getArraySyUser().size();
 
         company.saveSystemUserData(newUser);
@@ -479,62 +477,107 @@ class CompanyTest {
     }
 
     @Test
-    public void saveSystemUserFailEmailAlreadyExists() {
+    public void saveSystemUserWithoutPhotoSuccess() {
         //Arrange
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
         String password = "ghi";
         String function = "tester";
-        String photo = "photo";
-        Profile profileTest = new Profile("Visitor", "System Profile");
-        SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
         Company company = new Company();
-        company.saveSystemUserData(newUser);
+        SystemUser newUser = company.createSystemUser(userName, email, function, password);
+        int initialSize = company.getArraySyUser().size();
 
-        String userName2 = "maneloliveira";
-        SystemUser newUser2 = new SystemUser(userName2, email, function, photo, password, profileTest);
+        company.saveSystemUserData(newUser);
+        int expected = initialSize + 1;
         //Act
-        boolean result = company.saveSystemUserData(newUser2);
+        int result = company.getArraySyUser().size();
         //Assert
-        assertFalse(result);
+        assertEquals(expected, result);
     }
 
     @Test
-    public void saveSystemUserFailUserNameAlreadyExists() {
+    public void saveSystemUserWithPhotoFailEmailAlreadyExists() {
         //Arrange
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
         String password = "ghi";
         String function = "tester";
         String photo = "photo";
-        Profile profileTest = new Profile("Visitor", "System Profile");
-        SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
         Company company = new Company();
+        SystemUser newUser = company.createSystemUser(userName, email, function, photo, password);
+        company.saveSystemUserData(newUser);
+
+        String userName2 = "maneloliveira";
+        SystemUser newUser2 = company.createSystemUser(userName2, email, function, photo, password);
+        //Assert
+        assertFalse(company.saveSystemUserData(newUser2));
+    }
+
+    @Test
+    public void saveSystemUserWithoutPhotoFailEmailAlreadyExists() {
+        //Arrange
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String function = "tester";
+        Company company = new Company();
+        SystemUser newUser = company.createSystemUser(userName, email, function, password);
+        company.saveSystemUserData(newUser);
+
+        String userName2 = "maneloliveira";
+        SystemUser newUser2 = company.createSystemUser(userName2, email, function, password);
+        //Assert
+        assertFalse(company.saveSystemUserData(newUser2));
+    }
+
+    @Test
+    public void saveSystemUserWithPhotoFailUserNameAlreadyExists() {
+        //Arrange
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String function = "tester";
+        String photo = "photo";
+        Company company = new Company();
+        SystemUser newUser = company.createSystemUser(userName, email, function, photo, password);
         company.saveSystemUserData(newUser);
 
         String email2 = "maneloliveira@beaver.com";
-        SystemUser newUser2 = new SystemUser(userName, email2, function, photo, password, profileTest);
-        //Act
-        boolean result = company.saveSystemUserData(newUser2);
+        SystemUser newUser2 = company.createSystemUser(userName, email2, function, photo, password);
         //Assert
-        assertFalse(result);
+        assertFalse(company.saveSystemUserData(newUser2));
+    }
+
+    @Test
+    public void saveSystemUserWithoutPhotoFailUserNameAlreadyExists() {
+        //Arrange
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String function = "tester";
+        Company company = new Company();
+        SystemUser newUser = company.createSystemUser(userName, email, function, password);
+        company.saveSystemUserData(newUser);
+
+        String email2 = "maneloliveira@beaver.com";
+        SystemUser newUser2 = company.createSystemUser(userName, email2, function, password);
+        //Assert
+        assertFalse(company.saveSystemUserData(newUser2));
     }
 
     @Test
     public void saveSystemUserFailUserNameEmpty() {
-        //Arrange
-        String userName = "";
-        String email = "manueloliveira@beaver.com";
-        String password = "ghi";
-        String function = "tester";
-        String photo = "photo";
-        Profile profileTest = new Profile("Visitor", "System Profile");
-        SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
-        Company company = new Company();
-        //Act
-        boolean result = company.saveSystemUserData(newUser);
         //Assert
-        assertFalse(result);
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String userName = "";
+            String email = "manueloliveira@beaver.com";
+            String password = "ghi";
+            String function = "tester";
+            String photo = "photo";
+            Company company = new Company();
+            company.createSystemUser(userName, email, function, photo, password);
+        });
     }
 
     //@Test
@@ -600,9 +643,9 @@ class CompanyTest {
         Customer cust = new Customer("ght@gmail.com");
         Typology typo = new Typology("typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
-        Project proj1 = comTest.createProject("1", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
-        Project proj2 = comTest.createProject("2", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
-        Project proj3 = comTest.createProject("3", "gfd", "ghj", cust,typo, busSector, startProjectDate, 30,4500);
+        Project proj1 = comTest.createProject("1", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
+        Project proj2 = comTest.createProject("2", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
+        Project proj3 = comTest.createProject("3", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
         testProjectList.add(proj1);
         testProjectList.add(proj2);
         testProjectList.add(proj3);
@@ -616,7 +659,7 @@ class CompanyTest {
         assertFalse(result);
     }
 
-        // Test to validate if there is project code (Cris US009)
+    // Test to validate if there is project code (Cris US009)
 
     @Test
     public void getProjectListWithPORightEmptyList() {
