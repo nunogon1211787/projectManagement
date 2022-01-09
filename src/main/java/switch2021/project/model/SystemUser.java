@@ -19,6 +19,10 @@ public class SystemUser {
      * Contructor without photo
      **/
     public SystemUser(String userName, String email, String function, String password, Profile profile) {
+        checkUserNameRules(userName);
+        checkEmailRules(email);
+        checkFunctionRules(function);
+        checkPasswordRules(password);
         this.userName = userName;
         this.email = email;
         this.photo = "";
@@ -33,6 +37,10 @@ public class SystemUser {
      * Contructor with photo
      **/
     public SystemUser(String userName, String email, String function, String photo, String password, Profile profile) {
+        checkUserNameRules(userName);
+        checkEmailRules(email);
+        checkFunctionRules(function);
+        checkPasswordRules(password);
         this.userName = userName;
         this.email = email;
         this.photo = photo;
@@ -41,6 +49,34 @@ public class SystemUser {
         this.activateUser = false;
         this.assignedProfileList = new ArrayList<>();
         this.assignedProfileList.add(profile);
+    }
+
+    private void checkUserNameRules(String userName) {
+        if (userName.trim().isEmpty())
+            throw new IllegalArgumentException("Username cannot be empty.");
+        if ((userName.length() < 2))
+            throw new IllegalArgumentException("Username must be at least 2 characters");
+    }
+
+    private void checkEmailRules(String email) {
+        if (email.trim().isEmpty())
+            throw new IllegalArgumentException("Email cannot be empty.");
+        if ((email.length() < 2))
+            throw new IllegalArgumentException("Email must be at least 2 characters");
+    }
+
+    private void checkFunctionRules(String function) {
+        if (function.trim().isEmpty())
+            throw new IllegalArgumentException("Function cannot be empty.");
+        if ((function.length() < 2))
+            throw new IllegalArgumentException("Function must be at least 2 characters");
+    }
+
+    private void checkPasswordRules(String password) {
+        if (password.trim().isEmpty())
+            throw new IllegalArgumentException("Password cannot be empty.");
+        if ((password.length() < 2))
+            throw new IllegalArgumentException("Password must be at least 2 characters");
     }
 
     /**

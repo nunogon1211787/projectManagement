@@ -281,10 +281,10 @@ class ProjectTest {
     public void editProjectSetsTest() {
         //Arrange
         Project project = new Project();
-        SystemUser scrumMaster = new SystemUser("Antonio","antonio@isep.ipp.pt", "Designer", "", User);
-        SystemUser productOwner = new SystemUser("Manuel","manuel@isep.ipp.pt", "Designer mini", "", User);
-        SystemUser user = new SystemUser("Antonio","antonio@isep.ipp.pt", "Designer", "", User);
-        SystemUser user2 = new SystemUser("Manuel","manuel@isep.ipp.pt", "Designer mini", "", User);
+        SystemUser scrumMaster = new SystemUser("Antonio","antonio@isep.ipp.pt", "Designer", "123", User);
+        SystemUser productOwner = new SystemUser("Manuel","manuel@isep.ipp.pt", "Designer mini", "123", User);
+        SystemUser user = new SystemUser("Antonio","antonio@isep.ipp.pt", "Designer", "123", User);
+        SystemUser user2 = new SystemUser("Manuel","manuel@isep.ipp.pt", "Designer mini", "123", User);
         ProjectStatus status = new ProjectStatus("Planned");
 
         // Act

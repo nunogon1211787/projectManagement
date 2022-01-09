@@ -166,6 +166,22 @@ class SystemUserTest {
     }
 
     @Test
+    public void encryptPasswordFail() {
+        //Arrange
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String function = "tester";
+        String photo = "photo";
+        Profile profileTest = new Profile("Visitor", "System Profile");
+        SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
+        //Act
+        String result = newUser.encryptPassword(password);
+        //Assert
+        assertNotEquals("ghi", result);
+    }
+
+    @Test
     public void decryptPasswordSuccess() {
         //Arrange
         String userName = "manueloliveira";
@@ -181,6 +197,88 @@ class SystemUserTest {
         String result = newUser.decryptPassword(encryptedPassword);
         //Assert
         assertEquals("a1b2c3", result);
+    }
+
+    @Test
+    public void decryptPasswordFail() {
+        //Arrange
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "a1b2c3";
+        String function = "tester";
+        String photo = "photo";
+        Profile profileTest = new Profile("Visitor", "System Profile");
+        SystemUser newUser = new SystemUser(userName, email, function, photo, password, profileTest);
+
+        String encryptedPassword = newUser.getPassword();//encryptedPassword = "Ä\u0094Å\u0095Æ\u0096";
+        //Act
+        String result = newUser.decryptPassword(encryptedPassword);
+        //Assert
+        assertNotEquals("Ä\\u0094Å\\u0095Æ\\u0096", result);
+    }
+
+    @Test
+    public void createSystemUserWithPhotoFailUserNameIsEmpty() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String userName = "";
+            String email = "manueloliveira@beaver.com";
+            String password = "ghi";
+            String function = "tester";
+            String photo = "photo";
+            Company company = new Company();
+            Profile profile = company.getArrayProfile().get(0);
+            SystemUser newUser = new SystemUser(userName, email, function, photo, password, profile);
+        });
+    }
+
+    @Test
+    public void createSystemUserWithPhotoFailUserNameIsShort() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String userName = "M";
+            String email = "manueloliveira@beaver.com";
+            String password = "ghi";
+            String function = "tester";
+            String photo = "photo";
+            Company company = new Company();
+            Profile profile = company.getArrayProfile().get(0);
+            SystemUser newUser = new SystemUser(userName, email, function, photo, password, profile);
+        });
+    }
+
+    @Test
+    public void createSystemUserWithPhotoFailEmailIsEmpty() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String userName = "manueloliveira";
+            String email = "";
+            String password = "ghi";
+            String function = "tester";
+            String photo = "photo";
+            Company company = new Company();
+            Profile profile = company.getArrayProfile().get(0);
+            SystemUser newUser = new SystemUser(userName, email, function, photo, password, profile);
+        });
+    }
+
+    @Test
+    public void createSystemUserWithPhotoFailEmailIsShort() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String userName = "manueloliveira";
+            String email = "m";
+            String password = "ghi";
+            String function = "tester";
+            String photo = "photo";
+            Company company = new Company();
+            Profile profile = company.getArrayProfile().get(0);
+            SystemUser newUser = new SystemUser(userName, email, function, photo, password, profile);
+        });
     }
 
     /*@Test
