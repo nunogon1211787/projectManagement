@@ -374,7 +374,7 @@ public class SystemUser {
 
     public boolean updateProfile(Profile oldProfile, Profile newProfile) {
         this.assignedProfileList.remove(oldProfile);
-        if (newProfile.isValidName(newProfile.toString())) {
+        if (newProfile.isValidName(newProfile.getName())) {
             this.assignedProfileList.add(newProfile);
         } else {
             return false;

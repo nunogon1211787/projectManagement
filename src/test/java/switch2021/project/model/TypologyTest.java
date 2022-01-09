@@ -82,6 +82,17 @@ public class TypologyTest {
         assertEquals(2, id);
     }
 
+    @Test
+    public void getDescriptionTest(){
+        //Arrange
+        ProjectSettings proj = new ProjectSettings();
+        //Act
+        String descriptionTest = proj.getArrayTypology().get(1).getDescription();
+        //Assert
+        assertEquals(descriptionTest, "Time and Materials");
+
+    }
+
     //Teste para mudar a descrição da Typology.
     @Test
     public void updateDescriptionTest() {
@@ -91,8 +102,10 @@ public class TypologyTest {
         testList.add(typo8);
         typo8.updateDescription("Update Description Test");
         //Act
+        int size = testList.size();
         Typology expected = new Typology("Update Description Test");
         //Assert
+        assertEquals(size, 1);
         assertEquals(typo8.getDescription(),expected.getDescription());
         assertNotEquals(typo8.getId_Typology(),expected.getId_Typology());
     }
@@ -116,10 +129,19 @@ public class TypologyTest {
         Typology typo8 = new Typology("");
         //Act
         proj.saveTypology(typo8);
-        proj.getArrayTypology();
+        int id = typo8.getId_Typology();
         //Assert
-        assertEquals(2,typo8.getId_Typology());
-        //Como não é incorporado ao arrayTypology, o index = 0.
+        assertEquals(2, id);
         assertFalse(proj.saveTypology(typo8));
+    }
+
+    @Test
+    public void equalsTest() {
+        //Arrange
+        ProjectSettings proj = new ProjectSettings();
+        Typology typo = new Typology("Fixed Cost");
+        boolean equals = typo.equals(proj.getTypologyById(0));
+        //Assert
+        assertTrue(equals);
     }
 }

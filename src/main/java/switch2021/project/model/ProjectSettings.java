@@ -145,7 +145,7 @@ public class ProjectSettings {
      * Typology Validate´s Method
      **/
     public boolean validateTypology(Typology typo) {
-        if (typo.getDescription() == null || typo.getDescription() == "" || this.arrayTypology.contains(typo)) {
+        if (typo.getDescription() == null || typo.getDescription() == "") {
             return false;
         }
         return true;

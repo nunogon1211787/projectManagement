@@ -8,7 +8,7 @@ public class Typology {
 
     /** Typology attributes **/
 
-    private int id_Typology;
+    private final int id_Typology;
     private String description;
 
     // Constructor with parameters
@@ -20,7 +20,7 @@ public class Typology {
     /** Constructors of typology´s class **/
 
     //Create ID automatically
-    private static AtomicInteger ID_TYPOLOGY_GENERATOR = new AtomicInteger();
+    private static final AtomicInteger ID_TYPOLOGY_GENERATOR = new AtomicInteger();
 
     /** Getters and Setters **/
 

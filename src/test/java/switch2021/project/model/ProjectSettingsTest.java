@@ -8,10 +8,20 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ProjectSettingsTest {
-
     /**
      *       >>>>>TYPOLOGY´S TEST<<<<<
      **/
+
+
+    @Test
+    public void createTypologyTestNull() {
+        //Arrange
+        ProjectSettings Test = new ProjectSettings();
+        //Act
+        Typology typo = Test.createTypology("");
+        //Assert
+        assertFalse(Test.saveTypology(typo));
+    }
 
     /**
      * Este método faz teste do construtorr de Typology, do método getArrayTypology(),
@@ -35,16 +45,6 @@ public class ProjectSettingsTest {
         assertEquals(Test.getArrayProjectStatus().size(), Lists.getArrayProjectStatus().size());
         assertEquals(Test.getArrayCustomer().size(), Lists.getArrayCustomer().size());
         assertEquals(Test.getArrayBusinessSector().size(), Lists.getArrayBusinessSector().size());
-    }
-
-    @Test
-    public void createTypologyTestNull() {
-        //Arrange
-        ProjectSettings Test = new ProjectSettings();
-        //Act
-        Typology typo = Test.createTypology("");
-        //Assert
-        assertFalse(Test.saveTypology(typo));
     }
 
     @Test
@@ -101,4 +101,27 @@ public class ProjectSettingsTest {
 
     }
 
+    @Test
+    public void saveTypologyTest() {
+        //Arrange
+        ProjectSettings proj = new ProjectSettings();
+        Typology typo = new Typology("Test");
+        //Act
+        proj.saveTypology(typo);
+        int size = proj.getArrayTypology().size();
+        //Assert
+        assertEquals(3,size);
+    }
+
+    @Test
+    public void notSaveTypologyTest() {
+        //Arrange
+        ProjectSettings proj = new ProjectSettings();
+        Typology typo = new Typology("");
+        //Act
+        proj.saveTypology(typo);
+        int size = proj.getArrayTypology().size();
+        //Assert
+        assertEquals(2,size);
+    }
 }
