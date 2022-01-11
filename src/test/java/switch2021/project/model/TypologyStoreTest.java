@@ -1,5 +1,6 @@
 package switch2021.project.model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -8,7 +9,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TypologyStoreTest {
 
+    private Company company;
 
+    @BeforeEach
+    public void initialize() {
+        //Arrange
+        company = new Company();
+    }
 
     @Test
     public void createTypologyTestNull() {
@@ -25,32 +32,28 @@ public class TypologyStoreTest {
      * do método createTypology(), do método saveTypology() e do método ValidateTypology()
      **/
     @Test
-    public void constructorProjectSettingsTest() {
+    public void constructorTypologyTest() {
         //Arrange
         //Sec1
         TypologyStore Lists = new TypologyStore();
         Typology TypoTest = Lists.createTypology("Test");
         //Sec2
-        ProjectSettings Test = new ProjectSettings();
+        TypologyStore Test = new TypologyStore();
         Typology newTypo = Lists.createTypology("Test");
         //Act
         Lists.saveTypology(TypoTest);
         Test.saveTypology(newTypo);
         //Assert
-        assertEquals(Test.getArrayTypology().size(), Lists.getArrayTypology().size());
-        assertEquals(Test.getArrayTypology().get(2), Lists.getArrayTypology().get(2));
-        assertEquals(Test.getArrayProjectStatus().size(), Lists.getArrayProjectStatus().size());
-        assertEquals(Test.getArrayCustomer().size(), Lists.getArrayCustomer().size());
-        assertEquals(Test.getArrayBusinessSector().size(), Lists.getArrayBusinessSector().size());
+        assertEquals(Test.getTypologyList().size(), Lists.getTypologyList().size());
+        assertEquals(Test.getTypologyById(2), Lists.getTypologyList().get(2));
     }
 
     @Test
     public void createTypologyTest() {
         //Arrange
-        ProjectSettings Test = new ProjectSettings();
-        Typology tes = Test.createTypology("Test");
+        Typology tes = company.getTypologyStore().createTypology("Test");
         //Act
-        Typology typo = Test.createTypology("TestXPTO");
+        Typology typo = company.getTypologyStore().createTypology("TestXPTO");
         //Assert
         assertNotEquals(typo, tes);
     }
@@ -58,54 +61,50 @@ public class TypologyStoreTest {
     @Test
     public void getArrayTypologyTest() {
         //Arrange
-        ProjectSettings Test = new ProjectSettings();
-        List<Typology> arrayTest = Test.getArrayTypology();
+        List<Typology> arrayTest = company.getTypologyStore().getTypologyList();
         //Act
-        Typology typo = Test.createTypology("Test");
-        Test.saveTypology(typo);
+        Typology typo = company.getTypologyStore().createTypology("Test");
+        company.getTypologyStore().saveTypology(typo);
         arrayTest.add(typo);
         //Assert
-        assertEquals(Test.getArrayTypology(), arrayTest);
+        assertEquals(company.getTypologyStore().getTypologyList(), arrayTest);
     }
 
     @Test
     public void getTypologyByIdTest() {
         //Arrange
-        ProjectSettings proj = new ProjectSettings();
         //Act
-        Typology typo = proj.getTypologyById(0);
+        Typology typo = company.getTypologyStore().getTypologyById(0);
         //Assert
-        assertEquals(typo, proj.getTypologyById(0));
+        assertEquals(typo, company.getTypologyStore().getTypologyById(0));
 
     }
 
     @Test
     public void validateTypology(){
         //Arrange
-        ProjectSettings proj = new ProjectSettings();
         Typology typo = new Typology("");
         Typology typo1 = new Typology("Tes");
         Typology typo2 = new Typology("");
         //Act
-        proj.add(typo);
-        proj.add(typo1);
-        proj.add(typo2);
+        company.getTypologyStore().add(typo);
+        company.getTypologyStore().add(typo1);
+        company.getTypologyStore().add(typo2);
         //Assert
-        assertFalse(proj.validateTypology(typo));
-        assertTrue(proj.validateTypology(typo1));
-        assertFalse(proj.validateTypology(typo2));
-        assertEquals(typo1,proj.getTypologyById(2));
+        assertFalse(company.getTypologyStore().validateTypology(typo));
+        assertTrue(company.getTypologyStore().validateTypology(typo1));
+        assertFalse(company.getTypologyStore().validateTypology(typo2));
+        assertEquals(typo1,company.getTypologyStore().getTypologyById(2));
 
     }
 
     @Test
     public void saveTypologyTest() {
         //Arrange
-        ProjectSettings proj = new ProjectSettings();
         Typology typo = new Typology("Test");
         //Act
-        proj.saveTypology(typo);
-        int size = proj.getArrayTypology().size();
+        company.getTypologyStore().saveTypology(typo);
+        int size = company.getTypologyStore().getTypologyList().size();
         //Assert
         assertEquals(3,size);
     }
@@ -113,11 +112,10 @@ public class TypologyStoreTest {
     @Test
     public void notSaveTypologyTest() {
         //Arrange
-        ProjectSettings proj = new ProjectSettings();
         Typology typo = new Typology("");
         //Act
-        proj.saveTypology(typo);
-        int size = proj.getArrayTypology().size();
+        company.getTypologyStore().saveTypology(typo);
+        int size = company.getTypologyStore().getTypologyList().size();
         //Assert
         assertEquals(2,size);
     }
