@@ -15,7 +15,7 @@ class ProjectTest {
 
     //Arrange
     static LocalDate date = LocalDate.of(2021, 12, 12);
-    static Typology typology = new ProjectSettings().getTypologyById(0);
+    static Typology typology = new TypologyStore().getTypologyById(0);
     static Customer customer = new ProjectSettings().getCustomerById(0);
     static BusinessSector businessSector = new ProjectSettings().getBussinessSectorById(0);
 
@@ -29,7 +29,8 @@ class ProjectTest {
         //Arrange
         LocalDate date = LocalDate.of(2021, 12, 12);
         ProjectSettings test= new ProjectSettings();
-        Typology typology = test.getTypologyById(0);
+        TypologyStore typoS= new TypologyStore();
+        Typology typology = typoS.getTypologyById(0);
         Customer customer = test.getCustomerById(0);
         BusinessSector businessSector = test.getBussinessSectorById(0);
 
@@ -41,7 +42,7 @@ class ProjectTest {
         assertEquals("Test_Project", newProject.getProjectName());
         assertEquals("test", newProject.getDescription());
         assertEquals(test.getCustomerById(0), newProject.getCustomer());
-        assertEquals(test.getTypologyById(0), newProject.getTypology());
+        assertEquals(typoS.getTypologyById(0), newProject.getTypology());
         assertEquals(test.getBussinessSectorById(0), newProject.getBusinessSector());
         assertEquals(test.getProjectStatusById(0), newProject.getProjectStatus());
         assertEquals(date, newProject.getStartDate());

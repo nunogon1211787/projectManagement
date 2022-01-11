@@ -61,6 +61,17 @@ class SystemUserTest {
     }
 
     @Test
+    public void verifyUpdateProfile(){
+        //Arrange
+        Company com = new Company();
+        SystemUser user = new SystemUser("xxx","xxx@isep.ipp.pt","tester","123456", com.getProfile(0));
+        //Act
+        com.addSystemUser(user);
+        // Assert
+        assertTrue(user.updateProfile(com.getProfile(0), com.getProfile(1)));
+    }
+
+    @Test
     public void verifyUpdateAndEncryptationOfPassword() {
 
         //Test to verify if the oldpassword is updated by the newpassword, and this last one is
@@ -719,5 +730,6 @@ class SystemUserTest {
         //Assert
         assertTrue(ana.getUserActivated());
     }
+
 
 }
