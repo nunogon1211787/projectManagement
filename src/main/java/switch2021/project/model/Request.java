@@ -18,7 +18,7 @@ public class Request {
      * construtor da classe "Request"
      **/
 
-    public Request(LocalDate requestDate, LocalDate requestTime, Profile profile, SystemUser user) {
+    public Request(LocalDate requestDate, LocalDate requestTime, UserProfile profile, SystemUser user) {
         this.requestDate = requestDate;
         this.requestTime = requestTime;
         this.user = user;

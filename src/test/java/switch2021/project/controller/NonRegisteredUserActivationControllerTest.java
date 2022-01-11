@@ -13,7 +13,7 @@ class NonRegisteredUserActivationControllerTest {
         //Arrange
         Company company = new Company();
         SystemUser user = new SystemUser("Ana", "1211748@isep.ipp.pt",
-                "User_12", "111", company.getProfile("visitor"));
+                "User_12", "111", company.getUserProfile("visitor"));
         NonRegisteredUserActivationController userActivation = new NonRegisteredUserActivationController(company);
         //Assert
         assertTrue(userActivation.getUserbyEmail("1211748@isep.ipp.pt"));

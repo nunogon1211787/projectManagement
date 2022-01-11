@@ -20,7 +20,7 @@ public class UpdateUserProfileControllerTest {
         company = App.getInstance().getCompany(); // sempre a mesma instancia
         user = new SystemUser(new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
                 "tester", "123456", new Profile("sss", "sss")));
-                user.updateProfile(company.getProfile(0), company.getProfile(1));
+                user.updateProfile(company.getUserProfile(0), company.getUserProfile(1));
         company.getArraySyUser().add(user);
     }
 
@@ -42,11 +42,11 @@ public class UpdateUserProfileControllerTest {
     public void updateProfileTest() {
         //Arrange
         SystemUser user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
-                "tester", "123456", company.getProfile("Visitor"));
+                "tester", "123456", company.getUserProfile("Visitor"));
         UpdateUserProfileController controllerTest = new UpdateUserProfileController(company);
         //Act
         company.getArraySyUser().add(user);
         //Assert
-        assertTrue(controllerTest.updateProfile(user, company.getProfile(0), company.getProfile(1)));
+        assertTrue(controllerTest.updateProfile(user, company.getUserProfile(0), company.getUserProfile(1)));
     }
 }

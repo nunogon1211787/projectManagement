@@ -16,13 +16,13 @@ class ResourceTest {
     public void Resource(){
         //Input
         /** user **/
-        Profile pro = new Profile("mku","sss");
+        UserProfile pro = new UserProfile("mku","sss");
         SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
         LocalDate startDate = LocalDate.of(2021,12,31);
         LocalDate endDate = LocalDate.of(2022,01,05);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         //Expected
-        Profile iso = new Profile("mku","sss");
+        UserProfile iso = new UserProfile("mku","sss");
         SystemUser newUser2 = new SystemUser("xyz", "fase", "des", "gth", iso);
         LocalDate startDate2 = LocalDate.of(2021,12,31);
         LocalDate endDate2 = LocalDate.of(2022,01,05);

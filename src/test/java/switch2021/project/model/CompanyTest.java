@@ -209,11 +209,11 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         //Act
-        int inicialSize = company.getArrayProfile().size();
+        int inicialSize = company.getUserProfileList().size();
         Profile up = company.createProfile("Cris", "System Profile");
         company.addProfile(up);
         //Assert
-        assertEquals(company.getArrayProfile().size(), inicialSize + 1);
+        assertEquals(company.getUserProfileList().size(), inicialSize + 1);
     }
 
     @Test
@@ -221,13 +221,13 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         //Act
-        int inicialSize = company.getArrayProfile().size();
+        int inicialSize = company.getUserProfileList().size();
         Profile up1 = company.createProfile("Cris", "System Profile");
         Profile up2 = company.createProfile("Cris_Dani", "System Profile");
         company.addProfile(up1);
         company.addProfile(up2);
         //Assert
-        assertEquals(company.getArrayProfile().size(), inicialSize + 2);
+        assertEquals(company.getUserProfileList().size(), inicialSize + 2);
     }
 
     // Teste de lista de profile em company (Ivan)
@@ -743,7 +743,7 @@ class CompanyTest {
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.createUserStory(UserStoryStatus.TODO, 12, "Default Story", 6);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
-                "Product Owner", "AAA", company.getProfile("Product Owne")));
+                "Product Owner", "AAA", company.getUserProfile("Product Owne")));
         company.addProject(project);
         // Act
         List<Project> projectList = company.getProjectListWithPORight("123@isep.ipp.pt");

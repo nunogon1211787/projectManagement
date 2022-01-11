@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProfileTest {
+class UserProfileTest {
 
     @Test
     void getNameTest() {
         //input
-        Profile test = new Profile("admin", "system");
+        UserProfile test = new UserProfile("admin", "system");
         //Expected
         String expected = "admin";
         String result = test.getName();
@@ -20,7 +20,7 @@ class ProfileTest {
     @Test
     void setNameTest() {
         //input
-        Profile test = new Profile("admin", "system");
+        UserProfile test = new UserProfile("admin", "system");
         String newName = "visitor";
         test.setName(newName);
         //Expected
@@ -33,7 +33,7 @@ class ProfileTest {
    @Test
     void isValidIdwith1Profile() {
         //input
-        Profile test = new Profile("admin", "system");
+       UserProfile test = new UserProfile("admin", "system");
         int check = 0;
         //Result
         assertTrue(test.isValidId(check));
@@ -42,11 +42,11 @@ class ProfileTest {
     @Test
     void isValidIdwith5Profile() {
         //input
-        Profile test1 = new Profile("admin", "system");
-        Profile test2 = new Profile("visitor", "system");
-        Profile test3 = new Profile("guest", "system");
-        Profile test4 = new Profile("user", "system");
-        Profile test5 = new Profile("director", "system");
+        UserProfile test1 = new UserProfile("admin", "system");
+        UserProfile test2 = new UserProfile("visitor", "system");
+        UserProfile test3 = new UserProfile("guest", "system");
+        UserProfile test4 = new UserProfile("user", "system");
+        UserProfile test5 = new UserProfile("director", "system");
         int check1 = 0;
         int check2 = 1;
         int check3 = 2;
@@ -63,8 +63,8 @@ class ProfileTest {
     @Test
     void copyConstructorTestName() {
         //input
-        Profile test = new Profile("admin", "system");
-        Profile copyTest = new Profile(test);
+        UserProfile test = new UserProfile("admin", "system");
+        UserProfile copyTest = new UserProfile(test);
         String newName = "visitor";
         copyTest.setName(newName);
         //Expected
@@ -79,8 +79,8 @@ class ProfileTest {
     @Test
     void copyConstructorTestType() {
         //input
-        Profile test = new Profile("admin", "system");
-        Profile copyTest = new Profile(test);
+        UserProfile test = new UserProfile("admin", "system");
+        UserProfile copyTest = new UserProfile(test);
         String newType = "project";
         copyTest.setType(newType);
         //Expected
@@ -95,14 +95,14 @@ class ProfileTest {
     @Test
     void copyConstructorTest(){
         //input
-        Profile test = new Profile("admin", "system");
-        Profile copyTest = new Profile(test);
+        UserProfile test = new UserProfile("admin", "system");
+        UserProfile copyTest = new UserProfile(test);
         //result
         assertEquals(test, copyTest);
     }
 
     @Test
     void isvalinameteste(){
-        Profile teste = new Profile("admin", "system");
+        UserProfile teste = new UserProfile("admin", "system");
     }
 }

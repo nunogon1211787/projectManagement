@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Company {
 
@@ -9,14 +10,14 @@ public class Company {
      * Atributos da Classe
      **/
     private TypologyStore typologyStore = new TypologyStore();
-    SystemUserStore userStore;
+    SystemUserStore systemUserStore;
     UserProfileStore userProfileStore;
     ProjectStore userProjectStore;
     // falta colocar a chamada para o request quando se criar a página;
     List<Request> arrayRequest;
 
     public  Company(){
-        this.userStore = getSystemUserStore();
+        this.systemUserStore = getSystemUserStore();
         this.userProfileStore = getUserProfileStore();
         this.userProjectStore = getProjectStore();
 
@@ -58,12 +59,12 @@ public class Company {
      * Add Method
      **/
 
-    public boolean addProfile(Profile profile) {
+    public boolean addUserProfile(UserProfile profile) {
 
         if (!validateProfile(profile)) {
             return false;
         }
-        arrayProfile.add(profile);
+        userProfileStore.userProfileList.add(profile);
         return true;
     }
 
@@ -71,18 +72,18 @@ public class Company {
      * Getter Methods
      **/
 
-    public List<Profile> getArrayProfile() {
-        return this.arrayProfile;
+    public List<UserProfile> getUserProfileList() {
+        return this.getUserProfileList();
     }
 
-    public List<Profile> getArrayProfileWithType(String type) {
+    public List<UserProfile> getUserProfileListWithType(String type) {
 
-        List<Profile> foundList = new ArrayList<>();
+        List<UserProfile> foundList = new ArrayList<>();
 
-        for (int i = 0; i < this.arrayProfile.size(); i++) {
+        for (int i = 0; i < this.userProfileStore.userProfileList.size(); i++) {
 
-            if (this.arrayProfile.get(i).hasType(type)) {
-                foundList.add(this.arrayProfile.get(i));
+            if (this.userProfileStore.userProfileList.get(i).hasType(type)) {
+                foundList.add(this.userProfileStore.userProfileList.get(i));
             }
 
         }
@@ -91,15 +92,15 @@ public class Company {
     }
 
     ////Talvez mudar para não buscar por index
-    public Profile getProfile(int index) {
-        return new Profile(arrayProfile.get(index));
+    public UserProfile getUserProfile(int index) {
+        return new UserProfile(userProfileStore.userProfileList.get(index));
     }
 
-    public Profile getProfile(String name) {
-        Profile pro = null;
-        for (int i = 0; i < arrayProfile.size(); i++) {
-            if (Objects.equals(getProfile(i).getName(), name)) {
-                pro = getProfile(i);
+    public UserProfile getUserProfile(String name) {
+        UserProfile pro = null;
+        for (int i = 0; i < userProfileStore.userProfileList.size(); i++) {
+            if (Objects.equals(getUserProfile(i).getName(), name)) {
+                pro = getUserProfile(i);
                 break;
             }
         }
@@ -108,9 +109,10 @@ public class Company {
 
     /**
      * Validation Method
-     **/
+     *
+     * @param profile*/
 
-    private boolean validateProfile(Profile profile) {
+    private boolean validateProfile(UserProfile profile) {
         //Check empty fields on name and type
         if (profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()) {
             return false;
@@ -122,7 +124,7 @@ public class Company {
         }
 
         //Check if profile already exist
-        for (Profile up : arrayProfile) {
+        for (UserProfile up : userProfileStore.userProfileList) {
             if (up.equals(profile)) {
                 return false;
             }

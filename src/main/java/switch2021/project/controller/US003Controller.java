@@ -1,56 +1,56 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.Company;
-import switch2021.project.model.Profile;
 import switch2021.project.model.Request;
 import switch2021.project.model.SystemUser;
+import switch2021.project.model.UserProfile;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public class US003Controller {
 
-    private Company co;
-    private Request req;
+    private Company company;
+    private Request request;
 
     /**
      * Construtor da Classe
      */
 
-    public US003Controller() { this.co = new Company();}
+    public US003Controller() { this.company = new Company();}
 
     /**
      * Método Get.
      */
 
-    public Company getCompany() {return this.co;}
+    public Company getCompany() {return this.company;}
 
     /**
      * Método para ...
      */
 
-    public List<Profile> getProfileList (){
+    public List<UserProfile> getProfileList (){
 
         String type = "System Profile";
 
-        return co.getArrayProfileWithType(type);
+        return company.getUserProfileStore().getUserProfileListWithType(type);
 
     }
 
     public Request createProfileRequest(LocalDate data, LocalDate time, int profileIdx, String email){
 
-        Profile profRequest = co.getProfile(profileIdx);
-        SystemUser user = co.getUserByEmail(email);
+        UserProfile profRequest = company.getUserProfileStore().getProfile(profileIdx);
+        SystemUser user = company.getSystemUserStore().getUserByEmail(email);
 
-        this.req = new Request(data, time, profRequest, user);
+        this.request = new Request(data, time, profRequest, user);
 
-        return this.req;
+        return this.request;
 
     }
 
     public boolean saveRequest(){
 
-        return co.saveRequest(this.req);
+        return company.saveRequest(this.request);
 
     }
 }

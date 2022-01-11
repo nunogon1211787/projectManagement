@@ -47,11 +47,11 @@ public class UserProfileStore {
      * Getter Methods
      **/
 
-    public List<UserProfile> getArrayProfile() {
+    public List<UserProfile> getUserProfileList() {
         return this.userProfileList;
     }
 
-    public List<UserProfile> getArrayProfileWithType(String type) {
+    public List<UserProfile> getUserProfileListWithType(String type) {
 
         List<UserProfile> foundList = new ArrayList<>();
 
