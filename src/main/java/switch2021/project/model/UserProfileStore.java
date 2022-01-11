@@ -8,12 +8,18 @@ public class UserProfileStore {
 
     List<UserProfile> userProfileList;
 
-
     public UserProfileStore () {
+        userProfileList = new ArrayList<>();
+    }
+
+    public void populateDefault() {
         userProfileList.add(new UserProfile("Visitor", "System Profile"));
         userProfileList.add(new UserProfile("Administrator", "System Profile"));
         userProfileList.add(new UserProfile("Director", "System Profile"));
+    }
 
+    public void populateSystemUser(UserProfile profile) {
+        userProfileList.add(profile);
     }
 
     /**

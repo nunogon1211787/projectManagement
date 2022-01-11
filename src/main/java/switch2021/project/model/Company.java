@@ -9,8 +9,19 @@ public class Company {
      * Atributos da Classe
      **/
     private TypologyStore typologyStore = new TypologyStore();
-    List<SystemUser> arraySyUser;
+    SystemUserStore userStore;
+    UserProfileStore userProfileStore;
+    ProjectStore userProjectStore;
+    // falta colocar a chamada para o request quando se criar a página;
     List<Request> arrayRequest;
+
+    public  Company(){
+        this.userStore = getSystemUserStore();
+        this.userProfileStore = getUserProfileStore();
+        this.userProjectStore = getProjectStore();
+
+        this.userProfileStore.populateDefault();
+    }
 
 
     //Project
@@ -18,9 +29,13 @@ public class Company {
         return new ProjectStore();
     }
 
+    public SystemUserStore getSystemUserStore() {
+        return new SystemUserStore();
+    }
+
     //Profile
     public UserProfileStore getUserProfileStore() {
-        return new UserProfileStore();
+            return new UserProfileStore();
     }
 
     //Typology
@@ -28,121 +43,92 @@ public class Company {
         return this.typologyStore;
     }
 
-    // System user
+
+    // Profile
 
     /**
-     * Create Methods
+     * Create Method
      **/
 
-    public SystemUser createSystemUser(String userName, String email, String function, String password) {
-        return new SystemUser(userName, email, function, password, arrayProfile.get(0));
-    }
-    ///// Apenas manter um construtor !!!
-
-    public SystemUser createSystemUser(String userName, String email, String function, String photo, String password) {
-        return new SystemUser(userName, email, function, photo, password, arrayProfile.get(0));
+    public UserProfile createProfile(String name, String type) {
+        return new UserProfile(name, type);
     }
 
     /**
      * Add Method
      **/
 
-    public boolean addSystemUser(SystemUser syUser) {
-        this.arraySyUser.add(syUser);
+    public boolean addProfile(Profile profile) {
+
+        if (!validateProfile(profile)) {
+            return false;
+        }
+        arrayProfile.add(profile);
         return true;
     }
 
     /**
      * Getter Methods
-     */
-    public List<SystemUser> getArraySyUser() {
-        return this.arraySyUser;
+     **/
+
+    public List<Profile> getArrayProfile() {
+        return this.arrayProfile;
     }
 
-    public SystemUser getUserByEmail(String email) {
+    public List<Profile> getArrayProfileWithType(String type) {
 
-        SystemUser user = null;
+        List<Profile> foundList = new ArrayList<>();
 
-        for (int i = 0; i < this.arraySyUser.size(); i++) {
-            if (this.arraySyUser.get(i).isYourEmail(email)) {
-                user = this.arraySyUser.get(i);
+        for (int i = 0; i < this.arrayProfile.size(); i++) {
+
+            if (this.arrayProfile.get(i).hasType(type)) {
+                foundList.add(this.arrayProfile.get(i));
+            }
+
+        }
+
+        return foundList;
+    }
+
+    ////Talvez mudar para não buscar por index
+    public Profile getProfile(int index) {
+        return new Profile(arrayProfile.get(index));
+    }
+
+    public Profile getProfile(String name) {
+        Profile pro = null;
+        for (int i = 0; i < arrayProfile.size(); i++) {
+            if (Objects.equals(getProfile(i).getName(), name)) {
+                pro = getProfile(i);
                 break;
             }
         }
-
-        return user;
-    }
-
-    public List<SystemUser> searchUsers(String name, String email, String function, int isActive, int[] profileList) {
-
-        int listSize = this.arraySyUser.size();
-        List<SystemUser> foundUsersList = new ArrayList<>();
-
-        if (listSize != 0) {
-
-            for (SystemUser systemUser : this.arraySyUser)
-                if (systemUser.hasThisData(name, email, function, isActive, profileList)) {
-                    foundUsersList.add(new SystemUser(systemUser));
-                }
-
-        }
-
-        return foundUsersList;
+        return pro;
     }
 
     /**
-     * Validation Methods
-     */
+     * Validation Method
+     **/
 
-    public boolean validateSystemUser(SystemUser user) {
-        if (user == null) {
+    private boolean validateProfile(Profile profile) {
+        //Check empty fields on name and type
+        if (profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()) {
             return false;
         }
-        if (hasEmail(user.getEmail())) {
-            return false;
-        }
-        if (hasUserName(user.getUserName())) {
-            return false;
-        }
-        return !this.arraySyUser.contains(user);
-    }
 
-    boolean hasEmail(String newUserEmail) {
-        for (SystemUser newUser : arraySyUser) {
-            if (newUser.getEmail().trim().equalsIgnoreCase(newUserEmail.trim())) {
-                return true;
+        //Check if the profile type is valid
+        if (!profile.getType().equalsIgnoreCase("System Profile") && !profile.getType().equalsIgnoreCase("Special Profile")) {
+            return false;
+        }
+
+        //Check if profile already exist
+        for (Profile up : arrayProfile) {
+            if (up.equals(profile)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
-
-    //// Dois utilizadores podem existir com o mesmo nome, podem existir dois Nunos!!
-    boolean hasUserName(String newUserName) {
-        for (SystemUser newUser : arraySyUser) {
-            if (newUser.getUserName().trim().equalsIgnoreCase(newUserName.trim())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    /**
-     * Save Method
-     */
-
-    public boolean saveSystemUser(SystemUser user) {
-        boolean result = true;
-
-        if (!validateSystemUser(user)) {
-            result = false;
-        } else {
-            this.arraySyUser.add(user);
-        }
-        return result;
-    }
-
-
 
     //Request
 

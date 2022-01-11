@@ -663,10 +663,10 @@ class SystemUserTest {
     @Test
     void hasThisDataWithTwoProfilesFail() {
         //Input
-        Profile pro = new Profile("ddd", "pro");
-        Profile pre = new Profile("aaa", "pre");
+        UserProfile pro = new UserProfile("ddd", "pro");
+        UserProfile pre = new UserProfile("aaa", "pre");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
-        ivan.addProfileToList(pre);
+        ivan.assignProfileToUser(pre);
         String name = "";
         String email = "";
         String func = "";
@@ -679,7 +679,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithTwoParametersFail() {
         //Input
-        Profile pro = new Profile("ddd", "pro");
+        UserProfile pro = new UserProfile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "ivan";
         String email = "axxx";
@@ -690,11 +690,14 @@ class SystemUserTest {
         assertFalse(ivan.hasThisData(name, email, func, state, profiles));
     }
 
-    @Test
+    @Test // Exmeplo corrigido
     void hasThisDataWithThreeParametersFail() {
         //Input
-        Profile pro = new Profile("ddd", "pro");
-        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
+        Company company = new Company();
+        UserProfile visitor = company.getUserProfileStore().getProfile("visitor");
+        SystemUser ivan = new SystemUserStore().createSystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
+                "tester", "12345", "12345", "img_123", visitor);
+
         String name = "ivan";
         String email = "xxxx";
         String func = "aest";
@@ -707,7 +710,7 @@ class SystemUserTest {
     @Test
     void hasThisDataWithFourParametersFail() {
         //Input
-        Profile pro = new Profile("ddd", "pro");
+        UserProfile pro = new UserProfile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
         String name = "ivan";
         String email = "xxxx";
@@ -723,7 +726,7 @@ class SystemUserTest {
 
         //Test to activate the user
         //Arrange
-        Profile tes = new Profile("ddd", "pro");
+        UserProfile tes = new UserProfile("ddd", "pro");
         SystemUser ana = new SystemUser("Ana", "1211748@isep.ipp.pt", "User_12", "png_234", "HELLO", tes);
         //Act
         ana.setActivateUser();

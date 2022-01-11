@@ -55,21 +55,3 @@ public class UpdatePersonalDataControllerTest {
     }
 }
 
-    /*
-    @Test
-    public void updateSystemUserWithUserNameEmpty() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            String userName = " ";
-            String email = "11";
-            String password = "ghi";
-            String function = "tester";
-            String photo = "photo";
-            Company company = new Company();
-            Profile profile = company.getArrayProfile().set(1);
-            SystemUser newUser = new SystemUser(userName, email, function, photo, password, profile);
-        });
-    }
-
-     */

@@ -2,6 +2,7 @@ package switch2021.project.controller;
 
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser;
+import switch2021.project.model.UserProfile;
 
 public class RegisterUserController {
     private Company company;
@@ -12,15 +13,14 @@ public class RegisterUserController {
         this.user = null;
     }
 
-    //without photo
-    public boolean createSystemUser(String userName, String email, String function, String password) {
-        this.user = this.company.createSystemUser(userName, email, function, password);
-        return this.company.validateSystemUser(user);
+    //with photo
+    public boolean createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo) {
+
+        UserProfile visitor = this.company.getUserProfileStore().getProfile("visitor");
+
+        this.user = this.company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);
+
+        return this.company.getSystemUserStore().validateSystemUser(user);
     }
 
-    //with photo
-    public boolean createSystemUser(String userName, String email, String function, String photo, String password) {
-        this.user = this.company.createSystemUser(userName, email, function, photo, password);
-        return this.company.validateSystemUser(user);
-    }
 }

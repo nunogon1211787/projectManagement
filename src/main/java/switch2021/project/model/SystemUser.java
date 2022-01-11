@@ -13,30 +13,12 @@ public class SystemUser {
     private String password;  // Implementar password confirmation ***
     private String function;
     private boolean activateUser;
-    private List<Profile> assignedProfileList;
+    private UserProfileStore assignedProfileList;
 
     /**
-     * Contructor without photo
+     * Contructor
      **/
-    public SystemUser(String userName, String email, String function, String password, Profile profile) {
-        checkUserNameRules(userName);
-        checkEmailRules(email);
-        checkFunctionRules(function);
-        checkPasswordRules(password);
-        this.userName = userName;
-        this.email = email;                             /////  Implementar apenas um construtor  *****
-        this.photo = "";
-        this.function = function;
-        this.password = encryptPassword(password);
-        this.activateUser = false;
-        this.assignedProfileList = new ArrayList<>();
-        assignedProfileList.add(profile);
-    }
-
-    /**
-     * Contructor with photo
-     **/
-    public SystemUser(String userName, String email, String function, String photo, String password, Profile profile) {
+    public SystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor) {
         checkUserNameRules(userName);
         checkEmailRules(email);
         checkFunctionRules(function);
@@ -47,8 +29,9 @@ public class SystemUser {
         this.function = function;
         this.password = encryptPassword(password);
         this.activateUser = false;
-        this.assignedProfileList = new ArrayList<>();
-        this.assignedProfileList.add(profile);
+        this.assignedProfileList = new UserProfileStore();
+
+        assignedProfileList.populateSystemUser(visitor);
     }
 
     /**
@@ -65,16 +48,8 @@ public class SystemUser {
 
     }
 
-    private List<Profile> deepCopyListProfile(List<Profile> originalList) {
-
-        List<Profile> deepCopyList = new ArrayList<>();
-
-        for (int i = 0; i < originalList.size(); i++) {
-
-            deepCopyList.add(new Profile(originalList.get(i)));
-
-        }
-
+    private UserProfileStore deepCopyListProfile(UserProfileStore originalList) {
+        UserProfileStore deepCopyList = this.assignedProfileList;
         return deepCopyList;
     }
 
@@ -110,7 +85,7 @@ public class SystemUser {
         return this.activateUser;
     }
 
-    public List<Profile> getAssignedProfileList() {
+    public UserProfileStore getAssignedProfileList() {
         return this.assignedProfileList;
     }
 
@@ -201,7 +176,7 @@ public class SystemUser {
      * Método para adicionar um profile a lista de profiles do User.
      */
 
-    public void addProfileToList(Profile p) {
+    public void assignProfileToUser(UserProfile p) {
         this.assignedProfileList.add(p);
     }
 
@@ -225,7 +200,7 @@ public class SystemUser {
     /**
      * Método para verificar se os parâmetros recebidos são do objeto.
      */
-
+    // Rever este Método!!!!
     public boolean hasThisData(String userName, String email, String function, int isActive, int[] profilesId) {
 
         boolean result = true;
@@ -283,7 +258,7 @@ public class SystemUser {
                 int count = 0;
 
                 for (int k : profilesId) {
-                    for (Profile profile : this.assignedProfileList) {
+                    for (UserProfile profile : this.assignedProfileList) {
                         if (profile.isValidId(k)) {
                             count++;
                             match++;
@@ -336,7 +311,7 @@ public class SystemUser {
      * Update profile Method
      */
 
-    public boolean updateProfile(Profile oldProfile, Profile newProfile) {
+    public boolean updateProfile(UserProfile oldProfile, UserProfile newProfile) {
         this.assignedProfileList.remove(oldProfile);
         if (newProfile.isValidName(newProfile.getName())) {  ///// Faz sentido ter esta validação de Profile?? Os profiles
             this.assignedProfileList.add(newProfile);          /// já vão ser selecionados de uma lista válida!
