@@ -12,30 +12,17 @@ public class Company {
      **/
 
     List<SystemUser> arraySyUser;
-    List<Profile> arrayProfile;
     List<Request> arrayRequest;
 
-    /**
-     * Constructors with data
-     **/
-    /*public Company() {
-        this.arraySyUser = new ArrayList<>();
-        this.arrayProfile = new ArrayList<>();
-        this.arrayRequest = new ArrayList<>();
-
-        arrayProfile.add(new Profile("Visitor", "System Profile"));
-        arrayProfile.add(new Profile("Administrator", "System Profile"));
-        arrayProfile.add(new Profile("Director", "System Profile"));
-        arrayProfile.add(new Profile("Project Manager", "Special Profile"));
-        arrayProfile.add(new Profile("Product Owner", "Special Profile"));
-        arrayProfile.add(new Profile("Scrum Master", "Special Profile"));
-        arrayProfile.add(new Profile("Project Team", "Special Profile"));
-    }*/
 
     //Project
-
     public ProjectStore getProjectStore() {
         return new ProjectStore();
+    }
+
+    //Profile
+    public UserProfileStore getUserProfileStore() {
+        return new UserProfileStore();
     }
 
     // System user
@@ -154,94 +141,6 @@ public class Company {
 
 
 
-    // Profile
-
-    /**
-     * Create Method
-     **/
-
-    public Profile createProfile(String name, String type) {
-        return new Profile(name, type);
-    }
-
-    /**
-     * Add Method
-     **/
-
-    public boolean addProfile(Profile profile) {
-
-        if (!validateProfile(profile)) {
-            return false;
-        }
-        arrayProfile.add(profile);
-        return true;
-    }
-
-    /**
-     * Getter Methods
-     **/
-
-    public List<Profile> getArrayProfile() {
-        return this.arrayProfile;
-    }
-
-    public List<Profile> getArrayProfileWithType(String type) {
-
-        List<Profile> foundList = new ArrayList<>();
-
-        for (int i = 0; i < this.arrayProfile.size(); i++) {
-
-            if (this.arrayProfile.get(i).hasType(type)) {
-                foundList.add(this.arrayProfile.get(i));
-            }
-
-        }
-
-        return foundList;
-    }
-
-    ////Talvez mudar para não buscar por index
-    public Profile getProfile(int index) {
-        return new Profile(arrayProfile.get(index));
-    }
-
-    public Profile getProfile(String name) {
-        Profile pro = null;
-        for (int i = 0; i < arrayProfile.size(); i++) {
-            if (Objects.equals(getProfile(i).getName(), name)) {
-                pro = getProfile(i);
-                break;
-            }
-        }
-        return pro;
-    }
-
-    /**
-     * Validation Method
-     **/
-
-    private boolean validateProfile(Profile profile) {
-        //Check empty fields on name and type
-        if (profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()) {
-            return false;
-        }
-
-        //Check if the profile type is valid
-        if (!profile.getType().equalsIgnoreCase("System Profile") && !profile.getType().equalsIgnoreCase("Special Profile")) {
-            return false;
-        }
-
-        //Check if profile already exist
-        for (Profile up : arrayProfile) {
-            if (up.equals(profile)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
-
     //Request
 
     /**
@@ -285,7 +184,6 @@ public class Company {
         return result;
 
     }
-
 
 
 }
