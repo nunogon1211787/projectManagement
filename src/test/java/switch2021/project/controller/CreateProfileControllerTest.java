@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.utils.App;
 
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,7 +18,7 @@ public class CreateProfileControllerTest {
     public void init() {
         company = App.getInstance().getCompany(); // sempre a mesma instancia
         profile = company.createProfile("Cris", "System Profile");
-        company.add(profile);
+        company.addProfile(profile);
     }
 
     @Test

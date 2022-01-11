@@ -31,8 +31,6 @@ public class US008Controller {
         this.project.setNumberOfSprints(numberOfSprints);
         this.project.setProjectStatus(status);
         this.project.setSprintDuration(sprintDuration);
-        this.project.setScrumMaster(scrumMaster);
-        this.project.setProductOwner(productOwner);
         return this.project;
     }
 

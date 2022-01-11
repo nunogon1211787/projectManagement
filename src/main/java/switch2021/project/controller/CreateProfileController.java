@@ -27,7 +27,7 @@ public class CreateProfileController {
 
     public boolean createProfile(String name, String type) {
         this.profile = this.company.createProfile(name, type);
-        return this.company.add(this.profile);
+        return this.company.addProfile(this.profile);
 
 
     }

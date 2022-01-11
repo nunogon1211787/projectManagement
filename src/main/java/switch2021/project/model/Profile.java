@@ -34,7 +34,6 @@ public class Profile {
 
     /**
      * Profle Constructors
-     * Constructors
      */
     //Create ID automatically
     private static AtomicInteger ID_PROFILE_GENERATOR = new AtomicInteger();
@@ -70,7 +69,7 @@ public class Profile {
     }
 
     public boolean isValidName(String name) {
-        if(name.toUpperCase(Locale.ROOT) != this.getName().toUpperCase()) {
+        if(!name.toUpperCase(Locale.ROOT).equals(this.name.toUpperCase())) {
             return false;
         }
         return true;

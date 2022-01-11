@@ -143,7 +143,7 @@ class ProjectTest {
     @DisplayName("Teste de check Budget")
     public void checkBudget() {
         //Expected
-        int budget = newProject.getBudget();
+        double budget = newProject.getBudget();
         int valueBudget = 5000;
 
         //Result
@@ -176,11 +176,11 @@ class ProjectTest {
     @DisplayName("Teste de busca de projecto a pelo indice")
     public void checkGetProjByIndex() {
         Company comp = new Company();
-        comp.add(comp.createProject("123testcode", "prototype", "test", customer,
+        comp.addProject(comp.createProject("123testcode", "prototype", "test", customer,
                 typology, businessSector, date, 7, 5000));
         Project proj = new Project("123testcode_2", "prototype_2", "test_2", customer,
                 typology, businessSector, date, 7, 6000);
-        comp.add(proj);
+        comp.addProject(proj);
 
         //Result
         assertEquals(comp.getProjByIndex(0), newProject);
@@ -191,7 +191,7 @@ class ProjectTest {
     @DisplayName("Teste de adição de projecto a company")
     public void checkAddProject() {
         Company comp = new Company();
-        comp.add(comp.createProject("123testcode", "prototype", "test", customer,
+        comp.addProject(comp.createProject("123testcode", "prototype", "test", customer,
                 typology, businessSector, date, 7, 5000));
 
         //Result
@@ -224,15 +224,14 @@ class ProjectTest {
     @Test
     public void createUserStoryPriorityIsInvalid() {
         //Arrange
-        Project project = new Project();
         String code = "123d";
-        project.setCode(code);
+        newProject.setCode(code);
         UserStoryStatus status = UserStoryStatus.TODO;
         int priority = -1;
         String description = "teste";
         int timeEstimate = 1;
         // Act
-        boolean isAdded = project.createUserStory(status, priority, description, timeEstimate);
+        boolean isAdded = newProject.createUserStory(status, priority, description, timeEstimate);
         //Assert
         assertFalse(isAdded);
     }
@@ -240,16 +239,15 @@ class ProjectTest {
     @Test
     public void createUserStoryUserStoryAlreadyExist() {
         //Arrange
-        Project project = new Project();
         String code = "123d";
-        project.setCode(code);
+        newProject.setCode(code);
         UserStoryStatus status = UserStoryStatus.TODO;
         int priority = 1;
         String description = "teste";
         int timeEstimate = 7;
-        project.createUserStory(status, priority, description, timeEstimate);
+        newProject.createUserStory(status, priority, description, timeEstimate);
         // Act
-        boolean isAdded = project.createUserStory(UserStoryStatus.IN_TEST, 2, description, 8);
+        boolean isAdded = newProject.createUserStory(UserStoryStatus.IN_TEST, 2, description, 8);
         //Assert
         assertFalse(isAdded);
     }
@@ -257,15 +255,14 @@ class ProjectTest {
     @Test
     public void createUserStoryTimeEstimateInvalid() {
         //Arrange
-        Project project = new Project();
         String code = "123d";
-        project.setCode(code);
+        newProject.setCode(code);
         UserStoryStatus status = UserStoryStatus.TODO;
         int priority = 1;
         String description = "teste";
         int timeEstimate = -1;
         // Act
-        boolean isAdded = project.createUserStory(status, priority, description, timeEstimate);
+        boolean isAdded = newProject.createUserStory(status, priority, description, timeEstimate);
         //Assert
         assertFalse(isAdded);
     }
@@ -273,15 +270,14 @@ class ProjectTest {
     @Test
     public void createUserStoryDescriptionInvalid() {
         //Arrange
-        Project project = new Project();
         String code = "123d";
-        project.setCode(code);
+        newProject.setCode(code);
         UserStoryStatus status = UserStoryStatus.TODO;
         int priority = 1;
         String description = null;
         int timeEstimate = 1;
         // Act
-        boolean isAdded = project.createUserStory(status, priority, description, timeEstimate);
+        boolean isAdded = newProject.createUserStory(status, priority, description, timeEstimate);
         //Assert
         assertFalse(isAdded);
     }
@@ -289,24 +285,21 @@ class ProjectTest {
     @Test
     public void createUserStoryWithSuccess() {
         //Arrange
-        Project project = new Project();
         String code = "123d";
-        project.setCode(code);
+        newProject.setCode(code);
         UserStoryStatus status = UserStoryStatus.TODO;
         int priority = 1;
         String description = "teste";
         int timeEstimate = 7;
         // Act
-        boolean isAdded = project.createUserStory(status, priority, description, timeEstimate);
+        boolean isAdded = newProject.createUserStory(status, priority, description, timeEstimate);
         //Assert
         assertTrue(isAdded);
     }
 
-
     @Test
     public void editProjectSetsTest() {
         //Arrange
-        Project project = new Project();
         SystemUser scrumMaster = new SystemUser("Antonio", "antonio@isep.ipp.pt", "Designer", "123", User);
         SystemUser productOwner = new SystemUser("Manuel", "manuel@isep.ipp.pt", "Designer mini", "123", User);
         SystemUser user = new SystemUser("Antonio", "antonio@isep.ipp.pt", "Designer", "123", User);
@@ -314,24 +307,22 @@ class ProjectTest {
         ProjectStatus status = new ProjectStatus("Planned");
 
         // Act
-        project.setProjectName("XPTO9");
-        project.setStartDate(LocalDate.of(2022, 2, 10));
-        project.setEndDate(LocalDate.of(2022, 4, 20));
-        project.setNumberOfSprints(5);
-        project.setProjectStatus(status);
-        project.setSprintDuration(2);
-        project.setScrumMaster(scrumMaster);
-        project.setProductOwner(productOwner);
+        newProject.setProjectName("XPTO9");
+        newProject.setStartDate(LocalDate.of(2022, 2, 10));
+        newProject.setEndDate(LocalDate.of(2022, 4, 20));
+        newProject.setNumberOfSprints(5);
+        newProject.setProjectStatus(status);
+        newProject.setSprintDuration(2);
+        newProject.setProductOwner(productOwner);
 
         //Assert
-        assertEquals("XPTO9", project.getProjectName());
-        assertEquals(LocalDate.of(2022, 2, 10), project.getStartDate());
-        assertEquals(LocalDate.of(2022, 4, 20), project.getEndDate());
-        assertEquals(5, project.getNumberOfSprints());
-        assertEquals(status, project.getProjectStatus());
-        assertEquals(2, project.getSprintDuration());
-        assertEquals(user, project.getScrumMaster());
-        assertEquals(user2, project.getProductOwner());
+        assertEquals("XPTO9", newProject.getProjectName());
+        assertEquals(LocalDate.of(2022, 2, 10), newProject.getStartDate());
+        assertEquals(LocalDate.of(2022, 4, 20), newProject.getEndDate());
+        assertEquals(5, newProject.getNumberOfSprints());
+        assertEquals(status, newProject.getProjectStatus());
+        assertEquals(2, newProject.getSprintDuration());
+        assertEquals(user2, newProject.getProductOwner());
 
     }
 

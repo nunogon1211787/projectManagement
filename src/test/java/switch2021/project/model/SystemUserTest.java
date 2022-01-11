@@ -1,9 +1,7 @@
 package switch2021.project.model;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +13,11 @@ class SystemUserTest {
         //Input
         Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
-        ivan.activateUser();
+        ivan.setActivateUser();
         //Expected
         Profile tes = new Profile("ddd", "pro");
         SystemUser expected = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", tes);
-        expected.activateUser();
+        expected.setActivateUser();
         //Results
         assertEquals(ivan, expected);
     }
@@ -29,11 +27,11 @@ class SystemUserTest {
         //Input
         Profile pro = new Profile("ddd", "pro");
         SystemUser ivan1 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456", pro);
-        ivan1.activateUser();
+        ivan1.setActivateUser();
         //Expected
         Profile tes = new Profile("ddd", "pro");
         SystemUser expected2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456", tes);
-        expected2.activateUser();
+        expected2.setActivateUser();
         //Result
         assertEquals(ivan1, expected2);
     }
@@ -215,7 +213,7 @@ class SystemUserTest {
         String passwordResult = newUser.getPassword();
         String functionResult = newUser.getFunction();
         String photoResult = newUser.getPhoto();
-        boolean activateUserResult = newUser.isUserActivated();
+        boolean activateUserResult = newUser.getUserActivated();
         List<Profile> assignedProfileResult = newUser.getAssignedProfileList();
         //Assert
         assertEquals(userNameExpected, userNameResult);
@@ -249,7 +247,7 @@ class SystemUserTest {
         String emailResult = newUser.getEmail();
         String passwordResult = newUser.getPassword();
         String functionResult = newUser.getFunction();
-        boolean activateUserResult = newUser.isUserActivated();
+        boolean activateUserResult = newUser.getUserActivated();
         List<Profile> assignedProfileResult = newUser.getAssignedProfileList();
         //Assert
         assertEquals(userNameExpected, userNameResult);
@@ -717,9 +715,9 @@ class SystemUserTest {
         Profile tes = new Profile("ddd", "pro");
         SystemUser ana = new SystemUser("Ana", "1211748@isep.ipp.pt", "User_12", "png_234", "HELLO", tes);
         //Act
-        ana.activateUser();
+        ana.setActivateUser();
         //Assert
-        assertTrue(ana.isUserActivated());
+        assertTrue(ana.getUserActivated());
     }
 
 }

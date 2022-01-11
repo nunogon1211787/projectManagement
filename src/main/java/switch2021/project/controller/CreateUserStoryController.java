@@ -30,7 +30,7 @@ public class CreateUserStoryController {
     }
 
     public boolean createUserStory(String code, String userStoryStatus, int priority, String description, int timeEstimate) {
-        this.project = this.company.getProj(code);
+        this.project = this.company.getProject(code);
         try {
             return this.project.createUserStory(UserStoryStatus.valueOf(userStoryStatus.toUpperCase()), priority, description, timeEstimate);
         } catch (IllegalArgumentException exception) {

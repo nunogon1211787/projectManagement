@@ -21,7 +21,7 @@ public class CreateProjectController {
     }
 
     public boolean saveProject(Project project) {
-        int index = company.getArrayProj().size();
+        int index = company.getArrayProject().size();
         return this.company.saveProject(project, index); // confirmar se funciona, ou seja o set adiciona numa nova posição?
     }
 

@@ -2,7 +2,6 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.controller.CreateUserStoryController;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -152,7 +151,7 @@ class CompanyTest {
         Company company = new Company();
         Profile up = company.createProfile("", "System Profile");
         // Act
-        boolean result = company.add(up);
+        boolean result = company.addProfile(up);
         //Assert
         assertFalse(result);
     }
@@ -164,7 +163,7 @@ class CompanyTest {
         Profile up = company.createProfile("Visitor", "");
         //Act
         boolean expected = false;
-        boolean result = company.add(up);
+        boolean result = company.addProfile(up);
         //Assert
         assertFalse(result);
     }
@@ -176,7 +175,7 @@ class CompanyTest {
         Profile up = company.createProfile("", "");
         //Act
         boolean expected = false;
-        boolean result = company.add(up);
+        boolean result = company.addProfile(up);
         //Assert
         assertFalse(result);
     }
@@ -188,7 +187,7 @@ class CompanyTest {
         Profile up = company.createProfile("Visitor", "Other Type Profile");
         //Act
         boolean expected = false;
-        boolean result = company.add(up);
+        boolean result = company.addProfile(up);
         //Assert
         assertFalse(result);
     }
@@ -200,7 +199,7 @@ class CompanyTest {
         Profile up = company.createProfile("Visitor", "System Profile");
         //Act
         boolean expected = false;
-        boolean result = company.add(up);
+        boolean result = company.addProfile(up);
         //Assert
         assertFalse(result);
     }
@@ -212,7 +211,7 @@ class CompanyTest {
         //Act
         int inicialSize = company.getArrayProfile().size();
         Profile up = company.createProfile("Cris", "System Profile");
-        company.add(up);
+        company.addProfile(up);
         //Assert
         assertEquals(company.getArrayProfile().size(), inicialSize + 1);
     }
@@ -225,8 +224,8 @@ class CompanyTest {
         int inicialSize = company.getArrayProfile().size();
         Profile up1 = company.createProfile("Cris", "System Profile");
         Profile up2 = company.createProfile("Cris_Dani", "System Profile");
-        company.add(up1);
-        company.add(up2);
+        company.addProfile(up1);
+        company.addProfile(up2);
         //Assert
         assertEquals(company.getArrayProfile().size(), inicialSize + 2);
     }
@@ -257,9 +256,9 @@ class CompanyTest {
         Company company = new Company();
         Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"),
                 new Typology("description"), new BusinessSector("ee"), LocalDate.now(), 5, 555);
-        company.add(proj1);
+        company.addProject(proj1);
         //act
-        Project proj2 = company.getProj("123");
+        Project proj2 = company.getProject("123");
         //assert information
         assertEquals(proj1, proj2);
     }
@@ -270,9 +269,9 @@ class CompanyTest {
         Company company = new Company();
         Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"),
                 new Typology("description"), new BusinessSector("ee"), LocalDate.now(), 5, 555);
-        company.add(proj1);
+        company.addProject(proj1);
         //act
-        Project proj2 = company.getProj("125");
+        Project proj2 = company.getProject("125");
         //assert information
         assertNull(proj2);
     }
@@ -439,7 +438,7 @@ class CompanyTest {
         String passwordResult = newUser.getPassword();
         String functionResult = newUser.getFunction();
         String photoResult = newUser.getPhoto();
-        boolean activateUserResult = newUser.isUserActivated();
+        boolean activateUserResult = newUser.getUserActivated();
         List<Profile> assignedProfileResult = newUser.getAssignedProfileList();
         //Assert
         assertEquals(userNameExpected, userNameResult);
@@ -473,7 +472,7 @@ class CompanyTest {
         String emailResult = newUser.getEmail();
         String passwordResult = newUser.getPassword();
         String functionResult = newUser.getFunction();
-        boolean activateUserResult = newUser.isUserActivated();
+        boolean activateUserResult = newUser.getUserActivated();
         List<Profile> assignedProfileResult = newUser.getAssignedProfileList();
         //Assert
         assertEquals(userNameExpected, userNameResult);
@@ -496,7 +495,7 @@ class CompanyTest {
         SystemUser newUser = company.createSystemUser(userName, email, function, photo, password);
         int initialSize = company.getArraySyUser().size();
 
-        company.saveSystemUserData(newUser);
+        company.saveSystemUser(newUser);
         int expected = initialSize + 1;
         //Act
         int result = company.getArraySyUser().size();
@@ -515,7 +514,7 @@ class CompanyTest {
         SystemUser newUser = company.createSystemUser(userName, email, function, password);
         int initialSize = company.getArraySyUser().size();
 
-        company.saveSystemUserData(newUser);
+        company.saveSystemUser(newUser);
         int expected = initialSize + 1;
         //Act
         int result = company.getArraySyUser().size();
@@ -533,12 +532,12 @@ class CompanyTest {
         String photo = "photo";
         Company company = new Company();
         SystemUser newUser = company.createSystemUser(userName, email, function, photo, password);
-        company.saveSystemUserData(newUser);
+        company.saveSystemUser(newUser);
 
         String userName2 = "maneloliveira";
         SystemUser newUser2 = company.createSystemUser(userName2, email, function, photo, password);
         //Assert
-        assertFalse(company.saveSystemUserData(newUser2));
+        assertFalse(company.saveSystemUser(newUser2));
     }
 
     @Test
@@ -550,12 +549,12 @@ class CompanyTest {
         String function = "tester";
         Company company = new Company();
         SystemUser newUser = company.createSystemUser(userName, email, function, password);
-        company.saveSystemUserData(newUser);
+        company.saveSystemUser(newUser);
 
         String userName2 = "maneloliveira";
         SystemUser newUser2 = company.createSystemUser(userName2, email, function, password);
         //Assert
-        assertFalse(company.saveSystemUserData(newUser2));
+        assertFalse(company.saveSystemUser(newUser2));
     }
 
     @Test
@@ -568,12 +567,12 @@ class CompanyTest {
         String photo = "photo";
         Company company = new Company();
         SystemUser newUser = company.createSystemUser(userName, email, function, photo, password);
-        company.saveSystemUserData(newUser);
+        company.saveSystemUser(newUser);
 
         String email2 = "maneloliveira@beaver.com";
         SystemUser newUser2 = company.createSystemUser(userName, email2, function, photo, password);
         //Assert
-        assertFalse(company.saveSystemUserData(newUser2));
+        assertFalse(company.saveSystemUser(newUser2));
     }
 
     @Test
@@ -585,12 +584,12 @@ class CompanyTest {
         String function = "tester";
         Company company = new Company();
         SystemUser newUser = company.createSystemUser(userName, email, function, password);
-        company.saveSystemUserData(newUser);
+        company.saveSystemUser(newUser);
 
         String email2 = "maneloliveira@beaver.com";
         SystemUser newUser2 = company.createSystemUser(userName, email2, function, password);
         //Assert
-        assertFalse(company.saveSystemUserData(newUser2));
+        assertFalse(company.saveSystemUser(newUser2));
     }
 
     @Test
@@ -619,7 +618,7 @@ class CompanyTest {
         Company company = new Company();
         SystemUser joana = company.createSystemUser(userName, email, function, photo, password);
         int initialSize = company.getArraySyUser().size();
-        company.saveSystemUserData(joana);
+        company.saveSystemUser(joana);
         int expected = initialSize +1 ;
         //Act
         int result = company.getArraySyUser().size();
@@ -646,7 +645,7 @@ class CompanyTest {
         /** project list **/
 
         Company comTest = new Company();
-       List<Project> testProjectList = comTest.getArrayProj();
+       List<Project> testProjectList = comTest.getArrayProject();
        LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
        Customer cust = new Customer("ght@gmail.com");
        Typology typo = new Typology("typo1");
@@ -685,7 +684,7 @@ class CompanyTest {
 
         /** project **/
         Company comTest = new Company();
-        List<Project> testProjectList = comTest.getArrayProj();
+        List<Project> testProjectList = comTest.getArrayProject();
         LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
         Customer cust = new Customer("ght@gmail.com");
         Typology typo = new Typology("typo1");
@@ -745,7 +744,7 @@ class CompanyTest {
         project.createUserStory(UserStoryStatus.TODO, 12, "Default Story", 6);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
                 "Product Owner", "AAA", company.getProfile("Product Owne")));
-        company.add(project);
+        company.addProject(project);
         // Act
         List<Project> projectList = company.getProjectListWithPORight("123@isep.ipp.pt");
         //Assert
@@ -770,7 +769,7 @@ class CompanyTest {
 
         /** project **/
         Company comTest = new Company();
-        List<Project> testProjectList = comTest.getArrayProj();
+        List<Project> testProjectList = comTest.getArrayProject();
         LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
         Customer cust = new Customer("ght@gmail.com");
         Typology typo = new Typology("typo1");
