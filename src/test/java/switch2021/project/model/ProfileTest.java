@@ -100,4 +100,9 @@ class ProfileTest {
         //result
         assertEquals(test, copyTest);
     }
+
+    @Test
+    void isvalinameteste(){
+        Profile teste = new Profile("admin", "system");
+    }
 }
