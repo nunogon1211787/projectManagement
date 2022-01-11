@@ -25,15 +25,8 @@ public class Profile {
 
 
 
-    /**
-     * Profle Constructors
-     * Constructors
-     */
-    //Create ID automatically
-    private static AtomicInteger ID_GENERATOR = new AtomicInteger();
-
     public Profile(String name, String type) {
-        this.id_Profile = ID_GENERATOR.getAndIncrement();
+        this.id_Profile = ID_PROFILE_GENERATOR.getAndIncrement();
         this.name = name;
         this.type = type;
     }
@@ -47,6 +40,12 @@ public class Profile {
         this.name = originalProfile.name;
         this.type = originalProfile.type;
     }
+
+    /**
+     * Profle Constructors
+     */
+    //Create ID automatically
+    private static AtomicInteger ID_PROFILE_GENERATOR = new AtomicInteger();
 
     /**
      * Getters e Setters
@@ -86,7 +85,7 @@ public class Profile {
     }
 
     public boolean isValidName(String name) {
-        if(name.toUpperCase(Locale.ROOT) != this.getName().toUpperCase()) {
+        if(!name.toUpperCase(Locale.ROOT).equals(this.name.toUpperCase())) {
             return false;
         }
         return true;

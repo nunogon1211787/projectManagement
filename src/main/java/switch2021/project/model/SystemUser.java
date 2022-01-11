@@ -11,7 +11,7 @@ public class SystemUser {
     private String userName;
     private String email;
     private String photo;
-    private String password;
+    private String password;  // Implementar password confirmation ***
     private String function;
     private boolean activateUser;
     private List<Profile> assignedProfileList;
@@ -25,7 +25,7 @@ public class SystemUser {
         checkFunctionRules(function);
         checkPasswordRules(password);
         this.userName = userName;
-        this.email = email;
+        this.email = email;                             /////  Implementar apenas um construtor  *****
         this.photo = "";
         this.function = function;
         this.password = encryptPassword(password);
@@ -52,6 +52,96 @@ public class SystemUser {
         this.assignedProfileList.add(profile);
     }
 
+    /**
+     * Copy Constructor. Para criar um novo objeto, igual ao parâmetro, mas sem levar adiante as referências do objeto original.
+     */
+    public SystemUser(SystemUser originalUser) {
+        this.userName = originalUser.userName;
+        this.email = originalUser.email;
+        this.photo = originalUser.photo;
+        this.function = originalUser.function;
+        this.password = originalUser.password;
+        this.activateUser = originalUser.activateUser;
+        this.assignedProfileList = deepCopyListProfile(originalUser.assignedProfileList);
+
+    }
+
+    private List<Profile> deepCopyListProfile(List<Profile> originalList) {
+
+        List<Profile> deepCopyList = new ArrayList<>();
+
+        for (int i = 0; i < originalList.size(); i++) {
+
+            deepCopyList.add(new Profile(originalList.get(i)));
+
+        }
+
+        return deepCopyList;
+    }
+
+    /**
+     * Getting Methods
+     **/
+
+    public String getUserName() {
+        return this.userName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getPhoto() {
+        return this.photo;
+    }
+
+    public String getFunction() {
+        return this.function;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public boolean getUserActivated() {
+        return this.activateUser;
+    }
+
+    public List<Profile> getAssignedProfileList() {
+        return this.assignedProfileList;
+    }
+
+    /**
+     * Setting Methods
+     **/
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setFunction(String function) {
+        this.function = function;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public void setActivateUser() {this.activateUser = true;}
+
+    /**
+     * Validation Methods
+     **/
+
+    //// Verificar se se pode implementar apenas um metodo de validação ****
     private void checkUserNameRules(String userName) {
         if (userName.trim().isEmpty())
             throw new IllegalArgumentException("Username cannot be empty.");
@@ -81,34 +171,9 @@ public class SystemUser {
     }
 
     /**
-     * Copy Constructor. Para criar um novo objeto, igual ao parâmetro, mas sem levar adiante as referências do objeto original.
-     */
-    public SystemUser(SystemUser originalUser) {
-        this.userName = originalUser.userName;
-        this.email = originalUser.email;
-        this.photo = originalUser.photo;
-        this.function = originalUser.function;
-        this.password = originalUser.password;
-        this.activateUser = originalUser.activateUser;
-        this.assignedProfileList = deepCopyListProfile(originalUser.assignedProfileList);
+     * Encryption/Decryption Methods
+     **/
 
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SystemUser that = (SystemUser) o;
-        return (this.userName.equals(that.userName)) && (this.email.equals(that.email)) &&
-                (this.photo.equals(that.photo)) && (this.password.equals(that.password)) &&
-                (this.function.equals(that.function)) && (this.activateUser == that.activateUser)
-                && (this.assignedProfileList.equals(that.assignedProfileList));
-    }
-    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
-    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
-
-
-    //para encriptar
     public String encryptPassword(String password) {
         int codigoASCII;
         String result = "";
@@ -121,7 +186,6 @@ public class SystemUser {
         return result;
     }
 
-    //para desencriptar
     public String decryptPassword(String password) {
         int codigoASCII;
         String result = "";
@@ -135,68 +199,9 @@ public class SystemUser {
     }
 
     /**
-     * Getting and Setting Methods
-     **/
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserName() {
-        return this.userName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public String getPhoto() {
-        return this.photo;
-    }
-
-    public void setFunction(String function) {
-        this.function = function;
-    }
-
-    public String getFunction() {
-        return this.function;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public boolean isUserActivated() {
-        return this.activateUser;
-    }
-
-    public List<Profile> getAssignedProfileList() {
-        return this.assignedProfileList;
-    }
-
-
-    public boolean activateUser() {
-        return true;
-    }
-
-    public String getAssignedProfile(int idx) {
-        return assignedProfileList.get(idx).getName();
-    }
-
-    /**
      * Método para adicionar um profile a lista de profiles do User.
      */
+
     public void addProfileToList(Profile p) {
         this.assignedProfileList.add(p);
     }
@@ -204,6 +209,7 @@ public class SystemUser {
     /**
      * Método para validar se o email (ou parte dele) é deste objeto.
      */
+
     public boolean isYourEmail(String email) {
 
         boolean result = false;
@@ -220,25 +226,6 @@ public class SystemUser {
     public boolean isYourID(int id){return this.userId == id ;}
 
 
-
-    /**
-     * Método para verificar se o profile recebido (by ID) está associado (tem na lista) ao objeto.
-     */
-    public boolean isYourProfile(int id) {
-
-        boolean valid = false;
-
-        for (int i = 0; i < this.assignedProfileList.size(); i++) {
-
-            if (this.assignedProfileList.get(i).isValidId(id)) {
-                valid = true;
-                break;
-            }
-
-        }
-
-        return valid;
-    }
 
     /**
      * Método para verificar se os parâmetros recebidos são do objeto.
@@ -325,23 +312,6 @@ public class SystemUser {
     }
 
     /**
-     * Método para criar uma Deep Copy da lista de profiles do user.
-     */
-
-    private List<Profile> deepCopyListProfile(List<Profile> originalList) {
-
-        List<Profile> deepCopyList = new ArrayList<>();
-
-        for (int i = 0; i < originalList.size(); i++) {
-
-            deepCopyList.add(new Profile(originalList.get(i)));
-
-        }
-
-        return deepCopyList;
-    }
-
-    /**
      * Method to update old password with the new password
      */
 
@@ -357,12 +327,6 @@ public class SystemUser {
         return true;
     }
 
-    /**
-     * Method to compare the oldpassword from de UI (oldpasswordUI) and the oldpassword saved in System User (oldpasswordSU)
-     */
-
-    //Método para validar a passar que vem do UI encriptada, que irá ser comparada com a password, também
-    //encriptada, do SU.
     private boolean validateOldPassword(String oldpasswordUI) {
 
         String oldpasswordSU = decryptPassword(this.password);
@@ -374,17 +338,30 @@ public class SystemUser {
     }
 
     /**
-     * Method to set the new password
+     * Update profile Method
      */
 
     public boolean updateProfile(Profile oldProfile, Profile newProfile) {
         this.assignedProfileList.remove(oldProfile);
-        if (newProfile.isValidName(newProfile.toString())) {
-            this.assignedProfileList.add(newProfile);
+        if (newProfile.isValidName(newProfile.getName())) {  ///// Faz sentido ter esta validação de Profile?? Os profiles
+            this.assignedProfileList.add(newProfile);          /// já vão ser selecionados de uma lista válida!
         } else {
             return false;
         }
         return true;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SystemUser that = (SystemUser) o;
+        return (this.userName.equals(that.userName)) && (this.email.equals(that.email)) &&
+                (this.photo.equals(that.photo)) && (this.password.equals(that.password)) &&
+                (this.function.equals(that.function)) && (this.activateUser == that.activateUser)
+                && (this.assignedProfileList.equals(that.assignedProfileList));
+    }
+    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
+    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
 }

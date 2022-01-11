@@ -2,7 +2,6 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.controller.CreateUserStoryController;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -89,26 +88,54 @@ class CompanyTest {
 //                     o mesmo pode ser feito para SystemUser **/
 //    }
     @Test
-    public void UserByEmail() {
+    public void SearchUserByEmail() {
 
+        //Act
         SystemUser ana = new SystemUser("Ana", "1211748@isep.ipp.pt", "Developer", "12345", new Profile("Visit", "System"));
         Company company = new Company(); // criar uma company
         company.saveSystemUser(ana); //ana = objeto da classe SU
-        //Expected
+        //Arrange
         SystemUser ana2 = company.getUserByEmail("1211748@isep.ipp.pt"); // estou a ir buscar um utilizador com o email etc
-        //Result
+        //Assert
         assertEquals(ana, ana2);
+    }
+
+    @Test
+    public void SearchUserByPartiallySwitchedEmail() {
+
+        //Arrange
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", new Profile("XXX", "AAA"));
+        Company company = new Company();
+        company.saveSystemUser(joana);
+        //Act
+        SystemUser joanasilva = company.getUserByEmail("1235@isep.ipp.pt");
+        //Assert
+        assertNotEquals(joana, joanasilva);
+    }
+
+    @Test
+    public void SearchUserByWrongEmail() {
+
+        //Arrange
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", new Profile("XXX", "AAA"));
+        Company company = new Company();
+        company.saveSystemUser(joana);
+        //Act
+        SystemUser joanasilva = company.getUserByEmail("4321@isep.ipp.pt");
+        //Assert
+        assertNotEquals(joana, joanasilva);
     }
 
 
     @Test
     public void verifyUpdatePassword() {
 
-        //Input
+        //Arrange
         Profile tes = new Profile("ddd", "pro");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", tes);
-        //RESULT
+        //Act
         assertTrue(joana.updatePassword("png_123", "GOODBYE"));
+        //Assert
         assertEquals("GOODBYE", joana.getPassword());
     }
 
@@ -124,7 +151,7 @@ class CompanyTest {
         Company company = new Company();
         Profile up = company.createProfile("", "System Profile");
         // Act
-        boolean result = company.add(up);
+        boolean result = company.addProfile(up);
         //Assert
         assertFalse(result);
     }
@@ -136,7 +163,7 @@ class CompanyTest {
         Profile up = company.createProfile("Visitor", "");
         //Act
         boolean expected = false;
-        boolean result = company.add(up);
+        boolean result = company.addProfile(up);
         //Assert
         assertFalse(result);
     }
@@ -148,7 +175,7 @@ class CompanyTest {
         Profile up = company.createProfile("", "");
         //Act
         boolean expected = false;
-        boolean result = company.add(up);
+        boolean result = company.addProfile(up);
         //Assert
         assertFalse(result);
     }
@@ -160,7 +187,7 @@ class CompanyTest {
         Profile up = company.createProfile("Visitor", "Other Type Profile");
         //Act
         boolean expected = false;
-        boolean result = company.add(up);
+        boolean result = company.addProfile(up);
         //Assert
         assertFalse(result);
     }
@@ -172,7 +199,7 @@ class CompanyTest {
         Profile up = company.createProfile("Visitor", "System Profile");
         //Act
         boolean expected = false;
-        boolean result = company.add(up);
+        boolean result = company.addProfile(up);
         //Assert
         assertFalse(result);
     }
@@ -184,7 +211,7 @@ class CompanyTest {
         //Act
         int inicialSize = company.getArrayProfile().size();
         Profile up = company.createProfile("Cris", "System Profile");
-        company.add(up);
+        company.addProfile(up);
         //Assert
         assertEquals(company.getArrayProfile().size(), inicialSize + 1);
     }
@@ -197,8 +224,8 @@ class CompanyTest {
         int inicialSize = company.getArrayProfile().size();
         Profile up1 = company.createProfile("Cris", "System Profile");
         Profile up2 = company.createProfile("Cris_Dani", "System Profile");
-        company.add(up1);
-        company.add(up2);
+        company.addProfile(up1);
+        company.addProfile(up2);
         //Assert
         assertEquals(company.getArrayProfile().size(), inicialSize + 2);
     }
@@ -229,9 +256,9 @@ class CompanyTest {
         Company company = new Company();
         Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"),
                 new Typology("description"), new BusinessSector("ee"), LocalDate.now(), 5, 555);
-        company.add(proj1);
+        company.addProject(proj1);
         //act
-        Project proj2 = company.getProj("123");
+        Project proj2 = company.getProject("123");
         //assert information
         assertEquals(proj1, proj2);
     }
@@ -242,9 +269,9 @@ class CompanyTest {
         Company company = new Company();
         Project proj1 = new Project("123", "CDC", "teste", new Customer("email@domain.pt"),
                 new Typology("description"), new BusinessSector("ee"), LocalDate.now(), 5, 555);
-        company.add(proj1);
+        company.addProject(proj1);
         //act
-        Project proj2 = company.getProj("125");
+        Project proj2 = company.getProject("125");
         //assert information
         assertNull(proj2);
     }
@@ -411,7 +438,7 @@ class CompanyTest {
         String passwordResult = newUser.getPassword();
         String functionResult = newUser.getFunction();
         String photoResult = newUser.getPhoto();
-        boolean activateUserResult = newUser.isUserActivated();
+        boolean activateUserResult = newUser.getUserActivated();
         List<Profile> assignedProfileResult = newUser.getAssignedProfileList();
         //Assert
         assertEquals(userNameExpected, userNameResult);
@@ -445,7 +472,7 @@ class CompanyTest {
         String emailResult = newUser.getEmail();
         String passwordResult = newUser.getPassword();
         String functionResult = newUser.getFunction();
-        boolean activateUserResult = newUser.isUserActivated();
+        boolean activateUserResult = newUser.getUserActivated();
         List<Profile> assignedProfileResult = newUser.getAssignedProfileList();
         //Assert
         assertEquals(userNameExpected, userNameResult);
@@ -468,7 +495,7 @@ class CompanyTest {
         SystemUser newUser = company.createSystemUser(userName, email, function, photo, password);
         int initialSize = company.getArraySyUser().size();
 
-        company.saveSystemUserData(newUser);
+        company.saveSystemUser(newUser);
         int expected = initialSize + 1;
         //Act
         int result = company.getArraySyUser().size();
@@ -487,7 +514,7 @@ class CompanyTest {
         SystemUser newUser = company.createSystemUser(userName, email, function, password);
         int initialSize = company.getArraySyUser().size();
 
-        company.saveSystemUserData(newUser);
+        company.saveSystemUser(newUser);
         int expected = initialSize + 1;
         //Act
         int result = company.getArraySyUser().size();
@@ -505,12 +532,12 @@ class CompanyTest {
         String photo = "photo";
         Company company = new Company();
         SystemUser newUser = company.createSystemUser(userName, email, function, photo, password);
-        company.saveSystemUserData(newUser);
+        company.saveSystemUser(newUser);
 
         String userName2 = "maneloliveira";
         SystemUser newUser2 = company.createSystemUser(userName2, email, function, photo, password);
         //Assert
-        assertFalse(company.saveSystemUserData(newUser2));
+        assertFalse(company.saveSystemUser(newUser2));
     }
 
     @Test
@@ -522,12 +549,12 @@ class CompanyTest {
         String function = "tester";
         Company company = new Company();
         SystemUser newUser = company.createSystemUser(userName, email, function, password);
-        company.saveSystemUserData(newUser);
+        company.saveSystemUser(newUser);
 
         String userName2 = "maneloliveira";
         SystemUser newUser2 = company.createSystemUser(userName2, email, function, password);
         //Assert
-        assertFalse(company.saveSystemUserData(newUser2));
+        assertFalse(company.saveSystemUser(newUser2));
     }
 
     @Test
@@ -540,12 +567,12 @@ class CompanyTest {
         String photo = "photo";
         Company company = new Company();
         SystemUser newUser = company.createSystemUser(userName, email, function, photo, password);
-        company.saveSystemUserData(newUser);
+        company.saveSystemUser(newUser);
 
         String email2 = "maneloliveira@beaver.com";
         SystemUser newUser2 = company.createSystemUser(userName, email2, function, photo, password);
         //Assert
-        assertFalse(company.saveSystemUserData(newUser2));
+        assertFalse(company.saveSystemUser(newUser2));
     }
 
     @Test
@@ -557,12 +584,12 @@ class CompanyTest {
         String function = "tester";
         Company company = new Company();
         SystemUser newUser = company.createSystemUser(userName, email, function, password);
-        company.saveSystemUserData(newUser);
+        company.saveSystemUser(newUser);
 
         String email2 = "maneloliveira@beaver.com";
         SystemUser newUser2 = company.createSystemUser(userName, email2, function, password);
         //Assert
-        assertFalse(company.saveSystemUserData(newUser2));
+        assertFalse(company.saveSystemUser(newUser2));
     }
 
     @Test
@@ -580,12 +607,32 @@ class CompanyTest {
         });
     }
 
-    //@Test
-    //@DisplayName("Validate Allocation True")
-    /*public void validateAllocationTrue() {
+    @Test
+    public void saveSystemUser() {
+        //Arrange
+        String userName = "Joana Silva";
+        String email = "1234@isep.ipp.pt";
+        String password = "1234";
+        String function = "Aluna";
+        String photo = "123_img";
+        Company company = new Company();
+        SystemUser joana = company.createSystemUser(userName, email, function, photo, password);
+        int initialSize = company.getArraySyUser().size();
+        company.saveSystemUser(joana);
+        int expected = initialSize +1 ;
+        //Act
+        int result = company.getArraySyUser().size();
+        //Assert
+        assertEquals(expected, result);
+    }
+
+
+    @Test
+    @DisplayName("Validate Allocation True")
+    public void validateAllocationTrue() {
         //Arrange
         /** user **/
-        /*Profile pro = new Profile("mku", "sss");
+        Profile pro = new Profile("mku", "sss");
         SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
@@ -597,8 +644,8 @@ class CompanyTest {
 
         /** project list **/
 
-       /*Company comTest = new Company();
-       List<Project> testProjectList = comTest.getArrayProj();
+        Company comTest = new Company();
+       List<Project> testProjectList = comTest.getArrayProject();
        LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
        Customer cust = new Customer("ght@gmail.com");
        Typology typo = new Typology("typo1");
@@ -613,11 +660,11 @@ class CompanyTest {
        proj3.addResource(resAllo1);
 
        //Act
-        boolean result = proj2.addResource(resAllo2);
+       boolean result = proj2.addResource(resAllo1);
 
         //Assert
         assertTrue(result);
-    }*/
+    }
 
     @Test
     @DisplayName("Validate Allocation False")
@@ -630,15 +677,14 @@ class CompanyTest {
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
 
-        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .2);
+        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
-        Resource resAllo2 = new Resource(newUser2, startDateToAllocate, endDateToAllocate, 100, .2);
+        Resource resAllo2 = new Resource(newUser2, startDateToAllocate, endDateToAllocate, 100, .5);
 
-        /** project list **/
-
+        /** project **/
         Company comTest = new Company();
-        List<Project> testProjectList = comTest.getArrayProj();
+        List<Project> testProjectList = comTest.getArrayProject();
         LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
         Customer cust = new Customer("ght@gmail.com");
         Typology typo = new Typology("typo1");
@@ -653,7 +699,7 @@ class CompanyTest {
         proj3.addResource(resAllo1);
 
         //Act
-        boolean result = proj2.addResource(resAllo2);
+        boolean result = comTest.validateAllocation(newUser,.5, startDateToAllocate, endDateToAllocate );
 
         //Assert
         assertFalse(result);
@@ -698,11 +744,49 @@ class CompanyTest {
         project.createUserStory(UserStoryStatus.TODO, 12, "Default Story", 6);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
                 "Product Owner", "AAA", company.getProfile("Product Owne")));
-        company.add(project);
+        company.addProject(project);
         // Act
         List<Project> projectList = company.getProjectListWithPORight("123@isep.ipp.pt");
         //Assert
         assertNotEquals(0, projectList.size());
+    }
 
+    @Test
+    @DisplayName("Create Resource")
+    public void createResource() {
+        //Arrange
+        /** user **/
+        Profile pro = new Profile("mku", "sss");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        SystemUser newUser2 = new SystemUser("xyz", "fase", "des", "gth", pro);
+        LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
+        LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
+
+        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
+        LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
+//        Resource resAllo2 = new Resource(newUser2, startDateToAllocate, endDateToAllocate, 100, .5);
+
+        /** project **/
+        Company comTest = new Company();
+        List<Project> testProjectList = comTest.getArrayProject();
+        LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
+        Customer cust = new Customer("ght@gmail.com");
+        Typology typo = new Typology("typo1");
+        BusinessSector busSector = new BusinessSector("busSec1");
+        Project proj1 = comTest.createProject("1", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
+        Project proj2 = comTest.createProject("2", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
+        Project proj3 = comTest.createProject("3", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
+        testProjectList.add(proj1);
+        testProjectList.add(proj2);
+        testProjectList.add(proj3);
+        proj1.addResource(resAllo1);
+        proj3.addResource(resAllo1);
+
+        //Act
+        Resource resultexp = proj1.createResource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+
+        //Assert
+        assertEquals(resAllo1,resultexp);
     }
 }

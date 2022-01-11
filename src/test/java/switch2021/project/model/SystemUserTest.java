@@ -1,9 +1,7 @@
 package switch2021.project.model;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +13,11 @@ class SystemUserTest {
         //Input
         Profile pro = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", pro);
-        ivan.activateUser();
+        ivan.setActivateUser();
         //Expected
         Profile tes = new Profile("ddd", "pro");
         SystemUser expected = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", tes);
-        expected.activateUser();
+        expected.setActivateUser();
         //Results
         assertEquals(ivan, expected);
     }
@@ -29,24 +27,37 @@ class SystemUserTest {
         //Input
         Profile pro = new Profile("ddd", "pro");
         SystemUser ivan1 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456", pro);
-        ivan1.activateUser();
+        ivan1.setActivateUser();
         //Expected
         Profile tes = new Profile("ddd", "pro");
         SystemUser expected2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456", tes);
-        expected2.activateUser();
+        expected2.setActivateUser();
         //Result
         assertEquals(ivan1, expected2);
     }
 
     @Test
-    public void verifyEmailTest() {
+    public void verifyEmail() {
 
-        //Input
+        //Arrange
         Profile tes = new Profile("ddd", "pro");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456", "123456", tes);
+        //Act
         String emailCheck = "xxxx";
-        //Result
+        //Assert
         assertTrue(ivan.isYourEmail(emailCheck));
+    }
+
+    @Test
+    public void verifyEmailFail() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "123_img", "abcde", tes);
+        //Act
+        String emailCheck = "4321@isep.ipp.pt";
+        //Assert
+        assertFalse(joana.isYourEmail(emailCheck));
     }
 
     @Test
@@ -59,7 +70,6 @@ class SystemUserTest {
         Profile tes = new Profile("ddd", "pro");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO", tes);
         //Act
-        //assertTrue(joana.updatePassword("HELLO", "GOODBYE"));
         joana.updatePassword("HELLO", "GOODBYE");
         //Assert
         assertEquals("GOODBYE", joana.getPassword());
@@ -70,13 +80,112 @@ class SystemUserTest {
 
         //Test to verify if the oldpassword, stored in the system user, is equal or diferent from the
         //password that came from User Interface (UI).
-
         //Arrange
         Profile tes = new Profile("ddd", "pro");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO_01", tes);
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+                "png_123", "HELLO_01", tes);
         //Act
         assertFalse(joana.updatePassword("HELLO_02", "GOODBYE"));
 
+    }
+
+    @Test
+    public void setPasswordSucess() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", tes);
+        //Act
+        joana.setPassword("123");
+        //Assert
+        assertEquals(joana.getPassword(), "123");
+    }
+
+    @Test
+    public void setPasswordFail() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", tes);
+        //Act
+        joana.setPassword("123");
+        //Assert
+        assertNotEquals(joana.getPassword(), "321");
+    }
+
+
+    @Test
+    public void setUserNameSucess() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", tes);
+        //Act
+        joana.setUserName("Joana");
+        //Assert
+        assertEquals(joana.getUserName(), "Joana");
+    }
+
+    @Test
+    public void setUserNameFail() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", tes);
+        //Act
+        joana.setUserName("Joana");
+        //Assert
+        assertNotEquals(joana.getUserName(), "Isabel");
+    }
+
+    @Test
+    public void setFunctionSucess() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", tes);
+        //Act
+        joana.setFunction("Aluna_10");
+        //Assert
+        assertEquals(joana.getFunction(), "Aluna_10");
+    }
+
+    @Test
+    public void setFuncionFail() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", tes);
+        //Act
+        joana.setFunction("Aluna_10");
+        //Assert
+        assertNotEquals(joana.getFunction(), "Project Manager");
+    }
+
+    @Test
+    public void setPhotoSucess() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+                "img_789", "123", tes);
+        //Act
+        joana.setPhoto("img_789");
+        //Assert
+        assertEquals(joana.getPhoto(), "img_789");
+    }
+
+    @Test
+    public void setPhotoFail() {
+
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+                "img_789", "123", tes);
+        //Act
+        joana.setPhoto("img_789");
+        //Assert
+        assertNotEquals(joana.getPhoto(), "img_000");
     }
 
     @Test
@@ -104,7 +213,7 @@ class SystemUserTest {
         String passwordResult = newUser.getPassword();
         String functionResult = newUser.getFunction();
         String photoResult = newUser.getPhoto();
-        boolean activateUserResult = newUser.isUserActivated();
+        boolean activateUserResult = newUser.getUserActivated();
         List<Profile> assignedProfileResult = newUser.getAssignedProfileList();
         //Assert
         assertEquals(userNameExpected, userNameResult);
@@ -138,7 +247,7 @@ class SystemUserTest {
         String emailResult = newUser.getEmail();
         String passwordResult = newUser.getPassword();
         String functionResult = newUser.getFunction();
-        boolean activateUserResult = newUser.isUserActivated();
+        boolean activateUserResult = newUser.getUserActivated();
         List<Profile> assignedProfileResult = newUser.getAssignedProfileList();
         //Assert
         assertEquals(userNameExpected, userNameResult);
@@ -596,6 +705,19 @@ class SystemUserTest {
         int[] profiles = {}; // profile Id
         //Result
         assertFalse(ivan.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    public void activationUser() {
+
+        //Test to activate the user
+        //Arrange
+        Profile tes = new Profile("ddd", "pro");
+        SystemUser ana = new SystemUser("Ana", "1211748@isep.ipp.pt", "User_12", "png_234", "HELLO", tes);
+        //Act
+        ana.setActivateUser();
+        //Assert
+        assertTrue(ana.getUserActivated());
     }
 
 }

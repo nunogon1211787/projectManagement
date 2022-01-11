@@ -7,38 +7,36 @@ import java.util.List;
 public class Project {
 
     /**
-     * Atributos da classe Projecto
+     * Class Atributes
      **/
 
     private String code;
     private String projectName;
     private String description;
 
-    private ProductBacklog productBacklog;
     private Customer customer;
     private Typology typology;
     private ProjectStatus projectStatus;
-    private SystemUser scrumMaster;   /** Adicionado **/
-    private SystemUser productOwner;   /** Adicionado **/
+    private ProductBacklog productBacklog;
+    private SystemUser productOwner; // Verificar a necessidade de se manter este atributo
 
     private BusinessSector businessSector;  // Para já coloquei em tipo Business Sector e não lista. Depois será para mudar.
-    private List<Resource> projectTeam; //lista de resources alocados ao projecto (Carolina)
+    private List<Resource> projectTeam;
 
     private LocalDate startDate;
     private LocalDate endDate;
 
     private int numberOfSprints;
-    private int budget;
-    private int sprintDuration;   /** Adicionado **/
+    private double budget;
+    private int sprintDuration;
 
     /**
-     * Construtor de Projecto (Paulo - US005)
+     * Project Constructor
      **/
 
     public Project(String code, String name, String description, Customer customer, Typology typology,
-                   BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
+                   BusinessSector businessSector, LocalDate startDate, int numberOfSprints, double budget) {
 
-        this();
         this.code = code;
         this.projectName = name;
         this.description = description;
@@ -53,35 +51,8 @@ public class Project {
         this.projectTeam = new ArrayList<>();
     }
 
-
-    public void setScrumMaster(SystemUser scrumMaster) {
-        this.scrumMaster = scrumMaster;
-    }
-
-    public void setProductOwner(SystemUser productOwner) {
-        this.productOwner = productOwner;
-    }
-
-    public Project() {
-        this.productBacklog = new ProductBacklog();
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     /**
-     * Método que obtem a data actual no momento do uso do proprio metodo; (Paulo - US005)
-     **/
-
-    public boolean setEndDate() {
-
-        this.endDate = LocalDate.now();
-        return true;
-    }
-
-    /**
-     * Métodos "Getter" dos atributos (Paulo, menos o productBacklog + Cris, productBacklog)
+     * Getter Methods (Paulo + Cris, productBacklog)
      **/
 
     public String getCode() {
@@ -120,20 +91,16 @@ public class Project {
         return numberOfSprints;
     }
 
-    public int getBudget() {
+    public double getBudget() {
         return budget;
-    }
-
-    public List<UserStory> getProductBacklog() {
-        return productBacklog.getUserStoryList();
-    }
-
-    public SystemUser getScrumMaster() {
-        return scrumMaster;
     }
 
     public SystemUser getProductOwner() {
         return productOwner;
+    }
+
+    public List<UserStory> getProductBacklog() {
+        return productBacklog.getUserStoryList();
     }
 
     public int getSprintDuration() {
@@ -141,8 +108,20 @@ public class Project {
     }
 
     /**
-     * Metodos Setter de atributos
+     * Setter Methods
      **/
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public boolean setEndDate() {this.endDate = LocalDate.now();
+        return true;
+    }
+
+    public void setProductOwner(SystemUser productOwner) {
+        this.productOwner = productOwner;
+    }
 
     public void setProjectName(String projectName) {
         this.projectName = projectName;
@@ -152,24 +131,12 @@ public class Project {
         this.description = description;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
     public void setTypology(Typology typology) {
         this.typology = typology;
     }
 
     public void setProjectStatus(ProjectStatus projectStatus) {
         this.projectStatus = projectStatus;
-    }
-
-    public void setBusinessSector(BusinessSector businessSector) {
-        this.businessSector = businessSector;
-    }
-
-    public void setProductBacklog(List<UserStory> productBacklog) {
-        this.productBacklog.setUserStoryList(productBacklog);
     }
 
     public void setStartDate(LocalDate startDate) {
@@ -188,16 +155,6 @@ public class Project {
         this.budget = budget;
     }
 
-
-    /**
-     * Methods for createUserStory (Cris US009)
-     **/
-    public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
-        UserStory us = productBacklog.createUserStory(code, userStoryStatus, priority, description, timeEstimate);
-        return us == null ? false : productBacklog.addUserStory(us);
-    }
-
-
     public void setSprintDuration(int sprintDuration) {
         this.sprintDuration = sprintDuration;
     }
@@ -207,16 +164,25 @@ public class Project {
     }
 
     /**
-     * Método para ir buscar Project Team (Carolina)
+     * Methods UserStory creation (Cris US009)
+     * - Create User Story method
+     **/
+
+    public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
+        UserStory us = productBacklog.createUserStory(code, userStoryStatus, priority, description, timeEstimate);
+        return us != null && productBacklog.addUserStory(us);
+    }
+
+    /**
+     * Resource Allocation Methods - (Carolina US007)
+     * - Método para criar resource
+     * - Método para ir buscar Team Member a Project Team
+     * - Método para Validar Resource
      **/
 
     public List<Resource> getProjectTeam() {
         return projectTeam;
     }
-
-    /**
-     * Método para adicionar resource à Project Team (Carolina US007)
-     **/
 
     public boolean addResource(Resource toAdd) {
         boolean msg = false;
@@ -227,38 +193,27 @@ public class Project {
         return msg;
     }
 
-    /**
-     * Método para criar resource  (Carolina US007)
-     **/
-
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
         Resource res = new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
         return res;
     }
 
-    /** Método para ir buscar Team Member a Project Team (Carolina US007) **/
-
     public Resource getTeamMemberByIndex(int index) {
-        Resource res = null;
-        for (int i = 0; i < projectTeam.size(); i++) {
-            if (projectTeam.get(i).equals(index)) {
-                res = projectTeam.get(i);
-            }
-        }
-        return res;
+        return projectTeam.get(index);
     }
 
-    /** Método para Validar Resource (Carolina US007) **/
-
     public boolean validateResource(Resource resource){
-        boolean msg = false;
+        boolean msg = true;
         for (int i = 0; i < projectTeam.size(); i++) {
             if(projectTeam.get(i).equals(resource)){
-        msg = true;
+        msg = false;
             }
         }
         return msg;
     }
+
+
+
 
     @Override
     public boolean equals(Object o) {

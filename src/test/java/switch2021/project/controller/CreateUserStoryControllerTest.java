@@ -24,7 +24,7 @@ public class CreateUserStoryControllerTest {
         project.createUserStory(UserStoryStatus.TODO, 12, "Default Story", 6);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
                 "Product Owner", "AAA", company.getProfile("Product Owne")));
-        company.add(project);
+        company.addProject(project);
     }
 
     @Test
