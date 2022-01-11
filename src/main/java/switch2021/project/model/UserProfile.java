@@ -1,10 +1,9 @@
 package switch2021.project.model;
 
 import java.util.Locale;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Profile {
+public class UserProfile {
 
     /**
      * Classe Profile Atributes
@@ -16,7 +15,7 @@ public class Profile {
 
 
 
-    public Profile(String name, String type) {
+    public UserProfile(String name, String type) {
         this.id_Profile = ID_PROFILE_GENERATOR.getAndIncrement();
         this.name = name;
         this.type = type;
@@ -26,7 +25,7 @@ public class Profile {
      * Copy Constructor
      */
 
-    public Profile(Profile originalProfile) {
+    public UserProfile(UserProfile originalProfile) {
         this.id_Profile = originalProfile.id_Profile;
         this.name = originalProfile.name;
         this.type = originalProfile.type;
@@ -81,7 +80,7 @@ public class Profile {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Profile that = (Profile) o;
+        UserProfile that = (UserProfile) o;
         return (this.getName().equals(that.getName())) && (this.getType().equals(getType()));
     }
     //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
