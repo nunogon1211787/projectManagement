@@ -12,6 +12,7 @@ public class Company {
     List<SystemUser> arraySyUser;
     List<Request> arrayRequest;
 
+
     //Project
     public ProjectStore getProjectStore() {
         return new ProjectStore();
