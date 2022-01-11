@@ -333,5 +333,5 @@ public class SystemUser {
                 && (this.assignedProfileList.equals(that.assignedProfileList));
     }
     //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
-    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
+    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...teste
 }
