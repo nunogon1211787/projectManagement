@@ -12,14 +12,15 @@ public class Company {
     private TypologyStore typologyStore = new TypologyStore();
     SystemUserStore systemUserStore;
     UserProfileStore userProfileStore;
-    ProjectStore userProjectStore;
+    ProjectStore projectStore;
     // falta colocar a chamada para o request quando se criar a página;
     List<Request> arrayRequest;
 
     public  Company(){
-        this.systemUserStore = getSystemUserStore();
-        this.userProfileStore = getUserProfileStore();
-        this.userProjectStore = getProjectStore();
+        this.systemUserStore = new SystemUserStore();
+        this.userProfileStore = new UserProfileStore();
+        this.projectStore = new ProjectStore();
+        this.typologyStore = new TypologyStore();
 
         this.userProfileStore.populateDefault();
     }
@@ -27,16 +28,16 @@ public class Company {
 
     //Project
     public ProjectStore getProjectStore() {
-        return new ProjectStore();
+        return this.projectStore;
     }
 
     public SystemUserStore getSystemUserStore() {
-        return new SystemUserStore();
+        return this.systemUserStore;
     }
 
     //Profile
     public UserProfileStore getUserProfileStore() {
-            return new UserProfileStore();
+            return this.userProfileStore;
     }
 
     //Typology
