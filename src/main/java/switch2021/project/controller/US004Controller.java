@@ -25,10 +25,10 @@ public class US004Controller {
      * Método para procurar um ou mais Users no domínio.
      */
 
-    public List<SystemUser> searchUsers (String name, String email, String function, int state, int[] profileList){
+    /*public List<SystemUser> searchUsers (String name, String email, String function, int state, int[] profileList){
 
-        return co.searchUsers(name, email, function, state, profileList);
+        return co.getSystemUserStore().searchUsers(name, email, function, state, profileList);
 
-    }
+    }*/
 
 }

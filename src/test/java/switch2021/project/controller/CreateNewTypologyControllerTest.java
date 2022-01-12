@@ -17,12 +17,12 @@ public class CreateNewTypologyControllerTest {
     private TypologyStore typologyStore;
     private Typology typology;
 
-    @BeforeEach
+    /*@BeforeEach
     public void init(){
         projectSettings = App.getInstance().getProjectSettings(); // sempre a mesma instancia
         typology = typologyStore.createTypology("TypoTest");
         typologyStore.getTypologyList().add(typology);
-    }
+    }*/
 
     @Test
     public void createNewTypologyControllerTest() {

@@ -14,7 +14,7 @@ public class UpdatePersonalDataController {
     }
 
     public SystemUser getUser(String email) {
-        return this.company.getSystemUserstore().getUserByEmail(email);
+        return this.company.getSystemUserStore().getUserByEmail(email);
     }
 
     public SystemUser updateSystemUserData(String username, String function, String photo) {
@@ -25,7 +25,7 @@ public class UpdatePersonalDataController {
     }
 
     public boolean saveSystemUser() {
-        return this.company.getSystemUserstore().saveSystemUser(this.user);
+        return this.company.getSystemUserStore().saveSystemUser(this.user);
     }
 
 }

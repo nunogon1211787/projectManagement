@@ -4,13 +4,13 @@ import java.util.List;
 
 public class SpecialProfileStore {
 
-    List<UserProfile> specialProfileList;
+    List<SpecialProfile> specialProfileList;
 
-    public SpecialProfile () {
+    public SpecialProfileStore() {
         specialProfileList.add(new SpecialProfile("Project Manager", "Special Profile"));
         specialProfileList.add(new SpecialProfile("Product Owner", "Special Profile"));
         specialProfileList.add(new SpecialProfile("Scrum Master", "Special Profile"));
         specialProfileList.add(new SpecialProfile("Project Team", "Special Profile"));
-
+    }
 
 }

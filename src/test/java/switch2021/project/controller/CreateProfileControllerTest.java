@@ -11,14 +11,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CreateProfileControllerTest {
 
     Company company;
-    Profile profile;
+    UserProfile profile;
 
 
     @BeforeEach
     public void init() {
         company = App.getInstance().getCompany(); // sempre a mesma instancia
         profile = company.createProfile("Cris", "System Profile");
-        company.addProfile(profile);
+        company.getUserProfileStore().addProfile(profile);
     }
 
     @Test

@@ -23,11 +23,11 @@ public class AssociateResourceTest {
         Customer cust = new Customer("ght@gmail.com");
         Typology typo = new Typology("typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
-        Project proj1 = comTest.createProject("1", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
+        Project proj1 = comTest.getProjectStore().createProject("1", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
 
         /** user **/
-        Profile pro = new Profile("mku", "sss");
-        SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "des", "gth", pro);
+        UserProfile pro = new UserProfile("mku", "sss");
+        SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "des", "gth","gth","", pro);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
 

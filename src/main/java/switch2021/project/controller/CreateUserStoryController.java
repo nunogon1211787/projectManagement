@@ -25,12 +25,12 @@ public class CreateUserStoryController {
     }
 
     public List<Project> getProjectListWithPORight(String email){
-        List<Project> projectsAvailable = this.company.getProjectListWithPORight(email);
+        List<Project> projectsAvailable = this.company.getProjectStore().getProjectListWithPORight(email);
         return projectsAvailable;
     }
 
     public boolean createUserStory(String code, String userStoryStatus, int priority, String description, int timeEstimate) {
-        this.project = this.company.getProject(code);
+        this.project = this.company.getProjectStore().getProject(code);
         try {
             return this.project.createUserStory(UserStoryStatus.valueOf(userStoryStatus.toUpperCase()), priority, description, timeEstimate);
         } catch (IllegalArgumentException exception) {

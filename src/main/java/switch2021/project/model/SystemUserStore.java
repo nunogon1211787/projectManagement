@@ -57,7 +57,8 @@ public class SystemUserStore {
         return user;
     }
 
-    public List<SystemUser> searchUsers(String name, String email, String function, int isActive, int[] profileList) {
+    ///// Rever Método
+    /*public List<SystemUser> searchUsers(String name, String email, String function, int isActive, int[] profileList) {
 
         int listSize = this.SystemUserList.size();
         List<SystemUser> foundUsersList = new ArrayList<>();
@@ -72,7 +73,7 @@ public class SystemUserStore {
         }
 
         return foundUsersList;
-    }
+    }*/
 
     /**
      * Validation Methods

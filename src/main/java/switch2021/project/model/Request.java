@@ -12,7 +12,7 @@ public class Request {
     private LocalDate requestDate;
     private LocalDate requestTime;
     private SystemUser user;
-    private Profile profileRequested;
+    private UserProfile profileRequested;
 
     /**
      * construtor da classe "Request"
@@ -41,7 +41,7 @@ public class Request {
         return user;
     }
 
-    public Profile getProfile() {
+    public UserProfile getProfile() {
         return this.profileRequested;
     }
 

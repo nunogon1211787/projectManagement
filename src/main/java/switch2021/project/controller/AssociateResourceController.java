@@ -23,9 +23,9 @@ public class AssociateResourceController {
 
     public boolean associateResource(String email, String projectCode, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
         boolean msg = false;
-        this.user = this.company.getUserByEmail(email);
-        if(this.company.validateAllocation(this.user, percentageOfAllocation, startDate,endDate)) {
-            this.company.getProject(projectCode);
+        this.user = this.company.getSystemUserStore().getUserByEmail(email);
+        if(this.company.getProjectStore().validateAllocation(this.user, percentageOfAllocation, startDate,endDate)) {
+            this.company.getProjectStore().getProject(projectCode);
             this.resource = this.project.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);
             this.project.addResource(resource);
             msg = true;

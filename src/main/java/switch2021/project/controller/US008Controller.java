@@ -21,7 +21,7 @@ public class US008Controller {
 //        this.project = copia;
 //        return copia;
         this.index = index;
-        return this.project = this.company.getProjByIndex(index);
+        return this.project = this.company.getProjectStore().getProjByIndex(index);
     }
 
     public Project editProject(String name, LocalDate startDate, LocalDate endDate, int numberOfSprints, int sprintDuration, String status, SystemUser scrumMaster, SystemUser productOwner){
@@ -35,7 +35,7 @@ public class US008Controller {
     }
 
     public boolean saveProject(Project proj){
-        this.company.saveProject(proj, this.index);
+        this.company.getProjectStore().saveProject(proj, this.index);
         return true;
     }
 

@@ -24,7 +24,7 @@ public class SpecialProfile {
      * Copy Constructor
      */
 
-    public SpecialProfile(UserProfile originalProfile) {
+    public SpecialProfile(SpecialProfile originalProfile) {
         this.id_Profile = originalProfile.id_Profile;
         this.name = originalProfile.name;
         this.type = originalProfile.type;

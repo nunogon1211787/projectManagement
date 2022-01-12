@@ -6,8 +6,17 @@ import java.util.List;
 
 public class ProjectStore {
 
+
+
+    /**
+     * Atributos da Classe
+     **/
+
     List<Project> arrayProject;
 
+    /**
+     * Constructors with data
+     **/
     public Project createProject(String code, String name, String description, Customer customer, Typology typology,
                                  BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
@@ -21,6 +30,8 @@ public class ProjectStore {
 
     public boolean addProject(Project proj) {
         this.arrayProject.add(proj);
+        UserProfile test = new UserProfileStore().getProfile(0);
+
         return true;
 
     }

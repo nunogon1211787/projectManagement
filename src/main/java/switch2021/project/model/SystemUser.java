@@ -200,8 +200,13 @@ public class SystemUser {
     /**
      * Método para verificar se os parâmetros recebidos são do objeto.
      */
-    // Rever este Método!!!!
-    public boolean hasThisData(String userName, String email, String function, int isActive, int[] profilesId) {
+
+
+    ///
+    // Rever este Método!!!!    *****************************
+    ///
+
+    /*public boolean hasThisData(String userName, String email, String function, int isActive, int[] profilesId) {
 
         boolean result = true;
         int match = 0;
@@ -279,7 +284,7 @@ public class SystemUser {
         }
 
         return result;
-    }
+    }*/
 
     /**
      * Method to update old password with the new password
@@ -311,7 +316,11 @@ public class SystemUser {
      * Update profile Method
      */
 
-    public boolean updateProfile(UserProfile oldProfile, UserProfile newProfile) {
+    ///////
+    /// Rever Este Método **************************************************
+
+    ///////
+    /*public boolean updateProfile(UserProfile oldProfile, UserProfile newProfile) {
         this.assignedProfileList.remove(oldProfile);
         if (newProfile.isValidName(newProfile.getName())) {  ///// Faz sentido ter esta validação de Profile?? Os profiles
             this.assignedProfileList.add(newProfile);          /// já vão ser selecionados de uma lista válida!
@@ -319,7 +328,7 @@ public class SystemUser {
             return false;
         }
         return true;
-    }
+    }*/
 
 
     @Override
