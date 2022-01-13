@@ -23,6 +23,8 @@ public class Resource {
      **/
 
     public Resource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
+        checkStartDateEndDate(startDate, endDate);
+        checkCostPerHour(costPerHour);
 
         this.user = user;
         //this.project = project;
@@ -94,5 +96,16 @@ public class Resource {
             msg = true;
         }
         return msg;
+    }
+
+    private void checkStartDateEndDate(LocalDate startDate, LocalDate endDate){
+        if(endDate.isBefore(startDate)){
+            throw new IllegalArgumentException("End Date must be after Start Date");
+        }
+    }
+    private void checkCostPerHour(double costPerHour){
+        if(costPerHour < 0){
+            throw new IllegalArgumentException("Cost Per Hour must be valid.");
+        }
     }
 }
