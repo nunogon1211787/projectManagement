@@ -19,7 +19,9 @@ public class CreateUserStoryControllerTest {
     @BeforeEach
     public void init() {
         company = App.getInstance().getCompany();
-        project = company.getProjectStore().createProject("TEST", "Projecto Test", "decricao", new Customer(0,"marreta@email.pt", "name"), company.getTypologyStore().getTypologyById(0),
+        project = company.getProjectStore().createProject("TEST", "Projecto Test", "decricao",
+                new Customer("marreta@email.pt", "name"),
+                company.getTypologyStore().getTypologyByDescription("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.createUserStory(UserStoryStatus.TODO, 12, "Default Story", 6);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",

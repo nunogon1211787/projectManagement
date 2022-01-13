@@ -3,18 +3,15 @@ package switch2021.project.model;
 public class ProjectStatus {
 
     /**
-     * Classe  ProjectStatus -
-     * Atributos da Classe
+     * Project Status class
+     * Project Status atributes are composed of a description of the Project Status.
      **/
+
     private String description;
 
-    public ProjectStatus setDescription(String description) {
-        this.description = description;
-        return null;
-    }
-
     /**
-     * Constutor da Classe  ProjectStatus (Paulo - US005)
+     * Constructors of Project Status class
+     * Creates a new Project Status instance.
      **/
 
     public ProjectStatus(String description) {
@@ -22,7 +19,23 @@ public class ProjectStatus {
     }
 
 
-    /** Metodos Override  para comparar objectos diferentes **/
+    /**
+     * Getters and Setters
+     **/
+
+    public String getDescription() {
+        return description;
+    }
+
+    public ProjectStatus setDescription(String description) {
+        this.description = description;
+        return null;
+    }
+
+    /**
+     * Override Methods
+     **/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
