@@ -6,23 +6,44 @@ public class Customer {
 
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(001);
     /**
-     * Classe de Customer -
+     * Classe de Customer
      * Atributos da Classe
      **/
     private int id;
+    private String name;
     private String email;
 
     /**
-     * Construtor de  customer (Paulo - US005)
+     * Construtor de  customer (Paulo)
      **/
 
-    public Customer(int id, String email) {
-        this.id = id;
+    public Customer(String email, String name) {
+        this.id =  ID_GENERATOR.getAndIncrement();
         this.email = email;
+        this.name = name;
     }
 
-    public Customer(String email) {
-        this.id =  ID_GENERATOR.getAndIncrement();
+    /**
+     * Getter and Setters
+     **/
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
     }
 
