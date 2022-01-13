@@ -16,7 +16,7 @@ public class Resource {
     private double costPerHour;
     private double percentageOfAllocation;
 
-    private UserProfile profile;
+    private ProjectRolesStore role;
 
     /**
      * Construtor de Resource (Carolina US007)
@@ -67,8 +67,8 @@ public class Resource {
         return costPerHour;
     }
 
-    public UserProfile getProfile() {
-        return profile;
+    public ProjectRolesStore getProjectRoles() {
+        return role;
     }
 
     public double getPercentageOfAllocation() {
@@ -85,6 +85,7 @@ public class Resource {
     public boolean checkAllocationPeriod(LocalDate startDate, LocalDate endDate){
         boolean msg = false;
         if(startDate.isAfter(this.endDate) || endDate.isBefore(this.startDate)){
+
             msg = false;
         } else if (startDate.isEqual(this.startDate) || startDate.isEqual(this.endDate) || endDate.isEqual(this.endDate) || endDate.isEqual(this.startDate) ){
             msg = true;

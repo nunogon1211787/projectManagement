@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class SpecialProfile {
+public class ProjectRoles {
 
     /**
      * Classe SpecialProfile Atributes
@@ -14,7 +14,7 @@ public class SpecialProfile {
 
 
 
-    public SpecialProfile(String name, String type) {
+    public ProjectRoles(String name, String type) {
         this.id_Profile = ID_PROFILE_GENERATOR.getAndIncrement();
         this.name = name;
         this.type = type;
@@ -24,7 +24,7 @@ public class SpecialProfile {
      * Copy Constructor
      */
 
-    public SpecialProfile(SpecialProfile originalProfile) {
+    public ProjectRoles(ProjectRoles originalProfile) {
         this.id_Profile = originalProfile.id_Profile;
         this.name = originalProfile.name;
         this.type = originalProfile.type;

@@ -33,11 +33,10 @@ class ResourceTest {
         LocalDate endDate = LocalDate.of(2022, 1,5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         //Expected
-//        SystemUser newUser2 = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
-//        LocalDate startDate2 = LocalDate.of(2021,12,31);
-//        LocalDate endDate2 = LocalDate.of(2022,1,5);
-//        Resource expected = new Resource(newUser2, startDate2, endDate2, 100, .5);
-        Resource expected = new Resource(newUser, startDate, endDate, 100, .5);
+        SystemUser newUser2 = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
+        LocalDate startDate2 = LocalDate.of(2021,12,31);
+        LocalDate endDate2 = LocalDate.of(2022,1,5);
+        Resource expected = new Resource(newUser2, startDate2, endDate2, 100, .5);
         //Result
         assertEquals(input, expected);
     }

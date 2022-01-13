@@ -105,7 +105,11 @@ public class UserProfileStore {
         }
         return true;
     }
-
-
-
+    public boolean equals(Object obj){
+        if (this == obj) return true;
+        if (!(obj instanceof UserProfileStore)) return false;
+        UserProfileStore that = (UserProfileStore) obj;
+        return
+                (this.userProfileList.equals(that.getUserProfileList()));
+    }
 }
