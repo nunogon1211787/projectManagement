@@ -40,7 +40,7 @@ class SystemUserTest {
     public void verifyEmail() {
 
         //Arrange
-        UserProfile tes = new UserProfile("ddd", "pro");
+        UserProfile tes = new UserProfile("ddd");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456",
                                         "123456", "img_123456", tes);
         //Act
@@ -53,7 +53,7 @@ class SystemUserTest {
     public void verifyEmailFail() {
 
         //Arrange
-        UserProfile tes = new UserProfile("ddd", "pro");
+        UserProfile tes = new UserProfile("ddd");
         SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "abcde", "abcde", "123_img", tes);
         //Act
         String emailCheck = "4321@isep.ipp.pt";
@@ -79,7 +79,7 @@ class SystemUserTest {
         //stored in system user with the encryptation method.
 
         //Arrange
-        UserProfile tes = new UserProfile("ddd", "pro");
+        UserProfile tes = new UserProfile("ddd");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "HELLO", "HELLO", "png_123", tes);
         //Act
         joana.updatePassword("HELLO", "GOODBYE");
@@ -93,7 +93,7 @@ class SystemUserTest {
         //Test to verify if the oldpassword, stored in the system user, is equal or diferent from the
         //password that came from User Interface (UI).
         //Arrange
-        UserProfile tes = new UserProfile("ddd", "pro");
+        UserProfile tes = new UserProfile("ddd");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
                 "HELLO_01", "HELLO_01", "png_123", tes);
         //Act
@@ -105,7 +105,7 @@ class SystemUserTest {
     public void setPasswordSucess() {
 
         //Arrange
-        UserProfile tes = new UserProfile("ddd", "pro");
+        UserProfile tes = new UserProfile("ddd");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", "123", "img_123", tes);
         //Act
         joana.setPassword("123");
@@ -117,7 +117,7 @@ class SystemUserTest {
     public void setPasswordFail() {
 
         //Arrange
-        UserProfile tes = new UserProfile("ddd", "pro");
+        UserProfile tes = new UserProfile("ddd");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", "123", "img_123", tes);
         //Act
         joana.setPassword("123");
@@ -130,7 +130,7 @@ class SystemUserTest {
     public void setUserNameSucess() {
 
         //Arrange
-        UserProfile tes = new UserProfile("ddd", "pro");
+        UserProfile tes = new UserProfile("ddd");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", "123", "img_123", tes);
         //Act
         joana.setUserName("Joana");
@@ -142,7 +142,7 @@ class SystemUserTest {
     public void setUserNameFail() {
 
         //Arrange
-        UserProfile tes = new UserProfile("ddd", "pro");
+        UserProfile tes = new UserProfile("ddd");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", "123", "img_123", tes);
         //Act
         joana.setUserName("Joana");
@@ -154,7 +154,7 @@ class SystemUserTest {
     public void setFunctionSucess() {
 
         //Arrange
-        UserProfile tes = new UserProfile("ddd", "pro");
+        UserProfile tes = new UserProfile("ddd");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", "123", "img_123", tes);
         //Act
         joana.setFunction("Aluna_10");
@@ -166,7 +166,7 @@ class SystemUserTest {
     public void setFuncionFail() {
 
         //Arrange
-        UserProfile tes = new UserProfile("ddd", "pro");
+        UserProfile tes = new UserProfile("ddd");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", "123", "img_123", tes);
         //Act
         joana.setFunction("Aluna_10");
@@ -178,7 +178,7 @@ class SystemUserTest {
     public void setPhotoSucess() {
 
         //Arrange
-        UserProfile tes = new UserProfile("ddd", "pro");
+        UserProfile tes = new UserProfile("ddd");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_789", tes);
         //Act
@@ -191,7 +191,7 @@ class SystemUserTest {
     public void setPhotoFail() {
 
         //Arrange
-        UserProfile tes = new UserProfile("ddd", "pro");
+        UserProfile tes = new UserProfile("ddd");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_789", tes);
         //Act
@@ -209,17 +209,17 @@ class SystemUserTest {
         String passwordConfirmation = "ghi";
         String function = "tester";
         String photo = "photo";
-        UserProfile profileTest = new UserProfile("Visitor", "System Profile");
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profileTest);
+        UserProfile profile = new UserProfile("Visitor");
+        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
 
         String userNameExpected = "manueloliveira";
         String emailExpected = "manueloliveira@beaver.com";
         String passwordExpected = "ÊËÌ";
         String functionExpected = "tester";
         String photoExpected = "photo";
-        UserProfile pro = new UserProfile("Visitor", "System Profile");
-        List<UserProfile> assignedProfileExpected = new ArrayList<>();
-        assignedProfileExpected.add(pro);
+        Company company = new Company();
+        UserProfile assignedProfileExpected = company.getUserProfileStore().getProfileByName("Visitor");
+
         //Act
         String userNameResult = newUser.getUserName();
         String emailResult = newUser.getEmail();
@@ -227,7 +227,7 @@ class SystemUserTest {
         String functionResult = newUser.getFunction();
         String photoResult = newUser.getPhoto();
         boolean activateUserResult = newUser.getUserActivated();
-        UserProfileStore assignedProfileResult = newUser.getAssignedProfileList();
+        UserProfile assignedProfileResult = newUser.getAssignedProfile();
         //Assert
         assertEquals(userNameExpected, userNameResult);
         assertEquals(emailExpected, emailResult);
@@ -235,42 +235,7 @@ class SystemUserTest {
         assertEquals(functionExpected, functionResult);
         assertEquals(photoExpected, photoResult);
         assertFalse(activateUserResult);
-        //assertEquals(assignedProfileExpected, assignedProfileResult);
-    }
-
-    @Test
-    public void createSystemUserWithoutPhotoSuccess() {
-        //Arrange
-        String userName = "manueloliveira";
-        String email = "manueloliveira@beaver.com";
-        String password = "ghi";
-        String passwordConfirmation = "ghi";
-        String function = "tester";
-        String photo = "photo";
-        UserProfile profileTest = new UserProfile("Visitor", "System Profile");
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profileTest);
-
-        String userNameExpected = "manueloliveira";
-        String emailExpected = "manueloliveira@beaver.com";
-        String passwordExpected = "ÊËÌ";
-        String functionExpected = "tester";
-        UserProfile pro = new UserProfile("Visitor", "System Profile");
-        List<UserProfile> assignedProfileExpected = new ArrayList<>();
-        assignedProfileExpected.add(pro);
-        //Act
-        String userNameResult = newUser.getUserName();
-        String emailResult = newUser.getEmail();
-        String passwordResult = newUser.getPassword();
-        String functionResult = newUser.getFunction();
-        boolean activateUserResult = newUser.getUserActivated();
-        UserProfileStore assignedProfileResult = newUser.getAssignedProfileList();
-        //Assert
-        assertEquals(userNameExpected, userNameResult);
-        assertEquals(emailExpected, emailResult);
-        assertEquals(passwordExpected, passwordResult);
-        assertEquals(functionExpected, functionResult);
-        assertFalse(activateUserResult);
-        //assertEquals(assignedProfileExpected, assignedProfileResult);
+        assertEquals(assignedProfileExpected, assignedProfileResult);
     }
 
     @Test
@@ -282,8 +247,9 @@ class SystemUserTest {
         String passwordConfirmation = "ghi";
         String function = "tester";
         String photo = "photo";
-        UserProfile profileTest = new UserProfile("Visitor", "System Profile");
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profileTest);
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         //Act
         String result = newUser.encryptPassword(password);
         //Assert
@@ -299,8 +265,9 @@ class SystemUserTest {
         String passwordConfirmation = "ghi";
         String function = "tester";
         String photo = "photo";
-        UserProfile profileTest = new UserProfile("Visitor", "System Profile");
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profileTest);
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         //Act
         String result = newUser.encryptPassword(password);
         //Assert
@@ -316,8 +283,9 @@ class SystemUserTest {
         String passwordConfirmation = "a1b2c3";
         String function = "tester";
         String photo = "photo";
-        UserProfile profileTest = new UserProfile("Visitor", "System Profile");
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profileTest);
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
 
         String encryptedPassword = newUser.getPassword();//encryptedPassword = "Ä\u0094Å\u0095Æ\u0096";
         //Act
@@ -335,8 +303,9 @@ class SystemUserTest {
         String passwordConfirmation = "a1b2c3";
         String function = "tester";
         String photo = "photo";
-        UserProfile profileTest = new UserProfile("Visitor", "System Profile");
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profileTest);
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
 
         String encryptedPassword = newUser.getPassword();//encryptedPassword = "Ä\u0094Å\u0095Æ\u0096";
         //Act
@@ -357,7 +326,7 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             Company company = new Company();
-            UserProfile profile = company.getUserProfileStore().getProfile("Visitor");
+            UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
             SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         });
     }
@@ -374,7 +343,7 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             Company company = new Company();
-            UserProfile profile = company.getUserProfileStore().getProfile("Visitor");
+            UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
             SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         });
     }
@@ -391,7 +360,7 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             Company company = new Company();
-            UserProfile profile = company.getUserProfileStore().getProfile("Visitor");
+            UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
             SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         });
     }
@@ -408,7 +377,7 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             Company company = new Company();
-            UserProfile profile = company.getUserProfileStore().getProfile("Visitor");
+            UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
             SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         });
     }

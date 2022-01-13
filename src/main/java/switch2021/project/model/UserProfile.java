@@ -11,14 +11,14 @@ public class UserProfile {
      **/
     private int id_Profile;
     private String name;
-    private String type;
+    //private String type;
 
 
 
-    public UserProfile(String name, String type) {
+    public UserProfile(String name) {
         this.id_Profile = ID_PROFILE_GENERATOR.getAndIncrement();
         this.name = name;
-        this.type = type;
+        //this.type = type;
     }
 
     /**
@@ -28,7 +28,7 @@ public class UserProfile {
     public UserProfile(UserProfile originalProfile) {
         this.id_Profile = originalProfile.id_Profile;
         this.name = originalProfile.name;
-        this.type = originalProfile.type;
+        //this.type = originalProfile.type;
     }
 
     /**
@@ -49,15 +49,15 @@ public class UserProfile {
         return id_Profile;
     }
 
-    public String getType() {
+    /*public String getType() {
         return type;
-    }
+    }*/
 
     public void setName(String newName) {
         this.name = newName;
     }
 
-    public void setType(String newType) { this.type = newType; }
+    //public void setType(String newType) { this.type = newType; }
 
     /**
      * Method to verify if a given ID matches with object ID
@@ -74,14 +74,14 @@ public class UserProfile {
         return true;
     }
 
-    public boolean hasType(String type){ return this.type.equalsIgnoreCase(type);}
+    //public boolean hasType(String type){ return this.type.equalsIgnoreCase(type);}
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserProfile that = (UserProfile) o;
-        return (this.getName().equals(that.getName())) && (this.getType().equals(getType()));
+        return (this.getName().equals(that.getName())) /*&& (this.getType().equals(getType()))*/;
     }
     //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
     // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...

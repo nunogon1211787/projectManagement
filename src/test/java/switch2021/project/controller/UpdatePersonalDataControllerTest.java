@@ -15,12 +15,12 @@ public class UpdatePersonalDataControllerTest {
         //Arrange
         Company company = new Company();
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company, new SystemUser("Joana", "123@isep.ipp.pt",
-                "Aluna", "AAA","AAA","", new UserProfile("TTT", "TTT")));
+                "Aluna", "AAA","AAA","", new UserProfile("TTT")));
         SystemUser user = controllerTest.getUser("123@isep.ipp.pt");
         //Act
         Company company2 = new Company();
         UpdatePersonalDataController controllerTest2 = new UpdatePersonalDataController(company2, new SystemUser("Joana", "123@isep.ipp.pt",
-                "Aluna", "AAA","AAA","", new UserProfile("TTT", "TTT")));
+                "Aluna", "AAA","AAA","", new UserProfile("TTT")));
         SystemUser expected = controllerTest2.getUser("123@isep.ipp.pt");
         //Assert
         assertEquals(user, expected);
@@ -31,11 +31,11 @@ public class UpdatePersonalDataControllerTest {
         //Arrange
         Company company = new Company();
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company, new SystemUser("Joana", "123@isep.ipp.pt",
-                "Aluna", "AAA","AAA","", new UserProfile("TTT", "TTT")));
+                "Aluna", "AAA","AAA","", new UserProfile("TTT")));
         SystemUser user = controllerTest.updateSystemUserData("Joana Isabel Silva", "Aluna_numero10", "imagem_300");
         //Act
         SystemUser expected = new SystemUser("Joana", "123@isep.ipp.pt",
-                "Aluna", "AAA","AAA","", new UserProfile("TTT", "TTT"));
+                "Aluna", "AAA","AAA","", new UserProfile("TTT"));
         //Assert
         assertEquals(user, expected);
     }
@@ -45,11 +45,11 @@ public class UpdatePersonalDataControllerTest {
         //Arrange
         Company company = new Company();
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company, new SystemUser("Joana", "123@isep.ipp.pt",
-                "Aluna", "AAA","AAA","", new UserProfile("TTT", "TTT")));
+                "Aluna", "AAA","AAA","", new UserProfile("TTT")));
         SystemUser user = controllerTest.updateSystemUserData("Joana Isabel Silva", "Aluna_numero10", "imagem_300");
         //Act
         SystemUser expected = new SystemUser("Joana", "123@isep.ipp.pt",
-                "Aluna", "AAA","AAA","", new UserProfile("TTT", "TTT"));
+                "Aluna", "AAA","AAA","", new UserProfile("TTT"));
         //Assert
         assertNotEquals(user, expected);
     }

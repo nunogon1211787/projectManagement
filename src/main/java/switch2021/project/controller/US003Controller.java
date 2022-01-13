@@ -29,17 +29,17 @@ public class US003Controller {
      * Método para ...
      */
 
-    public List<UserProfile> getProfileList (){
+    /*public List<UserProfile> getProfileList (){
 
         String type = "System Profile";
 
         return company.getUserProfileStore().getUserProfileListWithType(type);
 
-    }
+    }*/
 
-    public Request createProfileRequest(LocalDate data, LocalDate time, int profileIdx, String email){
+    public Request createProfileRequest(LocalDate data, LocalDate time, String profileName, String email){
 
-        UserProfile profRequest = company.getUserProfileStore().getProfile(profileIdx);
+        UserProfile profRequest = company.getUserProfileStore().getProfileByName(profileName);
         SystemUser user = company.getSystemUserStore().getUserByEmail(email);
 
         this.request = new Request(data, time, profRequest, user);

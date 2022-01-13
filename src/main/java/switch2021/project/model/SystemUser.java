@@ -10,10 +10,10 @@ public class SystemUser {
     private String userName;
     private String email;
     private String photo;
-    private String password;  // Implementar password confirmation ***
+    private String password;
     private String function;
     private boolean activateUser;
-    private UserProfileStore assignedProfileList;
+    private UserProfile assignedProfile;
 
     /**
      * Contructor
@@ -33,14 +33,13 @@ public class SystemUser {
             throw new IllegalArgumentException("passwords not match");
         }
         this.activateUser = false;
-        this.assignedProfileList = new UserProfileStore();
-        assignedProfileList.populateSystemUser(visitor);
+        this.assignedProfile = visitor;
     }
-
+//ver este método (13/01/2022):
     /**
      * Copy Constructor. Para criar um novo objeto, igual ao parâmetro, mas sem levar adiante as referências do objeto original.
      */
-    public SystemUser(SystemUser originalUser) {
+    /*public SystemUser(SystemUser originalUser) {
         this.userName = originalUser.userName;
         this.email = originalUser.email;
         this.photo = originalUser.photo;
@@ -54,7 +53,7 @@ public class SystemUser {
     private UserProfileStore deepCopyListProfile(UserProfileStore originalList) {
         UserProfileStore deepCopyList = this.assignedProfileList;
         return deepCopyList;
-    }
+    }*/
 
     /**
      * Getting Methods
@@ -88,8 +87,8 @@ public class SystemUser {
         return this.activateUser;
     }
 
-    public UserProfileStore getAssignedProfileList() {
-        return this.assignedProfileList;
+    public UserProfile getAssignedProfile() {
+        return assignedProfile;
     }
 
     /**
@@ -113,6 +112,10 @@ public class SystemUser {
     }
 
     public void setActivateUser() {this.activateUser = true;}
+
+    public void setAssignedProfile(UserProfile assignedProfile) {
+        this.assignedProfile = assignedProfile;
+    }
 
     /**
      * Validation Methods
@@ -178,7 +181,7 @@ public class SystemUser {
     /**
      * AssignProfileList´s methods
      */
-
+/*
     public void assignProfileToUser(UserProfile p) {
         this.assignedProfileList.addProfile(p);
     }
@@ -190,7 +193,7 @@ public class SystemUser {
        // this.assignedProfileList.add(newProfile);
         return true;
     }
-
+*/
     /**
      * Método para validar se o email (ou parte dele) é deste objeto.
      */
@@ -331,7 +334,7 @@ public class SystemUser {
         return (this.userName.equals(that.userName)) && (this.email.equals(that.email)) &&
                 (this.photo.equals(that.photo)) && (this.password.equals(that.password)) &&
                 (this.function.equals(that.function)) && (this.activateUser == that.activateUser)
-                && (this.assignedProfileList.equals(that.assignedProfileList));
+                && (this.assignedProfile.equals(that.assignedProfile));
     }
     //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
     // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...teste

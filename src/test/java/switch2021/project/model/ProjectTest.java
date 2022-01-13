@@ -21,7 +21,7 @@ class ProjectTest {
 
     static Project newProject = new Project("123testcode", "prototype", "test", customer,
                                             typology, businessSector, date, 7, 5000);
-    private UserProfile User= new UserProfile("ddd", "pro");
+    private UserProfile User= new UserProfile("ddd");
 
 
     @Test
@@ -328,7 +328,7 @@ class ProjectTest {
     public void addResource() {
         //Arrange
         /** user **/
-        UserProfile pro = new UserProfile("mku", "sss");
+        UserProfile pro = new UserProfile("mku");
         SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456",
                                                 "123456", "123456", pro);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
@@ -361,7 +361,7 @@ class ProjectTest {
     public void getTeamMemberByIndex() {
         //Arrange
         /** user **/
-        UserProfile pro = new UserProfile("mku", "sss");
+        UserProfile pro = new UserProfile("mku");
         SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456",
                                                  "123456", "123456", pro);
         SystemUser newUser2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456",

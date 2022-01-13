@@ -10,9 +10,9 @@ public class Company {
      * Atributos da Classe
      **/
     private TypologyStore typologyStore;
-    SystemUserStore systemUserStore;
-    UserProfileStore userProfileStore;
-    ProjectStore projectStore;
+    private SystemUserStore systemUserStore;
+    private UserProfileStore userProfileStore;
+    private ProjectStore projectStore;
     // falta colocar a chamada para o request quando se criar a página;
     List<Request> requestList;
 
@@ -53,8 +53,8 @@ public class Company {
      * Create Method
      **/
 
-    public UserProfile createProfile(String name, String type) {
-        return new UserProfile(name, type);
+    public UserProfile createProfile(String name) {
+        return new UserProfile(name);
     }
 
     /**
@@ -78,7 +78,7 @@ public class Company {
         return this.getUserProfileList();
     }
 
-    public List<UserProfile> getUserProfileListWithType(String type) {
+    /*public List<UserProfile> getUserProfileListWithType(String type) {
 
         List<UserProfile> foundList = new ArrayList<>();
 
@@ -91,7 +91,7 @@ public class Company {
         }
 
         return foundList;
-    }
+    }*/
 
     ////Talvez mudar para não buscar por index
     public UserProfile getUserProfile(int index) {
@@ -116,14 +116,14 @@ public class Company {
 
     private boolean validateProfile(UserProfile profile) {
         //Check empty fields on name and type
-        if (profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()) {
+        if (profile.getName().trim().isEmpty()) {
             return false;
         }
 
         //Check if the profile type is valid
-        if (!profile.getType().equalsIgnoreCase("System Profile") && !profile.getType().equalsIgnoreCase("Special Profile")) {
+        /*if (!profile.getType().equalsIgnoreCase("System Profile") && !profile.getType().equalsIgnoreCase("Special Profile")) {
             return false;
-        }
+        }*/
 
         //Check if profile already exist
         for (UserProfile up : userProfileStore.userProfileList) {

@@ -28,7 +28,7 @@ public class ProjectStore {
 
     public boolean addProject(Project proj) {
         this.arrayProject.add(proj);
-        UserProfile test = new UserProfileStore().getProfile(0);
+        UserProfile test = new UserProfileStore().getProfileByName("Visitor");
 
         return true;
     }

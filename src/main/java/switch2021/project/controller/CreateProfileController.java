@@ -25,8 +25,8 @@ public class CreateProfileController {
     }
 
 
-    public boolean createProfile(String name, String type) {
-        this.userProfile = this.company.getUserProfileStore().createProfile(name, type);
+    public boolean createProfile(String name) {
+        this.userProfile = this.company.getUserProfileStore().createProfile(name);
         return this.company.getUserProfileStore().addProfile(this.userProfile);
 
 

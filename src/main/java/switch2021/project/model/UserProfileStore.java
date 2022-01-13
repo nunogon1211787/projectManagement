@@ -13,21 +13,17 @@ public class UserProfileStore {
     }
 
     public void populateDefault() {
-        userProfileList.add(new UserProfile("Visitor", "System Profile"));
-        userProfileList.add(new UserProfile("Administrator", "System Profile"));
-        userProfileList.add(new UserProfile("Director", "System Profile"));
-    }
-
-    public void populateSystemUser(UserProfile profile) {
-        userProfileList.add(profile);
+        userProfileList.add(new UserProfile("Visitor"));
+        userProfileList.add(new UserProfile("Administrator"));
+        userProfileList.add(new UserProfile("Director"));
     }
 
     /**
      * Create Method
      **/
 
-    public UserProfile createProfile(String name, String type) {
-        return new UserProfile(name, type);
+    public UserProfile createProfile(String name) {
+        return new UserProfile(name);
     }
 
     /**
@@ -51,7 +47,7 @@ public class UserProfileStore {
         return this.userProfileList;
     }
 
-    public List<UserProfile> getUserProfileListWithType(String type) {
+    /*public List<UserProfile> getUserProfileListWithType(String type) {
 
         List<UserProfile> foundList = new ArrayList<>();
 
@@ -64,22 +60,32 @@ public class UserProfileStore {
         }
 
         return foundList;
-    }
+    }*/
 
     ////Talvez mudar para não buscar por index
-    public UserProfile getProfile(int index) {
+    /*public UserProfile getProfileByName(int index) {
         return new UserProfile(userProfileList.get(index));
     }
 
-    public UserProfile getProfile(String name) {
+    public UserProfile getProfileByName(String name) {
         UserProfile pro = null;
         for (int i = 0; i < userProfileList.size(); i++) {
-            if (Objects.equals(getProfile(i).getName(), name)) {
-                pro = getProfile(i);
+            if (Objects.equals(getProfileByName(i).getName(), name)) {
+                pro = getProfileByName(i);
                 break;
             }
         }
         return pro;
+    }*/
+    public UserProfile getProfileByName(String profileName) {
+        int result = -1;
+
+        for (int i = 0; i < userProfileList.size(); i++) {
+            if (userProfileList.get(i).getName().equals(profileName)) {
+                result = i;
+            }
+        }
+        return userProfileList.get(result);
     }
 
     /**
@@ -88,14 +94,14 @@ public class UserProfileStore {
 
     private boolean validateProfile(UserProfile profile) {
         //Check empty fields on name and type
-        if (profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()) {
+        if (profile.getName().trim().isEmpty()) {
             return false;
         }
 
         //Check if the profile type is valid
-        if (!profile.getType().equalsIgnoreCase("System Profile") && !profile.getType().equalsIgnoreCase("Special Profile")) {
+        /*if (!profile.getType().equalsIgnoreCase("System Profile") && !profile.getType().equalsIgnoreCase("Special Profile")) {
             return false;
-        }
+        }*/
 
         //Check if profile already exist
         for (UserProfile up : userProfileList) {
