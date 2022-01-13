@@ -91,8 +91,8 @@ public class Company {
      * Create Method
      **/
 
-    public UserProfile createProfile(String name, String type) {
-        return new UserProfile(name, type);
+    public UserProfile createProfile(String name) {
+        return new UserProfile(name);
     }
 
     /**
@@ -112,11 +112,11 @@ public class Company {
      * Getter Methods
      **/
 
-    public List<UserProfile> getUserProfileList() {
+    /*public List<UserProfile> getUserProfileList() {
         return this.getUserProfileList();
-    }
+    }*/
 
-    public List<UserProfile> getUserProfileListWithType(String type) {
+    /*public List<UserProfile> getUserProfileListWithType(String type) {
 
         List<UserProfile> foundList = new ArrayList<>();
 
@@ -129,7 +129,7 @@ public class Company {
         }
 
         return foundList;
-    }
+    }*/
 
     ////Talvez mudar para não buscar por index
     public UserProfile getUserProfile(int index) {
@@ -155,14 +155,14 @@ public class Company {
 
     private boolean validateProfile(UserProfile profile) {
         //Check empty fields on name and type
-        if (profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()) {
+        if (profile.getName().trim().isEmpty()) {
             return false;
         }
 
-        //Check if the profile type is valid
-        if (!profile.getType().equalsIgnoreCase("System Profile") && !profile.getType().equalsIgnoreCase("Special Profile")) {
+       /* //Check if the profile type is valid
+        if (!profile.getType().equalsIgnoreCase("System Profile")) {
             return false;
-        }
+        }*/
 
         //Check if profile already exist
         for (UserProfile up : userProfileStore.userProfileList) {
