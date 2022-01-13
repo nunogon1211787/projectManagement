@@ -12,15 +12,8 @@ public class EditProjectInfoController {
     private Company company;
     private Project project;
     private ProjectStore projectStore;
-    private String code;
     List<Project> arrayProject;
     private List projectTeam;
-
-
-    public EditProjectInfoController(Company company, Project project){
-        this.company = company;
-        this.project = project;
-    }
 
     public List getProjectList (){
         this.arrayProject = this.company.getProjectStore().getArrayProject();
@@ -28,11 +21,12 @@ public class EditProjectInfoController {
     }
 
     public Project getProjectRequested(String code){
-        this.code = code;
-        return this.project = this.company.getProjectStore().getProject(code);
+        this.project = this.company.getProjectStore().getProject(code);
+        return this.project ;
     }
 
-    public Project editProject(String name, LocalDate startDate, LocalDate endDate, int numberOfSprints, int sprintDuration, String status, List projectTeam){
+    public Project editProject(String name, LocalDate startDate, LocalDate endDate, int numberOfSprints,
+                               int sprintDuration, String status, List projectTeam){
         this.project.setProjectName(name);
         this.project.setStartDate(startDate);
         this.project.setEndDate(endDate);
@@ -43,10 +37,10 @@ public class EditProjectInfoController {
         return this.project;
     }
 
-    public boolean saveProject(Project proj){
-        this.company.getProjectStore().saveProject(proj, this.code);
-        return true;
+    public boolean validateProject(Project proj){
+        return this.projectStore.validateProject(proj);
     }
+
 
 
 
