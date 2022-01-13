@@ -15,13 +15,14 @@ class ProjectTest {
 
     //Arrange
     static LocalDate date = LocalDate.of(2021, 12, 12);
-    static Typology typology = new ProjectSettings().getTypologyById(0);
+    static Typology typology = new TypologyStore().getTypologyById(0);
     static Customer customer = new ProjectSettings().getCustomerById(0);
     static BusinessSector businessSector = new ProjectSettings().getBussinessSectorById(0);
 
     static Project newProject = new Project("123testcode", "prototype", "test", customer,
-            typology, businessSector, date, 7, 5000);
-    private Profile User;
+                                            typology, businessSector, date, 7, 5000);
+    private UserProfile User= new UserProfile("ddd", "pro");
+
 
     @Test
     @DisplayName("Teste do construtor de Project")
@@ -29,7 +30,8 @@ class ProjectTest {
         //Arrange
         LocalDate date = LocalDate.of(2021, 12, 12);
         ProjectSettings test= new ProjectSettings();
-        Typology typology = test.getTypologyById(0);
+        TypologyStore typoS= new TypologyStore();
+        Typology typology = typoS.getTypologyById(0);
         Customer customer = test.getCustomerById(0);
         BusinessSector businessSector = test.getBussinessSectorById(0);
 
@@ -41,7 +43,7 @@ class ProjectTest {
         assertEquals("Test_Project", newProject.getProjectName());
         assertEquals("test", newProject.getDescription());
         assertEquals(test.getCustomerById(0), newProject.getCustomer());
-        assertEquals(test.getTypologyById(0), newProject.getTypology());
+        assertEquals(typoS.getTypologyById(0), newProject.getTypology());
         assertEquals(test.getBussinessSectorById(0), newProject.getBusinessSector());
         assertEquals(test.getProjectStatusById(0), newProject.getProjectStatus());
         assertEquals(date, newProject.getStartDate());
@@ -176,26 +178,26 @@ class ProjectTest {
     @DisplayName("Teste de busca de projecto a pelo indice")
     public void checkGetProjByIndex() {
         Company comp = new Company();
-        comp.addProject(comp.createProject("123testcode", "prototype", "test", customer,
+        comp.getProjectStore().addProject(comp.getProjectStore().createProject("123testcode", "prototype", "test", customer,
                 typology, businessSector, date, 7, 5000));
         Project proj = new Project("123testcode_2", "prototype_2", "test_2", customer,
                 typology, businessSector, date, 7, 6000);
-        comp.addProject(proj);
+        comp.getProjectStore().addProject(proj);
 
         //Result
-        assertEquals(comp.getProjByIndex(0), newProject);
-        assertEquals(comp.getProjByIndex(1), proj);
+        assertEquals(comp.getProjectStore().getProjByIndex(0), newProject);
+        assertEquals(comp.getProjectStore().getProjByIndex(1), proj);
     }
 
     @Test
     @DisplayName("Teste de adição de projecto a company")
     public void checkAddProject() {
         Company comp = new Company();
-        comp.addProject(comp.createProject("123testcode", "prototype", "test", customer,
+        comp.getProjectStore().addProject(comp.getProjectStore().createProject("123testcode", "prototype", "test", customer,
                 typology, businessSector, date, 7, 5000));
 
         //Result
-        assertEquals(comp.getProjByIndex(0), newProject);
+        assertEquals(comp.getProjectStore().getProjByIndex(0), newProject);
     }
 
     @Test
@@ -204,15 +206,15 @@ class ProjectTest {
         Company comp = new Company();
 
         //Result
-        assertTrue(comp.validateProject(comp.createProject("123testcode", "prototype", "test", customer,
+        assertTrue(comp.getProjectStore().validateProject(comp.getProjectStore().createProject("123testcode", "prototype", "test", customer,
                 typology, businessSector, date, 7, 5000)));
-        assertFalse(comp.validateProject(comp.createProject("123testcode", "prototype", "test", customer,
+        assertFalse(comp.getProjectStore().validateProject(comp.getProjectStore().createProject("123testcode", "prototype", "test", customer,
                 typology, businessSector, date, 7, -1)));
-        assertFalse(comp.validateProject(comp.createProject("123testcode", "prototype", "test", customer,
+        assertFalse(comp.getProjectStore().validateProject(comp.getProjectStore().createProject("123testcode", "prototype", "test", customer,
                 typology, businessSector, date, -7, 5000)));
-        assertFalse(comp.validateProject(comp.createProject("", "prototype", "test", customer,
+        assertFalse(comp.getProjectStore().validateProject(comp.getProjectStore().createProject("", "prototype", "test", customer,
                 typology, businessSector, date, 7, 5000)));
-        assertFalse(comp.validateProject(comp.createProject("123testcode", "", "test", customer,
+        assertFalse(comp.getProjectStore().validateProject(comp.getProjectStore().createProject("123testcode", "", "test", customer,
                 typology, businessSector, date, 7, 5000)));
     }
 
@@ -300,10 +302,14 @@ class ProjectTest {
     @Test
     public void editProjectSetsTest() {
         //Arrange
-        SystemUser scrumMaster = new SystemUser("Antonio", "antonio@isep.ipp.pt", "Designer", "123", User);
-        SystemUser productOwner = new SystemUser("Manuel", "manuel@isep.ipp.pt", "Designer mini", "123", User);
-        SystemUser user = new SystemUser("Antonio", "antonio@isep.ipp.pt", "Designer", "123", User);
-        SystemUser user2 = new SystemUser("Manuel", "manuel@isep.ipp.pt", "Designer mini", "123", User);
+        SystemUser scrumMaster = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456",
+                "123456", "123456", User);
+        SystemUser productOwner = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456",
+                "123456", "123456", User);
+        SystemUser user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456",
+                "123456", "123456", User);
+        SystemUser user2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456",
+                "123456", "123456", User);
         ProjectStatus status = new ProjectStatus("Planned");
 
         // Act
@@ -331,8 +337,9 @@ class ProjectTest {
     public void addResource() {
         //Arrange
         /** user **/
-        Profile pro = new Profile("mku", "sss");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        UserProfile pro = new UserProfile("mku", "sss");
+        SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456",
+                                                "123456", "123456", pro);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
 
@@ -349,7 +356,7 @@ class ProjectTest {
         Customer cust = new Customer("ght@gmail.com");
         Typology typo = new Typology("typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
-        Project proj2 = comTest.createProject("2", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
+        Project proj2 = comTest.getProjectStore().createProject("2", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
 
         //Act
         boolean result = proj2.addResource(resAllo2);
@@ -363,9 +370,11 @@ class ProjectTest {
     public void getTeamMemberByIndex() {
         //Arrange
         /** user **/
-        Profile pro = new Profile("mku", "sss");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
-        SystemUser newUser2 = new SystemUser("xyz", "fase", "des", "gth", pro);
+        UserProfile pro = new UserProfile("mku", "sss");
+        SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456",
+                                                 "123456", "123456", pro);
+        SystemUser newUser2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456",
+                                                "123456", "123456", pro);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
         Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
@@ -376,8 +385,8 @@ class ProjectTest {
         Customer cust = new Customer("ght@gmail.com");
         Typology typo = new Typology("typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
-        Project proj1 = comTest.createProject("1", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
-        Project proj3 = comTest.createProject("3", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
+        Project proj1 = comTest.getProjectStore().createProject("1", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
+        Project proj3 = comTest.getProjectStore().createProject("3", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
         proj1.addResource(resAllo1);
         proj3.addResource(resAllo1);
 

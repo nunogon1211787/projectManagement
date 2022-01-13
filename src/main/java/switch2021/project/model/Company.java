@@ -1,6 +1,5 @@
 package switch2021.project.model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,268 +9,41 @@ public class Company {
     /**
      * Atributos da Classe
      **/
-
-    List<Project> arrayProject;
-    List<SystemUser> arraySyUser;
-    List<Profile> arrayProfile;
+    private TypologyStore typologyStore = new TypologyStore();
+    SystemUserStore systemUserStore;
+    UserProfileStore userProfileStore;
+    ProjectStore projectStore;
+    // falta colocar a chamada para o request quando se criar a página;
     List<Request> arrayRequest;
 
-    /**
-     * Constructors with data
-     **/
-    public Company() {
-        this.arraySyUser = new ArrayList<>();
-        this.arrayProfile = new ArrayList<>();
-        this.arrayProject = new ArrayList<>();
-        this.arrayRequest = new ArrayList<>();
+    public  Company(){
+        this.systemUserStore = new SystemUserStore();
+        this.userProfileStore = new UserProfileStore();
+        this.projectStore = new ProjectStore();
+        this.typologyStore = new TypologyStore();
 
-        arrayProfile.add(new Profile("Visitor", "System Profile"));
-        arrayProfile.add(new Profile("Administrator", "System Profile"));
-        arrayProfile.add(new Profile("Director", "System Profile"));
-        arrayProfile.add(new Profile("Project Manager", "Special Profile"));
-        arrayProfile.add(new Profile("Product Owner", "Special Profile"));
-        arrayProfile.add(new Profile("Scrum Master", "Special Profile"));
-        arrayProfile.add(new Profile("Project Team", "Special Profile"));
-    }
-
-    // Project
-
-    /**
-     * Create Methods
-     **/
-
-    public Project createProject(String code, String name, String description, Customer customer, Typology typology,
-                                 BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
-
-        return new Project(code, name, description, customer, typology, businessSector,
-                startDate, numberOfSprints, budget);
-    }
-
-    /**
-     * Add Method
-     **/
-
-    public boolean addProject(Project proj) {
-        this.arrayProject.add(proj);
-        return true;
-
-    }
-
-    /**
-     * Getters Methods
-     **/
-
-    public List<Project> getArrayProject() {
-        return this.arrayProject;
-    }
-
-    public Project getProject(String code) {
-
-        for (Project proj : arrayProject) {
-            if (proj.getCode().equalsIgnoreCase(code)) {
-                return proj;
-            }
-        }
-        return null;
-    }
-
-    ////Talvez mudar para não buscar por index
-    public Project getProjByIndex(int index) {
-        return arrayProject.get(index);
-    }
-
-    public List<Project> getProjectListWithPORight(String email) {
-        List<Project> projectList = new ArrayList<>();
-        if (email == null || email.trim().isEmpty()) {
-            return projectList;
-        }
-        for (Project project : arrayProject) {
-            if (project.getProductOwner() != null && email.equals(project.getProductOwner().getEmail())) {
-                projectList.add(project);
-            }
-        }
-        return projectList;
-    }
-
-    /**
-     * Validation Methods
-     **/
-
-    public boolean checkProjectExists(String code) {
-
-        for (Project proj : arrayProject) {
-            if (proj.getCode().equalsIgnoreCase(code)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean validateProject(Project project) {
-        // check if project exists
-        if (checkProjectExists(project.getCode())) {
-            return false;
-        }
-
-        //check if numbers in Number of Sprints and budget are valid
-        if (project.getBudget() < 0 || project.getNumberOfSprints() < 0) {
-            return false;
-        }
-
-        //Check empty fields on code, name and description
-        return !project.getProjectName().trim().isEmpty()
-                && !project.getCode().trim().isEmpty()
-                && !project.getDescription().trim().isEmpty();
-    }
-
-    public boolean validateAllocation(SystemUser user, double percentageOfAllocation, LocalDate startDate, LocalDate
-            endDate) {
-        double sum = 0;
-        boolean msg = false;
-
-        for (int i = 0; i < arrayProject.size(); i++) {
-            for (int j = 0; j < arrayProject.get(i).getProjectTeam().size(); j++) {
-                if (arrayProject.get(i).getTeamMemberByIndex(j).getUser().equals(user) &&
-                        arrayProject.get(i).getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
-                    sum = sum + arrayProject.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();
-                }
-            }
-        }
-        if ((sum + percentageOfAllocation) <= 1) {
-            msg = true;
-        }
-        return msg;
-    }
-
-    /**
-     * Save Methods
-     */
-
-    public boolean saveProject(Project proj, int index) {
-        validateProject(proj);
-        overwriteProject(proj, index);
-        return true;
-    }
-
-    public void overwriteProject(Project proj, int index) {
-        this.arrayProject.set(index, proj);
+        this.userProfileStore.populateDefault();
     }
 
 
-    // System user
-
-    /**
-     * Create Methods
-     **/
-
-    public SystemUser createSystemUser(String userName, String email, String function, String password) {
-        return new SystemUser(userName, email, function, password, arrayProfile.get(0));
-    }
-    ///// Apenas manter um construtor !!!
-
-    public SystemUser createSystemUser(String userName, String email, String function, String photo, String password) {
-        return new SystemUser(userName, email, function, photo, password, arrayProfile.get(0));
+    //Project
+    public ProjectStore getProjectStore() {
+        return this.projectStore;
     }
 
-    /**
-     * Add Method
-     **/
-
-    public boolean addSystemUser(SystemUser syUser) {
-        this.arraySyUser.add(syUser);
-        return true;
+    public SystemUserStore getSystemUserStore() {
+        return this.systemUserStore;
     }
 
-    /**
-     * Getter Methods
-     */
-    public List<SystemUser> getArraySyUser() {
-        return this.arraySyUser;
+    //Profile
+    public UserProfileStore getUserProfileStore() {
+            return this.userProfileStore;
     }
 
-    public SystemUser getUserByEmail(String email) {
-
-        SystemUser user = null;
-
-        for (int i = 0; i < this.arraySyUser.size(); i++) {
-            if (this.arraySyUser.get(i).isYourEmail(email)) {
-                user = this.arraySyUser.get(i);
-                break;
-            }
-        }
-
-        return user;
+    //Typology
+    public TypologyStore getTypologyStore() {
+        return this.typologyStore;
     }
-
-    public List<SystemUser> searchUsers(String name, String email, String function, int isActive, int[] profileList) {
-
-        int listSize = this.arraySyUser.size();
-        List<SystemUser> foundUsersList = new ArrayList<>();
-
-        if (listSize != 0) {
-
-            for (SystemUser systemUser : this.arraySyUser)
-                if (systemUser.hasThisData(name, email, function, isActive, profileList)) {
-                    foundUsersList.add(new SystemUser(systemUser));
-                }
-
-        }
-
-        return foundUsersList;
-    }
-
-    /**
-     * Validation Methods
-     */
-
-    public boolean validateSystemUser(SystemUser user) {
-        if (user == null) {
-            return false;
-        }
-        if (hasEmail(user.getEmail())) {
-            return false;
-        }
-        if (hasUserName(user.getUserName())) {
-            return false;
-        }
-        return !this.arraySyUser.contains(user);
-    }
-
-    boolean hasEmail(String newUserEmail) {
-        for (SystemUser newUser : arraySyUser) {
-            if (newUser.getEmail().trim().equalsIgnoreCase(newUserEmail.trim())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    //// Dois utilizadores podem existir com o mesmo nome, podem existir dois Nunos!!
-    boolean hasUserName(String newUserName) {
-        for (SystemUser newUser : arraySyUser) {
-            if (newUser.getUserName().trim().equalsIgnoreCase(newUserName.trim())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    /**
-     * Save Method
-     */
-
-    public boolean saveSystemUser(SystemUser user) {
-        boolean result = true;
-
-        if (!validateSystemUser(user)) {
-            result = false;
-        } else {
-            this.arraySyUser.add(user);
-        }
-        return result;
-    }
-
 
 
     // Profile
@@ -280,20 +52,20 @@ public class Company {
      * Create Method
      **/
 
-    public Profile createProfile(String name, String type) {
-        return new Profile(name, type);
+    public UserProfile createProfile(String name, String type) {
+        return new UserProfile(name, type);
     }
 
     /**
      * Add Method
      **/
 
-    public boolean addProfile(Profile profile) {
+    public boolean addUserProfile(UserProfile profile) {
 
         if (!validateProfile(profile)) {
             return false;
         }
-        arrayProfile.add(profile);
+        userProfileStore.userProfileList.add(profile);
         return true;
     }
 
@@ -301,18 +73,18 @@ public class Company {
      * Getter Methods
      **/
 
-    public List<Profile> getArrayProfile() {
-        return this.arrayProfile;
+    public List<UserProfile> getUserProfileList() {
+        return this.getUserProfileList();
     }
 
-    public List<Profile> getArrayProfileWithType(String type) {
+    public List<UserProfile> getUserProfileListWithType(String type) {
 
-        List<Profile> foundList = new ArrayList<>();
+        List<UserProfile> foundList = new ArrayList<>();
 
-        for (int i = 0; i < this.arrayProfile.size(); i++) {
+        for (int i = 0; i < this.userProfileStore.userProfileList.size(); i++) {
 
-            if (this.arrayProfile.get(i).hasType(type)) {
-                foundList.add(this.arrayProfile.get(i));
+            if (this.userProfileStore.userProfileList.get(i).hasType(type)) {
+                foundList.add(this.userProfileStore.userProfileList.get(i));
             }
 
         }
@@ -321,15 +93,15 @@ public class Company {
     }
 
     ////Talvez mudar para não buscar por index
-    public Profile getProfile(int index) {
-        return new Profile(arrayProfile.get(index));
+    public UserProfile getUserProfile(int index) {
+        return new UserProfile(userProfileStore.userProfileList.get(index));
     }
 
-    public Profile getProfile(String name) {
-        Profile pro = null;
-        for (int i = 0; i < arrayProfile.size(); i++) {
-            if (Objects.equals(getProfile(i).getName(), name)) {
-                pro = getProfile(i);
+    public UserProfile getUserProfile(String name) {
+        UserProfile pro = null;
+        for (int i = 0; i < userProfileStore.userProfileList.size(); i++) {
+            if (Objects.equals(getUserProfile(i).getName(), name)) {
+                pro = getUserProfile(i);
                 break;
             }
         }
@@ -338,9 +110,10 @@ public class Company {
 
     /**
      * Validation Method
-     **/
+     *
+     * @param profile*/
 
-    private boolean validateProfile(Profile profile) {
+    private boolean validateProfile(UserProfile profile) {
         //Check empty fields on name and type
         if (profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()) {
             return false;
@@ -352,15 +125,13 @@ public class Company {
         }
 
         //Check if profile already exist
-        for (Profile up : arrayProfile) {
+        for (UserProfile up : userProfileStore.userProfileList) {
             if (up.equals(profile)) {
                 return false;
             }
         }
         return true;
     }
-
-
 
     //Request
 
@@ -405,7 +176,6 @@ public class Company {
         return result;
 
     }
-
 
 
 }

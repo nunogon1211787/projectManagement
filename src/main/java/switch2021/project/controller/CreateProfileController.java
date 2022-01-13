@@ -2,7 +2,7 @@ package switch2021.project.controller;
 
 
 import switch2021.project.model.Company;
-import switch2021.project.model.Profile;
+import switch2021.project.model.UserProfile;
 import switch2021.project.utils.App;
 
 
@@ -13,7 +13,7 @@ import switch2021.project.utils.App;
 public class CreateProfileController {
 
     private Company company;
-    private Profile profile;
+    private UserProfile userProfile;
 
     public CreateProfileController() {
         this(App.getInstance().getCompany());
@@ -26,8 +26,8 @@ public class CreateProfileController {
 
 
     public boolean createProfile(String name, String type) {
-        this.profile = this.company.createProfile(name, type);
-        return this.company.addProfile(this.profile);
+        this.userProfile = this.company.getUserProfileStore().createProfile(name, type);
+        return this.company.getUserProfileStore().addProfile(this.userProfile);
 
 
     }

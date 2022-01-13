@@ -12,13 +12,13 @@ public class Request {
     private LocalDate requestDate;
     private LocalDate requestTime;
     private SystemUser user;
-    private Profile profileRequested;
+    private UserProfile profileRequested;
 
     /**
      * construtor da classe "Request"
      **/
 
-    public Request(LocalDate requestDate, LocalDate requestTime, Profile profile, SystemUser user) {
+    public Request(LocalDate requestDate, LocalDate requestTime, UserProfile profile, SystemUser user) {
         this.requestDate = requestDate;
         this.requestTime = requestTime;
         this.user = user;
@@ -41,7 +41,7 @@ public class Request {
         return user;
     }
 
-    public Profile getProfile() {
+    public UserProfile getProfile() {
         return this.profileRequested;
     }
 

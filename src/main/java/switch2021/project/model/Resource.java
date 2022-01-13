@@ -16,7 +16,7 @@ public class Resource {
     private double costPerHour;
     private double percentageOfAllocation;
 
-    private Profile profile;
+    private UserProfile profile;
 
     /**
      * Construtor de Resource (Carolina US007)
@@ -65,7 +65,7 @@ public class Resource {
         return costPerHour;
     }
 
-    public Profile getProfile() {
+    public UserProfile getProfile() {
         return profile;
     }
 

@@ -16,14 +16,14 @@ class ResourceTest {
     public void Resource(){
         //Input
         /** user **/
-        Profile pro = new Profile("mku","sss");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        UserProfile pro = new UserProfile( "mku","sss");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", pro);
         LocalDate startDate = LocalDate.of(2021,12,31);
         LocalDate endDate = LocalDate.of(2022,01,05);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         //Expected
-        Profile iso = new Profile("mku","sss");
-        SystemUser newUser2 = new SystemUser("xyz", "fase", "des", "gth", iso);
+        UserProfile iso = new UserProfile( "mku","sss");
+        SystemUser newUser2 = new SystemUser("xyz", "fase", "des", "gth", "gth","", iso);
         LocalDate startDate2 = LocalDate.of(2021,12,31);
         LocalDate endDate2 = LocalDate.of(2022,01,05);
         Resource expected = new Resource(newUser2, startDate2, endDate2, 100, .5);
@@ -42,8 +42,8 @@ class ResourceTest {
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 02);
 
         /** user **/
-        Profile pro = new Profile("mku", "sss");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        UserProfile pro = new UserProfile( "mku", "sss");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", pro);
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act
@@ -64,8 +64,8 @@ class ResourceTest {
         LocalDate endDateToAllocate = LocalDate.of(2022, 01, 02);
 
         /** user **/
-        Profile pro = new Profile("mku", "sss");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        UserProfile pro = new UserProfile("mku", "sss");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", pro);
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act
@@ -86,8 +86,8 @@ class ResourceTest {
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 24);
 
         /** user **/
-        Profile pro = new Profile("mku", "sss");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        UserProfile pro = new UserProfile("mku", "sss");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", pro);
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act
@@ -108,8 +108,8 @@ class ResourceTest {
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
 
         /** user **/
-        Profile pro = new Profile("mku", "sss");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        UserProfile pro = new UserProfile("mku", "sss");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", pro);
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act
@@ -129,8 +129,8 @@ class ResourceTest {
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 20);
 
         /** user **/
-        Profile pro = new Profile("mku", "sss");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        UserProfile pro = new UserProfile("mku", "sss");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", pro);
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act
@@ -151,8 +151,8 @@ class ResourceTest {
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 25);
 
         /** user **/
-        Profile pro = new Profile("mku", "sss");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        UserProfile pro = new UserProfile("mku", "sss");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", pro);
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act
@@ -170,8 +170,8 @@ class ResourceTest {
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
 
         /** user **/
-        Profile pro = new Profile("mku", "sss");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", pro);
+        UserProfile pro = new UserProfile("mku", "sss");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", pro);
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act

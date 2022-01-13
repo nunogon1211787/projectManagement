@@ -19,12 +19,12 @@ public class CreateUserStoryControllerTest {
     @BeforeEach
     public void init() {
         company = App.getInstance().getCompany();
-        project = company.createProject("TEST", "Projecto Test", "decricao", new Customer("marreta@email.pt"), new Typology("description"),
+        project = company.getProjectStore().createProject("TEST", "Projecto Test", "decricao", new Customer("marreta@email.pt"), new Typology("description"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.createUserStory(UserStoryStatus.TODO, 12, "Default Story", 6);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
-                "Product Owner", "AAA", company.getProfile("Product Owne")));
-        company.addProject(project);
+                "Product Owner", "AAA", "AAA", "", company.getUserProfile("Product Owne")));
+        company.getProjectStore().addProject(project);
     }
 
     @Test

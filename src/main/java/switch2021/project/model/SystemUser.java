@@ -14,30 +14,12 @@ public class SystemUser {
     private String password;  // Implementar password confirmation ***
     private String function;
     private boolean activateUser;
-    private List<Profile> assignedProfileList;
+    private UserProfileStore assignedProfileList;
 
     /**
-     * Contructor without photo
+     * Contructor
      **/
-    public SystemUser(String userName, String email, String function, String password, Profile profile) {
-        checkUserNameRules(userName);
-        checkEmailRules(email);
-        checkFunctionRules(function);
-        checkPasswordRules(password);
-        this.userName = userName;
-        this.email = email;                             /////  Implementar apenas um construtor  *****
-        this.photo = "";
-        this.function = function;
-        this.password = encryptPassword(password);
-        this.activateUser = false;
-        this.assignedProfileList = new ArrayList<>();
-        assignedProfileList.add(profile);
-    }
-
-    /**
-     * Contructor with photo
-     **/
-    public SystemUser(String userName, String email, String function, String photo, String password, Profile profile) {
+    public SystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor) {
         checkUserNameRules(userName);
         checkEmailRules(email);
         checkFunctionRules(function);
@@ -48,8 +30,9 @@ public class SystemUser {
         this.function = function;
         this.password = encryptPassword(password);
         this.activateUser = false;
-        this.assignedProfileList = new ArrayList<>();
-        this.assignedProfileList.add(profile);
+        this.assignedProfileList = new UserProfileStore();
+
+        assignedProfileList.populateSystemUser(visitor);
     }
 
     /**
@@ -66,16 +49,8 @@ public class SystemUser {
 
     }
 
-    private List<Profile> deepCopyListProfile(List<Profile> originalList) {
-
-        List<Profile> deepCopyList = new ArrayList<>();
-
-        for (int i = 0; i < originalList.size(); i++) {
-
-            deepCopyList.add(new Profile(originalList.get(i)));
-
-        }
-
+    private UserProfileStore deepCopyListProfile(UserProfileStore originalList) {
+        UserProfileStore deepCopyList = this.assignedProfileList;
         return deepCopyList;
     }
 
@@ -111,7 +86,7 @@ public class SystemUser {
         return this.activateUser;
     }
 
-    public List<Profile> getAssignedProfileList() {
+    public UserProfileStore getAssignedProfileList() {
         return this.assignedProfileList;
     }
 
@@ -202,8 +177,8 @@ public class SystemUser {
      * Método para adicionar um profile a lista de profiles do User.
      */
 
-    public void addProfileToList(Profile p) {
-        this.assignedProfileList.add(p);
+    public void assignProfileToUser(UserProfile p) {
+        this.assignedProfileList.addProfile(p);
     }
 
     /**
@@ -231,7 +206,12 @@ public class SystemUser {
      * Método para verificar se os parâmetros recebidos são do objeto.
      */
 
-    public boolean hasThisData(String userName, String email, String function, int isActive, int[] profilesId) {
+
+    ///
+    // Rever este Método!!!!    *****************************
+    ///
+
+    /*public boolean hasThisData(String userName, String email, String function, int isActive, int[] profilesId) {
 
         boolean result = true;
         int match = 0;
@@ -288,7 +268,7 @@ public class SystemUser {
                 int count = 0;
 
                 for (int k : profilesId) {
-                    for (Profile profile : this.assignedProfileList) {
+                    for (UserProfile profile : this.assignedProfileList) {
                         if (profile.isValidId(k)) {
                             count++;
                             match++;
@@ -309,7 +289,7 @@ public class SystemUser {
         }
 
         return result;
-    }
+    }*/
 
     /**
      * Method to update old password with the new password
@@ -341,7 +321,11 @@ public class SystemUser {
      * Update profile Method
      */
 
-    public boolean updateProfile(Profile oldProfile, Profile newProfile) {
+    ///////
+    /// Rever Este Método **************************************************
+
+    ///////
+    /*public boolean updateProfile(UserProfile oldProfile, UserProfile newProfile) {
         this.assignedProfileList.remove(oldProfile);
         if (newProfile.isValidName(newProfile.getName())) {  ///// Faz sentido ter esta validação de Profile?? Os profiles
             this.assignedProfileList.add(newProfile);          /// já vão ser selecionados de uma lista válida!
@@ -349,7 +333,7 @@ public class SystemUser {
             return false;
         }
         return true;
-    }
+    }*/
 
 
     @Override
@@ -363,5 +347,5 @@ public class SystemUser {
                 && (this.assignedProfileList.equals(that.assignedProfileList));
     }
     //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
-    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
+    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...teste
 }

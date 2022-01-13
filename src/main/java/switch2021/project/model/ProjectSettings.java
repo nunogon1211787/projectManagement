@@ -12,7 +12,6 @@ public class ProjectSettings {
 
     private List<ProjectStatus> arrayProjectStatus;
     private List<Customer> arrayCustomer;
-    private List<Typology> arrayTypology;
     private List<BusinessSector> arrayBusinessSector;
 
     /**
@@ -20,9 +19,7 @@ public class ProjectSettings {
      **/
 
     public ProjectSettings() {
-        this.arrayTypology = new ArrayList<>();
-        this.arrayTypology.add(new Typology("Fixed Cost"));
-        this.arrayTypology.add(new Typology("Time and Materials"));
+
 
         this.arrayBusinessSector = new ArrayList<>();
         this.arrayBusinessSector.add(new BusinessSector("Business_0"));
@@ -108,59 +105,7 @@ public class ProjectSettings {
         return arrayCustomer.get(index);
     }
 
-    /**
-     * >>>>>TYPOLOGY´S METHODS<<<<<
-     * <p>
-     * Create Typology.
-     **/
-    public Typology createTypology(String description) {
-        Typology typo = new Typology(description);
 
-        return typo;
-    }
-
-    /**
-     * Typology Add´s Method.
-     **/
-    public boolean add(Typology typo) {
-        if (validateTypology(typo)) {
-            this.arrayTypology.add(typo);
-        } else {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Getter´s Method.
-     **/
-    public List<Typology> getArrayTypology() {
-        return arrayTypology;
-    }
-
-    public Typology getTypologyById(int index) {
-        return arrayTypology.get(index);
-    }
-
-    /**
-     * Typology Validate´s Method
-     **/
-    public boolean validateTypology(Typology typo) {
-        if (typo.getDescription() == null || typo.getDescription() == "") {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Save Typology at List
-     **/
-    public boolean saveTypology(Typology typo) {
-        if (!validateTypology(typo)) {
-            return false;
-        }
-        return add(typo);
-    }
 
     /**
      * >>>>>BUSINESSSECTOR´S METHODS<<<<<

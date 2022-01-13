@@ -14,9 +14,9 @@ public class ChangePasswordController {
     public boolean changePassword(String email, String oldpasswordUI, String newpassword) {
 
 
-       SystemUser user = this.company.getUserByEmail(email);
+       SystemUser user = this.company.getSystemUserStore().getUserByEmail(email);
        user.updatePassword(oldpasswordUI, newpassword);
-       return this.company.saveSystemUser(user);
+       return this.company.getSystemUserStore().saveSystemUser(user);
     }
 }
 

@@ -29,7 +29,7 @@ public class Typology {
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void updateDescription(String description) {
