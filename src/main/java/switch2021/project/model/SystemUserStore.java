@@ -1,6 +1,5 @@
 package switch2021.project.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SystemUserStore {
@@ -9,7 +8,7 @@ public class SystemUserStore {
      * Atributos
      */
 
-    List<SystemUser> SystemUserList;
+    List<SystemUser> systemUserList;
 
 
     // System user
@@ -18,10 +17,13 @@ public class SystemUserStore {
      * Create Methods
      **/
 
-    public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor ) {
-
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);
-
+    public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor) {
+        SystemUser newUser;
+        try {
+            newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);
+        } catch (IllegalArgumentException e) {
+            newUser = null;
+        }
         return newUser;
 
     }
@@ -32,7 +34,7 @@ public class SystemUserStore {
      **/
 
     public boolean addSystemUser(SystemUser syUser) {
-        this.SystemUserList.add(syUser);
+        this.systemUserList.add(syUser);
         return true;
     }
 
@@ -40,16 +42,16 @@ public class SystemUserStore {
      * Getter Methods
      */
     public List<SystemUser> getSystemUserList() {
-        return this.SystemUserList;
+        return this.systemUserList;
     }
 
     public SystemUser getUserByEmail(String email) {
 
         SystemUser user = null;
 
-        for (int i = 0; i < this.SystemUserList.size(); i++) {
-            if (this.SystemUserList.get(i).isYourEmail(email)) {
-                user = this.SystemUserList.get(i);
+        for (int i = 0; i < this.systemUserList.size(); i++) {
+            if (this.systemUserList.get(i).isYourEmail(email)) {
+                user = this.systemUserList.get(i);
                 break;
             }
         }
@@ -89,11 +91,11 @@ public class SystemUserStore {
         if (hasUserName(user.getUserName())) {
             return false;
         }
-        return !this.SystemUserList.contains(user);
+        return !this.systemUserList.contains(user);
     }
 
     boolean hasEmail(String newUserEmail) {
-        for (SystemUser newUser : SystemUserList) {
+        for (SystemUser newUser : systemUserList) {
             if (newUser.getEmail().trim().equalsIgnoreCase(newUserEmail.trim())) {
                 return true;
             }
@@ -103,7 +105,7 @@ public class SystemUserStore {
 
     //// Dois utilizadores podem existir com o mesmo nome, podem existir dois Nunos!!
     boolean hasUserName(String newUserName) {
-        for (SystemUser newUser : SystemUserList) {
+        for (SystemUser newUser : systemUserList) {
             if (newUser.getUserName().trim().equalsIgnoreCase(newUserName.trim())) {
                 return true;
             }
@@ -122,12 +124,10 @@ public class SystemUserStore {
         if (!validateSystemUser(user)) {
             result = false;
         } else {
-            this.SystemUserList.add(user);
+            this.systemUserList.add(user);
         }
         return result;
     }
-
-
 
 
 }

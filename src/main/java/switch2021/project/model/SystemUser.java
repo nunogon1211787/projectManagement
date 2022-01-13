@@ -27,6 +27,11 @@ public class SystemUser {
         this.email = email;
         this.photo = photo;
         this.function = function;
+        if (password.contains(passwordConfirmation)) {
+            this.password = encryptPassword(password);
+        } else {
+            throw new IllegalArgumentException("passwords not match");
+        }
         this.password = encryptPassword(password);
         this.activateUser = false;
         this.assignedProfileList = new UserProfileStore();
