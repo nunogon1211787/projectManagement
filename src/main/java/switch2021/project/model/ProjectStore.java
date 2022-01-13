@@ -17,6 +17,7 @@ public class ProjectStore {
     /**
      * Constructors with data
      **/
+
     public Project createProject(String code, String name, String description, Customer customer, Typology typology,
                                  BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
@@ -24,16 +25,12 @@ public class ProjectStore {
                 startDate, numberOfSprints, budget);
     }
 
-    /**
-     * Add Method
-     **/
 
     public boolean addProject(Project proj) {
         this.arrayProject.add(proj);
         UserProfile test = new UserProfileStore().getProfile(0);
 
         return true;
-
     }
 
     /**
@@ -45,7 +42,6 @@ public class ProjectStore {
     }
 
     public Project getProject(String code) {
-
         for (Project proj : arrayProject) {
             if (proj.getCode().equalsIgnoreCase(code)) {
                 return proj;
@@ -126,13 +122,28 @@ public class ProjectStore {
      * Save Methods
      */
 
-    public boolean saveProject(Project proj, int index) {
+    public boolean saveProject(Project proj, String code) {
         validateProject(proj);
-        overwriteProject(proj, index);
+        overwriteProject(proj, code);
         return true;
     }
 
-    public void overwriteProject(Project proj, int index) {
-        this.arrayProject.set(index, proj);
+    public void overwriteProject(Project proj, String code) {
+        int x = 0;
+        for (int i = 0; i < this.arrayProject.size(); i++) {
+                if (proj.getCode().equalsIgnoreCase(code)) {
+                    x = i;
+                }
+        }
+        this.arrayProject.set(x, proj);
     }
+
+    public boolean saveNewProject(Project proj) {
+        validateProject(proj);
+        addProject(proj);
+        return true;
+    }
+
+
+
 }
