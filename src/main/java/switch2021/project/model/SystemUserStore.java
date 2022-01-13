@@ -18,14 +18,7 @@ public class SystemUserStore {
      **/
 
     public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor) {
-        SystemUser newUser;
-        try {
-            newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);
-        } catch (IllegalArgumentException e) {
-            newUser = null;
-        }
-        return newUser;
-
+        return new SystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);
     }
     ///// Apenas manter um construtor !!!
 

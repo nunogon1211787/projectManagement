@@ -41,8 +41,8 @@ class SystemUserTest {
 
         //Arrange
         UserProfile tes = new UserProfile("ddd", "pro");
-        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456",
-                                        "123456", "123456", tes);
+        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456",
+                                        "123456", "img_123456", tes);
         //Act
         String emailCheck = "xxxx";
         //Assert
