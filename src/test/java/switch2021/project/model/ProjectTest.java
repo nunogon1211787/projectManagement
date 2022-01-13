@@ -90,7 +90,7 @@ class ProjectTest {
     public void checkCustomer() {
         //Expected
         Customer customerCheck = newProject.getCustomer();
-        Customer valueCustomer = new Customer(0, "customer1@email.com");
+        Customer valueCustomer = new Customer(0, "customer1@email.com", "name");
 
         //Result
         assertEquals(valueCustomer, customerCheck);
@@ -101,7 +101,7 @@ class ProjectTest {
     public void checkTypology() {
         //Expected
         Typology typologyCheck = newProject.getTypology();
-        Typology valueTypology = new Typology("Fixed Cost");
+        Typology valueTypology = new Typology(0,"Fixed Cost");
 
         //Result
         assertEquals(valueTypology, typologyCheck);
@@ -344,8 +344,8 @@ class ProjectTest {
 
         Company comTest = new Company();
         LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
-        Customer cust = new Customer("ght@gmail.com");
-        Typology typo = new Typology("typo1");
+        Customer cust = new Customer(0, "ght@gmail.com", "name");
+        Typology typo = new Typology(0,"typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
         Project proj2 = comTest.getProjectStore().createProject("2", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
 
@@ -373,8 +373,8 @@ class ProjectTest {
         /** project **/
         Company comTest = new Company();
         LocalDate startProjectDate = LocalDate.of(2021, 02, 25);
-        Customer cust = new Customer("ght@gmail.com");
-        Typology typo = new Typology("typo1");
+        Customer cust = new Customer(0, "ght@gmail.com", "name");
+        Typology typo = new Typology(0,"typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
         Project proj1 = comTest.getProjectStore().createProject("1", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);
         Project proj3 = comTest.getProjectStore().createProject("3", "gfd", "ghj", cust, typo, busSector, startProjectDate, 30, 4500);

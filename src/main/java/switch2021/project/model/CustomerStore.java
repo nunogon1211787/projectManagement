@@ -22,8 +22,8 @@ public class CustomerStore {
         this.customerList = new ArrayList<>();
     }
 
-    public Customer createCustomer(String name, String email) {
-        return new Customer(name,email);
+    public Customer createCustomer(int id, String name, String email) {
+        return new Customer(id, name,email);
     }
 
     /**

@@ -21,13 +21,13 @@ public class TypologyStore {
         this.typologyList = new ArrayList<>();
     }
 
-    public void populateDefault() {
-        this.typologyList.add(new Typology("Fixed Cost"));
-        this.typologyList.add(new Typology("Time and Materials"));
+    public void populateTypologyList() {
+        this.typologyList.add(new Typology(0, "Fixed Cost"));
+        this.typologyList.add(new Typology(1, "Time and Materials"));
     }
 
-    public Typology createTypology(String description) {
-        Typology typo = new Typology(description);
+    public Typology createTypology(int id, String description) {
+        Typology typo = new Typology(id, description);
 
         return typo;
     }
@@ -63,5 +63,12 @@ public class TypologyStore {
         return add(typo);
     }
 
+    public boolean equals(Object obj){
+        if (this == obj) return true;
+        if (!(obj instanceof UserProfileStore)) return false;
+        TypologyStore that = (TypologyStore) obj;
+        return
+                (this.typologyList.equals(that.getTypologyList()));
+    }
 
 }

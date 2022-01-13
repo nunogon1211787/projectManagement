@@ -176,11 +176,19 @@ public class SystemUser {
     }
 
     /**
-     * Método para adicionar um profile a lista de profiles do User.
+     * AssignProfileList´s methods
      */
 
     public void assignProfileToUser(UserProfile p) {
         this.assignedProfileList.addProfile(p);
+    }
+
+
+    public boolean updateProfile(UserProfile oldProfile, UserProfile newProfile) {
+
+       // this.assignedProfileList.remove(oldProfile);
+       // this.assignedProfileList.add(newProfile);
+        return true;
     }
 
     /**
@@ -314,25 +322,6 @@ public class SystemUser {
         }
         return false;
     }
-
-    /**
-     * Update profile Method
-     */
-
-    ///////
-    /// Rever Este Método **************************************************
-
-    ///////
-    /*public boolean updateProfile(UserProfile oldProfile, UserProfile newProfile) {
-        this.assignedProfileList.remove(oldProfile);
-        if (newProfile.isValidName(newProfile.getName())) {  ///// Faz sentido ter esta validação de Profile?? Os profiles
-            this.assignedProfileList.add(newProfile);          /// já vão ser selecionados de uma lista válida!
-        } else {
-            return false;
-        }
-        return true;
-    }*/
-
 
     @Override
     public boolean equals(Object o) {

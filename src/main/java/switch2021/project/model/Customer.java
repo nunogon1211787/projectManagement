@@ -1,10 +1,6 @@
 package switch2021.project.model;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Customer {
-
-    private static AtomicInteger ID_GENERATOR = new AtomicInteger(001);
     /**
      * Customer Class
      * Class Atributes
@@ -17,8 +13,8 @@ public class Customer {
      * Customer Constructor
      **/
 
-    public Customer(String email, String name) {
-        this.id =  ID_GENERATOR.getAndIncrement();
+    public Customer(int id, String email, String name) {
+        this.id = id;
         this.email = email;
         this.name = name;
     }
@@ -55,6 +51,6 @@ public class Customer {
         if (o == null || getClass() != o.getClass()) return false;
         Customer that = (Customer) o;
 
-        return (this.email.equals(that.email) && this.id==that.id);
+        return ((this.email.equals(that.email)) && (this.id==that.id)  && (this.name.equals(that.name)));
     }
 }

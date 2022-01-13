@@ -12,9 +12,13 @@ public class Typology {
     private String description;
 
     // Constructor with parameters
-    public Typology(String description) {
-        this.id_Typology = ID_TYPOLOGY_GENERATOR.getAndIncrement();
-        this.description = description;
+    public Typology(int id_Typology, String description) {
+        this.id_Typology = id_Typology;
+        if(description != "") {
+            this.description = description;
+        } else {
+            throw new IllegalArgumentException("Description is empty");
+        }
     }
 
     /** Constructors of typology´s class **/
@@ -42,7 +46,7 @@ public class Typology {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Typology that = (Typology) o;
-        return (this.description.equals(that.description));
+        return ((this.description.equals(that.description) && (this.id_Typology == that.id_Typology)));
     }
     //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
     // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...

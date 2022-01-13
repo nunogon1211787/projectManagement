@@ -27,8 +27,8 @@ public class ProjectSettings {
         this.arrayBusinessSector.add(new BusinessSector("Business_2"));
 
         this.arrayCustomer = new ArrayList<>();
-        this.arrayCustomer.add(new Customer(0, "customer1@email.com"));  // estes parametros são para efeitos de testes
-        this.arrayCustomer.add(new Customer(1, "customer2@email.com"));
+        this.arrayCustomer.add(new Customer(0, "customer1@email.com", "name"));  // estes parametros são para efeitos de testes
+        this.arrayCustomer.add(new Customer(1, "customer2@email.com", "name"));
 
         this.arrayProjectStatus = new ArrayList<>();
         this.arrayProjectStatus.add(new ProjectStatus("Planned"));
@@ -76,11 +76,11 @@ public class ProjectSettings {
      * <p>
      * Create Customer
      **/
-    public Customer createCustomer(int num, String email) {
+  /*  public Customer createCustomer(int num, String email) {
 
         return new Customer(num, email);
 
-    }
+    }*/
 
     /**
      * Metodo adicionar Customer

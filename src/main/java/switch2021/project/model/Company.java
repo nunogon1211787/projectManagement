@@ -9,12 +9,12 @@ public class Company {
     /**
      * Atributos da Classe
      **/
-    private TypologyStore typologyStore = new TypologyStore();
+    private TypologyStore typologyStore;
     SystemUserStore systemUserStore;
     UserProfileStore userProfileStore;
     ProjectStore projectStore;
     // falta colocar a chamada para o request quando se criar a página;
-    List<Request> arrayRequest;
+    List<Request> requestList;
 
     public  Company(){
         this.systemUserStore = new SystemUserStore();
@@ -23,6 +23,7 @@ public class Company {
         this.typologyStore = new TypologyStore();
 
         this.userProfileStore.populateDefault();
+        this.typologyStore.populateTypologyList();
     }
 
 
@@ -140,7 +141,7 @@ public class Company {
      */
 
     public boolean addRequest(Request request) {
-        this.arrayRequest.add(request);
+        this.requestList.add(request);
         return true;
 
     }
@@ -152,7 +153,7 @@ public class Company {
     private boolean validateRequest(Request newRequest) {
 
         //Check if request already exist
-        for (Request up : arrayRequest) {
+        for (Request up : requestList) {
             if (up.equals(newRequest)) {
                 return false;
             }
