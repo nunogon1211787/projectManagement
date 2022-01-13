@@ -1,56 +1,66 @@
 package switch2021.project.model;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Customer {
+
     /**
      * Customer Class
-     * Class Atributes
+     * Class Atributes - The customer is composed of an automaticly generated ID, an email adress and a customer name.
      **/
-    private int id;
-    private String name;
-    private String email;
+    private long customerId;
+    private String customerName;
+    private String customerEmail;
+
 
     /**
      * Customer Constructor
+     * Creates a new Customer instance.
      **/
 
-    public Customer(int id, String email, String name) {
-        this.id = id;
-        this.email = email;
-        this.name = name;
+    public Customer(String customerEmail, String customerName) {
+        this.customerId = ID_GENERATOR.getAndIncrement();
+        this.customerEmail = customerEmail;
+        this.customerName = customerName;
     }
+
+    //Create ID automatically
+    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
 
     /**
      * Getter and Setters
      **/
 
-    public int getId() {
-        return id;
+    public long getCustomerId() {
+        return customerId;
     }
 
-    public String getName() {
-        return name;
+    public String getCustomerName() {
+        return customerName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getCustomerEmail() {
+        return customerEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
     }
 
 
-    /** Override Methods **/
+    /**
+     * Override Methods
+     **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer that = (Customer) o;
 
-        return ((this.email.equals(that.email)) && (this.id==that.id)  && (this.name.equals(that.name)));
+        return ((this.customerEmail.equals(that.customerEmail)) && (this.customerId ==that.customerId)  && (this.customerName.equals(that.customerName)));
     }
 }

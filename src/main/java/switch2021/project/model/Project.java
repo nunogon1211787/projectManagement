@@ -40,19 +40,23 @@ public class Project {
         this.code = code;
         this.projectName = name;
         this.description = description;
+
         this.customer = customer;
         this.typology = typology;
-        this.projectStatus = new ProjectSettings().getProjectStatusById(0);
+        this.projectStatus = new Company().getProjectStatusStore().getProjectStatusByDescription("Planned");
         this.businessSector = businessSector;
+
         this.startDate = startDate;
+
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
+
         this.productBacklog = new ProductBacklog();
         this.projectTeam = new ArrayList<>();
     }
 
     /**
-     * Getter Methods (Paulo + Cris, productBacklog)
+     * Getter Methods
      **/
 
     public String getCode() {
@@ -63,7 +67,9 @@ public class Project {
         return projectName;
     }
 
-    public String getDescription() {return description;}
+    public String getDescription() {
+        return description;
+    }
 
     public Customer getCustomer() {
         return this.customer;
@@ -77,7 +83,9 @@ public class Project {
         return projectStatus;
     }
 
-    public BusinessSector getBusinessSector() {return businessSector;}
+    public BusinessSector getBusinessSector() {
+        return businessSector;
+    }
 
     public LocalDate getStartDate() {
         return startDate;
@@ -115,7 +123,8 @@ public class Project {
         this.code = code;
     }
 
-    public boolean setEndDate() {this.endDate = LocalDate.now();
+    public boolean setEndDate() {
+        this.endDate = LocalDate.now();
         return true;
     }
 
@@ -190,7 +199,7 @@ public class Project {
 
     public boolean addResource(Resource toAdd) {
         boolean msg = false;
-        if(validateResource(toAdd)) {
+        if (validateResource(toAdd)) {
             this.projectTeam.add(toAdd);
             msg = true;
         }
@@ -206,17 +215,15 @@ public class Project {
         return projectTeam.get(index);
     }
 
-    public boolean validateResource(Resource resource){
+    public boolean validateResource(Resource resource) {
         boolean msg = true;
         for (int i = 0; i < projectTeam.size(); i++) {
-            if(projectTeam.get(i).equals(resource)){
-        msg = false;
+            if (projectTeam.get(i).equals(resource)) {
+                msg = false;
             }
         }
         return msg;
     }
-
-
 
 
     @Override

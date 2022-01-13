@@ -7,47 +7,85 @@ import java.util.Objects;
 public class Company {
 
     /**
-     * Atributos da Classe
+     * Company Atributes
+     * The company atributes are composed by all the store lists of a given project
      **/
+
+    private SystemUserStore systemUserStore;
+    private ProjectStore projectStore;
+
+    private UserProfileStore userProfileStore;
+
+    private ProjectStatusStore projectStatusStore;
+    private CustomerStore customerStore;
+    private BusinessSectorStore businessSectorStore;
     private TypologyStore typologyStore;
-    SystemUserStore systemUserStore;
-    UserProfileStore userProfileStore;
-    ProjectStore projectStore;
+
     // falta colocar a chamada para o request quando se criar a página;
     List<Request> requestList;
 
-    public  Company(){
+    /**
+     * Company Constructor
+     * The company constructor initializes and populates all the store lists.
+     **/
+
+    public Company() {
         this.systemUserStore = new SystemUserStore();
-        this.userProfileStore = new UserProfileStore();
         this.projectStore = new ProjectStore();
+
+        this.userProfileStore = new UserProfileStore();
+
         this.typologyStore = new TypologyStore();
+        this.customerStore = new CustomerStore();
+        this.businessSectorStore = new BusinessSectorStore();
+        this.projectStatusStore = new ProjectStatusStore();
 
         this.userProfileStore.populateDefault();
         this.typologyStore.populateTypologyList();
+        this.projectStatusStore.populateProjectStatusList();
     }
 
+    /**
+     * Company getter's
+     * Getting Methods that return all the stores to other classes
+     */
 
     //Project
     public ProjectStore getProjectStore() {
         return this.projectStore;
     }
 
+    //SystemUser
     public SystemUserStore getSystemUserStore() {
         return this.systemUserStore;
     }
 
     //Profile
     public UserProfileStore getUserProfileStore() {
-            return this.userProfileStore;
+        return this.userProfileStore;
     }
+
+    // SpecialProfile or ProjectRole
 
     //Typology
     public TypologyStore getTypologyStore() {
         return this.typologyStore;
     }
 
+    //ProjectStatus
+    public ProjectStatusStore getProjectStatusStore() {
+        return this.projectStatusStore;
+    }
 
-    // Profile
+    //Customer
+    public CustomerStore getCustomerStore() {
+        return this.customerStore;
+    }
+
+    //BusinessSector
+    public BusinessSectorStore getBusinessSectorStore() {
+        return this.businessSectorStore;
+    }
 
     /**
      * Create Method
@@ -112,7 +150,8 @@ public class Company {
     /**
      * Validation Method
      *
-     * @param profile*/
+     * @param profile
+     */
 
     private boolean validateProfile(UserProfile profile) {
         //Check empty fields on name and type

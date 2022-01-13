@@ -2,35 +2,51 @@ package switch2021.project.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TypologyStore {
 
     /**
-     * Classe ProjectSettings que vai conter a lista de Typology -
-     * Atributos
+     * Typology Store Atributes
+     * Contains a Typology list
      **/
 
     private List<Typology> typologyList;
 
 
     /**
-     * Constructor
+     * Typology Constructor
      **/
 
     public TypologyStore() {
         this.typologyList = new ArrayList<>();
     }
 
+    /**
+     * Typology Populator
+     * Populates the typology List with pre-set objects
+     **/
+
     public void populateTypologyList() {
-        this.typologyList.add(new Typology(0, "Fixed Cost"));
-        this.typologyList.add(new Typology(1, "Time and Materials"));
+        this.typologyList.add(new Typology("Fixed Cost"));
+        this.typologyList.add(new Typology("Time and Materials"));
     }
 
-    public Typology createTypology(int id, String description) {
-        Typology typo = new Typology(id, description);
+    /**
+     * Create Typology
+     * Creates a new Typology object
+     **/
+
+    public Typology createTypology(String description) {
+        Typology typo = new Typology(description);
 
         return typo;
     }
+
+    /**
+     * Add Typology Method
+     * Adds a new Typology object to the Project Status List
+     **/
 
     public boolean add(Typology typo) {
         if (validateTypology(typo)) {
@@ -45,12 +61,21 @@ public class TypologyStore {
         return typologyList;
     }
 
-    public Typology getTypologyById(int index) {
-        return typologyList.get(index);
+    public Typology getTypologyByDescription(String description) {
+        Typology typo = null;
+
+        for (Typology i : this.typologyList) {
+            if (i.getDescription().equals(description)) {
+                typo = i;
+                break;
+            }
+        }
+        return typo;
     }
 
     public boolean validateTypology(Typology typo) {
-        if (typo.getDescription() == null || typo.getDescription() == "") {
+
+        if (typo.getDescription() == null || typo.getDescription().equals("")) {
             return false;
         }
         return true;
@@ -63,7 +88,7 @@ public class TypologyStore {
         return add(typo);
     }
 
-    public boolean equals(Object obj){
+    public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!(obj instanceof UserProfileStore)) return false;
         TypologyStore that = (TypologyStore) obj;

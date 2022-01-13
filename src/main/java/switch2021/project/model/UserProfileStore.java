@@ -55,10 +55,10 @@ public class UserProfileStore {
 
         List<UserProfile> foundList = new ArrayList<>();
 
-        for (int i = 0; i < this.userProfileList.size(); i++) {
+        for (UserProfile userProfile : this.userProfileList) {
 
-            if (this.userProfileList.get(i).hasType(type)) {
-                foundList.add(this.userProfileList.get(i));
+            if (userProfile.hasType(type)) {
+                foundList.add(userProfile);
             }
 
         }

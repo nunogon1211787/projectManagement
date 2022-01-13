@@ -1,7 +1,6 @@
 package switch2021.project.utils;
 
 import switch2021.project.model.Company;
-import switch2021.project.model.ProjectSettings;
 import switch2021.project.model.TypologyStore;
 
 /**
