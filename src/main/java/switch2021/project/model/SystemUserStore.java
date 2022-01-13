@@ -39,7 +39,10 @@ public class SystemUserStore {
      * Getter Methods
      */
     public List<SystemUser> getSystemUserList() {
-        return this.systemUserList;
+        List<SystemUser> copyList = new ArrayList<>();
+        copyList.addAll(systemUserList);
+
+        return copyList;
     }
 
     public SystemUser getUserByEmail(String email) {
