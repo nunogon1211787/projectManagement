@@ -163,6 +163,10 @@ public class Project {
         this.projectStatus = projectStatus.setDescription(status);
     }
 
+    public void setProjectTeam(List<Resource> projectTeam) {
+        this.projectTeam = projectTeam;
+    }
+
     /**
      * Methods UserStory creation (Cris US009)
      * - Create User Story method

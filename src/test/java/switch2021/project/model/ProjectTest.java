@@ -302,14 +302,6 @@ class ProjectTest {
     @Test
     public void editProjectSetsTest() {
         //Arrange
-        SystemUser scrumMaster = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456",
-                "123456", "123456", User);
-        SystemUser productOwner = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456",
-                "123456", "123456", User);
-        SystemUser user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456",
-                "123456", "123456", User);
-        SystemUser user2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "img_123456",
-                "123456", "123456", User);
         ProjectStatus status = new ProjectStatus("Planned");
 
         // Act
@@ -319,7 +311,7 @@ class ProjectTest {
         newProject.setNumberOfSprints(5);
         newProject.setProjectStatus(status);
         newProject.setSprintDuration(2);
-        newProject.setProductOwner(productOwner);
+
 
         //Assert
         assertEquals("XPTO9", newProject.getProjectName());
@@ -328,7 +320,6 @@ class ProjectTest {
         assertEquals(5, newProject.getNumberOfSprints());
         assertEquals(status, newProject.getProjectStatus());
         assertEquals(2, newProject.getSprintDuration());
-        assertEquals(user2, newProject.getProductOwner());
 
     }
 
