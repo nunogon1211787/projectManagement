@@ -1,22 +1,29 @@
 package switch2021.project.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class CustomerStore {
 
-    private List<Customer> customerList;
+    /**
+     * <p>
+     * Atributes
+     **/
 
+    private List<Customer> customerList;
 
     /**
      * >>>>>CUSTOMER´S METHODS<<<<<
      * <p>
      * Create Customer
      **/
+    public CustomerStore() {
+        this.customerList = new ArrayList<>();
+    }
+
     public Customer createCustomer(String name, String email) {
-
-        return new Customer(name, email);
-
+        return new Customer(name,email);
     }
 
     /**
@@ -31,15 +38,14 @@ public class CustomerStore {
      * Métodos Getter e Setter
      **/
     public List<Customer> getArrayCustomer() {
-        List<Customer> copyCustomer = this.customerList;
 
-        return copyCustomer;
+        return this.customerList;
     }
 
     public Customer getCustomerByName(String name) {
         Customer cust = null;
         for (Customer i : this.customerList)
-            if (Objects.equals(i.getName(), name)) {
+            if (i.getName().equals(name)) {
                 cust = i;
                 break;
             }

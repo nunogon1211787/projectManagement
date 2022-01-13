@@ -6,15 +6,15 @@ public class Customer {
 
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(001);
     /**
-     * Classe de Customer
-     * Atributos da Classe
+     * Customer Class
+     * Class Atributes
      **/
     private int id;
     private String name;
     private String email;
 
     /**
-     * Construtor de  customer (Paulo)
+     * Customer Constructor
      **/
 
     public Customer(String email, String name) {
@@ -48,7 +48,7 @@ public class Customer {
     }
 
 
-    /** Metodos Override  para comparar objectos diferentes **/
+    /** Override Methods **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
