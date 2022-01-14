@@ -1,5 +1,7 @@
 package switch2021.project.model;
 
+import switch2021.project.utils.App;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +37,7 @@ public class Project {
      **/
 
     public Project(String code, String name, String description, Customer customer, Typology typology,
-                   BusinessSector businessSector, LocalDate startDate, int numberOfSprints, double budget) {
+                   BusinessSector businessSector, LocalDate startDate,ProjectStatus status, int numberOfSprints, double budget) {
 
         validateProjectFields(name, description);
 
@@ -45,7 +47,7 @@ public class Project {
 
         this.customer = customer;
         this.typology = typology;
-        this.projectStatus = new Company().getProjectStatusStore().getProjectStatusByDescription("Planned");
+        this.projectStatus = status;
         this.businessSector = businessSector;
 
         this.startDate = startDate;
