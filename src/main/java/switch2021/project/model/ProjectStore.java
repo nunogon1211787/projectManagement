@@ -44,18 +44,13 @@ public class ProjectStore {
         return this.projectList;
     }
 
-    public Project getProject(String code) {
+    public Project getProjectByCode(String code) {
         for (Project proj : projectList) {
             if (proj.getCode().equalsIgnoreCase(code)) {
                 return proj;
             }
         }
         return null;
-    }
-
-    ////Talvez mudar para não buscar por index
-    public Project getProjByIndex(int index) {
-        return projectList.get(index);
     }
 
     public List<Project> getProjectListWithPORight(String email) {
