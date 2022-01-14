@@ -20,7 +20,7 @@ public class SystemUser {
      * Contructor
      **/
     public SystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor) {
-        checkUserNameRules(userName);
+        checkUserNameRules(userName); // o construtor faz validações
         checkEmailRules(email);
         checkFunctionRules(function);
         checkPasswordRules(password);
@@ -120,8 +120,8 @@ public class SystemUser {
         this.photo = photo;
     }
 
-    public void setActivateUser() {
-        this.activateUser = true;
+    public boolean setActivateUser() {
+       return this.activateUser = true;
     }
 
     public void setAssignedProfile(UserProfile assignedProfile) {
