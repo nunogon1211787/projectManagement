@@ -126,4 +126,32 @@ public class SystemUserStoreTest {
 
         assertEquals(2, systemUserStore.getSystemUserList().size());
     }
+
+    @Test
+    public void reachUserbyEmailSuccess () {
+        Company company = new Company();
+        String userName = "anaguedes";
+        String email = "anaguedes@beaver.com";
+        String password = "hello123";
+        String passwordConfirmation = "hello123";
+        String function = "PO";
+        String photo = "photo.png";
+        SystemUser findUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo);
+        company.getSystemUserStore().addSystemUser(findUser);// faltou adicionar à company
+        SystemUser user_verification = company.getSystemUserStore().getUserByEmail("anaguedes@beaver.com"); // email do user que criei
+        assertEquals(user_verification, findUser);
+    }
+
+
+    @Test
+    public void IsYourEmailSuccess() {
+        Company company = new Company();
+        SystemUser systemUser = company.getSystemUserStore().createSystemUser("anaguedes", "anaguedes@beaver.com",
+                "PO", "hello123", "hello123", "photo.png");
+        //Assert
+        assertTrue(systemUser.isYourEmail("anaguedes@beaver.com"));
+
+    }
+
+
 }

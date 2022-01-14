@@ -1,5 +1,7 @@
 package switch2021.project.model;
 
+import switch2021.project.utils.App;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +29,12 @@ public class ProjectStore {
     public Project createProject(String code, String name, String description, Customer customer, Typology typology,
                                  BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
-        return new Project(code, name, description, customer, typology, businessSector,
-                startDate, numberOfSprints, budget);
-    }
+        Company company = App.getInstance().getCompany();
 
+        ProjectStatus status= company.getProjectStatusStore().getProjectStatusByDescription("Planned");
+        return new Project(code, name, description, customer, typology, businessSector,
+                startDate,status, numberOfSprints, budget);
+    }
 
     public void addProject(Project proj) {
         this.projectList.add(proj);

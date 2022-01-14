@@ -6,9 +6,17 @@ import java.util.Objects;
 
 public class UserProfileStore {
 
+    /**
+     * Atributes
+     **/
+
     List<UserProfile> userProfileList;
 
-    public UserProfileStore () {
+    /**
+     * Constructor
+     **/
+
+    public UserProfileStore() {
         userProfileList = new ArrayList<>();
     }
 
@@ -30,13 +38,24 @@ public class UserProfileStore {
      * Add Method
      **/
 
-    public boolean addProfile(UserProfile profile) {
+    public void addUserProfile(UserProfile profile) {
 
         if (!validateProfile(profile)) {
-            return false;
+            throw new IllegalArgumentException("Repeated user profile name inserted.");
         }
         userProfileList.add(profile);
-        return true;
+    }
+
+    /**
+     * save Method
+     **/
+
+    public void saveUserProfile(UserProfile profile) {
+
+        if (!validateProfile(profile)) {
+            throw new IllegalArgumentException("Repeated user profile name inserted.");
+        }
+        userProfileList.add(profile);
     }
 
     /**
@@ -92,26 +111,24 @@ public class UserProfileStore {
      * Validation Method
      **/
 
-    private boolean validateProfile(UserProfile profile) {
-        //Check empty fields on name and type
-        if (profile.getName().trim().isEmpty()) {
-            return false;
-        }
 
-        //Check if the profile type is valid
-        /*if (!profile.getType().equalsIgnoreCase("System Profile") && !profile.getType().equalsIgnoreCase("Special Profile")) {
-            return false;
-        }*/
+    private boolean validateProfile(UserProfile profile) {
+        //Check empty fields on name
+        if (profile.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be blank.");
+        }
 
         //Check if profile already exist
         for (UserProfile up : userProfileList) {
             if (up.equals(profile)) {
-                return false;
+                throw new IllegalArgumentException("Repeated user profile name inserted.");
             }
         }
         return true;
     }
-    public boolean equals(Object obj){
+
+
+    public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!(obj instanceof UserProfileStore)) return false;
         UserProfileStore that = (UserProfileStore) obj;

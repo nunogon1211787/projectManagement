@@ -116,7 +116,21 @@ public class SystemUser {
     }
 
     public void setPhoto(String photo) {
-        this.photo = photo;
+
+        if (!photo.trim().isEmpty()) {
+            this.photo = photo;
+        }
+    }
+
+    public SystemUser setAllData (String userName, String function, String photo, SystemUser user) {
+
+        if (checkAllData(userName, function, photo)) {
+            user.setUserName(userName);
+            user.setFunction(function);
+            user.setPhoto(photo);
+            return user;
+        }
+        return null;
     }
 
     public boolean setActivateUser() {
@@ -158,6 +172,16 @@ public class SystemUser {
             throw new IllegalArgumentException("Password cannot be empty.");
         if ((password.length() < 2))
             throw new IllegalArgumentException("Password must be at least 2 characters");
+    }
+
+    public boolean checkAllData(String userName, String function, String photo) {
+        if (photo.trim().isEmpty())
+            throw new IllegalArgumentException("Photo cannot be empty.");
+        if (function.trim().isEmpty() || function.length() < 2)
+            throw new IllegalArgumentException("Function cannot be empty.");
+        if (userName.trim().isEmpty() || userName.length() < 2)
+        throw new IllegalArgumentException("Username cannot be empty.");
+        return true;
     }
 
     /**

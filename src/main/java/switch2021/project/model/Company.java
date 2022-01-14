@@ -87,26 +87,7 @@ public class Company {
         return this.businessSectorStore;
     }
 
-    /**
-     * Create Method
-     **/
 
-    public UserProfile createProfile(String name) {
-        return new UserProfile(name);
-    }
-
-    /**
-     * Add Method
-     **/
-
-    public boolean addUserProfile(UserProfile profile) {
-
-        if (!validateProfile(profile)) {
-            return false;
-        }
-        userProfileStore.userProfileList.add(profile);
-        return true;
-    }
 
     /**
      * Getter Methods

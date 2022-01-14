@@ -81,4 +81,9 @@ class ProjectCreationTest {
     }
 
     //TODO repetir testes do Project testes, check todos os campos de criação;
+    @Test
+    @DisplayName("Project Creation validation test")
+    public void checkValidation() {
+
+    }
 }
