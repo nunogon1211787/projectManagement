@@ -55,7 +55,6 @@ public class SystemUserStore {
                 break;
             }
         }
-
         return user;
     }
 
