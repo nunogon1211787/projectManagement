@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.utils.App;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,8 +17,8 @@ class ResourceTest {
     @BeforeEach
     public void init() {
         company = App.getInstance().getCompany(); // sempre a mesma instancia
-        userProfile = company.createProfile("Cris");
-        company.getUserProfileStore().addProfile(userProfile);
+        userProfile = company.getUserProfileStore().createProfile("Cris");
+        company.getUserProfileStore().addUserProfile(userProfile);
     }
 
 
