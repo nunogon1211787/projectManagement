@@ -20,7 +20,7 @@ public class EditProjectInfoController {
     }
 
     public Project getProjectRequested(String code){
-        this.project = this.company.getProjectStore().getProject(code);
+        this.project = this.company.getProjectStore().getProjectByCode(code);
         return this.project ;
     }
 

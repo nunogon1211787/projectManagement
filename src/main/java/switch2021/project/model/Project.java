@@ -20,7 +20,7 @@ public class Project {
     private ProductBacklog productBacklog;
     private SystemUser productOwner; // Verificar a necessidade de se manter este atributo
 
-    private BusinessSector businessSector;  // Para já coloquei em tipo Business Sector e não lista. Depois será para mudar.
+    private BusinessSector businessSector;
     private List<Resource> projectTeam;
 
     private LocalDate startDate;
@@ -36,6 +36,8 @@ public class Project {
 
     public Project(String code, String name, String description, Customer customer, Typology typology,
                    BusinessSector businessSector, LocalDate startDate, int numberOfSprints, double budget) {
+
+        validateProjectFields(name, description);
 
         this.code = code;
         this.projectName = name;
@@ -174,6 +176,23 @@ public class Project {
 
     public void setProjectTeam(List<Resource> projectTeam) {
         this.projectTeam = projectTeam;
+    }
+
+
+    /**
+     * Validates Project Creation Fields
+     * Checks if @param projectName and @param description are emptry or have the minimum characters necessary
+     */
+
+    private void validateProjectFields(String projectName, String description) {
+        if (projectName.trim().isEmpty())
+            throw new IllegalArgumentException("Project Name cannot be empty.");
+        if ((projectName.length() < 3))
+            throw new IllegalArgumentException("Project Name must be at least 3 characters");
+        if (description.trim().isEmpty())
+            throw new IllegalArgumentException("Description cannot be empty.");
+        if ((description.length() < 5))
+            throw new IllegalArgumentException("Description must be at least 5 characters");
     }
 
     /**

@@ -17,10 +17,7 @@ public class NonRegisteredUserActivationController {
 
     public boolean activateNonRegisteredUser (String email) {
         this.company.getSystemUserStore().getUserByEmail(email).setActivateUser();
-        // é possivel misturar booleans com não booleans?
         return true;
     }
-
-
 
 }
