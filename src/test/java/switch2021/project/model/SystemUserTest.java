@@ -8,34 +8,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SystemUserTest {
-    /*@Test
-    public void registerSystemUser() {
-        //Input
-        UserProfile pro = new UserProfile("ddd", "pro");
-        SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", "123456", "img_123", pro);
-        ivan.setActivateUser();
-        //Expected
-        UserProfile tes = new UserProfile("ddd", "pro");
-        SystemUser expected = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester","123456" , "123456", "img_123", tes);
-        expected.setActivateUser();
-        //Results
-        assertEquals(ivan, expected);
-    }
-
-    @Test
-    public void registerSystemUserWithPhoto() {
-        //Input
-        UserProfile pro = new UserProfile("ddd", "pro");
-        SystemUser ivan1 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", "123456", "img_123456", pro);
-        ivan1.setActivateUser();
-        //Expected
-        UserProfile tes = new UserProfile("ddd", "pro");
-        SystemUser expected2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", "123456", "img_123456", tes);
-        expected2.setActivateUser();
-        //Result
-        assertEquals(ivan1, expected2);
-    }
-*/
     @Test
     public void verifyEmail() {
 
@@ -201,7 +173,7 @@ class SystemUserTest {
     }
 
     @Test
-    public void createSystemUserWithPhotoSuccess() {
+    public void createSystemUserSuccess() {
         //Arrange
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
@@ -226,7 +198,7 @@ class SystemUserTest {
         String passwordResult = newUser.getPassword();
         String functionResult = newUser.getFunction();
         String photoResult = newUser.getPhoto();
-        boolean activateUserResult = newUser.getUserActivated();
+        boolean activateUserResult = newUser.getActivateUserStatus();
         UserProfile assignedProfileResult = newUser.getAssignedProfile();
         //Assert
         assertEquals(userNameExpected, userNameResult);
@@ -315,7 +287,7 @@ class SystemUserTest {
     }
 
     @Test
-    public void createSystemUserWithPhotoFailUserNameIsEmpty() {
+    public void createSystemUserFailUserNameIsEmpty() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
@@ -332,7 +304,7 @@ class SystemUserTest {
     }
 
     @Test
-    public void createSystemUserWithPhotoFailUserNameIsShort() {
+    public void createSystemUserFailUserNameIsShort() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
@@ -349,7 +321,7 @@ class SystemUserTest {
     }
 
     @Test
-    public void createSystemUserWithPhotoFailEmailIsEmpty() {
+    public void createSystemUserFailEmailIsEmpty() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
@@ -366,7 +338,7 @@ class SystemUserTest {
     }
 
     @Test
-    public void createSystemUserWithPhotoFailEmailIsShort() {
+    public void createSystemUserFailEmailIsShort() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange

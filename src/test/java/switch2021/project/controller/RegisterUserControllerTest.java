@@ -23,7 +23,7 @@ public class RegisterUserControllerTest {
     }*/
 
     @Test
-    void createSystemUserWithPhotoFailUserNameIsEmpty() {
+    void createSystemUserFailUserNameIsEmpty() {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             Company company = new Company();

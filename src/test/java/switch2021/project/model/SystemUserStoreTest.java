@@ -2,11 +2,13 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SystemUserStoreTest {
     @Test
-    public void createSystemUserWithPhotoSuccess() {
+    public void createSystemUserSuccess() {
         //Arrange
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
@@ -23,15 +25,13 @@ public class SystemUserStoreTest {
         String functionExpected = "tester";
         String photoExpected = "photo";
         UserProfile assignedProfileExpected = new UserProfile("Visitor");
-        //List<UserProfile> assignedProfileExpected = new ArrayList<>();
-        //assignedProfileExpected.add(pro);
         //Act
         String userNameResult = newUser.getUserName();
         String emailResult = newUser.getEmail();
         String passwordResult = newUser.getPassword();
         String functionResult = newUser.getFunction();
         String photoResult = newUser.getPhoto();
-        boolean activateUserResult = newUser.getUserActivated();
+        boolean activateUserResult = newUser.getActivateUserStatus();
         UserProfile assignedProfileResult = company.getUserProfileStore().getProfileByName("Visitor");
         //Assert
         assertEquals(userNameExpected, userNameResult);
@@ -44,7 +44,7 @@ public class SystemUserStoreTest {
     }
 
     @Test
-    public void saveSystemUserWithPhotoSuccess() {
+    public void saveSystemUserSuccess() {
         //Arrange
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
@@ -65,7 +65,7 @@ public class SystemUserStoreTest {
     }
 
     @Test
-    public void saveSystemUserWithPhotoFailEmailAlreadyExists() {
+    public void saveSystemUserFailEmailAlreadyExists() {
         //Arrange
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
@@ -97,5 +97,33 @@ public class SystemUserStoreTest {
             Company company = new Company();
             company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo);
         });
+    }
+
+    @Test
+    public void getSystemUserListEncapsulationSuccess() {
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String passwordConfirmation = "ghi";
+        String function = "tester";
+        String photo = "photo";
+        Company company = new Company();
+        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo);
+
+        String userName2 = "manueloliveira";
+        String email2 = "maneloliveira@beaver.com";
+        String password2 = "ghi";
+        String passwordConfirmation2 = "ghi";
+        String function2 = "tester";
+        String photo2 = "photo";
+        SystemUser newUser2 = company.getSystemUserStore().createSystemUser(userName2, email2, function2, password2, passwordConfirmation2, photo2);
+        SystemUserStore systemUserStore = new SystemUserStore();
+
+        systemUserStore.saveSystemUser(newUser);
+        systemUserStore.saveSystemUser(newUser2);
+        List<SystemUser> list = systemUserStore.getSystemUserList();
+        list.remove(0);
+
+        assertEquals(2, systemUserStore.getSystemUserList().size());
     }
 }

@@ -63,10 +63,6 @@ public class SystemUser {
         return this.userName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getEmail() {
         return this.email;
     }
@@ -83,8 +79,8 @@ public class SystemUser {
         return this.password;
     }
 
-    public boolean getUserActivated() {
-        return this.activateUser;
+    public boolean getActivateUserStatus() {
+        return activateUser;
     }
 
     public UserProfile getAssignedProfile() {
@@ -96,22 +92,36 @@ public class SystemUser {
      **/
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        if (!userName.trim().isEmpty() || !(userName.length() < 2)) {
+            this.userName = userName;
+        }
+    }
+
+    public void setEmail(String email) {
+        if (!email.trim().isEmpty() || !(email.length() < 2)) {
+            this.email = email;
+        }
     }
 
     public void setFunction(String function) {
-        this.function = function;
+        if (!function.trim().isEmpty() || !(function.length() < 2)) {
+            this.function = function;
+        }
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        if (!password.trim().isEmpty() || !(password.length() < 2)) {
+            this.password = password;
+        }
     }
 
     public void setPhoto(String photo) {
         this.photo = photo;
     }
 
-    public void setActivateUser() {this.activateUser = true;}
+    public void setActivateUser() {
+        this.activateUser = true;
+    }
 
     public void setAssignedProfile(UserProfile assignedProfile) {
         this.assignedProfile = assignedProfile;
@@ -194,6 +204,7 @@ public class SystemUser {
         return true;
     }
 */
+
     /**
      * Método para validar se o email (ou parte dele) é deste objeto.
      */
