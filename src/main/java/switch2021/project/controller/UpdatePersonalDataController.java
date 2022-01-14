@@ -18,14 +18,10 @@ public class UpdatePersonalDataController {
     }
 
     public SystemUser updateSystemUserData(String username, String function, String photo) {
+        this.user.setAllData("username", "function", "photo", user);
         this.user.setUserName(username);
         this.user.setFunction(function);
         this.user.setPhoto(photo);
         return user;
     }
-
-    public boolean saveSystemUser() {
-        return this.company.getSystemUserStore().saveSystemUser(this.user);
-    }
-
 }

@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ class SystemUserTest {
         assertFalse(joana.isYourEmail(emailCheck));
     }
 
-/*    @Test
+    /*@Test
     public void verifyUpdateProfile(){
         //Arrange
         Company com = new Company();
@@ -170,6 +171,79 @@ class SystemUserTest {
         joana.setPhoto("img_789");
         //Assert
         assertNotEquals(joana.getPhoto(), "img_000");
+    }
+
+    @Test
+    public void setAllDataSucess() {
+
+        //Arrange
+        UserProfile tes = new UserProfile("ddd");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", tes);
+        //Act
+        SystemUser joana2 = joana.setAllData("Joana Silva", "Aluna_100", "img_900", joana);
+        // Act / Assert
+        assertEquals(joana,joana2);
+    }
+
+    @Test
+    public void setAllDataFailUsernameEmpty() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser(" ", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.checkAllData(" ", "Aluna_10", "img_123");
+        });
+    }
+
+    @Test
+    public void setAllDataFailUsernameLowLenght() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("J", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.checkAllData("J", "Aluna_10", "img_123");
+        });
+    }
+
+    @Test
+    public void setAllDataFailFunctionEmpty() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+                    " ", "123", "123", "img_900", tes);
+            newUser.checkAllData("Joana Silva", " ", "img_123");
+        });
+    }
+
+    @Test
+    public void setAllDataFailFunctionLowLenght() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.checkAllData("Joana Silva", "A", "img_123");
+        });
+    }
+
+    @Test
+    public void setAllDataFailPhotoEmpty() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "", tes);
+            newUser.checkAllData("Joana Silva", "Aluna_10", "");
+        });
     }
 
     @Test
@@ -354,21 +428,6 @@ class SystemUserTest {
         });
     }
 
-    /*@Test
-    void hasThisDataTest() {
-        //Input
-        Profile tes = new Profile("ddd", "pro");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO", tes);
-        String name = "";
-        String email = "";
-        String func = "";
-        int isActive = -1;
-        int[] profiles = {};
-        //Result
-        assertTrue(joana.hasThisData(name, email, func, isActive, profiles));
-
-    }
-*/
 //    @Test
 //    void hasThisDataWithAll() {
 //        //Input
