@@ -21,8 +21,8 @@ public class CreateProjectController {
     }
 
     public boolean saveProject(Project project) {
-        int index = company.getProjectStore().getArrayProject().size();
-        return this.company.getProjectStore().saveProject(project, index); // confirmar se funciona, ou seja o set adiciona numa nova posição?
+        int index = company.getProjectStore().getProjectList().size();
+        return this.company.getProjectStore().saveNewProject(project); // confirmar se funciona, ou seja o set adiciona numa nova posição?
     }
 
 }

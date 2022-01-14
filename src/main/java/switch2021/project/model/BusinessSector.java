@@ -2,25 +2,38 @@ package switch2021.project.model;
 
 public class BusinessSector {
 
-
-
     /**
-     * Classe BusinessSector -
-     * Atributos da Classe
+     * Business Sector class
+     * Business Sector atributes are composed of a description of the business sector
      **/
+
     private String description;
 
     /**
-     * Constutor da Classe BusinessSector (Paulo - US005)
+     * Business Sector Constructor
+     * Creates a new Business Sector instance.
      **/
 
     public BusinessSector(String description) {
         this.description = description;
     }
 
+    /**
+     * Getter and Setter
+     **/
 
+    public String getDescription() {
+        return description;
+    }
 
-    /** Metodos Override  para comparar objectos diferentes **/
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Override Methods
+     **/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

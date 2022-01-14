@@ -16,13 +16,15 @@ public class Resource {
     private double costPerHour;
     private double percentageOfAllocation;
 
-    private UserProfile profile;
+    private ProjectRolesStore role;
 
     /**
      * Construtor de Resource (Carolina US007)
      **/
 
     public Resource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
+        checkStartDateEndDate(startDate, endDate);
+        checkCostPerHour(costPerHour);
 
         this.user = user;
         //this.project = project;
@@ -65,8 +67,8 @@ public class Resource {
         return costPerHour;
     }
 
-    public UserProfile getProfile() {
-        return profile;
+    public ProjectRolesStore getProjectRoles() {
+        return role;
     }
 
     public double getPercentageOfAllocation() {
@@ -83,6 +85,7 @@ public class Resource {
     public boolean checkAllocationPeriod(LocalDate startDate, LocalDate endDate){
         boolean msg = false;
         if(startDate.isAfter(this.endDate) || endDate.isBefore(this.startDate)){
+
             msg = false;
         } else if (startDate.isEqual(this.startDate) || startDate.isEqual(this.endDate) || endDate.isEqual(this.endDate) || endDate.isEqual(this.startDate) ){
             msg = true;
@@ -94,5 +97,16 @@ public class Resource {
             msg = true;
         }
         return msg;
+    }
+
+    private void checkStartDateEndDate(LocalDate startDate, LocalDate endDate){
+        if(endDate.isBefore(startDate)){
+            throw new IllegalArgumentException("End Date must be after Start Date");
+        }
+    }
+    private void checkCostPerHour(double costPerHour){
+        if(costPerHour < 0){
+            throw new IllegalArgumentException("Cost Per Hour must be valid.");
+        }
     }
 }

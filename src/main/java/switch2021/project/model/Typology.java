@@ -4,29 +4,30 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Typology {
 
+    /**
+     * Typology class
+     * Typology atributes are composed of a description of the Typology.
+     **/
 
-
-    /** Typology attributes **/
-
-    private final int id_Typology;
     private String description;
 
-    // Constructor with parameters
+    /**
+     * Constructors of typology´s class
+     * Creates a new typology instance.
+     **/
+
     public Typology(String description) {
-        this.id_Typology = ID_TYPOLOGY_GENERATOR.getAndIncrement();
-        this.description = description;
+
+        if (!description.equals("")) {
+            this.description = description;
+        } else {
+            throw new IllegalArgumentException("Description is empty");
+        }
     }
 
-    /** Constructors of typology´s class **/
-
-    //Create ID automatically
-    private static final AtomicInteger ID_TYPOLOGY_GENERATOR = new AtomicInteger();
-
-    /** Getters and Setters **/
-
-    public int getId_Typology() {
-        return id_Typology;
-    }
+    /**
+     * Getters and Setters
+     **/
 
     public String getDescription() {
         return this.description;
@@ -36,13 +37,16 @@ public class Typology {
         this.description = description;
     }
 
-    /** Metodos Override  para comparar Typologys diferentes **/
+    /**
+     * Override Methods
+     **/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Typology that = (Typology) o;
-        return (this.description.equals(that.description));
+        return ((this.description.equals(that.description)));
     }
     //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
     // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...

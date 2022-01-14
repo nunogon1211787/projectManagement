@@ -7,53 +7,92 @@ import java.util.Objects;
 public class Company {
 
     /**
-     * Atributos da Classe
+     * Company Atributes
+     * The company atributes are composed by all the store lists of a given project
      **/
-    private TypologyStore typologyStore = new TypologyStore();
-    SystemUserStore systemUserStore;
-    UserProfileStore userProfileStore;
-    ProjectStore projectStore;
-    // falta colocar a chamada para o request quando se criar a página;
-    List<Request> arrayRequest;
 
-    public  Company(){
+    private SystemUserStore systemUserStore;
+    private ProjectStore projectStore;
+
+    private UserProfileStore userProfileStore;
+
+    private ProjectStatusStore projectStatusStore;
+    private CustomerStore customerStore;
+    private BusinessSectorStore businessSectorStore;
+    private TypologyStore typologyStore;
+
+    // falta colocar a chamada para o request quando se criar a página;
+    List<Request> requestList;
+
+    /**
+     * Company Constructor
+     * The company constructor initializes and populates all the store lists.
+     **/
+
+    public Company() {
         this.systemUserStore = new SystemUserStore();
-        this.userProfileStore = new UserProfileStore();
         this.projectStore = new ProjectStore();
+
+        this.userProfileStore = new UserProfileStore();
+
         this.typologyStore = new TypologyStore();
+        this.customerStore = new CustomerStore();
+        this.businessSectorStore = new BusinessSectorStore();
+        this.projectStatusStore = new ProjectStatusStore();
 
         this.userProfileStore.populateDefault();
+        this.typologyStore.populateTypologyList();
+        this.projectStatusStore.populateProjectStatusList();
     }
 
+    /**
+     * Company getter's
+     * Getting Methods that return all the stores to other classes
+     */
 
     //Project
     public ProjectStore getProjectStore() {
         return this.projectStore;
     }
 
+    //SystemUser
     public SystemUserStore getSystemUserStore() {
         return this.systemUserStore;
     }
 
     //Profile
     public UserProfileStore getUserProfileStore() {
-            return this.userProfileStore;
+        return this.userProfileStore;
     }
+
+    // SpecialProfile or ProjectRole
 
     //Typology
     public TypologyStore getTypologyStore() {
         return this.typologyStore;
     }
 
+    //ProjectStatus
+    public ProjectStatusStore getProjectStatusStore() {
+        return this.projectStatusStore;
+    }
 
-    // Profile
+    //Customer
+    public CustomerStore getCustomerStore() {
+        return this.customerStore;
+    }
+
+    //BusinessSector
+    public BusinessSectorStore getBusinessSectorStore() {
+        return this.businessSectorStore;
+    }
 
     /**
      * Create Method
      **/
 
-    public UserProfile createProfile(String name, String type) {
-        return new UserProfile(name, type);
+    public UserProfile createProfile(String name) {
+        return new UserProfile(name);
     }
 
     /**
@@ -73,11 +112,11 @@ public class Company {
      * Getter Methods
      **/
 
-    public List<UserProfile> getUserProfileList() {
+    /*public List<UserProfile> getUserProfileList() {
         return this.getUserProfileList();
-    }
+    }*/
 
-    public List<UserProfile> getUserProfileListWithType(String type) {
+    /*public List<UserProfile> getUserProfileListWithType(String type) {
 
         List<UserProfile> foundList = new ArrayList<>();
 
@@ -90,7 +129,7 @@ public class Company {
         }
 
         return foundList;
-    }
+    }*/
 
     ////Talvez mudar para não buscar por index
     public UserProfile getUserProfile(int index) {
@@ -111,18 +150,19 @@ public class Company {
     /**
      * Validation Method
      *
-     * @param profile*/
+     * @param profile
+     */
 
     private boolean validateProfile(UserProfile profile) {
         //Check empty fields on name and type
-        if (profile.getName().trim().isEmpty() || profile.getType().trim().isEmpty()) {
+        if (profile.getName().trim().isEmpty()) {
             return false;
         }
 
-        //Check if the profile type is valid
-        if (!profile.getType().equalsIgnoreCase("System Profile") && !profile.getType().equalsIgnoreCase("Special Profile")) {
+       /* //Check if the profile type is valid
+        if (!profile.getType().equalsIgnoreCase("System Profile")) {
             return false;
-        }
+        }*/
 
         //Check if profile already exist
         for (UserProfile up : userProfileStore.userProfileList) {
@@ -140,7 +180,7 @@ public class Company {
      */
 
     public boolean addRequest(Request request) {
-        this.arrayRequest.add(request);
+        this.requestList.add(request);
         return true;
 
     }
@@ -152,7 +192,7 @@ public class Company {
     private boolean validateRequest(Request newRequest) {
 
         //Check if request already exist
-        for (Request up : arrayRequest) {
+        for (Request up : requestList) {
             if (up.equals(newRequest)) {
                 return false;
             }

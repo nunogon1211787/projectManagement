@@ -1,6 +1,8 @@
 package switch2021.project.model;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +12,9 @@ public class TypologyTest {
     private Company company;
     private TypologyStore typologyStore;
 
-
+    /**
+     * REFAZER TESTES
+     **/
 
     @BeforeEach
     public void initialize() {
@@ -19,36 +23,27 @@ public class TypologyTest {
         typologyStore = company.getTypologyStore();
     }
 
-
     /**
      * Constructor´s Tests
      */
 
     @Test
-    public void constructorTypologyTestNull() {
-        //Arrange
-        Typology typo = new Typology("");
-        //Act
-        int id = typo.getId_Typology();
-        int value_id = 0;
-        String description = typo.getDescription();
-        String value_description = "";
-        //Assert
-        assertEquals(id, value_id);
-        assertEquals(description, value_description);
-    }
+    public void constructorTypologyTestNull()  throws IllegalArgumentException {
+            Throwable exception = assertThrows(IllegalArgumentException.class,
+                    () -> { new Typology(""); });
+            Assertions.assertEquals("Description is empty", exception.getMessage());
+        }
 
     @Test
-    public void constructorTypologyTestNotNull() {
+    public void constructorTypologyTestNotNull() { //REFAZER TESTE E MÉTODO VALIDATE
         //Arrange
-        Typology typo2 = new Typology("TestTypology");
+        Typology typo2 = new Typology( "Fixed Cost");
         //Act
         typologyStore.add(typo2);
-        int value_id = 2;
+
         String description = typo2.getDescription();
-        String value_description = "TestTypology";
+        String value_description = "Fixed Cost";
         //Assert
-        assertEquals(typo2.getId_Typology(), value_id);
         assertEquals(description, value_description);
     }
 
@@ -66,27 +61,14 @@ public class TypologyTest {
         typologyStore.add(typo4);
         typologyStore.add(typo5);
         typologyStore.add(typo6);
-        int id = typo5.getId_Typology();
-        int value_id = 5;
+
         String description = typo3.getDescription();
         String value_description = "TestTypology3";
+
         //Assert
-        assertEquals(id, value_id);
         assertEquals(description, value_description);
         assertEquals(7,typologyStore.getTypologyList().size());
 
-    }
-
-    @Test
-    public void getId_Typology(){
-
-        //Arrange
-        Typology typo8 = new Typology("TestTypology8");
-        //Act
-        typologyStore.saveTypology(typo8);
-        int id = typo8.getId_Typology();
-        //Assert
-        assertEquals(2, id);
     }
 
     @Test
@@ -96,7 +78,6 @@ public class TypologyTest {
         String descriptionTest = typologyStore.getTypologyList().get(1).getDescription();
         //Assert
         assertEquals(descriptionTest, "Time and Materials");
-
     }
 
     //Teste para mudar a descrição da Typology.
@@ -104,16 +85,14 @@ public class TypologyTest {
     public void updateDescriptionTest() {
         //Arrange
         Typology typo8 = new Typology("TestTypology8");
-        ArrayList<Typology> testList = new ArrayList<>();
-        testList.add(typo8);
+        company.getTypologyStore().getTypologyList().add(typo8);
         typo8.updateDescription("Update Description Test");
         //Act
-        int size = testList.size();
+        int size = company.getTypologyStore().getTypologyList().size();
         Typology expected = new Typology("Update Description Test");
         //Assert
-        assertEquals(size, 1);
+        assertEquals(size, 3);
         assertEquals(typo8.getDescription(),expected.getDescription());
-        assertNotEquals(typo8.getId_Typology(),expected.getId_Typology());
     }
 
     @Test
@@ -130,20 +109,19 @@ public class TypologyTest {
     @Test
     public void setDescriptionTestDescriptionEmpty2() {
         //Arrange
-        Typology typo8 = new Typology("");
+        Typology typo8 = new Typology("Test");
         //Act
         typologyStore.saveTypology(typo8);
-        int id = typo8.getId_Typology();
+
         //Assert
-        assertEquals(2, id);
-        assertFalse(typologyStore.saveTypology(typo8));
+        assertTrue(typologyStore.saveTypology(typo8));
     }
 
     @Test
     public void equalsTest() {
         //Arrange
         Typology typo = new Typology("Fixed Cost");
-        boolean equals = typo.equals(typologyStore.getTypologyById(0));
+        boolean equals = typo.equals(typologyStore.getTypologyByDescription("Fixed Cost"));
         //Assert
         assertTrue(equals);
     }

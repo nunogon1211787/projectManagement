@@ -2,7 +2,7 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.ProjectSettings;
+import switch2021.project.model.Company;
 import switch2021.project.model.Typology;
 import switch2021.project.model.TypologyStore;
 import switch2021.project.utils.App;
@@ -13,16 +13,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CreateNewTypologyControllerTest {
 
-    private ProjectSettings projectSettings;
+    private  Company company;
     private TypologyStore typologyStore;
-    private Typology typology;
 
-    /*@BeforeEach
+    @BeforeEach
     public void init(){
-        projectSettings = App.getInstance().getProjectSettings(); // sempre a mesma instancia
-        typology = typologyStore.createTypology("TypoTest");
-        typologyStore.getTypologyList().add(typology);
-    }*/
+
+        company = App.getInstance().getCompany(); // sempre a mesma instancia
+        typologyStore = company.getTypologyStore();
+    }
 
     @Test
     public void createNewTypologyControllerTest() {
@@ -30,7 +29,7 @@ public class CreateNewTypologyControllerTest {
         CreateNewTypologyController controller = new CreateNewTypologyController
                 (typologyStore);
         //Act and Assert
-        assertTrue(controller.createTypology("TypoTest"));
+        assertTrue(controller.createTypology(0,"TypoTest"));
     }
 
     @Test
@@ -38,6 +37,6 @@ public class CreateNewTypologyControllerTest {
         //Arrange
         CreateNewTypologyController cont = new CreateNewTypologyController(typologyStore);
         //Act and Assert
-        assertFalse(cont.createTypology(""));
+        assertFalse(cont.createTypology(0, ""));
     }
 }

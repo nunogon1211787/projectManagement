@@ -17,14 +17,14 @@ public class CreateProfileControllerTest {
     @BeforeEach
     public void init() {
         company = App.getInstance().getCompany(); // sempre a mesma instancia
-        profile = company.createProfile("Cris", "System Profile");
+        profile = company.createProfile("Cris");
         company.getUserProfileStore().addProfile(profile);
     }
 
     @Test
     public void createProfileAlreadyExist() {
         CreateProfileController createProfileController = new CreateProfileController();
-        boolean ProfileCreated = createProfileController.createProfile(profile.getName(), profile.getType());
+        boolean ProfileCreated = createProfileController.createProfile(profile.getName());
         assertFalse(ProfileCreated);
     }
 
@@ -34,7 +34,7 @@ public class CreateProfileControllerTest {
         CreateProfileController createProfileController = new CreateProfileController();
         String name = "Cris_Dani";
         String type = "System Profile";
-        boolean profileCreated = createProfileController.createProfile(name, type);
+        boolean profileCreated = createProfileController.createProfile(name);
         assertTrue(profileCreated);
     }
 
@@ -43,7 +43,7 @@ public class CreateProfileControllerTest {
         CreateProfileController createProfileController = new CreateProfileController();
         String name = "";
         String type = "System Profile";
-        boolean profileCreated = createProfileController.createProfile(name, type);
+        boolean profileCreated = createProfileController.createProfile(name);
         assertFalse(profileCreated);
     }
 
@@ -52,7 +52,7 @@ public class CreateProfileControllerTest {
         CreateProfileController createProfileController = new CreateProfileController();
         String name = "Cris_Dani";
         String type = "";
-        boolean profileCreated = createProfileController.createProfile(name, type);
+        boolean profileCreated = createProfileController.createProfile(name);
         assertFalse(profileCreated);
     }
 
@@ -61,7 +61,7 @@ public class CreateProfileControllerTest {
         CreateProfileController createProfileController = new CreateProfileController();
         String name = "Cris_Dani";
         String type = "teste";
-        boolean profileCreated = createProfileController.createProfile(name, type);
+        boolean profileCreated = createProfileController.createProfile(name);
         assertFalse(profileCreated);
     }
 }

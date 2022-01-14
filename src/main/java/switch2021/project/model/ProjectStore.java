@@ -6,17 +6,24 @@ import java.util.List;
 
 public class ProjectStore {
 
-
-
     /**
      * Atributos da Classe
      **/
 
-    List<Project> arrayProject;
+    private List<Project> projectList;
 
     /**
      * Constructors with data
      **/
+
+    public ProjectStore() {
+        this.projectList = new ArrayList<>();
+    }
+
+    /**
+     * Project creator
+     **/
+
     public Project createProject(String code, String name, String description, Customer customer, Typology typology,
                                  BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
@@ -24,29 +31,21 @@ public class ProjectStore {
                 startDate, numberOfSprints, budget);
     }
 
-    /**
-     * Add Method
-     **/
 
-    public boolean addProject(Project proj) {
-        this.arrayProject.add(proj);
-        UserProfile test = new UserProfileStore().getProfile(0);
-
-        return true;
-
+    public void addProject(Project proj) {
+        this.projectList.add(proj);
     }
 
     /**
      * Getters Methods
      **/
 
-    public List<Project> getArrayProject() {
-        return this.arrayProject;
+    public List<Project> getProjectList() {
+        return this.projectList;
     }
 
     public Project getProject(String code) {
-
-        for (Project proj : arrayProject) {
+        for (Project proj : projectList) {
             if (proj.getCode().equalsIgnoreCase(code)) {
                 return proj;
             }
@@ -56,7 +55,7 @@ public class ProjectStore {
 
     ////Talvez mudar para não buscar por index
     public Project getProjByIndex(int index) {
-        return arrayProject.get(index);
+        return projectList.get(index);
     }
 
     public List<Project> getProjectListWithPORight(String email) {
@@ -64,7 +63,7 @@ public class ProjectStore {
         if (email == null || email.trim().isEmpty()) {
             return projectList;
         }
-        for (Project project : arrayProject) {
+        for (Project project : this.projectList) {
             if (project.getProductOwner() != null && email.equals(project.getProductOwner().getEmail())) {
                 projectList.add(project);
             }
@@ -78,7 +77,7 @@ public class ProjectStore {
 
     public boolean checkProjectExists(String code) {
 
-        for (Project proj : arrayProject) {
+        for (Project proj : projectList) {
             if (proj.getCode().equalsIgnoreCase(code)) {
                 return true;
             }
@@ -108,11 +107,11 @@ public class ProjectStore {
         double sum = 0;
         boolean msg = false;
 
-        for (int i = 0; i < arrayProject.size(); i++) {
-            for (int j = 0; j < arrayProject.get(i).getProjectTeam().size(); j++) {
-                if (arrayProject.get(i).getTeamMemberByIndex(j).getUser().equals(user) &&
-                        arrayProject.get(i).getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
-                    sum = sum + arrayProject.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();
+        for (int i = 0; i < projectList.size(); i++) {
+            for (int j = 0; j < projectList.get(i).getProjectTeam().size(); j++) {
+                if (projectList.get(i).getTeamMemberByIndex(j).getUser().equals(user) &&
+                        projectList.get(i).getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
+                    sum = sum + projectList.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();
                 }
             }
         }
@@ -126,13 +125,28 @@ public class ProjectStore {
      * Save Methods
      */
 
-    public boolean saveProject(Project proj, int index) {
+    public boolean saveProject(Project proj, String code) {
         validateProject(proj);
-        overwriteProject(proj, index);
+        overwriteProject(proj, code);
         return true;
     }
 
-    public void overwriteProject(Project proj, int index) {
-        this.arrayProject.set(index, proj);
+    //NAO FUNCIONA
+
+    public void overwriteProject(Project proj, String code) {
+        int x = 0;
+        for (int i = 0; i < this.projectList.size(); i++) {
+                if (proj.getCode().equalsIgnoreCase(code)) {
+                    x = i;
+                }
+        }
+        this.projectList.set(x, proj);
     }
+
+    public boolean saveNewProject(Project proj) {
+        validateProject(proj);
+        addProject(proj);
+        return true;
+    }
+
 }

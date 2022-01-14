@@ -5,34 +5,33 @@ import java.util.List;
 
 public class SystemUserStore {
 
-    /**
-     * Atributos
-     */
+    //Atributes
+    private List<SystemUser> systemUserList;
 
-    List<SystemUser> SystemUserList;
-
-
-    // System user
-
-    /**
-     * Create Methods
-     **/
-
-    public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor ) {
-
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);
-
-        return newUser;
-
+    //Constructor
+    public SystemUserStore() {
+        this.systemUserList = new ArrayList<>();
     }
-    ///// Apenas manter um construtor !!!
+
+    public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo) {
+        Company company = new Company();
+        UserProfile visitor = company.getUserProfileStore().getProfileByName("Visitor");
+        SystemUser user;
+        //try {
+        user = new SystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);
+        // } catch (IllegalArgumentException e) {
+        //e.getMessage();
+        // user = null;
+        // }
+        return user;
+    }
 
     /**
      * Add Method
      **/
 
     public boolean addSystemUser(SystemUser syUser) {
-        this.SystemUserList.add(syUser);
+        this.systemUserList.add(syUser);
         return true;
     }
 
@@ -40,16 +39,19 @@ public class SystemUserStore {
      * Getter Methods
      */
     public List<SystemUser> getSystemUserList() {
-        return this.SystemUserList;
+        List<SystemUser> copyList = new ArrayList<>();
+        copyList.addAll(systemUserList);
+
+        return copyList;
     }
 
     public SystemUser getUserByEmail(String email) {
 
         SystemUser user = null;
 
-        for (int i = 0; i < this.SystemUserList.size(); i++) {
-            if (this.SystemUserList.get(i).isYourEmail(email)) {
-                user = this.SystemUserList.get(i);
+        for (int i = 0; i < this.systemUserList.size(); i++) {
+            if (this.systemUserList.get(i).isYourEmail(email)) {
+                user = this.systemUserList.get(i);
                 break;
             }
         }
@@ -86,31 +88,17 @@ public class SystemUserStore {
         if (hasEmail(user.getEmail())) {
             return false;
         }
-        if (hasUserName(user.getUserName())) {
-            return false;
-        }
-        return !this.SystemUserList.contains(user);
+        return !this.systemUserList.contains(user);
     }
 
     boolean hasEmail(String newUserEmail) {
-        for (SystemUser newUser : SystemUserList) {
+        for (SystemUser newUser : systemUserList) {
             if (newUser.getEmail().trim().equalsIgnoreCase(newUserEmail.trim())) {
                 return true;
             }
         }
         return false;
     }
-
-    //// Dois utilizadores podem existir com o mesmo nome, podem existir dois Nunos!!
-    boolean hasUserName(String newUserName) {
-        for (SystemUser newUser : SystemUserList) {
-            if (newUser.getUserName().trim().equalsIgnoreCase(newUserName.trim())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     /**
      * Save Method
@@ -122,12 +110,10 @@ public class SystemUserStore {
         if (!validateSystemUser(user)) {
             result = false;
         } else {
-            this.SystemUserList.add(user);
+            this.systemUserList.add(user);
         }
         return result;
     }
-
-
 
 
 }

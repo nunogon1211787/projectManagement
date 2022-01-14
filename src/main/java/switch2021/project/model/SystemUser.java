@@ -11,10 +11,10 @@ public class SystemUser {
     private String userName;
     private String email;
     private String photo;
-    private String password;  // Implementar password confirmation ***
+    private String password;
     private String function;
     private boolean activateUser;
-    private UserProfileStore assignedProfileList;
+    private UserProfile assignedProfile;
 
     /**
      * Contructor
@@ -28,17 +28,19 @@ public class SystemUser {
         this.email = email;
         this.photo = photo;
         this.function = function;
-        this.password = encryptPassword(password);
+        if (password.equals(passwordConfirmation)) {
+            this.password = encryptPassword(password);
+        } else {
+            throw new IllegalArgumentException("passwords not match");
+        }
         this.activateUser = false;
-        this.assignedProfileList = new UserProfileStore();
-
-        assignedProfileList.populateSystemUser(visitor);
+        this.assignedProfile = visitor;
     }
-
+//ver este método (13/01/2022):
     /**
      * Copy Constructor. Para criar um novo objeto, igual ao parâmetro, mas sem levar adiante as referências do objeto original.
      */
-    public SystemUser(SystemUser originalUser) {
+    /*public SystemUser(SystemUser originalUser) {
         this.userName = originalUser.userName;
         this.email = originalUser.email;
         this.photo = originalUser.photo;
@@ -52,7 +54,7 @@ public class SystemUser {
     private UserProfileStore deepCopyListProfile(UserProfileStore originalList) {
         UserProfileStore deepCopyList = this.assignedProfileList;
         return deepCopyList;
-    }
+    }*/
 
     /**
      * Getting Methods
@@ -60,10 +62,6 @@ public class SystemUser {
 
     public String getUserName() {
         return this.userName;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getEmail() {
@@ -82,12 +80,12 @@ public class SystemUser {
         return this.password;
     }
 
-    public boolean getUserActivated() {
-        return this.activateUser;
+    public boolean getActivateUserStatus() {
+        return activateUser;
     }
 
-    public UserProfileStore getAssignedProfileList() {
-        return this.assignedProfileList;
+    public UserProfile getAssignedProfile() {
+        return assignedProfile;
     }
 
     /**
@@ -95,22 +93,40 @@ public class SystemUser {
      **/
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        if (!userName.trim().isEmpty() || !(userName.length() < 2)) {
+            this.userName = userName;
+        }
+    }
+
+    public void setEmail(String email) {
+        if (!email.trim().isEmpty() || !(email.length() < 2)) {
+            this.email = email;
+        }
     }
 
     public void setFunction(String function) {
-        this.function = function;
+        if (!function.trim().isEmpty() || !(function.length() < 2)) {
+            this.function = function;
+        }
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        if (!password.trim().isEmpty() || !(password.length() < 2)) {
+            this.password = password;
+        }
     }
 
     public void setPhoto(String photo) {
         this.photo = photo;
     }
 
-    public void setActivateUser() {this.activateUser = true;}
+    public void setActivateUser() {
+        this.activateUser = true;
+    }
+
+    public void setAssignedProfile(UserProfile assignedProfile) {
+        this.assignedProfile = assignedProfile;
+    }
 
     /**
      * Validation Methods
@@ -174,12 +190,21 @@ public class SystemUser {
     }
 
     /**
-     * Método para adicionar um profile a lista de profiles do User.
+     * AssignProfileList´s methods
      */
-
+/*
     public void assignProfileToUser(UserProfile p) {
         this.assignedProfileList.addProfile(p);
     }
+
+
+    public boolean updateProfile(UserProfile oldProfile, UserProfile newProfile) {
+
+       // this.assignedProfileList.remove(oldProfile);
+       // this.assignedProfileList.add(newProfile);
+        return true;
+    }
+*/
 
     /**
      * Método para validar se o email (ou parte dele) é deste objeto.
@@ -317,25 +342,6 @@ public class SystemUser {
         return false;
     }
 
-    /**
-     * Update profile Method
-     */
-
-    ///////
-    /// Rever Este Método **************************************************
-
-    ///////
-    /*public boolean updateProfile(UserProfile oldProfile, UserProfile newProfile) {
-        this.assignedProfileList.remove(oldProfile);
-        if (newProfile.isValidName(newProfile.getName())) {  ///// Faz sentido ter esta validação de Profile?? Os profiles
-            this.assignedProfileList.add(newProfile);          /// já vão ser selecionados de uma lista válida!
-        } else {
-            return false;
-        }
-        return true;
-    }*/
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -344,7 +350,7 @@ public class SystemUser {
         return (this.userName.equals(that.userName)) && (this.email.equals(that.email)) &&
                 (this.photo.equals(that.photo)) && (this.password.equals(that.password)) &&
                 (this.function.equals(that.function)) && (this.activateUser == that.activateUser)
-                && (this.assignedProfileList.equals(that.assignedProfileList));
+                && (this.assignedProfile.equals(that.assignedProfile));
     }
     //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
     // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...teste
