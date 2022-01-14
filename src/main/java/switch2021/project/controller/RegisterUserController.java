@@ -16,8 +16,8 @@ public class RegisterUserController {
         this.user = null;
     }
 
-        public boolean createSystemUser(String userName, String email, String function, String photo, String password, String passwordConfirmation) {
-            this.user = this.company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo);
-            return this.company.getSystemUserStore().validateSystemUser(user);
-        }
+    public boolean createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo) {
+        this.user = this.company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo);
+        return this.company.getSystemUserStore().validateSystemUser(user);
     }
+}
