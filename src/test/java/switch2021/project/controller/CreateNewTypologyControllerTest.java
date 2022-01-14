@@ -3,12 +3,10 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
-import switch2021.project.model.Typology;
 import switch2021.project.model.TypologyStore;
 import switch2021.project.utils.App;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CreateNewTypologyControllerTest {
@@ -29,14 +27,17 @@ public class CreateNewTypologyControllerTest {
         CreateNewTypologyController controller = new CreateNewTypologyController
                 (typologyStore);
         //Act and Assert
-        assertTrue(controller.createTypology(0,"TypoTest"));
+        assertTrue(controller.createTypology("TypoTest"));
     }
 
     @Test
     public void createTypologyTest(){
-        //Arrange
-        CreateNewTypologyController cont = new CreateNewTypologyController(typologyStore);
-        //Act and Assert
-        assertFalse(cont.createTypology(0, ""));
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            CreateNewTypologyController cont = new CreateNewTypologyController(typologyStore);
+            //Act
+            cont.createTypology("");
+        });
     }
 }

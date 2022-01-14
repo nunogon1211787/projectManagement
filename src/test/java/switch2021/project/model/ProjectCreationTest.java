@@ -24,7 +24,7 @@ class ProjectCreationTest {
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
         company.getCustomerStore().add(company.getCustomerStore().createCustomer("Teste","Teste"));
 
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
@@ -50,7 +50,7 @@ class ProjectCreationTest {
         Customer valueCustomer = company.getCustomerStore().getCustomerByName("Teste");
 
         Typology typology = company.getProjectStore().getProjectByCode("123testcode").getTypology();
-        Typology valuetypology = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology valuetypology = company.getTypologyStore().getTypology("Fixed Cost");
 
         BusinessSector sector = company.getProjectStore().getProjectByCode("123testcode").getBusinessSector();
         BusinessSector valueSector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");

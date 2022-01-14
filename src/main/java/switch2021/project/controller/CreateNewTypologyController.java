@@ -17,7 +17,7 @@ public class CreateNewTypologyController {
         this.typology = null;
     }
 
-    public boolean createTypology(int id, String description) {
+    public boolean createTypology(String description) {
         this.typology = this.typologyStore.createTypology(description);
         return this.typologyStore.saveTypology(typology);
     }

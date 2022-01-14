@@ -11,39 +11,40 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UpdateUserProfileControllerTest {
-
+/*
     private Company company;
+    private SystemUserStore systemUserStore;
     private SystemUser user;
 
 
         //REVER        ***************************
 
 
-//    @BeforeEach
-//    public void init() {
-//        company = App.getInstance().getCompany(); // sempre a mesma instancia
-//        user = new SystemUser(new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
-//                "tester", "123456","" new UserProfile("sss", "sss")));
-//                user.updateProfile(company.getUserProfile(0), company.getUserProfile(1));
-//        company.getSystemUserStore().getSystemUserList().add(user);
-//    }
-//                   REVER METODO ***************
-//    @Test
-//    public void constructorUpdateUserProfileTest() {
-//        //Arrange
-//        Company company = new Company();
-//        UpdateUserProfileController controllerTest = new UpdateUserProfileController(company);
-//        SystemUser user = controllerTest.getUser("xxxx@isep.ipp.pt");
-//        //Act
-//        Company company2 = new Company();
-//        UpdateUserProfileController controllerTest2 = new UpdateUserProfileController(company2);
-//        SystemUser expected = controllerTest2.getUser("xxxx@isep.ipp.pt");
-//        //Assert
-//        assertEquals(user, expected);
-//    }
+    @BeforeEach
+    public void init() {
+        company = App.getInstance().getCompany(); // sempre a mesma instancia
+        user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
+                "tester", "123456", "123456","IMG_123", company.getUserProfile(0));
+                user.updateProfile(company.getUserProfile(0), company.getUserProfile(1));
+        company.getSystemUserStore().getSystemUserList().add(user);
+    }
+                  // REVER METODO ***************
+    @Test
+    public void constructorUpdateUserProfileTest() {
+        //Arrange
+        Company company = new Company();
+        UpdateUserProfileController controllerTest = new UpdateUserProfileController(company);
+        SystemUser user = controllerTest.getUser("xxxx@isep.ipp.pt");
+        //Act
+        Company company2 = new Company();
+        UpdateUserProfileController controllerTest2 = new UpdateUserProfileController(company2);
+        SystemUser expected = controllerTest2.getUser("xxxx@isep.ipp.pt");
+        //Assert
+        assertEquals(user, expected);
+    }
 
     /////    REVER METODO ****************************
-    /*@Test
+    @Test
     public void updateProfileTest() {
         //Arrange
         SystemUser user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",

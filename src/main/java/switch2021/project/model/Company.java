@@ -212,10 +212,6 @@ public class Company {
             addRequest(newRequest);
             result = true;
         }
-
         return result;
-
     }
-
-
 }

@@ -9,7 +9,8 @@ public class Typology {
      * Typology atributes are composed of a description of the Typology.
      **/
 
-    private String description;
+    private int id_Typology;
+    private final String description;
 
     /**
      * Constructors of typology´s class
@@ -29,12 +30,14 @@ public class Typology {
      * Getters and Setters
      **/
 
+    public int getId_Typology() { return this.id_Typology;}
+
     public String getDescription() {
         return this.description;
     }
 
-    public void updateDescription(String description) {
-        this.description = description;
+    public void setId_Typology(int id_Typology) {
+        this.id_Typology = id_Typology;
     }
 
     /**
