@@ -13,12 +13,12 @@ public class SystemUser {
     private String password;
     private String function;
     private boolean activateUser;
-    private UserProfile assignedProfile;
+    private List<UserProfile> assignedProfileList;
 
     /**
      * Contructor
      **/
-    public SystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor) {
+    public SystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile profile) {
         checkUserNameRules(userName); // o construtor faz validações
         checkEmailRules(email);
         checkFunctionRules(function);
@@ -33,7 +33,8 @@ public class SystemUser {
             throw new IllegalArgumentException("passwords not match");
         }
         this.activateUser = false;
-        this.assignedProfile = visitor;
+        this.assignedProfileList = new ArrayList<>();
+        this.assignedProfileList.add(profile);
     }
 //ver este método (13/01/2022):
     /**
@@ -83,8 +84,8 @@ public class SystemUser {
         return activateUser;
     }
 
-    public UserProfile getAssignedProfile() {
-        return assignedProfile;
+    public List<UserProfile> getAssignedProfileList() {
+        return assignedProfileList;
     }
 
     /**
@@ -137,8 +138,8 @@ public class SystemUser {
        return this.activateUser = true;
     }
 
-    public void setAssignedProfile(UserProfile assignedProfile) {
-        this.assignedProfile = assignedProfile;
+    public void setAssignedProfileList(List<UserProfile> assignedProfileList) {
+        this.assignedProfileList = assignedProfileList;
     }
 
     /**
@@ -215,9 +216,9 @@ public class SystemUser {
     /**
      * AssignProfileList´s methods
      */
-/*
+
     public void assignProfileToUser(UserProfile p) {
-        this.assignedProfileList.addProfile(p);
+        this.assignedProfileList.add(p);
     }
 
 
@@ -227,7 +228,7 @@ public class SystemUser {
        // this.assignedProfileList.add(newProfile);
         return true;
     }
-*/
+
 
     /**
      * Método para validar se o email (ou parte dele) é deste objeto.
@@ -369,7 +370,7 @@ public class SystemUser {
         return (this.userName.equals(that.userName)) && (this.email.equals(that.email)) &&
                 (this.photo.equals(that.photo)) && (this.password.equals(that.password)) &&
                 (this.function.equals(that.function)) && (this.activateUser == that.activateUser)
-                && (this.assignedProfile.equals(that.assignedProfile));
+                && (this.assignedProfileList.equals(that.assignedProfileList));
     }
     //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
     // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...teste

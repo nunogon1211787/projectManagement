@@ -1,23 +1,27 @@
 package switch2021.project.controller;
 
-import switch2021.project.model.Company;
-import switch2021.project.model.SystemUser;
-import switch2021.project.model.SystemUserStore;
-import switch2021.project.model.UserProfile;
+import switch2021.project.model.*;
 
 public class RegisterUserController {
     private Company company;
-    private SystemUserStore store;
+    private SystemUserStore usersSstore;
+    private UserProfileStore profilesStore;
     private SystemUser user;
 
     public RegisterUserController() {
         this.company = new Company();
-        this.store = null;
+        this.usersSstore = null;
+        this.profilesStore = null;
         this.user = null;
     }
 
     public boolean createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo) {
-        this.user = this.company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo);
-        return this.company.getSystemUserStore().validateSystemUser(user);
+        UserProfileStore profileStore = company.getUserProfileStore();
+        UserProfile visitorProfile = profileStore.getProfileByName("Visitor");
+
+        SystemUserStore usersStore = company.getSystemUserStore();
+        this.user=usersStore.createSystemUser(userName, email, function, password, passwordConfirmation, photo, visitorProfile);
+
+        return usersStore.saveSystemUser(user);
     }
 }

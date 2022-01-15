@@ -255,7 +255,11 @@ class SystemUserTest {
         String passwordConfirmation = "ghi";
         String function = "tester";
         String photo = "photo";
-        UserProfile profile = new UserProfile("Visitor");
+
+        Company company = new Company();
+        List<UserProfile> assignedProfileExpected = new ArrayList<>();
+        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        assignedProfileExpected.add(profile);
         SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
 
         String userNameExpected = "manueloliveira";
@@ -263,8 +267,6 @@ class SystemUserTest {
         String passwordExpected = "ÊËÌ";
         String functionExpected = "tester";
         String photoExpected = "photo";
-        Company company = new Company();
-        UserProfile assignedProfileExpected = company.getUserProfileStore().getProfileByName("Visitor");
 
         //Act
         String userNameResult = newUser.getUserName();
@@ -273,7 +275,7 @@ class SystemUserTest {
         String functionResult = newUser.getFunction();
         String photoResult = newUser.getPhoto();
         boolean activateUserResult = newUser.getActivateUserStatus();
-        UserProfile assignedProfileResult = newUser.getAssignedProfile();
+        List<UserProfile> assignedProfileResult = newUser.getAssignedProfileList();
         //Assert
         assertEquals(userNameExpected, userNameResult);
         assertEquals(emailExpected, emailResult);

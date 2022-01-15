@@ -13,9 +13,7 @@ public class SystemUserStore {
         this.systemUserList = new ArrayList<>();
     }
 
-    public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo) {
-        Company company = new Company();
-        UserProfile visitor = company.getUserProfileStore().getProfileByName("Visitor");
+    public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo,UserProfile visitor) {
         SystemUser user;
         //try {
         user = new SystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);
@@ -39,8 +37,10 @@ public class SystemUserStore {
      * Getter Methods
      */
     public List<SystemUser> getSystemUserList() {
+        List<SystemUser> copyList = new ArrayList<>();
+        copyList.addAll(this.systemUserList);
 
-        return new ArrayList<>(systemUserList);
+        return copyList;
     }
 
     public SystemUser getUserByEmail(String email) {
