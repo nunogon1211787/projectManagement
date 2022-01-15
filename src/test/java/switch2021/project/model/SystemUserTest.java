@@ -182,7 +182,7 @@ class SystemUserTest {
         //Act
         SystemUser joana2 = joana.setAllData("Joana Silva", "Aluna_100", "img_900", joana);
         // Act / Assert
-        assertEquals(joana,joana2);
+        assertEquals(joana, joana2);
     }
 
     @Test
@@ -198,7 +198,7 @@ class SystemUserTest {
     }
 
     @Test
-    public void setAllDataFailUsernameLowLenght() {
+    public void setAllDataFailUsernameLowLength() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
@@ -222,7 +222,7 @@ class SystemUserTest {
     }
 
     @Test
-    public void setAllDataFailFunctionLowLenght() {
+    public void setAllDataFailFunctionLowLength() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
