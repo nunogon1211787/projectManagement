@@ -1,6 +1,5 @@
 package switch2021.project.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -120,7 +119,7 @@ public class Company {
     public UserProfile getUserProfile(String name) {
         UserProfile pro = null;
         for (int i = 0; i < userProfileStore.userProfileList.size(); i++) {
-            if (Objects.equals(getUserProfile(i).getName(), name)) {
+            if (Objects.equals(getUserProfile(i).getUserProfileName(), name)) {
                 pro = getUserProfile(i);
                 break;
             }
@@ -136,7 +135,7 @@ public class Company {
 
     private boolean validateProfile(UserProfile profile) {
         //Check empty fields on name and type
-        if (profile.getName().trim().isEmpty()) {
+        if (profile.getUserProfileName().trim().isEmpty()) {
             return false;
         }
 

@@ -1,7 +1,6 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -35,7 +34,7 @@ public class UserProfileStoreTest {
         // Act
         UserProfile up = userProfileStore.createProfile(name);
         //Assert
-        assertEquals(up, up);
+        assertEquals("Cris", up.getUserProfileName());
     }
 
     @Test
@@ -62,8 +61,8 @@ public class UserProfileStoreTest {
         UserProfile up1 = userProfileStore.createProfile(name);
         // Act
         try {
-            userProfileStore.addUserProfile(up);
-            userProfileStore.addUserProfile(up1);
+            userProfileStore.saveUserProfile(up);
+            userProfileStore.saveUserProfile(up1);
         } catch (IllegalArgumentException exception) {
             //Assert
             assertEquals("Repeated user profile name inserted.", exception.getMessage());
@@ -174,7 +173,7 @@ public class UserProfileStoreTest {
     public void saveNewUserProfileWithFailNameEmpty() {
         //Arrange
         UserProfileStore userProfileStore = new UserProfileStore();
-        String name = "";
+        String name = "    ";
 
         // Act
         try {
@@ -184,7 +183,6 @@ public class UserProfileStoreTest {
             //Assert
             assertEquals("Name cannot be blank.", exception.getMessage());
         }
-
     }
 
 

@@ -2,9 +2,7 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.Company;
-import switch2021.project.model.UserProfile;
-import switch2021.project.model.SystemUser;
+import switch2021.project.model.*;
 import switch2021.project.utils.App;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class UpdateUserProfileControllerTest {
 /*
     private Company company;
-    private SystemUserStore systemUserStore;
+    private UserProfileStore userProfileStore;
     private SystemUser user;
 
 
@@ -53,6 +51,6 @@ public class UpdateUserProfileControllerTest {
         //Act
         company.getSystemUserStore().getSystemUserList().add(user);
         //Assert
-        assertTrue(controllerTest.updateProfile(user, company.getUserProfile(0), company.getUserProfile(1)));
-    }*/
+       // assertTrue(controllerTest.updateProfile(user, userProfileStore.getOriginalUserProfileList().get(0), company.getUserProfile(1)));
+    } */
 }

@@ -17,7 +17,7 @@ public class RegisterUserController {
 
     public boolean createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo) {
         UserProfileStore profileStore = company.getUserProfileStore();
-        UserProfile visitorProfile = profileStore.getProfileByName("Visitor");
+        UserProfile visitorProfile = profileStore.getUserProfile("Visitor");
 
         SystemUserStore usersStore = company.getSystemUserStore();
         this.user=usersStore.createSystemUser(userName, email, function, password, passwordConfirmation, photo, visitorProfile);

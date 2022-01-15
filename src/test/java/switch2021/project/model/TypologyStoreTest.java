@@ -213,14 +213,14 @@ public class TypologyStoreTest {
 
     @Test
     public void thisExistTest() {
-        //Arrange
-        Typology typo = new Typology("teste");
-        Typology typo1 = new Typology("teste");
-        //Act
-        typologyStore.saveTypology(typo);
-        typologyStore.saveTypology(typo1);
         //Assert
-        assertEquals(3,typologyStore.getTypologyList().size());
-        //typologyList is initialized with two typologies.
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            Typology typo = new Typology("teste");
+            Typology typo1 = new Typology("teste");
+            //Act
+            typologyStore.saveTypology(typo);
+            typologyStore.saveTypology(typo1);
+        });
     }
 }

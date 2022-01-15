@@ -3,10 +3,10 @@ package switch2021.project.controller;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser;
 import switch2021.project.utils.App;
-
+/*
 public class UpdateUserProfileController {
 
-  /*  private Company company;
+    private Company company;
     private SystemUser user;
 
     public UpdateUserProfileController() {
@@ -31,5 +31,5 @@ public class UpdateUserProfileController {
         this.company.saveSystemUser(user);
 
         return true;
-    }*/
-}
+    }
+}*/

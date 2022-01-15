@@ -6,7 +6,6 @@ import switch2021.project.model.SystemUser;
 import switch2021.project.model.UserProfile;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class US003Controller {
 
@@ -39,7 +38,7 @@ public class US003Controller {
 
     public Request createProfileRequest(LocalDate data, LocalDate time, String profileName, String email){
 
-        UserProfile profRequest = company.getUserProfileStore().getProfileByName(profileName);
+        UserProfile profRequest = company.getUserProfileStore().getUserProfile(profileName);
         SystemUser user = company.getSystemUserStore().getUserByEmail(email);
 
         this.request = new Request(data, time, profRequest, user);

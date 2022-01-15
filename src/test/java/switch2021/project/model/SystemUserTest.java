@@ -2,7 +2,6 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -258,7 +257,7 @@ class SystemUserTest {
 
         Company company = new Company();
         List<UserProfile> assignedProfileExpected = new ArrayList<>();
-        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         assignedProfileExpected.add(profile);
         SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
 
@@ -296,7 +295,7 @@ class SystemUserTest {
         String function = "tester";
         String photo = "photo";
         Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         //Act
         String result = newUser.encryptPassword(password);
@@ -314,7 +313,7 @@ class SystemUserTest {
         String function = "tester";
         String photo = "photo";
         Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         //Act
         String result = newUser.encryptPassword(password);
@@ -332,7 +331,7 @@ class SystemUserTest {
         String function = "tester";
         String photo = "photo";
         Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
 
         String encryptedPassword = newUser.getPassword();//encryptedPassword = "Ä\u0094Å\u0095Æ\u0096";
@@ -352,7 +351,7 @@ class SystemUserTest {
         String function = "tester";
         String photo = "photo";
         Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
 
         String encryptedPassword = newUser.getPassword();//encryptedPassword = "Ä\u0094Å\u0095Æ\u0096";
@@ -374,7 +373,7 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             Company company = new Company();
-            UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         });
     }
@@ -391,7 +390,7 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             Company company = new Company();
-            UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         });
     }
@@ -408,7 +407,7 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             Company company = new Company();
-            UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         });
     }
@@ -425,7 +424,7 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             Company company = new Company();
-            UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         });
     }

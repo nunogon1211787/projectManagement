@@ -19,7 +19,7 @@ public class SystemUserStoreTest {
         String photo = "photo";
         Company company = new Company();
         List<UserProfile> assignedProfileExpected = new ArrayList<>();
-        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         assignedProfileExpected.add(profile);
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
 
@@ -57,7 +57,7 @@ public class SystemUserStoreTest {
         String photo = "photo";
         Company company = new Company();
         List<UserProfile> assignedProfileExpected = new ArrayList<>();
-        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         assignedProfileExpected.add(profile);
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         int initialSize = company.getSystemUserStore().getSystemUserList().size();
@@ -81,7 +81,7 @@ public class SystemUserStoreTest {
         String photo = "photo";
         Company company = new Company();
         List<UserProfile> assignedProfileExpected = new ArrayList<>();
-        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         assignedProfileExpected.add(profile);
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo,profile);
         company.getSystemUserStore().saveSystemUser(newUser);
@@ -105,7 +105,7 @@ public class SystemUserStoreTest {
             String photo = "photo";
             Company company = new Company();
             List<UserProfile> assignedProfileExpected = new ArrayList<>();
-            UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             assignedProfileExpected.add(profile);
             company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo,profile);
         });
@@ -121,7 +121,7 @@ public class SystemUserStoreTest {
         String photo = "photo";
         Company company = new Company();
         List<UserProfile> assignedProfileExpected = new ArrayList<>();
-        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         assignedProfileExpected.add(profile);
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo,profile);
 
@@ -146,7 +146,7 @@ public class SystemUserStoreTest {
         String passwordConfirmation = "hello123";
         String function = "PO";
         String photo = "photo.png";
-        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser findUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo,profile);
         company.getSystemUserStore().addSystemUser(findUser);// faltou adicionar à company
         SystemUser user_verification = company.getSystemUserStore().getUserByEmail("anaguedes@beaver.com"); // email do user que criei
@@ -157,7 +157,7 @@ public class SystemUserStoreTest {
     @Test
     public void IsYourEmailSuccess() {
         Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser systemUser = company.getSystemUserStore().createSystemUser("anaguedes", "anaguedes@beaver.com",
                 "PO", "hello123", "hello123", "photo.png",profile);
         //Assert

@@ -31,6 +31,17 @@ public class CreateNewTypologyControllerTest {
     }
 
     @Test
+    public void createNewTypologyControllerNullDescriptionTest() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            CreateNewTypologyController controller = new CreateNewTypologyController(typologyStore);
+            //Act and Assert
+            controller.createTypology("");
+        });
+    }
+
+    @Test
     public void createTypologyTest(){
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
