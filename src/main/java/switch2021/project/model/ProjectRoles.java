@@ -1,23 +1,19 @@
 package switch2021.project.model;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Locale;
 
 public class ProjectRoles {
 
     /**
-     * Classe SpecialProfile Atributes
+     * Classe ProjectRoles Atributes
      * Attributes
      **/
-    private int id_Profile;
+    private int id_Role;
     private String name;
-    private String type;
 
-
-
-    public ProjectRoles(String name, String type) {
-        this.id_Profile = ID_PROFILE_GENERATOR.getAndIncrement();
+    public ProjectRoles(int idRole, String name) {
+        this.id_Role = idRole;
         this.name = name;
-        this.type = type;
     }
 
     /**
@@ -25,14 +21,50 @@ public class ProjectRoles {
      */
 
     public ProjectRoles(ProjectRoles originalProfile) {
-        this.id_Profile = originalProfile.id_Profile;
+        this.id_Role = originalProfile.id_Role;
         this.name = originalProfile.name;
-        this.type = originalProfile.type;
     }
+
     /**
-     * Profle Constructors
+     * Getters e Setters
      */
-    //Create ID automatically
-    private static AtomicInteger ID_PROFILE_GENERATOR = new AtomicInteger();
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getId_Role() {
+        return id_Role;
+    }
+
+    public void setId_Role(int id_Role) {
+        this.id_Role = id_Role;
+    }
+
+    /**
+     * Method to verify if a given name to Project Role is valid
+     */
+
+    public boolean isValidName(String name) {
+        if(!name.toUpperCase(Locale.ROOT).equals(this.name.toUpperCase())) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Override Equals
+     */
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProjectRoles that = (ProjectRoles) o;
+        return (this.getName().equals(that.getName()));
+    }
 
 }
