@@ -17,12 +17,7 @@ public class CreateProjectController {
 
         this.project = this.company.getProjectStore().createProject(code,name,description, customer,typology,businessSector,
                 startDate,numberOfSprints,budget);
-        return this.company.getProjectStore().validateProject(project);
-    }
-
-    public boolean saveProject(Project project) {
-        int index = company.getProjectStore().getProjectList().size();
-        return this.company.getProjectStore().saveNewProject(project); // confirmar se funciona, ou seja o set adiciona numa nova posição?
+        return this.company.getProjectStore().saveNewProject(project);
     }
 
 }

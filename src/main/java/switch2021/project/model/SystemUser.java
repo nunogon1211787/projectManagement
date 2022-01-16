@@ -173,9 +173,9 @@ public class SystemUser {
         if (photo.trim().isEmpty())
             throw new IllegalArgumentException("Photo cannot be empty.");
         if (function.trim().isEmpty() || function.length() < 2)
-            throw new IllegalArgumentException("Function cannot be empty.");
+            throw new IllegalArgumentException("Function cannot be empty or less then 2 characters.");
         if (userName.trim().isEmpty() || userName.length() < 2)
-            throw new IllegalArgumentException("Username cannot be empty.");
+            throw new IllegalArgumentException("Username cannot be empty or less then 2 characters.");
         return true;
     }
 
@@ -323,6 +323,7 @@ public class SystemUser {
 
         if (validateOldPassword(oldpasswordUI)) {
             setPassword(newpassword);
+            checkPasswordRules(newpassword);
             encryptPassword(newpassword);
         } else {
             return false;
