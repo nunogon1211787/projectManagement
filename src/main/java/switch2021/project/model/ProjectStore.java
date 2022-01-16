@@ -60,7 +60,7 @@ public class ProjectStore {
     public List<Project> getProjectListWithPORight(String email) {
         List<Project> projectList = new ArrayList<>();
         if (email == null || email.trim().isEmpty()) {
-            return projectList;
+            throw new IllegalArgumentException("Invalid email inserted");
         }
         for (Project project : this.projectList) {
             if (project.getProductOwner() != null && email.equals(project.getProductOwner().getEmail())) {
@@ -69,6 +69,8 @@ public class ProjectStore {
         }
         return projectList;
     }
+
+
 
     /**
      * Validation Methods
@@ -148,4 +150,11 @@ public class ProjectStore {
         return true;
     }
 
+    public ProductBacklog getProductBacklog(String code) {
+        Project project = getProjectByCode(code);
+        if(project == null) {
+            throw new IllegalArgumentException("Project does not exist.");
+        }
+        return  project.getProductBacklog();
+    }
 }

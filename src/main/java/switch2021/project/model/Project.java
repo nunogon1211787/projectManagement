@@ -1,7 +1,5 @@
 package switch2021.project.model;
 
-import switch2021.project.utils.App;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,8 +109,8 @@ public class Project {
         return productOwner;
     }
 
-    public List<UserStory> getProductBacklog() {
-        return productBacklog.getUserStoryList();
+    public ProductBacklog getProductBacklog() {
+        return productBacklog;
     }
 
     public int getSprintDuration() {
@@ -202,10 +200,10 @@ public class Project {
      * - Create User Story method
      **/
 
-    public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
-        UserStory us = productBacklog.createUserStory(code, userStoryStatus, priority, description, timeEstimate);
-        return us != null && productBacklog.addUserStory(us);
-    }
+//    public boolean createUserStory(String userStoryStatus, int priority, String description, int timeEstimate) {
+//        UserStory us = productBacklog.createUserStory(code, userStoryStatus, priority, description, timeEstimate);
+//        return productBacklog.addUserStory(us);
+//    }
 
     /**
      * Resource Allocation Methods - (Carolina US007)
@@ -246,6 +244,10 @@ public class Project {
         return msg;
     }
 
+    public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
+        UserStory userStory = this.productBacklog.createUserStory(this.getCode(), userStoryStatus, priority, description, timeEstimate);
+        return this.productBacklog.saveUserStory(userStory);
+    }
 
     @Override
     public boolean equals(Object o) {

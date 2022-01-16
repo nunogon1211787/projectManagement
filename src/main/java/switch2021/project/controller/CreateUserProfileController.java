@@ -25,16 +25,10 @@ public class CreateUserProfileController {
     }
 
 
-    public String createProfile(String name) {
-        try {
-            UserProfileStore userProfileStore = this.company.getUserProfileStore();
-            UserProfile userProfile = userProfileStore.createProfile(name);
-            userProfileStore.addUserProfile(userProfile);
-        }catch (IllegalArgumentException exception){
-            return exception.getMessage();
-        }
-        return "Profile created.";
-
+    public boolean createProfile(String name) {
+        UserProfileStore userProfileStore = this.company.getUserProfileStore();
+        UserProfile userProfile = userProfileStore.createProfile(name);
+        return userProfileStore.saveUserProfile(userProfile);
     }
 }
 

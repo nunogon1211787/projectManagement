@@ -1,28 +1,46 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.*;
-import switch2021.project.utils.App;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CreateUserProfileControllerTest {
 
+
     @Test
-    public void createProfileWithSucess() {
+    public void createProfileWithSuccess() {
         CreateUserProfileController createUserProfileController = new CreateUserProfileController();
         String name = "Cris_Dani";
-        String profileCreated = createUserProfileController.createProfile(name);
-        assertEquals("Profile created.", profileCreated);
+        boolean userProfileCreated = createUserProfileController.createProfile(name);
+        assertTrue(userProfileCreated);
     }
 
     @Test
     public void createProfileWithEmptyName() {
+        // Arrange
         CreateUserProfileController createUserProfileController = new CreateUserProfileController();
         String name = "";
-        String profileCreated = createUserProfileController.createProfile(name);
-        assertEquals("Name cannot be blank.", profileCreated);
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            createUserProfileController.createProfile(name);
+        });
+        // Assert
+        assertTrue(exception.getMessage().contains("Name cannot be blank."));
+    }
+
+    @Test
+    public void createProfileAlreadyExist() {
+        // Arrange
+        CreateUserProfileController createUserProfileController = new CreateUserProfileController();
+        String name = "Cris_Dani";
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            createUserProfileController.createProfile(name);
+            createUserProfileController.createProfile(name);
+        });
+        // Assert
+        assertTrue(exception.getMessage().contains("Repeated user profile name inserted."));
     }
 
 }

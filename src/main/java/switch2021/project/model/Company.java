@@ -12,10 +12,9 @@ public class Company {
 
     private SystemUserStore systemUserStore;
     private ProjectStore projectStore;
-
     private UserProfileStore userProfileStore;
-
     private ProjectStatusStore projectStatusStore;
+    private UserStoryStatusStore userStoryStatusStore;
     private CustomerStore customerStore;
     private BusinessSectorStore businessSectorStore;
     private TypologyStore typologyStore;
@@ -31,17 +30,18 @@ public class Company {
     public Company() {
         this.systemUserStore = new SystemUserStore();
         this.projectStore = new ProjectStore();
-
         this.userProfileStore = new UserProfileStore();
 
         this.typologyStore = new TypologyStore();
         this.customerStore = new CustomerStore();
         this.businessSectorStore = new BusinessSectorStore();
         this.projectStatusStore = new ProjectStatusStore();
+        this.userStoryStatusStore = new UserStoryStatusStore();
 
         this.userProfileStore.populateDefault();
         this.typologyStore.populateTypologyList();
         this.projectStatusStore.populateProjectStatusList();
+        this.userStoryStatusStore.populateUserStoryStatusList();
     }
 
     /**
@@ -52,6 +52,14 @@ public class Company {
     //Project
     public ProjectStore getProjectStore() {
         return this.projectStore;
+    }
+
+    public ProductBacklog getProductBacklog(String code) {
+        return this.projectStore.getProductBacklog(code);
+    }
+
+    public List<Project> getProjectListWithPORight(String email) {
+        return projectStore.getProjectListWithPORight(email);
     }
 
     //SystemUser
@@ -86,8 +94,6 @@ public class Company {
         return this.businessSectorStore;
     }
 
-
-
     /**
      * Getter Methods
      **/
@@ -96,7 +102,7 @@ public class Company {
         return this.getUserProfileList();
     }*/
 
-    /*public List<UserProfile> getUserProfileListWithType(String type) {
+    /* public List<UserProfile> getUserProfileListWithType(String type) {
 
         List<UserProfile> foundList = new ArrayList<>();
 
@@ -133,25 +139,25 @@ public class Company {
      * @param profile
      */
 
-    private boolean validateProfile(UserProfile profile) {
-        //Check empty fields on name and type
-        if (profile.getUserProfileName().trim().isEmpty()) {
-            return false;
-        }
-
-       /* //Check if the profile type is valid
-        if (!profile.getType().equalsIgnoreCase("System Profile")) {
-            return false;
-        }*/
-
-        //Check if profile already exist
-        for (UserProfile up : userProfileStore.userProfileList) {
-            if (up.equals(profile)) {
-                return false;
-            }
-        }
-        return true;
-    }
+//    private boolean validateProfile(UserProfile profile) {
+//        //Check empty fields on name and type
+//        if (profile.getUserProfileName().trim().isEmpty()) {
+//            return false;
+//        }
+//
+//       /* //Check if the profile type is valid
+//        if (!profile.getType().equalsIgnoreCase("System Profile")) {
+//            return false;
+//        }*/
+//
+//        //Check if profile already exist
+//        for (UserProfile up : userProfileStore.userProfileList) {
+//            if (up.equals(profile)) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 
     //Request
 
@@ -194,4 +200,6 @@ public class Company {
         }
         return result;
     }
+
+
 }

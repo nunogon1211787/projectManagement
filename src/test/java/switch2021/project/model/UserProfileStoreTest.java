@@ -1,7 +1,8 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class UserProfileStoreTest {
@@ -16,14 +17,14 @@ public class UserProfileStoreTest {
         //Arrange
         UserProfileStore userProfileStore = new UserProfileStore();
         String name = "";
-        // Act
-        try {
-            UserProfile up = userProfileStore.createProfile(name);
-        } catch (IllegalArgumentException exception) {
-            //Assert
-            assertEquals("Name cannot be blank.", exception.getMessage());
-        }
 
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            UserProfile up = userProfileStore.createProfile(name);
+            userProfileStore.saveUserProfile(up);
+        });
+        //Assert
+        assertTrue(exception.getMessage().contains("Name cannot be blank."));
     }
 
     @Test
@@ -42,14 +43,15 @@ public class UserProfileStoreTest {
         //Arrange
         UserProfileStore userProfileStore = new UserProfileStore();
         String name = "Cris";
+        UserProfile up = userProfileStore.createProfile(name);
+        UserProfile up1 = userProfileStore.createProfile(name);
         // Act
-        try {
-            UserProfile up = userProfileStore.createProfile(name);
-            UserProfile up1 = userProfileStore.createProfile(name);
-        } catch (IllegalArgumentException exception) {
-            //Assert
-            assertEquals("Repeated user profile name inserted.", exception.getMessage());
-        }
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            userProfileStore.saveUserProfile(up);
+            userProfileStore.saveUserProfile(up1);
+        });
+        //Assert
+        assertTrue(exception.getMessage().contains("Repeated user profile name inserted."));
     }
 
     @Test
@@ -60,13 +62,13 @@ public class UserProfileStoreTest {
         UserProfile up = userProfileStore.createProfile(name);
         UserProfile up1 = userProfileStore.createProfile(name);
         // Act
-        try {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             userProfileStore.saveUserProfile(up);
             userProfileStore.saveUserProfile(up1);
-        } catch (IllegalArgumentException exception) {
-            //Assert
-            assertEquals("Repeated user profile name inserted.", exception.getMessage());
-        }
+        });
+        // Assert
+        assertTrue(exception.getMessage().contains("Repeated user profile name inserted."));
+
     }
 
     @Test
@@ -75,11 +77,11 @@ public class UserProfileStoreTest {
         UserProfileStore userProfileStore = new UserProfileStore();
         String name = "Cris";
         UserProfile up = userProfileStore.createProfile(name);
-        userProfileStore.addUserProfile(up);
+        userProfileStore.saveUserProfile(up);
         // Act
         int inicialSize = userProfileStore.getUserProfileList().size();
         UserProfile up1 = userProfileStore.createProfile("Cris_Dani");
-        userProfileStore.addUserProfile(up1);
+        userProfileStore.saveUserProfile(up1);
         //Assert
         assertEquals(userProfileStore.getUserProfileList().size(), inicialSize + 1);
     }
@@ -91,15 +93,15 @@ public class UserProfileStoreTest {
         UserProfileStore userProfileStore = new UserProfileStore();
         String name = "Cris";
         UserProfile up = userProfileStore.createProfile(name);
-        userProfileStore.addUserProfile(up);
+        userProfileStore.saveUserProfile(up);
         // Act
-        int inicialSize = userProfileStore.getUserProfileList().size();
+        int initialSize = userProfileStore.getUserProfileList().size();
         UserProfile up1 = userProfileStore.createProfile("Cris_Dani");
         UserProfile up2 = userProfileStore.createProfile("Cris_Dani2");
-        userProfileStore.addUserProfile(up1);
-        userProfileStore.addUserProfile(up2);
+        userProfileStore.saveUserProfile(up1);
+        userProfileStore.saveUserProfile(up2);
         //Assert
-        assertEquals(userProfileStore.getUserProfileList().size(), inicialSize + 2);
+        assertEquals(userProfileStore.getUserProfileList().size(), initialSize + 2);
     }
 
     @Test
@@ -107,17 +109,16 @@ public class UserProfileStoreTest {
         //Arrange
         UserProfileStore userProfileStore = new UserProfileStore();
         String name = "";
-
         // Act
-        try {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             UserProfile up = userProfileStore.createProfile(name);
-            userProfileStore.addUserProfile(up);
-        } catch (IllegalArgumentException exception) {
-            //Assert
-            assertEquals("Name cannot be blank.", exception.getMessage());
-        }
+            userProfileStore.saveUserProfile(up);
+        });
+        //Assert
+        assertTrue(exception.getMessage().contains("Name cannot be blank."));
 
     }
+
 
     @Test
     public void saveNewUserProfileAlreadyExist() {
@@ -127,13 +128,12 @@ public class UserProfileStoreTest {
         UserProfile up = userProfileStore.createProfile(name);
         UserProfile up1 = userProfileStore.createProfile(name);
         // Act
-        try {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             userProfileStore.saveUserProfile(up);
             userProfileStore.saveUserProfile(up1);
-        } catch (IllegalArgumentException exception) {
-            //Assert
-            assertEquals("Repeated user profile name inserted.", exception.getMessage());
-        }
+        });
+        //Assert
+        assertTrue(exception.getMessage().contains("Repeated user profile name inserted."));
     }
 
     @Test
@@ -158,7 +158,7 @@ public class UserProfileStoreTest {
         UserProfileStore userProfileStore = new UserProfileStore();
         String name = "Cris";
         UserProfile up = userProfileStore.createProfile(name);
-        userProfileStore.addUserProfile(up);
+        userProfileStore.saveUserProfile(up);
         // Act
         int inicialSize = userProfileStore.getUserProfileList().size();
         UserProfile up1 = userProfileStore.createProfile("Cris_Dani");
@@ -176,14 +176,12 @@ public class UserProfileStoreTest {
         String name = "    ";
 
         // Act
-        try {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             UserProfile up = userProfileStore.createProfile(name);
             userProfileStore.saveUserProfile(up);
-        } catch (IllegalArgumentException exception) {
-            //Assert
-            assertEquals("Name cannot be blank.", exception.getMessage());
-        }
+        });
+        //Assert
+        assertTrue(exception.getMessage().contains("Name cannot be blank."));
     }
-
-
 }
+

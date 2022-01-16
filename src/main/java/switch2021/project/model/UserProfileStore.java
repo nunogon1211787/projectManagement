@@ -21,6 +21,39 @@ public class UserProfileStore {
         userProfileList.add(new UserProfile("Director"));
     }
 
+    /** Getters and Setters Methods. **/
+    private List<UserProfile> getOriginalUserProfileList() {
+        return this.userProfileList;
+    }
+
+    public  List<UserProfile> getUserProfileList() {
+        return new ArrayList<>(userProfileList);
+    }
+    //Get userProfile by name
+
+    public UserProfile getUserProfile(String profileName) {
+        UserProfile profile = null;
+
+        for (UserProfile i : userProfileList) {
+            if (i.getUserProfileName().equals(profileName)) {
+                profile = i;
+            }
+        }
+        return profile;
+    }
+    //Get userProfile by ID
+
+    public UserProfile getUserProfile(int id_UserProfile) {
+        UserProfile profile = null;
+
+        for (UserProfile i : userProfileList) {
+            if (i.getId_UserProfile() == id_UserProfile) {
+                profile = i;
+            }
+        }
+        return profile;
+    }
+
 
     /** Create Method **/
     public UserProfile createProfile(String name) {
@@ -39,9 +72,20 @@ public class UserProfileStore {
     //objects. This issue will be solved when calling the save method.
 
 
+
+    /** Save UserProfile Method. Save a new UserProfile object to the UserProfile List **/
+    public boolean saveUserProfile(UserProfile profile) {
+        if(!validateProfile(profile)) {
+            throw new IllegalArgumentException("Repeated user profile name inserted.");
+        } else {
+            profile.setId_UserProfile(id_UserProfileGenerator());
+        }
+        return addUserProfile(profile);
+    }
+
     /** Add and Remove UserProfile Methods. Adds or remove a UserProfile object to the UserProfile List. **/
 
-    public boolean addUserProfile(UserProfile profile) {
+    private boolean addUserProfile(UserProfile profile) {
         if (validateId_UserProfile(profile)) {
             userProfileList.add(profile);
         } else {
@@ -58,40 +102,6 @@ public class UserProfileStore {
             msg = true;
         }
         return msg;
-    }
-
-
-    /** Getters and Setters Methods. **/
-    private List<UserProfile> getOriginalUserProfileList() {
-        return this.userProfileList;
-    }
-
-    public  List<UserProfile> getUserProfileList() {
-        return new ArrayList<>(userProfileList);
-    }
-
-    //Get userProfile by name
-    public UserProfile getUserProfile(String profileName) {
-        UserProfile profile = null;
-
-        for (UserProfile i : userProfileList) {
-            if (i.getUserProfileName().equals(profileName)) {
-                profile = i;
-            }
-        }
-        return profile;
-    }
-
-    //Get userProfile by ID
-    public UserProfile getUserProfile(int id_UserProfile) {
-        UserProfile profile = null;
-
-        for (UserProfile i : userProfileList) {
-            if (i.getId_UserProfile() == id_UserProfile) {
-                profile = i;
-            }
-        }
-        return profile;
     }
 
 
@@ -118,17 +128,6 @@ public class UserProfileStore {
             }
         }
         return msg;
-    }
-
-
-    /** Save UserProfile Method. Save a new UserProfile object to the UserProfile List **/
-    public boolean saveUserProfile(UserProfile profile) {
-        if(!validateProfile(profile)) {
-            throw new IllegalArgumentException("Repeated user profile name inserted.");
-        } else {
-            profile.setId_UserProfile(id_UserProfileGenerator());
-        }
-        return addUserProfile(profile);
     }
 
 
