@@ -100,7 +100,7 @@ public class CreateUserStoryControllerTest {
                     new UserStoryStatus("In progress"), 12, "Default Story", 6);
         });
         // Assert
-        assertTrue(exception.getMessage().contains("Repeated user story description inserted."));
+        assertTrue(exception.getMessage().contains("Repeated user story inserted, same code project and description."));
     }
 
     @Test

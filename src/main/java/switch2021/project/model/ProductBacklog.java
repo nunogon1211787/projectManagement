@@ -37,7 +37,7 @@ public class ProductBacklog {
 
     public boolean saveUserStory(UserStory userStory){
         if(!validateUserStory(userStory)){
-            throw new IllegalArgumentException("Repeated user profile name inserted.");
+            throw new IllegalArgumentException("Repeated user story inserted, same code project and description.");
         }
         return addUserStory(userStory);
     }
@@ -56,7 +56,7 @@ public class ProductBacklog {
         // check duplicate story
         for (UserStory us : userStoryList) {
             if (us.getDescription().trim().equalsIgnoreCase(userStory.getDescription().trim()) && userStory.getProjectCode().equals(us.getProjectCode())) {
-                throw new IllegalArgumentException("Repeated user story description inserted.");
+                throw new IllegalArgumentException("Repeated user story inserted, same code project and description.");
             }
         }
         return true;

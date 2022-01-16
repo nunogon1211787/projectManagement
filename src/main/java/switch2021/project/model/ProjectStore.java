@@ -67,6 +67,9 @@ public class ProjectStore {
                 projectList.add(project);
             }
         }
+        if (projectList.isEmpty()) {
+            throw new IllegalArgumentException("Dont recognise email");
+        }
         return projectList;
     }
 
@@ -151,10 +154,14 @@ public class ProjectStore {
     }
 
     public ProductBacklog getProductBacklog(String code) {
+        if(code == null || code.trim().isEmpty()){
+            throw new IllegalArgumentException("Project code is empty.");
+        }
         Project project = getProjectByCode(code);
         if(project == null) {
             throw new IllegalArgumentException("Project does not exist.");
         }
+
         return  project.getProductBacklog();
     }
 }

@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CompanyTest {
 
+    Project project;
+
     @Test
     public void companyConstructor() {
         //Arrange
@@ -19,6 +21,131 @@ class CompanyTest {
         assertEquals(2,company.getTypologyStore().getTypologyList().size());
         assertEquals(7,company.getProjectStatusStore().getprojectStatusList().size());
     }
+
+    // Test to validate if there is project code (Cris US009)
+
+    @Test
+    public void getProjectListWithPORightEmptyEmail() {
+        //Arrange
+        Company company = new Company();
+        project = company.getProjectStore().createProject("TEST", "Projecto Test", "criar us",
+                new Customer("marreta@email.pt", "name"),
+                company.getTypologyStore().getTypology("Fixed Cost"),
+                new BusinessSector("description"), LocalDate.now(), 10, 100000);
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        List<Project> projectList = company.getProjectListWithPORight("");
+        });
+        //Assert
+        assertTrue(exception.getMessage().contains("Invalid email inserted"));
+    }
+
+    @Test
+    public void getProjectListWithPORightEmptyList() {
+        //Arrange
+        Company company = new Company();
+        project = company.getProjectStore().createProject("TEST", "Projecto Test", "criar us",
+                new Customer("marreta@email.pt", "name"),
+                company.getTypologyStore().getTypology("Fixed Cost"),
+                new BusinessSector("description"), LocalDate.now(), 10, 100000);
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            List<Project> projectList = company.getProjectListWithPORight("Email");
+        });
+        //Assert
+        assertTrue(exception.getMessage().contains("Dont recognise email"));
+    }
+
+    @Test
+    public void getProjectListWithPORightWithEmptyEmailAndGetEmptyList() {
+        //Arrange
+        Company company = new Company();
+        project = company.getProjectStore().createProject("TEST", "Projecto Test", "criar us",
+                new Customer("marreta@email.pt", "name"),
+                company.getTypologyStore().getTypology("Fixed Cost"),
+                new BusinessSector("description"), LocalDate.now(), 10, 100000);
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            List<Project> projectList = company.getProjectListWithPORight("");
+            List<Project> projectList2 = company.getProjectListWithPORight(null);
+        });
+        //Assert
+        assertTrue(exception.getMessage().contains("Invalid email inserted"));
+
+    }
+
+    @Test
+    public void getProjectListWithPORighListWithResults() {
+        //Arrange
+        Company company = new Company();
+        project = company.getProjectStore().createProject("other TEST", "CDC", "criar projeto",
+                new Customer("marreta@email.pt", "name"),
+                company.getTypologyStore().getTypology("Fixed Cost"),
+                new BusinessSector("description"), LocalDate.now(), 10, 100000);
+        project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
+                "Product Owner", "AAA", "AAA", "", company.getUserProfile("Product Owne")));
+        company.getProjectStore().addProject(project);
+        // Act
+        List<Project> projectList = company.getProjectListWithPORight("123@isep.ipp.pt");
+        //Assert
+        assertEquals(1, projectList.size());
+    }
+
+    @Test
+    public void getProductBacklogWithResults() {
+        //Arrange
+        Company company = new Company();
+        project = company.getProjectStore().createProject("other TEST", "CDC", "criar projeto",
+                new Customer("marreta@email.pt", "name"),
+                company.getTypologyStore().getTypology("Fixed Cost"),
+                new BusinessSector("description"), LocalDate.now(), 10, 100000);
+        project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
+                "Product Owner", "AAA", "AAA", "", company.getUserProfile("Product Owne")));
+        company.getProjectStore().addProject(project);
+        // Act
+        ProductBacklog productBacklog = company.getProductBacklog("other TEST");
+        //Assert
+        assertNotNull(productBacklog);
+    }
+
+    @Test
+    public void getProductBacklogInvalidNull() {
+        //Arrange
+        Company company = new Company();
+        project = company.getProjectStore().createProject("other TEST", "CDC", "criar projeto",
+                new Customer("marreta@email.pt", "name"),
+                company.getTypologyStore().getTypology("Fixed Cost"),
+                new BusinessSector("description"), LocalDate.now(), 10, 100000);
+        project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
+                "Product Owner", "AAA", "AAA", "", company.getUserProfile("Product Owne")));
+        company.getProjectStore().addProject(project);
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        ProductBacklog productBacklog = company.getProductBacklog(null);
+        });
+        //Assert
+        assertTrue(exception.getMessage().contains("Project code is empty."));
+    }
+
+    @Test
+    public void getProductBacklogInvalidEmpty() {
+        //Arrange
+        Company company = new Company();
+        project = company.getProjectStore().createProject("other TEST", "CDC", "criar projeto",
+                new Customer("marreta@email.pt", "name"),
+                company.getTypologyStore().getTypology("Fixed Cost"),
+                new BusinessSector("description"), LocalDate.now(), 10, 100000);
+        project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
+                "Product Owner", "AAA", "AAA", "", company.getUserProfile("Product Owne")));
+        company.getProjectStore().addProject(project);
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            ProductBacklog productBacklog = company.getProductBacklog("");
+        });
+        //Assert
+        assertTrue(exception.getMessage().contains("Project code is empty."));
+    }
+
 
 //    @Test
 //    public void SearchUserByPartiallySwitchedEmail() {
@@ -624,52 +751,8 @@ class CompanyTest {
 //        assertFalse(result);
 //    }
 //
-//    // Test to validate if there is project code (Cris US009)
-//
-//    @Test
-//    public void getProjectListWithPORightEmptyList() {
-//        //Arrange
-//        Company company = new Company();
-//        Project project = company.createProject("TEST", "Projecto Test", "decricao",
-//                new Customer("marreta@email.pt"), new Typology("description"),
-//                new BusinessSector("description"), LocalDate.now(), 10, 100000);
-//        // Act
-//        List<Project> projectList = company.getProjectListWithPORight("email");
-//        //Assert
-//        assertEquals(0, projectList.size());
-//
-//    }
-//
-//    @Test
-//    public void getProjectListWithPORightWithEmptyEmailAndGetEmptyList() {
-//        //Arrange
-//        Company company = new Company();
-//        // Act
-//        List<Project> projectList = company.getProjectListWithPORight("");
-//        List<Project> projectList2 = company.getProjectListWithPORight(null);
-//        //Assert
-//        assertEquals(0, projectList.size());
-//        assertEquals(0, projectList2.size());
-//
-//    }
-//
-//    @Test
-//    public void getProjectListWithPORighListWithResults() {
-//        //Arrange
-//        Company company = new Company();
-//        Project project = company.createProject("TEST", "Projecto Test", "decricao",
-//                new Customer("marreta@email.pt"), new Typology("description"),
-//                new BusinessSector("description"), LocalDate.now(), 10, 100000);
-//        project.createUserStory(UserStoryStatus., 12, "Default Story", 6);
-//        project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
-//                "Product Owner", "AAA", company.getUserUserProfile("Product Owne")));
-//        company.addProject(project);
-//        // Act
-//        List<Project> projectList = company.getProjectListWithPORight("123@isep.ipp.pt");
-//        //Assert
-//        assertNotEquals(0, projectList.size());
-//    }
-//
+
+
 //    @Test
 //    @DisplayName("Create Resource")
 //    public void createResource() {

@@ -133,32 +133,6 @@ public class Company {
         return pro;
     }
 
-    /**
-     * Validation Method
-     *
-     * @param profile
-     */
-
-//    private boolean validateProfile(UserProfile profile) {
-//        //Check empty fields on name and type
-//        if (profile.getUserProfileName().trim().isEmpty()) {
-//            return false;
-//        }
-//
-//       /* //Check if the profile type is valid
-//        if (!profile.getType().equalsIgnoreCase("System Profile")) {
-//            return false;
-//        }*/
-//
-//        //Check if profile already exist
-//        for (UserProfile up : userProfileStore.userProfileList) {
-//            if (up.equals(profile)) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-
 
     //Request
 
