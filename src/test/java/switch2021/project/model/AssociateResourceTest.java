@@ -22,7 +22,7 @@ public class AssociateResourceTest {
 
     @BeforeEach
     public void init() {
-        company = App.getInstance().getCompany(); // sempre a mesma instancia
+        company = new Company(); // sempre a mesma instancia
         userProfile = company.getUserProfileStore().getUserProfile("Visitor");
 
         LocalDate date = LocalDate.of(2021, 12, 12);
