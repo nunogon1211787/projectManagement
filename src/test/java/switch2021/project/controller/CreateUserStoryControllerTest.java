@@ -25,7 +25,7 @@ public class CreateUserStoryControllerTest {
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.createUserStory(UserStoryStatus.TODO, 12, "Default Story", 6);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
-                "Product Owner", "AAA", "AAA", "", company.getUserProfile("Product Owne")));
+                "Product Owner", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("Product Owne")));
         company.getProjectStore().addProject(project);
     }
 

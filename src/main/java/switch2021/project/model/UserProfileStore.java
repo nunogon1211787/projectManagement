@@ -6,7 +6,7 @@ import java.util.List;
 public class UserProfileStore {
 
     /** UserProfile Store Attributes. Contains a UserProfile list. **/
-    List<UserProfile> userProfileList;
+    private List<UserProfile> userProfileList;
 
     /** UserProfile Store Constructor **/
     public UserProfileStore() {

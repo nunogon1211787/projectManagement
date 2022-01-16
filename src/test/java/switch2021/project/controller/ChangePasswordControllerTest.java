@@ -14,7 +14,7 @@ public class ChangePasswordControllerTest {
             //Arrange
             Company company = new Company();
             SystemUser user = new SystemUser("Joana", "123@isep.ipp.pt",
-                    "Aluna", "AAA","AAA","", company.getUserProfile("visitor"));
+                    "Aluna", "AAA","AAA","", company.getUserProfileStore().getUserProfile("visitor"));
             ChangePasswordController controllerTest = new ChangePasswordController(company, user);
             company.getSystemUserStore().addSystemUser(user);
             //Assert
@@ -26,7 +26,7 @@ public class ChangePasswordControllerTest {
         //Arrange
         Company company = new Company();
         SystemUser user = new SystemUser("Joana", "123@isep.ipp.pt",
-                "Aluna", "AAA","AAA","", company.getUserProfile("visitor"));
+                "Aluna", "AAA","AAA","", company.getUserProfileStore().getUserProfile("visitor"));
         ChangePasswordController controllerTest = new ChangePasswordController(company, user);
         company.getSystemUserStore().addSystemUser(user);
         //Assert

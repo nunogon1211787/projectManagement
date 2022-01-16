@@ -44,12 +44,11 @@ public class SystemUserStore {
     }
 
     public SystemUser getUserByEmail(String email) {
-
         SystemUser user = null;
 
-        for (int i = 0; i < this.systemUserList.size(); i++) {
-            if (this.systemUserList.get(i).isYourEmail(email)) {
-                user = this.systemUserList.get(i);
+        for (SystemUser i : this.systemUserList) {
+            if (i.isYourEmail(email)) {
+                user = i;
                 break;
             }
         }
@@ -79,10 +78,7 @@ public class SystemUserStore {
      */
 
     public boolean validateSystemUser(SystemUser user) {
-        if (user == null) {
-            return false;
-        }
-        if (hasEmail(user.getEmail())) {
+        if (user == null || hasEmail(user.getEmail())) {
             return false;
         }
         return !this.systemUserList.contains(user);
@@ -112,5 +108,13 @@ public class SystemUserStore {
         return result;
     }
 
+    /** Override Methods **/
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof UserProfileStore)) return false;
+        SystemUserStore that = (SystemUserStore) obj;
+        return (this.systemUserList.equals(that.systemUserList));
+    }
 
 }

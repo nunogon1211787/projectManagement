@@ -1,7 +1,6 @@
 package switch2021.project.model;
 
 import java.util.List;
-import java.util.Objects;
 
 public class Company {
 
@@ -64,7 +63,7 @@ public class Company {
         return this.userProfileStore;
     }
 
-    // SpecialProfile or ProjectRole
+    // SpecialProfile or ProjectRole (acho melhor a segunda opção)
 
     //Typology
     public TypologyStore getTypologyStore() {
@@ -86,72 +85,6 @@ public class Company {
         return this.businessSectorStore;
     }
 
-
-
-    /**
-     * Getter Methods
-     **/
-
-    /*public List<UserProfile> getUserProfileList() {
-        return this.getUserProfileList();
-    }*/
-
-    /*public List<UserProfile> getUserProfileListWithType(String type) {
-
-        List<UserProfile> foundList = new ArrayList<>();
-
-        for (int i = 0; i < this.userProfileStore.userProfileList.size(); i++) {
-
-            if (this.userProfileStore.userProfileList.get(i).hasType(type)) {
-                foundList.add(this.userProfileStore.userProfileList.get(i));
-            }
-
-        }
-
-        return foundList;
-    }*/
-
-    ////Talvez mudar para não buscar por index
-    public UserProfile getUserProfile(int index) {
-        return new UserProfile(userProfileStore.userProfileList.get(index));
-    }
-
-    public UserProfile getUserProfile(String name) {
-        UserProfile pro = null;
-        for (int i = 0; i < userProfileStore.userProfileList.size(); i++) {
-            if (Objects.equals(getUserProfile(i).getUserProfileName(), name)) {
-                pro = getUserProfile(i);
-                break;
-            }
-        }
-        return pro;
-    }
-
-    /**
-     * Validation Method
-     *
-     * @param profile
-     */
-
-    private boolean validateProfile(UserProfile profile) {
-        //Check empty fields on name and type
-        if (profile.getUserProfileName().trim().isEmpty()) {
-            return false;
-        }
-
-       /* //Check if the profile type is valid
-        if (!profile.getType().equalsIgnoreCase("System Profile")) {
-            return false;
-        }*/
-
-        //Check if profile already exist
-        for (UserProfile up : userProfileStore.userProfileList) {
-            if (up.equals(profile)) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     //Request
 
