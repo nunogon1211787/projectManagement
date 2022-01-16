@@ -119,12 +119,12 @@ public class Company {
 
     ////Talvez mudar para não buscar por index
     public UserProfile getUserProfile(int index) {
-        return new UserProfile(userProfileStore.userProfileList.get(index));
+        return new UserProfile(userProfileStore.getUserProfileList().get(index));
     }
 
     public UserProfile getUserProfile(String name) {
         UserProfile pro = null;
-        for (int i = 0; i < userProfileStore.userProfileList.size(); i++) {
+        for (int i = 0; i < userProfileStore.getUserProfileList().size(); i++) {
             if (Objects.equals(getUserProfile(i).getUserProfileName(), name)) {
                 pro = getUserProfile(i);
                 break;
