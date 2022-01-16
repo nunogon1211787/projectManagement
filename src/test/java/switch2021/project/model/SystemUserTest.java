@@ -1,13 +1,12 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class SystemUserTest {
+
     @Test
     public void verifyEmail() {
 
@@ -33,16 +32,32 @@ class SystemUserTest {
         assertFalse(joana.isYourEmail(emailCheck));
     }
 
-    /*@Test
-    public void verifyUpdateProfile(){
+    @Test
+    public void UpdateProfile(){
         //Arrange
-        Company com = new Company();
-        SystemUser user = new SystemUser("xxx","xxx@isep.ipp.pt","tester", "img_123", "123456", "123456", com.getUserProfile(0));
+        Company company = new Company();
+        UserProfileStore userProfileStore = company.getUserProfileStore();
+        SystemUserStore systemUserStore = company.getSystemUserStore();
+        SystemUser user = new SystemUser("xxx","xxx@isep.ipp.pt","tester", "123456" , "123456", "img_123", userProfileStore.getUserProfile(0));
         //Act
-        com.systemUserStore.addSystemUser(user);
+        systemUserStore.addSystemUser(user);
         // Assert
-        assertTrue(user.updateProfile(com.getUserProfile(0), com.getUserProfile(1)));
-    }*/
+        assertTrue(user.updateProfile(userProfileStore.getUserProfile(0), userProfileStore.getUserProfile(1)));
+    }
+
+    @Test
+    public void UpdateProfileAlreadyExist(){
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            Company company = new Company();
+            UserProfileStore userProfileStore = company.getUserProfileStore();
+            SystemUserStore systemUserStore = company.getSystemUserStore();
+            SystemUser user = new SystemUser("xxx","xxx@isep.ipp.pt","tester", "123456" , "123456", "img_123", userProfileStore.getUserProfile(0));
+            //Act
+            user.updateProfile(userProfileStore.getUserProfile(0), userProfileStore.getUserProfile(0));
+        });
+    }
 
     @Test
     public void verifyUpdateAndEncryptationOfPassword() {
@@ -182,7 +197,7 @@ class SystemUserTest {
         //Act
         SystemUser joana2 = joana.setAllData("Joana Silva", "Aluna_100", "img_900", joana);
         // Act / Assert
-        assertEquals(joana,joana2);
+        assertEquals(joana, joana2);
     }
 
     @Test
@@ -198,7 +213,7 @@ class SystemUserTest {
     }
 
     @Test
-    public void setAllDataFailUsernameLowLenght() {
+    public void setAllDataFailUsernameLowLength() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
@@ -222,7 +237,7 @@ class SystemUserTest {
     }
 
     @Test
-    public void setAllDataFailFunctionLowLenght() {
+    public void setAllDataFailFunctionLowLength() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange

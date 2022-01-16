@@ -1,17 +1,25 @@
-//package switch2021.project.model;
-//
-//import org.junit.jupiter.api.DisplayName;
-//import org.junit.jupiter.api.Test;
-//
-//import java.time.LocalDate;
-//import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.List;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//class CompanyTest {
-//
+package switch2021.project.model;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
+
+class CompanyTest {
+
+    @Test
+    public void companyConstructor() {
+        //Arrange
+        Company company = new Company();
+        //Assert
+        assertEquals(3,company.getUserProfileStore().getUserProfileList().size());
+        assertEquals(2,company.getTypologyStore().getTypologyList().size());
+        assertEquals(7,company.getProjectStatusStore().getprojectStatusList().size());
+    }
+
 //    @Test
 //    public void SearchUserByPartiallySwitchedEmail() {
 //
@@ -700,4 +708,4 @@
 //        //Assert
 //        assertEquals(resAllo1,resultexp);
 //    }
-//}
+}

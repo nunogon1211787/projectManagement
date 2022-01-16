@@ -72,7 +72,7 @@ public class Company {
         return this.userProfileStore;
     }
 
-    // SpecialProfile or ProjectRole
+    // SpecialProfile or ProjectRole (acho melhor a segunda opção)
 
     //Typology
     public TypologyStore getTypologyStore() {
@@ -159,6 +159,7 @@ public class Company {
 //        return true;
 //    }
 
+
     //Request
 
     /**
@@ -200,6 +201,4 @@ public class Company {
         }
         return result;
     }
-
-
 }
