@@ -230,6 +230,7 @@ public class Project {
     }
 
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
+
         Resource res = new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
         return res;
     }

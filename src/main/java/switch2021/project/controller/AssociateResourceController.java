@@ -6,12 +6,15 @@ import switch2021.project.model.Resource;
 import switch2021.project.model.SystemUser;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class AssociateResourceController {
     private Company company;
     private SystemUser user;
     private Project project;
     private Resource resource;
+    List<Project> arrayProject;
+    List<SystemUser> arraySystemUser;
 
 
     public AssociateResourceController(Company company, Project project){
@@ -19,6 +22,16 @@ public class AssociateResourceController {
         this.project = project;
         this.user = null;
         this.resource = null;
+    }
+
+    public List getProjectList (){
+        this.arrayProject = this.company.getProjectStore().getProjectList();
+        return arrayProject;
+    }
+
+    public List getSystemUserList (){
+        this.arraySystemUser = this.company.getSystemUserStore().getSystemUserList();
+        return arraySystemUser;
     }
 
     public boolean associateResource(String email, String projectCode, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
