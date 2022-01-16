@@ -35,9 +35,9 @@ public class Project {
      **/
 
     public Project(String code, String name, String description, Customer customer, Typology typology,
-                   BusinessSector businessSector, LocalDate startDate,ProjectStatus status, int numberOfSprints, double budget) {
+                   BusinessSector businessSector, LocalDate startDate, ProjectStatus status, int numberOfSprints, double budget) {
 
-        validateProjectFields(name, description);
+        validateProjectFields(name, description,budget,numberOfSprints);
 
         this.code = code;
         this.projectName = name;
@@ -162,7 +162,7 @@ public class Project {
         this.numberOfSprints = numberOfSprints;
     }
 
-    public void setBudget(int budget) {
+    public void setBudget(double budget) {
         this.budget = budget;
     }
 
@@ -184,15 +184,19 @@ public class Project {
      * Checks if @param projectName and @param description are emptry or have the minimum characters necessary
      */
 
-    private void validateProjectFields(String projectName, String description) {
+    public void validateProjectFields(String projectName, String description, double budget, int numberOfSprints) {
         if (projectName.trim().isEmpty())
-            throw new IllegalArgumentException("Project Name cannot be empty.");
+            throw new IllegalArgumentException("Project Name cannot be empty");
         if ((projectName.length() < 3))
             throw new IllegalArgumentException("Project Name must be at least 3 characters");
         if (description.trim().isEmpty())
-            throw new IllegalArgumentException("Description cannot be empty.");
+            throw new IllegalArgumentException("Description cannot be empty");
         if ((description.length() < 5))
             throw new IllegalArgumentException("Description must be at least 5 characters");
+        if (numberOfSprints <= 0)
+            throw new IllegalArgumentException("Number of Sprints must be greater than 0");
+        if (budget <= 0)
+            throw new IllegalArgumentException("Budget must be greater than 0");
     }
 
     /**
@@ -226,6 +230,7 @@ public class Project {
     }
 
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
+
         Resource res = new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
         return res;
     }

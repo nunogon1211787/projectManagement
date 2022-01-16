@@ -113,7 +113,7 @@ public class CreateUserStoryControllerTest {
                     new UserStoryStatus("To Do"), 12, "Fazer testes", 6);
         });
         // Assert
-        assertTrue(exception.getMessage().contains("Project does not exist."));
+        assertTrue(exception.getMessage().contains("Project code is empty."));
     }
 
 
