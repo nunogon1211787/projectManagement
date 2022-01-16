@@ -31,9 +31,9 @@ public class ProjectStore {
 
         Company company = App.getInstance().getCompany();
 
-        ProjectStatus status= company.getProjectStatusStore().getProjectStatusByDescription("Planned");
+        ProjectStatus status = company.getProjectStatusStore().getProjectStatusByDescription("Planned");
         return new Project(code, name, description, customer, typology, businessSector,
-                startDate,status, numberOfSprints, budget);
+                startDate, status, numberOfSprints, budget);
     }
 
     public void addProject(Project proj) {
@@ -70,7 +70,13 @@ public class ProjectStore {
         return projectList;
     }
 
-
+    public ProductBacklog getProductBacklog(String code) {
+        Project project = getProjectByCode(code);
+        if (project == null) {
+            throw new IllegalArgumentException("Project does not exist.");
+        }
+        return project.getProductBacklog();
+    }
 
     /**
      * Validation Methods
@@ -84,23 +90,6 @@ public class ProjectStore {
             }
         }
         return false;
-    }
-
-    public boolean validateProject(Project project) {
-        // check if project exists
-        if (checkProjectExists(project.getCode())) {
-            return false;
-        }
-
-        //check if numbers in Number of Sprints and budget are valid
-        if (project.getBudget() < 0 || project.getNumberOfSprints() < 0) {
-            return false;
-        }
-
-        //Check empty fields on code, name and description
-        return !project.getProjectName().trim().isEmpty()
-                && !project.getCode().trim().isEmpty()
-                && !project.getDescription().trim().isEmpty();
     }
 
     public boolean validateAllocation(SystemUser user, double percentageOfAllocation, LocalDate startDate, LocalDate
@@ -126,35 +115,12 @@ public class ProjectStore {
      * Save Methods
      */
 
-    public boolean saveProject(Project proj, String code) {
-        validateProject(proj);
-        overwriteProject(proj, code);
-        return true;
-    }
-
-    //NAO FUNCIONA
-
-    public void overwriteProject(Project proj, String code) {
-        int x = 0;
-        for (int i = 0; i < this.projectList.size(); i++) {
-                if (proj.getCode().equalsIgnoreCase(code)) {
-                    x = i;
-                }
-        }
-        this.projectList.set(x, proj);
-    }
-
     public boolean saveNewProject(Project proj) {
-        validateProject(proj);
-        addProject(proj);
-        return true;
-    }
-
-    public ProductBacklog getProductBacklog(String code) {
-        Project project = getProjectByCode(code);
-        if(project == null) {
-            throw new IllegalArgumentException("Project does not exist.");
+        boolean status = false;
+        if (!checkProjectExists(proj.getCode())) {
+            addProject(proj);
+            status = true;
         }
-        return  project.getProductBacklog();
+        return status;
     }
 }
