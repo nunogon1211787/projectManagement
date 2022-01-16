@@ -1,6 +1,7 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.Company;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,7 +11,8 @@ public class CreateUserProfileControllerTest {
 
     @Test
     public void createProfileWithSuccess() {
-        CreateUserProfileController createUserProfileController = new CreateUserProfileController();
+        Company company = new Company();
+        CreateUserProfileController createUserProfileController = new CreateUserProfileController(company);
         String name = "Cris_Dani";
         boolean userProfileCreated = createUserProfileController.createProfile(name);
         assertTrue(userProfileCreated);
@@ -19,7 +21,8 @@ public class CreateUserProfileControllerTest {
     @Test
     public void createProfileWithEmptyName() {
         // Arrange
-        CreateUserProfileController createUserProfileController = new CreateUserProfileController();
+        Company company = new Company();
+        CreateUserProfileController createUserProfileController = new CreateUserProfileController(company);
         String name = "";
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -32,7 +35,8 @@ public class CreateUserProfileControllerTest {
     @Test
     public void createProfileAlreadyExist() {
         // Arrange
-        CreateUserProfileController createUserProfileController = new CreateUserProfileController();
+        Company company = new Company();
+        CreateUserProfileController createUserProfileController = new CreateUserProfileController(company);
         String name = "Cris_Dani";
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
