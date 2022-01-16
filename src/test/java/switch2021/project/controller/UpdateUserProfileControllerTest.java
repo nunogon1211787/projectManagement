@@ -52,15 +52,6 @@ public class UpdateUserProfileControllerTest {
     @Test
     public void getUserProfileListTest() {
         //Arrange
-        Company company2 = new Company();
-        UpdateUserProfileController controllerTest2 = new UpdateUserProfileController(company2);
-        //Assert
-        assertEquals(controllerTest2.getUserProfileList(), userProfileStore.getUserProfileList());
-    }
-
-    @Test
-    public void getUserProfileListTest2() {
-        //Arrange
         UpdateUserProfileController controllerTest2 = new UpdateUserProfileController();
         //Assert
         assertEquals(controllerTest2.getUserProfileList(), userProfileStore.getUserProfileList());
