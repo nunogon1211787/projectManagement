@@ -3,7 +3,6 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
-import switch2021.project.model.UserProfile;
 import switch2021.project.model.SystemUser;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +14,7 @@ public class ChangePasswordControllerTest {
         //Arrange
         Company company = new Company();
         SystemUser user = new SystemUser("Joana", "123@isep.ipp.pt",
-                "Aluna", "AAA", "AAA", "img_123", company.getUserProfile("visitor"));
+                "Aluna", "AAA", "AAA", "img_123", company.getUserProfileStore().getUserProfile("visitor"));
         //Act
         company.getSystemUserStore().addSystemUser(user);
         //Assert
@@ -28,7 +27,7 @@ public class ChangePasswordControllerTest {
         //Arrange
         Company company = new Company();
         SystemUser user = new SystemUser("Joana", "123@isep.ipp.pt",
-                "Aluna", "AAA", "AAA", "", company.getUserProfile("visitor"));
+                "Aluna", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("visitor"));
         company.getSystemUserStore().addSystemUser(user);
         //Assert
         assertFalse(user.updatePassword("BBB", "CCC"));

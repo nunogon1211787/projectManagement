@@ -15,7 +15,12 @@ public class CreateNewTypologyController {
     }
 
     public boolean createTypology(String description) {
-        this.typology = this.typologyStore.createTypology(description);
-        return this.typologyStore.saveTypology(typology);
+
+        if (description.trim().isEmpty()) {
+            throw new IllegalArgumentException("Description can't be blank.");
+        } else {
+            this.typology = this.typologyStore.createTypology(description);
+            return this.typologyStore.saveTypology(typology);
+        }
     }
 }

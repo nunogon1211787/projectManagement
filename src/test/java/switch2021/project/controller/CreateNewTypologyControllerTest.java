@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
 import switch2021.project.model.TypologyStore;
 import switch2021.project.utils.App;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -30,6 +29,8 @@ public class CreateNewTypologyControllerTest {
         assertTrue(controller.createTypology("TypoTest"));
     }
 
+
+
     @Test
     public void createNewTypologyControllerNullDescriptionTest() {
         //Assert
@@ -48,7 +49,7 @@ public class CreateNewTypologyControllerTest {
             //Arrange
             CreateNewTypologyController cont = new CreateNewTypologyController(typologyStore);
             //Act
-            cont.createTypology("");
+            cont.createTypology("      ");
         });
     }
 }
