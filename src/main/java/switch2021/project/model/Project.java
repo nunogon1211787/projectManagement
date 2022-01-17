@@ -20,7 +20,7 @@ public class Project {
     private ProductBacklog productBacklog;
     private SystemUser productOwner; // Verificar a necessidade de se manter este atributo
 
-    private BusinessSector businessSector;  // Para já coloquei em tipo Business Sector e não lista. Depois será para mudar.
+    private BusinessSector businessSector;
     private List<Resource> projectTeam;
 
     private LocalDate startDate;
@@ -35,7 +35,9 @@ public class Project {
      **/
 
     public Project(String code, String name, String description, Customer customer, Typology typology,
-                   BusinessSector businessSector, LocalDate startDate, int numberOfSprints, double budget) {
+                   BusinessSector businessSector, LocalDate startDate, ProjectStatus status, int numberOfSprints, double budget) {
+
+        validateProjectFields(name, description,budget,numberOfSprints);
 
         this.code = code;
         this.projectName = name;
@@ -43,7 +45,7 @@ public class Project {
 
         this.customer = customer;
         this.typology = typology;
-        this.projectStatus = new Company().getProjectStatusStore().getProjectStatusByDescription("Planned");
+        this.projectStatus = status;
         this.businessSector = businessSector;
 
         this.startDate = startDate;
@@ -107,8 +109,8 @@ public class Project {
         return productOwner;
     }
 
-    public List<UserStory> getProductBacklog() {
-        return productBacklog.getUserStoryList();
+    public ProductBacklog getProductBacklog() {
+        return productBacklog;
     }
 
     public int getSprintDuration() {
@@ -160,7 +162,7 @@ public class Project {
         this.numberOfSprints = numberOfSprints;
     }
 
-    public void setBudget(int budget) {
+    public void setBudget(double budget) {
         this.budget = budget;
     }
 
@@ -176,15 +178,36 @@ public class Project {
         this.projectTeam = projectTeam;
     }
 
+
+    /**
+     * Validates Project Creation Fields
+     * Checks if @param projectName and @param description are emptry or have the minimum characters necessary
+     */
+
+    public void validateProjectFields(String projectName, String description, double budget, int numberOfSprints) {
+        if (projectName.trim().isEmpty())
+            throw new IllegalArgumentException("Project Name cannot be empty");
+        if ((projectName.length() < 3))
+            throw new IllegalArgumentException("Project Name must be at least 3 characters");
+        if (description.trim().isEmpty())
+            throw new IllegalArgumentException("Description cannot be empty");
+        if ((description.length() < 5))
+            throw new IllegalArgumentException("Description must be at least 5 characters");
+        if (numberOfSprints <= 0)
+            throw new IllegalArgumentException("Number of Sprints must be greater than 0");
+        if (budget <= 0)
+            throw new IllegalArgumentException("Budget must be greater than 0");
+    }
+
     /**
      * Methods UserStory creation (Cris US009)
      * - Create User Story method
      **/
 
-    public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
-        UserStory us = productBacklog.createUserStory(code, userStoryStatus, priority, description, timeEstimate);
-        return us != null && productBacklog.addUserStory(us);
-    }
+//    public boolean createUserStory(String userStoryStatus, int priority, String description, int timeEstimate) {
+//        UserStory us = productBacklog.createUserStory(code, userStoryStatus, priority, description, timeEstimate);
+//        return productBacklog.addUserStory(us);
+//    }
 
     /**
      * Resource Allocation Methods - (Carolina US007)
@@ -207,6 +230,7 @@ public class Project {
     }
 
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
+
         Resource res = new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
         return res;
     }
@@ -225,6 +249,10 @@ public class Project {
         return msg;
     }
 
+    public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
+        UserStory userStory = this.productBacklog.createUserStory(this.getCode(), userStoryStatus, priority, description, timeEstimate);
+        return this.productBacklog.saveUserStory(userStory);
+    }
 
     @Override
     public boolean equals(Object o) {

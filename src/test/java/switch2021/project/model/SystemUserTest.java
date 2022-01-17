@@ -1,13 +1,15 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.stores.SystemUserStore;
+import switch2021.project.stores.UserProfileStore;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class SystemUserTest {
+
     @Test
     public void verifyEmail() {
 
@@ -33,16 +35,32 @@ class SystemUserTest {
         assertFalse(joana.isYourEmail(emailCheck));
     }
 
-/*    @Test
-    public void verifyUpdateProfile(){
+    @Test
+    public void UpdateProfile(){
         //Arrange
-        Company com = new Company();
-        SystemUser user = new SystemUser("xxx","xxx@isep.ipp.pt","tester", "img_123", "123456", "123456", com.getUserProfile(0));
+        Company company = new Company();
+        UserProfileStore userProfileStore = company.getUserProfileStore();
+        SystemUserStore systemUserStore = company.getSystemUserStore();
+        SystemUser user = new SystemUser("xxx","xxx@isep.ipp.pt","tester", "123456" , "123456", "img_123", userProfileStore.getUserProfile(0));
         //Act
-        com.systemUserStore.addSystemUser(user);
+        systemUserStore.addSystemUser(user);
         // Assert
-        assertTrue(user.updateProfile(com.getUserProfile(0), com.getUserProfile(1)));
-    }*/
+        assertTrue(user.updateProfile(userProfileStore.getUserProfile(0), userProfileStore.getUserProfile(1)));
+    }
+
+    @Test
+    public void UpdateProfileAlreadyExist(){
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            Company company = new Company();
+            UserProfileStore userProfileStore = company.getUserProfileStore();
+            SystemUserStore systemUserStore = company.getSystemUserStore();
+            SystemUser user = new SystemUser("xxx","xxx@isep.ipp.pt","tester", "123456" , "123456", "img_123", userProfileStore.getUserProfile(0));
+            //Act
+            user.updateProfile(userProfileStore.getUserProfile(0), userProfileStore.getUserProfile(0));
+        });
+    }
 
     @Test
     public void verifyUpdateAndEncryptationOfPassword() {
@@ -173,6 +191,79 @@ class SystemUserTest {
     }
 
     @Test
+    public void setAllDataSucess() {
+
+        //Arrange
+        UserProfile tes = new UserProfile("ddd");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", tes);
+        //Act
+        SystemUser joana2 = joana.setAllData("Joana Silva", "Aluna_100", "img_900", joana);
+        // Act / Assert
+        assertEquals(joana, joana2);
+    }
+
+    @Test
+    public void setAllDataFailUsernameEmpty() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser(" ", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.checkAllData(" ", "Aluna_10", "img_123");
+        });
+    }
+
+    @Test
+    public void setAllDataFailUsernameLowLength() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("J", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.checkAllData("J", "Aluna_10", "img_123");
+        });
+    }
+
+    @Test
+    public void setAllDataFailFunctionEmpty() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+                    " ", "123", "123", "img_900", tes);
+            newUser.checkAllData("Joana Silva", " ", "img_123");
+        });
+    }
+
+    @Test
+    public void setAllDataFailFunctionLowLength() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.checkAllData("Joana Silva", "A", "img_123");
+        });
+    }
+
+    @Test
+    public void setAllDataFailPhotoEmpty() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "", tes);
+            newUser.checkAllData("Joana Silva", "Aluna_10", "");
+        });
+    }
+
+    @Test
     public void createSystemUserSuccess() {
         //Arrange
         String userName = "manueloliveira";
@@ -181,7 +272,11 @@ class SystemUserTest {
         String passwordConfirmation = "ghi";
         String function = "tester";
         String photo = "photo";
-        UserProfile profile = new UserProfile("Visitor");
+
+        Company company = new Company();
+        List<UserProfile> assignedProfileExpected = new ArrayList<>();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        assignedProfileExpected.add(profile);
         SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
 
         String userNameExpected = "manueloliveira";
@@ -189,8 +284,6 @@ class SystemUserTest {
         String passwordExpected = "ÊËÌ";
         String functionExpected = "tester";
         String photoExpected = "photo";
-        Company company = new Company();
-        UserProfile assignedProfileExpected = company.getUserProfileStore().getProfileByName("Visitor");
 
         //Act
         String userNameResult = newUser.getUserName();
@@ -199,7 +292,7 @@ class SystemUserTest {
         String functionResult = newUser.getFunction();
         String photoResult = newUser.getPhoto();
         boolean activateUserResult = newUser.getActivateUserStatus();
-        UserProfile assignedProfileResult = newUser.getAssignedProfile();
+        List<UserProfile> assignedProfileResult = newUser.getAssignedProfileList();
         //Assert
         assertEquals(userNameExpected, userNameResult);
         assertEquals(emailExpected, emailResult);
@@ -220,7 +313,7 @@ class SystemUserTest {
         String function = "tester";
         String photo = "photo";
         Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         //Act
         String result = newUser.encryptPassword(password);
@@ -238,7 +331,7 @@ class SystemUserTest {
         String function = "tester";
         String photo = "photo";
         Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         //Act
         String result = newUser.encryptPassword(password);
@@ -256,7 +349,7 @@ class SystemUserTest {
         String function = "tester";
         String photo = "photo";
         Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
 
         String encryptedPassword = newUser.getPassword();//encryptedPassword = "Ä\u0094Å\u0095Æ\u0096";
@@ -276,7 +369,7 @@ class SystemUserTest {
         String function = "tester";
         String photo = "photo";
         Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
 
         String encryptedPassword = newUser.getPassword();//encryptedPassword = "Ä\u0094Å\u0095Æ\u0096";
@@ -298,7 +391,7 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             Company company = new Company();
-            UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         });
     }
@@ -315,7 +408,7 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             Company company = new Company();
-            UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         });
     }
@@ -332,7 +425,7 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             Company company = new Company();
-            UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         });
     }
@@ -349,26 +442,11 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             Company company = new Company();
-            UserProfile profile = company.getUserProfileStore().getProfileByName("Visitor");
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         });
     }
 
-    /*@Test
-    void hasThisDataTest() {
-        //Input
-        Profile tes = new Profile("ddd", "pro");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "png_123", "HELLO", tes);
-        String name = "";
-        String email = "";
-        String func = "";
-        int isActive = -1;
-        int[] profiles = {};
-        //Result
-        assertTrue(joana.hasThisData(name, email, func, isActive, profiles));
-
-    }
-*/
 //    @Test
 //    void hasThisDataWithAll() {
 //        //Input

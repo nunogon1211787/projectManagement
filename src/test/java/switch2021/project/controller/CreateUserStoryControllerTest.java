@@ -18,127 +18,158 @@ public class CreateUserStoryControllerTest {
 
     @BeforeEach
     public void init() {
-        company = App.getInstance().getCompany();
-        project = company.getProjectStore().createProject("TEST", "Projecto Test", "decricao",
+        company = new Company();
+        project = company.getProjectStore().createProject("TEST", "Projecto Test", "criar us",
                 new Customer("marreta@email.pt", "name"),
-                company.getTypologyStore().getTypologyByDescription("Fixed Cost"),
+                company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
-        project.createUserStory(UserStoryStatus.TODO, 12, "Default Story", 6);
+        project.createUserStory(new UserStoryStatus("In progress"), 12, "Default Story", 6);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
-                "Product Owner", "AAA", "AAA", "", company.getUserProfile("Product Owne")));
+                "Product Owner", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("Product Owne")));
         company.getProjectStore().addProject(project);
+
     }
 
     @Test
     public void createUserStorySuccessFull() {
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController();
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(this.company);
         boolean isUserStoryCreated = createUserStoryController.createUserStory(project.getCode(),
-                UserStoryStatus.TODO.toString(), 12, "desc", 6);
+                new UserStoryStatus("To Do"), 12, "New Story", 6);
         assertTrue(isUserStoryCreated);
     }
 
     @Test
-    public void createUserStoryInvalidDuplicatedUserStory() {
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController();
-        boolean isUserStoryCreated = createUserStoryController.createUserStory(project.getCode(),
-                UserStoryStatus.IN_TEST.toString(), 1, "Default Story", 1);
-        assertFalse(isUserStoryCreated);
+    public void createUserStoryTimeEstimateInvalid() {
+        // Arrange
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(this.company);
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            boolean isUserStoryCreated = createUserStoryController.createUserStory(project.getCode(),
+                    new UserStoryStatus("To Do"), 12, "New Story", -6);
+        });
+        // Assert
+        assertTrue(exception.getMessage().contains("Check time estimate, cannot be < 0."));
     }
 
     @Test
-    public void createUserStoryTimeEstimateInvalid() {
-        //Arrange
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController();
-        int priority = 1;
-        String description = "teste";
-        int timeEstimate = -1;
+    public void createUserStorydescriptionInvalidEmpty() {
+        // Arrange
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(this.company);
         // Act
-        boolean isAdded = createUserStoryController.createUserStory(project.getCode(),
-                UserStoryStatus.IN_TEST.toString(), priority, description, timeEstimate);
-        //Assert
-        assertFalse(isAdded);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            boolean isUserStoryCreated = createUserStoryController.createUserStory(project.getCode(),
+                    new UserStoryStatus("To Do"), 12, "", 6);
+        });
+        // Assert
+        assertTrue(exception.getMessage().contains("Description cannot be blank."));
+    }
+
+    @Test
+    public void createUserStorydescriptionInvalidShort() {
+        // Arrange
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(this.company);
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            boolean isUserStoryCreated = createUserStoryController.createUserStory(project.getCode(),
+                    new UserStoryStatus("To Do"), 12, "str", 6);
+        });
+        // Assert
+        assertTrue(exception.getMessage().contains("Description must be at least 5 characters"));
     }
 
     @Test
     public void createUserStoryPriorityInvalid() {
-        //Arrange
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController();
-        int priority = -1;
-        String description = "teste";
-        int timeEstimate = 1;
+        // Arrange
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(this.company);
         // Act
-        boolean isAdded = createUserStoryController.createUserStory(project.getCode(),
-                UserStoryStatus.IN_TEST.toString(), priority, description, timeEstimate);
-        //Assert
-        assertFalse(isAdded);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            boolean isUserStoryCreated = createUserStoryController.createUserStory(project.getCode(),
+                    new UserStoryStatus("To Do"), -12, "Fazer testes", 6);
+        });
+        // Assert
+        assertTrue(exception.getMessage().contains("Check priority, cannot be < 0."));
     }
 
     @Test
-    public void createUserStoryUserStoryStatusInvalid() {
-        //Arrange
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController();
-        int priority = 1;
-        String description = "teste";
-        int timeEstimate = 1;
+    public void createUserStoryAlreadyExist() {
+        // Arrange
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(this.company);
         // Act
-        boolean isAdded = createUserStoryController.createUserStory(project.getCode(),
-                "Erro", priority, description, timeEstimate);
-        //Assert
-        assertFalse(isAdded);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            boolean isUserStoryCreated = createUserStoryController.createUserStory(project.getCode(),
+                    new UserStoryStatus("In progress"), 12, "Default Story", 6);
+        });
+        // Assert
+        assertTrue(exception.getMessage().contains("Repeated user story inserted, same code project and description."));
+    }
+
+    @Test
+    public void createUserStoryCodeProjectInvalidBlank() {
+        // Arrange
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(this.company);
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            boolean isUserStoryCreated = createUserStoryController.createUserStory("",
+                    new UserStoryStatus("To Do"), 12, "Fazer testes", 6);
+        });
+        // Assert
+        assertTrue(exception.getMessage().contains("Project code is empty."));
     }
 
 
     @Test
-    public void createUserStoryDescriptionInvalid() {
-        //Arrange
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController();
-        int priority = 1;
-        int timeEstimate = 1;
+    public void createUserStoryCodeProjectInvalidNotExist() {
+        // Arrange
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(this.company);
         // Act
-        boolean isAdded = createUserStoryController.createUserStory(project.getCode(),
-                UserStoryStatus.IN_TEST.toString(), priority, null, timeEstimate);
-        boolean isAdded2 = createUserStoryController.createUserStory(project.getCode(),
-                UserStoryStatus.IN_TEST.toString(), priority, "", timeEstimate);
-        boolean isAdded3 = createUserStoryController.createUserStory(project.getCode(),
-                UserStoryStatus.IN_TEST.toString(), priority, "   ", timeEstimate);
-        //Assert
-        assertFalse(isAdded);
-        assertFalse(isAdded2);
-        assertFalse(isAdded3);
-    }
-
-    @Test
-    public void getProjectListWithPORightEmptyList() {
-        //Arrange
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController();
-        // Act
-        List<Project> projectList = createUserStoryController.getProjectListWithPORight("email");
-        //Assert
-        assertEquals(0, projectList.size());
-
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            boolean isUserStoryCreated = createUserStoryController.createUserStory("ssss",
+                    new UserStoryStatus("To Do"), 12, "Fazer testes", 6);
+        });
+        // Assert
+        assertTrue(exception.getMessage().contains("Project does not exist."));
     }
 
     @Test
     public void getProjectListWithPORightWithEmptyEmailAndGetEmptyList() {
         //Arrange
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController();
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(this.company);
         // Act
-        List<Project> projectList = createUserStoryController.getProjectListWithPORight("");
-        List<Project> projectList2 = createUserStoryController.getProjectListWithPORight(null);
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            List<Project> projectList = createUserStoryController.getProjectListWithPORight("");
+            List<Project> projectList2 = createUserStoryController.getProjectListWithPORight(null);
+        });
         //Assert
-        assertEquals(0, projectList.size());
-        assertEquals(0, projectList2.size());
+        assertTrue(exception.getMessage().contains("Invalid email inserted"));
+    }
+
+
+    @Test
+    public void getProjectListWithPORighListWithOneResults() {
+        //Arrange
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(this.company);
+        // Act
+        List<Project> projectList = createUserStoryController.getProjectListWithPORight("123@isep.ipp.pt");
+        //Assert
+        assertEquals(1, projectList.size());
 
     }
 
     @Test
-    public void getProjectListWithPORighListWithResults() {
+    public void getProjectListWithPORighListWithTwoResults() {
         //Arrange
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController();
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(this.company);
+        project = company.getProjectStore().createProject("other TEST", "CDC", "criar projeto",
+                new Customer("marreta@email.pt", "name"),
+                company.getTypologyStore().getTypology("Fixed Cost"),
+                new BusinessSector("description"), LocalDate.now(), 10, 100000);
+        project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
+                "Product Owner", "AAA", "AAA", "", company.getUserProfile("Product Owne")));
+        company.getProjectStore().addProject(project);
         // Act
         List<Project> projectList = createUserStoryController.getProjectListWithPORight("123@isep.ipp.pt");
         //Assert
-        assertNotEquals(0, projectList.size());
+        assertEquals(2, projectList.size());
 
     }
 

@@ -16,7 +16,7 @@ public class Resource {
     private double costPerHour;
     private double percentageOfAllocation;
 
-    private ProjectRolesStore role;
+    private ProjectRoles role;
 
     /**
      * Construtor de Resource (Carolina US007)
@@ -49,6 +49,8 @@ public class Resource {
                         (this.percentageOfAllocation == that.getPercentageOfAllocation());
     }
 
+
+
     /** Métodos "Getter" dos atributos (Carolina US007) **/
 
     public SystemUser getUser() {
@@ -67,12 +69,16 @@ public class Resource {
         return costPerHour;
     }
 
-    public ProjectRolesStore getProjectRoles() {
+    public ProjectRoles getProjectRoles() {
         return role;
     }
 
     public double getPercentageOfAllocation() {
         return percentageOfAllocation;
+    }
+
+    public ProjectRoles getRole() {
+        return role;
     }
 
     /** Método check se o user é aquele que queremos (Carolina US007) **/
@@ -85,7 +91,6 @@ public class Resource {
     public boolean checkAllocationPeriod(LocalDate startDate, LocalDate endDate){
         boolean msg = false;
         if(startDate.isAfter(this.endDate) || endDate.isBefore(this.startDate)){
-
             msg = false;
         } else if (startDate.isEqual(this.startDate) || startDate.isEqual(this.endDate) || endDate.isEqual(this.endDate) || endDate.isEqual(this.startDate) ){
             msg = true;

@@ -1,105 +1,57 @@
 package switch2021.project.model;
 
-import java.util.Locale;
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class UserProfile {
 
-    /**
-     * Classe Profile Atributes
-     * Attributes
-     **/
+    /** Classe Profile Attributes **/
     private int id_Profile;
-    private String name;
-    //private String type;
+    private String userProfileName;
 
 
-    /**
-     * Método para verificar se atributo "type" do objecto é igual a "type" do parâmetro.
-     *
-     */
-
-    public boolean hasEqualType (String type) {return this.type.equals(type);}
-
-
-
-
-    public UserProfile(String name) {
-        this.id_Profile = ID_PROFILE_GENERATOR.getAndIncrement();
-        this.name = name;
-        //this.type = type;
+    /** Profile Constructors */
+    public UserProfile(String userProfileName) {
+        checkAttributeRules(userProfileName);
+        this.userProfileName = userProfileName;
     }
 
-    /**
-     * Copy Constructor
-     */
 
+    /** Copy Constructor */
     public UserProfile(UserProfile originalProfile) {
         this.id_Profile = originalProfile.id_Profile;
-        this.name = originalProfile.name;
-        //this.type = originalProfile.type;
+        this.userProfileName = originalProfile.userProfileName;
     }
 
-    /**
-     * Profle Constructors
-     */
-    //Create ID automatically
-    private static AtomicInteger ID_PROFILE_GENERATOR = new AtomicInteger();
 
-    /**
-     * Getters e Setters
-     */
-
-    public String getName() {
-        return this.name;
-    }
-
-    public int getId() {
+    /** Getters e Setters **/
+    public int getId_UserProfile() {
         return id_Profile;
     }
 
-    /*public String getType() {
-        return type;
-    }*/
-
-    public void setName(String newName) {
-        this.name = newName;
+    public String getUserProfileName() {
+        return this.userProfileName;
     }
 
-    //public void setType(String newType) { this.type = newType; }
-
-    /**
-     * Method to verify if a given ID matches with object ID
-     */
-
-    public boolean isValidId(int x) {
-        try {
-            if (x == this.id_Profile) {
-                return true;
-            }
-        } catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
-        }
-        return false;
+    public void setUserProfileName(String newName) {
+        this.userProfileName = newName;
     }
 
-    public boolean isValidName(String name) {
-        if(!name.toUpperCase(Locale.ROOT).equals(this.name.toUpperCase())) {
-            return false;
-        }
-        return true;
+    public void setId_UserProfile(int id) {this.id_Profile = id;}
+
+
+    /** Method to validate entered data (name) by Administrator */
+    private void checkAttributeRules(String name) {
+        //Check empty field on name
+        if (name.trim().isEmpty()) throw new IllegalArgumentException("Name cannot be blank.");
     }
 
-    //public boolean hasType(String type){ return this.type.equalsIgnoreCase(type);}
 
+    /** Override Methods **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserProfile that = (UserProfile) o;
-        return (this.getName().equals(that.getName())) /*&& (this.getType().equals(getType()))*/;
+        return (this.getUserProfileName().equals(that.getUserProfileName()));
     }
     //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
     // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
-
 }

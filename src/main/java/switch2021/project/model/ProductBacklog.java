@@ -6,12 +6,15 @@ import java.util.List;
 
 public class ProductBacklog {
 
+    /** UserStory Store Attributes (backlog). Contains a UserStory list. **/
     private List<UserStory> userStoryList;
 
+    /** Constructor **/
     public ProductBacklog() {
         userStoryList = new ArrayList<>();
     }
 
+    /** Getters and Setters Methods. **/
     public List<UserStory> getUserStoryList() {
         return userStoryList;
     }
@@ -21,52 +24,41 @@ public class ProductBacklog {
     }
 
     /**
+     * Methods for create UserStory to the productBacklog (Cris US009)
+     **/
+
+    public UserStory createUserStory(String code, UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
+        return new UserStory(code, userStoryStatus, priority, description, timeEstimate);
+    }
+
+    /**
+     * Methods for save UserStory to the productBacklog - validate duplicate for description (Cris US009)
+     **/
+
+    public boolean saveUserStory(UserStory userStory){
+        if(!validateUserStory(userStory)){
+            throw new IllegalArgumentException("Repeated user story inserted, same code project and description.");
+        }
+        return addUserStory(userStory);
+    }
+
+    /**
      * Methods for addUserStory to the productBacklog (Cris US009)
      **/
 
-    public boolean addUserStory(UserStory us) {
+    private boolean addUserStory(UserStory us) {
         this.userStoryList.add(us);
         return true;
     }
 
-    /**
-     * Methods for validate data (Cris US009)
-     **/
-
-    private boolean isValidUserStory(String code, UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
-        //check if priority is invalid
-        if (priority < 0) {
-            return false;
-        }
-
-        //check if description is invalid
-        if (description == null || description.trim().isEmpty()) {
-            return false;
-        }
-
+    /** Validation Methods. **/
+    private boolean validateUserStory(UserStory userStory) {
         // check duplicate story
-        for (UserStory userStory : userStoryList) {
-            if (description.trim().equalsIgnoreCase(userStory.getDescription().trim()) && userStory.getProjectCode().equals(code)) {
-                return false;
+        for (UserStory us : userStoryList) {
+            if (us.getDescription().trim().equalsIgnoreCase(userStory.getDescription().trim()) && userStory.getProjectCode().equals(us.getProjectCode())) {
+                throw new IllegalArgumentException("Repeated user story inserted, same code project and description.");
             }
         }
-
-        // check invalid project code
-        if (code == null || code.trim().isEmpty()) {
-            return false;
-        }
-
-        // check estimated time is invalid
-        if (timeEstimate < 0) {
-            return false;
-        }
-
         return true;
     }
-
-    public UserStory createUserStory(String code, UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate){
-        boolean isDataValid = isValidUserStory(code, userStoryStatus, priority, description, timeEstimate);
-        return isDataValid ? new UserStory(code, userStoryStatus, priority, description, timeEstimate) : null;
-    }
-
 }

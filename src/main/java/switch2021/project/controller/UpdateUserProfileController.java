@@ -1,14 +1,15 @@
 package switch2021.project.controller;
 
-import switch2021.project.model.Company;
-import switch2021.project.model.UserProfile;
-import switch2021.project.model.SystemUser;
-import switch2021.project.model.UserProfile;
+import switch2021.project.model.*;
+import switch2021.project.stores.SystemUserStore;
+import switch2021.project.stores.UserProfileStore;
 import switch2021.project.utils.App;
+import java.util.List;
 
 public class UpdateUserProfileController {
-
     private Company company;
+    private UserProfileStore userProfileStore;
+    private SystemUserStore systemUserStore;
     private SystemUser user;
 
     public UpdateUserProfileController() {
@@ -17,21 +18,28 @@ public class UpdateUserProfileController {
 
     public UpdateUserProfileController(Company company) {
         this.company = company;
+        this.userProfileStore = company.getUserProfileStore();
+        this.systemUserStore = company.getSystemUserStore();
         this.user = null;
     }
 
-    /*public SystemUser getUser(String email) {
-        return this.company.getUserByEmail(email);
-    }*/
+    public SystemUser getUser(String email) {
+        SystemUser user = systemUserStore.getUserByEmail(email);
+        if(user == null) {
+            throw new IllegalArgumentException("This email doesn't exist.");
+        }
+        return user;
+    }
 
+    public List<UserProfile> getUserProfileList() {
+        return userProfileStore.getUserProfileList();
+    }
 
-    ///// Rever Método *****************
-    /*public boolean updateProfile(SystemUser user, UserProfile oldProfile, UserProfile newProfile) {
-
+    public boolean updateProfile(SystemUser user, UserProfile oldProfile, UserProfile newProfile) {
         this.user = user;
         this.user.updateProfile(oldProfile, newProfile);
-        this.company.saveSystemUser(user);
+        this.systemUserStore.saveSystemUser(user);
 
         return true;
-    }*/
+    }
 }

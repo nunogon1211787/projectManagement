@@ -13,7 +13,7 @@ class UserProfileTest {
         UserProfile test = new UserProfile("admin");
         //Expected
         String expected = "admin";
-        String result = test.getName();
+        String result = test.getUserProfileName();
         //Result
         assertEquals(expected, result);
     }
@@ -23,10 +23,10 @@ class UserProfileTest {
         //input
         UserProfile test = new UserProfile("admin");
         String newName = "visitor";
-        test.setName(newName);
+        test.setUserProfileName(newName);
         //Expected
         String expected = "visitor";
-        String result = test.getName();
+        String result = test.getUserProfileName();
         //Result
         assertEquals(expected, result);
     }
@@ -78,11 +78,11 @@ class UserProfileTest {
         UserProfile test = new UserProfile("admin");
         UserProfile copyTest = new UserProfile(test);
         String newName = "visitor";
-        copyTest.setName(newName);
+        copyTest.setUserProfileName(newName);
         //Expected
         String expected = "visitor";
-        String result = copyTest.getName();
-        String nameOriginal = test.getName();
+        String result = copyTest.getUserProfileName();
+        String nameOriginal = test.getUserProfileName();
         //Result
         assertEquals(expected, result);
         assertEquals("admin", nameOriginal);

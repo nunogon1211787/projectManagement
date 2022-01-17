@@ -1,18 +1,18 @@
 package switch2021.project.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import switch2021.project.utils.App;
+
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Getters e Setters - Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java.
+ * Getters e Setters e Override - Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java.
  */
-@Getter
-@Setter
+
+@Data
 
 public class UserStory {
-
 
     /**
      * Attributes
@@ -26,10 +26,11 @@ public class UserStory {
     private long id_UserStory;
 
     /**
-     * Constructors
+     * Constructor
      */
 
     public UserStory(String projectCode, UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
+        isValidUserStory(projectCode, userStoryStatus, priority, description, timeEstimate);
         this.id_UserStory = ID_GENERATOR.getAndIncrement();
         this.projectCode = projectCode;
         this.userStoryStatus = userStoryStatus;
@@ -38,14 +39,40 @@ public class UserStory {
         this.timeEstimate = timeEstimate;
     }
 
-    //Create ID automatically
-    private static AtomicInteger ID_GENERATOR = new AtomicInteger(001);
+    /**
+     * Method to validate entered data (name) by Product Owner
+     * (Cris US009)
+     */
+    private boolean isValidUserStory(String code, UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
+        //check if priority is invalid
+        if (priority < 0) {
+            throw new IllegalArgumentException("Check priority, cannot be < 0.");
+        }
+
+        //check if description is invalid
+        if (description == null || description.trim().isEmpty()) {
+            throw new IllegalArgumentException("Description cannot be blank.");
+        }
+        if (description.length() < 5) {
+            throw new IllegalArgumentException("Description must be at least 5 characters");
+        }
+
+        // check invalid project code
+        if (code == null || code.trim().isEmpty()) {
+            throw new IllegalArgumentException("Project does not exist.");
+        }
+
+        // check estimated time is invalid
+        if (timeEstimate < 0) {
+            throw new IllegalArgumentException("Check time estimate, cannot be < 0.");
+        }
+
+
+        return true;
+    }
 
     /**
-     * @return the join between the project code and the ID that will be generated automatically
+     * ID_UserProfile Generator.
      */
-
-    public String getUserStoryStringIdentifier() {
-        return projectCode + "-" + id_UserStory;
-    }
+    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
 }
