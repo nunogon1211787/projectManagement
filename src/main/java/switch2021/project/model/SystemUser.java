@@ -244,8 +244,27 @@ public class SystemUser {
         return result;
     }
 
-    public boolean isYourID(int id){return this.userId == id ;}
+    public boolean isYourName (String name ){return this.userName.equals(name) ;}
 
+    /**
+     * Method to validate if user as already has the profile requested
+     *
+     */
+
+    public boolean hasProfile (UserProfile profile){
+
+        boolean profileStatus = false;
+
+        for (UserProfile profileCheck:assignedProfileList){
+
+            if (profile.equals(profileCheck)){
+
+                profileStatus = true;
+            }
+        }
+
+        return profileStatus;
+    }
 
 
     /**

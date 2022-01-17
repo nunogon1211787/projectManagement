@@ -65,12 +65,13 @@ class UserProfileTest {
         int check4 = 3;
         int check5 = 4;
         //Result
-        assertTrue(test1.isValidId(check1));
+        /**assertTrue(test1.isValidId(check1));
         assertTrue(test2.isValidId(check2));
         assertTrue(test3.isValidId(check3));
         assertTrue(test4.isValidId(check4));
         assertTrue(test5.isValidId(check5));
-    }*/
+         **/
+    }
 
     @Test
     void copyConstructorTestName() {

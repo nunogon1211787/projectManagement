@@ -727,6 +727,29 @@ class CompanyTest {
 //        LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
 //        LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
 //        Resource resAllo2 = new Resource(newUser2, startDateToAllocate, endDateToAllocate, 100, .5);
+
+        /** project **/
+/**
+    }
+
+   /* @Test
+    public void saveRequestProfile() {
+        //Arrange
+
+        Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+        int initialSize = Request.getArrayRequest().size();
+
+        Request.saveRequestProfile(newUser);
+        int expected = initialSize + 1;
+        //Act
+        int result = company.getArraySyUser().size();
+        //Assert
+        assertEquals(expected, result);
+    }
+
+    */
+
+//}
 //
 //        /** project **/
 //        Company comTest = new Company();

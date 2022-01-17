@@ -20,9 +20,8 @@ public class Company {
     private CustomerStore customerStore;
     private BusinessSectorStore businessSectorStore;
     private TypologyStore typologyStore;
+    private RequestStore requestStore;
 
-    // falta colocar a chamada para o request quando se criar a página;
-    List<Request> requestList;
 
     /**
      * Company Constructor
@@ -39,6 +38,7 @@ public class Company {
         this.businessSectorStore = new BusinessSectorStore();
         this.projectStatusStore = new ProjectStatusStore();
         this.userStoryStatusStore = new UserStoryStatusStore();
+        this.requestStore = new RequestStore();
 
         this.userProfileStore.populateDefault();
         this.typologyStore.populateTypologyList();
@@ -96,6 +96,16 @@ public class Company {
         return this.businessSectorStore;
     }
 
+    public RequestStore getRequestStore() {return requestStore;}
+
+    /**
+     * Create Method
+     **/
+
+    public UserProfile createProfile(String name) {
+        return new UserProfile(name);
+    }
+
     /**
      * Getter Methods
      **/
@@ -136,45 +146,6 @@ public class Company {
     }
 
 
-    //Request
 
-    /**
-     * Add Method
-     */
 
-    public boolean addRequest(Request request) {
-        this.requestList.add(request);
-        return true;
-
-    }
-
-    /**
-     * Validation Method
-     */
-
-    private boolean validateRequest(Request newRequest) {
-
-        //Check if request already exist
-        for (Request up : requestList) {
-            if (up.equals(newRequest)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Save Method
-     */
-
-    public boolean saveRequest(Request newRequest) {
-
-        boolean result = false;
-
-        if (validateRequest(newRequest)) {
-            addRequest(newRequest);
-            result = true;
-        }
-        return result;
-    }
 }
