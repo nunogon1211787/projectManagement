@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.ListIterator;
 
 public class Sprint {
 
@@ -12,9 +13,10 @@ public class Sprint {
     private int duration;
     private Project proj;
 
+    private SprintBacklog sprintUserStorylist;
+
     private LocalDate startDate; /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
     private LocalDate endDate; /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
-
 
     /**
      * Construtor de Sprint
@@ -33,7 +35,5 @@ public class Sprint {
     public void changeSprintDuration(int x){
         this.duration = x;
     }
-
-
 
 }

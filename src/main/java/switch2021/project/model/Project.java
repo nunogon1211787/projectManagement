@@ -21,6 +21,7 @@ public class Project {
     private SystemUser productOwner; // Verificar a necessidade de se manter este atributo
 
     private BusinessSector businessSector;
+
     private List<Resource> projectTeam;
 
     private LocalDate startDate;
