@@ -1,4 +1,7 @@
-package switch2021.project.model;
+package switch2021.project.stores;
+
+import switch2021.project.model.SystemUser;
+import switch2021.project.model.UserProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +13,11 @@ public class SystemUserStore {
 
     //Constructor
     public SystemUserStore() {
+
         this.systemUserList = new ArrayList<>();
     }
 
-    public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo,UserProfile visitor) {
+    public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor) {
         SystemUser user;
         //try {
         user = new SystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);

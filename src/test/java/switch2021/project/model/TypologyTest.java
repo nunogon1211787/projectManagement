@@ -2,6 +2,8 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import switch2021.project.stores.TypologyStore;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TypologyTest {

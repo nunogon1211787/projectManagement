@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.controller.AssociateResourceController;
-import switch2021.project.utils.App;
+import switch2021.project.stores.ProjectStore;
 
 import java.time.LocalDate;
 

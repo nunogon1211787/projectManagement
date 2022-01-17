@@ -1,5 +1,6 @@
-package switch2021.project.model;
+package switch2021.project.stores;
 
+import switch2021.project.model.*;
 import switch2021.project.utils.App;
 
 import java.time.LocalDate;

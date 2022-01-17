@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.stores.SystemUserStore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -162,7 +163,6 @@ public class SystemUserStoreTest {
                 "PO", "hello123", "hello123", "photo.png",profile);
         //Assert
         assertTrue(systemUser.isYourEmail("anaguedes@beaver.com"));
-
     }
 
 
