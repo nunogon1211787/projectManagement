@@ -13,7 +13,7 @@ public class EditProjectInfoController {
     private Project project;
     private ProjectStore projectStore;
     List<Project> arrayProject;
-    private List projectTeam;
+    private ProjectTeam projectTeam;
 
 
     public List getProjectList (){
@@ -40,7 +40,7 @@ public class EditProjectInfoController {
         this.project.setBudget(budget);
         this.project.setProjectStatus(status);
         this.project.setSprintDuration(sprintDuration);
-        this.project.setProjectTeam(projectTeam);
+//        this.project.setProjectTeam(projectTeam);
         return true;
     }
 
