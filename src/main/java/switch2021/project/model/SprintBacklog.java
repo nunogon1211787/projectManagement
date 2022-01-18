@@ -5,24 +5,28 @@ import java.util.List;
 
 public class SprintBacklog {
 
-    /** Class Atribures **/
+    /** Calss Atributtes **/
+    private final List<UserStoryOfSprint> userStoryOfSprintList;
 
-    private List<UserStory> sprintList;
-
-    /** Class constructor **/
     public SprintBacklog() {
-        this.sprintList = new ArrayList<>();
+        this.userStoryOfSprintList = new ArrayList<>();
+    }
+    /** Create User Story Of Sprint **/
+    public UserStoryOfSprint createUSerStoryOfSprint (UserStory userStory, int effort) {
+        return new UserStoryOfSprint(userStory, effort );
     }
 
-    /** Getter **/
-    public List<UserStory> getSprintList() {
-        return sprintList;
+    /**Getter **/
+    public List<UserStoryOfSprint> getUserStoryOfSprintList() {
+        return userStoryOfSprintList;
     }
 
-    /** Add spint to list **/
-    public boolean addSprint(UserStory sprint) {
-        this.sprintList.add(sprint);
+    /** Add User Story Of Sprint **/
+    public boolean addUserStory(UserStoryOfSprint story) {
+        this.userStoryOfSprintList.add(story);
         return true;
     }
+
+
 
 }
