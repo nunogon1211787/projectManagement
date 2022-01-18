@@ -13,19 +13,18 @@ public class Request {
     private LocalDate requestDate;
     private SystemUser user;
     private UserProfile profileRequested;
-    private boolean statusRequest;
+    private boolean requestStatus;
 
     /**
      * construtor da classe "Request"
      **/
 
     public Request(UserProfile profile, SystemUser user) {
-
         this.idRequest = idRequest;
         this.requestDate = LocalDate.now();
         this.user = user;
         this.profileRequested = profile;
-        this.statusRequest = false;
+        this.requestStatus = false;
     }
 
     /**
@@ -40,7 +39,17 @@ public class Request {
 
     public Integer getIdRequest() {return this.idRequest;}
 
-    public boolean isStatusRequest() {return statusRequest;}
+    public boolean getRequestStatus() {return requestStatus;}
+
+
+    /**
+     * Method to change request status
+     * */
+
+    public void changeRequestStatus(Request request){
+        this.requestStatus =true;
+
+    }
 
     @Override
     public boolean equals(Object o) {
