@@ -22,7 +22,7 @@ public class Project {
 
     private BusinessSector businessSector;
     private List<Sprint> sprintList;
-    private List<Resource> projectTeam;
+    private ProjectTeam projectTeam;
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -55,7 +55,7 @@ public class Project {
         this.budget = budget;
 
         this.productBacklog = new ProductBacklog();
-      this.projectTeam = new ProjectTeam();
+        this.projectTeam = new ProjectTeam();
 //        this.projectTeam = new ProjectTeam(res);
     }
 
@@ -117,6 +117,18 @@ public class Project {
 
     public int getSprintDuration() {
         return sprintDuration;
+    }
+
+    public Sprint getSprint(long id) {
+        Sprint sprint = null;
+        for(Sprint sprt:sprintList) {
+            if(sprt.getNumber() == id) {
+                sprint = sprt;
+                break;
+            }
+        }
+        return sprint;
+
     }
 
     /**
@@ -260,6 +272,15 @@ public class Project {
         return this.productBacklog.saveUserStory(userStory);
     }
 
+    /** add Srpint **/
+
+    public boolean addSprint(Sprint sprint) {
+        this.sprintList.add(sprint);
+        return true;
+    }
+
+
+    /** Override **/
     @Override
     public boolean equals(Object o) {
         Project that = (Project) o;

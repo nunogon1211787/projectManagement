@@ -22,11 +22,8 @@ public class SprintBacklog {
     }
 
     /** Add User Story Of Sprint **/
-    public boolean addUserStory(UserStoryOfSprint story) {
+    public void addUserStory(UserStoryOfSprint story) {
         this.userStoryOfSprintList.add(story);
-        return true;
     }
-
-
 
 }

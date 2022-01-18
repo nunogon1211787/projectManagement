@@ -19,6 +19,17 @@ public class ProductBacklog {
         return userStoryList;
     }
 
+    public UserStory getUserStoryById(long id) {
+        UserStory userStory = null;
+        for(UserStory us:userStoryList) {
+            if(us.getId_UserStory() == id) {
+                userStory = us;
+                break;
+            }
+        }
+        return userStory;
+    }
+
     public void setUserStoryList(List<UserStory> userStoryList) {
         this.userStoryList = userStoryList;
     }

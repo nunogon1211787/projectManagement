@@ -12,17 +12,20 @@ public class AddUserStoryToSprintbacklogTest {
     @Test
     @DisplayName("Creat Story in sprint")
     public void createStoryInSprint() {
-        UserStoryStatus status = new UserStoryStatus("statusTet");
-        UserStory userStory = new UserStory("test",status, 2,"teste", 5);
-        SprintBacklog testBacklog = new SprintBacklog();
-        UserStoryOfSprint test = testBacklog.createUSerStoryOfSprint(userStory,8);
+        //Arrange
 
-        assertEquals(test,testBacklog.getUserStoryOfSprintList().get(0));
     }
 
     @Test
     @DisplayName("Add Story to backlog")
     public void addStoryToBacklog() {
+        UserStoryStatus status = new UserStoryStatus("statusTet");
+        UserStory userStory = new UserStory(status, 2,"teste", 5);
+        SprintBacklog testBacklog = new SprintBacklog();
+        UserStoryOfSprint test = testBacklog.createUSerStoryOfSprint(userStory,8);
+        testBacklog.addUserStory(test);
 
+        //Result
+        assertEquals(test,testBacklog.getUserStoryOfSprintList().get(0));
     }
 }
