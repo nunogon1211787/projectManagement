@@ -1,7 +1,7 @@
 package switch2021.project.model;
 
 import java.time.LocalDate;
-import java.util.Objects;
+import java.util.List;
 
 public class Resource {
 
@@ -16,7 +16,7 @@ public class Resource {
     private double costPerHour;
     private double percentageOfAllocation;
 
-    private ProjectRoles role;
+    private List<ResourceRole> roleList;
 
     /**
      * Construtor de Resource (Carolina US007)
@@ -27,7 +27,6 @@ public class Resource {
         checkCostPerHour(costPerHour);
 
         this.user = user;
-        //this.project = project;
         this.startDate = startDate;
         this.endDate = endDate;
         this.costPerHour = costPerHour;
@@ -69,16 +68,12 @@ public class Resource {
         return costPerHour;
     }
 
-    public ProjectRoles getProjectRoles() {
-        return role;
-    }
-
     public double getPercentageOfAllocation() {
         return percentageOfAllocation;
     }
 
-    public ProjectRoles getRole() {
-        return role;
+    public List<ResourceRole> getRoleList() {
+        return roleList;
     }
 
     /** Método check se o user é aquele que queremos (Carolina US007) **/

@@ -22,7 +22,7 @@ public class Project {
 
     private BusinessSector businessSector;
 
-    private List<Resource> projectTeam;
+    private ProjectTeam projectTeam;
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -55,7 +55,7 @@ public class Project {
         this.budget = budget;
 
         this.productBacklog = new ProductBacklog();
-        this.projectTeam = new ArrayList<>();
+        this.projectTeam = new ProjectTeam();
     }
 
     /**
@@ -175,7 +175,7 @@ public class Project {
         this.projectStatus = projectStatus.setDescription(status);
     }
 
-    public void setProjectTeam(List<Resource> projectTeam) {
+    public void setProjectTeam(ProjectTeam projectTeam) {
         this.projectTeam = projectTeam;
     }
 
@@ -217,18 +217,18 @@ public class Project {
      * - Método para Validar Resource
      **/
 
-    public List<Resource> getProjectTeam() {
-        return projectTeam;
-    }
-
-    public boolean addResource(Resource toAdd) {
-        boolean msg = false;
-        if (validateResource(toAdd)) {
-            this.projectTeam.add(toAdd);
-            msg = true;
-        }
-        return msg;
-    }
+//    public List<Resource> getProjectTeam() {
+//        return projectTeam;
+//    }
+//
+//    public boolean addResource(Resource toAdd) {
+//        boolean msg = false;
+//        if (validateResource(toAdd)) {
+//            this.projectTeam.add(toAdd);
+//            msg = true;
+//        }
+//        return msg;
+//    }
 
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
 
@@ -236,19 +236,19 @@ public class Project {
         return res;
     }
 
-    public Resource getTeamMemberByIndex(int index) {
-        return projectTeam.get(index);
-    }
+//    public Resource getTeamMemberByIndex(int index) {
+//        return projectTeam.get(index);
+//    }
 
-    public boolean validateResource(Resource resource) {
-        boolean msg = true;
-        for (int i = 0; i < projectTeam.size(); i++) {
-            if (projectTeam.get(i).equals(resource)) {
-                msg = false;
-            }
-        }
-        return msg;
-    }
+//    public boolean validateResource(Resource resource) {
+//        boolean msg = true;
+//        for (int i = 0; i < projectTeam.size(); i++) {
+//            if (projectTeam.get(i).equals(resource)) {
+//                msg = false;
+//            }
+//        }
+//        return msg;
+//    }
 
     public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
         UserStory userStory = this.productBacklog.createUserStory(this.getCode(), userStoryStatus, priority, description, timeEstimate);
