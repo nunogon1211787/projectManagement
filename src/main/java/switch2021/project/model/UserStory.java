@@ -18,32 +18,43 @@ public class UserStory {
      * Attributes
      */
 
-    private String projectCode;
+//    private String projectCode;
     private UserStoryStatus userStoryStatus;
     private int priority;
     private String description;
     private int timeEstimate;
     private long id_UserStory;
+    private long id_ParentUserStory;
 
     /**
      * Constructor
      */
 
-    public UserStory(String projectCode, UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
-        isValidUserStory(projectCode, userStoryStatus, priority, description, timeEstimate);
+    public UserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
+        isValidUserStory(userStoryStatus, priority, description, timeEstimate);
         this.id_UserStory = ID_GENERATOR.getAndIncrement();
-        this.projectCode = projectCode;
+//        this.projectCode = projectCode;
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
         this.description = description;
         this.timeEstimate = timeEstimate;
+        this.id_ParentUserStory = 0;
+    }
+
+    /**
+     * Set parentUserStory
+     *
+     */
+
+    public void setId_ParentUserStory(long id_ParentUserStory) {
+        this.id_ParentUserStory = id_ParentUserStory;
     }
 
     /**
      * Method to validate entered data (name) by Product Owner
      * (Cris US009)
      */
-    private boolean isValidUserStory(String code, UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
+    private boolean isValidUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
         //check if priority is invalid
         if (priority < 0) {
             throw new IllegalArgumentException("Check priority, cannot be < 0.");
@@ -58,9 +69,9 @@ public class UserStory {
         }
 
         // check invalid project code
-        if (code == null || code.trim().isEmpty()) {
-            throw new IllegalArgumentException("Project does not exist.");
-        }
+//        if (code == null || code.trim().isEmpty()) {
+//            throw new IllegalArgumentException("Project does not exist.");
+//        }
 
         // check estimated time is invalid
         if (timeEstimate < 0) {
@@ -76,3 +87,9 @@ public class UserStory {
      */
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
 }
+
+/**
+ * Get
+ *
+ */
+

@@ -55,7 +55,8 @@ public class Project {
         this.budget = budget;
 
         this.productBacklog = new ProductBacklog();
-        this.projectTeam = new ProjectTeam();
+      this.projectTeam = new ProjectTeam();
+//        this.projectTeam = new ProjectTeam(res);
     }
 
     /**
@@ -206,7 +207,7 @@ public class Project {
      **/
 
 //    public boolean createUserStory(String userStoryStatus, int priority, String description, int timeEstimate) {
-//        UserStory us = productBacklog.createUserStory(code, userStoryStatus, priority, description, timeEstimate);
+//        UserStory us = productBacklog.createUserStory(userStoryStatus, priority, description, timeEstimate);
 //        return productBacklog.addUserStory(us);
 //    }
 
@@ -255,7 +256,7 @@ public class Project {
     }
 
     public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
-        UserStory userStory = this.productBacklog.createUserStory(this.getCode(), userStoryStatus, priority, description, timeEstimate);
+        UserStory userStory = this.productBacklog.createUserStory(userStoryStatus, priority, description, timeEstimate);
         return this.productBacklog.saveUserStory(userStory);
     }
 

@@ -1,5 +1,7 @@
 package switch2021.project.model;
 
+import switch2021.project.stores.ProjectRolesStore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +10,17 @@ public class ProjectTeam {
 //    Lista de Resources no Projecto
 
     private List<Resource> projectTeamList;
+    private ProjectRolesStore role = null;
 
     public ProjectTeam() {
         this.projectTeamList = new ArrayList<>();
     }
+
+//    public ProjectTeam(Resource projectManager) {
+//        this.projectTeamList = new ArrayList<>();
+//        this.projectTeamList.add(projectManager);
+//        projectManager.setRole(role.getProjectRoleByName("Project Manager"));
+//    }
 
     public void addResourceToTeam(Resource resource) {
         this.projectTeamList.add(resource);

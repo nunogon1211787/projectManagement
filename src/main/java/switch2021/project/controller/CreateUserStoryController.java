@@ -24,7 +24,7 @@ public class CreateUserStoryController {
 
     public boolean createUserStory(String code, UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
         ProductBacklog productBacklog = this.company.getProductBacklog(code);
-        UserStory userStory = productBacklog.createUserStory(code, userStoryStatus, priority, description, timeEstimate);
+        UserStory userStory = productBacklog.createUserStory(userStoryStatus, priority, description, timeEstimate);
         return productBacklog.saveUserStory(userStory);
     }
 

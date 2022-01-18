@@ -27,8 +27,8 @@ public class ProductBacklog {
      * Methods for create UserStory to the productBacklog (Cris US009)
      **/
 
-    public UserStory createUserStory(String code, UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
-        return new UserStory(code, userStoryStatus, priority, description, timeEstimate);
+    public UserStory createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
+        return new UserStory(userStoryStatus, priority, description, timeEstimate);
     }
 
     /**
@@ -46,7 +46,7 @@ public class ProductBacklog {
      * Methods for addUserStory to the productBacklog (Cris US009)
      **/
 
-    private boolean addUserStory(UserStory us) {
+    public boolean addUserStory(UserStory us) {
         this.userStoryList.add(us);
         return true;
     }
@@ -55,7 +55,7 @@ public class ProductBacklog {
     private boolean validateUserStory(UserStory userStory) {
         // check duplicate story
         for (UserStory us : userStoryList) {
-            if (us.getDescription().trim().equalsIgnoreCase(userStory.getDescription().trim()) && userStory.getProjectCode().equals(us.getProjectCode())) {
+            if (us.getDescription().trim().equalsIgnoreCase(userStory.getDescription().trim())) {
                 throw new IllegalArgumentException("Repeated user story inserted, same code project and description.");
             }
         }

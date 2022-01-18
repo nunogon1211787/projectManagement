@@ -76,6 +76,10 @@ public class Resource {
         return role;
     }
 
+    public void setRole(ProjectRoles role) {
+        this.role = role;
+    }
+
     /** Método check se o user é aquele que queremos (Carolina US007) **/
     public boolean isYourUser(SystemUser user){
         return this.user == user;

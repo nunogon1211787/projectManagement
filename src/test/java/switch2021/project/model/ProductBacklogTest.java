@@ -21,11 +21,11 @@ public class ProductBacklogTest {
         String code = "123";
 
         // Act
-        UserStory userStory = productBacklog.createUserStory(code,
+        UserStory userStory = productBacklog.createUserStory(
                 status, priority, description, timeEstimate);
         // Assert
         assertNotNull(userStory);
-        assertEquals(code, userStory.getProjectCode());
+//        assertEquals(code, userStory.getProjectCode());
         assertEquals(status, userStory.getUserStoryStatus());
         assertEquals(priority, userStory.getPriority());
         assertEquals(description, userStory.getDescription());
@@ -44,7 +44,7 @@ public class ProductBacklogTest {
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            UserStory userStory = productBacklog.createUserStory(code,
+            UserStory userStory = productBacklog.createUserStory(
                     status, priority, description, timeEstimate);
         });
         // Assert
@@ -63,7 +63,7 @@ public class ProductBacklogTest {
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            UserStory userStory = productBacklog.createUserStory(code,
+            UserStory userStory = productBacklog.createUserStory(
                     status, priority, description, timeEstimate);
         });
         // Assert
@@ -82,7 +82,7 @@ public class ProductBacklogTest {
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            UserStory userStory = productBacklog.createUserStory(code,
+            UserStory userStory = productBacklog.createUserStory(
                     status, priority, description, timeEstimate);
         });
         // Assert
@@ -101,7 +101,7 @@ public class ProductBacklogTest {
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            UserStory userStory = productBacklog.createUserStory(code,
+            UserStory userStory = productBacklog.createUserStory(
                     status, priority, description, timeEstimate);
         });
         // Assert
@@ -120,10 +120,10 @@ public class ProductBacklogTest {
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            UserStory userStory = productBacklog.createUserStory(code,
+            UserStory userStory = productBacklog.createUserStory(
                     status, priority, description, timeEstimate);
             productBacklog.saveUserStory(userStory);
-            UserStory userStory2 = productBacklog.createUserStory(code,
+            UserStory userStory2 = productBacklog.createUserStory(
                     status, priority, description, timeEstimate);
             productBacklog.saveUserStory(userStory2);
         });
@@ -131,24 +131,24 @@ public class ProductBacklogTest {
         assertTrue(exception.getMessage().contains("Repeated user story inserted, same code project and description."));
     }
 
-    @Test
-    public void createUserStoryCodeProjectInvalidBlank() {
-        // Arrange
-        ProductBacklog productBacklog = new ProductBacklog();
-        UserStoryStatus status = new UserStoryStatus("In progress");
-        int priority = 1;
-        String description = "Create user story";
-        int timeEstimate = 7;
-        String code = "";
-
-        // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            UserStory userStory = productBacklog.createUserStory(code,
-                    status, priority, description, timeEstimate);
-        });
-        // Assert
-        assertTrue(exception.getMessage().contains("Project does not exist."));
-    }
+//    @Test
+//    public void createUserStoryCodeProjectInvalidBlank() {
+//        // Arrange
+//        ProductBacklog productBacklog = new ProductBacklog();
+//        UserStoryStatus status = new UserStoryStatus("In progress");
+//        int priority = 1;
+//        String description = "Create user story";
+//        int timeEstimate = 7;
+//        String code = "";
+//
+//        // Act
+//        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+//            UserStory userStory = productBacklog.createUserStory(
+//                    status, priority, description, timeEstimate);
+//        });
+//        // Assert
+//        assertTrue(exception.getMessage().contains("Project does not exist."));
+//    }
 
     @Test
     public void saveNewUserStoryAlreadyExist() {
@@ -159,10 +159,10 @@ public class ProductBacklogTest {
         String description = "Create user story";
         int timeEstimate = 7;
         String code = "123";
-        UserStory userStory = productBacklog.createUserStory(code,
+        UserStory userStory = productBacklog.createUserStory(
                 status, priority, description, timeEstimate);
         productBacklog.saveUserStory(userStory);
-        UserStory userStory2 = productBacklog.createUserStory(code,
+        UserStory userStory2 = productBacklog.createUserStory(
                 status, priority, description, timeEstimate);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -182,13 +182,13 @@ public class ProductBacklogTest {
         String description = "Create user story";
         int timeEstimate = 7;
         String code = "123";
-        UserStory userStory = productBacklog.createUserStory(code,
+        UserStory userStory = productBacklog.createUserStory(
                 status, priority, description, timeEstimate);
         // Act
         productBacklog.saveUserStory(userStory);
         // Assert
         assertNotNull(userStory);
-        assertEquals(code, userStory.getProjectCode());
+//        assertEquals(code, userStory.getProjectCode());
         assertEquals(status, userStory.getUserStoryStatus());
         assertEquals(priority, userStory.getPriority());
         assertEquals(description, userStory.getDescription());
