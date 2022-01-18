@@ -217,18 +217,18 @@ public class Project {
      * - Método para Validar Resource
      **/
 
-//    public List<Resource> getProjectTeam() {
-//        return projectTeam;
-//    }
-//
-//    public boolean addResource(Resource toAdd) {
-//        boolean msg = false;
-//        if (validateResource(toAdd)) {
-//            this.projectTeam.add(toAdd);
-//            msg = true;
-//        }
-//        return msg;
-//    }
+    public ProjectTeam getProjectTeam() {
+        return projectTeam;
+    }
+
+    public boolean addResource(Resource toAdd) {
+        boolean msg = false;
+        if (validateResource(toAdd)) {
+            this.projectTeam.addResourceToTeam(toAdd);
+            msg = true;
+        }
+        return msg;
+    }
 
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
 
@@ -236,19 +236,23 @@ public class Project {
         return res;
     }
 
-//    public Resource getTeamMemberByIndex(int index) {
-//        return projectTeam.get(index);
-//    }
+    public Resource getTeamMemberByIndex(int index) {
+        Resource res = null;
+        for (int i = 0; i < projectTeam.getProjectTeamList().size(); i++) {
+            res = projectTeam.getProjectTeamList().get(index);
+        }
+        return res;
+    }
 
-//    public boolean validateResource(Resource resource) {
-//        boolean msg = true;
-//        for (int i = 0; i < projectTeam.size(); i++) {
-//            if (projectTeam.get(i).equals(resource)) {
-//                msg = false;
-//            }
-//        }
-//        return msg;
-//    }
+    public boolean validateResource(Resource resource) {
+        boolean msg = true;
+        for (int i = 0; i < projectTeam.getProjectTeamList().size(); i++) {
+            if (projectTeam.getProjectTeamList().get(i).equals(resource)) {
+                msg = false;
+            }
+        }
+        return msg;
+    }
 
     public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
         UserStory userStory = this.productBacklog.createUserStory(this.getCode(), userStoryStatus, priority, description, timeEstimate);

@@ -95,7 +95,7 @@ public class ProjectStore {
         boolean msg = false;
 
         for (int i = 0; i < projectList.size(); i++) {
-            for (int j = 0; j < projectList.get(i).getProjectTeam().size(); j++) {
+            for (int j = 0; j < projectList.get(i).getProjectTeam().getProjectTeamList().size(); j++) {
                 if (projectList.get(i).getTeamMemberByIndex(j).getUser().equals(user) &&
                         projectList.get(i).getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
                     sum = sum + projectList.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();

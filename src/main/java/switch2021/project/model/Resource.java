@@ -16,7 +16,7 @@ public class Resource {
     private double costPerHour;
     private double percentageOfAllocation;
 
-    private List<ResourceRole> roleList;
+    private ProjectRoles role;
 
     /**
      * Construtor de Resource (Carolina US007)
@@ -72,8 +72,8 @@ public class Resource {
         return percentageOfAllocation;
     }
 
-    public List<ResourceRole> getRoleList() {
-        return roleList;
+    public ProjectRoles getRole() {
+        return role;
     }
 
     /** Método check se o user é aquele que queremos (Carolina US007) **/

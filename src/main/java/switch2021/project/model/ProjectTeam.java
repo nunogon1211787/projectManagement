@@ -37,7 +37,7 @@ public class ProjectTeam {
     public boolean checkProjectRolesExists(ProjectRoles role) {
         boolean msg = true;
         for (int i = 0; i < projectTeamList.size(); i++) {
-            if (projectTeamList.get(i).getProjectRoles().equals(role)) {
+            if (projectTeamList.get(i).getRole().equals(role)) {
                 msg = false;
             } else {
                 msg = true;
