@@ -1,8 +1,12 @@
 package switch2021.project.model;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+@Getter
 public class SprintBacklog {
 
     /** Calss Atributtes **/
@@ -26,4 +30,24 @@ public class SprintBacklog {
         this.userStoryOfSprintList.add(story);
     }
 
+    /** Override **/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SprintBacklog)) return false;
+        SprintBacklog that = (SprintBacklog) o;
+        return Objects.equals(userStoryOfSprintList, that.userStoryOfSprintList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userStoryOfSprintList);
+    }
+
+    @Override
+    public String toString() {
+        return "SprintBacklog{" +
+                "userStoryOfSprintList=" + userStoryOfSprintList +
+                '}';
+    }
 }

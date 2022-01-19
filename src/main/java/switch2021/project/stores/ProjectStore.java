@@ -1,7 +1,9 @@
 package switch2021.project.stores;
+
 import switch2021.project.model.*;
 import switch2021.project.utils.App;
 
+import javax.swing.plaf.PanelUI;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -146,28 +148,27 @@ public class ProjectStore {
         return projectListUser;
     }*/
 
-    public List<Project> getAllProjectListByUserEmail(String email) {
-        List<Project> allProjectListByUser = new ArrayList<>();
+    public List<Project> getProjectListByUserEmail(String email) {
+        List<Project> projectListByUser = new ArrayList<>();
 
         for (Project project : this.projectList) {
-            for (Resource resource : project.getProjectTeam().getProjectTeamList()) {
-                if (resource.getUser().getEmail().equals(email)) {
-                    allProjectListByUser.add(project);
-                }
+            if (project.hasResource(email)) {
+                projectListByUser.add(project);
             }
         }
-        return allProjectListByUser;
+        return projectListByUser;
     }
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
-        List<Project> allProjectListByUser = getAllProjectListByUserEmail(email);
         List<Project> currentProjectListByUser = new ArrayList<>();
 
-        for (Project project : allProjectListByUser) {
-            if (project.getEndDate().isAfter(LocalDate.now())) {
+        for (Project project : this.projectList) {
+            if (project.hasCurrentResource(email)) {
                 currentProjectListByUser.add(project);
             }
         }
         return currentProjectListByUser;
     }
+
+
 }

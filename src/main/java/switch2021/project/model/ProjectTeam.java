@@ -1,17 +1,20 @@
 package switch2021.project.model;
 
-import switch2021.project.stores.ProjectRoleStore;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectTeam {
 
-//    Lista de Resources no Projecto
+    /**
+     * ProjectTeam's Attribute
+     **/
+    private List<Resource> projectTeamList;  //Lista de Resources no Project.
 
-    private List<Resource> projectTeamList;
-    private ProjectRoleStore role = null;
 
+    /**
+     * ProjectTeam's Constructor
+     **/
     public ProjectTeam() {
         this.projectTeamList = new ArrayList<>();
     }
@@ -22,34 +25,96 @@ public class ProjectTeam {
 //        projectManager.setRole(role.getProjectRoleByName("Project Manager"));
 //    }
 
-    public void addResourceToTeam(Resource resource) {
-        this.projectTeamList.add(resource);
-    }
 
+    /**
+     * Getters and Setters
+     **/
     public List<Resource> getProjectTeamList() {
         return projectTeamList;
     }
 
-    public Resource getResource(Resource resource) {
-        for (int i = 0; i < projectTeamList.size(); i++) {
-            if (projectTeamList.get(i).equals(resource)) {
-                return resource;
+    //Get resource by User
+    public Resource getResource(SystemUser user) {
+        Resource resource = null;
+
+        for (Resource i : projectTeamList) {
+            if (i.isYour(user) && i.getEndDate().isAfter(LocalDate.now())) {
+                resource = i;
             }
         }
-        return null;
+        return resource;
     }
+
+    //Get resource by Role
+    public Resource getResource(ProjectRole role) {
+        Resource resource = null;
+
+        for (Resource i : projectTeamList) {
+            if (i.isYour(role) && i.getEndDate().isAfter(LocalDate.now())) {
+                resource = i;
+            }
+        }
+        return resource;
+    }
+
+
+    /**
+     * Setter new Role
+     **/
+    public boolean assignProjectRole(Resource originalResource, LocalDate startDate, ProjectRole projectRole) {
+
+        Resource newResource = new Resource(originalResource); //copyResource
+        newResource.setRole(projectRole);                      //change copyResource role
+        newResource.setStartDate(startDate);                   //change originalResource start date
+
+        originalResource.setEndDate(startDate);                //change originalResource end date
+
+        return saveResource(newResource);                      //add copy to Project Team List
+    }
+
+
+    /**
+     * Add Method
+     **/
+    public void addResourceToTeam(Resource resource) {
+        this.projectTeamList.add(resource); //Precisa ter validações <-------------
+    }
+
+
+    /**
+     * Method which saves new resource at ProjectTeam List
+     **/
+    private boolean saveResource(Resource newResource) {
+        boolean msg;
+        if (validateRoleExistent(newResource.getRole())) {
+            assignProjectRole(getResource(newResource.getRole()), newResource.getStartDate(), null);
+            this.projectTeamList.add(newResource);
+            msg = true;
+        } else {                //-----------> Validação a fazer <------------
+            this.projectTeamList.add(newResource);
+            msg = true;
+        }
+        return msg;
+    }
+    //
+
+           /* Resource copyOldResource = getResource(newResource.getRole());
+            getResource(newResource.getRole()).setEndDate(newResource.getStartDate());
+            copyOldResource.setRole(null);
+            copyOldResource.setStartDate(newResource.getStartDate());
+            addResourceToTeam(copyOldResource);
+            */
+
 
     /**
      * Validation Methods
      **/
-
-    public boolean checkProjectRolesExists(ProjectRole role) {
+    public boolean validateRoleExistent(ProjectRole role) {
         boolean msg = true;
-        for (int i = 0; i < projectTeamList.size(); i++) {
-            if (projectTeamList.get(i).getRole().equals(role)) {
+        for (Resource i : projectTeamList) {
+            if (!i.isYour(role) && i.getEndDate().isAfter(LocalDate.now())) {
                 msg = false;
-            } else {
-                msg = true;
+                break;
             }
         }
         return msg;

@@ -6,8 +6,11 @@ import java.util.List;
 
 public class ProjectRoleStore {
 
-    List<ProjectRole> projectRoleList;
+    /** Project Role List **/
+    private List<ProjectRole> projectRoleList;
 
+
+    /** Project Role Store Constructor **/
     public ProjectRoleStore(){ projectRoleList = new ArrayList<>();}
 
 

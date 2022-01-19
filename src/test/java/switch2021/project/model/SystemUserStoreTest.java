@@ -150,7 +150,7 @@ public class SystemUserStoreTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser findUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo,profile);
         company.getSystemUserStore().addSystemUser(findUser);// faltou adicionar à company
-        SystemUser user_verification = company.getSystemUserStore().getUserByEmail("anaguedes@beaver.com"); // email do user que criei
+        SystemUser user_verification = company.getSystemUserStore().getUserByEmail("anaguedes@beaver.com");
         assertEquals(user_verification, findUser);
     }
 

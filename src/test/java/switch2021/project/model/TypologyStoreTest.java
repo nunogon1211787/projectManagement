@@ -34,7 +34,7 @@ public class TypologyStoreTest {
         Typology tes1 = new Typology("Fixed Cost");
         Typology tes2 = new Typology("Time and Materials");
         //Act
-        test.populateTypologyList();
+        test.populateDefault();
         //Assert
         assertEquals(test.getTypologyList().size(), 2);
         assertEquals(test.getTypologyList(), typologyStore.getTypologyList());
@@ -180,7 +180,7 @@ public class TypologyStoreTest {
         //Arrange
         TypologyStore test = new TypologyStore();
         //Act
-        test.populateTypologyList();
+        test.populateDefault();
         //Assert
         assertEquals(typologyStore.getTypologyList(), test.getTypologyList());
     }
