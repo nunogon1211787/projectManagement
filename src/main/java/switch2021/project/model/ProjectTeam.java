@@ -1,6 +1,6 @@
 package switch2021.project.model;
 
-import switch2021.project.stores.ProjectRolesStore;
+import switch2021.project.stores.ProjectRoleStore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ public class ProjectTeam {
 //    Lista de Resources no Projecto
 
     private List<Resource> projectTeamList;
-    private ProjectRolesStore role = null;
+    private ProjectRoleStore role = null;
 
     public ProjectTeam() {
         this.projectTeamList = new ArrayList<>();
@@ -43,7 +43,7 @@ public class ProjectTeam {
      * Validation Methods
      **/
 
-    public boolean checkProjectRolesExists(ProjectRoles role) {
+    public boolean checkProjectRolesExists(ProjectRole role) {
         boolean msg = true;
         for (int i = 0; i < projectTeamList.size(); i++) {
             if (projectTeamList.get(i).getRole().equals(role)) {

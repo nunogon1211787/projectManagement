@@ -1,7 +1,6 @@
 package switch2021.project.model;
 
 import switch2021.project.stores.*;
-import java.util.List;
 
 public class Company {
 
@@ -13,7 +12,7 @@ public class Company {
     private SystemUserStore systemUserStore;
     private ProjectStore projectStore;
     private UserProfileStore userProfileStore;
-    private ProjectRolesStore projectRolesStore;
+    private ProjectRoleStore projectRoleStore;
     private TypologyStore typologyStore;
     private CustomerStore customerStore;
     private BusinessSectorStore businessSectorStore;
@@ -32,7 +31,7 @@ public class Company {
         this.projectStore = new ProjectStore();
         this.userProfileStore = new UserProfileStore();
 
-        this.projectRolesStore = new ProjectRolesStore();
+        this.projectRoleStore = new ProjectRoleStore();
         this.typologyStore = new TypologyStore();
         this.customerStore = new CustomerStore();
         this.businessSectorStore = new BusinessSectorStore();
@@ -41,7 +40,7 @@ public class Company {
         this.requestStore = new RequestStore();
 
         this.userProfileStore.populateDefault();
-        this.projectRolesStore.populateDefault();
+        this.projectRoleStore.populateDefault();
         this.typologyStore.populateTypologyList();
         this.projectStatusStore.populateProjectStatusList();
         this.userStoryStatusStore.populateUserStoryStatusList();
@@ -60,7 +59,7 @@ public class Company {
     public UserProfileStore getUserProfileStore() {return this.userProfileStore;}
 
     // ProjectRole Store
-    public  ProjectRolesStore getProjectRolesStore() { return this.projectRolesStore;}
+    public ProjectRoleStore getProjectRolesStore() { return this.projectRoleStore;}
 
     //Typology Store
     public TypologyStore getTypologyStore() {return this.typologyStore;}

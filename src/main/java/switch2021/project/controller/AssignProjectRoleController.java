@@ -1,7 +1,7 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.*;
-import switch2021.project.stores.ProjectRolesStore;
+import switch2021.project.stores.ProjectRoleStore;
 
 public class AssignProjectRoleController {
 
@@ -11,8 +11,8 @@ public class AssignProjectRoleController {
     private Project project;
     private ProjectTeam projectTeam;
     private Resource resource;
-    private ProjectRolesStore projectRolesStore;
-    private ProjectRoles projectRoles;
+    private ProjectRoleStore projectRoleStore;
+    private ProjectRole projectRole;
 
 
     /** Constructor **/

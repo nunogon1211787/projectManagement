@@ -1,13 +1,10 @@
 package switch2021.project.model;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Resource {
 
-    /**
-     * Atributos da classe Resource (Carolina US007)
-     **/
+    /** Atributos da classe Resource (Carolina US007) **/
     private SystemUser user;
 
     private LocalDate startDate;
@@ -16,12 +13,10 @@ public class Resource {
     private double costPerHour;
     private double percentageOfAllocation;
 
-    private ProjectRoles role;
+    private ProjectRole role;
 
-    /**
-     * Construtor de Resource (Carolina US007)
-     **/
 
+    /** Construtor de Resource (Carolina US007) **/
     public Resource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
         checkStartDateEndDate(startDate, endDate);
         checkCostPerHour(costPerHour);
@@ -31,27 +26,11 @@ public class Resource {
         this.endDate = endDate;
         this.costPerHour = costPerHour;
         this.percentageOfAllocation = percentageOfAllocation;
+        this.role = null;
     }
-
-    /** Override Equals (Carolina US007) **/
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Resource)) return false;
-        Resource that = (Resource) o;
-        return
-                (this.user.equals(that.getUser())) &&
-                        (this.startDate.equals(that.getStartDate())) &&
-                        (this.endDate.equals(that.getEndDate())) &&
-                        (this.costPerHour == that.getCostPerHour()) &&
-                        (this.percentageOfAllocation == that.getPercentageOfAllocation());
-    }
-
 
 
     /** Métodos "Getter" dos atributos (Carolina US007) **/
-
     public SystemUser getUser() {
         return user;
     }
@@ -72,11 +51,11 @@ public class Resource {
         return percentageOfAllocation;
     }
 
-    public ProjectRoles getRole() {
+    public ProjectRole getRole() {
         return role;
     }
 
-    public void setRole(ProjectRoles role) {
+    public void setRole(ProjectRole role) {
         this.role = role;
     }
 
@@ -108,9 +87,25 @@ public class Resource {
             throw new IllegalArgumentException("End Date must be after Start Date");
         }
     }
+
     private void checkCostPerHour(double costPerHour){
         if(costPerHour < 0){
             throw new IllegalArgumentException("Cost Per Hour must be valid.");
         }
+    }
+
+
+    /** Override Equals (Carolina US007) **/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Resource)) return false;
+        Resource that = (Resource) o;
+        return
+                (this.user.equals(that.getUser())) &&
+                        (this.startDate.equals(that.getStartDate())) &&
+                        (this.endDate.equals(that.getEndDate())) &&
+                        (this.costPerHour == that.getCostPerHour()) &&
+                        (this.percentageOfAllocation == that.getPercentageOfAllocation());
     }
 }
