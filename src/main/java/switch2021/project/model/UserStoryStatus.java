@@ -1,6 +1,14 @@
 package switch2021.project.model;
 
-public enum UserStoryStatus {
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-    TODO, IN_PROGRESS, DONE, CANCELLED, IN_TEST
+@Data
+@AllArgsConstructor
+
+public class UserStoryStatus {
+
+    private String description;
+
+
 }

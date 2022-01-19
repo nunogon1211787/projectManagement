@@ -1,27 +1,15 @@
 package switch2021.project.model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.utils.App;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ResourceTest {
 
-    private Company company;
-    private UserProfile userProfile;
-
-    @BeforeEach
-    public void init() {
-        company = App.getInstance().getCompany(); // sempre a mesma instancia
-        userProfile = company.createProfile("Cris");
-        company.getUserProfileStore().addProfile(userProfile);
-    }
-
+    UserProfile userProfile = new UserProfile("zzz");
 
     @Test
     @DisplayName("Teste de criação de Resource")

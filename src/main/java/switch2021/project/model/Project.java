@@ -20,8 +20,9 @@ public class Project {
     private ProductBacklog productBacklog;
     private SystemUser productOwner; // Verificar a necessidade de se manter este atributo
 
-    private BusinessSector businessSector;  // Para já coloquei em tipo Business Sector e não lista. Depois será para mudar.
-    private List<Resource> projectTeam;
+    private BusinessSector businessSector;
+    private List<Sprint> sprintList;
+    private ProjectTeam projectTeam;
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -35,7 +36,9 @@ public class Project {
      **/
 
     public Project(String code, String name, String description, Customer customer, Typology typology,
-                   BusinessSector businessSector, LocalDate startDate, int numberOfSprints, double budget) {
+                   BusinessSector businessSector, LocalDate startDate, ProjectStatus status, int numberOfSprints, double budget) {
+
+        validateProjectFields(name, description,budget,numberOfSprints);
 
         this.code = code;
         this.projectName = name;
@@ -43,7 +46,7 @@ public class Project {
 
         this.customer = customer;
         this.typology = typology;
-        this.projectStatus = new Company().getProjectStatusStore().getProjectStatusByDescription("Planned");
+        this.projectStatus = status;
         this.businessSector = businessSector;
 
         this.startDate = startDate;
@@ -52,7 +55,8 @@ public class Project {
         this.budget = budget;
 
         this.productBacklog = new ProductBacklog();
-        this.projectTeam = new ArrayList<>();
+        this.projectTeam = new ProjectTeam();
+//        this.projectTeam = new ProjectTeam(res);
     }
 
     /**
@@ -107,12 +111,24 @@ public class Project {
         return productOwner;
     }
 
-    public List<UserStory> getProductBacklog() {
-        return productBacklog.getUserStoryList();
+    public ProductBacklog getProductBacklog() {
+        return productBacklog;
     }
 
     public int getSprintDuration() {
         return sprintDuration;
+    }
+
+    public Sprint getSprint(long id) {
+        Sprint sprint = null;
+        for(Sprint sprt:sprintList) {
+            if(sprt.getNumber() == id) {
+                sprint = sprt;
+                break;
+            }
+        }
+        return sprint;
+
     }
 
     /**
@@ -160,7 +176,7 @@ public class Project {
         this.numberOfSprints = numberOfSprints;
     }
 
-    public void setBudget(int budget) {
+    public void setBudget(double budget) {
         this.budget = budget;
     }
 
@@ -172,8 +188,29 @@ public class Project {
         this.projectStatus = projectStatus.setDescription(status);
     }
 
-    public void setProjectTeam(List<Resource> projectTeam) {
+    public void setProjectTeam(ProjectTeam projectTeam) {
         this.projectTeam = projectTeam;
+    }
+
+
+    /**
+     * Validates Project Creation Fields
+     * Checks if @param projectName and @param description are emptry or have the minimum characters necessary
+     */
+
+    public void validateProjectFields(String projectName, String description, double budget, int numberOfSprints) {
+        if (projectName.trim().isEmpty())
+            throw new IllegalArgumentException("Project Name cannot be empty");
+        if ((projectName.length() < 3))
+            throw new IllegalArgumentException("Project Name must be at least 3 characters");
+        if (description.trim().isEmpty())
+            throw new IllegalArgumentException("Description cannot be empty");
+        if ((description.length() < 5))
+            throw new IllegalArgumentException("Description must be at least 5 characters");
+        if (numberOfSprints <= 0)
+            throw new IllegalArgumentException("Number of Sprints must be greater than 0");
+        if (budget <= 0)
+            throw new IllegalArgumentException("Budget must be greater than 0");
     }
 
     /**
@@ -181,10 +218,10 @@ public class Project {
      * - Create User Story method
      **/
 
-    public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
-        UserStory us = productBacklog.createUserStory(code, userStoryStatus, priority, description, timeEstimate);
-        return us != null && productBacklog.addUserStory(us);
-    }
+//    public boolean createUserStory(String userStoryStatus, int priority, String description, int timeEstimate) {
+//        UserStory us = productBacklog.createUserStory(userStoryStatus, priority, description, timeEstimate);
+//        return productBacklog.addUserStory(us);
+//    }
 
     /**
      * Resource Allocation Methods - (Carolina US007)
@@ -193,39 +230,57 @@ public class Project {
      * - Método para Validar Resource
      **/
 
-    public List<Resource> getProjectTeam() {
+    public ProjectTeam getProjectTeam() {
         return projectTeam;
     }
 
     public boolean addResource(Resource toAdd) {
         boolean msg = false;
         if (validateResource(toAdd)) {
-            this.projectTeam.add(toAdd);
+            this.projectTeam.addResourceToTeam(toAdd);
             msg = true;
         }
         return msg;
     }
 
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
+
         Resource res = new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
         return res;
     }
 
     public Resource getTeamMemberByIndex(int index) {
-        return projectTeam.get(index);
+        Resource res = null;
+        for (int i = 0; i < projectTeam.getProjectTeamList().size(); i++) {
+            res = projectTeam.getProjectTeamList().get(index);
+        }
+        return res;
     }
 
     public boolean validateResource(Resource resource) {
         boolean msg = true;
-        for (int i = 0; i < projectTeam.size(); i++) {
-            if (projectTeam.get(i).equals(resource)) {
+        for (int i = 0; i < projectTeam.getProjectTeamList().size(); i++) {
+            if (projectTeam.getProjectTeamList().get(i).equals(resource)) {
                 msg = false;
             }
         }
         return msg;
     }
 
+    public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
+        UserStory userStory = this.productBacklog.createUserStory(userStoryStatus, priority, description, timeEstimate);
+        return this.productBacklog.saveUserStory(userStory);
+    }
 
+    /** add Srpint **/
+
+    public boolean addSprint(Sprint sprint) {
+        this.sprintList.add(sprint);
+        return true;
+    }
+
+
+    /** Override **/
     @Override
     public boolean equals(Object o) {
         Project that = (Project) o;
@@ -240,6 +295,5 @@ public class Project {
                 && this.budget == that.budget
                 && this.numberOfSprints == that.numberOfSprints);
     }
-
 }
 

@@ -1,23 +1,14 @@
 package switch2021.project.model;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Typology {
 
-    /**
-     * Typology class
-     * Typology atributes are composed of a description of the Typology.
-     **/
+    /** Typology attributes are composed of a description of the Typology. **/
+    private int id_Typology;
+    private final String description;
 
-    private String description;
 
-    /**
-     * Constructors of typology´s class
-     * Creates a new typology instance.
-     **/
-
+    /** Constructors of typology´s class. Creates a new typology instance. **/
     public Typology(String description) {
-
         if (!description.equals("")) {
             this.description = description;
         } else {
@@ -25,22 +16,27 @@ public class Typology {
         }
     }
 
-    /**
-     * Getters and Setters
-     **/
+
+    /** Copy Constructor **/
+    public Typology(Typology originalTypology) {
+        this.id_Typology = originalTypology.id_Typology;
+        this.description = originalTypology.description;
+    }
+
+
+    /** Getters and Setters **/
+    public int getId_Typology() { return this.id_Typology;}
 
     public String getDescription() {
         return this.description;
     }
 
-    public void updateDescription(String description) {
-        this.description = description;
+    public void setId_Typology(int id_Typology) {
+        this.id_Typology = id_Typology;
     }
 
-    /**
-     * Override Methods
-     **/
 
+    /** Override Methods **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

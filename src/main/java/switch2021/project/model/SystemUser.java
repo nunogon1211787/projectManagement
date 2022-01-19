@@ -1,25 +1,25 @@
 package switch2021.project.model;
 
+import switch2021.project.stores.UserProfileStore;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class SystemUser {
-    /**
-     * Attributes of systemUser´s class
-     **/
+
+
+    /** Attributes of systemUser´s class **/
     private String userName;
     private String email;
     private String photo;
     private String password;
     private String function;
     private boolean activateUser;
-    private List<UserProfile> assignedProfile;
+    private List<UserProfile> assignedProfileList;
 
-    /**
-     * Contructor
-     **/
-    public SystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor) {
-        checkUserNameRules(userName);
+    /** Constructor **/
+    public SystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile profile) {
+        checkUserNameRules(userName); // o construtor faz validações
         checkEmailRules(email);
         checkFunctionRules(function);
         checkPasswordRules(password);
@@ -33,12 +33,12 @@ public class SystemUser {
             throw new IllegalArgumentException("passwords not match");
         }
         this.activateUser = false;
-        this.assignedProfile = visitor;
+        this.assignedProfileList = new ArrayList<>();
+        this.assignedProfileList.add(profile);
     }
+
 //ver este método (13/01/2022):
-    /**
-     * Copy Constructor. Para criar um novo objeto, igual ao parâmetro, mas sem levar adiante as referências do objeto original.
-     */
+    // Copy Constructor. Para criar um novo objeto, igual ao parâmetro, mas sem levar adiante as referências do objeto original. */
     /*public SystemUser(SystemUser originalUser) {
         this.userName = originalUser.userName;
         this.email = originalUser.email;
@@ -47,7 +47,6 @@ public class SystemUser {
         this.password = originalUser.password;
         this.activateUser = originalUser.activateUser;
         this.assignedProfileList = deepCopyListProfile(originalUser.assignedProfileList);
-
     }
 
     private UserProfileStore deepCopyListProfile(UserProfileStore originalList) {
@@ -55,10 +54,8 @@ public class SystemUser {
         return deepCopyList;
     }*/
 
-    /**
-     * Getting Methods
-     **/
 
+    /** Getting Methods **/
     public String getUserName() {
         return this.userName;
     }
@@ -75,6 +72,7 @@ public class SystemUser {
         return this.function;
     }
 
+    // o getPassword não deveria ser privado??
     public String getPassword() {
         return this.password;
     }
@@ -83,14 +81,13 @@ public class SystemUser {
         return activateUser;
     }
 
-    public UserProfile getAssignedProfile() {
-        return assignedProfile;
+    //está de acordo com o encapsulamento??
+    public List<UserProfile> getAssignedProfileList() {
+        return assignedProfileList;
     }
 
-    /**
-     * Setting Methods
-     **/
 
+    /** Setting Methods **/
     public void setUserName(String userName) {
         if (!userName.trim().isEmpty() || !(userName.length() < 2)) {
             this.userName = userName;
@@ -116,21 +113,34 @@ public class SystemUser {
     }
 
     public void setPhoto(String photo) {
-        this.photo = photo;
+
+        if (!photo.trim().isEmpty()) {
+            this.photo = photo;
+        }
     }
 
-    public void setActivateUser() {
-        this.activateUser = true;
+    public SystemUser setAllData(String userName, String function, String photo, SystemUser user) {
+
+        if (checkAllData(userName, function, photo)) {
+            user.setUserName(userName);
+            user.setFunction(function);
+            user.setPhoto(photo);
+            return user;
+        }
+        return null;
     }
 
-    public void setAssignedProfile(UserProfile assignedProfile) {
-        this.assignedProfile = assignedProfile;
+    public boolean setActivateUser() {
+        return this.activateUser = true;
     }
 
-    /**
-     * Validation Methods
-     **/
+    //é suposto ter esse método? não quebra a regra de encapsulamento?
+    public void setAssignedProfileList(List<UserProfile> assignedProfileList) {
+        this.assignedProfileList = assignedProfileList;
+    }
 
+
+    /** Validation Methods **/
     //// Verificar se se pode implementar apenas um metodo de validação ****
     private void checkUserNameRules(String userName) {
         if (userName.trim().isEmpty())
@@ -160,10 +170,29 @@ public class SystemUser {
             throw new IllegalArgumentException("Password must be at least 2 characters");
     }
 
-    /**
-     * Encryption/Decryption Methods
-     **/
+    public boolean checkAllData(String userName, String function, String photo) {
+        if (photo.trim().isEmpty())
+            throw new IllegalArgumentException("Photo cannot be empty.");
+        if (function.trim().isEmpty() || function.length() < 2)
+            throw new IllegalArgumentException("Function cannot be empty or less then 2 characters.");
+        if (userName.trim().isEmpty() || userName.length() < 2)
+            throw new IllegalArgumentException("Username cannot be empty or less then 2 characters.");
+        return true;
+    }
 
+    public boolean checkAssignedProfileList(UserProfile Profile) {
+        boolean msg = true;
+        for (UserProfile i : assignedProfileList) {
+            if (i.equals(Profile)) {
+                msg = false;
+                break;
+            }
+        }
+        return msg;
+    }
+
+
+    /** Encryption/Decryption Methods **/
     public String encryptPassword(String password) {
         int codigoASCII;
         String result = "";
@@ -172,7 +201,6 @@ public class SystemUser {
             codigoASCII = password.charAt(i) + 99;
             result += (char) codigoASCII;
         }
-
         return result;
     }
 
@@ -184,31 +212,28 @@ public class SystemUser {
             codigoASCII = password.charAt(i) - 99;
             result += (char) codigoASCII;
         }
-
         return result;
     }
 
-    /**
-     * AssignProfileList´s methods
-     */
-/*
-    public void assignProfileToUser(UserProfile p) {
-        this.assignedProfileList.addProfile(p);
-    }
 
+    /** AssignProfileList´s methods */
+    public void assignProfileToUser(UserProfile profile) {
+        this.assignedProfileList.add(profile);
+    }
 
     public boolean updateProfile(UserProfile oldProfile, UserProfile newProfile) {
 
-       // this.assignedProfileList.remove(oldProfile);
-       // this.assignedProfileList.add(newProfile);
+        if(!checkAssignedProfileList(newProfile)) {
+            throw new IllegalArgumentException("Repeated user profile inserted.");
+        } else {
+            this.assignedProfileList.remove(oldProfile);
+            this.assignedProfileList.add(newProfile);
+        }
         return true;
     }
-*/
 
-    /**
-     * Método para validar se o email (ou parte dele) é deste objeto.
-     */
 
+    /** Método para validar se o email (ou parte dele) é deste objeto. */
     public boolean isYourEmail(String email) {
 
         boolean result = false;
@@ -217,16 +242,38 @@ public class SystemUser {
         if (idxString != -1) {
             result = true;
         }
-
         return result;
-
     }
 
+    public boolean isYourName (String name ){return this.userName.equals(name) ;}
+
     /**
+     * Method to validate if user as already has the profile requested
+     *
+     */
+
+    public boolean hasProfile (UserProfile profile){
+
+        boolean profileStatus = false;
+
+        for (UserProfile profileCheck:assignedProfileList){
+
+            if (profile.equals(profileCheck)) {
+
+                profileStatus = true;
+                break;
+            }
+        }
+
+        return profileStatus;
+    }
+
+
+    /*
      * Método para verificar se os parâmetros recebidos são do objeto.
      */
 
-
+    // Método para verificar se os parâmetros recebidos são do objeto. */
     ///
     // Rever este Método!!!!    *****************************
     ///
@@ -281,14 +328,14 @@ public class SystemUser {
 
         if (profileChoosenList.size() != 0) {
 
-            if (this.assignedProfile == null) {
+            if (this.assignedProfileList == null) {
                 result = false;
             } else {
 
                 int count = 0;
 
                 for (UserProfile k : profileChoosenList) {
-                        if (this.assignedProfile.contains(k)) {
+                        if (this.assignedProfileList.contains(k)) {
                             count++;
                             match++;
                             break;
@@ -313,11 +360,12 @@ public class SystemUser {
      * Method to update old password with the new password
      */
 
+    /** Method to update old password with the new password */
     public boolean updatePassword(String oldpasswordUI, String newpassword) {
-
 
         if (validateOldPassword(oldpasswordUI)) {
             setPassword(newpassword);
+            checkPasswordRules(newpassword);
             encryptPassword(newpassword);
         } else {
             return false;
@@ -329,12 +377,10 @@ public class SystemUser {
 
         String oldpasswordSU = decryptPassword(this.password);
 
-        if (oldpasswordUI.equals(oldpasswordSU)) {
-            return true;
-        }
-        return false;
+        return oldpasswordUI.equals(oldpasswordSU);
     }
 
+    /** Override Methods **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -343,7 +389,7 @@ public class SystemUser {
         return (this.userName.equals(that.userName)) && (this.email.equals(that.email)) &&
                 (this.photo.equals(that.photo)) && (this.password.equals(that.password)) &&
                 (this.function.equals(that.function)) && (this.activateUser == that.activateUser)
-                && (this.assignedProfile.equals(that.assignedProfile));
+                && (this.assignedProfileList.equals(that.assignedProfileList));
     }
     //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
     // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...teste

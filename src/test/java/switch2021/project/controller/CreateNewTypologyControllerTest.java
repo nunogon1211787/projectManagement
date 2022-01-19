@@ -1,42 +1,45 @@
 package switch2021.project.controller;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
-import switch2021.project.model.Typology;
-import switch2021.project.model.TypologyStore;
-import switch2021.project.utils.App;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CreateNewTypologyControllerTest {
 
-    private  Company company;
-    private TypologyStore typologyStore;
-
-    @BeforeEach
-    public void init(){
-
-        company = App.getInstance().getCompany(); // sempre a mesma instancia
-        typologyStore = company.getTypologyStore();
-    }
-
     @Test
     public void createNewTypologyControllerTest() {
         //Arrange
+        Company company = new Company();
         CreateNewTypologyController controller = new CreateNewTypologyController
-                (typologyStore);
+                (company.getTypologyStore());
         //Act and Assert
-        assertTrue(controller.createTypology(0,"TypoTest"));
+        assertTrue(controller.createTypology("TypoTest"));
+    }
+
+
+
+    @Test
+    public void createNewTypologyControllerNullDescriptionTest() {
+        //Arrange
+        Company company = new Company();
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            CreateNewTypologyController controller = new CreateNewTypologyController(company.getTypologyStore());
+            //Act and Assert
+            controller.createTypology("");
+        });
     }
 
     @Test
     public void createTypologyTest(){
         //Arrange
-        CreateNewTypologyController cont = new CreateNewTypologyController(typologyStore);
-        //Act and Assert
-        assertFalse(cont.createTypology(0, ""));
+        Company company = new Company();
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            CreateNewTypologyController cont = new CreateNewTypologyController(company.getTypologyStore());
+            //Act
+            cont.createTypology("      ");
+        });
     }
 }

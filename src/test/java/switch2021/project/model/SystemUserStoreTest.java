@@ -1,7 +1,9 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.stores.SystemUserStore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,22 +19,24 @@ public class SystemUserStoreTest {
         String function = "tester";
         String photo = "photo";
         Company company = new Company();
-        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo);
+        List<UserProfile> assignedProfileExpected = new ArrayList<>();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        assignedProfileExpected.add(profile);
+        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
 
         String userNameExpected = "manueloliveira";
         String emailExpected = "manueloliveira@beaver.com";
         String passwordExpected = "ÊËÌ";
         String functionExpected = "tester";
         String photoExpected = "photo";
-        UserProfile assignedProfileExpected = new UserProfile("Visitor");
-        //Act
+
         String userNameResult = newUser.getUserName();
         String emailResult = newUser.getEmail();
         String passwordResult = newUser.getPassword();
         String functionResult = newUser.getFunction();
         String photoResult = newUser.getPhoto();
         boolean activateUserResult = newUser.getActivateUserStatus();
-        UserProfile assignedProfileResult = company.getUserProfileStore().getProfileByName("Visitor");
+        List<UserProfile> assignedProfileResult = newUser.getAssignedProfileList();
         //Assert
         assertEquals(userNameExpected, userNameResult);
         assertEquals(emailExpected, emailResult);
@@ -53,7 +57,10 @@ public class SystemUserStoreTest {
         String function = "tester";
         String photo = "photo";
         Company company = new Company();
-        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo);
+        List<UserProfile> assignedProfileExpected = new ArrayList<>();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        assignedProfileExpected.add(profile);
+        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         int initialSize = company.getSystemUserStore().getSystemUserList().size();
 
         company.getSystemUserStore().saveSystemUser(newUser);
@@ -74,11 +81,14 @@ public class SystemUserStoreTest {
         String function = "tester";
         String photo = "photo";
         Company company = new Company();
-        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo);
+        List<UserProfile> assignedProfileExpected = new ArrayList<>();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        assignedProfileExpected.add(profile);
+        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo,profile);
         company.getSystemUserStore().saveSystemUser(newUser);
 
         String userName2 = "maneloliveira";
-        SystemUser newUser2 = company.getSystemUserStore().createSystemUser(userName2, email, function, password, passwordConfirmation, photo);
+        SystemUser newUser2 = company.getSystemUserStore().createSystemUser(userName2, email, function, password, passwordConfirmation, photo,profile);
         //Assert
         assertFalse(company.getSystemUserStore().saveSystemUser(newUser2));
     }
@@ -95,7 +105,10 @@ public class SystemUserStoreTest {
             String function = "tester";
             String photo = "photo";
             Company company = new Company();
-            company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo);
+            List<UserProfile> assignedProfileExpected = new ArrayList<>();
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            assignedProfileExpected.add(profile);
+            company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo,profile);
         });
     }
 
@@ -108,15 +121,13 @@ public class SystemUserStoreTest {
         String function = "tester";
         String photo = "photo";
         Company company = new Company();
-        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo);
+        List<UserProfile> assignedProfileExpected = new ArrayList<>();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        assignedProfileExpected.add(profile);
+        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo,profile);
 
-        String userName2 = "manueloliveira";
         String email2 = "maneloliveira@beaver.com";
-        String password2 = "ghi";
-        String passwordConfirmation2 = "ghi";
-        String function2 = "tester";
-        String photo2 = "photo";
-        SystemUser newUser2 = company.getSystemUserStore().createSystemUser(userName2, email2, function2, password2, passwordConfirmation2, photo2);
+        SystemUser newUser2 = company.getSystemUserStore().createSystemUser(userName, email2, function, password, passwordConfirmation, photo,profile);
         SystemUserStore systemUserStore = new SystemUserStore();
 
         systemUserStore.saveSystemUser(newUser);
@@ -126,4 +137,33 @@ public class SystemUserStoreTest {
 
         assertEquals(2, systemUserStore.getSystemUserList().size());
     }
+
+    @Test
+    public void reachUserbyEmailSuccess () {
+        Company company = new Company();
+        String userName = "anaguedes";
+        String email = "anaguedes@beaver.com";
+        String password = "hello123";
+        String passwordConfirmation = "hello123";
+        String function = "PO";
+        String photo = "photo.png";
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser findUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo,profile);
+        company.getSystemUserStore().addSystemUser(findUser);// faltou adicionar à company
+        SystemUser user_verification = company.getSystemUserStore().getUserByEmail("anaguedes@beaver.com"); // email do user que criei
+        assertEquals(user_verification, findUser);
+    }
+
+
+    @Test
+    public void IsYourEmailSuccess() {
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser systemUser = company.getSystemUserStore().createSystemUser("anaguedes", "anaguedes@beaver.com",
+                "PO", "hello123", "hello123", "photo.png",profile);
+        //Assert
+        assertTrue(systemUser.isYourEmail("anaguedes@beaver.com"));
+    }
+
+
 }

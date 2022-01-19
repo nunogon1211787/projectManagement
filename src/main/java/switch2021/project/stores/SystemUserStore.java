@@ -1,4 +1,7 @@
-package switch2021.project.model;
+package switch2021.project.stores;
+
+import switch2021.project.model.SystemUser;
+import switch2021.project.model.UserProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +13,11 @@ public class SystemUserStore {
 
     //Constructor
     public SystemUserStore() {
+
         this.systemUserList = new ArrayList<>();
     }
 
-    public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo) {
-        Company company = new Company();
-        UserProfile visitor = company.getUserProfileStore().getProfileByName("Visitor");
+    public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor) {
         SystemUser user;
         //try {
         user = new SystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);
@@ -40,22 +42,20 @@ public class SystemUserStore {
      */
     public List<SystemUser> getSystemUserList() {
         List<SystemUser> copyList = new ArrayList<>();
-        copyList.addAll(systemUserList);
+        copyList.addAll(this.systemUserList);
 
         return copyList;
     }
 
     public SystemUser getUserByEmail(String email) {
-
         SystemUser user = null;
 
-        for (int i = 0; i < this.systemUserList.size(); i++) {
-            if (this.systemUserList.get(i).isYourEmail(email)) {
-                user = this.systemUserList.get(i);
+        for (SystemUser i : this.systemUserList) {
+            if (i.isYourEmail(email)) {
+                user = i;
                 break;
             }
         }
-
         return user;
     }
 
@@ -82,10 +82,7 @@ public class SystemUserStore {
      */
 
     public boolean validateSystemUser(SystemUser user) {
-        if (user == null) {
-            return false;
-        }
-        if (hasEmail(user.getEmail())) {
+        if (user == null || hasEmail(user.getEmail())) {
             return false;
         }
         return !this.systemUserList.contains(user);
@@ -115,5 +112,13 @@ public class SystemUserStore {
         return result;
     }
 
+    /** Override Methods **/
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof UserProfileStore)) return false;
+        SystemUserStore that = (SystemUserStore) obj;
+        return (this.systemUserList.equals(that.systemUserList));
+    }
 
 }

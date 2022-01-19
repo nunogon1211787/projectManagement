@@ -1,5 +1,6 @@
 package switch2021.project.model;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +13,7 @@ class UserProfileTest {
         UserProfile test = new UserProfile("admin");
         //Expected
         String expected = "admin";
-        String result = test.getName();
+        String result = test.getUserProfileName();
         //Result
         assertEquals(expected, result);
     }
@@ -22,10 +23,10 @@ class UserProfileTest {
         //input
         UserProfile test = new UserProfile("admin");
         String newName = "visitor";
-        test.setName(newName);
+        test.setUserProfileName(newName);
         //Expected
         String expected = "visitor";
-        String result = test.getName();
+        String result = test.getUserProfileName();
         //Result
         assertEquals(expected, result);
     }
@@ -38,6 +39,17 @@ class UserProfileTest {
         //Result
         assertTrue(test.isValidId(check));
     }
+
+    //achar uma alternativa para testar o erro
+   /* @Test
+    public void validateRequestTestOutOFBound () throws IndexOutOfBoundsException{
+       Company com = new Company();
+        Profile pro = com.arrayProfile.get(7);
+        Throwable exception = assertThrows(IndexOutOfBoundsException.class,
+                () -> { pro.isValidId(20); });
+        Assertions.assertTrue(true);
+    }*/
+
 
     @Test
     void isValidIdwith5Profile() {
@@ -53,12 +65,13 @@ class UserProfileTest {
         int check4 = 3;
         int check5 = 4;
         //Result
-        assertTrue(test1.isValidId(check1));
+        /**assertTrue(test1.isValidId(check1));
         assertTrue(test2.isValidId(check2));
         assertTrue(test3.isValidId(check3));
         assertTrue(test4.isValidId(check4));
         assertTrue(test5.isValidId(check5));
-    }*/
+         **/
+    }
 
     @Test
     void copyConstructorTestName() {
@@ -66,11 +79,11 @@ class UserProfileTest {
         UserProfile test = new UserProfile("admin");
         UserProfile copyTest = new UserProfile(test);
         String newName = "visitor";
-        copyTest.setName(newName);
+        copyTest.setUserProfileName(newName);
         //Expected
         String expected = "visitor";
-        String result = copyTest.getName();
-        String nameOriginal = test.getName();
+        String result = copyTest.getUserProfileName();
+        String nameOriginal = test.getUserProfileName();
         //Result
         assertEquals(expected, result);
         assertEquals("admin", nameOriginal);

@@ -1,9 +1,6 @@
 package switch2021.project.controller;
 
-import switch2021.project.model.Company;
-import switch2021.project.model.Project;
-import switch2021.project.model.UserStory;
-import switch2021.project.model.UserStoryStatus;
+import switch2021.project.model.*;
 import switch2021.project.utils.App;
 
 import java.util.List;
@@ -13,28 +10,28 @@ import java.util.List;
  **/
 
 
-
 public class CreateUserStoryController {
 
     private Company company;
-    private Project project;
-    private UserStory userStory;
 
     public CreateUserStoryController() {
         this.company = App.getInstance().getCompany();
     }
 
-    public List<Project> getProjectListWithPORight(String email){
-        List<Project> projectsAvailable = this.company.getProjectStore().getProjectListWithPORight(email);
+    public CreateUserStoryController(Company company) {
+        this.company = company;
+    }
+
+    public boolean createUserStory(String code, UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
+        ProductBacklog productBacklog = this.company.getProjectStore().getProductBacklog(code);
+        UserStory userStory = productBacklog.createUserStory(userStoryStatus, priority, description, timeEstimate);
+        return productBacklog.saveUserStory(userStory);
+    }
+
+    public List<Project> getProjectListWithPORight(String email) {
+        List<Project> projectsAvailable = this.company.getProjectStore().getProjectListWithPORight(email); //CONFIRMAR ALTERAÇÃO
         return projectsAvailable;
     }
 
-    public boolean createUserStory(String code, String userStoryStatus, int priority, String description, int timeEstimate) {
-        this.project = this.company.getProjectStore().getProject(code);
-        try {
-            return this.project.createUserStory(UserStoryStatus.valueOf(userStoryStatus.toUpperCase()), priority, description, timeEstimate);
-        } catch (IllegalArgumentException exception) {
-            return false;
-        }
-    }
+
 }

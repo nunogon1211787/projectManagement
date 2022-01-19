@@ -3,6 +3,7 @@ package switch2021.project.controller;
 
 import switch2021.project.model.Company;
 import switch2021.project.model.UserProfile;
+import switch2021.project.stores.UserProfileStore;
 import switch2021.project.utils.App;
 
 
@@ -10,26 +11,24 @@ import switch2021.project.utils.App;
  * >>>>>> https://www.devmedia.com.br/padrao-de-projeto-singleton-em-java/26392 || https://www.geeksforgeeks.org/singleton-class-java/ <<<<<<
  **/
 
-public class CreateProfileController {
+public class CreateUserProfileController {
 
     private Company company;
-    private UserProfile userProfile;
 
-    public CreateProfileController() {
+
+    public CreateUserProfileController() {
         this(App.getInstance().getCompany());
     }
 
-    public CreateProfileController(Company company) {
+    public CreateUserProfileController(Company company) {
         this.company = company;
-        //this.profile = null;
     }
 
 
     public boolean createProfile(String name) {
-        this.userProfile = this.company.getUserProfileStore().createProfile(name);
-        return this.company.getUserProfileStore().addProfile(this.userProfile);
-
-
+        UserProfileStore userProfileStore = this.company.getUserProfileStore();
+        UserProfile userProfile = userProfileStore.createProfile(name);
+        return userProfileStore.saveUserProfile(userProfile);
     }
 }
 

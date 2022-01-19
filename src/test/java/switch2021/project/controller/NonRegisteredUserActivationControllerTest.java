@@ -9,13 +9,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class NonRegisteredUserActivationControllerTest {
 
     @Test
-    public void Mytest () {
+    public void activateNonRegisteredUserbyEmailSuccess () {
         //Arrange
-        Company company = new Company();
+        Company company = new Company(); //objeto do tipo company
         SystemUser user = new SystemUser("Ana", "1211748@isep.ipp.pt",
-                                            "User_12", "111", "111", "",company.getUserProfile("visitor"));
-        NonRegisteredUserActivationController userActivation = new NonRegisteredUserActivationController(company);
+                                            "User_12", "111", "111", "",company.getUserProfileStore().getUserProfile("Visitor"));
+          company.getSystemUserStore().addSystemUser(user);
+
+        //NonRegisteredUserActivationController controller = new NonRegisteredUserActivationController(user);
+
+        // Act
+        boolean result = company.getSystemUserStore().getUserByEmail("1211748@isep.ipp.pt").setActivateUser();
+
         //Assert
-        assertTrue(userActivation.getUserbyEmail("1211748@isep.ipp.pt"));
+        assertTrue(result);
     }
 }

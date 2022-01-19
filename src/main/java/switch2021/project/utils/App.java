@@ -1,7 +1,7 @@
 package switch2021.project.utils;
 
 import switch2021.project.model.Company;
-import switch2021.project.model.TypologyStore;
+import switch2021.project.stores.TypologyStore;
 
 /**
  * >>>>>> https://www.devmedia.com.br/padrao-de-projeto-singleton-em-java/26392 || https://www.geeksforgeeks.org/singleton-class-java/ <<<<<<

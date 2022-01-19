@@ -1,39 +1,61 @@
 package switch2021.project.model;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Sprint {
 
     /**
      * Atributos da classe Sprint
      **/
-    private int number;
-    private int duration;
-    private Project proj;
+    private long number;
 
-    private LocalDate startDate; /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
-    private LocalDate endDate; /** è necessario mudar as datas o mesmo formato(ver qual o melhor)  **/
+    private SprintBacklog sprintBacklog;
+
+    private LocalDate startDate;
+    private LocalDate endDate;
 
 
     /**
      * Construtor de Sprint
      **/
 
-    public Sprint(Project x,int number, int duration, LocalDate startDate, LocalDate endDate){
+    public Sprint(LocalDate startDate, LocalDate endDate) {
 
-        this.proj = x;
-        this.number = number;
-        this.duration = duration;
+        ///this.number  - TODO incrementar números automaticamente
         this.startDate = startDate;
         this.endDate = endDate;
-
+        this.sprintBacklog = new SprintBacklog();
     }
 
-    public void changeSprintDuration(int x){
-        this.duration = x;
+    public boolean addStoryToSprintBacklog(UserStory us, int effort) {
+        this.sprintBacklog.addUserStory(sprintBacklog.createUSerStoryOfSprint(us, effort));
+        return true;
     }
 
+    /**
+     * Change Sprint End Date
+     **/
+    public void changeSprintEndDate(LocalDate end) {
+        this.endDate = end;
+    }
 
+    /**
+     * Getter
+     **/
+    public SprintBacklog getSprintBacklog() {
+        return sprintBacklog;
+    }
 
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public long getNumber() {
+        return number;
+    }
 }
