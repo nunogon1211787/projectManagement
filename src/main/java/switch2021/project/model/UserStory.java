@@ -41,6 +41,14 @@ public class UserStory {
         this.id_ParentUserStory = 0;
     }
 
+    public boolean setPriority(int priority) {
+        if(validatePriority(priority)) {
+            this.priority = priority;
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Set parentUserStory
      *
@@ -86,6 +94,12 @@ public class UserStory {
      * ID_UserProfile Generator.
      */
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
+
+    private boolean validatePriority (int x){
+        if(x < 0 || x > 5)
+            return false;
+        return true;
+    }
 }
 
 /**

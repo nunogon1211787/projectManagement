@@ -8,7 +8,7 @@ import switch2021.project.stores.ProjectStore;
 
 import java.util.List;
 
-public class ChangePriorityUS {
+public class ChangePriorityUSController {
 
     private Company company;
     private ProjectStore projectStore;
@@ -41,8 +41,7 @@ public class ChangePriorityUS {
     }
 
     public boolean setPriority(int x){
-        this.userStory.setPriority(x);
-        return true;
+        return this.userStory.setPriority(x);
     }
 
 
