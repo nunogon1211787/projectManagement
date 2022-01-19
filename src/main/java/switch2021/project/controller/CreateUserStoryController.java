@@ -31,36 +31,21 @@ public class CreateUserStoryController {
     }
 
 
-  //TODO - apagar o PO right?
-
-  //  public List<Project> getProjectListWithPORight(String email) {
- //       List<Project> projectsAvailable = this.company.getProjectStore().getProjectListWithPORight(email); //CONFIRMAR ALTERAÇÃO
-   //     return projectsAvailable;
-      //  }
-
-    public List<Project> getProjectListByMemberAssociated (String email){
+    public List<Project> getAllProjectListByUserEmail(String email) {
         this.projectStore = this.company.getProjectStore();
         this.arrayProject = this.projectStore.getAllProjectListByUserEmail(email);
         return arrayProject;
     }
 
-    public Project getProjectByCode(String code){
+    public Project getProjectByCode(String code) {
         this.project = this.company.getProjectStore().getProjectByCode(code);
         return this.project;
     }
 
-    //TODO - criar novo metodo a ir ao sitio certo e eliminar este
-
-  //  public boolean createUserStoryNEW(String code, UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
- //       ProductBacklog productBacklog = this.company.getProjectStore().getProductBacklog(code);
-//        UserStory userStory = productBacklog.createUserStory(userStoryStatus, priority, description, timeEstimate);
-  //      return productBacklog.saveUserStory(userStory);
-//    }
-
 
 
     public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
-      ProductBacklog productBacklog = this.project.getProductBacklog();
+        ProductBacklog productBacklog = this.project.getProductBacklog();
         UserStory userStory = productBacklog.createUserStory(userStoryStatus, priority, description);
         return productBacklog.saveUserStory(userStory);
     }

@@ -1,22 +1,21 @@
 package switch2021.project.model;
 
 import lombok.Data;
-import switch2021.project.utils.App;
 
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Getters e Setters e Override - Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java.
+ * ---> Getters e Setters e Override <--- - Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java.
  */
-
 @Data
+
 
 public class UserStory {
 
     /**
-     * Attributes
-     */
+     * ---> Attributes <---
+     **/
 
     private UserStoryStatus userStoryStatus;
     private int priority;
@@ -24,9 +23,10 @@ public class UserStory {
     private long id_UserStory;
     private long id_ParentUserStory;
 
+
     /**
-     * Constructor
-     */
+     * ---> Constructor <---
+     **/
 
     public UserStory(UserStoryStatus userStoryStatus, int priority, String description) {
         isValidUserStory(userStoryStatus, priority, description);
@@ -46,7 +46,7 @@ public class UserStory {
     }
 
     /**
-     * Set parentUserStory
+     * ---> Set parentUserStory <---
      */
 
     public void setId_ParentUserStory(long id_ParentUserStory) {
@@ -54,7 +54,7 @@ public class UserStory {
     }
 
     /**
-     * Method to validate entered data (name) by Product Owner
+     * ---> Method to validate entered info by Product Owner <---
      * (Cris US009)
      */
     private boolean isValidUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
@@ -75,7 +75,7 @@ public class UserStory {
     }
 
     /**
-     * ID_UserProfile Generator.
+     * ---> ID_UserProfile Generator. <---
      */
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
 

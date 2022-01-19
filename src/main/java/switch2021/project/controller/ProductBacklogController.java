@@ -5,6 +5,7 @@ import switch2021.project.model.ProductBacklog;
 import switch2021.project.model.Project;
 import switch2021.project.model.UserStory;
 import switch2021.project.stores.ProjectStore;
+import switch2021.project.utils.App;
 
 import java.util.List;
 
@@ -19,6 +20,14 @@ public class ProductBacklogController {
     List<Project> arrayProject;
     List<UserStory> userStoryList;
 
+    public ProductBacklogController() {
+        this.company = App.getInstance().getCompany();
+    }
+
+    public ProductBacklogController(Company company) {
+        this.company = company;
+    }
+
     public List<Project> getAllProjectListByUserEmail (String email){
         this.projectStore = this.company.getProjectStore();
         this.arrayProject = this.projectStore.getAllProjectListByUserEmail(email);
@@ -30,16 +39,13 @@ public class ProductBacklogController {
         return this.project;
     }
 
-    public List<UserStory> getUserStoryList(){
+    public List<UserStory> getUsSortedByPriority(){
         this.productBacklog = this.project.getProductBacklog();
-        this.userStoryList = this.project.getProductBacklog().getUserStoryList();
+        this.userStoryList = this.project.getProductBacklog().getUsSortedByPriority();
         return this.userStoryList;
     }
 
 
-    public boolean setPriority(int x){
-        return this.userStory.setPriority(x);
-    }
 
 
 

@@ -1,28 +1,33 @@
 package switch2021.project.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 public class ProductBacklog {
 
-    /** UserStory Store Attributes (backlog). Contains a UserStory list. **/
+    /**
+     * UserStory Store Attributes (backlog). Contains a UserStory list.
+     **/
     private List<UserStory> userStoryList;
 
-    /** Constructor **/
+    /**
+     * Constructor
+     **/
     public ProductBacklog() {
         userStoryList = new ArrayList<>();
     }
 
-    /** Getters and Setters Methods. **/
+    /**
+     * Getters and Setters Methods.
+     **/
     public List<UserStory> getUserStoryList() {
         return userStoryList;
     }
 
     public UserStory getUserStoryById(long id) {
         UserStory userStory = null;
-        for(UserStory us:userStoryList) {
-            if(us.getId_UserStory() == id) {
+        for (UserStory us : userStoryList) {
+            if (us.getId_UserStory() == id) {
                 userStory = us;
                 break;
             }
@@ -46,8 +51,8 @@ public class ProductBacklog {
      * Methods for save UserStory to the productBacklog - validate duplicate for description (Cris US009)
      **/
 
-    public boolean saveUserStory(UserStory userStory){
-        if(!validateUserStory(userStory)){
+    public boolean saveUserStory(UserStory userStory) {
+        if (!validateUserStory(userStory)) {
             throw new IllegalArgumentException("Repeated user story inserted, same code project and description.");
         }
         return addUserStory(userStory);
@@ -62,7 +67,9 @@ public class ProductBacklog {
         return true;
     }
 
-    /** Validation Methods. **/
+    /**
+     * Validation Methods.
+     **/
     private boolean validateUserStory(UserStory userStory) {
         // check duplicate story
         for (UserStory us : userStoryList) {
@@ -71,5 +78,11 @@ public class ProductBacklog {
             }
         }
         return true;
+    }
+
+
+    public List<UserStory> getUsSortedByPriority(){
+        userStoryList.sort(Comparator.comparingInt(UserStory::getPriority));
+        return userStoryList;
     }
 }
