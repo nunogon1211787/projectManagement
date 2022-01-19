@@ -4,20 +4,22 @@ import java.time.LocalDate;
 
 public class Resource {
 
-    /** Atributos da classe Resource (Carolina US007) **/
+    /**
+     * Resource's Attribute
+     **/
     private SystemUser user;
-
+    private ProjectRole role;
     private LocalDate startDate;
     private LocalDate endDate;
 
     private double costPerHour;
     private double percentageOfAllocation;
 
-    private ProjectRole role;
 
-
-    /** Construtor de Resource (Carolina US007) **/
-    public Resource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
+    /**
+     * Resource's Constructor
+     **/
+    public Resource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
         checkStartDateEndDate(startDate, endDate);
         checkCostPerHour(costPerHour);
 
@@ -29,7 +31,10 @@ public class Resource {
         this.role = null;
     }
 
-    /** Métodos "Getter" dos atributos (Carolina US007) **/
+
+    /**
+     * Getters and Setters Methods
+     **/
     public SystemUser getUser() {
         return user;
     }
@@ -58,22 +63,41 @@ public class Resource {
         this.role = role;
     }
 
-    /** Método check se o user é aquele que queremos (Carolina US007) **/
-    public boolean isYourUser(SystemUser user){
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+
+    /**
+     * This method checks if the Resource is that what we are looking for
+     **/
+    // Check by User
+    public boolean isYour(SystemUser user) {
         return this.user == user;
     }
 
-    /** Método check se o período que queremos alocar é coincidente com o período que o resource está alocado ao projecto (para depois podermos somar e confirmar que a alocação total não é maior que 1) (Carolina US007) **/
+    // Check by Role
+    public boolean isYour(ProjectRole projectRole) {
+        return this.role == projectRole;
+    }
 
-    public boolean checkAllocationPeriod(LocalDate startDate, LocalDate endDate){
+
+    /**
+     * Método check se o período que queremos alocar é coincidente com o período que o resource está alocado ao projecto (para depois podermos somar e confirmar que a alocação total não é maior que 1) (Carolina US007)
+     **/
+    public boolean checkAllocationPeriod(LocalDate startDate, LocalDate endDate) {
         boolean msg = false;
-        if(startDate.isAfter(this.endDate) || endDate.isBefore(this.startDate)){
+        if (startDate.isAfter(this.endDate) || endDate.isBefore(this.startDate)) {
             msg = false;
-        } else if (startDate.isEqual(this.startDate) || startDate.isEqual(this.endDate) || endDate.isEqual(this.endDate) || endDate.isEqual(this.startDate) ){
+        } else if (startDate.isEqual(this.startDate) || startDate.isEqual(this.endDate) || endDate.isEqual(this.endDate) || endDate.isEqual(this.startDate)) {
             msg = true;
-        } else if (startDate.isBefore(this.startDate) && endDate.isAfter(this.startDate)){
+        } else if (startDate.isBefore(this.startDate) && endDate.isAfter(this.startDate)) {
             msg = true;
-        } else if (startDate.isBefore(this.endDate) && endDate.isAfter(this.endDate)){
+        } else if (startDate.isBefore(this.endDate) && endDate.isAfter(this.endDate)) {
             msg = true;
         } else if (startDate.isAfter(this.startDate) && endDate.isBefore(this.endDate)) {
             msg = true;
@@ -81,20 +105,34 @@ public class Resource {
         return msg;
     }
 
-    private void checkStartDateEndDate(LocalDate startDate, LocalDate endDate){
-        if(endDate.isBefore(startDate)){
+    private void checkStartDateEndDate(LocalDate startDate, LocalDate endDate) {
+        if (endDate.isBefore(startDate)) {
             throw new IllegalArgumentException("End Date must be after Start Date");
         }
     }
 
-    private void checkCostPerHour(double costPerHour){
-        if(costPerHour < 0){
+    private void checkCostPerHour(double costPerHour) {
+        if (costPerHour < 0) {
             throw new IllegalArgumentException("Cost Per Hour must be valid.");
         }
     }
 
+    /**
+     * Resource's Copy
+     **/
+    public Resource(Resource originalResource) {
+        this.user = originalResource.user;
+        this.startDate = originalResource.startDate;
+        this.endDate = originalResource.endDate;
+        this.costPerHour = originalResource.costPerHour;
+        this.percentageOfAllocation = originalResource.percentageOfAllocation;
+        this.role = originalResource.role;
 
-    /** Override Equals (Carolina US007) **/
+    }
+
+    /**
+     * Override Equals (Carolina US007)
+     **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

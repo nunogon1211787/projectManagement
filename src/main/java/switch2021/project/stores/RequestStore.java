@@ -1,4 +1,8 @@
-package switch2021.project.model;
+package switch2021.project.stores;
+
+import switch2021.project.model.Request;
+import switch2021.project.model.SystemUser;
+import switch2021.project.model.UserProfile;
 
 import java.util.ArrayList;
 import java.util.List;
