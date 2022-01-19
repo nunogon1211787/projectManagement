@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddUserStoryToSprintbacklogTest {
-/* CORRIGIR TESTES NÃO ESTÃO A PASSAR! 19/01/2022
+
     Company company = new Company();
     @BeforeEach
 
@@ -20,9 +20,10 @@ public class AddUserStoryToSprintbacklogTest {
         UserStory userStory = new UserStory(status, 2,"teste");
         SprintBacklog testBacklog = new SprintBacklog();
         UserStoryOfSprint test = testBacklog.createUSerStoryOfSprint(userStory,8);
-        String value = test.toString();
+        int value = test.getEstimateEffort();
+        int expected = 8;
 
-        assertEquals("",value);
+        assertEquals(expected,value);///TODO replicar para outros atributos
     }
 
     @Test
@@ -33,8 +34,9 @@ public class AddUserStoryToSprintbacklogTest {
         SprintBacklog testBacklog = new SprintBacklog();
         UserStoryOfSprint test = testBacklog.createUSerStoryOfSprint(userStory,8);
         testBacklog.addUserStory(test);
+        String expected = test.toString();
 
         //Result
-        assertEquals(test,testBacklog.getUserStoryOfSprintList().get(0));
-    }*/
+        assertEquals(expected,testBacklog.getUserStoryOfSprintList().get(0).toString());
+    }
 }
