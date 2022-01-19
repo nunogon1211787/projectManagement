@@ -20,7 +20,7 @@ public class ChangePriorityUSController {
 
     public List<Project> getProjectListByMemberAssociated (String email){
         this.projectStore = this.company.getProjectStore();
-        this.arrayProject = this.projectStore.getProjectListByMemberAssociated(email);
+        this.arrayProject = this.projectStore.getAllProjectListByUserEmail(email);
         return arrayProject;
     }
 

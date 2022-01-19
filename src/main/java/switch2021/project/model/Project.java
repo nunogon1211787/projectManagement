@@ -1,5 +1,7 @@
 package switch2021.project.model;
 
+import switch2021.project.stores.SprintStore;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ public class Project {
     private SystemUser productOwner; // Verificar a necessidade de se manter este atributo
 
     private BusinessSector businessSector;
-    private List<Sprint> sprintList;
+    private SprintStore sprintList;
     private ProjectTeam projectTeam;
 
     private LocalDate startDate;
@@ -119,16 +121,8 @@ public class Project {
         return sprintDuration;
     }
 
-    public Sprint getSprint(long id) {
-        Sprint sprint = null;
-        for(Sprint sprt:sprintList) {
-            if(sprt.getNumber() == id) {
-                sprint = sprt;
-                break;
-            }
-        }
-        return sprint;
-
+    public SprintStore getSprintStore() {
+        return this.sprintList;
     }
 
     /**
@@ -270,13 +264,6 @@ public class Project {
     public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
         UserStory userStory = this.productBacklog.createUserStory(userStoryStatus, priority, description);
         return this.productBacklog.saveUserStory(userStory);
-    }
-
-    /** add Srpint **/
-
-    public boolean addSprint(Sprint sprint) {
-        this.sprintList.add(sprint);
-        return true;
     }
 
 

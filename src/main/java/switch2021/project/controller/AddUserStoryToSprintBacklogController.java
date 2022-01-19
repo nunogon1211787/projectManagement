@@ -20,7 +20,7 @@ public class AddUserStoryToSprintBacklogController {
     }
 
     public boolean addUserStoryToSprintBacklog() {
-        company.getProjectStore().getProjectByCode(projCode).getSprint(id).addStoryToSprintBacklog(userStory,effort);
+        company.getProjectStore().getProjectByCode(projCode).getSprintStore().getSprint(id).addStoryToSprintBacklog(userStory,effort);
         return true;
     }
 }
