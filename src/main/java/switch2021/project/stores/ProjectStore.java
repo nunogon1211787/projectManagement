@@ -1,5 +1,6 @@
 package switch2021.project.stores;
 
+import sun.util.resources.LocaleData;
 import switch2021.project.model.*;
 import switch2021.project.utils.App;
 
@@ -132,7 +133,7 @@ public class ProjectStore {
         return project.getProductBacklog();
     }
 
-    public List<Project> getProjectListByMemberAssociated(String email){
+    /*public List<Project> getProjectListByMemberAssociated(String email) {
         List<Project> projectListUser = new ArrayList<>();
 
         for (Project project : this.projectList) {
@@ -143,5 +144,30 @@ public class ProjectStore {
             }
         }
         return projectListUser;
+    }*/
+
+    public List<Project> getProjectListByMemberAssociated(String email) {
+        List<Project> allProjectListByUser = new ArrayList<>();
+
+        for (Project project : this.projectList) {
+            for (Resource resource : project.getProjectTeam().getProjectTeamList()) {
+                if (resource.getUser().getEmail().equals(email)) {
+                    allProjectListByUser.add(project);
+                }
+            }
+        }
+        return allProjectListByUser;
+    }
+
+    public List<Project> getCurrentProjectListByMemberAssociated(String email) {
+        List<Project> allProjectListByUser = getProjectListByMemberAssociated(email);
+        List<Project> currentProjectListByUser = new ArrayList<>();
+
+        for (Project project : allProjectListByUser) {
+            if (project.getEndDate().isAfter(LocalDate.now())) {
+                currentProjectListByUser.add(project);
+            }
+        }
+        return currentProjectListByUser;
     }
 }
