@@ -25,7 +25,7 @@ public class UpdateUserProfileController {
 
     public SystemUser getUser(String email) {
         SystemUser user = systemUserStore.getUserByEmail(email);
-        if(user == null) {
+        if (user == null) {
             throw new IllegalArgumentException("This email doesn't exist.");
         }
         return user;
