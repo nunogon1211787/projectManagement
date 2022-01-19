@@ -23,13 +23,13 @@ public class CreateUserStoryController {
     }
 
     public boolean createUserStory(String code, UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
-        ProductBacklog productBacklog = this.company.getProductBacklog(code);
+        ProductBacklog productBacklog = this.company.getProjectStore().getProductBacklog(code);
         UserStory userStory = productBacklog.createUserStory(userStoryStatus, priority, description, timeEstimate);
         return productBacklog.saveUserStory(userStory);
     }
 
     public List<Project> getProjectListWithPORight(String email) {
-        List<Project> projectsAvailable = this.company.getProjectListWithPORight(email);
+        List<Project> projectsAvailable = this.company.getProjectStore().getProjectListWithPORight(email); //CONFIRMAR ALTERAÇÃO
         return projectsAvailable;
     }
 
