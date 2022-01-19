@@ -18,9 +18,9 @@ public class ChangePriorityUSController {
     List<Project> arrayProject;
     List<UserStory> userStoryList;
 
-    public List<Project> getProjectListByMemberAssociated (String email){
+    public List<Project> getCurrentProjectListByUserEmail (String email){
         this.projectStore = this.company.getProjectStore();
-        this.arrayProject = this.projectStore.getAllProjectListByUserEmail(email);
+        this.arrayProject = this.projectStore.getCurrentProjectListByUserEmail(email);
         return arrayProject;
     }
 
@@ -31,7 +31,7 @@ public class ChangePriorityUSController {
 
     public List<UserStory> getUserStoryList(){
         this.productBacklog = this.project.getProductBacklog();
-        this.userStoryList = this.project.getProductBacklog().getUserStoryList();
+        this.userStoryList = this.productBacklog.getUserStoryList();
         return this.userStoryList;
     }
 

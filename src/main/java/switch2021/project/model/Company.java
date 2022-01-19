@@ -41,7 +41,7 @@ public class Company {
 
         this.userProfileStore.populateDefault();
         this.projectRoleStore.populateDefault();
-        this.typologyStore.populateTypologyList();
+        this.typologyStore.populateDefault();
         this.projectStatusStore.populateProjectStatusList();
         this.userStoryStatusStore.populateUserStoryStatusList();
     }

@@ -18,7 +18,7 @@ public class TypologyStore {
 
 
     /** Typology populator. Populates the typology List with pre-set objects. **/
-    public void populateTypologyList() {
+    public void populateDefault() {
         saveTypology(new Typology("Fixed Cost"));
         saveTypology(new Typology("Time and Materials"));
     }

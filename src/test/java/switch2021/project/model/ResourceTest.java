@@ -173,7 +173,7 @@ class ResourceTest {
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act
-        boolean result = resAllo.isYourUser(newUser);
+        boolean result = resAllo.isYour(newUser);
 
         //Assert
         assertTrue(result);
