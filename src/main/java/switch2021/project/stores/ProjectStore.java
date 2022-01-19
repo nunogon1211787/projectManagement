@@ -133,6 +133,10 @@ public class ProjectStore {
         return project.getProductBacklog();
     }
 
+    /**
+     * Method to get all project that a user with a specific email is associasted to
+     */
+
     public List<Project> getProjectListByMemberAssociated(String email){
         SystemUser user = company.getSystemUserStore().getUserByEmail(email);
 
