@@ -1,5 +1,7 @@
 package switch2021.project.model;
 
+import switch2021.project.stores.TaskStore;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -8,10 +10,9 @@ public class Sprint {
     /**
      * Atributos da classe Sprint
      **/
-    private long number;
-
+    private long id;
+    private TaskStore taskstore;
     private SprintBacklog sprintBacklog;
-
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -22,7 +23,7 @@ public class Sprint {
 
     public Sprint(LocalDate startDate, LocalDate endDate) {
 
-        ///this.number  - TODO incrementar números automaticamente
+        ///this.number  - TODO incrementar números automaticamente -> Id generator (método de salvar/validação)
         this.startDate = startDate;
         this.endDate = endDate;
         this.sprintBacklog = new SprintBacklog();
@@ -56,6 +57,6 @@ public class Sprint {
     }
 
     public long getNumber() {
-        return number;
+        return id;
     }
 }
