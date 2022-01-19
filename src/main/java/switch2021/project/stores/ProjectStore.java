@@ -14,6 +14,7 @@ public class ProjectStore {
      **/
 
     private List<Project> projectList;
+    private Company company;
 
     /**
      * Constructors with data
@@ -130,5 +131,20 @@ public class ProjectStore {
             throw new IllegalArgumentException("Project does not exist.");
         }
         return project.getProductBacklog();
+    }
+
+    public List<Project> getProjectListByMemberAssociated(String email){
+        SystemUser user = company.getSystemUserStore().getUserByEmail(email);
+
+        List<Project> projectListUser = new ArrayList<>();
+
+        for (int i = 0; i < this.projectList.size(); i++) {
+            for (int j = 0; j < this.projectList.get(i).getProjectTeam().getProjectTeamList().size(); j++) {
+                if(this.projectList.get(i).getProjectTeam().getProjectTeamList().get(j).getUser() == user){
+                    projectListUser.add(this.projectList.get(i));
+                }
+            }
+        }
+        return projectListUser;
     }
 }

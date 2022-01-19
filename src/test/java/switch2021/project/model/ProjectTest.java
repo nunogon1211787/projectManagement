@@ -302,6 +302,7 @@ class ProjectTest {
     @Test
     public void editProjectSetsTest() {
         //Arrange
+
         ProjectStatus status = new ProjectStatus("Planned");
 
         // Act

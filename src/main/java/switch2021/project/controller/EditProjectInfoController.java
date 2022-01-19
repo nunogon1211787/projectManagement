@@ -11,9 +11,7 @@ public class EditProjectInfoController {
 
     private Company company;
     private Project project;
-    private ProjectStore projectStore;
     List<Project> arrayProject;
-    private ProjectTeam projectTeam;
 
 
     public List getProjectList (){
@@ -27,9 +25,8 @@ public class EditProjectInfoController {
     }
 
     public boolean editProject(String name,String description, LocalDate startDate, LocalDate endDate, int numberOfSprints,
-                               double budget, int sprintDuration, String status, List projectTeam){
+                               double budget, int sprintDuration, String status, ProjectTeam projectTeam){
 
-        //////è preciso apanhas as excepçoes - temos de ver como
         project.validateProjectFields(name,description,budget,numberOfSprints);
 
         this.project.setProjectName(name);
@@ -40,7 +37,7 @@ public class EditProjectInfoController {
         this.project.setBudget(budget);
         this.project.setProjectStatus(status);
         this.project.setSprintDuration(sprintDuration);
-//        this.project.setProjectTeam(projectTeam);
+        this.project.setProjectTeam(projectTeam);
         return true;
     }
 
