@@ -278,9 +278,11 @@ public class SystemUser {
     // Rever este Método!!!!    *****************************
     ///
 
-    /*public boolean hasThisData(String userName, String email, String function, int isActive, int[] profilesId) {
+    public boolean hasThisData(String userName, String email, String function, int state, List<UserProfile> profileChoosenList) {
+
         boolean result = true;
         int match = 0;
+
         if (!userName.isEmpty()) {
             int idxString = this.userName.toLowerCase().indexOf(userName.toLowerCase());
             if (idxString == -1) {
@@ -289,6 +291,7 @@ public class SystemUser {
                 match++;
             }
         }
+
         if (!email.isEmpty()) {
             int idxString = this.email.toLowerCase().indexOf(email.toLowerCase());
             if (idxString == -1) {
@@ -297,6 +300,7 @@ public class SystemUser {
                 match++;
             }
         }
+
         if (!function.isEmpty()) {
             int idxString = this.function.toLowerCase().indexOf(function.toLowerCase());
             if (idxString == -1) {
@@ -305,14 +309,15 @@ public class SystemUser {
                 match++;
             }
         }
-        if (isActive != -1) {
-            if (isActive == 0) {
+
+        if (state != -1) {
+            if (state == 0) {
                 if (this.activateUser) {
                     result = false;
                 } else {
                     match++;
                 }
-            } else if (isActive == 1) {
+            } else if (state == 1) {
                 if (!this.activateUser) {
                     result = false;
                 } else {
@@ -320,31 +325,40 @@ public class SystemUser {
                 }
             }
         }
-        if (profilesId.length != 0) {
-            if (this.assignedProfileList.size() == 0) {
+
+        if (profileChoosenList.size() != 0) {
+
+            if (this.assignedProfileList == null) {
                 result = false;
             } else {
+
                 int count = 0;
-                for (int k : profilesId) {
-                    for (UserProfile profile : this.assignedProfileList) {
-                        if (profile.isValidId(k)) {
+
+                for (UserProfile k : profileChoosenList) {
+                        if (this.assignedProfileList.contains(k)) {
                             count++;
                             match++;
                             break;
                         }
-                    }
                 }
-                if (count != profilesId.length) {
+
+                if (count != profileChoosenList.size()) {
                     result = false;
                 }
+
             }
         }
+
         if (match == 0) {
             result = false;
         }
-        return result;
-    }*/
 
+        return result;
+    }
+
+    /**
+     * Method to update old password with the new password
+     */
 
     /** Method to update old password with the new password */
     public boolean updatePassword(String oldpasswordUI, String newpassword) {

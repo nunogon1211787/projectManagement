@@ -22,7 +22,7 @@ public class UserStory {
     private UserStoryStatus userStoryStatus;
     private int priority;
     private String description;
-    private int timeEstimate;
+//    private int timeEstimate;
     private long id_UserStory;
     private long id_ParentUserStory;
 
@@ -30,15 +30,23 @@ public class UserStory {
      * Constructor
      */
 
-    public UserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
-        isValidUserStory(userStoryStatus, priority, description, timeEstimate);
+    public UserStory(UserStoryStatus userStoryStatus, int priority, String description) {
+        isValidUserStory(userStoryStatus, priority, description);
         this.id_UserStory = ID_GENERATOR.getAndIncrement();
 //        this.projectCode = projectCode;
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
         this.description = description;
-        this.timeEstimate = timeEstimate;
+//        this.timeEstimate = timeEstimate;
         this.id_ParentUserStory = 0;
+    }
+
+    public boolean setPriority(int priority) {
+        if(validatePriority(priority)) {
+            this.priority = priority;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -54,7 +62,7 @@ public class UserStory {
      * Method to validate entered data (name) by Product Owner
      * (Cris US009)
      */
-    private boolean isValidUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
+    private boolean isValidUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
         //check if priority is invalid
         if (priority < 0) {
             throw new IllegalArgumentException("Check priority, cannot be < 0.");
@@ -74,9 +82,9 @@ public class UserStory {
 //        }
 
         // check estimated time is invalid
-        if (timeEstimate < 0) {
-            throw new IllegalArgumentException("Check time estimate, cannot be < 0.");
-        }
+//        if (timeEstimate < 0) {
+//            throw new IllegalArgumentException("Check time estimate, cannot be < 0.");
+//        }
 
 
         return true;
@@ -86,6 +94,12 @@ public class UserStory {
      * ID_UserProfile Generator.
      */
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
+
+    private boolean validatePriority (int x){
+        if(x < 0 || x > 5)
+            return false;
+        return true;
+    }
 }
 
 /**

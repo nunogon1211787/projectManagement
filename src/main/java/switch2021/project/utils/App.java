@@ -32,6 +32,5 @@ public class App {
         return company;
     }
 
-    public TypologyStore getTypologyStore() { return typologyStore;
-    }
+    public TypologyStore getTypologyStore() { return typologyStore; }
 }

@@ -6,5 +6,5 @@ public class ResourceRole {
 
     private LocalDate startDate;
     private LocalDate endDate;
-    private ProjectRoles role;
+    private ProjectRole role;
 }

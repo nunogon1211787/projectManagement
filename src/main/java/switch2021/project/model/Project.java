@@ -295,6 +295,5 @@ public class Project {
                 && this.budget == that.budget
                 && this.numberOfSprints == that.numberOfSprints);
     }
-
 }
 
