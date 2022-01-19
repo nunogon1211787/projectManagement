@@ -29,7 +29,6 @@ public class Resource {
         this.role = null;
     }
 
-
     /** Métodos "Getter" dos atributos (Carolina US007) **/
     public SystemUser getUser() {
         return user;
