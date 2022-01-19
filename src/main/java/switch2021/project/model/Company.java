@@ -76,14 +76,4 @@ public class Company {
 
     //Request Store
     public RequestStore getRequestStore() {return requestStore;}
-
-//TO DO CRIS
-    /** Project Store **/
-    public ProductBacklog getProductBacklog(String code) {
-        return this.projectStore.getProductBacklog(code);
-    }
-
-    public List<Project> getProjectListWithPORight(String email) {
-        return projectStore.getProjectListWithPORight(email);
-    }
 }
