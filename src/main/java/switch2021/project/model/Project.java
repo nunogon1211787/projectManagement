@@ -267,8 +267,8 @@ public class Project {
         return msg;
     }
 
-    public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
-        UserStory userStory = this.productBacklog.createUserStory(userStoryStatus, priority, description, timeEstimate);
+    public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
+        UserStory userStory = this.productBacklog.createUserStory(userStoryStatus, priority, description);
         return this.productBacklog.saveUserStory(userStory);
     }
 

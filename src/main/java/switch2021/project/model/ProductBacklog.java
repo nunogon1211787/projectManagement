@@ -38,7 +38,7 @@ public class ProductBacklog {
      * Methods for create UserStory to the productBacklog (Cris US009)
      **/
 
-    public UserStory createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
+    public UserStory createUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
         return new UserStory(userStoryStatus, priority, description);
     }
 

@@ -121,6 +121,8 @@ public class ProjectStore {
         return status;
     }
 
+    //TODO - validar se é para manter aqui o metodo do get product backlog
+    // A ser usado no add user story no sprint backlog
     public ProductBacklog getProductBacklog(String code) {
         if (code == null || code.trim().isEmpty()) {
             throw new IllegalArgumentException("Project code is empty.");
