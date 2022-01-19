@@ -39,7 +39,7 @@ public class ProductBacklog {
      **/
 
     public UserStory createUserStory(UserStoryStatus userStoryStatus, int priority, String description, int timeEstimate) {
-        return new UserStory(userStoryStatus, priority, description, timeEstimate);
+        return new UserStory(userStoryStatus, priority, description);
     }
 
     /**

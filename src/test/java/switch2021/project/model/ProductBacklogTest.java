@@ -29,27 +29,28 @@ public class ProductBacklogTest {
         assertEquals(status, userStory.getUserStoryStatus());
         assertEquals(priority, userStory.getPriority());
         assertEquals(description, userStory.getDescription());
-        assertEquals(timeEstimate, userStory.getTimeEstimate());
+//        assertEquals(timeEstimate, userStory.getTimeEstimate());
     }
 
-    @Test
-    public void createUserStoryTimeEstimateInvalid() {
-        // Arrange
-        ProductBacklog productBacklog = new ProductBacklog();
-        UserStoryStatus status = new UserStoryStatus("In progress");
-        int priority = 1;
-        String description = "Default Story";
-        int timeEstimate = -7;
-        String code = "123";
-
-        // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            UserStory userStory = productBacklog.createUserStory(
-                    status, priority, description, timeEstimate);
-        });
-        // Assert
-        assertTrue(exception.getMessage().contains("Check time estimate, cannot be < 0."));
-    }
+    // Deixa de fazer sentido por timeEstimate passar para SprintBacklog
+//    @Test
+//    public void createUserStoryTimeEstimateInvalid() {
+//        // Arrange
+//        ProductBacklog productBacklog = new ProductBacklog();
+//        UserStoryStatus status = new UserStoryStatus("In progress");
+//        int priority = 1;
+//        String description = "Default Story";
+//        int timeEstimate = -7;
+//        String code = "123";
+//
+//        // Act
+//        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+//            UserStory userStory = productBacklog.createUserStory(
+//                    status, priority, description, timeEstimate);
+//        });
+//        // Assert
+//        assertTrue(exception.getMessage().contains("Check time estimate, cannot be < 0."));
+//    }
 
     @Test
     public void createUserStorydescriptionInvalidEmpty() {
@@ -131,6 +132,7 @@ public class ProductBacklogTest {
         assertTrue(exception.getMessage().contains("Repeated user story inserted, same code project and description."));
     }
 
+    // Deixa de fazer sentido porque ela já está ligadada projecto e não precisa de atributo
 //    @Test
 //    public void createUserStoryCodeProjectInvalidBlank() {
 //        // Arrange
@@ -192,7 +194,7 @@ public class ProductBacklogTest {
         assertEquals(status, userStory.getUserStoryStatus());
         assertEquals(priority, userStory.getPriority());
         assertEquals(description, userStory.getDescription());
-        assertEquals(timeEstimate, userStory.getTimeEstimate());
+//        assertEquals(timeEstimate, userStory.getTimeEstimate());
     }
 
 }

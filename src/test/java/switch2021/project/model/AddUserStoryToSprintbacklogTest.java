@@ -20,7 +20,7 @@ public class AddUserStoryToSprintbacklogTest {
     @DisplayName("Add Story to backlog")
     public void addStoryToBacklog() {
         UserStoryStatus status = new UserStoryStatus("statusTet");
-        UserStory userStory = new UserStory(status, 2,"teste", 5);
+        UserStory userStory = new UserStory(status, 2,"teste");
         SprintBacklog testBacklog = new SprintBacklog();
         UserStoryOfSprint test = testBacklog.createUSerStoryOfSprint(userStory,8);
         testBacklog.addUserStory(test);
