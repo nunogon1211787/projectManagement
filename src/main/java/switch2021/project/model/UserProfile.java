@@ -63,11 +63,11 @@ public class UserProfile {
      * Method to verify if a given ID matches with object ID
      */
 
-    public boolean isValidId(int x) {
+    public boolean hasId(int x) {
         return (x == this.id_Profile);
     }
 
-    public boolean isValidName(String name) {
+    public boolean hasName(String name) {
         if(!name.toUpperCase(Locale.ROOT).equals(this.name.toUpperCase())) {
             return false;
         }

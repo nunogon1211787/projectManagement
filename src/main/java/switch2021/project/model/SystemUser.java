@@ -13,7 +13,7 @@ public class SystemUser {
     private String password;
     private String function;
     private boolean activateUser;
-    private UserProfile assignedProfile;
+    private List<UserProfile> assignedProfile;
 
     /**
      * Contructor
@@ -231,7 +231,7 @@ public class SystemUser {
     // Rever este Método!!!!    *****************************
     ///
 
-    /*public boolean hasThisData(String userName, String email, String function, int isActive, int[] profilesId) {
+    public boolean hasThisData(String userName, String email, String function, int state, List<UserProfile> profileChoosenList) {
 
         boolean result = true;
         int match = 0;
@@ -263,14 +263,14 @@ public class SystemUser {
             }
         }
 
-        if (isActive != -1) {
-            if (isActive == 0) {
+        if (state != -1) {
+            if (state == 0) {
                 if (this.activateUser) {
                     result = false;
                 } else {
                     match++;
                 }
-            } else if (isActive == 1) {
+            } else if (state == 1) {
                 if (!this.activateUser) {
                     result = false;
                 } else {
@@ -279,25 +279,23 @@ public class SystemUser {
             }
         }
 
-        if (profilesId.length != 0) {
+        if (profileChoosenList.size() != 0) {
 
-            if (this.assignedProfileList.size() == 0) {
+            if (this.assignedProfile == null) {
                 result = false;
             } else {
 
                 int count = 0;
 
-                for (int k : profilesId) {
-                    for (UserProfile profile : this.assignedProfileList) {
-                        if (profile.isValidId(k)) {
+                for (UserProfile k : profileChoosenList) {
+                        if (this.assignedProfile.contains(k)) {
                             count++;
                             match++;
                             break;
                         }
-                    }
                 }
 
-                if (count != profilesId.length) {
+                if (count != profileChoosenList.size()) {
                     result = false;
                 }
 
@@ -309,7 +307,7 @@ public class SystemUser {
         }
 
         return result;
-    }*/
+    }
 
     /**
      * Method to update old password with the new password

@@ -60,22 +60,22 @@ public class SystemUserStore {
     }
 
     ///// Rever Método
-    /*public List<SystemUser> searchUsers(String name, String email, String function, int isActive, int[] profileList) {
+    public List<SystemUser> searchUsers(String name, String email, String function, int state, List<UserProfile> profileChoosenList) {
 
-        int listSize = this.SystemUserList.size();
+        int listSize = this.systemUserList.size();
         List<SystemUser> foundUsersList = new ArrayList<>();
 
         if (listSize != 0) {
 
-            for (SystemUser systemUser : this.SystemUserList)
-                if (systemUser.hasThisData(name, email, function, isActive, profileList)) {
-                    foundUsersList.add(new SystemUser(systemUser));
+            for (SystemUser systemUser : this.systemUserList)
+                if (systemUser.hasThisData(name, email, function, state, profileChoosenList)) {
+                    foundUsersList.add(systemUser);
                 }
 
         }
 
         return foundUsersList;
-    }*/
+    }
 
     /**
      * Validation Methods

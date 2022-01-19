@@ -44,7 +44,12 @@ public class UserProfileStore {
      **/
 
     public List<UserProfile> getUserProfileList() {
-        return this.userProfileList;
+
+        List<UserProfile> copyList = new ArrayList<>();
+
+        copyList.addAll(this.userProfileList);
+
+        return copyList;
     }
 
     /*public List<UserProfile> getUserProfileListWithType(String type) {
