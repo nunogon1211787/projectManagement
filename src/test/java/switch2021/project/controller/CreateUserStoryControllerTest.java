@@ -38,18 +38,19 @@ public class CreateUserStoryControllerTest {
         assertTrue(isUserStoryCreated);
     }
 
-    @Test
-    public void createUserStoryTimeEstimateInvalid() {
-        // Arrange
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController(this.company);
-        // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            boolean isUserStoryCreated = createUserStoryController.createUserStory(project.getCode(),
-                    new UserStoryStatus("To Do"), 12, "New Story", -6);
-        });
-        // Assert
-        assertTrue(exception.getMessage().contains("Check time estimate, cannot be < 0."));
-    }
+    // Não faz sentido porque timeEstimate pasa para SprintBacklog
+//    @Test
+//    public void createUserStoryTimeEstimateInvalid() {
+//        // Arrange
+//        CreateUserStoryController createUserStoryController = new CreateUserStoryController(this.company);
+//        // Act
+//        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+//            boolean isUserStoryCreated = createUserStoryController.createUserStory(project.getCode(),
+//                    new UserStoryStatus("To Do"), 12, "New Story", -6);
+//        });
+//        // Assert
+//        assertTrue(exception.getMessage().contains("Check time estimate, cannot be < 0."));
+//    }
 
     @Test
     public void createUserStorydescriptionInvalidEmpty() {
