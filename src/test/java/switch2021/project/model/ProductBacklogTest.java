@@ -66,7 +66,7 @@ public class ProductBacklogTest {
     }
 
     @Test
-    public void createUserStoryPriorityInvalid() {
+    public void createUserStoryPriorityInvalidInf() {
         // Arrange
         ProductBacklog productBacklog = new ProductBacklog();
         UserStoryStatus status = new UserStoryStatus("In progress");
@@ -79,8 +79,26 @@ public class ProductBacklogTest {
                     status, priority, description);
         });
         // Assert
-        assertTrue(exception.getMessage().contains("Check priority, cannot be < 0."));
+        assertTrue(exception.getMessage().contains("Check priority, cannot be < 0 or superior to 5."));
     }
+
+    @Test
+    public void createUserStoryPriorityInvalidSup() {
+        // Arrange
+        ProductBacklog productBacklog = new ProductBacklog();
+        UserStoryStatus status = new UserStoryStatus("In progress");
+        int priority = 6;
+        String description = "Create user story";
+
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            UserStory userStory = productBacklog.createUserStory(
+                    status, priority, description);
+        });
+        // Assert
+        assertTrue(exception.getMessage().contains("Check priority, cannot be < 0 or superior to 5."));
+    }
+
 
     @Test
     public void createUserStoryAlreadyExist() {

@@ -38,7 +38,7 @@ public class UserStory {
     }
 
     public boolean setPriority(int priority) {
-        if(validatePriority(priority)) {
+        if (validatePriority(priority)) {
             this.priority = priority;
             return true;
         }
@@ -47,7 +47,6 @@ public class UserStory {
 
     /**
      * Set parentUserStory
-     *
      */
 
     public void setId_ParentUserStory(long id_ParentUserStory) {
@@ -60,8 +59,8 @@ public class UserStory {
      */
     private boolean isValidUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
         //check if priority is invalid
-        if (priority < 0) {
-            throw new IllegalArgumentException("Check priority, cannot be < 0.");
+        if (priority < 0 || priority > 5) {
+            throw new IllegalArgumentException("Check priority, cannot be < 0 or superior to 5.");
         }
 
         //check if description is invalid
@@ -80,8 +79,8 @@ public class UserStory {
      */
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
 
-    private boolean validatePriority (int x){
-        if(x < 0 || x > 5)
+    private boolean validatePriority(int x) {
+        if (x < 0 || x > 5)
             return false;
         return true;
     }
