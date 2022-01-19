@@ -14,7 +14,6 @@ public class ProjectStore {
      **/
 
     private List<Project> projectList;
-    private Company company;
 
     /**
      * Constructors with data
@@ -95,11 +94,11 @@ public class ProjectStore {
         double sum = 0;
         boolean msg = false;
 
-        for (int i = 0; i < projectList.size(); i++) {
-            for (int j = 0; j < projectList.get(i).getProjectTeam().getProjectTeamList().size(); j++) {
-                if (projectList.get(i).getTeamMemberByIndex(j).getUser().equals(user) &&
-                        projectList.get(i).getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
-                    sum = sum + projectList.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();
+        for (Project project : projectList) {
+            for (int j = 0; j < project.getProjectTeam().getProjectTeamList().size(); j++) {
+                if (project.getTeamMemberByIndex(j).getUser().equals(user) &&
+                        project.getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
+                    sum = sum + project.getTeamMemberByIndex(j).getPercentageOfAllocation();
                 }
             }
         }
@@ -133,15 +132,13 @@ public class ProjectStore {
         return project.getProductBacklog();
     }
 
-    public List<Project> getProjectListByMemberAssociated(String email){
-        SystemUser user = company.getSystemUserStore().getUserByEmail(email);
-
+    public List<Project> getProjectListByMemberAssociated(String email) {
         List<Project> projectListUser = new ArrayList<>();
 
-        for (int i = 0; i < this.projectList.size(); i++) {
-            for (int j = 0; j < this.projectList.get(i).getProjectTeam().getProjectTeamList().size(); j++) {
-                if(this.projectList.get(i).getProjectTeam().getProjectTeamList().get(j).getUser() == user){
-                    projectListUser.add(this.projectList.get(i));
+        for (Project project : this.projectList) {
+            for (int j = 0; j < project.getProjectTeam().getProjectTeamList().size(); j++) {
+                if (project.getProjectTeam().getProjectTeamList().get(j).getUser().getEmail().equals(email)) {
+                    projectListUser.add(project);
                 }
             }
         }

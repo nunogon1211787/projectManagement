@@ -1,5 +1,7 @@
 package switch2021.project.model;
 
+import switch2021.project.stores.UserProfileStore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,6 @@ public class SystemUser {
     private String function;
     private boolean activateUser;
     private List<UserProfile> assignedProfileList;
-
 
     /** Constructor **/
     public SystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile profile) {
@@ -37,7 +38,7 @@ public class SystemUser {
     }
 
 //ver este método (13/01/2022):
-    /** Copy Constructor. Para criar um novo objeto, igual ao parâmetro, mas sem levar adiante as referências do objeto original. */
+    // Copy Constructor. Para criar um novo objeto, igual ao parâmetro, mas sem levar adiante as referências do objeto original. */
     /*public SystemUser(SystemUser originalUser) {
         this.userName = originalUser.userName;
         this.email = originalUser.email;
@@ -257,9 +258,10 @@ public class SystemUser {
 
         for (UserProfile profileCheck:assignedProfileList){
 
-            if (profile.equals(profileCheck)){
+            if (profile.equals(profileCheck)) {
 
                 profileStatus = true;
+                break;
             }
         }
 
@@ -267,11 +269,11 @@ public class SystemUser {
     }
 
 
-    /**
+    /*
      * Método para verificar se os parâmetros recebidos são do objeto.
      */
 
-    /** Método para verificar se os parâmetros recebidos são do objeto. */
+    // Método para verificar se os parâmetros recebidos são do objeto. */
     ///
     // Rever este Método!!!!    *****************************
     ///

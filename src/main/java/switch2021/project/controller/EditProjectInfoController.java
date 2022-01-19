@@ -14,7 +14,7 @@ public class EditProjectInfoController {
     List<Project> arrayProject;
 
 
-    public List getProjectList (){
+    public List<Project> getProjectList (){
         this.arrayProject = this.company.getProjectStore().getProjectList();
         return arrayProject;
     }
@@ -40,7 +40,6 @@ public class EditProjectInfoController {
         this.project.setProjectTeam(projectTeam);
         return true;
     }
-
 }
 
 
