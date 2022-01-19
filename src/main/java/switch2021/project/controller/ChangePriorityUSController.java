@@ -44,8 +44,4 @@ public class ChangePriorityUSController {
         return this.userStory.setPriority(x);
     }
 
-
-
-
-
 }

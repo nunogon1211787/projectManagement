@@ -3,8 +3,7 @@ package switch2021.project.model;
 import switch2021.project.stores.SprintStore;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class Project {
 
@@ -16,13 +15,13 @@ public class Project {
     private String projectName;
     private String description;
 
-    private Customer customer;
+    private final Customer customer;
     private Typology typology;
     private ProjectStatus projectStatus;
-    private ProductBacklog productBacklog;
+    private final ProductBacklog productBacklog;
     private SystemUser productOwner; // Verificar a necessidade de se manter este atributo
 
-    private BusinessSector businessSector;
+    private final BusinessSector businessSector;
     private SprintStore sprintList;
     private ProjectTeam projectTeam;
 
@@ -239,8 +238,7 @@ public class Project {
 
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
 
-        Resource res = new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
-        return res;
+        return new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
     }
 
     public Resource getTeamMemberByIndex(int index) {
@@ -256,6 +254,7 @@ public class Project {
         for (int i = 0; i < projectTeam.getProjectTeamList().size(); i++) {
             if (projectTeam.getProjectTeamList().get(i).equals(resource)) {
                 msg = false;
+                break;
             }
         }
         return msg;
@@ -270,17 +269,33 @@ public class Project {
     /** Override **/
     @Override
     public boolean equals(Object o) {
-        Project that = (Project) o;
-        return (this.code.equals(that.code)
-                && this.projectName.equals(that.projectName)
-                && this.description.equals(that.description)
-                && this.typology.equals(that.typology)
-                && this.businessSector.equals(that.businessSector)
-                && this.customer.equals(that.customer)
-                && this.projectStatus.equals(that.projectStatus)
-                && this.startDate.equals(that.startDate)
-                && this.budget == that.budget
-                && this.numberOfSprints == that.numberOfSprints);
+        if (this == o) return true;
+        if (!(o instanceof Project)) return false;
+        Project project = (Project) o;
+        return numberOfSprints == project.numberOfSprints
+                && Double.compare(project.budget, budget) == 0
+                && sprintDuration == project.sprintDuration
+                && Objects.equals(code, project.code)
+                && Objects.equals(projectName, project.projectName)
+                && Objects.equals(description, project.description)
+                && Objects.equals(customer, project.customer)
+                && Objects.equals(typology, project.typology)
+                && Objects.equals(projectStatus, project.projectStatus)
+                && Objects.equals(productBacklog, project.productBacklog)
+                && Objects.equals(productOwner, project.productOwner)
+                && Objects.equals(businessSector, project.businessSector)
+                && Objects.equals(sprintList, project.sprintList)
+                && Objects.equals(projectTeam, project.projectTeam)
+                && Objects.equals(startDate, project.startDate)
+                && Objects.equals(endDate, project.endDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(code, projectName, description, customer, typology,
+                projectStatus, productBacklog, productOwner, businessSector,
+                sprintList, projectTeam, startDate, endDate, numberOfSprints,
+                budget, sprintDuration);
     }
 }
 

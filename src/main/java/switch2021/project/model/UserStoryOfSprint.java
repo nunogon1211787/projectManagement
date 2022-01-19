@@ -1,14 +1,15 @@
 package switch2021.project.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.Getter;
 
+import java.util.Objects;
+
+@Getter
 public class UserStoryOfSprint {
 
     /** Class Atribures **/
-
-    private int estimateEffort;
-    private UserStory userStoryOfSprint;
+    private final int estimateEffort;
+    private final UserStory userStoryOfSprint;
 
     public UserStoryOfSprint(UserStory story, int effort){
         this.estimateEffort = effort;
@@ -18,9 +19,22 @@ public class UserStoryOfSprint {
     /** Override **/
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserStoryOfSprint)) return false;
         UserStoryOfSprint that = (UserStoryOfSprint) o;
-        return (this.estimateEffort == that.estimateEffort)
-                && this.userStoryOfSprint.equals(that.userStoryOfSprint);
+        return estimateEffort == that.estimateEffort && userStoryOfSprint.equals(that.userStoryOfSprint);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(estimateEffort, userStoryOfSprint);
+    }
+
+    @Override
+    public String toString() {
+        return "UserStoryOfSprint{" +
+                "estimateEffort=" + estimateEffort +
+                ", userStoryOfSprint=" + userStoryOfSprint +
+                '}';
+    }
 }
