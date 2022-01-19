@@ -73,7 +73,9 @@ public class ProjectTeam {
     }
 
 
-    /** Add Method **/
+    /**
+     * Add Method
+     **/
     public void addResourceToTeam(Resource resource) {
         this.projectTeamList.add(resource); //Precisa ter validações <-------------
     }

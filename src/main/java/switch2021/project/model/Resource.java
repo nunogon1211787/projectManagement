@@ -85,6 +85,11 @@ public class Resource {
         return this.role == projectRole;
     }
 
+    // Check by Email
+    public boolean isYour(String email) {
+        return this.user.isYourEmail(email);
+    }
+
 
     /**
      * Método check se o período que queremos alocar é coincidente com o período que o resource está alocado ao projecto (para depois podermos somar e confirmar que a alocação total não é maior que 1) (Carolina US007)

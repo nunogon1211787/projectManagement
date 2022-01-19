@@ -39,7 +39,7 @@ public class Project {
     public Project(String code, String name, String description, Customer customer, Typology typology,
                    BusinessSector businessSector, LocalDate startDate, ProjectStatus status, int numberOfSprints, double budget) {
 
-        validateProjectFields(name, description,budget,numberOfSprints);
+        validateProjectFields(name, description, budget, numberOfSprints);
 
         this.code = code;
         this.projectName = name;
@@ -206,10 +206,10 @@ public class Project {
             throw new IllegalArgumentException("Budget must be greater than 0");
     }
 
-    /**
+    /*
      * Methods UserStory creation (Cris US009)
      * - Create User Story method
-     **/
+     */
 
 //    public boolean createUserStory(String userStoryStatus, int priority, String description, int timeEstimate) {
 //        UserStory us = productBacklog.createUserStory(userStoryStatus, priority, description, timeEstimate);
@@ -260,13 +260,36 @@ public class Project {
         return msg;
     }
 
+    public boolean hasCurrentResource(String email) {
+        boolean msg = false;
+        for (Resource resource : this.projectTeam.getProjectTeamList()) {
+            if (hasResource(email) && resource.getStartDate().isBefore(LocalDate.now())
+                    && resource.getEndDate().isAfter(LocalDate.now())) {
+                msg = true;
+            }
+        }
+        return msg;
+    }
+
+    public boolean hasResource(String email) {
+        boolean msg = false;
+        for (Resource resource : this.projectTeam.getProjectTeamList()) {
+            if (resource.isYour(email)) {
+                msg = true;
+            }
+        }
+        return msg;
+    }
+
     public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
         UserStory userStory = this.productBacklog.createUserStory(userStoryStatus, priority, description);
         return this.productBacklog.saveUserStory(userStory);
     }
 
 
-    /** Override **/
+    /**
+     * Override
+     **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
