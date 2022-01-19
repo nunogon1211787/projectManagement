@@ -146,7 +146,7 @@ public class ProjectStore {
         return projectListUser;
     }*/
 
-    public List<Project> getProjectListByMemberAssociated(String email) {
+    public List<Project> getAllProjectListByUserEmail(String email) {
         List<Project> allProjectListByUser = new ArrayList<>();
 
         for (Project project : this.projectList) {
@@ -159,8 +159,8 @@ public class ProjectStore {
         return allProjectListByUser;
     }
 
-    public List<Project> getCurrentProjectListByMemberAssociated(String email) {
-        List<Project> allProjectListByUser = getProjectListByMemberAssociated(email);
+    public List<Project> getCurrentProjectListByUserEmail(String email) {
+        List<Project> allProjectListByUser = getAllProjectListByUserEmail(email);
         List<Project> currentProjectListByUser = new ArrayList<>();
 
         for (Project project : allProjectListByUser) {
