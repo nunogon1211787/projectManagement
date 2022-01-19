@@ -1,7 +1,9 @@
 package switch2021.project.stores;
+
 import switch2021.project.model.*;
 import switch2021.project.utils.App;
 
+import javax.swing.plaf.PanelUI;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -164,10 +166,18 @@ public class ProjectStore {
         List<Project> currentProjectListByUser = new ArrayList<>();
 
         for (Project project : allProjectListByUser) {
-            if (project.getEndDate().isAfter(LocalDate.now())) {
+            if (validateDateResourceInProject(project, )) {
                 currentProjectListByUser.add(project);
             }
         }
         return currentProjectListByUser;
     }
+
+    public boolean validateDateResourceInProject(Project project, SystemUser user) {
+        LocalDate resourceStartDate = project.getProjectTeam().getResource(user).getStartDate();
+        LocalDate resourceEndDate = project.getProjectTeam().getResource(user).getEndDate();
+
+        return (resourceStartDate.isBefore(LocalDate.now()) && resourceEndDate.isAfter(LocalDate.now()));
+    }
+
 }
