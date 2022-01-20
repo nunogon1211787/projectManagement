@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import switch2021.project.stores.ProjectRoleStore;
+import switch2021.project.utils.App;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -75,14 +76,14 @@ public class ProjectTeam {
     /**
      * Setter new Role
      **/
-    public boolean assignProjectRole(Resource originalResource, LocalDate startDate, LocalDate endDate, ProjectRole projectRole) {
+    public boolean assignProjectRole(Resource originalResource, LocalDate startDateNewRole, LocalDate endDateCurrentSprint, ProjectRole projectRole) {
 
         Resource newResource = new Resource(originalResource); //copyResource
         newResource.setRole(projectRole);                      //change copyResource role
-        newResource.setStartDate(startDate);                   //change originalResource start date
-        newResource.setEndDate(endDate);
+        newResource.setStartDate(startDateNewRole);            //change originalResource start date
+        newResource.checkStartDateEndDate(newResource.getStartDate(),newResource.getEndDate());
 
-        originalResource.setEndDate(startDate.minusDays(1));                //change originalResource end date
+        originalResource.setEndDate(endDateCurrentSprint);     //change originalResource end date
 
         return saveResource(newResource);                      //add copy to Project Team List
     }
@@ -102,7 +103,7 @@ public class ProjectTeam {
     private boolean saveResource(Resource newResource) {
         boolean msg;
         if (validateRoleExistent(newResource.getRole())) {
-            assignProjectRole(getResource(newResource.getRole()), newResource.getStartDate(), null, null);
+            assignProjectRole(getResource(newResource.getRole()), newResource.getStartDate(), null, App.getInstance().getCompany().getProjectRolesStore().getProjectRole("Team Member"));
             this.projectTeamList.add(newResource);
             msg = true;
         } else {                //-----------> Validação a fazer <------------
