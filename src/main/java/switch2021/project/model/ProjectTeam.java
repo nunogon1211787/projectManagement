@@ -40,7 +40,7 @@ public class ProjectTeam {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(user) && i.getEndDate().isAfter(LocalDate.now())) {
+            if (i.isYour(user) && i.isCurrent()) {
                 resource = i;
             }
         }
@@ -52,7 +52,19 @@ public class ProjectTeam {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(role) && i.getEndDate().isAfter(LocalDate.now())) {
+            if (i.isYour(role) && i.isCurrent()) {
+                resource = i;
+            }
+        }
+        return resource;
+    }
+
+    //Get resource by E-mail
+    public Resource getResource(String email) {
+        Resource resource = null;
+
+        for (Resource i : projectTeamList) {
+            if (i.isYour(email) && i.isCurrent()) {
                 resource = i;
             }
         }
@@ -63,7 +75,6 @@ public class ProjectTeam {
     /**
      * Setter new Role
      **/
-
     public boolean assignProjectRole(Resource originalResource, LocalDate startDate, LocalDate endDate, ProjectRole projectRole) {
 
         Resource newResource = new Resource(originalResource); //copyResource
@@ -128,8 +139,7 @@ public class ProjectTeam {
         boolean msg = false;
 
         for (Resource resource : this.projectTeamList) {
-            if (resource.isYour(email) && resource.getStartDate().isBefore(LocalDate.now())
-                    && resource.getEndDate().isAfter(LocalDate.now())) {
+            if (resource.isYour(email) && resource.isCurrent()) {
                 msg = true;
             }
         }
