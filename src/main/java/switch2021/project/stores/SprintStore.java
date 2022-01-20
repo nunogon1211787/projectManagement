@@ -1,10 +1,9 @@
 package switch2021.project.stores;
 
-import switch2021.project.model.ProjectRole;
-import switch2021.project.model.Sprint;
-import switch2021.project.model.SystemUser;
-import switch2021.project.model.Typology;
+import switch2021.project.model.*;
+import switch2021.project.utils.App;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +25,20 @@ public class SprintStore {
     }
 
     /**
+     * Sprint creator
+     **/
+
+    public Sprint createSprint(long id, String name, LocalDate startDate, Project sprintDuration) {
+
+        Sprint sprint;
+
+        sprint = new Sprint(id, name, startDate, sprintDuration);
+
+        return sprint;
+    }
+
+
+    /**
      * Sprint Methods
      */
 
@@ -33,7 +46,7 @@ public class SprintStore {
     public Sprint getSprint(long id) {
         Sprint sprint = null;
         for (Sprint sprt : sprintList) {
-            if (sprt.getNumber() == id) {
+            if (sprt.getID() == id) {
                 sprint = sprt;
                 break;
             }
@@ -71,15 +84,6 @@ public class SprintStore {
             }
         }
         return msg;
-    }
-
-    /**
-     * ID Generator to the Sprint ID
-     */
-
-    public int idGeneratorSprint() {
-        int id = getSprintList().size();
-        return id;
     }
 
     /**

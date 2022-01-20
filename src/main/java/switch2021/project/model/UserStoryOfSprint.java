@@ -7,7 +7,7 @@ import java.util.Objects;
 @Getter
 public class UserStoryOfSprint {
 
-    /** Class Atribures **/
+    /** Class Attributes **/
     private final int estimateEffort;
     private final UserStory userStoryOfSprint;
 

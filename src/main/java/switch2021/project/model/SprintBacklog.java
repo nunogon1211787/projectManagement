@@ -9,12 +9,13 @@ import java.util.Objects;
 @Getter
 public class SprintBacklog {
 
-    /** Calss Atributtes **/
+    /** Class Attributes **/
     private final List<UserStoryOfSprint> userStoryOfSprintList;
 
     public SprintBacklog() {
         this.userStoryOfSprintList = new ArrayList<>();
     }
+
     /** Create User Story Of Sprint **/
     public UserStoryOfSprint createUSerStoryOfSprint (UserStory userStory, int effort) {
         return new UserStoryOfSprint(userStory, effort );

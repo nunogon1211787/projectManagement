@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddUserStoryToSprintbacklogTest {
 
+
     Company company = new Company();
     @BeforeEach
 
@@ -39,4 +40,5 @@ public class AddUserStoryToSprintbacklogTest {
         //Result
         assertEquals(expected,testBacklog.getUserStoryOfSprintList().get(0).toString());
     }
+
 }
