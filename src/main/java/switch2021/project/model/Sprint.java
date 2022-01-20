@@ -17,21 +17,20 @@ public class Sprint {
     private SprintBacklog sprintBacklog;
     private LocalDate startDate;
     private LocalDate endDate;
-    private Project sprintDuration;
+    private int sprintDuration;
 
 
     /**
      * Constructor of Sprint
      **/
 
-    public Sprint(long id, String name, LocalDate startDate, Project sprintDuration) {
+    public Sprint(long id, String name, LocalDate startDate, int sprintDuration) {
         checkSprintNameRules(name);
         //checkSprintStartDateRules(startDate);
         //checkSprintSprintDurationRules(sprintDuration);
         this.id = ID_GENERATOR.getAndIncrement();
         this.name = name;
         this.startDate = startDate;
-        this.endDate = endDate;
         this.sprintBacklog = new SprintBacklog();
         this.sprintDuration = sprintDuration;
     }
@@ -97,11 +96,11 @@ public class Sprint {
         return endDate;
     }
 
-    public Project getSprintDuration() {
+    public int getSprintDuration() {
         return sprintDuration;
     }
 
-    public Project setSprintDuration() {
+    public int setSprintDuration() {
         return sprintDuration;
     }
 

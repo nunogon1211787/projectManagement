@@ -28,7 +28,7 @@ public class SprintStore {
      * Sprint creator
      **/
 
-    public Sprint createSprint(long id, String name, LocalDate startDate, Project sprintDuration) {
+    public Sprint createSprint(long id, String name, LocalDate startDate, int sprintDuration) {
 
         Sprint sprint;
 
