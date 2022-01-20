@@ -9,18 +9,22 @@ public class UserStoryOfSprint {
 
     /** Class Attributes **/
     private final int estimateEffort;
-    private final UserStory userStoryOfSprint;
-    private final long id_UserStoryofSprint;
+    private  UserStory userStoryOfSprint;
+    private int id_UserStoryOfSprint;
+
+    /**
+     * ---> Constructor <---
+     **/
 
     public UserStoryOfSprint(UserStory story, int effort){
         validateFields(effort,story);
         this.estimateEffort = effort;
         this.userStoryOfSprint = story;
-        this.id_UserStoryofSprint= 0;
+//        this.id_UserStoryOfSprint= 0;
     }
 
     public boolean hasCode (long id_UserStoryofSprint) {
-        return this.id_UserStoryofSprint==id_UserStoryofSprint;
+        return this.id_UserStoryOfSprint==id_UserStoryofSprint;
     }
 
     public void validateFields(int estimateEffort, UserStory userStory) {
@@ -30,6 +34,14 @@ public class UserStoryOfSprint {
             throw new IllegalArgumentException("User Story cannot be found.");
         if(userStory.getUserStoryStatus().getDescription().equals("Done"))
             throw new IllegalArgumentException("User Story is already finished.");;
+    }
+
+    public UserStory getUserStoryOfSprint() {
+        return userStoryOfSprint;
+    }
+
+    public void setId_UserStoryOfSprint(int id_UserStoryOfSprint) {
+        this.id_UserStoryOfSprint = id_UserStoryOfSprint;
     }
 
     /** Override **/
