@@ -103,6 +103,11 @@ public class Resource {
         return this.user.isYourEmail(email);
     }
 
+    //Check if is current
+    public boolean isCurrent() {
+        return (this.startDate.isBefore(LocalDate.now()) && this.endDate.isAfter(LocalDate.now()));
+    }
+
 
     /**
      * Método check se o período que queremos alocar é coincidente com o período que o resource está alocado ao projecto (para depois podermos somar e confirmar que a alocação total não é maior que 1) (Carolina US007)

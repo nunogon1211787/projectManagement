@@ -3,7 +3,7 @@ package switch2021.project.controller;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectRoleStore;
 
-public class AssignProjectRoleController {
+public class AssignScrumMasterController {
 
     /** Attributes **/
     private Company company;
@@ -16,7 +16,7 @@ public class AssignProjectRoleController {
 
 
     /** Constructor **/
-    public AssignProjectRoleController() {
+    public AssignScrumMasterController() {
         company = new Company();
     }
 
