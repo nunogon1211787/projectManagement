@@ -28,8 +28,9 @@ public class CreateSprintController {
         return this.company.getProjectStore();
     }
 
-    //Fazer a validação de se a startdate do sprint esta´contida das datas do projecto. Assim terá de "impedir" a criação do sprint, caso aconteça.
-    //validação do nr de sprints.
+    //Fazer a validação de se a startdate do sprint esta´contida das datas do projecto.
+    //validação do nr de sprints (se o sprint atual está contido no nr de sprints do projeto).
+
     //public SprintStore createSprint (String name, LocalDate startDate) {
 
     //    this.sprintStore.createSprint(name, startDate);

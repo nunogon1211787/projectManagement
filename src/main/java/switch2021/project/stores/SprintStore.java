@@ -2,7 +2,6 @@ package switch2021.project.stores;
 
 import lombok.Getter;
 import switch2021.project.model.*;
-import switch2021.project.utils.App;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class SprintStore {
      * Atributos da Classe
      **/
 
-    private List<Sprint> sprintList;
+    private final List<Sprint> sprintList;
 
     /**
      * Constructors with data
@@ -30,6 +29,8 @@ public class SprintStore {
      **/
 
     public Sprint createSprint(String name, LocalDate startDate, int sprintDuration) {
+
+        validateIfStartDate(startDate);
 
         Sprint sprint;
 
@@ -81,10 +82,7 @@ public class SprintStore {
      **/
     public List<Sprint> getSprintList() {
 
-        List<Sprint> copy = new ArrayList<>();
-        copy.addAll(this.sprintList);
-
-        return copy;
+        return new ArrayList<>(this.sprintList);
     }
 
     /**
@@ -97,7 +95,17 @@ public class SprintStore {
 
     }
 
-    //validação da startdate tem de ser posterior à enddate do anterior;
+    /**
+     * Method to Validate if StartDate is later than the EndDate of the last Sprint
+     */
+
+    private void validateIfStartDate (LocalDate startDate) {
+
+        for (Sprint i : sprintList)
+            if (i.getEndDate().isBefore(startDate) && i.getStartDate() != startDate)
+                throw new IllegalArgumentException("Please type the correct Start Date.");
+        }
+
 
     /**
      * Method to Save a Sprint
