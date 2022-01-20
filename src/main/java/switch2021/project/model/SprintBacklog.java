@@ -18,7 +18,7 @@ public class SprintBacklog {
 
     /** Create User Story Of Sprint **/
     public UserStoryOfSprint createUSerStoryOfSprint (UserStory userStory, int effort) {
-        return new UserStoryOfSprint(userStory, effort );
+        return new UserStoryOfSprint(userStory, effort);
     }
 
     /**Getter **/
@@ -26,9 +26,28 @@ public class SprintBacklog {
         return userStoryOfSprintList;
     }
 
+    public UserStoryOfSprint getUserStory(long id_UserStory) {
+        UserStoryOfSprint us=null;
+        for (UserStoryOfSprint i: this.userStoryOfSprintList) {
+            if (i.hasCode(id_UserStory)){
+                us=i;
+                break;
+            }
+        }
+        return us;
+    }
+
     /** Add User Story Of Sprint **/
     public void addUserStory(UserStoryOfSprint story) {
         this.userStoryOfSprintList.add(story);
+    }
+
+    /** Validate UserStoryOfSprint Addition - checks if already exists **/
+    public void validateUserStoryOfSprintAddition (long id) {
+        for (UserStoryOfSprint i : userStoryOfSprintList) {
+            if(i.getUserStoryOfSprint().getId_UserStory() == id)
+                throw new IllegalArgumentException("User Story already in this sprintbacklog.");
+        }
     }
 
     /** Override **/

@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.controller.ProductBacklogController;
+import switch2021.project.stores.ProjectStore;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,7 +29,7 @@ public class ProjectStoreTest {
 
 
     @Test
-    public void getAllProjectListByUserEmail (){
+    public void getProjectListByUserEmail (){
         //Arrange
         company.getProjectStore().addProject(project);
         company.getProjectStore().addProject(project2);
@@ -43,7 +44,7 @@ public class ProjectStoreTest {
     }
     @Test
 
-    public void getAllProjectListByUserEmailIsBlank (){
+    public void getProjectListByUserEmailIsBlank (){
         //Arrange
         company.getProjectStore().addProject(project);
         company.getProjectStore().addProject(project2);
@@ -52,8 +53,8 @@ public class ProjectStoreTest {
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            ProductBacklogController productBacklogController = new ProductBacklogController(company);
-            List<Project> projectList = productBacklogController.getAllProjectListByUserEmail("");
+            ProjectStore projectStore = new ProjectStore();
+            List<Project> projectList = projectStore.getProjectListByUserEmail("");
         });
         // Assert
         assertEquals("Email cannot be blank", exception.getMessage());
@@ -70,11 +71,12 @@ public class ProjectStoreTest {
         project2.addResource(input);
 
         // Act
-        ProductBacklogController productBacklogController = new ProductBacklogController(company);
-        List<Project> projectList = productBacklogController.getAllProjectListByUserEmail("dani@ipp.pt");
-
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        ProjectStore projectStore = new ProjectStore();
+        List<Project> projectList = projectStore.getProjectListByUserEmail("dani@ipp.pt");
+        });
         // Assert
-        assertEquals(0, projectList.size());
+        assertEquals("Email don't exist in system", exception.getMessage());
 
 
     }

@@ -1,22 +1,23 @@
 package switch2021.project.model;
 
 import lombok.Getter;
+import lombok.Setter;
 import switch2021.project.stores.TaskStore;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Objects;
 
 @Getter
+@Setter
 public class Sprint {
 
     /**
      * Atributos da classe Sprint
      **/
-    private long id;
+    private final long id;
     private String name;
-    private TaskStore taskstore;
-    private SprintBacklog sprintBacklog;
+    private final TaskStore taskstore;
+    private final SprintBacklog sprintBacklog;
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -31,7 +32,10 @@ public class Sprint {
         this.name = name;
         this.startDate = startDate;
         this.sprintBacklog = new SprintBacklog();
+        this.taskstore = new TaskStore();
     }
+
+    /** Add USer Story to the Sprintbacklog **/
 
     public boolean addStoryToSprintBacklog(UserStory us, int effort) {
         this.sprintBacklog.addUserStory(sprintBacklog.createUSerStoryOfSprint(us, effort));
@@ -43,14 +47,12 @@ public class Sprint {
      **/
 
 
-    public LocalDate changeEndDate(int sprintDurationInWeeks) {
-
-        return startDate.plusDays(sprintDurationInWeeks * 7);
+    public void changeEndDate(int sprintDurationInWeeks) {
+        this.endDate = startDate.plusDays(sprintDurationInWeeks * 7L);
     }
 
-
     /**
-     * Validation Methods for the Constructor
+     * Validation Method for the Constructor
      **/
 
     private void checkSprintNameRules(String name) {
@@ -67,5 +69,16 @@ public class Sprint {
         return (this.startDate.isBefore(LocalDate.now()) && this.endDate.isAfter(LocalDate.now()));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Sprint)) return false;
+        Sprint sprint = (Sprint) o;
+        return id == sprint.id && Objects.equals(name, sprint.name) && Objects.equals(taskstore, sprint.taskstore) && Objects.equals(sprintBacklog, sprint.sprintBacklog) && Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, taskstore, sprintBacklog, startDate, endDate);
+    }
 }

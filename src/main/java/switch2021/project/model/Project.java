@@ -22,7 +22,7 @@ public class Project {
     private SystemUser productOwner; // Verificar a necessidade de se manter este atributo
 
     private final BusinessSector businessSector;
-    private SprintStore sprintList;
+    private final SprintStore sprintList;
     private ProjectTeam projectTeam;
 
     private LocalDate startDate;
@@ -51,11 +51,12 @@ public class Project {
         this.businessSector = businessSector;
 
         this.startDate = startDate;
+        this.sprintList = new SprintStore();
 
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
 
-        this.productBacklog = new ProductBacklog();
+        this.productBacklog = new ProductBacklog(); // o objeto project tem objeto productbacklog (metodo) como parametro
         this.projectTeam = new ProjectTeam();
 //        this.projectTeam = new ProjectTeam(res);
     }
@@ -185,7 +186,6 @@ public class Project {
         this.projectTeam = projectTeam;
     }
 
-
     /**
      * Validates Project Creation Fields
      * Checks if @param projectName and @param description are emptry or have the minimum characters necessary
@@ -205,16 +205,6 @@ public class Project {
         if (budget <= 0)
             throw new IllegalArgumentException("Budget must be greater than 0");
     }
-
-    /*
-     * Methods UserStory creation (Cris US009)
-     * - Create User Story method
-     */
-
-//    public boolean createUserStory(String userStoryStatus, int priority, String description, int timeEstimate) {
-//        UserStory us = productBacklog.createUserStory(userStoryStatus, priority, description, timeEstimate);
-//        return productBacklog.addUserStory(us);
-//    }
 
     /**
      * Resource Allocation Methods - (Carolina US007)
@@ -277,11 +267,6 @@ public class Project {
 
     public boolean hasProjectTeamMember(String email) {
         return this.projectTeam.hasResource(email);
-    }
-
-    public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
-        UserStory userStory = this.productBacklog.createUserStory(userStoryStatus, priority, description);
-        return this.productBacklog.saveUserStory(userStory);
     }
 
     /**

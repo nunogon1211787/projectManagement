@@ -17,7 +17,9 @@ public class ProfileRequestController {
      * Construtor da Classe
      */
 
-    public ProfileRequestController() { this.company = App.getInstance().getCompany();}
+    public ProfileRequestController() {
+        this.company = App.getInstance().getCompany();
+    }
 
     /**
      * Método Get.

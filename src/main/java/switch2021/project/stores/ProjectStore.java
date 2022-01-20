@@ -1,11 +1,13 @@
 package switch2021.project.stores;
 
+import switch2021.project.controller.ProductBacklogController;
 import switch2021.project.model.*;
 import switch2021.project.utils.App;
 
 import javax.swing.plaf.PanelUI;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class ProjectStore {
@@ -122,8 +124,7 @@ public class ProjectStore {
         return status;
     }
 
-    //TODO - validar se é para manter aqui o metodo do get product backlog
-    // A ser usado no add user story no sprint backlog
+
     public ProductBacklog getProductBacklog(String code) {
         if (code == null || code.trim().isEmpty()) {
             throw new IllegalArgumentException("Project code is empty.");
@@ -134,19 +135,6 @@ public class ProjectStore {
         }
         return project.getProductBacklog();
     }
-
-    /*public List<Project> getProjectListByMemberAssociated(String email) {
-        List<Project> projectListUser = new ArrayList<>();
-
-        for (Project project : this.projectList) {
-            for (int j = 0; j < project.getProjectTeam().getProjectTeamList().size(); j++) {
-                if (project.getProjectTeam().getProjectTeamList().get(j).getUser().getEmail().equals(email)) {
-                    projectListUser.add(project);
-                }
-            }
-        }
-        return projectListUser;
-    }*/
 
     public List<Project> getProjectListByUserEmail(String email) {
         List<Project> projectListByUser = new ArrayList<>();
@@ -165,8 +153,8 @@ public class ProjectStore {
         List<Project> currentProjectListByUser = new ArrayList<>();
 
         if (isValidGetProjListEmail(email)) {
-            for (Project project : this.projectList) {
-                if (project.hasCurrentProjectTeamMember(email)) {
+            for (Project project : this.projectList) { //nesta lista estao todos os objetos do tipo projeto
+                if (project.hasCurrentProjectTeamMember(email)) { //project corresponde ao "objeto" daquele ciclo
                     currentProjectListByUser.add(project);
                 }
             }
@@ -178,7 +166,18 @@ public class ProjectStore {
         if (email == null || email.trim().isEmpty()) {
             throw new IllegalArgumentException("Email cannot be blank");
         }
+
+        boolean isEmailExist = false;
+
+        for (Project project :projectList){
+            if(project.hasProjectTeamMember(email)){
+                isEmailExist = true;
+                break;
+            }
+        }
+        if (!isEmailExist) {
+            throw new IllegalArgumentException("Email don't exist in system");
+        }
         return true;
     }
-
 }

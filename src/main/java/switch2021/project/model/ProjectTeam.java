@@ -140,8 +140,7 @@ public class ProjectTeam {
         boolean msg = false;
 
         for (Resource resource : this.projectTeamList) {
-            if (resource.isYour(email) && resource.getStartDate().isBefore(LocalDate.now())
-                    && resource.getEndDate().isAfter(LocalDate.now())) {
+            if (resource.isYour(email) && resource.isCurrent()) {
                 msg = true;
             }
         }
