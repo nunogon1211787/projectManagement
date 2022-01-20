@@ -1,22 +1,22 @@
 package switch2021.project.model;
 
 import lombok.Getter;
+import lombok.Setter;
 import switch2021.project.stores.TaskStore;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Getter
+@Setter
 public class Sprint {
 
     /**
      * Atributos da classe Sprint
      **/
-    private long id;
+    private final long id;
     private String name;
-    private TaskStore taskstore;
-    private SprintBacklog sprintBacklog;
+    private final TaskStore taskstore;
+    private final SprintBacklog sprintBacklog;
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -31,6 +31,7 @@ public class Sprint {
         this.name = name;
         this.startDate = startDate;
         this.sprintBacklog = new SprintBacklog();
+        this.taskstore = new TaskStore();
     }
 
     public boolean addStoryToSprintBacklog(UserStory us, int effort) {
@@ -43,11 +44,9 @@ public class Sprint {
      **/
 
 
-    public LocalDate changeEndDate(int sprintDurationInWeeks) {
-
-        return startDate.plusDays(sprintDurationInWeeks * 7);
+    public void changeEndDate(int sprintDurationInWeeks) {
+        this.endDate = startDate.plusDays(sprintDurationInWeeks * 7L);
     }
-
 
     /**
      * Validation Methods for the Constructor

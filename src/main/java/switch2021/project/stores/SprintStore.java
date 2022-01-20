@@ -2,8 +2,6 @@ package switch2021.project.stores;
 
 import lombok.Getter;
 import switch2021.project.model.*;
-import switch2021.project.utils.App;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +13,7 @@ public class SprintStore {
      * Atributos da Classe
      **/
 
-    private List<Sprint> sprintList;
+    private final List<Sprint> sprintList;
 
     /**
      * Constructors with data
@@ -81,10 +79,7 @@ public class SprintStore {
      **/
     public List<Sprint> getSprintList() {
 
-        List<Sprint> copy = new ArrayList<>();
-        copy.addAll(this.sprintList);
-
-        return copy;
+        return new ArrayList<>(this.sprintList);
     }
 
     /**
