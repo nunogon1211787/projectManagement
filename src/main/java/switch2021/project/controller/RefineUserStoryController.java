@@ -33,15 +33,14 @@ public class RefineUserStoryController {
         return userStoryParent;
     }
 
-//    public boolean updateRefinedUserStoryStatus(){
-//        this.userStoryParent.setUserStoryStatus(App.getInstance().getUserStoryStore().get(""));
-//    }
-
-    public boolean createUserStory(String description, int priority, UserStoryStatus userStoryStatus){
-        UserStory userStoryCreated = this.productBacklog.createUserStory(userStoryParent, userStoryStatus, priority, description);
-        this.productBacklog.saveUserStory(userStoryCreated);
+    public boolean updateRefinedUserStoryStatus(){
+        this.userStoryParent.setUserStoryStatus(App.getInstance().getCompany().getUserStoryStatusStore().getUserStoryStatusByDescription("Refined"));
         return true;
     }
 
-
+    public boolean createUserStory(String description, int priority, UserStoryStatus userStoryStatus){
+        UserStory userStoryCreated = this.productBacklog.createUserStoryRefine(userStoryParent, userStoryStatus, priority, description);
+        this.productBacklog.saveUserStory(userStoryCreated);
+        return true;
+    }
 }

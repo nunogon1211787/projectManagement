@@ -43,11 +43,11 @@ public class UserStory {
         this.ParentUserStory = userStoryToRefine;
     }
 
-    /**
-     * ---> ID_UserProfile Generator. <---
-     */
-    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
-
+//    /**
+//     * ---> ID_UserProfile Generator. <---
+//     */
+//    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
+//
 
     /**
      * ---> Set Priority <---
