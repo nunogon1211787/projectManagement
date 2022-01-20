@@ -151,9 +151,11 @@ public class ProjectStore {
     public List<Project> getProjectListByUserEmail(String email) {
         List<Project> projectListByUser = new ArrayList<>();
 
-        for (Project project : this.projectList) {
-            if (project.hasResource(email) && isValidGetProjListEmail(email)) {
-                projectListByUser.add(project);
+        if (isValidGetProjListEmail(email)) {
+            for (Project project : this.projectList) {
+                if (project.hasProjectTeamMember(email)) {
+                    projectListByUser.add(project);
+                }
             }
         }
         return projectListByUser;
@@ -162,16 +164,18 @@ public class ProjectStore {
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         List<Project> currentProjectListByUser = new ArrayList<>();
 
-        for (Project project : this.projectList) {
-            if (project.hasCurrentResource(email)) {
-                currentProjectListByUser.add(project);
+        if (isValidGetProjListEmail(email)) {
+            for (Project project : this.projectList) {
+                if (project.hasCurrentProjectTeamMember(email)) {
+                    currentProjectListByUser.add(project);
+                }
             }
         }
         return currentProjectListByUser;
     }
 
-    private boolean isValidGetProjListEmail(String email){
-        if(email==null || email.trim().isEmpty()){
+    private boolean isValidGetProjListEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
             throw new IllegalArgumentException("Email cannot be blank");
         }
         return true;

@@ -1,16 +1,20 @@
 package switch2021.project.model;
 
+import lombok.Getter;
 import switch2021.project.stores.TaskStore;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
+@Getter
 public class Sprint {
 
     /**
      * Atributos da classe Sprint
      **/
     private long id;
+    private String name;
     private TaskStore taskstore;
     private SprintBacklog sprintBacklog;
     private LocalDate startDate;
@@ -18,14 +22,14 @@ public class Sprint {
 
 
     /**
-     * Construtor de Sprint
+     * Constructor of Sprint
      **/
 
-    public Sprint(LocalDate startDate, LocalDate endDate) {
-
-        ///this.number  - TODO incrementar números automaticamente -> Id generator (método de salvar/validação)
+    public Sprint(long id, String name, LocalDate startDate) {
+        checkSprintNameRules(name);
+        this.id = id;
+        this.name = name;
         this.startDate = startDate;
-        this.endDate = endDate;
         this.sprintBacklog = new SprintBacklog();
     }
 
@@ -35,28 +39,33 @@ public class Sprint {
     }
 
     /**
-     * Change Sprint End Date
+     * Method to change Sprint EndDate
      **/
-    public void changeSprintEndDate(LocalDate end) {
-        this.endDate = end;
+
+
+    public LocalDate changeEndDate(int sprintDurationInWeeks) {
+
+        return startDate.plusDays(sprintDurationInWeeks * 7);
+    }
+
+
+    /**
+     * Validation Methods for the Constructor
+     **/
+
+    private void checkSprintNameRules(String name) {
+        if (name.trim().isEmpty())
+            throw new IllegalArgumentException("Sprint Name cannot be empty.");
+        if ((name.length() < 2))
+            throw new IllegalArgumentException("Sprint Name must have at least 2 characters");
     }
 
     /**
-     * Getter
-     **/
-    public SprintBacklog getSprintBacklog() {
-        return sprintBacklog;
+     * Check if this Sprint is the current Sprint
+     */
+    public boolean isCurrentSprint() {
+        return (this.startDate.isBefore(LocalDate.now()) && this.endDate.isAfter(LocalDate.now()));
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
-    }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public long getNumber() {
-        return id;
-    }
 }
