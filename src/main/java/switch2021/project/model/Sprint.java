@@ -5,6 +5,7 @@ import lombok.Setter;
 import switch2021.project.stores.TaskStore;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -49,7 +50,7 @@ public class Sprint {
     }
 
     /**
-     * Validation Methods for the Constructor
+     * Validation Method for the Constructor
      **/
 
     private void checkSprintNameRules(String name) {
@@ -66,5 +67,16 @@ public class Sprint {
         return (this.startDate.isBefore(LocalDate.now()) && this.endDate.isAfter(LocalDate.now()));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Sprint)) return false;
+        Sprint sprint = (Sprint) o;
+        return id == sprint.id && Objects.equals(name, sprint.name) && Objects.equals(taskstore, sprint.taskstore) && Objects.equals(sprintBacklog, sprint.sprintBacklog) && Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, taskstore, sprintBacklog, startDate, endDate);
+    }
 }

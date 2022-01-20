@@ -8,10 +8,4 @@ import java.time.LocalDate;
 public class SprintStoreTest {
 
 
-    //@Test
-    //public void createSprintSucess() {
-        //Arrange
-        //String name = "Joana Silva";
-       // LocalDate startDate = LocalDate.now();
-
-}
+    }
