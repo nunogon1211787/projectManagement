@@ -2,7 +2,6 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.controller.ProductBacklogController;
-import switch2021.project.stores.ProjectStore;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -35,7 +34,7 @@ public class ProjectStoreTest {
         project2.addResource(input);
 
         // Act
-        List<Project> projectList = company.getProjectStore().getAllProjectListByUserEmail("cris@ipp.pt");
+        List<Project> projectList = company.getProjectStore().getProjectListByUserEmail("cris@ipp.pt");
         // Assert
         assertEquals(2, projectList.size());
 
