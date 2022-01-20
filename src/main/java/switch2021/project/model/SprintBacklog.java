@@ -26,6 +26,17 @@ public class SprintBacklog {
         return userStoryOfSprintList;
     }
 
+    public UserStoryOfSprint getUserStory(long id_UserStory) {
+        UserStoryOfSprint us=null;
+        for (UserStoryOfSprint i: this.userStoryOfSprintList) {
+            if (i.hasCode(id_UserStory)){
+                us=i;
+                break;
+            }
+        }
+        return us;
+    }
+
     /** Add User Story Of Sprint **/
     public void addUserStory(UserStoryOfSprint story) {
         this.userStoryOfSprintList.add(story);

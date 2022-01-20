@@ -165,8 +165,8 @@ public class ProjectStore {
         List<Project> currentProjectListByUser = new ArrayList<>();
 
         if (isValidGetProjListEmail(email)) {
-            for (Project project : this.projectList) {
-                if (project.hasCurrentProjectTeamMember(email)) {
+            for (Project project : this.projectList) { //nesta lista estao todos os objetos do tipo projeto
+                if (project.hasCurrentProjectTeamMember(email)) { //project corresponde ao "objeto" daquele ciclo
                     currentProjectListByUser.add(project);
                 }
             }

@@ -10,10 +10,16 @@ public class UserStoryOfSprint {
     /** Class Attributes **/
     private final int estimateEffort;
     private final UserStory userStoryOfSprint;
+    private final long id_UserStoryofSprint;
 
     public UserStoryOfSprint(UserStory story, int effort){
         this.estimateEffort = effort;
         this.userStoryOfSprint = story;
+        this.id_UserStoryofSprint= 0;
+    }
+
+    public boolean hasCode (long id_UserStoryofSprint) {
+        return this.id_UserStoryofSprint==id_UserStoryofSprint;
     }
 
     /** Override **/
@@ -37,4 +43,6 @@ public class UserStoryOfSprint {
                 ", userStoryOfSprint=" + userStoryOfSprint +
                 '}';
     }
+
+
 }
