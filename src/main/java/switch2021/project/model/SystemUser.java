@@ -8,7 +8,9 @@ import java.util.List;
 public class SystemUser {
 
 
-    /** Attributes of systemUser´s class **/
+    /**
+     * Attributes of systemUser´s class
+     **/
     private String userName;
     private String email;
     private String photo;
@@ -17,7 +19,9 @@ public class SystemUser {
     private boolean activateUser;
     private List<UserProfile> assignedProfileList;
 
-    /** Constructor **/
+    /**
+     * Constructor
+     **/
     public SystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile profile) {
         checkUserNameRules(userName); // o construtor faz validações
         checkEmailRules(email);
@@ -55,7 +59,9 @@ public class SystemUser {
     }*/
 
 
-    /** Getting Methods **/
+    /**
+     * Getting Methods
+     **/
     public String getUserName() {
         return this.userName;
     }
@@ -87,7 +93,9 @@ public class SystemUser {
     }
 
 
-    /** Setting Methods **/
+    /**
+     * Setting Methods
+     **/
     public void setUserName(String userName) {
         if (!userName.trim().isEmpty() || !(userName.length() < 2)) {
             this.userName = userName;
@@ -140,7 +148,9 @@ public class SystemUser {
     }
 
 
-    /** Validation Methods **/
+    /**
+     * Validation Methods
+     **/
     //// Verificar se se pode implementar apenas um metodo de validação ****
     private void checkUserNameRules(String userName) {
         if (userName.trim().isEmpty())
@@ -192,7 +202,9 @@ public class SystemUser {
     }
 
 
-    /** Encryption/Decryption Methods **/
+    /**
+     * Encryption/Decryption Methods
+     **/
     public String encryptPassword(String password) {
         int codigoASCII;
         String result = "";
@@ -216,14 +228,16 @@ public class SystemUser {
     }
 
 
-    /** AssignProfileList´s methods */
+    /**
+     * AssignProfileList´s methods
+     */
     public void assignProfileToUser(UserProfile profile) {
         this.assignedProfileList.add(profile);
     }
 
     public boolean updateProfile(UserProfile oldProfile, UserProfile newProfile) {
 
-        if(!checkAssignedProfileList(newProfile)) {
+        if (!checkAssignedProfileList(newProfile)) {
             throw new IllegalArgumentException("Repeated user profile inserted.");
         } else {
             this.assignedProfileList.remove(oldProfile);
@@ -233,7 +247,9 @@ public class SystemUser {
     }
 
 
-    /** Método para validar se o email (ou parte dele) é deste objeto. */
+    /**
+     * Método para validar se o email (ou parte dele) é deste objeto.
+     */
     public boolean isYourEmail(String email) {
 
         boolean result = false;
@@ -245,18 +261,19 @@ public class SystemUser {
         return result;
     }
 
-    public boolean isYourName (String name ){return this.userName.equals(name) ;}
+    public boolean isYourName(String name) {
+        return this.userName.equals(name);
+    }
 
     /**
      * Method to validate if user as already has the profile requested
-     *
      */
 
-    public boolean hasProfile (UserProfile profile){
+    public boolean hasProfile(UserProfile profile) {
 
         boolean profileStatus = false;
 
-        for (UserProfile profileCheck:assignedProfileList){
+        for (UserProfile profileCheck : assignedProfileList) {
 
             if (profile.equals(profileCheck)) {
 
@@ -335,11 +352,11 @@ public class SystemUser {
                 int count = 0;
 
                 for (UserProfile k : profileChoosenList) {
-                        if (this.assignedProfileList.contains(k)) {
-                            count++;
-                            match++;
-                            break;
-                        }
+                    if (this.assignedProfileList.contains(k)) {
+                        count++;
+                        match++;
+                        break;
+                    }
                 }
 
                 if (count != profileChoosenList.size()) {
@@ -356,11 +373,13 @@ public class SystemUser {
         return result;
     }
 
-    /**
+    /*
      * Method to update old password with the new password
      */
 
-    /** Method to update old password with the new password */
+    /*
+     * Method to update old password with the new password
+     */
     public boolean updatePassword(String oldpasswordUI, String newpassword) {
 
         if (validateOldPassword(oldpasswordUI)) {
@@ -380,7 +399,9 @@ public class SystemUser {
         return oldpasswordUI.equals(oldpasswordSU);
     }
 
-    /** Override Methods **/
+    /**
+     * Override Methods
+     **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

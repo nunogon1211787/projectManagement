@@ -151,9 +151,11 @@ public class ProjectStore {
     public List<Project> getAllProjectListByUserEmail(String email) {
         List<Project> projectListByUser = new ArrayList<>();
 
-        for (Project project : this.projectList) {
-            if (project.hasResource(email) && isValidGetProjListEmail(email)) {
-                projectListByUser.add(project);
+        if (isValidGetProjListEmail(email)) {
+            for (Project project : this.projectList) {
+                if (project.hasProjectTeamMember(email)) {
+                    projectListByUser.add(project);
+                }
             }
         }
         return projectListByUser;
@@ -162,9 +164,11 @@ public class ProjectStore {
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         List<Project> currentProjectListByUser = new ArrayList<>();
 
-        for (Project project : this.projectList) {
-            if (project.hasCurrentProjectTeamMember(email)) {
-                currentProjectListByUser.add(project);
+        if (isValidGetProjListEmail(email)) {
+            for (Project project : this.projectList) {
+                if (project.hasCurrentProjectTeamMember(email)) {
+                    currentProjectListByUser.add(project);
+                }
             }
         }
         return currentProjectListByUser;

@@ -122,6 +122,7 @@ public class ProjectTeam {
 
     public boolean hasCurrentResource(String email) {
         boolean msg = false;
+
         for (Resource resource : this.projectTeamList) {
             if (resource.isYour(email) && resource.getStartDate().isBefore(LocalDate.now())
                     && resource.getEndDate().isAfter(LocalDate.now())) {
@@ -131,5 +132,14 @@ public class ProjectTeam {
         return msg;
     }
 
+    public boolean hasResource(String email) {
+        boolean msg = false;
+        for (Resource resource : this.projectTeamList) {
+            if (resource.isYour(email)) {
+                msg = true;
+            }
+        }
+        return msg;
+    }
 }
 

@@ -260,7 +260,7 @@ public class Project {
         return msg;
     }
 
-    public boolean hasCurrentResource(String email) {
+    /*public boolean hasCurrentResource(String email) {
         boolean msg = false;
         for (Resource resource : this.projectTeam.getProjectTeamList()) {
             if (hasResource(email) && resource.getStartDate().isBefore(LocalDate.now())
@@ -269,20 +269,14 @@ public class Project {
             }
         }
         return msg;
-    }
+    }*/
 
     public boolean hasCurrentProjectTeamMember(String email) {
         return this.projectTeam.hasCurrentResource(email);
     }
 
-    public boolean hasResource(String email) {
-        boolean msg = false;
-        for (Resource resource : this.projectTeam.getProjectTeamList()) {
-            if (resource.isYour(email)) {
-                msg = true;
-            }
-        }
-        return msg;
+    public boolean hasProjectTeamMember(String email) {
+        return this.projectTeam.hasResource(email);
     }
 
     public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
