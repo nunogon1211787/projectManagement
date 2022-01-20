@@ -42,6 +42,11 @@ public class UserStory {
      */
     private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
 
+
+    /**
+     * ---> Set Priority <---
+     */
+
     public boolean setPriority(int priority) {
         if (validatePriority(priority)) {
             this.priority = priority;

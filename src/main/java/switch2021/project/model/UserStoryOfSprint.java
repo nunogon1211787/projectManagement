@@ -13,6 +13,7 @@ public class UserStoryOfSprint {
     private final long id_UserStoryofSprint;
 
     public UserStoryOfSprint(UserStory story, int effort){
+        validateFields(effort,story);
         this.estimateEffort = effort;
         this.userStoryOfSprint = story;
         this.id_UserStoryofSprint= 0;
@@ -20,6 +21,15 @@ public class UserStoryOfSprint {
 
     public boolean hasCode (long id_UserStoryofSprint) {
         return this.id_UserStoryofSprint==id_UserStoryofSprint;
+    }
+
+    public void validateFields(int estimateEffort, UserStory userStory) {
+        if(estimateEffort <= 0)
+            throw new IllegalArgumentException("Estimate Effort cannot be 0 or lower than.");
+        if(userStory == null)
+            throw new IllegalArgumentException("User Story cannot be found.");
+        if(userStory.getUserStoryStatus().getDescription().equals("Done"))
+            throw new IllegalArgumentException("User Story is already finished.");;
     }
 
     /** Override **/

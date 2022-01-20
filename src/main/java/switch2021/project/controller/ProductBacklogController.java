@@ -17,32 +17,25 @@ public class ProductBacklogController {
     List<Project> arrayProject;
     List<UserStory> userStoryList;
 
-    public ProductBacklogController(Company company)
-    {
+    public ProductBacklogController(Company company) {
         this.company = company;
     }
 
-    public List<Project> getAllProjectListByUserEmail (String email) {
+    public List<Project> getProjectListByUserEmail(String email){
         this.projectStore = this.company.getProjectStore();
         this.arrayProject = this.projectStore.getProjectListByUserEmail(email);
         return arrayProject;
     }
 
-    public Project getProject (String code) {
+    public Project getProject(String code){
         this.project = this.company.getProjectStore().getProjectByCode(code);
         return this.project;
     }
 
-    public List<UserStory> getUsSortedByPriority() {
+    public List<UserStory> getUsSortedByPriority(){
         this.productBacklog = this.project.getProductBacklog();
         this.userStoryList = this.project.getProductBacklog().getUsSortedByPriority();
         return this.userStoryList;
     }
-
-
-
-
-
-
 
 }

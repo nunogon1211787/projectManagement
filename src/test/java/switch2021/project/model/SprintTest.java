@@ -55,7 +55,7 @@ public class SprintTest {
         sprint.changeEndDate(2);
         LocalDate endadate = sprint.getEndDate();
         //Assert
-        assertEquals(LocalDate.of(2022, 02, 03), endadate);
+        assertEquals(LocalDate.of(2022, 2, 3), endadate);
     }
 
 

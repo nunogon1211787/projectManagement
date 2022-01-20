@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -204,6 +205,53 @@ public class ProductBacklogTest {
         assertEquals(status, userStory.getUserStoryStatus());
         assertEquals(priority, userStory.getPriority());
         assertEquals(description, userStory.getDescription());
+    }
+
+    @Test
+    public void getSortedListWithSuccess(){
+        // Arrange
+        ProductBacklog productBacklog=new ProductBacklog();
+        UserStory userStory =productBacklog.createUserStory(new UserStoryStatus("In progress"),1,"create user story");
+        productBacklog.saveUserStory(userStory);
+        UserStory userStory1 =productBacklog.createUserStory(new UserStoryStatus("In progress"),3,"sort user story");
+        productBacklog.saveUserStory(userStory1);
+        UserStory userStory2 =productBacklog.createUserStory(new UserStoryStatus("In progress"),2,"backlog sorted");
+        productBacklog.saveUserStory(userStory2);
+        UserStory userStory3 =productBacklog.createUserStory(new UserStoryStatus("In progress"),5,"show sorted");
+        productBacklog.saveUserStory(userStory3);
+
+        // Act
+        List<UserStory> userStoryList =  productBacklog.getUsSortedByPriority();
+
+        // Assert
+        assertEquals(4, userStoryList.size());
+
+        assertEquals(1, userStoryList.get(0).getPriority());
+        assertEquals(2, userStoryList.get(1).getPriority());
+        assertEquals(3, userStoryList.get(2).getPriority());
+        assertEquals(5, userStoryList.get(3).getPriority());
+
+    }
+
+    @Test
+    public void getSortedListFailWrongPriority(){
+        // Arrange
+        ProductBacklog productBacklog=new ProductBacklog();
+        UserStory userStory =productBacklog.createUserStory(new UserStoryStatus("In progress"),1,"create user story");
+        productBacklog.saveUserStory(userStory);
+        UserStory userStory2 =productBacklog.createUserStory(new UserStoryStatus("In progress"),2,"backlog sorted");
+        productBacklog.saveUserStory(userStory2);
+        UserStory userStory3 =productBacklog.createUserStory(new UserStoryStatus("In progress"),5,"show sorted");
+        productBacklog.saveUserStory(userStory3);
+
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            UserStory userStory1 =productBacklog.createUserStory(new UserStoryStatus("In progress"),6,"sort user story");
+            productBacklog.saveUserStory(userStory1);
+        List<UserStory> userStoryList =  productBacklog.getUsSortedByPriority();
+        });
+        // Assert
+        assertTrue(exception.getMessage().contains("Check priority, cannot be < 0 or superior to 5."));
     }
 
 }
