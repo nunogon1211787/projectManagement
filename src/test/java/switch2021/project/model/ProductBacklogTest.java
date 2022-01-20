@@ -213,7 +213,7 @@ public class ProductBacklogTest {
         ProductBacklog productBacklog=new ProductBacklog();
         UserStory userStory =productBacklog.createUserStory(new UserStoryStatus("In progress"),1,"create user story");
         productBacklog.saveUserStory(userStory);
-        UserStory userStory1 =productBacklog.createUserStory(new UserStoryStatus("In progress"),1,"sort user story");
+        UserStory userStory1 =productBacklog.createUserStory(new UserStoryStatus("In progress"),3,"sort user story");
         productBacklog.saveUserStory(userStory1);
         UserStory userStory2 =productBacklog.createUserStory(new UserStoryStatus("In progress"),2,"backlog sorted");
         productBacklog.saveUserStory(userStory2);
@@ -225,6 +225,12 @@ public class ProductBacklogTest {
 
         // Assert
         assertEquals(4, userStoryList.size());
+
+        assertEquals(1, userStoryList.get(0).getPriority());
+        assertEquals(2, userStoryList.get(1).getPriority());
+        assertEquals(3, userStoryList.get(2).getPriority());
+        assertEquals(5, userStoryList.get(3).getPriority());
+
     }
 
     @Test

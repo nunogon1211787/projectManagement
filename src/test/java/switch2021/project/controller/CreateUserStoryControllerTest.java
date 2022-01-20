@@ -11,22 +11,26 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CreateUserStoryControllerTest {
 
-
-
+    Company company = new Company();
+    Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+    Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+    BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+    Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
+            typo, sector, LocalDate.now(), 7, 5000);
+    Project project2 = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
+            typo, sector, LocalDate.now(), 7, 5000);
+    UserProfile userProfile = new UserProfile("zzz");
+    SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+    LocalDate startDate = LocalDate.of(2021, 12, 31);
+    LocalDate endDate = LocalDate.of(2022, 1, 5);
+    Resource input = new Resource(newUser, startDate, endDate, 100, .5);
 
     // Test create userStory (Cris US009)
 
     @Test
     public void createUserStoryPriorityInvalidInf() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().addProject(project);
-
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
         createUserStoryController.getProjectByCode("123testcode");
         UserStoryStatus status = new UserStoryStatus("In progress");
@@ -43,13 +47,7 @@ public class CreateUserStoryControllerTest {
     @Test
     public void createUserStorydescriptionInvalidEmpty() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
-        company.getProjectStore().addProject(project);
+               company.getProjectStore().addProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
         createUserStoryController.getProjectByCode("123testcode");
@@ -67,12 +65,7 @@ public class CreateUserStoryControllerTest {
     @Test
     public void createUserStorydescriptionInvalidShort() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
+
         company.getProjectStore().addProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
@@ -91,12 +84,7 @@ public class CreateUserStoryControllerTest {
     @Test
     public void createUserStoryPriorityInvalidSup() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
+
         company.getProjectStore().addProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
@@ -115,12 +103,7 @@ public class CreateUserStoryControllerTest {
     @Test
     public void createUserStorySuccessFull() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
+
         company.getProjectStore().addProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
@@ -136,25 +119,10 @@ public class CreateUserStoryControllerTest {
     }
 
     @Test
-    @DisplayName("Criar company + projetos(2) + system user + resource ")
     public void getAllProjectListByUserEmail() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().addProject(project);
-        Project project2 = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().addProject(project2);
-
-        UserProfile userProfile = new UserProfile("zzz");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
-        LocalDate startDate = LocalDate.of(2021, 12, 31);
-        LocalDate endDate = LocalDate.of(2022, 1, 5);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         project.addResource(input);
         project2.addResource(input);
         // Act
@@ -165,25 +133,10 @@ public class CreateUserStoryControllerTest {
     }
 
     @Test
-    @DisplayName("Criar company + projetos(2) + system user + resource ")
     public void getAllProjectListByUserEmailIsBlank() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().addProject(project);
-        Project project2 = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().addProject(project2);
-
-        UserProfile userProfile = new UserProfile("zzz");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
-        LocalDate startDate = LocalDate.of(2021, 12, 31);
-        LocalDate endDate = LocalDate.of(2022, 1, 5);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         project.addResource(input);
         project2.addResource(input);
         // Act
@@ -199,31 +152,17 @@ public class CreateUserStoryControllerTest {
     @DisplayName("Criar company + projetos(2) + system user + resource ")
     public void getAllProjectListByUserEmailDontExist() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().addProject(project);
-        Project project2 = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().addProject(project2);
-
-        UserProfile userProfile = new UserProfile("zzz");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
-        LocalDate startDate = LocalDate.of(2021, 12, 31);
-        LocalDate endDate = LocalDate.of(2022, 1, 5);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         project.addResource(input);
         project2.addResource(input);
         // Act
-
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
         List<Project> projectList = createUserStoryController.getAllProjectListByUserEmail("dani@ipp.pt");
-
+        });
         // Assert
-        assertEquals(0, projectList.size());
+        assertEquals("Email don't exist in system", exception.getMessage());
     }
 
 }
