@@ -33,6 +33,19 @@ public class Resource {
 
 
     /**
+     * Resource's Copy
+     **/
+    public Resource(Resource originalResource) {
+        this.user = originalResource.user;
+        this.startDate = originalResource.startDate;
+        this.endDate = originalResource.endDate;
+        this.costPerHour = originalResource.costPerHour;
+        this.percentageOfAllocation = originalResource.percentageOfAllocation;
+        this.role = originalResource.role;
+    }
+
+
+    /**
      * Getters and Setters Methods
      **/
     public SystemUser getUser() {
@@ -122,18 +135,6 @@ public class Resource {
         }
     }
 
-    /**
-     * Resource's Copy
-     **/
-    public Resource(Resource originalResource) {
-        this.user = originalResource.user;
-        this.startDate = originalResource.startDate;
-        this.endDate = originalResource.endDate;
-        this.costPerHour = originalResource.costPerHour;
-        this.percentageOfAllocation = originalResource.percentageOfAllocation;
-        this.role = originalResource.role;
-
-    }
 
     /**
      * Override Equals (Carolina US007)

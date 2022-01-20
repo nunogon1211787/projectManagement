@@ -1,5 +1,6 @@
 package switch2021.project.stores;
 
+import lombok.Getter;
 import switch2021.project.model.*;
 import switch2021.project.utils.App;
 
@@ -7,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Getter
 public class SprintStore {
 
     /**
@@ -28,13 +29,25 @@ public class SprintStore {
      * Sprint creator
      **/
 
-    public Sprint createSprint(long id, String name, LocalDate startDate, int sprintDuration) {
+    public Sprint createSprint(String name, LocalDate startDate, int sprintDuration) {
 
         Sprint sprint;
 
-        sprint = new Sprint(id, name, startDate, sprintDuration);
+        long id = generateID();
+
+        sprint = new Sprint(id, name, startDate);
+
+        sprint.changeEndDate(sprintDuration);
 
         return sprint;
+    }
+
+    private long generateID() {
+        long id = 1;
+        if(this.sprintList.size() > 0) {
+            id = this.sprintList.get(sprintList.size()-1).getId() + 1;
+        }
+        return id;
     }
 
 
@@ -46,7 +59,7 @@ public class SprintStore {
     public Sprint getSprint(long id) {
         Sprint sprint = null;
         for (Sprint sprt : sprintList) {
-            if (sprt.getID() == id) {
+            if (sprt.getId() == id) {
                 sprint = sprt;
                 break;
             }
@@ -67,38 +80,53 @@ public class SprintStore {
      * Get Method
      **/
     public List<Sprint> getSprintList() {
-        return this.sprintList;
+
+        List<Sprint> copy = new ArrayList<>();
+        copy.addAll(this.sprintList);
+
+        return copy;
     }
 
     /**
      * Method to Validate a Sprint
      **/
 
-    public boolean validateSprint(Sprint sprint) {
+    public boolean validateIfSprintAlreadyExists(Sprint sprint) {
 
-        boolean msg = true;
-        for (Sprint x : this.sprintList) {
-            if (x.equals(sprint) || sprint == null) {
-                msg = false;
-                break;
-            }
-        }
-        return msg;
+        return this.sprintList.contains(sprint);
+
     }
+
+    //validação da startdate tem de ser posterior à enddate do anterior;
 
     /**
      * Method to Save a Sprint
      */
 
+
     public boolean saveSprint(Sprint sprint) {
 
         boolean result = true;
 
-        if (!validateSprint(sprint)) {
+        if (!validateIfSprintAlreadyExists(sprint)) {
             result = false;
         } else {
             this.sprintList.add(sprint);
         }
         return result;
+    }
+
+
+    /**
+     * Get the start and end date of the current Sprint
+     */
+    public LocalDate getCurrentSprintEndDate() {
+        LocalDate date = null;
+        for(Sprint i : this.sprintList) {
+            if(i.isCurrentSprint()) {
+                date = i.getEndDate();
+            }
+        }
+        return date;
     }
 }
