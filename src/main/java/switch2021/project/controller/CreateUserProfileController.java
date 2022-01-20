@@ -16,10 +16,6 @@ public class CreateUserProfileController {
     private Company company;
 
 
-    public CreateUserProfileController() {
-        this(App.getInstance().getCompany());
-    }
-
     public CreateUserProfileController(Company company) {
         this.company = company;
     }

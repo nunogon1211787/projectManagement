@@ -108,7 +108,6 @@ public class ProductBacklogTest {
         int priority = 1;
         String description = "Create user story";
 
-
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             UserStory userStory = productBacklog.createUserStory(
@@ -157,6 +156,49 @@ public class ProductBacklogTest {
                 status, priority, description);
         // Act
         productBacklog.saveUserStory(userStory);
+        // Assert
+        assertNotNull(userStory);
+        assertEquals(status, userStory.getUserStoryStatus());
+        assertEquals(priority, userStory.getPriority());
+        assertEquals(description, userStory.getDescription());
+    }
+
+    @Test
+    public void addNewUserStoryAlreadyExist() {
+        // Arrange
+        ProductBacklog productBacklog = new ProductBacklog();
+        UserStoryStatus status = new UserStoryStatus("In progress");
+        int priority = 1;
+        String description = "Create user story";
+
+        UserStory userStory = productBacklog.createUserStory(
+                status, priority, description);
+        productBacklog.addUserStory(userStory);
+        productBacklog.addUserStory(userStory);
+        UserStory userStory2 = productBacklog.createUserStory(
+                status, priority, description);
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            productBacklog.addUserStory(userStory2);
+            productBacklog.saveUserStory(userStory2);
+
+        });
+        // Assert
+        assertTrue(exception.getMessage().contains("Repeated user story inserted, same code project and description."));
+    }
+
+    @Test
+    public void addNewUserStoryWithSuccess() {
+        // Arrange
+        ProductBacklog productBacklog = new ProductBacklog();
+        UserStoryStatus status = new UserStoryStatus("In progress");
+        int priority = 1;
+        String description = "Create user story";
+
+        UserStory userStory = productBacklog.createUserStory(
+                status, priority, description);
+        // Act
+        productBacklog.addUserStory(userStory);
         // Assert
         assertNotNull(userStory);
         assertEquals(status, userStory.getUserStoryStatus());

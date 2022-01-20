@@ -2,7 +2,6 @@ package switch2021.project.controller;
 
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
-import switch2021.project.utils.App;
 
 import java.util.List;
 
@@ -18,22 +17,14 @@ public class CreateUserStoryController {
     List<Project> arrayProject;
     private Project project;
 
-    public CreateUserStoryController() {
-        this.company = App.getInstance().getCompany();
-    }
 
     public CreateUserStoryController(Company company) {
         this.company = company;
     }
 
-    public CreateUserStoryController(Project project) {
-        this.project = project;
-    }
-
-
     public List<Project> getAllProjectListByUserEmail(String email) {
         this.projectStore = this.company.getProjectStore();
-        this.arrayProject = this.projectStore.getProjectListByUserEmail(email);
+        this.arrayProject = this.projectStore.getAllProjectListByUserEmail(email);
         return arrayProject;
     }
 

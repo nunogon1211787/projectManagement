@@ -81,7 +81,7 @@ public class ProductBacklog {
     }
 
 
-    public List<UserStory> getUsSortedByPriority(){
+    public List<UserStory> getUsSortedByPriority() {
         userStoryList.sort(Comparator.comparingInt(UserStory::getPriority));
         return userStoryList;
     }

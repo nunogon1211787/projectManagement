@@ -4,8 +4,6 @@ import switch2021.project.model.Company;
 import switch2021.project.model.ProductBacklog;
 import switch2021.project.model.Project;
 import switch2021.project.model.UserStory;
-import switch2021.project.stores.ProjectStore;
-import switch2021.project.utils.App;
 
 import java.util.List;
 
@@ -13,16 +11,11 @@ public class ProductBacklogController {
 
 
     private Company company;
-    private ProjectStore projectStore;
+    private switch2021.project.stores.ProjectStore projectStore;
     private Project project;
     private ProductBacklog productBacklog;
-    private UserStory userStory;
     List<Project> arrayProject;
     List<UserStory> userStoryList;
-
-    public ProductBacklogController() {
-        this.company = App.getInstance().getCompany();
-    }
 
     public ProductBacklogController(Company company) {
         this.company = company;
@@ -30,7 +23,7 @@ public class ProductBacklogController {
 
     public List<Project> getAllProjectListByUserEmail (String email){
         this.projectStore = this.company.getProjectStore();
-        this.arrayProject = this.projectStore.getProjectListByUserEmail(email);
+        this.arrayProject = this.projectStore.getAllProjectListByUserEmail(email);
         return arrayProject;
     }
 

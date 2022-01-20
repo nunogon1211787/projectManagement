@@ -37,6 +37,11 @@ public class UserStory {
         this.id_ParentUserStory = 0;
     }
 
+    /**
+     * ---> ID_UserProfile Generator. <---
+     */
+    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
+
     public boolean setPriority(int priority) {
         if (validatePriority(priority)) {
             this.priority = priority;
@@ -74,10 +79,6 @@ public class UserStory {
         return true;
     }
 
-    /**
-     * ---> ID_UserProfile Generator. <---
-     */
-    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
 
     private boolean validatePriority(int x) {
         if (x < 0 || x > 5)
