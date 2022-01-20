@@ -20,7 +20,6 @@ public class GetCurrentProjectListController {
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         ProjectStore projStore = company.getProjectStore();
-
         return projStore.getCurrentProjectListByUserEmail(email);
     }
 }
