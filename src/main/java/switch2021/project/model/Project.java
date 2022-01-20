@@ -271,6 +271,10 @@ public class Project {
         return msg;
     }
 
+    public boolean hasCurrentProjectTeamMember(String email) {
+        return this.projectTeam.hasCurrentResource(email);
+    }
+
     public boolean hasResource(String email) {
         boolean msg = false;
         for (Resource resource : this.projectTeam.getProjectTeamList()) {
