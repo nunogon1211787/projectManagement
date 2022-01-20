@@ -21,7 +21,7 @@ public class ProductBacklogController {
         this.company = company;
     }
 
-    public List<Project> getAllProjectListByUserEmail (String email){
+    public List<Project> getProjectListByUserEmail(String email){
         this.projectStore = this.company.getProjectStore();
         this.arrayProject = this.projectStore.getProjectListByUserEmail(email);
         return arrayProject;
@@ -37,11 +37,5 @@ public class ProductBacklogController {
         this.userStoryList = this.project.getProductBacklog().getUsSortedByPriority();
         return this.userStoryList;
     }
-
-
-
-
-
-
 
 }
