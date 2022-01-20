@@ -12,25 +12,27 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ProjectStoreTest {
 
+    Company company = new Company();
+    Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+    Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+    BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+    Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
+            typo, sector, LocalDate.now(), 7, 5000);
+    Project project2 = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
+            typo, sector, LocalDate.now(), 7, 5000);
+
+    UserProfile userProfile = new UserProfile("zzz");
+    SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+    LocalDate startDate = LocalDate.of(2021, 12, 31);
+    LocalDate endDate = LocalDate.of(2022, 1, 5);
+    Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+
+
     @Test
     public void getAllProjectListByUserEmail (){
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().addProject(project);
-        Project project2 = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().addProject(project2);
-
-        UserProfile userProfile = new UserProfile("zzz");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
-        LocalDate startDate = LocalDate.of(2021, 12, 31);
-        LocalDate endDate = LocalDate.of(2022, 1, 5);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         project.addResource(input);
         project2.addResource(input);
 
@@ -44,22 +46,8 @@ public class ProjectStoreTest {
 
     public void getAllProjectListByUserEmailIsBlank (){
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().addProject(project);
-        Project project2 = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().addProject(project2);
-
-        UserProfile userProfile = new UserProfile("zzz");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
-        LocalDate startDate = LocalDate.of(2021, 12, 31);
-        LocalDate endDate = LocalDate.of(2022, 1, 5);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         project.addResource(input);
         project2.addResource(input);
 
@@ -77,22 +65,8 @@ public class ProjectStoreTest {
 
     public void getAllProjectListByUserEmailDontExist (){
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().addProject(project);
-        Project project2 = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().addProject(project2);
-
-        UserProfile userProfile = new UserProfile("zzz");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
-        LocalDate startDate = LocalDate.of(2021, 12, 31);
-        LocalDate endDate = LocalDate.of(2022, 1, 5);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         project.addResource(input);
         project2.addResource(input);
 
@@ -105,4 +79,6 @@ public class ProjectStoreTest {
 
 
     }
+
+
 }
