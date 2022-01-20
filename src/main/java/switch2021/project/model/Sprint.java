@@ -60,6 +60,12 @@ public class Sprint {
             throw new IllegalArgumentException("Sprint Name must have at least 2 characters");
     }
 
+    /**
+     * Check if this Sprint is the current Sprint
+     */
+    public boolean isCurrentSprint() {
+        return (this.startDate.isBefore(LocalDate.now()) && this.endDate.isAfter(LocalDate.now()));
+    }
 
 
 }

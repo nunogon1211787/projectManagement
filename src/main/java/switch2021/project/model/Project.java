@@ -60,10 +60,10 @@ public class Project {
 //        this.projectTeam = new ProjectTeam(res);
     }
 
+
     /**
      * Getter Methods
      **/
-
     public String getCode() {
         return code;
     }
@@ -282,6 +282,13 @@ public class Project {
     public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
         UserStory userStory = this.productBacklog.createUserStory(userStoryStatus, priority, description);
         return this.productBacklog.saveUserStory(userStory);
+    }
+
+    /**
+     * Get the start and end date of the current Sprint
+     */
+    public LocalDate getValidStartDate() {
+      return this.sprintList.getCurrentSprintEndDate();
     }
 
 
