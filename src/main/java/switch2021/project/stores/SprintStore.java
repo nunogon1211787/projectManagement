@@ -67,7 +67,11 @@ public class SprintStore {
      * Get Method
      **/
     public List<Sprint> getSprintList() {
-        return this.sprintList;
+
+        List<Sprint> copy = new ArrayList<>();
+        copy.addAll(this.sprintList);
+
+        return copy;
     }
 
     /**
@@ -100,5 +104,19 @@ public class SprintStore {
             this.sprintList.add(sprint);
         }
         return result;
+    }
+
+
+    /**
+     * Get the start and end date of the current Sprint
+     */
+    public LocalDate getCurrentSprintEndDate() {
+        LocalDate date = null;
+        for(Sprint i : this.sprintList) {
+            if(i.isCurrentSprint()) {
+                date = i.getEndDate();
+            }
+        }
+        return date;
     }
 }
