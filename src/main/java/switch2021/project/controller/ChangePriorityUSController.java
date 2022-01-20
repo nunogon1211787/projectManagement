@@ -5,6 +5,7 @@ import switch2021.project.model.ProductBacklog;
 import switch2021.project.model.Project;
 import switch2021.project.model.UserStory;
 import switch2021.project.stores.ProjectStore;
+import switch2021.project.utils.App;
 
 import java.util.List;
 
@@ -17,6 +18,10 @@ public class ChangePriorityUSController {
     private UserStory userStory;
     List<Project> arrayProject;
     List<UserStory> userStoryList;
+
+    public ChangePriorityUSController(){
+        this.company = App.getInstance().getCompany();
+    }
 
     public List<Project> getCurrentProjectListByUserEmail (String email){
         this.projectStore = this.company.getProjectStore();
