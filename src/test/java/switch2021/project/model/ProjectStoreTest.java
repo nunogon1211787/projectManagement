@@ -2,7 +2,6 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.controller.ProductBacklogController;
-import switch2021.project.stores.ProjectStore;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -35,7 +34,7 @@ public class ProjectStoreTest {
         project2.addResource(input);
 
         // Act
-        List<Project> projectList = company.getProjectStore().getAllProjectListByUserEmail("cris@ipp.pt");
+        List<Project> projectList = company.getProjectStore().getProjectListByUserEmail("cris@ipp.pt");
         // Assert
         assertEquals(2, projectList.size());
 
@@ -66,7 +65,7 @@ public class ProjectStoreTest {
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             ProductBacklogController productBacklogController = new ProductBacklogController(company);
-            List<Project> projectList = productBacklogController.getAllProjectListByUserEmail("");
+            List<Project> projectList = productBacklogController.getProjectListByUserEmail("");
         });
         // Assert
         assertEquals("Email cannot be blank", exception.getMessage());
@@ -98,7 +97,7 @@ public class ProjectStoreTest {
 
         // Act
         ProductBacklogController productBacklogController = new ProductBacklogController(company);
-        List<Project> projectList = productBacklogController.getAllProjectListByUserEmail("dani@ipp.pt");
+        List<Project> projectList = productBacklogController.getProjectListByUserEmail("dani@ipp.pt");
 
         // Assert
         assertEquals(0, projectList.size());

@@ -148,7 +148,7 @@ public class ProjectStore {
         return projectListUser;
     }*/
 
-    public List<Project> getAllProjectListByUserEmail(String email) {
+    public List<Project> getProjectListByUserEmail(String email) {
         List<Project> projectListByUser = new ArrayList<>();
 
         for (Project project : this.projectList) {

@@ -35,7 +35,7 @@ public class ProductBacklogControllerTest {
 
         // Act
         ProductBacklogController productBacklogController = new ProductBacklogController(company);
-        List<Project> projectList = productBacklogController.getAllProjectListByUserEmail("cris@ipp.pt");
+        List<Project> projectList = productBacklogController.getProjectListByUserEmail("cris@ipp.pt");
         // Assert
         assertEquals(2, projectList.size());
 
@@ -66,7 +66,7 @@ public class ProductBacklogControllerTest {
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
         ProductBacklogController productBacklogController = new ProductBacklogController(company);
-        List<Project> projectList = productBacklogController.getAllProjectListByUserEmail("");
+        List<Project> projectList = productBacklogController.getProjectListByUserEmail("");
         });
         // Assert
         assertEquals("Email cannot be blank", exception.getMessage());
@@ -98,7 +98,7 @@ public class ProductBacklogControllerTest {
 
         // Act
             ProductBacklogController productBacklogController = new ProductBacklogController(company);
-            List<Project> projectList = productBacklogController.getAllProjectListByUserEmail("dani@ipp.pt");
+            List<Project> projectList = productBacklogController.getProjectListByUserEmail("dani@ipp.pt");
 
         // Assert
         assertEquals(0, projectList.size());
