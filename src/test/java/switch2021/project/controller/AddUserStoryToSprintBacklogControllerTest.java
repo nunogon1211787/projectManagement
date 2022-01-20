@@ -41,6 +41,8 @@ public class AddUserStoryToSprintBacklogControllerTest {
         proj.getProductBacklog().addUserStory(userStory);
     }
 
+
+    //Rever teste
     @Test
     @DisplayName("Add Story to backlog")
     public void addStoryToBacklog() {
@@ -52,7 +54,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
 
         UserStoryStatus status = new UserStoryStatus("statusTest");
         UserStory userStory = new UserStory(status, 2,"teste");
-        UserStoryOfSprint expectedUS = sprintBacklog.createUSerStoryOfSprint(userStory,5);
+        UserStoryOfSprint expectedUS = new UserStoryOfSprint(userStory,5);
         expectedUS.getUserStoryOfSprint().setId_UserStory(1);
 
         //Result
