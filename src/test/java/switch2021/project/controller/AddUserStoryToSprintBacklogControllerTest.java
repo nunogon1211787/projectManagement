@@ -44,7 +44,6 @@ public class AddUserStoryToSprintBacklogControllerTest {
 
     }
 
-
     //Rever teste
     @Test
     @DisplayName("Add Story to backlog")
@@ -52,20 +51,21 @@ public class AddUserStoryToSprintBacklogControllerTest {
         //Assert
         AddUserStoryToSprintBacklogController addStory = new AddUserStoryToSprintBacklogController(1,1, "testCode", 5);
 
+        UserStoryOfSprint value = proj.getSprintStore().getSprintList().get(0).getSprintBacklog().getUserStoryOfSprintList().get(0);
+
+        UserStoryStatus status = new UserStoryStatus("statusTest");
+        UserStory userStory = new UserStory(status, 2,"teste");
+        UserStoryOfSprint expectedUS = new UserStoryOfSprint(userStory,5);
+        expectedUS.getUserStoryOfSprint().setId_UserStory(1);
+
         //Result
-        assertEquals(1,proj.getSprintStore().getSprint(1).getSprintBacklog().getUserStoryOfSprintList().size());
-    }
+        assertEquals(expectedUS.toString(),value.toString());
 
-    @Test
-    @DisplayName("Add Story to backlog fail - User Story already exists")
-    public void addStoryToBacklogFail() {
-        //Assert
-        AddUserStoryToSprintBacklogController addStory =
-                new AddUserStoryToSprintBacklogController(1,1, "testCode", 5);
 
+        //User Story already exists
         assertThrows(IllegalArgumentException.class, () -> {
-        AddUserStoryToSprintBacklogController coppiedUserStory =
-                new AddUserStoryToSprintBacklogController(1,1, "testCode", 5);});
-
+            AddUserStoryToSprintBacklogController coppiedUserStory =
+                    new AddUserStoryToSprintBacklogController(1,1, "testCode", 5);});
     }
+
 }
