@@ -163,15 +163,15 @@ public class ProjectStore {
         List<Project> currentProjectListByUser = new ArrayList<>();
 
         for (Project project : this.projectList) {
-            if (project.hasCurrentResource(email)) {
+            if (project.hasCurrentProjectTeamMember(email)) {
                 currentProjectListByUser.add(project);
             }
         }
         return currentProjectListByUser;
     }
 
-    private boolean isValidGetProjListEmail(String email){
-        if(email==null || email.trim().isEmpty()){
+    private boolean isValidGetProjListEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
             throw new IllegalArgumentException("Email cannot be blank");
         }
         return true;
