@@ -55,7 +55,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
         assertEquals(expectedUS.toString(),value.toString());
     }*/
 
-    @Test
+ /*   @Test
     @DisplayName("Add Story to backlog fail - User Story already exists")
     public void addStoryToBacklogFail() {
         //Arrange
@@ -89,5 +89,5 @@ public class AddUserStoryToSprintBacklogControllerTest {
         assertThrows(IllegalArgumentException.class, () -> {
         AddUserStoryToSprintBacklogController coppiedUserStory =
                 new AddUserStoryToSprintBacklogController(1,1, "testCode", 5);});
-    }
+    }*/
 }
