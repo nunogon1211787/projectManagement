@@ -9,12 +9,14 @@ import switch2021.project.utils.App;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddUserStoryToSprintBacklogControllerTest {
 
     Company company = App.getInstance().getCompany();
     Project proj;
     SprintBacklog sprintBacklog = new SprintBacklog();
+    UserStory userStory;
 
     @BeforeEach
     public void init() {
@@ -37,8 +39,10 @@ public class AddUserStoryToSprintBacklogControllerTest {
 
         //UserStory
         UserStoryStatus status = new UserStoryStatus("statusTest");
-        UserStory userStory = new UserStory(status, 2,"teste");
+        userStory = new UserStory(status, 2,"teste");
         proj.getProductBacklog().addUserStory(userStory);
+
+
     }
 
 
@@ -47,8 +51,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
     @DisplayName("Add Story to backlog")
     public void addStoryToBacklog() {
         //Assert
-        AddUserStoryToSprintBacklogController addStory = new AddUserStoryToSprintBacklogController(1, "testCode", 5);
-        addStory.addUserStoryToSprintBacklog();
+        AddUserStoryToSprintBacklogController addStory = new AddUserStoryToSprintBacklogController(1,1, "testCode", 5);
 
         UserStoryOfSprint value = proj.getSprintStore().getSprintList().get(0).getSprintBacklog().getUserStoryOfSprintList().get(0);
 
@@ -59,5 +62,18 @@ public class AddUserStoryToSprintBacklogControllerTest {
 
         //Result
         assertEquals(expectedUS.toString(),value.toString());
+    }
+
+    @Test
+    @DisplayName("Add Story to backlog fail - User Story already exists")
+    public void addStoryToBacklogFail() {
+        //Assert
+        AddUserStoryToSprintBacklogController addStory =
+                new AddUserStoryToSprintBacklogController(1,1, "testCode", 5);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+        AddUserStoryToSprintBacklogController coppiedUserStory =
+                new AddUserStoryToSprintBacklogController(1,1, "testCode", 5);});
+
     }
 }
