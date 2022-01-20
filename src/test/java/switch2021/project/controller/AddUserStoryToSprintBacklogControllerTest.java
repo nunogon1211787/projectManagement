@@ -33,7 +33,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
         company.getProjectStore().addProject(proj);
 
         //Sprint
-        proj.getSprintStore().addSprint(proj.getSprintStore().createSprint(1, "testSprint", LocalDate.now(), 5));
+        proj.getSprintStore().addSprint(proj.getSprintStore().createSprint("nameTest",LocalDate.now(),5));
 
         //UserStory
         UserStoryStatus status = new UserStoryStatus("statusTest");
