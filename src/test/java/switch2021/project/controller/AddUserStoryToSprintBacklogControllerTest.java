@@ -43,6 +43,9 @@ public class AddUserStoryToSprintBacklogControllerTest {
         userStory = new UserStory(status, 2,"teste");
         proj.getProductBacklog().addUserStory(userStory);
 
+    @Test
+    @DisplayName("Add Story to backlog")
+    public void addStoryToBacklog() {
         //Assert
         AddUserStoryToSprintBacklogController addStory = new AddUserStoryToSprintBacklogController(1,1, "testCode", 5);
 

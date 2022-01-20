@@ -6,6 +6,7 @@ import switch2021.project.model.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 public class SprintStore {
@@ -30,7 +31,7 @@ public class SprintStore {
 
     public Sprint createSprint(String name, LocalDate startDate, int sprintDuration) {
 
-        validateIfStartDate(startDate);
+        validateStartDate(startDate);
 
         Sprint sprint;
 
@@ -99,10 +100,10 @@ public class SprintStore {
      * Method to Validate if StartDate is later than the EndDate of the last Sprint
      */
 
-    private void validateIfStartDate (LocalDate startDate) {
+    private void validateStartDate(LocalDate startDate) {
 
         for (Sprint i : sprintList)
-            if (i.getEndDate().isBefore(startDate) && i.getStartDate() != startDate)
+            if (!i.getEndDate().isBefore(startDate) || i.getEndDate().isEqual(startDate))
                 throw new IllegalArgumentException("Please type the correct Start Date.");
         }
 
@@ -116,7 +117,7 @@ public class SprintStore {
 
         boolean result = true;
 
-        if (!validateIfSprintAlreadyExists(sprint)) {
+        if (validateIfSprintAlreadyExists(sprint)) {
             result = false;
         } else {
             this.sprintList.add(sprint);
@@ -136,5 +137,18 @@ public class SprintStore {
             }
         }
         return date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SprintStore)) return false;
+        SprintStore that = (SprintStore) o;
+        return Objects.equals(sprintList, that.sprintList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sprintList);
     }
 }
