@@ -83,7 +83,7 @@ public class AddUserStoryToSprintbacklogTest {
         //Act
         UserStoryStatus status = new UserStoryStatus("statusTest");
         UserStory userStory = new UserStory(status, 2,"teste");
-        userStory.setId_UserStory(7);
+        userStory.setId_UserStory(17);
         SprintBacklog testBacklog = new SprintBacklog();
         UserStoryOfSprint test = testBacklog.createUSerStoryOfSprint(userStory,8);
         testBacklog.addUserStory(test);
