@@ -26,15 +26,19 @@ class ChangePriorityUSControllerTest {
             typo, sector, startDate2, 7, 5000);
     Project project2 = company.getProjectStore().createProject("XPTO3000", "prototype5", "test56", customer,
             typo, sector, startDate3, 7, 5000);
-
     UserProfile userProfile = new UserProfile("Apresentador");
     UserProfile userProfile2 = new UserProfile("Duo");
     SystemUser newUser = new SystemUser("batatinha", "batatinha@cartoon.com", "des", "gth", "gth", "", userProfile);
     SystemUser newUser2 = new SystemUser("companhia", "companhia@cartoon.com", "des", "gth", "gth", "", userProfile2);
     LocalDate startDate = LocalDate.of(2021, 12, 31);
-    LocalDate endDate = LocalDate.of(2022, 1, 5);
+    LocalDate endDate = LocalDate.of(2022, 3, 5);
     Resource input = new Resource(newUser, startDate, endDate, 100, .5);
     Resource input2 = new Resource(newUser2, startDate, endDate, 100, .5);
+    UserStoryStatus userStoryStatus = new UserStoryStatus("coiso" );
+    UserStory userStory2 = new UserStory(userStoryStatus, 3, "Fazer tal e coiso");
+    UserStory userStory3 = new UserStory(userStoryStatus, 4, "Fazer tal e coiso também");
+
+
 
     @Test
     void getCurrentProjectListByUserEmailIsInvalid() {
@@ -62,7 +66,7 @@ class ChangePriorityUSControllerTest {
         // Act
         List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("batatinha@cartoon.com");
         // Assert
-        assertEquals(0, projectList.size());
+        assertEquals(2, projectList.size());
 
     }
 
@@ -80,7 +84,7 @@ class ChangePriorityUSControllerTest {
         // Act
         List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("batatinha@cartoon.com");
         // Assert
-        assertEquals(0, projectList.size());
+        assertEquals(1, projectList.size());
 
 
     }
@@ -92,11 +96,41 @@ class ChangePriorityUSControllerTest {
     }
 
     @Test
-    void getProject() {
+    void getProjectTest() {
+        company.getProjectStore().addProject(project);
+        company.getProjectStore().addProject(project2);
+        project.addResource(input);
+        project2.addResource(input);
+        // Act
+        Project project3 = company.getProjectStore().getProjectByCode("XPTO2000");
+
+        // Assert
+        assertEquals(project,project3);
     }
 
+        // TESTE AINDA NÃO FUNCIONA PORQUE O CODE DO PROJECT NAO TA VALIDADO
+//    @Test
+//    void getCurrentProjectByInvalidCode() {
+//        assertThrows(IllegalArgumentException.class, () -> {//Arrange
+//            company.getProjectStore().addProject(project);
+//            company.getProjectStore().addProject(project2);
+//            project.addResource(input);
+//            project2.addResource(input);
+//
+//            // Act
+//            Project project3 = company.getProjectStore().getProjectByCode("");
+//            // Assert
+//
+//        });
+//    }
+
     @Test
-    void getUserStoryList() {
+    void getUserStoryListFromProject() {
+        company.getProjectStore().addProject(project);
+        company.getProjectStore().addProject(project2);
+        project.addResource(input);
+        project2.addResource(input);
+
     }
 
     @Test
