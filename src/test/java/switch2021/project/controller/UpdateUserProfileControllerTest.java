@@ -18,7 +18,7 @@ public class UpdateUserProfileControllerTest {
 
     @BeforeEach
     public void init() {
-        company = App.getInstance().getCompany(); // sempre a mesma instancia
+        company = new Company(); // sempre a mesma instancia
         systemUserStore = company.getSystemUserStore();
         userProfileStore = company.getUserProfileStore();
         user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
