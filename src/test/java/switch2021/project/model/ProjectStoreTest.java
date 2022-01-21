@@ -106,7 +106,7 @@ public class ProjectStoreTest {
         assertNotEquals(this.project, project);
     }
 
-    /*@Test
+    @Test
     public void getCurrentProjectListByUserEmailSucess() {
         //Arrange
         Company company = new Company();
@@ -126,51 +126,69 @@ public class ProjectStoreTest {
         SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile1);
         LocalDate startDate1 = LocalDate.of(2021, 12, 1);
         LocalDate endDate1 = LocalDate.of(2021, 12, 15);
-        Resource resource1 = new Resource(user1, startDate1, endDate1, 100, .2);
+        Resource resource1 = new Resource(user1, startDate1, endDate1, 100, .25);
+
+        LocalDate copyStartDate1 = LocalDate.of(2022, 1, 1);
+        LocalDate copyEndDate1 = LocalDate.of(2022, 1, 15);
+        Resource copyResource1 = new Resource(user1, copyStartDate1, copyEndDate1, 100, .5);
+
+        LocalDate copy2StartDate1 = LocalDate.of(2022, 1, 16);
+        LocalDate copy2EndDate1 = LocalDate.of(2022, 1, 31);
+        Resource copy2Resource1 = new Resource(user1, copy2StartDate1, copy2EndDate1, 100, 1);
 
         UserProfile profile2 = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile2);
-        LocalDate startDate2 = LocalDate.of(2022, 1, 6);
-        LocalDate endDate2 = LocalDate.of(2022, 1, 11);
-        Resource resource2 = new Resource(user2, startDate2, endDate2, 100, .2);
+        LocalDate startDate2 = LocalDate.of(2021, 12, 1);
+        LocalDate endDate2 = LocalDate.of(2021, 12, 15);
+        Resource resource2 = new Resource(user2, startDate2, endDate2, 100, .25);
+
+        LocalDate copyStartDate2 = LocalDate.of(2022, 1, 1);
+        LocalDate copyEndDate2 = LocalDate.of(2022, 1, 15);
+        Resource copyResource2 = new Resource(user2, copyStartDate2, copyEndDate2, 100, .5);
 
         UserProfile profile3 = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user3 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "ghi", "ghi", "photo", profile3);
-        LocalDate startDate3 = LocalDate.of(2022, 1, 12);
-        LocalDate endDate3 = LocalDate.of(2022, 1, 17);
-        Resource resource3 = new Resource(user3, startDate3, endDate3, 100, .2);
+        LocalDate startDate3 = LocalDate.of(2021, 12, 16);
+        LocalDate endDate3 = LocalDate.of(2021, 12, 31);
+        Resource resource3 = new Resource(user3, startDate3, endDate3, 100, .5);
+
+        LocalDate copyStartDate3 = LocalDate.of(2021, 12, 1);
+        LocalDate copyEndDate3 = LocalDate.of(2021, 12, 15);
+        Resource copyResource3 = new Resource(user3, copyStartDate3, copyEndDate3, 100, .25);
 
         UserProfile profile4 = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "ghi", "ghi", "photo", profile4);
-        LocalDate startDate4 = LocalDate.of(2022, 1, 18);
-        LocalDate endDate4 = LocalDate.of(2022, 1, 23);
-        Resource resource4 = new Resource(user4, startDate4, endDate4, 100, .2);
+        LocalDate startDate4 = LocalDate.of(2021, 12, 1);
+        LocalDate endDate4 = LocalDate.of(2021, 12, 15);
+        Resource resource4 = new Resource(user4, startDate4, endDate4, 100, .25);
 
-        UserProfile profile5 = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user5 = new SystemUser("manuelgoncalves", "manuelgoncalves@beaver.com", "tester", "ghi", "ghi", "photo", profile5);
-        LocalDate startDate5 = LocalDate.of(2022, 1, 24);
-        LocalDate endDate5 = LocalDate.of(2022, 1, 29);
-        Resource resource5 = new Resource(user5, startDate5, endDate5, 100, .2);
+        LocalDate copyStartDate4 = LocalDate.of(2021, 12, 16);
+        LocalDate copyEndDate4 = LocalDate.of(2021, 12, 31);
+        Resource copyResource4 = new Resource(user4, copyStartDate4, copyEndDate4, 100, .5);
 
         project1.addResource(resource1);
-        project1.addResource(resource2);
-        project1.addResource(resource3);
+        project3.addResource(copyResource1);
+        project3.addResource(copy2Resource1);
 
-        project3.addResource(resource1);
-        project3.addResource(resource2);
-        project3.addResource(resource3);
+        project1.addResource(resource2);
+        project3.addResource(copyResource2);
+
+        project1.addResource(resource3);
+        project1.addResource(copyResource3);
+
+        project1.addResource(resource4);
+        project1.addResource(copyResource4);
 
         company.getProjectStore().addProject(project1);
         company.getProjectStore().addProject(project3);
 
         // Act
-        ProjectStore projectStore = new ProjectStore();
-        List<Project> projectList = projectStore.getProjectListByUserEmail("dani@ipp.pt");
+        List<Project> projectList = company.getProjectStore().getProjectListByUserEmail("manueloliveira@beaver.com");
 
         int sizeExpected = projectList.size();
 
         // Assert
         assertEquals(1, sizeExpected);
-    }*/
+    }
 
 }
