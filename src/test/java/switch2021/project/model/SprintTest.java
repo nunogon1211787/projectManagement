@@ -5,17 +5,16 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SprintTest {
 
 
     @Test
-    @DisplayName("Teste ao Construtor")
-    public void SprintConstructorSucess() {
+    @DisplayName("Constructor test, verification of success")
+    public void sprintConstructorSucess() {
         //Arrange
-        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.now());
+        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
         long x = sprint.getId();
         String name = sprint.getName();
@@ -23,12 +22,72 @@ public class SprintTest {
         //Assert
         assertEquals(1, x);
         assertEquals("Sprint_1", name);
-        assertEquals(LocalDate.now(), date);
+        assertEquals(LocalDate.of(2022, 1, 1), date);
     }
 
     @Test
-    @DisplayName("Teste ao Construtor, com falha no nome do Sprint")
-    public void SprintConstructorNameEmptyFail() {
+    @DisplayName("Constructor test, verification of failure by ID")
+    public void sprintConstructorFail_ID() {
+        //Arrange
+        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 1, 1));
+        //Act
+        long x = sprint.getId();
+        String name = sprint.getName();
+        LocalDate date = sprint.getStartDate();
+        //Assert
+        assertNotEquals(2, x);
+        assertEquals("Sprint_1", name);
+        assertEquals(LocalDate.of(2022, 1, 1), date);
+    }
+
+    @Test
+    @DisplayName("Constructor test, verification of failure by Name")
+    public void sprintConstructorFail_Name() {
+        //Arrange
+        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 1, 1));
+        //Act
+        long x = sprint.getId();
+        String name = sprint.getName();
+        LocalDate date = sprint.getStartDate();
+        //Assert
+        assertEquals(1, x);
+        assertNotEquals("Sprint_2", name);
+        assertEquals(LocalDate.of(2022, 1, 1), date);
+    }
+
+    @Test
+    @DisplayName("Constructor test, verification of failure by StartDate")
+    public void sprintConstructorFail_Date() {
+        //Arrange
+        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 1, 1));
+        //Act
+        long x = sprint.getId();
+        String name = sprint.getName();
+        LocalDate date = sprint.getStartDate();
+        //Assert
+        assertEquals(1, x);
+        assertEquals("Sprint_1", name);
+        assertNotEquals(LocalDate.of(2022, 1, 2), date);
+    }
+
+    @Test
+    @DisplayName("Constructor test, verification of total failure (all parameters)")
+    public void sprintConstructorFail_All() {
+        //Arrange
+        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 1, 1));
+        //Act
+        long x = sprint.getId();
+        String name = sprint.getName();
+        LocalDate date = sprint.getStartDate();
+        //Assert
+        assertNotEquals(2, x);
+        assertNotEquals("Sprint_2", name);
+        assertNotEquals(LocalDate.of(2022, 1, 2), date);
+    }
+
+    @Test
+    @DisplayName("Constructor Test, to catch the exception of having a empty name.")
+    public void sprintConstructorNameEmptyFail() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
@@ -37,8 +96,8 @@ public class SprintTest {
     }
 
     @Test
-    @DisplayName("Teste ao Construtor, com falha no nome do Sprint")
-    public void SprintConstructorNameLowLengthFail() {
+    @DisplayName("Constructor Test, to catch the exception of having a low length name.")
+    public void sprintConstructorNameLowLengthFail() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
@@ -47,15 +106,27 @@ public class SprintTest {
     }
 
     @Test
-    @DisplayName("Teste à alteração do EndDate")
-    public void ChangeEndDateSucess() {
+    @DisplayName("Verification test if EndDate is set with success")
+    public void changeEndDateSucess() {
 
         //Assert
-        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.now());
+        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 2, 1));
         sprint.changeEndDate(2);
         LocalDate endadate = sprint.getEndDate();
         //Assert
-        assertEquals(LocalDate.of(2022, 2, 3), endadate);
+        assertEquals(LocalDate.of(2022, 2, 15), endadate);
+    }
+
+    @Test
+    @DisplayName("Verification test if EndDate is set with failure")
+    public void changeEndDateFail() {
+
+        //Assert
+        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 2, 1));
+        sprint.changeEndDate(2);
+        LocalDate endadate = sprint.getEndDate();
+        //Assert
+        assertNotEquals(LocalDate.of(2022, 2, 16), endadate);
     }
 
 
