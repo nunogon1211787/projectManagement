@@ -1,6 +1,7 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.*;
+import switch2021.project.utils.App;
 
 import java.time.LocalDate;
 
@@ -29,7 +30,8 @@ public class CreateProjectController {
                                  String businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         this.project = this.company.getProjectStore().createProject(code, name, description, getCustomer(customer),
-                getTypology(typology), getBusinessSector(businessSector), startDate, numberOfSprints, budget);
+                    getTypology(typology), getBusinessSector(businessSector), startDate, numberOfSprints, budget);
+
         return this.company.getProjectStore().saveNewProject(project);
     }
 

@@ -27,6 +27,7 @@ public class UserProfileStore {
         userProfileList.add(new UserProfile("Visitor"));
         userProfileList.add(new UserProfile("Administrator"));
         userProfileList.add(new UserProfile("Director"));
+        userProfileList.add(new UserProfile("User"));
     }
 
     /**
@@ -45,7 +46,7 @@ public class UserProfileStore {
         UserProfile profile = null;
 
         for (UserProfile i : userProfileList) {
-            if (i.getUserProfileName().equals(profileName)) {
+            if (i.getUserProfileName().equalsIgnoreCase(profileName)) {
                 profile = i;
             }
         }

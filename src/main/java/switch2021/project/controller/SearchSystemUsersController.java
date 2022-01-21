@@ -1,14 +1,13 @@
 package switch2021.project.controller;
 
-import switch2021.project.model.Company;
-import switch2021.project.model.SystemUser;
-import switch2021.project.model.UserProfile;
-import switch2021.project.stores.UserProfileStore;
+import lombok.Getter;
+import switch2021.project.model.*;
+import switch2021.project.stores.*;
 import switch2021.project.utils.App;
-
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class SearchSystemUsersController {
 
     private Company company;

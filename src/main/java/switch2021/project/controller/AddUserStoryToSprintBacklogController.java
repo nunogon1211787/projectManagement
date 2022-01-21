@@ -8,25 +8,25 @@ public class AddUserStoryToSprintBacklogController {
 
     private Company company;
     private UserStory userStory;
-    private long id;
+    private int sprintId;
     private String projCode;
     private int effort;
 
 
-    public AddUserStoryToSprintBacklogController(long id, String projCode, int effort) {
+/*    public AddUserStoryToSprintBacklogController(int id, String projCode, int effort) {
         this(App.getInstance().getCompany(), id, projCode, effort);
-    }
+    }*/
 
-    public AddUserStoryToSprintBacklogController(Company company, long id, String projCode, int effort) {
+    public AddUserStoryToSprintBacklogController(Company company, int userStoryId,int sprintId, String projCode, int effort) {
         this.company = company;
-        this.userStory = company.getProjectStore().getProductBacklog(projCode).getUserStoryById(id);
-        this.id = id;
+        this.userStory = company.getProjectStore().getProductBacklog(projCode).getUserStoryById(userStoryId);
+        this.sprintId = sprintId;
         this.projCode = projCode;
         this.effort = effort;
     }
 
     public boolean addUserStoryToSprintBacklog() {
-        company.getProjectStore().getProjectByCode(projCode).getSprintStore().getSprint(id).addStoryToSprintBacklog(userStory, effort);
+        company.getProjectStore().getProjectByCode(projCode).getSprintStore().getSprint(sprintId).addStoryToSprintBacklog(userStory, effort);
         return true;
     }
 }

@@ -42,7 +42,7 @@ public class UserStoryEffortController {
         return this.sprintList;
     }
 
-    public Sprint getSprint(long id) {
+    public Sprint getSprint(int id) {
         this.sprintStore = this.proj.getSprintStore();
         this.sprint = this.sprintStore.getSprint(id);
         return this.sprint;

@@ -208,7 +208,7 @@ public class SprintStoreTest {
         SprintStore sprintStore = new SprintStore();
         Sprint sprint = sprintStore.createSprint("Sprint_0", LocalDate.of(2022, 1, 1), 2);
         //Act
-        sprintStore.addSprint(sprint);
+        sprintStore.saveSprint(sprint);
         //Assert
         assertEquals(sprint, sprintStore.getSprint(1));
 

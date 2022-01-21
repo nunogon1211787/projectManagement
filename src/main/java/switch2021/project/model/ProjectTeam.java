@@ -103,7 +103,7 @@ public class ProjectTeam {
     private boolean saveResource(Resource newResource) {
         boolean msg;
         if (validateRoleExistent(newResource.getRole())) {
-            assignProjectRole(getResource(newResource.getRole()), newResource.getStartDate(), null, App.getInstance().getCompany().getProjectRolesStore().getProjectRole("Team Member"));
+            assignProjectRole(getResource(newResource.getRole()), newResource.getStartDate(), null, App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Team Member"));
             this.projectTeamList.add(newResource);
             msg = true;
         } else {                //-----------> Validação a fazer <------------
