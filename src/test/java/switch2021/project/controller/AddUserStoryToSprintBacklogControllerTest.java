@@ -33,7 +33,12 @@ public class AddUserStoryToSprintBacklogControllerTest {
         addStory.addUserStoryToSprintBacklog();
         UserStoryOfSprint value = project.getSprintStore().getSprintList().get(0).getSprintBacklog().getUserStoryOfSprintList().get(0);
 
-        //Assert
-        assertEquals(userStory, value.getUserStoryOfSprint());
+//    @Test
+//    @DisplayName("Add Story to backlog")
+//    public void addStoryToBacklog() {
+//        //Assert
+//        assertEquals(userStory, value.getUserStoryOfSprint());
+//    }
     }
+
 }
