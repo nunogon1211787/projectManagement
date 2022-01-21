@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProjectTest {
 
     Company company = new Company();
+    ProjectTeamTest projectTeamTest = new ProjectTeamTest();
     Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
@@ -44,6 +45,21 @@ class ProjectTest {
 //        ProductBacklog productbacklog = company.getProjectStore().getProjectByCode(code).getProductBacklog();
         //Assert
         assertNotNull(productBacklog);
+    }
+
+    @Test
+    public void hasCurrentProjectTeamMemberEmailSuccess() {
+        assertTrue(this.projectTeamTest.getProject1().getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
+    }
+
+    @Test
+    public void hasCurrentProjectTeamMemberEmailFailResourceNotPresent() {
+        assertFalse(this.projectTeamTest.getProject1().getProjectTeam().hasCurrentResource(("manuelalexandre@beaver.com")));
+    }
+
+    @Test
+    public void hasCurrentProjectTeamMemberEmailFailResourceNotCurrent() {
+        assertFalse(this.projectTeamTest.getProject1().getProjectTeam().hasCurrentResource(("manueljose@beaver.com")));
     }
 
     /**
