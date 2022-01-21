@@ -29,8 +29,12 @@ public class UserStory {
      **/
 
     public UserStory(UserStoryStatus userStoryStatus, int priority, String description) {
+        this(ID_GENERATOR.getAndIncrement(), userStoryStatus, priority, description);
+    }
+
+    public UserStory(int userStoryID, UserStoryStatus userStoryStatus, int priority, String description) {
         isValidUserStory(userStoryStatus, priority, description);
-        this.id_UserStory = ID_GENERATOR.getAndIncrement();
+        this.id_UserStory = userStoryID;
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
         this.description = description;
