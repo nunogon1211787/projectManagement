@@ -10,13 +10,14 @@ public class RegisterUserControllerTest {
     @Test
     void createSystemUserSuccess() {
         //Arrange
+        Company company = new Company();
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
         String password = "ghi";
         String passwordConfirmation = "ghi";
         String function = "tester";
         String photo = "photo";
-        RegisterUserController controller = new RegisterUserController();
+        RegisterUserController controller = new RegisterUserController(company);
 
         assertTrue(controller.createSystemUser(userName, email, function, password, passwordConfirmation, photo));
     }

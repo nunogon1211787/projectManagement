@@ -11,8 +11,13 @@ public class RegisterUserController {
     private UserProfileStore profilesStore;
     private SystemUser user;
 
+
     public RegisterUserController() {
-        this.company = App.getInstance().getCompany();
+        this(App.getInstance().getCompany());
+    }
+
+    public RegisterUserController(Company company) {
+        this.company = company;
         this.usersSstore = null;
         this.profilesStore = null;
         this.user = null;

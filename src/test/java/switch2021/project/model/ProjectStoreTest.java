@@ -7,8 +7,7 @@ import switch2021.project.stores.ProjectStore;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProjectStoreTest {
 
@@ -78,8 +77,32 @@ public class ProjectStoreTest {
         // Assert
         assertEquals("Email don't exist in system", exception.getMessage());
 
-
     }
 
+    @Test
+    public void getProjectByCodeSuccess(){
+        // Arrange
+        ProjectStore projectStore = new ProjectStore();
+        project.addResource(input);
+        projectStore.addProject(this.project);
+        // Act
+        Project project = projectStore.getProjectByCode("123testcode");
+
+        // Assert
+        assertEquals(this.project,project);
+    }
+
+    @Test
+    public void getProjectByCodeFail(){
+        // Arrange
+        ProjectStore projectStore = new ProjectStore();
+        project.addResource(input);
+        projectStore.addProject(this.project);
+        // Act
+        Project project = projectStore.getProjectByCode("123");
+
+        // Assert
+        assertNotEquals(this.project,project);
+    }
 
 }

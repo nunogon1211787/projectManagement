@@ -29,11 +29,15 @@ public class UserStory {
      **/
 
     public UserStory(UserStoryStatus userStoryStatus, int priority, String description) {
+        this(ID_GENERATOR.getAndIncrement(), userStoryStatus, priority, description);
+    }
+
+    public UserStory(int userStoryID, UserStoryStatus userStoryStatus, int priority, String description) {
         isValidUserStory(userStoryStatus, priority, description);
+        this.id_UserStory = userStoryID;
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
         this.description = description;
-        this.ParentUserStory = null;
     }
 
     public UserStory(UserStory userStoryToRefine, UserStoryStatus userStoryStatus, int priority, String description){
@@ -43,11 +47,11 @@ public class UserStory {
         this.ParentUserStory = userStoryToRefine;
     }
 
-//    /**
-//     * ---> ID_UserProfile Generator. <---
-//     */
-//    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
-//
+    /**
+     * ---> ID_UserProfile Generator. <---
+     */
+    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
+
 
     /**
      * ---> Set Priority <---

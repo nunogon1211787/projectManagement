@@ -47,6 +47,10 @@ public class ProductBacklog {
         return new UserStory(userStoryStatus, priority, description);
     }
 
+    public UserStory createUserStory(int userStoryId, UserStoryStatus userStoryStatus, int priority, String description) {
+        return new UserStory(userStoryId, userStoryStatus, priority, description);
+    }
+
     public UserStory createUserStoryRefine(UserStory userStoryParent, UserStoryStatus userStoryStatus, int priority, String description) {
         return new UserStory(userStoryParent, userStoryStatus, priority, description);
     }
