@@ -154,7 +154,8 @@ public class ProjectStore {
 
         if (isValidGetProjListEmail(email)) {
             for (Project project : this.projectList) { //nesta lista estao todos os objetos do tipo projeto
-                if (project.getEndDate() == null || project.getEndDate().isAfter(LocalDate.now()) ) { //project corresponde ao "objeto" daquele ciclo
+                if (project.hasCurrentProjectTeamMember(email) && project.getEndDate() == null ||
+                        project.hasCurrentProjectTeamMember(email) && project.getEndDate().isAfter(LocalDate.now())) { //project corresponde ao "objeto" daquele ciclo
                     currentProjectListByUser.add(project);
                 }
             }
@@ -169,8 +170,8 @@ public class ProjectStore {
 
         boolean isEmailExist = false;
 
-        for (Project project :projectList){
-            if(project.hasProjectTeamMember(email)){
+        for (Project project : projectList) {
+            if (project.hasProjectTeamMember(email)) {
                 isEmailExist = true;
                 break;
             }
