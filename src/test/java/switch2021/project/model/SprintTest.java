@@ -12,7 +12,7 @@ public class SprintTest {
 
     @Test
     @DisplayName("Constructor test, verification of success")
-    public void sprintConstructorSucess() {
+    public void sprintConstructorSuccess() {
         //Arrange
         Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
@@ -107,7 +107,7 @@ public class SprintTest {
 
     @Test
     @DisplayName("Verification test if EndDate is set with success")
-    public void changeEndDateSucess() {
+    public void changeEndDateSuccess() {
 
         //Assert
         Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 2, 1));
