@@ -20,8 +20,8 @@ public class UserStory {
     private UserStoryStatus userStoryStatus;
     private int priority;
     private String description;
-    private long id_UserStory;
-    private long id_ParentUserStory;
+    private int id_UserStory;
+    private UserStory ParentUserStory;
 
 
     /**
@@ -29,12 +29,22 @@ public class UserStory {
      **/
 
     public UserStory(UserStoryStatus userStoryStatus, int priority, String description) {
+        this(ID_GENERATOR.getAndIncrement(), userStoryStatus, priority, description);
+    }
+
+    public UserStory(int userStoryID, UserStoryStatus userStoryStatus, int priority, String description) {
         isValidUserStory(userStoryStatus, priority, description);
-        this.id_UserStory = ID_GENERATOR.getAndIncrement();
+        this.id_UserStory = userStoryID;
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
         this.description = description;
-        this.id_ParentUserStory = 0;
+    }
+
+    public UserStory(UserStory userStoryToRefine, UserStoryStatus userStoryStatus, int priority, String description){
+        this.userStoryStatus = userStoryStatus;
+        this.priority = priority;
+        this.description = description;
+        this.ParentUserStory = userStoryToRefine;
     }
 
     /**
@@ -55,12 +65,17 @@ public class UserStory {
         return false;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
     /**
      * ---> Set parentUserStory <---
      */
 
-    public void setId_ParentUserStory(long id_ParentUserStory) {
-        this.id_ParentUserStory = id_ParentUserStory;
+    public void setParentUserStory(UserStory parentUserStory) {
+        ParentUserStory = parentUserStory;
     }
 
     /**
@@ -90,6 +105,7 @@ public class UserStory {
             return false;
         return true;
     }
+
 }
 
 

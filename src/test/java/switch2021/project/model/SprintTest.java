@@ -51,11 +51,11 @@ public class SprintTest {
     public void ChangeEndDateSucess() {
 
         //Assert
-        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.now());
+        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 02, 01));
         sprint.changeEndDate(2);
         LocalDate endadate = sprint.getEndDate();
         //Assert
-        assertEquals(LocalDate.of(2022, 2, 3), endadate);
+        assertEquals(LocalDate.of(2022, 02, 15), endadate);
     }
 
 
