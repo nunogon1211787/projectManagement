@@ -9,7 +9,7 @@ public class Company {
 
     /**
      * Company Atributes
-     * The company atributes are composed by all the store lists of a given project
+     * The company atributes are composed by all the store lists of a xiven project
      **/
     private final SystemUserStore systemUserStore;
     private final ProjectStore projectStore;
