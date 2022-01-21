@@ -183,7 +183,7 @@ public class ProjectStoreTest {
         company.getProjectStore().addProject(project3);
 
         // Act
-        List<Project> projectList = company.getProjectStore().getProjectListByUserEmail("manueloliveira@beaver.com");
+        List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("manuelbras@beaver.com");
 
         int sizeExpected = projectList.size();
 
