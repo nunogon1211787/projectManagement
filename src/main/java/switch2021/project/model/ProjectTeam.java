@@ -80,10 +80,10 @@ public class ProjectTeam {
 
         Resource newResource = new Resource(originalResource); //copyResource
         newResource.setRole(projectRole);                      //change copyResource role
-        newResource.setStartDate(startDateNewRole);            //change originalResource start date
-        newResource.checkStartDateEndDate(newResource.getStartDate(),newResource.getEndDate());
+        newResource.setStartDate(startDateNewRole);            //change copyResource Start Date
+        newResource.checkStartDateEndDate(startDateNewRole,newResource.getEndDate());
 
-        originalResource.setEndDate(endDateCurrentSprint);     //change originalResource end date
+        originalResource.setEndDate(startDateNewRole.minusDays(1));     //change originalResource end date
 
         return saveResource(newResource);                      //add copy to Project Team List
     }

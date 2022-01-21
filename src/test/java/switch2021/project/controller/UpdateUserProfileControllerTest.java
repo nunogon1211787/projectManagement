@@ -18,7 +18,7 @@ public class UpdateUserProfileControllerTest {
 
     @BeforeEach
     public void init() {
-        company = App.getInstance().getCompany(); // sempre a mesma instancia
+        company = new Company(); // sempre a mesma instancia
         systemUserStore = company.getSystemUserStore();
         userProfileStore = company.getUserProfileStore();
         user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
@@ -54,9 +54,10 @@ public class UpdateUserProfileControllerTest {
     @Test
     public void getUserProfileListTest() {
         //Arrange
+        UpdateUserProfileController controllerTest1 = new UpdateUserProfileController();
         UpdateUserProfileController controllerTest2 = new UpdateUserProfileController();
         //Assert
-        assertEquals(controllerTest2.getUserProfileList(), userProfileStore.getUserProfileList());
+        assertEquals(controllerTest2.getUserProfileList(), controllerTest1.getUserProfileList());
     }
 
     @Test

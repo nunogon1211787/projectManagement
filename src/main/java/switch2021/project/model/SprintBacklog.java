@@ -58,12 +58,16 @@ public class SprintBacklog {
 
     private boolean validateIdUserStoryOfSprint(UserStoryOfSprint userStoryOfSprint){
         boolean msg = true;
-        for (UserStoryOfSprint i : userStoryOfSprintList) {
-            if(i.getId_UserStoryOfSprint() == userStoryOfSprint.getId_UserStoryOfSprint()){
-                msg = false;
-                break;
+        if(userStoryOfSprintList.size() == 0){
+            msg = false; } else {
+            for (UserStoryOfSprint i : userStoryOfSprintList) {
+                if(i.getId_UserStoryOfSprint() == userStoryOfSprint.getId_UserStoryOfSprint()){
+                    msg = false;
+                    break;
+                }
             }
         }
+
         return msg;
     }
 
