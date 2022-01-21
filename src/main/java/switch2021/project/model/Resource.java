@@ -128,7 +128,7 @@ public class Resource {
         return msg;
     }
 
-    private void checkStartDateEndDate(LocalDate startDate, LocalDate endDate) {
+    public void checkStartDateEndDate(LocalDate startDate, LocalDate endDate) {
         if (endDate.isBefore(startDate)) {
             throw new IllegalArgumentException("End Date must be after Start Date");
         }

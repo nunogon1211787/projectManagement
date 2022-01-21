@@ -270,9 +270,9 @@ public class Project {
     }
 
     /**
-     * Get the start and end date of the current Sprint
+     * Get the start date of the next Sprint and end date of the current Sprint
      */
-    public LocalDate getValidStartDate() {
+    public LocalDate getValidEndDate() {
       return this.sprintList.getCurrentSprintEndDate();
     }
 

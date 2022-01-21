@@ -14,31 +14,27 @@ public class SprintStore {
     /**
      * Atributos da Classe
      **/
-
     private final List<Sprint> sprintList;
+
 
     /**
      * Constructors with data
      **/
-
     public SprintStore() {
         this.sprintList = new ArrayList<>();
     }
 
+
     /**
      * Sprint creator
      **/
-
     public Sprint createSprint(String name, LocalDate startDate, int sprintDuration) {
-
-        validateStartDate(startDate);
+        validateIfStartDate(startDate);
 
         Sprint sprint;
 
         long id = generateID();
-
         sprint = new Sprint(id, name, startDate);
-
         sprint.changeEndDate(sprintDuration);
 
         return sprint;
@@ -56,8 +52,6 @@ public class SprintStore {
     /**
      * Sprint Methods
      */
-
-
     public Sprint getSprint(long id) {
         Sprint sprint = null;
         for (Sprint sprt : sprintList) {
@@ -69,14 +63,15 @@ public class SprintStore {
         return sprint;
     }
 
+
     /**
      * Add Sprint
      **/
-
     public boolean addSprint(Sprint sprint) {
         this.sprintList.add(sprint);
         return true;
     }
+
 
     /**
      * Get Method
@@ -86,14 +81,12 @@ public class SprintStore {
         return new ArrayList<>(this.sprintList);
     }
 
+
     /**
      * Method to Validate a Sprint
      **/
-
     public boolean validateIfSprintAlreadyExists(Sprint sprint) {
-
         return this.sprintList.contains(sprint);
-
     }
 
     /**
@@ -111,8 +104,6 @@ public class SprintStore {
     /**
      * Method to Save a Sprint
      */
-
-
     public boolean saveSprint(Sprint sprint) {
 
         boolean result = true;
