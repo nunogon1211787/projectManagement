@@ -32,13 +32,13 @@ public class CreateSprintController {
         return projectstore.getProjectList();
     }
 
-    public Project getProject(String code) {
-        return this.company.getProjectStore().getProjectByCode(code);
+    public Project getProject(Company company, String code) {
+        return this.project = company.getProjectStore().getProjectByCode(code);
     }
 
     public Sprint createSprint(String name, LocalDate startDate) {
-        SprintStore sprintStore = this.project.getSprintStore();
-        return sprintStore.createSprint(name, startDate,this.project.getSprintDuration());
+        this.sprintStore = this.project.getSprintStore();
+        return this.sprint = sprintStore.createSprint(name, startDate,this.project.getSprintDuration());
     }
 
     public boolean saveSprint() {
@@ -46,13 +46,4 @@ public class CreateSprintController {
     }
 }
 
-
-
-
-
-
-
-
-    //Fazer a validação de se a startdate do sprint esta´contida das datas do projecto.
-    //validação do nr de sprints (se o sprint atual está contido no nr de sprints do projeto).
 

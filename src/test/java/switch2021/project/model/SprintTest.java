@@ -35,7 +35,7 @@ public class SprintTest {
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
-//        assertNotEquals(2, x);
+//      assertNotEquals(2, x);
         assertEquals("Sprint_1", name);
         assertEquals(LocalDate.of(2022, 1, 1), date);
     }
