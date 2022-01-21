@@ -45,7 +45,7 @@ public class AddUserStoryToSprintbacklogTest {
         UserStoryStatus status = new UserStoryStatus("statusTest");
         UserStory userStory = new UserStory(status, 2,"teste");
         assertThrows(IllegalArgumentException.class, () -> {
-        UserStoryOfSprint expectedUS = sprintBacklog.createUSerStoryOfSprint(userStory,-1);});
+            sprintBacklog.createUSerStoryOfSprint(userStory,-1);});
     }
 
     @Test
@@ -53,7 +53,7 @@ public class AddUserStoryToSprintbacklogTest {
     public void createStoryInSprintFailCase_2() {
         UserStory userStory = null;
         assertThrows(IllegalArgumentException.class, () -> {
-            UserStoryOfSprint expectedUS = sprintBacklog.createUSerStoryOfSprint(userStory,5);});
+            sprintBacklog.createUSerStoryOfSprint(userStory,5);});
     }
 
     @Test
@@ -73,7 +73,7 @@ public class AddUserStoryToSprintbacklogTest {
         UserStoryStatus status = new UserStoryStatus("Done");
         UserStory userStory = new UserStory(status, 2,"teste");
         assertThrows(IllegalArgumentException.class, () -> {
-            UserStoryOfSprint expectedUS = sprintBacklog.createUSerStoryOfSprint(userStory,5);});
+            sprintBacklog.createUSerStoryOfSprint(userStory,5);});
 
     }
 
