@@ -8,16 +8,16 @@ public class AddUserStoryToSprintBacklogController {
 
     private Company company;
     private UserStory userStory;
-    private long id;
+    private int id;
     private String projCode;
     private int effort;
 
 
-    public AddUserStoryToSprintBacklogController(long id, String projCode, int effort) {
+    public AddUserStoryToSprintBacklogController(int id, String projCode, int effort) {
         this(App.getInstance().getCompany(), id, projCode, effort);
     }
 
-    public AddUserStoryToSprintBacklogController(Company company, long id, String projCode, int effort) {
+    public AddUserStoryToSprintBacklogController(Company company, int id, String projCode, int effort) {
         this.company = company;
         this.userStory = company.getProjectStore().getProductBacklog(projCode).getUserStoryById(id);
         this.id = id;

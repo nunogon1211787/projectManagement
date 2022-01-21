@@ -55,7 +55,7 @@ public class SprintStore {
     /**
      * Sprint Methods
      */
-    public Sprint getSprint(long id) {
+    public Sprint getSprint(int id) {
         Sprint sprint = null;
         for (Sprint sprt : sprintList) {
             if (sprt.getId_Sprint() == id) {
@@ -133,6 +133,7 @@ public class SprintStore {
         if (validateIfSprintAlreadyExists(sprint)) {
             result = false;
         } else {
+            sprint.setId_Sprint(id_SprintGenerator());
             this.sprintList.add(sprint);
         }
         return result;

@@ -40,7 +40,7 @@ public class AssignScrumMasterController {
         boolean msg;
         LocalDate startDateNextSprint = project.getNextSprint().getStartDate();
         LocalDate endDateNextSprint = project.getNextSprint().getStartDate().minusDays(1);
-        ProjectRole role = company.getProjectRolesStore().getProjectRole(roleName);
+        ProjectRole role = company.getProjectRoleStore().getProjectRole(roleName);
 
         return projectTeam.assignProjectRole(resource, startDateNextSprint, endDateNextSprint, role);
     }

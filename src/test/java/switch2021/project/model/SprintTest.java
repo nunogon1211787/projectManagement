@@ -20,7 +20,7 @@ public class SprintTest {
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
-        assertEquals(1, x);
+//        assertEquals(1, x);
         assertEquals("Sprint_1", name);
         assertEquals(LocalDate.of(2022, 1, 1), date);
     }
@@ -29,13 +29,13 @@ public class SprintTest {
     @DisplayName("Constructor test, verification of failure by ID")
     public void sprintConstructorFail_ID() {
         //Arrange
-        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 1, 1));
+        Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
-        long x = sprint.getId();
+        long x = sprint.getId_Sprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
-        assertNotEquals(2, x);
+//        assertNotEquals(2, x);
         assertEquals("Sprint_1", name);
         assertEquals(LocalDate.of(2022, 1, 1), date);
     }
@@ -44,13 +44,13 @@ public class SprintTest {
     @DisplayName("Constructor test, verification of failure by Name")
     public void sprintConstructorFail_Name() {
         //Arrange
-        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 1, 1));
+        Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
-        long x = sprint.getId();
+        long x = sprint.getId_Sprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
-        assertEquals(1, x);
+//        assertEquals(1, x);
         assertNotEquals("Sprint_2", name);
         assertEquals(LocalDate.of(2022, 1, 1), date);
     }
@@ -59,13 +59,13 @@ public class SprintTest {
     @DisplayName("Constructor test, verification of failure by StartDate")
     public void sprintConstructorFail_Date() {
         //Arrange
-        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 1, 1));
+        Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
-        long x = sprint.getId();
+        long x = sprint.getId_Sprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
-        assertEquals(1, x);
+//        assertEquals(1, x);
         assertEquals("Sprint_1", name);
         assertNotEquals(LocalDate.of(2022, 1, 2), date);
     }
@@ -74,13 +74,13 @@ public class SprintTest {
     @DisplayName("Constructor test, verification of total failure (all parameters)")
     public void sprintConstructorFail_All() {
         //Arrange
-        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 1, 1));
+        Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
-        long x = sprint.getId();
+        long x = sprint.getId_Sprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
-        assertNotEquals(2, x);
+//        assertNotEquals(2, x);
         assertNotEquals("Sprint_2", name);
         assertNotEquals(LocalDate.of(2022, 1, 2), date);
     }
@@ -122,7 +122,7 @@ public class SprintTest {
     public void changeEndDateFail() {
 
         //Assert
-        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 2, 1));
+        Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 2, 1));
         sprint.changeEndDate(2);
         LocalDate endadate = sprint.getEndDate();
         //Assert
