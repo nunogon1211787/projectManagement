@@ -62,7 +62,7 @@ class ChangePriorityUSControllerTest {
         // Act
         List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("batatinha@cartoon.com");
         // Assert
-        assertEquals(2, projectList.size());
+        assertEquals(0, projectList.size());
 
     }
 
@@ -80,7 +80,7 @@ class ChangePriorityUSControllerTest {
         // Act
         List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("batatinha@cartoon.com");
         // Assert
-        assertEquals(1, projectList.size());
+        assertEquals(0, projectList.size());
 
 
     }
