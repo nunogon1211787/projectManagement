@@ -53,7 +53,7 @@ public class UserStoryEffortController {
         return this.sprintBacklog;
     }
 
-    public UserStoryOfSprint getUserStory(long id_UserStory){
+    public UserStoryOfSprint getUserStory(int id_UserStory){
         this.userStoryOfSprint= this.sprintBacklog.getUserStory(id_UserStory);
         return this.userStoryOfSprint;
     }

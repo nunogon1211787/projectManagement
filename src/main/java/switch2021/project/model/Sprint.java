@@ -38,7 +38,7 @@ public class Sprint {
      * Add User Story to the Sprintbacklog
      **/
     public boolean addStoryToSprintBacklog(UserStory us, int effort) {
-        this.sprintBacklog.addUserStory(sprintBacklog.createUSerStoryOfSprint(us, effort));
+        this.sprintBacklog.saveUserStoryOfSprint(sprintBacklog.createUSerStoryOfSprint(us, effort));
         return true;
     }
 
@@ -66,6 +66,9 @@ public class Sprint {
      * Check if this Sprint is the current Sprint
      */
     public boolean isCurrentSprint() {
+        if(this.endDate == null) {
+            throw new NullPointerException();
+        }
         return (this.startDate.isBefore(LocalDate.now()) && this.endDate.isAfter(LocalDate.now()));
     }
 
@@ -78,7 +81,9 @@ public class Sprint {
         if (this == o) return true;
         if (!(o instanceof Sprint)) return false;
         Sprint sprint = (Sprint) o;
-        return id_Sprint == sprint.id_Sprint && Objects.equals(name, sprint.name) && Objects.equals(taskstore, sprint.taskstore) && Objects.equals(sprintBacklog, sprint.sprintBacklog) && Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
+        return id_Sprint == sprint.id_Sprint && Objects.equals(name, sprint.name) &&
+                Objects.equals(taskstore, sprint.taskstore) && Objects.equals(sprintBacklog, sprint.sprintBacklog)
+                && Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
     }
 
     @Override
