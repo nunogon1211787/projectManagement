@@ -35,6 +35,8 @@ public class Sprint {
         this.taskstore = new TaskStore();
     }
 
+    /** Add USer Story to the Sprintbacklog **/
+
     public boolean addStoryToSprintBacklog(UserStory us, int effort) {
         this.sprintBacklog.addUserStory(sprintBacklog.createUSerStoryOfSprint(us, effort));
         return true;

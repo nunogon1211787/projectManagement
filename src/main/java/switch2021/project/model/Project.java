@@ -56,7 +56,7 @@ public class Project {
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
 
-        this.productBacklog = new ProductBacklog();
+        this.productBacklog = new ProductBacklog(); // o objeto project tem objeto productbacklog (metodo) como parametro
         this.projectTeam = new ProjectTeam();
 //        this.projectTeam = new ProjectTeam(res);
     }

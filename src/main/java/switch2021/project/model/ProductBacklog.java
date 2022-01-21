@@ -51,6 +51,10 @@ public class ProductBacklog {
         return new UserStory(userStoryId, userStoryStatus, priority, description);
     }
 
+    public UserStory createUserStoryRefine(UserStory userStoryParent, UserStoryStatus userStoryStatus, int priority, String description) {
+        return new UserStory(userStoryParent, userStoryStatus, priority, description);
+    }
+
     /**
      * Methods for save UserStory to the productBacklog - validate duplicate for description (Cris US009)
      **/
@@ -58,6 +62,8 @@ public class ProductBacklog {
     public boolean saveUserStory(UserStory userStory) {
         if (!validateUserStory(userStory)) {
             throw new IllegalArgumentException("Repeated user story inserted, same code project and description.");
+        } else {
+            userStory.setId_UserStory(id_UserStoryGenerator());
         }
         return addUserStory(userStory);
     }
@@ -67,7 +73,12 @@ public class ProductBacklog {
      **/
 
     public boolean addUserStory(UserStory us) {
-        this.userStoryList.add(us);
+        if(validateIdUserStory(us)){
+            this.userStoryList.add(us);
+        } else {
+            us.setId_UserStory(id_UserStoryGenerator());
+            this.userStoryList.add(us);
+        }
         return true;
     }
 
@@ -84,9 +95,30 @@ public class ProductBacklog {
         return true;
     }
 
+    private boolean validateIdUserStory(UserStory userStory){
+        boolean msg = true;
+        for (UserStory i : userStoryList) {
+            if(i.getId_UserStory() == userStory.getId_UserStory()){
+                msg = false;
+                break;
+            }
+        }
+        return msg;
+    }
+
 
     public List<UserStory> getUsSortedByPriority() {
         userStoryList.sort(Comparator.comparingInt(UserStory::getPriority));
         return userStoryList;
     }
+
+    /** ID_UserStory Generator **/
+    public int id_UserStoryGenerator() {
+        int id = 1;
+        if(this.userStoryList.size() > 0) {
+            id = this.userStoryList.get(userStoryList.size()-1).getId_UserStory() + 1;
+        }
+        return id;
+    } //if the object isn´t saved on the list, the id will be the same for all
+    //objects. This issue will be solved when calling the save method.
 }

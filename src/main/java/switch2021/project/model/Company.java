@@ -75,4 +75,14 @@ public class Company {
 
     //Request Store
     public RequestStore getRequestStore() {return requestStore;}
+
+    //User Story Status Store
+    public UserStoryStatusStore getUserStoryStatusStore() {
+        return userStoryStatusStore;
+    }
+
+    // Project Roles Store
+    public ProjectRoleStore getProjectRoleStore() {
+        return projectRoleStore;
+    }
 }
