@@ -99,7 +99,7 @@ class CompanyTest {
                 company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
-                "Product Owner", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("Product Owne")));
+                "Product Owner", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("Product Owner")));
         company.getProjectStore().addProject(project);
         // Act
         ProductBacklog productBacklog = company.getProjectStore().getProductBacklog("other TEST");
