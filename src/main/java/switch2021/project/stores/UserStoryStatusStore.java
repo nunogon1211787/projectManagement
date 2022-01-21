@@ -21,7 +21,6 @@ public class UserStoryStatusStore {
 
     public UserStoryStatusStore() {
         this.userStoryStatusList = new ArrayList<>();
-        populateUserStoryStatusList();
     }
 
     public UserStoryStatusStore(List<UserStoryStatus> userStoryStatusList) {

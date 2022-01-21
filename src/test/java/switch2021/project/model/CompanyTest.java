@@ -1,7 +1,9 @@
 package switch2021.project.model;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +16,7 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         //Assert
-        assertEquals(3,company.getUserProfileStore().getUserProfileList().size());
+        assertEquals(4,company.getUserProfileStore().getUserProfileList().size());
         assertEquals(2,company.getTypologyStore().getTypologyList().size());
         assertEquals(7,company.getProjectStatusStore().getprojectStatusList().size());
     }
@@ -144,47 +146,48 @@ class CompanyTest {
     }
 
 
+    @Test
+    public void SearchUserByPartiallySwitchedEmail() {
+
+        //Arrange
+        Company company = new Company();
+        company.getUserProfileStore().populateDefault();
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", "12345","", company.getUserProfileStore().getUserProfile("visitor"));
+        company.getSystemUserStore().addSystemUser(joana);
+        //Act
+        SystemUser joanasilva = company.getSystemUserStore().getUserByEmail("1235@isep.ipp.pt");
+        //Assert
+        assertNotEquals(joana, joanasilva);
+    }
+
+    @Test
+    public void SearchUserByWrongEmail() {
+
+        //Arrange
+        Company company = new Company();
+        company.getUserProfileStore().populateDefault();
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", "12345","", company.getUserProfileStore().getUserProfile("visitor"));
+        company.getSystemUserStore().addSystemUser(joana);
+        //Act
+        SystemUser joanasilva = company.getSystemUserStore().getUserByEmail("4321@ipp.pt");
+        //Assert
+        assertNotEquals(joana, joanasilva);
+    }
+
+    /**
+     * Teste do searchProject, ainda acabar
+     **/
+
 //    @Test
-//    public void SearchUserByPartiallySwitchedEmail() {
+//    @DisplayName("Teste de criação de projecto")
+//    void searchProject() {
+//      List<String> businesses = new ArrayList<>();
+//        LocalDate date = LocalDate.now();
+//        Company XPTO = new Company();
 //
-//        //Arrange
-//        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", new UserProfile("XXX", "AAA"));
-//        Company company = new Company();
-//        company.saveSystemUser(joana);
-//        //Act
-//        SystemUser joanasilva = company.getUserByEmail("1235@isep.ipp.pt");
-//        //Assert
-//        assertNotEquals(joana, joanasilva);
+//        XPTO.getProjectStore().addProject(XPTO.getProjectStore().createProject("002", "XPTO2", "Teste fixe_2", "ISEP_2", "cenas_2", businesses, date, 9, 5000));
+//
 //    }
-//
-//    @Test
-//    public void SearchUserByWrongEmail() {
-//
-//        //Arrange
-//        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", new UserProfile("XXX", "AAA"));
-//        Company company = new Company();
-//        company.saveSystemUser(joana);
-//        //Act
-//        SystemUser joanasilva = company.getUserByEmail("4321@isep.ipp.pt");
-//        //Assert
-//        assertNotEquals(joana, joanasilva);
-//    }
-//
-//    /**
-//     * Teste do searchProject, ainda acabar
-//     **/
-//
-////    @Test
-////    @DisplayName("Teste de craição de projecto atraves de Company (Paulo)")
-////    void searchProject() {
-////      List<String> businesses = new ArrayList<>();
-////        LocalDate date = LocalDate.now();
-////        Company XPTO = new Company();
-////
-////        XPTO.add(XPTO.createProject("002", "XPTO2", "Teste fixe_2", "ISEP_2",
-////                "cenas_2", businesses, date, 9, 5000));
-////
-////    }
 //
 ////    @Test
 ////    @DisplayName("teste com inicialização de instancia")
