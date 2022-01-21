@@ -29,21 +29,24 @@ public class SprintStore {
      * Sprint creator
      **/
     public Sprint createSprint(String name, LocalDate startDate, int sprintDuration) {
-        validateIfStartDate(startDate);
+        validateStartDate(startDate);
 
         Sprint sprint;
 
-        long id = generateID();
-        sprint = new Sprint(id, name, startDate);
+        sprint = new Sprint(name, startDate);
         sprint.changeEndDate(sprintDuration);
 
         return sprint;
     }
 
-    private long generateID() {
-        long id = 1;
+
+    /**
+     * ID_Sprint Generator
+     */
+    private int id_SprintGenerator() {
+        int id = 1;
         if(this.sprintList.size() > 0) {
-            id = this.sprintList.get(sprintList.size()-1).getId() + 1;
+            id = (this.sprintList.get(sprintList.size()-1).getId_Sprint() + 1);
         }
         return id;
     }
@@ -55,7 +58,7 @@ public class SprintStore {
     public Sprint getSprint(long id) {
         Sprint sprint = null;
         for (Sprint sprt : sprintList) {
-            if (sprt.getId() == id) {
+            if (sprt.getId_Sprint() == id) {
                 sprint = sprt;
                 break;
             }
@@ -65,10 +68,15 @@ public class SprintStore {
 
 
     /**
-     * Add Sprint
+     * Add and Remove Sprint Methods. Adds or remove a Sprint object to the Sprint List
      **/
     public boolean addSprint(Sprint sprint) {
-        this.sprintList.add(sprint);
+        if (validateId_Sprint(sprint)) {
+            this.sprintList.add(sprint);
+        } else {
+            sprint.setId_Sprint(id_SprintGenerator());
+            this.sprintList.add(sprint);
+        }
         return true;
     }
 
@@ -88,6 +96,20 @@ public class SprintStore {
     public boolean validateIfSprintAlreadyExists(Sprint sprint) {
         return this.sprintList.contains(sprint);
     }
+
+    private boolean validateId_Sprint(Sprint sprint) {
+        boolean msg = true;
+
+        for (Sprint i : this.sprintList) {
+            if (i.getId_Sprint() == sprint.getId_Sprint()) {
+                msg = false;
+                break;
+            }
+        }
+        return msg;
+    }
+
+
 
     /**
      * Method to Validate if StartDate is later than the EndDate of the last Sprint
@@ -120,14 +142,15 @@ public class SprintStore {
     /**
      * Get the start and end date of the current Sprint
      */
-    public LocalDate getCurrentSprintEndDate() {
-        LocalDate date = null;
+    public Sprint getCurrentNextSprint() {
+        Sprint sprint = null;
         for(Sprint i : this.sprintList) {
             if(i.isCurrentSprint()) {
-                date = i.getEndDate();
+                int id = i.getId_Sprint();
+                sprint = getSprint(id + 1);
             }
         }
-        return date;
+        return sprint;
     }
 
     @Override

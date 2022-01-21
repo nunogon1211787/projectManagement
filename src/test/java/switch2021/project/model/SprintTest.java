@@ -14,9 +14,9 @@ public class SprintTest {
     @DisplayName("Constructor test, verification of success")
     public void sprintConstructorSuccess() {
         //Arrange
-        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 1, 1));
+        Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
-        long x = sprint.getId();
+        long x = sprint.getId_Sprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
@@ -91,7 +91,7 @@ public class SprintTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            Sprint sprint = new Sprint(1, " ", LocalDate.now());
+            Sprint sprint = new Sprint(" ", LocalDate.now());
         });
     }
 
@@ -101,7 +101,7 @@ public class SprintTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            Sprint sprint = new Sprint(1, "S", LocalDate.now());
+            Sprint sprint = new Sprint("S", LocalDate.now());
         });
     }
 
@@ -110,7 +110,7 @@ public class SprintTest {
     public void changeEndDateSuccess() {
 
         //Assert
-        Sprint sprint = new Sprint(1, "Sprint_1", LocalDate.of(2022, 2, 1));
+        Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 2, 1));
         sprint.changeEndDate(2);
         LocalDate endadate = sprint.getEndDate();
         //Assert

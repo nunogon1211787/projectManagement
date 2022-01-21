@@ -7,10 +7,10 @@ import java.util.Objects;
 
 public class Project {
 
+
     /**
      * Class Atributes
      **/
-
     private String code;
     private String projectName;
     private String description;
@@ -32,10 +32,10 @@ public class Project {
     private double budget;
     private int sprintDuration;
 
+
     /**
      * Project Constructor
      **/
-
     public Project(String code, String name, String description, Customer customer, Typology typology,
                    BusinessSector businessSector, LocalDate startDate, ProjectStatus status, int numberOfSprints, double budget) {
 
@@ -125,10 +125,10 @@ public class Project {
         return this.sprintList;
     }
 
+
     /**
      * Setter Methods
      **/
-
     public void setCode(String code) {
         this.code = code;
     }
@@ -186,11 +186,11 @@ public class Project {
         this.projectTeam = projectTeam;
     }
 
+
     /**
      * Validates Project Creation Fields
      * Checks if @param projectName and @param description are emptry or have the minimum characters necessary
      */
-
     public void validateProjectFields(String projectName, String description, double budget, int numberOfSprints) {
         if (projectName.trim().isEmpty())
             throw new IllegalArgumentException("Project Name cannot be empty");
@@ -206,13 +206,13 @@ public class Project {
             throw new IllegalArgumentException("Budget must be greater than 0");
     }
 
+
     /**
      * Resource Allocation Methods - (Carolina US007)
      * - Método para criar resource
      * - Método para ir buscar Team Member a Project Team
      * - Método para Validar Resource
      **/
-
     public ProjectTeam getProjectTeam() {
         return projectTeam;
     }
@@ -269,11 +269,12 @@ public class Project {
         return this.projectTeam.hasResource(email);
     }
 
+
     /**
      * Get the start date of the next Sprint and end date of the current Sprint
      */
-    public LocalDate getValidEndDate() {
-      return this.sprintList.getCurrentSprintEndDate();
+    public Sprint getNextSprint() {
+      return this.sprintList.getCurrentNextSprint();
     }
 
 
