@@ -1,117 +1,59 @@
 package switch2021.project.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import switch2021.project.stores.TaskStore;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Objects;
 
+@Getter
+@Setter
 public class Sprint {
 
     /**
      * Atributos da classe Sprint
      **/
-    private long id;
+    private int id_Sprint;
     private String name;
-    private TaskStore taskstore;
-    private SprintBacklog sprintBacklog;
+    private final TaskStore taskstore;
+    private final SprintBacklog sprintBacklog;
     private LocalDate startDate;
     private LocalDate endDate;
-    private Project sprintDuration;
 
 
     /**
      * Constructor of Sprint
      **/
-
-    public Sprint(long id, String name, LocalDate startDate, Project sprintDuration) {
+    public Sprint(String name, LocalDate startDate) {
         checkSprintNameRules(name);
-        //checkSprintStartDateRules(startDate);
-        //checkSprintSprintDurationRules(sprintDuration);
-        this.id = ID_GENERATOR.getAndIncrement();
         this.name = name;
         this.startDate = startDate;
-        this.endDate = endDate;
         this.sprintBacklog = new SprintBacklog();
-        this.sprintDuration = sprintDuration;
+        this.taskstore = new TaskStore();
     }
 
+
+    /**
+     * Add User Story to the Sprintbacklog
+     **/
     public boolean addStoryToSprintBacklog(UserStory us, int effort) {
         this.sprintBacklog.addUserStory(sprintBacklog.createUSerStoryOfSprint(us, effort));
         return true;
     }
 
-    /**
-     * Change Sprint End Date
-     **/
-
-    public void changeSprintEndDate(LocalDate end) {
-        this.endDate = end;
-    }
 
     /**
-     * Getters and Setters
+     * Method to change Sprint EndDate
      **/
-
-    public long getID() {
-        return id;
+    public void changeEndDate(int sprintDurationInWeeks) {
+        this.endDate = startDate.plusDays(sprintDurationInWeeks * 7L);
     }
 
-    public String getname() {
-        return name;
-    }
-
-    public String setname() {
-        return name;
-    }
-
-    public TaskStore getTaskStore() {
-        return taskstore;
-    }
-
-    public TaskStore setTaskStore() {
-        return taskstore;
-    }
-
-    public SprintBacklog getSprintBacklog() {
-        return sprintBacklog;
-    }
-
-    public SprintBacklog setSprintBacklog() {
-        return sprintBacklog;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public LocalDate setStartDate() {
-        return startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public LocalDate setEndDate() {
-        return endDate;
-    }
-
-    public Project getSprintDuration() {
-        return sprintDuration;
-    }
-
-    public Project setSprintDuration() {
-        return sprintDuration;
-    }
-
-    //Create ID Automatically
-    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
 
     /**
-     * Validation Methods for the Constructor
+     * Validation Method for the Constructor
      **/
-
     private void checkSprintNameRules(String name) {
         if (name.trim().isEmpty())
             throw new IllegalArgumentException("Sprint Name cannot be empty.");
@@ -119,14 +61,28 @@ public class Sprint {
             throw new IllegalArgumentException("Sprint Name must have at least 2 characters");
     }
 
-    //private void checkSprintStartDateRules(LocalDate startDate) {
-    //    if (startDate <= endDate)
-    //        throw new IllegalArgumentException("StartDate cannot be empty.");
-    //}
 
-    //private void checkSprintSprintDurationRules(Project sprintDuration) {
-    //    if ((sprintDuration < 0))
-    //        throw new IllegalArgumentException("Username must be at least 2 characters");
-    //}
+    /**
+     * Check if this Sprint is the current Sprint
+     */
+    public boolean isCurrentSprint() {
+        return (this.startDate.isBefore(LocalDate.now()) && this.endDate.isAfter(LocalDate.now()));
+    }
 
+
+    /**
+     * Override Methods
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Sprint)) return false;
+        Sprint sprint = (Sprint) o;
+        return id_Sprint == sprint.id_Sprint && Objects.equals(name, sprint.name) && Objects.equals(taskstore, sprint.taskstore) && Objects.equals(sprintBacklog, sprint.sprintBacklog) && Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_Sprint, name, taskstore, sprintBacklog, startDate, endDate);
+    }
 }

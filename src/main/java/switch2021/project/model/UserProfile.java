@@ -2,26 +2,34 @@ package switch2021.project.model;
 
 public class UserProfile {
 
-    /** Classe Profile Attributes **/
+    /**
+     * Classe Profile Attributes
+     **/
     private int id_Profile;
     private String userProfileName;
 
 
-    /** Profile Constructors */
+    /**
+     * Profile Constructors
+     */
     public UserProfile(String userProfileName) {
         checkAttributeRules(userProfileName);
         this.userProfileName = userProfileName;
     }
 
 
-    /** Copy Constructor */
+    /**
+     * Copy Constructor
+     */
     public UserProfile(UserProfile originalProfile) {
         this.id_Profile = originalProfile.id_Profile;
         this.userProfileName = originalProfile.userProfileName;
     }
 
 
-    /** Getters e Setters **/
+    /**
+     * Getters e Setters
+     **/
     public int getId_UserProfile() {
         return id_Profile;
     }
@@ -34,17 +42,23 @@ public class UserProfile {
         this.userProfileName = newName;
     }
 
-    public void setId_UserProfile(int id) {this.id_Profile = id;}
+    public void setId_UserProfile(int id) {
+        this.id_Profile = id;
+    }
 
 
-    /** Method to validate entered data (name) by Administrator */
+    /**
+     * Method to validate entered data (name) by Administrator
+     */
     private void checkAttributeRules(String name) {
         //Check empty field on name
         if (name.trim().isEmpty()) throw new IllegalArgumentException("Name cannot be blank.");
     }
 
 
-    /** Override Methods **/
+    /**
+     * Override Methods
+     **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

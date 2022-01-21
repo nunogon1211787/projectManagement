@@ -7,10 +7,10 @@ import java.util.Objects;
 
 public class Project {
 
+
     /**
      * Class Atributes
      **/
-
     private String code;
     private String projectName;
     private String description;
@@ -22,7 +22,7 @@ public class Project {
     private SystemUser productOwner; // Verificar a necessidade de se manter este atributo
 
     private final BusinessSector businessSector;
-    private SprintStore sprintList;
+    private final SprintStore sprintList;
     private ProjectTeam projectTeam;
 
     private LocalDate startDate;
@@ -32,10 +32,10 @@ public class Project {
     private double budget;
     private int sprintDuration;
 
+
     /**
      * Project Constructor
      **/
-
     public Project(String code, String name, String description, Customer customer, Typology typology,
                    BusinessSector businessSector, LocalDate startDate, ProjectStatus status, int numberOfSprints, double budget) {
 
@@ -51,19 +51,20 @@ public class Project {
         this.businessSector = businessSector;
 
         this.startDate = startDate;
+        this.sprintList = new SprintStore();
 
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
 
-        this.productBacklog = new ProductBacklog();
+        this.productBacklog = new ProductBacklog(); // o objeto project tem objeto productbacklog (metodo) como parametro
         this.projectTeam = new ProjectTeam();
 //        this.projectTeam = new ProjectTeam(res);
     }
 
+
     /**
      * Getter Methods
      **/
-
     public String getCode() {
         return code;
     }
@@ -124,10 +125,10 @@ public class Project {
         return this.sprintList;
     }
 
+
     /**
      * Setter Methods
      **/
-
     public void setCode(String code) {
         this.code = code;
     }
@@ -190,7 +191,6 @@ public class Project {
      * Validates Project Creation Fields
      * Checks if @param projectName and @param description are emptry or have the minimum characters necessary
      */
-
     public void validateProjectFields(String projectName, String description, double budget, int numberOfSprints) {
         if (projectName.trim().isEmpty())
             throw new IllegalArgumentException("Project Name cannot be empty");
@@ -206,15 +206,6 @@ public class Project {
             throw new IllegalArgumentException("Budget must be greater than 0");
     }
 
-    /*
-     * Methods UserStory creation (Cris US009)
-     * - Create User Story method
-     */
-
-//    public boolean createUserStory(String userStoryStatus, int priority, String description, int timeEstimate) {
-//        UserStory us = productBacklog.createUserStory(userStoryStatus, priority, description, timeEstimate);
-//        return productBacklog.addUserStory(us);
-//    }
 
     /**
      * Resource Allocation Methods - (Carolina US007)
@@ -222,7 +213,6 @@ public class Project {
      * - Método para ir buscar Team Member a Project Team
      * - Método para Validar Resource
      **/
-
     public ProjectTeam getProjectTeam() {
         return projectTeam;
     }
@@ -260,7 +250,7 @@ public class Project {
         return msg;
     }
 
-    public boolean hasCurrentResource(String email) {
+    /*public boolean hasCurrentResource(String email) {
         boolean msg = false;
         for (Resource resource : this.projectTeam.getProjectTeamList()) {
             if (hasResource(email) && resource.getStartDate().isBefore(LocalDate.now())
@@ -269,25 +259,22 @@ public class Project {
             }
         }
         return msg;
-    }
+    }*/
 
     public boolean hasCurrentProjectTeamMember(String email) {
         return this.projectTeam.hasCurrentResource(email);
     }
 
-    public boolean hasResource(String email) {
-        boolean msg = false;
-        for (Resource resource : this.projectTeam.getProjectTeamList()) {
-            if (resource.isYour(email)) {
-                msg = true;
-            }
-        }
-        return msg;
+    public boolean hasProjectTeamMember(String email) {
+        return this.projectTeam.hasResource(email);
     }
 
-    public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
-        UserStory userStory = this.productBacklog.createUserStory(userStoryStatus, priority, description);
-        return this.productBacklog.saveUserStory(userStory);
+
+    /**
+     * Get the start date of the next Sprint and end date of the current Sprint
+     */
+    public Sprint getNextSprint() {
+      return this.sprintList.getCurrentNextSprint();
     }
 
 

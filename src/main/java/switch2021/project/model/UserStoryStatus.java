@@ -7,8 +7,15 @@ import lombok.Data;
 @AllArgsConstructor
 
 public class UserStoryStatus {
-
+    /** Classe UserStoryStatus Atributes **/
+    private int id_UserStoryStatus;
     private String description;
+
+    /** Constructor **/
+    public UserStoryStatus(String description) {
+        this.description = description;
+    }
+
 
 
 }

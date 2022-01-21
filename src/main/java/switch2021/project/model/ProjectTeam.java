@@ -1,5 +1,8 @@
 package switch2021.project.model;
 
+import switch2021.project.stores.ProjectRoleStore;
+import switch2021.project.utils.App;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +41,7 @@ public class ProjectTeam {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(user) && i.getEndDate().isAfter(LocalDate.now())) {
+            if (i.isYour(user) && i.isCurrent()) {
                 resource = i;
             }
         }
@@ -50,7 +53,19 @@ public class ProjectTeam {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(role) && i.getEndDate().isAfter(LocalDate.now())) {
+            if (i.isYour(role) && i.isCurrent()) {
+                resource = i;
+            }
+        }
+        return resource;
+    }
+
+    //Get resource by E-mail
+    public Resource getResource(String email) {
+        Resource resource = null;
+
+        for (Resource i : projectTeamList) {
+            if (i.isYour(email) && i.isCurrent()) {
                 resource = i;
             }
         }
@@ -61,13 +76,14 @@ public class ProjectTeam {
     /**
      * Setter new Role
      **/
-    public boolean assignProjectRole(Resource originalResource, LocalDate startDate, ProjectRole projectRole) {
+    public boolean assignProjectRole(Resource originalResource, LocalDate startDateNewRole, LocalDate endDateCurrentSprint, ProjectRole projectRole) {
 
         Resource newResource = new Resource(originalResource); //copyResource
         newResource.setRole(projectRole);                      //change copyResource role
-        newResource.setStartDate(startDate);                   //change originalResource start date
+        newResource.setStartDate(startDateNewRole);            //change originalResource start date
+        newResource.checkStartDateEndDate(newResource.getStartDate(),newResource.getEndDate());
 
-        originalResource.setEndDate(startDate);                //change originalResource end date
+        originalResource.setEndDate(endDateCurrentSprint);     //change originalResource end date
 
         return saveResource(newResource);                      //add copy to Project Team List
     }
@@ -87,7 +103,7 @@ public class ProjectTeam {
     private boolean saveResource(Resource newResource) {
         boolean msg;
         if (validateRoleExistent(newResource.getRole())) {
-            assignProjectRole(getResource(newResource.getRole()), newResource.getStartDate(), null);
+            assignProjectRole(getResource(newResource.getRole()), newResource.getStartDate(), null, App.getInstance().getCompany().getProjectRolesStore().getProjectRole("Team Member"));
             this.projectTeamList.add(newResource);
             msg = true;
         } else {                //-----------> Validação a fazer <------------
@@ -122,14 +138,23 @@ public class ProjectTeam {
 
     public boolean hasCurrentResource(String email) {
         boolean msg = false;
+
         for (Resource resource : this.projectTeamList) {
-            if (resource.isYour(email) && resource.getStartDate().isBefore(LocalDate.now())
-                    && resource.getEndDate().isAfter(LocalDate.now())) {
+            if (resource.isYour(email) && resource.isCurrent()) {
                 msg = true;
             }
         }
         return msg;
     }
 
+    public boolean hasResource(String email) {
+        boolean msg = false;
+        for (Resource resource : this.projectTeamList) {
+            if (resource.isYour(email)) {
+                msg = true;
+            }
+        }
+        return msg;
+    }
 }
 

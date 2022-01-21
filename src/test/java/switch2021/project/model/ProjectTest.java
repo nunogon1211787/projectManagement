@@ -4,10 +4,28 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProjectTest {
+
+    Company company = new Company();
+    Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+    Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+    BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+    Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
+            typo, sector, LocalDate.now(), 7, 5000);
+    ProjectStatus projectStatus = new ProjectStatus("ToStart");
+
+    @Test
+    public void getProductbacklog() {
+        // Arrange
+        Project project = new Project("123testcode", "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), projectStatus, 7, 5000);
+
+
+    }
 
     /**
      * Testes de Criação de Project da classe Project (Paulo - US005)

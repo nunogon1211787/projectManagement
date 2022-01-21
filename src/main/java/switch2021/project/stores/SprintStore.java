@@ -1,52 +1,64 @@
 package switch2021.project.stores;
 
+import lombok.Getter;
 import switch2021.project.model.*;
-import switch2021.project.utils.App;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-
+@Getter
 public class SprintStore {
 
     /**
      * Atributos da Classe
      **/
+    private final List<Sprint> sprintList;
 
-    private List<Sprint> sprintList;
 
     /**
      * Constructors with data
      **/
-
     public SprintStore() {
         this.sprintList = new ArrayList<>();
     }
 
+
     /**
      * Sprint creator
      **/
-
-    public Sprint createSprint(long id, String name, LocalDate startDate, Project sprintDuration) {
+    public Sprint createSprint(String name, LocalDate startDate, int sprintDuration) {
+        validateStartDate(startDate);
 
         Sprint sprint;
 
-        sprint = new Sprint(id, name, startDate, sprintDuration);
+        sprint = new Sprint(name, startDate);
+        sprint.changeEndDate(sprintDuration);
 
         return sprint;
     }
 
 
     /**
+     * ID_Sprint Generator
+     */
+    private int id_SprintGenerator() {
+        int id = 1;
+        if(this.sprintList.size() > 0) {
+            id = (this.sprintList.get(sprintList.size()-1).getId_Sprint() + 1);
+        }
+        return id;
+    }
+
+
+    /**
      * Sprint Methods
      */
-
-
     public Sprint getSprint(long id) {
         Sprint sprint = null;
         for (Sprint sprt : sprintList) {
-            if (sprt.getID() == id) {
+            if (sprt.getId_Sprint() == id) {
                 sprint = sprt;
                 break;
             }
@@ -54,31 +66,42 @@ public class SprintStore {
         return sprint;
     }
 
-    /**
-     * Add Sprint
-     **/
 
+    /**
+     * Add and Remove Sprint Methods. Adds or remove a Sprint object to the Sprint List
+     **/
     public boolean addSprint(Sprint sprint) {
-        this.sprintList.add(sprint);
+        if (validateId_Sprint(sprint)) {
+            this.sprintList.add(sprint);
+        } else {
+            sprint.setId_Sprint(id_SprintGenerator());
+            this.sprintList.add(sprint);
+        }
         return true;
     }
+
 
     /**
      * Get Method
      **/
     public List<Sprint> getSprintList() {
-        return this.sprintList;
+
+        return new ArrayList<>(this.sprintList);
     }
+
 
     /**
      * Method to Validate a Sprint
      **/
+    public boolean validateIfSprintAlreadyExists(Sprint sprint) {
+        return this.sprintList.contains(sprint);
+    }
 
-    public boolean validateSprint(Sprint sprint) {
-
+    private boolean validateId_Sprint(Sprint sprint) {
         boolean msg = true;
-        for (Sprint x : this.sprintList) {
-            if (x.equals(sprint) || sprint == null) {
+
+        for (Sprint i : this.sprintList) {
+            if (i.getId_Sprint() == sprint.getId_Sprint()) {
                 msg = false;
                 break;
             }
@@ -86,19 +109,60 @@ public class SprintStore {
         return msg;
     }
 
+
+
+    /**
+     * Method to Validate if StartDate is later than the EndDate of the last Sprint
+     */
+
+    private void validateStartDate(LocalDate startDate) {
+
+        for (Sprint i : sprintList)
+            if (!i.getEndDate().isBefore(startDate) || i.getEndDate().isEqual(startDate))
+                throw new IllegalArgumentException("Please type the correct Start Date.");
+        }
+
+
     /**
      * Method to Save a Sprint
      */
-
     public boolean saveSprint(Sprint sprint) {
 
         boolean result = true;
 
-        if (!validateSprint(sprint)) {
+        if (validateIfSprintAlreadyExists(sprint)) {
             result = false;
         } else {
             this.sprintList.add(sprint);
         }
         return result;
+    }
+
+
+    /**
+     * Get the start and end date of the current Sprint
+     */
+    public Sprint getCurrentNextSprint() {
+        Sprint sprint = null;
+        for(Sprint i : this.sprintList) {
+            if(i.isCurrentSprint()) {
+                int id = i.getId_Sprint();
+                sprint = getSprint(id + 1);
+            }
+        }
+        return sprint;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SprintStore)) return false;
+        SprintStore that = (SprintStore) o;
+        return Objects.equals(sprintList, that.sprintList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sprintList);
     }
 }

@@ -33,6 +33,19 @@ public class Resource {
 
 
     /**
+     * Resource's Copy
+     **/
+    public Resource(Resource originalResource) {
+        this.user = originalResource.user;
+        this.startDate = originalResource.startDate;
+        this.endDate = originalResource.endDate;
+        this.costPerHour = originalResource.costPerHour;
+        this.percentageOfAllocation = originalResource.percentageOfAllocation;
+        this.role = originalResource.role;
+    }
+
+
+    /**
      * Getters and Setters Methods
      **/
     public SystemUser getUser() {
@@ -90,6 +103,11 @@ public class Resource {
         return this.user.isYourEmail(email);
     }
 
+    //Check if is current
+    public boolean isCurrent() {
+        return (this.startDate.isBefore(LocalDate.now()) && this.endDate.isAfter(LocalDate.now()));
+    }
+
 
     /**
      * Método check se o período que queremos alocar é coincidente com o período que o resource está alocado ao projecto (para depois podermos somar e confirmar que a alocação total não é maior que 1) (Carolina US007)
@@ -110,7 +128,7 @@ public class Resource {
         return msg;
     }
 
-    private void checkStartDateEndDate(LocalDate startDate, LocalDate endDate) {
+    public void checkStartDateEndDate(LocalDate startDate, LocalDate endDate) {
         if (endDate.isBefore(startDate)) {
             throw new IllegalArgumentException("End Date must be after Start Date");
         }
@@ -122,18 +140,6 @@ public class Resource {
         }
     }
 
-    /**
-     * Resource's Copy
-     **/
-    public Resource(Resource originalResource) {
-        this.user = originalResource.user;
-        this.startDate = originalResource.startDate;
-        this.endDate = originalResource.endDate;
-        this.costPerHour = originalResource.costPerHour;
-        this.percentageOfAllocation = originalResource.percentageOfAllocation;
-        this.role = originalResource.role;
-
-    }
 
     /**
      * Override Equals (Carolina US007)

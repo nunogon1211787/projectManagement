@@ -33,12 +33,22 @@ public class UserStoryStatusStore {
         this.userStoryStatusList.add(new UserStoryStatus("Done"));
         this.userStoryStatusList.add(new UserStoryStatus("Cancelled"));
         this.userStoryStatusList.add(new UserStoryStatus("In test"));
+        this.userStoryStatusList.add(new UserStoryStatus("Refined"));
     }
 
     public List<UserStoryStatus> getUserStoryStatusList() {
         return userStoryStatusList;
     }
 
+    public UserStoryStatus getUserStoryStatusByDescription(String description){
+        UserStoryStatus userStoryStatus = null;
+        for(UserStoryStatus uss : this.userStoryStatusList){
+            if(uss.getDescription().equals(description)){
+                userStoryStatus = uss;
+            }
+        }
+        return userStoryStatus;
+    }
     /**
      * Add UserStory Status
      * Adds a new UserStory Status object to the UserStory Status List
@@ -48,4 +58,5 @@ public class UserStoryStatusStore {
         this.userStoryStatusList.add(userStoryStat);
         return true;
     }
+
 }
