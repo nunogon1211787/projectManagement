@@ -13,7 +13,7 @@ class SprintBacklogTest {
 
 
     @Test
-    void getUserStoryOfSprint() {
+    void compareUserStoryIDOfSprint() {
         Company company = new Company();
         ProjectTeamTest projectTeamTest = new ProjectTeamTest();
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
@@ -27,18 +27,21 @@ class SprintBacklogTest {
         int priority = 5;
         String description = "Validate";
         UserStory userstory = new UserStory(status, priority, description);
-        UserStoryOfSprint story = new UserStoryOfSprint(userstory, 21);
-        UserStoryOfSprint story2 = new UserStoryOfSprint(userstory, 13);
-        UserStoryOfSprint story3 = new UserStoryOfSprint(userstory, 2);
+        UserStoryOfSprint story = new UserStoryOfSprint(userstory, 21, 1);
+        UserStoryOfSprint story2 = new UserStoryOfSprint(userstory, 13, 2);
+        UserStoryOfSprint story3 = new UserStoryOfSprint(userstory, 2, 3);
 
         
         sprintBacklog.addUserStory(story);
         sprintBacklog.addUserStory(story2);
         sprintBacklog.addUserStory(story3);
 
-        //List<Sprint> sprintList = project2.getSprintStore().getSprintList();
-        UserStoryOfSprint userStoryOfSprint2 = sprintBacklog.getUserStory(0);
+        UserStoryOfSprint userStoryOfSprint1 = sprintBacklog.getUserStory(1);
+        UserStoryOfSprint userStoryOfSprint2 = sprintBacklog.getUserStory(2);
+        UserStoryOfSprint userStoryOfSprint3 = sprintBacklog.getUserStory(3);
 
+        assertEquals(story, userStoryOfSprint1);
         assertEquals(story2, userStoryOfSprint2);
+        assertNotEquals(story3, userStoryOfSprint2);
     }
 }

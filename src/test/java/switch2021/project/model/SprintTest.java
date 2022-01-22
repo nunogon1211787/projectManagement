@@ -153,4 +153,12 @@ public class SprintTest {
         });
     }
 
+    @Test
+    @DisplayName("Verification test of hasSprintID method")
+    public void hasSprintIDTest() {
+        Sprint sprint = new Sprint("Sprint_1", LocalDate.now().minusWeeks(1));
+        sprint.setId_Sprint(1);
+        assertTrue(sprint.hasSprintID(1));
+    }
+
 }

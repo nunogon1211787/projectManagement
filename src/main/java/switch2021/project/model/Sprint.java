@@ -80,4 +80,8 @@ public class Sprint {
     public int hashCode() {
         return Objects.hash(id_Sprint, name, taskstore, sprintBacklog, startDate, endDate);
     }
+
+    public boolean hasSprintID(int id) {
+        return this.id_Sprint == id;
+    }
 }

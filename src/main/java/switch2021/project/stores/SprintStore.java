@@ -58,7 +58,7 @@ public class SprintStore {
     public Sprint getSprint(int id) {
         Sprint sprint = null;
         for (Sprint sprt : sprintList) {
-            if (sprt.getId_Sprint() == id) {
+            if (sprt.hasSprintID(id)) {
                 sprint = sprt;
                 break;
             }
