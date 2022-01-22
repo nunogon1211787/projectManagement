@@ -1,32 +1,48 @@
 package switch2021.project.controller;
 
-import switch2021.project.model.Company;
-import switch2021.project.model.UserStory;
-import switch2021.project.utils.App;
+import switch2021.project.model.*;
+import switch2021.project.stores.SprintStore;
 
 public class AddUserStoryToSprintBacklogController {
 
-    private Company company;
+    private final Company company;
+    private Project project;
+    private SprintStore sprintStore;
+    private ProductBacklog productBacklog;
     private UserStory userStory;
-    private int sprintId;
-    private String projCode;
-    private int effort;
+    private Sprint sprint;
 
 
 /*    public AddUserStoryToSprintBacklogController(int id, String projCode, int effort) {
-        this(App.getInstance().getCompany(), id, projCode, effort);
+        this(App.getInstance().getCompany());
     }*/
 
-    public AddUserStoryToSprintBacklogController(Company company, int userStoryId,int sprintId, String projCode, int effort) {
+    public AddUserStoryToSprintBacklogController(Company company) {
         this.company = company;
-        this.userStory = company.getProjectStore().getProductBacklog(projCode).getUserStoryById(userStoryId);
-        this.sprintId = sprintId;
-        this.projCode = projCode;
-        this.effort = effort;
     }
 
-    public boolean addUserStoryToSprintBacklog() {
-        company.getProjectStore().getProjectByCode(projCode).getSprintStore().getSprint(sprintId).addStoryToSprintBacklog(userStory, effort);
+    public Project getProject(String code) {
+        return this.project = company.getProjectStore().getProjectByCode(code);
+    }
+
+    public SprintStore getSprintStore() {
+        return sprintStore = this.project.getSprintStore();
+    }
+
+    public Sprint getSprint(int sprintId) {
+        return this.sprint = this.sprintStore.getSprint(sprintId);
+    }
+
+    public ProductBacklog getProductBacklog() {
+        return this.productBacklog = this.project.getProductBacklog();
+    }
+
+    public UserStory getUserStory(int userStoryId) {
+        return this.userStory = this.productBacklog.getUserStoryById(userStoryId);
+    }
+
+    public boolean addUserStoryToSprintBacklog(int effort) {
+        this.sprint.getSprintBacklog().addUserStory(this.sprint.getSprintBacklog().createUSerStoryOfSprint(this.userStory,effort));
         return true;
     }
 }
