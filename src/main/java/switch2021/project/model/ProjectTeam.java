@@ -33,7 +33,7 @@ public class ProjectTeam {
      * Getters and Setters
      **/
     public List<Resource> getProjectTeamList() {
-        return projectTeamList;
+        return new ArrayList<>(this.projectTeamList);
     }
 
     //Get resource by User
@@ -81,7 +81,7 @@ public class ProjectTeam {
         Resource newResource = new Resource(originalResource); //copyResource
         newResource.setRole(projectRole);                      //change copyResource role
         newResource.setStartDate(startDateNewRole);            //change copyResource Start Date
-        newResource.checkStartDateEndDate(startDateNewRole,newResource.getEndDate());
+        newResource.checkStartDateEndDate(startDateNewRole, newResource.getEndDate());
 
         originalResource.setEndDate(startDateNewRole.minusDays(1));     //change originalResource end date
 

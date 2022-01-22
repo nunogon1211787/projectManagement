@@ -2,9 +2,12 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.stores.ProjectStore;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CompanyTest {
@@ -174,9 +177,147 @@ class CompanyTest {
         assertNotEquals(joana, joanasilva);
     }
 
-    /**
-     * Teste do searchProject, ainda acabar
-     **/
+    @Test
+    public void getProjectStoreIsInstanceOfProjectStore() {
+        //Arrange
+        Company c = new Company();
+        ProjectStore p = new ProjectStore();
+        // Assert
+        assertInstanceOf(p.getClass(), c.getProjectStore());
+        assertNotSame(p, c.getProjectStore());
+        assertNotNull(c.getProjectStore());
+    }
+
+    @Test
+    public void getProjectStoreHasList() {
+        //Arrange
+        Company c = new Company();
+        // Assert
+        assertEquals(0, c.getProjectStore().getProjectList().size());
+    }
+
+/**
+ * Teste do searchProject, ainda acabar
+ * project
+ * }
+ * <p>
+ * /* @Test
+ * public void saveRequestProfile() {
+ * //Arrange
+ * <p>
+ * Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+ * int initialSize = Request.getArrayRequest().size();
+ * <p>
+ * Request.saveRequestProfile(newUser);
+ * int expected = initialSize + 1;
+ * //Act
+ * int result = company.getArraySyUser().size();
+ * //Assert
+ * assertEquals(expected, result);
+ * }
+ * project
+ * }
+ * <p>
+ * /* @Test
+ * public void saveRequestProfile() {
+ * //Arrange
+ * <p>
+ * Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+ * int initialSize = Request.getArrayRequest().size();
+ * <p>
+ * Request.saveRequestProfile(newUser);
+ * int expected = initialSize + 1;
+ * //Act
+ * int result = company.getArraySyUser().size();
+ * //Assert
+ * assertEquals(expected, result);
+ * }
+ * project
+ * }
+ * <p>
+ * /* @Test
+ * public void saveRequestProfile() {
+ * //Arrange
+ * <p>
+ * Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+ * int initialSize = Request.getArrayRequest().size();
+ * <p>
+ * Request.saveRequestProfile(newUser);
+ * int expected = initialSize + 1;
+ * //Act
+ * int result = company.getArraySyUser().size();
+ * //Assert
+ * assertEquals(expected, result);
+ * }
+ * project
+ * }
+ * <p>
+ * /* @Test
+ * public void saveRequestProfile() {
+ * //Arrange
+ * <p>
+ * Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+ * int initialSize = Request.getArrayRequest().size();
+ * <p>
+ * Request.saveRequestProfile(newUser);
+ * int expected = initialSize + 1;
+ * //Act
+ * int result = company.getArraySyUser().size();
+ * //Assert
+ * assertEquals(expected, result);
+ * }
+ * project
+ * }
+ * <p>
+ * /* @Test
+ * public void saveRequestProfile() {
+ * //Arrange
+ * <p>
+ * Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+ * int initialSize = Request.getArrayRequest().size();
+ * <p>
+ * Request.saveRequestProfile(newUser);
+ * int expected = initialSize + 1;
+ * //Act
+ * int result = company.getArraySyUser().size();
+ * //Assert
+ * assertEquals(expected, result);
+ * }
+ * project
+ * }
+ * <p>
+ * /* @Test
+ * public void saveRequestProfile() {
+ * //Arrange
+ * <p>
+ * Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+ * int initialSize = Request.getArrayRequest().size();
+ * <p>
+ * Request.saveRequestProfile(newUser);
+ * int expected = initialSize + 1;
+ * //Act
+ * int result = company.getArraySyUser().size();
+ * //Assert
+ * assertEquals(expected, result);
+ * }
+ * project
+ * }
+ * <p>
+ * /* @Test
+ * public void saveRequestProfile() {
+ * //Arrange
+ * <p>
+ * Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+ * int initialSize = Request.getArrayRequest().size();
+ * <p>
+ * Request.saveRequestProfile(newUser);
+ * int expected = initialSize + 1;
+ * //Act
+ * int result = company.getArraySyUser().size();
+ * //Assert
+ * assertEquals(expected, result);
+ * }
+ */
 
 //    @Test
 //    @DisplayName("Teste de criação de projecto")
@@ -814,4 +955,7 @@ class CompanyTest {
 //        //Assert
 //        assertEquals(resAllo1,resultexp);
 //    }
+
+
+
 }

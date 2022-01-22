@@ -2,7 +2,6 @@ package switch2021.project.stores;
 
 import lombok.Getter;
 import switch2021.project.model.*;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +57,7 @@ public class SprintStore {
     public Sprint getSprint(int id) {
         Sprint sprint = null;
         for (Sprint sprt : sprintList) {
-            if (sprt.getId_Sprint() == id) {
+            if (sprt.hasSprintID(id)) {
                 sprint = sprt;
                 break;
             }
@@ -134,7 +133,7 @@ public class SprintStore {
             result = false;
         } else {
             sprint.setId_Sprint(id_SprintGenerator());
-            this.sprintList.add(sprint);
+            addSprint(sprint);
         }
         return result;
     }
@@ -143,23 +142,35 @@ public class SprintStore {
     /**
      * Get the start and end date of the current Sprint
      */
-    public Sprint getCurrentNextSprint() {
+    public Sprint getNextSprint() {
+        Sprint currentSprint = getCurrentSprint();
+        Sprint nextSprint = null;
+        for(Sprint i : this.sprintList) {
+            if(i.getStartDate().isAfter(currentSprint.getEndDate())) {
+                nextSprint = i;
+                break;
+            }
+        }
+        return nextSprint;
+    }
+
+    public Sprint getCurrentSprint() {
         Sprint sprint = null;
         for(Sprint i : this.sprintList) {
             if(i.isCurrentSprint()) {
-                int id = i.getId_Sprint();
-                sprint = getSprint(id + 1);
+                sprint = i;
             }
         }
         return sprint;
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof SprintStore)) return false;
         SprintStore that = (SprintStore) o;
-        return Objects.equals(sprintList, that.sprintList);
+        return sprintList.equals(that.sprintList);
     }
 
     @Override

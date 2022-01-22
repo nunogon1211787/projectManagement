@@ -3,8 +3,10 @@ package switch2021.project.model;
 import org.junit.jupiter.api.Test;
 import switch2021.project.controller.ProductBacklogController;
 import switch2021.project.stores.ProjectStore;
+import switch2021.project.stores.SystemUserStore;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -106,7 +108,7 @@ public class ProjectStoreTest {
         assertNotEquals(this.project, project);
     }
 
-    @Test
+    @Test//US017
     public void getCurrentProjectListByUserEmailSucess() {
         //Arrange
         ProjectTeamTest test = new ProjectTeamTest();
@@ -121,7 +123,7 @@ public class ProjectStoreTest {
         assertEquals(1, sizeExpected);
     }
 
-    @Test
+    @Test//US017
     public void getCurrentProjectListByUserEmailFailResourceNotPresent() {
         //Arrange
         List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("manueloliveira@beaver.com");
@@ -130,7 +132,7 @@ public class ProjectStoreTest {
         assertEquals(0, sizeExpected);
     }
 
-    @Test
+    @Test//US017
     public void getCurrentProjectListByUserEmailFailResourceNotCurrent() {
         //Arrange
         List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("manueloliveira@beaver.com");
@@ -139,4 +141,43 @@ public class ProjectStoreTest {
         assertEquals(0, sizeExpected);
     }
 
+    @Test//US015
+    public void getProjectListEncapsulationSuccess() {
+        ProjectStore projStore = company.getProjectStore();
+        ProjectTeamTest test = new ProjectTeamTest();
+
+        projStore.addProject(test.getProj1());
+        projStore.addProject(test.getProj2());
+        projStore.addProject(test.getProj3());
+        projStore.addProject(test.getCurrentProject());
+
+        List<Project> list = company.getProjectStore().getProjectList();
+        list.remove(0);
+
+        assertEquals(4, projStore.getProjectList().size());
+    }
+
+    @Test//US015
+    public void getProjectListSuccessEmpty() {
+        //Arrange
+        List<Project> projectList = company.getProjectStore().getProjectList();
+        int sizeExpected = projectList.size();
+        // Assert
+        assertEquals(0, sizeExpected);
+    }
+
+    @Test//US015
+    public void getProjectListSuccessWith2Projects() {
+        //Arrange
+        ProjectStore projStore = company.getProjectStore();
+        ProjectTeamTest test = new ProjectTeamTest();
+
+        projStore.addProject(test.getProj1());
+        projStore.addProject(test.getProj2());
+
+        List<Project> projectList = company.getProjectStore().getProjectList();
+        int sizeExpected = projectList.size();
+        // Assert
+        assertEquals(2, sizeExpected);
+    }
 }
