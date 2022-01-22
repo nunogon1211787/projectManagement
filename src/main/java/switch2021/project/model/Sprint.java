@@ -37,7 +37,7 @@ public class Sprint {
      * Method to change Sprint EndDate
      **/
     public void changeEndDate(int sprintDurationInWeeks) {
-        this.endDate = startDate.plusDays(sprintDurationInWeeks * 7L);
+        this.endDate = startDate.plusDays((sprintDurationInWeeks * 7L) - 1);
     }
 
 
