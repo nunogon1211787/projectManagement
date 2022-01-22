@@ -3,7 +3,7 @@ package switch2021.project.model;
 public class UserProfile {
 
     /**
-     * Classe Profile Attributes
+     * Class Profile Attributes
      **/
     private int id_Profile;
     private String userProfileName;

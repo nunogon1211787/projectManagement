@@ -152,14 +152,12 @@ public class ProjectStore {
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         List<Project> currentProjectListByUser = new ArrayList<>();
 
-        if (isValidGetProjListEmail(email)) {
             for (Project project : this.projectList) { //nesta lista estao todos os objetos do tipo projeto
                 if (project.hasCurrentProjectTeamMember(email) && project.getEndDate() == null ||
                         project.hasCurrentProjectTeamMember(email) && project.getEndDate().isAfter(LocalDate.now())) { //project corresponde ao "objeto" daquele ciclo
                     currentProjectListByUser.add(project);
                 }
             }
-        }
         return currentProjectListByUser;
     }
 

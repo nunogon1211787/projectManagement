@@ -17,13 +17,13 @@ class UserStoryOfSprintTest {
     String description = "Validate";
     UserStory story = new UserStory(status, priority, description);
 
-    @Test
-    void hasCode() {
-        UserStoryOfSprint userStoryOfSprint = new UserStoryOfSprint(story, 21);
-        sprintBacklog.addUserStory(userStoryOfSprint);
-        int id = 1;
-        assertTrue(userStoryOfSprint.hasCode(id));
-    }
+//    @Test
+//    void hasCode() {
+//        UserStoryOfSprint userStoryOfSprint = new UserStoryOfSprint(story, 21);
+//        sprintBacklog.addUserStory(userStoryOfSprint);
+//        int id = 1;
+//        assertTrue(userStoryOfSprint.hasCode(id));
+//    }
 
     @Test
     void getSprintIDSuccess() {
