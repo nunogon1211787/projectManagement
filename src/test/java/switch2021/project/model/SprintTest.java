@@ -2,9 +2,8 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
+import switch2021.project.stores.SprintStore;
 import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SprintTest {
@@ -30,12 +29,14 @@ public class SprintTest {
     public void sprintConstructorFail_ID() {
         //Arrange
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
+        SprintStore sprintStore = new SprintStore();
         //Act
-        long x = sprint.getId_Sprint();
+        sprintStore.saveSprint(sprint);
+        int x = sprint.getId_Sprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
-//        assertNotEquals(2, x);
+//      assertNotEquals(2, x);
         assertEquals("Sprint_1", name);
         assertEquals(LocalDate.of(2022, 1, 1), date);
     }
@@ -80,7 +81,7 @@ public class SprintTest {
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
-//        assertNotEquals(2, x);
+        assertNotEquals(2, x);
         assertNotEquals("Sprint_2", name);
         assertNotEquals(LocalDate.of(2022, 1, 2), date);
     }
@@ -108,7 +109,6 @@ public class SprintTest {
     @Test
     @DisplayName("Verification test if EndDate is set with success")
     public void changeEndDateSuccess() {
-
         //Assert
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 2, 1));
         sprint.changeEndDate(2);
@@ -120,7 +120,6 @@ public class SprintTest {
     @Test
     @DisplayName("Verification test if EndDate is set with failure")
     public void changeEndDateFail() {
-
         //Assert
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 2, 1));
         sprint.changeEndDate(2);
@@ -129,5 +128,29 @@ public class SprintTest {
         assertNotEquals(LocalDate.of(2022, 2, 16), endadate);
     }
 
+    @Test
+    @DisplayName("Verification test if is a current Sprint")
+    public void isCurrentSprintFalseTest() {
+        Sprint sprint = new Sprint("Sprint_1", LocalDate.now().minusWeeks(3));
+        sprint.changeEndDate(2);
+        assertFalse(sprint.isCurrentSprint());
+    }
+
+    @Test
+    @DisplayName("Verification test if is a current Sprint")
+    public void isCurrentSprintTrueTest() {
+        Sprint sprint = new Sprint("Sprint_1", LocalDate.now().minusWeeks(1));
+        sprint.changeEndDate(2);
+        assertTrue(sprint.isCurrentSprint());
+    }
+
+    @Test
+    @DisplayName("Verification test if is a current Sprint")
+    public void isCurrentSprintEndDateNullTest() {
+        assertThrows(NullPointerException.class, () -> {
+            Sprint sprint = new Sprint("Sprint_1", LocalDate.now().minusWeeks(1));
+            sprint.isCurrentSprint();
+        });
+    }
 
 }

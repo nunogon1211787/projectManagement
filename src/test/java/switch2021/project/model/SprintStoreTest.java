@@ -222,7 +222,7 @@ public class SprintStoreTest {
         SprintStore sprintStore = new SprintStore();
         Sprint sprint = sprintStore.createSprint("Sprint_0", LocalDate.of(2022, 1, 1), 2);
         //Act
-        sprintStore.addSprint(sprint);
+        sprintStore.saveSprint(sprint);
         //Assert
         assertTrue(sprintStore.validateIfSprintAlreadyExists(sprint));
     }
@@ -236,7 +236,7 @@ public class SprintStoreTest {
         SprintStore sprintStore = new SprintStore();
         Sprint sprint0 = sprintStore.createSprint("Sprint_1", LocalDate.of(2022, 1, 1), 2);
         sprint0.setEndDate(LocalDate.of(2022, 1, 20));
-        sprintStore.addSprint(sprint0);
+        sprintStore.saveSprint(sprint0);
 
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange

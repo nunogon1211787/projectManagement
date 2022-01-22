@@ -17,7 +17,7 @@ public class UserStoryEffortController {
     private List<Sprint> sprintList;
     private Sprint sprint;
     private SprintBacklog sprintBacklog;
-    private UserStoryOfSprint userStory;
+    private UserStoryOfSprint userStoryOfSprint;
 
     public UserStoryEffortController() { //tem como função o dominio para os proximos passos
         this.company = App.getInstance().getCompany();
@@ -53,12 +53,14 @@ public class UserStoryEffortController {
         return this.sprintBacklog;
     }
 
-    public UserStoryOfSprint getUserStory(long id_UserStory){
-        this.userStory= this.sprintBacklog.getUserStory(id_UserStory);
-        return this.userStory;
+    public UserStoryOfSprint getUserStory(int id_UserStory){
+        this.userStoryOfSprint= this.sprintBacklog.getUserStory(id_UserStory);
+        return this.userStoryOfSprint;
     }
 
-
+    public boolean setEffort(int effort) {
+        return this.userStoryOfSprint.setEstimateEffort(effort);
+    }
 
 }
 
