@@ -39,22 +39,20 @@ public class SprintBacklog {
 
     /** Add User Story Of Sprint **/
     public boolean addUserStory(UserStoryOfSprint story) {
-        if(validateId_UserStoryOfSprint(story)){
-            this.userStoryOfSprintList.add(story);
-        } else {
+        if (!validateId_UserStoryOfSprint(story)) {
             story.setId_UserStoryOfSprint(id_UserStoryOfSprintGenerator());
-            this.userStoryOfSprintList.add(story);
         }
-       return true;
+        this.userStoryOfSprintList.add(story);
+        return true;
     }
 
     /** Validate UserStoryOfSprint Addition - checks if already exists **/
     public boolean validateId_UserStoryOfSprint (UserStoryOfSprint userStoryOfSprint) {
-        boolean msg = true;
+        boolean msg = false;
 
         for (UserStoryOfSprint i : userStoryOfSprintList) {
-            if (i.getId_UserStoryOfSprint() == userStoryOfSprint.getId_UserStoryOfSprint()) {
-                msg = false;
+            if (i.getUserStoryOfSprint().getId_UserStory() == userStoryOfSprint.getUserStoryOfSprint().getId_UserStory()) {
+                msg = true;
                 break;
             }
         }
@@ -120,4 +118,5 @@ public class SprintBacklog {
                 "userStoryOfSprintList=" + userStoryOfSprintList +
                 '}';
     }
+
 }

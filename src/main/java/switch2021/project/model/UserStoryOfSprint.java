@@ -1,6 +1,8 @@
 package switch2021.project.model;
 
 import lombok.Getter;
+import switch2021.project.utils.Utils;
+
 import java.util.Objects;
 
 @Getter
@@ -21,6 +23,13 @@ public class UserStoryOfSprint {
         validateFields(effort, story);
         this.estimateEffort = effort;
         this.userStoryOfSprint = story;
+    }
+
+    public UserStoryOfSprint(UserStory story, int effort, int userStoryId) {
+        validateFields(effort, story);
+        this.estimateEffort = effort;
+        this.userStoryOfSprint = story;
+        this.id_UserStoryOfSprint = userStoryId;
     }
 
     public boolean hasCode(long id_UserStoryofSprint) {
@@ -71,9 +80,10 @@ public class UserStoryOfSprint {
     }
 
     private boolean validateEffort(int x) {
-        if (x < 0 || x == 4 || x == 6 || x == 7 || x > 8 && x < 13 || x > 13 && x < 20 || x > 20)
+        /*if (x < 0 || x == 4 || x == 6 || x == 7 || x > 8 && x < 13 || x > 13 && x < 20 || x > 20)
             return false;
-        return true;
+        return true;*/
+        return Utils.isFibonacci(x);
     }
 
     public boolean setEstimateEffort(int estimateEffort) {
