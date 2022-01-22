@@ -37,7 +37,7 @@ public class Sprint {
      * Method to change Sprint EndDate
      **/
     public void changeEndDate(int sprintDurationInWeeks) {
-        this.endDate = startDate.plusDays(sprintDurationInWeeks * 7L);
+        this.endDate = startDate.plusDays((sprintDurationInWeeks * 7L) - 1);
     }
 
 
@@ -79,5 +79,9 @@ public class Sprint {
     @Override
     public int hashCode() {
         return Objects.hash(id_Sprint, name, taskstore, sprintBacklog, startDate, endDate);
+    }
+
+    public boolean hasSprintID(int id) {
+        return this.id_Sprint == id;
     }
 }

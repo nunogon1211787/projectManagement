@@ -35,7 +35,7 @@ public class UserStoryEffortController {
         return this.proj;
     }
 
-    public List<Sprint> getSprintList() {
+    public List<Sprint> getSprintList () {
         this.sprintList = new ArrayList<>();
         this.sprintStore = this.proj.getSprintStore();
         this.sprintList = this.sprintStore.getSprintList();
