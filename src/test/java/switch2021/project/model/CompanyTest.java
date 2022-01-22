@@ -2,9 +2,12 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.stores.ProjectStore;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CompanyTest {
@@ -16,9 +19,9 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         //Assert
-        assertEquals(4,company.getUserProfileStore().getUserProfileList().size());
-        assertEquals(2,company.getTypologyStore().getTypologyList().size());
-        assertEquals(7,company.getProjectStatusStore().getprojectStatusList().size());
+        assertEquals(4, company.getUserProfileStore().getUserProfileList().size());
+        assertEquals(2, company.getTypologyStore().getTypologyList().size());
+        assertEquals(7, company.getProjectStatusStore().getprojectStatusList().size());
     }
 
     // Test to validate if there is project code (Cris US009)
@@ -33,7 +36,7 @@ class CompanyTest {
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-        List<Project> projectList = company.getProjectStore().getProjectListWithPORight("");
+            List<Project> projectList = company.getProjectStore().getProjectListWithPORight("");
         });
         //Assert
         assertTrue(exception.getMessage().contains("Invalid email inserted"));
@@ -120,7 +123,7 @@ class CompanyTest {
         company.getProjectStore().addProject(project);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-        ProductBacklog productBacklog = company.getProjectStore().getProductBacklog(null);
+            ProductBacklog productBacklog = company.getProjectStore().getProductBacklog(null);
         });
         //Assert
         assertTrue(exception.getMessage().contains("Project code is empty."));
@@ -152,7 +155,7 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         company.getUserProfileStore().populateDefault();
-        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", "12345","", company.getUserProfileStore().getUserProfile("visitor"));
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", "12345", "", company.getUserProfileStore().getUserProfile("visitor"));
         company.getSystemUserStore().addSystemUser(joana);
         //Act
         SystemUser joanasilva = company.getSystemUserStore().getUserByEmail("1235@isep.ipp.pt");
@@ -166,7 +169,7 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         company.getUserProfileStore().populateDefault();
-        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", "12345","", company.getUserProfileStore().getUserProfile("visitor"));
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", "12345", "", company.getUserProfileStore().getUserProfile("visitor"));
         company.getSystemUserStore().addSystemUser(joana);
         //Act
         SystemUser joanasilva = company.getSystemUserStore().getUserByEmail("4321@ipp.pt");
@@ -174,9 +177,147 @@ class CompanyTest {
         assertNotEquals(joana, joanasilva);
     }
 
-    /**
-     * Teste do searchProject, ainda acabar
-     **/
+    @Test
+    public void getProjectStoreIsInstanceOfProjectStore() {
+        //Arrange
+        Company c = new Company();
+        ProjectStore p = new ProjectStore();
+        // Assert
+        assertInstanceOf(p.getClass(), c.getProjectStore());
+        assertNotSame(p, c.getProjectStore());
+        assertNotNull(c.getProjectStore());
+    }
+
+    @Test
+    public void getProjectStoreHasList() {
+        //Arrange
+        Company c = new Company();
+        // Assert
+        assertEquals(0, c.getProjectStore().getProjectList().size());
+    }
+}
+/**
+ * Teste do searchProject, ainda acabar
+ * project
+ * }
+ * <p>
+ * /* @Test
+ * public void saveRequestProfile() {
+ * //Arrange
+ * <p>
+ * Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+ * int initialSize = Request.getArrayRequest().size();
+ * <p>
+ * Request.saveRequestProfile(newUser);
+ * int expected = initialSize + 1;
+ * //Act
+ * int result = company.getArraySyUser().size();
+ * //Assert
+ * assertEquals(expected, result);
+ * }
+ * project
+ * }
+ * <p>
+ * /* @Test
+ * public void saveRequestProfile() {
+ * //Arrange
+ * <p>
+ * Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+ * int initialSize = Request.getArrayRequest().size();
+ * <p>
+ * Request.saveRequestProfile(newUser);
+ * int expected = initialSize + 1;
+ * //Act
+ * int result = company.getArraySyUser().size();
+ * //Assert
+ * assertEquals(expected, result);
+ * }
+ * project
+ * }
+ * <p>
+ * /* @Test
+ * public void saveRequestProfile() {
+ * //Arrange
+ * <p>
+ * Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+ * int initialSize = Request.getArrayRequest().size();
+ * <p>
+ * Request.saveRequestProfile(newUser);
+ * int expected = initialSize + 1;
+ * //Act
+ * int result = company.getArraySyUser().size();
+ * //Assert
+ * assertEquals(expected, result);
+ * }
+ * project
+ * }
+ * <p>
+ * /* @Test
+ * public void saveRequestProfile() {
+ * //Arrange
+ * <p>
+ * Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+ * int initialSize = Request.getArrayRequest().size();
+ * <p>
+ * Request.saveRequestProfile(newUser);
+ * int expected = initialSize + 1;
+ * //Act
+ * int result = company.getArraySyUser().size();
+ * //Assert
+ * assertEquals(expected, result);
+ * }
+ * project
+ * }
+ * <p>
+ * /* @Test
+ * public void saveRequestProfile() {
+ * //Arrange
+ * <p>
+ * Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+ * int initialSize = Request.getArrayRequest().size();
+ * <p>
+ * Request.saveRequestProfile(newUser);
+ * int expected = initialSize + 1;
+ * //Act
+ * int result = company.getArraySyUser().size();
+ * //Assert
+ * assertEquals(expected, result);
+ * }
+ * project
+ * }
+ * <p>
+ * /* @Test
+ * public void saveRequestProfile() {
+ * //Arrange
+ * <p>
+ * Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+ * int initialSize = Request.getArrayRequest().size();
+ * <p>
+ * Request.saveRequestProfile(newUser);
+ * int expected = initialSize + 1;
+ * //Act
+ * int result = company.getArraySyUser().size();
+ * //Assert
+ * assertEquals(expected, result);
+ * }
+ * project
+ * }
+ * <p>
+ * /* @Test
+ * public void saveRequestProfile() {
+ * //Arrange
+ * <p>
+ * Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+ * int initialSize = Request.getArrayRequest().size();
+ * <p>
+ * Request.saveRequestProfile(newUser);
+ * int expected = initialSize + 1;
+ * //Act
+ * int result = company.getArraySyUser().size();
+ * //Assert
+ * assertEquals(expected, result);
+ * }
+ */
 
 //    @Test
 //    @DisplayName("Teste de criação de projecto")
@@ -728,26 +869,26 @@ class CompanyTest {
 //        LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
 //        Resource resAllo2 = new Resource(newUser2, startDateToAllocate, endDateToAllocate, 100, .5);
 
-        /** project **/
+/** project **/
 /**
-    }
+ }
 
-   /* @Test
-    public void saveRequestProfile() {
-        //Arrange
+ /* @Test
+ public void saveRequestProfile() {
+ //Arrange
 
-        Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
-        int initialSize = Request.getArrayRequest().size();
+ Request newRequest = Request(LocalDate.of(2022,1,9),new SystemUser());
+ int initialSize = Request.getArrayRequest().size();
 
-        Request.saveRequestProfile(newUser);
-        int expected = initialSize + 1;
-        //Act
-        int result = company.getArraySyUser().size();
-        //Assert
-        assertEquals(expected, result);
-    }
+ Request.saveRequestProfile(newUser);
+ int expected = initialSize + 1;
+ //Act
+ int result = company.getArraySyUser().size();
+ //Assert
+ assertEquals(expected, result);
+ }
 
-    */
+ */
 
 //}
 //
@@ -814,4 +955,3 @@ class CompanyTest {
 //        //Assert
 //        assertEquals(resAllo1,resultexp);
 //    }
-}
