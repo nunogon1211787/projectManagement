@@ -13,72 +13,109 @@ public class ProjectTeamTest {
      * Attribute
      **/
     private Company company;
-    private Project project1;
+    private Project proj1;
+    private Project proj2;
+    private Project proj3;
+    private Project proj4;
 
-    public Project getProject1() {
+    public Project getProj1() {
         init();
-        return project1;
+        return this.proj1;
+    }
+
+    public Project getProj2() {
+        init();
+        return this.proj2;
+    }
+
+    public Project getProj3() {
+        init();
+        return this.proj3;
+    }
+
+    public Project getProj4() {
+        init();
+        return this.proj4;
     }
 
     @BeforeEach
     public void init() {
         Company company = new Company();
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        project1 = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
-        UserProfile profile1 = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile1);
-        LocalDate startDate1 = LocalDate.of(2021, 12, 31);
-        LocalDate endDate1 = LocalDate.of(2022, 1, 5);
-        Resource resource1 = new Resource(user1, startDate1, endDate1, 100, .2);
+        proj1 = company.getProjectStore().createProject("proj1Code", "prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2021, 11, 30));
 
-        UserProfile profile2 = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile2);
-        LocalDate startDate2 = LocalDate.of(2022, 1, 6);
-        LocalDate endDate2 = LocalDate.of(2022, 1, 11);
-        Resource resource2 = new Resource(user2, startDate2, endDate2, 100, .2);
+        proj2 = company.getProjectStore().createProject("proj2Code", "prototype2", "proj2Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
+        proj2.setEndDate(LocalDate.of(2021, 11, 30));
 
-        UserProfile profile3 = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user3 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "ghi", "ghi", "photo", profile3);
-        LocalDate startDate3 = LocalDate.of(2022, 1, 12);
-        LocalDate endDate3 = LocalDate.of(2022, 1, 17);
-        Resource resource3 = new Resource(user3, startDate3, endDate3, 100, .2);
+        proj3 = company.getProjectStore().createProject("proj3Code", "prototype3", "proj3Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
+        proj3.setEndDate(LocalDate.of(2021, 11, 30));
 
-        UserProfile profile4 = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "ghi", "ghi", "photo", profile4);
-        LocalDate startDate4 = LocalDate.of(2022, 1, 18);
-        LocalDate endDate4 = LocalDate.of(2022, 1, 23);
-        Resource resource4 = new Resource(user4, startDate4, endDate4, 100, .2);
+        proj4 = company.getProjectStore().createProject("proj4Code", "prototype4", "proj4Prototype", customer,
+                typo, sector, LocalDate.of(2021, 12, 1), 2, 4000);
+        proj4.setEndDate(LocalDate.of(2021, 12, 31));
 
-        UserProfile profile5 = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user5 = new SystemUser("manuelgoncalves", "manuelgoncalves@beaver.com", "tester", "ghi", "ghi", "photo", profile5);
-        LocalDate startDate5 = LocalDate.of(2022, 1, 24);
-        LocalDate endDate5 = LocalDate.of(2022, 1, 29);
-        Resource resource5 = new Resource(user5, startDate5, endDate5, 100, .2);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
+        LocalDate endDateMb = LocalDate.of(2021, 11, 15);
+        Resource manuelbras = new Resource(user1, startDateMb, endDateMb, 100, .5);
 
-        project1.getProjectTeam().addResourceToTeam(resource1);
-        project1.getProjectTeam().addResourceToTeam(resource2);
-        project1.getProjectTeam().addResourceToTeam(resource3);
-        project1.getProjectTeam().addResourceToTeam(resource4);
-        project1.getProjectTeam().addResourceToTeam(resource5);
+        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMm = LocalDate.now().minusDays(7);
+        LocalDate endDateMm = LocalDate.now().plusDays(7);
+        Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, 100, 1);
 
+        SystemUser user3 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMj = LocalDate.of(2021, 11, 1);
+        LocalDate endDateMj = LocalDate.of(2021, 11, 15);
+        Resource manueljose = new Resource(user3, startDateMj, endDateMj, 100, .5);
+
+        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMo = LocalDate.of(2021, 11, 1);
+        LocalDate endDateMo = LocalDate.of(2021, 11, 15);
+        Resource manueloliveira = new Resource(user4, startDateMo, endDateMo, 100, .3333);
+
+        SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMf = LocalDate.of(2021, 11, 16);
+        LocalDate endDateMf = LocalDate.of(2021, 11, 30);
+        Resource manuelfernandes = new Resource(user5, startDateMf, endDateMf, 100, 1);
+
+        SystemUser user6 = new SystemUser("manuelgoncalves", "manuelgoncalves@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMg = LocalDate.of(2021, 11, 16);
+        LocalDate endDateMg = LocalDate.of(2021, 11, 30);
+        Resource manuelgoncalves = new Resource(user6, startDateMg, endDateMg, 100, 1);
+
+        proj1.getProjectTeam().addResourceToTeam(manuelbras);
+        proj1.getProjectTeam().addResourceToTeam(manueljose);
+        proj1.getProjectTeam().addResourceToTeam(manueloliveira);
+        proj1.getProjectTeam().addResourceToTeam(manuelfernandes);
+        proj2.getProjectTeam().addResourceToTeam(manuelbras);
+        proj2.getProjectTeam().addResourceToTeam(manueloliveira);
+        proj2.getProjectTeam().addResourceToTeam(manuelgoncalves);
+        proj3.getProjectTeam().addResourceToTeam(manueljose);
+        proj3.getProjectTeam().addResourceToTeam(manueloliveira);
+        proj4.getProjectTeam().addResourceToTeam(manuelmartins);
     }
 
     @Test
     public void hasCurrentResourceSuccess() {
-        assertTrue(project1.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
+        assertTrue(proj4.getProjectTeam().hasCurrentResource(("manuelmartins@beaver.com")));
     }
 
     @Test
     public void hasCurrentResourceFailResourceNotPresent() {
-        assertFalse(project1.getProjectTeam().hasCurrentResource(("manuelalexandre@beaver.com")));
+        assertFalse(proj4.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
     }
 
     @Test
     public void hasCurrentResourceFailResourceNotCurrent() {
-        assertFalse(project1.getProjectTeam().hasCurrentResource(("manueljose@beaver.com")));
+        assertFalse(proj3.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
     }
 }

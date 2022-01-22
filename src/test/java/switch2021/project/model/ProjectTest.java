@@ -49,17 +49,20 @@ class ProjectTest {
 
     @Test
     public void hasCurrentProjectTeamMemberEmailSuccess() {
-        assertTrue(this.projectTeamTest.getProject1().getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
+        ProjectTeamTest teamTest = new ProjectTeamTest();
+        assertTrue(teamTest.getProj4().getProjectTeam().hasCurrentResource(("manuelmartins@beaver.com")));
     }
 
     @Test
     public void hasCurrentProjectTeamMemberEmailFailResourceNotPresent() {
-        assertFalse(this.projectTeamTest.getProject1().getProjectTeam().hasCurrentResource(("manuelalexandre@beaver.com")));
+        ProjectTeamTest teamTest = new ProjectTeamTest();
+        assertFalse(teamTest.getProj4().getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
     }
 
     @Test
     public void hasCurrentProjectTeamMemberEmailFailResourceNotCurrent() {
-        assertFalse(this.projectTeamTest.getProject1().getProjectTeam().hasCurrentResource(("manueljose@beaver.com")));
+        ProjectTeamTest teamTest = new ProjectTeamTest();
+        assertFalse(teamTest.getProj3().getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
     }
 
     /**
