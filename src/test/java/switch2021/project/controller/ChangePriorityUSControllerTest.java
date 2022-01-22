@@ -57,7 +57,8 @@ class ChangePriorityUSControllerTest {
     userStory3 = new UserStory(userStoryStatus, 4, "Fazer tal e coiso também");
 
     }
-    @Test
+    /*@Test//David tirei esta validação do método em ProjectStore que estás aqui a testar
+        // pois o email já está no sistema não é introduzido pelo utilizador, logo já foi validado quando foi criado o user.
     void getCurrentProjectListByUserEmailIsInvalid() {
         assertThrows(IllegalArgumentException.class, () -> {//Arrange
             company.getProjectStore().addProject(project);
@@ -70,7 +71,7 @@ class ChangePriorityUSControllerTest {
             // Assert
 
         });
-    }
+    }*/
 
     @Test
     void getCurrentProjectListByUserEmailSizeTest() {
