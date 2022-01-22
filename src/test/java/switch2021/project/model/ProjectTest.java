@@ -1,11 +1,8 @@
 package switch2021.project.model;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.stores.ProjectStore;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -50,13 +47,13 @@ class ProjectTest {
     @Test
     public void hasCurrentProjectTeamMemberEmailSuccess() {
         ProjectTeamTest teamTest = new ProjectTeamTest();
-        assertTrue(teamTest.getProj4().getProjectTeam().hasCurrentResource(("manuelmartins@beaver.com")));
+        assertTrue(teamTest.getCurrentProject().getProjectTeam().hasCurrentResource(("manuelmartins@beaver.com")));
     }
 
     @Test
     public void hasCurrentProjectTeamMemberEmailFailResourceNotPresent() {
         ProjectTeamTest teamTest = new ProjectTeamTest();
-        assertFalse(teamTest.getProj4().getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
+        assertFalse(teamTest.getCurrentProject().getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
     }
 
     @Test
