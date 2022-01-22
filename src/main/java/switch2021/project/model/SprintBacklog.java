@@ -50,26 +50,12 @@ public class SprintBacklog {
 
     /** Validate UserStoryOfSprint Addition - checks if already exists **/
     public boolean validateId_UserStoryOfSprint (UserStoryOfSprint userStoryOfSprint) {
-        boolean msg = true;
+        boolean msg = false;
 
         for (UserStoryOfSprint i : userStoryOfSprintList) {
-            if (i.getId_UserStoryOfSprint() == userStoryOfSprint.getId_UserStoryOfSprint()) {
-                msg = false;
+            if (i.getUserStoryOfSprint().getId_UserStory() == userStoryOfSprint.getUserStoryOfSprint().getId_UserStory()) {
+                msg = true;
                 break;
-            }
-        }
-        return msg;
-    }
-
-    private boolean validateUserStoryOfSprint(UserStoryOfSprint userStoryOfSprint){
-        boolean msg = true;
-        if(userStoryOfSprintList.size() == 0){
-            msg = false; } else {
-            for (UserStoryOfSprint i : userStoryOfSprintList) {
-                if(i.equals(userStoryOfSprint)){
-                    msg = false;
-                    break;
-                }
             }
         }
         return msg;
@@ -84,20 +70,6 @@ public class SprintBacklog {
         return id;
     } //if the object isn´t saved on the list, the id will be the same for all
     //objects. This issue will be solved when calling the save method.
-
-
-
-    /**
-     * Save UserStoryOfSprint Method. Save a new UserStoryOfSprint object to the UserStoryOfSprint List
-     **/
-    public boolean saveUserStoryOfSprint(UserStoryOfSprint userStory) {
-        if (!validateUserStoryOfSprint(userStory)) {
-            throw new IllegalArgumentException("Repeated UserStoryOfSprint.");
-        } else {
-            userStory.setId_UserStoryOfSprint(id_UserStoryOfSprintGenerator());
-        }
-        return addUserStory(userStory);
-    }
 
 
     /** Override **/
@@ -120,4 +92,5 @@ public class SprintBacklog {
                 "userStoryOfSprintList=" + userStoryOfSprintList +
                 '}';
     }
+
 }

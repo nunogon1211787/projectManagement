@@ -33,16 +33,6 @@ public class Sprint {
         this.taskstore = new TaskStore();
     }
 
-
-    /**
-     * Add User Story to the Sprintbacklog
-     **/
-    public boolean addStoryToSprintBacklog(UserStory us, int effort) {
-        this.sprintBacklog.saveUserStoryOfSprint(sprintBacklog.createUSerStoryOfSprint(us, effort));
-        return true;
-    }
-
-
     /**
      * Method to change Sprint EndDate
      **/

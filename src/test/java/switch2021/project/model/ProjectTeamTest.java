@@ -16,7 +16,7 @@ public class ProjectTeamTest {
     private Project proj1;
     private Project proj2;
     private Project proj3;
-    private Project proj4;
+    private Project currentProject;
 
     public Project getProj1() {
         init();
@@ -33,9 +33,9 @@ public class ProjectTeamTest {
         return this.proj3;
     }
 
-    public Project getProj4() {
+    public Project getCurrentProject() {
         init();
-        return this.proj4;
+        return this.currentProject;
     }
 
     @BeforeEach
@@ -57,9 +57,9 @@ public class ProjectTeamTest {
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
         proj3.setEndDate(LocalDate.of(2021, 11, 30));
 
-        proj4 = company.getProjectStore().createProject("proj4Code", "prototype4", "proj4Prototype", customer,
-                typo, sector, LocalDate.of(2021, 12, 1), 2, 4000);
-        proj4.setEndDate(LocalDate.of(2021, 12, 31));
+        currentProject = company.getProjectStore().createProject("proj4Code", "prototype4", "proj4Prototype", customer,
+                typo, sector, LocalDate.now().minusDays(7), 2, 4000);
+        currentProject.setEndDate(LocalDate.now().plusDays(7));
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
@@ -101,17 +101,17 @@ public class ProjectTeamTest {
         proj2.getProjectTeam().addResourceToTeam(manuelgoncalves);
         proj3.getProjectTeam().addResourceToTeam(manueljose);
         proj3.getProjectTeam().addResourceToTeam(manueloliveira);
-        proj4.getProjectTeam().addResourceToTeam(manuelmartins);
+        currentProject.getProjectTeam().addResourceToTeam(manuelmartins);
     }
 
     @Test
     public void hasCurrentResourceSuccess() {
-        assertTrue(proj4.getProjectTeam().hasCurrentResource(("manuelmartins@beaver.com")));
+        assertTrue(currentProject.getProjectTeam().hasCurrentResource(("manuelmartins@beaver.com")));
     }
 
     @Test
     public void hasCurrentResourceFailResourceNotPresent() {
-        assertFalse(proj4.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
+        assertFalse(currentProject.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
     }
 
     @Test
