@@ -57,6 +57,12 @@ class ChangePriorityUSControllerTest {
     userStory = new UserStory(userStoryStatus, 2, "Fazer tal");
     userStory2 = new UserStory(userStoryStatus, 3, "Fazer tal e coiso");
     userStory3 = new UserStory(userStoryStatus, 4, "Fazer tal e coiso também");
+        project.getProductBacklog().addUserStory(userStory);
+        project.getProductBacklog().addUserStory(userStory2);
+        project.getProductBacklog().addUserStory(userStory3);
+        company.getProjectStore().addProject(project);
+        company.getProjectStore().addProject(project2);
+
 
     }
     /*@Test//David tirei esta validação do método em ProjectStore que estás aqui a testar
@@ -78,8 +84,6 @@ class ChangePriorityUSControllerTest {
     @Test
     void getCurrentProjectListByUserEmailSizeTest() {
         //Arrange
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
         project.addResource(input);
         project2.addResource(input);
 
@@ -93,8 +97,7 @@ class ChangePriorityUSControllerTest {
     @Test
     void getCurrentProjectListByUserEmailOnlyActiveTest() {
         //Arrange
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
+
         project.addResource(input);
         project2.addResource(input);
         LocalDate endDate = LocalDate.of(2021,1,2);
@@ -112,8 +115,6 @@ class ChangePriorityUSControllerTest {
     @Test
     void getCurrentProjectListByUserEmailCorrectList() {
         //Arrange
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
         company.getProjectStore().addProject(project3);
         LocalDate endDate = LocalDate.of(2021,1,2);
         company.getProjectStore().getProjectByCode("XPTO2000").setEndDate(endDate);
@@ -133,8 +134,6 @@ class ChangePriorityUSControllerTest {
 
     @Test
     void getProjectByCodeTest() {
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
         project.addResource(input);
         project2.addResource(input);
         // Act
@@ -161,13 +160,7 @@ class ChangePriorityUSControllerTest {
 
     @Test
     void getUserStoryListFromProjectCorrect() {
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
         project.addResource(input);
-
-        project.getProductBacklog().addUserStory(userStory);
-        project.getProductBacklog().addUserStory(userStory2);
-        project.getProductBacklog().addUserStory(userStory3);
 
         List<UserStory> usList = company.getProjectStore().getProjectByCode("XPTO2000").getProductBacklog().getUserStoryList();
 
@@ -176,13 +169,7 @@ class ChangePriorityUSControllerTest {
 
     @Test
     void getUserStoryListFromProjectSizeTest() {
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
         project.addResource(input);
-
-        project.getProductBacklog().addUserStory(userStory);
-        project.getProductBacklog().addUserStory(userStory2);
-        project.getProductBacklog().addUserStory(userStory3);
 
         List<UserStory> usList = company.getProjectStore().getProjectByCode("XPTO2000").getProductBacklog().getUserStoryList();
 
@@ -192,26 +179,46 @@ class ChangePriorityUSControllerTest {
 
     @Test
     void getUserStoryListFromProjectOnlyActive() {
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
         project.addResource(input);
 
-        project.getProductBacklog().addUserStory(userStory);
-        project.getProductBacklog().addUserStory(userStory2);
+        UserStoryStatus usStatus2 = new UserStoryStatus("Completed");
+        userStory3.setUserStoryStatus(usStatus2);
+
+        List<UserStory> usList = company.getProjectStore().getProjectByCode("XPTO2000").getProductBacklog().getActiveUserStoryList();
+
+        assertEquals(2,usList.size());
+    }
+
+    @Test
+    void getUSCorrect() {
+        project.addResource(input);
+
+        UserStory us1 = project.getProductBacklog().getUserStoryById(23);
+
+        assertEquals(userStory2,us1);
+    }
+
+    @Test
+    void setPriorityCorrect() {
+        project.addResource(input);
+
         project.getProductBacklog().addUserStory(userStory3);
 
+        userStory3.setPriority(3);
 
+        assertEquals(3,userStory3.getPriority());
 
-        List<UserStory> usList = company.getProjectStore().getProjectByCode("XPTO2000").getProductBacklog().getUserStoryList();
-
-        assertEquals(usList,this.project.getProductBacklog().getUserStoryList());
     }
 
     @Test
-    void getUS() {
-    }
+    void setPriorityInvalid() {
+        project.addResource(input);
 
-    @Test
-    void setPriority() {
+        project.getProductBacklog().addUserStory(userStory3);
+
+        userStory3.setPriority(6);
+
+        assertEquals(4,userStory3.getPriority());
+
     }
 }
