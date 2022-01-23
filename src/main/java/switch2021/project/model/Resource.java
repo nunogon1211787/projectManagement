@@ -1,7 +1,11 @@
 package switch2021.project.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
+@Getter @Setter
 public class Resource {
 
     /**
@@ -135,7 +139,7 @@ public class Resource {
     }
 
     public boolean checkIfResourceCanBeAssignedToRoleByDate(LocalDate startDate, int sprintDuration){
-        LocalDate endDateSprint = startDate.plusDays(sprintDuration * 7L);
+        LocalDate endDateSprint = startDate.plusDays((sprintDuration * 7L) -1);
         return startDate.isAfter(this.startDate) && endDateSprint.isBefore(this.endDate);
     }
 

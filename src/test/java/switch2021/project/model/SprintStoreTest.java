@@ -228,22 +228,30 @@ public class SprintStoreTest {
 
     @Test
     @DisplayName("Get the next start Sprint")
-    public void getCurrentNextSprintTest() {
+    public void getCurrentSprintTest() {
         //Arrange
-        Sprint sprintTest = sprintStore.getNextSprint();
+        SprintStore storeTest = new SprintStore();
+        storeTest.saveSprint(sprint8);
+        storeTest.saveSprint(sprint9);
+        storeTest.saveSprint(sprint10);
+        //Act
+        Sprint sprintTest = storeTest.getCurrentSprint();
         //Assert
-        assertEquals(sprint5,sprintTest);
+        assertEquals(sprint9,sprintTest);
     }
 
-//    @Test
-//    @DisplayName("Get the next start Sprint")
-//    public void getCurrentNextSprintTestNull() {
-//        //Arrange
-//
-//        //
-//        Sprint sprintTest = sprintStore.getNextSprint();
-//        //Assert
-//        assertEquals(null,sprintTest);
-//    }
-
+    @Test
+    @DisplayName("Get NullPointerException for the next Sprint")
+    public void getNullCurrentSprintTest() {
+        //Assert
+        assertThrows(NullPointerException.class, () -> {
+            //Arrange
+            SprintStore storeTest = new SprintStore();
+            storeTest.saveSprint(sprint);
+            storeTest.saveSprint(sprint3);
+            storeTest.saveSprint(sprint4);
+            //Act
+            storeTest.getCurrentSprint();
+        });
+    }
 }

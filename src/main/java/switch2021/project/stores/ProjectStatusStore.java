@@ -28,7 +28,7 @@ public class ProjectStatusStore {
      * Populates the Project Status List with pre-set objects
      **/
 
-    public void populateProjectStatusList() {
+    public void populateDefault() {
         this.projectStatusList.add(new ProjectStatus("Planned"));
         this.projectStatusList.add(new ProjectStatus("Inception"));
         this.projectStatusList.add(new ProjectStatus("Elaboration"));

@@ -139,20 +139,22 @@ public class SprintStore {
     }
 
 
-    /**
-     * Get the start and end date of the current Sprint
-     */
-    public Sprint getNextSprint() {
-        Sprint currentSprint = getCurrentSprint();
-        Sprint nextSprint = null;
-        for(Sprint i : this.sprintList) {
-            if(i.getStartDate().isAfter(currentSprint.getEndDate())) {
-                nextSprint = i;
-                break;
-            }
-        }
-        return nextSprint;
-    }
+//    /**
+//     * Get the start and end date of the current Sprint
+//     */
+//    public Sprint getNextSprint() {
+//        Sprint nextSprint = null;
+//        for(Sprint i : this.sprintList) {
+//            if(i.getStartDate().isAfter(getCurrentSprint().getEndDate())) {
+//                nextSprint = i;
+//                break;
+//            }
+//        }
+//        if(nextSprint == null) {
+//            throw new NullPointerException("Do not exist the next sprint.");
+//        }
+//        return nextSprint;
+//    }
 
     public Sprint getCurrentSprint() {
         Sprint sprint = null;
@@ -160,6 +162,9 @@ public class SprintStore {
             if(i.isCurrentSprint()) {
                 sprint = i;
             }
+        }
+        if(sprint == null) {
+            throw new NullPointerException("Do not exist a current sprint.");
         }
         return sprint;
     }

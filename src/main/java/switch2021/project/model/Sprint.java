@@ -61,7 +61,7 @@ public class Sprint {
         if(this.endDate == null) {
             throw new NullPointerException();
         }
-        return (this.startDate.isBefore(LocalDate.now()) && this.endDate.isAfter(LocalDate.now()));
+        return ((this.startDate.isBefore(LocalDate.now()) || this.startDate.equals(LocalDate.now())) && (this.endDate.isAfter(LocalDate.now()) || this.endDate.equals(LocalDate.now())));
     }
 
     /**
