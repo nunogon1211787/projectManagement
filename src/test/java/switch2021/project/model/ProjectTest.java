@@ -136,7 +136,6 @@ class ProjectTest {
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
         SprintStore sprintStore1 = new SprintStore();
         sprintStore1.saveSprint(sprint1);
-        Sprint sprint2 = new Sprint("Effort View 1", LocalDate.now());
         SprintStore projectSprintStore = this.project2.getSprintStore();
         projectSprintStore.saveSprint(sprint1);
         assertTrue(sprintStore1.equals(projectSprintStore));

@@ -177,7 +177,7 @@ public class ProjectStoreTest {
         assertNotEquals(this.project, project);
     }
 
-    @Test//US017
+    @Test//US017, US019
     public void getCurrentProjectListByUserEmailSucess() {
         //Arrange
         company.getProjectStore().addProject(this.proj1);
@@ -191,7 +191,7 @@ public class ProjectStoreTest {
         assertEquals(1, sizeExpected);
     }
 
-    @Test//US017
+    @Test//US017, US019
     public void getCurrentProjectListByUserEmailFailResourceNotPresent() {
         //Arrange
         List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("manuelbras@beaver.com");
