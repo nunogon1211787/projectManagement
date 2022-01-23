@@ -5,6 +5,7 @@ import switch2021.project.utils.App;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ProjectTeam {
 
@@ -79,7 +80,7 @@ public class ProjectTeam {
 
         boolean result = false;
 
-        if(originalResource.checkIfResourceCanBeAssignedToRoleByDate(startDateNewRole, sprintDuration)){
+        if (originalResource.checkIfResourceCanBeAssignedToRoleByDate(startDateNewRole, sprintDuration)) {
 
             Resource newResource = new Resource(originalResource); //copyResource
             newResource.setRole(projectRole);                      //change copyResource role
@@ -87,12 +88,11 @@ public class ProjectTeam {
 
             originalResource.setEndDate(startDateNewRole.minusDays(1));     //change originalResource end date
 
-            if(saveResource(newResource)){   //add copy to Project Team List
+            if (saveResource(newResource)) {   //add copy to Project Team List
                 result = true;
             }
 
         }
-
         return result;
     }
 
@@ -111,9 +111,9 @@ public class ProjectTeam {
     private boolean saveResource(Resource newResource) {
         boolean msg;
         if (checkIfRoleCurrentExistInTheProjectTeam(newResource.getRole(), newResource.getStartDate())) {
-            Resource oldResourceRole = getResource(newResource.getRole()); // Old Resource with Project Role that must be unique
-            Resource changeRole = new Resource(oldResourceRole); // Copy of Old Resource that must be updated
-            oldResourceRole.setEndDate(newResource.getStartDate().minusDays(1)); // change end date of old resource
+//            Resource oldResourceRole = getResource(newResource.getRole()); // Old Resource with Project Role that must be unique
+            Resource changeRole = new Resource(newResource); // Copy of Old Resource that must be updated
+            newResource.setEndDate(newResource.getStartDate().minusDays(1)); // change end date of old resource
             changeRole.setStartDate(newResource.getStartDate()); // change start date of copy of old resource
             changeRole.setRole(App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Team Member")); // change role of copy of old resource
             this.projectTeamList.add(newResource); // save in project team the new resource that was assigned to a new role
@@ -126,7 +126,6 @@ public class ProjectTeam {
         return msg;
     }
     //
-
            /* Resource copyOldResource = getResource(newResource.getRole());
             getResource(newResource.getRole()).setEndDate(newResource.getStartDate());
             copyOldResource.setRole(null);
@@ -140,7 +139,7 @@ public class ProjectTeam {
      **/
     public boolean checkIfRoleCurrentExistInTheProjectTeam(ProjectRole role, LocalDate startDate) {
         boolean msg = false;
-        if(!role.isValidName("Team Member")) {
+        if (!role.isValidName("Team Member")) {
             for (Resource i : projectTeamList) {
                 if (!i.isYour(role) && i.getEndDate().isAfter(startDate)) {
                     msg = true;
@@ -171,5 +170,21 @@ public class ProjectTeam {
         }
         return msg;
     }
+
+
+    /** Override **/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProjectTeam)) return false;
+        ProjectTeam that = (ProjectTeam) o;
+        return Objects.equals(this.projectTeamList, that.projectTeamList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(projectTeamList);
+    }
+
 }
 

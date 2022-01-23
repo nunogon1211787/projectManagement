@@ -54,6 +54,6 @@ public class ProjectRole {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProjectRole that = (ProjectRole) o;
-        return (this.getName().equals(that.getName()));
+        return (this.name.equals(that.name));
     }
 }

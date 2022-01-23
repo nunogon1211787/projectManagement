@@ -69,7 +69,7 @@ public class SprintStore {
     /**
      * Add and Remove Sprint Methods. Adds or remove a Sprint object to the Sprint List
      **/
-    private boolean addSprint(Sprint sprint) {
+    public boolean addSprint(Sprint sprint) {
         if (validateId_Sprint(sprint)) {
             this.sprintList.add(sprint);
         } else {
@@ -139,20 +139,22 @@ public class SprintStore {
     }
 
 
-    /**
-     * Get the start and end date of the current Sprint
-     */
-    public Sprint getNextSprint() {
-        Sprint currentSprint = getCurrentSprint();
-        Sprint nextSprint = null;
-        for(Sprint i : this.sprintList) {
-            if(i.getStartDate().isAfter(currentSprint.getEndDate())) {
-                nextSprint = i;
-                break;
-            }
-        }
-        return nextSprint;
-    }
+//    /**
+//     * Get the start and end date of the current Sprint
+//     */
+//    public Sprint getNextSprint() {
+//        Sprint nextSprint = null;
+//        for(Sprint i : this.sprintList) {
+//            if(i.getStartDate().isAfter(getCurrentSprint().getEndDate())) {
+//                nextSprint = i;
+//                break;
+//            }
+//        }
+//        if(nextSprint == null) {
+//            throw new NullPointerException("Do not exist the next sprint.");
+//        }
+//        return nextSprint;
+//    }
 
     public Sprint getCurrentSprint() {
         Sprint sprint = null;
@@ -161,9 +163,23 @@ public class SprintStore {
                 sprint = i;
             }
         }
+        if(sprint == null) {
+            throw new NullPointerException("Do not exist a current sprint.");
+        }
         return sprint;
     }
 
+    /**
+     * Method to return all activities in a project
+     */
+    public List<Task> getListOfAllAActivitiesOfAProject(){
+        List<Task> allActivitiesInAProject = new ArrayList<>();
+
+        for (Sprint i: sprintList){
+            allActivitiesInAProject.addAll(i.getListOfTasksOfASprint());
+        }
+        return allActivitiesInAProject;
+    }
 
     @Override
     public boolean equals(Object o) {

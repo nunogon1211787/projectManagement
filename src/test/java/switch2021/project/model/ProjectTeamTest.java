@@ -1,7 +1,9 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.utils.App;
 
 import java.time.LocalDate;
 
@@ -17,26 +19,6 @@ public class ProjectTeamTest {
     private Project proj2;
     private Project proj3;
     private Project currentProject;
-
-    public Project getProj1() {
-        init();
-        return this.proj1;
-    }
-
-    public Project getProj2() {
-        init();
-        return this.proj2;
-    }
-
-    public Project getProj3() {
-        init();
-        return this.proj3;
-    }
-
-    public Project getCurrentProject() {
-        init();
-        return this.currentProject;
-    }
 
     @BeforeEach
     public void init() {
@@ -64,7 +46,7 @@ public class ProjectTeamTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDateMb = LocalDate.of(2021, 11, 1);
-        LocalDate endDateMb = LocalDate.of(2021, 11, 15);
+        LocalDate endDateMb = LocalDate.of(2022, 11, 15);
         Resource manuelbras = new Resource(user1, startDateMb, endDateMb, 100, .5);
 
         SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
@@ -78,8 +60,8 @@ public class ProjectTeamTest {
         Resource manueljose = new Resource(user3, startDateMj, endDateMj, 100, .5);
 
         SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDateMo = LocalDate.of(2021, 11, 1);
-        LocalDate endDateMo = LocalDate.of(2021, 11, 15);
+        LocalDate startDateMo = LocalDate.now().minusWeeks(1);
+        LocalDate endDateMo = LocalDate.now().plusWeeks(3);
         Resource manueloliveira = new Resource(user4, startDateMo, endDateMo, 100, .3333);
 
         SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "ghi", "ghi", "photo", profile);
@@ -106,16 +88,60 @@ public class ProjectTeamTest {
 
     @Test
     public void hasCurrentResourceSuccess() {
-        assertTrue(currentProject.getProjectTeam().hasCurrentResource(("manuelmartins@beaver.com")));
+        assertTrue(this.currentProject.getProjectTeam().hasCurrentResource(("manuelmartins@beaver.com")));
     }
 
     @Test
     public void hasCurrentResourceFailResourceNotPresent() {
-        assertFalse(currentProject.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
+        assertFalse(this.currentProject.getProjectTeam().hasCurrentResource(("manuelbras@beaver.com")));
     }
 
     @Test
     public void hasCurrentResourceFailResourceNotCurrent() {
-        assertFalse(proj3.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
+        assertFalse(this.currentProject.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
     }
+
+    @Test
+    @DisplayName("Get current resource by email")
+    public void getCurrentResource() {
+        //Arrange
+        UserProfile profile = App.getInstance().getCompany().getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMo = LocalDate.now().minusWeeks(1);
+        LocalDate endDateMo = LocalDate.now().plusWeeks(3);
+        Resource manueloliveira = new Resource(user4, startDateMo, endDateMo, 100, .3333);
+        //Act
+        Resource teste = proj1.getProjectTeam().getResource("manueloliveira@beaver.com");
+        //Assert
+        assertEquals(teste, manueloliveira);
+    }
+
+    @Test
+    @DisplayName("Get current resource by email")
+    public void getCurrentResourceNull() {
+        //Assert
+        assertNull(proj1.getProjectTeam().getResource("manuelbraga@beaver.com"));
+    }
+
+
+//    @Test
+//    @DisplayName("Assign New Role for a resource")
+//    public void assignProjectRoleTest() {
+//        //Arrange
+//        Company company = new Company();
+//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+//        SystemUser expected = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+//        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
+//        LocalDate endDateMb = LocalDate.of(2022, 11, 15);
+//        Resource manuelbras = new Resource(expected, startDateMb, endDateMb, 100, .5);
+//        manuelbras.setRole(App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Scrum Master"));
+//        //Act
+//        Resource manuelTest = proj1.getProjectTeam().getResource("manuelbras@beaver.com");
+//        manuelTest.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+//        proj1.getProjectTeam().assignProjectRole(manuelTest, LocalDate.of(2021,11,16), 2,
+//                App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Scrum Master"));
+//        //Assert
+//        assertEquals(manuelbras,manuelTest);
+//    }
 }
+

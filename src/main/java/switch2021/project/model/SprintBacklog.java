@@ -83,8 +83,6 @@ public class SprintBacklog {
     } //if the object isn´t saved on the list, the id will be the same for all
     //objects. This issue will be solved when calling the save method.
 
-
-
     /**
      * Save UserStoryOfSprint Method. Save a new UserStoryOfSprint object to the UserStoryOfSprint List
      **/
@@ -97,6 +95,18 @@ public class SprintBacklog {
         return addUserStory(userStory);
     }
 
+    /**
+     * Method to get user story of sprint tasks
+     */
+    public List<Task> getUserStoryOfSprintTasks(){
+        List<Task> userStoryOfSprintTasksList = new ArrayList<>();
+
+        for (UserStoryOfSprint i: userStoryOfSprintList) {
+            userStoryOfSprintTasksList.add(i.getUserStoryOfSprintTask());
+
+        }
+        return userStoryOfSprintTasksList;
+    }
 
     /** Override **/
     @Override

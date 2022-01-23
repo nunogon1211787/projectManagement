@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class AddUserStoryToSprintbacklogTest {
 
@@ -54,17 +54,17 @@ public class AddUserStoryToSprintbacklogTest {
         assertThrows(IllegalArgumentException.class, () -> sprintBacklog.createUSerStoryOfSprint(userStory, 5));
     }
 
-/*    @Test
+    @Test
     @DisplayName("Create Story in sprint fail case - UserStory already exists in sprintbacklog")
     public void createStoryInSprintAlreadyExists() {
         UserStoryStatus status = new UserStoryStatus("statusTest");
         UserStory userStory = new UserStory(status, 2, "teste");
         userStory.setId_UserStory(1);
-        sprintBacklog.addUserStory(sprintBacklog.createUSerStoryOfSprint(userStory, 5));
-        assertThrows(IllegalArgumentException.class, () -> {
-            sprintBacklog.validateId_UserStoryOfSprint(user);
-        });
-    }*/
+        UserStoryOfSprint userStoryOfSprint= sprintBacklog.createUSerStoryOfSprint(userStory, 5);
+        sprintBacklog.addUserStory(userStoryOfSprint);
+        assertTrue(sprintBacklog.validateId_UserStoryOfSprint(userStoryOfSprint));
+
+    }
 
     @Test
     @DisplayName("Create Story in sprint fail case - UserStory selected has Done Status")

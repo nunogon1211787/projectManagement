@@ -2,7 +2,6 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import switch2021.project.stores.*;
-import switch2021.project.utils.App;
 
 @Getter
 public class Company {
@@ -42,8 +41,8 @@ public class Company {
         this.userProfileStore.populateDefault();
         this.projectRoleStore.populateDefault();
         this.typologyStore.populateDefault();
-        this.projectStatusStore.populateProjectStatusList();
-        this.userStoryStatusStore.populateUserStoryStatusList();
+        this.projectStatusStore.populateDefault();
+        this.userStoryStatusStore.populateDefault();
     }
 
 }

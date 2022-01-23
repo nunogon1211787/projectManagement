@@ -27,7 +27,7 @@ public class UserStoryStatusStore {
         this.userStoryStatusList = userStoryStatusList;
     }
 
-    public void populateUserStoryStatusList() {
+    public void populateDefault() {
         this.userStoryStatusList.add(new UserStoryStatus("To do"));
         this.userStoryStatusList.add(new UserStoryStatus("In progress"));
         this.userStoryStatusList.add(new UserStoryStatus("Done"));
