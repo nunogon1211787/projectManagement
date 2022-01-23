@@ -113,10 +113,6 @@ public class ProjectStoreTest {
         List<Project> projectList = company.getProjectStore().getProjectListByUserEmail("cris@ipp.pt");
         // Assert
         assertEquals(2, projectList.size());
-
-        //company.getProjectStore().removeProject(project);
-        //company.getProjectStore().removeProject(project2);
-
     }
 
     @Test
@@ -135,9 +131,6 @@ public class ProjectStoreTest {
         });
         // Assert
         assertEquals("Email cannot be blank", exception.getMessage());
-
-        //company.getProjectStore().removeProject(project);
-        //company.getProjectStore().removeProject(project2);
     }
 
     @Test
@@ -156,9 +149,6 @@ public class ProjectStoreTest {
         });
         // Assert
         assertEquals("Email don't exist in system", exception.getMessage());
-
-        //company.getProjectStore().removeProject(project);
-        //company.getProjectStore().removeProject(project2);
     }
 
     @Test
@@ -172,8 +162,6 @@ public class ProjectStoreTest {
 
         // Assert
         assertEquals(this.project, project1);
-
-        projectStore.removeProject(this.project);
     }
 
     @Test
@@ -187,8 +175,6 @@ public class ProjectStoreTest {
 
         // Assert
         assertNotEquals(this.project, project);
-
-        //projectStore.removeProject(this.project);
     }
 
     @Test//US017
@@ -203,11 +189,6 @@ public class ProjectStoreTest {
         int sizeExpected = projectList.size();
         // Assert
         assertEquals(1, sizeExpected);
-
-        company.getProjectStore().removeProject(this.proj1);
-        company.getProjectStore().removeProject(this.proj2);
-        company.getProjectStore().removeProject(this.proj3);
-        company.getProjectStore().removeProject(this.currentProject);
     }
 
     @Test//US017
@@ -239,11 +220,6 @@ public class ProjectStoreTest {
         list.remove(0);
 
         assertEquals(4, projStore.getProjectList().size());
-
-        projStore.removeProject(this.proj1);
-        projStore.removeProject(this.proj2);
-        projStore.removeProject(this.proj3);
-        projStore.removeProject(this.currentProject);
     }
 
     @Test//US015
@@ -266,8 +242,5 @@ public class ProjectStoreTest {
         int sizeExpected = projectList.size();
         // Assert
         assertEquals(2, sizeExpected);
-
-        projStore.removeProject(this.proj1);
-        projStore.removeProject(this.proj2);
     }
 }

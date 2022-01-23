@@ -18,26 +18,6 @@ public class ProjectTeamTest {
     private Project proj3;
     private Project currentProject;
 
-    /*public Project getProj1() {
-        init();
-        return this.proj1;
-    }
-
-    public Project getProj2() {
-        init();
-        return this.proj2;
-    }
-
-    public Project getProj3() {
-        init();
-        return this.proj3;
-    }
-
-    public Project getCurrentProject() {
-        init();
-        return this.currentProject;
-    }*/
-
     @BeforeEach
     public void init() {
         Company company = new Company();

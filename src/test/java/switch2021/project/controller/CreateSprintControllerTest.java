@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CreateSprintControllerTest {
 
 
-
     @Test
     @DisplayName("To search a project")
     public void getProject() {
@@ -38,7 +37,7 @@ public class CreateSprintControllerTest {
         Project project1 = controllerTest1.getProject(company, "123testcode");
         //Assert
         assertEquals(project, project1);
-
+        company.getProjectStore().removeProject(project);
     }
 
     @Test
@@ -72,5 +71,6 @@ public class CreateSprintControllerTest {
 
         //Assert
         assertEquals(sprint, proj.getSprintStore().getSprint(1));
+        company.getProjectStore().removeProject(proj);
     }
 }

@@ -117,7 +117,7 @@ class ProjectTest {
         //Assert
         assertNotNull(productBacklog);
 
-        company.getProjectStore().removeProject(project2);
+        //company.getProjectStore().removeProject(project2);
     }
 
     @Test
