@@ -29,14 +29,14 @@ public class ChangePriorityUSController {
         return arrayProject;
     }
 
-    public Project getProject(String code){
+    public Project getProjectByCode(String code){
         this.project = this.company.getProjectStore().getProjectByCode(code);
         return this.project;
     }
 
     public List<UserStory> getUserStoryList(){
         this.productBacklog = this.project.getProductBacklog();
-        this.userStoryList = this.productBacklog.getUserStoryList();
+        this.userStoryList = this.productBacklog.getActiveUserStoryList();
         return this.userStoryList;
     }
 

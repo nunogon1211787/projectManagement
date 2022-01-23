@@ -24,6 +24,16 @@ public class ProductBacklog {
         return userStoryList;
     }
 
+    public List<UserStory> getActiveUserStoryList() {
+        List <UserStory> activeUSList = new ArrayList<>();
+        for (UserStory us : userStoryList){
+            if(!us.getUserStoryStatus().getDescription().equals("Completed")){
+                activeUSList.add(us);
+            }
+        }
+        return activeUSList;
+    }
+
     public UserStory getUserStoryById(long id) {
         UserStory userStory = null;
         for (UserStory us : userStoryList) {

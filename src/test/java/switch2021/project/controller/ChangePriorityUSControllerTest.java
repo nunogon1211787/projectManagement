@@ -4,19 +4,19 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
-import switch2021.project.stores.ProjectStore;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ChangePriorityUSControllerTest {
 
     private Company company;
     private Project project;
     private Project project2;
+    private Project project3;
     private Resource input;
     private Resource input2;
     private UserStory userStory;
@@ -32,7 +32,7 @@ class ChangePriorityUSControllerTest {
     private UserStoryStatus userStoryStatus;
 
     @BeforeEach
-    void ChangePriorityUSControllerTest2(){
+    void ChangePriorityUSControllerTestWorld(){
     LocalDate startDate2 = LocalDate.of(2022, 12, 31);
     LocalDate startDate3 = LocalDate.of(2022, 12, 31);
     company = new Company();
@@ -43,6 +43,8 @@ class ChangePriorityUSControllerTest {
             typo, sector, startDate2, 7, 5000);
     project2 = company.getProjectStore().createProject("XPTO3000", "prototype5", "test56", customer,
             typo, sector, startDate3, 7, 5000);
+    project3 = company.getProjectStore().createProject("XPTO7000", "prototype8", "test56", customer,
+            typo, sector, startDate3, 4, 3000);
     userProfile = new UserProfile("Apresentador");
     userProfile2 = new UserProfile("Duo");
     newUser = new SystemUser("batatinha", "batatinha@cartoon.com", "des", "gth", "gth", "", userProfile);
@@ -108,20 +110,35 @@ class ChangePriorityUSControllerTest {
     }
 
     @Test
-    void getCurrentProjectListByUserEmail() {
+    void getCurrentProjectListByUserEmailCorrectList() {
+        //Arrange
+        company.getProjectStore().addProject(project);
+        company.getProjectStore().addProject(project2);
+        company.getProjectStore().addProject(project3);
+        LocalDate endDate = LocalDate.of(2021,1,2);
+        company.getProjectStore().getProjectByCode("XPTO2000").setEndDate(endDate);
+        project.addResource(input);
+        project2.addResource(input);
+        project3.addResource(input);
 
+        // Act
+        List<Project> projectList2 = new ArrayList<>();
+                projectList2.add(project2);
+                projectList2.add(project3);
+        List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("batatinha@cartoon.com");
+        // Assert
+        assertEquals(projectList, projectList2);
 
     }
 
     @Test
-    void getProjectTest() {
+    void getProjectByCodeTest() {
         company.getProjectStore().addProject(project);
         company.getProjectStore().addProject(project2);
         project.addResource(input);
         project2.addResource(input);
         // Act
         Project project3 = company.getProjectStore().getProjectByCode("XPTO2000");
-
         // Assert
         assertEquals(project,project3);
     }
@@ -143,11 +160,25 @@ class ChangePriorityUSControllerTest {
 //    }
 
     @Test
-    void getUserStoryListFromProject() {
+    void getUserStoryListFromProjectCorrect() {
         company.getProjectStore().addProject(project);
         company.getProjectStore().addProject(project2);
         project.addResource(input);
-        project2.addResource(input);
+
+        project.getProductBacklog().addUserStory(userStory);
+        project.getProductBacklog().addUserStory(userStory2);
+        project.getProductBacklog().addUserStory(userStory3);
+
+        List<UserStory> usList = company.getProjectStore().getProjectByCode("XPTO2000").getProductBacklog().getUserStoryList();
+
+        assertEquals(usList,this.project.getProductBacklog().getUserStoryList());
+    }
+
+    @Test
+    void getUserStoryListFromProjectSizeTest() {
+        company.getProjectStore().addProject(project);
+        company.getProjectStore().addProject(project2);
+        project.addResource(input);
 
         project.getProductBacklog().addUserStory(userStory);
         project.getProductBacklog().addUserStory(userStory2);
@@ -156,6 +187,24 @@ class ChangePriorityUSControllerTest {
         List<UserStory> usList = company.getProjectStore().getProjectByCode("XPTO2000").getProductBacklog().getUserStoryList();
 
 //        assertArrayEquals(usList, this.);
+        assertEquals(3,usList.size());
+    }
+
+    @Test
+    void getUserStoryListFromProjectOnlyActive() {
+        company.getProjectStore().addProject(project);
+        company.getProjectStore().addProject(project2);
+        project.addResource(input);
+
+        project.getProductBacklog().addUserStory(userStory);
+        project.getProductBacklog().addUserStory(userStory2);
+        project.getProductBacklog().addUserStory(userStory3);
+
+
+
+        List<UserStory> usList = company.getProjectStore().getProjectByCode("XPTO2000").getProductBacklog().getUserStoryList();
+
+        assertEquals(usList,this.project.getProductBacklog().getUserStoryList());
     }
 
     @Test
