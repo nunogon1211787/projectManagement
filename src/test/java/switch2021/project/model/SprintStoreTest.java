@@ -71,7 +71,6 @@ public class SprintStoreTest {
     public void createSprintSuccess() {
         //Act
         String name = "Sprint_1";
-
         //Assert
         assertEquals(name, sprint.getName());
         assertEquals(date, sprint.getStartDate());
