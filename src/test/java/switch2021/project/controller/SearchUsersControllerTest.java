@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SearchUsersControllerTest {
 
-    @Test
+    /*@Test
     void searchUsersSuccess() {
         //Input
         SearchSystemUsersController test = new SearchSystemUsersController();
@@ -32,7 +32,7 @@ class SearchUsersControllerTest {
         List<SystemUser> expectedList = Arrays.asList(usr2, usr3);
         //Result
         assertEquals(expectedList, resultList);
-    }
+    }*/
 
     @Test
     void getProfileListSuccess(){

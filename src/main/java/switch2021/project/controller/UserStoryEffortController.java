@@ -23,6 +23,10 @@ public class UserStoryEffortController {
         this.company = App.getInstance().getCompany();
     }
 
+    public UserStoryEffortController(Company company) { //tem como função o dominio para os proximos passos
+        this.company = company;
+    }
+
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         this.projectList = new ArrayList<>();
         this.projStore = this.company.getProjectStore();
@@ -31,11 +35,11 @@ public class UserStoryEffortController {
     }
 
     public Project getProjectByCode(String code) {
-        this.proj = this.projStore.getProjectByCode(code);
+        this.proj = this.company.getProjectStore().getProjectByCode(code);
         return this.proj;
     }
 
-    public List<Sprint> getSprintList () {
+    public List<Sprint> getSprintList() {
         this.sprintList = new ArrayList<>();
         this.sprintStore = this.proj.getSprintStore();
         this.sprintList = this.sprintStore.getSprintList();

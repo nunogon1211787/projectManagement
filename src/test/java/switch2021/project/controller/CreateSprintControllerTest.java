@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class CreateSprintControllerTest {
 
 
-    @Test
+   /* @Test
     @DisplayName("Controller Test, to get a list of projects")
     public void getProjectList() {
 
@@ -28,7 +28,7 @@ public class CreateSprintControllerTest {
         List<Project> projectStore1 = new ArrayList<>();
         //Assert
         assertEquals(projectStore, projectStore1);
-    }
+    }*/
 
     @Test
     @DisplayName("To search a project")

@@ -13,11 +13,7 @@ public class RegisterUserController {
 
 
     public RegisterUserController() {
-        this(App.getInstance().getCompany());
-    }
-
-    public RegisterUserController(Company company) {
-        this.company = company;
+        this.company = (App.getInstance().getCompany());
         this.usersSstore = null;
         this.profilesStore = null;
         this.user = null;
@@ -31,5 +27,9 @@ public class RegisterUserController {
         this.user = usersStore.createSystemUser(userName, email, function, password, passwordConfirmation, photo, visitorProfile);
 
         return usersStore.saveSystemUser(user);
+    }
+
+    public Company getCompany() {
+        return company;
     }
 }

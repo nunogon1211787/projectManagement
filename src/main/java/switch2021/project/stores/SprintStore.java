@@ -170,7 +170,7 @@ public class SprintStore {
         if (this == o) return true;
         if (!(o instanceof SprintStore)) return false;
         SprintStore that = (SprintStore) o;
-        return Objects.equals(sprintList, that.sprintList);
+        return sprintList.equals(that.sprintList);
     }
 
     @Override

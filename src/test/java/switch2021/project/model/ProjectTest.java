@@ -1,6 +1,8 @@
 package switch2021.project.model;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.stores.SprintStore;
 
 import java.time.LocalDate;
 
@@ -297,4 +299,29 @@ class ProjectTest {
 
     }
 */
+
+    @Test
+    @DisplayName("Validate the getter of sprint store")
+    void getSprintStoreTest() {
+        Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
+        SprintStore sprintStore1 = new SprintStore();
+        sprintStore1.saveSprint(sprint1);
+        Sprint sprint2 = new Sprint("Effort View 1", LocalDate.now());
+        SprintStore projectSprintStore = this.project2.getSprintStore();
+        projectSprintStore.saveSprint(sprint1);
+        assertTrue(sprintStore1.equals(projectSprintStore));
+    }
+
+    @Test
+    @DisplayName("Validate the getter of sprint store")
+    void getSprintStoreTestFail() {
+        Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
+        SprintStore sprintStore1 = new SprintStore();
+        sprintStore1.saveSprint(sprint1);
+        Sprint sprint2 = new Sprint("Effort View 1", LocalDate.now());
+        SprintStore projectSprintStore = this.project2.getSprintStore();
+        projectSprintStore.saveSprint(sprint1);
+        projectSprintStore.saveSprint(sprint2);
+        assertFalse(sprintStore1.equals(projectSprintStore));
+    }
 }
