@@ -11,25 +11,24 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class CreateSprintController {
-
     private Company company;
     private Project project;
     private ProjectStore projectStore;
     private SprintStore sprintStore;
     private Sprint sprint;
 
-    public CreateSprintController() {
+    public CreateSprintController(Company company) {
 
-        this.company = App.getInstance().getCompany();
+        this.company = company;
         this.project = null;
         this.projectStore = null;
         this.sprintStore = null;
         this.sprint = null;
     }
 
-    public List<Project> getProjectList() {
+    public List<Project> getCurrentProjectListByUserEmail(String email) {
         ProjectStore projectstore = company.getProjectStore();
-        return projectstore.getProjectList();
+        return projectstore.getCurrentProjectListByUserEmail(email);
     }
 
     public Project getProject(Company company, String code) {
@@ -37,11 +36,10 @@ public class CreateSprintController {
     }
 
     public Sprint createSprint(String name, LocalDate startDate) {
-        this.sprintStore = this.project.getSprintStore();
-        return this.sprint = sprintStore.createSprint(name, startDate,this.project.getSprintDuration());
+        return this.sprint = this.project.getSprintStore().createSprint(name, startDate,this.project.getSprintDuration());
     }
 
-    public boolean saveSprint() {
+    public boolean saveSprint(Sprint sprint) {
         return this.project.getSprintStore().saveSprint(this.sprint);
     }
 }

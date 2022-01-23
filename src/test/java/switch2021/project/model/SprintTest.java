@@ -15,11 +15,11 @@ public class SprintTest {
         //Arrange
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
-        long x = sprint.getId_Sprint();
+        int x = sprint.getId_Sprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
-//        assertEquals(1, x);
+        assertEquals(0, x);
         assertEquals("Sprint_1", name);
         assertEquals(LocalDate.of(2022, 1, 1), date);
     }
@@ -36,7 +36,7 @@ public class SprintTest {
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
-//      assertNotEquals(2, x);
+        assertNotEquals(2, x);
         assertEquals("Sprint_1", name);
         assertEquals(LocalDate.of(2022, 1, 1), date);
     }
@@ -47,11 +47,11 @@ public class SprintTest {
         //Arrange
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
-        long x = sprint.getId_Sprint();
+        int x = sprint.getId_Sprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
-//        assertEquals(1, x);
+        assertNotEquals(1, x);
         assertNotEquals("Sprint_2", name);
         assertEquals(LocalDate.of(2022, 1, 1), date);
     }
@@ -62,11 +62,11 @@ public class SprintTest {
         //Arrange
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
-        long x = sprint.getId_Sprint();
+        int x = sprint.getId_Sprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
-//        assertEquals(1, x);
+        assertNotEquals(1, x);
         assertEquals("Sprint_1", name);
         assertNotEquals(LocalDate.of(2022, 1, 2), date);
     }
@@ -77,7 +77,7 @@ public class SprintTest {
         //Arrange
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
-        long x = sprint.getId_Sprint();
+        int x = sprint.getId_Sprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
