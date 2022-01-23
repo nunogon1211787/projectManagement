@@ -3,32 +3,15 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
-import switch2021.project.stores.ProjectStore;
-import switch2021.project.stores.SprintStore;
 import switch2021.project.utils.App;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CreateSprintControllerTest {
 
 
-    @Test
-    @DisplayName("Controller Test, to get a list of projects")
-    public void getProjectList() {
-
-        //Arrange
-        Company company = new Company();
-        CreateSprintController controllerTest1 = new CreateSprintController();
-        List<Project> projectStore = controllerTest1.getProjectList();
-        //Act
-        List<Project> projectStore1 = new ArrayList<>();
-        //Assert
-        assertEquals(projectStore, projectStore1);
-    }
 
     @Test
     @DisplayName("To search a project")
@@ -51,7 +34,7 @@ public class CreateSprintControllerTest {
                 typo, sector, date, 7, 5000);
         company.getProjectStore().addProject(project);
         //Act
-        CreateSprintController controllerTest1 = new CreateSprintController();
+        CreateSprintController controllerTest1 = new CreateSprintController(company);
         Project project1 = controllerTest1.getProject(company, "123testcode");
         //Assert
         assertEquals(project, project1);
@@ -60,7 +43,7 @@ public class CreateSprintControllerTest {
 
     @Test
     @DisplayName("Test to create a sprint")
-    public void createSprint() {
+    public void createAndSaveSprint() {
 
         //Arrange
         Company company = new Company();
@@ -80,15 +63,14 @@ public class CreateSprintControllerTest {
 
         proj.setSprintDuration(2);
 
-        Sprint sprint1 = proj.getSprintStore().createSprint("Sprint_1", LocalDate.of(2022, 1, 1), 2);
-        //proj.getSprintStore().addSprint(sprint1);
         company.getProjectStore().addProject(proj);
 
-        CreateSprintController controllerTest1 = new CreateSprintController();
-        Sprint sprint = controllerTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1));
+        CreateSprintController controllerTest1 = new CreateSprintController(company);
         controllerTest1.getProject(company, "123testcode");
+        Sprint sprint = controllerTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1));
+        controllerTest1.saveSprint(sprint);
 
         //Assert
-        assertEquals(sprint, sprint1);
+        assertEquals(sprint, proj.getSprintStore().getSprint(1));
     }
 }
