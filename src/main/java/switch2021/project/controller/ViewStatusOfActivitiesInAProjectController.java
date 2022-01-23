@@ -16,6 +16,15 @@ public class ViewStatusOfActivitiesInAProjectController {
     List<Project> arrayProject;
     List<Task> listOfTasks;
 
+    /**
+     * Constructor
+     */
+
+    public ViewStatusOfActivitiesInAProjectController(Company company){
+        this.company = company;
+
+    }
+
     //Method do get list of projects where the user is associated
 
     public List<Project> getProjectListByUser(String email) {
