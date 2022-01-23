@@ -79,7 +79,7 @@ public class ProjectTeam {
 
         boolean result = false;
 
-        if(originalResource.checkIfResourceCanBeAssignedToRoleByDate(startDateNewRole, sprintDuration)){
+        if (originalResource.checkIfResourceCanBeAssignedToRoleByDate(startDateNewRole, sprintDuration)) {
 
             Resource newResource = new Resource(originalResource); //copyResource
             newResource.setRole(projectRole);                      //change copyResource role
@@ -87,7 +87,7 @@ public class ProjectTeam {
 
             originalResource.setEndDate(startDateNewRole.minusDays(1));     //change originalResource end date
 
-            if(saveResource(newResource)){   //add copy to Project Team List
+            if (saveResource(newResource)) {   //add copy to Project Team List
                 result = true;
             }
 
@@ -140,7 +140,7 @@ public class ProjectTeam {
      **/
     public boolean checkIfRoleCurrentExistInTheProjectTeam(ProjectRole role, LocalDate startDate) {
         boolean msg = false;
-        if(!role.isValidName("Team Member")) {
+        if (!role.isValidName("Team Member")) {
             for (Resource i : projectTeamList) {
                 if (!i.isYour(role) && i.getEndDate().isAfter(startDate)) {
                     msg = true;
@@ -170,6 +170,21 @@ public class ProjectTeam {
             }
         }
         return msg;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProjectTeam)) return false;
+
+        ProjectTeam that = (ProjectTeam) o;
+
+        return projectTeamList.equals(that.projectTeamList);
+    }
+
+    @Override
+    public int hashCode() {
+        return projectTeamList.hashCode();
     }
 }
 
