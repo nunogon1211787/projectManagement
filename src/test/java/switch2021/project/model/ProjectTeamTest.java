@@ -18,7 +18,7 @@ public class ProjectTeamTest {
     private Project proj3;
     private Project currentProject;
 
-    public Project getProj1() {
+    /*public Project getProj1() {
         init();
         return this.proj1;
     }
@@ -36,7 +36,7 @@ public class ProjectTeamTest {
     public Project getCurrentProject() {
         init();
         return this.currentProject;
-    }
+    }*/
 
     @BeforeEach
     public void init() {
@@ -106,16 +106,16 @@ public class ProjectTeamTest {
 
     @Test
     public void hasCurrentResourceSuccess() {
-        assertTrue(currentProject.getProjectTeam().hasCurrentResource(("manuelmartins@beaver.com")));
+        assertTrue(this.currentProject.getProjectTeam().hasCurrentResource(("manuelmartins@beaver.com")));
     }
 
     @Test
     public void hasCurrentResourceFailResourceNotPresent() {
-        assertFalse(currentProject.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
+        assertFalse(this.currentProject.getProjectTeam().hasCurrentResource(("manuelbras@beaver.com")));
     }
 
     @Test
     public void hasCurrentResourceFailResourceNotCurrent() {
-        assertFalse(proj3.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
+        assertFalse(this.proj3.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
     }
 }

@@ -193,7 +193,7 @@ class CompanyTest {
         //Arrange
         Company c = new Company();
         // Assert
-        assertEquals(0, c.getProjectStore().getProjectList().size());
+        assertTrue(c.getProjectStore().getProjectList().isEmpty());
     }
 
 /**

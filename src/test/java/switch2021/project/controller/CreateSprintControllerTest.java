@@ -56,43 +56,44 @@ public class CreateSprintControllerTest {
         //Assert
         assertEquals(project, project1);
 
+        company.getProjectStore().removeProject(project);
     }
 
     //@Test
     //@DisplayName("Test to create a sprint")
     //public void createSprint() {
 
-        //Arrange
-        //Company company = new Company();
+    //Arrange
+    //Company company = new Company();
 
-        //Project proj;
+    //Project proj;
 
-        //LocalDate date = LocalDate.of(2021, 12, 12);
+    //LocalDate date = LocalDate.of(2021, 12, 12);
 
-        //company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
-        //company.getCustomerStore().add(company.getCustomerStore().createCustomer("Teste", "Teste"));
-        //Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        //Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        //BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+    //company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
+    //company.getCustomerStore().add(company.getCustomerStore().createCustomer("Teste", "Teste"));
+    //Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+    //Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+    //BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
-        //proj = company.getProjectStore().createProject("123testcode", "prototype", "test1234", customer,
-        //        typo, sector, date, 7, 5000);
+    //proj = company.getProjectStore().createProject("123testcode", "prototype", "test1234", customer,
+    //        typo, sector, date, 7, 5000);
 
-        //proj.setSprintDuration(2);
+    //proj.setSprintDuration(2);
 
-        //Sprint sprint1 = proj.getSprintStore().createSprint("Sprint_1", LocalDate.of(2022, 1, 1), 2);
-        //proj.getSprintStore().addSprint(sprint1);
-        //company.getProjectStore().addProject(proj);
+    //Sprint sprint1 = proj.getSprintStore().createSprint("Sprint_1", LocalDate.of(2022, 1, 1), 2);
+    //proj.getSprintStore().addSprint(sprint1);
+    //company.getProjectStore().addProject(proj);
 
-        //CreateSprintController controllerTest1 = new CreateSprintController();
-        //Sprint sprint = controllerTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1));
-        //controllerTest1.getProject(company, "123testcode");
+    //CreateSprintController controllerTest1 = new CreateSprintController();
+    //Sprint sprint = controllerTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1));
+    //controllerTest1.getProject(company, "123testcode");
 
-        //Assert
-        //assertEquals(sprint, sprint1);
+    //Assert
+    //assertEquals(sprint, sprint1);
 
 
- }
+}
 
 
 
