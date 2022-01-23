@@ -15,6 +15,7 @@ public class UserStoryOfSprint {
     private int estimateEffort;
     private UserStory userStoryOfSprint;
     private int id_UserStoryOfSprint;
+    private Task userStoryOfSprintTask;
 
     /**
      * ---> Constructor <---
@@ -24,6 +25,7 @@ public class UserStoryOfSprint {
         validateFields(effort, story);
         this.estimateEffort = effort;
         this.userStoryOfSprint = story;
+        this.userStoryOfSprintTask = new Task();
     }
 
     public UserStoryOfSprint(UserStory story, int effort, int userStoryId) {
@@ -31,6 +33,7 @@ public class UserStoryOfSprint {
         this.estimateEffort = effort;
         this.userStoryOfSprint = story;
         this.id_UserStoryOfSprint = userStoryId;
+        this.userStoryOfSprintTask = new Task();
     }
 
     public boolean hasCode(long id_UserStoryofSprint) {

@@ -164,6 +164,17 @@ public class SprintStore {
         return sprint;
     }
 
+    /**
+     * Method to return all activities in a project
+     */
+    public List<Task> getListOfAllAActivitiesOfAProject(){
+        List<Task> allActivitiesInAProject = new ArrayList<>();
+
+        for (Sprint i: sprintList){
+            allActivitiesInAProject.addAll(i.getListOfTasksOfASprint());
+        }
+        return allActivitiesInAProject;
+    }
 
     @Override
     public boolean equals(Object o) {
