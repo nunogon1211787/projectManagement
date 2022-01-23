@@ -18,6 +18,20 @@ class ProjectTest {
     private Project proj3;
     private Project currentProject;
 
+    Company company = new Company();
+    Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+    Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+    BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+    ProjectStatus projectStatus = new ProjectStatus("ToStart");
+    Project project2 = new Project("1234testcode", "prototype", "test56", customer,
+            typo, sector, LocalDate.now(), projectStatus, 7, 5000);
+    ProductBacklog productBacklog = project2.getProductBacklog();
+
+    UserStory userStory = productBacklog.createUserStory(new UserStoryStatus("In progress"), 1, "making test");
+    UserStory userStory2 = productBacklog.createUserStory(new UserStoryStatus("Done"), 1, "making other test");
+    UserStory userStory3 = productBacklog.createUserStory(new UserStoryStatus("To do"), 1, "making test 4");
+
+
     @BeforeEach
     public void init() {
         Company company = new Company();
@@ -84,24 +98,6 @@ class ProjectTest {
         currentProject.getProjectTeam().addResourceToTeam(manuelmartins);
     }
 
-    Company company = new Company();
-    ProjectTeamTest projectTeamTest = new ProjectTeamTest();
-    Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-    Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-    BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-//    Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
-//            typo, sector, LocalDate.now(), 7, 5000);
-    ProjectStatus projectStatus = new ProjectStatus("ToStart");
-    Project project2 = new Project("1234testcode", "prototype", "test56", customer,
-            typo, sector, LocalDate.now(), projectStatus, 7, 5000);
-//    String code = "1234testcode";
-
-    ProductBacklog productBacklog = project2.getProductBacklog();
-
-    UserStory userStory = productBacklog.createUserStory(new UserStoryStatus("In progress"), 1, "making test");
-    UserStory userStory2 = productBacklog.createUserStory(new UserStoryStatus("Done"), 1, "making other test");
-    UserStory userStory3 = productBacklog.createUserStory(new UserStoryStatus("To do"), 1, "making test 4");
-
 
     @Test
     public void getProductBacklogWithResults() {
@@ -110,16 +106,12 @@ class ProjectTest {
         productBacklog.addUserStory(userStory);
         productBacklog.addUserStory(userStory2);
         productBacklog.addUserStory(userStory3);
-//        company.getProjectStore().getProductBacklog(code).addUserStory(userStory);
-//        company.getProjectStore().getProductBacklog(code).addUserStory(userStory2);
-//        company.getProjectStore().getProductBacklog(code).addUserStory(userStory3);
         // Act
-        ProductBacklog productBacklog = company.getProjectStore().getProductBacklog("1234testcode");
-//        ProductBacklog productbacklog = company.getProjectStore().getProjectByCode(code).getProductBacklog();
+        ProductBacklog productBacklog = company.getProjectStore().getProjectByCode("1234testcode").getProductBacklog();
         //Assert
         assertNotNull(productBacklog);
+        assertEquals(3, productBacklog.getUserStoryList().size());
 
-        //company.getProjectStore().removeProject(project2);
     }
 
     @Test
@@ -165,7 +157,7 @@ class ProjectTest {
 
     @Test
     @DisplayName("create task")
-    void getActivitiesOfAProject(){
+    void getActivitiesOfAProject() {
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
         Task taskTest = sprint1.getTaskstore().createTask("test");
         sprint1.getTaskstore().addTaskToTheList(taskTest);
@@ -175,7 +167,7 @@ class ProjectTest {
         taskList.add(taskTest);
 
 
-        assertEquals(taskList,project2.getSprintStore().getSprint(1).getListOfTasksOfASprint());
+        assertEquals(taskList, project2.getSprintStore().getSprint(1).getListOfTasksOfASprint());
 
     }
 

@@ -211,9 +211,9 @@ public class ProductBacklogTest {
     public void getSortedListWithSuccess(){
         // Arrange
         ProductBacklog productBacklog=new ProductBacklog();
-        UserStory userStory =productBacklog.createUserStory(new UserStoryStatus("In progress"),1,"create user story");
+        UserStory userStory =productBacklog.createUserStory(1,"create user story");
         productBacklog.saveUserStory(userStory);
-        UserStory userStory1 =productBacklog.createUserStory(new UserStoryStatus("In progress"),3,"sort user story");
+        UserStory userStory1 =productBacklog.createUserStory(3,"sort user story");
         productBacklog.saveUserStory(userStory1);
         UserStory userStory2 =productBacklog.createUserStory(new UserStoryStatus("In progress"),2,"backlog sorted");
         productBacklog.saveUserStory(userStory2);
@@ -230,6 +230,32 @@ public class ProductBacklogTest {
         assertEquals(2, userStoryList.get(1).getPriority());
         assertEquals(3, userStoryList.get(2).getPriority());
         assertEquals(5, userStoryList.get(3).getPriority());
+
+    }
+
+    @Test
+    public void getSortedListWithSuccess2(){
+        // Arrange
+        ProductBacklog productBacklog=new ProductBacklog();
+        UserStory userStory =productBacklog.createUserStory(new UserStoryStatus("Done"), 1,"create user story");
+        productBacklog.saveUserStory(userStory);
+        UserStory userStory1 =productBacklog.createUserStory(new UserStoryStatus("Cancelled"), 3,"sort user story");
+        productBacklog.saveUserStory(userStory1);
+        UserStory userStory2 =productBacklog.createUserStory(new UserStoryStatus("To do"),2,"backlog sorted");
+        productBacklog.saveUserStory(userStory2);
+        UserStory userStory3 =productBacklog.createUserStory(new UserStoryStatus("In progress"),5,"show sorted");
+        productBacklog.saveUserStory(userStory3);
+
+        // Act
+        List<UserStory> userStoryList =  productBacklog.getUsSortedByPriority();
+
+        // Assert
+        assertEquals(4, userStoryList.size());
+
+        assertEquals(2, userStoryList.get(0).getPriority());
+        assertEquals(5, userStoryList.get(1).getPriority());
+        assertEquals(1, userStoryList.get(2).getPriority());
+        assertEquals(3, userStoryList.get(3).getPriority());
 
     }
 

@@ -28,6 +28,11 @@ public class UserStory {
      * ---> Constructor <---
      **/
 
+
+    public UserStory(int priority, String description) {
+        this(ID_GENERATOR.getAndIncrement(), new UserStoryStatus("To do") , priority, description);
+    }
+
     public UserStory(UserStoryStatus userStoryStatus, int priority, String description) {
         this(ID_GENERATOR.getAndIncrement(), userStoryStatus, priority, description);
     }

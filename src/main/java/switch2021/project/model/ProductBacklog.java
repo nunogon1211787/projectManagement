@@ -47,6 +47,10 @@ public class ProductBacklog {
         return new UserStory(userStoryStatus, priority, description);
     }
 
+    public UserStory createUserStory(int priority, String description) {
+        return new UserStory(priority, description);
+    }
+
     public UserStory createUserStory(int userStoryId, UserStoryStatus userStoryStatus, int priority, String description) {
         return new UserStory(userStoryId, userStoryStatus, priority, description);
     }
@@ -73,7 +77,7 @@ public class ProductBacklog {
      **/
 
     public boolean addUserStory(UserStory us) {
-        if(validateIdUserStory(us)){
+        if (validateIdUserStory(us)) {
             this.userStoryList.add(us);
         } else {
             us.setId_UserStory(id_UserStoryGenerator());
@@ -95,10 +99,10 @@ public class ProductBacklog {
         return true;
     }
 
-    private boolean validateIdUserStory(UserStory userStory){
+    private boolean validateIdUserStory(UserStory userStory) {
         boolean msg = true;
         for (UserStory i : userStoryList) {
-            if(i.getId_UserStory() == userStory.getId_UserStory()){
+            if (i.getId_UserStory() == userStory.getId_UserStory()) {
                 msg = false;
                 break;
             }
@@ -108,15 +112,31 @@ public class ProductBacklog {
 
 
     public List<UserStory> getUsSortedByPriority() {
+
+        List<UserStory> returnList = new LinkedList<>();
+        List<UserStory> closeAndDoneUserStories = new LinkedList<>();
+
         userStoryList.sort(Comparator.comparingInt(UserStory::getPriority));
+
+        for (UserStory userStory : userStoryList) {
+            if(!userStory.getUserStoryStatus().getDescription().equals("Cancelled") && !userStory.getUserStoryStatus().getDescription().equals("Done")){
+                returnList.add(userStory);
+            } else{
+                closeAndDoneUserStories.add(userStory);
+            }
+        }
+        returnList.addAll(closeAndDoneUserStories);
+        userStoryList = returnList;
         return userStoryList;
     }
 
-    /** ID_UserStory Generator **/
+    /**
+     * ID_UserStory Generator
+     **/
     public int id_UserStoryGenerator() {
         int id = 1;
-        if(this.userStoryList.size() > 0) {
-            id = this.userStoryList.get(userStoryList.size()-1).getId_UserStory() + 1;
+        if (this.userStoryList.size() > 0) {
+            id = this.userStoryList.get(userStoryList.size() - 1).getId_UserStory() + 1;
         }
         return id;
     } //if the object isn´t saved on the list, the id will be the same for all
