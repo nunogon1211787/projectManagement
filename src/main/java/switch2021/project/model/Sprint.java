@@ -5,6 +5,8 @@ import lombok.Setter;
 import switch2021.project.stores.TaskStore;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -62,6 +64,16 @@ public class Sprint {
         return (this.startDate.isBefore(LocalDate.now()) && this.endDate.isAfter(LocalDate.now()));
     }
 
+    /**
+     * Method to get list of tasks within a sprint
+     */
+    public List<Task> getListOfTasksOfASprint(){
+        List<Task> taskList = new ArrayList<>();
+
+        taskList.addAll(this.sprintBacklog.getUserStoryOfSprintTasks());
+        taskList.addAll(this.taskstore.getTaskList());
+        return taskList;
+    }
 
     /**
      * Override Methods

@@ -95,6 +95,19 @@ public class SprintBacklog {
         return addUserStory(userStory);
     }
 
+    /**
+     * Method to get user story of sprint tasks
+     */
+    public List<Task> getUserStoryOfSprintTasks(){
+        List<Task> userStoryOfSprintTasksList = new ArrayList<>();
+
+        for (UserStoryOfSprint i: userStoryOfSprintList) {
+            userStoryOfSprintTasksList.add(i.getUserStoryOfSprintTask());
+
+        }
+        return userStoryOfSprintTasksList;
+    }
+
     /** Override **/
     @Override
     public boolean equals(Object o) {
