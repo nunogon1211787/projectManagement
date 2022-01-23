@@ -36,12 +36,12 @@ public class Resource {
      * Resource's Copy
      **/
     public Resource(Resource originalResource) {
-        this.user = originalResource.user;
-        this.startDate = originalResource.startDate;
-        this.endDate = originalResource.endDate;
-        this.costPerHour = originalResource.costPerHour;
-        this.percentageOfAllocation = originalResource.percentageOfAllocation;
-        this.role = originalResource.role;
+        this.user = originalResource.getUser();
+        this.startDate = originalResource.getStartDate();
+        this.endDate = originalResource.getEndDate();
+        this.costPerHour = originalResource.getCostPerHour();
+        this.percentageOfAllocation = originalResource.getPercentageOfAllocation();
+        this.role = originalResource.getRole();
     }
 
 
@@ -132,6 +132,11 @@ public class Resource {
         if (endDate.isBefore(startDate)) {
             throw new IllegalArgumentException("End Date must be after Start Date");
         }
+    }
+
+    public boolean checkIfResourceCanBeAssignedToRoleByDate(LocalDate startDate, int sprintDuration){
+        LocalDate endDateSprint = startDate.plusDays(sprintDuration * 7L);
+        return startDate.isAfter(this.startDate) && endDateSprint.isBefore(this.endDate);
     }
 
     private void checkCostPerHour(double costPerHour) {

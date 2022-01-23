@@ -1,6 +1,5 @@
 package switch2021.project.model;
 
-import switch2021.project.stores.ProjectRoleStore;
 import switch2021.project.utils.App;
 
 import java.time.LocalDate;
@@ -76,16 +75,25 @@ public class ProjectTeam {
     /**
      * Setter new Role
      **/
-    public boolean assignProjectRole(Resource originalResource, LocalDate startDateNewRole, LocalDate endDateCurrentSprint, ProjectRole projectRole) {
+    public boolean assignProjectRole(Resource originalResource, LocalDate startDateNewRole, int sprintDuration, ProjectRole projectRole) {
 
-        Resource newResource = new Resource(originalResource); //copyResource
-        newResource.setRole(projectRole);                      //change copyResource role
-        newResource.setStartDate(startDateNewRole);            //change copyResource Start Date
-        newResource.checkStartDateEndDate(startDateNewRole, newResource.getEndDate());
+        boolean result = false;
 
-        originalResource.setEndDate(startDateNewRole.minusDays(1));     //change originalResource end date
+        if(originalResource.checkIfResourceCanBeAssignedToRoleByDate(startDateNewRole, sprintDuration)){
 
-        return saveResource(newResource);                      //add copy to Project Team List
+            Resource newResource = new Resource(originalResource); //copyResource
+            newResource.setRole(projectRole);                      //change copyResource role
+            newResource.setStartDate(startDateNewRole);            //change copyResource Start Date
+
+            originalResource.setEndDate(startDateNewRole.minusDays(1));     //change originalResource end date
+
+            if(saveResource(newResource)){   //add copy to Project Team List
+                result = true;
+            }
+
+        }
+
+        return result;
     }
 
 
@@ -102,9 +110,14 @@ public class ProjectTeam {
      **/
     private boolean saveResource(Resource newResource) {
         boolean msg;
-        if (validateRoleExistent(newResource.getRole())) {
-            assignProjectRole(getResource(newResource.getRole()), newResource.getStartDate(), null, App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Team Member"));
-            this.projectTeamList.add(newResource);
+        if (checkIfRoleCurrentExistInTheProjectTeam(newResource.getRole(), newResource.getStartDate())) {
+            Resource oldResourceRole = getResource(newResource.getRole()); // Old Resource with Project Role that must be unique
+            Resource changeRole = new Resource(oldResourceRole); // Copy of Old Resource that must be updated
+            oldResourceRole.setEndDate(newResource.getStartDate().minusDays(1)); // change end date of old resource
+            changeRole.setStartDate(newResource.getStartDate()); // change start date of copy of old resource
+            changeRole.setRole(App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Team Member")); // change role of copy of old resource
+            this.projectTeamList.add(newResource); // save in project team the new resource that was assigned to a new role
+            this.projectTeamList.add(changeRole); // save in project team the old resource with new role
             msg = true;
         } else {                //-----------> Validação a fazer <------------
             this.projectTeamList.add(newResource);
@@ -125,12 +138,14 @@ public class ProjectTeam {
     /**
      * Validation Methods
      **/
-    public boolean validateRoleExistent(ProjectRole role) {
-        boolean msg = true;
-        for (Resource i : projectTeamList) {
-            if (!i.isYour(role) && i.getEndDate().isAfter(LocalDate.now())) {
-                msg = false;
-                break;
+    public boolean checkIfRoleCurrentExistInTheProjectTeam(ProjectRole role, LocalDate startDate) {
+        boolean msg = false;
+        if(!role.isValidName("Team Member")) {
+            for (Resource i : projectTeamList) {
+                if (!i.isYour(role) && i.getEndDate().isAfter(startDate)) {
+                    msg = true;
+                    break;
+                }
             }
         }
         return msg;
