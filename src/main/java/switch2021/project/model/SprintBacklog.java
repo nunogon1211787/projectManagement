@@ -83,8 +83,6 @@ public class SprintBacklog {
     } //if the object isn´t saved on the list, the id will be the same for all
     //objects. This issue will be solved when calling the save method.
 
-
-
     /**
      * Save UserStoryOfSprint Method. Save a new UserStoryOfSprint object to the UserStoryOfSprint List
      **/
@@ -96,7 +94,6 @@ public class SprintBacklog {
         }
         return addUserStory(userStory);
     }
-
 
     /** Override **/
     @Override
