@@ -235,7 +235,7 @@ public class ProductBacklogTest {
     }
 
     @Test
-    @DisplayName("garantes a list of US is sorted by priority, mantain for the last US done and/or even cancelled")
+    @DisplayName("grants a list of US that is sorted by priority. It keeps the done and/or cancelled US on the end\n")
     public void getSortedListWithSuccess2(){
         // Arrange
         ProductBacklog productBacklog=new ProductBacklog();
