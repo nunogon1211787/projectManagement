@@ -87,8 +87,8 @@ public class GetProjectListControllerTest {
     @Test
     public void getProjectListSizeSuccessWith2Projects() {
         //Arrange
-        GetProjectListController controller = new GetProjectListController();
-        Company company = controller.getCompany();
+        Company company = new Company();
+        GetProjectListController controller = new GetProjectListController(company);
         ProjectStore projectStore = company.getProjectStore();
         projectStore.addProject(this.proj1);
         projectStore.addProject(this.proj2);
@@ -105,7 +105,8 @@ public class GetProjectListControllerTest {
     @Test
     public void getProjectListSizeSuccessEmptyList() {
         //Arrange
-        GetProjectListController controller = new GetProjectListController();
+        Company company = new Company();
+        GetProjectListController controller = new GetProjectListController(company);
         // Act
         List<Project> projectList = controller.getProjectList();
         // Assert
@@ -115,8 +116,8 @@ public class GetProjectListControllerTest {
     @Test
     public void getProjectListSuccessCorrectList() {
         //Arrange
-        GetProjectListController controller = new GetProjectListController();
-        Company company = controller.getCompany();
+        Company company = new Company();
+        GetProjectListController controller = new GetProjectListController(company);
         ProjectStore p = company.getProjectStore();
         p.addProject(this.proj3);
         // Act

@@ -12,17 +12,16 @@ public class GetProjectListController {
     private ProjectStore projStore;
     private List<Project> projectList;
 
-    public GetProjectListController() {
-        this.company = App.getInstance().getCompany();
-        this.projStore = null;
-        this.projectList = null;
-    }
+    /**
+     * Constructor to UI (with SINGLETON).
+     */
+    public GetProjectListController() { this.company = App.getInstance().getCompany(); }
 
-    public GetProjectListController(Company company) {
-        this.company = company;
-        this.projStore = null;
-        this.projectList = null;
-    }
+    /**
+     * Constructor to test (without SINGLETON).
+     */
+    public GetProjectListController(Company company){ this.company = company; }
+
 
     public List<Project> getProjectList() {
         this.projStore = this.company.getProjectStore();

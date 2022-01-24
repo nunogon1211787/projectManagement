@@ -12,12 +12,16 @@ public class RegisterUserController {
     private SystemUser user;
 
 
-    public RegisterUserController() {
-        this.company = (App.getInstance().getCompany());
-        this.usersSstore = null;
-        this.profilesStore = null;
-        this.user = null;
-    }
+    /**
+     * Constructor to UI (with SINGLETON).
+     */
+    public RegisterUserController() { this.company = App.getInstance().getCompany(); }
+
+    /**
+     * Constructor to test (without SINGLETON).
+     */
+    public RegisterUserController(Company company){ this.company = company; }
+
 
     public boolean createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo) {
         UserProfileStore profileStore = company.getUserProfileStore();

@@ -2,6 +2,7 @@ package switch2021.project.controller;
 
 import switch2021.project.model.*;
 import switch2021.project.stores.SprintStore;
+import switch2021.project.utils.App;
 
 public class AddUserStoryToSprintBacklogController {
 
@@ -17,6 +18,16 @@ public class AddUserStoryToSprintBacklogController {
         this(App.getInstance().getCompany());
     }*/
 
+    /**
+     * Constructor to UI (with SINGLETON).
+     */
+    public AddUserStoryToSprintBacklogController() {
+        this.company = App.getInstance().getCompany();
+    }
+
+    /**
+     * Constructor to test (without SINGLETON).
+     */
     public AddUserStoryToSprintBacklogController(Company company) {
         this.company = company;
     }

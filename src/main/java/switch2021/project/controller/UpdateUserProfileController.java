@@ -12,10 +12,14 @@ public class UpdateUserProfileController {
     private SystemUserStore systemUserStore;
     private SystemUser user;
 
-    public UpdateUserProfileController() {
-        this(App.getInstance().getCompany());
-    }
+    /**
+     * Constructor to UI (with SINGLETON).
+     */
+    public UpdateUserProfileController() { this.company = App.getInstance().getCompany(); }
 
+    /**
+     * Constructor to test (without SINGLETON).
+     */
     public UpdateUserProfileController(Company company) {
         this.company = company;
         this.userProfileStore = company.getUserProfileStore();

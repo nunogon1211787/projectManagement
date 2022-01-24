@@ -15,8 +15,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class RefineUserStoryControllerTest {
 //    Company company;
 
-    RefineUserStoryController refineUserStoryController = new RefineUserStoryController();
-    Company company = refineUserStoryController.getCompany();
+    Company company = new Company();
+    RefineUserStoryController refineUserStoryController = new RefineUserStoryController(company);
+
 
     @Test
     @DisplayName("Refine User Story Controller")

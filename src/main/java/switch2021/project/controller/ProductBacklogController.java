@@ -5,6 +5,7 @@ import switch2021.project.model.ProductBacklog;
 import switch2021.project.model.Project;
 import switch2021.project.model.UserStory;
 import switch2021.project.stores.ProjectStore;
+import switch2021.project.utils.App;
 
 import java.util.List;
 
@@ -18,6 +19,16 @@ public class ProductBacklogController {
     private List<Project> arrayProject;
     private List<UserStory> userStoryList;
 
+    /**
+     * Constructor to UI (with SINGLETON).
+     */
+    public ProductBacklogController() {
+        this.company = App.getInstance().getCompany();
+    }
+
+    /**
+     * Constructor to test (without SINGLETON).
+     */
     public ProductBacklogController(Company company) {
         this.company = company;
     }
