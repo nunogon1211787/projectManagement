@@ -92,7 +92,6 @@ public class UserStory {
         if (priority < 0 || priority > 5) {
             throw new IllegalArgumentException("Check priority, cannot be < 0 or superior to 5.");
         }
-
         //check if description is invalid
         if (description == null || description.trim().isEmpty()) {
             throw new IllegalArgumentException("Description cannot be blank.");

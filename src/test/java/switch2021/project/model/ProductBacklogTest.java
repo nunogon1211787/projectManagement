@@ -243,21 +243,24 @@ public class ProductBacklogTest {
         productBacklog.saveUserStory(userStory);
         UserStory userStory1 =productBacklog.createUserStory(new UserStoryStatus("Cancelled"), 3,"sort user story");
         productBacklog.saveUserStory(userStory1);
-        UserStory userStory2 =productBacklog.createUserStory(new UserStoryStatus("To do"),2,"backlog sorted");
+        UserStory userStory2 =productBacklog.createUserStory(new UserStoryStatus("To do"),1,"backlog sorted");
         productBacklog.saveUserStory(userStory2);
         UserStory userStory3 =productBacklog.createUserStory(new UserStoryStatus("In progress"),5,"show sorted");
         productBacklog.saveUserStory(userStory3);
+        UserStory userStory4 =productBacklog.createUserStory(new UserStoryStatus("To do"),0,"show US");
+        productBacklog.saveUserStory(userStory4);
 
         // Act
         List<UserStory> userStoryList =  productBacklog.getUsSortedByPriority();
 
         // Assert
-        assertEquals(4, userStoryList.size());
+        assertEquals(5, userStoryList.size());
 
-        assertEquals(2, userStoryList.get(0).getPriority());
+        assertEquals(1, userStoryList.get(0).getPriority());
         assertEquals(5, userStoryList.get(1).getPriority());
-        assertEquals(1, userStoryList.get(2).getPriority());
-        assertEquals(3, userStoryList.get(3).getPriority());
+        assertEquals(0, userStoryList.get(2).getPriority());
+        assertEquals(1, userStoryList.get(3).getPriority());
+        assertEquals(3, userStoryList.get(4).getPriority());
 
     }
 
