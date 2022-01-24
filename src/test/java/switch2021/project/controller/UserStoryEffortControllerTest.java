@@ -36,13 +36,13 @@ class UserStoryEffortControllerTest {
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        project1 = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
+        project1 = company.getProjectStore().createProject( "prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 3, 5);
         input = new Resource(user, startDate, endDate, 100, .5);
         //Resource input2 = new Resource(user, startDate, endDate, 100, .5);
-        project2 = company.getProjectStore().createProject("123testcode2", "prototype2", "test562", customer,
+        project2 = company.getProjectStore().createProject( "prototype2", "test562", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         sprint1 = new Sprint("Effort View", LocalDate.now());
         sprint1.setId_Sprint(1);
@@ -85,7 +85,7 @@ class UserStoryEffortControllerTest {
         List<Project> projectList = new ArrayList<>();
         projectList.add(project1);
 
-        Project companyProject = userStoryEffortController.getProjectByCode("123testcode");
+        Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
 
         assertEquals(project1.getSprintStore().getSprintList(), userStoryEffortController.getSprintList());
     }
@@ -96,7 +96,7 @@ class UserStoryEffortControllerTest {
         project1.getSprintStore().saveSprint(sprint2);
         company.getProjectStore().addProject(project1);
 
-        Project companyProject = userStoryEffortController.getProjectByCode("123testcode");
+        Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
 
         assertEquals(sprint1, userStoryEffortController.getSprint(1));
     }
@@ -109,7 +109,7 @@ class UserStoryEffortControllerTest {
         project1.getSprintStore().saveSprint(sprint2);
         company.getProjectStore().addProject(project1);
 
-        Project companyProject = userStoryEffortController.getProjectByCode("123testcode");
+        Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
         Sprint userSprint = userStoryEffortController.getSprint(1);
 
         assertEquals(sprint1.getSprintBacklog(), userStoryEffortController.getSprintBacklog());
@@ -124,7 +124,7 @@ class UserStoryEffortControllerTest {
         project1.getSprintStore().saveSprint(sprint2);
         company.getProjectStore().addProject(project1);
 
-        Project companyProject = userStoryEffortController.getProjectByCode("123testcode");
+        Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
         Sprint userSprint = userStoryEffortController.getSprint(1);
 
         SprintBacklog sprintBacklog = userStoryEffortController.getSprintBacklog();
@@ -141,7 +141,7 @@ class UserStoryEffortControllerTest {
         project1.getSprintStore().saveSprint(sprint2);
         company.getProjectStore().addProject(project1);
 
-        Project companyProject = userStoryEffortController.getProjectByCode("123testcode");
+        Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
         Sprint userSprint = userStoryEffortController.getSprint(1);
 
         SprintBacklog sprintBacklog = userStoryEffortController.getSprintBacklog();

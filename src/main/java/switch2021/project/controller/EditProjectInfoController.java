@@ -10,7 +10,7 @@ import java.util.List;
 
 public class EditProjectInfoController {
 
-    private Company company;
+    private final Company company;
     private Project project;
     List<Project> arrayProject;
 
@@ -30,7 +30,7 @@ public class EditProjectInfoController {
     }
 
     public boolean editProject(String name,String description, LocalDate startDate, LocalDate endDate, int numberOfSprints,
-                               double budget, int sprintDuration, String status, ProjectTeam projectTeam){
+                               double budget, int sprintDuration, ProjectStatus status, ProjectTeam projectTeam){
 
         project.validateProjectFields(name,description,budget,numberOfSprints);
 

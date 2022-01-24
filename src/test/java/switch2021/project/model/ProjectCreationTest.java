@@ -29,7 +29,7 @@ class ProjectCreationTest {
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
-        proj = company.getProjectStore().createProject("123testcode", "prototype", "test1234", customer,
+        proj = company.getProjectStore().createProject( "prototype", "test1234", customer,
                 typo, sector, date, 7, 5000);
         company.getProjectStore().addProject(proj);
     }
@@ -39,7 +39,7 @@ class ProjectCreationTest {
     public void checkProjectCreation() {
         //Real and Expected
         String code = proj.getCode();
-        String valuecode = "123testcode";
+        String valuecode = "Project_2022_1";
 
         String name = proj.getProjectName();
         String valueName = "prototype";
@@ -47,25 +47,25 @@ class ProjectCreationTest {
         String description = proj.getDescription();
         String valuedescription = "test1234";
 
-        Customer customer = company.getProjectStore().getProjectByCode("123testcode").getCustomer();
+        Customer customer = company.getProjectStore().getProjectByCode("Project_2022_1").getCustomer();
         Customer valueCustomer = company.getCustomerStore().getCustomerByName("Teste");
 
-        Typology typology = company.getProjectStore().getProjectByCode("123testcode").getTypology();
+        Typology typology = company.getProjectStore().getProjectByCode("Project_2022_1").getTypology();
         Typology valuetypology = company.getTypologyStore().getTypology("Fixed Cost");
 
-        BusinessSector sector = company.getProjectStore().getProjectByCode("123testcode").getBusinessSector();
+        BusinessSector sector = company.getProjectStore().getProjectByCode("Project_2022_1").getBusinessSector();
         BusinessSector valueSector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
-        ProjectStatus status = company.getProjectStore().getProjectByCode("123testcode").getProjectStatus();
+        ProjectStatus status = company.getProjectStore().getProjectByCode("Project_2022_1").getProjectStatus();
         ProjectStatus valuestatus = company.getProjectStatusStore().getProjectStatusByDescription("Planned");
 
-        LocalDate date = company.getProjectStore().getProjectByCode("123testcode").getStartDate();
+        LocalDate date = company.getProjectStore().getProjectByCode("Project_2022_1").getStartDate();
         LocalDate valueDate = LocalDate.of(2021, 12, 12);
 
-        int numberOfSprints = company.getProjectStore().getProjectByCode("123testcode").getNumberOfSprints();
+        int numberOfSprints = company.getProjectStore().getProjectByCode("Project_2022_1").getNumberOfSprints();
         int valueNrSprint = 7;
 
-        double budget = company.getProjectStore().getProjectByCode("123testcode").getBudget();
+        double budget = company.getProjectStore().getProjectByCode("Project_2022_1").getBudget();
         double valueBudget = 5000;
 
         //Result
@@ -86,7 +86,7 @@ class ProjectCreationTest {
     public void projectAdditionTest() {
         List<Project> test = company.getProjectStore().getProjectList();
         String code = test.get(0).getCode();
-        String expectedCode = "123testcode";
+        String expectedCode = "Project_2022_1";
         assertEquals(expectedCode,code);
     }
 
@@ -100,8 +100,8 @@ class ProjectCreationTest {
         LocalDate date = LocalDate.now();
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            company.getProjectStore().createProject("", "", "", customer,
-                    typo, sector, date, -1, -1);
+            company.getProjectStore().createProject("", "test1234", customer,
+                    typo, sector, date, 7, 5000);
         });
         //Assert
         assertTrue(exception.getMessage().contains("Project Name cannot be empty"));
@@ -117,8 +117,8 @@ class ProjectCreationTest {
         LocalDate date = LocalDate.now();
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            company.getProjectStore().createProject("", "as", "", customer,
-                    typo, sector, date, -1, -1);
+            company.getProjectStore().createProject("pr", "test1234", customer,
+                    typo, sector, date, 7, 5000);
         });
         //Assert
         assertTrue(exception.getMessage().contains("Project Name must be at least 3 characters"));
@@ -134,8 +134,8 @@ class ProjectCreationTest {
         LocalDate date = LocalDate.now();
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            company.getProjectStore().createProject("", "aetr", "", customer,
-                    typo, sector, date, -1, -1);
+            company.getProjectStore().createProject("prototype", "", customer,
+                    typo, sector, date, 7, 5000);
         });
         //Assert
         assertTrue(exception.getMessage().contains("Description cannot be empty"));
@@ -151,8 +151,8 @@ class ProjectCreationTest {
         LocalDate date = LocalDate.now();
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            company.getProjectStore().createProject("", "aetr", "asd", customer,
-                    typo, sector, date, -1, -1);
+            company.getProjectStore().createProject("prototype", "test", customer,
+                    typo, sector, date, 7, 5000);
         });
         //Assert
         assertTrue(exception.getMessage().contains("Description must be at least 5 characters"));
@@ -168,8 +168,8 @@ class ProjectCreationTest {
         LocalDate date = LocalDate.now();
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            company.getProjectStore().createProject("", "aetr", "asdlkjv", customer,
-                    typo, sector, date, -1, -1);
+            company.getProjectStore().createProject("prototype", "test1234", customer,
+                    typo, sector, date, 0, 5000);
         });
         //Assert
         assertTrue(exception.getMessage().contains("Number of Sprints must be greater than 0"));
@@ -185,8 +185,8 @@ class ProjectCreationTest {
         LocalDate date = LocalDate.now();
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            company.getProjectStore().createProject("", "aetr", "asdlkjv", customer,
-                    typo, sector, date, 7, -1);
+            company.getProjectStore().createProject("prototype", "test1234", customer,
+                    typo, sector, date, 7, 0);
         });
         //Assert
         assertTrue(exception.getMessage().contains("Budget must be greater than 0"));

@@ -15,9 +15,9 @@ public class CreateUserStoryControllerTest {
     Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-    Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
+    Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
             typo, sector, LocalDate.now(), 7, 5000);
-    Project project2 = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
+    Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
             typo, sector, LocalDate.now(), 7, 5000);
     UserProfile userProfile = new UserProfile("zzz");
     SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
@@ -32,7 +32,7 @@ public class CreateUserStoryControllerTest {
         //Arrange
         company.getProjectStore().addProject(project);
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-        createUserStoryController.getProjectByCode("123testcode");
+        createUserStoryController.getProjectByCode("Project_2022_1");
         UserStoryStatus status = new UserStoryStatus("In progress");
         int priority = -1;
         String description = "teste";
@@ -50,7 +50,7 @@ public class CreateUserStoryControllerTest {
                company.getProjectStore().addProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-        createUserStoryController.getProjectByCode("123testcode");
+        createUserStoryController.getProjectByCode("Project_2022_1");
         UserStoryStatus status = new UserStoryStatus("In progress");
         int priority = 1;
         String description = "";
@@ -69,7 +69,7 @@ public class CreateUserStoryControllerTest {
         company.getProjectStore().addProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-        createUserStoryController.getProjectByCode("123testcode");
+        createUserStoryController.getProjectByCode("Project_2022_1");
         UserStoryStatus status = new UserStoryStatus("In progress");
         int priority = 1;
         String description = "dd";
@@ -88,7 +88,7 @@ public class CreateUserStoryControllerTest {
         company.getProjectStore().addProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-        createUserStoryController.getProjectByCode("123testcode");
+        createUserStoryController.getProjectByCode("Project_2022_1");
         UserStoryStatus status = new UserStoryStatus("In progress");
         int priority = 6;
         String description = "teste";
@@ -107,7 +107,7 @@ public class CreateUserStoryControllerTest {
         company.getProjectStore().addProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-        createUserStoryController.getProjectByCode("123testcode");
+        createUserStoryController.getProjectByCode("Project_2022_1");
         UserStoryStatus status = new UserStoryStatus("In progress");
         int priority = 1;
         String description = "teste";

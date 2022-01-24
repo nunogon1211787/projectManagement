@@ -37,7 +37,7 @@ public class SprintStoreTest {
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         date = LocalDate.of(2022, 1, 1);
-        project = projectStore.createProject("123testcode", "prototype", "test1234", customer,
+        project = projectStore.createProject( "prototype", "test1234", customer,
                 typo, sector, date, 7, 5000);
         project.setSprintDuration(2);
         sprintStore = new SprintStore();

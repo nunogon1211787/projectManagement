@@ -16,7 +16,7 @@ public class ProjectStore {
      * Atributos da Classe
      **/
 
-    private List<Project> projectList;
+    private final List<Project> projectList;
 
     /**
      * Constructors with data
@@ -30,13 +30,16 @@ public class ProjectStore {
      * Project creator
      **/
 
-    public Project createProject(String code, String name, String description, Customer customer, Typology typology,
+    public Project createProject(String name, String description, Customer customer, Typology typology,
                                  BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         Company company = App.getInstance().getCompany();
 
+        String codeG = "Project_" + LocalDate.now().getYear() + "_" + (this.projectList.size()+1);
+
         ProjectStatus status = company.getProjectStatusStore().getProjectStatusByDescription("Planned");
-        return new Project(code, name, description, customer, typology, businessSector,
+
+        return new Project(codeG, name, description, customer, typology, businessSector,
                 startDate, status, numberOfSprints, budget);
     }
 

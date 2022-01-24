@@ -32,13 +32,13 @@ public class AssociateResourceTest {
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        proj = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
+        proj = company.getProjectStore().createProject( "prototype", "test56", customer,
                 typo, sector, date, 7, 5000);
-        proj1 = company.getProjectStore().createProject("345testcode", "prototype2", "test57", customer,
+        proj1 = company.getProjectStore().createProject( "prototype2", "test57", customer,
                 typo, sector, date, 7, 5000);
-        proj2 = company.getProjectStore().createProject("987testcode", "prototype2", "test58", customer,
+        proj2 = company.getProjectStore().createProject( "prototype2", "test58", customer,
                 typo, sector, date, 7, 5000);
-        proj3 = company.getProjectStore().createProject("678testcode", "prototype3", "test59", customer,
+        proj3 = company.getProjectStore().createProject( "prototype3", "test59", customer,
                 typo, sector, date, 7, 5000);
         projectList = company.getProjectStore();
     }

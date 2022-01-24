@@ -25,7 +25,7 @@ public class AssociateResourceTest {
         Customer cust = new Customer("ght@gmail.com","Name");
         Typology typo = new Typology("typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
-        Project proj1 = comTest.getProjectStore().createProject("1", "gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);
+        Project proj1 = comTest.getProjectStore().createProject( "gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);
 
             //user
         UserProfile pro = comTest.getUserProfileStore().getUserProfile("Visitor");

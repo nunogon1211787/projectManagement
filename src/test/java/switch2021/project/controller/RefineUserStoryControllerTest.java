@@ -28,7 +28,7 @@ public class RefineUserStoryControllerTest {
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
-        Project proj1 = company.getProjectStore().createProject("proj1Code", "prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2022, 11, 30));
 
@@ -55,12 +55,12 @@ public class RefineUserStoryControllerTest {
         assertEquals(1,refineUserStoryController.getProjectList().size());
         //check if User Story were added on product Backlog
         assertEquals(4,proj1.getProductBacklog().getUserStoryList().size());
-        assertEquals(4, refineUserStoryController.getProject("proj1Code").getProductBacklog().getUserStoryList().size());
+        assertEquals(4, refineUserStoryController.getProject("Project_2022_1").getProductBacklog().getUserStoryList().size());
         //check if method getProject is working
-        assertEquals(proj1,refineUserStoryController.getProject("proj1Code"));
+        assertEquals(proj1,refineUserStoryController.getProject("Project_2022_1"));
         //get User Story
         assertEquals(userStory2, userStoryToRefine);
-        assertEquals(userStory2, refineUserStoryController.getProject("proj1Code").getProductBacklog().getUserStoryById(2));
+        assertEquals(userStory2, refineUserStoryController.getProject("Project_2022_1").getProductBacklog().getUserStoryById(2));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class RefineUserStoryControllerTest {
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
-        Project proj1 = company.getProjectStore().createProject("proj1Code", "prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2022, 11, 30));
 
@@ -109,7 +109,7 @@ public class RefineUserStoryControllerTest {
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
-        Project proj1 = company.getProjectStore().createProject("proj1Code", "prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2022, 11, 30));
 
@@ -131,8 +131,8 @@ public class RefineUserStoryControllerTest {
         UserStory userStoryToRefine = proj1.getProductBacklog().getUserStoryById(2);
         refineUserStoryController.updateRefinedUserStoryStatus(userStoryToRefine);
         UserStoryStatus statusRefined = company.getUserStoryStatusStore().getUserStoryStatusByDescription("Refined");
-        boolean newUserStory1 = refineUserStoryController.createUserStory("proj1Code", userStoryToRefine, "123testtest",3,StatusToDo);
-        boolean newUserStory2 = refineUserStoryController.createUserStory("proj1Code", userStoryToRefine, "1234testtest",3,StatusToDo);
+        boolean newUserStory1 = refineUserStoryController.createUserStory("Project_2022_1", userStoryToRefine, "123testtest",3,StatusToDo);
+        boolean newUserStory2 = refineUserStoryController.createUserStory("Project_2022_1", userStoryToRefine, "1234testtest",3,StatusToDo);
 
 
         assertTrue(newUserStory1);

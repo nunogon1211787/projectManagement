@@ -15,9 +15,9 @@ public class ProductBacklogControllerTest {
     Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-    Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
+    Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
             typo, sector, LocalDate.now(), 7, 5000);
-    Project project2 = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
+    Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
             typo, sector, LocalDate.now(), 7, 5000);
     UserProfile userProfile = new UserProfile("zzz");
     SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
@@ -88,7 +88,7 @@ public class ProductBacklogControllerTest {
         company.getProjectStore().addProject(this.project);
         ProductBacklogController productBacklogController = new ProductBacklogController(company);
         // Act
-        Project project = productBacklogController.getProject("123testcode");
+        Project project = productBacklogController.getProject("Project_2022_1");
         // Assert
         assertEquals(this.project,project);
     }
@@ -125,7 +125,7 @@ public class ProductBacklogControllerTest {
         // Act
         ProductBacklogController productBacklogController = new ProductBacklogController(company);
         productBacklogController.getProjectListByUserEmail("cris@ipp.pt");
-        productBacklogController.getProject("123testcode");
+        productBacklogController.getProject("Project_2022_1");
         List<UserStory> usSortedByPriority = productBacklogController.getUsSortedByPriority();
 
         // Assert
