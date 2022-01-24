@@ -4,6 +4,7 @@ import switch2021.project.model.Company;
 import switch2021.project.model.Project;
 import switch2021.project.model.Resource;
 import switch2021.project.model.SystemUser;
+import switch2021.project.utils.App;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,18 +12,19 @@ import java.util.List;
 public class AssociateResourceController {
     private Company company;
     private SystemUser user;
-    private Project project;
     private Resource resource;
     List<Project> arrayProject;
     List<SystemUser> arraySystemUser;
 
+    /**
+     * Constructor to UI (with SINGLETON).
+     */
+    public AssociateResourceController(){ this.company = App.getInstance().getCompany(); }
 
-    public AssociateResourceController(Company company, Project project){
-        this.company = company;
-        this.project = project;
-        this.user = null;
-        this.resource = null;
-    }
+    /**
+     * Constructor to test (without SINGLETON).
+     */
+    public AssociateResourceController(Company company){ this.company = company; }
 
     public List getProjectList (){
         this.arrayProject = this.company.getProjectStore().getProjectList();
@@ -38,9 +40,9 @@ public class AssociateResourceController {
         boolean msg = false;
         this.user = this.company.getSystemUserStore().getUserByEmail(email);
         if(this.company.getProjectStore().validateAllocation(this.user, percentageOfAllocation, startDate,endDate)) {
-            this.company.getProjectStore().getProjectByCode(projectCode);
-            this.resource = this.project.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);
-            this.project.addResource(resource);
+            Project project = this.company.getProjectStore().getProjectByCode(projectCode);
+            this.resource = project.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);
+            project.addResource(resource);
             msg = true;
         }
         return msg;

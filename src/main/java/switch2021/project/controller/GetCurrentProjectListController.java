@@ -13,11 +13,17 @@ public class GetCurrentProjectListController {
     private ProjectStore projStore;
     private List<Project> currentProjectListByUser;
 
-    public GetCurrentProjectListController() {
-        this.company = App.getInstance().getCompany();
-        this.projStore = null;
-        this.currentProjectListByUser = null;
-    }
+    /**
+     * Constructor to UI (with SINGLETON).
+     */
+    public GetCurrentProjectListController() { this.company = App.getInstance().getCompany(); }
+
+    /**
+     * Constructor to test (without SINGLETON).
+     */
+    public GetCurrentProjectListController(Company company){ this.company = company; }
+
+
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         this.projStore = this.company.getProjectStore();

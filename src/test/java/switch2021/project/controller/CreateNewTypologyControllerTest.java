@@ -12,7 +12,7 @@ public class CreateNewTypologyControllerTest {
         //Arrange
         Company company = new Company();
         CreateNewTypologyController controller = new CreateNewTypologyController
-                (company.getTypologyStore());
+                (company);
         //Act and Assert
         assertTrue(controller.createTypology("TypoTest"));
     }
@@ -25,7 +25,7 @@ public class CreateNewTypologyControllerTest {
         Company company = new Company();
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            CreateNewTypologyController controller = new CreateNewTypologyController(company.getTypologyStore());
+            CreateNewTypologyController controller = new CreateNewTypologyController(company);
             //Act and Assert
             controller.createTypology("");
         });
@@ -37,7 +37,7 @@ public class CreateNewTypologyControllerTest {
         Company company = new Company();
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            CreateNewTypologyController cont = new CreateNewTypologyController(company.getTypologyStore());
+            CreateNewTypologyController cont = new CreateNewTypologyController(company);
             //Act
             cont.createTypology("      ");
         });

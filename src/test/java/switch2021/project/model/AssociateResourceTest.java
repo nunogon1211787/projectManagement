@@ -157,13 +157,26 @@ public class AssociateResourceTest {
     public void associateResourceController() {
 
         //Arrange
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        LocalDate date = LocalDate.of(2021, 12, 12);
+        company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
+        company.getCustomerStore().add(company.getCustomerStore().createCustomer("Teste", "Teste"));
+
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project proj = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer, typo, sector, date, 7, 5000);
+        company.getProjectStore().saveNewProject(proj);
+
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
         SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456",
                 "123456", "img_123456", userProfile);
 
 //      Construtor AssociateResource Controller
-        AssociateResourceController controllerTest = new AssociateResourceController(company, proj1);
+        AssociateResourceController controllerTest = new AssociateResourceController(company);
+        company.getSystemUserStore().saveSystemUser(newUser);
         boolean result = controllerTest.associateResource("xxxx@isep.ipp.pt", "123testcode", startDateToAllocate, endDateToAllocate, 100, .2);
 
         assertTrue(result);

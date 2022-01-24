@@ -19,13 +19,20 @@ public class UserStoryEffortController {
     private SprintBacklog sprintBacklog;
     private UserStoryOfSprint userStoryOfSprint;
 
+    /**
+     * Constructor to UI (with SINGLETON).
+     */
     public UserStoryEffortController() { //tem como função o dominio para os proximos passos
         this.company = App.getInstance().getCompany();
     }
 
+    /**
+     * Constructor to test (without SINGLETON).
+     */
     public UserStoryEffortController(Company company) { //tem como função o dominio para os proximos passos
         this.company = company;
     }
+
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         this.projectList = new ArrayList<>();

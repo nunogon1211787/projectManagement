@@ -9,10 +9,18 @@ public class CreateProjectController {
     private Company company;
     private Project project;
 
-    public CreateProjectController(Company company) {
-        this.company = company;
-        this.project = null;
-    }
+
+    /**
+     * Constructor to UI (with SINGLETON).
+     */
+    public CreateProjectController(){ this.company = App.getInstance().getCompany();}
+
+    /**
+     * Constructor to test (without SINGLETON).
+     */
+    public CreateProjectController(Company company) { this.company = company; }
+
+
 
     public Typology getTypology(String typo) {
         return company.getTypologyStore().getTypology(typo);

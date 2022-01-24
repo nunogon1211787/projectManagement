@@ -12,9 +12,18 @@ public class RefineUserStoryController {
     private ProductBacklog productBacklog;
     private UserStory userStoryParent;
 
+    /**
+     * Constructor to UI (with SINGLETON).
+     */
     public RefineUserStoryController(){
         this.company = App.getInstance().getCompany();
     }
+
+    /**
+     * Constructor to test (without SINGLETON).
+     */
+    public RefineUserStoryController(Company company){ this.company = company;}
+
 
     public List<Project> getProjectList(String email){
         ProjectStore projSt = this.company.getProjectStore();

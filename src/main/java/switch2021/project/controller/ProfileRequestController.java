@@ -14,12 +14,16 @@ public class ProfileRequestController {
     private UserProfileStore upStore;
 
     /**
-     * Construtor da Classe
+     * Constructor to UI (with SINGLETON).
      */
-
     public ProfileRequestController() {
         this.company = App.getInstance().getCompany();
     }
+
+    /**
+     * Constructor to test (without SINGLETON).
+     */
+    public ProfileRequestController(Company company){ this.company = company; }
 
     /**
      * Método Get.

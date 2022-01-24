@@ -37,8 +37,8 @@ class SearchUsersControllerTest {
     @Test
     void getProfileListSuccess(){
         //Input
-        SearchSystemUsersController test = new SearchSystemUsersController();
-        Company co = test.getCompany();
+        Company co = new Company();
+        SearchSystemUsersController test = new SearchSystemUsersController(co);
         List<UserProfile> profileList = test.getUserProfileList();
         //Expected
         List<UserProfile> expectedList = co.getUserProfileStore().getUserProfileList();

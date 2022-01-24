@@ -17,14 +17,17 @@ public class CreateSprintController {
     private SprintStore sprintStore;
     private Sprint sprint;
 
-    public CreateSprintController(Company company) {
+    /**
+     * Constructor to UI (with SINGLETON).
+     */
+    public CreateSprintController(){ this.company = App.getInstance().getCompany();}
 
-        this.company = company;
-        this.project = null;
-        this.projectStore = null;
-        this.sprintStore = null;
-        this.sprint = null;
-    }
+    /**
+     * Constructor to test (without SINGLETON).
+     */
+    public CreateSprintController(Company company) { this.company = company; }
+
+
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         ProjectStore projectstore = company.getProjectStore();

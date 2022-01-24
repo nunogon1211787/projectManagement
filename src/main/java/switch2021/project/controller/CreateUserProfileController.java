@@ -15,7 +15,14 @@ public class CreateUserProfileController {
 
     private Company company;
 
+    /**
+     * Constructor to UI (with SINGLETON).
+     */
+    public CreateUserProfileController(){ this.company = App.getInstance().getCompany();}
 
+    /**
+     * Constructor to test (without SINGLETON).
+     */
     public CreateUserProfileController(Company company) {
         this.company = company;
     }
