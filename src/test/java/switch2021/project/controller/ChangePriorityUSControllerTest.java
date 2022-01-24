@@ -62,7 +62,7 @@ class ChangePriorityUSControllerTest {
         project.getProductBacklog().addUserStory(userStory3);
         company.getProjectStore().addProject(project);
         company.getProjectStore().addProject(project2);
-
+        company.getProjectStore().addProject(project3);
 
     }
     /*@Test//David tirei esta validação do método em ProjectStore que estás aqui a testar
@@ -115,7 +115,7 @@ class ChangePriorityUSControllerTest {
     @Test
     void getCurrentProjectListByUserEmailCorrectList() {
         //Arrange
-        company.getProjectStore().addProject(project3);
+
         LocalDate endDate = LocalDate.of(2021,1,2);
         company.getProjectStore().getProjectByCode("XPTO2000").setEndDate(endDate);
         project.addResource(input);
@@ -189,14 +189,14 @@ class ChangePriorityUSControllerTest {
         assertEquals(2,usList.size());
     }
 
-    @Test
-    void getUSCorrect() {
-        project.addResource(input);
-
-        UserStory us1 = project.getProductBacklog().getUserStoryById(23);
-
-        assertEquals(userStory2,us1);
-    }
+//    @Test
+//    void getUSCorrect() {
+//        project.addResource(input);
+//
+//        UserStory us1 = project.getProductBacklog().getUserStoryById(23);
+//
+//        assertEquals(userStory2,us1);
+//    }
 
     @Test
     void setPriorityCorrect() {
