@@ -167,5 +167,6 @@ public class AssociateResourceTest {
         boolean result = controllerTest.associateResource("xxxx@isep.ipp.pt", "123testcode", startDateToAllocate, endDateToAllocate, 100, .2);
 
         assertTrue(result);
+
     }
 }

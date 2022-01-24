@@ -30,33 +30,24 @@ public class UserStory {
 
 
     public UserStory(int priority, String description) {
-        this(ID_GENERATOR.getAndIncrement(), new UserStoryStatus("To do") , priority, description);
+        this(new UserStoryStatus("To do") , priority, description);
     }
 
     public UserStory(UserStoryStatus userStoryStatus, int priority, String description) {
-        this(ID_GENERATOR.getAndIncrement(), userStoryStatus, priority, description);
-    }
-
-    public UserStory(int userStoryID, UserStoryStatus userStoryStatus, int priority, String description) {
         isValidUserStory(userStoryStatus, priority, description);
-        this.id_UserStory = userStoryID;
+
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
         this.description = description;
     }
 
     public UserStory(UserStory userStoryToRefine, UserStoryStatus userStoryStatus, int priority, String description){
+        isValidUserStory(userStoryStatus, priority, description);
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
         this.description = description;
         this.ParentUserStory = userStoryToRefine;
     }
-
-    /**
-     * ---> ID_UserProfile Generator. <---
-     */
-    private static AtomicInteger ID_GENERATOR = new AtomicInteger(1);
-
 
     /**
      * ---> Set Priority <---
@@ -74,6 +65,9 @@ public class UserStory {
         this.description = description;
     }
 
+    public void setUserStoryStatus(UserStoryStatus userStoryStatus) {
+        this.userStoryStatus = userStoryStatus;
+    }
 
     /**
      * ---> Set parentUserStory <---
@@ -100,7 +94,6 @@ public class UserStory {
         if (description.length() < 5) {
             throw new IllegalArgumentException("Description must be at least 5 characters");
         }
-
         return true;
     }
 

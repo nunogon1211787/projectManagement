@@ -34,7 +34,7 @@ public class ProductBacklog {
         return activeUSList;
     }
 
-    public UserStory getUserStoryById(long id) {
+    public UserStory getUserStoryById(int id) {
         UserStory userStory = null;
         for (UserStory us : userStoryList) {
             if (us.getId_UserStory() == id) {
@@ -61,9 +61,9 @@ public class ProductBacklog {
         return new UserStory(priority, description);
     }
 
-    public UserStory createUserStory(int userStoryId, UserStoryStatus userStoryStatus, int priority, String description) {
-        return new UserStory(userStoryId, userStoryStatus, priority, description);
-    }
+//    public UserStory createUserStory(int userStoryId, UserStoryStatus userStoryStatus, int priority, String description) {
+//        return new UserStory(userStoryId, userStoryStatus, priority, description);
+//    }
 
     public UserStory createUserStoryRefine(UserStory userStoryParent, UserStoryStatus userStoryStatus, int priority, String description) {
         return new UserStory(userStoryParent, userStoryStatus, priority, description);
