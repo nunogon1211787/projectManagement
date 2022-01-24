@@ -36,11 +36,11 @@ class ChangePriorityUSControllerTest {
     typo = company.getTypologyStore().getTypology("Fixed Cost");
     customer = company.getCustomerStore().getCustomerByName("ISEP");
     sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-    project = company.getProjectStore().createProject("XPTO2000", "prototype2", "test56", customer,
+    project = company.getProjectStore().createProject( "prototype2", "test56", customer,
             typo, sector, startDate2, 7, 5000);
-    project2 = company.getProjectStore().createProject("XPTO3000", "prototype5", "test56", customer,
+    project2 = company.getProjectStore().createProject( "prototype5", "test56", customer,
             typo, sector, startDate3, 7, 5000);
-    project3 = company.getProjectStore().createProject("XPTO7000", "prototype8", "test56", customer,
+    project3 = company.getProjectStore().createProject( "prototype8", "test56", customer,
             typo, sector, startDate3, 4, 3000);
     userProfile = new UserProfile("Apresentador");
     userProfile2 = new UserProfile("Duo");
@@ -98,7 +98,7 @@ class ChangePriorityUSControllerTest {
         project.addResource(input);
         project2.addResource(input);
         LocalDate endDate = LocalDate.of(2021,1,2);
-        company.getProjectStore().getProjectByCode("XPTO2000").setEndDate(endDate);
+        company.getProjectStore().getProjectByCode("Project_2022_1").setEndDate(endDate);
 
 
         // Act
@@ -114,7 +114,7 @@ class ChangePriorityUSControllerTest {
         //Arrange
 
         LocalDate endDate = LocalDate.of(2021,1,2);
-        company.getProjectStore().getProjectByCode("XPTO2000").setEndDate(endDate);
+        company.getProjectStore().getProjectByCode("Project_2022_1").setEndDate(endDate);
         project.addResource(input);
         project2.addResource(input);
         project3.addResource(input);
@@ -134,7 +134,7 @@ class ChangePriorityUSControllerTest {
         project.addResource(input);
         project2.addResource(input);
         // Act
-        Project project3 = company.getProjectStore().getProjectByCode("XPTO2000");
+        Project project3 = company.getProjectStore().getProjectByCode("Project_2022_1");
         // Assert
         assertEquals(project,project3);
     }
@@ -159,7 +159,7 @@ class ChangePriorityUSControllerTest {
     void getUserStoryListFromProjectCorrect() {
         project.addResource(input);
 
-        List<UserStory> usList = company.getProjectStore().getProjectByCode("XPTO2000").getProductBacklog().getUserStoryList();
+        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryList();
 
         assertEquals(usList,this.project.getProductBacklog().getUserStoryList());
     }
@@ -168,7 +168,7 @@ class ChangePriorityUSControllerTest {
     void getUserStoryListFromProjectSizeTest() {
         project.addResource(input);
 
-        List<UserStory> usList = company.getProjectStore().getProjectByCode("XPTO2000").getProductBacklog().getUserStoryList();
+        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryList();
 
 //        assertArrayEquals(usList, this.);
         assertEquals(3,usList.size());
@@ -181,7 +181,7 @@ class ChangePriorityUSControllerTest {
         UserStoryStatus usStatus2 = new UserStoryStatus("Completed");
         userStory3.setUserStoryStatus(usStatus2);
 
-        List<UserStory> usList = company.getProjectStore().getProjectByCode("XPTO2000").getProductBacklog().getActiveUserStoryList();
+        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getActiveUserStoryList();
 
         assertEquals(2,usList.size());
     }

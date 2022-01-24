@@ -30,7 +30,7 @@ public class ProductBacklogTest {
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        proj = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
+        proj = company.getProjectStore().createProject( "prototype", "test56", customer,
                 typo, sector, date, 7, 5000);
         company.getProjectStore().addProject(proj);
         productBacklog = proj.getProductBacklog();
@@ -369,12 +369,12 @@ public class ProductBacklogTest {
     @Test
     @DisplayName("get User Story By Id Success")
     public void getUserStoryByIdSucess(){
-        assertEquals(userStoryToRefine,company.getProjectStore().getProductBacklog("123testcode").getUserStoryById(1));
+        assertEquals(userStoryToRefine,company.getProjectStore().getProductBacklog("Project_2022_1").getUserStoryById(1));
     }
     @Test
     @DisplayName("get User Story By Id Fail")
     public void getUserStoryByIdFail(){
-        assertEquals(null,company.getProjectStore().getProductBacklog("123testcode").getUserStoryById(2));
+        assertEquals(null,company.getProjectStore().getProductBacklog("Project_2022_1").getUserStoryById(2));
     }
 
 }

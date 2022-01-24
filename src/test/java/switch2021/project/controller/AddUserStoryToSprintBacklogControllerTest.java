@@ -19,24 +19,24 @@ public class AddUserStoryToSprintBacklogControllerTest {
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("testCode", "prototype", "test1234", customer,
+        Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
 
         Sprint sprint = project.getSprintStore().createSprint("Sprint 1", LocalDate.now(), 2);
         project.getSprintStore().saveSprint(sprint);
 
         company.getProjectStore().addProject(project);
-        UserStory userStory = company.getProjectStore().getProductBacklog("testCode").createUserStory(new UserStoryStatus("TODO"),
+        UserStory userStory = company.getProjectStore().getProductBacklog("Project_2022_1").createUserStory( new UserStoryStatus("TODO"),
                 1, "Fazer coisas cool");
-        company.getProjectStore().getProductBacklog("testCode").saveUserStory(userStory);
+        company.getProjectStore().getProductBacklog("Project_2022_1").addUserStory(userStory);
 
         //Act
         AddUserStoryToSprintBacklogController addStory = new AddUserStoryToSprintBacklogController(company);
-        addStory.getProject("testCode");
+        addStory.getProject("Project_2022_1");
         addStory.getSprintStore();
         addStory.getSprint(1);
         addStory.getProductBacklog();
-        addStory.getUserStory(1);
+        addStory.getUserStory(0);
 
         addStory.addUserStoryToSprintBacklog(4);
 

@@ -1,10 +1,14 @@
 package switch2021.project.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import switch2021.project.stores.SprintStore;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Getter
+@Setter
 public class Project {
 
 
@@ -22,7 +26,7 @@ public class Project {
     private SystemUser productOwner; // Verificar a necessidade de se manter este atributo
 
     private final BusinessSector businessSector;
-    private final SprintStore sprintList;
+    private final SprintStore sprintStore;
     private ProjectTeam projectTeam;
 
     private LocalDate startDate;
@@ -51,141 +55,26 @@ public class Project {
         this.businessSector = businessSector;
 
         this.startDate = startDate;
-        this.sprintList = new SprintStore();
+        this.sprintStore = new SprintStore();
 
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
 
         this.productBacklog = new ProductBacklog(); // o objeto project tem objeto productbacklog (metodo) como parametro
         this.projectTeam = new ProjectTeam();
-//        this.projectTeam = new ProjectTeam(res);
+//      this.projectTeam = new ProjectTeam(res);
     }
 
 
     /**
-     * Getter Methods
+     * Set End Date
      **/
-    public String getCode() {
-        return code;
-    }
 
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Customer getCustomer() {
-        return this.customer;
-    }
-
-    public Typology getTypology() {
-        return typology;
-    }
-
-    public ProjectStatus getProjectStatus() {
-        return projectStatus;
-    }
-
-    public BusinessSector getBusinessSector() {
-        return businessSector;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public int getNumberOfSprints() {
-        return numberOfSprints;
-    }
-
-    public double getBudget() {
-        return budget;
-    }
-
-    public SystemUser getProductOwner() {
-        return productOwner;
-    }
-
-    public ProductBacklog getProductBacklog() {
-        return productBacklog;
-    }
-
-    public int getSprintDuration() {
-        return sprintDuration;
-    }
-
-    public SprintStore getSprintStore() {
-        return this.sprintList;
-    }
-
-
-    /**
-     * Setter Methods
-     **/
-    public void setCode(String code) {
-        this.code = code;
-    }
-
+    //Gives the project an end date
     public boolean setEndDate() {
         this.endDate = LocalDate.now();
         return true;
     }
-
-    public void setProductOwner(SystemUser productOwner) {
-        this.productOwner = productOwner;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setTypology(Typology typology) {
-        this.typology = typology;
-    }
-
-    public void setProjectStatus(ProjectStatus projectStatus) {
-        this.projectStatus = projectStatus;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setNumberOfSprints(int numberOfSprints) {
-        this.numberOfSprints = numberOfSprints;
-    }
-
-    public void setBudget(double budget) {
-        this.budget = budget;
-    }
-
-    public void setSprintDuration(int sprintDuration) {
-        this.sprintDuration = sprintDuration;
-    }
-
-    public void setProjectStatus(String status) {
-        this.projectStatus = projectStatus.setDescription(status);
-    }
-
-    public void setProjectTeam(ProjectTeam projectTeam) {
-        this.projectTeam = projectTeam;
-    }
-
 
     /**
      * Validates Project Creation Fields
@@ -269,14 +158,12 @@ public class Project {
         return this.projectTeam.hasResource(email);
     }
 
-
     /**
      * Get the start date of the next Sprint and end date of the current Sprint
      */
     public Sprint getCurrentSprint() {
-      return this.sprintList.getCurrentSprint();
+      return this.sprintStore.getCurrentSprint();
     }
-
 
     /**
      * Override
@@ -298,7 +185,7 @@ public class Project {
                 && Objects.equals(productBacklog, project.productBacklog)
                 && Objects.equals(productOwner, project.productOwner)
                 && Objects.equals(businessSector, project.businessSector)
-                && Objects.equals(sprintList, project.sprintList)
+                && Objects.equals(sprintStore, project.sprintStore)
                 && Objects.equals(projectTeam, project.projectTeam)
                 && Objects.equals(startDate, project.startDate)
                 && Objects.equals(endDate, project.endDate);
@@ -308,7 +195,7 @@ public class Project {
     public int hashCode() {
         return Objects.hash(code, projectName, description, customer, typology,
                 projectStatus, productBacklog, productOwner, businessSector,
-                sprintList, projectTeam, startDate, endDate, numberOfSprints,
+                sprintStore, projectTeam, startDate, endDate, numberOfSprints,
                 budget, sprintDuration);
     }
 }

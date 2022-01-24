@@ -30,8 +30,8 @@ class CompanyTest {
     public void getProjectListWithPORightEmptyEmail() {
         //Arrange
         Company company = new Company();
-        project = company.getProjectStore().createProject("TEST", "Projecto Test", "criar us",
-                new Customer("marreta@email.pt", "name"),
+        project = company.getProjectStore().createProject( "Projecto Test", "criar us",
+                new Customer(1,"marreta@email.pt", "name"),
                 company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         // Act
@@ -46,8 +46,8 @@ class CompanyTest {
     public void getProjectListWithPORightEmptyList() {
         //Arrange
         Company company = new Company();
-        project = company.getProjectStore().createProject("TEST", "Projecto Test", "criar us",
-                new Customer("marreta@email.pt", "name"),
+        project = company.getProjectStore().createProject( "Projecto Test", "criar us",
+                new Customer(1, "marreta@email.pt", "name"),
                 company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         // Act
@@ -62,8 +62,8 @@ class CompanyTest {
     public void getProjectListWithPORightWithEmptyEmailAndGetEmptyList() {
         //Arrange
         Company company = new Company();
-        project = company.getProjectStore().createProject("TEST", "Projecto Test", "criar us",
-                new Customer("marreta@email.pt", "name"),
+        project = company.getProjectStore().createProject( "Projecto Test", "criar us",
+                new Customer(1,"marreta@email.pt", "name"),
                 company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         // Act
@@ -80,8 +80,8 @@ class CompanyTest {
     public void getProjectListWithPORighListWithResults() {
         //Arrange
         Company company = new Company();
-        project = company.getProjectStore().createProject("other TEST", "CDC", "criar projeto",
-                new Customer("marreta@email.pt", "name"),
+        project = company.getProjectStore().createProject( "CDC", "criar projeto",
+                new Customer(1,"marreta@email.pt", "name"),
                 company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
@@ -97,15 +97,15 @@ class CompanyTest {
     public void getProductBacklogWithResults() {
         //Arrange
         Company company = new Company();
-        project = company.getProjectStore().createProject("other TEST", "CDC", "criar projeto",
-                new Customer("marreta@email.pt", "name"),
+        project = company.getProjectStore().createProject( "CDC_X", "criar projeto",
+                new Customer(1,"marreta@email.pt", "name"),
                 company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
                 "Product Owner", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("Product Owner")));
         company.getProjectStore().addProject(project);
         // Act
-        ProductBacklog productBacklog = company.getProjectStore().getProductBacklog("other TEST");
+        ProductBacklog productBacklog = company.getProjectStore().getProductBacklog("Project_2022_1");
         //Assert
         assertNotNull(productBacklog);
     }
@@ -114,8 +114,8 @@ class CompanyTest {
     public void getProductBacklogInvalidNull() {
         //Arrange
         Company company = new Company();
-        project = company.getProjectStore().createProject("other TEST", "CDC", "criar projeto",
-                new Customer("marreta@email.pt", "name"),
+        project = company.getProjectStore().createProject( "CDC", "criar projeto",
+                new Customer(1,"marreta@email.pt", "name"),
                 company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
@@ -133,8 +133,8 @@ class CompanyTest {
     public void getProductBacklogInvalidEmpty() {
         //Arrange
         Company company = new Company();
-        project = company.getProjectStore().createProject("other TEST", "CDC", "criar projeto",
-                new Customer("marreta@email.pt", "name"),
+        project = company.getProjectStore().createProject( "CDC", "criar projeto",
+                new Customer(1,"marreta@email.pt", "name"),
                 company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",

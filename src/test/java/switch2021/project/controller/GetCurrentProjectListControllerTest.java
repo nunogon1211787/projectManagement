@@ -26,19 +26,19 @@ public class GetCurrentProjectListControllerTest {
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
-        proj1 = company.getProjectStore().createProject("proj1Code", "prototype1", "proj1Prototype", customer,
+        proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2021, 11, 30));
 
-        proj2 = company.getProjectStore().createProject("proj2Code", "prototype2", "proj2Prototype", customer,
+        proj2 = company.getProjectStore().createProject( "prototype2", "proj2Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
         proj2.setEndDate(LocalDate.of(2021, 11, 30));
 
-        proj3 = company.getProjectStore().createProject("proj3Code", "prototype3", "proj3Prototype", customer,
+        proj3 = company.getProjectStore().createProject( "prototype3", "proj3Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
         proj3.setEndDate(LocalDate.of(2021, 11, 30));
 
-        currentProject = company.getProjectStore().createProject("proj4Code", "prototype4", "proj4Prototype", customer,
+        currentProject = company.getProjectStore().createProject( "prototype4", "proj4Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 4000);
         currentProject.setEndDate(LocalDate.now().plusDays(7));
 

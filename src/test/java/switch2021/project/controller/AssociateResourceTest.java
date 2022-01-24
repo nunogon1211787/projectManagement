@@ -22,10 +22,10 @@ public class AssociateResourceTest {
             //Project
         //List<Project> testProjectList = comTest.getArrayProj();
         LocalDate startProjectDate = LocalDate.of(2021, 2, 25);
-        Customer cust = new Customer("ght@gmail.com","Name");
+        Customer cust = new Customer(1,"ght@gmail.com","Name");
         Typology typo = new Typology("typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
-        Project proj1 = comTest.getProjectStore().createProject("1", "gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);
+        Project proj1 = comTest.getProjectStore().createProject( "gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);
         comTest.getProjectStore().saveNewProject(proj1);
 
             //user
@@ -37,7 +37,7 @@ public class AssociateResourceTest {
 
             //Construtor Controller
         AssociateResourceController controllerTest = new AssociateResourceController(comTest);
-        boolean result = controllerTest.associateResource("fase@gmail.com", "1", startDateToAllocate, endDateToAllocate, 100, .2);
+        boolean result = controllerTest.associateResource("fase@gmail.com", "Project_2022_1", startDateToAllocate, endDateToAllocate, 100, .2);
 
         assertTrue(result);
     }

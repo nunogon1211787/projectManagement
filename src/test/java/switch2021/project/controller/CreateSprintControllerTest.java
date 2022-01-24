@@ -30,12 +30,12 @@ public class CreateSprintControllerTest {
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
-        project = company.getProjectStore().createProject("123testcode", "prototype", "test1234", customer,
+        project = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, date, 7, 5000);
         company.getProjectStore().addProject(project);
         //Act
         CreateSprintController controllerTest1 = new CreateSprintController(company);
-        Project project1 = controllerTest1.getProject(company, "123testcode");
+        Project project1 = controllerTest1.getProject(company, "Project_2022_1");
         //Assert
         assertEquals(project, project1);
         //company.getProjectStore().removeProject(project);
@@ -58,7 +58,7 @@ public class CreateSprintControllerTest {
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
-        proj = company.getProjectStore().createProject("123testcode", "prototype", "test1234", customer,
+        proj = company.getProjectStore().createProject( "prototype", "test1234", customer,
                 typo, sector, date, 7, 5000);
 
         proj.setSprintDuration(2);
@@ -66,7 +66,7 @@ public class CreateSprintControllerTest {
         company.getProjectStore().addProject(proj);
 
         CreateSprintController controllerTest1 = new CreateSprintController(company);
-        controllerTest1.getProject(company, "123testcode");
+        controllerTest1.getProject(company, "Project_2022_1");
         Sprint sprint = controllerTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1));
         controllerTest1.saveSprint(sprint);
 

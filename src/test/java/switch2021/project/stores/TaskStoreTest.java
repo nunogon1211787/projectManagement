@@ -1,6 +1,7 @@
-package switch2021.project.model;
+package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.Task;
 import switch2021.project.stores.TaskStore;
 import static org.junit.jupiter.api.Assertions.*;
 

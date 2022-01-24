@@ -20,7 +20,7 @@ class AssignScrumMasterControllerTest {
         Typology typo = co.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = co.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = co.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project proj1 = co.getProjectStore().createProject("proj1Code", "prototype1", "proj1Prototype", customer,
+        Project proj1 = co.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
 
         UserProfile profile = co.getUserProfileStore().getUserProfile("Visitor");
@@ -71,7 +71,7 @@ class AssignScrumMasterControllerTest {
         Typology typo = co.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = co.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = co.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project proj1 = co.getProjectStore().createProject("proj1Code", "prototype1", "proj1Prototype", customer,
+        Project proj1 = co.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         proj1.setSprintDuration(2);
 

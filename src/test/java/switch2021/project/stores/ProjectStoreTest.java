@@ -1,8 +1,9 @@
-package switch2021.project.model;
+package switch2021.project.stores;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.controller.ProductBacklogController;
+import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SystemUserStore;
 
@@ -26,19 +27,19 @@ public class ProjectStoreTest {
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
-        proj1 = company.getProjectStore().createProject("proj1Code", "prototype1", "proj1Prototype", customer,
+        proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2021, 11, 30));
 
-        proj2 = company.getProjectStore().createProject("proj2Code", "prototype2", "proj2Prototype", customer,
+        proj2 = company.getProjectStore().createProject( "prototype2", "proj2Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
         proj2.setEndDate(LocalDate.of(2021, 11, 30));
 
-        proj3 = company.getProjectStore().createProject("proj3Code", "prototype3", "proj3Prototype", customer,
+        proj3 = company.getProjectStore().createProject( "prototype3", "proj3Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
         proj3.setEndDate(LocalDate.of(2021, 11, 30));
 
-        currentProject = company.getProjectStore().createProject("proj4Code", "prototype4", "proj4Prototype", customer,
+        currentProject = company.getProjectStore().createProject( "prototype4", "proj4Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 4000);
         currentProject.setEndDate(LocalDate.now().plusDays(7));
 
@@ -89,9 +90,9 @@ public class ProjectStoreTest {
     Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-    Project project = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
+    Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
             typo, sector, LocalDate.now(), 7, 5000);
-    Project project2 = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
+    Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
             typo, sector, LocalDate.now(), 7, 5000);
 
     UserProfile userProfile = new UserProfile("zzz");
@@ -158,7 +159,7 @@ public class ProjectStoreTest {
         project.addResource(input);
         projectStore.addProject(this.project);
         // Act
-        Project project1 = projectStore.getProjectByCode("123testcode");
+        Project project1 = projectStore.getProjectByCode("Project_2022_1");
 
         // Assert
         assertEquals(this.project, project1);

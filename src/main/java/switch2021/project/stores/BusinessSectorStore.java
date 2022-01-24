@@ -12,7 +12,7 @@ public class BusinessSectorStore {
      * Contains a Business Sector list
      **/
 
-    private List<BusinessSector> businessSectorList;
+    private final List<BusinessSector> businessSectorList;
 
     /**
      * Business Sector Constructor

@@ -1,8 +1,9 @@
-package switch2021.project.model;
+package switch2021.project.stores;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintStore;
 import java.time.LocalDate;
@@ -37,7 +38,7 @@ public class SprintStoreTest {
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         date = LocalDate.of(2022, 1, 1);
-        project = projectStore.createProject("123testcode", "prototype", "test1234", customer,
+        project = projectStore.createProject( "prototype", "test1234", customer,
                 typo, sector, date, 7, 5000);
         project.setSprintDuration(2);
         sprintStore = new SprintStore();
