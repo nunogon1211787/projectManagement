@@ -124,24 +124,37 @@ public class ProjectTeamTest {
     }
 
 
-//    @Test
-//    @DisplayName("Assign New Role for a resource")
-//    public void assignProjectRoleTest() {
-//        //Arrange
-//        Company company = new Company();
-//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-//        SystemUser expected = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-//        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
-//        LocalDate endDateMb = LocalDate.of(2022, 11, 15);
-//        Resource manuelbras = new Resource(expected, startDateMb, endDateMb, 100, .5);
-//        manuelbras.setRole(App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Scrum Master"));
-//        //Act
-//        Resource manuelTest = proj1.getProjectTeam().getResource("manuelbras@beaver.com");
-//        manuelTest.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
-//        proj1.getProjectTeam().assignProjectRole(manuelTest, LocalDate.of(2021,11,16), 2,
-//                App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Scrum Master"));
-//        //Assert
-//        assertEquals(manuelbras,manuelTest);
-//    }
+    @Test
+    @DisplayName("Assign New Role for a resource")
+    public void assignScrumMasterWithoutRepeatedTestSize() {
+        //Arrange
+        Company company = new Company();
+        //Act
+        Resource manuelTest = proj1.getProjectTeam().getResource("manuelbras@beaver.com");
+        manuelTest.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+        proj1.getProjectTeam().assignProjectRole(manuelTest, LocalDate.of(2021,11,16), 2, company.getProjectRoleStore().getProjectRole("Scrum Master"));
+        //Assert
+        assertEquals(5, proj1.getProjectTeam().getProjectTeamList().size());
+    }
+
+    @Test
+    @DisplayName("Assign New Role for a resource")
+    public void assignScrumMasterWithRepeatedTestSize() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user1 = new SystemUser("manuelbrasil", "manuelbrasil@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 11, 15);
+        Resource manuelbrasil = new Resource(user1, startDateMb, endDateMb, 100, .5);
+        manuelbrasil.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
+        //Act
+        proj1.getProjectTeam().addResourceToTeam(manuelbrasil);
+        Resource manuelTest = proj1.getProjectTeam().getResource("manuelbras@beaver.com");
+        manuelTest.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+        proj1.getProjectTeam().assignProjectRole(manuelTest, LocalDate.of(2021,11,16), 2, company.getProjectRoleStore().getProjectRole("Scrum Master"));
+        //Assert
+        assertEquals(7, proj1.getProjectTeam().getProjectTeamList().size());
+    }
 }
 

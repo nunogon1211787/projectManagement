@@ -111,9 +111,9 @@ public class ProjectTeam {
     private boolean saveResource(Resource newResource) {
         boolean msg;
         if (checkIfRoleCurrentExistInTheProjectTeam(newResource.getRole(), newResource.getStartDate())) {
-//            Resource oldResourceRole = getResource(newResource.getRole()); // Old Resource with Project Role that must be unique
-            Resource changeRole = new Resource(newResource); // Copy of Old Resource that must be updated
-            newResource.setEndDate(newResource.getStartDate().minusDays(1)); // change end date of old resource
+            Resource oldResourceRole = getResource(newResource.getRole()); // Old Resource with Project Role that must be unique
+            Resource changeRole = new Resource(oldResourceRole); // Copy of Old Resource that must be updated
+            oldResourceRole.setEndDate(newResource.getStartDate().minusDays(1)); // change end date of old resource
             changeRole.setStartDate(newResource.getStartDate()); // change start date of copy of old resource
             changeRole.setRole(App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Team Member")); // change role of copy of old resource
             this.projectTeamList.add(newResource); // save in project team the new resource that was assigned to a new role
@@ -141,7 +141,7 @@ public class ProjectTeam {
         boolean msg = false;
         if (!role.isValidName("Team Member")) {
             for (Resource i : projectTeamList) {
-                if (!i.isYour(role) && i.getEndDate().isAfter(startDate)) {
+                if (i.isYour(role) && i.getEndDate().isAfter(startDate)) {
                     msg = true;
                     break;
                 }
