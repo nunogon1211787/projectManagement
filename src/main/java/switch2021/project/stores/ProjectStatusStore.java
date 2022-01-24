@@ -13,7 +13,7 @@ public class ProjectStatusStore {
      * Contains a Project Status list
      **/
 
-    private List<ProjectStatus> projectStatusList;
+    private final List<ProjectStatus> projectStatusList;
 
     /**
      * Project Status Constructor

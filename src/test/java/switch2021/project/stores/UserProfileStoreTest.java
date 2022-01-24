@@ -1,6 +1,7 @@
-package switch2021.project.model;
+package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.UserProfile;
 import switch2021.project.stores.UserProfileStore;
 
 import static org.junit.jupiter.api.Assertions.*;

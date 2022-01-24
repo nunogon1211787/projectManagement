@@ -1,8 +1,9 @@
-package switch2021.project.model;
+package switch2021.project.stores;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintStore;
 import java.time.LocalDate;
