@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AssignScrumMasterControllerTest {
 
-    @Test
-    void getCurrentResourceByUserEmailTest() {
-    }
+//    @Test
+//    void getCurrentResourceByUserEmailTest() {
+//    }
 
     @Test
     void assignRoleTestSuccess() {

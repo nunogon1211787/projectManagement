@@ -1,7 +1,6 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import switch2021.project.stores.TaskStore;
 import switch2021.project.utils.Utils;
 
 import java.util.Objects;

@@ -41,7 +41,7 @@ public class AddUserStoryToSprintbacklogTest {
 
     @Test
     @DisplayName("Create Story in sprint fail case - effort below 1")
-    public void createStoryInSprintFailCase() {
+    public void createStoryInSprintFailEffort() {
         UserStoryStatus status = new UserStoryStatus("statusTest");
         UserStory userStory = new UserStory(status, 2, "teste");
         assertThrows(IllegalArgumentException.class, () -> sprintBacklog.createUSerStoryOfSprint(userStory, -1));
@@ -49,22 +49,11 @@ public class AddUserStoryToSprintbacklogTest {
 
     @Test
     @DisplayName("Create Story in sprint fail case - User Story null")
-    public void createStoryInSprintFailCase_2() {
+    public void createStoryInSprintFailUserStory() {
         UserStory userStory = null;
         assertThrows(IllegalArgumentException.class, () -> sprintBacklog.createUSerStoryOfSprint(userStory, 5));
     }
 
-    @Test
-    @DisplayName("Create Story in sprint fail case - UserStory already exists in sprintbacklog")
-    public void createStoryInSprintAlreadyExists() {
-        UserStoryStatus status = new UserStoryStatus("statusTest");
-        UserStory userStory = new UserStory(status, 2, "teste");
-        userStory.setId_UserStory(1);
-        UserStoryOfSprint userStoryOfSprint= sprintBacklog.createUSerStoryOfSprint(userStory, 5);
-        sprintBacklog.addUserStory(userStoryOfSprint);
-        assertTrue(sprintBacklog.validateId_UserStoryOfSprint(userStoryOfSprint));
-
-    }
 
     @Test
     @DisplayName("Create Story in sprint fail case - UserStory selected has Done Status")
@@ -72,6 +61,18 @@ public class AddUserStoryToSprintbacklogTest {
         UserStoryStatus status = new UserStoryStatus("Done");
         UserStory userStory = new UserStory(status, 2, "teste");
         assertThrows(IllegalArgumentException.class, () -> sprintBacklog.createUSerStoryOfSprint(userStory, 5));
+
+    }
+
+    @Test
+    @DisplayName("Create Story in sprint fail case - UserStory already exists in sprintbacklog")
+    public void UserStoryInSprintFail_AlreadyExists() {
+        UserStoryStatus status = new UserStoryStatus("statusTest");
+        UserStory userStory = new UserStory(status, 2, "teste");
+        userStory.setId_UserStory(1);
+        UserStoryOfSprint userStoryOfSprint= sprintBacklog.createUSerStoryOfSprint(userStory, 5);
+        sprintBacklog.addUserStory(userStoryOfSprint);
+        assertTrue(sprintBacklog.validateId_UserStoryOfSprint(userStoryOfSprint));
 
     }
 

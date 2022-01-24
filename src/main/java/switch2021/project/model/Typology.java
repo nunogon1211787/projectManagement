@@ -1,5 +1,7 @@
 package switch2021.project.model;
 
+import java.util.Objects;
+
 public class Typology {
 
     /** Typology attributes are composed of a description of the Typology. **/
@@ -44,6 +46,9 @@ public class Typology {
         Typology that = (Typology) o;
         return ((this.description.equals(that.description)));
     }
-    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
-    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description);
+    }
 }

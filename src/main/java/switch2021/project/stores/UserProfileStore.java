@@ -4,6 +4,7 @@ import switch2021.project.model.UserProfile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class UserProfileStore {
 
@@ -159,6 +160,11 @@ public class UserProfileStore {
         if (this == obj) return true;
         if (!(obj instanceof UserProfileStore)) return false;
         UserProfileStore that = (UserProfileStore) obj;
-        return (this.userProfileList.equals(that.getOriginalUserProfileList()));
+        return (this.userProfileList.equals(that.userProfileList));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userProfileList);
     }
 }
