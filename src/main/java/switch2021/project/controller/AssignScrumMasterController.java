@@ -4,6 +4,7 @@ import switch2021.project.model.*;
 import switch2021.project.utils.App;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class AssignScrumMasterController {
 
@@ -13,7 +14,7 @@ public class AssignScrumMasterController {
      **/
     private Company company;
     private Project project;
-    private ProjectTeam projectTeam;
+    private List<Resource> projectTeamList;
     private Resource resource;
 
 
@@ -28,13 +29,9 @@ public class AssignScrumMasterController {
         return this.project = company.getProjectStore().getProjectByCode(code);
     }
 
-    public ProjectTeam getProjectTeam() {
-        return this.projectTeam = project.getProjectTeam();
-    }
+    public List<Resource> getProjectTeamList() {return this.projectTeamList = project.getProjectTeam().getProjectTeamList();}
 
-    public Resource getResource(String email) {
-        return this.resource = projectTeam.getResource(email);
-    }
+    public Resource getResource(String email) {return this.resource = project.getProjectTeam().getResource(email);}
 
     public boolean assignRole(Resource resource, String roleName) {
         boolean msg;
@@ -42,6 +39,6 @@ public class AssignScrumMasterController {
         int sprintDuration = project.getSprintDuration();
         ProjectRole role = company.getProjectRoleStore().getProjectRole(roleName);
 
-        return projectTeam.assignProjectRole(resource, startDateNextSprint, sprintDuration, role);
+        return project.getProjectTeam().assignProjectRole(resource, startDateNextSprint, sprintDuration, role);
     }
 }
