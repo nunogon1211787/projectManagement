@@ -1,5 +1,7 @@
 package switch2021.project.model;
 
+import java.util.Objects;
+
 public class BusinessSector {
 
     /**
@@ -41,5 +43,10 @@ public class BusinessSector {
         BusinessSector that = (BusinessSector) o;
 
         return (this.description.equals(that.description));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description);
     }
 }

@@ -1,5 +1,7 @@
 package switch2021.project.model;
 
+import java.util.Objects;
+
 public class UserProfile {
 
     /**
@@ -64,8 +66,11 @@ public class UserProfile {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserProfile that = (UserProfile) o;
-        return (this.getUserProfileName().equals(that.getUserProfileName()));
+        return (this.userProfileName.equals(that.userProfileName));
     }
-    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
-    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userProfileName);
+    }
 }

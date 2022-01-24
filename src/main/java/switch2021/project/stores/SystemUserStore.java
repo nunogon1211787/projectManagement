@@ -5,6 +5,7 @@ import switch2021.project.model.UserProfile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SystemUserStore {
 
@@ -41,8 +42,7 @@ public class SystemUserStore {
      * Getter Methods
      */
     public List<SystemUser> getSystemUserList() {
-        List<SystemUser> copyList = new ArrayList<>();
-        copyList.addAll(this.systemUserList);
+        List<SystemUser> copyList = new ArrayList<>(this.systemUserList);
 
         return copyList;
     }
@@ -121,4 +121,8 @@ public class SystemUserStore {
         return (this.systemUserList.equals(that.systemUserList));
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(systemUserList);
+    }
 }
