@@ -1,5 +1,6 @@
 package switch2021.project.controller;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 
@@ -27,8 +28,8 @@ public class ProductBacklogControllerTest {
 
 
     @Test
-
-    public void getAllProjectListByUserEmail() {
+    @DisplayName("check if the list size is correct")
+    public void getProjectListByUserEmailWith2Projects() {
         //Arrange
         company.getProjectStore().addProject(project);
         company.getProjectStore().addProject(project2);
@@ -44,8 +45,8 @@ public class ProductBacklogControllerTest {
     }
 
     @Test
-
-    public void getAllProjectListByUserEmailIsBlank() {
+    @DisplayName("get exception message  \"Email cannot be blank“;\n")
+    public void getProjectListByUserEmailIsBlank() {
         //Arrange
         company.getProjectStore().addProject(project);
         company.getProjectStore().addProject(project2);
@@ -63,7 +64,7 @@ public class ProductBacklogControllerTest {
     }
 
     @Test
-
+    @DisplayName("get exception message  \"Email don't exist in system")
     public void getAllProjectListByUserEmailDontExist() {
         //Arrange
         company.getProjectStore().addProject(project);
@@ -81,6 +82,31 @@ public class ProductBacklogControllerTest {
 
     }
     @Test
+    @DisplayName("check the provided project is the correct")
+    public void getProjectByCodeWithSuccess(){
+        // Arrange
+        company.getProjectStore().addProject(this.project);
+        ProductBacklogController productBacklogController = new ProductBacklogController(company);
+        // Act
+        Project project = productBacklogController.getProject("123testcode");
+        // Assert
+        assertEquals(this.project,project);
+    }
+
+    @Test
+    @DisplayName("check the provided return null")
+    public void getProjectByCodeFail(){
+        // Arrange
+        company.getProjectStore().addProject(this.project);
+        ProductBacklogController productBacklogController = new ProductBacklogController(company);
+        // Act
+        Project project = productBacklogController.getProject("testcode");
+        // Assert
+        assertNull(project);
+    }
+
+    @Test
+    @DisplayName("grants a list of US that is sorted by priority. It keeps the done and/or cancelled US on the end\n")
     public void getSortedListWithSuccess(){
         // Arrange
         company.getProjectStore().addProject(project);
@@ -112,6 +138,8 @@ public class ProductBacklogControllerTest {
     }
 
     @Test
+    @DisplayName("get exception message \"Check priority, cannot be < 0 or superior to 5.“")
+
     public void getSortedListFailWrongPriority(){
         // Arrange
         company.getProjectStore().addProject(project);
@@ -139,25 +167,5 @@ public class ProductBacklogControllerTest {
         assertTrue(exception.getMessage().contains("Check priority, cannot be < 0 or superior to 5."));
     }
 
-    @Test
-    public void getProjectByCode(){
-        // Arrange
-        company.getProjectStore().addProject(this.project);
-        ProductBacklogController productBacklogController = new ProductBacklogController(company);
-        // Act
-        Project project = productBacklogController.getProject("123testcode");
-        // Assert
-       assertEquals(this.project,project);
-    }
 
-    @Test
-    public void getProjectByCodeFail(){
-        // Arrange
-        company.getProjectStore().addProject(this.project);
-        ProductBacklogController productBacklogController = new ProductBacklogController(company);
-        // Act
-        Project project = productBacklogController.getProject("testcode");
-        // Assert
-        assertNull(project);
-    }
 }

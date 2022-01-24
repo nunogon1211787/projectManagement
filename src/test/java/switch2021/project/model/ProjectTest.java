@@ -100,6 +100,7 @@ class ProjectTest {
 
 
     @Test
+    @DisplayName("validate that list have results (not null) and check list size are correct")
     public void getProductBacklogWithResults() {
         // Arrange
         company.getProjectStore().addProject(project2);

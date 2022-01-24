@@ -102,7 +102,7 @@ public class ProjectStoreTest {
 
 
     @Test
-    public void getProjectListByUserEmail() {
+    public void getProjectListByUserEmailWith2Projects() {
         //Arrange
         company.getProjectStore().addProject(project);
         company.getProjectStore().addProject(project2);
@@ -117,7 +117,7 @@ public class ProjectStoreTest {
 
     @Test
 
-    public void getProjectListByUserEmailIsBlank() {
+    public void getProjectListByUserEmailBlank() {
         //Arrange
         company.getProjectStore().addProject(project);
         company.getProjectStore().addProject(project2);

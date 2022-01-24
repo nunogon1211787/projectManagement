@@ -1,9 +1,9 @@
 package switch2021.project.model;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -208,6 +208,7 @@ public class ProductBacklogTest {
     }
 
     @Test
+    @DisplayName("grants a list of US that is sorted by priority. It keeps the done and/or cancelled US on the end\n")
     public void getSortedListWithSuccess(){
         // Arrange
         ProductBacklog productBacklog=new ProductBacklog();
@@ -234,6 +235,7 @@ public class ProductBacklogTest {
     }
 
     @Test
+    @DisplayName("garantes a list of US is sorted by priority, mantain for the last US done and/or even cancelled")
     public void getSortedListWithSuccess2(){
         // Arrange
         ProductBacklog productBacklog=new ProductBacklog();
@@ -260,6 +262,7 @@ public class ProductBacklogTest {
     }
 
     @Test
+    @DisplayName("get exception message \"Check priority, cannot be < 0 or superior to 5.“")
     public void getSortedListFailWrongPriority(){
         // Arrange
         ProductBacklog productBacklog=new ProductBacklog();
