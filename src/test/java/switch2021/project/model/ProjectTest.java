@@ -4,11 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.stores.SprintStore;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProjectTest {
@@ -139,7 +137,7 @@ class ProjectTest {
         sprintStore1.saveSprint(sprint1);
         SprintStore projectSprintStore = this.project2.getSprintStore();
         projectSprintStore.saveSprint(sprint1);
-        assertTrue(sprintStore1.equals(projectSprintStore));
+        assertEquals(sprintStore1, projectSprintStore);
     }
 
     @Test
@@ -152,23 +150,22 @@ class ProjectTest {
         SprintStore projectSprintStore = this.project2.getSprintStore();
         projectSprintStore.saveSprint(sprint1);
         projectSprintStore.saveSprint(sprint2);
-        assertFalse(sprintStore1.equals(projectSprintStore));
+        assertNotEquals(sprintStore1, projectSprintStore);
     }
 
     @Test
     @DisplayName("create task")
     void getActivitiesOfAProject() {
+        //Arrange
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
         Task taskTest = sprint1.getTaskstore().createTask("test");
         sprint1.getTaskstore().addTaskToTheList(taskTest);
         List<Task> taskList = new ArrayList<>();
-
+        //Act
         project2.getSprintStore().saveSprint(sprint1);
         taskList.add(taskTest);
-
-
+        //Assert
         assertEquals(taskList, project2.getSprintStore().getSprint(1).getListOfTasksOfASprint());
-
     }
 
 }

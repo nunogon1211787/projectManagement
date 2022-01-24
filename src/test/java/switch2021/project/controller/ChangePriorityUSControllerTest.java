@@ -1,14 +1,11 @@
 package switch2021.project.controller;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ChangePriorityUSControllerTest {
