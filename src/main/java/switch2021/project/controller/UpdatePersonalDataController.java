@@ -21,14 +21,10 @@ public class UpdatePersonalDataController {
     public UpdatePersonalDataController(Company company) { this.company = company; }
 
 
+    public SystemUser getUser(String email) {
+        return this.user= this.company.getSystemUserStore().getUserByEmail(email); }
 
-    public SystemUser getUser(String email) { return this.user= this.company.getSystemUserStore().getUserByEmail(email); }
-
-    public SystemUser updateSystemUserData(String username, String function, String photo) {
-        this.user.setAllData("username", "function", "photo", user);
-        this.user.setUserName(username);
-        this.user.setFunction(function);
-        this.user.setPhoto(photo);
-        return user;
+    public boolean updateSystemUserData(String username, String function, String photo) {
+        return this.user.setAllData(username, function, photo);
     }
 }

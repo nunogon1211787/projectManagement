@@ -128,15 +128,17 @@ public class SystemUser {
         }
     }
 
-    public SystemUser setAllData(String userName, String function, String photo, SystemUser user) {
+    public boolean setAllData(String userName, String function, String photo) {
+
+        boolean msg = false;
 
         if (checkAllData(userName, function, photo)) {
-            user.setUserName(userName);
-            user.setFunction(function);
-            user.setPhoto(photo);
-            return user;
+            this.userName = userName;
+            this.function = function;
+            this.photo = photo;
+            msg = true;
         }
-        return null;
+        return msg;
     }
 
     public boolean setActivateUser() {

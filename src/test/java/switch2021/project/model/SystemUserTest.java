@@ -197,10 +197,8 @@ class SystemUserTest {
         UserProfile tes = new UserProfile("ddd");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_123", tes);
-        //Act
-        SystemUser joana2 = joana.setAllData("Joana Silva", "Aluna_100", "img_900", joana);
-        // Act / Assert
-        assertEquals(joana, joana2);
+        //Act and Assert
+        assertTrue(joana.setAllData("Joana Silva", "Aluna_100", "img_900"));
     }
 
     @Test
