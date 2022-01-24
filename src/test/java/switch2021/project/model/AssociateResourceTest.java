@@ -166,7 +166,7 @@ public class AssociateResourceTest {
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project proj = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer, typo, sector, date, 7, 5000);
+        Project proj = company.getProjectStore().createProject( "prototype", "test56", customer, typo, sector, date, 7, 5000);
         company.getProjectStore().saveNewProject(proj);
 
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
@@ -177,7 +177,7 @@ public class AssociateResourceTest {
 //      Construtor AssociateResource Controller
         AssociateResourceController controllerTest = new AssociateResourceController(company);
         company.getSystemUserStore().saveSystemUser(newUser);
-        boolean result = controllerTest.associateResource("xxxx@isep.ipp.pt", "123testcode", startDateToAllocate, endDateToAllocate, 100, .2);
+        boolean result = controllerTest.associateResource("xxxx@isep.ipp.pt", "Project_2022_1", startDateToAllocate, endDateToAllocate, 100, .2);
 
         assertTrue(result);
 

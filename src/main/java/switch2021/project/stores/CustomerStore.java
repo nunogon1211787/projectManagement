@@ -12,7 +12,7 @@ public class CustomerStore {
      * Contains a Customer list
      **/
 
-    private List<Customer> customerList;
+    private final List<Customer> customerList;
 
     /**
      * Customer Store Constructor
@@ -28,7 +28,8 @@ public class CustomerStore {
      **/
 
     public Customer createCustomer(String name, String email) {
-        return new Customer(name,email);
+        long id = this.customerList.size()+1;
+        return new Customer(id, name,email);
     }
 
     /**
@@ -46,8 +47,9 @@ public class CustomerStore {
      **/
 
     public List<Customer> getArrayCustomer() {
-
-        return this.customerList;
+        List<Customer> copyList;
+        copyList = this.customerList;
+        return copyList;
     }
 
     public Customer getCustomerByName(String name) {
