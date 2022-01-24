@@ -51,7 +51,7 @@ public class ChangePriorityUSController {
         return this.userStoryList;
     }
 
-    public UserStory getUS(long idUS){
+    public UserStory getUS(int idUS){
         this.userStory = this.productBacklog.getUserStoryById(idUS);
         return this.userStory;
     }

@@ -1,15 +1,42 @@
 package switch2021.project.model;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.stores.ProjectStore;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductBacklogTest {
-    Project project;
+    Company company;
+    ProductBacklog productBacklog;
+    private Project proj;
+    private Project proj1;
+    private Project proj2;
+    private Project proj3;
+    private ProjectStore projectList;
+    private UserStory userStoryToRefine;
+
+    @BeforeEach
+    public void ini(){
+        company = new Company(); // sempre a mesma instancia
+        LocalDate date = LocalDate.of(2021, 12, 12);
+        company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
+        company.getCustomerStore().add(company.getCustomerStore().createCustomer("Teste", "Teste"));
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        proj = company.getProjectStore().createProject("123testcode", "prototype", "test56", customer,
+                typo, sector, date, 7, 5000);
+        company.getProjectStore().addProject(proj);
+        productBacklog = proj.getProductBacklog();
+        userStoryToRefine = productBacklog.createUserStory(company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do"),4,"123testtest");
+        productBacklog.saveUserStory(userStoryToRefine);
+    }
 
     @Test
     public void createUserStorySuccessFull() {
@@ -243,21 +270,24 @@ public class ProductBacklogTest {
         productBacklog.saveUserStory(userStory);
         UserStory userStory1 =productBacklog.createUserStory(new UserStoryStatus("Cancelled"), 3,"sort user story");
         productBacklog.saveUserStory(userStory1);
-        UserStory userStory2 =productBacklog.createUserStory(new UserStoryStatus("To do"),2,"backlog sorted");
+        UserStory userStory2 =productBacklog.createUserStory(new UserStoryStatus("To do"),1,"backlog sorted");
         productBacklog.saveUserStory(userStory2);
         UserStory userStory3 =productBacklog.createUserStory(new UserStoryStatus("In progress"),5,"show sorted");
         productBacklog.saveUserStory(userStory3);
+        UserStory userStory4 =productBacklog.createUserStory(new UserStoryStatus("To do"),0,"show US");
+        productBacklog.saveUserStory(userStory4);
 
         // Act
         List<UserStory> userStoryList =  productBacklog.getUsSortedByPriority();
 
         // Assert
-        assertEquals(4, userStoryList.size());
+        assertEquals(5, userStoryList.size());
 
-        assertEquals(2, userStoryList.get(0).getPriority());
+        assertEquals(1, userStoryList.get(0).getPriority());
         assertEquals(5, userStoryList.get(1).getPriority());
-        assertEquals(1, userStoryList.get(2).getPriority());
-        assertEquals(3, userStoryList.get(3).getPriority());
+        assertEquals(0, userStoryList.get(2).getPriority());
+        assertEquals(1, userStoryList.get(3).getPriority());
+        assertEquals(3, userStoryList.get(4).getPriority());
 
     }
 
@@ -281,6 +311,70 @@ public class ProductBacklogTest {
         });
         // Assert
         assertTrue(exception.getMessage().contains("Check priority, cannot be < 0 or superior to 5."));
+    }
+
+    @Test
+    @DisplayName("Create UserStory Refine Success")
+    public void createUserStoryRefineSucess(){
+        UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
+        UserStory userStory = new UserStory(userStoryToRefine, userStoryStatus, 5,"234test234");
+
+        assertEquals(userStory.getUserStoryStatus(),company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do"));
+        assertEquals(userStory.getParentUserStory(),userStoryToRefine);
+        assertEquals(userStory.getPriority(),5);
+        assertEquals(userStory.getDescription(),"234test234");
+
+    }
+    @Test
+    @DisplayName("Create UserStory Refine Fail - Description Empty")
+    public void createUserStoryRefineDescriptionIsEmptyFail(){
+        assertThrows(IllegalArgumentException.class, () -> {
+        UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
+        UserStory userStory = new UserStory(userStoryToRefine, userStoryStatus, 5,"");
+        });
+    }
+    @Test
+    @DisplayName("Create UserStory Refine Fail - Description too Short")
+    public void createUserStoryRefineDescriptiontooShortFail(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
+            UserStory userStory = new UserStory(userStoryToRefine, userStoryStatus, 5,"rd");
+        });
+    }
+    @Test
+    @DisplayName("Create/save UserStory Refine Fail - Description already Exist")
+    public void createUserStoryRefineDescriptionAlreadyExistFail(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
+            UserStory userStory = new UserStory(userStoryToRefine, userStoryStatus, 5,"123testtest");
+            productBacklog.saveUserStory(userStory);
+        });
+    }
+    @Test
+    @DisplayName("Create/save UserStory Refine Fail - Priority Low")
+    public void createUserStoryRefinePriorityLowFail(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
+            UserStory userStory = new UserStory(userStoryToRefine, userStoryStatus, -1,"456testtest");
+        });
+    }
+    @Test
+    @DisplayName("Create/save UserStory Refine Fail - Priority High")
+    public void createUserStoryRefinePriorityHighFail(){
+        assertThrows(IllegalArgumentException.class, () -> {
+            UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
+            UserStory userStory = new UserStory(userStoryToRefine, userStoryStatus, 6,"456testtest");
+        });
+    }
+    @Test
+    @DisplayName("get User Story By Id Success")
+    public void getUserStoryByIdSucess(){
+        assertEquals(userStoryToRefine,company.getProjectStore().getProductBacklog("123testcode").getUserStoryById(1));
+    }
+    @Test
+    @DisplayName("get User Story By Id Fail")
+    public void getUserStoryByIdFail(){
+        assertEquals(null,company.getProjectStore().getProductBacklog("123testcode").getUserStoryById(2));
     }
 
 }

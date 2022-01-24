@@ -15,9 +15,9 @@ public class CreateSprintControllerTest {
     @Test
     @DisplayName("To search a project")
     public void getProject() {
-
         //Arrange
-        Company company = App.getInstance().getCompany();
+        //Company company = App.getInstance().getCompany();
+        Company company = new Company();
 
         Project project;
 
@@ -37,7 +37,7 @@ public class CreateSprintControllerTest {
         Project project1 = controllerTest1.getProject(company, "123testcode");
         //Assert
         assertEquals(project, project1);
-        company.getProjectStore().removeProject(project);
+        //company.getProjectStore().removeProject(project);
     }
 
     @Test
@@ -71,6 +71,6 @@ public class CreateSprintControllerTest {
 
         //Assert
         assertEquals(sprint, proj.getSprintStore().getSprint(1));
-        company.getProjectStore().removeProject(proj);
+        //company.getProjectStore().removeProject(proj);
     }
 }

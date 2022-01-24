@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import java.util.Locale;
+import java.util.Objects;
 
 public class ProjectRole {
 
@@ -55,5 +56,10 @@ public class ProjectRole {
         if (o == null || getClass() != o.getClass()) return false;
         ProjectRole that = (ProjectRole) o;
         return (this.name.equals(that.name));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

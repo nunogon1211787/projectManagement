@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Getter @Setter
 public class Resource {
@@ -118,9 +119,7 @@ public class Resource {
      **/
     public boolean checkAllocationPeriod(LocalDate startDate, LocalDate endDate) {
         boolean msg = false;
-        if (startDate.isAfter(this.endDate) || endDate.isBefore(this.startDate)) {
-            msg = false;
-        } else if (startDate.isEqual(this.startDate) || startDate.isEqual(this.endDate) || endDate.isEqual(this.endDate) || endDate.isEqual(this.startDate)) {
+        if (startDate.isEqual(this.startDate) || startDate.isEqual(this.endDate) || endDate.isEqual(this.endDate) || endDate.isEqual(this.startDate)) {
             msg = true;
         } else if (startDate.isBefore(this.startDate) && endDate.isAfter(this.startDate)) {
             msg = true;
@@ -164,5 +163,10 @@ public class Resource {
                         (this.endDate.equals(that.getEndDate())) &&
                         (this.costPerHour == that.getCostPerHour()) &&
                         (this.percentageOfAllocation == that.getPercentageOfAllocation());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user,startDate,endDate,costPerHour,percentageOfAllocation);
     }
 }

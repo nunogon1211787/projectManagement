@@ -1,5 +1,7 @@
 package switch2021.project.model;
 
+import java.util.Objects;
+
 public class ProjectStatus {
 
     /**
@@ -41,7 +43,11 @@ public class ProjectStatus {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProjectStatus that = (ProjectStatus) o;
-
         return (this.description.equals(that.description));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description);
     }
 }

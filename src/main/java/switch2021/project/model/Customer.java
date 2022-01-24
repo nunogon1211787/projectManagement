@@ -1,5 +1,6 @@
 package switch2021.project.model;
 
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Customer {
@@ -61,6 +62,12 @@ public class Customer {
         if (o == null || getClass() != o.getClass()) return false;
         Customer that = (Customer) o;
 
-        return ((this.customerEmail.equals(that.customerEmail)) && (this.customerId ==that.customerId)  && (this.customerName.equals(that.customerName)));
+        return ((this.customerEmail.equals(that.customerEmail)) && (this.customerId ==that.customerId)  &&
+                (this.customerName.equals(that.customerName)));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(customerEmail,customerId,customerName);
     }
 }

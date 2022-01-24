@@ -51,27 +51,26 @@ class UserProfileTest {
     }*/
 
 
-    @Test
-    void isValidIdwith5Profile() {
-        //input
-        UserProfile test1 = new UserProfile("admin");
-        UserProfile test2 = new UserProfile("visitor");
-        UserProfile test3 = new UserProfile("guest");
-        UserProfile test4 = new UserProfile("user");
-        UserProfile test5 = new UserProfile("director");
-        int check1 = 0;
-        int check2 = 1;
-        int check3 = 2;
-        int check4 = 3;
-        int check5 = 4;
-        //Result
-        /**assertTrue(test1.isValidId(check1));
-        assertTrue(test2.isValidId(check2));
-        assertTrue(test3.isValidId(check3));
-        assertTrue(test4.isValidId(check4));
-        assertTrue(test5.isValidId(check5));
-         **/
-    }
+//    @Test
+//    void isValidIdwith5Profile() {
+//        //input
+//        UserProfile test1 = new UserProfile("admin");
+//        UserProfile test2 = new UserProfile("visitor");
+//        UserProfile test3 = new UserProfile("guest");
+//        UserProfile test4 = new UserProfile("user");
+//        UserProfile test5 = new UserProfile("director");
+//        int check1 = 0;
+//        int check2 = 1;
+//        int check3 = 2;
+//        int check4 = 3;
+//        int check5 = 4;
+//        //Result
+//        assertTrue(test1.isValidId(check1));
+//        assertTrue(test2.isValidId(check2));
+//        assertTrue(test3.isValidId(check3));
+//        assertTrue(test4.isValidId(check4));
+//        assertTrue(test5.isValidId(check5));
+//    }
 
     @Test
     void copyConstructorTestName() {
@@ -114,8 +113,12 @@ class UserProfileTest {
         assertEquals(test, copyTest);
     }
 
-    @Test
-    void isvalinameteste(){
-        UserProfile teste = new UserProfile("admin");
-    }
+
+    /* rever este teste */
+
+
+//    @Test
+//    void isvalinameteste(){
+//        UserProfile teste = new UserProfile("admin");
+//    }
 }

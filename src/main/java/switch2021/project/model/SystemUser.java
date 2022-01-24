@@ -4,6 +4,7 @@ import switch2021.project.stores.UserProfileStore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SystemUser {
 
@@ -412,6 +413,9 @@ public class SystemUser {
                 (this.function.equals(that.function)) && (this.activateUser == that.activateUser)
                 && (this.assignedProfileList.equals(that.assignedProfileList));
     }
-    //Este override foi feito expecíficamente para os teste... uma vez que os IDs da classe
-    // vão sempre seguir uma sequência! Aceito sugestões para melhorar isto...teste
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userName,email,photo,password,function,activateUser,assignedProfileList);
+    }
 }

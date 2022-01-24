@@ -25,16 +25,16 @@ public class ProductBacklog {
     }
 
     public List<UserStory> getActiveUserStoryList() {
-        List <UserStory> activeUSList = new ArrayList<>();
-        for (UserStory us : userStoryList){
-            if(!us.getUserStoryStatus().getDescription().equals("Completed")){
+        List<UserStory> activeUSList = new ArrayList<>();
+        for (UserStory us : userStoryList) {
+            if (!us.getUserStoryStatus().getDescription().equals("Completed")) {
                 activeUSList.add(us);
             }
         }
         return activeUSList;
     }
 
-    public UserStory getUserStoryById(long id) {
+    public UserStory getUserStoryById(int id) {
         UserStory userStory = null;
         for (UserStory us : userStoryList) {
             if (us.getId_UserStory() == id) {
@@ -61,9 +61,9 @@ public class ProductBacklog {
         return new UserStory(priority, description);
     }
 
-    public UserStory createUserStory(int userStoryId, UserStoryStatus userStoryStatus, int priority, String description) {
-        return new UserStory(userStoryId, userStoryStatus, priority, description);
-    }
+//    public UserStory createUserStory(int userStoryId, UserStoryStatus userStoryStatus, int priority, String description) {
+//        return new UserStory(userStoryId, userStoryStatus, priority, description);
+//    }
 
     public UserStory createUserStoryRefine(UserStory userStoryParent, UserStoryStatus userStoryStatus, int priority, String description) {
         return new UserStory(userStoryParent, userStoryStatus, priority, description);
@@ -124,17 +124,23 @@ public class ProductBacklog {
     public List<UserStory> getUsSortedByPriority() {
 
         List<UserStory> returnList = new LinkedList<>();
+        List<UserStory> noPriorityStories = new LinkedList<>();
         List<UserStory> closeAndDoneUserStories = new LinkedList<>();
 
         userStoryList.sort(Comparator.comparingInt(UserStory::getPriority));
 
         for (UserStory userStory : userStoryList) {
-            if(!userStory.getUserStoryStatus().getDescription().equals("Cancelled") && !userStory.getUserStoryStatus().getDescription().equals("Done")){
+            if (!userStory.getUserStoryStatus().getDescription().equals("Cancelled") &&
+                    !userStory.getUserStoryStatus().getDescription().equals("Done") &&
+                     userStory.getPriority()!=0) {
                 returnList.add(userStory);
-            } else{
+            } else if(userStory.getPriority()==0) {
+                noPriorityStories.add(userStory);
+            } else {
                 closeAndDoneUserStories.add(userStory);
             }
         }
+        returnList.addAll(noPriorityStories);
         returnList.addAll(closeAndDoneUserStories);
         userStoryList = returnList;
         return userStoryList;

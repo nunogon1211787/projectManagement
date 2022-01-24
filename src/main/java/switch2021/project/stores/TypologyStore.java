@@ -4,6 +4,7 @@ import switch2021.project.model.Typology;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class TypologyStore {
 
@@ -162,5 +163,10 @@ public class TypologyStore {
         if (!(obj instanceof UserProfileStore)) return false;
         TypologyStore that = (TypologyStore) obj;
         return (this.typologyList.equals(that.getTypologyList()));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(typologyList);
     }
 }
