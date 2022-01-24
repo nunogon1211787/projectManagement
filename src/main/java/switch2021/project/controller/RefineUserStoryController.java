@@ -34,8 +34,8 @@ public class RefineUserStoryController {
     public Project getProject(String projectCode){
         return this.project = projSt.getProjectByCode(projectCode);
     }
-    public ProductBacklog getProductBacklog(){
-        this.productBacklog = project.getProductBacklog();
+    public ProductBacklog getProductBacklog(String projectCode){
+        this.productBacklog = getProject(projectCode).getProductBacklog();
         return this.productBacklog;
     }
     public UserStory getUserStory(int idUserStory){
@@ -48,9 +48,9 @@ public class RefineUserStoryController {
         return true;
     }
 
-    public boolean createUserStory(UserStory userStoryParent, String description, int priority, UserStoryStatus userStoryStatus){
-        UserStory userStoryCreated = this.productBacklog.createUserStoryRefine(userStoryParent, userStoryStatus, priority, description);
-        this.productBacklog.saveUserStory(userStoryCreated);
+    public boolean createUserStory(String projectCode, UserStory userStoryParent, String description, int priority, UserStoryStatus userStoryStatus){
+        UserStory userStoryCreated = this.company.getProjectStore().getProjectByCode(projectCode).getProductBacklog().createUserStoryRefine(userStoryParent, userStoryStatus, priority, description);
+        this.company.getProjectStore().getProjectByCode(projectCode).getProductBacklog().saveUserStory(userStoryCreated);
         return true;
     }
 
