@@ -90,15 +90,11 @@ public class GetCurrentProjectListControllerTest {
         //Arrange
         GetCurrentProjectListController controller = new GetCurrentProjectListController();
         Company company = controller.getCompany();
-        //List<Project> list = company.getProjectStore().getProjectList();
-        //list.clear();
         ProjectStore projectStore = company.getProjectStore();
-
         projectStore.addProject(this.proj1);
         projectStore.addProject(this.proj2);
         projectStore.addProject(this.proj3);
         projectStore.addProject(this.currentProject);
-
         // Act
         List<Project> projectList = controller.getCurrentProjectListByUserEmail("manuelmartins@beaver.com");
         int sizeExpected = projectList.size();
@@ -127,32 +123,11 @@ public class GetCurrentProjectListControllerTest {
         GetCurrentProjectListController controller = new GetCurrentProjectListController();
         Company company = controller.getCompany();
         ProjectStore projectStore = company.getProjectStore();
-        ProjectTeamTest test = new ProjectTeamTest();
-
-        //ProjectList com o Project atual
         projectStore.addProject(this.currentProject);
-
-        //ProjectList local com o Project current (atual) a adicionar a projectListExpected
-        /*Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project currentProject = company.getProjectStore().createProject("proj4Code", "prototype4", "proj4Prototype", customer,
-                typo, sector, LocalDate.now().minusDays(7), 2, 4000);
-        currentProject.setEndDate(LocalDate.now().plusDays(7));
-
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDateMm = LocalDate.now().minusDays(7);
-        LocalDate endDateMm = LocalDate.now().plusDays(7);
-        Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, 100, 1);
-*/
-        //currentProject.getProjectTeam().addResourceToTeam(manuelmartins);
         // Act
         List<Project> projectListResult = controller.getCurrentProjectListByUserEmail("manuelmartins@beaver.com");
-
         List<Project> projectListExpected = new ArrayList<>();
         projectListExpected.add(this.currentProject);
-
         // Assert
         //verifica se o resource está na lista:
         assertTrue(projectListResult.get(0).hasProjectTeamMember("manuelmartins@beaver.com"));

@@ -90,10 +90,8 @@ public class GetProjectListControllerTest {
         GetProjectListController controller = new GetProjectListController();
         Company company = controller.getCompany();
         ProjectStore projectStore = company.getProjectStore();
-
         projectStore.addProject(this.proj1);
         projectStore.addProject(this.proj2);
-
         // Act
         List<Project> projectList = controller.getProjectList();
         int sizeExpected = projectList.size();
