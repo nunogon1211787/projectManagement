@@ -26,15 +26,17 @@ public class AssociateResourceTest {
         Typology typo = new Typology("typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
         Project proj1 = comTest.getProjectStore().createProject("1", "gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);
+        comTest.getProjectStore().saveNewProject(proj1);
 
             //user
         UserProfile pro = comTest.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "description", "gth","gth","", pro);
+        comTest.getSystemUserStore().saveSystemUser(newUser);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
 
             //Construtor Controller
-        AssociateResourceController controllerTest = new AssociateResourceController(comTest, proj1);
+        AssociateResourceController controllerTest = new AssociateResourceController(comTest);
         boolean result = controllerTest.associateResource("fase@gmail.com", "1", startDateToAllocate, endDateToAllocate, 100, .2);
 
         assertTrue(result);

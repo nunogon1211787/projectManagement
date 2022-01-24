@@ -19,14 +19,13 @@ public class RefineUserStoryController {
      */
     public RefineUserStoryController(){
         this.company = App.getInstance().getCompany();
-        this.projSt = null;
-        this.projectList = null;
     }
 
+    /**
+     * Constructor to test (without SINGLETON).
+     */
     public RefineUserStoryController(Company company){
         this.company = company;
-        this.projSt = null;
-        this.projectList = null;
     }
 
     public List<Project> getProjectList(){

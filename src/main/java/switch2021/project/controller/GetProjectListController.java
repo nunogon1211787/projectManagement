@@ -22,11 +22,6 @@ public class GetProjectListController {
      */
     public GetProjectListController(Company company){ this.company = company; }
 
-    public GetProjectListController(Company company) {
-        this.company = company;
-        this.projStore = null;
-        this.projectList = null;
-    }
 
     public List<Project> getProjectList() {
         this.projStore = this.company.getProjectStore();
