@@ -63,8 +63,9 @@ public class ProjectStatusStore {
      **/
 
     public List<ProjectStatus> getprojectStatusList() {
-
-        return this.projectStatusList;
+        List<ProjectStatus> copyList = new ArrayList<>();
+        copyList = this.projectStatusList;
+        return copyList;
     }
 
     public ProjectStatus getProjectStatusByDescription(String name) {

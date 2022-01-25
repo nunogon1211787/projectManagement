@@ -16,7 +16,7 @@ public class ChangePasswordControllerTest {
         SystemUser user = new SystemUser("Joana", "123@isep.ipp.pt",
                 "Aluna", "AAA", "AAA", "img_123", company.getUserProfileStore().getUserProfile("visitor"));
         //Act
-        company.getSystemUserStore().addSystemUser(user);
+        company.getSystemUserStore().saveSystemUser(user);
         //Assert
         assertTrue(user.updatePassword("AAA", "BBB"));
     }
@@ -28,7 +28,7 @@ public class ChangePasswordControllerTest {
         Company company = new Company();
         SystemUser user = new SystemUser("Joana", "123@isep.ipp.pt",
                 "Aluna", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("visitor"));
-        company.getSystemUserStore().addSystemUser(user);
+        company.getSystemUserStore().saveSystemUser(user);
         //Assert
         assertFalse(user.updatePassword("BBB", "CCC"));
     }

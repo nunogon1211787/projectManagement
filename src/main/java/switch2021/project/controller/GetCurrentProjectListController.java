@@ -10,7 +10,6 @@ import java.util.*;
 
 public class GetCurrentProjectListController {
     private Company company;
-    private ProjectStore projStore;
     private List<Project> currentProjectListByUser;
 
     /**
@@ -26,8 +25,8 @@ public class GetCurrentProjectListController {
 
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
-        this.projStore = this.company.getProjectStore();
-        this.currentProjectListByUser = this.projStore.getCurrentProjectListByUserEmail(email);
+        ProjectStore projStore = this.company.getProjectStore();
+        this.currentProjectListByUser = projStore.getCurrentProjectListByUserEmail(email);
         return this.currentProjectListByUser;
     }
 

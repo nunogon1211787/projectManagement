@@ -47,10 +47,6 @@ public class ProjectStore {
         this.projectList.add(proj);
     }
 
-    public void removeProject(Project proj) {
-        this.projectList.remove(proj);
-    }
-
     /**
      * Getters Methods
      **/

@@ -156,7 +156,7 @@ class CompanyTest {
         Company company = new Company();
         company.getUserProfileStore().populateDefault();
         SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", "12345","", company.getUserProfileStore().getUserProfile("visitor"));
-        company.getSystemUserStore().addSystemUser(joana);
+        company.getSystemUserStore().saveSystemUser(joana);
         //Act
         SystemUser joanasilva = company.getSystemUserStore().getUserByEmail("1235@isep.ipp.pt");
         //Assert
@@ -170,7 +170,7 @@ class CompanyTest {
         Company company = new Company();
         company.getUserProfileStore().populateDefault();
         SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", "12345","", company.getUserProfileStore().getUserProfile("visitor"));
-        company.getSystemUserStore().addSystemUser(joana);
+        company.getSystemUserStore().saveSystemUser(joana);
         //Act
         SystemUser joanasilva = company.getSystemUserStore().getUserByEmail("4321@ipp.pt");
         //Assert
@@ -196,7 +196,7 @@ class CompanyTest {
         assertTrue(c.getProjectStore().getProjectList().isEmpty());
     }
 
-/**
+/*
  * Teste do searchProject, ainda acabar
  * project
  * }
@@ -869,8 +869,8 @@ class CompanyTest {
 //        LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
 //        Resource resAllo2 = new Resource(newUser2, startDateToAllocate, endDateToAllocate, 100, .5);
 
-        /** project **/
-/**
+        /* project **/
+/*
     }
 
    /* @Test
