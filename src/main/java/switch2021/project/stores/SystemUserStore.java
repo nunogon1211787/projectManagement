@@ -14,7 +14,6 @@ public class SystemUserStore {
 
     //Constructor
     public SystemUserStore() {
-
         this.systemUserList = new ArrayList<>();
     }
 

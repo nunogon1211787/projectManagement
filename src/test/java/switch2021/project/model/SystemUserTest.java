@@ -444,6 +444,22 @@ class SystemUserTest {
             SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         });
     }
+        @Test
+        public void createSystemUserFailPasswordsNotMatch() {
+            //Assert
+            assertThrows(IllegalArgumentException.class, () -> {
+                //Arrange
+                String userName = "manueloliveira";
+                String email = "m";
+                String password = "ghi";
+                String passwordConfirmation = "abc";
+                String function = "tester";
+                String photo = "photo";
+                Company company = new Company();
+                UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+                SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+            });
+    }
 
 //    @Test
 //    void hasThisDataWithAll() {

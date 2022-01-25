@@ -30,8 +30,4 @@ public class RegisterUserController {
 
         return usersStore.saveSystemUser(user);
     }
-
-    public Company getCompany() {
-        return company;
-    }
 }

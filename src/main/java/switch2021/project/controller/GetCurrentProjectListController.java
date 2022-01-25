@@ -29,8 +29,4 @@ public class GetCurrentProjectListController {
         this.currentProjectListByUser = projStore.getCurrentProjectListByUserEmail(email);
         return this.currentProjectListByUser;
     }
-
-    public Company getCompany() {
-        return this.company;
-    }
 }

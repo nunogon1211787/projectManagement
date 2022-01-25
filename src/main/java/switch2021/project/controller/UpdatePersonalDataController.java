@@ -20,7 +20,6 @@ public class UpdatePersonalDataController {
      */
     public UpdatePersonalDataController(Company company) { this.company = company; }
 
-
     public SystemUser getUser(String email) {
         return this.user= this.company.getSystemUserStore().getUserByEmail(email); }
 

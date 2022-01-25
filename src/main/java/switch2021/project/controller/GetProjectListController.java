@@ -27,8 +27,4 @@ public class GetProjectListController {
         this.projectList = projStore.getProjectList();
         return this.projectList;
     }
-
-    public Company getCompany() {
-        return this.company;
-    }
 }

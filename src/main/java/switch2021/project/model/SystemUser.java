@@ -88,11 +88,9 @@ public class SystemUser {
         return activateUser;
     }
 
-    //está de acordo com o encapsulamento??
     public List<UserProfile> getAssignedProfileList() {
-        return assignedProfileList;
+        return new ArrayList<>(assignedProfileList);
     }
-
 
     /**
      * Setting Methods
@@ -144,12 +142,6 @@ public class SystemUser {
     public boolean setActivateUser() {
         return this.activateUser = true;
     }
-
-    //é suposto ter esse método? não quebra a regra de encapsulamento?
-    public void setAssignedProfileList(List<UserProfile> assignedProfileList) {
-        this.assignedProfileList = assignedProfileList;
-    }
-
 
     /**
      * Validation Methods
@@ -263,11 +255,6 @@ public class SystemUser {
         }
         return result;
     }
-
-    public boolean isYourName(String name) {
-        return this.userName.equals(name);
-    }
-
     /**
      * Method to validate if user as already has the profile requested
      */

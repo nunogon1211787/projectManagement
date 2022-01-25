@@ -148,7 +148,8 @@ public class GetCurrentProjectListControllerTest {
     @Test //size test empty
     public void getCurrentProjectListByUserEmailFailEmptyList() {
         //Arrange
-        GetCurrentProjectListController controller = new GetCurrentProjectListController();
+        Company company = new Company();
+        GetCurrentProjectListController controller = new GetCurrentProjectListController(company);
         // Act
         List<Project> projectList = controller.getCurrentProjectListByUserEmail("manuelmartins@beaver.com");
         // Assert
