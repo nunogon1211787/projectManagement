@@ -57,9 +57,9 @@ class ChangePriorityUSControllerTest {
         project.getProductBacklog().addUserStory(userStory);
         project.getProductBacklog().addUserStory(userStory2);
         project.getProductBacklog().addUserStory(userStory3);
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
-        company.getProjectStore().addProject(project3);
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
+        company.getProjectStore().saveNewProject(project3);
 
     }
     /*@Test//David tirei esta validação do método em ProjectStore que estás aqui a testar

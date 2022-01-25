@@ -31,8 +31,8 @@ public class ProductBacklogControllerTest {
     @DisplayName("check if the list size is correct")
     public void getProjectListByUserEmailWith2Projects() {
         //Arrange
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
 
@@ -48,8 +48,8 @@ public class ProductBacklogControllerTest {
     @DisplayName("get exception message  \"Email cannot be blank“;\n")
     public void getProjectListByUserEmailIsBlank() {
         //Arrange
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
 
@@ -67,8 +67,8 @@ public class ProductBacklogControllerTest {
     @DisplayName("get exception message  \"Email don't exist in system")
     public void getAllProjectListByUserEmailDontExist() {
         //Arrange
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
 
@@ -85,7 +85,7 @@ public class ProductBacklogControllerTest {
     @DisplayName("check the provided project is the correct")
     public void getProjectByCodeWithSuccess(){
         // Arrange
-        company.getProjectStore().addProject(this.project);
+        company.getProjectStore().saveNewProject(this.project);
         ProductBacklogController productBacklogController = new ProductBacklogController(company);
         // Act
         Project project = productBacklogController.getProject("Project_2022_1");
@@ -97,7 +97,7 @@ public class ProductBacklogControllerTest {
     @DisplayName("check the provided return null")
     public void getProjectByCodeFail(){
         // Arrange
-        company.getProjectStore().addProject(this.project);
+        company.getProjectStore().saveNewProject(this.project);
         ProductBacklogController productBacklogController = new ProductBacklogController(company);
         // Act
         Project project = productBacklogController.getProject("testcode");
@@ -109,7 +109,7 @@ public class ProductBacklogControllerTest {
     @DisplayName("grants a list of US that is sorted by priority. It keeps the done and/or cancelled US on the end\n")
     public void getSortedListWithSuccess(){
         // Arrange
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         UserStory userStory =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),2,"create user story");
         project.getProductBacklog().saveUserStory(userStory);
         UserStory userStory1 =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),1,"sort user story");
@@ -142,7 +142,7 @@ public class ProductBacklogControllerTest {
 
     public void getSortedListFailWrongPriority(){
         // Arrange
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         UserStory userStory =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),2,"create user story");
         project.getProductBacklog().saveUserStory(userStory);
         UserStory userStory1 =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),1,"sort user story");

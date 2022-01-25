@@ -111,9 +111,9 @@ public class AssociateResourceTest {
         Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, 100, .2);
 
         /** project list **/
-        projectList.addProject(proj1);
-        projectList.addProject(proj2);
-        projectList.addProject(proj3);
+        projectList.saveNewProject(proj1);
+        projectList.saveNewProject(proj2);
+        projectList.saveNewProject(proj3);
         proj1.addResource(resAllo1);
         proj3.addResource(resAllo1);
 
@@ -139,9 +139,9 @@ public class AssociateResourceTest {
         Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, 100, .2);
 
         /** project list **/
-        projectList.addProject(proj1);
-        projectList.addProject(proj2);
-        projectList.addProject(proj3);
+        projectList.saveNewProject(proj1);
+        projectList.saveNewProject(proj2);
+        projectList.saveNewProject(proj3);
         proj1.addResource(resAllo1);
         proj3.addResource(resAllo1);
 

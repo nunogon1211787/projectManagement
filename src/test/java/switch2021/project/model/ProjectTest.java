@@ -32,7 +32,7 @@ class ProjectTest {
 
         proj = company.getProjectStore().createProject( "prototype", "test1234", customer,
                 typo, sector, date, 7, 5000);
-        company.getProjectStore().addProject(proj);
+        company.getProjectStore().saveNewProject(proj);
     }
 
     @Test
@@ -209,7 +209,7 @@ class ProjectTest {
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
     ProjectStatus projectStatus = new ProjectStatus("ToStart");
-    Project project2 = new Project("1234testcode", "prototype", "test56", customer,
+    Project project2 = new Project( "prototype", "test56", customer,
             typo, sector, LocalDate.now(), projectStatus, 7, 5000);
     ProductBacklog productBacklog = project2.getProductBacklog();
 
@@ -289,12 +289,12 @@ class ProjectTest {
     @DisplayName("validate that list have results (not null) and check list size are correct")
     public void getProductBacklogWithResults() {
         // Arrange
-        company.getProjectStore().addProject(project2);
+        company.getProjectStore().saveNewProject(project2);
         productBacklog.addUserStory(userStory);
         productBacklog.addUserStory(userStory2);
         productBacklog.addUserStory(userStory3);
         // Act
-        ProductBacklog productBacklog = company.getProjectStore().getProjectByCode("1234testcode").getProductBacklog();
+        ProductBacklog productBacklog = company.getProjectStore().getProjectByCode("Project_2022_2").getProductBacklog();
         //Assert
         assertNotNull(productBacklog);
         assertEquals(3, productBacklog.getUserStoryList().size());

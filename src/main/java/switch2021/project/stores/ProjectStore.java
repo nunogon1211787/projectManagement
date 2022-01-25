@@ -1,13 +1,9 @@
 package switch2021.project.stores;
 
-import switch2021.project.controller.ProductBacklogController;
 import switch2021.project.model.*;
 import switch2021.project.utils.App;
-
-import javax.swing.plaf.PanelUI;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class ProjectStore {
@@ -35,16 +31,12 @@ public class ProjectStore {
 
         Company company = App.getInstance().getCompany();
 
-        String codeG = "Project_" + LocalDate.now().getYear() + "_" + (this.projectList.size()+1);
+
 
         ProjectStatus status = company.getProjectStatusStore().getProjectStatusByDescription("Planned");
 
-        return new Project(codeG, name, description, customer, typology, businessSector,
+        return new Project(name, description, customer, typology, businessSector,
                 startDate, status, numberOfSprints, budget);
-    }
-
-    public void addProject(Project proj) {
-        this.projectList.add(proj);
     }
 
     /**
@@ -80,15 +72,14 @@ public class ProjectStore {
         return projectList;
     }
 
-
     /**
      * Validation Methods
      **/
 
-    public boolean checkProjectExists(String code) {
+    public boolean checkProjectExists(Project project) {
 
         for (Project proj : projectList) {
-            if (proj.getCode().equalsIgnoreCase(code)) {
+            if (proj.equals(project)) {
                 return true;
             }
         }
@@ -100,11 +91,11 @@ public class ProjectStore {
         double sum = 0;
         boolean msg = false;
 
-        for (int i = 0; i < projectList.size(); i++) {
-            for (int j = 0; j < projectList.get(i).getProjectTeam().getProjectTeamList().size(); j++) {
-                if (projectList.get(i).getTeamMemberByIndex(j).getUser().equals(user) &&
-                        projectList.get(i).getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
-                    sum = sum + projectList.get(i).getTeamMemberByIndex(j).getPercentageOfAllocation();
+        for (Project project : projectList) {
+            for (int j = 0; j < project.getProjectTeam().getProjectTeamList().size(); j++) {
+                if (project.getTeamMemberByIndex(j).getUser().equals(user) &&
+                        project.getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
+                    sum = sum + project.getTeamMemberByIndex(j).getPercentageOfAllocation();
                 }
             }
         }
@@ -120,13 +111,15 @@ public class ProjectStore {
 
     public boolean saveNewProject(Project proj) {
         boolean status = false;
-        if (!checkProjectExists(proj.getCode())) {
-            addProject(proj);
+        String codeG = "Project_" + LocalDate.now().getYear() + "_" + (this.projectList.size()+1);
+        if (!checkProjectExists(proj)) {
+            proj.setCode(codeG);
+            this.projectList.add(proj);
+
             status = true;
         }
         return status;
     }
-
 
     public ProductBacklog getProductBacklog(String code) {
         if (code == null || code.trim().isEmpty()) {

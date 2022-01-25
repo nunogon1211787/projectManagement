@@ -86,7 +86,7 @@ class CompanyTest {
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
                 "Product Owner", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("Product Owne")));
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         // Act
         List<Project> projectList = company.getProjectStore().getProjectListWithPORight("123@isep.ipp.pt");
         //Assert
@@ -103,7 +103,7 @@ class CompanyTest {
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
                 "Product Owner", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("Product Owner")));
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         // Act
         ProductBacklog productBacklog = company.getProjectStore().getProductBacklog("Project_2022_1");
         //Assert
@@ -120,7 +120,7 @@ class CompanyTest {
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
                 "Product Owner", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("Product Owne")));
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
         ProductBacklog productBacklog = company.getProjectStore().getProductBacklog(null);
@@ -139,7 +139,7 @@ class CompanyTest {
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
                 "Product Owner", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("Product Owne")));
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             ProductBacklog productBacklog = company.getProjectStore().getProductBacklog("");

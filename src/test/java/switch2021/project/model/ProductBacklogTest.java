@@ -32,7 +32,7 @@ public class ProductBacklogTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         proj = company.getProjectStore().createProject( "prototype", "test56", customer,
                 typo, sector, date, 7, 5000);
-        company.getProjectStore().addProject(proj);
+        company.getProjectStore().saveNewProject(proj);
         productBacklog = proj.getProductBacklog();
         userStoryToRefine = productBacklog.createUserStory(company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do"),4,"123testtest");
         productBacklog.saveUserStory(userStoryToRefine);

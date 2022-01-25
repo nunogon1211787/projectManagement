@@ -21,7 +21,7 @@ class SprintBacklogTest {
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         ProjectStatus projectStatus = new ProjectStatus("ToStart");
-        Project project2 = new Project("1234testcode", "prototype", "test56", customer,
+        Project project2 = new Project( "prototype", "test56", customer,
                 typo, sector, LocalDate.now(), projectStatus, 7, 5000);
         UserStoryStatus status = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
         SprintBacklog sprintBacklog = new SprintBacklog();

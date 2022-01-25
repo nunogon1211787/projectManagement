@@ -22,10 +22,10 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
         ProjectStatus projectStatus = new ProjectStatus("ToStart");
-        Project project2 = new Project("1234testcode", "prototype", "test56", customer,
+        Project project2 = new Project("Project_test", "prototype",  customer,
                 typo, sector, LocalDate.now(), projectStatus, 7, 5000);
 
-        company.getProjectStore().addProject(project2);
+        company.getProjectStore().saveNewProject(project2);
 
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
         Task taskTest = sprint1.getTaskstore().createTask("test");
@@ -41,7 +41,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
 
         ViewStatusOfActivitiesInAProjectController viewStatusTester = new ViewStatusOfActivitiesInAProjectController(company);
 
-        viewStatusTester.getProjectByCode("1234testcode");
+        viewStatusTester.getProjectByCode("Project_2022_1");
         listTest = viewStatusTester.getListOfProjectActivities();
 
         assertEquals(listTest,project2.getSprintStore().getListOfAllAActivitiesOfAProject());

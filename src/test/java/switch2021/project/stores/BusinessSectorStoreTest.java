@@ -8,17 +8,21 @@ class BusinessSectorStoreTest {
 
     @Test
     void createBusinessSector() {
+
     }
 
     @Test
     void addBusinessSector() {
+
     }
 
     @Test
     void getBusinessSectorList() {
+
     }
 
     @Test
     void getBusinessSectorByDescription() {
+
     }
 }

@@ -32,7 +32,7 @@ public class CreateSprintControllerTest {
 
         project = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, date, 7, 5000);
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         //Act
         CreateSprintController controllerTest1 = new CreateSprintController(company);
         Project project1 = controllerTest1.getProject(company, "Project_2022_1");
@@ -63,7 +63,7 @@ public class CreateSprintControllerTest {
 
         proj.setSprintDuration(2);
 
-        company.getProjectStore().addProject(proj);
+        company.getProjectStore().saveNewProject(proj);
 
         CreateSprintController controllerTest1 = new CreateSprintController(company);
         controllerTest1.getProject(company, "Project_2022_1");
