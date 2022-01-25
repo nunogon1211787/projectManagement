@@ -57,6 +57,5 @@ public class AssignScrumMasterController {
         if(this.resource == getResource(email)){ msg=project.getProjectTeam().assignProjectRole(resource, startDateNextSprint, sprintDuration, role); }
 
         return msg;
-
     }
 }
