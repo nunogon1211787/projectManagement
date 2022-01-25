@@ -3,6 +3,7 @@ package switch2021.project.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintStore;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -354,6 +355,40 @@ class ProjectTest {
         taskList.add(taskTest);
         //Assert
         assertEquals(taskList, project2.getSprintStore().getSprint(1).getListOfTasksOfASprint());
+    }
+
+    @Test
+    @DisplayName("Validate Save Project")
+    void saveNewProject() {
+        //Arrange
+        ProjectStore store = new ProjectStore();
+        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2021, 11, 30));
+
+        store.saveNewProject(proj1);
+        store.saveNewProject(proj1);
+
+        assertEquals(1,store.getProjectList().size());
+    }
+
+    @Test
+    @DisplayName("Validate Save Project")
+    void saveNewProject_2() {
+        //Arrange
+        ProjectStore store = new ProjectStore();
+        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2021, 11, 30));
+
+        Project proj2 = company.getProjectStore().createProject( "prototype2", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2021, 11, 30));
+
+        store.saveNewProject(proj1);
+        store.saveNewProject(proj2);
+
+        assertEquals(2,store.getProjectList().size());
     }
 
 }
