@@ -3,6 +3,7 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
+import switch2021.project.model.dto.UserStoryDto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,26 +12,25 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductBacklogControllerTest {
 
-    Company company = new Company();
-    Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-    Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-    BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-    Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
-            typo, sector, LocalDate.now(), 7, 5000);
-    Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
-            typo, sector, LocalDate.now(), 7, 5000);
-    UserProfile userProfile = new UserProfile("zzz");
-    SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
-    LocalDate startDate = LocalDate.of(2021, 12, 31);
-    LocalDate endDate = LocalDate.of(2022, 1, 5);
-    Resource input = new Resource(newUser, startDate, endDate, 100, .5);
-    ProjectTeam projectTeam = new ProjectTeam();
-
-
     @Test
     @DisplayName("check if the list size is correct")
     public void getProjectListByUserEmailWith2Projects() {
         //Arrange
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        UserProfile userProfile = new UserProfile("zzz");
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        LocalDate startDate = LocalDate.of(2021, 12, 31);
+        LocalDate endDate = LocalDate.of(2022, 1, 5);
+        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        ProjectTeam projectTeam = new ProjectTeam();
+
         company.getProjectStore().addProject(project);
         company.getProjectStore().addProject(project2);
         project.addResource(input);
@@ -48,6 +48,21 @@ public class ProductBacklogControllerTest {
     @DisplayName("get exception message  \"Email cannot be blank“;\n")
     public void getProjectListByUserEmailIsBlank() {
         //Arrange
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        UserProfile userProfile = new UserProfile("zzz");
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        LocalDate startDate = LocalDate.of(2021, 12, 31);
+        LocalDate endDate = LocalDate.of(2022, 1, 5);
+        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        ProjectTeam projectTeam = new ProjectTeam();
+
         company.getProjectStore().addProject(project);
         company.getProjectStore().addProject(project2);
         project.addResource(input);
@@ -67,6 +82,21 @@ public class ProductBacklogControllerTest {
     @DisplayName("get exception message  \"Email don't exist in system")
     public void getAllProjectListByUserEmailDontExist() {
         //Arrange
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        UserProfile userProfile = new UserProfile("zzz");
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        LocalDate startDate = LocalDate.of(2021, 12, 31);
+        LocalDate endDate = LocalDate.of(2022, 1, 5);
+        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        ProjectTeam projectTeam = new ProjectTeam();
+
         company.getProjectStore().addProject(project);
         company.getProjectStore().addProject(project2);
         project.addResource(input);
@@ -85,30 +115,75 @@ public class ProductBacklogControllerTest {
     @DisplayName("check the provided project is the correct")
     public void getProjectByCodeWithSuccess(){
         // Arrange
-        company.getProjectStore().addProject(this.project);
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        UserProfile userProfile = new UserProfile("zzz");
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        LocalDate startDate = LocalDate.of(2021, 12, 31);
+        LocalDate endDate = LocalDate.of(2022, 1, 5);
+        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        ProjectTeam projectTeam = new ProjectTeam();
+
+        company.getProjectStore().addProject(project);
         ProductBacklogController productBacklogController = new ProductBacklogController(company);
         // Act
-        Project project = productBacklogController.getProject("Project_2022_1");
+        Project projectT = productBacklogController.getProject("Project_2022_1");
         // Assert
-        assertEquals(this.project,project);
+        assertEquals(projectT,project);
     }
 
     @Test
     @DisplayName("check the provided return null")
     public void getProjectByCodeFail(){
         // Arrange
-        company.getProjectStore().addProject(this.project);
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        UserProfile userProfile = new UserProfile("zzz");
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        LocalDate startDate = LocalDate.of(2021, 12, 31);
+        LocalDate endDate = LocalDate.of(2022, 1, 5);
+        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        ProjectTeam projectTeam = new ProjectTeam();
+
+        company.getProjectStore().addProject(project);
         ProductBacklogController productBacklogController = new ProductBacklogController(company);
         // Act
-        Project project = productBacklogController.getProject("testcode");
+        Project projectT = productBacklogController.getProject("testcode");
         // Assert
-        assertNull(project);
+        assertNull(projectT);
     }
 
     @Test
     @DisplayName("grants a list of US that is sorted by priority. It keeps the done and/or cancelled US on the end\n")
     public void getSortedListWithSuccess(){
         // Arrange
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        UserProfile userProfile = new UserProfile("zzz");
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        LocalDate startDate = LocalDate.of(2021, 12, 31);
+        LocalDate endDate = LocalDate.of(2022, 1, 5);
+        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        ProjectTeam projectTeam = new ProjectTeam();
+
         company.getProjectStore().addProject(project);
         UserStory userStory =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),2,"create user story");
         project.getProductBacklog().saveUserStory(userStory);
@@ -126,7 +201,7 @@ public class ProductBacklogControllerTest {
         ProductBacklogController productBacklogController = new ProductBacklogController(company);
         productBacklogController.getProjectListByUserEmail("cris@ipp.pt");
         productBacklogController.getProject("Project_2022_1");
-        List<UserStory> usSortedByPriority = productBacklogController.getUsSortedByPriority();
+        List<UserStoryDto> usSortedByPriority = productBacklogController.getUsSortedByPriority();
 
         // Assert
         assertEquals(4, usSortedByPriority.size());
@@ -142,6 +217,21 @@ public class ProductBacklogControllerTest {
 
     public void getSortedListFailWrongPriority(){
         // Arrange
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        UserProfile userProfile = new UserProfile("zzz");
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        LocalDate startDate = LocalDate.of(2021, 12, 31);
+        LocalDate endDate = LocalDate.of(2022, 1, 5);
+        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        ProjectTeam projectTeam = new ProjectTeam();
+
         company.getProjectStore().addProject(project);
         UserStory userStory =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),2,"create user story");
         project.getProductBacklog().saveUserStory(userStory);
@@ -161,7 +251,7 @@ public class ProductBacklogControllerTest {
         productBacklogController.getProject("123testcode");
             UserStory userStory3 =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),6,"show sorted");
             project.getProductBacklog().saveUserStory(userStory3);
-        List<UserStory> usSortedByPriority = productBacklogController.getUsSortedByPriority();
+        List<UserStoryDto> usSortedByPriority = productBacklogController.getUsSortedByPriority();
         });
         // Assert
         assertTrue(exception.getMessage().contains("Check priority, cannot be < 0 or superior to 5."));

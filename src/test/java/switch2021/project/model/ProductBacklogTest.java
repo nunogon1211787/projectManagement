@@ -201,15 +201,13 @@ public class ProductBacklogTest {
 
         UserStory userStory = productBacklog.createUserStory(
                 status, priority, description);
-        productBacklog.addUserStory(userStory);
-        productBacklog.addUserStory(userStory);
+        productBacklog.saveUserStory(userStory);
         UserStory userStory2 = productBacklog.createUserStory(
                 status, priority, description);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            productBacklog.addUserStory(userStory2);
             productBacklog.saveUserStory(userStory2);
-
+            productBacklog.saveUserStory(userStory);
         });
         // Assert
         assertTrue(exception.getMessage().contains("Repeated user story inserted, same code project and description."));
@@ -226,7 +224,7 @@ public class ProductBacklogTest {
         UserStory userStory = productBacklog.createUserStory(
                 status, priority, description);
         // Act
-        productBacklog.addUserStory(userStory);
+        productBacklog.saveUserStory(userStory);
         // Assert
         assertNotNull(userStory);
         assertEquals(status, userStory.getUserStoryStatus());

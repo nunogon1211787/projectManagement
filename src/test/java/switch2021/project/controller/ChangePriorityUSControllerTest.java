@@ -54,9 +54,9 @@ class ChangePriorityUSControllerTest {
     userStory = new UserStory(userStoryStatus, 2, "Fazer tal");
     userStory2 = new UserStory(userStoryStatus, 3, "Fazer tal e coiso");
     userStory3 = new UserStory(userStoryStatus, 4, "Fazer tal e coiso também");
-        project.getProductBacklog().addUserStory(userStory);
-        project.getProductBacklog().addUserStory(userStory2);
-        project.getProductBacklog().addUserStory(userStory3);
+        project.getProductBacklog().saveUserStory(userStory);
+        project.getProductBacklog().saveUserStory(userStory2);
+        project.getProductBacklog().saveUserStory(userStory3);
         company.getProjectStore().addProject(project);
         company.getProjectStore().addProject(project2);
         company.getProjectStore().addProject(project3);
@@ -199,7 +199,7 @@ class ChangePriorityUSControllerTest {
     void setPriorityCorrect() {
         project.addResource(input);
 
-        project.getProductBacklog().addUserStory(userStory3);
+     //   project.getProductBacklog().saveUserStory(userStory3);
 
         userStory3.setPriority(3);
 
@@ -211,7 +211,7 @@ class ChangePriorityUSControllerTest {
     void setPriorityInvalid() {
         project.addResource(input);
 
-        project.getProductBacklog().addUserStory(userStory3);
+     //   project.getProductBacklog().saveUserStory(userStory3);
 
         userStory3.setPriority(6);
 

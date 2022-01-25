@@ -32,11 +32,6 @@ public class CreateUserStoryController {
     }
 
 
-    //public CreateUserStoryController() {
-    //    this.company = App.getInstance().getCompany();
-  //  }
-
-
     public List<Project> getAllProjectListByUserEmail(String email) {
         this.projectStore = this.company.getProjectStore();
         this.arrayProject = this.projectStore.getProjectListByUserEmail(email);

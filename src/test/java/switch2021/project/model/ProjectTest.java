@@ -290,9 +290,9 @@ class ProjectTest {
     public void getProductBacklogWithResults() {
         // Arrange
         company.getProjectStore().addProject(project2);
-        productBacklog.addUserStory(userStory);
-        productBacklog.addUserStory(userStory2);
-        productBacklog.addUserStory(userStory3);
+        productBacklog.saveUserStory(userStory);
+        productBacklog.saveUserStory(userStory2);
+        productBacklog.saveUserStory(userStory3);
         // Act
         ProductBacklog productBacklog = company.getProjectStore().getProjectByCode("1234testcode").getProductBacklog();
         //Assert
