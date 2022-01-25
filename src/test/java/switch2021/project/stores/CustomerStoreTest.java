@@ -30,7 +30,7 @@ class CustomerStoreTest {
         Customer customer = store.createCustomer("teste","teste@teste.com");
         store.saveNewCustomer(customer);
 
-        assertEquals(customer, store.getArrayCustomer().get(0));
+        assertEquals(customer, store.getCustomerList().get(0));
     }
 
     @Test
@@ -42,7 +42,7 @@ class CustomerStoreTest {
         List<Customer> list = new ArrayList<>();
         list.add(customer);
 
-        assertEquals(list,store.getArrayCustomer());
+        assertEquals(list,store.getCustomerList());
     }
 
     @Test
@@ -69,11 +69,11 @@ class CustomerStoreTest {
         Customer customer = store.createCustomer("teste","teste@teste.com");
         store.saveNewCustomer(customer);
 
-        store.getArrayCustomer().get(0).setCustomerEmail("setemail");
-        store.getArrayCustomer().get(0).setCustomerName("setname");
+        store.getCustomerList().get(0).setCustomerEmail("setemail");
+        store.getCustomerList().get(0).setCustomerName("setname");
 
-        assertEquals("setname",store.getArrayCustomer().get(0).getCustomerName());
-        assertEquals("setemail",store.getArrayCustomer().get(0).getCustomerEmail());
+        assertEquals("setname",store.getCustomerList().get(0).getCustomerName());
+        assertEquals("setemail",store.getCustomerList().get(0).getCustomerEmail());
     }
 
     @Test
@@ -82,7 +82,7 @@ class CustomerStoreTest {
         Customer customer = store.createCustomer("teste","teste@teste.com");
         store.saveNewCustomer(customer);
 
-        assertEquals(customer.hashCode(),store.getArrayCustomer().get(0).hashCode());
+        assertEquals(customer.hashCode(),store.getCustomerList().get(0).hashCode());
     }
 
     @Test
@@ -94,5 +94,38 @@ class CustomerStoreTest {
         Customer customerTest = new Customer("teste","teste@teste.com");
         customerTest.setCustomerId(1);
         assertEquals(customerTest,customer);
+    }
+
+    @Test
+    void encapsulationtest() {
+        CustomerStore store = new CustomerStore();
+        Customer customer = store.createCustomer("teste","teste@teste.com");
+        store.saveNewCustomer(customer);
+
+        List<Customer> customerTest = store.getCustomerList();
+
+        assertNotEquals(customerTest.hashCode(),customer.hashCode());
+    }
+
+    @Test
+    void validateCustomerTrue() {
+        CustomerStore store = new CustomerStore();
+        Customer customer = store.createCustomer("teste","teste@teste.com");
+        store.saveNewCustomer(customer);
+
+        Customer customerTest = store.createCustomer("teste","teste@teste.com");
+
+        assertTrue(store.validateCustomer(customerTest));
+    }
+
+    @Test
+    void validateCustomerFalse() {
+        CustomerStore store = new CustomerStore();
+        Customer customer = store.createCustomer("teste","teste@teste.com");
+        store.saveNewCustomer(customer);
+
+        Customer customerTest = store.createCustomer("teste2","teste2@teste.com");
+
+        assertFalse(store.validateCustomer(customerTest));
     }
 }

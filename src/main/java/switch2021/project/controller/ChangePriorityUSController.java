@@ -1,5 +1,6 @@
 package switch2021.project.controller;
 
+import lombok.Getter;
 import switch2021.project.model.Company;
 import switch2021.project.model.ProductBacklog;
 import switch2021.project.model.Project;
@@ -8,10 +9,11 @@ import switch2021.project.stores.ProjectStore;
 import switch2021.project.utils.App;
 
 import java.util.List;
+@Getter
 
 public class ChangePriorityUSController {
 
-    private Company company;
+    private final Company company;
     private ProjectStore projectStore;
     private Project project;
     private ProductBacklog productBacklog;
@@ -19,18 +21,39 @@ public class ChangePriorityUSController {
     List<Project> arrayProject;
     List<UserStory> userStoryList;
 
-    /**
-     * Constructor to UI (with SINGLETON).
-     */
-    public ChangePriorityUSController(){
-        this.company = App.getInstance().getCompany();
-    }
+//    /**
+//     * Constructor to UI (with SINGLETON).
+//     */
+//    public ChangePriorityUSController(){
+//        this.company = App.getInstance().getCompany();
+//    }
 
     /**
      * Constructor to test (without SINGLETON).
      */
     public ChangePriorityUSController(Company company){
         this.company = company;
+    }
+
+
+    public ProjectStore getProjectStore (){
+        this.projectStore = company.getProjectStore();
+        return this.projectStore;
+    }
+
+    public Project getProject (String code){
+        this.project = company.getProjectStore().getProjectByCode(code);
+        return this.project;
+    }
+
+    public ProductBacklog getProductBacklog (){
+        this.productBacklog = this.project.getProductBacklog();
+        return this.productBacklog;
+    }
+
+    public UserStory getUserStory (int id){
+        this.userStory = this.productBacklog.getUserStoryById(id);
+        return this.userStory;
     }
 
 

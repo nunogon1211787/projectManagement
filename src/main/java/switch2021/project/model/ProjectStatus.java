@@ -1,7 +1,12 @@
 package switch2021.project.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Objects;
 
+@Getter
+@Setter
 public class ProjectStatus {
 
     /**
@@ -18,20 +23,6 @@ public class ProjectStatus {
 
     public ProjectStatus(String description) {
         this.description = description;
-    }
-
-
-    /**
-     * Getters and Setters
-     **/
-
-    public String getDescription() {
-        return description;
-    }
-
-    public ProjectStatus setDescription(String description) {
-        this.description = description;
-        return null;
     }
 
     /**
