@@ -17,7 +17,6 @@ public class ChangePriorityUSControllerTest {
     private Project project;
     private Project project2;
     private Project project3;
-    private ProjectStore projectStore;
     private Resource input;
     private Resource input2;
     private UserStory userStory;

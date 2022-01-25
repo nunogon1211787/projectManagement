@@ -21,12 +21,20 @@ public class ChangePriorityUSController {
     List<Project> arrayProject;
     List<UserStory> userStoryList;
 
+//    /**
+//     * Constructor to UI (with SINGLETON).
+//     */
+//    public ChangePriorityUSController(){
+//        this.company = App.getInstance().getCompany();
+//    }
+
     /**
-     * Constructor to UI (with SINGLETON).
+     * Constructor to test (without SINGLETON).
      */
-    public ChangePriorityUSController(){
-        this.company = App.getInstance().getCompany();
+    public ChangePriorityUSController(Company company){
+        this.company = company;
     }
+
 
     public ProjectStore getProjectStore (){
         this.projectStore = company.getProjectStore();
@@ -46,15 +54,6 @@ public class ChangePriorityUSController {
     public UserStory getUserStory (int id){
         this.userStory = this.productBacklog.getUserStoryById(id);
         return this.userStory;
-    }
-
-
-
-    /**
-     * Constructor to test (without SINGLETON).
-     */
-    public ChangePriorityUSController(Company company){
-        this.company = company;
     }
 
 
