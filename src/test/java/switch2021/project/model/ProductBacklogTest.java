@@ -372,7 +372,9 @@ public class ProductBacklogTest {
     @Test
     @DisplayName("get User Story By Id Fail")
     public void getUserStoryByIdFail(){
-        assertEquals(null,company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryById(2));
+        assertNull(company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryById(2));
     }
+
+
 
 }

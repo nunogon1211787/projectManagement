@@ -61,7 +61,7 @@ public class CustomerStore {
      * Métodos Getter e Setter
      **/
 
-    public List<Customer> getArrayCustomer() {
+    public List<Customer> getCustomerList() {
         return new ArrayList<>(customerList);
     }
 
