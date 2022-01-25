@@ -43,12 +43,9 @@ public class CreateUserStoryController {
         return this.project;
     }
 
-
-
     public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
         ProductBacklog productBacklog = this.project.getProductBacklog();
         UserStory userStory = productBacklog.createUserStory(userStoryStatus, priority, description);
         return productBacklog.saveUserStory(userStory);
     }
-
 }
