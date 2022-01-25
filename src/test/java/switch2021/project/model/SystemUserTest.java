@@ -72,9 +72,9 @@ class SystemUserTest {
         UserProfile tes = new UserProfile("ddd");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "HELLO", "HELLO", "png_123", tes);
         //Act
-        joana.updatePassword("HELLO", "GOODBYE");
+        joana.updatePassword("HELLO", "ghi", "ghi");
         //Assert
-        assertEquals("GOODBYE", joana.getPassword());
+        assertEquals("ÊËÌ", joana.getPassword());
     }
 
     @Test
@@ -87,111 +87,12 @@ class SystemUserTest {
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
                 "HELLO_01", "HELLO_01", "png_123", tes);
         //Act
-        assertFalse(joana.updatePassword("HELLO_02", "GOODBYE"));
+        assertFalse(joana.updatePassword("HELLO_02", "GOODBYE", "GOODBYE"));
 
     }
 
     @Test
-    public void setPasswordSucess() {
-
-        //Arrange
-        UserProfile tes = new UserProfile("ddd");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", "123", "img_123", tes);
-        //Act
-        joana.setPassword("123");
-        //Assert
-        assertEquals(joana.getPassword(), "123");
-    }
-
-    @Test
-    public void setPasswordFail() {
-
-        //Arrange
-        UserProfile tes = new UserProfile("ddd");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", "123", "img_123", tes);
-        //Act
-        joana.setPassword("123");
-        //Assert
-        assertNotEquals(joana.getPassword(), "321");
-    }
-
-
-    @Test
-    public void setUserNameSucess() {
-
-        //Arrange
-        UserProfile tes = new UserProfile("ddd");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", "123", "img_123", tes);
-        //Act
-        joana.setUserName("Joana");
-        //Assert
-        assertEquals(joana.getUserName(), "Joana");
-    }
-
-    @Test
-    public void setUserNameFail() {
-
-        //Arrange
-        UserProfile tes = new UserProfile("ddd");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", "123", "img_123", tes);
-        //Act
-        joana.setUserName("Joana");
-        //Assert
-        assertNotEquals(joana.getUserName(), "Isabel");
-    }
-
-    @Test
-    public void setFunctionSucess() {
-
-        //Arrange
-        UserProfile tes = new UserProfile("ddd");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", "123", "img_123", tes);
-        //Act
-        joana.setFunction("Aluna_10");
-        //Assert
-        assertEquals(joana.getFunction(), "Aluna_10");
-    }
-
-    @Test
-    public void setFuncionFail() {
-
-        //Arrange
-        UserProfile tes = new UserProfile("ddd");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "123", "123", "img_123", tes);
-        //Act
-        joana.setFunction("Aluna_10");
-        //Assert
-        assertNotEquals(joana.getFunction(), "Project Manager");
-    }
-
-    @Test
-    public void setPhotoSucess() {
-
-        //Arrange
-        UserProfile tes = new UserProfile("ddd");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
-                "123", "123", "img_789", tes);
-        //Act
-        joana.setPhoto("img_789");
-        //Assert
-        assertEquals(joana.getPhoto(), "img_789");
-    }
-
-    @Test
-    public void setPhotoFail() {
-
-        //Arrange
-        UserProfile tes = new UserProfile("ddd");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
-                "123", "123", "img_789", tes);
-        //Act
-        joana.setPhoto("img_789");
-        //Assert
-        assertNotEquals(joana.getPhoto(), "img_000");
-    }
-
-    @Test
-    public void setAllDataSucess() {
+    public void setAllDataSuccess() {
 
         //Arrange
         UserProfile tes = new UserProfile("ddd");

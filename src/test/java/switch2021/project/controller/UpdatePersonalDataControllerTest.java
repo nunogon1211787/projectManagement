@@ -15,7 +15,8 @@ public class UpdatePersonalDataControllerTest {
         //Arrange
         Company company = new Company();
         SystemUser joana = new SystemUser("Joana", "123@isep.pt",
-                "Aluna", "AAA","AAA","img_123", new UserProfile("TTT"));
+                "Aluna", "AAA","AAA","img_123",
+                new UserProfile("TTT"));
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
         company.getSystemUserStore().saveSystemUser(joana);
         //Act
@@ -25,11 +26,12 @@ public class UpdatePersonalDataControllerTest {
     }
 
     @Test
-    public void updateSystemUserData() {
+    public void updateSystemUserDataSuccess() {
         //Arrange
         Company company = new Company();
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
-        SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "AAA","AAA","img_123", new UserProfile("TTT"));
+        SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "AAA",
+                "AAA","img_123", new UserProfile("TTT"));
         company.getSystemUserStore().saveSystemUser(user1);
         //Act
         controllerTest.getUser("123@isep.ipp.pt");
@@ -38,19 +40,46 @@ public class UpdatePersonalDataControllerTest {
     }
 
     @Test
-    public void updateSystemUserWithWrongEmail() {
+    public void updateSystemUserWithWrongUserName() {
         //Arrange
         Company company = new Company();
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
-        SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "AAA","AAA","img_12", new UserProfile("TTT"));
+        SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "AAA",
+                "AAA","img_12", new UserProfile("TTT"));
         company.getSystemUserStore().saveSystemUser(user1);
-        controllerTest.getUser("123@isep.ipp.pt");
-        boolean user = controllerTest.updateSystemUserData("Joana Isabel Silva", "Aluna_numero10", "imagem_300");
         //Act
-        SystemUser expected = new SystemUser("Joana", "123@isep.ipp.pt",
-                "Aluna", "AAA","AAA","img_12", new UserProfile("TTT"));
+        controllerTest.getUser("123@isep.ipp.pt");
         //Assert
-        assertNotEquals(user, expected);
+        assertTrue(controllerTest.updateSystemUserData("Jo", "Aluna_numero10", "imagem_300"));
     }
+
+    @Test
+    public void updateSystemUserWithWrongFunction() {
+        //Arrange
+        Company company = new Company();
+        UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
+        SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "AAA",
+                "AAA","img_12", new UserProfile("TTT"));
+        company.getSystemUserStore().saveSystemUser(user1);
+        //Act
+        controllerTest.getUser("123@isep.ipp.pt");
+        //Assert
+        assertTrue(controllerTest.updateSystemUserData("Joana Isabel Silva", "Al", "imagem_300"));
+    }
+
+    @Test
+    public void updateSystemUserWithWrongPhoto() {
+        //Arrange
+        Company company = new Company();
+        UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
+        SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "AAA",
+                "AAA","img_12", new UserProfile("TTT"));
+        company.getSystemUserStore().saveSystemUser(user1);
+        //Act
+        controllerTest.getUser("123@isep.ipp.pt");
+        //Assert
+        assertTrue(controllerTest.updateSystemUserData("Joana Isabel Silva", "Aluna_numero10", "im"));
+    }
+
 }
 

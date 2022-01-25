@@ -69,7 +69,7 @@ public class SprintStore {
     /**
      * Add and Remove Sprint Methods. Adds or remove a Sprint object to the Sprint List
      **/
-    public boolean addSprint(Sprint sprint) {
+    private boolean addSprint(Sprint sprint) {
         if (!validateId_Sprint(sprint)) {
             sprint.setId_Sprint(id_SprintGenerator());
         }
