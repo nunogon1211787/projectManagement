@@ -195,24 +195,24 @@ public class SystemUser {
      **/
     public String encryptPassword(String password) {
         int codigoASCII;
-        String result = "";
+        StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < password.length(); i++) {
             codigoASCII = password.charAt(i) + 99;
-            result += (char) codigoASCII;
+            stringBuilder.append((char) codigoASCII);
         }
-        return result;
+        return stringBuilder.toString();
     }
 
     public String decryptPassword(String password) {
         int codigoASCII;
-        String result = "";
+        StringBuilder stringBuilder = new StringBuilder();
 
         for (int i = 0; i < password.length(); i++) {
             codigoASCII = password.charAt(i) - 99;
-            result += (char) codigoASCII;
+            stringBuilder.append((char) codigoASCII);
         }
-        return result;
+        return stringBuilder.toString();
     }
 
 
