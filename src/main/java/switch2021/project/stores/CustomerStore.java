@@ -47,9 +47,7 @@ public class CustomerStore {
      **/
 
     public List<Customer> getArrayCustomer() {
-        List<Customer> copyList;
-        copyList = this.customerList;
-        return copyList;
+        return new ArrayList<>(customerList);
     }
 
     public Customer getCustomerByName(String name) {

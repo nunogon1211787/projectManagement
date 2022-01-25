@@ -53,4 +53,13 @@ class CustomerStoreTest {
 
         assertEquals(customer,store.getCustomerByName("teste"));
     }
+
+    @Test
+    void getCustomerByName_null() {
+        CustomerStore store = new CustomerStore();
+        Customer customer = store.createCustomer("teste","teste@teste.com");
+        store.add(customer);
+
+        assertNull(store.getCustomerByName("null"));
+    }
 }

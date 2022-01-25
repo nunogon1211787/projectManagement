@@ -51,4 +51,13 @@ class BusinessSectorStoreTest {
 
         assertEquals(sector, store.getBusinessSectorByDescription("teste"));
     }
+
+    @Test
+    void getBusinessSectorByDescription_Null() {
+        BusinessSectorStore store = new BusinessSectorStore();
+        BusinessSector sector = new BusinessSector("teste");
+        store.addBusinessSector(sector);
+
+        assertNull( store.getBusinessSectorByDescription("null"));
+    }
 }
