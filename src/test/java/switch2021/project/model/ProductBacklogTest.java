@@ -367,12 +367,12 @@ public class ProductBacklogTest {
     @Test
     @DisplayName("get User Story By Id Success")
     public void getUserStoryByIdSucess(){
-        assertEquals(userStoryToRefine,company.getProjectStore().getProductBacklog("Project_2022_1").getUserStoryById(1));
+        assertEquals(userStoryToRefine,company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryById(1));
     }
     @Test
     @DisplayName("get User Story By Id Fail")
     public void getUserStoryByIdFail(){
-        assertEquals(null,company.getProjectStore().getProductBacklog("Project_2022_1").getUserStoryById(2));
+        assertEquals(null,company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryById(2));
     }
 
 }

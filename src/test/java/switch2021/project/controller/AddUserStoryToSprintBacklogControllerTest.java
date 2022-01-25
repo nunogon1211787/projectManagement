@@ -26,9 +26,9 @@ public class AddUserStoryToSprintBacklogControllerTest {
         project.getSprintStore().saveSprint(sprint);
 
         company.getProjectStore().saveNewProject(project);
-        UserStory userStory = company.getProjectStore().getProductBacklog("Project_2022_1").createUserStory( new UserStoryStatus("TODO"),
+        UserStory userStory = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createUserStory( new UserStoryStatus("TODO"),
                 1, "Fazer coisas cool");
-        company.getProjectStore().getProductBacklog("Project_2022_1").saveUserStory(userStory);
+        company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().saveUserStory(userStory);
 
         //Act
         AddUserStoryToSprintBacklogController addStory = new AddUserStoryToSprintBacklogController(company);

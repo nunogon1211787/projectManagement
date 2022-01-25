@@ -3,7 +3,6 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
-import switch2021.project.model.dto.UserStoryDto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -202,7 +201,7 @@ public class ProductBacklogControllerTest {
         ProductBacklogController productBacklogController = new ProductBacklogController(company);
         productBacklogController.getProjectListByUserEmail("cris@ipp.pt");
         productBacklogController.getProject("Project_2022_1");
-        List<UserStoryDto> usSortedByPriority = productBacklogController.getUsSortedByPriority();
+        List<UserStory> usSortedByPriority = productBacklogController.getUsSortedByPriority();
 
         // Assert
         assertEquals(4, usSortedByPriority.size());
@@ -251,7 +250,7 @@ public class ProductBacklogControllerTest {
         productBacklogController.getProject("123testcode");
             UserStory userStory3 =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),6,"show sorted");
             project.getProductBacklog().saveUserStory(userStory3);
-        List<UserStoryDto> usSortedByPriority = productBacklogController.getUsSortedByPriority();
+        List<UserStory> usSortedByPriority = productBacklogController.getUsSortedByPriority();
         });
         // Assert
         assertTrue(exception.getMessage().contains("Check priority, cannot be < 0 or superior to 5."));
