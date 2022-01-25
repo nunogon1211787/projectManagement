@@ -56,22 +56,6 @@ public class ProjectStore {
         return null;
     }
 
-    public List<Project> getProjectListWithPORight(String email) {
-        List<Project> projectList = new ArrayList<>();
-        if (email == null || email.trim().isEmpty()) {
-            throw new IllegalArgumentException("Invalid email inserted");
-        }
-        for (Project project : this.projectList) {
-            if (project.getProductOwner() != null && email.equals(project.getProductOwner().getEmail())) {
-                projectList.add(project);
-            }
-        }
-        if (projectList.isEmpty()) {
-            throw new IllegalArgumentException("Dont recognise email");
-        }
-        return projectList;
-    }
-
     /**
      * Validation Methods
      **/
