@@ -9,7 +9,6 @@ import java.util.List;
 
 public class GetProjectListController {
     private Company company;
-    private ProjectStore projStore;
     private List<Project> projectList;
 
     /**
@@ -24,8 +23,8 @@ public class GetProjectListController {
 
 
     public List<Project> getProjectList() {
-        this.projStore = this.company.getProjectStore();
-        this.projectList = this.projStore.getProjectList();
+        ProjectStore projStore = this.company.getProjectStore();
+        this.projectList = projStore.getProjectList();
         return this.projectList;
     }
 

@@ -43,7 +43,7 @@ class SystemUserTest {
         SystemUserStore systemUserStore = company.getSystemUserStore();
         SystemUser user = new SystemUser("xxx","xxx@isep.ipp.pt","tester", "123456" , "123456", "img_123", userProfileStore.getUserProfile(0));
         //Act
-        systemUserStore.addSystemUser(user);
+        systemUserStore.saveSystemUser(user);
         // Assert
         assertTrue(user.updateProfile(userProfileStore.getUserProfile(0), userProfileStore.getUserProfile(1)));
     }

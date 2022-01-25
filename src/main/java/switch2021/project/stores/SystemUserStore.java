@@ -19,32 +19,14 @@ public class SystemUserStore {
     }
 
     public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor) {
-        SystemUser user;
-        //try {
-        user = new SystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);
-        // } catch (IllegalArgumentException e) {
-        //e.getMessage();
-        // user = null;
-        // }
-        return user;
-    }
-
-    /**
-     * Add Method
-     **/
-
-    public boolean addSystemUser(SystemUser syUser) {
-        this.systemUserList.add(syUser);
-        return true;
+        return new SystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);
     }
 
     /**
      * Getter Methods
      */
     public List<SystemUser> getSystemUserList() {
-        List<SystemUser> copyList = new ArrayList<>(this.systemUserList);
-
-        return copyList;
+        return new ArrayList<>(this.systemUserList);
     }
 
     public SystemUser getUserByEmail(String email) {
@@ -116,7 +98,7 @@ public class SystemUserStore {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof UserProfileStore)) return false;
+        if (!(obj instanceof SystemUserStore)) return false;
         SystemUserStore that = (SystemUserStore) obj;
         return (this.systemUserList.equals(that.systemUserList));
     }
@@ -125,4 +107,5 @@ public class SystemUserStore {
     public int hashCode() {
         return Objects.hash(systemUserList);
     }
+
 }

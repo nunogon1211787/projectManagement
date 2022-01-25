@@ -7,10 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RegisterUserControllerTest {
-    @Test
+
+    @Test //create and save a new user
     void createSystemUserSuccess() {
         //Arrange
-        RegisterUserController controller = new RegisterUserController();
+        Company company = new Company();
+        RegisterUserController controller = new RegisterUserController(company);
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
         String password = "ghi";
@@ -21,17 +23,19 @@ public class RegisterUserControllerTest {
         assertTrue(controller.createSystemUser(userName, email, function, password, passwordConfirmation, photo));
     }
 
-    @Test
+    @Test //check fail username input value is empty
     void createSystemUserFailUserNameIsEmpty() {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
+            Company company = new Company();
+            RegisterUserController controller = new RegisterUserController(company);
             String userName = "";
             String email = "manueloliveira@beaver.com";
             String password = "ghi";
             String passwordConfirmation = "ghi";
             String function = "tester";
             String photo = "photo";
-            RegisterUserController controller = new RegisterUserController();
+
             controller.createSystemUser(userName, email, function, photo, password, passwordConfirmation);
         });
     }

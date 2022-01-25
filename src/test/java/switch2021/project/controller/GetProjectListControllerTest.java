@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GetProjectListControllerTest {
-
+/*
     private Project proj1;
     private Project proj2;
     private Project proj3;
@@ -82,27 +82,34 @@ public class GetProjectListControllerTest {
         proj3.getProjectTeam().addResourceToTeam(manueljose);
         proj3.getProjectTeam().addResourceToTeam(manueloliveira);
         currentProject.getProjectTeam().addResourceToTeam(manuelmartins);
-    }
+    }*/
 
-    @Test
+    @Test //size test with 2 projects
     public void getProjectListSizeSuccessWith2Projects() {
         //Arrange
         Company company = new Company();
         GetProjectListController controller = new GetProjectListController(company);
-        ProjectStore projectStore = company.getProjectStore();
-        projectStore.addProject(this.proj1);
-        projectStore.addProject(this.proj2);
-        // Act
-        List<Project> projectList = controller.getProjectList();
-        int sizeExpected = projectList.size();
-        // Assert
-        assertEquals(2, sizeExpected);
 
-        projectStore.removeProject(this.proj1);
-        projectStore.removeProject(this.proj2);
+        ProjectStore projectStore = company.getProjectStore();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2021, 11, 30));
+        projectStore.saveNewProject(proj1);
+        Project proj2 = company.getProjectStore().createProject( "prototype2", "proj2Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
+        proj2.setEndDate(LocalDate.of(2021, 11, 30));
+                projectStore.saveNewProject(proj2);
+        // Act
+        List<Project> projectListActual = controller.getProjectList();
+        int sizeActual = projectListActual.size();
+        // Assert
+        assertEquals(2, sizeActual);
     }
 
-    @Test
+    @Test //size test empty
     public void getProjectListSizeSuccessEmptyList() {
         //Arrange
         Company company = new Company();
@@ -113,26 +120,26 @@ public class GetProjectListControllerTest {
         assertTrue(projectList.isEmpty());
     }
 
-    @Test
+    @Test // check both lists are equal
     public void getProjectListSuccessCorrectList() {
         //Arrange
         Company company = new Company();
         GetProjectListController controller = new GetProjectListController(company);
-        ProjectStore p = company.getProjectStore();
-        p.addProject(this.proj3);
-        // Act
-        List<Project> projectListResult = controller.getProjectList();
+
+        ProjectStore projectStore = company.getProjectStore();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+        Project proj3 = company.getProjectStore().createProject( "prototype3", "proj3Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
+        proj3.setEndDate(LocalDate.of(2021, 11, 30));
+        projectStore.saveNewProject(proj3);
 
         List<Project> projectListExpected = new ArrayList<>();
-        projectListExpected.add(this.proj3);
+        projectListExpected.add(proj3);
+        // Act
+        List<Project> projectListActual = controller.getProjectList();
         // Assert
-        //verifica se o resource está na lista:
-        assertTrue(projectListResult.get(0).hasProjectTeamMember("manueloliveira@beaver.com"));
-        //verifica se têm a mesma ProjectTeam:
-        assertEquals(projectListExpected.get(0).getProjectTeam(), projectListResult.get(0).getProjectTeam());
-        //verifica se têm o mesmo Project:
-        assertEquals(projectListResult.indexOf(0), projectListExpected.indexOf(0));
-
-        p.removeProject(this.proj3);
+        assertEquals(projectListExpected,projectListActual);
     }
 }

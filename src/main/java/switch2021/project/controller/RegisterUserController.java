@@ -7,8 +7,6 @@ import switch2021.project.utils.App;
 
 public class RegisterUserController {
     private Company company;
-    private SystemUserStore usersSstore;
-    private UserProfileStore profilesStore;
     private SystemUser user;
 
 
