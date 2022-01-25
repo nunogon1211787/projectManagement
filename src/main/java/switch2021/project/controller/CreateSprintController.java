@@ -12,38 +12,48 @@ import java.util.List;
 
 public class CreateSprintController {
     private Company company;
-    private Project project;
+    private Project proj;
     private ProjectStore projectStore;
     private SprintStore sprintStore;
     private Sprint sprint;
+    private List<Project> currentProjectListByUser;
 
     /**
      * Constructor to UI (with SINGLETON).
      */
-    public CreateSprintController(){ this.company = App.getInstance().getCompany();}
+    public CreateSprintController() {
+        this.company = App.getInstance().getCompany();
+    }
 
     /**
      * Constructor to test (without SINGLETON).
      */
-    public CreateSprintController(Company company) { this.company = company; }
-
+    public CreateSprintController(Company company) {
+        this.company = company;
+    }
 
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
-        ProjectStore projectstore = company.getProjectStore();
-        return projectstore.getCurrentProjectListByUserEmail(email);
+        this.projectStore = company.getProjectStore();
+        this.currentProjectListByUser = projectStore.getCurrentProjectListByUserEmail(email);
+        return this.currentProjectListByUser;
     }
 
-    public Project getProject(Company company, String code) {
-        return this.project = company.getProjectStore().getProjectByCode(code);
+    public Project getProject(String code) {
+        this.proj = this.projectStore.getProjectByCode(code);
+        return this.proj;
     }
 
     public Sprint createSprint(String name, LocalDate startDate) {
-        return this.sprint = this.project.getSprintStore().createSprint(name, startDate,this.project.getSprintDuration());
+        this.sprintStore = this.proj.getSprintStore();
+        int sprintDuration = this.proj.getSprintDuration();
+
+        this.sprint = sprintStore.createSprint(name, startDate, sprintDuration);
+        return this.sprint;
     }
 
-    public boolean saveSprint(Sprint sprint) {
-        return this.project.getSprintStore().saveSprint(this.sprint);
+    public boolean saveSprint() {
+        return this.sprintStore.saveSprint(this.sprint);
     }
 }
 
