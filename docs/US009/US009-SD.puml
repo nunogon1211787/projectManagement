@@ -1,35 +1,58 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title US013 - As Administrator, I want to create user profiles
+title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
 
 autoactivate on
 autonumber
 
-actor "Admistrator" as User
-participant ":{CreateUserProfile}UI" as System
-participant ":{CreateUserProfile}Controller" as Ctrl
+actor "Product Owner" as User
+participant ": CreateUserStoryUI" as System
+participant ": CreateUserStoryController" as Ctrl
 participant ": Company" as C1
-participant " userProfileStore : UserProfileStore" as C2
-participant "up : UserProfile" as C3
-
+participant " projStore : ProjectStore" as C2
+participant "projectListByUser : List <Project>" as C2.1
+participant "proj : Project" as C3
+participant ": ProductBacklog" as C4
+participant "us : UserStory" as C5
 
 activate User
 
-User -> System: Request creation of a user profile
-System --> User: Show form (name)
-User -> System: Send request data in form
-System -> Ctrl: createUserProfile(name)
-Ctrl -> C1: getUserProfileStore()
-C1-->Ctrl: userProfileStore
-Ctrl-> C2 : createUserProfile(name)
-C2 -> C3 ** : create (name)
-C2-->Ctrl : up
-Ctrl->C2 : saveUserProfile(up)
-C2->C2 : validateUserProfile (up)
-C2->C2 : addUserProfile (up)
-C2--> Ctrl : true
-Ctrl--> System : true
-System--> User : Informs operation success
+User -> System: Get list of project where is associated
+System -> Ctrl: getProjectListByUserEmail(email)
+Ctrl -> C1: getProjectStore()
+C1 --> Ctrl: projStore
+Ctrl -> C2: getProjectListByUserEmail(email)
+ loop for each know project
+C2 -> C2.1 ** : createProjectList
+end
+
+C2 --> Ctrl: projectListByUser
+Ctrl --> System: projectListByUser
+System --> User : Shows projectList to select project
+
+User -> System: Choose project
+System -> Ctrl: getProject(code)
+Ctrl -> C2 : getProjectByCode(code)
+C2 --> Ctrl : proj
+Ctrl --> System : proj
+System --> User :Shows project information
+
+User -> System: Starting creating a user story (status, priority, description)
+System ->Ctrl: createUserStory(status, priority, description)
+Ctrl -> C3 : getProductBacklog()
+C3-->Ctrl : productBacklog
+Ctrl->C4: createUserStory(status, priority, description)
+C4->C4:isValidUserStory(status, priority, description)
+C4 -> C5 ** : create(status, priority, description)
+C4-->Ctrl: us
+Ctrl->C4 : saveUserStory(us)
+C4->C4 : validateUserStory(us)
+C4->C4 : addUserStory(us)
+C4-->Ctrl : true
+Ctrl-->System:true
+System--> User:shows us data created
+
+
 
 @enduml

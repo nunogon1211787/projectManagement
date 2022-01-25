@@ -7,15 +7,14 @@ autoactivate on
 autonumber
 
 actor "PO/SM/TeamMember" as User
-participant ":{ProductBacklog}UI" as System
-participant ":{ProductBacklog}Controller" as Ctrl
+participant ": ProductBacklogUI" as System
+participant ": ProductBacklogController" as Ctrl
 participant ": Company" as C1
 participant "projStore : ProjectStore" as C2
 participant "projectListByUser : List <Project>" as C2.1
 participant "proj : Project" as C3
 participant "productBacklog : ProductBacklog" as C4
 participant "userStoryList : LinkedList <UserStory>" as C4.1
-participant ": {UserStory}DTO" as DTO
 
 activate User
 
@@ -43,7 +42,7 @@ System --> User :Shows project information
 User -> System: Access product backlog
 System -> Ctrl: getUsSortedByPriority()
 Ctrl-> C3 : getProductBacklog()
-C3 --> Ctrl : getProductBacklog
+C3 --> Ctrl : productBacklog
 Ctrl -> C4 : getUsSortedByPriority()
 C4 -> C4.1 ** : createProjectList
 C4-->Ctrl : userStoryList
