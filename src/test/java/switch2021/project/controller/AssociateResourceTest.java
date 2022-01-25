@@ -22,7 +22,7 @@ public class AssociateResourceTest {
             //Project
         //List<Project> testProjectList = comTest.getArrayProj();
         LocalDate startProjectDate = LocalDate.of(2021, 2, 25);
-        Customer cust = new Customer(1,"ght@gmail.com","Name");
+        Customer cust = new Customer("ght@gmail.com","Name");
         Typology typo = new Typology("typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
         Project proj1 = comTest.getProjectStore().createProject( "gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);

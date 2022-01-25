@@ -77,22 +77,10 @@ public class ProductBacklog {
     public boolean saveUserStory(UserStory userStory) {
         if (!validateUserStory(userStory)) {
             throw new IllegalArgumentException("Repeated user story inserted, same code project and description.");
-        } else {
-            userStory.setId_UserStory(id_UserStoryGenerator());
         }
-        return addUserStory(userStory);
-    }
-
-    /**
-     * Methods for addUserStory to the productBacklog (Cris US009)
-     **/
-
-    public boolean addUserStory(UserStory us) {
-        if (validateIdUserStory(us)) {
-            this.userStoryList.add(us);
-        } else {
-            us.setId_UserStory(id_UserStoryGenerator());
-            this.userStoryList.add(us);
+        if (validateIdUserStory(userStory)) {
+            userStory.setId_UserStory(id_UserStoryGenerator());
+            this.userStoryList.add(userStory);
         }
         return true;
     }
@@ -133,9 +121,9 @@ public class ProductBacklog {
         for (UserStory userStory : userStoryList) {
             if (!userStory.getUserStoryStatus().getDescription().equals("Cancelled") &&
                     !userStory.getUserStoryStatus().getDescription().equals("Done") &&
-                     userStory.getPriority()!=0) {
+                    userStory.getPriority() != 0) {
                 returnList.add(userStory);
-            } else if(userStory.getPriority()==0) {
+            } else if (userStory.getPriority() == 0) {
                 noPriorityStories.add(userStory);
             } else {
                 closeAndDoneUserStories.add(userStory);

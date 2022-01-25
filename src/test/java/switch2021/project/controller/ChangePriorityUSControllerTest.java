@@ -1,14 +1,16 @@
 package switch2021.project.controller;
 
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ChangePriorityUSControllerTest {
+public class ChangePriorityUSControllerTest {
 
     private Company company;
     private Project project;
@@ -28,12 +30,16 @@ class ChangePriorityUSControllerTest {
     private SystemUser newUser2;
     private UserStoryStatus userStoryStatus;
 
+
+
     @BeforeEach
     void ChangePriorityUSControllerTestWorld(){
+
+
     LocalDate startDate2 = LocalDate.of(2022, 12, 31);
     LocalDate startDate3 = LocalDate.of(2022, 12, 31);
     company = new Company();
-    typo = company.getTypologyStore().getTypology("Fixed Cost");
+    typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
     customer = company.getCustomerStore().getCustomerByName("ISEP");
     sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
     project = company.getProjectStore().createProject( "prototype2", "test56", customer,
@@ -54,168 +60,232 @@ class ChangePriorityUSControllerTest {
     userStory = new UserStory(userStoryStatus, 2, "Fazer tal");
     userStory2 = new UserStory(userStoryStatus, 3, "Fazer tal e coiso");
     userStory3 = new UserStory(userStoryStatus, 4, "Fazer tal e coiso também");
-        project.getProductBacklog().addUserStory(userStory);
-        project.getProductBacklog().addUserStory(userStory2);
-        project.getProductBacklog().addUserStory(userStory3);
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
-        company.getProjectStore().addProject(project3);
+        project.getProductBacklog().saveUserStory(userStory);
+        project.getProductBacklog().saveUserStory(userStory2);
+        project.getProductBacklog().saveUserStory(userStory3);
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
+        company.getProjectStore().saveNewProject(project3);
+        project.addResource(input);
+        project2.addResource(input);
 
     }
-    /*@Test//David tirei esta validação do método em ProjectStore que estás aqui a testar
-        // pois o email já está no sistema não é introduzido pelo utilizador, logo já foi validado quando foi criado o user.
-    void getCurrentProjectListByUserEmailIsInvalid() {
-        assertThrows(IllegalArgumentException.class, () -> {//Arrange
-            company.getProjectStore().addProject(project);
-            company.getProjectStore().addProject(project2);
-            project.addResource(input);
-            project2.addResource(input);
-
-            // Act
-            List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("batatinhacartoon.com");
-            // Assert
-
-        });
-    }*/
 
     @Test
-    void getCurrentProjectListByUserEmailSizeTest() {
+    void getCurrentProjectListByUserEmailSuccess(){
         //Arrange
-        project.addResource(input);
-        project2.addResource(input);
+        ChangePriorityUSController change = new ChangePriorityUSController(company);
 
         // Act
-        List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("batatinha@cartoon.com");
-        // Assert
-        assertEquals(2, projectList.size());
+        List<Project> expected = change.getCurrentProjectListByUserEmail("batatinha@cartoon.com");
+        List<Project> actual = new ArrayList<>();
+            actual.add(project);
+            actual.add(project2);
 
+        // Assert
+        assertEquals(expected, actual);
     }
 
     @Test
-    void getCurrentProjectListByUserEmailOnlyActiveTest() {
+    void getProjectByCodeSuccess(){
         //Arrange
-
-        project.addResource(input);
-        project2.addResource(input);
-        LocalDate endDate = LocalDate.of(2021,1,2);
-        company.getProjectStore().getProjectByCode("Project_2022_1").setEndDate(endDate);
-
+        ChangePriorityUSController change = new ChangePriorityUSController(company);
 
         // Act
-        List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("batatinha@cartoon.com");
-        // Assert
-        assertEquals(1, projectList.size());
+        Project expected = project;
+        Project actual = change.getProjectByCode(project.getCode());
 
+        // Assert
+        assertEquals(expected, actual);
 
     }
 
     @Test
-    void getCurrentProjectListByUserEmailCorrectList() {
+    void getUserStoryListSuccess(){
         //Arrange
-
-        LocalDate endDate = LocalDate.of(2021,1,2);
-        company.getProjectStore().getProjectByCode("Project_2022_1").setEndDate(endDate);
-        project.addResource(input);
-        project2.addResource(input);
-        project3.addResource(input);
-
+        ChangePriorityUSController change = new ChangePriorityUSController(company);
+        change.getProject(project.getCode());
         // Act
-        List<Project> projectList2 = new ArrayList<>();
-                projectList2.add(project2);
-                projectList2.add(project3);
-        List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("batatinha@cartoon.com");
-        // Assert
-        assertEquals(projectList, projectList2);
+        List<UserStory> expected = change.getUserStoryList();
+        List<UserStory> actual = new ArrayList<>();
+        actual.add(userStory);
+        actual.add(userStory2);
+        actual.add(userStory3);
 
+        // Assert
+        assertEquals(expected, actual);
     }
 
     @Test
-    void getProjectByCodeTest() {
-        project.addResource(input);
-        project2.addResource(input);
+    void getUSSuccess(){
+        //Arrange
+        ChangePriorityUSController change = new ChangePriorityUSController(company);
+        change.getProject(project.getCode());
+        change.getProductBacklog();
         // Act
-        Project project3 = company.getProjectStore().getProjectByCode("Project_2022_1");
+        UserStory expected = userStory2;
+        UserStory actual = change.getUS(userStory2.getId_UserStory());
+
         // Assert
-        assertEquals(project,project3);
+        assertEquals(expected, actual);
     }
 
-        // TESTE AINDA NÃO FUNCIONA PORQUE O CODE DO PROJECT NAO TA VALIDADO
+    @Test
+    void setPrioritySuccess(){
+        //Arrange
+        ChangePriorityUSController change = new ChangePriorityUSController(company);
+        change.getProject(project.getCode());
+        change.getProductBacklog();
+        change.getUserStory(userStory.getId_UserStory());
+
+        // Act
+        change.setPriority(4);
+        int expected = 4;
+        int actual = userStory.getPriority();
+
+        // Assert
+        assertEquals(expected, actual);
+    }
+
+//
+//
 //    @Test
-//    void getCurrentProjectByInvalidCode() {
-//        assertThrows(IllegalArgumentException.class, () -> {//Arrange
-//            company.getProjectStore().addProject(project);
-//            company.getProjectStore().addProject(project2);
-//            project.addResource(input);
-//            project2.addResource(input);
+//    void getCurrentProjectListByUserEmailSizeTest() {
+//        //Arrange
+//        project.addResource(input);
+//        project2.addResource(input);
 //
-//            // Act
-//            Project project3 = company.getProjectStore().getProjectByCode("");
-//            // Assert
-//
-//        });
+//        // Act
+//        List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("batatinha@cartoon.com");
+//        // Assert
+//        assertEquals(2, projectList.size());
 //    }
-
-    @Test
-    void getUserStoryListFromProjectCorrect() {
-        project.addResource(input);
-
-        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryList();
-
-        assertEquals(usList,this.project.getProductBacklog().getUserStoryList());
-    }
-
-    @Test
-    void getUserStoryListFromProjectSizeTest() {
-        project.addResource(input);
-
-        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryList();
-
-//        assertArrayEquals(usList, this.);
-        assertEquals(3,usList.size());
-    }
-
-    @Test
-    void getUserStoryListFromProjectOnlyActive() {
-        project.addResource(input);
-
-        UserStoryStatus usStatus2 = new UserStoryStatus("Completed");
-        userStory3.setUserStoryStatus(usStatus2);
-
-        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getActiveUserStoryList();
-
-        assertEquals(2,usList.size());
-    }
-
+//
 //    @Test
-//    void getUSCorrect() {
+//    void getCurrentProjectListByUserEmailOnlyActiveTest() {
+//        //Arrange
+//
+//        project.addResource(input);
+//        project2.addResource(input);
+//        LocalDate endDate = LocalDate.of(2021,1,2);
+//        company.getProjectStore().getProjectByCode("Project_2022_1").setEndDate(endDate);
+//
+//
+//        // Act
+//        List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("batatinha@cartoon.com");
+//        // Assert
+//        assertEquals(1, projectList.size());
+//    }
+//
+//    @Test
+//    void getCurrentProjectListByUserEmailCorrectList() {
+//        //Arrange
+//
+//        LocalDate endDate = LocalDate.of(2021,1,2);
+//        company.getProjectStore().getProjectByCode("Project_2022_1").setEndDate(endDate);
+//        project.addResource(input);
+//        project2.addResource(input);
+//        project3.addResource(input);
+//
+//        // Act
+//        List<Project> projectList2 = new ArrayList<>();
+//                projectList2.add(project2);
+//                projectList2.add(project3);
+//        List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("batatinha@cartoon.com");
+//        // Assert
+//        assertEquals(projectList, projectList2);
+//
+//    }
+//
+//    @Test
+//    void getProjectByCodeTest() {
+//        project.addResource(input);
+//        project2.addResource(input);
+//        // Act
+//        Project project3 = company.getProjectStore().getProjectByCode("Project_2022_1");
+//        // Assert
+//        assertEquals(project,project3);
+//    }
+//
+//        // TESTE AINDA NÃO FUNCIONA PORQUE O CODE DO PROJECT NAO TA VALIDADO
+////    @Test
+////    void getCurrentProjectByInvalidCode() {
+////        assertThrows(IllegalArgumentException.class, () -> {//Arrange
+////            company.getProjectStore().addProject(project);
+////            company.getProjectStore().addProject(project2);
+////            project.addResource(input);
+////            project2.addResource(input);
+////
+////            // Act
+////            Project project3 = company.getProjectStore().getProjectByCode("");
+////            // Assert
+////
+////        });
+////    }
+//
+//    @Test
+//    void getUserStoryListFromProjectCorrect() {
+//
 //        project.addResource(input);
 //
-//        UserStory us1 = project.getProductBacklog().getUserStoryById(23);
+//        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryList();
 //
-//        assertEquals(userStory2,us1);
+//        assertEquals(usList,this.project.getProductBacklog().getUserStoryList());
 //    }
-
-    @Test
-    void setPriorityCorrect() {
-        project.addResource(input);
-
-        project.getProductBacklog().addUserStory(userStory3);
-
-        userStory3.setPriority(3);
-
-        assertEquals(3,userStory3.getPriority());
-
-    }
-
-    @Test
-    void setPriorityInvalid() {
-        project.addResource(input);
-
-        project.getProductBacklog().addUserStory(userStory3);
-
-        userStory3.setPriority(6);
-
-        assertEquals(4,userStory3.getPriority());
-
-    }
+//
+//    @Test
+//    void getUserStoryListFromProjectSizeTest() {
+//        project.addResource(input);
+//
+//        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryList();
+//
+////        assertArrayEquals(usList, this.);
+//        assertEquals(3,usList.size());
+//    }
+//
+//    @Test
+//    void getUserStoryListFromProjectOnlyActive() {
+//        project.addResource(input);
+//
+//        UserStoryStatus usStatus2 = new UserStoryStatus("Completed");
+//        userStory3.setUserStoryStatus(usStatus2);
+//
+//        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getActiveUserStoryList();
+//
+//        assertEquals(2,usList.size());
+//    }
+//
+//    //        TEST NOT WORKING SINCE US ID GENERATOR IS NOT WORKING PROPERLY
+////    @Test
+////    void getUSCorrect() {
+////        project.addResource(input);
+////
+////        UserStory us1 = project.getProductBacklog().getUserStoryById(2);
+////
+////        assertEquals(userStory2,us1);
+////    }
+//
+//    @Test
+//    void setPriorityCorrect() {
+//        project.addResource(input);
+//
+//     //   project.getProductBacklog().saveUserStory(userStory3);
+//
+//        userStory3.setPriority(3);
+//
+//        assertEquals(3,userStory3.getPriority());
+//
+//    }
+//
+//    @Test
+//    void setPriorityInvalid() {
+//        project.addResource(input);
+//
+//     //   project.getProductBacklog().saveUserStory(userStory3);
+//
+//        userStory3.setPriority(6);
+//
+//        assertEquals(4,userStory3.getPriority());
+//
+//    }
 }

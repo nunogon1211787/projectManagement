@@ -95,31 +95,24 @@ public class SystemUser {
     /**
      * Setting Methods
      **/
-    public void setUserName(String userName) {
+    private void setUserName(String userName) {
         if (!userName.trim().isEmpty() || !(userName.length() < 2)) {
             this.userName = userName;
         }
     }
 
-    public void setEmail(String email) {
-        if (!email.trim().isEmpty() || !(email.length() < 2)) {
-            this.email = email;
-        }
-    }
-
-    public void setFunction(String function) {
+    private void setFunction(String function) {
         if (!function.trim().isEmpty() || !(function.length() < 2)) {
             this.function = function;
         }
     }
 
-    public void setPassword(String password) {
-        if (!password.trim().isEmpty() || !(password.length() < 2)) {
-            this.password = password;
-        }
+    private void setPassword(String password) {
+        checkPasswordRules(password);
+        this.password = encryptPassword(password);
     }
 
-    public void setPhoto(String photo) {
+    private void setPhoto(String photo) {
 
         if (!photo.trim().isEmpty()) {
             this.photo = photo;
@@ -131,9 +124,9 @@ public class SystemUser {
         boolean msg = false;
 
         if (checkAllData(userName, function, photo)) {
-            this.userName = userName;
-            this.function = function;
-            this.photo = photo;
+            setUserName(userName);
+            setFunction(function);
+            setPhoto(photo);
             msg = true;
         }
         return msg;
@@ -146,7 +139,7 @@ public class SystemUser {
     /**
      * Validation Methods
      **/
-    //// Verificar se se pode implementar apenas um metodo de validação ****
+
     private void checkUserNameRules(String userName) {
         if (userName.trim().isEmpty())
             throw new IllegalArgumentException("Username cannot be empty.");
@@ -363,24 +356,22 @@ public class SystemUser {
         return result;
     }
 
-    /*
+    /**
      * Method to update old password with the new password
-     */
+     **/
+    public boolean updatePassword(String oldPasswordUI, String newPassword, String newPasswordConfirmation) {
+        boolean msg = false;
 
-    /*
-     * Method to update old password with the new password
-     */
-    public boolean updatePassword(String oldpasswordUI, String newpassword) {
-
-        if (validateOldPassword(oldpasswordUI)) {
-            setPassword(newpassword);
-            checkPasswordRules(newpassword);
-            encryptPassword(newpassword);
-        } else {
-            return false;
+        if (validateOldPassword(oldPasswordUI) && newPassword.equals(newPasswordConfirmation)) {
+            setPassword(newPassword);
+            msg = true;
         }
-        return true;
+        return msg;
     }
+
+    /**
+     * Method to validate the oldpassword from the UI with thew old password from the System User
+     **/
 
     private boolean validateOldPassword(String oldpasswordUI) {
 

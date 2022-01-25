@@ -1,7 +1,12 @@
 package switch2021.project.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Objects;
 
+@Getter
+@Setter
 public class BusinessSector {
 
     /**
@@ -17,18 +22,6 @@ public class BusinessSector {
      **/
 
     public BusinessSector(String description) {
-        this.description = description;
-    }
-
-    /**
-     * Getter and Setter
-     **/
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
     }
 

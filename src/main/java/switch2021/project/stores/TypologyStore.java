@@ -87,7 +87,7 @@ public class TypologyStore {
     }
 
     //Get typology by description
-    public Typology getTypology(String description) {
+    public Typology getTypologyByDescription(String description) {
         Typology typo = null;
 
         for (Typology i : this.typologyList) {
@@ -100,7 +100,7 @@ public class TypologyStore {
     }
 
     // Get typology by ID
-    public Typology getTypology(int id_Typology) {
+    public Typology getTypologyByID(int id_Typology) {
         Typology typo = null;
 
         for (Typology i : this.typologyList) {
@@ -160,7 +160,7 @@ public class TypologyStore {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof UserProfileStore)) return false;
+        if (!(obj instanceof TypologyStore)) return false;
         TypologyStore that = (TypologyStore) obj;
         return (this.typologyList.equals(that.getTypologyList()));
     }

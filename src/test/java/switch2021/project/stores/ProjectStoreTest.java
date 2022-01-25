@@ -2,13 +2,9 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import switch2021.project.controller.ProductBacklogController;
 import switch2021.project.model.*;
-import switch2021.project.stores.ProjectStore;
-import switch2021.project.stores.SystemUserStore;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,7 +19,7 @@ public class ProjectStoreTest {
     @BeforeEach
     public void init() {
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -87,7 +83,7 @@ public class ProjectStoreTest {
     }
 
     Company company = new Company();
-    Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+    Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
     Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
@@ -105,8 +101,8 @@ public class ProjectStoreTest {
     @Test
     public void getProjectListByUserEmailWith2Projects() {
         //Arrange
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
 
@@ -120,8 +116,8 @@ public class ProjectStoreTest {
 
     public void getProjectListByUserEmailBlank() {
         //Arrange
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
 
@@ -138,8 +134,8 @@ public class ProjectStoreTest {
 
     public void getAllProjectListByUserEmailDontExist() {
         //Arrange
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
 
@@ -157,7 +153,7 @@ public class ProjectStoreTest {
         // Arrange
         ProjectStore projectStore = company.getProjectStore();
         project.addResource(input);
-        projectStore.addProject(this.project);
+        projectStore.saveNewProject(this.project);
         // Act
         Project project1 = projectStore.getProjectByCode("Project_2022_1");
 
@@ -170,7 +166,7 @@ public class ProjectStoreTest {
         // Arrange
         ProjectStore projectStore = company.getProjectStore();
         project.addResource(input);
-        projectStore.addProject(this.project);
+        projectStore.saveNewProject(this.project);
         // Act
         Project project = projectStore.getProjectByCode("123");
 
@@ -181,10 +177,10 @@ public class ProjectStoreTest {
     @Test//US017, US019
     public void getCurrentProjectListByUserEmailSucess() {
         //Arrange
-        company.getProjectStore().addProject(this.proj1);
-        company.getProjectStore().addProject(this.proj2);
-        company.getProjectStore().addProject(this.proj3);
-        company.getProjectStore().addProject(this.currentProject);
+        company.getProjectStore().saveNewProject(this.proj1);
+        company.getProjectStore().saveNewProject(this.proj2);
+        company.getProjectStore().saveNewProject(this.proj3);
+        company.getProjectStore().saveNewProject(this.currentProject);
         // Act
         List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("manuelmartins@beaver.com");
         int sizeExpected = projectList.size();
@@ -212,10 +208,10 @@ public class ProjectStoreTest {
     public void getProjectListEncapsulationSuccess() {
         ProjectStore projStore = company.getProjectStore();
 
-        projStore.addProject(this.proj1);
-        projStore.addProject(this.proj2);
-        projStore.addProject(this.proj3);
-        projStore.addProject(this.currentProject);
+        projStore.saveNewProject(this.proj1);
+        projStore.saveNewProject(this.proj2);
+        projStore.saveNewProject(this.proj3);
+        projStore.saveNewProject(this.currentProject);
 
         List<Project> list = company.getProjectStore().getProjectList();
         list.remove(0);
@@ -236,8 +232,8 @@ public class ProjectStoreTest {
         //Arrange
         ProjectStore projStore = company.getProjectStore();
 
-        projStore.addProject(this.proj1);
-        projStore.addProject(this.proj2);
+        projStore.saveNewProject(this.proj1);
+        projStore.saveNewProject(this.proj2);
 
         List<Project> projectList = company.getProjectStore().getProjectList();
         int sizeExpected = projectList.size();

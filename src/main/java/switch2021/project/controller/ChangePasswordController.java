@@ -2,6 +2,7 @@ package switch2021.project.controller;
 
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser;
+import switch2021.project.stores.SystemUserStore;
 import switch2021.project.utils.App;
 
 public class ChangePasswordController {
@@ -20,16 +21,10 @@ public class ChangePasswordController {
      */
     public ChangePasswordController(Company company) { this.company = company; }
 
-    public ChangePasswordController(Company company, SystemUser user) {
-        this.company = company;
-    }
-
-    public boolean changePassword(String email, String oldpasswordUI, String newpassword) {
-
-
-       SystemUser user = this.company.getSystemUserStore().getUserByEmail(email);
-       user.updatePassword(oldpasswordUI, newpassword);
-       return this.company.getSystemUserStore().saveSystemUser(user);
+    public boolean changePassword(String email, String oldPasswordUI, String newPassword, String newPasswordConfirmation) {
+        SystemUserStore systemUserStore = company.getSystemUserStore();
+       SystemUser user = systemUserStore.getUserByEmail(email);
+       return user.updatePassword(oldPasswordUI, newPassword, newPasswordConfirmation);
     }
 }
 

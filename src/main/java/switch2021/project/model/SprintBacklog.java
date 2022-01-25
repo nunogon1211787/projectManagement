@@ -38,8 +38,8 @@ public class SprintBacklog {
     }
 
     /** Add User Story Of Sprint **/
-    public boolean addUserStory(UserStoryOfSprint story) {
-        if (!validateId_UserStoryOfSprint(story)) {
+    public boolean saveUserStoryOfSprint(UserStoryOfSprint story) {
+        if (!validateUserStoryOfSprint(story)) {
             story.setId_UserStoryOfSprint(id_UserStoryOfSprintGenerator());
         }
         this.userStoryOfSprintList.add(story);
@@ -47,27 +47,13 @@ public class SprintBacklog {
     }
 
     /** Validate UserStoryOfSprint Addition - checks if already exists **/
-    public boolean validateId_UserStoryOfSprint (UserStoryOfSprint userStoryOfSprint) {
+    public boolean validateUserStoryOfSprint(UserStoryOfSprint userStoryOfSprint) {
         boolean msg = false;
 
         for (UserStoryOfSprint i : userStoryOfSprintList) {
-            if (i.getUserStoryOfSprint().getId_UserStory() == userStoryOfSprint.getUserStoryOfSprint().getId_UserStory()) {
+            if (i.equals(userStoryOfSprint)) {
                 msg = true;
                 break;
-            }
-        }
-        return msg;
-    }
-
-    private boolean validateUserStoryOfSprint(UserStoryOfSprint userStoryOfSprint){
-        boolean msg = true;
-        if(userStoryOfSprintList.size() == 0){
-            msg = false; } else {
-            for (UserStoryOfSprint i : userStoryOfSprintList) {
-                if(i.equals(userStoryOfSprint)){
-                    msg = false;
-                    break;
-                }
             }
         }
         return msg;
@@ -80,19 +66,6 @@ public class SprintBacklog {
             id = this.userStoryOfSprintList.get(userStoryOfSprintList.size()-1).getId_UserStoryOfSprint() + 1;
         }
         return id;
-    } //if the object isn´t saved on the list, the id will be the same for all
-    //objects. This issue will be solved when calling the save method.
-
-    /**
-     * Save UserStoryOfSprint Method. Save a new UserStoryOfSprint object to the UserStoryOfSprint List
-     **/
-    public boolean saveUserStoryOfSprint(UserStoryOfSprint userStory) {
-        if (!validateUserStoryOfSprint(userStory)) {
-            throw new IllegalArgumentException("Repeated UserStoryOfSprint.");
-        } else {
-            userStory.setId_UserStoryOfSprint(id_UserStoryOfSprintGenerator());
-        }
-        return addUserStory(userStory);
     }
 
     /**

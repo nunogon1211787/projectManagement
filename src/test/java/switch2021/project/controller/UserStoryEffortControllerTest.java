@@ -1,6 +1,5 @@
 package switch2021.project.controller;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
@@ -33,7 +32,7 @@ class UserStoryEffortControllerTest {
                 "tester", "123456", "123456", "IMG_123", userProfileStore.getUserProfile(0));
         systemUserStore.saveSystemUser(user);
         userStoryEffortController = new UserStoryEffortController(company);
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         project1 = company.getProjectStore().createProject( "prototype", "test56", customer,
@@ -56,7 +55,7 @@ class UserStoryEffortControllerTest {
 
     @Test
     void getCurrentProjectListByUserEmail() {
-        company.getProjectStore().addProject(project1);
+        company.getProjectStore().saveNewProject(project1);
         project1.addResource(input);
         List<Project> projectList = new ArrayList<>();
         projectList.add(project1);
@@ -67,7 +66,7 @@ class UserStoryEffortControllerTest {
 
     @Test
     void getProjectByCode() {
-        company.getProjectStore().addProject(project1);
+        company.getProjectStore().saveNewProject(project1);
         project1.addResource(input);
         List<Project> projectList = new ArrayList<>();
         projectList.add(project1);
@@ -79,7 +78,7 @@ class UserStoryEffortControllerTest {
 
     @Test
     void getSprintList() {
-        company.getProjectStore().addProject(project1);
+        company.getProjectStore().saveNewProject(project1);
         project1.addResource(input);
         project1.getSprintStore().saveSprint(sprint1);
         List<Project> projectList = new ArrayList<>();
@@ -94,7 +93,7 @@ class UserStoryEffortControllerTest {
     void getSprint() {
         project1.getSprintStore().saveSprint(sprint1);
         project1.getSprintStore().saveSprint(sprint2);
-        company.getProjectStore().addProject(project1);
+        company.getProjectStore().saveNewProject(project1);
 
         Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
 
@@ -105,9 +104,9 @@ class UserStoryEffortControllerTest {
     void getSprintBacklog() {
         project1.getSprintStore().saveSprint(sprint1);
         UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story,5);
-        sprint1.getSprintBacklog().addUserStory(userStoryOfSprint);
+        sprint1.getSprintBacklog().saveUserStoryOfSprint(userStoryOfSprint);
         project1.getSprintStore().saveSprint(sprint2);
-        company.getProjectStore().addProject(project1);
+        company.getProjectStore().saveNewProject(project1);
 
         Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
         Sprint userSprint = userStoryEffortController.getSprint(1);
@@ -120,9 +119,9 @@ class UserStoryEffortControllerTest {
         project1.getSprintStore().saveSprint(sprint1);
         UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story,5);
         userStoryOfSprint.setId_UserStoryOfSprint(1);
-        sprint1.getSprintBacklog().addUserStory(userStoryOfSprint);
+        sprint1.getSprintBacklog().saveUserStoryOfSprint(userStoryOfSprint);
         project1.getSprintStore().saveSprint(sprint2);
-        company.getProjectStore().addProject(project1);
+        company.getProjectStore().saveNewProject(project1);
 
         Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
         Sprint userSprint = userStoryEffortController.getSprint(1);
@@ -137,9 +136,9 @@ class UserStoryEffortControllerTest {
         project1.getSprintStore().saveSprint(sprint1);
         UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story,5);
         userStoryOfSprint.setId_UserStoryOfSprint(1);
-        sprint1.getSprintBacklog().addUserStory(userStoryOfSprint);
+        sprint1.getSprintBacklog().saveUserStoryOfSprint(userStoryOfSprint);
         project1.getSprintStore().saveSprint(sprint2);
-        company.getProjectStore().addProject(project1);
+        company.getProjectStore().saveNewProject(project1);
 
         Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
         Sprint userSprint = userStoryEffortController.getSprint(1);

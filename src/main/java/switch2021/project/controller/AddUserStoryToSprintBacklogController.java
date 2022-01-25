@@ -2,7 +2,6 @@ package switch2021.project.controller;
 
 import switch2021.project.model.*;
 import switch2021.project.stores.SprintStore;
-import switch2021.project.utils.App;
 
 public class AddUserStoryToSprintBacklogController {
 
@@ -13,17 +12,9 @@ public class AddUserStoryToSprintBacklogController {
     private UserStory userStory;
     private Sprint sprint;
 
-
-/*    public AddUserStoryToSprintBacklogController(int id, String projCode, int effort) {
-        this(App.getInstance().getCompany());
-    }*/
-
-    /**
-     * Constructor to UI (with SINGLETON).
-     */
-    public AddUserStoryToSprintBacklogController() {
+/*    public AddUserStoryToSprintBacklogController() {
         this.company = App.getInstance().getCompany();
-    }
+    }*/
 
     /**
      * Constructor to test (without SINGLETON).
@@ -53,7 +44,7 @@ public class AddUserStoryToSprintBacklogController {
     }
 
     public boolean addUserStoryToSprintBacklog(int effort) {
-        this.sprint.getSprintBacklog().addUserStory(this.sprint.getSprintBacklog().createUSerStoryOfSprint(this.userStory,effort));
+        this.sprint.getSprintBacklog().saveUserStoryOfSprint(this.sprint.getSprintBacklog().createUSerStoryOfSprint(this.userStory,effort));
         return true;
     }
 }

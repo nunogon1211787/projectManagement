@@ -27,9 +27,9 @@ public class AssociateResourceTest {
 
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
-        company.getCustomerStore().add(company.getCustomerStore().createCustomer("Teste", "Teste"));
+        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste"));
 
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         proj = company.getProjectStore().createProject( "prototype", "test56", customer,
@@ -111,9 +111,9 @@ public class AssociateResourceTest {
         Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, 100, .2);
 
         /** project list **/
-        projectList.addProject(proj1);
-        projectList.addProject(proj2);
-        projectList.addProject(proj3);
+        projectList.saveNewProject(proj1);
+        projectList.saveNewProject(proj2);
+        projectList.saveNewProject(proj3);
         proj1.addResource(resAllo1);
         proj3.addResource(resAllo1);
 
@@ -139,9 +139,9 @@ public class AssociateResourceTest {
         Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, 100, .2);
 
         /** project list **/
-        projectList.addProject(proj1);
-        projectList.addProject(proj2);
-        projectList.addProject(proj3);
+        projectList.saveNewProject(proj1);
+        projectList.saveNewProject(proj2);
+        projectList.saveNewProject(proj3);
         proj1.addResource(resAllo1);
         proj3.addResource(resAllo1);
 
@@ -161,9 +161,9 @@ public class AssociateResourceTest {
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
-        company.getCustomerStore().add(company.getCustomerStore().createCustomer("Teste", "Teste"));
+        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste"));
 
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project proj = company.getProjectStore().createProject( "prototype", "test56", customer, typo, sector, date, 7, 5000);

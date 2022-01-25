@@ -28,8 +28,8 @@ public class CustomerStore {
      **/
 
     public Customer createCustomer(String name, String email) {
-        long id = this.customerList.size()+1;
-        return new Customer(id, name,email);
+
+        return new Customer(name, email);
     }
 
     /**
@@ -37,19 +37,32 @@ public class CustomerStore {
      * Adds a Customer object to the customer list
      **/
 
-    public boolean add(Customer customer) {
-        this.customerList.add(customer);
+    public boolean saveNewCustomer(Customer customer) {
+        if (!validateCustomer(customer)) {
+            customer.setCustomerId(this.customerList.size() + 1);
+            this.customerList.add(customer);
+        }
+
         return true;
+    }
+
+    public boolean validateCustomer(Customer customer) {
+        boolean status = false;
+        for (Customer i : customerList) {
+            if (i.getCustomerName().equals(customer.getCustomerName())) {
+                status = true;
+                break;
+            }
+        }
+        return status;
     }
 
     /**
      * Métodos Getter e Setter
      **/
 
-    public List<Customer> getArrayCustomer() {
-        List<Customer> copyList;
-        copyList = this.customerList;
-        return copyList;
+    public List<Customer> getCustomerList() {
+        return new ArrayList<>(customerList);
     }
 
     public Customer getCustomerByName(String name) {

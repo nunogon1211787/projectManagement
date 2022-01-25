@@ -46,8 +46,7 @@ public class BusinessSectorStore {
      **/
 
     public List<BusinessSector> getBusinessSectorList() {
-
-        return this.businessSectorList;
+        return new ArrayList<>(businessSectorList);
     }
 
     public BusinessSector getBusinessSectorByDescription(String description) {

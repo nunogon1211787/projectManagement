@@ -58,6 +58,20 @@ public class UserStoryOfSprint {
         this.id_UserStoryOfSprint = id_UserStoryOfSprint;
     }
 
+    private boolean validateEffort(int x) {
+        /*if (x < 0 || x == 4 || x == 6 || x == 7 || x > 8 && x < 13 || x > 13 && x < 20 || x > 20)
+            return false;
+        return true;*/
+        return Utils.isFibonacci(x);
+    }
+
+    public boolean setEstimateEffort(int estimateEffort) {
+        if (validateEffort(estimateEffort)) {
+            this.estimateEffort = estimateEffort;
+            return true;
+        }
+        return false;
+    }
     /**
      * Override
      **/
@@ -66,7 +80,8 @@ public class UserStoryOfSprint {
         if (this == o) return true;
         if (!(o instanceof UserStoryOfSprint)) return false;
         UserStoryOfSprint that = (UserStoryOfSprint) o;
-        return estimateEffort == that.estimateEffort && userStoryOfSprint.equals(that.userStoryOfSprint);
+        return estimateEffort == that.estimateEffort && userStoryOfSprint.equals(that.userStoryOfSprint)
+                && userStoryOfSprintTask.equals(that.userStoryOfSprintTask);//TODO This override doesnt compare ID
     }
 
     @Override
@@ -82,18 +97,4 @@ public class UserStoryOfSprint {
                 '}';
     }
 
-    private boolean validateEffort(int x) {
-        /*if (x < 0 || x == 4 || x == 6 || x == 7 || x > 8 && x < 13 || x > 13 && x < 20 || x > 20)
-            return false;
-        return true;*/
-        return Utils.isFibonacci(x);
-    }
-
-    public boolean setEstimateEffort(int estimateEffort) {
-        if (validateEffort(estimateEffort)) {
-            this.estimateEffort = estimateEffort;
-            return true;
-        }
-        return false;
-    }
 }

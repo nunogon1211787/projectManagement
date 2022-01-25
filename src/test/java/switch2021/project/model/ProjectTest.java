@@ -3,6 +3,7 @@ package switch2021.project.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintStore;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,15 +25,16 @@ class ProjectTest {
         //Arrange
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
-        company.getCustomerStore().add(company.getCustomerStore().createCustomer("Teste","Teste"));
+        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste","Teste"));
 
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
         proj = company.getProjectStore().createProject( "prototype", "test1234", customer,
                 typo, sector, date, 7, 5000);
-        company.getProjectStore().addProject(proj);
+        company.getProjectStore().saveNewProject(proj);
+        company.getProjectStore().getProjectByCode(proj.getCode()).setEndDate();
     }
 
     @Test
@@ -52,7 +54,7 @@ class ProjectTest {
         Customer valueCustomer = company.getCustomerStore().getCustomerByName("Teste");
 
         Typology typology = company.getProjectStore().getProjectByCode("Project_2022_1").getTypology();
-        Typology valuetypology = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology valuetypology = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
 
         BusinessSector sector = company.getProjectStore().getProjectByCode("Project_2022_1").getBusinessSector();
         BusinessSector valueSector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
@@ -63,11 +65,15 @@ class ProjectTest {
         LocalDate date = company.getProjectStore().getProjectByCode("Project_2022_1").getStartDate();
         LocalDate valueDate = LocalDate.of(2021, 12, 12);
 
+        LocalDate endDate = company.getProjectStore().getProjectByCode("Project_2022_1").getEndDate();
+        LocalDate valueEndDate = LocalDate.now();
+
         int numberOfSprints = company.getProjectStore().getProjectByCode("Project_2022_1").getNumberOfSprints();
         int valueNrSprint = 7;
 
         double budget = company.getProjectStore().getProjectByCode("Project_2022_1").getBudget();
         double valueBudget = 5000;
+
 
         //Result
         assertEquals(valuecode, code);
@@ -78,6 +84,7 @@ class ProjectTest {
         assertEquals(valueSector,sector);
         assertEquals(valuestatus,status);
         assertEquals(valueDate,date);
+        assertEquals(valueEndDate,endDate);
         assertEquals(valueNrSprint,numberOfSprints);
         assertEquals(valueBudget,budget);
     }
@@ -95,7 +102,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_name() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -112,7 +119,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_nameLength() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -129,7 +136,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_description() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -146,7 +153,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_descriptionLenght() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -163,7 +170,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_numberOfSprints() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -180,7 +187,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_budget() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -205,11 +212,11 @@ class ProjectTest {
     private Project proj3;
     private Project currentProject;
 
-    Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+    Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
     ProjectStatus projectStatus = new ProjectStatus("ToStart");
-    Project project2 = new Project("1234testcode", "prototype", "test56", customer,
+    Project project2 = new Project( "prototype", "test56", customer,
             typo, sector, LocalDate.now(), projectStatus, 7, 5000);
     ProductBacklog productBacklog = project2.getProductBacklog();
 
@@ -221,7 +228,7 @@ class ProjectTest {
     @BeforeEach
     public void init_2() {
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -289,12 +296,12 @@ class ProjectTest {
     @DisplayName("validate that list have results (not null) and check list size are correct")
     public void getProductBacklogWithResults() {
         // Arrange
-        company.getProjectStore().addProject(project2);
-        productBacklog.addUserStory(userStory);
-        productBacklog.addUserStory(userStory2);
-        productBacklog.addUserStory(userStory3);
+        company.getProjectStore().saveNewProject(project2);
+        productBacklog.saveUserStory(userStory);
+        productBacklog.saveUserStory(userStory2);
+        productBacklog.saveUserStory(userStory3);
         // Act
-        ProductBacklog productBacklog = company.getProjectStore().getProjectByCode("1234testcode").getProductBacklog();
+        ProductBacklog productBacklog = company.getProjectStore().getProjectByCode("Project_2022_2").getProductBacklog();
         //Assert
         assertNotNull(productBacklog);
         assertEquals(3, productBacklog.getUserStoryList().size());
@@ -355,5 +362,40 @@ class ProjectTest {
         //Assert
         assertEquals(taskList, project2.getSprintStore().getSprint(1).getListOfTasksOfASprint());
     }
+
+    @Test
+    @DisplayName("Validate Save Project")
+    void saveNewProject() {
+        //Arrange
+        ProjectStore store = new ProjectStore();
+        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2021, 11, 30));
+
+        store.saveNewProject(proj1);
+        store.saveNewProject(proj1);
+
+        assertEquals(1,store.getProjectList().size());
+    }
+
+    @Test
+    @DisplayName("Validate Save Project")
+    void saveNewProject_2() {
+        //Arrange
+        ProjectStore store = new ProjectStore();
+        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2021, 11, 30));
+
+        Project proj2 = company.getProjectStore().createProject( "prototype2", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2021, 11, 30));
+
+        store.saveNewProject(proj1);
+        store.saveNewProject(proj2);
+
+        assertEquals(2,store.getProjectList().size());
+    }
+
 
 }
