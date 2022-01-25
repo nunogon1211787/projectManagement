@@ -3,6 +3,7 @@ package switch2021.project.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintStore;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ class ProjectTest {
         //Arrange
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
-        company.getCustomerStore().add(company.getCustomerStore().createCustomer("Teste","Teste"));
+        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste","Teste"));
 
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
@@ -32,7 +33,7 @@ class ProjectTest {
 
         proj = company.getProjectStore().createProject( "prototype", "test1234", customer,
                 typo, sector, date, 7, 5000);
-        company.getProjectStore().addProject(proj);
+        company.getProjectStore().saveNewProject(proj);
     }
 
     @Test
@@ -209,7 +210,7 @@ class ProjectTest {
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
     ProjectStatus projectStatus = new ProjectStatus("ToStart");
-    Project project2 = new Project("1234testcode", "prototype", "test56", customer,
+    Project project2 = new Project( "prototype", "test56", customer,
             typo, sector, LocalDate.now(), projectStatus, 7, 5000);
     ProductBacklog productBacklog = project2.getProductBacklog();
 
@@ -289,12 +290,12 @@ class ProjectTest {
     @DisplayName("validate that list have results (not null) and check list size are correct")
     public void getProductBacklogWithResults() {
         // Arrange
-        company.getProjectStore().addProject(project2);
+        company.getProjectStore().saveNewProject(project2);
         productBacklog.saveUserStory(userStory);
         productBacklog.saveUserStory(userStory2);
         productBacklog.saveUserStory(userStory3);
         // Act
-        ProductBacklog productBacklog = company.getProjectStore().getProjectByCode("1234testcode").getProductBacklog();
+        ProductBacklog productBacklog = company.getProjectStore().getProjectByCode("Project_2022_2").getProductBacklog();
         //Assert
         assertNotNull(productBacklog);
         assertEquals(3, productBacklog.getUserStoryList().size());
@@ -354,6 +355,40 @@ class ProjectTest {
         taskList.add(taskTest);
         //Assert
         assertEquals(taskList, project2.getSprintStore().getSprint(1).getListOfTasksOfASprint());
+    }
+
+    @Test
+    @DisplayName("Validate Save Project")
+    void saveNewProject() {
+        //Arrange
+        ProjectStore store = new ProjectStore();
+        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2021, 11, 30));
+
+        store.saveNewProject(proj1);
+        store.saveNewProject(proj1);
+
+        assertEquals(1,store.getProjectList().size());
+    }
+
+    @Test
+    @DisplayName("Validate Save Project")
+    void saveNewProject_2() {
+        //Arrange
+        ProjectStore store = new ProjectStore();
+        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2021, 11, 30));
+
+        Project proj2 = company.getProjectStore().createProject( "prototype2", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2021, 11, 30));
+
+        store.saveNewProject(proj1);
+        store.saveNewProject(proj2);
+
+        assertEquals(2,store.getProjectList().size());
     }
 
 }

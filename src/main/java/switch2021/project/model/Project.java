@@ -40,12 +40,11 @@ public class Project {
     /**
      * Project Constructor
      **/
-    public Project(String code, String name, String description, Customer customer, Typology typology,
+    public Project(String name, String description, Customer customer, Typology typology,
                    BusinessSector businessSector, LocalDate startDate, ProjectStatus status, int numberOfSprints, double budget) {
 
         validateProjectFields(name, description, budget, numberOfSprints);
 
-        this.code = code;
         this.projectName = name;
         this.description = description;
 

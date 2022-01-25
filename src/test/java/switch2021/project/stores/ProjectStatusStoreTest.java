@@ -68,4 +68,14 @@ class ProjectStatusStoreTest {
 
         assertEquals(status, store.getProjectStatusByDescription("Planned"));
     }
+
+    @Test
+    void getProjectStatusByDescription_null() {
+        ProjectStatusStore store = new ProjectStatusStore();
+        store.populateDefault();
+
+        String status ="null";
+
+        assertNull(store.getProjectStatusByDescription(status));
+    }
 }

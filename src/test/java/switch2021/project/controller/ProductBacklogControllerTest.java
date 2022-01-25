@@ -12,6 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductBacklogControllerTest {
 
+
+
+
     @Test
     @DisplayName("check if the list size is correct")
     public void getProjectListByUserEmailWith2Projects() {
@@ -30,9 +33,8 @@ public class ProductBacklogControllerTest {
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         ProjectTeam projectTeam = new ProjectTeam();
-
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
 
@@ -63,8 +65,9 @@ public class ProductBacklogControllerTest {
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         ProjectTeam projectTeam = new ProjectTeam();
 
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
+
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
 
@@ -97,8 +100,8 @@ public class ProductBacklogControllerTest {
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         ProjectTeam projectTeam = new ProjectTeam();
 
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
 
@@ -130,7 +133,7 @@ public class ProductBacklogControllerTest {
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         ProjectTeam projectTeam = new ProjectTeam();
 
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         ProductBacklogController productBacklogController = new ProductBacklogController(company);
         // Act
         Project projectT = productBacklogController.getProject("Project_2022_1");
@@ -156,8 +159,7 @@ public class ProductBacklogControllerTest {
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         ProjectTeam projectTeam = new ProjectTeam();
-
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         ProductBacklogController productBacklogController = new ProductBacklogController(company);
         // Act
         Project projectT = productBacklogController.getProject("testcode");
@@ -168,7 +170,6 @@ public class ProductBacklogControllerTest {
     @Test
     @DisplayName("grants a list of US that is sorted by priority. It keeps the done and/or cancelled US on the end\n")
     public void getSortedListWithSuccess(){
-        // Arrange
         Company company = new Company();
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
@@ -182,9 +183,9 @@ public class ProductBacklogControllerTest {
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
-        ProjectTeam projectTeam = new ProjectTeam();
+        ProjectTeam projectTeam = new ProjectTeam();// Arrange
 
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         UserStory userStory =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),2,"create user story");
         project.getProductBacklog().saveUserStory(userStory);
         UserStory userStory1 =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),1,"sort user story");
@@ -231,8 +232,7 @@ public class ProductBacklogControllerTest {
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         ProjectTeam projectTeam = new ProjectTeam();
-
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         UserStory userStory =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),2,"create user story");
         project.getProductBacklog().saveUserStory(userStory);
         UserStory userStory1 =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),1,"sort user story");

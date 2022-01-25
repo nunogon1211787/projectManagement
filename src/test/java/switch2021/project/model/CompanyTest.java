@@ -31,7 +31,7 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         project = company.getProjectStore().createProject( "Projecto Test", "criar us",
-                new Customer(1,"marreta@email.pt", "name"),
+                new Customer("marreta@email.pt", "name"),
                 company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         // Act
@@ -47,7 +47,7 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         project = company.getProjectStore().createProject( "Projecto Test", "criar us",
-                new Customer(1, "marreta@email.pt", "name"),
+                new Customer( "marreta@email.pt", "name"),
                 company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         // Act
@@ -63,7 +63,7 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         project = company.getProjectStore().createProject( "Projecto Test", "criar us",
-                new Customer(1,"marreta@email.pt", "name"),
+                new Customer("marreta@email.pt", "name"),
                 company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         // Act
@@ -81,12 +81,12 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         project = company.getProjectStore().createProject( "CDC", "criar projeto",
-                new Customer(1,"marreta@email.pt", "name"),
+                new Customer("marreta@email.pt", "name"),
                 company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
                 "Product Owner", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("Product Owne")));
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         // Act
         List<Project> projectList = company.getProjectStore().getProjectListWithPORight("123@isep.ipp.pt");
         //Assert
@@ -98,12 +98,12 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         project = company.getProjectStore().createProject( "CDC_X", "criar projeto",
-                new Customer(1,"marreta@email.pt", "name"),
+                new Customer("marreta@email.pt", "name"),
                 company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
                 "Product Owner", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("Product Owner")));
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         // Act
         ProductBacklog productBacklog = company.getProjectStore().getProductBacklog("Project_2022_1");
         //Assert
@@ -115,12 +115,12 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         project = company.getProjectStore().createProject( "CDC", "criar projeto",
-                new Customer(1,"marreta@email.pt", "name"),
+                new Customer("marreta@email.pt", "name"),
                 company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
                 "Product Owner", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("Product Owne")));
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
         ProductBacklog productBacklog = company.getProjectStore().getProductBacklog(null);
@@ -134,12 +134,12 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         project = company.getProjectStore().createProject( "CDC", "criar projeto",
-                new Customer(1,"marreta@email.pt", "name"),
+                new Customer("marreta@email.pt", "name"),
                 company.getTypologyStore().getTypology("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
                 "Product Owner", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("Product Owne")));
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             ProductBacklog productBacklog = company.getProjectStore().getProductBacklog("");

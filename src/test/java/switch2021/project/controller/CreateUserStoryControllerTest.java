@@ -30,7 +30,7 @@ public class CreateUserStoryControllerTest {
     @Test
     public void createUserStoryPriorityInvalidInf() {
         //Arrange
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
         createUserStoryController.getProjectByCode("Project_2022_1");
         UserStoryStatus status = new UserStoryStatus("In progress");
@@ -47,7 +47,7 @@ public class CreateUserStoryControllerTest {
     @Test
     public void createUserStorydescriptionInvalidEmpty() {
         //Arrange
-               company.getProjectStore().addProject(project);
+               company.getProjectStore().saveNewProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
         createUserStoryController.getProjectByCode("Project_2022_1");
@@ -66,7 +66,7 @@ public class CreateUserStoryControllerTest {
     public void createUserStorydescriptionInvalidShort() {
         //Arrange
 
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
         createUserStoryController.getProjectByCode("Project_2022_1");
@@ -85,7 +85,7 @@ public class CreateUserStoryControllerTest {
     public void createUserStoryPriorityInvalidSup() {
         //Arrange
 
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
         createUserStoryController.getProjectByCode("Project_2022_1");
@@ -104,7 +104,7 @@ public class CreateUserStoryControllerTest {
     public void createUserStorySuccessFull() {
         //Arrange
 
-        company.getProjectStore().addProject(project);
+        company.getProjectStore().saveNewProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
         createUserStoryController.getProjectByCode("Project_2022_1");
@@ -121,8 +121,8 @@ public class CreateUserStoryControllerTest {
     @Test
     public void getAllProjectListByUserEmail() {
         //Arrange
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
         // Act
@@ -135,8 +135,8 @@ public class CreateUserStoryControllerTest {
     @Test
     public void getAllProjectListByUserEmailIsBlank() {
         //Arrange
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
         // Act
@@ -152,8 +152,8 @@ public class CreateUserStoryControllerTest {
     @DisplayName("Criar company + projetos(2) + system user + resource ")
     public void getAllProjectListByUserEmailDontExist() {
         //Arrange
-        company.getProjectStore().addProject(project);
-        company.getProjectStore().addProject(project2);
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
         // Act

@@ -14,7 +14,7 @@ public class Customer {
      * Customer Class
      * Class Atributes - The customer is composed of an automaticly generated ID, an email adress and a customer name.
      **/
-    private final long customerId;
+    private long customerId;
     private String customerName;
     private String customerEmail;
 
@@ -23,8 +23,8 @@ public class Customer {
      * Creates a new Customer instance.
      **/
 
-    public Customer(long id, String customerName, String customerEmail) {
-        this.customerId = id;
+    public Customer(String customerName, String customerEmail) {
+        this.customerId = -1;
         this.customerEmail = customerEmail;
         this.customerName = customerName;
     }

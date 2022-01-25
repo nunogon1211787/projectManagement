@@ -4,8 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
-import switch2021.project.stores.ProjectStore;
-import switch2021.project.stores.SprintStore;
+
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,7 +33,7 @@ public class SprintStoreTest {
         projectStore = company.getProjectStore();
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
-        company.getCustomerStore().add(company.getCustomerStore().createCustomer("Teste", "Teste"));
+        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste"));
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         date = LocalDate.of(2022, 1, 1);
