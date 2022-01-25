@@ -34,6 +34,7 @@ class ProjectTest {
         proj = company.getProjectStore().createProject( "prototype", "test1234", customer,
                 typo, sector, date, 7, 5000);
         company.getProjectStore().saveNewProject(proj);
+        company.getProjectStore().getProjectByCode(proj.getCode()).setEndDate();
     }
 
     @Test
@@ -64,11 +65,15 @@ class ProjectTest {
         LocalDate date = company.getProjectStore().getProjectByCode("Project_2022_1").getStartDate();
         LocalDate valueDate = LocalDate.of(2021, 12, 12);
 
+        LocalDate endDate = company.getProjectStore().getProjectByCode("Project_2022_1").getEndDate();
+        LocalDate valueEndDate = LocalDate.now();
+
         int numberOfSprints = company.getProjectStore().getProjectByCode("Project_2022_1").getNumberOfSprints();
         int valueNrSprint = 7;
 
         double budget = company.getProjectStore().getProjectByCode("Project_2022_1").getBudget();
         double valueBudget = 5000;
+
 
         //Result
         assertEquals(valuecode, code);
@@ -79,6 +84,7 @@ class ProjectTest {
         assertEquals(valueSector,sector);
         assertEquals(valuestatus,status);
         assertEquals(valueDate,date);
+        assertEquals(valueEndDate,endDate);
         assertEquals(valueNrSprint,numberOfSprints);
         assertEquals(valueBudget,budget);
     }
@@ -390,5 +396,6 @@ class ProjectTest {
 
         assertEquals(2,store.getProjectList().size());
     }
+
 
 }

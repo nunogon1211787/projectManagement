@@ -31,9 +31,9 @@ class SprintBacklogTest {
         UserStoryOfSprint story3 = new UserStoryOfSprint(userstory, 2, 3);
 
         
-        sprintBacklog.addUserStory(story);
-        sprintBacklog.addUserStory(story2);
-        sprintBacklog.addUserStory(story3);
+        sprintBacklog.saveUserStoryOfSprint(story);
+        sprintBacklog.saveUserStoryOfSprint(story2);
+        sprintBacklog.saveUserStoryOfSprint(story3);
 
         UserStoryOfSprint userStoryOfSprint1 = sprintBacklog.getUserStory(1);
         UserStoryOfSprint userStoryOfSprint2 = sprintBacklog.getUserStory(2);
@@ -53,7 +53,7 @@ class SprintBacklogTest {
         UserStoryStatus status = new UserStoryStatus("statusTest");
         UserStory userStory = new UserStory(status, 2, "teste");
         userStoryOfSprint = sprintBacklog.createUSerStoryOfSprint(userStory, 8);
-        sprintBacklog.addUserStory(userStoryOfSprint);
+        sprintBacklog.saveUserStoryOfSprint(userStoryOfSprint);
     }
 
     @Test
@@ -107,8 +107,8 @@ class SprintBacklogTest {
         UserStory userStory = new UserStory(status, 2, "teste");
         userStory.setId_UserStory(1);
         UserStoryOfSprint userStoryOfSprint= sprintBacklog.createUSerStoryOfSprint(userStory, 5);
-        sprintBacklog.addUserStory(userStoryOfSprint);
-        assertTrue(sprintBacklog.validateId_UserStoryOfSprint(userStoryOfSprint));
+        sprintBacklog.saveUserStoryOfSprint(userStoryOfSprint);
+        assertTrue(sprintBacklog.validateUserStoryOfSprint(userStoryOfSprint));
 
     }
 
@@ -121,7 +121,7 @@ class SprintBacklogTest {
 
         SprintBacklog testBacklog = new SprintBacklog();
         UserStoryOfSprint test = testBacklog.createUSerStoryOfSprint(userStory, 8);
-        testBacklog.addUserStory(test);
+        testBacklog.saveUserStoryOfSprint(test);
         test.getUserStoryOfSprint().setId_UserStory(sprintBacklog.getUserStoryOfSprintList().get(0).getUserStoryOfSprint().getId_UserStory());
 
         String expected = test.toString();
@@ -129,4 +129,5 @@ class SprintBacklogTest {
         //Result
         assertEquals(expected, sprintBacklog.getUserStoryOfSprintList().get(0).toString());
     }
+
 }
