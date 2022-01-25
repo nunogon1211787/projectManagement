@@ -25,7 +25,7 @@ class ProjectTest {
         //Arrange
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
-        company.getCustomerStore().add(company.getCustomerStore().createCustomer("Teste","Teste"));
+        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste","Teste"));
 
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");

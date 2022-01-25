@@ -16,7 +16,7 @@ public class CreateNewProjectControllerTest {
         //Arrange
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
-        company.getCustomerStore().add(company.getCustomerStore().createCustomer("Teste", "Teste"));
+        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste"));
 
         company.getTypologyStore().getTypology("Fixed Cost");
         company.getCustomerStore().getCustomerByName("Teste");
