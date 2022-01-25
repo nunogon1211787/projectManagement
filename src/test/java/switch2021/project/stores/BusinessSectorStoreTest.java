@@ -58,6 +58,16 @@ class BusinessSectorStoreTest {
         BusinessSector sector = new BusinessSector("teste");
         store.addBusinessSector(sector);
 
-        assertNull( store.getBusinessSectorByDescription("null"));
+        assertNull(store.getBusinessSectorByDescription("null"));
+    }
+
+    @Test
+    void hashCodeTest() {
+        BusinessSector sector = new BusinessSector("sector");
+        BusinessSector sector2 = new BusinessSector("sector2");
+        BusinessSector x = sector;
+
+        assertNotEquals(sector.hashCode(),sector2.hashCode());
+        assertEquals(sector.hashCode(),x.hashCode());
     }
 }

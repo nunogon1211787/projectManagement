@@ -23,7 +23,7 @@ public class CreateProjectController {
 
 
     public Typology getTypology(String typo) {
-        return company.getTypologyStore().getTypology(typo);
+        return company.getTypologyStore().getTypologyByDescription(typo);
     }
 
     public Customer getCustomer(String customer) {

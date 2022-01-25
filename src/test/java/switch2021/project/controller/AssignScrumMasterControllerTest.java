@@ -17,7 +17,7 @@ class AssignScrumMasterControllerTest {
     void assignRoleTestSuccess() {
         //Input
         Company co = new Company();
-        Typology typo = co.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = co.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = co.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = co.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj1 = co.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
@@ -68,7 +68,7 @@ class AssignScrumMasterControllerTest {
     void assignRoleTestFailure() {
         //Input
         Company co = new Company();
-        Typology typo = co.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = co.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = co.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = co.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj1 = co.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,

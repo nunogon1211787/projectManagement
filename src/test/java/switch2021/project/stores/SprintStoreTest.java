@@ -31,7 +31,7 @@ public class SprintStoreTest {
     public void initialize(){
         company = new Company();
         projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
         company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste"));
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");

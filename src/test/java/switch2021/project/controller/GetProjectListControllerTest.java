@@ -1,6 +1,5 @@
 package switch2021.project.controller;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
@@ -91,7 +90,7 @@ public class GetProjectListControllerTest {
         GetProjectListController controller = new GetProjectListController(company);
 
         ProjectStore projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
@@ -127,7 +126,7 @@ public class GetProjectListControllerTest {
         GetProjectListController controller = new GetProjectListController(company);
 
         ProjectStore projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj3 = company.getProjectStore().createProject( "prototype3", "proj3Prototype", customer,

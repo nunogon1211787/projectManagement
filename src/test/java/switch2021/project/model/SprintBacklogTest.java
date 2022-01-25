@@ -3,10 +3,8 @@ package switch2021.project.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.stores.SprintStore;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,7 +15,7 @@ class SprintBacklogTest {
     void compareUserStoryIDOfSprint() {
         Company company = new Company();
         ProjectTeamTest projectTeamTest = new ProjectTeamTest();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         ProjectStatus projectStatus = new ProjectStatus("ToStart");

@@ -17,7 +17,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
 
         Company company = new Company();
         ProjectTeamTest projectTeamTest = new ProjectTeamTest();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 

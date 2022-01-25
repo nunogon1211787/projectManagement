@@ -4,7 +4,6 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
-import switch2021.project.stores.ProjectStore;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class ChangePriorityUSControllerTest {
     LocalDate startDate2 = LocalDate.of(2022, 12, 31);
     LocalDate startDate3 = LocalDate.of(2022, 12, 31);
     company = new Company();
-    typo = company.getTypologyStore().getTypology("Fixed Cost");
+    typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
     customer = company.getCustomerStore().getCustomerByName("ISEP");
     sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
     project = company.getProjectStore().createProject( "prototype2", "test56", customer,

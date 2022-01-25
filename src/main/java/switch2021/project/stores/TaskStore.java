@@ -7,6 +7,7 @@ import switch2021.project.model.Task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 public class TaskStore {
@@ -65,7 +66,16 @@ public class TaskStore {
         return result;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskStore taskStore = (TaskStore) o;
+        return Objects.equals(taskList, taskStore.taskList);
+    }
 
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(taskList);
+    }
 }

@@ -1,7 +1,12 @@
 package switch2021.project.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Objects;
 
+@Getter
+@Setter
 public class Typology {
 
     /** Typology attributes are composed of a description of the Typology. **/
@@ -18,20 +23,7 @@ public class Typology {
         }
     }
 
-
-    /** Copy Constructor **/
-    public Typology(Typology originalTypology) {
-        this.id_Typology = originalTypology.id_Typology;
-        this.description = originalTypology.description;
-    }
-
-
     /** Getters and Setters **/
-    public int getId_Typology() { return this.id_Typology;}
-
-    public String getDescription() {
-        return this.description;
-    }
 
     public void setId_Typology(int id_Typology) {
         this.id_Typology = id_Typology;

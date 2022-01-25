@@ -1,11 +1,9 @@
 package switch2021.project.model;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.stores.ProjectStore;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,7 +30,7 @@ class CompanyTest {
         Company company = new Company();
         project = company.getProjectStore().createProject( "Projecto Test", "criar us",
                 new Customer("marreta@email.pt", "name"),
-                company.getTypologyStore().getTypology("Fixed Cost"),
+                company.getTypologyStore().getTypologyByDescription("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -48,7 +46,7 @@ class CompanyTest {
         Company company = new Company();
         project = company.getProjectStore().createProject( "Projecto Test", "criar us",
                 new Customer( "marreta@email.pt", "name"),
-                company.getTypologyStore().getTypology("Fixed Cost"),
+                company.getTypologyStore().getTypologyByDescription("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -64,7 +62,7 @@ class CompanyTest {
         Company company = new Company();
         project = company.getProjectStore().createProject( "Projecto Test", "criar us",
                 new Customer("marreta@email.pt", "name"),
-                company.getTypologyStore().getTypology("Fixed Cost"),
+                company.getTypologyStore().getTypologyByDescription("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -82,7 +80,7 @@ class CompanyTest {
         Company company = new Company();
         project = company.getProjectStore().createProject( "CDC", "criar projeto",
                 new Customer("marreta@email.pt", "name"),
-                company.getTypologyStore().getTypology("Fixed Cost"),
+                company.getTypologyStore().getTypologyByDescription("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
                 "Product Owner", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("Product Owne")));
@@ -99,7 +97,7 @@ class CompanyTest {
         Company company = new Company();
         project = company.getProjectStore().createProject( "CDC_X", "criar projeto",
                 new Customer("marreta@email.pt", "name"),
-                company.getTypologyStore().getTypology("Fixed Cost"),
+                company.getTypologyStore().getTypologyByDescription("Fixed Cost"),
                 new BusinessSector("description"), LocalDate.now(), 10, 100000);
         project.setProductOwner(new SystemUser("Test User", "123@isep.ipp.pt",
                 "Product Owner", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("Product Owner")));

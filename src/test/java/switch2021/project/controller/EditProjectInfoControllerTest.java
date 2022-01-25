@@ -19,7 +19,7 @@ class EditProjectInfoControllerTest {
         ProjectStore store = company.getProjectStore();
         //Act
         store.saveNewProject(store.createProject("Name", "Description", new Customer("email","Name"),
-                company.getTypologyStore().getTypology("Fixed Cost"),new BusinessSector("Description"),
+                company.getTypologyStore().getTypologyByDescription("Fixed Cost"),new BusinessSector("Description"),
                 LocalDate.now(),2,10));
         List<Project> proj = store.getProjectList();
         //Assert

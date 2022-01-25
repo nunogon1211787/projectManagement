@@ -53,7 +53,6 @@ public class Sprint {
             throw new IllegalArgumentException("Sprint Name must have at least 2 characters");
     }
 
-
     /**
      * Check if this Sprint is the current Sprint
      */
@@ -78,14 +77,13 @@ public class Sprint {
     /**
      * Override Methods
      */
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Sprint)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Sprint sprint = (Sprint) o;
-        return id_Sprint == sprint.id_Sprint && Objects.equals(name, sprint.name) &&
-                Objects.equals(taskstore, sprint.taskstore) && Objects.equals(sprintBacklog, sprint.sprintBacklog)
-                && Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
+        return id_Sprint == sprint.id_Sprint && Objects.equals(name, sprint.name) && Objects.equals(taskstore, sprint.taskstore) && Objects.equals(sprintBacklog, sprint.sprintBacklog) && Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
     }
 
     @Override

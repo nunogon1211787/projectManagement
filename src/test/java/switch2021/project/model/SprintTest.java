@@ -161,4 +161,17 @@ public class SprintTest {
         assertTrue(sprint.hasSprintID(1));
     }
 
+    @Test
+    @DisplayName("HashCode Verification")
+    public void haschCodeTest() {
+
+        Sprint sprint = new Sprint("Sprint_1", LocalDate.now().minusWeeks(1));
+        Sprint sprint2 = new Sprint("Sprint_1", LocalDate.now().minusWeeks(1));
+        Sprint sprint3 = new Sprint("Sprint_2", LocalDate.now().minusWeeks(2));
+
+
+        assertEquals(sprint,sprint2);
+        assertNotEquals(sprint3,sprint2);
+    }
+
 }

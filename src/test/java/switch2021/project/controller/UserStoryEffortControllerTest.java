@@ -1,6 +1,5 @@
 package switch2021.project.controller;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
@@ -33,7 +32,7 @@ class UserStoryEffortControllerTest {
                 "tester", "123456", "123456", "IMG_123", userProfileStore.getUserProfile(0));
         systemUserStore.saveSystemUser(user);
         userStoryEffortController = new UserStoryEffortController(company);
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         project1 = company.getProjectStore().createProject( "prototype", "test56", customer,

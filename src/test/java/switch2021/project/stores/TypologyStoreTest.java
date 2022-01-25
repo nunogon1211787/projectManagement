@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
 import switch2021.project.model.Typology;
-import switch2021.project.stores.TypologyStore;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,8 +39,8 @@ public class TypologyStoreTest {
         //Assert
         assertEquals(test.getTypologyList().size(), 2);
         assertEquals(test.getTypologyList(), typologyStore.getTypologyList());
-        assertEquals(tes1, test.getTypology(1));
-        assertEquals(tes2, test.getTypology(2));
+        assertEquals(tes1, test.getTypologyByID(1));
+        assertEquals(tes2, test.getTypologyByID(2));
     }
 
     @Test
@@ -134,20 +133,20 @@ public class TypologyStoreTest {
         typologyStore.saveTypology(typo3);
         //Act and Assert
         assertEquals(4,typologyStore.getTypologyList().size());
-        typologyStore.removeTypology(typologyStore.getTypology(1));
+        typologyStore.removeTypology(typologyStore.getTypologyByID(1));
         assertEquals(3,typologyStore.getTypologyList().size());
     }
 
     @Test
     public void removeTypologyInexistent() {
         //Act
-        assertFalse(typologyStore.removeTypology(typologyStore.getTypology(4)));
+        assertFalse(typologyStore.removeTypology(typologyStore.getTypologyByID(4)));
     }
 
     @Test
     public void getTypologyWithDescriptionTest(){
         //Arrange //Act
-        Typology descriptionTest = typologyStore.getTypology("Time and Materials");
+        Typology descriptionTest = typologyStore.getTypologyByDescription("Time and Materials");
         //Assert
         assertEquals(descriptionTest, new Typology("Time and Materials"));
     }
@@ -155,7 +154,7 @@ public class TypologyStoreTest {
     @Test
     public void getTypologyWithWrongDescriptionTest(){
         //Arrange //Act
-        Typology descriptionTest = typologyStore.getTypology("time and materials");
+        Typology descriptionTest = typologyStore.getTypologyByDescription("time and materials");
         //Assert
         assertNull(descriptionTest);
     }
@@ -163,7 +162,7 @@ public class TypologyStoreTest {
     @Test
     public void getTypologyWithId_TypologyTest(){
         //Arrange //Act
-        Typology descriptionTest = typologyStore.getTypology(2);
+        Typology descriptionTest = typologyStore.getTypologyByID(2);
         //Assert
         assertEquals(descriptionTest, new Typology("Time and Materials"));
     }
@@ -171,7 +170,7 @@ public class TypologyStoreTest {
     @Test
     public void getWrongId_TypologyTest(){
         //Arrange //Act
-        Typology id = typologyStore.getTypology(10);
+        Typology id = typologyStore.getTypologyByID(10);
         //Assert
         assertNull(id);
     }
