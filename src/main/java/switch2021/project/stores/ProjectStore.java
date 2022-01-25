@@ -121,17 +121,6 @@ public class ProjectStore {
         return status;
     }
 
-    public ProductBacklog getProductBacklog(String code) {
-        if (code == null || code.trim().isEmpty()) {
-            throw new IllegalArgumentException("Project code is empty.");
-        }
-        Project project = getProjectByCode(code);
-        if (project == null) {
-            throw new IllegalArgumentException("Project does not exist.");
-        }
-        return project.getProductBacklog();
-    }
-
     public List<Project> getProjectListByUserEmail(String email) {
         List<Project> projectListByUser = new ArrayList<>();
 

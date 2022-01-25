@@ -84,20 +84,6 @@ public class ProductBacklog {
         }
         return true;
     }
-//
-//    /**
-//     * Methods for addUserStory to the productBacklog (Cris US009)
-//     **/
-//
-//    public boolean addUserStory(UserStory us) {
-//        if (validateIdUserStory(us)) {
-//            this.userStoryList.add(us);
-//        } else {
-//            us.setId_UserStory(id_UserStoryGenerator());
-//            this.userStoryList.add(us);
-//        }
-//        return true;
-//    }
 
     /**
      * Validation Methods.
