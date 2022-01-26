@@ -43,7 +43,7 @@ public class ProjectStore {
      * Getters Methods
      **/
 
-    public List<Project> getProjectList() {
+    public List<Project> getProjects() {
         return new ArrayList<>(this.projectList);
     }
 
@@ -105,7 +105,7 @@ public class ProjectStore {
         return status;
     }
 
-    public List<Project> getProjectListByUserEmail(String email) {
+    public List<Project> getProjectsByUserEmail(String email) {
         List<Project> projectListByUser = new ArrayList<>();
 
         if (isValidGetProjListEmail(email)) {
@@ -118,7 +118,7 @@ public class ProjectStore {
         return projectListByUser;
     }
 
-    public List<Project> getCurrentProjectListByUserEmail(String email) {
+    public List<Project> getCurrentProjectsByUserEmail(String email) {
         List<Project> currentProjectListByUser = new ArrayList<>();
 
         for (Project project : this.projectList) {

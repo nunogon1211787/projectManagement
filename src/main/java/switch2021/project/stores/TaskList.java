@@ -1,8 +1,6 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.model.Customer;
-import switch2021.project.model.Request;
 import switch2021.project.model.Task;
 
 import java.util.ArrayList;
@@ -10,11 +8,11 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-public class TaskStore {
+public class TaskList {
 
     private List<Task> taskList;
 
-    public TaskStore() {
+    public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
@@ -70,8 +68,8 @@ public class TaskStore {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TaskStore taskStore = (TaskStore) o;
-        return Objects.equals(taskList, taskStore.taskList);
+        TaskList taskList = (TaskList) o;
+        return Objects.equals(this.taskList, taskList.taskList);
     }
 
     @Override

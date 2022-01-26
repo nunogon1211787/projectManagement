@@ -8,6 +8,7 @@ import switch2021.project.model.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ChangePriorityUSControllerTest {
@@ -25,41 +26,38 @@ public class ChangePriorityUSControllerTest {
     private Customer customer;
     private BusinessSector sector;
     private UserProfile userProfile;
-    private UserProfile userProfile2;
     private SystemUser newUser;
     private SystemUser newUser2;
     private UserStoryStatus userStoryStatus;
 
 
-
     @BeforeEach
-    void ChangePriorityUSControllerTestWorld(){
+    void ChangePriorityUSControllerTestWorld() {
 
 
-    LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-    LocalDate startDate3 = LocalDate.of(2022, 12, 31);
-    company = new Company();
-    typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-    customer = company.getCustomerStore().getCustomerByName("ISEP");
-    sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-    project = company.getProjectStore().createProject( "prototype2", "test56", customer,
-            typo, sector, startDate2, 7, 5000);
-    project2 = company.getProjectStore().createProject( "prototype5", "test56", customer,
-            typo, sector, startDate3, 7, 5000);
-    project3 = company.getProjectStore().createProject( "prototype8", "test56", customer,
-            typo, sector, startDate3, 4, 3000);
-    userProfile = new UserProfile("Apresentador");
-    userProfile2 = new UserProfile("Duo");
-    newUser = new SystemUser("batatinha", "batatinha@cartoon.com", "des", "gth", "gth", "", userProfile);
-    newUser2 = new SystemUser("companhia", "companhia@cartoon.com", "des", "gth", "gth", "", userProfile2);
-    LocalDate startDate = LocalDate.of(2021, 12, 31);
-    LocalDate endDate = LocalDate.of(2022, 3, 5);
-    input = new Resource(newUser, startDate, endDate, 100, .5);
-    input2 = new Resource(newUser2, startDate, endDate, 100, .5);
-    userStoryStatus = new UserStoryStatus("coiso" );
-    userStory = new UserStory(userStoryStatus, 2, "Fazer tal");
-    userStory2 = new UserStory(userStoryStatus, 3, "Fazer tal e coiso");
-    userStory3 = new UserStory(userStoryStatus, 4, "Fazer tal e coiso também");
+        LocalDate startDate2 = LocalDate.of(2022, 12, 31);
+        LocalDate startDate3 = LocalDate.of(2022, 12, 31);
+        company = new Company();
+        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        customer = company.getCustomerStore().getCustomerByName("ISEP");
+        sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
+        project = company.getProjectStore().createProject("prototype2", "test56", customer,
+                typo, sector, startDate2, 7, 5000);
+        project2 = company.getProjectStore().createProject("prototype5", "test56", customer,
+                typo, sector, startDate3, 7, 5000);
+        project3 = company.getProjectStore().createProject("prototype8", "test56", customer,
+                typo, sector, startDate3, 4, 3000);
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        newUser = new SystemUser("batatinha", "batatinha@cartoon.com", "des", "gth", "gth", "", userProfile);
+        newUser2 = new SystemUser("companhia", "companhia@cartoon.com", "des", "gth", "gth", "", userProfile);
+        LocalDate startDate = LocalDate.of(2021, 12, 31);
+        LocalDate endDate = LocalDate.of(2022, 3, 5);
+        input = new Resource(newUser, startDate, endDate, 100, .5);
+        input2 = new Resource(newUser2, startDate, endDate, 100, .5);
+        userStoryStatus = new UserStoryStatus("coiso");
+        userStory = new UserStory(userStoryStatus, 2, "Fazer tal");
+        userStory2 = new UserStory(userStoryStatus, 3, "Fazer tal e coiso");
+        userStory3 = new UserStory(userStoryStatus, 4, "Fazer tal e coiso também");
         project.getProductBacklog().saveUserStory(userStory);
         project.getProductBacklog().saveUserStory(userStory2);
         project.getProductBacklog().saveUserStory(userStory3);
@@ -72,22 +70,22 @@ public class ChangePriorityUSControllerTest {
     }
 
     @Test
-    void getCurrentProjectListByUserEmailSuccess(){
+    void getCurrentProjectListByUserEmailSuccess() {
         //Arrange
         ChangePriorityUSController change = new ChangePriorityUSController(company);
 
         // Act
         List<Project> expected = change.getCurrentProjectListByUserEmail("batatinha@cartoon.com");
         List<Project> actual = new ArrayList<>();
-            actual.add(project);
-            actual.add(project2);
+        actual.add(project);
+        actual.add(project2);
 
         // Assert
         assertEquals(expected, actual);
     }
 
     @Test
-    void getProjectByCodeSuccess(){
+    void getProjectByCodeSuccess() {
         //Arrange
         ChangePriorityUSController change = new ChangePriorityUSController(company);
 
@@ -101,7 +99,7 @@ public class ChangePriorityUSControllerTest {
     }
 
     @Test
-    void getUserStoryListSuccess(){
+    void getUserStoryListSuccess() {
         //Arrange
         ChangePriorityUSController change = new ChangePriorityUSController(company);
         change.getProject(project.getCode());
@@ -117,7 +115,7 @@ public class ChangePriorityUSControllerTest {
     }
 
     @Test
-    void getUSSuccess(){
+    void getUSSuccess() {
         //Arrange
         ChangePriorityUSController change = new ChangePriorityUSController(company);
         change.getProject(project.getCode());
@@ -131,7 +129,7 @@ public class ChangePriorityUSControllerTest {
     }
 
     @Test
-    void setPrioritySuccess(){
+    void setPrioritySuccess() {
         //Arrange
         ChangePriorityUSController change = new ChangePriorityUSController(company);
         change.getProject(project.getCode());

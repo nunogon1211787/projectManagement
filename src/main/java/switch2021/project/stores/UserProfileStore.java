@@ -25,10 +25,14 @@ public class UserProfileStore {
      * UserProfile Populator. Populates the UserProfile List with pre-set objects.
      **/
     public void populateDefault() {
-        userProfileList.add(new UserProfile("Visitor"));
-        userProfileList.add(new UserProfile("Administrator"));
-        userProfileList.add(new UserProfile("Director"));
-        userProfileList.add(new UserProfile("User"));
+        saveUserProfile(createProfile("Visitor"));
+        saveUserProfile(createProfile("Administrator"));
+        saveUserProfile(createProfile("Director"));
+        saveUserProfile(createProfile("User"));
+        //userProfileList.add(new UserProfile("Visitor"));
+        //userProfileList.add(new UserProfile("Administrator"));
+        //userProfileList.add(new UserProfile("Director"));
+        //userProfileList.add(new UserProfile("User"));
     }
 
     /**
@@ -94,9 +98,9 @@ public class UserProfileStore {
     public boolean saveUserProfile(UserProfile profile) {
         if (!validateProfile(profile)) {
             throw new IllegalArgumentException("Repeated user profile name inserted.");
-        } else {
+        } /*else {
             profile.setId_UserProfile(id_UserProfileGenerator());
-        }
+        }*/
         return addUserProfile(profile);
     }
 

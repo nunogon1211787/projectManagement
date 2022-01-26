@@ -4,7 +4,7 @@ import switch2021.project.model.Company;
 import switch2021.project.model.Project;
 import switch2021.project.model.Sprint;
 import switch2021.project.stores.ProjectStore;
-import switch2021.project.stores.SprintStore;
+import switch2021.project.stores.SprintList;
 import switch2021.project.utils.App;
 
 import java.time.LocalDate;
@@ -14,7 +14,7 @@ public class CreateSprintController {
     private Company company;
     private Project proj;
     private ProjectStore projectStore;
-    private SprintStore sprintStore;
+    private SprintList sprintList;
     private Sprint sprint;
     private List<Project> currentProjectListByUser;
 
@@ -35,7 +35,7 @@ public class CreateSprintController {
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         this.projectStore = company.getProjectStore();
-        this.currentProjectListByUser = projectStore.getCurrentProjectListByUserEmail(email);
+        this.currentProjectListByUser = projectStore.getCurrentProjectsByUserEmail(email);
         return this.currentProjectListByUser;
     }
 
@@ -45,15 +45,15 @@ public class CreateSprintController {
     }
 
     public Sprint createSprint(String name, LocalDate startDate) {
-        this.sprintStore = this.proj.getSprintStore();
+        this.sprintList = this.proj.getSprintList();
         int sprintDuration = this.proj.getSprintDuration();
 
-        this.sprint = sprintStore.createSprint(name, startDate, sprintDuration);
+        this.sprint = sprintList.createSprint(name, startDate, sprintDuration);
         return this.sprint;
     }
 
     public boolean saveSprint() {
-        return this.sprintStore.saveSprint(this.sprint);
+        return this.sprintList.saveSprint(this.sprint);
     }
 }
 

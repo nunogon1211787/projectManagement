@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import switch2021.project.stores.UserProfileStore;
+import switch2021.project.utils.App;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class SystemUser {
         checkEmailRules(email);
         checkFunctionRules(function);
         checkPasswordRules(password);
+        checkProfileRules(profile);
         this.userName = userName;
         this.email = email;
         this.photo = photo;
@@ -168,6 +170,15 @@ public class SystemUser {
             throw new IllegalArgumentException("Password must be at least 2 characters");
     }
 
+    private void checkProfileRules(UserProfile profile) {
+        Company company = App.getInstance().getCompany();
+        UserProfileStore profileStore = company.getUserProfileStore();
+        UserProfile visitorProfile = profileStore.getUserProfile("Visitor");
+
+        if (!profile.equals(visitorProfile))
+            throw new IllegalArgumentException("at registration visitor profile must be associated");
+    }
+
     public boolean checkAllData(String userName, String function, String photo) {
         if (photo.trim().isEmpty())
             throw new IllegalArgumentException("Photo cannot be empty.");
@@ -248,6 +259,7 @@ public class SystemUser {
         }
         return result;
     }
+
     /**
      * Method to validate if user as already has the profile requested
      */
@@ -396,6 +408,6 @@ public class SystemUser {
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName,email,photo,password,function,activateUser,assignedProfileList);
+        return Objects.hash(userName, email, photo, password, function, activateUser, assignedProfileList);
     }
 }

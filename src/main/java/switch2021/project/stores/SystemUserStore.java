@@ -25,7 +25,7 @@ public class SystemUserStore {
     /**
      * Getter Methods
      */
-    public List<SystemUser> getSystemUserList() {
+    public List<SystemUser> getSystemUsers() {
         return new ArrayList<>(this.systemUserList);
     }
 
