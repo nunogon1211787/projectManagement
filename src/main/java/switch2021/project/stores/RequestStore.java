@@ -11,7 +11,7 @@ import java.util.Objects;
 public class RequestStore {
 
     /**
-     * Atributos da Classe
+     * Class attribute
      **/
 
     private List<Request> requestProfileList;
@@ -86,7 +86,7 @@ public class RequestStore {
      */
 
     private boolean validateIfProfileRequestedItsNotAlreadyAssigned (Request request) {
-        return request.getUser().hasProfile(request.getProfile());
+        return request.getUser().hasProfile(request.getProfileRequested());
     }
 
     /**
@@ -102,7 +102,7 @@ public class RequestStore {
      */
 
     private boolean validateStatusOfARequest (Request request){
-        return request.getRequestStatus();
+        return request.isRequestStatus();
 
     }
 
@@ -136,7 +136,6 @@ public class RequestStore {
         return result;
     }
 
-
     /**
      * Method to change request status
      * */
@@ -147,7 +146,7 @@ public class RequestStore {
     }
 
     private boolean validateRequestStatus(Request request){
-        return request.getRequestStatus();
+        return request.isRequestStatus();
     }
 
     @Override

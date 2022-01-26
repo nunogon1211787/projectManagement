@@ -57,7 +57,7 @@ class RequestStoreTest {
             Request request = new Request(newUserProfile, user);
 
             RequestStore requestTestList = new RequestStore();
-            requestTestList.addProfileRequest(request);
+            requestTestList.saveRequest(request);
             requestTestList.addProfileRequest(request);
         });
     }
@@ -81,7 +81,7 @@ class RequestStoreTest {
     void testStatus() {
 
         request.changeRequestStatus(request);
-        assertTrue(request.getRequestStatus());
+        assertTrue(request.isRequestStatus());
     }
 
 
