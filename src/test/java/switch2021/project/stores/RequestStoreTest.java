@@ -18,8 +18,6 @@ class RequestStoreTest {
     SystemUser user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
             "tester", "img_123", "img_123", "123456", profile);
 
-    //SystemUser user2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
-    //"tester", "img_123", "img_123", "123456", profile);
 
     Request request = new Request(profile, user);
 
@@ -78,11 +76,32 @@ class RequestStoreTest {
     }
 
     @Test
-    void testStatus() {
+    public void testStatus() {
 
         request.changeRequestStatus(request);
         assertTrue(request.isRequestStatus());
     }
+
+    @Test
+
+    public void overrideTest() {
+        //Arrange
+        UserProfile profile = new UserProfile("name");
+        UserProfile profile2 = new UserProfile("name2");
+        SystemUser user = new SystemUser("Topo gigio", "xxxx@isep.ipp.pt",
+                "tester", "img_123", "img_123", "123456", profile);
+        SystemUser user2 = new SystemUser("pato donald", "zzzz@isep.ipp.pt",
+                "tester", "img_123", "img_123", "123456", profile2);
+        //Act
+        Request request = new Request(profile, user);
+        Request request2 = new Request(profile, user);
+        Request request3 = new Request(profile2,user2);
+        //Assert
+        assertEquals(request,request2);
+        assertNotEquals(request,request3);
+        assertNotEquals(request.hashCode(),request3.hashCode());
+    }
+
 
 
 }
