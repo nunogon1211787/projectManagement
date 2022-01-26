@@ -86,20 +86,33 @@ class RequestStoreTest {
 
     public void overrideTest() {
         //Arrange
+
         UserProfile profile = new UserProfile("name");
         UserProfile profile2 = new UserProfile("name2");
-        SystemUser user = new SystemUser("Topo gigio", "xxxx@isep.ipp.pt",
+        UserProfile profile3 = new UserProfile("name3");
+        SystemUser user = new SystemUser("shyriu", "xxxx@isep.ipp.pt",
                 "tester", "img_123", "img_123", "123456", profile);
-        SystemUser user2 = new SystemUser("pato donald", "zzzz@isep.ipp.pt",
+        SystemUser user2 = new SystemUser("ikki", "yyyy@isep.ipp.pt",
                 "tester", "img_123", "img_123", "123456", profile2);
-        //Act
-        Request request = new Request(profile, user);
-        Request request2 = new Request(profile, user);
-        Request request3 = new Request(profile2,user2);
+        SystemUser user3 = new SystemUser("shun", "zzzz@isep.ipp.pt",
+                "tester", "img_123", "img_123", "123456", profile3);
+
+        Request request1 = new Request(profile, user2);
+        Request request2 = new Request(profile2,user3);
+        Request request3 = new Request(profile3,user);
+
+        RequestStore requestTestList1 = new RequestStore();
+        RequestStore requestTestList2 = new RequestStore();
+        RequestStore requestTestList3 = new RequestStore();
+
+        requestTestList1.addProfileRequest(request1);
+        requestTestList2.addProfileRequest(request1);
+        requestTestList3.addProfileRequest(request3);
+
         //Assert
-        assertEquals(request,request2);
-        assertNotEquals(request,request3);
-        assertNotEquals(request.hashCode(),request3.hashCode());
+        assertEquals(requestTestList1,requestTestList2);
+        assertNotEquals(requestTestList1,requestTestList3);
+        assertNotEquals(requestTestList1.hashCode(),requestTestList3.hashCode());
     }
 
 
