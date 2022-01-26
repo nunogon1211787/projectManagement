@@ -28,7 +28,24 @@ class RequestTest {
     }
 
 
-
+    @Test
+    public void overrideTest(){
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile(0);
+        SystemUser user = new SystemUser("joaquim", "xxxx@isep.ipp.pt",
+                "tester", "img_123", "img_123", "123456", profile);
+        java.time.LocalDate datateste = LocalDate.now();
+        //Act
+        Request req = new Request(company.getUserProfileStore().getUserProfile("Director"),user);
+        Request req2 = new Request(company.getUserProfileStore().getUserProfile("Director"),user);
+        Request req3 = new Request(company.getUserProfileStore().getUserProfile("Visitor"),user);
+        //Assert
+        assertEquals(req,req2);
+        assertNotEquals(req2,req3);
+        assertNotEquals(req.hashCode(),req3.hashCode());
+        assertEquals(req.hashCode(),req.hashCode());
+    }
 
 
 

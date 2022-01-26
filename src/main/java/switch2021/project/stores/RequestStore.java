@@ -52,7 +52,7 @@ public class RequestStore {
         {
             throw new IllegalArgumentException("Requested profile is already assigned to the user.");
         }
-        if (validateIfRequestAlreadyExists(request) && (!validateRequestStatus(request))){
+        if (validateIfRequestAlreadyExists(request) && (!validateStatusOfARequest(request))){
             throw new IllegalArgumentException("Request already exists");
         }
 
@@ -101,10 +101,11 @@ public class RequestStore {
      * Method to validate request status
      */
 
-    private boolean validateStatusOfARequest (Request request){
+    public boolean validateStatusOfARequest (Request request){
         return request.isRequestStatus();
 
     }
+
 
     /**
      * Validation Method
@@ -140,13 +141,9 @@ public class RequestStore {
      * Method to change request status
      * */
 
-    public void changeRequestStatusCheck(Request request){
+    public void changeRequestStatus(Request request){
         request.changeRequestStatus(request);
 
-    }
-
-    private boolean validateRequestStatus(Request request){
-        return request.isRequestStatus();
     }
 
     @Override
