@@ -356,6 +356,74 @@ class SystemUserTest {
     }
 
     @Test
+    public void createSystemUserFailFunctionIsShort() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String userName = "manueloliveira";
+            String email = "manueloliveira@beaver.com";
+            String password = "ghi";
+            String passwordConfirmation = "ghi";
+            String function = "t";
+            String photo = "photo";
+            Company company = new Company();
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+        });
+    }
+
+    @Test
+    public void createSystemUserFailPasswordIsEmpty() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String userName = "manueloliveira";
+            String email = "manueloliveira@beaver.com";
+            String password = "";
+            String passwordConfirmation = "";
+            String function = "tester";
+            String photo = "photo";
+            Company company = new Company();
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+        });
+    }
+
+    @Test
+    public void createSystemUserFailPasswordIsShort() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String userName = "manueloliveira";
+            String email = "manueloliveira@beaver.com";
+            String password = "g";
+            String passwordConfirmation = "g";
+            String function = "tester";
+            String photo = "photo";
+            Company company = new Company();
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+        });
+    }
+
+    @Test
+    public void createSystemUserFailWrongFunction() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String userName = "manueloliveira";
+            String email = "manueloliveira@beaver.com";
+            String password = "ghi";
+            String passwordConfirmation = "ghi";
+            String function = "tester";
+            String photo = "photo";
+            Company company = new Company();
+            UserProfile profile = company.getUserProfileStore().getUserProfile("User");
+            SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+        });
+    }
+
+    @Test
     public void createSystemUserFailPasswordsNotMatch() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
@@ -370,6 +438,31 @@ class SystemUserTest {
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         });
+    }
+
+    @Test
+    public void overrideAndHashCodeTest() {
+        //Arrange
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String passwordConfirmation = "ghi";
+        String function = "tester";
+        String photo = "photo";
+        String email2 = "maneloliveira@beaver.com";
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        //newUser and newUser2 are equals
+        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+        SystemUser newUser2 = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+        //newUser3 is different (different email)
+        SystemUser newUser3 = company.getSystemUserStore().createSystemUser(userName, email2, function, password, passwordConfirmation, photo, profile);
+        //Assert
+        assertNotSame(newUser,newUser2);
+        assertEquals(newUser,newUser2);
+        assertEquals(newUser.hashCode(),newUser2.hashCode());
+        assertNotEquals(newUser,newUser3);
+        assertNotEquals(newUser.hashCode(),newUser3.hashCode());
     }
 
     @Test
