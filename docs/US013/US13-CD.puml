@@ -22,7 +22,6 @@ class UserProfileStore {
    +createUserProfile(name)
    +validateUserProfile(up)
    +saveUserProfile(up)
-   -addUserProfile(up)
 }
 
 class UserProfile {

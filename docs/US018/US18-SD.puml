@@ -7,8 +7,8 @@ autoactivate on
 autonumber
 
 actor "PO/SM/TeamMember" as User
-participant ": ProductBacklogUI" as System
-participant ": ProductBacklogController" as Ctrl
+participant ": ProductBacklogSortUI" as System
+participant ": ProductBacklogSortController" as Ctrl
 participant ": Company" as C1
 participant "projStore : ProjectStore" as C2
 participant "projectListByUser : List <Project>" as C2.1
@@ -23,11 +23,13 @@ System -> Ctrl: getProjectListByUserEmail(email)
 Ctrl -> C1: getProjectStore()
 C1 --> Ctrl: projStore
 Ctrl -> C2: getProjectListByUserEmail(email)
- loop for each know project
+
 C2 -> C2.1 ** : createProjectList
+
+ loop for each know project
+C2->C2.1 : addProjectList
+C2.1-->C2 : true
 end
-
-
 C2 --> Ctrl: projectListByUser
 Ctrl --> System: projectListByUser
 System --> User : Shows projectList to select project
@@ -44,7 +46,7 @@ System -> Ctrl: getUsSortedByPriority()
 Ctrl-> C3 : getProductBacklog()
 C3 --> Ctrl : productBacklog
 Ctrl -> C4 : getUsSortedByPriority()
-C4 -> C4.1 ** : createProjectList
+C4 -> C4.1 ** : createUserStoryList
 C4-->Ctrl : userStoryList
 Ctrl --> System : userStoryList
 System --> User : Shows list of User Stories sorted

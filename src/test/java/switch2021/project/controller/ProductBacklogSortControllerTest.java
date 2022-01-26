@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ProductBacklogControllerTest {
+public class ProductBacklogSortControllerTest {
 
 
 
@@ -38,8 +38,8 @@ public class ProductBacklogControllerTest {
         project2.addResource(input);
 
         // Act
-        ProductBacklogController productBacklogController = new ProductBacklogController(company);
-        List<Project> projectList = productBacklogController.getProjectListByUserEmail("cris@ipp.pt");
+        ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company);
+        List<Project> projectList = productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
         // Assert
         assertEquals(2, projectList.size());
 
@@ -72,8 +72,8 @@ public class ProductBacklogControllerTest {
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            ProductBacklogController productBacklogController = new ProductBacklogController(company);
-            List<Project> projectList = productBacklogController.getProjectListByUserEmail("");
+            ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company);
+            List<Project> projectList = productBacklogSortController.getProjectListByUserEmail("");
         });
         // Assert
         assertEquals("Email cannot be blank", exception.getMessage());
@@ -106,8 +106,8 @@ public class ProductBacklogControllerTest {
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-        ProductBacklogController productBacklogController = new ProductBacklogController(company);
-        List<Project> projectList = productBacklogController.getProjectListByUserEmail("dani@ipp.pt");
+        ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company);
+        List<Project> projectList = productBacklogSortController.getProjectListByUserEmail("dani@ipp.pt");
         });
         // Assert
             assertEquals("Email don't exist in system", exception.getMessage());
@@ -133,9 +133,9 @@ public class ProductBacklogControllerTest {
         ProjectTeam projectTeam = new ProjectTeam();
 
         company.getProjectStore().saveNewProject(project);
-        ProductBacklogController productBacklogController = new ProductBacklogController(company);
+        ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company);
         // Act
-        Project projectT = productBacklogController.getProject("Project_2022_1");
+        Project projectT = productBacklogSortController.getProject("Project_2022_1");
         // Assert
         assertEquals(projectT,project);
     }
@@ -159,9 +159,9 @@ public class ProductBacklogControllerTest {
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         ProjectTeam projectTeam = new ProjectTeam();
         company.getProjectStore().saveNewProject(project);
-        ProductBacklogController productBacklogController = new ProductBacklogController(company);
+        ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company);
         // Act
-        Project projectT = productBacklogController.getProject("testcode");
+        Project projectT = productBacklogSortController.getProject("testcode");
         // Assert
         assertNull(projectT);
     }
@@ -198,10 +198,10 @@ public class ProductBacklogControllerTest {
         project.setProjectTeam(projectTeam);
 
         // Act
-        ProductBacklogController productBacklogController = new ProductBacklogController(company);
-        productBacklogController.getProjectListByUserEmail("cris@ipp.pt");
-        productBacklogController.getProject("Project_2022_1");
-        List<UserStory> usSortedByPriority = productBacklogController.getUsSortedByPriority();
+        ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company);
+        productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
+        productBacklogSortController.getProject("Project_2022_1");
+        List<UserStory> usSortedByPriority = productBacklogSortController.getUsSortedByPriority();
 
         // Assert
         assertEquals(4, usSortedByPriority.size());
@@ -245,12 +245,12 @@ public class ProductBacklogControllerTest {
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-        ProductBacklogController productBacklogController = new ProductBacklogController(company);
-        productBacklogController.getProjectListByUserEmail("cris@ipp.pt");
-        productBacklogController.getProject("123testcode");
+        ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company);
+        productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
+        productBacklogSortController.getProject("123testcode");
             UserStory userStory3 =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),6,"show sorted");
             project.getProductBacklog().saveUserStory(userStory3);
-        List<UserStory> usSortedByPriority = productBacklogController.getUsSortedByPriority();
+        List<UserStory> usSortedByPriority = productBacklogSortController.getUsSortedByPriority();
         });
         // Assert
         assertTrue(exception.getMessage().contains("Check priority, cannot be < 0 or superior to 5."));

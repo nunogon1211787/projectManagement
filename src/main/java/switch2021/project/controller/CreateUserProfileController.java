@@ -14,6 +14,8 @@ import switch2021.project.utils.App;
 public class CreateUserProfileController {
 
     private Company company;
+    private UserProfileStore userProfileStore;
+    private UserProfile userProfile;
 
     /**
      * Constructor to UI (with SINGLETON).
@@ -28,10 +30,10 @@ public class CreateUserProfileController {
     }
 
 
-    public boolean createProfile(String name) {
-        UserProfileStore userProfileStore = this.company.getUserProfileStore();
-        UserProfile userProfile = userProfileStore.createProfile(name);
-        return userProfileStore.saveUserProfile(userProfile);
+    public boolean createUserProfile(String name) {
+        this.userProfileStore = this.company.getUserProfileStore();
+        this.userProfile = this.userProfileStore.createProfile(name);
+        return this.userProfileStore.saveUserProfile(this.userProfile);
     }
 }
 

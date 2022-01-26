@@ -23,7 +23,7 @@ public class ProductBacklogTest {
 
     @BeforeEach
     public void ini(){
-        company = new Company(); // sempre a mesma instancia
+        company = new Company();
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
         company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste"));

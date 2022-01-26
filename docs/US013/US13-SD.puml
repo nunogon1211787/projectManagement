@@ -6,9 +6,9 @@ title US013 - As Administrator, I want to create user profiles
 autoactivate on
 autonumber
 
-actor "Admistrator" as User
-participant ":{CreateUserProfile}UI" as System
-participant ":{CreateUserProfile}Controller" as Ctrl
+actor "Administrator" as User
+participant ": CreateUserProfileUI" as System
+participant ": CreateUserProfileController" as Ctrl
 participant ": Company" as C1
 participant " userProfileStore : UserProfileStore" as C2
 participant "up : UserProfile" as C3

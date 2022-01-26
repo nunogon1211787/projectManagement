@@ -15,8 +15,10 @@ public class CreateUserStoryController {
 
     private Company company;
     private ProjectStore projectStore;
-    List<Project> arrayProject;
+    private List<Project> arrayProject;
     private Project project;
+    private ProductBacklog productBacklog;
+    private UserStory userStory;
 
 
     /**
@@ -32,7 +34,7 @@ public class CreateUserStoryController {
     }
 
 
-    public List<Project> getAllProjectListByUserEmail(String email) {
+    public List<Project> getProjectListByUserEmail(String email) {
         this.projectStore = this.company.getProjectStore();
         this.arrayProject = this.projectStore.getProjectListByUserEmail(email);
         return arrayProject;
@@ -44,8 +46,8 @@ public class CreateUserStoryController {
     }
 
     public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
-        ProductBacklog productBacklog = this.project.getProductBacklog();
-        UserStory userStory = productBacklog.createUserStory(userStoryStatus, priority, description);
-        return productBacklog.saveUserStory(userStory);
+        this.productBacklog = this.project.getProductBacklog();
+        this.userStory = this.productBacklog.createUserStory(userStoryStatus, priority, description);
+        return this.productBacklog.saveUserStory(userStory);
     }
 }

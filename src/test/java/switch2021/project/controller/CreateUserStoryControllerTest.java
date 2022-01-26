@@ -127,7 +127,7 @@ public class CreateUserStoryControllerTest {
         project2.addResource(input);
         // Act
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-        List<Project> projectList = createUserStoryController.getAllProjectListByUserEmail("cris@ipp.pt");
+        List<Project> projectList = createUserStoryController.getProjectListByUserEmail("cris@ipp.pt");
         // Assert
         assertEquals(2, projectList.size());
     }
@@ -142,7 +142,7 @@ public class CreateUserStoryControllerTest {
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-            List<Project> projectList = createUserStoryController.getAllProjectListByUserEmail("");
+            List<Project> projectList = createUserStoryController.getProjectListByUserEmail("");
         });
         // Assert
         assertEquals("Email cannot be blank", exception.getMessage());
@@ -159,7 +159,7 @@ public class CreateUserStoryControllerTest {
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-        List<Project> projectList = createUserStoryController.getAllProjectListByUserEmail("dani@ipp.pt");
+        List<Project> projectList = createUserStoryController.getProjectListByUserEmail("dani@ipp.pt");
         });
         // Assert
         assertEquals("Email don't exist in system", exception.getMessage());

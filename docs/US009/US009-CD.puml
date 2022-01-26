@@ -4,37 +4,60 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-title US013 - As Administrator, I want to create user profiles
+title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
 
-class CreateUserProfileUI {
+class CreateUserStoryUI {
 
 }
 
-class CreateUserProfileController {
-    +createUserProfile(name): bool
+class CreateUserStoryController {
+    +getProjectListByUserEmail(String email)
+    +getProjectByCode(String code)
+    +createUserStory(status, priority, description)
 }
 
 class Company {
-    +getUserProfileStore()
+    +getProjectStore()
 }
 
-class UserProfileStore {
-   +createUserProfile(name)
-   +validateUserProfile(up)
-   +saveUserProfile(up)
-   -addUserProfile(up)
+class ProjectStore {
++getProjectListByUserEmail(String email)
++getProjectByCode(String code)
 }
 
-class UserProfile {
-    -name : String
-    +UserProfile(name)
- }
+class Project {
+-code : String
+-productBacklog : ProductBacklog
++getProductBacklog()
+}
 
-CreateUserProfileUI ..> CreateUserProfileController
+class ProductBacklog {
+-userStoryList : List<UserStory>
++createUserStory(status, priority, description)
++isValideUserStory(status, priority, description)
++saveUserStory(us)
++validateUserStory(us)
+}
 
-CreateUserProfileController ..> Company
-CreateUserProfileController ..> UserProfileStore
-Company "1" o-- "1" UserProfileStore: has
-UserProfileStore "1" *-- "*" UserProfile: Assigned
+class UserStory {
+- userStoryStatus : UserStoryStatus
+- priority : int
+- description : String
+- id_UserStory : int
+- parentUserStory : UserStory
++UserStory(status, priority,description)
+}
+
+CreateUserStoryUI ..> CreateUserStoryController
+
+CreateUserStoryController ..> Company
+CreateUserStoryController ..> ProjectStore
+CreateUserStoryController ..> Project
+CreateUserStoryController ..> ProductBacklog
+
+Company "1" o-- "1" ProjectStore: has
+ProjectStore "1" *-- "0..*" Project: has
+Project "1" -> "1" ProductBacklog
+ProductBacklog "1" -> "0..*" UserStory
 
 @enduml

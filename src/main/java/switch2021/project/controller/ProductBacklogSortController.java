@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProductBacklogController {
+public class ProductBacklogSortController {
 
 
     private Company company;
@@ -24,14 +24,14 @@ public class ProductBacklogController {
     /**
      * Constructor to UI (with SINGLETON).
      */
-    public ProductBacklogController() {
+    public ProductBacklogSortController() {
         this.company = App.getInstance().getCompany();
     }
 
     /**
      * Constructor to test (without SINGLETON).
      */
-    public ProductBacklogController(Company company) {
+    public ProductBacklogSortController(Company company) {
         this.company = company;
     }
 
@@ -52,6 +52,7 @@ public class ProductBacklogController {
         return userStoryList;
     }
 
+//TODO - ver questão do DTO
 
 //    public List<UserStoryDto> getUsSortedByPriority(){
 //        this.productBacklog = this.project.getProductBacklog();
