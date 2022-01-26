@@ -53,7 +53,7 @@ class AssignScrumMasterControllerTest {
         //Arrange
         LocalDate sDate;
         try {
-            sDate = proj1.getSprintStore().getCurrentSprint().getEndDate().plusDays(1);
+            sDate = proj1.getSprintList().getCurrentSprint().getEndDate().plusDays(1);
         }catch (NullPointerException e){
             sDate = LocalDate.now();
         }
@@ -105,7 +105,7 @@ class AssignScrumMasterControllerTest {
         //Arrange
         LocalDate sDate;
         try {
-            sDate = proj1.getSprintStore().getCurrentSprint().getEndDate().plusDays(1);
+            sDate = proj1.getSprintList().getCurrentSprint().getEndDate().plusDays(1);
         }catch (NullPointerException e){
             sDate = LocalDate.now();
         }

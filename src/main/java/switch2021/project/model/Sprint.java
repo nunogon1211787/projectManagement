@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.stores.TaskStore;
+import switch2021.project.stores.TaskList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class Sprint {
      **/
     private int id_Sprint;
     private String name;
-    private final TaskStore taskstore;
+    private final TaskList taskstore;
     private final SprintBacklog sprintBacklog;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -32,7 +32,7 @@ public class Sprint {
         this.name = name;
         this.startDate = startDate;
         this.sprintBacklog = new SprintBacklog();
-        this.taskstore = new TaskStore();
+        this.taskstore = new TaskList();
     }
 
     /**

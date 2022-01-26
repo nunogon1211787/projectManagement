@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.stores.SprintStore;
+import switch2021.project.stores.SprintList;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -26,7 +26,7 @@ public class Project {
     private SystemUser productOwner; // Verificar a necessidade de se manter este atributo
 
     private final BusinessSector businessSector;
-    private final SprintStore sprintStore;
+    private final SprintList sprintList;
     private ProjectTeam projectTeam;
 
     private LocalDate startDate;
@@ -54,7 +54,7 @@ public class Project {
         this.businessSector = businessSector;
 
         this.startDate = startDate;
-        this.sprintStore = new SprintStore();
+        this.sprintList = new SprintList();
 
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
@@ -161,7 +161,7 @@ public class Project {
      * Get the start date of the next Sprint and end date of the current Sprint
      */
     public Sprint getCurrentSprint() {
-      return this.sprintStore.getCurrentSprint();
+      return this.sprintList.getCurrentSprint();
     }
 
     /**
@@ -184,7 +184,7 @@ public class Project {
                 && Objects.equals(productBacklog, project.productBacklog)
                 && Objects.equals(productOwner, project.productOwner)
                 && Objects.equals(businessSector, project.businessSector)
-                && Objects.equals(sprintStore, project.sprintStore)
+                && Objects.equals(sprintList, project.sprintList)
                 && Objects.equals(projectTeam, project.projectTeam)
                 && Objects.equals(startDate, project.startDate)
                 && Objects.equals(endDate, project.endDate);
@@ -194,7 +194,7 @@ public class Project {
     public int hashCode() {
         return Objects.hash(code, projectName, description, customer, typology,
                 projectStatus, productBacklog, productOwner, businessSector,
-                sprintStore, projectTeam, startDate, endDate, numberOfSprints,
+                sprintList, projectTeam, startDate, endDate, numberOfSprints,
                 budget, sprintDuration);
     }
 }
