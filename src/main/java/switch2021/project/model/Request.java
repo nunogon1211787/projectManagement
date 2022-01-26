@@ -1,12 +1,17 @@
 package switch2021.project.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Getter
+@Setter
 public class Request {
 
     /**
-     * atributos da classe "Request"
+     * Class attributes
      **/
 
     private int idRequest;
@@ -16,39 +21,20 @@ public class Request {
     private boolean requestStatus;
 
     /**
-     * construtor da classe "Request"
+     * Class constructor
      **/
 
     public Request(UserProfile profile, SystemUser user) {
-        this.idRequest = idRequest;
         this.requestDate = LocalDate.now();
         this.user = user;
         this.profileRequested = profile;
-        this.requestStatus = false;
     }
-
-    /**
-     * getters da classe "Request"
-     **/
-
-    public LocalDate getRequestDate() {return requestDate;}
-
-    public SystemUser getUser() {return user;}
-
-    public UserProfile getProfile() {return this.profileRequested;}
-
-    public Integer getIdRequest() {return this.idRequest;}
-
-    public boolean getRequestStatus() {return requestStatus;}
-
 
     /**
      * Method to change request status
      * */
-
     public void changeRequestStatus(Request request){
-        this.requestStatus =true;
-
+        this.requestStatus = true;
     }
 
     @Override
@@ -62,12 +48,6 @@ public class Request {
     @Override
     public int hashCode() {
         return Objects.hash(requestDate,user, profileRequested);
-    }
-
-    public void setIdRequest(int idGenerator) {
-
-        this.idRequest = idGenerator;
-
     }
 }
 

@@ -10,20 +10,37 @@ actor "Administrator" as User
 participant ": SystemUserWithStatusUI" as System
 participant ": SystemUserWithStatusController" as Ctrl
 participant ": Company" as C1
-participant "systemUserStore : SystemUserStore" as C2
-participant "systemUserListWithStatus : List <SystemUser>" as C3
+participant "systemUserList : SystemUserStore" as C2
+participant ": SystemUserMapper" as C3
+participant "systemUser : SystemUser" as C4
+participant "systemUserDto : SystemUserDto" as C5
+participant "systemUserDtoList : List <SystemUserDto>" as C6
+
+
 
 
 activate User
 
 User -> System: Get list all user accounts and their status
-System -> Ctrl: getListUserAccountsWithStatus()
+System -> Ctrl: getListSystemUserWithStatus()
 Ctrl-> C1 : getSystemUserStore()
-C1--> Ctrl : systemUserStore
-Ctrl->C2 : getListUserAccountsWithStatus()
-C2->C3  ** : createSystemUserWithStatusList()
-C2-->Ctrl : systemUserWithStatusList
-Ctrl-->System : SystemUserWithStatusList
+C1--> Ctrl : sysUserStore
+Ctrl->C2 : getSystemUserList()
+
+C2-->Ctrl : systemUserList
+Ctrl->C3 :toDto(systemUserList)
+
+C3->C5 **: create
+ loop for each know SystemUser
+C3->C4 : getUserName()
+C3->C4 : getEmail()
+C3->C4 : getActivateUserStatus()
+C3-> C6 ** : create(userName, email, activateUserStatus)
+C3->C5 : add(systemUserDto)
+C5-->C3 : true
+end
+C3-->Ctrl: systemUserDtoList
+Ctrl-->System : systemUserDtoList
 System-->User : Show requested list user accounts with status
 
 @enduml

@@ -18,8 +18,6 @@ class RequestStoreTest {
     SystemUser user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
             "tester", "img_123", "img_123", "123456", profile);
 
-    //SystemUser user2 = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
-    //"tester", "img_123", "img_123", "123456", profile);
 
     Request request = new Request(profile, user);
 
@@ -57,7 +55,7 @@ class RequestStoreTest {
             Request request = new Request(newUserProfile, user);
 
             RequestStore requestTestList = new RequestStore();
-            requestTestList.addProfileRequest(request);
+            requestTestList.saveRequest(request);
             requestTestList.addProfileRequest(request);
         });
     }
@@ -74,15 +72,102 @@ class RequestStoreTest {
 
         RequestStore requestTestList = new RequestStore();
 
+
         assertTrue(requestTestList.addProfileRequest(request));
+        assertEquals(1,requestTestList.getRequestProfileList().size());
+
+    }
+    @Test
+    void removeProfileRequestSuccess() {
+        UserProfile userProfile = new UserProfile("Visitor");
+        SystemUser user = new SystemUser("Rogério Moreira", "xxx@isep.ipp.pt", "Devop", "1234567",
+                "1234567", "123", userProfile);
+
+        UserProfile newUserProfile = new UserProfile("Admin");
+
+        Request request = new Request(newUserProfile, user);
+
+        RequestStore requestTestList = new RequestStore();
+
+        assertTrue(requestTestList.addProfileRequest(request));
+        assertEquals(1, requestTestList.getRequestProfileList().size());
+        assertTrue(requestTestList.removeProfileRequest(request));
+        assertEquals(0, requestTestList.getRequestProfileList().size());
+
     }
 
     @Test
-    void testStatus() {
+    void alterProfileRequestStatus() {
+        UserProfile userProfile = new UserProfile("Visitor");
+        SystemUser user = new SystemUser("Rogério Moreira", "xxx@isep.ipp.pt", "Devop", "1234567",
+                "1234567", "123", userProfile);
+
+        UserProfile newUserProfile = new UserProfile("Admin");
+
+        Request request = new Request(newUserProfile, user);
+
+        RequestStore requestTestList = new RequestStore();
+
+        assertFalse(request.isRequestStatus());
+        request.changeRequestStatus(request);
+        assertTrue(request.isRequestStatus());
+    }
+
+    @Test
+    public void testStatus() {
 
         request.changeRequestStatus(request);
-        assertTrue(request.getRequestStatus());
+        assertTrue(request.isRequestStatus());
     }
+
+    @Test
+    public void validateRequest() {
+        UserProfile userProfile = new UserProfile("Visitor");
+        SystemUser user = new SystemUser("yoga", "xxx@isep.ipp.pt", "Devop", "1234567",
+                "1234567", "123", userProfile);
+        UserProfile newUserProfile = new UserProfile("Admin");
+
+        Request request = new Request(newUserProfile, user);
+        RequestStore requestTestList = new RequestStore();
+        requestTestList.addProfileRequest(request);
+
+        assertEquals(request,requestTestList.getRequestProfileList().get(0));
+
+    }
+
+    @Test
+
+    public void overrideTest() {
+        //Arrange
+
+        UserProfile profile = new UserProfile("name");
+        UserProfile profile2 = new UserProfile("name2");
+        UserProfile profile3 = new UserProfile("name3");
+        SystemUser user = new SystemUser("shyriu", "xxxx@isep.ipp.pt",
+                "tester", "img_123", "img_123", "123456", profile);
+        SystemUser user2 = new SystemUser("ikki", "yyyy@isep.ipp.pt",
+                "tester", "img_123", "img_123", "123456", profile2);
+        SystemUser user3 = new SystemUser("shun", "zzzz@isep.ipp.pt",
+                "tester", "img_123", "img_123", "123456", profile3);
+
+        Request request1 = new Request(profile, user2);
+        Request request2 = new Request(profile2,user3);
+        Request request3 = new Request(profile3,user);
+
+        RequestStore requestTestList1 = new RequestStore();
+        RequestStore requestTestList2 = new RequestStore();
+        RequestStore requestTestList3 = new RequestStore();
+
+        requestTestList1.addProfileRequest(request1);
+        requestTestList2.addProfileRequest(request1);
+        requestTestList3.addProfileRequest(request3);
+
+        //Assert
+        assertEquals(requestTestList1,requestTestList2);
+        assertNotEquals(requestTestList1,requestTestList3);
+        assertNotEquals(requestTestList1.hashCode(),requestTestList3.hashCode());
+    }
+
 
 
 }
