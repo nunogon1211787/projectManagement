@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CreateUserStoryController {
 
-    private Company company;
+    private final Company company;
     private ProjectStore projectStore;
     private List<Project> arrayProject;
     private Project project;

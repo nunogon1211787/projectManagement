@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title US024 - As Administrator, I want to get a list all user accounts and their status
+
+autoactivate on
+autonumber
+
+actor "Administrator" as User
+participant ": SystemUserWithStatusUI" as System
+participant ": SystemUserWithStatusController" as Ctrl
+participant ": Company" as C1
+participant "systemUserStore : SystemUserStore" as C2
+participant "systemUserListWithStatus : List <SystemUser>" as C3
+
+
+activate User
+
+User -> System: Get list all user accounts and their status
+System -> Ctrl: getListUserAccountsWithStatus()
+Ctrl-> C1 : getSystemUserStore()
+C1--> Ctrl : systemUserStore
+Ctrl->C2 : getListUserAccountsWithStatus()
+C2->C3  ** : createSystemUserWithStatusList()
+C2-->Ctrl : systemUserWithStatusList
+Ctrl-->System : SystemUserWithStatusList
+System-->User : Show requested list user accounts with status
+
+@enduml

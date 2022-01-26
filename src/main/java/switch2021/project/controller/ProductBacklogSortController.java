@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class ProductBacklogSortController {
 
 
-    private Company company;
+    private final Company company;
     private ProjectStore projectStore;
     private Project project;
     private ProductBacklog productBacklog;

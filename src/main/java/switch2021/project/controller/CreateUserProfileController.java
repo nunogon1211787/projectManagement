@@ -13,7 +13,7 @@ import switch2021.project.utils.App;
 
 public class CreateUserProfileController {
 
-    private Company company;
+    private final Company company;
     private UserProfileStore userProfileStore;
     private UserProfile userProfile;
 
