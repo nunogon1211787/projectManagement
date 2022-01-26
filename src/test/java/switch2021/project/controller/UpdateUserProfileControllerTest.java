@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.stores.SystemUserStore;
 import switch2021.project.stores.UserProfileStore;
-import switch2021.project.utils.App;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UpdateUserProfileControllerTest {
@@ -21,8 +21,9 @@ public class UpdateUserProfileControllerTest {
         company = new Company(); // sempre a mesma instancia
         systemUserStore = company.getSystemUserStore();
         userProfileStore = company.getUserProfileStore();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
-                "tester", "123456", "123456", "IMG_123", userProfileStore.getUserProfile(0));
+                "tester", "123456", "123456", "IMG_123", userProfile);
         systemUserStore.saveSystemUser(user);
     }
 
@@ -67,7 +68,7 @@ public class UpdateUserProfileControllerTest {
                 "tester", "123456", "123456", "", userProfileStore.getUserProfile("Visitor"));
         UpdateUserProfileController controllerTest = new UpdateUserProfileController(company);
         //Act
-        company.getSystemUserStore().getSystemUserList().add(user);
+        company.getSystemUserStore().getSystemUsers().add(user);
         //Assert
         assertTrue(controllerTest.updateProfile(user, userProfileStore.getUserProfile(1), userProfileStore.getUserProfile(2)));
     }

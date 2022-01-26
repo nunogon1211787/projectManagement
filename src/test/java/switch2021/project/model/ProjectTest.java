@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.stores.ProjectStore;
-import switch2021.project.stores.SprintStore;
+import switch2021.project.stores.SprintList;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,7 +92,7 @@ class ProjectTest {
     @Test
     @DisplayName("Project addition to list test")
     public void projectAdditionTest() {
-        List<Project> test = company.getProjectStore().getProjectList();
+        List<Project> test = company.getProjectStore().getProjects();
         String code = test.get(0).getCode();
         String expectedCode = "Project_2022_1";
         assertEquals(expectedCode,code);
@@ -328,24 +328,24 @@ class ProjectTest {
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTest() {
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
-        SprintStore sprintStore1 = new SprintStore();
-        sprintStore1.saveSprint(sprint1);
-        SprintStore projectSprintStore = this.project2.getSprintStore();
-        projectSprintStore.saveSprint(sprint1);
-        assertEquals(sprintStore1, projectSprintStore);
+        SprintList sprintList1 = new SprintList();
+        sprintList1.saveSprint(sprint1);
+        SprintList projectSprintList = this.project2.getSprintList();
+        projectSprintList.saveSprint(sprint1);
+        assertEquals(sprintList1, projectSprintList);
     }
 
     @Test
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTestFail() {
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
-        SprintStore sprintStore1 = new SprintStore();
-        sprintStore1.saveSprint(sprint1);
+        SprintList sprintList1 = new SprintList();
+        sprintList1.saveSprint(sprint1);
         Sprint sprint2 = new Sprint("Effort View 1", LocalDate.now());
-        SprintStore projectSprintStore = this.project2.getSprintStore();
-        projectSprintStore.saveSprint(sprint1);
-        projectSprintStore.saveSprint(sprint2);
-        assertNotEquals(sprintStore1, projectSprintStore);
+        SprintList projectSprintList = this.project2.getSprintList();
+        projectSprintList.saveSprint(sprint1);
+        projectSprintList.saveSprint(sprint2);
+        assertNotEquals(sprintList1, projectSprintList);
     }
 
     @Test
@@ -357,10 +357,10 @@ class ProjectTest {
         sprint1.getTaskstore().addTaskToTheList(taskTest);
         List<Task> taskList = new ArrayList<>();
         //Act
-        project2.getSprintStore().saveSprint(sprint1);
+        project2.getSprintList().saveSprint(sprint1);
         taskList.add(taskTest);
         //Assert
-        assertEquals(taskList, project2.getSprintStore().getSprint(1).getListOfTasksOfASprint());
+        assertEquals(taskList, project2.getSprintList().getSprint(1).getListOfTasksOfASprint());
     }
 
     @Test
@@ -375,7 +375,7 @@ class ProjectTest {
         store.saveNewProject(proj1);
         store.saveNewProject(proj1);
 
-        assertEquals(1,store.getProjectList().size());
+        assertEquals(1,store.getProjects().size());
     }
 
     @Test
@@ -394,7 +394,7 @@ class ProjectTest {
         store.saveNewProject(proj1);
         store.saveNewProject(proj2);
 
-        assertEquals(2,store.getProjectList().size());
+        assertEquals(2,store.getProjects().size());
     }
 
 

@@ -1,0 +1,94 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor SM_TeamMember as actor
+participant ":createTaskOutsideUserStoryUI" as UI
+participant ":createTaskOutsideUserStoryController" as Ctrl
+participant ":Company" as Co
+participant "pStore:ProjectStore" as pStore
+participant "currentProjList:List<Project>" as cPList
+participant "proj:Project" as proj
+participant ":ProjectMapper" as projMapper
+participant "projListDTO:List<ProjectDTO>" as pListDTO
+participant "projDTO: ProjectDTO" as projDTO
+
+
+actor -> UI: Ask for projects that I am associated with
+activate UI
+
+UI -> Ctrl: getCurrentProjectsByMember(email)
+activate Ctrl
+
+Ctrl -> Co: getProjectStore()
+activate Co
+
+Co --> Ctrl: pStore
+deactivate Co
+
+Ctrl -> pStore: getCurrentProjectListByUserEmail(email)
+activate pStore
+
+pStore -> cPList**: create()
+
+loop for Each known project
+
+pStore -> proj: hasCurrentProjectTeamMember(email)
+activate proj
+
+proj --> pStore: result
+deactivate proj
+
+opt result = true
+
+pStore -> cPList: add(proj)
+activate cPList
+
+cPList --> pStore: true
+deactivate cPList
+
+end
+
+end
+
+pStore --> Ctrl: currentProjList
+deactivate pStore
+
+Ctrl -> projMapper: toDTO(currentProjList)
+activate projMapper
+
+projMapper -> pListDTO**: create()
+
+loop for each project in currentProjList
+
+projMapper -> cPList: get(i)
+activate cPList
+
+cPList --> projMapper: proj
+deactivate cPList
+
+projMapper -> projMapper: projDTO = toDTO(proj)
+activate projMapper
+
+projMapper -> projDTO**: create()
+deactivate projMapper
+
+projMapper -> pListDTO: add(projDTO)
+activate pListDTO
+
+pListDTO --> projMapper: true
+deactivate pListDTO
+
+end
+
+projMapper --> Ctrl: projListDTO
+deactivate projMapper
+
+Ctrl --> UI: projListDTO
+deactivate Ctrl
+
+UI --> actor: projListDTO
+deactivate UI
+
+@enduml

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="545px" preserveAspectRatio="none" style="width:1219px;height:545px;background:#FFFFFF;" version="1.1" viewBox="0 0 1219 545" width="1219px" zoomAndPan="magnify"><defs><filter height="300%" id="f8lnrogtdaj7h" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><rect fill="#FFFFFF" filter="url(#f8lnrogtdaj7h)" height="319.7734" style="stroke:#A80036;stroke-width:1.0;" width="10" x="239" y="121.9609"/><rect fill="#FFFFFF" filter="url(#f8lnrogtdaj7h)" height="259.0703" style="stroke:#A80036;stroke-width:1.0;" width="10" x="490" y="152.3125"/><rect fill="#FFFFFF" filter="url(#f8lnrogtdaj7h)" height="91.0547" style="stroke:#A80036;stroke-width:1.0;" width="10" x="704" y="182.6641"/><rect fill="#FFFFFF" filter="url(#f8lnrogtdaj7h)" height="30.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="854" y="213.0156"/><rect fill="#FFFFFF" filter="url(#f8lnrogtdaj7h)" height="76.9609" style="stroke:#A80036;stroke-width:1.0;" width="10" x="966" y="304.0703"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="65" x2="65" y1="89.6094" y2="459.7344"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="244" x2="244" y1="89.6094" y2="459.7344"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="495" x2="495" y1="89.6094" y2="459.7344"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="709" x2="709" y1="89.6094" y2="459.7344"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="859" x2="859" y1="89.6094" y2="459.7344"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="971" x2="971" y1="89.6094" y2="459.7344"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="1132" x2="1132" y1="345.375" y2="459.7344"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="5" y="86.5332">SM_TeamMember</text><ellipse cx="65.5" cy="15" fill="#FEFECE" filter="url(#f8lnrogtdaj7h)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M65.5,23 L65.5,50 M52.5,31 L78.5,31 M65.5,50 L52.5,65 M65.5,50 L78.5,65 " fill="none" filter="url(#f8lnrogtdaj7h)" style="stroke:#A80036;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="115" x="5" y="473.2676">SM_TeamMember</text><ellipse cx="65.5" cy="486.3438" fill="#FEFECE" filter="url(#f8lnrogtdaj7h)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M65.5,494.3438 L65.5,521.3438 M52.5,502.3438 L78.5,502.3438 M65.5,521.3438 L52.5,536.3438 M65.5,521.3438 L78.5,536.3438 " fill="none" filter="url(#f8lnrogtdaj7h)" style="stroke:#A80036;stroke-width:2.0;"/><rect fill="#FEFECE" filter="url(#f8lnrogtdaj7h)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="212" x="136" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="198" x="143" y="74.5332">:createTaskOutsideUserStoryUI</text><rect fill="#FEFECE" filter="url(#f8lnrogtdaj7h)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="212" x="136" y="458.7344"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="198" x="143" y="480.2676">:createTaskOutsideUserStoryUI</text><rect fill="#FEFECE" filter="url(#f8lnrogtdaj7h)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="262" x="362" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="248" x="369" y="74.5332">:createTaskOutsideUserStoryController</text><rect fill="#FEFECE" filter="url(#f8lnrogtdaj7h)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="262" x="362" y="458.7344"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="248" x="369" y="480.2676">:createTaskOutsideUserStoryController</text><rect fill="#FEFECE" filter="url(#f8lnrogtdaj7h)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="138" x="638" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="124" x="645" y="74.5332">pStore:ProjectStore</text><rect fill="#FEFECE" filter="url(#f8lnrogtdaj7h)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="138" x="638" y="458.7344"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="124" x="645" y="480.2676">pStore:ProjectStore</text><rect fill="#FEFECE" filter="url(#f8lnrogtdaj7h)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="86" x="814" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="821" y="74.5332">proj:Project</text><rect fill="#FEFECE" filter="url(#f8lnrogtdaj7h)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="86" x="814" y="458.7344"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="821" y="480.2676">proj:Project</text><rect fill="#FEFECE" filter="url(#f8lnrogtdaj7h)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="110" x="914" y="53"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="921" y="74.5332">:ProjectMapper</text><rect fill="#FEFECE" filter="url(#f8lnrogtdaj7h)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="110" x="914" y="458.7344"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="921" y="480.2676">:ProjectMapper</text><rect fill="#FEFECE" filter="url(#f8lnrogtdaj7h)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="150" x="1055" y="458.7344"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="1062" y="480.2676">projDTO: ProjectDTO</text><rect fill="#FFFFFF" filter="url(#f8lnrogtdaj7h)" height="319.7734" style="stroke:#A80036;stroke-width:1.0;" width="10" x="239" y="121.9609"/><rect fill="#FFFFFF" filter="url(#f8lnrogtdaj7h)" height="259.0703" style="stroke:#A80036;stroke-width:1.0;" width="10" x="490" y="152.3125"/><rect fill="#FFFFFF" filter="url(#f8lnrogtdaj7h)" height="91.0547" style="stroke:#A80036;stroke-width:1.0;" width="10" x="704" y="182.6641"/><rect fill="#FFFFFF" filter="url(#f8lnrogtdaj7h)" height="30.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="854" y="213.0156"/><rect fill="#FFFFFF" filter="url(#f8lnrogtdaj7h)" height="76.9609" style="stroke:#A80036;stroke-width:1.0;" width="10" x="966" y="304.0703"/><polygon fill="#A80036" points="227,117.9609,237,121.9609,227,125.9609,231,121.9609" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="65.5" x2="233" y1="121.9609" y2="121.9609"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="72.5" y="117.1045">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="98" x="83.5" y="117.1045">Choose a project</text><polygon fill="#A80036" points="478,148.3125,488,152.3125,478,156.3125,482,152.3125" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="249" x2="484" y1="152.3125" y2="152.3125"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="256" y="147.4561">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="118" x="267" y="147.4561">getProject(projCode)</text><polygon fill="#A80036" points="692,178.6641,702,182.6641,692,186.6641,696,182.6641" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="500" x2="698" y1="182.6641" y2="182.6641"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="507" y="177.8076">3</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="164" x="518" y="177.8076">getProjectByCode(projCode)</text><polygon fill="#A80036" points="842,209.0156,852,213.0156,842,217.0156,846,213.0156" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="714" x2="848" y1="213.0156" y2="213.0156"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="721" y="208.1592">4</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="110" x="732" y="208.1592">hasCode(projCode)</text><polygon fill="#A80036" points="725,239.3672,715,243.3672,725,247.3672,721,243.3672" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="719" x2="858" y1="243.3672" y2="243.3672"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="731" y="238.5107">5</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="742" y="238.5107">true</text><polygon fill="#A80036" points="511,269.7188,501,273.7188,511,277.7188,507,273.7188" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="505" x2="708" y1="273.7188" y2="273.7188"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="517" y="268.8623">6</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="21" x="528" y="268.8623">proj</text><polygon fill="#A80036" points="954,300.0703,964,304.0703,954,308.0703,958,304.0703" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="500" x2="960" y1="304.0703" y2="304.0703"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="507" y="299.2139">7</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="66" x="518" y="299.2139">toDTO(proj)</text><polygon fill="#A80036" points="1043,330.4219,1053,334.4219,1043,338.4219,1047,334.4219" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="976" x2="1049" y1="334.4219" y2="334.4219"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="983" y="329.5654">8</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="44" x="994" y="329.5654">create()</text><rect fill="#FEFECE" filter="url(#f8lnrogtdaj7h)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="150" x="1055" y="312.0703"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="1062" y="333.6035">projDTO: ProjectDTO</text><polygon fill="#A80036" points="511,377.0313,501,381.0313,511,385.0313,507,381.0313" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="505" x2="970" y1="381.0313" y2="381.0313"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="517" y="376.1748">9</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="47" x="528" y="376.1748">projDTO</text><polygon fill="#A80036" points="260,407.3828,250,411.3828,260,415.3828,256,411.3828" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="254" x2="494" y1="411.3828" y2="411.3828"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="266" y="406.5264">10</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="47" x="284" y="406.5264">projDTO</text><polygon fill="#A80036" points="76.5,437.7344,66.5,441.7344,76.5,445.7344,72.5,441.7344" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="70.5" x2="243" y1="441.7344" y2="441.7344"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="14" x="82.5" y="436.8779">11</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="47" x="100.5" y="436.8779">projDTO</text><!--MD5=[b770107418b07364e3d5c111cbc2fa6d]
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor SM_TeamMember as actor
+participant ":createTaskOutsideUserStoryUI" as UI
+participant ":createTaskOutsideUserStoryController" as Ctrl
+participant "pStore:ProjectStore" as pStore
+participant "proj:Project" as proj
+participant ":ProjectMapper" as projMapper
+participant "projDTO: ProjectDTO" as projDTO
+
+
+actor -> UI: Choose a project
+activate UI
+
+UI -> Ctrl: getProject(projCode)
+activate Ctrl
+
+Ctrl -> pStore: getProjectByCode(projCode)
+activate pStore
+
+pStore -> proj: hasCode(projCode)
+activate proj
+
+proj - -> pStore: true
+deactivate proj
+
+pStore - -> Ctrl: proj
+deactivate pStore
+
+Ctrl -> projMapper: toDTO(proj)
+activate projMapper
+
+projMapper -> projDTO**: create()
+
+projMapper - -> Ctrl: projDTO
+deactivate projMapper
+
+Ctrl - -> UI: projDTO
+deactivate Ctrl
+
+UI - -> actor: projDTO
+deactivate UI
+
+
+@enduml
+
+@startuml
+
+autonumber
+
+actor SM_TeamMember as actor
+participant ":createTaskOutsideUserStoryUI" as UI
+participant ":createTaskOutsideUserStoryController" as Ctrl
+participant "pStore:ProjectStore" as pStore
+participant "proj:Project" as proj
+participant ":ProjectMapper" as projMapper
+participant "projDTO: ProjectDTO" as projDTO
+
+
+actor -> UI: Choose a project
+activate UI
+
+UI -> Ctrl: getProject(projCode)
+activate Ctrl
+
+Ctrl -> pStore: getProjectByCode(projCode)
+activate pStore
+
+pStore -> proj: hasCode(projCode)
+activate proj
+
+proj - -> pStore: true
+deactivate proj
+
+pStore - -> Ctrl: proj
+deactivate pStore
+
+Ctrl -> projMapper: toDTO(proj)
+activate projMapper
+
+projMapper -> projDTO**: create()
+
+projMapper - -> Ctrl: projDTO
+deactivate projMapper
+
+Ctrl - -> UI: projDTO
+deactivate Ctrl
+
+UI - -> actor: projDTO
+deactivate UI
+
+
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 GMT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

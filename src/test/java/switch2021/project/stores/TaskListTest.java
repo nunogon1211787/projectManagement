@@ -2,17 +2,17 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Task;
-import switch2021.project.stores.TaskStore;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TaskStoreTest {
+public class TaskListTest {
 
 
     @Test
     void testIfCreatedListStartsEmpty() {
 
         //Arrange
-        TaskStore test = new TaskStore();
+        TaskList test = new TaskList();
         //Assert
         int listSizeResult = test.getTaskList().size();
         assertEquals(listSizeResult, 0);
@@ -23,7 +23,7 @@ public class TaskStoreTest {
     void addTaskToTheList() {
 
         //Arrange
-        TaskStore test = new TaskStore();
+        TaskList test = new TaskList();
         Task newTask = new Task();
         test.addTaskToTheList(newTask);
         //Assert
@@ -35,7 +35,7 @@ public class TaskStoreTest {
     void removeTaskFromTheList() {
 
         //Arrange
-        TaskStore test = new TaskStore();
+        TaskList test = new TaskList();
         Task newTask = new Task();
         Task newTask2 = new Task();
         //Assert
@@ -49,7 +49,7 @@ public class TaskStoreTest {
     void validateIfTaskDontExistOnList() {
 
         //Arrange
-        TaskStore test = new TaskStore();
+        TaskList test = new TaskList();
         Task newTask = new Task();
         //Assert
         assertTrue(test.saveTask(newTask));

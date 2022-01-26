@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.stores.SprintStore;
+import switch2021.project.stores.SprintList;
 
 import java.time.LocalDate;
 
@@ -28,19 +28,19 @@ class UserStoryOfSprintTest {
 
     @Test
     void getSprintIDSuccess() {
-        SprintStore sprintStore = new SprintStore();
-        sprintStore.saveSprint(sprint);
-        Sprint sprint1 = sprintStore.getSprint(1);
+        SprintList sprintList = new SprintList();
+        sprintList.saveSprint(sprint);
+        Sprint sprint1 = sprintList.getSprint(1);
         assertEquals(sprint, sprint1);
     }
 
     @Test
     void getSprintIDNotSuccess() {
-        SprintStore sprintStore = new SprintStore();
-        sprintStore.saveSprint(sprint);
-        Sprint sprint2 = sprintStore.getSprint(1);
-        sprintStore.saveSprint(sprint1);
-        Sprint sprint3 = sprintStore.getSprint(5);
+        SprintList sprintList = new SprintList();
+        sprintList.saveSprint(sprint);
+        Sprint sprint2 = sprintList.getSprint(1);
+        sprintList.saveSprint(sprint1);
+        Sprint sprint3 = sprintList.getSprint(5);
         assertNotEquals(sprint2, sprint3);
     }
 

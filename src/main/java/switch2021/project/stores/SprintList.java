@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-public class SprintStore {
+public class SprintList {
 
     /**
      * Atributos da Classe
@@ -19,7 +19,7 @@ public class SprintStore {
     /**
      * Constructors with data
      **/
-    public SprintStore() {
+    public SprintList() {
         this.sprintList = new ArrayList<>();
     }
 
@@ -182,8 +182,8 @@ public class SprintStore {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SprintStore)) return false;
-        SprintStore that = (SprintStore) o;
+        if (!(o instanceof SprintList)) return false;
+        SprintList that = (SprintList) o;
         return sprintList.equals(that.sprintList);
     }
 

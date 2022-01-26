@@ -6,6 +6,7 @@ import switch2021.project.stores.UserProfileStore;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SystemUserTest {
@@ -14,9 +15,10 @@ class SystemUserTest {
     public void verifyEmail() {
 
         //Arrange
-        UserProfile tes = new UserProfile("ddd");
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser ivan = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456",
-                                        "123456", "img_123456", tes);
+                "123456", "img_123456", userProfile);
         //Act
         String emailCheck = "xxxx";
         //Assert
@@ -27,8 +29,9 @@ class SystemUserTest {
     public void verifyEmailFail() {
 
         //Arrange
-        UserProfile tes = new UserProfile("ddd");
-        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "abcde", "abcde", "123_img", tes);
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "abcde", "abcde", "123_img", userProfile);
         //Act
         String emailCheck = "4321@isep.ipp.pt";
         //Assert
@@ -36,29 +39,28 @@ class SystemUserTest {
     }
 
     @Test
-    public void UpdateProfile(){
+    public void UpdateProfile() {
         //Arrange
         Company company = new Company();
-        UserProfileStore userProfileStore = company.getUserProfileStore();
-        SystemUserStore systemUserStore = company.getSystemUserStore();
-        SystemUser user = new SystemUser("xxx","xxx@isep.ipp.pt","tester", "123456" , "123456", "img_123", userProfileStore.getUserProfile(0));
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "123456", "123456", "img_123", profile);
         //Act
-        systemUserStore.saveSystemUser(user);
+        UserProfile newProfile = company.getUserProfileStore().getUserProfile("User");
         // Assert
-        assertTrue(user.updateProfile(userProfileStore.getUserProfile(0), userProfileStore.getUserProfile(1)));
+        assertTrue(user.updateProfile(profile, newProfile));
     }
 
     @Test
-    public void UpdateProfileAlreadyExist(){
+    public void UpdateProfileAlreadyExist() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             Company company = new Company();
-            UserProfileStore userProfileStore = company.getUserProfileStore();
-            SystemUserStore systemUserStore = company.getSystemUserStore();
-            SystemUser user = new SystemUser("xxx","xxx@isep.ipp.pt","tester", "123456" , "123456", "img_123", userProfileStore.getUserProfile(0));
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "123456", "123456", "img_123", profile);
             //Act
-            user.updateProfile(userProfileStore.getUserProfile(0), userProfileStore.getUserProfile(0));
+            UserProfile newProfile = company.getUserProfileStore().getUserProfile("Visitor");
+            user.updateProfile(profile, newProfile);
         });
     }
 
@@ -69,8 +71,9 @@ class SystemUserTest {
         //stored in system user with the encryptation method.
 
         //Arrange
-        UserProfile tes = new UserProfile("ddd");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "HELLO", "HELLO", "png_123", tes);
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "HELLO", "HELLO", "png_123", userProfile);
         //Act
         joana.updatePassword("HELLO", "ghi", "ghi");
         //Assert
@@ -83,9 +86,10 @@ class SystemUserTest {
         //Test to verify if the oldpassword, stored in the system user, is equal or diferent from the
         //password that came from User Interface (UI).
         //Arrange
-        UserProfile tes = new UserProfile("ddd");
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
-                "HELLO_01", "HELLO_01", "png_123", tes);
+                "HELLO_01", "HELLO_01", "png_123", userProfile);
         //Act
         assertFalse(joana.updatePassword("HELLO_02", "GOODBYE", "GOODBYE"));
 
@@ -95,9 +99,10 @@ class SystemUserTest {
     public void setAllDataSuccess() {
 
         //Arrange
-        UserProfile tes = new UserProfile("ddd");
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
-                "123", "123", "img_123", tes);
+                "123", "123", "img_123", userProfile);
         //Act and Assert
         assertTrue(joana.setAllData("Joana Silva", "Aluna_100", "img_900"));
     }
@@ -165,6 +170,7 @@ class SystemUserTest {
     @Test
     public void createSystemUserSuccess() {
         //Arrange
+        Company company = new Company();
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
         String password = "ghi";
@@ -172,34 +178,20 @@ class SystemUserTest {
         String function = "tester";
         String photo = "photo";
 
-        Company company = new Company();
-        List<UserProfile> assignedProfileExpected = new ArrayList<>();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        assignedProfileExpected.add(profile);
         SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
 
-        String userNameExpected = "manueloliveira";
-        String emailExpected = "manueloliveira@beaver.com";
+        List<UserProfile> assignedProfileExpected = new ArrayList<>();
+        assignedProfileExpected.add(profile);
         String passwordExpected = "ÊËÌ";
-        String functionExpected = "tester";
-        String photoExpected = "photo";
-
-        //Act
-        String userNameResult = newUser.getUserName();
-        String emailResult = newUser.getEmail();
-        String passwordResult = newUser.getPassword();
-        String functionResult = newUser.getFunction();
-        String photoResult = newUser.getPhoto();
-        boolean activateUserResult = newUser.getActivateUserStatus();
-        List<UserProfile> assignedProfileResult = newUser.getAssignedProfileList();
         //Assert
-        assertEquals(userNameExpected, userNameResult);
-        assertEquals(emailExpected, emailResult);
-        assertEquals(passwordExpected, passwordResult);
-        assertEquals(functionExpected, functionResult);
-        assertEquals(photoExpected, photoResult);
-        assertFalse(activateUserResult);
-        assertEquals(assignedProfileExpected, assignedProfileResult);
+        assertEquals(userName, newUser.getUserName());
+        assertEquals(email, newUser.getEmail());
+        assertEquals(passwordExpected, newUser.getPassword());
+        assertEquals(function, newUser.getFunction());
+        assertEquals(photo, newUser.getPhoto());
+        assertFalse(newUser.getActivateUserStatus());
+        assertEquals(assignedProfileExpected, newUser.getAssignedProfileList());
     }
 
     @Test
@@ -345,21 +337,151 @@ class SystemUserTest {
             SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         });
     }
-        @Test
-        public void createSystemUserFailPasswordsNotMatch() {
-            //Assert
-            assertThrows(IllegalArgumentException.class, () -> {
-                //Arrange
-                String userName = "manueloliveira";
-                String email = "m";
-                String password = "ghi";
-                String passwordConfirmation = "abc";
-                String function = "tester";
-                String photo = "photo";
-                Company company = new Company();
-                UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-                SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
-            });
+
+    @Test
+    public void createSystemUserFailFunctionIsEmpty() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String userName = "manueloliveira";
+            String email = "manueloliveira@beaver.com";
+            String password = "ghi";
+            String passwordConfirmation = "ghi";
+            String function = "";
+            String photo = "photo";
+            Company company = new Company();
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+        });
+    }
+
+    @Test
+    public void createSystemUserFailFunctionIsShort() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String userName = "manueloliveira";
+            String email = "manueloliveira@beaver.com";
+            String password = "ghi";
+            String passwordConfirmation = "ghi";
+            String function = "t";
+            String photo = "photo";
+            Company company = new Company();
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+        });
+    }
+
+    @Test
+    public void createSystemUserFailPasswordIsEmpty() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String userName = "manueloliveira";
+            String email = "manueloliveira@beaver.com";
+            String password = "";
+            String passwordConfirmation = "";
+            String function = "tester";
+            String photo = "photo";
+            Company company = new Company();
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+        });
+    }
+
+    @Test
+    public void createSystemUserFailPasswordIsShort() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String userName = "manueloliveira";
+            String email = "manueloliveira@beaver.com";
+            String password = "g";
+            String passwordConfirmation = "g";
+            String function = "tester";
+            String photo = "photo";
+            Company company = new Company();
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+        });
+    }
+
+    @Test
+    public void createSystemUserFailWrongFunction() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String userName = "manueloliveira";
+            String email = "manueloliveira@beaver.com";
+            String password = "ghi";
+            String passwordConfirmation = "ghi";
+            String function = "tester";
+            String photo = "photo";
+            Company company = new Company();
+            UserProfile profile = company.getUserProfileStore().getUserProfile("User");
+            SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+        });
+    }
+
+    @Test
+    public void createSystemUserFailPasswordsNotMatch() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String userName = "manueloliveira";
+            String email = "m";
+            String password = "ghi";
+            String passwordConfirmation = "abc";
+            String function = "tester";
+            String photo = "photo";
+            Company company = new Company();
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+        });
+    }
+
+    @Test
+    public void overrideAndHashCodeTest() {
+        //Arrange
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String passwordConfirmation = "ghi";
+        String function = "tester";
+        String photo = "photo";
+        String email2 = "maneloliveira@beaver.com";
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        //newUser and newUser2 are equals
+        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+        SystemUser newUser2 = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+        //newUser3 is different (different email)
+        SystemUser newUser3 = company.getSystemUserStore().createSystemUser(userName, email2, function, password, passwordConfirmation, photo, profile);
+        //Assert
+        assertNotSame(newUser,newUser2);
+        assertEquals(newUser,newUser2);
+        assertEquals(newUser.hashCode(),newUser2.hashCode());
+        assertNotEquals(newUser,newUser3);
+        assertNotEquals(newUser.hashCode(),newUser3.hashCode());
+    }
+
+    @Test
+    public void setActivateUser() {
+        //Arrange
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String passwordConfirmation = "ghi";
+        String function = "tester";
+        String photo = "photo";
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+        assertFalse(newUser.getActivateUserStatus());
+        //Act
+        newUser.setActivateUser();
+        //Assert
+        assertTrue(newUser.getActivateUserStatus());
     }
 
 //    @Test

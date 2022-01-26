@@ -1,7 +1,6 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.*;
-import switch2021.project.stores.ProjectStore;
 import switch2021.project.utils.App;
 
 import java.time.LocalDate;
@@ -26,7 +25,7 @@ public class EditProjectInfoController {
 
 
     public List<Project> getProjectList (){
-        this.arrayProject = this.company.getProjectStore().getProjectList();
+        this.arrayProject = this.company.getProjectStore().getProjects();
         return arrayProject;
     }
 

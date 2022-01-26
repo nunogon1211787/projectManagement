@@ -6,53 +6,44 @@ skinparam classAttributeIconSize 0
 
 title US024 - As Administrator, I want to get a list all user accounts and their status
 
-class UserAccountStatusUI {
+class SystemUserWithStatusUI {
 
 }
 
-class ProductBacklogSortController {
-    +getProjectListByUserEmail(String email)
-    +getProject(String code)
-    +getUsSortedByPriority()
+class SystemUserWithStatusController {
+    +getListUserAccountsWithStatus()
+
 }
 
 class Company {
-    +getProjectStore()
+    +getSystemUserStore()
 }
 
-class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
+class SystemUserStore {
++getListUserAccountsWithStatus()
++createSystemUserWithStatusList()
 }
 
-class Project {
--code : String
--productBacklog : ProductBacklog
-+getProductBacklog()
+class SystemUser {
+-userName : String
+-email : String
+-photo : String
+-password : String
+-function : String
+-activateUser : boolean
+-assignedProfileList : List<UserProfile>
++List <SystemUser>()
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+getUsSortedByPriority()
-}
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
-}
+SystemUserWithStatusUI ..> SystemUserWithStatusController
 
-UserAccountStatusUI ..> ProductBacklogSortController
+SystemUserWithStatusController ..> Company
+SystemUserWithStatusController ..> SystemUserStore
+SystemUserWithStatusController ..> SystemUser
 
-ProductBacklogSortController ..> Company
-ProductBacklogSortController ..> ProjectStore
-ProductBacklogSortController ..> Project
-ProductBacklogSortController ..> ProductBacklog
 
-Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+Company "1" o-- "1" SystemUserStore: uses
+SystemUserStore "1" *-- "0..*" SystemUser: has
+
 @enduml

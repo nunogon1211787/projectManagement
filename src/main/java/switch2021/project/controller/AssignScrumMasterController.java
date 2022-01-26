@@ -51,7 +51,7 @@ public class AssignScrumMasterController {
 
         boolean msg = false;
 
-        LocalDate startDateNextSprint = project.getSprintStore().getCurrentSprint().getEndDate().plusDays(1);
+        LocalDate startDateNextSprint = project.getSprintList().getCurrentSprint().getEndDate().plusDays(1);
         int sprintDuration = project.getSprintDuration();
         ProjectRole role = company.getProjectRoleStore().getProjectRole(roleName);
         if(this.resource == getResource(email)){ msg=project.getProjectTeam().assignProjectRole(resource, startDateNextSprint, sprintDuration, role); }

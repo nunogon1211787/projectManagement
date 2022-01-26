@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.stores.SprintStore;
+import switch2021.project.stores.SprintList;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,9 +29,9 @@ public class SprintTest {
     public void sprintConstructorFail_ID() {
         //Arrange
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
-        SprintStore sprintStore = new SprintStore();
+        SprintList sprintList = new SprintList();
         //Act
-        sprintStore.saveSprint(sprint);
+        sprintList.saveSprint(sprint);
         int x = sprint.getId_Sprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();

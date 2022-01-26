@@ -36,7 +36,7 @@ public class CreateUserStoryController {
 
     public List<Project> getProjectListByUserEmail(String email) {
         this.projectStore = this.company.getProjectStore();
-        this.arrayProject = this.projectStore.getProjectListByUserEmail(email);
+        this.arrayProject = this.projectStore.getProjectsByUserEmail(email);
         return arrayProject;
     }
 
