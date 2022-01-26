@@ -11,7 +11,7 @@ import java.util.Objects;
 public class RequestStore {
 
     /**
-     * Atributos da Classe
+     * Class attribute
      **/
 
     private List<Request> requestProfileList;
@@ -52,7 +52,7 @@ public class RequestStore {
         {
             throw new IllegalArgumentException("Requested profile is already assigned to the user.");
         }
-        if (validateIfRequestAlreadyExists(request) && (!validateRequestStatus(request))){
+        if (validateIfRequestAlreadyExists(request) && (!validateStatusOfARequest(request))){
             throw new IllegalArgumentException("Request already exists");
         }
 
@@ -86,7 +86,7 @@ public class RequestStore {
      */
 
     private boolean validateIfProfileRequestedItsNotAlreadyAssigned (Request request) {
-        return request.getUser().hasProfile(request.getProfile());
+        return request.getUser().hasProfile(request.getProfileRequested());
     }
 
     /**
@@ -101,10 +101,11 @@ public class RequestStore {
      * Method to validate request status
      */
 
-    private boolean validateStatusOfARequest (Request request){
-        return request.getRequestStatus();
+    public boolean validateStatusOfARequest (Request request){
+        return request.isRequestStatus();
 
     }
+
 
     /**
      * Validation Method
@@ -136,18 +137,13 @@ public class RequestStore {
         return result;
     }
 
-
     /**
      * Method to change request status
      * */
 
-    public void changeRequestStatusCheck(Request request){
+    public void changeRequestStatus(Request request){
         request.changeRequestStatus(request);
 
-    }
-
-    private boolean validateRequestStatus(Request request){
-        return request.getRequestStatus();
     }
 
     @Override

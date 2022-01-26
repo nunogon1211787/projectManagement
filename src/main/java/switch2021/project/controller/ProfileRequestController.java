@@ -11,7 +11,6 @@ public class ProfileRequestController {
 
     private Company company;
     private Request request;
-    private UserProfileStore upStore;
 
     /**
      * Constructor to UI (with SINGLETON).
@@ -26,35 +25,22 @@ public class ProfileRequestController {
     public ProfileRequestController(Company company){ this.company = company; }
 
     /**
-     * Método Get.
-     */
-
-    public Company getCompany() {return this.company;}
-
-    /**
      * Método para ...
     */
 
-    public List<UserProfile> getProfileList (){
-
-        this.upStore= this.company.getUserProfileStore();
-        return this.upStore.getUserProfileList();
-
-    }
 
     public Request createProfileRequest(String email,String nameProfile){
 
         UserProfile profRequest = this.company.getUserProfileStore().getUserProfile(nameProfile);
         SystemUser user = this.company.getSystemUserStore().getUserByEmail(email);
 
-        this.request = this.company.getRequestStore().createProfileRequest(profRequest,user);
+        return this.request = this.company.getRequestStore().createProfileRequest(profRequest,user);
 
-        return this.request;
 
     }
 
     public boolean saveRequest(){
-        return this.company.getRequestStore().addProfileRequest(this.request);
+        return this.company.getRequestStore().saveRequest(this.request);
     }
 
 }
