@@ -1,6 +1,7 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.Company;
 import switch2021.project.model.Request;
 import switch2021.project.model.SystemUser;
 import switch2021.project.model.UserProfile;
@@ -12,8 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RequestStoreTest {
 
-
-    UserProfile profile = new UserProfile("name");
+    Company company = new Company();
+    UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
     //UserProfile profile2 = new UserProfile("name");
     SystemUser user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
             "tester", "img_123", "img_123", "123456", profile);
@@ -31,11 +32,10 @@ class RequestStoreTest {
     void createProfileRequestFailProfileAlreadyAssigned() {
 
         assertThrows(IllegalArgumentException.class, () -> {
-            UserProfile profile = new UserProfile("Rogério Moreira");
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser user = new SystemUser("Rogério Moreira", "xxx@isep.ipp.pt", "Devop", "1234567",
                     "1234567", "123", profile);
             Request request = new Request(profile, user);
-
 
             RequestStore requestTestList = new RequestStore();
             requestTestList.addProfileRequest(request);
@@ -47,8 +47,7 @@ class RequestStoreTest {
     void createProfileRequestFailAlreadyExists() {
 
         assertThrows(IllegalArgumentException.class, () -> {
-
-            UserProfile userProfile = new UserProfile("Visitor");
+            UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser user = new SystemUser("Rogério Moreira", "xxx@isep.ipp.pt", "Devop", "1234567",
                     "1234567", "123", userProfile);
 
@@ -64,7 +63,7 @@ class RequestStoreTest {
 
     @Test
     void addProfileRequestSuccess() {
-        UserProfile userProfile = new UserProfile("Visitor");
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("Rogério Moreira", "xxx@isep.ipp.pt", "Devop", "1234567",
                 "1234567", "123", userProfile);
 

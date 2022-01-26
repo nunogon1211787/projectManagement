@@ -21,8 +21,9 @@ public class UpdateUserProfileControllerTest {
         company = new Company(); // sempre a mesma instancia
         systemUserStore = company.getSystemUserStore();
         userProfileStore = company.getUserProfileStore();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
-                "tester", "123456", "123456", "IMG_123", userProfileStore.getUserProfile(0));
+                "tester", "123456", "123456", "IMG_123", userProfile);
         systemUserStore.saveSystemUser(user);
     }
 

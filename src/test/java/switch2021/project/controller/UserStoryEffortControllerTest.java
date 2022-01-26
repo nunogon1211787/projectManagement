@@ -28,8 +28,9 @@ class UserStoryEffortControllerTest {
         company = new Company(); // sempre a mesma instancia
         SystemUserStore systemUserStore = company.getSystemUserStore();
         UserProfileStore userProfileStore = company.getUserProfileStore();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
-                "tester", "123456", "123456", "IMG_123", userProfileStore.getUserProfile(0));
+                "tester", "123456", "123456", "IMG_123", userProfile);
         systemUserStore.saveSystemUser(user);
         userStoryEffortController = new UserStoryEffortController(company);
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");

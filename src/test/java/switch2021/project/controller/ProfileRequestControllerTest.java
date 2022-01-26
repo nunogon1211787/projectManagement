@@ -17,7 +17,7 @@ class ProfileRequestControllerTest {
         //Arrange
         Company company = new Company();
         ProfileRequestController controller = new ProfileRequestController(company);
-        UserProfile profile = company.getUserProfileStore().getUserProfile(0);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("joaquim", "xxxx@isep.ipp.pt",
                 "tester", "img_123", "img_123", "123456", profile);
         company.getSystemUserStore().saveSystemUser(user);
@@ -37,7 +37,7 @@ class ProfileRequestControllerTest {
         //Arrange
         Company company = new Company();
         ProfileRequestController controller = new ProfileRequestController(company);
-        UserProfile profile = company.getUserProfileStore().getUserProfile(0);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("joaquim", "xxxx@isep.ipp.pt",
                 "tester", "img_123", "img_123", "123456", profile);
         company.getSystemUserStore().saveSystemUser(user);
