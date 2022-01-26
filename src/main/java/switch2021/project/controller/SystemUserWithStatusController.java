@@ -33,9 +33,8 @@ public class SystemUserWithStatusController {
 
     public List<SystemUserDto> getListSystemUserWithStatus() {
         this.systemUserStore = this.company.getSystemUserStore();
-        this.systemUserList = this.systemUserStore.getSystemUserList();
+        this.systemUserList = this.systemUserStore.getSystemUsers();
 
-        List<SystemUserDto> systemUserDto = SystemUserMapper.toDto(this.systemUserList);
-        return systemUserDto;
+        return SystemUserMapper.toDto(this.systemUserList);
     }
 }

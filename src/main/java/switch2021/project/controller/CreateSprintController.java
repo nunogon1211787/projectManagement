@@ -35,7 +35,7 @@ public class CreateSprintController {
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         this.projectStore = company.getProjectStore();
-        this.currentProjectListByUser = projectStore.getCurrentProjectListByUserEmail(email);
+        this.currentProjectListByUser = projectStore.getCurrentProjectsByUserEmail(email);
         return this.currentProjectListByUser;
     }
 

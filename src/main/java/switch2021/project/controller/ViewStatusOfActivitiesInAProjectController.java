@@ -32,7 +32,7 @@ public class ViewStatusOfActivitiesInAProjectController {
 
     public List<Project> getProjectListByUser(String email) {
         this.projectStore = this.company.getProjectStore();
-        this.arrayProject = this.projectStore.getProjectListByUserEmail(email);
+        this.arrayProject = this.projectStore.getProjectsByUserEmail(email);
         return arrayProject;
     }
     //Method to get project by code

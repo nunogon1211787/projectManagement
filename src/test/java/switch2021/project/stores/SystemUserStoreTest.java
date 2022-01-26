@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser;
 import switch2021.project.model.UserProfile;
-import switch2021.project.stores.SystemUserStore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,12 +64,12 @@ public class SystemUserStoreTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         assignedProfileExpected.add(profile);
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
-        int initialSize = company.getSystemUserStore().getSystemUserList().size();
+        int initialSize = company.getSystemUserStore().getSystemUsers().size();
 
         company.getSystemUserStore().saveSystemUser(newUser);
         int expected = initialSize + 1;
         //Act
-        int result = company.getSystemUserStore().getSystemUserList().size();
+        int result = company.getSystemUserStore().getSystemUsers().size();
         //Assert
         assertEquals(expected, result);
     }
@@ -136,10 +135,10 @@ public class SystemUserStoreTest {
 
         systemUserStore.saveSystemUser(newUser);
         systemUserStore.saveSystemUser(newUser2);
-        List<SystemUser> list = systemUserStore.getSystemUserList();
+        List<SystemUser> list = systemUserStore.getSystemUsers();
         list.remove(0);
 
-        assertEquals(2, systemUserStore.getSystemUserList().size());
+        assertEquals(2, systemUserStore.getSystemUsers().size());
     }
 
     @Test

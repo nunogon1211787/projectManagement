@@ -3,9 +3,6 @@ package switch2021.project.model;
 import org.junit.jupiter.api.Test;
 import switch2021.project.stores.ProjectStore;
 
-import java.time.LocalDate;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CompanyTest {
@@ -68,7 +65,7 @@ class CompanyTest {
         //Arrange
         Company c = new Company();
         // Assert
-        assertTrue(c.getProjectStore().getProjectList().isEmpty());
+        assertTrue(c.getProjectStore().getProjects().isEmpty());
     }
 
 /*

@@ -24,7 +24,7 @@ public class GetProjectListController {
 
     public List<Project> getProjects() {
         ProjectStore projStore = this.company.getProjectStore();
-        this.projectList = projStore.getProjectList();
+        this.projectList = projStore.getProjects();
         return this.projectList;
     }
 }

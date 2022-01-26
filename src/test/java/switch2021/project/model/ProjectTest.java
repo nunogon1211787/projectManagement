@@ -92,7 +92,7 @@ class ProjectTest {
     @Test
     @DisplayName("Project addition to list test")
     public void projectAdditionTest() {
-        List<Project> test = company.getProjectStore().getProjectList();
+        List<Project> test = company.getProjectStore().getProjects();
         String code = test.get(0).getCode();
         String expectedCode = "Project_2022_1";
         assertEquals(expectedCode,code);
@@ -375,7 +375,7 @@ class ProjectTest {
         store.saveNewProject(proj1);
         store.saveNewProject(proj1);
 
-        assertEquals(1,store.getProjectList().size());
+        assertEquals(1,store.getProjects().size());
     }
 
     @Test
@@ -394,7 +394,7 @@ class ProjectTest {
         store.saveNewProject(proj1);
         store.saveNewProject(proj2);
 
-        assertEquals(2,store.getProjectList().size());
+        assertEquals(2,store.getProjects().size());
     }
 
 

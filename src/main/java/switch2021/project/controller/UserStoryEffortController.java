@@ -38,7 +38,7 @@ public class UserStoryEffortController {
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         this.projectList = new ArrayList<>();
         this.projStore = this.company.getProjectStore();
-        this.projectList = this.projStore.getCurrentProjectListByUserEmail(email);
+        this.projectList = this.projStore.getCurrentProjectsByUserEmail(email);
         return this.projectList;
     }
 

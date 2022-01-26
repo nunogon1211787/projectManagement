@@ -105,7 +105,7 @@ public class GetCurrentProjectListControllerTest {
         currentProject.getProjectTeam().addResourceToTeam(manuelmartins);
         projectStore.saveNewProject(currentProject);
         // Act
-        List<Project> projectListActual = controller.getCurrentProjectListByUserEmail("manuelmartins@beaver.com");
+        List<Project> projectListActual = controller.getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
         int sizeExpected = projectListActual.size();
         // Assert
         assertEquals(1, sizeExpected);
@@ -138,7 +138,7 @@ public class GetCurrentProjectListControllerTest {
         proj1.getProjectTeam().addResourceToTeam(manuelmartins);
         projectStore.saveNewProject(proj1);
         // Act
-        List<Project> projectListActual = controller.getCurrentProjectListByUserEmail("manuelmartins@beaver.com");
+        List<Project> projectListActual = controller.getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
         int sizeExpected = projectListActual.size();
         // Assert
         assertEquals(2, sizeExpected);
@@ -150,7 +150,7 @@ public class GetCurrentProjectListControllerTest {
         Company company = new Company();
         GetCurrentProjectListController controller = new GetCurrentProjectListController(company);
         // Act
-        List<Project> projectList = controller.getCurrentProjectListByUserEmail("manuelmartins@beaver.com");
+        List<Project> projectList = controller.getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
         // Assert
         assertTrue(projectList.isEmpty());
     }
@@ -179,7 +179,7 @@ public class GetCurrentProjectListControllerTest {
         List<Project> projectListExpected = new ArrayList<>();
         projectListExpected.add(currentProject);
         // Act
-        List<Project> projectListActual = controller.getCurrentProjectListByUserEmail("manuelmartins@beaver.com");
+        List<Project> projectListActual = controller.getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
         // Assert
         assertEquals(projectListExpected, projectListActual);
     }
