@@ -72,7 +72,45 @@ class RequestStoreTest {
 
         RequestStore requestTestList = new RequestStore();
 
+
         assertTrue(requestTestList.addProfileRequest(request));
+        assertEquals(1,requestTestList.getRequestProfileList().size());
+
+    }
+    @Test
+    void removeProfileRequestSuccess() {
+        UserProfile userProfile = new UserProfile("Visitor");
+        SystemUser user = new SystemUser("Rogério Moreira", "xxx@isep.ipp.pt", "Devop", "1234567",
+                "1234567", "123", userProfile);
+
+        UserProfile newUserProfile = new UserProfile("Admin");
+
+        Request request = new Request(newUserProfile, user);
+
+        RequestStore requestTestList = new RequestStore();
+
+        assertTrue(requestTestList.addProfileRequest(request));
+        assertEquals(1, requestTestList.getRequestProfileList().size());
+        assertTrue(requestTestList.removeProfileRequest(request));
+        assertEquals(0, requestTestList.getRequestProfileList().size());
+
+    }
+
+    @Test
+    void alterProfileRequestStatus() {
+        UserProfile userProfile = new UserProfile("Visitor");
+        SystemUser user = new SystemUser("Rogério Moreira", "xxx@isep.ipp.pt", "Devop", "1234567",
+                "1234567", "123", userProfile);
+
+        UserProfile newUserProfile = new UserProfile("Admin");
+
+        Request request = new Request(newUserProfile, user);
+
+        RequestStore requestTestList = new RequestStore();
+
+        assertFalse(request.isRequestStatus());
+        request.changeRequestStatus(request);
+        assertTrue(request.isRequestStatus());
     }
 
     @Test
