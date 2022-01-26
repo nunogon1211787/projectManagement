@@ -121,6 +121,21 @@ class RequestStoreTest {
     }
 
     @Test
+    public void validateRequest() {
+        UserProfile userProfile = new UserProfile("Visitor");
+        SystemUser user = new SystemUser("yoga", "xxx@isep.ipp.pt", "Devop", "1234567",
+                "1234567", "123", userProfile);
+        UserProfile newUserProfile = new UserProfile("Admin");
+
+        Request request = new Request(newUserProfile, user);
+        RequestStore requestTestList = new RequestStore();
+        requestTestList.addProfileRequest(request);
+
+        assertEquals(request,requestTestList.getRequestProfileList().get(0));
+
+    }
+
+    @Test
 
     public void overrideTest() {
         //Arrange
