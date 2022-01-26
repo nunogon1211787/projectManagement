@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+actor SM_TeamMember as actor
+participant ":createTaskOutsideUserStoryUI" as UI
+participant ":createTaskOutsideUserStoryController" as Ctrl
+participant ":Company" as co
+participant "taskTypeStore:TaskTypeStore" as tTStore
+participant "currentSprint:Sprint" as sprint
+participant ":SprintMapper" as sMapper
+participant "sprintDTO: SprintDTO" as sDTO
+
+
+actor -> UI: Ask to create task outside the scope of a user story
+activate UI
+
+UI -> Ctrl: getTaskType()
+activate Ctrl
+
+Ctrl -> co: getTaskTypeStore()
+activate co
+
+co --> Ctrl: taskTypeStore
+deactivate co
+
+Ctrl -> tTStore: getTaskType()
+activate tTStore
+
+tSStore --> Ctrl: taskTypeList
+deactivate tTStore
+
+Ctrl --> UI: taskTypeList
+deactivate Ctrl
+
+UI --> actor: taskTypeList
+deactivate UI
+
+UI --> actor: Request data
+deactivate UI
+
+actor -> UI: Type requested data ()
+activate UI
+
+UI -> Ctrl: getTaskType()
+activate Ctrl
+
+
+
+
+
+
+@enduml

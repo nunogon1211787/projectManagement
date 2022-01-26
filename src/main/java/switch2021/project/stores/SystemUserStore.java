@@ -1,5 +1,6 @@
 package switch2021.project.stores;
 
+import switch2021.project.model.Project;
 import switch2021.project.model.SystemUser;
 import switch2021.project.model.UserProfile;
 
@@ -93,7 +94,7 @@ public class SystemUserStore {
         return result;
     }
 
-    /** Override Methods **/
+     /** Override Methods **/
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

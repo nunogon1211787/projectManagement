@@ -14,8 +14,8 @@ public class UserStoryEffortController {
     private ProjectStore projStore;
     private List<Project> projectList; // nome da lista que contem o projectliST
     private Project proj;
-    private SprintStore sprintStore;
-    private List<Sprint> sprintList;
+    private SprintList sprintList;
+    private List<Sprint> sprintsList;
     private Sprint sprint;
     private SprintBacklog sprintBacklog;
     private UserStoryOfSprint userStoryOfSprint;
@@ -47,16 +47,16 @@ public class UserStoryEffortController {
         return this.proj;
     }
 
-    public List<Sprint> getSprintList() {
-        this.sprintList = new ArrayList<>();
-        this.sprintStore = this.proj.getSprintStore();
-        this.sprintList = this.sprintStore.getSprintList();
-        return this.sprintList;
+    public List<Sprint> getSprintsList() {
+        this.sprintsList = new ArrayList<>();
+        this.sprintList = this.proj.getSprintList();
+        this.sprintsList = this.sprintList.getSprintList();
+        return this.sprintsList;
     }
 
     public Sprint getSprint(int id) {
-        this.sprintStore = this.proj.getSprintStore();
-        this.sprint = this.sprintStore.getSprint(id);
+        this.sprintList = this.proj.getSprintList();
+        this.sprint = this.sprintList.getSprint(id);
         return this.sprint;
     }
 

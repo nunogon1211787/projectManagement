@@ -75,10 +75,8 @@ public class ProductBacklog {
      **/
 
     public boolean saveUserStory(UserStory userStory) {
-        if (!validateUserStory(userStory)) {
-            throw new IllegalArgumentException("Repeated user story inserted, same code project and description.");
-        }
-        if (validateIdUserStory(userStory)) {
+
+        if (validateUserStory(userStory) && validateIdUserStory(userStory)) {
             userStory.setId_UserStory(id_UserStoryGenerator());
             this.userStoryList.add(userStory);
         }
