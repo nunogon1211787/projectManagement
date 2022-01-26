@@ -2,10 +2,8 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.stores.ProjectStore;
-
 import java.time.LocalDate;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CompanyTest {
@@ -17,9 +15,15 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         //Assert
+        assertEquals(0,company.getSystemUserStore().getSystemUserList().size());
+        assertEquals(0,company.getProjectStore().getProjectList().size());
         assertEquals(4,company.getUserProfileStore().getUserProfileList().size());
         assertEquals(2,company.getTypologyStore().getTypologyList().size());
+        assertEquals(0,company.getCustomerStore().getCustomerList().size());
+        assertEquals(0,company.getBusinessSectorStore().getBusinessSectorList().size());
         assertEquals(7,company.getProjectStatusStore().getprojectStatusList().size());
+        assertEquals(6,company.getUserStoryStatusStore().getUserStoryStatusList().size());
+        assertEquals(0,company.getRequestStore().getRequestProfileList().size());
     }
 
 
