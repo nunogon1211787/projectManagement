@@ -9,6 +9,7 @@ import java.util.List;
 
 public class UserStoryEffortController {
 
+    // construtor com get instance e com company
     private Company company;
     private ProjectStore projStore;
     private List<Project> projectList; // nome da lista que contem o projectliST

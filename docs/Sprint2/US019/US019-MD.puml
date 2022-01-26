@@ -1,22 +1,13 @@
 @startuml
 'https://plantuml.com/class-diagram
-
 hide circle
 skinparam classAttributeIconSize 0
+hide methods
 
-title Example of a Class Diagram
-
-class XXXUI {
-
-}
-
-class xxxController {
-    +authenticate(string userId, string pwd): bool
-}
+title Example of Domain Model extract
 
 class Class1 {
     -designation
-    +doLogin(string userId, string pwd): UserToken
 }
 
 class Class2 {
@@ -25,10 +16,6 @@ class Class2 {
     -address
     -password
 }
-
-XXXUI ..> XXXController
-
-XXXController ..> Class1
 
 Class1 "1" -> "0..*" Class2: knows
 
