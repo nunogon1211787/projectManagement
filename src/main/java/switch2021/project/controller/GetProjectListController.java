@@ -22,7 +22,7 @@ public class GetProjectListController {
     public GetProjectListController(Company company){ this.company = company; }
 
 
-    public List<Project> getProjectList() {
+    public List<Project> getProjects() {
         ProjectStore projStore = this.company.getProjectStore();
         this.projectList = projStore.getProjectList();
         return this.projectList;
