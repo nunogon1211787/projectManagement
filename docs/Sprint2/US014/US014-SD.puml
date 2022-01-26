@@ -85,9 +85,17 @@ C4 -> C5: checkResourceCanBeAssignedToRoleByDate(startDate, sprintDuration)
 return true
 C4 -> C6 **: createResource(originalResource)
 C4 -> C6: setRole(projectRole)
+deactivate
 C4 -> C6: setStartDate(startDate)
+deactivate
 C4 -> C5: setEndDate(startDate)
-C5 -> C5: saveResource(newResource)
-C5 -> C5: checkIfRoleCurrentExistInTheProjectTeam(projectRole,startDate)
+deactivate
+    C4 -> C4: saveResource(newResource)
+    deactivate
+    C4 -> C4: checkIfRoleCurrentExistInTheProjectTeam(projectRole,startDate)
+    deactivate
+return true
+return true
+return Informs operation success.
 
 @enduml
