@@ -18,10 +18,10 @@ public class SystemUserWithStatusController {
 
     /**
      * Constructor to UI (with SINGLETON).
-     */
-    public SystemUserWithStatusController() {
-        this.company = App.getInstance().getCompany();
-    }
+//     */
+//    public SystemUserWithStatusController() {
+//        this.company = App.getInstance().getCompany();
+//    }
 
     /**
      * Constructor to test (without SINGLETON).
