@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Sequence Diagram US 028 "As Director, I want to get a list of all human resources in a project"
+
+autoactivate on
+autonumber
+
+actor "Director" as Director
+participant ":GetListHResourceProjectUI" as UI
+participant ":GetListHResourceProjectController" as Controller
+participant ":Company" as Company
+participant "projSt:ProjectStore" as ProjectStore
+participant "proj:Project" as Project
+participant "projTeam:ProjectTeam" as ProjectTeam
+participant "ProjectTeamMapper" as ProjectTeamMapper
+participant "projectTeamListDTO:List<ResourcesDTO>" as ProjectTeamDTO
+participant "resDTO:ResourceDTO" as ResourceDTO
+
+activate Director
+
+Director -> UI: Ask to access Project team of projCode Project
+UI -> Controller: getProjectTeam()
+Controller -> Company: getProjectStore()
+Company --> Controller: projSt
+Controller -> ProjectStore: getProjectByCode(projectCode)
+ProjectStore --> Controller: proj
+Controller -> Project: getProjectTeam()
+Project -> ProjectTeam: getProjectTeamList()
+ProjectTeam --> Project: projectTeamList
+Project -> ProjectTeamMapper : toDTO(projectTeamList)
+ProjectTeamMapper --> ProjectTeamDTO**: create()
+loop for each resource in projectTeamList
+ProjectTeamMapper -> Project: get(i)
+Project --> ProjectTeamMapper: res
+ProjectTeamMapper -> ProjectTeamMapper: resDTO = toDTO(res)
+ProjectTeamMapper --> ResourceDTO**: create()
+deactivate ProjectTeamMapper
+ProjectTeamMapper -> ProjectTeamDTO: add(resDTO)
+ProjectTeamDTO --> ProjectTeamMapper: true
+end
+ProjectTeamMapper --> Controller: projTeamListDTO
+Controller --> UI: projTeamListDTO
+UI --> Director: projTeamListDTO
+
+@enduml
