@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class CreateSprintController {
-    private Company company;
+    private final Company company;
     private Project proj;
     private ProjectStore projectStore;
     private SprintList sprintList;

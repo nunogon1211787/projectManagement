@@ -7,14 +7,12 @@ import switch2021.project.utils.App;
 
 public class ChangePasswordController {
 
-    private Company company;
+    private final Company company;
 
     /**
      * Constructor to UI (with SINGLETON).
      */
-    public ChangePasswordController() {
-        this.company = App.getInstance().getCompany();
-    }
+    public ChangePasswordController() {this.company = App.getInstance().getCompany();}
 
     /**
      * Constructor to test (without SINGLETON).
