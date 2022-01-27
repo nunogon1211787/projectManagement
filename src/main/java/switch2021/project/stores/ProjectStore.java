@@ -8,30 +8,28 @@ import java.util.List;
 
 public class ProjectStore {
 
+
     /**
      * Atributos da Classe
      **/
-
     private final List<Project> projectList;
+
 
     /**
      * Constructors with data
      **/
-
     public ProjectStore() {
         this.projectList = new ArrayList<>();
     }
 
+
     /**
      * Project creator
      **/
-
     public Project createProject(String name, String description, Customer customer, Typology typology,
                                  BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         Company company = App.getInstance().getCompany();
-
-
 
         ProjectStatus status = company.getProjectStatusStore().getProjectStatusByDescription("Planned");
 
@@ -39,10 +37,10 @@ public class ProjectStore {
                 startDate, status, numberOfSprints, budget);
     }
 
+
     /**
      * Getters Methods
      **/
-
     public List<Project> getProjects() {
         return new ArrayList<>(this.projectList);
     }
