@@ -14,6 +14,7 @@ participant "projSt:ProjectStore" as ProjectStore
 participant "proj:Project" as Project
 participant "projTeam:ProjectTeam" as ProjectTeam
 participant "ProjectTeamMapper" as ProjectTeamMapper
+participant "projTeam:List<Resource>" as ProjectTeam2
 participant "projectTeamListDTO:List<ResourcesDTO>" as ProjectTeamDTO
 participant "resDTO:ResourceDTO" as ResourceDTO
 
@@ -26,13 +27,14 @@ Company --> Controller: projSt
 Controller -> ProjectStore: getProjectByCode(projectCode)
 ProjectStore --> Controller: proj
 Controller -> Project: getProjectTeam()
-Project -> ProjectTeam: getProjectTeamList()
-ProjectTeam --> Project: projectTeamList
-Project -> ProjectTeamMapper : toDTO(projectTeamList)
+Project --> Controller: projTeam
+Controller -> ProjectTeam: get ProjectTeamList()
+ProjectTeam --> Controller: projTeamList
+Controller -> ProjectTeamMapper : toDTO(projectTeamList)
 ProjectTeamMapper --> ProjectTeamDTO**: create()
 loop for each resource in projectTeamList
-ProjectTeamMapper -> Project: get(i)
-Project --> ProjectTeamMapper: res
+ProjectTeamMapper -> ProjectTeam2: get(i)
+ProjectTeam2 --> ProjectTeamMapper: res
 ProjectTeamMapper -> ProjectTeamMapper: resDTO = toDTO(res)
 ProjectTeamMapper --> ResourceDTO**: create()
 deactivate ProjectTeamMapper
