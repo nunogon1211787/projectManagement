@@ -3,7 +3,6 @@ package switch2021.project.stores;
 import switch2021.project.model.Project;
 import switch2021.project.model.SystemUser;
 import switch2021.project.model.UserProfile;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

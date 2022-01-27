@@ -2,28 +2,23 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
-
 import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class AssignScrumMasterControllerTest {
 
-//    @Test
-//    void getCurrentResourceByUserEmailTest() {
-//    }
-
     @Test
-    void assignRoleTestSuccess() {
+    void assignScrumMasterTestSuccess() {
         //Input
-        Company co = new Company();
-        Typology typo = co.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = co.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = co.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project proj1 = co.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+        Company company = new Company();
+        AssignScrumMasterController controller = new AssignScrumMasterController(company);
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+        company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
-
-        UserProfile profile = co.getUserProfileStore().getUserProfile("Visitor");
+        Project proj1 = controller.getProject("proj_2022_1");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDateMb = LocalDate.of(2021, 11, 1);
@@ -58,7 +53,7 @@ class AssignScrumMasterControllerTest {
             sDate = LocalDate.now();
         }
         int sDuration = proj1.getSprintDuration();
-        ProjectRole sMaster = co.getProjectRoleStore().getProjectRole("Scrum Master");
+        ProjectRole sMaster = company.getProjectRoleStore().getProjectRole("Scrum Master");
 
         //Asserts
         assertTrue(proj1.getProjectTeam().assignProjectRole(manueljose, sDate, sDuration, sMaster));
