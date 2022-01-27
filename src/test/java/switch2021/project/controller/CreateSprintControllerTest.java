@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CreateSprintControllerTest {
 
@@ -80,36 +81,44 @@ public class CreateSprintControllerTest {
         assertEquals(currentProject, projectActual);
     }
 
-    /*@Test
-    @DisplayName("Test to create a sprint")
-    public void createAndSaveSprint() {
+//    @Test
+//    @DisplayName("Test to create and save a sprint")
+//    public void createAndSaveSprint() {
+//
+//        //Arrange
+//        Company company = new Company();
+//        CreateSprintController controllerTest = new CreateSprintController(company);
+//
+//        ProjectStore projectStore = company.getProjectStore();
+//        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+//        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+//        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+//
+//        Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
+//                typo, sector, LocalDate.now().minusDays(7), 2, 4000);
+//        currentProject.setEndDate(LocalDate.now().plusDays(7));
+//        currentProject.setSprintDuration(2);
+//        projectStore.saveNewProject(currentProject);
+//
+////        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+////                typo, sector, LocalDate.now().minusDays(7), 2, 3000);
+////        proj1.setEndDate(LocalDate.now().plusDays(7));
+////        projectStore.saveNewProject(proj1);
+//
+//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+//        SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+//        LocalDate startDateMm = LocalDate.now().minusDays(7);
+//        LocalDate endDateMm = LocalDate.now().plusDays(7);
+//        Resource joana = new Resource(user2, startDateMm, endDateMm, 100, 1);
+//        currentProject.getProjectTeam().addResourceToTeam(joana);
+//
+//        controllerTest.getProject("Project_2022_1");
+//
+//        Sprint sprint = controllerTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 1));
+//        controllerTest.saveSprint();
+//
+//        //Assert
+//        assertEquals(sprint, currentProject.getSprintStore().getSprint(1));
+//    }
 
-        //Arrange
-        Company company = new Company();
-
-        Project proj;
-
-        LocalDate date = LocalDate.of(2021, 12, 12);
-
-        company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
-        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste"));
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-
-        proj = company.getProjectStore().createProject("prototype", "test1234", customer,
-                typo, sector, date, 7, 5000);
-
-        proj.setSprintDuration(2);
-
-        company.getProjectStore().saveNewProject(proj);
-
-        CreateSprintController controllerTest1 = new CreateSprintController(company);
-        controllerTest1.getProject(company, "Project_2022_1");
-        Sprint sprint = controllerTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1));
-        controllerTest1.saveSprint();
-
-        //Assert
-        assertEquals(sprint, proj.getSprintStore().getSprint(1));
-    }*/
 }
