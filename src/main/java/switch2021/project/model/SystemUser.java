@@ -2,7 +2,6 @@ package switch2021.project.model;
 
 import switch2021.project.stores.UserProfileStore;
 import switch2021.project.utils.App;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,12 +13,12 @@ public class SystemUser {
      * Attributes of systemUser´s class
      **/
     private String userName;
-    private String email;
+    private final String email;
     private String photo;
     private String password;
     private String function;
     private boolean activateUser;
-    private List<UserProfile> assignedProfileList;
+    private final List<UserProfile> assignedProfileList;
 
     /**
      * Constructor
@@ -265,18 +264,14 @@ public class SystemUser {
      */
 
     public boolean hasProfile(UserProfile profile) {
-
         boolean profileStatus = false;
 
         for (UserProfile profileCheck : assignedProfileList) {
-
             if (profile.equals(profileCheck)) {
-
                 profileStatus = true;
                 break;
             }
         }
-
         return profileStatus;
     }
 

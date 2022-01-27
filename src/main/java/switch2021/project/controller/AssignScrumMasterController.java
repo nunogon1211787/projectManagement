@@ -29,6 +29,7 @@ public class AssignScrumMasterController {
         this.company = company;
     }
 
+
     /**
      * Method to receive a project and than send to UI
      */

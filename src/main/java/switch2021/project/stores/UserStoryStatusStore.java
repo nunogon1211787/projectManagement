@@ -1,5 +1,6 @@
 package switch2021.project.stores;
 
+import switch2021.project.model.Project;
 import switch2021.project.model.UserStoryStatus;
 
 import java.util.ArrayList;
@@ -54,9 +55,27 @@ public class UserStoryStatusStore {
      * Adds a new UserStory Status object to the UserStory Status List
      **/
 
-    public boolean add(UserStoryStatus userStoryStat) {
-        this.userStoryStatusList.add(userStoryStat);
-        return true;
+//    public boolean add(UserStoryStatus userStoryStat) {
+//        this.userStoryStatusList.add(userStoryStat);
+//        return true;
+//    }
+
+    public boolean checkUserStoryStatusExists(UserStoryStatus status) {
+
+        for (UserStoryStatus st : userStoryStatusList) {
+            if (st.equals(status)) {
+                return true;
+            }
+        }
+        return false;
     }
 
+    public boolean saveNewUserStoryStatus(UserStoryStatus status) {
+        boolean msg = false;
+        if (!checkUserStoryStatusExists(status)) {
+            this.userStoryStatusList.add(status);
+            msg = true;
+        }
+        return msg;
+    }
 }
