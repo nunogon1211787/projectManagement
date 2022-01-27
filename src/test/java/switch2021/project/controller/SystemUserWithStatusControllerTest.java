@@ -49,6 +49,8 @@ public class SystemUserWithStatusControllerTest {
         assertEquals(newUser.getUserName(),systemUserDto.get(0).getUserName());
         assertEquals(newUser.getEmail(),systemUserDto.get(0).getEmail());
         assertEquals(newUser.getActivateUserStatus(), systemUserDto.get(0).isActivateUser());
-
+        assertEquals(newUser2.getUserName(),systemUserDto.get(1).getUserName());
+        assertEquals(newUser2.getEmail(),systemUserDto.get(1).getEmail());
+        assertEquals(newUser2.getActivateUserStatus(), systemUserDto.get(1).isActivateUser());
     }
 }

@@ -14,7 +14,7 @@ public class SystemUserWithStatusController {
     private final Company company;
     private SystemUserStore systemUserStore;
     private List<SystemUser> systemUserList;
-
+    private List<SystemUserDto> systemUserDtoList;
 
     /**
      * Constructor to UI (with SINGLETON).
@@ -34,7 +34,7 @@ public class SystemUserWithStatusController {
     public List<SystemUserDto> getListSystemUserWithStatus() {
         this.systemUserStore = this.company.getSystemUserStore();
         this.systemUserList = this.systemUserStore.getSystemUsers();
-
-        return SystemUserMapper.toDto(this.systemUserList);
+        this.systemUserDtoList = SystemUserMapper.toDto(this.systemUserList);
+        return systemUserDtoList;
     }
 }
