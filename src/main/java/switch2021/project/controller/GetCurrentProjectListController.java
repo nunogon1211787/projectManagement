@@ -23,7 +23,6 @@ public class GetCurrentProjectListController {
     public GetCurrentProjectListController(Company company){ this.company = company; }
 
 
-
     public List<Project> getCurrentProjectsByUserEmail(String email) {
         ProjectStore projStore = this.company.getProjectStore();
         this.currentProjectListByUser = projStore.getCurrentProjectsByUserEmail(email);
