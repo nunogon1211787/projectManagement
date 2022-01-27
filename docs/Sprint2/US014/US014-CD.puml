@@ -1,0 +1,90 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+title "US014 - As Director, I want to define the Scrum Master of a project."
+
+class AssignScrumMasterUI {
+}
+
+class AssignScrumMasterController{
+    +AssignScrumMasterController
+    +getProjectList()
+    +getProject(code)
+    +getProjectTeam()
+    +getResource(email)
+    +assignRole(resource, roleName)
+}
+
+class Company {
+    +Company()
+    +getProjectStore()
+    +getProjectRoleStore()
+}
+
+class ProjectTeam {
+    +ProjectTeam()
+    +getResource()
+    +assignProjectRole(resource,startDate,endDate,projectRole)
+    +saveResource(newResource)
+    +checkOfRoleCurrentExistInTheProjectTeam(projectRole,startDate)
+    +getProjectTeamList()
+}
+
+class Resource {
+    +Resource()
+    +Resource(originalResource)
+    +isYour(email)
+    +isCurrent()
+    +setRole(projectRole)
+    +setStartDate(startDate)
+    +setEndDate(startDate))
+    +checkIfResourceCanBeAssignedToRoleByDate(startDate, sprintDuration)
+}
+
+class ProjectStore {
+    +ProjectStore()
+    +getProjectList()
+    +getProjectByCode()
+}
+
+class ProjectRoleStore {
+    +ProjectRoleStore()
+    +getProjectRole(roleName)
+}
+
+class Project {
+    +Project()
+    +getProjectTeam()
+    +getSprintDuration()
+    +getSprintStore()
+    +getCode()
+}
+
+class SprintSotre {
+    +SprintSotre()
+    +getCurrentSprint()
+}
+
+class Sprint {
+    +Sprint()
+    +isCurrentSprint()
+    +getEndDate()
+}
+
+AssignScrumMasterUI ..> AssignScrumMasterController
+AssignScrumMasterController ..> Company
+AssignScrumMasterController ..> Project
+AssignScrumMasterController ..> ProjectTeam
+AssignScrumMasterController ..> Resource
+
+Company "1" o-- "1" ProjectRoleStore: has
+Company "1" o-- "1" ProjectStore: has
+ProjectStore "1" *-- "*" Project
+Project "1" o-- "1" ProjectTeam
+Project "1" o-- "1" SprintSotre
+SprintSotre "1" *-- "1" Sprint
+ProjectTeam "1" *-- "1" Resource
+
+@enduml

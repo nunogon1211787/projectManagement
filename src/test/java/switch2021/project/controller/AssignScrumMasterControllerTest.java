@@ -13,11 +13,14 @@ class AssignScrumMasterControllerTest {
         Company company = new Company();
         AssignScrumMasterController controller = new AssignScrumMasterController(company);
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+        Customer customer = company.getCustomerStore().createCustomer("isep","xxx@sss.sss");
+        company.getCustomerStore().saveNewCustomer(customer);
+        BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
+        company.getBusinessSectorStore().addBusinessSector(sector);
+        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
-        Project proj1 = controller.getProject("proj_2022_1");
+        company.getProjectStore().saveNewProject(proj1);
+        controller.getProject("proj_2022_1");
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
