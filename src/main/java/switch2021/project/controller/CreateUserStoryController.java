@@ -24,7 +24,7 @@ public class CreateUserStoryController {
     /**
      * Constructor to UI (with SINGLETON).
      */
-    public CreateUserStoryController(){ this.company = App.getInstance().getCompany();}
+ //   public CreateUserStoryController(){ this.company = App.getInstance().getCompany();}
 
     /**
      * Constructor to test (without SINGLETON).

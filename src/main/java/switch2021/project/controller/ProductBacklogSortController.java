@@ -22,9 +22,9 @@ public class ProductBacklogSortController {
     /**
      * Constructor to UI (with SINGLETON).
      */
-    public ProductBacklogSortController() {
-        this.company = App.getInstance().getCompany();
-    }
+//    public ProductBacklogSortController() {
+//        this.company = App.getInstance().getCompany();
+//    }
 
     /**
      * Constructor to test (without SINGLETON).
