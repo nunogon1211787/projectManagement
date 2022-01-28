@@ -20,6 +20,7 @@ public class Company {
     private final ProjectStatusStore projectStatusStore;
     private final UserStoryStatusStore userStoryStatusStore;
     private final RequestStore requestStore;
+    private final TaskStatusStore taskStatusStore;
 
 
     /**
@@ -37,12 +38,14 @@ public class Company {
         this.projectStatusStore = new ProjectStatusStore();
         this.userStoryStatusStore = new UserStoryStatusStore();
         this.requestStore = new RequestStore();
+        this.taskStatusStore = new TaskStatusStore();
 
         this.userProfileStore.populateDefault();
         this.projectRoleStore.populateDefault();
         this.typologyStore.populateDefault();
         this.projectStatusStore.populateDefault();
         this.userStoryStatusStore.populateDefault();
+        this.taskStatusStore.populateDefault();
     }
 
 }

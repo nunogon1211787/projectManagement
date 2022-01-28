@@ -43,8 +43,8 @@ public class AddUserStoryToSprintBacklogController {
         return this.userStory = this.productBacklog.getUserStoryById(userStoryId);
     }
 
-    public boolean addUserStoryToSprintBacklog(int effort) {
-        this.sprint.getSprintBacklog().saveUserStoryOfSprint(this.sprint.getSprintBacklog().createUSerStoryOfSprint(this.userStory,effort));
+    public boolean addUserStoryToSprintBacklog(int effort, UserStoryStatus status) {
+        this.sprint.getSprintBacklog().saveUserStoryOfSprint(this.sprint.getSprintBacklog().createUSerStoryOfSprint(this.userStory,effort,status));
         return true;
     }
 }

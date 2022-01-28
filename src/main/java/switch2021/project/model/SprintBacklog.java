@@ -17,8 +17,8 @@ public class SprintBacklog {
     }
 
     /** Create User Story Of Sprint **/
-    public UserStoryOfSprint createUSerStoryOfSprint (UserStory userStory, int effort) {
-        return new UserStoryOfSprint(userStory, effort);
+    public UserStoryOfSprint createUSerStoryOfSprint (UserStory userStory, int effort, UserStoryStatus status) {
+        return new UserStoryOfSprint(userStory, effort, status);
     }
 
     /**Getter **/
@@ -75,7 +75,7 @@ public class SprintBacklog {
         List<Task> userStoryOfSprintTasksList = new ArrayList<>();
 
         for (UserStoryOfSprint i: userStoryOfSprintList) {
-            userStoryOfSprintTasksList.add(i.getUserStoryOfSprintTask());
+            userStoryOfSprintTasksList.addAll(i.getUserStoryOfSprintTasks());
 
         }
         return userStoryOfSprintTasksList;

@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+title US030 - As a Team Member, i want to view the Scrum Board of a current sprint.
+
+autoactivate on
+autonumber
+
+actor "Team Member" as TeamMember
+
+participant ": GetScrumBoardUI " as UI
+participant ": GetScrumBoardController " as controller
+participant "sprint : Sprint " as sprint
+participant ": SprintBacklog " as sprintBacklog
+participant ": UserStoryOfSprint " as userStoryOfSprint
+participant ": TaskMapper" as mapper
+participant "sprintBacklog : SprintBacklog" as tasksStatus
+participant "UserStoryStatusDTOList : List<UserStoryOfSprintStatusDTO> " as tasksDTOList
+participant "userStoryStatus : UserStoryOfSprintStatusDTO" as UserStoryStatus
+
+activate TeamMember
+
+TeamMember -> UI: Get all user story status of the current sprint
+
+UI -> controller: getUserStoryOfSprintStatus()
+controller -> sprint: getSprintBacklog()
+return sprintBacklog
+controller -> mapper : toDTO(sprintBacklog)
+mapper -> tasksDTOList**: create(sprintBacklog)
+loop
+mapper -> tasksStatus : get(i)
+return userStoryOfSprint
+mapper -> mapper : userStoryStatusDTO=toDTO(UserStoryOfSprint)
+mapper --> UserStoryStatus**: create()
+deactivate
+mapper -> tasksDTOList : add(userStoryStatusDTO)
+return true
+end
+return userStoryStatusDTOList
+return userStoryStatusDTOList
+return Shows all user story status of that sprint
+
+
+@enduml
+

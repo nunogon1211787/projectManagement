@@ -21,7 +21,6 @@ public class TaskList {
     }
 
 
-
     /**
      * Method to add a task to the list
      */

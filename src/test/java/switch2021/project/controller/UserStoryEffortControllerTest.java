@@ -104,7 +104,7 @@ class UserStoryEffortControllerTest {
     @Test
     void getSprintBacklog() {
         project1.getSprintList().saveSprint(sprint1);
-        UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story,5);
+        UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story,5,company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         sprint1.getSprintBacklog().saveUserStoryOfSprint(userStoryOfSprint);
         project1.getSprintList().saveSprint(sprint2);
         company.getProjectStore().saveNewProject(project1);
@@ -118,7 +118,7 @@ class UserStoryEffortControllerTest {
     @Test
     void getUserStory() {
         project1.getSprintList().saveSprint(sprint1);
-        UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story,5);
+        UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story,5,company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         userStoryOfSprint.setId_UserStoryOfSprint(1);
         sprint1.getSprintBacklog().saveUserStoryOfSprint(userStoryOfSprint);
         project1.getSprintList().saveSprint(sprint2);
@@ -135,7 +135,7 @@ class UserStoryEffortControllerTest {
     @Test
     void setEffort() {
         project1.getSprintList().saveSprint(sprint1);
-        UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story,5);
+        UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story,5,company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         userStoryOfSprint.setId_UserStoryOfSprint(1);
         sprint1.getSprintBacklog().saveUserStoryOfSprint(userStoryOfSprint);
         project1.getSprintList().saveSprint(sprint2);

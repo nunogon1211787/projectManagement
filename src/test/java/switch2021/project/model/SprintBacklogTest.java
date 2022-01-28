@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SprintBacklogTest {
 
+    Company company = new Company();
 
     @Test
     void compareUserStoryIDOfSprint() {
@@ -52,7 +53,8 @@ class SprintBacklogTest {
     public void init() {
         UserStoryStatus status = new UserStoryStatus("statusTest");
         UserStory userStory = new UserStory(status, 2, "teste");
-        userStoryOfSprint = sprintBacklog.createUSerStoryOfSprint(userStory, 8);
+        userStoryOfSprint = sprintBacklog.createUSerStoryOfSprint(userStory, 8,
+                company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         sprintBacklog.saveUserStoryOfSprint(userStoryOfSprint);
     }
 
@@ -80,14 +82,16 @@ class SprintBacklogTest {
     public void createStoryInSprintFailEffort() {
         UserStoryStatus status = new UserStoryStatus("statusTest");
         UserStory userStory = new UserStory(status, 2, "teste");
-        assertThrows(IllegalArgumentException.class, () -> sprintBacklog.createUSerStoryOfSprint(userStory, -1));
+        assertThrows(IllegalArgumentException.class, () -> sprintBacklog.createUSerStoryOfSprint(userStory, -1,
+                company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned")));
     }
 
     @Test
     @DisplayName("Create Story in sprint fail case - User Story null")
     public void createStoryInSprintFailUserStory() {
         UserStory userStory = null;
-        assertThrows(IllegalArgumentException.class, () -> sprintBacklog.createUSerStoryOfSprint(userStory, 5));
+        assertThrows(IllegalArgumentException.class, () -> sprintBacklog.createUSerStoryOfSprint(userStory, 5,
+                company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned")));
     }
 
 
@@ -96,7 +100,8 @@ class SprintBacklogTest {
     public void createStoryInSprintStatusDone() {
         UserStoryStatus status = new UserStoryStatus("Done");
         UserStory userStory = new UserStory(status, 2, "teste");
-        assertThrows(IllegalArgumentException.class, () -> sprintBacklog.createUSerStoryOfSprint(userStory, 5));
+        assertThrows(IllegalArgumentException.class, () -> sprintBacklog.createUSerStoryOfSprint(userStory, 5,
+                company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned")));
 
     }
 
@@ -106,7 +111,8 @@ class SprintBacklogTest {
         UserStoryStatus status = new UserStoryStatus("statusTest");
         UserStory userStory = new UserStory(status, 2, "teste");
         userStory.setId_UserStory(1);
-        UserStoryOfSprint userStoryOfSprint= sprintBacklog.createUSerStoryOfSprint(userStory, 5);
+        UserStoryOfSprint userStoryOfSprint= sprintBacklog.createUSerStoryOfSprint(userStory, 5,
+                company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         sprintBacklog.saveUserStoryOfSprint(userStoryOfSprint);
         assertTrue(sprintBacklog.validateUserStoryOfSprint(userStoryOfSprint));
 
@@ -120,7 +126,8 @@ class SprintBacklogTest {
         UserStory userStory = new UserStory(status, 2, "teste");
 
         SprintBacklog testBacklog = new SprintBacklog();
-        UserStoryOfSprint test = testBacklog.createUSerStoryOfSprint(userStory, 8);
+        UserStoryOfSprint test = testBacklog.createUSerStoryOfSprint(userStory, 8,
+                company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         testBacklog.saveUserStoryOfSprint(test);
         test.getUserStoryOfSprint().setId_UserStory(sprintBacklog.getUserStoryOfSprintList().get(0).getUserStoryOfSprint().getId_UserStory());
 

@@ -10,7 +10,7 @@ import java.util.Objects;
 public class SystemUserStore {
 
     //Atributes
-    private List<SystemUser> systemUserList;
+    private final List<SystemUser> systemUserList;
 
     //Constructor
     public SystemUserStore() {
