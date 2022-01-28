@@ -10,27 +10,28 @@ actor "Team Member" as TeamMember
 
 participant ": GetScrumBoardUI " as UI
 participant ": GetScrumBoardController " as controller
+participant "proj : Project" as proj
 participant "sprint : Sprint " as sprint
-participant ": SprintBacklog " as sprintBacklog
-participant ": UserStoryOfSprint " as userStoryOfSprint
 participant ": TaskMapper" as mapper
 participant "sprintBacklog : SprintBacklog" as tasksStatus
-participant "UserStoryStatusDTOList : List<UserStoryOfSprintStatusDTO> " as tasksDTOList
-participant "userStoryStatus : UserStoryOfSprintStatusDTO" as UserStoryStatus
+participant "UserStoryStatusDTOList : List<UserStoryStatusDTO> " as tasksDTOList
+participant "userStoryStatus : UserStoryStatusDTO" as UserStoryStatus
 
 activate TeamMember
 
-TeamMember -> UI: Get all user story status of the current sprint
+TeamMember -> UI: Get all the user story status of the current sprint
 
 UI -> controller: getUserStoryOfSprintStatus()
+controller -> proj: getCurrentSprint()
+return sprint
 controller -> sprint: getSprintBacklog()
 return sprintBacklog
 controller -> mapper : toDTO(sprintBacklog)
 mapper -> tasksDTOList**: create(sprintBacklog)
 loop
 mapper -> tasksStatus : get(i)
-return userStoryOfSprint
-mapper -> mapper : userStoryStatusDTO=toDTO(UserStoryOfSprint)
+return userStory
+mapper -> mapper : userStoryStatusDTO=toDTO(UserStory)
 mapper --> UserStoryStatus**: create()
 deactivate
 mapper -> tasksDTOList : add(userStoryStatusDTO)
