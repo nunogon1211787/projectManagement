@@ -26,28 +26,25 @@ PM -> System: Wants to check the Sprint Backlog of a Project
 System -> Ctrl: getSprint(code)
 Ctrl -> C1: getProjectStore()
 C1 --> Ctrl: projStore
-Ctrl --> C2: getCurrentProjectListByUserEmail(email)
 Ctrl -> C2: getProjectByCode(code)
 C2 --> Ctrl: proj
 Ctrl -> C3: getSprintBacklog
-C3 --> Ctrl: sprint
-Ctrl -> C4: getUserStoryList()
-C4 --> Ctrl: usList
-Ctrl -> C5: toDTO(USList)
-C5 -> C5.1 ** : create()
-loop
-C5 -> C5.1: getUS
-C5.1 --> C5: us
-C5 -> C5: usDTO = toDTO(us)
-C5 -> C5.2 ** : create()
-deactivate C5
-C5 -> C5.1: add(usDTO)
-C5.1 --> C5: true
-end
-C5 --> Ctrl: usListDTO
-Ctrl --> System: usListDTO
-System --> PM: usListDTO
-PM -> System: Change Status of US
+C3 --> Ctrl: sprintBacklog
+Ctrl -> C4: getUserStory()
+C4 --> Ctrl: us
+Ctrl -> C5: toDTO(us)
+C5 --> Ctrl: usDTO
+Ctrl --> System: usDTO
+System --> PM: usDTO
+
+PM -> System: Wants to change Status of US
+System -> Ctrl: getUsStatusListD()
+Ctrl -> C4: getUsStatusListD()
+
+
+
+
+
 System -> Ctrl: changeStatusOfUS(usId, userStoryStatus)
 Ctrl -> C4: getUS(usId)
 C4 --> Ctrl: us
