@@ -20,7 +20,6 @@ public class RefineUserStoryControllerTest {
     @Test
     @DisplayName("Refine User Story Controller")
     public void RefineUserStoryController(){
-
         Company company = new Company();
         RefineUserStoryController refineUserStoryController = new RefineUserStoryController(company);
 
