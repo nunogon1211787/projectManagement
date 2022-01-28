@@ -1,63 +1,90 @@
 @startuml
-'https://plantuml.com/class-diagram
 
 hide circle
 skinparam classAttributeIconSize 0
 
-title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
+title "US014 - As Director, I want to define the Scrum Master of a project."
 
-class CreateUserStoryUI {
-
+class AssignScrumMasterUI {
 }
 
-class CreateUserStoryController {
-    +getProjectListByUserEmail(String email)
-    +getProjectByCode(String code)
-    +createUserStory(status, priority, description)
+class AssignScrumMasterController{
+    +AssignScrumMasterController
+    +getProjectList()
+    +getProject(code)
+    +getProjectTeam()
+    +getResource(email)
+    +assignRole(resource, roleName)
 }
 
 class Company {
+    +Company()
     +getProjectStore()
+    +getProjectRoleStore()
+}
+
+class ProjectTeam {
+    +ProjectTeam()
+    +getResource()
+    +assignProjectRole(resource,startDate,endDate,projectRole)
+    +saveResource(newResource)
+    +checkOfRoleCurrentExistInTheProjectTeam(projectRole,startDate)
+    +getProjectTeamList()
+}
+
+class Resource {
+    +Resource()
+    +Resource(originalResource)
+    +isYour(email)
+    +isCurrent()
+    +setRole(projectRole)
+    +setStartDate(startDate)
+    +setEndDate(startDate))
+    +checkIfResourceCanBeAssignedToRoleByDate(startDate, sprintDuration)
 }
 
 class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
+    +ProjectStore()
+    +getProjectList()
+    +getProjectByCode()
+}
+
+class ProjectRoleStore {
+    +ProjectRoleStore()
+    +getProjectRole(roleName)
 }
 
 class Project {
--code : String
--productBacklog : ProductBacklog
-+getProductBacklog()
+    +Project()
+    +getProjectTeam()
+    +getSprintDuration()
+    +getSprintStore()
+    +getCode()
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+createUserStory(status, priority, description)
-+isValideUserStory(status, priority, description)
-+saveUserStory(us)
-+validateUserStory(us)
+class SprintSotre {
+    +SprintSotre()
+    +getCurrentSprint()
 }
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
-+UserStory(status, priority,description)
+class Sprint {
+    +Sprint()
+    +isCurrentSprint()
+    +getEndDate()
 }
 
-CreateUserStoryUI ..> CreateUserStoryController
+AssignScrumMasterUI ..> AssignScrumMasterController
+AssignScrumMasterController ..> Company
+AssignScrumMasterController ..> Project
+AssignScrumMasterController ..> ProjectTeam
+AssignScrumMasterController ..> Resource
 
-CreateUserStoryController ..> Company
-CreateUserStoryController ..> ProjectStore
-CreateUserStoryController ..> Project
-CreateUserStoryController ..> ProductBacklog
-
+Company "1" o-- "1" ProjectRoleStore: has
 Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+ProjectStore "1" *-- "*" Project
+Project "1" o-- "1" ProjectTeam
+Project "1" o-- "1" SprintSotre
+SprintSotre "1" *-- "1" Sprint
+ProjectTeam "1" *-- "1" Resource
 
 @enduml

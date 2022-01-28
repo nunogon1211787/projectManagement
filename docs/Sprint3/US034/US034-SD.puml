@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title As Project Member, I want to update the status (i.e.: the Scrum Board category) of a user story in the scope of the current sprint backlog.
+
+autoactivate on
+autonumber
+
+actor "Project Member" as PM
+participant ":UpdateStatusUSSprintUI" as System
+participant ":UpdateStatusUSSprintController" as Ctrl
+participant ": Company" as C1
+participant "projStore : ProjectStore" as C2
+participant "proj : Project" as C3
+participant "sprintBack : SprintBacklog" as C4
+participant "SprintListMapper" as C5
+participant "usListDTO:List<UserStoryDTO>" as C5.1
+participant "usDTO: userStoryDTO" as C5.2
+participant "us : UserStory" as C6
+
+activate PM
+
+
+
+PM -> System: Wants to check the Sprint Backlog of a Project
+System -> Ctrl: getSprint(code)
+Ctrl -> C1: getProjectStore()
+C1 --> Ctrl: projStore
+Ctrl --> C2: getCurrentProjectListByUserEmail(email)
+Ctrl -> C2: getProjectByCode(code)
+C2 --> Ctrl: proj
+Ctrl -> C3: getSprintBacklog
+C3 --> Ctrl: sprint
+Ctrl -> C4: getUserStoryList()
+C4 --> Ctrl: usList
+Ctrl -> C5: toDTO(USList)
+C5 -> C5.1 ** : create()
+loop
+C5 -> C5.1: getUS
+C5.1 --> C5: us
+C5 -> C5: usDTO = toDTO(us)
+C5 -> C5.2 ** : create()
+deactivate C5
+C5 -> C5.1: add(usDTO)
+C5.1 --> C5: true
+end
+C5 --> Ctrl: usListDTO
+Ctrl --> System: usListDTO
+System --> PM: usListDTO
+PM -> System: Change Status of US
+System -> Ctrl: changeStatusOfUS(usId, userStoryStatus)
+Ctrl -> C4: getUS(usId)
+C4 --> Ctrl: us
+Ctrl -> C6: setStatus(userStoryStatus)
+C6 --> Ctrl: true
+Ctrl --> System: true
+System --> PM: Completed
+
+
+
+
+
+@enduml

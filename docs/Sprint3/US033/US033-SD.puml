@@ -1,0 +1,97 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title US033 - As SM/Team Member, I want to register work done on a Task
+
+autoactivate on
+autonumber
+
+actor "SM/Team Mamber" as User
+participant ": RegisterWorkToTaskUI" as Ui
+participant ": RegisterWorkToTaskController" as Ctrl
+participant ": Company" as company
+participant "proj : Project" as project
+participant "sprintList : SprintList" as sprintList
+participant "sprint : Sprint" as sprint
+participant "userStoryOfSprintList : SprintBacklog" as usSprintList
+participant "userStoryOfSprint : UserStoryOfSprint" as usSprint
+participant "task : Task" as task
+participant "effort : Effort" as effort
+
+
+activate User
+
+User -> Ui: Access sprint list
+Ui -> Ctrl: getSprints()
+Ctrl-> project : getSprintList()
+project --> Ctrl : sprintList
+Ctrl ->sprintList : getSprints()
+sprintList -->Ctrl : sprintList
+Ctrl --> Ui: sprintList
+Ui -->User : Shows sprint list.
+
+User -> Ui: Choose sprint
+Ui -> Ctrl: getSprint(id)
+Ctrl->sprintList : getSprint(id)
+loop for each know Sprint
+sprintList->sprint : hasSprintId(id)
+sprint--> sprintList: true
+end
+sprintList-->Ctrl: sprint
+Ctrl-->Ui : sprint
+Ui-->User : Show sprint details.
+
+User -> Ui: Access UserStoryOfSprint list.
+Ui -> Ctrl: getSprintBacklog()
+Ctrl-> sprint : getSprintBacklog()
+sprint--> Ctrl: sprintBacklog
+Ctrl->usSprintList: getSprintUserStories()
+usSprintList-->Ctrl: userStoryOfSprintList
+Ctrl-->Ui : userStoryOfSprintList
+Ui-->User : Shows userStoryOfSprint list.
+
+User -> Ui: Choose UserStoryOfSprint
+Ui -> Ctrl: getUserStoryOfSprint(id)
+Ctrl-> usSprintList : getUserStoryOfSprint(id)
+loop for each know UserStoryOfSprint
+usSprintList->usSprint : hasUserStoryOfSprint(id)
+usSprint--> usSprintList: true
+end
+usSprintList-->Ctrl: userStoryOfSprint
+Ctrl-->Ui : userStoryOfSprint
+Ui-->User : Show userStoryOfSprint details.
+
+User -> Ui: Access task list.
+Ui -> Ctrl: getTasks()
+Ctrl ->usSprint : getTasks()
+usSprint --> Ctrl : taskList
+Ctrl-->Ui : taskList
+Ui-->User : Shows task list.
+
+User -> Ui: Choose task.
+Ui -> Ctrl: getTask(id)
+Ctrl-> usSprint : getTask(id)
+loop for each know Task
+usSprint->task : hasTask(id)
+task--> usSprint: true
+end
+usSprint-->Ctrl: task
+Ctrl-->Ui : task
+Ui-->User : Show task details.
+
+User -> Ui: Starts registration of a new effort.
+Ui-->User: requests data(timeSpent, workDescription)
+User -> Ui: types requested data
+Ui -> Ctrl: createEffort(timeSpent, workDescription)
+Ctrl -> task: createEffort(timeSpent, workDescription)
+task->effort **: create(timeSpent, workDescription)
+task--> Ctrl: effort
+Ctrl -> task: saveEffort(effort)
+task -> task: validateEffort(effort)
+deactivate task
+task -> task: add(effort)
+deactivate task
+task-->Ctrl: true
+Ctrl-->Ui : true
+Ui-->User : Informs operation success.
+@enduml

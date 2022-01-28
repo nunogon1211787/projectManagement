@@ -3,28 +3,33 @@ package switch2021.project.model;
 import lombok.Getter;
 import switch2021.project.utils.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
+//@Deprecated
 public class UserStoryOfSprint {
 
     /**
      * Class Attributes
      **/
+    private int id_UserStoryOfSprint;
     private int estimateEffort;
     private UserStory userStoryOfSprint;
-    private int id_UserStoryOfSprint;
-    private Task userStoryOfSprintTask;
+    private UserStoryStatus status;
+    private List<Task> userStoryOfSprintTasks;
 
     /**
      * ---> Constructor <---
      **/
 
-    public UserStoryOfSprint(UserStory story, int effort) {
+    public UserStoryOfSprint(UserStory story, int effort, UserStoryStatus status) {
         validateFields(effort, story);
         this.estimateEffort = effort;
         this.userStoryOfSprint = story;
-        this.userStoryOfSprintTask = new Task();
+        this.userStoryOfSprintTasks = new ArrayList<>();
+        this.status = status;
     }
 
     public UserStoryOfSprint(UserStory story, int effort, int userStoryId) {
@@ -32,7 +37,7 @@ public class UserStoryOfSprint {
         this.estimateEffort = effort;
         this.userStoryOfSprint = story;
         this.id_UserStoryOfSprint = userStoryId;
-        this.userStoryOfSprintTask = new Task();
+        this.userStoryOfSprintTasks = new ArrayList<>();
     }
 
     public boolean hasCode(long id_UserStoryofSprint) {
@@ -81,7 +86,7 @@ public class UserStoryOfSprint {
         if (!(o instanceof UserStoryOfSprint)) return false;
         UserStoryOfSprint that = (UserStoryOfSprint) o;
         return estimateEffort == that.estimateEffort && userStoryOfSprint.equals(that.userStoryOfSprint)
-                && userStoryOfSprintTask.equals(that.userStoryOfSprintTask);//TODO This override doesnt compare ID
+                && userStoryOfSprintTasks.equals(that.userStoryOfSprintTasks);//TODO This override doesnt compare ID
     }
 
     @Override

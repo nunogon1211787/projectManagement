@@ -4,55 +4,41 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-title US024 - As Administrator, I want to get a list all user accounts and their status
+title US025 - As Administrator, I want to inactivate a user account
 
-class UserAccountStatusUI {
+class InactiveUserAccountUI {
 
 }
 
-class ProductBacklogSortController {
-    +getProjectListByUserEmail(String email)
-    +getProject(String code)
-    +getUsSortedByPriority()
+class InactiveUserAccountController {
+    +getUser(email)
 }
 
 class Company {
-    +getProjectStore()
+    +getSystemUserStore(email)
 }
 
-class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
+class SystemUserStore {
++getUserByEmail(email)
 }
 
-class Project {
+class SystemUser {
 -code : String
--productBacklog : ProductBacklog
-+getProductBacklog()
+-photo: String
+-username: String
+-password: String
+-function: String
+-inactivateUser: boolean
+
++setInactivateUser(email)
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+getUsSortedByPriority()
-}
+InactiveUserAccountUI ..> InactiveUserAccountController
+InactiveUserAccountController ..> Company
+InactiveUserAccountController ..> SystemUserStore
+InactiveUserAccountController ..> SystemUser
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
-}
+Company "1" o- "1" SystemUserStore: has
+SystemUserStore "1" *- "1" SystemUser: has
 
-UserAccountStatusUI ..> ProductBacklogSortController
-
-ProductBacklogSortController ..> Company
-ProductBacklogSortController ..> ProjectStore
-ProductBacklogSortController ..> Project
-ProductBacklogSortController ..> ProductBacklog
-
-Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
 @enduml

@@ -1,12 +1,16 @@
 package switch2021.project.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import switch2021.project.utils.App;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
+@Getter
+@Setter
 public class ProjectTeam {
 
     /**
@@ -28,14 +32,9 @@ public class ProjectTeam {
 //        projectManager.setRole(role.getProjectRoleByName("Project Manager"));
 //    }
 
-
     /**
      * Getters and Setters
      **/
-    public List<Resource> getProjectTeamList() {
-        return new ArrayList<>(this.projectTeamList);
-    }
-
     //Get resource by User
     public Resource getResource(SystemUser user) {
         Resource resource = null;
@@ -74,6 +73,14 @@ public class ProjectTeam {
 
 
     /**
+     * Create a new Resource
+     */
+    public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
+        return new  Resource(user,startDate,endDate,costPerHour,percentageOfAllocation);
+    }
+
+
+    /**
      * Setter new Role
      **/
     public boolean assignProjectRole(Resource originalResource, LocalDate startDateNewRole, int sprintDuration, ProjectRole projectRole) {
@@ -108,7 +115,7 @@ public class ProjectTeam {
     /**
      * Method which saves new resource at ProjectTeam List
      **/
-    private boolean saveResource(Resource newResource) {
+    public boolean saveResource(Resource newResource) {
         boolean msg;
         if (checkIfRoleCurrentExistInTheProjectTeam(newResource.getRole(), newResource.getStartDate())) {
             Resource oldResourceRole = getResource(newResource.getRole()); // Old Resource with Project Role that must be unique
@@ -120,7 +127,7 @@ public class ProjectTeam {
             this.projectTeamList.add(changeRole); // save in project team the old resource with new role
             msg = true;
         } else {                //-----------> Validação a fazer <------------
-            this.projectTeamList.add(newResource);
+            addResourceToTeam(newResource);
             msg = true;
         }
         return msg;

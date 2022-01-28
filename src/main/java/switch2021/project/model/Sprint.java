@@ -18,7 +18,7 @@ public class Sprint {
      **/
     private int id_Sprint;
     private String name;
-    private final TaskList taskstore;
+    private final TaskList taskList;
     private final SprintBacklog sprintBacklog;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -32,7 +32,7 @@ public class Sprint {
         this.name = name;
         this.startDate = startDate;
         this.sprintBacklog = new SprintBacklog();
-        this.taskstore = new TaskList();
+        this.taskList = new TaskList();
     }
 
     /**
@@ -70,7 +70,7 @@ public class Sprint {
         List<Task> taskList = new ArrayList<>();
 
         taskList.addAll(this.sprintBacklog.getUserStoryOfSprintTasks());
-        taskList.addAll(this.taskstore.getTaskList());
+        taskList.addAll(this.taskList.getTaskList());
         return taskList;
     }
 
@@ -83,12 +83,12 @@ public class Sprint {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sprint sprint = (Sprint) o;
-        return id_Sprint == sprint.id_Sprint && Objects.equals(name, sprint.name) && Objects.equals(taskstore, sprint.taskstore) && Objects.equals(sprintBacklog, sprint.sprintBacklog) && Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
+        return id_Sprint == sprint.id_Sprint && Objects.equals(name, sprint.name) && Objects.equals(taskList, sprint.taskList) && Objects.equals(sprintBacklog, sprint.sprintBacklog) && Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_Sprint, name, taskstore, sprintBacklog, startDate, endDate);
+        return Objects.hash(id_Sprint, name, taskList, sprintBacklog, startDate, endDate);
     }
 
     public boolean hasSprintID(int id) {
