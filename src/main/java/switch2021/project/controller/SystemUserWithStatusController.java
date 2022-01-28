@@ -1,11 +1,10 @@
 package switch2021.project.controller;
 
-import switch2021.project.Mapper.SystemUserMapper;
-import switch2021.project.dto.SystemUserDto;
+import switch2021.project.Mapper.SystemUserWithStatusMapper;
+import switch2021.project.dto.SystemUserWithStatusDto;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser;
 import switch2021.project.stores.SystemUserStore;
-import switch2021.project.utils.App;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class SystemUserWithStatusController {
     private final Company company;
     private SystemUserStore systemUserStore;
     private List<SystemUser> systemUserList;
-    private List<SystemUserDto> systemUserDtoList;
+    private List<SystemUserWithStatusDto> systemUserWithStatusDtoList;
 
     /**
      * Constructor to UI (with SINGLETON).
@@ -31,10 +30,11 @@ public class SystemUserWithStatusController {
         this.company = company;
     }
 
-    public List<SystemUserDto> getListSystemUserWithStatus() {
+
+    public List<SystemUserWithStatusDto> getListSystemUserWithStatus() {
         this.systemUserStore = this.company.getSystemUserStore();
         this.systemUserList = this.systemUserStore.getSystemUsers();
-        this.systemUserDtoList = SystemUserMapper.toDto(this.systemUserList);
-        return systemUserDtoList;
+        this.systemUserWithStatusDtoList = SystemUserWithStatusMapper.toDto(this.systemUserList);
+        return systemUserWithStatusDtoList;
     }
 }

@@ -23,7 +23,7 @@ class SystemUserStore {
 +getSystemUsers()
 }
 
-class SystemUserMapper{
+class SystemUserWithStatusMapper{
 +toDto(systemUserList)
 }
 
@@ -40,8 +40,10 @@ class SystemUser {
 +getAtivatateUserStatus()
 }
 
-class SystemUserDto {
-+create(userName, email, ativateUserStatus) ?????????
+class SystemUserWithStatusDto {
++create()
++create(userName, email, ativateUserStatus)
++add(systemUserDto)
 
 }
 
@@ -49,7 +51,9 @@ SystemUserWithStatusUI ..> SystemUserWithStatusController
 
 SystemUserWithStatusController ..> Company
 SystemUserWithStatusController ..> SystemUserStore
-SystemUserWithStatusController ..> SystemUser
+SystemUserWithStatusController ..> SystemUserWithStatusMapper
+SystemUserWithStatusMapper ..> SystemUserWithStatusDto
+
 
 
 Company "1" o-- "1" SystemUserStore: uses

@@ -1,13 +1,12 @@
 package switch2021.project.Mapper;
 
-import switch2021.project.dto.SystemUserDto;
+import switch2021.project.dto.SystemUserWithStatusDto;
 import switch2021.project.model.SystemUser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class SystemUserMapper {
+public class SystemUserWithStatusMapper {
 
 //
 //    public static SystemUserDto toDto1(SystemUser systemUser){
@@ -24,12 +23,12 @@ public class SystemUserMapper {
 //    }
 
     //percorrer a lista de systemUser e acrescentar a uma nova lista DTO
-    public static List<SystemUserDto> toDto(List<SystemUser> systemUserList){
-        List<SystemUserDto> systemUserDtoList = new ArrayList<>();
+    public static List<SystemUserWithStatusDto> toDto(List<SystemUser> systemUserList){
+        List<SystemUserWithStatusDto> systemUserWithStatusDtoList = new ArrayList<>();
         for (SystemUser systemUser: systemUserList) {
-            SystemUserDto systemUserDto = new SystemUserDto(systemUser.getUserName(), systemUser.getEmail(), systemUser.getActivateUserStatus());
-            systemUserDtoList.add(systemUserDto);
+            SystemUserWithStatusDto systemUserWithStatusDto = new SystemUserWithStatusDto(systemUser.getUserName(), systemUser.getEmail(), systemUser.getActivateUserStatus());
+            systemUserWithStatusDtoList.add(systemUserWithStatusDto);
         }
-        return systemUserDtoList;
+        return systemUserWithStatusDtoList;
     }
 }
