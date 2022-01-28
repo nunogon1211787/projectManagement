@@ -5,6 +5,7 @@ import switch2021.project.utils.App;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ProjectStore {
 
@@ -146,5 +147,19 @@ public class ProjectStore {
             throw new IllegalArgumentException("Email don't exist in system");
         }
         return true;
+    }
+
+    /** Override **/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProjectStore)) return false;
+        ProjectStore that = (ProjectStore) o;
+        return Objects.equals(this.projectList, that.projectList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(projectList);
     }
 }

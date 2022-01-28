@@ -3,6 +3,8 @@ package switch2021.project.model;
 import lombok.Getter;
 import switch2021.project.stores.*;
 
+import java.util.Objects;
+
 @Getter
 public class Company {
 
@@ -46,6 +48,33 @@ public class Company {
         this.projectStatusStore.populateDefault();
         this.userStoryStatusStore.populateDefault();
         this.taskStatusStore.populateDefault();
+    }
+
+
+    /** Override **/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Company)) return false;
+        Company that = (Company) o;
+        return this.systemUserStore.equals(that.systemUserStore) &&
+                this.projectStore.equals(that.projectStore) &&
+                this.userProfileStore.equals(that.userProfileStore) &&
+                this.projectRoleStore.equals(that.projectRoleStore) &&
+                this.typologyStore.equals(that.typologyStore) &&
+                this.customerStore.equals(that.customerStore) &&
+                this.businessSectorStore.equals(that.businessSectorStore) &&
+                this.projectStatusStore.equals(that.projectStatusStore) &&
+                this.userStoryStatusStore.equals(that.userStoryStatusStore) &&
+                this.requestStore.equals(that.requestStore);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(systemUserStore, projectStore, userProfileStore,
+                            projectRoleStore, typologyStore, customerStore,
+                            businessSectorStore, projectStatusStore,
+                            userStoryStatusStore, requestStore);
     }
 
 }

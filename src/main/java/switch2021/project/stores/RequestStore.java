@@ -1,5 +1,6 @@
 package switch2021.project.stores;
 
+import switch2021.project.model.ProjectTeam;
 import switch2021.project.model.Request;
 import switch2021.project.model.SystemUser;
 import switch2021.project.model.UserProfile;
@@ -146,6 +147,8 @@ public class RequestStore {
 
     }
 
+
+    /** Override **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

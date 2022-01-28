@@ -1,10 +1,12 @@
 package switch2021.project.stores;
 
 import switch2021.project.model.Project;
+import switch2021.project.model.ProjectTeam;
 import switch2021.project.model.UserStoryStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class UserStoryStatusStore {
@@ -78,4 +80,19 @@ public class UserStoryStatusStore {
         }
         return msg;
     }
+
+    /** Override **/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserStoryStatusStore)) return false;
+        UserStoryStatusStore that = (UserStoryStatusStore) o;
+        return Objects.equals(this.userStoryStatusList, that.userStoryStatusList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userStoryStatusList);
+    }
+
 }

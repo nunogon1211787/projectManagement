@@ -1,9 +1,11 @@
 package switch2021.project.stores;
 
 import switch2021.project.model.BusinessSector;
+import switch2021.project.model.ProjectTeam;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class BusinessSectorStore {
 
@@ -59,4 +61,19 @@ public class BusinessSectorStore {
 
         return sector;
     }
+
+    /** Override **/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BusinessSectorStore)) return false;
+        BusinessSectorStore that = (BusinessSectorStore) o;
+        return Objects.equals(this.businessSectorList, that.businessSectorList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(businessSectorList);
+    }
+
 }
