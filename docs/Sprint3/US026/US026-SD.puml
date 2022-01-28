@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Sequence Diagram US026 "As Administrator, I want to activate a user account"
+
+autoactivate on
+autonumber
+
+actor "Administrator" as Administrator
+participant ":ActivateAnUserAccountUI" as UI
+participant ":ActivateAnUserAccountController" as Ctrl
+participant ":Company" as Company
+participant "systemUserStore:SystemUserStore" as SystemUserStore
+participant "user:SystemUser" as SystemUser
+
+
+activate "Administrator"
+
+"Administrator" -> UI: Active and User Account
+UI -> Ctrl: getSystemUserStore()
+Ctrl -> Company: getSystemUserStore()
+return systemUserStore
+Ctrl -> SystemUserStore : getUserByEmail()
+return user
+loop
+SystemUserStore-> SystemUser: isYourEmail(email)
+SystemUser --> SystemUserStore: true
+end
+Ctrl -> SystemUserStore : setActivateUser()
+SystemUserStore --> Ctrl : true
+Ctrl --> UI : true
+UI --> "Administrator": Account activated
+@enduml

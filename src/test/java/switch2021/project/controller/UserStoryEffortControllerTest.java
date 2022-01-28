@@ -141,10 +141,6 @@ class UserStoryEffortControllerTest {
         project1.getSprintList().saveSprint(sprint2);
         company.getProjectStore().saveNewProject(project1);
 
-        Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
-        Sprint userSprint = userStoryEffortController.getSprint(1);
-
-        SprintBacklog sprintBacklog = userStoryEffortController.getSprintBacklog();
 
         userStoryEffortController.getUserStory(1);
         userStoryEffortController.setEffort(21);

@@ -13,7 +13,7 @@ participant ": Company" as C1
 participant "projStore : ProjectStore" as C2
 participant "projectList: List <Project>" as C2.1
 participant "proj : Project" as C3
-participant "sprintStore: SprintStore" as C4
+participant "sprintList: SprintList" as C4
 participant "sprint: Sprint" as C5
 participant "sprintbacklog: SprintBacklog" as C6
 participant "usOfSprint: UserStoryOfSprint" as C7
@@ -44,7 +44,7 @@ System --> User :Shows project choosen
 
 User -> System: Access sprint list
 System -> Ctrl: getSprintList()
-Ctrl-> C3 : getSprintStore()
+Ctrl-> C3 : getSprintList()
 C3 --> Ctrl : sprintStore
 Ctrl -> C4 : getSprintList()
 C4 --> Ctrl : sprint list
@@ -87,17 +87,5 @@ C7 -> C7 : validateEffort()
 C7 --> Ctrl: true
 Ctrl --> System: true
 System --> User: true
-
-
-
-
-
-
-
-
-
-
-
-
 
 @enduml

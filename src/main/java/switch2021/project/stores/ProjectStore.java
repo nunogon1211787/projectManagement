@@ -42,6 +42,7 @@ public class ProjectStore {
      * Getters Methods
      **/
     public List<Project> getProjects() {
+
         return new ArrayList<>(this.projectList);
     }
 
