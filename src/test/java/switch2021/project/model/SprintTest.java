@@ -190,7 +190,7 @@ public class SprintTest {
         Sprint sprint = new Sprint("Add an apple", startDate);
         UserStoryStatus status = new UserStoryStatus(1, "To Do");
         UserStory userstory = new UserStory(status, 5, "AnaBoss");
-        UserStoryOfSprint userStoryOfSprint = new UserStoryOfSprint(userstory, 1 );
+        UserStoryOfSprint userStoryOfSprint = new UserStoryOfSprint(userstory, 5 , 1 );
         sprint.getSprintBacklog().getUserStoryOfSprintList().add(userStoryOfSprint);
         assertEquals(1, sprint.getSprintBacklog().getUserStoryOfSprintList().size());
     }
