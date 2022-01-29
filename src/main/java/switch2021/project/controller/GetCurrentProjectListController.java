@@ -23,10 +23,9 @@ public class GetCurrentProjectListController {
     public GetCurrentProjectListController(Company company){ this.company = company; }
 
 
-
-    public List<Project> getCurrentProjectListByUserEmail(String email) {
+    public List<Project> getCurrentProjectsByUserEmail(String email) {
         ProjectStore projStore = this.company.getProjectStore();
-        this.currentProjectListByUser = projStore.getCurrentProjectListByUserEmail(email);
+        this.currentProjectListByUser = projStore.getCurrentProjectsByUserEmail(email);
         return this.currentProjectListByUser;
     }
 }

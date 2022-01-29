@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="358px" preserveAspectRatio="none" style="width:1218px;height:358px;background:#FFFFFF;" version="1.1" viewBox="0 0 1218 358" width="1218px" zoomAndPan="magnify"><defs><filter height="300%" id="f1jak7dztjyok1" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="1083" x="61.25" y="18.6855">As Project Member, I want to update the status (i.e.: the Scrum Board category) of a user story in the scope of the current sprint backlog.</text><!--MD5=[5d216171312b368784673672c3933d73]
+class UpdateStatusUSSprintUI--><rect codeLine="8" fill="#FEFECE" filter="url(#f1jak7dztjyok1)" height="41.0938" id="UpdateStatusUSSprintUI" style="stroke:#A80036;stroke-width:1.5;" width="142" x="481" y="29.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="136" x="484" y="47.0977">UpdateStatusUSSprintUI</text><line style="stroke:#A80036;stroke-width:1.5;" x1="482" x2="622" y1="54.7344" y2="54.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="482" x2="622" y1="62.7344" y2="62.7344"/><!--MD5=[a8c8c472218f6ca801e955f36f65cd37]
+class UpdateStatusUSSprintController--><rect codeLine="11" fill="#FEFECE" filter="url(#f1jak7dztjyok1)" height="54.9297" id="UpdateStatusUSSprintController" style="stroke:#A80036;stroke-width:1.5;" width="184" x="460" y="131.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="178" x="463" y="149.0977">UpdateStatusUSSprintController</text><line style="stroke:#A80036;stroke-width:1.5;" x1="461" x2="643" y1="156.7344" y2="156.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="461" x2="643" y1="164.7344" y2="164.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="115" x="466" y="180.1533">+getSprint(code): Sprint</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect codeLine="15" fill="#FEFECE" filter="url(#f1jak7dztjyok1)" height="54.9297" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="100" x="7" y="268.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="30.5" y="285.5977">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="106" y1="293.2344" y2="293.2344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="106" y1="301.2344" y2="301.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="88" x="13" y="316.6533">+getProjectStore()</text><!--MD5=[0cf43f64de24b70e8ffe65ff9ee7abee]
+class ProjectStore--><rect codeLine="19" fill="#FEFECE" filter="url(#f1jak7dztjyok1)" height="54.9297" id="ProjectStore" style="stroke:#A80036;stroke-width:1.5;" width="136" x="181" y="268.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="67" x="215.5" y="285.5977">ProjectStore</text><line style="stroke:#A80036;stroke-width:1.5;" x1="182" x2="316" y1="293.2344" y2="293.2344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="182" x2="316" y1="301.2344" y2="301.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="124" x="187" y="316.6533">+getProjectByCode(code)</text><!--MD5=[79d378210367c0c6ec62ef762ddfbd1b]
+class Project--><rect codeLine="23" fill="#FEFECE" filter="url(#f1jak7dztjyok1)" height="54.9297" id="Project" style="stroke:#A80036;stroke-width:1.5;" width="107" x="402.5" y="268.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="38" x="437" y="285.5977">Project</text><line style="stroke:#A80036;stroke-width:1.5;" x1="403.5" x2="508.5" y1="293.2344" y2="293.2344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="403.5" x2="508.5" y1="301.2344" y2="301.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="95" x="408.5" y="316.6533">+getSprintBacklog()</text><!--MD5=[a136f49e3565b20f66540890d0159f10]
+class SprintBacklog--><rect codeLine="27" fill="#FEFECE" filter="url(#f1jak7dztjyok1)" height="54.9297" id="SprintBacklog" style="stroke:#A80036;stroke-width:1.5;" width="107" x="595.5" y="268.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="76" x="611" y="285.5977">SprintBacklog</text><line style="stroke:#A80036;stroke-width:1.5;" x1="596.5" x2="701.5" y1="293.2344" y2="293.2344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="596.5" x2="701.5" y1="301.2344" y2="301.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="95" x="601.5" y="316.6533">+getUserStoryList()</text><!--MD5=[aa321f039a525ec5d76097f67718c632]
+class SprintListMapper--><rect codeLine="31" fill="#FEFECE" filter="url(#f1jak7dztjyok1)" height="96.4375" id="SprintListMapper" style="stroke:#A80036;stroke-width:1.5;" width="99" x="974.5" y="247.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="93" x="977.5" y="265.0977">SprintListMapper</text><line style="stroke:#A80036;stroke-width:1.5;" x1="975.5" x2="1072.5" y1="272.7344" y2="272.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="975.5" x2="1072.5" y1="280.7344" y2="280.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="980.5" y="296.1533">+toDTO(usList)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="43" x="980.5" y="309.9893">+getUS()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="45" x="980.5" y="323.8252">+create()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="65" x="980.5" y="337.6611">+add(usDTO)</text><!--MD5=[addac4ac0d906149d9f4561682b94013]
+class Userstory--><rect codeLine="38" fill="#FEFECE" filter="url(#f1jak7dztjyok1)" height="54.9297" id="Userstory" style="stroke:#A80036;stroke-width:1.5;" width="151" x="788.5" y="268.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="837.5" y="285.5977">Userstory</text><line style="stroke:#A80036;stroke-width:1.5;" x1="789.5" x2="938.5" y1="293.2344" y2="293.2344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="789.5" x2="938.5" y1="301.2344" y2="301.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="139" x="794.5" y="316.6533">+setStatus(userStoryStatus)</text><!--MD5=[a9c6523eed2e761af86521ca9001dce4]
+class usDTO--><rect codeLine="42" fill="#FEFECE" filter="url(#f1jak7dztjyok1)" height="41.0938" id="usDTO" style="stroke:#A80036;stroke-width:1.5;" width="45" x="1159.5" y="275.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="39" x="1162.5" y="292.5977">usDTO</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1160.5" x2="1203.5" y1="300.2344" y2="300.2344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1160.5" x2="1203.5" y1="308.2344" y2="308.2344"/><!--MD5=[65cf8c359a4e3db5b88a0f18a13a0227]
+link UpdateStatusUSSprintUI to UpdateStatusUSSprintController--><path codeLine="48" d="M552,70.7706 C552,86.1806 552,107.9806 552,125.9406 " fill="none" id="UpdateStatusUSSprintUI-to-UpdateStatusUSSprintController" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="552,131.3906,556,122.3906,552,126.3906,548,122.3906,552,131.3906" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[e107266b9f98b18d70017ef9f66c3530]
+link UpdateStatusUSSprintController to Company--><path codeLine="50" d="M459.84,175.5906 C380.14,190.2006 262.41,214.7706 163,247.6406 C146.11,253.2206 128.25,260.5506 112.11,267.7606 " fill="none" id="UpdateStatusUSSprintController-to-Company" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="107.15,269.9806,116.9988,269.9492,111.7125,267.9353,113.7264,262.6491,107.15,269.9806" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[5d75cc71c3428822bf3ccf678435b67b]
+link UpdateStatusUSSprintController to ProjectStore--><path codeLine="52" d="M492.14,186.7106 C440.57,209.6006 366.32,242.5606 313.47,266.0206 " fill="none" id="UpdateStatusUSSprintController-to-ProjectStore" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="308.74,268.1206,318.5889,268.1263,313.3102,266.0926,315.344,260.814,308.74,268.1206" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[2e4af2ce5939cd34d53eafc7abec8f10]
+link UpdateStatusUSSprintController to Project--><path codeLine="54" d="M533.03,186.7106 C517.19,208.9106 494.59,240.5806 477.96,263.8706 " fill="none" id="UpdateStatusUSSprintController-to-Project" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="474.93,268.1206,483.4094,263.1107,477.8308,264.0481,476.8934,258.4695,474.93,268.1206" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[129ab1bbaae35a779d3fee9209da2875]
+link UpdateStatusUSSprintController to SprintBacklog--><path codeLine="56" d="M571.16,186.7106 C587.17,208.9106 610.01,240.5806 626.81,263.8706 " fill="none" id="UpdateStatusUSSprintController-to-SprintBacklog" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="629.88,268.1206,627.8558,258.482,626.9536,264.0665,621.3691,263.1643,629.88,268.1206" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7af88fc117495cabd12b78f74e6c7ed9]
+link UpdateStatusUSSprintController to SprintListMapper--><path codeLine="58" d="M644.08,169.4406 C728.33,180.3906 855.01,203.0406 957,247.6406 C961.3,249.5206 965.61,251.7006 969.85,254.0706 " fill="none" id="UpdateStatusUSSprintController-to-SprintListMapper" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="974.42,256.7106,968.627,248.7456,970.0903,254.21,964.6259,255.6732,974.42,256.7106" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[23a8eac4039402a730ab80332452cbcb]
+link UpdateStatusUSSprintController to Userstory--><path codeLine="60" d="M613.64,186.7106 C666.74,209.6006 743.19,242.5606 797.62,266.0206 " fill="none" id="UpdateStatusUSSprintController-to-Userstory" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="802.49,268.1206,795.8205,260.8737,797.9017,266.1338,792.6416,268.215,802.49,268.1206" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[e1b5bd22d66a38e71db80b1b351ff0db]
+link Company to ProjectStore--><path codeLine="62" d="M107.45,295.6406 C128.31,295.6406 152.91,295.6406 175.71,295.6406 " fill="none" id="Company-to-ProjectStore" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="180.84,295.6406,171.84,291.6406,175.84,295.6406,171.84,299.6406,180.84,295.6406" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="37" x="125.5" y="289.1357">knows</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="115.0367" y="292.0404">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="166.0022" y="292.2838">1</text><!--MD5=[626cc0adcc6c3eabfe261ec19000087f]
+link ProjectStore to Project--><path codeLine="64" d="M317.07,295.6406 C342.92,295.6406 372.13,295.6406 397.07,295.6406 " fill="none" id="ProjectStore-to-Project" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="402.32,295.6406,393.32,291.6406,397.32,295.6406,393.32,299.6406,402.32,295.6406" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="49" x="335.25" y="289.1357">contains</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="324.898" y="292.2838">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="374.559" y="310.1365">0..*</text><!--MD5=[365e7c2afad1a3ad7be76fd260b021f5]
+link Project to SprintBacklog--><path codeLine="66" d="M509.5,295.6406 C534.61,295.6406 564.58,295.6406 590.31,295.6406 " fill="none" id="Project-to-SprintBacklog" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="595.39,295.6406,586.39,291.6406,590.39,295.6406,586.39,299.6406,595.39,295.6406" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="49" x="528" y="289.1357">contains</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="517.5156" y="292.0404">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="580.3589" y="292.0404">1</text><!--MD5=[f11fbac6f1736352a1e833a3d7d99734]
+link SprintBacklog to Userstory--><path codeLine="68" d="M702.7,295.6406 C726.95,295.6406 756.13,295.6406 782.96,295.6406 " fill="none" id="SprintBacklog-to-Userstory" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="788.29,295.6406,779.29,291.6406,783.29,295.6406,779.29,299.6406,788.29,295.6406" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="49" x="721" y="289.1357">contains</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="710.3863" y="292.0891">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="760.3886" y="309.8927">0..*</text><!--MD5=[e62dad9e12037049948ee2e0b11bcc2a]
+link SprintListMapper to usDTO--><path codeLine="70" d="M1073.56,295.6406 C1100.2,295.6406 1132.06,295.6406 1154.32,295.6406 " fill="none" id="SprintListMapper-to-usDTO" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1159.49,295.6406,1150.49,291.6406,1154.49,295.6406,1150.49,299.6406,1159.49,295.6406" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="49" x="1092" y="289.1357">contains</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1081.3532" y="291.9544">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="1131.5657" y="311.1172">0..*</text><!--MD5=[f6c062120806092999a270672827b31c]
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+title As Project Member, I want to update the status (i.e.: the Scrum Board category) of a user story in the scope of the current sprint backlog.
+
+class UpdateStatusUSSprintUI {
+}
+
+class UpdateStatusUSSprintController {
+    +getSprint(code): Sprint
+}
+
+class Company {
+    +getProjectStore()
+}
+
+class ProjectStore {
+    +getProjectByCode(code)
+}
+
+class Project {
+    +getSprintBacklog()
+}
+
+class SprintBacklog {
+    +getUserStoryList()
+}
+
+class SprintListMapper {
+    +toDTO(usList)
+    +getUS()
+    +create()
+    +add(usDTO)
+}
+
+class Userstory {
+    +setStatus(userStoryStatus)
+}
+
+class usDTO {
+    
+}
+
+
+
+UpdateStatusUSSprintUI ..> UpdateStatusUSSprintController
+
+UpdateStatusUSSprintController ..> Company
+
+UpdateStatusUSSprintController ..> ProjectStore
+
+UpdateStatusUSSprintController ..> Project
+
+UpdateStatusUSSprintController ..> SprintBacklog
+
+UpdateStatusUSSprintController ..> SprintListMapper
+
+UpdateStatusUSSprintController ..> Userstory
+
+Company "1" -> "1" ProjectStore: knows
+
+ProjectStore "1" -> "0..*" Project: contains
+
+Project "1" -> "1" SprintBacklog: contains
+
+SprintBacklog "1" -> "0..*" Userstory: contains
+
+SprintListMapper"1" -> "0..*" usDTO: contains
+
+@enduml
+
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+title As Project Member, I want to update the status (i.e.: the Scrum Board category) of a user story in the scope of the current sprint backlog.
+
+class UpdateStatusUSSprintUI {
+}
+
+class UpdateStatusUSSprintController {
+    +getSprint(code): Sprint
+}
+
+class Company {
+    +getProjectStore()
+}
+
+class ProjectStore {
+    +getProjectByCode(code)
+}
+
+class Project {
+    +getSprintBacklog()
+}
+
+class SprintBacklog {
+    +getUserStoryList()
+}
+
+class SprintListMapper {
+    +toDTO(usList)
+    +getUS()
+    +create()
+    +add(usDTO)
+}
+
+class Userstory {
+    +setStatus(userStoryStatus)
+}
+
+class usDTO {
+    
+}
+
+
+
+UpdateStatusUSSprintUI ..> UpdateStatusUSSprintController
+
+UpdateStatusUSSprintController ..> Company
+
+UpdateStatusUSSprintController ..> ProjectStore
+
+UpdateStatusUSSprintController ..> Project
+
+UpdateStatusUSSprintController ..> SprintBacklog
+
+UpdateStatusUSSprintController ..> SprintListMapper
+
+UpdateStatusUSSprintController ..> Userstory
+
+Company "1" -> "1" ProjectStore: knows
+
+ProjectStore "1" -> "0..*" Project: contains
+
+Project "1" -> "1" SprintBacklog: contains
+
+SprintBacklog "1" -> "0..*" Userstory: contains
+
+SprintListMapper"1" -> "0..*" usDTO: contains
+
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 GMT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: GB
+--></g></svg>

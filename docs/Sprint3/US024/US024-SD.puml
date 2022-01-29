@@ -11,10 +11,10 @@ participant ": SystemUserWithStatusUI" as System
 participant ": SystemUserWithStatusController" as Ctrl
 participant ": Company" as C1
 participant "systemUserList : SystemUserStore" as C2
-participant ": SystemUserMapper" as C3
+participant ": SystemUserWithStatusMapper" as C3
 participant "systemUser : SystemUser" as C4
-participant "systemUserDto : SystemUserDto" as C5
-participant "systemUserDtoList : List <SystemUserDto>" as C6
+participant "systemUserWithStatusDtoList : List <SystemUserWithStatusDtoList>" as C5
+participant "systemUserWithStatusDto : SystemUserWithStatusDto" as C6
 
 
 
@@ -25,18 +25,18 @@ User -> System: Get list all user accounts and their status
 System -> Ctrl: getListSystemUserWithStatus()
 Ctrl-> C1 : getSystemUserStore()
 C1--> Ctrl : sysUserStore
-Ctrl->C2 : getSystemUserList()
+Ctrl->C2 : getSystemUsers()
 
 C2-->Ctrl : systemUserList
 Ctrl->C3 :toDto(systemUserList)
 
-C3->C5 **: create
+C3->C5 **: create()
  loop for each know SystemUser
 C3->C4 : getUserName()
 C3->C4 : getEmail()
 C3->C4 : getActivateUserStatus()
 C3-> C6 ** : create(userName, email, activateUserStatus)
-C3->C5 : add(systemUserDto)
+C3->C5 : add(systemUserWithStatusDto)
 C5-->C3 : true
 end
 C3-->Ctrl: systemUserDtoList

@@ -91,12 +91,11 @@ public class ProjectStoreTest {
     Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
             typo, sector, LocalDate.now(), 7, 5000);
 
-    UserProfile userProfile = new UserProfile("zzz");
+    UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
     SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
     LocalDate startDate = LocalDate.of(2021, 12, 31);
     LocalDate endDate = LocalDate.of(2022, 1, 5);
     Resource input = new Resource(newUser, startDate, endDate, 100, .5);
-
 
     @Test
     public void getProjectListByUserEmailWith2Projects() {
@@ -107,7 +106,7 @@ public class ProjectStoreTest {
         project2.addResource(input);
 
         // Act
-        List<Project> projectList = company.getProjectStore().getProjectListByUserEmail("cris@ipp.pt");
+        List<Project> projectList = company.getProjectStore().getProjectsByUserEmail("cris@ipp.pt");
         // Assert
         assertEquals(2, projectList.size());
     }
@@ -124,7 +123,7 @@ public class ProjectStoreTest {
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             ProjectStore projectStore = new ProjectStore();
-            List<Project> projectList = projectStore.getProjectListByUserEmail("");
+            List<Project> projectList = projectStore.getProjectsByUserEmail("");
         });
         // Assert
         assertEquals("Email cannot be blank", exception.getMessage());
@@ -142,7 +141,7 @@ public class ProjectStoreTest {
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             ProjectStore projectStore = new ProjectStore();
-            List<Project> projectList = projectStore.getProjectListByUserEmail("dani@ipp.pt");
+            List<Project> projectList = projectStore.getProjectsByUserEmail("dani@ipp.pt");
         });
         // Assert
         assertEquals("Email don't exist in system", exception.getMessage());
@@ -182,7 +181,7 @@ public class ProjectStoreTest {
         company.getProjectStore().saveNewProject(this.proj3);
         company.getProjectStore().saveNewProject(this.currentProject);
         // Act
-        List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("manuelmartins@beaver.com");
+        List<Project> projectList = company.getProjectStore().getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
         int sizeExpected = projectList.size();
         // Assert
         assertEquals(1, sizeExpected);
@@ -191,7 +190,7 @@ public class ProjectStoreTest {
     @Test//US017, US019
     public void getCurrentProjectListByUserEmailFailResourceNotPresent() {
         //Arrange
-        List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("manuelbras@beaver.com");
+        List<Project> projectList = company.getProjectStore().getCurrentProjectsByUserEmail("manuelbras@beaver.com");
         // Assert
         assertTrue(projectList.isEmpty());
     }
@@ -199,7 +198,7 @@ public class ProjectStoreTest {
     @Test//US017
     public void getCurrentProjectListByUserEmailFailResourceNotCurrent() {
         //Arrange
-        List<Project> projectList = company.getProjectStore().getCurrentProjectListByUserEmail("manueloliveira@beaver.com");
+        List<Project> projectList = company.getProjectStore().getCurrentProjectsByUserEmail("manueloliveira@beaver.com");
         // Assert
         assertTrue(projectList.isEmpty());
     }
@@ -213,16 +212,16 @@ public class ProjectStoreTest {
         projStore.saveNewProject(this.proj3);
         projStore.saveNewProject(this.currentProject);
 
-        List<Project> list = company.getProjectStore().getProjectList();
+        List<Project> list = company.getProjectStore().getProjects();
         list.remove(0);
 
-        assertEquals(4, projStore.getProjectList().size());
+        assertEquals(4, projStore.getProjects().size());
     }
 
     @Test//US015
     public void getProjectListSuccessEmpty() {
         //Arrange
-        List<Project> projectList = company.getProjectStore().getProjectList();
+        List<Project> projectList = company.getProjectStore().getProjects();
         // Assert
         assertTrue(projectList.isEmpty());
     }
@@ -235,7 +234,7 @@ public class ProjectStoreTest {
         projStore.saveNewProject(this.proj1);
         projStore.saveNewProject(this.proj2);
 
-        List<Project> projectList = company.getProjectStore().getProjectList();
+        List<Project> projectList = company.getProjectStore().getProjects();
         int sizeExpected = projectList.size();
         // Assert
         assertEquals(2, sizeExpected);

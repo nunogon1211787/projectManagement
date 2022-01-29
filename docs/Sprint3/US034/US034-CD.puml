@@ -4,16 +4,13 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-title US024 - As Administrator, I want to get a list all user accounts and their status
+title As Project Member, I want to update the status (i.e.: the Scrum Board category) of a user story in the scope of the current sprint backlog.
 
-class UserAccountStatusUI {
-
+class UpdateStatusUSSprintUI {
 }
 
-class ProductBacklogSortController {
-    +getProjectListByUserEmail(String email)
-    +getProject(String code)
-    +getUsSortedByPriority()
+class UpdateStatusUSSprintController {
+    +getSprint(code): Sprint
 }
 
 class Company {
@@ -21,38 +18,56 @@ class Company {
 }
 
 class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
+    +getProjectByCode(code)
 }
 
 class Project {
--code : String
--productBacklog : ProductBacklog
-+getProductBacklog()
+    +getSprintBacklog()
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+getUsSortedByPriority()
+class SprintBacklog {
+    +getUserStoryList()
 }
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
+class SprintListMapper {
+    +toDTO(usList)
+    +getUS()
+    +create()
+    +add(usDTO)
 }
 
-UserAccountStatusUI ..> ProductBacklogSortController
+class Userstory {
+    +setStatus(userStoryStatus)
+}
 
-ProductBacklogSortController ..> Company
-ProductBacklogSortController ..> ProjectStore
-ProductBacklogSortController ..> Project
-ProductBacklogSortController ..> ProductBacklog
+class usDTO {
 
-Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+}
+
+
+
+UpdateStatusUSSprintUI ..> UpdateStatusUSSprintController
+
+UpdateStatusUSSprintController ..> Company
+
+UpdateStatusUSSprintController ..> ProjectStore
+
+UpdateStatusUSSprintController ..> Project
+
+UpdateStatusUSSprintController ..> SprintBacklog
+
+UpdateStatusUSSprintController ..> SprintListMapper
+
+UpdateStatusUSSprintController ..> Userstory
+
+Company "1" -> "1" ProjectStore: knows
+
+ProjectStore "1" -> "0..*" Project: contains
+
+Project "1" -> "1" SprintBacklog: contains
+
+SprintBacklog "1" -> "0..*" Userstory: contains
+
+SprintListMapper"1" -> "0..*" usDTO: contains
+
 @enduml

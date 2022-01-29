@@ -1,6 +1,7 @@
 package switch2021.project.stores;
 
 import switch2021.project.model.ProjectStatus;
+import switch2021.project.model.ProjectTeam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,5 +79,18 @@ public class ProjectStatusStore {
         return status;
     }
 
+    /** Override **/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProjectStatusStore)) return false;
+        ProjectStatusStore that = (ProjectStatusStore) o;
+        return Objects.equals(this.projectStatusList, that.projectStatusList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(projectStatusList);
+    }
 
 }

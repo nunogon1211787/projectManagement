@@ -24,7 +24,7 @@ public class CreateUserStoryController {
     /**
      * Constructor to UI (with SINGLETON).
      */
-    public CreateUserStoryController(){ this.company = App.getInstance().getCompany();}
+ //   public CreateUserStoryController(){ this.company = App.getInstance().getCompany();}
 
     /**
      * Constructor to test (without SINGLETON).
@@ -36,7 +36,7 @@ public class CreateUserStoryController {
 
     public List<Project> getProjectListByUserEmail(String email) {
         this.projectStore = this.company.getProjectStore();
-        this.arrayProject = this.projectStore.getProjectListByUserEmail(email);
+        this.arrayProject = this.projectStore.getProjectsByUserEmail(email);
         return arrayProject;
     }
 

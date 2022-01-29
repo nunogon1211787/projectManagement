@@ -38,7 +38,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
         addStory.getProductBacklog();
         addStory.getUserStory(1);
 
-        addStory.addUserStoryToSprintBacklog(4);
+        addStory.addUserStoryToSprintBacklog(4,company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
 
         UserStoryOfSprint value = project.getSprintList().getSprintList().get(0).getSprintBacklog().getUserStoryOfSprintList().get(0);
 

@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class CreateSprintController {
-    private Company company;
+    private final Company company;
     private Project proj;
     private ProjectStore projectStore;
     private SprintList sprintList;
@@ -35,7 +35,7 @@ public class CreateSprintController {
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         this.projectStore = company.getProjectStore();
-        this.currentProjectListByUser = projectStore.getCurrentProjectListByUserEmail(email);
+        this.currentProjectListByUser = projectStore.getCurrentProjectsByUserEmail(email);
         return this.currentProjectListByUser;
     }
 

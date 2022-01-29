@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title As Project Member, I want to update the status (i.e.: the Scrum Board category) of a user story in the scope of the current sprint backlog.
+
+autoactivate on
+autonumber
+
+actor "Project Member" as PM
+participant ":UpdateStatusUSSprintUI" as System
+participant ":UpdateStatusUSSprintController" as Ctrl
+participant ": Company" as C1
+participant "projStore : ProjectStore" as C2
+participant "proj : Project" as C3
+participant "sprintBack : SprintBacklog" as C4
+participant "SprintListMapper" as C5
+participant "usListDTO:List<UserStoryDTO>" as C5.1
+participant "usDTO: userStoryDTO" as C5.2
+participant "us : UserStory" as C6
+
+activate PM
+
+
+
+PM -> System: Wants to check the Sprint Backlog of a Project
+System -> Ctrl: getSprint(code)
+Ctrl -> C1: getProjectStore()
+C1 --> Ctrl: projStore
+Ctrl -> C2: getProjectByCode(code)
+C2 --> Ctrl: proj
+Ctrl -> C3: getSprintBacklog
+C3 --> Ctrl: sprintBacklog
+Ctrl -> C4: getUserStory()
+C4 --> Ctrl: us
+Ctrl -> C5: toDTO(us)
+C5 --> Ctrl: usDTO
+Ctrl --> System: usDTO
+System --> PM: usDTO
+
+PM -> System: Wants to change Status of US
+System -> Ctrl: getUsStatusListD()
+Ctrl -> C4: getUsStatusListD()
+
+
+
+
+
+System -> Ctrl: changeStatusOfUS(usId, userStoryStatus)
+Ctrl -> C4: getUS(usId)
+C4 --> Ctrl: us
+Ctrl -> C6: setStatus(userStoryStatus)
+C6 --> Ctrl: true
+Ctrl --> System: true
+System --> PM: Completed
+
+
+
+
+
+@enduml

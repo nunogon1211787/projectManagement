@@ -49,6 +49,15 @@ public class UserStory {
         this.ParentUserStory = userStoryToRefine;
     }
 
+    public int getId_UserStory() {
+        return id_UserStory;
+    }
+
+    public boolean hasCode(long id_UserStory) {
+
+        return this.id_UserStory == id_UserStory;
+    }
+
     /**
      * ---> Set Priority <---
      */

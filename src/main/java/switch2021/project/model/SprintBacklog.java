@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import lombok.Getter;
+import org.graalvm.compiler.lir.LIRInstruction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +12,18 @@ public class SprintBacklog {
 
     /** Class Attributes **/
     private final List<UserStoryOfSprint> userStoryOfSprintList;
+    private UserStory userStory;
+    private List<UserStory> userStoryList;
 
     public SprintBacklog() {
         this.userStoryOfSprintList = new ArrayList<>();
+        this.userStoryList = new ArrayList<>();
     }
 
+
     /** Create User Story Of Sprint **/
-    public UserStoryOfSprint createUSerStoryOfSprint (UserStory userStory, int effort) {
-        return new UserStoryOfSprint(userStory, effort);
+    public UserStoryOfSprint createUSerStoryOfSprint (UserStory userStory, int effort, UserStoryStatus status) {
+        return new UserStoryOfSprint(userStory, effort, status);
     }
 
     /**Getter **/
@@ -26,10 +31,23 @@ public class SprintBacklog {
         return userStoryOfSprintList;
     }
 
-    public UserStoryOfSprint getUserStory(int id_UserStory) {
+    @Deprecated
+    public UserStoryOfSprint getUserStoryDeprecated(int id_UserStory) {
+
         UserStoryOfSprint us = null;
         for (UserStoryOfSprint i: this.userStoryOfSprintList) {
             if (i.hasCode(id_UserStory)){
+                us = i;
+                break;
+            }
+        }
+        return us;
+    }
+
+    public UserStory getUserStory(int idUs){
+        UserStory us = null;
+        for (UserStory i : this.userStoryList) {
+            if (i.hasCode(idUs)) {
                 us = i;
                 break;
             }
@@ -75,7 +93,7 @@ public class SprintBacklog {
         List<Task> userStoryOfSprintTasksList = new ArrayList<>();
 
         for (UserStoryOfSprint i: userStoryOfSprintList) {
-            userStoryOfSprintTasksList.add(i.getUserStoryOfSprintTask());
+            userStoryOfSprintTasksList.addAll(i.getUserStoryOfSprintTasks());
 
         }
         return userStoryOfSprintTasksList;

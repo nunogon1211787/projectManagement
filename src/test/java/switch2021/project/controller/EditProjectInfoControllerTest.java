@@ -21,7 +21,7 @@ class EditProjectInfoControllerTest {
         store.saveNewProject(store.createProject("Name", "Description", new Customer("email","Name"),
                 company.getTypologyStore().getTypologyByDescription("Fixed Cost"),new BusinessSector("Description"),
                 LocalDate.now(),2,10));
-        List<Project> proj = store.getProjectList();
+        List<Project> proj = store.getProjects();
         //Assert
         assertEquals(proj.size(),1); //Verificar se é válido este Test...
     }

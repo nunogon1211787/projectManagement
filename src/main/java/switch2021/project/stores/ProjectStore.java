@@ -5,33 +5,32 @@ import switch2021.project.utils.App;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ProjectStore {
+
 
     /**
      * Atributos da Classe
      **/
-
     private final List<Project> projectList;
+
 
     /**
      * Constructors with data
      **/
-
     public ProjectStore() {
         this.projectList = new ArrayList<>();
     }
 
+
     /**
      * Project creator
      **/
-
     public Project createProject(String name, String description, Customer customer, Typology typology,
                                  BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         Company company = App.getInstance().getCompany();
-
-
 
         ProjectStatus status = company.getProjectStatusStore().getProjectStatusByDescription("Planned");
 
@@ -39,11 +38,12 @@ public class ProjectStore {
                 startDate, status, numberOfSprints, budget);
     }
 
+
     /**
      * Getters Methods
      **/
+    public List<Project> getProjects() {
 
-    public List<Project> getProjectList() {
         return new ArrayList<>(this.projectList);
     }
 
@@ -105,7 +105,7 @@ public class ProjectStore {
         return status;
     }
 
-    public List<Project> getProjectListByUserEmail(String email) {
+    public List<Project> getProjectsByUserEmail(String email) {
         List<Project> projectListByUser = new ArrayList<>();
 
         if (isValidGetProjListEmail(email)) {
@@ -118,7 +118,7 @@ public class ProjectStore {
         return projectListByUser;
     }
 
-    public List<Project> getCurrentProjectListByUserEmail(String email) {
+    public List<Project> getCurrentProjectsByUserEmail(String email) {
         List<Project> currentProjectListByUser = new ArrayList<>();
 
         for (Project project : this.projectList) {
@@ -147,5 +147,19 @@ public class ProjectStore {
             throw new IllegalArgumentException("Email don't exist in system");
         }
         return true;
+    }
+
+    /** Override **/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProjectStore)) return false;
+        ProjectStore that = (ProjectStore) o;
+        return Objects.equals(this.projectList, that.projectList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(projectList);
     }
 }

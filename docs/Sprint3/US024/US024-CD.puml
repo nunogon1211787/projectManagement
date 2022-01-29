@@ -20,8 +20,11 @@ class Company {
 }
 
 class SystemUserStore {
-+getListUserAccountsWithStatus()
-+createSystemUserWithStatusList()
++getSystemUsers()
+}
+
+class SystemUserWithStatusMapper{
++toDto(systemUserList)
 }
 
 class SystemUser {
@@ -32,15 +35,25 @@ class SystemUser {
 -function : String
 -activateUser : boolean
 -assignedProfileList : List<UserProfile>
-+List <SystemUser>()
++getUserName()
++getEmail()
++getAtivatateUserStatus()
 }
 
+class SystemUserWithStatusDto {
++create()
++create(userName, email, ativateUserStatus)
++add(systemUserDto)
+
+}
 
 SystemUserWithStatusUI ..> SystemUserWithStatusController
 
 SystemUserWithStatusController ..> Company
 SystemUserWithStatusController ..> SystemUserStore
-SystemUserWithStatusController ..> SystemUser
+SystemUserWithStatusController ..> SystemUserWithStatusMapper
+SystemUserWithStatusMapper ..> SystemUserWithStatusDto
+
 
 
 Company "1" o-- "1" SystemUserStore: uses

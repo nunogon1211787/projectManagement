@@ -2,10 +2,6 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.stores.ProjectStore;
-
-import java.time.LocalDate;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CompanyTest {
@@ -17,9 +13,15 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         //Assert
+//        assertEquals(0,company.getSystemUserStore().getSystemUserList().size());
+//        assertEquals(0,company.getProjectStore().getProjectList().size());
         assertEquals(4,company.getUserProfileStore().getUserProfileList().size());
         assertEquals(2,company.getTypologyStore().getTypologyList().size());
+        assertEquals(0,company.getCustomerStore().getCustomerList().size());
+        assertEquals(0,company.getBusinessSectorStore().getBusinessSectorList().size());
         assertEquals(7,company.getProjectStatusStore().getprojectStatusList().size());
+        assertEquals(6,company.getUserStoryStatusStore().getUserStoryStatusList().size());
+        assertEquals(0,company.getRequestStore().getRequestProfileList().size());
     }
 
 
@@ -29,8 +31,8 @@ class CompanyTest {
 
         //Arrange
         Company company = new Company();
-        company.getUserProfileStore().populateDefault();
-        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", "12345","", company.getUserProfileStore().getUserProfile("visitor"));
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", "12345","", profile);
         company.getSystemUserStore().saveSystemUser(joana);
         //Act
         SystemUser joanasilva = company.getSystemUserStore().getUserByEmail("1235@isep.ipp.pt");
@@ -43,8 +45,8 @@ class CompanyTest {
 
         //Arrange
         Company company = new Company();
-        company.getUserProfileStore().populateDefault();
-        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", "12345","", company.getUserProfileStore().getUserProfile("visitor"));
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "12345", "12345","", profile);
         company.getSystemUserStore().saveSystemUser(joana);
         //Act
         SystemUser joanasilva = company.getSystemUserStore().getUserByEmail("4321@ipp.pt");
@@ -68,7 +70,7 @@ class CompanyTest {
         //Arrange
         Company c = new Company();
         // Assert
-        assertTrue(c.getProjectStore().getProjectList().isEmpty());
+        assertTrue(c.getProjectStore().getProjects().isEmpty());
     }
 
 /*

@@ -9,14 +9,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ResourceTest {
 
-    UserProfile userProfile = new UserProfile("zzz");
-
     /** Objetos estão iguais, mas no assertEquals não identifica */
     @Test
     @DisplayName("Teste de criação de Resource")
     public void Resource(){
         //Arrange
-        /** user **/
+        //user
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
         LocalDate startDate = LocalDate.of(2021,12,31);
         LocalDate endDate = LocalDate.of(2022, 1,5);
@@ -35,7 +35,9 @@ class ResourceTest {
     @DisplayName("Validate if copy constructor is working")
     public void copyConstructor() {
         //Arrange
-        /** user **/
+        // user
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
         LocalDate startDate = LocalDate.of(2021,12,31);
         LocalDate endDate = LocalDate.of(2022, 1,5);
@@ -51,6 +53,7 @@ class ResourceTest {
     public void isYourUserTrueTest() {
         //Arrenge
         Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
         LocalDate startDate = LocalDate.of(2021,12,31);
         LocalDate endDate = LocalDate.of(2022, 1,31);
@@ -66,8 +69,9 @@ class ResourceTest {
     @Test
     @DisplayName("Validate Resource Attributes")
     public void isYourUserFalseTest() {
-        //Arrenge
+        //Arrange
         Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
         SystemUser testUser = new SystemUser("xyz", "test", "des", "gth", "gth","", userProfile);
         LocalDate startDate = LocalDate.of(2021,12,31);
@@ -125,9 +129,10 @@ class ResourceTest {
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 1);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 2);
 
-        /** user **/
-        UserProfile pro = new UserProfile( "mku");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", pro);
+        // user
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act
@@ -147,9 +152,10 @@ class ResourceTest {
         LocalDate startDateToAllocate = LocalDate.of(2022, 1, 1);
         LocalDate endDateToAllocate = LocalDate.of(2022, 1, 2);
 
-        /** user **/
-        UserProfile pro = new UserProfile("mku");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", pro);
+        //user
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act
@@ -169,9 +175,10 @@ class ResourceTest {
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 12);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 24);
 
-        /** user **/
-        UserProfile pro = new UserProfile("mku");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", pro);
+        // user
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act
@@ -191,9 +198,10 @@ class ResourceTest {
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
 
-        /** user **/
-        UserProfile pro = new UserProfile("mku");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", pro);
+        // user
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act
@@ -212,9 +220,10 @@ class ResourceTest {
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 1);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 20);
 
-        /** user **/
-        UserProfile pro = new UserProfile("mku");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", pro);
+        //user
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act
@@ -234,9 +243,10 @@ class ResourceTest {
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 14);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 25);
 
-        /** user **/
-        UserProfile pro = new UserProfile("mku");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", pro);
+        //user
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act
@@ -253,9 +263,10 @@ class ResourceTest {
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
 
-        /** user **/
-        UserProfile pro = new UserProfile("mku");
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", pro);
+        //user
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act
@@ -270,7 +281,9 @@ class ResourceTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            /** user **/
+            //user
+            Company company = new Company();
+            UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "", userProfile);
             LocalDate startDate = LocalDate.of(2021, 12, 31);
             LocalDate endDate = LocalDate.of(2021, 1, 5);
@@ -283,8 +296,9 @@ class ResourceTest {
             //Assert
             assertThrows(IllegalArgumentException.class, () -> {
                 //Arrange
-
-                /** user **/
+                //user
+                Company company = new Company();
+                UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
                 SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
                 LocalDate startDate = LocalDate.of(2021,12,31);
                 LocalDate endDate = LocalDate.of(2022, 1,5);

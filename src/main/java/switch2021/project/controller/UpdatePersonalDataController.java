@@ -6,7 +6,7 @@ import switch2021.project.utils.App;
 
 public class UpdatePersonalDataController {
 
-    private Company company;
+    private final Company company;
     private SystemUser user;
 
 
@@ -21,7 +21,8 @@ public class UpdatePersonalDataController {
     public UpdatePersonalDataController(Company company) { this.company = company; }
 
     public SystemUser getUser(String email) {
-        return this.user= this.company.getSystemUserStore().getUserByEmail(email); }
+        this.user = this.company.getSystemUserStore().getUserByEmail(email);
+        return this.user; }
 
     public boolean updateSystemUserData(String username, String function, String photo) {
         return this.user.setAllData(username, function, photo);

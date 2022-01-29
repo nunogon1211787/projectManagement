@@ -47,7 +47,9 @@ class UserStoryOfSprintTest {
     @Test
     @DisplayName("Validate the Effort of an User Story of Sprint")
     void validateEffortTestSuccess() {
+        //Act
         UserStoryOfSprint userStoryOfSprint = new UserStoryOfSprint(story, 5, 1);
+        //Assert
         assertTrue(userStoryOfSprint.setEstimateEffort(5));
         assertEquals(userStoryOfSprint.getEstimateEffort(), 5);
     }

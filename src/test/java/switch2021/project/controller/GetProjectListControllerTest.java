@@ -102,7 +102,7 @@ public class GetProjectListControllerTest {
         proj2.setEndDate(LocalDate.of(2021, 11, 30));
         projectStore.saveNewProject(proj2);
         // Act
-        List<Project> projectListActual = controller.getProjectList();
+        List<Project> projectListActual = controller.getProjects();
         int sizeActual = projectListActual.size();
         // Assert
         assertEquals(2, sizeActual);
@@ -114,7 +114,7 @@ public class GetProjectListControllerTest {
         Company company = new Company();
         GetProjectListController controller = new GetProjectListController(company);
         // Act
-        List<Project> projectList = controller.getProjectList();
+        List<Project> projectList = controller.getProjects();
         // Assert
         assertTrue(projectList.isEmpty());
     }
@@ -137,7 +137,7 @@ public class GetProjectListControllerTest {
         List<Project> projectListExpected = new ArrayList<>();
         projectListExpected.add(proj3);
         // Act
-        List<Project> projectListActual = controller.getProjectList();
+        List<Project> projectListActual = controller.getProjects();
         // Assert
         assertEquals(projectListExpected, projectListActual);
     }

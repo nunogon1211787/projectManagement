@@ -26,13 +26,13 @@ public class AssociateResourceController {
      */
     public AssociateResourceController(Company company){ this.company = company; }
 
-    public List getProjectList (){
-        this.arrayProject = this.company.getProjectStore().getProjectList();
+    public List<Project> getProjectList (){
+        this.arrayProject = this.company.getProjectStore().getProjects();
         return arrayProject;
     }
 
-    public List getSystemUserList (){
-        this.arraySystemUser = this.company.getSystemUserStore().getSystemUserList();
+    public List<SystemUser> getSystemUserList (){
+        this.arraySystemUser = this.company.getSystemUserStore().getSystemUsers();
         return arraySystemUser;
     }
 

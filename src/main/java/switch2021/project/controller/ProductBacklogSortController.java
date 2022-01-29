@@ -7,9 +7,7 @@ import switch2021.project.model.UserStory;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.utils.App;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProductBacklogSortController {
 
@@ -24,9 +22,9 @@ public class ProductBacklogSortController {
     /**
      * Constructor to UI (with SINGLETON).
      */
-    public ProductBacklogSortController() {
-        this.company = App.getInstance().getCompany();
-    }
+//    public ProductBacklogSortController() {
+//        this.company = App.getInstance().getCompany();
+//    }
 
     /**
      * Constructor to test (without SINGLETON).
@@ -37,7 +35,7 @@ public class ProductBacklogSortController {
 
     public List<Project> getProjectListByUserEmail(String email){
         this.projectStore = this.company.getProjectStore();
-        this.arrayProject = this.projectStore.getProjectListByUserEmail(email);
+        this.arrayProject = this.projectStore.getProjectsByUserEmail(email);
         return arrayProject;
     }
 

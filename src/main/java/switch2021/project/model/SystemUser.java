@@ -1,7 +1,7 @@
 package switch2021.project.model;
 
 import switch2021.project.stores.UserProfileStore;
-
+import switch2021.project.utils.App;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,12 +13,12 @@ public class SystemUser {
      * Attributes of systemUser´s class
      **/
     private String userName;
-    private String email;
+    private final String email;
     private String photo;
     private String password;
     private String function;
     private boolean activateUser;
-    private List<UserProfile> assignedProfileList;
+    private final List<UserProfile> assignedProfileList;
 
     /**
      * Constructor
@@ -28,6 +28,7 @@ public class SystemUser {
         checkEmailRules(email);
         checkFunctionRules(function);
         checkPasswordRules(password);
+        checkProfileRules(profile);
         this.userName = userName;
         this.email = email;
         this.photo = photo;
@@ -168,6 +169,15 @@ public class SystemUser {
             throw new IllegalArgumentException("Password must be at least 2 characters");
     }
 
+    private void checkProfileRules(UserProfile profile) {
+        Company company = App.getInstance().getCompany();
+        UserProfileStore profileStore = company.getUserProfileStore();
+        UserProfile visitorProfile = profileStore.getUserProfile("Visitor");
+
+        if (!profile.equals(visitorProfile))
+            throw new IllegalArgumentException("at registration visitor profile must be associated");
+    }
+
     public boolean checkAllData(String userName, String function, String photo) {
         if (photo.trim().isEmpty())
             throw new IllegalArgumentException("Photo cannot be empty.");
@@ -248,23 +258,20 @@ public class SystemUser {
         }
         return result;
     }
+
     /**
      * Method to validate if user as already has the profile requested
      */
 
     public boolean hasProfile(UserProfile profile) {
-
         boolean profileStatus = false;
 
         for (UserProfile profileCheck : assignedProfileList) {
-
             if (profile.equals(profileCheck)) {
-
                 profileStatus = true;
                 break;
             }
         }
-
         return profileStatus;
     }
 
@@ -396,6 +403,6 @@ public class SystemUser {
 
     @Override
     public int hashCode() {
-        return Objects.hash(userName,email,photo,password,function,activateUser,assignedProfileList);
+        return Objects.hash(userName, email, photo, password, function, activateUser, assignedProfileList);
     }
 }
