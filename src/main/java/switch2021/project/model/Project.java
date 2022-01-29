@@ -13,7 +13,7 @@ public class Project {
 
 
     /**
-     * Class Atributes
+     * Class Attributes
      **/
     private String code;
     private String projectName;
