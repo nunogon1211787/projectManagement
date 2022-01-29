@@ -36,9 +36,9 @@ class SprintBacklogTest {
         sprintBacklog.saveUserStoryOfSprint(story2);
         sprintBacklog.saveUserStoryOfSprint(story3);
 
-        UserStoryOfSprint userStoryOfSprint1 = sprintBacklog.getUserStory(1);
-        UserStoryOfSprint userStoryOfSprint2 = sprintBacklog.getUserStory(2);
-        UserStoryOfSprint userStoryOfSprint3 = sprintBacklog.getUserStory(3);
+        UserStoryOfSprint userStoryOfSprint1 = sprintBacklog.getUserStoryDeprecated(1);
+        UserStoryOfSprint userStoryOfSprint2 = sprintBacklog.getUserStoryDeprecated(2);
+        UserStoryOfSprint userStoryOfSprint3 = sprintBacklog.getUserStoryDeprecated(3);
 
         assertEquals(story, userStoryOfSprint1);
         assertEquals(story2, userStoryOfSprint2);

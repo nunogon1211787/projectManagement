@@ -66,7 +66,7 @@ public class UserStoryEffortController {
     }
 
     public UserStoryOfSprint getUserStory(int id_UserStory){
-        this.userStoryOfSprint= this.sprintBacklog.getUserStory(id_UserStory);
+        this.userStoryOfSprint= this.sprintBacklog.getUserStoryDeprecated(id_UserStory);
         return this.userStoryOfSprint;
     }
 
