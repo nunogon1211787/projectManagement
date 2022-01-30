@@ -7,6 +7,10 @@ import java.util.List;
 
 public class UpdateStatusUsController {
 
+        /**
+         * Attributes
+         **/
+
         private final Company company;
         private ProjectStore projectStore;
         private Project project;
@@ -16,47 +20,44 @@ public class UpdateStatusUsController {
         List<UserStory> userStoryList;
 
 //    /**
-//     * Constructor to UI (with SINGLETON).
-//     */
+//     * Constructor to UI (with SINGLETON)
+//     **/
+
 //    public ChangePriorityUSController(){
 //        this.company = App.getInstance().getCompany();
 //    }
 
         /**
-         * Constructor (without SINGLETON).
-         */
-        public UpdateStatusUsController(Company company){
+         * Constructor (without SINGLETON)
+         **/
+
+        public UpdateStatusUsController(Company company) {
                 this.company = company;
         }
 
+        /**
+         * Methods
+         **/
 
-
-        public ProjectStore getProjectStore (){
+        public ProjectStore getProjectStore() {
                 this.projectStore = company.getProjectStore();
                 return this.projectStore;
         }
 
-        public Project getProjectByCode (String code){
+        public Project getProjectByCode(String code) {
                 this.project = company.getProjectStore().getProjectByCode(code);
                 return this.project;
         }
 
-        public SprintBacklog getSprintBacklog (){
+        public SprintBacklog getSprintBacklog() {
                 this.sprintBacklog = this.project.getCurrentSprint().getSprintBacklog();
                 return this.sprintBacklog;
         }
 
-        public UserStory getUserStory(int usId){
+        public UserStory getUserStory(int usId) {
                 this.userStory = this.sprintBacklog.getUserStory(usId);
                 return this.userStory;
         }
-
-
-
-
-
-
-
 
 
 }

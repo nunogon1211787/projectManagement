@@ -12,6 +12,10 @@ import java.util.List;
 
 public class ChangePriorityUSController {
 
+    /**
+     * Attributes
+     **/
+
     private final Company company;
     private ProjectStore projectStore;
     private Project project;
@@ -28,12 +32,17 @@ public class ChangePriorityUSController {
 //    }
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
+
     public ChangePriorityUSController(Company company){
         this.company = company;
     }
 
+
+    /**
+     * Methods
+     **/
 
     public ProjectStore getProjectStore (){
         this.projectStore = company.getProjectStore();

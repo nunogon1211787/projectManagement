@@ -10,6 +10,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class AssociateResourceController {
+
+    /**
+     * Attributes
+     **/
+
     private Company company;
     private SystemUser user;
     private Resource resource;
@@ -17,14 +22,20 @@ public class AssociateResourceController {
     List<SystemUser> arraySystemUser;
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
+
     public AssociateResourceController(){ this.company = App.getInstance().getCompany(); }
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
+
     public AssociateResourceController(Company company){ this.company = company; }
+
+    /**
+     * Methods
+     **/
 
     public List<Project> getProjectList (){
         this.arrayProject = this.company.getProjectStore().getProjects();

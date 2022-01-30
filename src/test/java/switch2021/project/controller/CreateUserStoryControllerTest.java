@@ -25,9 +25,9 @@ public class CreateUserStoryControllerTest {
     LocalDate endDate = LocalDate.of(2022, 1, 5);
     Resource input = new Resource(newUser, startDate, endDate, 100, .5);
 
-    // Test create userStory (Cris US009)
 
     @Test
+    @DisplayName("Test create userStory - US009")
     public void createUserStoryPriorityInvalidInf() {
         //Arrange
         company.getProjectStore().saveNewProject(project);
@@ -44,7 +44,7 @@ public class CreateUserStoryControllerTest {
     }
 
     @Test
-    public void createUserStorydescriptionInvalidEmpty() {
+    public void createUserStoryDescriptionInvalidEmpty() {
         //Arrange
                company.getProjectStore().saveNewProject(project);
 
@@ -60,7 +60,7 @@ public class CreateUserStoryControllerTest {
     }
 
     @Test
-    public void createUserStorydescriptionInvalidShort() {
+    public void createUserStoryDescriptionInvalidShort() {
         //Arrange
 
         company.getProjectStore().saveNewProject(project);

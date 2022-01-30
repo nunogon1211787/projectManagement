@@ -11,6 +11,9 @@ import java.util.List;
 
 public class ProductBacklogSortController {
 
+    /**
+     * Attributes
+     **/
 
     private final Company company;
     private ProjectStore projectStore;
@@ -20,18 +23,24 @@ public class ProductBacklogSortController {
     private List<UserStory> userStoryList;
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
+
 //    public ProductBacklogSortController() {
 //        this.company = App.getInstance().getCompany();
 //    }
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
+
     public ProductBacklogSortController(Company company) {
         this.company = company;
     }
+
+    /**
+     * Methods
+     **/
 
     public List<Project> getProjectListByUserEmail(String email){
         this.projectStore = this.company.getProjectStore();

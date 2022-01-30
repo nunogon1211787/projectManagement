@@ -9,19 +9,29 @@ import java.util.*;
 
 
 public class GetCurrentProjectListController {
+
+    /**
+     * Attributes
+     **/
+
     private Company company;
     private List<Project> currentProjectListByUser;
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
+
     public GetCurrentProjectListController() { this.company = App.getInstance().getCompany(); }
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
+
     public GetCurrentProjectListController(Company company){ this.company = company; }
 
+    /**
+     * Methods
+     **/
 
     public List<Project> getCurrentProjectsByUserEmail(String email) {
         ProjectStore projStore = this.company.getProjectStore();

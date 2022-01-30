@@ -8,22 +8,30 @@ import java.util.List;
 
 public class GetListHResourceProjectController {
 
+    /**
+     * Attributes
+     **/
+
     private final Company company;
     private List<Resource> projectTeamList;
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
     public GetListHResourceProjectController(){
         this.company = App.getInstance().getCompany();
     }
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
     public GetListHResourceProjectController(Company company){
         this.company = company;
     }
+
+    /**
+     * Methods
+     **/
 
 //    public List<ResourceDto> getProjectTeam(){
 //

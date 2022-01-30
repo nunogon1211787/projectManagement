@@ -7,25 +7,36 @@ import switch2021.project.utils.App;
 import java.util.List;
 
 public class UpdateUserProfileController {
+
+    /**
+     * Attributes
+     **/
+
     private Company company;
     private UserProfileStore userProfileStore;
     private SystemUserStore systemUserStore;
     private SystemUser user;
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
+
     public UpdateUserProfileController() { this.company = App.getInstance().getCompany(); }
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
+
     public UpdateUserProfileController(Company company) {
         this.company = company;
         this.userProfileStore = company.getUserProfileStore();
         this.systemUserStore = company.getSystemUserStore();
         this.user = null;
     }
+
+    /**
+     * Methods
+     **/
 
     public SystemUser getUser(String email) {
         SystemUser user = systemUserStore.getUserByEmail(email);

@@ -9,20 +9,31 @@ import java.util.List;
 
 public class EditProjectInfoController {
 
+
+    /**
+     * Attributes
+     **/
+
     private final Company company;
     private Project project;
     List<Project> arrayProject;
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
+
     public EditProjectInfoController(){ this.company = App.getInstance().getCompany(); }
 
     /**
      * Constructor to test (without SINGLETON).
-     */
+     **/
+
     public EditProjectInfoController(Company company){ this.company = company; }
 
+
+    /**
+     * Methods
+     **/
 
     public List<Project> getProjectList (){
         this.arrayProject = this.company.getProjectStore().getProjects();

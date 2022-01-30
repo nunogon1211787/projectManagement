@@ -6,21 +6,30 @@ import switch2021.project.utils.App;
 import java.time.LocalDate;
 
 public class CreateProjectController {
+
+    /**
+     * Attributes
+     **/
+
     private Company company;
     private Project project;
 
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
+
     public CreateProjectController(){ this.company = App.getInstance().getCompany();}
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
+
     public CreateProjectController(Company company) { this.company = company; }
 
-
+    /**
+     * Methods
+     **/
 
     public Typology getTypology(String typo) {
         return company.getTypologyStore().getTypologyByDescription(typo);

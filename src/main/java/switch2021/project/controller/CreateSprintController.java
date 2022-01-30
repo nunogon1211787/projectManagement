@@ -11,6 +11,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class CreateSprintController {
+
+    /**
+     * Attributes
+     **/
+
     private final Company company;
     private Project proj;
     private ProjectStore projectStore;
@@ -19,19 +24,24 @@ public class CreateSprintController {
     private List<Project> currentProjectListByUser;
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
+
     public CreateSprintController() {
         this.company = App.getInstance().getCompany();
     }
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
+
     public CreateSprintController(Company company) {
         this.company = company;
     }
 
+    /**
+     * Methods
+     **/
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         this.projectStore = company.getProjectStore();

@@ -1,5 +1,6 @@
 package switch2021.project.controller;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
@@ -84,7 +85,9 @@ public class GetCurrentProjectListControllerTest {
             currentProject.getProjectTeam().addResourceToTeam(manuelmartins);
         }
     */
-    @Test //size test with one project
+
+    @Test
+    @DisplayName("Size test with one project")
     public void getCurrentProjectListByUserEmailSuccessWith1Project() {
         //Arrange
         Company company = new Company();
@@ -111,7 +114,8 @@ public class GetCurrentProjectListControllerTest {
         assertEquals(1, sizeExpected);
     }
 
-    @Test //size test with two project
+    @Test
+    @DisplayName("Size test with two project")
     public void getCurrentProjectListByUserEmailSuccessWith2Project() {
         //Arrange
         Company company = new Company();
@@ -144,7 +148,8 @@ public class GetCurrentProjectListControllerTest {
         assertEquals(2, sizeExpected);
     }
 
-    @Test //size test empty
+    @Test
+    @DisplayName("Size test empty")
     public void getCurrentProjectListByUserEmailFailEmptyList() {
         //Arrange
         Company company = new Company();
@@ -155,7 +160,8 @@ public class GetCurrentProjectListControllerTest {
         assertTrue(projectList.isEmpty());
     }
 
-    @Test // check both lists are equal
+    @Test
+    @DisplayName("Check both lists are equal")
     public void getCurrentProjectListByUserEmailSuccessCorrectList() {
         //Arrange
         Company company = new Company();

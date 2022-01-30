@@ -7,26 +7,32 @@ import java.util.List;
 
 public class SearchSystemUsersController {
 
+    /**
+     * Attributes
+     **/
+
     private Company company;
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
+
     public SearchSystemUsersController() { this.company = App.getInstance().getCompany();}
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
+
     public SearchSystemUsersController(Company company) { this.company = company;}
 
     /**
-     * Getter method to receive an user profile list to send to UI.
-     */
+     * Getter method to receive an user profile list to send to UI
+     **/
     public List<UserProfile> getUserProfileList(){return company.getUserProfileStore().getUserProfileList();}
 
     /**
-     * Method to search users in the domain.
-     */
+     * Method to search users in the domain
+     **/
     public List<SystemUser> searchUsers (String name, String email, String function, int state, String[] profileChoosenNameList){
 
         List<UserProfile> profileChoosenList = new ArrayList<>();

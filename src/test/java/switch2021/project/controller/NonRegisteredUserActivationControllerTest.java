@@ -16,8 +16,6 @@ class NonRegisteredUserActivationControllerTest {
                                             "User_12", "111", "111", "",company.getUserProfileStore().getUserProfile("Visitor"));
           company.getSystemUserStore().saveSystemUser(user);
 
-        //NonRegisteredUserActivationController controller = new NonRegisteredUserActivationController(user);
-
         // Act
         boolean result = company.getSystemUserStore().getUserByEmail("1211748@isep.ipp.pt").setActivateUser();
 
