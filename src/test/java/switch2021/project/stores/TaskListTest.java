@@ -2,6 +2,7 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Task;
+import switch2021.project.model.TaskStatus;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -54,5 +55,78 @@ public class TaskListTest {
         //Assert
         assertTrue(test.saveTask(newTask));
         assertFalse(test.saveTask(newTask));
+    }
+
+    @Test
+    void createTaskStatus() {
+        //Arranje
+        TaskStatus status = new TaskStatus("teste123");
+
+        //Assert
+        assertEquals("teste123", status.getDescription());
+    }
+
+    @Test
+    void getTaskStatusByDescription() {
+        //Arranje
+        TaskStatusStore store = new TaskStatusStore();
+        store.populateDefault();
+
+        //Assert
+        assertEquals("Planned", store.getTaskStatusByDescription("Planned"));
+    }
+
+    @Test
+    void taskOverride() {
+        //Arranje
+        TaskStatusStore store = new TaskStatusStore();
+        store.populateDefault();
+
+        TaskStatusStore store2 = new TaskStatusStore();
+        store2.populateDefault();
+
+        TaskStatusStore store3 = new TaskStatusStore();
+        store3.populateDefault();
+        store3.getTaskList().set(0,"Teste");
+
+        //Assert
+        assertEquals(store,store2);
+        assertNotEquals(store,store3);
+    }
+
+    @Test
+    void taskStatus() {
+        //Arranje
+        Task task = new Task("test");
+        TaskStatus status = new TaskStatus("test");
+        task.setStatus(status);
+
+        //Assert
+        assertEquals(status,task.getStatus());
+    }
+
+    @Test
+    void taskStatusHash() {
+        //Arranje
+        TaskStatus status = new TaskStatus("test");
+        TaskStatus status2 = new TaskStatus("test_2");
+
+        //Assert
+        assertNotEquals(status.hashCode(),status2.hashCode());
+        assertEquals(status.hashCode(),status.hashCode());
+    }
+
+    @Test
+    void taskStatusStoreHash() {
+        //Arranje
+        TaskStatusStore status = new TaskStatusStore();
+        status.populateDefault();
+        TaskStatusStore status2 = new TaskStatusStore();
+        status2.populateDefault();
+        status2.getTaskList().set(0,"teste");
+
+        //Assert
+        assertNotEquals(status.hashCode(),status2.hashCode());
+        assertEquals(status.hashCode(),status.hashCode());
     }
 }

@@ -1,11 +1,13 @@
 package switch2021.project.model;
 
+import lombok.Getter;
+
+@Getter
 public class TaskStatus {
 
     /**
      * Classe UserStoryStatus Atributes
      **/
-    private int id_TaskStatus;
     private String description;
 
     /**

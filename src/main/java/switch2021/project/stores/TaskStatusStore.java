@@ -1,7 +1,7 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.model.ProjectTeam;
+import lombok.Setter;
 import switch2021.project.model.TaskStatus;
 
 import java.util.ArrayList;
@@ -10,6 +10,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 @Getter
+@Setter
 public class TaskStatusStore {
 
     private final List<String> taskList;
