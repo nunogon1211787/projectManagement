@@ -71,6 +71,33 @@ public class ProjectTeam {
         return resource;
     }
 
+    //Get current resource by name
+    public Resource getCurrentResourceByName(String name) {
+        Resource resource = null;
+
+        for (Resource i : projectTeamList) {
+            if (i.isYour(name) && i.isCurrent()) {
+                resource = i;
+            }
+        }
+        return resource;
+    }
+
+    public List<String> getCurrentResourcesNames() {
+
+        List<String> currentResourcesNames = new ArrayList<>();
+
+        for (Resource resource : this.projectTeamList) {
+
+            if (resource.isCurrent()) {
+                currentResourcesNames.add(resource.getUser().getUserName());
+            }
+
+        }
+
+        return currentResourcesNames;
+    }
+
 
     /**
      * Create a new Resource
@@ -179,7 +206,7 @@ public class ProjectTeam {
     }
 
 
-    /** Override **/
+    /** Override methods. **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -192,6 +219,5 @@ public class ProjectTeam {
     public int hashCode() {
         return Objects.hash(projectTeamList);
     }
-
 }
 

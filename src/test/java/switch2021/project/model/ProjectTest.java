@@ -330,7 +330,7 @@ class ProjectTest {
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
         SprintList sprintList1 = new SprintList();
         sprintList1.saveSprint(sprint1);
-        SprintList projectSprintList = this.project2.getSprintList();
+        SprintList projectSprintList = this.project2.getSprints();
         projectSprintList.saveSprint(sprint1);
         assertEquals(sprintList1, projectSprintList);
     }
@@ -342,7 +342,7 @@ class ProjectTest {
         SprintList sprintList1 = new SprintList();
         sprintList1.saveSprint(sprint1);
         Sprint sprint2 = new Sprint("Effort View 1", LocalDate.now());
-        SprintList projectSprintList = this.project2.getSprintList();
+        SprintList projectSprintList = this.project2.getSprints();
         projectSprintList.saveSprint(sprint1);
         projectSprintList.saveSprint(sprint2);
         assertNotEquals(sprintList1, projectSprintList);
@@ -357,10 +357,10 @@ class ProjectTest {
         sprint1.getTaskList().addTaskToTheList(taskTest);
         List<Task> taskList = new ArrayList<>();
         //Act
-        project2.getSprintList().saveSprint(sprint1);
+        project2.getSprints().saveSprint(sprint1);
         taskList.add(taskTest);
         //Assert
-        assertEquals(taskList, project2.getSprintList().getSprint(1).getListOfTasksOfASprint());
+        assertEquals(taskList, project2.getSprints().getSprint(1).getListOfTasksOfASprint());
     }
 
     @Test

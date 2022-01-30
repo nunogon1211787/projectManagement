@@ -259,6 +259,11 @@ public class SystemUser {
         return result;
     }
 
+    public boolean hasName(String name) {
+
+        return this.userName.equals(name);
+    }
+
     /**
      * Method to validate if user as already has the profile requested
      */

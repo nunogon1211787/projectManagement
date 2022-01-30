@@ -47,9 +47,10 @@ public class ProjectStore {
         return new ArrayList<>(this.projectList);
     }
 
+    //This method was changed to implement encapsulation.
     public Project getProjectByCode(String code) {
         for (Project proj : projectList) {
-            if (proj.getCode().equalsIgnoreCase(code)) {
+            if (proj.hasCode(code)) {
                 return proj;
             }
         }

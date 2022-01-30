@@ -46,7 +46,7 @@ public class ViewStatusOfActivitiesInAProjectController {
     //Method to get list of project activities
 
     public List<Task> getListOfProjectActivities(){
-        return new ArrayList<>(project.getSprintList().getListOfAllAActivitiesOfAProject());
+        return new ArrayList<>(project.getSprints().getListOfAllAActivitiesOfAProject());
     }
 
 }

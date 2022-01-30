@@ -81,19 +81,19 @@ class UserStoryEffortControllerTest {
     void getSprintList() {
         company.getProjectStore().saveNewProject(project1);
         project1.addResource(input);
-        project1.getSprintList().saveSprint(sprint1);
+        project1.getSprints().saveSprint(sprint1);
         List<Project> projectList = new ArrayList<>();
         projectList.add(project1);
 
         Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
 
-        assertEquals(project1.getSprintList().getSprintList(), userStoryEffortController.getSprintsList());
+        assertEquals(project1.getSprints().getSprintList(), userStoryEffortController.getSprintsList());
     }
 
     @Test
     void getSprint() {
-        project1.getSprintList().saveSprint(sprint1);
-        project1.getSprintList().saveSprint(sprint2);
+        project1.getSprints().saveSprint(sprint1);
+        project1.getSprints().saveSprint(sprint2);
         company.getProjectStore().saveNewProject(project1);
 
         Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
@@ -103,10 +103,10 @@ class UserStoryEffortControllerTest {
 
     @Test
     void getSprintBacklog() {
-        project1.getSprintList().saveSprint(sprint1);
+        project1.getSprints().saveSprint(sprint1);
         UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story,5,company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         sprint1.getSprintBacklog().saveUserStoryOfSprint(userStoryOfSprint);
-        project1.getSprintList().saveSprint(sprint2);
+        project1.getSprints().saveSprint(sprint2);
         company.getProjectStore().saveNewProject(project1);
 
         Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
@@ -117,11 +117,11 @@ class UserStoryEffortControllerTest {
 
     @Test
     void getUserStory() {
-        project1.getSprintList().saveSprint(sprint1);
+        project1.getSprints().saveSprint(sprint1);
         UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story,5,company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         userStoryOfSprint.setId_UserStoryOfSprint(1);
         sprint1.getSprintBacklog().saveUserStoryOfSprint(userStoryOfSprint);
-        project1.getSprintList().saveSprint(sprint2);
+        project1.getSprints().saveSprint(sprint2);
         company.getProjectStore().saveNewProject(project1);
 
         Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
@@ -134,11 +134,11 @@ class UserStoryEffortControllerTest {
 
     @Test
     void setEffort() {
-        project1.getSprintList().saveSprint(sprint1);
+        project1.getSprints().saveSprint(sprint1);
         UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story,5,company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         userStoryOfSprint.setId_UserStoryOfSprint(1);
         sprint1.getSprintBacklog().saveUserStoryOfSprint(userStoryOfSprint);
-        project1.getSprintList().saveSprint(sprint2);
+        project1.getSprints().saveSprint(sprint2);
         company.getProjectStore().saveNewProject(project1);
 
 

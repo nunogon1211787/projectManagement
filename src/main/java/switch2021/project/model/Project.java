@@ -26,7 +26,7 @@ public class Project {
     private SystemUser productOwner; // Verificar a necessidade de se manter este atributo
 
     private final BusinessSector businessSector;
-    private final SprintList sprintList;
+    private final SprintList sprints;
     private ProjectTeam projectTeam;
 
     private LocalDate startDate;
@@ -54,7 +54,7 @@ public class Project {
         this.businessSector = businessSector;
 
         this.startDate = startDate;
-        this.sprintList = new SprintList();
+        this.sprints = new SprintList();
 
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
@@ -157,11 +157,13 @@ public class Project {
         return this.projectTeam.hasResource(email);
     }
 
+    public boolean hasCode(String code){ return this.code.equalsIgnoreCase(code); }
+
     /**
      * Get the start date of the next Sprint and end date of the current Sprint
      */
     public Sprint getCurrentSprint() {
-      return this.sprintList.getCurrentSprint();
+      return this.sprints.getCurrentSprint();
     }
 
     /**
@@ -184,7 +186,7 @@ public class Project {
                 && Objects.equals(productBacklog, project.productBacklog)
                 && Objects.equals(productOwner, project.productOwner)
                 && Objects.equals(businessSector, project.businessSector)
-                && Objects.equals(sprintList, project.sprintList)
+                && Objects.equals(sprints, project.sprints)
                 && Objects.equals(projectTeam, project.projectTeam)
                 && Objects.equals(startDate, project.startDate)
                 && Objects.equals(endDate, project.endDate);
@@ -194,7 +196,7 @@ public class Project {
     public int hashCode() {
         return Objects.hash(code, projectName, description, customer, typology,
                 projectStatus, productBacklog, productOwner, businessSector,
-                sprintList, projectTeam, startDate, endDate, numberOfSprints,
+                sprints, projectTeam, startDate, endDate, numberOfSprints,
                 budget, sprintDuration);
     }
 }
