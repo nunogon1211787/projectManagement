@@ -56,9 +56,9 @@ public class ChangePriorityUSControllerTest {
         input = new Resource(newUser, startDate, endDate, 100, .5);
         input2 = new Resource(newUser2, startDate, endDate, 100, .5);
         userStoryStatus = new UserStoryStatus("coiso");
-        userStory = new UserStory(userStoryStatus, 2, "Fazer tal");
-        userStory2 = new UserStory(userStoryStatus, 3, "Fazer tal e coiso");
-        userStory3 = new UserStory(userStoryStatus, 4, "Fazer tal e coiso também");
+        userStory = new UserStory("US001", 2, "Fazer tal",5);
+        userStory2 = new UserStory("US001", 3, "Fazer tal e coiso",5);
+        userStory3 = new UserStory("US001", 4, "Fazer tal e coiso também",5);
         project.getProductBacklog().saveUserStory(userStory);
         project.getProductBacklog().saveUserStory(userStory2);
         project.getProductBacklog().saveUserStory(userStory3);

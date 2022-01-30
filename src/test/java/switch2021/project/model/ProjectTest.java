@@ -220,9 +220,9 @@ class ProjectTest {
             typo, sector, LocalDate.now(), projectStatus, 7, 5000);
     ProductBacklog productBacklog = project2.getProductBacklog();
 
-    UserStory userStory = productBacklog.createUserStory(new UserStoryStatus("In progress"), 1, "making test");
-    UserStory userStory2 = productBacklog.createUserStory(new UserStoryStatus("Done"), 1, "making other test");
-    UserStory userStory3 = productBacklog.createUserStory(new UserStoryStatus("To do"), 1, "making test 4");
+    UserStory userStory = productBacklog.createUserStory("US001", 1, "making test",5);
+    UserStory userStory2 = productBacklog.createUserStory("US001", 1, "making other test",5);
+    UserStory userStory3 = productBacklog.createUserStory("US001", 1, "making test 4",5);
 
 
     @BeforeEach

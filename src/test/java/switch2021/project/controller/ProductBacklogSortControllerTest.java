@@ -184,13 +184,13 @@ public class ProductBacklogSortControllerTest {
         ProjectTeam projectTeam = new ProjectTeam();// Arrange
 
         company.getProjectStore().saveNewProject(project);
-        UserStory userStory =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),2,"create user story");
+        UserStory userStory =project.getProductBacklog().createUserStory("US001",2,"create user story",5);
         project.getProductBacklog().saveUserStory(userStory);
-        UserStory userStory1 =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),1,"sort user story");
+        UserStory userStory1 =project.getProductBacklog().createUserStory("US001",1,"sort user story",5);
         project.getProductBacklog().saveUserStory(userStory1);
-        UserStory userStory2 =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),3,"backlog sorted");
+        UserStory userStory2 =project.getProductBacklog().createUserStory("US001",3,"backlog sorted",5);
         project.getProductBacklog().saveUserStory(userStory2);
-        UserStory userStory3 =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),5,"show sorted");
+        UserStory userStory3 =project.getProductBacklog().createUserStory("US001",5,"show sorted",5);
         project.getProductBacklog().saveUserStory(userStory3);
 
         projectTeam.addResourceToTeam(input);
@@ -231,11 +231,11 @@ public class ProductBacklogSortControllerTest {
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         ProjectTeam projectTeam = new ProjectTeam();
         company.getProjectStore().saveNewProject(project);
-        UserStory userStory =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),2,"create user story");
+        UserStory userStory =project.getProductBacklog().createUserStory("US001",2,"create user story",5);
         project.getProductBacklog().saveUserStory(userStory);
-        UserStory userStory1 =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),1,"sort user story");
+        UserStory userStory1 =project.getProductBacklog().createUserStory("US001",1,"sort user story",5);
         project.getProductBacklog().saveUserStory(userStory1);
-        UserStory userStory2 =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),3,"backlog sorted");
+        UserStory userStory2 =project.getProductBacklog().createUserStory("US001",3,"backlog sorted",5);
         project.getProductBacklog().saveUserStory(userStory2);
 
 
@@ -247,7 +247,7 @@ public class ProductBacklogSortControllerTest {
         ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company);
         productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
         productBacklogSortController.getProject("123testcode");
-            UserStory userStory3 =project.getProductBacklog().createUserStory(new UserStoryStatus("In progress"),6,"show sorted");
+            UserStory userStory3 =project.getProductBacklog().createUserStory("US001",6,"show sorted",5);
             project.getProductBacklog().saveUserStory(userStory3);
         List<UserStory> usSortedByPriority = productBacklogSortController.getUsSortedByPriority();
         });

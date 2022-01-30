@@ -2,6 +2,7 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.depracated.UserStoryOfSprint;
 import switch2021.project.model.*;
 
 import java.time.LocalDate;
@@ -26,8 +27,8 @@ public class AddUserStoryToSprintBacklogControllerTest {
         project.getSprintList().saveSprint(sprint);
 
         company.getProjectStore().saveNewProject(project);
-        UserStory userStory = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createUserStory( new UserStoryStatus("TODO"),
-                1, "Fazer coisas cool");
+        UserStory userStory = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createUserStory( "US001",
+                1, "Fazer coisas cool",5);
         company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().saveUserStory(userStory);
 
         //Act

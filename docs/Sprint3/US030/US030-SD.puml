@@ -10,6 +10,8 @@ actor "Team Member" as TeamMember
 
 participant ": GetScrumBoardUI " as UI
 participant ": GetScrumBoardController " as controller
+participant ": Company " as company
+participant ": ProjectStore " as ProjStore
 participant "proj : Project" as proj
 participant "sprint : Sprint " as sprint
 participant "sprintBacklog : SprintBacklog" as sprintBacklog
@@ -22,7 +24,15 @@ activate TeamMember
 
 TeamMember -> UI: Get all the user story status of the current sprint
 
-UI -> controller: getUserStoryStatusOfCurrentSprint()
+UI -> controller: getUserStoryStatusOfCurrentSprint(code)
+controller -> company: getProject(code)
+company -> ProjStore: getProject(code)
+loop for each know project
+ProjStore -> proj: getCode()
+return true
+end
+return proj
+return proj
 controller -> proj: getCurrentSprint()
 return sprint
 controller -> sprint: getSprintBacklog()
@@ -31,7 +41,7 @@ controller -> sprintBacklog: getUserStoryList()
 return userStoryList
 controller -> mapper : toDTO(userStoryList)
 mapper -> tasksDTOList**: create(userStoryList)
-loop
+loop for each  know userStory
 mapper -> userStoryList : get(i)
 return userStory
 mapper -> mapper : userStoryStatusDTO=toDTO(UserStory)

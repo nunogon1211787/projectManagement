@@ -14,11 +14,17 @@ class ScrumBoardController{
 +getUserStoryList()
 }
 
-class Company{}
+class Company{
++getProjectStore()
+}
 
-class ProjectStore{}
+class ProjectStore{
++getProject()
+}
 
 class Project{
+-code
++getCode()
 +getCurrentSprint()
 }
 
@@ -64,6 +70,7 @@ ScrumBoardUI ..> ScrumBoardController
 ScrumBoardUI ..> userStoryStatusDTO
 ScrumBoardController ..> userStoryStatusDTO
 ScrumBoardController ..> Company
+ScrumBoardController ..> Project
 ScrumBoardController ..> Mapper
 Mapper ..> UserStory
 Mapper ..> userStoryStatusDTO

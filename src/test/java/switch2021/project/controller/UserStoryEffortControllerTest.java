@@ -2,6 +2,7 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import switch2021.project.depracated.UserStoryOfSprint;
 import switch2021.project.model.*;
 import switch2021.project.stores.SystemUserStore;
 import switch2021.project.stores.UserProfileStore;
@@ -51,7 +52,7 @@ class UserStoryEffortControllerTest {
         UserStoryStatus status = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
         int priority = 5;
         String description = "Validate";
-        story = new UserStory(status, priority, description);
+        story = new UserStory("US001", priority, description,8);
     }
 
     @Test

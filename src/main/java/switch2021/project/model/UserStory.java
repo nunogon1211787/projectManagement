@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import lombok.Data;
+import switch2021.project.stores.TaskList;
 
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -17,32 +18,42 @@ public class UserStory {
      * ---> Attributes <---
      **/
 
+    private int id_UserStory;
+    private String name;
     private UserStoryStatus userStoryStatus;
     private int priority;
     private String description;
-    private int id_UserStory;
     private UserStory ParentUserStory;
-
+    private int estimateEffort;
+    private TaskList tasks;
 
     /**
      * ---> Constructor <---
      **/
 
+    //Quantos Construtores precisamos?? não devia ser só um?
+/*    public UserStory(int priority, String description) {
 
-    public UserStory(int priority, String description) {
         this(new UserStoryStatus("To do") , priority, description);
-    }
+    }*/
 
-    public UserStory(UserStoryStatus userStoryStatus, int priority, String description) {
-        isValidUserStory(userStoryStatus, priority, description);
+    //Principal Construtor (acho)
+    public UserStory(String name, int priority, String description, int estimateEffort) {
+        isValidUserStory(name, priority, description);
 
-        this.userStoryStatus = userStoryStatus;
-        this.priority = priority;
+        this.name = name;
         this.description = description;
+        this.userStoryStatus = new UserStoryStatus("To do");
+        this.priority = priority;
+        this.estimateEffort = estimateEffort;
+        this.tasks = new TaskList();
     }
 
     public UserStory(UserStory userStoryToRefine, UserStoryStatus userStoryStatus, int priority, String description){
-        isValidUserStory(userStoryStatus, priority, description);
+        this.name = userStoryToRefine.getName() + " _Refined";
+
+        isValidUserStory(name, priority, description);
+
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
         this.description = description;
@@ -90,7 +101,7 @@ public class UserStory {
      * ---> Method to validate entered info by Product Owner <---
      * (Cris US009)
      */
-    private boolean isValidUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
+    private boolean isValidUserStory(String name, int priority, String description) {
         //check if priority is invalid
         if (priority < 0 || priority > 5) {
             throw new IllegalArgumentException("Check priority, cannot be < 0 or superior to 5.");
@@ -101,6 +112,13 @@ public class UserStory {
         }
         if (description.length() < 5) {
             throw new IllegalArgumentException("Description must be at least 5 characters");
+        }
+        //check if Name is invalid
+        if (name == null || name.trim().isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be blank.");
+        }
+        if (name.length() < 5) {
+            throw new IllegalArgumentException("Name must be at least 5 characters");
         }
         return true;
     }
