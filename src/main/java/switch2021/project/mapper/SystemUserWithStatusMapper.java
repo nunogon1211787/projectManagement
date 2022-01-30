@@ -1,4 +1,4 @@
-package switch2021.project.Mapper;
+package switch2021.project.mapper;
 
 import switch2021.project.dto.SystemUserWithStatusDto;
 import switch2021.project.model.SystemUser;

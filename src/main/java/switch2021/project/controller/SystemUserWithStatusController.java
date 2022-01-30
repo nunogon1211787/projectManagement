@@ -1,6 +1,6 @@
 package switch2021.project.controller;
 
-import switch2021.project.Mapper.SystemUserWithStatusMapper;
+import switch2021.project.mapper.SystemUserWithStatusMapper;
 import switch2021.project.dto.SystemUserWithStatusDto;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser;
