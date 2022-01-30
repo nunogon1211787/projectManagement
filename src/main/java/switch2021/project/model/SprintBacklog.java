@@ -19,6 +19,7 @@ public class SprintBacklog {
         this.userStoryList = new ArrayList<>();
     }
 
+    /**Save new User Story in Sprintbacklog **/
     public boolean saveUserStoryToSprintBacklog(UserStory userStory) {
         boolean status = false;
         if(validateUserStory(userStory)) {
@@ -29,15 +30,14 @@ public class SprintBacklog {
         return status;
     }
 
+    /**Validate User Story in Sprintbacklog **/
     public boolean validateUserStory(UserStory userStory){
-        boolean status = true;
         for(UserStory i: userStoryList)
-            if(i.equals(userStory)) {
-                status = false;
-                break;
+            if(i.equals(userStory) || userStory == null) {
+                throw new IllegalArgumentException("User Story already exists in the sprintbacklog or is null");  //Improve Method
             }
 
-        return status;
+        return true;
     }
 
     /** Override **/
