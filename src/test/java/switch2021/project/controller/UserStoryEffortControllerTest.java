@@ -2,6 +2,7 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import switch2021.project.depracated.UserStoryOfSprint;
 import switch2021.project.model.*;
 import switch2021.project.stores.SprintList;
 import switch2021.project.stores.SystemUserStore;
@@ -135,7 +136,7 @@ class UserStoryEffortControllerTest {
         assertEquals(sprint1, controller.getSprint(1));
     }
 
-   /* @Test
+    @Test
     void getSprintBacklog() {
         project1.getSprintList().saveSprint(sprint1);
         UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story, 5, company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
@@ -184,5 +185,5 @@ class UserStoryEffortControllerTest {
         assertEquals(21, userStoryEffortController.getUserStory(1).getEstimateEffort());
     }
 
-    */
+
 }
