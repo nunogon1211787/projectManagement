@@ -16,6 +16,4 @@ public class UserStoryStatus {
         this.description = description;
     }
 
-
-
 }
