@@ -10,7 +10,8 @@ class UpdateStatusUSSprintUI {
 }
 
 class UpdateStatusUSSprintController {
-    +getSprint(code): Sprint
+    +getUsStatusList()
+    +changeStatusOfUs(code, usId, userStoryStatus)
 }
 
 class Company {
@@ -22,26 +23,19 @@ class ProjectStore {
 }
 
 class Project {
+    +getSprint()
+}
+
+class Sprint {
     +getSprintBacklog()
 }
 
 class SprintBacklog {
-    +getUserStoryList()
-}
-
-class SprintListMapper {
-    +toDTO(usList)
-    +getUS()
-    +create()
-    +add(usDTO)
+    +getUserStory(usId)
 }
 
 class Userstory {
     +setStatus(userStoryStatus)
-}
-
-class usDTO {
-
 }
 
 
@@ -54,9 +48,9 @@ UpdateStatusUSSprintController ..> ProjectStore
 
 UpdateStatusUSSprintController ..> Project
 
-UpdateStatusUSSprintController ..> SprintBacklog
+UpdateStatusUSSprintController ..> Sprint
 
-UpdateStatusUSSprintController ..> SprintListMapper
+UpdateStatusUSSprintController ..> SprintBacklog
 
 UpdateStatusUSSprintController ..> Userstory
 
@@ -64,10 +58,11 @@ Company "1" -> "1" ProjectStore: knows
 
 ProjectStore "1" -> "0..*" Project: contains
 
-Project "1" -> "1" SprintBacklog: contains
+Project "1" -> "1" Sprint: involves
 
-SprintBacklog "1" -> "0..*" Userstory: contains
+Sprint "1" -> "1" SprintBacklog: has
 
-SprintListMapper"1" -> "0..*" usDTO: contains
+SprintBacklog "1" -> "0..*" Userstory: incorporates
+
 
 @enduml
