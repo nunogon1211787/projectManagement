@@ -23,8 +23,8 @@ public class AddUserStoryToSprintBacklogControllerTest {
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
 
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.now(), 2);
-        project.getSprintList().saveSprint(sprint);
+        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.now(), 2);
+        project.getSprints().saveSprint(sprint);
 
         company.getProjectStore().saveNewProject(project);
         UserStory userStory = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createUserStory( "US001",
@@ -41,11 +41,11 @@ public class AddUserStoryToSprintBacklogControllerTest {
 
         addStory.addUserStoryToSprintBacklog(4,company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
 
-        UserStoryOfSprint value = project.getSprintList().getSprintList().get(0).getSprintBacklog().getUserStoryOfSprintList().get(0);
+        UserStoryOfSprint value = project.getSprints().getSprintList().get(0).getSprintBacklog().getUserStoryOfSprintList().get(0);
 
         //Assert
         assertEquals(userStory, value.getUserStoryOfSprint());
-        assertEquals(4,project.getSprintList().getSprintList().get(0).getSprintBacklog().getUserStoryOfSprintList().get(0).getEstimateEffort());
+        assertEquals(4,project.getSprints().getSprintList().get(0).getSprintBacklog().getUserStoryOfSprintList().get(0).getEstimateEffort());
     }
 }
 

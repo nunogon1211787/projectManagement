@@ -6,17 +6,17 @@ hide circle
 
 title US032 - As SM/Team Member, I want to create task outside the scope of a user story
 
-class CreateTaskOutsideUserStoryUI{}
+class CreateSprintTaskUI{}
 
-class CreateTaskOutsideUserStoryController{
+class CreateSprintTaskController{
 -Company company
 -Project proj
 -TaskList taskList
 -TaskMapper taskMapper
 +getTaskTypes()
-+getTasksOfSprint(String projCode, int sprintID)
++getSprintTasks(String code, int id)
 +getCurrentProjectTeam()
-+createSprintTask(CreateTaskDTO createTaskDTO)
++createSprintTask(CreateTaskDTO dto)
 }
 
 class Company{
@@ -36,20 +36,20 @@ class TaskType{
 
 class ProjectStore{
 -List<Project> projectList
-+getProjectByCode(String projCode)
++getProjectByCode(String code)
 }
 
 class Project{
 -SprintList sList
 -ProjectTeam projectTeam
-+hasCode(Sting projCode)
-+getSprintList()
++hasCode(String code)
++getSprints()
 +getProjectTeam()
 }
 
 class SprintList{
 -List<Sprint> sprintList
-+getSprint(int sprintID)
++getSprint(int id)
 }
 
 class Sprint{
@@ -57,17 +57,17 @@ class Sprint{
 -LocalDate startDate
 -LocalDate endDate
 -TaskList sprintTaskList
-+hasID(int sprintID)
++hasID(int id)
 +getTaskList()
 }
 
 class TaskList{
 -List<Task> taskList
 +getTasksNames()
-+createSprintTask(createTaskDTO createTaskDTO)
-+saveTask(Task newSprintTask)
--validate(Task newSprintTask)
--add(Task newSprintTask)
++createSprintTask(createTaskDTO dto)
++saveTask(Task task)
+-validate(Task task)
+-add(Task task)
 }
 
 class Task{
@@ -77,7 +77,7 @@ class Task{
 -TaskType taskType
 -List<Task> tasksPrecedence
 -Resource responsible
-+Task(String name,String description,int effortEstimate,TaskType taskType,List<Task> precedence,Resource responsible)
++Task(String name,String description,int effort,TaskType type,List<Task> precedence,Resource responsible)
 +getName()
 +getDescription()
 +getEffortEstimate()
@@ -100,8 +100,8 @@ class Resource{
 }
 
 class TaskMapper{
-+toModel(CreateTaskDTO createTaskDTO)
-+toDTO(Task newSprintTask)
++toModel(CreateTaskDTO dto)
++toDTO(Task task)
 }
 
 class CreateTaskDTO{
@@ -110,7 +110,7 @@ class CreateTaskDTO{
 -int effortEstimate
 -String taskTypeName
 -String responsibleEmail
-+CreateTaskDTO(Task newSprintTask)
++CreateTaskDTO(Task task)
 +getName()
 +getDescription()
 +getEffortEstimate()
@@ -118,19 +118,19 @@ class CreateTaskDTO{
 +getResponsible()
 }
 
-CreateTaskOutsideUserStoryUI ..> CreateTaskOutsideUserStoryController
-CreateTaskOutsideUserStoryUI ..> CreateTaskDTO
+CreateSprintTaskUI ..> CreateSprintTaskController
+CreateSprintTaskUI ..> CreateTaskDTO
 
-CreateTaskOutsideUserStoryController ..> Company
-CreateTaskOutsideUserStoryController ..> TaskTypeStore
-CreateTaskOutsideUserStoryController ..> ProjectStore
-CreateTaskOutsideUserStoryController ..> Project
-CreateTaskOutsideUserStoryController ..> SprintList
-CreateTaskOutsideUserStoryController ..> Sprint
-CreateTaskOutsideUserStoryController ..> TaskList
-CreateTaskOutsideUserStoryController ..> ProjectTeam
-CreateTaskOutsideUserStoryController ..> TaskMapper
-CreateTaskOutsideUserStoryController ..> CreateTaskDTO
+CreateSprintTaskController ..> Company
+CreateSprintTaskController ..> TaskTypeStore
+CreateSprintTaskController ..> ProjectStore
+CreateSprintTaskController ..> Project
+CreateSprintTaskController ..> SprintList
+CreateSprintTaskController ..> Sprint
+CreateSprintTaskController ..> TaskList
+CreateSprintTaskController ..> ProjectTeam
+CreateSprintTaskController ..> TaskMapper
+CreateSprintTaskController ..> CreateTaskDTO
 
 
 Company "1" *-- "1" TaskTypeStore

@@ -49,10 +49,10 @@ class AssignScrumMasterControllerTest {
         Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         company.getProjectStore().saveNewProject(proj1);
-        Sprint sprint1 = proj1.getSprintList().createSprint("Sprint1",LocalDate.now().minusWeeks(1),2);
-        proj1.getSprintList().saveSprint(sprint1);
-        Sprint sprint2 = proj1.getSprintList().createSprint("Sprint2",LocalDate.now().plusWeeks(1),2);
-        proj1.getSprintList().saveSprint(sprint2);
+        Sprint sprint1 = proj1.getSprints().createSprint("Sprint1",LocalDate.now().minusWeeks(1),2);
+        proj1.getSprints().saveSprint(sprint1);
+        Sprint sprint2 = proj1.getSprints().createSprint("Sprint2",LocalDate.now().plusWeeks(1),2);
+        proj1.getSprints().saveSprint(sprint2);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Create resource
         SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
@@ -130,7 +130,7 @@ class AssignScrumMasterControllerTest {
         //Arrange
         LocalDate sDate;
         try {
-            sDate = proj1.getSprintList().getCurrentSprint().getEndDate().plusDays(1);
+            sDate = proj1.getSprints().getCurrentSprint().getEndDate().plusDays(1);
         }catch (NullPointerException e){
             sDate = LocalDate.now();
         }

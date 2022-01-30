@@ -1,6 +1,9 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
+import switch2021.project.mapper.TaskMapper;
+import switch2021.project.dto.CreateTaskDTO;
+import switch2021.project.model.Project;
 import switch2021.project.model.Task;
 
 import java.util.ArrayList;
@@ -10,14 +13,51 @@ import java.util.Objects;
 @Getter
 public class TaskList {
 
+    /**
+     * Atributtes.
+     */
+
     private List<Task> taskList;
+
+    /**
+     * Constructor.
+     */
 
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
+
+    /**
+     * Methods to create Task.
+     */
+
     public Task createTask(String description){
         return new Task(description);
+    }
+
+    public boolean createSprintTask(CreateTaskDTO dto, TaskMapper mapper, Project proj){
+
+        Task newTask = mapper.toModel(dto, proj);
+
+        return saveTask(newTask);
+    }
+
+    /**
+     * Getter methods.
+     */
+
+    public List<String> getTasksNames(){
+
+        List<String> tasksNames = new ArrayList<>();
+
+        for (Task task : this.taskList) {
+
+            tasksNames.add(task.getDescription());
+
+        }
+
+        return tasksNames;
     }
 
 
@@ -62,6 +102,10 @@ public class TaskList {
         }
         return result;
     }
+
+    /**
+     * Override methods.
+     */
 
     @Override
     public boolean equals(Object o) {

@@ -2,6 +2,7 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import switch2021.project.depracated.UserStoryOfSprint;
 import switch2021.project.model.*;
 import switch2021.project.stores.SprintList;
 import switch2021.project.stores.SystemUserStore;
@@ -105,7 +106,7 @@ class UserStoryEffortControllerTest {
 
         //Act
         controller.getProjectByCode("Project_2022_1");
-        SprintList sprintList = project1.getSprintList(); //objeto
+        SprintList sprintList = project1.getSprints(); //objeto
         sprintList.saveSprint(sprint1);
         List<Sprint> sprint = sprintList.getSprintList(); // passar de objeto para lista
         List<Sprint> sprint2 = controller.getSprintsList();
@@ -117,63 +118,105 @@ class UserStoryEffortControllerTest {
 
     @Test
     void getSprint() {
-        project1.getSprintList().saveSprint(sprint1);
-        project1.getSprintList().saveSprint(sprint2);
+        //Arrange
+        Company company = new Company();
+        UserStoryEffortController controller = new UserStoryEffortController(company);
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().saveNewProject(project1);
-
-        Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
-
-        assertEquals(sprint1, userStoryEffortController.getSprint(1));
+        Sprint sprint1 = new Sprint("teste1", LocalDate.now());
+        Sprint sprint2 = new Sprint("teste2", LocalDate.now().plusDays(21));
+        project1.getSprints().saveSprint(sprint1);
+        project1.getSprints().saveSprint(sprint2);
+        controller.getProjectByCode(project1.getCode());
+        //Assert
+        assertEquals(sprint1, controller.getSprint(1));
     }
 
-   /* @Test
+    @Test
     void getSprintBacklog() {
-        project1.getSprintList().saveSprint(sprint1);
+        Company company = new Company();
+        UserStoryEffortController controller = new UserStoryEffortController(company);
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        company.getProjectStore().saveNewProject(project1);
+        Sprint sprint1 = new Sprint("teste1", LocalDate.now());
+        Sprint sprint2 = new Sprint("teste2", LocalDate.now().plusDays(21));
+        project1.getSprints().saveSprint(sprint1);
+        UserStory story = new UserStory("teste", 5, "validate", 5);
         UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story, 5, company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         sprint1.getSprintBacklog().saveUserStoryOfSprint(userStoryOfSprint);
-        project1.getSprintList().saveSprint(sprint2);
+        project1.getSprints().saveSprint(sprint2);
         company.getProjectStore().saveNewProject(project1);
 
-        Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
-        Sprint userSprint = userStoryEffortController.getSprint(1);
+        Project companyProject = controller.getProjectByCode("Project_2022_1");
+        Sprint userSprint = controller.getSprint(1);
 
-        assertEquals(sprint1.getSprintBacklog(), userStoryEffortController.getSprintBacklog());
+        assertEquals(sprint1.getSprintBacklog(), controller.getSprintBacklog());
     }
 
     @Test
     void getUserStory() {
-        project1.getSprintList().saveSprint(sprint1);
+        Company company = new Company();
+        UserStoryEffortController controller = new UserStoryEffortController(company);
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        company.getProjectStore().saveNewProject(project1);
+        Sprint sprint1 = new Sprint("teste1", LocalDate.now());
+        Sprint sprint2 = new Sprint("teste2", LocalDate.now().plusDays(21));
+        project1.getSprints().saveSprint(sprint1);
+        UserStory story = new UserStory("teste", 5, "validate", 5);
         UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story, 5, company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         userStoryOfSprint.setId_UserStoryOfSprint(1);
         sprint1.getSprintBacklog().saveUserStoryOfSprint(userStoryOfSprint);
-        project1.getSprintList().saveSprint(sprint2);
+        project1.getSprints().saveSprint(sprint2);
         company.getProjectStore().saveNewProject(project1);
 
-        Project companyProject = userStoryEffortController.getProjectByCode("Project_2022_1");
-        Sprint userSprint = userStoryEffortController.getSprint(1);
+        Project companyProject = controller.getProjectByCode("Project_2022_1");
+        Sprint userSprint = controller.getSprint(1);
 
-        SprintBacklog sprintBacklog = userStoryEffortController.getSprintBacklog();
+        SprintBacklog sprintBacklog = controller.getSprintBacklog();
 
-        assertEquals(userStoryOfSprint, userStoryEffortController.getUserStory(1));
+        assertEquals(userStoryOfSprint, controller.getUserStory(1));
     }
 
     @Test
     void setEffort() {
-        project1.getSprintList().saveSprint(sprint1);
+        Company company = new Company();
+        UserStoryEffortController controller = new UserStoryEffortController(company);
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        company.getProjectStore().saveNewProject(project1);
+        Sprint sprint1 = new Sprint("teste1", LocalDate.now());
+        Sprint sprint2 = new Sprint("teste2", LocalDate.now().plusDays(21));
+        project1.getSprints().saveSprint(sprint1);
+        UserStory story = new UserStory("teste", 5, "validate", 5);
         UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story, 5, company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         userStoryOfSprint.setId_UserStoryOfSprint(1);
         sprint1.getSprintBacklog().saveUserStoryOfSprint(userStoryOfSprint);
-        project1.getSprintList().saveSprint(sprint2);
+        project1.getSprints().saveSprint(sprint2);
         company.getProjectStore().saveNewProject(project1);
 
 
-        userStoryEffortController.getProjectByCode(project1.getCode());
-        userStoryEffortController.getSprint(sprint1.getId_Sprint());
-        userStoryEffortController.getSprintBacklog();
-        userStoryEffortController.getUserStory(1);
-        userStoryEffortController.setEffort(21);
-        assertEquals(21, userStoryEffortController.getUserStory(1).getEstimateEffort());
+        controller.getProjectByCode(project1.getCode());
+        controller.getSprint(sprint1.getId_Sprint());
+        controller.getSprintBacklog();
+        controller.getUserStory(1);
+        controller.setEffort(21);
+        assertEquals(21, controller.getUserStory(1).getEstimateEffort());
     }
 
-    */
+
 }

@@ -6,8 +6,8 @@ title US032 - As SM/Team Member, I want to create task outside the scope of a us
 autonumber
 
 actor SM_TeamMember as actor
-participant ": CreateTaskOutsideUserStoryUI" as UI
-participant ": createTaskOutsideUserStoryController" as Ctrl
+participant ": CreateSprintTaskUI" as UI
+participant ": createSprintTaskController" as Ctrl
 participant ": Company" as co
 participant "taskTypeStore : TaskTypeStore" as tTStore
 participant "taskTypeList : List<TaskType>" as listTaskType
@@ -72,7 +72,7 @@ UI --> actor: Show a list of task types
 
 actor -> UI: Ask to receive a list of current tasks of sprint
 
-UI -> Ctrl: getTasksOfSprint(projCode, sprintID)
+UI -> Ctrl: getSprintTasks(projCode, sprintID)
 
 Ctrl -> co: getProjectStore()
 
@@ -94,7 +94,7 @@ end
 
 pStore --> Ctrl: proj
 
-Ctrl -> proj: getSprintList()
+Ctrl -> proj: getSprints()
 
 proj --> Ctrl: sList
 

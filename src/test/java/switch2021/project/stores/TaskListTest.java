@@ -25,7 +25,7 @@ public class TaskListTest {
 
         //Arrange
         TaskList test = new TaskList();
-        Task newTask = new Task();
+        Task newTask = new Task("teste");
         test.addTaskToTheList(newTask);
         //Assert
         assertEquals(1,test.getTaskList().size());
@@ -37,8 +37,8 @@ public class TaskListTest {
 
         //Arrange
         TaskList test = new TaskList();
-        Task newTask = new Task();
-        Task newTask2 = new Task();
+        Task newTask = new Task("teste");
+        Task newTask2 = new Task("teste2");
         //Assert
         test.saveTask(newTask);
         test.saveTask(newTask2);
@@ -51,7 +51,7 @@ public class TaskListTest {
 
         //Arrange
         TaskList test = new TaskList();
-        Task newTask = new Task();
+        Task newTask = new Task("teste");
         //Assert
         assertTrue(test.saveTask(newTask));
         assertFalse(test.saveTask(newTask));

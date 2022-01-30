@@ -108,6 +108,11 @@ public class Resource {
         return this.user.isYourEmail(email);
     }
 
+    // Check by Name
+    public boolean isYourName(String name) {
+        return this.user.hasName(name);
+    }
+
     //Check if is current
     public boolean isCurrent() {
         return (this.startDate.isBefore(LocalDate.now()) && this.endDate.isAfter(LocalDate.now()));

@@ -13,10 +13,12 @@ import java.util.Objects;
 @Setter
 public class TaskStatusStore {
 
-    private final List<String> taskList;
+    private final List<String> taskList; // Review this atributte. The class need to have a list of Objects that are responsible.
+    private List<TaskStatus> taskStatusList;
 
     public TaskStatusStore() {
-        this.taskList = new ArrayList<>();
+        this.taskList = new ArrayList<>(); //Review
+        this.taskStatusList = new ArrayList<>();
     }
 
     public TaskStatus createTaskStatus(String status) {
@@ -24,10 +26,15 @@ public class TaskStatusStore {
     }
 
     public void populateDefault() {
-        this.taskList.add("Planned");
-        this.taskList.add("Running");
-        this.taskList.add("Finished");
-        this.taskList.add("Blocked");
+        this.taskList.add("Planned"); //Review
+        this.taskList.add("Running"); //Review
+        this.taskList.add("Finished"); //Review
+        this.taskList.add("Blocked"); //Review
+
+        saveTaskStatus(new TaskStatus("Planned"));
+        saveTaskStatus(new TaskStatus("Running"));
+        saveTaskStatus(new TaskStatus("Finished"));
+        saveTaskStatus(new TaskStatus("Blocked"));
     }
 
     public String getTaskStatusByDescription(String description) {
@@ -39,6 +46,75 @@ public class TaskStatusStore {
         }
         return result;
     }
+
+    public TaskStatus getInitialStatus(){
+
+        TaskStatus status = null;
+
+        for (TaskStatus taskStatus : this.taskStatusList) {
+
+            if (taskStatus.getDescription().equalsIgnoreCase("Planned")) {
+                status = taskStatus;
+            }
+
+        }
+
+        return status;
+    }
+
+    /**
+     * Method to save and validate task types in the list.
+     */
+
+    public boolean saveTaskStatus(TaskStatus status) {
+
+        boolean result = false;
+
+        if(status != null) {
+
+            result = true;
+
+            for (int i = 0; i < this.taskStatusList.size(); i++) {
+
+                if (validateNewStatusDescription(status)) {
+                    status.setId_TaskStatus(id_TaskStatusGenerator());
+                    this.taskStatusList.add(status);
+                }
+
+            }
+        }
+
+
+        return result;
+    }
+
+    private boolean validateNewStatusDescription(TaskStatus status) {
+
+        boolean result = true;
+
+        for (TaskStatus taskStatus : this.taskStatusList) {
+
+            if (taskStatus.getDescription().equals(status.getDescription())) {
+                result = false;
+                break;
+            }
+
+        }
+
+        return result;
+    }
+
+    /**
+     * ID Generator.
+     **/
+    public int id_TaskStatusGenerator() {
+        int id = 1;
+        if (this.taskStatusList.size() > 0) {
+            id = this.taskStatusList.get(taskStatusList.size() - 1).getId_TaskStatus() + 1;
+        }
+        return id;
+    }
+
 
 
     /** Override **/

@@ -33,7 +33,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         sprint1.getTaskList().addTaskToTheList(taskTest);
         List<Task> taskList = new ArrayList<>();
 
-        project2.getSprintList().saveSprint(sprint1);
+        project2.getSprints().saveSprint(sprint1);
         taskList.add(taskTest);
         taskList.add(taskTest2);
 
@@ -44,7 +44,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         viewStatusTester.getProjectByCode("Project_2022_1");
         listTest = viewStatusTester.getListOfProjectActivities();
 
-        assertEquals(listTest,project2.getSprintList().getListOfAllAActivitiesOfAProject());
+        assertEquals(listTest,project2.getSprints().getListOfAllAActivitiesOfAProject());
 
     }
 }
