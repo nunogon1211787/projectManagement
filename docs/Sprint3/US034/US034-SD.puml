@@ -7,46 +7,37 @@ autoactivate on
 autonumber
 
 actor "Project Member" as PM
-participant ":UpdateStatusUSSprintUI" as System
-participant ":UpdateStatusUSSprintController" as Ctrl
+participant ":UpdateStatusUsSprintUI" as System
+participant ":UpdateStatusUsSprintController" as Ctrl
+participant "usStatusStore : UserStoryStatusStore" as C7
 participant ": Company" as C1
 participant "projStore : ProjectStore" as C2
 participant "proj : Project" as C3
+participant "sprint : Sprint" as C5
 participant "sprintBack : SprintBacklog" as C4
-participant "SprintListMapper" as C5
-participant "usListDTO:List<UserStoryDTO>" as C5.1
-participant "usDTO: userStoryDTO" as C5.2
+
 participant "us : UserStory" as C6
 
 activate PM
 
+PM -> System: Wants to change Status of US
+System -> Ctrl: getUsStatusListD()
+Ctrl -> C7: getUsStatusListD()
+C7 --> Ctrl: usStatusListD
+Ctrl --> System: usStatusListD
+System --> PM: Shows available status for user story
 
-
-PM -> System: Wants to check the Sprint Backlog of a Project
-System -> Ctrl: getSprint(code)
+PM -> System: Selects new status of US
+System -> Ctrl: changeStatusOfUS(code, usId, userStoryStatus)
 Ctrl -> C1: getProjectStore()
 C1 --> Ctrl: projStore
 Ctrl -> C2: getProjectByCode(code)
 C2 --> Ctrl: proj
-Ctrl -> C3: getSprintBacklog
-C3 --> Ctrl: sprintBacklog
-Ctrl -> C4: getUserStory()
-C4 --> Ctrl: us
-Ctrl -> C5: toDTO(us)
-C5 --> Ctrl: usDTO
-Ctrl --> System: usDTO
-System --> PM: usDTO
-
-PM -> System: Wants to change Status of US
-System -> Ctrl: getUsStatusListD()
-Ctrl -> C4: getUsStatusListD()
-
-
-
-
-
-System -> Ctrl: changeStatusOfUS(usId, userStoryStatus)
-Ctrl -> C4: getUS(usId)
+Ctrl -> C3: getSprint()
+C3 --> Ctrl: sprint
+Ctrl -> C5: getSprintBacklog()
+C5 --> Ctrl: sprintBacklog
+Ctrl -> C4: getUserStory(usId)
 C4 --> Ctrl: us
 Ctrl -> C6: setStatus(userStoryStatus)
 C6 --> Ctrl: true
