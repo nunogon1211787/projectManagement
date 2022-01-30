@@ -89,6 +89,11 @@ public class UserStory {
         this.userStoryStatus = userStoryStatus;
     }
 
+    public boolean setUserStoryStatusBoolean (UserStoryStatus userStoryStatus) {
+        this.userStoryStatus = userStoryStatus;
+        return true;
+    }
+
     /**
      * ---> Set parentUserStory <---
      */

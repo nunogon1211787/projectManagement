@@ -53,13 +53,13 @@ public class UpdateStatusUsController {
                 return this.usList;
         }
 
-        public void changeStatusOfUs(String code, int usId, UserStoryStatus userST) {
+        public boolean changeStatusOfUs(String code, int usId, UserStoryStatus userST) {
                 this.projectStore = company.getProjectStore();
                 this.project = this.projectStore.getProjectByCode(code);
                 this.sprint = this.project.getCurrentSprint();
                 this.sprintBacklog = this.sprint.getSprintBacklog();
                 this.userStory = this.sprintBacklog.getUserStory(usId);
-                this.userStory.setUserStoryStatus(userST);
+                return this.userStory.setUserStoryStatusBoolean(userST);
         }
 
 }
