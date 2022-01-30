@@ -4,6 +4,7 @@ import lombok.Data;
 import switch2021.project.stores.TaskList;
 
 
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -135,6 +136,18 @@ public class UserStory {
         return true;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserStory userStory = (UserStory) o;
+        return id_UserStory == userStory.id_UserStory && priority == userStory.priority && estimateEffort == userStory.estimateEffort && Objects.equals(name, userStory.name) && Objects.equals(userStoryStatus, userStory.userStoryStatus) && Objects.equals(description, userStory.description) && Objects.equals(ParentUserStory, userStory.ParentUserStory) && Objects.equals(tasks, userStory.tasks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_UserStory, name, userStoryStatus, priority, description, ParentUserStory, estimateEffort, tasks);
+    }
 }
 
 

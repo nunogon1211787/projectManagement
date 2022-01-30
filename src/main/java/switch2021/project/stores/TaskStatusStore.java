@@ -77,7 +77,7 @@ public class TaskStatusStore {
             for (int i = 0; i < this.taskStatusList.size(); i++) {
 
                 if (validateNewStatusDescription(status)) {
-                    status.setId_TaskStatus(id_TaskStatusGenerator());
+                    status.setTask_Id_TaskStatus(id_TaskStatusGenerator());
                     this.taskStatusList.add(status);
                 }
 
@@ -110,7 +110,7 @@ public class TaskStatusStore {
     public int id_TaskStatusGenerator() {
         int id = 1;
         if (this.taskStatusList.size() > 0) {
-            id = this.taskStatusList.get(taskStatusList.size() - 1).getId_TaskStatus() + 1;
+            id = this.taskStatusList.get(taskStatusList.size() - 1).getTask_Id_TaskStatus() + 1;
         }
         return id;
     }

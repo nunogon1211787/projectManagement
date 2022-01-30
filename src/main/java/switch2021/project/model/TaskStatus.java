@@ -10,6 +10,7 @@ public class TaskStatus {
     /**
      * Class UserStoryStatus Atributes
      **/
+    private int task_Id_TaskStatus;
     private String description;
 
     /**

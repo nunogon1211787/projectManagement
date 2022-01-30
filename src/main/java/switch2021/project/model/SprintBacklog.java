@@ -12,23 +12,61 @@ public class SprintBacklog {
 
     /** Class Attributes **/
     private final List<UserStoryOfSprint> userStoryOfSprintList;
-    private UserStory userStory;
-    private List<UserStory> userStoryList;
+    private final List<UserStory> userStoryList;
 
     public SprintBacklog() {
         this.userStoryOfSprintList = new ArrayList<>();
         this.userStoryList = new ArrayList<>();
     }
 
+    public boolean saveUserStoryToSprintBacklog(UserStory userStory) {
+        boolean status = false;
+        if(validateUserStory(userStory)) {
+            status = true;
+            userStoryList.add(userStory);
+        }
 
-    /** Create User Story Of Sprint **/
-    public UserStoryOfSprint createUSerStoryOfSprint (UserStory userStory, int effort, UserStoryStatus status) {
-        return new UserStoryOfSprint(userStory, effort, status);
+        return status;
     }
 
-    /**Getter **/
-    public List<UserStoryOfSprint> getUserStoryOfSprintList() {
-        return userStoryOfSprintList;
+    public boolean validateUserStory(UserStory userStory){
+        boolean status = true;
+        for(UserStory i: userStoryList)
+            if(i.equals(userStory)) {
+                status = false;
+                break;
+            }
+
+        return status;
+    }
+
+    /** Override **/
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SprintBacklog)) return false;
+        SprintBacklog that = (SprintBacklog) o;
+        return Objects.equals(userStoryOfSprintList, that.userStoryOfSprintList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userStoryOfSprintList);
+    }
+
+    @Override
+    public String toString() {
+        return "SprintBacklog{" +
+                "userStoryOfSprintList=" + userStoryOfSprintList +
+                '}';
+    }
+
+
+    ////Deprecated Methods
+    /** Create User Story Of Sprint **/
+    @Deprecated
+    public UserStoryOfSprint createUSerStoryOfSprint (UserStory userStory, int effort, UserStoryStatus status) {
+        return new UserStoryOfSprint(userStory, effort, status);
     }
 
     @Deprecated
@@ -56,6 +94,7 @@ public class SprintBacklog {
     }
 
     /** Add User Story Of Sprint **/
+    @Deprecated
     public boolean saveUserStoryOfSprint(UserStoryOfSprint story) {
         if (!validateUserStoryOfSprint(story)) {
             story.setId_UserStoryOfSprint(id_UserStoryOfSprintGenerator());
@@ -65,6 +104,7 @@ public class SprintBacklog {
     }
 
     /** Validate UserStoryOfSprint Addition - checks if already exists **/
+    @Deprecated
     public boolean validateUserStoryOfSprint(UserStoryOfSprint userStoryOfSprint) {
         boolean msg = false;
 
@@ -78,6 +118,7 @@ public class SprintBacklog {
     }
 
     /** ID_UserStory of Sprint Generator **/
+    @Deprecated
     public int id_UserStoryOfSprintGenerator() {
         int id = 1;
         if(this.userStoryOfSprintList.size() > 0) {
@@ -89,6 +130,7 @@ public class SprintBacklog {
     /**
      * Method to get user story of sprint tasks
      */
+    @Deprecated
     public List<Task> getUserStoryOfSprintTasks(){
         List<Task> userStoryOfSprintTasksList = new ArrayList<>();
 
@@ -97,27 +139,6 @@ public class SprintBacklog {
 
         }
         return userStoryOfSprintTasksList;
-    }
-
-    /** Override **/
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof SprintBacklog)) return false;
-        SprintBacklog that = (SprintBacklog) o;
-        return Objects.equals(userStoryOfSprintList, that.userStoryOfSprintList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userStoryOfSprintList);
-    }
-
-    @Override
-    public String toString() {
-        return "SprintBacklog{" +
-                "userStoryOfSprintList=" + userStoryOfSprintList +
-                '}';
     }
 
 }
