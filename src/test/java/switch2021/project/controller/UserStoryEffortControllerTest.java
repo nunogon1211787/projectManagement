@@ -142,6 +142,9 @@ class UserStoryEffortControllerTest {
         company.getProjectStore().saveNewProject(project1);
 
 
+        userStoryEffortController.getProjectByCode(project1.getCode());
+        userStoryEffortController.getSprint(sprint1.getId_Sprint());
+        userStoryEffortController.getSprintBacklog();
         userStoryEffortController.getUserStory(1);
         userStoryEffortController.setEffort(21);
         assertEquals(21, userStoryEffortController.getUserStory(1).getEstimateEffort());

@@ -1,94 +1,236 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+title US032 - As SM/Team Member, I want to create task outside the scope of a user story
+
 autonumber
 
 actor SM_TeamMember as actor
-participant ":createTaskOutsideUserStoryUI" as UI
-participant ":createTaskOutsideUserStoryController" as Ctrl
-participant ":Company" as Co
-participant "pStore:ProjectStore" as pStore
-participant "currentProjList:List<Project>" as cPList
-participant "proj:Project" as proj
-participant ":ProjectMapper" as projMapper
-participant "projListDTO:List<ProjectDTO>" as pListDTO
-participant "projDTO: ProjectDTO" as projDTO
+participant ": CreateTaskOutsideUserStoryUI" as UI
+participant ": createTaskOutsideUserStoryController" as Ctrl
+participant ": Company" as co
+participant "taskTypeStore : TaskTypeStore" as tTStore
+participant "taskTypeList : List<TaskType>" as listTaskType
+participant "taskType : TaskType" as tType
+participant "taskTypesNames : List<String>" as listTypes
+participant "pStore : ProjectStore" as pStore
+participant "projectList : List<Project>" as listProj
+participant "proj : Project" as proj
+participant "sList : SprintList" as sList
+participant "sprintList : List<Sprint>" as listSprint
+participant "sprint : Sprint" as sprint
+participant "sprintTaskList: TaskList" as tList
+participant "taskList : List<Task>" as listTask
+participant "task : Task" as task
+participant "tasksNames : List<String>" as listTasks
+participant "projectTeam : ProjectTeam" as cPTeam
+participant "projectTeam : List<Resource>" as listResources
+participant "resource : Resource" as res
+participant "currentResourcesName : List<String>" as listRes
+participant ": TaskMapper" as tMapper
+participant "createTaskDTO : CreateTaskDTO" as cTDTO
+participant "newSprintTask : Task" as newTask
 
 
-actor -> UI: Ask for projects that I am associated with
+actor -> UI: Ask to create task outside the scope of a user story
 activate UI
 
-UI -> Ctrl: getCurrentProjectsByMember(email)
-activate Ctrl
+actor -> UI: Ask to receive a list of task types
 
-Ctrl -> Co: getProjectStore()
-activate Co
+autoactivate on
+UI -> Ctrl: getTaskTypes()
 
-Co --> Ctrl: pStore
-deactivate Co
+Ctrl -> co: getTaskTypeStore()
 
-Ctrl -> pStore: getCurrentProjectListByUserEmail(email)
-activate pStore
+co --> Ctrl: taskTypeStore
 
-pStore -> cPList**: create()
+Ctrl -> tTStore: getTaskTypesNames()
 
-loop for Each known project
+tTStore --> listTypes**: create()
 
-pStore -> proj: hasCurrentProjectTeamMember(email)
-activate proj
+loop for each know task type
 
-proj --> pStore: result
-deactivate proj
+tTStore -> listTaskType: get(i)
 
-opt result = true
+listTaskType --> tTStore: taskType
 
-pStore -> cPList: add(proj)
-activate cPList
+tTStore -> tType: getName()
 
-cPList --> pStore: true
-deactivate cPList
+tType --> tTStore: typeName
+
+tTStore -> listTypes: add(typeName)
+
+listTypes --> tTStore: true
+
+end
+
+tTStore --> Ctrl: taskTypesNames
+
+Ctrl --> UI: taskTypesNames
+
+UI --> actor: Show a list of task types
+
+actor -> UI: Ask to receive a list of current tasks of sprint
+
+UI -> Ctrl: getTasksOfSprint(projCode, sprintID)
+
+Ctrl -> co: getProjectStore()
+
+co --> Ctrl: pStore
+
+Ctrl -> pStore: getProjectByCode(projCode)
+
+loop for each known project in projectList
+
+pStore -> listProj: get(i)
+
+listProj --> pStore: proj
+
+pStore -> proj: hasCode(projCode)
+
+proj --> pStore: true
+
+end
+
+pStore --> Ctrl: proj
+
+Ctrl -> proj: getSprintList()
+
+proj --> Ctrl: sList
+
+Ctrl -> sList: getSprint(sprintID)
+
+loop for each known sprint in sprintList
+
+sList -> listSprint: get(i)
+
+listSprint --> sList: sprint
+
+sList -> sprint: hasID(sprintID)
+
+sprint --> sList: true
+
+end
+
+sList --> Ctrl: sprint
+
+autoactivate on
+Ctrl -> sprint: getTaskList()
+
+sprint --> Ctrl: sprintTaskList
+
+Ctrl -> tList: getTasksNames()
+
+tList --> listTasks**: create()
+
+loop for each know task
+
+tList -> listTask: get(i)
+
+listTask --> tList: task
+
+tList -> task: getName()
+
+task --> tList: taskName
+
+tList -> listTasks: add(taskName)
+
+listTasks --> tList: true
+
+end
+
+tList --> Ctrl: tasksNames
+
+Ctrl --> UI: tasksNames
+
+UI --> actor: Show a list of current tasks (to choose a precedence, if want)
+
+actor -> UI: Ask to receive a list of current resources of the project
+
+UI -> Ctrl: getCurrentProjectTeam()
+
+Ctrl -> proj: getProjectTeam()
+
+proj --> Ctrl: projectTeam
+
+Ctrl -> cPTeam: getCurrentResourcesNames()
+
+cPTeam --> listRes**: create()
+
+loop for each know resource
+
+cPTeam -> listResources: get(i)
+
+listResources --> cPTeam: resource
+
+cPTeam -> res: isCurrent()
+
+res --> cPTeam: result
+
+alt result = true
+
+cPTeam -> res: getName()
+
+res --> cPTeam: resourceName
+
+cPTeam -> listRes: add(resourceName)
+
+listRes --> cPTeam: true
 
 end
 
 end
 
-pStore --> Ctrl: currentProjList
-deactivate pStore
+cPTeam --> Ctrl: currentResourcesNames
 
-Ctrl -> projMapper: toDTO(currentProjList)
-activate projMapper
+Ctrl --> UI: currentResourcesNames
+autoactivate off
 
-projMapper -> pListDTO**: create()
+UI --> actor: Show a list of current resources of project (to choose the responsible, if want)
 
-loop for each project in currentProjList
+autoactivate on
+UI --> actor: Request data (name, description, effortEstimate, taskType, precedences(optional), responsible)
 
-projMapper -> cPList: get(i)
-activate cPList
+actor -> UI: Choose and typed requested data
 
-cPList --> projMapper: proj
-deactivate cPList
+UI -> Ctrl: createSprintTask(createTaskDTO)
 
-projMapper -> projMapper: projDTO = toDTO(proj)
-activate projMapper
+Ctrl -> tList: createSprintTask(createTaskDTO)
 
-projMapper -> projDTO**: create()
-deactivate projMapper
+tList -> tMapper: toModel(createTaskDTO)
 
-projMapper -> pListDTO: add(projDTO)
-activate pListDTO
+tMapper -> cTDTO: name = getName()
+deactivate cTDTO
 
-pListDTO --> projMapper: true
-deactivate pListDTO
+tMapper -> cTDTO: description = getDescription()
+deactivate cTDTO
 
-end
+tMapper -> cTDTO: effortEstimate = getEffortEstimate()
+deactivate cTDTO
 
-projMapper --> Ctrl: projListDTO
-deactivate projMapper
+tMapper -> cTDTO: taskType = getTaskType()
+deactivate cTDTO
 
-Ctrl --> UI: projListDTO
-deactivate Ctrl
+tMapper -> cTDTO: responsible = getResponsible()
+deactivate cTDTO
 
-UI --> actor: projListDTO
-deactivate UI
+tMapper -> newTask**: createTask(name, description, effortEstimate, taskType, responsible)
+
+tMapper --> tList: newSprintTask
+
+tList -> tList: saveTask(newSprintTask)
+
+tList -> tList: validate(newSprintTask)
+deactivate tList
+
+tList -> tList: add(newSprintTask)
+deactivate tList
+deactivate tList
+
+tList --> Ctrl: true
+
+Ctrl --> UI: created and saved successfully
+
+UI --> actor: created and saved successfully
 
 @enduml

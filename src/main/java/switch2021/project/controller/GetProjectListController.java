@@ -8,19 +8,29 @@ import switch2021.project.utils.App;
 import java.util.List;
 
 public class GetProjectListController {
+
+    /**
+     * Attributes
+     **/
+
     private Company company;
     private List<Project> projectList;
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
+
     public GetProjectListController() { this.company = App.getInstance().getCompany(); }
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
+
     public GetProjectListController(Company company){ this.company = company; }
 
+    /**
+     * Methods
+     **/
 
     public List<Project> getProjects() {
         ProjectStore projStore = this.company.getProjectStore();

@@ -7,21 +7,30 @@ import switch2021.project.utils.App;
 
 public class CreateNewTypologyController {
 
-    /** Attributes **/
+    /**
+     * Attributes
+     **/
+
     private Company company;
     private Typology typology;
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
+
     public CreateNewTypologyController(){ this.company = App.getInstance().getCompany();}
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
+
     public CreateNewTypologyController(Company company) {
         this.company = company;
     }
+
+    /**
+     * Methods
+     **/
 
     public boolean createTypology(String description) {
 

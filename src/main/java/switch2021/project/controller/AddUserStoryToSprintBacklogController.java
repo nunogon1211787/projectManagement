@@ -5,6 +5,10 @@ import switch2021.project.stores.SprintList;
 
 public class AddUserStoryToSprintBacklogController {
 
+    /**
+     * Attributes
+     **/
+
     private final Company company;
     private Project project;
     private SprintList sprintList;
@@ -17,11 +21,16 @@ public class AddUserStoryToSprintBacklogController {
     }*/
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
+
     public AddUserStoryToSprintBacklogController(Company company) {
         this.company = company;
     }
+
+    /**
+     * Methods
+     **/
 
     public Project getProject(String code) {
         return this.project = company.getProjectStore().getProjectByCode(code);

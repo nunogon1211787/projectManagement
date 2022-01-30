@@ -11,6 +11,10 @@ import java.util.List;
 
 public class ViewStatusOfActivitiesInAProjectController {
 
+    /**
+     * Attributes
+     **/
+
     private Company company;
     private ProjectStore projectStore;
     private Project project;
@@ -18,24 +22,30 @@ public class ViewStatusOfActivitiesInAProjectController {
     List<Task> listOfTasks;
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
+
     public ViewStatusOfActivitiesInAProjectController(){ this.company = App.getInstance().getCompany(); }
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
+
     public ViewStatusOfActivitiesInAProjectController(Company company){ this.company = company; }
 
-
-    //Method do get list of projects where the user is associated
+    /**
+     * Method do get list of projects where the user is associated
+     **/
 
     public List<Project> getProjectListByUser(String email) {
         this.projectStore = this.company.getProjectStore();
         this.arrayProject = this.projectStore.getProjectsByUserEmail(email);
         return arrayProject;
     }
-    //Method to get project by code
+
+    /**
+     * Method to get project by code
+     **/
 
     public Project getProjectByCode(String code){
         this.projectStore = this.company.getProjectStore();
@@ -43,7 +53,9 @@ public class ViewStatusOfActivitiesInAProjectController {
         return this.project;
     }
 
-    //Method to get list of project activities
+    /**
+     * Method to get list of project activities
+     **/
 
     public List<Task> getListOfProjectActivities(){
         return new ArrayList<>(project.getSprintList().getListOfAllAActivitiesOfAProject());

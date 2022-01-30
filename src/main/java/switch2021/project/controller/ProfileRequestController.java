@@ -9,37 +9,41 @@ import java.util.List;
 
 public class ProfileRequestController {
 
+    /**
+     * Attributes
+     **/
+
     private Company company;
     private Request request;
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
+
     public ProfileRequestController() {
         this.company = App.getInstance().getCompany();
     }
 
     /**
      * Constructor to test (without SINGLETON).
-     */
-    public ProfileRequestController(Company company){ this.company = company; }
+     **/
+
+    public ProfileRequestController(Company company) {
+        this.company = company;
+    }
 
     /**
-     * Método para ...
-    */
+     * Method
+     **/
 
-
-    public Request createProfileRequest(String email,String nameProfile){
+    public Request createProfileRequest(String email, String nameProfile) {
 
         UserProfile profRequest = this.company.getUserProfileStore().getUserProfile(nameProfile);
         SystemUser user = this.company.getSystemUserStore().getUserByEmail(email);
-
-        return this.request = this.company.getRequestStore().createProfileRequest(profRequest,user);
-
-
+        return this.request = this.company.getRequestStore().createProfileRequest(profRequest, user);
     }
 
-    public boolean saveRequest(){
+    public boolean saveRequest() {
         return this.company.getRequestStore().saveRequest(this.request);
     }
 

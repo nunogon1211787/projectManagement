@@ -9,10 +9,13 @@ import java.util.List;
 
 public class UserStoryEffortController {
 
-    // construtor com get instance e com company
+    /**
+     * Attributes
+     **/
+
     private Company company;
     private ProjectStore projStore;
-    private List<Project> projectList; // nome da lista que contem o projectliST
+    private List<Project> projectList;
     private Project proj;
     private SprintList sprintList;
     private List<Sprint> sprintsList;
@@ -21,19 +24,24 @@ public class UserStoryEffortController {
     private UserStoryOfSprint userStoryOfSprint;
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
+
     public UserStoryEffortController() { //tem como função o dominio para os proximos passos
         this.company = App.getInstance().getCompany();
     }
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
+
     public UserStoryEffortController(Company company) { //tem como função o dominio para os proximos passos
         this.company = company;
     }
 
+    /**
+     * Methods
+     **/
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         this.projectList = new ArrayList<>();
@@ -66,7 +74,7 @@ public class UserStoryEffortController {
     }
 
     public UserStoryOfSprint getUserStory(int id_UserStory){
-        this.userStoryOfSprint= this.sprintBacklog.getUserStory(id_UserStory);
+        this.userStoryOfSprint= this.sprintBacklog.getUserStoryDeprecated(id_UserStory);
         return this.userStoryOfSprint;
     }
 

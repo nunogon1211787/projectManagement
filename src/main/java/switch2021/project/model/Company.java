@@ -9,8 +9,8 @@ import java.util.Objects;
 public class Company {
 
     /**
-     * Company Atributes
-     * The company atributes are composed by all the store lists of a xiven project
+     * Company Attributes
+     * The company attributes are composed by all the store lists of a given project
      **/
     private final SystemUserStore systemUserStore;
     private final ProjectStore projectStore;
@@ -27,7 +27,7 @@ public class Company {
 
     /**
      * Company Constructor
-     * The company constructor initializes and populates all the store lists.
+     * The company constructor initializes and populates all the store lists
      **/
     public Company() {
         this.systemUserStore = new SystemUserStore();

@@ -1,0 +1,158 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title US032 - As SM/Team Member, I want to create task outside the scope of a user story
+
+class CreateTaskOutsideUserStoryUI{}
+
+class CreateTaskOutsideUserStoryController{
+-Company company
+-Project proj
+-TaskList taskList
+-TaskMapper taskMapper
++getTaskTypes()
++getTasksOfSprint(String projCode, int sprintID)
++getCurrentProjectTeam()
++createSprintTask(CreateTaskDTO createTaskDTO)
+}
+
+class Company{
++getTaskTypeStore()
++getProjectStore()
+}
+
+class TaskTypeStore{
+-List<TaskType> taskTypeList
++getTaskTypesNames()
+}
+
+class TaskType{
+-String name
++getName()
+}
+
+class ProjectStore{
+-List<Project> projectList
++getProjectByCode(String projCode)
+}
+
+class Project{
+-SprintList sList
+-ProjectTeam projectTeam
++hasCode(Sting projCode)
++getSprintList()
++getProjectTeam()
+}
+
+class SprintList{
+-List<Sprint> sprintList
++getSprint(int sprintID)
+}
+
+class Sprint{
+-int sprint_ID
+-LocalDate startDate
+-LocalDate endDate
+-TaskList sprintTaskList
++hasID(int sprintID)
++getTaskList()
+}
+
+class TaskList{
+-List<Task> taskList
++getTasksNames()
++createSprintTask(createTaskDTO createTaskDTO)
++saveTask(Task newSprintTask)
+-validate(Task newSprintTask)
+-add(Task newSprintTask)
+}
+
+class Task{
+-String name
+-String description
+-int effortEstimate
+-TaskType taskType
+-List<Task> tasksPrecedence
+-Resource responsible
++Task(String name,String description,int effortEstimate,TaskType taskType,List<Task> precedence,Resource responsible)
++getName()
++getDescription()
++getEffortEstimate()
++getTaskTypeName()
++getResponsibleEmail()
+}
+
+class ProjectTeam{
+-List<Resource> projectTeam
++getCurrentResourcesNames()
++getCurrentResource(String email)
+}
+
+class Resource{
+-String name
+-LocalDate startDate
+-LocalDate endDate
++isCurrent()
++getName()
+}
+
+class TaskMapper{
++toModel(CreateTaskDTO createTaskDTO)
++toDTO(Task newSprintTask)
+}
+
+class CreateTaskDTO{
+-String name
+-String description
+-int effortEstimate
+-String taskTypeName
+-String responsibleEmail
++CreateTaskDTO(Task newSprintTask)
++getName()
++getDescription()
++getEffortEstimate()
++getTaskTypeName()
++getResponsible()
+}
+
+CreateTaskOutsideUserStoryUI ..> CreateTaskOutsideUserStoryController
+CreateTaskOutsideUserStoryUI ..> CreateTaskDTO
+
+CreateTaskOutsideUserStoryController ..> Company
+CreateTaskOutsideUserStoryController ..> TaskTypeStore
+CreateTaskOutsideUserStoryController ..> ProjectStore
+CreateTaskOutsideUserStoryController ..> Project
+CreateTaskOutsideUserStoryController ..> SprintList
+CreateTaskOutsideUserStoryController ..> Sprint
+CreateTaskOutsideUserStoryController ..> TaskList
+CreateTaskOutsideUserStoryController ..> ProjectTeam
+CreateTaskOutsideUserStoryController ..> TaskMapper
+CreateTaskOutsideUserStoryController ..> CreateTaskDTO
+
+
+Company "1" *-- "1" TaskTypeStore
+Company "1" *-- "1" ProjectStore
+
+TaskTypeStore "1" *-- "*" TaskType
+
+TaskType "*" --o "1" Task
+
+ProjectStore "1" *-- "*" Project
+
+Project "1" *-- "1" SprintList
+Project "1" *-- "1" ProjectTeam
+
+SprintList "1" *-- "*" Sprint
+
+Sprint "1" *-- "1" TaskList
+
+TaskList "1" *-- "*" Task
+
+ProjectTeam "1" *-- "*" Resource
+
+TaskMapper ..> CreateTaskDTO
+
+@enduml
