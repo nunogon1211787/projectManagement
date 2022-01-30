@@ -1,6 +1,9 @@
-package switch2021.project.model;
+package switch2021.project.depracated;
 
 import lombok.Getter;
+import switch2021.project.model.Task;
+import switch2021.project.model.UserStory;
+import switch2021.project.model.UserStoryStatus;
 import switch2021.project.utils.Utils;
 
 import java.util.ArrayList;
@@ -8,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-//@Deprecated
+@Deprecated
 public class UserStoryOfSprint {
 
     /**

@@ -25,9 +25,9 @@ public class CreateUserStoryControllerTest {
     LocalDate endDate = LocalDate.of(2022, 1, 5);
     Resource input = new Resource(newUser, startDate, endDate, 100, .5);
 
-    // Test create userStory (Cris US009)
 
     @Test
+    @DisplayName("Test create userStory - US009")
     public void createUserStoryPriorityInvalidInf() {
         //Arrange
         company.getProjectStore().saveNewProject(project);
@@ -38,13 +38,13 @@ public class CreateUserStoryControllerTest {
         String description = "teste";
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                createUserStoryController.createUserStory(status, priority, description));
+                createUserStoryController.createUserStory("US001", priority, description,5));
         //Assert
         assertEquals("Check priority, cannot be < 0 or superior to 5.", exception.getMessage());
     }
 
     @Test
-    public void createUserStorydescriptionInvalidEmpty() {
+    public void createUserStoryDescriptionInvalidEmpty() {
         //Arrange
                company.getProjectStore().saveNewProject(project);
 
@@ -54,13 +54,13 @@ public class CreateUserStoryControllerTest {
         int priority = 1;
         String description = "";
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory(status, priority, description));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("US001", priority, description,5));
         //Assert
         assertTrue(exception.getMessage().contains("Description cannot be blank."));
     }
 
     @Test
-    public void createUserStorydescriptionInvalidShort() {
+    public void createUserStoryDescriptionInvalidShort() {
         //Arrange
 
         company.getProjectStore().saveNewProject(project);
@@ -71,7 +71,7 @@ public class CreateUserStoryControllerTest {
         int priority = 1;
         String description = "dd";
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory(status, priority, description));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("US001", priority, description,5));
         //Assert
         assertTrue(exception.getMessage().contains("Description must be at least 5 characters"));
     }
@@ -88,7 +88,7 @@ public class CreateUserStoryControllerTest {
         int priority = 6;
         String description = "teste";
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory(status, priority, description));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("US001", priority, description,5));
         //Assert
         assertEquals("Check priority, cannot be < 0 or superior to 5.", exception.getMessage());
     }
@@ -105,7 +105,7 @@ public class CreateUserStoryControllerTest {
         String description = "teste";
 
         // Act
-        boolean isUserStoryCreated = createUserStoryController.createUserStory(status, priority, description);
+        boolean isUserStoryCreated = createUserStoryController.createUserStory("US001", priority, description,5);
         //Assert
         assertTrue(isUserStoryCreated);
     }

@@ -20,7 +20,6 @@ public class RefineUserStoryControllerTest {
     @Test
     @DisplayName("Refine User Story Controller")
     public void RefineUserStoryController(){
-
         Company company = new Company();
         RefineUserStoryController refineUserStoryController = new RefineUserStoryController(company);
 
@@ -37,19 +36,20 @@ public class RefineUserStoryControllerTest {
         company.getProjectStore().saveNewProject(proj1);
 
         //UserStory Creation and save on Product Backlog
-        UserStoryStatus statusToDo = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To Do");
-        UserStory userStory1 = new UserStory(statusToDo,4,"userstory1");
+        UserStoryStatus statusToDo = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
+        UserStory userStory1 = new UserStory("US001",4,"userstory1",5);
         proj1.getProductBacklog().saveUserStory(userStory1);
-        UserStory userStory2 = new UserStory(statusToDo,3,"userstory2");
+        UserStory userStory2 = new UserStory("US002",3,"userstory2",5);
         proj1.getProductBacklog().saveUserStory(userStory2);
-        UserStory userStory3 = new UserStory(statusToDo,1,"userstory3");
+        UserStory userStory3 = new UserStory("US003",1,"userstory3",5);
         proj1.getProductBacklog().saveUserStory(userStory3);
-        UserStory userStory4 = new UserStory(statusToDo,0,"userstory4");
+        UserStory userStory4 = new UserStory("US004",0,"userstory4",5);
         proj1.getProductBacklog().saveUserStory(userStory4);
 
         //Act
         refineUserStoryController.getProject("Project_2022_1");
         refineUserStoryController.getProductBacklog();
+        refineUserStoryController.getUserStory(2);
         refineUserStoryController.updateRefinedUserStoryStatus(userStory2);
         boolean newUserStory = refineUserStoryController.createUserStory("newUserStoryCreated", 3, statusToDo);
         boolean newUserStory2 = refineUserStoryController.createUserStory("newUserStoryCreated2", 5, statusToDo);

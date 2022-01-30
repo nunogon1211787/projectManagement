@@ -139,19 +139,19 @@ public class SprintListTest {
     }
 
 
-//    @Test
-//    @DisplayName("Test to verify the creation of 2 sprints with the same information")
-//    public void createEqualsSprint() {
-//
-//        //Arrange
-//        SprintStore sprintStore1 = new SprintStore();
-//        Sprint sprint1 = sprintStore1.createSprint("Sprint_0", LocalDate.of(2022, 01, 01), 2);
-//        //Act
-//        Sprint sprint2 = sprintStore1.createSprint("Sprint_0", LocalDate.of(2022, 01, 01), 2);
-//        //Assert
-//        assertEquals(sprint1, sprint2);
-//
-//    }
+    @Test
+    @DisplayName("Test to verify the creation of 2 sprints with the same information")
+    public void createEqualsSprint() {
+
+        //Arrange
+        SprintList sprintStore1 = new SprintList();
+        Sprint sprint1 = sprintStore1.createSprint("Sprint_0", LocalDate.of(2022, 1, 1), 2);
+        //Act
+        Sprint sprint2 = sprintStore1.createSprint("Sprint_0", LocalDate.of(2022, 1, 1), 2);
+        //Assert
+        assertEquals(sprint1, sprint2);
+
+    }
 
     @Test
     @DisplayName("Test to search sprint by id")
@@ -200,7 +200,7 @@ public class SprintListTest {
 
     @Test
     @DisplayName("Test to verify if the act of saving a sprint is correct")
-    public void checkSavetheSprint () {
+    public void checkSaveTheSprint () {
 
        //Arrange
        SprintList sprintListTest = new SprintList();

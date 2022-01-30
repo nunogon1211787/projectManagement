@@ -6,12 +6,18 @@ import switch2021.project.utils.App;
 
 import java.util.List;
 
-/**
- * >>>>>> https://www.devmedia.com.br/padrao-de-projeto-singleton-em-java/26392 || https://www.geeksforgeeks.org/singleton-class-java/ <<<<<<
- **/
+
+//https://www.devmedia.com.br/padrao-de-projeto-singleton-em-java/26392
+//https://www.geeksforgeeks.org/singleton-class-java/
+
 
 
 public class CreateUserStoryController {
+
+
+    /**
+     * Attributes
+     **/
 
     private final Company company;
     private ProjectStore projectStore;
@@ -22,17 +28,22 @@ public class CreateUserStoryController {
 
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
+
  //   public CreateUserStoryController(){ this.company = App.getInstance().getCompany();}
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
+
     public CreateUserStoryController(Company company) {
         this.company = company;
     }
 
+    /**
+     * Methods
+     **/
 
     public List<Project> getProjectListByUserEmail(String email) {
         this.projectStore = this.company.getProjectStore();
@@ -45,9 +56,9 @@ public class CreateUserStoryController {
         return this.project;
     }
 
-    public boolean createUserStory(UserStoryStatus userStoryStatus, int priority, String description) {
+    public boolean createUserStory(String name, int priority, String description, int  estimateEffort) {
         this.productBacklog = this.project.getProductBacklog();
-        this.userStory = this.productBacklog.createUserStory(userStoryStatus, priority, description);
+        this.userStory = this.productBacklog.createUserStory(name, priority, description, estimateEffort);
         return this.productBacklog.saveUserStory(userStory);
     }
 }

@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.depracated.UserStoryOfSprint;
 import switch2021.project.stores.SprintList;
 
 import java.time.LocalDate;
@@ -12,11 +13,10 @@ class UserStoryOfSprintTest {
     Company company= new Company();
     Sprint sprint = new Sprint("Effort View", LocalDate.now());
     Sprint sprint1 = new Sprint("Effort View 1", LocalDate.now());
-    UserStoryStatus status = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
     SprintBacklog sprintBacklog = new SprintBacklog();
     int priority = 5;
     String description = "Validate";
-    UserStory story = new UserStory(status, priority, description);
+    UserStory story = new UserStory("US001", priority, description,5);
 
 //    @Test
 //    void hasCode() {

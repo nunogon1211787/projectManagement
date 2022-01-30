@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 class EditProjectInfoControllerTest {
 
 
-
     @Test
     void getProjectList() {
         //Arrange

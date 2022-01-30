@@ -55,4 +55,5 @@ Company "1" o-- "1" ProjectStore: has
 ProjectStore "1" *-- "0..*" Project: has
 Project "1" -> "1" ProductBacklog
 ProductBacklog "1" -> "0..*" UserStory
+
 @enduml

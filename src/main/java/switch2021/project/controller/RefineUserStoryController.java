@@ -5,24 +5,35 @@ import switch2021.project.stores.ProjectStore;
 import switch2021.project.utils.App;
 
 public class RefineUserStoryController {
+
+    /**
+     * Attributes
+     **/
+
     private final Company company;
     private Project project;
     private ProductBacklog productBacklog;
     private UserStory userStoryParent;
 
     /**
-     * Constructor to UI (with SINGLETON).
-     */
+     * Constructor to UI (with SINGLETON)
+     **/
+
     public RefineUserStoryController(){
         this.company = App.getInstance().getCompany();
     }
 
     /**
      * Constructor to test (without SINGLETON).
-     */
+     **/
+
     public RefineUserStoryController(Company company){
         this.company = company;
     }
+
+    /**
+     * Methods
+     **/
 
     public Project getProject(String projectCode){
         return this.project = company.getProjectStore().getProjectByCode(projectCode);

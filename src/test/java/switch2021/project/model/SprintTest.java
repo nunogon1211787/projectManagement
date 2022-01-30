@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.stores.ProjectStore;
+import switch2021.project.depracated.UserStoryOfSprint;
 import switch2021.project.stores.SprintList;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
@@ -189,7 +189,7 @@ public class SprintTest {
         LocalDate startDate = LocalDate.of(2022, 1, 2);
         Sprint sprint = new Sprint("Add an apple", startDate);
         UserStoryStatus status = new UserStoryStatus(1, "To Do");
-        UserStory userstory = new UserStory(status, 5, "AnaBoss");
+        UserStory userstory = new UserStory("US001", 5, "AnaBoss",5);
         UserStoryOfSprint userStoryOfSprint = new UserStoryOfSprint(userstory, 5 , 1 );
         sprint.getSprintBacklog().getUserStoryOfSprintList().add(userStoryOfSprint);
         assertEquals(1, sprint.getSprintBacklog().getUserStoryOfSprintList().size());
