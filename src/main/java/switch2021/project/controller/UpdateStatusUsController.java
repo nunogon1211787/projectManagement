@@ -42,12 +42,9 @@ public class UpdateStatusUsController {
          **/
 
         public String[] getUsAvailableStatusList() {
-
                 List<UserStoryStatus> statusList= this.USStore.getUserStoryStatusList();
                 for (int i = 0; i < statusList.size(); i++) {
-                        if(statusList.get(i).toString().equals("To do") ||
-                                statusList.get(i).toString().equals("Done") ||
-                                statusList.get(i).toString().equals("In progress") )
+                        if(statusList.get(i).isSprintAvailable() )
                         this.usList[i] = statusList.get(i).toString();
                 }
                 return this.usList;
@@ -56,7 +53,7 @@ public class UpdateStatusUsController {
         public boolean changeStatusOfUs(String code, int usId, UserStoryStatus userST) {
                 this.projectStore = company.getProjectStore();
                 this.project = this.projectStore.getProjectByCode(code);
-                this.sprint = this.project.getCurrentSprint();
+                this.sprint = this.project.getSprints().getCurrentSprint();
                 this.sprintBacklog = this.sprint.getSprintBacklog();
                 this.userStory = this.sprintBacklog.getUserStory(usId);
                 return this.userStory.setUserStoryStatusBoolean(userST);
