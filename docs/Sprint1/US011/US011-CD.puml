@@ -4,60 +4,49 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
+title US011 - As Authenticated User, i want to change his/her password
 
-class CreateUserStoryUI {
+
+class ChangePasswordUI {
 
 }
 
-class CreateUserStoryController {
-    +getProjectListByUserEmail(String email)
-    +getProjectByCode(String code)
-    +createUserStory(status, priority, description)
+class ChangePasswordController {
++changePassword(email, oldPassword, newPassword, newPasswordConfirmation)
 }
 
 class Company {
-    +getProjectStore()
++getSystemUserStore()
 }
 
-class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
+class SystemUserStore {
++getUserByEmail(email)
 }
 
-class Project {
--code : String
--productBacklog : ProductBacklog
-+getProductBacklog()
+
+class SystemUser {
+username : String
+email : String
+photo : String
+password : String
+passwordConfirmation : String
+function : String
+activateUser : boolean = False
++SystemUser(username, email, photo, password, passwordConfirmation, function, profile)
++isYourEmail(email)
++updatePassword(oldPassword, newPassword, newPasswordConfirmation)
+-validateOldPassword(oldPasswordUI)
+-setPassword(newPassword)
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+createUserStory(status, priority, description)
-+isValideUserStory(status, priority, description)
-+saveUserStory(us)
-+validateUserStory(us)
-}
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
-+UserStory(status, priority,description)
-}
+ChangePasswordUI ..> ChangePasswordController
 
-CreateUserStoryUI ..> CreateUserStoryController
+ChangePasswordController ..> Company
+ChangePasswordController ..> SystemUserStore
+ChangePasswordController ..> SystemUser
 
-CreateUserStoryController ..> Company
-CreateUserStoryController ..> ProjectStore
-CreateUserStoryController ..> Project
-CreateUserStoryController ..> ProductBacklog
 
-Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
-
+Company "1" o-- "1" SystemUserStore: has
+SystemUserStore "1" *-- "0..*" SystemUser: has
 @enduml
