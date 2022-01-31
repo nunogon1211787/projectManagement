@@ -16,9 +16,9 @@ public class GetListHResourceProjectController {
     /**
      * Constructor to UI (with SINGLETON).
      */
-    public GetListHResourceProjectController(){
-        this.company = App.getInstance().getCompany();
-    }
+//    public GetListHResourceProjectController(){
+//        this.company = App.getInstance().getCompany();
+//    }
 
     /**
      * Constructor to test (without SINGLETON).
