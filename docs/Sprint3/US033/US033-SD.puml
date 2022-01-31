@@ -11,7 +11,6 @@ participant ": RegisterWorkToTaskUI" as Ui
 participant ": RegisterWorkToTaskController" as Ctrl
 participant ": Company" as company
 participant "RegisterWorkToTaskMapper" as mapper
-participant "taskIdDTO: TaskIdDTO" as taskIdDTO
 participant "taskList: TaskList" as taskList
 participant "taskEffortDTO: TaskEffortDTO" as effortDTO
 participant "user : SystemUserStore" as userStore
