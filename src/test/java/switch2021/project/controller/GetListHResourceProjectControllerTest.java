@@ -19,7 +19,8 @@ public class GetListHResourceProjectControllerTest {
     public void GetHResourceProjectController() {
         //Arrange
         Company company = new Company();
-        GetListHResourceProjectController controller = new GetListHResourceProjectController(company);
+        ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
+        GetListHResourceProjectController controller = new GetListHResourceProjectController(company, projectTeamMapper);
         //create project and save it
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
@@ -84,7 +85,7 @@ public class GetListHResourceProjectControllerTest {
 
         //Act
 //    ResourceDto resDto = ProjectTeamMapper.toDto(manuelfernandes);
-        List<ResourceDto> resDtoList = ProjectTeamMapper.toDto(projTeam);
+        List<ResourceDto> resDtoList = projectTeamMapper.toDto(projTeam);
 
 
 //    controller.getProjectTeam("Project_2022_1");

@@ -18,6 +18,7 @@ public class ProjectTeamMapperTest {
     public void ProjectTeamMappertoDto() {
         //Arrange
         Company company = new Company();
+        ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
 
         //create project and save it
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
@@ -69,8 +70,8 @@ public class ProjectTeamMapperTest {
         resourceDtoListExp.add(resourceDtoExp5);
 
         //Act
-        ResourceDto resDto = ProjectTeamMapper.toDto(manuelfernandes);
-        List<ResourceDto> resDtoList = ProjectTeamMapper.toDto(projTeam);
+        ResourceDto resDto = projectTeamMapper.toDto(manuelfernandes);
+        List<ResourceDto> resDtoList = projectTeamMapper.toDto(projTeam);
 
         //Asserts
         assertEquals(resourceDtoExp5,resDto);
