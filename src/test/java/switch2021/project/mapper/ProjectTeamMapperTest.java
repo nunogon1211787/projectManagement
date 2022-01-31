@@ -15,7 +15,7 @@ public class ProjectTeamMapperTest {
 
     @Test
     @DisplayName("Project Team Mapper - toDto")
-    public void ProjectMappertoDto() {
+    public void ProjectTeamMappertoDto() {
         //Arrange
         Company company = new Company();
 
@@ -54,6 +54,7 @@ public class ProjectTeamMapperTest {
         proj1.getProjectTeam().saveResource(manuelbras);
         proj1.getProjectTeam().saveResource(manueljose);
         proj1.getProjectTeam().saveResource(manuelfernandes);
+
         //Resource List
         List<Resource> projTeam = proj1.getProjectTeam().getProjectTeamList();
 
