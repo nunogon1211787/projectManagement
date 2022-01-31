@@ -10,88 +10,94 @@ actor "SM/Team Mamber" as User
 participant ": RegisterWorkToTaskUI" as Ui
 participant ": RegisterWorkToTaskController" as Ctrl
 participant ": Company" as company
-participant "proj : Project" as project
-participant "sprintList : SprintList" as sprintList
-participant "sprint : Sprint" as sprint
-participant "userStoryOfSprintList : SprintBacklog" as usSprintList
-participant "userStoryOfSprint : UserStoryOfSprint" as usSprint
+participant "RegisterWorkToTaskMapper" as mapper
+participant "taskIdDTO: TaskIdDTO" as taskIdDTO
+participant "taskList: TaskList" as taskList
+participant "taskEffortDTO: TaskEffortDTO" as effortDTO
+participant "user : SystemUserStore" as userStore
 participant "task : Task" as task
-participant "effort : Effort" as effort
-
+participant "taskEffort : TaskEffort" as effort
 
 activate User
 
-User -> Ui: Access sprint list
-Ui -> Ctrl: getSprints()
-Ctrl-> project : getSprintList()
-project --> Ctrl : sprintList
-Ctrl ->sprintList : getSprints()
-sprintList -->Ctrl : sprintList
-Ctrl --> Ui: sprintList
-Ui -->User : Shows sprint list.
+User->Ui : starts registering a new task effort
+Ui->Ctrl: getCurrentProjectsByUserEmail(email)
+ref over Ctrl, company : US033_1-SD_getProjects
+Ctrl-->Ui:projectCodeDTOList
+Ui-->User: asks to select the project
 
-User -> Ui: Choose sprint
-Ui -> Ctrl: getSprint(id)
-Ctrl->sprintList : getSprint(id)
-loop for each know Sprint
-sprintList->sprint : hasSprintId(id)
-sprint--> sprintList: true
-end
-sprintList-->Ctrl: sprint
-Ctrl-->Ui : sprint
-Ui-->User : Show sprint details.
+User->Ui: selects the intended project
+Ui-->User:
 
-User -> Ui: Access UserStoryOfSprint list.
-Ui -> Ctrl: getSprintBacklog()
-Ctrl-> sprint : getSprintBacklog()
-sprint--> Ctrl: sprintBacklog
-Ctrl->usSprintList: getSprintUserStories()
-usSprintList-->Ctrl: userStoryOfSprintList
-Ctrl-->Ui : userStoryOfSprintList
-Ui-->User : Shows userStoryOfSprint list.
+User->Ui: Access project sprint list
+Ui->Ctrl: getProjectSprints(projCodeDTO)
+ref over Ctrl, company : US033_2-SD_getSprints
+Ctrl-->Ui: sprintIdDTOList
+Ui-->User: asks to select the sprint
 
-User -> Ui: Choose UserStoryOfSprint
-Ui -> Ctrl: getUserStoryOfSprint(id)
-Ctrl-> usSprintList : getUserStoryOfSprint(id)
-loop for each know UserStoryOfSprint
-usSprintList->usSprint : hasUserStoryOfSprint(id)
-usSprint--> usSprintList: true
-end
-usSprintList-->Ctrl: userStoryOfSprint
-Ctrl-->Ui : userStoryOfSprint
-Ui-->User : Show userStoryOfSprint details.
+User->Ui: selects the intended sprint
+Ui-->User:
 
-User -> Ui: Access task list.
-Ui -> Ctrl: getTasks()
-Ctrl ->usSprint : getTasks()
-usSprint --> Ctrl : taskList
-Ctrl-->Ui : taskList
-Ui-->User : Shows task list.
+User->Ui: Access sprint backlog
+Ui->Ctrl: getUserStories(sprintIdDTO)
+ref over Ctrl, company : US033_3-SD_getUserStories
+Ctrl-->Ui: userStoryIdDTOList
+Ui-->User: asks to select the user story
 
-User -> Ui: Choose task.
-Ui -> Ctrl: getTask(id)
-Ctrl-> usSprint : getTask(id)
-loop for each know Task
-usSprint->task : hasTask(id)
-task--> usSprint: true
-end
-usSprint-->Ctrl: task
-Ctrl-->Ui : task
-Ui-->User : Show task details.
+User->Ui: selects the intended user story
+Ui-->User:
+
+User->Ui: Access task list.
+Ui->Ctrl: getTasks(userStoryIdDTO)
+ref over Ctrl, company : US033_4-SD_getTasks
+Ctrl-->Ui: taskIdDTOList
+Ui-->User: asks to select the task
+
+User->Ui: selects the intended task
+Ui-->User:
 
 User -> Ui: Starts registration of a new effort.
-Ui-->User: requests data(timeSpent, workDescription)
+Ui-->User: requests data(workHours, workDate, comment, attachment)
 User -> Ui: types requested data
-Ui -> Ctrl: createEffort(timeSpent, workDescription)
-Ctrl -> task: createEffort(timeSpent, workDescription)
-task->effort **: create(timeSpent, workDescription)
-task--> Ctrl: effort
-Ctrl -> task: saveEffort(effort)
-task -> task: validateEffort(effort)
+Ui -> Ctrl: createTaskEffort(taskEffortDTO)
+Ctrl -> mapper: taskEffortDTOToTaskEffort(taskEffortDTO)
+mapper->taskIdDTO: getTaskId()
+taskIdDTO-->mapper: taskId
+mapper->taskList: getTaskById(taskId)
+loop for each task in taskList
+taskList->task: hasId(taskId)
+task-->taskList: true
+end
+taskList-->mapper: task
+mapper->effortDTO: getWorkHours()
+effortDTO-->mapper: workHours
+mapper->effortDTO: getWorkDate()
+effortDTO-->mapper: workdate
+mapper->effortDTO: getComment()
+effortDTO-->mapper: comment
+mapper->effortDTO: getAttachment()
+effortDTO-->mapper: attachment
+mapper->effortDTO: getEmail()
+effortDTO-->mapper: email
+mapper->userStore: getUserByEmail(email)
+userStore-->mapper: user
+mapper->task:createTaskEffort(workHours, workDate, comment, attachment, user)
+task->effort **: createTaskEffort(workHours, workDate, comment, attachment, user)
+task-->mapper: effort
+mapper--> Ctrl: effort
+Ctrl -> task: saveTaskEffort(effort)
+task -> task: validateTaskEffort(effort)
 deactivate task
 task -> task: add(effort)
 deactivate task
+task -> task: updateHoursSpent(effort)
+deactivate task
+task -> task: updateExecutionPercentage()
+deactivate task
 task-->Ctrl: true
+Ctrl -> us: updateWorkDone()
+us-->Ctrl: true
 Ctrl-->Ui : true
+
 Ui-->User : Informs operation success.
 @enduml
