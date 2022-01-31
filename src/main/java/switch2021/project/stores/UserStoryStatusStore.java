@@ -1,7 +1,5 @@
 package switch2021.project.stores;
 
-import switch2021.project.model.Project;
-import switch2021.project.model.ProjectTeam;
 import switch2021.project.model.UserStoryStatus;
 
 import java.util.ArrayList;
@@ -32,8 +30,11 @@ public class UserStoryStatusStore {
 
     public void populateDefault() {
         this.userStoryStatusList.add(new UserStoryStatus("To do"));
+        userStoryStatusList.get(0).setSprintAvailable(true);
         this.userStoryStatusList.add(new UserStoryStatus("In progress"));
+        userStoryStatusList.get(1).setSprintAvailable(true);
         this.userStoryStatusList.add(new UserStoryStatus("Done"));
+        userStoryStatusList.get(2).setSprintAvailable(true);
         this.userStoryStatusList.add(new UserStoryStatus("Cancelled"));
         this.userStoryStatusList.add(new UserStoryStatus("In test"));
         this.userStoryStatusList.add(new UserStoryStatus("Refined"));
