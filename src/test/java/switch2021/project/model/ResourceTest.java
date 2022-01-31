@@ -74,8 +74,8 @@ class ResourceTest {
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
         SystemUser testUser = new SystemUser("xyz", "test", "des", "gth", "gth","", userProfile);
-        LocalDate startDate = LocalDate.of(2021,12,31);
-        LocalDate endDate = LocalDate.of(2022, 1,31);
+        LocalDate startDate = LocalDate.now().minusDays(7);
+        LocalDate endDate = LocalDate.now().plusDays(7);
         Resource test = new Resource(testUser, LocalDate.now().plusWeeks(1), LocalDate.now().plusWeeks(3), 100, .5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
