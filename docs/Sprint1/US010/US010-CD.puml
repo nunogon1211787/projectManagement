@@ -4,60 +4,59 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
+title US010 - As a Authenticated user, i want to update its own data (e.g. photo, function...)
 
-class CreateUserStoryUI {
-
+class UpdatePersonalDataUI {
 }
 
-class CreateUserStoryController {
-    +getProjectListByUserEmail(String email)
-    +getProjectByCode(String code)
-    +createUserStory(status, priority, description)
+class UpdatePersonalDataController {
++getUser(email)
++updateSystemUser(username, function, photo)
 }
 
 class Company {
-    +getProjectStore()
++getSystemUserStore()
 }
 
-class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
+class SystemUserStore {
++getUserByEmail(email)
 }
 
-class Project {
--code : String
--productBacklog : ProductBacklog
-+getProductBacklog()
+
+class SystemUser {
+username : String
+email : String
+photo : String
+password : String
+passwordConfirmation : String
+function : String
+activateUser : boolean = False
++SystemUser(username, email, photo, password, passwordConfirmation, function, profile)
++isYourEmail(email)
++setAllData(username, function, photo)
++setUsername(username)
++setFunction(function)
++setPhoto(photo)
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+createUserStory(status, priority, description)
-+isValideUserStory(status, priority, description)
-+saveUserStory(us)
-+validateUserStory(us)
+
+class SystemUserMapper {
++toUserDTO(user)
+-toDTO(user)
++create()
 }
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
-+UserStory(status, priority,description)
-}
 
-CreateUserStoryUI ..> CreateUserStoryController
+UpdatePersonalDataUI ..> UpdatePersonalDataController
 
-CreateUserStoryController ..> Company
-CreateUserStoryController ..> ProjectStore
-CreateUserStoryController ..> Project
-CreateUserStoryController ..> ProductBacklog
+UpdatePersonalDataController ..> Company
+UpdatePersonalDataController ..> SystemUserStore
+UpdatePersonalDataController ..> SystemUser
+UpdatePersonalDataController ..> SystemUserMapper
 
-Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+
+Company "1" o-- "1" SystemUserStore: has
+SystemUserStore "1" *-- "0..*" SystemUser: has
+
 
 @enduml

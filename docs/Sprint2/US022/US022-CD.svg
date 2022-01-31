@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="999px" preserveAspectRatio="none" style="width:1101px;height:999px;background:#FFFFFF;" version="1.1" viewBox="0 0 1101 999" width="1101px" zoomAndPan="magnify"><defs><filter height="300%" id="fjb07dynh457a" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="451" x="318.75" y="17.4023">US029 - As Project Manager, I want to start a sprint</text><!--MD5=[c6270199c04e1ecb207ea5c800b90bdc]
+class startASprintUI--><rect codeLine="8" fill="#FEFECE" filter="url(#fjb07dynh457a)" height="40.1328" id="startASprintUI" style="stroke:#A80036;stroke-width:1.5;" width="84" x="354.5" y="28.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="78" x="357.5" y="44.8008">startASprintUI</text><line style="stroke:#A80036;stroke-width:1.5;" x1="355.5" x2="437.5" y1="52.332" y2="52.332"/><line style="stroke:#A80036;stroke-width:1.5;" x1="355.5" x2="437.5" y1="60.332" y2="60.332"/><!--MD5=[29ac4140c601102a570d036215ece24d]
+class startASprintController--><rect codeLine="12" fill="#FEFECE" filter="url(#fjb07dynh457a)" height="78.998" id="startASprintController" style="stroke:#A80036;stroke-width:1.5;" width="154" x="319.5" y="129.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="123" x="335" y="145.8008">startASprintController</text><line style="stroke:#A80036;stroke-width:1.5;" x1="320.5" x2="472.5" y1="153.332" y2="153.332"/><line style="stroke:#A80036;stroke-width:1.5;" x1="320.5" x2="472.5" y1="161.332" y2="161.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="100" x="325.5" y="175.9668">+getActualSprint()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="142" x="325.5" y="188.9219">+getCurrentProjectTeam()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="116" x="325.5" y="201.877">+setNewSprintTeam()</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect codeLine="18" fill="#FEFECE" filter="url(#fjb07dynh457a)" height="53.0879" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="111" x="260" y="269.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="288.5" y="285.8008">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="261" x2="370" y1="293.332" y2="293.332"/><line style="stroke:#A80036;stroke-width:1.5;" x1="261" x2="370" y1="301.332" y2="301.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="99" x="266" y="315.9668">+getProjectStore()</text><!--MD5=[0cf43f64de24b70e8ffe65ff9ee7abee]
+class ProjectStore--><rect codeLine="22" fill="#FEFECE" filter="url(#fjb07dynh457a)" height="53.0879" id="ProjectStore" style="stroke:#A80036;stroke-width:1.5;" width="184" x="295.5" y="399.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="69" x="353" y="415.8008">ProjectStore</text><line style="stroke:#A80036;stroke-width:1.5;" x1="296.5" x2="478.5" y1="423.332" y2="423.332"/><line style="stroke:#A80036;stroke-width:1.5;" x1="296.5" x2="478.5" y1="431.332" y2="431.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="172" x="301.5" y="445.9668">+getProjectByCode(String code)</text><!--MD5=[79d378210367c0c6ec62ef762ddfbd1b]
+class Project--><rect codeLine="26" fill="#FEFECE" filter="url(#fjb07dynh457a)" height="91.9531" id="Project" style="stroke:#A80036;stroke-width:1.5;" width="112" x="476.5" y="529.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="40" x="512.5" y="545.8008">Project</text><line style="stroke:#A80036;stroke-width:1.5;" x1="477.5" x2="587.5" y1="553.332" y2="553.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="67" x="482.5" y="567.9668">code : String</text><line style="stroke:#A80036;stroke-width:1.5;" x1="477.5" x2="587.5" y1="574.2871" y2="574.2871"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="59" x="482.5" y="588.9219">-getCode()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="85" x="482.5" y="601.877">+getSprintList()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="100" x="482.5" y="614.832">+getProjectTeam()</text><!--MD5=[65512b4198a937e8c73da9f2b73fc58d]
+class SprintList--><rect codeLine="33" fill="#FEFECE" filter="url(#fjb07dynh457a)" height="78.998" id="SprintList" style="stroke:#A80036;stroke-width:1.5;" width="165" x="7" y="906.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="52" x="63.5" y="922.8008">SprintList</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="171" y1="930.332" y2="930.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="129" x="13" y="944.9668">sprintList : List&lt;Sprint&gt;</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="171" y1="951.2871" y2="951.2871"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="76" x="13" y="965.9219">+getSprint(id)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="153" x="13" y="978.877">-validateStartDate(startDate)</text><!--MD5=[452a66c2e8d45f5bd209be454bbcd04f]
+class Sprint--><rect codeLine="39" fill="#FEFECE" filter="url(#fjb07dynh457a)" height="130.8184" id="Sprint" style="stroke:#A80036;stroke-width:1.5;" width="122" x="113.5" y="698.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="33" x="158" y="714.8008">Sprint</text><line style="stroke:#A80036;stroke-width:1.5;" x1="114.5" x2="234.5" y1="722.332" y2="722.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="30" x="119.5" y="736.9668">id: int</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="110" x="119.5" y="749.9219">startDate : LocalDate</text><line style="stroke:#A80036;stroke-width:1.5;" x1="114.5" x2="234.5" y1="756.2422" y2="756.2422"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="89" x="119.5" y="770.877">+hasSprintID(id)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="82" x="119.5" y="783.832">+setStartDate()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="110" x="119.5" y="796.7871">+setProductOwner()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="103" x="119.5" y="809.7422">+setScrumMaster()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="105" x="119.5" y="822.6973">+setTeamMember()</text><!--MD5=[ea85c9eeae48c9b9754651e25079a913]
+class ProjectTeam--><rect codeLine="50" fill="#FEFECE" filter="url(#fjb07dynh457a)" height="78.998" id="ProjectTeam" style="stroke:#A80036;stroke-width:1.5;" width="194" x="893.5" y="724.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73" x="954" y="740.8008">ProjectTeam</text><line style="stroke:#A80036;stroke-width:1.5;" x1="894.5" x2="1086.5" y1="748.332" y2="748.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="182" x="899.5" y="762.9668">projectTeamList : List&lt;Resource&gt;</text><line style="stroke:#A80036;stroke-width:1.5;" x1="894.5" x2="1086.5" y1="769.2871" y2="769.2871"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="132" x="899.5" y="783.9219">+getCurrentResources()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="140" x="899.5" y="796.877">+getResourceByRole(role)</text><!--MD5=[6b13f1b330d33795af281e5c1dfe1e98]
+class Resource--><rect codeLine="56" fill="#FEFECE" filter="url(#fjb07dynh457a)" height="130.8184" id="Resource" style="stroke:#A80036;stroke-width:1.5;" width="587" x="271" y="698.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="538" y="714.8008">Resource</text><line style="stroke:#A80036;stroke-width:1.5;" x1="272" x2="857" y1="722.332" y2="722.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="62" x="277" y="736.9668">role : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="110" x="277" y="749.9219">startDate : LocalDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="102" x="277" y="762.877">sprintDuration : int</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="173" x="277" y="775.832">percentageOfAllocation : double</text><line style="stroke:#A80036;stroke-width:1.5;" x1="272" x2="857" y1="782.1523" y2="782.1523"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="68" x="277" y="796.7871">+isCurrent()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="395" x="277" y="809.7422">+checkIfResourceCanBeAssignedToRoleByDate(startDate, sprintDuration)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="575" x="277" y="822.6973">+checkIfResourceCanBeAssignedToRoleByPercentageOfAllocation(percentageOfAllocation, sprintDuration)</text><!--MD5=[5bf9a740a094f45d2b9287dfdee10de8]
+link startASprintUI to startASprintController--><path codeLine="67" d="M396.5,68.2392 C396.5,83.1892 396.5,104.6092 396.5,123.7392 " fill="none" id="startASprintUI-to-startASprintController" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="396.5,129.0692,400.5,120.0692,396.5,124.0692,392.5,120.0692,396.5,129.0692" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[86b3dad26ca31ed19608a7c50400bdcc]
+link startASprintController to Company--><path codeLine="69" d="M371.54,208.2192 C359.71,226.4792 345.8,247.9392 334.8,264.9192 " fill="none" id="startASprintController-to-Company" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="332.06,269.1392,340.3045,263.7514,334.7739,264.9398,333.5855,259.4092,332.06,269.1392" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[d52caef5c9545c5dc62e3e5bfe6b437f]
+link startASprintController to ProjectStore--><path codeLine="70" d="M395.13,208.4292 C393.34,259.2692 390.22,347.5092 388.58,394.0092 " fill="none" id="startASprintController-to-ProjectStore" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="388.4,399.1892,392.7313,390.3439,388.5856,394.1927,384.7368,390.047,388.4,399.1892" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[55148007cce8a681e07e751aad50cebe]
+link startASprintController to Project--><path codeLine="71" d="M416.69,208.4892 C439.29,253.3392 475.6,329.8792 497.5,399.1992 C510.49,440.3092 519.7,488.4392 525.4,523.7992 " fill="none" id="startASprintController-to-Project" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="526.21,528.9292,528.7475,519.4129,525.4251,523.9912,520.8467,520.6688,526.21,528.9292" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[6dde9e529453c5740124b7e659f05dd6]
+link startASprintController to SprintList--><path codeLine="72" d="M319.41,182.4892 C220.22,201.1692 60.5,239.7692 60.5,294.6992 C60.5,294.6992 60.5,294.6992 60.5,764.6992 C60.5,811.6092 70.22,864.5392 78.41,900.7892 " fill="none" id="startASprintController-to-SprintList" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="79.6,906.0092,81.4925,896.3439,78.4851,901.1351,73.6939,898.1277,79.6,906.0092" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[5b596d19b82c477f8093bdb6bdaf504c]
+link startASprintController to Sprint--><path codeLine="73" d="M319.21,184.1292 C260.75,200.0292 190.5,232.1592 190.5,294.6992 C190.5,294.6992 190.5,294.6992 190.5,576.1992 C190.5,614.9192 187.03,657.9892 183.33,692.9792 " fill="none" id="startASprintController-to-Sprint" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="182.78,698.0792,187.7091,689.5526,183.3086,693.1072,179.754,688.7068,182.78,698.0792" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[8d9e5f8fd2c4fef0f8b1ada05b64968d]
+link startASprintController to ProjectTeam--><path codeLine="74" d="M473.6,172.4992 C617.27,179.8192 911.5,205.6792 911.5,294.6992 C911.5,294.6992 911.5,294.6992 911.5,576.1992 C911.5,628.5692 938.24,683.1392 960.61,719.6092 " fill="none" id="startASprintController-to-ProjectTeam" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="963.31,723.9692,961.9705,714.2119,960.6767,719.7188,955.1698,718.4251,963.31,723.9692" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[5080d0b1308565521d8577f7e8059843]
+reverse link Company to ProjectStore--><path codeLine="76" d="M336.31,333.6992 C348.12,354.6892 362.59,380.4092 373.13,399.1492 " fill="none" id="Company-backto-ProjectStore" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#FFFFFF" points="329.9,322.2992,329.3617,329.4902,335.7925,332.7528,336.3308,325.5619,329.9,322.2992" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="357.5" y="365.7676">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="324.305" y="342.7789">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="360.6523" y="388.445">1</text><!--MD5=[c2999c5e21c0a7115ef87c36c02875b6]
+reverse link ProjectStore to Project--><path codeLine="77" d="M422.02,461.8192 C441.85,481.9792 466.94,507.5092 488.21,529.1392 " fill="none" id="ProjectStore-backto-Project" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="412.76,452.3892,414.1137,459.4721,421.1725,460.9467,419.8187,453.8638,412.76,452.3892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="456.5" y="495.7676">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="409.6764" y="472.8898">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="457.7437" y="518.5336">0..*</text><!--MD5=[c1411256f47ae1ed9a3bb6846f611a01]
+reverse link Project to Sprint--><path codeLine="78" d="M463.95,600.1592 C405.84,621.8592 321.38,656.7292 253.5,698.1992 C247.61,701.7992 241.68,705.7992 235.86,709.9992 " fill="none" id="Project-backto-Sprint" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="476.3,595.5992,469.2865,593.9227,465.0415,599.752,472.055,601.4284,476.3,595.5992" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="335.5" y="664.7676">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="460.5869" y="594.8433">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="240.8989" y="700.7564">0..*</text><!--MD5=[352310352512ea7c8ebcd3b871b8d730]
+reverse link Project to ProjectTeam--><path codeLine="79" d="M601.21,596.8492 C671.43,618.8292 783,656.1792 875.5,698.1992 C892.28,705.8192 909.87,715.0292 926.12,724.0692 " fill="none" id="Project-backto-ProjectTeam" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="588.59,592.9292,593.133,598.5294,600.0496,596.4897,595.5066,590.8896,588.59,592.9292" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="802.5" y="664.7676">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="596.6646" y="591.8962">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="906.3672" y="713.564">1</text><!--MD5=[cdd69db85b029f01c6adb2438fc81227]
+reverse link Project to Resource--><path codeLine="80" d="M542.45,634.1892 C545.92,654.3892 549.82,677.1692 553.38,697.8792 " fill="none" id="Project-backto-Resource" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="540.25,621.3492,537.3229,627.9395,542.2805,633.1762,545.2076,626.5859,540.25,621.3492" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="548.5" y="664.7676">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="532.8008" y="641.8237">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="528.9606" y="687.4551">0..*</text><!--MD5=[2adfd8e4689decb638c88ac7f53520b8]
+reverse link Sprint to SprintList--><path codeLine="81" d="M138.3,841.3492 C127.74,863.7292 116.64,887.2292 107.7,906.1492 " fill="none" id="Sprint-backto-SprintList" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#FFFFFF" points="143.93,829.4292,137.7496,833.1445,138.802,840.2784,144.9824,836.5631,143.93,829.4292" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="130.5" y="872.7676">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="132.365" y="849.5748">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="102.2294" y="895.3646">1</text><!--MD5=[d224dcdc9f26fb4a4fbbf44cfb60afb4]
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+title US029 - As Project Manager, I want to start a sprint
+
+class startASprintUI {
+
+}
+
+class startASprintController {
++getActualSprint()
++getCurrentProjectTeam()
++setNewSprintTeam()
+}
+
+class Company {
++getProjectStore()
+}
+
+class ProjectStore {
++getProjectByCode(String code)
+}
+
+class Project {
+code : String
+-getCode()
++getSprintList()
++getProjectTeam()
+}
+
+class SprintList {
+sprintList : List<Sprint>
++getSprint(id)
+-validateStartDate(startDate)
+}
+
+class Sprint {
+id: int
+startDate : LocalDate
++hasSprintID(id)
++setStartDate()
++setProductOwner()
++setScrumMaster()
++setTeamMember()
+}
+
+
+class ProjectTeam {
+projectTeamList : List<Resource>
++getCurrentResources()
++getResourceByRole(role)
+}
+
+class Resource {
+role : String
+startDate : LocalDate
+sprintDuration : int
+percentageOfAllocation : double
++isCurrent()
++checkIfResourceCanBeAssignedToRoleByDate(startDate, sprintDuration)
++checkIfResourceCanBeAssignedToRoleByPercentageOfAllocation(percentageOfAllocation, sprintDuration)
+}
+
+
+startASprintUI ..> startASprintController
+
+startASprintController ..> Company
+startASprintController ..> ProjectStore
+startASprintController ..> Project
+startASprintController ..> SprintList
+startASprintController ..> Sprint
+startASprintController ..> ProjectTeam
+
+Company "1" o- - "1" ProjectStore: has
+ProjectStore "1" *- - "0..*" Project: has
+Project "1" *- - "0..*" Sprint: has
+Project "1" *- - "1" ProjectTeam: has
+Project "1" *- - "0..*" Resource: has
+Sprint "1" o- - "1" SprintList: has
+
+@enduml
+
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+title US029 - As Project Manager, I want to start a sprint
+
+class startASprintUI {
+
+}
+
+class startASprintController {
++getActualSprint()
++getCurrentProjectTeam()
++setNewSprintTeam()
+}
+
+class Company {
++getProjectStore()
+}
+
+class ProjectStore {
++getProjectByCode(String code)
+}
+
+class Project {
+code : String
+-getCode()
++getSprintList()
++getProjectTeam()
+}
+
+class SprintList {
+sprintList : List<Sprint>
++getSprint(id)
+-validateStartDate(startDate)
+}
+
+class Sprint {
+id: int
+startDate : LocalDate
++hasSprintID(id)
++setStartDate()
++setProductOwner()
++setScrumMaster()
++setTeamMember()
+}
+
+
+class ProjectTeam {
+projectTeamList : List<Resource>
++getCurrentResources()
++getResourceByRole(role)
+}
+
+class Resource {
+role : String
+startDate : LocalDate
+sprintDuration : int
+percentageOfAllocation : double
++isCurrent()
++checkIfResourceCanBeAssignedToRoleByDate(startDate, sprintDuration)
++checkIfResourceCanBeAssignedToRoleByPercentageOfAllocation(percentageOfAllocation, sprintDuration)
+}
+
+
+startASprintUI ..> startASprintController
+
+startASprintController ..> Company
+startASprintController ..> ProjectStore
+startASprintController ..> Project
+startASprintController ..> SprintList
+startASprintController ..> Sprint
+startASprintController ..> ProjectTeam
+
+Company "1" o- - "1" ProjectStore: has
+ProjectStore "1" *- - "0..*" Project: has
+Project "1" *- - "0..*" Sprint: has
+Project "1" *- - "1" ProjectTeam: has
+Project "1" *- - "0..*" Resource: has
+Sprint "1" o- - "1" SprintList: has
+
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 WET 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: pt
+Country: PT
+--></g></svg>

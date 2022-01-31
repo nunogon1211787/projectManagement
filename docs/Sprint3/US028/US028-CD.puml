@@ -4,16 +4,14 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-title US024 - As Administrator, I want to get a list all user accounts and their status
+title Class Diagram Get List of Human Resources in a Project
 
-class UserAccountStatusUI {
+class GetListHResourceProjectUI {
 
 }
 
-class ProductBacklogSortController {
-    +getProjectListByUserEmail(String email)
-    +getProject(String code)
-    +getUsSortedByPriority()
+class GetListHResourceProjectController {
+    +getProjectTeam()
 }
 
 class Company {
@@ -21,39 +19,39 @@ class Company {
 }
 
 class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
+    +getProjectByCode(projCode)
 }
 
 class Project {
--code : String
--productBacklog : ProductBacklog
-+getProductBacklog()
+    +getProjectTeam()
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+getUsSortedByPriority()
+class ProjectTeam {
+    +getProjectTeamList()
+    +get(i)
 }
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
+class ProjectTeamMapper {
+    +toDTO(projectTeamList)
+    +createResourceDTO(res)
 }
 
-UserAccountStatusUI ..> ProductBacklogSortController
+class ResourceDTO {
+    +ResourceDTO()
+}
 
-ProductBacklogSortController ..> Company
-ProductBacklogSortController ..> ProjectStore
-ProductBacklogSortController ..> Project
-ProductBacklogSortController ..> ProductBacklog
+GetListHResourceProjectUI ..> GetListHResourceProjectController
 
-Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+GetListHResourceProjectController ..> ProjectTeam
+GetListHResourceProjectController ..> Company
+GetListHResourceProjectController ..> ProjectStore
+GetListHResourceProjectController ..> Project
+GetListHResourceProjectController ..> ProjectTeamMapper
+
+'GetListHResourceProjectController -> Company
+Company "1" o-- "1" ProjectStore
+ProjectStore"1" *-- "*"Project
+Project"1" *-- "1"ProjectTeam
+ProjectTeamMapper "1" -> "*"ResourceDTO: ??
 
 @enduml
