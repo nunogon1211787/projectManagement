@@ -61,8 +61,8 @@ Ui-->User: requests data(workHours, workDate, comment, attachment)
 User -> Ui: types requested data
 Ui -> Ctrl: createTaskEffort(taskEffortDTO)
 Ctrl -> mapper: taskEffortDTOToTaskEffort(taskEffortDTO)
-mapper->taskIdDTO: getTaskId()
-taskIdDTO-->mapper: taskId
+mapper->effortDTO: getTaskId()
+effortDTO-->mapper: taskId
 mapper->taskList: getTaskById(taskId)
 loop for each task in taskList
 taskList->task: hasId(taskId)
