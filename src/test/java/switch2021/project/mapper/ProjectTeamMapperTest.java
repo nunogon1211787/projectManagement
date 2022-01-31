@@ -59,9 +59,9 @@ public class ProjectTeamMapperTest {
         List<Resource> projTeam = proj1.getProjectTeam().getProjectTeamList();
 
         //create ResourceDto
-        ResourceDto resourceDtoExp1 = new ResourceDto("manuelbras", 2021,11,1,2022,11,15,100,0.5);
-        ResourceDto resourceDtoExp3 = new ResourceDto("manueljose", 2021,11,1,2022,11,15,100,.5);
-        ResourceDto resourceDtoExp5 = new ResourceDto("manuelfernandes", 2021,11,16,2022,11,30,100,1);
+        ResourceDto resourceDtoExp1 = new ResourceDto("manuelbras", projectRole.getName(),"2021/11/1","2022/11/15",100,0.5);
+        ResourceDto resourceDtoExp3 = new ResourceDto("manueljose", projectRole.getName(), "2021/11/1", "2022/11/15",100,.5);
+        ResourceDto resourceDtoExp5 = new ResourceDto("manuelfernandes", projectRole.getName(), "2021/11/16","2022/11/30",100,1);
         //create ResourceDtoList
         List<ResourceDto> resourceDtoListExp = new ArrayList<>();
         resourceDtoListExp.add(resourceDtoExp1);
