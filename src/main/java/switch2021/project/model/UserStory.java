@@ -5,13 +5,11 @@ import switch2021.project.stores.TaskList;
 
 
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * ---> Getters e Setters e Override <--- - Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java.
  */
 @Data
-
 
 public class UserStory {
 
@@ -25,7 +23,7 @@ public class UserStory {
     private int priority;
     private String description;
     private UserStory ParentUserStory;
-    private int estimateEffort;
+    private int timeEstimate;
     private TaskList tasks;
 
     /**
@@ -38,15 +36,15 @@ public class UserStory {
         this(new UserStoryStatus("To do") , priority, description);
     }*/
 
-    //Principal Construtor (acho)
-    public UserStory(String name, int priority, String description, int estimateEffort) {
+    //Main Constructor(acho)
+    public UserStory(String name, int priority, String description, int timeEstimate) {
         isValidUserStory(name, priority, description);
 
         this.name = name;
         this.description = description;
         this.userStoryStatus = new UserStoryStatus("To do");
         this.priority = priority;
-        this.estimateEffort = estimateEffort;
+        this.timeEstimate = timeEstimate;
         this.tasks = new TaskList();
     }
 
@@ -141,12 +139,12 @@ public class UserStory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserStory userStory = (UserStory) o;
-        return id_UserStory == userStory.id_UserStory && priority == userStory.priority && estimateEffort == userStory.estimateEffort && Objects.equals(name, userStory.name) && Objects.equals(userStoryStatus, userStory.userStoryStatus) && Objects.equals(description, userStory.description) && Objects.equals(ParentUserStory, userStory.ParentUserStory) && Objects.equals(tasks, userStory.tasks);
+        return id_UserStory == userStory.id_UserStory && priority == userStory.priority && timeEstimate == userStory.timeEstimate && Objects.equals(name, userStory.name) && Objects.equals(userStoryStatus, userStory.userStoryStatus) && Objects.equals(description, userStory.description) && Objects.equals(ParentUserStory, userStory.ParentUserStory) && Objects.equals(tasks, userStory.tasks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_UserStory, name, userStoryStatus, priority, description, ParentUserStory, estimateEffort, tasks);
+        return Objects.hash(id_UserStory, name, userStoryStatus, priority, description, ParentUserStory, timeEstimate, tasks);
     }
 }
 
