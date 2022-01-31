@@ -17,6 +17,10 @@ public class UserStoryStatus {
         this.description = description;
     }
 
+    public boolean isSprintAvailable() {
+        return sprintAvailable;
+    }
+
     public void setSprintAvailable(boolean sprintAvailable) {
         this.sprintAvailable = sprintAvailable;
     }

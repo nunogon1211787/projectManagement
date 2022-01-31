@@ -6,6 +6,7 @@ import switch2021.project.stores.UserStoryStatusStore;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,6 +28,19 @@ class UpdateStatusUsControllerTest {
 
     @Test
     void getUsAvailableStatusList() {
+        //arrange
+        company = new Company();
+        UpdateStatusUsController update = new UpdateStatusUsController(company);
+
+        //act
+        String todo = "To do";
+        String progress = "In progress";
+        String done = "Done";
+        List <String> expectedList = update.getUsAvailableStatusList();
+        List <String> actualList = Arrays.asList(todo, progress, done);
+
+        //assert
+        assertEquals(expectedList,actualList);
     }
 
     @Test
@@ -34,7 +48,6 @@ class UpdateStatusUsControllerTest {
         //arrange
         company = new Company();
         UpdateStatusUsController update = new UpdateStatusUsController(company);
-
         this.userStoryStatusStore.populateDefault();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
         typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
@@ -45,10 +58,8 @@ class UpdateStatusUsControllerTest {
         company.getProjectStore().saveNewProject(project);
         userStory = new UserStory("US001", 2, "Fazer tal",5);
         userStory2 = new UserStory("US001", 3, "Fazer tal e coiso",5);
-
         sprint = project.getSprints().createSprint("Sprintao", LocalDate.now(),12);
         project.getSprints().saveSprint(sprint);
-
         project.getCurrentSprint().getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         project.getCurrentSprint().getSprintBacklog().saveUserStoryToSprintBacklog(userStory2);
 
