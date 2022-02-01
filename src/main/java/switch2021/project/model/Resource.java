@@ -115,7 +115,17 @@ public class Resource {
 
     //Check if is current
     public boolean isCurrent() {
-        return (this.startDate.isBefore(LocalDate.now()) && this.endDate.isAfter(LocalDate.now()));
+
+        boolean result = false;
+
+        //To check start date
+        if(this.startDate.isBefore(LocalDate.now()) || this.startDate.isEqual(LocalDate.now())){
+            if(this.endDate.isAfter(LocalDate.now()) || this.endDate.isEqual(LocalDate.now())){
+                result = true;
+            }
+        }
+
+        return result;
     }
 
 

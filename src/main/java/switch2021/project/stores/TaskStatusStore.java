@@ -3,6 +3,7 @@ package switch2021.project.stores;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.TaskStatus;
+import switch2021.project.model.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +14,29 @@ import java.util.Objects;
 @Setter
 public class TaskStatusStore {
 
+    /**
+     * Atributtes.
+     */
     private final List<String> taskList; // Review this atributte. The class need to have a list of Objects that are responsible.
     private List<TaskStatus> taskStatusList;
 
+
+    /**
+     * Constructor
+     */
     public TaskStatusStore() {
         this.taskList = new ArrayList<>(); //Review
         this.taskStatusList = new ArrayList<>();
     }
 
-    public TaskStatus createTaskStatus(String status) {
-        return new TaskStatus(status);
+    /**
+     * Methods to create an object that this class are responsible.
+     */
+    public boolean createTaskStatus(String status) {
+
+        TaskStatus newStatus = new TaskStatus(status);
+
+        return saveTaskStatus(newStatus);
     }
 
     public void populateDefault() {
@@ -37,7 +51,10 @@ public class TaskStatusStore {
         saveTaskStatus(new TaskStatus("Blocked"));
     }
 
-    public String getTaskStatusByDescription(String description) {
+    /**
+     * Methods to iterate with the list.
+     */
+    public String getTaskStatusDescription(String description) {
         String result = "Status not found";
         for(String i : taskList) {
             if(i.toLowerCase(Locale.ROOT).equals(description.trim().toLowerCase(Locale.ROOT))) {
@@ -46,6 +63,24 @@ public class TaskStatusStore {
         }
         return result;
     }
+
+    public TaskStatus getTaskStatusByDescription(String descript){
+
+        TaskStatus result = null;
+
+        for (TaskStatus status : this.taskStatusList) {
+
+            if (status.hasDescription(descript)) {
+                result = status;
+            }
+
+        }
+
+        return result;
+
+    }
+
+
 
     public TaskStatus getInitialStatus(){
 
@@ -62,10 +97,23 @@ public class TaskStatusStore {
         return status;
     }
 
-    /**
-     * Method to save and validate task types in the list.
-     */
+    public List<String> getTaskStatusNames(){
 
+        List<String> taskStatusNames = new ArrayList<>();
+
+        for (TaskStatus taskStatus : this.taskStatusList) {
+
+            taskStatusNames.add(taskStatus.getDescription());
+
+        }
+
+        return taskStatusNames;
+
+    }
+
+    /**
+     * Method to save and validate task status in the list.
+     */
     public boolean saveTaskStatus(TaskStatus status) {
 
         boolean result = false;
@@ -74,12 +122,20 @@ public class TaskStatusStore {
 
             result = true;
 
-            for (int i = 0; i < this.taskStatusList.size(); i++) {
+            if(this.taskStatusList.size() != 0) {
 
-                if (validateNewStatusDescription(status)) {
-                    status.setTask_Id_TaskStatus(id_TaskStatusGenerator());
-                    this.taskStatusList.add(status);
+                for (int i = 0; i < this.taskStatusList.size(); i++) {
+
+                    if (validateNewStatusDescription(status)) {
+                        status.setID_TaskStatus(id_TaskStatusGenerator());
+                        this.taskStatusList.add(status);
+                    }
+
                 }
+            } else {
+
+                status.setID_TaskStatus(id_TaskStatusGenerator());
+                this.taskStatusList.add(status);
 
             }
         }
@@ -110,7 +166,7 @@ public class TaskStatusStore {
     public int id_TaskStatusGenerator() {
         int id = 1;
         if (this.taskStatusList.size() > 0) {
-            id = this.taskStatusList.get(taskStatusList.size() - 1).getTask_Id_TaskStatus() + 1;
+            id = this.taskStatusList.get(taskStatusList.size() - 1).getId_TaskStatus() + 1;
         }
         return id;
     }

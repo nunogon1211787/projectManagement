@@ -14,7 +14,7 @@ import java.util.Objects;
 public class TaskList {
 
     /**
-     * Atributtes.
+     * Attributes.
      */
 
     private List<Task> taskList;
@@ -36,6 +36,7 @@ public class TaskList {
         return new Task(description);
     }
 
+    // Create task with DTO and Mapper. US032 - Sprint 3
     public boolean createSprintTask(CreateTaskDTO dto, TaskMapper mapper, Project proj){
 
         Task newTask = mapper.toModel(dto, proj);
@@ -53,39 +54,63 @@ public class TaskList {
 
         for (Task task : this.taskList) {
 
-            tasksNames.add(task.getDescription());
+            tasksNames.add(task.getName());
 
         }
 
         return tasksNames;
     }
 
+    public Task getTaskById(int id){
+
+        Task result = null;
+
+        for (Task task : this.taskList) {
+
+            if (task.hasId(id)) {
+                result = task;
+            }
+
+        }
+
+        return result;
+
+    }
+
+    public Task getTaskByName(String name){
+
+        Task result = null;
+
+        for (Task task : this.taskList) {
+
+            if (task.hasName(name)) {
+                result = task;
+            }
+
+        }
+
+        return result;
+
+    }
+
 
     /**
-     * Method to add a task to the list
+     * Method to add a task to the list.
      */
 
-    public boolean addTaskToTheList(Task task) {
+    private boolean addTaskToTheList(Task task) {
         this.taskList.add(task);
         return true;
     }
 
     /**
-     * Method to remove an object
+     * Method to remove an object.
      */
 
     public boolean removeTaskFromTheList(Task task) {
         this.taskList.remove(task);
 
         return true;
-    }
-
-    /**
-     * Method to validate if a task already exists
-     */
-
-    private boolean validateIfTaskAlreadyExists(Task task) {
-        return this.taskList.contains(task);
     }
 
     /**
@@ -96,11 +121,36 @@ public class TaskList {
 
         boolean result = false;
 
-        if (!validateIfTaskAlreadyExists(newTask)) {
-            addTaskToTheList(newTask);
+        if(newTask != null) {
+
             result = true;
+
+            if (!validateIfTaskAlreadyExists(newTask)) {
+                newTask.setID_Task(id_TaskGenerator());
+                addTaskToTheList(newTask);
+            }
+
         }
         return result;
+    }
+
+    /**
+     * Method to validate if a task already exists.
+     */
+
+    private boolean validateIfTaskAlreadyExists(Task task) {
+        return this.taskList.contains(task);
+    }
+
+    /**
+     * ID Generator.
+     **/
+    public int id_TaskGenerator() {
+        int id = 1;
+        if (this.taskList.size() > 0) {
+            id = this.taskList.get(taskList.size() - 1).getID_Task() + 1;
+        }
+        return id;
     }
 
     /**
