@@ -4,16 +4,12 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-title US024 - As Administrator, I want to get a list all user accounts and their status
+title US033 - As SM/Team Member, I want to register work done on a Task
 
-class UserAccountStatusUI {
-
+class RegisterWorkToTaskUI {
 }
 
-class ProductBacklogSortController {
-    +getProjectListByUserEmail(String email)
-    +getProject(String code)
-    +getUsSortedByPriority()
+class RegisterWorkToTaskController {
 }
 
 class Company {
@@ -21,38 +17,54 @@ class Company {
 }
 
 class ProjectStore {
-+getProjectListByUserEmail(String email)
++getCurrentProjectsByUserEmail(String email)
 +getProjectByCode(String code)
 }
 
 class Project {
 -code : String
--productBacklog : ProductBacklog
+-projectName : String
 +getProductBacklog()
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+getUsSortedByPriority()
+class SprintList {
 }
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
+class Sprint {
 }
 
-UserAccountStatusUI ..> ProductBacklogSortController
+class TaskList {
+}
 
-ProductBacklogSortController ..> Company
-ProductBacklogSortController ..> ProjectStore
-ProductBacklogSortController ..> Project
-ProductBacklogSortController ..> ProductBacklog
+class Task {
++createTaskEffort(workHours, workDay, comment, attachment, user)
++saveTaskEffort(effort)
++validateTaskEffort(effort)
++add(effort)
++updateWorkDone(effort)
++updatePercentExecution(effort)
+}
 
-Company "1" o-- "1" ProjectStore: has
+class TaskEffort {
+-workHours : double
+-workDate : LocalDate
+-comment : String
+-attachment : String
+-user : SystemUser
++createTaskEffort(workHours, workDate, comment, attachment, user)
+}
+
+RegisterWorkToTaskUI ..> RegisterWorkToTaskController
+
+RegisterWorkToTaskController ..> Company
+RegisterWorkToTaskController ..> ProjectStore
+RegisterWorkToTaskController ..> Project
+
+Company "1" -> "1" ProjectStore: has
 ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+Project "1" *-- "1" SprintList
+SprintList "1" *-- "0..*" Sprint
+Sprint "1" -> "1" TaskList: has
+TaskList "1" *-- "0..*" Task
+Task "1" *-- "0..*" TaskEffort: has
 @enduml

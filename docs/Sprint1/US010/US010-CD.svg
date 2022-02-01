@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="764px" preserveAspectRatio="none" style="width:771px;height:764px;background:#FFFFFF;" version="1.1" viewBox="0 0 771 764" width="771px" zoomAndPan="magnify"><defs><filter height="300%" id="f1mikn1bfwmg5u" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="762" x="2" y="17.4023">US010 - As a Authenticated user, i want to update its own data (e.g. photo, function...)</text><!--MD5=[dc70826148653b7492c22464f0a5baee]
+class UpdatePersonalDataUI--><rect codeLine="8" fill="#FEFECE" filter="url(#f1mikn1bfwmg5u)" height="40.1328" id="UpdatePersonalDataUI" style="stroke:#A80036;stroke-width:1.5;" width="135" x="344.5" y="28.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="129" x="347.5" y="44.8008">UpdatePersonalDataUI</text><line style="stroke:#A80036;stroke-width:1.5;" x1="345.5" x2="478.5" y1="52.332" y2="52.332"/><line style="stroke:#A80036;stroke-width:1.5;" x1="345.5" x2="478.5" y1="60.332" y2="60.332"/><!--MD5=[656248b3324c4572a873b9973e352078]
+class UpdatePersonalDataController--><rect codeLine="11" fill="#FEFECE" filter="url(#f1mikn1bfwmg5u)" height="66.043" id="UpdatePersonalDataController" style="stroke:#A80036;stroke-width:1.5;" width="271" x="276.5" y="129.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="174" x="325" y="145.8008">UpdatePersonalDataController</text><line style="stroke:#A80036;stroke-width:1.5;" x1="277.5" x2="546.5" y1="153.332" y2="153.332"/><line style="stroke:#A80036;stroke-width:1.5;" x1="277.5" x2="546.5" y1="161.332" y2="161.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="87" x="282.5" y="175.9668">+getUser(email)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="259" x="282.5" y="188.9219">+updateSystemUser(username, function, photo)</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect codeLine="16" fill="#FEFECE" filter="url(#f1mikn1bfwmg5u)" height="53.0879" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="137" x="186.5" y="269.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="228" y="285.8008">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="187.5" x2="322.5" y1="293.332" y2="293.332"/><line style="stroke:#A80036;stroke-width:1.5;" x1="187.5" x2="322.5" y1="301.332" y2="301.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="125" x="192.5" y="315.9668">+getSystemUserStore()</text><!--MD5=[8787f7db94578849901ee2e9b6146b1d]
+class SystemUserStore--><rect codeLine="20" fill="#FEFECE" filter="url(#f1mikn1bfwmg5u)" height="53.0879" id="SystemUserStore" style="stroke:#A80036;stroke-width:1.5;" width="139" x="255.5" y="412.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="95" x="277.5" y="428.8008">SystemUserStore</text><line style="stroke:#A80036;stroke-width:1.5;" x1="256.5" x2="393.5" y1="436.332" y2="436.332"/><line style="stroke:#A80036;stroke-width:1.5;" x1="256.5" x2="393.5" y1="444.332" y2="444.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="127" x="261.5" y="458.9668">+getUserByEmail(email)</text><!--MD5=[bc064d979c32666ae52f3d7624591b7b]
+class SystemUser--><rect codeLine="25" fill="#FEFECE" filter="url(#f1mikn1bfwmg5u)" height="208.5488" id="SystemUser" style="stroke:#A80036;stroke-width:1.5;" width="496" x="138" y="542.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="66" x="353" y="558.8008">SystemUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="139" x2="633" y1="566.332" y2="566.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="94" x="144" y="580.9668">username : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="69" x="144" y="593.9219">email : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="144" y="606.877">photo : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="93" x="144" y="619.832">password : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="164" x="144" y="632.7871">passwordConfirmation : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="144" y="645.7422">function : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="160" x="144" y="658.6973">activateUser : boolean = False</text><line style="stroke:#A80036;stroke-width:1.5;" x1="139" x2="633" y1="665.0176" y2="665.0176"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="484" x="144" y="679.6523">+SystemUser(username, email, photo, password, passwordConfirmation, function, profile)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="108" x="144" y="692.6074">+isYourEmail(email)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="213" x="144" y="705.5625">+setAllData(username, function, photo)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="140" x="144" y="718.5176">+setUsername(username)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="125" x="144" y="731.4727">+setFunction(function)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="96" x="144" y="744.4277">+setPhoto(photo)</text><!--MD5=[aee9175e10c5348cf29c12aac1a0eb8c]
+class SystemUserMapper--><rect codeLine="42" fill="#FEFECE" filter="url(#f1mikn1bfwmg5u)" height="78.998" id="SystemUserMapper" style="stroke:#A80036;stroke-width:1.5;" width="117" x="501.5" y="256.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="111" x="504.5" y="272.8008">SystemUserMapper</text><line style="stroke:#A80036;stroke-width:1.5;" x1="502.5" x2="617.5" y1="280.332" y2="280.332"/><line style="stroke:#A80036;stroke-width:1.5;" x1="502.5" x2="617.5" y1="288.332" y2="288.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="101" x="507.5" y="302.9668">+toUserDTO(user)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="507.5" y="315.9219">-toDTO(user)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="50" x="507.5" y="328.877">+create()</text><!--MD5=[21c9184e093d3c8ab3574166ca6af88b]
+link UpdatePersonalDataUI to UpdatePersonalDataController--><path codeLine="49" d="M412,68.4492 C412,83.6592 412,105.3392 412,123.9192 " fill="none" id="UpdatePersonalDataUI-to-UpdatePersonalDataController" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="412,129.0592,416,120.0592,412,124.0592,408,120.0592,412,129.0592" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[e5734e4b4915b369e0350708a3631c73]
+link UpdatePersonalDataController to Company--><path codeLine="51" d="M373.59,195.3692 C347.91,216.8792 314.41,244.9392 289.57,265.7492 " fill="none" id="UpdatePersonalDataController-to-Company" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="285.66,269.0192,295.1308,266.3166,289.4964,265.8127,290.0003,260.1783,285.66,269.0192" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[cc2e9ba5acbe84ecd0a01e18b7bf553c]
+link UpdatePersonalDataController to SystemUserStore--><path codeLine="52" d="M401.85,195.2292 C384.96,248.5192 351.3,354.7192 334.71,407.0692 " fill="none" id="UpdatePersonalDataController-to-SystemUserStore" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="333.16,411.9692,339.7014,404.6065,334.6766,407.2048,332.0783,402.1799,333.16,411.9692" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[8bcc85a4609a7c670ca24cac815fdd8a]
+link UpdatePersonalDataController to SystemUser--><path codeLine="53" d="M417.16,195.4992 C418.3,205.3292 419.15,216.1892 419,226.1992 C417.44,332.4592 421.15,359.3292 412,465.1992 C409.99,488.4592 406.98,513.3092 403.71,536.8792 " fill="none" id="UpdatePersonalDataController-to-SystemUser" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="403.01,541.8892,408.2291,533.5369,403.7091,536.9383,400.3077,532.4183,403.01,541.8892" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[fc35276dc88f95172164fc41f98db828]
+link UpdatePersonalDataController to SystemUserMapper--><path codeLine="54" d="M448.2,195.3692 C467.62,212.6192 491.78,234.0892 512.67,252.6492 " fill="none" id="UpdatePersonalDataController-to-SystemUserMapper" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="516.53,256.0792,512.4608,247.1103,512.793,252.7574,507.1459,253.0896,516.53,256.0792" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[8b399b28c903131df3378f5fe4d26a41]
+reverse link Company to SystemUserStore--><path codeLine="57" d="M273.52,333.9992 C285.71,358.5492 301.35,390.0692 312.18,411.8792 " fill="none" id="Company-backto-SystemUserStore" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#FFFFFF" points="267.68,322.2292,266.768,329.3824,273.0202,332.9755,273.9322,325.8223,267.68,322.2292" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="298" y="378.7676">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="261.6873" y="342.6928">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="300.2904" y="401.5368">1</text><!--MD5=[7758a2d24f0b1a5b8a5ff338858e9484]
+reverse link SystemUserStore to SystemUser--><path codeLine="58" d="M336.37,478.0892 C341.77,496.3492 348.53,519.1492 355.29,541.9992 " fill="none" id="SystemUserStore-backto-SystemUser" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="332.6,465.3692,330.4645,472.2569,336.001,476.8772,338.1365,469.9895,332.6,465.3692" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="346" y="508.7676">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="325.4325" y="485.8651">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="330.2269" y="531.3559">0..*</text><!--MD5=[ffb4d78053969339e09aa9cecd03388e]
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+title US010 - As a Authenticated user, i want to update its own data (e.g. photo, function...)
+
+class UpdatePersonalDataUI {
+}
+
+class UpdatePersonalDataController {
++getUser(email)
++updateSystemUser(username, function, photo)
+}
+
+class Company {
++getSystemUserStore()
+}
+
+class SystemUserStore {
++getUserByEmail(email)
+}
+
+
+class SystemUser {
+username : String
+email : String
+photo : String
+password : String
+passwordConfirmation : String
+function : String
+activateUser : boolean = False
++SystemUser(username, email, photo, password, passwordConfirmation, function, profile)
++isYourEmail(email)
++setAllData(username, function, photo)
++setUsername(username)
++setFunction(function)
++setPhoto(photo)
+}
+
+
+class SystemUserMapper {
++toUserDTO(user)
+-toDTO(user)
++create()
+}
+
+
+UpdatePersonalDataUI ..> UpdatePersonalDataController
+
+UpdatePersonalDataController ..> Company
+UpdatePersonalDataController ..> SystemUserStore
+UpdatePersonalDataController ..> SystemUser
+UpdatePersonalDataController ..> SystemUserMapper
+
+
+Company "1" o- - "1" SystemUserStore: has
+SystemUserStore "1" *- - "0..*" SystemUser: has
+
+
+@enduml
+
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+title US010 - As a Authenticated user, i want to update its own data (e.g. photo, function...)
+
+class UpdatePersonalDataUI {
+}
+
+class UpdatePersonalDataController {
++getUser(email)
++updateSystemUser(username, function, photo)
+}
+
+class Company {
++getSystemUserStore()
+}
+
+class SystemUserStore {
++getUserByEmail(email)
+}
+
+
+class SystemUser {
+username : String
+email : String
+photo : String
+password : String
+passwordConfirmation : String
+function : String
+activateUser : boolean = False
++SystemUser(username, email, photo, password, passwordConfirmation, function, profile)
++isYourEmail(email)
++setAllData(username, function, photo)
++setUsername(username)
++setFunction(function)
++setPhoto(photo)
+}
+
+
+class SystemUserMapper {
++toUserDTO(user)
+-toDTO(user)
++create()
+}
+
+
+UpdatePersonalDataUI ..> UpdatePersonalDataController
+
+UpdatePersonalDataController ..> Company
+UpdatePersonalDataController ..> SystemUserStore
+UpdatePersonalDataController ..> SystemUser
+UpdatePersonalDataController ..> SystemUserMapper
+
+
+Company "1" o- - "1" SystemUserStore: has
+SystemUserStore "1" *- - "0..*" SystemUser: has
+
+
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 WET 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: pt
+Country: PT
+--></g></svg>

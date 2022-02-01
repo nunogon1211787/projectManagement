@@ -188,7 +188,7 @@ public class SprintTest {
     public void sprintBacklogWithSize() {
         LocalDate startDate = LocalDate.of(2022, 1, 2);
         Sprint sprint = new Sprint("Add an apple", startDate);
-        UserStoryStatus status = new UserStoryStatus(1, "To Do");
+        UserStoryStatus status = new UserStoryStatus("To Do");
         UserStory userstory = new UserStory("US001", 5, "AnaBoss",5);
         UserStoryOfSprint userStoryOfSprint = new UserStoryOfSprint(userstory, 5 , 1 );
         sprint.getSprintBacklog().getUserStoryOfSprintList().add(userStoryOfSprint);

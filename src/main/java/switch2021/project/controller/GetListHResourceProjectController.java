@@ -11,24 +11,26 @@ public class GetListHResourceProjectController {
 
     private final Company company;
     private List<Resource> projectTeamList;
+    private ProjectTeamMapper projectTeamMapper;
 
 
     /**
      * Constructor to UI (with SINGLETON).
      */
-    public GetListHResourceProjectController(){
-        this.company = App.getInstance().getCompany();
-    }
+//    public GetListHResourceProjectController(){
+//        this.company = App.getInstance().getCompany();
+//    }
 
     /**
      * Constructor to test (without SINGLETON).
      */
-    public GetListHResourceProjectController(Company company){
+    public GetListHResourceProjectController(Company company, ProjectTeamMapper projectTeamMapper){
         this.company = company;
+        this.projectTeamMapper = projectTeamMapper;
     }
 
     public List<ResourceDto> getProjectTeam(String projectCode){
         this.projectTeamList = company.getProjectStore().getProjectByCode(projectCode).getProjectTeam().getProjectTeamList();
-        return ProjectTeamMapper.toDto(projectTeamList);
+        return this.projectTeamMapper.toDto(projectTeamList);
     }
 }

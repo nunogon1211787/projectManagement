@@ -4,6 +4,7 @@ import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.UserStoryStatusStore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UpdateStatusUsController {
@@ -13,13 +14,13 @@ public class UpdateStatusUsController {
          **/
 
         private final Company company;
-        private UserStoryStatusStore USStore;
+        private UserStoryStatusStore usStore = new UserStoryStatusStore();
         private ProjectStore projectStore;
         private Project project;
         private Sprint sprint;
         private SprintBacklog sprintBacklog;
         private UserStory userStory;
-        String [] usList;
+        private List <String> usList;
 
 //    /**
 //     * Constructor to UI (with SINGLETON)
@@ -41,14 +42,12 @@ public class UpdateStatusUsController {
          * Methods
          **/
 
-        public String[] getUsAvailableStatusList() {
-
-                List<UserStoryStatus> statusList= this.USStore.getUserStoryStatusList();
+        public List<String> getUsAvailableStatusList() {
+                List<UserStoryStatus> statusList= this.company.getUserStoryStatusStore().getUserStoryStatusList();
+                this.usList = new ArrayList<>();
                 for (int i = 0; i < statusList.size(); i++) {
-                        if(statusList.get(i).toString().equals("To do") ||
-                                statusList.get(i).toString().equals("Done") ||
-                                statusList.get(i).toString().equals("In progress") )
-                        this.usList[i] = statusList.get(i).toString();
+                        if(statusList.get(i).isSprintAvailable() )
+                        this.usList.add(statusList.get(i).getDescription());
                 }
                 return this.usList;
         }
@@ -56,7 +55,7 @@ public class UpdateStatusUsController {
         public boolean changeStatusOfUs(String code, int usId, UserStoryStatus userST) {
                 this.projectStore = company.getProjectStore();
                 this.project = this.projectStore.getProjectByCode(code);
-                this.sprint = this.project.getCurrentSprint();
+                this.sprint = this.project.getSprints().getCurrentSprint();
                 this.sprintBacklog = this.sprint.getSprintBacklog();
                 this.userStory = this.sprintBacklog.getUserStory(usId);
                 return this.userStory.setUserStoryStatusBoolean(userST);

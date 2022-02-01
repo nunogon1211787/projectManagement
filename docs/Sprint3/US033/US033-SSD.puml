@@ -11,7 +11,12 @@ participant ": RegisterWorkToTaskUI" as Ui
 participant ": RegisterWorkToTaskController" as Ctrl
 participant ": Company" as company
 participant "RegisterWorkToTaskMapper" as mapper
+participant "userStoryIdDTO: UserStoryIdDTO" as userStoryIdDTO
+participant "userStoryList : Sprintbacklog" as sprintBacklog
+participant "userStory : UserStory" as userStory
 participant "taskList: TaskList" as taskList
+participant "taskIdDTOList: List<TaskIdDTO>" as taskIdDTOList
+participant "taskIdDTO: TaskIdDTO" as taskIdDTO
 participant "taskEffortDTO: TaskEffortDTO" as effortDTO
 participant "user : SystemUserStore" as userStore
 participant "task : Task" as task
@@ -20,45 +25,47 @@ participant "taskEffort : TaskEffort" as effort
 activate User
 
 User->Ui : starts registering a new task effort
-Ui->Ctrl: getCurrentProjectsByUserEmail(email)
-ref over Ctrl, company : US033_1-SD_getProjects
-Ctrl-->Ui:projectCodeDTOList
-Ui-->User: asks to select the project
-
-User->Ui: selects the intended project
-Ui-->User: projCodeDTO
-
-User->Ui: Access project sprint list (projCodeDTO)
-Ui->Ctrl: getProjectSprints(projCodeDTO)
-ref over Ctrl, company : US033_2-SD_getSprints
-Ctrl-->Ui: sprintIdDTOList
-Ui-->User: asks to select the sprint (sprintIdDTO)
-
-User->Ui: selects the intended sprint
-Ui-->User: sprintIdDTO
-
-User->Ui: Access sprint backlog
-Ui->Ctrl: getUserStories(sprintIdDTO)
-ref over Ctrl, company : US033_3-SD_getUserStories
-Ctrl-->Ui: userStoryIdDTOList
-Ui-->User: asks to select the user story
-
-User->Ui: selects the intended user story
-Ui-->User:
-
-User->Ui: Access task list.
 Ui->Ctrl: getTasks(userStoryIdDTO)
-ref over Ctrl, company : US033_4-SD_getTasks
+Ctrl->mapper: userStoryIdDTOToUserStoryId(userStoryIdDTO)
+mapper->userStoryIdDTO: getId()
+userStoryIdDTO-->mapper: userStoryId
+mapper-->Ctrl: userStoryId
+Ctrl->sprintBacklog: getUserStoryById(userStoryId)
+loop for each userStory in sprintBacklog
+sprintBacklog->userStory: hasId(userStoryId)
+userStory-->sprintBacklog: true
+end
+sprintBacklog-->Ctrl: userStory
+
+Ctrl->userStory: getTaskList()
+userStory-->Ctrl: taskList
+Ctrl->taskList: getTaskList()
+taskList-->Ctrl: taskList
+
+Ctrl->mapper: taskListToTaskListDTO(taskList)
+mapper->taskIdDTOList **: create()
+loop for each task in taskList
+mapper->taskList: get(i)
+taskList-->mapper: task
+mapper->mapper: taskIdDTO = taskIdToTaskIdDTO(task)
+mapper->mapper:taskIdDTO = task.getId()
+deactivate mapper
+mapper->taskIdDTO**: create(taskIdDTO)
+deactivate mapper
+mapper->taskIdDTOList: add(taskIdDTO)
+taskIdDTOList-->mapper: true
+end
+mapper-->Ctrl: taskIdDTOList
 Ctrl-->Ui: taskIdDTOList
 Ui-->User: asks to select the task
 
-User->Ui: selects the intended task
-Ui-->User: taskIdDTO
-
-User -> Ui: Starts registration of a new effort.
+User -> Ui: selects the intended task (taskIdDTO)
 Ui-->User: requests data(workHours, workDate, comment, attachment)
 User -> Ui: types requested data
 Ui -> Ctrl: createTaskEffort(taskEffortDTO)
+note right
+  taskEffortDTO has all required data, including the 'id' of the selected task and the email of the user responsible
+end note
 Ctrl->effortDTO: getTaskId()
 effortDTO-->Ctrl: taskId
 Ctrl->taskList: getTaskById(taskId)
@@ -67,7 +74,7 @@ taskList->task: hasId(taskId)
 task-->taskList: true
 end
 taskList-->Ctrl: task
-Ctrl->effortDTO: workHours=getWorkHours()
+Ctrl->effortDTO: getWorkHours()
 effortDTO-->Ctrl: workHours
 Ctrl->effortDTO: getWorkDate()
 effortDTO-->Ctrl: workdate
@@ -92,8 +99,8 @@ deactivate task
 task -> task: updateExecutionPercentage()
 deactivate task
 task-->Ctrl: true
-Ctrl -> us: updateWorkDone()
-us-->Ctrl: true
+Ctrl -> userStory: updateWorkDone()
+userStory-->Ctrl: true
 Ctrl-->Ui : true
 
 Ui-->User : Informs operation success.
