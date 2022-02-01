@@ -29,12 +29,15 @@ public class SprintList {
      * Sprint creator
      **/
     public Sprint createSprint(String name, LocalDate startDate, int sprintDuration) {
-        validateStartDate(startDate);
 
-        Sprint sprint;
+        Sprint sprint = null;
 
-        sprint = new Sprint(name, startDate);
-        sprint.changeEndDate(sprintDuration);
+        if(validateStartDate(startDate)) {
+
+            sprint = new Sprint(name, startDate);
+            sprint.changeEndDate(sprintDuration);
+
+        }
 
         return sprint;
     }
