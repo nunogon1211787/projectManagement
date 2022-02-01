@@ -59,10 +59,13 @@ mapper-->Ctrl: taskIdDTOList
 Ctrl-->Ui: taskIdDTOList
 Ui-->User: asks to select the task
 
-User -> Ui: selects the intended task
+User -> Ui: selects the intended task (taskIdDTO)
 Ui-->User: requests data(workHours, workDate, comment, attachment)
 User -> Ui: types requested data
 Ui -> Ctrl: createTaskEffort(taskEffortDTO)
+note right
+  taskEffortDTO has all required data, including the 'id' of the selected task and the email of the user responsible
+end note
 Ctrl->effortDTO: getTaskId()
 effortDTO-->Ctrl: taskId
 Ctrl->taskList: getTaskById(taskId)
@@ -71,7 +74,7 @@ taskList->task: hasId(taskId)
 task-->taskList: true
 end
 taskList-->Ctrl: task
-Ctrl->effortDTO: workHours=getWorkHours()
+Ctrl->effortDTO: getWorkHours()
 effortDTO-->Ctrl: workHours
 Ctrl->effortDTO: getWorkDate()
 effortDTO-->Ctrl: workdate
