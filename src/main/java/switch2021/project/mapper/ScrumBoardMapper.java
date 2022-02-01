@@ -1,9 +1,7 @@
 package switch2021.project.mapper;
 
 import switch2021.project.dto.ScrumBoardDTO;
-import switch2021.project.dto.UserStoryDto;
 import switch2021.project.model.UserStory;
-
 import java.util.ArrayList;
 import java.util.List;
 

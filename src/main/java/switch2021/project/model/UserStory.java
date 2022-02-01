@@ -121,7 +121,7 @@ public class UserStory {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be blank.");
         }
-        if (name.length() < 5) {
+        if (name.length() < 3) {
             throw new IllegalArgumentException("Name must be at least 5 characters");
         }
         return true;

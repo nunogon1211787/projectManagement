@@ -16,7 +16,7 @@ public class GetScrumBoardController {
         this.mapper = mapper;
     }
 
-    public List<ScrumBoardDTO> getProjectTeam(String projectCode){
+    public List<ScrumBoardDTO> getScrumBoard(String projectCode){
         List<UserStory> usList = company.getProjectStore().getProjectByCode(projectCode).getCurrentSprint().getSprintBacklog().getUserStoryList();
         return this.mapper.toDtoList(usList);
     }
