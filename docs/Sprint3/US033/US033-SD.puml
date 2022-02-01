@@ -26,16 +26,16 @@ Ctrl-->Ui:projectCodeDTOList
 Ui-->User: asks to select the project
 
 User->Ui: selects the intended project
-Ui-->User:
+Ui-->User: projCodeDTO
 
-User->Ui: Access project sprint list
+User->Ui: Access project sprint list (projCodeDTO)
 Ui->Ctrl: getProjectSprints(projCodeDTO)
 ref over Ctrl, company : US033_2-SD_getSprints
 Ctrl-->Ui: sprintIdDTOList
-Ui-->User: asks to select the sprint
+Ui-->User: asks to select the sprint (sprintIdDTO)
 
 User->Ui: selects the intended sprint
-Ui-->User:
+Ui-->User: sprintIdDTO
 
 User->Ui: Access sprint backlog
 Ui->Ctrl: getUserStories(sprintIdDTO)
@@ -53,7 +53,7 @@ Ctrl-->Ui: taskIdDTOList
 Ui-->User: asks to select the task
 
 User->Ui: selects the intended task
-Ui-->User:
+Ui-->User: taskIdDTO
 
 User -> Ui: Starts registration of a new effort.
 Ui-->User: requests data(workHours, workDate, comment, attachment)

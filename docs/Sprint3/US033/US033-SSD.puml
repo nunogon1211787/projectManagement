@@ -59,20 +59,27 @@ mapper-->Ctrl: taskIdDTOList
 Ctrl-->Ui: taskIdDTOList
 Ui-->User: asks to select the task
 
-User -> Ui: selects the intended task
-Ui-->User: requests data(workHours, workDate, comment, attachment)
+User -> Ui: selects the intended task (taskIdDTO)
+Ui-->User: requests data(workHours, workMinutes, workDate, comment, attachment)
 User -> Ui: types requested data
 Ui -> Ctrl: createTaskEffort(taskEffortDTO)
-Ctrl->effortDTO: getTaskId()
-effortDTO-->Ctrl: taskId
+note right
+  taskEffortDTO has all required data, including the 'id' of the selected task and the email of the user responsible
+end note
+Ctrl->effortDTO: getTaskIdDTO()
+effortDTO-->Ctrl: taskIdDTO
+Ctrl->taskIdDTO: getTaskId()
+taskIdDTO-->Ctrl: taskId
 Ctrl->taskList: getTaskById(taskId)
 loop for each task in taskList
 taskList->task: hasId(taskId)
 task-->taskList: true
 end
 taskList-->Ctrl: task
-Ctrl->effortDTO: workHours=getWorkHours()
+Ctrl->effortDTO: getWorkHours()
 effortDTO-->Ctrl: workHours
+Ctrl->effortDTO: getWorkMinutes()
+effortDTO-->Ctrl: workMinutes
 Ctrl->effortDTO: getWorkDate()
 effortDTO-->Ctrl: workdate
 Ctrl->effortDTO: getComment()
@@ -83,8 +90,8 @@ Ctrl->effortDTO: getEmail()
 effortDTO-->Ctrl: email
 Ctrl->userStore: getUserByEmail(email)
 userStore-->Ctrl: user
-Ctrl->task:createTaskEffort(workHours, workDate, comment, attachment, user)
-task->effort **: createTaskEffort(workHours, workDate, comment, attachment, user)
+Ctrl->task:createTaskEffort(workHours, workMinutes, workDate, comment, attachment, user)
+task->effort **: createTaskEffort(workHours, workMinutes, workDate, comment, attachment, user)
 task-->Ctrl: effort
 Ctrl -> task: saveTaskEffort(effort)
 task -> task: validateTaskEffort(effort)

@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import switch2021.project.depracated.UserStoryOfSprint;
+import switch2021.project.stores.UserStoryStatusStore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,9 @@ public class SprintBacklog {
         boolean status = false;
         if(validateUserStory(userStory)) {
             status = true;
+            UserStoryStatusStore statusStore = new UserStoryStatusStore();
+            statusStore.populateDefault();
+            userStory.setUserStoryStatus(statusStore.getUserStoryStatusByDescription("To do"));
             userStoryList.add(userStory);
         }
 

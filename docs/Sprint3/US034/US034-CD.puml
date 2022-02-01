@@ -54,15 +54,20 @@ UpdateStatusUSSprintController ..> SprintBacklog
 
 UpdateStatusUSSprintController ..> Userstory
 
-Company "1" -> "1" ProjectStore: knows
 
-ProjectStore "1" -> "0..*" Project: contains
 
-Project "1" -> "1" Sprint: involves
+Company "1" o-- "1" ProjectStore: has
 
-Sprint "1" -> "1" SprintBacklog: has
+ProjectStore "1" *-- "0..*" Project: contains
 
-SprintBacklog "1" -> "0..*" Userstory: incorporates
+Project "1" *-- "1" Sprint: involves
+
+Sprint "1" *-- "1" SprintBacklog: has
+
+SprintBacklog "1" *-- "0..*" Userstory: incorporates
+
+
+
 
 
 @enduml
