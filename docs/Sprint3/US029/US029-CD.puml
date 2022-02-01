@@ -4,55 +4,67 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-title US024 - As Administrator, I want to get a list all user accounts and their status
+title US029 - As Project Manager, I want to start a sprint
 
-class UserAccountStatusUI {
-
+class StartASprintUI {
 }
 
-class ProductBacklogSortController {
-    +getProjectListByUserEmail(String email)
-    +getProject(String code)
-    +getUsSortedByPriority()
+class StartASprintController {
++startASprint(sprintDTO)
+}
+
+class StartASprintDTO {
++getCode()
++getSprintID()
++getStartDate()
 }
 
 class Company {
-    +getProjectStore()
++getProjectStore()
 }
 
 class ProjectStore {
-+getProjectListByUserEmail(String email)
 +getProjectByCode(String code)
 }
 
 class Project {
--code : String
--productBacklog : ProductBacklog
-+getProductBacklog()
+code : String
+-hasCode(code)
++getProjectTeam()
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+getUsSortedByPriority()
+class SprintList {
+sprintList : List<Sprint>
++getSprint(sprintID)
++startASprint(sprintID, startDate, projectTeam)
++getSprint(sprintID)
++validateStartDate(startDate)
 }
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
+class Sprint {
+id: int
+startDate : LocalDate
++hasSprintID(sprintID)
++setStartDate()
 }
 
-UserAccountStatusUI ..> ProductBacklogSortController
+class ProjectTeam {
++validateProjectTeam()
+}
 
-ProductBacklogSortController ..> Company
-ProductBacklogSortController ..> ProjectStore
-ProductBacklogSortController ..> Project
-ProductBacklogSortController ..> ProductBacklog
+StartASprintUI ..> StartASprintController
+StartASprintUI ..> StartASprintDTO
+StartASprintController ..> Company
+StartASprintController ..> ProjectStore
+StartASprintController ..> Project
+StartASprintController ..> SprintList
+StartASprintController ..> Sprint
+StartASprintController ..> ProjectTeam
 
 Company "1" o-- "1" ProjectStore: has
 ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+Project "1" *-- "0..*" SprintList: has
+Project "1" *-- "1" ProjectTeam: has
+Sprint "1" o-- "1" SprintList: has
+
 @enduml

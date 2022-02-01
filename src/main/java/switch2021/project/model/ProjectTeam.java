@@ -98,6 +98,59 @@ public class ProjectTeam {
         return currentResourcesNames;
     }
 
+    /**
+     * Method to Validate a PO and a SM exists in the ProjectTeam
+     */
+
+    public boolean validateProjectTeam (LocalDate startDate, int sprintDuration) {
+
+        boolean msg = true;
+
+        Resource po = getProductOwnerByStartDate(startDate, sprintDuration);
+        Resource sm = getScrumMasterByStartDate(startDate, sprintDuration);
+
+        if (po == null || sm == null){
+            msg = false;
+        }
+        return msg;
+    }
+
+    /**
+     * Method to Get a Specific Resource (PO), by StartDate of the Sprint
+     */
+
+    private Resource getProductOwnerByStartDate(LocalDate startDate, int sprintDuration) {
+
+        Resource resource = null;
+
+        ProjectRole role = App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Product Owner");
+
+        for (Resource i : projectTeamList) {
+            if (i.isYour(role)&& i.isAvailableToSprint(startDate, sprintDuration)) {
+                resource = i;
+            }
+        }
+        return resource;
+    }
+
+    /**
+     * Method to Get a Specific Resource (SM), by StartDate of the Sprint
+     */
+
+    private Resource getScrumMasterByStartDate(LocalDate startDate, int sprintDuration) {
+
+        Resource resource = null;
+
+        ProjectRole role = App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Scrum Master");
+
+        for (Resource i : projectTeamList) {
+            if (i.isYour(role) && i.isAvailableToSprint(startDate, sprintDuration)){
+                resource = i;
+            }
+        }
+        return resource;
+    }
+
 
     /**
      * Create a new Resource

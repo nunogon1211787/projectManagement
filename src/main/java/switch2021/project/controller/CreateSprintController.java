@@ -27,9 +27,9 @@ public class CreateSprintController {
      * Constructor to UI (with SINGLETON)
      **/
 
-    public CreateSprintController() {
-        this.company = App.getInstance().getCompany();
-    }
+//    public CreateSprintController() {
+//        this.company = App.getInstance().getCompany();
+//    }
 
     /**
      * Constructor to test (without SINGLETON)
@@ -62,8 +62,8 @@ public class CreateSprintController {
         return this.sprint;
     }
 
-    public boolean saveSprint() {
-        return this.sprintList.saveSprint(this.sprint);
+    public boolean saveSprint(Sprint sprint) {
+        return this.sprintList.saveSprint(sprint);
     }
 }
 

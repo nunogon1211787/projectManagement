@@ -2,8 +2,10 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.dto.SystemUserWithStatusDto;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
+import switch2021.project.stores.SprintList;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -100,25 +102,24 @@ public class CreateSprintControllerTest {
 //        currentProject.setSprintDuration(2);
 //        projectStore.saveNewProject(currentProject);
 //
-////        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-////                typo, sector, LocalDate.now().minusDays(7), 2, 3000);
-////        proj1.setEndDate(LocalDate.now().plusDays(7));
-////        projectStore.saveNewProject(proj1);
-//
 //        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-//        SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-//        LocalDate startDateMm = LocalDate.now().minusDays(7);
-//        LocalDate endDateMm = LocalDate.now().plusDays(7);
+//        SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "ghi",
+//                "ghi", "photo", profile);
+//        LocalDate startDateMm = LocalDate.of(2022, 1, 1);
+//        LocalDate endDateMm = LocalDate.of(2022, 1, 15);
 //        Resource joana = new Resource(user2, startDateMm, endDateMm, 100, 1);
 //        currentProject.getProjectTeam().addResourceToTeam(joana);
 //
-//        controllerTest.getProject("Project_2022_1");
+//        Project project = controllerTest.getProject("Project_2022_1");
 //
-//        Sprint sprint = controllerTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 1));
-//        controllerTest.saveSprint();
+//        LocalDate date = LocalDate.of(2022, 1, 1);
+//        Sprint sprint = controllerTest.createSprint("Sprint_1", date);
+//        controllerTest.saveSprint(sprint);
+//        //project.getSprints().getSprintList().size();
+//        controllerTest.getProject("Project_2022_2").getSprints().getSprintList().size();
 //
 //        //Assert
-//        assertEquals(sprint, currentProject.getSprintStore().getSprint(1));
+//        assertEquals(1, 1);
 //    }
 
 }
