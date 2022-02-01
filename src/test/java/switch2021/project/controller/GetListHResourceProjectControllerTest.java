@@ -19,7 +19,8 @@ public class GetListHResourceProjectControllerTest {
     public void GetHResourceProjectController() {
         //Arrange
         Company company = new Company();
-        GetListHResourceProjectController controller = new GetListHResourceProjectController(company);
+        ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
+        GetListHResourceProjectController controller = new GetListHResourceProjectController(company, projectTeamMapper);
         //create project and save it
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
@@ -71,11 +72,11 @@ public class GetListHResourceProjectControllerTest {
         List<Resource> projTeam = proj1.getProjectTeam().getProjectTeamList();
 
         //create ResourceDto
-        ResourceDto resourceDtoExp1 = new ResourceDto("manuelbras", 2021,11,1,2022,11,15,100,0.5);
+        ResourceDto resourceDtoExp1 = new ResourceDto("manuelbras", projectRole.getName(),"2021/11/1","2022/11/15",100,0.5);
         //        ResourceDto resourceDtoExp2 = new ResourceDto("manuelfernandes", 2021,11,16,2022,11,30,100,1);
-        ResourceDto resourceDtoExp3 = new ResourceDto("manueljose", 2021,11,1,2022,11,15,100,.5);
+        ResourceDto resourceDtoExp3 = new ResourceDto("manueljose", projectRole.getName(), "2021/11/1", "2022/11/15",100,.5);
         //        ResourceDto resourceDtoExp4 = new ResourceDto("manuelfernandes", 2021,11,16,2022,11,30,100,1);
-        ResourceDto resourceDtoExp5 = new ResourceDto("manuelfernandes", 2021,11,16,2022,11,30,100,1);
+        ResourceDto resourceDtoExp5 = new ResourceDto("manuelfernandes", projectRole.getName(), "2021/11/16","2022/11/30",100,1);
         //create ResourceDtoList
         List<ResourceDto> resourceDtoListExp = new ArrayList<>();
         resourceDtoListExp.add(resourceDtoExp1);
@@ -84,7 +85,7 @@ public class GetListHResourceProjectControllerTest {
 
         //Act
 //    ResourceDto resDto = ProjectTeamMapper.toDto(manuelfernandes);
-        List<ResourceDto> resDtoList = ProjectTeamMapper.toDto(projTeam);
+        List<ResourceDto> resDtoList = projectTeamMapper.toDto(projTeam);
 
 
 //    controller.getProjectTeam("Project_2022_1");

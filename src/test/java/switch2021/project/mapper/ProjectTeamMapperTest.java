@@ -18,6 +18,7 @@ public class ProjectTeamMapperTest {
     public void ProjectTeamMappertoDto() {
         //Arrange
         Company company = new Company();
+        ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
 
         //create project and save it
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
@@ -59,9 +60,9 @@ public class ProjectTeamMapperTest {
         List<Resource> projTeam = proj1.getProjectTeam().getProjectTeamList();
 
         //create ResourceDto
-        ResourceDto resourceDtoExp1 = new ResourceDto("manuelbras", 2021,11,1,2022,11,15,100,0.5);
-        ResourceDto resourceDtoExp3 = new ResourceDto("manueljose", 2021,11,1,2022,11,15,100,.5);
-        ResourceDto resourceDtoExp5 = new ResourceDto("manuelfernandes", 2021,11,16,2022,11,30,100,1);
+        ResourceDto resourceDtoExp1 = new ResourceDto("manuelbras", projectRole.getName(),"2021/11/1","2022/11/15",100,0.5);
+        ResourceDto resourceDtoExp3 = new ResourceDto("manueljose", projectRole.getName(), "2021/11/1", "2022/11/15",100,.5);
+        ResourceDto resourceDtoExp5 = new ResourceDto("manuelfernandes", projectRole.getName(), "2021/11/16","2022/11/30",100,1);
         //create ResourceDtoList
         List<ResourceDto> resourceDtoListExp = new ArrayList<>();
         resourceDtoListExp.add(resourceDtoExp1);
@@ -69,8 +70,8 @@ public class ProjectTeamMapperTest {
         resourceDtoListExp.add(resourceDtoExp5);
 
         //Act
-        ResourceDto resDto = ProjectTeamMapper.toDto(manuelfernandes);
-        List<ResourceDto> resDtoList = ProjectTeamMapper.toDto(projTeam);
+        ResourceDto resDto = projectTeamMapper.toDto(manuelfernandes);
+        List<ResourceDto> resDtoList = projectTeamMapper.toDto(projTeam);
 
         //Asserts
         assertEquals(resourceDtoExp5,resDto);

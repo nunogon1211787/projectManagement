@@ -14,13 +14,8 @@ public class ResourceDto {
 
     private String userName;
     private String role;
-    private int yearStartDate;
-    private int monthStartDate;
-    private int dayStartDate;
-    private int yearEndDate;
-    private int monthEndDate;
-    private int dayEndDate;
-
+    private String startDate;
+    private String endDate;
     private double costPerHour;
     private double percentageOfAllocation;
 
@@ -28,16 +23,12 @@ public class ResourceDto {
      * Constructor to test (without SINGLETON).
      */
 
-    public ResourceDto(String name, int yearStartDate, int monthStartDate, int dayStartDate, int yearEndDate, int monthEndDate, int dayEndDate, double costPerHour, double percentageOfAllocation){
+    public ResourceDto(String name, String role, String startDate, String endDate, double costPerHour, double percentageOfAllocation){
         this.userName = name;
-        this.yearStartDate = yearStartDate;
-        this.monthStartDate = monthStartDate;
-        this.dayStartDate = dayStartDate;
-        this.yearEndDate = yearEndDate;
-        this.monthEndDate = monthEndDate;
-        this.dayEndDate = dayEndDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.role = role;
         this.costPerHour = costPerHour;
         this.percentageOfAllocation = percentageOfAllocation;
     }
-
 }
