@@ -21,7 +21,7 @@ participant "us : UserStory" as C6
 activate PM
 
 PM -> System: Wants to change Status of US
-System -> Ctrl: getUsStatusListD()
+System -> Ctrl: getUsAvailableStatusListD()
 Ctrl -> C7: getUsStatusListD()
 C7 --> Ctrl: usStatusListD
 Ctrl --> System: usStatusListD
@@ -33,7 +33,7 @@ Ctrl -> C1: getProjectStore()
 C1 --> Ctrl: projStore
 Ctrl -> C2: getProjectByCode(code)
 C2 --> Ctrl: proj
-Ctrl -> C3: getSprint()
+Ctrl -> C3: getCurrentSprint()
 C3 --> Ctrl: sprint
 Ctrl -> C5: getSprintBacklog()
 C5 --> Ctrl: sprintBacklog
