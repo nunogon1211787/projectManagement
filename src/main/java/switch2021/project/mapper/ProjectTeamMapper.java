@@ -11,7 +11,11 @@ public class ProjectTeamMapper {
     public ResourceDto toDto(Resource resource){
         String startDate = resource.getStartDate().getYear() + "/" + resource.getStartDate().getMonthValue() + "/" + resource.getStartDate().getDayOfMonth();
         String endDate = resource.getEndDate().getYear() + "/" + resource.getEndDate().getMonthValue() + "/" + resource.getEndDate().getDayOfMonth();
-        return new ResourceDto(resource.getUser().getUserName(), resource.getRole().getName(), startDate, endDate, resource.getCostPerHour(), resource.getPercentageOfAllocation());
+        String role = null;
+        if(resource.getRole() != null){
+            role = resource.getRole().getName();
+        }
+        return new ResourceDto(resource.getUser().getUserName(),role, startDate, endDate, resource.getCostPerHour(), resource.getPercentageOfAllocation());
     }
 
     public List<ResourceDto> toDto(List<Resource> resourceList){
@@ -20,7 +24,11 @@ public class ProjectTeamMapper {
         for(Resource resource: resourceList){
             String startDate = resource.getStartDate().getYear() + "/" + resource.getStartDate().getMonthValue() + "/" + resource.getStartDate().getDayOfMonth();
             String endDate = resource.getEndDate().getYear() + "/" + resource.getEndDate().getMonthValue() + "/" + resource.getEndDate().getDayOfMonth();
-            ResourceDto resourceDto = new ResourceDto(resource.getUser().getUserName(), resource.getRole().getName(), startDate, endDate, resource.getCostPerHour(), resource.getPercentageOfAllocation());
+            String role = null;
+            if(resource.getRole() != null){
+                role = resource.getRole().getName();
+            }
+            ResourceDto resourceDto = new ResourceDto(resource.getUser().getUserName(), role, startDate, endDate, resource.getCostPerHour(), resource.getPercentageOfAllocation());
             resourceDtoList.add(resourceDto);
         }
         return resourceDtoList;
