@@ -37,14 +37,14 @@ public class UserStory {
     }*/
 
     //Main Constructor(acho)
-    public UserStory(String name, int priority, String description, int timeEstimate) {
+    public UserStory(String name, int priority, String description, int timeEstimateInHours) {
         isValidUserStory(name, priority, description);
 
         this.name = name;
         this.description = description;
         this.userStoryStatus = new UserStoryStatus("To do");
         this.priority = priority;
-        this.timeEstimate = timeEstimate;
+        this.timeEstimate = timeEstimateInHours;
         this.tasks = new TaskList();
     }
 
@@ -122,7 +122,7 @@ public class UserStory {
             throw new IllegalArgumentException("Name cannot be blank.");
         }
         if (name.length() < 3) {
-            throw new IllegalArgumentException("Name must be at least 5 characters");
+            throw new IllegalArgumentException("Name must be at least 3 characters");
         }
         return true;
     }

@@ -9,7 +9,7 @@ public class ScrumBoardMapper {
 
     public ScrumBoardDTO toDTO (UserStory userStory) {
         return new ScrumBoardDTO(userStory.getName(),userStory.getUserStoryStatus().getDescription(),
-                userStory.getDescription(), userStory.getTimeEstimate(), userStory.getPriority());
+                userStory.getDescription(), userStory.getTimeEstimate(), userStory.getPriority(), userStory.getId_UserStory());
     }
 
     public List<ScrumBoardDTO> toDtoList(List<UserStory> userStoryList){

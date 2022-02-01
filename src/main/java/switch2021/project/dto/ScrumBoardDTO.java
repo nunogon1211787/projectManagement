@@ -12,13 +12,15 @@ public class ScrumBoardDTO {
         private String userStoryDescription;
         private int userStoryTimeEstimate;
         private int userStoryPriority;
+        private int userStoryId;
 
-        public ScrumBoardDTO(String name, String status, String description, int timeEstimate, int priority) {
+        public ScrumBoardDTO(String name, String status, String description, int timeEstimate, int priority, int userStoryId) {
                 this.userStoryName = name;
                 this.userStoryStatus = status;
                 this.userStoryDescription = description;
                 this.userStoryTimeEstimate = timeEstimate;
                 this.userStoryPriority = priority;
+                this.userStoryId = userStoryId;
         }
 
         @Override
@@ -26,7 +28,12 @@ public class ScrumBoardDTO {
                 if (this == o) return true;
                 if (o == null || getClass() != o.getClass()) return false;
                 ScrumBoardDTO that = (ScrumBoardDTO) o;
-                return userStoryTimeEstimate == that.userStoryTimeEstimate && userStoryPriority == that.userStoryPriority && Objects.equals(userStoryName, that.userStoryName) && Objects.equals(userStoryStatus, that.userStoryStatus) && Objects.equals(userStoryDescription, that.userStoryDescription);
+                return userStoryTimeEstimate == that.userStoryTimeEstimate
+                        && userStoryPriority == that.userStoryPriority
+                        && userStoryId == that.userStoryId
+                        && Objects.equals(userStoryName, that.userStoryName)
+                        && Objects.equals(userStoryStatus, that.userStoryStatus)
+                        && Objects.equals(userStoryDescription, that.userStoryDescription);
         }
 
         @Override
