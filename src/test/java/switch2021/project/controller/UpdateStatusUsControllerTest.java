@@ -23,9 +23,6 @@ class UpdateStatusUsControllerTest {
     private Sprint sprint;
     private UserStoryStatusStore userStoryStatusStore = new UserStoryStatusStore();
 
-
-
-
     @Test
     void getUsAvailableStatusList() {
         //arrange

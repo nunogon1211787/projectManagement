@@ -23,7 +23,7 @@ class ProjectStore {
 }
 
 class Project {
-    +getSprint()
+    +getCurrentSprint()
 }
 
 class Sprint {
