@@ -1,15 +1,29 @@
 package switch2021.project.dto;
 
 import lombok.Getter;
-import switch2021.project.model.TaskType;
 
 @Getter
 public class CreateTaskDTO {
 
-    private String name;
-    private String description;
-    private int effortEstimate;
-    private String typeName;
-    private String responsible;
 
+    /**
+     * Atributtes.
+     */
+    private final String name;
+    private final String description;
+    private final int effortEstimate;
+    private final String typeName;
+    private final String responsible;
+
+    /**
+     * Constructor.
+     */
+
+    public CreateTaskDTO(String name, String description, int effortEstimate, String typeName, String responsible) {
+        this.name = name;
+        this.description = description;
+        this.effortEstimate = effortEstimate;
+        this.typeName = typeName;
+        this.responsible = responsible;
+    }
 }

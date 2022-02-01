@@ -354,7 +354,7 @@ class ProjectTest {
         //Arrange
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
         Task taskTest = sprint1.getTaskList().createTask("test");
-        sprint1.getTaskList().addTaskToTheList(taskTest);
+        sprint1.getTaskList().saveTask(taskTest);
         List<Task> taskList = new ArrayList<>();
         //Act
         project2.getSprints().saveSprint(sprint1);

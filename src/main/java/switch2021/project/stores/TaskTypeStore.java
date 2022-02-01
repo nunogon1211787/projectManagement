@@ -35,6 +35,19 @@ public class TaskTypeStore {
     }
 
     /**
+     * Method to create TaskType.
+     */
+
+    public boolean createTaskType(String name){
+
+        TaskType newType = new TaskType(name);
+
+        return saveTaskType(newType);
+
+    }
+
+
+    /**
      * Methods to iterate with the list.
      */
 
@@ -92,10 +105,8 @@ public class TaskTypeStore {
 
             } else {
 
-                if (validateNewTypeName(type)) {
                     type.setType_ID(id_TaskTypeGenerator());
                     this.taskTypeList.add(type);
-                }
 
             }
 

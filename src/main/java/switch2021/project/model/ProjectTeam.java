@@ -76,7 +76,7 @@ public class ProjectTeam {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(name) && i.isCurrent()) {
+            if (i.isYourName(name) && i.isCurrent()) {
                 resource = i;
             }
         }
@@ -173,14 +173,18 @@ public class ProjectTeam {
      **/
     public boolean checkIfRoleCurrentExistInTheProjectTeam(ProjectRole role, LocalDate startDate) {
         boolean msg = false;
-        if (!role.isValidName("Team Member")) {
-            for (Resource i : projectTeamList) {
-                if (i.isYour(role) && i.getEndDate().isAfter(startDate)) {
-                    msg = true;
-                    break;
+
+        if(role != null) {
+            if (!role.isValidName("Team Member")) {
+                for (Resource i : projectTeamList) {
+                    if (i.isYour(role) && i.getEndDate().isAfter(startDate)) {
+                        msg = true;
+                        break;
+                    }
                 }
             }
         }
+
         return msg;
     }
 

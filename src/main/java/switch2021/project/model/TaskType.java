@@ -1,15 +1,21 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Objects;
 
 @Getter
 public class TaskType {
 
+    /**
+     * Attributes.
+     */
     private int type_ID;
     private String name;
+
+    /**
+     * Constructor.
+     */
 
     public TaskType(String name){
         checkNameRules(name);
@@ -17,7 +23,7 @@ public class TaskType {
     }
 
     /**
-     * Methods to iterate with atributtes,
+     * Methods to iterate with attributes,
      */
 
     public boolean hasName(String typeName) {
@@ -30,7 +36,7 @@ public class TaskType {
     }
 
     /**
-     * Methods to validate atributtes data.
+     * Methods to validate attributes data.
      */
 
 
@@ -46,5 +52,20 @@ public class TaskType {
             throw new IllegalArgumentException("Type ID cannot be negative.");
     }
 
+    /**
+     * Override methods.
+     */
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskType taskType = (TaskType) o;
+        return type_ID == taskType.type_ID && name.equals(taskType.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type_ID, name);
+    }
 }

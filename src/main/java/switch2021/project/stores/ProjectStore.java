@@ -49,12 +49,13 @@ public class ProjectStore {
 
     //This method was changed to implement encapsulation.
     public Project getProjectByCode(String code) {
+        Project res = null;
         for (Project proj : projectList) {
             if (proj.hasCode(code)) {
-                return proj;
+                res = proj;
             }
         }
-        return null;
+        return res;
     }
 
     /**
