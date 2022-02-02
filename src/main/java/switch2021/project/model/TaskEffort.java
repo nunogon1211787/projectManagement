@@ -27,15 +27,15 @@ public class TaskEffort {
             throw new IllegalArgumentException("Not valid work time values.");
     }
 
-    private void checkWorkDateRules(LocalDate workDate) {
-        if (workDate == null || workDate.toString().isEmpty()) {
+    private void checkWorkDateRules(LocalDate effortDate) {
+        if (effortDate == null || effortDate.toString().isEmpty()) {
             this.effortDate = LocalDate.now();
-        } else if (workDate.isAfter(LocalDate.now())) {
+        } else if (effortDate.isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("Invalid workHours value.");
-        } else if (workDate.isAfter(this.effortResponsible.getEndDate()) || workDate.isBefore(this.effortResponsible.getStartDate())) {
+        } else if (effortDate.isAfter(this.effortResponsible.getEndDate()) || effortDate.isBefore(this.effortResponsible.getStartDate())) {
             throw new IllegalArgumentException("work date not match with the resource allocation dates");
         } else {
-            this.effortDate = workDate;
+            this.effortDate = effortDate;
         }
     }
 

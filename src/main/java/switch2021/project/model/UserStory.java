@@ -3,7 +3,6 @@ package switch2021.project.model;
 import lombok.Data;
 import switch2021.project.stores.TaskList;
 
-
 import java.util.Objects;
 
 /**
@@ -25,6 +24,7 @@ public class UserStory {
     private UserStory ParentUserStory;
     private int timeEstimate;
     private TaskList tasks;
+    private double workDone;
 
     /**
      * ---> Constructor <---
@@ -129,8 +129,12 @@ public class UserStory {
 
 
     private boolean validatePriority(int x) {
-        if (x < 0 || x > 5)
-            return false;
+        return x >= 0 && x <= 5;
+    }
+
+    public boolean updateWorkDone(int taskId) {
+        this.workDone = this.tasks.getTaskById(taskId).getHoursSpent();
+
         return true;
     }
 

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserStoryTest {
 
@@ -23,13 +23,44 @@ class UserStoryTest {
     @Test
     void setUserStoryStatusBooleanTest() {
 
-        Sprint sprint = new Sprint("Super", LocalDate.of(2022,3,1));
-        userStory = new UserStory("US001", 2, "Fazer tal",5);
+        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+        userStory = new UserStory("US001", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         UserStoryStatus userStoryStatus = new UserStoryStatus("Almost finished");
         userStory.setUserStoryStatusBoolean(userStoryStatus);
 
         assertEquals(userStory.getUserStoryStatus().getDescription(), "Almost finished");
 
+    }
+
+    @Test
+    void setUpdateUserStoryWorkDoneTest() {
+        //Arrange
+        Company company = new Company();
+        //User Story
+        ProductBacklog productBacklog = new ProductBacklog();
+        UserStory userStory = new UserStory("US001", 1, "US001 - Test", 40);
+        productBacklog.saveUserStory(userStory);
+        //Task
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        Task task = new Task("test", taskDescription, 20.00, taskType, resource);
+        userStory.getTasks().saveTask(task);
+        //TaskEffort
+        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
+        LocalDate effortDate2 = LocalDate.of(2022, 1, 21);
+        TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
+        task.saveTaskEffort(taskEffort);
+        task.saveTaskEffort(taskEffort2);
+        //Act
+        userStory.updateWorkDone(task.getID_Task());
+        //Assert
+        assertEquals(12, userStory.getWorkDone());
     }
 }

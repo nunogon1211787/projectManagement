@@ -127,7 +127,9 @@ public class Task {
     }
 
     public TaskEffort createTaskEffort(int effortHours, int effortMinutes, LocalDate effortDate, String comment, String attachment) {
-        return new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, this.responsible);
+        Resource effortResponsible = this.responsible;
+
+        return new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, effortResponsible);
     }
 
     public boolean validateTaskEffort(TaskEffort effort) {
