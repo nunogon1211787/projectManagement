@@ -129,9 +129,7 @@ public class UserStory {
 
 
     private boolean validatePriority(int x) {
-        if (x < 0 || x > 5)
-            return false;
-        return true;
+        return x >= 0 && x <= 5;
     }
 
     @Override

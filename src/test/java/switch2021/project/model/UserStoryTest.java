@@ -14,6 +14,20 @@ class UserStoryTest {
 
     @Test
     void setPriorityTest() {
+        Sprint sprint = new Sprint("Super", LocalDate.of(2022,3,1));
+        userStory = new UserStory("US001", 2, "Fazer tal",5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        userStory.setPriority(4);
+        assertEquals(userStory.getPriority(),4);
+    }
+
+    @Test
+    void setPriorityTestInvalid() {
+        Sprint sprint = new Sprint("Super", LocalDate.of(2022,3,1));
+        userStory = new UserStory("US001", 2, "Fazer tal",5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        userStory.setPriority(6);
+        assertEquals(userStory.getPriority(),2);
     }
 
     @Test
