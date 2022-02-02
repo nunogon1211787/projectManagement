@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.controller.ChangePasswordController;
 import switch2021.project.utils.App;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -119,14 +120,16 @@ public class ProjectTeam {
      * Method to Get a Specific Resource (PO), by StartDate of the Sprint
      */
 
-    private Resource getProductOwnerByStartDate(LocalDate startDate, int sprintDuration) {
+    public Resource getProductOwnerByStartDate(LocalDate startDate, int sprintDuration) {
+
+        Company company = new Company();
 
         Resource resource = null;
 
-        ProjectRole role = App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Product Owner");
+        ProjectRole role = company.getProjectRoleStore().getProjectRole("Product Owner");
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(role)&& i.isAvailableToSprint(startDate, sprintDuration)) {
+            if (i.isYour(role) && i.isAvailableToSprint(startDate, sprintDuration)) {
                 resource = i;
             }
         }
@@ -137,11 +140,13 @@ public class ProjectTeam {
      * Method to Get a Specific Resource (SM), by StartDate of the Sprint
      */
 
-    private Resource getScrumMasterByStartDate(LocalDate startDate, int sprintDuration) {
+    public Resource getScrumMasterByStartDate(LocalDate startDate, int sprintDuration) {
+
+        Company company = new Company();
 
         Resource resource = null;
 
-        ProjectRole role = App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Scrum Master");
+        ProjectRole role = company.getProjectRoleStore().getProjectRole("Scrum Master");
 
         for (Resource i : projectTeamList) {
             if (i.isYour(role) && i.isAvailableToSprint(startDate, sprintDuration)){

@@ -157,38 +157,62 @@ public class ProjectTeamTest {
         //Assert
         assertEquals(7, proj1.getProjectTeam().getProjectTeamList().size());
     }
-
+//
 //    @Test
 //    @DisplayName("Test to Validate Project Team")
 //    public void validateProjectTeamSuccess() {
 //        //Arrange
 //        //User1
 //        Company company = new Company();
+//
 //        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-//        SystemUser joana = new SystemUser("joana", "joana@beaver.com", "developer", "ghi",
-//                "ghi", "photo", profile);
-//        LocalDate startDate = LocalDate.of(2022, 1, 1);
-//        LocalDate endDate = LocalDate.of(2022, 1, 15);
-//        Resource joanaResource = new Resource(joana, startDate, endDate, 100, .5);
-//        boolean joanaRole = joanaResource.isYour("Scrum Master");
-//        //User2
-//        SystemUser isabel = new SystemUser("isabel", "isabel@beaver.com", "tester", "ghi",
-//                "ghi", "photo1", profile);
-//        LocalDate startDateIsa = LocalDate.of(2022, 1, 1);
-//        LocalDate endDateIsa = LocalDate.of(2022, 1, 15);
-//        Resource isabelResource = new Resource(isabel, startDateIsa, endDateIsa, 100, .5);
+//
+//        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+//        LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
+//        LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
+//        Resource joana1R = new Resource(joana1, startDatej1, endDatej1, 100, .5);
+//        joana1R.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
+//
+//        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+//        LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
+//        LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
+//        Resource joana2R = new Resource(joana2, startDatej2, endDatej2, 100, 1);
+//        joana2R.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
+//
+//        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+//        LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
+//        LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
+//        Resource joana3R= new Resource(joana3, startDatej3, endDatej3, 100, .5);
+//        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
+//
+//        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+//        LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
+//        LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
+//        Resource joana4R = new Resource(joana4, startDatej4, endDatej4, 100, .3333);
+//        joana4R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+//
+//        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+//        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+//        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+//
+//        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+//                typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
+//        proj1.setEndDate(LocalDate.of(2022, 12, 31));
+//
 //        //Act
-//        proj1.getProjectTeam().addResourceToTeam(joanaResource);
-//        proj1.getProjectTeam().addResourceToTeam(isabelResource);
-//        int joanaSize = company.getProjectStore().getCurrentProjectsByUserEmail("joana@beaver.com").size();
-//        int isabelSize = company.getProjectStore().getCurrentProjectsByUserEmail("isabel@beaver.com").size();
-//        //proj1.getProjectTeam().assignProjectRole(manuelTest, LocalDate.of(2021,11,16), 2, company.getProjectRoleStore().getProjectRole("Scrum Master"));
+//
+//        proj1.getProjectTeam().addResourceToTeam(joana1R);
+//        proj1.getProjectTeam().addResourceToTeam(joana2R);
+//        proj1.getProjectTeam().addResourceToTeam(joana3R);
+//        proj1.getProjectTeam().addResourceToTeam(joana4R);
+//
 //        //Assert
-//        assertEquals(joanaSize, isabelSize);
-//        assertTrue(proj1.getProjectTeam().validateProjectTeam(startDate, 1));
-//
-//        //assertTrue(proj1.getProjectTeam().validateProjectTeam(startDateIsa, 1));
-//
+//        assertTrue(joana1R.isYour(company.getProjectRoleStore().getProjectRole("Scrum Master")));
+//        assertTrue(joana2R.isYour(company.getProjectRoleStore().getProjectRole("Product Owner")));
+//        assertTrue(joana3R.isYour(company.getProjectRoleStore().getProjectRole("Project Manager")));
+//        assertTrue(joana4R.isYour(company.getProjectRoleStore().getProjectRole("Team Member")));
+//        assertTrue(proj1.getProjectTeam().validateProjectTeam(LocalDate.of(2022, 2, 1), 2));
+//        //assertTrue(proj1.getProjectTeam().validateProjectTeam(startDatej2, 2));
 //    }
 }
 
