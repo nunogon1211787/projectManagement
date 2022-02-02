@@ -1,6 +1,7 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.Company;
 import switch2021.project.model.TaskType;
 
 import java.util.List;
@@ -113,6 +114,15 @@ class TaskTypeStoreTest {
         test.saveTaskType(type1);
         //Assert
         assertEquals(0, test.getTaskTypesNames().size());
+    }
+
+    @Test
+    void TaskTypeStoreConstructorTest() {
+        //Arrange
+        TaskTypeStore test1 = new TaskTypeStore();
+        TaskTypeStore test2 = new TaskTypeStore();
+        //Assert
+        assertEquals(test1, test2);
     }
 
 }

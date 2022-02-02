@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.utils.App;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -156,6 +158,45 @@ public class ProjectTeamTest {
         proj1.getProjectTeam().assignProjectRole(manuelTest, LocalDate.of(2021,11,16), 2, company.getProjectRoleStore().getProjectRole("Scrum Master"));
         //Assert
         assertEquals(7, proj1.getProjectTeam().getProjectTeamList().size());
+    }
+
+    @Test
+    void getResource() {
+        //Arrange
+        Company company = new Company();
+        ProjectTeam test = new ProjectTeam();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user1 = new SystemUser("manuelbrasil", "manuelbrasil@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = new SystemUser("manueltest", "manueltest@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 11, 15);
+        Resource manuelbrasil = new Resource(user1, startDateMb, endDateMb, 100, .5);
+        Resource manueltest = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, .5);
+        test.saveResource(manueltest);
+        test.saveResource(manuelbrasil);
+        //Assert
+        assertEquals(manueltest, test.getResource(user2));
+        assertEquals(manuelbrasil, test.getResource(user1));
+    }
+
+    @Test
+    void getCurrentResourcesNames() {
+        Company company = new Company();
+        ProjectTeam test = new ProjectTeam();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user1 = new SystemUser("manuelbrasil", "manuelbrasil@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = new SystemUser("manueltest", "manueltest@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 11, 15);
+        Resource manuelbrasil = new Resource(user1, startDateMb, endDateMb, 100, .5);
+        Resource manueltest = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, .5);
+        test.saveResource(manueltest);
+        test.saveResource(manuelbrasil);
+        List<String> testList = new ArrayList<>();
+        testList.add("manueltest");
+        testList.add("manuelbrasil");
+        //Assert
+        assertEquals(testList, test.getCurrentResourcesNames());
     }
 
 //    @Test

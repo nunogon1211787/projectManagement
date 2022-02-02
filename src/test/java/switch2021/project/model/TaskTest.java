@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.stores.TaskList;
 
 import java.time.LocalDate;
 
@@ -312,5 +313,156 @@ class TaskTest {
         //Assert
         assertFalse(task.saveTaskEffort(taskEffort));
     }
+
+    @Test
+    void hasTypeStatusResponsibleTestSuccess() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        Task task = new Task("test", taskDescription, 20.00, taskType, resource);
+        //Assert
+        assertTrue(task.hasType(taskType));
+        assertTrue(task.hasStatus(company.getTaskStatusStore().getInitialStatus()));
+        assertTrue(task.hasResponsible(resource));
+    }
+
+    @Test
+    void constructorCheckNameEmptyTest() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+
+        //Asserts
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            new Task("", taskDescription, 20.00, taskType, resource);
+        });
+    }
+
+    @Test
+    void constructorCheckNameSizeTest() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+
+        //Asserts
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            new Task("t1", taskDescription, 20.00, taskType, resource);
+        });
+    }
+
+    @Test
+    void constructorCheckDescriptionEmptyTest() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        String taskDescription = "";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+
+        //Asserts
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            new Task("test", taskDescription, 20.00, taskType, resource);
+        });
+    }
+
+    @Test
+    void constructorCheckDescriptionSizeTest() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        String taskDescription = "must be at";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+
+        //Asserts
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            new Task("test", taskDescription, 20.00, taskType, resource);
+        });
+    }
+
+    @Test
+    void constructorCheckTypeNotNullTest() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = null;
+
+        //Asserts
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            new Task("test", taskDescription, 20.00, taskType, resource);
+        });
+    }
+
+    @Test
+    void constructorCheckResponsibleNotNullTest() {
+        //Arrange
+        Company company = new Company();
+        Resource resource = null;
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+
+        //Asserts
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            new Task("test", taskDescription, 20.00, taskType, resource);
+        });
+    }
+
+    @Test
+    void checkIdRulesTest() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        Task test = new Task("test", taskDescription, 20.00, taskType, resource);
+        //Asserts
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            test.setID_Task(-1);
+        });
+    }
+
+
+
+
 
 }
