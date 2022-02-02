@@ -100,4 +100,49 @@ class UserStoryTest {
         boolean expected = userStory.validatePriority(1);
         assertTrue(expected);
     }
+
+    @Test
+    void validatePriorityTest3() {
+        Sprint sprint = new Sprint("Super", LocalDate.of(2022,3,1));
+        userStory = new UserStory("US001", 2, "Fazer tal",5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        boolean expected = userStory.validatePriority(-1);
+        assertFalse(expected);
+    }
+
+    @Test
+    void isValidUserStoryDescription() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            userStory = new UserStory("US001", 2, "", 5);
+            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        });
+    }
+
+    @Test
+    void isValidUserStoryDescription2() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            userStory = new UserStory("US001", 2, "Co", 5);
+            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        });
+    }
+
+    @Test
+    void isValidUserStoryName() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            userStory = new UserStory("", 2, "Fazer tal", 5);
+            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        });
+    }
+
+    @Test
+    void isValidUserStoryName2() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            userStory = new UserStory("C", 2, "Fazer tal", 5);
+            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        });
+    }
 }
