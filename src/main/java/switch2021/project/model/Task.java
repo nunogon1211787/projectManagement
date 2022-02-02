@@ -2,10 +2,11 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.stores.TaskStatusStore;
 import switch2021.project.utils.App;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Setter
@@ -27,6 +28,7 @@ public class Task {
     private double hoursSpent; // Initially zero and will be updated by effort register.
     private double executionPercentage; // Calculated by divide hoursSpent to effortRemaining.
     private Resource responsible;
+    private List<TaskEffort> taskEffortList;
 
 
     /**
@@ -37,7 +39,7 @@ public class Task {
         this.status = new TaskStatus("Planned");
     }
 
-    public Task(String name, String description, int effortEstimate, TaskType type, Resource responsible){
+    public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible) {
 
         checkNameRules(name);
         checkDescriptionRules(description);
@@ -52,6 +54,7 @@ public class Task {
         this.type = type;
         this.responsible = responsible;
         this.status = App.getInstance().getCompany().getTaskStatusStore().getInitialStatus();
+        this.taskEffortList = new ArrayList<>();
 
     }
 
@@ -59,21 +62,30 @@ public class Task {
      * Methods to iterate with atributtes,
      */
 
-    public boolean hasName(String taskName) { return Objects.equals(this.name, taskName); }
+    public boolean hasName(String taskName) {
+        return Objects.equals(this.name, taskName);
+    }
 
-    public boolean hasType(TaskType taskType) { return Objects.equals(this.type, taskType); }
+    public boolean hasType(TaskType taskType) {
+        return Objects.equals(this.type, taskType);
+    }
 
-    public boolean hasStatus(TaskStatus taskStatus) { return Objects.equals(this.status, taskStatus); }
+    public boolean hasStatus(TaskStatus taskStatus) {
+        return Objects.equals(this.status, taskStatus);
+    }
 
-    public boolean hasResponsible(Resource resp) { return Objects.equals(this.responsible, resp); }
+    public boolean hasResponsible(Resource resp) {
+        return Objects.equals(this.responsible, resp);
+    }
 
-    public boolean hasId(int id) { return Objects.equals(this.ID_Task, id);}
+    public boolean hasId(int id) {
+        return Objects.equals(this.ID_Task, id);
+    }
 
-    public void setID_Task(int id){
+    public void setID_Task(int id) {
         checkIdRules(id);
         this.ID_Task = id;
     }
-
     /**
      * Methods to validate attributes data.
      */
@@ -91,28 +103,94 @@ public class Task {
 
     private void checkDescriptionRules(String description) {
         if (description.trim().isEmpty())
-            throw new IllegalArgumentException("Name cannot be empty.");
+            throw new IllegalArgumentException("Description cannot be empty.");
         if ((description.length() < 20))
-            throw new IllegalArgumentException("Name must be at least 20 characters");
+            throw new IllegalArgumentException("Description must be at least 20 characters");
     }
 
-    private void checkEffortRules(int effort) {
-        if(effort <= 0){
+    private void checkEffortRules(double effort) {
+        if (effort <= 0) {
             throw new IllegalArgumentException("Effort can be bigger than zero.");
         }
     }
 
     private void checkTypeNotNull(TaskType type) {
-        if(type == null){
+        if (type == null) {
             throw new IllegalArgumentException("Type can be a valid(not null) object.");
         }
     }
 
     private void checkResponsibleNotNull(Resource responsible) {
-        if(responsible == null){
+        if (responsible == null) {
             throw new IllegalArgumentException("Responsible can be a valid(not null) object.");
         }
     }
+
+    public TaskEffort createTaskEffort(int effortHours, int effortMinutes, LocalDate effortDate, String comment, String attachment) {
+        return new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, this.responsible);
+    }
+
+    public boolean validateTaskEffort(TaskEffort effort) {
+        boolean result = false;
+
+        for (TaskEffort i : this.taskEffortList) {
+            if (!effort.getEffortDate().isAfter(i.getEffortDate())) {
+                throw new IllegalArgumentException("Effort for this day is already saved.");
+            }
+        }
+        if (effort == null) {
+            return false;
+        }
+        return !this.taskEffortList.contains(effort);
+    }
+
+    public boolean saveTaskEffort(TaskEffort effort) {
+        boolean result = true;
+
+        if (!validateTaskEffort(effort)) {
+            result = false;
+        } else {
+            if (taskEffortList.isEmpty()) {
+                setStartDate(effort.getEffortDate());
+                setStatus(App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Running"));
+            }
+            this.taskEffortList.add(effort);
+            updateHoursSpent(effort);
+            updateEffortRemaining(effort);
+            updateExecutionPercentage();
+            if (this.effortRemaining == 0) {
+                setStatus(App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Finished"));
+                setEndDate(effort.getEffortDate());
+            }
+        }
+        return result;
+    }
+
+    private double effortInHours(TaskEffort effort) {
+        return (double) effort.getEffortHours() + ((double) effort.getEffortMinutes() / 60);
+    }
+
+    public double updateHoursSpent(TaskEffort effort) {
+        return this.hoursSpent = this.hoursSpent + effortInHours(effort);
+    }
+
+    public double updateEffortRemaining(TaskEffort effort) {
+        if (this.effortRemaining - effortInHours(effort) < 0) {
+            return this.effortRemaining = 0.0;
+        }
+        return this.effortRemaining = this.effortRemaining - effortInHours(effort);
+    }
+
+    public double updateExecutionPercentage() {
+        double workTotal = this.hoursSpent + this.effortRemaining;
+        double workDone = this.hoursSpent;
+        if (workDone > workTotal || workDone == workTotal) {
+            return this.executionPercentage = 1.0;
+        } else {
+            return this.executionPercentage = workDone / workTotal;
+        }
+    }
+
 
     /**
      * Override methods.

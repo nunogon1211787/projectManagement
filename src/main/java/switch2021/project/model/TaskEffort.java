@@ -4,48 +4,51 @@ import java.time.LocalDate;
 
 public class TaskEffort {
 
-    private int workHours;
-    private int workMinutes;
-    private LocalDate workDate;
+    private int effortHours;
+    private int effortMinutes;
+    private LocalDate effortDate;
     private String comment;
     private String attachment;
-    private SystemUser user;
+    private Resource effortResponsible;
 
-    public TaskEffort(int workHours, int workMinutes, LocalDate workDate, String comment, String attachment, SystemUser user) {
-        checkWorkTimeRules(workHours, workMinutes);
-        checkWorkDateRules(workDate);
-        this.workHours = workHours;
-        this.workMinutes = workMinutes;
+    public TaskEffort(int effortHours, int effortMinutes, LocalDate effortDate, String comment, String attachment, Resource effortResponsible) {
+        this.effortResponsible = effortResponsible;
+        checkWorkTimeRules(effortHours, effortMinutes);
+        checkWorkDateRules(effortDate);
+        this.effortHours = effortHours;
+        this.effortMinutes = effortMinutes;
         this.comment = comment;
         this.attachment = attachment;
-        this.user = user;
+
     }
 
-    private void checkWorkTimeRules(double workHours, double workMinutes) {
-        if (workHours < 0 || workMinutes < 0 || workHours == 0 && workMinutes == 0 || workHours >= 24 || workMinutes >= 60)
+    private void checkWorkTimeRules(double effortHours, double effortMinutes) {
+        if (effortHours < 0 || effortMinutes < 0 || effortHours == 0 && effortMinutes == 0 || effortHours >= 24 || effortMinutes >= 60)
             throw new IllegalArgumentException("Not valid work time values.");
     }
 
     private void checkWorkDateRules(LocalDate workDate) {
         if (workDate == null || workDate.toString().isEmpty()) {
-            this.workDate = LocalDate.now();
+            this.effortDate = LocalDate.now();
         } else if (workDate.isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("Invalid workHours value.");
+        } else if (workDate.isAfter(this.effortResponsible.getEndDate()) || workDate.isBefore(this.effortResponsible.getStartDate())) {
+            throw new IllegalArgumentException("work date not match with the resource allocation dates");
         } else {
-            this.workDate = workDate;
+            this.effortDate = workDate;
         }
     }
 
-    public double getWorkHours() {
-        return workHours;
+    public int getEffortHours() {
+        return effortHours;
     }
 
-    public int getWorkMinutes() {
-        return workMinutes;
+    public int getEffortMinutes() {
+        return effortMinutes;
     }
 
-    public LocalDate getWorkDate() {
-        return workDate;
+    public LocalDate getEffortDate() {
+        return effortDate;
     }
 
     public String getComment() {
@@ -56,7 +59,8 @@ public class TaskEffort {
         return attachment;
     }
 
-    public SystemUser getUser() {
-        return user;
+    public Resource getEffortResponsible() {
+        return effortResponsible;
     }
+
 }

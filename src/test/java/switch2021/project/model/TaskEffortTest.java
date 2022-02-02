@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskEffortTest {
 
@@ -15,21 +14,24 @@ public class TaskEffortTest {
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "developer", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
 
-        int workHours = 4;
-        int workMinutes = 30;
-        LocalDate workDate = LocalDate.of(2022, 1, 27);
+        int effortHours = 4;
+        int effortMinutes = 30;
+        LocalDate effortDate = LocalDate.of(2022, 1, 27);
         String comment = "design";
         String attachment = "photo";
         //Act
-        TaskEffort taskEffort = new TaskEffort(workHours, workMinutes, workDate, comment, attachment, user);
+        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
         //Assert
-        assertEquals(workHours, taskEffort.getWorkHours());
-        assertEquals(workMinutes, taskEffort.getWorkMinutes());
-        assertEquals(workDate, taskEffort.getWorkDate());
+        assertEquals(effortHours, taskEffort.getEffortHours());
+        assertEquals(effortMinutes, taskEffort.getEffortMinutes());
+        assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
-        assertEquals(user, taskEffort.getUser());
+        assertEquals(resource, taskEffort.getEffortResponsible());
     }
 
     @Test //create effort with no comments or attachments
@@ -38,21 +40,24 @@ public class TaskEffortTest {
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "developer", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
 
-        int workHours = 4;
-        int workMinutes = 30;
-        LocalDate workDate = LocalDate.of(2022, 1, 27);
+        int effortHours = 4;
+        int effortMinutes = 30;
+        LocalDate effortDate = LocalDate.of(2022, 1, 27);
         String comment = "";
         String attachment = "";
         //Act
-        TaskEffort taskEffort = new TaskEffort(workHours, workMinutes, workDate, comment, attachment, user);
+        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
         //Assert
-        assertEquals(workHours, taskEffort.getWorkHours());
-        assertEquals(workMinutes, taskEffort.getWorkMinutes());
-        assertEquals(workDate, taskEffort.getWorkDate());
+        assertEquals(effortHours, taskEffort.getEffortHours());
+        assertEquals(effortMinutes, taskEffort.getEffortMinutes());
+        assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
-        assertEquals(user, taskEffort.getUser());
+        assertEquals(resource, taskEffort.getEffortResponsible());
     }
 
     @Test //no date entered -> assigns the date of today
@@ -61,21 +66,24 @@ public class TaskEffortTest {
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "developer", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
 
-        int workHours = 4;
-        int workMinutes = 30;
-        LocalDate workDate = null;
+        int effortHours = 4;
+        int effortMinutes = 30;
+        LocalDate effortDate = null;
         String comment = "design";
         String attachment = "";
         //Act
-        TaskEffort taskEffort = new TaskEffort(workHours, workMinutes, workDate, comment, attachment, user);
+        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
         //Assert
-        assertEquals(workHours, taskEffort.getWorkHours());
-        assertEquals(workMinutes, taskEffort.getWorkMinutes());
-        assertEquals(LocalDate.now(), taskEffort.getWorkDate());
+        assertEquals(effortHours, taskEffort.getEffortHours());
+        assertEquals(effortMinutes, taskEffort.getEffortMinutes());
+        assertEquals(LocalDate.now(), taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
-        assertEquals(user, taskEffort.getUser());
+        assertEquals(resource, taskEffort.getEffortResponsible());
     }
 
     @Test
@@ -84,21 +92,24 @@ public class TaskEffortTest {
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "developer", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
 
-        int workHours = 0;
-        int workMinutes = 30;
-        LocalDate workDate = LocalDate.of(2022, 1, 27);
+        int effortHours = 0;
+        int effortMinutes = 30;
+        LocalDate effortDate = LocalDate.of(2022, 1, 27);
         String comment = "design";
         String attachment = "photo";
         //Act
-        TaskEffort taskEffort = new TaskEffort(workHours, workMinutes, workDate, comment, attachment, user);
+        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
         //Assert
-        assertEquals(workHours, taskEffort.getWorkHours());
-        assertEquals(workMinutes, taskEffort.getWorkMinutes());
-        assertEquals(workDate, taskEffort.getWorkDate());
+        assertEquals(effortHours, taskEffort.getEffortHours());
+        assertEquals(effortMinutes, taskEffort.getEffortMinutes());
+        assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
-        assertEquals(user, taskEffort.getUser());
+        assertEquals(resource, taskEffort.getEffortResponsible());
     }
 
     @Test
@@ -107,21 +118,24 @@ public class TaskEffortTest {
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "developer", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
 
-        int workHours = 4;
-        int workMinutes = 0;
-        LocalDate workDate = LocalDate.of(2022, 1, 27);
+        int effortHours = 4;
+        int effortMinutes = 0;
+        LocalDate effortDate = LocalDate.of(2022, 1, 27);
         String comment = "design";
         String attachment = "photo";
         //Act
-        TaskEffort taskEffort = new TaskEffort(workHours, workMinutes, workDate, comment, attachment, user);
+        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
         //Assert
-        assertEquals(workHours, taskEffort.getWorkHours());
-        assertEquals(workMinutes, taskEffort.getWorkMinutes());
-        assertEquals(workDate, taskEffort.getWorkDate());
+        assertEquals(effortHours, taskEffort.getEffortHours());
+        assertEquals(effortMinutes, taskEffort.getEffortMinutes());
+        assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
-        assertEquals(user, taskEffort.getUser());
+        assertEquals(resource, taskEffort.getEffortResponsible());
     }
 
     //Fails
@@ -133,14 +147,17 @@ public class TaskEffortTest {
             Company company = new Company();
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser user = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "developer", "ghi", "ghi", "photo", profile);
+            LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+            LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+            Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
 
-            int workHours = -4;
-            int workMinutes = 30;
-            LocalDate workDate = LocalDate.of(2022, 1, 27);
+            int effortHours = -4;
+            int effortMinutes = 30;
+            LocalDate effortDate = LocalDate.of(2022, 1, 27);
             String comment = "design";
             String attachment = "";
             //Act
-            TaskEffort taskEffort = new TaskEffort(workHours, workMinutes, workDate, comment, attachment, user);
+            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
         });
     }
 
@@ -152,14 +169,17 @@ public class TaskEffortTest {
             Company company = new Company();
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser user = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "developer", "ghi", "ghi", "photo", profile);
+            LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+            LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+            Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
 
-            int workHours = 4;
-            int workMinutes = -30;
-            LocalDate workDate = LocalDate.of(2022, 1, 27);
+            int effortHours = 4;
+            int effortMinutes = -30;
+            LocalDate effortDate = LocalDate.of(2022, 1, 27);
             String comment = "design";
             String attachment = "";
             //Act
-            TaskEffort taskEffort = new TaskEffort(workHours, workMinutes, workDate, comment, attachment, user);
+            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
         });
     }
 
@@ -171,14 +191,17 @@ public class TaskEffortTest {
             Company company = new Company();
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser user = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "developer", "ghi", "ghi", "photo", profile);
+            LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+            LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+            Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
 
-            int workHours = 0;
-            int workMinutes = 0;
-            LocalDate workDate = LocalDate.of(2022, 1, 27);
+            int effortHours = 0;
+            int effortMinutes = 0;
+            LocalDate effortDate = LocalDate.of(2022, 1, 27);
             String comment = "design";
             String attachment = "";
             //Act
-            TaskEffort taskEffort = new TaskEffort(workHours, workMinutes, workDate, comment, attachment, user);
+            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
         });
     }
 
@@ -190,14 +213,17 @@ public class TaskEffortTest {
             Company company = new Company();
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser user = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "developer", "ghi", "ghi", "photo", profile);
+            LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+            LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+            Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
 
-            int workHours = 25;
-            int workMinutes = 10;
-            LocalDate workDate = LocalDate.of(2022, 1, 27);
+            int effortHours = 25;
+            int effortMinutes = 10;
+            LocalDate effortDate = LocalDate.of(2022, 1, 27);
             String comment = "design";
             String attachment = "";
             //Act
-            TaskEffort taskEffort = new TaskEffort(workHours, workMinutes, workDate, comment, attachment, user);
+            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
         });
     }
 
@@ -209,18 +235,21 @@ public class TaskEffortTest {
             Company company = new Company();
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser user = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "developer", "ghi", "ghi", "photo", profile);
+            LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+            LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+            Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
 
-            int workHours = 0;
-            int workMinutes = 61;
-            LocalDate workDate = LocalDate.of(2022, 1, 27);
+            int effortHours = 0;
+            int effortMinutes = 61;
+            LocalDate effortDate = LocalDate.of(2022, 1, 27);
             String comment = "design";
             String attachment = "";
             //Act
-            TaskEffort taskEffort = new TaskEffort(workHours, workMinutes, workDate, comment, attachment, user);
+            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
         });
     }
 
-    @Test //effort is in the future
+    @Test //register effort is in the future
     public void createTaskEffortFailWorkDateAfterToday() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
@@ -228,14 +257,39 @@ public class TaskEffortTest {
             Company company = new Company();
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             SystemUser user = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "developer", "ghi", "ghi", "photo", profile);
+            LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+            LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+            Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
 
-            int workHours = 4;
-            int workMinutes = 30;
-            LocalDate workDate = LocalDate.now().plusDays(1);
+            int effortHours = 4;
+            int effortMinutes = 30;
+            LocalDate effortDate = LocalDate.now().plusDays(1);
             String comment = "design";
             String attachment = "";
             //Act
-            TaskEffort taskEffort = new TaskEffort(workHours, workMinutes, workDate, comment, attachment, user);
+            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
+        });
+    }
+
+    @Test
+    public void createTaskEffortFailWorkDateNotMatchResourceDates() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            Company company = new Company();
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            SystemUser user = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "developer", "ghi", "ghi", "photo", profile);
+            LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+            LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+            Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+
+            int effortHours = 4;
+            int effortMinutes = 30;
+            LocalDate effortDate = LocalDate.of(2021, 1, 27);
+            String comment = "design";
+            String attachment = "";
+            //Act
+            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
         });
     }
 
