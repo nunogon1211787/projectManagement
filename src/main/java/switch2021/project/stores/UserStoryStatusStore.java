@@ -14,7 +14,7 @@ public class UserStoryStatusStore {
      * Contains a Project Status list
      **/
 
-    private List<UserStoryStatus> userStoryStatusList;
+    private final List<UserStoryStatus> userStoryStatusList;
 
     /**
      * Project Status Constructor
@@ -22,10 +22,6 @@ public class UserStoryStatusStore {
 
     public UserStoryStatusStore() {
         this.userStoryStatusList = new ArrayList<>();
-    }
-
-    public UserStoryStatusStore(List<UserStoryStatus> userStoryStatusList) {
-        this.userStoryStatusList = userStoryStatusList;
     }
 
     public void populateDefault() {
@@ -53,15 +49,6 @@ public class UserStoryStatusStore {
         }
         return userStoryStatus;
     }
-    /**
-     * Add UserStory Status
-     * Adds a new UserStory Status object to the UserStory Status List
-     **/
-
-//    public boolean add(UserStoryStatus userStoryStat) {
-//        this.userStoryStatusList.add(userStoryStat);
-//        return true;
-//    }
 
     public boolean checkUserStoryStatusExists(UserStoryStatus status) {
 

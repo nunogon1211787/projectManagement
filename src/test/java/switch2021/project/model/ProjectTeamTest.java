@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ProjectTeamTest {
+
     /**
      * Attribute
      **/
@@ -156,5 +157,38 @@ public class ProjectTeamTest {
         //Assert
         assertEquals(7, proj1.getProjectTeam().getProjectTeamList().size());
     }
+
+//    @Test
+//    @DisplayName("Test to Validate Project Team")
+//    public void validateProjectTeamSuccess() {
+//        //Arrange
+//        //User1
+//        Company company = new Company();
+//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+//        SystemUser joana = new SystemUser("joana", "joana@beaver.com", "developer", "ghi",
+//                "ghi", "photo", profile);
+//        LocalDate startDate = LocalDate.of(2022, 1, 1);
+//        LocalDate endDate = LocalDate.of(2022, 1, 15);
+//        Resource joanaResource = new Resource(joana, startDate, endDate, 100, .5);
+//        boolean joanaRole = joanaResource.isYour("Scrum Master");
+//        //User2
+//        SystemUser isabel = new SystemUser("isabel", "isabel@beaver.com", "tester", "ghi",
+//                "ghi", "photo1", profile);
+//        LocalDate startDateIsa = LocalDate.of(2022, 1, 1);
+//        LocalDate endDateIsa = LocalDate.of(2022, 1, 15);
+//        Resource isabelResource = new Resource(isabel, startDateIsa, endDateIsa, 100, .5);
+//        //Act
+//        proj1.getProjectTeam().addResourceToTeam(joanaResource);
+//        proj1.getProjectTeam().addResourceToTeam(isabelResource);
+//        int joanaSize = company.getProjectStore().getCurrentProjectsByUserEmail("joana@beaver.com").size();
+//        int isabelSize = company.getProjectStore().getCurrentProjectsByUserEmail("isabel@beaver.com").size();
+//        //proj1.getProjectTeam().assignProjectRole(manuelTest, LocalDate.of(2021,11,16), 2, company.getProjectRoleStore().getProjectRole("Scrum Master"));
+//        //Assert
+//        assertEquals(joanaSize, isabelSize);
+//        assertTrue(proj1.getProjectTeam().validateProjectTeam(startDate, 1));
+//
+//        //assertTrue(proj1.getProjectTeam().validateProjectTeam(startDateIsa, 1));
+//
+//    }
 }
 
