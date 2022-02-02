@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title Sequence Diagram US025 "As Administrator, I want to inactivate a user account"
+title Sequence Diagram US025 "As Administrator, I want to inactivate an user account"
 
 autoactivate on
 autonumber
