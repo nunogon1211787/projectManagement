@@ -14,7 +14,7 @@ public class UserStoryStatusStore {
      * Contains a Project Status list
      **/
 
-    private List<UserStoryStatus> userStoryStatusList;
+    private final List<UserStoryStatus> userStoryStatusList;
 
     /**
      * Project Status Constructor

@@ -7,8 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserStoryStatusTest {
 
-    private UserStoryStatusStore userStoryStatusStore = new UserStoryStatusStore();
-    private UserStoryStatus userStoryStatus = new UserStoryStatus("Forte");
+    private final UserStoryStatusStore userStoryStatusStore = new UserStoryStatusStore();
+    private final UserStoryStatus userStoryStatus = new UserStoryStatus("Forte");
 
     @Test
     void isSprintAvailable() {
