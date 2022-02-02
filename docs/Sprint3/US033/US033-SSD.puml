@@ -76,22 +76,20 @@ taskList->task: hasId(taskId)
 task-->taskList: true
 end
 taskList-->Ctrl: task
-Ctrl->effortDTO: getWorkHours()
-effortDTO-->Ctrl: workHours
-Ctrl->effortDTO: getWorkMinutes()
-effortDTO-->Ctrl: workMinutes
-Ctrl->effortDTO: getWorkDate()
-effortDTO-->Ctrl: workdate
+Ctrl->effortDTO: getEffortHours()
+effortDTO-->Ctrl: effortHours
+Ctrl->effortDTO: getEffortMinutes()
+effortDTO-->Ctrl: effortMinutes
+Ctrl->effortDTO: getEffortDate()
+effortDTO-->Ctrl: effortdate
 Ctrl->effortDTO: getComment()
 effortDTO-->Ctrl: comment
 Ctrl->effortDTO: getAttachment()
 effortDTO-->Ctrl: attachment
-Ctrl->effortDTO: getEmail()
-effortDTO-->Ctrl: email
-Ctrl->userStore: getUserByEmail(email)
-userStore-->Ctrl: user
-Ctrl->task:createTaskEffort(workHours, workMinutes, workDate, comment, attachment, user)
-task->effort **: createTaskEffort(workHours, workMinutes, workDate, comment, attachment, user)
+Ctrl->task:createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment)
+task -> task: effortResponsible =this.responsible
+deactivate task
+task->effort **: createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, effortResponsible)
 task-->Ctrl: effort
 Ctrl -> task: saveTaskEffort(effort)
 task -> task: validateTaskEffort(effort)
@@ -100,10 +98,12 @@ task -> task: add(effort)
 deactivate task
 task -> task: updateHoursSpent(effort)
 deactivate task
+task -> task: updateEffortRemaining(effort)
+deactivate task
 task -> task: updateExecutionPercentage()
 deactivate task
 task-->Ctrl: true
-Ctrl -> userStory: updateWorkDone()
+Ctrl -> userStory: updateWorkDone(taskId))
 userStory-->Ctrl: true
 Ctrl-->Ui : true
 

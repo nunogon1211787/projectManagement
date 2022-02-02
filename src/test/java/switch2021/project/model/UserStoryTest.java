@@ -31,6 +31,30 @@ class UserStoryTest {
     }
 
     @Test
+    void hasCodeTest() {
+
+        ProductBacklog productBacklog = new ProductBacklog();
+        Sprint sprint = new Sprint("Super", LocalDate.of(2022,3,1));
+        userStory = new UserStory("US001", 2, "Fazer tal",5);
+        productBacklog.saveUserStory(userStory);
+
+        boolean expected = userStory.hasCode(userStory.getId_UserStory());
+        assertTrue(expected);
+    }
+
+    @Test
+    void hasCodeTest2() {
+
+        ProductBacklog productBacklog = new ProductBacklog();
+        Sprint sprint = new Sprint("Super", LocalDate.of(2022,3,1));
+        userStory = new UserStory("US001", 2, "Fazer tal",5);
+        productBacklog.saveUserStory(userStory);
+
+        boolean expected = userStory.hasCode(4);
+        assertFalse(expected);
+    }
+
+    @Test
     void setDescriptionTest() {
         Sprint sprint = new Sprint("Super", LocalDate.of(2022,3,1));
         userStory = new UserStory("US001", 2, "Fazer tal",5);
@@ -53,6 +77,37 @@ class UserStoryTest {
     }
 
     @Test
+    void setUpdateUserStoryWorkDoneTest() {
+        //Arrange
+        Company company = new Company();
+        //User Story
+        ProductBacklog productBacklog = new ProductBacklog();
+        UserStory userStory = new UserStory("US001", 1, "US001 - Test", 40);
+        productBacklog.saveUserStory(userStory);
+        //Task
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        Task task = new Task("test", taskDescription, 20.00, taskType, resource);
+        userStory.getTasks().saveTask(task);
+        //TaskEffort
+        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
+        LocalDate effortDate2 = LocalDate.of(2022, 1, 21);
+        TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
+        task.saveTaskEffort(taskEffort);
+        task.saveTaskEffort(taskEffort2);
+        //Act
+        userStory.updateWorkDone(task.getID_Task());
+        //Assert
+        assertEquals(12, userStory.getWorkDone());
+    }
+
+    @Test
     void validatePriorityTest() {
         Sprint sprint = new Sprint("Super", LocalDate.of(2022,3,1));
         userStory = new UserStory("US001", 2, "Fazer tal",5);
@@ -68,5 +123,68 @@ class UserStoryTest {
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         boolean expected = userStory.validatePriority(1);
         assertTrue(expected);
+    }
+
+    @Test
+    void validatePriorityTest3() {
+        Sprint sprint = new Sprint("Super", LocalDate.of(2022,3,1));
+        userStory = new UserStory("US001", 2, "Fazer tal",5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        boolean expected = userStory.validatePriority(-1);
+        assertFalse(expected);
+    }
+
+    @Test
+    void isValidUserStoryDescription() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            userStory = new UserStory("US001", 2, "", 5);
+            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        });
+    }
+
+    @Test
+    void isValidUserStoryDescription2() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            userStory = new UserStory("US001", 2, "    ", 5);
+            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        });
+    }
+
+    @Test
+    void isValidUserStoryDescription3() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            userStory = new UserStory("US001", 2, "Co", 5);
+            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        });
+    }
+
+    @Test
+    void isValidUserStoryName() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            userStory = new UserStory("", 2, "Fazer tal", 5);
+            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        });
+    }
+
+    @Test
+    void isValidUserStoryName2() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            userStory = new UserStory("C", 2, "Fazer tal", 5);
+            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        });
+    }
+
+    @Test
+    void isValidUserStoryName3() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            userStory = new UserStory("   ", 2, "Fazer tal", 5);
+            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        });
     }
 }
