@@ -15,7 +15,7 @@ class ActivateUserAccountController {
 }
 
 class Company {
-    +getSystemUserStore(email)
+    +activateUser(email)
 }
 
 class SystemUserStore {
