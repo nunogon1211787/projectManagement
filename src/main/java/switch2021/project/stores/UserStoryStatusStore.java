@@ -24,10 +24,6 @@ public class UserStoryStatusStore {
         this.userStoryStatusList = new ArrayList<>();
     }
 
-    public UserStoryStatusStore(List<UserStoryStatus> userStoryStatusList) {
-        this.userStoryStatusList = userStoryStatusList;
-    }
-
     public void populateDefault() {
         this.userStoryStatusList.add(new UserStoryStatus("To do"));
         userStoryStatusList.get(0).setSprintAvailable(true);
@@ -53,15 +49,6 @@ public class UserStoryStatusStore {
         }
         return userStoryStatus;
     }
-    /**
-     * Add UserStory Status
-     * Adds a new UserStory Status object to the UserStory Status List
-     **/
-
-//    public boolean add(UserStoryStatus userStoryStat) {
-//        this.userStoryStatusList.add(userStoryStat);
-//        return true;
-//    }
 
     public boolean checkUserStoryStatusExists(UserStoryStatus status) {
 

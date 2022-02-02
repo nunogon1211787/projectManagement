@@ -33,6 +33,23 @@ class UserStoryStatusStoreTest {
         this.userStoryStatusStore.populateDefault();
         this.userStoryStatusStore.saveNewUserStoryStatus(userStoryStatus);
         this.userStoryStatus.setSprintAvailable(true);
-assertEquals(userStoryStatusStore.getUserStoryStatusByDescription("Forte"), userStoryStatus);
+        assertEquals(userStoryStatusStore.getUserStoryStatusByDescription("Forte"), userStoryStatus);
+    }
+
+    @Test
+    void saveNewUserStoryStatus2() {
+        this.userStoryStatusStore.populateDefault();
+        this.userStoryStatusStore.saveNewUserStoryStatus(userStoryStatus);
+        boolean expected = this.userStoryStatusStore.saveNewUserStoryStatus(userStoryStatus);
+        this.userStoryStatus.setSprintAvailable(true);
+        assertFalse(expected);
+    }
+
+    @Test
+    void saveNewUserStoryStatus3() {
+        this.userStoryStatusStore.populateDefault();
+        boolean expected = this.userStoryStatusStore.saveNewUserStoryStatus(userStoryStatus);
+        this.userStoryStatus.setSprintAvailable(true);
+        assertTrue(expected);
     }
 }
