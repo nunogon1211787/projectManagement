@@ -27,7 +27,7 @@ public class TaskType {
      */
 
     public boolean hasName(String typeName) {
-        return Objects.equals(this.name, typeName);
+        return this.name.equalsIgnoreCase(typeName);
     }
 
     public void setType_ID(int id){

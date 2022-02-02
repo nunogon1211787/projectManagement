@@ -23,7 +23,6 @@ public class Project {
     private Typology typology;
     private ProjectStatus projectStatus;
     private final ProductBacklog productBacklog;
-    private SystemUser productOwner; // Verificar a necessidade de se manter este atributo
 
     private final BusinessSector businessSector;
     private final SprintList sprints;
@@ -184,7 +183,6 @@ public class Project {
                 && Objects.equals(typology, project.typology)
                 && Objects.equals(projectStatus, project.projectStatus)
                 && Objects.equals(productBacklog, project.productBacklog)
-                && Objects.equals(productOwner, project.productOwner)
                 && Objects.equals(businessSector, project.businessSector)
                 && Objects.equals(sprints, project.sprints)
                 && Objects.equals(projectTeam, project.projectTeam)
@@ -195,7 +193,7 @@ public class Project {
     @Override
     public int hashCode() {
         return Objects.hash(code, projectName, description, customer, typology,
-                projectStatus, productBacklog, productOwner, businessSector,
+                projectStatus, productBacklog, businessSector,
                 sprints, projectTeam, startDate, endDate, numberOfSprints,
                 budget, sprintDuration);
     }

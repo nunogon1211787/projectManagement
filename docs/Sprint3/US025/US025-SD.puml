@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title Sequence Diagram US025 "As Administrator, I want to inactivate a user account"
+title Sequence Diagram US025 "As Administrator, I want to inactivate an user account"
 
 autoactivate on
 autonumber
@@ -16,18 +16,18 @@ participant "user:SystemUser" as SystemUser
 
 activate "Administrator"
 
-"Administrator" -> UI: Innactive and User Account
-UI -> Ctrl: getSystemUserStore()
+"Administrator" -> UI: Innactive an User Account
+UI -> Ctrl: inactiveUser()
 Ctrl -> Company: getSystemUserStore()
 return systemUserStore
 Ctrl -> SystemUserStore : getUserByEmail()
-return user
 loop
 SystemUserStore-> SystemUser: isYourEmail(email)
 SystemUser --> SystemUserStore: true
 end
-Ctrl -> SystemUserStore : setInactivateUser()
-SystemUserStore --> Ctrl : true
+return user
+Ctrl -> SystemUser : setInactivateUser()
+SystemUser --> Ctrl : true
 Ctrl --> UI : true
 UI --> "Administrator": Account innactivated
 
