@@ -4,6 +4,7 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
+import switch2021.project.stores.ProjectStore;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class ChangePriorityUSControllerTest {
 
 
     private Company company;
+    private ProjectStore projectStore;
     private Project project;
     private Project project2;
     private Project project3;
@@ -96,6 +98,19 @@ public class ChangePriorityUSControllerTest {
 
         // Assert
         assertEquals(expected, actual);
+
+    }
+
+    @Test
+    void getProjectStoreTest() {
+        //Arrange
+        ChangePriorityUSController change = new ChangePriorityUSController(company);
+        this.projectStore = this.company.getProjectStore();
+        // Act
+        ProjectStore expected = change.getProjectStore();
+
+        // Assert
+        assertEquals(expected, this.projectStore);
 
     }
 
