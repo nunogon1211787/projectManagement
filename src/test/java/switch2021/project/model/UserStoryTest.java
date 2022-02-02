@@ -32,6 +32,11 @@ class UserStoryTest {
 
     @Test
     void setDescriptionTest() {
+        Sprint sprint = new Sprint("Super", LocalDate.of(2022,3,1));
+        userStory = new UserStory("US001", 2, "Fazer tal",5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        userStory.setDescription("Fazer coiso");
+        assertEquals(userStory.getDescription(), "Fazer coiso");
     }
 
     @Test
@@ -45,5 +50,23 @@ class UserStoryTest {
 
         assertEquals(userStory.getUserStoryStatus().getDescription(), "Almost finished");
 
+    }
+
+    @Test
+    void validatePriorityTest() {
+        Sprint sprint = new Sprint("Super", LocalDate.of(2022,3,1));
+        userStory = new UserStory("US001", 2, "Fazer tal",5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        boolean expected = userStory.validatePriority(6);
+        assertFalse(expected);
+    }
+
+    @Test
+    void validatePriorityTest2() {
+        Sprint sprint = new Sprint("Super", LocalDate.of(2022,3,1));
+        userStory = new UserStory("US001", 2, "Fazer tal",5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        boolean expected = userStory.validatePriority(1);
+        assertTrue(expected);
     }
 }

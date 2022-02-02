@@ -128,7 +128,7 @@ public class UserStory {
     }
 
 
-    private boolean validatePriority(int x) {
+    public boolean validatePriority(int x) {
         return x >= 0 && x <= 5;
     }
 
