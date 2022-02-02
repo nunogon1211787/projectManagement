@@ -128,6 +128,24 @@ public class Resource {
         return result;
     }
 
+    /**
+     * Method to Check if the Resource is Available in this Period of Time (starDate and endDate)
+     **/
+
+    public boolean isAvailableToSprint(LocalDate startDate, int sprintDuration) {
+
+        boolean msg = false;
+
+        LocalDate currentEndDate = startDate.plusDays(sprintDuration * 7L - 1);
+
+        if(this.startDate.isBefore(startDate) || this.startDate.isEqual(startDate)) {
+            if (this.endDate.isAfter(currentEndDate) || this.endDate.isEqual(currentEndDate)) {
+                msg = true;
+            }
+        }
+        return msg;
+    }
+
 
     /**
      * Método check se o período que queremos alocar é coincidente com o período que o resource está alocado ao projecto (para depois podermos somar e confirmar que a alocação total não é maior que 1) (Carolina US007)

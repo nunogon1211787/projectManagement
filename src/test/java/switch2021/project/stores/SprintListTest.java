@@ -190,11 +190,7 @@ public class SprintListTest {
         Sprint sprintTest = sprintListTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 1), 2);
         sprintTest.setEndDate(LocalDate.of(2022, 1, 20));
         sprintListTest.saveSprint(sprintTest);
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            sprintListTest.createSprint("Sprint_0", LocalDate.of(2022, 1, 10), 2);
-        });
+        assertNull(sprintListTest.createSprint("Sprint_0", LocalDate.of(2022, 1, 10), 2));
     }
 
 

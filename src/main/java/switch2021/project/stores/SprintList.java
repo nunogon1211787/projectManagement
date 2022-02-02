@@ -1,6 +1,7 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
+import switch2021.project.dto.StartASprintDTO;
 import switch2021.project.model.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,12 +29,15 @@ public class SprintList {
      * Sprint creator
      **/
     public Sprint createSprint(String name, LocalDate startDate, int sprintDuration) {
-        validateStartDate(startDate);
 
-        Sprint sprint;
+        Sprint sprint = null;
 
-        sprint = new Sprint(name, startDate);
-        sprint.changeEndDate(sprintDuration);
+        if(validateStartDate(startDate)) {
+
+            sprint = new Sprint(name, startDate);
+            sprint.changeEndDate(sprintDuration);
+
+        }
 
         return sprint;
     }
@@ -44,8 +48,8 @@ public class SprintList {
      */
     private int id_SprintGenerator() {
         int id = 1;
-        if(this.sprintList.size() > 0) {
-            id = (this.sprintList.get(sprintList.size()-1).getId_Sprint() + 1);
+        if (this.sprintList.size() > 0) {
+            id = (this.sprintList.get(sprintList.size() - 1).getId_Sprint() + 1);
         }
         return id;
     }
@@ -107,18 +111,37 @@ public class SprintList {
     }
 
 
-
     /**
      * Method to Validate if StartDate is later than the EndDate of the last Sprint
      */
 
-    private void validateStartDate(LocalDate startDate) {
+    private boolean validateStartDate(LocalDate startDate) {
+
+        boolean msg = true;
 
         for (Sprint i : sprintList)
-            if (!i.getEndDate().isBefore(startDate) || i.getEndDate().isEqual(startDate))
-                throw new IllegalArgumentException("Please type the correct Start Date.");
-        }
+            if (!i.getEndDate().isBefore(startDate) || i.getEndDate().isEqual(startDate)) {
+                msg = false;
+                //throw new IllegalArgumentException("Please type the correct Start Date.");
+            }
+        return msg;
+    }
 
+    /**
+     * Method to Start the Sprint
+     */
+
+    public boolean startASprint (int sprintID, LocalDate startDate, ProjectTeam projectTeam, int sprintDuration) {
+
+        boolean msg = false;
+
+        if (validateStartDate(startDate) && projectTeam.validateProjectTeam(startDate, sprintDuration)) {
+            msg = true;
+            Sprint sprint = getSprint(sprintID);
+            sprint.setStartDate(startDate);
+        }
+        return msg;
+    }
 
     /**
      * Method to Save a Sprint
