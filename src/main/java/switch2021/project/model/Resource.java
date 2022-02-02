@@ -129,17 +129,17 @@ public class Resource {
     }
 
     /**
-     * Method to Check if the Resource is Available in this Period of Time (starDate and endDate)
+     * Method to Check if the Resource is Available in this Period of Time (starDate to endDate)
      **/
 
     public boolean isAvailableToSprint(LocalDate startDate, int sprintDuration) {
 
         boolean msg = false;
 
-        LocalDate currentEndDate = startDate.plusDays(sprintDuration * 7L - 1);
+        LocalDate endDate = startDate.plusDays(sprintDuration * 7L - 1);
 
         if(this.startDate.isBefore(startDate) || this.startDate.isEqual(startDate)) {
-            if (this.endDate.isAfter(currentEndDate) || this.endDate.isEqual(currentEndDate)) {
+            if (this.endDate.isAfter(endDate) || this.endDate.isEqual(endDate)) {
                 msg = true;
             }
         }
