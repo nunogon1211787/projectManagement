@@ -126,26 +126,26 @@ class UserStoryEffortControllerTest {
         assertEquals(sprint1, controller.getSprint(1));
     }
 
-    @Test
-    void getSprintBacklog() {
-        Company company = new Company();
-        UserStoryEffortController controller = new UserStoryEffortController(company);
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
-        company.getProjectStore().saveNewProject(project1);
-        Sprint sprint1 = new Sprint("teste1", LocalDate.now());
-        project1.getSprints().saveSprint(sprint1);
-        UserStory story = new UserStory("teste", 5, "validate", 5);
-        UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story, 5, company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
-        sprint1.getSprintBacklog().saveUserStoryOfSprint(userStoryOfSprint);
-        company.getProjectStore().saveNewProject(project1);
-
-
-        assertEquals(sprint1.getSprintBacklog(), controller.getSprintBacklog());
-    }
+//    @Test
+//    void getSprintBacklog() {
+//        Company company = new Company();
+//        UserStoryEffortController controller = new UserStoryEffortController(company);
+//        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+//        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+//        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+//        Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
+//                typo, sector, LocalDate.now(), 7, 5000);
+//        company.getProjectStore().saveNewProject(project1);
+//        Sprint sprint1 = new Sprint("teste1", LocalDate.now());
+//        project1.getSprints().saveSprint(sprint1);
+//        UserStory story = new UserStory("teste", 5, "validate", 5);
+//        UserStoryOfSprint userStoryOfSprint = sprint1.getSprintBacklog().createUSerStoryOfSprint(story, 5, company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
+//        sprint1.getSprintBacklog().saveUserStoryOfSprint(userStoryOfSprint);
+//        company.getProjectStore().saveNewProject(project1);
+//
+//
+//        assertEquals(sprint1.getSprintBacklog(), controller.getSprintBacklog());
+//    }
 
     @Test
     void getUserStory() {
