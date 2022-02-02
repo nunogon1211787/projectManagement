@@ -63,7 +63,7 @@ class UpdateStatusUsControllerTest {
         //act
 
         userStory.setUserStoryStatus(userStoryStatusStore.getUserStoryStatusByDescription("Done"));
-        update.changeStatusOfUs("Project_2022_1", 0, userStoryStatusStore.getUserStoryStatusByDescription("In progress"));
+        update.changeStatusOfUs("Project_2022_1", 0, "In progress");
 
         //assert
         assertEquals(userStory.getUserStoryStatus(), userStoryStatusStore.getUserStoryStatusByDescription("In progress"));

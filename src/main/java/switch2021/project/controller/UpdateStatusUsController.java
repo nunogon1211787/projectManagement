@@ -52,13 +52,14 @@ public class UpdateStatusUsController {
                 return this.usList;
         }
 
-        public boolean changeStatusOfUs(String code, int usId, UserStoryStatus userST) {
+        public boolean changeStatusOfUs(String code, int usId, String userST) {
+                UserStoryStatus userStoryStatus = this.company.getUserStoryStatusStore().getUserStoryStatusByDescription(userST);
                 this.projectStore = company.getProjectStore();
                 this.project = this.projectStore.getProjectByCode(code);
                 this.sprint = this.project.getSprints().getCurrentSprint();
                 this.sprintBacklog = this.sprint.getSprintBacklog();
                 this.userStory = this.sprintBacklog.getUserStory(usId);
-                return this.userStory.setUserStoryStatusBoolean(userST);
+                return this.userStory.setUserStoryStatusBoolean(userStoryStatus);
         }
 
 }
