@@ -19,9 +19,9 @@ public class RefineUserStoryController {
      * Constructor to UI (with SINGLETON)
      **/
 
-    public RefineUserStoryController(){
-        this.company = App.getInstance().getCompany();
-    }
+//    public RefineUserStoryController(){
+//        this.company = App.getInstance().getCompany();
+//    }
 
     /**
      * Constructor to test (without SINGLETON).

@@ -20,7 +20,7 @@ public class GetProjectListController {
      * Constructor to UI (with SINGLETON)
      **/
 
-    public GetProjectListController() { this.company = App.getInstance().getCompany(); }
+ //   public GetProjectListController() { this.company = App.getInstance().getCompany(); }
 
     /**
      * Constructor to test (without SINGLETON)

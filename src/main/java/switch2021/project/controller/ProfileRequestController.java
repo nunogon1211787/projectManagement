@@ -19,10 +19,10 @@ public class ProfileRequestController {
     /**
      * Constructor to UI (with SINGLETON)
      **/
-
-    public ProfileRequestController() {
-        this.company = App.getInstance().getCompany();
-    }
+//
+//    public ProfileRequestController() {
+//        this.company = App.getInstance().getCompany();
+//    }
 
     /**
      * Constructor to test (without SINGLETON).
