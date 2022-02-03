@@ -132,8 +132,8 @@ public class UserStory {
         return x >= 0 && x <= 5;
     }
 
-    public boolean updateWorkDone(int taskId) {
-        this.workDone = this.tasks.getTaskById(taskId).getHoursSpent();
+    public boolean updateWorkDone(Task task) {
+        this.workDone = task.getHoursSpent();
 
         return true;
     }

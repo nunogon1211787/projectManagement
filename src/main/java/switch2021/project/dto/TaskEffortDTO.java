@@ -3,38 +3,36 @@ package switch2021.project.dto;
 import java.time.LocalDate;
 
 public class TaskEffortDTO {
-    private TaskIdDTO taskIdDTO;
-    private int workHours;
-    private int workMinutes;
-    private LocalDate workDate;
+    private TaskIdNameDTO taskIdNameDTO;
+    private int effortHours;
+    private int effortMinutes;
+    private LocalDate effortDate;
     private String comment;
     private String attachment;
-    private String email;
 
-    public TaskEffortDTO(TaskIdDTO taskIdDTO, int workHours, int workMinutes, LocalDate workDate, String comment, String attachment, String email) {
-        this.taskIdDTO = taskIdDTO;
-        this.workHours = workHours;
-        this.workMinutes = workMinutes;
-        this.workDate = workDate;
+    public TaskEffortDTO(TaskIdNameDTO taskIdNameDTO, int effortHours, int effortMinutes, LocalDate effortDate, String comment, String attachment) {
+        this.taskIdNameDTO = taskIdNameDTO;
+        this.effortHours = effortHours;
+        this.effortMinutes = effortMinutes;
+        this.effortDate = effortDate;
         this.comment = comment;
         this.attachment = attachment;
-        this.email = email;
     }
 
-    public TaskIdDTO getTaskIdDTO() {
-        return taskIdDTO;
+    public TaskIdNameDTO getTaskIdNameDTO() {
+        return taskIdNameDTO;
     }
 
-    public int getWorkHours() {
-        return workHours;
+    public int getEffortHours() {
+        return effortHours;
     }
 
-    public int getWorkMinutes() {
-        return workMinutes;
+    public int getEffortMinutes() {
+        return effortMinutes;
     }
 
-    public LocalDate getWorkDate() {
-        return workDate;
+    public LocalDate getEffortDate() {
+        return effortDate;
     }
 
     public String getComment() {
@@ -45,7 +43,4 @@ public class TaskEffortDTO {
         return attachment;
     }
 
-    public String getEmail() {
-        return email;
-    }
 }

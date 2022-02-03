@@ -15,16 +15,14 @@ participant "userStoryIdDTO: UserStoryIdDTO" as userStoryIdDTO
 participant "userStoryList : Sprintbacklog" as sprintBacklog
 participant "userStory : UserStory" as userStory
 participant "taskList: TaskList" as taskList
-participant "taskIdDTOList: List<TaskIdDTO>" as taskIdDTOList
-participant "taskIdDTO: TaskIdDTO" as taskIdDTO
+participant "taskIdNameDTOList: List<TaskIdNameDTO>" as taskIdDTOList
+participant "taskIdNameDTO: TaskIdNameDTO" as taskIdDTO
 participant "taskEffortDTO: TaskEffortDTO" as effortDTO
 participant "user : SystemUserStore" as userStore
 participant "task : Task" as task
 participant "taskEffort : TaskEffort" as effort
-
 activate User
-
-User->Ui : starts registering a new task effort
+User->Ui : starts registering a new user story task effort
 Ui->Ctrl: getTasks(userStoryIdDTO)
 Ctrl->mapper: userStoryIdDTOToUserStoryId(userStoryIdDTO)
 mapper->userStoryIdDTO: getId()

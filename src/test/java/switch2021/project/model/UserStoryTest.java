@@ -78,7 +78,7 @@ class UserStoryTest {
         task.saveTaskEffort(taskEffort);
         task.saveTaskEffort(taskEffort2);
         //Act
-        userStory.updateWorkDone(task.getID_Task());
+        userStory.updateWorkDone(task);
         //Assert
         assertEquals(12, userStory.getWorkDone());
     }
