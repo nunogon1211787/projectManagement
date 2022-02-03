@@ -14,11 +14,11 @@ public class CreateNewTypologyController {
     private Company company;
     private Typology typology;
 
-    /**
+    /*
      * Constructor to UI (with SINGLETON)
      **/
 
-    public CreateNewTypologyController(){ this.company = App.getInstance().getCompany();}
+    //public CreateNewTypologyController(){ this.company = App.getInstance().getCompany();}
 
     /**
      * Constructor to test (without SINGLETON)

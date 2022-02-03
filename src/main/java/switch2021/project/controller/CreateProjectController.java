@@ -15,11 +15,11 @@ public class CreateProjectController {
     private Project project;
 
 
-    /**
+    /*
      * Constructor to UI (with SINGLETON)
      **/
 
-    public CreateProjectController(){ this.company = App.getInstance().getCompany();}
+    //public CreateProjectController(){ this.company = App.getInstance().getCompany();}
 
     /**
      * Constructor to test (without SINGLETON)

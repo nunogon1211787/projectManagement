@@ -4,7 +4,6 @@ import switch2021.project.model.Company;
 import switch2021.project.model.Project;
 import switch2021.project.model.Task;
 import switch2021.project.stores.ProjectStore;
-import switch2021.project.utils.App;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +20,11 @@ public class ViewStatusOfActivitiesInAProjectController {
     List<Project> arrayProject;
     List<Task> listOfTasks;
 
-    /**
+    /*
      * Constructor to UI (with SINGLETON)
      **/
 
-    public ViewStatusOfActivitiesInAProjectController(){ this.company = App.getInstance().getCompany(); }
+    //public ViewStatusOfActivitiesInAProjectController(){ this.company = App.getInstance().getCompany(); }
 
     /**
      * Constructor to test (without SINGLETON)

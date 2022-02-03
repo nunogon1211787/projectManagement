@@ -2,10 +2,10 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.dto.SystemUserWithStatusDto;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
+import switch2021.project.stores.SystemUserStore;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -116,7 +116,7 @@ public class CreateSprintControllerTest {
 
         controller.getCurrentProjectListByUserEmail("joana@beaver.com");
         controller.getProject(proj1.getCode());
-        Sprint sprintC = controller.createSprint("Sprint44", LocalDate.of(2022,3,1));
+        Sprint sprintC = controller.createSprint("Sprint44", LocalDate.of(2022, 3, 1));
         proj1.getSprints().saveSprint(sprintC);
 
         //Assert
