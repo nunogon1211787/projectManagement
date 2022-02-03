@@ -476,7 +476,7 @@ class SystemUserTest {
         SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         assertFalse(newUser.getActivateUserStatus());
         //Act
-        newUser.setActivateUser();
+        newUser.setActivateUser(true);
         //Assert
         assertTrue(newUser.getActivateUserStatus());
     }

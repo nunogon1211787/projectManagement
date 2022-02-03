@@ -1,11 +1,15 @@
 package switch2021.project.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import switch2021.project.stores.UserProfileStore;
 import switch2021.project.utils.App;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+@Setter
 public class SystemUser {
 
 

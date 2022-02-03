@@ -34,7 +34,7 @@ public class SystemUserWithStatusControllerTest {
 
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
                 passwordConfirmation, photo, profile);
-        newUser.setActivateUser();
+        newUser.setActivateUser(true);
         company.getSystemUserStore().saveSystemUser(newUser);
         SystemUser newUser2 = company.getSystemUserStore().createSystemUser("Cris", "Cris@ipp.pt",
                 function, password, passwordConfirmation, photo, profile);
