@@ -3,6 +3,7 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.dto.SystemUserWithStatusDto;
+import switch2021.project.mapper.SystemUserWithStatusMapper;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser;
 import switch2021.project.model.UserProfile;
@@ -19,7 +20,8 @@ public class SystemUserWithStatusControllerTest {
     void getListSystemUserWithStatusSuccessSize() {
         //Arrange
         Company company = new Company();
-
+        SystemUserWithStatusMapper mapper = new SystemUserWithStatusMapper();
+        SystemUserWithStatusController systemUserWithStatusController = new SystemUserWithStatusController(company, mapper);
 
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
@@ -40,8 +42,6 @@ public class SystemUserWithStatusControllerTest {
                 function, password, passwordConfirmation, photo, profile);
         company.getSystemUserStore().saveSystemUser(newUser2);
         // Act
-
-        SystemUserWithStatusController systemUserWithStatusController = new SystemUserWithStatusController(company);
         List<SystemUserWithStatusDto> systemUserWithStatusDto = systemUserWithStatusController.getListSystemUserWithStatus();
 
         // Assert
@@ -53,7 +53,8 @@ public class SystemUserWithStatusControllerTest {
     void getListSystemUserWithStatusSuccess() {
         //Arrange
         Company company = new Company();
-
+        SystemUserWithStatusMapper mapper = new SystemUserWithStatusMapper();
+        SystemUserWithStatusController systemUserWithStatusController = new SystemUserWithStatusController(company, mapper);
 
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
@@ -73,9 +74,8 @@ public class SystemUserWithStatusControllerTest {
         SystemUser newUser2 = company.getSystemUserStore().createSystemUser("Cris", "Cris@ipp.pt",
                 function, password, passwordConfirmation, photo, profile);
         company.getSystemUserStore().saveSystemUser(newUser2);
-        // Act
 
-        SystemUserWithStatusController systemUserWithStatusController = new SystemUserWithStatusController(company);
+        // Act
         List<SystemUserWithStatusDto> systemUserWithStatusDto = systemUserWithStatusController.getListSystemUserWithStatus();
 
         // Assert
