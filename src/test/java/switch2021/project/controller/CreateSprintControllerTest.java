@@ -124,10 +124,10 @@ public class CreateSprintControllerTest {
     }
 
 //    @Test
-//    @DisplayName("Test to Save a Sprint")
-//    public void saveASprint() {
+//    @DisplayName("Test to create a sprint")
+//    public void createASprint() {
 //
-//        //Arrange
+//        //Arrange and Act
 //        Company company = new Company();
 //        CreateSprintController controller = new CreateSprintController(company);
 //        this.projectStore = company.getProjectStore();
@@ -152,14 +152,16 @@ public class CreateSprintControllerTest {
 //        Resource joana = new Resource(user2, startDateMm, endDateMm, 100, 1);
 //        currentProject.getProjectTeam().addResourceToTeam(joana);
 //        proj1.getProjectTeam().addResourceToTeam(joana);
-//        //Act
+//
 //        controller.getCurrentProjectListByUserEmail("joana@beaver.com");
 //        controller.getProject(proj1.getCode());
 //        Sprint sprintC = controller.createSprint("Sprint44", LocalDate.of(2022,3,1));
-//        controller.saveSprint(sprintC);
-//        List<Sprint> sprintSave = this.sprintList.getSprintList();
+//        SprintList sprintList = proj1.
+//        boolean save1 = proj1.getSprints().saveSprint(sprintC);
 //        //Assert
-//        assertTrue();
+//        assertEquals(sprintC, proj1.getSprints().getSprint(sprintC.getId_Sprint()));
+//        assertTrue(save1);
+//        assertTrue(controller.saveSprint(sprintC));
 //    }
 
 }

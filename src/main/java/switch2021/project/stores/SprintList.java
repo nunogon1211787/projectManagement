@@ -119,10 +119,11 @@ public class SprintList {
 
         boolean msg = true;
 
-        for (Sprint i : sprintList)
-            if (!i.getEndDate().isBefore(startDate) || i.getEndDate().isEqual(startDate)) {
+        for (int i = 0; i < sprintList.size() - 1; i++) {
+            if (!sprintList.get(i).getEndDate().isBefore(startDate) || sprintList.get(i).getEndDate().isEqual(startDate)) {
                 msg = false;
             }
+        }
         return msg;
     }
 
