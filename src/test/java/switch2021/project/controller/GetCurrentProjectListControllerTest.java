@@ -4,11 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -32,7 +30,7 @@ public class GetCurrentProjectListControllerTest {
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, 100, 1);
-        currentProject.getProjectTeam().addResourceToTeam(manuelmartins);
+        currentProject.getProjectTeam().saveResource(manuelmartins);
         projectStore.saveNewProject(currentProject);
         // Act
         List<Project> projectListActual = controller.getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
@@ -60,13 +58,13 @@ public class GetCurrentProjectListControllerTest {
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, 100, .5);
-        currentProject.getProjectTeam().addResourceToTeam(manuelmartins);
+        currentProject.getProjectTeam().saveResource(manuelmartins);
         projectStore.saveNewProject(currentProject);
 
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 3000);
         proj1.setEndDate(LocalDate.now().plusDays(7));
-        proj1.getProjectTeam().addResourceToTeam(manuelmartins);
+        proj1.getProjectTeam().saveResource(manuelmartins);
         projectStore.saveNewProject(proj1);
         // Act
         List<Project> projectListActual = controller.getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
@@ -106,7 +104,7 @@ public class GetCurrentProjectListControllerTest {
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, 100, .5);
-        currentProject.getProjectTeam().addResourceToTeam(manuelmartins);
+        currentProject.getProjectTeam().saveResource(manuelmartins);
         projectStore.saveNewProject(currentProject);
 
         List<Project> projectListExpected = new ArrayList<>();

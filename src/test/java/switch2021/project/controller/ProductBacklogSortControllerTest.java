@@ -193,7 +193,7 @@ public class ProductBacklogSortControllerTest {
         UserStory userStory3 =project.getProductBacklog().createUserStory("US001",5,"show sorted",5);
         project.getProductBacklog().saveUserStory(userStory3);
 
-        projectTeam.addResourceToTeam(input);
+        projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
 
         // Act
@@ -239,7 +239,7 @@ public class ProductBacklogSortControllerTest {
         project.getProductBacklog().saveUserStory(userStory2);
 
 
-        projectTeam.addResourceToTeam(input);
+        projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
 
         // Act

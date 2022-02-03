@@ -31,7 +31,6 @@ public class ProjectStore {
                                  BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         Company company = App.getInstance().getCompany();
-
         ProjectStatus status = company.getProjectStatusStore().getProjectStatusByDescription("Planned");
 
         return new Project(name, description, customer, typology, businessSector,

@@ -39,7 +39,7 @@ public class CreateSprintControllerTest {
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource joana = new Resource(user2, startDateMm, endDateMm, 100, 1);
-        currentProject.getProjectTeam().addResourceToTeam(joana);
+        currentProject.getProjectTeam().saveResource(joana);
 
         // Act
         List<Project> projectListActual = controller.getCurrentProjectListByUserEmail("joana@beaver.com");
@@ -74,8 +74,8 @@ public class CreateSprintControllerTest {
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource joana = new Resource(user2, startDateMm, endDateMm, 100, 1);
-        currentProject.getProjectTeam().addResourceToTeam(joana);
-        proj1.getProjectTeam().addResourceToTeam(joana);
+        currentProject.getProjectTeam().saveResource(joana);
+        proj1.getProjectTeam().saveResource(joana);
 
         controller.getCurrentProjectListByUserEmail("joana@beaver.com");
         //Act
@@ -111,8 +111,8 @@ public class CreateSprintControllerTest {
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource joana = new Resource(user2, startDateMm, endDateMm, 100, 1);
-        currentProject.getProjectTeam().addResourceToTeam(joana);
-        proj1.getProjectTeam().addResourceToTeam(joana);
+        currentProject.getProjectTeam().saveResource(joana);
+        proj1.getProjectTeam().saveResource(joana);
 
         controller.getCurrentProjectListByUserEmail("joana@beaver.com");
         controller.getProject(proj1.getCode());

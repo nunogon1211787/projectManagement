@@ -279,16 +279,16 @@ class ProjectTest {
         LocalDate endDateMg = LocalDate.of(2021, 11, 30);
         Resource manuelgoncalves = new Resource(user6, startDateMg, endDateMg, 100, 1);
 
-        proj1.getProjectTeam().addResourceToTeam(manuelbras);
-        proj1.getProjectTeam().addResourceToTeam(manueljose);
-        proj1.getProjectTeam().addResourceToTeam(manueloliveira);
-        proj1.getProjectTeam().addResourceToTeam(manuelfernandes);
-        proj2.getProjectTeam().addResourceToTeam(manuelbras);
-        proj2.getProjectTeam().addResourceToTeam(manueloliveira);
-        proj2.getProjectTeam().addResourceToTeam(manuelgoncalves);
-        proj3.getProjectTeam().addResourceToTeam(manueljose);
-        proj3.getProjectTeam().addResourceToTeam(manueloliveira);
-        currentProject.getProjectTeam().addResourceToTeam(manuelmartins);
+        proj1.getProjectTeam().saveResource(manuelbras);
+        proj1.getProjectTeam().saveResource(manueljose);
+        proj1.getProjectTeam().saveResource(manueloliveira);
+        proj1.getProjectTeam().saveResource(manuelfernandes);
+        proj2.getProjectTeam().saveResource(manuelbras);
+        proj2.getProjectTeam().saveResource(manueloliveira);
+        proj2.getProjectTeam().saveResource(manuelgoncalves);
+        proj3.getProjectTeam().saveResource(manueljose);
+        proj3.getProjectTeam().saveResource(manueloliveira);
+        currentProject.getProjectTeam().saveResource(manuelmartins);
     }
 
 

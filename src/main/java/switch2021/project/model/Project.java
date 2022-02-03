@@ -107,7 +107,7 @@ public class Project {
     public boolean addResource(Resource toAdd) {
         boolean msg = false;
         if (validateResource(toAdd)) {
-            this.projectTeam.addResourceToTeam(toAdd);
+            this.projectTeam.saveResource(toAdd);
             msg = true;
         }
         return msg;

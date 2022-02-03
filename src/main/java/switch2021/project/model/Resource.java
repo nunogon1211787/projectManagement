@@ -2,7 +2,6 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -27,13 +26,13 @@ public class Resource {
     public Resource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
         checkStartDateEndDate(startDate, endDate);
         checkCostPerHour(costPerHour);
+        checkSystemUser(user);
 
         this.user = user;
         this.startDate = startDate;
         this.endDate = endDate;
         this.costPerHour = costPerHour;
         this.percentageOfAllocation = percentageOfAllocation;
-        this.role = null;
     }
 
 
@@ -49,45 +48,6 @@ public class Resource {
         this.role = originalResource.getRole();
     }
 
-
-    /**
-     * Getters and Setters Methods
-     **/
-    public SystemUser getUser() {
-        return user;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public double getCostPerHour() {
-        return costPerHour;
-    }
-
-    public double getPercentageOfAllocation() {
-        return percentageOfAllocation;
-    }
-
-    public ProjectRole getRole() {
-        return role;
-    }
-
-    public void setRole(ProjectRole role) {
-        this.role = role;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
 
 
     /**
@@ -168,14 +128,20 @@ public class Resource {
         }
     }
 
-    public boolean checkIfResourceCanBeAssignedToRoleByDate(LocalDate startDate, int sprintDuration){
+    public boolean checkIfResourceIsActiveAndCurrent(LocalDate startDate, int sprintDuration){
         LocalDate endDateSprint = startDate.plusDays((sprintDuration * 7L) -1);
-        return startDate.isAfter(this.startDate) && endDateSprint.isBefore(this.endDate);
+            return (startDate.isAfter(this.startDate) || startDate == this.startDate) && (endDateSprint.isBefore(this.endDate) || endDateSprint == this.endDate);
     }
 
     private void checkCostPerHour(double costPerHour) {
         if (costPerHour < 0) {
             throw new IllegalArgumentException("Cost Per Hour must be valid.");
+        }
+    }
+
+    private void checkSystemUser(SystemUser user) {
+        if(user == null) {
+            throw new NullPointerException("Resource can not have a System User as null.");
         }
     }
 
@@ -188,16 +154,18 @@ public class Resource {
         if (this == o) return true;
         if (!(o instanceof Resource)) return false;
         Resource that = (Resource) o;
+        if (this.role == null && that.role == null) return true;
         return
-                (this.user.equals(that.getUser())) &&
-                        (this.startDate.equals(that.getStartDate())) &&
-                        (this.endDate.equals(that.getEndDate())) &&
-                        (this.costPerHour == that.getCostPerHour()) &&
-                        (this.percentageOfAllocation == that.getPercentageOfAllocation());
+                (this.user.equals(that.user)) &&
+                        (this.role.equals(that.role)) &&
+                        (this.startDate.equals(that.startDate)) &&
+                        (this.endDate.equals(that.endDate)) &&
+                        (this.costPerHour == that.costPerHour) &&
+                        (this.percentageOfAllocation == that.percentageOfAllocation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user,startDate,endDate,costPerHour,percentageOfAllocation);
+        return Objects.hash(user,role,startDate,endDate,costPerHour,percentageOfAllocation);
     }
 }

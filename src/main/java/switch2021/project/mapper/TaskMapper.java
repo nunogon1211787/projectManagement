@@ -11,7 +11,7 @@ public class TaskMapper {
         String name = dto.getName();
         String description = dto.getDescription();
         int effortEstimate = dto.getEffortEstimate();
-        Resource responsible = proj.getProjectTeam().getCurrentResourceByName(dto.getResponsible());
+        Resource responsible = proj.getProjectTeam().getResourceByName(dto.getResponsible());
         TaskType type = App.getInstance().getCompany().getTaskTypeStore().getTypeByName(dto.getTypeName());
 
         return new Task(name, description, effortEstimate, type, responsible);

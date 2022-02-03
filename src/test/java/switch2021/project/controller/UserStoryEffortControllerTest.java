@@ -1,15 +1,12 @@
 package switch2021.project.controller;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.depracated.UserStoryOfSprint;
 import switch2021.project.model.*;
 import switch2021.project.stores.SprintList;
 import switch2021.project.stores.SystemUserStore;
-import switch2021.project.stores.UserProfileStore;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,8 +32,8 @@ class UserStoryEffortControllerTest {
         LocalDate endDate = LocalDate.of(2022, 3, 5);
         Resource person1 = new Resource(user, startDate, endDate, 100, .5);
         Resource person2 = new Resource(user, startDate, endDate, 100, .5);
-        project1.getProjectTeam().addResourceToTeam(person1);
-        project1.getProjectTeam().addResourceToTeam(person2);
+        project1.getProjectTeam().saveResource(person1);
+        project1.getProjectTeam().saveResource(person2);
         company.getProjectStore().saveNewProject(project1);
         //UserProfileStore userProfileStore = company.getUserProfileStore();
         /*Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
@@ -89,8 +86,8 @@ class UserStoryEffortControllerTest {
         LocalDate endDate = LocalDate.of(2022, 3, 5);
         Resource person1 = new Resource(user, startDate, endDate, 100, .5);
         Resource person2 = new Resource(user, startDate, endDate, 100, .5);
-        project1.getProjectTeam().addResourceToTeam(person1);
-        project1.getProjectTeam().addResourceToTeam(person2);
+        project1.getProjectTeam().saveResource(person1);
+        project1.getProjectTeam().saveResource(person2);
         company.getProjectStore().saveNewProject(project1);
         Sprint sprint1 = new Sprint("Hello1", LocalDate.now());
         SprintList sprintList = project1.getSprints(); //objeto
