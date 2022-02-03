@@ -137,6 +137,7 @@ public class SystemUser {
         return this.activateUser = true;
     }
 
+
     /**
      * Validation Methods
      **/
