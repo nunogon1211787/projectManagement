@@ -1,9 +1,7 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.Task;
 import switch2021.project.model.TaskStatus;
-import switch2021.project.model.TaskType;
 
 import java.util.List;
 
@@ -16,7 +14,7 @@ class TaskStatusStoreTest {
         //Arrange
         TaskStatusStore test = new TaskStatusStore();
         //Asserts
-        assertTrue(test.createTaskStatus("test1"));;
+        assertTrue(test.createTaskStatus("test1"));
         assertEquals(1, test.getTaskStatusNames().size());
         assertEquals("test1", test.getTaskStatusByDescription("test1").getDescription());
     }
@@ -87,8 +85,8 @@ class TaskStatusStoreTest {
         test.saveTaskStatus(status1);
         test.saveTaskStatus(status2);
         //Assert
-        assertEquals(1, status1.getId_TaskStatus());
-        assertEquals(2, status2.getId_TaskStatus());
+        assertEquals(1, status1.getIdTaskStatus());
+        assertEquals(2, status2.getIdTaskStatus());
     }
 
     @Test

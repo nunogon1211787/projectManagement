@@ -36,12 +36,12 @@ public class RegisterWorkToTaskController {
     private List<Task> taskList;
     private Task task;*/
 
-    /**
+    /*
      * Constructor to UI (with SINGLETON).
      */
-    public RegisterWorkToTaskController() {
+    /*public RegisterWorkToTaskController() {
         this.company = App.getInstance().getCompany();
-    }
+    }*/
 
     /**
      * Constructor to test (without SINGLETON).
@@ -71,15 +71,15 @@ public class RegisterWorkToTaskController {
         return this.mapper.toDtoList(this.taskList);
     }
 
-    public Task getTask(int taskId) {
+    public TaskIdNameDTO getTask(int taskId) {
         TaskList taskList = this.userStory.getTasks();
 
         this.task = taskList.getTaskById(taskId);
-        return this.task;
+        return this.mapper.toDTO(this.task);
     }
 
     public boolean createTaskEffort(TaskEffortDTO taskEffortDTO) {
-        this.taskIdNameDTO = taskEffortDTO.getTaskIdNameDTO();
+        TaskIdNameDTO taskIdNameDTO = taskEffortDTO.getTaskIdNameDTO();
         int effortHours = taskEffortDTO.getEffortHours();
         int effortMinutes = taskEffortDTO.getEffortMinutes();
         LocalDate effortDate = taskEffortDTO.getEffortDate();
@@ -94,42 +94,6 @@ public class RegisterWorkToTaskController {
         this.task.saveTaskEffort(taskEffort);
         return this.userStory.updateWorkDone(this.task);
     }
-
-
-//Pode vir a dar jeito
-    /*public List<ProjectCodeDTO> getCurrentProjectsByUserEmail(String email) {
-        this.projStore = this.company.getProjectStore();
-        List<Project> currentProjectList = projStore.getCurrentProjectsByUserEmail(email);
-
-        this.projectCodeDTOList = this.mapper.projectListToProjectCodeDTOList(currentProjectList);
-        return this.projectCodeDTOList;
-    }
-
-    public Project getProjectByCodeDTO(String code) {
-        this.project = this.projStore.getProjectByCode(code);
-
-        //this.projCodeDTO = this.projectCodeDTOList.getProjectCodeDTO(projCodeDTO);
-
-        return this.project;
-    }
-
-
-    public List<SprintIdDTO> getProjectSprints(ProjectCodeDTO projCodeDTO) {
-        this.projCodeDTO = this.projectCodeDTOList.getProjectCodeDTO(projCodeDTO);
-
-        String code = this.mapper.projectCodeDTOToProjectCode(projCodeDTO);
-        Project proj = company.getProjectStore().getProjectByCode(code);
-        List<Sprint> sprintList = proj.getSprints().getSprintList();
-        this.sprintIdDTOList = this.mapper.sprintListToSprintIdDTOList(sprintList);
-
-        return this.sprintIdDTOList;
-    }
-
-    public UserStory getUserStory(int idUserStory) {
-        this.userStoryParent = this.productBacklog.getUserStoryById(idUserStory);
-        return userStoryParent;
-    }*/
-
 
     //if not using DTO
     /*public List<Project> getCurrentProjectsByUserEmail(String email) {
