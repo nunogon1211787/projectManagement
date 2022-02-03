@@ -12,7 +12,7 @@ participant ": SystemUserWithStatusController" as Ctrl
 participant ": Company" as C1
 participant "systemUserList : SystemUserStore" as C2
 participant ": SystemUserWithStatusMapper" as C3
-participant "systemUser : SystemUser" as C4
+participant "systemUser : List<SystemUser>" as C4
 participant "systemUserWithStatusDtoList : List <SystemUserWithStatusDtoList>" as C5
 participant "systemUserWithStatusDto : SystemUserWithStatusDto" as C6
 
@@ -33,8 +33,11 @@ Ctrl->C3 :toDto(systemUserList)
 C3->C5 **: create()
  loop for each know SystemUser
 C3->C4 : getUserName()
+C4-->C3 : userName
 C3->C4 : getEmail()
+C4-->C3 : email
 C3->C4 : getActivateUserStatus()
+C4-->C3 : activateUserStatus
 C3-> C6 ** : create(userName, email, activateUserStatus)
 C3->C5 : add(systemUserWithStatusDto)
 C5-->C3 : true

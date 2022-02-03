@@ -19,7 +19,7 @@ public class RegisterUserController {
      * Constructor to UI (with SINGLETON)
      **/
 
-    public RegisterUserController() { this.company = App.getInstance().getCompany(); }
+  //  public RegisterUserController() { this.company = App.getInstance().getCompany(); }
 
     /**
      * Constructor to test (without SINGLETON)

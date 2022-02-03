@@ -137,6 +137,9 @@ public class SystemUser {
         return this.activateUser = true;
     }
 
+    public boolean setInactivateUser() { return this.activateUser = false;}
+
+
     /**
      * Validation Methods
      **/
@@ -410,4 +413,6 @@ public class SystemUser {
     public int hashCode() {
         return Objects.hash(userName, email, photo, password, function, activateUser, assignedProfileList);
     }
+
+
 }
