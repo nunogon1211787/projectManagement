@@ -138,14 +138,12 @@ public class Resource {
 
         LocalDate endDate = startDate.plusDays(sprintDuration * 7L - 1);
 
-        if(this.startDate.isBefore(startDate) || this.startDate.isEqual(startDate)) {
-            if (this.endDate.isAfter(endDate) || this.endDate.isEqual(endDate)) {
+        if((this.startDate.isBefore(startDate) || this.startDate.isEqual(startDate)) &&
+                (this.endDate.isAfter(endDate) || this.endDate.isEqual(endDate))){
                 msg = true;
             }
-        }
         return msg;
     }
-
 
     /**
      * Método check se o período que queremos alocar é coincidente com o período que o resource está alocado ao projecto (para depois podermos somar e confirmar que a alocação total não é maior que 1) (Carolina US007)

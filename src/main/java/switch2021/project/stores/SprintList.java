@@ -122,7 +122,6 @@ public class SprintList {
         for (Sprint i : sprintList)
             if (!i.getEndDate().isBefore(startDate) || i.getEndDate().isEqual(startDate)) {
                 msg = false;
-                //throw new IllegalArgumentException("Please type the correct Start Date.");
             }
         return msg;
     }
