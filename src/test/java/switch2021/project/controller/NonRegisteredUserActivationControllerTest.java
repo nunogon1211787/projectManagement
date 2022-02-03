@@ -3,6 +3,8 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser;
+import switch2021.project.stores.SystemUserStore;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -12,14 +14,17 @@ class NonRegisteredUserActivationControllerTest {
     public void activateNonRegisteredUserbyEmailSuccess () {
         //Arrange
         Company company = new Company(); //objeto do tipo company
-        SystemUser user = new SystemUser("Ana", "1211748@isep.ipp.pt",
+        NonRegisteredUserActivationController controller = new NonRegisteredUserActivationController(company);
+        SystemUserStore systemUserStore = company.getSystemUserStore();
+
+        String userEmail = "1211748@isep.ipp.pt";
+        SystemUser user = systemUserStore.createSystemUser("Ana", userEmail,
                                             "User_12", "111", "111", "",company.getUserProfileStore().getUserProfile("Visitor"));
-        company.getSystemUserStore().saveSystemUser(user);
-
+        systemUserStore.saveSystemUser(user);
         // Act
-        boolean result = company.getSystemUserStore().getUserByEmail("1211748@isep.ipp.pt").setActivateUser();
-
+        boolean result = controller.activateNonRegisteredUser(userEmail);
         //Assert
         assertTrue(result);
+        assertTrue(user.getActivateUserStatus());
     }
 }
