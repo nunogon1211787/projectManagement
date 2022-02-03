@@ -1,58 +1,158 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-hide circle
 skinparam classAttributeIconSize 0
+hide circle
 
-title US024 - As Administrator, I want to get a list all user accounts and their status
+title US031 - As Team Member, I want to create a task in a user story
 
-class UserAccountStatusUI {
+class CreateUSTaskUI{}
 
+class CreateUSTaskController{
+-Company company
+-Project proj
+-TaskList taskList
+-TaskMapper taskMapper
++getTaskTypes()
++getSprintTasks(String code, int id)
++getCurrentProjectTeam()
++createSprintTask(CreateTaskDTO dto)
 }
 
-class ProductBacklogSortController {
-    +getProjectListByUserEmail(String email)
-    +getProject(String code)
-    +getUsSortedByPriority()
+class Company{
++getTaskTypeStore()
++getProjectStore()
 }
 
-class Company {
-    +getProjectStore()
+class TaskTypeStore{
+-List<TaskType> taskTypeList
++getTaskTypesNames()
 }
 
-class ProjectStore {
-+getProjectListByUserEmail(String email)
+class TaskType{
+-String name
++getName()
+}
+
+class ProjectStore{
+-List<Project> projectList
 +getProjectByCode(String code)
 }
 
-class Project {
--code : String
--productBacklog : ProductBacklog
-+getProductBacklog()
+class Project{
+-SprintList sList
+-ProjectTeam projectTeam
++hasCode(String code)
++getSprints()
++getProjectTeam()
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+getUsSortedByPriority()
+class SprintList{
+-List<Sprint> sprintList
++getSprint(int id)
 }
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
+class Sprint{
+-int sprint_ID
+-LocalDate startDate
+-LocalDate endDate
+-TaskList sprintTaskList
++hasID(int id)
++getTaskList()
 }
 
-UserAccountStatusUI ..> ProductBacklogSortController
+class TaskList{
+-List<Task> taskList
++getTasksNames()
++createSprintTask(createTaskDTO dto)
++saveTask(Task task)
+-validate(Task task)
+-add(Task task)
+}
 
-ProductBacklogSortController ..> Company
-ProductBacklogSortController ..> ProjectStore
-ProductBacklogSortController ..> Project
-ProductBacklogSortController ..> ProductBacklog
+class Task{
+-String name
+-String description
+-int effortEstimate
+-TaskType taskType
+-List<Task> tasksPrecedence
+-Resource responsible
++Task(String name,String description,int effort,TaskType type,List<Task> precedence,Resource responsible)
++getName()
++getDescription()
++getEffortEstimate()
++getTaskTypeName()
++getResponsibleEmail()
+}
 
-Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+class ProjectTeam{
+-List<Resource> projectTeam
++getCurrentResourcesNames()
++getCurrentResource(String email)
+}
+
+class Resource{
+-String name
+-LocalDate startDate
+-LocalDate endDate
++isCurrent()
++getName()
+}
+
+class TaskMapper{
++toModel(CreateTaskDTO dto)
++toDTO(Task task)
+}
+
+class CreateTaskDTO{
+-String name
+-String description
+-int effortEstimate
+-String taskTypeName
+-String responsibleEmail
++CreateTaskDTO(Task task)
++getName()
++getDescription()
++getEffortEstimate()
++getTaskTypeName()
++getResponsible()
+}
+
+CreateSprintTaskUI ..> CreateSprintTaskController
+CreateSprintTaskUI ..> CreateTaskDTO
+
+CreateSprintTaskController ..> Company
+CreateSprintTaskController ..> TaskTypeStore
+CreateSprintTaskController ..> ProjectStore
+CreateSprintTaskController ..> Project
+CreateSprintTaskController ..> SprintList
+CreateSprintTaskController ..> Sprint
+CreateSprintTaskController ..> TaskList
+CreateSprintTaskController ..> ProjectTeam
+CreateSprintTaskController ..> TaskMapper
+CreateSprintTaskController ..> CreateTaskDTO
+
+
+Company "1" *-- "1" TaskTypeStore
+Company "1" *-- "1" ProjectStore
+
+TaskTypeStore "1" *-- "*" TaskType
+
+TaskType "*" --o "1" Task
+
+ProjectStore "1" *-- "*" Project
+
+Project "1" *-- "1" SprintList
+Project "1" *-- "1" ProjectTeam
+
+SprintList "1" *-- "*" Sprint
+
+Sprint "1" *-- "1" TaskList
+
+TaskList "1" *-- "*" Task
+
+ProjectTeam "1" *-- "*" Resource
+
+TaskMapper ..> CreateTaskDTO
+
 @enduml
