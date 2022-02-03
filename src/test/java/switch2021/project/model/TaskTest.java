@@ -1,7 +1,6 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.stores.TaskList;
 
 import java.time.LocalDate;
 
@@ -457,7 +456,7 @@ class TaskTest {
         //Asserts
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            test.setID_Task(-1);
+            test.setIdTask(-1);
         });
     }
 

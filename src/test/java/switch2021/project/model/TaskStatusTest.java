@@ -40,7 +40,7 @@ class TaskStatusTest {
         TaskStatus status = new TaskStatus("teste");
         teste.saveTaskStatus(status);
         //Assert
-        assertEquals(1, status.getId_TaskStatus());
+        assertEquals(1, status.getIdTaskStatus());
     }
 
     @Test
@@ -49,7 +49,7 @@ class TaskStatusTest {
         TaskStatusStore teste = new TaskStatusStore();
         TaskStatus status = new TaskStatus("teste");
         //Assert
-        assertEquals(0, status.getId_TaskStatus());
+        assertEquals(0, status.getIdTaskStatus());
     }
 
     @Test
@@ -58,7 +58,7 @@ class TaskStatusTest {
         TaskStatusStore teste = new TaskStatusStore();
         TaskStatus status = new TaskStatus("teste");
         //Assert
-        assertNotEquals(1, status.getId_TaskStatus());
+        assertNotEquals(1, status.getIdTaskStatus());
     }
 
     @Test
@@ -72,7 +72,7 @@ class TaskStatusTest {
         teste.saveTaskStatus(status2);
         teste.saveTaskStatus(status3);
         //Assert
-        assertEquals(3, status3.getId_TaskStatus());
+        assertEquals(3, status3.getIdTaskStatus());
     }
 
     @Test
@@ -117,9 +117,9 @@ class TaskStatusTest {
         status2.setID_TaskStatus(2);
         status3.setID_TaskStatus(3);
         //Assert
-        assertEquals(1, status1.getId_TaskStatus());
-        assertEquals(2, status2.getId_TaskStatus());
-        assertEquals(3, status3.getId_TaskStatus());
+        assertEquals(1, status1.getIdTaskStatus());
+        assertEquals(2, status2.getIdTaskStatus());
+        assertEquals(3, status3.getIdTaskStatus());
     }
 
     @Test
@@ -132,9 +132,9 @@ class TaskStatusTest {
         status2.setID_TaskStatus(2);
         status3.setID_TaskStatus(3);
         //Assert
-        assertNotEquals(1, status2.getId_TaskStatus());
-        assertNotEquals(2, status3.getId_TaskStatus());
-        assertNotEquals(3, status1.getId_TaskStatus());
+        assertNotEquals(1, status2.getIdTaskStatus());
+        assertNotEquals(2, status3.getIdTaskStatus());
+        assertNotEquals(3, status1.getIdTaskStatus());
     }
 
     @Test

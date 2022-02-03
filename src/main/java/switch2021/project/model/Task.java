@@ -16,7 +16,7 @@ public class Task {
     /**
      * Attributes.
      */
-    private int ID_Task;
+    private int idTask;
     private String name;
     private String description;
     private TaskType type;
@@ -79,12 +79,12 @@ public class Task {
     }
 
     public boolean hasId(int id) {
-        return Objects.equals(this.ID_Task, id);
+        return Objects.equals(this.idTask, id);
     }
 
-    public void setID_Task(int id) {
+    public void setIdTask(int id) {
         checkIdRules(id);
-        this.ID_Task = id;
+        this.idTask = id;
     }
     /**
      * Methods to validate attributes data.

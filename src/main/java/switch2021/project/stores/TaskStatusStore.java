@@ -3,7 +3,6 @@ package switch2021.project.stores;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.TaskStatus;
-import switch2021.project.model.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -166,7 +165,7 @@ public class TaskStatusStore {
     public int id_TaskStatusGenerator() {
         int id = 1;
         if (this.taskStatusList.size() > 0) {
-            id = this.taskStatusList.get(taskStatusList.size() - 1).getId_TaskStatus() + 1;
+            id = this.taskStatusList.get(taskStatusList.size() - 1).getIdTaskStatus() + 1;
         }
         return id;
     }

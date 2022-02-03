@@ -4,7 +4,9 @@ import lombok.Getter;
 import switch2021.project.mapper.TaskMapper;
 import switch2021.project.dto.CreateTaskDTO;
 import switch2021.project.model.Project;
+import switch2021.project.model.Resource;
 import switch2021.project.model.Task;
+import switch2021.project.model.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +34,8 @@ public class TaskList {
      * Methods to create Task.
      */
 
-    public Task createTask(String description){
-        return new Task(description);
+    public Task createTask(String name, String description, double effortEstimate, TaskType type, Resource responsible){
+        return new Task(name, description, effortEstimate, type, responsible);
     }
 
     // Create task with DTO and Mapper. US032 - Sprint 3
@@ -126,7 +128,7 @@ public class TaskList {
             result = true;
 
             if (!validateIfTaskAlreadyExists(newTask)) {
-                newTask.setID_Task(id_TaskGenerator());
+                newTask.setIdTask(id_TaskGenerator());
                 addTaskToTheList(newTask);
             }
 
@@ -148,7 +150,7 @@ public class TaskList {
     public int id_TaskGenerator() {
         int id = 1;
         if (this.taskList.size() > 0) {
-            id = this.taskList.get(taskList.size() - 1).getID_Task() + 1;
+            id = this.taskList.get(taskList.size() - 1).getIdTask() + 1;
         }
         return id;
     }
