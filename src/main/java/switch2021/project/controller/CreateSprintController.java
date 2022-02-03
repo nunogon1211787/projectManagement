@@ -19,7 +19,6 @@ public class CreateSprintController {
     private final Company company;
     private Project proj;
     private ProjectStore projectStore;
-    private SprintList sprintList;
     private Sprint sprint;
     private List<Project> currentProjectListByUser;
 
@@ -56,13 +55,12 @@ public class CreateSprintController {
 
     public Sprint createSprint(String name, LocalDate startDate) {
         int sprintDuration = this.proj.getSprintDuration();
-
         this.sprint = this.proj.getSprints().createSprint(name, startDate, sprintDuration);
         return this.sprint;
     }
 
     public boolean saveSprint(Sprint sprint) {
-        return this.sprintList.saveSprint(sprint);
+        return this.proj.getSprints().saveSprint(sprint);
     }
 }
 
