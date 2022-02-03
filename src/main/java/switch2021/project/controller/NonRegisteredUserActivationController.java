@@ -12,15 +12,13 @@ public class NonRegisteredUserActivationController {
      **/
 
     private Company company;
-    private SystemUserStore systemUserStore;
-    private SystemUser user;
 
 
-    /**
+    /*
      * Constructor to UI (with SINGLETON)
      **/
 
-    public NonRegisteredUserActivationController(){ this.company = App.getInstance().getCompany();}
+    //public NonRegisteredUserActivationController(){ this.company = App.getInstance().getCompany();}
 
     /**
      * Constructor to test (without SINGLETON)
