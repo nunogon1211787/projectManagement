@@ -105,7 +105,7 @@ public class UserStory {
      * ---> Method to validate entered info by Product Owner <---
      * (Cris US009)
      */
-    private boolean isValidUserStory(String name, int priority, String description) {
+    public boolean isValidUserStory(String name, int priority, String description) {
         //check if priority is invalid
         if (priority < 0 || priority > 5) {
             throw new IllegalArgumentException("Check priority, cannot be < 0 or superior to 5.");
@@ -121,7 +121,7 @@ public class UserStory {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be blank.");
         }
-        if (name.length() < 3) {
+        if (name.length() <= 3) {
             throw new IllegalArgumentException("Name must be at least 3 characters");
         }
         return true;
