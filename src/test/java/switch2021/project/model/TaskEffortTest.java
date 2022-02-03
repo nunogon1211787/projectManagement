@@ -24,14 +24,13 @@ public class TaskEffortTest {
         String comment = "design";
         String attachment = "photo";
         //Act
-        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
+        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         //Assert
         assertEquals(effortHours, taskEffort.getEffortHours());
         assertEquals(effortMinutes, taskEffort.getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
-        assertEquals(resource, taskEffort.getEffortResponsible());
     }
 
     @Test //create effort with no comments or attachments
@@ -50,14 +49,13 @@ public class TaskEffortTest {
         String comment = "";
         String attachment = "";
         //Act
-        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
+        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         //Assert
         assertEquals(effortHours, taskEffort.getEffortHours());
         assertEquals(effortMinutes, taskEffort.getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
-        assertEquals(resource, taskEffort.getEffortResponsible());
     }
 
     @Test //no date entered -> assigns the date of today
@@ -76,14 +74,13 @@ public class TaskEffortTest {
         String comment = "design";
         String attachment = "";
         //Act
-        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
+        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         //Assert
         assertEquals(effortHours, taskEffort.getEffortHours());
         assertEquals(effortMinutes, taskEffort.getEffortMinutes());
         assertEquals(LocalDate.now(), taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
-        assertEquals(resource, taskEffort.getEffortResponsible());
     }
 
     @Test
@@ -102,14 +99,13 @@ public class TaskEffortTest {
         String comment = "design";
         String attachment = "photo";
         //Act
-        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
+        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         //Assert
         assertEquals(effortHours, taskEffort.getEffortHours());
         assertEquals(effortMinutes, taskEffort.getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
-        assertEquals(resource, taskEffort.getEffortResponsible());
     }
 
     @Test
@@ -128,14 +124,13 @@ public class TaskEffortTest {
         String comment = "design";
         String attachment = "photo";
         //Act
-        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
+        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         //Assert
         assertEquals(effortHours, taskEffort.getEffortHours());
         assertEquals(effortMinutes, taskEffort.getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
-        assertEquals(resource, taskEffort.getEffortResponsible());
     }
 
     //Fails
@@ -157,7 +152,7 @@ public class TaskEffortTest {
             String comment = "design";
             String attachment = "";
             //Act
-            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
+            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         });
     }
 
@@ -179,7 +174,7 @@ public class TaskEffortTest {
             String comment = "design";
             String attachment = "";
             //Act
-            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
+            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         });
     }
 
@@ -201,7 +196,7 @@ public class TaskEffortTest {
             String comment = "design";
             String attachment = "";
             //Act
-            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
+            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         });
     }
 
@@ -223,7 +218,7 @@ public class TaskEffortTest {
             String comment = "design";
             String attachment = "";
             //Act
-            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
+            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         });
     }
 
@@ -245,7 +240,7 @@ public class TaskEffortTest {
             String comment = "design";
             String attachment = "";
             //Act
-            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
+            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         });
     }
 
@@ -267,29 +262,7 @@ public class TaskEffortTest {
             String comment = "design";
             String attachment = "";
             //Act
-            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
-        });
-    }
-
-    @Test
-    public void createTaskEffortFailWorkDateNotMatchResourceDates() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            Company company = new Company();
-            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-            SystemUser user = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "developer", "ghi", "ghi", "photo", profile);
-            LocalDate startDateMb = LocalDate.of(2022, 1, 1);
-            LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-            Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
-
-            int effortHours = 4;
-            int effortMinutes = 30;
-            LocalDate effortDate = LocalDate.of(2021, 1, 27);
-            String comment = "design";
-            String attachment = "";
-            //Act
-            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, resource);
+            TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         });
     }
 

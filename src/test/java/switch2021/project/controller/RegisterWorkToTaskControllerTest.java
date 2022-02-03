@@ -174,7 +174,7 @@ public class RegisterWorkToTaskControllerTest {
         assertEquals(0, userStory1.getWorkDone());
         //TaskEffortDTO
         LocalDate effortDate = LocalDate.of(2022, 1, 10);
-        TaskEffortDTO taskEffortDTO = new TaskEffortDTO(taskIdNameDTO, 4, 30, effortDate, "test", ".pdf");
+        TaskEffortDTO taskEffortDTO = new TaskEffortDTO( 4, 30, effortDate, "test", ".pdf");
         //Assert
         assertTrue(controller.createTaskEffort(taskEffortDTO));
         assertEquals(10, task2.getEffortEstimate());

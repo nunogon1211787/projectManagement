@@ -79,16 +79,16 @@ public class RegisterWorkToTaskController {
     }
 
     public boolean createTaskEffort(TaskEffortDTO taskEffortDTO) {
-        TaskIdNameDTO taskIdNameDTO = taskEffortDTO.getTaskIdNameDTO();
+        //TaskIdNameDTO taskIdNameDTO = taskEffortDTO.getTaskIdNameDTO();
         int effortHours = taskEffortDTO.getEffortHours();
         int effortMinutes = taskEffortDTO.getEffortMinutes();
         LocalDate effortDate = taskEffortDTO.getEffortDate();
         String comment = taskEffortDTO.getComment();
         String attachment = taskEffortDTO.getAttachment();
 
-        int taskId = taskIdNameDTO.getTaskId();
+        /*int taskId = taskIdNameDTO.getTaskId();
         TaskList taskList = this.userStory.getTasks();
-        this.task = taskList.getTaskById(taskId);
+        this.task = taskList.getTaskById(taskId);*/
 
         TaskEffort taskEffort = this.task.createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         this.task.saveTaskEffort(taskEffort);

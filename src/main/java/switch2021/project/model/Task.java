@@ -127,9 +127,7 @@ public class Task {
     }
 
     public TaskEffort createTaskEffort(int effortHours, int effortMinutes, LocalDate effortDate, String comment, String attachment) {
-        Resource effortResponsible = this.responsible;
-
-        return new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, effortResponsible);
+        return new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
     }
 
     public boolean validateTaskEffort(TaskEffort effort) {
@@ -142,6 +140,9 @@ public class Task {
         }
         if (effort == null) {
             return false;
+        }
+        if (effort.getEffortDate().isAfter(this.getResponsible().getEndDate()) || effort.getEffortDate().isBefore(this.getResponsible().getStartDate())) {
+            throw new IllegalArgumentException("work date not match with the resource allocation dates");
         }
         return !this.taskEffortList.contains(effort);
     }
