@@ -9,11 +9,12 @@ import java.util.List;
 public class RegisterWorkToTaskMapper {
 
     public TaskIdNameDTO toDTO (Task task) {
-        return new TaskIdNameDTO(task.getID_Task(), task.getName());
+        return new TaskIdNameDTO(task.getIdTask(), task.getName());
     }
 
     public List<TaskIdNameDTO> toDtoList(List<Task> taskList){
         List<TaskIdNameDTO> taskIdNameDTOList = new ArrayList<>();
+
         for(Task i: taskList) {
             taskIdNameDTOList.add(toDTO(i));
         }

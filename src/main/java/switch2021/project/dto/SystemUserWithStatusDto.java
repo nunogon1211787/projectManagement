@@ -1,15 +1,10 @@
 package switch2021.project.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import switch2021.project.model.Project;
 
-import java.util.ArrayList;
-import java.util.List;
 
-@Data
+import lombok.Getter;
+
+@Getter
 
 public class SystemUserWithStatusDto {
     private String userName;

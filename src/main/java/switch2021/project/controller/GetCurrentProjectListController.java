@@ -19,9 +19,9 @@ public class GetCurrentProjectListController {
      * Constructor to UI (with SINGLETON)
      **/
 
-    public GetCurrentProjectListController() {
-        this.company = App.getInstance().getCompany();
-    }
+//    public GetCurrentProjectListController() {
+//        this.company = App.getInstance().getCompany();
+//    }
 
     /**
      * Constructor to test (without SINGLETON)

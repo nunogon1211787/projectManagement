@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ViewStatusOfActivitiesInAProjectControllerTest {
 
@@ -22,14 +22,23 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
         ProjectStatus projectStatus = new ProjectStatus("ToStart");
-        Project project2 = new Project("Project_test", "prototype",  customer,
+        Project project2 = new Project("Project_test", "prototype", customer,
                 typo, sector, LocalDate.now(), projectStatus, 7, 5000);
 
         company.getProjectStore().saveNewProject(project2);
 
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
-        Task taskTest = sprint1.getTaskList().createTask("test");
-        Task taskTest2 = sprint1.getTaskList().createTask("test2");
+
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = company.getSystemUserStore().createSystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+
+        Task taskTest = sprint1.getTaskList().createTask("test", taskDescription, 8.0, taskType, resource);
+        Task taskTest2 = sprint1.getTaskList().createTask("test2", taskDescription, 8.0, taskType, resource);
         sprint1.getTaskList().saveTask(taskTest);
         List<Task> taskList = new ArrayList<>();
 
