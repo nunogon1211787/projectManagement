@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title Example of a System Sequence Diagram
+
+autoactivate on
+autonumber
+
+actor "Director" as Director
+participant ":System" as System
+
+activate Director
+
+Director -> System: Ask to access project team of a project
+System --> Director: projTeamListDto
+
+@enduml

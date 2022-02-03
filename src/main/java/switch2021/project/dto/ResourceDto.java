@@ -24,6 +24,9 @@ public class ResourceDto {
      */
 
     public ResourceDto(String name, String role, String startDate, String endDate, double costPerHour, double percentageOfAllocation){
+        if(role == null){
+            role = "";
+        }
         this.userName = name;
         this.startDate = startDate;
         this.endDate = endDate;
