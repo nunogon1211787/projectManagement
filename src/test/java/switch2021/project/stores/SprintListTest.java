@@ -237,7 +237,7 @@ public class SprintListTest {
 
     @Test
     @DisplayName("Verification Test, to Start a Sprint")
-    public void startASprint() {
+    public void startASprintGlobalSuccess() {
         //Arrange
         Company company = new Company();
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
