@@ -68,19 +68,4 @@ public class UserStoryStatusStore {
         }
         return msg;
     }
-
-    /** Override **/
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserStoryStatusStore)) return false;
-        UserStoryStatusStore that = (UserStoryStatusStore) o;
-        return Objects.equals(this.userStoryStatusList, that.userStoryStatusList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userStoryStatusList);
-    }
-
 }
