@@ -34,6 +34,16 @@ class TaskType{
 +getName()
 }
 
+class TaskStatusStore{
+-List<TaskStatus> taskStatusList
++getTaskStatusDescription()
+}
+
+class TaskStatus{
+-String description
++getDescription()
+}
+
 class ProjectStore{
 -List<Project> projectList
 +getProjectByCode(String code)
@@ -73,10 +83,17 @@ class TaskList{
 class Task{
 -String name
 -String description
--int effortEstimate
+-LocalDate startDate
+-LocalDate endDate
+-double effortEstimate
+-double effortRemaing
+-double hoursSpent
+-double percentageOfExecution
+-TaskStatus taskStatus
 -TaskType taskType
 -List<Task> tasksPrecedence
 -Resource responsible
+-List<Effort> taskEffortList
 +Task(String name,String description,int effort,TaskType type,List<Task> precedence,Resource responsible)
 +getName()
 +getDescription()
@@ -88,15 +105,20 @@ class Task{
 class ProjectTeam{
 -List<Resource> projectTeam
 +getCurrentResourcesNames()
-+getCurrentResource(String email)
++getResourceByName(String name)
 }
 
 class Resource{
--String name
+-SystemUser user
 -LocalDate startDate
 -LocalDate endDate
 +isCurrent()
-+getName()
++isYourName(String name)
+}
+
+class SystemUser{
+-String name
++hasName(String name)
 }
 
 class TaskMapper{
@@ -134,11 +156,14 @@ CreateSprintTaskController ..> CreateTaskDTO
 
 
 Company "1" *-- "1" TaskTypeStore
+Company "1" *-- "1" TaskStatusStore
 Company "1" *-- "1" ProjectStore
 
 TaskTypeStore "1" *-- "*" TaskType
+TaskStatusStore "1" *-- "*" TaskStatus
 
-TaskType "*" --o "1" Task
+TaskType "1" --o "*" Task
+TaskStatus "1" --o "*" Task
 
 ProjectStore "1" *-- "*" Project
 
@@ -152,6 +177,8 @@ Sprint "1" *-- "1" TaskList
 TaskList "1" *-- "*" Task
 
 ProjectTeam "1" *-- "*" Resource
+
+Resource "*" o-- "1" SystemUser
 
 TaskMapper ..> CreateTaskDTO
 

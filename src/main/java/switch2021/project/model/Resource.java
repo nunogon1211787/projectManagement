@@ -60,7 +60,7 @@ public class Resource {
 
     // Check by Role
     public boolean isYour(ProjectRole projectRole) {
-        return this.role == projectRole;
+        return this.role.equals(projectRole);
     }
 
     // Check by Email
