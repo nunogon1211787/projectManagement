@@ -139,4 +139,5 @@ class AssignScrumMasterControllerTest {
 //        //Asserts
 //        assertFalse(proj1.getProjectTeam().assignProjectRole(manueljose, sDate, sDuration, sMaster)); //Resource without possible dates
 //    }
+
 }
