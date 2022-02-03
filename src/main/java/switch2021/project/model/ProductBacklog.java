@@ -67,8 +67,8 @@ public class ProductBacklog {
      **/
 
     public boolean saveUserStory(UserStory userStory) {
-
-        if (validateUserStory(userStory) && validateIdUserStory(userStory)) {
+        validateUserStory(userStory);
+        if (validateIdUserStory(userStory)) {
             userStory.setId_UserStory(id_UserStoryGenerator());
             this.userStoryList.add(userStory);
         }
