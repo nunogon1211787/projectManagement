@@ -167,6 +167,24 @@ class UserStoryTest {
     }
 
     @Test
+    void validatePriorityTest4() {
+        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+        userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        boolean expected = userStory.validatePriority(5);
+        assertTrue(expected);
+    }
+
+    @Test
+    void validatePriorityTest5() {
+        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+        userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        boolean expected = userStory.validatePriority(0);
+        assertTrue(expected);
+    }
+
+    @Test
     void isValidUserStoryDescription() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
