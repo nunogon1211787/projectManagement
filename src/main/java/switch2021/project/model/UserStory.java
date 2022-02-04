@@ -29,14 +29,6 @@ public class UserStory {
     /**
      * ---> Constructor <---
      **/
-
-    //Quantos Construtores precisamos?? não devia ser só um?
-/*    public UserStory(int priority, String description) {
-
-        this(new UserStoryStatus("To do") , priority, description);
-    }*/
-
-    //Main Constructor(acho)
     public UserStory(String name, int priority, String description, int timeEstimateInHours) {
         isValidUserStory(name, priority, description);
 
