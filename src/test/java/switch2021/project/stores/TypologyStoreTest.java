@@ -243,4 +243,13 @@ public class TypologyStoreTest {
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
     }
+
+    @Test
+    public void typologySetTest () {
+        TypologyStore store = new TypologyStore();
+        store.populateDefault();
+        store.getTypologyList().get(0).setIdTypology(50002);
+
+        assertEquals(50002, store.getTypologyList().get(0).getIdTypology());
+    }
 }

@@ -187,7 +187,7 @@ class SystemUserTest {
         assertEquals(passwordExpected, newUser.getPassword());
         assertEquals(function, newUser.getFunction());
         assertEquals(photo, newUser.getPhoto());
-        assertFalse(newUser.getActivateUserStatus());
+        assertFalse(newUser.isActivateUser());
         assertEquals(assignedProfileExpected, newUser.getAssignedProfileList());
     }
 
@@ -474,11 +474,11 @@ class SystemUserTest {
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
-        assertFalse(newUser.getActivateUserStatus());
+        assertFalse(newUser.isActivateUser());
         //Act
-        newUser.setActivateUser();
+        newUser.setActivateUser(true);
         //Assert
-        assertTrue(newUser.getActivateUserStatus());
+        assertTrue(newUser.isActivateUser());
     }
 
     @Test
@@ -812,7 +812,7 @@ class SystemUserTest {
         //Act
         ana.setActivateUser();
         //Assert
-        assertTrue(ana.getActivateUserStatus());
+        assertTrue(ana.isActivateUser());
     }
 
 

@@ -276,5 +276,61 @@ class CreateUsTaskControllerTest {
         assertEquals("newTask", userStory.getTasks().getTasksNames().get(2));
     }
 
+    @Test
+    void createUsTaskValidWithPrecedence() {
+        //Arrange
+        Company company = new Company();
+        TaskMapper mapper = new TaskMapper();
+        CreateUsTaskController controller = new CreateUsTaskController(company, mapper);
+
+        //Create a project
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        company.getProjectStore().saveNewProject(project);
+
+        //Create a sprint
+        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        project.getSprints().saveSprint(sprint);
+
+        //Create a UserStory
+        UserStory userStory = new UserStory("US001", 2, "Fazer tal",5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+
+        //Create project team
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "encript", "encript", "photo", profile);
+        Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        SystemUser user2 = new SystemUser("user test2", "test2@test.pt", "test", "encript", "encript", "photo", profile);
+        Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        SystemUser user3 = new SystemUser("user test3", "test@test.pt", "test", "encript", "encript", "photo", profile);
+        Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        project.getProjectTeam().saveResource(res1);
+        project.getProjectTeam().saveResource(res2);
+        project.getProjectTeam().saveResource(res3);
+
+        //Create tasks
+        TaskType type = new TaskType("type");
+        Task newTask = new Task("test", "test test test tests", 10, type, res1);
+        Task newTask2 = new Task("test2", "test2 test2 test2 test2", 10, type, res2);
+        userStory.getTasks().saveTask(newTask);
+        userStory.getTasks().saveTask(newTask2);
+        List <String> precedenceList = new ArrayList<>();
+        precedenceList.add(newTask.getName());
+        precedenceList.add(newTask2.getName());
+
+        //Create a new us Task
+        controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
+        CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test3", precedenceList );
+
+
+        //Asserts
+        assertTrue(controller.createUsTask(dto));
+        assertEquals(2, userStory.getTasks().getTaskById(3).getPrecedenceList().size());
+        assertEquals("test", userStory.getTasks().getTaskById(3).getPrecedenceList().get(0));
+    }
+
 
 }

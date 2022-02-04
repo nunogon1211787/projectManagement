@@ -36,7 +36,7 @@ public class SystemUserWithStatusControllerTest {
 
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
                 passwordConfirmation, photo, profile);
-        newUser.setActivateUser();
+        newUser.setActivateUser(true);
         company.getSystemUserStore().saveSystemUser(newUser);
         SystemUser newUser2 = company.getSystemUserStore().createSystemUser("Cris", "Cris@ipp.pt",
                 function, password, passwordConfirmation, photo, profile);
@@ -81,9 +81,9 @@ public class SystemUserWithStatusControllerTest {
         // Assert
         assertEquals(newUser.getUserName(), systemUserWithStatusDto.get(0).getUserName());
         assertEquals(newUser.getEmail(), systemUserWithStatusDto.get(0).getEmail());
-        assertEquals(newUser.getActivateUserStatus(), systemUserWithStatusDto.get(0).isActivateUser());
+        assertEquals(newUser.isActivateUser(), systemUserWithStatusDto.get(0).isActivateUser());
         assertEquals(newUser2.getUserName(), systemUserWithStatusDto.get(1).getUserName());
         assertEquals(newUser2.getEmail(), systemUserWithStatusDto.get(1).getEmail());
-        assertEquals(newUser2.getActivateUserStatus(), systemUserWithStatusDto.get(1).isActivateUser());
+        assertEquals(newUser2.isActivateUser(), systemUserWithStatusDto.get(1).isActivateUser());
     }
 }

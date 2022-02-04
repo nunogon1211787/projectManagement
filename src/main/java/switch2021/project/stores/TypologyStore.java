@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-@Setter
 
 public class TypologyStore {
 
@@ -17,7 +16,7 @@ public class TypologyStore {
      * Attributes
      **/
 
-    private List<Typology> typologyList;
+    private final List<Typology> typologyList;
 
 
     /**

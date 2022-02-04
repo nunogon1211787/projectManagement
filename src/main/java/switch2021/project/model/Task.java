@@ -29,6 +29,7 @@ public class Task {
     private double executionPercentage; // Calculated by divide hoursSpent to effortRemaining.
     private Resource responsible;
     private List<TaskEffort> taskEffortList;
+    private List<String> precedenceList;
 
 
     /**
@@ -55,7 +56,25 @@ public class Task {
         this.responsible = responsible;
         this.status = App.getInstance().getCompany().getTaskStatusStore().getInitialStatus();
         this.taskEffortList = new ArrayList<>();
+    }
 
+    public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible, List <String> precedenceList) {
+
+        checkNameRules(name);
+        checkDescriptionRules(description);
+        checkEffortRules(effortEstimate);
+        checkTypeNotNull(type);
+        checkResponsibleNotNull(responsible);
+
+        this.name = name;
+        this.description = description;
+        this.effortEstimate = effortEstimate;
+        this.effortRemaining = effortEstimate;
+        this.type = type;
+        this.responsible = responsible;
+        this.status = App.getInstance().getCompany().getTaskStatusStore().getInitialStatus();
+        this.taskEffortList = new ArrayList<>();
+        this.precedenceList = precedenceList;
     }
 
     /**
