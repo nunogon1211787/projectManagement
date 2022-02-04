@@ -5,7 +5,7 @@ import switch2021.project.utils.App;
 import java.time.LocalDate;
 import java.util.List;
 
-public class AssignScrumMasterController {
+public class AssignProductOwnerController {
 
     /**
      * Attributes
@@ -18,14 +18,14 @@ public class AssignScrumMasterController {
     /**
      * Constructor to UI (with SINGLETON)
      **/
-//    public AssignScrumMasterController() {
+//    public AssignProductOwnerController() {
 //        this.company = App.getInstance().getCompany();
 //    }
 
     /**
      * Constructor to test (without SINGLETON)
      **/
-    public AssignScrumMasterController(Company company) {
+    public AssignProductOwnerController(Company company) {
         this.company = company;
     }
 
@@ -51,8 +51,8 @@ public class AssignScrumMasterController {
     /**
      * Method to receive a resource of the project and send to UI
      */
-    public Resource getResource(String email) {
-        this.resource = project.getProjectTeam().getResource(email);
+    public Resource getResource(String name) {
+        this.resource = project.getProjectTeam().getResourceByName(name);
         return this.resource;
     }
 
@@ -60,16 +60,15 @@ public class AssignScrumMasterController {
     /**
      * Method to define a new role, to a resource, in the project that it belong
      **/
-    public boolean assignRole(String email, String roleName) {
+    public boolean assignRole(String name, String roleName) {
         boolean msg = false;
 
         LocalDate startDateNextSprint = project.getSprints().getCurrentSprint().getEndDate().plusDays(1);
         int sprintDuration = project.getSprintDuration();
         ProjectRole role = company.getProjectRoleStore().getProjectRole(roleName);
-        if (this.resource == getResource(email)) {
-            if(project.getProjectTeam().assignProjectRole(resource, startDateNextSprint, sprintDuration, role)) {
+        if (this.resource == getResource(name) && project.getProjectTeam().assignProjectRole
+                (resource, startDateNextSprint, sprintDuration, role)) {
                 msg = true;
-            }
         }
         return msg;
     }

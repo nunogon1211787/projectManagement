@@ -1,58 +1,90 @@
 @startuml
-'https://plantuml.com/class-diagram
 
 hide circle
 skinparam classAttributeIconSize 0
 
-title US024 - As Administrator, I want to get a list all user accounts and their status
+title "US014 - As Director, I want to define the Product Owner of a project."
 
-class UserAccountStatusUI {
-
+class AssignProductOwnerUI {
 }
 
-class ProductBacklogSortController {
-    +getProjectListByUserEmail(String email)
-    +getProject(String code)
-    +getUsSortedByPriority()
+class AssignProductOwnerController{
+    +AssignProductOwnerController
+    +getProjectList()
+    +getProject(code)
+    +getProjectTeam()
+    +getResource(email)
+    +assignRole(resource, roleName)
 }
 
 class Company {
+    +Company()
     +getProjectStore()
+    +getProjectRoleStore()
+}
+
+class ProjectTeam {
+    +ProjectTeam()
+    +getResource()
+    +assignProjectRole(resource,startDate,endDate,projectRole)
+    +saveResource(newResource)
+    +checkOfRoleCurrentExistInTheProjectTeam(projectRole,startDate)
+    +getProjectTeamList()
+}
+
+class Resource {
+    +Resource()
+    +Resource(originalResource)
+    +isYour(email)
+    +isCurrent()
+    +setRole(projectRole)
+    +setStartDate(startDate)
+    +setEndDate(startDate))
+    +checkIfResourceCanBeAssignedToRoleByDate(startDate, sprintDuration)
 }
 
 class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
+    +ProjectStore()
+    +getProjectList()
+    +getProjectByCode()
+}
+
+class ProjectRoleStore {
+    +ProjectRoleStore()
+    +getProjectRole(roleName)
 }
 
 class Project {
--code : String
--productBacklog : ProductBacklog
-+getProductBacklog()
+    +Project()
+    +getProjectTeam()
+    +getSprintDuration()
+    +getSprintStore()
+    +getCode()
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+getUsSortedByPriority()
+class SprintSotre {
+    +SprintSotre()
+    +getCurrentSprint()
 }
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
+class Sprint {
+    +Sprint()
+    +isCurrentSprint()
+    +getEndDate()
 }
 
-UserAccountStatusUI ..> ProductBacklogSortController
+AssignProductOwnerUI ..> AssignProductOwnerController
+AssignProductOwnerController ..> Company
+AssignProductOwnerController ..> Project
+AssignProductOwnerController ..> ProjectTeam
+AssignProductOwnerController ..> Resource
 
-ProductBacklogSortController ..> Company
-ProductBacklogSortController ..> ProjectStore
-ProductBacklogSortController ..> Project
-ProductBacklogSortController ..> ProductBacklog
-
+Company "1" o-- "1" ProjectRoleStore: has
 Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+ProjectStore "1" *-- "*" Project
+Project "1" o-- "1" ProjectTeam
+Project "1" o-- "1" SprintSotre
+SprintSotre "1" *-- "1" Sprint
+ProjectTeam "1" *-- "1" Resource
+
 @enduml

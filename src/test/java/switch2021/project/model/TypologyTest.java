@@ -58,12 +58,19 @@ public class TypologyTest {
     }
 
     @Test
-    public void equalsTest() {
+    public void equalsTestSuccess() {
         //Arrange
         Typology typo = new Typology("Fixed Cost");
-        boolean equals = typo.equals(typologyStore.getTypology("Fixed Cost"));
         //Assert
-        assertTrue(equals);
+        assertTrue(typo.equals(typologyStore.getTypology("Fixed Cost")));
+    }
+
+    @Test
+    public void equalsTestFail() {
+        //Arrange
+        Typology typo = new Typology("Test");
+        //Assert
+        assertFalse(typo.equals(typologyStore.getTypology("Fixed Cost")));
     }
 
     @Test
@@ -73,6 +80,6 @@ public class TypologyTest {
         Typology typo2 = new Typology("Fixed Cost2");
         Typology typo3 = new Typology("Fixed Cost2");
         assertNotEquals(typo,typo2);
-        assertEquals(typo2,typo2);
+        assertEquals(typo2,typo3);
     }
 }

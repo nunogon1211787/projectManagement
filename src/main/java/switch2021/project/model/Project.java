@@ -60,7 +60,6 @@ public class Project {
 
         this.productBacklog = new ProductBacklog(); // o objeto project tem objeto productbacklog (metodo) como parametro
         this.projectTeam = new ProjectTeam();
-//      this.projectTeam = new ProjectTeam(res);
     }
 
 
@@ -114,8 +113,7 @@ public class Project {
     }
 
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
-
-        return new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
+        return this.projectTeam.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);
     }
 
     public Resource getTeamMemberByIndex(int index) {

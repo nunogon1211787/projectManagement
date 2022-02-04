@@ -4,15 +4,16 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class AssignScrumMasterControllerTest {
+public class AssignProductOwnerControllerTest {
 
 
     @Test
     public void controllerFailTest() {
         //Arrange
         Company company = new Company();
-        AssignScrumMasterController controller = new AssignScrumMasterController(company);
+        AssignProductOwnerController controller = new AssignProductOwnerController(company);
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep","xxx@sss.sss");
         company.getCustomerStore().saveNewCustomer(customer);
@@ -27,10 +28,10 @@ class AssignScrumMasterControllerTest {
     }
 
     @Test
-    void assignScrumMasterTestSuccess() {
+    void assignProductOwnerTestSuccess() {
         //Arrange
         Company company = new Company();
-        AssignScrumMasterController controller = new AssignScrumMasterController(company);
+        AssignProductOwnerController controller = new AssignProductOwnerController(company);
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
         company.getCustomerStore().saveNewCustomer(customer);
@@ -73,15 +74,15 @@ class AssignScrumMasterControllerTest {
         controller.getResource("manueljose@beaver.com");
         controller.getProjectTeamList();
         //Asserts
-        assertTrue(controller.assignRole("manueljose@beaver.com", "Scrum Master"));
+        assertTrue(controller.assignRole("manueljose@beaver.com", "Product Owner"));
         assertEquals(5,proj1.getProjectTeam().getProjectTeamList().size());
     }
 
     @Test
-    void assignScrumMasterTestSuccessWithRoleDefined() {
+    void assignProductOwnerTestSuccessWithRoleDefined() {
         //Arrange
         Company company = new Company();
-        AssignScrumMasterController controller = new AssignScrumMasterController(company);
+        AssignProductOwnerController  controller = new AssignProductOwnerController(company);
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
         company.getCustomerStore().saveNewCustomer(customer);
@@ -100,7 +101,7 @@ class AssignScrumMasterControllerTest {
         LocalDate startDateMb = LocalDate.of(2021, 11, 1);
         LocalDate endDateMb = LocalDate.of(2022, 11, 15);
         Resource manuelbras = proj1.getProjectTeam().createResource(user1, startDateMb, endDateMb, 100, .5);
-        manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
+        manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
         proj1.getProjectTeam().saveResource(manuelbras);
         //Create resource 2
         SystemUser user2 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "ghi", "ghi", "photo", profile);
@@ -125,7 +126,7 @@ class AssignScrumMasterControllerTest {
         controller.getResource("manueljose@beaver.com");
         controller.getProjectTeamList();
         //Asserts
-        assertTrue(controller.assignRole("manueljose@beaver.com", "Scrum Master"));
+        assertTrue(controller.assignRole("manueljose@beaver.com", "Product Owner"));
         assertEquals(6,proj1.getProjectTeam().getProjectTeamList().size());
     }
 
@@ -135,7 +136,7 @@ class AssignScrumMasterControllerTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            AssignScrumMasterController controller = new AssignScrumMasterController(company);
+            AssignProductOwnerController controller = new AssignProductOwnerController(company);
             Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
             Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
@@ -172,7 +173,7 @@ class AssignScrumMasterControllerTest {
             controller.getProject("project_2022_1");
             controller.getResource("manueljose@beaver.com");
             controller.getProjectTeamList();
-            controller.assignRole("manueljose@beaver.com", "Scrum Master"); //Resource without possible dates
+            controller.assignRole("manueljose@beaver.com", "Product Owner"); //Resource without possible dates
         });
     }
 
@@ -182,7 +183,7 @@ class AssignScrumMasterControllerTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            AssignScrumMasterController controller = new AssignScrumMasterController(company);
+            AssignProductOwnerController controller = new AssignProductOwnerController(company);
             Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
             Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
@@ -197,7 +198,7 @@ class AssignScrumMasterControllerTest {
             controller.getProject("project_2022_1");
             controller.getResource("manueljose@beaver.com");
             controller.getProjectTeamList();
-            controller.assignRole(null, "Scrum Master");
+            controller.assignRole(null, "Product Owner");
         });
     }
 }
