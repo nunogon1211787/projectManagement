@@ -139,5 +139,33 @@ public class ProjectTeamMapperTest {
         assertEquals(dto.hashCode(),dto_3.hashCode());
     }
 
+    @Test
+    public void overrideTest() {
+        //Arrange
+        ProjectTeamMapper mapper = new ProjectTeamMapper();
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 11, 15);
+        Resource manuelbras = new Resource(user1, startDateMb, endDateMb, 100, .5);
+
+        SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMf = LocalDate.of(2021, 11, 16);
+        LocalDate endDateMf = LocalDate.of(2022, 11, 30);
+        Resource manuelfernandes = new Resource(user5, startDateMf, endDateMf, 100, 1);
+
+        //Act
+        ResourceDto dto = mapper.toDto(manuelbras);
+        ResourceDto dto_3 = mapper.toDto(manuelbras);
+        ResourceDto dto_2 = mapper.toDto(manuelfernandes);
+
+
+        //Assert
+        assertNotEquals(dto,dto_2);
+        assertEquals(dto, dto_3);
+        assertEquals(dto.getClass(),dto_2.getClass());
+    }
+
 
 }
