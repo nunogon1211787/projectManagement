@@ -31,13 +31,14 @@ public class ProjectTeamMapper {
         List<ResourceDto> resourceDtoList = new ArrayList<>();
 
         for(Resource resource: resourceList){
-            String startDate = resource.getStartDate().getYear() + "/" + resource.getStartDate().getMonthValue() + "/" + resource.getStartDate().getDayOfMonth();
-            String endDate = resource.getEndDate().getYear() + "/" + resource.getEndDate().getMonthValue() + "/" + resource.getEndDate().getDayOfMonth();
-            String role = null;
-            if(resource.getRole() != null){
-                role = resource.getRole().getName();
-            }
-            ResourceDto resourceDto = new ResourceDto(resource.getUser().getUserName(), role, startDate, endDate, resource.getCostPerHour(), resource.getPercentageOfAllocation());
+//            String startDate = resource.getStartDate().getYear() + "/" + resource.getStartDate().getMonthValue() + "/" + resource.getStartDate().getDayOfMonth();
+//            String endDate = resource.getEndDate().getYear() + "/" + resource.getEndDate().getMonthValue() + "/" + resource.getEndDate().getDayOfMonth();
+//            String role = null;
+//            if(resource.getRole() != null){
+//                role = resource.getRole().getName();
+//            }
+//            ResourceDto resourceDto = new ResourceDto(resource.getUser().getUserName(), role, startDate, endDate, resource.getCostPerHour(), resource.getPercentageOfAllocation());
+            ResourceDto resourceDto = toDto(resource);
             resourceDtoList.add(resourceDto);
         }
         return resourceDtoList;

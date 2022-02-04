@@ -3,7 +3,6 @@ package switch2021.project.mapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.dto.ResourceDto;
-import switch2021.project.dto.ScrumBoardDTO;
 import switch2021.project.model.*;
 
 import java.time.LocalDate;
@@ -159,12 +158,17 @@ public class ProjectTeamMapperTest {
         ResourceDto dto = mapper.toDto(manuelbras);
         ResourceDto dto_3 = mapper.toDto(manuelbras);
         ResourceDto dto_2 = mapper.toDto(manuelfernandes);
+        ResourceDto dto_4 = null;
+        UserStory userStory = new UserStory("name", 5, "description", 5);
 
 
         //Assert
         assertNotEquals(dto,dto_2);
         assertEquals(dto, dto_3);
         assertEquals(dto.getClass(),dto_2.getClass());
+//        assertTrue(dto.equals(dto_3));
+//        assertFalse(dto.equals(dto_4));
+//        assertFalse(dto.getClass().equals(userStory.getClass()));
     }
 
 
