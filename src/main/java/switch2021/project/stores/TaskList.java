@@ -48,6 +48,13 @@ public class TaskList {
         return saveTask(newTask);
     }
 
+    public boolean createUsTask(CreateTaskDTO dto, TaskMapper mapper, Project proj){
+
+        Task newTask = mapper.toModel(dto, proj);
+
+        return saveTask(newTask);
+    }
+
     /**
      * Getter methods
      */
