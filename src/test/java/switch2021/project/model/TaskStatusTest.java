@@ -113,9 +113,9 @@ class TaskStatusTest {
         TaskStatus status1= new TaskStatus("teste1");
         TaskStatus status2 = new TaskStatus("teste2");
         TaskStatus status3 = new TaskStatus("teste3");
-        status1.setID_TaskStatus(1);
-        status2.setID_TaskStatus(2);
-        status3.setID_TaskStatus(3);
+        status1.setIDTaskStatus(1);
+        status2.setIDTaskStatus(2);
+        status3.setIDTaskStatus(3);
         //Assert
         assertEquals(1, status1.getIdTaskStatus());
         assertEquals(2, status2.getIdTaskStatus());
@@ -128,9 +128,9 @@ class TaskStatusTest {
         TaskStatus status1= new TaskStatus("teste1");
         TaskStatus status2 = new TaskStatus("teste2");
         TaskStatus status3 = new TaskStatus("teste3");
-        status1.setID_TaskStatus(1);
-        status2.setID_TaskStatus(2);
-        status3.setID_TaskStatus(3);
+        status1.setIDTaskStatus(1);
+        status2.setIDTaskStatus(2);
+        status3.setIDTaskStatus(3);
         //Assert
         assertNotEquals(1, status2.getIdTaskStatus());
         assertNotEquals(2, status3.getIdTaskStatus());
@@ -171,7 +171,7 @@ class TaskStatusTest {
         boolean result;
         try {
             TaskStatus status = new TaskStatus("teste");
-            status.setID_TaskStatus(-1);
+            status.setIDTaskStatus(-1);
             result = false;
         } catch(IllegalArgumentException e){
             result = true;

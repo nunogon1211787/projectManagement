@@ -10,30 +10,31 @@ participant ": CreateUSTaskUI" as UI
 participant ": CreateUSTaskController" as Ctrl
 participant ": Company" as co
 
-participant "taskTypeStore : TaskTypeStore" as tTStore
-participant "taskTypeList : List<TaskType>" as listTaskType
-participant "taskType : TaskType" as tType
-participant "taskTypesNames : List<String>" as listTypes
-participant "pStore : ProjectStore" as pStore
-participant "projectList : List<Project>" as listProj
+participant "taskTypeStore \n: TaskTypeStore" as tTStore
+participant "taskTypeList \n: List<TaskType>" as listTaskType
+participant "taskType \n: TaskType" as tType
+participant "taskTypesNames \n: List<String>" as listTypes
+participant "pStore \n: ProjectStore" as pStore
 participant "proj : Project" as proj
-participant "sList : SprintList" as sList
-participant "sprintList : List<Sprint>" as listSprint
+participant "sList \n: SprintList" as sList
 participant "sprint : Sprint" as sprint
-participant "sprintTaskList: TaskList" as tList
-participant "taskList : List<Task>" as listTask
+participant "sprintBacklog" as sprintBacklog
+participant "UserStoryList" as usList
+participant "Us" as us
+participant "UsTaskList \n: TaskList" as tList
+participant "taskList \n: List<Task>" as listTask
 participant "task : Task" as task
-participant "tasksNames : List<String>" as listTasks
-participant "projectTeam : ProjectTeam" as cPTeam
-participant "projectTeam : List<Resource>" as listResources
+participant "tasksNames \n: List<String>" as listTasks
+participant "projectTeam \n: ProjectTeam" as cPTeam
+participant "projectTeam \n: List<Resource>" as listResources
 participant "resource : Resource" as res
-participant "currentResourcesName : List<String>" as listRes
+participant "currentResName \n: List<String>" as listRes
 participant ": TaskMapper" as tMapper
-participant "createTaskDTO : CreateTaskDTO" as cTDTO
-participant "newSprintTask : Task" as newTask
+participant "createTaskDTO \n: CreateTaskDTO" as cTDTO
+participant "newUsTask : Task" as newTask
 
 
-actor -> UI: Ask to create task outside the scope of a user story
+actor -> UI: Ask to create a task of a user story
 activate UI
 
 
@@ -73,9 +74,10 @@ UI --> actor: Show a list of task types
 
 
 
-actor -> UI: Ask to receive a list of current tasks of sprint
+actor -> UI: Selects task type
 
-UI -> Ctrl: getSprintTasks(projCode, sprintID)
+
+UI -> Ctrl: getUsTasks(projCode, sprintID, usId)
 
 Ctrl -> co: getProjectStore()
 
@@ -91,24 +93,26 @@ proj --> Ctrl: sList
 
 Ctrl -> sList: getSprint(sprintID)
 
-loop for each known sprint in sprintList
-
-sList -> listSprint: get(i)
-
-listSprint --> sList: sprint
-
-sList -> sprint: hasID(sprintID)
-
-sprint --> sList: true
-
-end
-
 sList --> Ctrl: sprint
 
-autoactivate on
-Ctrl -> sprint: getTaskList()
+Ctrl -> sprint: getBacklog
 
-sprint --> Ctrl: sprintTaskList
+sprint --> Ctrl: sprintBacklog
+
+Ctrl -> sprintBacklog: getUsList
+
+sprintBacklog --> Ctrl: usList
+
+Ctrl -> usList: getUs(usId)
+
+usList --> Ctrl: us
+
+
+
+
+Ctrl -> us: getUsTaskList()
+
+us --> Ctrl: usTaskList
 
 Ctrl -> tList: getTasksNames()
 
@@ -134,9 +138,9 @@ tList --> Ctrl: tasksNames
 
 Ctrl --> UI: tasksNames
 
-UI --> actor: Show a list of current tasks (to choose a precedence, if want)
+UI --> actor: Show a list of current tasks \n (to choose a precedence, if want)
 
-actor -> UI: Selects task type
+actor -> UI: Selects precedence (optional)
 
 UI -> Ctrl: getCurrentProjectTeam()
 
@@ -178,15 +182,17 @@ Ctrl --> UI: currentResourcesNames
 autoactivate off
 
 autoactivate on
-UI --> actor: Request data (name, description, effortEstimate, taskType, precedences(optional), responsible)
+UI --> actor: Shows resource list and request data\n (name, description, effortEstimate, taskType, \n precedences(optional), responsible)
+
+
 
 actor -> UI: Choose and typed requested data
 
-UI -> Ctrl: createSprintTask(createTaskDTO)
+UI -> Ctrl: createUsTask(createUsTaskDTO)
 
-Ctrl -> tList: createSprintTask(createTaskDTO)
+Ctrl -> tList: createUsTask(createUsTaskDTO)
 
-tList -> tMapper: toModel(createTaskDTO)
+tList -> tMapper: toModel(createUsTaskDTO)
 
 tMapper -> cTDTO: name = getName()
 deactivate cTDTO
@@ -205,14 +211,14 @@ deactivate cTDTO
 
 tMapper -> newTask**: createTask(name, description, effortEstimate, taskType, responsible)
 
-tMapper --> tList: newSprintTask
+tMapper --> tList: newUsTask
 
-tList -> tList: saveTask(newSprintTask)
+tList -> tList: saveTask(newUsTask)
 
-tList -> tList: validate(newSprintTask)
+tList -> tList: validate(newUsTask)
 deactivate tList
 
-tList -> tList: add(newSprintTask)
+tList -> tList: add(newUsTask)
 deactivate tList
 deactivate tList
 

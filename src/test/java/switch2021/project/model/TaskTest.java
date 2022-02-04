@@ -72,7 +72,6 @@ class TaskTest {
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
-        assertEquals(resource, taskEffort.getEffortResponsible());
     }
 
     @Test
@@ -94,7 +93,7 @@ class TaskTest {
             String comment = "test";
             String attachment = ".pdf";
             //Act
-            task.createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
+            task.validateTaskEffort(task.createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment));
         });
     }
 
@@ -126,7 +125,6 @@ class TaskTest {
         assertEquals(12.00, task.getEffortRemaining());
         assertEquals(8, task.getHoursSpent());
         assertEquals(0.4, task.getExecutionPercentage());
-        assertEquals(taskEffort.getEffortResponsible(), task.getResponsible());
     }
 
     @Test

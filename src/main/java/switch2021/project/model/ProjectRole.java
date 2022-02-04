@@ -1,55 +1,55 @@
 package switch2021.project.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Locale;
 import java.util.Objects;
 
+@Getter
+@Setter
 public class ProjectRole {
 
 
-    /** Classe ProjectRoles Atributes **/
-    private int id_Role;
+    /**
+     * Classe ProjectRoles Atributes
+     **/
+    private int idRole;
     private String name;
 
 
-    /** Constructor **/
-    public ProjectRole(int idRole, String name) {
-        this.id_Role = idRole;
-        this.name = name;
+    /**
+     * Constructor
+     **/
+    public ProjectRole(String name) {
+        if (!name.equals("")) {
+            this.name = name;
+        } else {
+            throw new NullPointerException("Description can not be null");
+        }
     }
 
 
-    /** Copy Constructor **/
+    /**
+     * Copy Constructor
+     **/
     public ProjectRole(ProjectRole originalProfile) {
-        this.id_Role = originalProfile.id_Role;
+        this.idRole = originalProfile.idRole;
         this.name = originalProfile.name;
     }
 
 
-    /** Getters e Setters **/
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getId_Role() {
-        return id_Role;
-    }
-
-    public void setId_Role(int id_Role) {
-        this.id_Role = id_Role;
-    }
-
-
-    /** Method to verify if a given name to Project Role is valid **/
+    /**
+     * Method to verify if a given name to Project Role is valid
+     **/
     public boolean isValidName(String name) {
         return name.toUpperCase(Locale.ROOT).equals(this.name.toUpperCase());
     }
 
 
-    /** Override Equals **/
+    /**
+     * Override Equals
+     **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

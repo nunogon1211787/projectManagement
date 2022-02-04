@@ -5,7 +5,6 @@ import switch2021.project.model.*;
 import switch2021.project.stores.UserStoryStatusStore;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -47,7 +46,7 @@ class UpdateStatusUsControllerTest {
         UpdateStatusUsController update = new UpdateStatusUsController(company);
         this.userStoryStatusStore.populateDefault();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        typo = company.getTypologyStore().getTypology("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,

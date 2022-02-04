@@ -1,14 +1,19 @@
 package switch2021.project.stores;
 
+import lombok.Getter;
+import lombok.Setter;
 import switch2021.project.model.TaskType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+@Setter
+
 public class TaskTypeStore {
 
     /**
-     * Atributtes.
+     * Attributes
      */
 
     private List<TaskType> taskTypeList;
@@ -22,7 +27,7 @@ public class TaskTypeStore {
     }
 
     /**
-     * Method to populate the class with default objects.
+     * Method to populate the class with default objects
      */
 
     public void populateDefault() {
@@ -35,7 +40,7 @@ public class TaskTypeStore {
     }
 
     /**
-     * Method to create TaskType.
+     * Method to create TaskType
      */
 
     public boolean createTaskType(String name){
@@ -46,9 +51,8 @@ public class TaskTypeStore {
 
     }
 
-
     /**
-     * Methods to iterate with the list.
+     * Methods to iterate with the list
      */
 
     public List<String> getTaskTypesNames(){
@@ -81,7 +85,7 @@ public class TaskTypeStore {
     }
 
     /**
-     * Method to save and validate task types in the list.
+     * Method to save and validate task types in the list
      */
 
     public boolean saveTaskType(TaskType type) {
@@ -97,7 +101,7 @@ public class TaskTypeStore {
                 for (int i = 0; i < this.taskTypeList.size(); i++) {
 
                     if (validateNewTypeName(type)) {
-                        type.setType_ID(id_TaskTypeGenerator());
+                        type.setType_ID(idTaskTypeGenerator());
                         this.taskTypeList.add(type);
                     }
 
@@ -105,7 +109,7 @@ public class TaskTypeStore {
 
             } else {
 
-                    type.setType_ID(id_TaskTypeGenerator());
+                    type.setType_ID(idTaskTypeGenerator());
                     this.taskTypeList.add(type);
 
             }
@@ -133,9 +137,10 @@ public class TaskTypeStore {
     }
 
     /**
-     * ID Generator.
+     * ID Generator
      **/
-    public int id_TaskTypeGenerator() {
+
+    public int idTaskTypeGenerator() {
         int id = 1;
         if (this.taskTypeList.size() > 0) {
             id = this.taskTypeList.get(taskTypeList.size() - 1).getType_ID() + 1;
@@ -144,9 +149,8 @@ public class TaskTypeStore {
     }
 
     /**
-     * Override methods.
+     * Override
      */
-
 
     @Override
     public boolean equals(Object o) {
@@ -155,6 +159,10 @@ public class TaskTypeStore {
         TaskTypeStore that = (TaskTypeStore) o;
         return Objects.equals(taskTypeList, that.taskTypeList);
     }
+
+    /**
+     * Hash
+     */
 
     @Override
     public int hashCode() {

@@ -18,7 +18,7 @@ public class CreateNewProjectControllerTest {
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
         company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste"));
 
-        company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        company.getTypologyStore().getTypology("Fixed Cost");
         company.getCustomerStore().getCustomerByName("Teste");
         company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 

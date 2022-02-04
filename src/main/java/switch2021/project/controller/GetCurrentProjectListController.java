@@ -8,11 +8,12 @@ import switch2021.project.utils.App;
 import java.util.List;
 
 public class GetCurrentProjectListController {
+
     /**
      * Attributes
      **/
 
-    private Company company;
+    private final Company company;
     private List<Project> currentProjectListByUser;
 
     /**
@@ -30,6 +31,10 @@ public class GetCurrentProjectListController {
     public GetCurrentProjectListController(Company company) {
         this.company = company;
     }
+
+    /**
+     * Method
+     **/
 
     public List<Project> getCurrentProjectsByUserEmail(String email) {
         ProjectStore projStore = this.company.getProjectStore();

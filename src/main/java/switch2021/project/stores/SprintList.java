@@ -1,7 +1,7 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.dto.StartASprintDTO;
+import lombok.Setter;
 import switch2021.project.model.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,17 +9,21 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
+@Setter
+
 public class SprintList {
 
     /**
-     * Atributos da Classe
+     * Class Attributes
      **/
+
     private final List<Sprint> sprintList;
 
 
     /**
      * Constructors with data
      **/
+
     public SprintList() {
         this.sprintList = new ArrayList<>();
     }
@@ -28,6 +32,7 @@ public class SprintList {
     /**
      * Sprint creator
      **/
+
     public Sprint createSprint(String name, LocalDate startDate, int sprintDuration) {
 
         Sprint sprint = null;
@@ -42,22 +47,22 @@ public class SprintList {
         return sprint;
     }
 
-
     /**
      * ID_Sprint Generator
      */
-    private int id_SprintGenerator() {
+
+    private int idSprintGenerator() {
         int id = 1;
         if (this.sprintList.size() > 0) {
-            id = (this.sprintList.get(sprintList.size() - 1).getId_Sprint() + 1);
+            id = (this.sprintList.get(sprintList.size() - 1).getIdSprint() + 1);
         }
         return id;
     }
 
-
     /**
      * Sprint Methods
      */
+
     public Sprint getSprint(int id) {
         Sprint sprint = null;
         for (Sprint sprt : sprintList) {
@@ -69,13 +74,13 @@ public class SprintList {
         return sprint;
     }
 
-
     /**
      * Add and Remove Sprint Methods. Adds or remove a Sprint object to the Sprint List
      **/
+
     private boolean addSprint(Sprint sprint) {
-        if (!validateId_Sprint(sprint)) {
-            sprint.setId_Sprint(id_SprintGenerator());
+        if (!validateIdSprint(sprint)) {
+            sprint.setIdSprint(idSprintGenerator());
         }
         this.sprintList.add(sprint);
         return true;
@@ -85,6 +90,7 @@ public class SprintList {
     /**
      * Get Method
      **/
+
     public List<Sprint> getSprintList() {
 
         return new ArrayList<>(this.sprintList);
@@ -94,22 +100,22 @@ public class SprintList {
     /**
      * Method to Validate a Sprint
      **/
+
     public boolean validateIfSprintAlreadyExists(Sprint sprint) {
         return this.sprintList.contains(sprint);
     }
 
-    private boolean validateId_Sprint(Sprint sprint) {
+    private boolean validateIdSprint(Sprint sprint) {
         boolean msg = true;
 
         for (Sprint i : this.sprintList) {
-            if (i.getId_Sprint() == sprint.getId_Sprint()) {
+            if (i.getIdSprint() == sprint.getIdSprint()) {
                 msg = false;
                 break;
             }
         }
         return msg;
     }
-
 
     /**
      * Method to Validate if StartDate is later than the EndDate of the last Sprint
@@ -146,6 +152,7 @@ public class SprintList {
     /**
      * Method to Save a Sprint
      */
+
     public boolean saveSprint(Sprint sprint) {
 
         boolean result = true;
@@ -153,7 +160,7 @@ public class SprintList {
         if (validateIfSprintAlreadyExists(sprint)) {
             result = false;
         } else {
-            sprint.setId_Sprint(id_SprintGenerator());
+            sprint.setIdSprint(idSprintGenerator());
             addSprint(sprint);
         }
         return result;
@@ -193,6 +200,7 @@ public class SprintList {
     /**
      * Method to return all activities in a project
      */
+
     public List<Task> getListOfAllAActivitiesOfAProject(){
         List<Task> allActivitiesInAProject = new ArrayList<>();
 
@@ -202,6 +210,10 @@ public class SprintList {
         return allActivitiesInAProject;
     }
 
+    /**
+     * Override
+     */
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -209,6 +221,10 @@ public class SprintList {
         SprintList that = (SprintList) o;
         return sprintList.equals(that.sprintList);
     }
+
+    /**
+     * Hash
+     */
 
     @Override
     public int hashCode() {

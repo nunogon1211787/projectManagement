@@ -11,14 +11,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CreateSprintTaskControllerTest {
+class CreateUsTaskControllerTest {
 
     @Test
-    void getTaskTypesTestSuccess() {
-        //Arrange
+    void getTaskTypesValid() {
         Company company = new Company();
         TaskMapper mapper = new TaskMapper();
-        CreateSprintTaskController controller = new CreateSprintTaskController(company, mapper);
+        CreateUsTaskController controller = new CreateUsTaskController(company, mapper);
         List<String> result = controller.getTaskTypes();
         List<String> test = new ArrayList<>(company.getTaskTypeStore().getTaskTypesNames());
         //Assert
@@ -27,13 +26,13 @@ class CreateSprintTaskControllerTest {
     }
 
     @Test
-    void getSprintTasksTestSuccess() {
+    void getUsTasksValid() {
         //Arrange
         Company company = new Company();
         TaskMapper mapper = new TaskMapper();
-        CreateSprintTaskController controller = new CreateSprintTaskController(company, mapper);
+        CreateUsTaskController controller = new CreateUsTaskController(company, mapper);
 
-            //Create a project
+        //Create a project
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
@@ -41,22 +40,27 @@ class CreateSprintTaskControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().saveNewProject(project);
 
-            //Create a sprint
+        //Create a sprint
         Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
         project.getSprints().saveSprint(sprint);
 
-            //Create tasks
+        //Create a UserStory
+        UserStory userStory = new UserStory("US001", 2, "Fazer tal",5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+
+
+        //Create tasks
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "encript", "encript", "photo", profile);
         Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         TaskType type = new TaskType("type");
         Task newTask = new Task("test", "test test test tests", 10, type, resource);
         Task newTask2 = new Task("test2", "test2 test2 test2 test2", 10, type, resource);
-        sprint.getTaskList().saveTask(newTask);
-        sprint.getTaskList().saveTask(newTask2);
+        userStory.getTasks().saveTask(newTask);
+        userStory.getTasks().saveTask(newTask2);
 
-            //Get sprint task list
-        List<String> tasksNames = controller.getSprintTasks(project.getCode(), sprint.getIdSprint());
+        //Get us task list
+        List<String> tasksNames = controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
 
         //Asserts
         assertEquals(2, tasksNames.size());
@@ -65,11 +69,11 @@ class CreateSprintTaskControllerTest {
     }
 
     @Test
-    void getSprintTasksEmptyTest() {
+    void getUsTasksEmpty() {
         //Arrange
         Company company = new Company();
         TaskMapper mapper = new TaskMapper();
-        CreateSprintTaskController controller = new CreateSprintTaskController(company, mapper);
+        CreateUsTaskController controller = new CreateUsTaskController(company, mapper);
 
         //Create a project
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
@@ -83,19 +87,24 @@ class CreateSprintTaskControllerTest {
         Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
         project.getSprints().saveSprint(sprint);
 
-        //Get sprint task list
-        List<String> tasksNames = controller.getSprintTasks(project.getCode(), sprint.getIdSprint());
+        //Create a UserStory
+        UserStory userStory = new UserStory("US001", 2, "Fazer tal",5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+
+        //Get us task list
+        List<String> tasksNames = controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
 
         //Asserts
         assertEquals(0, tasksNames.size());
     }
 
     @Test
-    void getCurrentProjectTeamTestSuccess() {
+    void getCurrentProjectTeamValid() {
+
         //Arrange
         Company company = new Company();
         TaskMapper mapper = new TaskMapper();
-        CreateSprintTaskController controller = new CreateSprintTaskController(company, mapper);
+        CreateUsTaskController controller = new CreateUsTaskController(company, mapper);
 
         //Create a project
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
@@ -108,6 +117,10 @@ class CreateSprintTaskControllerTest {
         //Create a sprint
         Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
         project.getSprints().saveSprint(sprint);
+
+        //Create a UserStory
+        UserStory userStory = new UserStory("US001", 2, "Fazer tal",5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -121,8 +134,8 @@ class CreateSprintTaskControllerTest {
         project.getProjectTeam().saveResource(res2);
         project.getProjectTeam().saveResource(res3);
 
-            //Get project team names
-        controller.getSprintTasks(project.getCode(), sprint.getIdSprint());
+        //Get project team names
+        controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
         List<String> test = controller.getCurrentProjectTeam();
 
         //Asserts
@@ -133,11 +146,12 @@ class CreateSprintTaskControllerTest {
     }
 
     @Test
-    void getCurrentProjectTeamEmptyTest() {
+    void getCurrentProjectTeamEmpty() {
+
         //Arrange
         Company company = new Company();
         TaskMapper mapper = new TaskMapper();
-        CreateSprintTaskController controller = new CreateSprintTaskController(company, mapper);
+        CreateUsTaskController controller = new CreateUsTaskController(company, mapper);
 
         //Create a project
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
@@ -151,8 +165,12 @@ class CreateSprintTaskControllerTest {
         Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
         project.getSprints().saveSprint(sprint);
 
+        //Create a UserStory
+        UserStory userStory = new UserStory("US001", 2, "Fazer tal",5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+
         //Get project team names
-        controller.getSprintTasks(project.getCode(), sprint.getIdSprint());
+        controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
         List<String> test = controller.getCurrentProjectTeam();
 
         //Asserts
@@ -160,11 +178,11 @@ class CreateSprintTaskControllerTest {
     }
 
     @Test
-    void createSprintTaskTestSuccessFirstOne() {
+    void createUsTaskValid() {
         //Arrange
         Company company = new Company();
         TaskMapper mapper = new TaskMapper();
-        CreateSprintTaskController controller = new CreateSprintTaskController(company, mapper);
+        CreateUsTaskController controller = new CreateUsTaskController(company, mapper);
 
         //Create a project
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
@@ -177,6 +195,10 @@ class CreateSprintTaskControllerTest {
         //Create a sprint
         Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
         project.getSprints().saveSprint(sprint);
+
+        //Create a UserStory
+        UserStory userStory = new UserStory("US001", 2, "Fazer tal",5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -190,22 +212,23 @@ class CreateSprintTaskControllerTest {
         project.getProjectTeam().saveResource(res2);
         project.getProjectTeam().saveResource(res3);
 
-            //Create a new Sprint Task
-        controller.getSprintTasks(project.getCode(), sprint.getIdSprint());
+        //Create a new us Task
+        controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
         CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test3");
 
+
         //Asserts
-        assertTrue(controller.createSprintTask(dto));
-        assertEquals(1, sprint.getTaskList().getTasksNames().size());
-        assertEquals("newTask", sprint.getTaskList().getTasksNames().get(0));
+        assertTrue(controller.createUsTask(dto));
+        assertEquals(1, userStory.getTasks().getTasksNames().size());
+        assertEquals("newTask", userStory.getTasks().getTasksNames().get(0));
     }
 
     @Test
-    void createSprintTaskTestSuccessOneMore() {
+    void createUsTaskValid2() {
         //Arrange
         Company company = new Company();
         TaskMapper mapper = new TaskMapper();
-        CreateSprintTaskController controller = new CreateSprintTaskController(company, mapper);
+        CreateUsTaskController controller = new CreateUsTaskController(company, mapper);
 
         //Create a project
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
@@ -218,6 +241,10 @@ class CreateSprintTaskControllerTest {
         //Create a sprint
         Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
         project.getSprints().saveSprint(sprint);
+
+        //Create a UserStory
+        UserStory userStory = new UserStory("US001", 2, "Fazer tal",5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -235,16 +262,19 @@ class CreateSprintTaskControllerTest {
         TaskType type = new TaskType("type");
         Task newTask = new Task("test", "test test test tests", 10, type, res1);
         Task newTask2 = new Task("test2", "test2 test2 test2 test2", 10, type, res2);
-        sprint.getTaskList().saveTask(newTask);
-        sprint.getTaskList().saveTask(newTask2);
+        userStory.getTasks().saveTask(newTask);
+        userStory.getTasks().saveTask(newTask2);
 
-        //Create a new Sprint Task
-        controller.getSprintTasks(project.getCode(), sprint.getIdSprint());
+        //Create a new us Task
+        controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
         CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test3");
 
+
         //Asserts
-        assertTrue(controller.createSprintTask(dto));
-        assertEquals(3, sprint.getTaskList().getTasksNames().size());
-        assertEquals("newTask", sprint.getTaskList().getTasksNames().get(2));
+        assertTrue(controller.createUsTask(dto));
+        assertEquals(3, userStory.getTasks().getTasksNames().size());
+        assertEquals("newTask", userStory.getTasks().getTasksNames().get(2));
     }
+
+
 }

@@ -27,7 +27,7 @@ class ProjectTest {
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
         company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste","Teste"));
 
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
@@ -54,7 +54,7 @@ class ProjectTest {
         Customer valueCustomer = company.getCustomerStore().getCustomerByName("Teste");
 
         Typology typology = company.getProjectStore().getProjectByCode("Project_2022_1").getTypology();
-        Typology valuetypology = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology valuetypology = company.getTypologyStore().getTypology("Fixed Cost");
 
         BusinessSector sector = company.getProjectStore().getProjectByCode("Project_2022_1").getBusinessSector();
         BusinessSector valueSector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
@@ -102,7 +102,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_name() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -119,7 +119,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_nameLength() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -136,7 +136,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_description() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -153,7 +153,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_descriptionLenght() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -170,7 +170,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_numberOfSprints() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -187,7 +187,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_budget() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -212,7 +212,7 @@ class ProjectTest {
     private Project proj3;
     private Project currentProject;
 
-    Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+    Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
     ProjectStatus projectStatus = new ProjectStatus("ToStart");
@@ -228,7 +228,7 @@ class ProjectTest {
     @BeforeEach
     public void init_2() {
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -406,5 +406,20 @@ class ProjectTest {
         assertEquals(2,store.getProjects().size());
     }
 
+    @Test
+    @DisplayName("Validate resource - add fail")
+    void addResource() {
+        //Arrange
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMo = LocalDate.of(2021, 11, 1);
+        LocalDate endDateMo = LocalDate.of(2021, 11, 15);
+        Resource manueloliveira = new Resource(user4, startDateMo, endDateMo, 100, .3333);
+        //Act
+        proj3.addResource(manueloliveira);
+        boolean addResource = proj3.addResource(manueloliveira);
+        //Assert
+        assertFalse(addResource);
+    }
 
 }

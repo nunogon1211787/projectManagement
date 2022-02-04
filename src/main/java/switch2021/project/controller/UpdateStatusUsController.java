@@ -20,7 +20,7 @@ public class UpdateStatusUsController {
         private Sprint sprint;
         private SprintBacklog sprintBacklog;
         private UserStory userStory;
-        private List <String> usList;
+        private List<String> usList;
 
 //    /**
 //     * Constructor to UI (with SINGLETON)
@@ -43,11 +43,11 @@ public class UpdateStatusUsController {
          **/
 
         public List<String> getUsAvailableStatusList() {
-                List<UserStoryStatus> statusList= this.company.getUserStoryStatusStore().getUserStoryStatusList();
+                List<UserStoryStatus> statusList = this.company.getUserStoryStatusStore().getUserStoryStatusList();
                 this.usList = new ArrayList<>();
                 for (int i = 0; i < statusList.size(); i++) {
-                        if(statusList.get(i).isSprintAvailable() )
-                        this.usList.add(statusList.get(i).getDescription());
+                        if (statusList.get(i).isSprintAvailable())
+                                this.usList.add(statusList.get(i).getDescription());
                 }
                 return this.usList;
         }

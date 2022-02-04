@@ -1,16 +1,20 @@
 package switch2021.project.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
-@Data
-@AllArgsConstructor
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Objects;
+
+@Getter
+@Setter
+
 
 public class UserStoryStatus {
     /** Classe UserStoryStatus Atributes **/
-    private int id_UserStoryStatus;
+    private int idUserStoryStatus;
     private String description;
-    private boolean sprintAvailable = false;  //this attribute means it is available as a status in sprint backlog
+    private boolean sprintAvailable;  //this attribute means it is available as a status in sprint backlog
 
     /** Constructor **/
     public UserStoryStatus(String description) {
@@ -26,4 +30,17 @@ public class UserStoryStatus {
     }
 
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserStoryStatus that = (UserStoryStatus) o;
+        return idUserStoryStatus == that.idUserStoryStatus && sprintAvailable == that.sprintAvailable && Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idUserStoryStatus, description, sprintAvailable);
+    }
 }

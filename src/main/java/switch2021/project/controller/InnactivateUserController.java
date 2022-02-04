@@ -3,11 +3,12 @@ package switch2021.project.controller;
 import switch2021.project.model.Company;
 
 public class InnactivateUserController {
+
     /**
      * Attributes
      **/
 
-    private Company company;
+    private final Company company;
 
     /**
      * Constructor to test (without SINGLETON)
@@ -18,7 +19,7 @@ public class InnactivateUserController {
     }
 
     /**
-     * Methods
+     * Method
      **/
 
     public boolean innactivateUser (String email) {

@@ -41,7 +41,7 @@ public class ChangePriorityUSControllerTest {
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
         LocalDate startDate3 = LocalDate.of(2022, 12, 31);
         company = new Company();
-        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        typo = company.getTypologyStore().getTypology("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
@@ -138,7 +138,7 @@ public class ChangePriorityUSControllerTest {
         change.getProductBacklog();
         // Act
         UserStory expected = userStory2;
-        UserStory actual = change.getUS(userStory2.getId_UserStory());
+        UserStory actual = change.getUS(userStory2.getIdUserStory());
 
         // Assert
         assertEquals(expected, actual);
@@ -150,7 +150,7 @@ public class ChangePriorityUSControllerTest {
         ChangePriorityUSController change = new ChangePriorityUSController(company);
         change.getProject(project.getCode());
         change.getProductBacklog();
-        change.getUserStory(userStory.getId_UserStory());
+        change.getUserStory(userStory.getIdUserStory());
 
         // Act
         change.setPriority(4);

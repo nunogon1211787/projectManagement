@@ -29,7 +29,7 @@ public class GetProjectListController {
     public GetProjectListController(Company company){ this.company = company; }
 
     /**
-     * Methods
+     * Method
      **/
 
     public List<Project> getProjects() {

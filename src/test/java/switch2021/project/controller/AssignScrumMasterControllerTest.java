@@ -40,7 +40,7 @@ class AssignScrumMasterControllerTest {
         //Arrange
         Company company = new Company();
         AssignScrumMasterController controller = new AssignScrumMasterController(company);
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep","xxx@sss.sss");
         company.getCustomerStore().saveNewCustomer(customer);
         BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");

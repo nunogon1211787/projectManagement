@@ -124,5 +124,4 @@ class TaskTypeStoreTest {
         //Assert
         assertEquals(test1, test2);
     }
-
 }

@@ -1,6 +1,7 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 
@@ -19,7 +20,7 @@ public class ProjectStoreTest {
     @BeforeEach
     public void init() {
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -83,7 +84,7 @@ public class ProjectStoreTest {
     }
 
     Company company = new Company();
-    Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+    Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
     Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
@@ -238,5 +239,70 @@ public class ProjectStoreTest {
         int sizeExpected = projectList.size();
         // Assert
         assertEquals(2, sizeExpected);
+    }
+
+    @Test
+    public void checkProjectExists() {
+        //Arrange
+        ProjectStore projStore = company.getProjectStore();
+        projStore.saveNewProject(this.proj1);
+        projStore.saveNewProject(this.proj2);
+        // Assert
+        assertTrue(projStore.checkProjectExists(proj1));
+        assertFalse(projStore.checkProjectExists(proj3));
+    }
+
+    @Test
+    public void validateAllocation() {
+        //Arrange
+        Company company = new Company();
+        ProjectStore projectStore = company.getProjectStore();
+        //Project
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+        Project project1 = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
+                typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
+        project1.setEndDate(LocalDate.of(2022, 1, 31));
+        projectStore.saveNewProject(project1);
+        //Resource
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user2 = company.getSystemUserStore().createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMm = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMm = LocalDate.of(2022, 1, 31);
+        Resource resource1 = project1.getProjectTeam().createResource(user2, startDateMm, endDateMm, 100, .5);
+        project1.getProjectTeam().saveResource(resource1);
+        //Assert
+        assertTrue(projectStore.validateAllocation(user2, 0.5, startDateMm, endDateMm));
+    }
+
+    @Test
+    public void overrideAndHashCodeTest() {
+        //Arrange
+        Company company = new Company();
+        //Project
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+        //list1 and list2 are equals
+        Project project1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
+        project1.setEndDate(LocalDate.of(2022, 1, 31));
+        ProjectStore list1 = new ProjectStore();
+        list1.saveNewProject(project1);
+        ProjectStore list2 = new ProjectStore();
+        list2.saveNewProject(project1);
+        //project3/list3 is different (different name)
+        Project project3 = company.getProjectStore().createProject("prototype3", "proj3Prototype", customer,
+                typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
+        project3.setEndDate(LocalDate.of(2022, 1, 31));
+        ProjectStore list3 = new ProjectStore();
+        list3.saveNewProject(project3);
+        //Assert
+        assertNotSame(list1, list2);
+        assertEquals(list1, list2);
+        assertEquals(list1.hashCode(), list2.hashCode());
+        assertNotEquals(list1, list3);
+        assertNotEquals(list1.hashCode(), list3.hashCode());
     }
 }

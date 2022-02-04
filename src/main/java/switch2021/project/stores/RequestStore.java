@@ -1,5 +1,7 @@
 package switch2021.project.stores;
 
+import lombok.Getter;
+import lombok.Setter;
 import switch2021.project.model.ProjectTeam;
 import switch2021.project.model.Request;
 import switch2021.project.model.SystemUser;
@@ -9,10 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Setter
+@Getter
+
 public class RequestStore {
 
     /**
-     * Class attribute
+     * Class Attributes
      **/
 
     private List<Request> requestProfileList;
@@ -25,6 +30,7 @@ public class RequestStore {
     /**
      * Creator Method
      **/
+
     public Request createProfileRequest (UserProfile Profile, SystemUser user ) {
 
         return new Request(Profile,user);
@@ -33,6 +39,7 @@ public class RequestStore {
     /**
      * ID Generator
      */
+
     public int idGenerator () {
 
         int id = 1;
@@ -147,8 +154,10 @@ public class RequestStore {
 
     }
 
+    /**
+     * Override
+     **/
 
-    /** Override **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -156,6 +165,10 @@ public class RequestStore {
         RequestStore that = (RequestStore) o;
         return Objects.equals(requestProfileList, that.requestProfileList);
     }
+
+    /**
+     * Hash
+     **/
 
     @Override
     public int hashCode() {

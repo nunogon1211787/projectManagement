@@ -1,5 +1,7 @@
 package switch2021.project.stores;
 
+import lombok.Getter;
+import lombok.Setter;
 import switch2021.project.model.Project;
 import switch2021.project.model.SystemUser;
 import switch2021.project.model.UserProfile;
@@ -7,15 +9,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+@Setter
+
 public class SystemUserStore {
 
-    //Atributes
+    /**
+     * Class Attributes
+     */
+
     private final List<SystemUser> systemUserList;
 
-    //Constructor
+    /**
+     * Constructor
+     */
+
     public SystemUserStore() {
         this.systemUserList = new ArrayList<>();
     }
+
+    /**
+     * Create Method
+     */
 
     public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor) {
         return new SystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);
@@ -24,6 +39,7 @@ public class SystemUserStore {
     /**
      * Getter Methods
      */
+
     public List<SystemUser> getSystemUsers() {
         return new ArrayList<>(this.systemUserList);
     }
@@ -40,7 +56,7 @@ public class SystemUserStore {
         return user;
     }
 
-    ///// Rever Método
+   ///// ----->>>>>>  Rever Método
     public List<SystemUser> searchUsers(String name, String email, String function, int state, List<UserProfile> profileChoosenList) {
 
         int listSize = this.systemUserList.size();
@@ -93,7 +109,10 @@ public class SystemUserStore {
         return result;
     }
 
-     /** Override Methods **/
+     /**
+      * Override
+      **/
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -101,6 +120,10 @@ public class SystemUserStore {
         SystemUserStore that = (SystemUserStore) obj;
         return (this.systemUserList.equals(that.systemUserList));
     }
+
+    /**
+     * Hash
+     **/
 
     @Override
     public int hashCode() {

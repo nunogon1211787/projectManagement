@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ProjectTeamMapperTest {
 
@@ -21,7 +22,7 @@ public class ProjectTeamMapperTest {
         ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
 
         //create project and save it
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
         company.getCustomerStore().saveNewCustomer(customer);
         BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
@@ -74,4 +75,37 @@ public class ProjectTeamMapperTest {
         assertEquals(resourceDtoExp5,resDto);
         assertEquals(resourceDtoListExp,resDtoList);
     }
+    @Test
+    @DisplayName("Project Team Mapper - toDto")
+    public void ProjectTeamMappertoDtoRoleNotNull() {
+        //Arrange
+        Company company = new Company();
+
+        //create project and save it
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
+        BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        ProjectRole projectRole = company.getProjectRoleStore().getProjectRole("Team Member");
+
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 11, 15);
+        Resource manuelbras = proj1.getProjectTeam().createResource(user1, startDateMb, endDateMb, 100, .5);
+
+        Resource resource = new Resource(user1, startDateMb, endDateMb, 100, .5);
+        ProjectTeamMapper projectTeamMapper1 = new ProjectTeamMapper();
+        manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+
+        //Act
+        ResourceDto resourceDto = projectTeamMapper1.toDto(manuelbras);
+
+        //Asserts
+        assertNotNull(resourceDto.getRole());
+        assertEquals("Team Member", resourceDto.getRole());
+    }
+
+
 }

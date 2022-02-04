@@ -28,9 +28,9 @@ public class UserStoryEffortController {
      * Constructor to UI (with SINGLETON)
      **/
 
-    public UserStoryEffortController() { //tem como função o dominio para os proximos passos
-        this.company = App.getInstance().getCompany();
-    }
+//    public UserStoryEffortController() { //tem como função o dominio para os proximos passos
+//        this.company = App.getInstance().getCompany();
+//    }
 
     /**
      * Constructor to test (without SINGLETON)

@@ -17,14 +17,14 @@ public class UserStoryOfSprint {
     /**
      * Class Attributes
      **/
-    private int id_UserStoryOfSprint;
+    private int idUserStoryOfSprint;
     private int estimateEffort;
     private UserStory userStoryOfSprint;
     private UserStoryStatus status;
     private List<Task> userStoryOfSprintTasks;
 
     /**
-     * ---> Constructor <---
+     * Constructor
      **/
 
     public UserStoryOfSprint(UserStory story, int effort, UserStoryStatus status) {
@@ -39,13 +39,13 @@ public class UserStoryOfSprint {
         validateFields(effort, story);
         this.estimateEffort = effort;
         this.userStoryOfSprint = story;
-        this.id_UserStoryOfSprint = userStoryId;
+        this.idUserStoryOfSprint = userStoryId;
         this.userStoryOfSprintTasks = new ArrayList<>();
     }
 
     public boolean hasCode(long id_UserStoryofSprint) {
 
-        return this.id_UserStoryOfSprint == id_UserStoryofSprint;
+        return this.idUserStoryOfSprint == id_UserStoryofSprint;
     }
 
     public void validateFields(int estimateEffort, UserStory userStory) {
@@ -62,14 +62,11 @@ public class UserStoryOfSprint {
         return userStoryOfSprint;
     }
 
-    public void setId_UserStoryOfSprint(int id_UserStoryOfSprint) {
-        this.id_UserStoryOfSprint = id_UserStoryOfSprint;
+    public void setIdUserStoryOfSprint(int idUserStoryOfSprint) {
+        this.idUserStoryOfSprint = idUserStoryOfSprint;
     }
 
     private boolean validateEffort(int x) {
-        /*if (x < 0 || x == 4 || x == 6 || x == 7 || x > 8 && x < 13 || x > 13 && x < 20 || x > 20)
-            return false;
-        return true;*/
         return Utils.isFibonacci(x);
     }
 

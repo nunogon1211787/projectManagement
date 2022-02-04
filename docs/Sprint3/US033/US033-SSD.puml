@@ -6,88 +6,118 @@ title US033 - As SM/Team Member, I want to register work done on a Task
 autoactivate on
 autonumber
 
-actor "SM/Team Mamber" as User
+actor "SM/Team Member" as User
 participant ": RegisterWorkToTaskUI" as Ui
 participant ": RegisterWorkToTaskController" as Ctrl
 participant ": Company" as company
+participant "userStorySprintProjectDTO\n : UserStorySprintProjectDTO" as userStorySprintProjectDTO
+participant "projectStore\n : ProjectStore" as projStore
+participant "project\n : Project" as project
+participant "sprintList\n : SprintList" as sprintList
+participant "sprint\n : Sprint" as sprint
+participant "userStoryList\n : Sprintbacklog" as sprintBacklog
+participant "userStory\n : UserStory" as userStory
+participant "taskList\n : TaskList" as taskList
 participant "RegisterWorkToTaskMapper" as mapper
-participant "userStoryIdDTO: UserStoryIdDTO" as userStoryIdDTO
-participant "userStoryList : Sprintbacklog" as sprintBacklog
-participant "userStory : UserStory" as userStory
-participant "taskList: TaskList" as taskList
-participant "taskIdNameDTOList: List<TaskIdNameDTO>" as taskIdDTOList
-participant "taskIdNameDTO: TaskIdNameDTO" as taskIdDTO
-participant "taskEffortDTO: TaskEffortDTO" as effortDTO
-participant "user : SystemUserStore" as userStore
-participant "task : Task" as task
-participant "taskEffort : TaskEffort" as effort
+participant "taskIdNameDTOList\n : List<TaskIdNameDTO>" as taskIdDTOList
+participant "taskIdNameDTO\n : TaskIdNameDTO" as taskIdDTO
+participant "taskEffortDTO\n : TaskEffortDTO" as effortDTO
+participant "user\n : SystemUserStore" as userStore
+participant "task\n : Task" as task
+participant "taskEffort\n : TaskEffort" as effort
 activate User
-User->Ui : starts registering a new user story task effort
-Ui->Ctrl: getTasks(userStoryIdDTO)
-Ctrl->mapper: userStoryIdDTOToUserStoryId(userStoryIdDTO)
-mapper->userStoryIdDTO: getId()
-userStoryIdDTO-->mapper: userStoryId
-mapper-->Ctrl: userStoryId
-Ctrl->sprintBacklog: getUserStoryById(userStoryId)
+User->Ui : wants to register a new user story task effort
+Ui->Ctrl: getTasks(userStorySprintProjectDTO)
+note right
+  userStorySprintProjectDTO has project 'code', sprint 'id' and user story 'id'
+end note
+Ctrl->userStorySprintProjectDTO: code = getProjectCode()
+deactivate userStorySprintProjectDTO
+Ctrl->userStorySprintProjectDTO: sprintId = getSprintId()
+deactivate userStorySprintProjectDTO
+Ctrl->userStorySprintProjectDTO: userStoryId = getUserStoryId()
+deactivate userStorySprintProjectDTO
+Ctrl->company: projectStore\n = getProjectStore()
+deactivate company
+Ctrl->projStore: getProjectByCode(code)
+loop for each project in projectList
+projStore->project: hasCode\n(code)
+project-->projStore: true
+end
+projStore-->Ctrl: project
+Ctrl->project: sprintList = getSprints()
+deactivate
+Ctrl->sprintList: getSprintById(sprintId)
+loop for each sprint in sprintList
+sprintList->sprint: hasId\n(sprintId)
+sprint-->sprintList: true
+end
+sprintList-->Ctrl: sprint
+Ctrl->sprint: sprintBacklog = getSprintBacklog()
+deactivate
+
+Ctrl->sprintBacklog: getUserStory(userStoryId)
 loop for each userStory in sprintBacklog
-sprintBacklog->userStory: hasId(userStoryId)
+sprintBacklog->userStory: hasId\n(userStoryId)
 userStory-->sprintBacklog: true
 end
 sprintBacklog-->Ctrl: userStory
 
-Ctrl->userStory: getTaskList()
-userStory-->Ctrl: taskList
-Ctrl->taskList: getTaskList()
-taskList-->Ctrl: taskList
+Ctrl->userStory: taskList = getTasks()
+deactivate
 
-Ctrl->mapper: taskListToTaskListDTO(taskList)
+
+
+
+
+Ctrl->mapper: toDTOList(taskList)
 mapper->taskIdDTOList **: create()
 loop for each task in taskList
 mapper->taskList: get(i)
 taskList-->mapper: task
-mapper->mapper: taskIdDTO = taskIdToTaskIdDTO(task)
-mapper->mapper:taskIdDTO = task.getId()
+mapper->mapper: taskIdNameDTO\n = toDTO(task)
+mapper->taskIdDTO**: create(task.getIdTask(), task.getName())
 deactivate mapper
-mapper->taskIdDTO**: create(taskIdDTO)
-deactivate mapper
-mapper->taskIdDTOList: add(taskIdDTO)
+mapper->taskIdDTOList: add(taskIdNameDTO)
 taskIdDTOList-->mapper: true
 end
-mapper-->Ctrl: taskIdDTOList
-Ctrl-->Ui: taskIdDTOList
+mapper-->Ctrl: taskIdNameDTOList
+Ctrl-->Ui: taskIdNameDTOList
 Ui-->User: asks to select the task
 
-User -> Ui: selects the intended task (taskIdDTO)
-Ui-->User: requests data(workHours, workMinutes, workDate, comment, attachment)
-User -> Ui: types requested data
-Ui -> Ctrl: createTaskEffort(taskEffortDTO)
-note right
-  taskEffortDTO has all required data, including the 'id' of the selected task and the email of the user responsible
-end note
-Ctrl->effortDTO: getTaskIdDTO()
-effortDTO-->Ctrl: taskIdDTO
-Ctrl->taskIdDTO: getTaskId()
-taskIdDTO-->Ctrl: taskId
+User -> Ui: selects the intended task
+Ui->Ctrl: getTask(taskId)
 Ctrl->taskList: getTaskById(taskId)
 loop for each task in taskList
 taskList->task: hasId(taskId)
 task-->taskList: true
 end
 taskList-->Ctrl: task
-Ctrl->effortDTO: getEffortHours()
-effortDTO-->Ctrl: effortHours
-Ctrl->effortDTO: getEffortMinutes()
-effortDTO-->Ctrl: effortMinutes
-Ctrl->effortDTO: getEffortDate()
-effortDTO-->Ctrl: effortdate
-Ctrl->effortDTO: getComment()
-effortDTO-->Ctrl: comment
-Ctrl->effortDTO: getAttachment()
-effortDTO-->Ctrl: attachment
+Ctrl->mapper: toDTO(task)
+mapper->task:taskId = getIdTask()
+deactivate
+mapper->task:taskName = getName()
+deactivate
+mapper->taskIdDTO**: create(taskId, taskName)
+mapper-->Ctrl: taskIdNameDTO
+Ctrl-->Ui: taskIdNameDTO
+Ui-->User: shows task details
+User->Ui : starts registering a new task effort
+Ui-->User: requests data (workHours,\n workMinutes, workDate,\n comment, attachment)
+User -> Ui: types requested data
+Ui -> Ctrl: createTaskEffort(taskEffortDTO)
+Ctrl->effortDTO: effortHours = getEffortHours()
+deactivate
+Ctrl->effortDTO: effortMinutes = getEffortMinutes()
+deactivate
+Ctrl->effortDTO: effortdate = getEffortDate()
+deactivate
+Ctrl->effortDTO: comment = getComment()
+deactivate
+Ctrl->effortDTO: attachment = getAttachment()
+deactivate
 Ctrl->task:createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment)
-task -> task: effortResponsible =this.responsible
-deactivate task
-task->effort **: createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, effortResponsible)
+task->effort **: createTaskEffort\n(effortHours, effortMinutes,\n effortDate, comment, attachment)
 task-->Ctrl: effort
 Ctrl -> task: saveTaskEffort(effort)
 task -> task: validateTaskEffort(effort)
@@ -101,7 +131,7 @@ deactivate task
 task -> task: updateExecutionPercentage()
 deactivate task
 task-->Ctrl: true
-Ctrl -> userStory: updateWorkDone(taskId))
+Ctrl -> userStory: updateWorkDone(task))
 userStory-->Ctrl: true
 Ctrl-->Ui : true
 

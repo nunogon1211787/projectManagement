@@ -8,14 +8,16 @@ import java.util.List;
 
 public class SystemUserWithStatusMapper {
 
+    /**
+     * Method to change data in to a System User Status DTO List
+     **/
 
-    //percorrer a lista de systemUser e acrescentar a uma nova lista DTO
-    public static List<SystemUserWithStatusDto> toDto(List<SystemUser> systemUserList){
-        List<SystemUserWithStatusDto> systemUserWithStatusDtoList = new ArrayList<>();
-        for (SystemUser systemUser: systemUserList) {
-            SystemUserWithStatusDto systemUserWithStatusDto = new SystemUserWithStatusDto(systemUser.getUserName(), systemUser.getEmail(), systemUser.getActivateUserStatus());
-            systemUserWithStatusDtoList.add(systemUserWithStatusDto);
+        public List<SystemUserWithStatusDto> toDto(List<SystemUser> systemUserList) {
+            List<SystemUserWithStatusDto> systemUserWithStatusDtoList = new ArrayList<>();
+            for (SystemUser systemUser : systemUserList) {
+                SystemUserWithStatusDto systemUserWithStatusDto = new SystemUserWithStatusDto(systemUser.getUserName(), systemUser.getEmail(), systemUser.getActivateUserStatus());
+                systemUserWithStatusDtoList.add(systemUserWithStatusDto);
+            }
+            return systemUserWithStatusDtoList;
         }
-        return systemUserWithStatusDtoList;
     }
-}

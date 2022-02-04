@@ -23,7 +23,7 @@ public class RegisterWorkToTaskControllerTest {
         RegisterWorkToTaskController controller = new RegisterWorkToTaskController(company, mapper);
         ProjectStore projectStore = company.getProjectStore();
         //Project
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -41,11 +41,11 @@ public class RegisterWorkToTaskControllerTest {
         //Sprint
         Sprint sprint1 = project1.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
         project1.getSprints().saveSprint(sprint1);
-        int id_Sprint1 = sprint1.getId_Sprint(); //1
+        int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
         UserStory userStory1 = project1.getProductBacklog().createUserStory("US001", 1, "description", 5);
         project1.getProductBacklog().saveUserStory(userStory1);
-        int id_UserStory1 = userStory1.getId_UserStory(); //1
+        int id_UserStory1 = userStory1.getIdUserStory(); //1
         sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(userStory1);
         //Tasks
         String taskDescription = "must be at least 20 characters";
@@ -74,7 +74,7 @@ public class RegisterWorkToTaskControllerTest {
         RegisterWorkToTaskController controller = new RegisterWorkToTaskController(company, mapper);
         ProjectStore projectStore = company.getProjectStore();
         //Project
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -92,11 +92,11 @@ public class RegisterWorkToTaskControllerTest {
         //Sprint
         Sprint sprint1 = project1.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
         project1.getSprints().saveSprint(sprint1);
-        int id_Sprint1 = sprint1.getId_Sprint(); //1
+        int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
         UserStory userStory1 = project1.getProductBacklog().createUserStory("US001", 1, "description", 5);
         project1.getProductBacklog().saveUserStory(userStory1);
-        int id_UserStory1 = userStory1.getId_UserStory(); //1
+        int id_UserStory1 = userStory1.getIdUserStory(); //1
         sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(userStory1);
         //Tasks
         String taskDescription = "must be at least 20 characters";
@@ -128,7 +128,7 @@ public class RegisterWorkToTaskControllerTest {
         RegisterWorkToTaskController controller = new RegisterWorkToTaskController(company, mapper);
         ProjectStore projectStore = company.getProjectStore();
         //Project
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -146,11 +146,11 @@ public class RegisterWorkToTaskControllerTest {
         //Sprint
         Sprint sprint1 = project1.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
         project1.getSprints().saveSprint(sprint1);
-        int id_Sprint1 = sprint1.getId_Sprint(); //1
+        int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
         UserStory userStory1 = project1.getProductBacklog().createUserStory("US001", 1, "description", 5);
         project1.getProductBacklog().saveUserStory(userStory1);
-        int id_UserStory1 = userStory1.getId_UserStory(); //1
+        int id_UserStory1 = userStory1.getIdUserStory(); //1
         sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(userStory1);
         //Tasks
         String taskDescription = "must be at least 20 characters";
@@ -174,7 +174,7 @@ public class RegisterWorkToTaskControllerTest {
         assertEquals(0, userStory1.getWorkDone());
         //TaskEffortDTO
         LocalDate effortDate = LocalDate.of(2022, 1, 10);
-        TaskEffortDTO taskEffortDTO = new TaskEffortDTO(taskIdNameDTO, 4, 30, effortDate, "test", ".pdf");
+        TaskEffortDTO taskEffortDTO = new TaskEffortDTO( 4, 30, effortDate, "test", ".pdf");
         //Assert
         assertTrue(controller.createTaskEffort(taskEffortDTO));
         assertEquals(10, task2.getEffortEstimate());

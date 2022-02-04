@@ -16,7 +16,7 @@ public class Sprint {
     /**
      * Atributos da classe Sprint
      **/
-    private int id_Sprint;
+    private int idSprint;
     private String name;
     private final TaskList taskList;
     private final SprintBacklog sprintBacklog;
@@ -83,15 +83,15 @@ public class Sprint {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sprint sprint = (Sprint) o;
-        return id_Sprint == sprint.id_Sprint && Objects.equals(name, sprint.name) && Objects.equals(taskList, sprint.taskList) && Objects.equals(sprintBacklog, sprint.sprintBacklog) && Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
+        return idSprint == sprint.idSprint && Objects.equals(name, sprint.name) && Objects.equals(taskList, sprint.taskList) && Objects.equals(sprintBacklog, sprint.sprintBacklog) && Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_Sprint, name, taskList, sprintBacklog, startDate, endDate);
+        return Objects.hash(idSprint, name, taskList, sprintBacklog, startDate, endDate);
     }
 
     public boolean hasSprintID(int id) {
-        return this.id_Sprint == id;
+        return this.idSprint == id;
     }
 }

@@ -39,8 +39,8 @@ public class TypologyStoreTest {
         //Assert
         assertEquals(test.getTypologyList().size(), 2);
         assertEquals(test.getTypologyList(), typologyStore.getTypologyList());
-        assertEquals(tes1, test.getTypologyByID(1));
-        assertEquals(tes2, test.getTypologyByID(2));
+        assertEquals(tes1, test.getTypology(1));
+        assertEquals(tes2, test.getTypology(2));
     }
 
     @Test
@@ -74,8 +74,8 @@ public class TypologyStoreTest {
         typologyStore.saveTypology(newTypo);
         Typology newTypo2 = typologyStore.createTypology("Test2");
         //Assert
-        assertEquals(newTypo.getId_Typology(), 3);
-        assertEquals(newTypo2.getId_Typology(),0); //ID is 0 when initialized.
+        assertEquals(newTypo.getIdTypology(), 3);
+        assertEquals(newTypo2.getIdTypology(),0); //ID is 0 when initialized.
     }
 
     @Test //Test for adding new typology not null at Typology List checking attributes and list size.
@@ -86,7 +86,7 @@ public class TypologyStoreTest {
         typologyStore.saveTypology(typo2);
         //Assert
         assertEquals("Test", typo2.getDescription());
-        assertEquals(3,typo2.getId_Typology());
+        assertEquals(3,typo2.getIdTypology());
         assertEquals(3, typologyStore.getTypologyList().size());
     }
 
@@ -133,20 +133,20 @@ public class TypologyStoreTest {
         typologyStore.saveTypology(typo3);
         //Act and Assert
         assertEquals(4,typologyStore.getTypologyList().size());
-        typologyStore.removeTypology(typologyStore.getTypologyByID(1));
+        typologyStore.removeTypology(typologyStore.getTypology(1));
         assertEquals(3,typologyStore.getTypologyList().size());
     }
 
     @Test
     public void removeTypologyInexistent() {
         //Act
-        assertFalse(typologyStore.removeTypology(typologyStore.getTypologyByID(4)));
+        assertFalse(typologyStore.removeTypology(typologyStore.getTypology(4)));
     }
 
     @Test
     public void getTypologyWithDescriptionTest(){
         //Arrange //Act
-        Typology descriptionTest = typologyStore.getTypologyByDescription("Time and Materials");
+        Typology descriptionTest = typologyStore.getTypology("Time and Materials");
         //Assert
         assertEquals(descriptionTest, new Typology("Time and Materials"));
     }
@@ -154,7 +154,7 @@ public class TypologyStoreTest {
     @Test
     public void getTypologyWithWrongDescriptionTest(){
         //Arrange //Act
-        Typology descriptionTest = typologyStore.getTypologyByDescription("time and materials");
+        Typology descriptionTest = typologyStore.getTypology("time and materials");
         //Assert
         assertNull(descriptionTest);
     }
@@ -162,7 +162,7 @@ public class TypologyStoreTest {
     @Test
     public void getTypologyWithId_TypologyTest(){
         //Arrange //Act
-        Typology descriptionTest = typologyStore.getTypologyByID(2);
+        Typology descriptionTest = typologyStore.getTypology(2);
         //Assert
         assertEquals(descriptionTest, new Typology("Time and Materials"));
     }
@@ -170,7 +170,7 @@ public class TypologyStoreTest {
     @Test
     public void getWrongId_TypologyTest(){
         //Arrange //Act
-        Typology id = typologyStore.getTypologyByID(10);
+        Typology id = typologyStore.getTypology(10);
         //Assert
         assertNull(id);
     }
@@ -225,5 +225,22 @@ public class TypologyStoreTest {
             typologyStore.saveTypology(typo);
             typologyStore.saveTypology(typo1);
         });
+    }
+
+    @Test
+    public void overrideAndHashCodeTest() {
+        //Arrange
+        TypologyStore list1 = new TypologyStore ();
+        list1.saveTypology(list1.createTypology("new"));
+        TypologyStore  list2 = new TypologyStore ();
+        list2.saveTypology(list1.createTypology("new"));
+        TypologyStore  list3 = new TypologyStore ();
+        list3.saveTypology(list3.createTypology("not new"));
+        //Assert
+        assertNotSame(list1, list2);
+        assertEquals(list1, list2);
+        assertEquals(list1.hashCode(), list2.hashCode());
+        assertNotEquals(list1, list3);
+        assertNotEquals(list1.hashCode(), list3.hashCode());
     }
 }

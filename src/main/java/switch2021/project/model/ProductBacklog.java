@@ -38,7 +38,7 @@ public class ProductBacklog {
     public UserStory getUserStoryById(int id) {
         UserStory userStory = null;
         for (UserStory us : userStoryList) {
-            if (us.getId_UserStory() == id) {
+            if (us.getIdUserStory() == id) {
                 userStory = us;
                 break;
             }
@@ -67,9 +67,9 @@ public class ProductBacklog {
      **/
 
     public boolean saveUserStory(UserStory userStory) {
-
-        if (validateUserStory(userStory) && validateIdUserStory(userStory)) {
-            userStory.setId_UserStory(id_UserStoryGenerator());
+        validateUserStory(userStory);
+        if (validateIdUserStory(userStory)) {
+            userStory.setIdUserStory(idUserStoryGenerator());
             this.userStoryList.add(userStory);
         }
         return true;
@@ -91,7 +91,7 @@ public class ProductBacklog {
     private boolean validateIdUserStory(UserStory userStory) {
         boolean msg = true;
         for (UserStory i : userStoryList) {
-            if (i.getId_UserStory() == userStory.getId_UserStory()) {
+            if (i.getIdUserStory() == userStory.getIdUserStory()) {
                 msg = false;
                 break;
             }
@@ -128,10 +128,10 @@ public class ProductBacklog {
     /**
      * ID_UserStory Generator
      **/
-    public int id_UserStoryGenerator() {
+    public int idUserStoryGenerator() {
         int id = 1;
         if (this.userStoryList.size() > 0) {
-            id = this.userStoryList.get(userStoryList.size() - 1).getId_UserStory() + 1;
+            id = this.userStoryList.get(userStoryList.size() - 1).getIdUserStory() + 1;
         }
         return id;
     } //if the object isn´t saved on the list, the id will be the same for all

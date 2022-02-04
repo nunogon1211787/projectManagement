@@ -40,4 +40,5 @@ public class RegisterUserController {
 
         return usersStore.saveSystemUser(user);
     }
+
 }

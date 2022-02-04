@@ -70,4 +70,22 @@ class BusinessSectorStoreTest {
         assertNotEquals(sector.hashCode(),sector2.hashCode());
         assertEquals(sector.hashCode(),x.hashCode());
     }
+
+    @Test
+    public void overrideAndHashCodeTest() {
+        //Arrange
+        BusinessSectorStore list1 = new BusinessSectorStore();
+        BusinessSector businessSector = list1.createBusinessSector("new");
+        list1.addBusinessSector(businessSector);
+        BusinessSectorStore list2 = new BusinessSectorStore();
+        list2.addBusinessSector(businessSector);
+        BusinessSectorStore list3 = new BusinessSectorStore();
+        list3.addBusinessSector(list3.createBusinessSector("not new"));
+        //Assert
+        assertNotSame(list1, list2);
+        assertEquals(list1, list2);
+        assertEquals(list1.hashCode(), list2.hashCode());
+        assertNotEquals(list1, list3);
+        assertNotEquals(list1.hashCode(), list3.hashCode());
+    }
 }
