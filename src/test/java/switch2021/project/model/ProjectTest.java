@@ -442,6 +442,9 @@ class ProjectTest {
         list3.saveNewProject(list3.createProject( "prototype4", "test123456", customer,
                 typo, sector, LocalDate.now(), 10, 6000));
 
+
+
+
         //Assert
         assertNotSame(list1, list2);
         assertEquals(list1, list2);
@@ -452,6 +455,7 @@ class ProjectTest {
         assertEquals(project.getCode(), list1.getProjectByCode(project.getCode()).getCode());
         assertEquals("prototype", project.getProjectName());
         assertEquals("test1234", project.getDescription());
+        assertEquals(sector, project.getBusinessSector());
 
 
 
