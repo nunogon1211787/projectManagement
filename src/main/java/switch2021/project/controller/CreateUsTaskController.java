@@ -20,7 +20,6 @@ public class CreateUsTaskController {
     private final Company company;
     private Project project;
     private TaskList taskList;
-    private TaskTypeStore taskTypeStore;
     private final TaskMapper taskMapper;
 
 

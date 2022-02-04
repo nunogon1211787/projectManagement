@@ -14,21 +14,13 @@ public class UpdateStatusUsController {
          **/
 
         private final Company company;
-        private UserStoryStatusStore usStore = new UserStoryStatusStore();
+        private final UserStoryStatusStore usStore = new UserStoryStatusStore();
         private ProjectStore projectStore;
         private Project project;
         private Sprint sprint;
         private SprintBacklog sprintBacklog;
         private UserStory userStory;
         private List<String> usList;
-
-//    /**
-//     * Constructor to UI (with SINGLETON)
-//     **/
-
-//    public ChangePriorityUSController(){
-//        this.company = App.getInstance().getCompany();
-//    }
 
         /**
          * Constructor (without SINGLETON)
