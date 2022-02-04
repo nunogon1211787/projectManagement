@@ -47,4 +47,20 @@ public class ScrumBoardMapperTest {
         //Assert
         assertNotEquals(dto.hashCode(),dto_2.hashCode());
     }
+
+    @Test
+    public void overrideTest() {
+        //Arrange
+        ScrumBoardMapper mapper = new ScrumBoardMapper();
+        UserStory userStory = new UserStory("name", 5, "description", 5);
+        UserStory userStory_2 = new UserStory("name_2", 4, "description_2", 6);
+
+        //Act
+        ScrumBoardDTO dto = mapper.toDTO(userStory);
+        ScrumBoardDTO dto_2 = mapper.toDTO(userStory_2);
+
+        //Assert
+        assertNotEquals(dto,dto_2);
+        assertEquals(dto.getClass(),dto_2.getClass());
+    }
 }
