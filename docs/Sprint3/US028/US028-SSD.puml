@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title Example of a System Sequence Diagram
+title US028 - As Director, I want to get a list of all human resources in a project
 
 autoactivate on
 autonumber
