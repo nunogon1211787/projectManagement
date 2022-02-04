@@ -18,7 +18,7 @@ public class SystemUserWithStatusController {
     private SystemUserStore systemUserStore;
     private List<SystemUser> systemUserList;
     private List<SystemUserWithStatusDto> systemUserWithStatusDtoList;
-    private SystemUserWithStatusMapper mapper;
+    private final SystemUserWithStatusMapper mapper;
 
     /**
      * Constructor to UI (with SINGLETON)

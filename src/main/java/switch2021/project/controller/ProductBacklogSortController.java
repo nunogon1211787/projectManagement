@@ -7,6 +7,7 @@ import switch2021.project.model.UserStory;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.utils.App;
 
+import java.security.Permission;
 import java.util.List;
 
 public class ProductBacklogSortController {
@@ -18,7 +19,6 @@ public class ProductBacklogSortController {
     private final Company company;
     private ProjectStore projectStore;
     private Project project;
-    private ProductBacklog productBacklog;
     private List<Project> arrayProject;
     private List<UserStory> userStoryList;
 
@@ -54,7 +54,8 @@ public class ProductBacklogSortController {
     }
 
     public List<UserStory> getUsSortedByPriority(){
-        this.productBacklog = this.project.getProductBacklog();
+        ProductBacklog productBacklog = new ProductBacklog();
+        productBacklog = this.project.getProductBacklog();
         this.userStoryList = this.project.getProductBacklog().getUsSortedByPriority();
         return userStoryList;
     }
