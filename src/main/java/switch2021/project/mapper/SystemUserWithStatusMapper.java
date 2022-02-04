@@ -15,7 +15,8 @@ public class SystemUserWithStatusMapper {
         public List<SystemUserWithStatusDto> toDto(List<SystemUser> systemUserList) {
             List<SystemUserWithStatusDto> systemUserWithStatusDtoList = new ArrayList<>();
             for (SystemUser systemUser : systemUserList) {
-                SystemUserWithStatusDto systemUserWithStatusDto = new SystemUserWithStatusDto(systemUser.getUserName(), systemUser.getEmail(), systemUser.getActivateUserStatus());
+                SystemUserWithStatusDto systemUserWithStatusDto = new SystemUserWithStatusDto(systemUser.getUserName(),
+                        systemUser.getEmail(), systemUser.getActivateUserStatus());
                 systemUserWithStatusDtoList.add(systemUserWithStatusDto);
             }
             return systemUserWithStatusDtoList;

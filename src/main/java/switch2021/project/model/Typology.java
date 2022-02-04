@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Typology {
 
     /** Typology attributes are composed of a description of the Typology. **/
-    private int id_Typology;
+    private int idTypology;
     private final String description;
 
 
@@ -25,8 +25,8 @@ public class Typology {
 
     /** Getters and Setters **/
 
-    public void setId_Typology(int id_Typology) {
-        this.id_Typology = id_Typology;
+    public void setIdTypology(int idTypology) {
+        this.idTypology = idTypology;
     }
 
 

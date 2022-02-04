@@ -69,7 +69,7 @@ public class UserProfileStore {
         UserProfile profile = null;
 
         for (UserProfile i : userProfileList) {
-            if (i.getId_UserProfile() == id_UserProfile) {
+            if (i.getIdUserProfile() == id_UserProfile) {
                 profile = i;
             }
         }
@@ -90,10 +90,10 @@ public class UserProfileStore {
      * ID_UserProfile Generator (if the object isn´t saved on the list, the id will be the same for all objects.
      * This issue will be solved when calling the save method.)
      */
-    public int id_UserProfileGenerator() {
+    public int idUserProfileGenerator() {
         int id = 1;
         if (this.userProfileList.size() > 0) {
-            id = userProfileList.get(userProfileList.size() - 1).getId_UserProfile() + 1;
+            id = userProfileList.get(userProfileList.size() - 1).getIdUserProfile() + 1;
         }
         return id;
     }
@@ -115,10 +115,10 @@ public class UserProfileStore {
      **/
 
     private boolean addUserProfile(UserProfile profile) {
-        if (validateId_UserProfile(profile)) {
+        if (validateIdUserProfile(profile)) {
             userProfileList.add(profile);
         } else {
-            profile.setId_UserProfile(id_UserProfileGenerator());
+            profile.setIdUserProfile(idUserProfileGenerator());
             userProfileList.add(profile);
         }
         return true;
@@ -137,11 +137,11 @@ public class UserProfileStore {
     /**
      * Validation Methods
      **/
-    private boolean validateId_UserProfile(UserProfile profile) {
+    private boolean validateIdUserProfile(UserProfile profile) {
         boolean msg = true;
 
         for (UserProfile i : userProfileList) {
-            if (i.getId_UserProfile() == profile.getId_UserProfile()) {
+            if (i.getIdUserProfile() == profile.getIdUserProfile()) {
                 msg = false;
                 break;
             }

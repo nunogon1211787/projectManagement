@@ -20,7 +20,7 @@ participant "resDTO:ResourceDTO" as ResourceDTO
 
 activate Director
 
-Director -> UI: Ask to access Project team of projCode Project
+Director -> UI: Ask to access project team of a project
 UI -> Controller: getProjectTeam()
 Controller -> Company: getProjectStore()
 Company --> Controller: projSt

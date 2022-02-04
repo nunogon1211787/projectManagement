@@ -2,7 +2,6 @@ package switch2021.project.stores;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.dto.StartASprintDTO;
 import switch2021.project.model.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -52,10 +51,10 @@ public class SprintList {
      * ID_Sprint Generator
      */
 
-    private int id_SprintGenerator() {
+    private int idSprintGenerator() {
         int id = 1;
         if (this.sprintList.size() > 0) {
-            id = (this.sprintList.get(sprintList.size() - 1).getId_Sprint() + 1);
+            id = (this.sprintList.get(sprintList.size() - 1).getIdSprint() + 1);
         }
         return id;
     }
@@ -80,8 +79,8 @@ public class SprintList {
      **/
 
     private boolean addSprint(Sprint sprint) {
-        if (!validateId_Sprint(sprint)) {
-            sprint.setId_Sprint(id_SprintGenerator());
+        if (!validateIdSprint(sprint)) {
+            sprint.setIdSprint(idSprintGenerator());
         }
         this.sprintList.add(sprint);
         return true;
@@ -106,11 +105,11 @@ public class SprintList {
         return this.sprintList.contains(sprint);
     }
 
-    private boolean validateId_Sprint(Sprint sprint) {
+    private boolean validateIdSprint(Sprint sprint) {
         boolean msg = true;
 
         for (Sprint i : this.sprintList) {
-            if (i.getId_Sprint() == sprint.getId_Sprint()) {
+            if (i.getIdSprint() == sprint.getIdSprint()) {
                 msg = false;
                 break;
             }
@@ -161,7 +160,7 @@ public class SprintList {
         if (validateIfSprintAlreadyExists(sprint)) {
             result = false;
         } else {
-            sprint.setId_Sprint(id_SprintGenerator());
+            sprint.setIdSprint(idSprintGenerator());
             addSprint(sprint);
         }
         return result;

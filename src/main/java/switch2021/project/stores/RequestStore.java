@@ -150,7 +150,7 @@ public class RequestStore {
      * */
 
     public void changeRequestStatus(Request request){
-        request.changeRequestStatus(request);
+        request.changeRequestStatus();
 
     }
 

@@ -60,7 +60,7 @@ class UserStoryTest {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
         productBacklog.saveUserStory(userStory);
 
-        boolean expected = userStory.hasCode(userStory.getId_UserStory());
+        boolean expected = userStory.hasCode(userStory.getIdUserStory());
         assertTrue(expected);
     }
 
@@ -91,7 +91,7 @@ class UserStoryTest {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         userStory.setParentUserStory(userStoryToRefine);
-        assertEquals(userStoryToRefine, sprint.getSprintBacklog().getUserStory(userStory.getId_UserStory()).getParentUserStory());
+        assertEquals(userStoryToRefine, sprint.getSprintBacklog().getUserStory(userStory.getIdUserStory()).getParentUserStory());
     }
 
 
@@ -167,6 +167,24 @@ class UserStoryTest {
     }
 
     @Test
+    void validatePriorityTest4() {
+        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+        userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        boolean expected = userStory.validatePriority(5);
+        assertTrue(expected);
+    }
+
+    @Test
+    void validatePriorityTest5() {
+        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+        userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        boolean expected = userStory.validatePriority(0);
+        assertTrue(expected);
+    }
+
+    @Test
     void isValidUserStoryDescription() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
@@ -236,5 +254,22 @@ class UserStoryTest {
             userStory = new UserStory(null, 2, "Fazer tal", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
+    }
+
+    @Test
+    void isValidUserStoryName5() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            userStory = new UserStory("CC", 2, "Fazer tal", 5);
+            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        });
+    }
+
+    @Test
+    void hashCodeTest() {
+        UserStory userStory1 = new UserStory("CCC", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("AAA", 2, "Fazer tal e coiso", 5);
+
+        assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
     }
 }

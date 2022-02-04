@@ -16,7 +16,7 @@ public class SprintTest {
         //Arrange
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
-        int x = sprint.getId_Sprint();
+        int x = sprint.getIdSprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
@@ -33,7 +33,7 @@ public class SprintTest {
         SprintList sprintList = new SprintList();
         //Act
         sprintList.saveSprint(sprint);
-        int x = sprint.getId_Sprint();
+        int x = sprint.getIdSprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
@@ -48,7 +48,7 @@ public class SprintTest {
         //Arrange
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
-        int x = sprint.getId_Sprint();
+        int x = sprint.getIdSprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
@@ -63,7 +63,7 @@ public class SprintTest {
         //Arrange
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
-        int x = sprint.getId_Sprint();
+        int x = sprint.getIdSprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
@@ -78,7 +78,7 @@ public class SprintTest {
         //Arrange
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
-        int x = sprint.getId_Sprint();
+        int x = sprint.getIdSprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
@@ -158,7 +158,7 @@ public class SprintTest {
     @DisplayName("Verification test of hasSprintID method")
     public void hasSprintIDTest() {
         Sprint sprint = new Sprint("Sprint_1", LocalDate.now().minusWeeks(1));
-        sprint.setId_Sprint(1);
+        sprint.setIdSprint(1);
         assertTrue(sprint.hasSprintID(1));
     }
 

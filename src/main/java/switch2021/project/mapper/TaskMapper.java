@@ -4,6 +4,8 @@ import switch2021.project.dto.CreateTaskDTO;
 import switch2021.project.model.*;
 import switch2021.project.utils.App;
 
+import java.util.List;
+
 public class TaskMapper {
 
     /**
@@ -18,7 +20,12 @@ public class TaskMapper {
         Resource responsible = proj.getProjectTeam().getResourceByName(dto.getResponsible());
         TaskType type = App.getInstance().getCompany().getTaskTypeStore().getTypeByName(dto.getTypeName());
 
-        return new Task(name, description, effortEstimate, type, responsible);
-
+        if(dto.getPrecedenceList() == null) {
+            return new Task(name, description, effortEstimate, type, responsible);
+        }
+        else{
+            List<String> precedenceList = dto.getPrecedenceList();
+            return new Task(name, description, effortEstimate, type, responsible, precedenceList);
+        }
     }
 }

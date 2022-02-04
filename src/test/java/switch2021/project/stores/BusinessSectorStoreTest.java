@@ -88,4 +88,13 @@ class BusinessSectorStoreTest {
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
     }
+
+    @Test
+    public void setBusinessSectorTest() {
+        BusinessSectorStore store = new BusinessSectorStore();
+        store.addBusinessSector(store.createBusinessSector("teste"));
+        store.getBusinessSectorList().get(0).setDescription("testeDeSet");
+
+        assertEquals("testeDeSet", store.getBusinessSectorList().get(0).getDescription());
+    }
 }

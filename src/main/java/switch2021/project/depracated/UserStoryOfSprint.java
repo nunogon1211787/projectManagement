@@ -17,11 +17,11 @@ public class UserStoryOfSprint {
     /**
      * Class Attributes
      **/
-    private int id_UserStoryOfSprint;
+    private int idUserStoryOfSprint;
     private int estimateEffort;
-    private UserStory userStoryOfSprint;
+    private final UserStory storyOfSprint;
     private UserStoryStatus status;
-    private List<Task> userStoryOfSprintTasks;
+    private final List<Task> userStoryOfSprintTasks;
 
     /**
      * Constructor
@@ -30,7 +30,7 @@ public class UserStoryOfSprint {
     public UserStoryOfSprint(UserStory story, int effort, UserStoryStatus status) {
         validateFields(effort, story);
         this.estimateEffort = effort;
-        this.userStoryOfSprint = story;
+        this.storyOfSprint = story;
         this.userStoryOfSprintTasks = new ArrayList<>();
         this.status = status;
     }
@@ -38,14 +38,14 @@ public class UserStoryOfSprint {
     public UserStoryOfSprint(UserStory story, int effort, int userStoryId) {
         validateFields(effort, story);
         this.estimateEffort = effort;
-        this.userStoryOfSprint = story;
-        this.id_UserStoryOfSprint = userStoryId;
+        this.storyOfSprint = story;
+        this.idUserStoryOfSprint = userStoryId;
         this.userStoryOfSprintTasks = new ArrayList<>();
     }
 
     public boolean hasCode(long id_UserStoryofSprint) {
 
-        return this.id_UserStoryOfSprint == id_UserStoryofSprint;
+        return this.idUserStoryOfSprint == id_UserStoryofSprint;
     }
 
     public void validateFields(int estimateEffort, UserStory userStory) {
@@ -58,12 +58,12 @@ public class UserStoryOfSprint {
         ;
     }
 
-    public UserStory getUserStoryOfSprint() {
-        return userStoryOfSprint;
+    public UserStory getStoryOfSprint() {
+        return storyOfSprint;
     }
 
-    public void setId_UserStoryOfSprint(int id_UserStoryOfSprint) {
-        this.id_UserStoryOfSprint = id_UserStoryOfSprint;
+    public void setIdUserStoryOfSprint(int idUserStoryOfSprint) {
+        this.idUserStoryOfSprint = idUserStoryOfSprint;
     }
 
     private boolean validateEffort(int x) {
@@ -85,20 +85,20 @@ public class UserStoryOfSprint {
         if (this == o) return true;
         if (!(o instanceof UserStoryOfSprint)) return false;
         UserStoryOfSprint that = (UserStoryOfSprint) o;
-        return estimateEffort == that.estimateEffort && userStoryOfSprint.equals(that.userStoryOfSprint)
-                && userStoryOfSprintTasks.equals(that.userStoryOfSprintTasks);//TODO This override doesnt compare ID
+        return estimateEffort == that.estimateEffort && storyOfSprint.equals(that.storyOfSprint)
+                && userStoryOfSprintTasks.equals(that.userStoryOfSprintTasks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(estimateEffort, userStoryOfSprint);
+        return Objects.hash(estimateEffort, storyOfSprint);
     }
 
     @Override
     public String toString() {
         return "UserStoryOfSprint{" +
                 "estimateEffort=" + estimateEffort +
-                ", userStoryOfSprint=" + userStoryOfSprint +
+                ", userStoryOfSprint=" + storyOfSprint +
                 '}';
     }
 

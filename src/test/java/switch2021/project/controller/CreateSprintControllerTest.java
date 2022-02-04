@@ -119,7 +119,7 @@ public class CreateSprintControllerTest {
         proj1.getSprints().saveSprint(sprintC);
 
         //Assert
-        assertEquals(sprintC, proj1.getSprints().getSprint(sprintC.getId_Sprint()));
+        assertEquals(sprintC, proj1.getSprints().getSprint(sprintC.getIdSprint()));
     }
 
     @Test

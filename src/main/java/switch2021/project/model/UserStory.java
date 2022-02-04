@@ -16,7 +16,7 @@ public class UserStory {
      * ---> Attributes <---
      **/
 
-    private int id_UserStory;
+    private int idUserStory;
     private String name;
     private UserStoryStatus userStoryStatus;
     private int priority;
@@ -29,14 +29,6 @@ public class UserStory {
     /**
      * ---> Constructor <---
      **/
-
-    //Quantos Construtores precisamos?? não devia ser só um?
-/*    public UserStory(int priority, String description) {
-
-        this(new UserStoryStatus("To do") , priority, description);
-    }*/
-
-    //Main Constructor(acho)
     public UserStory(String name, int priority, String description, int timeEstimateInHours) {
         isValidUserStory(name, priority, description);
 
@@ -59,13 +51,13 @@ public class UserStory {
         this.ParentUserStory = userStoryToRefine;
     }
 
-    public int getId_UserStory() {
-        return id_UserStory;
+    public int getIdUserStory() {
+        return idUserStory;
     }
 
     public boolean hasCode(long id_UserStory) {
 
-        return this.id_UserStory == id_UserStory;
+        return this.idUserStory == id_UserStory;
     }
 
     /**
@@ -121,7 +113,7 @@ public class UserStory {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be blank.");
         }
-        if (name.length() <= 3) {
+        if (name.length() <= 2) {
             throw new IllegalArgumentException("Name must be at least 3 characters");
         }
         return true;
@@ -143,12 +135,12 @@ public class UserStory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserStory userStory = (UserStory) o;
-        return id_UserStory == userStory.id_UserStory && priority == userStory.priority && timeEstimate == userStory.timeEstimate && Objects.equals(name, userStory.name) && Objects.equals(userStoryStatus, userStory.userStoryStatus) && Objects.equals(description, userStory.description) && Objects.equals(ParentUserStory, userStory.ParentUserStory) && Objects.equals(tasks, userStory.tasks);
+        return idUserStory == userStory.idUserStory && priority == userStory.priority && timeEstimate == userStory.timeEstimate && Objects.equals(name, userStory.name) && Objects.equals(userStoryStatus, userStory.userStoryStatus) && Objects.equals(description, userStory.description) && Objects.equals(ParentUserStory, userStory.ParentUserStory) && Objects.equals(tasks, userStory.tasks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_UserStory, name, userStoryStatus, priority, description, ParentUserStory, timeEstimate, tasks);
+        return Objects.hash(idUserStory, name, userStoryStatus, priority, description, ParentUserStory, timeEstimate, tasks);
     }
 }
 
