@@ -3,6 +3,7 @@ package switch2021.project.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.stores.CustomerStore;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
 import java.time.LocalDate;
@@ -420,6 +421,41 @@ class ProjectTest {
         boolean addResource = proj3.addResource(manueloliveira);
         //Assert
         assertFalse(addResource);
+    }
+
+    @Test
+    public void overrideAndHashCodeTest() {
+        //Arrange
+        ProjectStore list1 = new ProjectStore();
+
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        company.getProjectStore().saveNewProject(project);
+
+        list1.saveNewProject(project);
+        ProjectStore list2 = new ProjectStore();
+        list2.saveNewProject(project);
+        ProjectStore list3 = new ProjectStore();
+        list3.saveNewProject(list3.createProject( "prototype4", "test123456", customer,
+                typo, sector, LocalDate.now(), 10, 6000));
+
+        //Assert
+        assertNotSame(list1, list2);
+        assertEquals(list1, list2);
+        assertEquals(list1.hashCode(), list2.hashCode());
+        assertNotEquals(list1, list3);
+        assertNotEquals(list1.hashCode(), list3.hashCode());
+        assertEquals(7, project.getNumberOfSprints());
+        assertEquals(project.getCode(), list1.getProjectByCode(project.getCode()).getCode());
+        assertEquals("prototype", project.getProjectName());
+        assertEquals("test1234", project.getDescription());
+
+
+
+
     }
 
 }
