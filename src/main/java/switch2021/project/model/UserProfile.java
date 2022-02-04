@@ -54,7 +54,7 @@ public class UserProfile {
      */
     private void checkAttributeRules(String name) {
         //Check empty field on name
-        if (name.trim().isEmpty()) throw new IllegalArgumentException("Name cannot be blank.");
+        if ((name == null || name.trim().isEmpty())) throw new IllegalArgumentException("Name cannot be blank.");
     }
 
 

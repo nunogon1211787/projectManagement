@@ -1,10 +1,14 @@
 package switch2021.project.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 
-@Data
-@AllArgsConstructor
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Objects;
+
+@Getter
+@Setter
+
 
 public class UserStoryStatus {
     /** Classe UserStoryStatus Atributes **/
@@ -26,4 +30,17 @@ public class UserStoryStatus {
     }
 
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserStoryStatus that = (UserStoryStatus) o;
+        return id_UserStoryStatus == that.id_UserStoryStatus && sprintAvailable == that.sprintAvailable && Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_UserStoryStatus, description, sprintAvailable);
+    }
 }
