@@ -71,10 +71,10 @@ public class AssignProductOwnerControllerTest {
         proj1.getProjectTeam().saveResource(manuelfernandes);
         //Act
         controller.getProject("project_2022_1");
-        controller.getResource("manueljose@beaver.com");
+        controller.getResource("manueljose");
         controller.getProjectTeamList();
         //Asserts
-        assertTrue(controller.assignRole("manueljose@beaver.com", "Product Owner"));
+        assertTrue(controller.assignRole("manueljose", "Product Owner"));
         assertEquals(5,proj1.getProjectTeam().getProjectTeamList().size());
     }
 
@@ -123,10 +123,10 @@ public class AssignProductOwnerControllerTest {
         proj1.getProjectTeam().saveResource(manuelfernandes);
         //Act
         controller.getProject("project_2022_1");
-        controller.getResource("manueljose@beaver.com");
+        controller.getResource("manueljose");
         controller.getProjectTeamList();
         //Asserts
-        assertTrue(controller.assignRole("manueljose@beaver.com", "Product Owner"));
+        assertTrue(controller.assignRole("manueljose", "Product Owner"));
         assertEquals(6,proj1.getProjectTeam().getProjectTeamList().size());
     }
 
