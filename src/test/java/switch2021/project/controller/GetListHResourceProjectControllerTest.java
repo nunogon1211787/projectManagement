@@ -31,12 +31,6 @@ public class GetListHResourceProjectControllerTest {
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         company.getProjectStore().saveNewProject(proj1);
 
-//        Sprint sprint1 = proj1.getSprintList().createSprint("Sprint1", LocalDate.now().minusWeeks(1), 2);
-//        proj1.getSprintList().saveSprint(sprint1);
-//        Sprint sprint2 = proj1.getSprintList().createSprint("Sprint2", LocalDate.now().plusWeeks(1), 2);
-//        proj1.getSprintList().saveSprint(sprint2);
-
-
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         ProjectRole projectRole = company.getProjectRoleStore().getProjectRole("Team Member");
 
@@ -53,11 +47,6 @@ public class GetListHResourceProjectControllerTest {
         Resource manueljose = proj1.getProjectTeam().createResource(user3, startDateMj, endDateMj, 100, .5);
         manueljose.setRole(projectRole);
         //Create resource
-//        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-//        LocalDate startDateMo = LocalDate.now().minusWeeks(1);
-//        LocalDate endDateMo = LocalDate.now().plusWeeks(51);
-//        Resource manueloliveira = proj1.getProjectTeam().createResource(user4, startDateMo, endDateMo, 100, .3333);
-        //Create resource
         SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDateMf = LocalDate.of(2021, 11, 16);
         LocalDate endDateMf = LocalDate.of(2022, 11, 30);
@@ -66,16 +55,14 @@ public class GetListHResourceProjectControllerTest {
 
         proj1.getProjectTeam().saveResource(manuelbras);
         proj1.getProjectTeam().saveResource(manueljose);
-//        proj1.getProjectTeam().saveResource(manueloliveira);
         proj1.getProjectTeam().saveResource(manuelfernandes);
         //Resource List
         List<Resource> projTeam = proj1.getProjectTeam().getProjectTeamList();
 
         //create ResourceDto
         ResourceDto resourceDtoExp1 = new ResourceDto("manuelbras", projectRole.getName(),"2021/11/1","2022/11/15",100,0.5);
-        //        ResourceDto resourceDtoExp2 = new ResourceDto("manuelfernandes", 2021,11,16,2022,11,30,100,1);
         ResourceDto resourceDtoExp3 = new ResourceDto("manueljose", projectRole.getName(), "2021/11/1", "2022/11/15",100,.5);
-        //        ResourceDto resourceDtoExp4 = new ResourceDto("manuelfernandes", 2021,11,16,2022,11,30,100,1);
+
         ResourceDto resourceDtoExp5 = new ResourceDto("manuelfernandes", projectRole.getName(), "2021/11/16","2022/11/30",100,1);
         //create ResourceDtoList
         List<ResourceDto> resourceDtoListExp = new ArrayList<>();
@@ -84,14 +71,14 @@ public class GetListHResourceProjectControllerTest {
         resourceDtoListExp.add(resourceDtoExp5);
 
         //Act
-//    ResourceDto resDto = ProjectTeamMapper.toDto(manuelfernandes);
+        ResourceDto resDto = projectTeamMapper.toDto(manuelfernandes);
         List<ResourceDto> resDtoList = projectTeamMapper.toDto(projTeam);
 
 
-//    controller.getProjectTeam("Project_2022_1");
+    controller.getProjectTeam("Project_2022_1");
 
         //Asserts
-//    assertEquals(resourceDtoExp5,resDto);
-        assertEquals(resourceDtoListExp,controller.getProjectTeam("Project_2022_1"));
+        assertEquals(resourceDtoExp5,resDto);
+        assertEquals(resourceDtoListExp,resDtoList);
     }
 }
