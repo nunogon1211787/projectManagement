@@ -32,7 +32,7 @@ public class UserProfile {
     /**
      * Getters e Setters
      **/
-    public int getId_UserProfile() {
+    public int getIdUserProfile() {
         return id_Profile;
     }
 
@@ -44,7 +44,7 @@ public class UserProfile {
         this.userProfileName = newName;
     }
 
-    public void setId_UserProfile(int id) {
+    public void setIdUserProfile(int id) {
         this.id_Profile = id;
     }
 
@@ -54,7 +54,7 @@ public class UserProfile {
      */
     private void checkAttributeRules(String name) {
         //Check empty field on name
-        if (name.trim().isEmpty()) throw new IllegalArgumentException("Name cannot be blank.");
+        if ((name == null || name.trim().isEmpty())) throw new IllegalArgumentException("Name cannot be blank.");
     }
 
 

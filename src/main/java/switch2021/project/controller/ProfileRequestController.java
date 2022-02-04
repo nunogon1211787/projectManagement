@@ -19,13 +19,13 @@ public class ProfileRequestController {
     /**
      * Constructor to UI (with SINGLETON)
      **/
-
-    public ProfileRequestController() {
-        this.company = App.getInstance().getCompany();
-    }
+//
+//    public ProfileRequestController() {
+//        this.company = App.getInstance().getCompany();
+//    }
 
     /**
-     * Constructor to test (without SINGLETON).
+     * Constructor to test (without SINGLETON)
      **/
 
     public ProfileRequestController(Company company) {
@@ -33,7 +33,7 @@ public class ProfileRequestController {
     }
 
     /**
-     * Method
+     * Methods
      **/
 
     public Request createProfileRequest(String email, String nameProfile) {

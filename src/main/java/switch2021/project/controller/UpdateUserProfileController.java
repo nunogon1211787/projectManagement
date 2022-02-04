@@ -17,11 +17,11 @@ public class UpdateUserProfileController {
     private SystemUserStore systemUserStore;
     private SystemUser user;
 
-    /**
+    /*
      * Constructor to UI (with SINGLETON)
      **/
 
-    public UpdateUserProfileController() { this.company = App.getInstance().getCompany(); }
+    //public UpdateUserProfileController() { this.company = App.getInstance().getCompany(); }
 
     /**
      * Constructor to test (without SINGLETON)
@@ -57,4 +57,5 @@ public class UpdateUserProfileController {
 
         return true;
     }
+
 }

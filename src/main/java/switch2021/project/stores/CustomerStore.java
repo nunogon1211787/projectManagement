@@ -10,36 +10,34 @@ import java.util.Objects;
 public class CustomerStore {
 
     /**
-     * Customer Store Atributes
-     * Contains a Customer list
+     * Customer Store Attributes (Contains a Customer list)
      **/
     private final List<Customer> customerList;
-
 
     /**
      * Customer Store Constructor
      **/
+
     public CustomerStore() {
         this.customerList = new ArrayList<>();
     }
 
 
     /**
-     * Create Customer
-     * Creates a new Customer object
+     * Create Customer (Creates a new Customer object)
      **/
+
     public Customer createCustomer(String name, String email) {
         return new Customer(name, email);
     }
 
 
     /**
-     * Add Customer Method
-     * Adds a Customer object to the customer list
+     * Add Customer Method (Adds a Customer object to the customer list)
      **/
     public boolean saveNewCustomer(Customer customer) {
         if (!validateCustomer(customer)) {
-            customer.setCustomerId(this.customerList.size() + 1);
+            customer.setCustomerId(this.customerList.size() + 1L);
             this.customerList.add(customer);
         }
         return true;
@@ -58,8 +56,9 @@ public class CustomerStore {
 
 
     /**
-     * Métodos Getter e Setter
+     * Getter Method
      **/
+
     public List<Customer> getCustomerList() {
         return new ArrayList<>(customerList);
     }
@@ -74,7 +73,10 @@ public class CustomerStore {
         return cust;
     }
 
-    /** Override **/
+    /**
+     * Override
+     **/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,6 +84,10 @@ public class CustomerStore {
         CustomerStore that = (CustomerStore) o;
         return Objects.equals(this.customerList, that.customerList);
     }
+
+    /**
+     * Hash
+     **/
 
     @Override
     public int hashCode() {

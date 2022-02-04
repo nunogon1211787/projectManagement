@@ -35,7 +35,7 @@ public class StartASprintController {
     }
 
     /**
-     * Methods
+     * Method
      **/
 
     public boolean startASprint(StartASprintDTO sprintDTO) {
@@ -47,7 +47,7 @@ public class StartASprintController {
         LocalDate startDate = sprintDTO.getStartDate();
         ProjectTeam projectTeam = proj.getProjectTeam();
         int sprintDuration = proj.getSprintDuration();
-        SprintList sprintList = new SprintList();
+        SprintList sprintList = proj.getSprints();
         return sprintList.startASprint(sprintID, startDate, projectTeam, sprintDuration);
 
     }

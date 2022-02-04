@@ -36,7 +36,7 @@ public class TypologyTest {
         //Arrange and Act
         Typology typo = new Typology("Fixed Cost");
         //Assert
-        assertEquals(typo,typologyStore.getTypologyByID(1));
+        assertEquals(typo,typologyStore.getTypology(1));
     }
 
     @Test
@@ -44,7 +44,7 @@ public class TypologyTest {
         //Arrange
         Typology typo = new Typology("Teste");
         //Assert
-        assertEquals(0,typo.getId_Typology());
+        assertEquals(0,typo.getIdTypology());
     }
 
     @Test
@@ -52,16 +52,16 @@ public class TypologyTest {
         //Arrange
         Typology typo = new Typology("Teste");
         //Act
-        typo.setId_Typology(3);
+        typo.setIdTypology(3);
         //Assert
-        assertEquals(3,typo.getId_Typology());
+        assertEquals(3,typo.getIdTypology());
     }
 
     @Test
     public void equalsTest() {
         //Arrange
         Typology typo = new Typology("Fixed Cost");
-        boolean equals = typo.equals(typologyStore.getTypologyByDescription("Fixed Cost"));
+        boolean equals = typo.equals(typologyStore.getTypology("Fixed Cost"));
         //Assert
         assertTrue(equals);
     }

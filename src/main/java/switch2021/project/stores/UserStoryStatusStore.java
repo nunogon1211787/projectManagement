@@ -10,8 +10,7 @@ import java.util.Objects;
 public class UserStoryStatusStore {
 
     /**
-     * Project Status Store Atributes
-     * Contains a Project Status list
+     * Project Status Store Attributes (Contains a Project Status list)
      **/
 
     private final List<UserStoryStatus> userStoryStatusList;
@@ -35,6 +34,10 @@ public class UserStoryStatusStore {
         this.userStoryStatusList.add(new UserStoryStatus("In test"));
         this.userStoryStatusList.add(new UserStoryStatus("Refined"));
     }
+
+    /**
+     * Methods
+     **/
 
     public List<UserStoryStatus> getUserStoryStatusList() {
         return userStoryStatusList;
@@ -68,19 +71,4 @@ public class UserStoryStatusStore {
         }
         return msg;
     }
-
-    /** Override **/
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof UserStoryStatusStore)) return false;
-        UserStoryStatusStore that = (UserStoryStatusStore) o;
-        return Objects.equals(this.userStoryStatusList, that.userStoryStatusList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userStoryStatusList);
-    }
-
 }

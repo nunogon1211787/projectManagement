@@ -3,6 +3,7 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.dto.SystemUserWithStatusDto;
+import switch2021.project.mapper.SystemUserWithStatusMapper;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser;
 import switch2021.project.model.UserProfile;
@@ -19,7 +20,8 @@ public class SystemUserWithStatusControllerTest {
     void getListSystemUserWithStatusSuccessSize() {
         //Arrange
         Company company = new Company();
-
+        SystemUserWithStatusMapper mapper = new SystemUserWithStatusMapper();
+        SystemUserWithStatusController systemUserWithStatusController = new SystemUserWithStatusController(company, mapper);
 
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
@@ -34,14 +36,12 @@ public class SystemUserWithStatusControllerTest {
 
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
                 passwordConfirmation, photo, profile);
-        newUser.setActivateUser();
+        newUser.setActivateUser(true);
         company.getSystemUserStore().saveSystemUser(newUser);
         SystemUser newUser2 = company.getSystemUserStore().createSystemUser("Cris", "Cris@ipp.pt",
                 function, password, passwordConfirmation, photo, profile);
         company.getSystemUserStore().saveSystemUser(newUser2);
         // Act
-
-        SystemUserWithStatusController systemUserWithStatusController = new SystemUserWithStatusController(company);
         List<SystemUserWithStatusDto> systemUserWithStatusDto = systemUserWithStatusController.getListSystemUserWithStatus();
 
         // Assert
@@ -53,7 +53,8 @@ public class SystemUserWithStatusControllerTest {
     void getListSystemUserWithStatusSuccess() {
         //Arrange
         Company company = new Company();
-
+        SystemUserWithStatusMapper mapper = new SystemUserWithStatusMapper();
+        SystemUserWithStatusController systemUserWithStatusController = new SystemUserWithStatusController(company, mapper);
 
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
@@ -73,17 +74,16 @@ public class SystemUserWithStatusControllerTest {
         SystemUser newUser2 = company.getSystemUserStore().createSystemUser("Cris", "Cris@ipp.pt",
                 function, password, passwordConfirmation, photo, profile);
         company.getSystemUserStore().saveSystemUser(newUser2);
-        // Act
 
-        SystemUserWithStatusController systemUserWithStatusController = new SystemUserWithStatusController(company);
+        // Act
         List<SystemUserWithStatusDto> systemUserWithStatusDto = systemUserWithStatusController.getListSystemUserWithStatus();
 
         // Assert
         assertEquals(newUser.getUserName(), systemUserWithStatusDto.get(0).getUserName());
         assertEquals(newUser.getEmail(), systemUserWithStatusDto.get(0).getEmail());
-        assertEquals(newUser.getActivateUserStatus(), systemUserWithStatusDto.get(0).isActivateUser());
+        assertEquals(newUser.isActivateUser(), systemUserWithStatusDto.get(0).isActivateUser());
         assertEquals(newUser2.getUserName(), systemUserWithStatusDto.get(1).getUserName());
         assertEquals(newUser2.getEmail(), systemUserWithStatusDto.get(1).getEmail());
-        assertEquals(newUser2.getActivateUserStatus(), systemUserWithStatusDto.get(1).isActivateUser());
+        assertEquals(newUser2.isActivateUser(), systemUserWithStatusDto.get(1).isActivateUser());
     }
 }

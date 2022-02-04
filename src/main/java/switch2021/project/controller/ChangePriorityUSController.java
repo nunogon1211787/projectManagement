@@ -24,9 +24,9 @@ public class ChangePriorityUSController {
     List<Project> arrayProject;
     List<UserStory> userStoryList;
 
-//    /**
-//     * Constructor to UI (with SINGLETON).
-//     */
+    /**
+     * Constructor to UI (with SINGLETON)
+     **/
 //    public ChangePriorityUSController(){
 //        this.company = App.getInstance().getCompany();
 //    }

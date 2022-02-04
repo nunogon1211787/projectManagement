@@ -16,7 +16,7 @@ public class Task {
     /**
      * Attributes.
      */
-    private int ID_Task;
+    private int idTask;
     private String name;
     private String description;
     private TaskType type;
@@ -29,6 +29,7 @@ public class Task {
     private double executionPercentage; // Calculated by divide hoursSpent to effortRemaining.
     private Resource responsible;
     private List<TaskEffort> taskEffortList;
+    private List<String> precedenceList;
 
 
     /**
@@ -55,7 +56,25 @@ public class Task {
         this.responsible = responsible;
         this.status = App.getInstance().getCompany().getTaskStatusStore().getInitialStatus();
         this.taskEffortList = new ArrayList<>();
+    }
 
+    public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible, List <String> precedenceList) {
+
+        checkNameRules(name);
+        checkDescriptionRules(description);
+        checkEffortRules(effortEstimate);
+        checkTypeNotNull(type);
+        checkResponsibleNotNull(responsible);
+
+        this.name = name;
+        this.description = description;
+        this.effortEstimate = effortEstimate;
+        this.effortRemaining = effortEstimate;
+        this.type = type;
+        this.responsible = responsible;
+        this.status = App.getInstance().getCompany().getTaskStatusStore().getInitialStatus();
+        this.taskEffortList = new ArrayList<>();
+        this.precedenceList = precedenceList;
     }
 
     /**
@@ -79,12 +98,12 @@ public class Task {
     }
 
     public boolean hasId(int id) {
-        return Objects.equals(this.ID_Task, id);
+        return Objects.equals(this.idTask, id);
     }
 
-    public void setID_Task(int id) {
+    public void setIdTask(int id) {
         checkIdRules(id);
-        this.ID_Task = id;
+        this.idTask = id;
     }
     /**
      * Methods to validate attributes data.
@@ -127,9 +146,7 @@ public class Task {
     }
 
     public TaskEffort createTaskEffort(int effortHours, int effortMinutes, LocalDate effortDate, String comment, String attachment) {
-        Resource effortResponsible = this.responsible;
-
-        return new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment, effortResponsible);
+        return new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
     }
 
     public boolean validateTaskEffort(TaskEffort effort) {
@@ -142,6 +159,9 @@ public class Task {
         }
         if (effort == null) {
             return false;
+        }
+        if (effort.getEffortDate().isAfter(this.getResponsible().getEndDate()) || effort.getEffortDate().isBefore(this.getResponsible().getStartDate())) {
+            throw new IllegalArgumentException("work date not match with the resource allocation dates");
         }
         return !this.taskEffortList.contains(effort);
     }

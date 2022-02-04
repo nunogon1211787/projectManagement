@@ -24,4 +24,5 @@ public class InnactivateUserControllerTest {
         //Assert
         assertTrue(result);
     }
+
 }

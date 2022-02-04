@@ -1,5 +1,7 @@
 package switch2021.project.stores;
 
+import lombok.Getter;
+import lombok.Setter;
 import switch2021.project.model.ProjectStatus;
 import switch2021.project.model.ProjectTeam;
 
@@ -7,11 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+@Setter
+
 public class ProjectStatusStore {
 
     /**
-     * Project Status Store Atributes
-     * Contains a Project Status list
+     * Project Status Store Attributes (Contains a Project Status list)
      **/
 
     private final List<ProjectStatus> projectStatusList;
@@ -25,8 +29,7 @@ public class ProjectStatusStore {
     }
 
     /**
-     * Project Status Populator
-     * Populates the Project Status List with pre-set objects
+     * Project Status Populator (Populates the Project Status List with pre-set objects)
      **/
 
     public void populateDefault() {
@@ -40,8 +43,7 @@ public class ProjectStatusStore {
     }
 
     /**
-     * Create Project Status
-     * Creates a new Project Status object
+     * Create Project Status (Creates a new Project Status object)
      **/
 
     public ProjectStatus createProjectStatus(String descritpion) {
@@ -50,8 +52,7 @@ public class ProjectStatusStore {
     }
 
     /**
-     * Add Project Status Method
-     * Adds a new Project Status object to the Project Status List
+     * Add Project Status Method (Adds a new Project Status object to the Project Status List)
      **/
 
     public boolean add(ProjectStatus projStat) {
@@ -60,7 +61,7 @@ public class ProjectStatusStore {
     }
 
     /**
-     * Métodos Getter e Setter
+     * Getter Methods
      **/
 
     public List<ProjectStatus> getprojectStatusList() {
@@ -79,7 +80,10 @@ public class ProjectStatusStore {
         return status;
     }
 
-    /** Override **/
+    /**
+     * Override
+     **/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -87,6 +91,10 @@ public class ProjectStatusStore {
         ProjectStatusStore that = (ProjectStatusStore) o;
         return Objects.equals(this.projectStatusList, that.projectStatusList);
     }
+
+    /**
+     * Hash
+     **/
 
     @Override
     public int hashCode() {

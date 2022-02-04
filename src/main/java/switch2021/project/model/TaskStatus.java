@@ -12,7 +12,7 @@ public class TaskStatus {
     /**
      * Attributes.
      **/
-    private int Id_TaskStatus;
+    private int idTaskStatus;
     private String description;
 
     /**
@@ -32,9 +32,9 @@ public class TaskStatus {
         return Objects.equals(this.description, description);
     }
 
-    public void setID_TaskStatus(int id){
+    public void setIDTaskStatus(int id){
         checkIdRules(id);
-        this.Id_TaskStatus = id;
+        this.idTaskStatus = id;
     }
 
     /**
@@ -57,11 +57,11 @@ public class TaskStatus {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TaskStatus that = (TaskStatus) o;
-        return Id_TaskStatus == that.Id_TaskStatus && description.equals(that.description);
+        return idTaskStatus == that.idTaskStatus && description.equals(that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id_TaskStatus, description);
+        return Objects.hash(idTaskStatus, description);
     }
 }

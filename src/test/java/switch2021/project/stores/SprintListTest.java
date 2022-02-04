@@ -28,16 +28,16 @@ public class SprintListTest {
 
 
     @BeforeEach
-    public void initialize(){
+    public void initialize() {
         company = new Company();
         projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
         company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste"));
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         date = LocalDate.of(2022, 1, 1);
-        project = projectStore.createProject( "prototype", "test1234", customer,
+        project = projectStore.createProject("prototype", "test1234", customer,
                 typo, sector, date, 7, 5000);
         project.setSprintDuration(2);
         sprintList = new SprintList();
@@ -94,7 +94,7 @@ public class SprintListTest {
     public void createSprintFail_StartDate() {
         //Arrange
         SprintList sprintListTest = new SprintList();
-        Sprint sprintTest = sprintListTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 2 ), project.getSprintDuration());
+        Sprint sprintTest = sprintListTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 2), project.getSprintDuration());
         //Act
         String name = "Sprint_1";
 
@@ -110,7 +110,7 @@ public class SprintListTest {
     public void createSprintFail_SprintDuration() {
         //Arrange
         SprintList sprintListTest = new SprintList();
-        Sprint sprintTest = sprintListTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 1 ), project.getSprintDuration());
+        Sprint sprintTest = sprintListTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 1), project.getSprintDuration());
         //Act
         String name = "Sprint_1";
 
@@ -127,7 +127,7 @@ public class SprintListTest {
     public void createSprintFailAll() {
         //Arrange
         SprintList sprintListTest = new SprintList();
-        Sprint sprintTest = sprintListTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 2 ), project.getSprintDuration());
+        Sprint sprintTest = sprintListTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 2), project.getSprintDuration());
         //Act
         String name = "Sprint_2";
 
@@ -180,28 +180,14 @@ public class SprintListTest {
         assertTrue(sprintListTest.validateIfSprintAlreadyExists(sprintTest));
     }
 
-
-    @Test
-    @DisplayName("Test to verify if it is caught the exception of having a sprint with a start date that is " +
-            "before the end date of another sprint")
-    public void validationOfStarDate() {
-        //Assert
-        SprintList sprintListTest = new SprintList();
-        Sprint sprintTest = sprintListTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 1), 2);
-        sprintTest.setEndDate(LocalDate.of(2022, 1, 20));
-        sprintListTest.saveSprint(sprintTest);
-        assertNull(sprintListTest.createSprint("Sprint_0", LocalDate.of(2022, 1, 10), 2));
-    }
-
-
     @Test
     @DisplayName("Test to verify if the act of saving a sprint is correct")
-    public void checkSaveTheSprint () {
+    public void checkSaveTheSprint() {
 
-       //Arrange
-       SprintList sprintListTest = new SprintList();
-       Sprint sprintTest = sprintListTest.createSprint("String_0", LocalDate.of(2022, 1, 1), 2);
-       //Act and Assert
+        //Arrange
+        SprintList sprintListTest = new SprintList();
+        Sprint sprintTest = sprintListTest.createSprint("String_0", LocalDate.of(2022, 1, 1), 2);
+        //Act and Assert
         assertTrue(sprintListTest.saveSprint(sprintTest));
 
     }
@@ -231,7 +217,7 @@ public class SprintListTest {
         //Act
         Sprint sprintTest = storeTest.getCurrentSprint();
         //Assert
-        assertEquals(sprint9,sprintTest);
+        assertEquals(sprint9, sprintTest);
     }
 
     @Test
@@ -248,4 +234,245 @@ public class SprintListTest {
             storeTest.getCurrentSprint();
         });
     }
+
+    @Test
+    @DisplayName("Verification Test, to Start a Sprint")
+    public void startASprintGlobalSuccess() {
+        //Arrange
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+
+        //Project 1
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2022, 12, 31));
+        company.getProjectStore().saveNewProject(proj1);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+
+        //Resource 1
+        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
+        Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
+        joana1R.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
+        proj1.getProjectTeam().saveResource(joana1R);
+
+        //Resource 2
+        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
+        Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
+        joana2R.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
+        proj1.getProjectTeam().saveResource(joana2R);
+
+        //Resource 3
+        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
+        Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
+        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
+        proj1.getProjectTeam().saveResource(joana3R);
+
+        //Resource 4
+        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
+        Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
+        joana4R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+        proj1.getProjectTeam().saveResource(joana4R);
+
+        //Create a Sprint
+        SprintList sprintListTest1 = new SprintList();
+        Sprint sprint1 = sprintListTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
+                project.getSprintDuration());
+        sprintListTest1.saveSprint(sprint1);
+        Sprint sprint2 = sprintListTest1.createSprint("Sprint_2", LocalDate.of(2022, 1, 15),
+                project.getSprintDuration());
+        sprintListTest1.saveSprint(sprint2);
+
+        //Assert
+        assertTrue(sprintListTest1.startASprint(2, LocalDate.of(2022, 1, 15),
+                proj1.getProjectTeam(), 2));
+    }
+
+    @Test
+    @DisplayName("Fail Test, to Start a Sprint - Without project team")
+    public void startASprintFail_ProjectTeam() {
+        //Arrange
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+
+        //Project 1
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2022, 12, 31));
+        company.getProjectStore().saveNewProject(proj1);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+
+        //Resource 1
+        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
+        Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
+        joana1R.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
+        proj1.getProjectTeam().saveResource(joana1R);
+
+        //Resource 2
+        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
+        Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
+        joana2R.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
+        proj1.getProjectTeam().saveResource(joana2R);
+
+        //Resource 3
+        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
+        Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
+        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
+        proj1.getProjectTeam().saveResource(joana3R);
+
+        //Resource 4
+        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
+        Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
+        joana4R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+        proj1.getProjectTeam().saveResource(joana4R);
+
+        //Create a Sprint
+        SprintList sprintListTest1 = new SprintList();
+        Sprint sprint1 = sprintListTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
+                project.getSprintDuration());
+        sprintListTest1.saveSprint(sprint1);
+
+        //Assert
+        assertFalse(sprintListTest1.startASprint(2, LocalDate.of(2022, 2, 5),
+                proj1.getProjectTeam(), 2));
+    }
+
+    @Test
+    @DisplayName("Fail Test, to Start a Sprint - Wrong Sprint ID")
+    public void startASprintFail_SprintID() {
+        //Arrange
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+
+        //Project 1
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2022, 12, 31));
+        company.getProjectStore().saveNewProject(proj1);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+
+        //Resource 1
+        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
+        Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
+        joana1R.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
+        proj1.getProjectTeam().saveResource(joana1R);
+
+        //Resource 2
+        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
+        Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
+        joana2R.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
+        proj1.getProjectTeam().saveResource(joana2R);
+
+        //Resource 3
+        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
+        Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
+        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
+        proj1.getProjectTeam().saveResource(joana3R);
+
+        //Resource 4
+        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
+        Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
+        joana4R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+        proj1.getProjectTeam().saveResource(joana4R);
+
+        //Create a Sprint
+        SprintList sprintListTest1 = new SprintList();
+        Sprint sprint1 = sprintListTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
+                project.getSprintDuration());
+        sprintListTest1.saveSprint(sprint1);
+
+        //Assert
+        assertFalse(sprintListTest1.startASprint(2, LocalDate.of(2022, 2, 1),
+                proj1.getProjectTeam(), 2));
+    }
+
+    @Test
+    @DisplayName("Fail Global Test, to Start a Sprint - Without project team, with wrong id sprint and wrong startDate")
+    public void startASprintGlobalFail() {
+        //Arrange
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+
+        //Project 1
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2022, 12, 31));
+        company.getProjectStore().saveNewProject(proj1);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+
+        //Resource 1
+        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
+        Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
+        joana1R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+        proj1.getProjectTeam().saveResource(joana1R);
+
+        //Resource 2
+        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
+        Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
+        joana2R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
+        proj1.getProjectTeam().saveResource(joana2R);
+
+        //Resource 3
+        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
+        Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
+        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
+        proj1.getProjectTeam().saveResource(joana3R);
+
+        //Resource 4
+        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
+        LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
+        Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
+        joana4R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+        proj1.getProjectTeam().saveResource(joana4R);
+
+        //Create a Sprint
+        SprintList sprintListTest1 = new SprintList();
+        Sprint sprint1 = sprintListTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
+                project.getSprintDuration());
+        sprintListTest1.saveSprint(sprint1);
+
+        //Assert
+        assertFalse(sprintListTest1.startASprint(2, LocalDate.of(2022, 2, 1),
+                proj1.getProjectTeam(), 2));
+    }
+
 }
+

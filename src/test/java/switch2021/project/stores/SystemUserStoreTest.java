@@ -37,7 +37,7 @@ public class SystemUserStoreTest {
         String passwordResult = newUser.getPassword();
         String functionResult = newUser.getFunction();
         String photoResult = newUser.getPhoto();
-        boolean activateUserResult = newUser.getActivateUserStatus();
+        boolean activateUserResult = newUser.isActivateUser();
         List<UserProfile> assignedProfileResult = newUser.getAssignedProfileList();
         //Assert
         assertEquals(userNameExpected, userNameResult);

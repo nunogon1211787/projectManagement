@@ -40,7 +40,7 @@ class AssignScrumMasterControllerTest {
         //Arrange
         Company company = new Company();
         AssignScrumMasterController controller = new AssignScrumMasterController(company);
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep","xxx@sss.sss");
         company.getCustomerStore().saveNewCustomer(customer);
         BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
@@ -139,4 +139,5 @@ class AssignScrumMasterControllerTest {
 //        //Asserts
 //        assertFalse(proj1.getProjectTeam().assignProjectRole(manueljose, sDate, sDuration, sMaster)); //Resource without possible dates
 //    }
+
 }

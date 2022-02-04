@@ -3,7 +3,6 @@ package switch2021.project.stores;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.TaskStatus;
-import switch2021.project.model.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +14,9 @@ import java.util.Objects;
 public class TaskStatusStore {
 
     /**
-     * Atributtes.
+     * Attributes
      */
+
     private final List<String> taskList; // Review this atributte. The class need to have a list of Objects that are responsible.
     private List<TaskStatus> taskStatusList;
 
@@ -24,14 +24,16 @@ public class TaskStatusStore {
     /**
      * Constructor
      */
+
     public TaskStatusStore() {
         this.taskList = new ArrayList<>(); //Review
         this.taskStatusList = new ArrayList<>();
     }
 
     /**
-     * Methods to create an object that this class are responsible.
+     * Methods to create an object that this class are responsible
      */
+
     public boolean createTaskStatus(String status) {
 
         TaskStatus newStatus = new TaskStatus(status);
@@ -52,8 +54,9 @@ public class TaskStatusStore {
     }
 
     /**
-     * Methods to iterate with the list.
+     * Methods to iterate with the list
      */
+
     public String getTaskStatusDescription(String description) {
         String result = "Status not found";
         for(String i : taskList) {
@@ -112,8 +115,9 @@ public class TaskStatusStore {
     }
 
     /**
-     * Method to save and validate task status in the list.
+     * Method to save and validate task status in the list
      */
+
     public boolean saveTaskStatus(TaskStatus status) {
 
         boolean result = false;
@@ -127,14 +131,14 @@ public class TaskStatusStore {
                 for (int i = 0; i < this.taskStatusList.size(); i++) {
 
                     if (validateNewStatusDescription(status)) {
-                        status.setID_TaskStatus(id_TaskStatusGenerator());
+                        status.setIDTaskStatus(idTaskStatusGenerator());
                         this.taskStatusList.add(status);
                     }
 
                 }
             } else {
 
-                status.setID_TaskStatus(id_TaskStatusGenerator());
+                status.setIDTaskStatus(idTaskStatusGenerator());
                 this.taskStatusList.add(status);
 
             }
@@ -161,19 +165,21 @@ public class TaskStatusStore {
     }
 
     /**
-     * ID Generator.
+     * ID Generator
      **/
-    public int id_TaskStatusGenerator() {
+
+    public int idTaskStatusGenerator() {
         int id = 1;
         if (this.taskStatusList.size() > 0) {
-            id = this.taskStatusList.get(taskStatusList.size() - 1).getId_TaskStatus() + 1;
+            id = this.taskStatusList.get(taskStatusList.size() - 1).getIdTaskStatus() + 1;
         }
         return id;
     }
 
+    /**
+     * Override
+     **/
 
-
-    /** Override **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -181,6 +187,10 @@ public class TaskStatusStore {
         TaskStatusStore that = (TaskStatusStore) o;
         return Objects.equals(this.taskList, that.taskList);
     }
+
+    /**
+     * Hash
+     **/
 
     @Override
     public int hashCode() {

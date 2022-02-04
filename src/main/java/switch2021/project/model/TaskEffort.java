@@ -9,17 +9,14 @@ public class TaskEffort {
     private LocalDate effortDate;
     private String comment;
     private String attachment;
-    private Resource effortResponsible;
 
-    public TaskEffort(int effortHours, int effortMinutes, LocalDate effortDate, String comment, String attachment, Resource effortResponsible) {
-        this.effortResponsible = effortResponsible;
+    public TaskEffort(int effortHours, int effortMinutes, LocalDate effortDate, String comment, String attachment) {
         checkWorkTimeRules(effortHours, effortMinutes);
         checkWorkDateRules(effortDate);
         this.effortHours = effortHours;
         this.effortMinutes = effortMinutes;
         this.comment = comment;
         this.attachment = attachment;
-
     }
 
     private void checkWorkTimeRules(double effortHours, double effortMinutes) {
@@ -32,8 +29,6 @@ public class TaskEffort {
             this.effortDate = LocalDate.now();
         } else if (effortDate.isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("Invalid workHours value.");
-        } else if (effortDate.isAfter(this.effortResponsible.getEndDate()) || effortDate.isBefore(this.effortResponsible.getStartDate())) {
-            throw new IllegalArgumentException("work date not match with the resource allocation dates");
         } else {
             this.effortDate = effortDate;
         }
@@ -57,10 +52,6 @@ public class TaskEffort {
 
     public String getAttachment() {
         return attachment;
-    }
-
-    public Resource getEffortResponsible() {
-        return effortResponsible;
     }
 
 }

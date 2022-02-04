@@ -8,13 +8,25 @@ import java.util.List;
 
 public class GetScrumBoardController {
 
+    /**
+     * Attributes
+     **/
+
     private final Company company;
     private final ScrumBoardMapper mapper;
+
+    /**
+     * Constructor to test (without SINGLETON)
+     **/
 
     public GetScrumBoardController(Company company, ScrumBoardMapper mapper) {
         this.company = company;
         this.mapper = mapper;
     }
+
+    /**
+     * Method
+     **/
 
     public List<ScrumBoardDTO> getScrumBoard(String projectCode){
         List<UserStory> usList = company.getProjectStore().getProjectByCode(projectCode).getCurrentSprint().getSprintBacklog().getUserStoryList();

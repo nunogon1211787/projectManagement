@@ -18,7 +18,7 @@ public class CreateNewTypologyController {
      * Constructor to UI (with SINGLETON)
      **/
 
-    public CreateNewTypologyController(){ this.company = App.getInstance().getCompany();}
+    //public CreateNewTypologyController(){ this.company = App.getInstance().getCompany();}
 
     /**
      * Constructor to test (without SINGLETON)
@@ -29,7 +29,7 @@ public class CreateNewTypologyController {
     }
 
     /**
-     * Methods
+     * Method
      **/
 
     public boolean createTypology(String description) {

@@ -17,22 +17,22 @@ class SprintBacklogTest {
     void compareUserStoryIDOfSprint() {
         Company company = new Company();
         ProjectTeamTest projectTeamTest = new ProjectTeamTest();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         ProjectStatus projectStatus = new ProjectStatus("ToStart");
-        Project project2 = new Project( "prototype", "test56", customer,
+        Project project2 = new Project("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), projectStatus, 7, 5000);
         UserStoryStatus status = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
         SprintBacklog sprintBacklog = new SprintBacklog();
         int priority = 5;
         String description = "Validate";
-        UserStory userstory = new UserStory("US001", priority, description,5);
+        UserStory userstory = new UserStory("US001", priority, description, 5);
         UserStoryOfSprint story = new UserStoryOfSprint(userstory, 21, 1);
         UserStoryOfSprint story2 = new UserStoryOfSprint(userstory, 13, 2);
         UserStoryOfSprint story3 = new UserStoryOfSprint(userstory, 2, 3);
 
-        
+
         sprintBacklog.saveUserStoryOfSprint(story);
         sprintBacklog.saveUserStoryOfSprint(story2);
         sprintBacklog.saveUserStoryOfSprint(story3);
@@ -53,7 +53,7 @@ class SprintBacklogTest {
     @BeforeEach
     public void init() {
         UserStoryStatus status = new UserStoryStatus("statusTest");
-        UserStory userStory = new UserStory("US001", 2, "teste",5);
+        UserStory userStory = new UserStory("US001", 2, "teste", 5);
         userStoryOfSprint = sprintBacklog.createUSerStoryOfSprint(userStory, 8,
                 company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         sprintBacklog.saveUserStoryOfSprint(userStoryOfSprint);
@@ -82,7 +82,7 @@ class SprintBacklogTest {
     @DisplayName("Create Story in sprint fail case - effort below 1")
     public void createStoryInSprintFailEffort() {
         UserStoryStatus status = new UserStoryStatus("statusTest");
-        UserStory userStory = new UserStory("US001", 2, "teste",5);
+        UserStory userStory = new UserStory("US001", 2, "teste", 5);
         assertThrows(IllegalArgumentException.class, () -> sprintBacklog.createUSerStoryOfSprint(userStory, -1,
                 company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned")));
     }
@@ -99,7 +99,7 @@ class SprintBacklogTest {
     @Test
     @DisplayName("Create Story in sprint fail case - UserStory selected has Done Status")
     public void createStoryInSprintStatusDone() {
-        UserStory userStory = new UserStory("US001", 2, "teste",5);
+        UserStory userStory = new UserStory("US001", 2, "teste", 5);
         userStory.setUserStoryStatus(company.getUserStoryStatusStore().getUserStoryStatusByDescription("Done"));
         assertThrows(IllegalArgumentException.class, () -> sprintBacklog.createUSerStoryOfSprint(userStory, 5,
                 company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned")));
@@ -110,9 +110,9 @@ class SprintBacklogTest {
     @DisplayName("Create Story in sprint fail case - UserStory already exists in sprintbacklog")
     public void UserStoryInSprintFail_AlreadyExists() {
         UserStoryStatus status = new UserStoryStatus("statusTest");
-        UserStory userStory = new UserStory("US001", 2, "teste",5);
-        userStory.setId_UserStory(1);
-        UserStoryOfSprint userStoryOfSprint= sprintBacklog.createUSerStoryOfSprint(userStory, 5,
+        UserStory userStory = new UserStory("US001", 2, "teste", 5);
+        userStory.setIdUserStory(1);
+        UserStoryOfSprint userStoryOfSprint = sprintBacklog.createUSerStoryOfSprint(userStory, 5,
                 company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         sprintBacklog.saveUserStoryOfSprint(userStoryOfSprint);
         assertTrue(sprintBacklog.validateUserStoryOfSprint(userStoryOfSprint));
@@ -124,13 +124,13 @@ class SprintBacklogTest {
     public void addStoryToBacklog() {
         //Act
         UserStoryStatus status = new UserStoryStatus("statusTest");
-        UserStory userStory = new UserStory("US001", 2, "teste",5);
+        UserStory userStory = new UserStory("US001", 2, "teste", 5);
 
         SprintBacklog testBacklog = new SprintBacklog();
         UserStoryOfSprint test = testBacklog.createUSerStoryOfSprint(userStory, 8,
                 company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         testBacklog.saveUserStoryOfSprint(test);
-        test.getUserStoryOfSprint().setId_UserStory(sprintBacklog.getUserStoryOfSprintList().get(0).getUserStoryOfSprint().getId_UserStory());
+        test.getUserStoryOfSprint().setIdUserStory(sprintBacklog.getUserStoryOfSprintList().get(0).getUserStoryOfSprint().getIdUserStory());
 
         String expected = test.toString();
 
@@ -138,4 +138,36 @@ class SprintBacklogTest {
         assertEquals(expected, sprintBacklog.getUserStoryOfSprintList().get(0).toString());
     }
 
+
+    @Test
+    @DisplayName("save user story to sprint backlog fail")
+    public void saveStoryToBacklogFail() {
+        // Arrange
+        int priority = 5;
+        String description = "Validate";
+        UserStory userstory = new UserStory("US001", priority, description, 5);
+        sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+        });
+        //Assert
+        assertTrue(exception.getMessage().contains("User Story already exists in the sprintbacklog or is null"));
+    }
+
+    @Test
+    @DisplayName("save user story to sprint backlog null")
+    public void saveStoryToBacklogNull() {
+        // Arrange
+        int priority = 5;
+        String description = "Validate";
+        UserStory userstory = new UserStory("US001", priority, description, 5);
+        sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            sprintBacklog.saveUserStoryToSprintBacklog(null);
+        });
+        //Assert
+        assertTrue(exception.getMessage().contains("User Story already exists in the sprintbacklog or is null"));
+    }
 }

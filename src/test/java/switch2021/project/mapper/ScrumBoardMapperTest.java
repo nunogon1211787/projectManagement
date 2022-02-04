@@ -13,7 +13,7 @@ public class ScrumBoardMapperTest {
         //Arrange
         ScrumBoardMapper mapper = new ScrumBoardMapper();
         UserStory userStory = new UserStory("name", 5, "description", 5);
-        userStory.setId_UserStory(0);
+        userStory.setIdUserStory(0);
 
         //Act
         ScrumBoardDTO dto = mapper.toDTO(userStory);
@@ -29,7 +29,7 @@ public class ScrumBoardMapperTest {
         assertEquals(dto.getUserStoryPriority(),5);
         assertEquals(dto.getUserStoryStatus(),userStory.getUserStoryStatus().getDescription());
         assertEquals(dto.getUserStoryStatus(),"To do");
-        assertEquals(dto.getUserStoryId(),userStory.getId_UserStory());
+        assertEquals(dto.getUserStoryId(),userStory.getIdUserStory());
         assertEquals(dto.getUserStoryId(),0);
     }
 

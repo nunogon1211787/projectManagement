@@ -7,12 +7,20 @@ import java.util.Objects;
 @Getter
 public class ScrumBoardDTO {
 
+        /**
+         * Attributes
+         **/
+
         private String userStoryName;
         private String userStoryStatus;
         private String userStoryDescription;
         private int userStoryTimeEstimate;
         private int userStoryPriority;
         private int userStoryId;
+
+        /**
+         * Constructor to test (without SINGLETON)
+         **/
 
         public ScrumBoardDTO(String name, String status, String description, int timeEstimate, int priority, int userStoryId) {
                 this.userStoryName = name;
