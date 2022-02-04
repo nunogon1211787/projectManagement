@@ -13,7 +13,7 @@ public class ChangePasswordController {
 
     private final Company company;
 
-    /*
+    /**
      * Constructor to UI (with SINGLETON)
      **/
 

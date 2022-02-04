@@ -1,5 +1,7 @@
 package switch2021.project.stores;
 
+import lombok.Getter;
+import lombok.Setter;
 import switch2021.project.model.*;
 import switch2021.project.utils.App;
 import java.time.LocalDate;
@@ -7,18 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+@Setter
+
 public class ProjectStore {
 
 
     /**
-     * Atributos da Classe
+     * Class Attributes
      **/
+
     private final List<Project> projectList;
 
 
     /**
      * Constructors with data
      **/
+
     public ProjectStore() {
         this.projectList = new ArrayList<>();
     }
@@ -27,6 +34,7 @@ public class ProjectStore {
     /**
      * Project creator
      **/
+
     public Project createProject(String name, String description, Customer customer, Typology typology,
                                  BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
@@ -37,10 +45,10 @@ public class ProjectStore {
                 startDate, status, numberOfSprints, budget);
     }
 
-
     /**
      * Getters Methods
      **/
+
     public List<Project> getProjects() {
 
         return new ArrayList<>(this.projectList);
@@ -150,7 +158,10 @@ public class ProjectStore {
         return true;
     }
 
-    /** Override **/
+    /**
+     * Override
+     **/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -158,6 +169,10 @@ public class ProjectStore {
         ProjectStore that = (ProjectStore) o;
         return Objects.equals(this.projectList, that.projectList);
     }
+
+    /**
+     * Hash
+     **/
 
     @Override
     public int hashCode() {

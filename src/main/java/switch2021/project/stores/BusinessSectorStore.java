@@ -1,5 +1,7 @@
 package switch2021.project.stores;
 
+import lombok.Getter;
+import lombok.Setter;
 import switch2021.project.model.BusinessSector;
 import switch2021.project.model.ProjectTeam;
 
@@ -7,11 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+@Setter
+
 public class BusinessSectorStore {
 
     /**
-     * Business Sector Store Atributes
-     * Contains a Business Sector list
+     * Business Sector Store Attributes (Contains a Business Sector list)
      **/
 
     private final List<BusinessSector> businessSectorList;
@@ -25,8 +29,7 @@ public class BusinessSectorStore {
     }
 
     /**
-     * Add Business Sector Method
-     * Creates a new Business Sector object of the customer
+     * Add Business Sector Method (Creates a new Business Sector object of the customer)
      **/
 
     public BusinessSector createBusinessSector(String description) {
@@ -34,8 +37,7 @@ public class BusinessSectorStore {
     }
 
     /**
-     * Add Project Status Method
-     * Adds a new Project Status object to the Project Status List
+     * Add Project Status Method (Adds a new Project Status object to the Project Status List)
      **/
 
     public boolean addBusinessSector(BusinessSector sector) {
@@ -44,7 +46,7 @@ public class BusinessSectorStore {
     }
 
     /**
-     * Métodos Getter e Setter
+     * Getter Methods
      **/
 
     public List<BusinessSector> getBusinessSectorList() {
@@ -62,7 +64,10 @@ public class BusinessSectorStore {
         return sector;
     }
 
-    /** Override **/
+    /**
+     * Override
+     **/
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,6 +75,10 @@ public class BusinessSectorStore {
         BusinessSectorStore that = (BusinessSectorStore) o;
         return Objects.equals(this.businessSectorList, that.businessSectorList);
     }
+
+    /**
+     * Hash
+     **/
 
     @Override
     public int hashCode() {

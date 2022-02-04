@@ -1,9 +1,22 @@
 package switch2021.project.dto;
 
+import lombok.Getter;
+
+@Getter
+
 public class UserStorySprintProjectDTO {
+
+    /**
+     * Attributes
+     **/
+
     private String projectCode;
     private int sprintId;
     private int userStoryId;
+
+    /**
+     * Constructor to test (without SINGLETON)
+     **/
 
     public UserStorySprintProjectDTO(String projectCode, int sprintId, int userStoryId) {
         this.projectCode = projectCode;
@@ -11,15 +24,4 @@ public class UserStorySprintProjectDTO {
         this.userStoryId = userStoryId;
     }
 
-    public String getProjectCode() {
-        return projectCode;
-    }
-
-    public int getSprintId() {
-        return sprintId;
-    }
-
-    public int getUserStoryId() {
-        return userStoryId;
-    }
 }

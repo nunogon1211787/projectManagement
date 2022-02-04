@@ -35,7 +35,7 @@ public class StartASprintController {
     }
 
     /**
-     * Methods
+     * Method
      **/
 
     public boolean startASprint(StartASprintDTO sprintDTO) {

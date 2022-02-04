@@ -7,8 +7,8 @@ public class CreateTaskDTO {
 
 
     /**
-     * Atributtes.
-     */
+     * Attributes
+     **/
     private final String name;
     private final String description;
     private final int effortEstimate;
@@ -16,8 +16,8 @@ public class CreateTaskDTO {
     private final String responsible;
 
     /**
-     * Constructor.
-     */
+     * Constructor
+     **/
 
     public CreateTaskDTO(String name, String description, int effortEstimate, String typeName, String responsible) {
         this.name = name;

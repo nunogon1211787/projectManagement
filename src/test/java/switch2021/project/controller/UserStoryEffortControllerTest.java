@@ -16,18 +16,18 @@ class UserStoryEffortControllerTest {
     @Test
     void catchCurrentProjectListByUserEmail() {
         // Arrange
-        Company company = new Company(); //iniciar aqui
-        UserStoryEffortController controller = new UserStoryEffortController(company); //chamei o controller
-        SystemUserStore systemUserStore = company.getSystemUserStore(); //chamo a systemUserStore
-        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor"); //Preciso de obter o profile para introduzir no user
+        Company company = new Company();
+        UserStoryEffortController controller = new UserStoryEffortController(company);
+        SystemUserStore systemUserStore = company.getSystemUserStore();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "123456", "123456", "IMG_123", userProfile); //Tenho de atribuir um user profile
+                "tester", "123456", "123456", "IMG_123", userProfile);
         systemUserStore.saveSystemUser(user); //salvo o user
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000); //quando inicio um project preciso de customer, typo, sector
+                typo, sector, LocalDate.now(), 7, 5000);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 3, 5);
         Resource person1 = new Resource(user, startDate, endDate, 100, .5);
@@ -35,23 +35,12 @@ class UserStoryEffortControllerTest {
         project1.getProjectTeam().saveResource(person1);
         project1.getProjectTeam().saveResource(person2);
         company.getProjectStore().saveNewProject(project1);
-        //UserProfileStore userProfileStore = company.getUserProfileStore();
-        /*Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
-        sprint1.setId_Sprint(1);
-        Sprint sprint2 = new Sprint("Effort View 1", LocalDate.now());
-        sprint2.setId_Sprint(2);
-        UserStoryStatus status = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
-        int priority = 5;
-        String description = "Validate";
-        UserStory story = new UserStory(status, priority, description);*/
 
         //Act
-
         List<Project> projectList = company.getProjectStore().getProjectsByUserEmail("xxxx@isep.ipp.pt");
         List<Project> companyProjectList = controller.getCurrentProjectListByUserEmail("xxxx@isep.ipp.pt");
 
         //Assert
-
         assertEquals(companyProjectList, projectList);
     }
 
@@ -70,18 +59,18 @@ class UserStoryEffortControllerTest {
     @Test
     void getSprintList() {
         //Arrange
-        Company company = new Company(); //iniciar aqui
-        UserStoryEffortController controller = new UserStoryEffortController(company); //chamei o controller
+        Company company = new Company();
+        UserStoryEffortController controller = new UserStoryEffortController(company);
         SystemUserStore systemUserStore = company.getSystemUserStore(); //chamo a systemUserStore
-        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor"); //Preciso de obter o profile para introduzir no user
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "123456", "123456", "IMG_123", userProfile); //Tenho de atribuir um user profile
+                "tester", "123456", "123456", "IMG_123", userProfile);
         systemUserStore.saveSystemUser(user); //salvo o user
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000); //quando inicio um project preciso de customer, typo, sector
+                typo, sector, LocalDate.now(), 7, 5000);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 3, 5);
         Resource person1 = new Resource(user, startDate, endDate, 100, .5);
@@ -95,7 +84,7 @@ class UserStoryEffortControllerTest {
 
         //Act
         controller.getProjectByCode("Project_2022_1");
-        List<Sprint> sprint = sprintList.getSprintList(); // passar de objeto para lista
+        List<Sprint> sprint = sprintList.getSprintList();
         List<Sprint> sprint2 = controller.getSprintsList();
 
         //Assert

@@ -13,11 +13,11 @@ public class SearchSystemUsersController {
 
     private Company company;
 
-    /*
+    /**
      * Constructor to UI (with SINGLETON)
      **/
 
-    //public SearchSystemUsersController() { this.company = App.getInstance().getCompany();}
+//    public SearchSystemUsersController() { this.company = App.getInstance().getCompany();}
 
     /**
      * Constructor to test (without SINGLETON)

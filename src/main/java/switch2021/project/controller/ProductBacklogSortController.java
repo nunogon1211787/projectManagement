@@ -59,21 +59,5 @@ public class ProductBacklogSortController {
         return userStoryList;
     }
 
-//TODO - ver questão do DTO
-
-//    public List<UserStoryDto> getUsSortedByPriority(){
-//        this.productBacklog = this.project.getProductBacklog();
-//        this.userStoryList = this.project.getProductBacklog().getUsSortedByPriority();
-//
-//        LinkedList<UserStoryDto> userStoryDtos = new LinkedList<>();
-//        for (UserStory userStory: userStoryList) {
-//            UserStoryDto userStoryDto = UserStoryMapper.convertToDto(userStory);
-//            userStoryDtos.add(userStoryDto);
-//        }
-//        return UserStoryMapper.convertToDto(userStoryList);
-//        //map - tranformar objecto entrada num objecto saida
-//        //    return this.userStoryList.stream().map(UserStoryMapper::convertToDto).collect(Collectors.toCollection(LinkedList::new));
-//        // return this.userStoryList.stream().map(userStory -> {return UserStoryMapper.convertToDto(userStory);}).collect(Collectors.toCollection(LinkedList::new));
-//    }
 
 }

@@ -21,7 +21,7 @@ public class AssociateResourceController {
     List<Project> arrayProject;
     List<SystemUser> arraySystemUser;
 
-    /*
+    /**
      * Constructor to UI (with SINGLETON)
      **/
 

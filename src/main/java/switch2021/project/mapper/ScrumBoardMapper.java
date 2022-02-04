@@ -7,10 +7,18 @@ import java.util.List;
 
 public class ScrumBoardMapper {
 
+    /**
+     * Method to change data in to a Scrum Board DTO
+     **/
+
     public ScrumBoardDTO toDTO (UserStory userStory) {
         return new ScrumBoardDTO(userStory.getName(),userStory.getUserStoryStatus().getDescription(),
                 userStory.getDescription(), userStory.getTimeEstimate(), userStory.getPriority(), userStory.getId_UserStory());
     }
+
+    /**
+     * Method to change data in to a Resource DTO
+     **/
 
     public List<ScrumBoardDTO> toDtoList(List<UserStory> userStoryList){
         List<ScrumBoardDTO> userStoryDtoList = new ArrayList<>();

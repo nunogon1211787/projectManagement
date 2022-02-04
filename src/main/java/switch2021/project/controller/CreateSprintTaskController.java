@@ -17,13 +17,13 @@ public class CreateSprintTaskController {
 
 
     /**
-     * Constructor to UI (with SINGLETON).
+     * Constructor to UI (with SINGLETON)
      */
 
 //    public createSprintTaskController() { this.company = App.getInstance().getCompany(); }
 
     /**
-     * Constructor to test (without SINGLETON).
+     * Constructor to test (without SINGLETON)
      */
 
     public CreateSprintTaskController(Company company, TaskMapper taskMapper) {
@@ -32,7 +32,7 @@ public class CreateSprintTaskController {
     }
 
     /**
-     * Methods to implement the feature.
+     * Methods to implement the feature
      */
 
     public List<String> getTaskTypes(){

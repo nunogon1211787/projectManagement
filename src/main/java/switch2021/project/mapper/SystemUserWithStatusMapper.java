@@ -8,12 +8,16 @@ import java.util.List;
 
 public class SystemUserWithStatusMapper {
 
-    public  List<SystemUserWithStatusDto> toDto(List<SystemUser> systemUserList){
-        List<SystemUserWithStatusDto> systemUserWithStatusDtoList = new ArrayList<>();
-        for (SystemUser systemUser: systemUserList) {
-            SystemUserWithStatusDto systemUserWithStatusDto = new SystemUserWithStatusDto(systemUser.getUserName(), systemUser.getEmail(), systemUser.getActivateUserStatus());
-            systemUserWithStatusDtoList.add(systemUserWithStatusDto);
+    /**
+     * Method to change data in to a System User Status DTO List
+     **/
+
+        public List<SystemUserWithStatusDto> toDto(List<SystemUser> systemUserList) {
+            List<SystemUserWithStatusDto> systemUserWithStatusDtoList = new ArrayList<>();
+            for (SystemUser systemUser : systemUserList) {
+                SystemUserWithStatusDto systemUserWithStatusDto = new SystemUserWithStatusDto(systemUser.getUserName(), systemUser.getEmail(), systemUser.getActivateUserStatus());
+                systemUserWithStatusDtoList.add(systemUserWithStatusDto);
+            }
+            return systemUserWithStatusDtoList;
         }
-        return systemUserWithStatusDtoList;
     }
-}

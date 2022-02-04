@@ -3,11 +3,12 @@ package switch2021.project.controller;
 import switch2021.project.model.Company;
 
 public class ActivateUserController {
+
     /**
      * Attributes
      **/
 
-    private Company company;
+    private final Company company;
 
     /**
      * Constructor to test (without SINGLETON)

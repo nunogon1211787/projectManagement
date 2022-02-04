@@ -6,6 +6,10 @@ import switch2021.project.utils.App;
 
 public class TaskMapper {
 
+    /**
+     * Method to break a Create Task DTO data
+     **/
+
     public Task toModel(CreateTaskDTO dto, Project proj){
 
         String name = dto.getName();
