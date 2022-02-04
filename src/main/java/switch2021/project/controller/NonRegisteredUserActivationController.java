@@ -14,7 +14,7 @@ public class NonRegisteredUserActivationController {
     private Company company;
 
 
-    /*
+    /**
      * Constructor to UI (with SINGLETON)
      **/
 

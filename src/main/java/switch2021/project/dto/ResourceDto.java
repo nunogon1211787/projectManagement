@@ -12,6 +12,10 @@ import java.time.LocalDate;
 @Getter
 public class ResourceDto {
 
+    /**
+     * Attributes
+     **/
+
     private String userName;
     private String role;
     private String startDate;
@@ -20,8 +24,8 @@ public class ResourceDto {
     private double percentageOfAllocation;
 
     /**
-     * Constructor to test (without SINGLETON).
-     */
+     * Constructor to test (without SINGLETON)
+     **/
 
     public ResourceDto(String name, String role, String startDate, String endDate, double costPerHour, double percentageOfAllocation){
         this.userName = name;

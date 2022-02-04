@@ -38,7 +38,7 @@ public class SystemUserWithStatusController {
     }
 
     /**
-     * Methods
+     * Method
      **/
 
     public List<SystemUserWithStatusDto> getListSystemUserWithStatus() {

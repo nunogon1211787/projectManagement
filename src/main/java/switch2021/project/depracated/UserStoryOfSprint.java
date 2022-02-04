@@ -24,7 +24,7 @@ public class UserStoryOfSprint {
     private List<Task> userStoryOfSprintTasks;
 
     /**
-     * ---> Constructor <---
+     * Constructor
      **/
 
     public UserStoryOfSprint(UserStory story, int effort, UserStoryStatus status) {
@@ -67,9 +67,6 @@ public class UserStoryOfSprint {
     }
 
     private boolean validateEffort(int x) {
-        /*if (x < 0 || x == 4 || x == 6 || x == 7 || x > 8 && x < 13 || x > 13 && x < 20 || x > 20)
-            return false;
-        return true;*/
         return Utils.isFibonacci(x);
     }
 

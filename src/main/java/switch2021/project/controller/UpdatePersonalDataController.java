@@ -14,7 +14,7 @@ public class UpdatePersonalDataController {
     private SystemUser user;
 
 
-    /*
+    /**
      * Constructor to UI (with SINGLETON)
      **/
 

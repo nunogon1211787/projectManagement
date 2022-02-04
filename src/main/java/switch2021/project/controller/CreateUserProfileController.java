@@ -38,7 +38,7 @@ public class CreateUserProfileController {
 
 
     /**
-     * Methods
+     * Method
      **/
 
     public boolean createUserProfile(String name) {

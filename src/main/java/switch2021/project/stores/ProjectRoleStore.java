@@ -26,8 +26,9 @@ public class ProjectRoleStore {
 
 
     /**
-     * Project Role Store populator. Populates the Project Role List with pre-set objects.
+     * Project Role Store populator. Populates the Project Role List with pre-set objects
      **/
+
     public void populateDefault() {
         saveProjectRole(new ProjectRole("Project Manager"));
         saveProjectRole(new ProjectRole("Product Owner"));
@@ -39,10 +40,10 @@ public class ProjectRoleStore {
     /**
      * Create Method
      **/
+
     public ProjectRole createProjectRole(String name) {
         return new ProjectRole(name);
     }
-
 
     /**
      * ID Generator
@@ -60,7 +61,8 @@ public class ProjectRoleStore {
     /**
      * Add Method
      **/
-    private boolean addProjectRole(ProjectRole role) {
+
+    public boolean addProjectRole(ProjectRole role) {
         boolean msg = false;
         if (validateIdProjectRole(role)) {
             this.projectRoleList.add(role);
@@ -73,11 +75,18 @@ public class ProjectRoleStore {
         return msg;
     }
 
+    /**
+     * Get Method
+     **/
+
+    public List<ProjectRole> getProjectRolesList() {
+        return this.projectRoleList;
+    }
 
     /**
-     * Getter Methods
+     * Get Project Role by Name Methods
      **/
-    //Get Project Role by Name
+
     public ProjectRole getProjectRole(String name) {
         ProjectRole projRole = null;
 
@@ -90,7 +99,11 @@ public class ProjectRoleStore {
         return projRole;
     }
 
-    //Get Project Role by ID
+
+    /**
+     * Get Project Role by ID Method
+     **/
+
     public ProjectRole getProjectRole(int id) {
         ProjectRole projRole = null;
 
@@ -162,6 +175,10 @@ public class ProjectRoleStore {
         return
                 (this.projectRoleList.equals(that.projectRoleList));
     }
+
+    /**
+     * Hash
+     **/
 
     @Override
     public int hashCode() {

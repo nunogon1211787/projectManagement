@@ -14,7 +14,7 @@ public class CreateNewTypologyController {
     private Company company;
     private Typology typology;
 
-    /*
+    /**
      * Constructor to UI (with SINGLETON)
      **/
 
@@ -29,7 +29,7 @@ public class CreateNewTypologyController {
     }
 
     /**
-     * Methods
+     * Method
      **/
 
     public boolean createTypology(String description) {

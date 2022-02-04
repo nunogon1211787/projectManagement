@@ -7,6 +7,10 @@ import switch2021.project.model.UserStoryStatus;
 
 public class UserStoryDto {
 
+    /**
+     * Attributes
+     **/
+
     private UserStoryStatus userStoryStatus;
     private int priority;
     private String description;
@@ -14,7 +18,7 @@ public class UserStoryDto {
 
 
     /**
-     * Constructor to test (without SINGLETON).
+     * Constructor to test (without SINGLETON)
      */
 
     public UserStoryDto(UserStoryStatus userStoryStatus, int priority, String description, int id_UserStory) {

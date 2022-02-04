@@ -25,7 +25,7 @@ public class ProfileRequestController {
 //    }
 
     /**
-     * Constructor to test (without SINGLETON).
+     * Constructor to test (without SINGLETON)
      **/
 
     public ProfileRequestController(Company company) {
@@ -33,7 +33,7 @@ public class ProfileRequestController {
     }
 
     /**
-     * Method
+     * Methods
      **/
 
     public Request createProfileRequest(String email, String nameProfile) {

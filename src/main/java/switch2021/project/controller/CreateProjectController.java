@@ -14,7 +14,7 @@ public class CreateProjectController {
     private Project project;
 
 
-    /*
+    /**
      * Constructor to UI (with SINGLETON)
      **/
 

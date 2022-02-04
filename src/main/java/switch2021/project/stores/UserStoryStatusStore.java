@@ -10,8 +10,7 @@ import java.util.Objects;
 public class UserStoryStatusStore {
 
     /**
-     * Project Status Store Atributes
-     * Contains a Project Status list
+     * Project Status Store Attributes (Contains a Project Status list)
      **/
 
     private final List<UserStoryStatus> userStoryStatusList;
@@ -35,6 +34,10 @@ public class UserStoryStatusStore {
         this.userStoryStatusList.add(new UserStoryStatus("In test"));
         this.userStoryStatusList.add(new UserStoryStatus("Refined"));
     }
+
+    /**
+     * Methods
+     **/
 
     public List<UserStoryStatus> getUserStoryStatusList() {
         return userStoryStatusList;

@@ -9,35 +9,35 @@ import java.util.Objects;
 public class UserProfileStore {
 
     /**
-     * UserProfile Store Attributes. Contains a UserProfile list.
+     * Attributes
      **/
+
     private List<UserProfile> userProfileList;
 
     /**
      * UserProfile Store Constructor
      **/
+
     public UserProfileStore() {
         userProfileList = new ArrayList<>();
     }
 
 
     /**
-     * UserProfile Populator. Populates the UserProfile List with pre-set objects.
+     * UserProfile Populator, that populates the UserProfile List with pre-set objects.
      **/
+
     public void populateDefault() {
         saveUserProfile(createProfile("Visitor"));
         saveUserProfile(createProfile("Administrator"));
         saveUserProfile(createProfile("Director"));
         saveUserProfile(createProfile("User"));
-        //userProfileList.add(new UserProfile("Visitor"));
-        //userProfileList.add(new UserProfile("Administrator"));
-        //userProfileList.add(new UserProfile("Director"));
-        //userProfileList.add(new UserProfile("User"));
     }
 
     /**
-     * Getters and Setters Methods.
+     * Getters and Setters Methods
      **/
+
     private List<UserProfile> getOriginalUserProfileList() {
         return this.userProfileList;
     }
@@ -45,7 +45,10 @@ public class UserProfileStore {
     public List<UserProfile> getUserProfileList() {
         return new ArrayList<>(userProfileList);
     }
-    //Get userProfile by name
+
+    /**
+     * Get UserProfile By Name Method
+     **/
 
     public UserProfile getUserProfile(String profileName) {
         UserProfile profile = null;
@@ -57,7 +60,10 @@ public class UserProfileStore {
         }
         return profile;
     }
-    //Get userProfile by ID
+
+    /**
+     * Get UserProfile By ID Method
+     **/
 
     public UserProfile getUserProfile(int id_UserProfile) {
         UserProfile profile = null;
@@ -74,13 +80,15 @@ public class UserProfileStore {
     /**
      * Create Method
      **/
+
     public UserProfile createProfile(String name) {
         return new UserProfile(name);
     }
 
 
     /**
-     * ID_UserProfile Generator.
+     * ID_UserProfile Generator (if the object isn´t saved on the list, the id will be the same for all objects.
+     * This issue will be solved when calling the save method.)
      */
     public int id_UserProfileGenerator() {
         int id = 1;
@@ -88,24 +96,22 @@ public class UserProfileStore {
             id = userProfileList.get(userProfileList.size() - 1).getId_UserProfile() + 1;
         }
         return id;
-    } //if the object isn´t saved on the list, the id will be the same for all
-    //objects. This issue will be solved when calling the save method.
+    }
 
 
     /**
-     * Save UserProfile Method. Save a new UserProfile object to the UserProfile List
+     * Save UserProfile Method (Save a new UserProfile object to the UserProfile List)
      **/
+
     public boolean saveUserProfile(UserProfile profile) {
         if (!validateProfile(profile)) {
             throw new IllegalArgumentException("Repeated user profile name inserted.");
-        } /*else {
-            profile.setId_UserProfile(id_UserProfileGenerator());
-        }*/
+        }
         return addUserProfile(profile);
     }
 
     /**
-     * Add and Remove UserProfile Methods. Adds or remove a UserProfile object to the UserProfile List.
+     * Add and Remove UserProfile Methods (Adds or remove a UserProfile object to the UserProfile List)
      **/
 
     private boolean addUserProfile(UserProfile profile) {
@@ -129,7 +135,7 @@ public class UserProfileStore {
 
 
     /**
-     * Validation Methods.
+     * Validation Methods
      **/
     private boolean validateId_UserProfile(UserProfile profile) {
         boolean msg = true;
@@ -155,10 +161,10 @@ public class UserProfileStore {
         return msg;
     }
 
-
     /**
-     * Override Methods
+     * Override
      **/
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -166,6 +172,10 @@ public class UserProfileStore {
         UserProfileStore that = (UserProfileStore) obj;
         return (this.userProfileList.equals(that.userProfileList));
     }
+
+    /**
+     * Hash
+     **/
 
     @Override
     public int hashCode() {

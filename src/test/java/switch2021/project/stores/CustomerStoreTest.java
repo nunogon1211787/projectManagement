@@ -64,7 +64,7 @@ class CustomerStoreTest {
     }
 
     @Test
-    void setAtributes() {
+    void setAttributes() {
         CustomerStore store = new CustomerStore();
         Customer customer = store.createCustomer("teste","teste@teste.com");
         store.saveNewCustomer(customer);
@@ -97,7 +97,7 @@ class CustomerStoreTest {
     }
 
     @Test
-    void encapsulationtest() {
+    void encapsulationTest() {
         CustomerStore store = new CustomerStore();
         Customer customer = store.createCustomer("teste","teste@teste.com");
         store.saveNewCustomer(customer);

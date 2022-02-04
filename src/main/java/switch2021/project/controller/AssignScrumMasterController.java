@@ -16,9 +16,9 @@ public class AssignScrumMasterController {
     private List<Resource> projectTeamList;
     private Resource resource;
 
-//    /**
-//     * Constructor to UI (with SINGLETON).
-//     **/
+    /**
+     * Constructor to UI (with SINGLETON)
+     **/
 //    public AssignScrumMasterController() {
 //        this.company = App.getInstance().getCompany();
 //    }

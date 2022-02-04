@@ -20,11 +20,11 @@ public class ViewStatusOfActivitiesInAProjectController {
     List<Project> arrayProject;
     List<Task> listOfTasks;
 
-    /*
+    /**
      * Constructor to UI (with SINGLETON)
      **/
 
-    //public ViewStatusOfActivitiesInAProjectController(){ this.company = App.getInstance().getCompany(); }
+//    public ViewStatusOfActivitiesInAProjectController(){ this.company = App.getInstance().getCompany(); }
 
     /**
      * Constructor to test (without SINGLETON)
