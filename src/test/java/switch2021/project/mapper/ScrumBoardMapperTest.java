@@ -54,13 +54,16 @@ public class ScrumBoardMapperTest {
         ScrumBoardMapper mapper = new ScrumBoardMapper();
         UserStory userStory = new UserStory("name", 5, "description", 5);
         UserStory userStory_2 = new UserStory("name_2", 4, "description_2", 6);
+        UserStory userStory_3 = new UserStory("name_2", 4, "description_2", 6);
 
         //Act
         ScrumBoardDTO dto = mapper.toDTO(userStory);
         ScrumBoardDTO dto_2 = mapper.toDTO(userStory_2);
+        ScrumBoardDTO dto_3 = mapper.toDTO(userStory_3);
 
         //Assert
         assertNotEquals(dto,dto_2);
+        assertEquals(dto_2,dto_3);
         assertEquals(dto.getClass(),dto_2.getClass());
     }
 }
