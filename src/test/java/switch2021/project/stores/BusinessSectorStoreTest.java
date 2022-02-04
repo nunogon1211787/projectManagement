@@ -75,9 +75,10 @@ class BusinessSectorStoreTest {
     public void overrideAndHashCodeTest() {
         //Arrange
         BusinessSectorStore list1 = new BusinessSectorStore();
-        list1.addBusinessSector(list1.createBusinessSector("new"));
+        BusinessSector businessSector = list1.createBusinessSector("new");
+        list1.addBusinessSector(businessSector);
         BusinessSectorStore list2 = new BusinessSectorStore();
-        list2.addBusinessSector(list1.createBusinessSector("new"));
+        list2.addBusinessSector(businessSector);
         BusinessSectorStore list3 = new BusinessSectorStore();
         list3.addBusinessSector(list3.createBusinessSector("not new"));
         //Assert
