@@ -255,4 +255,13 @@ class UserStoryTest {
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }
+
+    @Test
+    void isValidUserStoryName5() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            userStory = new UserStory("CCC", 2, "Fazer tal", 5);
+            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        });
+    }
 }
