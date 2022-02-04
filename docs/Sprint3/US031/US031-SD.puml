@@ -182,7 +182,7 @@ Ctrl --> UI: currentResourcesNames
 autoactivate off
 
 autoactivate on
-UI --> actor: Shows resource list and request data\n (name, description, effortEstimate, taskType, \n precedences(optional), responsible)
+UI --> actor: Shows resource list and request data\n (name, description, effortEstimate, \n taskType, responsible)
 
 
 
@@ -209,7 +209,7 @@ deactivate cTDTO
 tMapper -> cTDTO: responsible = getResponsible()
 deactivate cTDTO
 
-tMapper -> newTask**: createTask(name, description, effortEstimate, taskType, responsible)
+tMapper -> newTask**: createTask(name, description, \n effortEstimate, taskType, responsible)
 
 tMapper --> tList: newUsTask
 
