@@ -3,14 +3,14 @@ package switch2021.project.mapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.dto.ResourceDto;
+import switch2021.project.dto.ScrumBoardDTO;
 import switch2021.project.model.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProjectTeamMapperTest {
 
@@ -105,6 +105,66 @@ public class ProjectTeamMapperTest {
         //Asserts
         assertNotNull(resourceDto.getRole());
         assertEquals("Team Member", resourceDto.getRole());
+        assertEquals("manuelbras", resourceDto.getUserName());
+        assertEquals("2021/11/1", resourceDto.getStartDate());
+        assertEquals("2022/11/15", resourceDto.getEndDate());
+        assertEquals(100, resourceDto.getCostPerHour());
+        assertEquals(.5, resourceDto.getPercentageOfAllocation());
+    }
+
+    @Test
+    public void hashCodeTest() {
+        //Arrange
+        ProjectTeamMapper mapper = new ProjectTeamMapper();
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 11, 15);
+        Resource manuelbras = new Resource(user1, startDateMb, endDateMb, 100, .5);
+
+        SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMf = LocalDate.of(2021, 11, 16);
+        LocalDate endDateMf = LocalDate.of(2022, 11, 30);
+        Resource manuelfernandes = new Resource(user5, startDateMf, endDateMf, 100, 1);
+
+        //Act
+        ResourceDto dto = mapper.toDto(manuelbras);
+        ResourceDto dto_3 = mapper.toDto(manuelbras);
+        ResourceDto dto_2 = mapper.toDto(manuelfernandes);
+
+
+        //Assert
+        assertNotEquals(dto.hashCode(),dto_2.hashCode());
+        assertEquals(dto.hashCode(),dto_3.hashCode());
+    }
+
+    @Test
+    public void overrideTest() {
+        //Arrange
+        ProjectTeamMapper mapper = new ProjectTeamMapper();
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 11, 15);
+        Resource manuelbras = new Resource(user1, startDateMb, endDateMb, 100, .5);
+
+        SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMf = LocalDate.of(2021, 11, 16);
+        LocalDate endDateMf = LocalDate.of(2022, 11, 30);
+        Resource manuelfernandes = new Resource(user5, startDateMf, endDateMf, 100, 1);
+
+        //Act
+        ResourceDto dto = mapper.toDto(manuelbras);
+        ResourceDto dto_3 = mapper.toDto(manuelbras);
+        ResourceDto dto_2 = mapper.toDto(manuelfernandes);
+
+
+        //Assert
+        assertNotEquals(dto,dto_2);
+        assertEquals(dto, dto_3);
+        assertEquals(dto.getClass(),dto_2.getClass());
     }
 
 

@@ -66,10 +66,10 @@ class SprintBacklogTest {
         int value = userStoryOfSprint.getEstimateEffort();
         int priority_expected = 8;
 
-        String description = userStoryOfSprint.getUserStoryOfSprint().getDescription();
+        String description = userStoryOfSprint.getStoryOfSprint().getDescription();
         String description_expected = "teste";
 
-        String status_value = userStoryOfSprint.getUserStoryOfSprint().getUserStoryStatus().getDescription();
+        String status_value = userStoryOfSprint.getStoryOfSprint().getUserStoryStatus().getDescription();
         String expected_status = "To do";
 
         //Assert
@@ -130,7 +130,7 @@ class SprintBacklogTest {
         UserStoryOfSprint test = testBacklog.createUSerStoryOfSprint(userStory, 8,
                 company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         testBacklog.saveUserStoryOfSprint(test);
-        test.getUserStoryOfSprint().setIdUserStory(sprintBacklog.getUserStoryOfSprintList().get(0).getUserStoryOfSprint().getIdUserStory());
+        test.getStoryOfSprint().setIdUserStory(sprintBacklog.getUserStoryOfSprintList().get(0).getStoryOfSprint().getIdUserStory());
 
         String expected = test.toString();
 

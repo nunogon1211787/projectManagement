@@ -18,14 +18,6 @@ class UserStoryOfSprintTest {
     String description = "Validate";
     UserStory story = new UserStory("US001", priority, description,5);
 
-//    @Test
-//    void hasCode() {
-//        UserStoryOfSprint userStoryOfSprint = new UserStoryOfSprint(story, 21);
-//        sprintBacklog.addUserStory(userStoryOfSprint);
-//        int id = 1;
-//        assertTrue(userStoryOfSprint.hasCode(id));
-//    }
-
     @Test
     void getSprintIDSuccess() {
         SprintList sprintList = new SprintList();
@@ -62,4 +54,27 @@ class UserStoryOfSprintTest {
         assertNotEquals(userStoryOfSprint.getEstimateEffort(), 4);
     }
 
+    @Test
+    @DisplayName("Test hashCode Method")
+    void HashCodeTest() {
+        UserStory userStory1 = new UserStory("CCC", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("AAA", 2, "Fazer tal e coiso", 5);
+
+        UserStoryOfSprint usSrpint = new UserStoryOfSprint(userStory1,5, new UserStoryStatus("teste"));
+        UserStoryOfSprint usSrpint2 = new UserStoryOfSprint(userStory2,5, new UserStoryStatus("teste"));
+
+        assertNotEquals(usSrpint.hashCode(),usSrpint2.hashCode());
+        assertNotEquals(usSrpint,usSrpint2);
+    }
+
+    @Test
+    @DisplayName("Test get Status")
+    void userStpryOfSprintGetStatus() {
+        UserStory userStory1 = new UserStory("CCC", 2, "Fazer tal", 5);
+
+        UserStoryOfSprint usSrpint = new UserStoryOfSprint(userStory1,5, new UserStoryStatus("teste"));
+
+        assertNotEquals("Fazer tal",usSrpint.getStatus().getDescription());
+        assertEquals(0,usSrpint.getUserStoryOfSprintTasks().size());
+    }
 }

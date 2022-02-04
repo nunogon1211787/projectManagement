@@ -108,14 +108,14 @@ class RequestStoreTest {
         RequestStore requestTestList = new RequestStore();
 
         assertFalse(request.isRequestStatus());
-        request.changeRequestStatus(request);
+        request.changeRequestStatus();
         assertTrue(request.isRequestStatus());
     }
 
     @Test
     public void testStatus() {
 
-        request.changeRequestStatus(request);
+        request.changeRequestStatus();
         assertTrue(request.isRequestStatus());
     }
 
