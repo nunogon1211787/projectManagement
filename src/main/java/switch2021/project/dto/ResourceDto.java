@@ -1,12 +1,7 @@
 package switch2021.project.dto;
 
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
-import switch2021.project.model.ProjectRole;
-import switch2021.project.model.SystemUser;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 
