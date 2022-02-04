@@ -44,7 +44,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
         UserStoryOfSprint value = project.getSprints().getSprintList().get(0).getSprintBacklog().getUserStoryOfSprintList().get(0);
 
         //Assert
-        assertEquals(userStory, value.getUserStoryOfSprint());
+        assertEquals(userStory, value.getStoryOfSprint());
         assertEquals(4,project.getSprints().getSprintList().get(0).getSprintBacklog().getUserStoryOfSprintList().get(0).getEstimateEffort());
     }
 }
