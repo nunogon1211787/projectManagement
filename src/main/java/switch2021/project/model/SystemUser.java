@@ -1,5 +1,6 @@
 package switch2021.project.model;
 
+
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.stores.UserProfileStore;
@@ -28,7 +29,7 @@ public class SystemUser {
      * Constructor
      **/
     public SystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile profile) {
-        checkUserNameRules(userName); // o construtor faz validações
+        checkUserNameRules(userName);
         checkEmailRules(email);
         checkFunctionRules(function);
         checkPasswordRules(password);
@@ -64,31 +65,6 @@ public class SystemUser {
         return deepCopyList;
     }*/
 
-
-    /**
-     * Getting Methods
-     **/
-    public String getUserName() {
-        return this.userName;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public String getPhoto() {
-        return this.photo;
-    }
-
-    public String getFunction() {
-        return this.function;
-    }
-
-    // o getPassword não deveria ser privado??
-    public String getPassword() {
-        return this.password;
-    }
-
     public boolean getActivateUserStatus() {
         return activateUser;
     }
@@ -98,7 +74,7 @@ public class SystemUser {
     }
 
     /**
-     * Setting Methods
+     * Setting Methods (outside of lombock)
      **/
     private void setUserName(String userName) {
         if (!userName.trim().isEmpty() || !(userName.length() < 2)) {
@@ -118,7 +94,6 @@ public class SystemUser {
     }
 
     private void setPhoto(String photo) {
-
         if (!photo.trim().isEmpty()) {
             this.photo = photo;
         }
@@ -141,7 +116,9 @@ public class SystemUser {
         return this.activateUser = true;
     }
 
-    public boolean setInactivateUser() { return this.activateUser = false;}
+    public boolean setInactivateUser() {
+        return this.activateUser = false;
+    }
 
 
     /**

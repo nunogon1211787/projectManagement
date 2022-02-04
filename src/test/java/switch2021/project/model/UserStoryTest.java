@@ -260,8 +260,16 @@ class UserStoryTest {
     void isValidUserStoryName5() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-            userStory = new UserStory("CCC", 2, "Fazer tal", 5);
+            userStory = new UserStory("CC", 2, "Fazer tal", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
+    }
+
+    @Test
+    void hashCodeTest() {
+        UserStory userStory1 = new UserStory("CCC", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("AAA", 2, "Fazer tal e coiso", 5);
+
+        assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
     }
 }
