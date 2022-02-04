@@ -33,7 +33,7 @@ public class Request {
     /**
      * Method to change request status
      * */
-    public void changeRequestStatus(Request request){
+    public void changeRequestStatus(){
         this.requestStatus = true;
     }
 

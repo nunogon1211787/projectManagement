@@ -67,11 +67,11 @@ public class Sprint {
      * Method to get list of tasks within a sprint
      */
     public List<Task> getListOfTasksOfASprint(){
-        List<Task> taskList = new ArrayList<>();
+        List<Task> taskList2 = new ArrayList<>();
 
-        taskList.addAll(this.sprintBacklog.getUserStoryOfSprintTasks());
-        taskList.addAll(this.taskList.getTaskList());
-        return taskList;
+        taskList2.addAll(this.sprintBacklog.getUserStoryOfSprintTasks());
+        taskList2.addAll(this.taskList.getTaskList());
+        return taskList2;
     }
 
     /**
