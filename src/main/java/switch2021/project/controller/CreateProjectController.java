@@ -1,7 +1,6 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.*;
-import switch2021.project.utils.App;
 
 import java.time.LocalDate;
 
@@ -32,7 +31,7 @@ public class CreateProjectController {
      **/
 
     public Typology getTypology(String typo) {
-        return company.getTypologyStore().getTypologyByDescription(typo);
+        return company.getTypologyStore().getTypology(typo);
     }
 
     public Customer getCustomer(String customer) {

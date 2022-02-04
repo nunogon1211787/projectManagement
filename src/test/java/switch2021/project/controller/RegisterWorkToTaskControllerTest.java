@@ -23,7 +23,7 @@ public class RegisterWorkToTaskControllerTest {
         RegisterWorkToTaskController controller = new RegisterWorkToTaskController(company, mapper);
         ProjectStore projectStore = company.getProjectStore();
         //Project
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -74,7 +74,7 @@ public class RegisterWorkToTaskControllerTest {
         RegisterWorkToTaskController controller = new RegisterWorkToTaskController(company, mapper);
         ProjectStore projectStore = company.getProjectStore();
         //Project
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -128,7 +128,7 @@ public class RegisterWorkToTaskControllerTest {
         RegisterWorkToTaskController controller = new RegisterWorkToTaskController(company, mapper);
         ProjectStore projectStore = company.getProjectStore();
         //Project
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,

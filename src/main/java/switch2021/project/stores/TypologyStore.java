@@ -87,7 +87,7 @@ public class TypologyStore {
     }
 
     //Get typology by description
-    public Typology getTypologyByDescription(String description) {
+    public Typology getTypology(String description) {
         Typology typo = null;
 
         for (Typology i : this.typologyList) {
@@ -100,7 +100,7 @@ public class TypologyStore {
     }
 
     // Get typology by ID
-    public Typology getTypologyByID(int id_Typology) {
+    public Typology getTypology(int id_Typology) {
         Typology typo = null;
 
         for (Typology i : this.typologyList) {

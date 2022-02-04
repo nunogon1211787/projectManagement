@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
-import switch2021.project.stores.SystemUserStore;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -26,7 +25,7 @@ public class CreateSprintControllerTest {
         CreateSprintController controller = new CreateSprintController(company);
 
         ProjectStore projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -56,7 +55,7 @@ public class CreateSprintControllerTest {
         Company company = new Company();
         CreateSprintController controller = new CreateSprintController(company);
         this.projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -92,7 +91,7 @@ public class CreateSprintControllerTest {
         Company company = new Company();
         CreateSprintController controller = new CreateSprintController(company);
         this.projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -131,7 +130,7 @@ public class CreateSprintControllerTest {
         Company company = new Company();
         CreateSprintController controller = new CreateSprintController(company);
         this.projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,

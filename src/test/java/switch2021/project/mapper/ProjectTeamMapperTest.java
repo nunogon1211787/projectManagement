@@ -22,7 +22,7 @@ public class ProjectTeamMapperTest {
         ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
 
         //create project and save it
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
         company.getCustomerStore().saveNewCustomer(customer);
         BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
@@ -82,7 +82,7 @@ public class ProjectTeamMapperTest {
         Company company = new Company();
 
         //create project and save it
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
         BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -97,14 +97,14 @@ public class ProjectTeamMapperTest {
 
         Resource resource = new Resource(user1, startDateMb, endDateMb, 100, .5);
         ProjectTeamMapper projectTeamMapper1 = new ProjectTeamMapper();
-        manuelbras.setRole(new ProjectRole(1, "Manager"));
+        manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
 
         //Act
         ResourceDto resourceDto = projectTeamMapper1.toDto(manuelbras);
 
         //Asserts
         assertNotNull(resourceDto.getRole());
-        assertEquals("Manager", resourceDto.getRole());
+        assertEquals("Team Member", resourceDto.getRole());
     }
 
 

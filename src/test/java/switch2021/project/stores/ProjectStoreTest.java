@@ -19,7 +19,7 @@ public class ProjectStoreTest {
     @BeforeEach
     public void init() {
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -83,7 +83,7 @@ public class ProjectStoreTest {
     }
 
     Company company = new Company();
-    Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+    Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
     Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
@@ -257,7 +257,7 @@ public class ProjectStoreTest {
         Company company = new Company();
         ProjectStore projectStore = company.getProjectStore();
         //Project
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -280,7 +280,7 @@ public class ProjectStoreTest {
         //Arrange
         Company company = new Company();
         //Project
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //list1 and list2 are equals

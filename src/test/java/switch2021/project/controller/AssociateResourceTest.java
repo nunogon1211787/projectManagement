@@ -49,7 +49,7 @@ public class AssociateResourceTest {
         AssociateResourceController controller = new AssociateResourceController(company);
         ProjectStore projectStore = company.getProjectStore();
         //Project1
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = projectStore.createProject("prototype4", "proj4Prototype", customer,

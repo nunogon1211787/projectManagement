@@ -4,7 +4,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.dto.StartASprintDTO;
 import switch2021.project.model.*;
-import switch2021.project.stores.SprintList;
 
 import java.time.LocalDate;
 
@@ -23,7 +22,7 @@ public class StartASprintControllerTest {
 
         StartASprintController startASprintController = new StartASprintController(company);
 
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
