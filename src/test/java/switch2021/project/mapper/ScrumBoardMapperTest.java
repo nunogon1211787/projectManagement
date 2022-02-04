@@ -63,6 +63,9 @@ public class ScrumBoardMapperTest {
         userStory_4.setUserStoryStatus(store.getUserStoryStatusByDescription("Done"));
         UserStory userStory_5 = new UserStory("name_2", 4, "description_3", 6);
         UserStory userStory_6 = new UserStory("name_asd", 4, "description_3", 6);
+        UserStory userStory_7 = new UserStory("name_asd", 4, "description_7", 6);
+        UserStory userStory_8 = new UserStory("name_asd", 4, "description_7", 6);
+        userStory_8.setTimeEstimate(555);
 
         //Act
         ScrumBoardDTO dto = mapper.toDTO(userStory);
@@ -71,13 +74,19 @@ public class ScrumBoardMapperTest {
         ScrumBoardDTO dto_4 = mapper.toDTO(userStory_4);
         ScrumBoardDTO dto_5 = mapper.toDTO(userStory_5);
         ScrumBoardDTO dto_6 = mapper.toDTO(userStory_6);
+        ScrumBoardDTO dto_7 = mapper.toDTO(userStory_7);
+        ScrumBoardDTO dto_8 = mapper.toDTO(userStory_8);
 
         //Assert
         assertNotEquals(dto,dto_2);
         assertNotEquals(dto_4,dto_3);
         assertNotEquals(dto_4,dto_5);
         assertNotEquals(dto_6,dto_5);
+        assertNotEquals(dto_6, null);
+        assertNotEquals(dto_6, dto_7);
+        assertNotEquals(dto_8, dto_7);
         assertEquals(dto_2,dto_3);
         assertEquals(dto.getClass(),dto_2.getClass());
+
     }
 }
