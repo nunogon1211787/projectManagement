@@ -14,7 +14,7 @@ public class ProjectRole {
     /**
      * Classe ProjectRoles Atributes
      **/
-    private int id_Role;
+    private int idRole;
     private String name;
 
 
@@ -34,7 +34,7 @@ public class ProjectRole {
      * Copy Constructor
      **/
     public ProjectRole(ProjectRole originalProfile) {
-        this.id_Role = originalProfile.id_Role;
+        this.idRole = originalProfile.idRole;
         this.name = originalProfile.name;
     }
 

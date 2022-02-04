@@ -137,7 +137,7 @@ public class TaskList {
             result = true;
 
             if (!validateIfTaskAlreadyExists(newTask)) {
-                newTask.setIdTask(id_TaskGenerator());
+                newTask.setIdTask(idTaskGenerator());
                 addTaskToTheList(newTask);
             }
 
@@ -156,7 +156,7 @@ public class TaskList {
     /**
      * ID Generator
      **/
-    public int id_TaskGenerator() {
+    public int idTaskGenerator() {
         int id = 1;
         if (this.taskList.size() > 0) {
             id = this.taskList.get(taskList.size() - 1).getIdTask() + 1;

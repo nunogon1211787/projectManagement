@@ -72,7 +72,7 @@ public class StartASprintControllerTest {
         //Act
 
         StartASprintDTO sprintDTO = new StartASprintDTO(proj1.getCode(),
-                proj1.getSprints().getSprintList().get(0).getId_Sprint(),
+                proj1.getSprints().getSprintList().get(0).getIdSprint(),
                 LocalDate.of(2022, 1, 16));
 
         //Assert

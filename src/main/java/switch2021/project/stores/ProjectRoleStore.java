@@ -48,10 +48,10 @@ public class ProjectRoleStore {
     /**
      * ID Generator
      **/
-    public int id_ProjectRoleGenerator() {
+    public int idProjectRoleGenerator() {
         int id = 1;
         if (this.projectRoleList.size() > 0) {
-            id = this.projectRoleList.get(projectRoleList.size() - 1).getId_Role() + 1;
+            id = this.projectRoleList.get(projectRoleList.size() - 1).getIdRole() + 1;
         }
         return id;
     } //if the object isn´t saved on the list, the id will be the same for all
@@ -68,7 +68,7 @@ public class ProjectRoleStore {
             this.projectRoleList.add(role);
             msg = true;
         } else {
-            role.setId_Role(id_ProjectRoleGenerator());
+            role.setIdRole(idProjectRoleGenerator());
             this.projectRoleList.add(role);
             msg = true;
         }
@@ -108,7 +108,7 @@ public class ProjectRoleStore {
         ProjectRole projRole = null;
 
         for (ProjectRole i : projectRoleList) {
-            if (i.getId_Role() == id) {
+            if (i.getIdRole() == id) {
                 projRole = i;
             }
         }
@@ -144,7 +144,7 @@ public class ProjectRoleStore {
     private boolean validateIdProjectRole(ProjectRole role) {
         boolean msg = false;
         for (ProjectRole up : projectRoleList) {
-            if (up.getId_Role() == (role.getId_Role())) {
+            if (up.getIdRole() == (role.getIdRole())) {
                 msg = true;
                 break;
             }
@@ -160,7 +160,7 @@ public class ProjectRoleStore {
         if (validateProjectRole(role)) {
             throw new IllegalArgumentException("Repeated Project Role inserted.");
         } else {
-            role.setId_Role(id_ProjectRoleGenerator());
+            role.setIdRole(idProjectRoleGenerator());
         }
         return addProjectRole(role);
     }

@@ -12,7 +12,7 @@ import java.util.Objects;
 
 public class UserStoryStatus {
     /** Classe UserStoryStatus Atributes **/
-    private int id_UserStoryStatus;
+    private int idUserStoryStatus;
     private String description;
     private boolean sprintAvailable;  //this attribute means it is available as a status in sprint backlog
 
@@ -36,11 +36,11 @@ public class UserStoryStatus {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserStoryStatus that = (UserStoryStatus) o;
-        return id_UserStoryStatus == that.id_UserStoryStatus && sprintAvailable == that.sprintAvailable && Objects.equals(description, that.description);
+        return idUserStoryStatus == that.idUserStoryStatus && sprintAvailable == that.sprintAvailable && Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_UserStoryStatus, description, sprintAvailable);
+        return Objects.hash(idUserStoryStatus, description, sprintAvailable);
     }
 }

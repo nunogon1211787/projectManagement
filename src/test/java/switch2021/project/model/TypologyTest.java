@@ -44,7 +44,7 @@ public class TypologyTest {
         //Arrange
         Typology typo = new Typology("Teste");
         //Assert
-        assertEquals(0,typo.getId_Typology());
+        assertEquals(0,typo.getIdTypology());
     }
 
     @Test
@@ -52,9 +52,9 @@ public class TypologyTest {
         //Arrange
         Typology typo = new Typology("Teste");
         //Act
-        typo.setId_Typology(3);
+        typo.setIdTypology(3);
         //Assert
-        assertEquals(3,typo.getId_Typology());
+        assertEquals(3,typo.getIdTypology());
     }
 
     @Test

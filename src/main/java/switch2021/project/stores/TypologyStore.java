@@ -53,10 +53,10 @@ public class TypologyStore {
      * objects. This issue will be solved when calling the save method.
      **/
 
-    public int id_TypologyGenerator() {
+    public int idTypologyGenerator() {
         int id = 1;
         if (this.typologyList.size() > 0) {
-            id = this.typologyList.get(typologyList.size() - 1).getId_Typology() + 1;
+            id = this.typologyList.get(typologyList.size() - 1).getIdTypology() + 1;
         }
         return id;
     }
@@ -66,10 +66,10 @@ public class TypologyStore {
      **/
 
     private boolean addTypology(Typology typo) {
-        if (validateId_Typology(typo)) {
+        if (validateIdTypology(typo)) {
             this.typologyList.add(typo);
         } else {
-            typo.setId_Typology(id_TypologyGenerator());
+            typo.setIdTypology(idTypologyGenerator());
             this.typologyList.add(typo);
         }
         return true;
@@ -120,7 +120,7 @@ public class TypologyStore {
         Typology typo = null;
 
         for (Typology i : this.typologyList) {
-            if (i.getId_Typology() == id_Typology) {
+            if (i.getIdTypology() == id_Typology) {
                 typo = i;
                 break;
             }
@@ -133,11 +133,11 @@ public class TypologyStore {
      * Validation Methods
      **/
 
-    private boolean validateId_Typology(Typology typo) {
+    private boolean validateIdTypology(Typology typo) {
         boolean msg = true;
 
         for (Typology i : this.typologyList) {
-            if (i.getId_Typology() == typo.getId_Typology()) {
+            if (i.getIdTypology() == typo.getIdTypology()) {
                 msg = false;
                 break;
             }
@@ -166,7 +166,7 @@ public class TypologyStore {
         if (!validateTypology(typo)) {
             throw new IllegalArgumentException("Repeated typology description inserted.");
         } else {
-            typo.setId_Typology(id_TypologyGenerator());
+            typo.setIdTypology(idTypologyGenerator());
         }
         return addTypology(typo);
     }

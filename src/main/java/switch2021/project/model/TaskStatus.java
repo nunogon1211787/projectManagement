@@ -32,7 +32,7 @@ public class TaskStatus {
         return Objects.equals(this.description, description);
     }
 
-    public void setID_TaskStatus(int id){
+    public void setIDTaskStatus(int id){
         checkIdRules(id);
         this.idTaskStatus = id;
     }

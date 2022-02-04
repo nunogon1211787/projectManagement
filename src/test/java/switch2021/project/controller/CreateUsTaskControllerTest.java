@@ -60,7 +60,7 @@ class CreateUsTaskControllerTest {
         userStory.getTasks().saveTask(newTask2);
 
         //Get us task list
-        List<String> tasksNames = controller.getUsTasks(project.getCode(), sprint.getId_Sprint(), userStory.getId_UserStory());
+        List<String> tasksNames = controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
 
         //Asserts
         assertEquals(2, tasksNames.size());
@@ -92,7 +92,7 @@ class CreateUsTaskControllerTest {
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
 
         //Get us task list
-        List<String> tasksNames = controller.getUsTasks(project.getCode(), sprint.getId_Sprint(), userStory.getId_UserStory());
+        List<String> tasksNames = controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
 
         //Asserts
         assertEquals(0, tasksNames.size());
@@ -135,7 +135,7 @@ class CreateUsTaskControllerTest {
         project.getProjectTeam().saveResource(res3);
 
         //Get project team names
-        controller.getUsTasks(project.getCode(), sprint.getId_Sprint(), userStory.getId_UserStory());
+        controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
         List<String> test = controller.getCurrentProjectTeam();
 
         //Asserts
@@ -170,7 +170,7 @@ class CreateUsTaskControllerTest {
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
 
         //Get project team names
-        controller.getUsTasks(project.getCode(), sprint.getId_Sprint(), userStory.getId_UserStory());
+        controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
         List<String> test = controller.getCurrentProjectTeam();
 
         //Asserts
@@ -213,7 +213,7 @@ class CreateUsTaskControllerTest {
         project.getProjectTeam().saveResource(res3);
 
         //Create a new us Task
-        controller.getUsTasks(project.getCode(), sprint.getId_Sprint(), userStory.getId_UserStory());
+        controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
         CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test3");
 
 
@@ -266,7 +266,7 @@ class CreateUsTaskControllerTest {
         userStory.getTasks().saveTask(newTask2);
 
         //Create a new us Task
-        controller.getUsTasks(project.getCode(), sprint.getId_Sprint(), userStory.getId_UserStory());
+        controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
         CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test3");
 
 

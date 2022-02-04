@@ -60,7 +60,7 @@ class UserStoryTest {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
         productBacklog.saveUserStory(userStory);
 
-        boolean expected = userStory.hasCode(userStory.getId_UserStory());
+        boolean expected = userStory.hasCode(userStory.getIdUserStory());
         assertTrue(expected);
     }
 
@@ -91,7 +91,7 @@ class UserStoryTest {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         userStory.setParentUserStory(userStoryToRefine);
-        assertEquals(userStoryToRefine, sprint.getSprintBacklog().getUserStory(userStory.getId_UserStory()).getParentUserStory());
+        assertEquals(userStoryToRefine, sprint.getSprintBacklog().getUserStory(userStory.getIdUserStory()).getParentUserStory());
     }
 
 

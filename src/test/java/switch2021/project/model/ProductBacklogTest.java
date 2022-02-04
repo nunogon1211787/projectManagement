@@ -446,15 +446,15 @@ public class ProductBacklogTest {
 
         UserStory userStory = productBacklog.createUserStory("US001", 1, "create user story", 5);
         userStory.setUserStoryStatus(company.getUserStoryStatusStore().getUserStoryStatusByDescription("Done"));
-        userStory.getId_UserStory();
+        userStory.getIdUserStory();
 
         UserStory userStory1 = productBacklog.createUserStory("US001", 3, "sort user story", 5);
         userStory1.setUserStoryStatus(company.getUserStoryStatusStore().getUserStoryStatusByDescription("Cancelled"));
-        userStory1.getId_UserStory();
+        userStory1.getIdUserStory();
 
         UserStory userStory2 = productBacklog.createUserStory("US001", 1, "backlog sorted", 5);
         userStory2.setUserStoryStatus(company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do"));
-        userStory2.setId_UserStory(1);
+        userStory2.setIdUserStory(1);
 
         List<UserStory> userStories = new ArrayList<>();
         userStories.add(userStory);

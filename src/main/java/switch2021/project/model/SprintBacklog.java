@@ -101,7 +101,7 @@ public class SprintBacklog {
     @Deprecated
     public boolean saveUserStoryOfSprint(UserStoryOfSprint story) {
         if (!validateUserStoryOfSprint(story)) {
-            story.setId_UserStoryOfSprint(id_UserStoryOfSprintGenerator());
+            story.setIdUserStoryOfSprint(id_UserStoryOfSprintGenerator());
         }
         this.userStoryOfSprintList.add(story);
         return true;
@@ -126,7 +126,7 @@ public class SprintBacklog {
     public int id_UserStoryOfSprintGenerator() {
         int id = 1;
         if(this.userStoryOfSprintList.size() > 0) {
-            id = this.userStoryOfSprintList.get(userStoryOfSprintList.size()-1).getId_UserStoryOfSprint() + 1;
+            id = this.userStoryOfSprintList.get(userStoryOfSprintList.size()-1).getIdUserStoryOfSprint() + 1;
         }
         return id;
     }

@@ -56,7 +56,7 @@ class CreateSprintTaskControllerTest {
         sprint.getTaskList().saveTask(newTask2);
 
             //Get sprint task list
-        List<String> tasksNames = controller.getSprintTasks(project.getCode(), sprint.getId_Sprint());
+        List<String> tasksNames = controller.getSprintTasks(project.getCode(), sprint.getIdSprint());
 
         //Asserts
         assertEquals(2, tasksNames.size());
@@ -84,7 +84,7 @@ class CreateSprintTaskControllerTest {
         project.getSprints().saveSprint(sprint);
 
         //Get sprint task list
-        List<String> tasksNames = controller.getSprintTasks(project.getCode(), sprint.getId_Sprint());
+        List<String> tasksNames = controller.getSprintTasks(project.getCode(), sprint.getIdSprint());
 
         //Asserts
         assertEquals(0, tasksNames.size());
@@ -122,7 +122,7 @@ class CreateSprintTaskControllerTest {
         project.getProjectTeam().saveResource(res3);
 
             //Get project team names
-        controller.getSprintTasks(project.getCode(), sprint.getId_Sprint());
+        controller.getSprintTasks(project.getCode(), sprint.getIdSprint());
         List<String> test = controller.getCurrentProjectTeam();
 
         //Asserts
@@ -152,7 +152,7 @@ class CreateSprintTaskControllerTest {
         project.getSprints().saveSprint(sprint);
 
         //Get project team names
-        controller.getSprintTasks(project.getCode(), sprint.getId_Sprint());
+        controller.getSprintTasks(project.getCode(), sprint.getIdSprint());
         List<String> test = controller.getCurrentProjectTeam();
 
         //Asserts
@@ -191,7 +191,7 @@ class CreateSprintTaskControllerTest {
         project.getProjectTeam().saveResource(res3);
 
             //Create a new Sprint Task
-        controller.getSprintTasks(project.getCode(), sprint.getId_Sprint());
+        controller.getSprintTasks(project.getCode(), sprint.getIdSprint());
         CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test3");
 
         //Asserts
@@ -239,7 +239,7 @@ class CreateSprintTaskControllerTest {
         sprint.getTaskList().saveTask(newTask2);
 
         //Create a new Sprint Task
-        controller.getSprintTasks(project.getCode(), sprint.getId_Sprint());
+        controller.getSprintTasks(project.getCode(), sprint.getIdSprint());
         CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test3");
 
         //Asserts

@@ -101,7 +101,7 @@ public class TaskTypeStore {
                 for (int i = 0; i < this.taskTypeList.size(); i++) {
 
                     if (validateNewTypeName(type)) {
-                        type.setType_ID(id_TaskTypeGenerator());
+                        type.setType_ID(idTaskTypeGenerator());
                         this.taskTypeList.add(type);
                     }
 
@@ -109,7 +109,7 @@ public class TaskTypeStore {
 
             } else {
 
-                    type.setType_ID(id_TaskTypeGenerator());
+                    type.setType_ID(idTaskTypeGenerator());
                     this.taskTypeList.add(type);
 
             }
@@ -140,7 +140,7 @@ public class TaskTypeStore {
      * ID Generator
      **/
 
-    public int id_TaskTypeGenerator() {
+    public int idTaskTypeGenerator() {
         int id = 1;
         if (this.taskTypeList.size() > 0) {
             id = this.taskTypeList.get(taskTypeList.size() - 1).getType_ID() + 1;

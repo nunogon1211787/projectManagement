@@ -111,7 +111,7 @@ class SprintBacklogTest {
     public void UserStoryInSprintFail_AlreadyExists() {
         UserStoryStatus status = new UserStoryStatus("statusTest");
         UserStory userStory = new UserStory("US001", 2, "teste", 5);
-        userStory.setId_UserStory(1);
+        userStory.setIdUserStory(1);
         UserStoryOfSprint userStoryOfSprint = sprintBacklog.createUSerStoryOfSprint(userStory, 5,
                 company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         sprintBacklog.saveUserStoryOfSprint(userStoryOfSprint);
@@ -130,7 +130,7 @@ class SprintBacklogTest {
         UserStoryOfSprint test = testBacklog.createUSerStoryOfSprint(userStory, 8,
                 company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
         testBacklog.saveUserStoryOfSprint(test);
-        test.getUserStoryOfSprint().setId_UserStory(sprintBacklog.getUserStoryOfSprintList().get(0).getUserStoryOfSprint().getId_UserStory());
+        test.getUserStoryOfSprint().setIdUserStory(sprintBacklog.getUserStoryOfSprintList().get(0).getUserStoryOfSprint().getIdUserStory());
 
         String expected = test.toString();
 
