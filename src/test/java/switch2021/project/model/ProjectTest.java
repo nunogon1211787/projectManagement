@@ -406,5 +406,20 @@ class ProjectTest {
         assertEquals(2,store.getProjects().size());
     }
 
+    @Test
+    @DisplayName("Validate resource - add fail")
+    void addResource() {
+        //Arrange
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMo = LocalDate.of(2021, 11, 1);
+        LocalDate endDateMo = LocalDate.of(2021, 11, 15);
+        Resource manueloliveira = new Resource(user4, startDateMo, endDateMo, 100, .3333);
+        //Act
+        proj3.addResource(manueloliveira);
+        boolean addResource = proj3.addResource(manueloliveira);
+        //Assert
+        assertFalse(addResource);
+    }
 
 }
