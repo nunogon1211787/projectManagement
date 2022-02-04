@@ -128,4 +128,21 @@ class CustomerStoreTest {
 
         assertFalse(store.validateCustomer(customerTest));
     }
+
+    @Test
+    public void overrideAndHashCodeTest() {
+        //Arrange
+        CustomerStore list1 = new CustomerStore();
+        list1.saveNewCustomer(list1.createCustomer("new","email@isep.pt"));
+        CustomerStore list2 = new CustomerStore();
+        list2.saveNewCustomer(list1.createCustomer("new","email@isep.pt"));
+        CustomerStore list3 = new CustomerStore();
+        list3.saveNewCustomer(list3.createCustomer("not new", "email@isep.pt"));
+        //Assert
+        assertNotSame(list1, list2);
+        assertEquals(list1, list2);
+        assertEquals(list1.hashCode(), list2.hashCode());
+        assertNotEquals(list1, list3);
+        assertNotEquals(list1.hashCode(), list3.hashCode());
+    }
 }

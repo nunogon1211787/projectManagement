@@ -1,6 +1,7 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.Company;
 import switch2021.project.model.ProjectStatus;
 
 import java.util.ArrayList;
@@ -110,5 +111,22 @@ class ProjectStatusStoreTest {
         status1.setDescription("teste2");
 
         assertEquals("teste2",status1.getDescription());
+    }
+
+    @Test
+    public void overrideAndHashCodeTest() {
+        //Arrange
+        ProjectStatusStore list1 = new ProjectStatusStore();
+        list1.add(list1.createProjectStatus("new"));
+        ProjectStatusStore list2 = new ProjectStatusStore();
+        list2.add(list1.createProjectStatus("new"));
+        ProjectStatusStore list3 = new ProjectStatusStore();
+        list3.add(list3.createProjectStatus("not new"));
+        //Assert
+        assertNotSame(list1, list2);
+        assertEquals(list1, list2);
+        assertEquals(list1.hashCode(), list2.hashCode());
+        assertNotEquals(list1, list3);
+        assertNotEquals(list1.hashCode(), list3.hashCode());
     }
 }

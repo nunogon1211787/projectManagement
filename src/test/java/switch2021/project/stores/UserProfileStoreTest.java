@@ -195,6 +195,22 @@ public class UserProfileStoreTest {
 
     }
 
+    @Test
+    public void overrideAndHashCodeTest() {
+        //Arrange
+        UserProfileStore list1 = new UserProfileStore();
+        list1.saveUserProfile(list1.createProfile("new"));
+        UserProfileStore list2 = new UserProfileStore();
+        list2.saveUserProfile(list1.createProfile("new"));
+        UserProfileStore list3 = new UserProfileStore();
+        list3.saveUserProfile(list3.createProfile("not new"));
+        //Assert
+        assertNotSame(list1, list2);
+        assertEquals(list1, list2);
+        assertEquals(list1.hashCode(), list2.hashCode());
+        assertNotEquals(list1, list3);
+        assertNotEquals(list1.hashCode(), list3.hashCode());
+    }
 
 }
 

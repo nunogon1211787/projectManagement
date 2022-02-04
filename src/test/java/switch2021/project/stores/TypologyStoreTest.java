@@ -226,4 +226,21 @@ public class TypologyStoreTest {
             typologyStore.saveTypology(typo1);
         });
     }
+
+    @Test
+    public void overrideAndHashCodeTest() {
+        //Arrange
+        TypologyStore list1 = new TypologyStore ();
+        list1.saveTypology(list1.createTypology("new"));
+        TypologyStore  list2 = new TypologyStore ();
+        list2.saveTypology(list1.createTypology("new"));
+        TypologyStore  list3 = new TypologyStore ();
+        list3.saveTypology(list3.createTypology("not new"));
+        //Assert
+        assertNotSame(list1, list2);
+        assertEquals(list1, list2);
+        assertEquals(list1.hashCode(), list2.hashCode());
+        assertNotEquals(list1, list3);
+        assertNotEquals(list1.hashCode(), list3.hashCode());
+    }
 }
