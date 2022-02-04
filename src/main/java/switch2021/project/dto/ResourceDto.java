@@ -7,8 +7,9 @@ import switch2021.project.model.ProjectRole;
 import switch2021.project.model.SystemUser;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
-@Data
+
 @Getter
 public class ResourceDto {
 
@@ -34,5 +35,18 @@ public class ResourceDto {
         this.role = role;
         this.costPerHour = costPerHour;
         this.percentageOfAllocation = percentageOfAllocation;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ResourceDto that = (ResourceDto) o;
+        return Double.compare(that.costPerHour, costPerHour) == 0 && Double.compare(that.percentageOfAllocation, percentageOfAllocation) == 0 && Objects.equals(userName, that.userName) && Objects.equals(role, that.role) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userName, role, startDate, endDate, costPerHour, percentageOfAllocation);
     }
 }
