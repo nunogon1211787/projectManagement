@@ -19,9 +19,9 @@ public class UserStoryOfSprint {
      **/
     private int idUserStoryOfSprint;
     private int estimateEffort;
-    private UserStory userStoryOfSprint;
+    private final UserStory storyOfSprint;
     private UserStoryStatus status;
-    private List<Task> userStoryOfSprintTasks;
+    private final List<Task> userStoryOfSprintTasks;
 
     /**
      * Constructor
@@ -30,7 +30,7 @@ public class UserStoryOfSprint {
     public UserStoryOfSprint(UserStory story, int effort, UserStoryStatus status) {
         validateFields(effort, story);
         this.estimateEffort = effort;
-        this.userStoryOfSprint = story;
+        this.storyOfSprint = story;
         this.userStoryOfSprintTasks = new ArrayList<>();
         this.status = status;
     }
@@ -38,7 +38,7 @@ public class UserStoryOfSprint {
     public UserStoryOfSprint(UserStory story, int effort, int userStoryId) {
         validateFields(effort, story);
         this.estimateEffort = effort;
-        this.userStoryOfSprint = story;
+        this.storyOfSprint = story;
         this.idUserStoryOfSprint = userStoryId;
         this.userStoryOfSprintTasks = new ArrayList<>();
     }
@@ -58,8 +58,8 @@ public class UserStoryOfSprint {
         ;
     }
 
-    public UserStory getUserStoryOfSprint() {
-        return userStoryOfSprint;
+    public UserStory getStoryOfSprint() {
+        return storyOfSprint;
     }
 
     public void setIdUserStoryOfSprint(int idUserStoryOfSprint) {
@@ -85,20 +85,20 @@ public class UserStoryOfSprint {
         if (this == o) return true;
         if (!(o instanceof UserStoryOfSprint)) return false;
         UserStoryOfSprint that = (UserStoryOfSprint) o;
-        return estimateEffort == that.estimateEffort && userStoryOfSprint.equals(that.userStoryOfSprint)
-                && userStoryOfSprintTasks.equals(that.userStoryOfSprintTasks);//TODO This override doesnt compare ID
+        return estimateEffort == that.estimateEffort && storyOfSprint.equals(that.storyOfSprint)
+                && userStoryOfSprintTasks.equals(that.userStoryOfSprintTasks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(estimateEffort, userStoryOfSprint);
+        return Objects.hash(estimateEffort, storyOfSprint);
     }
 
     @Override
     public String toString() {
         return "UserStoryOfSprint{" +
                 "estimateEffort=" + estimateEffort +
-                ", userStoryOfSprint=" + userStoryOfSprint +
+                ", userStoryOfSprint=" + storyOfSprint +
                 '}';
     }
 
