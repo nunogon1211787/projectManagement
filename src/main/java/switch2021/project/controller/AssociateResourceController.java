@@ -22,12 +22,6 @@ public class AssociateResourceController {
     List<SystemUser> arraySystemUser;
 
     /**
-     * Constructor to UI (with SINGLETON)
-     **/
-
-    //public AssociateResourceController(){ this.company = App.getInstance().getCompany(); }
-
-    /**
      * Constructor to test (without SINGLETON)
      **/
 

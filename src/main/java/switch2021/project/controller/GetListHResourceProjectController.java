@@ -17,14 +17,6 @@ public class GetListHResourceProjectController {
     private List<Resource> projectTeamList;
     private ProjectTeamMapper projectTeamMapper;
 
-
-    /**
-     * Constructor to UI (with SINGLETON)
-     */
-//    public GetListHResourceProjectController(){
-//        this.company = App.getInstance().getCompany();
-//    }
-
     /**
      * Constructor to test (without SINGLETON)
      */
