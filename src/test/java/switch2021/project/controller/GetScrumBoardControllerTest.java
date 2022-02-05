@@ -29,10 +29,11 @@ public class GetScrumBoardControllerTest {
         company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().saveUserStory(userStory);
         company.getProjectStore().getProjectByCode("Project_2022_1").getSprints().getCurrentSprint().getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
 
-        //
+        //Act
         ScrumBoardMapper mapper = new ScrumBoardMapper();
         GetScrumBoardController controller = new GetScrumBoardController(company,mapper);
 
+        //Assert
         assertEquals(controller.getScrumBoard("Project_2022_1").get(0).getUserStoryId(),mapper.toDTO(userStory).getUserStoryId());
         assertEquals(controller.getScrumBoard("Project_2022_1").get(0).getUserStoryPriority(),mapper.toDTO(userStory).getUserStoryPriority());
         assertEquals(controller.getScrumBoard("Project_2022_1").get(0).getUserStoryTimeEstimate(),mapper.toDTO(userStory).getUserStoryTimeEstimate());

@@ -17,14 +17,6 @@ public class AddUserStoryToSprintBacklogController {
     private Sprint sprint;
 
     /**
-     * Constructor to UI (with SINGLETON)
-     **/
-
-/*    public AddUserStoryToSprintBacklogController() {
-        this.company = App.getInstance().getCompany();
-    }*/
-
-    /**
      * Constructor to test (without SINGLETON)
      **/
 
