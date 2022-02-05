@@ -2,7 +2,6 @@ package switch2021.project.controller;
 
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
-import switch2021.project.stores.UserStoryStatusStore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,6 @@ public class UpdateStatusUsController {
          **/
 
         private final Company company;
-        private final UserStoryStatusStore usStore = new UserStoryStatusStore();
         private ProjectStore projectStore;
         private Project project;
         private Sprint sprint;
