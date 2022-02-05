@@ -40,6 +40,7 @@ public class SystemUserWithStatusControllerTest {
         company.getSystemUserStore().saveSystemUser(newUser);
         SystemUser newUser2 = company.getSystemUserStore().createSystemUser("Cris", "Cris@ipp.pt",
                 function, password, passwordConfirmation, photo, profile);
+        newUser2.setActivateUser(true);
         company.getSystemUserStore().saveSystemUser(newUser2);
         // Act
         List<SystemUserWithStatusDto> systemUserWithStatusDto = systemUserWithStatusController.getListSystemUserWithStatus();
@@ -47,6 +48,40 @@ public class SystemUserWithStatusControllerTest {
         // Assert
         assertEquals(2, systemUserWithStatusDto.size());
     }
+
+    @Test
+    @DisplayName("check if the list is empty")
+    void getListSystemUserWithStatusEmptyList() {
+        //Arrange
+        Company company = new Company();
+        SystemUserWithStatusMapper mapper = new SystemUserWithStatusMapper();
+        SystemUserWithStatusController systemUserWithStatusController = new SystemUserWithStatusController(company, mapper);
+
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String passwordConfirmation = "ghi";
+        String function = "tester";
+        String photo = "photo";
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+
+        List<UserProfile> assignedProfileExpected = new ArrayList<>();
+        assignedProfileExpected.add(profile);
+
+        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
+                passwordConfirmation, photo, profile);
+        newUser.setActivateUser(true);
+        SystemUser newUser2 = company.getSystemUserStore().createSystemUser("Cris", "Cris@ipp.pt",
+                function, password, passwordConfirmation, photo, profile);
+        newUser2.setActivateUser(false);
+        // Act
+        List<SystemUserWithStatusDto> systemUserWithStatusDto = systemUserWithStatusController.getListSystemUserWithStatus();
+
+        // Assert
+        assertEquals(0, systemUserWithStatusDto.size());
+    }
+
+
 
     @Test
     @DisplayName("check if the created DTO list contains correct information")
@@ -73,6 +108,7 @@ public class SystemUserWithStatusControllerTest {
         company.getSystemUserStore().saveSystemUser(newUser);
         SystemUser newUser2 = company.getSystemUserStore().createSystemUser("Cris", "Cris@ipp.pt",
                 function, password, passwordConfirmation, photo, profile);
+        newUser2.setActivateUser();
         company.getSystemUserStore().saveSystemUser(newUser2);
 
         // Act

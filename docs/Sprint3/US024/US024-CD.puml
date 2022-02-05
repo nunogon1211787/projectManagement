@@ -43,7 +43,7 @@ class SystemUser {
 class SystemUserWithStatusDto {
 +create()
 +create(userName, email, ativateUserStatus)
-+add(systemUserDto)
++add(systemUserWithStatusDto)
 
 }
 
