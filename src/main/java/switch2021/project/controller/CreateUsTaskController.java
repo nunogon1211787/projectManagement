@@ -3,12 +3,8 @@ package switch2021.project.controller;
 import switch2021.project.dto.CreateTaskDTO;
 import switch2021.project.mapper.TaskMapper;
 import switch2021.project.model.*;
-import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.TaskList;
-import switch2021.project.stores.TaskTypeStore;
-import switch2021.project.stores.UserStoryStatusStore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CreateUsTaskController {

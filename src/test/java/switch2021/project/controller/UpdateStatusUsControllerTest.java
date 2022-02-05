@@ -40,6 +40,23 @@ class UpdateStatusUsControllerTest {
     }
 
     @Test
+    void getUsAvailableStatusListSize() {
+        //arrange
+        company = new Company();
+        UpdateStatusUsController update = new UpdateStatusUsController(company);
+
+        //act
+        String todo = "To do";
+        String progress = "In progress";
+        String done = "Done";
+        List <String> expectedList = update.getUsAvailableStatusList();
+        List <String> actualList = Arrays.asList(todo, progress, done);
+
+        //assert
+        assertEquals(expectedList.size(),actualList.size());
+    }
+
+    @Test
     void changeStatusOfUs() {
         //arrange
         company = new Company();
