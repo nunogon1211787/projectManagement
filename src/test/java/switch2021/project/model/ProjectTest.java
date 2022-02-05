@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.stores.CustomerStore;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
+
+import java.awt.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -443,8 +445,6 @@ class ProjectTest {
                 typo, sector, LocalDate.now(), 10, 6000));
 
 
-
-
         //Assert
         assertNotSame(list1, list2);
         assertEquals(list1, list2);
@@ -457,9 +457,42 @@ class ProjectTest {
         assertEquals("test1234", project.getDescription());
         assertEquals(sector, project.getBusinessSector());
 
-
-
-
     }
 
+    @Test
+    public void overrideTest() {
+        //Arrange
+        ProductBacklog backlog = new ProductBacklog();
+        LocalDate date = LocalDate.of(2024,12,12);
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        project.setCode("1");
+        project.setProductBacklog(backlog);
+        project.setEndDate(date);
+        Project project2 = company.getProjectStore().createProject( "prototype", "test1234", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        project2.setCode("1");
+        project2.setEndDate(date);
+        project2.setProductBacklog(backlog);
+
+        assertEquals(project.toString(),project2.toString());
+        assertEquals(project,project2);
+
+        project2.setProjectStatus(new ProjectStatus("test"));
+
+        assertNotEquals(project,project2);
+
+        project.setProjectStatus(new ProjectStatus("test"));
+        project2.setDescription("test");
+
+        assertNotEquals(project,project2);
+
+        project.setDescription("test");
+        project2.setProjectName("erro");
+
+        assertNotEquals(project,project2);
+    }
 }
