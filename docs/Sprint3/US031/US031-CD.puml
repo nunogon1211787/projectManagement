@@ -6,7 +6,7 @@ hide circle
 
 title US031 - As Team Member, I want to create a task in a user story
 
-class TaskUSUI{}
+class CreateUsTaskUI{}
 
 class TaskUSController{
 +getTaskTypes()
@@ -21,7 +21,7 @@ class Company{
 
 class TaskTypeStore{
 -List<TaskType> taskTypeList
-+getTaskTypesNames()
++createTaskTypesNames()
 }
 
 class TaskType{
@@ -106,8 +106,8 @@ class TaskDTO{
 +getResponsible()
 }
 
-TaskUSUI ..> TaskUSController
-TaskUSUI ..> TaskDTO
+CreateUsTaskUI ..> TaskUSController
+
 
 TaskUSController ..> Company
 TaskUSController ..> TaskTypeStore
@@ -123,12 +123,12 @@ TaskUSController ..> USTaskList
 TaskUSController ..> ProjectTeam
 TaskUSController ..> Resource
 TaskUSController ..> TaskMapper
-TaskUSController ..> TaskDTO
+
 
 
 Company "1" *-- "1" TaskTypeStore
 Company "1" *-- "1" ProjectStore
-Company "1" *-- "1" TaskDTO
+
 
 TaskTypeStore "1" *-- "*" TaskType
 
@@ -141,12 +141,20 @@ Project "1" *-- "1" ProjectTeam
 
 SprintList "1" *-- "*" Sprint
 
-Sprint "1" *-- "1" TaskList
+Sprint "1" *-- "1" SprintBacklog
+
+SprintBacklog "1" *-- "1" UserStoryList
+
+UserStoryList "1" *-- "*" UserStory
+
+UserStory "1" *-- "1" TaskList
 
 TaskList "1" *-- "*" Task
 
 ProjectTeam "1" *-- "*" Resource
 
-TaskMapper ..> TaskDTO
+USTaskList "1" *-- "1" TaskMapper
+
+TaskMapper *-- TaskDTO
 
 @enduml
