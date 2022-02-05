@@ -15,9 +15,7 @@ public class AssociateResourceController {
      * Attributes
      **/
 
-    private Company company;
-    private SystemUser user;
-    private Resource resource;
+    private final Company company;
     List<Project> arrayProject;
     List<SystemUser> arraySystemUser;
 
@@ -43,10 +41,10 @@ public class AssociateResourceController {
 
     public boolean associateResource(String email, String projectCode, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation){
         boolean msg = false;
-        this.user = this.company.getSystemUserStore().getUserByEmail(email);
-        if(this.company.getProjectStore().validateAllocation(this.user, percentageOfAllocation, startDate,endDate)) {
+        SystemUser user = this.company.getSystemUserStore().getUserByEmail(email);
+        if(this.company.getProjectStore().validateAllocation(user, percentageOfAllocation, startDate,endDate)) {
             Project project = this.company.getProjectStore().getProjectByCode(projectCode);
-            this.resource = project.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);
+            Resource resource = project.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);
             project.addResource(resource);
             msg = true;
         }

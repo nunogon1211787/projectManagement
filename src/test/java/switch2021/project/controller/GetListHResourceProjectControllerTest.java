@@ -7,7 +7,6 @@ import switch2021.project.mapper.ProjectTeamMapper;
 import switch2021.project.model.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -56,7 +55,6 @@ public class GetListHResourceProjectControllerTest {
         proj1.getProjectTeam().saveResource(manuelbras);
         proj1.getProjectTeam().saveResource(manueljose);
         proj1.getProjectTeam().saveResource(manuelfernandes);
-
 
         //Act
         List<ResourceDto> resDtoList = controller.getProjectTeam("Project_2022_1");

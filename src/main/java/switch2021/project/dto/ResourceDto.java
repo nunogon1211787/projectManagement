@@ -2,9 +2,6 @@ package switch2021.project.dto;
 
 import lombok.Getter;
 
-import java.util.Objects;
-
-
 @Getter
 public class ResourceDto {
 
@@ -12,12 +9,12 @@ public class ResourceDto {
      * Attributes
      **/
 
-    private String userName;
-    private String role;
-    private String startDate;
-    private String endDate;
-    private double costPerHour;
-    private double percentageOfAllocation;
+    private final String userName;
+    private final String role;
+    private final String startDate;
+    private final String endDate;
+    private final double costPerHour;
+    private final double percentageOfAllocation;
 
     /**
      * Constructor to test (without SINGLETON)

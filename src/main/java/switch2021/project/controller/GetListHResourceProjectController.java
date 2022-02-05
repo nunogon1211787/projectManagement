@@ -3,8 +3,6 @@ import switch2021.project.dto.ResourceDto;
 import switch2021.project.mapper.ProjectTeamMapper;
 import switch2021.project.model.Company;
 import switch2021.project.model.Resource;
-import switch2021.project.utils.App;
-
 import java.util.List;
 
 public class GetListHResourceProjectController {
@@ -14,8 +12,7 @@ public class GetListHResourceProjectController {
      **/
 
     private final Company company;
-    private List<Resource> projectTeamList;
-    private ProjectTeamMapper projectTeamMapper;
+    private final ProjectTeamMapper projectTeamMapper;
 
     /**
      * Constructor to test (without SINGLETON)
@@ -30,7 +27,7 @@ public class GetListHResourceProjectController {
      **/
 
     public List<ResourceDto> getProjectTeam(String projectCode){
-        this.projectTeamList = company.getProjectStore().getProjectByCode(projectCode).getProjectTeam().getProjectTeamList();
+        List<Resource> projectTeamList = company.getProjectStore().getProjectByCode(projectCode).getProjectTeam().getProjectTeamList();
         return this.projectTeamMapper.toDto(projectTeamList);
     }
 }
