@@ -2,7 +2,7 @@ package switch2021.project.controller;
 
 import switch2021.project.model.Company;
 
-public class InnactivateUserController {
+public class InactivateUserController {
 
     /**
      * Attributes
@@ -14,7 +14,7 @@ public class InnactivateUserController {
      * Constructor to test (without SINGLETON)
      **/
 
-    public InnactivateUserController (Company company) {
+    public InactivateUserController (Company company) {
         this.company = company;
     }
 
@@ -22,7 +22,7 @@ public class InnactivateUserController {
      * Method
      **/
 
-    public boolean innactivateUser (String email) {
+    public boolean inactivateUser (String email) {
         this.company.getSystemUserStore().getUserByEmail(email).setInactivateUser();
         return true;
     }

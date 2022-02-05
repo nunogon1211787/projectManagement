@@ -134,7 +134,7 @@ public class SystemUserStoreTest {
     }
 
     @Test
-    public void reachUserbyEmailSuccess() {
+    public void reachUserbyEmail() {
         Company company = new Company();
         String userName = "anaguedes";
         String email = "anaguedes@beaver.com";
@@ -144,7 +144,7 @@ public class SystemUserStoreTest {
         String photo = "photo.png";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser findUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
-        company.getSystemUserStore().saveSystemUser(findUser);// faltou adicionar à company
+        company.getSystemUserStore().saveSystemUser(findUser);
         SystemUser user_verification = company.getSystemUserStore().getUserByEmail("anaguedes@beaver.com");
         assertEquals(user_verification, findUser);
     }

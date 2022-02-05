@@ -6,27 +6,22 @@ hide circle
 
 title US031 - As Team Member, I want to create a task in a user story
 
-class CreateUSTaskUI{}
+class CreateUsTaskUI{}
 
-class CreateUSTaskController{
--Company company
--Project proj
--TaskList taskList
--TaskMapper taskMapper
+class TaskUSController{
 +getTaskTypes()
-+getSprintTasks(String code, int id)
-+getCurrentProjectTeam()
-+createSprintTask(CreateTaskDTO dto)
++createUsTask(createUsTaskDTO)
 }
 
 class Company{
 +getTaskTypeStore()
 +getProjectStore()
++createUsTask(createUsTaskDTO)
 }
 
 class TaskTypeStore{
 -List<TaskType> taskTypeList
-+getTaskTypesNames()
++createTaskTypesNames()
 }
 
 class TaskType{
@@ -40,16 +35,14 @@ class ProjectStore{
 }
 
 class Project{
--SprintList sList
--ProjectTeam projectTeam
-+hasCode(String code)
+-List<Sprint> sprintList
 +getSprints()
 +getProjectTeam()
 }
 
 class SprintList{
--List<Sprint> sprintList
-+getSprint(int id)
+-Sprint
++getSprint(sprintID)
 }
 
 class Sprint{
@@ -57,38 +50,35 @@ class Sprint{
 -LocalDate startDate
 -LocalDate endDate
 -TaskList sprintTaskList
-+hasID(int id)
-+getTaskList()
++getBacklog()
 }
 
-class TaskList{
--List<Task> taskList
-+getTasksNames()
-+createSprintTask(createTaskDTO dto)
-+saveTask(Task task)
--validate(Task task)
--add(Task task)
+class SprintBacklog{
++getUSList()
 }
 
-class Task{
+class UserStoryList {
++getUs(usId)
+}
+
+class UserStory{
++getUsTaskList()
+}
+
+class USTaskList{
 -String name
 -String description
 -int effortEstimate
 -TaskType taskType
 -List<Task> tasksPrecedence
--Resource responsible
-+Task(String name,String description,int effort,TaskType type,List<Task> precedence,Resource responsible)
-+getName()
-+getDescription()
-+getEffortEstimate()
-+getTaskTypeName()
-+getResponsibleEmail()
++getTasksNames()
++createUsTask(createUsTaskDTO)
 }
+
 
 class ProjectTeam{
 -List<Resource> projectTeam
-+getCurrentResourcesNames()
-+getCurrentResource(String email)
+getCurrentResourcesNames()
 }
 
 class Resource{
@@ -100,17 +90,15 @@ class Resource{
 }
 
 class TaskMapper{
-+toModel(CreateTaskDTO dto)
-+toDTO(Task task)
++toModel(createUsTaskDTO)
 }
 
-class CreateTaskDTO{
+class TaskDTO{
 -String name
 -String description
 -int effortEstimate
 -String taskTypeName
 -String responsibleEmail
-+CreateTaskDTO(Task task)
 +getName()
 +getDescription()
 +getEffortEstimate()
@@ -118,23 +106,29 @@ class CreateTaskDTO{
 +getResponsible()
 }
 
-CreateSprintTaskUI ..> CreateSprintTaskController
-CreateSprintTaskUI ..> CreateTaskDTO
+CreateUsTaskUI ..> TaskUSController
 
-CreateSprintTaskController ..> Company
-CreateSprintTaskController ..> TaskTypeStore
-CreateSprintTaskController ..> ProjectStore
-CreateSprintTaskController ..> Project
-CreateSprintTaskController ..> SprintList
-CreateSprintTaskController ..> Sprint
-CreateSprintTaskController ..> TaskList
-CreateSprintTaskController ..> ProjectTeam
-CreateSprintTaskController ..> TaskMapper
-CreateSprintTaskController ..> CreateTaskDTO
+
+TaskUSController ..> Company
+TaskUSController ..> TaskTypeStore
+TaskUSController ..> TaskType
+TaskUSController ..> ProjectStore
+TaskUSController ..> Project
+TaskUSController ..> SprintList
+TaskUSController ..> Sprint
+TaskUSController ..> SprintBacklog
+TaskUSController ..> UserStoryList
+TaskUSController ..> UserStory
+TaskUSController ..> USTaskList
+TaskUSController ..> ProjectTeam
+TaskUSController ..> Resource
+TaskUSController ..> TaskMapper
+
 
 
 Company "1" *-- "1" TaskTypeStore
 Company "1" *-- "1" ProjectStore
+
 
 TaskTypeStore "1" *-- "*" TaskType
 
@@ -147,12 +141,20 @@ Project "1" *-- "1" ProjectTeam
 
 SprintList "1" *-- "*" Sprint
 
-Sprint "1" *-- "1" TaskList
+Sprint "1" *-- "1" SprintBacklog
+
+SprintBacklog "1" *-- "1" UserStoryList
+
+UserStoryList "1" *-- "*" UserStory
+
+UserStory "1" *-- "1" TaskList
 
 TaskList "1" *-- "*" Task
 
 ProjectTeam "1" *-- "*" Resource
 
-TaskMapper ..> CreateTaskDTO
+USTaskList "1" *-- "1" TaskMapper
+
+TaskMapper *-- TaskDTO
 
 @enduml
