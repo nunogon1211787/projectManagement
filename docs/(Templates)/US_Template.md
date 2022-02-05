@@ -7,7 +7,7 @@
 
 ### 1.1. User Story Description
 
-*Insert here the User Story as described by the client.*
+As a Team Member i want to view the Scrum Board of the current sprint
 
 ### 1.2. Customer Specifications and Clarifications 
 

@@ -15,7 +15,7 @@ participant ": ProjectStore " as ProjStore
 participant "proj : Project" as proj
 participant "sprint : Sprint " as sprint
 participant "sprintBacklog : SprintBacklog" as sprintBacklog
-participant ": TaskMapper" as mapper
+participant ": Mapper" as mapper
 participant "userStoryList : List<UserStory>" as userStoryList
 participant "UserStoryStatusDTOList : List<UserStoryStatusDTO> " as tasksDTOList
 participant "userStoryStatus : UserStoryStatusDTO" as UserStoryStatus
@@ -24,9 +24,9 @@ activate TeamMember
 
 TeamMember -> UI: Get all the user story status of the current sprint
 
-UI -> controller: getUserStoryStatusOfCurrentSprint(code)
-controller -> company: getProject(code)
-company -> ProjStore: getProject(code)
+UI -> controller: getScrumBoard(projectCode)
+controller -> company: getProject(projectCode)
+company -> ProjStore: getProject(projectCode)
 loop for each know project
 ProjStore -> proj: getCode()
 return true
