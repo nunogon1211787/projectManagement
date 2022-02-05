@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.stores.ProjectStore;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CompanyTest {
+class
+CompanyTest {
 
     Project project;
 

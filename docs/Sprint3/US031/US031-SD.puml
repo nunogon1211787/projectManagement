@@ -46,7 +46,6 @@ Ctrl -> co: getTaskTypeStore()
 co --> Ctrl: taskTypeStore
 
 Ctrl -> tTStore: getTaskTypesNames()
-
 tTStore --> listTypes**: create()
 
 loop for each know task type
