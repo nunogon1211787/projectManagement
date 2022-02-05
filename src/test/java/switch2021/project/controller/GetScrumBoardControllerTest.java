@@ -33,6 +33,11 @@ public class GetScrumBoardControllerTest {
         ScrumBoardMapper mapper = new ScrumBoardMapper();
         GetScrumBoardController controller = new GetScrumBoardController(company,mapper);
 
-        assertEquals(controller.getScrumBoard("Project_2022_1").get(0),mapper.toDTO(userStory));
+        assertEquals(controller.getScrumBoard("Project_2022_1").get(0).getUserStoryId(),mapper.toDTO(userStory).getUserStoryId());
+        assertEquals(controller.getScrumBoard("Project_2022_1").get(0).getUserStoryPriority(),mapper.toDTO(userStory).getUserStoryPriority());
+        assertEquals(controller.getScrumBoard("Project_2022_1").get(0).getUserStoryTimeEstimate(),mapper.toDTO(userStory).getUserStoryTimeEstimate());
+        assertEquals(controller.getScrumBoard("Project_2022_1").get(0).getUserStoryStatus(),mapper.toDTO(userStory).getUserStoryStatus());
+        assertEquals(controller.getScrumBoard("Project_2022_1").get(0).getUserStoryName(),mapper.toDTO(userStory).getUserStoryName());
+        assertEquals(controller.getScrumBoard("Project_2022_1").get(0).getUserStoryDescription(),mapper.toDTO(userStory).getUserStoryDescription());
     }
 }
