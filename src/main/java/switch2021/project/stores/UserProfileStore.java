@@ -124,16 +124,6 @@ public class UserProfileStore {
         return true;
     }
 
-    public boolean removeUserProfile(UserProfile profile) {
-        boolean msg = false;
-        if (userProfileList.contains(profile)) {
-            getOriginalUserProfileList().remove(profile);
-            msg = true;
-        }
-        return msg;
-    }
-
-
     /**
      * Validation Methods
      **/

@@ -10,15 +10,7 @@ public class CreateProjectController {
      * Attributes
      **/
 
-    private Company company;
-    private Project project;
-
-
-    /**
-     * Constructor to UI (with SINGLETON)
-     **/
-
-    //public CreateProjectController(){ this.company = App.getInstance().getCompany();}
+    private final Company company;
 
     /**
      * Constructor to test (without SINGLETON)
@@ -45,8 +37,8 @@ public class CreateProjectController {
     public boolean createProject(String code, String name, String description, String customer, String typology,
                                  String businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
-        this.project = this.company.getProjectStore().createProject( name, description, getCustomer(customer),
-                    getTypology(typology), getBusinessSector(businessSector), startDate, numberOfSprints, budget);
+        Project project = this.company.getProjectStore().createProject(name, description, getCustomer(customer),
+                getTypology(typology), getBusinessSector(businessSector), startDate, numberOfSprints, budget);
 
         return this.company.getProjectStore().saveNewProject(project);
     }
