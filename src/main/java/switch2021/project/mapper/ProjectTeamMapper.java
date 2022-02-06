@@ -3,7 +3,6 @@ package switch2021.project.mapper;
 
 import switch2021.project.dto.ResourceDto;
 import switch2021.project.model.Resource;
-
 import java.util.ArrayList;
 import java.util.List;
 
