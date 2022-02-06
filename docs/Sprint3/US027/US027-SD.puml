@@ -29,47 +29,49 @@ Director -> UI: Ask to access resource of a project
 return resDTO
 
 Director -> UI: Define as Product Owner
-UI -> Controller: assignRole(resourceName, roleName)
-Controller -> C3: getSprints()
-return sprintStore
-Controller -> C7: getCurrentSprint()
-    loop isCurrentSprint
-        C7 -> C8: isCurrentSprint()
-        return true
-    end
-return currentSprint
-Controller -> C8: getEndDate()
-return endDate
-Controller -> C3: getSprintDuration()
-return sprintDuration
-Controller -> C1: getProjectRoleStore()
-return projectRoleStore
-Controller -> C9: getProjectRole(roleName)
-return role
-    alt result = true "resourceName == name && assignProjectRole"
-        Controller -> C4: assignProjectRole(resource, startDateNextSprint, sprintDuration, role)
-    alt result = true "Check if resource can be assigned to role by date"
-    C4 -> C5: checkResourceCanBeAssignedToRoleByDate(startDateNextSprint, sprintDuration)
-    return true
-    end
-    C4 -> C5: copyUpdateProjectRoleOfAResource(originalResource, startDateNewRole, role)
-    alt result = true "check if the role exist and is current"
+alt result = true "Assign Product Owner"
+    UI -> Controller: assignRole(resourceName, roleName)
+    Controller -> C3: getSprints()
+    return sprintStore
+    Controller -> C7: getCurrentSprint()
+        loop isCurrentSprint
+            C7 -> C8: isCurrentSprint()
+            return true
+        end
+    return currentSprint
+    Controller -> C8: getEndDate()
+    return endDate
+    Controller -> C3: getSprintDuration()
+    return sprintDuration
+    Controller -> C1: getProjectRoleStore()
+    return projectRoleStore
+    Controller -> C9: getProjectRole(roleName)
+    return role
+        alt result = true "resourceName == name && assignProjectRole"
+            Controller -> C4: assignProjectRole(resource, startDateNextSprint, sprintDuration, role)
+            alt result = true "Check if resource can be assigned to role by date"
+            C4 -> C5: checkResourceCanBeAssignedToRoleByDate(startDateNextSprint, sprintDuration)
+            return true
+            end
+            C4 -> C5: copyUpdateProjectRoleOfAResource(originalResource, startDateNewRole, role)
+            alt result = true "check if the role exist and is current"
 
-    C4 -> C6: setRole(projectRole)
-    deactivate
-    C4 -> C6: setStartDate(startDate)
-    deactivate
-    C4 -> C5: setEndDate(startDate)
-    deactivate
-        C4 -> C4: saveResource(newResource)
-        deactivate
-        C4 -> C4: checkIfRoleCurrentExistInTheProjectTeam(role,startDateNextSprint)
-        deactivate
+                C4 -> C6: setRole(projectRole)
+                deactivate
+                C4 -> C6: setStartDate(startDate)
+                deactivate
+                C4 -> C5: setEndDate(startDate)
+                deactivate
+                    C4 -> C4: saveResource(newResource)
+                    deactivate
+                    C4 -> C4: checkIfRoleCurrentExistInTheProjectTeam(role,startDateNextSprint)
+                    deactivate
+                return true
+            end
+        return true
+        end
     return true
-    end
-return true
 end
-return true
 return Informs operation success
 
 @enduml

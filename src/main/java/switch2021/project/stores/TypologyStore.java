@@ -1,9 +1,7 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import lombok.Setter;
 import switch2021.project.model.Typology;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

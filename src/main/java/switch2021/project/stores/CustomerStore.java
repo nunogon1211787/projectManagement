@@ -1,8 +1,6 @@
 package switch2021.project.stores;
 
 import switch2021.project.model.Customer;
-import switch2021.project.model.ProjectTeam;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
