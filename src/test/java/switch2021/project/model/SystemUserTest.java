@@ -174,20 +174,20 @@ class SystemUserTest {
             UserProfile tes = new UserProfile("ddd");
             SystemUser newUser = new SystemUser("JJJJ", "1211770@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
-            newUser.setAllData("JJ", "Aluna_10", "img_900");
+            newUser.setAllData("J", "A", "img_900");
 
         });
     }
 
     @Test
-    public void setAllDataFailUsernameLowLength3() {
+    public void setAllDataFailEmpty() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
             SystemUser newUser = new SystemUser("JJJJ", "1211770@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
-            newUser.setAllData("  ", "Aluna_10", "img_900");
+            newUser.setAllData("  ", "", "");
         });
     }
 
@@ -199,7 +199,19 @@ class SystemUserTest {
             UserProfile tes = new UserProfile("ddd");
             SystemUser newUser = new SystemUser("JJJJ", "1211770@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
-            newUser.setAllData("", "Aluna_10", "img_900");
+            newUser.setAllData("JJ", "Al", "img_900");
+        });
+    }
+
+    @Test
+    public void setAllDataFailNull() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("JJJJ", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.setAllData(null, null, null);
         });
     }
 
@@ -1020,7 +1032,7 @@ class SystemUserTest {
         SystemUser ana = new SystemUser("Ana", "1211@isep.ipp.pt", "User_12",
                 "HELLO", "HELLO", "HELLO", tes);
         //Act
-        ana.setActivateUser();
+        ana.setActivateUser(true);
         //Assert
         assertTrue(ana.isActivateUser());
     }
@@ -1033,7 +1045,7 @@ class SystemUserTest {
         SystemUser ana = new SystemUser("Ana", "1211@isep.ipp.pt", "User_12",
                 "HELLO", "HELLO", "HELLO", tes);
         //Act
-        ana.setInactivateUser();
+        ana.setActivateUser(false);
         //Assert
         assertFalse(ana.isActivateUser());
     }

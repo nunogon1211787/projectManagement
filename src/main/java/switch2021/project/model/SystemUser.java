@@ -95,13 +95,6 @@ public class SystemUser {
         return msg;
     }
 
-    public boolean setActivateUser() {
-        return this.activateUser = true;
-    }
-
-    public boolean setInactivateUser() {
-        return this.activateUser = false;
-    }
 
 
     /**

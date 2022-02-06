@@ -296,7 +296,7 @@ public class AssignProductOwnerControllerTest {
         Company company = new Company();
         ProjectsMapper projectsMapper = new ProjectsMapper();
         ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
-        AssignScrumMasterController controller = new AssignScrumMasterController(company, projectsMapper,projectTeamMapper);
+        AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
