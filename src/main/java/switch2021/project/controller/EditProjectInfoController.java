@@ -19,12 +19,6 @@ public class EditProjectInfoController {
     List<Project> arrayProject;
 
 
-   /**
-    * Constructor to UI (with SINGLETON)
-    **/
-
-//    public EditProjectInfoController(){ this.company = App.getInstance().getCompany(); }
-
     /**
      * Constructor to test (without SINGLETON)
      **/

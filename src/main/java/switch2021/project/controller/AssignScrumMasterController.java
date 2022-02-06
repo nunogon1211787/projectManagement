@@ -1,9 +1,11 @@
 package switch2021.project.controller;
 
+import switch2021.project.dto.ProjectDTO;
+import switch2021.project.dto.ResourceDTO;
+import switch2021.project.mapper.ProjectTeamMapper;
+import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.model.*;
-import switch2021.project.utils.App;
 import java.time.LocalDate;
-import java.util.List;
 
 public class AssignScrumMasterController {
 
@@ -11,65 +13,51 @@ public class AssignScrumMasterController {
      * Attributes
      **/
     private final Company company;
+    private final ProjectsMapper projectsMapper;
+    private final ProjectTeamMapper projectTeamMapper;
     private Project project;
-    private List<Resource> projectTeamList;
     private Resource resource;
 
-    /**
-     * Constructor to UI (with SINGLETON)
-     **/
-//    public AssignScrumMasterController() {
-//        this.company = App.getInstance().getCompany();
-//    }
 
     /**
      * Constructor to test (without SINGLETON)
      **/
-    public AssignScrumMasterController(Company company) {
+    public AssignScrumMasterController(Company company, ProjectsMapper projectsMapper, ProjectTeamMapper projectTeamMapper) {
         this.company = company;
+        this.projectTeamMapper = projectTeamMapper;
+        this.projectsMapper = projectsMapper;
     }
 
 
     /**
      * Method to receive a project and then send to UI
      **/
-    public Project getProject(String code) {
+    public ProjectDTO getProject(String code) {
         this.project = company.getProjectStore().getProjectByCode(code);
-        return this.project;
-    }
-
-
-    /**
-     * Method to receive a project team list (resource list of the project) and send to UI
-     */
-    public List<Resource> getProjectTeamList() {
-        this.projectTeamList = project.getProjectTeam().getProjectTeamList();
-        return this.projectTeamList;
+        return this.projectsMapper.toDTO(project);
     }
 
 
     /**
      * Method to receive a resource of the project and send to UI
      */
-    public Resource getResource(String email) {
+    public ResourceDTO getResource(String email) {
         this.resource = project.getProjectTeam().getResource(email);
-        return this.resource;
+        return this.projectTeamMapper.toDto(resource);
     }
 
 
     /**
      * Method to define a new role, to a resource, in the project that it belong
      **/
-    public boolean assignRole(String email, String roleName) {
+    public boolean assignRole(String name, String roleName) {
         boolean msg = false;
 
         LocalDate startDateNextSprint = project.getSprints().getCurrentSprint().getEndDate().plusDays(1);
         int sprintDuration = project.getSprintDuration();
         ProjectRole role = company.getProjectRoleStore().getProjectRole(roleName);
-        if (this.resource == getResource(email)) {
-            if(project.getProjectTeam().assignProjectRole(resource, startDateNextSprint, sprintDuration, role)) {
-                msg = true;
-            }
+        if (this.resource.getUser().getUserName().equals(name) && project.getProjectTeam().assignProjectRole(resource, startDateNextSprint, sprintDuration, role)) {
+            msg = true;
         }
         return msg;
     }

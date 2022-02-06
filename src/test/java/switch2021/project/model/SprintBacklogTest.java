@@ -170,4 +170,32 @@ class SprintBacklogTest {
         //Assert
         assertTrue(exception.getMessage().contains("User Story already exists in the sprintbacklog or is null"));
     }
+
+    @Test
+    @DisplayName("save user story to sprint backlog null")
+    public void getUserStory1() {
+        // Arrange
+        int priority = 5;
+        String description = "Validate";
+        UserStory userstory = new UserStory("US001", priority, description, 5);
+        sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+        // Act
+
+         assertEquals(sprintBacklog.getUserStory(userstory.getIdUserStory()), userstory);
+
+    }
+
+    @Test
+    @DisplayName("save user story to sprint backlog null")
+    public void getUserStory2() {
+        // Arrange
+        int priority = 5;
+        String description = "Validate";
+        UserStory userstory = new UserStory("US001", priority, description, 5);
+        sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+        UserStory userstory2 = new UserStory("US003", priority, description, 5);
+        // Act
+
+        assertNotEquals(sprintBacklog.getUserStory(userstory.getIdUserStory()), userstory2);
+    }
 }

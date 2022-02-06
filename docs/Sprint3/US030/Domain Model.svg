@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1095px" preserveAspectRatio="none" style="width:1335px;height:1095px;background:#FFFFFF;" version="1.1" viewBox="0 0 1335 1095" width="1335px" zoomAndPan="magnify"><defs><filter height="300%" id="fevuyqp4xrvve" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="115" x="603.75" y="18.6855">Domain Model</text><!--MD5=[79d378210367c0c6ec62ef762ddfbd1b]
+class Project--><rect codeLine="9" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="137.9453" id="Project" style="stroke:#A80036;stroke-width:1.5;" width="98" x="734.5" y="176.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="38" x="764.5" y="194.0977">Project</text><line style="stroke:#A80036;stroke-width:1.5;" x1="735.5" x2="831.5" y1="201.7344" y2="201.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="740.5" y="217.1533">-code</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="64" x="740.5" y="230.9893">-projectName</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="740.5" y="244.8252">-description</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="48" x="740.5" y="258.6611">-startDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="44" x="740.5" y="272.4971">-endDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="740.5" y="286.333">-numberOfSprints</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="71" x="740.5" y="300.1689">-sprintDuration</text><line style="stroke:#A80036;stroke-width:1.5;" x1="735.5" x2="831.5" y1="306.5859" y2="306.5859"/><!--MD5=[024d6bb17f4c47f299ed89907d0655d2]
+class Typology--><rect codeLine="18" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="68.7656" id="Typology" style="stroke:#A80036;stroke-width:1.5;" width="69" x="749" y="29.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="48" x="759.5" y="47.0977">Typology</text><line style="stroke:#A80036;stroke-width:1.5;" x1="750" x2="817" y1="54.7344" y2="54.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="56" x="755" y="70.1533">-idTypology</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="755" y="83.9893">-description</text><line style="stroke:#A80036;stroke-width:1.5;" x1="750" x2="817" y1="90.4063" y2="90.4063"/><!--MD5=[91b5dce48d18c73d9cea267c757e6d47]
+class ProductBacklog--><rect codeLine="22" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="41.0938" id="ProductBacklog" style="stroke:#A80036;stroke-width:1.5;" width="92" x="928.5" y="1033.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="86" x="931.5" y="1051.0977">ProductBacklog</text><line style="stroke:#A80036;stroke-width:1.5;" x1="929.5" x2="1019.5" y1="1058.7344" y2="1058.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="929.5" x2="1019.5" y1="1066.7344" y2="1066.7344"/><!--MD5=[a136f49e3565b20f66540890d0159f10]
+class SprintBacklog--><rect codeLine="24" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="41.0938" id="SprintBacklog" style="stroke:#A80036;stroke-width:1.5;" width="82" x="765.5" y="1033.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="76" x="768.5" y="1051.0977">SprintBacklog</text><line style="stroke:#A80036;stroke-width:1.5;" x1="766.5" x2="846.5" y1="1058.7344" y2="1058.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="766.5" x2="846.5" y1="1066.7344" y2="1066.7344"/><!--MD5=[452a66c2e8d45f5bd209be454bbcd04f]
+class Sprint--><rect codeLine="26" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="96.4375" id="Sprint" style="stroke:#A80036;stroke-width:1.5;" width="60" x="1017.5" y="831.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="32" x="1031.5" y="849.0977">Sprint</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1018.5" x2="1076.5" y1="856.7344" y2="856.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="40" x="1023.5" y="872.1533">-idSprint</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="30" x="1023.5" y="885.9893">-name</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="48" x="1023.5" y="899.8252">-startDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="44" x="1023.5" y="913.6611">-endDate</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1018.5" x2="1076.5" y1="920.0781" y2="920.0781"/><!--MD5=[b6422d6deb05d6c4c6d5d657746b79ec]
+class ScrumCeremonies--><rect codeLine="32" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="54.9297" id="ScrumCeremonies" style="stroke:#A80036;stroke-width:1.5;" width="111" x="1056" y="1026.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="105" x="1059" y="1044.0977">ScrumCeremonies</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1057" x2="1166" y1="1051.7344" y2="1051.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="1062" y="1067.1533">-description</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1057" x2="1166" y1="1073.5703" y2="1073.5703"/><!--MD5=[bac55b868ac9340fa140d91cd9486221]
+class TaskEffort--><rect codeLine="35" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="110.2734" id="TaskEffort" style="stroke:#A80036;stroke-width:1.5;" width="80" x="153.5" y="824.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="55" x="166" y="842.0977">TaskEffort</text><line style="stroke:#A80036;stroke-width:1.5;" x1="154.5" x2="232.5" y1="849.7344" y2="849.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="60" x="159.5" y="865.1533">-effortHours</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="68" x="159.5" y="878.9893">-effortMinutes</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="53" x="159.5" y="892.8252">-effortDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="47" x="159.5" y="906.6611">-comment</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="159.5" y="920.4971">-attachment</text><line style="stroke:#A80036;stroke-width:1.5;" x1="154.5" x2="232.5" y1="926.9141" y2="926.9141"/><!--MD5=[b34797a66dc35cbf1d65f7e3ca75530e]
+class Task--><rect codeLine="42" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="165.6172" id="Task" style="stroke:#A80036;stroke-width:1.5;" width="118" x="335.5" y="566.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="27" x="381" y="584.0977">Task</text><line style="stroke:#A80036;stroke-width:1.5;" x1="336.5" x2="452.5" y1="591.7344" y2="591.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="35" x="341.5" y="607.1533">-idTask</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="30" x="341.5" y="620.9893">-name</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="341.5" y="634.8252">-description</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="71" x="341.5" y="648.6611">-effortEstimate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="80" x="341.5" y="662.4971">-effortRemaining</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="48" x="341.5" y="676.333">-startDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="44" x="341.5" y="690.1689">-endDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="54" x="341.5" y="704.0049">-hourSpent</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="106" x="341.5" y="717.8408">-executionPercentage</text><line style="stroke:#A80036;stroke-width:1.5;" x1="336.5" x2="452.5" y1="724.2578" y2="724.2578"/><!--MD5=[007b513da6771087a86fbb3bd355c48d]
+class TaskStatus--><rect codeLine="53" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="68.7656" id="TaskStatus" style="stroke:#A80036;stroke-width:1.5;" width="78" x="304.5" y="845.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="62" x="312.5" y="862.5977">TaskStatus</text><line style="stroke:#A80036;stroke-width:1.5;" x1="305.5" x2="381.5" y1="870.2344" y2="870.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="66" x="310.5" y="885.6533">-idTaskStatus</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="310.5" y="899.4893">-description</text><line style="stroke:#A80036;stroke-width:1.5;" x1="305.5" x2="381.5" y1="905.9063" y2="905.9063"/><!--MD5=[88ee21eff3843b66d49ba6da731dc29a]
+class TaskType--><rect codeLine="57" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="68.7656" id="TaskType" style="stroke:#A80036;stroke-width:1.5;" width="59" x="418" y="845.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="421" y="862.5977">TaskType</text><line style="stroke:#A80036;stroke-width:1.5;" x1="419" x2="476" y1="870.2344" y2="870.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="34" x="424" y="885.6533">-typeID</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="30" x="424" y="899.4893">-name</text><line style="stroke:#A80036;stroke-width:1.5;" x1="419" x2="476" y1="905.9063" y2="905.9063"/><!--MD5=[9c1fd783fe022c5c955eb1af582def7f]
+class UserStoryStatus--><rect codeLine="61" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="82.6016" id="UserStoryStatus" style="stroke:#A80036;stroke-width:1.5;" width="104" x="708.5" y="608.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="89" x="716" y="625.5977">UserStoryStatus</text><line style="stroke:#A80036;stroke-width:1.5;" x1="709.5" x2="811.5" y1="633.2344" y2="633.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="92" x="714.5" y="648.6533">-idUserStoryStatus</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="714.5" y="662.4893">-description</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="75" x="714.5" y="676.3252">-sprintAvailable</text><line style="stroke:#A80036;stroke-width:1.5;" x1="709.5" x2="811.5" y1="682.7422" y2="682.7422"/><!--MD5=[daa6dd44d8f60c5a9cd695bb66773862]
+class UserStory--><rect codeLine="66" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="137.9453" id="UserStory" style="stroke:#A80036;stroke-width:1.5;" width="96" x="712.5" y="810.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="733.5" y="828.0977">UserStory</text><line style="stroke:#A80036;stroke-width:1.5;" x1="713.5" x2="807.5" y1="835.7344" y2="835.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="61" x="718.5" y="851.1533">-idUserStory</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="30" x="718.5" y="864.9893">-name</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="37" x="718.5" y="878.8252">-priority</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="718.5" y="892.6611">-description</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="84" x="718.5" y="906.4971">-parentUserStory</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="63" x="718.5" y="920.333">-timeEstimate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="54" x="718.5" y="934.1689">-workDone</text><line style="stroke:#A80036;stroke-width:1.5;" x1="713.5" x2="807.5" y1="940.5859" y2="940.5859"/><!--MD5=[447f8b4c2341541f2d92ddde6334f3f9]
+class BusinessSector--><rect codeLine="75" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="54.9297" id="BusinessSector" style="stroke:#A80036;stroke-width:1.5;" width="94" x="755.5" y="413.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="88" x="758.5" y="430.5977">BusinessSector</text><line style="stroke:#A80036;stroke-width:1.5;" x1="756.5" x2="848.5" y1="438.2344" y2="438.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="761.5" y="453.6533">-description</text><line style="stroke:#A80036;stroke-width:1.5;" x1="756.5" x2="848.5" y1="460.0703" y2="460.0703"/><!--MD5=[c0f7ef69a41a7152a3543feb3e336d86]
+class Budget--><rect codeLine="78" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="54.9297" id="Budget" style="stroke:#A80036;stroke-width:1.5;" width="51" x="885" y="413.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="39" x="891" y="430.5977">Budget</text><line style="stroke:#A80036;stroke-width:1.5;" x1="886" x2="935" y1="438.2344" y2="438.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="39" x="891" y="453.6533">-amount</text><line style="stroke:#A80036;stroke-width:1.5;" x1="886" x2="935" y1="460.0703" y2="460.0703"/><!--MD5=[3ab895b9d042fb04bd9a00cbdf39bb54]
+class ProjectStatus--><rect codeLine="81" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="54.9297" id="ProjectStatus" style="stroke:#A80036;stroke-width:1.5;" width="79" x="971" y="413.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73" x="974" y="430.5977">ProjectStatus</text><line style="stroke:#A80036;stroke-width:1.5;" x1="972" x2="1049" y1="438.2344" y2="438.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="977" y="453.6533">-description</text><line style="stroke:#A80036;stroke-width:1.5;" x1="972" x2="1049" y1="460.0703" y2="460.0703"/><!--MD5=[2ce0c9fb7f55b1e256ab28a8ea6b25ec]
+class Customer--><rect codeLine="84" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="82.6016" id="Customer" style="stroke:#A80036;stroke-width:1.5;" width="88" x="1085.5" y="399.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="55" x="1102" y="416.5977">Customer</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1086.5" x2="1172.5" y1="424.2344" y2="424.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="58" x="1091.5" y="439.6533">-customerID</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="76" x="1091.5" y="453.4893">-customerName</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="1091.5" y="467.3252">-customerEmail</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1086.5" x2="1172.5" y1="473.7422" y2="473.7422"/><!--MD5=[3891815ef421381316acb9044248cefa]
+class KPIReport--><rect codeLine="89" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="82.6016" id="KPIReport" style="stroke:#A80036;stroke-width:1.5;" width="65" x="1209" y="399.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="56" x="1213.5" y="416.5977">KPIReport</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1210" x2="1273" y1="424.2344" y2="424.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="19" x="1215" y="439.6533">-SPI</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="19" x="1215" y="453.4893">-CPI</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="53" x="1215" y="467.3252">-timeStamp</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1210" x2="1273" y1="473.7422" y2="473.7422"/><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect codeLine="94" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="41.0938" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="59" x="585" y="420.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="588" y="437.5977">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="586" x2="643" y1="445.2344" y2="445.2344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="586" x2="643" y1="453.2344" y2="453.2344"/><!--MD5=[6b13f1b330d33795af281e5c1dfe1e98]
+class Resource--><rect codeLine="96" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="96.4375" id="Resource" style="stroke:#A80036;stroke-width:1.5;" width="130" x="419.5" y="392.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="457.5" y="410.0977">Resource</text><line style="stroke:#A80036;stroke-width:1.5;" x1="420.5" x2="548.5" y1="417.7344" y2="417.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="48" x="425.5" y="433.1533">-startDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="44" x="425.5" y="446.9893">-endDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="64" x="425.5" y="460.8252">-costPerHour</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="118" x="425.5" y="474.6611">-percentageOfAllocation</text><line style="stroke:#A80036;stroke-width:1.5;" x1="420.5" x2="548.5" y1="481.0781" y2="481.0781"/><!--MD5=[f674fe2441669c801535413934f3bd52]
+class SpecialProfile--><rect codeLine="108" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="110.2734" id="SpecialProfile" style="stroke:#A80036;stroke-width:1.5;" width="130" x="847.5" y="594.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="76" x="874.5" y="612.0977">SpecialProfile</text><line style="stroke:#A80036;stroke-width:1.5;" x1="848.5" x2="976.5" y1="619.7344" y2="619.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="48" x="853.5" y="635.1533">-startDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="44" x="853.5" y="648.9893">-endDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="64" x="853.5" y="662.8252">-costPerHour</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="118" x="853.5" y="676.6611">-percentageOfAllocation</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="853.5" y="690.4971">-description</text><line style="stroke:#A80036;stroke-width:1.5;" x1="848.5" x2="976.5" y1="696.9141" y2="696.9141"/><!--MD5=[72c2b38f0075f7c9d19a6864453fbfd6]
+class ProjectRole--><rect codeLine="111" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="68.7656" id="ProjectRole" style="stroke:#A80036;stroke-width:1.5;" width="70" x="603.5" y="615.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="64" x="606.5" y="632.5977">ProjectRole</text><line style="stroke:#A80036;stroke-width:1.5;" x1="604.5" x2="672.5" y1="640.2344" y2="640.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="33" x="609.5" y="655.6533">-idRole</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="30" x="609.5" y="669.4893">-name</text><line style="stroke:#A80036;stroke-width:1.5;" x1="604.5" x2="672.5" y1="675.9063" y2="675.9063"/><!--MD5=[7dde244f1b93ccf44d7f9e836b89e039]
+class UserProfile--><rect codeLine="119" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="96.4375" id="UserProfile" style="stroke:#A80036;stroke-width:1.5;" width="95" x="7" y="601.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="62" x="23.5" y="619.0977">UserProfile</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="101" y1="626.7344" y2="626.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="42" x="13" y="642.1533">-idProfile</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="83" x="13" y="655.9893">-userProfileName</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="42" x="13" y="669.8252">-idProfile</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="83" x="13" y="683.6611">-userProfileName</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="101" y1="690.0781" y2="690.0781"/><!--MD5=[0851f84a889f989e7bb0bebc385d0f09]
+class Request--><rect codeLine="123" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="82.6016" id="Request" style="stroke:#A80036;stroke-width:1.5;" width="84" x="257.5" y="399.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="47" x="276" y="416.5977">Request</text><line style="stroke:#A80036;stroke-width:1.5;" x1="258.5" x2="340.5" y1="424.2344" y2="424.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="52" x="263.5" y="439.6533">-idRequest</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="63" x="263.5" y="453.4893">-requestDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="72" x="263.5" y="467.3252">-requestStatus</text><line style="stroke:#A80036;stroke-width:1.5;" x1="258.5" x2="340.5" y1="473.7422" y2="473.7422"/><!--MD5=[bc064d979c32666ae52f3d7624591b7b]
+class SystemUser--><rect codeLine="128" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="124.1094" id="SystemUser" style="stroke:#A80036;stroke-width:1.5;" width="77" x="196" y="183.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="68" x="200.5" y="201.0977">SystemUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="197" x2="272" y1="208.7344" y2="208.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="53" x="202" y="224.1533">-userName</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="202" y="237.9893">-email</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="31" x="202" y="251.8252">-photo</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="54" x="202" y="265.6611">-password</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="43" x="202" y="279.4971">-function</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="65" x="202" y="293.333">-activateUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="197" x2="272" y1="299.75" y2="299.75"/><!--MD5=[50c10d59b426a1e122aa861cdef63b34]
+class ActivationInfo--><rect codeLine="136" fill="#FEFECE" filter="url(#fevuyqp4xrvve)" height="82.6016" id="ActivationInfo" style="stroke:#A80036;stroke-width:1.5;" width="77" x="7" y="399.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="71" x="10" y="416.5977">ActivationInfo</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="83" y1="424.2344" y2="424.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="13" y="439.6533">-code</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="19" x="13" y="453.4893">-link</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="48" x="13" y="467.3252">-activated</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="83" y1="473.7422" y2="473.7422"/><!--MD5=[05a41fea581227a15ef08ff144d9fd4d]
+link SystemUser to ActivationInfo--><path codeLine="143" d="M195.91,263.3706 C162.18,279.7206 113.96,307.5706 83.5,344.6406 C70.64,360.2906 61.7,380.8406 55.74,398.8206 " fill="none" id="SystemUser-ActivationInfo" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="60" x="84.5" y="359.1357">belongs to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="180.8866" y="262.7436">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="49.8142" y="388.4354">1</text><!--MD5=[2f713e130ba18a0486743f01698e3482]
+reverse link SystemUser to Request--><path codeLine="144" d="M224.13,312.8606 C223.84,329.5406 225.62,347.1006 231.5,362.6406 C237.05,377.3206 246.82,391.0006 257.26,402.6506 " fill="none" id="SystemUser-backto-Request" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="224.28,307.7206,219.9993,316.5905,224.1229,312.7182,227.9953,316.8418,224.28,307.7206" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="43" x="232.5" y="359.1357">sent by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="215.6936" y="329.3327">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="244.5703" y="392.3057">*</text><!--MD5=[4e5345a94f49587242ea8b9145d799f7]
+link SystemUser to Resource--><path codeLine="145" d="M269,307.9206 C282.03,327.2206 298.18,347.4406 316.5,362.6406 C346.62,387.6306 386.19,406.2906 419.36,418.9806 " fill="none" id="SystemUser-Resource" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="36" x="317.5" y="359.1357">act as</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="265.3906" y="329.1159">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="406.5391" y="413.0413">*</text><!--MD5=[988b35f008724b2c1bfc967b2bade10e]
+link SystemUser to Company--><path codeLine="146" d="M273.14,273.6706 C312.37,299.9306 375.67,339.2006 435.5,362.6406 C491.52,384.5906 514.83,363.5606 567.5,392.6406 C579.82,399.4406 591.08,410.4406 599.48,420.0806 " fill="none" id="SystemUser-Company" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="74" x="436.5" y="359.1357">employed by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="280.9823" y="275.007">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="587.0398" y="409.2241">1</text><!--MD5=[248afbc790a19bc4b510361410018abf]
+link UserProfile to SystemUser--><path codeLine="147" d="M75.61,601.4906 C108.28,528.5306 171.07,388.3006 207.16,307.7006 " fill="none" id="UserProfile-SystemUser" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="66" x="168.5" y="446.1357">is assigned</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="57.2418" y="590.7324">1..*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="198.7097" y="329.3104">*</text><!--MD5=[16b3a1bc46e544860209d7e501f7dea9]
+link Request to UserProfile--><path codeLine="148" d="M257.45,472.6806 C248.77,478.3906 239.53,484.0106 230.5,488.6406 C195.98,506.3706 179.45,495.2206 148.5,518.6406 C119.52,540.5706 95.65,573.9206 79.23,601.3606 " fill="none" id="Request-UserProfile" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="57" x="149.5" y="533.1357">asks for a</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="244.5145" y="474.5247">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="83.1998" y="590.9353">1</text><!--MD5=[7c293a4122c366cd2affa8ae14b1d57e]
+reverse link Resource to TaskEffort--><path codeLine="149" d="M414.6,469.1106 C329.77,502.7806 197.13,556.6106 190.5,566.6406 C139.25,644.1206 158.01,757.8206 175.98,824.4306 " fill="none" id="Resource-backto-TaskEffort" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="419.36,467.2206,409.5192,466.8231,414.7127,469.0652,412.4706,474.2588,419.36,467.2206" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="126" x="191.5" y="655.1357">under responsibility of</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="404.4235" y="466.8591">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="168.4149" y="813.832">*</text><!--MD5=[97514f6ae089ba0513654f38c5ff3204]
+link Resource to Sprint--><path codeLine="150" d="M549.53,481.6306 C555.47,484.3106 561.51,486.7006 567.5,488.6406 C751.48,548.1306 868.06,421.2306 995.5,566.6406 C1060.47,640.7706 1059.89,764.3406 1053.75,831.5706 " fill="none" id="Resource-Sprint" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="67" x="1055.5" y="655.1357">participates</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="557.2675" y="500.1734">1..*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="1049.3008" y="820.8241">*</text><!--MD5=[9039bf2631a3c286dcd8c6d3e83fb159]
+reverse link Resource to Task--><path codeLine="151" d="M443.83,493.3806 C438.51,501.5506 433.53,510.1206 429.5,518.6406 C422.41,533.6406 416.56,550.3206 411.8,566.6006 " fill="none" id="Resource-backto-Task" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="446.81,488.8906,438.5104,494.1932,444.053,493.0618,445.1844,498.6044,446.81,488.8906" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="126" x="430.5" y="533.1357">under responsibility of</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="433.7602" y="510.6411">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="408.1644" y="555.7368">*</text><!--MD5=[1610863e6964f45ac3f1f15f4d049456]
+link Resource to ProjectRole--><path codeLine="152" d="M535.33,488.8006 C544.49,498.2906 553.62,508.4806 561.5,518.6406 C585.3,549.3106 607.32,587.9706 621.66,615.1206 " fill="none" id="Resource-ProjectRole" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="42" x="574.5" y="533.1357">plays a</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="537.4285" y="510.5379">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="610.6556" y="604.3023">1</text><!--MD5=[0f015f5e448d20fb6b0ad4c03557d05a]
+link Resource to SpecialProfile--><path codeLine="153" d="M549.96,480.4906 C555.81,483.4106 561.71,486.1806 567.5,488.6406 C679.71,536.3206 725.73,504.2806 830.5,566.6406 C843.13,574.1606 855.22,584.0506 866.06,594.3606 " fill="none" id="Resource-SpecialProfile" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="66" x="763.5" y="533.1357">is assigned</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="557.3931" y="481.4646">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="836.7005" y="583.753">0..1</text><!--MD5=[f130c257ebb6a38c51a4dfecf97f87fa]
+reverse link Sprint to ScrumCeremonies--><path codeLine="154" d="M1066.81,932.6806 C1078.28,963.5906 1092.34,1001.5106 1101.6,1026.4506 " fill="none" id="Sprint-backto-ScrumCeremonies" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1064.99,927.7806,1064.3521,937.6088,1066.7205,932.4716,1071.8577,934.84,1064.99,927.7806" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="75" x="1089.5" y="993.1357">generated by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1060.0448" y="949.515">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="1093.7325" y="1015.7412">*</text><!--MD5=[99e6a3d10935d54e10b120f38e844c1f]
+link Sprint to SprintBacklog--><path codeLine="155" d="M1017.48,896.7106 C984.47,914.9106 930.4,946.2606 887.5,978.6406 C866.83,994.2406 845.35,1014.2006 829.7,1029.5306 " fill="none" id="Sprint-to-SprintBacklog" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="825.86,1033.3306,835.0736,1029.8509,829.4169,1029.8166,829.4512,1024.1598,825.86,1033.3306" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="38" x="888.5" y="993.1357">origins</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1002.3095" y="896.4061">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="823.3206" y="1022.7592">1</text><!--MD5=[90fa0837cd9082c75cabde5f26fcd73e]
+link Task to Sprint--><path codeLine="156" d="M453.69,676.0706 C491.62,692.3306 541.92,713.8206 586.5,732.6406 C637.52,754.1806 648.06,766.0906 701.5,780.6406 C796.29,806.4406 827.06,780.3106 920.5,810.6406 C955.59,822.0306 992.4,842.8706 1017.31,858.4906 " fill="none" id="Task-Sprint" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="49" x="702.5" y="777.1357">contains</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="461.6901" y="693.5892">1..*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1002.5192" y="849.2349">1</text><!--MD5=[e7470f68175942cba5d83e095e35829d]
+link Task to TaskStatus--><path codeLine="157" d="M357.04,732.7906 C353.64,742.6906 350.67,752.7906 348.5,762.6406 C342.51,789.9106 341.53,821.6206 341.9,844.9906 " fill="none" id="Task-TaskStatus" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="48" x="349.5" y="777.1357">includes</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="348.7308" y="753.8645">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="333.9278" y="834.4114">1</text><!--MD5=[8d0d839979bc5a6cc84fbc9930d69b0d]
+link Task to TaskType--><path codeLine="158" d="M413.63,732.9506 C422.62,771.6006 432.83,815.5306 439.67,844.9506 " fill="none" id="Task-TaskType" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="86" x="424.5" y="777.1357">is classified by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="409.9552" y="753.7513">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="430.5102" y="834.3638">1</text><!--MD5=[73952f855041b549baeea6233d10d386]
+link Task to TaskEffort--><path codeLine="159" d="M335.47,711.3806 C326.78,718.9806 317.66,726.2906 308.5,732.6406 C283.34,750.0806 267.91,740.7606 246.5,762.6406 C230.95,778.5406 219.44,799.8206 211.2,819.8106 " fill="none" id="Task-to-TaskEffort" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="209.28,824.5906,216.3364,817.7199,211.137,819.9482,208.9086,814.7488,209.28,824.5906" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="89" x="247.5" y="777.1357">is measured by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="320.4583" y="715.8082">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="206.0645" y="813.6186">*</text><!--MD5=[810aacbcb787067ff1fbbe6f57746f48]
+link Task to UserStory--><path codeLine="160" d="M453.84,696.3706 C488.52,722.3006 533.58,754.6506 575.5,780.6406 C620.6,808.6006 674.43,836.5506 712.36,855.4006 " fill="none" id="Task-UserStory" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="49" x="576.5" y="777.1357">contains</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="461.4241" y="715.892">1..*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="697.4526" y="847.9901">1</text><!--MD5=[ae4b1b71eb317da752f325fb1afab916]
+link Task to Task--><path codeLine="161" d="M453.71,626.7706 C473.08,626.8806 488.5,634.5106 488.5,649.6406 C488.5,664.7706 473.08,672.4006 453.71,672.5106 " fill="none" id="Task-Task" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="85" x="494.5" y="655.1357">is preceded by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="461.3528" y="620.5482">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="461.6166" y="671.958">*</text><!--MD5=[34911fc2437078b894d23db88034a7c3]
+link UserStoryStatus to UserStory--><path codeLine="162" d="M760.5,691.4006 C760.5,724.4506 760.5,771.7306 760.5,810.5206 " fill="none" id="UserStoryStatus-UserStory" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="48" x="761.5" y="777.1357">includes</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="752.9859" y="712.2593">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="755.2266" y="799.603">*</text><!--MD5=[4407f3fc0ccce478d476bcef109ab671]
+link UserStory to UserStory--><path codeLine="163" d="M808.68,859.4906 C827.65,858.4706 843.5,865.1906 843.5,879.6406 C843.5,894.0906 827.65,900.8106 808.68,899.7906 " fill="none" id="UserStory-UserStory" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="64" x="849.5" y="885.1357">is groomed</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="816.5935" y="852.7064">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="816.4404" y="917.6273">*</text><!--MD5=[3878d971ea3e2fbf2f6fd0cada0364d1]
+link UserStory to ProductBacklog--><path codeLine="164" d="M808.87,898.6806 C847.06,914.8906 899.7,941.8106 935.5,978.6406 C950.76,994.3406 961.53,1017.2206 967.83,1033.4706 " fill="none" id="UserStory-ProductBacklog" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="48" x="948.5" y="993.1357">includes</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="816.3415" y="897.8271">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="957.9697" y="1022.9386">1</text><!--MD5=[f2cc10ddb74e57fb7526487bc204486b]
+link UserStory to SprintBacklog--><path codeLine="165" d="M750.2,948.9306 C750.09,964.9806 751.94,981.7306 757.5,996.6406 C762.11,1008.9906 770.76,1020.4206 779.54,1029.7306 " fill="none" id="UserStory-to-SprintBacklog" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="783.29,1033.5906,779.8848,1024.3492,779.8048,1030.0055,774.1485,1029.9255,783.29,1033.5906" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="92" x="758.5" y="993.1357">is composed by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="728.2017" y="970.054">1..*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="770.7377" y="1022.737">*</text><!--MD5=[779bf0e26291f99b31865e9a7f715620]
+link ProductBacklog to Project--><path codeLine="166" d="M1018.89,1033.6006 C1025.4,1031.0706 1032.08,1028.6706 1038.5,1026.6406 C1097.12,1008.1506 1134.99,1044.5406 1173.5,996.6406 C1306.61,831.0706 1319.47,673.9306 1174.5,518.6406 C1108.23,447.6506 804.77,559.6306 738.5,488.6406 C695.34,442.4106 717.12,368.7506 743.19,314.8306 " fill="none" id="ProductBacklog-Project" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="49" x="1278.5" y="655.1357">contains</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1023.9014" y="1022.75">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="731.6721" y="336.3069">1</text><!--MD5=[d6d7f4a9855853da0e2cab67ce85ccf9]
+link Project to Sprint--><path codeLine="167" d="M734.44,299.8506 C724.63,313.5006 715.74,328.8306 710.5,344.6406 C690.36,405.3906 668.04,440.7506 710.5,488.6406 C747.48,530.3406 904.83,507.7806 959.5,518.6406 C1037.35,534.1006 1083.51,503.4306 1131.5,566.6406 C1194.33,649.4106 1122.24,775.7706 1077.6,839.2906 " fill="none" id="Project-Sprint" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="67" x="1098.5" y="533.1357">is divided in</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="719.3918" y="304.4528">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="1085.5462" y="824.99">*</text><!--MD5=[96ce7856f178689b44c2d15b53e41b32]
+link Project to Budget--><path codeLine="168" d="M828.28,314.6806 C850.56,348.5506 876.22,387.5406 892.86,412.8406 " fill="none" id="Project-Budget" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="66" x="858.5" y="359.1357">financed by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="825.537" y="336.1414">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="880.9714" y="402.1058">1</text><!--MD5=[e31ab2617a32f17357b9830575bfb504]
+reverse link Project to ProjectStatus--><path codeLine="169" d="M837.2,276.1506 C867.16,293.9406 904.23,318.2206 933.5,344.6406 C956.2,365.1206 977.72,392.6206 992.21,412.7606 " fill="none" id="Project-backto-ProjectStatus" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="832.84,273.5706,838.5507,281.5948,837.1438,276.1157,842.6229,274.7088,832.84,273.5706" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="48" x="950.5" y="359.1357">includes</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="840.6009" y="292.3728">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="980.4434" y="402.4531">1</text><!--MD5=[70d1096270c037c9ccdb9d978b7d8524]
+link Project to Customer--><path codeLine="170" d="M832.84,264.1406 C879.42,281.6006 950.42,310.6606 1007.5,344.6406 C1033.23,359.9606 1059.7,379.9706 1081.39,397.6706 " fill="none" id="Project-to-Customer" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1085.38,400.9506,1080.9526,392.153,1081.5121,397.7821,1075.883,398.3416,1085.38,400.9506" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="75" x="1032.5" y="359.1357">requested by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="840.6009" y="263.2078">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1070.4929" y="390.6092">1</text><!--MD5=[325ded1f796ce1eab76253a159da3f41]
+reverse link Project to KPIReport--><path codeLine="171" d="M837.9,257.6606 C905.26,272.4306 1022.58,301.8206 1116.5,344.6406 C1152.51,361.0606 1160.28,368.3206 1191.5,392.6406 C1197.33,397.1806 1203.26,402.2806 1208.92,407.4006 " fill="none" id="Project-backto-KPIReport" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="832.74,256.5406,840.6905,262.3535,837.6269,257.598,842.3824,254.5344,832.74,256.5406" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="75" x="1151.5" y="359.1357">measured by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="840.4862" y="254.4915">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="1181.0693" y="397.3613">1..*</text><!--MD5=[5a36ae2b1559e67b8816e02b447e0166]
+link Project to Company--><path codeLine="172" d="M734.4,259.6606 C693.46,273.3906 637.75,299.4706 611.5,344.6406 C599.12,365.9506 602.2,394.7206 606.92,415.0106 " fill="none" id="Project-to-Company" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="608.15,419.9706,609.8746,410.2739,606.9508,415.1166,602.1081,412.1927,608.15,419.9706" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="60" x="612.5" y="359.1357">belongs to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="721.4988" y="276.5587">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="598.3797" y="409.4386">1</text><!--MD5=[0bef9f8d7067a121dd96a530c1f2080d]
+link Project to Resource--><path codeLine="173" d="M734.38,255.5206 C680.14,267.5106 592.91,293.5506 535.5,344.6406 C522.32,356.3706 511.93,372.3406 504.07,387.8406 " fill="none" id="Project-to-Resource" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="501.71,392.6306,509.2644,386.3115,503.9117,388.1415,502.0817,382.7888,501.71,392.6306" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="59" x="536.5" y="359.1357">worked by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="706.4358" y="253.2957">1..*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="498.8705" y="381.893">*</text><!--MD5=[6656d6ef60bed46e10fc22e2565ee02e]
+link Project to BusinessSector--><path codeLine="174" d="M778,314.9406 C777.76,330.6606 778.35,347.2806 780.5,362.6406 C782.63,377.8506 787.02,394.2606 791.32,408.0106 " fill="none" id="Project-to-BusinessSector" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="792.89,412.9506,793.9801,403.1623,791.3775,408.1849,786.3549,405.5823,792.89,412.9506" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="57" x="781.5" y="359.1357">correlates</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="770.1141" y="336.065">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="782.8583" y="402.2412">1</text><!--MD5=[aeb4911f112c3786e6f565bc8ede3c91]
+reverse link Typology to Project--><path codeLine="175" d="M783.5,104.1506 C783.5,125.2806 783.5,152.0006 783.5,176.4606 " fill="none" id="Typology-backto-Project" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="783.5,98.9006,779.5,107.9006,783.5,103.9006,787.5,107.9006,783.5,98.9006" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="96" x="784.5" y="143.1357">characterized by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="775.8984" y="119.7955">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="778.2422" y="166.0175">*</text><!--MD5=[ea01771414ab8b9b2e4ce196aa4c1af9]
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title Domain Model
+
+together {
+class Project{
+- code
+- projectName
+- description
+- startDate
+- endDate
+- numberOfSprints
+- sprintDuration
+}
+class Typology{
+- idTypology
+- description
+}
+class ProductBacklog{
+}
+class SprintBacklog{
+}
+class Sprint{
+- idSprint
+- name
+- startDate
+- endDate
+}
+class ScrumCeremonies{
+- description
+}
+class TaskEffort{
+- effortHours
+- effortMinutes
+- effortDate
+- comment
+- attachment
+}
+class Task{
+- idTask
+- name
+- description
+- effortEstimate
+- effortRemaining
+- startDate
+- endDate
+- hourSpent
+- executionPercentage
+}
+class TaskStatus{
+- idTaskStatus
+- description
+}
+class TaskType{
+- typeID
+- name
+}
+class UserStoryStatus{
+- idUserStoryStatus
+- description
+- sprintAvailable
+}
+class UserStory{
+- idUserStory
+- name
+- priority
+- description
+- parentUserStory
+- timeEstimate
+- workDone
+}
+class BusinessSector{
+- description
+}
+class Budget{
+- amount
+}
+class ProjectStatus{
+- description
+}
+class Customer{
+- customerID
+- customerName
+- customerEmail
+}
+class KPIReport{
+- SPI
+- CPI
+- timeStamp
+}
+class Company{
+}
+class Resource{
+- startDate
+- endDate
+- costPerHour
+- percentageOfAllocation
+}
+class SpecialProfile{
+- startDate
+- endDate
+- costPerHour
+- percentageOfAllocation
+}
+class SpecialProfile{
+- description
+}
+class ProjectRole{
+- idRole
+- name
+}
+class UserProfile{
+- idProfile
+- userProfileName
+}
+class UserProfile{
+- idProfile
+- userProfileName
+}
+class Request{
+- idRequest
+- requestDate
+- requestStatus
+}
+class SystemUser{
+- userName
+- email
+- photo
+- password
+- function
+- activateUser
+}
+class ActivationInfo{
+- code
+- link
+- activated
+}
+
+
+SystemUser "1" - - "1" ActivationInfo: belongs to
+SystemUser "1" <- - "*" Request: sent by
+SystemUser "1" - - "*" Resource: act as
+SystemUser "*" - - "1" Company: employed by
+UserProfile "1..*" - - "*" SystemUser: is assigned
+Request "*" - - "1" UserProfile: asks for a
+Resource "1" <- - "*" TaskEffort: under responsibility of
+Resource "1..*" - - "*" Sprint: participates
+Resource "1" <- - "*" Task: under responsibility of
+Resource "*" - - "1" ProjectRole: plays a
+Resource "*" - - "0..1" SpecialProfile: is assigned
+Sprint "1" <- - "*" ScrumCeremonies: generated by
+Sprint "1" - -> "1" SprintBacklog: origins
+Task "1..*" - - "1" Sprint: contains
+Task "*" - - "1" TaskStatus: includes
+Task "*" - - "1" TaskType: is classified by
+Task "1" - -> "*" TaskEffort: is measured by
+Task "1..*" - - "1" UserStory: contains
+Task "1" - - "*" Task: is preceded by
+UserStoryStatus "1" - - "*" UserStory: includes
+UserStory "1" - - "*" UserStory: is groomed
+UserStory "*" - - "1" ProductBacklog: includes
+UserStory "1..*" - -> "*" SprintBacklog: is composed by
+ProductBacklog "1" - - "1" Project: contains
+Project "1" - - "*" Sprint: is divided in
+Project "1" - - "1" Budget: financed by
+Project "1" <- -"1" ProjectStatus: includes
+Project "1" - -> "1" Customer: requested by
+Project "1" <- - "1..*" KPIReport: measured by
+Project "*" - -> "1" Company: belongs to
+Project "1..*" - -> "*" Resource: worked by
+Project "1" - -> "1" BusinessSector: correlates
+Typology "1" <- - "*" Project: characterized by
+@enduml
+
+@startuml
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title Domain Model
+
+together {
+class Project{
+- code
+- projectName
+- description
+- startDate
+- endDate
+- numberOfSprints
+- sprintDuration
+}
+class Typology{
+- idTypology
+- description
+}
+class ProductBacklog{
+}
+class SprintBacklog{
+}
+class Sprint{
+- idSprint
+- name
+- startDate
+- endDate
+}
+class ScrumCeremonies{
+- description
+}
+class TaskEffort{
+- effortHours
+- effortMinutes
+- effortDate
+- comment
+- attachment
+}
+class Task{
+- idTask
+- name
+- description
+- effortEstimate
+- effortRemaining
+- startDate
+- endDate
+- hourSpent
+- executionPercentage
+}
+class TaskStatus{
+- idTaskStatus
+- description
+}
+class TaskType{
+- typeID
+- name
+}
+class UserStoryStatus{
+- idUserStoryStatus
+- description
+- sprintAvailable
+}
+class UserStory{
+- idUserStory
+- name
+- priority
+- description
+- parentUserStory
+- timeEstimate
+- workDone
+}
+class BusinessSector{
+- description
+}
+class Budget{
+- amount
+}
+class ProjectStatus{
+- description
+}
+class Customer{
+- customerID
+- customerName
+- customerEmail
+}
+class KPIReport{
+- SPI
+- CPI
+- timeStamp
+}
+class Company{
+}
+class Resource{
+- startDate
+- endDate
+- costPerHour
+- percentageOfAllocation
+}
+class SpecialProfile{
+- startDate
+- endDate
+- costPerHour
+- percentageOfAllocation
+}
+class SpecialProfile{
+- description
+}
+class ProjectRole{
+- idRole
+- name
+}
+class UserProfile{
+- idProfile
+- userProfileName
+}
+class UserProfile{
+- idProfile
+- userProfileName
+}
+class Request{
+- idRequest
+- requestDate
+- requestStatus
+}
+class SystemUser{
+- userName
+- email
+- photo
+- password
+- function
+- activateUser
+}
+class ActivationInfo{
+- code
+- link
+- activated
+}
+
+
+SystemUser "1" - - "1" ActivationInfo: belongs to
+SystemUser "1" <- - "*" Request: sent by
+SystemUser "1" - - "*" Resource: act as
+SystemUser "*" - - "1" Company: employed by
+UserProfile "1..*" - - "*" SystemUser: is assigned
+Request "*" - - "1" UserProfile: asks for a
+Resource "1" <- - "*" TaskEffort: under responsibility of
+Resource "1..*" - - "*" Sprint: participates
+Resource "1" <- - "*" Task: under responsibility of
+Resource "*" - - "1" ProjectRole: plays a
+Resource "*" - - "0..1" SpecialProfile: is assigned
+Sprint "1" <- - "*" ScrumCeremonies: generated by
+Sprint "1" - -> "1" SprintBacklog: origins
+Task "1..*" - - "1" Sprint: contains
+Task "*" - - "1" TaskStatus: includes
+Task "*" - - "1" TaskType: is classified by
+Task "1" - -> "*" TaskEffort: is measured by
+Task "1..*" - - "1" UserStory: contains
+Task "1" - - "*" Task: is preceded by
+UserStoryStatus "1" - - "*" UserStory: includes
+UserStory "1" - - "*" UserStory: is groomed
+UserStory "*" - - "1" ProductBacklog: includes
+UserStory "1..*" - -> "*" SprintBacklog: is composed by
+ProductBacklog "1" - - "1" Project: contains
+Project "1" - - "*" Sprint: is divided in
+Project "1" - - "1" Budget: financed by
+Project "1" <- -"1" ProjectStatus: includes
+Project "1" - -> "1" Customer: requested by
+Project "1" <- - "1..*" KPIReport: measured by
+Project "*" - -> "1" Company: belongs to
+Project "1..*" - -> "*" Resource: worked by
+Project "1" - -> "1" BusinessSector: correlates
+Typology "1" <- - "*" Project: characterized by
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 GMT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

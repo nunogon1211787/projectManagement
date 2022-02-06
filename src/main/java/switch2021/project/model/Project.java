@@ -22,7 +22,7 @@ public class Project {
     private final Customer customer;
     private Typology typology;
     private ProjectStatus projectStatus;
-    private final ProductBacklog productBacklog;
+    private ProductBacklog productBacklog;
 
     private final BusinessSector businessSector;
     private final SprintList sprints;
@@ -194,6 +194,27 @@ public class Project {
                 projectStatus, productBacklog, businessSector,
                 sprints, projectTeam, startDate, endDate, numberOfSprints,
                 budget, sprintDuration);
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "code='" + code + '\'' +
+                ", projectName='" + projectName + '\'' +
+                ", description='" + description + '\'' +
+                ", customer=" + customer +
+                ", typology=" + typology +
+                ", projectStatus=" + projectStatus +
+                ", productBacklog=" + productBacklog +
+                ", businessSector=" + businessSector +
+                ", sprints=" + sprints +
+                ", projectTeam=" + projectTeam +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", numberOfSprints=" + numberOfSprints +
+                ", budget=" + budget +
+                ", sprintDuration=" + sprintDuration +
+                '}';
     }
 }
 

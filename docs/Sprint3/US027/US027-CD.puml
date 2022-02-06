@@ -10,9 +10,7 @@ class AssignProductOwnerUI {
 
 class AssignProductOwnerController{
     +AssignProductOwnerController
-    +getProjectList()
     +getProject(code)
-    +getProjectTeam()
     +getResource(email)
     +assignRole(resource, roleName)
 }

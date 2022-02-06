@@ -482,7 +482,44 @@ class TaskTest {
     }
 
 
+    @Test
+    void checkEffortRulesTest() {
+        //Asserts
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            Company company = new Company();
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+            LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+            LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+            Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+            String taskDescription = "must be at least 20 characters";
+            TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+            //Act
+            new Task("test", taskDescription, 00.00, taskType, resource);
+        });
+    }
 
-
+    @Test
+    public void overrideAndHashCodeTest() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        Task task1 = new Task("test", taskDescription, 20.00, taskType, resource);
+        Task task2 = new Task("test", taskDescription, 20.00, taskType, resource);
+        Task task3 = new Task("test3", taskDescription, 20.00, taskType, resource);
+        //Assert
+        assertNotSame(task1, task2);
+        assertEquals(task1, task2);
+        assertEquals(task1.hashCode(), task2.hashCode());
+        assertNotEquals(task1, task3);
+        assertNotEquals(task1.hashCode(), task3.hashCode());
+    }
 
 }

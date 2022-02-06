@@ -2,12 +2,11 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.dto.ResourceDto;
+import switch2021.project.dto.ResourceDTO;
 import switch2021.project.mapper.ProjectTeamMapper;
 import switch2021.project.model.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -56,29 +55,17 @@ public class GetListHResourceProjectControllerTest {
         proj1.getProjectTeam().saveResource(manuelbras);
         proj1.getProjectTeam().saveResource(manueljose);
         proj1.getProjectTeam().saveResource(manuelfernandes);
-        //Resource List
-        List<Resource> projTeam = proj1.getProjectTeam().getProjectTeamList();
-
-        //create ResourceDto
-        ResourceDto resourceDtoExp1 = new ResourceDto("manuelbras", projectRole.getName(),"2021/11/1","2022/11/15",100,0.5);
-        ResourceDto resourceDtoExp3 = new ResourceDto("manueljose", projectRole.getName(), "2021/11/1", "2022/11/15",100,.5);
-
-        ResourceDto resourceDtoExp5 = new ResourceDto("manuelfernandes", projectRole.getName(), "2021/11/16","2022/11/30",100,1);
-        //create ResourceDtoList
-        List<ResourceDto> resourceDtoListExp = new ArrayList<>();
-        resourceDtoListExp.add(resourceDtoExp1);
-        resourceDtoListExp.add(resourceDtoExp3);
-        resourceDtoListExp.add(resourceDtoExp5);
 
         //Act
-        ResourceDto resDto = projectTeamMapper.toDto(manuelfernandes);
-        List<ResourceDto> resDtoList = projectTeamMapper.toDto(projTeam);
-
-
-    controller.getProjectTeam("Project_2022_1");
+        List<ResourceDTO> resDtoList = controller.getProjectTeam("Project_2022_1");
 
         //Asserts
-        assertEquals(resourceDtoExp5,resDto);
-        assertEquals(resourceDtoListExp,resDtoList);
+        assertEquals("Team Member", resDtoList.get(0).getRole());
+        assertEquals("manuelbras", resDtoList.get(0).getUserName());
+        assertEquals("2021/11/1", resDtoList.get(0).getStartDate());
+        assertEquals("2022/11/15", resDtoList.get(0).getEndDate());
+        assertEquals(100, resDtoList.get(0).getCostPerHour());
+        assertEquals(.5, resDtoList.get(0).getPercentageOfAllocation());
+        assertEquals(3,resDtoList.size());
     }
 }

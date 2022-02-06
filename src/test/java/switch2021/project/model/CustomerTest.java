@@ -1,25 +1,27 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.stores.BusinessSectorStore;
 import switch2021.project.stores.CustomerStore;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerTest {
 
-    @Test
-    void testEquals() {
-    }
 
     @Test
     void testHashCode() {
         Customer customer = new Customer("ZeManel", "zemanel@beaver.com");
         Customer customer2 = new Customer("ZePaulo", "zepaulo@beaver.com");
-        Customer x = customer;
+        Customer x = new Customer("ZeManel", "zemanel@beaver.com");
+
 
         assertNotEquals(customer.hashCode(),customer2.hashCode());
         assertEquals(customer.hashCode(),x.hashCode());
+        assertNotEquals(customer,null);
+        assertEquals(x.getCustomerName(), customer.getCustomerName());
+        assertEquals(x.getCustomerEmail(), customer.getCustomerEmail());
+        assertEquals(x.getCustomerId(), customer.getCustomerId());
+        assertNotEquals(customer2.getCustomerName(), customer.getCustomerName());
+        assertNotEquals(customer2.getCustomerEmail(), customer.getCustomerEmail());
     }
 
     @Test

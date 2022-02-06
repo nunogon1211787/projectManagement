@@ -4,19 +4,38 @@ hide circle
 skinparam classAttributeIconSize 0
 hide methods
 
-title Example of Domain Model extract
+title Domain Model extract
 
-class Class1 {
-    -designation
+class Company{
 }
 
-class Class2 {
-    -id
-    -name
-    -address
-    -password
+class SystemUser{
+      - userName
+      - email
+      - photo
+      - password
+      - function
+      - activateUser
+      }
+
+class ActivationInfo{
+- code
+- link
+- activated
+}
+class UserProfile{
+- idProfile
+- userProfileName
+}
+class Request{
+- idRequest
+- requestDate
+- requestStatus
 }
 
-Class1 "1" -> "0..*" Class2: knows
+SystemUser "1" -- "1" ActivationInfo: belongs to
+SystemUser "1" <-- "*" Request: sent by
+SystemUser "*" -- "1" Company: employed by
+UserProfile "1..*" -- "*" SystemUser: is assigned
 
 @enduml

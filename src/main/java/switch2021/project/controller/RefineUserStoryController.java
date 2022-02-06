@@ -16,14 +16,6 @@ public class RefineUserStoryController {
     private UserStory userStoryParent;
 
     /**
-     * Constructor to UI (with SINGLETON)
-     **/
-
-//    public RefineUserStoryController(){
-//        this.company = App.getInstance().getCompany();
-//    }
-
-    /**
      * Constructor to test (without SINGLETON).
      **/
 

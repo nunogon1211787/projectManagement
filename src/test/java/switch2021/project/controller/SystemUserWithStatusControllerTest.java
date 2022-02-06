@@ -122,4 +122,42 @@ public class SystemUserWithStatusControllerTest {
         assertEquals(newUser2.getEmail(), systemUserWithStatusDto.get(1).getEmail());
         assertEquals(newUser2.isActivateUser(), systemUserWithStatusDto.get(1).isActivateUser());
     }
+
+    @Test
+    @DisplayName("check if the created DTO list contains users active and users inactive")
+    void getListSystemUserWithWithAnyStatus() {
+        //Arrange
+        Company company = new Company();
+        SystemUserWithStatusMapper mapper = new SystemUserWithStatusMapper();
+        SystemUserWithStatusController systemUserWithStatusController = new SystemUserWithStatusController(company, mapper);
+
+        String userName = "manueloliveira";
+        String email = "manueloliveira@beaver.com";
+        String password = "ghi";
+        String passwordConfirmation = "ghi";
+        String function = "tester";
+        String photo = "photo";
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+
+        List<UserProfile> assignedProfileExpected = new ArrayList<>();
+        assignedProfileExpected.add(profile);
+
+        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
+                passwordConfirmation, photo, profile);
+        newUser.setInactivateUser();
+        company.getSystemUserStore().saveSystemUser(newUser);
+        SystemUser newUser2 = company.getSystemUserStore().createSystemUser("Cris", "Cris@ipp.pt",
+                function, password, passwordConfirmation, photo, profile);
+        newUser2.setActivateUser(true);
+        company.getSystemUserStore().saveSystemUser(newUser2);
+
+        // Act
+        List<SystemUserWithStatusDto> systemUserWithStatusDto = systemUserWithStatusController.getListSystemUserWithStatus();
+
+        // Assert
+        assertEquals(2, systemUserWithStatusDto.size());
+        assertEquals(newUser.isActivateUser(), systemUserWithStatusDto.get(0).isActivateUser());
+        assertEquals(newUser2.isActivateUser(), systemUserWithStatusDto.get(1).isActivateUser());
+
+    }
 }

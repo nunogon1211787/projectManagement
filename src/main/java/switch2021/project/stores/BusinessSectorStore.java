@@ -3,8 +3,6 @@ package switch2021.project.stores;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.BusinessSector;
-import switch2021.project.model.ProjectTeam;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

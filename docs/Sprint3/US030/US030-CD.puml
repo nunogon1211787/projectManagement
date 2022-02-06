@@ -58,13 +58,6 @@ class UserStory {
 +getExectution()
 }
 
-class TaskList {
-}
-
-class Tasks{
--percentageOfExecution: double
--status : TaskStatus
-}
 
 ScrumBoardUI ..> ScrumBoardController
 ScrumBoardUI ..> userStoryStatusDTO
@@ -80,8 +73,7 @@ Project "1" *-- "*" SprintList
 SprintList "1" *-- "*" Sprint
 Sprint "1" *-- "1" SprintBacklog
 SprintBacklog "1" o-- "*" UserStory
-UserStory "1" *-- "1" TaskList
-TaskList "1" *-- "*" Tasks
+
 ScrumBoardController ..> SprintBacklog
 ScrumBoardController ..> Sprint
 

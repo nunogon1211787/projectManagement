@@ -10,7 +10,6 @@ import java.util.Objects;
 
 @Getter
 @Setter
-
 public class SprintList {
 
     /**
@@ -75,19 +74,6 @@ public class SprintList {
     }
 
     /**
-     * Add and Remove Sprint Methods. Adds or remove a Sprint object to the Sprint List
-     **/
-
-    private boolean addSprint(Sprint sprint) {
-        if (!validateIdSprint(sprint)) {
-            sprint.setIdSprint(idSprintGenerator());
-        }
-        this.sprintList.add(sprint);
-        return true;
-    }
-
-
-    /**
      * Get Method
      **/
 
@@ -105,17 +91,6 @@ public class SprintList {
         return this.sprintList.contains(sprint);
     }
 
-    private boolean validateIdSprint(Sprint sprint) {
-        boolean msg = true;
-
-        for (Sprint i : this.sprintList) {
-            if (i.getIdSprint() == sprint.getIdSprint()) {
-                msg = false;
-                break;
-            }
-        }
-        return msg;
-    }
 
     /**
      * Method to Validate if StartDate is later than the EndDate of the last Sprint
@@ -161,7 +136,7 @@ public class SprintList {
             result = false;
         } else {
             sprint.setIdSprint(idSprintGenerator());
-            addSprint(sprint);
+            this.sprintList.add(sprint);
         }
         return result;
     }
