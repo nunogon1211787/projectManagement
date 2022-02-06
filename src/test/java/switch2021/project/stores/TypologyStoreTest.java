@@ -73,7 +73,7 @@ public class TypologyStoreTest {
         //Act
         typologyStore.saveTypology(newTypo);
         Typology newTypo2 = typologyStore.createTypology("Test2");
-        Typology newTypo3 = typologyStore.createTypology("Test2");
+        Typology newTypo3 = typologyStore.createTypology("Test3");
         newTypo3.setIdTypology(3);
         typologyStore.saveTypology(newTypo3);
         //Assert
@@ -138,11 +138,11 @@ public class TypologyStoreTest {
         //Act and Assert
         assertEquals(4,typologyStore.getTypologyList().size());
         typologyStore.removeTypology(typologyStore.getTypology(1));
-        assertEquals(3,typologyStore.getTypologyList().size());
+        assertEquals(4,typologyStore.getTypologyList().size());
     }
 
     @Test
-    public void removeTypologyInexistent() {
+    public void removeTypologyNonexistent() {
         //Act
         assertFalse(typologyStore.removeTypology(typologyStore.getTypology(4)));
     }
