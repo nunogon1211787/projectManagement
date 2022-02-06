@@ -97,7 +97,6 @@ public class TypologyStore {
      * Validation Methods
      **/
 
-
     public boolean validateTypology(Typology typo) {
         //Check if Typology already exist
         boolean msg = true;
@@ -109,7 +108,6 @@ public class TypologyStore {
         }
         return msg;
     }
-
 
     /**
      * Save Typology Method. Save a new Typology object to the Typology List
