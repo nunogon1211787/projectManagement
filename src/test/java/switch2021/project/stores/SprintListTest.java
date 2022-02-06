@@ -237,7 +237,7 @@ public class SprintListTest {
 
     @Test
     @DisplayName("Verification Test, to Start a Sprint")
-    public void startASprintGlobalSuccess() {
+    public void startASprintSuccess() {
         //Arrange
         Company company = new Company();
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
@@ -417,7 +417,7 @@ public class SprintListTest {
 
     @Test
     @DisplayName("Fail Global Test, to Start a Sprint - Without project team, with wrong id sprint and wrong startDate")
-    public void startASprintGlobalFail() {
+    public void startASprintFail() {
         //Arrange
         Company company = new Company();
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");

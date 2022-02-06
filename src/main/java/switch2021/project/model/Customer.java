@@ -2,9 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Getter
 @Setter
@@ -12,7 +10,7 @@ public class Customer {
 
     /**
      * Customer Class
-     * Class Atributes - The customer is composed of an automaticly generated ID, an email adress and a customer name.
+     * Attributes - The customer is composed of an automatically generated ID, an email address and a customer name.
      **/
     private long customerId;
     private String customerName;

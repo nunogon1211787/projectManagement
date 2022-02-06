@@ -153,7 +153,7 @@ class ResourceTest {
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
-        assertTrue(input.checkIfResourceIsActiveAndCurrent(LocalDate.now(),2));
+        assertTrue(input.isAvailableToSprint(LocalDate.now(),2));
     }
 
     @Test
@@ -169,7 +169,7 @@ class ResourceTest {
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
-        assertFalse(input.checkIfResourceIsActiveAndCurrent(LocalDate.now(),3));
+        assertFalse(input.isAvailableToSprint(LocalDate.now(),3));
     }
 
 
@@ -225,7 +225,13 @@ class ResourceTest {
         Resource copy = new Resource(joana1, startDateSet, endDateSet, 100, .5);
         copy.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Assert
+        assertNotSame(original,copy);
         assertEquals(original,copy);
+        assertEquals(company.getProjectRoleStore().getProjectRole("Team Member"), copy.getRole());
+        assertEquals(startDate, copy.getStartDate());
+        assertEquals(endDate, copy.getEndDate());
+        assertEquals(original.getCostPerHour(),copy.getCostPerHour());
+        assertEquals(original.getPercentageOfAllocation(), copy.getPercentageOfAllocation());
     }
 
     @Test
@@ -248,6 +254,12 @@ class ResourceTest {
         copy.setRole(company.getProjectRoleStore().getProjectRole("Developer"));
         //Assert
         assertNotEquals(original,copy);
+        assertNotEquals(company.getProjectRoleStore().getProjectRole("Team Member"), copy.getRole());
+        assertNotEquals(startDate, copy.getStartDate());
+        assertNotEquals(endDate, copy.getEndDate());
+        assertNotEquals(original.getCostPerHour(),copy.getCostPerHour());
+        assertNotEquals(original.getPercentageOfAllocation(), copy.getPercentageOfAllocation());
+
     }
 
     @Test

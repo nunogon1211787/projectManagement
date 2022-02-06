@@ -95,4 +95,36 @@ public class AssociateResourceTest {
         assertTrue(users.contains(user2));
 
     }
+
+    @Test
+    @DisplayName("Teste construtor de AssociateResourceController")
+    public void associateResourceControllerFail() {
+        //Arrange
+        //Company
+        Company comTest = new Company();
+        //Project
+        //List<Project> testProjectList = comTest.getArrayProj();
+        LocalDate startProjectDate = LocalDate.of(2021, 2, 25);
+        Customer cust = new Customer("ght@gmail.com", "Name");
+        Typology typo = new Typology("typo1");
+        BusinessSector busSector = new BusinessSector("busSec1");
+        Project proj1 = comTest.getProjectStore().createProject("gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);
+        Project proj2 = comTest.getProjectStore().createProject("ghj", "testtestest", cust, typo, busSector, startProjectDate, 30, 4500);
+        comTest.getProjectStore().saveNewProject(proj1);
+        comTest.getProjectStore().saveNewProject(proj2);
+
+        //user
+        UserProfile pro = comTest.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "description", "gth", "gth", "", pro);
+        comTest.getSystemUserStore().saveSystemUser(newUser);
+        LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
+        LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
+
+        //Construtor Controller
+        AssociateResourceController controllerTest = new AssociateResourceController(comTest);
+        controllerTest.associateResource("fase@gmail.com", "Project_2022_1", startDateToAllocate, endDateToAllocate, 100, .6);
+        boolean result = controllerTest.associateResource("fase@gmail.com", "Project_2022_2", startDateToAllocate, endDateToAllocate, 100, .5);
+
+        assertFalse(result);
+    }
 }

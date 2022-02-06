@@ -135,7 +135,14 @@ public class UserStory {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserStory userStory = (UserStory) o;
-        return idUserStory == userStory.idUserStory && priority == userStory.priority && timeEstimate == userStory.timeEstimate && Objects.equals(name, userStory.name) && Objects.equals(userStoryStatus, userStory.userStoryStatus) && Objects.equals(description, userStory.description) && Objects.equals(ParentUserStory, userStory.ParentUserStory) && Objects.equals(tasks, userStory.tasks);
+        return idUserStory == userStory.idUserStory
+                && priority == userStory.priority
+                && timeEstimate == userStory.timeEstimate
+                && Objects.equals(name, userStory.name)
+                && Objects.equals(userStoryStatus, userStory.userStoryStatus)
+                && Objects.equals(description, userStory.description)
+                && Objects.equals(ParentUserStory, userStory.ParentUserStory)
+                && Objects.equals(tasks, userStory.tasks);
     }
 
     @Override

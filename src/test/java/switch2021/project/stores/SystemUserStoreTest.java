@@ -4,10 +4,8 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser;
 import switch2021.project.model.UserProfile;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SystemUserStoreTest {
@@ -134,7 +132,7 @@ public class SystemUserStoreTest {
     }
 
     @Test
-    public void reachUserbyEmail() {
+    public void reachUserByEmail() {
         Company company = new Company();
         String userName = "anaguedes";
         String email = "anaguedes@beaver.com";
@@ -148,7 +146,6 @@ public class SystemUserStoreTest {
         SystemUser user_verification = company.getSystemUserStore().getUserByEmail("anaguedes@beaver.com");
         assertEquals(user_verification, findUser);
     }
-
 
     @Test
     public void IsYourEmailSuccess() {
@@ -174,6 +171,7 @@ public class SystemUserStoreTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //newUser/list1 and newUser2/list2 are equals
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+
         SystemUserStore list1 = new SystemUserStore();
         list1.saveSystemUser(newUser);
 
@@ -186,8 +184,8 @@ public class SystemUserStoreTest {
         list3.saveSystemUser(newUser3);
         //Assert
         assertNotSame(list1, list2);
-        assertEquals(list1, list2);
-        assertEquals(list1.hashCode(), list2.hashCode());
+        assertEquals(list1.getSystemUserList(), list2.getSystemUserList());
+        assertEquals(list1.getSystemUserList().hashCode(), list2.getSystemUserList().hashCode());
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
     }

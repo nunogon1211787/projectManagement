@@ -1,8 +1,6 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import lombok.Setter;
-import switch2021.project.model.Project;
 import switch2021.project.model.SystemUser;
 import switch2021.project.model.UserProfile;
 import java.util.ArrayList;
@@ -10,20 +8,16 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-@Setter
-
 public class SystemUserStore {
 
     /**
      * Class Attributes
      */
-
     private final List<SystemUser> systemUserList;
 
     /**
      * Constructor
      */
-
     public SystemUserStore() {
         this.systemUserList = new ArrayList<>();
     }
@@ -31,7 +25,6 @@ public class SystemUserStore {
     /**
      * Create Method
      */
-
     public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor) {
         return new SystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);
     }
@@ -39,7 +32,6 @@ public class SystemUserStore {
     /**
      * Getter Methods
      */
-
     public List<SystemUser> getSystemUsers() {
         return new ArrayList<>(this.systemUserList);
     }
@@ -58,26 +50,21 @@ public class SystemUserStore {
 
    ///// ----->>>>>>  Rever Método
     public List<SystemUser> searchUsers(String name, String email, String function, int state, List<UserProfile> profileChoosenList) {
-
         int listSize = this.systemUserList.size();
         List<SystemUser> foundUsersList = new ArrayList<>();
 
         if (listSize != 0) {
-
             for (SystemUser systemUser : this.systemUserList)
                 if (systemUser.hasThisData(name, email, function, state, profileChoosenList)) {
                     foundUsersList.add(systemUser);
                 }
-
         }
-
         return foundUsersList;
     }
 
     /**
      * Validation Methods
      */
-
     public boolean validateSystemUser(SystemUser user) {
         if (user == null || hasEmail(user.getEmail())) {
             return false;
@@ -97,7 +84,6 @@ public class SystemUserStore {
     /**
      * Save Method
      */
-
     public boolean saveSystemUser(SystemUser user) {
         boolean result = true;
 
@@ -112,7 +98,6 @@ public class SystemUserStore {
      /**
       * Override
       **/
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -120,10 +105,6 @@ public class SystemUserStore {
         SystemUserStore that = (SystemUserStore) obj;
         return (this.systemUserList.equals(that.systemUserList));
     }
-
-    /**
-     * Hash
-     **/
 
     @Override
     public int hashCode() {

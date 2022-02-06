@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
 import switch2021.project.model.Typology;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TypologyStoreTest {
@@ -73,9 +72,33 @@ public class TypologyStoreTest {
         //Act
         typologyStore.saveTypology(newTypo);
         Typology newTypo2 = typologyStore.createTypology("Test2");
+        Typology newTypo3 = typologyStore.createTypology("Test3");
+        newTypo3.setIdTypology(3);
+        typologyStore.saveTypology(newTypo3);
         //Assert
         assertEquals(newTypo.getIdTypology(), 3);
+        assertEquals(newTypo3.getIdTypology(), 4);
         assertEquals(newTypo2.getIdTypology(),0); //ID is 0 when initialized.
+    }
+
+    @Test
+    public void idGeneratorTestInvalidID(){
+        //Arrange
+        TypologyStore typologyStore = new TypologyStore();
+        Typology newTypo = typologyStore.createTypology("Test1");
+        Typology newTypo2 = typologyStore.createTypology("Test2");
+        Typology newTypo3 = typologyStore.createTypology("Test3");
+        //Act
+        newTypo.setIdTypology(1);
+        newTypo2.setIdTypology(1);
+        newTypo3.setIdTypology(1);
+        typologyStore.saveTypology(newTypo);
+        typologyStore.saveTypology(newTypo2);
+        typologyStore.saveTypology(newTypo3);
+        //Assert
+        assertEquals(newTypo.getIdTypology(), 1);
+        assertEquals(newTypo3.getIdTypology(), 3);
+        assertEquals(newTypo2.getIdTypology(),2); //ID is 0 when initialized.
     }
 
     @Test //Test for adding new typology not null at Typology List checking attributes and list size.
@@ -122,25 +145,6 @@ public class TypologyStoreTest {
         //Assert
         assertEquals(description, value_description);
         assertEquals(7,typologyStore.getTypologyList().size());
-    }
-
-    @Test
-    public void removeTypologyTest() {
-        //Arrange
-        Typology typo2 = new Typology("TestTypology2");
-        Typology typo3 = new Typology("TestTypology3");
-        typologyStore.saveTypology(typo2);
-        typologyStore.saveTypology(typo3);
-        //Act and Assert
-        assertEquals(4,typologyStore.getTypologyList().size());
-        typologyStore.removeTypology(typologyStore.getTypology(1));
-        assertEquals(3,typologyStore.getTypologyList().size());
-    }
-
-    @Test
-    public void removeTypologyInexistent() {
-        //Act
-        assertFalse(typologyStore.removeTypology(typologyStore.getTypology(4)));
     }
 
     @Test

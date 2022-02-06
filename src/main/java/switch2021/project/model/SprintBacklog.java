@@ -3,7 +3,6 @@ package switch2021.project.model;
 import lombok.Getter;
 import switch2021.project.depracated.UserStoryOfSprint;
 import switch2021.project.stores.UserStoryStatusStore;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -58,13 +57,13 @@ public class SprintBacklog {
         return Objects.hash(userStoryOfSprintList);
     }
 
-    @Override
-    public String toString() {
-        return "SprintBacklog{" +
-                "userStoryOfSprintList=" + userStoryOfSprintList +
-                '}';
-    }
-
+//    @Override
+//    public String toString() {
+//        return "SprintBacklog{" +
+//                "userStoryOfSprintList=" + userStoryOfSprintList +
+//                '}';
+//    }
+// É NECESSÁRIO????
 
     ////Deprecated Methods
     /** Create User Story Of Sprint **/

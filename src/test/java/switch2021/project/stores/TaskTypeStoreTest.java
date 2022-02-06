@@ -120,8 +120,13 @@ class TaskTypeStoreTest {
     void TaskTypeStoreConstructorTest() {
         //Arrange
         TaskTypeStore test1 = new TaskTypeStore();
+        List<TaskType> test1List = test1.getTaskTypeList();
         TaskTypeStore test2 = new TaskTypeStore();
+        List<TaskType> test2List = test2.getTaskTypeList();
         //Assert
+        assertNotSame(test1, test2);
         assertEquals(test1, test2);
+        assertEquals(test1.hashCode(), test2.hashCode());
+        assertEquals(test1List.hashCode(),test2List.hashCode());
     }
 }

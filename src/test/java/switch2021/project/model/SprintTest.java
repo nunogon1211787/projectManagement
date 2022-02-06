@@ -164,14 +164,15 @@ public class SprintTest {
 
     @Test
     @DisplayName("HashCode Verification")
-    public void haschCodeTest() {
-
+    public void hashCodeTest() {
+        //Arrange
         Sprint sprint = new Sprint("Sprint_1", LocalDate.now().minusWeeks(1));
         Sprint sprint2 = new Sprint("Sprint_1", LocalDate.now().minusWeeks(1));
         Sprint sprint3 = new Sprint("Sprint_2", LocalDate.now().minusWeeks(2));
-
-
+        //Assert
+        assertEquals(sprint.hashCode(), sprint2.hashCode());
         assertEquals(sprint, sprint2);
+        assertNotEquals(sprint3.hashCode(), sprint2.hashCode());
         assertNotEquals(sprint3, sprint2);
     }
 

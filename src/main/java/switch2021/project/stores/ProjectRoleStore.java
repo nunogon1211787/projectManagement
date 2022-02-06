@@ -1,14 +1,12 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import lombok.Setter;
 import switch2021.project.model.ProjectRole;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Getter
-@Setter
 public class ProjectRoleStore {
 
     /**
@@ -59,31 +57,6 @@ public class ProjectRoleStore {
 
 
     /**
-     * Add Method
-     **/
-
-    public boolean addProjectRole(ProjectRole role) {
-        boolean msg = false;
-        if (validateIdProjectRole(role)) {
-            this.projectRoleList.add(role);
-            msg = true;
-        } else {
-            role.setIdRole(idProjectRoleGenerator());
-            this.projectRoleList.add(role);
-            msg = true;
-        }
-        return msg;
-    }
-
-    /**
-     * Get Method
-     **/
-
-    public List<ProjectRole> getProjectRolesList() {
-        return this.projectRoleList;
-    }
-
-    /**
      * Get Project Role by Name Methods
      **/
 
@@ -119,18 +92,8 @@ public class ProjectRoleStore {
     /**
      * Validation Method
      **/
-    private boolean validateProjectRole(ProjectRole role) {
-        //Check empty fields on name and type
-        boolean msg = false;
-
-        if (validateProjectRoleExist(role)) {
-            msg = true;
-        }
-        return msg;
-    }
-
     //Check if profile already exist
-    private boolean validateProjectRoleExist(ProjectRole role) {
+    private boolean validateProjectRole(ProjectRole role) {
         boolean msg = false;
         for (ProjectRole up : projectRoleList) {
             if (up.equals(role)) {
@@ -141,20 +104,9 @@ public class ProjectRoleStore {
         return msg;
     }
 
-    private boolean validateIdProjectRole(ProjectRole role) {
-        boolean msg = false;
-        for (ProjectRole up : projectRoleList) {
-            if (up.getIdRole() == (role.getIdRole())) {
-                msg = true;
-                break;
-            }
-        }
-        return msg;
-    }
-
 
     /**
-     * Save Typology Method. Save a new Typology object to the Typology List
+     * Save Project Role Method. Save a new Project Role object to the Project Role List
      **/
     public boolean saveProjectRole(ProjectRole role) {
         if (validateProjectRole(role)) {
@@ -162,12 +114,13 @@ public class ProjectRoleStore {
         } else {
             role.setIdRole(idProjectRoleGenerator());
         }
-        return addProjectRole(role);
+        return this.projectRoleList.add(role);
     }
 
     /**
      * Override Equals
      **/
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!(obj instanceof ProjectRoleStore)) return false;
@@ -175,10 +128,6 @@ public class ProjectRoleStore {
         return
                 (this.projectRoleList.equals(that.projectRoleList));
     }
-
-    /**
-     * Hash
-     **/
 
     @Override
     public int hashCode() {

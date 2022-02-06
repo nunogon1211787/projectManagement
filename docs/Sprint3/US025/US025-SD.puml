@@ -7,8 +7,8 @@ autoactivate on
 autonumber
 
 actor "Administrator" as Administrator
-participant ":InnactivateAnUserAccountUI" as UI
-participant ":InnactivateAnUserAccountController" as Ctrl
+participant ":InactivateAnUserAccountUI" as UI
+participant ":InactivateAnUserAccountController" as Ctrl
 participant ":Company" as Company
 participant "systemUserStore:SystemUserStore" as SystemUserStore
 participant "user:SystemUser" as SystemUser
@@ -16,7 +16,7 @@ participant "user:SystemUser" as SystemUser
 
 activate "Administrator"
 
-"Administrator" -> UI: Innactive an User Account
+"Administrator" -> UI: Inactive an User Account
 UI -> Ctrl: inactiveUser()
 Ctrl -> Company: getSystemUserStore()
 return systemUserStore
@@ -29,6 +29,6 @@ return user
 Ctrl -> SystemUser : setInactivateUser()
 SystemUser --> Ctrl : true
 Ctrl --> UI : true
-UI --> "Administrator": Account innactivated
+UI --> "Administrator": Account inactivated
 
 @enduml

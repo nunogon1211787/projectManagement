@@ -95,6 +95,8 @@ class ProjectStatusStoreTest {
         ProjectStatus status2 = new ProjectStatus("teste2");
 
         assertNotEquals(status1,status2);
+        assertEquals(status1.getClass(),status2.getClass());
+        assertNotEquals(status1, null);
     }
 
     @Test
