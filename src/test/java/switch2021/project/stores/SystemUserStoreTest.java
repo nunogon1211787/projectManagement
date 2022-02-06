@@ -229,4 +229,16 @@ public class SystemUserStoreTest {
         //Assert
         assertFalse(expected);
     }
+
+    @Test
+    public void validateSystemUser4() {
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser systemUser = company.getSystemUserStore().createSystemUser("anaguedes", "anaguedes@beaver.com",
+                "POAAAA", "hello123", "hello123", "photo.png", profile);
+        boolean expected = company.getSystemUserStore().validateSystemUser(systemUser);
+        company.getSystemUserStore().saveSystemUser(systemUser);
+        //Assert
+        assertTrue(expected);
+    }
 }
