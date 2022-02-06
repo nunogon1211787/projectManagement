@@ -189,4 +189,44 @@ public class SystemUserStoreTest {
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
     }
+
+    @Test
+    public void validateSystemUser() {
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser systemUser = company.getSystemUserStore().createSystemUser("anaguedes", "anaguedes@beaver.com",
+                "POAAAA", "hello123", "hello123", "photo.png", profile);
+        boolean expected = company.getSystemUserStore().validateSystemUser(systemUser);
+        company.getSystemUserStore().saveSystemUser(systemUser);
+        //Assert
+        assertTrue(expected);
+    }
+
+    @Test
+    public void validateSystemUser2() {
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser systemUser = company.getSystemUserStore().createSystemUser("anaguedes", "anaguedes@beaver.com",
+                "PO", "hello123", "hello123", "photo.png", profile);
+        SystemUser systemUser2 = company.getSystemUserStore().createSystemUser("anaguedes", "anaguedes@beaver.com",
+                "PO", "hello123", "hello123", "photo.png", profile);
+        SystemUserStore list1 = new SystemUserStore();
+        list1.saveSystemUser(systemUser);
+        list1.saveSystemUser(systemUser2);
+
+        boolean expected = list1.validateSystemUser(systemUser);
+        //Assert
+        assertFalse(expected);
+    }
+
+    @Test
+    public void validateSystemUser3() {
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser systemUser = null;
+        boolean expected = company.getSystemUserStore().validateSystemUser(systemUser);
+        company.getSystemUserStore().saveSystemUser(systemUser);
+        //Assert
+        assertFalse(expected);
+    }
 }
