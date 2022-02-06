@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
 import switch2021.project.model.Typology;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TypologyStoreTest {
@@ -147,25 +146,6 @@ public class TypologyStoreTest {
         assertEquals(description, value_description);
         assertEquals(7,typologyStore.getTypologyList().size());
     }
-
-//    @Test
-//    public void removeTypologyTest() {
-//        //Arrange
-//        Typology typo2 = new Typology("TestTypology2");
-//        Typology typo3 = new Typology("TestTypology3");
-//        typologyStore.saveTypology(typo2);
-//        typologyStore.saveTypology(typo3);
-//        //Act and Assert
-//        assertEquals(4,typologyStore.getTypologyList().size());
-//        typologyStore.removeTypology(typologyStore.getTypology(1));
-//        assertEquals(4,typologyStore.getTypologyList().size());
-//    }
-//
-//    @Test
-//    public void removeTypologyNonexistent() {
-//        //Act
-//        assertFalse(typologyStore.removeTypology(typologyStore.getTypology(4)));
-//    }
 
     @Test
     public void getTypologyWithDescriptionTest(){

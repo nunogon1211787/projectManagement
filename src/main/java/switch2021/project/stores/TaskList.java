@@ -7,7 +7,6 @@ import switch2021.project.model.Project;
 import switch2021.project.model.Resource;
 import switch2021.project.model.Task;
 import switch2021.project.model.TaskType;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

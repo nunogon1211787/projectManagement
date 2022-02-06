@@ -57,19 +57,6 @@ public class ProjectRoleStore {
 
 
     /**
-     * Add Method
-     **/
-
-    public boolean addProjectRole(ProjectRole role) {
-        if (!validateIdProjectRole(role)) {
-            role.setIdRole(idProjectRoleGenerator());
-        }
-        this.projectRoleList.add(role);
-        return true;
-    }
-
-
-    /**
      * Get Project Role by Name Methods
      **/
 
@@ -117,17 +104,6 @@ public class ProjectRoleStore {
         return msg;
     }
 
-    private boolean validateIdProjectRole(ProjectRole role) {
-        boolean msg = false;
-        for (ProjectRole up : projectRoleList) {
-            if (up.getIdRole() == (role.getIdRole())) {
-                msg = true;
-                break;
-            }
-        }
-        return msg;
-    }
-
 
     /**
      * Save Project Role Method. Save a new Project Role object to the Project Role List
@@ -138,7 +114,7 @@ public class ProjectRoleStore {
         } else {
             role.setIdRole(idProjectRoleGenerator());
         }
-        return addProjectRole(role);
+        return this.projectRoleList.add(role);
     }
 
     /**
