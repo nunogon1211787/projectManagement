@@ -8,10 +8,10 @@ public class ProjectDTO {
     /**
      * Attributes
      **/
-    private String code;
-    private String projectName;
-    private String startDate;
-    private String endDate;
+    private final String code;
+    private final String projectName;
+    private final String startDate;
+    private final String endDate;
 
     /**
      * Constructor to test (without SINGLETON)
