@@ -1050,5 +1050,20 @@ class SystemUserTest {
         assertFalse(ana.isActivateUser());
     }
 
+    @Test
+    public void setAllDataFail() {
+
+        //Arrange
+
+            Company company = new Company();
+            UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+            SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+                    "123", "123", "img_123", userProfile);
+            //Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            assertFalse(joana.setAllData("", "00", "img_900"));
+        });
+    }
+
 
 }
