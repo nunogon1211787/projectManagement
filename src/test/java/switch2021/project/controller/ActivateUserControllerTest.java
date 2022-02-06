@@ -10,7 +10,7 @@ public class ActivateUserControllerTest {
 
 
     @Test
-    public void activeUser() {
+    public void activateUser() {
         //Arrange
         Company company = new Company();
         ActivateUserController controller = new ActivateUserController(company);
