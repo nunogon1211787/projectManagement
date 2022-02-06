@@ -73,8 +73,12 @@ public class TypologyStoreTest {
         //Act
         typologyStore.saveTypology(newTypo);
         Typology newTypo2 = typologyStore.createTypology("Test2");
+        Typology newTypo3 = typologyStore.createTypology("Test2");
+        newTypo3.setIdTypology(3);
+        typologyStore.saveTypology(newTypo3);
         //Assert
         assertEquals(newTypo.getIdTypology(), 3);
+        assertEquals(newTypo3.getIdTypology(), 4);
         assertEquals(newTypo2.getIdTypology(),0); //ID is 0 when initialized.
     }
 

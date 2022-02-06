@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-
 public class TypologyStore {
 
     /**
@@ -54,7 +53,7 @@ public class TypologyStore {
 
     public int idTypologyGenerator() {
         int id = 1;
-        if (this.typologyList.size() > 0) {
+        if (!this.typologyList.isEmpty()) {
             id = this.typologyList.get(typologyList.size() - 1).getIdTypology() + 1;
         }
         return id;
@@ -77,7 +76,7 @@ public class TypologyStore {
     public boolean removeTypology(Typology typo) {
         boolean msg = false;
         if (typologyList.contains(typo)) {
-            getOriginalTypologyList().remove(typo);
+            getTypologyList().remove(typo);
             msg = true;
         }
         return msg;
@@ -86,10 +85,6 @@ public class TypologyStore {
     /**
      * Getters and Setters Methods
      **/
-
-    private List<Typology> getOriginalTypologyList() {
-        return this.typologyList;
-    }
 
     public List<Typology> getTypologyList() {
         return new ArrayList<>(this.typologyList);
