@@ -241,6 +241,18 @@ class SystemUserTest {
     }
 
     @Test
+    public void setAllDataFailPhotoEmpty2() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "", tes);
+            newUser.setAllData("Joana Silva", "Aluna_10", "");
+        });
+    }
+
+    @Test
     public void createSystemUserSuccess() {
         //Arrange
         Company company = new Company();
