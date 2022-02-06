@@ -93,6 +93,20 @@ class SystemUserTest {
     }
 
     @Test
+    public void InvalidPasswordInput() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            Company company = new Company();
+            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "*#&", "123456", "img_123", profile);
+            //Act
+            UserProfile newProfile = company.getUserProfileStore().getUserProfile("Visitor");
+            user.updateProfile(profile, newProfile);
+        });
+    }
+
+    @Test
     public void setAllDataSuccess() {
 
         //Arrange
@@ -129,6 +143,44 @@ class SystemUserTest {
     }
 
     @Test
+    public void setAllDataFailUsernameLowLength2() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("JJJJ", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.setAllData("JJ", "Aluna_10", "img_900");
+
+
+        });
+    }
+
+    @Test
+    public void setAllDataFailUsernameLowLength3() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("JJJJ", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.setAllData("  ", "Aluna_10", "img_900");
+        });
+    }
+
+    @Test
+    public void setAllDataFailUsernameLowLength4() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("JJJJ", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.setAllData("JJ", "Aluna_10", "img_900");
+        });
+    }
+
+    @Test
     public void setAllDataFailFunctionEmpty() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
@@ -149,6 +201,30 @@ class SystemUserTest {
             SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.checkAllData("Joana Silva", "A", "img_123");
+        });
+    }
+
+    @Test
+    public void setAllDataFailFunctionLowLength2() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.setAllData("Joana Silva", "A", "img_123");
+        });
+    }
+
+    @Test
+    public void setAllDataFailFunctionLowLength3() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.setAllData("Joana Silva", "   ", "img_123");
         });
     }
 
