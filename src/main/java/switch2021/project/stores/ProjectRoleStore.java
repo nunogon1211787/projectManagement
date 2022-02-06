@@ -105,18 +105,8 @@ public class ProjectRoleStore {
     /**
      * Validation Method
      **/
-    private boolean validateProjectRole(ProjectRole role) {
-        //Check empty fields on name and type
-        boolean msg = false;
-
-        if (validateProjectRoleExist(role)) {
-            msg = true;
-        }
-        return msg;
-    }
-
     //Check if profile already exist
-    private boolean validateProjectRoleExist(ProjectRole role) {
+    private boolean validateProjectRole(ProjectRole role) {
         boolean msg = false;
         for (ProjectRole up : projectRoleList) {
             if (up.equals(role)) {
@@ -140,7 +130,7 @@ public class ProjectRoleStore {
 
 
     /**
-     * Save Typology Method. Save a new Typology object to the Typology List
+     * Save Project Role Method. Save a new Project Role object to the Project Role List
      **/
     public boolean saveProjectRole(ProjectRole role) {
         if (validateProjectRole(role)) {
@@ -154,6 +144,7 @@ public class ProjectRoleStore {
     /**
      * Override Equals
      **/
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (!(obj instanceof ProjectRoleStore)) return false;
@@ -161,10 +152,6 @@ public class ProjectRoleStore {
         return
                 (this.projectRoleList.equals(that.projectRoleList));
     }
-
-    /**
-     * Hash
-     **/
 
     @Override
     public int hashCode() {
