@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title Domain Model excerpt - US029 - As Project Manager, i want to start a sprint.
+
+together {
+class Company{
+}
+class Project{
+}
+}
+together {
+class ProjectTeam{
+}
+together {
+class Sprint{
+-id
+-startDate
+}
+
+
+Company "1" -left-> "*" Project: contains
+Project "1" <-right- "1" ProjectTeam: belongs to
+Sprint "1" --> "*" Project: belongs to
+
+
+@enduml

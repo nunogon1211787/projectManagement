@@ -24,6 +24,7 @@ activate ProjectManager
 ProjectManager -> UI: Asks to Start a Sprint
 UI -> Ctrl: startASprint(sprintDTO)
 Ctrl -> sprintDTO: code = getCode()
+sprintDTO --> Ctrl: code
 deactivate sprintDTO
 Ctrl -> company: getProjectStore()
 company --> Ctrl: projectStore
@@ -60,11 +61,8 @@ end
 deactivate sprintList
 sprintList -> sprint: setStartDate()
 sprint --> sprintList: true
-'validation if the project team has a PO and SM to start the sprint
-'projectTeam --> sprintList: true
 end
-
-sprintList --> Ctrl: result
+sprintList --> Ctrl: true
 Ctrl --> UI: true
 UI --> ProjectManager: Confirmation Information Success
 @enduml
