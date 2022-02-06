@@ -41,13 +41,13 @@ public class ProjectsMapperTest {
         projectsMapper.toDTO(company.getProjectStore().getProjectList());
 
         List<ProjectDTO> test = new ArrayList<>();
-        ProjectDTO projectDTO1 = new ProjectDTO("Project_2022_1" ,"prototype1", "proj1Prototype", "2021/11/1", null, 2, 3000, 0);
+        ProjectDTO projectDTO1 = new ProjectDTO("Project_2022_1" ,"prototype1", "2021/11/1", null);
         test.add(projectDTO1);
-        ProjectDTO projectDTO2 = new ProjectDTO("Project_2022_2" ,"prototype2", "proj2Prototype", "2021/11/1", null, 2, 3000, 0);
+        ProjectDTO projectDTO2 = new ProjectDTO("Project_2022_2" ,"prototype2", "2021/11/1", null);
         test.add(projectDTO2);
-        ProjectDTO projectDTO3 = new ProjectDTO("Project_2022_3" ,"prototype3", "proj3Prototype", "2021/11/1", null, 2, 3000, 0);
+        ProjectDTO projectDTO3 = new ProjectDTO("Project_2022_3" ,"prototype3", "2021/11/1", null);
         test.add(projectDTO3);
-        ProjectDTO projectDTO4 = new ProjectDTO("Project_2022_4" ,"prototype4", "proj4Prototype", "2021/11/1", null, 2, 3000, 0);
+        ProjectDTO projectDTO4 = new ProjectDTO("Project_2022_4" ,"prototype4", "2021/11/1", null);
         test.add(projectDTO4);
         //Assert
         assertEquals(test.size(), projectsMapper.getProjectDTOList().size());
@@ -73,12 +73,8 @@ public class ProjectsMapperTest {
         //Assert
         assertEquals("Project_2022_1",test.getCode());
         assertEquals("prototype1",test.getProjectName());
-        assertEquals("proj1Prototype",test.getDescription());
         assertEquals("2021/11/1",test.getStartDate());
         assertNull(test.getEndDate());
-        assertEquals(2,test.getNumberOfSprints());
-        assertEquals(3000,test.getBudget());
-        assertEquals(0, test.getSprintDuration());
     }
 
     @Test
@@ -101,12 +97,8 @@ public class ProjectsMapperTest {
         //Assert
         assertEquals("Project_2022_1",test.getCode());
         assertEquals("prototype1",test.getProjectName());
-        assertEquals("proj1Prototype",test.getDescription());
         assertEquals("2021/11/1",test.getStartDate());
         assertEquals("2022/11/1", test.getEndDate());
-        assertEquals(2,test.getNumberOfSprints());
-        assertEquals(3000,test.getBudget());
-        assertEquals(0, test.getSprintDuration());
     }
 
     @Test
@@ -129,12 +121,8 @@ public class ProjectsMapperTest {
         //Assert
         assertNotEquals("Project2022_1",test.getCode());
         assertNotEquals("type1",test.getProjectName());
-        assertNotEquals("proj1",test.getDescription());
         assertNotEquals("2021/11/2",test.getStartDate());
         assertNotEquals("2022/11/2", test.getEndDate());
-        assertNotEquals(22,test.getNumberOfSprints());
-        assertNotEquals(30,test.getBudget());
-        assertNotEquals(1, test.getSprintDuration());
     }
 
     @Test
@@ -142,14 +130,6 @@ public class ProjectsMapperTest {
         //Arrange
         Company company = new Company();
         ProjectsMapper projectsMapper = new ProjectsMapper();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
-        company.getCustomerStore().saveNewCustomer(customer);
-        BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
-        company.getBusinessSectorStore().addBusinessSector(sector);
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         //Act
         List<ProjectDTO> test = new ArrayList<>();
         //Assert
@@ -186,15 +166,14 @@ public class ProjectsMapperTest {
     @Test
     public void overrideHashCodeNotEqualTest() {
         //Arrange and Act
-        ProjectDTO projectDTO1 = new ProjectDTO("Project_2022_1" ,"prototype1", "proj1Prototype", "2021/11/1", null, 2, 3000, 0);
-        ProjectDTO projectDTO3 = new ProjectDTO("Project_2022_3" ,"prototype3", "proj3Prototype", "2022/11/1", null, 2, 3000, 0);
+        ProjectDTO projectDTO1 = new ProjectDTO("Project_2022_1" ,"prototype1", "2021/11/1", null);
+        ProjectDTO projectDTO3 = new ProjectDTO("Project_2022_3" ,"prototype3", "2022/11/1", null);
         //Assert
         assertNotSame(projectDTO1, projectDTO3);
         assertNotEquals(projectDTO1,projectDTO3);
         assertNotEquals(projectDTO1.hashCode(),projectDTO3.hashCode());
         assertNotEquals(projectDTO1.getCode(),projectDTO3.getCode());
         assertNotEquals(projectDTO1.getProjectName(),projectDTO3.getProjectName());
-        assertNotEquals(projectDTO1.getDescription(),projectDTO3.getDescription());
         assertNotEquals(projectDTO1.getStartDate(),projectDTO3.getStartDate());
     }
 }

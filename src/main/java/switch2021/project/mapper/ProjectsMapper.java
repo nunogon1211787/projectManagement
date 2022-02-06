@@ -25,8 +25,8 @@ public class ProjectsMapper {
             endDate = project.getEndDate().getYear()
                     + "/" + project.getEndDate().getMonthValue() + "/" + project.getEndDate().getDayOfMonth();
         }
-        return new ProjectDTO(project.getCode(), project.getProjectName(), project.getDescription(),
-                startDate, endDate, project.getNumberOfSprints(), project.getBudget(), project.getSprintDuration());
+        return new ProjectDTO(project.getCode(), project.getProjectName(),
+                startDate, endDate);
     }
 
 
