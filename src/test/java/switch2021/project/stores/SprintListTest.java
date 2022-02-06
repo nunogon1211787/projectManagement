@@ -474,5 +474,23 @@ public class SprintListTest {
                 proj1.getProjectTeam(), 2));
     }
 
+    @Test
+    @DisplayName("Validate start date")
+    public void validateStartDate() {
+        //Arrange
+        LocalDate startDatej4 = LocalDate.of(2022, 1, 15);
+        LocalDate startDatej5 = LocalDate.of(2022, 1, 1);
+
+        SprintList sprintListTest = new SprintList();
+        Sprint sprintTest = sprintListTest.createSprint("String_0", startDatej4, 2);
+        Sprint sprintTest2 = sprintListTest.createSprint("String_0", startDatej5, 2);
+        //Act
+        sprintListTest.saveSprint(sprintTest);
+        sprintListTest.saveSprint(sprintTest2);
+
+        //Assert
+        assertEquals(startDatej4, sprintTest.getStartDate());
+    }
+
 }
 
