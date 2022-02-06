@@ -56,8 +56,8 @@ public class AssignProductOwnerController {
         LocalDate startDateNextSprint = project.getSprints().getCurrentSprint().getEndDate().plusDays(1);
         int sprintDuration = project.getSprintDuration();
         ProjectRole role = company.getProjectRoleStore().getProjectRole(roleName);
-        if (this.resource.getUser().getUserName().equals(name) && project.getProjectTeam().assignProjectRole
-                (resource, startDateNextSprint, sprintDuration, role)) {
+        if (this.resource.getUser().getUserName().equals(name)
+                && project.getProjectTeam().assignProjectRole(resource, startDateNextSprint, sprintDuration, role)) {
             msg = true;
         }
         return msg;
