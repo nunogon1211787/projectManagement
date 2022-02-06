@@ -1,8 +1,10 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.Task;
 import switch2021.project.model.TaskStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -87,6 +89,36 @@ class TaskStatusStoreTest {
         //Assert
         assertEquals(1, status1.getIdTaskStatus());
         assertEquals(2, status2.getIdTaskStatus());
+    }
+
+    @Test
+    void TaskStatusListSuccess() {
+        //Arrange
+        TaskStatusStore test = new TaskStatusStore();
+        TaskStatus status1 = new TaskStatus("status1");
+        TaskStatus status2 = new TaskStatus("status2");
+        test.saveTaskStatus(status1);
+        test.saveTaskStatus(status2);
+        //Act
+        List<TaskStatus> testList = new ArrayList<>();
+        testList.add(status1);
+        testList.add(status2);
+        //Assert
+        assertEquals(testList, test.getTaskStatusList());
+    }
+
+    @Test
+    void TaskStatusListFail() {
+        //Arrange
+        TaskStatusStore test = new TaskStatusStore();
+        TaskStatus status1 = new TaskStatus("status1");
+        TaskStatus status2 = new TaskStatus("status2");
+        test.saveTaskStatus(status1);
+        test.saveTaskStatus(status2);
+        //Act
+        List<TaskStatus> testList = new ArrayList<>();
+        //Assert
+        assertNotEquals(testList, test.getTaskStatusList());
     }
 
     @Test

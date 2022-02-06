@@ -1,7 +1,6 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import lombok.Setter;
 import switch2021.project.mapper.TaskMapper;
 import switch2021.project.dto.CreateTaskDTO;
 import switch2021.project.model.Project;
@@ -14,19 +13,16 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-@Setter
 public class TaskList {
 
     /**
      * Attributes
      */
-
     private List<Task> taskList;
 
     /**
      * Constructor
      */
-
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
@@ -35,21 +31,18 @@ public class TaskList {
     /**
      * Methods to create Task
      */
-
     public Task createTask(String name, String description, double effortEstimate, TaskType type, Resource responsible){
         return new Task(name, description, effortEstimate, type, responsible);
     }
 
     // Create task with DTO and Mapper. US032 - Sprint 3
     public boolean createSprintTask(CreateTaskDTO dto, TaskMapper mapper, Project proj){
-
         Task newTask = mapper.toModel(dto, proj);
 
         return saveTask(newTask);
     }
 
     public boolean createUsTask(CreateTaskDTO dto, TaskMapper mapper, Project proj){
-
         Task newTask = mapper.toModel(dto, proj);
 
         return saveTask(newTask);
@@ -58,57 +51,41 @@ public class TaskList {
     /**
      * Getter methods
      */
-
     public List<String> getTasksNames(){
-
         List<String> tasksNames = new ArrayList<>();
 
         for (Task task : this.taskList) {
-
             tasksNames.add(task.getName());
-
         }
-
         return tasksNames;
     }
 
     public Task getTaskById(int id){
-
         Task result = null;
 
         for (Task task : this.taskList) {
-
             if (task.hasId(id)) {
                 result = task;
             }
-
         }
-
         return result;
-
     }
 
     public Task getTaskByName(String name){
-
         Task result = null;
 
         for (Task task : this.taskList) {
-
             if (task.hasName(name)) {
                 result = task;
             }
-
         }
-
         return result;
-
     }
 
 
     /**
      * Method to add a task to the list
      */
-
     private boolean addTaskToTheList(Task task) {
         this.taskList.add(task);
         return true;
@@ -117,7 +94,6 @@ public class TaskList {
     /**
      * Method to remove an object
      */
-
     public boolean removeTaskFromTheList(Task task) {
         this.taskList.remove(task);
 
@@ -127,7 +103,6 @@ public class TaskList {
     /**
      * Method to save task
      */
-
     public boolean saveTask(Task newTask) {
 
         boolean result = false;
@@ -148,7 +123,6 @@ public class TaskList {
     /**
      * Method to validate if a task already exists
      */
-
     private boolean validateIfTaskAlreadyExists(Task task) {
         return this.taskList.contains(task);
     }
@@ -167,7 +141,6 @@ public class TaskList {
     /**
      * Override
      */
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -175,10 +148,6 @@ public class TaskList {
         TaskList taskList = (TaskList) o;
         return Objects.equals(this.taskList, taskList.taskList);
     }
-
-    /**
-     * Hash
-     */
 
     @Override
     public int hashCode() {

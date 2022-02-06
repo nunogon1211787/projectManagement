@@ -1,28 +1,24 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import lombok.Setter;
-import switch2021.project.model.ProjectTeam;
 import switch2021.project.model.Request;
 import switch2021.project.model.SystemUser;
 import switch2021.project.model.UserProfile;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Setter
 @Getter
-
 public class RequestStore {
 
     /**
      * Class Attributes
      **/
-
     private List<Request> requestProfileList;
 
-
+    /**
+     * Constructor
+     */
     public RequestStore (){
         this.requestProfileList = new ArrayList<>();
     }
@@ -30,7 +26,6 @@ public class RequestStore {
     /**
      * Creator Method
      **/
-
     public Request createProfileRequest (UserProfile Profile, SystemUser user ) {
 
         return new Request(Profile,user);
@@ -39,13 +34,11 @@ public class RequestStore {
     /**
      * ID Generator
      */
-
     public int idGenerator () {
 
         int id = 1;
         if (getRequestProfileList().size() !=0){
             id = this.requestProfileList.get(this.requestProfileList.size() -1).getIdRequest() +1;
-
         }
         return id;
     }
@@ -53,7 +46,6 @@ public class RequestStore {
     /**
      * Add Method
      **/
-
     public boolean addProfileRequest(Request request) {
 
         if(validateIfProfileRequestedItsNotAlreadyAssigned(request))
@@ -72,17 +64,8 @@ public class RequestStore {
     }
 
     /**
-     * Getter Method
-     **/
-
-    public List<Request> getRequestProfileList() {
-        return this.requestProfileList;
-    }
-
-    /**
      * Remove Method
      */
-
     public boolean removeProfileRequest (Request request){
         this.requestProfileList.remove(request);
 
@@ -92,7 +75,6 @@ public class RequestStore {
     /**
      * Method To Validate If Requested Profile Is Not Already Assigned To The User
      */
-
     private boolean validateIfProfileRequestedItsNotAlreadyAssigned (Request request) {
         return request.getUser().hasProfile(request.getProfileRequested());
     }
@@ -100,7 +82,6 @@ public class RequestStore {
     /**
      * Method to validate if a request already exists
      * */
-
     private boolean validateIfRequestAlreadyExists(Request request){
         return this.requestProfileList.contains(request);
     }
@@ -108,7 +89,6 @@ public class RequestStore {
     /**
      * Method to validate request status
      */
-
     public boolean validateStatusOfARequest (Request request){
         return request.isRequestStatus();
 
@@ -118,7 +98,6 @@ public class RequestStore {
     /**
      * Validation Method
      */
-
     private boolean validateRequest(Request newRequest) {
 
         //Check if request already exist
@@ -133,31 +112,19 @@ public class RequestStore {
     /**
      * Save Method
      */
-
     public boolean saveRequest(Request newRequest) {
 
         boolean result = false;
 
         if (validateRequest(newRequest)) {
-            addProfileRequest(newRequest);
-            result = true;
+            result = addProfileRequest(newRequest);
         }
         return result;
     }
 
     /**
-     * Method to change request status
-     * */
-
-    public void changeRequestStatus(Request request){
-        request.changeRequestStatus();
-
-    }
-
-    /**
      * Override
      **/
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -166,14 +133,8 @@ public class RequestStore {
         return Objects.equals(requestProfileList, that.requestProfileList);
     }
 
-    /**
-     * Hash
-     **/
-
     @Override
     public int hashCode() {
         return Objects.hash(requestProfileList);
     }
-
-
 }

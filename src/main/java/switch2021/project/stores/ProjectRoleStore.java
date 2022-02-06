@@ -1,14 +1,12 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import lombok.Setter;
 import switch2021.project.model.ProjectRole;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Getter
-@Setter
 public class ProjectRoleStore {
 
     /**
@@ -63,25 +61,13 @@ public class ProjectRoleStore {
      **/
 
     public boolean addProjectRole(ProjectRole role) {
-        boolean msg = false;
-        if (validateIdProjectRole(role)) {
-            this.projectRoleList.add(role);
-            msg = true;
-        } else {
+        if (!validateIdProjectRole(role)) {
             role.setIdRole(idProjectRoleGenerator());
-            this.projectRoleList.add(role);
-            msg = true;
         }
-        return msg;
+        this.projectRoleList.add(role);
+        return true;
     }
 
-    /**
-     * Get Method
-     **/
-
-    public List<ProjectRole> getProjectRolesList() {
-        return this.projectRoleList;
-    }
 
     /**
      * Get Project Role by Name Methods

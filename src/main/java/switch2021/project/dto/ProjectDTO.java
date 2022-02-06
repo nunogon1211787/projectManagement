@@ -1,7 +1,10 @@
 package switch2021.project.dto;
 
+import lombok.Getter;
+
 import java.util.Objects;
 
+@Getter
 public class ProjectDTO {
 
     /**
@@ -21,7 +24,8 @@ public class ProjectDTO {
     /**
      * Constructor to test (without SINGLETON)
      **/
-    public ProjectDTO(String code, String projectName, String description, String startDate, String endDate, int numberOfSprints, double budget, int sprintDuration) {
+    public ProjectDTO(String code, String projectName, String description, String startDate,
+                      String endDate, int numberOfSprints, double budget, int sprintDuration) {
         this.code = code;
         this.projectName = projectName;
         this.description = description;
@@ -39,15 +43,15 @@ public class ProjectDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ProjectDTO)) return false;
-        ProjectDTO projectDTO = (ProjectDTO) o;
-        return  Objects.equals(code, projectDTO.code)
-                && Objects.equals(projectName, projectDTO.projectName)
-                && Objects.equals(description, projectDTO.description)
-                && Objects.equals(startDate, projectDTO.startDate)
-                && Objects.equals(endDate, projectDTO.endDate)
-                && numberOfSprints == projectDTO.numberOfSprints
-                && Double.compare(projectDTO.budget, budget) == 0
-                && sprintDuration == projectDTO.sprintDuration;
+        ProjectDTO that = (ProjectDTO) o;
+        return  this.code.equals(that.code)
+                && this.projectName.equals(that.projectName)
+                && this.description.equals(that.description)
+                && this.startDate.equals(that.startDate)
+                && this.endDate == that.endDate
+                && this.numberOfSprints == that.numberOfSprints
+                && this.budget == that.budget
+                && this.sprintDuration == that.sprintDuration;
     }
 
     @Override

@@ -1,16 +1,11 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.stores.BusinessSectorStore;
 import switch2021.project.stores.CustomerStore;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CustomerTest {
 
-    @Test
-    void testEquals() {
-    }
 
     @Test
     void testHashCode() {
