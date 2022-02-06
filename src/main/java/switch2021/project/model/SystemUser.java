@@ -48,23 +48,6 @@ public class SystemUser {
         this.assignedProfileList.add(profile);
     }
 
-//ver este método (13/01/2022):
-    // Copy Constructor. Para criar um novo objeto, igual ao parâmetro, mas sem levar adiante as referências do objeto original. */
-    /*public SystemUser(SystemUser originalUser) {
-        this.userName = originalUser.userName;
-        this.email = originalUser.email;
-        this.photo = originalUser.photo;
-        this.function = originalUser.function;
-        this.password = originalUser.password;
-        this.activateUser = originalUser.activateUser;
-        this.assignedProfileList = deepCopyListProfile(originalUser.assignedProfileList);
-    }
-
-    private UserProfileStore deepCopyListProfile(UserProfileStore originalList) {
-        UserProfileStore deepCopyList = this.assignedProfileList;
-        return deepCopyList;
-    }*/
-
     public boolean getActivateUserStatus() {
         return activateUser;
     }
