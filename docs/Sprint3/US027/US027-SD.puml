@@ -1,101 +1,75 @@
 @startuml
 
-title "US014 - As Director, I want to define the Product Owner of a project."
+title "US027 - As Director, I want to define the Product Owner of a project."
 
 autoactivate on
 autonumber
 
-actor "Director" as User
-participant ": AssignProductOwnerUI" as System
-participant ": AssignProductOwnerController" as Ctrl
+actor "Director" as Director
+participant ": AssignProductOwnerUI" as UI
+participant ": AssignProductOwnerController" as Controller
 participant ": Company" as C1
 participant "projectStore : ProjectStore" as C2
 participant "project : Project" as C3
 participant "projectTeam : ProjectTeam" as C4
 participant "resource : Resource" as C5
 participant "newResource : Resource" as C6
-participant "sprintStore : SprintStore" as C7
+participant "sprintList : SprintList" as C7
 participant "currentSprint : Sprint" as C8
 participant "projectRoleStore : ProjectRoleStore" as C9
 
-activate User
+activate Director
 
-User -> System: Access the list of projects.
-System -> Ctrl: getProjectList()
-Ctrl -> C1: getProjectStore()
-return projectStore
-Ctrl -> C2: getProjectList()
-return projectList
-return projectList
-return Shows projectList.
+Director -> UI: Ask to access a project
+    ref over UI, Controller : US027-SD-getProject()
+UI --> Director: projDTO
 
-User -> System: Select a project.
-System -> Ctrl: getProject(code)
-Ctrl -> C2: getProjectByCode(code)
-    loop hasCode(code)
-        C2 -> C3: getCode()
-        return code
-    end
-return project
-return project
-return Shows project information.
+Director -> UI: Ask to access resource of a project
+    ref over UI, Controller : us027-SD-getResource()
+return resDTO
 
-User -> System: Access the list of resource.
-System -> Ctrl: getProjectTeamList()
-Ctrl -> C3: getProjectTeam()
-return projectTeam
-Ctrl -> C4: getProjectTeamList()
-return projectTeamList
-return projectTeamList
-return Shows project team list.
-
-User -> System: Choose Resource.
-System -> Ctrl: getResource(email)
-Ctrl -> C4: getResource(email)
-    loop hasEmail(email)
-        C4 -> C5: isYour(email)
-        return true
-        C4 -> C5: isCurrent()
-        return true
-    end
-return resource
-return resource
-return Shows resource information.
-
-User -> System: Define as Scrum Master.
-System -> Ctrl: assignRole(resource, role)
-Ctrl -> C3: getSprintStore()
+Director -> UI: Define as Product Owner
+UI -> Controller: assignRole(resourceName, roleName)
+Controller -> C3: getSprints()
 return sprintStore
-Ctrl -> C7: getCurrentSprint()
+Controller -> C7: getCurrentSprint()
     loop isCurrentSprint
         C7 -> C8: isCurrentSprint()
         return true
     end
 return currentSprint
-Ctrl -> C8: getEndDate()
+Controller -> C8: getEndDate()
 return endDate
-Ctrl -> C3: detSprintDuration()
+Controller -> C3: getSprintDuration()
 return sprintDuration
-Ctrl -> C1: getProjectRoleStore()
+Controller -> C1: getProjectRoleStore()
 return projectRoleStore
-Ctrl -> C9: getProjectRole(roleName)
-return projectRole
-Ctrl -> C4: assignProjectRole(resource, startDate, sprintDuration, projectRole)
-C4 -> C5: checkResourceCanBeAssignedToRoleByDate(startDate, sprintDuration)
-return true
-C4 -> C6 **: createResource(originalResource)
-C4 -> C6: setRole(projectRole)
-deactivate
-C4 -> C6: setStartDate(startDate)
-deactivate
-C4 -> C5: setEndDate(startDate)
-deactivate
-    C4 -> C4: saveResource(newResource)
+Controller -> C9: getProjectRole(roleName)
+return role
+    alt result = true "resourceName == name && assignProjectRole"
+        Controller -> C4: assignProjectRole(resource, startDateNextSprint, sprintDuration, role)
+    alt result = true "Check if resource can be assigned to role by date"
+    C4 -> C5: checkResourceCanBeAssignedToRoleByDate(startDateNextSprint, sprintDuration)
+    return true
+    end
+    C4 -> C5: copyUpdateProjectRoleOfAResource(originalResource, startDateNewRole, role)
+    alt result = true "check if the role exist and is current"
+
+    C4 -> C6: setRole(projectRole)
     deactivate
-    C4 -> C4: checkIfRoleCurrentExistInTheProjectTeam(projectRole,startDate)
+    C4 -> C6: setStartDate(startDate)
     deactivate
+    C4 -> C5: setEndDate(startDate)
+    deactivate
+        C4 -> C4: saveResource(newResource)
+        deactivate
+        C4 -> C4: checkIfRoleCurrentExistInTheProjectTeam(role,startDateNextSprint)
+        deactivate
+    return true
+    end
 return true
+end
 return true
-return Informs operation success.
+return Informs operation success
 
 @enduml

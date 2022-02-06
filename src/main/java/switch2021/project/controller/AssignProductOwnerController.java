@@ -1,9 +1,11 @@
 package switch2021.project.controller;
 
+import switch2021.project.dto.ProjectDTO;
+import switch2021.project.dto.ResourceDTO;
+import switch2021.project.mapper.ProjectTeamMapper;
+import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.model.*;
-import switch2021.project.utils.App;
 import java.time.LocalDate;
-import java.util.List;
 
 public class AssignProductOwnerController {
 
@@ -11,49 +13,37 @@ public class AssignProductOwnerController {
      * Attributes
      **/
     private final Company company;
+    private final ProjectsMapper projectsMapper;
+    private final ProjectTeamMapper projectTeamMapper;
     private Project project;
-    private List<Resource> projectTeamList;
     private Resource resource;
 
-    /**
-     * Constructor to UI (with SINGLETON)
-     **/
-//    public AssignProductOwnerController() {
-//        this.company = App.getInstance().getCompany();
-//    }
 
     /**
      * Constructor to test (without SINGLETON)
      **/
-    public AssignProductOwnerController(Company company) {
+    public AssignProductOwnerController(Company company, ProjectsMapper projectsMapper, ProjectTeamMapper projectTeamMapper) {
         this.company = company;
+        this.projectTeamMapper = projectTeamMapper;
+        this.projectsMapper = projectsMapper;
     }
 
 
     /**
      * Method to receive a project and then send to UI
      **/
-    public Project getProject(String code) {
+    public ProjectDTO getProject(String code) {
         this.project = company.getProjectStore().getProjectByCode(code);
-        return this.project;
-    }
-
-
-    /**
-     * Method to receive a project team list (resource list of the project) and send to UI
-     */
-    public List<Resource> getProjectTeamList() {
-        this.projectTeamList = project.getProjectTeam().getProjectTeamList();
-        return this.projectTeamList;
+        return projectsMapper.toDTO(project);
     }
 
 
     /**
      * Method to receive a resource of the project and send to UI
      */
-    public Resource getResource(String name) {
+    public ResourceDTO getResource(String name) {
         this.resource = project.getProjectTeam().getResourceByName(name);
-        return this.resource;
+        return projectTeamMapper.toDto(resource);
     }
 
 
@@ -66,9 +56,9 @@ public class AssignProductOwnerController {
         LocalDate startDateNextSprint = project.getSprints().getCurrentSprint().getEndDate().plusDays(1);
         int sprintDuration = project.getSprintDuration();
         ProjectRole role = company.getProjectRoleStore().getProjectRole(roleName);
-        if (this.resource == getResource(name) && project.getProjectTeam().assignProjectRole
+        if (this.resource.getUser().getUserName().equals(name) && project.getProjectTeam().assignProjectRole
                 (resource, startDateNextSprint, sprintDuration, role)) {
-                msg = true;
+            msg = true;
         }
         return msg;
     }

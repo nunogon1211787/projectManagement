@@ -1,0 +1,24 @@
+@startuml
+
+title "US027 - As Director, I want to define the Product Owner of a project."
+autoactivate on
+autonumber
+
+actor "Director" as Director
+participant ":System" as System
+
+activate Director
+
+Director -> System: Access the list of projects
+System --> Director: projectsDto
+Director -> System: Select a project
+System --> Director: Shows project information
+Director -> System: Access the list of resource
+System --> Director: Shows projectTeamDto
+Director -> System: Choose Resource
+System --> Director: Shows resourceDto
+Director -> System: Define Product Owner
+System --> Director: Informs operation success
+
+
+@enduml

@@ -1,8 +1,13 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.dto.ProjectDTO;
+import switch2021.project.mapper.ProjectTeamMapper;
+import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.model.*;
 import java.time.LocalDate;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -11,27 +16,32 @@ public class AssignProductOwnerControllerTest {
 
     @Test
     public void controllerFailTest() {
-        //Arrange
-        Company company = new Company();
-        AssignProductOwnerController controller = new AssignProductOwnerController(company);
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep","xxx@sss.sss");
-        company.getCustomerStore().saveNewCustomer(customer);
-        BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
-        company.getBusinessSectorStore().addBusinessSector(sector);
-        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
-        //Act
-        Project projectTest = controller.getProject("proj_2022_1"); //Project is not save at ProjectStore
         //Assert
-        assertNotEquals(proj1,projectTest);
+        assertThrows(NullPointerException.class, () -> {
+            //Arrange
+            Company company = new Company();
+            ProjectsMapper projectsMapper = new ProjectsMapper();
+            ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
+            AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
+            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            Customer customer = company.getCustomerStore().createCustomer("isep","xxx@sss.sss");
+            company.getCustomerStore().saveNewCustomer(customer);
+            BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
+            company.getBusinessSectorStore().addBusinessSector(sector);
+            Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+                    typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+            //Act
+            controller.getProject("proj_2022_1"); //Project is not save at ProjectStore
+        });
     }
 
     @Test
     void assignProductOwnerTestSuccess() {
         //Arrange
         Company company = new Company();
-        AssignProductOwnerController controller = new AssignProductOwnerController(company);
+        ProjectsMapper projectsMapper = new ProjectsMapper();
+        ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
+        AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
         company.getCustomerStore().saveNewCustomer(customer);
@@ -72,7 +82,6 @@ public class AssignProductOwnerControllerTest {
         //Act
         controller.getProject("project_2022_1");
         controller.getResource("manueljose");
-        controller.getProjectTeamList();
         //Asserts
         assertTrue(controller.assignRole("manueljose", "Product Owner"));
         assertEquals(5,proj1.getProjectTeam().getProjectTeamList().size());
@@ -82,7 +91,9 @@ public class AssignProductOwnerControllerTest {
     void assignProductOwnerTestSuccessWithRoleDefined() {
         //Arrange
         Company company = new Company();
-        AssignProductOwnerController  controller = new AssignProductOwnerController(company);
+        ProjectsMapper projectsMapper = new ProjectsMapper();
+        ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
+        AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
         company.getCustomerStore().saveNewCustomer(customer);
@@ -124,7 +135,6 @@ public class AssignProductOwnerControllerTest {
         //Act
         controller.getProject("project_2022_1");
         controller.getResource("manueljose");
-        controller.getProjectTeamList();
         //Asserts
         assertTrue(controller.assignRole("manueljose", "Product Owner"));
         assertEquals(6,proj1.getProjectTeam().getProjectTeamList().size());
@@ -136,7 +146,9 @@ public class AssignProductOwnerControllerTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            AssignProductOwnerController controller = new AssignProductOwnerController(company);
+            ProjectsMapper projectsMapper = new ProjectsMapper();
+            ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
+            AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
             Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
             Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
@@ -172,7 +184,6 @@ public class AssignProductOwnerControllerTest {
             //Act
             controller.getProject("project_2022_1");
             controller.getResource("manueljose@beaver.com");
-            controller.getProjectTeamList();
             controller.assignRole("manueljose@beaver.com", "Product Owner"); //Resource without possible dates
         });
     }
@@ -183,7 +194,9 @@ public class AssignProductOwnerControllerTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            AssignProductOwnerController controller = new AssignProductOwnerController(company);
+            ProjectsMapper projectsMapper = new ProjectsMapper();
+            ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
+            AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
             Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
             Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
@@ -197,7 +210,6 @@ public class AssignProductOwnerControllerTest {
             //Act
             controller.getProject("project_2022_1");
             controller.getResource("manueljose@beaver.com");
-            controller.getProjectTeamList();
             controller.assignRole(null, "Product Owner");
         });
     }

@@ -187,12 +187,26 @@ public class ProjectsMapperTest {
         //Arrange and Act
         ProjectDTO projectDTO1 = new ProjectDTO("Project_2022_1" ,"prototype1", "proj1Prototype", "2021/11/1", null, 2, 3000, 0);
         ProjectDTO projectDTO2 = new ProjectDTO("Project_2022_1" ,"prototype1", "proj1Prototype", "2021/11/1", null, 2, 3000, 0);
-        ProjectDTO projectDTO3 = new ProjectDTO("Project_2022_3" ,"prototype3", "proj3Prototype", "2021/11/1", null, 2, 3000, 0);
+        ProjectDTO projectDTO3 = new ProjectDTO("Project_2022_3" ,"prototype3", "proj3Prototype", "2022/11/1", null, 2, 3000, 0);
         //Assert
+            //Equals
         assertNotSame(projectDTO1,projectDTO2);
         assertEquals(projectDTO1,projectDTO2);
         assertEquals(projectDTO1.hashCode(),projectDTO2.hashCode());
+        assertEquals(projectDTO1.getCode(),projectDTO2.getCode());
+        assertEquals(projectDTO1.getProjectName(),projectDTO2.getProjectName());
+        assertEquals(projectDTO1.getDescription(),projectDTO2.getDescription());
+        assertEquals(projectDTO1.getStartDate(),projectDTO2.getStartDate());
+        assertEquals(projectDTO1.getEndDate(),projectDTO2.getEndDate());
+        assertEquals(projectDTO1.getEndDate(),projectDTO2.getEndDate());
+        assertEquals(projectDTO1.getEndDate(),projectDTO2.getEndDate());
+            //Not Equals
+        assertNotSame(projectDTO1, projectDTO3);
         assertNotEquals(projectDTO1,projectDTO3);
         assertNotEquals(projectDTO1.hashCode(),projectDTO3.hashCode());
+        assertNotEquals(projectDTO1.getCode(),projectDTO3.getCode());
+        assertNotEquals(projectDTO1.getProjectName(),projectDTO3.getProjectName());
+        assertNotEquals(projectDTO1.getDescription(),projectDTO3.getDescription());
+        assertNotEquals(projectDTO1.getStartDate(),projectDTO3.getStartDate());
     }
 }

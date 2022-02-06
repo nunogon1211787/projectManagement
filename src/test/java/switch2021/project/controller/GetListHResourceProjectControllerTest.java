@@ -2,7 +2,7 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.dto.ResourceDto;
+import switch2021.project.dto.ResourceDTO;
 import switch2021.project.mapper.ProjectTeamMapper;
 import switch2021.project.model.*;
 
@@ -57,7 +57,7 @@ public class GetListHResourceProjectControllerTest {
         proj1.getProjectTeam().saveResource(manuelfernandes);
 
         //Act
-        List<ResourceDto> resDtoList = controller.getProjectTeam("Project_2022_1");
+        List<ResourceDTO> resDtoList = controller.getProjectTeam("Project_2022_1");
 
         //Asserts
         assertEquals("Team Member", resDtoList.get(0).getRole());

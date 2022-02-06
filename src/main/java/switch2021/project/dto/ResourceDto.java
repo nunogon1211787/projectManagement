@@ -3,7 +3,7 @@ package switch2021.project.dto;
 import lombok.Getter;
 
 @Getter
-public class ResourceDto {
+public class ResourceDTO {
 
     /**
      * Attributes
@@ -20,7 +20,7 @@ public class ResourceDto {
      * Constructor to test (without SINGLETON)
      **/
 
-    public ResourceDto(String name, String role, String startDate, String endDate, double costPerHour, double percentageOfAllocation){
+    public ResourceDTO(String name, String role, String startDate, String endDate, double costPerHour, double percentageOfAllocation){
         if(role == null){
             role = "";
         }
