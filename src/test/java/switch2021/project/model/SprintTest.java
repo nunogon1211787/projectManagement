@@ -164,7 +164,7 @@ public class SprintTest {
 
     @Test
     @DisplayName("HashCode Verification")
-    public void haschCodeTest() {
+    public void hashCodeTest() {
         //Arrange
         Sprint sprint = new Sprint("Sprint_1", LocalDate.now().minusWeeks(1));
         Sprint sprint2 = new Sprint("Sprint_1", LocalDate.now().minusWeeks(1));

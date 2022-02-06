@@ -829,7 +829,7 @@ public class ProjectTeamTest {
     }
 
     @Test
-    @DisplayName("Test to Validate Project Team - The team doesn´t have a PO and a SM")
+    @DisplayName("Test to Validate Project Team - The team does not have a PO and a SM")
     public void validateProjectTeamGlobalFail() {
         //Arrange
         Company company = new Company();
@@ -879,7 +879,7 @@ public class ProjectTeamTest {
     }
 
     @Test
-    @DisplayName("Test to Validate Project Team - The Team doesn't have a PO but has a Scrum Master")
+    @DisplayName("Test to Validate Project Team - The Team does not have a PO but has a Scrum Master")
     public void validateProjectTeamPOFail() {
         //Arrange
         Company company = new Company();
@@ -929,7 +929,7 @@ public class ProjectTeamTest {
     }
 
     @Test
-    @DisplayName("Test to Validate Project Team - The Team doesn't have a SM but has a Product Owner")
+    @DisplayName("Test to Validate Project Team - The Team does not have a SM but has a Product Owner")
     public void validateProjectTeamSMFail() {
         //Arrange
         Company company = new Company();
