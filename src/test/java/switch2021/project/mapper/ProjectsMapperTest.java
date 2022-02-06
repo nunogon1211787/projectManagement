@@ -82,7 +82,7 @@ public class ProjectsMapperTest {
     }
 
     @Test
-    public void ProjectMapperDTOEndDateNotNullTest() {
+    public void ProjectMapperDTOEndDateNotNullTestSuccess() {
         //Arrange
         Company company = new Company();
         ProjectsMapper projectsMapper = new ProjectsMapper();
@@ -107,6 +107,34 @@ public class ProjectsMapperTest {
         assertEquals(2,test.getNumberOfSprints());
         assertEquals(3000,test.getBudget());
         assertEquals(0, test.getSprintDuration());
+    }
+
+    @Test
+    public void ProjectMapperDTOEndDateNotNullTestFail() {
+        //Arrange
+        Company company = new Company();
+        ProjectsMapper projectsMapper = new ProjectsMapper();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
+        company.getCustomerStore().saveNewCustomer(customer);
+        BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
+        company.getBusinessSectorStore().addBusinessSector(sector);
+        //Project 1
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        proj1.setEndDate(LocalDate.of(2022,11,1));
+        company.getProjectStore().saveNewProject(proj1);
+        //Act
+        ProjectDTO test = projectsMapper.toDTO(proj1);
+        //Assert
+        assertNotEquals("Project2022_1",test.getCode());
+        assertNotEquals("type1",test.getProjectName());
+        assertNotEquals("proj1",test.getDescription());
+        assertNotEquals("2021/11/2",test.getStartDate());
+        assertNotEquals("2022/11/2", test.getEndDate());
+        assertNotEquals(22,test.getNumberOfSprints());
+        assertNotEquals(30,test.getBudget());
+        assertNotEquals(1, test.getSprintDuration());
     }
 
     @Test
