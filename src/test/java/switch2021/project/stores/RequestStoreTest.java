@@ -179,13 +179,13 @@ class RequestStoreTest {
         RequestStore requestTestList3 = new RequestStore();
         Request request3 = new Request(profile3,user3);
         requestTestList3.addProfileRequest(request3);
+
         //Assert
         assertEquals(requestTestList1,requestTestList2);
         assertEquals(requestTestList1.hashCode(),requestTestList2.hashCode());
         assertNotEquals(requestTestList1,requestTestList3);
         assertNotEquals(requestTestList1.hashCode(),requestTestList3.hashCode());
+        assertNotNull(request1);
     }
-
-
 
 }
