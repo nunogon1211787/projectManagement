@@ -17,7 +17,7 @@ class SystemUserTest {
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester", "123456",
                 "123456", "img_123456", userProfile);
         //Act
-        String emailCheck = "xxxx";
+        String emailCheck = "xxxx@isep.ipp.pt";
         //Assert
         assertTrue(test.isYourEmail(emailCheck));
     }
@@ -813,6 +813,19 @@ class SystemUserTest {
         ana.setActivateUser();
         //Assert
         assertTrue(ana.isActivateUser());
+    }
+
+    @Test
+    public void inactivationUser() {
+        //Test to activate the user
+        //Arrange
+        UserProfile tes = new UserProfile("Visitor");
+        SystemUser ana = new SystemUser("Ana", "1211@isep.ipp.pt", "User_12",
+                "HELLO", "HELLO", "HELLO", tes);
+        //Act
+        ana.setInactivateUser();
+        //Assert
+        assertFalse(ana.isActivateUser());
     }
 
 
