@@ -35,28 +35,4 @@ public class ProjectDTO {
         this.budget = budget;
         this.sprintDuration = sprintDuration;
     }
-
-    /**
-     * Override
-     **/
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ProjectDTO)) return false;
-        ProjectDTO that = (ProjectDTO) o;
-        return  this.code.equals(that.code)
-                && this.projectName.equals(that.projectName)
-                && this.description.equals(that.description)
-                && this.startDate.equals(that.startDate)
-                && this.endDate == that.endDate
-                && this.numberOfSprints == that.numberOfSprints
-                && this.budget == that.budget
-                && this.sprintDuration == that.sprintDuration;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(code, projectName, description, startDate, endDate, numberOfSprints,
-                budget, sprintDuration);
-    }
 }
