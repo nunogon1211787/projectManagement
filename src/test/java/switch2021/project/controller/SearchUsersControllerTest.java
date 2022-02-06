@@ -34,6 +34,29 @@ class SearchUsersControllerTest {
     }
 
     @Test
+    void searchUsersSuccess2() {
+        //Input
+        Company company = new Company();
+        SearchSystemUsersController test = new SearchSystemUsersController(company);
+        // company.getUserProfileStore().populateDefault();
+        UserProfile p1 = company.getUserProfileStore().getUserProfile("visitor");
+        //UserProfile p2 = company.getUserProfileStore().getUserProfile("director");
+        // UserProfile p3 = company.getUserProfileStore().getUserProfile("administrator");
+        SystemUser usr1 = new SystemUser("Romulo", "rom@rom.pt", "any", "qwerty", "qwerty", "", p1);
+        SystemUser usr2 = new SystemUser("Maria", "ma@ma.pt", "any", "qwerty", "qwerty", "", p1);
+        SystemUser usr3 = new SystemUser("Joao", "jo@jo.pt", "any", "qwerty", "qwerty", "", p1);
+        company.getSystemUserStore().saveSystemUser(usr1);
+        company.getSystemUserStore().saveSystemUser(usr2);
+        company.getSystemUserStore().saveSystemUser(usr3);
+        //Expected
+        String[] list = {};
+        List<SystemUser> resultList = test.searchUsers("a", "", "", -1, list);
+        List<SystemUser> expectedList = Arrays.asList(usr2);
+        //Result
+        assertNotEquals(expectedList, resultList);
+    }
+
+    @Test
     void getProfileListSuccess(){
         //Input
         Company co = new Company();

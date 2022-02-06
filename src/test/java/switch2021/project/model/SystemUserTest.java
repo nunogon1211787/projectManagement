@@ -119,7 +119,7 @@ class SystemUserTest {
     }
 
     @Test
-    public void setAllDataFailUsernameEmpty() {
+    public void checkAllDataFailUsernameEmpty() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
@@ -131,7 +131,7 @@ class SystemUserTest {
     }
 
     @Test
-    public void setAllDataFailUsernameLowLength() {
+    public void checkAllDataFailUsernameLowLength() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
@@ -139,6 +139,30 @@ class SystemUserTest {
             SystemUser newUser = new SystemUser("J", "1211770@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.checkAllData("J", "Aluna_10", "img_123");
+        });
+    }
+
+    @Test
+    public void checkAllDataFailUsernameLowLength2() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("J", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.checkAllData("JJ", "Aluna_10", "img_123");
+        });
+    }
+
+    @Test
+    public void checkAllDataFailUsernameLowLength3() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("J", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.checkAllData("", "Aluna_10", "img_123");
         });
     }
 
@@ -151,7 +175,6 @@ class SystemUserTest {
             SystemUser newUser = new SystemUser("JJJJ", "1211770@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.setAllData("JJ", "Aluna_10", "img_900");
-
 
         });
     }
@@ -176,24 +199,24 @@ class SystemUserTest {
             UserProfile tes = new UserProfile("ddd");
             SystemUser newUser = new SystemUser("JJJJ", "1211770@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
-            newUser.setAllData("JJ", "Aluna_10", "img_900");
+            newUser.setAllData("", "Aluna_10", "img_900");
         });
     }
 
     @Test
-    public void setAllDataFailFunctionEmpty() {
+    public void checkAllDataFailFunctionEmpty() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
             SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
-                    " ", "123", "123", "img_900", tes);
-            newUser.checkAllData("Joana Silva", " ", "img_123");
+                    "", "123", "123", "img_900", tes);
+            newUser.checkAllData("Joana Silva", "", "img_123");
         });
     }
 
     @Test
-    public void setAllDataFailFunctionLowLength() {
+    public void checkAllDataFailFunctionLowLength() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
@@ -217,6 +240,18 @@ class SystemUserTest {
     }
 
     @Test
+    public void checkAllDataFailFunctionLowLength4() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.checkAllData("Joana Silva", "AA", "img_123");
+        });
+    }
+
+    @Test
     public void setAllDataFailFunctionLowLength3() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
@@ -229,7 +264,19 @@ class SystemUserTest {
     }
 
     @Test
-    public void setAllDataFailPhotoEmpty() {
+    public void checkAllDataFailFunctionLowLength5() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "img_900", tes);
+            newUser.checkAllData("Joana Silva", "   ", "img_123");
+        });
+    }
+
+    @Test
+    public void checkAllDataFailPhotoEmpty() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
@@ -237,6 +284,18 @@ class SystemUserTest {
             SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
                     "Aluna_10", "123", "123", "", tes);
             newUser.checkAllData("Joana Silva", "Aluna_10", "");
+        });
+    }
+
+    @Test
+    public void checkAllDataFailPhotoEmpty2() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile tes = new UserProfile("ddd");
+            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+                    "Aluna_10", "123", "123", "", tes);
+            newUser.checkAllData("Joana Silva", "Aluna_10", "  ");
         });
     }
 
@@ -813,6 +872,51 @@ class SystemUserTest {
     }
 
     @Test
+    void hasThisDataWithStateFail2() {
+        //Arrange
+        UserProfile pro = new UserProfile("Visitor");
+        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
+                "123456", "123456", "img_123", pro);
+        String name = "";
+        String email = "";
+        String func = "";
+        int state = 2; //isActiveUser : -1 == null / 0 == false / 1 == true
+        List<UserProfile> profiles = new ArrayList<>(); // profileId
+        //Assert
+        assertFalse(test.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithStateFail3() {
+        //Arrange
+        UserProfile pro = new UserProfile("Visitor");
+        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
+                "123456", "123456", "img_123", pro);
+        String name = "";
+        String email = "";
+        String func = "";
+        int state = -3; //isActiveUser : -1 == null / 0 == false / 1 == true
+        List<UserProfile> profiles = new ArrayList<>(); // profileId
+        //Assert
+        assertFalse(test.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithStateFail4() {
+        //Arrange
+        UserProfile pro = new UserProfile("Visitor");
+        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
+                "123456", "123456", "img_123", pro);
+        String name = "";
+        String email = "";
+        String func = "";
+        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
+        List<UserProfile> profiles = new ArrayList<>(); // profileId
+        //Assert
+        assertFalse(test.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
     void hasThisDataWithProfilesFail() {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
@@ -831,6 +935,24 @@ class SystemUserTest {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
         UserProfile pre = new UserProfile("Visitor");
+        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
+                "123456", "123456", "img_123", pro);
+        test.assignProfileToUser(pre);
+        test.assignProfileToUser(pro);
+        String name = "";
+        String email = "";
+        String func = "";
+        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
+        List<UserProfile> profiles = new ArrayList<>(); // profileId
+        //Assert
+        assertFalse(test.hasThisData(name, email, func, state, profiles));
+    }
+
+    @Test
+    void hasThisDataWithTwoProfilesFail2() {
+        //Arrange
+        UserProfile pro = new UserProfile("Visitor");
+        UserProfile pre = new UserProfile("A");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
                 "123456", "123456", "img_123", pro);
         test.assignProfileToUser(pre);
