@@ -3,7 +3,6 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -28,9 +27,7 @@ public class CreateUserProfileControllerTest {
         CreateUserProfileController createUserProfileController = new CreateUserProfileController(company);
         String name = "";
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            createUserProfileController.createUserProfile(name);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserProfileController.createUserProfile(name));
         // Assert
         assertTrue(exception.getMessage().contains("Name cannot be blank."));
     }

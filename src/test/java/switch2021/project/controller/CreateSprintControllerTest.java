@@ -5,17 +5,14 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
-
 import java.time.LocalDate;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CreateSprintControllerTest {
 
     private ProjectStore projectStore;
-    private SprintList sprintList;
 
     @Test
     @DisplayName("To search the list of projects that the PM is current in")

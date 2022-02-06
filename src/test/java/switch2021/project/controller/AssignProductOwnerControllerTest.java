@@ -1,13 +1,10 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.dto.ProjectDTO;
 import switch2021.project.mapper.ProjectTeamMapper;
 import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.model.*;
 import java.time.LocalDate;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

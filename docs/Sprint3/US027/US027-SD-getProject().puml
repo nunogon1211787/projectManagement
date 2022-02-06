@@ -29,9 +29,9 @@ ProjectStore -> Project:getProjectByCode(code)
     end
 return proj
 return proj
-Controller --> ProjectsMapper: toDTO(proj)
+Controller -> ProjectsMapper: toDTO(proj)
 ProjectsMapper --> ProjectDTO**: create()
-deactivate ProjectsMapper
+deactivate ProjectDTO
 ProjectsMapper --> Controller: projDTO
 Controller --> UI: projDTO
 UI --> Director: projDTO

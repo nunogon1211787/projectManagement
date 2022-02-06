@@ -18,12 +18,13 @@ class AssignScrumMasterControllerTest {
             Company company = new Company();
             ProjectsMapper projectsMapper = new ProjectsMapper();
             ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
-            AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            AssignScrumMasterController controller = new AssignScrumMasterController(company, projectsMapper,projectTeamMapper);
+            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
             Customer customer = company.getCustomerStore().createCustomer("isep","xxx@sss.sss");
             company.getCustomerStore().saveNewCustomer(customer);
             BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
             company.getBusinessSectorStore().addBusinessSector(sector);
-            Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+            company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
             //Act
             controller.getProject("proj_2022_1"); //Project is not save at ProjectStore
@@ -36,7 +37,7 @@ class AssignScrumMasterControllerTest {
         Company company = new Company();
         ProjectsMapper projectsMapper = new ProjectsMapper();
         ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
-        AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
+        AssignScrumMasterController controller = new AssignScrumMasterController(company, projectsMapper,projectTeamMapper);
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
         company.getCustomerStore().saveNewCustomer(customer);
@@ -88,7 +89,7 @@ class AssignScrumMasterControllerTest {
         Company company = new Company();
         ProjectsMapper projectsMapper = new ProjectsMapper();
         ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
-        AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
+        AssignScrumMasterController controller = new AssignScrumMasterController(company, projectsMapper,projectTeamMapper);
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
         company.getCustomerStore().saveNewCustomer(customer);
@@ -143,7 +144,8 @@ class AssignScrumMasterControllerTest {
             Company company = new Company();
             ProjectsMapper projectsMapper = new ProjectsMapper();
             ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
-            AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            AssignScrumMasterController controller = new AssignScrumMasterController(company, projectsMapper,projectTeamMapper);
+            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
             Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
@@ -190,7 +192,8 @@ class AssignScrumMasterControllerTest {
             Company company = new Company();
             ProjectsMapper projectsMapper = new ProjectsMapper();
             ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
-            AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            AssignScrumMasterController controller = new AssignScrumMasterController(company, projectsMapper,projectTeamMapper);
+            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
             Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
