@@ -46,8 +46,8 @@ public class SprintBacklog {
     /** Override **/
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof SprintBacklog)) return false;
+    //    if (this == o) return true;
+     //   if (!(o instanceof SprintBacklog)) return false;
         SprintBacklog that = (SprintBacklog) o;
         return Objects.equals(userStoryOfSprintList, that.userStoryOfSprintList);
     }
