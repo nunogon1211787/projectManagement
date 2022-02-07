@@ -8,15 +8,14 @@ autonumber
 actor "Director" as Director
 participant ": AssignProductOwnerUI" as UI
 participant ": AssignProductOwnerController" as Controller
-participant ": Company" as C1
-participant "projectStore : ProjectStore" as C2
-participant "project : Project" as C3
-participant "projectTeam : ProjectTeam" as C4
-participant "resource : Resource" as C5
-participant "newResource : Resource" as C6
-participant "sprintList : SprintList" as C7
-participant "currentSprint : Sprint" as C8
-participant "projectRoleStore : ProjectRoleStore" as C9
+participant ": Company" as Company
+participant "project : Project" as Project
+participant "sprintList : SprintList" as SprintList
+participant "currentSprint : Sprint" as Sprint
+participant "projectRoleStore : ProjectRoleStore" as ProjectRoleStore
+participant "projectTeam : ProjectTeam" as ProjectTeam
+participant "resource : Resource" as OriginalResource
+participant "newResource : Resource" as newResource
 
 activate Director
 
@@ -31,43 +30,49 @@ return resDTO
 Director -> UI: Define as Product Owner
 alt result = true "Assign Product Owner"
     UI -> Controller: assignRole(resourceName, roleName)
-    Controller -> C3: getSprints()
+    Controller -> Project: getSprints()
     return sprintStore
-    Controller -> C7: getCurrentSprint()
+    Controller -> SprintList: getCurrentSprint()
         loop isCurrentSprint
-            C7 -> C8: isCurrentSprint()
+            SprintList -> Sprint: isCurrentSprint()
             return true
         end
     return currentSprint
-    Controller -> C8: getEndDate()
+    Controller -> Sprint: getEndDate()
     return endDate
-    Controller -> C3: getSprintDuration()
+    Controller -> Project: getSprintDuration()
     return sprintDuration
-    Controller -> C1: getProjectRoleStore()
+    Controller -> Company: getProjectRoleStore()
     return projectRoleStore
-    Controller -> C9: getProjectRole(roleName)
+    Controller -> ProjectRoleStore: getProjectRole(roleName)
     return role
         alt result = true "resourceName == name && assignProjectRole"
-            Controller -> C4: assignProjectRole(resource, startDateNextSprint, sprintDuration, role)
+            Controller -> ProjectTeam: assignProjectRole(resource, startDateNextSprint, sprintDuration, role)
             alt result = true "Check if resource can be assigned to role by date"
-            C4 -> C5: checkResourceCanBeAssignedToRoleByDate(startDateNextSprint, sprintDuration)
+            ProjectTeam -> OriginalResource: isAvailableToSprint(startDate, sprintDuration)
+                alt result = true "check startDate and endDate"
+                OriginalResource -> OriginalResource: isBefore(startDate)
+                return true
+                OriginalResource -> OriginalResource: isAfter(endDate)
+                return true
+                end
             return true
             end
-            C4 -> C5: copyUpdateProjectRoleOfAResource(originalResource, startDateNewRole, role)
-            alt result = true "check if the role exist and is current"
-
-                C4 -> C6: setRole(projectRole)
+            ProjectTeam -> OriginalResource: copyUpdateProjectRoleOfAResource(originalResource, startDateNewRole, role)
+            OriginalResource -> newResource**: Resource(originalResource)
+                ProjectTeam -> newResource: setRole(role)
                 deactivate
-                C4 -> C6: setStartDate(startDate)
+                ProjectTeam -> newResource: setStartDate(startDate)
                 deactivate
-                C4 -> C5: setEndDate(startDate)
+                ProjectTeam -> OriginalResource: setEndDate(startDate)
                 deactivate
-                    C4 -> C4: saveResource(newResource)
+            return newResource
+            alt result = false "check if the role exist and is current"
+                    ProjectTeam -> ProjectTeam: checkIfRoleCurrentExistInTheProjectTeam(role,startDate)
                     deactivate
-                    C4 -> C4: checkIfRoleCurrentExistInTheProjectTeam(role,startDateNextSprint)
-                    deactivate
-                return true
             end
+                    ProjectTeam -> ProjectTeam: saveResource(newResource)
+                    return true
         return true
         end
     return true
