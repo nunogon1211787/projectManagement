@@ -130,6 +130,8 @@ class SystemUserTest {
         });
     }
 
+
+
     @Test
     public void checkAllDataFailUsernameLowLength() {
         //Assert
@@ -1048,6 +1050,51 @@ class SystemUserTest {
         ana.setActivateUser(false);
         //Assert
         assertFalse(ana.isActivateUser());
+    }
+
+    @Test
+    public void setAllDataFail() {
+
+        //Arrange
+
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        //Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            assertFalse(joana.setAllData("", "User_12", "img_900"));
+        });
+    }
+
+    @Test
+    public void setAllDataFail2() {
+
+        //Arrange
+
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        //Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            assertFalse(joana.setAllData("Cris", "X", "img_900"));
+        });
+    }
+
+    @Test
+    public void setAllDataFail3() {
+
+        //Arrange
+
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        //Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            assertFalse(joana.setAllData("Cris", "User_12", ""));
+        });
     }
 
 

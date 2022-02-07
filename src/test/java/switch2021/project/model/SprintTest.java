@@ -195,4 +195,18 @@ public class SprintTest {
         sprint.getSprintBacklog().getUserStoryOfSprintList().add(userStoryOfSprint);
         assertEquals(1, sprint.getSprintBacklog().getUserStoryOfSprintList().size());
     }
+
+    @Test
+    @DisplayName("Test to validate start date")
+    public void validateStartDate() {
+        LocalDate startDate1 = LocalDate.of(2022, 1, 1);
+        LocalDate startDate2 = LocalDate.of(2022, 1, 1);
+        Sprint sprint1 = new Sprint("Sprint_1", startDate1);
+        Sprint sprint2 = new Sprint("Sprint_12", startDate2);
+        SprintList sprintList = new SprintList();
+        sprintList.saveSprint(sprint1);
+        sprintList.saveSprint(sprint2);
+        assertNotEquals(sprint1, sprint2);
+        assertTrue(sprintList.validateIfSprintAlreadyExists(sprint2));
+    }
 }

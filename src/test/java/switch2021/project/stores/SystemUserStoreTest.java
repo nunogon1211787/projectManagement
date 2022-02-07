@@ -158,6 +158,16 @@ public class SystemUserStoreTest {
     }
 
     @Test
+    public void IsYourEmailFail() {
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser systemUser = company.getSystemUserStore().createSystemUser("anaguedes", "anaguedes@beaver.com",
+                "PO", "hello123", "hello123", "photo.png", profile);
+        //Assert
+        assertFalse(systemUser.isYourEmail("guedesana@beaver.com"));
+    }
+
+    @Test
     public void overrideAndHashCodeTest() {
         //Arrange
         String userName = "manueloliveira";

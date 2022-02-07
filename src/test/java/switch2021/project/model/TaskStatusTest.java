@@ -195,4 +195,28 @@ class TaskStatusTest {
         //Assert
         assertTrue(result);
     }
+
+    @Test
+    void overrideTests() {
+        //Arrange
+        TaskStatus status1= new TaskStatus("test1");
+        TaskStatus status2 = new TaskStatus("test2");
+        TaskStatus status3 = new TaskStatus("test3");
+        TaskStatus status4 = null;
+        TaskStatus status5= new TaskStatus("test1");
+        TaskStatus status6= new TaskStatus("test1");
+        status1.setIDTaskStatus(1);
+        status2.setIDTaskStatus(2);
+        status3.setIDTaskStatus(3);
+        status5.setIDTaskStatus(55);
+        status6.setIDTaskStatus(1);
+        //Assert
+        assertNotEquals(1, status2.getIdTaskStatus());
+        assertNotEquals(2, status3.getIdTaskStatus());
+        assertNotEquals(3, status1.getIdTaskStatus());
+        assertEquals(status1.getClass(),status2.getClass());
+        assertEquals(status1,status6);
+        assertNull(status4);
+        assertNotEquals(status5,status1);
+    }
 }
