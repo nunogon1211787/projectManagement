@@ -817,7 +817,7 @@ class SystemUserTest {
 
     @Test
     public void inactivationUser() {
-        //Test to activate the user
+        //Test to inactivate the user
         //Arrange
         UserProfile tes = new UserProfile("Visitor");
         SystemUser ana = new SystemUser("Ana", "1211@isep.ipp.pt", "User_12",

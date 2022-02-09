@@ -28,7 +28,7 @@ public class SystemUser {
     /**
      * Constructor
      **/
-    public SystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile profile) {
+    public SystemUser (String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile profile) {
         checkUserNameRules(userName);
         checkEmailRules(email);
         checkFunctionRules(function);

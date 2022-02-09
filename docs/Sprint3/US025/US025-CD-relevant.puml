@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/class-diagramhide circle
+skinparam classAttributeIconSize 0
+hide methods
+
+title Domain Model extract
+
+class SystemUser{
+- userName
+- email
+- photo
+- password
+- function
+- activateUser
+}
+class ActivationInfo{
+- code
+- link
+- activated
+}
+
+SystemUser "1" -right-> "1..*" ActivationInfo: has
+
+@enduml
