@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.*;
 import switch2021.project.utils.App;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +51,12 @@ public class ProjectStore {
      **/
 
     public List<Project> getProjects() {
+        List<Project> projectList = new ArrayList<>();
 
-        return new ArrayList<>(this.projectList);
+        for (Project project : this.projectList) {
+            projectList.add(project);
+        }
+        return projectList;
     }
 
     //This method was changed to implement encapsulation.
