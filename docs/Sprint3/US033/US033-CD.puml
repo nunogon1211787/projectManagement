@@ -6,15 +6,18 @@ skinparam classAttributeIconSize 0
 
 title US033 - As SM/Team Member, I want to register work done on a Task
 
+package "UI"{
 class RegisterWorkToTaskUI {
 }
-
+}
+package "Controllers"{
 class RegisterWorkToTaskController {
 +getTasks(userStorySprintProjectDTO) : List<TaskIdNameDTO>
 +getTask(idTask) : TaskIdNameDTO
 +createTaskEffort(taskEffortDTO) : boolean
 }
-
+}
+package "Domain"{
 class Company {
 +getProjectStore() : ProjectStore
 }
@@ -117,7 +120,7 @@ class TaskEffort {
 -attachment : String
 +TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment)
 }
-
+}
 RegisterWorkToTaskUI ..> RegisterWorkToTaskController
 
 RegisterWorkToTaskController ..> Company : uses
