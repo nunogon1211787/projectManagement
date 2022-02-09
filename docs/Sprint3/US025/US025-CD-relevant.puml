@@ -13,12 +13,6 @@ class SystemUser{
 - function
 - activateUser
 }
-class ActivationInfo{
-- code
-- link
-- activated
-}
 
-SystemUser "1" -right-> "1..*" ActivationInfo: has
 
 @enduml
