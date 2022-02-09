@@ -2,11 +2,10 @@ package switch2021.project.mapper;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.dto.ResourceDto;
+import switch2021.project.dto.ResourceDTO;
 import switch2021.project.model.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -55,15 +54,15 @@ public class ProjectTeamMapperTest {
 
         //Act
         //create ResourceDto
-        ResourceDto resourceDtoExp1 = projectTeamMapper.toDto(manuelbras);
+        ResourceDTO resourceDTOExp1 = projectTeamMapper.toDto(manuelbras);
 
         //Asserts
-        assertEquals("", resourceDtoExp1.getRole());
-        assertEquals("manuelbras", resourceDtoExp1.getUserName());
-        assertEquals("2021/11/1", resourceDtoExp1.getStartDate());
-        assertEquals("2022/11/15", resourceDtoExp1.getEndDate());
-        assertEquals(100, resourceDtoExp1.getCostPerHour());
-        assertEquals(.5, resourceDtoExp1.getPercentageOfAllocation());
+        assertEquals("", resourceDTOExp1.getRole());
+        assertEquals("manuelbras", resourceDTOExp1.getUserName());
+        assertEquals("2021/11/1", resourceDTOExp1.getStartDate());
+        assertEquals("2022/11/15", resourceDTOExp1.getEndDate());
+        assertEquals(100, resourceDTOExp1.getCostPerHour());
+        assertEquals(.5, resourceDTOExp1.getPercentageOfAllocation());
     }
 
     @Test
@@ -109,7 +108,7 @@ public class ProjectTeamMapperTest {
         List<Resource> projTeam = proj1.getProjectTeam().getProjectTeamList();
 
         //Act
-        List<ResourceDto> resDtoList = projectTeamMapper.toDto(projTeam);
+        List<ResourceDTO> resDtoList = projectTeamMapper.toDto(projTeam);
 
         //Asserts
         assertEquals("", resDtoList.get(0).getRole());
@@ -146,7 +145,7 @@ public class ProjectTeamMapperTest {
         manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
 
         //Act
-        ResourceDto resourceDto = projectTeamMapper1.toDto(manuelbras);
+        ResourceDTO resourceDto = projectTeamMapper1.toDto(manuelbras);
 
         //Asserts
         assertNotNull(resourceDto.getRole());

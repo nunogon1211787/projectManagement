@@ -74,10 +74,6 @@ CompanyTest {
         assertTrue(c.getProjectStore().getProjects().isEmpty());
     }
 
-    @Test
-    public void equalsTest() {
-
-    }
 
 /*
  * Teste do searchProject, ainda acabar

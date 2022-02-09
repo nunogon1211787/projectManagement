@@ -3,7 +3,6 @@ package switch2021.project.model;
 import lombok.Getter;
 import switch2021.project.depracated.UserStoryOfSprint;
 import switch2021.project.stores.UserStoryStatusStore;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -47,8 +46,8 @@ public class SprintBacklog {
     /** Override **/
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof SprintBacklog)) return false;
+    //    if (this == o) return true;
+     //   if (!(o instanceof SprintBacklog)) return false;
         SprintBacklog that = (SprintBacklog) o;
         return Objects.equals(userStoryOfSprintList, that.userStoryOfSprintList);
     }
@@ -58,13 +57,13 @@ public class SprintBacklog {
         return Objects.hash(userStoryOfSprintList);
     }
 
-    @Override
-    public String toString() {
-        return "SprintBacklog{" +
-                "userStoryOfSprintList=" + userStoryOfSprintList +
-                '}';
-    }
-
+//    @Override
+//    public String toString() {
+//        return "SprintBacklog{" +
+//                "userStoryOfSprintList=" + userStoryOfSprintList +
+//                '}';
+//    }
+// É NECESSÁRIO????
 
     ////Deprecated Methods
     /** Create User Story Of Sprint **/

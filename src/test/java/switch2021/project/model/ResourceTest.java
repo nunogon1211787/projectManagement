@@ -120,6 +120,44 @@ class ResourceTest {
     }
 
     @Test
+    @DisplayName("Validate Resource Attributes")
+    public void isYourUserTrueTest2() {
+        //Arrange
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "", userProfile);
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = LocalDate.now().plusWeeks(1);
+        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+        //Act and Assert
+        assertTrue(input.isYour("fase"));
+        assertTrue(input.isYour(newUser));
+        assertTrue(input.isYour(company.getProjectRoleStore().getProjectRole("Team Member")));
+        assertTrue(input.isYourName("xyz"));
+        assertTrue(input.isCurrent());
+    }
+
+    @Test
+    @DisplayName("Validate Resource Attributes")
+    public void isYourUserTrueTest3() {
+        //Arrange
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "", userProfile);
+        LocalDate startDate = LocalDate.now().minusWeeks(1);
+        LocalDate endDate = LocalDate.now();
+        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+        //Act and Assert
+        assertTrue(input.isYour("fase"));
+        assertTrue(input.isYour(newUser));
+        assertTrue(input.isYour(company.getProjectRoleStore().getProjectRole("Team Member")));
+        assertTrue(input.isYourName("xyz"));
+        assertTrue(input.isCurrent());
+    }
+
+    @Test
     @DisplayName("Validate Resource Attributes - Fail")
     public void isYourUserFalseTest() {
         //Arrange
@@ -128,6 +166,27 @@ class ResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "", userProfile);
         SystemUser testUser = new SystemUser("xyz", "test", "des", "gth", "gth", "", userProfile);
         LocalDate startDate = LocalDate.now().minusWeeks(1);
+        LocalDate endDate = LocalDate.now().plusWeeks(1);
+        Resource test = new Resource(testUser, LocalDate.now().plusWeeks(1), LocalDate.now().plusWeeks(3), 100, .5);
+        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+        //Act and Assert
+        assertFalse(test.isYour("fase"));
+        assertFalse(test.isYour(newUser));
+        //assertTrue(test.isYour(company.getProjectRoleStore().getProjectRole("Team Member")));
+        assertFalse(test.isYourName("ert"));
+        assertFalse(test.isCurrent());
+    }
+
+    @Test
+    @DisplayName("Validate Resource Attributes - Fail")
+    public void isYourUserFalseTest2() {
+        //Arrange
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "", userProfile);
+        SystemUser testUser = new SystemUser("xyz", "test", "des", "gth", "gth", "", userProfile);
+        LocalDate startDate = LocalDate.now();
         LocalDate endDate = LocalDate.now().plusWeeks(1);
         Resource test = new Resource(testUser, LocalDate.now().plusWeeks(1), LocalDate.now().plusWeeks(3), 100, .5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
@@ -153,7 +212,22 @@ class ResourceTest {
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
-        assertTrue(input.checkIfResourceIsActiveAndCurrent(LocalDate.now(),2));
+        assertTrue(input.isAvailableToSprint(LocalDate.now(),2));
+    }
+    @Test
+    public void checkIfResourceIsActiveAndCurrentTrue2() {
+        //Arrange
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "", userProfile);
+        SystemUser testUser = new SystemUser("xyz", "test", "des", "gth", "gth", "", userProfile);
+        LocalDate startDate = LocalDate.now().minusWeeks(1);
+        LocalDate endDate = LocalDate.now().plusWeeks(10);
+        Resource test = new Resource(testUser, LocalDate.now().plusWeeks(1), LocalDate.now().plusWeeks(3), 100, .5);
+        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+        //Act and Assert
+        assertTrue(input.isAvailableToSprint(LocalDate.now().plusWeeks(1),2));
     }
 
     @Test
@@ -169,7 +243,7 @@ class ResourceTest {
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
-        assertFalse(input.checkIfResourceIsActiveAndCurrent(LocalDate.now(),3));
+        assertFalse(input.isAvailableToSprint(LocalDate.now(),3));
     }
 
 
@@ -225,7 +299,13 @@ class ResourceTest {
         Resource copy = new Resource(joana1, startDateSet, endDateSet, 100, .5);
         copy.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Assert
+        assertNotSame(original,copy);
         assertEquals(original,copy);
+        assertEquals(company.getProjectRoleStore().getProjectRole("Team Member"), copy.getRole());
+        assertEquals(startDate, copy.getStartDate());
+        assertEquals(endDate, copy.getEndDate());
+        assertEquals(original.getCostPerHour(),copy.getCostPerHour());
+        assertEquals(original.getPercentageOfAllocation(), copy.getPercentageOfAllocation());
     }
 
     @Test
@@ -248,6 +328,12 @@ class ResourceTest {
         copy.setRole(company.getProjectRoleStore().getProjectRole("Developer"));
         //Assert
         assertNotEquals(original,copy);
+        assertNotEquals(company.getProjectRoleStore().getProjectRole("Team Member"), copy.getRole());
+        assertNotEquals(startDate, copy.getStartDate());
+        assertNotEquals(endDate, copy.getEndDate());
+        assertNotEquals(original.getCostPerHour(),copy.getCostPerHour());
+        assertNotEquals(original.getPercentageOfAllocation(), copy.getPercentageOfAllocation());
+
     }
 
     @Test

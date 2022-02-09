@@ -1,6 +1,8 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.mapper.ProjectTeamMapper;
+import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.model.*;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,28 +11,34 @@ class AssignScrumMasterControllerTest {
 
 
     @Test
-    public void controllerFailTest() {
-        //Arrange
-        Company company = new Company();
-        AssignScrumMasterController controller = new AssignScrumMasterController(company);
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep","xxx@sss.sss");
-        company.getCustomerStore().saveNewCustomer(customer);
-        BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
-        company.getBusinessSectorStore().addBusinessSector(sector);
-        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
-        //Act
-        Project projectTest = controller.getProject("proj_2022_1"); //Project is not save at ProjectStore
+    public void getProjectFailTest() {
         //Assert
-        assertNotEquals(proj1,projectTest);
+        assertThrows(NullPointerException.class, ()->{
+            //Arrange
+            Company company = new Company();
+            ProjectsMapper projectsMapper = new ProjectsMapper();
+            ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
+            AssignScrumMasterController controller = new AssignScrumMasterController(company, projectsMapper,projectTeamMapper);
+            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            Customer customer = company.getCustomerStore().createCustomer("isep","xxx@sss.sss");
+            company.getCustomerStore().saveNewCustomer(customer);
+            BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
+            company.getBusinessSectorStore().addBusinessSector(sector);
+            Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+                    typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+            company.getProjectStore().saveNewProject(proj1);
+            //Act
+            controller.getProject("proj_2022_1"); //Project is not save at ProjectStore
+        });
     }
 
     @Test
     void assignScrumMasterTestSuccess() {
         //Arrange
         Company company = new Company();
-        AssignScrumMasterController controller = new AssignScrumMasterController(company);
+        ProjectsMapper projectsMapper = new ProjectsMapper();
+        ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
+        AssignScrumMasterController controller = new AssignScrumMasterController(company, projectsMapper,projectTeamMapper);
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
         company.getCustomerStore().saveNewCustomer(customer);
@@ -70,10 +78,9 @@ class AssignScrumMasterControllerTest {
         proj1.getProjectTeam().saveResource(manuelfernandes);
         //Act
         controller.getProject("project_2022_1");
-        controller.getResource("manueljose@beaver.com");
-        controller.getProjectTeamList();
+        controller.getResource("manueljose");
         //Asserts
-        assertTrue(controller.assignRole("manueljose@beaver.com", "Scrum Master"));
+        assertTrue(controller.assignRole("manueljose", "Scrum Master"));
         assertEquals(5,proj1.getProjectTeam().getProjectTeamList().size());
     }
 
@@ -81,7 +88,9 @@ class AssignScrumMasterControllerTest {
     void assignScrumMasterTestSuccessWithRoleDefined() {
         //Arrange
         Company company = new Company();
-        AssignScrumMasterController controller = new AssignScrumMasterController(company);
+        ProjectsMapper projectsMapper = new ProjectsMapper();
+        ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
+        AssignScrumMasterController controller = new AssignScrumMasterController(company, projectsMapper,projectTeamMapper);
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
         company.getCustomerStore().saveNewCustomer(customer);
@@ -122,10 +131,9 @@ class AssignScrumMasterControllerTest {
         proj1.getProjectTeam().saveResource(manuelfernandes);
         //Act
         controller.getProject("project_2022_1");
-        controller.getResource("manueljose@beaver.com");
-        controller.getProjectTeamList();
+        controller.getResource("manueljose");
         //Asserts
-        assertTrue(controller.assignRole("manueljose@beaver.com", "Scrum Master"));
+        assertTrue(controller.assignRole("manueljose", "Scrum Master"));
         assertEquals(6,proj1.getProjectTeam().getProjectTeamList().size());
     }
 
@@ -135,12 +143,15 @@ class AssignScrumMasterControllerTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            AssignScrumMasterController controller = new AssignScrumMasterController(company);
+            ProjectsMapper projectsMapper = new ProjectsMapper();
+            ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
+            AssignScrumMasterController controller = new AssignScrumMasterController(company, projectsMapper,projectTeamMapper);
             Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
             Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+            company.getProjectStore().saveNewProject(proj1);
             proj1.setSprintDuration(2);
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             // Create Resource 1
@@ -170,9 +181,8 @@ class AssignScrumMasterControllerTest {
 
             //Act
             controller.getProject("project_2022_1");
-            controller.getResource("manueljose@beaver.com");
-            controller.getProjectTeamList();
-            controller.assignRole("manueljose@beaver.com", "Scrum Master"); //Resource without possible dates
+            controller.getResource("manueljose");
+            controller.assignRole("manueljose", "Scrum Master"); //Resource without possible dates
         });
     }
 
@@ -182,12 +192,15 @@ class AssignScrumMasterControllerTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            AssignScrumMasterController controller = new AssignScrumMasterController(company);
+            ProjectsMapper projectsMapper = new ProjectsMapper();
+            ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
+            AssignScrumMasterController controller = new AssignScrumMasterController(company, projectsMapper,projectTeamMapper);
             Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
             Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+            company.getProjectStore().saveNewProject(proj1);
             proj1.setSprintDuration(2);
             Sprint current = proj1.getSprints().createSprint("Current", LocalDate.now().minusWeeks(2).plusDays(1), 2);
             proj1.getSprints().saveSprint(current);
@@ -195,9 +208,73 @@ class AssignScrumMasterControllerTest {
             proj1.getSprints().saveSprint(next);
             //Act
             controller.getProject("project_2022_1");
-            controller.getResource("manueljose@beaver.com");
-            controller.getProjectTeamList();
+            controller.getResource("manueljose");
             controller.assignRole(null, "Scrum Master");
         });
+    }
+
+    @Test
+    void assignRoleTestResourceNullFailure2() {
+        //Assert
+        assertThrows(NullPointerException.class, () -> {
+            //Arrange
+            Company company = new Company();
+            ProjectsMapper projectsMapper = new ProjectsMapper();
+            ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
+            AssignScrumMasterController controller = new AssignScrumMasterController(company, projectsMapper,projectTeamMapper);
+            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
+            BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+            Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                    typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+            company.getProjectStore().saveNewProject(proj1);
+            proj1.setSprintDuration(2);
+            Sprint current = proj1.getSprints().createSprint("Current", LocalDate.now().minusWeeks(2).plusDays(1), 2);
+            proj1.getSprints().saveSprint(current);
+            Sprint next = proj1.getSprints().createSprint("Next", LocalDate.now().plusDays(1), 2);
+            proj1.getSprints().saveSprint(next);
+            //Act
+            controller.getProject("project_2022_1");
+            controller.getResource("manueljose");
+            controller.assignRole("mabueljose", "Scrum Master");
+        });
+    }
+
+    @Test
+    void assignRoleWrongName() {
+        //Arrange
+        Company company = new Company();
+        ProjectsMapper projectsMapper = new ProjectsMapper();
+        ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
+        AssignScrumMasterController controller = new AssignScrumMasterController(company, projectsMapper,projectTeamMapper);
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        company.getProjectStore().saveNewProject(proj1);
+        proj1.setSprintDuration(2);
+        Sprint current = proj1.getSprints().createSprint("Current", LocalDate.now().minusWeeks(2).plusDays(1), 2);
+        proj1.getSprints().saveSprint(current);
+        Sprint next = proj1.getSprints().createSprint("Next", LocalDate.now().plusDays(1), 2);
+        proj1.getSprints().saveSprint(next);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+             //Create resource 1
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 11, 15);
+        Resource manuelbras = proj1.getProjectTeam().createResource(user1, startDateMb, endDateMb, 100, .5);
+        proj1.getProjectTeam().saveResource(manuelbras);
+            //Create resource 2
+        SystemUser user2 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMj = LocalDate.of(2021, 11, 1);
+        LocalDate endDateMj = LocalDate.of(2022, 11, 15);
+        Resource manueljose = proj1.getProjectTeam().createResource(user2, startDateMj, endDateMj, 100, .5);
+        proj1.getProjectTeam().saveResource(manueljose);
+        //Act
+        controller.getProject("project_2022_1");
+        controller.getResource("manuelbras");
+        //Assert
+        assertFalse(controller.assignRole("manueljose","Scrum Master"));
     }
 }

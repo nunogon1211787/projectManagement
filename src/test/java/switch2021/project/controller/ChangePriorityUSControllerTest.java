@@ -1,15 +1,12 @@
 package switch2021.project.controller;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ChangePriorityUSControllerTest {
@@ -36,8 +33,6 @@ public class ChangePriorityUSControllerTest {
 
     @BeforeEach
     void ChangePriorityUSControllerTestWorld() {
-
-
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
         LocalDate startDate3 = LocalDate.of(2022, 12, 31);
         company = new Company();
@@ -73,18 +68,36 @@ public class ChangePriorityUSControllerTest {
     }
 
     @Test
+    void getUserStoryTest() {
+        //Arrange
+        ChangePriorityUSController change = new ChangePriorityUSController(company);
+        UserStory userStory = new UserStory("US001", 2, "Fazer tal",5);
+        UserStory userStory2 = new UserStory("US001", 3, "Fazer tal e coiso",5);
+        UserStory userStory3 = new UserStory("US001", 4, "Fazer tal e coiso também",5);
+        //Act
+        change.getProjectStore();
+        change.getProject("Project_2022_1");
+        change.getProductBacklog();
+        ProductBacklog testPB = new ProductBacklog();
+        testPB.saveUserStory(userStory);
+        testPB.saveUserStory(userStory2);
+        testPB.saveUserStory(userStory3);
+        //Assert
+        assertEquals(userStory, change.getUserStory(1));
+        assertEquals(userStory2, change.getUserStory(2));
+        assertEquals(userStory3, change.getUserStory(3));
+    }
+
+    @Test
     void getCurrentProjectListByUserEmailSuccess() {
         //Arrange
         ChangePriorityUSController change = new ChangePriorityUSController(company);
-
         // Act
-        List<Project> expected = change.getCurrentProjectListByUserEmail("batatinha@cartoon.com");
         List<Project> actual = new ArrayList<>();
         actual.add(project);
         actual.add(project2);
-
         // Assert
-        assertEquals(expected, actual);
+        assertEquals(actual, change.getCurrentProjectListByUserEmail("batatinha@cartoon.com"));
     }
 
     @Test
@@ -121,10 +134,10 @@ public class ChangePriorityUSControllerTest {
         change.getProject(project.getCode());
         // Act
         List<UserStory> expected = change.getUserStoryList();
-        List<UserStory> actual = new ArrayList<>();
-        actual.add(userStory);
-        actual.add(userStory2);
-        actual.add(userStory3);
+        change.getUserStoryList().add(userStory);
+        change.getUserStoryList().add(userStory2);
+        change.getUserStoryList().add(userStory3);
+        List<UserStory> actual = change.getUserStoryList();
 
         // Assert
         assertEquals(expected, actual);
@@ -139,7 +152,6 @@ public class ChangePriorityUSControllerTest {
         // Act
         UserStory expected = userStory2;
         UserStory actual = change.getUS(userStory2.getIdUserStory());
-
         // Assert
         assertEquals(expected, actual);
     }

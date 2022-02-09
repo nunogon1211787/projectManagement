@@ -62,7 +62,7 @@ public class TypologyTest {
         //Arrange
         Typology typo = new Typology("Fixed Cost");
         //Assert
-        assertTrue(typo.equals(typologyStore.getTypology("Fixed Cost")));
+        assertEquals(typo, typologyStore.getTypology("Fixed Cost"));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class TypologyTest {
         //Arrange
         Typology typo = new Typology("Test");
         //Assert
-        assertFalse(typo.equals(typologyStore.getTypology("Fixed Cost")));
+        assertNotEquals(typo, typologyStore.getTypology("Fixed Cost"));
     }
 
     @Test
@@ -81,5 +81,23 @@ public class TypologyTest {
         Typology typo3 = new Typology("Fixed Cost2");
         assertNotEquals(typo,typo2);
         assertEquals(typo2,typo3);
+    }
+
+    @Test
+    public void typologyClass() {
+        //Arrange
+        Typology typo = new Typology("Fixed Cost");
+        Typology typo2 = new Typology("Fixed Cost2");
+        assertEquals(typo.getClass(),typo2.getClass());
+
+    }
+
+    @Test
+    public void typologyNull() {
+        //Arrange
+        Typology typo = new Typology("Fixed Cost");
+        Typology typo2 = null;
+        assertNotEquals(typo,typo2);
+
     }
 }

@@ -495,4 +495,46 @@ class ProjectTest {
 
         assertNotEquals(project,project2);
     }
+
+    @Test
+    public void overrideTest2() {
+        //Arrange
+        ProductBacklog backlog = new ProductBacklog();
+        LocalDate date = LocalDate.of(2024,12,12);
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        project.setCode("1");
+        project.setProductBacklog(backlog);
+        project.setEndDate(date);
+        Project project2 = company.getProjectStore().createProject( "prototype", "test1234", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        project2.setCode("1");
+        project2.setEndDate(date);
+        project2.setProductBacklog(backlog);
+
+        assertEquals(project.toString(),project2.toString());
+        assertEquals(project,project2);
+
+        project2.setProjectStatus(new ProjectStatus("test"));
+
+        assertNotEquals(project,project2);
+
+        project.setProjectStatus(new ProjectStatus("test"));
+        project2.setDescription("test");
+
+        assertNotEquals(project,project2);
+
+        project.setDescription("test");
+        project2.setProjectName("erro");
+
+        assertNotEquals(project,project2);
+
+        assertEquals(project.getBusinessSector(), sector);
+        assertEquals(project.getCustomer(), customer);
+        assertEquals(project.getTypology(), typo);
+        assertEquals(project.getEndDate(), date );
+    }
 }

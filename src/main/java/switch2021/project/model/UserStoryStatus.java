@@ -3,7 +3,6 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.Objects;
 
 @Getter
@@ -12,7 +11,6 @@ import java.util.Objects;
 
 public class UserStoryStatus {
     /** Classe UserStoryStatus Atributes **/
-    private int idUserStoryStatus;
     private String description;
     private boolean sprintAvailable;  //this attribute means it is available as a status in sprint backlog
 
@@ -36,11 +34,11 @@ public class UserStoryStatus {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserStoryStatus that = (UserStoryStatus) o;
-        return idUserStoryStatus == that.idUserStoryStatus && sprintAvailable == that.sprintAvailable && Objects.equals(description, that.description);
+        return sprintAvailable == that.sprintAvailable && Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idUserStoryStatus, description, sprintAvailable);
+        return Objects.hash(description, sprintAvailable);
     }
 }

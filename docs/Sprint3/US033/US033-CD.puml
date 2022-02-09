@@ -10,61 +10,139 @@ class RegisterWorkToTaskUI {
 }
 
 class RegisterWorkToTaskController {
++getTasks(userStorySprintProjectDTO) : List<TaskIdNameDTO>
++getTask(idTask) : TaskIdNameDTO
++createTaskEffort(taskEffortDTO) : boolean
 }
 
 class Company {
-    +getProjectStore()
++getProjectStore() : ProjectStore
+}
+
+class UserStorySprintProjectDTO {
+-code : String
+-idSprint : int
+-idUserStory : int
+}
+
+class TaskEffortDTO {
+-effortHours : int
+-effortMinutes : int
+-effortDate : LocalDate
+-comment : String
+-attachment : String
+}
+
+class TaskIdNameDTO {
+-taskId : int
+-taskName : String
++TaskIdNameDTO(taskId, taskName)
+}
+
+class RegisterWorkToTaskMapper {
++toDTO(task) : TaskIdNameDTO
++toDtoList(taskList) : List<TaskIdNameDTO>
 }
 
 class ProjectStore {
-+getCurrentProjectsByUserEmail(String email)
-+getProjectByCode(String code)
++getProjectByCode(code) : Project
 }
 
 class Project {
 -code : String
--projectName : String
-+getProductBacklog()
++hasCode(code) : boolean
++getSprints() : SprintList
+}
+
+class ProjectTeam {
+}
+
+class Resource {
 }
 
 class SprintList {
++getSprint(idSprint) : Sprint
 }
 
 class Sprint {
+-idSprint : int
++hasSprintID(idSprint) : boolean
++getSprintBacklog() : SprintBacklog
+}
+
+class SprintBacklog {
++getUserStory(idUserStory) : UserStory
+}
+
+class UserStory {
+-idUserStory : int
+-timeEstimate : double
+-workDone : double
++hasId(idUserStory) : boolean
++getTasks() : TaskList
++updateWorkDone(task) : boolean
 }
 
 class TaskList {
++getTaskById(idTask) : Task
 }
 
 class Task {
-+createTaskEffort(workHours, workDay, comment, attachment, user)
-+saveTaskEffort(effort)
-+validateTaskEffort(effort)
-+add(effort)
-+updateWorkDone(effort)
-+updatePercentExecution(effort)
+-idTask : int
+-effortEstimate : double
+-effortRemaining : double
+-startDate : LocalDate
+-endDate : LocalDate
+-hoursSpent : double
+-executionPercentage : double
++hasId(idTask) : boolean
++createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment) : TaskEffort
++saveTaskEffort(effort) : boolean
++validateTaskEffort(effort) : boolean
++add(effort) : boolean
++updateHoursSpent(effort) : double
++updateEffortRemaining(effort) : double
++updateExecutionPercentage() : double
+}
+
+class TaskStatus {
+-description : String
 }
 
 class TaskEffort {
--workHours : double
--workDate : LocalDate
+-effortHours : int
+-effortMinutes : int
+-effortDate : LocalDate
 -comment : String
 -attachment : String
--user : SystemUser
-+createTaskEffort(workHours, workDate, comment, attachment, user)
++TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment)
 }
 
 RegisterWorkToTaskUI ..> RegisterWorkToTaskController
 
-RegisterWorkToTaskController ..> Company
-RegisterWorkToTaskController ..> ProjectStore
-RegisterWorkToTaskController ..> Project
+RegisterWorkToTaskController ..> Company : uses
+RegisterWorkToTaskController ..> UserStorySprintProjectDTO : uses
+RegisterWorkToTaskController ..> RegisterWorkToTaskMapper : uses
+RegisterWorkToTaskController ..> TaskEffortDTO : uses
+RegisterWorkToTaskMapper ..> TaskIdNameDTO
+RegisterWorkToTaskController ..> ProjectStore : uses
+RegisterWorkToTaskController ..> Project : uses
+RegisterWorkToTaskController ..> Sprint : uses
+RegisterWorkToTaskController ..> UserStory : uses
+RegisterWorkToTaskController ..> Task : uses
 
-Company "1" -> "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" *-- "1" SprintList
-SprintList "1" *-- "0..*" Sprint
-Sprint "1" -> "1" TaskList: has
-TaskList "1" *-- "0..*" Task
-Task "1" *-- "0..*" TaskEffort: has
+Company "1" -> "1" ProjectStore: knows a
+ProjectStore "1" *-- "0..*" Project: a list of
+Project "1" *-- "1" ProjectTeam : allocates
+ProjectTeam "1" *-- "0..*" Resource : a list of
+Resource "1" <- "0..*" Task : under responsibility of
+Project "1" *-- "1" SprintList : is carried out in
+SprintList "1" *-- "0..*" Sprint :a list of
+Sprint "1" -> "1" SprintBacklog: origins
+SprintBacklog "0..*" o-- "0..*" UserStory: contains
+UserStory "1" o-- "1" TaskList: contains
+Sprint "1" o-- "1" TaskList: contains
+TaskList "1" *-- "1..*" Task : a list of
+Task "*" -> "1" TaskStatus : has
+Task "1" *-- "0..*" TaskEffort: is updated by
 @enduml

@@ -1,5 +1,5 @@
 package switch2021.project.controller;
-import switch2021.project.dto.ResourceDto;
+import switch2021.project.dto.ResourceDTO;
 import switch2021.project.mapper.ProjectTeamMapper;
 import switch2021.project.model.Company;
 import switch2021.project.model.Resource;
@@ -26,7 +26,7 @@ public class GetListHResourceProjectController {
      * Method
      **/
 
-    public List<ResourceDto> getProjectTeam(String projectCode){
+    public List<ResourceDTO> getProjectTeam(String projectCode){
         List<Resource> projectTeamList = company.getProjectStore().getProjectByCode(projectCode).getProjectTeam().getProjectTeamList();
         return this.projectTeamMapper.toDto(projectTeamList);
     }

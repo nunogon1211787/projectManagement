@@ -3,7 +3,6 @@ package switch2021.project.model;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.stores.TaskList;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +41,10 @@ public class Sprint {
         this.endDate = startDate.plusDays((sprintDurationInWeeks * 7L) - 1);
     }
 
+    public boolean hasSprintID(int id) {
+        return this.idSprint == id;
+    }
+
 
     /**
      * Validation Method for the Constructor
@@ -77,7 +80,6 @@ public class Sprint {
     /**
      * Override Methods
      */
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -89,9 +91,5 @@ public class Sprint {
     @Override
     public int hashCode() {
         return Objects.hash(idSprint, name, taskList, sprintBacklog, startDate, endDate);
-    }
-
-    public boolean hasSprintID(int id) {
-        return this.idSprint == id;
     }
 }

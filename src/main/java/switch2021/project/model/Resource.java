@@ -97,7 +97,6 @@ public class Resource {
      **/
 
     public boolean isAvailableToSprint(LocalDate startDate, int sprintDuration) {
-
         boolean msg = false;
 
         LocalDate endDate = startDate.plusDays(sprintDuration * 7L - 1);
@@ -114,13 +113,10 @@ public class Resource {
      **/
     public boolean checkAllocationPeriod(LocalDate startDate, LocalDate endDate) {
         boolean msg = false;
-        if (startDate.isEqual(this.startDate) || startDate.isEqual(this.endDate) || endDate.isEqual(this.endDate) || endDate.isEqual(this.startDate)) {
-            msg = true;
-        } else if (startDate.isBefore(this.startDate) && endDate.isAfter(this.startDate)) {
-            msg = true;
-        } else if (startDate.isBefore(this.endDate) && endDate.isAfter(this.endDate)) {
-            msg = true;
-        } else if (startDate.isAfter(this.startDate) && endDate.isBefore(this.endDate)) {
+        if ((startDate.isEqual(this.startDate) || startDate.isEqual(this.endDate) || endDate.isEqual(this.endDate) || endDate.isEqual(this.startDate))
+            || (startDate.isBefore(this.startDate) && endDate.isAfter(this.startDate))
+            || (startDate.isBefore(this.endDate) && endDate.isAfter(this.endDate))
+            || (startDate.isAfter(this.startDate) && endDate.isBefore(this.endDate))) {
             msg = true;
         }
         return msg;
@@ -130,11 +126,6 @@ public class Resource {
         if (endDate.isBefore(startDate)) {
             throw new IllegalArgumentException("End Date must be after Start Date");
         }
-    }
-
-    public boolean checkIfResourceIsActiveAndCurrent(LocalDate startDate, int sprintDuration){
-        LocalDate endDateSprint = startDate.plusDays((sprintDuration * 7L) -1);
-            return (startDate.isAfter(this.startDate) || startDate == this.startDate) && (endDateSprint.isBefore(this.endDate) || endDateSprint == this.endDate);
     }
 
     private void checkCostPerHour(double costPerHour) {

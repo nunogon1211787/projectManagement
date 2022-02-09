@@ -2,7 +2,6 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.stores.TaskStatusStore;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskStatusTest {
@@ -10,25 +9,25 @@ class TaskStatusTest {
     @Test
     void hasDescriptionSuccess() {
         //Arrange
-        TaskStatus status = new TaskStatus("teste");
-        String testeName = "teste";
+        TaskStatus status = new TaskStatus("test");
+        String testName = "test";
         //Assert
-        assertTrue(status.hasDescription(testeName));
+        assertTrue(status.hasDescription(testName));
     }
 
     @Test
     void hasDescriptionFail() {
         //Arrange
-        TaskStatus status = new TaskStatus("teste");
-        String testeName = "fail";
+        TaskStatus status = new TaskStatus("test");
+        String testName = "fail";
         //Assert
-        assertFalse(status.hasDescription(testeName));
+        assertFalse(status.hasDescription(testName));
     }
 
     @Test
     void hasDescriptionNull() {
         //Arrange
-        TaskStatus status = new TaskStatus("teste");
+        TaskStatus status = new TaskStatus("test");
         //Assert
         assertFalse(status.hasDescription(null));
     }
@@ -36,9 +35,9 @@ class TaskStatusTest {
     @Test
     void getId_TaskStatusSuccess() {
         //Arrange
-        TaskStatusStore teste = new TaskStatusStore();
-        TaskStatus status = new TaskStatus("teste");
-        teste.saveTaskStatus(status);
+        TaskStatusStore test = new TaskStatusStore();
+        TaskStatus status = new TaskStatus("test");
+        test.saveTaskStatus(status);
         //Assert
         assertEquals(1, status.getIdTaskStatus());
     }
@@ -46,8 +45,7 @@ class TaskStatusTest {
     @Test
     void getId_TaskStatusWithoutSave() {
         //Arrange
-        TaskStatusStore teste = new TaskStatusStore();
-        TaskStatus status = new TaskStatus("teste");
+        TaskStatus status = new TaskStatus("test");
         //Assert
         assertEquals(0, status.getIdTaskStatus());
     }
@@ -55,22 +53,39 @@ class TaskStatusTest {
     @Test
     void getId_TaskStatusFail() {
         //Arrange
-        TaskStatusStore teste = new TaskStatusStore();
-        TaskStatus status = new TaskStatus("teste");
+        TaskStatus status = new TaskStatus("test");
         //Assert
         assertNotEquals(1, status.getIdTaskStatus());
     }
 
     @Test
-    void getId_TaskStatusWith3statuss() {
+    void setId_TaskStatus() {
         //Arrange
-        TaskStatusStore teste = new TaskStatusStore();
-        TaskStatus status1= new TaskStatus("teste1");
-        TaskStatus status2 = new TaskStatus("teste2");
-        TaskStatus status3 = new TaskStatus("teste3");
-        teste.saveTaskStatus(status1);
-        teste.saveTaskStatus(status2);
-        teste.saveTaskStatus(status3);
+        TaskStatus status = new TaskStatus("test");
+        status.setIDTaskStatus(1);
+        //Assert
+        assertEquals(1, status.getIdTaskStatus());
+    }
+
+    @Test
+    void setDescription_TaskStatus() {
+        //Arrange
+        TaskStatus status = new TaskStatus("test");
+        status.setDescription("Success");
+        //Assert
+        assertEquals("Success", status.getDescription());
+    }
+
+    @Test
+    void getId_TaskStatusWith3status() {
+        //Arrange
+        TaskStatusStore test = new TaskStatusStore();
+        TaskStatus status1= new TaskStatus("test1");
+        TaskStatus status2 = new TaskStatus("test2");
+        TaskStatus status3 = new TaskStatus("test3");
+        test.saveTaskStatus(status1);
+        test.saveTaskStatus(status2);
+        test.saveTaskStatus(status3);
         //Assert
         assertEquals(3, status3.getIdTaskStatus());
     }
@@ -78,41 +93,41 @@ class TaskStatusTest {
     @Test
     void getDescriptionSuccess() {
         //Arrange
-        TaskStatusStore teste = new TaskStatusStore();
-        TaskStatus status1= new TaskStatus("teste1");
-        TaskStatus status2 = new TaskStatus("teste2");
-        TaskStatus status3 = new TaskStatus("teste3");
-        teste.saveTaskStatus(status1);
-        teste.saveTaskStatus(status2);
-        teste.saveTaskStatus(status3);
+        TaskStatusStore test = new TaskStatusStore();
+        TaskStatus status1= new TaskStatus("test1");
+        TaskStatus status2 = new TaskStatus("test2");
+        TaskStatus status3 = new TaskStatus("test3");
+        test.saveTaskStatus(status1);
+        test.saveTaskStatus(status2);
+        test.saveTaskStatus(status3);
         //Assert
-        assertEquals("teste1", status1.getDescription());
-        assertEquals("teste2", status2.getDescription());
-        assertEquals("teste3", status3.getDescription());
+        assertEquals("test1", status1.getDescription());
+        assertEquals("test2", status2.getDescription());
+        assertEquals("test3", status3.getDescription());
     }
 
     @Test
     void getDescriptionFail() {
         //Arrange
-        TaskStatusStore teste = new TaskStatusStore();
-        TaskStatus status1= new TaskStatus("teste1");
-        TaskStatus status2 = new TaskStatus("teste2");
-        TaskStatus status3 = new TaskStatus("teste3");
-        teste.saveTaskStatus(status1);
-        teste.saveTaskStatus(status2);
-        teste.saveTaskStatus(status3);
+        TaskStatusStore test = new TaskStatusStore();
+        TaskStatus status1= new TaskStatus("test1");
+        TaskStatus status2 = new TaskStatus("test2");
+        TaskStatus status3 = new TaskStatus("test3");
+        test.saveTaskStatus(status1);
+        test.saveTaskStatus(status2);
+        test.saveTaskStatus(status3);
         //Assert
-        assertNotEquals("teste2", status1.getDescription());
-        assertNotEquals("teste3", status2.getDescription());
-        assertNotEquals("teste1", status3.getDescription());
+        assertNotEquals("test2", status1.getDescription());
+        assertNotEquals("test3", status2.getDescription());
+        assertNotEquals("test1", status3.getDescription());
     }
 
     @Test
     void setID_TaskStatusSuccess() {
         //Arrange
-        TaskStatus status1= new TaskStatus("teste1");
-        TaskStatus status2 = new TaskStatus("teste2");
-        TaskStatus status3 = new TaskStatus("teste3");
+        TaskStatus status1= new TaskStatus("test1");
+        TaskStatus status2 = new TaskStatus("test2");
+        TaskStatus status3 = new TaskStatus("test3");
         status1.setIDTaskStatus(1);
         status2.setIDTaskStatus(2);
         status3.setIDTaskStatus(3);
@@ -125,9 +140,9 @@ class TaskStatusTest {
     @Test
     void setID_TaskStatusFail() {
         //Arrange
-        TaskStatus status1= new TaskStatus("teste1");
-        TaskStatus status2 = new TaskStatus("teste2");
-        TaskStatus status3 = new TaskStatus("teste3");
+        TaskStatus status1= new TaskStatus("test1");
+        TaskStatus status2 = new TaskStatus("test2");
+        TaskStatus status3 = new TaskStatus("test3");
         status1.setIDTaskStatus(1);
         status2.setIDTaskStatus(2);
         status3.setIDTaskStatus(3);
@@ -145,6 +160,7 @@ class TaskStatusTest {
             TaskStatus status = new TaskStatus("t1");
             result = false;
         } catch(IllegalArgumentException e){
+
             result = true;
         }
         //Assert
@@ -178,5 +194,29 @@ class TaskStatusTest {
         }
         //Assert
         assertTrue(result);
+    }
+
+    @Test
+    void overrideTests() {
+        //Arrange
+        TaskStatus status1= new TaskStatus("test1");
+        TaskStatus status2 = new TaskStatus("test2");
+        TaskStatus status3 = new TaskStatus("test3");
+        TaskStatus status4 = null;
+        TaskStatus status5= new TaskStatus("test1");
+        TaskStatus status6= new TaskStatus("test1");
+        status1.setIDTaskStatus(1);
+        status2.setIDTaskStatus(2);
+        status3.setIDTaskStatus(3);
+        status5.setIDTaskStatus(55);
+        status6.setIDTaskStatus(1);
+        //Assert
+        assertNotEquals(1, status2.getIdTaskStatus());
+        assertNotEquals(2, status3.getIdTaskStatus());
+        assertNotEquals(3, status1.getIdTaskStatus());
+        assertEquals(status1.getClass(),status2.getClass());
+        assertEquals(status1,status6);
+        assertNull(status4);
+        assertNotEquals(status5,status1);
     }
 }

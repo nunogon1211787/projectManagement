@@ -3,7 +3,6 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ActivateUserControllerTest {

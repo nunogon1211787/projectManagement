@@ -1,32 +1,29 @@
 package switch2021.project.stores;
 
+import lombok.Getter;
 import switch2021.project.model.UserProfile;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
 public class UserProfileStore {
 
     /**
      * Attributes
      **/
-
     private List<UserProfile> userProfileList;
 
     /**
      * UserProfile Store Constructor
      **/
-
     public UserProfileStore() {
         userProfileList = new ArrayList<>();
     }
 
-
     /**
      * UserProfile Populator, that populates the UserProfile List with pre-set objects.
      **/
-
     public void populateDefault() {
         saveUserProfile(createProfile("Visitor"));
         saveUserProfile(createProfile("Administrator"));
@@ -35,21 +32,8 @@ public class UserProfileStore {
     }
 
     /**
-     * Getters and Setters Methods
-     **/
-
-    private List<UserProfile> getOriginalUserProfileList() {
-        return this.userProfileList;
-    }
-
-    public List<UserProfile> getUserProfileList() {
-        return new ArrayList<>(userProfileList);
-    }
-
-    /**
      * Get UserProfile By Name Method
      **/
-
     public UserProfile getUserProfile(String profileName) {
         UserProfile profile = null;
 
@@ -64,7 +48,6 @@ public class UserProfileStore {
     /**
      * Get UserProfile By ID Method
      **/
-
     public UserProfile getUserProfile(int id_UserProfile) {
         UserProfile profile = null;
 
@@ -76,11 +59,9 @@ public class UserProfileStore {
         return profile;
     }
 
-
     /**
      * Create Method
      **/
-
     public UserProfile createProfile(String name) {
         return new UserProfile(name);
     }
@@ -102,7 +83,6 @@ public class UserProfileStore {
     /**
      * Save UserProfile Method (Save a new UserProfile object to the UserProfile List)
      **/
-
     public boolean saveUserProfile(UserProfile profile) {
         if (!validateProfile(profile)) {
             throw new IllegalArgumentException("Repeated user profile name inserted.");
@@ -113,7 +93,6 @@ public class UserProfileStore {
     /**
      * Add and Remove UserProfile Methods (Adds or remove a UserProfile object to the UserProfile List)
      **/
-
     private boolean addUserProfile(UserProfile profile) {
         if (validateIdUserProfile(profile)) {
             userProfileList.add(profile);
@@ -154,7 +133,6 @@ public class UserProfileStore {
     /**
      * Override
      **/
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -162,10 +140,6 @@ public class UserProfileStore {
         UserProfileStore that = (UserProfileStore) obj;
         return (this.userProfileList.equals(that.userProfileList));
     }
-
-    /**
-     * Hash
-     **/
 
     @Override
     public int hashCode() {

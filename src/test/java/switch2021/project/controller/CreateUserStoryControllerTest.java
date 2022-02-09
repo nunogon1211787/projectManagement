@@ -3,10 +3,8 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
-
 import java.time.LocalDate;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CreateUserStoryControllerTest {
@@ -33,7 +31,6 @@ public class CreateUserStoryControllerTest {
         company.getProjectStore().saveNewProject(project);
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
         createUserStoryController.getProjectByCode("Project_2022_1");
-        UserStoryStatus status = new UserStoryStatus("In progress");
         int priority = -1;
         String description = "teste";
         // Act
@@ -50,7 +47,6 @@ public class CreateUserStoryControllerTest {
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
         createUserStoryController.getProjectByCode("Project_2022_1");
-        UserStoryStatus status = new UserStoryStatus("In progress");
         int priority = 1;
         String description = "";
         // Act
@@ -62,12 +58,10 @@ public class CreateUserStoryControllerTest {
     @Test
     public void createUserStoryDescriptionInvalidShort() {
         //Arrange
-
         company.getProjectStore().saveNewProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
         createUserStoryController.getProjectByCode("Project_2022_1");
-        UserStoryStatus status = new UserStoryStatus("In progress");
         int priority = 1;
         String description = "dd";
         // Act
@@ -84,7 +78,6 @@ public class CreateUserStoryControllerTest {
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
         createUserStoryController.getProjectByCode("Project_2022_1");
-        UserStoryStatus status = new UserStoryStatus("In progress");
         int priority = 6;
         String description = "teste";
         // Act
@@ -100,7 +93,6 @@ public class CreateUserStoryControllerTest {
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
         createUserStoryController.getProjectByCode("Project_2022_1");
-        UserStoryStatus status = new UserStoryStatus("In progress");
         int priority = 1;
         String description = "teste";
 
@@ -134,7 +126,7 @@ public class CreateUserStoryControllerTest {
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-            List<Project> projectList = createUserStoryController.getProjectListByUserEmail("");
+            createUserStoryController.getProjectListByUserEmail("");
         });
         // Assert
         assertEquals("Email cannot be blank", exception.getMessage());
@@ -151,12 +143,11 @@ public class CreateUserStoryControllerTest {
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-        List<Project> projectList = createUserStoryController.getProjectListByUserEmail("dani@ipp.pt");
+        createUserStoryController.getProjectListByUserEmail("dani@ipp.pt");
         });
         // Assert
         assertEquals("Email don't exist in system", exception.getMessage());
     }
-
 }
 
 

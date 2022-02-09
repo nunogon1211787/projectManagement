@@ -1,8 +1,6 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import lombok.Setter;
-import switch2021.project.controller.ChangePasswordController;
 import switch2021.project.utils.App;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,7 +8,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-@Setter
 public class ProjectTeam {
 
     /**
@@ -177,7 +174,7 @@ public class ProjectTeam {
     public boolean assignProjectRole(Resource originalResource, LocalDate startDateNewRole, int sprintDuration, ProjectRole projectRole) {
         Resource newResource = null;
         //At this moment, will create a copy of the resource and change the role of the new resource.
-        if (originalResource.checkIfResourceIsActiveAndCurrent(startDateNewRole, sprintDuration)) {
+        if (originalResource.isAvailableToSprint(startDateNewRole, sprintDuration)) {
             newResource = copyUpdateProjectRoleOfAResource(originalResource, startDateNewRole, projectRole);
             //At this moment, will check if exist any resource active and current as SM, PO or PM.
             if (checkIfTheRoleExistAndIsCurrent(newResource.getRole(), newResource.getStartDate())) {

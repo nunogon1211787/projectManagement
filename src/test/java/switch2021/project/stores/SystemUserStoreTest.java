@@ -4,10 +4,8 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser;
 import switch2021.project.model.UserProfile;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SystemUserStoreTest {
@@ -134,7 +132,7 @@ public class SystemUserStoreTest {
     }
 
     @Test
-    public void reachUserbyEmail() {
+    public void reachUserByEmail() {
         Company company = new Company();
         String userName = "anaguedes";
         String email = "anaguedes@beaver.com";
@@ -149,7 +147,6 @@ public class SystemUserStoreTest {
         assertEquals(user_verification, findUser);
     }
 
-
     @Test
     public void IsYourEmailSuccess() {
         Company company = new Company();
@@ -158,6 +155,16 @@ public class SystemUserStoreTest {
                 "PO", "hello123", "hello123", "photo.png", profile);
         //Assert
         assertTrue(systemUser.isYourEmail("anaguedes@beaver.com"));
+    }
+
+    @Test
+    public void IsYourEmailFail() {
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser systemUser = company.getSystemUserStore().createSystemUser("anaguedes", "anaguedes@beaver.com",
+                "PO", "hello123", "hello123", "photo.png", profile);
+        //Assert
+        assertFalse(systemUser.isYourEmail("guedesana@beaver.com"));
     }
 
     @Test
@@ -174,6 +181,7 @@ public class SystemUserStoreTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //newUser/list1 and newUser2/list2 are equals
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
+
         SystemUserStore list1 = new SystemUserStore();
         list1.saveSystemUser(newUser);
 
@@ -186,9 +194,61 @@ public class SystemUserStoreTest {
         list3.saveSystemUser(newUser3);
         //Assert
         assertNotSame(list1, list2);
-        assertEquals(list1, list2);
-        assertEquals(list1.hashCode(), list2.hashCode());
+        assertEquals(list1.getSystemUserList(), list2.getSystemUserList());
+        assertEquals(list1.getSystemUserList().hashCode(), list2.getSystemUserList().hashCode());
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
+    }
+
+    @Test
+    public void validateSystemUser() {
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser systemUser = company.getSystemUserStore().createSystemUser("anaguedes", "anaguedes@beaver.com",
+                "POAAAA", "hello123", "hello123", "photo.png", profile);
+        boolean expected = company.getSystemUserStore().validateSystemUser(systemUser);
+        company.getSystemUserStore().saveSystemUser(systemUser);
+        //Assert
+        assertTrue(expected);
+    }
+
+    @Test
+    public void validateSystemUser2() {
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser systemUser = company.getSystemUserStore().createSystemUser("anaguedes", "anaguedes@beaver.com",
+                "PO", "hello123", "hello123", "photo.png", profile);
+        SystemUser systemUser2 = company.getSystemUserStore().createSystemUser("anaguedes", "anaguedes@beaver.com",
+                "PO", "hello123", "hello123", "photo.png", profile);
+        SystemUserStore list1 = new SystemUserStore();
+        list1.saveSystemUser(systemUser);
+        list1.saveSystemUser(systemUser2);
+
+        boolean expected = list1.validateSystemUser(systemUser);
+        //Assert
+        assertFalse(expected);
+    }
+
+    @Test
+    public void validateSystemUser3() {
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser systemUser = null;
+        boolean expected = company.getSystemUserStore().validateSystemUser(systemUser);
+        company.getSystemUserStore().saveSystemUser(systemUser);
+        //Assert
+        assertFalse(expected);
+    }
+
+    @Test
+    public void validateSystemUser4() {
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser systemUser = company.getSystemUserStore().createSystemUser("anaguedes", "anaguedes@beaver.com",
+                "POAAAA", "hello123", "hello123", "photo.png", profile);
+        boolean expected = company.getSystemUserStore().validateSystemUser(systemUser);
+        company.getSystemUserStore().saveSystemUser(systemUser);
+        //Assert
+        assertTrue(expected);
     }
 }
