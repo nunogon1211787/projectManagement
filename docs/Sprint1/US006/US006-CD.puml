@@ -1,63 +1,50 @@
 @startuml
-'https://plantuml.com/class-diagram
 
 hide circle
 skinparam classAttributeIconSize 0
 
-title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
+title "US006 - As Administrator, I want to update profiles assigned to a user account."
 
-class CreateUserStoryUI {
-
+class UpdateUserProfileUI {
 }
 
-class CreateUserStoryController {
-    +getProjectListByUserEmail(String email)
-    +getProjectByCode(String code)
-    +createUserStory(status, priority, description)
+class UpdateUserProfileController {
++UpdateUserProfileController(company)
++getUser(email)
++getUserProfileList()
++updateProfile(user, oldProfile, newProfile)
 }
 
 class Company {
-    +getProjectStore()
++Company
++getSystemUserStore()
++getUserProfileStore()
 }
 
-class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
+class UserProfileStore {
++UserProfileStore()
+getUserProfileList()
 }
 
-class Project {
--code : String
--productBacklog : ProductBacklog
-+getProductBacklog()
+class SystemUserStore {
++SystemUserStore()
++getUserByEmail(email)
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+createUserStory(status, priority, description)
-+isValideUserStory(status, priority, description)
-+saveUserStory(us)
-+validateUserStory(us)
+class SystemUser {
++SystemUser()
++isYourEmail(email)
++updateProfile(oldProfile, newProfile)
 }
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
-+UserStory(status, priority,description)
-}
+UpdateUserProfileUI ..> UpdateUserProfileController
+UpdateUserProfileController ..> Company
+UpdateUserProfileController ..> UserProfileStore
+UpdateUserProfileController ..> SystemUserStore
+UpdateUserProfileController ..> SystemUser
 
-CreateUserStoryUI ..> CreateUserStoryController
-
-CreateUserStoryController ..> Company
-CreateUserStoryController ..> ProjectStore
-CreateUserStoryController ..> Project
-CreateUserStoryController ..> ProductBacklog
-
-Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+Company "1" o-- "1" UserProfileStore
+Company "1" o-- "1" SystemUserStore
+SystemUserStore "1" *-- "*" SystemUser
 
 @enduml

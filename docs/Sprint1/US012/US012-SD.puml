@@ -1,0 +1,32 @@
+@startuml
+
+title US012 - "As Director, I want to create a new project typology."
+
+autoactivate on
+autonumber
+
+actor "Director" as Director
+participant ":CreateNewTypologyUI" as UI
+participant ":CreateNewTypologyController" as Controller
+participant ":Company" as Company
+participant "typologyStore:TypologyStore" as Store
+participant "typo:Typology" as Typology
+
+Director -> UI: Starts the creation of a new typology
+return Request data (description)
+Director -> UI: types required data
+UI -> Controller: createTypology (description)
+Controller -> Company: getTypologyStore()
+return typologyStore
+Controller -> Store: createTypology (description)
+Store -> Typology**: Typology (description)
+return typology
+Controller -> Store: saveTypology (typo)
+Store -> Store: validateTypology (typo)
+return true
+return true
+return true
+return Informs operation success
+
+
+@enduml
