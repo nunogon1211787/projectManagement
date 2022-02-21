@@ -23,10 +23,9 @@ public class SprintBacklog {
     public boolean saveUserStoryToSprintBacklog(UserStory userStory) {
         boolean status = false;
         if(validateUserStory(userStory)) {
-            status = true;
             UserStoryStatusStore statusStore = new UserStoryStatusStore();
             statusStore.populateDefault();
-            userStory.setUserStoryStatus(statusStore.getUserStoryStatusByDescription("To do"));
+            status = userStory.setUserStoryStatusBoolean(statusStore.getUserStoryStatusByDescription("To do"));
             userStoryList.add(userStory);
         }
 
@@ -46,8 +45,8 @@ public class SprintBacklog {
     /** Override **/
     @Override
     public boolean equals(Object o) {
-    //    if (this == o) return true;
-     //   if (!(o instanceof SprintBacklog)) return false;
+        if (this == o) return true;
+        if (!(o instanceof SprintBacklog)) return false;
         SprintBacklog that = (SprintBacklog) o;
         return Objects.equals(userStoryOfSprintList, that.userStoryOfSprintList);
     }
@@ -56,6 +55,8 @@ public class SprintBacklog {
     public int hashCode() {
         return Objects.hash(userStoryOfSprintList);
     }
+
+
 
 //    @Override
 //    public String toString() {

@@ -23,8 +23,7 @@ public class ActivateUserController {
      **/
 
     public boolean activateUser (String email) {
-        this.company.getSystemUserStore().getUserByEmail(email).setActivateUser(true);
-        return true;
+        return this.company.getSystemUserStore().getUserByEmail(email).setActivateUser(true);
     }
 
 }

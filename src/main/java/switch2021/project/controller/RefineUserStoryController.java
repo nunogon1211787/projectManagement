@@ -42,8 +42,7 @@ public class RefineUserStoryController {
     }
 
     public boolean updateRefinedUserStoryStatus(UserStory userStoryParent){
-        userStoryParent.setUserStoryStatus(company.getUserStoryStatusStore().getUserStoryStatusByDescription("Refined"));
-        return true;
+        return userStoryParent.setUserStoryStatusBoolean(company.getUserStoryStatusStore().getUserStoryStatusByDescription("Refined"));
     }
 
     public boolean createUserStory(String description, int priority, UserStoryStatus userStoryStatus){
