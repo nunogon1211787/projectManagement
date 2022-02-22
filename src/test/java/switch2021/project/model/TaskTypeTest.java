@@ -39,7 +39,7 @@ class TaskTypeTest {
         TaskType type = new TaskType("teste");
         teste.saveTaskType(type);
         //Assert
-        assertEquals(1, type.getType_ID());
+        assertEquals(1, type.getTypeID());
     }
 
     @Test
@@ -48,7 +48,7 @@ class TaskTypeTest {
         TaskTypeStore teste = new TaskTypeStore();
         TaskType type = new TaskType("teste");
         //Assert
-        assertEquals(0, type.getType_ID());
+        assertEquals(0, type.getTypeID());
     }
 
     @Test
@@ -57,7 +57,7 @@ class TaskTypeTest {
         TaskTypeStore teste = new TaskTypeStore();
         TaskType type = new TaskType("teste");
         //Assert
-        assertNotEquals(1, type.getType_ID());
+        assertNotEquals(1, type.getTypeID());
     }
 
     @Test
@@ -71,7 +71,7 @@ class TaskTypeTest {
         teste.saveTaskType(type2);
         teste.saveTaskType(type3);
         //Assert
-        assertEquals(3, type3.getType_ID());
+        assertEquals(3, type3.getTypeID());
     }
 
     @Test
@@ -112,13 +112,13 @@ class TaskTypeTest {
         TaskType type1= new TaskType("teste1");
         TaskType type2 = new TaskType("teste2");
         TaskType type3 = new TaskType("teste3");
-        type1.setType_ID(1);
-        type2.setType_ID(2);
-        type3.setType_ID(3);
+        type1.setTypeID(1);
+        type2.setTypeID(2);
+        type3.setTypeID(3);
         //Assert
-        assertEquals(1, type1.getType_ID());
-        assertEquals(2, type2.getType_ID());
-        assertEquals(3, type3.getType_ID());
+        assertEquals(1, type1.getTypeID());
+        assertEquals(2, type2.getTypeID());
+        assertEquals(3, type3.getTypeID());
     }
 
     @Test
@@ -127,13 +127,13 @@ class TaskTypeTest {
         TaskType type1= new TaskType("teste1");
         TaskType type2 = new TaskType("teste2");
         TaskType type3 = new TaskType("teste3");
-        type1.setType_ID(1);
-        type2.setType_ID(2);
-        type3.setType_ID(3);
+        type1.setTypeID(1);
+        type2.setTypeID(2);
+        type3.setTypeID(3);
         //Assert
-        assertNotEquals(1, type2.getType_ID());
-        assertNotEquals(2, type3.getType_ID());
-        assertNotEquals(3, type1.getType_ID());
+        assertNotEquals(1, type2.getTypeID());
+        assertNotEquals(2, type3.getTypeID());
+        assertNotEquals(3, type1.getTypeID());
     }
 
     @Test
@@ -170,7 +170,7 @@ class TaskTypeTest {
         boolean result;
         try {
             TaskType type = new TaskType("teste");
-            type.setType_ID(-1);
+            type.setTypeID(-1);
             result = false;
         } catch(IllegalArgumentException e){
             result = true;
