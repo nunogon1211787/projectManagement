@@ -1,0 +1,47 @@
+@startuml
+
+title "US006 - As Administrator, I want to update profiles assigned to a user account."
+
+autoactivate on
+autonumber
+
+actor "Administrator" as Administrator
+participant ":CreateUpdateUserProfileUI" as UI
+participant ":CreateUserStoryController" as Controller
+participant ":Company" as Company
+participant "systemUserStore: SystemUserStore" as UserStore
+participant "userProfileStore: UserProfileStore" as ProfileStore
+participant "user: SystemUser" as User
+
+
+
+Administrator -> UI: Start update profile
+UI -> Controller: getUser(email)
+Controller -> Company: getSystemUserStore()
+return systemUserStore
+Controller -> UserStore: getUserByEmail(email)
+loop check user's email
+    UserStore -> User: isYourEmail(email)
+    return true
+end
+return user
+return user
+return Show System User data
+
+Administrator -> UI: Choose new profile
+UI -> Controller: getUserProfileList()
+Controller -> Company: getUserProfileStore()
+return userProfileStore
+Controller -> ProfileStore: getUserProfileList()
+return userProfileList
+return userProfileList
+return Show userProfileList
+
+Administrator -> UI: Update profile assigned to a user account
+UI -> Controller: updateProfile(systemUser, oldProfile, newProfile)
+Controller -> User: updateProfile(oldProfile, newProfile)
+return true
+return true
+return inform operation success
+
+@enduml

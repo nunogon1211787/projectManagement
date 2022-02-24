@@ -1,4 +1,4 @@
-@startuml
+ q@startuml
 'https://plantuml.com/class-diagram
 
 hide circle
@@ -14,8 +14,13 @@ class UpdateStatusUSSprintController {
     +changeStatusOfUs(code, usId, userStoryStatus)
 }
 
+class UserStoryStatusStore{
+    +getUsAvailableStatusListD()
+}
+
 class Company {
     +getProjectStore()
+    +getUserStoryStatusStore()
 }
 
 class ProjectStore {
@@ -42,6 +47,8 @@ class Userstory {
 
 UpdateStatusUSSprintUI ..> UpdateStatusUSSprintController
 
+UpdateStatusUSSprintController ..> UserStoryStatusStore
+
 UpdateStatusUSSprintController ..> Company
 
 UpdateStatusUSSprintController ..> ProjectStore
@@ -57,6 +64,8 @@ UpdateStatusUSSprintController ..> Userstory
 
 
 Company "1" o-- "1" ProjectStore: has
+
+Company "1" o-- "1" UserStoryStatusStore: has
 
 ProjectStore "1" *-- "0..*" Project: contains
 

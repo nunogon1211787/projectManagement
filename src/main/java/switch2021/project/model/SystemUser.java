@@ -1,6 +1,5 @@
 package switch2021.project.model;
 
-
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.stores.UserProfileStore;
@@ -28,7 +27,7 @@ public class SystemUser {
     /**
      * Constructor
      **/
-    public SystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile profile) {
+    public SystemUser (String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile profile) {
         checkUserNameRules(userName);
         checkEmailRules(email);
         checkFunctionRules(function);
@@ -60,7 +59,7 @@ public class SystemUser {
      * Setting Methods (outside of lombock)
      **/
     private void setUserName(String userName) {
-        if (!userName.trim().isEmpty() || !(userName.length() < 2)) {
+        if (!userName.trim().isEmpty() || !(userName.length() <= 1)) {
             this.userName = userName;
         }
     }
@@ -93,6 +92,11 @@ public class SystemUser {
             msg = true;
         }
         return msg;
+    }
+
+    public boolean setActivateUser(Boolean x){
+        this.activateUser = x;
+        return true;
     }
 
 

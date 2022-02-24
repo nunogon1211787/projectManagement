@@ -78,7 +78,7 @@ public class Task {
     }
 
     /**
-     * Methods to iterate with atributtes,
+     * Methods to iterate with attributes,
      */
 
     public boolean hasName(String taskName) {

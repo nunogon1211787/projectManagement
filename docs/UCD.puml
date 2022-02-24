@@ -13,6 +13,7 @@ actor "Project Manager" as pm
 actor "Product Owner" as po
 actor "Scrum Master" as sm
 actor "Team Member" as tm
+actor "Project Member" as pmb
 rectangle "Beaver Application" {
   usecase "US01 - Register account" as UC1
   usecase "US02 - Activate account" as UC2
@@ -89,5 +90,5 @@ tm --> UC32
 sm --> UC32
 tm --> UC33
 sm --> UC33
-pm --> UC34
+pmb --> UC34
 @enduml
