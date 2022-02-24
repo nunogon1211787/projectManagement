@@ -21,14 +21,6 @@ public class SystemUserWithStatusController {
     private final SystemUserWithStatusMapper mapper;
 
     /**
-     * Constructor to UI (with SINGLETON)
-    **/
-
-//    public SystemUserWithStatusController() {
-//        this.company = App.getInstance().getCompany();
-//    }
-
-    /**
      * Constructor to test (without SINGLETON)
      **/
 

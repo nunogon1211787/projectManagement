@@ -4,7 +4,7 @@ hide circle
 skinparam classAttributeIconSize 0
 hide methods
 
-title Domain Model extract
+title Domain Model extract US024 - As Administrator, I want to get a list all user accounts and their status
 
 class Company{
 }
