@@ -18,24 +18,8 @@ class SystemUser{
       - activateUser
       }
 
-class ActivationInfo{
-- code
-- link
-- activated
-}
-class UserProfile{
-- idProfile
-- userProfileName
-}
-class Request{
-- idRequest
-- requestDate
-- requestStatus
-}
 
-SystemUser "1" -- "1" ActivationInfo: belongs to
-SystemUser "1" <-- "*" Request: sent by
 SystemUser "*" -- "1" Company: employed by
-UserProfile "1..*" -- "*" SystemUser: is assigned
+
 
 @enduml
