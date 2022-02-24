@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide circle
+skinparam classAttributeIconSize 0
+hide methods
+
+title Domain Model extract of US001 - As Non-Registered User, I want to register as an application user
+
+class RegisterUserUI {
+'    -designation
+}
+
+class RegisterUserController {
+
+    +createSystemUser(userName, email, function, password, passwordConfirmation, photo)
+}
+
+class Company {
+    {method}
+    +getSystemUserStore()
+    +getUserProfileStore()
+}
+
+class UserProfileStore {
+}
+class SystemUserStore {
+}
+class SystemUser {
+- userName
+- email
+- password
+- function
+-activateUser
+
++SystemUser(userName, email, function, password, passwordConfirmation, photo, Userprofile)
+}
+class UserProfile {
+- id
+- name
+}
+
+RegisterUserUI ..>  RegisterUserController
+RegisterUserController ..> UserProfileStore
+RegisterUserController ..> SystemUserStore
+RegisterUserController ..> Company
+Company -> UserProfileStore
+Company -> SystemUserStore
+UserProfileStore -> UserProfile
+SystemUserStore -> SystemUser
+SystemUser -> UserProfile: assigned as
+@enduml
