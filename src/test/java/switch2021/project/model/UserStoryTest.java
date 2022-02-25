@@ -40,7 +40,7 @@ class UserStoryTest {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         userStory.setPriority(4);
-        assertEquals(userStory.getPriority(), 4);
+        assertEquals(4, userStory.getPriority());
     }
 
     @Test
@@ -49,7 +49,7 @@ class UserStoryTest {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         userStory.setPriority(6);
-        assertEquals(userStory.getPriority(), 2);
+        assertEquals(2, userStory.getPriority());
     }
 
     @Test
@@ -82,7 +82,7 @@ class UserStoryTest {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         userStory.setDescription("Fazer coiso");
-        assertEquals(userStory.getDescription(), "Fazer coiso");
+        assertEquals("Fazer coiso", userStory.getDescription());
     }
 
     @Test
@@ -104,7 +104,7 @@ class UserStoryTest {
         UserStoryStatus userStoryStatus = new UserStoryStatus("Almost finished");
         userStory.setUserStoryStatusBoolean(userStoryStatus);
 
-        assertEquals(userStory.getUserStoryStatus().getDescription(), "Almost finished");
+        assertEquals("Almost finished", userStory.getUserStoryStatus().getDescription());
 
     }
 

@@ -43,7 +43,7 @@ class UserStoryOfSprintTest {
         UserStoryOfSprint userStoryOfSprint = new UserStoryOfSprint(story, 5, 1);
         //Assert
         assertTrue(userStoryOfSprint.setEstimateEffort(5));
-        assertEquals(userStoryOfSprint.getEstimateEffort(), 5);
+        assertEquals(5, userStoryOfSprint.getEstimateEffort());
     }
 
     @Test
@@ -51,7 +51,7 @@ class UserStoryOfSprintTest {
     void validateEffortTestNotSuccess() {
         UserStoryOfSprint userStoryOfSprint = new UserStoryOfSprint(story, 5, 1);
         assertFalse(userStoryOfSprint.setEstimateEffort(4));
-        assertNotEquals(userStoryOfSprint.getEstimateEffort(), 4);
+        assertNotEquals(4, userStoryOfSprint.getEstimateEffort() );
     }
 
     @Test

@@ -6,12 +6,12 @@ title US024 - As Administrator, I want to get a list all user accounts and their
 autoactivate on
 autonumber
 
-actor "User" as User
+actor "Administrator" as Administrator
 participant ":System" as System
 
-activate User
+activate Administrator
 
-User -> System: Get list all user accounts and their status
-System --> User: Show requested list user accounts with status
+Administrator -> System: Get list all user accounts and their status
+System --> Administrator: Show requested list user accounts with status
 
 @enduml

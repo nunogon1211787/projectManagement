@@ -48,11 +48,11 @@ public class UserProfileStore {
     /**
      * Get UserProfile By ID Method
      **/
-    public UserProfile getUserProfile(int id_UserProfile) {
+    public UserProfile getUserProfile(int idUserProfile) {
         UserProfile profile = null;
 
         for (UserProfile i : userProfileList) {
-            if (i.getIdUserProfile() == id_UserProfile) {
+            if (i.getIdUserProfile() == idUserProfile) {
                 profile = i;
             }
         }
@@ -73,7 +73,7 @@ public class UserProfileStore {
      */
     public int idUserProfileGenerator() {
         int id = 1;
-        if (this.userProfileList.size() > 0) {
+        if (!this.userProfileList.isEmpty()) {
             id = userProfileList.get(userProfileList.size() - 1).getIdUserProfile() + 1;
         }
         return id;
