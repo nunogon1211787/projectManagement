@@ -42,4 +42,18 @@ public class ProjectsMapper {
         }
         return this.projectDTOList;
     }
+
+    /**
+     * Method to change data in to a project DTO List
+     **/
+
+    public List<ProjectDTO> toDto(List<Project> projectListByUser) {
+        List<ProjectDTO> projectListByUserDtoList = new ArrayList<>();
+        for (Project project : projectListByUser) {
+            ProjectDTO projectListByUserDto = new ProjectDTO(project.getCode(), project.getProjectName(), project.getDescription());
+            projectListByUserDtoList.add(projectListByUserDto);
+        }
+        return projectListByUserDtoList;
+    }
+
 }

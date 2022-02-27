@@ -38,8 +38,8 @@ public class SystemUserWithStatusController {
      **/
 
     public List<SystemUserWithStatusDto> getListSystemUserWithStatus() {
-        SystemUserStore systemUserStore = this.company.getSystemUserStore();
-        List<SystemUser> systemUserList = systemUserStore.getSystemUsers();
+        SystemUserStore sysUserStore = this.company.getSystemUserStore();
+        List<SystemUser> systemUserList = sysUserStore.getSystemUsers();
         List<SystemUserWithStatusDto> systemUserWithStatusDtoList = this.mapper.toDto(systemUserList);
         return Collections.unmodifiableList(systemUserWithStatusDtoList);
     }

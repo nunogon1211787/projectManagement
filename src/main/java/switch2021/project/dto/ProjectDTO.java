@@ -10,8 +10,9 @@ public class ProjectDTO {
      **/
     private final String code;
     private final String projectName;
-    private final String startDate;
-    private final String endDate;
+    private String description;
+    private String startDate;
+    private String endDate;
 
     /**
      * Constructor to test (without SINGLETON)
@@ -21,5 +22,14 @@ public class ProjectDTO {
         this.projectName = projectName;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+    /**
+     * Constructor to test (without SINGLETON)
+     * Need this information to US018 DTO
+     **/
+    public ProjectDTO(String code, String projectName, String description) {
+        this.code = code;
+        this.projectName = projectName;
+        this.description = description;
     }
 }
