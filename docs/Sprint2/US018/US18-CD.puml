@@ -58,7 +58,7 @@ class UserStory {
 }
 
 class ProjectsMapper {
-+toDto(projectListByUser)
++toDtoByUser(projectListByUser)
 }
 
 class ProductBacklogMapper{

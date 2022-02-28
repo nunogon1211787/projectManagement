@@ -20,7 +20,6 @@ public class ProductBacklogSortController {
      **/
 
     private final Company company;
-    private Project project;
     private final ProjectsMapper mapper;
     private final ProductBacklogMapper mapperPB;
 
@@ -47,19 +46,14 @@ public class ProductBacklogSortController {
     public List<ProjectDTO> getProjectListByUserEmail(String email) {
         ProjectStore projStore = this.company.getProjectStore();
         List<Project> projectListByUser = projStore.getProjectsByUserEmail(email);
-        List<ProjectDTO> projectListByUserDtoList = this.mapper.toDto(projectListByUser);
+        List<ProjectDTO> projectListByUserDtoList = this.mapper.toDtoByUser(projectListByUser);
         return Collections.unmodifiableList(projectListByUserDtoList);
     }
 
-//    public List<UserStory> getUsSortedByPriority(String code) {
-//        this.project = this.company.getProjectStore().getProjectByCode(code);
-//        List<UserStory> userStoryList = this.project.getProductBacklog().getUsSortedByPriority();
-//        return Collections.unmodifiableList(userStoryList);
-//    }
 
     public List<UserStoryDto> getUsSortedByPriority(String code) {
-        this.project = this.company.getProjectStore().getProjectByCode(code);
-        List<UserStory> userStoryList = this.project.getProductBacklog().getUsSortedByPriority();
+        Project project = this.company.getProjectStore().getProjectByCode(code);
+        List<UserStory> userStoryList = project.getProductBacklog().getUsSortedByPriority();
         List<UserStoryDto> userStoryListDtoList = this.mapperPB.toDto(userStoryList);
         return Collections.unmodifiableList(userStoryListDtoList);
     }

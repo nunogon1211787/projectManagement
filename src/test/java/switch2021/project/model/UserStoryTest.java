@@ -33,6 +33,18 @@ class UserStoryTest {
         productBacklog.saveUserStory(userStoryToRefine);
     }
 
+    @Test
+    void ValidateInfoUserStory(){
+        //Arrange
+        Company company = new Company();
+        //User Story
+        ProductBacklog productBacklog = new ProductBacklog();
+        UserStory userStory = new UserStory("US001", 1, "US001 - Test", 40);
+        productBacklog.saveUserStory(userStory);
+        assertEquals("US001", userStory.getName());
+        assertEquals("US001 - Test", userStory.getDescription());
+    }
+
 
     @Test
     void setPriorityTest() {

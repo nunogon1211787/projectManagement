@@ -1,12 +1,7 @@
 package switch2021.project.dto;
 
 import lombok.Getter;
-import switch2021.project.model.UserStory;
 import switch2021.project.model.UserStoryStatus;
-
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
 
 @Getter
 public class UserStoryDto {

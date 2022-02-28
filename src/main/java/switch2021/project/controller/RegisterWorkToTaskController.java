@@ -19,7 +19,7 @@ public class RegisterWorkToTaskController {
      * Attributes
      **/
 
-    private Company company;
+    private final Company company;
     private RegisterWorkToTaskMapper mapper;
     private ProjectStore projectStore;
     private Project project;

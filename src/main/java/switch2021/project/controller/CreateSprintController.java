@@ -8,6 +8,7 @@ import switch2021.project.stores.SprintList;
 import switch2021.project.utils.App;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 public class CreateSprintController {
@@ -45,7 +46,7 @@ public class CreateSprintController {
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         this.projectStore = company.getProjectStore();
         this.currentProjectListByUser = projectStore.getCurrentProjectsByUserEmail(email);
-        return this.currentProjectListByUser;
+        return Collections.unmodifiableList(currentProjectListByUser);
     }
 
     public Project getProject(String code) {

@@ -208,7 +208,7 @@ public class ProjectsMapperTest {
         project2.addResource(input);
 
         // Act
-        List<ProjectDTO> projectList = mapper.toDto(company.getProjectStore().getProjectList());
+        List<ProjectDTO> projectList = mapper.toDtoByUser(company.getProjectStore().getProjectList());
         // Assert
         assertEquals(2, projectList.size());
 
@@ -240,7 +240,7 @@ public class ProjectsMapperTest {
 
         // Act
 
-        List<ProjectDTO> projectList = mapper.toDto(company.getProjectStore().getProjectList());
+        List<ProjectDTO> projectList = mapper.toDtoByUser(company.getProjectStore().getProjectList());
 
         // Assert
         assertEquals(project.getCode(),projectList.get(0).getCode());

@@ -55,9 +55,9 @@ public class UserStory {
         return idUserStory;
     }
 
-    public boolean hasCode(long id_UserStory) {
+    public boolean hasCode(long idUserStory) {
 
-        return this.idUserStory == id_UserStory;
+        return this.idUserStory == idUserStory;
     }
 
     /**
@@ -139,10 +139,7 @@ public class UserStory {
                 && priority == userStory.priority
                 && timeEstimate == userStory.timeEstimate
                 && Objects.equals(name, userStory.name)
-                && Objects.equals(userStoryStatus, userStory.userStoryStatus)
-                && Objects.equals(description, userStory.description)
-                && Objects.equals(ParentUserStory, userStory.ParentUserStory)
-                && Objects.equals(tasks, userStory.tasks);
+                && Objects.equals(description, userStory.description);
     }
 
     @Override

@@ -4,6 +4,7 @@ import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.utils.App;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -48,7 +49,7 @@ public class CreateUserStoryController {
     public List<Project> getProjectListByUserEmail(String email) {
         this.projectStore = this.company.getProjectStore();
         this.arrayProject = this.projectStore.getProjectsByUserEmail(email);
-        return arrayProject;
+        return Collections.unmodifiableList(arrayProject);
     }
 
     public Project getProjectByCode(String code) {

@@ -75,7 +75,7 @@ public class Project {
 
     /**
      * Validates Project Creation Fields
-     * Checks if @param projectName and @param description are emptry or have the minimum characters necessary
+     * Checks if @param projectName and @param description are empty or have the minimum characters necessary
      */
     public void validateProjectFields(String projectName, String description, double budget, int numberOfSprints) {
         if (projectName.trim().isEmpty())

@@ -37,7 +37,7 @@ C2->C2.1 : addProjectList
 C2.1-->C2 : true
 end
 C2 --> Ctrl: projectListByUser
-Ctrl-> C2.1.0: toDto(projectListByUser)
+Ctrl-> C2.1.0: toDtoByUser(projectListByUser)
 C2.1.0->C5 ** : create()
 
 loop for each known project in projectList

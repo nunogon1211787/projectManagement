@@ -328,8 +328,8 @@ public class ProductBacklogTest {
 
         assertEquals(userStory.getUserStoryStatus(), company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do"));
         assertEquals(userStory.getParentUserStory(), userStoryToRefine);
-        assertEquals(userStory.getPriority(), 5);
-        assertEquals(userStory.getDescription(), "234test234");
+        assertEquals( 5, userStory.getPriority());
+        assertEquals( "234test234", userStory.getDescription());
 
     }
 

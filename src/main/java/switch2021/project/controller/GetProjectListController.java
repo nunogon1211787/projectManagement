@@ -5,6 +5,7 @@ import switch2021.project.model.Project;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.utils.App;
 
+import java.util.Collections;
 import java.util.List;
 
 public class GetProjectListController {
@@ -35,6 +36,6 @@ public class GetProjectListController {
     public List<Project> getProjects() {
         ProjectStore projStore = this.company.getProjectStore();
         this.projectList = projStore.getProjects();
-        return this.projectList;
+        return Collections.unmodifiableList(projectList);
     }
 }

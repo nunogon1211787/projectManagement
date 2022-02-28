@@ -58,21 +58,19 @@ public class SprintBacklog {
 
 
 
-//    @Override
-//    public String toString() {
-//        return "SprintBacklog{" +
-//                "userStoryOfSprintList=" + userStoryOfSprintList +
-//                '}';
-//    }
-// É NECESSÁRIO????
 
     ////Deprecated Methods
     /** Create User Story Of Sprint **/
+    /**
+     * @deprecated (...)
+     */
     @Deprecated
     public UserStoryOfSprint createUSerStoryOfSprint (UserStory userStory, int effort, UserStoryStatus status) {
         return new UserStoryOfSprint(userStory, effort, status);
     }
-
+    /**
+     * @deprecated (...)
+     */
     @Deprecated
     public UserStoryOfSprint getUserStoryDeprecated(int id_UserStory) {
 
@@ -98,6 +96,9 @@ public class SprintBacklog {
     }
 
     /** Add User Story Of Sprint **/
+    /**
+     * @deprecated (...)
+     */
     @Deprecated
     public boolean saveUserStoryOfSprint(UserStoryOfSprint story) {
         if (!validateUserStoryOfSprint(story)) {
@@ -108,6 +109,9 @@ public class SprintBacklog {
     }
 
     /** Validate UserStoryOfSprint Addition - checks if already exists **/
+    /**
+     * @deprecated (...)
+     */
     @Deprecated
     public boolean validateUserStoryOfSprint(UserStoryOfSprint userStoryOfSprint) {
         boolean msg = false;
@@ -122,6 +126,9 @@ public class SprintBacklog {
     }
 
     /** ID_UserStory of Sprint Generator **/
+    /**
+     * @deprecated (...)
+     */
     @Deprecated
     public int id_UserStoryOfSprintGenerator() {
         int id = 1;
@@ -133,6 +140,9 @@ public class SprintBacklog {
 
     /**
      * Method to get user story of sprint tasks
+     */
+    /**
+     * @deprecated (...)
      */
     @Deprecated
     public List<Task> getUserStoryOfSprintTasks(){
