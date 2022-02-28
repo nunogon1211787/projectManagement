@@ -2,6 +2,7 @@ package switch2021.project.dto;
 
 import lombok.Getter;
 
+import java.util.Collections;
 import java.util.List;
 
 @Getter
@@ -36,6 +37,6 @@ public class CreateTaskDTO {
         this.effortEstimate = effortEstimate;
         this.typeName = typeName;
         this.responsible = responsible;
-        this.precedenceList = precedenceList;
+        this.precedenceList = Collections.unmodifiableList(precedenceList);
     }
 }

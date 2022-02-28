@@ -6,6 +6,7 @@ import switch2021.project.utils.App;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -74,7 +75,7 @@ public class Task {
         this.responsible = responsible;
         this.status = App.getInstance().getCompany().getTaskStatusStore().getInitialStatus();
         this.taskEffortList = new ArrayList<>();
-        this.precedenceList = precedenceList;
+        this.precedenceList = Collections.unmodifiableList(precedenceList);
     }
 
     /**

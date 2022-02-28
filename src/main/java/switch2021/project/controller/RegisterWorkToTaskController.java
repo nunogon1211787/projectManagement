@@ -20,23 +20,12 @@ public class RegisterWorkToTaskController {
      **/
 
     private final Company company;
-    private RegisterWorkToTaskMapper mapper;
-    private ProjectStore projectStore;
+    private final RegisterWorkToTaskMapper mapper;
     private Project project;
-    private Sprint sprint;
     private UserStory userStory;
     private List<Task> taskList;
     private Task task;
-    private TaskIdNameDTO taskIdNameDTO;
 
-
-    /**
-     * Constructor to UI (with SINGLETON)
-     **/
-
-    /*public RegisterWorkToTaskController() {
-        this.company = App.getInstance().getCompany();
-    }*/
 
     /**
      * Constructor to test (without SINGLETON)
@@ -56,13 +45,13 @@ public class RegisterWorkToTaskController {
         int sprintId = userStorySprintProjectDTO.getSprintId();
         int userStoryId = userStorySprintProjectDTO.getUserStoryId();
 
-        this.projectStore = this.company.getProjectStore();
-        this.project = this.projectStore.getProjectByCode(code);
+        ProjectStore projectStore = this.company.getProjectStore();
+        this.project = projectStore.getProjectByCode(code);
 
         SprintList sprintList = this.project.getSprints();
-        this.sprint = sprintList.getSprint(sprintId);
+        Sprint sprint = sprintList.getSprint(sprintId);
 
-        SprintBacklog sprintBacklog = this.sprint.getSprintBacklog();
+        SprintBacklog sprintBacklog = sprint.getSprintBacklog();
         this.userStory = sprintBacklog.getUserStory(userStoryId);
 
         TaskList taskList = this.userStory.getTasks();

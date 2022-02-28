@@ -14,14 +14,8 @@ public class GetProjectListController {
      * Attributes
      **/
 
-    private Company company;
-    private List<Project> projectList;
+    private final Company company;
 
-    /**
-     * Constructor to UI (with SINGLETON)
-     **/
-
- //   public GetProjectListController() { this.company = App.getInstance().getCompany(); }
 
     /**
      * Constructor to test (without SINGLETON)
@@ -35,7 +29,7 @@ public class GetProjectListController {
 
     public List<Project> getProjects() {
         ProjectStore projStore = this.company.getProjectStore();
-        this.projectList = projStore.getProjects();
+        List<Project> projectList = projStore.getProjects();
         return Collections.unmodifiableList(projectList);
     }
 }

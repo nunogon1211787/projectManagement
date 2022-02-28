@@ -21,7 +21,7 @@ public class UserStory {
     private UserStoryStatus userStoryStatus;
     private int priority;
     private String description;
-    private UserStory ParentUserStory;
+    private UserStory parentUserStory;
     private int timeEstimate;
     private TaskList tasks;
     private double workDone;
@@ -48,7 +48,7 @@ public class UserStory {
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
         this.description = description;
-        this.ParentUserStory = userStoryToRefine;
+        this.parentUserStory = userStoryToRefine;
     }
 
     public int getIdUserStory() {
@@ -90,7 +90,7 @@ public class UserStory {
      */
 
     public void setParentUserStory(UserStory parentUserStory) {
-        ParentUserStory = parentUserStory;
+        this.parentUserStory = parentUserStory;
     }
 
     /**
@@ -144,7 +144,7 @@ public class UserStory {
 
     @Override
     public int hashCode() {
-        return Objects.hash(idUserStory, name, userStoryStatus, priority, description, ParentUserStory, timeEstimate, tasks);
+        return Objects.hash(idUserStory, name, userStoryStatus, priority, description, parentUserStory, timeEstimate, tasks);
     }
 }
 

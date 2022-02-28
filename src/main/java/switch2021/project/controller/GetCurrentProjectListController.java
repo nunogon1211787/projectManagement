@@ -3,7 +3,6 @@ package switch2021.project.controller;
 import switch2021.project.model.Company;
 import switch2021.project.model.Project;
 import switch2021.project.stores.ProjectStore;
-import switch2021.project.utils.App;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +14,6 @@ public class GetCurrentProjectListController {
      **/
 
     private final Company company;
-    private List<Project> currentProjectListByUser;
 
 
     /**
@@ -33,7 +31,7 @@ public class GetCurrentProjectListController {
     public List<Project> getCurrentProjectsByUserEmail(String email) {
         ProjectStore projStore = this.company.getProjectStore();
 
-        this.currentProjectListByUser = projStore.getCurrentProjectsByUserEmail(email);
+        List<Project> currentProjectListByUser = projStore.getCurrentProjectsByUserEmail(email);
         return Collections.unmodifiableList(currentProjectListByUser);
     }
 }

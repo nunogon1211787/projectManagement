@@ -11,15 +11,7 @@ public class RegisterUserController {
      * Attributes
      **/
 
-    private Company company;
-    private SystemUser user;
-
-
-    /**
-     * Constructor to UI (with SINGLETON)
-     **/
-
-  //  public RegisterUserController() { this.company = App.getInstance().getCompany(); }
+    private final Company company;
 
     /**
      * Constructor to test (without SINGLETON)
@@ -36,7 +28,7 @@ public class RegisterUserController {
         UserProfile visitorProfile = profileStore.getUserProfile("Visitor");
 
         SystemUserStore usersStore = company.getSystemUserStore();
-        this.user = usersStore.createSystemUser(userName, email, function, password, passwordConfirmation, photo, visitorProfile);
+        SystemUser user = usersStore.createSystemUser(userName, email, function, password, passwordConfirmation, photo, visitorProfile);
 
         return usersStore.saveSystemUser(user);
     }

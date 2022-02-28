@@ -1,11 +1,7 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.*;
-import switch2021.project.stores.UserProfileStore;
-import switch2021.project.utils.App;
 
-import java.time.LocalDate;
-import java.util.List;
 
 public class ProfileRequestController {
 
@@ -13,16 +9,9 @@ public class ProfileRequestController {
      * Attributes
      **/
 
-    private Company company;
+    private final Company company;
     private Request request;
 
-    /**
-     * Constructor to UI (with SINGLETON)
-     **/
-//
-//    public ProfileRequestController() {
-//        this.company = App.getInstance().getCompany();
-//    }
 
     /**
      * Constructor to test (without SINGLETON)

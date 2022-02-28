@@ -281,7 +281,14 @@ class UserStoryTest {
     void hashCodeTest() {
         UserStory userStory1 = new UserStory("CCC", 2, "Fazer tal", 5);
         UserStory userStory2 = new UserStory("AAA", 2, "Fazer tal e coiso", 5);
+        UserStory userStory3 = new UserStory("AAA", 2, "Fazer tal e coiso", 5);
 
         assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
+        assertEquals(userStory2.getDescription(), userStory3.getDescription());
+        assertNotEquals(userStory2.getDescription(), userStory1.getDescription());
+        assertNotEquals( null,userStory1);
+        assertEquals(userStory1.getClass(),userStory2.getClass());
+        assertEquals(userStory2.hashCode(),userStory3.hashCode());
+        assertNotEquals(userStory1.hashCode(),userStory3.hashCode());
     }
 }
