@@ -10,7 +10,7 @@ public class TaskType {
     /**
      * Attributes.
      */
-    private int type_ID;
+    private int typeID;
     private String name;
 
     /**
@@ -30,9 +30,9 @@ public class TaskType {
         return this.name.equalsIgnoreCase(typeName);
     }
 
-    public void setType_ID(int id){
+    public void setTypeID(int id){
         checkIdRules(id);
-        this.type_ID = id;
+        this.typeID = id;
     }
 
     /**
@@ -61,11 +61,11 @@ public class TaskType {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TaskType taskType = (TaskType) o;
-        return type_ID == taskType.type_ID && name.equals(taskType.name);
+        return typeID == taskType.typeID && name.equals(taskType.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type_ID, name);
+        return Objects.hash(typeID, name);
     }
 }

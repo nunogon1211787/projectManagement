@@ -4,6 +4,7 @@ import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.utils.App;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -20,18 +21,7 @@ public class CreateUserStoryController {
      **/
 
     private final Company company;
-    private ProjectStore projectStore;
-    private List<Project> arrayProject;
     private Project project;
-    private ProductBacklog productBacklog;
-    private UserStory userStory;
-
-
-    /**
-     * Constructor to UI (with SINGLETON)
-     **/
-
- //   public CreateUserStoryController(){ this.company = App.getInstance().getCompany();}
 
     /**
      * Constructor to test (without SINGLETON)
@@ -46,9 +36,9 @@ public class CreateUserStoryController {
      **/
 
     public List<Project> getProjectListByUserEmail(String email) {
-        this.projectStore = this.company.getProjectStore();
-        this.arrayProject = this.projectStore.getProjectsByUserEmail(email);
-        return arrayProject;
+        ProjectStore projectStore = this.company.getProjectStore();
+        List<Project> arrayProject = projectStore.getProjectsByUserEmail(email);
+        return Collections.unmodifiableList(arrayProject);
     }
 
     public Project getProjectByCode(String code) {
@@ -57,9 +47,9 @@ public class CreateUserStoryController {
     }
 
     public boolean createUserStory(String name, int priority, String description, int  estimateEffort) {
-        this.productBacklog = this.project.getProductBacklog();
-        this.userStory = this.productBacklog.createUserStory(name, priority, description, estimateEffort);
-        return this.productBacklog.saveUserStory(userStory);
+        ProductBacklog productBacklog = this.project.getProductBacklog();
+        UserStory userStory = productBacklog.createUserStory(name, priority, description, estimateEffort);
+        return productBacklog.saveUserStory(userStory);
     }
 
 }

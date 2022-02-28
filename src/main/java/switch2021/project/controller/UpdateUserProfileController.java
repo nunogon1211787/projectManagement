@@ -10,9 +10,9 @@ public class UpdateUserProfileController {
     /**
      * Attributes
      **/
-    private Company company;
-    private UserProfileStore userProfileStore;
-    private SystemUserStore systemUserStore;
+    private final Company company;
+    private final UserProfileStore userProfileStore;
+    private final SystemUserStore systemUserStore;
     private SystemUser user;
 
 

@@ -16,7 +16,7 @@ class CustomerTest {
 
         assertNotEquals(customer.hashCode(),customer2.hashCode());
         assertEquals(customer.hashCode(),x.hashCode());
-        assertNotEquals(customer,null);
+        assertNotEquals(null, customer);
         assertEquals(x.getCustomerName(), customer.getCustomerName());
         assertEquals(x.getCustomerEmail(), customer.getCustomerEmail());
         assertEquals(x.getCustomerId(), customer.getCustomerId());

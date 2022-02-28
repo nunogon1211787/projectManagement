@@ -28,4 +28,20 @@ class UserStoryStatusTest {
         assertFalse(actual);
 
     }
+
+    @Test
+    void overrideTest() {
+    UserStoryStatus status1 = new UserStoryStatus("teste");
+    UserStoryStatus status2= new UserStoryStatus("teste2");
+        UserStoryStatus status3 = new UserStoryStatus("teste");
+
+        assertNotEquals(status1,status2);
+        assertNotSame(status1,status2);
+        assertEquals(status1.getClass(),status2.getClass());
+        assertNotEquals( null,status1);
+        assertNotEquals(status1.hashCode(),status2.hashCode());
+        assertEquals(status1.hashCode(),status3.hashCode());
+        assertEquals(status1.getDescription(), status3.getDescription());
+        assertNotEquals(status1.getDescription(), status2.getDescription());
+    }
 }

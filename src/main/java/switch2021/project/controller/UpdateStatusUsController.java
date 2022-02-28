@@ -4,6 +4,7 @@ import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UpdateStatusUsController {
@@ -39,7 +40,7 @@ public class UpdateStatusUsController {
                         if (statusList.get(i).isSprintAvailable())
                                 this.usList.add(statusList.get(i).getDescription());
                 }
-                return this.usList;
+                return Collections.unmodifiableList(usList);
         }
 
         public boolean changeStatusOfUs(String code, int usId, String userST) {

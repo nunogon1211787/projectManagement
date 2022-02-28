@@ -1,7 +1,6 @@
 package switch2021.project.dto;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDate;
 

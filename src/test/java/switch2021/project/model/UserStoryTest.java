@@ -33,6 +33,18 @@ class UserStoryTest {
         productBacklog.saveUserStory(userStoryToRefine);
     }
 
+    @Test
+    void ValidateInfoUserStory(){
+        //Arrange
+        Company company = new Company();
+        //User Story
+        ProductBacklog productBacklog = new ProductBacklog();
+        UserStory userStory = new UserStory("US001", 1, "US001 - Test", 40);
+        productBacklog.saveUserStory(userStory);
+        assertEquals("US001", userStory.getName());
+        assertEquals("US001 - Test", userStory.getDescription());
+    }
+
 
     @Test
     void setPriorityTest() {
@@ -40,7 +52,7 @@ class UserStoryTest {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         userStory.setPriority(4);
-        assertEquals(userStory.getPriority(), 4);
+        assertEquals(4, userStory.getPriority());
     }
 
     @Test
@@ -49,7 +61,7 @@ class UserStoryTest {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         userStory.setPriority(6);
-        assertEquals(userStory.getPriority(), 2);
+        assertEquals(2, userStory.getPriority());
     }
 
     @Test
@@ -82,7 +94,7 @@ class UserStoryTest {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         userStory.setDescription("Fazer coiso");
-        assertEquals(userStory.getDescription(), "Fazer coiso");
+        assertEquals("Fazer coiso", userStory.getDescription());
     }
 
     @Test
@@ -104,7 +116,7 @@ class UserStoryTest {
         UserStoryStatus userStoryStatus = new UserStoryStatus("Almost finished");
         userStory.setUserStoryStatusBoolean(userStoryStatus);
 
-        assertEquals(userStory.getUserStoryStatus().getDescription(), "Almost finished");
+        assertEquals("Almost finished", userStory.getUserStoryStatus().getDescription());
 
     }
 
@@ -269,7 +281,14 @@ class UserStoryTest {
     void hashCodeTest() {
         UserStory userStory1 = new UserStory("CCC", 2, "Fazer tal", 5);
         UserStory userStory2 = new UserStory("AAA", 2, "Fazer tal e coiso", 5);
+        UserStory userStory3 = new UserStory("AAA", 2, "Fazer tal e coiso", 5);
 
         assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
+        assertEquals(userStory2.getDescription(), userStory3.getDescription());
+        assertNotEquals(userStory2.getDescription(), userStory1.getDescription());
+        assertNotEquals( null,userStory1);
+        assertEquals(userStory1.getClass(),userStory2.getClass());
+        assertEquals(userStory2.hashCode(),userStory3.hashCode());
+        assertNotEquals(userStory1.hashCode(),userStory3.hashCode());
     }
 }

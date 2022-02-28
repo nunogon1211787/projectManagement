@@ -1,19 +1,19 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title Example of a System Sequence Diagram
+title US018 - As PO/SM/TeamMember, I want to consult the Product Backlog, i. e. to get the list of user stories sorted by priority
 
 autoactivate on
 autonumber
 
-actor "User" as User
+actor "PO/SM/TeamMember" as User
 participant ":System" as System
 
 activate User
 
-User -> System: Authentication Request
-System --> User: Authentication Response
+User -> System: Get list of project where is associated
+System --> User: Shows projectList to select project
 
-User -> System: Another authentication Request
-User <-- System: another authentication Response
+User -> System: Choose project to access product backlog
+User <-- System: Shows list of User Stories sorted
 @enduml

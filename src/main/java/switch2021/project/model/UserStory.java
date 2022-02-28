@@ -21,7 +21,7 @@ public class UserStory {
     private UserStoryStatus userStoryStatus;
     private int priority;
     private String description;
-    private UserStory ParentUserStory;
+    private UserStory parentUserStory;
     private int timeEstimate;
     private TaskList tasks;
     private double workDone;
@@ -48,16 +48,16 @@ public class UserStory {
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
         this.description = description;
-        this.ParentUserStory = userStoryToRefine;
+        this.parentUserStory = userStoryToRefine;
     }
 
     public int getIdUserStory() {
         return idUserStory;
     }
 
-    public boolean hasCode(long id_UserStory) {
+    public boolean hasCode(long idUserStory) {
 
-        return this.idUserStory == id_UserStory;
+        return this.idUserStory == idUserStory;
     }
 
     /**
@@ -90,7 +90,7 @@ public class UserStory {
      */
 
     public void setParentUserStory(UserStory parentUserStory) {
-        ParentUserStory = parentUserStory;
+        this.parentUserStory = parentUserStory;
     }
 
     /**
@@ -139,15 +139,12 @@ public class UserStory {
                 && priority == userStory.priority
                 && timeEstimate == userStory.timeEstimate
                 && Objects.equals(name, userStory.name)
-                && Objects.equals(userStoryStatus, userStory.userStoryStatus)
-                && Objects.equals(description, userStory.description)
-                && Objects.equals(ParentUserStory, userStory.ParentUserStory)
-                && Objects.equals(tasks, userStory.tasks);
+                && Objects.equals(description, userStory.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idUserStory, name, userStoryStatus, priority, description, ParentUserStory, timeEstimate, tasks);
+        return Objects.hash(idUserStory, name, userStoryStatus, priority, description, parentUserStory, timeEstimate, tasks);
     }
 }
 

@@ -1,13 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="451px" preserveAspectRatio="none" style="width:324px;height:451px;background:#FFFFFF;" version="1.1" viewBox="0 0 324 451" width="324px" zoomAndPan="magnify"><defs><filter height="300%" id="fy1i43ri6y7qf" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="173" x="69.25" y="18.6855">Domain Model extract</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
-class Company--><rect codeLine="8" fill="#FEFECE" filter="url(#fy1i43ri6y7qf)" height="33.0938" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="59" x="7" y="383.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="10" y="401.0977">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="65" y1="408.7344" y2="408.7344"/><!--MD5=[bc064d979c32666ae52f3d7624591b7b]
-class SystemUser--><rect codeLine="11" fill="#FEFECE" filter="url(#fy1i43ri6y7qf)" height="116.1094" id="SystemUser" style="stroke:#A80036;stroke-width:1.5;" width="77" x="114" y="168.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="68" x="118.5" y="186.0977">SystemUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="115" x2="190" y1="193.7344" y2="193.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="53" x="120" y="209.1533">-userName</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="120" y="222.9893">-email</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="31" x="120" y="236.8252">-photo</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="54" x="120" y="250.6611">-password</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="43" x="120" y="264.4971">-function</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="65" x="120" y="278.333">-activateUser</text><!--MD5=[50c10d59b426a1e122aa861cdef63b34]
-class ActivationInfo--><rect codeLine="20" fill="#FEFECE" filter="url(#fy1i43ri6y7qf)" height="74.6016" id="ActivationInfo" style="stroke:#A80036;stroke-width:1.5;" width="77" x="114" y="362.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="71" x="117" y="380.0977">ActivationInfo</text><line style="stroke:#A80036;stroke-width:1.5;" x1="115" x2="190" y1="387.7344" y2="387.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="120" y="403.1533">-code</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="19" x="120" y="416.9893">-link</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="48" x="120" y="430.8252">-activated</text><!--MD5=[7dde244f1b93ccf44d7f9e836b89e039]
-class UserProfile--><rect codeLine="25" fill="#FEFECE" filter="url(#fy1i43ri6y7qf)" height="60.7656" id="UserProfile" style="stroke:#A80036;stroke-width:1.5;" width="95" x="105" y="29.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="62" x="121.5" y="47.0977">UserProfile</text><line style="stroke:#A80036;stroke-width:1.5;" x1="106" x2="199" y1="54.7344" y2="54.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="42" x="111" y="70.1533">-idProfile</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="83" x="111" y="83.9893">-userProfileName</text><!--MD5=[0851f84a889f989e7bb0bebc385d0f09]
-class Request--><rect codeLine="29" fill="#FEFECE" filter="url(#fy1i43ri6y7qf)" height="74.6016" id="Request" style="stroke:#A80036;stroke-width:1.5;" width="84" x="226.5" y="362.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="47" x="245" y="380.0977">Request</text><line style="stroke:#A80036;stroke-width:1.5;" x1="227.5" x2="309.5" y1="387.7344" y2="387.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="52" x="232.5" y="403.1533">-idRequest</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="63" x="232.5" y="416.9893">-requestDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="72" x="232.5" y="430.8252">-requestStatus</text><!--MD5=[05a41fea581227a15ef08ff144d9fd4d]
-link SystemUser to ActivationInfo--><path codeLine="35" d="M152.5,284.7506 C152.5,310.3706 152.5,339.8606 152.5,362.4706 " fill="none" id="SystemUser-ActivationInfo" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="60" x="153.5" y="329.1357">belongs to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="145.0734" y="306.3177">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="144.8766" y="351.8976">1</text><!--MD5=[2f713e130ba18a0486743f01698e3482]
-reverse link SystemUser to Request--><path codeLine="36" d="M194.41,276.5906 C204.07,288.7106 214,301.8906 222.5,314.6406 C232.6,329.7906 242.44,347.3606 250.41,362.5406 " fill="none" id="SystemUser-backto-Request" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="191.15,272.5306,193.6615,282.0539,194.2787,276.4308,199.9018,277.048,191.15,272.5306" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="43" x="235.5" y="329.1357">sent by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="198.9214" y="277.034">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="241.6137" y="351.6974">*</text><!--MD5=[988b35f008724b2c1bfc967b2bade10e]
-link SystemUser to Company--><path codeLine="37" d="M113.76,261.2206 C98.11,276.3306 80.86,295.1306 68.5,314.6406 C54.48,336.7706 45.13,365.9806 40.33,383.6306 " fill="none" id="SystemUser-Company" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="74" x="69.5" y="329.1357">employed by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="100.8986" y="263.8056">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="33.4434" y="372.7447">1</text><!--MD5=[248afbc790a19bc4b510361410018abf]
-link UserProfile to SystemUser--><path codeLine="38" d="M152.5,90.9306 C152.5,112.5006 152.5,142.3406 152.5,168.4506 " fill="none" id="UserProfile-SystemUser" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="66" x="153.5" y="135.1357">is assigned</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="130.5938" y="111.8759">1..*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="147.1953" y="157.8936">*</text><!--MD5=[e6f27c4d1f8df36499f396ecadb49c22]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="270px" preserveAspectRatio="none" style="width:182px;height:270px;background:#FFFFFF;" version="1.1" viewBox="0 0 182 270" width="182px" zoomAndPan="magnify"><defs><filter height="300%" id="fh9y00fae8kgs" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="173" x="2" y="18.6855">Domain Model extract</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect codeLine="8" fill="#FEFECE" filter="url(#fh9y00fae8kgs)" height="33.0938" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="59" x="46.75" y="223.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="49.75" y="241.0977">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="47.75" x2="104.75" y1="248.7344" y2="248.7344"/><!--MD5=[bc064d979c32666ae52f3d7624591b7b]
+class SystemUser--><rect codeLine="11" fill="#FEFECE" filter="url(#fh9y00fae8kgs)" height="116.1094" id="SystemUser" style="stroke:#A80036;stroke-width:1.5;" width="77" x="37.75" y="29.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="68" x="42.25" y="47.0977">SystemUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="38.75" x2="113.75" y1="54.7344" y2="54.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="53" x="43.75" y="70.1533">-userName</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="43.75" y="83.9893">-email</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="31" x="43.75" y="97.8252">-photo</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="54" x="43.75" y="111.6611">-password</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="43" x="43.75" y="125.4971">-function</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="65" x="43.75" y="139.333">-activateUser</text><!--MD5=[988b35f008724b2c1bfc967b2bade10e]
+link SystemUser to Company--><path codeLine="21" d="M76.25,145.9706 C76.25,173.8806 76.25,205.2806 76.25,223.5706 " fill="none" id="SystemUser-Company" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="74" x="77.25" y="190.1357">employed by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="70.9609" y="167.1491">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="68.0469" y="212.6641">1</text><!--MD5=[6a3763767413194ef66b234a1a7224a3]
 @startuml
 'https://plantuml.com/class-diagram
 hide circle
@@ -28,25 +22,9 @@ class SystemUser{
       - activateUser
       }
 
-class ActivationInfo{
-- code
-- link
-- activated
-}
-class UserProfile{
-- idProfile
-- userProfileName
-}
-class Request{
-- idRequest
-- requestDate
-- requestStatus
-}
 
-SystemUser "1" - - "1" ActivationInfo: belongs to
-SystemUser "1" <- - "*" Request: sent by
 SystemUser "*" - - "1" Company: employed by
-UserProfile "1..*" - - "*" SystemUser: is assigned
+
 
 @enduml
 
@@ -69,25 +47,9 @@ class SystemUser{
       - activateUser
       }
 
-class ActivationInfo{
-- code
-- link
-- activated
-}
-class UserProfile{
-- idProfile
-- userProfileName
-}
-class Request{
-- idRequest
-- requestDate
-- requestStatus
-}
 
-SystemUser "1" - - "1" ActivationInfo: belongs to
-SystemUser "1" <- - "*" Request: sent by
 SystemUser "*" - - "1" Company: employed by
-UserProfile "1..*" - - "*" SystemUser: is assigned
+
 
 @enduml
 

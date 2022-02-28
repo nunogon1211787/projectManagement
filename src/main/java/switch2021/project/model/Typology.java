@@ -36,7 +36,7 @@ public class Typology {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Typology that = (Typology) o;
-        return ((this.description.equals(that.description)));
+        return (this.description.equals(that.description));
     }
 
     @Override

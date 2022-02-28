@@ -4,10 +4,9 @@ import switch2021.project.model.Company;
 import switch2021.project.model.Project;
 import switch2021.project.model.Sprint;
 import switch2021.project.stores.ProjectStore;
-import switch2021.project.stores.SprintList;
-import switch2021.project.utils.App;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 public class CreateSprintController {
@@ -19,16 +18,8 @@ public class CreateSprintController {
     private final Company company;
     private Project proj;
     private ProjectStore projectStore;
-    private Sprint sprint;
-    private List<Project> currentProjectListByUser;
 
-    /**
-     * Constructor to UI (with SINGLETON)
-     **/
 
-//    public CreateSprintController() {
-//        this.company = App.getInstance().getCompany();
-//    }
 
     /**
      * Constructor to test (without SINGLETON)
@@ -44,8 +35,8 @@ public class CreateSprintController {
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         this.projectStore = company.getProjectStore();
-        this.currentProjectListByUser = projectStore.getCurrentProjectsByUserEmail(email);
-        return this.currentProjectListByUser;
+        List<Project> currentProjectListByUser = projectStore.getCurrentProjectsByUserEmail(email);
+        return Collections.unmodifiableList(currentProjectListByUser);
     }
 
     public Project getProject(String code) {
@@ -55,8 +46,8 @@ public class CreateSprintController {
 
     public Sprint createSprint(String name, LocalDate startDate) {
         int sprintDuration = this.proj.getSprintDuration();
-        this.sprint = this.proj.getSprints().createSprint(name, startDate, sprintDuration);
-        return this.sprint;
+        Sprint sprint = this.proj.getSprints().createSprint(name, startDate, sprintDuration);
+        return sprint;
     }
 
     public boolean saveSprint(Sprint sprint) {
