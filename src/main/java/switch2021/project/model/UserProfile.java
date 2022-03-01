@@ -64,6 +64,7 @@ public class UserProfile {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         UserProfile that = (UserProfile) o;
         return (this.userProfileName.equals(that.userProfileName));
     }
@@ -73,3 +74,5 @@ public class UserProfile {
         return Objects.hash(userProfileName);
     }
 }
+
+

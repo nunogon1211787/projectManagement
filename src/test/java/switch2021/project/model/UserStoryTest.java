@@ -34,7 +34,7 @@ class UserStoryTest {
     }
 
     @Test
-    void ValidateInfoUserStory(){
+    void ValidateInfoUserStory() {
         //Arrange
         Company company = new Company();
         //User Story
@@ -286,9 +286,20 @@ class UserStoryTest {
         assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
         assertEquals(userStory2.getDescription(), userStory3.getDescription());
         assertNotEquals(userStory2.getDescription(), userStory1.getDescription());
-        assertNotEquals( null,userStory1);
-        assertEquals(userStory1.getClass(),userStory2.getClass());
-        assertEquals(userStory2.hashCode(),userStory3.hashCode());
-        assertNotEquals(userStory1.hashCode(),userStory3.hashCode());
+        assertNotEquals(null, userStory1);
+        assertEquals(userStory1.getClass(), userStory2.getClass());
+        assertEquals(userStory2.hashCode(), userStory3.hashCode());
+        assertNotEquals(userStory1.hashCode(), userStory3.hashCode());
+        assertEquals(0, userStory1.getIdUserStory());
+    }
+
+    @Test
+    void setID() {
+        UserStory userStory1 = new UserStory("CCC", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("AAA", 2, "Fazer tal e coiso", 5);
+        userStory2.setIdUserStory(2);
+
+        assertEquals(2, userStory2.getIdUserStory());
+        assertNotEquals(2, userStory1.getIdUserStory());
     }
 }
