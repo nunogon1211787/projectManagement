@@ -15,6 +15,7 @@ participant "proj:Project" as Project
 participant "projTeam:ProjectTeam" as ProjectTeam
 participant "ProjectTeamMapper" as ProjectTeamMapper
 participant "projTeam:List<Resource>" as ProjectTeam2
+participant "res:Resource" as Resource
 participant "projectTeamListDTO:List<ResourcesDTO>" as ProjectTeamDTO
 participant "resDTO:ResourceDTO" as ResourceDTO
 
@@ -35,6 +36,20 @@ ProjectTeamMapper --> ProjectTeamDTO**: create()
 loop for each resource in projectTeamList
 ProjectTeamMapper -> ProjectTeam2: get(i)
 ProjectTeam2 --> ProjectTeamMapper: res
+ProjectTeamMapper -> Resource: getName()
+Resource --> ProjectTeamMapper: name
+ProjectTeamMapper -> Resource: getEmail()
+Resource --> ProjectTeamMapper: email
+ProjectTeamMapper -> Resource: getStartDate()
+Resource --> ProjectTeamMapper: startdate
+ProjectTeamMapper -> Resource: getEndDate()
+Resource --> ProjectTeamMapper: enddate
+ProjectTeamMapper -> Resource: getRole()
+Resource --> ProjectTeamMapper: role
+ProjectTeamMapper -> Resource: getCostPerHour()
+Resource --> ProjectTeamMapper: costPerHour
+ProjectTeamMapper -> Resource: getPercentageOfAllocation()
+Resource --> ProjectTeamMapper: percentageOfAllocation
 ProjectTeamMapper -> ProjectTeamMapper: resDTO = toDTO(res)
 ProjectTeamMapper --> ResourceDTO**: create()
 deactivate ProjectTeamMapper

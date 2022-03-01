@@ -968,6 +968,5 @@ public class ProjectTeamTest {
         assertFalse(proj1.getProjectTeam().validateProjectTeam(startDatej3, 2));
         assertFalse(proj1.getProjectTeam().validateProjectTeam(startDatej4, 2));
     }
-
-}
+    }
 

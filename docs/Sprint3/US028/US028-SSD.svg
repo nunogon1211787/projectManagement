@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="292px" preserveAspectRatio="none" style="width:612px;height:292px;background:#FFFFFF;" version="1.1" viewBox="0 0 612 292" width="612px" zoomAndPan="magnify"><defs><filter height="300%" id="f1av4ro43sigym" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="587" x="9" y="30.6855">US028 - As Director, I want to get a list of all human resources in a project</text><rect fill="#FFFFFF" filter="url(#f1av4ro43sigym)" height="61.7031" style="stroke:#A80036;stroke-width:1.0;" width="10" x="156" y="136.25"/><rect fill="#FFFFFF" filter="url(#f1av4ro43sigym)" height="30.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="433" y="158.6016"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="161" x2="161" y1="126.25" y2="206.9531"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="438" x2="438" y1="126.25" y2="206.9531"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="133" y="123.1738">Director</text><ellipse cx="161" cy="51.6406" fill="#FEFECE" filter="url(#f1av4ro43sigym)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M161,59.6406 L161,86.6406 M148,67.6406 L174,67.6406 M161,86.6406 L148,101.6406 M161,86.6406 L174,101.6406 " fill="none" filter="url(#f1av4ro43sigym)" style="stroke:#A80036;stroke-width:2.0;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="133" y="220.4863">Director</text><ellipse cx="161" cy="233.5625" fill="#FEFECE" filter="url(#f1av4ro43sigym)" rx="8" ry="8" style="stroke:#A80036;stroke-width:2.0;"/><path d="M161,241.5625 L161,268.5625 M148,249.5625 L174,249.5625 M161,268.5625 L148,283.5625 M161,268.5625 L174,283.5625 " fill="none" filter="url(#f1av4ro43sigym)" style="stroke:#A80036;stroke-width:2.0;"/><rect fill="#FEFECE" filter="url(#f1av4ro43sigym)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="64" x="404" y="89.6406"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="411" y="111.1738">:System</text><rect fill="#FEFECE" filter="url(#f1av4ro43sigym)" height="31.6094" style="stroke:#A80036;stroke-width:1.5;" width="64" x="404" y="205.9531"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="411" y="227.4863">:System</text><rect fill="#FFFFFF" filter="url(#f1av4ro43sigym)" height="61.7031" style="stroke:#A80036;stroke-width:1.0;" width="10" x="156" y="136.25"/><rect fill="#FFFFFF" filter="url(#f1av4ro43sigym)" height="30.3516" style="stroke:#A80036;stroke-width:1.0;" width="10" x="433" y="158.6016"/><polygon fill="#A80036" points="421,154.6016,431,158.6016,421,162.6016,425,158.6016" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;" x1="166" x2="427" y1="158.6016" y2="158.6016"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="173" y="153.7451">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="228" x="184" y="153.7451">Ask to access project team of a project</text><polygon fill="#A80036" points="177,184.9531,167,188.9531,177,192.9531,173,188.9531" style="stroke:#A80036;stroke-width:1.0;"/><line style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:2.0,2.0;" x1="171" x2="437" y1="188.9531" y2="188.9531"/><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="7" x="183" y="184.0967">2</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="232" x="194" y="184.0967">List of resources associated to a project</text><!--MD5=[e87a6a05b2e171111e66744618b8da50]
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title US028 - As Director, I want to get a list of all human resources in a project
+
+autoactivate on
+autonumber
+
+actor "Director" as Director
+participant ":System" as System
+
+activate Director
+
+Director -> System: Ask to access project team of a project
+System - -> Director: List of resources associated to a project
+
+@enduml
+
+@startuml
+
+title US028 - As Director, I want to get a list of all human resources in a project
+
+autoactivate on
+autonumber
+
+actor "Director" as Director
+participant ":System" as System
+
+activate Director
+
+Director -> System: Ask to access project team of a project
+System - -> Director: List of resources associated to a project
+
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 GMT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>
