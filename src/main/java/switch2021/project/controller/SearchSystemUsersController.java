@@ -11,13 +11,8 @@ public class SearchSystemUsersController {
      * Attributes
      **/
 
-    private Company company;
+    private final Company company;
 
-    /**
-     * Constructor to UI (with SINGLETON)
-     **/
-
-//    public SearchSystemUsersController() { this.company = App.getInstance().getCompany();}
 
     /**
      * Constructor to test (without SINGLETON)

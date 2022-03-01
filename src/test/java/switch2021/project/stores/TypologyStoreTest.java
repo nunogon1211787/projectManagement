@@ -23,7 +23,7 @@ public class TypologyStoreTest {
         //Arrange
         TypologyStore test = new TypologyStore();
         //Assert
-        assertEquals(test.getTypologyList().size(), 0);
+        assertEquals( 0, test.getTypologyList().size());
         assertNotEquals(test, typologyStore.getTypologyList());
     }
 

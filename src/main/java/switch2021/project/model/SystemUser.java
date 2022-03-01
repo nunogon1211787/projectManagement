@@ -58,8 +58,8 @@ public class SystemUser {
     /**
      * Setting Methods (outside of lombock)
      **/
-    private void setUserName(String userName) {
-        if (!userName.trim().isEmpty() || !(userName.length() <= 1)) {
+    public void setUserName(String userName) {
+        if (!userName.trim().isEmpty() && !(userName.length() <= 1)) {
             this.userName = userName;
         }
     }
@@ -152,10 +152,10 @@ public class SystemUser {
         return true;
     }
 
-    public boolean checkAssignedProfileList(UserProfile Profile) {
+    public boolean checkAssignedProfileList(UserProfile profile) {
         boolean msg = true;
         for (UserProfile i : assignedProfileList) {
-            if (i.equals(Profile)) {
+            if (i.equals(profile)) {
                 msg = false;
                 break;
             }

@@ -1097,5 +1097,39 @@ class SystemUserTest {
         });
     }
 
+    @Test
+    public void setUserNameIsEmpty() {
+
+        //Arrange
+
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser teste = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue = teste.getUserName();
+        SystemUser teste2 = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue2 = teste.getUserName();
+        SystemUser teste3 = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue3 = teste.getUserName();
+        SystemUser teste4 = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue4 = teste.getUserName();
+
+        //Act
+
+        teste.setUserName("D");
+        teste2.setUserName("");
+        teste3.setUserName("CDC");
+        teste4.setUserName("CD");
+
+        // Assert
+        assertEquals(originalValue, teste.getUserName());
+        assertEquals(originalValue2, teste2.getUserName());
+        assertNotEquals(originalValue3, teste3.getUserName());
+        assertEquals("CDC",teste3.getUserName());
+        assertEquals("CD",teste4.getUserName());
+    }
 
 }

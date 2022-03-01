@@ -493,15 +493,6 @@ public class ProjectTeamTest {
         });
     }
 
-    /**
-     * Copy Update Role of a Resource Test
-     */
-    @Test
-    public void copyUpdateProjectRoleOfAResourceTest() {
-
-    }
-
-
     @Test
     public void hasCurrentResourceTestSuccess() {
         //Arrange
