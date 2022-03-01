@@ -1132,4 +1132,39 @@ class SystemUserTest {
         assertEquals("CD",teste4.getUserName());
     }
 
+    @Test
+    public void setFunction() {
+
+        //Arrange
+
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser teste = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue = teste.getFunction();
+        SystemUser teste2 = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue2 = teste.getFunction();
+        SystemUser teste3 = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue3 = teste.getFunction();
+        SystemUser teste4 = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue4 = teste.getFunction();
+
+        //Act
+
+        teste.setFunction("D");
+        teste2.setFunction("");
+        teste3.setFunction("CDC");
+        teste4.setFunction("CD");
+
+        // Assert
+        assertEquals(originalValue, teste.getFunction());
+        assertEquals(originalValue2, teste2.getFunction());
+        assertNotEquals(originalValue3, teste3.getFunction());
+        assertEquals("CDC",teste3.getFunction());
+        assertEquals("CD",teste4.getFunction());
+    }
+
 }

@@ -3,7 +3,6 @@ package switch2021.project.controller;
 import switch2021.project.depracated.UserStoryOfSprint;
 import switch2021.project.model.*;
 import switch2021.project.stores.*;
-import switch2021.project.utils.App;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,9 +14,7 @@ public class UserStoryEffortController {
      * Attributes
      **/
 
-    private Company company;
-    private ProjectStore projStore;
-    private List<Project> projectList;
+    private final Company company;
     private Project proj;
     private SprintList sprintList;
     private List<Sprint> sprintsList;
@@ -39,9 +36,9 @@ public class UserStoryEffortController {
      **/
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
-        this.projectList = new ArrayList<>();
-        this.projStore = this.company.getProjectStore();
-        this.projectList = this.projStore.getCurrentProjectsByUserEmail(email);
+        List<Project> projectList = new ArrayList<>();
+        ProjectStore projStore = this.company.getProjectStore();
+        projectList = projStore.getCurrentProjectsByUserEmail(email);
         return Collections.unmodifiableList(projectList);
     }
 
@@ -64,12 +61,12 @@ public class UserStoryEffortController {
     }
 
     public SprintBacklog getSprintBacklog() {
-        this.sprintBacklog=this.sprint.getSprintBacklog();
+        this.sprintBacklog = this.sprint.getSprintBacklog();
         return this.sprintBacklog;
     }
 
-    public UserStoryOfSprint getUserStory(int id_UserStory){
-        this.userStoryOfSprint= this.sprintBacklog.getUserStoryDeprecated(id_UserStory);
+    public UserStoryOfSprint getUserStory(int id_UserStory) {
+        this.userStoryOfSprint = this.sprintBacklog.getUserStoryDeprecated(id_UserStory);
         return this.userStoryOfSprint;
     }
 

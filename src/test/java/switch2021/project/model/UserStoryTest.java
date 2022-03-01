@@ -282,6 +282,8 @@ class UserStoryTest {
         UserStory userStory1 = new UserStory("CCC", 2, "Fazer tal", 5);
         UserStory userStory2 = new UserStory("AAA", 2, "Fazer tal e coiso", 5);
         UserStory userStory3 = new UserStory("AAA", 2, "Fazer tal e coiso", 5);
+        UserStoryStatus status4 = new UserStoryStatus("teste5");
+        boolean result = status4.equals(null);
 
         assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
         assertEquals(userStory2.getDescription(), userStory3.getDescription());
@@ -291,6 +293,7 @@ class UserStoryTest {
         assertEquals(userStory2.hashCode(), userStory3.hashCode());
         assertNotEquals(userStory1.hashCode(), userStory3.hashCode());
         assertEquals(0, userStory1.getIdUserStory());
+        assertFalse(result);
     }
 
     @Test

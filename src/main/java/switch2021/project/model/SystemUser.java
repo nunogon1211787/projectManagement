@@ -64,8 +64,8 @@ public class SystemUser {
         }
     }
 
-    private void setFunction(String function) {
-        if (!function.trim().isEmpty() || !(function.length() < 2)) {
+    public void setFunction(String function) {
+        if (!function.trim().isEmpty() && !(function.length() < 2)) {
             this.function = function;
         }
     }
