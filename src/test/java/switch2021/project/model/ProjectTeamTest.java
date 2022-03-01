@@ -859,7 +859,7 @@ public class ProjectTeamTest {
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
         Resource joana3R= proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
-        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
+        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Resource 4
         SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
