@@ -1,6 +1,6 @@
 package switch2021.project.controller;
 
-import switch2021.project.depracated.UserStoryOfSprint;
+import switch2021.project.deprecated.UserStoryOfSprint;
 import switch2021.project.model.*;
 import switch2021.project.stores.*;
 

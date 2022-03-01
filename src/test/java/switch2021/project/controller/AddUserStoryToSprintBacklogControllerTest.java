@@ -2,7 +2,7 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.depracated.UserStoryOfSprint;
+import switch2021.project.deprecated.UserStoryOfSprint;
 import switch2021.project.model.*;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
