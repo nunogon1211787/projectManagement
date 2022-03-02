@@ -36,7 +36,7 @@ public class Task {
     /**
      * Constructors.
      */
-    public Task (String description){
+    public Task(String description) {
         this.description = description;
         this.status = new TaskStatus("Planned");
     }
@@ -59,7 +59,7 @@ public class Task {
         this.taskEffortList = new ArrayList<>();
     }
 
-    public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible, List <String> precedenceList) {
+    public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible, List<String> precedenceList) {
 
         checkNameRules(name);
         checkDescriptionRules(description);
@@ -106,6 +106,7 @@ public class Task {
         checkIdRules(id);
         this.idTask = id;
     }
+
     /**
      * Methods to validate attributes data.
      */
@@ -151,8 +152,6 @@ public class Task {
     }
 
     public boolean validateTaskEffort(TaskEffort effort) {
-        boolean result = false;
-
         for (TaskEffort i : this.taskEffortList) {
             if (!effort.getEffortDate().isAfter(i.getEffortDate())) {
                 throw new IllegalArgumentException("Effort for this day is already saved.");

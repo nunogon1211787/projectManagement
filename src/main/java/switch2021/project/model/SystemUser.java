@@ -59,13 +59,13 @@ public class SystemUser {
      * Setting Methods (outside of lombock)
      **/
     public void setUserName(String userName) {
-        if (!userName.trim().isEmpty() && !(userName.length() <= 1)) {
+        if (!userName.trim().isEmpty() && (userName.length() >= 1)) {
             this.userName = userName;
         }
     }
 
     public void setFunction(String function) {
-        if (!function.trim().isEmpty() && !(function.length() < 2)) {
+        if (!function.trim().isEmpty() && (function.length() > 2)) {
             this.function = function;
         }
     }
@@ -75,7 +75,7 @@ public class SystemUser {
         this.password = encryptPassword(password);
     }
 
-    private void setPhoto(String photo) {
+    public void setPhoto(String photo) {
         if (!photo.trim().isEmpty()) {
             this.photo = photo;
         }
@@ -302,7 +302,7 @@ public class SystemUser {
             }
         }
 
-        if (profileChoosenList.size() != 0) {
+        if (!profileChoosenList.isEmpty()) {
 
             if (this.assignedProfileList == null) {
                 result = false;

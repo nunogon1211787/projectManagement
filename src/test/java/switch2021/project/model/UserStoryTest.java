@@ -279,7 +279,7 @@ class UserStoryTest {
 
     @Test
     void hashCodeTest() {
-        UserStory userStory1 = new UserStory("CCC", 2, "Fazer tal", 5);
+        UserStory userStory1 = new UserStory("CCC", 1, "Fazer tal", 5);
         UserStory userStory2 = new UserStory("AAA", 2, "Fazer tal e coiso", 5);
         UserStory userStory3 = new UserStory("AAA", 2, "Fazer tal e coiso", 5);
         UserStoryStatus status4 = new UserStoryStatus("teste5");
@@ -287,6 +287,9 @@ class UserStoryTest {
 
         assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
         assertEquals(userStory2.getDescription(), userStory3.getDescription());
+        assertEquals(userStory2.getPriority(), userStory3.getPriority());
+        assertEquals(userStory2.getName(), userStory3.getName());
+        assertEquals(userStory2.getTimeEstimate(), userStory3.getTimeEstimate());
         assertNotEquals(userStory2.getDescription(), userStory1.getDescription());
         assertNotEquals(null, userStory1);
         assertEquals(userStory1.getClass(), userStory2.getClass());

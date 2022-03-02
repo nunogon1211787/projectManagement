@@ -72,11 +72,11 @@ public class SprintBacklog {
      * @deprecated (...)
      */
     @Deprecated
-    public UserStoryOfSprint getUserStoryDeprecated(int id_UserStory) {
+    public UserStoryOfSprint getUserStoryDeprecated(int idUserStory) {
 
         UserStoryOfSprint us = null;
         for (UserStoryOfSprint i: this.userStoryOfSprintList) {
-            if (i.hasCode(id_UserStory)){
+            if (i.hasCode(idUserStory)){
                 us = i;
                 break;
             }
@@ -102,7 +102,7 @@ public class SprintBacklog {
     @Deprecated
     public boolean saveUserStoryOfSprint(UserStoryOfSprint story) {
         if (!validateUserStoryOfSprint(story)) {
-            story.setIdUserStoryOfSprint(id_UserStoryOfSprintGenerator());
+            story.setIdUserStoryOfSprint(idUserStoryOfSprintGenerator());
         }
         this.userStoryOfSprintList.add(story);
         return true;
@@ -130,9 +130,9 @@ public class SprintBacklog {
      * @deprecated (...)
      */
     @Deprecated
-    public int id_UserStoryOfSprintGenerator() {
+    public int idUserStoryOfSprintGenerator() {
         int id = 1;
-        if(this.userStoryOfSprintList.size() > 0) {
+        if(!this.userStoryOfSprintList.isEmpty()) {
             id = this.userStoryOfSprintList.get(userStoryOfSprintList.size()-1).getIdUserStoryOfSprint() + 1;
         }
         return id;

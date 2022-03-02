@@ -2,8 +2,10 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.stores.SystemUserStore;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SystemUserTest {
@@ -119,6 +121,18 @@ class SystemUserTest {
     }
 
     @Test
+    public void checkAllDataSuccess() {
+
+        //Arrange
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser cris = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        //Act and Assert
+        assertTrue(cris.checkAllData("CDC", "ALN", "img_900"));
+    }
+
+    @Test
     public void checkAllDataFailUsernameEmpty() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
@@ -129,7 +143,6 @@ class SystemUserTest {
             newUser.checkAllData(" ", "Aluna_10", "img_123");
         });
     }
-
 
 
     @Test
@@ -616,11 +629,11 @@ class SystemUserTest {
         //newUser3 is different (different email)
         SystemUser newUser3 = company.getSystemUserStore().createSystemUser(userName, email2, function, password, passwordConfirmation, photo, profile);
         //Assert
-        assertNotSame(newUser,newUser2);
-        assertEquals(newUser,newUser2);
-        assertEquals(newUser.hashCode(),newUser2.hashCode());
-        assertNotEquals(newUser,newUser3);
-        assertNotEquals(newUser.hashCode(),newUser3.hashCode());
+        assertNotSame(newUser, newUser2);
+        assertEquals(newUser, newUser2);
+        assertEquals(newUser.hashCode(), newUser2.hashCode());
+        assertNotEquals(newUser, newUser3);
+        assertNotEquals(newUser.hashCode(), newUser3.hashCode());
     }
 
     @Test
@@ -742,7 +755,7 @@ class SystemUserTest {
         String email = "xxxx@isep.ipp.pt";
         String func = "tester";
         int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List <UserProfile> profiles = new ArrayList<>();// profileId
+        List<UserProfile> profiles = new ArrayList<>();// profileId
         profiles.add(pro);
         //Assert
         assertTrue(test.hasThisData(name, email, func, state, profiles));
@@ -1125,11 +1138,11 @@ class SystemUserTest {
         teste4.setUserName("CD");
 
         // Assert
-        assertEquals(originalValue, teste.getUserName());
+        assertNotEquals(originalValue, teste.getUserName());
         assertEquals(originalValue2, teste2.getUserName());
         assertNotEquals(originalValue3, teste3.getUserName());
-        assertEquals("CDC",teste3.getUserName());
-        assertEquals("CD",teste4.getUserName());
+        assertEquals("CDC", teste3.getUserName());
+        assertEquals("CD", teste4.getUserName());
     }
 
     @Test
@@ -1163,8 +1176,36 @@ class SystemUserTest {
         assertEquals(originalValue, teste.getFunction());
         assertEquals(originalValue2, teste2.getFunction());
         assertNotEquals(originalValue3, teste3.getFunction());
-        assertEquals("CDC",teste3.getFunction());
-        assertEquals("CD",teste4.getFunction());
+        assertEquals("CDC", teste3.getFunction());
+        assertNotEquals("CD", teste4.getFunction());
     }
+
+    @Test
+    public void setPhoto() {
+
+        //Arrange
+
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser teste = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue = teste.getPhoto();
+        SystemUser teste2 = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue2 = teste.getPhoto();
+
+        //Act
+
+        teste.setPhoto("D");
+        teste2.setPhoto("");
+
+
+        // Assert
+        assertEquals(originalValue2, teste2.getPhoto());
+        assertNotEquals(originalValue, teste.getPhoto());
+        assertEquals("D", teste.getPhoto());
+
+    }
+
 
 }

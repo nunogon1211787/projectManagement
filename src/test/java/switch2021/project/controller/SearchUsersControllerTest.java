@@ -77,4 +77,27 @@ class SearchUsersControllerTest {
         assertEquals(expectedList, profileList);
         assertEquals(nominalList, profileList);
     }
+
+    @Test
+    void getProfileListSuccessValidateInfo(){
+        //Input
+        Company co = new Company();
+        SearchSystemUsersController test = new SearchSystemUsersController(co);
+        //Expected
+        UserProfile p1 = co.getUserProfileStore().getUserProfile("visitor");
+        UserProfile p2 = co.getUserProfileStore().getUserProfile("administrator");
+        UserProfile p3 = co.getUserProfileStore().getUserProfile("director");
+        UserProfile p4 = co.getUserProfileStore().getUserProfile("user");
+        List<UserProfile> list = new ArrayList<>();
+        list.add(p1);
+        list.add(p2);
+        list.add(p3);
+        list.add(p4);
+        //Result
+        assertEquals(p1.getUserProfileName(), list.get(0).getUserProfileName());
+        assertEquals(p2.getUserProfileName(), list.get(1).getUserProfileName());
+        assertEquals(p3.getUserProfileName(), list.get(2).getUserProfileName());
+        assertEquals(p4.getUserProfileName(), list.get(3).getUserProfileName());
+        assertEquals(p4.getIdUserProfile(), list.get(3).getIdUserProfile());
+    }
 }
