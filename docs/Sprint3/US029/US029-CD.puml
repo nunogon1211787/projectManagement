@@ -28,7 +28,8 @@ class ProjectStore {
 }
 
 class Project {
-code : String
+-code : String
+-sprintDuration: int
 -hasCode(code)
 +getProjectTeam()
 }
@@ -42,8 +43,8 @@ sprintList : List<Sprint>
 }
 
 class Sprint {
-id: int
-startDate : LocalDate
+-idSprint : int
+-startDate : LocalDate
 +hasSprintID(sprintID)
 +setStartDate()
 }
@@ -61,10 +62,10 @@ StartASprintController ..> SprintList
 StartASprintController ..> Sprint
 StartASprintController ..> ProjectTeam
 
-Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" *-- "0..*" SprintList: has
+Company "1" o-- "1" ProjectStore: knows the
+ProjectStore "1" *-- "0..*" Project: has a list of
+Project "1" *-- "0..*" SprintList: contains
 Project "1" *-- "1" ProjectTeam: has
-Sprint "1" o-- "1" SprintList: has
+Sprint "1" -- "1" SprintList: has a list of
 
 @enduml

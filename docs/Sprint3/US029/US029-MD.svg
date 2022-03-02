@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="253px" preserveAspectRatio="none" style="width:685px;height:253px;background:#FFFFFF;" version="1.1" viewBox="0 0 685 253" width="685px" zoomAndPan="magnify"><defs><filter height="300%" id="fioeu6jnrui1m" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="676" x="2" y="17.4023">Domain Model excerpt - US029 - As Project Manager, i want to start a sprint.</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
-class Company--><rect codeLine="9" fill="#FEFECE" filter="url(#fioeu6jnrui1m)" height="40.1328" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="60" x="416.25" y="199.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="419.25" y="215.8008">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="417.25" x2="475.25" y1="223.332" y2="223.332"/><line style="stroke:#A80036;stroke-width:1.5;" x1="417.25" x2="475.25" y1="231.332" y2="231.332"/><!--MD5=[79d378210367c0c6ec62ef762ddfbd1b]
-class Project--><rect codeLine="11" fill="#FEFECE" filter="url(#fioeu6jnrui1m)" height="40.1328" id="Project" style="stroke:#A80036;stroke-width:1.5;" width="46" x="279.25" y="199.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="40" x="282.25" y="215.8008">Project</text><line style="stroke:#A80036;stroke-width:1.5;" x1="280.25" x2="324.25" y1="223.332" y2="223.332"/><line style="stroke:#A80036;stroke-width:1.5;" x1="280.25" x2="324.25" y1="231.332" y2="231.332"/><!--MD5=[ea85c9eeae48c9b9754651e25079a913]
-class ProjectTeam--><rect codeLine="15" fill="#FEFECE" filter="url(#fioeu6jnrui1m)" height="40.1328" id="ProjectTeam" style="stroke:#A80036;stroke-width:1.5;" width="79" x="209.75" y="41.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73" x="212.75" y="57.8008">ProjectTeam</text><line style="stroke:#A80036;stroke-width:1.5;" x1="210.75" x2="287.75" y1="65.332" y2="65.332"/><line style="stroke:#A80036;stroke-width:1.5;" x1="210.75" x2="287.75" y1="73.332" y2="73.332"/><!--MD5=[452a66c2e8d45f5bd209be454bbcd04f]
-class Sprint--><rect codeLine="18" fill="#FEFECE" filter="url(#fioeu6jnrui1m)" height="66.043" id="Sprint" style="stroke:#A80036;stroke-width:1.5;" width="67" x="323.75" y="28.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="33" x="340.75" y="44.8008">Sprint</text><line style="stroke:#A80036;stroke-width:1.5;" x1="324.75" x2="389.75" y1="52.332" y2="52.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="16" x="329.75" y="66.9668">-id</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="55" x="329.75" y="79.9219">-startDate</text><line style="stroke:#A80036;stroke-width:1.5;" x1="324.75" x2="389.75" y1="86.2422" y2="86.2422"/><!--MD5=[4fd7a19b1634c741096f92064b745dd2]
-reverse link Project to Company--><path codeLine="24" d="M330.48,219.1992 C355.17,219.1992 390.94,219.1992 416.16,219.1992 " fill="none" id="Project-backto-Company" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="325.39,219.1992,334.39,223.1992,330.39,219.1992,334.39,215.1992,325.39,219.1992" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="54" x="343.75" y="212.7676">contains</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="6" x="333.3954" y="214.4979">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="400.2767" y="215.0538">1</text><!--MD5=[352310352512ea7c8ebcd3b871b8d730]
-reverse link Project to ProjectTeam--><path codeLine="25" d="M275.06,201.4892 C263.6,192.8292 251.48,181.1292 245.25,167.1992 C232.82,139.3892 238.31,103.1792 243.63,81.3592 " fill="none" id="Project-backto-ProjectTeam" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="279.25,204.5392,274.3276,196.0087,275.2076,201.5967,269.6196,202.4766,279.25,204.5392" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="67" x="246.25" y="163.7676">belongs to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="263.3188" y="195.6242">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="232.9244" y="101.7319">1</text><!--MD5=[6e6d33f92af012b517bd747a26e702ca]
-link Sprint to Project--><path codeLine="26" d="M345.85,94.5192 C335.37,124.2592 320.06,167.6892 310.65,194.3792 " fill="none" id="Sprint-to-Project" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="308.96,199.1592,315.7307,192.0068,310.6263,194.4451,308.1881,189.3407,308.96,199.1592" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="67" x="325.25" y="163.7676">belongs to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="334.9144" y="114.8944">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="6" x="304.0962" y="188.3207">*</text><!--MD5=[50b415cd329bfdde522f4453a55622f8]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="290px" preserveAspectRatio="none" style="width:685px;height:290px;background:#FFFFFF;" version="1.1" viewBox="0 0 685 290" width="685px" zoomAndPan="magnify"><defs><filter height="300%" id="f8d783oxcpz9c" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="676" x="2" y="17.4023">Domain Model excerpt - US029 - As Project Manager, i want to start a sprint.</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect codeLine="9" fill="#FEFECE" filter="url(#f8d783oxcpz9c)" height="40.1328" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="60" x="319" y="28.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="322" y="44.8008">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="320" x2="378" y1="52.332" y2="52.332"/><line style="stroke:#A80036;stroke-width:1.5;" x1="320" x2="378" y1="60.332" y2="60.332"/><!--MD5=[79d378210367c0c6ec62ef762ddfbd1b]
+class Project--><rect codeLine="11" fill="#FEFECE" filter="url(#f8d783oxcpz9c)" height="130.8184" id="Project" style="stroke:#A80036;stroke-width:1.5;" width="111" x="293.5" y="145.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="40" x="329" y="161.8008">Project</text><line style="stroke:#A80036;stroke-width:1.5;" x1="294.5" x2="403.5" y1="169.332" y2="169.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="32" x="299.5" y="183.9668">-code</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="74" x="299.5" y="196.9219">-projectName</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="67" x="299.5" y="209.877">-description</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="55" x="299.5" y="222.832">-startDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="50" x="299.5" y="235.7871">-endDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="99" x="299.5" y="248.7422">-numberOfSprints</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="85" x="299.5" y="261.6973">-sprintDuration</text><line style="stroke:#A80036;stroke-width:1.5;" x1="294.5" x2="403.5" y1="268.0176" y2="268.0176"/><!--MD5=[ea85c9eeae48c9b9754651e25079a913]
+class ProjectTeam--><rect codeLine="20" fill="#FEFECE" filter="url(#f8d783oxcpz9c)" height="40.1328" id="ProjectTeam" style="stroke:#A80036;stroke-width:1.5;" width="79" x="508.5" y="190.6992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73" x="511.5" y="207.3008">ProjectTeam</text><line style="stroke:#A80036;stroke-width:1.5;" x1="509.5" x2="586.5" y1="214.832" y2="214.832"/><line style="stroke:#A80036;stroke-width:1.5;" x1="509.5" x2="586.5" y1="222.832" y2="222.832"/><!--MD5=[452a66c2e8d45f5bd209be454bbcd04f]
+class Sprint--><rect codeLine="22" fill="#FEFECE" filter="url(#f8d783oxcpz9c)" height="91.9531" id="Sprint" style="stroke:#A80036;stroke-width:1.5;" width="67" x="98.5" y="164.6992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="33" x="115.5" y="181.3008">Sprint</text><line style="stroke:#A80036;stroke-width:1.5;" x1="99.5" x2="164.5" y1="188.832" y2="188.832"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="48" x="104.5" y="203.4668">-idSprint</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="35" x="104.5" y="216.4219">-name</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="55" x="104.5" y="229.377">-startDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="50" x="104.5" y="242.332">-endDate</text><line style="stroke:#A80036;stroke-width:1.5;" x1="99.5" x2="164.5" y1="248.6523" y2="248.6523"/><!--MD5=[2e490d5338ac1af0f8b8635f18fa3e01]
+link Company to Project--><path codeLine="30" d="M349,68.2392 C349,85.9892 349,113.5692 349,139.6892 " fill="none" id="Company-to-Project" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="349,144.8892,353,135.8892,349,139.8892,345,135.8892,349,144.8892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="54" x="350" y="111.7676">contains</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="339.825" y="88.9236">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="6" x="342.6719" y="134.4662">*</text><!--MD5=[9953a814c058dd671fcf1ab36e7beb34]
+link Project to ProjectTeam--><path codeLine="31" d="M404.7,210.6992 C437.7,210.6992 478.73,210.6992 508.42,210.6992 " fill="none" id="Project-ProjectTeam" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="67" x="423" y="204.2676">belongs to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="412.3491" y="207.3382">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="492.3849" y="206.9012">1</text><!--MD5=[6e6d33f92af012b517bd747a26e702ca]
+link Sprint to Project--><path codeLine="32" d="M165.91,210.6992 C200,210.6992 253.13,210.6992 293.4,210.6992 " fill="none" id="Sprint-Project" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91" x="184" y="204.2676">in divided into</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="6" x="173.5227" y="206.7576">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="277.3913" y="207.2928">1</text><!--MD5=[cc91dfcdfdea175901f9d035bbdaf680]
 @startuml
 'https://plantuml.com/class-diagram
 
@@ -14,25 +14,31 @@ hide circle
 
 title Domain Model excerpt - US029 - As Project Manager, i want to start a sprint.
 
-together {
+
 class Company{
 }
 class Project{
+- code
+- projectName
+- description
+- startDate
+- endDate
+- numberOfSprints
+- sprintDuration
 }
-}
-together {
 class ProjectTeam{
 }
-together {
 class Sprint{
--id
--startDate
+- idSprint
+- name
+- startDate
+- endDate
 }
 
 
-Company "1" -left-> "*" Project: contains
-Project "1" <-right- "1" ProjectTeam: belongs to
-Sprint "1" - -> "*" Project: belongs to
+Company "1" -down-> "*" Project: contains
+Project "1" -right- "1" ProjectTeam: belongs to
+Sprint "*" -right- "1" Project: in divided into
 
 
 @enduml
@@ -44,25 +50,31 @@ hide circle
 
 title Domain Model excerpt - US029 - As Project Manager, i want to start a sprint.
 
-together {
+
 class Company{
 }
 class Project{
+- code
+- projectName
+- description
+- startDate
+- endDate
+- numberOfSprints
+- sprintDuration
 }
-}
-together {
 class ProjectTeam{
 }
-together {
 class Sprint{
--id
--startDate
+- idSprint
+- name
+- startDate
+- endDate
 }
 
 
-Company "1" -left-> "*" Project: contains
-Project "1" <-right- "1" ProjectTeam: belongs to
-Sprint "1" - -> "*" Project: belongs to
+Company "1" -down-> "*" Project: contains
+Project "1" -right- "1" ProjectTeam: belongs to
+Sprint "*" -right- "1" Project: in divided into
 
 
 @enduml
