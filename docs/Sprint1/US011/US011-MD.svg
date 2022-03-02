@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="173px" preserveAspectRatio="none" style="width:810px;height:173px;background:#FFFFFF;" version="1.1" viewBox="0 0 810 173" width="810px" zoomAndPan="magnify"><defs><filter height="300%" id="f155ezdv1c6esm" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="801" x="2" y="17.4023">Domain Model excerpt - US011 - As Authenticated User, i want to change his/her password</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect codeLine="9" fill="#FEFECE" filter="url(#f155ezdv1c6esm)" height="40.1328" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="60" x="246.75" y="73.6992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="249.75" y="90.3008">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="247.75" x2="305.75" y1="97.832" y2="97.832"/><line style="stroke:#A80036;stroke-width:1.5;" x1="247.75" x2="305.75" y1="105.832" y2="105.832"/><!--MD5=[bc064d979c32666ae52f3d7624591b7b]
+class SystemUser--><rect codeLine="12" fill="#FEFECE" filter="url(#f155ezdv1c6esm)" height="130.8184" id="SystemUser" style="stroke:#A80036;stroke-width:1.5;" width="141" x="423.25" y="28.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="66" x="460.75" y="44.8008">SystemUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="424.25" x2="563.25" y1="52.332" y2="52.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="59" x="429.25" y="66.9668">-username</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="34" x="429.25" y="79.9219">-email</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="38" x="429.25" y="92.877">-photo</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="58" x="429.25" y="105.832">-password</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="129" x="429.25" y="118.7871">-passwordConfirmation</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="51" x="429.25" y="131.7422">-function</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="72" x="429.25" y="144.6973">-activateUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="424.25" x2="563.25" y1="151.0176" y2="151.0176"/><!--MD5=[29ba05bb23273e963a898f2a55a4d86c]
+reverse link Company to SystemUser--><path codeLine="22" d="M311.98,93.6992 C341.97,93.6992 385.96,93.6992 423.16,93.6992 " fill="none" id="Company-backto-SystemUser" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="306.92,93.6992,315.92,97.6992,311.92,93.6992,315.92,89.6992,306.92,93.6992" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="80" x="325" y="87.2676">employed by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="314.8218" y="89.5538">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="6" x="409.1111" y="90.4742">*</text><!--MD5=[3fdabd0a1ce20b4525393b7cf3470945]
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title Domain Model excerpt - US011 - As Authenticated User, i want to change his/her password
+
+
+class Company{
+}
+
+class SystemUser{
+- username
+- email
+- photo
+- password
+- passwordConfirmation
+- function
+- activateUser
+}
+
+Company "1" <-right- "*" SystemUser: employed by
+
+@enduml
+
+@startuml
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title Domain Model excerpt - US011 - As Authenticated User, i want to change his/her password
+
+
+class Company{
+}
+
+class SystemUser{
+- username
+- email
+- photo
+- password
+- passwordConfirmation
+- function
+- activateUser
+}
+
+Company "1" <-right- "*" SystemUser: employed by
+
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 WET 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: pt
+Country: PT
+--></g></svg>

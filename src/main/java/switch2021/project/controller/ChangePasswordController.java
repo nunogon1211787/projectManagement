@@ -9,25 +9,25 @@ public class ChangePasswordController {
 
     /**
      * Attributes
-     **/
+     */
 
     private final Company company;
 
     /**
      * Constructor to UI (with SINGLETON)
-     **/
+     */
 
     //public ChangePasswordController() {this.company = App.getInstance().getCompany();}
 
     /**
      * Constructor to test (without SINGLETON)
-     **/
+     */
 
     public ChangePasswordController(Company company) { this.company = company; }
 
     /**
      * Methods
-     **/
+     */
 
     public boolean changePassword(String email, String oldPasswordUI, String newPassword, String newPasswordConfirmation) {
         SystemUserStore systemUserStore = company.getSystemUserStore();
