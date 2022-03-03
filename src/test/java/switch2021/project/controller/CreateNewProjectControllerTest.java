@@ -31,7 +31,7 @@ public class CreateNewProjectControllerTest {
     }
 
     @Test
-    @DisplayName("Check creation and addition to list")
+    @DisplayName("Check addition to list")
     public void SaveNewProjectControllerTest() {
         //Arrange
         LocalDate date = LocalDate.of(2021, 12, 12);
