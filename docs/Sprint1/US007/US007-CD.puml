@@ -1,63 +1,94 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-hide circle
+'hide circle
 skinparam classAttributeIconSize 0
 
-title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
+title US007 - As Director, I want to associate a human resource (user) to a project
 
-class CreateUserStoryUI {
+class AssociateResourceUI {
 
 }
 
-class CreateUserStoryController {
-    +getProjectListByUserEmail(String email)
-    +getProjectByCode(String code)
-    +createUserStory(status, priority, description)
+class AssociateResourceController {
+    +getProjectList()
+    +getSystemUserList()
+    +associateResource(email, projectCode, startDate, endDate, costPerHour, percentageOfAllocation)
 }
 
 class Company {
     +getProjectStore()
+    +getSystemUserStore()
 }
 
 class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
++getProjects()
++getProjectByCode(code)
++validateAllocation(user, percentageOfAllocation, startDate, endDate)
 }
 
 class Project {
--code : String
--productBacklog : ProductBacklog
-+getProductBacklog()
+code : String
+projectName : String
+description : String
+customer : Customer
+typology : Typology
+projectStatus : ProjectStatus
+productBacklog : ProductBacklog
+businessSector : BusinessSector
+projectTeam : ProjectTeam
+startDate : LocalDate
+endDate : LocalDate
+numberOfSprints : int
+budget : double
+sprintDuration : int
++hasCode(code)
++getProjectTeam()
++getTeamMemberByIndex(index)
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+createUserStory(status, priority, description)
-+isValideUserStory(status, priority, description)
-+saveUserStory(us)
-+validateUserStory(us)
+class SystemUserStore {
++getSystemUsers()
++getUserByEmail(email)
 }
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
-+UserStory(status, priority,description)
+class SystemUser {
+username : String
+email : String
+photo : String
+password : String
+passwordConfirmation : String
+function : String
+activateUser : boolean = False
++SystemUser(username, email, photo, password, passwordConfirmation, function, profile)
++isYourEmail(email)
 }
 
-CreateUserStoryUI ..> CreateUserStoryController
 
-CreateUserStoryController ..> Company
-CreateUserStoryController ..> ProjectStore
-CreateUserStoryController ..> Project
-CreateUserStoryController ..> ProductBacklog
+class Resource {
+user : SystemUser
+role : ProjectRole
+startDate : LocalDate
+endDate : LocalDate
+costPerHour : double
+percentageOfAllocation : double
++getUser()
++getPercentageOfAllocation()
++checkAllocationPeriod(startDate, endDate)
+}
 
-Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+AssociateResourceUI ..> AssociateResourceController
+
+AssociateResourceController ..> Company
+AssociateResourceController ..> ProjectStore
+AssociateResourceController ..> SystemUserStore
+SystemUserStore ..> SystemUser
+ProjectStore ..> Project
+ProjectStore ..> Resource
+
+
+Company "1" o-- "1" SystemUserStore: has
+SystemUserStore "1" *-- "0..*" SystemUser: has
+
 
 @enduml

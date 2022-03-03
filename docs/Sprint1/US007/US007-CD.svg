@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="972px" preserveAspectRatio="none" style="width:925px;height:972px;background:#FFFFFF;" version="1.1" viewBox="0 0 925 972" width="925px" zoomAndPan="magnify"><defs><filter height="300%" id="f1tkuyl7obgqdd" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="671" x="120.75" y="17.4023">US007 - As Director, I want to associate a human resource (user) to a project</text><!--MD5=[231d6d6907ad75bbbdbcf604ed5726fc]
+class AssociateResourceUI--><rect codeLine="8" fill="#FEFECE" filter="url(#f1tkuyl7obgqdd)" height="48" id="AssociateResourceUI" style="stroke:#A80036;stroke-width:1.5;" width="150" x="241" y="28.1992"/><ellipse cx="256" cy="44.1992" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M258.4731,50.3423 Q257.8921,50.6411 257.2529,50.7905 Q256.6138,50.9399 255.9082,50.9399 Q253.4014,50.9399 252.0815,49.2881 Q250.7617,47.6362 250.7617,44.5151 Q250.7617,41.3857 252.0815,39.7339 Q253.4014,38.082 255.9082,38.082 Q256.6138,38.082 257.2612,38.2314 Q257.9087,38.3809 258.4731,38.6797 L258.4731,41.4023 Q257.8423,40.8213 257.2488,40.5515 Q256.6553,40.2817 256.0244,40.2817 Q254.6797,40.2817 253.9949,41.3484 Q253.3101,42.415 253.3101,44.5151 Q253.3101,46.6069 253.9949,47.6736 Q254.6797,48.7402 256.0244,48.7402 Q256.6553,48.7402 257.2488,48.4705 Q257.8423,48.2007 258.4731,47.6196 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="118" x="270" y="48.7344">AssociateResourceUI</text><line style="stroke:#A80036;stroke-width:1.5;" x1="242" x2="390" y1="60.1992" y2="60.1992"/><line style="stroke:#A80036;stroke-width:1.5;" x1="242" x2="390" y1="68.1992" y2="68.1992"/><!--MD5=[64460d780418aa034b32f169cf278c0f]
+class AssociateResourceController--><rect codeLine="12" fill="#FEFECE" filter="url(#f1tkuyl7obgqdd)" height="86.8652" id="AssociateResourceController" style="stroke:#A80036;stroke-width:1.5;" width="540" x="46" y="137.1992"/><ellipse cx="230.25" cy="153.1992" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M232.7231,159.3423 Q232.1421,159.6411 231.5029,159.7905 Q230.8638,159.9399 230.1582,159.9399 Q227.6514,159.9399 226.3315,158.2881 Q225.0117,156.6362 225.0117,153.5151 Q225.0117,150.3857 226.3315,148.7339 Q227.6514,147.082 230.1582,147.082 Q230.8638,147.082 231.5112,147.2314 Q232.1587,147.3809 232.7231,147.6797 L232.7231,150.4023 Q232.0923,149.8213 231.4988,149.5515 Q230.9053,149.2817 230.2744,149.2817 Q228.9297,149.2817 228.2449,150.3484 Q227.5601,151.415 227.5601,153.5151 Q227.5601,155.6069 228.2449,156.6736 Q228.9297,157.7402 230.2744,157.7402 Q230.9053,157.7402 231.4988,157.4705 Q232.0923,157.2007 232.7231,156.6196 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="163" x="250.75" y="157.7344">AssociateResourceController</text><line style="stroke:#A80036;stroke-width:1.5;" x1="47" x2="585" y1="169.1992" y2="169.1992"/><line style="stroke:#A80036;stroke-width:1.5;" x1="47" x2="585" y1="177.1992" y2="177.1992"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="90" x="52" y="191.834">+getProjectList()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="116" x="52" y="204.7891">+getSystemUserList()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="528" x="52" y="217.7441">+associateResource(email, projectCode, startDate, endDate, costPerHour, percentageOfAllocation)</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect codeLine="18" fill="#FEFECE" filter="url(#f1tkuyl7obgqdd)" height="73.9102" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="137" x="247.5" y="291.6992"/><ellipse cx="285.45" cy="307.6992" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M287.9231,313.8423 Q287.3421,314.1411 286.7029,314.2905 Q286.0638,314.4399 285.3582,314.4399 Q282.8514,314.4399 281.5315,312.7881 Q280.2117,311.1362 280.2117,308.0151 Q280.2117,304.8857 281.5315,303.2339 Q282.8514,301.582 285.3582,301.582 Q286.0638,301.582 286.7112,301.7314 Q287.3587,301.8809 287.9231,302.1797 L287.9231,304.9023 Q287.2923,304.3213 286.6988,304.0515 Q286.1053,303.7817 285.4744,303.7817 Q284.1297,303.7817 283.4449,304.8484 Q282.7601,305.915 282.7601,308.0151 Q282.7601,310.1069 283.4449,311.1736 Q284.1297,312.2402 285.4744,312.2402 Q286.1053,312.2402 286.6988,311.9705 Q287.2923,311.7007 287.9231,311.1196 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="304.55" y="312.2344">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="248.5" x2="383.5" y1="323.6992" y2="323.6992"/><line style="stroke:#A80036;stroke-width:1.5;" x1="248.5" x2="383.5" y1="331.6992" y2="331.6992"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="99" x="253.5" y="346.334">+getProjectStore()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="125" x="253.5" y="359.2891">+getSystemUserStore()</text><!--MD5=[0cf43f64de24b70e8ffe65ff9ee7abee]
+class ProjectStore--><rect codeLine="23" fill="#FEFECE" filter="url(#f1tkuyl7obgqdd)" height="86.8652" id="ProjectStore" style="stroke:#A80036;stroke-width:1.5;" width="386" x="420" y="285.1992"/><ellipse cx="574.25" cy="301.1992" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M576.7231,307.3423 Q576.1421,307.6411 575.5029,307.7905 Q574.8638,307.9399 574.1582,307.9399 Q571.6514,307.9399 570.3315,306.2881 Q569.0117,304.6362 569.0117,301.5151 Q569.0117,298.3857 570.3315,296.7339 Q571.6514,295.082 574.1582,295.082 Q574.8638,295.082 575.5112,295.2314 Q576.1587,295.3809 576.7231,295.6797 L576.7231,298.4023 Q576.0923,297.8213 575.4988,297.5515 Q574.9053,297.2817 574.2744,297.2817 Q572.9297,297.2817 572.2449,298.3484 Q571.5601,299.415 571.5601,301.5151 Q571.5601,303.6069 572.2449,304.6736 Q572.9297,305.7402 574.2744,305.7402 Q574.9053,305.7402 575.4988,305.4705 Q576.0923,305.2007 576.7231,304.6196 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="69" x="594.75" y="305.7344">ProjectStore</text><line style="stroke:#A80036;stroke-width:1.5;" x1="421" x2="805" y1="317.1992" y2="317.1992"/><line style="stroke:#A80036;stroke-width:1.5;" x1="421" x2="805" y1="325.1992" y2="325.1992"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="77" x="426" y="339.834">+getProjects()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="137" x="426" y="352.7891">+getProjectByCode(code)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="374" x="426" y="365.7441">+validateAllocation(user, percentageOfAllocation, startDate, endDate)</text><!--MD5=[79d378210367c0c6ec62ef762ddfbd1b]
+class Project--><rect codeLine="29" fill="#FEFECE" filter="url(#f1tkuyl7obgqdd)" height="268.2363" id="Project" style="stroke:#A80036;stroke-width:1.5;" width="190" x="439" y="449.1992"/><ellipse cx="509.75" cy="465.1992" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M512.2231,471.3423 Q511.6421,471.6411 511.0029,471.7905 Q510.3638,471.9399 509.6582,471.9399 Q507.1514,471.9399 505.8315,470.2881 Q504.5117,468.6362 504.5117,465.5151 Q504.5117,462.3857 505.8315,460.7339 Q507.1514,459.082 509.6582,459.082 Q510.3638,459.082 511.0112,459.2314 Q511.6587,459.3809 512.2231,459.6797 L512.2231,462.4023 Q511.5923,461.8213 510.9988,461.5515 Q510.4053,461.2817 509.7744,461.2817 Q508.4297,461.2817 507.7449,462.3484 Q507.0601,463.415 507.0601,465.5151 Q507.0601,467.6069 507.7449,468.6736 Q508.4297,469.7402 509.7744,469.7402 Q510.4053,469.7402 510.9988,469.4705 Q511.5923,469.2007 512.2231,468.6196 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="40" x="530.25" y="469.7344">Project</text><line style="stroke:#A80036;stroke-width:1.5;" x1="440" x2="628" y1="481.1992" y2="481.1992"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="67" x="445" y="495.834">code : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="109" x="445" y="508.7891">projectName : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="102" x="445" y="521.7441">description : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="113" x="445" y="534.6992">customer : Customer</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="106" x="445" y="547.6543">typology : Typology</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="150" x="445" y="560.6094">projectStatus : ProjectStatus</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="176" x="445" y="573.5645">productBacklog : ProductBacklog</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="172" x="445" y="586.5195">businessSector : BusinessSector</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="142" x="445" y="599.4746">projectTeam : ProjectTeam</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="110" x="445" y="612.4297">startDate : LocalDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="105" x="445" y="625.3848">endDate : LocalDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="116" x="445" y="638.3398">numberOfSprints : int</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="84" x="445" y="651.2949">budget : double</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="102" x="445" y="664.25">sprintDuration : int</text><line style="stroke:#A80036;stroke-width:1.5;" x1="440" x2="628" y1="670.5703" y2="670.5703"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="90" x="445" y="685.2051">+hasCode(code)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="100" x="445" y="698.1602">+getProjectTeam()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="178" x="445" y="711.1152">+getTeamMemberByIndex(index)</text><!--MD5=[8787f7db94578849901ee2e9b6146b1d]
+class SystemUserStore--><rect codeLine="49" fill="#FEFECE" filter="url(#f1tkuyl7obgqdd)" height="73.9102" id="SystemUserStore" style="stroke:#A80036;stroke-width:1.5;" width="139" x="185.5" y="546.1992"/><ellipse cx="205.9" cy="562.1992" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M208.3731,568.3423 Q207.7921,568.6411 207.1529,568.7905 Q206.5138,568.9399 205.8082,568.9399 Q203.3014,568.9399 201.9815,567.2881 Q200.6617,565.6362 200.6617,562.5151 Q200.6617,559.3857 201.9815,557.7339 Q203.3014,556.082 205.8082,556.082 Q206.5138,556.082 207.1612,556.2314 Q207.8087,556.3809 208.3731,556.6797 L208.3731,559.4023 Q207.7423,558.8213 207.1488,558.5515 Q206.5553,558.2817 205.9244,558.2817 Q204.5797,558.2817 203.8949,559.3484 Q203.2101,560.415 203.2101,562.5151 Q203.2101,564.6069 203.8949,565.6736 Q204.5797,566.7402 205.9244,566.7402 Q206.5553,566.7402 207.1488,566.4705 Q207.7423,566.2007 208.3731,565.6196 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="95" x="221.1" y="566.7344">SystemUserStore</text><line style="stroke:#A80036;stroke-width:1.5;" x1="186.5" x2="323.5" y1="578.1992" y2="578.1992"/><line style="stroke:#A80036;stroke-width:1.5;" x1="186.5" x2="323.5" y1="586.1992" y2="586.1992"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="103" x="191.5" y="600.834">+getSystemUsers()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="127" x="191.5" y="613.7891">+getUserByEmail(email)</text><!--MD5=[bc064d979c32666ae52f3d7624591b7b]
+class SystemUser--><rect codeLine="54" fill="#FEFECE" filter="url(#f1tkuyl7obgqdd)" height="164.5957" id="SystemUser" style="stroke:#A80036;stroke-width:1.5;" width="496" x="7" y="794.1992"/><ellipse cx="217.75" cy="810.1992" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M220.2231,816.3423 Q219.6421,816.6411 219.0029,816.7905 Q218.3638,816.9399 217.6582,816.9399 Q215.1514,816.9399 213.8315,815.2881 Q212.5117,813.6362 212.5117,810.5151 Q212.5117,807.3857 213.8315,805.7339 Q215.1514,804.082 217.6582,804.082 Q218.3638,804.082 219.0112,804.2314 Q219.6587,804.3809 220.2231,804.6797 L220.2231,807.4023 Q219.5923,806.8213 218.9988,806.5515 Q218.4053,806.2817 217.7744,806.2817 Q216.4297,806.2817 215.7449,807.3484 Q215.0601,808.415 215.0601,810.5151 Q215.0601,812.6069 215.7449,813.6736 Q216.4297,814.7402 217.7744,814.7402 Q218.4053,814.7402 218.9988,814.4705 Q219.5923,814.2007 220.2231,813.6196 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="66" x="238.25" y="814.7344">SystemUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="502" y1="826.1992" y2="826.1992"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="94" x="13" y="840.834">username : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="69" x="13" y="853.7891">email : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="13" y="866.7441">photo : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="93" x="13" y="879.6992">password : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="164" x="13" y="892.6543">passwordConfirmation : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="13" y="905.6094">function : String</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="160" x="13" y="918.5645">activateUser : boolean = False</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="502" y1="924.8848" y2="924.8848"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="484" x="13" y="939.5195">+SystemUser(username, email, photo, password, passwordConfirmation, function, profile)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="108" x="13" y="952.4746">+isYourEmail(email)</text><!--MD5=[6b13f1b330d33795af281e5c1dfe1e98]
+class Resource--><rect codeLine="67" fill="#FEFECE" filter="url(#f1tkuyl7obgqdd)" height="164.5957" id="Resource" style="stroke:#A80036;stroke-width:1.5;" width="247" x="664.5" y="500.6992"/><ellipse cx="757.25" cy="516.6992" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M759.7231,522.8423 Q759.1421,523.1411 758.5029,523.2905 Q757.8638,523.4399 757.1582,523.4399 Q754.6514,523.4399 753.3315,521.7881 Q752.0117,520.1362 752.0117,517.0151 Q752.0117,513.8857 753.3315,512.2339 Q754.6514,510.582 757.1582,510.582 Q757.8638,510.582 758.5112,510.7314 Q759.1587,510.8809 759.7231,511.1797 L759.7231,513.9023 Q759.0923,513.3213 758.4988,513.0515 Q757.9053,512.7817 757.2744,512.7817 Q755.9297,512.7817 755.2449,513.8484 Q754.5601,514.915 754.5601,517.0151 Q754.5601,519.1069 755.2449,520.1736 Q755.9297,521.2402 757.2744,521.2402 Q757.9053,521.2402 758.4988,520.9705 Q759.0923,520.7007 759.7231,520.1196 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="777.75" y="521.2344">Resource</text><line style="stroke:#A80036;stroke-width:1.5;" x1="665.5" x2="910.5" y1="532.6992" y2="532.6992"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="96" x="670.5" y="547.334">user : SystemUser</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="90" x="670.5" y="560.2891">role : ProjectRole</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="110" x="670.5" y="573.2441">startDate : LocalDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="105" x="670.5" y="586.1992">endDate : LocalDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="113" x="670.5" y="599.1543">costPerHour : double</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="173" x="670.5" y="612.1094">percentageOfAllocation : double</text><line style="stroke:#A80036;stroke-width:1.5;" x1="665.5" x2="910.5" y1="618.4297" y2="618.4297"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="59" x="670.5" y="633.0645">+getUser()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="160" x="670.5" y="646.0195">+getPercentageOfAllocation()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="235" x="670.5" y="658.9746">+checkAllocationPeriod(startDate, endDate)</text><!--MD5=[13516e16ed144eef80b15c04bf15e44c]
+link AssociateResourceUI to AssociateResourceController--><path codeLine="79" d="M316,76.3992 C316,91.9192 316,112.8992 316,131.8992 " fill="none" id="AssociateResourceUI-to-AssociateResourceController" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="316,137.1992,320,128.1992,316,132.1992,312,128.1992,316,137.1992" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[93602f0c3b0278be6d8fb53e1f7a3248]
+link AssociateResourceController to Company--><path codeLine="81" d="M316,224.3192 C316,243.8592 316,266.9392 316,286.3292 " fill="none" id="AssociateResourceController-to-Company" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="316,291.6892,320,282.6892,316,286.6892,312,282.6892,316,291.6892" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[3cae3d6ff71a6999abd783a4d722f995]
+link AssociateResourceController to ProjectStore--><path codeLine="82" d="M402.7,224.3192 C440.13,242.7192 483.94,264.2592 521.85,282.8892 " fill="none" id="AssociateResourceController-to-ProjectStore" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="526.45,285.1492,520.1309,277.5948,521.9608,282.9475,516.6082,284.7775,526.45,285.1492" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[cd3861ef7c2a3882a19661d9c4cdea2a]
+link AssociateResourceController to SystemUserStore--><path codeLine="83" d="M269.1,224.4192 C253.54,241.5992 238.14,262.6792 230,285.1992 C198.54,372.2992 223.28,482.7692 241.03,541.3692 " fill="none" id="AssociateResourceController-to-SystemUserStore" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="242.5,546.1892,243.6784,536.4111,241.0306,541.41,236.0317,538.7622,242.5,546.1892" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[223b1d932c2fbbeadc382f1ce7bdc986]
+link SystemUserStore to SystemUser--><path codeLine="84" d="M252.1,620.3892 C249.54,656.7392 246.44,714.3392 248,764.1992 C248.25,772.2292 248.61,780.5692 249.02,788.9292 " fill="none" id="SystemUserStore-to-SystemUser" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="249.29,794.1292,252.8487,784.9458,249.0474,789.1351,244.8581,785.3339,249.29,794.1292" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7758a2d24f0b1a5b8a5ff338858e9484]
+reverse link SystemUserStore to SystemUser--><path codeLine="90" d="M255,633.4092 C255,677.2592 255,742.3092 255,793.9692 " fill="none" id="SystemUserStore-backto-SystemUser" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="255,620.2392,251,626.2392,255,632.2392,259,626.2392,255,620.2392" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="256" y="760.7676">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="246.2875" y="640.7769">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="232.0203" y="783.5333">0..*</text><!--MD5=[626cc0adcc6c3eabfe261ec19000087f]
+link ProjectStore to Project--><path codeLine="85" d="M599.69,372.2492 C593.35,392.4892 585.39,417.9592 577.2,444.1092 " fill="none" id="ProjectStore-to-Project" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="575.67,448.9992,582.1648,441.5953,577.1565,444.2253,574.5265,439.217,575.67,448.9992" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[098a7972f1e1a3bcd9610c7c1309bebc]
+link ProjectStore to Resource--><path codeLine="86" d="M642.49,372.2492 C665.94,406.0792 699.5,454.5092 728.49,496.3392 " fill="none" id="ProjectStore-to-Resource" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="731.46,500.6192,729.6346,490.941,728.6177,496.5057,723.053,495.4887,731.46,500.6192" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[8b399b28c903131df3378f5fe4d26a41]
+reverse link Company to SystemUserStore--><path codeLine="89" d="M304.16,378.6892 C292.31,427.7692 274.34,502.1492 263.72,546.0892 " fill="none" id="Company-backto-SystemUserStore" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#FFFFFF" points="307.26,365.8792,301.9671,370.7767,304.452,377.5461,309.745,372.6486,307.26,365.8792" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="299" y="415.7676">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="297.0703" y="386.1614">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="256.5902" y="535.4695">1</text><!--MD5=[71d5018884cfdfd2385816b2cac81bdb]
+@startuml
+'https://plantuml.com/class-diagram
+
+'hide circle
+skinparam classAttributeIconSize 0
+
+title US007 - As Director, I want to associate a human resource (user) to a project
+
+class AssociateResourceUI {
+
+}
+
+class AssociateResourceController {
+    +getProjectList()
+    +getSystemUserList()
+    +associateResource(email, projectCode, startDate, endDate, costPerHour, percentageOfAllocation)
+}
+
+class Company {
+    +getProjectStore()
+    +getSystemUserStore()
+}
+
+class ProjectStore {
++getProjects()
++getProjectByCode(code)
++validateAllocation(user, percentageOfAllocation, startDate, endDate)
+}
+
+class Project {
+code : String
+projectName : String
+description : String
+customer : Customer
+typology : Typology
+projectStatus : ProjectStatus
+productBacklog : ProductBacklog
+businessSector : BusinessSector
+projectTeam : ProjectTeam
+startDate : LocalDate
+endDate : LocalDate
+numberOfSprints : int
+budget : double
+sprintDuration : int
++hasCode(code)
++getProjectTeam()
++getTeamMemberByIndex(index)
+}
+
+class SystemUserStore {
++getSystemUsers()
++getUserByEmail(email)
+}
+
+class SystemUser {
+username : String
+email : String
+photo : String
+password : String
+passwordConfirmation : String
+function : String
+activateUser : boolean = False
++SystemUser(username, email, photo, password, passwordConfirmation, function, profile)
++isYourEmail(email)
+}
+
+
+class Resource {
+user : SystemUser
+role : ProjectRole
+startDate : LocalDate
+endDate : LocalDate
+costPerHour : double
+percentageOfAllocation : double
++getUser()
++getPercentageOfAllocation()
++checkAllocationPeriod(startDate, endDate)
+}
+
+AssociateResourceUI ..> AssociateResourceController
+
+AssociateResourceController ..> Company
+AssociateResourceController ..> ProjectStore
+AssociateResourceController ..> SystemUserStore
+SystemUserStore ..> SystemUser
+ProjectStore ..> Project
+ProjectStore ..> Resource
+
+
+Company "1" o- - "1" SystemUserStore: has
+SystemUserStore "1" *- - "0..*" SystemUser: has
+
+
+@enduml
+
+@startuml
+
+skinparam classAttributeIconSize 0
+
+title US007 - As Director, I want to associate a human resource (user) to a project
+
+class AssociateResourceUI {
+
+}
+
+class AssociateResourceController {
+    +getProjectList()
+    +getSystemUserList()
+    +associateResource(email, projectCode, startDate, endDate, costPerHour, percentageOfAllocation)
+}
+
+class Company {
+    +getProjectStore()
+    +getSystemUserStore()
+}
+
+class ProjectStore {
++getProjects()
++getProjectByCode(code)
++validateAllocation(user, percentageOfAllocation, startDate, endDate)
+}
+
+class Project {
+code : String
+projectName : String
+description : String
+customer : Customer
+typology : Typology
+projectStatus : ProjectStatus
+productBacklog : ProductBacklog
+businessSector : BusinessSector
+projectTeam : ProjectTeam
+startDate : LocalDate
+endDate : LocalDate
+numberOfSprints : int
+budget : double
+sprintDuration : int
++hasCode(code)
++getProjectTeam()
++getTeamMemberByIndex(index)
+}
+
+class SystemUserStore {
++getSystemUsers()
++getUserByEmail(email)
+}
+
+class SystemUser {
+username : String
+email : String
+photo : String
+password : String
+passwordConfirmation : String
+function : String
+activateUser : boolean = False
++SystemUser(username, email, photo, password, passwordConfirmation, function, profile)
++isYourEmail(email)
+}
+
+
+class Resource {
+user : SystemUser
+role : ProjectRole
+startDate : LocalDate
+endDate : LocalDate
+costPerHour : double
+percentageOfAllocation : double
++getUser()
++getPercentageOfAllocation()
++checkAllocationPeriod(startDate, endDate)
+}
+
+AssociateResourceUI ..> AssociateResourceController
+
+AssociateResourceController ..> Company
+AssociateResourceController ..> ProjectStore
+AssociateResourceController ..> SystemUserStore
+SystemUserStore ..> SystemUser
+ProjectStore ..> Project
+ProjectStore ..> Resource
+
+
+Company "1" o- - "1" SystemUserStore: has
+SystemUserStore "1" *- - "0..*" SystemUser: has
+
+
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 WET 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: pt
+Country: PT
+--></g></svg>
