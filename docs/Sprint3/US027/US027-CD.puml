@@ -3,7 +3,7 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-title "US014 - As Director, I want to define the Product Owner of a project."
+title "US027 - As Director, I want to define the Product Owner of a project."
 
 class AssignProductOwnerUI {
 }

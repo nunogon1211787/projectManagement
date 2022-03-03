@@ -23,7 +23,7 @@ public class TypologyStoreTest {
         //Arrange
         TypologyStore test = new TypologyStore();
         //Assert
-        assertEquals(test.getTypologyList().size(), 0);
+        assertEquals( 0, test.getTypologyList().size());
         assertNotEquals(test, typologyStore.getTypologyList());
     }
 
@@ -36,7 +36,7 @@ public class TypologyStoreTest {
         //Act
         test.populateDefault();
         //Assert
-        assertEquals(test.getTypologyList().size(), 2);
+        assertEquals( 2,test.getTypologyList().size());
         assertEquals(test.getTypologyList(), typologyStore.getTypologyList());
         assertEquals(tes1, test.getTypology(1));
         assertEquals(tes2, test.getTypology(2));
@@ -76,9 +76,9 @@ public class TypologyStoreTest {
         newTypo3.setIdTypology(3);
         typologyStore.saveTypology(newTypo3);
         //Assert
-        assertEquals(newTypo.getIdTypology(), 3);
-        assertEquals(newTypo3.getIdTypology(), 4);
-        assertEquals(newTypo2.getIdTypology(),0); //ID is 0 when initialized.
+        assertEquals( 3, newTypo.getIdTypology());
+        assertEquals( 4, newTypo3.getIdTypology());
+        assertEquals(0,newTypo2.getIdTypology()); //ID is 0 when initialized.
     }
 
     @Test
@@ -96,9 +96,9 @@ public class TypologyStoreTest {
         typologyStore.saveTypology(newTypo2);
         typologyStore.saveTypology(newTypo3);
         //Assert
-        assertEquals(newTypo.getIdTypology(), 1);
-        assertEquals(newTypo3.getIdTypology(), 3);
-        assertEquals(newTypo2.getIdTypology(),2); //ID is 0 when initialized.
+        assertEquals( 1,newTypo.getIdTypology());
+        assertEquals( 3, newTypo3.getIdTypology());
+        assertEquals(2, newTypo2.getIdTypology()); //ID is 0 when initialized.
     }
 
     @Test //Test for adding new typology not null at Typology List checking attributes and list size.

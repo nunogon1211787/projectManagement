@@ -22,7 +22,7 @@ UI -> Ctrl: changePassword(email, oldPassword, newPassword, newPasswordConfirmat
 Ctrl -> company: getSystemUserStore()
 company --> Ctrl: systemUserStore
 Ctrl -> systemUserStore: getUserByEmail(email)
-loop for each known SystemUser in SystemUserStore
+loop for each known System User in System User Store
 systemUserStore -> user: isYourEmail(email)
 user --> systemUserStore: true
 end
@@ -35,4 +35,5 @@ deactivate user
 user --> Ctrl: true
 Ctrl --> UI: true
 UI --> authenticatedUser: Informs Operation Success
+
 @enduml

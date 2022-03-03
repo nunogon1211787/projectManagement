@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1101px" preserveAspectRatio="none" style="width:1288px;height:1101px;background:#FFFFFF;" version="1.1" viewBox="0 0 1288 1101" width="1288px" zoomAndPan="magnify"><defs><filter height="300%" id="f9zjv8otbraxt" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="535" x="370.25" y="18.6855">US014 - As Director, I want to define the Scrum Master of a project.</text><!--MD5=[7a848277e307ea5692998b089251502a]
+class AssignScrumMasterUI--><rect fill="#FEFECE" filter="url(#f9zjv8otbraxt)" height="41.0938" id="AssignScrumMasterUI" style="stroke:#A80036;stroke-width:1.5;" width="129" x="757.5" y="29.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="123" x="760.5" y="47.0977">AssignScrumMasterUI</text><line style="stroke:#A80036;stroke-width:1.5;" x1="758.5" x2="885.5" y1="54.7344" y2="54.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="758.5" x2="885.5" y1="62.7344" y2="62.7344"/><!--MD5=[256b105d9942267696275f79be4b2da8]
+class AssignScrumMasterController--><rect fill="#FEFECE" filter="url(#f9zjv8otbraxt)" height="96.4375" id="AssignScrumMasterController" style="stroke:#A80036;stroke-width:1.5;" width="201" x="721.5" y="131.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="165" x="739.5" y="149.0977">AssignScrumMasterController</text><line style="stroke:#A80036;stroke-width:1.5;" x1="722.5" x2="921.5" y1="156.7344" y2="156.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="150" x="727.5" y="172.1533">+AssignScrumMasterController</text><line style="stroke:#A80036;stroke-width:1.5;" x1="722.5" x2="921.5" y1="178.5703" y2="178.5703"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="727.5" y="193.9893">+getProject(code)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="102" x="727.5" y="207.8252">+getResource(name)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="189" x="727.5" y="221.6611">+assignRole(resourceName, roleName)</text><!--MD5=[2f3cc9c76803bc317669c2e8d10fd505]
+class ProjectsMapper--><rect fill="#FEFECE" filter="url(#f9zjv8otbraxt)" height="54.9297" id="ProjectsMapper" style="stroke:#A80036;stroke-width:1.5;" width="92" x="215" y="302.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="86" x="218" y="320.0977">ProjectsMapper</text><line style="stroke:#A80036;stroke-width:1.5;" x1="216" x2="306" y1="327.7344" y2="327.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="216" x2="306" y1="335.7344" y2="335.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="77" x="221" y="351.1533">+toDTO(project)</text><!--MD5=[00e7dc08fd1deba716fa711d0329fa07]
+class ProjectTeamMapper--><rect fill="#FEFECE" filter="url(#f9zjv8otbraxt)" height="54.9297" id="ProjectTeamMapper" style="stroke:#A80036;stroke-width:1.5;" width="117" x="539.5" y="302.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="111" x="542.5" y="320.0977">ProjectTeamMapper</text><line style="stroke:#A80036;stroke-width:1.5;" x1="540.5" x2="655.5" y1="327.7344" y2="327.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="540.5" x2="655.5" y1="335.7344" y2="335.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="83" x="545.5" y="351.1533">+toDto(resource)</text><!--MD5=[bbf4e46a62df0b428fb7b209d2b62353]
+class ProjectDTO--><rect fill="#FEFECE" filter="url(#f9zjv8otbraxt)" height="54.9297" id="ProjectDTO" style="stroke:#A80036;stroke-width:1.5;" width="266" x="7" y="456.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="63" x="108.5" y="474.0977">ProjectDTO</text><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="272" y1="481.7344" y2="481.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="8" x2="272" y1="489.7344" y2="489.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="254" x="13" y="505.1533">+ProjectDTO(code, projectName, startDate, endDate)</text><!--MD5=[a5870481d9b29aa2115b4f0879665d45]
+class ResourceDTO--><rect fill="#FEFECE" filter="url(#f9zjv8otbraxt)" height="54.9297" id="ResourceDTO" style="stroke:#A80036;stroke-width:1.5;" width="426" x="308" y="456.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="79" x="481.5" y="474.0977">ResourceDTO</text><line style="stroke:#A80036;stroke-width:1.5;" x1="309" x2="733" y1="481.7344" y2="481.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="309" x2="733" y1="489.7344" y2="489.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="414" x="314" y="505.1533">+ResourceDTO(name, role, startDate, endDate, costPerHour, percentageOfAllocation)</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect fill="#FEFECE" filter="url(#f9zjv8otbraxt)" height="82.6016" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="121" x="982.5" y="288.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="1016.5" y="306.0977">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="983.5" x2="1102.5" y1="313.7344" y2="313.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="983.5" x2="1102.5" y1="321.7344" y2="321.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="59" x="988.5" y="337.1533">+Company()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="88" x="988.5" y="350.9893">+getProjectStore()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="109" x="988.5" y="364.8252">+getProjectRoleStore()</text><!--MD5=[ea85c9eeae48c9b9754651e25079a913]
+class ProjectTeam--><rect fill="#FEFECE" filter="url(#f9zjv8otbraxt)" height="110.2734" id="ProjectTeam" style="stroke:#A80036;stroke-width:1.5;" width="294" x="840" y="750.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="70" x="952" y="768.0977">ProjectTeam</text><line style="stroke:#A80036;stroke-width:1.5;" x1="841" x2="1133" y1="775.7344" y2="775.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="841" x2="1133" y1="783.7344" y2="783.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="846" y="799.1533">+ProjectTeam()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="116" x="846" y="812.9893">+getResourceByName()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="282" x="846" y="826.8252">+assignProjectRole(resource,startDate,sprintDuration,role)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="154" x="846" y="840.6611">+saveResource(newResource)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="279" x="846" y="854.4971">+checkIfRoleCurrentExistInTheProjectTeam(role,startDate)</text><!--MD5=[6b13f1b330d33795af281e5c1dfe1e98]
+class Resource--><rect fill="#FEFECE" filter="url(#f9zjv8otbraxt)" height="165.6172" id="Resource" style="stroke:#A80036;stroke-width:1.5;" width="404" x="660" y="921.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="835" y="939.0977">Resource</text><line style="stroke:#A80036;stroke-width:1.5;" x1="661" x2="1063" y1="946.7344" y2="946.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="661" x2="1063" y1="954.7344" y2="954.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="61" x="666" y="970.1533">+Resource()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="142" x="666" y="983.9893">+Resource(originalResource)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="99" x="666" y="997.8252">+isYourName(name)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="58" x="666" y="1011.6611">+isCurrent()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="68" x="666" y="1025.4971">+setRole(role)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="118" x="666" y="1039.333">+setStartDate(startDate)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="113" x="666" y="1053.1689">+setEndDate(startDate)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="223" x="666" y="1067.0049">+isAvailableToSprint(startDate, sprintDuration)</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="392" x="666" y="1080.8408">+copyUpdateProjectRoleOfAResource(originalResource, startDateNewRole, role)</text><!--MD5=[0cf43f64de24b70e8ffe65ff9ee7abee]
+class ProjectStore--><rect fill="#FEFECE" filter="url(#f9zjv8otbraxt)" height="68.7656" id="ProjectStore" style="stroke:#A80036;stroke-width:1.5;" width="112" x="982" y="449.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="67" x="1004.5" y="467.0977">ProjectStore</text><line style="stroke:#A80036;stroke-width:1.5;" x1="983" x2="1093" y1="474.7344" y2="474.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="983" x2="1093" y1="482.7344" y2="482.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="988" y="498.1533">+ProjectStore()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="100" x="988" y="511.9893">+getProjectByCode()</text><!--MD5=[766ba48250ca7b4272c4555d7e57f905]
+class ProjectRoleStore--><rect fill="#FEFECE" filter="url(#f9zjv8otbraxt)" height="68.7656" id="ProjectRoleStore" style="stroke:#A80036;stroke-width:1.5;" width="140" x="1129" y="449.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="93" x="1152.5" y="467.0977">ProjectRoleStore</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1130" x2="1268" y1="474.7344" y2="474.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1130" x2="1268" y1="482.7344" y2="482.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="94" x="1135" y="498.1533">+ProjectRoleStore()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="128" x="1135" y="511.9893">+getProjectRole(roleName)</text><!--MD5=[79d378210367c0c6ec62ef762ddfbd1b]
+class Project--><rect fill="#FEFECE" filter="url(#f9zjv8otbraxt)" height="110.2734" id="Project" style="stroke:#A80036;stroke-width:1.5;" width="109" x="968.5" y="579.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="38" x="1004" y="597.0977">Project</text><line style="stroke:#A80036;stroke-width:1.5;" x1="969.5" x2="1076.5" y1="604.7344" y2="604.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="969.5" x2="1076.5" y1="612.7344" y2="612.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="47" x="974.5" y="628.1533">+Project()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="88" x="974.5" y="641.9893">+getProjectTeam()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="97" x="974.5" y="655.8252">+getSprintDuration()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="63" x="974.5" y="669.6611">+getSprints()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="974.5" y="683.4971">+hasCode()</text><!--MD5=[65512b4198a937e8c73da9f2b73fc58d]
+class SprintList--><rect fill="#FEFECE" filter="url(#f9zjv8otbraxt)" height="68.7656" id="SprintList" style="stroke:#A80036;stroke-width:1.5;" width="105" x="1169.5" y="771.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="52" x="1196" y="788.5977">SprintList</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1170.5" x2="1273.5" y1="796.2344" y2="796.2344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1170.5" x2="1273.5" y1="804.2344" y2="804.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="59" x="1175.5" y="819.6533">+SprintList()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="93" x="1175.5" y="833.4893">+getCurrentSprint()</text><!--MD5=[452a66c2e8d45f5bd209be454bbcd04f]
+class Sprint--><rect fill="#FEFECE" filter="url(#f9zjv8otbraxt)" height="82.6016" id="Sprint" style="stroke:#A80036;stroke-width:1.5;" width="98" x="1173" y="963.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="32" x="1206" y="980.5977">Sprint</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1174" x2="1270" y1="988.2344" y2="988.2344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1174" x2="1270" y1="996.2344" y2="996.2344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="42" x="1179" y="1011.6533">+Sprint()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="1179" y="1025.4893">+isCurrentSprint()</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="69" x="1179" y="1039.3252">+getEndDate()</text><!--MD5=[a72675cf411451de8fa84ecb0b77ec66]
+link AssignScrumMasterUI to AssignScrumMasterController--><path d="M822,70.7806 C822,85.5306 822,106.4606 822,125.9606 " fill="none" id="AssignScrumMasterUI-to-AssignScrumMasterController" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="822,131.4206,826,122.4206,822,126.4206,818,122.4206,822,131.4206" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[6c9ab9593dcab66c88000d30312b731e]
+link AssignScrumMasterController to Company--><path d="M908.02,227.7806 C923.92,237.2306 940.17,247.4206 955,257.6406 C967.23,266.0706 979.9,275.7506 991.68,285.2006 " fill="none" id="AssignScrumMasterController-to-Company" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="995.64,288.3906,991.1422,279.6288,991.7468,285.2533,986.1224,285.8579,995.64,288.3906" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[954f2649ccec22a9a377401c208f2e11]
+link AssignScrumMasterController to ProjectsMapper--><path d="M721.38,207.2706 C601.04,239.1306 404.28,291.2106 311.91,315.6606 " fill="none" id="AssignScrumMasterController-to-ProjectsMapper" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="307.05,316.9506,316.7762,318.5002,311.8816,315.6641,314.7177,310.7695,307.05,316.9506" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[1d744497bd5d5e8e5e05dadd301fab5b]
+link AssignScrumMasterController to ProjectTeamMapper--><path d="M750.82,227.8306 C715.29,251.3906 673.4,279.1506 642.48,299.6506 " fill="none" id="AssignScrumMasterController-to-ProjectTeamMapper" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="638,302.6206,647.7138,300.995,642.1712,299.8636,643.3026,294.3211,638,302.6206" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[bfe4a276ca661bae30ccdaaf9d140321]
+link AssignScrumMasterController to Project--><path d="M864.67,227.9706 C871.8,237.3706 878.61,247.4806 884,257.6406 C940.85,364.8206 918.35,406.2306 964,518.6406 C971.63,537.4206 981.22,557.2706 990.44,575.0906 " fill="none" id="AssignScrumMasterController-to-Project" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="992.77,579.5806,992.1846,569.7492,990.4713,575.1403,985.0802,573.427,992.77,579.5806" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[23c49a26e2d2e143757bc15774b6d23a]
+link AssignScrumMasterController to ProjectTeam--><path d="M839.47,227.7606 C848.65,256.6106 858,294.5206 858,329.1406 C858,329.1406 858,329.1406 858,635.6406 C858,678.5606 884.61,717.3506 913.66,746.9206 " fill="none" id="AssignScrumMasterController-to-ProjectTeam" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="917.21,750.4806,913.693,741.2811,913.6816,746.938,908.0248,746.9265,917.21,750.4806" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[4a48f8b597d1a7fc83b41d9d546a1fce]
+link AssignScrumMasterController to Resource--><path d="M805.01,227.7906 C796.1,256.6606 787,294.5706 787,329.1406 C787,329.1406 787,329.1406 787,806.6406 C787,844.1406 799.01,883.1806 813.43,916.5206 " fill="none" id="AssignScrumMasterController-to-Resource" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="815.57,921.3906,815.6128,911.5419,813.5592,916.8128,808.2882,914.7592,815.57,921.3906" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[7de1d49b4b07eb43cc53ee8a765bbd5b]
+link ProjectsMapper to ProjectDTO--><path d="M239.65,357.9606 C218.57,384.4506 186.37,424.8906 164.32,452.5906 " fill="none" id="ProjectsMapper-to-ProjectDTO" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="161.14,456.5806,169.8817,452.0438,164.26,452.6735,163.6303,447.0518,161.14,456.5806" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[1957cadf66f3e04eeffae5f463835561]
+link ProjectTeamMapper to ResourceDTO--><path d="M584.41,357.9606 C571.11,384.2306 550.84,424.2306 536.82,451.9106 " fill="none" id="ProjectTeamMapper-to-ResourceDTO" style="stroke:#A80036;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="534.45,456.5806,542.0846,450.3586,536.7089,452.12,534.9475,446.7443,534.45,456.5806" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[9cd393ed138f910b80d3f170bab752ed]
+reverse link Company to ProjectRoleStore--><path d="M1094.42,381.2406 C1117.4,403.6406 1143.89,429.4406 1164.46,449.4806 " fill="none" id="Company-backto-ProjectRoleStore" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#FFFFFF" points="1084.81,371.8706,1086.3121,378.9236,1093.4002,380.2497,1091.8981,373.1968,1084.81,371.8706" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="21" x="1131" y="416.1357">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1083.4368" y="392.7249">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1150.2086" y="438.8995">1</text><!--MD5=[5080d0b1308565521d8577f7e8059843]
+reverse link Company to ProjectStore--><path d="M1041.22,385.1706 C1040.52,406.6106 1039.73,430.6106 1039.11,449.4806 " fill="none" id="Company-backto-ProjectStore" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#FFFFFF" points="1041.66,371.8706,1037.4643,377.7354,1041.2642,383.8641,1045.4599,377.9993,1041.66,371.8706" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="21" x="1042" y="416.1357">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1033.9491" y="392.7249">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1031.6544" y="438.8995">1</text><!--MD5=[c2999c5e21c0a7115ef87c36c02875b6]
+reverse link ProjectStore to Project--><path d="M1033.26,532.0706 C1031.74,547.1106 1030.05,563.8806 1028.48,579.4006 " fill="none" id="ProjectStore-backto-Project" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1034.6,518.8406,1030.0143,524.4058,1033.3877,530.7792,1037.9734,525.214,1034.6,518.8406" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1026.3709" y="539.9939">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="1023.8618" y="568.7981">*</text><!--MD5=[352310352512ea7c8ebcd3b871b8d730]
+reverse link Project to ProjectTeam--><path d="M1008.64,703.0706 C1005.27,718.8706 1001.73,735.5006 998.51,750.6306 " fill="none" id="Project-backto-ProjectTeam" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#FFFFFF" points="1011.41,690.0406,1006.2455,695.0733,1008.9047,701.7762,1014.0692,696.7435,1011.41,690.0406" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1002.5709" y="711.2674">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="992.5863" y="739.664">1</text><!--MD5=[f9d8fe6ce79c321ab87967b8c43ad885]
+reverse link Project to SprintList--><path d="M1087.57,690.4806 C1118.78,716.9806 1155.24,747.9506 1182.31,770.9406 " fill="none" id="Project-backto-SprintList" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#FFFFFF" points="1077.64,682.0406,1079.6205,688.9744,1086.7826,689.8132,1084.8022,682.8794,1077.64,682.0406" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1085.4526" y="684.8354">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1167.0769" y="760.3519">1</text><!--MD5=[726d7aaf8cff47432ba29bbb11d1a704]
+reverse link SprintList to Sprint--><path d="M1222,853.6006 C1222,886.9506 1222,931.2606 1222,963.0706 " fill="none" id="SprintList-backto-Sprint" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1222,840.5106,1218,846.5106,1222,852.5106,1226,846.5106,1222,840.5106" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1214.3984" y="861.4244">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1214.4203" y="952.4178">1</text><!--MD5=[12ab16047cb79fbb7abfb3b5c3592b87]
+reverse link ProjectTeam to Resource--><path d="M945.51,872.0306 C935.44,887.9006 924.55,905.0606 914.06,921.5906 " fill="none" id="ProjectTeam-backto-Resource" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="952.68,860.7306,946.0861,863.6495,946.2443,870.8589,952.8383,867.94,952.68,860.7306" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="940.8343" y="882.3142">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="911.5366" y="910.7259">1</text><!--MD5=[ed08489c2414513ef31d8f4bc4b63f9e]
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+title "US014 - As Director, I want to define the Scrum Master of a project."
+
+class AssignScrumMasterUI {
+}
+
+class AssignScrumMasterController {
+    +AssignScrumMasterController
+    +getProject(code)
+    +getResource(name)
+    +assignRole(resourceName, roleName)
+}
+
+class ProjectsMapper {
+    +toDTO(project)
+    }
+
+class ProjectTeamMapper {
+    +toDto(resource)
+}
+
+class ProjectDTO {
+    +ProjectDTO(code, projectName, startDate, endDate)
+}
+
+class ResourceDTO {
+    +ResourceDTO(name, role, startDate, endDate, costPerHour, percentageOfAllocation)
+}
+
+class Company {
+    +Company()
+    +getProjectStore()
+    +getProjectRoleStore()
+}
+
+class ProjectTeam {
+    +ProjectTeam()
+    +getResourceByName()
+    +assignProjectRole(resource,startDate,sprintDuration,role)
+    +saveResource(newResource)
+    +checkIfRoleCurrentExistInTheProjectTeam(role,startDate)
+}
+
+class Resource {
+    +Resource()
+    +Resource(originalResource)
+    +isYourName(name)
+    +isCurrent()
+    +setRole(role)
+    +setStartDate(startDate)
+    +setEndDate(startDate)
+    +isAvailableToSprint(startDate, sprintDuration)
+    +copyUpdateProjectRoleOfAResource(originalResource, startDateNewRole, role)
+}
+
+class ProjectStore {
+    +ProjectStore()
+    +getProjectByCode()
+}
+
+class ProjectRoleStore {
+    +ProjectRoleStore()
+    +getProjectRole(roleName)
+}
+
+class Project {
+    +Project()
+    +getProjectTeam()
+    +getSprintDuration()
+    +getSprints()
+    +hasCode()
+}
+
+class SprintList {
+    +SprintList()
+    +getCurrentSprint()
+}
+
+class Sprint {
+    +Sprint()
+    +isCurrentSprint()
+    +getEndDate()
+}
+
+AssignScrumMasterUI ..> AssignScrumMasterController
+AssignScrumMasterController ..> Company
+AssignScrumMasterController ..> ProjectsMapper
+AssignScrumMasterController ..> ProjectTeamMapper
+AssignScrumMasterController ..> Project
+AssignScrumMasterController ..> ProjectTeam
+AssignScrumMasterController ..> Resource
+ProjectsMapper ..> ProjectDTO
+ProjectTeamMapper ..> ResourceDTO
+
+Company "1" o- - "1" ProjectRoleStore: has
+Company "1" o- - "1" ProjectStore: has
+ProjectStore "1" *- - "*" Project
+Project "1" o- - "1" ProjectTeam
+Project "1" o- - "1" SprintList
+SprintList "1" *- - "1" Sprint
+ProjectTeam "1" *- - "1" Resource
+
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 GMT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

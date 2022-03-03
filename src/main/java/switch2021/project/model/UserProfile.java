@@ -7,7 +7,7 @@ public class UserProfile {
     /**
      * Class Profile Attributes
      **/
-    private int id_Profile;
+    private int idProfile;
     private String userProfileName;
 
 
@@ -24,7 +24,7 @@ public class UserProfile {
      * Copy Constructor
      */
     public UserProfile(UserProfile originalProfile) {
-        this.id_Profile = originalProfile.id_Profile;
+        this.idProfile = originalProfile.idProfile;
         this.userProfileName = originalProfile.userProfileName;
     }
 
@@ -33,7 +33,7 @@ public class UserProfile {
      * Getters e Setters
      **/
     public int getIdUserProfile() {
-        return id_Profile;
+        return idProfile;
     }
 
     public String getUserProfileName() {
@@ -45,7 +45,7 @@ public class UserProfile {
     }
 
     public void setIdUserProfile(int id) {
-        this.id_Profile = id;
+        this.idProfile = id;
     }
 
 
@@ -74,3 +74,5 @@ public class UserProfile {
         return Objects.hash(userProfileName);
     }
 }
+
+

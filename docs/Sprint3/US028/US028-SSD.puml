@@ -12,6 +12,6 @@ participant ":System" as System
 activate Director
 
 Director -> System: Ask to access project team of a project
-System --> Director: projTeamListDto
+System --> Director: List of resources associated to a project
 
 @enduml

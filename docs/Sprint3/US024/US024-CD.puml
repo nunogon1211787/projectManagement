@@ -41,6 +41,9 @@ class SystemUser {
 }
 
 class SystemUserWithStatusDto {
+-userName : String
+-email : String
+-activateUser : boolean
 +create()
 +create(userName, email, ativateUserStatus)
 +add(systemUserWithStatusDto)

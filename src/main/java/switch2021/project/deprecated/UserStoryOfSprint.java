@@ -1,4 +1,4 @@
-package switch2021.project.depracated;
+package switch2021.project.deprecated;
 
 import lombok.Getter;
 import switch2021.project.model.Task;

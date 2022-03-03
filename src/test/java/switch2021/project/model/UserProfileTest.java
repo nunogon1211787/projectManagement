@@ -1,11 +1,12 @@
 package switch2021.project.model;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import switch2021.project.stores.UserProfileStore;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserProfileTest {
+    Company company;
 
     @Test
     void getNameTest() {
@@ -31,46 +32,21 @@ class UserProfileTest {
         assertEquals(expected, result);
     }
 
-   /*@Test //dão sempre erro ao correr todos mas depois individualmente passam, ver porquê 13-01-22
-    void isValidIdwith1Profile() {
+    @Test
+    void isValidIdWith5Profile() {
         //input
-       UserProfile test = new UserProfile("admin");
-        int check = 0;
+        company = new Company();
+        UserProfile test1 = new UserProfile("SET");
+        company.getUserProfileStore().saveUserProfile(test1);
+        UserProfile test2 = new UserProfile("DET");
+        company.getUserProfileStore().saveUserProfile(test2);
+
+
         //Result
-        assertTrue(test.isValidId(check));
+        assertEquals(4, test1.getIdUserProfile());
+        assertEquals(5, test2.getIdUserProfile());
+
     }
-
-    //achar uma alternativa para testar o erro
-   /* @Test
-    public void validateRequestTestOutOFBound () throws IndexOutOfBoundsException{
-       Company com = new Company();
-        Profile pro = com.arrayProfile.get(7);
-        Throwable exception = assertThrows(IndexOutOfBoundsException.class,
-                () -> { pro.isValidId(20); });
-        Assertions.assertTrue(true);
-    }*/
-
-
-//    @Test
-//    void isValidIdwith5Profile() {
-//        //input
-//        UserProfile test1 = new UserProfile("admin");
-//        UserProfile test2 = new UserProfile("visitor");
-//        UserProfile test3 = new UserProfile("guest");
-//        UserProfile test4 = new UserProfile("user");
-//        UserProfile test5 = new UserProfile("director");
-//        int check1 = 0;
-//        int check2 = 1;
-//        int check3 = 2;
-//        int check4 = 3;
-//        int check5 = 4;
-//        //Result
-//        assertTrue(test1.isValidId(check1));
-//        assertTrue(test2.isValidId(check2));
-//        assertTrue(test3.isValidId(check3));
-//        assertTrue(test4.isValidId(check4));
-//        assertTrue(test5.isValidId(check5));
-//    }
 
     @Test
     void copyConstructorTestName() {
@@ -88,24 +64,9 @@ class UserProfileTest {
         assertEquals("admin", nameOriginal);
     }
 
-    /*@Test
-    void copyConstructorTestType() {
-        //input
-        UserProfile test = new UserProfile("admin", "system");
-        UserProfile copyTest = new UserProfile(test);
-        String newType = "project";
-        copyTest.setType(newType);
-        //Expected
-        String expected = "project";
-        String result = copyTest.getType();
-        String typeOriginal = test.getType();
-        //Result
-        assertEquals(expected, result);
-        assertEquals("system", typeOriginal);
-    }*/
 
     @Test
-    void copyConstructorTest(){
+    void copyConstructorTest() {
         //input
         UserProfile test = new UserProfile("admin");
         UserProfile copyTest = new UserProfile(test);
@@ -113,12 +74,26 @@ class UserProfileTest {
         assertEquals(test, copyTest);
     }
 
+    @Test
+    void overrideTest() {
 
-    /* rever este teste */
+        UserProfile test1 = new UserProfile("admin");
+        UserProfile test2 = new UserProfile("user");
+        UserProfile test3 = new UserProfile("admin");
+        UserProfile test4 = new UserProfile("null");
+        boolean result = test4.equals(null);
 
+        assertNotEquals(test1, test2);
+        assertNotSame(test3, test2);
+        assertEquals(test3.getClass(), test2.getClass());
+        assertNotEquals(null, test1);
+        assertFalse(result);
+        assertNotEquals(test1.hashCode(), test2.hashCode());
+        assertEquals(test1.hashCode(), test3.hashCode());
+        assertEquals(test1.getUserProfileName(), test3.getUserProfileName());
+        assertNotEquals(test1.getUserProfileName(), test2.getUserProfileName());
 
-//    @Test
-//    void isvalinameteste(){
-//        UserProfile teste = new UserProfile("admin");
-//    }
+    }
+
 }
+

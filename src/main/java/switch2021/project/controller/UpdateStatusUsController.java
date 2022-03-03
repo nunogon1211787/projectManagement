@@ -4,6 +4,7 @@ import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UpdateStatusUsController {
@@ -13,12 +14,6 @@ public class UpdateStatusUsController {
          **/
 
         private final Company company;
-        private ProjectStore projectStore;
-        private Project project;
-        private Sprint sprint;
-        private SprintBacklog sprintBacklog;
-        private UserStory userStory;
-        private List<String> usList;
 
         /**
          * Constructor (without SINGLETON)
@@ -34,22 +29,22 @@ public class UpdateStatusUsController {
 
         public List<String> getUsAvailableStatusList() {
                 List<UserStoryStatus> statusList = this.company.getUserStoryStatusStore().getUserStoryStatusList();
-                this.usList = new ArrayList<>();
+                List<String> usList = new ArrayList<>();
                 for (int i = 0; i < statusList.size(); i++) {
                         if (statusList.get(i).isSprintAvailable())
-                                this.usList.add(statusList.get(i).getDescription());
+                                usList.add(statusList.get(i).getDescription());
                 }
-                return this.usList;
+                return Collections.unmodifiableList(usList);
         }
 
         public boolean changeStatusOfUs(String code, int usId, String userST) {
                 UserStoryStatus userStoryStatus = this.company.getUserStoryStatusStore().getUserStoryStatusByDescription(userST);
-                this.projectStore = company.getProjectStore();
-                this.project = this.projectStore.getProjectByCode(code);
-                this.sprint = this.project.getSprints().getCurrentSprint();
-                this.sprintBacklog = this.sprint.getSprintBacklog();
-                this.userStory = this.sprintBacklog.getUserStory(usId);
-                return this.userStory.setUserStoryStatusBoolean(userStoryStatus);
+                ProjectStore projectStore = company.getProjectStore();
+                Project project = projectStore.getProjectByCode(code);
+                Sprint sprint = project.getSprints().getCurrentSprint();
+                SprintBacklog sprintBacklog = sprint.getSprintBacklog();
+                UserStory userStory = sprintBacklog.getUserStory(usId);
+                return userStory.setUserStoryStatusBoolean(userStoryStatus);
         }
 
 }

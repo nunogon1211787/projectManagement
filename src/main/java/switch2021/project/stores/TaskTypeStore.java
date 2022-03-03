@@ -78,12 +78,12 @@ public class TaskTypeStore {
             if(this.taskTypeList.size() != 0) {
                 for (int i = 0; i < this.taskTypeList.size(); i++) {
                     if (validateNewTypeName(type)) {
-                        type.setType_ID(idTaskTypeGenerator());
+                        type.setTypeID(idTaskTypeGenerator());
                         this.taskTypeList.add(type);
                     }
                 }
             } else {
-                    type.setType_ID(idTaskTypeGenerator());
+                    type.setTypeID(idTaskTypeGenerator());
                     this.taskTypeList.add(type);
             }
         }
@@ -108,7 +108,7 @@ public class TaskTypeStore {
     public int idTaskTypeGenerator() {
         int id = 1;
         if (this.taskTypeList.size() > 0) {
-            id = this.taskTypeList.get(taskTypeList.size() - 1).getType_ID() + 1;
+            id = this.taskTypeList.get(taskTypeList.size() - 1).getTypeID() + 1;
         }
         return id;
     }

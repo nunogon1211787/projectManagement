@@ -36,8 +36,8 @@ class ProjectTeamMapper {
     +createResourceDTO(res)
 }
 
-class ResourceDTO {
-    +ResourceDTO()
+class Resource {
+    +Resource()
 }
 
 GetListHResourceProjectUI ..> GetListHResourceProjectController
@@ -48,10 +48,11 @@ GetListHResourceProjectController ..> ProjectStore
 GetListHResourceProjectController ..> Project
 GetListHResourceProjectController ..> ProjectTeamMapper
 
-'GetListHResourceProjectController -> Company
-Company "1" o-- "1" ProjectStore
-ProjectStore"1" *-- "*"Project
-Project"1" *-- "1"ProjectTeam
-ProjectTeamMapper "1" -> "*"ResourceDTO: ??
 
+'GetListHResourceProjectController -> Company
+Company "1" o-- "1" ProjectStore: has
+ProjectStore"1" *-- "*"Project: contains
+Project"1" *-- "1"ProjectTeam: contains
+ProjectTeamMapper "1" *-- "*"Resource: creates
+ProjectTeamMapper "1" *-- "*"ProjectTeam: creates
 @enduml

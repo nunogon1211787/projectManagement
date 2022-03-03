@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="173px" preserveAspectRatio="none" style="width:987px;height:173px;background:#FFFFFF;" version="1.1" viewBox="0 0 987 173" width="987px" zoomAndPan="magnify"><defs><filter height="300%" id="f1cxyuxdns6kr0" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="978" x="2" y="17.4023">Domain Model excerpt - US010 - As Authenticated User, i want to update its own data (e.g. photo, function, ...)</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect codeLine="9" fill="#FEFECE" filter="url(#f1cxyuxdns6kr0)" height="40.1328" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="60" x="335.25" y="73.6992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="338.25" y="90.3008">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="336.25" x2="394.25" y1="97.832" y2="97.832"/><line style="stroke:#A80036;stroke-width:1.5;" x1="336.25" x2="394.25" y1="105.832" y2="105.832"/><!--MD5=[bc064d979c32666ae52f3d7624591b7b]
+class SystemUser--><rect codeLine="12" fill="#FEFECE" filter="url(#f1cxyuxdns6kr0)" height="130.8184" id="SystemUser" style="stroke:#A80036;stroke-width:1.5;" width="141" x="511.75" y="28.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="66" x="549.25" y="44.8008">SystemUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="512.75" x2="651.75" y1="52.332" y2="52.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="59" x="517.75" y="66.9668">-username</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="34" x="517.75" y="79.9219">-email</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="38" x="517.75" y="92.877">-photo</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="58" x="517.75" y="105.832">-password</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="129" x="517.75" y="118.7871">-passwordConfirmation</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="51" x="517.75" y="131.7422">-function</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="72" x="517.75" y="144.6973">-activateUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="512.75" x2="651.75" y1="151.0176" y2="151.0176"/><!--MD5=[29ba05bb23273e963a898f2a55a4d86c]
+reverse link Company to SystemUser--><path codeLine="22" d="M400.48,93.6992 C430.47,93.6992 474.46,93.6992 511.66,93.6992 " fill="none" id="Company-backto-SystemUser" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="395.42,93.6992,404.42,97.6992,400.42,93.6992,404.42,89.6992,395.42,93.6992" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="80" x="413.5" y="87.2676">employed by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="403.3218" y="89.5538">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="6" x="497.6111" y="90.4742">*</text><!--MD5=[6adbea473728de27e219c4a242c174a1]
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title Domain Model excerpt - US010 - As Authenticated User, i want to update its own data (e.g. photo, function, ...)
+
+
+class Company{
+}
+
+class SystemUser{
+- username
+- email
+- photo
+- password
+- passwordConfirmation
+- function
+- activateUser
+}
+
+Company "1" <-right- "*" SystemUser: employed by
+
+@enduml
+
+@startuml
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title Domain Model excerpt - US010 - As Authenticated User, i want to update its own data (e.g. photo, function, ...)
+
+
+class Company{
+}
+
+class SystemUser{
+- username
+- email
+- photo
+- password
+- passwordConfirmation
+- function
+- activateUser
+}
+
+Company "1" <-right- "*" SystemUser: employed by
+
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 WET 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: pt
+Country: PT
+--></g></svg>

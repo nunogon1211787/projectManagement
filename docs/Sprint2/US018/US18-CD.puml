@@ -6,16 +6,18 @@ skinparam classAttributeIconSize 0
 
 title US018 - As PO/SM/TeamMember, I want to consult the Product Backlog, i. e. to get the list of user stories sorted by priority
 
+package "UI"{
 class ProductBacklogSortUI {
-
+}
 }
 
+package "Controllers"{
 class ProductBacklogSortController {
     +getProjectListByUserEmail(String email)
-    +getProject(String code)
     +getUsSortedByPriority()
 }
-
+}
+package "Domain"{
 class Company {
     +getProjectStore()
 }
@@ -28,28 +30,71 @@ class ProjectStore {
 class Project {
 -code : String
 -productBacklog : ProductBacklog
++getCode()
++getProjectName()
++getDescription()
 +getProductBacklog()
 }
 
 class ProductBacklog {
 -userStoryList : List<UserStory>
 +getUsSortedByPriority()
++getName()
++getUserStoryStatus()
++getPriority()
++getDescription()
 }
 
 class UserStory {
+- idUserStory : int
+- name : int
 - userStoryStatus : UserStoryStatus
 - priority : int
 - description : String
-- id_UserStory : int
+- timeEstimate : int
 - parentUserStory : UserStory
+- tasks : TaskList
+- workDone : double
 }
+
+class ProjectsMapper {
++toDtoByUser(projectListByUser)
+}
+
+class ProductBacklogMapper{
++toDto(userStoryList)
+}
+
+class ProjectDTO{
+-code : String
+-projectName : String
+-description : String
++create()
++create(code, ProjectName, description)
++add(projectListByUserDto)
+}
+
+class UserStoryDto{
+-name : String
+-userStoryStatus : UserStoryStatus
+-priority : int
+- description : String
++create()
++create(name, userStoryStatus, priority, description)
++add(userStoryListDto)
+}
+
 
 ProductBacklogSortUI ..> ProductBacklogSortController
 
 ProductBacklogSortController ..> Company
 ProductBacklogSortController ..> ProjectStore
+ProductBacklogSortController ..> ProjectsMapper
 ProductBacklogSortController ..> Project
 ProductBacklogSortController ..> ProductBacklog
+ProductBacklogSortController ..> ProductBacklogMapper
+ProjectsMapper ..> ProjectDTO
+ProductBacklogMapper ..> UserStoryDto
 
 Company "1" o-- "1" ProjectStore: has
 ProjectStore "1" *-- "0..*" Project: has
