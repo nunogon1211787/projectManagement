@@ -24,7 +24,7 @@ public class UserStoryEffortController {
     private SprintBacklog sprintBacklog;
     private UserStoryOfSprint userStoryOfSprint;
 
-    /**
+/*    *
      * Constructor to UI (with SINGLETON)
      **/
 

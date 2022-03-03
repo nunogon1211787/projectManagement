@@ -34,7 +34,7 @@ public class CreateProjectController {
         return company.getBusinessSectorStore().getBusinessSectorByDescription(sector);
     }
 
-    public boolean createProject(String code, String name, String description, String customer, String typology,
+    public boolean createProject(String name, String description, String customer, String typology,
                                  String businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
         Project project = this.company.getProjectStore().createProject(name, description, getCustomer(customer),

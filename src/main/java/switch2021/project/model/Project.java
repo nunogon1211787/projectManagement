@@ -58,7 +58,7 @@ public class Project {
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
 
-        this.productBacklog = new ProductBacklog(); // o objeto project tem objeto productbacklog (metodo) como parametro
+        this.productBacklog = new ProductBacklog();
         this.projectTeam = new ProjectTeam();
     }
 
@@ -66,7 +66,7 @@ public class Project {
     /**
      * Set End Date
      **/
-
+    //TODO change LocalDate.now() to LocalDate.to()
     //Gives the project an end date
     public boolean setEndDate() {
         this.endDate = LocalDate.now();

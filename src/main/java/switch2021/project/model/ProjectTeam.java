@@ -13,7 +13,7 @@ public class ProjectTeam {
     /**
      * ProjectTeam's Attribute
      **/
-    private List<Resource> projectTeamList;  //Resource´s List in a Project.
+    private final List<Resource> projectTeamList;  //Resource´s List in a Project.
 
 
     /**

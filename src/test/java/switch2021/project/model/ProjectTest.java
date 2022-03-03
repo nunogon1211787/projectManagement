@@ -45,25 +45,25 @@ class ProjectTest {
     public void checkProjectCreation() {
         //Real and Expected
         String code = proj.getCode();
-        String valuecode = "Project_2022_1";
+        String valueCode = "Project_2022_1";
 
         String name = proj.getProjectName();
         String valueName = "prototype";
 
         String description = proj.getDescription();
-        String valuedescription = "test1234";
+        String valueDescription = "test1234";
 
         Customer customer = company.getProjectStore().getProjectByCode("Project_2022_1").getCustomer();
         Customer valueCustomer = company.getCustomerStore().getCustomerByName("Teste");
 
         Typology typology = company.getProjectStore().getProjectByCode("Project_2022_1").getTypology();
-        Typology valuetypology = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology valueTypology = company.getTypologyStore().getTypology("Fixed Cost");
 
         BusinessSector sector = company.getProjectStore().getProjectByCode("Project_2022_1").getBusinessSector();
         BusinessSector valueSector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
         ProjectStatus status = company.getProjectStore().getProjectByCode("Project_2022_1").getProjectStatus();
-        ProjectStatus valuestatus = company.getProjectStatusStore().getProjectStatusByDescription("Planned");
+        ProjectStatus valueStatus = company.getProjectStatusStore().getProjectStatusByDescription("Planned");
 
         LocalDate date = company.getProjectStore().getProjectByCode("Project_2022_1").getStartDate();
         LocalDate valueDate = LocalDate.of(2021, 12, 12);
@@ -79,13 +79,13 @@ class ProjectTest {
 
 
         //Result
-        assertEquals(valuecode, code);
+        assertEquals(valueCode, code);
         assertEquals(valueName, name);
-        assertEquals(valuedescription, description);
+        assertEquals(valueDescription, description);
         assertEquals(valueCustomer,customer);
-        assertEquals(valuetypology,typology);
+        assertEquals(valueTypology,typology);
         assertEquals(valueSector,sector);
-        assertEquals(valuestatus,status);
+        assertEquals(valueStatus,status);
         assertEquals(valueDate,date);
         assertEquals(valueEndDate,endDate);
         assertEquals(valueNrSprint,numberOfSprints);
@@ -294,7 +294,6 @@ class ProjectTest {
         currentProject.getProjectTeam().saveResource(manuelmartins);
     }
 
-
     @Test
     @DisplayName("validate that list have results (not null) and check list size are correct")
     public void getProductBacklogWithResults() {
@@ -326,7 +325,6 @@ class ProjectTest {
         assertFalse(this.proj3.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
     }
 
-
     @Test
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTest() {
@@ -352,7 +350,7 @@ class ProjectTest {
     }
 
     @Test
-    @DisplayName("create task")
+    @DisplayName("Create task")
     void getActivitiesOfAProject() {
         //Arrange
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
@@ -460,6 +458,7 @@ class ProjectTest {
     }
 
     @Test
+    @DisplayName("Test Override")
     public void overrideTest() {
         //Arrange
         ProductBacklog backlog = new ProductBacklog();

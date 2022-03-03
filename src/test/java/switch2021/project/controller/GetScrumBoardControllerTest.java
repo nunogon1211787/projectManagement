@@ -32,13 +32,18 @@ public class GetScrumBoardControllerTest {
         //Act
         ScrumBoardMapper mapper = new ScrumBoardMapper();
         GetScrumBoardController controller = new GetScrumBoardController(company,mapper);
+        controller.getProject("Project_2022_1");
+        controller.getCurrentSprint();
+        controller.getSprintBacklog();
+        controller.getUserStoryList();
+
 
         //Assert
-        assertEquals(controller.getScrumBoard("Project_2022_1").get(0).getUserStoryId(),mapper.toDTO(userStory).getUserStoryId());
-        assertEquals(controller.getScrumBoard("Project_2022_1").get(0).getUserStoryPriority(),mapper.toDTO(userStory).getUserStoryPriority());
-        assertEquals(controller.getScrumBoard("Project_2022_1").get(0).getUserStoryTimeEstimate(),mapper.toDTO(userStory).getUserStoryTimeEstimate());
-        assertEquals(controller.getScrumBoard("Project_2022_1").get(0).getUserStoryStatus(),mapper.toDTO(userStory).getUserStoryStatus());
-        assertEquals(controller.getScrumBoard("Project_2022_1").get(0).getUserStoryName(),mapper.toDTO(userStory).getUserStoryName());
-        assertEquals(controller.getScrumBoard("Project_2022_1").get(0).getUserStoryDescription(),mapper.toDTO(userStory).getUserStoryDescription());
+        assertEquals(controller.getScrumBoard().get(0).getUserStoryId(),mapper.toDTO(userStory).getUserStoryId());
+        assertEquals(controller.getScrumBoard().get(0).getUserStoryPriority(),mapper.toDTO(userStory).getUserStoryPriority());
+        assertEquals(controller.getScrumBoard().get(0).getUserStoryTimeEstimate(),mapper.toDTO(userStory).getUserStoryTimeEstimate());
+        assertEquals(controller.getScrumBoard().get(0).getUserStoryStatus(),mapper.toDTO(userStory).getUserStoryStatus());
+        assertEquals(controller.getScrumBoard().get(0).getUserStoryName(),mapper.toDTO(userStory).getUserStoryName());
+        assertEquals(controller.getScrumBoard().get(0).getUserStoryDescription(),mapper.toDTO(userStory).getUserStoryDescription());
     }
 }
