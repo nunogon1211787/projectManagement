@@ -113,7 +113,8 @@ public class Resource {
      **/
     public boolean checkAllocationPeriod(LocalDate startDate, LocalDate endDate) {
         boolean msg = false;
-        if ((startDate.isEqual(this.startDate) || startDate.isEqual(this.endDate) || endDate.isEqual(this.endDate) || endDate.isEqual(this.startDate))
+        if ((startDate.isEqual(this.startDate) || startDate.isEqual(this.endDate) || endDate.isEqual(this.endDate)
+                || endDate.isEqual(this.startDate))
             || (startDate.isBefore(this.startDate) && endDate.isAfter(this.startDate))
             || (startDate.isBefore(this.endDate) && endDate.isAfter(this.endDate))
             || (startDate.isAfter(this.startDate) && endDate.isBefore(this.endDate))) {
