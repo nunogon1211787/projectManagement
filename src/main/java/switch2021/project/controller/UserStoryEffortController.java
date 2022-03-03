@@ -1,11 +1,11 @@
 package switch2021.project.controller;
 
-import switch2021.project.depracated.UserStoryOfSprint;
+import switch2021.project.deprecated.UserStoryOfSprint;
 import switch2021.project.model.*;
 import switch2021.project.stores.*;
-import switch2021.project.utils.App;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UserStoryEffortController {
@@ -14,9 +14,7 @@ public class UserStoryEffortController {
      * Attributes
      **/
 
-    private Company company;
-    private ProjectStore projStore;
-    private List<Project> projectList;
+    private final Company company;
     private Project proj;
     private SprintList sprintList;
     private List<Sprint> sprintsList;
@@ -24,13 +22,6 @@ public class UserStoryEffortController {
     private SprintBacklog sprintBacklog;
     private UserStoryOfSprint userStoryOfSprint;
 
-/*    *
-     * Constructor to UI (with SINGLETON)
-     **/
-
-//    public UserStoryEffortController() { //tem como função o dominio para os proximos passos
-//        this.company = App.getInstance().getCompany();
-//    }
 
     /**
      * Constructor to test (without SINGLETON)
@@ -45,10 +36,10 @@ public class UserStoryEffortController {
      **/
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
-        this.projectList = new ArrayList<>();
-        this.projStore = this.company.getProjectStore();
-        this.projectList = this.projStore.getCurrentProjectsByUserEmail(email);
-        return this.projectList;
+        List<Project> projectList = new ArrayList<>();
+        ProjectStore projStore = this.company.getProjectStore();
+        projectList = projStore.getCurrentProjectsByUserEmail(email);
+        return Collections.unmodifiableList(projectList);
     }
 
     public Project getProjectByCode(String code) {
@@ -60,7 +51,7 @@ public class UserStoryEffortController {
         this.sprintsList = new ArrayList<>();
         this.sprintList = this.proj.getSprints();
         this.sprintsList = this.sprintList.getSprintList();
-        return this.sprintsList;
+        return Collections.unmodifiableList(sprintsList);
     }
 
     public Sprint getSprint(int id) {
@@ -70,12 +61,12 @@ public class UserStoryEffortController {
     }
 
     public SprintBacklog getSprintBacklog() {
-        this.sprintBacklog=this.sprint.getSprintBacklog();
+        this.sprintBacklog = this.sprint.getSprintBacklog();
         return this.sprintBacklog;
     }
 
-    public UserStoryOfSprint getUserStory(int id_UserStory){
-        this.userStoryOfSprint= this.sprintBacklog.getUserStoryDeprecated(id_UserStory);
+    public UserStoryOfSprint getUserStory(int id_UserStory) {
+        this.userStoryOfSprint = this.sprintBacklog.getUserStoryDeprecated(id_UserStory);
         return this.userStoryOfSprint;
     }
 

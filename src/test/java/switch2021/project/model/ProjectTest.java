@@ -171,6 +171,59 @@ class ProjectTest {
 
     @Test
     @DisplayName("Project exceptions test")
+    public void createProjectExceptionsTest_descriptionLenght2() {
+        //Arrange
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        LocalDate date = LocalDate.now();
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            company.getProjectStore().createProject("prototype", "tes", customer,
+                    typo, sector, date, 7, 5000);
+        });
+        //Assert
+        assertTrue(exception.getMessage().contains("Description must be at least 5 characters"));
+    }
+
+    @Test
+    @DisplayName("Project exceptions test")
+    public void createProjectExceptionsTest_descriptionLenght3() {
+        //Arrange
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        LocalDate date = LocalDate.now();
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            company.getProjectStore().createProject("prototype", "ts", customer,
+                    typo, sector, date, 7, 5000);
+        });
+        //Assert
+        assertTrue(exception.getMessage().contains("Description must be at least 5 characters"));
+    }
+
+    @Test
+    @DisplayName("Project exceptions test")
+    public void createProjectExceptionsTest_descriptionLenght4() {
+        //Arrange
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        LocalDate date = LocalDate.now();
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            company.getProjectStore().createProject("prototype", "t", customer,
+                    typo, sector, date, 7, 5000);
+        });
+        //Assert
+        assertTrue(exception.getMessage().contains("Description must be at least 5 characters"));
+    }
+
+
+
+    @Test
+    @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_numberOfSprints() {
         //Arrange
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");

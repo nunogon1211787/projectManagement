@@ -2,8 +2,10 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.stores.SystemUserStore;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SystemUserTest {
@@ -70,7 +72,7 @@ class SystemUserTest {
         //Arrange
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10", "HELLO", "HELLO", "png_123", userProfile);
+        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10", "HELLO", "HELLO", "png_123", userProfile);
         //Act
         joana.updatePassword("HELLO", "ghi", "ghi");
         //Assert
@@ -85,7 +87,7 @@ class SystemUserTest {
         //Arrange
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
                 "HELLO_01", "HELLO_01", "png_123", userProfile);
         //Act
         assertFalse(joana.updatePassword("HELLO_02", "GOODBYE", "GOODBYE"));
@@ -112,10 +114,22 @@ class SystemUserTest {
         //Arrange
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_123", userProfile);
         //Act and Assert
         assertTrue(joana.setAllData("Joana Silva", "Aluna_100", "img_900"));
+    }
+
+    @Test
+    public void checkAllDataSuccess() {
+
+        //Arrange
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser cris = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        //Act and Assert
+        assertTrue(cris.checkAllData("CDC", "ALN", "img_900"));
     }
 
     @Test
@@ -124,12 +138,11 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser(" ", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser(" ", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.checkAllData(" ", "Aluna_10", "img_123");
         });
     }
-
 
 
     @Test
@@ -138,7 +151,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("J", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("J", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.checkAllData("J", "Aluna_10", "img_123");
         });
@@ -150,7 +163,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("J", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("J", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.checkAllData("JJ", "Aluna_10", "img_123");
         });
@@ -162,7 +175,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("J", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("J", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.checkAllData("", "Aluna_10", "img_123");
         });
@@ -174,7 +187,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("JJJJ", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("JJJJ", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.setAllData("J", "A", "img_900");
 
@@ -187,7 +200,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("JJJJ", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("JJJJ", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.setAllData("  ", "", "");
         });
@@ -199,7 +212,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("JJJJ", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("JJJJ", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.setAllData("JJ", "Al", "img_900");
         });
@@ -211,7 +224,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("JJJJ", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("JJJJ", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.setAllData(null, null, null);
         });
@@ -223,7 +236,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("Joana Silva", "112@isep.ipp.pt",
                     "", "123", "123", "img_900", tes);
             newUser.checkAllData("Joana Silva", "", "img_123");
         });
@@ -235,7 +248,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("Joana Silva", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.checkAllData("Joana Silva", "A", "img_123");
         });
@@ -247,7 +260,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("Joana Silva", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.setAllData("Joana Silva", "A", "img_123");
         });
@@ -259,7 +272,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("Joana Silva", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.checkAllData("Joana Silva", "AA", "img_123");
         });
@@ -271,7 +284,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("Joana Silva", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.setAllData("Joana Silva", "   ", "img_123");
         });
@@ -283,7 +296,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("Joana Silva", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
             newUser.checkAllData("Joana Silva", "   ", "img_123");
         });
@@ -295,7 +308,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("Joana Silva", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "", tes);
             newUser.checkAllData("Joana Silva", "Aluna_10", "");
         });
@@ -307,7 +320,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("Joana Silva", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "", tes);
             newUser.checkAllData("Joana Silva", "Aluna_10", "  ");
         });
@@ -319,7 +332,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile tes = new UserProfile("ddd");
-            SystemUser newUser = new SystemUser("Joana Silva", "1211770@isep.ipp.pt",
+            SystemUser newUser = new SystemUser("Joana Silva", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "", tes);
             newUser.setAllData("Joana Silva", "Aluna_10", "");
         });
@@ -616,11 +629,11 @@ class SystemUserTest {
         //newUser3 is different (different email)
         SystemUser newUser3 = company.getSystemUserStore().createSystemUser(userName, email2, function, password, passwordConfirmation, photo, profile);
         //Assert
-        assertNotSame(newUser,newUser2);
-        assertEquals(newUser,newUser2);
-        assertEquals(newUser.hashCode(),newUser2.hashCode());
-        assertNotEquals(newUser,newUser3);
-        assertNotEquals(newUser.hashCode(),newUser3.hashCode());
+        assertNotSame(newUser, newUser2);
+        assertEquals(newUser, newUser2);
+        assertEquals(newUser.hashCode(), newUser2.hashCode());
+        assertNotEquals(newUser, newUser3);
+        assertNotEquals(newUser.hashCode(), newUser3.hashCode());
     }
 
     @Test
@@ -742,7 +755,7 @@ class SystemUserTest {
         String email = "xxxx@isep.ipp.pt";
         String func = "tester";
         int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List <UserProfile> profiles = new ArrayList<>();// profileId
+        List<UserProfile> profiles = new ArrayList<>();// profileId
         profiles.add(pro);
         //Assert
         assertTrue(test.hasThisData(name, email, func, state, profiles));
@@ -1041,7 +1054,7 @@ class SystemUserTest {
 
     @Test
     public void inactivationUser() {
-        //Test to activate the user
+        //Test to inactivate the user
         //Arrange
         UserProfile tes = new UserProfile("Visitor");
         SystemUser ana = new SystemUser("Ana", "1211@isep.ipp.pt", "User_12",
@@ -1059,7 +1072,7 @@ class SystemUserTest {
 
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_123", userProfile);
         //Act and Assert
         assertThrows(IllegalArgumentException.class, () -> {
@@ -1074,7 +1087,7 @@ class SystemUserTest {
 
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_123", userProfile);
         //Act and Assert
         assertThrows(IllegalArgumentException.class, () -> {
@@ -1089,12 +1102,109 @@ class SystemUserTest {
 
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser joana = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
+        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_123", userProfile);
         //Act and Assert
         assertThrows(IllegalArgumentException.class, () -> {
             assertFalse(joana.setAllData("Cris", "User_12", ""));
         });
+    }
+
+    @Test
+    public void setUserNameIsEmpty() {
+
+        //Arrange
+
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser teste = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue = teste.getUserName();
+        SystemUser teste2 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue2 = teste.getUserName();
+        SystemUser teste3 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue3 = teste.getUserName();
+        SystemUser teste4 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue4 = teste.getUserName();
+
+        //Act
+
+        teste.setUserName("D");
+        teste2.setUserName("");
+        teste3.setUserName("CDC");
+        teste4.setUserName("CD");
+
+        // Assert
+        assertNotEquals(originalValue, teste.getUserName());
+        assertEquals(originalValue2, teste2.getUserName());
+        assertNotEquals(originalValue3, teste3.getUserName());
+        assertEquals("CDC", teste3.getUserName());
+        assertEquals("CD", teste4.getUserName());
+    }
+
+    @Test
+    public void setFunction() {
+
+        //Arrange
+
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser teste = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue = teste.getFunction();
+        SystemUser teste2 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue2 = teste.getFunction();
+        SystemUser teste3 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue3 = teste.getFunction();
+        SystemUser teste4 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue4 = teste.getFunction();
+
+        //Act
+
+        teste.setFunction("D");
+        teste2.setFunction("");
+        teste3.setFunction("CDC");
+        teste4.setFunction("CD");
+
+        // Assert
+        assertEquals(originalValue, teste.getFunction());
+        assertEquals(originalValue2, teste2.getFunction());
+        assertNotEquals(originalValue3, teste3.getFunction());
+        assertEquals("CDC", teste3.getFunction());
+        assertNotEquals("CD", teste4.getFunction());
+    }
+
+    @Test
+    public void setPhoto() {
+
+        //Arrange
+
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser teste = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue = teste.getPhoto();
+        SystemUser teste2 = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue2 = teste.getPhoto();
+
+        //Act
+
+        teste.setPhoto("D");
+        teste2.setPhoto("");
+
+
+        // Assert
+        assertEquals(originalValue2, teste2.getPhoto());
+        assertNotEquals(originalValue, teste.getPhoto());
+        assertEquals("D", teste.getPhoto());
+
     }
 
 

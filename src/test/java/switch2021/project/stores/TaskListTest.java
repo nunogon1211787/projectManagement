@@ -19,7 +19,7 @@ public class TaskListTest {
         TaskList test = new TaskList();
         //Assert
         int listSizeResult = test.getTaskList().size();
-        assertEquals(listSizeResult, 0);
+        assertEquals( 0, listSizeResult);
         assertTrue(test.getTaskList().isEmpty());
     }
 

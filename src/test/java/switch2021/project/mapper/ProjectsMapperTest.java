@@ -1,6 +1,8 @@
 package switch2021.project.mapper;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.controller.ProductBacklogSortController;
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.model.*;
 
@@ -180,4 +182,73 @@ public class ProjectsMapperTest {
         assertNotEquals(projectDTO1.getProjectName(), projectDTO3.getProjectName());
         assertNotEquals(projectDTO1.getStartDate(), projectDTO3.getStartDate());
     }
+
+    @Test
+    @DisplayName("check if the list size is correct")
+    public void getProjectListByUserEmailWith2Projects() {
+        //Arrange
+        Company company = new Company();
+        ProjectsMapper mapper = new ProjectsMapper();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        LocalDate startDate = LocalDate.of(2021, 12, 31);
+        LocalDate endDate = LocalDate.of(2022, 1, 5);
+        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        ProjectTeam projectTeam = new ProjectTeam();
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
+        project.addResource(input);
+        project2.addResource(input);
+
+        // Act
+        List<ProjectDTO> projectList = mapper.toDtoByUser(company.getProjectStore().getProjectList());
+        // Assert
+        assertEquals(2, projectList.size());
+
+    }
+
+    @Test
+    @DisplayName("check if the created DTO list contains correct information")
+    void getProjectListDTOSuccess() {
+        //Arrange
+        Company company = new Company();
+        ProjectsMapper mapper = new ProjectsMapper();
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        LocalDate startDate = LocalDate.of(2021, 12, 31);
+        LocalDate endDate = LocalDate.of(2022, 1, 5);
+        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        ProjectTeam projectTeam = new ProjectTeam();
+        company.getProjectStore().saveNewProject(project);
+        company.getProjectStore().saveNewProject(project2);
+        project.addResource(input);
+        project2.addResource(input);
+
+        // Act
+
+        List<ProjectDTO> projectList = mapper.toDtoByUser(company.getProjectStore().getProjectList());
+
+        // Assert
+        assertEquals(project.getCode(),projectList.get(0).getCode());
+        assertEquals(project.getProjectName(), projectList.get(0).getProjectName());
+        assertEquals(project.getDescription(), projectList.get(0).getDescription());
+        assertEquals(project2.getCode(),projectList.get(1).getCode());
+        assertEquals(project2.getProjectName(), projectList.get(1).getProjectName());
+        assertEquals(project2.getDescription(), projectList.get(1).getDescription());
+    }
+
 }

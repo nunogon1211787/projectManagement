@@ -47,15 +47,17 @@ public class ProductBacklogTest {
         UserStoryStatus status = new UserStoryStatus("To do");
         int priority = 1;
         String description = "Default Story";
+        String name = "US001";
 
         // Act
         UserStory userStory = productBacklog.createUserStory(
-                "US001", priority, description, 5);
+                name, priority, description, 5);
         // Assert
         assertNotNull(userStory);
         assertEquals(status, userStory.getUserStoryStatus());
         assertEquals(priority, userStory.getPriority());
         assertEquals(description, userStory.getDescription());
+        assertEquals(name,userStory.getName());
     }
 
 
@@ -326,8 +328,8 @@ public class ProductBacklogTest {
 
         assertEquals(userStory.getUserStoryStatus(), company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do"));
         assertEquals(userStory.getParentUserStory(), userStoryToRefine);
-        assertEquals(userStory.getPriority(), 5);
-        assertEquals(userStory.getDescription(), "234test234");
+        assertEquals( 5, userStory.getPriority());
+        assertEquals( "234test234", userStory.getDescription());
 
     }
 

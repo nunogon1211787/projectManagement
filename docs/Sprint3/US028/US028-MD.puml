@@ -19,6 +19,9 @@ together {
 class Resource{
 -startDate
 -endDate
+-role
+-percentageOfAllocation
+-costPerHour
 }
 class SystemUser{
 -name

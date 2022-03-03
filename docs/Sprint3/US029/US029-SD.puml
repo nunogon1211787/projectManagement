@@ -24,7 +24,6 @@ activate ProjectManager
 ProjectManager -> UI: Asks to Start a Sprint
 UI -> Ctrl: startASprint(sprintDTO)
 Ctrl -> sprintDTO: code = getCode()
-sprintDTO --> Ctrl: code
 deactivate sprintDTO
 Ctrl -> company: getProjectStore()
 company --> Ctrl: projectStore

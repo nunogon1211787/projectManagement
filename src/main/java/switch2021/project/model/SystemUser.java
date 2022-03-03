@@ -1,6 +1,5 @@
 package switch2021.project.model;
 
-
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.stores.UserProfileStore;
@@ -28,7 +27,7 @@ public class SystemUser {
     /**
      * Constructor
      **/
-    public SystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile profile) {
+    public SystemUser (String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile profile) {
         checkUserNameRules(userName);
         checkEmailRules(email);
         checkFunctionRules(function);
@@ -59,14 +58,14 @@ public class SystemUser {
     /**
      * Setting Methods (outside of lombock)
      **/
-    private void setUserName(String userName) {
-        if (!userName.trim().isEmpty() || !(userName.length() < 2)) {
+    public void setUserName(String userName) {
+        if (!userName.trim().isEmpty() && (userName.length() >= 1)) {
             this.userName = userName;
         }
     }
 
-    private void setFunction(String function) {
-        if (!function.trim().isEmpty() || !(function.length() < 2)) {
+    public void setFunction(String function) {
+        if (!function.trim().isEmpty() && (function.length() > 2)) {
             this.function = function;
         }
     }
@@ -76,7 +75,7 @@ public class SystemUser {
         this.password = encryptPassword(password);
     }
 
-    private void setPhoto(String photo) {
+    public void setPhoto(String photo) {
         if (!photo.trim().isEmpty()) {
             this.photo = photo;
         }
@@ -93,6 +92,11 @@ public class SystemUser {
             msg = true;
         }
         return msg;
+    }
+
+    public boolean setActivateUser(Boolean x){
+        this.activateUser = x;
+        return true;
     }
 
 
@@ -148,10 +152,10 @@ public class SystemUser {
         return true;
     }
 
-    public boolean checkAssignedProfileList(UserProfile Profile) {
+    public boolean checkAssignedProfileList(UserProfile profile) {
         boolean msg = true;
         for (UserProfile i : assignedProfileList) {
-            if (i.equals(Profile)) {
+            if (i.equals(profile)) {
                 msg = false;
                 break;
             }
@@ -298,7 +302,7 @@ public class SystemUser {
             }
         }
 
-        if (profileChoosenList.size() != 0) {
+        if (!profileChoosenList.isEmpty()) {
 
             if (this.assignedProfileList == null) {
                 result = false;

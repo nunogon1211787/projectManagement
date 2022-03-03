@@ -19,14 +19,6 @@ public class StartASprintController {
 
 
     /**
-     * Constructor to UI (with SINGLETON)
-     **/
-
-//    public StartASprintController() {
-//        this.company = App.getInstance().getCompany();
-//    }
-
-    /**
      * Constructor to test (without SINGLETON)
      **/
 

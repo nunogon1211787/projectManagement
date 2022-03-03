@@ -1,7 +1,6 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.*;
-import switch2021.project.utils.App;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -43,7 +42,13 @@ public class EditProjectInfoController {
     public boolean editProject(String name,String description, LocalDate startDate, LocalDate endDate, int numberOfSprints,
                                double budget, int sprintDuration, ProjectStatus status, ProjectTeam projectTeam){
 
-        project.validateProjectFields(name,description,budget,numberOfSprints);
+        boolean result = true;
+
+        try {
+            project.validateProjectFields(name, description, budget, numberOfSprints);
+        }catch(IllegalArgumentException e){
+            result = false;
+        }
 
         this.project.setProjectName(name);
         this.project.setDescription(description);
@@ -54,7 +59,8 @@ public class EditProjectInfoController {
         this.project.setProjectStatus(status);
         this.project.setSprintDuration(sprintDuration);
         this.project.setProjectTeam(projectTeam);
-        return true;
+
+        return result;
     }
 }
 

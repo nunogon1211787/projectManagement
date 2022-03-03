@@ -2,6 +2,7 @@ package switch2021.project.stores;
 
 import switch2021.project.model.UserStoryStatus;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UserStoryStatusStore {
@@ -37,7 +38,7 @@ public class UserStoryStatusStore {
      **/
 
     public List<UserStoryStatus> getUserStoryStatusList() {
-        return userStoryStatusList;
+        return Collections.unmodifiableList(userStoryStatusList);
     }
 
     public UserStoryStatus getUserStoryStatusByDescription(String description){

@@ -4,60 +4,32 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
+title Example of a Class Diagram
 
-class CreateUserStoryUI {
+class XXXUI {
 
 }
 
-class CreateUserStoryController {
-    +getProjectListByUserEmail(String email)
-    +getProjectByCode(String code)
-    +createUserStory(status, priority, description)
+class XXXController {
+    +authenticate(string userId, string pwd): bool
 }
 
-class Company {
-    +getProjectStore()
+class Class1 {
+    -designation
+    +doLogin(string userId, string pwd): UserToken
 }
 
-class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
+class Class2 {
+    -id
+    -name
+    -address
+    -password
 }
 
-class Project {
--code : String
--productBacklog : ProductBacklog
-+getProductBacklog()
-}
+XXXUI ..> XXXController
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+createUserStory(status, priority, description)
-+isValideUserStory(status, priority, description)
-+saveUserStory(us)
-+validateUserStory(us)
-}
+XXXController ..> Class1
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
-+UserStory(status, priority,description)
-}
-
-CreateUserStoryUI ..> CreateUserStoryController
-
-CreateUserStoryController ..> Company
-CreateUserStoryController ..> ProjectStore
-CreateUserStoryController ..> Project
-CreateUserStoryController ..> ProductBacklog
-
-Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+Class1 "1" -> "0..*" Class2: knows
 
 @enduml

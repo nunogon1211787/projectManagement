@@ -4,19 +4,25 @@ hide circle
 skinparam classAttributeIconSize 0
 hide methods
 
-title Example of Domain Model extract
+title Domain Model extract - US013 - As Administrator, I want to create user profiles
 
-class Class1 {
-    -designation
+class Company {
 }
 
-class Class2 {
-    -id
-    -name
-    -address
-    -password
+class SystemUser{
+      - userName
+      - email
+      - photo
+      - password
+      - function
+      - activateUser
+      }
+
+class UserProfile {
+    - name
 }
 
-Class1 "1" -> "0..*" Class2: knows
+SystemUser "*" -> "1..*" UserProfile: knows
+SystemUser "*" -> "1" Company: Employed
 
 @enduml

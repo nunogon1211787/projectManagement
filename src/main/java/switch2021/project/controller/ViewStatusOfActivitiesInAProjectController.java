@@ -14,17 +14,9 @@ public class ViewStatusOfActivitiesInAProjectController {
      * Attributes
      **/
 
-    private Company company;
-    private ProjectStore projectStore;
+    private final Company company;
     private Project project;
-    List<Project> arrayProject;
     List<Task> listOfTasks;
-
-    /**
-     * Constructor to UI (with SINGLETON)
-     **/
-
-//    public ViewStatusOfActivitiesInAProjectController(){ this.company = App.getInstance().getCompany(); }
 
     /**
      * Constructor to test (without SINGLETON)
@@ -37,8 +29,8 @@ public class ViewStatusOfActivitiesInAProjectController {
      **/
 
     public List<Project> getProjectListByUser(String email) {
-        this.projectStore = this.company.getProjectStore();
-        this.arrayProject = this.projectStore.getProjectsByUserEmail(email);
+        ProjectStore projectStore = this.company.getProjectStore();
+        List<Project> arrayProject = projectStore.getProjectsByUserEmail(email);
         return arrayProject;
     }
 
@@ -47,8 +39,8 @@ public class ViewStatusOfActivitiesInAProjectController {
      **/
 
     public Project getProjectByCode(String code){
-        this.projectStore = this.company.getProjectStore();
-        this.project = this.projectStore.getProjectByCode(code);
+        ProjectStore projectStore = this.company.getProjectStore();
+        this.project = projectStore.getProjectByCode(code);
         return this.project;
     }
 

@@ -4,7 +4,7 @@ hide circle
 skinparam classAttributeIconSize 0
 hide methods
 
-title Domain Model extract
+title Domain Model extract US024 - As Administrator, I want to get a list all user accounts and their status
 
 class Company{
 }
@@ -18,24 +18,8 @@ class SystemUser{
       - activateUser
       }
 
-class ActivationInfo{
-- code
-- link
-- activated
-}
-class UserProfile{
-- idProfile
-- userProfileName
-}
-class Request{
-- idRequest
-- requestDate
-- requestStatus
-}
 
-SystemUser "1" -- "1" ActivationInfo: belongs to
-SystemUser "1" <-- "*" Request: sent by
 SystemUser "*" -- "1" Company: employed by
-UserProfile "1..*" -- "*" SystemUser: is assigned
+
 
 @enduml

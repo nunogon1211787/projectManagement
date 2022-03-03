@@ -391,6 +391,45 @@ class TaskTest {
     }
 
     @Test
+    void constructorCheckNameSizeTest2() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+
+        //Act
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Assert
+            new Task("1", taskDescription, 20.00, taskType, resource);
+        });
+    }
+
+    @Test
+    void constructorCheckNameSizeTest3Sucess() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+
+        //Act
+        Task task = new Task("t31", taskDescription, 20.00, taskType, resource);
+        //Assert
+        assertEquals("t31",task.getName());
+
+    }
+
+
+    @Test
     void constructorCheckDescriptionEmptyTest() {
         //Arrange
         Company company = new Company();

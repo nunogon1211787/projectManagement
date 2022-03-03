@@ -1,7 +1,6 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.*;
-import switch2021.project.utils.App;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +10,8 @@ public class SearchSystemUsersController {
      * Attributes
      **/
 
-    private Company company;
+    private final Company company;
 
-    /**
-     * Constructor to UI (with SINGLETON)
-     **/
-
-//    public SearchSystemUsersController() { this.company = App.getInstance().getCompany();}
 
     /**
      * Constructor to test (without SINGLETON)

@@ -1,19 +1,17 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title Example of a System Sequence Diagram
+title US024 - As Administrator, I want to get a list all user accounts and their status
 
 autoactivate on
 autonumber
 
-actor "User" as User
+actor "Administrator" as Administrator
 participant ":System" as System
 
-activate User
+activate Administrator
 
-User -> System: Authentication Request
-System --> User: Authentication Response
+Administrator -> System: Get list all user accounts and their status
+System --> Administrator: Show requested list user accounts with status
 
-User -> System: Another authentication Request
-User <-- System: another authentication Response
 @enduml

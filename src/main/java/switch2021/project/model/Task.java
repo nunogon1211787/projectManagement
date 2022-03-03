@@ -6,6 +6,7 @@ import switch2021.project.utils.App;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,7 +36,7 @@ public class Task {
     /**
      * Constructors.
      */
-    public Task (String description){
+    public Task(String description) {
         this.description = description;
         this.status = new TaskStatus("Planned");
     }
@@ -58,7 +59,7 @@ public class Task {
         this.taskEffortList = new ArrayList<>();
     }
 
-    public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible, List <String> precedenceList) {
+    public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible, List<String> precedenceList) {
 
         checkNameRules(name);
         checkDescriptionRules(description);
@@ -74,11 +75,11 @@ public class Task {
         this.responsible = responsible;
         this.status = App.getInstance().getCompany().getTaskStatusStore().getInitialStatus();
         this.taskEffortList = new ArrayList<>();
-        this.precedenceList = precedenceList;
+        this.precedenceList = Collections.unmodifiableList(precedenceList);
     }
 
     /**
-     * Methods to iterate with atributtes,
+     * Methods to iterate with attributes,
      */
 
     public boolean hasName(String taskName) {
@@ -105,6 +106,7 @@ public class Task {
         checkIdRules(id);
         this.idTask = id;
     }
+
     /**
      * Methods to validate attributes data.
      */
@@ -150,8 +152,6 @@ public class Task {
     }
 
     public boolean validateTaskEffort(TaskEffort effort) {
-        boolean result = false;
-
         for (TaskEffort i : this.taskEffortList) {
             if (!effort.getEffortDate().isAfter(i.getEffortDate())) {
                 throw new IllegalArgumentException("Effort for this day is already saved.");

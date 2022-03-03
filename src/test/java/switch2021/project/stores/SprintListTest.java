@@ -326,7 +326,7 @@ public class SprintListTest {
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
-        joana2R.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
+        joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         proj1.getProjectTeam().saveResource(joana2R);
 
         //Resource 3

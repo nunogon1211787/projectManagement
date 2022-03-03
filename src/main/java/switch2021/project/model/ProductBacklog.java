@@ -22,7 +22,7 @@ public class ProductBacklog {
      * Getters and Setters Methods.
      **/
     public List<UserStory> getUserStoryList() {
-        return userStoryList;
+        return Collections.unmodifiableList(userStoryList);
     }
 
     public List<UserStory> getActiveUserStoryList() {
@@ -47,7 +47,7 @@ public class ProductBacklog {
     }
 
     public void setUserStoryList(List<UserStory> userStoryList) {
-        this.userStoryList = userStoryList;
+        this.userStoryList = Collections.unmodifiableList(userStoryList);
     }
 
     /**
@@ -122,7 +122,7 @@ public class ProductBacklog {
         returnList.addAll(noPriorityStories);
         returnList.addAll(closeAndDoneUserStories);
         userStoryList = returnList;
-        return userStoryList;
+        return Collections.unmodifiableList(userStoryList);
     }
 
     /**
@@ -130,7 +130,7 @@ public class ProductBacklog {
      **/
     public int idUserStoryGenerator() {
         int id = 1;
-        if (this.userStoryList.size() > 0) {
+        if (!this.userStoryList.isEmpty()) {
             id = this.userStoryList.get(userStoryList.size() - 1).getIdUserStory() + 1;
         }
         return id;

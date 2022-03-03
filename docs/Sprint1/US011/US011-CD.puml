@@ -1,14 +1,13 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-hide circle
+'hide circle
 skinparam classAttributeIconSize 0
 
 title US011 - As Authenticated User, i want to change his/her password
 
 
 class ChangePasswordUI {
-
 }
 
 class ChangePasswordController {
@@ -22,7 +21,6 @@ class Company {
 class SystemUserStore {
 +getUserByEmail(email)
 }
-
 
 class SystemUser {
 username : String
@@ -39,14 +37,13 @@ activateUser : boolean = False
 -setPassword(newPassword)
 }
 
-
 ChangePasswordUI ..> ChangePasswordController
 
 ChangePasswordController ..> Company
 ChangePasswordController ..> SystemUserStore
 ChangePasswordController ..> SystemUser
 
-
 Company "1" o-- "1" SystemUserStore: has
 SystemUserStore "1" *-- "0..*" SystemUser: has
+
 @enduml

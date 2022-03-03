@@ -1,7 +1,7 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.depracated.UserStoryOfSprint;
+import switch2021.project.deprecated.UserStoryOfSprint;
 import switch2021.project.model.*;
 import switch2021.project.stores.SprintList;
 import switch2021.project.stores.SystemUserStore;

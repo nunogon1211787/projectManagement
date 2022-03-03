@@ -150,9 +150,10 @@ public class Resource {
         if (!(o instanceof Resource)) return false;
         Resource that = (Resource) o;
         if (this.role == null && that.role == null) return true;
+        if ((!this.user.equals(that.user))) return false;
+        assert this.role != null;
         return
-                (this.user.equals(that.user)) &&
-                        (this.role.equals(that.role)) &&
+                (this.role.equals(that.role)) &&
                         (this.startDate.equals(that.startDate)) &&
                         (this.endDate.equals(that.endDate)) &&
                         (this.costPerHour == that.costPerHour) &&

@@ -4,7 +4,6 @@ package switch2021.project.controller;
 import switch2021.project.model.Company;
 import switch2021.project.model.UserProfile;
 import switch2021.project.stores.UserProfileStore;
-import switch2021.project.utils.App;
 
 
 //https://www.devmedia.com.br/padrao-de-projeto-singleton-em-java/26392
@@ -19,14 +18,7 @@ public class CreateUserProfileController {
      **/
 
     private final Company company;
-    private UserProfileStore userProfileStore;
-    private UserProfile userProfile;
 
-    /**
-     * Constructor to UI (with SINGLETON)
-     **/
-
-   // public CreateUserProfileController(){ this.company = App.getInstance().getCompany();}
 
     /**
      * Constructor to test (without SINGLETON)
@@ -42,9 +34,9 @@ public class CreateUserProfileController {
      **/
 
     public boolean createUserProfile(String name) {
-        this.userProfileStore = this.company.getUserProfileStore();
-        this.userProfile = this.userProfileStore.createProfile(name);
-        return this.userProfileStore.saveUserProfile(this.userProfile);
+        UserProfileStore userProfileStore = this.company.getUserProfileStore();
+        UserProfile userProfile = userProfileStore.createProfile(name);
+        return userProfileStore.saveUserProfile(userProfile);
     }
 }
 

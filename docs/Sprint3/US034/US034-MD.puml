@@ -4,7 +4,8 @@ hide circle
 skinparam classAttributeIconSize 0
 hide methods
 
-title Example of Domain Model extract
+title As Project Member, I want to update the status (i.e.: the Scrum Board category) of a user story in the scope of the current sprint backlog.
+
 
 class Company {
     -designation
