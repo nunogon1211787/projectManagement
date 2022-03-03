@@ -4,16 +4,17 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
+title US005 - As a Director, I want to create/register a new project
 
-class CreateUserStoryUI {
+class CreateProjectUI {
 
 }
 
-class CreateUserStoryController {
-    +getProjectListByUserEmail(String email)
-    +getProjectByCode(String code)
-    +createUserStory(status, priority, description)
+class CreateProjectController {
+    +createProject(name,description,startDate,numberOfSprints,typology, business, customer, budget)
+    +getBusinessSectorStore()
+    +getCustomerStore()
+    +getTypologyStore()
 }
 
 class Company {
@@ -21,43 +22,45 @@ class Company {
 }
 
 class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
++createProject(name,description,startDate,numberOfSprints,typology, business, customer, budget)
 }
 
 class Project {
--code : String
--productBacklog : ProductBacklog
-+getProductBacklog()
+-name : String
+-description : String
+-startDate : LocalDate
+-numberOfSprints : int
+-typology : Typology
+-customer : Customer
+-sector : BusinessSector
++Project(name,description,startDate,numberOfSprints,typology, business, customer, budget)
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+createUserStory(status, priority, description)
-+isValideUserStory(status, priority, description)
-+saveUserStory(us)
-+validateUserStory(us)
+class CustomerStore {
++getCustomerById(String customer)
 }
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
-+UserStory(status, priority,description)
+class TypologyStore {
++getTypologyById(String typology)
 }
 
-CreateUserStoryUI ..> CreateUserStoryController
+class BusinessSectorStore {
++getBusinessSectorById(String sector)
+}
 
-CreateUserStoryController ..> Company
-CreateUserStoryController ..> ProjectStore
-CreateUserStoryController ..> Project
-CreateUserStoryController ..> ProductBacklog
+CreateProjectUI ..> CreateProjectController
 
-Company "1" o-- "1" ProjectStore: has
+CreateProjectController ..> Company
+CreateProjectController ..> CustomerStore
+CreateProjectController ..> TypologyStore
+CreateProjectController ..> BusinessSectorStore
+
+
+Company "1" *-- "1" ProjectStore: has
+Company "1" *-- "1" CustomerStore: has
+Company "1" *-- "1" TypologyStore: has
+Company "1" *-- "1" BusinessSectorStore: has
 ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+
 
 @enduml
