@@ -152,7 +152,7 @@ class TaskStatusStoreTest {
         TaskStatus initial = test.getInitialStatus();
         //Assert
         assertEquals(4, test.getTaskStatusNames().size());
-        assertEquals(initial.getDescription(), test.getTaskStatusDescription("Planned"));
+        assertEquals(initial, test.getTaskStatusByDescription("Planned"));
     }
 
 

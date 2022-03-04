@@ -145,4 +145,5 @@ class CustomerStoreTest {
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
     }
+
 }

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="475px" preserveAspectRatio="none" style="width:759px;height:475px;background:#FFFFFF;" version="1.1" viewBox="0 0 759 475" width="759px" zoomAndPan="magnify"><defs><filter height="300%" id="f1hzx95r0gohg9" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="750" x="2" y="18.6855">Domain Model excerpt - "US027 - As Director, I want to define the Product Owner of a project."</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect fill="#FEFECE" filter="url(#f1hzx95r0gohg9)" height="41.0938" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="59" x="84.5" y="50.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="87.5" y="68.0977">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="85.5" x2="142.5" y1="75.7344" y2="75.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="85.5" x2="142.5" y1="83.7344" y2="83.7344"/><!--MD5=[ea85c9eeae48c9b9754651e25079a913]
+class ProjectTeam--><rect  fill="#FEFECE" filter="url(#f1hzx95r0gohg9)" height="41.0938" id="ProjectTeam" style="stroke:#A80036;stroke-width:1.5;" width="76" x="260" y="239.1406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="70" x="263" y="256.5977">ProjectTeam</text><line style="stroke:#A80036;stroke-width:1.5;" x1="261" x2="335" y1="264.2344" y2="264.2344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="261" x2="335" y1="272.2344" y2="272.2344"/><!--MD5=[6b13f1b330d33795af281e5c1dfe1e98]
+class Resource--><rect fill="#FEFECE" filter="url(#f1hzx95r0gohg9)" height="96.4375" id="Resource" style="stroke:#A80036;stroke-width:1.5;" width="252" x="443" y="211.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="542" y="229.0977">Resource</text><line style="stroke:#A80036;stroke-width:1.5;" x1="444" x2="694" y1="236.7344" y2="236.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="48" x="449" y="252.1533">-startDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="44" x="449" y="265.9893">-endDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="64" x="449" y="279.8252">-costPerHour</text><line style="stroke:#A80036;stroke-width:1.5;" x1="444" x2="694" y1="286.2422" y2="286.2422"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="240" x="449" y="301.6611">-percentageOfAllocation, startDateNewRole, role)</text><!--MD5=[72c2b38f0075f7c9d19a6864453fbfd6]
+class ProjectRole--><rect fill="#FEFECE" filter="url(#f1hzx95r0gohg9)" height="54.9297" id="ProjectRole" style="stroke:#A80036;stroke-width:1.5;" width="70" x="534" y="406.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="64" x="537" y="424.0977">ProjectRole</text><line style="stroke:#A80036;stroke-width:1.5;" x1="535" x2="603" y1="431.7344" y2="431.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="30" x="540" y="447.1533">-name</text><line style="stroke:#A80036;stroke-width:1.5;" x1="535" x2="603" y1="453.5703" y2="453.5703"/><!--MD5=[79d378210367c0c6ec62ef762ddfbd1b]
+class Project--><rect fill="#FEFECE" filter="url(#f1hzx95r0gohg9)" height="137.9453" id="Project" style="stroke:#A80036;stroke-width:1.5;" width="98" x="65" y="190.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="38" x="95" y="208.0977">Project</text><line style="stroke:#A80036;stroke-width:1.5;" x1="66" x2="162" y1="215.7344" y2="215.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="71" y="231.1533">-code</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="64" x="71" y="244.9893">-projectName</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="71" y="258.8252">-description</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="48" x="71" y="272.6611">-startDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="44" x="71" y="286.4971">-endDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="86" x="71" y="300.333">-numberOfSprints</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="71" x="71" y="314.1689">-sprintDuration</text><line style="stroke:#A80036;stroke-width:1.5;" x1="66" x2="162" y1="320.5859" y2="320.5859"/><!--MD5=[452a66c2e8d45f5bd209be454bbcd04f]
+class Sprint--><rect fill="#FEFECE" filter="url(#f1hzx95r0gohg9)" height="82.6016" id="Sprint" style="stroke:#A80036;stroke-width:1.5;" width="60" x="237" y="29.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="32" x="251" y="47.0977">Sprint</text><line style="stroke:#A80036;stroke-width:1.5;" x1="238" x2="296" y1="54.7344" y2="54.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="30" x="243" y="70.1533">-name</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="48" x="243" y="83.9893">-startDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="44" x="243" y="97.8252">-endDate</text><line style="stroke:#A80036;stroke-width:1.5;" x1="238" x2="296" y1="104.2422" y2="104.2422"/><!--MD5=[2e490d5338ac1af0f8b8635f18fa3e01]
+link Company to Project--><path d="M114,91.7506 C114,113.9406 114,151.4106 114,185.2306 " fill="none" id="Company-to-Project" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="114,190.6306,118,181.6306,114,185.6306,110,181.6306,114,190.6306" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="49" x="115" y="157.1357">contains</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="106.0156" y="113.3286">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="108.7266" y="179.725">*</text><!--MD5=[9953a814c058dd671fcf1ab36e7beb34]
+link Project to ProjectTeam--><path d="M163.31,259.6406 C193.65,259.6406 231.94,259.6406 259.94,259.6406 " fill="none" id="Project-ProjectTeam" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="60" x="181.5" y="253.1357">belongs to</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="171.0665" y="255.9906">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="245.0176" y="255.6353">1</text><!--MD5=[6e6d33f92af012b517bd747a26e702ca]
+link Sprint to Project--><path d="M236.77,108.9906 C215.78,134.5706 187.35,169.2306 163.14,198.7506 " fill="none" id="Sprint-Project" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="78" x="210" y="157.1357">in divided into</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="224.2012" y="113.4753">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="170.8715" y="186.1574">1</text><!--MD5=[12ab16047cb79fbb7abfb3b5c3592b87]
+reverse link ProjectTeam to Resource--><path d="M341.3,259.6406 C368.92,259.6406 406.27,259.6406 442.72,259.6406 " fill="none" id="ProjectTeam-backto-Resource" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="336.25,259.6406,345.25,263.6406,341.25,259.6406,345.25,255.6406,336.25,259.6406" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="70" x="354.5" y="253.1357">is associate</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="343.9477" y="255.6845">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="429.8725" y="256.6456">*</text><!--MD5=[1610863e6964f45ac3f1f15f4d049456]
+link Resource to ProjectRole--><path d="M569,307.7806 C569,339.5006 569,380.1806 569,406.4506 " fill="none" id="Resource-ProjectRole" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="42" x="570" y="373.1357">plays a</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="563.6328" y="329.515">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="561.1906" y="395.7412">1</text><!--MD5=[5181d69b901f17c6fcd0906616614dd4]
+link Sprint to Resource--><path d="M297.06,90.7006 C342.27,118.6206 429.21,172.3106 492.65,211.4906 " fill="none" id="Sprint-Resource" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="67" x="410" y="157.1357">participates</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="5" x="304.9965" y="91.1049">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="459.9673" y="200.7324">1..*</text><!--MD5=[8d083a73f60190654c9f359d01dfe17e]
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+title Domain Model excerpt - "US027 - As Director, I want to define the Product Owner of a project."
+
+class Company {
+}
+
+class ProjectTeam {
+    }
+
+class Resource {
+    - startDate
+    - endDate
+    - costPerHour
+    - percentageOfAllocation, startDateNewRole, role)
+}
+
+class ProjectRole {
+    - name
+}
+
+class Project {
+    - code
+    - projectName
+    - description
+    - startDate
+    - endDate
+    - numberOfSprints
+    - sprintDuration
+}
+
+class Sprint {
+    - name
+    - startDate
+    - endDate
+}
+
+Company "1" -down-> "*" Project: contains
+Project "1" -right- "1" ProjectTeam: belongs to
+Sprint "*" -right- "1" Project: in divided into
+Resource "*" -left-> "1" ProjectTeam: is associate
+Resource "*" -down- "1" ProjectRole: plays a
+Resource "1..*" -up- "*" Sprint: participates
+
+
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 GMT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

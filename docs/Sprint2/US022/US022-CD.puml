@@ -1,10 +1,9 @@
 @startuml
-'https://plantuml.com/class-diagram
 
 hide circle
 skinparam classAttributeIconSize 0
 
-title US022 - As Project Manager, i want to create a sprint.
+title US022 - As Project Manager, I want to create a sprint.
 
 class CreateSprintUI {
 }
@@ -24,13 +23,6 @@ class SystemUserStore {
 
 
 class SystemUser {
-username : String
-email : String
-photo : String
-password : String
-passwordConfirmation : String
-function : String
-activateUser : boolean = False
 +SystemUser(username, email, photo, password, passwordConfirmation, function, profile)
 +isYourEmail(email)
 +setAllData(username, function, photo)
