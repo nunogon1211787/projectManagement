@@ -2,7 +2,6 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.deprecated.UserStoryOfSprint;
 import switch2021.project.model.*;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -37,13 +36,10 @@ public class AddUserStoryToSprintBacklogControllerTest {
         addStory.getProductBacklog();
         addStory.getUserStory(1);
 
-        addStory.addUserStoryToSprintBacklog(4,company.getUserStoryStatusStore().getUserStoryStatusByDescription("Planned"));
-
-        UserStoryOfSprint value = project.getSprints().getSprintList().get(0).getSprintBacklog().getUserStoryOfSprintList().get(0);
+        addStory.addUserStoryToSprintBacklog();
 
         //Assert
-        assertEquals(userStory, value.getStoryOfSprint());
-        assertEquals(4,project.getSprints().getSprintList().get(0).getSprintBacklog().getUserStoryOfSprintList().get(0).getEstimateEffort());
+        assertEquals(userStory, company.getProjectStore().getProjectByCode("Project_2022_1").getCurrentSprint().getSprintBacklog().getUserStoryList().get(0));
     }
 }
 
