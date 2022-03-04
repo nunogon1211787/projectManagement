@@ -136,9 +136,6 @@ class ResourceTest {
         assertFalse(input.isAvailableToSprint(date,1));
     }
 
-
-
-
     @Test
     @DisplayName("Validate Resource Attributes")
     public void isYourUserTrueTest() {
@@ -630,5 +627,28 @@ class ResourceTest {
             LocalDate endDate = LocalDate.of(2022, 1, 5);
             new Resource(newUser, startDate, endDate, -1, .5);
         });
+    }
+
+    @Test
+    @DisplayName("Test setStartDate New role")
+    public void setStartDate() {
+        //Arrange
+        LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
+        LocalDate newStartDateAllocated = LocalDate.of(2021, 12, 13);
+        LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
+
+
+        //user
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "", userProfile);
+        Resource res = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        Resource resExpected = new Resource(newUser, newStartDateAllocated, endDateAllocated, 100, .5);
+
+        //Act
+        res.setStartDate(newStartDateAllocated);
+
+        //Assert
+        assertEquals(resExpected,res);
     }
 }
