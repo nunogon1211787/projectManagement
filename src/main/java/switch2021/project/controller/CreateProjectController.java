@@ -29,12 +29,12 @@ public class CreateProjectController {
         return this.typology = company.getTypologyStore().getTypology(typo);
     }
 
-    public Customer getCustomer(String customer) {
-        return this.customer = company.getCustomerStore().getCustomerByName(customer);
+    public void getCustomer(String customer) {
+        this.customer = company.getCustomerStore().getCustomerByName(customer);
     }
 
-    public BusinessSector getBusinessSector(String sector) {
-        return this.sector = company.getBusinessSectorStore().getBusinessSectorByDescription(sector);
+    public void getBusinessSector(String sector) {
+        this.sector = company.getBusinessSectorStore().getBusinessSectorByDescription(sector);
     }
 
     public boolean createProject(String name, String description, LocalDate startDate, int numberOfSprints, int budget) {

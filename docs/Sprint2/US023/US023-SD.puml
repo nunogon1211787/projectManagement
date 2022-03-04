@@ -1,0 +1,76 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+title US005 -  As a Team Member i want to add a story from the productbacklog to the sprintbacklog
+
+autoactivate on
+autonumber
+
+actor "Team Member" as TM
+
+participant ":AddUserStoryUI " as UI
+participant ":AddUserStoryController " as Controller
+participant ":Company " as Company
+participant "projectStore:ProjectStore " as projStore
+participant "CurrentProjectListByUser:List<Projects> " as currentList
+participant "project:Project " as proj
+participant "sprintList:SprintStore " as sprintStore
+participant "productBacklog:ProductBacklog " as ProductBacklog
+participant "sprintBacklog:SprintBacklog " as SprintBacklog
+
+
+activate TM
+TM -> UI: Access current list of projects
+UI -> Controller: getCurrentProjectListByUser(email)
+Controller -> Company: getProjectStore()
+Company --> Controller: projectStore
+Controller -> projStore: getCurrentProjectListByUser(email)
+projStore -> currentList**: create(email)
+projStore --> Controller:currentProjectListByUser
+Controller --> UI: currentProjectListByUser
+UI--> TM: Shows Project List
+
+TM -> UI: Chooses Project
+UI -> Controller: getProjectByCode(code)
+Controller -> projStore: getProjectByCode(code)
+projStore -> currentList: getProjectByCode(code)
+currentList --> projStore: project
+projStore --> Controller: project
+Controller --> UI: project
+UI --> TM: Shows Project
+
+TM -> UI: Asks for sprint list of project
+UI -> Controller: getSprintList()
+Controller -> proj: getSprintStore()
+proj --> Controller: sprintList
+Controller --> UI: sprintList
+UI --> TM: Shows Sprint List
+
+TM -> UI: Chooses sprint from sprint list
+UI -> Controller: getSprintById(sprintID)
+Controller -> sprintStore: getSprintById(sprintID)
+sprintStore --> Controller: sprint
+Controller --> UI: sprint
+UI --> TM: Shows Sprint
+
+TM -> UI: Asks for user story list
+UI -> Controller: getProductBacklog()
+Controller -> proj: getProductBacklog()
+proj --> Controller: productBacklog
+Controller --> UI: productBacklog
+UI --> TM: Shows product backlog
+
+TM -> UI: Chooses user story from the product backlog and adds it to the sprint backlog
+UI -> Controller: addUserStoryToSprintBacklog()
+Controller -> ProductBacklog: getUserStory(userStoryID)
+ProductBacklog --> Controller: userStory
+Controller -> SprintBacklog: saveUserStoryToSprintBacklog(userStory)
+SprintBacklog -> SprintBacklog: validateUserStory(userStory)
+SprintBacklog -> SprintBacklog: add(userStory)
+deactivate
+deactivate
+SprintBacklog --> Controller: true
+Controller --> UI: true
+UI --> TM: Shows confirmation of addition
+
+@enduml
