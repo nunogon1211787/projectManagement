@@ -149,9 +149,9 @@ class CustomerStoreTest {
     @Test
     public void overrideNull() {
         //Arrange
-        Customer customer = null;
+        CustomerStore list1 = new CustomerStore();
         Customer customerTest = new Customer("teste","teste@teste.com");
 
-        assertNotEquals(customerTest,customer);
+        assertNotEquals(customerTest,list1);
     }
 }
