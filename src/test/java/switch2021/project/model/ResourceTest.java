@@ -650,5 +650,6 @@ class ResourceTest {
 
         //Assert
         assertEquals(resExpected,res);
+        assertEquals(newStartDateAllocated,res.getStartDate());
     }
 }
