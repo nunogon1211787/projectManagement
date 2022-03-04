@@ -118,7 +118,8 @@ public class Project {
 
     public Resource getTeamMemberByIndex(int index) {
         Resource res = null;
-        for (int i = 0; i <= projectTeam.getProjectTeamList().size() - 1; i++) {
+//        for (int i = 0; i <= projectTeam.getProjectTeamList().size() - 1; i++) {
+        for(Resource i : projectTeam.getProjectTeamList()){
             res = projectTeam.getProjectTeamList().get(index);
         }
         return res;
@@ -126,8 +127,11 @@ public class Project {
 
     public boolean validateResource(Resource resource) {
         boolean msg = true;
-        for (int i = 0; i <= projectTeam.getProjectTeamList().size() - 1; i++) {
-            if (projectTeam.getProjectTeamList().get(i).equals(resource)) {
+        for(Resource i : projectTeam.getProjectTeamList()){
+//        }
+//        for (int i = 0; i <= projectTeam.getProjectTeamList().size() - 1; i++) {
+//            if (projectTeam.getProjectTeamList().get(i).equals(resource)) {
+            if (i.equals(resource)) {
                 msg = false;
                 break;
             }
