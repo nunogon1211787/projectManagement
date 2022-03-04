@@ -145,4 +145,13 @@ class CustomerStoreTest {
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
     }
+
+    @Test
+    public void overrideNull() {
+        //Arrange
+        Customer customer = null;
+        Customer customerTest = new Customer("teste","teste@teste.com");
+
+        assertNotEquals(customerTest,customer);
+    }
 }
