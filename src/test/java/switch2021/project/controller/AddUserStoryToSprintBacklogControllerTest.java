@@ -34,9 +34,8 @@ public class AddUserStoryToSprintBacklogControllerTest {
         addStory.getSprintStore();
         addStory.getSprint(1);
         addStory.getProductBacklog();
-        addStory.getUserStory(1);
 
-        addStory.addUserStoryToSprintBacklog();
+        addStory.addUserStoryToSprintBacklog(1);
 
         //Assert
         assertEquals(userStory, company.getProjectStore().getProjectByCode("Project_2022_1").getCurrentSprint().getSprintBacklog().getUserStoryList().get(0));

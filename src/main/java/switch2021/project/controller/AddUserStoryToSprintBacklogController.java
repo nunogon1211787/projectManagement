@@ -13,7 +13,6 @@ public class AddUserStoryToSprintBacklogController {
     private Project project;
     private SprintList sprintList;
     private ProductBacklog productBacklog;
-    private UserStory userStory;
     private Sprint sprint;
 
     /**
@@ -44,12 +43,10 @@ public class AddUserStoryToSprintBacklogController {
         return this.productBacklog = this.project.getProductBacklog();
     }
 
-    public UserStory getUserStory(int userStoryId) {
-        return this.userStory = this.productBacklog.getUserStoryById(userStoryId);
-    }
 
-    public boolean addUserStoryToSprintBacklog() {
-        this.sprint.getSprintBacklog().saveUserStoryToSprintBacklog(this.userStory);
+    public boolean addUserStoryToSprintBacklog(int userStoryId) {
+        UserStory userStory = this.productBacklog.getUserStoryById(userStoryId);
+        this.sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         return true;
     }
 }
