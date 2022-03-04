@@ -31,6 +31,8 @@ class Main {
      */
     public static void main(String[] args) throws IOException, SQLException {
 
+        // Do nothing because it was not already under project scope.
+
     }
 }
 

@@ -57,7 +57,7 @@ public class TaskStatus {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TaskStatus that = (TaskStatus) o;
-        return idTaskStatus == that.idTaskStatus && description.equals(that.description);
+        return description.equals(that.description);
     }
 
     @Override
