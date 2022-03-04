@@ -12,6 +12,7 @@ class CustomerTest {
         Customer customer = new Customer("ZeManel", "zemanel@beaver.com");
         Customer customer2 = new Customer("ZePaulo", "zepaulo@beaver.com");
         Customer x = new Customer("ZeManel", "zemanel@beaver.com");
+        Customer y = new Customer("ZeManel2", "zemanel@beaver.com");
 
 
         assertNotEquals(customer.hashCode(),customer2.hashCode());
@@ -22,6 +23,7 @@ class CustomerTest {
         assertEquals(x.getCustomerId(), customer.getCustomerId());
         assertNotEquals(customer2.getCustomerName(), customer.getCustomerName());
         assertNotEquals(customer2.getCustomerEmail(), customer.getCustomerEmail());
+        assertNotEquals(x,y);
     }
 
     @Test
