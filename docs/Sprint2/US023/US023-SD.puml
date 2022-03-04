@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-title US005 - As a Director, I want to create/register a new project
+title US005 -  As a Team Member i want to add a story from the productbacklog to the sprintbacklog
 
 autoactivate on
 autonumber
@@ -71,6 +71,6 @@ deactivate
 deactivate
 SprintBacklog --> Controller: true
 Controller --> UI: true
-UI --> TM: Shows confirmation of save
+UI --> TM: Shows confirmation of addition
 
 @enduml
