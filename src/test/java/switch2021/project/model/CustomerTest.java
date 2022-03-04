@@ -24,6 +24,9 @@ class CustomerTest {
         assertNotEquals(customer2.getCustomerName(), customer.getCustomerName());
         assertNotEquals(customer2.getCustomerEmail(), customer.getCustomerEmail());
         assertNotEquals(x,y);
+        x.setCustomerId(55);
+        customer.setCustomerId(60);
+        assertNotEquals(x,customer);
     }
 
     @Test
