@@ -3,7 +3,6 @@ package switch2021.project.controller;
 import switch2021.project.model.*;
 import switch2021.project.stores.SprintList;
 
-@Deprecated
 public class AddUserStoryToSprintBacklogController {
 
     /**
@@ -14,7 +13,6 @@ public class AddUserStoryToSprintBacklogController {
     private Project project;
     private SprintList sprintList;
     private ProductBacklog productBacklog;
-    private UserStory userStory;
     private Sprint sprint;
 
     /**
@@ -45,12 +43,10 @@ public class AddUserStoryToSprintBacklogController {
         return this.productBacklog = this.project.getProductBacklog();
     }
 
-    public UserStory getUserStory(int userStoryId) {
-        return this.userStory = this.productBacklog.getUserStoryById(userStoryId);
-    }
 
-    public boolean addUserStoryToSprintBacklog(int effort, UserStoryStatus status) {
-        this.sprint.getSprintBacklog().saveUserStoryOfSprint(this.sprint.getSprintBacklog().createUSerStoryOfSprint(this.userStory,effort,status));
+    public boolean addUserStoryToSprintBacklog(int userStoryId) {
+        UserStory userStory = this.productBacklog.getUserStoryById(userStoryId);
+        this.sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         return true;
     }
 }
