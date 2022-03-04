@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title US010 - As Authenticated User, i want to update its own data (e.g. photo, function,...)
+
+autoactivate on
+autonumber
+
+actor "Authenticated User" as authenticatedUser
+participant ":updatePersonalDataUI" as UI
+participant ":updatePersonalDataController" as Ctrl
+participant ":Company" as company
+participant "systemUserStore:SystemUserStore" as systemUserStore
+participant "user:SystemUser" as user
+
+
+activate authenticatedUser
+
+
+authenticatedUser -> UI: Starts looking for Personal Data
+UI -> Ctrl: getUser(email)
+Ctrl -> company: getSystemUserStore()
+company --> Ctrl: systemUserStore
+Ctrl -> systemUserStore: getUserByEmail(email)
+loop for each known System User in System User Store
+systemUserStore -> user: isYourEmail(email)
+user --> systemUserStore: true
+end
+systemUserStore --> Ctrl: user
+Ctrl --> UI: user
+UI --> authenticatedUser: Shows system user data
+deactivate UI
+authenticatedUser -> UI: Update System User Data
+UI -> Ctrl: updateSystemUserData(username, function, photo)
+Ctrl -> user: setAllData(username, function, photo)
+user -> user: checkAllData(username, function, photo)
+deactivate user
+user -> user: setUsername(username)
+deactivate user
+user -> user: setFunction(function)
+deactivate user
+user -> user: setPhoto(photo)
+deactivate user
+user --> Ctrl: true
+Ctrl --> UI: true
+UI --> authenticatedUser: Informs Operation Success
+@enduml

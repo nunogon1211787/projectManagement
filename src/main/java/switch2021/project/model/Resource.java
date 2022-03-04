@@ -83,12 +83,11 @@ public class Resource {
         boolean result = false;
 
         //To check start date
-        if(this.startDate.isBefore(LocalDate.now()) || this.startDate.isEqual(LocalDate.now())){
-            if(this.endDate.isAfter(LocalDate.now()) || this.endDate.isEqual(LocalDate.now())){
+        if((this.startDate.isBefore(LocalDate.now())
+                || this.startDate.isEqual(LocalDate.now())) && (this.endDate.isAfter(LocalDate.now())
+                || this.endDate.isEqual(LocalDate.now()))){
                 result = true;
             }
-        }
-
         return result;
     }
 
@@ -96,13 +95,13 @@ public class Resource {
      * Method to Check if the Resource is Available in this Period of Time (starDate to endDate)
      **/
 
-    public boolean isAvailableToSprint(LocalDate startDate, int sprintDuration) {
+    public boolean isAvailableToSprint(LocalDate sprintStartDate, int sprintDuration) {
         boolean msg = false;
 
-        LocalDate endDate = startDate.plusDays(sprintDuration * 7L - 1);
+        LocalDate sprintEndDate = sprintStartDate.plusDays(sprintDuration * 7L - 1);
 
-        if((this.startDate.isBefore(startDate) || this.startDate.isEqual(startDate)) &&
-                (this.endDate.isAfter(endDate) || this.endDate.isEqual(endDate))){
+        if((this.startDate.isBefore(sprintStartDate) || this.startDate.isEqual(sprintStartDate)) &&
+                (this.endDate.isAfter(sprintEndDate) || this.endDate.isEqual(sprintEndDate))){
                 msg = true;
             }
         return msg;
