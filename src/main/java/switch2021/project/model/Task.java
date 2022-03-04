@@ -62,21 +62,10 @@ public class Task {
     public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible, List<String> precedenceList) {
 
         Task task = new Task(name, description,effortEstimate, type, responsible);
-//        checkNameRules(name);
-//        checkDescriptionRules(description);
-//        checkEffortRules(effortEstimate);
-//        checkTypeNotNull(type);
-//        checkResponsibleNotNull(responsible);
-
-//        this.name = name;
-//        this.description = description;
-//        this.effortEstimate = effortEstimate;
         this.effortRemaining = effortEstimate;
-//        this.type = type;
-//        this.responsible = responsible;
         this.status = App.getInstance().getCompany().getTaskStatusStore().getInitialStatus();
         this.taskEffortList = new ArrayList<>();
-        this.precedenceList = precedenceList;
+        this.precedenceList = Collections.unmodifiableList(precedenceList);
 
 
     }
