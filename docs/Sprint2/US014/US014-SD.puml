@@ -12,10 +12,10 @@ participant ": Company" as Company
 participant "project : Project" as Project
 participant "sprintList : SprintList" as SprintList
 participant "currentSprint : Sprint" as Sprint
-participant "projectRoleStore : ProjectRoleStore" as ProjectRoleStore
-participant "projectTeam : ProjectTeam" as ProjectTeam
+participant "projectRoleStore :\nProjectRoleStore" as ProjectRoleStore
+participant "projectTeam :\nProjectTeam" as ProjectTeam
 participant "resource : Resource" as OriginalResource
-participant "newResource : Resource" as newResource
+participant "newResource :\nResource" as newResource
 
 activate Director
 
@@ -58,8 +58,8 @@ alt result = true "Assign Scrum Master"
                 end
             return true
             end
-            ProjectTeam -> OriginalResource: copyUpdateProjectRoleOfAResource(originalResource, startDateNewRole, role)
-            OriginalResource -> newResource**: Resource(originalResource)
+            ProjectTeam -> OriginalResource: copyUpdateProjectRoleOfAResource\n(originalResource, startDateNewRole, role)
+            OriginalResource -> newResource**: Resource\n(originalResource)
                 ProjectTeam -> newResource: setRole(role)
                 deactivate
                 ProjectTeam -> newResource: setStartDate(startDate)

@@ -1,7 +1,6 @@
 @startuml
-'https://plantuml.com/sequence-diagram
 
-title US010 - As a Authenticated User, i want to updte its own data (e.g. photo, function,...)
+title US010 - US022 - As Project Manager, I want to create a sprint.
 
 autoactivate on
 autonumber
