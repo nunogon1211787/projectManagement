@@ -4,25 +4,35 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
+title US023 -  As a Team Member i want to add a story from the productbacklog to the sprintbacklog
 
-class CreateUserStoryUI {
-
+class AddUserStoryUI {
 }
 
-class CreateUserStoryController {
-    +getProjectListByUserEmail(String email)
-    +getProjectByCode(String code)
-    +createUserStory(status, priority, description)
+class AddUserStoryController {
+    +getProject(String code)
+    +getSprintStore()
+    +getSprint()
+    +getProductBacklog()
+    +addUserStoryToSprintBacklog(int userStoryId)
 }
 
 class Company {
+    -projectList : ProjectStore
     +getProjectStore()
 }
 
 class ProjectStore {
-+getProjectListByUserEmail(String email)
+-projectList : List<Project>
 +getProjectByCode(String code)
+}
+
+class SprintStore {
+-sprintList: List<Sprint>
+}
+
+class Sprint {
+-id_sprint : int
 }
 
 class Project {
@@ -33,31 +43,31 @@ class Project {
 
 class ProductBacklog {
 -userStoryList : List<UserStory>
-+createUserStory(status, priority, description)
-+isValideUserStory(status, priority, description)
-+saveUserStory(us)
-+validateUserStory(us)
+}
+
+class SprintBacklog {
+-userStoryList : List<UserStory>
 }
 
 class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
 - id_UserStory : int
-- parentUserStory : UserStory
-+UserStory(status, priority,description)
 }
 
-CreateUserStoryUI ..> CreateUserStoryController
+AddUserStoryUI ..> AddUserStoryController
 
-CreateUserStoryController ..> Company
-CreateUserStoryController ..> ProjectStore
-CreateUserStoryController ..> Project
-CreateUserStoryController ..> ProductBacklog
+AddUserStoryController ..> Company
+AddUserStoryController ..> Project
+AddUserStoryController ..> SprintStore
+AddUserStoryController ..> ProductBacklog
+AddUserStoryController ..> Sprint
 
-Company "1" o-- "1" ProjectStore: has
+Company "1" *-- "1" ProjectStore: has
 ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+Project "1" *-- "1" SprintStore: has
+Project "1" *-- "1" ProductBacklog: has
+ProductBacklog "1" *-- "0..*" UserStory: has
+SprintStore "1" *-- "0..*" Sprint: has
+Sprint "1" *-- "1" SprintBacklog: has
+SprintBacklog "1" o-- "0..*" UserStory: has
 
 @enduml

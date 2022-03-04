@@ -245,88 +245,139 @@ public class SystemUser {
     }
 
 
-    /*
-     * Método para verificar se os parâmetros recebidos são do objeto.
+    /**
+     * Method to verify if the object has the received parameters.
      */
 
-    // Método para verificar se os parâmetros recebidos são do objeto. */
-    ///
-    // Rever este Método!!!!    *****************************
-    ///
+    private int hasPartiallyName (String name){
 
-    public boolean hasThisData(String userName, String email, String function, int state, List<UserProfile> profileChoosenList) {
+        int result = 0;
 
-        boolean result = true;
-        int match = 0;
-
-        if (!userName.isEmpty()) {
-            int idxString = this.userName.toLowerCase().indexOf(userName.toLowerCase());
-            if (idxString == -1) {
-                result = false;
+        if (!name.isEmpty()) {
+            int idxString = this.userName.toLowerCase().indexOf(name.toLowerCase());
+            if (idxString != -1) {
+                result = 1;
             } else {
-                match++;
+                result = -1;
             }
         }
+
+        return result;
+
+    }
+
+    private int hasPartiallyEmail (String email){
+
+        int result = 0;
 
         if (!email.isEmpty()) {
             int idxString = this.email.toLowerCase().indexOf(email.toLowerCase());
-            if (idxString == -1) {
-                result = false;
+            if (idxString != -1) {
+                result = 1;
             } else {
-                match++;
+                result = -1;
             }
         }
+
+        return result;
+
+    }
+
+    private int hasPartiallyFunction (String function){
+
+        int result = 0;
 
         if (!function.isEmpty()) {
             int idxString = this.function.toLowerCase().indexOf(function.toLowerCase());
-            if (idxString == -1) {
-                result = false;
+            if (idxString != -1) {
+                result = 1;
             } else {
-                match++;
+                result = -1;
             }
         }
+
+        return result;
+    }
+
+    private int hasState (int state) {
+
+        int result = 0;
+
+        int check = this.activateUser ? 1 : 0;
 
         if (state != -1) {
-            if (state == 0) {
-                if (this.activateUser) {
-                    result = false;
-                } else {
-                    match++;
-                }
-            } else if (state == 1) {
-                if (!this.activateUser) {
-                    result = false;
-                } else {
-                    match++;
-                }
+            if (state == check) {
+                result = 1;
+            } else {
+                result = -1;
             }
         }
 
-        if (!profileChoosenList.isEmpty()) {
+        return result;
 
-            if (this.assignedProfileList == null) {
-                result = false;
-            } else {
+    }
+
+    private int hasAllProfilesInTheList (List<UserProfile> profiles){
+
+        int result = 0;
+
+        if (!profiles.isEmpty()) {
+
+            if (this.assignedProfileList != null) {
 
                 int count = 0;
 
-                for (UserProfile k : profileChoosenList) {
+                for (UserProfile k : profiles) {
                     if (this.assignedProfileList.contains(k)) {
                         count++;
-                        match++;
-                        break;
                     }
                 }
 
-                if (count != profileChoosenList.size()) {
-                    result = false;
+                if (count == profiles.size()) {
+                    result = 1;
+                } else{
+                    result = -1;
                 }
 
             }
         }
 
-        if (match == 0) {
-            result = false;
+        return result;
+
+    }
+
+    public boolean hasThisData(String userName, String email, String function, int state, List<UserProfile> profileChoosenList) {
+
+        boolean result = false;
+
+        // Check if the object has the userName parameter.
+
+        int res1 = hasPartiallyName(userName);
+
+        // Check if the object has the email parameter.
+
+        int res2 = hasPartiallyEmail(email);
+
+        // Check if the object has the function parameter.
+
+        int res3 = hasPartiallyFunction(function);
+
+        // Check if the object has the state parameter.
+
+        int res4 = hasState(state);
+
+        // Check if the object has the list profiles parameter.
+
+        int res5 = hasAllProfilesInTheList(profileChoosenList);
+
+        if(res1 != -1 && res2 != -1 && res3 != -1 && res4 != -1 && res5 != -1) {
+
+            int match = res1 + res2 + res3 + res4 + res5;
+
+            if (match > 0) {
+                result = true;
+            }
+
         }
 
         return result;

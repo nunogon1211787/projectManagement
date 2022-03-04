@@ -13,7 +13,7 @@ public class TaskStatusStore {
     /**
      * Attributes
      */
-    private final List<String> taskList; // Review this atributte. The class need to have a list of Objects that are responsible.
+//    private final List<String> taskList; // Review this atributte. The class need to have a list of Objects that are responsible.
     private List<TaskStatus> taskStatusList;
 
 
@@ -21,7 +21,7 @@ public class TaskStatusStore {
      * Constructor
      */
     public TaskStatusStore() {
-        this.taskList = new ArrayList<>(); //Review
+//        this.taskList = new ArrayList<>(); //Review
         this.taskStatusList = new ArrayList<>();
     }
 
@@ -35,10 +35,10 @@ public class TaskStatusStore {
     }
 
     public void populateDefault() {
-        this.taskList.add("Planned"); //Review
-        this.taskList.add("Running"); //Review
-        this.taskList.add("Finished"); //Review
-        this.taskList.add("Blocked"); //Review
+//        this.taskList.add("Planned"); //Review
+//        this.taskList.add("Running"); //Review
+//        this.taskList.add("Finished"); //Review
+//        this.taskList.add("Blocked"); //Review
 
         saveTaskStatus(new TaskStatus("Planned"));
         saveTaskStatus(new TaskStatus("Running"));
@@ -49,15 +49,15 @@ public class TaskStatusStore {
     /**
      * Methods to iterate with the list
      */
-    public String getTaskStatusDescription(String description) {
-        String result = "Status not found";
-        for(String i : taskList) {
-            if(i.toLowerCase(Locale.ROOT).equals(description.trim().toLowerCase(Locale.ROOT))) {
-                result = i;
-            }
-        }
-        return result;
-    }
+//    public String getTaskStatusDescription(String description) {
+//        String result = "Status not found";
+//        for(String i : taskList) {
+//            if(i.toLowerCase(Locale.ROOT).equals(description.trim().toLowerCase(Locale.ROOT))) {
+//                result = i;
+//            }
+//        }
+//        return result;
+//    }
 
     public TaskStatus getTaskStatusByDescription(String descript){
         TaskStatus result = null;
@@ -136,20 +136,20 @@ public class TaskStatusStore {
         return id;
     }
 
-    /**
-     * Override
-     **/
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TaskStatusStore)) return false;
-        TaskStatusStore that = (TaskStatusStore) o;
-        return Objects.equals(this.taskList, that.taskList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(taskList);
-    }
+//    /**
+//     * Override
+//     **/
+//
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof TaskStatusStore)) return false;
+//        TaskStatusStore that = (TaskStatusStore) o;
+//        return Objects.equals(this.taskList, that.taskList);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(taskList);
+//    }
 }

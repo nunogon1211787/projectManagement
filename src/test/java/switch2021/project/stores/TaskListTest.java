@@ -84,27 +84,10 @@ public class TaskListTest {
         //Arranje
         TaskStatusStore store = new TaskStatusStore();
         store.populateDefault();
+        TaskStatus planned = new TaskStatus("Planned");
 
         //Assert
-        assertEquals("Planned", store.getTaskStatusDescription("Planned"));
-    }
-
-    @Test
-    void taskOverride() {
-        //Arranje
-        TaskStatusStore store = new TaskStatusStore();
-        store.populateDefault();
-
-        TaskStatusStore store2 = new TaskStatusStore();
-        store2.populateDefault();
-
-        TaskStatusStore store3 = new TaskStatusStore();
-        store3.populateDefault();
-        store3.getTaskList().set(0,"Teste");
-
-        //Assert
-        assertEquals(store,store2);
-        assertNotEquals(store,store3);
+        assertEquals(planned, store.getTaskStatusByDescription("Planned"));
     }
 
     @Test
@@ -136,7 +119,8 @@ public class TaskListTest {
         status.populateDefault();
         TaskStatusStore status2 = new TaskStatusStore();
         status2.populateDefault();
-        status2.getTaskList().set(0,"teste");
+        TaskStatus teste = new TaskStatus("Teste");
+        status2.getTaskStatusList().set(0,teste);
 
         //Assert
         assertNotEquals(status.hashCode(),status2.hashCode());
