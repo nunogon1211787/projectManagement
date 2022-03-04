@@ -118,7 +118,7 @@ public class Project {
 
     public Resource getTeamMemberByIndex(int index) {
         Resource res = null;
-        for (int i = 0; i < projectTeam.getProjectTeamList().size(); i++) {
+        for (int i = 0; i <= projectTeam.getProjectTeamList().size() - 1; i++) {
             res = projectTeam.getProjectTeamList().get(index);
         }
         return res;
@@ -126,7 +126,7 @@ public class Project {
 
     public boolean validateResource(Resource resource) {
         boolean msg = true;
-        for (int i = 0; i < projectTeam.getProjectTeamList().size(); i++) {
+        for (int i = 0; i <= projectTeam.getProjectTeamList().size() - 1; i++) {
             if (projectTeam.getProjectTeamList().get(i).equals(resource)) {
                 msg = false;
                 break;
@@ -134,17 +134,6 @@ public class Project {
         }
         return msg;
     }
-
-    /*public boolean hasCurrentResource(String email) {
-        boolean msg = false;
-        for (Resource resource : this.projectTeam.getProjectTeamList()) {
-            if (hasResource(email) && resource.getStartDate().isBefore(LocalDate.now())
-                    && resource.getEndDate().isAfter(LocalDate.now())) {
-                msg = true;
-            }
-        }
-        return msg;
-    }*/
 
     public boolean hasCurrentProjectTeamMember(String email) {
         return this.projectTeam.hasCurrentResource(email);

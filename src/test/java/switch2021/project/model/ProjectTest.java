@@ -34,7 +34,7 @@ class ProjectTest {
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
-        proj = company.getProjectStore().createProject( "prototype", "test1234", customer,
+        proj = company.getProjectStore().createProject( "prototype", "test1", customer,
                 typo, sector, date, 7, 5000);
         company.getProjectStore().saveNewProject(proj);
         company.getProjectStore().getProjectByCode(proj.getCode()).setEndDate();
@@ -51,7 +51,7 @@ class ProjectTest {
         String valueName = "prototype";
 
         String description = proj.getDescription();
-        String valueDescription = "test1234";
+        String valueDescription = "test1";
 
         Customer customer = company.getProjectStore().getProjectByCode("Project_2022_1").getCustomer();
         Customer valueCustomer = company.getCustomerStore().getCustomerByName("Teste");
