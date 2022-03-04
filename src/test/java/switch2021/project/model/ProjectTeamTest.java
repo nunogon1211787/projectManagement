@@ -408,6 +408,7 @@ public class ProjectTeamTest {
         assertEquals(proj1.getProjectTeam().getResource(user1).getRole(), company.getProjectRoleStore().getProjectRole("Team Member"));
         assertEquals(proj1.getProjectTeam().getResource(user2).getRole(), company.getProjectRoleStore().getProjectRole("Scrum Master"));
         assertEquals(4, proj1.getProjectTeam().getProjectTeamList().size());
+        assertEquals(LocalDate.now(), proj1.getProjectTeam().getResource(user2).getStartDate());
     }
 
     @Test //At this test the project role already exist in the team
