@@ -6,7 +6,6 @@ hide circle
 
 title Domain Model
 
-together {
 class Project{
 - code
 - projectName
@@ -16,18 +15,23 @@ class Project{
 - numberOfSprints
 - sprintDuration
 }
+
 class Typology{
 - description
 }
+
 class ProductBacklog{
 }
+
 class SprintBacklog{
 }
+
 class Sprint{
 - name
 - startDate
 - endDate
 }
+
 class TaskEffort{
 - effortHours
 - effortMinutes
@@ -35,6 +39,7 @@ class TaskEffort{
 - comment
 - attachment
 }
+
 class Task{
 - name
 - description
@@ -45,16 +50,20 @@ class Task{
 - hourSpent
 - executionPercentage
 }
+
 class TaskStatus{
 - description
 }
+
 class TaskType{
 - name
 }
+
 class UserStoryStatus{
 - description
 - sprintAvailable
 }
+
 class UserStory{
 - name
 - priority
@@ -63,37 +72,47 @@ class UserStory{
 - timeEstimate
 - workDone
 }
+
 class BusinessSector{
 - description
 }
+
 class Budget{
 - amount
 }
+
 class ProjectStatus{
 - description
 }
+
 class Customer{
 - name
 - email
 }
+
 class Company{
 }
+
 class Resource{
 - startDate
 - endDate
 - costPerHour
 - percentageOfAllocation
 }
+
 class ProjectRole{
 - name
 }
+
 class UserProfile{
 - name
 }
+
 class Request{
 - requestDate
 - requestStatus
 }
+
 class SystemUser{
 - userName
 - email
@@ -102,8 +121,8 @@ class SystemUser{
 - function
 - activateUser
 }
+
 class ProjectTeam{
-}
 }
 
 

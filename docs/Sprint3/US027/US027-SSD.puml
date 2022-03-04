@@ -9,14 +9,10 @@ participant ":System" as System
 
 activate Director
 
-Director -> System: Access the list of projects
-System --> Director: projectsDto
-Director -> System: Select a project
-System --> Director: Shows project information
-Director -> System: Access the list of resource
-System --> Director: Shows projectTeamDto
-Director -> System: Choose Resource
-System --> Director: Shows resourceDto
+Director -> System: Ask to access a project (code)
+System --> Director: Shows the request project data
+Director -> System: Ask to access resource of a project (name)
+System --> Director: Shows the request resource data
 Director -> System: Define Product Owner
 System --> Director: Informs operation success
 
