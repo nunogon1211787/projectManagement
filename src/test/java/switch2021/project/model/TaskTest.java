@@ -39,7 +39,7 @@ class TaskTest {
 
         String expectedTask = "Planear fazer totil coisas de cenas";
 
-        assertEquals(expectedTask, tastkTest3.getDescription());
+        assertEquals(expectedTask, tastkTest2.getDescription());
     }
 
     @Test
