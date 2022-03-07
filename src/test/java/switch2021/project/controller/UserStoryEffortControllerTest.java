@@ -14,38 +14,38 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserStoryEffortControllerTest {
 
 
-//TO DO
-//    @Test
-//    void catchCurrentProjectListByUserEmail() {
-//        // Arrange
-//        Company company = new Company();
-//        UserStoryEffortController controller = new UserStoryEffortController(company);
-//        SystemUserStore systemUserStore = company.getSystemUserStore();
-//        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-//        SystemUser user = new SystemUser("Test", "xxxx@isep.ipp.pt",
-//                "tester", "123456", "123456", "IMG_123", userProfile);
-//        systemUserStore.saveSystemUser(user); //salvo o user
-//        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-//        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-//        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+
+    @Test
+    void catchCurrentProjectListByUserEmail() {
+        // Arrange
+        Company company = new Company();
+        UserStoryEffortController controller = new UserStoryEffortController(company);
+        SystemUserStore systemUserStore = company.getSystemUserStore();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("Test", "xxxx@isep.ipp.pt",
+                "tester", "123456", "123456", "IMG_123", userProfile);
+        systemUserStore.saveSystemUser(user); //salvo o user
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        LocalDate startDate = LocalDate.of(2021, 12, 31);
+        Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
+                typo, sector, startDate, 7, 5000);
 //        LocalDate startDate = LocalDate.of(2021, 12, 31);
-//        Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
-//                typo, sector, startDate, 7, 5000);
-////        LocalDate startDate = LocalDate.of(2021, 12, 31);
-//        LocalDate endDate = LocalDate.of(2022, 3, 5);
-//        Resource person1 = new Resource(user, startDate, endDate, 100, .5);
-//        Resource person2 = new Resource(user, startDate, endDate, 100, .5);
-//        project1.getProjectTeam().saveResource(person1);
-//        project1.getProjectTeam().saveResource(person2);
-//        company.getProjectStore().saveNewProject(project1);
-//
-//        //Act
-//        List<Project> projectList = company.getProjectStore().getProjectsByUserEmail("xxxx@isep.ipp.pt");
-//        List<Project> companyProjectList = controller.getCurrentProjectListByUserEmail("xxxx@isep.ipp.pt");
-//
-//        //Assert
-//        assertEquals(companyProjectList, projectList);
-//    }
+        LocalDate endDate = LocalDate.of(2023, 3, 5);
+        Resource person1 = new Resource(user, startDate, endDate, 100, .5);
+        Resource person2 = new Resource(user, startDate, endDate, 100, .5);
+        project1.getProjectTeam().saveResource(person1);
+        project1.getProjectTeam().saveResource(person2);
+        company.getProjectStore().saveNewProject(project1);
+
+        //Act
+        List<Project> projectList = company.getProjectStore().getProjectsByUserEmail("xxxx@isep.ipp.pt");
+        List<Project> companyProjectList = controller.getCurrentProjectListByUserEmail("xxxx@isep.ipp.pt");
+
+        //Assert
+        assertEquals(companyProjectList, projectList);
+    }
 
     @Test
     void getProjectByCode() {

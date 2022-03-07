@@ -49,7 +49,7 @@ public class ChangePriorityUSControllerTest {
         newUser = new SystemUser("batatinha", "batatinha@cartoon.com", "des", "gth", "gth", "", userProfile);
         newUser2 = new SystemUser("companhia", "companhia@cartoon.com", "des", "gth", "gth", "", userProfile);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
-        LocalDate endDate = LocalDate.of(2022, 3, 5);
+        LocalDate endDate = LocalDate.of(2023, 3, 5);
         input = new Resource(newUser, startDate, endDate, 100, .5);
         input2 = new Resource(newUser2, startDate, endDate, 100, .5);
         userStoryStatus = new UserStoryStatus("coiso");
@@ -88,18 +88,18 @@ public class ChangePriorityUSControllerTest {
         assertEquals(userStory3, change.getUserStory(3));
     }
 
-//TO DO
-//    @Test
-//    void getCurrentProjectListByUserEmailSuccess() {
-//        //Arrange
-//        ChangePriorityUSController change = new ChangePriorityUSController(company);
-//        // Act
-//        List<Project> actual = new ArrayList<>();
-//        actual.add(project);
-//        actual.add(project2);
-//        // Assert
-//        assertEquals(actual, change.getCurrentProjectListByUserEmail("batatinha@cartoon.com"));
-//    }
+
+    @Test
+    void getCurrentProjectListByUserEmailSuccess() {
+        //Arrange
+        ChangePriorityUSController change = new ChangePriorityUSController(company);
+        // Act
+        List<Project> actual = new ArrayList<>();
+        actual.add(project);
+        actual.add(project2);
+        // Assert
+        assertEquals(actual, change.getCurrentProjectListByUserEmail("batatinha@cartoon.com"));
+    }
 
     @Test
     void getProjectByCodeSuccess() {
