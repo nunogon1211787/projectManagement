@@ -28,19 +28,23 @@ public class AddUserStoryToSprintBacklogController {
      **/
 
     public Project getProject(String code) {
-        return this.project = company.getProjectStore().getProjectByCode(code);
+        this.project = company.getProjectStore().getProjectByCode(code);
+        return this.project;
     }
 
     public SprintList getSprintStore() {
-        return sprintList = this.project.getSprints();
+        sprintList = this.project.getSprints();
+        return sprintList;
     }
 
     public Sprint getSprint(int sprintId) {
-        return this.sprint = this.sprintList.getSprint(sprintId);
+        this.sprint = this.sprintList.getSprint(sprintId);
+        return this.sprint;
     }
 
     public ProductBacklog getProductBacklog() {
-        return this.productBacklog = this.project.getProductBacklog();
+        this.productBacklog = this.project.getProductBacklog();
+        return this.productBacklog;
     }
 
 
