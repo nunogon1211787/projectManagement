@@ -26,7 +26,8 @@ public class RefineUserStoryController {
      **/
 
     public Project getProject(String projectCode){
-        return this.project = company.getProjectStore().getProjectByCode(projectCode);
+        this.project = company.getProjectStore().getProjectByCode(projectCode);
+        return this.project;
     }
 
     public ProductBacklog getProductBacklog(){
