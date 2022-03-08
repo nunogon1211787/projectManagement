@@ -25,11 +25,12 @@ System -> Ctrl: getProjectListByUserEmail(email)
 Ctrl -> C1: getProjectStore()
 C1 --> Ctrl: projStore
 Ctrl -> C2: getProjectListByUserEmail(email)
-loop
+
 C2 -> C2.1 ** : createProjectList
-end
+loop
 C2-> C2.1 : addProjectToList
 C2.1 --> C2 : true
+end
 
 
 C2 --> Ctrl: projectListByUser
