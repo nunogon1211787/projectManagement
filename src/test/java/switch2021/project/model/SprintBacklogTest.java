@@ -81,4 +81,18 @@ class SprintBacklogTest {
         // Act
         assertNull(sprintBacklog.getUserStory(55));
     }
+
+    @Test
+    @DisplayName("Test override conditions")
+    public void overrideTests() {
+        // Arrange
+        SprintBacklog sprintBacklog = new SprintBacklog();
+        SprintBacklog sprintBacklog1 = new SprintBacklog();
+        SprintBacklog sprintBacklog2 = null;
+        Typology test = new Typology("test");
+        // Act
+        assertEquals(sprintBacklog,sprintBacklog1);
+        assertNotEquals(sprintBacklog, sprintBacklog2);
+        assertNotEquals(sprintBacklog, test);
+    }
 }
