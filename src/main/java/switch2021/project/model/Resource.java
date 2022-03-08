@@ -144,21 +144,6 @@ public class Resource {
     /**
      * Override Equals (Carolina US007)
      **/
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof Resource)) return false;
-//        Resource that = (Resource) o;
-//        //if (this.role == null && that.role == null) return true;
-//        if ((!this.user.equals(that.user))) return false;
-//        assert this.role != null;
-//        return
-//                (this.role.equals(that.role)) &&
-//                        (this.startDate.equals(that.startDate)) &&
-//                        (this.endDate.equals(that.endDate)) &&
-//                        (this.costPerHour == that.costPerHour) &&
-//                        (this.percentageOfAllocation == that.percentageOfAllocation);
-//    }
 
     @Override
     public int hashCode() {
