@@ -2,7 +2,6 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.deprecated.UserStoryOfSprint;
 import switch2021.project.stores.SprintList;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
@@ -174,26 +173,6 @@ public class SprintTest {
         assertEquals(sprint, sprint2);
         assertNotEquals(sprint3.hashCode(), sprint2.hashCode());
         assertNotEquals(sprint3, sprint2);
-    }
-
-    @Test
-    public void sprintBacklogEmpty() {
-        LocalDate startDate = LocalDate.of(2022, 1, 2);
-
-        Sprint sprint = new Sprint("Add an apple", startDate);
-        assertTrue(sprint.getSprintBacklog().getUserStoryOfSprintList().isEmpty());
-    }
-
-    @Test
-    @DisplayName("List with 1 size")
-    public void sprintBacklogWithSize() {
-        LocalDate startDate = LocalDate.of(2022, 1, 2);
-        Sprint sprint = new Sprint("Add an apple", startDate);
-        UserStoryStatus status = new UserStoryStatus("To Do");
-        UserStory userstory = new UserStory("US001", 5, "AnaBoss",5);
-        UserStoryOfSprint userStoryOfSprint = new UserStoryOfSprint(userstory, 5 , 1 );
-        sprint.getSprintBacklog().getUserStoryOfSprintList().add(userStoryOfSprint);
-        assertEquals(1, sprint.getSprintBacklog().getUserStoryOfSprintList().size());
     }
 
     @Test

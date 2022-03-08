@@ -72,7 +72,6 @@ public class Sprint {
     public List<Task> getListOfTasksOfASprint(){
         List<Task> taskList2 = new ArrayList<>();
 
-        taskList2.addAll(this.sprintBacklog.getUserStoryOfSprintTasks());
         taskList2.addAll(this.taskList.getTaskList());
         return taskList2;
     }
