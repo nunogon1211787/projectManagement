@@ -115,7 +115,7 @@ class ProjectStatusStoreTest {
     }
 
     @Test
-    void setTest2() {
+    void overrideTest() {
         ProjectStatus status1 = new ProjectStatus("teste");
         ProjectStatus status2 = new ProjectStatus("teste");
         ProjectStatus status3 = null;
