@@ -470,7 +470,6 @@ class ProjectTest {
         LocalDate endDateMo = LocalDate.of(2021, 11, 15);
         Resource manueloliveira = new Resource(user4, startDateMo, endDateMo, 100, .3333);
         //Act
-        proj3.addResource(manueloliveira);
         boolean addResource = proj3.addResource(manueloliveira);
         //Assert
         assertFalse(addResource);
