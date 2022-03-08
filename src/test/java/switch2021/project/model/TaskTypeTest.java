@@ -9,8 +9,8 @@ class TaskTypeTest {
     @Test
     void hasNameSuccess() {
         //Arrange
-        TaskType type = new TaskType("teste");
-        String testeName = "teste";
+        TaskType type = new TaskType("tes");
+        String testeName = "tes";
         //Assert
         assertTrue(type.hasName(testeName));
     }
