@@ -121,7 +121,6 @@ class EditProjectInfoControllerTest {
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         //Resource 1
@@ -158,13 +157,15 @@ class EditProjectInfoControllerTest {
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
         //Act
-        edit.editProject("proto", "test44", LocalDate.of(2022,12,1),
+        edit.editProject("proto", "test44", LocalDate.of(2020,12,1),
                 LocalDate.of(2023,12,1), 10,10000,
                 3, projectStatus, newProjectTeam);
 
 
         //Assert
         assertEquals( newProjectTeam, project.getProjectTeam());
+        assertNotNull(project.getProjectTeam());
+        
 //        assertEquals( "test44", project.getDescription());
 //        assertEquals(project.getStartDate(),LocalDate.of(2022,12,1));
 //        assertEquals(project.getEndDate(),LocalDate.of(2023,12,1));
