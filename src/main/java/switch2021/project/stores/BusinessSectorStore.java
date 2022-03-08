@@ -62,25 +62,4 @@ public class BusinessSectorStore {
         return sector;
     }
 
-    /**
-     * Override
-     **/
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof BusinessSectorStore)) return false;
-        BusinessSectorStore that = (BusinessSectorStore) o;
-        return Objects.equals(this.businessSectorList, that.businessSectorList);
-    }
-
-    /**
-     * Hash
-     **/
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(businessSectorList);
-    }
-
 }

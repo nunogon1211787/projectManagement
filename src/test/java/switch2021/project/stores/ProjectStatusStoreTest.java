@@ -115,20 +115,4 @@ class ProjectStatusStoreTest {
         assertEquals("teste2",status1.getDescription());
     }
 
-    @Test
-    public void overrideAndHashCodeTest() {
-        //Arrange
-        ProjectStatusStore list1 = new ProjectStatusStore();
-        list1.add(list1.createProjectStatus("new"));
-        ProjectStatusStore list2 = new ProjectStatusStore();
-        list2.add(list1.createProjectStatus("new"));
-        ProjectStatusStore list3 = new ProjectStatusStore();
-        list3.add(list3.createProjectStatus("not new"));
-        //Assert
-        assertNotSame(list1, list2);
-        assertEquals(list1, list2);
-        assertEquals(list1.hashCode(), list2.hashCode());
-        assertNotEquals(list1, list3);
-        assertNotEquals(list1.hashCode(), list3.hashCode());
-    }
 }

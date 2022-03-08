@@ -78,25 +78,4 @@ public class ProjectStatusStore {
         return status;
     }
 
-    /**
-     * Override
-     **/
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ProjectStatusStore)) return false;
-        ProjectStatusStore that = (ProjectStatusStore) o;
-        return Objects.equals(this.projectStatusList, that.projectStatusList);
-    }
-
-    /**
-     * Hash
-     **/
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(projectStatusList);
-    }
-
 }
