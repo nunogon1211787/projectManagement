@@ -11,8 +11,8 @@ participant ": RegisterWorkToTaskUI" as Ui
 participant ": RegisterWorkToTaskController" as Ctrl
 participant ": Company" as company
 participant "userStorySprintProjectDTO\n : UserStorySprintProjectDTO" as userStorySprintProjectDTO
-participant "projectStore\n : ProjectStore" as projStore
-participant "project\n : Project" as project
+participant "projStore\n : ProjectStore" as projStore
+participant "proj\n : Project" as project
 participant "sprintList\n : SprintList" as sprintList
 participant "sprint\n : Sprint" as sprint
 participant "userStoryList\n : Sprintbacklog" as sprintBacklog
@@ -23,37 +23,46 @@ participant "taskIdNameDTOList\n : List<TaskIdNameDTO>" as taskIdDTOList
 participant "taskIdNameDTO\n : TaskIdNameDTO" as taskIdDTO
 participant "taskEffortDTO\n : TaskEffortDTO" as effortDTO
 participant "task\n : Task" as task
-participant "taskEffort\n : TaskEffort" as effort
+participant "effort\n : TaskEffort" as effort
 activate User
-User->Ui : wants to register\n a new user story task effort.\nAccess it's task list.
-Ui->Ctrl: getTasks(userStorySprintProjectDTO)
-note right
-  userStorySprintProjectDTO has project 'code', sprint 'id' and user story 'id'
-end note
-Ctrl->userStorySprintProjectDTO: code = getProjectCode()
-deactivate userStorySprintProjectDTO
-Ctrl->userStorySprintProjectDTO: sprintId = getSprintId()
-deactivate userStorySprintProjectDTO
-Ctrl->userStorySprintProjectDTO: userStoryId = getUserStoryId()
-deactivate userStorySprintProjectDTO
-Ctrl->company: projectStore\n = getProjectStore()
-deactivate company
+
+User->Ui : want to register a new task effort\nAccess my current projects
+Ui->Ctrl: getCurrentProjectsByUserEmail(email)
+ref over Ctrl, company : US033-SD_1getProjects
+Ctrl-->Ui:projectCodeDTOList
+Ui-->User: asks to select the project
+
+User->Ui: selects the intended project
+Ui->Ctrl: getProject(projCode)
 Ctrl->projStore: getProjectByCode(code)
-loop for each project in projectList
-projStore->project: hasCode\n(code)
+loop for each known project
+projStore->project: hasCode(code)
 project-->projStore: true
 end
-projStore-->Ctrl: project
-Ctrl->project: sprintList = getSprints()
-deactivate
-Ctrl->sprintList: getSprint(sprintId)
-loop for each sprint in sprintList
-sprintList->sprint: hasSprintID\n(sprintId)
-sprint-->sprintList: true
-end
-sprintList-->Ctrl: sprint
-Ctrl->sprint: sprintBacklog = getSprintBacklog()
-deactivate
+projStore-->Ctrl: proj
+Ctrl-->Ui: proj
+Ui-->User: shows project details
+
+User->Ui: Access project sprint list (projCodeDTO)
+Ui->Ctrl: getProjectSprints(projCodeDTO)
+ref over Ctrl, company : US033-SD_2getSprints
+Ctrl-->Ui: sprintIdDTOList
+Ui-->User: asks to select the sprint (sprintIdDTO)
+
+User->Ui: selects the intended sprint
+Ui-->User: sprintIdDTO
+
+User->Ui: Access sprint backlog
+Ui->Ctrl: getUserStories(sprintIdDTO)
+ref over Ctrl, company : US033-SD_3getUserStories
+Ctrl-->Ui: userStoryIdDTOList
+Ui-->User: asks to select the user story
+
+User->Ui: selects the intended user story
+Ui-->User:userStoryIdDTO
+
+User->Ui : Access it's task list.
+Ui->Ctrl: getTasks(userStorySprintProjectDTO)
 
 Ctrl->sprintBacklog: getUserStory(idUserStory)
 loop for each userStory in sprintBacklog
@@ -101,9 +110,7 @@ mapper->taskIdDTO**: create(taskId, taskName)
 mapper-->Ctrl: taskIdNameDTO
 Ctrl-->Ui: taskIdNameDTO
 Ui-->User: shows task details
-User->Ui : starts registering a new task effort
-Ui-->User: requests data (workHours,\n workMinutes, workDate,\n comment, attachment)
-User -> Ui: types requested data
+User -> Ui: starts registering a new task effort:\ntypes requested data (workHours,\n workMinutes, workDate,\n comment, attachment)
 Ui -> Ctrl: createTaskEffort(taskEffortDTO)
 Ctrl->effortDTO: effortHours = getEffortHours()
 deactivate
@@ -121,8 +128,8 @@ task-->Ctrl: effort
 Ctrl -> task: saveTaskEffort(effort)
 task -> task: validateTaskEffort(effort)
 deactivate task
-alt validate return true
-    alt taskEffortList.isEmpty()
+opt validate return true
+    opt taskEffortList.isEmpty()
     task -> task: setStartDate(effortDate)
     deactivate task
     task -> task: setStatus("Running")
@@ -136,7 +143,7 @@ task -> task: updateEffortRemaining(effort)
 deactivate task
 task -> task: updateExecutionPercentage()
 deactivate task
-    alt effortRemaining == 0
+    opt effortRemaining == 0
     task -> task: setStatus("Finished")
     deactivate task
     task -> task: setEndDate(effortDate)
@@ -144,7 +151,7 @@ deactivate task
     end
 end
 task-->Ctrl: true
-Ctrl -> userStory: updateWorkDone(task))
+Ctrl -> userStory: updateWorkDone(task)
 userStory-->Ctrl: true
 Ctrl-->Ui : true
 
