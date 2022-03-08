@@ -26,7 +26,8 @@ public class CreateProjectController {
      **/
 
     public Typology getTypology(String typo) {
-        return this.typology = company.getTypologyStore().getTypology(typo);
+        this.typology = company.getTypologyStore().getTypology(typo);
+        return this.typology;
     }
 
     public void getCustomer(String customer) {

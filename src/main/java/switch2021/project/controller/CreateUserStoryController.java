@@ -1,16 +1,11 @@
 package switch2021.project.controller;
 
+import switch2021.project.dto.ProjectDTO;
+import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
-import switch2021.project.utils.App;
-
 import java.util.Collections;
 import java.util.List;
-
-
-//https://www.devmedia.com.br/padrao-de-projeto-singleton-em-java/26392
-//https://www.geeksforgeeks.org/singleton-class-java/
-
 
 
 public class CreateUserStoryController {
@@ -22,31 +17,38 @@ public class CreateUserStoryController {
 
     private final Company company;
     private Project project;
+    private final ProjectsMapper mapper;
 
     /**
      * Constructor to test (without SINGLETON)
      **/
 
-    public CreateUserStoryController(Company company) {
+    public CreateUserStoryController(Company company, ProjectsMapper mapper) {
         this.company = company;
+        this.mapper = mapper;
     }
 
     /**
      * Methods
      **/
 
-    public List<Project> getProjectListByUserEmail(String email) {
-        ProjectStore projectStore = this.company.getProjectStore();
-        List<Project> arrayProject = projectStore.getProjectsByUserEmail(email);
-        return Collections.unmodifiableList(arrayProject);
+    public List<ProjectDTO> getProjectListByUserEmail(String email) {
+        ProjectStore projStore = this.company.getProjectStore();
+        List<Project> projectListByUser = projStore.getProjectsByUserEmail(email);
+        List<ProjectDTO> projectListByUserDtoList = this.mapper.toDtoByUser(projectListByUser);
+        return Collections.unmodifiableList(projectListByUserDtoList);
     }
 
-    public Project getProjectByCode(String code) {
+
+    public boolean createUserStory(String code, String name, int priority, String description, int  estimateEffort) {
         this.project = this.company.getProjectStore().getProjectByCode(code);
-        return this.project;
+        ProductBacklog productBacklog = this.project.getProductBacklog();
+        UserStory userStory = productBacklog.createUserStory(name, priority, description, estimateEffort);
+        return productBacklog.saveUserStory(userStory);
     }
 
-    public boolean createUserStory(String name, int priority, String description, int  estimateEffort) {
+    public boolean createUserStory1(String code, String name, int priority, String description, int  estimateEffort) {
+        this.project = this.company.getProjectStore().getProjectByCode(code);
         ProductBacklog productBacklog = this.project.getProductBacklog();
         UserStory userStory = productBacklog.createUserStory(name, priority, description, estimateEffort);
         return productBacklog.saveUserStory(userStory);
