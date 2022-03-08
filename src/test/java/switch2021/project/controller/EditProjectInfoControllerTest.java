@@ -163,17 +163,8 @@ class EditProjectInfoControllerTest {
 
 
         //Assert
-        assertEquals( newProjectTeam, project.getProjectTeam());
-        assertNotNull(project.getProjectTeam());
-        
-//        assertEquals( "test44", project.getDescription());
-//        assertEquals(project.getStartDate(),LocalDate.of(2022,12,1));
-//        assertEquals(project.getEndDate(),LocalDate.of(2023,12,1));
-//        assertEquals( 10, project.getNumberOfSprints());
-//        assertEquals(10000, project.getBudget());
-//        assertEquals( 3, project.getSprintDuration());
-//        assertEquals(project.getProjectStatus(),projectStatus);
-//        assertEquals(project.getProjectTeam(), projectTeam2);
+        ProjectTeam x = project.getProjectTeam();
+        assertEquals( newProjectTeam, x);
     }
 
     @Test

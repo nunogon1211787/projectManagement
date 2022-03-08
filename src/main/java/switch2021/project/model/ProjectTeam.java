@@ -248,7 +248,8 @@ public class ProjectTeam {
         if (this == o) return true;
         if (!(o instanceof ProjectTeam)) return false;
         ProjectTeam that = (ProjectTeam) o;
-        return Objects.equals(this.projectTeamList, that.projectTeamList);
+        boolean x = Objects.equals(this.projectTeamList, that.projectTeamList);
+        return x;
     }
 
     @Override
