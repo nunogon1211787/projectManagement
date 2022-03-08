@@ -54,8 +54,7 @@ public class ChangePriorityUSController {
 
 
     public List<Project> getCurrentProjectListByUserEmail (String email){
-        this.projectStore = this.company.getProjectStore();
-        this.arrayProject = this.projectStore.getCurrentProjectsByUserEmail(email);
+        this.arrayProject = this.company.getProjectStore().getCurrentProjectsByUserEmail(email);
         return arrayProject;
     }
 

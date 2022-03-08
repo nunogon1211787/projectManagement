@@ -14,14 +14,14 @@ public class SprintTest {
     @DisplayName("Constructor test, verification of success")
     public void sprintConstructorSuccess() {
         //Arrange
-        Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
+        Sprint sprint = new Sprint("Sp", LocalDate.of(2022, 1, 1));
         //Act
         int x = sprint.getIdSprint();
         String name = sprint.getName();
         LocalDate date = sprint.getStartDate();
         //Assert
         assertEquals(0, x);
-        assertEquals("Sprint_1", name);
+        assertEquals("Sp", name);
         assertEquals(LocalDate.of(2022, 1, 1), date);
     }
 

@@ -2,6 +2,8 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.dto.ProjectDTO;
+import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.model.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -10,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CreateUserStoryControllerTest {
 
     Company company = new Company();
+    ProjectsMapper mapper = new ProjectsMapper();
     Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
@@ -29,13 +32,13 @@ public class CreateUserStoryControllerTest {
     public void createUserStoryPriorityInvalidInf() {
         //Arrange
         company.getProjectStore().saveNewProject(project);
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-        createUserStoryController.getProjectByCode("Project_2022_1");
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper);
+
         int priority = -1;
         String description = "teste";
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                createUserStoryController.createUserStory("US001", priority, description,5));
+                createUserStoryController.createUserStory("Project_2022_1","US001", priority, description,5));
         //Assert
         assertEquals("Check priority, cannot be < 0 or superior to 5.", exception.getMessage());
     }
@@ -45,14 +48,16 @@ public class CreateUserStoryControllerTest {
         //Arrange
                company.getProjectStore().saveNewProject(project);
 
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-        createUserStoryController.getProjectByCode("Project_2022_1");
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper);
         int priority = 1;
         String description = "";
+        String description2 = "   ";
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("US001", priority, description,5));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1","US001", priority, description,5));
+        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1","US001", priority, description2,5));
         //Assert
         assertTrue(exception.getMessage().contains("Description cannot be blank."));
+        assertTrue(exception2.getMessage().contains("Description cannot be blank."));
     }
 
     @Test
@@ -60,14 +65,24 @@ public class CreateUserStoryControllerTest {
         //Arrange
         company.getProjectStore().saveNewProject(project);
 
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-        createUserStoryController.getProjectByCode("Project_2022_1");
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper);
         int priority = 1;
         String description = "dd";
+        String description2 = "d";
+        String description3 = "ddd";
+        String description4 = "ddde";
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("US001", priority, description,5));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1","US001", priority, description,5));
+        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1","US001", priority, description2,5));
+        Exception exception3 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1","US001", priority, description3,5));
+        Exception exception4 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1","US001", priority, description4,5));
+
         //Assert
         assertTrue(exception.getMessage().contains("Description must be at least 5 characters"));
+        assertTrue(exception2.getMessage().contains("Description must be at least 5 characters"));
+        assertTrue(exception3.getMessage().contains("Description must be at least 5 characters"));
+        assertTrue(exception4.getMessage().contains("Description must be at least 5 characters"));
+
     }
 
     @Test
@@ -76,12 +91,11 @@ public class CreateUserStoryControllerTest {
 
         company.getProjectStore().saveNewProject(project);
 
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-        createUserStoryController.getProjectByCode("Project_2022_1");
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper);
         int priority = 6;
         String description = "teste";
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("US001", priority, description,5));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1","US001", priority, description,5));
         //Assert
         assertEquals("Check priority, cannot be < 0 or superior to 5.", exception.getMessage());
     }
@@ -91,15 +105,20 @@ public class CreateUserStoryControllerTest {
         //Arrange
         company.getProjectStore().saveNewProject(project);
 
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-        createUserStoryController.getProjectByCode("Project_2022_1");
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper);
         int priority = 1;
+        int priority2 = 5;
+        int priority3 = 0;
         String description = "teste";
 
         // Act
-        boolean isUserStoryCreated = createUserStoryController.createUserStory("US001", priority, description,5);
+        boolean isUserStoryCreated = createUserStoryController.createUserStory("Project_2022_1","US001", priority, description,5);
+        boolean isUserStoryCreated2 = createUserStoryController.createUserStory("Project_2022_1","US001", priority2, "teste2",5);
+        boolean isUserStoryCreated3 = createUserStoryController.createUserStory("Project_2022_1","US001", priority3, "teste22",5);
         //Assert
         assertTrue(isUserStoryCreated);
+        assertTrue(isUserStoryCreated2);
+        assertTrue(isUserStoryCreated3);
     }
 
     @Test
@@ -110,11 +129,19 @@ public class CreateUserStoryControllerTest {
         project.addResource(input);
         project2.addResource(input);
         // Act
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
-        List<Project> projectList = createUserStoryController.getProjectListByUserEmail("cris@ipp.pt");
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper);
+        List<ProjectDTO> projectList = createUserStoryController.getProjectListByUserEmail("cris@ipp.pt");
         // Assert
         assertEquals(2, projectList.size());
-    }
+        assertEquals(project.getCode(), projectList.get(0).getCode());
+        assertEquals(project.getProjectName(), projectList.get(0).getProjectName());
+        assertEquals(project.getDescription(), projectList.get(0).getDescription());
+        assertEquals(project.getEndDate(), projectList.get(0).getEndDate());
+        assertEquals(project2.getCode(), projectList.get(1).getCode());
+        assertEquals(project2.getProjectName(), projectList.get(1).getProjectName());
+        assertEquals(project2.getDescription(), projectList.get(1).getDescription());
+        assertEquals(project2.getEndDate(), projectList.get(1).getEndDate());
+      }
 
     @Test
     public void getAllProjectListByUserEmailIsBlank() {
@@ -125,7 +152,7 @@ public class CreateUserStoryControllerTest {
         project2.addResource(input);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
+            CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper);
             createUserStoryController.getProjectListByUserEmail("");
         });
         // Assert
@@ -142,7 +169,7 @@ public class CreateUserStoryControllerTest {
         project2.addResource(input);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company);
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper);
         createUserStoryController.getProjectListByUserEmail("dani@ipp.pt");
         });
         // Assert

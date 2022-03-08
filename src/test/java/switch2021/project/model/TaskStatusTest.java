@@ -217,6 +217,6 @@ class TaskStatusTest {
         assertEquals(status1.getClass(),status2.getClass());
         assertEquals(status1,status6);
         assertNull(status4);
-        assertNotEquals(status5,status1);
+        assertEquals(status5,status1);
     }
 }

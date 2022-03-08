@@ -13,7 +13,7 @@ public class ProjectTeam {
     /**
      * ProjectTeam's Attribute
      **/
-    private List<Resource> projectTeamList;  //Resource´s List in a Project.
+    private final List<Resource> projectTeamList;  //Resource´s List in a Project.
 
 
     /**
@@ -89,6 +89,8 @@ public class ProjectTeam {
         }
         return currentResourcesNames;
     }
+
+
 
 
     /**
@@ -246,7 +248,8 @@ public class ProjectTeam {
         if (this == o) return true;
         if (!(o instanceof ProjectTeam)) return false;
         ProjectTeam that = (ProjectTeam) o;
-        return Objects.equals(this.projectTeamList, that.projectTeamList);
+        boolean x = Objects.equals(this.projectTeamList, that.projectTeamList);
+        return x;
     }
 
     @Override

@@ -3,6 +3,8 @@ package switch2021.project.model;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,6 +18,28 @@ class TaskTest {
         String expectedTask = "test";
 
         assertEquals(expectedTask, tastkTest.getDescription());
+    }
+
+    @Test
+    public void taskWithPrecedenceCreatorTest() {
+        Company company = new Company();
+        TaskType taskType = new TaskType("Coisa");
+        Task tastkTest = new Task("test");
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        Task tastkTest2 = new Task("test", "Planear fazer totil coisas de cenas", 22, taskType, resource);
+
+        List<String> precedence = new ArrayList<>();
+        precedence.add(tastkTest2.getDescription());
+
+        Task tastkTest3 = new Task("test2", "Planear fazer totil coisas de cenas", 21, taskType, resource, precedence);
+
+        String expectedTask = "Planear fazer totil coisas de cenas";
+
+        assertEquals(expectedTask, tastkTest2.getDescription());
     }
 
     @Test

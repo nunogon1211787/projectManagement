@@ -11,6 +11,9 @@ public class CreateProjectController {
      **/
 
     private final Company company;
+    private Typology typology;
+    private Customer customer;
+    private BusinessSector sector;
 
     /**
      * Constructor to test (without SINGLETON)
@@ -23,22 +26,23 @@ public class CreateProjectController {
      **/
 
     public Typology getTypology(String typo) {
-        return company.getTypologyStore().getTypology(typo);
+        this.typology = company.getTypologyStore().getTypology(typo);
+        return this.typology;
     }
 
-    public Customer getCustomer(String customer) {
-        return company.getCustomerStore().getCustomerByName(customer);
+    public void getCustomer(String customer) {
+        this.customer = company.getCustomerStore().getCustomerByName(customer);
     }
 
-    public BusinessSector getBusinessSector(String sector) {
-        return company.getBusinessSectorStore().getBusinessSectorByDescription(sector);
+    public void getBusinessSector(String sector) {
+        this.sector = company.getBusinessSectorStore().getBusinessSectorByDescription(sector);
     }
 
-    public boolean createProject(String code, String name, String description, String customer, String typology,
-                                 String businessSector, LocalDate startDate, int numberOfSprints, int budget) {
+    public boolean createProject(String name, String description, LocalDate startDate, int numberOfSprints, int budget) {
 
-        Project project = this.company.getProjectStore().createProject(name, description, getCustomer(customer),
-                getTypology(typology), getBusinessSector(businessSector), startDate, numberOfSprints, budget);
+
+        Project project = this.company.getProjectStore().createProject(name, description, customer,
+                typology, sector, startDate, numberOfSprints, budget);
 
         return this.company.getProjectStore().saveNewProject(project);
     }

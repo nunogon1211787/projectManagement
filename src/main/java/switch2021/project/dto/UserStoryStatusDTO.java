@@ -3,7 +3,7 @@ package switch2021.project.dto;
 import lombok.Getter;
 
 @Getter
-public class ScrumBoardDTO {
+public class UserStoryStatusDTO {
 
         /**
          * Attributes
@@ -20,7 +20,7 @@ public class ScrumBoardDTO {
          * Constructor to test (without SINGLETON)
          **/
 
-        public ScrumBoardDTO(String name, String status, String description, int timeEstimate, int priority, int userStoryId) {
+        public UserStoryStatusDTO(String name, String status, String description, int timeEstimate, int priority, int userStoryId) {
                 this.userStoryName = name;
                 this.userStoryStatus = status;
                 this.userStoryDescription = description;

@@ -25,6 +25,20 @@ class SystemUserTest {
     }
 
     @Test
+    public void verifyEmailSuccess() {
+
+        //Arrange
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser test = new SystemUser("Test", "xx", "tester", "123456",
+                "123456", "img_123456", userProfile);
+        //Act
+        String emailCheck = "xx";
+        //Assert
+        assertTrue(test.isYourEmail(emailCheck));
+    }
+
+    @Test
     public void verifyEmailFail() {
 
         //Arrange
@@ -35,6 +49,31 @@ class SystemUserTest {
         String emailCheck = "4321@isep.ipp.pt";
         //Assert
         assertFalse(joana.isYourEmail(emailCheck));
+    }
+
+    @Test
+    public void verifyUserNameSuccess() {
+
+        //Arrange
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser test = new SystemUser("Te", "xx", "tester", "123456",
+                "123456", "img_123456", userProfile);
+        //Act
+        String userName = "Te";
+        //Assert
+        assertTrue(test.hasName(userName));
+    }
+
+    @Test
+    public void verifyNameFail() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser joana = new SystemUser(" ", "1234@isep.ipp.pt", "Aluna", "abcde", "abcde", "123_img", userProfile);
+        });
     }
 
     @Test
@@ -118,6 +157,9 @@ class SystemUserTest {
                 "123", "123", "img_123", userProfile);
         //Act and Assert
         assertTrue(joana.setAllData("Joana Silva", "Aluna_100", "img_900"));
+        assertEquals(joana.getUserName(), "Joana Silva");
+        assertEquals(joana.getFunction(), "Aluna_100");
+        assertEquals(joana.getPhoto(), "img_900");
     }
 
     @Test

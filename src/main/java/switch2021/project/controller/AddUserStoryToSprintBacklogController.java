@@ -13,7 +13,6 @@ public class AddUserStoryToSprintBacklogController {
     private Project project;
     private SprintList sprintList;
     private ProductBacklog productBacklog;
-    private UserStory userStory;
     private Sprint sprint;
 
     /**
@@ -29,27 +28,29 @@ public class AddUserStoryToSprintBacklogController {
      **/
 
     public Project getProject(String code) {
-        return this.project = company.getProjectStore().getProjectByCode(code);
+        this.project = company.getProjectStore().getProjectByCode(code);
+        return this.project;
     }
 
     public SprintList getSprintStore() {
-        return sprintList = this.project.getSprints();
+        sprintList = this.project.getSprints();
+        return sprintList;
     }
 
     public Sprint getSprint(int sprintId) {
-        return this.sprint = this.sprintList.getSprint(sprintId);
+        this.sprint = this.sprintList.getSprint(sprintId);
+        return this.sprint;
     }
 
     public ProductBacklog getProductBacklog() {
-        return this.productBacklog = this.project.getProductBacklog();
+        this.productBacklog = this.project.getProductBacklog();
+        return this.productBacklog;
     }
 
-    public UserStory getUserStory(int userStoryId) {
-        return this.userStory = this.productBacklog.getUserStoryById(userStoryId);
-    }
 
-    public boolean addUserStoryToSprintBacklog(int effort, UserStoryStatus status) {
-        this.sprint.getSprintBacklog().saveUserStoryOfSprint(this.sprint.getSprintBacklog().createUSerStoryOfSprint(this.userStory,effort,status));
+    public boolean addUserStoryToSprintBacklog(int userStoryId) {
+        UserStory userStory = this.productBacklog.getUserStoryById(userStoryId);
+        this.sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         return true;
     }
 }

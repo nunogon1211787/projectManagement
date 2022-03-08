@@ -58,7 +58,7 @@ public class Project {
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
 
-        this.productBacklog = new ProductBacklog(); // o objeto project tem objeto productbacklog (metodo) como parametro
+        this.productBacklog = new ProductBacklog();
         this.projectTeam = new ProjectTeam();
     }
 
@@ -66,7 +66,7 @@ public class Project {
     /**
      * Set End Date
      **/
-
+    //TODO change LocalDate.now() to LocalDate.to()
     //Gives the project an end date
     public boolean setEndDate() {
         this.endDate = LocalDate.now();
@@ -118,7 +118,7 @@ public class Project {
 
     public Resource getTeamMemberByIndex(int index) {
         Resource res = null;
-        for (int i = 0; i < projectTeam.getProjectTeamList().size(); i++) {
+        for(Resource i : projectTeam.getProjectTeamList()){
             res = projectTeam.getProjectTeamList().get(index);
         }
         return res;
@@ -126,25 +126,14 @@ public class Project {
 
     public boolean validateResource(Resource resource) {
         boolean msg = true;
-        for (int i = 0; i < projectTeam.getProjectTeamList().size(); i++) {
-            if (projectTeam.getProjectTeamList().get(i).equals(resource)) {
+        for(Resource i : projectTeam.getProjectTeamList()){
+            if (i.equals(resource)) {
                 msg = false;
                 break;
             }
         }
         return msg;
     }
-
-    /*public boolean hasCurrentResource(String email) {
-        boolean msg = false;
-        for (Resource resource : this.projectTeam.getProjectTeamList()) {
-            if (hasResource(email) && resource.getStartDate().isBefore(LocalDate.now())
-                    && resource.getEndDate().isAfter(LocalDate.now())) {
-                msg = true;
-            }
-        }
-        return msg;
-    }*/
 
     public boolean hasCurrentProjectTeamMember(String email) {
         return this.projectTeam.hasCurrentResource(email);

@@ -83,12 +83,11 @@ public class Resource {
         boolean result = false;
 
         //To check start date
-        if(this.startDate.isBefore(LocalDate.now()) || this.startDate.isEqual(LocalDate.now())){
-            if(this.endDate.isAfter(LocalDate.now()) || this.endDate.isEqual(LocalDate.now())){
+        if((this.startDate.isBefore(LocalDate.now())
+                || this.startDate.isEqual(LocalDate.now())) && (this.endDate.isAfter(LocalDate.now())
+                || this.endDate.isEqual(LocalDate.now()))){
                 result = true;
             }
-        }
-
         return result;
     }
 
@@ -96,13 +95,13 @@ public class Resource {
      * Method to Check if the Resource is Available in this Period of Time (starDate to endDate)
      **/
 
-    public boolean isAvailableToSprint(LocalDate startDate, int sprintDuration) {
+    public boolean isAvailableToSprint(LocalDate sprintStartDate, int sprintDuration) {
         boolean msg = false;
 
-        LocalDate endDate = startDate.plusDays(sprintDuration * 7L - 1);
+        LocalDate sprintEndDate = sprintStartDate.plusDays(sprintDuration * 7L - 1);
 
-        if((this.startDate.isBefore(startDate) || this.startDate.isEqual(startDate)) &&
-                (this.endDate.isAfter(endDate) || this.endDate.isEqual(endDate))){
+        if((this.startDate.isBefore(sprintStartDate) || this.startDate.isEqual(sprintStartDate)) &&
+                (this.endDate.isAfter(sprintEndDate) || this.endDate.isEqual(sprintEndDate))){
                 msg = true;
             }
         return msg;
@@ -113,7 +112,8 @@ public class Resource {
      **/
     public boolean checkAllocationPeriod(LocalDate startDate, LocalDate endDate) {
         boolean msg = false;
-        if ((startDate.isEqual(this.startDate) || startDate.isEqual(this.endDate) || endDate.isEqual(this.endDate) || endDate.isEqual(this.startDate))
+        if ((startDate.isEqual(this.startDate) || startDate.isEqual(this.endDate) || endDate.isEqual(this.endDate)
+                || endDate.isEqual(this.startDate))
             || (startDate.isBefore(this.startDate) && endDate.isAfter(this.startDate))
             || (startDate.isBefore(this.endDate) && endDate.isAfter(this.endDate))
             || (startDate.isAfter(this.startDate) && endDate.isBefore(this.endDate))) {
@@ -144,24 +144,35 @@ public class Resource {
     /**
      * Override Equals (Carolina US007)
      **/
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Resource)) return false;
-        Resource that = (Resource) o;
-        if (this.role == null && that.role == null) return true;
-        if ((!this.user.equals(that.user))) return false;
-        assert this.role != null;
-        return
-                (this.role.equals(that.role)) &&
-                        (this.startDate.equals(that.startDate)) &&
-                        (this.endDate.equals(that.endDate)) &&
-                        (this.costPerHour == that.costPerHour) &&
-                        (this.percentageOfAllocation == that.percentageOfAllocation);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof Resource)) return false;
+//        Resource that = (Resource) o;
+//        //if (this.role == null && that.role == null) return true;
+//        if ((!this.user.equals(that.user))) return false;
+//        assert this.role != null;
+//        return
+//                (this.role.equals(that.role)) &&
+//                        (this.startDate.equals(that.startDate)) &&
+//                        (this.endDate.equals(that.endDate)) &&
+//                        (this.costPerHour == that.costPerHour) &&
+//                        (this.percentageOfAllocation == that.percentageOfAllocation);
+//    }
 
     @Override
     public int hashCode() {
         return Objects.hash(user,role,startDate,endDate,costPerHour,percentageOfAllocation);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Resource resource = (Resource) o;
+        return Double.compare(resource.costPerHour, costPerHour) == 0 && Double.compare(resource.percentageOfAllocation, percentageOfAllocation)
+                == 0 && user.equals(resource.user) && Objects.equals(role, resource.role) && Objects.equals(startDate,
+                resource.startDate) && Objects.equals(endDate, resource.endDate);
+
     }
 }

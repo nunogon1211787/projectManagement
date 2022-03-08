@@ -44,6 +44,7 @@ class SprintBacklogTest {
         assertEquals(story, userStoryOfSprint1);
         assertEquals(story2, userStoryOfSprint2);
         assertNotEquals(story3, userStoryOfSprint2);
+        assertNull(sprintBacklog.getUserStoryDeprecated(55));
     }
 
 
@@ -197,5 +198,18 @@ class SprintBacklogTest {
         // Act
 
         assertNotEquals(sprintBacklog.getUserStory(userstory.getIdUserStory()), userstory2);
+    }
+
+    @Test
+    @DisplayName("save user story to sprint backlog null")
+    public void getUserStoryNull() {
+        // Arrange
+        int priority = 5;
+        String description = "Validate";
+        UserStory userstory = new UserStory("US001", priority, description, 5);
+        sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+
+        // Act
+        assertNull(sprintBacklog.getUserStory(55));
     }
 }

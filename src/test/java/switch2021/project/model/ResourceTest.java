@@ -31,6 +31,27 @@ class ResourceTest {
         assertEquals(input, expected);
     }
 
+    @Test
+    @DisplayName("Test to Check Resource Creation - Cost Per Hour 0")
+    public void ResourcecostPerHour0(){
+        //Arrange
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "as", userProfile);
+        LocalDate startDate = LocalDate.of(2021, 12, 31);
+        LocalDate endDate = LocalDate.of(2022, 1, 5);
+        Resource input = new Resource(newUser, startDate, endDate, 0, .5);
+        input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+        //Act
+        SystemUser newUser2 = new SystemUser("xyz", "fase", "des", "gth", "gth", "as", userProfile);
+        LocalDate startDate2 = LocalDate.of(2021, 12, 31);
+        LocalDate endDate2 = LocalDate.of(2022, 1, 5);
+        Resource expected = new Resource(newUser2, startDate2, endDate2, 0, .5);
+        expected.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+        //Assert
+        assertEquals(input, expected);
+    }
+
     /**
      * Objetos estão iguais, mas no assertEquals não identifica
      */
@@ -84,6 +105,22 @@ class ResourceTest {
     }
 
     @Test
+    @DisplayName("Test to Check If Resource is Available in a Period of Time (Available date is equal global end date)")
+    public void checkIfResourceIsAvailableEqualDate2() {
+        //Arrange
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", userProfile);
+        LocalDate startDate = LocalDate.of(2022,1,1);
+        LocalDate endDate = LocalDate.of(2022, 1,20);
+        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        //Act
+        LocalDate date = LocalDate.of(2022, 1, 14);
+        //Assert
+        assertTrue(input.isAvailableToSprint(date,1));
+    }
+
+    @Test
     @DisplayName("Test to Check If Resource is Unavailable in a Period of Time")
     public void checkIfResourceIsUnavailableFail() {
         //Arrange
@@ -98,7 +135,6 @@ class ResourceTest {
         //Assert
         assertFalse(input.isAvailableToSprint(date,1));
     }
-
 
     @Test
     @DisplayName("Validate Resource Attributes")
@@ -384,13 +420,59 @@ class ResourceTest {
 
     @Test
     @DisplayName("Test to Check Allocation Period - True - SDtoAllocate is equal and EDtoAllocate is equal Allocated dates")
-    public void checkAllocationPeriodTrueEqual() {
+    public void checkAllocationPeriodTrueBothEqual() {
         //Arrange
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
 
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 12);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 24);
+
+        // user
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "", userProfile);
+        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+
+        //Act
+        boolean result = resAllo.checkAllocationPeriod(startDateToAllocate, endDateToAllocate);
+
+        //Assert
+        assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Test to Check Allocation Period - True - SDtoAllocate is equal to ED allocated")
+    public void checkAllocationPeriodTrueSDEqualED() {
+        //Arrange
+        LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
+        LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
+
+        LocalDate startDateToAllocate = LocalDate.of(2021, 12, 24);
+        LocalDate endDateToAllocate = LocalDate.of(2021, 12, 24);
+
+        // user
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "", userProfile);
+        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+
+        //Act
+        boolean result = resAllo.checkAllocationPeriod(startDateToAllocate, endDateToAllocate);
+
+        //Assert
+        assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Test to Check Allocation Period - True - EDtoAllocate is equal and SD allocated")
+    public void checkAllocationPeriodTrueEDisEqualSD() {
+        //Arrange
+        LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
+        LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
+
+        LocalDate startDateToAllocate = LocalDate.of(2021, 12, 1);
+        LocalDate endDateToAllocate = LocalDate.of(2021, 12, 12);
 
         // user
         Company company = new Company();
@@ -475,6 +557,29 @@ class ResourceTest {
     }
 
     @Test
+    @DisplayName("Test to Check Allocation Period - True - SDtoAllocate is before SDAllocated and EDtoAllocate is after SD allocated")
+    public void checkAllocationPeriodTrueSDisBeforeSDandEDisAfterSD() {
+        //Arrange
+        LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
+        LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
+
+        LocalDate startDateToAllocate = LocalDate.of(2021, 12, 10);
+        LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
+
+        //user
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "", userProfile);
+        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+
+        //Act
+        boolean result = resAllo.checkAllocationPeriod(startDateToAllocate, endDateToAllocate);
+
+        //Assert
+        assertTrue(result);
+    }
+
+    @Test
     @DisplayName("Test to Check User - True")
     public void checkUserTrue() {
         //Arrange
@@ -522,5 +627,29 @@ class ResourceTest {
             LocalDate endDate = LocalDate.of(2022, 1, 5);
             new Resource(newUser, startDate, endDate, -1, .5);
         });
+    }
+
+    @Test
+    @DisplayName("Test setStartDate New role")
+    public void setStartDate() {
+        //Arrange
+        LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
+        LocalDate newStartDateAllocated = LocalDate.of(2021, 12, 13);
+        LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
+
+
+        //user
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "", userProfile);
+        Resource res = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        Resource resExpected = new Resource(newUser, newStartDateAllocated, endDateAllocated, 100, .5);
+
+        //Act
+        res.setStartDate(newStartDateAllocated);
+
+        //Assert
+        assertEquals(resExpected,res);
+        assertEquals(newStartDateAllocated,res.getStartDate());
     }
 }

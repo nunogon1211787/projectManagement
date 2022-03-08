@@ -65,6 +65,7 @@ ScrumBoardController ..> userStoryStatusDTO
 ScrumBoardController ..> Company
 ScrumBoardController ..> Project
 ScrumBoardController ..> Mapper
+ScrumBoardController ..> UserStory
 Mapper ..> UserStory
 Mapper ..> userStoryStatusDTO
 Company "1" o-- "1" ProjectStore

@@ -2,7 +2,7 @@ package switch2021.project.mapper;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.dto.ScrumBoardDTO;
+import switch2021.project.dto.UserStoryStatusDTO;
 import switch2021.project.model.UserStory;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class ScrumBoardMapperTest {
         userStory.setIdUserStory(0);
 
         //Act
-        ScrumBoardDTO dto = mapper.toDTO(userStory);
+        UserStoryStatusDTO dto = mapper.toDTO(userStory);
 
         //Assert
         assertEquals(dto.getUserStoryName(),userStory.getName());
@@ -54,13 +54,13 @@ public class ScrumBoardMapperTest {
         list.add(userStory);
         list.add(userStory2);
         list.add(userStory3);
-        ScrumBoardDTO dto = mapper.toDTO(userStory);
-        ScrumBoardDTO dto2 = mapper.toDTO(userStory2);
-        ScrumBoardDTO dto3 = mapper.toDTO(userStory3);
+        UserStoryStatusDTO dto = mapper.toDTO(userStory);
+        UserStoryStatusDTO dto2 = mapper.toDTO(userStory2);
+        UserStoryStatusDTO dto3 = mapper.toDTO(userStory3);
 
 
         //Act
-        List<ScrumBoardDTO> dtoList = mapper.toDtoList(list);
+        List<UserStoryStatusDTO> dtoList = mapper.toDtoList(list);
 
         //Assert
         assertEquals(3, dtoList.size());

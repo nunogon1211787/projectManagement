@@ -1,0 +1,68 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+title US005 - As a Director, I want to create/register a new project
+
+autoactivate on
+autonumber
+
+actor "Director" as Director
+
+participant ":CreateProjectUI " as UI
+participant ":CreateProjectController " as Controller
+participant ":Company " as Company
+participant ":CostumerStore " as CostumerStore
+participant ":TypologyStore " as TypologyStore
+participant ":BusinessSectorStore " as BSStore
+participant ":ProjectStore " as ProjectStore
+participant "proj:Project " as Project
+
+activate "Director"
+Director -> UI: Starts the creation of a new Project
+UI --> Director: Requests data(name,description,startDate,numberOfSprints,typology, business, customer, budget)
+
+"Director" -> UI: Types and selects data
+UI -> Controller: createProject(name,description,startDate,numberOfSprints,typologyID, businessID, customerID, budget)
+
+Controller -> Company:getTypologyStore()
+Company -> TypologyStore:getTypology(typologyID)
+deactivate Company
+TypologyStore --> Controller:typology
+
+Controller -> Company:getCostumerStore()
+Company -> CostumerStore:getCostumer(costumerID)
+deactivate Company
+CostumerStore --> Controller:customer
+
+Controller -> Company:getBusinessSectorStore()
+Company -> BSStore:getBusinessSector(businessSectorID)
+deactivate Company
+BSStore --> Controller:business
+
+Controller -> Company:getProjectStore()
+Company -> ProjectStore:createProject:name,description,startDate,numberOfSprints,typology, business, customer, budget)
+deactivate Company
+
+ProjectStore -> Project**:create:name,description,startDate,numberOfSprints,typology, business, customer, budget)
+deactivate ProjectStore
+
+
+Project -> Project:validate()
+Project --> Controller:proj
+
+Controller -> Company:getProjectStore()
+Company -> ProjectStore:saveNewProject(proj)
+deactivate Company
+ProjectStore -> ProjectStore:validateProject(proj)
+ProjectStore -> ProjectStore:addProject(proj)
+deactivate ProjectStore
+deactivate ProjectStore
+
+ProjectStore --> Controller:true
+
+Controller --> UI:true
+
+UI --> Director:Confirms project creation
+
+@enduml
+
