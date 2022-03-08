@@ -179,5 +179,28 @@ class TaskTypeTest {
         assertTrue(result);
     }
 
+    @Test
+    void overrideTests(){
+        //Arrange
+        TaskType taskType = new TaskType("name");
+        TaskType taskType_equal = new TaskType("name");
+        TaskType taskType1 = new TaskType("name2");
+        TaskType taskType1_5 = new TaskType("name2");
+        TaskType taskType2 = new TaskType("name");
+        TaskType taskType3 = new TaskType("name2");
+        taskType.setTypeID(1);
+        taskType_equal.setTypeID(1);
+        taskType1.setTypeID(1);
+        taskType1_5.setTypeID(1);
+        taskType2.setTypeID(2);
+        taskType3.setTypeID(1);
 
+        //Assert
+        assertNotEquals(taskType,taskType2);
+        assertNotEquals(taskType,taskType3);
+        assertNotEquals(taskType2,taskType3);
+        assertNotEquals(taskType,taskType1);
+        assertNotEquals(taskType,taskType1_5);
+        assertEquals(taskType,taskType_equal);
+    }
 }
