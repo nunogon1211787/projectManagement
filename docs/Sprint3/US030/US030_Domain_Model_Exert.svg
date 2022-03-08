@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="791px" preserveAspectRatio="none" style="width:241px;height:791px;background:#FFFFFF;" version="1.1" viewBox="0 0 241 791" width="241px" zoomAndPan="magnify"><defs><filter height="300%" id="fnxxae05sbied" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="232" x="2" y="18.6855">US030 - Domain Model Exert</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect codeLine="10" fill="#FEFECE" filter="url(#fnxxae05sbied)" height="41.0938" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="59" x="88.5" y="29.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="91.5" y="47.0977">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="89.5" x2="146.5" y1="54.7344" y2="54.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="89.5" x2="146.5" y1="62.7344" y2="62.7344"/><!--MD5=[79d378210367c0c6ec62ef762ddfbd1b]
+class Project--><rect codeLine="13" fill="#FEFECE" filter="url(#fnxxae05sbied)" height="54.9297" id="Project" style="stroke:#A80036;stroke-width:1.5;" width="44" x="96" y="148.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="38" x="99" y="166.0977">Project</text><line style="stroke:#A80036;stroke-width:1.5;" x1="97" x2="139" y1="173.7344" y2="173.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="28" x="102" y="189.1533">-code</text><line style="stroke:#A80036;stroke-width:1.5;" x1="97" x2="139" y1="195.5703" y2="195.5703"/><!--MD5=[452a66c2e8d45f5bd209be454bbcd04f]
+class Sprint--><rect codeLine="17" fill="#FEFECE" filter="url(#fnxxae05sbied)" height="82.6016" id="Sprint" style="stroke:#A80036;stroke-width:1.5;" width="60" x="88" y="281.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="32" x="102" y="299.0977">Sprint</text><line style="stroke:#A80036;stroke-width:1.5;" x1="89" x2="147" y1="306.7344" y2="306.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="30" x="94" y="322.1533">-name</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="48" x="94" y="335.9893">-startDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="44" x="94" y="349.8252">-endDate</text><line style="stroke:#A80036;stroke-width:1.5;" x1="89" x2="147" y1="356.2422" y2="356.2422"/><!--MD5=[a136f49e3565b20f66540890d0159f10]
+class SprintBacklog--><rect codeLine="23" fill="#FEFECE" filter="url(#fnxxae05sbied)" height="41.0938" id="SprintBacklog" style="stroke:#A80036;stroke-width:1.5;" width="82" x="77" y="442.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="76" x="80" y="460.0977">SprintBacklog</text><line style="stroke:#A80036;stroke-width:1.5;" x1="78" x2="158" y1="467.7344" y2="467.7344"/><line style="stroke:#A80036;stroke-width:1.5;" x1="78" x2="158" y1="475.7344" y2="475.7344"/><!--MD5=[daa6dd44d8f60c5a9cd695bb66773862]
+class UserStory--><rect codeLine="26" fill="#FEFECE" filter="url(#fnxxae05sbied)" height="82.6016" id="UserStory" style="stroke:#A80036;stroke-width:1.5;" width="69" x="84.5" y="561.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="92" y="579.0977">UserStory</text><line style="stroke:#A80036;stroke-width:1.5;" x1="85.5" x2="152.5" y1="586.7344" y2="586.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="30" x="90.5" y="602.1533">-name</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="37" x="90.5" y="615.9893">-priority</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="90.5" y="629.8252">-description</text><line style="stroke:#A80036;stroke-width:1.5;" x1="85.5" x2="152.5" y1="636.2422" y2="636.2422"/><!--MD5=[9c1fd783fe022c5c955eb1af582def7f]
+class UserStoryStatus--><rect codeLine="32" fill="#FEFECE" filter="url(#fnxxae05sbied)" height="54.9297" id="UserStoryStatus" style="stroke:#A80036;stroke-width:1.5;" width="95" x="73.5" y="722.6406"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="89" x="76.5" y="740.0977">UserStoryStatus</text><line style="stroke:#A80036;stroke-width:1.5;" x1="74.5" x2="167.5" y1="747.7344" y2="747.7344"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="57" x="79.5" y="763.1533">-description</text><line style="stroke:#A80036;stroke-width:1.5;" x1="74.5" x2="167.5" y1="769.5703" y2="769.5703"/><!--MD5=[2e490d5338ac1af0f8b8635f18fa3e01]
+link Company to Project--><path codeLine="36" d="M118,70.7906 C118,91.6906 118,124.8806 118,148.2006 " fill="none" id="Company-Project" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="49" x="119" y="115.1357">contains</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="110.0156" y="92.3798">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="95.8125" y="137.88">0..*</text><!--MD5=[d6d7f4a9855853da0e2cab67ce85ccf9]
+link Project to Sprint--><path codeLine="37" d="M118,203.7406 C118,225.4806 118,256.5906 118,281.4706 " fill="none" id="Project-Sprint" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="21" x="119" y="248.1357">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="110.2344" y="225.0694">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="96.3438" y="270.8013">0..*</text><!--MD5=[99e6a3d10935d54e10b120f38e844c1f]
+link Sprint to SprintBacklog--><path codeLine="38" d="M118,364.8006 C118,390.4006 118,422.3006 118,442.4506 " fill="none" id="Sprint-SprintBacklog" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="21" x="119" y="409.1357">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="110.4859" y="385.6446">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="110.0156" y="431.9129">1</text><!--MD5=[8383f08382760acfe8beb7edb9e06a0c]
+link SprintBacklog to UserStory--><path codeLine="39" d="M118.14,483.9106 C118.29,504.0306 118.52,535.8106 118.7,561.3606 " fill="none" id="SprintBacklog-UserStory" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="49" x="119" y="528.1357">contains</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="110.237" y="505.1723">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="20" x="96.9941" y="550.673">0..*</text><!--MD5=[0c689516dabc79f767daf2f8fa8fffa6]
+link UserStory to UserStoryStatus--><path codeLine="40" d="M119.56,644.9206 C119.9,669.7106 120.33,700.6706 120.63,722.3806 " fill="none" id="UserStory-UserStoryStatus" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="21" x="121" y="689.1357">has</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="112.1282" y="665.7823">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="112.7351" y="711.655">1</text><!--MD5=[49cbbd70b9f83c74e9e57fc17c37d2f8]
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title US030 - Domain Model Exert
+
+together {
+
+class Company{
+}
+
+class Project{
+- code
+}
+
+class Sprint{
+- name
+- startDate
+- endDate
+}
+
+class SprintBacklog{
+}
+
+class UserStory{
+- name
+- priority
+- description
+}
+
+class UserStoryStatus{
+- description
+}
+
+Company "1" - - "0..*" Project: contains
+Project "1" - - "0..*" Sprint: has
+Sprint "1" - - "1" SprintBacklog: has
+SprintBacklog "1" - - "0..*" UserStory: contains
+UserStory "1" - - "1" UserStoryStatus: has
+
+@enduml
+
+@startuml
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title US030 - Domain Model Exert
+
+together {
+
+class Company{
+}
+
+class Project{
+- code
+}
+
+class Sprint{
+- name
+- startDate
+- endDate
+}
+
+class SprintBacklog{
+}
+
+class UserStory{
+- name
+- priority
+- description
+}
+
+class UserStoryStatus{
+- description
+}
+
+Company "1" - - "0..*" Project: contains
+Project "1" - - "0..*" Sprint: has
+Sprint "1" - - "1" SprintBacklog: has
+SprintBacklog "1" - - "0..*" UserStory: contains
+UserStory "1" - - "1" UserStoryStatus: has
+
+@enduml
+
+PlantUML version 1.2022.1(Tue Feb 01 18:19:58 GMT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>
