@@ -158,7 +158,7 @@ class EditProjectInfoControllerTest {
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
         //Act
-        edit.editProject("proto", "test44", LocalDate.of(2022,12,1),
+        edit.editProject("proto", "test44", LocalDate.of(2019,12,1),
                 LocalDate.of(2023,12,1), 10,10000,
                 3, projectStatus, newProjectTeam);
 
