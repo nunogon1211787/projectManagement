@@ -1,8 +1,7 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.Company;
-import switch2021.project.model.ProjectStatus;
+import switch2021.project.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,4 +114,15 @@ class ProjectStatusStoreTest {
         assertEquals("teste2",status1.getDescription());
     }
 
+    @Test
+    void setTest2() {
+        ProjectStatus status1 = new ProjectStatus("teste");
+        ProjectStatus status2 = new ProjectStatus("teste");
+        ProjectStatus status3 = null;
+        TaskType typo = new TaskType("test");
+
+        assertEquals(status1,status2);
+        assertNotEquals(status1,status3);
+        assertNotEquals(status1,typo);
+    }
 }
