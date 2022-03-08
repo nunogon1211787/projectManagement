@@ -22,7 +22,7 @@ public class AssociateResourceTest {
 
     @BeforeEach
     public void init() {
-        company = new Company(); // sempre a mesma instancia
+        company = new Company();
         userProfile = company.getUserProfileStore().getUserProfile("Visitor");
 
         LocalDate date = LocalDate.of(2021, 12, 12);
@@ -44,10 +44,10 @@ public class AssociateResourceTest {
     }
 
     @Test
-    @DisplayName("Teste add Resource")
+    @DisplayName("Add Resource")
     public void addResource() {
         //Arrange
-        //** user **//
+        //User
         SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456",
                 "123456", "img_123456", userProfile);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
@@ -60,35 +60,15 @@ public class AssociateResourceTest {
     }
 
     @Test
-    @DisplayName("Teste getTeamMemberByIndex")
+    @DisplayName("Get Team Member By Index Test")
     public void getTeamMemberByIndex() {
         //Arrange
         SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", "123456", "img_123456", userProfile);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
         Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
-
         proj1.addResource(resAllo1);
         proj3.addResource(resAllo1);
-
-        //Act
-        Resource result = proj1.getTeamMemberByIndex(0);
-        //Assert
-        assertEquals(resAllo1, result);
-    }
-
-    @Test
-    @DisplayName("Teste getTeamMemberByIndex")
-    public void createResource() {
-        //Arrange
-        SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", "123456", "img_123456", userProfile);
-        LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
-        LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
-        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
-
-        proj1.addResource(resAllo1);
-        proj3.addResource(resAllo1);
-
         //Act
         Resource result = proj1.getTeamMemberByIndex(0);
         //Assert
@@ -99,27 +79,21 @@ public class AssociateResourceTest {
     @DisplayName("Validate Allocation True")
     public void validateAllocationTrue() {
         //Arrange
-//        /** user **/
-
+        //User
         SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "img_xyz", userProfile);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
-
         Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .2);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
-        Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, 100, .2);
-
-        /** project list **/
+        //Save Project and Add Resource to Project
         projectList.saveNewProject(proj1);
         projectList.saveNewProject(proj2);
         projectList.saveNewProject(proj3);
         proj1.addResource(resAllo1);
         proj3.addResource(resAllo1);
-
         //Act
         boolean result = projectList.validateAllocation(newUser,0.2, startDateToAllocate, endDateToAllocate);
-
         //Assert
         assertTrue(result);
     }
@@ -128,58 +102,22 @@ public class AssociateResourceTest {
     @DisplayName("Validate Allocation False")
     public void validateAllocationFalse() {
         //Arrange
-//        /** user **/
+        //User
         SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "img_xyz", userProfile);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
-
         Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .2);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
-        Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, 100, .2);
-
-        /** project list **/
+        //Save Project and Add Resource to Project
         projectList.saveNewProject(proj1);
         projectList.saveNewProject(proj2);
         projectList.saveNewProject(proj3);
         proj1.addResource(resAllo1);
         proj3.addResource(resAllo1);
-
         //Act
         boolean result = projectList.validateAllocation(newUser,0.7, startDateToAllocate, endDateToAllocate);
-
         //Assert
         assertFalse(result);
-    }
-
-    @Test
-    @DisplayName("Teste construtor de AssociateResourceController")
-    public void associateResourceController() {
-
-        //Arrange
-        Company company = new Company();
-        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        LocalDate date = LocalDate.of(2021, 12, 12);
-        company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
-        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste"));
-
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project proj = company.getProjectStore().createProject( "prototype", "test56", customer, typo, sector, date, 7, 5000);
-        company.getProjectStore().saveNewProject(proj);
-
-        LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
-        LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
-        SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456",
-                "123456", "img_123456", userProfile);
-
-//      Construtor AssociateResource Controller
-        AssociateResourceController controllerTest = new AssociateResourceController(company);
-        company.getSystemUserStore().saveSystemUser(newUser);
-        boolean result = controllerTest.associateResource("xxxx@isep.ipp.pt", "Project_2022_1", startDateToAllocate, endDateToAllocate, 100, .2);
-
-        assertTrue(result);
-
     }
 }

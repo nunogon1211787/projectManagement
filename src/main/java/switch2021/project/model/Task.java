@@ -108,7 +108,7 @@ public class Task {
     }
 
     private void checkIdRules(int id) {
-        if (id < 0)
+        if (id < 1)
             throw new IllegalArgumentException("Type ID cannot be negative.");
     }
 
