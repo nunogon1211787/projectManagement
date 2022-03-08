@@ -64,9 +64,18 @@ public class UtilsTest {
     }
 
     @Test
-    void instance() {
+    void instanceNull() {
         //Arrange
         Company company = null;
+        company = App.getInstance().getCompany();
+        //Act and Assert
+        assertNotNull(company);
+    }
+
+    @Test
+    void instance() {
+        //Arrange
+        Company company = new Company();
         company = App.getInstance().getCompany();
         //Act and Assert
         assertNotNull(company);
