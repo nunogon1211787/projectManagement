@@ -476,6 +476,21 @@ class ProjectTest {
     }
 
     @Test
+    @DisplayName("Validate resource")
+    void addResource2() {
+        //Arrange
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        LocalDate startDateMo = LocalDate.of(2021, 11, 1);
+        LocalDate endDateMo = LocalDate.of(2021, 11, 15);
+        Resource manueloliveira = new Resource(user4, startDateMo, endDateMo, 100, .3333);
+        //Act
+        boolean addResource = proj3.addResource(manueloliveira);
+        //Assert
+        assertTrue(addResource);
+    }
+
+    @Test
     public void overrideAndHashCodeTest() {
         //Arrange
         ProjectStore list1 = new ProjectStore();
