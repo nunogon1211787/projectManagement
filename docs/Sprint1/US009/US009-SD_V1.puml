@@ -19,7 +19,7 @@ participant "proj : Project" as C3
 participant ": ProductBacklogMapper" as prodbackM
 participant ": ProductBacklog" as C4
 participant ": UserStoryMapper" as usMapper
-participant "createUserStoryDto : CreateUserStoryDto" as usdto
+participant "createUserStoryDto : UserStoryDto" as usdto
 participant "us : UserStory" as C5.1
 
 activate User
@@ -63,7 +63,7 @@ Ctrl -> C2 : getProjectByCode(code)
 C2 --> Ctrl : proj
 Ctrl-> C3 : getProductBacklog()
 C3 --> Ctrl : productBacklog
-Ctrl -> C4 : createUserStory(createUserStoryDto)
+Ctrl -> C4 : createUserStoryWithDto(createUserStoryDto)
 C4-> usMapper: toModel(createUserStoryDto)
 usMapper -> usdto : name = getName()
 deactivate usdto
