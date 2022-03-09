@@ -3,8 +3,6 @@ package switch2021.project.controller;
 import switch2021.project.model.Company;
 import switch2021.project.model.Project;
 import switch2021.project.stores.ProjectStore;
-import switch2021.project.utils.App;
-
 import java.util.Collections;
 import java.util.List;
 

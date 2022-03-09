@@ -86,17 +86,6 @@ class CustomerStoreTest {
     }
 
     @Test
-    void override() {
-        CustomerStore store = new CustomerStore();
-        Customer customer = store.createCustomer("teste","teste@teste.com");
-        store.saveNewCustomer(customer);
-
-        Customer customerTest = new Customer("teste","teste@teste.com");
-        customerTest.setCustomerId(1);
-        assertEquals(customerTest,customer);
-    }
-
-    @Test
     void encapsulationTest() {
         CustomerStore store = new CustomerStore();
         Customer customer = store.createCustomer("teste","teste@teste.com");
@@ -127,23 +116,6 @@ class CustomerStoreTest {
         Customer customerTest = store.createCustomer("teste2","teste2@teste.com");
 
         assertFalse(store.validateCustomer(customerTest));
-    }
-
-    @Test
-    public void overrideAndHashCodeTest() {
-        //Arrange
-        CustomerStore list1 = new CustomerStore();
-        list1.saveNewCustomer(list1.createCustomer("new","email@isep.pt"));
-        CustomerStore list2 = new CustomerStore();
-        list2.saveNewCustomer(list1.createCustomer("new","email@isep.pt"));
-        CustomerStore list3 = new CustomerStore();
-        list3.saveNewCustomer(list3.createCustomer("not new", "email@isep.pt"));
-        //Assert
-        assertNotSame(list1, list2);
-        assertEquals(list1, list2);
-        assertEquals(list1.hashCode(), list2.hashCode());
-        assertNotEquals(list1, list3);
-        assertNotEquals(list1.hashCode(), list3.hashCode());
     }
 
 }

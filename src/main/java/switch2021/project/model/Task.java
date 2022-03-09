@@ -66,8 +66,6 @@ public class Task {
         this.status = App.getInstance().getCompany().getTaskStatusStore().getInitialStatus();
         this.taskEffortList = new ArrayList<>();
         this.precedenceList = Collections.unmodifiableList(precedenceList);
-
-
     }
 
     /**
@@ -110,7 +108,7 @@ public class Task {
     }
 
     private void checkIdRules(int id) {
-        if (id < 0)
+        if (id < 1)
             throw new IllegalArgumentException("Type ID cannot be negative.");
     }
 

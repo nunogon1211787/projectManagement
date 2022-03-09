@@ -33,19 +33,23 @@ public class GetScrumBoardController {
      */
 
     public Project getProject(String projectCode) {
-        return project = company.getProjectStore().getProjectByCode(projectCode);
+        project = company.getProjectStore().getProjectByCode(projectCode);
+        return project;
     }
 
     public Sprint getCurrentSprint() {
-        return sprint = project.getCurrentSprint();
+        sprint = project.getCurrentSprint();
+        return sprint;
     }
 
     public SprintBacklog getSprintBacklog() {
-        return sprintBacklog = sprint.getSprintBacklog();
+        sprintBacklog = sprint.getSprintBacklog();
+        return sprintBacklog;
     }
 
     public List<UserStory> getUserStoryList() {
-        return userStoryList = sprintBacklog.getUserStoryList();
+        userStoryList = sprintBacklog.getUserStoryList();
+        return userStoryList;
     }
 
     /**

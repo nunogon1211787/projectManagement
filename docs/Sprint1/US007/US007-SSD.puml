@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title US010 - As Authenticated User, i want to update its own data (e.g. photo, function, ...)
+title US007 - As Director, I want to associate a human resource (user) to a project
 
 autoactivate on
 autonumber
@@ -11,9 +11,15 @@ participant ":System" as System
 
 activate user
 
-user -> System: Start looking for Personal Data
-System --> user: Shows System User Data
+user -> System: Asks to associate a human resource (user) to a project
+System --> user: Search for the Data
 
-user -> System: Update System User Data
-System --> user: Informs Operation Success
+user -> System: Asks for Project List
+System --> user: Shows Project List
+
+user -> System: Asks for System User List
+System --> user: Shows System User List
+
+user -> System: Types data (email, projectCode, startDate, endDate, costPerHour, percentageOfAllocation)
+System --> user: Shows Information Success
 @enduml

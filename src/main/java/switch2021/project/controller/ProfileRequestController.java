@@ -29,7 +29,8 @@ public class ProfileRequestController {
 
         UserProfile profRequest = this.company.getUserProfileStore().getUserProfile(nameProfile);
         SystemUser user = this.company.getSystemUserStore().getUserByEmail(email);
-        return this.request = this.company.getRequestStore().createProfileRequest(profRequest, user);
+        this.request = this.company.getRequestStore().createProfileRequest(profRequest, user);
+        return this.request;
     }
 
     public boolean saveRequest() {

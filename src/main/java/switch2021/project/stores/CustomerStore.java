@@ -77,6 +77,7 @@ public class CustomerStore {
      * Override
      **/
 
+/*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,13 +86,16 @@ public class CustomerStore {
         return Objects.equals(this.customerList, that.customerList);
     }
 
-    /**
+    */
+/**
      * Hash
-     **/
+     **//*
+
 
     @Override
     public int hashCode() {
         return Objects.hash(customerList);
     }
+*/
 
 }

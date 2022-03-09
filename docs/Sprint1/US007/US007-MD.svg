@@ -1,19 +1,24 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="173px" preserveAspectRatio="none" style="width:987px;height:173px;background:#FFFFFF;" version="1.1" viewBox="0 0 987 173" width="987px" zoomAndPan="magnify"><defs><filter height="300%" id="fuuapl2kjcfzc" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="978" x="2" y="17.4023">Domain Model excerpt - US010 - As Authenticated User, i want to update its own data (e.g. photo, function, ...)</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
-class Company--><rect codeLine="9" fill="#FEFECE" filter="url(#fuuapl2kjcfzc)" height="40.1328" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="60" x="335.25" y="73.6992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="338.25" y="90.3008">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="336.25" x2="394.25" y1="97.832" y2="97.832"/><line style="stroke:#A80036;stroke-width:1.5;" x1="336.25" x2="394.25" y1="105.832" y2="105.832"/><!--MD5=[bc064d979c32666ae52f3d7624591b7b]
-class SystemUser--><rect codeLine="12" fill="#FEFECE" filter="url(#fuuapl2kjcfzc)" height="130.8184" id="SystemUser" style="stroke:#A80036;stroke-width:1.5;" width="141" x="511.75" y="28.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="66" x="549.25" y="44.8008">SystemUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="512.75" x2="651.75" y1="52.332" y2="52.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="59" x="517.75" y="66.9668">-username</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="34" x="517.75" y="79.9219">-email</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="38" x="517.75" y="92.877">-photo</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="58" x="517.75" y="105.832">-password</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="129" x="517.75" y="118.7871">-passwordConfirmation</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="51" x="517.75" y="131.7422">-function</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="72" x="517.75" y="144.6973">-activateUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="512.75" x2="651.75" y1="151.0176" y2="151.0176"/><!--MD5=[29ba05bb23273e963a898f2a55a4d86c]
-reverse link Company to SystemUser--><path codeLine="24" d="M400.48,93.6992 C430.47,93.6992 474.46,93.6992 511.66,93.6992 " fill="none" id="Company-backto-SystemUser" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="395.42,93.6992,404.42,97.6992,400.42,93.6992,404.42,89.6992,395.42,93.6992" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="80" x="413.5" y="87.2676">employed by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="403.3218" y="89.5538">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="6" x="497.6111" y="90.4742">*</text><!--MD5=[37a4fdcf075db5605cb9e27e3ee008fe]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="498px" preserveAspectRatio="none" style="width:899px;height:498px;background:#FFFFFF;" version="1.1" viewBox="0 0 899 498" width="899px" zoomAndPan="magnify"><defs><filter height="300%" id="f154z41kne8bfs" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="890" x="2" y="17.4023">Domain Model excerpt - US007 - As Director, I want to associate a human resource (user) to a project</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect codeLine="9" fill="#FEFECE" filter="url(#f154z41kne8bfs)" height="40.1328" id="Company" style="stroke:#A80036;stroke-width:1.5;" width="60" x="176" y="73.6992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="179" y="90.3008">Company</text><line style="stroke:#A80036;stroke-width:1.5;" x1="177" x2="235" y1="97.832" y2="97.832"/><line style="stroke:#A80036;stroke-width:1.5;" x1="177" x2="235" y1="105.832" y2="105.832"/><!--MD5=[bc064d979c32666ae52f3d7624591b7b]
+class SystemUser--><rect codeLine="11" fill="#FEFECE" filter="url(#f154z41kne8bfs)" height="130.8184" id="SystemUser" style="stroke:#A80036;stroke-width:1.5;" width="141" x="352.5" y="28.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="66" x="390" y="44.8008">SystemUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="353.5" x2="492.5" y1="52.332" y2="52.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="59" x="358.5" y="66.9668">-username</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="34" x="358.5" y="79.9219">-email</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="38" x="358.5" y="92.877">-photo</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="58" x="358.5" y="105.832">-password</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="129" x="358.5" y="118.7871">-passwordConfirmation</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="51" x="358.5" y="131.7422">-function</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="72" x="358.5" y="144.6973">-activateUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="353.5" x2="492.5" y1="151.0176" y2="151.0176"/><!--MD5=[79d378210367c0c6ec62ef762ddfbd1b]
+class Project--><rect codeLine="20" fill="#FEFECE" filter="url(#f154z41kne8bfs)" height="130.8184" id="Project" style="stroke:#A80036;stroke-width:1.5;" width="111" x="591.5" y="353.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="40" x="627" y="369.8008">Project</text><line style="stroke:#A80036;stroke-width:1.5;" x1="592.5" x2="701.5" y1="377.332" y2="377.332"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="32" x="597.5" y="391.9668">-code</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="74" x="597.5" y="404.9219">-projectName</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="67" x="597.5" y="417.877">-description</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="55" x="597.5" y="430.832">-startDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="50" x="597.5" y="443.7871">-endDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="99" x="597.5" y="456.7422">-numberOfSprints</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="85" x="597.5" y="469.6973">-sprintDuration</text><line style="stroke:#A80036;stroke-width:1.5;" x1="592.5" x2="701.5" y1="476.0176" y2="476.0176"/><!--MD5=[ea85c9eeae48c9b9754651e25079a913]
+class ProjectTeam--><rect codeLine="29" fill="#FEFECE" filter="url(#f154z41kne8bfs)" height="40.1328" id="ProjectTeam" style="stroke:#A80036;stroke-width:1.5;" width="79" x="607.5" y="236.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73" x="610.5" y="252.8008">ProjectTeam</text><line style="stroke:#A80036;stroke-width:1.5;" x1="608.5" x2="685.5" y1="260.332" y2="260.332"/><line style="stroke:#A80036;stroke-width:1.5;" x1="608.5" x2="685.5" y1="268.332" y2="268.332"/><!--MD5=[6b13f1b330d33795af281e5c1dfe1e98]
+class Resource--><rect codeLine="31" fill="#FEFECE" filter="url(#f154z41kne8bfs)" height="91.9531" id="Resource" style="stroke:#A80036;stroke-width:1.5;" width="145" x="574.5" y="47.6992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="620.5" y="64.3008">Resource</text><line style="stroke:#A80036;stroke-width:1.5;" x1="575.5" x2="718.5" y1="71.832" y2="71.832"/><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="55" x="580.5" y="86.4668">-startDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="50" x="580.5" y="99.4219">-endDate</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="73" x="580.5" y="112.377">-costPerHour</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="133" x="580.5" y="125.332">-percentageOfAllocation</text><line style="stroke:#A80036;stroke-width:1.5;" x1="575.5" x2="718.5" y1="131.6523" y2="131.6523"/><!--MD5=[29ba05bb23273e963a898f2a55a4d86c]
+reverse link Company to SystemUser--><path codeLine="39" d="M241.23,93.6992 C271.22,93.6992 315.21,93.6992 352.41,93.6992 " fill="none" id="Company-backto-SystemUser" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="236.17,93.6992,245.17,97.6992,241.17,93.6992,245.17,89.6992,236.17,93.6992" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="80" x="254.25" y="87.2676">employed by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="244.0718" y="89.5538">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="6" x="338.3611" y="90.4742">*</text><!--MD5=[afeec06cbb723ea5fee49c2454271fc4]
+link ProjectTeam to Project--><path codeLine="40" d="M647,276.2392 C647,295.1692 647,325.2992 647,352.8892 " fill="none" id="ProjectTeam-Project" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="65" x="648" y="319.7676">worked by</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="637.825" y="296.9236">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="638.5625" y="342.4662">1</text><!--MD5=[6287566a3aa867d18bc0d5e3cdda00db]
+link Resource to ProjectTeam--><path codeLine="41" d="M647,139.8392 C647,171.5492 647,212.3692 647,235.9792 " fill="none" id="Resource-ProjectTeam" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="82" x="648" y="202.7676">is associated</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="638.4125" y="160.3122">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="6" x="640.1188" y="225.4309">*</text><!--MD5=[02b6709b4372592d30d8cc0f15963fb8]
+reverse link SystemUser to Resource--><path codeLine="42" d="M498.75,93.6992 C523.21,93.6992 550.25,93.6992 574.47,93.6992 " fill="none" id="SystemUser-backto-Resource" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="493.57,93.6992,502.57,97.6992,498.57,93.6992,502.57,89.6992,493.57,93.6992" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="44" x="512" y="87.2676">acts as</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="501.7261" y="90.4742">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="6" x="560.681" y="90.5126">*</text><!--MD5=[c39f1f9e7b640f367c1144df21594e34]
 @startuml
 'https://plantuml.com/class-diagram
 
 skinparam classAttributeIconSize 0
 hide circle
 
-title Domain Model excerpt - US010 - As Authenticated User, i want to update its own data (e.g. photo, function, ...)
+title Domain Model excerpt - US007 - As Director, I want to associate a human resource (user) to a project
 
 
 class Company{
 }
-
 class SystemUser{
 - username
 - email
@@ -23,11 +28,29 @@ class SystemUser{
 - function
 - activateUser
 }
-
+class Project{
+- code
+- projectName
+- description
+- startDate
+- endDate
+- numberOfSprints
+- sprintDuration
+}
+class ProjectTeam{
+}
+class Resource {
+- startDate
+- endDate
+- costPerHour
+- percentageOfAllocation
+}
 
 
 Company "1" <-right- "*" SystemUser: employed by
-
+Project "1" -up- "1" ProjectTeam: worked by
+ProjectTeam "*" -up- "1" Resource: is associated
+SystemUser "1" <-right- "*" Resource: acts as
 
 
 @enduml
@@ -37,12 +60,11 @@ Company "1" <-right- "*" SystemUser: employed by
 skinparam classAttributeIconSize 0
 hide circle
 
-title Domain Model excerpt - US010 - As Authenticated User, i want to update its own data (e.g. photo, function, ...)
+title Domain Model excerpt - US007 - As Director, I want to associate a human resource (user) to a project
 
 
 class Company{
 }
-
 class SystemUser{
 - username
 - email
@@ -52,11 +74,29 @@ class SystemUser{
 - function
 - activateUser
 }
-
+class Project{
+- code
+- projectName
+- description
+- startDate
+- endDate
+- numberOfSprints
+- sprintDuration
+}
+class ProjectTeam{
+}
+class Resource {
+- startDate
+- endDate
+- costPerHour
+- percentageOfAllocation
+}
 
 
 Company "1" <-right- "*" SystemUser: employed by
-
+Project "1" -up- "1" ProjectTeam: worked by
+ProjectTeam "*" -up- "1" Resource: is associated
+SystemUser "1" <-right- "*" Resource: acts as
 
 
 @enduml

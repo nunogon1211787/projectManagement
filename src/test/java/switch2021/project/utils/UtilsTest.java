@@ -1,8 +1,9 @@
 package switch2021.project.utils;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import switch2021.project.model.Company;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UtilsTest {
 
@@ -60,5 +61,23 @@ public class UtilsTest {
         int n = 7;
         //Act and Assert
         assertFalse(Utils.isFibonacci(n));
+    }
+
+    @Test
+    void instanceNull() {
+        //Arrange
+        Company company = null;
+        company = App.getInstance().getCompany();
+        //Act and Assert
+        assertNotNull(company);
+    }
+
+    @Test
+    void instance() {
+        //Arrange
+        Company company = new Company();
+        company = App.getInstance().getCompany();
+        //Act and Assert
+        assertNotNull(company);
     }
 }

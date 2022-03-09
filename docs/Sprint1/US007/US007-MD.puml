@@ -4,12 +4,11 @@
 skinparam classAttributeIconSize 0
 hide circle
 
-title Domain Model excerpt - US010 - As Authenticated User, i want to update its own data (e.g. photo, function, ...)
+title Domain Model excerpt - US007 - As Director, I want to associate a human resource (user) to a project
 
 
 class Company{
 }
-
 class SystemUser{
 - username
 - email
@@ -19,11 +18,29 @@ class SystemUser{
 - function
 - activateUser
 }
-
+class Project{
+- code
+- projectName
+- description
+- startDate
+- endDate
+- numberOfSprints
+- sprintDuration
+}
+class ProjectTeam{
+}
+class Resource {
+- startDate
+- endDate
+- costPerHour
+- percentageOfAllocation
+}
 
 
 Company "1" <-right- "*" SystemUser: employed by
-
+Project "1" -up- "1" ProjectTeam: worked by
+ProjectTeam "*" -up- "1" Resource: is associated
+SystemUser "1" <-right- "*" Resource: acts as
 
 
 @enduml

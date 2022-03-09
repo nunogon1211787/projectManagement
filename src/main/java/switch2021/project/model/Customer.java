@@ -26,22 +26,5 @@ public class Customer {
         this.customerEmail = customerEmail;
         this.customerName = customerName;
     }
-
-    /**
-     * Override Methods
-     **/
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Customer that = (Customer) o;
-
-        return ((this.customerEmail.equals(that.customerEmail)) && (this.customerId ==that.customerId)  &&
-                (this.customerName.equals(that.customerName)));
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(customerEmail,customerId,customerName);
-    }
+    
 }

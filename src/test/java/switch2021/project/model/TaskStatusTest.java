@@ -9,8 +9,8 @@ class TaskStatusTest {
     @Test
     void hasDescriptionSuccess() {
         //Arrange
-        TaskStatus status = new TaskStatus("test");
-        String testName = "test";
+        TaskStatus status = new TaskStatus("tes");
+        String testName = "tes";
         //Assert
         assertTrue(status.hasDescription(testName));
     }

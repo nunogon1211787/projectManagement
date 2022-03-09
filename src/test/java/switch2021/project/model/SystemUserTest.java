@@ -386,9 +386,9 @@ class SystemUserTest {
         Company company = new Company();
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
-        String password = "ghi";
-        String passwordConfirmation = "ghi";
-        String function = "tester";
+        String password = "gh";
+        String passwordConfirmation = "gh";
+        String function = "te";
         String photo = "photo";
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -396,7 +396,7 @@ class SystemUserTest {
 
         List<UserProfile> assignedProfileExpected = new ArrayList<>();
         assignedProfileExpected.add(profile);
-        String passwordExpected = "ÊËÌ";
+        String passwordExpected = "ÊË";
         //Assert
         assertEquals(userName, newUser.getUserName());
         assertEquals(email, newUser.getEmail());
