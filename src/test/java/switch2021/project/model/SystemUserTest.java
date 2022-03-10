@@ -157,9 +157,9 @@ class SystemUserTest {
                 "123", "123", "img_123", userProfile);
         //Act and Assert
         assertTrue(joana.setAllData("Joana Silva", "Aluna_100", "img_900"));
-        assertEquals(joana.getUserName(), "Joana Silva");
-        assertEquals(joana.getFunction(), "Aluna_100");
-        assertEquals(joana.getPhoto(), "img_900");
+        assertEquals("Joana Silva", joana.getUserName());
+        assertEquals("Aluna_100", joana.getFunction());
+        assertEquals("img_900", joana.getPhoto());
     }
 
     @Test
