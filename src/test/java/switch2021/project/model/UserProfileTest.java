@@ -43,35 +43,9 @@ class UserProfileTest {
 
 
         //Result
-        assertEquals(4, test1.getIdUserProfile());
-        assertEquals(5, test2.getIdUserProfile());
+        assertEquals(4, test1.getIdProfile());
+        assertEquals(5, test2.getIdProfile());
 
-    }
-
-    @Test
-    void copyConstructorTestName() {
-        //input
-        UserProfile test = new UserProfile("admin");
-        UserProfile copyTest = new UserProfile(test);
-        String newName = "visitor";
-        copyTest.setUserProfileName(newName);
-        //Expected
-        String expected = "visitor";
-        String result = copyTest.getUserProfileName();
-        String nameOriginal = test.getUserProfileName();
-        //Result
-        assertEquals(expected, result);
-        assertEquals("admin", nameOriginal);
-    }
-
-
-    @Test
-    void copyConstructorTest() {
-        //input
-        UserProfile test = new UserProfile("admin");
-        UserProfile copyTest = new UserProfile(test);
-        //result
-        assertEquals(test, copyTest);
     }
 
     @Test

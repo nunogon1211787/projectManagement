@@ -130,8 +130,8 @@ public class TypologyStore {
         return (this.typologyList.equals(that.getTypologyList()));
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(typologyList);
-    }
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(typologyList);
+//    }
 }
