@@ -7,14 +7,11 @@ autoactivate on
 autonumber
 
 participant ": RegisterWorkToTaskController" as Ctrl
-participant ": Company" as company
 participant ": RegisterWorkToTaskMapper" as mapper
-participant "projCodeDTO: ProjectCodeDTO" as projectDTO
-participant "projStore : ProjectStore" as projStore
 participant "proj : Project" as project
-participant "sprintList : SprintList" as sprintList
-participant "sprintIdDTOList: List<SprintIdDTO>" as sprintIdDTOList
-participant "sprintIdDTO: SprintIdDTO" as sprintIdDTO
+participant "sprintList\n: SprintList" as sprintList
+participant "sprintIdNameDTOList\n: List<SprintIdNameDTO>" as sprintIdDTOList
+participant "sprintIdNameDTO\n: SprintIdNameDTO" as sprintIdDTO
 
 [o->Ctrl: getProjectSprints()
 Ctrl->project: getSprintList()
@@ -27,15 +24,13 @@ mapper->sprintIdDTOList **: create()
 loop for each sprint in sprintList
 mapper->sprintList: get(i)
 sprintList-->mapper: sprint
-mapper->mapper: sprintIdDTO = sprintIdToSprintIdDTO(sprint)
-mapper->mapper:sprintIdDTO = sprint.getId()
+mapper->mapper: sprintToSprintIdNameDTO(sprint)
+mapper->sprintIdDTO**: create(sprint.getIdSprint(), sprint.getName())
 deactivate mapper
-mapper->sprintIdDTO**: create(sprintIdDTO)
-deactivate mapper
-mapper->sprintIdDTOList: add(sprintIdDTO)
+mapper->sprintIdDTOList: add(sprintIdNameDTO)
 sprintIdDTOList-->mapper: true
 end
-mapper-->Ctrl: sprintIdDTOList
-[<--Ctrl: sprintIdDTOList
+mapper-->Ctrl: sprintIdNameDTOList
+[<--Ctrl: sprintIdNameDTOList
 
 @enduml

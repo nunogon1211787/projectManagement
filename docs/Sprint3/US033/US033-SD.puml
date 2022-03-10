@@ -29,28 +29,25 @@ activate User
 User->Ui : want to register a new task effort\nAccess my current projects
 Ui->Ctrl: getCurrentProjectsByUserEmail(email)
 ref over Ctrl, company : US033-SD_1getProjects
-Ctrl-->Ui:projectCodeDTOList
+Ctrl-->Ui:projectCodeNameDTOList
 Ui-->User: asks to select the project
 
 User->Ui: selects the intended project
-Ui->Ctrl: getProject(projCode)
-Ctrl->projStore: getProjectByCode(code)
-loop for each known project
-projStore->project: hasCode(code)
-project-->projStore: true
-end
-projStore-->Ctrl: proj
-Ctrl-->Ui: proj
-Ui-->User: shows project details
+Ui->Ctrl: getProject(codeDTO)
+ref over Ctrl, company : US033-SD_2getProject
+Ctrl-->Ui: projCodeNameSprintListDTO
+Ui-->User: shows project partial details
 
-User->Ui: Access project sprint list (projCodeDTO)
-Ui->Ctrl: getProjectSprints(projCodeDTO)
-ref over Ctrl, company : US033-SD_2getSprints
-Ctrl-->Ui: sprintIdDTOList
-Ui-->User: asks to select the sprint (sprintIdDTO)
+User->Ui: Access project sprint list
+Ui->Ctrl: getProjectSprints()
+ref over Ctrl, company : US033-SD_3getSprints
+Ctrl-->Ui: sprintIdNameDTOList
+Ui-->User: asks to select the sprint
 
 User->Ui: selects the intended sprint
-Ui-->User: sprintIdDTO
+Ui->Ctrl: getSprint(idSprintDTO)
+Ctrl-->Ui:sprintIdNameSprintBacklogDTO
+Ui-->User: shows sprint partial details
 
 User->Ui: Access sprint backlog
 Ui->Ctrl: getUserStories(sprintIdDTO)

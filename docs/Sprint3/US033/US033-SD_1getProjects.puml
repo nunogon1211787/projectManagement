@@ -9,11 +9,11 @@ autonumber
 participant ": RegisterWorkToTaskController" as Ctrl
 participant ": Company" as company
 participant "projStore : ProjectStore" as projStore
-participant "currentProjectList : List<Project>" as projectList
+participant "currentProjectList\n: List<Project>" as projectList
 participant "proj : Project" as project
 participant ": RegisterWorkToTaskMapper" as mapper
-participant "projectCodeDTOList: List<ProjectCodeDTO>" as projectListDTO
-participant "projCodeDTO: ProjectCodeDTO" as projectDTO
+participant "projectCodeNameDTOList\n: List<ProjectCodeNameDTO>" as projectListDTO
+participant "projCodeNameDTO\n: ProjectCodeNameDTO" as projectDTO
 
 [o->Ctrl: getCurrentProjectsByUserEmail(email)
 Ctrl->company: getProjectStore()
@@ -32,17 +32,17 @@ mapper->projectListDTO **: create()
 loop for each project in currentProjectList
 mapper->projectList: get(i)
 projectList-->mapper: project
-mapper->mapper: projCodeDTO = projectCodeToProjectCodeDTO(project)
+mapper->mapper: projCodeNameDTO = \nprojectCodeNameToProjectCodeNameDTO(project)
 mapper->mapper:codeDTO = project.getCode()
 deactivate mapper
 mapper->mapper:nameDTO = project.getProjectName()
 deactivate mapper
 mapper->projectDTO**: create(codeDTO, nameDTO)
 deactivate mapper
-mapper->projectListDTO: add(projCodeDTO)
+mapper->projectListDTO: add(projCodeNameDTO)
 projectListDTO-->mapper: true
 end
-mapper-->Ctrl: projectCodeDTOList
-[<--Ctrl: projectCodeDTOList
+mapper-->Ctrl: projectCodeNameDTOList
+[<--Ctrl: projectCodeNameDTOList
 
 @enduml
