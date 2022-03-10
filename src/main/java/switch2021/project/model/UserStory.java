@@ -40,7 +40,7 @@ public class UserStory {
         this.tasks = new TaskList();
     }
 
-    public UserStory(UserStory userStoryToRefine, UserStoryStatus userStoryStatus, int priority, String description){
+    public UserStory(UserStory userStoryToRefine, UserStoryStatus userStoryStatus, int priority, String description) {
         this.name = userStoryToRefine.getName() + " _Refined";
 
         isValidUserStory(name, priority, description);
@@ -49,6 +49,15 @@ public class UserStory {
         this.priority = priority;
         this.description = description;
         this.parentUserStory = userStoryToRefine;
+    }
+
+    public UserStory(String name, UserStoryStatus userStoryStatus, int priority, String description) {
+        isValidUserStory(name, priority, description);
+
+        this.name = name;
+        this.userStoryStatus = userStoryStatus;
+        this.priority = priority;
+        this.description = description;
     }
 
     public int getIdUserStory() {
@@ -80,7 +89,7 @@ public class UserStory {
         this.userStoryStatus = userStoryStatus;
     }
 
-    public boolean setUserStoryStatusBoolean (UserStoryStatus userStoryStatus) {
+    public boolean setUserStoryStatusBoolean(UserStoryStatus userStoryStatus) {
         this.userStoryStatus = userStoryStatus;
         return true;
     }

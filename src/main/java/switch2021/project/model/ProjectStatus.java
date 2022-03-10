@@ -22,7 +22,15 @@ public class ProjectStatus {
      **/
 
     public ProjectStatus(String description) {
+        checkDescriptionRules(description);
         this.description = description;
+    }
+
+    private void checkDescriptionRules(String description) {
+        if (description.trim().isEmpty())
+            throw new IllegalArgumentException("Description cannot be empty.");
+        if ((description.length() < 3))
+            throw new IllegalArgumentException("Description must be at least 3 characters");
     }
 
     /**
