@@ -53,16 +53,13 @@ public class RegisterWorkToTaskController {
         SprintBacklog sprintBacklog = sprint.getSprintBacklog();
         this.userStory = sprintBacklog.getUserStory(userStoryId);
 
-        TaskList taskList = this.userStory.getTasks();
-        this.taskList = taskList.getTaskList();
+        this.taskList = this.userStory.getTasks().getTaskList();
 
         return this.mapper.toDtoList(this.taskList);
     }
 
     public TaskIdNameDTO getTask(int taskId) {
-        TaskList taskList = this.userStory.getTasks();
-
-        this.task = taskList.getTaskById(taskId);
+        this.task = this.userStory.getTasks().getTaskById(taskId);
         return this.mapper.toDTO(this.task);
     }
 

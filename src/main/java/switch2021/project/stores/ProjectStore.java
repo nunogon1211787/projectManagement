@@ -51,12 +51,12 @@ public class ProjectStore {
      **/
 
     public List<Project> getProjects() {
-        List<Project> projectList = new ArrayList<>();
+        List<Project> copyList = new ArrayList<>();
 
         for (Project project : this.projectList) {
-            projectList.add(project);
+            copyList.add(project);
         }
-        return projectList;
+        return copyList;
     }
 
     //This method was changed to implement encapsulation.

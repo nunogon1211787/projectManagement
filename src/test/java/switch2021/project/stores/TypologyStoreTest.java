@@ -199,7 +199,7 @@ public class TypologyStoreTest {
         //Arrange
         Typology typo = new Typology("test");
         Typology typo1 = new Typology("Tes");
-        Typology typo2 = new Typology("T");
+        Typology typo2 = new Typology("Test2");
         //Assert
         assertTrue(typologyStore.validateTypology(typo));
         assertTrue(typologyStore.validateTypology(typo1));

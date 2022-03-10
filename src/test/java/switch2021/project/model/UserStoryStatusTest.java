@@ -12,20 +12,22 @@ class UserStoryStatusTest {
 
     @Test
     void isSprintAvailable() {
+        //Arrange
         this.userStoryStatusStore.populateDefault();
         this.userStoryStatusStore.saveNewUserStoryStatus(userStoryStatus);
         this.userStoryStatus.setSprintAvailable(true);
-        boolean actual = this.userStoryStatus.isSprintAvailable();
-        assertTrue(actual);
+        //Act
+        assertTrue(this.userStoryStatus.isSprintAvailable());
     }
 
     @Test
     void setSprintAvailable() {
+        //Arrange
         this.userStoryStatusStore.populateDefault();
         this.userStoryStatusStore.saveNewUserStoryStatus(userStoryStatus);
         this.userStoryStatus.setSprintAvailable(false);
-        boolean actual = this.userStoryStatus.isSprintAvailable();
-        assertFalse(actual);
+        //Act
+        assertFalse(this.userStoryStatus.isSprintAvailable());
 
     }
 
