@@ -1,5 +1,8 @@
 package switch2021.project.model;
 
+import switch2021.project.dto.UserStoryDto;
+import switch2021.project.mapper.UserStoryMapper;
+
 import java.util.*;
 
 
@@ -136,4 +139,9 @@ public class ProductBacklog {
         return id;
     } //if the object isn´t saved on the list, the id will be the same for all
     //objects. This issue will be solved when calling the save method.
+
+    public UserStory createUserStoryWithDto(UserStoryDto createUserStoryDto, UserStoryMapper mapperUS) {
+        UserStory us = mapperUS.toModel(createUserStoryDto);
+        return us;
+    }
 }

@@ -1,6 +1,5 @@
 package switch2021.project.controller;
 
-import switch2021.project.deprecated.UserStoryOfSprint;
 import switch2021.project.model.*;
 import switch2021.project.stores.*;
 
@@ -20,8 +19,6 @@ public class UserStoryEffortController {
     private List<Sprint> sprintsList;
     private Sprint sprint;
     private SprintBacklog sprintBacklog;
-    private UserStoryOfSprint userStoryOfSprint;
-
 
     /**
      * Constructor to test (without SINGLETON)
@@ -63,15 +60,6 @@ public class UserStoryEffortController {
     public SprintBacklog getSprintBacklog() {
         this.sprintBacklog = this.sprint.getSprintBacklog();
         return this.sprintBacklog;
-    }
-
-    public UserStoryOfSprint getUserStory(int id_UserStory) {
-        this.userStoryOfSprint = this.sprintBacklog.getUserStoryDeprecated(id_UserStory);
-        return this.userStoryOfSprint;
-    }
-
-    public boolean setEffort(int effort) {
-        return this.userStoryOfSprint.setEstimateEffort(effort);
     }
 
 }

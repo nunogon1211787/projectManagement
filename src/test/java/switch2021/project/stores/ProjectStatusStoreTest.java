@@ -1,8 +1,7 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.Company;
-import switch2021.project.model.ProjectStatus;
+import switch2021.project.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,19 +115,14 @@ class ProjectStatusStoreTest {
     }
 
     @Test
-    public void overrideAndHashCodeTest() {
-        //Arrange
-        ProjectStatusStore list1 = new ProjectStatusStore();
-        list1.add(list1.createProjectStatus("new"));
-        ProjectStatusStore list2 = new ProjectStatusStore();
-        list2.add(list1.createProjectStatus("new"));
-        ProjectStatusStore list3 = new ProjectStatusStore();
-        list3.add(list3.createProjectStatus("not new"));
-        //Assert
-        assertNotSame(list1, list2);
-        assertEquals(list1, list2);
-        assertEquals(list1.hashCode(), list2.hashCode());
-        assertNotEquals(list1, list3);
-        assertNotEquals(list1.hashCode(), list3.hashCode());
+    void overrideTest() {
+        ProjectStatus status1 = new ProjectStatus("teste");
+        ProjectStatus status2 = new ProjectStatus("teste");
+        ProjectStatus status3 = null;
+        TaskType typo = new TaskType("test");
+
+        assertEquals(status1,status2);
+        assertNotEquals(status1,status3);
+        assertNotEquals(status1,typo);
     }
 }

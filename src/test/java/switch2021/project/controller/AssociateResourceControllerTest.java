@@ -9,38 +9,36 @@ import java.time.LocalDate;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AssociateResourceTest {
+public class AssociateResourceControllerTest {
 
     @Test
-    @DisplayName("Teste construtor de AssociateResourceController")
+    @DisplayName("Constructor Test - AssociateResourceController")
     public void associateResourceController() {
         //Arrange
         //Company
         Company comTest = new Company();
         //Project
-        //List<Project> testProjectList = comTest.getArrayProj();
         LocalDate startProjectDate = LocalDate.of(2021, 2, 25);
         Customer cust = new Customer("ght@gmail.com", "Name");
         Typology typo = new Typology("typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
         Project proj1 = comTest.getProjectStore().createProject("gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);
         comTest.getProjectStore().saveNewProject(proj1);
-
-        //user
+        //User
         UserProfile pro = comTest.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "description", "gth", "gth", "", pro);
         comTest.getSystemUserStore().saveSystemUser(newUser);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
-
-        //Construtor Controller
+        //Act
         AssociateResourceController controllerTest = new AssociateResourceController(comTest);
         boolean result = controllerTest.associateResource("fase@gmail.com", "Project_2022_1", startDateToAllocate, endDateToAllocate, 100, .2);
-
+        //Assert
         assertTrue(result);
     }
 
     @Test
+    @DisplayName("Test to get the Project List with Success")
     void getProjectListSuccess() {
         //Arrange
         Company company = new Company();
@@ -73,16 +71,15 @@ public class AssociateResourceTest {
         assertTrue(projects.contains(project3));
     }
     @Test
+    @DisplayName("Test to get the SystemUser List with Success")
     void getSystemUserListSuccess() {
         //Arrange
         Company company = new Company();
         AssociateResourceController controller = new AssociateResourceController(company);
         SystemUserStore systemUserStore = company.getSystemUserStore();
-
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = systemUserStore.createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         systemUserStore.saveSystemUser(user);
-
         SystemUser user2 = systemUserStore.createSystemUser("manuel", "manuel@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         systemUserStore.saveSystemUser(user2);
         //Act
@@ -91,17 +88,15 @@ public class AssociateResourceTest {
         assertEquals(2,users.size());
         assertTrue(users.contains(user));
         assertTrue(users.contains(user2));
-
     }
 
     @Test
-    @DisplayName("Teste construtor de AssociateResourceController")
+    @DisplayName("Constructor Test (fail) - AssociateResourceController")
     public void associateResourceControllerFail() {
         //Arrange
         //Company
         Company comTest = new Company();
         //Project
-        //List<Project> testProjectList = comTest.getArrayProj();
         LocalDate startProjectDate = LocalDate.of(2021, 2, 25);
         Customer cust = new Customer("ght@gmail.com", "Name");
         Typology typo = new Typology("typo1");
@@ -110,19 +105,18 @@ public class AssociateResourceTest {
         Project proj2 = comTest.getProjectStore().createProject("ghj", "testtestest", cust, typo, busSector, startProjectDate, 30, 4500);
         comTest.getProjectStore().saveNewProject(proj1);
         comTest.getProjectStore().saveNewProject(proj2);
-
-        //user
+        //User
         UserProfile pro = comTest.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "description", "gth", "gth", "", pro);
         comTest.getSystemUserStore().saveSystemUser(newUser);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
-
-        //Construtor Controller
+        //Controller
         AssociateResourceController controllerTest = new AssociateResourceController(comTest);
         controllerTest.associateResource("fase@gmail.com", "Project_2022_1", startDateToAllocate, endDateToAllocate, 100, .6);
+        //Act
         boolean result = controllerTest.associateResource("fase@gmail.com", "Project_2022_2", startDateToAllocate, endDateToAllocate, 100, .5);
-
+        //Assert
         assertFalse(result);
     }
 }
