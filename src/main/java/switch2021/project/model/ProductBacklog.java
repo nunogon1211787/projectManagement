@@ -141,7 +141,6 @@ public class ProductBacklog {
     //objects. This issue will be solved when calling the save method.
 
     public UserStory createUserStoryWithDto(UserStoryDto createUserStoryDto, UserStoryMapper mapperUS) {
-        UserStory us = mapperUS.toModel(createUserStoryDto);
-        return us;
+        return mapperUS.toModel(createUserStoryDto);
     }
 }
