@@ -1,7 +1,12 @@
 package switch2021.project.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Objects;
 
+@Getter
+@Setter
 public class UserProfile {
 
     /**
@@ -18,36 +23,6 @@ public class UserProfile {
         checkAttributeRules(userProfileName);
         this.userProfileName = userProfileName;
     }
-
-
-    /**
-     * Copy Constructor
-     */
-    public UserProfile(UserProfile originalProfile) {
-        this.idProfile = originalProfile.idProfile;
-        this.userProfileName = originalProfile.userProfileName;
-    }
-
-
-    /**
-     * Getters e Setters
-     **/
-    public int getIdUserProfile() {
-        return idProfile;
-    }
-
-    public String getUserProfileName() {
-        return this.userProfileName;
-    }
-
-    public void setUserProfileName(String newName) {
-        this.userProfileName = newName;
-    }
-
-    public void setIdUserProfile(int id) {
-        this.idProfile = id;
-    }
-
 
     /**
      * Method to validate entered data (name) by Administrator

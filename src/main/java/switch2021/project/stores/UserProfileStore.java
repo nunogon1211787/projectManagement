@@ -52,7 +52,7 @@ public class UserProfileStore {
         UserProfile profile = null;
 
         for (UserProfile i : userProfileList) {
-            if (i.getIdUserProfile() == idUserProfile) {
+            if (i.getIdProfile() == idUserProfile) {
                 profile = i;
             }
         }
@@ -74,7 +74,7 @@ public class UserProfileStore {
     public int idUserProfileGenerator() {
         int id = 1;
         if (!this.userProfileList.isEmpty()) {
-            id = userProfileList.get(userProfileList.size() - 1).getIdUserProfile() + 1;
+            id = userProfileList.get(userProfileList.size() - 1).getIdProfile() + 1;
         }
         return id;
     }
@@ -97,7 +97,7 @@ public class UserProfileStore {
         if (validateIdUserProfile(profile)) {
             userProfileList.add(profile);
         } else {
-            profile.setIdUserProfile(idUserProfileGenerator());
+            profile.setIdProfile(idUserProfileGenerator());
             userProfileList.add(profile);
         }
         return true;
@@ -110,7 +110,7 @@ public class UserProfileStore {
         boolean msg = true;
 
         for (UserProfile i : userProfileList) {
-            if (i.getIdUserProfile() == profile.getIdUserProfile()) {
+            if (i.getIdProfile() == profile.getIdProfile()) {
                 msg = false;
                 break;
             }
