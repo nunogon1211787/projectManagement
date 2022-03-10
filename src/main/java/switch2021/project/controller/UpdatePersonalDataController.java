@@ -13,13 +13,6 @@ public class UpdatePersonalDataController {
     private final Company company;
     private SystemUser user;
 
-
-    /**
-     * Constructor to UI (with SINGLETON)
-     **/
-
-    //public UpdatePersonalDataController(){ this.company = App.getInstance().getCompany();}
-
     /**
      * Constructor to test (without SINGLETON)
      **/

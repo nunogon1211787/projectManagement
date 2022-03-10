@@ -182,25 +182,26 @@ public class Task {
         return (double) effort.getEffortHours() + ((double) effort.getEffortMinutes() / 60);
     }
 
-    public double updateHoursSpent(TaskEffort effort) {
-        return this.hoursSpent = this.hoursSpent + effortInHours(effort);
+    private double updateHoursSpent(TaskEffort effort) {
+        return this.hoursSpent += effortInHours(effort);
     }
 
-    public double updateEffortRemaining(TaskEffort effort) {
+    private double updateEffortRemaining(TaskEffort effort) {
         if (this.effortRemaining - effortInHours(effort) < 0) {
             return this.effortRemaining = 0.0;
         }
-        return this.effortRemaining = this.effortRemaining - effortInHours(effort);
+        return this.effortRemaining -= effortInHours(effort);
     }
 
-    public double updateExecutionPercentage() {
+    private double updateExecutionPercentage() {
         double workTotal = this.hoursSpent + this.effortRemaining;
         double workDone = this.hoursSpent;
         if (workDone > workTotal || workDone == workTotal) {
-            return this.executionPercentage = 1.0;
+            this.executionPercentage = 1.0;
         } else {
-            return this.executionPercentage = workDone / workTotal;
+            this.executionPercentage = workDone / workTotal;
         }
+        return this.executionPercentage;
     }
 
 
