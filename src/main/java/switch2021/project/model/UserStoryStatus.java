@@ -7,8 +7,6 @@ import java.util.Objects;
 
 @Getter
 @Setter
-
-
 public class UserStoryStatus {
     /** Classe UserStoryStatus Atributes **/
     private String description;
