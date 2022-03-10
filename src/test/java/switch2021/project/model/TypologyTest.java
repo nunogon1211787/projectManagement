@@ -85,6 +85,16 @@ public class TypologyTest {
         //Assert
         assertNotEquals(typo, typo2);
     }
+        @Test
+    public void hashCodes() {
+        //Arrange
+        Typology typo = new Typology("Fixed Cost");
+        Typology typo2 = new Typology("Fixed Cost2");
+        Typology typo3 = new Typology("Fixed Cost2");
+        //Assert
+        assertNotEquals(typo,typo2);
+        assertEquals(typo2,typo3);
+    }
 
     @Test
     public void typologyClass() {

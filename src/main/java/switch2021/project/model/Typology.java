@@ -41,4 +41,9 @@ public class Typology {
         Typology that = (Typology) o;
         return (this.description.equals(that.description));
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description);
+    }
 }
