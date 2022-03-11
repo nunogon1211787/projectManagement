@@ -357,6 +357,92 @@ class TaskTest {
         //Assert
         assertFalse(task.saveTaskEffort(taskEffort));
     }
+//início (tentar acabar com os bugs)
+    @Test
+    public void updateHoursSpentPositivo() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        Task task = new Task("test", taskDescription, 20.00, taskType, resource);
+
+        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
+
+        TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
+        task.saveTaskEffort(taskEffort);
+        //Act
+
+        //Assert
+        assertEquals(12.0, task.getEffortRemaining());
+        assertEquals(8.0, task.getHoursSpent());
+        assertEquals(0.4, task.getExecutionPercentage());
+    }
+
+    @Test
+    public void updateHoursSpentZero() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        Task task = new Task("test", taskDescription, 8.00, taskType, resource);
+
+        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
+
+        TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
+        task.saveTaskEffort(taskEffort);
+        //Act
+
+        //Assert
+        assertEquals(0.0, task.getEffortRemaining());
+        assertEquals(8.0, task.getHoursSpent());
+        assertEquals(1.0, task.getExecutionPercentage());
+    }
+
+    @Test
+    public void updateHoursSpentNegative() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        Task task = new Task("test", taskDescription, 8.00, taskType, resource);
+
+        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
+        LocalDate effortDate2 = LocalDate.of(2022, 1, 21);
+        TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
+        TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
+        task.saveTaskEffort(taskEffort);
+        //Act
+        task.saveTaskEffort(taskEffort2);
+        //Assert
+        assertEquals(0.0, task.getEffortRemaining());
+        assertEquals(12.0, task.getHoursSpent());
+        assertEquals(1.0, task.getExecutionPercentage());
+    }
+    //fim (tentar acabar com os bugs)
 
     @Test
     void hasTypeStatusResponsibleTestSuccess() {
