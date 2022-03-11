@@ -438,7 +438,7 @@ class TaskTest {
         //Act
         task.saveTaskEffort(taskEffort2);
         //Assert
-        assertEquals(0.0, task.getEffortRemaining());
+        assertEquals(-1.0, task.getEffortRemaining());
         assertEquals(12.0, task.getHoursSpent());
         assertEquals(1.0, task.getExecutionPercentage());
     }
