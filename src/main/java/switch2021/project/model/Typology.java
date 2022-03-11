@@ -13,7 +13,7 @@ public class Typology {
     private int idTypology;
     private final String description;
 
-    public static final int CONSTANT_minimumDescription = 3;
+    public static final int CONSTANT_MINIMUM_DESCRIPTION = 3;
 
 
     /** Constructors of typology´s class. Creates a new typology instance. **/
@@ -22,15 +22,13 @@ public class Typology {
         this.description = description;
     }
 
-    /**
-     * Methods to validate attributes data.
-     */
+    /** Methods to validate attributes data. **/
 
     private void checkDescriptionRules(String description) {
         if (description.trim().isEmpty())
             throw new IllegalArgumentException("Description cannot be empty.");
-        if ((description.length() < CONSTANT_minimumDescription))
-            throw new IllegalArgumentException("Description must be at least" + CONSTANT_minimumDescription + "characters");
+        if ((description.length() < CONSTANT_MINIMUM_DESCRIPTION))
+            throw new IllegalArgumentException("Description must be at least" + CONSTANT_MINIMUM_DESCRIPTION + "characters");
     }
 
     /** Override Methods **/
@@ -46,4 +44,6 @@ public class Typology {
     public int hashCode() {
         return Objects.hash(description);
     }
+
+
 }
