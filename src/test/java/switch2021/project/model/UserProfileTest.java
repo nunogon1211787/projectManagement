@@ -21,32 +21,32 @@ class UserProfileTest {
 
     @Test
     void setNameTest() {
-        //input
+        //Arrange
         UserProfile test = new UserProfile("admin");
         String newName = "visitor";
         test.setUserProfileName(newName);
-        //Expected
+        //Act
         String expected = "visitor";
         String result = test.getUserProfileName();
-        //Result
+        //Assert
         assertEquals(expected, result);
     }
 
-    @Test
+/*    @Test
     void isValidIdWith5Profile() {
-        //input
+        //Arrange
         company = new Company();
         UserProfile test1 = new UserProfile("SET");
-        company.getUserProfileStore().saveUserProfile(test1);
         UserProfile test2 = new UserProfile("DET");
+
+        //Act
         company.getUserProfileStore().saveUserProfile(test2);
+        company.getUserProfileStore().saveUserProfile(test1);
 
-
-        //Result
+        //Assert
         assertEquals(4, test1.getIdProfile());
         assertEquals(5, test2.getIdProfile());
-
-    }
+    }*/
 
     @Test
     void overrideTest() {
