@@ -195,7 +195,7 @@ public class Task {
         return this.effortRemaining -= effortInHours(effort);
   */
 
-        if (this.effortRemaining < effortInHours(effort))
+        if (this.effortRemaining < effortInHours(effort) && this.effortRemaining != effortInHours(effort))
             return this.effortRemaining = 0.0;
         return this.effortRemaining -= effortInHours(effort);
     }
