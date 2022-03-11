@@ -9,9 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TypologyTest {
 
-    /**
-     * Constructor´s Tests
-     */
+    /** Constructor´s Tests **/
 
     @DisplayName("Constructor Test fail - Description empty")
     @Test
@@ -47,8 +45,9 @@ public class TypologyTest {
     public void getId_TypologyZeroTest() {
         //Arrange
         Typology typo = new Typology("Teste");
+        int id = typo.getIdTypology();
         //Assert
-        assertEquals(0,typo.getIdTypology());
+        assertEquals(0, id);
     }
 
     @DisplayName("Set id Test Success")
@@ -58,18 +57,17 @@ public class TypologyTest {
         Typology typo = new Typology("Teste");
         //Act
         typo.setIdTypology(3);
+        int id = typo.getIdTypology();
         //Assert
-        assertEquals(3,typo.getIdTypology());
+        assertEquals(3,id);
     }
 
 
     @Test
     public void equalsTestSuccess() {
         //Arrange
-        Company company = new Company();
-        TypologyStore typologyStore = company.getTypologyStore();
         Typology typo = new Typology("Fixed Cost");
-        Typology typo2 = typologyStore.getTypology("Fixed Cost");
+        Typology typo2 = new Typology("Fixed Cost");
         //Assert
         assertEquals(typo, typo2);
     }
@@ -77,11 +75,8 @@ public class TypologyTest {
     @Test
     public void equalsTestFail() {
         //Arrange
-        Company company = new Company();
-        TypologyStore typologyStore = company.getTypologyStore();
         Typology typo = new Typology("Test");
-        Typology typo2 = typologyStore.getTypology("Fixed Cost");
-
+        Typology typo2 = new Typology("Fixed Test");
         //Assert
         assertNotEquals(typo, typo2);
     }
@@ -101,6 +96,8 @@ public class TypologyTest {
         //Arrange
         Typology typo = new Typology("Fixed Cost");
         Typology typo2 = new Typology("Fixed Cost2");
+
+        //Assert
         assertEquals(typo.getClass(),typo2.getClass());
     }
 
@@ -109,6 +106,7 @@ public class TypologyTest {
         //Arrange
         Typology typo = new Typology("Fixed Cost");
         Typology typo2 = null;
+        //Assert
         assertNotEquals(typo,typo2);
     }
 }
