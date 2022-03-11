@@ -108,65 +108,73 @@ public class TaskEffortTest {
     @Test
     @DisplayName("create effort with negative hours field")
     public void createTaskEffortFailWorkHoursNegative() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            int effortHours = -4;
-            int effortMinutes = 30;
-            LocalDate effortDate = LocalDate.of(2022, 1, 27);
-            String comment = "design";
-            String attachment = "";
-            //Act
+        //Arrange
+        int effortHours = -4;
+        int effortMinutes = 30;
+        LocalDate effortDate = LocalDate.of(2022, 1, 27);
+        String comment = "design";
+        String attachment = "";
+        //Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         });
+        //Assert
+        assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
+                " || Hour interval: [" + 0 + " - " + 24 + "]"));
     }
 
     @Test
     @DisplayName("create effort with negative minutes field")
     public void createTaskEffortFailWorkMinutesNegative() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            int effortHours = 4;
-            int effortMinutes = -30;
-            LocalDate effortDate = LocalDate.of(2022, 1, 27);
-            String comment = "design";
-            String attachment = "";
-            //Act
+        //Arrange
+        int effortHours = 4;
+        int effortMinutes = -30;
+        LocalDate effortDate = LocalDate.of(2022, 1, 27);
+        String comment = "design";
+        String attachment = "";
+        //Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         });
+        //Assert
+        assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
+                " || Hour interval: [" + 0 + " - " + 24 + "]"));
     }
 
     @Test
     @DisplayName("create effort with hours and minutes without time")
     public void createTaskEffortFailNoWorkingTime() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            int effortHours = 0;
-            int effortMinutes = 0;
-            LocalDate effortDate = LocalDate.of(2022, 1, 27);
-            String comment = "design";
-            String attachment = "";
-            //Act
+        //Arrange
+        int effortHours = 0;
+        int effortMinutes = 0;
+        LocalDate effortDate = LocalDate.of(2022, 1, 27);
+        String comment = "design";
+        String attachment = "";
+        //Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         });
+        //Assert
+        assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
+                " || Hour interval: [" + 0 + " - " + 24 + "]"));
     }
 
     @Test
     @DisplayName("create effort with over 24 hours")
     public void createTaskEffortFailWorkingHoursMoreThanADay() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            int effortHours = 25;
-            int effortMinutes = 10;
-            LocalDate effortDate = LocalDate.of(2022, 1, 27);
-            String comment = "design";
-            String attachment = "";
-            //Act
+        //Arrange
+        int effortHours = 25;
+        int effortMinutes = 10;
+        LocalDate effortDate = LocalDate.of(2022, 1, 27);
+        String comment = "design";
+        String attachment = "";
+        //Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         });
+        //Assert
+        assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
+                " || Hour interval: [" + 0 + " - " + 24 + "]"));
     }
 
     @Test
@@ -192,49 +200,54 @@ public class TaskEffortTest {
     @Test
     @DisplayName("create effort with 60 min")
     public void createTaskEffortFailMinutesOnLimit() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            int effortHours = 1;
-            int effortMinutes = 60;
-            LocalDate effortDate = LocalDate.of(2022, 1, 27);
-            String comment = "design";
-            String attachment = "";
-            //Act
+        //Arrange
+        int effortHours = 1;
+        int effortMinutes = 60;
+        LocalDate effortDate = LocalDate.of(2022, 1, 27);
+        String comment = "design";
+        String attachment = "";
+        //Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         });
+        //Assert
+        assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
+                " || Hour interval: [" + 0 + " - " + 24 + "]"));
     }
 
     @Test
     @DisplayName("create effort with over 60 minutes")
     public void createTaskEffortFailWorkingMinutesMoreThanAHour() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            int effortHours = 0;
-            int effortMinutes = 61;
-            LocalDate effortDate = LocalDate.of(2022, 1, 27);
-            String comment = "design";
-            String attachment = "";
-            //Act
+        //Arrange
+        int effortHours = 0;
+        int effortMinutes = 61;
+        LocalDate effortDate = LocalDate.of(2022, 1, 27);
+        String comment = "design";
+        String attachment = "";
+        //Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         });
+        //Assert
+        assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
+                " || Hour interval: [" + 0 + " - " + 24 + "]"));
     }
 
     @Test
     @DisplayName("create effort with register effort is in the future")
     public void createTaskEffortFailWorkDateAfterToday() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            int effortHours = 4;
-            int effortMinutes = 30;
-            LocalDate effortDate = LocalDate.now().plusDays(1);
-            String comment = "design";
-            String attachment = "";
-            //Act
+        //Arrange
+        int effortHours = 4;
+        int effortMinutes = 30;
+        LocalDate effortDate = LocalDate.now().plusDays(1);
+        String comment = "design";
+        String attachment = "";
+        //Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         });
+        //Assert
+        assertTrue(exception.getMessage().equals("Invalid workHours value."));
     }
 
 }
