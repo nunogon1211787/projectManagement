@@ -8,6 +8,10 @@ import java.time.LocalDate;
 
 public class TaskEffort {
 
+    /**
+     * Attributes
+     **/
+
     private final int effortHours;
     private final int effortMinutes;
     private LocalDate effortDate;
@@ -18,6 +22,10 @@ public class TaskEffort {
     private static final int MIN_MINUTE = 0;
     private static final int MAX_MINUTE = 60;
 
+    /**
+     * Constructor (without SINGLETON)
+     **/
+
     public TaskEffort(int effortHours, int effortMinutes, LocalDate effortDate, String comment, String attachment) {
         checkWorkTimeRules(effortHours, effortMinutes);
         checkWorkDateRules(effortDate);
@@ -26,6 +34,10 @@ public class TaskEffort {
         this.comment = comment;
         this.attachment = attachment;
     }
+
+    /**
+     * Methods
+     **/
 
     private void checkWorkTimeRules(double effortHours, double effortMinutes) {
         if (effortHours < MIN_HOUR || effortMinutes < MIN_MINUTE || effortHours == MIN_HOUR && effortMinutes == MIN_MINUTE

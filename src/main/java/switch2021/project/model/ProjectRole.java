@@ -29,15 +29,7 @@ public class ProjectRole {
     }
 
     /**
-     * Copy Constructor
-     **/
-    public ProjectRole(ProjectRole originalProfile) {
-        this.idRole = originalProfile.idRole;
-        this.name = originalProfile.name;
-    }
-
-    /**
-     * Method to verify if the name to the Project Role is valid, regarding the locale rules
+     * Method to verify if the name to the Project Role is valid
      **/
     public boolean isValidName(String name) {
         return name.equalsIgnoreCase(this.name);

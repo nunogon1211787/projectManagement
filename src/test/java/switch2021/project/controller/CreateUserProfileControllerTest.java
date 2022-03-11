@@ -19,6 +19,8 @@ public class CreateUserProfileControllerTest {
         assertTrue(userProfileCreated);
     }
 
+
+
     @Test
     @DisplayName("Return exception message, no name for profile inserted")
     public void createProfileWithEmptyName() {
