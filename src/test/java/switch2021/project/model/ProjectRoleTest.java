@@ -7,47 +7,51 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProjectRoleTest {
 
     @Test
-    public void projectRoleConstructorTest() {
+    public void projectRoleConstructorSuccess() {
         //Arrange
-        Company company = new Company();
+        String roleName = "Team Member";
         //Act
-        ProjectRole role = new ProjectRole("Team Member");
+        ProjectRole role = new ProjectRole(roleName);
         //Assert
-        assertEquals(role, company.getProjectRoleStore().getProjectRole("Team Member"));
+        assertEquals(role.getName(), roleName);
     }
 
     @Test
-    public void projectRoleConstructorCopyTest() {
-        //Arrange
-        Company company = new Company();
-        //Act
-        ProjectRole role = new ProjectRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+    public void projectRoleConstructorNull() {
         //Assert
-        assertEquals(role, company.getProjectRoleStore().getProjectRole("Team Member"));
+        assertThrows(NullPointerException.class, () -> {
+            //Arrange
+            String roleName = "";
+            //Act
+            ProjectRole role = new ProjectRole(roleName);
+        });
     }
 
     @Test
     public void isValidNameTestSuccess() {
         //Arrange
-        Company company = new Company();
+        String roleName = "Team Member";
         //Act and Assert
-        assertTrue(company.getProjectRoleStore().getProjectRole("Team Member").isValidName("Team Member"));
+        ProjectRole role = new ProjectRole(roleName);
+        assertTrue(role.isValidName("Team Member"));
     }
 
     @Test
     public void isValidNameTestSuccessUpperCase() {
         //Arrange
-        Company company = new Company();
+        String roleName = "Team Member";
         //Act and Assert
-        assertTrue(company.getProjectRoleStore().getProjectRole("Team Member").isValidName("Team MEMBER"));
+        ProjectRole role = new ProjectRole(roleName);
+        assertTrue(role.isValidName("Team MEMBER"));
     }
 
     @Test
     public void isValidNameTestFail() {
         //Arrange
-        Company company = new Company();
+        String roleName = "Scrum Master";
         //Act and Assert
-        assertFalse(company.getProjectRoleStore().getProjectRole("Team Member").isValidName("Scrum Master"));
+        ProjectRole role = new ProjectRole(roleName);
+        assertFalse(role.isValidName("Team Member"));
     }
 }
 

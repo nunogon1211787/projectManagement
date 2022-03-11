@@ -13,7 +13,6 @@ public class ChangePriorityUSController {
      * Attributes
      **/
     private final Company company;
-    private ProjectStore projectStore;
     private Project project;
     private ProductBacklog productBacklog;
     private UserStory userStory;
@@ -33,8 +32,8 @@ public class ChangePriorityUSController {
      * Methods
      **/
     public ProjectStore getProjectStore (){
-        this.projectStore = company.getProjectStore();
-        return this.projectStore;
+        ProjectStore projectStore = company.getProjectStore();
+        return projectStore;
     }
 
     public Project getProject (String code){

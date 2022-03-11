@@ -4,6 +4,7 @@ import switch2021.project.dto.UserStoryStatusDTO;
 import switch2021.project.mapper.ScrumBoardMapper;
 import switch2021.project.model.*;
 
+import java.util.Collections;
 import java.util.List;
 
 public class GetScrumBoardController {
@@ -49,7 +50,7 @@ public class GetScrumBoardController {
 
     public List<UserStory> getUserStoryList() {
         userStoryList = sprintBacklog.getUserStoryList();
-        return userStoryList;
+        return Collections.unmodifiableList(userStoryList);
     }
 
     /**

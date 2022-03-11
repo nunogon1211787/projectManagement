@@ -3,7 +3,6 @@ package switch2021.project.model;
 import lombok.Getter;
 import switch2021.project.stores.*;
 
-import java.util.Objects;
 
 @Getter
 public class Company {

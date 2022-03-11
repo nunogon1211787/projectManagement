@@ -81,14 +81,13 @@ public class ProductBacklog {
     /**
      * Validation Methods.
      **/
-    private boolean validateUserStory(UserStory userStory) {
+    private void validateUserStory(UserStory userStory) {
         // check duplicate story
         for (UserStory us : userStoryList) {
             if (us.getDescription().trim().equalsIgnoreCase(userStory.getDescription().trim())) {
                 throw new IllegalArgumentException("Repeated user story inserted, same code project and description.");
             }
         }
-        return true;
     }
 
     private boolean validateIdUserStory(UserStory userStory) {
@@ -141,7 +140,6 @@ public class ProductBacklog {
     //objects. This issue will be solved when calling the save method.
 
     public UserStory createUserStoryWithDto(UserStoryDto createUserStoryDto, UserStoryMapper mapperUS) {
-        UserStory us = mapperUS.toModel(createUserStoryDto);
-        return us;
+        return mapperUS.toModel(createUserStoryDto);
     }
 }
