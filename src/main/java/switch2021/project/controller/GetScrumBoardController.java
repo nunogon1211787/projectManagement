@@ -48,8 +48,10 @@ public class GetScrumBoardController {
     }
 
     public List<UserStory> getUserStoryList() {
+        List<UserStory> list;
         userStoryList = sprintBacklog.getUserStoryList();
-        return userStoryList;
+        list = userStoryList;
+        return list;
     }
 
     /**
