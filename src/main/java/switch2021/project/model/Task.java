@@ -187,11 +187,16 @@ public class Task {
     }
 
     private double updateEffortRemaining(TaskEffort effort) {
-        double difference = this.effortRemaining - effortInHours(effort);
+ /*       double difference = this.effortRemaining - effortInHours(effort);
 
-        if (difference <= 0) {
+        if (difference < 0) {
             return this.effortRemaining = 0.0;
         }
+        return this.effortRemaining -= effortInHours(effort);
+  */
+
+        if (this.effortRemaining < effortInHours(effort))
+            return this.effortRemaining = 0.0;
         return this.effortRemaining -= effortInHours(effort);
     }
 
