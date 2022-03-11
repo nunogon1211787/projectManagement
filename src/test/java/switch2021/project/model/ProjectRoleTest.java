@@ -6,15 +6,37 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ProjectRoleTest {
 
+//    @Test
+//    public void projectRoleConstructorTest() {
+//        //Arrange
+//        Company company = new Company();
+//        //Act
+//        ProjectRole role = new ProjectRole("Team Member");
+//        //Assert
+//        assertEquals(role, company.getProjectRoleStore().getProjectRole("Team Member"));
+//    }
+
     @Test
-    public void projectRoleConstructorTest() {
+    public void projectRoleConstructorTestUni() {
         //Arrange
-        Company company = new Company();
+        String roleName = "Team Member";
         //Act
-        ProjectRole role = new ProjectRole("Team Member");
+        ProjectRole role = new ProjectRole(roleName);
         //Assert
-        assertEquals(role, company.getProjectRoleStore().getProjectRole("Team Member"));
+        assertEquals(role.getName(), roleName);
     }
+
+    @Test
+    public void projectRoleConstrutorNull() {
+        //Assert
+        assertThrows(NullPointerException.class, () -> {
+            //Arrange
+            String roleName = "";
+            //Act
+            ProjectRole role = new ProjectRole(roleName);
+        });
+    }
+
 
     @Test
     public void projectRoleConstructorCopyTest() {
