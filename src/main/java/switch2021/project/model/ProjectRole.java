@@ -3,7 +3,6 @@ package switch2021.project.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Locale;
 import java.util.Objects;
 
 @Getter
@@ -11,15 +10,11 @@ import java.util.Objects;
 public class ProjectRole {
 
 
-    /**
-     * Class ProjectRoles Attributes
-     **/
+    /*** Class ProjectRoles Attributes **/
     private int idRole;
     private String name;
 
-    /**
-     * Constructor
-     **/
+    /*** Constructor **/
     public ProjectRole(String name) {
         if (!name.equals("")) {
             this.name = name;
@@ -28,16 +23,12 @@ public class ProjectRole {
         }
     }
 
-    /**
-     * Method to verify if the name to the Project Role is valid
-     **/
+    /*** Method to verify if the name to the Project Role is valid **/
     public boolean isValidName(String name) {
         return name.equalsIgnoreCase(this.name);
     }
 
-    /**
-     * Override Equals
-     **/
+    /*** Override Equals **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
