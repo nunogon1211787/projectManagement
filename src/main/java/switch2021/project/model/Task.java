@@ -187,7 +187,9 @@ public class Task {
     }
 
     private double updateEffortRemaining(TaskEffort effort) {
-        if (this.effortRemaining - effortInHours(effort) < 0) {
+        double difference = this.effortRemaining - effortInHours(effort);
+
+        if (difference <= 0) {
             return this.effortRemaining = 0.0;
         }
         return this.effortRemaining -= effortInHours(effort);
@@ -196,7 +198,8 @@ public class Task {
     private double updateExecutionPercentage() {
         double workTotal = this.hoursSpent + this.effortRemaining;
         double workDone = this.hoursSpent;
-        if (workDone > workTotal || workDone == workTotal) {
+
+        if (workDone >= workTotal) {
             this.executionPercentage = 1.0;
         } else {
             this.executionPercentage = workDone / workTotal;
