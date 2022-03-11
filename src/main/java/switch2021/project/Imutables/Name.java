@@ -5,13 +5,13 @@ public class Name {
     /**
      * Attributes
      **/
-    private String name;
+    private final String nameF;
 
     /**
      * Constructor
      **/
     public Name (String name) {
-    this.name = name;
+    this.nameF = name;
     }
 
 }
