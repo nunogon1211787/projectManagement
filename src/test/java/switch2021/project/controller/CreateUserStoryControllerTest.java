@@ -62,15 +62,19 @@ public class CreateUserStoryControllerTest {
         int priority = 1;
         String description = "";
         String description2 = "   ";
+        String description3 = null;
         UserStoryStatus status = new UserStoryStatus("To do");
         UserStoryDto userStoryDto = new UserStoryDto("Teste", status, priority, description);
         UserStoryDto userStoryDto2 = new UserStoryDto("Teste", status, priority, description2);
+        UserStoryDto userStoryDto3 = new UserStoryDto("Teste", status, priority, description2);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto));
         Exception exception2 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto2));
+        Exception exception3 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto3));
         //Assert
         assertTrue(exception.getMessage().contains("Description cannot be blank."));
         assertTrue(exception2.getMessage().contains("Description cannot be blank."));
+        assertTrue(exception3.getMessage().contains("Description cannot be blank."));
     }
 
     @Test
@@ -104,6 +108,39 @@ public class CreateUserStoryControllerTest {
     }
 
     @Test
+    public void createUserStoryNameInvalid() {
+        //Arrange
+        company.getProjectStore().saveNewProject(project);
+
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
+        int priority = 1;
+        String description= "Make test";
+        String name = null;
+        String name2 = "d";
+        String name3 = "dd";
+        String name4 = "";
+        UserStoryStatus status = new UserStoryStatus("To do");
+        UserStoryDto userStoryDto = new UserStoryDto(name, status, priority, description);
+        UserStoryDto userStoryDto2 = new UserStoryDto(name2, status, priority, description);
+        UserStoryDto userStoryDto3 = new UserStoryDto(name3, status, priority, description);
+        UserStoryDto userStoryDto4 = new UserStoryDto(name4, status, priority, description);
+
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto));
+        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto2));
+        Exception exception3 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto3));
+        Exception exception4 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto4));
+
+
+        //Assert
+        assertTrue(exception.getMessage().contains("Name cannot be blank."));
+        assertTrue(exception2.getMessage().contains("Name must be at least 3 characters"));
+        assertTrue(exception3.getMessage().contains("Name must be at least 3 characters"));
+        assertTrue(exception4.getMessage().contains("Name cannot be blank."));
+
+    }
+
+    @Test
     public void createUserStoryPriorityInvalidSup() {
         //Arrange
 
@@ -129,19 +166,18 @@ public class CreateUserStoryControllerTest {
         int priority2 = 5;
         int priority3 = 0;
         String description = "teste";
+        String name = "teste";
         UserStoryStatus status = new UserStoryStatus("To do");
-        UserStoryDto userStoryDto = new UserStoryDto("Teste", status, priority, description);
-        UserStoryDto userStoryDto2 = new UserStoryDto("Teste", status, priority2, "description");
-        UserStoryDto userStoryDto3 = new UserStoryDto("Teste", status, priority3, "description2");
+        UserStoryDto userStoryDto = new UserStoryDto(name, status, priority, description);
 
         // Act
-        boolean isUserStoryCreated = createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
-        boolean isUserStoryCreated2 = createUserStoryController.createUserStory("Project_2022_1", userStoryDto2);
-        boolean isUserStoryCreated3 = createUserStoryController.createUserStory("Project_2022_1", userStoryDto3);
+        createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
+
         //Assert
-        assertTrue(isUserStoryCreated);
-        assertTrue(isUserStoryCreated2);
-        assertTrue(isUserStoryCreated3);
+        assertNotNull(userStoryDto);
+        assertEquals(priority, userStoryDto.getPriority());
+        assertEquals(description, userStoryDto.getDescription());
+        assertEquals(name, userStoryDto.getName());
 
     }
 

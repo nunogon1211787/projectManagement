@@ -120,7 +120,7 @@ public class TaskEffortTest {
         });
         //Assert
         assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
-                " || Hour interval: [" + 0 + " - " + 24 + "]"));
+                " || Hour interval: [" + 0 + " - " + 23 + "]"));
     }
 
     @Test
@@ -138,7 +138,7 @@ public class TaskEffortTest {
         });
         //Assert
         assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
-                " || Hour interval: [" + 0 + " - " + 24 + "]"));
+                " || Hour interval: [" + 0 + " - " + 23 + "]"));
     }
 
     @Test
@@ -156,7 +156,7 @@ public class TaskEffortTest {
         });
         //Assert
         assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
-                " || Hour interval: [" + 0 + " - " + 24 + "]"));
+                " || Hour interval: [" + 0 + " - " + 23 + "]"));
     }
 
     @Test
@@ -174,14 +174,14 @@ public class TaskEffortTest {
         });
         //Assert
         assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
-                " || Hour interval: [" + 0 + " - " + 24 + "]"));
+                " || Hour interval: [" + 0 + " - " + 23 + "]"));
     }
 
     @Test
     @DisplayName("create effort with 24 hours")
     public void createTaskEffortSuccessWorkingHoursOnLimit() {
         //Arrange
-        int effortHours = 24;
+        int effortHours = 23;
         int effortMinutes = 59;
         LocalDate effortDate = LocalDate.of(2022, 1, 27);
         String comment = "design";
@@ -212,7 +212,7 @@ public class TaskEffortTest {
         });
         //Assert
         assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
-                " || Hour interval: [" + 0 + " - " + 24 + "]"));
+                " || Hour interval: [" + 0 + " - " + 23 + "]"));
     }
 
     @Test
@@ -230,7 +230,7 @@ public class TaskEffortTest {
         });
         //Assert
         assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
-                " || Hour interval: [" + 0 + " - " + 24 + "]"));
+                " || Hour interval: [" + 0 + " - " + 23 + "]"));
     }
 
     @Test

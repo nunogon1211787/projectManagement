@@ -18,7 +18,7 @@ public class TaskEffort {
     private final String comment;
     private final String attachment;
     private static final int MIN_HOUR = 0;
-    private static final int MAX_HOUR = 24;
+    private static final int MAX_HOUR = 23;
     private static final int MIN_MINUTE = 0;
     private static final int MAX_MINUTE = 60;
 
