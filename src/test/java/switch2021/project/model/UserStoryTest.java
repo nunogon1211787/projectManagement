@@ -135,7 +135,7 @@ class UserStoryTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
         userStory.getTasks().saveTask(task);
         //TaskEffort

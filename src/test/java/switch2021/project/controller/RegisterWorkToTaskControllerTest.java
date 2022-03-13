@@ -49,7 +49,7 @@ public class RegisterWorkToTaskControllerTest {
         sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(userStory1);
         //Tasks
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task1 = userStory1.getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
         Task task2 = userStory1.getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
         userStory1.getTasks().saveTask(task1);
@@ -100,7 +100,7 @@ public class RegisterWorkToTaskControllerTest {
         sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(userStory1);
         //Tasks
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task1 = userStory1.getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
         Task task2 = userStory1.getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
         userStory1.getTasks().saveTask(task1);
@@ -154,7 +154,7 @@ public class RegisterWorkToTaskControllerTest {
         sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(userStory1);
         //Tasks
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task1 = userStory1.getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
         Task task2 = userStory1.getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
         userStory1.getTasks().saveTask(task1);
