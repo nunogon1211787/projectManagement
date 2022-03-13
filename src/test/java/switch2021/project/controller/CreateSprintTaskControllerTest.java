@@ -19,7 +19,7 @@ class CreateSprintTaskControllerTest {
         TaskMapper mapper = new TaskMapper();
         CreateSprintTaskController controller = new CreateSprintTaskController(company, mapper);
         List<String> result = controller.getTaskTypes();
-        List<String> test = new ArrayList<>(company.getTaskTypeStore().getTaskTypesNames());
+        List<String> test = new ArrayList<>(company.getTaskTypeStore().getTaskTypesDescription());
         //Assert
         assertEquals(6,result.size());
         assertEquals(result, test);
