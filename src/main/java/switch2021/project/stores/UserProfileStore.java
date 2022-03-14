@@ -12,7 +12,7 @@ public class UserProfileStore {
     /**
      * Attributes
      **/
-    private List<UserProfile> userProfileList;
+    private final List<UserProfile> userProfileList;
 
     /**
      * UserProfile Store Constructor
@@ -38,8 +38,9 @@ public class UserProfileStore {
         UserProfile profile = null;
 
         for (UserProfile i : userProfileList) {
-            if (i.getUserProfileName().equalsIgnoreCase(profileName)) {
+            if (i.getUserProfileName().getDescriptionF().equalsIgnoreCase(profileName)) {
                 profile = i;
+                break;
             }
         }
         return profile;

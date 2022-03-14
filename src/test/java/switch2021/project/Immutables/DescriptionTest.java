@@ -1,6 +1,10 @@
 package switch2021.project.Immutables;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.SprintBacklog;
+import switch2021.project.model.Typology;
+
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,5 +44,19 @@ class DescriptionTest {
         description.setDescriptionF("modified_test");
 
         assertEquals("modified_test", description.getDescriptionF());
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTests() {
+        // Arrange
+        Description description = new Description("Teste");
+        Description description2 = new Description("Teste");
+        Description description3 = null;
+        Typology test = new Typology("test");
+        // Act
+        assertEquals(description,description2);
+        assertNotEquals(description, description3);
+        assertNotEquals(description, test);
     }
 }
