@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.Immutables.HoursMinutes;
 import switch2021.project.utils.App;
 
 import java.time.LocalDate;
@@ -138,7 +139,7 @@ public class Task {
     }
 
     public TaskEffort createTaskEffort(int effortHours, int effortMinutes, LocalDate effortDate, String comment, String attachment) {
-        return new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
+        return new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
     }
 
     public boolean validateTaskEffort(TaskEffort effort) {
@@ -179,28 +180,37 @@ public class Task {
     }
 
     private double effortInHours(TaskEffort effort) {
-        return (double) effort.getEffortHours() + ((double) effort.getEffortMinutes() / 60);
+        return (double) effort.getEffort().getEffortHours() + ((double) effort.getEffort().getEffortMinutes() / 60);
     }
 
-    public double updateHoursSpent(TaskEffort effort) {
-        return this.hoursSpent = this.hoursSpent + effortInHours(effort);
+    private double updateHoursSpent(TaskEffort effort) {
+        return this.hoursSpent += effortInHours(effort);
     }
 
-    public double updateEffortRemaining(TaskEffort effort) {
-        if (this.effortRemaining - effortInHours(effort) < 0) {
+    private double updateEffortRemaining(TaskEffort effort) {
+ /*       double difference = this.effortRemaining - effortInHours(effort);
+
+        if (difference < 0) {
             return this.effortRemaining = 0.0;
         }
-        return this.effortRemaining = this.effortRemaining - effortInHours(effort);
+        return this.effortRemaining -= effortInHours(effort);
+  */
+
+        if (this.effortRemaining < effortInHours(effort) && this.effortRemaining != effortInHours(effort))
+            return this.effortRemaining = 0.0;
+        return this.effortRemaining -= effortInHours(effort);
     }
 
-    public double updateExecutionPercentage() {
+    private double updateExecutionPercentage() {
         double workTotal = this.hoursSpent + this.effortRemaining;
         double workDone = this.hoursSpent;
-        if (workDone > workTotal || workDone == workTotal) {
-            return this.executionPercentage = 1.0;
+
+        if (workDone >= workTotal) {
+            this.executionPercentage = 1.0;
         } else {
-            return this.executionPercentage = workDone / workTotal;
+            this.executionPercentage = workDone / workTotal;
         }
+        return this.executionPercentage;
     }
 
 

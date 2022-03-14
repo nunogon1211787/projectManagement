@@ -7,12 +7,10 @@ import java.util.Objects;
 
 @Getter
 @Setter
-
-
 public class UserStoryStatus {
     /** Classe UserStoryStatus Atributes **/
     private String description;
-    private boolean sprintAvailable;  //this attribute means it is available as a status in sprint backlog
+    private boolean sprintAvailable;  //this attribute determines if the status is available as a sprint backlog status
 
     /** Constructor **/
     public UserStoryStatus(String description) {
@@ -26,7 +24,6 @@ public class UserStoryStatus {
     public void setSprintAvailable(boolean sprintAvailable) {
         this.sprintAvailable = sprintAvailable;
     }
-
 
 
     @Override

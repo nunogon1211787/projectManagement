@@ -8,7 +8,6 @@ import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
 import switch2021.project.stores.TaskList;
-import switch2021.project.utils.App;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,7 +20,7 @@ public class RegisterWorkToTaskController {
 
     private final Company company;
     private final RegisterWorkToTaskMapper mapper;
-    private Project project;
+ //   private Project project;
     private UserStory userStory;
     private List<Task> taskList;
     private Task task;
@@ -46,24 +45,21 @@ public class RegisterWorkToTaskController {
         int userStoryId = userStorySprintProjectDTO.getUserStoryId();
 
         ProjectStore projectStore = this.company.getProjectStore();
-        this.project = projectStore.getProjectByCode(code);
+        Project project = projectStore.getProjectByCode(code);
 
-        SprintList sprintList = this.project.getSprints();
+        SprintList sprintList = project.getSprints();
         Sprint sprint = sprintList.getSprint(sprintId);
 
         SprintBacklog sprintBacklog = sprint.getSprintBacklog();
         this.userStory = sprintBacklog.getUserStory(userStoryId);
 
-        TaskList taskList = this.userStory.getTasks();
-        this.taskList = taskList.getTaskList();
+        this.taskList = this.userStory.getTasks().getTaskList();
 
         return this.mapper.toDtoList(this.taskList);
     }
 
     public TaskIdNameDTO getTask(int taskId) {
-        TaskList taskList = this.userStory.getTasks();
-
-        this.task = taskList.getTaskById(taskId);
+        this.task = this.userStory.getTasks().getTaskById(taskId);
         return this.mapper.toDTO(this.task);
     }
 

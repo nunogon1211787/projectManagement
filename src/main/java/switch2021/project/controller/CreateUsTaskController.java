@@ -28,7 +28,7 @@ public class CreateUsTaskController {
     public List<String> getTaskTypes(){
         List<String> taskTypesNames;
 
-        taskTypesNames = this.company.getTaskTypeStore().getTaskTypesNames();
+        taskTypesNames = this.company.getTaskTypeStore().getTaskTypesDescription();
         return taskTypesNames;
     }
 

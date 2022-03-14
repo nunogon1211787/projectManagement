@@ -112,6 +112,10 @@ class TaskStatus {
 -description : String
 }
 
+class TaskType {
+-name : String
+}
+
 class TaskEffort {
 -effortHours : int
 -effortMinutes : int
@@ -147,5 +151,6 @@ UserStory "1" o-- "1" TaskList: contains
 Sprint "1" o-- "1" TaskList: contains
 TaskList "1" *-- "1..*" Task : a list of
 Task "*" -> "1" TaskStatus : has
+Task "*" -> "1" TaskType : is classified by
 Task "1" *-- "0..*" TaskEffort: is updated by
 @enduml

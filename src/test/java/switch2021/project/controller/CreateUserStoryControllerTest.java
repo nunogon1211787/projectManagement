@@ -62,44 +62,50 @@ public class CreateUserStoryControllerTest {
         int priority = 1;
         String description = "";
         String description2 = "   ";
+        String description3 = null;
         UserStoryStatus status = new UserStoryStatus("To do");
-        UserStoryDto userStoryDto = new UserStoryDto("Teste", status, priority, description);
-        UserStoryDto userStoryDto2 = new UserStoryDto("Teste", status, priority, description2);
+
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto));
-        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto2));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", status, priority, description)));
+        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", status, priority, description2)));
+        Exception exception3 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", status, priority, description3)));
         //Assert
-        assertTrue(exception.getMessage().contains("Description cannot be blank."));
-        assertTrue(exception2.getMessage().contains("Description cannot be blank."));
+        assertTrue(exception.getMessage().contains("Description field requires at least " + 1 + " characters"));
+        assertTrue(exception2.getMessage().contains("Description field requires at least " + 1 + " characters"));
+        assertTrue(exception3.getMessage().contains("Description field requires at least " + 1 + " characters"));
     }
 
+
     @Test
-    public void createUserStoryDescriptionInvalidShort() {
+    public void createUserStoryNameInvalid() {
         //Arrange
         company.getProjectStore().saveNewProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = 1;
-        String description = "dd";
-        String description2 = "d";
-        String description3 = "ddd";
-        String description4 = "ddde";
+        String description = "Make test";
+        String name = null;
+        String name2 = "d";
+        String name3 = "dd";
+        String name4 = "";
         UserStoryStatus status = new UserStoryStatus("To do");
-        UserStoryDto userStoryDto = new UserStoryDto("Teste", status, priority, description);
-        UserStoryDto userStoryDto2 = new UserStoryDto("Teste", status, priority, description2);
-        UserStoryDto userStoryDto3 = new UserStoryDto("Teste", status, priority, description3);
-        UserStoryDto userStoryDto4 = new UserStoryDto("Teste", status, priority, description4);
+        UserStoryDto userStoryDto = new UserStoryDto(name, status, priority, description);
+        UserStoryDto userStoryDto2 = new UserStoryDto(name2, status, priority, description);
+        UserStoryDto userStoryDto3 = new UserStoryDto(name3, status, priority, description);
+        UserStoryDto userStoryDto4 = new UserStoryDto(name4, status, priority, description);
+
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto));
         Exception exception2 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto2));
         Exception exception3 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto3));
         Exception exception4 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto4));
 
+
         //Assert
-        assertTrue(exception.getMessage().contains("Description must be at least 5 characters"));
-        assertTrue(exception2.getMessage().contains("Description must be at least 5 characters"));
-        assertTrue(exception3.getMessage().contains("Description must be at least 5 characters"));
-        assertTrue(exception4.getMessage().contains("Description must be at least 5 characters"));
+        assertTrue(exception.getMessage().contains("Name cannot be blank."));
+        assertTrue(exception2.getMessage().contains("Name must be at least 3 characters"));
+        assertTrue(exception3.getMessage().contains("Name must be at least 3 characters"));
+        assertTrue(exception4.getMessage().contains("Name cannot be blank."));
 
     }
 
@@ -129,19 +135,41 @@ public class CreateUserStoryControllerTest {
         int priority2 = 5;
         int priority3 = 0;
         String description = "teste";
+        String name = "teste";
         UserStoryStatus status = new UserStoryStatus("To do");
-        UserStoryDto userStoryDto = new UserStoryDto("Teste", status, priority, description);
-        UserStoryDto userStoryDto2 = new UserStoryDto("Teste", status, priority2, "description");
-        UserStoryDto userStoryDto3 = new UserStoryDto("Teste", status, priority3, "description2");
+        UserStoryDto userStoryDto = new UserStoryDto(name, status, priority, description);
 
         // Act
-        boolean isUserStoryCreated = createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
-        boolean isUserStoryCreated2 = createUserStoryController.createUserStory("Project_2022_1", userStoryDto2);
-        boolean isUserStoryCreated3 = createUserStoryController.createUserStory("Project_2022_1", userStoryDto3);
+        createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
+
         //Assert
-        assertTrue(isUserStoryCreated);
-        assertTrue(isUserStoryCreated2);
-        assertTrue(isUserStoryCreated3);
+        assertNotNull(userStoryDto);
+        assertEquals(priority, userStoryDto.getPriority());
+        assertEquals(description, userStoryDto.getDescription().getDescriptionF());
+        assertEquals(name, userStoryDto.getName());
+
+    }
+
+    @Test
+    public void createUserStorySuccessFullDescriptionOnLimitSize() {
+        //Arrange
+        company.getProjectStore().saveNewProject(project);
+
+        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
+        int priority = 1;
+        String description = "t";
+        String name = "teste";
+        UserStoryStatus status = new UserStoryStatus("To do");
+        UserStoryDto userStoryDto = new UserStoryDto(name, status, priority, description);
+
+        // Act
+        createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
+
+        //Assert
+        assertNotNull(userStoryDto);
+        assertEquals(priority, userStoryDto.getPriority());
+        assertEquals(description, userStoryDto.getDescription().getDescriptionF());
+        assertEquals(name, userStoryDto.getName());
 
     }
 
@@ -160,7 +188,7 @@ public class CreateUserStoryControllerTest {
         assertEquals(userStoryDto.getName(), project_2022_1.getUserStoryList().get(0).getName());
         assertEquals(userStoryDto.getPriority(), project_2022_1.getUserStoryList().get(0).getPriority());
         assertEquals(userStoryDto.getUserStoryStatus(), project_2022_1.getUserStoryList().get(0).getUserStoryStatus());
-        assertEquals(userStoryDto.getDescription(), project_2022_1.getUserStoryList().get(0).getDescription());
+        assertEquals(userStoryDto.getDescription().getDescriptionF(), project_2022_1.getUserStoryList().get(0).getDescription().getDescriptionF());
     }
     //Arrange
 

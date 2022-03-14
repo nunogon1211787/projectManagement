@@ -33,7 +33,7 @@ public class CreateSprintTaskController {
 
         List<String> taskTypesNames;
 
-        taskTypesNames = this.company.getTaskTypeStore().getTaskTypesNames();
+        taskTypesNames = this.company.getTaskTypeStore().getTaskTypesDescription();
 
         return taskTypesNames;
     }

@@ -36,9 +36,9 @@ public class TaskTypeStore {
     /**
      * Method to create TaskType
      */
-    public boolean createTaskType(String name){
+    public boolean createTaskType(String description){
 
-        TaskType newType = new TaskType(name);
+        TaskType newType = new TaskType(description);
 
         return saveTaskType(newType);
 
@@ -47,20 +47,20 @@ public class TaskTypeStore {
     /**
      * Methods to iterate with the list
      */
-    public List<String> getTaskTypesNames(){
-        List<String> taskTypesNames = new ArrayList<>();
+    public List<String> getTaskTypesDescription(){
+        List<String> taskTypesDescription = new ArrayList<>();
 
         for (TaskType taskType : this.taskTypeList) {
-            taskTypesNames.add(taskType.getName());
+            taskTypesDescription.add(taskType.getDescriptionF().toString());
         }
-        return taskTypesNames;
+        return taskTypesDescription;
     }
 
-    public TaskType getTypeByName(String typeName) {
+    public TaskType getTypeByDescription(String typeDescription) {
         TaskType type = null;
 
         for (TaskType taskType : this.taskTypeList) {
-            if (taskType.hasName(typeName)) {
+            if (taskType.hasDescription(typeDescription)) {
                 type = taskType;
             }
         }
@@ -77,7 +77,7 @@ public class TaskTypeStore {
             result = true;
             if(this.taskTypeList.size() != 0) {
                 for (int i = 0; i < this.taskTypeList.size(); i++) {
-                    if (validateNewTypeName(type)) {
+                    if (validateNewTypeDescription(type)) {
                         type.setTypeID(idTaskTypeGenerator());
                         this.taskTypeList.add(type);
                     }
@@ -90,11 +90,11 @@ public class TaskTypeStore {
         return result;
     }
 
-    private boolean validateNewTypeName(TaskType type) {
+    private boolean validateNewTypeDescription(TaskType type) {
         boolean result = true;
 
         for (TaskType taskType : this.taskTypeList) {
-            if (taskType.getName().equals(type.getName())) {
+            if (taskType.getDescriptionF().equals(type.getDescriptionF())) {
                 result = false;
                 break;
             }
@@ -128,4 +128,5 @@ public class TaskTypeStore {
     public int hashCode() {
         return Objects.hash(taskTypeList);
     }
+
 }

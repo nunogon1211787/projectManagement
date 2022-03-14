@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import lombok.Data;
+import switch2021.project.Immutables.Description;
 import switch2021.project.stores.TaskList;
 
 import java.util.Objects;
@@ -20,7 +21,7 @@ public class UserStory {
     private String name;
     private UserStoryStatus userStoryStatus;
     private int priority;
-    private String description;
+    private Description description;
     private UserStory parentUserStory;
     private int timeEstimate;
     private TaskList tasks;
@@ -30,10 +31,10 @@ public class UserStory {
      * ---> Constructor <---
      **/
     public UserStory(String name, int priority, String description, int timeEstimateInHours) {
-        isValidUserStory(name, priority, description);
+        isValidUserStory(name, priority);
 
         this.name = name;
-        this.description = description;
+        this.description = new Description(description);
         this.userStoryStatus = new UserStoryStatus("To do");
         this.priority = priority;
         this.timeEstimate = timeEstimateInHours;
@@ -43,21 +44,21 @@ public class UserStory {
     public UserStory(UserStory userStoryToRefine, UserStoryStatus userStoryStatus, int priority, String description) {
         this.name = userStoryToRefine.getName() + " _Refined";
 
-        isValidUserStory(name, priority, description);
+        isValidUserStory(name, priority);
 
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
-        this.description = description;
+        this.description = new Description(description);
         this.parentUserStory = userStoryToRefine;
     }
 
     public UserStory(String name, UserStoryStatus userStoryStatus, int priority, String description) {
-        isValidUserStory(name, priority, description);
+        isValidUserStory(name, priority);
 
         this.name = name;
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
-        this.description = description;
+        this.description = new Description(description);
     }
 
     public int getIdUserStory() {
@@ -82,7 +83,7 @@ public class UserStory {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = new Description(description);
     }
 
     public void setUserStoryStatus(UserStoryStatus userStoryStatus) {
@@ -106,17 +107,10 @@ public class UserStory {
      * ---> Method to validate entered info by Product Owner <---
      * (Cris US009)
      */
-    public boolean isValidUserStory(String name, int priority, String description) {
+    public void isValidUserStory(String name, int priority) {
         //check if priority is invalid
         if (priority < 0 || priority > 5) {
             throw new IllegalArgumentException("Check priority, cannot be < 0 or superior to 5.");
-        }
-        //check if description is invalid
-        if (description == null || description.trim().isEmpty()) {
-            throw new IllegalArgumentException("Description cannot be blank.");
-        }
-        if (description.length() < 5) {
-            throw new IllegalArgumentException("Description must be at least 5 characters");
         }
         //check if Name is invalid
         if (name == null || name.trim().isEmpty()) {
@@ -125,7 +119,6 @@ public class UserStory {
         if (name.length() <= 2) {
             throw new IllegalArgumentException("Name must be at least 3 characters");
         }
-        return true;
     }
 
 

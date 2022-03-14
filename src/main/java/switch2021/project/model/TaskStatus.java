@@ -40,11 +40,13 @@ public class TaskStatus {
     /**
      * Methods to validate attributes data.
      */
+    private static final int MIN_DESCRIPTION_LENGTH = 3; //modify to public?
+
     private void checkDescriptionRules(String description) {
         if (description.trim().isEmpty())
             throw new IllegalArgumentException("Name cannot be empty.");
-        if ((description.length() < 3))
-            throw new IllegalArgumentException("Name must be at least 3 characters");
+        if ((description.length() < MIN_DESCRIPTION_LENGTH))
+            throw new IllegalArgumentException("Name must be at least" + MIN_DESCRIPTION_LENGTH + " characters");
     }
 
     private void checkIdRules(int id) {
