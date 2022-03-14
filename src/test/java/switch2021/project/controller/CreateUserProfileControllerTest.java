@@ -25,15 +25,11 @@ public class CreateUserProfileControllerTest {
       createUserProfileController.createUserProfile(name);
         // Assert
         assertNotNull(name);
-        assertEquals(name, up.getUserProfileName());
-
-
+        assertEquals(name, up.getUserProfileName().getDescriptionF());
     }
 
-
-
     @Test
-    @DisplayName("Return exception message, no name for profile inserted")
+    @DisplayName("Return Exception when creating a profile with empty description")
     public void createProfileWithEmptyName() {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
