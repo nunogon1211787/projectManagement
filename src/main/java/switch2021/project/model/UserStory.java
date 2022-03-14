@@ -31,7 +31,7 @@ public class UserStory {
      * ---> Constructor <---
      **/
     public UserStory(String name, int priority, String description, int timeEstimateInHours) {
-        isValidUserStory(name, priority, description);
+        isValidUserStory(name, priority);
 
         this.name = name;
         this.description = new Description(description);
@@ -44,7 +44,7 @@ public class UserStory {
     public UserStory(UserStory userStoryToRefine, UserStoryStatus userStoryStatus, int priority, String description) {
         this.name = userStoryToRefine.getName() + " _Refined";
 
-        isValidUserStory(name, priority, description);
+        isValidUserStory(name, priority);
 
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
@@ -53,7 +53,7 @@ public class UserStory {
     }
 
     public UserStory(String name, UserStoryStatus userStoryStatus, int priority, String description) {
-        isValidUserStory(name, priority, description);
+        isValidUserStory(name, priority);
 
         this.name = name;
         this.userStoryStatus = userStoryStatus;
@@ -107,18 +107,11 @@ public class UserStory {
      * ---> Method to validate entered info by Product Owner <---
      * (Cris US009)
      */
-    public void isValidUserStory(String name, int priority, String description) {
+    public void isValidUserStory(String name, int priority) {
         //check if priority is invalid
         if (priority < 0 || priority > 5) {
             throw new IllegalArgumentException("Check priority, cannot be < 0 or superior to 5.");
         }
-//        //check if description is invalid
-//        if (description == null || description.trim().isEmpty()) {
-//            throw new IllegalArgumentException("Description cannot be blank.");
-//        }
-//        if (description.length() < 5) {
-//            throw new IllegalArgumentException("Description must be at least 5 characters");
-//        }
         //check if Name is invalid
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be blank.");
