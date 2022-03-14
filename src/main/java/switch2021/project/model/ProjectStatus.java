@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.Immutables.Description;
 
 import java.util.Objects;
 
@@ -14,7 +15,7 @@ public class ProjectStatus {
      * Project Status atributes are composed of a description of the Project Status.
      **/
 
-    private String description;
+    private Description description;
 
     /**
      * Constructors of Project Status class
@@ -22,27 +23,21 @@ public class ProjectStatus {
      **/
 
     public ProjectStatus(String description) {
-        checkDescriptionRules(description);
-        this.description = description;
-    }
-
-    private void checkDescriptionRules(String description) {
-        if (description.trim().isEmpty())
-            throw new IllegalArgumentException("Description cannot be empty.");
-        if ((description.length() < 3))
-            throw new IllegalArgumentException("Description must be at least 3 characters");
+        this.description = new Description(description);
     }
 
     /**
      * Override Methods
      **/
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProjectStatus that = (ProjectStatus) o;
-        return (this.description.equals(that.description));
+        return (this.description.getDescriptionF().equals(that.description.getDescriptionF()));
     }
 
     @Override

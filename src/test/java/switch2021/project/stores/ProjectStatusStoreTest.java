@@ -10,41 +10,51 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProjectStatusStoreTest {
 
     @Test
-    void populateDefault() {
-        ProjectStatusStore store = new ProjectStatusStore();
-        store.populateDefault();
-
-        assertEquals("Planned", store.getprojectStatusList().get(0).getDescription());
-        assertEquals("Inception", store.getprojectStatusList().get(1).getDescription());
-        assertEquals("Elaboration", store.getprojectStatusList().get(2).getDescription());
-        assertEquals("Construction", store.getprojectStatusList().get(3).getDescription());
-        assertEquals("Transition", store.getprojectStatusList().get(4).getDescription());
-        assertEquals("Warranty", store.getprojectStatusList().get(5).getDescription());
-        assertEquals("Closed", store.getprojectStatusList().get(6).getDescription());
+    void populateDefaultStatusVerification() {
+        //Arrange
+        Company company = new Company();
+        ProjectStatusStore store = company.getProjectStatusStore();
+        //Assert
+        assertEquals(7,store.getProjectStatusList().size());
+        assertEquals("Planned", store.getProjectStatusByDescription("Planned").getDescription().getDescriptionF());
+        assertEquals("Inception", store.getProjectStatusByDescription("Inception").getDescription().getDescriptionF());
+        assertEquals("Elaboration", store.getProjectStatusByDescription("Elaboration").getDescription().getDescriptionF());
+        assertEquals("Construction", store.getProjectStatusByDescription("Construction").getDescription().getDescriptionF());
+        assertEquals("Transition", store.getProjectStatusByDescription("Transition").getDescription().getDescriptionF());
+        assertEquals("Warranty", store.getProjectStatusByDescription("Warranty").getDescription().getDescriptionF());
+        assertEquals("Closed", store.getProjectStatusByDescription("Closed").getDescription().getDescriptionF());
     }
 
     @Test
-    void createProjectStatus() {
-        ProjectStatusStore store = new ProjectStatusStore();
-        ProjectStatus test = store.createProjectStatus("test");
-
-        assertEquals("test", test.getDescription());
+    void createProjectStatusSuccess() {
+        //Arrange
+        Company company = new Company();
+        ProjectStatusStore store = company.getProjectStatusStore();
+        //Act
+        ProjectStatus newStatus = store.createProjectStatus("test");
+        //Assert
+        assertEquals(7,store.getProjectStatusList().size());
+        assertEquals("test", newStatus.getDescription().getDescriptionF());
     }
 
     @Test
-    void add() {
-        ProjectStatusStore store = new ProjectStatusStore();
-        store.populateDefault();
-        ProjectStatus test = store.createProjectStatus("test");
-        store.add(test);
-
-        assertEquals("test",store.getprojectStatusList().get(7).getDescription());
+    void addProjectStatusSuccess() {
+        //Arrange
+        Company company = new Company();
+        ProjectStatusStore store = company.getProjectStatusStore();
+        ProjectStatus newStatus = store.createProjectStatus("test");
+        //Act
+        store.add(newStatus);
+        //Assert
+        assertEquals(8,store.getProjectStatusList().size());
+        assertEquals("test",store.getProjectStatusByDescription("test").getDescription().getDescriptionF());
     }
 
     @Test
-    void getprojectStatusList() {
-        ProjectStatusStore store = new ProjectStatusStore();
-        store.populateDefault();
+    void getProjectStatusList() {
+        //Arrange
+        Company company = new Company();
+        ProjectStatusStore store = company.getProjectStatusStore();
 
         List<ProjectStatus> status = new ArrayList<>();
         status.add(new ProjectStatus("Planned"));
@@ -54,17 +64,18 @@ class ProjectStatusStoreTest {
         status.add(new ProjectStatus("Transition"));
         status.add(new ProjectStatus("Warranty"));
         status.add(new ProjectStatus("Closed"));
-
-        assertEquals(status, store.getprojectStatusList());
+        //Assert
+        assertEquals(status, store.getProjectStatusList());
     }
 
     @Test
     void getProjectStatusByDescription() {
-        ProjectStatusStore store = new ProjectStatusStore();
-        store.populateDefault();
+        //Arrange
+        Company company = new Company();
+        ProjectStatusStore store = company.getProjectStatusStore();
 
         ProjectStatus status = new ProjectStatus("Planned");
-
+        //Assert
         assertEquals(status, store.getProjectStatusByDescription("Planned"));
     }
 
@@ -103,14 +114,6 @@ class ProjectStatusStoreTest {
         ProjectStatus status2 = new ProjectStatus("teste2");
 
         assertNotEquals(status1.hashCode(),status2.hashCode());
-    }
-
-    @Test
-    void setTest() {
-        ProjectStatus status1 = new ProjectStatus("teste");
-        status1.setDescription("teste2");
-
-        assertEquals("teste2",status1.getDescription());
     }
 
     @Test

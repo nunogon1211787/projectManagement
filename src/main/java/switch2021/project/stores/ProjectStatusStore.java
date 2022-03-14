@@ -44,9 +44,8 @@ public class ProjectStatusStore {
      * Create Project Status (Creates a new Project Status object)
      **/
 
-    public ProjectStatus createProjectStatus(String descritpion) {
-
-        return new ProjectStatus(descritpion);
+    public ProjectStatus createProjectStatus(String description) {
+        return new ProjectStatus(description);
     }
 
     /**
@@ -62,7 +61,7 @@ public class ProjectStatusStore {
      * Getter Methods
      **/
 
-    public List<ProjectStatus> getprojectStatusList() {
+    public List<ProjectStatus> getProjectStatusList() {
         return new ArrayList<>(projectStatusList);
     }
 
@@ -70,7 +69,7 @@ public class ProjectStatusStore {
         ProjectStatus status = null;
 
         for (ProjectStatus i : this.projectStatusList) {
-            if (i.getDescription().equals(name)) {
+            if (i.getDescription().getDescriptionF().equals(name)) {
                  status = i;
                 break;
             }

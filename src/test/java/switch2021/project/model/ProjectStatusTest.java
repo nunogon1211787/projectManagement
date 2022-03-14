@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.Immutables.Description;
 import switch2021.project.stores.ProjectStatusStore;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +15,7 @@ public class ProjectStatusTest {
         //Act
         ProjectStatus projStatus = new ProjectStatus("new Project Status");
         //Assert
-        assertEquals(descriptionExpected, projStatus.getDescription());
+        assertEquals(descriptionExpected, projStatus.getDescription().getDescriptionF());
     }
 
     @Test
@@ -26,21 +27,13 @@ public class ProjectStatusTest {
     }
 
     @Test
-    public void createProjectStatusFailDescriptionLenghtEquals2() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Act
-            new ProjectStatus("to");
-        });
-    }
-
-    @Test
-    public void createProjectStatusFailDescriptionLenghtEquals3() {
+    public void createProjectStatusFailDescriptionLengthEquals3() {
         //Arrange
         String descriptionExpected = "new";
         //Act
         ProjectStatus projStatus = new ProjectStatus("new");
         //Assert
-        assertEquals(descriptionExpected, projStatus.getDescription());
+        assertEquals(descriptionExpected, projStatus.getDescription().getDescriptionF());
     }
 
     @Test
@@ -49,9 +42,11 @@ public class ProjectStatusTest {
         Company company = new Company();
         ProjectStatusStore projectStatusStore = company.getProjectStatusStore();
         ProjectStatus projStatus = projectStatusStore.getProjectStatusByDescription("Planned");
+
+        Description newStatusDescription = projectStatusStore.getProjectStatusByDescription("Elaboration").getDescription();
         //Act
-        projStatus.setDescription("Elaboration");
+        projStatus.setDescription(newStatusDescription);
         //Assert
-        assertEquals("Elaboration", projStatus.getDescription());
+        assertEquals("Elaboration", projStatus.getDescription().getDescriptionF());
     }
 }

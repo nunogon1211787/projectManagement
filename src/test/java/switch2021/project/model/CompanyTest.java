@@ -20,7 +20,7 @@ CompanyTest {
         assertEquals(2,company.getTypologyStore().getTypologyList().size());
         assertEquals(0,company.getCustomerStore().getCustomerList().size());
         assertEquals(0,company.getBusinessSectorStore().getBusinessSectorList().size());
-        assertEquals(7,company.getProjectStatusStore().getprojectStatusList().size());
+        assertEquals(7,company.getProjectStatusStore().getProjectStatusList().size());
         assertEquals(6,company.getUserStoryStatusStore().getUserStoryStatusList().size());
         assertEquals(0,company.getRequestStore().getRequestProfileList().size());
     }
