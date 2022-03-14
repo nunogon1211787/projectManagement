@@ -27,8 +27,8 @@ public class CustomerStore {
      * Create Customer (Creates a new Customer object)
      **/
 
-    public Customer createCustomer(String name, String email) {
-        return new Customer(name, email);
+    public Customer createCustomer(String name, String email, long nif) {
+        return new Customer(name, email, nif);
     }
 
 
@@ -37,7 +37,7 @@ public class CustomerStore {
      **/
     public boolean saveNewCustomer(Customer customer) {
         if (!validateCustomer(customer)) {
-            customer.setCustomerId(this.customerList.size() + 1L);
+            customer.setCustomerId(idGenerator());
             this.customerList.add(customer);
         }
         return true;
@@ -74,28 +74,16 @@ public class CustomerStore {
     }
 
     /**
-     * Override
-     **/
+     * ID Generator - to generate a new ID to the Customer Object when it is saved.
+     */
 
-/*
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CustomerStore)) return false;
-        CustomerStore that = (CustomerStore) o;
-        return Objects.equals(this.customerList, that.customerList);
+    private int idGenerator(){
+        int id = 1;
+        if(!this.customerList.isEmpty()){
+            id = this.customerList.get(this.customerList.size() - 1).getCustomerId() + 1;
+        }
+
+        return id;
     }
-
-    */
-/**
-     * Hash
-     **//*
-
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(customerList);
-    }
-*/
 
 }

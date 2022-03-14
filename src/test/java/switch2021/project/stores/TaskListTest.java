@@ -136,7 +136,7 @@ public class TaskListTest {
         CreateTaskDTO dto = new CreateTaskDTO("test", "test test test tests", 10, "Meeting", "user test");
 
             // Create Project
-        Customer cust = new Customer("test", "test@test.pt");
+        Customer cust = new Customer("test", "test@test.pt", 123456789);
         Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
         ProjectStatus status = new ProjectStatus("test1234");
@@ -164,7 +164,7 @@ public class TaskListTest {
         CreateTaskDTO dto2 = new CreateTaskDTO("test", "test test test tests", 10, "Meeting", "user test");
 
         // Create Project
-        Customer cust = new Customer("test", "test@test.pt");
+        Customer cust = new Customer("test", "test@test.pt", 123456789);
         Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
         ProjectStatus status = new ProjectStatus("test1234");
