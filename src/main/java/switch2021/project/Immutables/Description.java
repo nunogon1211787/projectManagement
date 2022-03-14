@@ -1,10 +1,12 @@
 package switch2021.project.Immutables;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 public class Description {
 
     /**
@@ -18,6 +20,8 @@ public class Description {
      * Constructor
      **/
     public Description (String description) {
+        if (description == null)
+            throw new IllegalArgumentException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + " characters");
         if (description.trim().length() < MIN_DESCRIPTION_LENGTH)
             throw new IllegalArgumentException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + " characters");
         if (description.trim().length() > MAX_DESCRIPTION_LENGTH)

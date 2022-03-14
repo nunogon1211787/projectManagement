@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import lombok.Data;
+import switch2021.project.Immutables.Description;
 import switch2021.project.stores.TaskList;
 
 import java.util.Objects;
@@ -20,7 +21,7 @@ public class UserStory {
     private String name;
     private UserStoryStatus userStoryStatus;
     private int priority;
-    private String description;
+    private Description description;
     private UserStory parentUserStory;
     private int timeEstimate;
     private TaskList tasks;
@@ -33,7 +34,7 @@ public class UserStory {
         isValidUserStory(name, priority, description);
 
         this.name = name;
-        this.description = description;
+        this.description = new Description(description);
         this.userStoryStatus = new UserStoryStatus("To do");
         this.priority = priority;
         this.timeEstimate = timeEstimateInHours;
@@ -47,7 +48,7 @@ public class UserStory {
 
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
-        this.description = description;
+        this.description = new Description(description);
         this.parentUserStory = userStoryToRefine;
     }
 
@@ -57,7 +58,7 @@ public class UserStory {
         this.name = name;
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
-        this.description = description;
+        this.description = new Description(description);
     }
 
     public int getIdUserStory() {
@@ -82,7 +83,7 @@ public class UserStory {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = new Description(description);
     }
 
     public void setUserStoryStatus(UserStoryStatus userStoryStatus) {
@@ -111,13 +112,13 @@ public class UserStory {
         if (priority < 0 || priority > 5) {
             throw new IllegalArgumentException("Check priority, cannot be < 0 or superior to 5.");
         }
-        //check if description is invalid
-        if (description == null || description.trim().isEmpty()) {
-            throw new IllegalArgumentException("Description cannot be blank.");
-        }
-        if (description.length() < 5) {
-            throw new IllegalArgumentException("Description must be at least 5 characters");
-        }
+//        //check if description is invalid
+//        if (description == null || description.trim().isEmpty()) {
+//            throw new IllegalArgumentException("Description cannot be blank.");
+//        }
+//        if (description.length() < 5) {
+//            throw new IllegalArgumentException("Description must be at least 5 characters");
+//        }
         //check if Name is invalid
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be blank.");

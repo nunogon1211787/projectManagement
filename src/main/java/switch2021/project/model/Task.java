@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.Immutables.HoursMinutes;
 import switch2021.project.utils.App;
 
 import java.time.LocalDate;
@@ -138,7 +139,7 @@ public class Task {
     }
 
     public TaskEffort createTaskEffort(int effortHours, int effortMinutes, LocalDate effortDate, String comment, String attachment) {
-        return new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
+        return new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
     }
 
     public boolean validateTaskEffort(TaskEffort effort) {
@@ -179,7 +180,7 @@ public class Task {
     }
 
     private double effortInHours(TaskEffort effort) {
-        return (double) effort.getEffortHours() + ((double) effort.getEffortMinutes() / 60);
+        return (double) effort.getEffort().getEffortHours() + ((double) effort.getEffort().getEffortMinutes() / 60);
     }
 
     private double updateHoursSpent(TaskEffort effort) {
