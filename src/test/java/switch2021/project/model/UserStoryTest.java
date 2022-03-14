@@ -290,4 +290,27 @@ class UserStoryTest {
         assertEquals(2, userStory2.getIdUserStory());
         assertNotEquals(2, userStory1.getIdUserStory());
     }
+
+    @Test
+    void setPriorityTrue() {
+        UserStory userStory1 = new UserStory("US001", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("US002", 2, "Fazer tal e coiso", 5);
+        userStory2.setPriority(1);
+        userStory1.setPriority(4);
+
+        assertTrue(userStory1.setPriority(3));
+        assertEquals(3, userStory1.getPriority());
+
+    }
+    @Test
+    void setPriorityFalse() {
+        UserStory userStory1 = new UserStory("US001", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("US002", 2, "Fazer tal e coiso", 5);
+        userStory2.setPriority(1);
+        userStory1.setPriority(6);
+
+        assertFalse(userStory1.setPriority(6));
+        assertNotEquals(6, userStory1.getPriority());
+
+    }
 }

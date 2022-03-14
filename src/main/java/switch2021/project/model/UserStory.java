@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import switch2021.project.Immutables.Description;
 import switch2021.project.stores.TaskList;
 
@@ -9,7 +10,8 @@ import java.util.Objects;
 /**
  * ---> Getters e Setters e Override <--- - Project Lombok is a java library that automatically plugs into your editor and build tools, spicing up your java.
  */
-@Data
+@Setter
+@Getter
 
 public class UserStory {
 

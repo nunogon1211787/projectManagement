@@ -2,7 +2,6 @@ package switch2021.project.Immutables;
 
 import lombok.Getter;
 
-import java.security.spec.ECFieldF2m;
 
 @Getter
 public class HoursMinutes {
