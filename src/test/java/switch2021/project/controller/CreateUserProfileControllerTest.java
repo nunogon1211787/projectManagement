@@ -3,6 +3,8 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
+import switch2021.project.stores.UserProfileStore;
+
 import switch2021.project.model.UserProfile;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,24 +25,19 @@ public class CreateUserProfileControllerTest {
       createUserProfileController.createUserProfile(name);
         // Assert
         assertNotNull(name);
-        assertEquals(name, up.getUserProfileName());
-
-
+        assertEquals(name, up.getUserProfileName().getDescriptionF());
     }
 
-
-
     @Test
-    @DisplayName("Return exception message, no name for profile inserted")
+    @DisplayName("Return Exception when creating a profile with empty description")
     public void createProfileWithEmptyName() {
-        // Arrange
-        Company company = new Company();
-        CreateUserProfileController createUserProfileController = new CreateUserProfileController(company);
-        String name = "";
-        // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserProfileController.createUserProfile(name));
-        // Assert
-        assertTrue(exception.getMessage().contains("Name cannot be blank."));
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            Company company = new Company();
+            CreateUserProfileController createUserProfileController = new CreateUserProfileController(company);
+            String name = "";
+            createUserProfileController.createUserProfile(name);
+        });
     }
 
     @Test

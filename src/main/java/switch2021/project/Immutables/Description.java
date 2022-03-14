@@ -4,6 +4,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -29,4 +31,16 @@ public class Description {
         this.descriptionF = description;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Description that = (Description) o;
+        return Objects.equals(descriptionF, that.descriptionF);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(descriptionF);
+    }
 }

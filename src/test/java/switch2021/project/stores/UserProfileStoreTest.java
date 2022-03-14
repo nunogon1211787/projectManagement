@@ -2,6 +2,7 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.Immutables.Description;
 import switch2021.project.model.UserProfile;
 import switch2021.project.stores.UserProfileStore;
 
@@ -20,33 +21,12 @@ public class UserProfileStoreTest {
     @Test
     @DisplayName("Return exception message, no name for profile inserted")
     public void createNewUserProfileWithFailNameEmpty() {
-        //Arrange
-        UserProfileStore userProfileStore = new UserProfileStore();
-        String name = "";
-
-        // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            UserProfile up = userProfileStore.createProfile(name);
-            userProfileStore.saveUserProfile(up);
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfileStore userProfileStore = new UserProfileStore();
+            String name = "";
+            userProfileStore.createProfile(name);
         });
-        //Assert
-        assertTrue(exception.getMessage().contains("Name cannot be blank."));
-    }
-
-    @Test
-    @DisplayName("Return exception message, null name")
-    public void createNewUserProfileWithFailNameNull() {
-        //Arrange
-        UserProfileStore userProfileStore = new UserProfileStore();
-        String name = null;
-
-        // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            UserProfile up = userProfileStore.createProfile(name);
-            userProfileStore.saveUserProfile(up);
-        });
-        //Assert
-        assertTrue(exception.getMessage().contains("Name cannot be blank."));
     }
 
     @Test
@@ -58,7 +38,7 @@ public class UserProfileStoreTest {
         // Act
         UserProfile up = userProfileStore.createProfile(name);
         //Assert
-        assertEquals("Cris", up.getUserProfileName());
+        assertEquals("Cris", up.getUserProfileName().getDescriptionF());
     }
 
     @Test
@@ -132,23 +112,6 @@ public class UserProfileStoreTest {
     }
 
     @Test
-    @DisplayName("Return exception message, no name for profile inserted")
-    public void saveNewUserProfileWithFailNameEmpty() {
-        //Arrange
-        UserProfileStore userProfileStore = new UserProfileStore();
-        String name = "    ";
-
-        // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            UserProfile up = userProfileStore.createProfile(name);
-            userProfileStore.saveUserProfile(up);
-        });
-        //Assert
-        assertTrue(exception.getMessage().contains("Name cannot be blank."));
-    }
-
-
-    @Test
     public void addNewUserProfileAlreadyExist() {
         //Arrange
         UserProfileStore userProfileStore = new UserProfileStore();
@@ -196,21 +159,6 @@ public class UserProfileStoreTest {
         userProfileStore.saveUserProfile(up2);
         //Assert
         assertEquals(userProfileStore.getUserProfileList().size(), initialSize + 2);
-    }
-
-    @Test
-    public void addNewUserProfileWithFailNameEmpty() {
-        //Arrange
-        UserProfileStore userProfileStore = new UserProfileStore();
-        String name = "";
-        // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            UserProfile up = userProfileStore.createProfile(name);
-            userProfileStore.saveUserProfile(up);
-        });
-        //Assert
-        assertTrue(exception.getMessage().contains("Name cannot be blank."));
-
     }
 
     @Test

@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
-
+import switch2021.project.Immutables.Description;
 import java.util.Objects;
 
 @Getter
@@ -13,25 +13,14 @@ public class UserProfile {
      * Class Profile Attributes
      **/
     private int idProfile;
-    private String userProfileName;
-
+    private Description userProfileName;
 
     /**
      * Profile Constructors
      */
     public UserProfile(String userProfileName) {
-        checkAttributeRules(userProfileName);
-        this.userProfileName = userProfileName;
+        this.userProfileName = new Description(userProfileName);
     }
-
-    /**
-     * Method to validate entered data (name) by Administrator
-     */
-    private void checkAttributeRules(String name) {
-        //Check empty field on name
-        if ((name == null || name.trim().isEmpty())) throw new IllegalArgumentException("Name cannot be blank.");
-    }
-
 
     /**
      * Override Methods
