@@ -84,7 +84,7 @@ public class ProductBacklog {
     private void validateUserStory(UserStory userStory) {
         // check duplicate story
         for (UserStory us : userStoryList) {
-            if (us.getDescription().trim().equalsIgnoreCase(userStory.getDescription().trim())) {
+            if (us.getDescription().getDescriptionF().trim().equalsIgnoreCase(userStory.getDescription().getDescriptionF().trim())) {
                 throw new IllegalArgumentException("Repeated user story inserted, same code project and description.");
             }
         }

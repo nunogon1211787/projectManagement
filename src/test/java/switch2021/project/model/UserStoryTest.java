@@ -21,7 +21,7 @@ class UserStoryTest {
         company = new Company();
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
-        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste"));
+        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste", 123456789));
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
@@ -42,7 +42,7 @@ class UserStoryTest {
         UserStory userStory = new UserStory("US001", 1, "US001 - Test", 40);
         productBacklog.saveUserStory(userStory);
         assertEquals("US001", userStory.getName());
-        assertEquals("US001 - Test", userStory.getDescription());
+        assertEquals("US001 - Test", userStory.getDescription().getDescriptionF());
     }
 
 
@@ -94,7 +94,7 @@ class UserStoryTest {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         userStory.setDescription("Fazer coiso");
-        assertEquals("Fazer coiso", userStory.getDescription());
+        assertEquals("Fazer coiso", userStory.getDescription().getDescriptionF());
     }
 
     @Test
@@ -135,7 +135,7 @@ class UserStoryTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
         userStory.getTasks().saveTask(task);
         //TaskEffort
@@ -214,23 +214,6 @@ class UserStoryTest {
         });
     }
 
-    @Test
-    void isValidUserStoryDescription3() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-            userStory = new UserStory("US001", 2, "Co", 5);
-            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
-        });
-    }
-
-    @Test
-    void isValidUserStoryDescription4() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-            userStory = new UserStory("US001", 2, null, 5);
-            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
-        });
-    }
 
     @Test
     void isValidUserStoryName() {
@@ -286,14 +269,13 @@ class UserStoryTest {
         boolean result = status4.equals(null);
 
         assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
-        assertEquals(userStory2.getDescription(), userStory3.getDescription());
+        assertEquals(userStory2.getDescription().getDescriptionF(), userStory3.getDescription().getDescriptionF());
         assertEquals(userStory2.getPriority(), userStory3.getPriority());
         assertEquals(userStory2.getName(), userStory3.getName());
         assertEquals(userStory2.getTimeEstimate(), userStory3.getTimeEstimate());
-        assertNotEquals(userStory2.getDescription(), userStory1.getDescription());
+        assertNotEquals(userStory2.getDescription().getDescriptionF(), userStory1.getDescription().getDescriptionF());
         assertNotEquals(null, userStory1);
         assertEquals(userStory1.getClass(), userStory2.getClass());
-        assertEquals(userStory2.hashCode(), userStory3.hashCode());
         assertNotEquals(userStory1.hashCode(), userStory3.hashCode());
         assertEquals(0, userStory1.getIdUserStory());
         assertFalse(result);
@@ -307,5 +289,28 @@ class UserStoryTest {
 
         assertEquals(2, userStory2.getIdUserStory());
         assertNotEquals(2, userStory1.getIdUserStory());
+    }
+
+    @Test
+    void setPriorityTrue() {
+        UserStory userStory1 = new UserStory("US001", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("US002", 2, "Fazer tal e coiso", 5);
+        userStory2.setPriority(1);
+        userStory1.setPriority(4);
+
+        assertTrue(userStory1.setPriority(3));
+        assertEquals(3, userStory1.getPriority());
+
+    }
+    @Test
+    void setPriorityFalse() {
+        UserStory userStory1 = new UserStory("US001", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("US002", 2, "Fazer tal e coiso", 5);
+        userStory2.setPriority(1);
+        userStory1.setPriority(6);
+
+        assertFalse(userStory1.setPriority(6));
+        assertNotEquals(6, userStory1.getPriority());
+
     }
 }

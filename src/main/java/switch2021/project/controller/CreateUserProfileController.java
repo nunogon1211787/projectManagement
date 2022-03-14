@@ -34,10 +34,10 @@ public class CreateUserProfileController {
      *
      * @return*/
 
-    public boolean createUserProfile(String name) {
+    public void createUserProfile(String name) {
         UserProfileStore userProfileStore = this.company.getUserProfileStore();
         UserProfile userProfile = userProfileStore.createProfile(name);
-        return userProfileStore.saveUserProfile(userProfile);
+      userProfileStore.saveUserProfile(userProfile);
     }
 }
 

@@ -13,13 +13,13 @@ class CustomerStoreTest {
     @Test
     void createCustomer() {
         CustomerStore store = new CustomerStore();
-        Customer customer = store.createCustomer("teste","teste@teste.com");
+        Customer customer = store.createCustomer("teste","teste@teste.com", 123456789);
 
         long id_value= customer.getCustomerId();
         String email_value = customer.getCustomerEmail();
         String name_value = customer.getCustomerName();
 
-        assertEquals(-1,id_value);
+        assertEquals(0,id_value);
         assertEquals("teste", name_value);
         assertEquals("teste@teste.com", email_value);
     }
@@ -27,7 +27,7 @@ class CustomerStoreTest {
     @Test
     void add() {
         CustomerStore store = new CustomerStore();
-        Customer customer = store.createCustomer("teste","teste@teste.com");
+        Customer customer = store.createCustomer("teste","teste@teste.com", 123456789);
         store.saveNewCustomer(customer);
 
         assertEquals(customer, store.getCustomerList().get(0));
@@ -36,7 +36,7 @@ class CustomerStoreTest {
     @Test
     void getArrayCustomer() {
         CustomerStore store = new CustomerStore();
-        Customer customer = store.createCustomer("teste","teste@teste.com");
+        Customer customer = store.createCustomer("teste","teste@teste.com", 123456789);
         store.saveNewCustomer(customer);
 
         List<Customer> list = new ArrayList<>();
@@ -48,7 +48,7 @@ class CustomerStoreTest {
     @Test
     void getCustomerByName() {
         CustomerStore store = new CustomerStore();
-        Customer customer = store.createCustomer("teste","teste@teste.com");
+        Customer customer = store.createCustomer("teste","teste@teste.com", 123456789);
         store.saveNewCustomer(customer);
 
         assertEquals(customer,store.getCustomerByName("teste"));
@@ -57,7 +57,7 @@ class CustomerStoreTest {
     @Test
     void getCustomerByName_null() {
         CustomerStore store = new CustomerStore();
-        Customer customer = store.createCustomer("teste","teste@teste.com");
+        Customer customer = store.createCustomer("teste","teste@teste.com", 123456789);
         store.saveNewCustomer(customer);
 
         assertNull(store.getCustomerByName("null"));
@@ -66,7 +66,7 @@ class CustomerStoreTest {
     @Test
     void setAttributes() {
         CustomerStore store = new CustomerStore();
-        Customer customer = store.createCustomer("teste","teste@teste.com");
+        Customer customer = store.createCustomer("teste","teste@teste.com", 123456789);
         store.saveNewCustomer(customer);
 
         store.getCustomerList().get(0).setCustomerEmail("setemail");
@@ -79,7 +79,7 @@ class CustomerStoreTest {
     @Test
     void getHash() {
         CustomerStore store = new CustomerStore();
-        Customer customer = store.createCustomer("teste","teste@teste.com");
+        Customer customer = store.createCustomer("teste","teste@teste.com", 123456789);
         store.saveNewCustomer(customer);
 
         assertEquals(customer.hashCode(),store.getCustomerList().get(0).hashCode());
@@ -88,7 +88,7 @@ class CustomerStoreTest {
     @Test
     void encapsulationTest() {
         CustomerStore store = new CustomerStore();
-        Customer customer = store.createCustomer("teste","teste@teste.com");
+        Customer customer = store.createCustomer("teste","teste@teste.com", 123456789);
         store.saveNewCustomer(customer);
 
         List<Customer> customerTest = store.getCustomerList();
@@ -99,10 +99,10 @@ class CustomerStoreTest {
     @Test
     void validateCustomerTrue() {
         CustomerStore store = new CustomerStore();
-        Customer customer = store.createCustomer("teste","teste@teste.com");
+        Customer customer = store.createCustomer("teste","teste@teste.com", 123456789);
         store.saveNewCustomer(customer);
 
-        Customer customerTest = store.createCustomer("teste","teste@teste.com");
+        Customer customerTest = store.createCustomer("teste","teste@teste.com", 123456789);
 
         assertTrue(store.validateCustomer(customerTest));
     }
@@ -110,12 +110,36 @@ class CustomerStoreTest {
     @Test
     void validateCustomerFalse() {
         CustomerStore store = new CustomerStore();
-        Customer customer = store.createCustomer("teste","teste@teste.com");
+        Customer customer = store.createCustomer("teste","teste@teste.com", 123456789);
         store.saveNewCustomer(customer);
 
-        Customer customerTest = store.createCustomer("teste2","teste2@teste.com");
+        Customer customerTest = store.createCustomer("teste2","teste2@teste.com", 123456789);
 
         assertFalse(store.validateCustomer(customerTest));
+    }
+
+    @Test
+    void saveNewCustomerAndCheckID(){
+        //Arrange
+        CustomerStore store = new CustomerStore();
+        Customer customer = store.createCustomer("teste", "teste@teste.com", 123456789);
+        //Act
+        store.saveNewCustomer(customer);
+        //Assert
+        assertEquals(1, customer.getCustomerId());
+    }
+
+    @Test
+    void saveTwoNewCustomerAndCheckSecondID(){
+        //Arrange
+        CustomerStore store = new CustomerStore();
+        Customer customer1 = store.createCustomer("teste", "teste@teste.com", 123456789);
+        Customer customer2 = store.createCustomer("teste2", "teste2@teste.com", 123456789);
+        //Act
+        store.saveNewCustomer(customer1);
+        store.saveNewCustomer(customer2);
+        //Assert
+        assertEquals(2, customer2.getCustomerId());
     }
 
 }

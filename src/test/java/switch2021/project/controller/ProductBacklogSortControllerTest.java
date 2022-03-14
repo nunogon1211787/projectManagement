@@ -294,18 +294,18 @@ public class ProductBacklogSortControllerTest {
         assertEquals(userStory.getName(),userStoryListDtoList.get(1).getName());
         assertEquals(userStory.getUserStoryStatus(),userStoryListDtoList.get(1).getUserStoryStatus());
       assertEquals(userStory.getPriority(),userStoryListDtoList.get(1).getPriority());
-        assertEquals(userStory.getDescription(),userStoryListDtoList.get(1).getDescription());
+        assertEquals(userStory.getDescription().getDescriptionF(),userStoryListDtoList.get(1).getDescription().getDescriptionF());
         assertEquals(userStory1.getName(),userStoryListDtoList.get(0).getName());
         assertEquals(userStory1.getUserStoryStatus(),userStoryListDtoList.get(0).getUserStoryStatus());
         assertEquals(userStory1.getPriority(),userStoryListDtoList.get(0).getPriority());
-        assertEquals(userStory1.getDescription(),userStoryListDtoList.get(0).getDescription());
+        assertEquals(userStory1.getDescription().getDescriptionF(),userStoryListDtoList.get(0).getDescription().getDescriptionF());
         assertEquals(userStory2.getName(),userStoryListDtoList.get(2).getName());
         assertEquals(userStory2.getUserStoryStatus(),userStoryListDtoList.get(2).getUserStoryStatus());
         assertEquals(userStory2.getPriority(),userStoryListDtoList.get(2).getPriority());
-        assertEquals(userStory2.getDescription(),userStoryListDtoList.get(2).getDescription());
+        assertEquals(userStory2.getDescription().getDescriptionF(),userStoryListDtoList.get(2).getDescription().getDescriptionF());
         assertEquals(userStory3.getName(),userStoryListDtoList.get(3).getName());
         assertEquals(userStory3.getUserStoryStatus(),userStoryListDtoList.get(3).getUserStoryStatus());
         assertEquals(userStory3.getPriority(),userStoryListDtoList.get(3).getPriority());
-        assertEquals(userStory3.getDescription(),userStoryListDtoList.get(3).getDescription());
+        assertEquals(userStory3.getDescription().getDescriptionF(),userStoryListDtoList.get(3).getDescription().getDescriptionF());
     }
 }

@@ -52,7 +52,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         TaskStatus taskStatus = company.getTaskStatusStore().getTaskStatusByDescription("Planned");
         //Act
         Task task = new Task("test", taskDescription, 16.00, taskType, resource);
@@ -91,8 +91,8 @@ class TaskTest {
         //Act
         TaskEffort taskEffort = task.createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         //Assert
-        assertEquals(effortHours, taskEffort.getEffortHours());
-        assertEquals(effortMinutes, taskEffort.getEffortMinutes());
+        assertEquals(effortHours, taskEffort.getEffort().getEffortHours());
+        assertEquals(effortMinutes, taskEffort.getEffort().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
@@ -131,7 +131,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         LocalDate effortDate = LocalDate.of(2022, 1, 20);
@@ -161,7 +161,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         LocalDate effortDate = LocalDate.of(2022, 1, 20);
@@ -194,7 +194,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         LocalDate effortDate = LocalDate.of(2022, 1, 20);
@@ -230,7 +230,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         LocalDate effortDate = LocalDate.of(2022, 1, 20);
@@ -266,7 +266,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         LocalDate effortDate = LocalDate.of(2022, 1, 20);
@@ -306,7 +306,7 @@ class TaskTest {
             LocalDate endDateMb = LocalDate.of(2022, 1, 31);
             Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
             String taskDescription = "must be at least 20 characters";
-            TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+            TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
             Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
             LocalDate effortDate = LocalDate.of(2022, 1, 20);
@@ -328,7 +328,7 @@ class TaskTest {
             LocalDate endDateMb = LocalDate.of(2022, 1, 31);
             Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
             String taskDescription = "must be at least 20 characters";
-            TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+            TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
             Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
             LocalDate effortDate = LocalDate.of(2022, 1, 20);
@@ -350,7 +350,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         TaskEffort taskEffort = null;
@@ -370,7 +370,7 @@ class TaskTest {
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
 
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         LocalDate effortDate = LocalDate.of(2022, 1, 20);
@@ -398,7 +398,7 @@ class TaskTest {
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
 
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 8.00, taskType, resource);
 
         LocalDate effortDate = LocalDate.of(2022, 1, 20);
@@ -426,7 +426,7 @@ class TaskTest {
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
 
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 8.00, taskType, resource);
 
         LocalDate effortDate = LocalDate.of(2022, 1, 20);
@@ -454,7 +454,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
         //Assert
         assertTrue(task.hasType(taskType));
@@ -472,7 +472,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
         //Asserts
         assertThrows(IllegalArgumentException.class, () -> {
@@ -491,7 +491,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
         //Asserts
         assertThrows(IllegalArgumentException.class, () -> {
@@ -510,7 +510,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
         //Act
         assertThrows(IllegalArgumentException.class, () -> {
@@ -529,7 +529,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
         //Act
         Task task = new Task("t31", taskDescription, 20.00, taskType, resource);
@@ -549,7 +549,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
         //Asserts
         assertThrows(IllegalArgumentException.class, () -> {
@@ -568,7 +568,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
         //Asserts
         assertThrows(IllegalArgumentException.class, () -> {
@@ -602,7 +602,7 @@ class TaskTest {
         Company company = new Company();
         Resource resource = null;
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
         //Asserts
         assertThrows(IllegalArgumentException.class, () -> {
@@ -621,7 +621,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task test = new Task("test", taskDescription, 20.00, taskType, resource);
         //Asserts
         assertThrows(IllegalArgumentException.class, () -> {
@@ -643,7 +643,7 @@ class TaskTest {
             LocalDate endDateMb = LocalDate.of(2022, 1, 31);
             Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
             String taskDescription = "must be at least 20 characters";
-            TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+            TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
             //Act
             new Task("test", taskDescription, 00.00, taskType, resource);
         });
@@ -659,7 +659,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task1 = new Task("test", taskDescription, 20.00, taskType, resource);
         Task task2 = new Task("test", taskDescription, 20.00, taskType, resource);
         Task task3 = new Task("test3", taskDescription, 20.00, taskType, resource);

@@ -44,12 +44,11 @@ public class CreateUserStoryController {
     }
 
 
-    public boolean createUserStory(String code, UserStoryDto createUserStoryDto) {
+    public void createUserStory(String code, UserStoryDto createUserStoryDto) {
         Project project = this.company.getProjectStore().getProjectByCode(code);
         ProductBacklog productBacklog = project.getProductBacklog();
         UserStory us = project.getProductBacklog().createUserStoryWithDto(createUserStoryDto, this.mapperUS);
-        return productBacklog.saveUserStory(us);
-
+        productBacklog.saveUserStory(us);
     }
 
 }

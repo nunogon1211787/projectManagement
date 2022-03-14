@@ -27,7 +27,7 @@ public class ScrumBoardMapperTest {
         //Assert
         assertEquals(dto.getUserStoryName(),userStory.getName());
         assertEquals("name",dto.getUserStoryName());
-        assertEquals(dto.getUserStoryDescription(),userStory.getDescription());
+        assertEquals(dto.getUserStoryDescription(),userStory.getDescription().getDescriptionF());
         assertEquals("description", dto.getUserStoryDescription());
         assertEquals(dto.getUserStoryPriority(),userStory.getPriority());
         assertEquals(5, dto.getUserStoryPriority());
@@ -47,9 +47,9 @@ public class ScrumBoardMapperTest {
         ScrumBoardMapper mapper = new ScrumBoardMapper();
         UserStory userStory = new UserStory("name", 5, "description", 5);
         userStory.setIdUserStory(0);
-        UserStory userStory2 = new UserStory("name2", 4, "description2", 4);
+        UserStory userStory2 = new UserStory("nameC", 4, "description2", 4);
         userStory2.setIdUserStory(1);
-        UserStory userStory3 = new UserStory("name3", 3, "description3", 3);
+        UserStory userStory3 = new UserStory("nameD", 3, "description3", 3);
         userStory3.setIdUserStory(2);
         list.add(userStory);
         list.add(userStory2);

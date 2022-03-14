@@ -20,7 +20,7 @@ public class AssignProductOwnerControllerTest {
             ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
             AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
             Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-            Customer customer = company.getCustomerStore().createCustomer("isep","xxx@sss.sss");
+            Customer customer = company.getCustomerStore().createCustomer("isep","xxx@sss.sss", 123456789);
             company.getCustomerStore().saveNewCustomer(customer);
             BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
             company.getBusinessSectorStore().addBusinessSector(sector);
@@ -40,7 +40,7 @@ public class AssignProductOwnerControllerTest {
         ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
         AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
+        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
         company.getCustomerStore().saveNewCustomer(customer);
         BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
         company.getBusinessSectorStore().addBusinessSector(sector);
@@ -92,7 +92,7 @@ public class AssignProductOwnerControllerTest {
         ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
         AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
+        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
         company.getCustomerStore().saveNewCustomer(customer);
         BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
         company.getBusinessSectorStore().addBusinessSector(sector);
@@ -147,7 +147,7 @@ public class AssignProductOwnerControllerTest {
             ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
             AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
             Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-            Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
+            Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt", 123456789);
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
@@ -196,7 +196,7 @@ public class AssignProductOwnerControllerTest {
             ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
             AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
             Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-            Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
+            Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt", 123456789);
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
@@ -245,7 +245,7 @@ public class AssignProductOwnerControllerTest {
             ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
             AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
             Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-            Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
+            Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt", 123456789);
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
@@ -272,7 +272,7 @@ public class AssignProductOwnerControllerTest {
             ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
             AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
             Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-            Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
+            Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt", 123456789);
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
@@ -297,7 +297,7 @@ public class AssignProductOwnerControllerTest {
         ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
         AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt");
+        Customer customer = company.getCustomerStore().createCustomer("isep", "isep@gmail.pt", 123456789);
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);

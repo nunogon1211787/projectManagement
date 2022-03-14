@@ -37,7 +37,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByName("Testing");
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
         Task taskTest = sprint1.getTaskList().createTask("test", taskDescription, 8.0, taskType, resource);
         Task taskTest2 = sprint1.getTaskList().createTask("test2", taskDescription, 8.0, taskType, resource);

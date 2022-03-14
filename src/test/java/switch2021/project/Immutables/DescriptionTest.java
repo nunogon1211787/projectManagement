@@ -1,7 +1,7 @@
-package switch2021.project.imutables;
+package switch2021.project.Immutables;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.Imutables.Description;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,7 +12,7 @@ class DescriptionTest {
         //Arrange
         Description description = new Description("Teste");
         //Assert
-        assertEquals("Teste", description.getDescription());
+        assertEquals("Teste", description.getDescriptionF());
     }
 
     @Test
@@ -26,11 +26,19 @@ class DescriptionTest {
     public void shouldThrowException_becauseDescriptionHigherThan() {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            StringBuilder test_string = new StringBuilder();
-            test_string.setLength(1001);
+            char[] data = new char[1000000];
+            Arrays.fill(data, 'a');
+            String str = new String(data);
             //Assert
-            new Description(test_string.toString());
+            new Description(str);
         });
     }
 
+    @Test
+    public void testSetter() {
+        Description description = new Description("test");
+        description.setDescriptionF("modified_test");
+
+        assertEquals("modified_test", description.getDescriptionF());
+    }
 }

@@ -53,5 +53,16 @@ public class ProjectRoleTest {
         ProjectRole role = new ProjectRole(roleName);
         assertFalse(role.isValidName("Team Member"));
     }
+
+    @Test
+    public void projectRoleNull() {
+        //Arrange
+        String roleName = "Team Member";
+        //Act
+        ProjectRole role = new ProjectRole(roleName);
+        ProjectRole roleNull = null;
+        //Assert
+        assertNotEquals(role, roleNull);
+    }
 }
 
