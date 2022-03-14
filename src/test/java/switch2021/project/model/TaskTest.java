@@ -430,7 +430,7 @@ class TaskTest {
         Task task = new Task("test", taskDescription, 8.00, taskType, resource);
 
         LocalDate effortDate = LocalDate.of(2022, 1, 20);
-        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
+        TaskEffort taskEffort = task.createTaskEffort(6, 0, effortDate, "test", ".pdf");
         LocalDate effortDate2 = LocalDate.of(2022, 1, 21);
         TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
@@ -438,8 +438,8 @@ class TaskTest {
         //Act
         task.saveTaskEffort(taskEffort2);
         //Assert
-        assertEquals(-1.0, task.getEffortRemaining());
-        assertEquals(12.0, task.getHoursSpent());
+        assertEquals(0.0, task.getEffortRemaining());
+        assertEquals(10.0, task.getHoursSpent());
         assertEquals(1.0, task.getExecutionPercentage());
     }
     //fim (tentar acabar com os bugs)
