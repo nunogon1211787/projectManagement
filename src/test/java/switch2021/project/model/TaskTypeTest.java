@@ -1,5 +1,6 @@
 package switch2021.project.model;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.stores.TaskTypeStore;
 import static org.junit.jupiter.api.Assertions.*;
@@ -7,150 +8,193 @@ import static org.junit.jupiter.api.Assertions.*;
 class TaskTypeTest {
 
     @Test
-    void hasNameSuccess() {
+    @DisplayName("Test to verify if task type description is valid.")
+    void hasDescriptionSuccess() {
         //Arrange
         TaskType type = new TaskType("tes");
-        String testeName = "tes";
+        String testDescription = "tes";
+        //Act
+        boolean x = type.hasDescription(testDescription);
         //Assert
-        assertTrue(type.hasName(testeName));
+        assertTrue(x);
     }
 
     @Test
-    void hasNameFail() {
+    @DisplayName("Test to verify if task type description is invalid.")
+    void hasDescriptionFail() {
         //Arrange
-        TaskType type = new TaskType("teste");
-        String testeName = "fail";
+        TaskType type = new TaskType("test");
+        String testDescription = "fail";
+        //Act
+        boolean x = type.hasDescription(testDescription);
         //Assert
-        assertFalse(type.hasName(testeName));
+        assertFalse(x);
     }
 
     @Test
-    void hasNameNull() {
+    @DisplayName("Test to verify if task type description has a null field.")
+    void hasDescriptionNull() {
         //Arrange
-        TaskType type = new TaskType("teste");
+        TaskType type = new TaskType("test");
+        //Act
+        boolean x = type.hasDescription(null);
         //Assert
-        assertFalse(type.hasName(null));
+        assertFalse(x);
     }
 
     @Test
+    @DisplayName("Test to get, with success, ID type.")
     void getType_IDSuccess() {
         //Arrange
-        TaskTypeStore teste = new TaskTypeStore();
-        TaskType type = new TaskType("teste");
-        teste.saveTaskType(type);
+        TaskTypeStore test = new TaskTypeStore();
+        TaskType type = new TaskType("test");
+        //Act
+        test.saveTaskType(type);
+        int x = type.getTypeID();
         //Assert
-        assertEquals(1, type.getTypeID());
+        assertEquals(1, x);
     }
 
     @Test
+    @DisplayName("Test to get ID type, without saving the task type.")
     void getType_IDWithoutSave() {
         //Arrange
-        TaskTypeStore teste = new TaskTypeStore();
-        TaskType type = new TaskType("teste");
+        TaskTypeStore test = new TaskTypeStore();
+        TaskType type = new TaskType("test");
+        //Act
+        int x = type.getTypeID();
         //Assert
-        assertEquals(0, type.getTypeID());
+        assertEquals(0, x);
     }
 
     @Test
+    @DisplayName("Test to get, without success, ID type.")
     void getType_IDFail() {
         //Arrange
-        TaskTypeStore teste = new TaskTypeStore();
-        TaskType type = new TaskType("teste");
+        TaskTypeStore test = new TaskTypeStore();
+        TaskType type = new TaskType("test");
+        //Act
+        int x = type.getTypeID();
         //Assert
-        assertNotEquals(1, type.getTypeID());
+        assertNotEquals(1, x);
     }
 
     @Test
+    @DisplayName("Test to get the last ID type.")
     void getType_IDWith3Types() {
         //Arrange
-        TaskTypeStore teste = new TaskTypeStore();
-        TaskType type1= new TaskType("teste1");
-        TaskType type2 = new TaskType("teste2");
-        TaskType type3 = new TaskType("teste3");
-        teste.saveTaskType(type1);
-        teste.saveTaskType(type2);
-        teste.saveTaskType(type3);
+        TaskTypeStore test = new TaskTypeStore();
+        TaskType type1= new TaskType("test1");
+        TaskType type2 = new TaskType("test2");
+        TaskType type3 = new TaskType("test3");
+        test.saveTaskType(type1);
+        test.saveTaskType(type2);
+        test.saveTaskType(type3);
+        //Act
+        int x = type3.getTypeID();
         //Assert
-        assertEquals(3, type3.getTypeID());
+        assertEquals(3, x);
     }
 
-    @Test
-    void getNameSuccess() {
-        //Arrange
-        TaskTypeStore teste = new TaskTypeStore();
-        TaskType type1= new TaskType("teste1");
-        TaskType type2 = new TaskType("teste2");
-        TaskType type3 = new TaskType("teste3");
-        teste.saveTaskType(type1);
-        teste.saveTaskType(type2);
-        teste.saveTaskType(type3);
-        //Assert
-        assertEquals("teste1", type1.getName());
-        assertEquals("teste2", type2.getName());
-        assertEquals("teste3", type3.getName());
-    }
+//    @Test
+//    @DisplayName("Test to get all descriptions for all the task type stored.")
+//    void getDescriptionSuccess() {
+//        //Arrange
+//        TaskTypeStore test = new TaskTypeStore();
+//        TaskType type1= new TaskType("test1");
+//        TaskType type2 = new TaskType("test2");
+//        TaskType type3 = new TaskType("test3");
+//        test.saveTaskType(type1);
+//        test.saveTaskType(type2);
+//        test.saveTaskType(type3);
+//        //Act
+//        String x1 = type1.getDescriptionF().toString();
+//        String x2 = type2.getDescriptionF().toString();
+//        String x3 = type3.getDescriptionF().toString();
+//        //Assert
+//        assertEquals("test1", x1);
+//        assertEquals("test2", x2);
+//        assertEquals("test3", x3);
+//    }
+
+//    @Test
+//    @DisplayName("Test to get all wrong names for all the task type stored.")
+//    void getNameFail() {
+//        //Arrange
+//        TaskTypeStore test = new TaskTypeStore();
+//        TaskType type1= new TaskType("test1");
+//        TaskType type2 = new TaskType("test2");
+//        TaskType type3 = new TaskType("test3");
+//        test.saveTaskType(type1);
+//        test.saveTaskType(type2);
+//        test.saveTaskType(type3);
+//        //Act
+//        String x1 = type1.getName();
+//        String x2 = type2.getName();
+//        String x3 = type3.getName();
+//        //Assert
+//        assertNotEquals("test2", x1);
+//        assertNotEquals("test3", x2);
+//        assertNotEquals("test1", x3);
+//    }
 
     @Test
-    void getNameFail() {
-        //Arrange
-        TaskTypeStore teste = new TaskTypeStore();
-        TaskType type1= new TaskType("teste1");
-        TaskType type2 = new TaskType("teste2");
-        TaskType type3 = new TaskType("teste3");
-        teste.saveTaskType(type1);
-        teste.saveTaskType(type2);
-        teste.saveTaskType(type3);
-        //Assert
-        assertNotEquals("teste2", type1.getName());
-        assertNotEquals("teste3", type2.getName());
-        assertNotEquals("teste1", type3.getName());
-    }
-
-    @Test
+    @DisplayName("Test to set all ID type, with success.")
     void setType_IDSuccess() {
         //Arrange
-        TaskType type1= new TaskType("teste1");
-        TaskType type2 = new TaskType("teste2");
-        TaskType type3 = new TaskType("teste3");
+        TaskType type1= new TaskType("test1");
+        TaskType type2 = new TaskType("test2");
+        TaskType type3 = new TaskType("test3");
         type1.setTypeID(1);
         type2.setTypeID(2);
         type3.setTypeID(3);
+        //Act
+        int x1 = type1.getTypeID();
+        int x2 = type2.getTypeID();
+        int x3 = type3.getTypeID();
         //Assert
-        assertEquals(1, type1.getTypeID());
-        assertEquals(2, type2.getTypeID());
-        assertEquals(3, type3.getTypeID());
+        assertEquals(1, x1);
+        assertEquals(2, x2);
+        assertEquals(3, x3);
     }
 
     @Test
+    @DisplayName("Test to set all ID type, without success.")
     void setType_IDFail() {
         //Arrange
-        TaskType type1= new TaskType("teste1");
-        TaskType type2 = new TaskType("teste2");
-        TaskType type3 = new TaskType("teste3");
+        TaskType type1= new TaskType("test1");
+        TaskType type2 = new TaskType("test2");
+        TaskType type3 = new TaskType("test3");
         type1.setTypeID(1);
         type2.setTypeID(2);
         type3.setTypeID(3);
+        //Act
+        int x1 = type1.getTypeID();
+        int x2 = type2.getTypeID();
+        int x3 = type3.getTypeID();
         //Assert
-        assertNotEquals(1, type2.getTypeID());
-        assertNotEquals(2, type3.getTypeID());
-        assertNotEquals(3, type1.getTypeID());
+        assertNotEquals(1, x2);
+        assertNotEquals(2, x3);
+        assertNotEquals(3, x1);
     }
 
-    @Test
-    void checkRulesLenght() {
-        //Arrange
-        boolean result;
-        try {
-            TaskType type = new TaskType("t1");
-            result = false;
-        } catch(IllegalArgumentException e){
-            result = true;
-        }
-        //Assert
-        assertTrue(result);
-    }
+//    @Test
+//    @DisplayName("Test to check name, with low length, rules.")
+//    void checkRulesLength() {
+//        //Arrange
+//        boolean result;
+//        try {
+//            TaskType type = new TaskType("t1");
+//            result = false;
+//        } catch(IllegalArgumentException e){
+//            result = true;
+//        }
+//        //Assert
+//        assertTrue(result);
+//    }
 
     @Test
+    @DisplayName("Test to check empty name rules.")
     void checkRulesEmpty() {
         //Arrange
         boolean result;
@@ -165,11 +209,12 @@ class TaskTypeTest {
     }
 
     @Test
+    @DisplayName("Test to check negative id type.")
     void checkRulesIdNegative() {
         //Arrange
         boolean result;
         try {
-            TaskType type = new TaskType("teste");
+            TaskType type = new TaskType("test");
             type.setTypeID(-1);
             result = false;
         } catch(IllegalArgumentException e){
@@ -178,29 +223,84 @@ class TaskTypeTest {
         //Assert
         assertTrue(result);
     }
+//
+//    @Test
+//    @DisplayName("Test 1 to check Override Method.")
+//    void overrideTest_1(){
+//        //Arrange
+//        TaskType taskType = new TaskType("name");
+//        TaskType taskType_equal = new TaskType("name");
+//        taskType.setTypeID(1);
+//        taskType_equal.setTypeID(1);
+//        //Act
+//        Object x = taskType;
+//        Object y = taskType_equal;
+//        //Assert
+//        assertEquals(x,y);
+//    }
 
     @Test
-    void overrideTests(){
+    @DisplayName("Test 2 to check Override Method.")
+    void overrideTest_2(){
         //Arrange
         TaskType taskType = new TaskType("name");
-        TaskType taskType_equal = new TaskType("name");
         TaskType taskType1 = new TaskType("name2");
-        TaskType taskType1_5 = new TaskType("name2");
-        TaskType taskType2 = new TaskType("name");
-        TaskType taskType3 = new TaskType("name2");
         taskType.setTypeID(1);
-        taskType_equal.setTypeID(1);
         taskType1.setTypeID(1);
-        taskType1_5.setTypeID(1);
-        taskType2.setTypeID(2);
-        taskType3.setTypeID(1);
-
+        //Act
+        Object x = taskType;
+        Object y = taskType1;
         //Assert
-        assertNotEquals(taskType,taskType2);
-        assertNotEquals(taskType,taskType3);
-        assertNotEquals(taskType2,taskType3);
-        assertNotEquals(taskType,taskType1);
-        assertNotEquals(taskType,taskType1_5);
-        assertEquals(taskType,taskType_equal);
+        assertNotEquals(x,y);
     }
+
+    @Test
+    @DisplayName("Test 3 to check Override Method.")
+    void overrideTest_3(){
+        //Arrange
+        TaskType taskType = new TaskType("taskType");
+        TaskType taskType1 = null;
+        //Act and Assert
+        assertNotEquals(taskType,taskType1);
+    }
+
+    @Test
+    @DisplayName("Test to check HashCode Method.")
+    void hashCodeTest_1(){
+        //Arrange
+        TaskType taskType = new TaskType("name");
+        TaskType taskType1 = new TaskType("name2");
+        taskType.setTypeID(1);
+        taskType1.setTypeID(1);
+        //Act
+        Object x = taskType.hashCode();
+        Object y = taskType1.hashCode();
+        //Assert
+        assertNotEquals(x,y);
+    }
+
+
+//    @Test
+//    @DisplayName("Test 2 to check Override Method.")
+//    void overrideTest_2(){
+//        //Arrange
+//        TaskType taskType = new TaskType("name");
+//        TaskType taskType1 = new TaskType("name2");
+//        TaskType taskType1_5 = new TaskType("name2");
+//        TaskType taskType2 = new TaskType("name");
+//        TaskType taskType3 = new TaskType("name2");
+//        taskType.setTypeID(1);
+//        taskType1.setTypeID(1);
+//        taskType1_5.setTypeID(1);
+//        taskType2.setTypeID(2);
+//        taskType3.setTypeID(1);
+//        //Act
+//
+//        //Assert
+//        assertNotEquals(taskType,taskType2);
+//        assertNotEquals(taskType,taskType3);
+//        assertNotEquals(taskType2,taskType3);
+//        assertNotEquals(taskType,taskType1);
+//        assertNotEquals(taskType,taskType1_5);
+//    }
 }

@@ -1,6 +1,7 @@
 package switch2021.project.dto;
 
 import lombok.Getter;
+import switch2021.project.Immutables.Description;
 import switch2021.project.model.UserStoryStatus;
 
 @Getter
@@ -13,7 +14,7 @@ public class UserStoryDto {
     private String name;
     private UserStoryStatus userStoryStatus;
     private int priority;
-    private String description;
+    private Description description;
 
     /**
      * Constructor to test (without SINGLETON)
@@ -23,7 +24,7 @@ public class UserStoryDto {
         this.name = name;
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
-        this.description = description;
+        this.description = new Description(description);
     }
 
 }

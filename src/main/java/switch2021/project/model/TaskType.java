@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import lombok.Getter;
+import switch2021.project.Immutables.Description;
 
 import java.util.Objects;
 
@@ -8,26 +9,28 @@ import java.util.Objects;
 public class TaskType {
 
     /**
-     * Attributes.
+     * Attributes
      */
+
     private int typeID;
-    private String name;
+    private Description descriptionF;
+    //public static final int MINIMUM_CHARACTER = 3;
 
     /**
-     * Constructor.
+     * Constructor
      */
 
-    public TaskType(String name){
-        checkNameRules(name);
-        this.name = name;
+    public TaskType(String description){
+        Description description_1 = new Description(description);
+        this.descriptionF = description_1;
     }
 
     /**
-     * Methods to iterate with attributes,
+     * Methods to iterate with attributes
      */
 
-    public boolean hasName(String typeName) {
-        return this.name.equalsIgnoreCase(typeName);
+    public boolean hasDescription(String typeDescription) {
+        return this.descriptionF.getDescriptionF().equalsIgnoreCase(typeDescription);
     }
 
     public void setTypeID(int id){
@@ -36,16 +39,8 @@ public class TaskType {
     }
 
     /**
-     * Methods to validate attributes data.
+     * Methods to validate attributes data
      */
-
-
-    private void checkNameRules(String name) {
-        if (name.trim().isEmpty())
-            throw new IllegalArgumentException("Name cannot be empty.");
-        if ((name.length() < 3))
-            throw new IllegalArgumentException("Name must be at least 3 characters");
-    }
 
     private void checkIdRules(int id) {
         if (id < 1)
@@ -53,19 +48,20 @@ public class TaskType {
     }
 
     /**
-     * Override methods.
+     * Override methods
      */
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof TaskType)) return false;
         TaskType taskType = (TaskType) o;
-        return typeID == taskType.typeID && name.equals(taskType.name);
+        return typeID == taskType.typeID && Objects.equals(descriptionF, taskType.descriptionF);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(typeID, name);
+        return Objects.hash(typeID, descriptionF);
     }
 }
+

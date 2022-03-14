@@ -22,7 +22,7 @@ public class GetListHResourceProjectControllerTest {
         GetListHResourceProjectController controller = new GetListHResourceProjectController(company, projectTeamMapper);
         //create project and save it
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss");
+        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
         company.getCustomerStore().saveNewCustomer(customer);
         BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
         company.getBusinessSectorStore().addBusinessSector(sector);

@@ -27,7 +27,7 @@ public class ProductBacklogTest {
         company = new Company();
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
-        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste"));
+        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste", 123456789));
         Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
@@ -47,7 +47,7 @@ public class ProductBacklogTest {
         UserStoryStatus status = new UserStoryStatus("To do");
         int priority = 1;
         String description = "Default Story";
-        String name = "US001";
+        String name = "usmake";
 
         // Act
         UserStory userStory = productBacklog.createUserStory(
@@ -56,8 +56,8 @@ public class ProductBacklogTest {
         assertNotNull(userStory);
         assertEquals(status, userStory.getUserStoryStatus());
         assertEquals(priority, userStory.getPriority());
-        assertEquals(description, userStory.getDescription());
-        assertEquals(name,userStory.getName());
+        assertEquals(description, userStory.getDescription().getDescriptionF());
+        assertEquals(name, userStory.getName());
     }
 
 
@@ -76,26 +76,31 @@ public class ProductBacklogTest {
                     "US001", priority, description, 5);
         });
         // Assert
-        assertTrue(exception.getMessage().contains("Description cannot be blank."));
+        assertTrue(exception.getMessage().contains("Description field requires at least " + 1 + " characters"));
     }
 
 
     @Test
-    public void createUserStorydescriptionInvalidShort() {
+    public void createUserStorySuccessFullOnLimit() {
         // Arrange
         ProductBacklog productBacklog = new ProductBacklog();
-        UserStoryStatus status = new UserStoryStatus("In progress");
+        UserStoryStatus status = new UserStoryStatus("To do");
         int priority = 1;
-        String description = "dd";
+        String description = "D";
+        String name = "US001";
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            UserStory userStory = productBacklog.createUserStory(
-                    "US001", priority, description, 5);
-        });
+        UserStory userStory = productBacklog.createUserStory(
+                name, priority, description, 5);
         // Assert
-        assertTrue(exception.getMessage().contains("Description must be at least 5 characters"));
+        assertNotNull(userStory);
+        assertEquals(status, userStory.getUserStoryStatus());
+        assertEquals(priority, userStory.getPriority());
+        assertEquals(description, userStory.getDescription().getDescriptionF());
+        assertEquals(name, userStory.getName());
     }
+
+
 
     @Test
     public void createUserStoryPriorityInvalidInf() {
@@ -192,7 +197,7 @@ public class ProductBacklogTest {
         assertNotNull(userStory);
         assertEquals(status, userStory.getUserStoryStatus());
         assertEquals(priority, userStory.getPriority());
-        assertEquals(description, userStory.getDescription());
+        assertEquals(description, userStory.getDescription().getDescriptionF());
     }
 
     @Test
@@ -233,7 +238,7 @@ public class ProductBacklogTest {
         assertNotNull(userStory);
         assertEquals(status, userStory.getUserStoryStatus());
         assertEquals(priority, userStory.getPriority());
-        assertEquals(description, userStory.getDescription());
+        assertEquals(description, userStory.getDescription().getDescriptionF());
     }
 
     @Test
@@ -328,8 +333,8 @@ public class ProductBacklogTest {
 
         assertEquals(userStory.getUserStoryStatus(), company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do"));
         assertEquals(userStory.getParentUserStory(), userStoryToRefine);
-        assertEquals( 5, userStory.getPriority());
-        assertEquals( "234test234", userStory.getDescription());
+        assertEquals(5, userStory.getPriority());
+        assertEquals("234test234", userStory.getDescription().getDescriptionF());
 
     }
 
@@ -344,11 +349,14 @@ public class ProductBacklogTest {
 
     @Test
     @DisplayName("Create UserStory Refine Fail - Description too Short")
-    public void createUserStoryRefineDescriptiontooShortFail() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
-            UserStory userStory = new UserStory(userStoryToRefine, userStoryStatus, 5, "rd");
-        });
+    public void createUserStoryRefineSucessOnLimit() {
+        UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
+        UserStory userStory = new UserStory(userStoryToRefine, userStoryStatus, 5, "2");
+
+        assertEquals(userStory.getUserStoryStatus(), company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do"));
+        assertEquals(userStory.getParentUserStory(), userStoryToRefine);
+        assertEquals(5, userStory.getPriority());
+        assertEquals("2", userStory.getDescription().getDescriptionF());
     }
 
     @Test
