@@ -136,19 +136,19 @@
                 <configuration>
                     <targetClasses>
                         <param>switch2021.project.model.*</param>
-                        <param>switch2021.project.utils.*</param>
+<!--                        <param>switch2021.project.utils.*</param>-->
                         <param>switch2021.project.controller.*</param>
                     </targetClasses>
                     <targetTests>
                         <param>switch2021.project.model.*</param>
-                        <param>switch2021.project.utils.*</param>
+<!--                        <param>switch2021.project.utils.*</param>-->
                         <param>switch2021.project.controller.*</param>
                     </targetTests>
                     <outputFormats>
                         <outputFormat>XML</outputFormat>
                         <outputFormat>HTML</outputFormat>
                     </outputFormats>
-                    <!--<verbose>true</verbose>-->
+<!--                    <verbose>true</verbose>-->
                 </configuration>
             </plugin>
 
