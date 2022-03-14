@@ -357,7 +357,8 @@ class TaskTest {
         //Assert
         assertFalse(task.saveTaskEffort(taskEffort));
     }
-//início (tentar acabar com os bugs)
+
+    //início (tentar acabar com os bugs)
     @Test
     public void updateHoursSpentPositivo() {
         //Arrange
@@ -460,6 +461,7 @@ class TaskTest {
         assertTrue(task.hasType(taskType));
         assertTrue(task.hasStatus(company.getTaskStatusStore().getInitialStatus()));
         assertTrue(task.hasResponsible(resource));
+        assertTrue(task.hasName("test"));
     }
 
     @Test
@@ -534,7 +536,7 @@ class TaskTest {
         //Act
         Task task = new Task("t31", taskDescription, 20.00, taskType, resource);
         //Assert
-        assertEquals("t31",task.getName());
+        assertEquals("t31", task.getName());
 
     }
 
@@ -655,20 +657,66 @@ class TaskTest {
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = new SystemUser("Cris", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        Resource resource2 = new Resource(user2, startDateMb, endDateMb, 100, .5);
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task1 = new Task("test", taskDescription, 20.00, taskType, resource);
         Task task2 = new Task("test", taskDescription, 20.00, taskType, resource);
         Task task3 = new Task("test3", taskDescription, 20.00, taskType, resource);
+        TaskStatus taskStatus = new TaskStatus("Cris");
+        TaskType taskType1 = new TaskType("Cris");
+        Resource resource1 = new Resource(resource2);
+
+
         //Assert
         assertNotSame(task1, task2);
         assertEquals(task1, task2);
         assertEquals(task1.hashCode(), task2.hashCode());
+        assertEquals(task1.hasName("test"), task2.hasName("test"));
         assertNotEquals(task1, task3);
         assertNotEquals(task1.hashCode(), task3.hashCode());
+        assertFalse(task1.hasName("cris"));
+        assertFalse(task1.hasStatus(taskStatus));
+        assertFalse(task1.hasType(taskType1));
+        assertFalse(task1.hasResponsible(resource1));
+    }
+
+    @Test
+    public void updateHoursSpent() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        Task task = new Task("test", taskDescription, 8.00, taskType, resource);
+        Task task2 = new Task("test", taskDescription, 8.00, taskType, resource);
+
+        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
+        TaskEffort taskEffort2 = task.createTaskEffort(1, 1, effortDate, "test", ".pdf");
+
+        TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
+        task.saveTaskEffort(taskEffort);
+        task.updateHoursSpent(taskEffort2);
+        task2.updateEffortRemaining(taskEffort2);
+        //Act
+
+        //Assert
+        assertEquals(0.0, task.getEffortRemaining());
+        assertEquals(9.016666666666666, task.getHoursSpent());
+        assertEquals(1.0, task.getExecutionPercentage());
+        assertEquals(10.033333333333331, task.updateHoursSpent(taskEffort2));
+        assertEquals(5.966666666666667, task2.updateEffortRemaining(taskEffort2));
     }
 
 }

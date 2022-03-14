@@ -137,4 +137,20 @@ class UserStoryEffortControllerTest {
         assertEquals(sprint1.getSprintBacklog(), controller.getSprintBacklog());
     }
 
+
+    @Test
+    void getProjectCode() {
+        //Arrange
+        Company company = new Company();
+        UserStoryEffortController controller = new UserStoryEffortController(company);
+        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+        Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
+                typo, sector, LocalDate.now(), 7, 5000);
+        company.getProjectStore().saveNewProject(project1);
+        //Assert
+        assertEquals(project1, controller.getProjectByCode(project1.getCode()));
+    }
+
 }

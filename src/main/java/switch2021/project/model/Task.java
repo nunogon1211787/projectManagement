@@ -183,11 +183,11 @@ public class Task {
         return (double) effort.getEffort().getEffortHours() + ((double) effort.getEffort().getEffortMinutes() / 60);
     }
 
-    private double updateHoursSpent(TaskEffort effort) {
+    public double updateHoursSpent(TaskEffort effort) {
         return this.hoursSpent += effortInHours(effort);
     }
 
-    private double updateEffortRemaining(TaskEffort effort) {
+    public double updateEffortRemaining(TaskEffort effort) {
         if (this.effortRemaining < effortInHours(effort))
             return this.effortRemaining = 0.0;
 
