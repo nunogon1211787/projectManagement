@@ -289,19 +289,19 @@ class ResourceTest {
         //Arrange
         Company company = new Company();
             //Original
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", company.getUserProfileStore().getUserProfile(0));
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth","", company.getUserProfileStore().getUserProfile("Visitor"));
         LocalDate startDate = LocalDate.of(2021,12,31);
         LocalDate endDate = LocalDate.of(2022, 4,5);
         Resource original = new Resource(newUser, startDate, endDate, 100, .5);
         original.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
             //Set Copy
-        SystemUser newUserCopy = new SystemUser("xyz", "fase", "des", "gth", "gth","", company.getUserProfileStore().getUserProfile(0));
+        SystemUser newUserCopy = new SystemUser("xyz", "fase", "des", "gth", "gth","", company.getUserProfileStore().getUserProfile("Visitor"));
         LocalDate startDateCopy = LocalDate.of(2021,1,15);
         LocalDate endDateCopy = LocalDate.of(2022, 4,5);
         Resource copySet = new Resource(newUserCopy, startDateCopy, endDateCopy, 100, .5);
         copySet.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
             //Set Original
-        SystemUser newUserSet = new SystemUser("xyz", "fase", "des", "gth", "gth","", company.getUserProfileStore().getUserProfile(0));
+        SystemUser newUserSet = new SystemUser("xyz", "fase", "des", "gth", "gth","", company.getUserProfileStore().getUserProfile("Visitor"));
         LocalDate startDateSet = LocalDate.of(2021,12,31);
         LocalDate endDateSet = LocalDate.of(2022, 1,14);
         Resource originalSet = new Resource(newUserSet, startDateSet, endDateSet, 100, .5);

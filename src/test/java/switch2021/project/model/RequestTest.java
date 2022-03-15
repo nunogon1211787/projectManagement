@@ -32,7 +32,7 @@ class RequestTest {
     public void overrideTest(){
         //Arrange
         Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getUserProfile(0);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("joaquim", "xxxx@isep.ipp.pt",
                 "tester", "img_123", "img_123", "123456", profile);
         java.time.LocalDate datateste = LocalDate.now();
