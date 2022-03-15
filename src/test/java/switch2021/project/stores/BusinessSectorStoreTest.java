@@ -66,7 +66,7 @@ class BusinessSectorStoreTest {
         store.addBusinessSector(sector);
 
         //Assert
-        assertEquals(sector, store.getBusinessSectorByDescription("teste"));
+        assertEquals("teste", sector.getDescription().getText());
     }
 
     @Test
