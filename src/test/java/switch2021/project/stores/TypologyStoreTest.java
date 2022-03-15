@@ -32,8 +32,8 @@ public class TypologyStoreTest {
     public void populateTypologyList() {
         //Arrange
         TypologyStore test = new TypologyStore();
-        Typology tes1 = new Typology(new Description("Fixed Cost"));
-        Typology tes2 = new Typology(new Description("Time and Materials"));
+        Typology tes1 = new Typology("Fixed Cost");
+        Typology tes2 = new Typology("Time and Materials");
         //Act
         test.populateDefault();
         //Assert
@@ -105,7 +105,7 @@ public class TypologyStoreTest {
     @Test //Test for adding new typology not null at Typology List checking attributes and list size.
     public void saveTypologyTestNotNull() {
         //Arrange
-        Typology typo2 = new Typology(new Description("Test"));
+        Typology typo2 = new Typology("Test");
         //Act
         typologyStore.saveTypology(typo2);
         //Assert
@@ -119,7 +119,7 @@ public class TypologyStoreTest {
         //Assert
         assertThrows (IllegalArgumentException.class, () -> {
             //Arrange
-            Typology typo2 = new Typology(new Description(""));
+            Typology typo2 = new Typology("");
             //Act
             typologyStore.saveTypology(typo2);
         });
@@ -128,11 +128,11 @@ public class TypologyStoreTest {
     @Test
     public void addMultiplesTypologiesAtSameTime() {
         //Arrange
-        Typology typo2 = new Typology(new Description("TestTypology2"));
-        Typology typo3 = new Typology(new Description("TestTypology3"));
-        Typology typo4 = new Typology(new Description("TestTypology4"));
-        Typology typo5 = new Typology(new Description("TestTypology5"));
-        Typology typo6 = new Typology(new Description("TestTypology6"));
+        Typology typo2 = new Typology("TestTypology2");
+        Typology typo3 = new Typology("TestTypology3");
+        Typology typo4 = new Typology("TestTypology4");
+        Typology typo5 = new Typology("TestTypology5");
+        Typology typo6 = new Typology("TestTypology6");
         //Act
         typologyStore.saveTypology(typo2);
         typologyStore.saveTypology(typo3);
@@ -154,7 +154,7 @@ public class TypologyStoreTest {
 
         Typology descriptionTest = typologyStore.getTypology("Time and Materials");
         //Assert
-        assertEquals(descriptionTest, new Typology(new Description("Time and Materials")));
+        assertEquals(descriptionTest, new Typology("Time and Materials"));
     }
 
     @Test
@@ -170,7 +170,7 @@ public class TypologyStoreTest {
         //Arrange //Act
         Typology descriptionTest = typologyStore.getTypology(2);
         //Assert
-        assertEquals(descriptionTest, new Typology(new Description("Time and Materials")));
+        assertEquals(descriptionTest, new Typology("Time and Materials"));
     }
 
     @Test
@@ -199,9 +199,9 @@ public class TypologyStoreTest {
     @Test
     public void validateTypology(){
         //Arrange
-        Typology typo = new Typology(new Description("test"));
-        Typology typo1 = new Typology(new Description("Tes"));
-        Typology typo2 = new Typology(new Description("Test2"));
+        Typology typo = new Typology("test");
+        Typology typo1 = new Typology("Tes");
+        Typology typo2 = new Typology("Test2");
         //Assert
         assertTrue(typologyStore.validateTypology(typo));
         assertTrue(typologyStore.validateTypology(typo1));
@@ -212,7 +212,7 @@ public class TypologyStoreTest {
     @Test
     public void thisNotExistTest() {
         //Arrange
-        Typology typo = new Typology(new Description("Test"));
+        Typology typo = new Typology("Test");
         //Act
         company.getTypologyStore().saveTypology(typo);
         int size = company.getTypologyStore().getTypologyList().size();
@@ -225,8 +225,8 @@ public class TypologyStoreTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            Typology typo = new Typology(new Description("teste"));
-            Typology typo1 = new Typology(new Description("teste"));
+            Typology typo = new Typology("teste");
+            Typology typo1 = new Typology("teste");
             //Act
             typologyStore.saveTypology(typo);
             typologyStore.saveTypology(typo1);

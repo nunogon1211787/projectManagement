@@ -1,51 +1,27 @@
 package switch2021.project.model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.Immutables.Description;
-import switch2021.project.stores.TypologyStore;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TypologyTest {
 
-    /** Constructor´s Tests **/
-
-//    @DisplayName("Constructor Test fail - Description empty")
-//    @Test
-//    public void constructorTypologyTestNull() {
-//        //Assert
-//        assertThrows (IllegalArgumentException.class, () -> {
-//            //Arrange and Act
-//            new Typology(new Description("");
-//        });
-//    }
-//    @DisplayName("Constructor Test fail - Description too small 2 characters")
-//    @Test
-//    public void constructorTypologyTest2char() {
-//        //Assert
-//        assertThrows (IllegalArgumentException.class, () -> {
-//            //Arrange and Act
-//            new Typology("df");
-//        });
-//    }
-
-    @DisplayName("Constructor Test Success - Description 3 characters")
-//    @Test
-//    public void constructorTypologyTestNotNull() {
-//        //Arrange and Act
-//        Typology typo = new Typology("Fix");
-//        String description = typo.getDescription();
-//        //Assert
-//        assertEquals("Fix",description);
-//    }
-
-//    @DisplayName("Get Typology test - id zero")
+    @DisplayName("Get Typology test")
     @Test
-    public void getId_TypologyZeroTest() {
+    public void getId_TypologyTestMock() {
         //Arrange
-        Typology typo = new Typology(new Description("Teste"));
+        Typology typo = new Typology("Teste");
+        String id = typo.getDescription().getText();
+        //Assert
+        assertEquals("Teste", id);
+    }
+
+    @DisplayName("Get Typology test - id zero")
+    @Test
+    public void getId_TypologyZeroTestMock() {
+        //Arrange
+        Typology typo = new Typology("Teste");
         int id = typo.getIdTypology();
         //Assert
         assertEquals(0, id);
@@ -55,7 +31,7 @@ public class TypologyTest {
     @Test
     public void setId_TypologyTest() {
         //Arrange
-        Typology typo = new Typology(new Description("Teste"));
+        Typology typo = new Typology("Teste");
         //Act
         typo.setIdTypology(3);
         int id = typo.getIdTypology();
@@ -67,8 +43,8 @@ public class TypologyTest {
     @Test
     public void equalsTestSuccess() {
         //Arrange
-        Typology typo = new Typology(new Description("Fixed Cost"));
-        Typology typo2 = new Typology(new Description("Fixed Cost"));
+        Typology typo = new Typology("Teste");
+        Typology typo2 = new Typology("Teste");
         //Assert
         assertEquals(typo, typo2);
     }
@@ -76,17 +52,17 @@ public class TypologyTest {
     @Test
     public void equalsTestFail() {
         //Arrange
-        Typology typo = new Typology(new Description("Test"));
-        Typology typo2 = new Typology(new Description("Fixed Cost"));
+        Typology typo = new Typology("Teste");
+        Typology typo2 = new Typology("Fixed Cost");
         //Assert
         assertNotEquals(typo, typo2);
     }
         @Test
     public void hashCodes() {
         //Arrange
-        Typology typo = new Typology(new Description("Fixed Cost"));
-        Typology typo2 = new Typology(new Description("Fixed Cost2"));
-        Typology typo3 = new Typology(new Description("Fixed Cost2"));
+        Typology typo = new Typology("Fixed Cost");
+        Typology typo2 = new Typology("Fixed Cost2");
+        Typology typo3 = new Typology("Fixed Cost2");
         //Assert
         assertNotEquals(typo,typo2);
         assertEquals(typo2,typo3);
@@ -95,8 +71,8 @@ public class TypologyTest {
     @Test
     public void typologyClass() {
         //Arrange
-        Typology typo = new Typology(new Description("Fixed Cost"));
-        Typology typo2 = new Typology(new Description("Fixed Cost2"));
+        Typology typo = new Typology("Fixed Cost");
+        Typology typo2 = new Typology("Fixed Cost2");
 
         //Assert
         assertEquals(typo.getClass(),typo2.getClass());
@@ -105,7 +81,7 @@ public class TypologyTest {
     @Test
     public void typologyNull() {
         //Arrange
-        Typology typo = new Typology(new Description("Fixed Cost2"));
+        Typology typo = new Typology("Fixed Cost2");
         Typology typo2 = null;
         //Assert
         assertNotEquals(typo,typo2);

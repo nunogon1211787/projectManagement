@@ -38,7 +38,7 @@ class UserProfileTest {
         UserProfile description = new UserProfile("Teste");
         UserProfile description2 = new UserProfile("Teste");
         UserProfile description3 = null;
-        Typology test = new Typology(new Description("test"));
+        Typology test = new Typology("test");
         // Act
         assertEquals(description,description2);
         assertNotEquals(description, description3);

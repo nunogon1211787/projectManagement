@@ -28,8 +28,8 @@ public class TypologyStore {
      * Typology populator, that populates the typology List with pre-set objects
      **/
     public void populateDefault() {
-        saveTypology(new Typology(new Description("Fixed Cost")));
-        saveTypology(new Typology(new Description("Time and Materials")));
+        saveTypology(new Typology("Fixed Cost"));
+        saveTypology(new Typology("Time and Materials"));
     }
 
 
@@ -37,7 +37,8 @@ public class TypologyStore {
      * Create Typology (Creates a new Typology object)
      **/
     public Typology createTypology(String description) {
-        return new Typology(new Description(description));
+
+        return new Typology(description);
     }
 
 
