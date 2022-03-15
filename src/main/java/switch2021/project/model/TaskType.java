@@ -13,16 +13,14 @@ public class TaskType {
      */
 
     private int typeID;
-    private Description descriptionF;
-    //public static final int MINIMUM_CHARACTER = 3;
+    private Description description;
 
     /**
      * Constructor
      */
 
     public TaskType(String description){
-        Description description_1 = new Description(description);
-        this.descriptionF = description_1;
+        this.description = new Description(description);
     }
 
     /**
@@ -30,7 +28,7 @@ public class TaskType {
      */
 
     public boolean hasDescription(String typeDescription) {
-        return this.descriptionF.getDescriptionF().equalsIgnoreCase(typeDescription);
+        return this.description.getDescriptionF().equalsIgnoreCase(typeDescription);
     }
 
     public void setTypeID(int id){
@@ -56,12 +54,12 @@ public class TaskType {
         if (this == o) return true;
         if (!(o instanceof TaskType)) return false;
         TaskType taskType = (TaskType) o;
-        return typeID == taskType.typeID && Objects.equals(descriptionF, taskType.descriptionF);
+        return typeID == taskType.typeID && Objects.equals(description, taskType.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(typeID, descriptionF);
+        return Objects.hash(typeID, description);
     }
 }
 

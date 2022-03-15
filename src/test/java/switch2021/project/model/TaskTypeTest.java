@@ -96,47 +96,47 @@ class TaskTypeTest {
         assertEquals(3, x);
     }
 
-//    @Test
-//    @DisplayName("Test to get all descriptions for all the task type stored.")
-//    void getDescriptionSuccess() {
-//        //Arrange
-//        TaskTypeStore test = new TaskTypeStore();
-//        TaskType type1= new TaskType("test1");
-//        TaskType type2 = new TaskType("test2");
-//        TaskType type3 = new TaskType("test3");
-//        test.saveTaskType(type1);
-//        test.saveTaskType(type2);
-//        test.saveTaskType(type3);
-//        //Act
-//        String x1 = type1.getDescriptionF().toString();
-//        String x2 = type2.getDescriptionF().toString();
-//        String x3 = type3.getDescriptionF().toString();
-//        //Assert
-//        assertEquals("test1", x1);
-//        assertEquals("test2", x2);
-//        assertEquals("test3", x3);
-//    }
+    @Test
+    @DisplayName("Test to get all descriptions for all the task type stored.")
+    void getDescriptionSuccess() {
+        //Arrange
+        TaskTypeStore test = new TaskTypeStore();
+        TaskType type1= new TaskType("test1");
+        TaskType type2 = new TaskType("test2");
+        TaskType type3 = new TaskType("test3");
+        test.saveTaskType(type1);
+        test.saveTaskType(type2);
+        test.saveTaskType(type3);
+        //Act
+        String x1 = type1.getDescription().getDescriptionF();
+        String x2 = type2.getDescription().getDescriptionF();
+        String x3 = type3.getDescription().getDescriptionF();
+        //Assert
+        assertEquals("test1", x1);
+        assertEquals("test2", x2);
+        assertEquals("test3", x3);
+    }
 
-//    @Test
-//    @DisplayName("Test to get all wrong names for all the task type stored.")
-//    void getNameFail() {
-//        //Arrange
-//        TaskTypeStore test = new TaskTypeStore();
-//        TaskType type1= new TaskType("test1");
-//        TaskType type2 = new TaskType("test2");
-//        TaskType type3 = new TaskType("test3");
-//        test.saveTaskType(type1);
-//        test.saveTaskType(type2);
-//        test.saveTaskType(type3);
-//        //Act
-//        String x1 = type1.getName();
-//        String x2 = type2.getName();
-//        String x3 = type3.getName();
-//        //Assert
-//        assertNotEquals("test2", x1);
-//        assertNotEquals("test3", x2);
-//        assertNotEquals("test1", x3);
-//    }
+    @Test
+    @DisplayName("Test to get all wrong descriptions for all the task type stored.")
+    void getDescriptionFail() {
+        //Arrange
+        TaskTypeStore test = new TaskTypeStore();
+        TaskType type1= new TaskType("test1");
+        TaskType type2 = new TaskType("test2");
+        TaskType type3 = new TaskType("test3");
+        test.saveTaskType(type1);
+        test.saveTaskType(type2);
+        test.saveTaskType(type3);
+        //Act
+        String x1 = type1.getDescription().getDescriptionF();
+        String x2 = type2.getDescription().getDescriptionF();
+        String x3 = type3.getDescription().getDescriptionF();
+        //Assert
+        assertNotEquals("test2", x1);
+        assertNotEquals("test3", x2);
+        assertNotEquals("test1", x3);
+    }
 
     @Test
     @DisplayName("Test to set all ID type, with success.")
@@ -179,7 +179,7 @@ class TaskTypeTest {
     }
 
 //    @Test
-//    @DisplayName("Test to check name, with low length, rules.")
+//    @DisplayName("Test to check description, with low length, rules.")
 //    void checkRulesLength() {
 //        //Arrange
 //        boolean result;
@@ -193,20 +193,20 @@ class TaskTypeTest {
 //        assertTrue(result);
 //    }
 
-    @Test
-    @DisplayName("Test to check empty name rules.")
-    void checkRulesEmpty() {
-        //Arrange
-        boolean result;
-        try {
-            TaskType type = new TaskType("");
-            result = false;
-        } catch(IllegalArgumentException e){
-            result = true;
-        }
-        //Assert
-        assertTrue(result);
-    }
+//    @Test
+//    @DisplayName("Test to check empty description rules.")
+//    void checkRulesEmpty() {
+//        //Arrange
+//        boolean result;
+//        try {
+//            TaskType type = new TaskType("");
+//            result = false;
+//        } catch(IllegalArgumentException e){
+//            result = true;
+//        }
+//        //Assert
+//        assertTrue(result);
+//    }
 
     @Test
     @DisplayName("Test to check negative id type.")
@@ -223,24 +223,24 @@ class TaskTypeTest {
         //Assert
         assertTrue(result);
     }
-//
-//    @Test
-//    @DisplayName("Test 1 to check Override Method.")
-//    void overrideTest_1(){
-//        //Arrange
-//        TaskType taskType = new TaskType("name");
-//        TaskType taskType_equal = new TaskType("name");
-//        taskType.setTypeID(1);
-//        taskType_equal.setTypeID(1);
-//        //Act
-//        Object x = taskType;
-//        Object y = taskType_equal;
-//        //Assert
-//        assertEquals(x,y);
-//    }
 
     @Test
-    @DisplayName("Test 2 to check Override Method.")
+    @DisplayName("Test 1 to check Override Method, two equal objects.")
+    void overrideTest_1(){
+        //Arrange
+        TaskType taskType = new TaskType("name");
+        TaskType taskType_equal = new TaskType("name");
+        taskType.setTypeID(1);
+        taskType_equal.setTypeID(1);
+        //Act
+        Object x = taskType;
+        Object y = taskType_equal;
+        //Assert
+        assertEquals(x,y);
+    }
+
+    @Test
+    @DisplayName("Test 2 to check Override Method, two different objects.")
     void overrideTest_2(){
         //Arrange
         TaskType taskType = new TaskType("name");
@@ -255,7 +255,7 @@ class TaskTypeTest {
     }
 
     @Test
-    @DisplayName("Test 3 to check Override Method.")
+    @DisplayName("Test 3 to check Override Method, with one null object.")
     void overrideTest_3(){
         //Arrange
         TaskType taskType = new TaskType("taskType");
@@ -279,28 +279,4 @@ class TaskTypeTest {
         assertNotEquals(x,y);
     }
 
-
-//    @Test
-//    @DisplayName("Test 2 to check Override Method.")
-//    void overrideTest_2(){
-//        //Arrange
-//        TaskType taskType = new TaskType("name");
-//        TaskType taskType1 = new TaskType("name2");
-//        TaskType taskType1_5 = new TaskType("name2");
-//        TaskType taskType2 = new TaskType("name");
-//        TaskType taskType3 = new TaskType("name2");
-//        taskType.setTypeID(1);
-//        taskType1.setTypeID(1);
-//        taskType1_5.setTypeID(1);
-//        taskType2.setTypeID(2);
-//        taskType3.setTypeID(1);
-//        //Act
-//
-//        //Assert
-//        assertNotEquals(taskType,taskType2);
-//        assertNotEquals(taskType,taskType3);
-//        assertNotEquals(taskType2,taskType3);
-//        assertNotEquals(taskType,taskType1);
-//        assertNotEquals(taskType,taskType1_5);
-//    }
 }
