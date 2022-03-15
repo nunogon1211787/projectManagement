@@ -1,19 +1,16 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import lombok.Setter;
 import switch2021.project.Immutables.Description;
 import java.util.Objects;
 
 @Getter
-@Setter
 public class UserProfile {
 
     /**
      * Class Profile Attributes
      **/
-    private int idProfile;
-    private Description userProfileName;
+    private final Description userProfileName;
 
     /**
      * Profile Constructors

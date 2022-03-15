@@ -63,14 +63,6 @@ public class Project {
     }
 
     /**
-     * Set End Date
-     **/
-    public boolean setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-        return true;
-    }
-
-    /**
      * Validates Project Creation Fields
      * Checks if @param projectName and @param description are empty or have the minimum characters necessary
      */

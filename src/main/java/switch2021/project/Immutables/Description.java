@@ -6,7 +6,6 @@ import lombok.Setter;
 import java.util.Objects;
 
 @Getter
-@Setter
 public class Description {
 
     /**
