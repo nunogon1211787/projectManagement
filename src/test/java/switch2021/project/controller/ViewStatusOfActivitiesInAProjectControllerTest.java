@@ -57,6 +57,8 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         listTest = viewStatusTester.getListOfProjectActivities();
 
         assertEquals(listTest, project2.getSprints().getListOfAllAActivitiesOfAProject());
+        assertNull(viewStatusTester.getProjectByCode(null));
+        assertNotNull(viewStatusTester.getProjectByCode("Project_2022_1"));
 
     }
 
