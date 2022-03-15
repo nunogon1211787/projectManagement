@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.Immutables.Description;
 import switch2021.project.stores.UserProfileStore;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,7 +38,7 @@ class UserProfileTest {
         UserProfile description = new UserProfile("Teste");
         UserProfile description2 = new UserProfile("Teste");
         UserProfile description3 = null;
-        Typology test = new Typology("test");
+        Typology test = new Typology(new Description("test"));
         // Act
         assertEquals(description,description2);
         assertNotEquals(description, description3);

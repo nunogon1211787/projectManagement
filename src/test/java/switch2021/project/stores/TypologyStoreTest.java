@@ -109,7 +109,7 @@ public class TypologyStoreTest {
         //Act
         typologyStore.saveTypology(typo2);
         //Assert
-        assertEquals("Test", typo2.getDescription().getDescriptionF());
+        assertEquals("Test", typo2.getDescription().getText());
         assertEquals(3,typo2.getIdTypology());
         assertEquals(3, typologyStore.getTypologyList().size());
     }

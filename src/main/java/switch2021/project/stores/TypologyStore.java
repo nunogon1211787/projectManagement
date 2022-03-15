@@ -68,7 +68,7 @@ public class TypologyStore {
         Typology typo = null;
 
         for (Typology i : this.typologyList) {
-            if (i.getDescription().getDescriptionF().equals(description)) {
+            if (i.getDescription().getText().equals(description)) {
                 typo = i;
                 break;
             }
