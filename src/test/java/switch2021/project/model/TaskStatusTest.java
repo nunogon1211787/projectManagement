@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.Immutables.Description;
 import switch2021.project.stores.TaskStatusStore;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -206,7 +207,7 @@ class TaskStatusTest {
         TaskStatus status4 = null;
         TaskStatus status5= new TaskStatus("test1");
         TaskStatus status6= new TaskStatus("test1");
-        Typology typo = new Typology("test");
+        Typology typo = new Typology(new Description("test"));
         status1.setIDTaskStatus(1);
         status2.setIDTaskStatus(2);
         status3.setIDTaskStatus(3);
