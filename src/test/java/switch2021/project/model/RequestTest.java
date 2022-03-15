@@ -37,16 +37,14 @@ class RequestTest {
 
         //Act
         Request req = new Request(profile,user);
+        Request req2 = new Request(profile,user);
         Request req3 = null;
 
         //Assert
-        assertEquals(req,req);
+        assertEquals(req,req2);
         assertNotEquals(req,req3);
         assertNotEquals(req,user);
+        assertEquals(req.hashCode(),req2.hashCode());
     }
 
-
-
-
-  
 }
