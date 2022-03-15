@@ -38,14 +38,6 @@ class DescriptionTest {
     }
 
     @Test
-    public void testSetter() {
-        Description description = new Description("test");
-        description.setText("modified_test");
-
-        assertEquals("modified_test", description.getText());
-    }
-
-    @Test
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTests() {
         // Arrange
