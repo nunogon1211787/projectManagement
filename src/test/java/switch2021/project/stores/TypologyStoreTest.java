@@ -2,6 +2,7 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import switch2021.project.Immutables.Description;
 import switch2021.project.model.Company;
 import switch2021.project.model.Typology;
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,8 +32,8 @@ public class TypologyStoreTest {
     public void populateTypologyList() {
         //Arrange
         TypologyStore test = new TypologyStore();
-        Typology tes1 = new Typology("Fixed Cost");
-        Typology tes2 = new Typology("Time and Materials");
+        Typology tes1 = new Typology(new Description("Fixed Cost"));
+        Typology tes2 = new Typology(new Description("Time and Materials"));
         //Act
         test.populateDefault();
         //Assert
@@ -104,11 +105,11 @@ public class TypologyStoreTest {
     @Test //Test for adding new typology not null at Typology List checking attributes and list size.
     public void saveTypologyTestNotNull() {
         //Arrange
-        Typology typo2 = new Typology("Test");
+        Typology typo2 = new Typology(new Description("Test"));
         //Act
         typologyStore.saveTypology(typo2);
         //Assert
-        assertEquals("Test", typo2.getDescription());
+        assertEquals("Test", typo2.getDescription().getText());
         assertEquals(3,typo2.getIdTypology());
         assertEquals(3, typologyStore.getTypologyList().size());
     }
@@ -118,7 +119,7 @@ public class TypologyStoreTest {
         //Assert
         assertThrows (IllegalArgumentException.class, () -> {
             //Arrange
-            Typology typo2 = new Typology("");
+            Typology typo2 = new Typology(new Description(""));
             //Act
             typologyStore.saveTypology(typo2);
         });
@@ -127,11 +128,11 @@ public class TypologyStoreTest {
     @Test
     public void addMultiplesTypologiesAtSameTime() {
         //Arrange
-        Typology typo2 = new Typology("TestTypology2");
-        Typology typo3 = new Typology("TestTypology3");
-        Typology typo4 = new Typology("TestTypology4");
-        Typology typo5 = new Typology("TestTypology5");
-        Typology typo6 = new Typology("TestTypology6");
+        Typology typo2 = new Typology(new Description("TestTypology2"));
+        Typology typo3 = new Typology(new Description("TestTypology3"));
+        Typology typo4 = new Typology(new Description("TestTypology4"));
+        Typology typo5 = new Typology(new Description("TestTypology5"));
+        Typology typo6 = new Typology(new Description("TestTypology6"));
         //Act
         typologyStore.saveTypology(typo2);
         typologyStore.saveTypology(typo3);
@@ -139,8 +140,8 @@ public class TypologyStoreTest {
         typologyStore.saveTypology(typo5);
         typologyStore.saveTypology(typo6);
 
-        String description = typo3.getDescription();
-        String value_description = "TestTypology3";
+        Description description = typo3.getDescription();
+        Description value_description = new Description("TestTypology3");
 
         //Assert
         assertEquals(description, value_description);
@@ -150,9 +151,10 @@ public class TypologyStoreTest {
     @Test
     public void getTypologyWithDescriptionTest(){
         //Arrange //Act
+
         Typology descriptionTest = typologyStore.getTypology("Time and Materials");
         //Assert
-        assertEquals(descriptionTest, new Typology("Time and Materials"));
+        assertEquals(descriptionTest, new Typology(new Description("Time and Materials")));
     }
 
     @Test
@@ -168,7 +170,7 @@ public class TypologyStoreTest {
         //Arrange //Act
         Typology descriptionTest = typologyStore.getTypology(2);
         //Assert
-        assertEquals(descriptionTest, new Typology("Time and Materials"));
+        assertEquals(descriptionTest, new Typology(new Description("Time and Materials")));
     }
 
     @Test
@@ -197,9 +199,9 @@ public class TypologyStoreTest {
     @Test
     public void validateTypology(){
         //Arrange
-        Typology typo = new Typology("test");
-        Typology typo1 = new Typology("Tes");
-        Typology typo2 = new Typology("Test2");
+        Typology typo = new Typology(new Description("test"));
+        Typology typo1 = new Typology(new Description("Tes"));
+        Typology typo2 = new Typology(new Description("Test2"));
         //Assert
         assertTrue(typologyStore.validateTypology(typo));
         assertTrue(typologyStore.validateTypology(typo1));
@@ -210,7 +212,7 @@ public class TypologyStoreTest {
     @Test
     public void thisNotExistTest() {
         //Arrange
-        Typology typo = new Typology("Test");
+        Typology typo = new Typology(new Description("Test"));
         //Act
         company.getTypologyStore().saveTypology(typo);
         int size = company.getTypologyStore().getTypologyList().size();
@@ -223,8 +225,8 @@ public class TypologyStoreTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            Typology typo = new Typology("teste");
-            Typology typo1 = new Typology("teste");
+            Typology typo = new Typology(new Description("teste"));
+            Typology typo1 = new Typology(new Description("teste"));
             //Act
             typologyStore.saveTypology(typo);
             typologyStore.saveTypology(typo1);

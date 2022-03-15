@@ -3,6 +3,8 @@ package switch2021.project.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.Immutables.Description;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SprintBacklogTest {
@@ -89,7 +91,7 @@ class SprintBacklogTest {
         SprintBacklog sprintBacklog = new SprintBacklog();
         SprintBacklog sprintBacklog1 = new SprintBacklog();
         SprintBacklog sprintBacklog2 = null;
-        Typology test = new Typology("test");
+        Typology test = new Typology(new Description("test"));
         // Act
         assertEquals(sprintBacklog,sprintBacklog1);
         assertNotEquals(sprintBacklog, sprintBacklog2);

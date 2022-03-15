@@ -52,7 +52,7 @@ class DescriptionTest {
         Description description = new Description("Teste");
         Description description2 = new Description("Teste");
         Description description3 = null;
-        Typology test = new Typology("test");
+        Typology test = new Typology(new Description("test"));
         // Act
         assertEquals(description,description2);
         assertNotEquals(description, description3);

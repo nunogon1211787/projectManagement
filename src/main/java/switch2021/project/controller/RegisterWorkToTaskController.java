@@ -1,5 +1,6 @@
 package switch2021.project.controller;
 
+import switch2021.project.Immutables.Date;
 import switch2021.project.dto.TaskEffortDTO;
 import switch2021.project.dto.TaskIdNameDTO;
 import switch2021.project.dto.UserStorySprintProjectDTO;
@@ -67,7 +68,7 @@ public class RegisterWorkToTaskController {
 
         int effortHours = taskEffortDTO.getEffortHours();
         int effortMinutes = taskEffortDTO.getEffortMinutes();
-        LocalDate effortDate = taskEffortDTO.getEffortDate();
+       Date effortDate = taskEffortDTO.getEffortDate();
         String comment = taskEffortDTO.getComment();
         String attachment = taskEffortDTO.getAttachment();
         TaskEffort taskEffort = this.task.createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
