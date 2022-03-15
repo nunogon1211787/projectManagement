@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.Immutables.Date;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -85,7 +86,7 @@ class TaskTest {
 
         int effortHours = 4;
         int effortMinutes = 30;
-        LocalDate effortDate = LocalDate.of(2022, 1, 27);
+        Date effortDate = new Date(LocalDate.of(2022, 1, 27));
         String comment = "test";
         String attachment = ".pdf";
         //Act
@@ -113,7 +114,7 @@ class TaskTest {
 
             int effortHours = 4;
             int effortMinutes = 30;
-            LocalDate effortDate = LocalDate.of(2021, 12, 27);
+            Date effortDate = new Date(LocalDate.of(2021, 12, 27));
             String comment = "test";
             String attachment = ".pdf";
             //Act
@@ -134,7 +135,7 @@ class TaskTest {
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
-        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        Date effortDate = new Date(LocalDate.of(2022, 1, 27));
         TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
 
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
@@ -143,7 +144,7 @@ class TaskTest {
         //Assert
         assertEquals(1, task.getTaskEffortList().size());
         assertEquals(taskStatusExpected, task.getStatus()); //change status to Running
-        assertEquals(effortDate, task.getStartDate()); //set start date
+        assertEquals(effortDate.getEffortDate(), task.getStartDate()); //set start date
         assertNull(task.getEndDate());
         assertEquals(20.00, task.getEffortEstimate()); //keep the same estimated effort
         assertEquals(12.00, task.getEffortRemaining());
@@ -164,9 +165,9 @@ class TaskTest {
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
-        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        Date effortDate = new Date(LocalDate.of(2022, 1, 20));
         TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
-        LocalDate effortDate2 = LocalDate.of(2022, 1, 21);
+        Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
         TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
 
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
@@ -176,7 +177,7 @@ class TaskTest {
         //Assert
         assertEquals(2, task.getTaskEffortList().size());
         assertEquals(taskStatusExpected, task.getStatus());
-        assertEquals(effortDate, task.getStartDate()); //start date of the first effort
+        assertEquals(effortDate.getEffortDate(), task.getStartDate()); //start date of the first effort
         assertNull(task.getEndDate());
         assertEquals(20.00, task.getEffortEstimate()); //keep the same estimated effort
         assertEquals(8.00, task.getEffortRemaining());
@@ -197,11 +198,11 @@ class TaskTest {
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
-        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        Date effortDate = new Date(LocalDate.of(2022, 1, 20));
         TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
-        LocalDate effortDate2 = LocalDate.of(2022, 1, 21);
+        Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
         TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
-        LocalDate effortDate3 = LocalDate.of(2022, 1, 22);
+        Date effortDate3 = new Date(LocalDate.of(2022, 1, 22));
         TaskEffort taskEffort3 = task.createTaskEffort(8, 0, effortDate3, "test3", ".pdf3");
 
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Finished");
@@ -212,8 +213,8 @@ class TaskTest {
         //Assert
         assertEquals(3, task.getTaskEffortList().size());
         assertEquals(taskStatusExpected, task.getStatus()); //change status to Finished
-        assertEquals(effortDate, task.getStartDate());
-        assertEquals(effortDate3, task.getEndDate()); //set end date
+        assertEquals(effortDate.getEffortDate(), task.getStartDate());
+        assertEquals(effortDate3.getEffortDate(), task.getEndDate()); //set end date
         assertEquals(20.00, task.getEffortEstimate()); //keep the same estimated effort
         assertEquals(0.00, task.getEffortRemaining());
         assertEquals(20, task.getHoursSpent());
@@ -233,11 +234,11 @@ class TaskTest {
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
-        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        Date effortDate = new Date(LocalDate.of(2022, 1, 20));
         TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
-        LocalDate effortDate2 = LocalDate.of(2022, 1, 21);
+        Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
         TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
-        LocalDate effortDate3 = LocalDate.of(2022, 1, 22);
+        Date effortDate3 = new Date(LocalDate.of(2022, 1, 22));
         TaskEffort taskEffort3 = task.createTaskEffort(10, 0, effortDate3, "test3", ".pdf3");
 
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Finished");
@@ -248,8 +249,8 @@ class TaskTest {
         //Assert
         assertEquals(3, task.getTaskEffortList().size());
         assertEquals(taskStatusExpected, task.getStatus());
-        assertEquals(effortDate, task.getStartDate());
-        assertEquals(effortDate3, task.getEndDate());
+        assertEquals(effortDate.getEffortDate(), task.getStartDate());
+        assertEquals(effortDate3.getEffortDate(), task.getEndDate());
         assertEquals(20.00, task.getEffortEstimate()); //keep the same estimated effort
         assertEquals(0.00, task.getEffortRemaining()); //0.0 is the lower value
         assertEquals(22, task.getHoursSpent());
@@ -269,13 +270,13 @@ class TaskTest {
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
-        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        Date effortDate = new Date(LocalDate.of(2022, 1, 20));
         TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
-        LocalDate effortDate2 = LocalDate.of(2022, 1, 21);
+        Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
         TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
-        LocalDate effortDate3 = LocalDate.of(2022, 1, 22);
+        Date effortDate3 = new Date(LocalDate.of(2022, 1, 22));
         TaskEffort taskEffort3 = task.createTaskEffort(8, 0, effortDate3, "test3", ".pdf3");
-        LocalDate effortDate4 = LocalDate.of(2022, 1, 23);
+        Date effortDate4 = new Date(LocalDate.of(2022, 1, 23));
         TaskEffort taskEffort4 = task.createTaskEffort(4, 0, effortDate4, "test4", ".pdf4");
 
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Finished");
@@ -287,8 +288,8 @@ class TaskTest {
         //Assert
         assertEquals(4, task.getTaskEffortList().size());
         assertEquals(taskStatusExpected, task.getStatus());
-        assertEquals(effortDate, task.getStartDate());
-        assertEquals(effortDate4, task.getEndDate()); // end date is updated
+        assertEquals(effortDate.getEffortDate(), task.getStartDate());
+        assertEquals(effortDate4.getEffortDate(), task.getEndDate()); // end date is updated
         assertEquals(20.00, task.getEffortEstimate());
         assertEquals(0.00, task.getEffortRemaining());
         assertEquals(24, task.getHoursSpent());
@@ -309,7 +310,7 @@ class TaskTest {
             TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
             Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
-            LocalDate effortDate = LocalDate.of(2022, 1, 20);
+            Date effortDate = new Date(LocalDate.of(2022, 1, 20));
             TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
             //Act
             task.saveTaskEffort(taskEffort);
@@ -331,7 +332,7 @@ class TaskTest {
             TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
             Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
-            LocalDate effortDate = LocalDate.of(2022, 1, 20);
+            Date effortDate = new Date(LocalDate.of(2022, 1, 20));
             TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
             TaskEffort taskEffort2 = task.createTaskEffort(1, 30, effortDate, "test", ".pdf");
             //Act
@@ -374,7 +375,7 @@ class TaskTest {
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
-        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        Date effortDate = new Date(LocalDate.of(2022, 1, 20));
         TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
 
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
@@ -402,7 +403,7 @@ class TaskTest {
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 8.00, taskType, resource);
 
-        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        Date effortDate = new Date(LocalDate.of(2022, 1, 20));
         TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
 
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
@@ -430,9 +431,9 @@ class TaskTest {
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 8.00, taskType, resource);
 
-        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        Date effortDate = new Date(LocalDate.of(2022, 1, 20));
         TaskEffort taskEffort = task.createTaskEffort(6, 0, effortDate, "test", ".pdf");
-        LocalDate effortDate2 = LocalDate.of(2022, 1, 21);
+        Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
         TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
         task.saveTaskEffort(taskEffort);
@@ -701,7 +702,7 @@ class TaskTest {
         Task task = new Task("test", taskDescription, 8.00, taskType, resource);
         Task task2 = new Task("test", taskDescription, 8.00, taskType, resource);
 
-        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        Date effortDate = new Date(LocalDate.of(2022, 1, 20));
         TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
         TaskEffort taskEffort2 = task.createTaskEffort(1, 1, effortDate, "test", ".pdf");
 

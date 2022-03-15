@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import switch2021.project.Immutables.Date;
 
 import java.time.LocalDate;
 
@@ -139,9 +140,9 @@ class UserStoryTest {
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
         userStory.getTasks().saveTask(task);
         //TaskEffort
-        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        Date effortDate = new Date(LocalDate.of(2022, 1, 20));
         TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
-        LocalDate effortDate2 = LocalDate.of(2022, 1, 21);
+        Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
         TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
         task.saveTaskEffort(taskEffort);
         task.saveTaskEffort(taskEffort2);

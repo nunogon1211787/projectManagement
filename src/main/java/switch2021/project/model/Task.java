@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.Immutables.Date;
 import switch2021.project.Immutables.HoursMinutes;
 import switch2021.project.utils.App;
 
@@ -138,20 +139,20 @@ public class Task {
         }
     }
 
-    public TaskEffort createTaskEffort(int effortHours, int effortMinutes, LocalDate effortDate, String comment, String attachment) {
+    public TaskEffort createTaskEffort(int effortHours, int effortMinutes, Date effortDate, String comment, String attachment) {
         return new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
     }
 
     public boolean validateTaskEffort(TaskEffort effort) {
         for (TaskEffort i : this.taskEffortList) {
-            if (!effort.getEffortDate().isAfter(i.getEffortDate())) {
+            if (!effort.getEffortDate().getEffortDate().isAfter(i.getEffortDate().getEffortDate())) {
                 throw new IllegalArgumentException("Effort for this day is already saved.");
             }
         }
         if (effort == null) {
             return false;
         }
-        if (effort.getEffortDate().isAfter(this.getResponsible().getEndDate()) || effort.getEffortDate().isBefore(this.getResponsible().getStartDate())) {
+        if (effort.getEffortDate().getEffortDate().isAfter(this.getResponsible().getEndDate()) || effort.getEffortDate().getEffortDate().isBefore(this.getResponsible().getStartDate())) {
             throw new IllegalArgumentException("work date not match with the resource allocation dates");
         }
         return !this.taskEffortList.contains(effort);
@@ -164,7 +165,7 @@ public class Task {
             result = false;
         } else {
             if (taskEffortList.isEmpty()) {
-                setStartDate(effort.getEffortDate());
+                setStartDate(effort.getEffortDate().getEffortDate());
                 setStatus(App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Running"));
             }
             this.taskEffortList.add(effort);
@@ -173,7 +174,7 @@ public class Task {
             updateExecutionPercentage();
             if (this.effortRemaining == 0) {
                 setStatus(App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Finished"));
-                setEndDate(effort.getEffortDate());
+                setEndDate(effort.getEffortDate().getEffortDate());
             }
         }
         return result;

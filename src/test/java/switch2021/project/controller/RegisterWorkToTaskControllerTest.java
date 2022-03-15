@@ -1,6 +1,7 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.Immutables.Date;
 import switch2021.project.dto.TaskEffortDTO;
 import switch2021.project.dto.TaskIdNameDTO;
 import switch2021.project.dto.UserStorySprintProjectDTO;
@@ -173,7 +174,7 @@ public class RegisterWorkToTaskControllerTest {
         assertEquals(0, task2.getExecutionPercentage());
         assertEquals(0, userStory1.getWorkDone());
         //TaskEffortDTO
-        LocalDate effortDate = LocalDate.of(2022, 1, 10);
+        Date effortDate = new Date(LocalDate.of(2022, 1, 10));
         TaskEffortDTO taskEffortDTO = new TaskEffortDTO( 4, 30, effortDate, "test", ".pdf");
         //Assert
         assertTrue(controller.createTaskEffort(taskEffortDTO));
