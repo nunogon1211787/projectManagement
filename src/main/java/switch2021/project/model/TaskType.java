@@ -28,7 +28,7 @@ public class TaskType {
      */
 
     public boolean hasDescription(String typeDescription) {
-        return this.description.getDescriptionF().equalsIgnoreCase(typeDescription);
+        return this.description.getText().equalsIgnoreCase(typeDescription);
     }
 
     public void setTypeID(int id){

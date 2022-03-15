@@ -145,7 +145,7 @@ public class CreateUserStoryControllerTest {
         //Assert
         assertNotNull(userStoryDto);
         assertEquals(priority, userStoryDto.getPriority());
-        assertEquals(description, userStoryDto.getDescription().getDescriptionF());
+        assertEquals(description, userStoryDto.getDescription().getText());
         assertEquals(name, userStoryDto.getName());
 
     }
@@ -168,7 +168,7 @@ public class CreateUserStoryControllerTest {
         //Assert
         assertNotNull(userStoryDto);
         assertEquals(priority, userStoryDto.getPriority());
-        assertEquals(description, userStoryDto.getDescription().getDescriptionF());
+        assertEquals(description, userStoryDto.getDescription().getText());
         assertEquals(name, userStoryDto.getName());
 
     }
@@ -188,7 +188,7 @@ public class CreateUserStoryControllerTest {
         assertEquals(userStoryDto.getName(), project_2022_1.getUserStoryList().get(0).getName());
         assertEquals(userStoryDto.getPriority(), project_2022_1.getUserStoryList().get(0).getPriority());
         assertEquals(userStoryDto.getUserStoryStatus(), project_2022_1.getUserStoryList().get(0).getUserStoryStatus());
-        assertEquals(userStoryDto.getDescription().getDescriptionF(), project_2022_1.getUserStoryList().get(0).getDescription().getDescriptionF());
+        assertEquals(userStoryDto.getDescription().getText(), project_2022_1.getUserStoryList().get(0).getDescription().getText());
     }
     //Arrange
 

@@ -3,18 +3,20 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.Immutables.Description;
+
 import java.util.Objects;
 
 @Getter
 @Setter
 public class UserStoryStatus {
     /** Classe UserStoryStatus Atributes **/
-    private String description;
+    private Description description;
     private boolean sprintAvailable;  //this attribute determines if the status is available as a sprint backlog status
 
     /** Constructor **/
     public UserStoryStatus(String description) {
-        this.description = description;
+        this.description = new Description(description);
     }
 
     public boolean isSprintAvailable() {

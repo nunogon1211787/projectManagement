@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.Immutables.Description;
 
 import java.util.Objects;
 
@@ -12,20 +13,11 @@ public class ProjectRole {
 
     /*** Class ProjectRoles Attributes **/
     private int idRole;
-    private String name;
+    private Description name;
 
     /*** Constructor **/
     public ProjectRole(String name) {
-        if (!name.equals("")) {
-            this.name = name;
-        } else {
-            throw new NullPointerException("Description cannot be null");
-        }
-    }
-
-    /*** Method to verify if the name to the Project Role is valid **/
-    public boolean isValidName(String name) {
-        return name.equalsIgnoreCase(this.name);
+       this.name = new Description(name);
     }
 
     /*** Override Equals **/

@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import switch2021.project.Immutables.Date;
 
 import java.time.LocalDate;
 
@@ -42,7 +43,7 @@ class UserStoryTest {
         UserStory userStory = new UserStory("US001", 1, "US001 - Test", 40);
         productBacklog.saveUserStory(userStory);
         assertEquals("US001", userStory.getName());
-        assertEquals("US001 - Test", userStory.getDescription().getDescriptionF());
+        assertEquals("US001 - Test", userStory.getDescription().getText());
     }
 
 
@@ -94,7 +95,7 @@ class UserStoryTest {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         userStory.setDescription("Fazer coiso");
-        assertEquals("Fazer coiso", userStory.getDescription().getDescriptionF());
+        assertEquals("Fazer coiso", userStory.getDescription().getText());
     }
 
     @Test
@@ -116,7 +117,7 @@ class UserStoryTest {
         UserStoryStatus userStoryStatus = new UserStoryStatus("Almost finished");
         userStory.setUserStoryStatusBoolean(userStoryStatus);
 
-        assertEquals("Almost finished", userStory.getUserStoryStatus().getDescription());
+        assertEquals("Almost finished", userStory.getUserStoryStatus().getDescription().getText());
 
     }
 
@@ -139,9 +140,9 @@ class UserStoryTest {
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
         userStory.getTasks().saveTask(task);
         //TaskEffort
-        LocalDate effortDate = LocalDate.of(2022, 1, 20);
+        Date effortDate = new Date(LocalDate.of(2022, 1, 20));
         TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
-        LocalDate effortDate2 = LocalDate.of(2022, 1, 21);
+        Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
         TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
         task.saveTaskEffort(taskEffort);
         task.saveTaskEffort(taskEffort2);
@@ -269,11 +270,11 @@ class UserStoryTest {
         boolean result = status4.equals(null);
 
         assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
-        assertEquals(userStory2.getDescription().getDescriptionF(), userStory3.getDescription().getDescriptionF());
+        assertEquals(userStory2.getDescription().getText(), userStory3.getDescription().getText());
         assertEquals(userStory2.getPriority(), userStory3.getPriority());
         assertEquals(userStory2.getName(), userStory3.getName());
         assertEquals(userStory2.getTimeEstimate(), userStory3.getTimeEstimate());
-        assertNotEquals(userStory2.getDescription().getDescriptionF(), userStory1.getDescription().getDescriptionF());
+        assertNotEquals(userStory2.getDescription().getText(), userStory1.getDescription().getText());
         assertNotEquals(null, userStory1);
         assertEquals(userStory1.getClass(), userStory2.getClass());
         assertNotEquals(userStory1.hashCode(), userStory3.hashCode());
