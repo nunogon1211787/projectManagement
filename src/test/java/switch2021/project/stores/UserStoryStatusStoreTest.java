@@ -1,6 +1,7 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.Immutables.Description;
 import switch2021.project.model.UserStoryStatus;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -57,7 +58,7 @@ class UserStoryStatusStoreTest {
         this.userStoryStatusStore.populateDefault();
         this.userStoryStatusStore.saveNewUserStoryStatus(userStoryStatus);
         this.userStoryStatus.setSprintAvailable(true);
-        userStoryStatus.setDescription("Outro");
+        userStoryStatus.setDescription(new Description("Outro"));
         boolean expected = this.userStoryStatusStore.checkUserStoryStatusExists(userStoryStatus);
         assertTrue(expected);
     }

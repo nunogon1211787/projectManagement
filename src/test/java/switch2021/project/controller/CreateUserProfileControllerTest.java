@@ -3,7 +3,6 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
-import switch2021.project.stores.UserProfileStore;
 
 import switch2021.project.model.UserProfile;
 
@@ -25,7 +24,7 @@ public class CreateUserProfileControllerTest {
       createUserProfileController.createUserProfile(name);
         // Assert
         assertNotNull(name);
-        assertEquals(name, up.getUserProfileName().getDescriptionF());
+        assertEquals(name, up.getUserProfileName().getText());
     }
 
     @Test

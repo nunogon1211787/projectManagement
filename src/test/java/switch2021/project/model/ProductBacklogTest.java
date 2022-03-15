@@ -56,7 +56,7 @@ public class ProductBacklogTest {
         assertNotNull(userStory);
         assertEquals(status, userStory.getUserStoryStatus());
         assertEquals(priority, userStory.getPriority());
-        assertEquals(description, userStory.getDescription().getDescriptionF());
+        assertEquals(description, userStory.getDescription().getText());
         assertEquals(name, userStory.getName());
     }
 
@@ -96,7 +96,7 @@ public class ProductBacklogTest {
         assertNotNull(userStory);
         assertEquals(status, userStory.getUserStoryStatus());
         assertEquals(priority, userStory.getPriority());
-        assertEquals(description, userStory.getDescription().getDescriptionF());
+        assertEquals(description, userStory.getDescription().getText());
         assertEquals(name, userStory.getName());
     }
 
@@ -197,7 +197,7 @@ public class ProductBacklogTest {
         assertNotNull(userStory);
         assertEquals(status, userStory.getUserStoryStatus());
         assertEquals(priority, userStory.getPriority());
-        assertEquals(description, userStory.getDescription().getDescriptionF());
+        assertEquals(description, userStory.getDescription().getText());
     }
 
     @Test
@@ -238,7 +238,7 @@ public class ProductBacklogTest {
         assertNotNull(userStory);
         assertEquals(status, userStory.getUserStoryStatus());
         assertEquals(priority, userStory.getPriority());
-        assertEquals(description, userStory.getDescription().getDescriptionF());
+        assertEquals(description, userStory.getDescription().getText());
     }
 
     @Test
@@ -334,7 +334,7 @@ public class ProductBacklogTest {
         assertEquals(userStory.getUserStoryStatus(), company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do"));
         assertEquals(userStory.getParentUserStory(), userStoryToRefine);
         assertEquals(5, userStory.getPriority());
-        assertEquals("234test234", userStory.getDescription().getDescriptionF());
+        assertEquals("234test234", userStory.getDescription().getText());
 
     }
 
@@ -356,7 +356,7 @@ public class ProductBacklogTest {
         assertEquals(userStory.getUserStoryStatus(), company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do"));
         assertEquals(userStory.getParentUserStory(), userStoryToRefine);
         assertEquals(5, userStory.getPriority());
-        assertEquals("2", userStory.getDescription().getDescriptionF());
+        assertEquals("2", userStory.getDescription().getText());
     }
 
     @Test

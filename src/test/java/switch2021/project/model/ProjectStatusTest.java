@@ -15,7 +15,7 @@ public class ProjectStatusTest {
         //Act
         ProjectStatus projStatus = new ProjectStatus("new Project Status");
         //Assert
-        assertEquals(descriptionExpected, projStatus.getDescription().getDescriptionF());
+        assertEquals(descriptionExpected, projStatus.getDescription().getText());
     }
 
     @Test
@@ -33,7 +33,7 @@ public class ProjectStatusTest {
         //Act
         ProjectStatus projStatus = new ProjectStatus("new");
         //Assert
-        assertEquals(descriptionExpected, projStatus.getDescription().getDescriptionF());
+        assertEquals(descriptionExpected, projStatus.getDescription().getText());
     }
 
     @Test
@@ -47,6 +47,6 @@ public class ProjectStatusTest {
         //Act
         projStatus.setDescription(newStatusDescription);
         //Assert
-        assertEquals("Elaboration", projStatus.getDescription().getDescriptionF());
+        assertEquals("Elaboration", projStatus.getDescription().getText());
     }
 }

@@ -51,7 +51,7 @@ public class TaskTypeStore {
         List<String> taskTypesDescription = new ArrayList<>();
 
         for (TaskType taskType : this.taskTypeList) {
-            taskTypesDescription.add(taskType.getDescription().getDescriptionF());
+            taskTypesDescription.add(taskType.getDescription().getText());
         }
         return taskTypesDescription;
     }

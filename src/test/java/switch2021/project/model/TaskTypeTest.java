@@ -108,9 +108,9 @@ class TaskTypeTest {
         test.saveTaskType(type2);
         test.saveTaskType(type3);
         //Act
-        String x1 = type1.getDescription().getDescriptionF();
-        String x2 = type2.getDescription().getDescriptionF();
-        String x3 = type3.getDescription().getDescriptionF();
+        String x1 = type1.getDescription().getText();
+        String x2 = type2.getDescription().getText();
+        String x3 = type3.getDescription().getText();
         //Assert
         assertEquals("test1", x1);
         assertEquals("test2", x2);
@@ -129,9 +129,9 @@ class TaskTypeTest {
         test.saveTaskType(type2);
         test.saveTaskType(type3);
         //Act
-        String x1 = type1.getDescription().getDescriptionF();
-        String x2 = type2.getDescription().getDescriptionF();
-        String x3 = type3.getDescription().getDescriptionF();
+        String x1 = type1.getDescription().getText();
+        String x2 = type2.getDescription().getText();
+        String x3 = type3.getDescription().getText();
         //Assert
         assertNotEquals("test2", x1);
         assertNotEquals("test3", x2);

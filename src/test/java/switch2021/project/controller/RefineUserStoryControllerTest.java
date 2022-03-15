@@ -136,7 +136,7 @@ public class RefineUserStoryControllerTest {
         refineUserStoryController.getProductBacklog();
         refineUserStoryController.getUserStory(2);
         boolean result = refineUserStoryController.updateRefinedUserStoryStatus(userStory2);
-        String refinedUserStoryStatus = userStory2.getUserStoryStatus().getDescription();
+        String refinedUserStoryStatus = userStory2.getUserStoryStatus().getDescription().getText();
 
         //Assert
         assertEquals("Refined",refinedUserStoryStatus);
