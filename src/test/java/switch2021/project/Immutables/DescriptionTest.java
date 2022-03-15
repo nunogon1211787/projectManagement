@@ -2,7 +2,6 @@ package switch2021.project.Immutables;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.SprintBacklog;
 import switch2021.project.model.Typology;
 
 import java.util.Arrays;
@@ -16,7 +15,7 @@ class DescriptionTest {
         //Arrange
         Description description = new Description("Teste");
         //Assert
-        assertEquals("Teste", description.getDescriptionF());
+        assertEquals("Teste", description.getText());
     }
 
     @Test
@@ -41,9 +40,9 @@ class DescriptionTest {
     @Test
     public void testSetter() {
         Description description = new Description("test");
-        description.setDescriptionF("modified_test");
+        description.setText("modified_test");
 
-        assertEquals("modified_test", description.getDescriptionF());
+        assertEquals("modified_test", description.getText());
     }
 
     @Test

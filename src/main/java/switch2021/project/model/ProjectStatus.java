@@ -32,7 +32,7 @@ public class ProjectStatus {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProjectStatus that = (ProjectStatus) o;
-        return (this.description.getDescriptionF().equals(that.description.getDescriptionF()));
+        return (this.description.getText().equals(that.description.getText()));
     }
 
     @Override

@@ -31,7 +31,7 @@ public class ProductBacklog {
     public List<UserStory> getActiveUserStoryList() {
         List<UserStory> activeUSList = new ArrayList<>();
         for (UserStory us : userStoryList) {
-            if (!us.getUserStoryStatus().getDescription().getDescriptionF().equals("Completed")) {
+            if (!us.getUserStoryStatus().getDescription().getText().equals("Completed")) {
                 activeUSList.add(us);
             }
         }
@@ -84,7 +84,7 @@ public class ProductBacklog {
     private void validateUserStory(UserStory userStory) {
         // check duplicate story
         for (UserStory us : userStoryList) {
-            if (us.getDescription().getDescriptionF().trim().equalsIgnoreCase(userStory.getDescription().getDescriptionF().trim())) {
+            if (us.getDescription().getText().trim().equalsIgnoreCase(userStory.getDescription().getText().trim())) {
                 throw new IllegalArgumentException("Repeated user story inserted, same code project and description.");
             }
         }
@@ -111,8 +111,8 @@ public class ProductBacklog {
         userStoryList.sort(Comparator.comparingInt(UserStory::getPriority));
 
         for (UserStory userStory : userStoryList) {
-            if (!userStory.getUserStoryStatus().getDescription().getDescriptionF().equals("Cancelled") &&
-                    !userStory.getUserStoryStatus().getDescription().getDescriptionF().equals("Done") &&
+            if (!userStory.getUserStoryStatus().getDescription().getText().equals("Cancelled") &&
+                    !userStory.getUserStoryStatus().getDescription().getText().equals("Done") &&
                     userStory.getPriority() != 0) {
                 returnList.add(userStory);
             } else if (userStory.getPriority() == 0) {

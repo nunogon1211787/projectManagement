@@ -42,7 +42,7 @@ class UserStoryTest {
         UserStory userStory = new UserStory("US001", 1, "US001 - Test", 40);
         productBacklog.saveUserStory(userStory);
         assertEquals("US001", userStory.getName());
-        assertEquals("US001 - Test", userStory.getDescription().getDescriptionF());
+        assertEquals("US001 - Test", userStory.getDescription().getText());
     }
 
 
@@ -94,7 +94,7 @@ class UserStoryTest {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         userStory.setDescription("Fazer coiso");
-        assertEquals("Fazer coiso", userStory.getDescription().getDescriptionF());
+        assertEquals("Fazer coiso", userStory.getDescription().getText());
     }
 
     @Test
@@ -116,7 +116,7 @@ class UserStoryTest {
         UserStoryStatus userStoryStatus = new UserStoryStatus("Almost finished");
         userStory.setUserStoryStatusBoolean(userStoryStatus);
 
-        assertEquals("Almost finished", userStory.getUserStoryStatus().getDescription().getDescriptionF());
+        assertEquals("Almost finished", userStory.getUserStoryStatus().getDescription().getText());
 
     }
 
@@ -269,11 +269,11 @@ class UserStoryTest {
         boolean result = status4.equals(null);
 
         assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
-        assertEquals(userStory2.getDescription().getDescriptionF(), userStory3.getDescription().getDescriptionF());
+        assertEquals(userStory2.getDescription().getText(), userStory3.getDescription().getText());
         assertEquals(userStory2.getPriority(), userStory3.getPriority());
         assertEquals(userStory2.getName(), userStory3.getName());
         assertEquals(userStory2.getTimeEstimate(), userStory3.getTimeEstimate());
-        assertNotEquals(userStory2.getDescription().getDescriptionF(), userStory1.getDescription().getDescriptionF());
+        assertNotEquals(userStory2.getDescription().getText(), userStory1.getDescription().getText());
         assertNotEquals(null, userStory1);
         assertEquals(userStory1.getClass(), userStory2.getClass());
         assertNotEquals(userStory1.hashCode(), userStory3.hashCode());

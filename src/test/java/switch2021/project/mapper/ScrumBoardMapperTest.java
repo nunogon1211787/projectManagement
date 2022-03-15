@@ -27,13 +27,13 @@ public class ScrumBoardMapperTest {
         //Assert
         assertEquals(dto.getUserStoryName(),userStory.getName());
         assertEquals("name",dto.getUserStoryName());
-        assertEquals(dto.getUserStoryDescription(),userStory.getDescription().getDescriptionF());
+        assertEquals(dto.getUserStoryDescription(),userStory.getDescription().getText());
         assertEquals("description", dto.getUserStoryDescription());
         assertEquals(dto.getUserStoryPriority(),userStory.getPriority());
         assertEquals(5, dto.getUserStoryPriority());
         assertEquals(dto.getUserStoryTimeEstimate(),userStory.getTimeEstimate());
         assertEquals(5, dto.getUserStoryPriority());
-        assertEquals(dto.getUserStoryStatus(),userStory.getUserStoryStatus().getDescription().getDescriptionF());
+        assertEquals(dto.getUserStoryStatus(),userStory.getUserStoryStatus().getDescription().getText());
         assertEquals("To do", dto.getUserStoryStatus());
         assertEquals(dto.getUserStoryId(),userStory.getIdUserStory());
         assertEquals(0, dto.getUserStoryId());

@@ -64,7 +64,7 @@ public class ProjectStatusStore {
         ProjectStatus status = null;
 
         for (ProjectStatus i : this.projectStatusList) {
-            if (i.getDescription().getDescriptionF().equals(name)) {
+            if (i.getDescription().getText().equals(name)) {
                  status = i;
                 break;
             }

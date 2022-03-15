@@ -13,7 +13,7 @@ public class ProjectRoleTest {
         //Act
         ProjectRole role = new ProjectRole(roleName);
         //Assert
-        assertEquals(role.getName().getDescriptionF(), roleName);
+        assertEquals(role.getName().getText(), roleName);
     }
 
     @Test

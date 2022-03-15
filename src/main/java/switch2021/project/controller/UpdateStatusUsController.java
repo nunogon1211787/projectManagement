@@ -32,7 +32,7 @@ public class UpdateStatusUsController {
                 List<String> usList = new ArrayList<>();
                 for (int i = 0; i < statusList.size(); i++) {
                         if (statusList.get(i).isSprintAvailable())
-                                usList.add(statusList.get(i).getDescription().getDescriptionF());
+                                usList.add(statusList.get(i).getDescription().getText());
                 }
                 return Collections.unmodifiableList(usList);
         }

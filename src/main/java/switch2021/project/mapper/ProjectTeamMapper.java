@@ -19,7 +19,7 @@ public class ProjectTeamMapper {
                 + "/" + resource.getEndDate().getMonthValue() + "/" + resource.getEndDate().getDayOfMonth();
         String role = null;
         if(resource.getRole() != null){
-            role = resource.getRole().getName().getDescriptionF();
+            role = resource.getRole().getName().getText();
         }
         return new ResourceDTO(resource.getUser().getUserName(),
                 role, startDate, endDate, resource.getCostPerHour(), resource.getPercentageOfAllocation());
