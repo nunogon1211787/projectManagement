@@ -3,9 +3,9 @@ package switch2021.project.stores;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.ProjectStatus;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -15,13 +15,11 @@ public class ProjectStatusStore {
     /**
      * Project Status Store Attributes (Contains a Project Status list)
      **/
-
     private final List<ProjectStatus> projectStatusList;
 
     /**
      * Project Status Constructor
      **/
-
     public ProjectStatusStore() {
         this.projectStatusList = new ArrayList<>();
     }
@@ -29,7 +27,6 @@ public class ProjectStatusStore {
     /**
      * Project Status Populator (Populates the Project Status List with pre-set objects)
      **/
-
     public void populateDefault() {
         this.projectStatusList.add(new ProjectStatus("Planned"));
         this.projectStatusList.add(new ProjectStatus("Inception"));
@@ -43,7 +40,6 @@ public class ProjectStatusStore {
     /**
      * Create Project Status (Creates a new Project Status object)
      **/
-
     public ProjectStatus createProjectStatus(String description) {
         return new ProjectStatus(description);
     }
@@ -51,16 +47,15 @@ public class ProjectStatusStore {
     /**
      * Add Project Status Method (Adds a new Project Status object to the Project Status List)
      **/
-
     public boolean add(ProjectStatus projStat) {
-        this.projectStatusList.add(projStat);
-        return true;
+        if (this.projectStatusList.contains(projStat))
+            return false;
+        return this.projectStatusList.add(projStat);
     }
 
     /**
      * Getter Methods
      **/
-
     public List<ProjectStatus> getProjectStatusList() {
         return new ArrayList<>(projectStatusList);
     }

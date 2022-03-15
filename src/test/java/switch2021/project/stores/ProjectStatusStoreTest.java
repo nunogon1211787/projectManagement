@@ -44,10 +44,24 @@ class ProjectStatusStoreTest {
         ProjectStatusStore store = company.getProjectStatusStore();
         ProjectStatus newStatus = store.createProjectStatus("test");
         //Act
-        store.add(newStatus);
+        boolean result = store.add(newStatus);
         //Assert
+        assertTrue(result);
         assertEquals(8,store.getProjectStatusList().size());
         assertEquals("test",store.getProjectStatusByDescription("test").getDescription().getDescriptionF());
+    }
+
+    @Test
+    void addProjectStatusFail() {
+        //Arrange
+        Company company = new Company();
+        ProjectStatusStore store = company.getProjectStatusStore();
+        ProjectStatus newStatus = store.createProjectStatus("Elaboration");
+        //Act
+        boolean result = store.add(newStatus);
+        //Assert
+        assertEquals(7,store.getProjectStatusList().size());
+        assertFalse(result);
     }
 
     @Test

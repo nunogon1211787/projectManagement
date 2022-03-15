@@ -32,7 +32,7 @@ class ProjectRoleStoreTest {
     @Test
     public void createProjectRoleTestNullFail() {
         //Assert
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             Company company = new Company();
             //Act
@@ -43,7 +43,7 @@ class ProjectRoleStoreTest {
     @Test
     public void createProjectRoleTestFail() {
         //Assert
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             Company company = new Company();
             //Act

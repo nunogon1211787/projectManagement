@@ -12,16 +12,14 @@ public class ProjectStatus {
 
     /**
      * Project Status class
-     * Project Status atributes are composed of a description of the Project Status.
+     * Project Status attributes are composed of a description of the Project Status.
      **/
-
     private Description description;
 
     /**
      * Constructors of Project Status class
      * Creates a new Project Status instance.
      **/
-
     public ProjectStatus(String description) {
         this.description = new Description(description);
     }
@@ -29,9 +27,6 @@ public class ProjectStatus {
     /**
      * Override Methods
      **/
-
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
