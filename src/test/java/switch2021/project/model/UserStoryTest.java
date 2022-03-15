@@ -116,7 +116,7 @@ class UserStoryTest {
         UserStoryStatus userStoryStatus = new UserStoryStatus("Almost finished");
         userStory.setUserStoryStatusBoolean(userStoryStatus);
 
-        assertEquals("Almost finished", userStory.getUserStoryStatus().getDescription());
+        assertEquals("Almost finished", userStory.getUserStoryStatus().getDescription().getDescriptionF());
 
     }
 

@@ -31,7 +31,7 @@ public class ProductBacklog {
     public List<UserStory> getActiveUserStoryList() {
         List<UserStory> activeUSList = new ArrayList<>();
         for (UserStory us : userStoryList) {
-            if (!us.getUserStoryStatus().getDescription().equals("Completed")) {
+            if (!us.getUserStoryStatus().getDescription().getDescriptionF().equals("Completed")) {
                 activeUSList.add(us);
             }
         }
@@ -111,8 +111,8 @@ public class ProductBacklog {
         userStoryList.sort(Comparator.comparingInt(UserStory::getPriority));
 
         for (UserStory userStory : userStoryList) {
-            if (!userStory.getUserStoryStatus().getDescription().equals("Cancelled") &&
-                    !userStory.getUserStoryStatus().getDescription().equals("Done") &&
+            if (!userStory.getUserStoryStatus().getDescription().getDescriptionF().equals("Cancelled") &&
+                    !userStory.getUserStoryStatus().getDescription().getDescriptionF().equals("Done") &&
                     userStory.getPriority() != 0) {
                 returnList.add(userStory);
             } else if (userStory.getPriority() == 0) {

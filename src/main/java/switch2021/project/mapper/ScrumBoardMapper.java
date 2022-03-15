@@ -12,7 +12,7 @@ public class ScrumBoardMapper {
      **/
 
     public UserStoryStatusDTO toDTO (UserStory userStory) {
-        return new UserStoryStatusDTO(userStory.getName(),userStory.getUserStoryStatus().getDescription(),
+        return new UserStoryStatusDTO(userStory.getName(),userStory.getUserStoryStatus().getDescription().getDescriptionF(),
                 userStory.getDescription().getDescriptionF(), userStory.getTimeEstimate(), userStory.getPriority(), userStory.getIdUserStory());
     }
 

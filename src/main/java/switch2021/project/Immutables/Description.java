@@ -8,15 +8,14 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@EqualsAndHashCode
 public class Description {
 
     /**
      * Attributes
      **/
-    private  String descriptionF;
-    private static final int MIN_DESCRIPTION_LENGTH = 1;
-    private static final int MAX_DESCRIPTION_LENGTH = 1000;
+    private String descriptionF;
+    private int MIN_DESCRIPTION_LENGTH = 1;
+    private int MAX_DESCRIPTION_LENGTH = 1000;
 
     /**
      * Constructor

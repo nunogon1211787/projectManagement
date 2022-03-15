@@ -44,7 +44,7 @@ public class UserStoryStatusStore {
     public UserStoryStatus getUserStoryStatusByDescription(String description){
         UserStoryStatus userStoryStatus = null;
         for(UserStoryStatus uss : this.userStoryStatusList){
-            if(uss.getDescription().equals(description)){
+            if(uss.getDescription().getDescriptionF().equals(description)){
                 userStoryStatus = uss;
             }
         }
