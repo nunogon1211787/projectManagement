@@ -206,7 +206,7 @@ public class ProjectTeam {
      **/
     public boolean checkIfTheRoleExistAndIsCurrent(ProjectRole role, LocalDate startDate) {
         boolean msg = false;
-        if (role != null && !role.isValidName("Team Member")) {
+        if (role != null && !role.getName().getDescriptionF().equals("Team Member")) {
             for (Resource i : projectTeamList) {
                 if (i.isYour(role) && i.getEndDate().isAfter(startDate)) {
                     msg = true;

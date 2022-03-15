@@ -64,7 +64,7 @@ public class ProjectRoleStore {
         ProjectRole projRole = null;
 
         for (ProjectRole i : projectRoleList) {
-            if (i.getName().equals(name)) {
+            if (i.getName().getDescriptionF().equals(name)) {
                 projRole = i;
                 break;
             }
