@@ -28,7 +28,6 @@ public class CreateNewTypologyController {
         if (description.trim().isEmpty()) {
             throw new IllegalArgumentException("Description can't be blank.");
         } else {
-//            Typology typology = this.company.getTypologyStore().createTypology(description);
             this.company.getTypologyStore().createTypology(description);
             msg = true;
         }
