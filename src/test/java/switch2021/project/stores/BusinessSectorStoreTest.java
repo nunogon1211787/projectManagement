@@ -66,7 +66,7 @@ class BusinessSectorStoreTest {
         store.addBusinessSector(sector);
 
         //Assert
-        assertEquals("teste", sector.getDescription().getText());
+        assertEquals("teste", sector.getDescription().getText()); //é preciso comparar objetos do mesmo tipo
     }
 
     @Test
