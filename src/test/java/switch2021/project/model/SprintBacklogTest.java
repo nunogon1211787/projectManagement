@@ -91,7 +91,7 @@ class SprintBacklogTest {
         SprintBacklog sprintBacklog = new SprintBacklog();
         SprintBacklog sprintBacklog1 = new SprintBacklog();
         SprintBacklog sprintBacklog2 = null;
-        Typology test = new Typology(new Description("test"));
+        Typology test = new Typology("test");
         // Act
         assertEquals(sprintBacklog,sprintBacklog1);
         assertNotEquals(sprintBacklog, sprintBacklog2);

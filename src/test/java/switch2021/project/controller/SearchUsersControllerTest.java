@@ -98,6 +98,5 @@ class SearchUsersControllerTest {
         assertEquals(p2.getUserProfileName(), list.get(1).getUserProfileName());
         assertEquals(p3.getUserProfileName(), list.get(2).getUserProfileName());
         assertEquals(p4.getUserProfileName(), list.get(3).getUserProfileName());
-        assertEquals(p4.getIdProfile(), list.get(3).getIdProfile());
     }
 }

@@ -38,21 +38,13 @@ class DescriptionTest {
     }
 
     @Test
-    public void testSetter() {
-        Description description = new Description("test");
-        description.setText("modified_test");
-
-        assertEquals("modified_test", description.getText());
-    }
-
-    @Test
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTests() {
         // Arrange
         Description description = new Description("Teste");
         Description description2 = new Description("Teste");
         Description description3 = null;
-        Typology test = new Typology(new Description("test"));
+        Typology test = new Typology("test");
         // Act
         assertEquals(description,description2);
         assertNotEquals(description, description3);

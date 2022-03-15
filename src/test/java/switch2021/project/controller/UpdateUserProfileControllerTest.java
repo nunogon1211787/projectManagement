@@ -70,6 +70,6 @@ public class UpdateUserProfileControllerTest {
         //Act
         company.getSystemUserStore().getSystemUsers().add(user);
         //Assert
-        assertTrue(controllerTest.updateProfile(user, userProfileStore.getUserProfile(1), userProfileStore.getUserProfile(2)));
+        assertTrue(controllerTest.updateProfile(user, userProfileStore.getUserProfile("Administrator"), userProfileStore.getUserProfile("Director")));
     }
 }
