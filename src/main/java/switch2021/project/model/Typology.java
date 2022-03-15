@@ -10,11 +10,9 @@ import java.util.Objects;
 import java.util.Scanner;
 
 @Getter
-@Setter
 public class Typology {
 
     /** Typology attributes are composed of a description of the Typology. **/
-    private int idTypology;
     private final Description description;
 
     /** Constructors of typology´s class. Creates a new typology instance. **/
@@ -35,6 +33,4 @@ public class Typology {
     public int hashCode() {
         return Objects.hash(description);
     }
-
-
 }

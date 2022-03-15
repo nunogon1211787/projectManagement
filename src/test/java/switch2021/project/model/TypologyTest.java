@@ -8,36 +8,13 @@ public class TypologyTest {
 
     @DisplayName("Get Typology test")
     @Test
-    public void getId_TypologyTestMock() {
+    public void get_TypologyTest() {
         //Arrange
         Typology typo = new Typology("Teste");
-        String id = typo.getDescription().getText();
+        String desc = typo.getDescription().getText();
         //Assert
-        assertEquals("Teste", id);
+        assertEquals("Teste", desc);
     }
-
-    @DisplayName("Get Typology test - id zero")
-    @Test
-    public void getId_TypologyZeroTestMock() {
-        //Arrange
-        Typology typo = new Typology("Teste");
-        int id = typo.getIdTypology();
-        //Assert
-        assertEquals(0, id);
-    }
-
-    @DisplayName("Set id Test Success")
-    @Test
-    public void setId_TypologyTest() {
-        //Arrange
-        Typology typo = new Typology("Teste");
-        //Act
-        typo.setIdTypology(3);
-        int id = typo.getIdTypology();
-        //Assert
-        assertEquals(3,id);
-    }
-
 
     @Test
     public void equalsTestSuccess() {
