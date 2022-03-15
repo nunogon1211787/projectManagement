@@ -51,7 +51,7 @@ public class TaskTypeStore {
         List<String> taskTypesDescription = new ArrayList<>();
 
         for (TaskType taskType : this.taskTypeList) {
-            taskTypesDescription.add(taskType.getDescriptionF().toString());
+            taskTypesDescription.add(taskType.getDescription().getDescriptionF());
         }
         return taskTypesDescription;
     }
@@ -94,7 +94,7 @@ public class TaskTypeStore {
         boolean result = true;
 
         for (TaskType taskType : this.taskTypeList) {
-            if (taskType.getDescriptionF().equals(type.getDescriptionF())) {
+            if (taskType.getDescription().equals(type.getDescription())) {
                 result = false;
                 break;
             }
