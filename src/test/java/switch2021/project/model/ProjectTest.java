@@ -37,7 +37,7 @@ class ProjectTest {
         proj = company.getProjectStore().createProject( "prototype", "test1", customer,
                 typo, sector, date, 7, 5000);
         company.getProjectStore().saveNewProject(proj);
-        company.getProjectStore().getProjectByCode(proj.getCode()).setEndDate();
+        company.getProjectStore().getProjectByCode(proj.getCode()).setEndDate(LocalDate.now());
     }
 
     @Test

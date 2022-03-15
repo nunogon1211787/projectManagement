@@ -54,7 +54,7 @@ public class BusinessSectorStore {
     public BusinessSector getBusinessSectorByDescription(String description) {
         BusinessSector sector = null;
         for (BusinessSector i : this.businessSectorList)
-            if (i.getDescription().equals(description)) {
+            if (i.getDescription().getText().equals(description)) {
                 sector = i;
                 break;
             }
