@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Description;
+import switch2021.project.Immutables.Name;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -187,7 +187,10 @@ public class ProjectTeamTest {
         ProjectTeam projectTeam = new ProjectTeam();
 
         SystemUser user = mock(SystemUser.class);
-        when(user.getUserName()).thenReturn("chico");
+        Name name = mock(Name.class);
+
+        when(name.getNameF()).thenReturn("chico");
+        when(user.getUserName()).thenReturn(name);
 
         Resource chico = mock(Resource.class);
         when(chico.getUser()).thenReturn(user);
@@ -196,7 +199,10 @@ public class ProjectTeamTest {
         projectTeam.saveResource(chico);
 
         SystemUser user2 = mock(SystemUser.class);
-        when(user2.getUserName()).thenReturn("jorgebras");
+        Name name2 = mock(Name.class);
+
+        when(name2.getNameF()).thenReturn("jorgebras");
+        when(user2.getUserName()).thenReturn(name2);
 
         Resource jorgebras = mock(Resource.class);
         when(jorgebras.getUser()).thenReturn(user2);
@@ -219,7 +225,10 @@ public class ProjectTeamTest {
         ProjectTeam projectTeam = new ProjectTeam();
 
         SystemUser user = mock(SystemUser.class);
-        when(user.getUserName()).thenReturn("chico");
+        Name name = mock(Name.class);
+
+        when(name.getNameF()).thenReturn("chico");
+        when(user.getUserName()).thenReturn(name);
 
         Resource chico = mock(Resource.class);
         when(chico.getUser()).thenReturn(user);
@@ -228,7 +237,10 @@ public class ProjectTeamTest {
         projectTeam.saveResource(chico);
 
         SystemUser user2 = mock(SystemUser.class);
-        when(user2.getUserName()).thenReturn("jorgebras");
+        Name name2 = mock(Name.class);
+
+        when(name.getNameF()).thenReturn("jorgebras");
+        when(user2.getUserName()).thenReturn(name2);
 
         Resource jorgebras = mock(Resource.class);
         when(jorgebras.getUser()).thenReturn(user2);
@@ -250,7 +262,7 @@ public class ProjectTeamTest {
     public void createResourceTestSuccess() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -274,7 +286,7 @@ public class ProjectTeamTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             //Project 1
@@ -318,7 +330,7 @@ public class ProjectTeamTest {
     public void assignProjectRoleTestSuccessWithRoleInTheTeam() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -349,7 +361,7 @@ public class ProjectTeamTest {
     public void assignProjectRoleTestSuccessWithOutRoleInTheTeam() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -381,7 +393,7 @@ public class ProjectTeamTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             //Project 1
@@ -410,7 +422,7 @@ public class ProjectTeamTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             //Project 1
@@ -491,7 +503,7 @@ public class ProjectTeamTest {
     public void hasCurrentResourceFailResourceNotCurrent() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -509,7 +521,7 @@ public class ProjectTeamTest {
     public void assignScrumMasterWithoutRepeatedTestSize() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -556,7 +568,7 @@ public class ProjectTeamTest {
     public void assignScrumMasterWithRepeatedTestSize() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -674,7 +686,7 @@ public class ProjectTeamTest {
     public void checkIfTheRoleExistAndIsCurrentFalseNullandTeamMember() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -684,25 +696,25 @@ public class ProjectTeamTest {
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaSilva", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
         joana1R.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanaJonas", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
         joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanaPereira", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 1, 31);
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
         joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
         //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana4 = new SystemUser("joanaCarvalho", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 1, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -711,7 +723,7 @@ public class ProjectTeamTest {
         ProjectRole joana4role = joana4R.getRole();
 
         //Resource 5
-        SystemUser joana5 = new SystemUser("joana5", "joana5@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana5 = new SystemUser("joanaFigueira", "joana5@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej5 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej5 = LocalDate.of(2022, 1, 31);
         Resource joana5R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -733,7 +745,7 @@ public class ProjectTeamTest {
     public void checkIfTheRoleExistAndIsCurrentTrueProductOwner() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -743,7 +755,7 @@ public class ProjectTeamTest {
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaSilva", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
@@ -752,13 +764,13 @@ public class ProjectTeamTest {
         ProjectRole joana1role = joana1R.getRole();
 
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanaJonas", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
         joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanaPereira", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 1, 31);
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
@@ -778,7 +790,7 @@ public class ProjectTeamTest {
     public void checkIfTheRoleExistAndIsCurrentTrueProductOwnerFail() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -788,7 +800,7 @@ public class ProjectTeamTest {
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaSilva", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
@@ -797,13 +809,13 @@ public class ProjectTeamTest {
         ProjectRole joana1role = joana1R.getRole();
 
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanaPereira", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
         joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanaJonas", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 1, 31);
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);

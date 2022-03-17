@@ -81,7 +81,7 @@ class BusinessSectorStoreTest {
         ProjectTeam projectTeam = new ProjectTeam();
 
         Resource manuelbras = mock(Resource.class);
-        when(manuelbras.isYour("manuelbras@beaver.com")).thenReturn(true);
+        when(manuelbras.isYourEmail("manuelbras@beaver.com")).thenReturn(true);
         when(manuelbras.isCurrent()).thenReturn(true);
 
         projectTeam.saveResource(manuelbras);
