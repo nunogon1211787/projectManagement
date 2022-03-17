@@ -187,10 +187,12 @@ public class Task {
     }
 
     public double updateEffortRemaining(TaskEffort effort) {
-        if (this.effortRemaining < effortInHours(effort))
-            return this.effortRemaining = 0.0;
-
-        return this.effortRemaining -= effortInHours(effort);
+        if (this.effortRemaining < effortInHours(effort)) {
+            this.effortRemaining = 0.0;
+        } else {
+            this.effortRemaining -= effortInHours(effort);
+        }
+        return this.effortRemaining;
     }
 
     private double updateExecutionPercentage() {

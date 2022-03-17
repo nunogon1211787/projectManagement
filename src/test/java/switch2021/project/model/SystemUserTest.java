@@ -1083,6 +1083,24 @@ class SystemUserTest {
     }
 
     @Test
+    void hasAllProfilesInTheListContainsFalse() {
+        //Arrange
+        UserProfile pro = new UserProfile("Visitor");
+        UserProfile tes = new UserProfile("Director");
+        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
+                "123456", "123456", "img_123", pro);
+        String name = "test";
+        String email = "xxxx";
+        String func = "test";
+        int state = 1; //isActiveUser : -1 == null / 0 == false / 1 == true
+        List<UserProfile> profiles = new ArrayList<>(); // profileId
+        //Act
+        profiles.add(tes);
+        //Assert
+        assertFalse(test.hasThisData(name,email,func, state, profiles));
+    }
+
+    @Test
     public void activationUser() {
         //Test to activate the user
         //Arrange
