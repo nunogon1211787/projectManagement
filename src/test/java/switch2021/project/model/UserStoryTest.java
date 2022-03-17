@@ -42,7 +42,7 @@ class UserStoryTest {
         ProductBacklog productBacklog = new ProductBacklog();
         UserStory userStory = new UserStory("US001", 1, "US001 - Test", 40);
         productBacklog.saveUserStory(userStory);
-        assertEquals("US001", userStory.getName());
+        assertEquals("US001", userStory.getTitle());
         assertEquals("US001 - Test", userStory.getDescription().getText());
     }
 
@@ -272,7 +272,7 @@ class UserStoryTest {
         assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
         assertEquals(userStory2.getDescription().getText(), userStory3.getDescription().getText());
         assertEquals(userStory2.getPriority(), userStory3.getPriority());
-        assertEquals(userStory2.getName(), userStory3.getName());
+        assertEquals(userStory2.getTitle(), userStory3.getTitle());
         assertEquals(userStory2.getTimeEstimate(), userStory3.getTimeEstimate());
         assertNotEquals(userStory2.getDescription().getText(), userStory1.getDescription().getText());
         assertNotEquals(null, userStory1);

@@ -291,19 +291,19 @@ public class ProductBacklogSortControllerTest {
 
         // Assert
 
-        assertEquals(userStory.getName(),userStoryListDtoList.get(1).getName());
+        assertEquals(userStory.getTitle(),userStoryListDtoList.get(1).getTitle());
         assertEquals(userStory.getUserStoryStatus(),userStoryListDtoList.get(1).getUserStoryStatus());
       assertEquals(userStory.getPriority(),userStoryListDtoList.get(1).getPriority());
         assertEquals(userStory.getDescription().getText(),userStoryListDtoList.get(1).getDescription().getText());
-        assertEquals(userStory1.getName(),userStoryListDtoList.get(0).getName());
+        assertEquals(userStory1.getTitle(),userStoryListDtoList.get(0).getTitle());
         assertEquals(userStory1.getUserStoryStatus(),userStoryListDtoList.get(0).getUserStoryStatus());
         assertEquals(userStory1.getPriority(),userStoryListDtoList.get(0).getPriority());
         assertEquals(userStory1.getDescription().getText(),userStoryListDtoList.get(0).getDescription().getText());
-        assertEquals(userStory2.getName(),userStoryListDtoList.get(2).getName());
+        assertEquals(userStory2.getTitle(),userStoryListDtoList.get(2).getTitle());
         assertEquals(userStory2.getUserStoryStatus(),userStoryListDtoList.get(2).getUserStoryStatus());
         assertEquals(userStory2.getPriority(),userStoryListDtoList.get(2).getPriority());
         assertEquals(userStory2.getDescription().getText(),userStoryListDtoList.get(2).getDescription().getText());
-        assertEquals(userStory3.getName(),userStoryListDtoList.get(3).getName());
+        assertEquals(userStory3.getTitle(),userStoryListDtoList.get(3).getTitle());
         assertEquals(userStory3.getUserStoryStatus(),userStoryListDtoList.get(3).getUserStoryStatus());
         assertEquals(userStory3.getPriority(),userStoryListDtoList.get(3).getPriority());
         assertEquals(userStory3.getDescription().getText(),userStoryListDtoList.get(3).getDescription().getText());

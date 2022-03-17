@@ -129,7 +129,6 @@ public class CreateUserStoryControllerTest {
     public void createUserStorySuccessFull() {
         //Arrange
         company.getProjectStore().saveNewProject(project);
-
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = 1;
         int priority2 = 5;
@@ -146,9 +145,51 @@ public class CreateUserStoryControllerTest {
         assertNotNull(userStoryDto);
         assertEquals(priority, userStoryDto.getPriority());
         assertEquals(description, userStoryDto.getDescription().getText());
-        assertEquals(name, userStoryDto.getName());
+        assertEquals(name, userStoryDto.getTitle());
 
     }
+
+//    TODO ver mock test
+
+//    @Test
+//    public void createUserStorySuccessFullMock() {
+//        //Arrange
+//        Company company = mock(Company.class);
+//        UserStoryMapper userStoryMapper = mock(UserStoryMapper.class);
+//        ProjectsMapper projectsMapper = mock(ProjectsMapper.class);
+//        ProjectStore projectStore = mock(ProjectStore.class);
+//        Project project = mock(Project.class);
+//        ProductBacklog productBacklog = mock(ProductBacklog.class);
+//        UserStory userStory = mock (UserStory.class);
+//        UserStoryDto userStoryDto = mock((UserStoryDto.class));
+//        CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, projectsMapper, userStoryMapper);
+//
+//        int priority = 1;
+//        String description = "teste";
+//        String name = "teste";
+//        UserStoryStatus status = new UserStoryStatus("To do");
+//
+////        UserStoryDto userStoryDto = new UserStoryDto(name, status, priority, description);
+////        UserStory userStory = new UserStory(name, status, priority, description);
+//
+//        when(company.getProjectStore()).thenReturn(projectStore);
+//        when(projectStore.getProjectByCode("Project_2022_1")).thenReturn(project);
+//        when(project.getProductBacklog()).thenReturn(productBacklog);
+//        when(productBacklog.createUserStoryWithDto(userStoryDto, mapperUS)).thenReturn(userStory);
+//        when(productBacklog.saveUserStory(userStory)).thenReturn(true);
+////        when(userStoryMapper.toModel(userStoryDto)).thenReturn(userStory);
+//
+//
+//        // Act
+//        createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
+//
+//        //Assert
+//        assertNotNull(userStoryDto);
+//        assertEquals(priority, userStoryDto.getPriority());
+//        assertEquals(description, userStoryDto.getDescription().getText());
+//        assertEquals(name, userStoryDto.getTitle());
+
+//    }
 
     @Test
     public void createUserStorySuccessFullDescriptionOnLimitSize() {
@@ -169,7 +210,7 @@ public class CreateUserStoryControllerTest {
         assertNotNull(userStoryDto);
         assertEquals(priority, userStoryDto.getPriority());
         assertEquals(description, userStoryDto.getDescription().getText());
-        assertEquals(name, userStoryDto.getName());
+        assertEquals(name, userStoryDto.getTitle());
 
     }
 
@@ -185,7 +226,7 @@ public class CreateUserStoryControllerTest {
 
         ProductBacklog project_2022_1 = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog();
         assertEquals(1, project_2022_1.getUserStoryList().size());
-        assertEquals(userStoryDto.getName(), project_2022_1.getUserStoryList().get(0).getName());
+        assertEquals(userStoryDto.getTitle(), project_2022_1.getUserStoryList().get(0).getTitle());
         assertEquals(userStoryDto.getPriority(), project_2022_1.getUserStoryList().get(0).getPriority());
         assertEquals(userStoryDto.getUserStoryStatus(), project_2022_1.getUserStoryList().get(0).getUserStoryStatus());
         assertEquals(userStoryDto.getDescription().getText(), project_2022_1.getUserStoryList().get(0).getDescription().getText());

@@ -43,7 +43,7 @@ public class GetScrumBoardControllerTest {
         assertEquals(controller.getScrumBoard().get(0).getUserStoryPriority(),mapper.toDTO(userStory).getUserStoryPriority());
         assertEquals(controller.getScrumBoard().get(0).getUserStoryTimeEstimate(),mapper.toDTO(userStory).getUserStoryTimeEstimate());
         assertEquals(controller.getScrumBoard().get(0).getUserStoryStatus(),mapper.toDTO(userStory).getUserStoryStatus());
-        assertEquals(controller.getScrumBoard().get(0).getUserStoryName(),mapper.toDTO(userStory).getUserStoryName());
+        assertEquals(controller.getScrumBoard().get(0).getUserStoryTitle(),mapper.toDTO(userStory).getUserStoryTitle());
         assertEquals(controller.getScrumBoard().get(0).getUserStoryDescription(),mapper.toDTO(userStory).getUserStoryDescription());
     }
 }

@@ -7,7 +7,7 @@ public class UserStoryMapper {
 
 
     public UserStory toModel(UserStoryDto createUserStoryDto) {
-        return new UserStory(createUserStoryDto.getName(), createUserStoryDto.getUserStoryStatus(), createUserStoryDto.getPriority(), createUserStoryDto.getDescription().getText());
+        return new UserStory(createUserStoryDto.getTitle(), createUserStoryDto.getUserStoryStatus(), createUserStoryDto.getPriority(), createUserStoryDto.getDescription().getText());
     }
 
 
