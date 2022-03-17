@@ -1,13 +1,8 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import lombok.Setter;
 import switch2021.project.Immutables.Description;
-
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Objects;
-import java.util.Scanner;
 
 @Getter
 public class Typology {

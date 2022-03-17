@@ -185,7 +185,7 @@ public class ProjectTeamTest {
     public void getCurrentResourcesNamesTestSuccess() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -212,7 +212,7 @@ public class ProjectTeamTest {
     public void getCurrentResourcesNamesTestFail() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -241,7 +241,7 @@ public class ProjectTeamTest {
     public void createResourceTestSuccess() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -264,7 +264,7 @@ public class ProjectTeamTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             //Project 1
@@ -285,7 +285,7 @@ public class ProjectTeamTest {
     public void saveResourceTestSuccess() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -306,7 +306,7 @@ public class ProjectTeamTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             //Project 1
@@ -329,7 +329,7 @@ public class ProjectTeamTest {
     public void assignProjectRoleTestSuccessWithRoleInTheTeam() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -360,7 +360,7 @@ public class ProjectTeamTest {
     public void assignProjectRoleTestSuccessWithOutRoleInTheTeam() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -392,7 +392,7 @@ public class ProjectTeamTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             //Project 1
@@ -421,7 +421,7 @@ public class ProjectTeamTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             //Project 1
@@ -443,7 +443,7 @@ public class ProjectTeamTest {
     public void hasCurrentResourceTestSuccess() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -539,7 +539,7 @@ public class ProjectTeamTest {
     public void hasCurrentResourceFailResourceNotPresent() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -580,7 +580,7 @@ public class ProjectTeamTest {
     public void hasCurrentResourceFailResourceNotCurrent() {
             //Arrange
             Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
                 //Project 1
@@ -598,7 +598,7 @@ public class ProjectTeamTest {
     public void getCurrentResource() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -624,7 +624,7 @@ public class ProjectTeamTest {
     public void getCurrentResourceNull() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             //Project 1
@@ -642,7 +642,7 @@ public class ProjectTeamTest {
     public void assignScrumMasterWithoutRepeatedTestSize() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -689,7 +689,7 @@ public class ProjectTeamTest {
     public void assignScrumMasterWithRepeatedTestSize() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -718,7 +718,7 @@ public class ProjectTeamTest {
     public void validateProjectTeamSuccess() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             //Project 1
@@ -770,7 +770,7 @@ public class ProjectTeamTest {
     public void validateProjectTeamGlobalFail() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -820,7 +820,7 @@ public class ProjectTeamTest {
     public void validateProjectTeamPOFail() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -870,7 +870,7 @@ public class ProjectTeamTest {
     public void validateProjectTeamSMFail() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -919,7 +919,7 @@ public class ProjectTeamTest {
     public void checkIfTheRoleExistAndIsCurrentFalseNullandTeamMember() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -978,7 +978,7 @@ public class ProjectTeamTest {
     public void checkIfTheRoleExistAndIsCurrentTrueProductOwner() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -1023,7 +1023,7 @@ public class ProjectTeamTest {
     public void checkIfTheRoleExistAndIsCurrentTrueProductOwnerFail() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1

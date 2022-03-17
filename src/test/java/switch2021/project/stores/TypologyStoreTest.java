@@ -1,6 +1,6 @@
 package switch2021.project.stores;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.Immutables.Description;
 import switch2021.project.model.Company;
@@ -13,15 +13,12 @@ public class TypologyStoreTest {
     private Company company;
     private TypologyStore typologyStore;
 
-    @BeforeEach
-    public void initialize() {
-        company = new Company();
-        typologyStore = company.getTypologyStore();
-    }
-
+    @DisplayName("Test typology list and equal to a different list")
     @Test
     public void typologyStoreTest() {
         //Arrange
+        company = new Company();
+        typologyStore = company.getTypologyStore();
         TypologyStore test = new TypologyStore();
         //Assert
         assertEquals( 0, test.getTypologyList().size());
@@ -31,6 +28,8 @@ public class TypologyStoreTest {
     @Test
     public void populateTypologyList() {
         //Arrange
+        company = new Company();
+        typologyStore = company.getTypologyStore();
         TypologyStore test = new TypologyStore();
         Typology tes1 = new Typology("Fixed Cost");
         Typology tes2 = new Typology("Time and Materials");
@@ -39,13 +38,15 @@ public class TypologyStoreTest {
         //Assert
         assertEquals( 2,test.getTypologyList().size());
         assertEquals(test.getTypologyList(), typologyStore.getTypologyList());
-        assertEquals(tes1, test.getTypology("Fixed Cost"));
-        assertEquals(tes2, test.getTypology("Time and Materials"));
+        assertEquals(tes1, test.getTypologyByDescription("Fixed Cost"));
+        assertEquals(tes2, test.getTypologyByDescription("Time and Materials"));
     }
 
     @Test
     public void createTypologyTestWhitEmptyDescription(){
         //Assert
+        company = new Company();
+        typologyStore = company.getTypologyStore();
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange and act
             typologyStore.createTypology("");
@@ -60,6 +61,8 @@ public class TypologyStoreTest {
     @Test //Test for adding new typology not null at Typology List checking attributes and list size.
     public void saveTypologyTestNotNull() {
         //Arrange
+        company = new Company();
+        typologyStore = company.getTypologyStore();
         Typology typo2 = new Typology("Test");
         //Act
         typologyStore.saveTypology(typo2);
@@ -71,6 +74,8 @@ public class TypologyStoreTest {
     @Test //Test for adding new null typology at Typology List checking attributes and list size.
     public void saveTypologyTestNull() {
         //Assert
+        company = new Company();
+        typologyStore = company.getTypologyStore();
         assertThrows (IllegalArgumentException.class, () -> {
             //Arrange
             Typology typo2 = new Typology("");
@@ -82,6 +87,8 @@ public class TypologyStoreTest {
     @Test
     public void addMultiplesTypologiesAtSameTime() {
         //Arrange
+        company = new Company();
+        typologyStore = company.getTypologyStore();
         Typology typo2 = new Typology("TestTypology2");
         Typology typo3 = new Typology("TestTypology3");
         Typology typo4 = new Typology("TestTypology4");
@@ -104,17 +111,22 @@ public class TypologyStoreTest {
 
     @Test
     public void getTypologyWithDescriptionTest(){
-        //Arrange //Act
-
-        Typology descriptionTest = typologyStore.getTypology("Time and Materials");
+        //Arrange
+        company = new Company();
+        typologyStore = company.getTypologyStore();
+        // Act
+        Typology descriptionTest = typologyStore.getTypologyByDescription("Time and Materials");
         //Assert
         assertEquals(descriptionTest, new Typology("Time and Materials"));
     }
 
     @Test
     public void getTypologyWithWrongDescriptionTest(){
-        //Arrange //Act
-        Typology descriptionTest = typologyStore.getTypology("time and materials");
+        //Arrange
+        company = new Company();
+        typologyStore = company.getTypologyStore();
+        // Act
+        Typology descriptionTest = typologyStore.getTypologyByDescription("time and materials");
         //Assert
         assertNull(descriptionTest);
     }
@@ -122,6 +134,8 @@ public class TypologyStoreTest {
     @Test
     public void getTypologyListTest() {
         //Arrange
+        company = new Company();
+        typologyStore = company.getTypologyStore();
         TypologyStore test = new TypologyStore();
         //Act
         test.populateDefault();
@@ -132,6 +146,8 @@ public class TypologyStoreTest {
     @Test
     public void validateTypology(){
         //Arrange
+        company = new Company();
+        typologyStore = company.getTypologyStore();
         Typology typo = new Typology("test");
         Typology typo1 = new Typology("Tes");
         Typology typo2 = new Typology("Test2");
@@ -145,6 +161,8 @@ public class TypologyStoreTest {
     @Test
     public void thisNotExistTest() {
         //Arrange
+        company = new Company();
+        typologyStore = company.getTypologyStore();
         Typology typo = new Typology("Test");
         //Act
         company.getTypologyStore().saveTypology(typo);
@@ -157,6 +175,8 @@ public class TypologyStoreTest {
     public void thisExistTest() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
+            company = new Company();
+            typologyStore = company.getTypologyStore();
             //Arrange
             Typology typo = new Typology("teste");
             Typology typo1 = new Typology("teste");

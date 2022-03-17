@@ -24,7 +24,7 @@ class UserStoryEffortControllerTest {
         SystemUser user = new SystemUser("Test", "xxxx@isep.ipp.pt",
                 "tester", "123456", "123456", "IMG_123", userProfile);
         systemUserStore.saveSystemUser(user); //salvo o user
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate startDate = LocalDate.of(2021, 12, 31);
@@ -68,7 +68,7 @@ class UserStoryEffortControllerTest {
         SystemUser user = new SystemUser("Test", "xxxx@isep.ipp.pt",
                 "tester", "123456", "123456", "IMG_123", userProfile);
         systemUserStore.saveSystemUser(user); //salvo o user
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
@@ -99,7 +99,7 @@ class UserStoryEffortControllerTest {
         //Arrange
         Company company = new Company();
         UserStoryEffortController controller = new UserStoryEffortController(company);
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
@@ -118,7 +118,7 @@ class UserStoryEffortControllerTest {
     void getSprintBacklog() {
         Company company = new Company();
         UserStoryEffortController controller = new UserStoryEffortController(company);
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
@@ -143,7 +143,7 @@ class UserStoryEffortControllerTest {
         //Arrange
         Company company = new Company();
         UserStoryEffortController controller = new UserStoryEffortController(company);
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
