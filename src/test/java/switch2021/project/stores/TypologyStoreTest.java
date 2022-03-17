@@ -260,7 +260,7 @@ public class TypologyStoreTest {
         typo2.populateDefault();
 
         assertEquals(typo, typo2);
-        assertTrue(typo.equals(typo2));
+        assertEquals(typo, typo);
     }
 
     @DisplayName("Override not Equal")
