@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.Immutables.Date;
 import switch2021.project.Immutables.HoursMinutes;
+import switch2021.project.Immutables.TaskStatus;
 import switch2021.project.utils.App;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;

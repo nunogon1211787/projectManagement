@@ -1,11 +1,8 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.TaskStatus;
-
-import java.util.ArrayList;
+import switch2021.project.Immutables.TaskStatus;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskStatusStoreTest {
