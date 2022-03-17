@@ -70,7 +70,7 @@ public class SprintListTest {
         //Act
         String name = "Sprint_1";
         //Assert
-        assertEquals(name, sprint.getName());
+        assertEquals(name, sprint.getSprintName().getText());
         assertEquals(date, sprint.getStartDate());
         assertEquals(LocalDate.of(2022, 1, 14), sprint.getEndDate());
 
@@ -83,7 +83,7 @@ public class SprintListTest {
         String name = "Sprint_2";
 
         //Assert
-        assertNotEquals(name, sprint.getName());
+        assertNotEquals(name, sprint.getSprintName());
         assertEquals(date, sprint.getStartDate());
         assertEquals(LocalDate.of(2022, 1, 14), sprint.getEndDate());
 
@@ -99,7 +99,7 @@ public class SprintListTest {
         String name = "Sprint_1";
 
         //Assert
-        assertEquals(name, sprintTest.getName());
+        assertEquals(name, sprintTest.getSprintName().getText());
         assertNotEquals(date, sprintTest.getStartDate());
         assertEquals(LocalDate.of(2022, 1, 15), sprintTest.getEndDate());
 
@@ -115,7 +115,7 @@ public class SprintListTest {
         String name = "Sprint_1";
 
         //Assert
-        assertEquals(name, sprintTest.getName());
+        assertEquals(name, sprintTest.getSprintName().getText());
         assertEquals(date, sprintTest.getStartDate());
         assertNotEquals(LocalDate.of(2022, 1, 16), sprintTest.getEndDate());
 
@@ -132,7 +132,7 @@ public class SprintListTest {
         String name = "Sprint_2";
 
         //Assert
-        assertNotEquals(name, sprintTest.getName());
+        assertNotEquals(name, sprintTest.getSprintName());
         assertNotEquals(date, sprintTest.getStartDate());
         assertNotEquals(LocalDate.of(2022, 2, 16), sprintTest.getEndDate());
 
