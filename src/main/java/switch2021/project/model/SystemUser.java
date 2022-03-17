@@ -220,14 +220,13 @@ public class SystemUser {
     }
 
     public boolean hasName(String name) {
-
         return this.userName.getNameF().equals(name);
     }
+
 
     /**
      * Method to validate if user as already has the profile requested
      */
-
     public boolean hasProfile(UserProfile profile) {
         boolean profileStatus = false;
 
@@ -244,9 +243,8 @@ public class SystemUser {
     /**
      * Method to verify if the object has the received parameters.
      */
-
+    //REVIEW
     private int hasPartiallyName (String name){
-
         int result = 0;
 
         if (!name.isEmpty()) {
@@ -257,13 +255,10 @@ public class SystemUser {
                 result = -1;
             }
         }
-
         return result;
-
     }
-
+    //REVIEW
     private int hasPartiallyEmail (String email){
-
         int result = 0;
 
         if (!email.isEmpty()) {
@@ -274,13 +269,10 @@ public class SystemUser {
                 result = -1;
             }
         }
-
         return result;
-
     }
-
+    //REVIEW
     private int hasPartiallyFunction (String function){
-
         int result = 0;
 
         if (!function.isEmpty()) {
@@ -291,14 +283,11 @@ public class SystemUser {
                 result = -1;
             }
         }
-
         return result;
     }
-
+    //REVIEW
     private int hasState (int state) {
-
         int result = 0;
-
         int check = this.activateUser ? 1 : 0;
 
         if (state != -1) {
@@ -308,19 +297,14 @@ public class SystemUser {
                 result = -1;
             }
         }
-
         return result;
-
     }
-
+    //REVIEW
     private int hasAllProfilesInTheList (List<UserProfile> profiles){
-
         int result = 0;
 
         if (!profiles.isEmpty()) {
-
             if (this.assignedProfileList != null) {
-
                 int count = 0;
 
                 for (UserProfile k : profiles) {
@@ -328,54 +312,41 @@ public class SystemUser {
                         count++;
                     }
                 }
-
                 if (count == profiles.size()) {
                     result = 1;
                 } else{
                     result = -1;
                 }
-
             }
         }
-
         return result;
-
     }
-
+    //REVIEW
     public boolean hasThisData(String userName, String email, String function, int state, List<UserProfile> profileChoosenList) {
-
         boolean result = false;
 
         // Check if the object has the userName parameter.
-
         int res1 = hasPartiallyName(userName);
 
         // Check if the object has the email parameter.
-
         int res2 = hasPartiallyEmail(email);
 
         // Check if the object has the function parameter.
-
         int res3 = hasPartiallyFunction(function);
 
         // Check if the object has the state parameter.
-
         int res4 = hasState(state);
 
         // Check if the object has the list profiles parameter.
-
         int res5 = hasAllProfilesInTheList(profileChoosenList);
 
         if(res1 != -1 && res2 != -1 && res3 != -1 && res4 != -1 && res5 != -1) {
-
             int match = res1 + res2 + res3 + res4 + res5;
 
             if (match > 0) {
                 result = true;
             }
-
         }
-
         return result;
     }
 
