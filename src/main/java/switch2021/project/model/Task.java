@@ -2,10 +2,9 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.Immutables.Date;
-import switch2021.project.Immutables.HoursMinutes;
+import switch2021.project.immutable.Date;
+import switch2021.project.immutable.TaskStatus;
 import switch2021.project.utils.App;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -187,10 +186,12 @@ public class Task {
     }
 
     public double updateEffortRemaining(TaskEffort effort) {
-        if (this.effortRemaining < effortInHours(effort))
-            return this.effortRemaining = 0.0;
-
-        return this.effortRemaining -= effortInHours(effort);
+        if (this.effortRemaining < effortInHours(effort)) {
+            this.effortRemaining = 0.0;
+        } else {
+            this.effortRemaining -= effortInHours(effort);
+        }
+        return this.effortRemaining;
     }
 
     private double updateExecutionPercentage() {

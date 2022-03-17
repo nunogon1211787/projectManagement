@@ -1,7 +1,6 @@
-package switch2021.project.Immutables;
+package switch2021.project.immutable;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Objects;
 
@@ -11,16 +10,16 @@ public class Description {
     /**
      * Attributes
      **/
-    private String text;
-    private int MIN_DESCRIPTION_LENGTH = 1;
-    private int MAX_DESCRIPTION_LENGTH = 1000;
+    private final String text;
+    private final int MIN_DESCRIPTION_LENGTH = 1;
+    private final int MAX_DESCRIPTION_LENGTH = 1000;
 
     /**
      * Constructor
      **/
     public Description (String description) {
         if (description == null)
-            throw new IllegalArgumentException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + " characters");
+            throw new NullPointerException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + " characters");
         if (description.trim().length() < MIN_DESCRIPTION_LENGTH)
             throw new IllegalArgumentException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + " characters");
         if (description.trim().length() > MAX_DESCRIPTION_LENGTH)

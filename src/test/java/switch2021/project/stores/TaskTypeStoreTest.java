@@ -2,10 +2,12 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Description;
+import switch2021.project.immutable.Description;
 import switch2021.project.model.TaskType;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class TaskTypeStoreTest {
 
@@ -102,11 +104,19 @@ class TaskTypeStoreTest {
         //Act
         int x = test.getTaskTypesDescription().size();
         String y = test.getTaskTypesDescription().get(0);
-        int z = test.getTypeByDescription("test1").getTypeID();
         //Asserts
         assertEquals(1, x);
         assertEquals("test1", y);
-        assertEquals(1, z);
+    }
+
+    @Test
+    @DisplayName("Test to verify the creation and save method, with success.")
+    void createAndSaveTaskType_Success(){
+        //Arrange
+        TaskTypeStore test = new TaskTypeStore();
+        boolean y = test.createTaskType("test1");
+        //Act and Assert
+        assertTrue(y);
     }
 
     @Test
@@ -148,34 +158,48 @@ class TaskTypeStoreTest {
     }
 
     @Test
-    @DisplayName("Test to verify if a task is saved, the ID is setted and the same task is getted with success")
-    void saveTaskTypeIDSuccess() {
+    @DisplayName("Test with mock if the description is returned, with success.")
+    void getTypeByDescriptionSuccess() {
         //Arrange
         TaskTypeStore test = new TaskTypeStore();
-        TaskType type1 = new TaskType("type1");
-        TaskType type2 = new TaskType("type2");
+        TaskType type1 = mock(TaskType.class);
+        when(type1.hasDescription("test1")).thenReturn(true);
         test.saveTaskType(type1);
-        test.saveTaskType(type2);
         //Act
-        int x = type1.getTypeID();
+        TaskType x = test.getTypeByDescription("test1");
         //Assert
-        assertEquals(1, x);
+        assertEquals(type1, x);
     }
 
     @Test
-    @DisplayName("Test to verify if a task is saved, the ID is setted and the same task is getted with insuccess")
-    void saveTaskTypeIDInsuccess() {
+    @DisplayName("Test with mock if the description is returned, with insuccess.")
+    void getTypeByDescriptionInsuccess() {
         //Arrange
         TaskTypeStore test = new TaskTypeStore();
-        TaskType type1 = new TaskType("type1");
-        TaskType type2 = new TaskType("type2");
+        TaskType type1 = mock(TaskType.class);
+        when(type1.hasDescription("test1")).thenReturn(true);
         test.saveTaskType(type1);
-        test.saveTaskType(type2);
         //Act
-        int x = type1.getTypeID();
+        TaskType x = test.getTypeByDescription("test2");
         //Assert
-        assertNotEquals(2, x);
+        assertNotEquals(type1, x);
     }
+
+    @Test
+    @DisplayName("Test with mock to verify if a task is saved, with success")
+    void saveTaskType_Success() {
+        //Arrange
+        TaskTypeStore test = new TaskTypeStore();
+        TaskType tasktype = mock(TaskType.class);
+        Description description = mock(Description.class);
+        when(tasktype.getDescription()).thenReturn(description);
+        when(description.getText()).thenReturn("test1");
+        //Act
+        test.saveTaskType(tasktype);
+        //Assert
+        assertEquals("test1", tasktype.getDescription().getText());
+    }
+
 
     @Test
     @DisplayName("Test to verify if is possible to save two task type with repeated description.")
@@ -183,8 +207,8 @@ class TaskTypeStoreTest {
         //Arrange
         TaskTypeStore test = new TaskTypeStore();
         TaskType type1 = new TaskType("type1");
-        TaskType type2 = new TaskType("type1");
         test.saveTaskType(type1);
+        TaskType type2 = new TaskType("type1");
         test.saveTaskType(type2);
         //Act
         int x = test.getTaskTypesDescription().size();
@@ -207,19 +231,10 @@ class TaskTypeStoreTest {
         assertEquals(0, x);
     }
 
-    @Test
-    @DisplayName("Hash code test - different objects.")
-    void TaskTypeStoreConstructorTest_1() {
-        //Arrange
-        TaskTypeStore test1 = new TaskTypeStore();
-        TaskTypeStore test2 = new TaskTypeStore();
-        //Assert
-        assertNotSame(test1, test2);
-    }
 
     @Test
-    @DisplayName("Hash code test - equal objects.")
-    void TaskTypeStoreConstructorTest_2() {
+    @DisplayName("Override test - equal objects.")
+    void TaskTypeStoreOverrideTest_1() {
         //Arrange
         TaskTypeStore test1 = new TaskTypeStore();
         TaskTypeStore test2 = new TaskTypeStore();
@@ -228,30 +243,68 @@ class TaskTypeStoreTest {
     }
 
     @Test
-    @DisplayName("Hash code test - equals stores.")
-    void TaskTypeStoreConstructorTest_3() {
+    @DisplayName("Test 2 to check Override Method, two different objects.")
+    void TaskTypeStoreOverrideTest_2() {
         //Arrange
         TaskTypeStore test1 = new TaskTypeStore();
-        TaskTypeStore test2 = new TaskTypeStore();
-        //Act
-        Object x = test1.hashCode();
-        Object y = test2.hashCode();
+        TaskTypeStore test2 = null;
         //Assert
-        assertEquals(x, y);
+        assertNotEquals(test1, test2);
     }
 
+
     @Test
-    @DisplayName("Hash code test - different lists.")
-    void TaskTypeStoreConstructorTest() {
+    @DisplayName("Hash code test - equal lists.")
+    void TaskTypeStoreOverrideTest_3() {
         //Arrange
         TaskTypeStore test1 = new TaskTypeStore();
         List<TaskType> test1List = test1.getTaskTypeList();
         TaskTypeStore test2 = new TaskTypeStore();
         List<TaskType> test2List = test2.getTaskTypeList();
         //Act
-        int x = test1List.hashCode();
-        int y = test2List.hashCode();
+        boolean x = equals(test1List);
+        boolean y = equals(test2List);
         //Assert
         assertEquals(x,y);
     }
+
+    @Test
+    @DisplayName("Hash code test - equal lists.")
+    void TaskTypeStoreOverride_4() {
+        //Arrange
+        TaskTypeStore test1 = new TaskTypeStore();
+        TaskTypeStore test2 = new TaskTypeStore();
+        //Act
+        boolean x = equals(test1);
+        boolean y = equals(test2);
+        //Assert
+        assertEquals(x,y);
+    }
+
+    @Test
+    @DisplayName("Hash code test - equal objects.")
+    void hashCodeTest_1() {
+        //Arrange
+        TaskTypeStore test1 = new TaskTypeStore();
+        TaskTypeStore test2 = new TaskTypeStore();
+        //Act
+        int x = test1.hashCode();
+        int y = test2.hashCode();
+        //Assert
+        assertEquals(x,y);
+    }
+    @Test
+    @DisplayName("Hash code test - different objects.")
+    void hashCodeTest_2() {
+        //Arrange
+        TaskTypeStore test1 = new TaskTypeStore();
+        TaskTypeStore test2 = new TaskTypeStore();
+        test1.populateDefault();
+        //Act
+        int x = test1.hashCode();
+        int y = test2.hashCode();
+        //Assert
+        assertNotEquals(x,y);
+    }
+
 }

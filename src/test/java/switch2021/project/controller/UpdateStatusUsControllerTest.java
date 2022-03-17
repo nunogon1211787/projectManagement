@@ -63,7 +63,7 @@ class UpdateStatusUsControllerTest {
         UpdateStatusUsController update = new UpdateStatusUsController(company);
         this.userStoryStatusStore.populateDefault();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypology("Fixed Cost");
+        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,

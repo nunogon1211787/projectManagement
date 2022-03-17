@@ -2,7 +2,7 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Description;
+import switch2021.project.immutable.Description;
 import switch2021.project.model.UserStoryStatus;
 
 import java.util.List;

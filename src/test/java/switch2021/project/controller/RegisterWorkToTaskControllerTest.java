@@ -1,8 +1,7 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Date;
-import switch2021.project.Immutables.HoursMinutes;
+import switch2021.project.immutable.Date;
 import switch2021.project.dto.TaskEffortDTO;
 import switch2021.project.dto.TaskIdNameDTO;
 import switch2021.project.dto.UserStorySprintProjectDTO;
@@ -25,7 +24,7 @@ public class RegisterWorkToTaskControllerTest {
         RegisterWorkToTaskController controller = new RegisterWorkToTaskController(company, mapper);
         ProjectStore projectStore = company.getProjectStore();
         //Project
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -76,7 +75,7 @@ public class RegisterWorkToTaskControllerTest {
         RegisterWorkToTaskController controller = new RegisterWorkToTaskController(company, mapper);
         ProjectStore projectStore = company.getProjectStore();
         //Project
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -130,7 +129,7 @@ public class RegisterWorkToTaskControllerTest {
         RegisterWorkToTaskController controller = new RegisterWorkToTaskController(company, mapper);
         ProjectStore projectStore = company.getProjectStore();
         //Project
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,

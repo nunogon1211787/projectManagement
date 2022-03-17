@@ -2,7 +2,8 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.Immutables.Function;
+import switch2021.project.immutable.Function;
+import switch2021.project.immutable.Name;
 import switch2021.project.stores.UserProfileStore;
 import switch2021.project.utils.App;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class SystemUser {
     /**
      * Attributes of systemUser´s class
      **/
-    private String userName;
+    private Name userName;
     private final String email;
     private String photo;
     private String password;
@@ -28,13 +29,13 @@ public class SystemUser {
     /**
      * Constructor
      **/
-    public SystemUser (String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile profile) {
+    public SystemUser (String userName, String email, String function, String password, String passwordConfirmation,
+                       String photo, UserProfile profile) {
         checkUserNameRules(userName);
         checkEmailRules(email);
-        checkFunctionRules(function);
         checkPasswordRules(password);
         checkProfileRules(profile);
-        this.userName = userName;
+        this.userName = new Name(userName);
         this.email = email;
         this.photo = photo;
         this.function = new Function(function);
@@ -61,7 +62,7 @@ public class SystemUser {
      **/
     public void setUserName(String userName) {
         if (!userName.trim().isEmpty() && (userName.length() >= 1)) {
-            this.userName = userName;
+            this.userName = new Name(userName);
         }
     }
 
@@ -120,12 +121,6 @@ public class SystemUser {
             throw new IllegalArgumentException("Email must be at least 2 characters");
     }
 
-    private void checkFunctionRules(String function) {
-        if (function.trim().isEmpty())
-            throw new IllegalArgumentException("Function cannot be empty.");
-        if ((function.length() < 2))
-            throw new IllegalArgumentException("Function must be at least 2 characters");
-    }
 
     private void checkPasswordRules(String password) {
         if (password.trim().isEmpty())
@@ -225,14 +220,13 @@ public class SystemUser {
     }
 
     public boolean hasName(String name) {
-
-        return this.userName.equals(name);
+        return this.userName.getNameF().equals(name);
     }
+
 
     /**
      * Method to validate if user as already has the profile requested
      */
-
     public boolean hasProfile(UserProfile profile) {
         boolean profileStatus = false;
 
@@ -249,26 +243,22 @@ public class SystemUser {
     /**
      * Method to verify if the object has the received parameters.
      */
-
+    //REVIEW
     private int hasPartiallyName (String name){
-
         int result = 0;
 
         if (!name.isEmpty()) {
-            int idxString = this.userName.toLowerCase().indexOf(name.toLowerCase());
+            int idxString = this.userName.getNameF().toLowerCase().indexOf(name.toLowerCase());
             if (idxString != -1) {
                 result = 1;
             } else {
                 result = -1;
             }
         }
-
         return result;
-
     }
-
+    //REVIEW
     private int hasPartiallyEmail (String email){
-
         int result = 0;
 
         if (!email.isEmpty()) {
@@ -279,13 +269,10 @@ public class SystemUser {
                 result = -1;
             }
         }
-
         return result;
-
     }
-
+    //REVIEW
     private int hasPartiallyFunction (String function){
-
         int result = 0;
 
         if (!function.isEmpty()) {
@@ -296,14 +283,11 @@ public class SystemUser {
                 result = -1;
             }
         }
-
         return result;
     }
-
+    //REVIEW
     private int hasState (int state) {
-
         int result = 0;
-
         int check = this.activateUser ? 1 : 0;
 
         if (state != -1) {
@@ -313,19 +297,15 @@ public class SystemUser {
                 result = -1;
             }
         }
-
         return result;
-
     }
-
+    //REVIEW
     private int hasAllProfilesInTheList (List<UserProfile> profiles){
-
         int result = 0;
 
         if (!profiles.isEmpty()) {
-
-            if (this.assignedProfileList != null) {
-
+            //Review, the assignedProfileList isn't null because is created in the constructor...
+//            if (this.assignedProfileList != null) {
                 int count = 0;
 
                 for (UserProfile k : profiles) {
@@ -333,54 +313,41 @@ public class SystemUser {
                         count++;
                     }
                 }
-
                 if (count == profiles.size()) {
                     result = 1;
                 } else{
                     result = -1;
                 }
-
             }
-        }
-
+//        }
         return result;
-
     }
-
+    //REVIEW
     public boolean hasThisData(String userName, String email, String function, int state, List<UserProfile> profileChoosenList) {
-
         boolean result = false;
 
         // Check if the object has the userName parameter.
-
         int res1 = hasPartiallyName(userName);
 
         // Check if the object has the email parameter.
-
         int res2 = hasPartiallyEmail(email);
 
         // Check if the object has the function parameter.
-
         int res3 = hasPartiallyFunction(function);
 
         // Check if the object has the state parameter.
-
         int res4 = hasState(state);
 
         // Check if the object has the list profiles parameter.
-
         int res5 = hasAllProfilesInTheList(profileChoosenList);
 
         if(res1 != -1 && res2 != -1 && res3 != -1 && res4 != -1 && res5 != -1) {
-
             int match = res1 + res2 + res3 + res4 + res5;
 
             if (match > 0) {
                 result = true;
             }
-
         }
-
         return result;
     }
 

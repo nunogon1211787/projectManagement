@@ -1,8 +1,7 @@
-package switch2021.project.Immutables;
+package switch2021.project.immutable;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.Typology;
 
 import java.util.Arrays;
 
@@ -36,6 +35,17 @@ class FunctionTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             String atual = "";
+            //Act
+            Function expected = new Function(atual);
+        });
+    }
+
+    @Test
+    public void checkFunctionEmpty1() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String atual = null;
             //Act
             Function expected = new Function(atual);
         });
@@ -76,5 +86,6 @@ class FunctionTest {
         assertEquals(function,function1);
         assertNotEquals(function, function2);
         assertNotEquals(function, test);
+        assertEquals(function,function);
     }
 }

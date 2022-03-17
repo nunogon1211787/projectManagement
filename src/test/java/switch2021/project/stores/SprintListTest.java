@@ -31,7 +31,7 @@ public class SprintListTest {
     public void initialize() {
         company = new Company();
         projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
         company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste", 123456789));
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
@@ -70,7 +70,7 @@ public class SprintListTest {
         //Act
         String name = "Sprint_1";
         //Assert
-        assertEquals(name, sprint.getName());
+        assertEquals(name, sprint.getSprintName().getText());
         assertEquals(date, sprint.getStartDate());
         assertEquals(LocalDate.of(2022, 1, 14), sprint.getEndDate());
 
@@ -83,7 +83,7 @@ public class SprintListTest {
         String name = "Sprint_2";
 
         //Assert
-        assertNotEquals(name, sprint.getName());
+        assertNotEquals(name, sprint.getSprintName());
         assertEquals(date, sprint.getStartDate());
         assertEquals(LocalDate.of(2022, 1, 14), sprint.getEndDate());
 
@@ -99,7 +99,7 @@ public class SprintListTest {
         String name = "Sprint_1";
 
         //Assert
-        assertEquals(name, sprintTest.getName());
+        assertEquals(name, sprintTest.getSprintName().getText());
         assertNotEquals(date, sprintTest.getStartDate());
         assertEquals(LocalDate.of(2022, 1, 15), sprintTest.getEndDate());
 
@@ -115,7 +115,7 @@ public class SprintListTest {
         String name = "Sprint_1";
 
         //Assert
-        assertEquals(name, sprintTest.getName());
+        assertEquals(name, sprintTest.getSprintName().getText());
         assertEquals(date, sprintTest.getStartDate());
         assertNotEquals(LocalDate.of(2022, 1, 16), sprintTest.getEndDate());
 
@@ -132,7 +132,7 @@ public class SprintListTest {
         String name = "Sprint_2";
 
         //Assert
-        assertNotEquals(name, sprintTest.getName());
+        assertNotEquals(name, sprintTest.getSprintName());
         assertNotEquals(date, sprintTest.getStartDate());
         assertNotEquals(LocalDate.of(2022, 2, 16), sprintTest.getEndDate());
 
@@ -240,7 +240,7 @@ public class SprintListTest {
     public void startASprintSuccess() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -252,7 +252,7 @@ public class SprintListTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
@@ -260,7 +260,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana1R);
 
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
@@ -268,7 +268,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana2R);
 
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
@@ -276,7 +276,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana3R);
 
         //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -302,7 +302,7 @@ public class SprintListTest {
     public void startASprintFail_ProjectTeam() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -314,7 +314,7 @@ public class SprintListTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
@@ -322,7 +322,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana1R);
 
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
@@ -330,7 +330,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana2R);
 
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
@@ -338,7 +338,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana3R);
 
         //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -361,7 +361,7 @@ public class SprintListTest {
     public void startASprintFail_SprintID() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -373,7 +373,7 @@ public class SprintListTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
@@ -381,7 +381,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana1R);
 
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
@@ -389,7 +389,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana2R);
 
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
@@ -397,7 +397,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana3R);
 
         //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -420,7 +420,7 @@ public class SprintListTest {
     public void startASprintFail_StartDate() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -432,7 +432,7 @@ public class SprintListTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
@@ -440,7 +440,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana1R);
 
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
@@ -448,7 +448,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana2R);
 
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
@@ -456,7 +456,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana3R);
 
         //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -479,7 +479,7 @@ public class SprintListTest {
     public void startASprintFail() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -491,7 +491,7 @@ public class SprintListTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
@@ -499,7 +499,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana1R);
 
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
@@ -507,7 +507,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana2R);
 
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
@@ -515,7 +515,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana3R);
 
         //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);

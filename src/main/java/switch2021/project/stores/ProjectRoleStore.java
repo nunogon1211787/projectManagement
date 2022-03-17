@@ -10,7 +10,7 @@ import java.util.Objects;
 public class ProjectRoleStore {
 
     /*** Project Role List **/
-    private List<ProjectRole> projectRoleList;
+    private final List<ProjectRole> projectRoleList;
 
 
     /*** Project Role Store Constructor **/

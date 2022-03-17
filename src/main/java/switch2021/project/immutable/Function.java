@@ -1,4 +1,4 @@
-package switch2021.project.Immutables;
+package switch2021.project.immutable;
 
 import java.util.Objects;
 
@@ -7,17 +7,18 @@ public class Function {
 
     /*** Attributes **/
     private final String text;
-    private final int MIN_DESCRIPTION_LENGTH = 1;
+    private final int MIN_DESCRIPTION_LENGTH = 2;
     private final int MAX_DESCRIPTION_LENGTH = 20;
 
     /*** Constructor **/
     public Function (String function) {
+        String x = " characters";
         if (function == null)
-            throw new IllegalArgumentException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + " characters");
+            throw new IllegalArgumentException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + x);
         if (function.trim().length() < MIN_DESCRIPTION_LENGTH)
-            throw new IllegalArgumentException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + " characters");
+            throw new IllegalArgumentException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + x);
         if (function.trim().length() > MAX_DESCRIPTION_LENGTH)
-            throw new IllegalArgumentException("Description field cannot have more than " + MAX_DESCRIPTION_LENGTH + " characters");
+            throw new IllegalArgumentException("Description field cannot have more than " + MAX_DESCRIPTION_LENGTH + x);
         this.text = function;
     }
 

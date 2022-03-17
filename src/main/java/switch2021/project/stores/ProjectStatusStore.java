@@ -1,14 +1,12 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import lombok.Setter;
 import switch2021.project.model.ProjectStatus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
 
 public class ProjectStatusStore {
 
@@ -28,29 +26,25 @@ public class ProjectStatusStore {
      * Project Status Populator (Populates the Project Status List with pre-set objects)
      **/
     public void populateDefault() {
-        this.projectStatusList.add(new ProjectStatus("Planned"));
-        this.projectStatusList.add(new ProjectStatus("Inception"));
-        this.projectStatusList.add(new ProjectStatus("Elaboration"));
-        this.projectStatusList.add(new ProjectStatus("Construction"));
-        this.projectStatusList.add(new ProjectStatus("Transition"));
-        this.projectStatusList.add(new ProjectStatus("Warranty"));
-        this.projectStatusList.add(new ProjectStatus("Closed"));
+        createAndSaveProjectStatus("Planned");
+        createAndSaveProjectStatus("Inception");
+        createAndSaveProjectStatus("Elaboration");
+        createAndSaveProjectStatus("Construction");
+        createAndSaveProjectStatus("Transition");
+        createAndSaveProjectStatus("Warranty");
+        createAndSaveProjectStatus("Closed");
     }
 
     /**
      * Create Project Status (Creates a new Project Status object)
      **/
-    public ProjectStatus createProjectStatus(String description) {
-        return new ProjectStatus(description);
-    }
+    public boolean createAndSaveProjectStatus(String description) {
+        if (getProjectStatusByDescription(description) != null) {
+            throw new IllegalArgumentException("Project status already exists.");
+        }
+        ProjectStatus newProjectStatus = new ProjectStatus(description);
 
-    /**
-     * Add Project Status Method (Adds a new Project Status object to the Project Status List)
-     **/
-    public boolean add(ProjectStatus projStat) {
-        if (this.projectStatusList.contains(projStat))
-            return false;
-        return this.projectStatusList.add(projStat);
+        return this.projectStatusList.add(newProjectStatus);
     }
 
     /**
@@ -64,12 +58,11 @@ public class ProjectStatusStore {
         ProjectStatus status = null;
 
         for (ProjectStatus i : this.projectStatusList) {
-            if (i.getDescription().getText().equals(name)) {
-                 status = i;
+            if (i.getDescription().getText().trim().equalsIgnoreCase(name.trim())) {
+                status = i;
                 break;
             }
         }
         return status;
     }
-
 }

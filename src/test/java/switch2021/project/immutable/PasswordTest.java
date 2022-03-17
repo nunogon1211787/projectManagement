@@ -1,4 +1,4 @@
-package switch2021.project.Immutables;
+package switch2021.project.immutable;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

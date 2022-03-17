@@ -13,7 +13,7 @@ import java.util.Objects;
 @Getter
 @Setter
 
-public class ProjectStore {
+public class ProjectStore{
 
 
     /**

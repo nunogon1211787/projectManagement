@@ -1,7 +1,6 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import lombok.NonNull;
 import switch2021.project.utils.App;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -29,11 +28,11 @@ public class ProjectTeam {
      * Getters and Setters
      **/
     //Get resource by User
-    public Resource getResource(SystemUser user) {
+    public Resource getResourceByUser(SystemUser user) {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(user) && i.isCurrent()) {
+            if (i.isYourEmail(user) && i.isCurrent()) {
                 resource = i;
                 break;
             }
@@ -42,11 +41,11 @@ public class ProjectTeam {
     }
 
     //Get resource by Role
-    public Resource getResource(ProjectRole role) {
+    public Resource getResourceByRole(ProjectRole role) {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(role) && i.isCurrent()) {
+            if (i.isYourEmail(role) && i.isCurrent()) {
                 resource = i;
                 break;
             }
@@ -55,11 +54,11 @@ public class ProjectTeam {
     }
 
     //Get resource by E-mail
-    public Resource getResource(String email) {
+    public Resource getResourceByEmail(String email) {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(email) && i.isCurrent()) {
+            if (i.isYourEmail(email) && i.isCurrent()) {
                 resource = i;
                 break;
             }
@@ -85,13 +84,11 @@ public class ProjectTeam {
 
         for (Resource resource : this.projectTeamList) {
             if (resource.isCurrent()) {
-                currentResourcesNames.add(resource.getUser().getUserName());
+                currentResourcesNames.add(resource.getUser().getUserName().getNameF());
             }
         }
         return currentResourcesNames;
     }
-
-
 
 
     /**
@@ -111,18 +108,15 @@ public class ProjectTeam {
     }
 
 
-
     /**
      * Method to Get a Specific Resource (PO), by StartDate of the Sprint
      */
-    private Resource getProductOwnerByStartDate(LocalDate startDate, int sprintDuration) {
+    public Resource getProductOwnerByStartDate(LocalDate startDate, int sprintDuration) {
 
         Resource resource = null;
 
-        ProjectRole role = App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Product Owner");
-
         for (Resource i : projectTeamList) {
-            if (i.isYour(role) && i.isAvailableToSprint(startDate, sprintDuration)) {
+            if (i.isYourRole("Product Owner") && i.isAvailableToSprint(startDate, sprintDuration)) {
                 resource = i;
             }
         }
@@ -133,14 +127,14 @@ public class ProjectTeam {
     /**
      * Method to Get a Specific Resource (SM), by StartDate of the Sprint
      */
-    private Resource getScrumMasterByStartDate(LocalDate startDate, int sprintDuration) {
+    public Resource getScrumMasterByStartDate(LocalDate startDate, int sprintDuration) {
 
         Resource resource = null;
 
-        ProjectRole role = App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Scrum Master");
+        String role = "Scrum Master";
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(role) && i.isAvailableToSprint(startDate, sprintDuration)){
+            if (i.isYourRole(role) && i.isAvailableToSprint(startDate, sprintDuration)){
                 resource = i;
             }
         }
@@ -181,7 +175,7 @@ public class ProjectTeam {
             newResource = copyUpdateProjectRoleOfAResource(originalResource, startDateNewRole, projectRole);
             //At this moment, will check if exist any resource active and current as SM, PO or PM.
             if (checkIfTheRoleExistAndIsCurrent(newResource.getRole(), newResource.getStartDate())) {
-                Resource oldResourceRole = getResource(newResource.getRole()); //If existed, will create a copy and update the role for "Team Member".
+                Resource oldResourceRole = getResourceByRole(newResource.getRole()); //If existed, will create a copy and update the role for "Team Member".
                 ProjectRole teamMember = App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Team Member");
                 //Copy and save
                 Resource oldResourceRoleCopy = copyUpdateProjectRoleOfAResource(oldResourceRole, startDateNewRole, teamMember);
@@ -209,7 +203,7 @@ public class ProjectTeam {
         boolean msg = false;
         if (role != null && !role.getName().getText().equals("Team Member")) {
             for (Resource i : projectTeamList) {
-                if (i.isYour(role) && i.getEndDate().isAfter(startDate)) {
+                if (i.isYourEmail(role) && i.getEndDate().isAfter(startDate)) {
                     msg = true;
                     break;
                 }
@@ -222,7 +216,7 @@ public class ProjectTeam {
         boolean msg = false;
 
         for (Resource resource : this.projectTeamList) {
-            if (resource.isYour(email) && resource.isCurrent()) {
+            if (resource.isYourEmail(email) && resource.isCurrent()) {
                 msg = true;
             }
         }
@@ -233,7 +227,7 @@ public class ProjectTeam {
     public boolean hasResource(String email) {
         boolean msg = false;
         for (Resource resource : this.projectTeamList) {
-            if (resource.isYour(email)) {
+            if (resource.isYourEmail(email)) {
                 msg = true;
             }
         }
@@ -249,8 +243,8 @@ public class ProjectTeam {
         if (this == o) return true;
         if (!(o instanceof ProjectTeam)) return false;
         ProjectTeam that = (ProjectTeam) o;
-        boolean x = Objects.equals(this.projectTeamList, that.projectTeamList);
-        return x;
+        return Objects.equals(this.projectTeamList, that.projectTeamList);
+
     }
 
     @Override

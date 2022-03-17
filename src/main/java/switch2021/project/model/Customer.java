@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.immutable.Nif;
 
-import java.util.Objects;
-
 @Getter
 @Setter
 public class Customer {

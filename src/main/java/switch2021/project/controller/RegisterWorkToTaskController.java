@@ -1,6 +1,6 @@
 package switch2021.project.controller;
 
-import switch2021.project.Immutables.Date;
+import switch2021.project.immutable.Date;
 import switch2021.project.dto.TaskEffortDTO;
 import switch2021.project.dto.TaskIdNameDTO;
 import switch2021.project.dto.UserStorySprintProjectDTO;
@@ -8,9 +8,7 @@ import switch2021.project.mapper.RegisterWorkToTaskMapper;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
-import switch2021.project.stores.TaskList;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class RegisterWorkToTaskController {
