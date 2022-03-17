@@ -19,7 +19,7 @@ public class GetCurrentProjectListControllerTest {
         GetCurrentProjectListController controller = new GetCurrentProjectListController(company);
 
         ProjectStore projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -47,7 +47,7 @@ public class GetCurrentProjectListControllerTest {
         GetCurrentProjectListController controller = new GetCurrentProjectListController(company);
 
         ProjectStore projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -93,7 +93,7 @@ public class GetCurrentProjectListControllerTest {
         GetCurrentProjectListController controller = new GetCurrentProjectListController(company);
 
         ProjectStore projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,

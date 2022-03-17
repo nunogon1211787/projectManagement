@@ -24,12 +24,13 @@ public class CreateNewTypologyController {
      **/
 
     public boolean createTypology(String description) {
-
+        boolean msg;
         if (description.trim().isEmpty()) {
             throw new IllegalArgumentException("Description can't be blank.");
         } else {
-            Typology typology = this.company.getTypologyStore().createTypology(description);
-            return this.company.getTypologyStore().saveTypology(typology);
+            this.company.getTypologyStore().createTypology(description);
+            msg = true;
         }
+        return msg;
     }
 }

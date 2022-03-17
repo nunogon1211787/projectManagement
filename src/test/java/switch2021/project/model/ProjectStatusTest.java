@@ -27,26 +27,12 @@ public class ProjectStatusTest {
     }
 
     @Test
-    public void createProjectStatusFailDescriptionLengthEquals3() {
+    public void createProjectStatusSuccessDescriptionLengthEquals1() {
         //Arrange
-        String descriptionExpected = "new";
+        String descriptionExpected = "n";
         //Act
-        ProjectStatus projStatus = new ProjectStatus("new");
+        ProjectStatus projStatus = new ProjectStatus("n");
         //Assert
         assertEquals(descriptionExpected, projStatus.getDescription().getText());
-    }
-
-    @Test
-    public void setProjectStatusDescription() {
-        //Arrange
-        Company company = new Company();
-        ProjectStatusStore projectStatusStore = company.getProjectStatusStore();
-        ProjectStatus projStatus = projectStatusStore.getProjectStatusByDescription("Planned");
-
-        Description newStatusDescription = projectStatusStore.getProjectStatusByDescription("Elaboration").getDescription();
-        //Act
-        projStatus.setDescription(newStatusDescription);
-        //Assert
-        assertEquals("Elaboration", projStatus.getDescription().getText());
     }
 }

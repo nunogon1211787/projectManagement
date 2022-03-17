@@ -84,7 +84,7 @@ public class ProjectTeam {
 
         for (Resource resource : this.projectTeamList) {
             if (resource.isCurrent()) {
-                currentResourcesNames.add(resource.getUser().getUserName());
+                currentResourcesNames.add(resource.getUser().getUserName().getNameF());
             }
         }
         return currentResourcesNames;
@@ -243,8 +243,8 @@ public class ProjectTeam {
         if (this == o) return true;
         if (!(o instanceof ProjectTeam)) return false;
         ProjectTeam that = (ProjectTeam) o;
-        boolean x = Objects.equals(this.projectTeamList, that.projectTeamList);
-        return x;
+        return Objects.equals(this.projectTeamList, that.projectTeamList);
+
     }
 
     @Override

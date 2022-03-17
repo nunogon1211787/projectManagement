@@ -1,11 +1,9 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.model.TaskStatus;
+import switch2021.project.Immutables.TaskStatus;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
 
 @Getter
 public class TaskStatusStore {
@@ -13,7 +11,6 @@ public class TaskStatusStore {
     /**
      * Attributes
      */
-//    private final List<String> taskList; // Review this atributte. The class need to have a list of Objects that are responsible.
     private List<TaskStatus> taskStatusList;
 
 
@@ -21,44 +18,39 @@ public class TaskStatusStore {
      * Constructor
      */
     public TaskStatusStore() {
-//        this.taskList = new ArrayList<>(); //Review
         this.taskStatusList = new ArrayList<>();
     }
 
+
     /**
-     * Methods to create an object that this class are responsible
+     * Methods to create and add an object that this class are responsible
      */
-    public boolean createTaskStatus(String status) {
-        TaskStatus newStatus = new TaskStatus(status);
+    public boolean createAndSaveTaskStatus(String status) {
+       TaskStatus ts = new TaskStatus(status);
 
-        return saveTaskStatus(newStatus);
+        if(getTaskStatusByDescription(status) != null) {
+            throw new IllegalArgumentException("This Task Status already exist!");
+        } else {
+            this.taskStatusList.add(ts);
+            return true;
+        }
     }
 
+
+    /**
+     * Methods to populate the Store
+     */
     public void populateDefault() {
-//        this.taskList.add("Planned"); //Review
-//        this.taskList.add("Running"); //Review
-//        this.taskList.add("Finished"); //Review
-//        this.taskList.add("Blocked"); //Review
-
-        saveTaskStatus(new TaskStatus("Planned"));
-        saveTaskStatus(new TaskStatus("Running"));
-        saveTaskStatus(new TaskStatus("Finished"));
-        saveTaskStatus(new TaskStatus("Blocked"));
+        createAndSaveTaskStatus("Planned");
+        createAndSaveTaskStatus("Running");
+        createAndSaveTaskStatus("Finished");
+        createAndSaveTaskStatus("Blocked");
     }
+
 
     /**
      * Methods to iterate with the list
      */
-//    public String getTaskStatusDescription(String description) {
-//        String result = "Status not found";
-//        for(String i : taskList) {
-//            if(i.toLowerCase(Locale.ROOT).equals(description.trim().toLowerCase(Locale.ROOT))) {
-//                result = i;
-//            }
-//        }
-//        return result;
-//    }
-
     public TaskStatus getTaskStatusByDescription(String descript){
         TaskStatus result = null;
 
@@ -74,72 +66,26 @@ public class TaskStatusStore {
         TaskStatus status = null;
 
         for (TaskStatus taskStatus : this.taskStatusList) {
-            if (taskStatus.getDescription().equalsIgnoreCase("Planned")) {
+            if (taskStatus.hasDescription("Planned")) {
                 status = taskStatus;
             }
         }
         return status;
     }
 
-    public List<String> getTaskStatusNames(){
-        List<String> taskStatusNames = new ArrayList<>();
+    public List<String> getTaskStatusDescriptions(){
+        List<String> taskStatusDescriptions = new ArrayList<>();
 
         for (TaskStatus taskStatus : this.taskStatusList) {
-            taskStatusNames.add(taskStatus.getDescription());
+            taskStatusDescriptions.add(taskStatus.getDescription().getText());
         }
-        return taskStatusNames;
+        return taskStatusDescriptions;
     }
 
-    /**
-     * Method to save and validate task status in the list
-     */
-    public boolean saveTaskStatus(TaskStatus status) {
-        boolean result = false;
-
-        if(status != null) {
-            result = true;
-            if(this.taskStatusList.size() != 0) {
-                for (int i = 0; i < this.taskStatusList.size(); i++) {
-                    if (validateNewStatusDescription(status)) {
-                        status.setIDTaskStatus(idTaskStatusGenerator());
-                        this.taskStatusList.add(status);
-                    }
-                }
-            } else {
-                status.setIDTaskStatus(idTaskStatusGenerator());
-                this.taskStatusList.add(status);
-            }
-        }
-        return result;
-    }
-
-    private boolean validateNewStatusDescription(TaskStatus status) {
-        boolean result = true;
-
-        for (TaskStatus taskStatus : this.taskStatusList) {
-            if (taskStatus.getDescription().equals(status.getDescription())) {
-                result = false;
-                break;
-            }
-        }
-        return result;
-    }
-
-    /**
-     * ID Generator
-     **/
-    public int idTaskStatusGenerator() {
-        int id = 1;
-        if (this.taskStatusList.size() > 0) {
-            id = this.taskStatusList.get(taskStatusList.size() - 1).getIdTaskStatus() + 1;
-        }
-        return id;
-    }
 
 //    /**
 //     * Override
 //     **/
-//
 //    @Override
 //    public boolean equals(Object o) {
 //        if (this == o) return true;

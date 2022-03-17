@@ -1,20 +1,18 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import lombok.Setter;
 import switch2021.project.Immutables.Description;
 
 import java.util.Objects;
 
 @Getter
-@Setter
 public class ProjectStatus {
 
     /**
      * Project Status class
      * Project Status attributes are composed of a description of the Project Status.
      **/
-    private Description description;
+    private final Description description;
 
     /**
      * Constructors of Project Status class
@@ -24,9 +22,6 @@ public class ProjectStatus {
         this.description = new Description(description);
     }
 
-    /**
-     * Override Methods
-     **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

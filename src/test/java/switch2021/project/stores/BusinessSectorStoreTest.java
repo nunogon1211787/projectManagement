@@ -1,13 +1,18 @@
 package switch2021.project.stores;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.Immutables.Description;
 import switch2021.project.model.BusinessSector;
+import switch2021.project.model.ProjectTeam;
+import switch2021.project.model.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class BusinessSectorStoreTest {
 
@@ -70,6 +75,43 @@ class BusinessSectorStoreTest {
     }
 
     @Test
+    @DisplayName("Test with mock if the resource is returned ")
+    public void getResourceByEmailTestSuccess() {
+        //Arrange
+        ProjectTeam projectTeam = new ProjectTeam();
+
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYour("manuelbras@beaver.com")).thenReturn(true);
+        when(manuelbras.isCurrent()).thenReturn(true);
+
+        projectTeam.saveResource(manuelbras);
+
+        //Act
+        Resource testRes = projectTeam.getResource("manuelbras@beaver.com");
+
+        //Assert
+        assertEquals(manuelbras, testRes);
+    }
+
+    @Test
+    void getBusinessSectorByDescriptionWithMock() {
+        //Arrange
+        BusinessSectorStore store = new BusinessSectorStore();
+        BusinessSector marketing = mock(BusinessSector.class);
+        Description description = mock(Description.class);
+
+        when(description.getText()).thenReturn("teste");
+        when(marketing.getDescription()).thenReturn(description);
+        store.addBusinessSector(marketing);
+
+        //Act
+        BusinessSector bs = store.getBusinessSectorByDescription("teste");
+
+        //Assert
+        assertEquals(marketing, bs);
+    }
+
+    @Test
     void getBusinessSectorByDescription_Null() {
         //Arrange
         BusinessSectorStore store = new BusinessSectorStore();
@@ -90,8 +132,8 @@ class BusinessSectorStoreTest {
         BusinessSector x = sector;
 
         //Act & Assert
-        assertNotEquals(sector.hashCode(),sector2.hashCode());
-        assertEquals(sector.hashCode(),x.hashCode());
+        assertNotEquals(sector.hashCode(), sector2.hashCode());
+        assertEquals(sector.hashCode(), x.hashCode());
     }
 
     @Test

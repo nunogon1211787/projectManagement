@@ -53,7 +53,7 @@ public class BusinessSectorStore {
 
     public BusinessSector getBusinessSectorByDescription(String description) {
         BusinessSector sector = null;
-        for (BusinessSector i : this.businessSectorList)
+        for (BusinessSector i : this.businessSectorList)  //percorrer o business sector list e encontrar um setor
             if (i.getDescription().getText().equals(description)) {
                 sector = i;
                 break;

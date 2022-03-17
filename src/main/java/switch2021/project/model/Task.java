@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.Immutables.Date;
 import switch2021.project.Immutables.HoursMinutes;
+import switch2021.project.Immutables.TaskStatus;
 import switch2021.project.utils.App;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -64,9 +64,7 @@ public class Task {
     public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible, List<String> precedenceList) {
 
         Task task = new Task(name, description,effortEstimate, type, responsible);
-        this.effortRemaining = effortEstimate;
-        this.status = App.getInstance().getCompany().getTaskStatusStore().getInitialStatus();
-        this.taskEffortList = new ArrayList<>();
+
         this.precedenceList = Collections.unmodifiableList(precedenceList);
     }
 
@@ -189,10 +187,12 @@ public class Task {
     }
 
     public double updateEffortRemaining(TaskEffort effort) {
-        if (this.effortRemaining < effortInHours(effort))
-            return this.effortRemaining = 0.0;
-
-        return this.effortRemaining -= effortInHours(effort);
+        if (this.effortRemaining < effortInHours(effort)) {
+            this.effortRemaining = 0.0;
+        } else {
+            this.effortRemaining -= effortInHours(effort);
+        }
+        return this.effortRemaining;
     }
 
     private double updateExecutionPercentage() {

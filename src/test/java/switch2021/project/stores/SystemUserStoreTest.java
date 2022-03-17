@@ -30,10 +30,10 @@ public class SystemUserStoreTest {
         List<UserProfile> assignedProfileExpected = new ArrayList<>();
         assignedProfileExpected.add(profile);
         //Act
-        String userNameResult = newUser.getUserName();
+        String userNameResult = newUser.getUserName().getNameF();
         String emailResult = newUser.getEmail();
         String passwordResult = newUser.getPassword();
-        String functionResult = newUser.getFunction();
+        String functionResult = newUser.getFunction().getText();
         String photoResult = newUser.getPhoto();
         boolean activateUserResult = newUser.isActivateUser();
         List<UserProfile> assignedProfileResult = newUser.getAssignedProfileList();
