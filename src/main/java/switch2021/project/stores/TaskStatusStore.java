@@ -1,7 +1,7 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.Immutables.TaskStatus;
+import switch2021.project.immutable.TaskStatus;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Date;
+import switch2021.project.immutable.Date;
 import switch2021.project.dto.TaskEffortDTO;
 import switch2021.project.dto.TaskIdNameDTO;
 import switch2021.project.dto.UserStorySprintProjectDTO;

@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.Immutables.Description;
+import switch2021.project.immutable.Description;
 import switch2021.project.stores.TaskList;
 
 import java.util.Objects;

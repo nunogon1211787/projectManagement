@@ -1,8 +1,8 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Date;
-import switch2021.project.Immutables.TaskStatus;
+import switch2021.project.immutable.Date;
+import switch2021.project.immutable.TaskStatus;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

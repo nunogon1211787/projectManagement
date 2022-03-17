@@ -28,7 +28,7 @@ public class ProjectTeam {
      * Getters and Setters
      **/
     //Get resource by User
-    public Resource getResource(SystemUser user) {
+    public Resource getResourceByUser(SystemUser user) {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
@@ -41,7 +41,7 @@ public class ProjectTeam {
     }
 
     //Get resource by Role
-    public Resource getResource(ProjectRole role) {
+    public Resource getResourceByRole(ProjectRole role) {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
@@ -54,7 +54,7 @@ public class ProjectTeam {
     }
 
     //Get resource by E-mail
-    public Resource getResource(String email) {
+    public Resource getResourceByEmail(String email) {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
@@ -175,7 +175,7 @@ public class ProjectTeam {
             newResource = copyUpdateProjectRoleOfAResource(originalResource, startDateNewRole, projectRole);
             //At this moment, will check if exist any resource active and current as SM, PO or PM.
             if (checkIfTheRoleExistAndIsCurrent(newResource.getRole(), newResource.getStartDate())) {
-                Resource oldResourceRole = getResource(newResource.getRole()); //If existed, will create a copy and update the role for "Team Member".
+                Resource oldResourceRole = getResourceByRole(newResource.getRole()); //If existed, will create a copy and update the role for "Team Member".
                 ProjectRole teamMember = App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Team Member");
                 //Copy and save
                 Resource oldResourceRoleCopy = copyUpdateProjectRoleOfAResource(oldResourceRole, startDateNewRole, teamMember);

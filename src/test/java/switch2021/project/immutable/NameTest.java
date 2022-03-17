@@ -1,7 +1,6 @@
-package switch2021.project.Immutables;
+package switch2021.project.immutable;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.ProjectRole;
 
 import static org.junit.jupiter.api.Assertions.*;
 

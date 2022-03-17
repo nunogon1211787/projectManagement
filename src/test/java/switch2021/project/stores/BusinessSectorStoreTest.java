@@ -2,7 +2,7 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Description;
+import switch2021.project.immutable.Description;
 import switch2021.project.model.BusinessSector;
 import switch2021.project.model.ProjectTeam;
 import switch2021.project.model.Resource;
@@ -87,7 +87,7 @@ class BusinessSectorStoreTest {
         projectTeam.saveResource(manuelbras);
 
         //Act
-        Resource testRes = projectTeam.getResource("manuelbras@beaver.com");
+        Resource testRes = projectTeam.getResourceByEmail("manuelbras@beaver.com");
 
         //Assert
         assertEquals(manuelbras, testRes);

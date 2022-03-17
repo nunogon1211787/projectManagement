@@ -1,8 +1,7 @@
-package switch2021.project.Immutables;
+package switch2021.project.immutable;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.TaskEffort;
 
 import java.time.LocalDate;
 

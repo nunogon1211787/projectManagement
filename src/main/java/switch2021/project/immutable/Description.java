@@ -1,7 +1,6 @@
-package switch2021.project.Immutables;
+package switch2021.project.immutable;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Objects;
 

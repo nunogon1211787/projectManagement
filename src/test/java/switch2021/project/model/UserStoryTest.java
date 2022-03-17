@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Date;
+import switch2021.project.immutable.Date;
 
 import java.time.LocalDate;
 

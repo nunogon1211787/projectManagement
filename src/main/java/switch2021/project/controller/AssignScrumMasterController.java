@@ -42,7 +42,7 @@ public class AssignScrumMasterController {
      * Method to receive a resource of the project and send to UI
      */
     public ResourceDTO getResource(String email) {
-        this.resource = project.getProjectTeam().getResource(email);
+        this.resource = project.getProjectTeam().getResourceByEmail(email);
         return this.projectTeamMapper.toDto(resource);
     }
 

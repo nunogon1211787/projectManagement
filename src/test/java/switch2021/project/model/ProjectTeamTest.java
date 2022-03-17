@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Name;
+import switch2021.project.immutable.Name;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -46,7 +46,7 @@ public class ProjectTeamTest {
         projectTeam.saveResource(manuelbras);
 
         //Act
-        Resource testRes = projectTeam.getResource("manuelbras@beaver.com");
+        Resource testRes = projectTeam.getResourceByEmail("manuelbras@beaver.com");
 
         //Assert
         assertEquals(manuelbras, testRes);
@@ -64,7 +64,7 @@ public class ProjectTeamTest {
         projectTeam.saveResource(manuelbras);
 
         //Act
-        Resource testRes = projectTeam.getResource("manuelbras@beaver.com");
+        Resource testRes = projectTeam.getResourceByEmail("manuelbras@beaver.com");
 
         //Assert
         assertNull(testRes);
@@ -82,7 +82,7 @@ public class ProjectTeamTest {
         projectTeam.saveResource(manuelbras);
 
         //Act
-        Resource testRes = projectTeam.getResource(user);
+        Resource testRes = projectTeam.getResourceByUser(user);
 
         //Assert
         assertEquals(manuelbras, testRes);
@@ -100,7 +100,7 @@ public class ProjectTeamTest {
         projectTeam.saveResource(manuelbras);
 
         //Act
-        Resource testRes = projectTeam.getResource(user);
+        Resource testRes = projectTeam.getResourceByUser(user);
 
         //Assert
         assertNull(testRes);
@@ -118,7 +118,7 @@ public class ProjectTeamTest {
         projectTeam.saveResource(manuelbras);
 
         //Act
-        Resource testRes = projectTeam.getResource(role);
+        Resource testRes = projectTeam.getResourceByRole(role);
 
         //Assert
         assertEquals(manuelbras, testRes);
@@ -136,7 +136,7 @@ public class ProjectTeamTest {
         projectTeam.saveResource(manuelbras);
 
         //Act
-        Resource testRes = projectTeam.getResource(role);
+        Resource testRes = projectTeam.getResourceByRole(role);
 
         //Assert
         assertNull(testRes);
@@ -351,10 +351,10 @@ public class ProjectTeamTest {
         //Act
         proj1.getProjectTeam().assignProjectRole(manuelmartins, LocalDate.now(), 2, company.getProjectRoleStore().getProjectRole("Scrum Master"));
         //Assert
-        assertEquals(proj1.getProjectTeam().getResource(user1).getRole(), company.getProjectRoleStore().getProjectRole("Team Member"));
-        assertEquals(proj1.getProjectTeam().getResource(user2).getRole(), company.getProjectRoleStore().getProjectRole("Scrum Master"));
+        assertEquals(proj1.getProjectTeam().getResourceByUser(user1).getRole(), company.getProjectRoleStore().getProjectRole("Team Member"));
+        assertEquals(proj1.getProjectTeam().getResourceByUser(user2).getRole(), company.getProjectRoleStore().getProjectRole("Scrum Master"));
         assertEquals(4, proj1.getProjectTeam().getProjectTeamList().size());
-        assertEquals(LocalDate.now(), proj1.getProjectTeam().getResource(user2).getStartDate());
+        assertEquals(LocalDate.now(), proj1.getProjectTeam().getResourceByUser(user2).getStartDate());
     }
 
     @Test //At this test the project role already exist in the team
@@ -382,8 +382,8 @@ public class ProjectTeamTest {
         //Act
         proj1.getProjectTeam().assignProjectRole(manuelmartins, LocalDate.now(), 2, company.getProjectRoleStore().getProjectRole("Scrum Master"));
         //Assert
-        assertEquals(proj1.getProjectTeam().getResource(user1).getRole(), company.getProjectRoleStore().getProjectRole("Team Member"));
-        assertEquals(proj1.getProjectTeam().getResource(user2).getRole(), company.getProjectRoleStore().getProjectRole("Scrum Master"));
+        assertEquals(proj1.getProjectTeam().getResourceByUser(user1).getRole(), company.getProjectRoleStore().getProjectRole("Team Member"));
+        assertEquals(proj1.getProjectTeam().getResourceByUser(user2).getRole(), company.getProjectRoleStore().getProjectRole("Scrum Master"));
         assertEquals(3, proj1.getProjectTeam().getProjectTeamList().size());
     }
 
@@ -556,7 +556,7 @@ public class ProjectTeamTest {
         proj1.getProjectTeam().saveResource(manueloliveira);
         proj1.getProjectTeam().saveResource(manuelmartins);
         //Act
-        Resource manuelTest = proj1.getProjectTeam().getResource("manuelbras@beaver.com");
+        Resource manuelTest = proj1.getProjectTeam().getResourceByEmail("manuelbras@beaver.com");
         manuelTest.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         proj1.getProjectTeam().assignProjectRole(manuelTest, LocalDate.of(2021, 11, 16), 2, company.getProjectRoleStore().getProjectRole("Scrum Master"));
         //Assert
@@ -585,7 +585,7 @@ public class ProjectTeamTest {
         manuelbrasil.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
         //Act
         proj1.getProjectTeam().saveResource(manuelbrasil);
-        Resource manuelTest = proj1.getProjectTeam().getResource("manuelbrasil@beaver.com");
+        Resource manuelTest = proj1.getProjectTeam().getResourceByEmail("manuelbrasil@beaver.com");
         manuelTest.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         proj1.getProjectTeam().assignProjectRole(manuelTest, LocalDate.of(2021, 11, 16), 2, company.getProjectRoleStore().getProjectRole("Scrum Master"));
         //Assert

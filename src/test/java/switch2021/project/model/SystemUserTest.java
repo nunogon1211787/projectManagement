@@ -1,7 +1,6 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Function;
 import switch2021.project.stores.SystemUserStore;
 
 import java.util.ArrayList;
