@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.Immutables.Function;
 import switch2021.project.stores.SystemUserStore;
 
 import java.util.ArrayList;
@@ -1221,6 +1222,18 @@ class SystemUserTest {
         assertEquals("CDC", teste3.getFunction().getText());
         assertNotEquals("CD", teste4.getFunction());
     }
+
+    @Test
+    public void setFunctionNull() { assertThrows(NullPointerException.class, () -> {
+        //Arrange
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser teste5 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        //Act
+        teste5.setFunction(null);
+    });
+}
 
     @Test
     public void setPhoto() {

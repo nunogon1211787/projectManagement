@@ -12,12 +12,13 @@ public class Function {
 
     /*** Constructor **/
     public Function (String function) {
+        String x = " characters";
         if (function == null)
-            throw new IllegalArgumentException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + " characters");
+            throw new IllegalArgumentException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + x);
         if (function.trim().length() < MIN_DESCRIPTION_LENGTH)
-            throw new IllegalArgumentException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + " characters");
+            throw new IllegalArgumentException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + x);
         if (function.trim().length() > MAX_DESCRIPTION_LENGTH)
-            throw new IllegalArgumentException("Description field cannot have more than " + MAX_DESCRIPTION_LENGTH + " characters");
+            throw new IllegalArgumentException("Description field cannot have more than " + MAX_DESCRIPTION_LENGTH + x);
         this.text = function;
     }
 

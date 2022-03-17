@@ -42,6 +42,17 @@ class FunctionTest {
     }
 
     @Test
+    public void checkFunctionEmpty1() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            String atual = null;
+            //Act
+            Function expected = new Function(atual);
+        });
+    }
+
+    @Test
     public void checkNameEmpty2() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
@@ -76,5 +87,6 @@ class FunctionTest {
         assertEquals(function,function1);
         assertNotEquals(function, function2);
         assertNotEquals(function, test);
+        assertEquals(function,function);
     }
 }
