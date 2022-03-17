@@ -1,7 +1,6 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Function;
 import switch2021.project.stores.SystemUserStore;
 
 import java.util.ArrayList;
@@ -158,7 +157,7 @@ class SystemUserTest {
                 "123", "123", "img_123", userProfile);
         //Act and Assert
         assertTrue(joana.setAllData("Joana Silva", "Aluna_100", "img_900"));
-        assertEquals("Joana Silva", joana.getUserName());
+        assertEquals("Joana Silva", joana.getUserName().getNameF());
         assertEquals("Aluna_100", joana.getFunction().getText());
         assertEquals("img_900", joana.getPhoto());
     }
@@ -389,7 +388,7 @@ class SystemUserTest {
         String email = "manueloliveira@beaver.com";
         String password = "gh";
         String passwordConfirmation = "gh";
-        String function = "te";
+        String function = "teeee";
         String photo = "photo";
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -399,7 +398,7 @@ class SystemUserTest {
         assignedProfileExpected.add(profile);
         String passwordExpected = "ÊË";
         //Assert
-        assertEquals(userName, newUser.getUserName());
+        assertEquals(userName, newUser.getUserName().getNameF());
         assertEquals(email, newUser.getEmail());
         assertEquals(passwordExpected, newUser.getPassword());
         assertEquals(function, newUser.getFunction().getText());
@@ -1083,6 +1082,24 @@ class SystemUserTest {
     }
 
     @Test
+    void hasAllProfilesInTheListContainsFalse() {
+        //Arrange
+        UserProfile pro = new UserProfile("Visitor");
+        UserProfile tes = new UserProfile("Director");
+        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
+                "123456", "123456", "img_123", pro);
+        String name = "test";
+        String email = "xxxx";
+        String func = "test";
+        int state = 1; //isActiveUser : -1 == null / 0 == false / 1 == true
+        List<UserProfile> profiles = new ArrayList<>(); // profileId
+        //Act
+        profiles.add(tes);
+        //Assert
+        assertFalse(test.hasThisData(name,email,func, state, profiles));
+    }
+
+    @Test
     public void activationUser() {
         //Test to activate the user
         //Arrange
@@ -1162,16 +1179,16 @@ class SystemUserTest {
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser teste = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_123", userProfile);
-        String originalValue = teste.getUserName();
+        String originalValue = teste.getUserName().getNameF();
         SystemUser teste2 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_123", userProfile);
-        String originalValue2 = teste.getUserName();
+        String originalValue2 = teste.getUserName().getNameF();
         SystemUser teste3 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_123", userProfile);
-        String originalValue3 = teste.getUserName();
+        String originalValue3 = teste.getUserName().getNameF();
         SystemUser teste4 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_123", userProfile);
-        String originalValue4 = teste.getUserName();
+        String originalValue4 = teste.getUserName().getNameF();
 
         //Act
 
@@ -1181,11 +1198,11 @@ class SystemUserTest {
         teste4.setUserName("CD");
 
         // Assert
-        assertNotEquals(originalValue, teste.getUserName());
-        assertEquals(originalValue2, teste2.getUserName());
-        assertNotEquals(originalValue3, teste3.getUserName());
-        assertEquals("CDC", teste3.getUserName());
-        assertEquals("CD", teste4.getUserName());
+        assertNotEquals(originalValue, teste.getUserName().getNameF());
+        assertEquals(originalValue2, teste2.getUserName().getNameF());
+        assertNotEquals(originalValue3, teste3.getUserName().getNameF());
+        assertEquals("CDC", teste3.getUserName().getNameF());
+        assertEquals("CD", teste4.getUserName().getNameF());
     }
 
     @Test

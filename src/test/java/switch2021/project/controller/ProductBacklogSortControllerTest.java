@@ -23,7 +23,7 @@ public class ProductBacklogSortControllerTest {
         Company company = new Company();
         ProjectsMapper mapper = new ProjectsMapper();
         ProductBacklogMapper mapperPB = new ProductBacklogMapper();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
@@ -56,7 +56,7 @@ public class ProductBacklogSortControllerTest {
         Company company = new Company();
         ProjectsMapper mapper = new ProjectsMapper();
         ProductBacklogMapper mapperPB = new ProductBacklogMapper();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
@@ -94,7 +94,7 @@ public class ProductBacklogSortControllerTest {
         Company company = new Company();
         ProjectsMapper mapper = new ProjectsMapper();
         ProductBacklogMapper mapperPB = new ProductBacklogMapper();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
@@ -130,7 +130,7 @@ public class ProductBacklogSortControllerTest {
         Company company = new Company();
         ProjectsMapper mapper = new ProjectsMapper();
         ProductBacklogMapper mapperPB = new ProductBacklogMapper();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
@@ -165,7 +165,7 @@ public class ProductBacklogSortControllerTest {
         Company company = new Company();
         ProjectsMapper mapper = new ProjectsMapper();
         ProductBacklogMapper mapperPB = new ProductBacklogMapper();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
@@ -214,7 +214,7 @@ public class ProductBacklogSortControllerTest {
         Company company = new Company();
         ProjectsMapper mapper = new ProjectsMapper();
         ProductBacklogMapper mapperPB = new ProductBacklogMapper();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
@@ -257,7 +257,7 @@ public class ProductBacklogSortControllerTest {
         Company company = new Company();
         ProjectsMapper mapper = new ProjectsMapper();
         ProductBacklogMapper mapperPB = new ProductBacklogMapper();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test56", customer,

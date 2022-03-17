@@ -37,6 +37,7 @@ public class UserStoryEffortController {
         ProjectStore projStore = this.company.getProjectStore();
         projectList = projStore.getCurrentProjectsByUserEmail(email);
         return Collections.unmodifiableList(projectList);
+
     }
 
     public Project getProjectByCode(String code) {

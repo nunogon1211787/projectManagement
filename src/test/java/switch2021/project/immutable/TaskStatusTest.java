@@ -1,7 +1,7 @@
-package switch2021.project.model;
+package switch2021.project.immutable;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Description;
+import switch2021.project.model.Typology;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskStatusTest {

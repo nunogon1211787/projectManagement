@@ -1,4 +1,4 @@
-package switch2021.project.Immutables;
+package switch2021.project.immutable;
 
 import java.util.Objects;
 
@@ -7,7 +7,7 @@ public class Function {
 
     /*** Attributes **/
     private final String text;
-    private final int MIN_DESCRIPTION_LENGTH = 1;
+    private final int MIN_DESCRIPTION_LENGTH = 2;
     private final int MAX_DESCRIPTION_LENGTH = 20;
 
     /*** Constructor **/

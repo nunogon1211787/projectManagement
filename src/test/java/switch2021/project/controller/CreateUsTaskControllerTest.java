@@ -33,7 +33,7 @@ class CreateUsTaskControllerTest {
         CreateUsTaskController controller = new CreateUsTaskController(company, mapper);
 
         //Create a project
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
@@ -76,7 +76,7 @@ class CreateUsTaskControllerTest {
         CreateUsTaskController controller = new CreateUsTaskController(company, mapper);
 
         //Create a project
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
@@ -107,7 +107,7 @@ class CreateUsTaskControllerTest {
         CreateUsTaskController controller = new CreateUsTaskController(company, mapper);
 
         //Create a project
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
@@ -126,9 +126,9 @@ class CreateUsTaskControllerTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "encript", "encript", "photo", profile);
         Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user2 = new SystemUser("user test2", "test2@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "encript", "encript", "photo", profile);
         Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user3 = new SystemUser("user test3", "test@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "encript", "encript", "photo", profile);
         Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);
@@ -141,8 +141,8 @@ class CreateUsTaskControllerTest {
         //Asserts
         assertEquals(3, test.size());
         assertEquals("user test", test.get(0));
-        assertEquals("user test2", test.get(1));
-        assertEquals("user test3", test.get(2));
+        assertEquals("user test dois", test.get(1));
+        assertEquals("user test tres", test.get(2));
     }
 
     @Test
@@ -154,7 +154,7 @@ class CreateUsTaskControllerTest {
         CreateUsTaskController controller = new CreateUsTaskController(company, mapper);
 
         //Create a project
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
@@ -185,7 +185,7 @@ class CreateUsTaskControllerTest {
         CreateUsTaskController controller = new CreateUsTaskController(company, mapper);
 
         //Create a project
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
@@ -204,9 +204,9 @@ class CreateUsTaskControllerTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "encript", "encript", "photo", profile);
         Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user2 = new SystemUser("user test2", "test2@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "encript", "encript", "photo", profile);
         Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user3 = new SystemUser("user test3", "test@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "encript", "encript", "photo", profile);
         Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);
@@ -214,7 +214,7 @@ class CreateUsTaskControllerTest {
 
         //Create a new us Task
         controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
-        CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test3");
+        CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test tres");
 
 
         //Asserts
@@ -231,7 +231,7 @@ class CreateUsTaskControllerTest {
         CreateUsTaskController controller = new CreateUsTaskController(company, mapper);
 
         //Create a project
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
@@ -250,9 +250,9 @@ class CreateUsTaskControllerTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "encript", "encript", "photo", profile);
         Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user2 = new SystemUser("user test2", "test2@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "encript", "encript", "photo", profile);
         Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user3 = new SystemUser("user test3", "test@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "encript", "encript", "photo", profile);
         Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);
@@ -267,7 +267,7 @@ class CreateUsTaskControllerTest {
 
         //Create a new us Task
         controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
-        CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test3");
+        CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test tres");
 
 
         //Asserts
@@ -284,7 +284,7 @@ class CreateUsTaskControllerTest {
         CreateUsTaskController controller = new CreateUsTaskController(company, mapper);
 
         //Create a project
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
@@ -303,9 +303,9 @@ class CreateUsTaskControllerTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "encript", "encript", "photo", profile);
         Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user2 = new SystemUser("user test2", "test2@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "encript", "encript", "photo", profile);
         Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user3 = new SystemUser("user test3", "test@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "encript", "encript", "photo", profile);
         Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);
@@ -323,7 +323,7 @@ class CreateUsTaskControllerTest {
 
         //Create a new us Task
         controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
-        CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test3", precedenceList );
+        CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test tres", precedenceList );
 
 
         //Asserts

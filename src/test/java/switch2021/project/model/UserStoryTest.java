@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Date;
+import switch2021.project.immutable.Date;
 
 import java.time.LocalDate;
 
@@ -23,7 +23,7 @@ class UserStoryTest {
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
         company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste", 123456789));
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         proj = company.getProjectStore().createProject("prototype", "test56", customer,

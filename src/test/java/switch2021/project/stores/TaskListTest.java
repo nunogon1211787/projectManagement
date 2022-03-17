@@ -1,13 +1,11 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Description;
+import switch2021.project.immutable.TaskStatus;
 import switch2021.project.dto.CreateTaskDTO;
 import switch2021.project.mapper.TaskMapper;
 import switch2021.project.model.*;
-
 import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskListTest {

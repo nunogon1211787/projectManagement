@@ -1,8 +1,6 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Description;
-import switch2021.project.stores.ProjectStatusStore;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

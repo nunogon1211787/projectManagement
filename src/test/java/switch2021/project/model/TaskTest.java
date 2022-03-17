@@ -1,8 +1,8 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Date;
-
+import switch2021.project.immutable.Date;
+import switch2021.project.immutable.TaskStatus;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -378,9 +378,8 @@ class TaskTest {
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
         TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
 
-        TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
+       //Act
         task.saveTaskEffort(taskEffort);
-        //Act
 
         //Assert
         assertEquals(12.0, task.getEffortRemaining());
@@ -406,9 +405,8 @@ class TaskTest {
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
         TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
 
-        TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
-        task.saveTaskEffort(taskEffort);
         //Act
+        task.saveTaskEffort(taskEffort);
 
         //Assert
         assertEquals(0.0, task.getEffortRemaining());
@@ -435,13 +433,37 @@ class TaskTest {
         TaskEffort taskEffort = task.createTaskEffort(6, 0, effortDate, "test", ".pdf");
         Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
         TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
-        TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
         task.saveTaskEffort(taskEffort);
         //Act
         task.saveTaskEffort(taskEffort2);
         //Assert
         assertEquals(0.0, task.getEffortRemaining());
         assertEquals(10.0, task.getHoursSpent());
+        assertEquals(1.0, task.getExecutionPercentage());
+    }
+
+    @Test
+    public void updateHoursSpentNegative2() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+
+        String taskDescription = "must be at least 20 characters";
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        Task task = new Task("test", taskDescription, 8.00, taskType, resource);
+
+        Date effortDate = new Date(LocalDate.of(2022, 1, 20));
+        TaskEffort taskEffort = task.createTaskEffort(12, 0, effortDate, "test", ".pdf");
+        //Act
+        task.saveTaskEffort(taskEffort);
+        //Assert
+        assertEquals(0.0, task.getEffortRemaining());
+        assertEquals(12.0, task.getHoursSpent());
         assertEquals(1.0, task.getExecutionPercentage());
     }
     //fim (tentar acabar com os bugs)

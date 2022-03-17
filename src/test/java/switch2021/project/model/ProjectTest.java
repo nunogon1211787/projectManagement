@@ -3,11 +3,9 @@ package switch2021.project.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.stores.CustomerStore;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
 
-import java.awt.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +28,7 @@ class ProjectTest {
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
         company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste","Teste", 123456789));
 
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
@@ -57,7 +55,7 @@ class ProjectTest {
         Customer valueCustomer = company.getCustomerStore().getCustomerByName("Teste");
 
         Typology typology = company.getProjectStore().getProjectByCode("Project_2022_1").getTypology();
-        Typology valueTypology = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology valueTypology = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
 
         BusinessSector sector = company.getProjectStore().getProjectByCode("Project_2022_1").getBusinessSector();
         BusinessSector valueSector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
@@ -105,7 +103,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_name() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -122,7 +120,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_nameLength() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -139,7 +137,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_description() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -156,7 +154,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_descriptionLenght() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -173,7 +171,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_descriptionLenght2() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -190,7 +188,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_descriptionLenght3() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -207,7 +205,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_descriptionLenght4() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -226,7 +224,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_numberOfSprints() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -243,7 +241,7 @@ class ProjectTest {
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_budget() {
         //Arrange
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
@@ -268,7 +266,7 @@ class ProjectTest {
     private Project proj3;
     private Project currentProject;
 
-    Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+    Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
     ProjectStatus projectStatus = new ProjectStatus("ToStart");
@@ -284,7 +282,7 @@ class ProjectTest {
     @BeforeEach
     public void init_2() {
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -495,7 +493,7 @@ class ProjectTest {
         //Arrange
         ProjectStore list1 = new ProjectStore();
 
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
@@ -530,7 +528,7 @@ class ProjectTest {
         //Arrange
         ProductBacklog backlog = new ProductBacklog();
         LocalDate date = LocalDate.of(2024,12,12);
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
@@ -567,7 +565,7 @@ class ProjectTest {
         //Arrange
         ProductBacklog backlog = new ProductBacklog();
         LocalDate date = LocalDate.of(2024,12,12);
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,

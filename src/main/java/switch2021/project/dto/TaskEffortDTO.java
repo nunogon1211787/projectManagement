@@ -1,9 +1,7 @@
 package switch2021.project.dto;
 
 import lombok.Getter;
-import switch2021.project.Immutables.Date;
-
-import java.time.LocalDate;
+import switch2021.project.immutable.Date;
 
 @Getter
 

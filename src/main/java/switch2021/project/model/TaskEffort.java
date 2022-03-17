@@ -1,8 +1,8 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import switch2021.project.Immutables.Date;
-import switch2021.project.Immutables.HoursMinutes;
+import switch2021.project.immutable.Date;
+import switch2021.project.immutable.HoursMinutes;
 
 @Getter
 public class TaskEffort {
