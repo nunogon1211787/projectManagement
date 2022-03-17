@@ -2,6 +2,7 @@ package switch2021.project.dto;
 
 import lombok.Getter;
 import switch2021.project.immutable.Date;
+import switch2021.project.immutable.HoursMinutes;
 
 @Getter
 
