@@ -75,25 +75,6 @@ class BusinessSectorStoreTest {
     }
 
     @Test
-    @DisplayName("Test with mock if the resource is returned ")
-    public void getResourceByEmailTestSuccess() {
-        //Arrange
-        ProjectTeam projectTeam = new ProjectTeam();
-
-        Resource manuelbras = mock(Resource.class);
-        when(manuelbras.isYour("manuelbras@beaver.com")).thenReturn(true);
-        when(manuelbras.isCurrent()).thenReturn(true);
-
-        projectTeam.saveResource(manuelbras);
-
-        //Act
-        Resource testRes = projectTeam.getResource("manuelbras@beaver.com");
-
-        //Assert
-        assertEquals(manuelbras, testRes);
-    }
-
-    @Test
     void getBusinessSectorByDescriptionWithMock() {
         //Arrange
         BusinessSectorStore store = new BusinessSectorStore();
