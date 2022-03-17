@@ -3,6 +3,7 @@ package switch2021.project.model;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.Immutables.Function;
+import switch2021.project.Immutables.Name;
 import switch2021.project.stores.UserProfileStore;
 import switch2021.project.utils.App;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class SystemUser {
     /**
      * Attributes of systemUser´s class
      **/
-    private String userName;
+    private Name userName;
     private final String email;
     private String photo;
     private String password;
@@ -32,10 +33,9 @@ public class SystemUser {
                        String photo, UserProfile profile) {
         checkUserNameRules(userName);
         checkEmailRules(email);
-        checkFunctionRules(function);
         checkPasswordRules(password);
         checkProfileRules(profile);
-        this.userName = userName;
+        this.userName = new Name(userName);
         this.email = email;
         this.photo = photo;
         this.function = new Function(function);
@@ -62,7 +62,7 @@ public class SystemUser {
      **/
     public void setUserName(String userName) {
         if (!userName.trim().isEmpty() && (userName.length() >= 1)) {
-            this.userName = userName;
+            this.userName = new Name(userName);
         }
     }
 
@@ -121,12 +121,6 @@ public class SystemUser {
             throw new IllegalArgumentException("Email must be at least 2 characters");
     }
 
-    private void checkFunctionRules(String function) {
-        if (function.trim().isEmpty())
-            throw new IllegalArgumentException("Function cannot be empty.");
-        if ((function.length() < 2))
-            throw new IllegalArgumentException("Function must be at least 2 characters");
-    }
 
     private void checkPasswordRules(String password) {
         if (password.trim().isEmpty())
@@ -227,7 +221,7 @@ public class SystemUser {
 
     public boolean hasName(String name) {
 
-        return this.userName.equals(name);
+        return this.userName.getNameF().equals(name);
     }
 
     /**
@@ -256,7 +250,7 @@ public class SystemUser {
         int result = 0;
 
         if (!name.isEmpty()) {
-            int idxString = this.userName.toLowerCase().indexOf(name.toLowerCase());
+            int idxString = this.userName.getNameF().toLowerCase().indexOf(name.toLowerCase());
             if (idxString != -1) {
                 result = 1;
             } else {

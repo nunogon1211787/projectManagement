@@ -351,13 +351,13 @@ class ResourceTest {
         //Original
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser joana = new SystemUser("123", "beaver", "abc", "gth", "gth","456", userProfile);
+        SystemUser joana = new SystemUser("jose", "beaver", "abc", "gth", "gth","456", userProfile);
         LocalDate startDate = LocalDate.of(2021,12,31);
         LocalDate endDate = LocalDate.of(2022, 4,5);
         Resource original = new Resource(joana, startDate, endDate, 100, .5);
         original.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Copy
-        SystemUser joana1 = new SystemUser("321", "beaver1", "123", "gth", "gth","img", userProfile);
+        SystemUser joana1 = new SystemUser("jose um", "beaver1", "123", "gth", "gth","img", userProfile);
         LocalDate startDateSet = LocalDate.of(2022,1,1);
         LocalDate endDateSet = LocalDate.of(2022, 1,15);
         Resource copy = new Resource(joana1, startDateSet, endDateSet, 10, .2);
