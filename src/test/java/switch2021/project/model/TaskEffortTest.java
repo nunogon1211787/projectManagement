@@ -47,25 +47,6 @@ public class TaskEffortTest {
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
     }
-//
-//    @Test
-//    @DisplayName("create effort with no date entered -> assigns the date of today")
-//    public void createTaskEffortSuccessWorkDateInputValueNull() {
-//        //Arrange
-//        int effortHours = 4;
-//        int effortMinutes = 30;
-//        Date effortDate = new Date (LocalDate.of(null,null,null);
-//        String comment = "design";
-//        String attachment = "";
-//        //Act
-//        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
-//        //Assert
-//        assertEquals(effortHours, taskEffort.getEffort().getEffortHours());
-//        assertEquals(effortMinutes, taskEffort.getEffort().getEffortMinutes());
-//        assertEquals(LocalDate.now(), taskEffort.getEffortDate());
-//        assertEquals(comment, taskEffort.getComment());
-//        assertEquals(attachment, taskEffort.getAttachment());
-//    }
 
     @Test
     @DisplayName("create effort only with minutes")

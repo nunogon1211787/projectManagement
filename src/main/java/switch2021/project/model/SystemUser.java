@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.Immutables.Function;
 import switch2021.project.stores.UserProfileStore;
 import switch2021.project.utils.App;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class SystemUser {
     private final String email;
     private String photo;
     private String password;
-    private String function;
+    private Function function;
     private boolean activateUser;
     private final List<UserProfile> assignedProfileList;
 
@@ -36,7 +37,7 @@ public class SystemUser {
         this.userName = userName;
         this.email = email;
         this.photo = photo;
-        this.function = function;
+        this.function = new Function(function);
         if (password.equals(passwordConfirmation)) {
             this.password = encryptPassword(password);
         } else {
@@ -66,7 +67,7 @@ public class SystemUser {
 
     public void setFunction(String function) {
         if (!function.trim().isEmpty() && (function.length() > 2)) {
-            this.function = function;
+            this.function = new Function(function);
         }
     }
 
@@ -288,7 +289,7 @@ public class SystemUser {
         int result = 0;
 
         if (!function.isEmpty()) {
-            int idxString = this.function.toLowerCase().indexOf(function.toLowerCase());
+            int idxString = this.function.getText().toLowerCase().indexOf(function.toLowerCase());
             if (idxString != -1) {
                 result = 1;
             } else {

@@ -97,4 +97,17 @@ class SprintBacklogTest {
         assertNotEquals(sprintBacklog, sprintBacklog2);
         assertNotEquals(sprintBacklog, test);
     }
+
+    @Test
+    @DisplayName("save user story to sprint backlog with success")
+    public void saveUserStorySuccess() {
+        // Arrange
+        int priority = 5;
+        String description = "Validate";
+        UserStory userstory = new UserStory("US001", priority, description, 5);
+        boolean test = sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+        // Act
+        assertTrue(test);
+
+    }
 }
