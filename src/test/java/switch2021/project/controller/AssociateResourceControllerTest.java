@@ -2,7 +2,6 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Description;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SystemUserStore;
@@ -46,7 +45,7 @@ public class AssociateResourceControllerTest {
         AssociateResourceController controller = new AssociateResourceController(company);
         ProjectStore projectStore = company.getProjectStore();
         //Project1
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = projectStore.createProject("prototype4", "proj4Prototype", customer,
