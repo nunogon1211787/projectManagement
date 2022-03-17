@@ -62,17 +62,6 @@ public class Project {
         this.projectTeam = new ProjectTeam();
     }
 
-
-    /**
-     * Set End Date
-     **/
-    //TODO change LocalDate.now() to LocalDate.to()
-    //Gives the project an end date
-    public boolean setEndDate() {
-        this.endDate = LocalDate.now();
-        return true;
-    }
-
     /**
      * Validates Project Creation Fields
      * Checks if @param projectName and @param description are empty or have the minimum characters necessary

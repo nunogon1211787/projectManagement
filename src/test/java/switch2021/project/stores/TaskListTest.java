@@ -138,7 +138,7 @@ public class TaskListTest {
 
             // Create Project
         Customer cust = new Customer("test", "test@test.pt", 123456789);
-        Typology typo = new Typology(new Description("test123"));
+        Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
         ProjectStatus status = new ProjectStatus("test1234");
         Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);
@@ -166,7 +166,7 @@ public class TaskListTest {
 
         // Create Project
         Customer cust = new Customer("test", "test@test.pt", 123456789);
-        Typology typo = new Typology(new Description("test123"));
+        Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
         ProjectStatus status = new ProjectStatus("test1234");
         Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);
@@ -195,7 +195,7 @@ public class TaskListTest {
 
         // Create Project
         Customer cust = new Customer("test", "test@test.pt", 123456789);
-        Typology typo = new Typology(new Description("test123"));
+        Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
         ProjectStatus status = new ProjectStatus("test1234");
         Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);
@@ -224,7 +224,7 @@ public class TaskListTest {
 
         // Create Project
         Customer cust = new Customer("test", "test@test.pt", 123456789);
-        Typology typo = new Typology(new Description("test123"));
+        Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
         ProjectStatus status = new ProjectStatus("test1234");
         Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);

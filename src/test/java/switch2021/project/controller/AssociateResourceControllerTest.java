@@ -21,7 +21,7 @@ public class AssociateResourceControllerTest {
         //Project
         LocalDate startProjectDate = LocalDate.of(2021, 2, 25);
         Customer cust = new Customer("ght@gmail.com", "Name", 123456789);
-        Typology typo = new Typology(new Description("typo1"));
+        Typology typo = new Typology("typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
         Project proj1 = comTest.getProjectStore().createProject("gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);
         comTest.getProjectStore().saveNewProject(proj1);
@@ -100,7 +100,7 @@ public class AssociateResourceControllerTest {
         //Project
         LocalDate startProjectDate = LocalDate.of(2021, 2, 25);
         Customer cust = new Customer("ght@gmail.com", "Name", 123456789);
-        Typology typo = new Typology(new Description("typo1"));
+        Typology typo = new Typology("typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
         Project proj1 = comTest.getProjectStore().createProject("gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);
         Project proj2 = comTest.getProjectStore().createProject("ghj", "testtestest", cust, typo, busSector, startProjectDate, 30, 4500);

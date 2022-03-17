@@ -207,7 +207,7 @@ class TaskStatusTest {
         TaskStatus status4 = null;
         TaskStatus status5= new TaskStatus("test1");
         TaskStatus status6= new TaskStatus("test1");
-        Typology typo = new Typology(new Description("test"));
+        Typology typo = new Typology("test");
         status1.setIDTaskStatus(1);
         status2.setIDTaskStatus(2);
         status3.setIDTaskStatus(3);

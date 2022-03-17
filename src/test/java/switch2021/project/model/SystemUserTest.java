@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.Immutables.Function;
 import switch2021.project.stores.SystemUserStore;
 
 import java.util.ArrayList;
@@ -158,7 +159,7 @@ class SystemUserTest {
         //Act and Assert
         assertTrue(joana.setAllData("Joana Silva", "Aluna_100", "img_900"));
         assertEquals("Joana Silva", joana.getUserName());
-        assertEquals("Aluna_100", joana.getFunction());
+        assertEquals("Aluna_100", joana.getFunction().getText());
         assertEquals("img_900", joana.getPhoto());
     }
 
@@ -401,7 +402,7 @@ class SystemUserTest {
         assertEquals(userName, newUser.getUserName());
         assertEquals(email, newUser.getEmail());
         assertEquals(passwordExpected, newUser.getPassword());
-        assertEquals(function, newUser.getFunction());
+        assertEquals(function, newUser.getFunction().getText());
         assertEquals(photo, newUser.getPhoto());
         assertFalse(newUser.isActivateUser());
         assertEquals(assignedProfileExpected, newUser.getAssignedProfileList());
@@ -1196,16 +1197,16 @@ class SystemUserTest {
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser teste = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_123", userProfile);
-        String originalValue = teste.getFunction();
+        String originalValue = teste.getFunction().getText();
         SystemUser teste2 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_123", userProfile);
-        String originalValue2 = teste.getFunction();
+        String originalValue2 = teste.getFunction().getText();
         SystemUser teste3 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_123", userProfile);
-        String originalValue3 = teste.getFunction();
+        String originalValue3 = teste.getFunction().getText();
         SystemUser teste4 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_123", userProfile);
-        String originalValue4 = teste.getFunction();
+        String originalValue4 = teste.getFunction().getText();
 
         //Act
 
@@ -1215,12 +1216,24 @@ class SystemUserTest {
         teste4.setFunction("CD");
 
         // Assert
-        assertEquals(originalValue, teste.getFunction());
-        assertEquals(originalValue2, teste2.getFunction());
+        assertEquals(originalValue, teste.getFunction().getText());
+        assertEquals(originalValue2, teste2.getFunction().getText());
         assertNotEquals(originalValue3, teste3.getFunction());
-        assertEquals("CDC", teste3.getFunction());
+        assertEquals("CDC", teste3.getFunction().getText());
         assertNotEquals("CD", teste4.getFunction());
     }
+
+    @Test
+    public void setFunctionNull() { assertThrows(NullPointerException.class, () -> {
+        //Arrange
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser teste5 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        //Act
+        teste5.setFunction(null);
+    });
+}
 
     @Test
     public void setPhoto() {

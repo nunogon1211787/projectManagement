@@ -32,15 +32,15 @@ public class TypologyStoreTest {
     public void populateTypologyList() {
         //Arrange
         TypologyStore test = new TypologyStore();
-        Typology tes1 = new Typology(new Description("Fixed Cost"));
-        Typology tes2 = new Typology(new Description("Time and Materials"));
+        Typology tes1 = new Typology("Fixed Cost");
+        Typology tes2 = new Typology("Time and Materials");
         //Act
         test.populateDefault();
         //Assert
         assertEquals( 2,test.getTypologyList().size());
         assertEquals(test.getTypologyList(), typologyStore.getTypologyList());
-        assertEquals(tes1, test.getTypology(1));
-        assertEquals(tes2, test.getTypology(2));
+        assertEquals(tes1, test.getTypology("Fixed Cost"));
+        assertEquals(tes2, test.getTypology("Time and Materials"));
     }
 
     @Test
@@ -56,61 +56,15 @@ public class TypologyStoreTest {
      * Este método faz teste do construtor de Typology, do método getArrayTypology(),
      * do método createTypology(), do método saveTypology() e do método ValidateTypology()
      **/
-    @Test
-    public void createTypologyTest() {
-        //Arrange
-        Typology newTypo = company.getTypologyStore().createTypology( "Fixed Cost");
-        //Act
-        Typology expected = company.getTypologyStore().getTypologyList().get(0);
-        //Assert
-        assertEquals(expected,newTypo);
-    }
-
-    @Test
-    public void idGeneratorTest(){
-        //Arrange
-        Typology newTypo = typologyStore.createTypology("Test1");
-        //Act
-        typologyStore.saveTypology(newTypo);
-        Typology newTypo2 = typologyStore.createTypology("Test2");
-        Typology newTypo3 = typologyStore.createTypology("Test3");
-        newTypo3.setIdTypology(3);
-        typologyStore.saveTypology(newTypo3);
-        //Assert
-        assertEquals( 3, newTypo.getIdTypology());
-        assertEquals( 4, newTypo3.getIdTypology());
-        assertEquals(0,newTypo2.getIdTypology()); //ID is 0 when initialized.
-    }
-
-    @Test
-    public void idGeneratorTestInvalidID(){
-        //Arrange
-        TypologyStore typologyStore = new TypologyStore();
-        Typology newTypo = typologyStore.createTypology("Test1");
-        Typology newTypo2 = typologyStore.createTypology("Test2");
-        Typology newTypo3 = typologyStore.createTypology("Test3");
-        //Act
-        newTypo.setIdTypology(1);
-        newTypo2.setIdTypology(1);
-        newTypo3.setIdTypology(1);
-        typologyStore.saveTypology(newTypo);
-        typologyStore.saveTypology(newTypo2);
-        typologyStore.saveTypology(newTypo3);
-        //Assert
-        assertEquals( 1,newTypo.getIdTypology());
-        assertEquals( 3, newTypo3.getIdTypology());
-        assertEquals(2, newTypo2.getIdTypology()); //ID is 0 when initialized.
-    }
 
     @Test //Test for adding new typology not null at Typology List checking attributes and list size.
     public void saveTypologyTestNotNull() {
         //Arrange
-        Typology typo2 = new Typology(new Description("Test"));
+        Typology typo2 = new Typology("Test");
         //Act
         typologyStore.saveTypology(typo2);
         //Assert
         assertEquals("Test", typo2.getDescription().getText());
-        assertEquals(3,typo2.getIdTypology());
         assertEquals(3, typologyStore.getTypologyList().size());
     }
 
@@ -119,7 +73,7 @@ public class TypologyStoreTest {
         //Assert
         assertThrows (IllegalArgumentException.class, () -> {
             //Arrange
-            Typology typo2 = new Typology(new Description(""));
+            Typology typo2 = new Typology("");
             //Act
             typologyStore.saveTypology(typo2);
         });
@@ -128,11 +82,11 @@ public class TypologyStoreTest {
     @Test
     public void addMultiplesTypologiesAtSameTime() {
         //Arrange
-        Typology typo2 = new Typology(new Description("TestTypology2"));
-        Typology typo3 = new Typology(new Description("TestTypology3"));
-        Typology typo4 = new Typology(new Description("TestTypology4"));
-        Typology typo5 = new Typology(new Description("TestTypology5"));
-        Typology typo6 = new Typology(new Description("TestTypology6"));
+        Typology typo2 = new Typology("TestTypology2");
+        Typology typo3 = new Typology("TestTypology3");
+        Typology typo4 = new Typology("TestTypology4");
+        Typology typo5 = new Typology("TestTypology5");
+        Typology typo6 = new Typology("TestTypology6");
         //Act
         typologyStore.saveTypology(typo2);
         typologyStore.saveTypology(typo3);
@@ -154,7 +108,7 @@ public class TypologyStoreTest {
 
         Typology descriptionTest = typologyStore.getTypology("Time and Materials");
         //Assert
-        assertEquals(descriptionTest, new Typology(new Description("Time and Materials")));
+        assertEquals(descriptionTest, new Typology("Time and Materials"));
     }
 
     @Test
@@ -166,23 +120,6 @@ public class TypologyStoreTest {
     }
 
     @Test
-    public void getTypologyWithId_TypologyTest(){
-        //Arrange //Act
-        Typology descriptionTest = typologyStore.getTypology(2);
-        //Assert
-        assertEquals(descriptionTest, new Typology(new Description("Time and Materials")));
-    }
-
-    @Test
-    public void getWrongId_TypologyTest(){
-        //Arrange //Act
-        Typology id = typologyStore.getTypology(10);
-        //Assert
-        assertNull(id);
-    }
-
-
-    @Test
     public void getTypologyListTest() {
         //Arrange
         TypologyStore test = new TypologyStore();
@@ -192,16 +129,12 @@ public class TypologyStoreTest {
         assertEquals(typologyStore.getTypologyList(), test.getTypologyList());
     }
 
-
-
-
-
     @Test
     public void validateTypology(){
         //Arrange
-        Typology typo = new Typology(new Description("test"));
-        Typology typo1 = new Typology(new Description("Tes"));
-        Typology typo2 = new Typology(new Description("Test2"));
+        Typology typo = new Typology("test");
+        Typology typo1 = new Typology("Tes");
+        Typology typo2 = new Typology("Test2");
         //Assert
         assertTrue(typologyStore.validateTypology(typo));
         assertTrue(typologyStore.validateTypology(typo1));
@@ -212,7 +145,7 @@ public class TypologyStoreTest {
     @Test
     public void thisNotExistTest() {
         //Arrange
-        Typology typo = new Typology(new Description("Test"));
+        Typology typo = new Typology("Test");
         //Act
         company.getTypologyStore().saveTypology(typo);
         int size = company.getTypologyStore().getTypologyList().size();
@@ -225,8 +158,8 @@ public class TypologyStoreTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            Typology typo = new Typology(new Description("teste"));
-            Typology typo1 = new Typology(new Description("teste"));
+            Typology typo = new Typology("teste");
+            Typology typo1 = new Typology("teste");
             //Act
             typologyStore.saveTypology(typo);
             typologyStore.saveTypology(typo1);
@@ -237,25 +170,19 @@ public class TypologyStoreTest {
     public void overrideAndHashCodeTest() {
         //Arrange
         TypologyStore list1 = new TypologyStore ();
-        list1.saveTypology(list1.createTypology("new"));
+//        list1.createTypology(list1.createTypology("new"));
+        list1.createTypology("new");
         TypologyStore  list2 = new TypologyStore ();
-        list2.saveTypology(list1.createTypology("new"));
+//        list2.saveTypology(list1.createTypology("new"));
+        list2.createTypology("new");
         TypologyStore  list3 = new TypologyStore ();
-        list3.saveTypology(list3.createTypology("not new"));
+//        list3.saveTypology(list3.createTypology("not new"));
+        list3.createTypology("not new");
         //Assert
         assertNotSame(list1, list2);
         assertEquals(list1, list2);
         assertEquals(list1.hashCode(), list2.hashCode());
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
-    }
-
-    @Test
-    public void typologySetTest () {
-        TypologyStore store = new TypologyStore();
-        store.populateDefault();
-        store.getTypologyList().get(0).setIdTypology(50002);
-
-        assertEquals(50002, store.getTypologyList().get(0).getIdTypology());
     }
 }

@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import lombok.Getter;
+import lombok.NonNull;
 import switch2021.project.utils.App;
 import java.time.LocalDate;
 import java.util.ArrayList;

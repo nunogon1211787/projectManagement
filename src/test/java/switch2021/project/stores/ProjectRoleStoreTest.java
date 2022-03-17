@@ -52,24 +52,6 @@ class ProjectRoleStoreTest {
     }
 
     @Test
-    public void getProjectRoleTestSuccess() {
-        //Arrange
-        Company company = new Company();
-        //Act
-        ProjectRole test = company.getProjectRoleStore().getProjectRole(1);
-        //Assert
-        assertEquals(test, company.getProjectRoleStore().getProjectRole("Project Manager"));
-    }
-
-    @Test
-    public void getProjectRoleTestFail() {
-        //Arrange
-        Company company = new Company();
-        //Act and Assert
-        assertNull(company.getProjectRoleStore().getProjectRole(10));
-    }
-
-    @Test
     public void validateProjectRoleExistTestSuccess() {
         //Arrange
         Company company = new Company();

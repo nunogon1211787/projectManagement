@@ -40,7 +40,7 @@ class UserStoryStatusTest {
         UserStoryStatus description = new UserStoryStatus("Teste");
         UserStoryStatus description2 = new UserStoryStatus("Teste");
         UserStoryStatus description3 = null;
-        Typology test = new Typology(new Description("test"));
+        Typology test = new Typology("test");
         // Act
         assertEquals(description,description2);
         assertNotEquals(description, description3);

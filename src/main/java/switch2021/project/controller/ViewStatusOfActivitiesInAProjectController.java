@@ -30,8 +30,8 @@ public class ViewStatusOfActivitiesInAProjectController {
 
     public List<Project> getProjectListByUser(String email) {
         ProjectStore projectStore = this.company.getProjectStore();
-        List<Project> arrayProject = projectStore.getProjectsByUserEmail(email);
-        return arrayProject;
+        return projectStore.getProjectsByUserEmail(email);
+
     }
 
     /**
