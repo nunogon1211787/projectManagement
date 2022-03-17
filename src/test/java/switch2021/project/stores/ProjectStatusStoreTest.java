@@ -1,7 +1,10 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.*;
+import switch2021.project.model.Company;
+import switch2021.project.model.ProjectStatus;
+import switch2021.project.model.TaskType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,42 +29,71 @@ class ProjectStatusStoreTest {
     }
 
     @Test
-    void createProjectStatusSuccess() {
+    void createAndSaveProjectStatusSuccess() {
         //Arrange
         Company company = new Company();
         ProjectStatusStore store = company.getProjectStatusStore();
         //Act
-        ProjectStatus newStatus = store.createProjectStatus("test");
+        boolean result = store.createAndSaveProjectStatus("test");
         //Assert
-        assertEquals(7,store.getProjectStatusList().size());
-        assertEquals("test", newStatus.getDescription().getText());
-    }
-
-    @Test
-    void addProjectStatusSuccess() {
-        //Arrange
-        Company company = new Company();
-        ProjectStatusStore store = company.getProjectStatusStore();
-        ProjectStatus newStatus = store.createProjectStatus("test");
-        //Act
-        boolean result = store.add(newStatus);
-        //Assert
+        assertEquals(8, store.getProjectStatusList().size());
         assertTrue(result);
-        assertEquals(8,store.getProjectStatusList().size());
-        assertEquals("test",store.getProjectStatusByDescription("test").getDescription().getText());
     }
 
     @Test
-    void addProjectStatusFail() {
+    void createAndSaveProjectStatusFailStatusAlreadyExists2() {
         //Arrange
         Company company = new Company();
         ProjectStatusStore store = company.getProjectStatusStore();
-        ProjectStatus newStatus = store.createProjectStatus("Elaboration");
+        store.createAndSaveProjectStatus("test");
         //Act
-        boolean result = store.add(newStatus);
-        //Assert
-        assertEquals(7,store.getProjectStatusList().size());
-        assertFalse(result);
+        assertThrows(IllegalArgumentException.class, () ->
+                store.createAndSaveProjectStatus("test")
+        );
+    }
+
+    @Test
+    void createAndSaveProjectStatusFailStatusAlreadyExists() {
+        //Arrange
+        Company company = new Company();
+        ProjectStatusStore store = company.getProjectStatusStore();
+        //Act
+        assertThrows(IllegalArgumentException.class, () ->
+                store.createAndSaveProjectStatus("Elaboration")
+        );
+    }
+
+    @Test
+    void createAndSaveProjectStatusFailStatusAlreadyExistsUpperCase() {
+        //Arrange
+        Company company = new Company();
+        ProjectStatusStore store = company.getProjectStatusStore();
+        //Act
+        assertThrows(IllegalArgumentException.class, () ->
+                store.createAndSaveProjectStatus(" ELABORATION ")
+        );
+    }
+
+    @Test
+    void createAndSaveProjectStatusFailStatusAlreadyExistsLowerCase() {
+        //Arrange
+        Company company = new Company();
+        ProjectStatusStore store = company.getProjectStatusStore();
+        //Act
+        assertThrows(IllegalArgumentException.class, () ->
+                store.createAndSaveProjectStatus(" elaboration ")
+        );
+    }
+
+    @Test
+    void createAndSaveProjectStatusFailEmptyStatus() {
+        //Arrange
+        Company company = new Company();
+        ProjectStatusStore store = company.getProjectStatusStore();
+        //Act
+        assertThrows(IllegalArgumentException.class, () ->
+                store.createAndSaveProjectStatus("")
+        );
     }
 
     @Test
@@ -69,28 +101,31 @@ class ProjectStatusStoreTest {
         //Arrange
         Company company = new Company();
         ProjectStatusStore store = company.getProjectStatusStore();
-
-        List<ProjectStatus> status = new ArrayList<>();
-        status.add(new ProjectStatus("Planned"));
-        status.add(new ProjectStatus("Inception"));
-        status.add(new ProjectStatus("Elaboration"));
-        status.add(new ProjectStatus("Construction"));
-        status.add(new ProjectStatus("Transition"));
-        status.add(new ProjectStatus("Warranty"));
-        status.add(new ProjectStatus("Closed"));
+        //Act
+        List<ProjectStatus> statusListCopy = new ArrayList<>(store.getProjectStatusList());
         //Assert
-        assertEquals(status, store.getProjectStatusList());
+        assertEquals(statusListCopy.size(), store.getProjectStatusList().size());
+        assertEquals(statusListCopy, store.getProjectStatusList());
     }
 
     @Test
-    void getProjectStatusByDescription() {
+    void getProjectStatusByDescriptionSuccess() {
         //Arrange
         Company company = new Company();
         ProjectStatusStore store = company.getProjectStatusStore();
-
-        ProjectStatus status = new ProjectStatus("Planned");
+        //Act
+        ProjectStatus status = store.getProjectStatusByDescription("Planned");
         //Assert
-        assertEquals(status, store.getProjectStatusByDescription("Planned"));
+        assertEquals("Planned", status.getDescription().getText());
+    }
+
+    @Test
+    void getProjectStatusByDescriptionFail() {
+        //Arrange
+        Company company = new Company();
+        ProjectStatusStore store = company.getProjectStatusStore();
+        //Assert
+        assertNull(store.getProjectStatusByDescription("new"));
     }
 
     @Test
@@ -98,47 +133,8 @@ class ProjectStatusStoreTest {
         ProjectStatusStore store = new ProjectStatusStore();
         store.populateDefault();
 
-        String status ="null";
+        String status = "null";
 
         assertNull(store.getProjectStatusByDescription(status));
-    }
-
-    @Test
-    void overrideEquals() {
-        ProjectStatus status1 = new ProjectStatus("teste");
-        ProjectStatus status2 = new ProjectStatus("teste");
-
-
-        assertEquals(status1,status2);
-    }
-
-    @Test
-    void overrideNotEquals() {
-        ProjectStatus status1 = new ProjectStatus("teste");
-        ProjectStatus status2 = new ProjectStatus("teste2");
-
-        assertNotEquals(status1,status2);
-        assertEquals(status1.getClass(),status2.getClass());
-        assertNotEquals( null,status1);
-    }
-
-    @Test
-    void hashCodeTest() {
-        ProjectStatus status1 = new ProjectStatus("teste");
-        ProjectStatus status2 = new ProjectStatus("teste2");
-
-        assertNotEquals(status1.hashCode(),status2.hashCode());
-    }
-
-    @Test
-    void overrideTest() {
-        ProjectStatus status1 = new ProjectStatus("teste");
-        ProjectStatus status2 = new ProjectStatus("teste");
-        ProjectStatus status3 = null;
-        TaskType typo = new TaskType("test");
-
-        assertEquals(status1,status2);
-        assertNotEquals(status1,status3);
-        assertNotEquals(status1,typo);
     }
 }
