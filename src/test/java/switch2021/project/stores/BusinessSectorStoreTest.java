@@ -124,6 +124,23 @@ class BusinessSectorStoreTest {
         assertNull(store.getBusinessSectorByDescription("null"));
     }
 
+
+    @Test
+    void getBusinessSectorByDescriptionWithMock_Null() {
+        //Arrange
+        BusinessSectorStore store = new BusinessSectorStore();
+        BusinessSector marketing = mock (BusinessSector.class); //classe B
+        Description description = mock (Description.class); //classe C
+
+        when(marketing.getDescription()).thenReturn(description);
+        when(description.getText()).thenReturn("teste");
+        store.addBusinessSector(marketing); //salvar a classe B
+
+        //Assert
+        assertNull (store.getBusinessSectorByDescription("null"));
+
+    }
+
     @Test
     void hashCodeTest() {
         //Arrange
