@@ -304,7 +304,8 @@ public class SystemUser {
         int result = 0;
 
         if (!profiles.isEmpty()) {
-            if (this.assignedProfileList != null) {
+            //Review, the assignedProfileList isn't null because is created in the constructor...
+//            if (this.assignedProfileList != null) {
                 int count = 0;
 
                 for (UserProfile k : profiles) {
@@ -318,7 +319,7 @@ public class SystemUser {
                     result = -1;
                 }
             }
-        }
+//        }
         return result;
     }
     //REVIEW
