@@ -1,7 +1,6 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import lombok.NonNull;
 import switch2021.project.utils.App;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class ProjectTeam {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(user) && i.isCurrent()) {
+            if (i.isYourByUser(user) && i.isCurrent()) {
                 resource = i;
                 break;
             }
@@ -46,7 +45,7 @@ public class ProjectTeam {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(role) && i.isCurrent()) {
+            if (i.isYourByRole(role) && i.isCurrent()) {
                 resource = i;
                 break;
             }
@@ -59,7 +58,7 @@ public class ProjectTeam {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(email) && i.isCurrent()) {
+            if (i.isYourByEmail(email) && i.isCurrent()) {
                 resource = i;
                 break;
             }
@@ -122,7 +121,7 @@ public class ProjectTeam {
         ProjectRole role = App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Product Owner");
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(role) && i.isAvailableToSprint(startDate, sprintDuration)) {
+            if (i.isYourByRole(role) && i.isAvailableToSprint(startDate, sprintDuration)) {
                 resource = i;
             }
         }
@@ -140,7 +139,7 @@ public class ProjectTeam {
         ProjectRole role = App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Scrum Master");
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(role) && i.isAvailableToSprint(startDate, sprintDuration)){
+            if (i.isYourByRole(role) && i.isAvailableToSprint(startDate, sprintDuration)){
                 resource = i;
             }
         }
@@ -209,7 +208,7 @@ public class ProjectTeam {
         boolean msg = false;
         if (role != null && !role.getName().getText().equals("Team Member")) {
             for (Resource i : projectTeamList) {
-                if (i.isYour(role) && i.getEndDate().isAfter(startDate)) {
+                if (i.isYourByRole(role) && i.getEndDate().isAfter(startDate)) {
                     msg = true;
                     break;
                 }
@@ -222,7 +221,7 @@ public class ProjectTeam {
         boolean msg = false;
 
         for (Resource resource : this.projectTeamList) {
-            if (resource.isYour(email) && resource.isCurrent()) {
+            if (resource.isYourByEmail(email) && resource.isCurrent()) {
                 msg = true;
             }
         }
@@ -233,7 +232,7 @@ public class ProjectTeam {
     public boolean hasResource(String email) {
         boolean msg = false;
         for (Resource resource : this.projectTeamList) {
-            if (resource.isYour(email)) {
+            if (resource.isYourByEmail(email)) {
                 msg = true;
             }
         }

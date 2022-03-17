@@ -48,18 +48,14 @@ public class Resource {
         this.role = originalResource.getRole();
     }
 
-
-
-    /**
-     * This method checks if the Resource is that what we are looking for
-     **/
+    /** This method checks if the Resource is that what we are looking for **/
     // Check by User
-    public boolean isYour(SystemUser user) {
+    public boolean isYourByUser(SystemUser user) {
         return this.user == user;
     }
 
     // Check by Role
-    public boolean isYour(ProjectRole projectRole) {
+    public boolean isYourByRole(ProjectRole projectRole) {
         boolean result = false;
         if(this.role != null){
             result = this.role.equals(projectRole);
@@ -68,7 +64,7 @@ public class Resource {
     }
 
     // Check by Email
-    public boolean isYour(String email) {
+    public boolean isYourByEmail(String email) {
         return this.user.isYourEmail(email);
     }
 

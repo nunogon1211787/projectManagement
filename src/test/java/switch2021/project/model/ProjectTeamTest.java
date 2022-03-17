@@ -40,7 +40,7 @@ public class ProjectTeamTest {
         ProjectTeam projectTeam = new ProjectTeam();
 
         Resource manuelbras = mock(Resource.class);
-        when(manuelbras.isYour("manuelbras@beaver.com")).thenReturn(true);
+        when(manuelbras.isYourByEmail("manuelbras@beaver.com")).thenReturn(true);
         when(manuelbras.isCurrent()).thenReturn(true);
 
         projectTeam.saveResource(manuelbras);
@@ -58,7 +58,7 @@ public class ProjectTeamTest {
         ProjectTeam projectTeam = new ProjectTeam();
 
         Resource manuelbras = mock(Resource.class);
-        when(manuelbras.isYour("manuelbras@beaver.com")).thenReturn(false);
+        when(manuelbras.isYourByEmail("manuelbras@beaver.com")).thenReturn(false);
         when(manuelbras.isCurrent()).thenReturn(false);
 
         projectTeam.saveResource(manuelbras);
@@ -76,7 +76,7 @@ public class ProjectTeamTest {
         ProjectTeam projectTeam = new ProjectTeam();
         SystemUser user = mock(SystemUser.class);
         Resource manuelbras = mock(Resource.class);
-        when(manuelbras.isYour(user)).thenReturn(true);
+        when(manuelbras.isYourByUser(user)).thenReturn(true);
         when(manuelbras.isCurrent()).thenReturn(true);
 
         projectTeam.saveResource(manuelbras);
@@ -94,7 +94,7 @@ public class ProjectTeamTest {
         ProjectTeam projectTeam = new ProjectTeam();
         SystemUser user = mock(SystemUser.class);
         Resource manuelbras = mock(Resource.class);
-        when(manuelbras.isYour(user)).thenReturn(false);
+        when(manuelbras.isYourByUser(user)).thenReturn(false);
         when(manuelbras.isCurrent()).thenReturn(false);
 
         projectTeam.saveResource(manuelbras);
@@ -112,7 +112,7 @@ public class ProjectTeamTest {
         ProjectTeam projectTeam = new ProjectTeam();
         ProjectRole role = mock(ProjectRole.class);
         Resource manuelbras = mock(Resource.class);
-        when(manuelbras.isYour(role)).thenReturn(true);
+        when(manuelbras.isYourByRole(role)).thenReturn(true);
         when(manuelbras.isCurrent()).thenReturn(true);
 
         projectTeam.saveResource(manuelbras);
@@ -130,7 +130,7 @@ public class ProjectTeamTest {
         ProjectTeam projectTeam = new ProjectTeam();
         ProjectRole role = mock(ProjectRole.class);
         Resource manuelbras = mock(Resource.class);
-        when(manuelbras.isYour(role)).thenReturn(false);
+        when(manuelbras.isYourByRole(role)).thenReturn(false);
         when(manuelbras.isCurrent()).thenReturn(false);
 
         projectTeam.saveResource(manuelbras);
@@ -757,10 +757,10 @@ public class ProjectTeamTest {
         proj1.getProjectTeam().saveResource(joana3R);
         proj1.getProjectTeam().saveResource(joana4R);
         //Assert
-        assertTrue(joana1R.isYour(company.getProjectRoleStore().getProjectRole("Scrum Master")));
-        assertTrue(joana2R.isYour(company.getProjectRoleStore().getProjectRole("Product Owner")));
-        assertTrue(joana3R.isYour(company.getProjectRoleStore().getProjectRole("Project Manager")));
-        assertTrue(joana4R.isYour(company.getProjectRoleStore().getProjectRole("Team Member")));
+        assertTrue(joana1R.isYourByRole(company.getProjectRoleStore().getProjectRole("Scrum Master")));
+        assertTrue(joana2R.isYourByRole(company.getProjectRoleStore().getProjectRole("Product Owner")));
+        assertTrue(joana3R.isYourByRole(company.getProjectRoleStore().getProjectRole("Project Manager")));
+        assertTrue(joana4R.isYourByRole(company.getProjectRoleStore().getProjectRole("Team Member")));
         assertTrue(proj1.getProjectTeam().validateProjectTeam(startDatej2, 2));
         assertTrue(proj1.getProjectTeam().validateProjectTeam(startDatej1, 1));
     }
