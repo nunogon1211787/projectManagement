@@ -68,7 +68,7 @@ public class CreateUserStoryControllerTest {
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", status, priority, description)));
         Exception exception2 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", status, priority, description2)));
-        Exception exception3 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", status, priority, description3)));
+        Exception exception3 = assertThrows(NullPointerException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", status, priority, description3)));
         //Assert
         assertTrue(exception.getMessage().contains("Description field requires at least " + 1 + " characters"));
         assertTrue(exception2.getMessage().contains("Description field requires at least " + 1 + " characters"));

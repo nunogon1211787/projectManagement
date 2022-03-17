@@ -37,8 +37,11 @@ public class Sprint {
     /**
      * Method to change Sprint EndDate
      **/
+    long SEM = 7;
+    int DIA = 1;
+
     public void changeEndDate(int sprintDurationInWeeks) {
-        this.endDate = startDate.plusDays((sprintDurationInWeeks * 7L) - 1);
+        this.endDate = startDate.plusDays((sprintDurationInWeeks * SEM) - DIA);
     }
 
     public boolean hasSprintID(int id) {
@@ -84,7 +87,9 @@ public class Sprint {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sprint sprint = (Sprint) o;
-        return idSprint == sprint.idSprint && Objects.equals(name, sprint.name) && Objects.equals(taskList, sprint.taskList) && Objects.equals(sprintBacklog, sprint.sprintBacklog) && Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
+        return idSprint == sprint.idSprint && Objects.equals(name, sprint.name) &&
+                Objects.equals(taskList, sprint.taskList) && Objects.equals(sprintBacklog, sprint.sprintBacklog) &&
+                Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
     }
 
     @Override

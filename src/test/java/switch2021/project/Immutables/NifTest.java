@@ -1,4 +1,4 @@
-package switch2021.project.immutable;
+package switch2021.project.Immutables;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;

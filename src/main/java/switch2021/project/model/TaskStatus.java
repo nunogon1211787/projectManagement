@@ -1,58 +1,33 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import lombok.Setter;
-
+import switch2021.project.Immutables.Description;
 import java.util.Objects;
 
-@Setter
 @Getter
 public class TaskStatus {
 
     /**
-     * Attributes.
+     * Attributes
      **/
-    private int idTaskStatus;
-    private String description;
+    private Description description;
+
 
     /**
-     * Constructor.
+     * Constructor
      **/
     public TaskStatus(String description) {
-
-        checkDescriptionRules(description);
-        this.description = description;
+        this.description = new Description(description);
     }
 
-    /**
-     * Methods to iterate with attributes,
-     */
 
+    /**
+     * Methods to iterate with attributes
+     */
     public boolean hasDescription(String description) {
-        return Objects.equals(this.description, description);
+        return this.description.getText().equals(description);
     }
 
-    public void setIDTaskStatus(int id){
-        checkIdRules(id);
-        this.idTaskStatus = id;
-    }
-
-    /**
-     * Methods to validate attributes data.
-     */
-    private static final int MIN_DESCRIPTION_LENGTH = 3; //modify to public?
-
-    private void checkDescriptionRules(String description) {
-        if (description.trim().isEmpty())
-            throw new IllegalArgumentException("Name cannot be empty.");
-        if ((description.length() < MIN_DESCRIPTION_LENGTH))
-            throw new IllegalArgumentException("Name must be at least" + MIN_DESCRIPTION_LENGTH + " characters");
-    }
-
-    private void checkIdRules(int id) {
-        if (id < 1)
-            throw new IllegalArgumentException("Type ID cannot be negative.");
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -64,6 +39,6 @@ public class TaskStatus {
 
     @Override
     public int hashCode() {
-        return Objects.hash(idTaskStatus, description);
+        return Objects.hash(description);
     }
 }

@@ -75,20 +75,18 @@ public class TaskListTest {
     void createTaskStatus() {
         //Arrange
         TaskStatus status = new TaskStatus("test123");
-
         //Assert
-        assertEquals("test123", status.getDescription());
+        assertEquals("test123", status.getDescription().getText());
     }
 
     @Test
     void getTaskStatusByDescription() {
         //Arrange
         TaskStatusStore store = new TaskStatusStore();
+        //Act
         store.populateDefault();
-        TaskStatus planned = new TaskStatus("Planned");
-
         //Assert
-        assertEquals(planned, store.getTaskStatusByDescription("Planned"));
+        assertEquals("Planned", store.getTaskStatusByDescription("Planned").getDescription().getText());
     }
 
     @Test
