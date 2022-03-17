@@ -1,7 +1,6 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import lombok.NonNull;
 import switch2021.project.utils.App;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class ProjectTeam {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(user) && i.isCurrent()) {
+            if (i.isYourEmail(user) && i.isCurrent()) {
                 resource = i;
                 break;
             }
@@ -46,7 +45,7 @@ public class ProjectTeam {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(role) && i.isCurrent()) {
+            if (i.isYourEmail(role) && i.isCurrent()) {
                 resource = i;
                 break;
             }
@@ -59,7 +58,7 @@ public class ProjectTeam {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(email) && i.isCurrent()) {
+            if (i.isYourEmail(email) && i.isCurrent()) {
                 resource = i;
                 break;
             }
@@ -92,8 +91,6 @@ public class ProjectTeam {
     }
 
 
-
-
     /**
      * Method to Validate a PO and a SM exists in the ProjectTeam
      */
@@ -111,18 +108,15 @@ public class ProjectTeam {
     }
 
 
-
     /**
      * Method to Get a Specific Resource (PO), by StartDate of the Sprint
      */
-    private Resource getProductOwnerByStartDate(LocalDate startDate, int sprintDuration) {
+    public Resource getProductOwnerByStartDate(LocalDate startDate, int sprintDuration) {
 
         Resource resource = null;
 
-        ProjectRole role = App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Product Owner");
-
         for (Resource i : projectTeamList) {
-            if (i.isYour(role) && i.isAvailableToSprint(startDate, sprintDuration)) {
+            if (i.isYourRole("Product Owner") && i.isAvailableToSprint(startDate, sprintDuration)) {
                 resource = i;
             }
         }
@@ -133,14 +127,14 @@ public class ProjectTeam {
     /**
      * Method to Get a Specific Resource (SM), by StartDate of the Sprint
      */
-    private Resource getScrumMasterByStartDate(LocalDate startDate, int sprintDuration) {
+    public Resource getScrumMasterByStartDate(LocalDate startDate, int sprintDuration) {
 
         Resource resource = null;
 
-        ProjectRole role = App.getInstance().getCompany().getProjectRoleStore().getProjectRole("Scrum Master");
+        String role = "Scrum Master";
 
         for (Resource i : projectTeamList) {
-            if (i.isYour(role) && i.isAvailableToSprint(startDate, sprintDuration)){
+            if (i.isYourRole(role) && i.isAvailableToSprint(startDate, sprintDuration)){
                 resource = i;
             }
         }
@@ -209,7 +203,7 @@ public class ProjectTeam {
         boolean msg = false;
         if (role != null && !role.getName().getText().equals("Team Member")) {
             for (Resource i : projectTeamList) {
-                if (i.isYour(role) && i.getEndDate().isAfter(startDate)) {
+                if (i.isYourEmail(role) && i.getEndDate().isAfter(startDate)) {
                     msg = true;
                     break;
                 }
@@ -222,7 +216,7 @@ public class ProjectTeam {
         boolean msg = false;
 
         for (Resource resource : this.projectTeamList) {
-            if (resource.isYour(email) && resource.isCurrent()) {
+            if (resource.isYourEmail(email) && resource.isCurrent()) {
                 msg = true;
             }
         }
@@ -233,7 +227,7 @@ public class ProjectTeam {
     public boolean hasResource(String email) {
         boolean msg = false;
         for (Resource resource : this.projectTeamList) {
-            if (resource.isYour(email)) {
+            if (resource.isYourEmail(email)) {
                 msg = true;
             }
         }
