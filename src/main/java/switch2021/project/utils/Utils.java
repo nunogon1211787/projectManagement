@@ -2,6 +2,9 @@ package switch2021.project.utils;
 
 public class Utils {
 
+    private Utils() {
+    }
+
     public static boolean isPerfectSquare(int x) {
         int square = (int) Math.sqrt(x);
         return (square * square == x);

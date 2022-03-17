@@ -1207,20 +1207,25 @@ class SystemUserTest {
         SystemUser teste4 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_123", userProfile);
         String originalValue4 = teste.getFunction().getText();
+        SystemUser teste5 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue5 = teste.getFunction().getText();
 
         //Act
 
         teste.setFunction("D");
-        teste2.setFunction("");
+        teste2.setFunction("  ");
         teste3.setFunction("CDC");
         teste4.setFunction("CD");
+        teste5.setFunction("C G");
 
         // Assert
         assertEquals(originalValue, teste.getFunction().getText());
         assertEquals(originalValue2, teste2.getFunction().getText());
-        assertNotEquals(originalValue3, teste3.getFunction());
+        assertNotEquals(originalValue3, teste3.getFunction().getText());
         assertEquals("CDC", teste3.getFunction().getText());
-        assertNotEquals("CD", teste4.getFunction());
+        assertNotEquals("CD", teste4.getFunction().getText());
+        assertEquals(originalValue5, teste5.getFunction().getText());
     }
 
     @Test
