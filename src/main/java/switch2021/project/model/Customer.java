@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.immutable.Nif;
+import switch2021.project.Immutables.Nif;
 
 import java.util.Objects;
 

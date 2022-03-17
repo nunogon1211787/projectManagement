@@ -1,7 +1,7 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.immutable.Nif;
+import switch2021.project.Immutables.Nif;
 import switch2021.project.model.Customer;
 
 import java.util.ArrayList;

@@ -20,7 +20,7 @@ public class Description {
      **/
     public Description (String description) {
         if (description == null)
-            throw new IllegalArgumentException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + " characters");
+            throw new NullPointerException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + " characters");
         if (description.trim().length() < MIN_DESCRIPTION_LENGTH)
             throw new IllegalArgumentException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + " characters");
         if (description.trim().length() > MAX_DESCRIPTION_LENGTH)

@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.Immutables.Function;
 import switch2021.project.stores.SystemUserStore;
 
 import java.util.ArrayList;
@@ -1206,21 +1207,38 @@ class SystemUserTest {
         SystemUser teste4 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
                 "123", "123", "img_123", userProfile);
         String originalValue4 = teste.getFunction().getText();
+        SystemUser teste5 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        String originalValue5 = teste5.getFunction().getText();
 
         //Act
 
         teste.setFunction("D");
-        teste2.setFunction("");
+        teste2.setFunction("  ");
         teste3.setFunction("CDC");
         teste4.setFunction("CD");
+        teste5.setFunction("C G");
 
         // Assert
         assertEquals(originalValue, teste.getFunction().getText());
         assertEquals(originalValue2, teste2.getFunction().getText());
-        assertNotEquals(originalValue3, teste3.getFunction());
+        assertNotEquals(originalValue3, teste3.getFunction().getText());
         assertEquals("CDC", teste3.getFunction().getText());
-        assertNotEquals("CD", teste4.getFunction());
+        assertNotEquals("CD", teste4.getFunction().getText());
+        assertNotEquals(originalValue5, teste5.getFunction().getText());
     }
+
+    @Test
+    public void setFunctionNull() { assertThrows(NullPointerException.class, () -> {
+        //Arrange
+        Company company = new Company();
+        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser teste5 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
+                "123", "123", "img_123", userProfile);
+        //Act
+        teste5.setFunction(null);
+    });
+}
 
     @Test
     public void setPhoto() {
