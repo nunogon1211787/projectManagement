@@ -85,7 +85,7 @@ public class ProjectTeam {
 
         for (Resource resource : this.projectTeamList) {
             if (resource.isCurrent()) {
-                currentResourcesNames.add(resource.getUser().getUserName());
+                currentResourcesNames.add(resource.getUser().getUserName().getNameF());
             }
         }
         return currentResourcesNames;

@@ -728,25 +728,25 @@ public class ProjectTeamTest {
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
         joana1R.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
             //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
         joana2R.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
             //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
         Resource joana3R= proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
         joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
             //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -780,25 +780,25 @@ public class ProjectTeamTest {
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
         joana1R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
         joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
         Resource joana3R= proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
         joana3R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -830,25 +830,25 @@ public class ProjectTeamTest {
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
         joana1R.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
         joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 1, 31);
         Resource joana3R= proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
         joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
         //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 1, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -880,25 +880,25 @@ public class ProjectTeamTest {
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
         joana1R.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
         joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 1, 31);
         Resource joana3R= proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
         joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
         //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 1, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -929,25 +929,25 @@ public class ProjectTeamTest {
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
         joana1R.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
         joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 1, 31);
         Resource joana3R= proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
         joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
         //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 1, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -956,7 +956,7 @@ public class ProjectTeamTest {
         ProjectRole joana4role = joana4R.getRole();
 
         //Resource 5
-        SystemUser joana5 = new SystemUser("joana5", "joana5@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana5 = new SystemUser("joanacinco", "joana5@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej5 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej5 = LocalDate.of(2022, 1, 31);
         Resource joana5R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -988,7 +988,7 @@ public class ProjectTeamTest {
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
@@ -997,13 +997,13 @@ public class ProjectTeamTest {
         ProjectRole joana1role = joana1R.getRole();
 
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
         joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 1, 31);
         Resource joana3R= proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
@@ -1033,7 +1033,7 @@ public class ProjectTeamTest {
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
@@ -1042,13 +1042,13 @@ public class ProjectTeamTest {
         ProjectRole joana1role = joana1R.getRole();
 
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
         joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 1, 31);
         Resource joana3R= proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
