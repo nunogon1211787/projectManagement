@@ -11,9 +11,9 @@ public class Description {
     /**
      * Attributes
      **/
-    private String text;
-    private int MIN_DESCRIPTION_LENGTH = 1;
-    private int MAX_DESCRIPTION_LENGTH = 1000;
+    private final String text;
+    private final int MIN_DESCRIPTION_LENGTH = 1;
+    private final int MAX_DESCRIPTION_LENGTH = 1000;
 
     /**
      * Constructor

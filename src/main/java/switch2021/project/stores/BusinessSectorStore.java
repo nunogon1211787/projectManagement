@@ -48,6 +48,7 @@ public class BusinessSectorStore {
      **/
 
     public List<BusinessSector> getBusinessSectorList() {
+
         return new ArrayList<>(businessSectorList);
     }
 

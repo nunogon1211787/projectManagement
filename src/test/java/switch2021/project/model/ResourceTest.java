@@ -148,9 +148,9 @@ class ResourceTest {
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
-        assertTrue(input.isYourByEmail("fase"));
-        assertTrue(input.isYourByUser(newUser));
-        assertTrue(input.isYourByRole(company.getProjectRoleStore().getProjectRole("Team Member")));
+        assertTrue(input.isYourEmail("fase"));
+        assertTrue(input.isYourEmail(newUser));
+        assertTrue(input.isYourEmail(company.getProjectRoleStore().getProjectRole("Team Member")));
         assertTrue(input.isYourName("xyz"));
         assertTrue(input.isCurrent());
     }
@@ -167,9 +167,9 @@ class ResourceTest {
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
-        assertTrue(input.isYourByEmail("fase"));
-        assertTrue(input.isYourByUser(newUser));
-        assertTrue(input.isYourByRole(company.getProjectRoleStore().getProjectRole("Team Member")));
+        assertTrue(input.isYourEmail("fase"));
+        assertTrue(input.isYourEmail(newUser));
+        assertTrue(input.isYourEmail(company.getProjectRoleStore().getProjectRole("Team Member")));
         assertTrue(input.isYourName("xyz"));
         assertTrue(input.isCurrent());
     }
@@ -186,9 +186,9 @@ class ResourceTest {
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
-        assertTrue(input.isYourByEmail("fase"));
-        assertTrue(input.isYourByUser(newUser));
-        assertTrue(input.isYourByRole(company.getProjectRoleStore().getProjectRole("Team Member")));
+        assertTrue(input.isYourEmail("fase"));
+        assertTrue(input.isYourEmail(newUser));
+        assertTrue(input.isYourEmail(company.getProjectRoleStore().getProjectRole("Team Member")));
         assertTrue(input.isYourName("xyz"));
         assertTrue(input.isCurrent());
     }
@@ -207,8 +207,8 @@ class ResourceTest {
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
-        assertFalse(test.isYourByEmail("fase"));
-        assertFalse(test.isYourByUser(newUser));
+        assertFalse(test.isYourEmail("fase"));
+        assertFalse(test.isYourEmail(newUser));
         //assertTrue(test.isYour(company.getProjectRoleStore().getProjectRole("Team Member")));
         assertFalse(test.isYourName("ert"));
         assertFalse(test.isCurrent());
@@ -228,8 +228,8 @@ class ResourceTest {
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
-        assertFalse(test.isYourByEmail("fase"));
-        assertFalse(test.isYourByUser(newUser));
+        assertFalse(test.isYourEmail("fase"));
+        assertFalse(test.isYourEmail(newUser));
         //assertTrue(test.isYour(company.getProjectRoleStore().getProjectRole("Team Member")));
         assertFalse(test.isYourName("ert"));
         assertFalse(test.isCurrent());
@@ -593,7 +593,7 @@ class ResourceTest {
         Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
 
         //Act
-        boolean result = resAllo.isYourByUser(newUser);
+        boolean result = resAllo.isYourEmail(newUser);
 
         //Assert
         assertTrue(result);
