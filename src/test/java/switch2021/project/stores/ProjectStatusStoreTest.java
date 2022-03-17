@@ -137,4 +137,43 @@ class ProjectStatusStoreTest {
 
         assertNull(store.getProjectStatusByDescription(status));
     }
+
+    @Test
+    void overrideEquals() {
+        ProjectStatus status1 = new ProjectStatus("teste");
+        ProjectStatus status2 = new ProjectStatus("teste");
+
+
+        assertEquals(status1,status2);
+    }
+
+    @Test
+    void overrideNotEquals() {
+        ProjectStatus status1 = new ProjectStatus("teste");
+        ProjectStatus status2 = new ProjectStatus("teste2");
+
+        assertNotEquals(status1,status2);
+        assertEquals(status1.getClass(),status2.getClass());
+        assertNotEquals( null,status1);
+    }
+
+    @Test
+    void hashCodeTest() {
+        ProjectStatus status1 = new ProjectStatus("teste");
+        ProjectStatus status2 = new ProjectStatus("teste2");
+
+        assertNotEquals(status1.hashCode(),status2.hashCode());
+    }
+
+    @Test
+    void overrideTest() {
+        ProjectStatus status1 = new ProjectStatus("teste");
+        ProjectStatus status2 = new ProjectStatus("teste");
+        ProjectStatus status3 = null;
+        TaskType typo = new TaskType("test");
+
+        assertEquals(status1,status2);
+        assertNotEquals(status1,status3);
+        assertNotEquals(status1,typo);
+    }
 }
