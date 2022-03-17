@@ -25,4 +25,7 @@ public class BusinessSector {
         this.description = new Description(description);
     }
 
+    public boolean isDescription(String desc){
+        return description.getText().equals(desc);
+    }
 }
