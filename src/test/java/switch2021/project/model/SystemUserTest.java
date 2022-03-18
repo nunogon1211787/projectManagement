@@ -505,7 +505,7 @@ class SystemUserTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            String userName = "M";
+            String userName = "";
             String email = "manueloliveira@beaver.com";
             String password = "ghi";
             String passwordConfirmation = "ghi";

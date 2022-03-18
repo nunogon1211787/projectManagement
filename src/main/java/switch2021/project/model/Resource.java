@@ -66,16 +66,17 @@ public class Resource {
         return result;
     }
 
-    // Check by Email
+    // Check Resource Email
     public boolean isYourEmail(String email) {
         return this.user.isYourEmail(email);
     }
 
-    // Check by Name
+    // Check Resource Name
     public boolean isYourName(String name) {
         return this.user.hasName(name);
     }
 
+    //Check Resource Role
     public boolean isYourRole(String role) {
         return this.role.getName().getText().equals(role);
     }

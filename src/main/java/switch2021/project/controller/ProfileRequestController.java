@@ -34,7 +34,7 @@ public class ProfileRequestController {
     }
 
     public boolean saveRequest() {
-        return this.company.getRequestStore().saveRequest(this.request);
+        return this.company.getRequestStore().addProfileRequest(this.request);
     }
 
 }

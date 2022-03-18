@@ -1,10 +1,11 @@
 package switch2021.project.stores;
 
+import lombok.Getter;
 import switch2021.project.model.UserStoryStatus;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+@Getter
 public class UserStoryStatusStore {
 
     /**
@@ -40,10 +41,6 @@ public class UserStoryStatusStore {
     /**
      * Methods
      **/
-
-    public List<UserStoryStatus> getUserStoryStatusList() {
-        return Collections.unmodifiableList(userStoryStatusList);
-    }
 
     public UserStoryStatus getUserStoryStatusByDescription(String description){
         UserStoryStatus userStoryStatus = null;

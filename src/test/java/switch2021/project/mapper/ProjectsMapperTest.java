@@ -3,6 +3,7 @@ package switch2021.project.mapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.dto.ProjectDTO;
+import switch2021.project.factory.ResourceFactory;
 import switch2021.project.model.*;
 
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 public class ProjectsMapperTest {
 
@@ -200,7 +202,9 @@ public class ProjectsMapperTest {
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
-        ProjectTeam projectTeam = new ProjectTeam();
+        ResourceFactory resourceFactory = new ResourceFactory();
+
+        ProjectTeam projectTeam = new ProjectTeam(resourceFactory);
         company.getProjectStore().saveNewProject(project);
         company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
@@ -231,7 +235,8 @@ public class ProjectsMapperTest {
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
-        ProjectTeam projectTeam = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
         company.getProjectStore().saveNewProject(project);
         company.getProjectStore().saveNewProject(project2);
         project.addResource(input);

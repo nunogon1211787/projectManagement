@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import lombok.Getter;
+import switch2021.project.factory.ResourceFactory;
 import switch2021.project.utils.App;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,12 +14,19 @@ public class ProjectTeam {
     /**
      * ProjectTeam's Attribute
      **/
+    private ResourceFactory resFac;
+
     private final List<Resource> projectTeamList;  //Resource´s List in a Project.
 
     /**
      * ProjectTeam's Constructor
      **/
-    public ProjectTeam() {
+    public ProjectTeam(ResourceFactory resourceFac) {
+        this.resFac = resourceFac;
+        this.projectTeamList = new ArrayList<>();
+    }
+
+    public ProjectTeam(){
         this.projectTeamList = new ArrayList<>();
     }
 
@@ -143,6 +151,10 @@ public class ProjectTeam {
     /**
      * Create a new Resource
      */
+    public Resource createResourceWithFac(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
+        return this.resFac.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);
+    }
+
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
         return new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
     }
@@ -197,11 +209,11 @@ public class ProjectTeam {
     /**
      * Validation Methods
      **/
-    public boolean checkIfTheRoleExistAndIsCurrent(ProjectRole role, LocalDate startDate) {
+    public boolean checkIfTheRoleExistAndIsCurrent(ProjectRole role, LocalDate date) {
         boolean msg = false;
         if (role != null && !role.getName().getText().equals("Team Member")) {
             for (Resource i : projectTeamList) {
-                if (i.isYourEmail(role) && i.getEndDate().isAfter(startDate)) {
+                if (i.isYourEmail(role) && i.getEndDate().isAfter(date)) {
                     msg = true;
                     break;
                 }

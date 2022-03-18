@@ -2,6 +2,7 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.factory.ResourceFactory;
 import switch2021.project.immutable.Description;
 import switch2021.project.model.BusinessSector;
 import switch2021.project.model.ProjectTeam;
@@ -78,7 +79,8 @@ class BusinessSectorStoreTest {
     @DisplayName("Test with mock if the resource is returned ")
     public void getResourceByEmailTestSuccess() {
         //Arrange
-        ProjectTeam projectTeam = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
 
         Resource manuelbras = mock(Resource.class);
         when(manuelbras.isYourEmail("manuelbras@beaver.com")).thenReturn(true);

@@ -6,9 +6,9 @@ import switch2021.project.model.SystemUser;
 import switch2021.project.model.UserProfile;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Getter
+
 public class RequestStore {
 
     /**
@@ -27,7 +27,6 @@ public class RequestStore {
      * Creator Method
      **/
     public Request createProfileRequest (UserProfile Profile, SystemUser user ) {
-
         return new Request(Profile,user);
     }
 
@@ -35,7 +34,6 @@ public class RequestStore {
      * ID Generator
      */
     public int idGenerator () {
-
         int id = 1;
         if (getRequestProfileList().size() !=0){
             id = this.requestProfileList.get(this.requestProfileList.size() -1).getIdRequest() +1;
@@ -47,7 +45,6 @@ public class RequestStore {
      * Add Method
      **/
     public boolean addProfileRequest(Request request) {
-
         if(validateIfProfileRequestedItsNotAlreadyAssigned(request))
         {
             throw new IllegalArgumentException("Requested profile is already assigned to the user.");
@@ -55,11 +52,8 @@ public class RequestStore {
         if (validateIfRequestAlreadyExists(request) && (!validateStatusOfARequest(request))){
             throw new IllegalArgumentException("Request already exists");
         }
-
         request.setIdRequest(idGenerator());
-
         this.requestProfileList.add(request);
-
         return true;
     }
 
@@ -68,7 +62,6 @@ public class RequestStore {
      */
     public boolean removeProfileRequest (Request request){
         this.requestProfileList.remove(request);
-
        return true;
     }
 
@@ -93,13 +86,10 @@ public class RequestStore {
         return request.isRequestStatus();
 
     }
-
-
-    /**
+        /**
      * Validation Method
      */
-    private boolean validateRequest(Request newRequest) {
-
+    public boolean validateRequest(Request newRequest) {
         //Check if request already exist
         for (Request up : requestProfileList) {
             if (up.equals(newRequest)) {
@@ -107,34 +97,5 @@ public class RequestStore {
             }
         }
         return true;
-    }
-
-    /**
-     * Save Method
-     */
-    public boolean saveRequest(Request newRequest) {
-
-        boolean result = false;
-
-        if (validateRequest(newRequest)) {
-            result = addProfileRequest(newRequest);
-        }
-        return result;
-    }
-
-    /**
-     * Override
-     **/
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RequestStore that = (RequestStore) o;
-        return Objects.equals(requestProfileList, that.requestProfileList);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(requestProfileList);
     }
 }

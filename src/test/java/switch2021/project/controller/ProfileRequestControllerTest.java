@@ -64,11 +64,13 @@ class ProfileRequestControllerTest {
         company.getSystemUserStore().saveSystemUser(user);
         java.time.LocalDate datateste = LocalDate.now();
         //Act
-        Request request = controller.createProfileRequest("xxxx@isep.ipp.pt","Director");
-        Request request2 = controller.createProfileRequest("xxxx@isep.ipp.pt","Director");
+        controller.createProfileRequest("xxxx@isep.ipp.pt","Director");
+        controller.createProfileRequest("xxxx@isep.ipp.pt","Director");
         boolean test = controller.saveRequest();
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
         boolean test2 = controller.saveRequest();
+        });
         //Assert
-        assertFalse(test2);
+        assertFalse(exception.getMessage().equals("Requested profile is already assigned to the user."));
     }
 }
