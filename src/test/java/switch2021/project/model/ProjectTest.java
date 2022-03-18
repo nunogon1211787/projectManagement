@@ -83,7 +83,7 @@ class ProjectTest {
         assertEquals(valueCustomer,customer);
         assertEquals(valueTypology,typology);
         assertEquals(valueSector,sector);
-        assertEquals(valueStatus,status);
+        assertEquals(valueStatus.getDescription(),status.getDescription());
         assertEquals(valueDate,date);
         assertEquals(valueEndDate,endDate);
         assertEquals(valueNrSprint,numberOfSprints);
