@@ -158,6 +158,8 @@ public class ProjectTeam {
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
         return new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
     }
+
+
     /**
      * Method which saves new resource at ProjectTeam List
      **/

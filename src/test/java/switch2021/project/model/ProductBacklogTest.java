@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.stores.ProjectStore;
+import switch2021.project.stores.UserStoryStatusStore;
 
 
 import java.time.LocalDate;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class ProductBacklogTest {
     Company company;
@@ -57,9 +60,8 @@ public class ProductBacklogTest {
         assertEquals(status, userStory.getUserStoryStatus());
         assertEquals(priority, userStory.getPriority());
         assertEquals(description, userStory.getDescription().getText());
-        assertEquals(name, userStory.getName());
+        assertEquals(name, userStory.getTitle());
     }
-
 
     @Test
     public void createUserStorydescriptionInvalidEmpty() {
@@ -97,7 +99,7 @@ public class ProductBacklogTest {
         assertEquals(status, userStory.getUserStoryStatus());
         assertEquals(priority, userStory.getPriority());
         assertEquals(description, userStory.getDescription().getText());
-        assertEquals(name, userStory.getName());
+        assertEquals(name, userStory.getTitle());
     }
 
 

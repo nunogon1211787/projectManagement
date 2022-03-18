@@ -33,11 +33,9 @@ public class UserStoryEffortController {
      **/
 
     public List<Project> getCurrentProjectListByUserEmail(String email) {
-        List<Project> projectList = new ArrayList<>();
         ProjectStore projStore = this.company.getProjectStore();
-        projectList = projStore.getCurrentProjectsByUserEmail(email);
+        List<Project> projectList = projStore.getCurrentProjectsByUserEmail(email);
         return Collections.unmodifiableList(projectList);
-
     }
 
     public Project getProjectByCode(String code) {
@@ -47,13 +45,13 @@ public class UserStoryEffortController {
 
     public List<Sprint> getSprintsList() {
         this.sprintsList = new ArrayList<>();
-        this.sprintList = this.proj.getSprints();
-        this.sprintsList = this.sprintList.getSprintList();
+        this.sprintList = this.proj.getSprintList();
+        this.sprintsList = this.sprintList.getSprints();
         return Collections.unmodifiableList(sprintsList);
     }
 
     public Sprint getSprint(int id) {
-        this.sprintList = this.proj.getSprints();
+        this.sprintList = this.proj.getSprintList();
         this.sprint = this.sprintList.getSprint(id);
         return this.sprint;
     }

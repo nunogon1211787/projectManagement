@@ -46,7 +46,7 @@ public class RegisterWorkToTaskController {
         ProjectStore projectStore = this.company.getProjectStore();
         Project project = projectStore.getProjectByCode(code);
 
-        SprintList sprintList = project.getSprints();
+        SprintList sprintList = project.getSprintList();
         Sprint sprint = sprintList.getSprint(sprintId);
 
         SprintBacklog sprintBacklog = sprint.getSprintBacklog();
@@ -64,8 +64,8 @@ public class RegisterWorkToTaskController {
 
     public boolean createTaskEffort(TaskEffortDTO taskEffortDTO) {
 
-        int effortHours = taskEffortDTO.getEffortHours();
-        int effortMinutes = taskEffortDTO.getEffortMinutes();
+        int effortHours = taskEffortDTO.getEffort().getEffortHours();
+        int effortMinutes = taskEffortDTO.getEffort().getEffortMinutes();
        Date effortDate = taskEffortDTO.getEffortDate();
         String comment = taskEffortDTO.getComment();
         String attachment = taskEffortDTO.getAttachment();

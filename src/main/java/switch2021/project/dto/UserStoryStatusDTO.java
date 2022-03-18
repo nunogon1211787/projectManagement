@@ -9,7 +9,7 @@ public class UserStoryStatusDTO {
          * Attributes
          **/
 
-        private final String userStoryName;
+        private final String userStoryTitle;
         private final String userStoryStatus;
         private final String userStoryDescription;
         private final int userStoryTimeEstimate;
@@ -20,8 +20,8 @@ public class UserStoryStatusDTO {
          * Constructor to test (without SINGLETON)
          **/
 
-        public UserStoryStatusDTO(String name, String status, String description, int timeEstimate, int priority, int userStoryId) {
-                this.userStoryName = name;
+        public UserStoryStatusDTO(String title, String status, String description, int timeEstimate, int priority, int userStoryId) {
+                this.userStoryTitle = title;
                 this.userStoryStatus = status;
                 this.userStoryDescription = description;
                 this.userStoryTimeEstimate = timeEstimate;
