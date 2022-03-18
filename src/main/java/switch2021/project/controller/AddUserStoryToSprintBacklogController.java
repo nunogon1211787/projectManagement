@@ -33,7 +33,7 @@ public class AddUserStoryToSprintBacklogController {
     }
 
     public SprintList getSprintStore() {
-        sprintList = this.project.getSprints();
+        sprintList = this.project.getSprintList();
         return sprintList;
     }
 

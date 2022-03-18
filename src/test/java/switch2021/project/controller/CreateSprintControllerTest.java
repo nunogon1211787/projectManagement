@@ -113,10 +113,10 @@ public class CreateSprintControllerTest {
         controller.getCurrentProjectListByUserEmail("joana@beaver.com");
         controller.getProject(proj1.getCode());
         Sprint sprintC = controller.createSprint("Sprint44", LocalDate.of(2022, 3, 1));
-        proj1.getSprints().saveSprint(sprintC);
+        proj1.getSprintList().saveSprint(sprintC);
 
         //Assert
-        assertEquals(sprintC, proj1.getSprints().getSprint(sprintC.getIdSprint()));
+        assertEquals(sprintC, proj1.getSprintList().getSprint(sprintC.getIdSprint()));
     }
 
     @Test

@@ -15,14 +15,12 @@ public class ProjectTeam {
      **/
     private final List<Resource> projectTeamList;  //Resource´s List in a Project.
 
-
     /**
      * ProjectTeam's Constructor
      **/
     public ProjectTeam() {
         this.projectTeamList = new ArrayList<>();
     }
-
 
     /**
      * Getters and Setters

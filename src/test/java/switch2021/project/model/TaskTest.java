@@ -359,7 +359,6 @@ class TaskTest {
         assertFalse(task.saveTaskEffort(taskEffort));
     }
 
-    //início (tentar acabar com os bugs)
     @Test
     public void updateHoursSpentPositivo() {
         //Arrange
@@ -466,7 +465,6 @@ class TaskTest {
         assertEquals(12.0, task.getHoursSpent());
         assertEquals(1.0, task.getExecutionPercentage());
     }
-    //fim (tentar acabar com os bugs)
 
     @Test
     void hasTypeStatusResponsibleTestSuccess() {

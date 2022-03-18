@@ -46,7 +46,7 @@ public class RegisterWorkToTaskController {
         ProjectStore projectStore = this.company.getProjectStore();
         Project project = projectStore.getProjectByCode(code);
 
-        SprintList sprintList = project.getSprints();
+        SprintList sprintList = project.getSprintList();
         Sprint sprint = sprintList.getSprint(sprintId);
 
         SprintBacklog sprintBacklog = sprint.getSprintBacklog();

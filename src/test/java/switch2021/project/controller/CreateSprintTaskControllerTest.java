@@ -41,8 +41,8 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
             //Create a sprint
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        project.getSprintList().saveSprint(sprint);
 
             //Create tasks
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -79,8 +79,8 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        project.getSprintList().saveSprint(sprint);
 
         //Get sprint task list
         List<String> tasksNames = controller.getSprintTasks(project.getCode(), sprint.getIdSprint());
@@ -105,8 +105,8 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        project.getSprintList().saveSprint(sprint);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -147,8 +147,8 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        project.getSprintList().saveSprint(sprint);
 
         //Get project team names
         controller.getSprintTasks(project.getCode(), sprint.getIdSprint());
@@ -174,8 +174,8 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        project.getSprintList().saveSprint(sprint);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -215,8 +215,8 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        project.getSprintList().saveSprint(sprint);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -263,8 +263,8 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        project.getSprintList().saveSprint(sprint);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");

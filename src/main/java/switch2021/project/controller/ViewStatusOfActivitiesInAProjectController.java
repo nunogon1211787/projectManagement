@@ -49,7 +49,7 @@ public class ViewStatusOfActivitiesInAProjectController {
      **/
 
     public List<Task> getListOfProjectActivities(){
-        return new ArrayList<>(project.getSprints().getListOfAllAActivitiesOfAProject());
+        return new ArrayList<>(project.getSprintList().getListOfAllAActivitiesOfAProject());
     }
 
 }

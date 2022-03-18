@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.factory.ProjectTeamFactory;
+import switch2021.project.factory.SprintFactory;
 import switch2021.project.stores.SprintList;
 
 import java.time.LocalDate;
@@ -26,10 +26,9 @@ public class Project {
     private ProductBacklog productBacklog;
 
     private final BusinessSector businessSector;
-    private final SprintList sprints;
+    private final SprintList sprintList;
 
     private ProjectTeam projectTeam;
-    private ProjectTeamFactory projectTeamFactory;
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -56,15 +55,13 @@ public class Project {
         this.businessSector = businessSector;
 
         this.startDate = startDate;
-        this.sprints = new SprintList();
+        this.sprintList = new SprintList();
 
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
 
         this.productBacklog = new ProductBacklog();
-
         this.projectTeam = new ProjectTeam();
-        //this.projectTeam = this.projectTeamFactory.createProjectTeam();
     }
 
     /**
@@ -145,7 +142,7 @@ public class Project {
      * Get the start date of the next Sprint and end date of the current Sprint
      */
     public Sprint getCurrentSprint() {
-      return this.sprints.getCurrentSprint();
+      return this.sprintList.getCurrentSprint();
     }
 
     /**
@@ -167,7 +164,7 @@ public class Project {
                 && Objects.equals(projectStatus, project.projectStatus)
                 && Objects.equals(productBacklog, project.productBacklog)
                 && Objects.equals(businessSector, project.businessSector)
-                && Objects.equals(sprints, project.sprints)
+                && Objects.equals(sprintList, project.sprintList)
                 && Objects.equals(projectTeam, project.projectTeam)
                 && Objects.equals(startDate, project.startDate)
                 && Objects.equals(endDate, project.endDate);
@@ -177,7 +174,7 @@ public class Project {
     public int hashCode() {
         return Objects.hash(code, projectName, description, customer, typology,
                 projectStatus, productBacklog, businessSector,
-                sprints, projectTeam, startDate, endDate, numberOfSprints,
+                sprintList, projectTeam, startDate, endDate, numberOfSprints,
                 budget, sprintDuration);
     }
 
@@ -192,7 +189,7 @@ public class Project {
                 ", projectStatus=" + projectStatus +
                 ", productBacklog=" + productBacklog +
                 ", businessSector=" + businessSector +
-                ", sprints=" + sprints +
+                ", sprints=" + sprintList +
                 ", projectTeam=" + projectTeam +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
