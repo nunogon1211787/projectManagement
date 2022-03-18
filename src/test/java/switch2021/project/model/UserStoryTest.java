@@ -7,6 +7,8 @@ import switch2021.project.immutable.Date;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class UserStoryTest {
     Company company;
@@ -38,10 +40,9 @@ class UserStoryTest {
     void ValidateInfoUserStory() {
         //Arrange
         Company company = new Company();
-        //User Story
-        ProductBacklog productBacklog = new ProductBacklog();
+        //Act
         UserStory userStory = new UserStory("US001", 1, "US001 - Test", 40);
-        productBacklog.saveUserStory(userStory);
+        //Assert
         assertEquals("US001", userStory.getTitle());
         assertEquals("US001 - Test", userStory.getDescription().getText());
     }
@@ -49,29 +50,15 @@ class UserStoryTest {
 
     @Test
     void setPriorityTest() {
-        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         userStory.setPriority(4);
         assertEquals(4, userStory.getPriority());
     }
 
-    @Test
-    void setPriorityTestInvalid() {
-        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-        userStory = new UserStory("US001", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
-        userStory.setPriority(6);
-        assertEquals(2, userStory.getPriority());
-    }
 
     @Test
     void hasCodeTest() {
-
-        ProductBacklog productBacklog = new ProductBacklog();
-        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
-        productBacklog.saveUserStory(userStory);
 
         boolean expected = userStory.hasCode(userStory.getIdUserStory());
         assertTrue(expected);
@@ -79,11 +66,7 @@ class UserStoryTest {
 
     @Test
     void hasCodeTest2() {
-
-        ProductBacklog productBacklog = new ProductBacklog();
-        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
-        productBacklog.saveUserStory(userStory);
 
         boolean expected = userStory.hasCode(4);
         assertFalse(expected);
@@ -91,108 +74,86 @@ class UserStoryTest {
 
     @Test
     void setDescriptionTest() {
-        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+
         userStory.setDescription("Fazer coiso");
         assertEquals("Fazer coiso", userStory.getDescription().getText());
     }
 
+
     @Test
     void setParentUserStoryTest() {
-        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-        userStory = new UserStory("US001", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
-        userStory.setParentUserStory(userStoryToRefine);
-        assertEquals(userStoryToRefine, sprint.getSprintBacklog().getUserStory(userStory.getIdUserStory()).getParentUserStory());
-    }
+        //Arrange
+        UserStory userStory = new UserStory("US001", 1, "US001 - Test", 40);
+        UserStory userStory_parent = new UserStory("US002", 1, "US002 - Test", 40);
 
+        //Act
+        userStory.setParentUserStory(userStory_parent);
+
+        //Assert
+        assertEquals(userStory.getParentUserStory(), userStory_parent);
+    }
 
     @Test
     void setUserStoryStatusBooleanTest() {
+        UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
 
-        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-        userStory = new UserStory("US001", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
-        UserStoryStatus userStoryStatus = new UserStoryStatus("Almost finished");
+        UserStoryStatus userStoryStatus = mock(UserStoryStatus.class);
         userStory.setUserStoryStatusBoolean(userStoryStatus);
 
-        assertEquals("Almost finished", userStory.getUserStoryStatus().getDescription().getText());
-
+        assertEquals(userStoryStatus, userStory.getUserStoryStatus());
     }
 
     @Test
     void setUpdateUserStoryWorkDoneTest() {
         //Arrange
-        Company company = new Company();
-        //User Story
-        ProductBacklog productBacklog = new ProductBacklog();
         UserStory userStory = new UserStory("US001", 1, "US001 - Test", 40);
-        productBacklog.saveUserStory(userStory);
-        //Task
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
-        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
-        String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-        Task task = new Task("test", taskDescription, 20.00, taskType, resource);
-        userStory.getTasks().saveTask(task);
-        //TaskEffort
-        Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
-        Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
-        TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
-        task.saveTaskEffort(taskEffort);
-        task.saveTaskEffort(taskEffort2);
+        Task task = mock(Task.class);
+        when(task.getHoursSpent()).thenReturn(12.0);
+
         //Act
         userStory.updateWorkDone(task);
+
         //Assert
         assertEquals(12, userStory.getWorkDone());
     }
 
     @Test
-    void validatePriorityTest() {
-        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+    void validatePriorityTestFail() {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+
         boolean expected = userStory.validatePriority(6);
         assertFalse(expected);
     }
 
     @Test
-    void validatePriorityTest2() {
-        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+    void validatePriorityTestSuccess() {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+
         boolean expected = userStory.validatePriority(1);
         assertTrue(expected);
     }
 
     @Test
-    void validatePriorityTest3() {
-        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+    void validatePriorityTestFailNegative() {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+
         boolean expected = userStory.validatePriority(-1);
         assertFalse(expected);
     }
 
     @Test
-    void validatePriorityTest4() {
-        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+    void validatePriorityTestSuccessHighLimit() {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+
         boolean expected = userStory.validatePriority(5);
         assertTrue(expected);
     }
 
     @Test
-    void validatePriorityTest5() {
-        Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+    void validatePriorityTestSuccessLowLimit() {
         userStory = new UserStory("US001", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+
         boolean expected = userStory.validatePriority(0);
         assertTrue(expected);
     }
