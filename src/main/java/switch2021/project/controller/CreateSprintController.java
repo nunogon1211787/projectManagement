@@ -46,11 +46,11 @@ public class CreateSprintController {
 
     public Sprint createSprint(String name, LocalDate startDate) {
         int sprintDuration = this.proj.getSprintDuration();
-        return this.proj.getSprints().createSprint(name, startDate, sprintDuration);
+        return this.proj.getSprintList().createSprint(name, startDate, sprintDuration);
     }
 
     public boolean saveSprint(Sprint sprint) {
-        return this.proj.getSprints().saveSprint(sprint);
+        return this.proj.getSprintList().saveSprint(sprint);
     }
 
 }

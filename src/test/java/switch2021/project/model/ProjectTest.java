@@ -108,10 +108,9 @@ class ProjectTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
             company.getProjectStore().createProject("", "test1234", customer,
-                    typo, sector, date, 7, 5000);
-        });
+                    typo, sector, date, 7, 5000));
         //Assert
         assertTrue(exception.getMessage().contains("Project Name cannot be empty"));
     }
@@ -382,7 +381,7 @@ class ProjectTest {
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
         SprintList sprintList1 = new SprintList();
         sprintList1.saveSprint(sprint1);
-        SprintList projectSprintList = this.project2.getSprints();
+        SprintList projectSprintList = this.project2.getSprintList();
         projectSprintList.saveSprint(sprint1);
         assertEquals(sprintList1, projectSprintList);
     }
@@ -394,7 +393,7 @@ class ProjectTest {
         SprintList sprintList1 = new SprintList();
         sprintList1.saveSprint(sprint1);
         Sprint sprint2 = new Sprint("Effort View 1", LocalDate.now());
-        SprintList projectSprintList = this.project2.getSprints();
+        SprintList projectSprintList = this.project2.getSprintList();
         projectSprintList.saveSprint(sprint1);
         projectSprintList.saveSprint(sprint2);
         assertNotEquals(sprintList1, projectSprintList);
@@ -418,10 +417,10 @@ class ProjectTest {
         sprint1.getTaskList().saveTask(taskTest);
         List<Task> taskList = new ArrayList<>();
         //Act
-        project2.getSprints().saveSprint(sprint1);
+        project2.getSprintList().saveSprint(sprint1);
         taskList.add(taskTest);
         //Assert
-        assertEquals(taskList, project2.getSprints().getSprint(1).getListOfTasksOfASprint());
+        assertEquals(taskList, project2.getSprintList().getSprint(1).getListOfTasksOfASprint());
     }
 
     @Test

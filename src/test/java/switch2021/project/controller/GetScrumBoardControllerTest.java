@@ -20,14 +20,14 @@ public class GetScrumBoardControllerTest {
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
 
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.now(), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.now(), 2);
+        project.getSprintList().saveSprint(sprint);
 
         company.getProjectStore().saveNewProject(project);
         UserStory userStory = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createUserStory( "US001",
                 1, "Fazer coisas cool",5);
         company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().saveUserStory(userStory);
-        company.getProjectStore().getProjectByCode("Project_2022_1").getSprints().getCurrentSprint().getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        company.getProjectStore().getProjectByCode("Project_2022_1").getSprintList().getCurrentSprint().getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
 
         //Act
         ScrumBoardMapper mapper = new ScrumBoardMapper();

@@ -81,12 +81,12 @@ class UserStoryEffortControllerTest {
         project1.getProjectTeam().saveResource(person2);
         company.getProjectStore().saveNewProject(project1);
         Sprint sprint1 = new Sprint("Hello1", LocalDate.now());
-        SprintList sprintList = project1.getSprints(); //objeto
+        SprintList sprintList = project1.getSprintList(); //objeto
         sprintList.saveSprint(sprint1);
 
         //Act
         controller.getProjectByCode("Project_2022_1");
-        List<Sprint> sprint = sprintList.getSprintList();
+        List<Sprint> sprint = sprintList.getSprints();
         List<Sprint> sprint2 = controller.getSprintsList();
 
         //Assert
@@ -106,9 +106,9 @@ class UserStoryEffortControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().saveNewProject(project1);
         Sprint sprint1 = new Sprint("Hello1", LocalDate.now());
-        SprintList sprintList = project1.getSprints(); //objeto
+        SprintList sprintList = project1.getSprintList(); //objeto
         sprintList.saveSprint(sprint1);
-        project1.getSprints().saveSprint(sprint1);
+        project1.getSprintList().saveSprint(sprint1);
         controller.getProjectByCode(project1.getCode());
         //Assert
         assertEquals(sprint1, controller.getSprint(1));
@@ -126,9 +126,9 @@ class UserStoryEffortControllerTest {
         company.getProjectStore().saveNewProject(project1);
         Sprint sprint1 = new Sprint("teste1", LocalDate.now());
         sprint1.setIdSprint(1);
-        project1.getSprints().saveSprint(sprint1);
+        project1.getSprintList().saveSprint(sprint1);
         UserStory story = new UserStory("teste", 5, "validate", 5);
-        project1.getSprints().getSprint(1).getSprintBacklog().saveUserStoryToSprintBacklog(story);
+        project1.getSprintList().getSprint(1).getSprintBacklog().saveUserStoryToSprintBacklog(story);
         company.getProjectStore().saveNewProject(project1);
         controller.getProjectByCode("Project_2022_1");
         controller.getSprintsList();

@@ -41,8 +41,8 @@ class CreateUsTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
         UserStory userStory = new UserStory("US001", 2, "Fazer tal",5);
@@ -84,8 +84,8 @@ class CreateUsTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
         UserStory userStory = new UserStory("US001", 2, "Fazer tal",5);
@@ -115,8 +115,8 @@ class CreateUsTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
         UserStory userStory = new UserStory("US001", 2, "Fazer tal",5);
@@ -162,8 +162,8 @@ class CreateUsTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
         UserStory userStory = new UserStory("US001", 2, "Fazer tal",5);
@@ -193,8 +193,8 @@ class CreateUsTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
         UserStory userStory = new UserStory("US001", 2, "Fazer tal",5);
@@ -239,8 +239,8 @@ class CreateUsTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
         UserStory userStory = new UserStory("US001", 2, "Fazer tal",5);
@@ -292,8 +292,8 @@ class CreateUsTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
         UserStory userStory = new UserStory("US001", 2, "Fazer tal",5);

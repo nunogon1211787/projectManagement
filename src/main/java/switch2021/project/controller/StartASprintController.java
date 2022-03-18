@@ -39,7 +39,7 @@ public class StartASprintController {
         LocalDate startDate = sprintDTO.getStartDate();
         ProjectTeam projectTeam = proj.getProjectTeam();
         int sprintDuration = proj.getSprintDuration();
-        SprintList sprintList = proj.getSprints();
+        SprintList sprintList = proj.getSprintList();
         return sprintList.startASprint(sprintID, startDate, projectTeam, sprintDuration);
 
     }

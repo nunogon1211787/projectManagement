@@ -40,8 +40,8 @@ public class RegisterWorkToTaskControllerTest {
         Resource resource1 = project1.getProjectTeam().createResource(user2, startDateMm, endDateMm, 100, 1);
         project1.getProjectTeam().saveResource(resource1);
         //Sprint
-        Sprint sprint1 = project1.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
-        project1.getSprints().saveSprint(sprint1);
+        Sprint sprint1 = project1.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
+        project1.getSprintList().saveSprint(sprint1);
         int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
         UserStory userStory1 = project1.getProductBacklog().createUserStory("US001", 1, "description", 5);
@@ -91,8 +91,8 @@ public class RegisterWorkToTaskControllerTest {
         Resource resource1 = project1.getProjectTeam().createResource(user2, startDateMm, endDateMm, 100, 1);
         project1.getProjectTeam().saveResource(resource1);
         //Sprint
-        Sprint sprint1 = project1.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
-        project1.getSprints().saveSprint(sprint1);
+        Sprint sprint1 = project1.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
+        project1.getSprintList().saveSprint(sprint1);
         int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
         UserStory userStory1 = project1.getProductBacklog().createUserStory("US001", 1, "description", 5);
@@ -145,8 +145,8 @@ public class RegisterWorkToTaskControllerTest {
         Resource resource1 = project1.getProjectTeam().createResource(user2, startDateMm, endDateMm, 100, 1);
         project1.getProjectTeam().saveResource(resource1);
         //Sprint
-        Sprint sprint1 = project1.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
-        project1.getSprints().saveSprint(sprint1);
+        Sprint sprint1 = project1.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
+        project1.getSprintList().saveSprint(sprint1);
         int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
         UserStory userStory1 = project1.getProductBacklog().createUserStory("US001", 1, "description", 5);
