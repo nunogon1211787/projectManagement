@@ -1,10 +1,14 @@
 package switch2021.project.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import switch2021.project.dto.UserStoryDto;
 import switch2021.project.mapper.UserStoryMapper;
 
 import java.util.*;
 
+@Getter
+@Setter
 
 public class ProductBacklog {
 
@@ -21,12 +25,6 @@ public class ProductBacklog {
         userStoryList = new ArrayList<>();
     }
 
-    /**
-     * Getters and Setters Methods.
-     **/
-    public List<UserStory> getUserStoryList() {
-        return Collections.unmodifiableList(userStoryList);
-    }
 
     public List<UserStory> getActiveUserStoryList() {
         List<UserStory> activeUSList = new ArrayList<>();
@@ -49,12 +47,8 @@ public class ProductBacklog {
         return userStory;
     }
 
-    public void setUserStoryList(List<UserStory> userStoryList) {
-        this.userStoryList = Collections.unmodifiableList(userStoryList);
-    }
-
     /**
-     * Methods for create UserStory to the productBacklog (Cris US009)
+     * Methods for create UserStory to the productBacklog
      **/
 
     public UserStory createUserStory(String name, int priority, String description, int estimateEffort) {

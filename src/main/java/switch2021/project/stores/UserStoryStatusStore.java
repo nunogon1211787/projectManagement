@@ -21,6 +21,10 @@ public class UserStoryStatusStore {
         this.userStoryStatusList = new ArrayList<>();
     }
 
+    /**
+     * Populate default for status
+     **/
+
     public void populateDefault() {
         this.userStoryStatusList.add(new UserStoryStatus("To do"));
         userStoryStatusList.get(0).setSprintAvailable(true);
