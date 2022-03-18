@@ -209,11 +209,11 @@ public class ProjectTeam {
     /**
      * Validation Methods
      **/
-    public boolean checkIfTheRoleExistAndIsCurrent(ProjectRole role, LocalDate startDate) {
+    public boolean checkIfTheRoleExistAndIsCurrent(ProjectRole role, LocalDate date) {
         boolean msg = false;
         if (role != null && !role.getName().getText().equals("Team Member")) {
             for (Resource i : projectTeamList) {
-                if (i.isYourEmail(role) && i.getEndDate().isAfter(startDate)) {
+                if (i.isYourEmail(role) && i.getEndDate().isAfter(date)) {
                     msg = true;
                     break;
                 }
