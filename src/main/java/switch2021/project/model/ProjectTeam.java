@@ -1,6 +1,7 @@
 package switch2021.project.model;
 
 import lombok.Getter;
+import switch2021.project.factory.ResourceFactory;
 import switch2021.project.utils.App;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,16 +14,21 @@ public class ProjectTeam {
     /**
      * ProjectTeam's Attribute
      **/
-    private final List<Resource> projectTeamList;  //Resource´s List in a Project.
+    private ResourceFactory resFac;
 
+    private final List<Resource> projectTeamList;  //Resource´s List in a Project.
 
     /**
      * ProjectTeam's Constructor
      **/
-    public ProjectTeam() {
+    public ProjectTeam(ResourceFactory resourceFac) {
+        this.resFac = resourceFac;
         this.projectTeamList = new ArrayList<>();
     }
 
+    public ProjectTeam(){
+        this.projectTeamList = new ArrayList<>();
+    }
 
     /**
      * Getters and Setters
@@ -145,11 +151,13 @@ public class ProjectTeam {
     /**
      * Create a new Resource
      */
+    public Resource createResourceWithFac(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
+        return this.resFac.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);
+    }
+
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
         return new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
     }
-
-
     /**
      * Method which saves new resource at ProjectTeam List
      **/

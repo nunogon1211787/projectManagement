@@ -3,6 +3,7 @@ package switch2021.project.model;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.factory.ProjectTeamFactory;
+import switch2021.project.factory.ResourceFactory;
 import switch2021.project.stores.SprintList;
 
 import java.time.LocalDate;
@@ -30,6 +31,7 @@ public class Project {
 
     private ProjectTeam projectTeam;
     private ProjectTeamFactory projectTeamFactory;
+    private ResourceFactory resFac;
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -63,7 +65,7 @@ public class Project {
 
         this.productBacklog = new ProductBacklog();
 
-        this.projectTeam = new ProjectTeam();
+        this.projectTeam = new ProjectTeam(resFac);
         //this.projectTeam = this.projectTeamFactory.createProjectTeam();
     }
 

@@ -2,6 +2,7 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.factory.ResourceFactory;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 class EditProjectInfoControllerTest {
 
@@ -84,7 +86,8 @@ class EditProjectInfoControllerTest {
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
@@ -146,8 +149,9 @@ class EditProjectInfoControllerTest {
         project.getProjectTeam().saveResource(manuelbras);
         project.getProjectTeam().saveResource(manueljose);
         project.getProjectTeam().saveResource(manueloliveira);
+        ResourceFactory resFac = mock(ResourceFactory.class);
 
-        ProjectTeam newProjectTeam = new ProjectTeam();
+        ProjectTeam newProjectTeam = new ProjectTeam(resFac);
         newProjectTeam.saveResource(manuelfernandes);
         newProjectTeam.saveResource(manuelgoncalves);
         newProjectTeam.saveResource(manuelmartins);
@@ -178,7 +182,8 @@ class EditProjectInfoControllerTest {
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
@@ -206,7 +211,8 @@ class EditProjectInfoControllerTest {
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
@@ -234,7 +240,8 @@ class EditProjectInfoControllerTest {
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
@@ -262,7 +269,8 @@ class EditProjectInfoControllerTest {
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
@@ -290,7 +298,8 @@ class EditProjectInfoControllerTest {
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
@@ -318,7 +327,8 @@ class EditProjectInfoControllerTest {
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
@@ -346,7 +356,8 @@ class EditProjectInfoControllerTest {
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
@@ -374,7 +385,8 @@ class EditProjectInfoControllerTest {
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
