@@ -32,7 +32,6 @@ public class SystemUser {
      **/
     public SystemUser (String userName, String email, String function, String password, String passwordConfirmation,
                        String photo, UserProfile profile) {
-        checkUserNameRules(userName);
         checkEmailRules(email);
 //        checkPasswordRules(password);
         checkProfileRules(profile);
@@ -102,18 +101,10 @@ public class SystemUser {
         return true;
     }
 
-
-
     /**
      * Validation Methods
      **/
 
-    private void checkUserNameRules(String userName) {
-        if (userName.trim().isEmpty())
-            throw new IllegalArgumentException("Username cannot be empty.");
-        if ((userName.length() < 2))
-            throw new IllegalArgumentException("Username must be at least 2 characters");
-    }
 
     private void checkEmailRules(String email) {
         if (email.trim().isEmpty())

@@ -21,18 +21,20 @@ public class SprintList {
      **/
     //private SprintFactory sprintFactory;
     private final List<Sprint> sprints;
+    private SprintFactory sprintFactory;
 
     /**
      * Constructors with data
      **/
-    public SprintList() {
+    public SprintList(SprintFactory sprintFactory1) {
         this.sprints = new ArrayList<>();
+        this.sprintFactory=sprintFactory1;
     }
 
-    /*public SprintList(SprintFactory sprintFact) {
+    public SprintList() {
         this.sprints = new ArrayList<>();
-        this.sprintFactory = sprintFact;
-    }*/
+        //this.sprintFactory = sprintFact;
+    }
 
     /**
      * Sprint creator

@@ -1,6 +1,7 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
+import switch2021.project.factory.ProjectStatusFactory;
 import switch2021.project.model.ProjectStatus;
 
 import java.util.ArrayList;
@@ -14,10 +15,16 @@ public class ProjectStatusStore {
      * Project Status Store Attributes (Contains a Project Status list)
      **/
     private final List<ProjectStatus> projectStatusList;
+    private ProjectStatusFactory projectStatusFactory;
 
     /**
      * Project Status Constructor
      **/
+    public ProjectStatusStore(ProjectStatusFactory projStatusFactory) {
+        this.projectStatusList = new ArrayList<>();
+        this.projectStatusFactory = projStatusFactory;
+    }
+
     public ProjectStatusStore() {
         this.projectStatusList = new ArrayList<>();
     }
@@ -40,9 +47,20 @@ public class ProjectStatusStore {
      **/
     public boolean createAndSaveProjectStatus(String description) {
         if (getProjectStatusByDescription(description) != null) {
+            //return false;
             throw new IllegalArgumentException("Project status already exists.");
         }
         ProjectStatus newProjectStatus = new ProjectStatus(description);
+
+        return this.projectStatusList.add(newProjectStatus);
+    }
+
+    public boolean createAndSaveProjectStatusWithFactory(String description) {
+        if (getProjectStatusByDescription(description) != null) {
+            return false;
+            //throw new IllegalArgumentException("Project status already exists.");
+        }
+        ProjectStatus newProjectStatus = this.projectStatusFactory.createProjectStatus(description);
 
         return this.projectStatusList.add(newProjectStatus);
     }

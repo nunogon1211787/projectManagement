@@ -1,14 +1,16 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.factory.ProjectStatusFactory;
 import switch2021.project.model.Company;
 import switch2021.project.model.ProjectStatus;
-import switch2021.project.model.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class ProjectStatusStoreTest {
 
@@ -31,13 +33,29 @@ class ProjectStatusStoreTest {
     @Test
     void createAndSaveProjectStatusSuccess() {
         //Arrange
-        Company company = new Company();
-        ProjectStatusStore store = company.getProjectStatusStore();
+        ProjectStatusStore store = new ProjectStatusStore();
+        String description = "test";
         //Act
-        boolean result = store.createAndSaveProjectStatus("test");
+        boolean hasCreated = store.createAndSaveProjectStatus(description);
         //Assert
-        assertEquals(8, store.getProjectStatusList().size());
-        assertTrue(result);
+        assertTrue(hasCreated);
+    }
+
+    @Test
+    void createAndSaveProjectStatusSuccessWithMockito() {
+        //Arrange
+        String description = "test";
+
+        ProjectStatus projectStatusDuplo = mock(ProjectStatus.class);
+
+        ProjectStatusFactory projectStatusFactoryDuplo = mock(ProjectStatusFactory.class);
+        when(projectStatusFactoryDuplo.createProjectStatus(description)).thenReturn(projectStatusDuplo);
+
+        ProjectStatusStore store = new ProjectStatusStore(projectStatusFactoryDuplo);
+        //Act
+        boolean hasCreated = store.createAndSaveProjectStatusWithFactory(description);
+        //Assert
+        assertTrue(hasCreated);
     }
 
     @Test
@@ -136,44 +154,5 @@ class ProjectStatusStoreTest {
         String status = "null";
 
         assertNull(store.getProjectStatusByDescription(status));
-    }
-
-    @Test
-    void overrideEquals() {
-        ProjectStatus status1 = new ProjectStatus("teste");
-        ProjectStatus status2 = new ProjectStatus("teste");
-
-
-        assertEquals(status1,status2);
-    }
-
-    @Test
-    void overrideNotEquals() {
-        ProjectStatus status1 = new ProjectStatus("teste");
-        ProjectStatus status2 = new ProjectStatus("teste2");
-
-        assertNotEquals(status1,status2);
-        assertEquals(status1.getClass(),status2.getClass());
-        assertNotEquals( null,status1);
-    }
-
-    @Test
-    void hashCodeTest() {
-        ProjectStatus status1 = new ProjectStatus("teste");
-        ProjectStatus status2 = new ProjectStatus("teste2");
-
-        assertNotEquals(status1.hashCode(),status2.hashCode());
-    }
-
-    @Test
-    void overrideTest() {
-        ProjectStatus status1 = new ProjectStatus("teste");
-        ProjectStatus status2 = new ProjectStatus("teste");
-        ProjectStatus status3 = null;
-        TaskType typo = new TaskType("test");
-
-        assertEquals(status1,status2);
-        assertNotEquals(status1,status3);
-        assertNotEquals(status1,typo);
     }
 }
