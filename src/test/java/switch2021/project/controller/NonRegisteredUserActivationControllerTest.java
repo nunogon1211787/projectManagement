@@ -14,7 +14,7 @@ class NonRegisteredUserActivationControllerTest {
         Company company = new Company(); //objeto do tipo company
         NonRegisteredUserActivationController controller = new NonRegisteredUserActivationController(company);
         SystemUser user = new SystemUser("Ana", "1211748@isep.ipp.pt",
-                                            "User_12", "111", "111", "",company.getUserProfileStore().getUserProfile("Visitor"));
+                                            "User_12", "Qwerty_1", "Qwerty_1", "",company.getUserProfileStore().getUserProfile("Visitor"));
         company.getSystemUserStore().saveSystemUser(user);
 
         // Act

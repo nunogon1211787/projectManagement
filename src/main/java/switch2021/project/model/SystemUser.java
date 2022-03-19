@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.immutable.Function;
 import switch2021.project.immutable.Name;
+import switch2021.project.immutable.Password;
 import switch2021.project.stores.UserProfileStore;
 import switch2021.project.utils.App;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class SystemUser {
     private Name userName;
     private final String email;
     private String photo;
-    private String password;
+    private Password password;
     private Function function;
     private boolean activateUser;
     private final List<UserProfile> assignedProfileList;
@@ -33,14 +34,14 @@ public class SystemUser {
                        String photo, UserProfile profile) {
         checkUserNameRules(userName);
         checkEmailRules(email);
-        checkPasswordRules(password);
+//        checkPasswordRules(password);
         checkProfileRules(profile);
         this.userName = new Name(userName);
         this.email = email;
         this.photo = photo;
         this.function = new Function(function);
         if (password.equals(passwordConfirmation)) {
-            this.password = encryptPassword(password);
+            this.password = new Password(password);
         } else {
             throw new IllegalArgumentException("passwords not match");
         }
@@ -73,8 +74,8 @@ public class SystemUser {
     }
 
     private void setPassword(String password) {
-        checkPasswordRules(password);
-        this.password = encryptPassword(password);
+//        checkPasswordRules(password);
+        this.password = new Password(password);
     }
 
     public void setPhoto(String photo) {
@@ -122,12 +123,12 @@ public class SystemUser {
     }
 
 
-    private void checkPasswordRules(String password) {
-        if (password.trim().isEmpty())
-            throw new IllegalArgumentException("Password cannot be empty.");
-        if ((password.length() < 2))
-            throw new IllegalArgumentException("Password must be at least 2 characters");
-    }
+//    private void checkPasswordRules(String password) {
+//        if (password.trim().isEmpty())
+//            throw new IllegalArgumentException("Password cannot be empty.");
+//        if ((password.length() < 2))
+//            throw new IllegalArgumentException("Password must be at least 2 characters");
+//    }
 
     private void checkProfileRules(UserProfile profile) {
         Company company = App.getInstance().getCompany();
@@ -163,17 +164,17 @@ public class SystemUser {
     /**
      * Encryption/Decryption Methods
      **/
-    public String encryptPassword(String password) {
-        int codigoASCII;
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (int i = 0; i < password.length(); i++) {
-            codigoASCII = password.charAt(i) + 99;
-            stringBuilder.append((char) codigoASCII);
-        }
-        return stringBuilder.toString();
-    }
-
+//    public String encryptPassword(String password) {
+//        int codigoASCII;
+//        StringBuilder stringBuilder = new StringBuilder();
+//
+//        for (int i = 0; i < password.length(); i++) {
+//            codigoASCII = password.charAt(i) + 99;
+//            stringBuilder.append((char) codigoASCII);
+//        }
+//        return stringBuilder.toString();
+//    }
+//
     public String decryptPassword(String password) {
         int codigoASCII;
         StringBuilder stringBuilder = new StringBuilder();
@@ -370,7 +371,7 @@ public class SystemUser {
 
     private boolean validateOldPassword(String oldpasswordUI) {
 
-        String oldpasswordSU = decryptPassword(this.password);
+        String oldpasswordSU = decryptPassword(this.password.getPwd());
 
         return oldpasswordUI.equals(oldpasswordSU);
     }

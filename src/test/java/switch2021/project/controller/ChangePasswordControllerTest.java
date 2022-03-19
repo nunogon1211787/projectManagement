@@ -13,13 +13,13 @@ public class ChangePasswordControllerTest {
         //Arrange
         Company company = new Company();
         SystemUser joana = new SystemUser("Joana", "123@isep.pt",
-                "Aluna", "AAA", "AAA", "img_123",
+                "Aluna", "Qwerty_1", "Qwerty_1", "img_123",
                 company.getUserProfileStore().getUserProfile("visitor"));
         ChangePasswordController controllerTest = new ChangePasswordController(company);
         //Act
         company.getSystemUserStore().saveSystemUser(joana);
         //Assert
-        assertTrue(controllerTest.changePassword("123@isep.pt", "AAA", "BBB", "BBB"));
+        assertTrue(controllerTest.changePassword("123@isep.pt", "Qwerty_1", "Qwerty_2", "Qwerty_2"));
     }
 
     @Test
@@ -29,10 +29,10 @@ public class ChangePasswordControllerTest {
         Company company = new Company();
         ChangePasswordController controller = new ChangePasswordController(company);
         SystemUser user = new SystemUser("Joana", "123@isep.ipp.pt",
-                "Aluna", "AAA", "AAA", "", company.getUserProfileStore().getUserProfile("visitor"));
+                "Aluna", "Qwerty_1", "Qwerty_1", "", company.getUserProfileStore().getUserProfile("visitor"));
         company.getSystemUserStore().saveSystemUser(user);
         //Assert
-        assertFalse(controller.changePassword("123@isep.ipp.pt", "BBB", "123", "123"));
+        assertFalse(controller.changePassword("123@isep.ipp.pt", "Qwerty_2", "Qwerty_3", "123"));
     }
 
     @Test
@@ -42,10 +42,10 @@ public class ChangePasswordControllerTest {
         Company company = new Company();
         ChangePasswordController controller = new ChangePasswordController(company);
         SystemUser user = new SystemUser("Joana", "123@isep.ipp.pt",
-                "Aluna", "AAA", "AAA", "img_123", company.getUserProfileStore().getUserProfile("visitor"));
+                "Aluna", "Qwerty_1", "Qwerty_1", "Qwerty_2", company.getUserProfileStore().getUserProfile("visitor"));
         company.getSystemUserStore().saveSystemUser(user);
         //Assert
-        assertFalse(controller.changePassword("123@isep.ipp.pt", "AAA", "123", "321"));
+        assertFalse(controller.changePassword("123@isep.ipp.pt", "Qwerty_1", "Qwerty_3", "321"));
     }
 
     @Test
