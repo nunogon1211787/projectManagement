@@ -375,15 +375,15 @@ class TaskTest {
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
+        TaskEffort taskEffort = task.createTaskEffort(19, 0, effortDate, "test", ".pdf");
 
        //Act
         task.saveTaskEffort(taskEffort);
 
         //Assert
-        assertEquals(12.0, task.getEffortRemaining());
-        assertEquals(8.0, task.getHoursSpent());
-        assertEquals(0.4, task.getExecutionPercentage());
+        assertEquals(1.0, task.getEffortRemaining());
+        assertEquals(19.0, task.getHoursSpent());
+        assertEquals(0.95, task.getExecutionPercentage());
     }
 
     @Test
@@ -457,12 +457,12 @@ class TaskTest {
         Task task = new Task("test", taskDescription, 8.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-        TaskEffort taskEffort = task.createTaskEffort(12, 0, effortDate, "test", ".pdf");
+        TaskEffort taskEffort = task.createTaskEffort(9, 0, effortDate, "test", ".pdf");
         //Act
         task.saveTaskEffort(taskEffort);
         //Assert
         assertEquals(0.0, task.getEffortRemaining());
-        assertEquals(12.0, task.getHoursSpent());
+        assertEquals(9.0, task.getHoursSpent());
         assertEquals(1.0, task.getExecutionPercentage());
     }
 

@@ -7,9 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ResourceTest {
 
-    /**
-     * Objetos estão iguais, mas no assertEquals não identifica
-     */
     @Test
     @DisplayName("Test to Check Resource Creation")
     public void Resource(){
@@ -33,7 +30,7 @@ class ResourceTest {
 
     @Test
     @DisplayName("Test to Check Resource Creation - Cost Per Hour 0")
-    public void ResourcecostPerHour0(){
+    public void ResourceCostPerHour0(){
         //Arrange
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -52,9 +49,7 @@ class ResourceTest {
         assertEquals(input, expected);
     }
 
-    /**
-     * Objetos estão iguais, mas no assertEquals não identifica
-     */
+
     @Test
     @DisplayName("Validate if copy constructor is working")
     public void copyConstructor() {
@@ -607,7 +602,7 @@ class ResourceTest {
             //user
             Company company = new Company();
             UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-            SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "", userProfile);
+            SystemUser newUser = new SystemUser("xyz", "fase", "des", "Switch_22", "Switch_22", "", userProfile);
             LocalDate startDate = LocalDate.of(2021, 12, 31);
             LocalDate endDate = LocalDate.of(2021, 1, 5);
             new Resource(newUser, startDate, endDate, 100, .5);
@@ -622,7 +617,7 @@ class ResourceTest {
             //user
             Company company = new Company();
             UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-            SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "", userProfile);
+            SystemUser newUser = new SystemUser("xyz", "fase", "des", "Switch_22", "Switch_22", "", userProfile);
             LocalDate startDate = LocalDate.of(2021, 12, 31);
             LocalDate endDate = LocalDate.of(2022, 1, 5);
             new Resource(newUser, startDate, endDate, -1, .5);

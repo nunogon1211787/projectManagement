@@ -1,11 +1,9 @@
 package switch2021.project.immutable;
 
 import lombok.Getter;
-
 import java.time.LocalDate;
 
 @Getter
-
 public class Date {
 
     /**
@@ -14,20 +12,19 @@ public class Date {
 
     private LocalDate effortDate;
 
+
     /**
      * Constructor (without SINGLETON)
      **/
-
-
     public Date(LocalDate effortDate) {
         checkWorkDateRules(effortDate);
         this.effortDate = effortDate;
     }
 
+
     /**
      * Methods
      **/
-
     private void checkWorkDateRules(LocalDate effortDate) {
         if (effortDate == null) {
             this.effortDate = LocalDate.now();

@@ -77,15 +77,15 @@ public class TaskListTest {
         assertEquals("test123", status.getDescription().getText());
     }
 
-    @Test
-    void getTaskStatusByDescription() {
-        //Arrange
-        TaskStatusStore store = new TaskStatusStore();
-        //Act
-        store.populateDefault();
-        //Assert
-        assertEquals("Planned", store.getTaskStatusByDescription("Planned").getDescription().getText());
-    }
+//    @Test
+//    void getTaskStatusByDescription() {
+//        //Arrange
+//        TaskStatusStore store = new TaskStatusStore();
+//        //Act
+//        store.populateDefault();
+//        //Assert
+//        assertEquals("Planned", store.getTaskStatusByDescription("Planned").getDescription().getText());
+//    }
 
     @Test
     void taskStatus() {
@@ -109,20 +109,20 @@ public class TaskListTest {
         assertEquals(status.hashCode(),status.hashCode());
     }
 
-    @Test
-    void taskStatusStoreHash() {
-        //Arranje
-        TaskStatusStore status = new TaskStatusStore();
-        status.populateDefault();
-        TaskStatusStore status2 = new TaskStatusStore();
-        status2.populateDefault();
-        TaskStatus teste = new TaskStatus("Teste");
-        status2.getTaskStatusList().set(0,teste);
-
-        //Assert
-        assertNotEquals(status.hashCode(),status2.hashCode());
-        assertEquals(status.hashCode(),status.hashCode());
-    }
+//    @Test
+//    void taskStatusStoreHash() {
+//        //Arranje
+//        TaskStatusStore status = new TaskStatusStore();
+//        status.populateDefault();
+//        TaskStatusStore status2 = new TaskStatusStore();
+//        status2.populateDefault();
+//        TaskStatus teste = new TaskStatus("Teste");
+//        status2.getTaskStatusList().set(0,teste);
+//
+//        //Assert
+//        assertNotEquals(status.hashCode(),status2.hashCode());
+//        assertEquals(status.hashCode(),status.hashCode());
+//    }
 
     @Test
     void createSprintTaskTestSuccess() {

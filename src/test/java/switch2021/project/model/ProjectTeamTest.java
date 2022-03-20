@@ -793,5 +793,105 @@ public class ProjectTeamTest {
         //Assert expected result for this method
         assertFalse(projectTeam.checkIfTheRoleExistAndIsCurrent(role,date));
     }
+
+    @Test
+    void overrideEqualsTestTrue() {
+        //Arrange
+        ProjectTeam pt = new ProjectTeam();
+        ProjectTeam expected = new ProjectTeam();
+        //Assert
+        assertTrue(pt.equals(expected));
+    }
+
+    @Test
+    void overrideEqualsTestObjectTrue() {
+        //Arrange
+        ProjectTeam pt = new ProjectTeam();
+        ProjectTeam expected = pt;
+        //Assert
+        assertTrue(pt.equals(expected));
+    }
+
+    @Test
+    void overrideEqualsTestFalseNull() {
+        //Arrange
+        ProjectTeam pt = new ProjectTeam();
+        ProjectTeam expected = null;
+        //Assert
+        assertFalse(pt.equals(expected));
+    }
+
+    @Test
+    void overrideEqualsTestFalseInstanceOf() {
+        //Arrange
+        ProjectTeam pt = new ProjectTeam();
+        Description expected = new Description("s");
+        //Assert
+        assertFalse(pt.equals(expected));
+    }
+
+    @Test
+    void overrideEqualsTestFalse() {
+        //Arrange
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+        //Project 1
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.now(), 2, 3000);
+        proj1.setEndDate(LocalDate.now().plusWeeks(10));
+        company.getProjectStore().saveNewProject(proj1);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        //Resource 3
+        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
+        LocalDate startDatej3 = LocalDate.now();
+        LocalDate endDatej3 = LocalDate.now().plusWeeks(2);
+        Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
+        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
+
+        ProjectTeam pt = new ProjectTeam();
+        ProjectTeam expected = new ProjectTeam();
+        expected.saveResource(joana3R);
+        //Assert
+        assertFalse(pt.equals(expected));
+    }
+
+
+    @Test
+    void overrideHashCodeTestTrue() {
+        //Arrange
+        ProjectTeam pt = new ProjectTeam();
+        ProjectTeam expected = new ProjectTeam();
+        //Assert
+        assertEquals(pt.hashCode(), expected.hashCode());
+    }
+
+    @Test
+    void overrideHashCodeTestFalse() {
+        //Arrange
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+        //Project 1
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.now(), 2, 3000);
+        proj1.setEndDate(LocalDate.now().plusWeeks(10));
+        company.getProjectStore().saveNewProject(proj1);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            //Resource 3
+        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
+        LocalDate startDatej3 = LocalDate.now();
+        LocalDate endDatej3 = LocalDate.now().plusWeeks(2);
+        Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
+        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
+
+        ProjectTeam pt = new ProjectTeam();
+        ProjectTeam expected = new ProjectTeam();
+        expected.saveResource(joana3R);
+        //Assert
+        assertNotEquals(pt.hashCode(), expected.hashCode());
+    }
 }
 

@@ -1,6 +1,7 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
+import switch2021.project.factory.TaskStatusFactory;
 import switch2021.project.immutable.TaskStatus;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,27 +12,28 @@ public class TaskStatusStore {
     /**
      * Attributes
      */
-    private List<TaskStatus> taskStatusList;
+    private final List<TaskStatus> taskStatusList;
+    private TaskStatusFactory taskStatusFactory;
 
 
     /**
      * Constructor
      */
-    public TaskStatusStore() {
+    public TaskStatusStore(TaskStatusFactory tsf) {
         this.taskStatusList = new ArrayList<>();
+        this.taskStatusFactory = tsf;
     }
 
 
     /**
      * Methods to create and add an object that this class are responsible
      */
-    public boolean createAndSaveTaskStatus(String status) {
-       TaskStatus ts = new TaskStatus(status);
+    public boolean createAndAddTaskStatus(String status) {
 
         if(getTaskStatusByDescription(status) != null) {
-            throw new IllegalArgumentException("This Task Status already exist!");
+            return false;
         } else {
-            this.taskStatusList.add(ts);
+            this.taskStatusList.add(taskStatusFactory.createAndAddTaskStatus(status));
             return true;
         }
     }
@@ -41,21 +43,24 @@ public class TaskStatusStore {
      * Methods to populate the Store
      */
     public void populateDefault() {
-        createAndSaveTaskStatus("Planned");
-        createAndSaveTaskStatus("Running");
-        createAndSaveTaskStatus("Finished");
-        createAndSaveTaskStatus("Blocked");
+        if(this.taskStatusList.size() != 0) {
+            throw new IllegalArgumentException ("Task Status Store is not empty!");
+        }
+        createAndAddTaskStatus("Planned");
+        createAndAddTaskStatus("Running");
+        createAndAddTaskStatus("Finished");
+        createAndAddTaskStatus("Blocked");
     }
 
 
     /**
      * Methods to iterate with the list
      */
-    public TaskStatus getTaskStatusByDescription(String descript){
+    public TaskStatus getTaskStatusByDescription(String description){
         TaskStatus result = null;
 
         for (TaskStatus status : this.taskStatusList) {
-            if (status.hasDescription(descript)) {
+            if (status.hasDescription(description)) {
                 result = status;
             }
         }
@@ -81,21 +86,4 @@ public class TaskStatusStore {
         }
         return taskStatusDescriptions;
     }
-
-
-//    /**
-//     * Override
-//     **/
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof TaskStatusStore)) return false;
-//        TaskStatusStore that = (TaskStatusStore) o;
-//        return Objects.equals(this.taskList, that.taskList);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(taskList);
-//    }
 }
