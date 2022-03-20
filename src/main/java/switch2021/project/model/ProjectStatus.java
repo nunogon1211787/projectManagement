@@ -18,7 +18,7 @@ public class ProjectStatus {
      * Constructors of Project Status class
      * Creates a new Project Status instance.
      **/
-    public ProjectStatus(String description) {
-        this.description = new Description(description);
+    public ProjectStatus(String text) {
+        this.description = new Description(text);
     }
 }
