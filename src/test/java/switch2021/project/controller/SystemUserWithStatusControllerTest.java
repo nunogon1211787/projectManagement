@@ -25,8 +25,8 @@ public class SystemUserWithStatusControllerTest {
 
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
-        String password = "ghi";
-        String passwordConfirmation = "ghi";
+        String password = "Qwerty_1";
+        String passwordConfirmation = "Qwerty_1";
         String function = "tester";
         String photo = "photo";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -59,8 +59,8 @@ public class SystemUserWithStatusControllerTest {
 
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
-        String password = "ghi";
-        String passwordConfirmation = "ghi";
+        String password = "Qwerty_1";
+        String passwordConfirmation = "Qwerty_1";
         String function = "tester";
         String photo = "photo";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -93,8 +93,8 @@ public class SystemUserWithStatusControllerTest {
 
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
-        String password = "ghi";
-        String passwordConfirmation = "ghi";
+        String password = "Qwerty_1";
+        String passwordConfirmation = "Qwerty_1";
         String function = "tester";
         String photo = "photo";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -133,8 +133,8 @@ public class SystemUserWithStatusControllerTest {
 
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
-        String password = "ghi";
-        String passwordConfirmation = "ghi";
+        String password = "Qwerty_1";
+        String passwordConfirmation = "Qwerty_1";
         String function = "tester";
         String photo = "photo";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");

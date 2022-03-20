@@ -51,7 +51,7 @@ class CreateUsTaskControllerTest {
 
         //Create tasks
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         TaskType type = new TaskType("type");
         Task newTask = new Task("test", "test test test tests", 10, type, resource);
@@ -124,11 +124,11 @@ class CreateUsTaskControllerTest {
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);
@@ -202,11 +202,11 @@ class CreateUsTaskControllerTest {
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);
@@ -248,11 +248,11 @@ class CreateUsTaskControllerTest {
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);
@@ -301,11 +301,11 @@ class CreateUsTaskControllerTest {
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
-        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "encript", "encript", "photo", profile);
+        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);

@@ -285,7 +285,7 @@ public class ProjectTeamTest {
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com",
-                "tester", "ghi", "ghi", "photo", profile);
+                "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelbras = new Resource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
         ResourceFactory resFac = mock(ResourceFactory.class);
         when(resFac.createResource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5)).thenReturn(manuelbras);
@@ -359,7 +359,7 @@ public class ProjectTeamTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelbras = proj1.createResource(user1, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, .5);
         manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
         ProjectRole projRol = manuelbras.getRole();
@@ -372,7 +372,7 @@ public class ProjectTeamTest {
 //        when(res.getRole()).thenReturn(projRol);
 //        proj1.getProjectTeam().saveResource(manuelbras);
         //Resource 2
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelmartins = proj1.createResource(user2, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, 1);
 //        Resource manuelmartins = proj1.createResource(user2, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, 1);
 //        when(resFac.createResource(user2, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, 1)).thenReturn(res);
@@ -401,12 +401,12 @@ public class ProjectTeamTest {
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Resource 1
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelbras = proj1.createResource(user1, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, .5);
         manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         proj1.getProjectTeam().saveResource(manuelbras);
         //Resource 2
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelmartins = proj1.createResource(user2, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, 1);
         proj1.getProjectTeam().saveResource(manuelmartins);
         //Act
@@ -433,12 +433,12 @@ public class ProjectTeamTest {
             company.getProjectStore().saveNewProject(proj1);
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             //Resource 1
-            SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+            SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
             Resource manuelbras = proj1.createResource(user1, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, .5);
             manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
             proj1.getProjectTeam().saveResource(manuelbras);
             //Resource 2
-            SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+            SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
             Resource manuelmartins = proj1.createResource(user2, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, 1);
             proj1.getProjectTeam().saveResource(manuelmartins);
             //Act
@@ -462,7 +462,7 @@ public class ProjectTeamTest {
             company.getProjectStore().saveNewProject(proj1);
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             //Resource 1
-            SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+            SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
             Resource manuelbras = proj1.createResource(user1, LocalDate.now().plusWeeks(1), LocalDate.now().plusWeeks(4), 100, .5);
             proj1.getProjectTeam().saveResource(manuelbras);
             //Act and Assert
@@ -565,23 +565,23 @@ public class ProjectTeamTest {
         company.getProjectStore().saveNewProject(proj1);
         //Resource 1
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelbras = new Resource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
         //Resource 2
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelmartins = new Resource(user2, LocalDate.now().minusDays(6), LocalDate.now().plusDays(7), 100, 1);
         //Resource 3
-        SystemUser user3 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user3 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manueljose = new Resource(user3, LocalDate.of(2021, 11, 1), LocalDate.of(2021, 11, 15), 100, .5);
         //Resource 4
-        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manueloliveira = new Resource(user4, LocalDate.now().minusWeeks(1), LocalDate.now().plusWeeks(3), 100, .3333);
         manueloliveira.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
         //Resource 5
-        SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelfernandes = new Resource(user5, LocalDate.of(2021, 11, 16), LocalDate.of(2021, 11, 30), 100, 1);
         //Resource 6
-        SystemUser user6 = new SystemUser("manuelgoncalves", "manuelgoncalves@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user6 = new SystemUser("manuelgoncalves", "manuelgoncalves@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelgoncalves = new Resource(user6, LocalDate.of(2021, 11, 16), LocalDate.of(2021, 11, 30), 100, 1);
         proj1.getProjectTeam().saveResource(manuelbras);
         proj1.getProjectTeam().saveResource(manuelgoncalves);
@@ -612,7 +612,7 @@ public class ProjectTeamTest {
         company.getProjectStore().saveNewProject(proj1);
         //Resource
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbrasil", "manuelbrasil@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user1 = new SystemUser("manuelbrasil", "manuelbrasil@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMb = LocalDate.of(2021, 11, 1);
         LocalDate endDateMb = LocalDate.of(2022, 11, 15);
         Resource manuelbrasil = proj1.createResource(user1, startDateMb, endDateMb, 100, .5);
@@ -792,6 +792,106 @@ public class ProjectTeamTest {
 
         //Assert expected result for this method
         assertFalse(projectTeam.checkIfTheRoleExistAndIsCurrent(role,date));
+    }
+
+    @Test
+    void overrideEqualsTestTrue() {
+        //Arrange
+        ProjectTeam pt = new ProjectTeam();
+        ProjectTeam expected = new ProjectTeam();
+        //Assert
+        assertTrue(pt.equals(expected));
+    }
+
+    @Test
+    void overrideEqualsTestObjectTrue() {
+        //Arrange
+        ProjectTeam pt = new ProjectTeam();
+        ProjectTeam expected = pt;
+        //Assert
+        assertTrue(pt.equals(expected));
+    }
+
+    @Test
+    void overrideEqualsTestFalseNull() {
+        //Arrange
+        ProjectTeam pt = new ProjectTeam();
+        ProjectTeam expected = null;
+        //Assert
+        assertFalse(pt.equals(expected));
+    }
+
+    @Test
+    void overrideEqualsTestFalseInstanceOf() {
+        //Arrange
+        ProjectTeam pt = new ProjectTeam();
+        Description expected = new Description("s");
+        //Assert
+        assertFalse(pt.equals(expected));
+    }
+
+    @Test
+    void overrideEqualsTestFalse() {
+        //Arrange
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+        //Project 1
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.now(), 2, 3000);
+        proj1.setEndDate(LocalDate.now().plusWeeks(10));
+        company.getProjectStore().saveNewProject(proj1);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        //Resource 3
+        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
+        LocalDate startDatej3 = LocalDate.now();
+        LocalDate endDatej3 = LocalDate.now().plusWeeks(2);
+        Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
+        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
+
+        ProjectTeam pt = new ProjectTeam();
+        ProjectTeam expected = new ProjectTeam();
+        expected.saveResource(joana3R);
+        //Assert
+        assertFalse(pt.equals(expected));
+    }
+
+
+    @Test
+    void overrideHashCodeTestTrue() {
+        //Arrange
+        ProjectTeam pt = new ProjectTeam();
+        ProjectTeam expected = new ProjectTeam();
+        //Assert
+        assertEquals(pt.hashCode(), expected.hashCode());
+    }
+
+    @Test
+    void overrideHashCodeTestFalse() {
+        //Arrange
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+        //Project 1
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.now(), 2, 3000);
+        proj1.setEndDate(LocalDate.now().plusWeeks(10));
+        company.getProjectStore().saveNewProject(proj1);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            //Resource 3
+        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
+        LocalDate startDatej3 = LocalDate.now();
+        LocalDate endDatej3 = LocalDate.now().plusWeeks(2);
+        Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
+        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
+
+        ProjectTeam pt = new ProjectTeam();
+        ProjectTeam expected = new ProjectTeam();
+        expected.saveResource(joana3R);
+        //Assert
+        assertNotEquals(pt.hashCode(), expected.hashCode());
     }
 }
 

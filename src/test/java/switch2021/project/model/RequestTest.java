@@ -17,7 +17,7 @@ class RequestTest {
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("joaquim", "xxxx@isep.ipp.pt",
-                "tester", "img_123", "img_123", "123456", profile);
+                "tester", "Qwerty_1", "Qwerty_1", "123456", profile);
         java.time.LocalDate datateste = LocalDate.now();
         //Act
         Request req = new Request(company.getUserProfileStore().getUserProfile("Director"),user);

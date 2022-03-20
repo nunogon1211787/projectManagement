@@ -55,7 +55,7 @@ public class ProductBacklog {
         return new UserStory(name, priority, description, estimateEffort);
     }
 
-    public UserStory createUserStoryRefine(UserStory userStoryParent, UserStoryStatus userStoryStatus, int priority, String description) {
+    public UserStory RefineUserStory(UserStory userStoryParent, UserStoryStatus userStoryStatus, int priority, String description) {
         return new UserStory(userStoryParent, userStoryStatus, priority, description);
     }
 
