@@ -44,17 +44,17 @@ public class RegisterWorkToTaskControllerTest {
         project1.getSprintList().saveSprint(sprint1);
         int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
-        UserStory userStory1 = project1.getProductBacklog().createUserStory("US001", 1, "description", 5);
-        project1.getProductBacklog().saveUserStory(userStory1);
-        int id_UserStory1 = userStory1.getIdUserStory(); //1
-        sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(userStory1);
+        project1.getProductBacklog().createAndSaveUserStory("US001", 1, "description", 5);
+        int id_UserStory1 = project1.getProductBacklog().getUserStoryList().get(0).getIdUserStory(); //1
+
+        sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-        Task task1 = userStory1.getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
-        Task task2 = userStory1.getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
-        userStory1.getTasks().saveTask(task1);
-        userStory1.getTasks().saveTask(task2);
+        Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
+        Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
+        project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task1);
+        project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task2);
         //userStorySprintProjectDTO
         UserStorySprintProjectDTO userStorySprintProjectDTO = new UserStorySprintProjectDTO(projectCode1, id_Sprint1, id_UserStory1);
         //Act
@@ -95,18 +95,17 @@ public class RegisterWorkToTaskControllerTest {
         project1.getSprintList().saveSprint(sprint1);
         int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
-        UserStory userStory1 = project1.getProductBacklog().createUserStory("US001", 1, "description", 5);
-        project1.getProductBacklog().saveUserStory(userStory1);
-        int id_UserStory1 = userStory1.getIdUserStory(); //1
-        sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(userStory1);
+        project1.getProductBacklog().createAndSaveUserStory("US001", 1, "description", 5);
+        int id_UserStory1 = project1.getProductBacklog().getUserStoryList().get(0).getIdUserStory(); //1
+        sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-        Task task1 = userStory1.getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
-        Task task2 = userStory1.getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
-        userStory1.getTasks().saveTask(task1);
+        Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
+        Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
+        project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task1);
         int id_task1 = task1.getIdTask(); //1
-        userStory1.getTasks().saveTask(task2);
+        project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task2);
         int id_task2 = task2.getIdTask(); //2
         //userStorySprintProjectDTO
         UserStorySprintProjectDTO userStorySprintProjectDTO = new UserStorySprintProjectDTO(projectCode1, id_Sprint1, id_UserStory1);
@@ -149,18 +148,18 @@ public class RegisterWorkToTaskControllerTest {
         project1.getSprintList().saveSprint(sprint1);
         int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
-        UserStory userStory1 = project1.getProductBacklog().createUserStory("US001", 1, "description", 5);
-        project1.getProductBacklog().saveUserStory(userStory1);
-        int id_UserStory1 = userStory1.getIdUserStory(); //1
-        sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(userStory1);
+        project1.getProductBacklog().createAndSaveUserStory("US001", 1, "description", 5);
+
+        int id_UserStory1 = project1.getProductBacklog().getUserStoryList().get(0).getIdUserStory(); //1
+        sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-        Task task1 = userStory1.getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
-        Task task2 = userStory1.getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
-        userStory1.getTasks().saveTask(task1);
+        Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
+        Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
+        project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task1);
         int id_task1 = task1.getIdTask(); //1
-        userStory1.getTasks().saveTask(task2);
+        project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task2);
         int id_task2 = task2.getIdTask(); //2
         //userStorySprintProjectDTO
         UserStorySprintProjectDTO userStorySprintProjectDTO = new UserStorySprintProjectDTO(projectCode1, id_Sprint1, id_UserStory1);
@@ -172,24 +171,22 @@ public class RegisterWorkToTaskControllerTest {
         assertEquals(0, task2.getHoursSpent());
         assertEquals(10, task2.getEffortRemaining());
         assertEquals(0, task2.getExecutionPercentage());
-        assertEquals(0, userStory1.getWorkDone());
+        assertEquals(0, project1.getProductBacklog().getUserStoryList().get(0).getWorkDone());
         //TaskEffortDTO
         Date effortDate = new Date(LocalDate.of(2022, 1, 10));
-        TaskEffortDTO taskEffortDTO = new TaskEffortDTO( 4, 30, effortDate, "test", ".pdf");
-        TaskEffortDTO taskEffortDTO2 = new TaskEffortDTO( 4, 30, effortDate, "", "");
+        TaskEffortDTO taskEffortDTO = new TaskEffortDTO(4, 30, effortDate, "test", ".pdf");
+        TaskEffortDTO taskEffortDTO2 = new TaskEffortDTO(4, 30, effortDate, "", "");
         //Assert
         assertTrue(controller.createTaskEffort(taskEffortDTO));
         assertEquals(10, task2.getEffortEstimate());
         assertEquals(4.5, task2.getHoursSpent());
         assertEquals(5.5, task2.getEffortRemaining());
         assertEquals(0.45, task2.getExecutionPercentage());
-        assertEquals(4.5, userStory1.getWorkDone());
+        assertEquals(4.5, project1.getProductBacklog().getUserStoryList().get(0).getWorkDone());
         assertEquals("test", taskEffortDTO.getComment());
         assertEquals(".pdf", taskEffortDTO.getAttachment());
         assertEquals("", taskEffortDTO2.getComment());
         assertEquals("", taskEffortDTO2.getAttachment());
-
-
 
 
     }

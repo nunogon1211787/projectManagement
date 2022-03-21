@@ -24,9 +24,9 @@ public class AddUserStoryToSprintBacklogControllerTest {
         project.getSprintList().saveSprint(sprint);
 
         company.getProjectStore().saveNewProject(project);
-        UserStory userStory = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createUserStory( "US001",
+
+        boolean userStory = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createAndSaveUserStory( "US001",
                 1, "Fazer coisas cool",5);
-        company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().saveUserStory(userStory);
 
         //Act
         AddUserStoryToSprintBacklogController addStory = new AddUserStoryToSprintBacklogController(company);
@@ -38,7 +38,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
         addStory.addUserStoryToSprintBacklog(1);
 
         //Assert
-        assertEquals(userStory, company.getProjectStore().getProjectByCode("Project_2022_1").getCurrentSprint().getSprintBacklog().getUserStoryList().get(0));
+        assertEquals(company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryList().get(0), company.getProjectStore().getProjectByCode("Project_2022_1").getCurrentSprint().getSprintBacklog().getUserStoryList().get(0));
     }
 }
 

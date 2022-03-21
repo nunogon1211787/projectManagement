@@ -28,9 +28,9 @@ public class ProductBacklogSortControllerTest {
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+        Project project = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+        Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
@@ -62,9 +62,9 @@ public class ProductBacklogSortControllerTest {
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+        Project project = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+        Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
@@ -83,10 +83,10 @@ public class ProductBacklogSortControllerTest {
         List<ProjectDTO> projectList = productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
 
         // Assert
-        assertEquals(project.getCode(),projectList.get(0).getCode());
+        assertEquals(project.getCode(), projectList.get(0).getCode());
         assertEquals(project.getProjectName(), projectList.get(0).getProjectName());
         assertEquals(project.getDescription(), projectList.get(0).getDescription());
-        assertEquals(project2.getCode(),projectList.get(1).getCode());
+        assertEquals(project2.getCode(), projectList.get(1).getCode());
         assertEquals(project2.getProjectName(), projectList.get(1).getProjectName());
         assertEquals(project2.getDescription(), projectList.get(1).getDescription());
     }
@@ -101,9 +101,9 @@ public class ProductBacklogSortControllerTest {
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+        Project project = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+        Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
@@ -121,7 +121,7 @@ public class ProductBacklogSortControllerTest {
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company, mapper, mapperPB);
-            List<ProjectDTO> projectList = productBacklogSortController.getProjectListByUserEmail("");
+            productBacklogSortController.getProjectListByUserEmail("");
         });
         // Assert
         assertEquals("Email cannot be blank", exception.getMessage());
@@ -138,9 +138,9 @@ public class ProductBacklogSortControllerTest {
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+        Project project = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+        Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
@@ -157,26 +157,26 @@ public class ProductBacklogSortControllerTest {
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-        ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company, mapper, mapperPB);
-        List<ProjectDTO> projectList = productBacklogSortController.getProjectListByUserEmail("dani@ipp.pt");
+            ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company, mapper, mapperPB);
+            productBacklogSortController.getProjectListByUserEmail("dani@ipp.pt");
         });
         // Assert
-            assertEquals("Email don't exist in system", exception.getMessage());
+        assertEquals("Email don't exist in system", exception.getMessage());
 
     }
 
     @Test
     @DisplayName("grants a list of US that is sorted by priority. It keeps the done and/or cancelled US on the end\n")
-    public void getSortedListWithSuccess(){
+    public void getSortedListWithSuccess() {
         Company company = new Company();
         ProjectsMapper mapper = new ProjectsMapper();
         ProductBacklogMapper mapperPB = new ProductBacklogMapper();
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+        Project project = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+        Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
@@ -187,14 +187,11 @@ public class ProductBacklogSortControllerTest {
         ProjectTeam projectTeam = new ProjectTeam(resFac);// Arrange
 
         company.getProjectStore().saveNewProject(project);
-        UserStory userStory =project.getProductBacklog().createUserStory("US001",2,"create user story",5);
-        project.getProductBacklog().saveUserStory(userStory);
-        UserStory userStory1 =project.getProductBacklog().createUserStory("US001",1,"sort user story",5);
-        project.getProductBacklog().saveUserStory(userStory1);
-        UserStory userStory2 =project.getProductBacklog().createUserStory("US001",3,"backlog sorted",5);
-        project.getProductBacklog().saveUserStory(userStory2);
-        UserStory userStory3 =project.getProductBacklog().createUserStory("US001",5,"show sorted",5);
-        project.getProductBacklog().saveUserStory(userStory3);
+        project.getProductBacklog().createAndSaveUserStory("US001", 2, "create user story", 5);
+        project.getProductBacklog().createAndSaveUserStory("US001", 1, "sort user story", 5);
+        project.getProductBacklog().createAndSaveUserStory("US001", 3, "backlog sorted", 5);
+        project.getProductBacklog().createAndSaveUserStory("US001", 5, "show sorted", 5);
+
 
         projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
@@ -216,7 +213,7 @@ public class ProductBacklogSortControllerTest {
     @Test
     @DisplayName("get exception message \"Check priority, cannot be < 0 or superior to 5.“")
 
-    public void getSortedListFailWrongPriority(){
+    public void getSortedListFailWrongPriority() {
         // Arrange
         Company company = new Company();
         ProjectsMapper mapper = new ProjectsMapper();
@@ -224,9 +221,9 @@ public class ProductBacklogSortControllerTest {
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+        Project project = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+        Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
@@ -236,24 +233,19 @@ public class ProductBacklogSortControllerTest {
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         company.getProjectStore().saveNewProject(project);
-        UserStory userStory =project.getProductBacklog().createUserStory("US001",2,"create user story",5);
-        project.getProductBacklog().saveUserStory(userStory);
-        UserStory userStory1 =project.getProductBacklog().createUserStory("US001",1,"sort user story",5);
-        project.getProductBacklog().saveUserStory(userStory1);
-        UserStory userStory2 =project.getProductBacklog().createUserStory("US001",3,"backlog sorted",5);
-        project.getProductBacklog().saveUserStory(userStory2);
-
+        project.getProductBacklog().createAndSaveUserStory("US001", 2, "create user story", 5);
+        project.getProductBacklog().createAndSaveUserStory("US001", 1, "sort user story", 5);
+        project.getProductBacklog().createAndSaveUserStory("US001", 3, "backlog sorted", 5);
 
         projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-        ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company, mapper, mapperPB);
-        productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
-            UserStory userStory3 =project.getProductBacklog().createUserStory("US001",6,"show sorted",5);
-            project.getProductBacklog().saveUserStory(userStory3);
-            List<UserStoryDto> userStoryListDtoList = productBacklogSortController.getUsSortedByPriority("123testcode");
+            ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company, mapper, mapperPB);
+            productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
+            project.getProductBacklog().createAndSaveUserStory("US001", 6, "show sorted", 5);
+            productBacklogSortController.getUsSortedByPriority("123testcode");
         });
         // Assert
         assertTrue(exception.getMessage().contains("Check priority, cannot be < 0 or superior to 5."));
@@ -261,16 +253,16 @@ public class ProductBacklogSortControllerTest {
 
     @Test
     @DisplayName("grants a list DTO of US that is sorted by priority. It keeps the done and/or cancelled US on the end\n")
-    public void getSortedListWithSuccessCorrectDTOInfo(){
+    public void getSortedListWithSuccessCorrectDTOInfo() {
         Company company = new Company();
         ProjectsMapper mapper = new ProjectsMapper();
         ProductBacklogMapper mapperPB = new ProductBacklogMapper();
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
+        Project project = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
+        Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
@@ -281,14 +273,10 @@ public class ProductBacklogSortControllerTest {
         ProjectTeam projectTeam = new ProjectTeam(resFac);// Arrange
 
         company.getProjectStore().saveNewProject(project);
-        UserStory userStory =project.getProductBacklog().createUserStory("US001",2,"create user story",5);
-        project.getProductBacklog().saveUserStory(userStory);
-        UserStory userStory1 =project.getProductBacklog().createUserStory("US001",1,"sort user story",5);
-        project.getProductBacklog().saveUserStory(userStory1);
-        UserStory userStory2 =project.getProductBacklog().createUserStory("US001",3,"backlog sorted",5);
-        project.getProductBacklog().saveUserStory(userStory2);
-        UserStory userStory3 =project.getProductBacklog().createUserStory("US001",5,"show sorted",5);
-        project.getProductBacklog().saveUserStory(userStory3);
+        project.getProductBacklog().createAndSaveUserStory("US001", 2, "create user story", 5);
+        project.getProductBacklog().createAndSaveUserStory("US001", 1, "sort user story", 5);
+        project.getProductBacklog().createAndSaveUserStory("US001", 3, "backlog sorted", 5);
+        project.getProductBacklog().createAndSaveUserStory("US001", 5, "show sorted", 5);
 
         projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
@@ -300,21 +288,21 @@ public class ProductBacklogSortControllerTest {
 
         // Assert
 
-        assertEquals(userStory.getTitle(),userStoryListDtoList.get(1).getTitle());
-        assertEquals(userStory.getUserStoryStatus(),userStoryListDtoList.get(1).getUserStoryStatus());
-      assertEquals(userStory.getPriority(),userStoryListDtoList.get(1).getPriority());
-        assertEquals(userStory.getDescription().getText(),userStoryListDtoList.get(1).getDescription().getText());
-        assertEquals(userStory1.getTitle(),userStoryListDtoList.get(0).getTitle());
-        assertEquals(userStory1.getUserStoryStatus(),userStoryListDtoList.get(0).getUserStoryStatus());
-        assertEquals(userStory1.getPriority(),userStoryListDtoList.get(0).getPriority());
-        assertEquals(userStory1.getDescription().getText(),userStoryListDtoList.get(0).getDescription().getText());
-        assertEquals(userStory2.getTitle(),userStoryListDtoList.get(2).getTitle());
-        assertEquals(userStory2.getUserStoryStatus(),userStoryListDtoList.get(2).getUserStoryStatus());
-        assertEquals(userStory2.getPriority(),userStoryListDtoList.get(2).getPriority());
-        assertEquals(userStory2.getDescription().getText(),userStoryListDtoList.get(2).getDescription().getText());
-        assertEquals(userStory3.getTitle(),userStoryListDtoList.get(3).getTitle());
-        assertEquals(userStory3.getUserStoryStatus(),userStoryListDtoList.get(3).getUserStoryStatus());
-        assertEquals(userStory3.getPriority(),userStoryListDtoList.get(3).getPriority());
-        assertEquals(userStory3.getDescription().getText(),userStoryListDtoList.get(3).getDescription().getText());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(0).getTitle(), userStoryListDtoList.get(0).getTitle());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(0).getUserStoryStatus(), userStoryListDtoList.get(0).getUserStoryStatus());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(0).getPriority(), userStoryListDtoList.get(0).getPriority());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(0).getDescription().getText(), userStoryListDtoList.get(0).getDescription().getText());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(1).getTitle(), userStoryListDtoList.get(1).getTitle());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(1).getUserStoryStatus(), userStoryListDtoList.get(1).getUserStoryStatus());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(1).getPriority(), userStoryListDtoList.get(1).getPriority());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(1).getDescription().getText(), userStoryListDtoList.get(1).getDescription().getText());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(2).getTitle(), userStoryListDtoList.get(2).getTitle());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(2).getUserStoryStatus(), userStoryListDtoList.get(2).getUserStoryStatus());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(2).getPriority(), userStoryListDtoList.get(2).getPriority());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(2).getDescription().getText(), userStoryListDtoList.get(2).getDescription().getText());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(3).getTitle(), userStoryListDtoList.get(3).getTitle());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(3).getUserStoryStatus(), userStoryListDtoList.get(3).getUserStoryStatus());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(3).getPriority(), userStoryListDtoList.get(3).getPriority());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(3).getDescription().getText(), userStoryListDtoList.get(3).getDescription().getText());
     }
 }

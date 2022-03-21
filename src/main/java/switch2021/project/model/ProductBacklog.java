@@ -3,6 +3,7 @@ package switch2021.project.model;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.dto.UserStoryDto;
+import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.mapper.UserStoryMapper;
 
 import java.util.*;
@@ -16,78 +17,68 @@ public class ProductBacklog {
      * UserStory Store Attributes (backlog). Contains a UserStory list.
      **/
     private List<UserStory> userStoryList;
+    private UserStoryFactory userStoryFactory;
 
     /**
      * Constructor
      **/
 
+    public ProductBacklog(UserStoryFactory userStoryFactory) {
+        this.userStoryList = new ArrayList<>();
+        this.userStoryFactory = userStoryFactory == null ? new UserStoryFactory() : userStoryFactory;
+    }
+
     public ProductBacklog() {
-        userStoryList = new ArrayList<>();
-    }
-
-
-    public List<UserStory> getActiveUserStoryList() {
-        List<UserStory> activeUSList = new ArrayList<>();
-        for (UserStory us : userStoryList) {
-            if (!us.getUserStoryStatus().getDescription().getText().equals("Completed")) {
-                activeUSList.add(us);
-            }
-        }
-        return activeUSList;
-    }
-
-    public UserStory getUserStoryById(int id) {
-        UserStory userStory = null;
-        for (UserStory us : userStoryList) {
-            if (us.getIdUserStory() == id) {
-                userStory = us;
-                break;
-            }
-        }
-        return userStory;
+        this(null);
     }
 
     /**
      * Methods for create UserStory to the productBacklog
      **/
 
-    public UserStory createUserStory(String name, int priority, String description, int estimateEffort) {
-        return new UserStory(name, priority, description, estimateEffort);
+    public boolean createAndSaveUserStory(String name, int priority, String description, int estimateEffort) {
+
+        UserStory newUserStory = this.userStoryFactory.createUserStory(name, priority, description, estimateEffort);
+
+        validateUserStory(newUserStory);
+
+        if (validateIdUserStory(newUserStory)) {
+            newUserStory.setIdUserStory(idUserStoryGenerator());
+        }
+        return this.userStoryList.add(newUserStory);
     }
+
 
     public UserStory createUserStoryRefine(UserStory userStoryParent, UserStoryStatus userStoryStatus, int priority, String description) {
-        return new UserStory(userStoryParent, userStoryStatus, priority, description);
-    }
-
-    /**
-     * Methods for save UserStory to the productBacklog - validate duplicate for description (Cris US009)
-     **/
-
-    public boolean saveUserStory(UserStory userStory) {
+        UserStory userStory = new UserStory(userStoryParent, userStoryStatus, priority, description);
         validateUserStory(userStory);
+
         if (validateIdUserStory(userStory)) {
             userStory.setIdUserStory(idUserStoryGenerator());
-            this.userStoryList.add(userStory);
         }
-        return true;
+        return userStory;
+    }
+
+    public UserStory createUserStoryWithDto(UserStoryDto createUserStoryDto, UserStoryMapper mapperUS) {
+        return mapperUS.toModel(createUserStoryDto);
     }
 
     /**
      * Validation Methods.
      **/
-    private void validateUserStory(UserStory userStory) {
+    private void validateUserStory(UserStory newUserStory) {
         // check duplicate story
         for (UserStory us : userStoryList) {
-            if (us.getDescription().getText().trim().equalsIgnoreCase(userStory.getDescription().getText().trim())) {
+            if (us.getDescription().getText().trim().equalsIgnoreCase(newUserStory.getDescription().getText().trim())) {
                 throw new IllegalArgumentException("Repeated user story inserted, same code project and description.");
             }
         }
     }
 
-    private boolean validateIdUserStory(UserStory userStory) {
+    private boolean validateIdUserStory(UserStory newUserStory) {
         boolean msg = true;
         for (UserStory i : userStoryList) {
-            if (i.getIdUserStory() == userStory.getIdUserStory()) {
+            if (i.getIdUserStory() == newUserStory.getIdUserStory()) {
                 msg = false;
                 break;
             }
@@ -95,6 +86,9 @@ public class ProductBacklog {
         return msg;
     }
 
+    /**
+     * Get Methods.
+     **/
 
     public List<UserStory> getUsSortedByPriority() {
 
@@ -121,6 +115,28 @@ public class ProductBacklog {
         return Collections.unmodifiableList(userStoryList);
     }
 
+
+    public List<UserStory> getActiveUserStoryList() {
+        List<UserStory> activeUSList = new ArrayList<>();
+        for (UserStory us : userStoryList) {
+            if (!us.getUserStoryStatus().getDescription().getText().equals("Completed")) {
+                activeUSList.add(us);
+            }
+        }
+        return activeUSList;
+    }
+
+    public UserStory getUserStoryById(int id) {
+        UserStory userStory = null;
+        for (UserStory us : userStoryList) {
+            if (us.getIdUserStory() == id) {
+                userStory = us;
+                break;
+            }
+        }
+        return userStory;
+    }
+
     /**
      * ID_UserStory Generator
      **/
@@ -131,9 +147,6 @@ public class ProductBacklog {
         }
         return id;
     } //if the object isn´t saved on the list, the id will be the same for all
-    //objects. This issue will be solved when calling the save method.
 
-    public UserStory createUserStoryWithDto(UserStoryDto createUserStoryDto, UserStoryMapper mapperUS) {
-        return mapperUS.toModel(createUserStoryDto);
-    }
+    //objects. This issue will be solved when calling the save method.
 }

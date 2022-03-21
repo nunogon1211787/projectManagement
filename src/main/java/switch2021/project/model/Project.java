@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.factory.ProjectTeamFactory;
 import switch2021.project.factory.ResourceFactory;
+import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.stores.SprintList;
 import switch2021.project.factory.SprintFactory;
 
@@ -26,6 +27,7 @@ public class Project {
     private Typology typology;
     private ProjectStatus projectStatus;
     private ProductBacklog productBacklog;
+    private UserStoryFactory userStoryFactory;
 
     private final BusinessSector businessSector;
     private final SprintList sprintList;
@@ -64,11 +66,11 @@ public class Project {
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
 
-        this.productBacklog = new ProductBacklog();
-
 //        this.projectTeam = new ProjectTeam(resFac);
         //this.projectTeam = this.projectTeamFactory.createProjectTeam();
         this.projectTeam = new ProjectTeam();
+        this.productBacklog = new ProductBacklog();
+
     }
 
     /**

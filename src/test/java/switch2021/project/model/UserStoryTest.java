@@ -11,30 +11,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class UserStoryTest {
-    Company company;
-    private UserStory userStory;
-    private UserStory userStory2;
-    private Sprint sprint;
-    private UserStory userStoryToRefine;
-    ProductBacklog productBacklog;
-    private Project proj;
-
-    @BeforeEach
-    public void ini() {
-        company = new Company();
-        LocalDate date = LocalDate.of(2021, 12, 12);
-        company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
-        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste", 123456789));
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        proj = company.getProjectStore().createProject("prototype", "test56", customer,
-                typo, sector, date, 7, 5000);
-        company.getProjectStore().saveNewProject(proj);
-        productBacklog = proj.getProductBacklog();
-        userStoryToRefine = productBacklog.createUserStory("US001", 4, "123testtest", 5);
-        productBacklog.saveUserStory(userStoryToRefine);
-    }
 
     @Test
     void ValidateInfoUserStory() {
@@ -50,7 +26,7 @@ class UserStoryTest {
 
     @Test
     void setPriorityTest() {
-        userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
         userStory.setPriority(4);
         assertEquals(4, userStory.getPriority());
     }
@@ -58,7 +34,7 @@ class UserStoryTest {
 
     @Test
     void hasCodeTest() {
-        userStory = new UserStory("US001", 2, "Fazer tal", 5);
+       UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
 
         boolean expected = userStory.hasCode(userStory.getIdUserStory());
         assertTrue(expected);
@@ -66,7 +42,7 @@ class UserStoryTest {
 
     @Test
     void hasCodeTest2() {
-        userStory = new UserStory("US001", 2, "Fazer tal", 5);
+       UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
 
         boolean expected = userStory.hasCode(4);
         assertFalse(expected);
@@ -74,7 +50,7 @@ class UserStoryTest {
 
     @Test
     void setDescriptionTest() {
-        userStory = new UserStory("US001", 2, "Fazer tal", 5);
+       UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
 
         userStory.setDescription("Fazer coiso");
         assertEquals("Fazer coiso", userStory.getDescription().getText());
@@ -120,7 +96,7 @@ class UserStoryTest {
 
     @Test
     void validatePriorityTestFail() {
-        userStory = new UserStory("US001", 2, "Fazer tal", 5);
+      UserStory  userStory = new UserStory("US001", 2, "Fazer tal", 5);
 
         boolean expected = userStory.validatePriority(6);
         assertFalse(expected);
@@ -128,7 +104,7 @@ class UserStoryTest {
 
     @Test
     void validatePriorityTestSuccess() {
-        userStory = new UserStory("US001", 2, "Fazer tal", 5);
+      UserStory  userStory = new UserStory("US001", 2, "Fazer tal", 5);
 
         boolean expected = userStory.validatePriority(1);
         assertTrue(expected);
@@ -136,7 +112,7 @@ class UserStoryTest {
 
     @Test
     void validatePriorityTestFailNegative() {
-        userStory = new UserStory("US001", 2, "Fazer tal", 5);
+     UserStory   userStory = new UserStory("US001", 2, "Fazer tal", 5);
 
         boolean expected = userStory.validatePriority(-1);
         assertFalse(expected);
@@ -144,7 +120,7 @@ class UserStoryTest {
 
     @Test
     void validatePriorityTestSuccessHighLimit() {
-        userStory = new UserStory("US001", 2, "Fazer tal", 5);
+     UserStory   userStory = new UserStory("US001", 2, "Fazer tal", 5);
 
         boolean expected = userStory.validatePriority(5);
         assertTrue(expected);
@@ -152,7 +128,7 @@ class UserStoryTest {
 
     @Test
     void validatePriorityTestSuccessLowLimit() {
-        userStory = new UserStory("US001", 2, "Fazer tal", 5);
+      UserStory  userStory = new UserStory("US001", 2, "Fazer tal", 5);
 
         boolean expected = userStory.validatePriority(0);
         assertTrue(expected);
@@ -162,7 +138,7 @@ class UserStoryTest {
     void isValidUserStoryDescription() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-            userStory = new UserStory("US001", 2, "", 5);
+        UserStory    userStory = new UserStory("US001", 2, "", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }
@@ -171,7 +147,7 @@ class UserStoryTest {
     void isValidUserStoryDescription2() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-            userStory = new UserStory("US001", 2, "    ", 5);
+          UserStory  userStory = new UserStory("US001", 2, "    ", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }
@@ -181,7 +157,7 @@ class UserStoryTest {
     void isValidUserStoryName() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-            userStory = new UserStory("", 2, "Fazer tal", 5);
+       UserStory     userStory = new UserStory("", 2, "Fazer tal", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }
@@ -190,7 +166,7 @@ class UserStoryTest {
     void isValidUserStoryName2() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-            userStory = new UserStory("C", 2, "Fazer tal", 5);
+      UserStory      userStory = new UserStory("C", 2, "Fazer tal", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }
@@ -199,7 +175,7 @@ class UserStoryTest {
     void isValidUserStoryName3() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-            userStory = new UserStory("   ", 2, "Fazer tal", 5);
+       UserStory     userStory = new UserStory("   ", 2, "Fazer tal", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }
@@ -208,7 +184,7 @@ class UserStoryTest {
     void isValidUserStoryName4() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-            userStory = new UserStory(null, 2, "Fazer tal", 5);
+         UserStory   userStory = new UserStory(null, 2, "Fazer tal", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }
@@ -217,7 +193,7 @@ class UserStoryTest {
     void isValidUserStoryName5() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-            userStory = new UserStory("CC", 2, "Fazer tal", 5);
+       UserStory     userStory = new UserStory("CC", 2, "Fazer tal", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }

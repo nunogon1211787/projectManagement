@@ -43,12 +43,11 @@ public class CreateUserStoryController {
         return Collections.unmodifiableList(projectListByUserDtoList);
     }
 
-
     public void createUserStory(String code, UserStoryDto createUserStoryDto) {
         Project project = this.company.getProjectStore().getProjectByCode(code);
         ProductBacklog productBacklog = project.getProductBacklog();
         UserStory us = project.getProductBacklog().createUserStoryWithDto(createUserStoryDto, this.mapperUS);
-        productBacklog.saveUserStory(us);
+        productBacklog.getUserStoryList().add(us);
     }
 
 }

@@ -9,6 +9,7 @@ import switch2021.project.stores.SprintList;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProjectTest {
@@ -26,13 +27,13 @@ class ProjectTest {
         //Arrange
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
-        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste","Teste", 123456789));
+        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste", 123456789));
 
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
-        proj = company.getProjectStore().createProject( "prototype", "test1", customer,
+        proj = company.getProjectStore().createProject("prototype", "test1", customer,
                 typo, sector, date, 7, 5000);
         company.getProjectStore().saveNewProject(proj);
         company.getProjectStore().getProjectByCode(proj.getCode()).setEndDate(LocalDate.now());
@@ -80,14 +81,14 @@ class ProjectTest {
         assertEquals(valueCode, code);
         assertEquals(valueName, name);
         assertEquals(valueDescription, description);
-        assertEquals(valueCustomer,customer);
-        assertEquals(valueTypology,typology);
-        assertEquals(valueSector,sector);
-        assertEquals(valueStatus.getDescription(),status.getDescription());
-        assertEquals(valueDate,date);
-        assertEquals(valueEndDate,endDate);
-        assertEquals(valueNrSprint,numberOfSprints);
-        assertEquals(valueBudget,budget);
+        assertEquals(valueCustomer, customer);
+        assertEquals(valueTypology, typology);
+        assertEquals(valueSector, sector);
+        assertEquals(valueStatus.getDescription(), status.getDescription());
+        assertEquals(valueDate, date);
+        assertEquals(valueEndDate, endDate);
+        assertEquals(valueNrSprint, numberOfSprints);
+        assertEquals(valueBudget, budget);
     }
 
     @Test
@@ -96,7 +97,7 @@ class ProjectTest {
         List<Project> test = company.getProjectStore().getProjects();
         String code = test.get(0).getCode();
         String expectedCode = "Project_2022_1";
-        assertEquals(expectedCode,code);
+        assertEquals(expectedCode, code);
     }
 
     @Test
@@ -109,8 +110,8 @@ class ProjectTest {
         LocalDate date = LocalDate.now();
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () ->
-            company.getProjectStore().createProject("", "test1234", customer,
-                    typo, sector, date, 7, 5000));
+                company.getProjectStore().createProject("", "test1234", customer,
+                        typo, sector, date, 7, 5000));
         //Assert
         assertTrue(exception.getMessage().contains("Project Name cannot be empty"));
     }
@@ -218,7 +219,6 @@ class ProjectTest {
     }
 
 
-
     @Test
     @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_numberOfSprints() {
@@ -269,13 +269,9 @@ class ProjectTest {
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
     ProjectStatus projectStatus = new ProjectStatus("ToStart");
-    Project project2 = new Project( "prototype", "test56", customer,
+    Project project2 = new Project("prototype", "test56", customer,
             typo, sector, LocalDate.now(), projectStatus, 7, 5000);
     ProductBacklog productBacklog = project2.getProductBacklog();
-
-    UserStory userStory = productBacklog.createUserStory("US001", 1, "making test",5);
-    UserStory userStory2 = productBacklog.createUserStory("US001", 1, "making other test",5);
-    UserStory userStory3 = productBacklog.createUserStory("US001", 1, "making test 4",5);
 
 
     @BeforeEach
@@ -285,19 +281,19 @@ class ProjectTest {
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
-        proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+        proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2021, 11, 30));
 
-        proj2 = company.getProjectStore().createProject( "prototype2", "proj2Prototype", customer,
+        proj2 = company.getProjectStore().createProject("prototype2", "proj2Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
         proj2.setEndDate(LocalDate.of(2021, 11, 30));
 
-        proj3 = company.getProjectStore().createProject( "prototype3", "proj3Prototype", customer,
+        proj3 = company.getProjectStore().createProject("prototype3", "proj3Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
         proj3.setEndDate(LocalDate.of(2021, 11, 30));
 
-        currentProject = company.getProjectStore().createProject( "prototype4", "proj4Prototype", customer,
+        currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 4000);
         currentProject.setEndDate(LocalDate.now().plusDays(7));
 
@@ -348,15 +344,17 @@ class ProjectTest {
     @DisplayName("validate that list have results (not null) and check list size are correct")
     public void getProductBacklogWithResults() {
         // Arrange
-        company.getProjectStore().saveNewProject(project2);
-        productBacklog.saveUserStory(userStory);
-        productBacklog.saveUserStory(userStory2);
-        productBacklog.saveUserStory(userStory3);
+
+
+        //company.getProjectStore().saveNewProject(proj1);
+        proj1.getProductBacklog().createAndSaveUserStory("US001", 1, "making test", 5);
+        proj1.getProductBacklog().createAndSaveUserStory("US002", 1, "making other test", 5);
+        proj1.getProductBacklog().createAndSaveUserStory("US003", 1, "making test 4", 5);
         // Act
-        ProductBacklog productBacklog = company.getProjectStore().getProjectByCode("Project_2022_2").getProductBacklog();
+        proj1.getProductBacklog().getUserStoryList();
         //Assert
-        assertNotNull(productBacklog);
-        assertEquals(3, productBacklog.getUserStoryList().size());
+        assertNotNull(proj1.getProductBacklog());
+        assertEquals(3, proj1.getProductBacklog().getUserStoryList().size());
 
     }
 
@@ -413,7 +411,7 @@ class ProjectTest {
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
-        Task taskTest = sprint1.getTaskList().createTask("test",taskDescription,8.0,taskType,resource);
+        Task taskTest = sprint1.getTaskList().createTask("test", taskDescription, 8.0, taskType, resource);
         sprint1.getTaskList().saveTask(taskTest);
         List<Task> taskList = new ArrayList<>();
         //Act
@@ -428,14 +426,14 @@ class ProjectTest {
     void saveNewProject() {
         //Arrange
         ProjectStore store = new ProjectStore();
-        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2021, 11, 30));
 
         store.saveNewProject(proj1);
         store.saveNewProject(proj1);
 
-        assertEquals(1,store.getProjects().size());
+        assertEquals(1, store.getProjects().size());
     }
 
     @Test
@@ -443,18 +441,18 @@ class ProjectTest {
     void saveNewProject_2() {
         //Arrange
         ProjectStore store = new ProjectStore();
-        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2021, 11, 30));
 
-        Project proj2 = company.getProjectStore().createProject( "prototype2", "proj1Prototype", customer,
+        Project proj2 = company.getProjectStore().createProject("prototype2", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2021, 11, 30));
 
         store.saveNewProject(proj1);
         store.saveNewProject(proj2);
 
-        assertEquals(2,store.getProjects().size());
+        assertEquals(2, store.getProjects().size());
     }
 
     @Test
@@ -495,7 +493,7 @@ class ProjectTest {
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
+        Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().saveNewProject(project);
 
@@ -503,7 +501,7 @@ class ProjectTest {
         ProjectStore list2 = new ProjectStore();
         list2.saveNewProject(project);
         ProjectStore list3 = new ProjectStore();
-        list3.saveNewProject(list3.createProject( "prototype4", "test123456", customer,
+        list3.saveNewProject(list3.createProject("prototype4", "test123456", customer,
                 typo, sector, LocalDate.now(), 10, 6000));
 
 
@@ -526,78 +524,78 @@ class ProjectTest {
     public void overrideTest() {
         //Arrange
         ProductBacklog backlog = new ProductBacklog();
-        LocalDate date = LocalDate.of(2024,12,12);
+        LocalDate date = LocalDate.of(2024, 12, 12);
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
+        Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         project.setCode("1");
         project.setProductBacklog(backlog);
         project.setEndDate(date);
-        Project project2 = company.getProjectStore().createProject( "prototype", "test1234", customer,
+        Project project2 = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         project2.setCode("1");
         project2.setEndDate(date);
         project2.setProductBacklog(backlog);
 
-        assertEquals(project.toString(),project2.toString());
-        assertEquals(project,project2);
+        assertEquals(project.toString(), project2.toString());
+        assertEquals(project, project2);
 
         project2.setProjectStatus(new ProjectStatus("test"));
 
-        assertNotEquals(project,project2);
+        assertNotEquals(project, project2);
 
         project.setProjectStatus(new ProjectStatus("test"));
         project2.setDescription("test");
 
-        assertNotEquals(project,project2);
+        assertNotEquals(project, project2);
 
         project.setDescription("test");
         project2.setProjectName("erro");
 
-        assertNotEquals(project,project2);
+        assertNotEquals(project, project2);
     }
 
     @Test
     public void overrideTest2() {
         //Arrange
         ProductBacklog backlog = new ProductBacklog();
-        LocalDate date = LocalDate.of(2024,12,12);
+        LocalDate date = LocalDate.of(2024, 12, 12);
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
+        Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         project.setCode("1");
         project.setProductBacklog(backlog);
         project.setEndDate(date);
-        Project project2 = company.getProjectStore().createProject( "prototype", "test1234", customer,
+        Project project2 = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         project2.setCode("1");
         project2.setEndDate(date);
         project2.setProductBacklog(backlog);
 
-        assertEquals(project.toString(),project2.toString());
-        assertEquals(project,project2);
+        assertEquals(project.toString(), project2.toString());
+        assertEquals(project, project2);
 
         project2.setProjectStatus(new ProjectStatus("test"));
 
-        assertNotEquals(project,project2);
+        assertNotEquals(project, project2);
 
         project.setProjectStatus(new ProjectStatus("test"));
         project2.setDescription("test");
 
-        assertNotEquals(project,project2);
+        assertNotEquals(project, project2);
 
         project.setDescription("test");
         project2.setProjectName("erro");
 
-        assertNotEquals(project,project2);
+        assertNotEquals(project, project2);
 
         assertEquals(project.getBusinessSector(), sector);
         assertEquals(project.getCustomer(), customer);
         assertEquals(project.getTypology(), typo);
-        assertEquals(project.getEndDate(), date );
+        assertEquals(project.getEndDate(), date);
     }
 }
