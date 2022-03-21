@@ -39,7 +39,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.status = new TaskStatus("Planned");
+        this.status = App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Planned");
     }
 
     public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible) {
@@ -61,7 +61,7 @@ public class Task {
     }
 
     public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible, List<String> precedenceList) {
-
+        //REVIEW ---- TASK IS NEVER USED
         Task task = new Task(name, description,effortEstimate, type, responsible);
 
         this.precedenceList = Collections.unmodifiableList(precedenceList);
@@ -186,20 +186,25 @@ public class Task {
     }
 
     public double updateEffortRemaining(TaskEffort effort) {
-        if (this.effortRemaining < effortInHours(effort)) {
-            this.effortRemaining = 0.0;
+        double EFFORT_TO_COMPLETE = 0.0;
+
+        if (this.effortRemaining <= effortInHours(effort)) {
+            this.effortRemaining = EFFORT_TO_COMPLETE;
         } else {
             this.effortRemaining -= effortInHours(effort);
         }
+
         return this.effortRemaining;
     }
 
     private double updateExecutionPercentage() {
+        double EFFORT_COMPLETED = 1.0;
+
         double workTotal = this.hoursSpent + this.effortRemaining;
         double workDone = this.hoursSpent;
 
         if (workDone >= workTotal) {
-            this.executionPercentage = 1.0;
+            this.executionPercentage = EFFORT_COMPLETED;
         } else {
             this.executionPercentage = workDone / workTotal;
         }

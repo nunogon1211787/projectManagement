@@ -32,7 +32,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = company.getSystemUserStore().createSystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user = company.getSystemUserStore().createSystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
@@ -88,13 +88,13 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         projectStore.saveNewProject(project3);
         //Resource1
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = systemUserStore.createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user = systemUserStore.createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         systemUserStore.saveSystemUser(user);
         LocalDate startDateMm = LocalDate.of(2021, 12, 15);
         LocalDate endDateMm = LocalDate.of(2021, 12, 31);
         Resource resource1 = project1.getProjectTeam().createResource(user, startDateMm, endDateMm, 100, .5);
         //Resource2
-       SystemUser user2 = systemUserStore.createSystemUser("manuel", "manuel@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+       SystemUser user2 = systemUserStore.createSystemUser("manuel", "manuel@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         systemUserStore.saveSystemUser(user2);
         LocalDate startDateM = LocalDate.of(2022, 1, 1);
         LocalDate endDateM = LocalDate.of(2022, 1, 31);

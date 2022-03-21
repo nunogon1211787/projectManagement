@@ -15,8 +15,8 @@ public class RegisterUserControllerTest {
         RegisterUserController controller = new RegisterUserController(company);
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
-        String password = "ghi";
-        String passwordConfirmation = "ghi";
+        String password = "Qwerty_1";
+        String passwordConfirmation = "Qwerty_1";
         String function = "tester";
         String photo = "photo";
 

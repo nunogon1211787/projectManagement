@@ -48,7 +48,6 @@ public class ProductBacklog {
         return this.userStoryList.add(newUserStory);
     }
 
-
     public UserStory createUserStoryRefine(UserStory userStoryParent, UserStoryStatus userStoryStatus, int priority, String description) {
         UserStory userStory = new UserStory(userStoryParent, userStoryStatus, priority, description);
         validateUserStory(userStory);

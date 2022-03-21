@@ -1,150 +1,169 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.factory.TaskStatusFactory;
+import switch2021.project.immutable.Description;
 import switch2021.project.immutable.TaskStatus;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 
 class TaskStatusStoreTest {
 
     @Test
+    void constructorFactory() {
+        //Arrange
+        TaskStatusFactory tsf = new TaskStatusFactory();
+        //Act
+        TaskStatusStore tss = new TaskStatusStore(tsf);
+        //Assert
+        assertEquals(tsf,tss.getTaskStatusFactory());
+    }
+
+    @Test
     void createTaskStatusTestSuccess() {
         //Arrange
-        TaskStatusStore test = new TaskStatusStore();
+        TaskStatusFactory tsf = mock(TaskStatusFactory.class);
+        TaskStatusStore test = new TaskStatusStore(tsf);
+        TaskStatus status = mock(TaskStatus.class);
         //Act
-        test.createAndSaveTaskStatus("test1");
-        //Asserts
-        assertEquals(1, test.getTaskStatusList().size());
+        when(tsf.createAndAddTaskStatus("test1")).thenReturn(status);
+        //Assert
+        assertTrue(test.createAndAddTaskStatus("test1"));
+    }
+
+    @Test
+    void createTaskStatusTestFail() {
+        //Arrange
+        TaskStatusFactory tsf = mock(TaskStatusFactory.class);
+        TaskStatusStore test = new TaskStatusStore(tsf);
+        test.getTaskStatusList().add(new TaskStatus("test1"));
+        TaskStatus status = mock(TaskStatus.class);
+        Description des = mock(Description.class);
+        //Act
+        when(status.getDescription()).thenReturn(des);
+        when(des.getText()).thenReturn("test1");
+        when(tsf.createAndAddTaskStatus("test1")).thenReturn(status);
+        //Assert
+        assertFalse(test.createAndAddTaskStatus("test1"));
     }
 
     @Test
     void populateDefaultTestSuccess() {
         //Arrange
-        TaskStatusStore test = new TaskStatusStore();
+        TaskStatusFactory tsf = mock(TaskStatusFactory.class);
+        TaskStatusStore test = new TaskStatusStore(tsf);
+        TaskStatus status = mock(TaskStatus.class);
+        //Act
+        when(tsf.createAndAddTaskStatus("Planned")).thenReturn(status);
+        when(tsf.createAndAddTaskStatus("Running")).thenReturn(status);
+        when(tsf.createAndAddTaskStatus("Finished")).thenReturn(status);
+        when(tsf.createAndAddTaskStatus("Blocked")).thenReturn(status);
         test.populateDefault();
-        //Asserts
-        assertEquals(4, test.getTaskStatusDescriptions().size());
-        assertEquals("Planned", test.getTaskStatusDescriptions().get(0));
-        assertEquals("Running", test.getTaskStatusDescriptions().get(1));
-        assertEquals("Finished", test.getTaskStatusDescriptions().get(2));
-        assertEquals("Blocked", test.getTaskStatusDescriptions().get(3));
+        //Assert
+        assertEquals(4, test.getTaskStatusList().size());
+    }
+
+    @Test
+    void populateDefaultTestFail() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            // Arrange
+            TaskStatusFactory tsf = mock(TaskStatusFactory.class);
+            TaskStatusStore test = new TaskStatusStore(tsf);
+            test.getTaskStatusList().add(new TaskStatus("Planned"));
+            test.getTaskStatusList().add(new TaskStatus("Running"));
+            test.getTaskStatusList().add(new TaskStatus("Finished"));
+            test.getTaskStatusList().add(new TaskStatus("Blocked"));
+            //Act
+            test.populateDefault();
+        });
+    }
+
+    @Test
+    void getStatusByDescriptionTestSuccess() {
+        //Arrange
+        TaskStatusFactory tsf = mock(TaskStatusFactory.class);
+        TaskStatusStore test = new TaskStatusStore(tsf);
+        test.getTaskStatusList().add(new TaskStatus("Planned"));
+        TaskStatus status = mock(TaskStatus.class);
+        Description des = mock(Description.class);
+        //Act
+        when(status.hasDescription("Planned")).thenReturn(true);
+        when(status.getDescription()).thenReturn(des);
+        when(des.getText()).thenReturn("Planned");
+        //Assert
+        assertEquals("Planned", test.getTaskStatusByDescription("Planned").getDescription().getText());
+    }
+
+    @Test
+    void getInitialStatus() {
+        //Arrange
+        TaskStatusFactory tsf = mock(TaskStatusFactory.class);
+        TaskStatusStore test = new TaskStatusStore(tsf);
+        test.getTaskStatusList().add(new TaskStatus("Planned"));
+        test.getTaskStatusList().add(new TaskStatus("Running"));
+        test.getTaskStatusList().add(new TaskStatus("Finished"));
+        test.getTaskStatusList().add(new TaskStatus("Blocked"));
+        TaskStatus initial = new TaskStatus("Planned");
+        TaskStatus status = mock(TaskStatus.class);
+        Description des = mock(Description.class);
+        //Act
+        when(status.hasDescription("Planned")).thenReturn(true);
+        when(status.getDescription()).thenReturn(des);
+        when(des.getText()).thenReturn("Planned");
+        //Assert
+        assertEquals(initial, test.getTaskStatusByDescription("Planned"));
+    }
+
+    @Test
+    void getInitialStatusNull() {
+        //Arrange
+        TaskStatusFactory tsf = mock(TaskStatusFactory.class);
+        TaskStatusStore test = new TaskStatusStore(tsf);
+        test.getTaskStatusList().add(new TaskStatus("Running"));
+        test.getTaskStatusList().add(new TaskStatus("Finished"));
+        TaskStatus status = mock(TaskStatus.class);
+        //Act
+        when(status.hasDescription("Planned")).thenReturn(false);
+        //Assert
+        assertNull(test.getInitialStatus());
     }
 
     @Test
     void getTaskStatusNamesSizeTest() {
         //Arrange
-        TaskStatusStore test = new TaskStatusStore();
+        TaskStatusFactory tsf = mock(TaskStatusFactory.class);
+        TaskStatusStore test = new TaskStatusStore(tsf);
+        TaskStatus status = mock(TaskStatus.class);
+        Description des = mock(Description.class);
+        //Act
+        when(tsf.createAndAddTaskStatus("Planned")).thenReturn(status);
+        when(tsf.createAndAddTaskStatus("Running")).thenReturn(status);
+        when(tsf.createAndAddTaskStatus("Finished")).thenReturn(status);
+        when(tsf.createAndAddTaskStatus("Blocked")).thenReturn(status);
         test.populateDefault();
+        when(status.getDescription()).thenReturn(des);
+        when(des.getText()).thenReturn("");
         List<String> testList = test.getTaskStatusDescriptions();
-        //Asserts
+        //Assert
         assertEquals(4, testList.size());
     }
 
     @Test
     void getTaskStatusNamesEmptyTest() {
         //Arrange
-        TaskStatusStore test = new TaskStatusStore();
-        List<String> testList = test.getTaskStatusDescriptions();
-        //Asserts
-        assertEquals(0, testList.size());
-    }
-
-    @Test
-    void getStatusByDescriptionTestSuccess() {
-        //Arrange
-        TaskStatusStore test = new TaskStatusStore();
-        test.populateDefault();
-        TaskStatus result = test.getTaskStatusByDescription("Planned");
-        TaskStatus expected = new TaskStatus("Planned");
-        //Assert
-        assertEquals(expected.getDescription(), result.getDescription());
-    }
-
-//    @Test
-//    void saveTaskStatusSuccess() {
-//        //Arrange
-//        TaskStatusStore test = new TaskStatusStore();
-//        TaskStatus status1 = new TaskStatus("status1");
-//        TaskStatus status2 = new TaskStatus("status2");
-//        test.saveTaskStatus(status1);
-//        test.saveTaskStatus(status2);
-//        //Assert
-//        assertEquals(2, test.getTaskStatusDescriptions().size());
-//        assertEquals("status1", test.getTaskStatusDescriptions().get(0));
-//        assertEquals("status2", test.getTaskStatusDescriptions().get(1));
-//    }
-
-//    @Test
-//    void saveTaskStatusIDSuccess() {
-//        //Arrange
-//        TaskStatusStore test = new TaskStatusStore();
-//        TaskStatus status1 = new TaskStatus("status1");
-//        TaskStatus status2 = new TaskStatus("status2");
-//
-//        ID sta1 = new ID(0);
-//        ID sta2 = new ID(1);
-//
-//        test.saveTaskStatus(status1);
-//        test.saveTaskStatus(status2);
-//        //Assert
-//        assertEquals(sta1.getId(), status1.getIdTaskStatus().getId());
-//        assertEquals(sta2.getId(), status2.getIdTaskStatus().getId());
-//    }
-//
-//    @Test
-//    void TaskStatusListSuccess() {
-//        //Arrange
-//        TaskStatusStore test = new TaskStatusStore();
-//        //Act
-//        test.createAndSaveTaskStatus("status1");
-//        test.createAndSaveTaskStatus("status2");
-//        //Assert
-//        assertEquals(testList, test.getTaskStatusList());
-//    }
-
-//    @Test
-//    void TaskStatusListFail() {
-//        //Arrange
-//        TaskStatusStore test = new TaskStatusStore();
-//        TaskStatus status1 = new TaskStatus("status1");
-//        TaskStatus status2 = new TaskStatus("status2");
-//        test.saveTaskStatus(status1);
-//        test.saveTaskStatus(status2);
-//        //Act
-//        List<TaskStatus> testList = new ArrayList<>();
-//        //Assert
-//        assertNotEquals(testList, test.getTaskStatusList());
-//    }
-
-    @Test
-    void createTaskStatusRepeatedName() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            TaskStatusStore test = new TaskStatusStore();
-            test.createAndSaveTaskStatus("status1");
-            test.createAndSaveTaskStatus("status1");
-        });
-    }
-
-    @Test
-    void createTaskStatusNull() {
-        //Assert
-        assertThrows(NullPointerException.class, () -> {
-            //Arrange
-            TaskStatusStore test = new TaskStatusStore();
-            test.createAndSaveTaskStatus(null);
-        });
-    }
-
-    @Test
-    void getInitialStatus() {
-        //Arrange
-        TaskStatusStore test = new TaskStatusStore();
-        test.populateDefault();
+        TaskStatusFactory tsf = mock(TaskStatusFactory.class);
+        TaskStatusStore test = new TaskStatusStore(tsf);
+        TaskStatus status = mock(TaskStatus.class);
+        Description des = mock(Description.class);
         //Act
-        TaskStatus initial = test.getInitialStatus();
+        when(status.getDescription()).thenReturn(des);
+        when(des.getText()).thenReturn("");
+        List<String> testList = test.getTaskStatusDescriptions();
         //Assert
-        assertEquals(initial, test.getTaskStatusByDescription("Planned"));
+        assertEquals(0, testList.size());
     }
 }

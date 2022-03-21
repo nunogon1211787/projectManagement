@@ -33,7 +33,7 @@ public class ProductBacklogSortControllerTest {
         Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
@@ -67,7 +67,7 @@ public class ProductBacklogSortControllerTest {
         Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
@@ -106,7 +106,7 @@ public class ProductBacklogSortControllerTest {
         Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
@@ -143,7 +143,7 @@ public class ProductBacklogSortControllerTest {
         Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
@@ -179,7 +179,7 @@ public class ProductBacklogSortControllerTest {
         Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
@@ -226,7 +226,7 @@ public class ProductBacklogSortControllerTest {
         Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
@@ -265,7 +265,7 @@ public class ProductBacklogSortControllerTest {
         Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
