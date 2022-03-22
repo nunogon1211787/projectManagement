@@ -4,6 +4,7 @@ import lombok.Getter;
 import switch2021.project.factory.ProjectRoleFactory;
 import switch2021.project.factory.ProjectStatusFactory;
 import switch2021.project.factory.TaskStatusFactory;
+import switch2021.project.factory.TaskTypeFactory;
 import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.stores.*;
 
@@ -50,7 +51,7 @@ public class Company {
         this.userStoryStatusStore = new UserStoryStatusStore();
         this.requestStore = new RequestStore();
         this.taskStatusStore = new TaskStatusStore(new TaskStatusFactory());
-        this.taskTypeStore = new TaskTypeStore();
+        this.taskTypeStore = new TaskTypeStore(new TaskTypeFactory());
         this.userStoryFactory = new UserStoryFactory();
         this.productBacklog = new ProductBacklog(this.userStoryFactory );
 

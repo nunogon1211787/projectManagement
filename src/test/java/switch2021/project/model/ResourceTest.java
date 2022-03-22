@@ -26,6 +26,11 @@ class ResourceTest {
         expected.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Assert
         assertEquals(input, expected);
+        assertEquals(newUser, input.getUser());
+        assertEquals(startDate, input.getStartDate());
+        assertEquals(endDate, input.getEndDate());
+        assertEquals(100, input.getCostPerHour());
+        assertEquals(.5, input.getPercentageOfAllocation());
     }
 
     @Test
