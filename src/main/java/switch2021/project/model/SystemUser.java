@@ -15,7 +15,6 @@ import java.util.Objects;
 @Setter
 public class SystemUser {
 
-
     /**
      * Attributes of systemUser´s class
      **/

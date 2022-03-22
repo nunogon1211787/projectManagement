@@ -2,18 +2,19 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
 import switch2021.project.factory.ResourceFactory;
 import switch2021.project.immutable.Description;
 import switch2021.project.immutable.Name;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ProjectTeamTest {
-
 
     /**
      * Constructor Test
@@ -807,8 +808,9 @@ public class ProjectTeamTest {
     @Test
     void overrideEqualsTestTrue() {
         //Arrange
-        ProjectTeam pt = new ProjectTeam();
-        ProjectTeam expected = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
+        ProjectTeam expected = new ProjectTeam(resFac);
         //Assert
         assertEquals(pt, expected);
     }
@@ -816,7 +818,8 @@ public class ProjectTeamTest {
     @Test
     void overrideEqualsTestObjectTrue() {
         //Arrange
-        ProjectTeam pt = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
         ProjectTeam expected = pt;
         //Assert
         assertEquals(pt, expected);
@@ -825,7 +828,8 @@ public class ProjectTeamTest {
     @Test
     void overrideEqualsTestFalseNull() {
         //Arrange
-        ProjectTeam pt = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
         ProjectTeam expected = null;
         //Assert
         assertNotEquals(pt, expected);
@@ -834,7 +838,8 @@ public class ProjectTeamTest {
     @Test
     void overrideEqualsTestFalseInstanceOf() {
         //Arrange
-        ProjectTeam pt = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
         Description expected = new Description("s");
         //Assert
         assertNotEquals(pt, expected);
@@ -860,8 +865,9 @@ public class ProjectTeamTest {
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
         joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
 
-        ProjectTeam pt = new ProjectTeam();
-        ProjectTeam expected = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
+        ProjectTeam expected = new ProjectTeam(resFac);
         expected.saveResource(joana3R);
         //Assert
         assertNotEquals(pt, expected);
@@ -871,8 +877,9 @@ public class ProjectTeamTest {
     @Test
     void overrideHashCodeTestTrue() {
         //Arrange
-        ProjectTeam pt = new ProjectTeam();
-        ProjectTeam expected = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
+        ProjectTeam expected = new ProjectTeam(resFac);
         //Assert
         assertEquals(pt.hashCode(), expected.hashCode());
     }
@@ -897,11 +904,99 @@ public class ProjectTeamTest {
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
         joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
 
-        ProjectTeam pt = new ProjectTeam();
-        ProjectTeam expected = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
+        ProjectTeam expected = new ProjectTeam(resFac);
         expected.saveResource(joana3R);
         //Assert
         assertNotEquals(pt.hashCode(), expected.hashCode());
     }
+
+    @Test
+    public void shouldCreateAndAddProject() throws Exception
+    {
+        // Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
+        LocalDate startDate = LocalDate.now().minusWeeks(1);
+        LocalDate endDate = LocalDate.now().plusYears(1);
+        Double costPerHour = 100.0;
+        Double percAlloc = 0.5;
+
+        Resource res = mock( Resource.class );
+        SystemUser user = mock(SystemUser.class);
+
+        ResourceFactory resFac =  mock( ResourceFactory.class );
+        when(resFac.createResource(joana3, startDate, endDate, costPerHour, percAlloc)).thenReturn( res );
+
+        ProjectTeam projTeam = new ProjectTeam( resFac );
+        boolean hasCreated = projTeam.createAndAddResourceWithFac( joana3, startDate, endDate ,costPerHour,percAlloc);
+
+        assertTrue( hasCreated );
+    }
+
+    @Test
+    public void shouldCreateAndAddProjectFail() throws Exception
+    {
+        // Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+//        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
+        SystemUser joana3 = null;
+        LocalDate startDate = LocalDate.now().minusWeeks(1);
+        LocalDate endDate = LocalDate.now().plusYears(1);
+        Double costPerHour = 100.0;
+        Double percAlloc = 0.5;
+
+        Resource res = mock( Resource.class );
+        SystemUser user = mock(SystemUser.class);
+
+        ResourceFactory resFac =  mock( ResourceFactory.class );
+        when(resFac.createResource(joana3, startDate, endDate, costPerHour, percAlloc)).thenReturn( res );
+
+        ProjectTeam projTeam = new ProjectTeam( resFac );
+        boolean hasCreated = projTeam.createAndAddResourceWithFac( joana3, startDate, endDate ,costPerHour,percAlloc);
+
+        assertFalse( hasCreated );
+    }
+
+//    @Test
+//    public void shouldNotCreateAndAddRepeatedTitleProject() throws Exception
+//    {
+//        // Arrange
+//        Company company = new Company();
+//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+//        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
+//        LocalDate startDate = LocalDate.now().minusWeeks(1);
+//        LocalDate endDate = LocalDate.now().plusYears(1);
+//        Double costPerHour = 100.0;
+//        Double percAlloc = 0.5;
+//
+//        Resource res = mock(Resource.class );
+//        when( res.hasTitle( titulo ) ).thenReturn( true );
+//
+//        ProjectFactory projectFactoryDouble =  mock( ProjectFactory.class );
+//        when(projectFactoryDouble.createProject(titulo, startDate, endDate) ).thenReturn( projectDouble );
+//
+//        StoreProjectReeng storeProjectReeng = new StoreProjectReeng( projectFactoryDouble );
+//
+//        // should work fine
+//        boolean hasCreated = storeProjectReeng.createAndAddProject( titulo, startDate, endDate );
+//
+//        // Act + Assert
+//        // throws IllegalArgumentException, because repeated title
+//        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+//            storeProjectReeng.createAndAddProject( titulo, startDate, endDate );
+//        });
+//
+//        String expectedMessage = "Título já existente.";
+//        String actualMessage = exception.getMessage();
+//
+//        assertTrue(actualMessage.contains(expectedMessage));
+//    }
+
+
+
 }
 
