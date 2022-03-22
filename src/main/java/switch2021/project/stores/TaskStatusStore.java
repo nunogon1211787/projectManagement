@@ -1,7 +1,7 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.factory.TaskStatusFactory;
+import switch2021.project.factoryInterface.TaskStatusFactoryInterface;
 import switch2021.project.immutable.TaskStatus;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +13,15 @@ public class TaskStatusStore {
      * Attributes
      */
     private final List<TaskStatus> taskStatusList;
-    private TaskStatusFactory taskStatusFactory;
+    private TaskStatusFactoryInterface taskStatusFactoryInterface;
 
 
     /**
      * Constructor
      */
-    public TaskStatusStore(TaskStatusFactory tsf) {
+    public TaskStatusStore(TaskStatusFactoryInterface tsf) {
         this.taskStatusList = new ArrayList<>();
-        this.taskStatusFactory = tsf;
+        this.taskStatusFactoryInterface = tsf;
     }
 
 
@@ -33,7 +33,7 @@ public class TaskStatusStore {
         if(getTaskStatusByDescription(status) != null) {
             return false;
         } else {
-            this.taskStatusList.add(taskStatusFactory.createAndAddTaskStatus(status));
+            this.taskStatusList.add(taskStatusFactoryInterface.createTaskStatus(status));
             return true;
         }
     }

@@ -1,10 +1,7 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import switch2021.project.factory.ProjectStatusFactoryInterface;
 import switch2021.project.immutable.Description;
-
-import java.util.Objects;
 
 @Getter
 public class ProjectStatus {

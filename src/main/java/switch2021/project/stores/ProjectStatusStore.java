@@ -1,10 +1,7 @@
 package switch2021.project.stores;
 
-import lombok.Getter;
-import switch2021.project.factory.ProjectStatusFactory;
-import switch2021.project.factory.ProjectStatusFactoryInterface;
+import switch2021.project.factoryInterface.ProjectStatusFactoryInterface;
 import switch2021.project.model.ProjectStatus;
-
 import java.util.ArrayList;
 import java.util.List;
 
