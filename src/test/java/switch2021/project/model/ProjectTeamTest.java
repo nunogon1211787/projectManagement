@@ -2,12 +2,10 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import switch2021.project.factory.ResourceFactory;
 import switch2021.project.immutable.Description;
 import switch2021.project.immutable.Name;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -254,7 +252,8 @@ public class ProjectTeamTest {
     @Test
     public void getCurrentResourcesNamesTestSuccess() {
         //Arrange
-        ProjectTeam projectTeam = new ProjectTeam();
+        ResourceFactory resourceFactory = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resourceFactory);
 
         SystemUser user = mock(SystemUser.class);
         Name name = mock(Name.class);
