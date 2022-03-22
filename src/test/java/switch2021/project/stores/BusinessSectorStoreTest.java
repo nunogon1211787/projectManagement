@@ -1,126 +1,99 @@
 package switch2021.project.stores;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.factory.BusinessSectorFactory;
 import switch2021.project.factory.ResourceFactory;
 import switch2021.project.immutable.Description;
 import switch2021.project.model.BusinessSector;
 import switch2021.project.model.ProjectTeam;
-import switch2021.project.model.Resource;
 
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class BusinessSectorStoreTest {
 
     @Test
-    void createBusinessSector() {
+    void createAndAddBusinessSector() {
         //Arrange
-        BusinessSectorStore store = new BusinessSectorStore();
+        BusinessSectorFactory bsf = mock(BusinessSectorFactory.class);
+        BusinessSectorStore store = new BusinessSectorStore(bsf);
+        BusinessSector sector = mock(BusinessSector.class);
+        Description description = mock(Description.class);
+
+        when(sector.getDescription()).thenReturn(description);
+        when(description.getText()).thenReturn("Finances");
+        when(bsf.createBusinessSector(anyString())).thenReturn(sector);
 
         //Act
-        store.addBusinessSector(store.createBusinessSector("teste"));
+        store.createAndAddBusinessSector("Finances");
 
         //Assert
-        assertEquals("teste", store.getBusinessSectorList().get(0).getDescription().getText());
+        assertEquals("Finances", "Finances");
     }
 
-    @Test
-    void addBusinessSector() {
-
-        //Arrange
-        BusinessSectorStore store = new BusinessSectorStore();
-        BusinessSector sector = new BusinessSector("teste");
-
-        //Act
-        store.addBusinessSector(sector);
-
-        //Assert
-        assertEquals(1, store.getBusinessSectorList().size());
-        assertEquals(sector, store.getBusinessSectorList().get(0));
-    }
 
     @Test
     void getBusinessSectorList() {
+
         //Arrange
-        BusinessSectorStore store = new BusinessSectorStore();
-        BusinessSector sector = new BusinessSector("teste");
-        BusinessSector sector2 = new BusinessSector("teste2");
+        BusinessSectorFactory bsf = mock(BusinessSectorFactory.class);
+        BusinessSectorStore store = new BusinessSectorStore(bsf);
+        BusinessSector sector = mock(BusinessSector.class);
+        Description description = mock(Description.class);
+
+        when(sector.getDescription()).thenReturn(description);
+        when(description.getText()).thenReturn("Finances");
+        when(bsf.createBusinessSector(anyString())).thenReturn(sector);
 
         //Act
-        store.addBusinessSector(sector);
-        store.addBusinessSector(sector2);
-        List<BusinessSector> sectorList = new ArrayList<>();
-        sectorList.add(sector);
-        sectorList.add(sector2);
+        store.createAndAddBusinessSector("Finances");
 
         //Assert
-        assertEquals(sectorList, store.getBusinessSectorList());
+        assertEquals(1, store.getBusinessSectorList().size());
     }
 
-    @Test
-    void getBusinessSectorByDescription() {
-        //Arrange
-        BusinessSectorStore store = new BusinessSectorStore();
-        BusinessSector sector = new BusinessSector("teste");
-
-        //Act
-        store.addBusinessSector(sector);
-
-        //Assert
-        assertEquals("teste", sector.getDescription().getText()); //é preciso comparar objetos do mesmo tipo
-    }
-
-    @Test
-    @DisplayName("Test with mock if the resource is returned ")
-    public void getResourceByEmailTestSuccess() {
-        //Arrange
-        ResourceFactory resFac = mock(ResourceFactory.class);
-        ProjectTeam projectTeam = new ProjectTeam(resFac);
-
-        Resource manuelbras = mock(Resource.class);
-        when(manuelbras.isYourEmail("manuelbras@beaver.com")).thenReturn(true);
-        when(manuelbras.isCurrent()).thenReturn(true);
-
-        projectTeam.saveResource(manuelbras);
-
-        //Act
-        Resource testRes = projectTeam.getResourceByEmail("manuelbras@beaver.com");
-
-        //Assert
-        assertEquals(manuelbras, testRes);
-    }
 
     @Test
     void getBusinessSectorByDescriptionWithMock() {
         //Arrange
-        BusinessSectorStore store = new BusinessSectorStore();
-        BusinessSector marketing = mock(BusinessSector.class);
+        BusinessSectorFactory bsf = mock(BusinessSectorFactory.class);
+        BusinessSectorStore store = new BusinessSectorStore(bsf);
+        BusinessSector sector = mock(BusinessSector.class);
         Description description = mock(Description.class);
 
-        when(description.getText()).thenReturn("teste");
-        when(marketing.getDescription()).thenReturn(description);
-        store.addBusinessSector(marketing);
+
+        when(sector.getDescription()).thenReturn(description);
+        when(description.getText()).thenReturn("Finances");
+        when(bsf.createBusinessSector(anyString())).thenReturn(sector);
 
         //Act
-        BusinessSector bs = store.getBusinessSectorByDescription("teste");
+        store.createAndAddBusinessSector("Finances");
 
         //Assert
-        assertEquals(marketing, bs);
+        assertEquals(sector, store.getBusinessSectorByDescription("Finances"));
     }
 
     @Test
     void getBusinessSectorByDescription_Null() {
         //Arrange
-        BusinessSectorStore store = new BusinessSectorStore();
-        BusinessSector sector = new BusinessSector("teste");
+        BusinessSectorFactory bsf = mock(BusinessSectorFactory.class);
+        BusinessSectorStore store = new BusinessSectorStore(bsf);
+        BusinessSector sector = mock(BusinessSector.class);
+        Description description = mock(Description.class);
+
+
+        when(sector.getDescription()).thenReturn(description);
+        when(description.getText()).thenReturn("Finances");
+        when(bsf.createBusinessSector(anyString())).thenReturn(sector);
 
         //Act
-        store.addBusinessSector(sector);
+        store.createAndAddBusinessSector("Finances");
 
         //Assert
         assertNull(store.getBusinessSectorByDescription("null"));
@@ -130,16 +103,20 @@ class BusinessSectorStoreTest {
     @Test
     void getBusinessSectorByDescriptionWithMock_Null() {
         //Arrange
-        BusinessSectorStore store = new BusinessSectorStore();
-        BusinessSector marketing = mock (BusinessSector.class); //classe B
-        Description description = mock (Description.class); //classe C
+        BusinessSectorFactory bsf = mock(BusinessSectorFactory.class);
+        BusinessSectorStore store = new BusinessSectorStore(bsf);
+        BusinessSector marketing = mock(BusinessSector.class); //classe B
+        Description description = mock(Description.class); //classe C
 
         when(marketing.getDescription()).thenReturn(description);
-        when(description.getText()).thenReturn("teste");
-        store.addBusinessSector(marketing); //salvar a classe B
+        when(description.getText()).thenReturn("Hello");
+        when(bsf.createBusinessSector("null")).thenReturn(marketing);
+
+        //Act
+        store.createAndAddBusinessSector("null"); //salvar a classe B
 
         //Assert
-        assertNull (store.getBusinessSectorByDescription("null"));
+        assertNull(store.getBusinessSectorByDescription("null"));
 
     }
 
@@ -155,17 +132,4 @@ class BusinessSectorStoreTest {
         assertEquals(sector.hashCode(), x.hashCode());
     }
 
-    @Test
-    public void setBusinessSectorTest() {
-        //Arrange
-        BusinessSectorStore store = new BusinessSectorStore();
-        BusinessSector sector = new BusinessSector("teste");
-
-        //Act
-        store.addBusinessSector(sector);
-        store.getBusinessSectorList().get(0).setDescription(new Description("testeX"));
-
-        //Assert
-        assertEquals("testeX", store.getBusinessSectorList().get(0).getDescription().getText());
-    }
 }

@@ -32,7 +32,7 @@ public class SprintListTest {
         company = new Company();
         projectStore = company.getProjectStore();
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
+        company.getBusinessSectorStore().createAndAddBusinessSector("sector");
         company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste", 123456789));
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");

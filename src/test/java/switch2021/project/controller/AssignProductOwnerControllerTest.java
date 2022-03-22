@@ -22,8 +22,8 @@ public class AssignProductOwnerControllerTest {
             Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
             Customer customer = company.getCustomerStore().createCustomer("isep","xxx@sss.sss", 123456789);
             company.getCustomerStore().saveNewCustomer(customer);
-            BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
-            company.getBusinessSectorStore().addBusinessSector(sector);
+            company.getBusinessSectorStore().createAndAddBusinessSector("it");
+            BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
             company.getProjectStore().saveNewProject(proj1);
@@ -42,8 +42,8 @@ public class AssignProductOwnerControllerTest {
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
         company.getCustomerStore().saveNewCustomer(customer);
-        BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
-        company.getBusinessSectorStore().addBusinessSector(sector);
+        company.getBusinessSectorStore().createAndAddBusinessSector("it");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         company.getProjectStore().saveNewProject(proj1);
@@ -94,8 +94,8 @@ public class AssignProductOwnerControllerTest {
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
         company.getCustomerStore().saveNewCustomer(customer);
-        BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
-        company.getBusinessSectorStore().addBusinessSector(sector);
+        company.getBusinessSectorStore().createAndAddBusinessSector("it");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         company.getProjectStore().saveNewProject(proj1);

@@ -24,8 +24,8 @@ public class GetListHResourceProjectControllerTest {
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
         company.getCustomerStore().saveNewCustomer(customer);
-        BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
-        company.getBusinessSectorStore().addBusinessSector(sector);
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+        company.getBusinessSectorStore().createAndAddBusinessSector("it");
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         company.getProjectStore().saveNewProject(proj1);

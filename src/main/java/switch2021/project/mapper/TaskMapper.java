@@ -23,6 +23,7 @@ public class TaskMapper {
         if(dto.getPrecedenceList() == null) {
             return new Task(name, description, effortEstimate, type, responsible);
         }
+
         else{
             List<String> precedenceList = dto.getPrecedenceList();
             return new Task(name, description, effortEstimate, type, responsible, precedenceList);

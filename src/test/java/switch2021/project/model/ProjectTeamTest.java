@@ -36,7 +36,7 @@ public class ProjectTeamTest {
     }
 
     @Test
-    @DisplayName("Test with mock if the resource is returned ")
+    @DisplayName("Test with mock if the resource is returned")
     public void getResourceByEmailTestSuccess() {
         //Arrange
         ResourceFactory resFac = mock(ResourceFactory.class);

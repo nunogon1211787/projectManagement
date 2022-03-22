@@ -1,12 +1,10 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import lombok.Setter;
 import switch2021.project.immutable.Description;
 
 
 @Getter
-@Setter
 public class BusinessSector {
 
     /**
@@ -22,6 +20,7 @@ public class BusinessSector {
      **/
 
     public BusinessSector(String description) {
+
         this.description = new Description(description);
     }
 
