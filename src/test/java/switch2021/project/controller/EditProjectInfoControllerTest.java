@@ -102,7 +102,7 @@ class EditProjectInfoControllerTest {
 
         //Assert
         assertEquals( "proto", project.getProjectName());
-        assertEquals( "test44", project.getDescription());
+        assertEquals( "test44", project.getDescription().getText());
         assertEquals(project.getStartDate(),LocalDate.of(2022,12,1));
         assertEquals(project.getEndDate(),LocalDate.of(2023,12,1));
         assertEquals( 10, project.getNumberOfSprints());
@@ -259,35 +259,6 @@ class EditProjectInfoControllerTest {
     }
 
     @Test
-    public void validateProjectFieldsProjectDescriptionLessThen5() {
-        //Arrange
-        company = new Company();
-        this.projectStore = company.getProjectStore();
-        LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        customer = company.getCustomerStore().getCustomerByName("ISEP");
-        sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-        project = company.getProjectStore().createProject("prototype2", "test56", customer,
-                typo, sector, startDate2, 7, 5000);
-        ResourceFactory resFac = mock(ResourceFactory.class);
-        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
-        ProjectStatus projectStatus = new ProjectStatus("Quase");
-
-        this.projectStore.saveNewProject(project);
-
-        EditProjectInfoController edit = new EditProjectInfoController(company);
-        edit.getProjectRequested(project.getCode());
-        String description="23r";
-        // Act
-
-        boolean isEdited = edit.editProject("proto", description, LocalDate.of(2022, 12, 1),
-                LocalDate.of(2023, 12, 1), 10, 10000,
-                3, projectStatus, projectTeam2);
-        //Assert
-        assertFalse(isEdited);
-    }
-
-    @Test
     public void validateProjectFieldsProjectNumberOfSprints0() {
         //Arrange
         company = new Company();
@@ -402,21 +373,5 @@ class EditProjectInfoControllerTest {
         //Assert
         assertFalse(isEdited);
     }
-
-
-
-//    @Test
-//    void getProjectRequested() {
-//    }
-//
-//    @Test
-//    void editProject() {
-//    }
-//
-//    @Test
-//    void saveProject() {
-//    }
-
-
 
 }

@@ -85,10 +85,10 @@ public class ProductBacklogSortControllerTest {
         // Assert
         assertEquals(project.getCode(), projectList.get(0).getCode());
         assertEquals(project.getProjectName(), projectList.get(0).getProjectName());
-        assertEquals(project.getDescription(), projectList.get(0).getDescription());
+        assertEquals(project.getDescription().getText(), projectList.get(0).getDescription());
         assertEquals(project2.getCode(), projectList.get(1).getCode());
         assertEquals(project2.getProjectName(), projectList.get(1).getProjectName());
-        assertEquals(project2.getDescription(), projectList.get(1).getDescription());
+        assertEquals(project2.getDescription().getText(), projectList.get(1).getDescription());
     }
 
     @Test
@@ -129,7 +129,7 @@ public class ProductBacklogSortControllerTest {
     }
 
     @Test
-    @DisplayName("get exception message  \"Email don't exist in system")
+    @DisplayName("get exception message  \"Email is not associated with any project")
     public void getAllProjectListByUserEmailDontExist() {
         //Arrange
         Company company = new Company();
@@ -161,7 +161,7 @@ public class ProductBacklogSortControllerTest {
             productBacklogSortController.getProjectListByUserEmail("dani@ipp.pt");
         });
         // Assert
-        assertEquals("Email don't exist in system", exception.getMessage());
+        assertEquals("Email is not associated with any project", exception.getMessage());
 
     }
 

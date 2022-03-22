@@ -19,7 +19,7 @@ class TaskStatusStoreTest {
         //Act
         TaskStatusStore tss = new TaskStatusStore(tsf);
         //Assert
-        assertEquals(tsf,tss.getTaskStatusFactory());
+        assertEquals(tsf,tss.getTaskStatusFactoryInterface());
     }
 
     @Test
@@ -29,7 +29,7 @@ class TaskStatusStoreTest {
         TaskStatusStore test = new TaskStatusStore(tsf);
         TaskStatus status = mock(TaskStatus.class);
         //Act
-        when(tsf.createAndAddTaskStatus("test1")).thenReturn(status);
+        when(tsf.createTaskStatus("test1")).thenReturn(status);
         //Assert
         assertTrue(test.createAndAddTaskStatus("test1"));
     }
@@ -45,7 +45,7 @@ class TaskStatusStoreTest {
         //Act
         when(status.getDescription()).thenReturn(des);
         when(des.getText()).thenReturn("test1");
-        when(tsf.createAndAddTaskStatus("test1")).thenReturn(status);
+        when(tsf.createTaskStatus("test1")).thenReturn(status);
         //Assert
         assertFalse(test.createAndAddTaskStatus("test1"));
     }
@@ -57,10 +57,10 @@ class TaskStatusStoreTest {
         TaskStatusStore test = new TaskStatusStore(tsf);
         TaskStatus status = mock(TaskStatus.class);
         //Act
-        when(tsf.createAndAddTaskStatus("Planned")).thenReturn(status);
-        when(tsf.createAndAddTaskStatus("Running")).thenReturn(status);
-        when(tsf.createAndAddTaskStatus("Finished")).thenReturn(status);
-        when(tsf.createAndAddTaskStatus("Blocked")).thenReturn(status);
+        when(tsf.createTaskStatus("Planned")).thenReturn(status);
+        when(tsf.createTaskStatus("Running")).thenReturn(status);
+        when(tsf.createTaskStatus("Finished")).thenReturn(status);
+        when(tsf.createTaskStatus("Blocked")).thenReturn(status);
         test.populateDefault();
         //Assert
         assertEquals(4, test.getTaskStatusList().size());
@@ -125,9 +125,11 @@ class TaskStatusStoreTest {
         TaskStatusStore test = new TaskStatusStore(tsf);
         test.getTaskStatusList().add(new TaskStatus("Running"));
         test.getTaskStatusList().add(new TaskStatus("Finished"));
-        TaskStatus status = mock(TaskStatus.class);
+        TaskStatus statusRun = mock(TaskStatus.class);
+        TaskStatus statusFin = mock(TaskStatus.class);
         //Act
-        when(status.hasDescription("Planned")).thenReturn(false);
+        when(statusRun.hasDescription("Planned")).thenReturn(false);
+        when(statusFin.hasDescription("Planned")).thenReturn(false);
         //Assert
         assertNull(test.getInitialStatus());
     }
@@ -140,10 +142,10 @@ class TaskStatusStoreTest {
         TaskStatus status = mock(TaskStatus.class);
         Description des = mock(Description.class);
         //Act
-        when(tsf.createAndAddTaskStatus("Planned")).thenReturn(status);
-        when(tsf.createAndAddTaskStatus("Running")).thenReturn(status);
-        when(tsf.createAndAddTaskStatus("Finished")).thenReturn(status);
-        when(tsf.createAndAddTaskStatus("Blocked")).thenReturn(status);
+        when(tsf.createTaskStatus("Planned")).thenReturn(status);
+        when(tsf.createTaskStatus("Running")).thenReturn(status);
+        when(tsf.createTaskStatus("Finished")).thenReturn(status);
+        when(tsf.createTaskStatus("Blocked")).thenReturn(status);
         test.populateDefault();
         when(status.getDescription()).thenReturn(des);
         when(des.getText()).thenReturn("");

@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.factory.SprintFactory;
 import switch2021.project.stores.SprintList;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;

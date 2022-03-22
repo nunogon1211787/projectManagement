@@ -2,12 +2,13 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.factory.*;
+import switch2021.project.factoryInterface.ResourceFactoryInterface;
 import switch2021.project.factory.ProjectTeamFactory;
 import switch2021.project.factory.ResourceFactory;
 import switch2021.project.factory.UserStoryFactory;
+import switch2021.project.immutable.Description;
 import switch2021.project.stores.SprintList;
-import switch2021.project.factory.SprintFactory;
-
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -21,7 +22,7 @@ public class Project {
      **/
     private String code;
     private String projectName;
-    private String description;
+    private Description description;
 
     private final Customer customer;
     private Typology typology;
@@ -34,7 +35,7 @@ public class Project {
 
     private ProjectTeam projectTeam;
     private ProjectTeamFactory projectTeamFactory;
-    private ResourceFactory resFac;
+    private ResourceFactoryInterface resFac = new ResourceFactory();
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -50,10 +51,10 @@ public class Project {
     public Project(String name, String description, Customer customer, Typology typology,
                    BusinessSector businessSector, LocalDate startDate, ProjectStatus status, int numberOfSprints, double budget) {
 
-        validateProjectFields(name, description, budget, numberOfSprints);
+        validateProjectFields(name, budget, numberOfSprints);
 
         this.projectName = name;
-        this.description = description;
+        this.description = new Description(description);
 
         this.customer = customer;
         this.typology = typology;
@@ -66,9 +67,9 @@ public class Project {
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
 
-//        this.projectTeam = new ProjectTeam(resFac);
+        this.projectTeam = new ProjectTeam(resFac);
         //this.projectTeam = this.projectTeamFactory.createProjectTeam();
-        this.projectTeam = new ProjectTeam();
+//        this.projectTeam = new ProjectTeam();
         this.productBacklog = new ProductBacklog();
 
     }
@@ -77,15 +78,11 @@ public class Project {
      * Validates Project Creation Fields
      * Checks if @param projectName and @param description are empty or have the minimum characters necessary
      */
-    public void validateProjectFields(String projectName, String description, double budget, int numberOfSprints) {
+    public void validateProjectFields(String projectName, double budget, int numberOfSprints) {
         if (projectName.trim().isEmpty())
             throw new IllegalArgumentException("Project Name cannot be empty");
         if ((projectName.length() < 3))
             throw new IllegalArgumentException("Project Name must be at least 3 characters");
-        if (description.trim().isEmpty())
-            throw new IllegalArgumentException("Description cannot be empty");
-        if ((description.length() < 5))
-            throw new IllegalArgumentException("Description must be at least 5 characters");
         if (numberOfSprints <= 0)
             throw new IllegalArgumentException("Number of Sprints must be greater than 0");
         if (budget <= 0)

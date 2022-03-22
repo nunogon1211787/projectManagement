@@ -1,9 +1,7 @@
 package switch2021.project.stores;
 
-import lombok.Getter;
-import switch2021.project.factory.ProjectStatusFactory;
+import switch2021.project.factoryInterface.ProjectStatusFactoryInterface;
 import switch2021.project.model.ProjectStatus;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +11,12 @@ public class ProjectStatusStore {
      * Project Status Store Attributes
      **/
     private final List<ProjectStatus> projectStatusList;
-    private final ProjectStatusFactory projectStatusFactory;
+    private final ProjectStatusFactoryInterface projectStatusFactory;
 
     /**
      * Project Status Constructor
      **/
-    public ProjectStatusStore(ProjectStatusFactory projStatusFactory) {
+    public ProjectStatusStore(ProjectStatusFactoryInterface projStatusFactory) {
         this.projectStatusList = new ArrayList<>();
         this.projectStatusFactory = projStatusFactory;
     }

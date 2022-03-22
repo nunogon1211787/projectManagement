@@ -1,5 +1,6 @@
 package switch2021.project.controller;
 
+import switch2021.project.immutable.Description;
 import switch2021.project.model.*;
 
 import java.time.LocalDate;
@@ -22,43 +23,52 @@ public class EditProjectInfoController {
      * Constructor to test (without SINGLETON)
      **/
 
-    public EditProjectInfoController(Company company){ this.company = company; }
+    public EditProjectInfoController(Company company) {
+        this.company = company;
+    }
 
 
     /**
      * Methods
      **/
 
-    public List<Project> getProjectList (){
+    public List<Project> getProjectList() {
         this.arrayProject = this.company.getProjectStore().getProjects();
         return arrayProject;
     }
 
-    public Project getProjectRequested(String code){
+    public Project getProjectRequested(String code) {
         this.project = this.company.getProjectStore().getProjectByCode(code);
         return this.project;
     }
 
-    public boolean editProject(String name,String description, LocalDate startDate, LocalDate endDate, int numberOfSprints,
-                               double budget, int sprintDuration, ProjectStatus status, ProjectTeam projectTeam){
+    public boolean editProject(String name, String description, LocalDate startDate, LocalDate endDate, int numberOfSprints,
+                               double budget, int sprintDuration, ProjectStatus status, ProjectTeam projectTeam) {
 
         boolean result = true;
 
         try {
-            project.validateProjectFields(name, description, budget, numberOfSprints);
-        }catch(IllegalArgumentException e){
+            project.validateProjectFields(name, budget, numberOfSprints);
+        } catch (IllegalArgumentException e) {
+            result = false;
+        }
+        try {
+            this.project.setDescription(new Description(description));
+        } catch (IllegalArgumentException e) {
             result = false;
         }
 
-        this.project.setProjectName(name);
-        this.project.setDescription(description);
-        this.project.setStartDate(startDate);
-        this.project.setEndDate(endDate);
-        this.project.setNumberOfSprints(numberOfSprints);
-        this.project.setBudget(budget);
-        this.project.setProjectStatus(status);
-        this.project.setSprintDuration(sprintDuration);
-        this.project.setProjectTeam(projectTeam);
+        if (result) {
+            this.project.setProjectName(name);
+            this.project.setDescription(new Description(description));
+            this.project.setStartDate(startDate);
+            this.project.setEndDate(endDate);
+            this.project.setNumberOfSprints(numberOfSprints);
+            this.project.setBudget(budget);
+            this.project.setProjectStatus(status);
+            this.project.setSprintDuration(sprintDuration);
+            this.project.setProjectTeam(projectTeam);
+        }
 
         return result;
     }

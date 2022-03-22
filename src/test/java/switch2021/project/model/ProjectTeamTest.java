@@ -8,12 +8,11 @@ import switch2021.project.immutable.Name;
 import java.time.LocalDate;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ProjectTeamTest {
-
 
     /**
      * Constructor Test
@@ -76,6 +75,44 @@ public class ProjectTeamTest {
     }
 
     @Test
+    public void getResourceByEmailTestIsYourEmailFail() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourEmail("manuelbras@beaver.com")).thenReturn(false);
+        when(manuelbras.isCurrent()).thenReturn(true);
+
+        projectTeam.saveResource(manuelbras);
+
+        //Act
+        Resource testRes = projectTeam.getResourceByEmail("manuelbras@beaver.com");
+
+        //Assert
+        assertNull(testRes);
+    }
+
+    @Test
+    public void getResourceByEmailIsCurrentFail() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourEmail("manuelbras@beaver.com")).thenReturn(true);
+        when(manuelbras.isCurrent()).thenReturn(false);
+
+        projectTeam.saveResource(manuelbras);
+
+        //Act
+        Resource testRes = projectTeam.getResourceByEmail("manuelbras@beaver.com");
+
+        //Assert
+        assertNull(testRes);
+    }
+
+    @Test
     public void getResourceByUserTestSuccess() {
         //Arrange
         ResourceFactory resFac = mock(ResourceFactory.class);
@@ -99,6 +136,7 @@ public class ProjectTeamTest {
         //Arrange
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
+
         SystemUser user = mock(SystemUser.class);
         Resource manuelbras = mock(Resource.class);
         when(manuelbras.isYourEmail(user)).thenReturn(false);
@@ -141,6 +179,25 @@ public class ProjectTeamTest {
         Resource manuelbras = mock(Resource.class);
         when(manuelbras.isYourEmail(role)).thenReturn(false);
         when(manuelbras.isCurrent()).thenReturn(false);
+
+        projectTeam.saveResource(manuelbras);
+
+        //Act
+        Resource testRes = projectTeam.getResourceByRole(role);
+
+        //Assert
+        assertNull(testRes);
+    }
+
+    @Test
+    public void getResourceByRoleTestFailOneCondition() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        ProjectRole role = mock(ProjectRole.class);
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourEmail(role)).thenReturn(false);
+        when(manuelbras.isCurrent()).thenReturn(true);
 
         projectTeam.saveResource(manuelbras);
 
@@ -195,8 +252,8 @@ public class ProjectTeamTest {
     @Test
     public void getCurrentResourcesNamesTestSuccess() {
         //Arrange
-        ResourceFactory resFac = mock(ResourceFactory.class);
-        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        ResourceFactory resourceFactory = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resourceFactory);
 
         SystemUser user = mock(SystemUser.class);
         Name name = mock(Name.class);
@@ -228,7 +285,6 @@ public class ProjectTeamTest {
         //Assert
         assertEquals("chico", testRes.get(0));
         assertEquals("jorgebras", testRes.get(1));
-        assertEquals(2, testRes.size());
     }
 
     @Test
@@ -268,52 +324,6 @@ public class ProjectTeamTest {
         assertTrue(testRes.isEmpty());
     }
 
-    /**
-     * Create a new Resource Test
-     */
-    @Test  //TODO Vai passar a factory
-    public void createResourceTestSuccess() {
-        //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com",
-                "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource manuelbras = new Resource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
-        ResourceFactory resFac = mock(ResourceFactory.class);
-        when(resFac.createResource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5)).thenReturn(manuelbras);
-        //Act
-
-        Resource test = resFac.createResource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
-        //Assert
-        assertEquals(test, manuelbras);
-    }
-
-    @Test  //TODO Vai passar a factory
-    public void createResourceTestFail() {
-        //Assert
-        assertThrows(NullPointerException.class, () -> {
-            //Arrange
-            Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-            Customer customer = company.getCustomerStore().getCustomerByName("isep");
-            BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-            //Project 1
-            Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                    typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-            proj1.setEndDate(LocalDate.now().plusYears(1));
-            company.getProjectStore().saveNewProject(proj1);
-            //Act
-            proj1.getProjectTeam().createResource(null, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
-        });
-    }
 
     @Test
     public void saveResourceTestSuccess() {
@@ -797,37 +807,41 @@ public class ProjectTeamTest {
     @Test
     void overrideEqualsTestTrue() {
         //Arrange
-        ProjectTeam pt = new ProjectTeam();
-        ProjectTeam expected = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
+        ProjectTeam expected = new ProjectTeam(resFac);
         //Assert
-        assertTrue(pt.equals(expected));
+        assertEquals(pt, expected);
     }
 
     @Test
     void overrideEqualsTestObjectTrue() {
         //Arrange
-        ProjectTeam pt = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
         ProjectTeam expected = pt;
         //Assert
-        assertTrue(pt.equals(expected));
+        assertEquals(pt, expected);
     }
 
     @Test
     void overrideEqualsTestFalseNull() {
         //Arrange
-        ProjectTeam pt = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
         ProjectTeam expected = null;
         //Assert
-        assertFalse(pt.equals(expected));
+        assertNotEquals(pt, expected);
     }
 
     @Test
     void overrideEqualsTestFalseInstanceOf() {
         //Arrange
-        ProjectTeam pt = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
         Description expected = new Description("s");
         //Assert
-        assertFalse(pt.equals(expected));
+        assertNotEquals(pt, expected);
     }
 
     @Test
@@ -850,19 +864,21 @@ public class ProjectTeamTest {
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
         joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
 
-        ProjectTeam pt = new ProjectTeam();
-        ProjectTeam expected = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
+        ProjectTeam expected = new ProjectTeam(resFac);
         expected.saveResource(joana3R);
         //Assert
-        assertFalse(pt.equals(expected));
+        assertNotEquals(pt, expected);
     }
 
 
     @Test
     void overrideHashCodeTestTrue() {
         //Arrange
-        ProjectTeam pt = new ProjectTeam();
-        ProjectTeam expected = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
+        ProjectTeam expected = new ProjectTeam(resFac);
         //Assert
         assertEquals(pt.hashCode(), expected.hashCode());
     }
@@ -887,11 +903,99 @@ public class ProjectTeamTest {
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
         joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
 
-        ProjectTeam pt = new ProjectTeam();
-        ProjectTeam expected = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
+        ProjectTeam expected = new ProjectTeam(resFac);
         expected.saveResource(joana3R);
         //Assert
         assertNotEquals(pt.hashCode(), expected.hashCode());
     }
+
+    @Test
+    public void shouldCreateAndAddProject() throws Exception
+    {
+        // Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
+        LocalDate startDate = LocalDate.now().minusWeeks(1);
+        LocalDate endDate = LocalDate.now().plusYears(1);
+        Double costPerHour = 100.0;
+        Double percAlloc = 0.5;
+
+        Resource res = mock( Resource.class );
+        SystemUser user = mock(SystemUser.class);
+
+        ResourceFactory resFac =  mock( ResourceFactory.class );
+        when(resFac.createResource(joana3, startDate, endDate, costPerHour, percAlloc)).thenReturn( res );
+
+        ProjectTeam projTeam = new ProjectTeam( resFac );
+        boolean hasCreated = projTeam.createAndAddResourceWithFac( joana3, startDate, endDate ,costPerHour,percAlloc);
+
+        assertTrue( hasCreated );
+    }
+
+    @Test
+    public void shouldCreateAndAddProjectFail() throws Exception
+    {
+        // Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+//        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
+        SystemUser joana3 = null;
+        LocalDate startDate = LocalDate.now().minusWeeks(1);
+        LocalDate endDate = LocalDate.now().plusYears(1);
+        Double costPerHour = 100.0;
+        Double percAlloc = 0.5;
+
+        Resource res = mock( Resource.class );
+        SystemUser user = mock(SystemUser.class);
+
+        ResourceFactory resFac =  mock( ResourceFactory.class );
+        when(resFac.createResource(joana3, startDate, endDate, costPerHour, percAlloc)).thenReturn( res );
+
+        ProjectTeam projTeam = new ProjectTeam( resFac );
+        boolean hasCreated = projTeam.createAndAddResourceWithFac( joana3, startDate, endDate ,costPerHour,percAlloc);
+
+        assertFalse( hasCreated );
+    }
+
+//    @Test
+//    public void shouldNotCreateAndAddRepeatedTitleProject() throws Exception
+//    {
+//        // Arrange
+//        Company company = new Company();
+//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+//        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
+//        LocalDate startDate = LocalDate.now().minusWeeks(1);
+//        LocalDate endDate = LocalDate.now().plusYears(1);
+//        Double costPerHour = 100.0;
+//        Double percAlloc = 0.5;
+//
+//        Resource res = mock(Resource.class );
+//        when( res.hasTitle( titulo ) ).thenReturn( true );
+//
+//        ProjectFactory projectFactoryDouble =  mock( ProjectFactory.class );
+//        when(projectFactoryDouble.createProject(titulo, startDate, endDate) ).thenReturn( projectDouble );
+//
+//        StoreProjectReeng storeProjectReeng = new StoreProjectReeng( projectFactoryDouble );
+//
+//        // should work fine
+//        boolean hasCreated = storeProjectReeng.createAndAddProject( titulo, startDate, endDate );
+//
+//        // Act + Assert
+//        // throws IllegalArgumentException, because repeated title
+//        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+//            storeProjectReeng.createAndAddProject( titulo, startDate, endDate );
+//        });
+//
+//        String expectedMessage = "Título já existente.";
+//        String actualMessage = exception.getMessage();
+//
+//        assertTrue(actualMessage.contains(expectedMessage));
+//    }
+
+
+
 }
 

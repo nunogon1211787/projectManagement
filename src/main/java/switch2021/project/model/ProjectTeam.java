@@ -1,7 +1,7 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import switch2021.project.factory.ResourceFactory;
+import switch2021.project.factoryInterface.ResourceFactoryInterface;
 import switch2021.project.utils.App;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,21 +14,21 @@ public class ProjectTeam {
     /**
      * ProjectTeam's Attribute
      **/
-    private ResourceFactory resFac;
+    private ResourceFactoryInterface resFac;
 
     private final List<Resource> projectTeamList;  //Resource´s List in a Project.
 
     /**
      * ProjectTeam's Constructor
      **/
-    public ProjectTeam(ResourceFactory resourceFac) {
+    public ProjectTeam(ResourceFactoryInterface resourceFac) {
         this.resFac = resourceFac;
         this.projectTeamList = new ArrayList<>();
     }
 
-    public ProjectTeam(){
-        this.projectTeamList = new ArrayList<>();
-    }
+//    public ProjectTeam(){
+//        this.projectTeamList = new ArrayList<>();
+//    }
 
     /**
      * Getters and Setters
@@ -151,8 +151,14 @@ public class ProjectTeam {
     /**
      * Create a new Resource
      */
-    public Resource createResourceWithFac(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
-        return this.resFac.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);
+    public boolean createAndAddResourceWithFac(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
+        boolean msg;
+        if(user != null) {
+            msg = this.projectTeamList.add(this.resFac.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation));
+        } else{
+            msg = false;
+        }
+        return msg;
     }
 
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {

@@ -1,11 +1,9 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.factory.ProjectTeamFactoryInterface;
 import switch2021.project.mapper.TaskMapper;
 import switch2021.project.dto.CreateTaskDTO;
 import switch2021.project.model.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

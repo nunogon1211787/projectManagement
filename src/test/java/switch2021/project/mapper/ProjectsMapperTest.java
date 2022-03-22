@@ -249,10 +249,10 @@ public class ProjectsMapperTest {
         // Assert
         assertEquals(project.getCode(),projectList.get(0).getCode());
         assertEquals(project.getProjectName(), projectList.get(0).getProjectName());
-        assertEquals(project.getDescription(), projectList.get(0).getDescription());
+        assertEquals(project.getDescription().getText(), projectList.get(0).getDescription());
         assertEquals(project2.getCode(),projectList.get(1).getCode());
         assertEquals(project2.getProjectName(), projectList.get(1).getProjectName());
-        assertEquals(project2.getDescription(), projectList.get(1).getDescription());
+        assertEquals(project2.getDescription().getText(), projectList.get(1).getDescription());
     }
 
 }

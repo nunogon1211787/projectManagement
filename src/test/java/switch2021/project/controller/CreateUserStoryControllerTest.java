@@ -205,11 +205,11 @@ public class CreateUserStoryControllerTest {
         assertEquals(2, projectList.size());
         assertEquals(project.getCode(), projectList.get(0).getCode());
         assertEquals(project.getProjectName(), projectList.get(0).getProjectName());
-        assertEquals(project.getDescription(), projectList.get(0).getDescription());
+        assertEquals(project.getDescription().getText(), projectList.get(0).getDescription());
         assertEquals(project.getEndDate(), projectList.get(0).getEndDate());
         assertEquals(project2.getCode(), projectList.get(1).getCode());
         assertEquals(project2.getProjectName(), projectList.get(1).getProjectName());
-        assertEquals(project2.getDescription(), projectList.get(1).getDescription());
+        assertEquals(project2.getDescription().getText(), projectList.get(1).getDescription());
         assertEquals(project2.getEndDate(), projectList.get(1).getEndDate());
     }
 
@@ -243,7 +243,7 @@ public class CreateUserStoryControllerTest {
             createUserStoryController.getProjectListByUserEmail("dani@ipp.pt");
         });
         // Assert
-        assertEquals("Email don't exist in system", exception.getMessage());
+        assertEquals("Email is not associated with any project", exception.getMessage());
     }
 }
 

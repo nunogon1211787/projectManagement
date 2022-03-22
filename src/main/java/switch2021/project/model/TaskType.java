@@ -12,7 +12,7 @@ public class TaskType {
      * Attributes
      */
 
-    private Description description;
+    private final Description description;
 
     /**
      * Constructor
