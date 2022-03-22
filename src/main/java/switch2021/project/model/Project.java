@@ -3,8 +3,8 @@ package switch2021.project.model;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.factory.*;
+import switch2021.project.factoryInterface.ResourceFactoryInterface;
 import switch2021.project.stores.SprintList;
-
 import java.time.LocalDate;
 import java.util.Objects;
 

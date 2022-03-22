@@ -1,8 +1,7 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import switch2021.project.factory.ResourceFactory;
-import switch2021.project.factory.ResourceFactoryInterface;
+import switch2021.project.factoryInterface.ResourceFactoryInterface;
 import switch2021.project.utils.App;
 import java.time.LocalDate;
 import java.util.ArrayList;
