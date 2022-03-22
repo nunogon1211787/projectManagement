@@ -2,8 +2,9 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.stores.TaskTypeStore;
+import switch2021.project.immutable.Description;
 import static org.junit.jupiter.api.Assertions.*;
+
 
 class TaskTypeTest {
 
@@ -20,6 +21,19 @@ class TaskTypeTest {
     }
 
     @Test
+    @DisplayName("Test to verify if task type description is valid.")
+    void getDescriptionSuccess() {
+        //Arrange
+        TaskType type1 = new TaskType("test1");
+        //Act
+        Description description = new Description("test1");
+        Description x = type1.getDescription();
+        //Assert
+        assertEquals(description, x);
+    }
+
+
+    @Test
     @DisplayName("Test to verify if task type description is invalid.")
     void hasDescriptionFail() {
         //Arrange
@@ -29,6 +43,18 @@ class TaskTypeTest {
         boolean x = type.hasDescription(testDescription);
         //Assert
         assertFalse(x);
+    }
+
+    @Test
+    @DisplayName("Test to verify if task type description is valid.")
+    void getDescriptionFail() {
+        //Arrange
+        TaskType type1 = new TaskType("test1");
+        //Act
+        Description description = new Description("test2");
+        Description x = type1.getDescription();
+        //Assert
+        assertNotEquals(description, x);
     }
 
     @Test
@@ -44,76 +70,28 @@ class TaskTypeTest {
 
 
     @Test
-    @DisplayName("Test to get all descriptions for all the task type stored.")
-    void getDescriptionSuccess() {
-        //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        TaskType type1= new TaskType("test1");
-        TaskType type2 = new TaskType("test2");
-        TaskType type3 = new TaskType("test3");
-        test.saveTaskType(type1);
-        test.saveTaskType(type2);
-        test.saveTaskType(type3);
-        //Act
-        String x1 = type1.getDescription().getText();
-        String x2 = type2.getDescription().getText();
-        String x3 = type3.getDescription().getText();
-        //Assert
-        assertEquals("test1", x1);
-        assertEquals("test2", x2);
-        assertEquals("test3", x3);
-    }
-
-    @Test
-    @DisplayName("Test to get all wrong descriptions for all the task type stored.")
-    void getDescriptionFail() {
-        //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        TaskType type1= new TaskType("test1");
-        TaskType type2 = new TaskType("test2");
-        TaskType type3 = new TaskType("test3");
-        test.saveTaskType(type1);
-        test.saveTaskType(type2);
-        test.saveTaskType(type3);
-        //Act
-        String x1 = type1.getDescription().getText();
-        String x2 = type2.getDescription().getText();
-        String x3 = type3.getDescription().getText();
-        //Assert
-        assertNotEquals("test2", x1);
-        assertNotEquals("test3", x2);
-        assertNotEquals("test1", x3);
-    }
-
-    @Test
-    @DisplayName("Test 1 to check Override Method, two equal objects.")
-    void overrideTest_1(){
-        //Arrange
-        TaskType taskType = new TaskType("name");
-        TaskType taskType_equal = new TaskType("name");
-        //Act
-        Object x = taskType;
-        Object y = taskType_equal;
-        //Assert
-        assertEquals(x,y);
-    }
-
-    @Test
     @DisplayName("Test 2 to check Override Method, two different objects.")
-    void overrideTest_2(){
+    void overrideTest_True_1(){
         //Arrange
         TaskType taskType = new TaskType("name");
-        TaskType taskType1 = new TaskType("name2");
-        //Act
-        Object x = taskType;
-        Object y = taskType1;
-        //Assert
-        assertNotEquals(x,y);
+        TaskType taskType1 = taskType;
+        //Act and Assert
+        assertTrue(taskType.equals(taskType1));
     }
 
     @Test
     @DisplayName("Test 3 to check Override Method, with one null object.")
-    void overrideTest_3(){
+    void overrideTest_True_2(){
+        //Arrange
+        TaskType taskType = new TaskType("TaskType");
+        TaskType taskType1 = new TaskType("TaskType");
+        //Act and Assert
+        assertTrue(taskType.equals(taskType1));
+    }
+
+    @Test
+    @DisplayName("Test 3 to check Override Method, with one null object.")
+    void overrideTest_NotEquals(){
         //Arrange
         TaskType taskType = new TaskType("taskType");
         TaskType taskType1 = null;
@@ -122,8 +100,19 @@ class TaskTypeTest {
     }
 
     @Test
+    @DisplayName("Test 3 to check Override Method, with one null object.")
+    void overrideTest_False(){
+        //Arrange
+        TaskType taskType = new TaskType("TaskType");
+        TaskType taskType1 = new TaskType("TypeTask");
+        //Act and Assert
+        assertFalse(taskType.equals(taskType1));
+    }
+
+
+    @Test
     @DisplayName("Test to check HashCode Method.")
-    void hashCodeTest_1(){
+    void hashCodeTest_Fail(){
         //Arrange
         TaskType taskType = new TaskType("name");
         TaskType taskType1 = new TaskType("name2");
@@ -136,7 +125,7 @@ class TaskTypeTest {
 
     @Test
     @DisplayName("Test to check HashCode Method.")
-    void hashCodeTest_2(){
+    void hashCodeTest_Success(){
         //Arrange
         TaskType taskType = new TaskType("name");
         TaskType taskType1 = new TaskType("name");
