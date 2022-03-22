@@ -2,7 +2,6 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.stores.UserProfileStore;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,11 +21,8 @@ class UserProfileTest {
     @DisplayName("Throw exception when creating profile")
     public void shouldThrowException() {
         assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            UserProfileStore userProfileStore = new UserProfileStore();
-            String name = "";
-            //Assert
-            new UserProfile(name);
+
+            new UserProfile("");
         });
     }
 

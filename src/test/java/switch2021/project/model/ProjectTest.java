@@ -3,6 +3,7 @@ package switch2021.project.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.immutable.Description;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
 
@@ -49,8 +50,8 @@ class ProjectTest {
         String name = proj.getProjectName();
         String valueName = "prototype";
 
-        String description = proj.getDescription();
-        String valueDescription = "test1";
+        Description description = proj.getDescription();
+        Description valueDescription = new Description("test1");
 
         Customer customer = company.getProjectStore().getProjectByCode("Project_2022_1").getCustomer();
         Customer valueCustomer = company.getCustomerStore().getCustomerByName("Teste");
@@ -93,7 +94,7 @@ class ProjectTest {
 
     @Test
     @DisplayName("Project addition to list test")
-    public void projectAdditionTest() {
+    public void saveProjectTest() {
         List<Project> test = company.getProjectStore().getProjects();
         String code = test.get(0).getCode();
         String expectedCode = "Project_2022_1";
@@ -135,40 +136,6 @@ class ProjectTest {
 
     @Test
     @DisplayName("Project exceptions test")
-    public void createProjectExceptionsTest_description() {
-        //Arrange
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        LocalDate date = LocalDate.now();
-        // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            company.getProjectStore().createProject("prototype", "", customer,
-                    typo, sector, date, 7, 5000);
-        });
-        //Assert
-        assertTrue(exception.getMessage().contains("Description cannot be empty"));
-    }
-
-    @Test
-    @DisplayName("Project exceptions test")
-    public void createProjectExceptionsTest_descriptionLenght() {
-        //Arrange
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        LocalDate date = LocalDate.now();
-        // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            company.getProjectStore().createProject("prototype", "test", customer,
-                    typo, sector, date, 7, 5000);
-        });
-        //Assert
-        assertTrue(exception.getMessage().contains("Description must be at least 5 characters"));
-    }
-
-    @Test
-    @DisplayName("Project exceptions test")
     public void createProjectExceptionsTest_descriptionLenght2() {
         //Arrange
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
@@ -176,48 +143,11 @@ class ProjectTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         LocalDate date = LocalDate.now();
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            company.getProjectStore().createProject("prototype", "tes", customer,
+        assertThrows(IllegalArgumentException.class, () -> {
+            company.getProjectStore().createProject("prototype", "", customer,
                     typo, sector, date, 7, 5000);
         });
-        //Assert
-        assertTrue(exception.getMessage().contains("Description must be at least 5 characters"));
     }
-
-    @Test
-    @DisplayName("Project exceptions test")
-    public void createProjectExceptionsTest_descriptionLenght3() {
-        //Arrange
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        LocalDate date = LocalDate.now();
-        // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            company.getProjectStore().createProject("prototype", "ts", customer,
-                    typo, sector, date, 7, 5000);
-        });
-        //Assert
-        assertTrue(exception.getMessage().contains("Description must be at least 5 characters"));
-    }
-
-    @Test
-    @DisplayName("Project exceptions test")
-    public void createProjectExceptionsTest_descriptionLenght4() {
-        //Arrange
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        LocalDate date = LocalDate.now();
-        // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            company.getProjectStore().createProject("prototype", "t", customer,
-                    typo, sector, date, 7, 5000);
-        });
-        //Assert
-        assertTrue(exception.getMessage().contains("Description must be at least 5 characters"));
-    }
-
 
     @Test
     @DisplayName("Project exceptions test")
@@ -514,7 +444,7 @@ class ProjectTest {
         assertEquals(7, project.getNumberOfSprints());
         assertEquals(project.getCode(), list1.getProjectByCode(project.getCode()).getCode());
         assertEquals("prototype", project.getProjectName());
-        assertEquals("test1234", project.getDescription());
+        assertEquals("test1234", project.getDescription().getText());
         assertEquals(sector, project.getBusinessSector());
 
     }
@@ -547,11 +477,11 @@ class ProjectTest {
         assertNotEquals(project, project2);
 
         project.setProjectStatus(new ProjectStatus("test"));
-        project2.setDescription("test");
+        project2.setDescription(new Description("test"));
 
         assertNotEquals(project, project2);
 
-        project.setDescription("test");
+        project.setDescription(new Description("test"));
         project2.setProjectName("erro");
 
         assertNotEquals(project, project2);
@@ -584,11 +514,11 @@ class ProjectTest {
         assertNotEquals(project, project2);
 
         project.setProjectStatus(new ProjectStatus("test"));
-        project2.setDescription("test");
+        project2.setDescription(new Description("test"));
 
         assertNotEquals(project, project2);
 
-        project.setDescription("test");
+        project.setDescription(new Description("test"));
         project2.setProjectName("erro");
 
         assertNotEquals(project, project2);
