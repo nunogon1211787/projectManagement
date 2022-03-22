@@ -33,7 +33,7 @@ public class ProductBacklogTest {
         when(status.getDescription()).thenReturn(description);
         when(description.getText()).thenReturn("To do");
 
-       when(userStoryFactory.createUserStory(name, priority, descriptionUS, 5)).thenReturn(newUserStory);
+        when(userStoryFactory.createUserStory(name, priority, descriptionUS, 5)).thenReturn(newUserStory);
 
 
         // Act
@@ -45,6 +45,7 @@ public class ProductBacklogTest {
         assertEquals(priority, productBacklog.getUserStoryList().get(0).getPriority());
         assertEquals(descriptionUS, productBacklog.getUserStoryList().get(0).getDescription().getText());
         assertEquals(name, productBacklog.getUserStoryList().get(0).getTitle());
+        assertTrue(isUserStoryCreated);
     }
 
 
@@ -61,6 +62,28 @@ public class ProductBacklogTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             boolean userStory = productBacklog.createAndSaveUserStory(
                     "US001", priority, description, 5);
+        });
+
+        // Assert
+        assertTrue(exception.getMessage().contains("Description field requires at least " + 1 + " characters"));
+    }
+
+    @Test
+    @DisplayName("Create and save user story fail - empty description")
+    public void createUserStorydescriptionInvalidEmptyMock() {
+        // Arrange
+        UserStoryFactory userStoryFactory = mock(UserStoryFactory.class);
+        ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
+        UserStory userStory = mock(UserStory.class);
+        userStory.setIdUserStory(1);
+
+        String descriptionUS = "";
+        int priority = 1;
+
+        when(userStoryFactory.createUserStory("As director i want create US", priority, descriptionUS, 5)).thenThrow(new IllegalArgumentException("Description field requires at least " + 1 + " characters"));
+        // Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            productBacklog.createAndSaveUserStory("As director i want create US", priority, descriptionUS, 5);
         });
 
         // Assert
@@ -292,7 +315,7 @@ public class ProductBacklogTest {
 
         assertThrows(IllegalArgumentException.class, () -> {
             UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
-            company.getProductBacklog().createUserStoryRefine(company.getProductBacklog().getUserStoryList().get(0), userStoryStatus, 4, "123testtest");
+            company.getProductBacklog().RefineUserStory(company.getProductBacklog().getUserStoryList().get(0), userStoryStatus, 4, "123testtest");
         });
     }
 
@@ -336,6 +359,8 @@ public class ProductBacklogTest {
         company.getProductBacklog().createAndSaveUserStory("US001", 4, "123testtest", 5);
 
         assertNull(company.getProductBacklog().getUserStoryById(2));
+        assertNotEquals(1, company.getProductBacklog().getUserStoryById(0));
+
     }
 
     @Test
@@ -360,21 +385,33 @@ public class ProductBacklogTest {
 
     @Test
     @DisplayName("set user story list")
-    public void setUserStoryList() {
+    public void CreateAndSaveUserStorySuccess() {
         // Arrange
-        Company company = new Company();
-        UserStoryFactory userStoryFactory = new UserStoryFactory();
+        Company company = mock(Company.class);
+        UserStoryFactory userStoryFactory = mock(UserStoryFactory.class);
         ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
+        when(company.getProductBacklog()).thenReturn(productBacklog);
+        UserStory userStory = mock(UserStory.class);
+        userStory.setIdUserStory(1);
+        UserStory userStory2 = mock(UserStory.class);
+        userStory2.setIdUserStory(2);
+        Description description1 = mock(Description.class);
+        Description description2 = mock(Description.class);
 
+        when(userStory.getDescription()).thenReturn(description1);
+        when(userStory2.getDescription()).thenReturn(description2);
+        when(description1.getText()).thenReturn("create user story");
+        when(description2.getText()).thenReturn("sort user story");
+
+        when(userStoryFactory.createUserStory("US001", 1, "create user story", 5)).thenReturn(userStory);
         productBacklog.createAndSaveUserStory("US001", 1, "create user story", 5);
-        productBacklog.createAndSaveUserStory("US001", 3, "sort user story", 5);
-        productBacklog.createAndSaveUserStory("US001", 1, "backlog sorted", 5);
-        // Act
-        productBacklog.getUserStoryList().get(0).setUserStoryStatus(company.getUserStoryStatusStore().getUserStoryStatusByDescription("Done"));
-        productBacklog.getUserStoryList().get(1).setUserStoryStatus(company.getUserStoryStatusStore().getUserStoryStatusByDescription("Cancelled"));
-        productBacklog.getUserStoryList().get(2).setUserStoryStatus(company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do"));
+
+        when(userStoryFactory.createUserStory("US002", 3, "sort user story", 5)).thenReturn(userStory2);
+        productBacklog.createAndSaveUserStory("US002", 3, "sort user story", 5);
+
         // Assert
-        assertEquals(3, productBacklog.getUserStoryList().size());
+        assertEquals(2, productBacklog.getUserStoryList().size());
+
 
     }
 
