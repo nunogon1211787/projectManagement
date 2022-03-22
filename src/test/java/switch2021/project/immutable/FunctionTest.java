@@ -2,6 +2,8 @@ package switch2021.project.immutable;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.TaskType;
+import switch2021.project.model.Typology;
 
 import java.util.Arrays;
 
@@ -12,21 +14,21 @@ class FunctionTest {
     @Test
     public void functionConstructorSuccess() {
         //Arrange
-        String atual = "Developer";
+        String actual = "Developer";
         //Act
-        Function function = new Function(atual);
+        Function function = new Function(actual);
         //Assert
-        assertEquals(function.getText(), atual);
+        assertEquals(function.getText(), actual);
     }
 
     @Test
     public void functionConstructorSuccessUpLimit() {
         //Arrange
-        String atual = "DeveloperDeveloperOO";
+        String actual = "DeveloperDeveloperOO";
         //Act
-        Function function = new Function(atual);
+        Function function = new Function(actual);
         //Assert
-        assertEquals(function.getText(), atual);
+        assertEquals(function.getText(), actual);
     }
 
     @Test
@@ -34,9 +36,9 @@ class FunctionTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            String atual = "";
+            String actual = "";
             //Act
-            Function expected = new Function(atual);
+            Function expected = new Function(actual);
         });
     }
 
@@ -45,9 +47,9 @@ class FunctionTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            String atual = null;
+            String actual = null;
             //Act
-            Function expected = new Function(atual);
+            Function expected = new Function(actual);
         });
     }
 
@@ -56,9 +58,9 @@ class FunctionTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            String atual = "   ";
+            String actual = "   ";
             //Act
-            Function expected = new Function(atual);
+            Function expected = new Function(actual);
         });
     }
 
@@ -78,8 +80,8 @@ class FunctionTest {
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTests() {
         // Arrange
-        Function function = new Function("Teste");
-        Function function1 = new Function("Teste");
+        Function function = new Function("Test");
+        Function function1 = new Function("Test");
         Function function2 = null;
         Description test = new Description("test");
         // Act
@@ -87,5 +89,45 @@ class FunctionTest {
         assertNotEquals(function, function2);
         assertNotEquals(function, test);
         assertEquals(function,function);
+    }
+
+    @Test
+    @DisplayName("Test hashcode conditions for coverage purposes")
+    void hashCodeTest_Success(){
+        //Arrange
+        Function function = new Function("Test");
+        Function function1 = new Function("Test");
+        //Act and Assert
+        assertEquals(function.hashCode(),function1.hashCode());
+    }
+
+    @Test
+    @DisplayName("Test hashcode conditions for coverage purposes")
+    void hashCodeTest_Fail(){
+        //Arrange
+        Function function = new Function("Test");
+        Typology function1 = new Typology("Test");
+        //Act and Assert
+        assertNotEquals(function.hashCode(),function1.hashCode());
+    }
+
+    @Test
+    @DisplayName("Test check minimum length conditions for coverage purposes")
+    void MinimumLengthTest(){
+        //Arrange
+        Function function = new Function("Te");
+        Function function1 = new Function("Te");
+        //Act and Assert
+        assertEquals(function.getText(),function1.getText());
+    }
+
+    @Test
+    @DisplayName("Test check maximum length conditions for coverage purposes")
+    void MaximumLengthTest(){
+        //Arrange
+        Function function = new Function("12345678998765432123");
+        Function function1 = new Function("12345678998765432123");
+        //Act and Assert
+        assertEquals(function.getText(),function1.getText());
     }
 }

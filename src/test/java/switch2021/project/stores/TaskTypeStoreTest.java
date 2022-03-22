@@ -156,7 +156,7 @@ class TaskTypeStoreTest {
     }
 
     @Test
-    @DisplayName("Test  to verify if the description is returned, with failure.")
+    @DisplayName("Test to verify if the list of descriptions is empty.")
     void getTypeByDescriptionListEmpty() {
         //Arrange
         TaskTypeFactory taskTypeFactory = mock(TaskTypeFactory.class);
@@ -166,18 +166,18 @@ class TaskTypeStoreTest {
     }
 
     @Test
-    @DisplayName("Test  to verify if the description is returned, with failure.")
+    @DisplayName("Test to verify if the list of descriptions is equal to 0.")
     void getTaskTypeDescriptionList() {
         //Arrange
         TaskTypeFactory taskTypeFactory = mock(TaskTypeFactory.class);
         TaskTypeStore store = new TaskTypeStore(taskTypeFactory);
         //Act and Arrange
-        assertTrue(store.getTaskTypesDescription().isEmpty());
+        assertEquals(0, store.getTaskTypesDescription().size());
     }
 
 
     @Test
-    @DisplayName("...")
+    @DisplayName("Test to get the list of task type descriptions")
     void getTaskStatusNamesSizeTest() {
         //Arrange
         TaskTypeFactory taskTypeFactory = mock(TaskTypeFactory.class);

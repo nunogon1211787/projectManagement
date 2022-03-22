@@ -2,6 +2,7 @@ package switch2021.project.immutable;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.Typology;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -83,5 +84,25 @@ public class PasswordTest {
         assertNotEquals(pwd, pwd2);
         assertNotEquals(pwd, test);
         assertEquals(pwd,pwd);
+    }
+
+    @Test
+    @DisplayName("Test hashcode conditions for coverage purposes")
+    void hashCodeTest_Success(){
+        //Arrange
+        Password pwd = new Password("Qwerty_1");
+        Password pwd1 = new Password("Qwerty_1");
+        //Act and Assert
+        assertEquals(pwd.hashCode(),pwd1.hashCode());
+    }
+
+    @Test
+    @DisplayName("Test hashcode conditions for coverage purposes")
+    void hashCodeTest_Fail(){
+        //Arrange
+        Password pwd = new Password("Qwerty_1");
+        Typology pwd1 = new Typology("Test");
+        //Act and Assert
+        assertNotEquals(pwd.hashCode(),pwd1.hashCode());
     }
 }

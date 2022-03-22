@@ -11,9 +11,9 @@ class DescriptionTest {
     @Test
     public void shouldCreateAValidDescription() {
         //Arrange
-        Description description = new Description("Teste");
+        Description description = new Description("Test");
         //Assert
-        assertEquals("Teste", description.getText());
+        assertEquals("Test", description.getText());
     }
 
     @Test
@@ -54,8 +54,8 @@ class DescriptionTest {
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTestEqual() {
         //Arrange
-        Description description = new Description("Teste");
-        Description description2 = new Description("Teste");
+        Description description = new Description("Test");
+        Description description2 = new Description("Test");
         //Assert
         assertTrue(description.equals(description2));
     }
@@ -64,7 +64,7 @@ class DescriptionTest {
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTestEqualTrue() {
         //Arrange
-        Description description = new Description("Teste");
+        Description description = new Description("Test");
         Description description2 = description;
         //Assert
         assertTrue(description.equals(description2));
@@ -74,7 +74,7 @@ class DescriptionTest {
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTestNotEqual() {
         //Arrange
-        Description description = new Description("Teste");
+        Description description = new Description("Test1");
         Description description3 = new Description("Test");
         //Assert
         assertFalse(description.equals(description3));
@@ -84,7 +84,7 @@ class DescriptionTest {
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTestNull() {
         // Arrange
-        Description description = new Description("Teste");
+        Description description = new Description("Test");
         Description description3 = null;
         //Assert
         assertFalse(description.equals(description3));
@@ -94,7 +94,7 @@ class DescriptionTest {
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTestClass() {
         // Arrange
-        Description description = new Description("Teste");
+        Description description = new Description("Test");
         Typology test = new Typology("test");
         //Assert
         assertFalse(description.equals(test));
@@ -103,8 +103,8 @@ class DescriptionTest {
     @Test
     public void hashCodeTestSuccess() {
         // Arrange
-        Description description = new Description("Teste");
-        Description description2 = new Description("Teste");
+        Description description = new Description("Test");
+        Description description2 = new Description("Test");
         //Assert
         assertEquals(description.hashCode(),description2.hashCode());
     }
@@ -112,8 +112,8 @@ class DescriptionTest {
     @Test
     public void hashCodeTestFail() {
         // Arrange
-        Description description = new Description("Teste");
-        Typology description2 = new Typology("Teste");
+        Description description = new Description("Test");
+        Typology description2 = new Typology("Test");
         //Assert
         assertNotEquals(description.hashCode(),description2.hashCode());
     }
