@@ -3,6 +3,8 @@ package switch2021.project.model;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.immutable.Date;
+import switch2021.project.immutable.Description;
+import switch2021.project.immutable.Name;
 import switch2021.project.immutable.TaskStatus;
 import switch2021.project.utils.App;
 import java.time.LocalDate;
@@ -61,10 +63,9 @@ public class Task {
     }
 
     public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible, List<String> precedenceList) {
-        //REVIEW ---- TASK IS NEVER USED
-        Task task = new Task(name, description,effortEstimate, type, responsible);
-
+        new Task(name, description,effortEstimate, type, responsible);
         this.precedenceList = Collections.unmodifiableList(precedenceList);
+
     }
 
     /**
