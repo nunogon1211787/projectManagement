@@ -2,6 +2,7 @@ package switch2021.project.stores;
 
 import lombok.Getter;
 import switch2021.project.factory.ProjectRoleFactory;
+import switch2021.project.factory.ProjectRoleFactoryInterface;
 import switch2021.project.model.ProjectRole;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,15 +13,14 @@ public class ProjectRoleStore {
     /**
      * Attribute
      */
-    private final ProjectRoleFactory projectRoleFactory;
+    private final ProjectRoleFactoryInterface projectRoleFactory;
     private final List<ProjectRole> projectRoleList = new ArrayList<>();
 
 
     /**
      * Constructor
-     * @param factory
      */
-    public ProjectRoleStore(ProjectRoleFactory factory){
+    public ProjectRoleStore(ProjectRoleFactoryInterface factory){
         this.projectRoleFactory = factory;
     }
 
@@ -34,7 +34,6 @@ public class ProjectRoleStore {
         createAndAddProjectRole("Scrum Master");
         createAndAddProjectRole("Team Member");
     }
-
 
     /**
      * Create and Add method
