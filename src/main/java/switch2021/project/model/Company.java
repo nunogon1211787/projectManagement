@@ -51,7 +51,7 @@ public class Company {
         this.userStoryStatusStore = new UserStoryStatusStore();
         this.requestStore = new RequestStore();
         this.taskStatusStore = new TaskStatusStore(new TaskStatusFactory());
-        this.taskTypeStore = new TaskTypeStore();
+        this.taskTypeStore = new TaskTypeStore(new TaskTypeFactory());
         this.userStoryFactory = new UserStoryFactory();
         this.productBacklog = new ProductBacklog(this.userStoryFactory );
 
