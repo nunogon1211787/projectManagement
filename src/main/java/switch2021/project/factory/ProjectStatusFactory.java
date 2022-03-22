@@ -2,9 +2,10 @@ package switch2021.project.factory;
 
 import switch2021.project.model.ProjectStatus;
 
-public class ProjectStatusFactory {
+public class ProjectStatusFactory implements ProjectStatusFactoryInterface {
 
-    public ProjectStatus createProjectStatus(String description){
+    @Override
+    public ProjectStatus createProjectStatus(String description) {
         return new ProjectStatus(description);
     }
 }
