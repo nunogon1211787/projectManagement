@@ -51,7 +51,7 @@ public class Project {
     public Project(String name, String description, Customer customer, Typology typology,
                    BusinessSector businessSector, LocalDate startDate, ProjectStatus status, int numberOfSprints, double budget) {
 
-        validateProjectFields(name, budget, numberOfSprints);
+        validateProjectFields(name,description, budget, numberOfSprints);
 
         this.projectName = name;
         this.description = new Description(description);
@@ -78,11 +78,13 @@ public class Project {
      * Validates Project Creation Fields
      * Checks if @param projectName and @param description are empty or have the minimum characters necessary
      */
-    public void validateProjectFields(String projectName, double budget, int numberOfSprints) {
+    public void validateProjectFields(String projectName, String description, double budget, int numberOfSprints) {
         if (projectName.trim().isEmpty())
             throw new IllegalArgumentException("Project Name cannot be empty");
         if ((projectName.length() < 3))
             throw new IllegalArgumentException("Project Name must be at least 3 characters");
+        if (description.length() <1)
+            throw new IllegalArgumentException("Description must be at least 1 character");
         if (numberOfSprints <= 0)
             throw new IllegalArgumentException("Number of Sprints must be greater than 0");
         if (budget <= 0)

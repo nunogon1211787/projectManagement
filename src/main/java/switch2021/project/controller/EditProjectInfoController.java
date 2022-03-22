@@ -48,12 +48,7 @@ public class EditProjectInfoController {
         boolean result = true;
 
         try {
-            project.validateProjectFields(name, budget, numberOfSprints);
-        } catch (IllegalArgumentException e) {
-            result = false;
-        }
-        try {
-            this.project.setDescription(new Description(description));
+            project.validateProjectFields(name,description, budget, numberOfSprints);
         } catch (IllegalArgumentException e) {
             result = false;
         }
