@@ -38,23 +38,9 @@ public class UserProfileStore {
         UserProfile profile = null;
 
         for (UserProfile i : userProfileList) {
-            if (i.getUserProfileName().getDescriptionF().equalsIgnoreCase(profileName)) {
+            if (i.getUserProfileName().getText().equalsIgnoreCase(profileName)) {
                 profile = i;
                 break;
-            }
-        }
-        return profile;
-    }
-
-    /**
-     * Get UserProfile By ID Method
-     **/
-    public UserProfile getUserProfile(int idUserProfile) {
-        UserProfile profile = null;
-
-        for (UserProfile i : userProfileList) {
-            if (i.getIdProfile() == idUserProfile) {
-                profile = i;
             }
         }
         return profile;
@@ -67,20 +53,6 @@ public class UserProfileStore {
         return new UserProfile(name);
     }
 
-
-    /**
-     * ID_UserProfile Generator (if the object isn´t saved on the list, the id will be the same for all objects.
-     * This issue will be solved when calling the save method.)
-     */
-    public int idUserProfileGenerator() {
-        int id = 1;
-        if (!this.userProfileList.isEmpty()) {
-            id = userProfileList.get(userProfileList.size() - 1).getIdProfile() + 1;
-        }
-        return id;
-    }
-
-
     /**
      * Save UserProfile Method (Save a new UserProfile object to the UserProfile List)
      **/
@@ -88,36 +60,12 @@ public class UserProfileStore {
         if (!validateProfile(profile)) {
             throw new IllegalArgumentException("Repeated user profile name inserted.");
         }
-        return addUserProfile(profile);
-    }
-
-    /**
-     * Add and Remove UserProfile Methods (Adds or remove a UserProfile object to the UserProfile List)
-     **/
-    private boolean addUserProfile(UserProfile profile) {
-        if (validateIdUserProfile(profile)) {
-            userProfileList.add(profile);
-        } else {
-            profile.setIdProfile(idUserProfileGenerator());
-            userProfileList.add(profile);
-        }
-        return true;
+        return userProfileList.add(profile);
     }
 
     /**
      * Validation Methods
      **/
-    private boolean validateIdUserProfile(UserProfile profile) {
-        boolean msg = true;
-
-        for (UserProfile i : userProfileList) {
-            if (i.getIdProfile() == profile.getIdProfile()) {
-                msg = false;
-                break;
-            }
-        }
-        return msg;
-    }
 
     private boolean validateProfile(UserProfile profile) {
         //Check if profile already exist

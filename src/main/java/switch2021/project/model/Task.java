@@ -2,9 +2,11 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.Immutables.HoursMinutes;
+import switch2021.project.immutable.Date;
+import switch2021.project.immutable.Description;
+import switch2021.project.immutable.Name;
+import switch2021.project.immutable.TaskStatus;
 import switch2021.project.utils.App;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,7 +41,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.status = new TaskStatus("Planned");
+        this.status = App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Planned");
     }
 
     public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible) {
@@ -61,12 +63,9 @@ public class Task {
     }
 
     public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible, List<String> precedenceList) {
-
-        Task task = new Task(name, description,effortEstimate, type, responsible);
-        this.effortRemaining = effortEstimate;
-        this.status = App.getInstance().getCompany().getTaskStatusStore().getInitialStatus();
-        this.taskEffortList = new ArrayList<>();
+        new Task(name, description,effortEstimate, type, responsible);
         this.precedenceList = Collections.unmodifiableList(precedenceList);
+
     }
 
     /**
@@ -138,20 +137,20 @@ public class Task {
         }
     }
 
-    public TaskEffort createTaskEffort(int effortHours, int effortMinutes, LocalDate effortDate, String comment, String attachment) {
+    public TaskEffort createTaskEffort(int effortHours, int effortMinutes, Date effortDate, String comment, String attachment) {
         return new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
     }
 
     public boolean validateTaskEffort(TaskEffort effort) {
         for (TaskEffort i : this.taskEffortList) {
-            if (!effort.getEffortDate().isAfter(i.getEffortDate())) {
+            if (!effort.getEffortDate().getEffortDate().isAfter(i.getEffortDate().getEffortDate())) {
                 throw new IllegalArgumentException("Effort for this day is already saved.");
             }
         }
         if (effort == null) {
             return false;
         }
-        if (effort.getEffortDate().isAfter(this.getResponsible().getEndDate()) || effort.getEffortDate().isBefore(this.getResponsible().getStartDate())) {
+        if (effort.getEffortDate().getEffortDate().isAfter(this.getResponsible().getEndDate()) || effort.getEffortDate().getEffortDate().isBefore(this.getResponsible().getStartDate())) {
             throw new IllegalArgumentException("work date not match with the resource allocation dates");
         }
         return !this.taskEffortList.contains(effort);
@@ -164,7 +163,7 @@ public class Task {
             result = false;
         } else {
             if (taskEffortList.isEmpty()) {
-                setStartDate(effort.getEffortDate());
+                setStartDate(effort.getEffortDate().getEffortDate());
                 setStatus(App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Running"));
             }
             this.taskEffortList.add(effort);
@@ -173,7 +172,7 @@ public class Task {
             updateExecutionPercentage();
             if (this.effortRemaining == 0) {
                 setStatus(App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Finished"));
-                setEndDate(effort.getEffortDate());
+                setEndDate(effort.getEffortDate().getEffortDate());
             }
         }
         return result;
@@ -188,18 +187,25 @@ public class Task {
     }
 
     public double updateEffortRemaining(TaskEffort effort) {
-        if (this.effortRemaining < effortInHours(effort))
-            return this.effortRemaining = 0.0;
+        double EFFORT_TO_COMPLETE = 0.0;
 
-        return this.effortRemaining -= effortInHours(effort);
+        if (this.effortRemaining <= effortInHours(effort)) {
+            this.effortRemaining = EFFORT_TO_COMPLETE;
+        } else {
+            this.effortRemaining -= effortInHours(effort);
+        }
+
+        return this.effortRemaining;
     }
 
     private double updateExecutionPercentage() {
+        double EFFORT_COMPLETED = 1.0;
+
         double workTotal = this.hoursSpent + this.effortRemaining;
         double workDone = this.hoursSpent;
 
         if (workDone >= workTotal) {
-            this.executionPercentage = 1.0;
+            this.executionPercentage = EFFORT_COMPLETED;
         } else {
             this.executionPercentage = workDone / workTotal;
         }

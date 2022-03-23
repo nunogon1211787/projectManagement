@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.immutable.Description;
 import switch2021.project.stores.TaskList;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class Sprint {
      * Atributos da classe Sprint
      **/
     private int idSprint;
-    private String name;
+    private Description sprintName;
     private final TaskList taskList;
     private final SprintBacklog sprintBacklog;
     private LocalDate startDate;
@@ -27,8 +28,7 @@ public class Sprint {
      * Constructor of Sprint
      **/
     public Sprint(String name, LocalDate startDate) {
-        checkSprintNameRules(name);
-        this.name = name;
+        this.sprintName = new Description(name);
         this.startDate = startDate;
         this.sprintBacklog = new SprintBacklog();
         this.taskList = new TaskList();
@@ -37,23 +37,15 @@ public class Sprint {
     /**
      * Method to change Sprint EndDate
      **/
+    long SEM = 7;
+    int DIA = 1;
+
     public void changeEndDate(int sprintDurationInWeeks) {
-        this.endDate = startDate.plusDays((sprintDurationInWeeks * 7L) - 1);
+        this.endDate = startDate.plusDays((sprintDurationInWeeks * SEM) - DIA);
     }
 
     public boolean hasSprintID(int id) {
         return this.idSprint == id;
-    }
-
-
-    /**
-     * Validation Method for the Constructor
-     **/
-    private void checkSprintNameRules(String name) {
-        if (name.trim().isEmpty())
-            throw new IllegalArgumentException("Sprint Name cannot be empty.");
-        if ((name.length() < 2))
-            throw new IllegalArgumentException("Sprint Name must have at least 2 characters");
     }
 
     /**
@@ -84,11 +76,13 @@ public class Sprint {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sprint sprint = (Sprint) o;
-        return idSprint == sprint.idSprint && Objects.equals(name, sprint.name) && Objects.equals(taskList, sprint.taskList) && Objects.equals(sprintBacklog, sprint.sprintBacklog) && Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
+        return idSprint == sprint.idSprint && Objects.equals(sprintName, sprint.sprintName) &&
+                Objects.equals(taskList, sprint.taskList) && Objects.equals(sprintBacklog, sprint.sprintBacklog) &&
+                Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idSprint, name, taskList, sprintBacklog, startDate, endDate);
+        return Objects.hash(idSprint, sprintName, taskList, sprintBacklog, startDate, endDate);
     }
 }

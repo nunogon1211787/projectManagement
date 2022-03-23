@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.factory.SprintFactory;
 import switch2021.project.stores.SprintList;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,14 +14,14 @@ public class SprintTest {
     @DisplayName("Constructor test, verification of success")
     public void sprintConstructorSuccess() {
         //Arrange
-        Sprint sprint = new Sprint("Sp", LocalDate.of(2022, 1, 1));
+        Sprint sprint = new Sprint("S", LocalDate.of(2022, 1, 1));
         //Act
         int x = sprint.getIdSprint();
-        String name = sprint.getName();
+        String name = sprint.getSprintName().getText();
         LocalDate date = sprint.getStartDate();
         //Assert
         assertEquals(0, x);
-        assertEquals("Sp", name);
+        assertEquals("S", name);
         assertEquals(LocalDate.of(2022, 1, 1), date);
     }
 
@@ -33,7 +34,7 @@ public class SprintTest {
         //Act
         sprintList.saveSprint(sprint);
         int x = sprint.getIdSprint();
-        String name = sprint.getName();
+        String name = sprint.getSprintName().getText();
         LocalDate date = sprint.getStartDate();
         //Assert
         assertNotEquals(2, x);
@@ -48,7 +49,7 @@ public class SprintTest {
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
         int x = sprint.getIdSprint();
-        String name = sprint.getName();
+        String name = sprint.getSprintName().getText();
         LocalDate date = sprint.getStartDate();
         //Assert
         assertNotEquals(1, x);
@@ -63,7 +64,7 @@ public class SprintTest {
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
         int x = sprint.getIdSprint();
-        String name = sprint.getName();
+        String name = sprint.getSprintName().getText();
         LocalDate date = sprint.getStartDate();
         //Assert
         assertNotEquals(1, x);
@@ -78,7 +79,7 @@ public class SprintTest {
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
         //Act
         int x = sprint.getIdSprint();
-        String name = sprint.getName();
+        String name = sprint.getSprintName().getText();
         LocalDate date = sprint.getStartDate();
         //Assert
         assertNotEquals(2, x);
@@ -93,16 +94,6 @@ public class SprintTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             Sprint sprint = new Sprint(" ", LocalDate.now());
-        });
-    }
-
-    @Test
-    @DisplayName("Constructor Test, to catch the exception of having a low length name.")
-    public void sprintConstructorNameLowLengthFail() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            Sprint sprint = new Sprint("S", LocalDate.now());
         });
     }
 

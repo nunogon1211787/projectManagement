@@ -2,7 +2,11 @@ package switch2021.project.stores;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.model.*;
+import switch2021.project.factory.SprintFactory;
+import switch2021.project.model.ProjectTeam;
+import switch2021.project.model.Sprint;
+import switch2021.project.model.Task;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,34 +19,34 @@ public class SprintList {
     /**
      * Class Attributes
      **/
-
-    private final List<Sprint> sprintList;
-
+    //private SprintFactory sprintFactory;
+    private final List<Sprint> sprints;
+    private SprintFactory sprintFactory;
 
     /**
      * Constructors with data
      **/
-
-    public SprintList() {
-        this.sprintList = new ArrayList<>();
+    public SprintList(SprintFactory sprintFactory1) {
+        this.sprints = new ArrayList<>();
+        this.sprintFactory=sprintFactory1;
     }
 
+    public SprintList() {
+        this.sprints = new ArrayList<>();
+        //this.sprintFactory = sprintFact;
+    }
 
     /**
      * Sprint creator
      **/
-
     public Sprint createSprint(String name, LocalDate startDate, int sprintDuration) {
-
         Sprint sprint = null;
 
         if(validateStartDate(startDate)) {
-
             sprint = new Sprint(name, startDate);
+            //sprint = this.sprintFactory.createSprint(name, startDate);
             sprint.changeEndDate(sprintDuration);
-
         }
-
         return sprint;
     }
 
@@ -52,8 +56,8 @@ public class SprintList {
 
     private int idSprintGenerator() {
         int id = 1;
-        if (this.sprintList.size() > 0) {
-            id = (this.sprintList.get(sprintList.size() - 1).getIdSprint() + 1);
+        if (this.sprints.size() > 0) {
+            id = (this.sprints.get(sprints.size() - 1).getIdSprint() + 1);
         }
         return id;
     }
@@ -64,7 +68,7 @@ public class SprintList {
 
     public Sprint getSprint(int id) {
         Sprint sprint = null;
-        for (Sprint sprt : sprintList) {
+        for (Sprint sprt : sprints) {
             if (sprt.hasSprintID(id)) {
                 sprint = sprt;
                 break;
@@ -77,9 +81,9 @@ public class SprintList {
      * Get Method
      **/
 
-    public List<Sprint> getSprintList() {
+    public List<Sprint> getSprints() {
 
-        return new ArrayList<>(this.sprintList);
+        return new ArrayList<>(this.sprints);
     }
 
 
@@ -88,7 +92,7 @@ public class SprintList {
      **/
 
     public boolean validateIfSprintAlreadyExists(Sprint sprint) {
-        return this.sprintList.contains(sprint);
+        return this.sprints.contains(sprint);
     }
 
 
@@ -100,8 +104,8 @@ public class SprintList {
 
         boolean msg = true;
 
-        for (int i = 0; i < sprintList.size() - 1; i++) {
-            if (!sprintList.get(i).getEndDate().isBefore(startDate) || sprintList.get(i).getEndDate().isEqual(startDate)) {
+        for (int i = 0; i < sprints.size() - 1; i++) {
+            if (!sprints.get(i).getEndDate().isBefore(startDate) || sprints.get(i).getEndDate().isEqual(startDate)) {
                 msg = false;
             }
         }
@@ -136,7 +140,7 @@ public class SprintList {
             result = false;
         } else {
             sprint.setIdSprint(idSprintGenerator());
-            this.sprintList.add(sprint);
+            this.sprints.add(sprint);
         }
         return result;
     }
@@ -161,8 +165,8 @@ public class SprintList {
 
     public Sprint getCurrentSprint() {
         Sprint sprint = null;
-        for(Sprint i : this.sprintList) {
-            if(i.isCurrentSprint()) {
+        for (Sprint i : this.sprints) {
+            if (i.isCurrentSprint()) {
                 sprint = i;
             }
         }
@@ -179,7 +183,7 @@ public class SprintList {
     public List<Task> getListOfAllAActivitiesOfAProject(){
         List<Task> allActivitiesInAProject = new ArrayList<>();
 
-        for (Sprint i: sprintList){
+        for (Sprint i : sprints) {
             allActivitiesInAProject.addAll(i.getListOfTasksOfASprint());
         }
         return allActivitiesInAProject;
@@ -194,7 +198,7 @@ public class SprintList {
         if (this == o) return true;
         if (!(o instanceof SprintList)) return false;
         SprintList that = (SprintList) o;
-        return sprintList.equals(that.sprintList);
+        return sprints.equals(that.sprints);
     }
 
     /**
@@ -203,6 +207,6 @@ public class SprintList {
 
     @Override
     public int hashCode() {
-        return Objects.hash(sprintList);
+        return Objects.hash(sprints);
     }
 }

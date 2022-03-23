@@ -13,7 +13,7 @@ public class RefineUserStoryControllerTest {
 //    Company company;
 
     Company company = new Company();
-//    RefineUserStoryController refineUserStoryController = new RefineUserStoryController(company);
+   RefineUserStoryController refineUserStoryController = new RefineUserStoryController(company);
 
     @Test
     @DisplayName("Refine User Story Controller - Check if project was saved on the list")
@@ -23,7 +23,7 @@ public class RefineUserStoryControllerTest {
 
         //Arrange
         //Project Creation and save on the list
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -36,21 +36,25 @@ public class RefineUserStoryControllerTest {
         //UserStory Creation and save on Product Backlog
         UserStoryStatus statusToDo = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
         UserStory userStory1 = new UserStory("US001",4,"userstory1",5);
-        proj1.getProductBacklog().saveUserStory(userStory1);
+        userStory1.setIdUserStory(0);
+        proj1.getProductBacklog().getUserStoryList().add(userStory1);
         UserStory userStory2 = new UserStory("US002",3,"userstory2",5);
-        proj1.getProductBacklog().saveUserStory(userStory2);
+        userStory2.setIdUserStory(1);
+        proj1.getProductBacklog().getUserStoryList().add(userStory2);
         UserStory userStory3 = new UserStory("US003",1,"userstory3",5);
-        proj1.getProductBacklog().saveUserStory(userStory3);
+        userStory3.setIdUserStory(2);
+        proj1.getProductBacklog().getUserStoryList().add(userStory3);
         UserStory userStory4 = new UserStory("US004",0,"userstory4",5);
-        proj1.getProductBacklog().saveUserStory(userStory4);
+        userStory4.setIdUserStory(3);
+        proj1.getProductBacklog().getUserStoryList().add(userStory4);
 
         //Act
         refineUserStoryController.getProject("Project_2022_1");
         refineUserStoryController.getProductBacklog();
         refineUserStoryController.getUserStory(2);
         refineUserStoryController.updateRefinedUserStoryStatus(userStory2);
-        boolean newUserStory = refineUserStoryController.createUserStory("newUserStoryCreated", 3, statusToDo);
-        boolean newUserStory2 = refineUserStoryController.createUserStory("newUserStoryCreated2", 5, statusToDo);
+        refineUserStoryController.createUserStory("newUserStoryCreated", 3, statusToDo);
+        refineUserStoryController.createUserStory("newUserStoryCreated2", 5, statusToDo);
 
         //Assert
         //check if project was saved on the list
@@ -64,7 +68,7 @@ public class RefineUserStoryControllerTest {
 
         //Arrange
         //Project Creation and save on the list
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -77,13 +81,17 @@ public class RefineUserStoryControllerTest {
         //UserStory Creation and save on Product Backlog
         UserStoryStatus statusToDo = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
         UserStory userStory1 = new UserStory("US001",4,"userstory1",5);
-        proj1.getProductBacklog().saveUserStory(userStory1);
+        userStory1.setIdUserStory(0);
+        proj1.getProductBacklog().getUserStoryList().add(userStory1);
         UserStory userStory2 = new UserStory("US002",3,"userstory2",5);
-        proj1.getProductBacklog().saveUserStory(userStory2);
+        userStory2.setIdUserStory(1);
+        proj1.getProductBacklog().getUserStoryList().add(userStory2);
         UserStory userStory3 = new UserStory("US003",1,"userstory3",5);
-        proj1.getProductBacklog().saveUserStory(userStory3);
+        userStory3.setIdUserStory(2);
+        proj1.getProductBacklog().getUserStoryList().add(userStory3);
         UserStory userStory4 = new UserStory("US004",0,"userstory4",5);
-        proj1.getProductBacklog().saveUserStory(userStory4);
+        userStory4.setIdUserStory(3);
+        proj1.getProductBacklog().getUserStoryList().add(userStory4);
 
         //Act
         refineUserStoryController.getProject("Project_2022_1");
@@ -97,11 +105,12 @@ public class RefineUserStoryControllerTest {
         //check if User Stories were added on product Backlog (4 created + 2 added after refine)
         assertEquals(6, refineUserStoryController.getProductBacklog().getUserStoryList().size());
         //check if User Story2 is added and we can get
-        assertEquals(userStory2, refineUserStoryController.getUserStory(2));
+        assertEquals(proj1.getProductBacklog().getUserStoryList().get(2), refineUserStoryController.getUserStory(2));
         //check New User Story Creation
         assertTrue(newUserStory);
         assertTrue(newUserStory2);
     }
+
     @Test
     @DisplayName("Refine User Story Controller - Check if status of user story refined changed")
     public void RefineUserStoryController3(){
@@ -110,7 +119,7 @@ public class RefineUserStoryControllerTest {
 
         //Arrange
         //Project Creation and save on the list
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -123,20 +132,20 @@ public class RefineUserStoryControllerTest {
         //UserStory Creation and save on Product Backlog
         UserStoryStatus statusToDo = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
         UserStory userStory1 = new UserStory("US001",4,"userstory1",5);
-        proj1.getProductBacklog().saveUserStory(userStory1);
+        proj1.getProductBacklog().getUserStoryList().add(userStory1);
         UserStory userStory2 = new UserStory("US002",3,"userstory2",5);
-        proj1.getProductBacklog().saveUserStory(userStory2);
+        proj1.getProductBacklog().getUserStoryList().add(userStory2);
         UserStory userStory3 = new UserStory("US003",1,"userstory3",5);
-        proj1.getProductBacklog().saveUserStory(userStory3);
+        proj1.getProductBacklog().getUserStoryList().add(userStory3);
         UserStory userStory4 = new UserStory("US004",0,"userstory4",5);
-        proj1.getProductBacklog().saveUserStory(userStory4);
+        proj1.getProductBacklog().getUserStoryList().add(userStory4);
 
         //Act
         refineUserStoryController.getProject("Project_2022_1");
         refineUserStoryController.getProductBacklog();
         refineUserStoryController.getUserStory(2);
         boolean result = refineUserStoryController.updateRefinedUserStoryStatus(userStory2);
-        String refinedUserStoryStatus = userStory2.getUserStoryStatus().getDescription();
+        String refinedUserStoryStatus = userStory2.getUserStoryStatus().getDescription().getText();
 
         //Assert
         assertEquals("Refined",refinedUserStoryStatus);

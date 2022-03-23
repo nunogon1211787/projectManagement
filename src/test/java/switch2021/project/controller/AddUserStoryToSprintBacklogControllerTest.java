@@ -14,19 +14,19 @@ public class AddUserStoryToSprintBacklogControllerTest {
         //Arrange
         Company company = new Company();
 
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
 
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.now(), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.now(), 2);
+        project.getSprintList().saveSprint(sprint);
 
         company.getProjectStore().saveNewProject(project);
-        UserStory userStory = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createUserStory( "US001",
+
+        boolean userStory = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createAndSaveUserStory( "US001",
                 1, "Fazer coisas cool",5);
-        company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().saveUserStory(userStory);
 
         //Act
         AddUserStoryToSprintBacklogController addStory = new AddUserStoryToSprintBacklogController(company);
@@ -38,7 +38,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
         addStory.addUserStoryToSprintBacklog(1);
 
         //Assert
-        assertEquals(userStory, company.getProjectStore().getProjectByCode("Project_2022_1").getCurrentSprint().getSprintBacklog().getUserStoryList().get(0));
+        assertEquals(company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryList().get(0), company.getProjectStore().getProjectByCode("Project_2022_1").getCurrentSprint().getSprintBacklog().getUserStoryList().get(0));
     }
 }
 

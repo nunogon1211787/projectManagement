@@ -1,10 +1,11 @@
 package switch2021.project.stores;
 
+import lombok.Getter;
 import switch2021.project.model.UserStoryStatus;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+@Getter
 public class UserStoryStatusStore {
 
     /**
@@ -20,6 +21,10 @@ public class UserStoryStatusStore {
     public UserStoryStatusStore() {
         this.userStoryStatusList = new ArrayList<>();
     }
+
+    /**
+     * Populate default for status
+     **/
 
     public void populateDefault() {
         this.userStoryStatusList.add(new UserStoryStatus("To do"));
@@ -37,14 +42,10 @@ public class UserStoryStatusStore {
      * Methods
      **/
 
-    public List<UserStoryStatus> getUserStoryStatusList() {
-        return Collections.unmodifiableList(userStoryStatusList);
-    }
-
     public UserStoryStatus getUserStoryStatusByDescription(String description){
         UserStoryStatus userStoryStatus = null;
         for(UserStoryStatus uss : this.userStoryStatusList){
-            if(uss.getDescription().equals(description)){
+            if(uss.getDescription().getText().equals(description)){
                 userStoryStatus = uss;
             }
         }

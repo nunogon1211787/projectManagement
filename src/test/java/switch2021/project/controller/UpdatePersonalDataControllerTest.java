@@ -16,7 +16,7 @@ public class UpdatePersonalDataControllerTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser joana = new SystemUser("Joana", "123@isep.pt",
-                "Aluna", "AAA","AAA","img_123",
+                "Aluna", "Qwerty_1","Qwerty_1","img_123",
                 userProfile);
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
         company.getSystemUserStore().saveSystemUser(joana);
@@ -32,8 +32,8 @@ public class UpdatePersonalDataControllerTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
-        SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "AAA",
-                "AAA","img_123", userProfile);
+        SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "Qwerty_1",
+                "Qwerty_1","img_123", userProfile);
         company.getSystemUserStore().saveSystemUser(user1);
         //Act
         controllerTest.getUser("123@isep.ipp.pt");
@@ -47,8 +47,8 @@ public class UpdatePersonalDataControllerTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
-        SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "AAA",
-                "AAA","img_12", userProfile);
+        SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "Qwerty_1",
+                "Qwerty_1","img_12", userProfile);
         company.getSystemUserStore().saveSystemUser(user1);
         //Act
         controllerTest.getUser("123@isep.ipp.pt");
@@ -62,8 +62,8 @@ public class UpdatePersonalDataControllerTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
-        SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "AAA",
-                "AAA","img_12", userProfile);
+        SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "Qwerty_1",
+                "Qwerty_1","img_12", userProfile);
         company.getSystemUserStore().saveSystemUser(user1);
         //Act
         controllerTest.getUser("123@isep.ipp.pt");
@@ -77,8 +77,8 @@ public class UpdatePersonalDataControllerTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
-        SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "AAA",
-                "AAA","img_12", userProfile);
+        SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "Qwerty_1",
+                "Qwerty_1","img_12", userProfile);
         company.getSystemUserStore().saveSystemUser(user1);
         //Act
         controllerTest.getUser("123@isep.ipp.pt");

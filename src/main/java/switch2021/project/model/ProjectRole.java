@@ -1,19 +1,15 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import lombok.Setter;
-import switch2021.project.Immutables.Description;
+import switch2021.project.immutable.Description;
 
 import java.util.Objects;
 
 @Getter
-@Setter
 public class ProjectRole {
 
-
-    /*** Class ProjectRoles Attributes **/
-    private int idRole;
-    private Description name;
+    /*** Class ProjectRole Attributes **/
+    private final Description name;
 
     /*** Constructor **/
     public ProjectRole(String name) {

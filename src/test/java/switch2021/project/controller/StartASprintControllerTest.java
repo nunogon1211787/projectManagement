@@ -22,7 +22,7 @@ public class StartASprintControllerTest {
 
         StartASprintController startASprintController = new StartASprintController(company);
 
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -34,7 +34,7 @@ public class StartASprintControllerTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
@@ -42,7 +42,7 @@ public class StartASprintControllerTest {
         proj1.getProjectTeam().saveResource(joana1R);
 
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
@@ -50,7 +50,7 @@ public class StartASprintControllerTest {
         proj1.getProjectTeam().saveResource(joana2R);
 
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
@@ -58,7 +58,7 @@ public class StartASprintControllerTest {
         proj1.getProjectTeam().saveResource(joana3R);
 
         //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -66,13 +66,13 @@ public class StartASprintControllerTest {
         proj1.getProjectTeam().saveResource(joana4R);
 
         //Create a Sprint
-        proj1.getSprints().saveSprint(proj1.getSprints().createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
+        proj1.getSprintList().saveSprint(proj1.getSprintList().createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
                 proj1.getSprintDuration()));
 
         //Act
 
         StartASprintDTO sprintDTO = new StartASprintDTO(proj1.getCode(),
-                proj1.getSprints().getSprintList().get(0).getIdSprint(),
+                proj1.getSprintList().getSprints().get(0).getIdSprint(),
                 LocalDate.of(2022, 1, 16));
 
         //Assert
@@ -89,7 +89,7 @@ public class StartASprintControllerTest {
 
         StartASprintController startASprintController = new StartASprintController(company);
 
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -101,7 +101,7 @@ public class StartASprintControllerTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
@@ -109,7 +109,7 @@ public class StartASprintControllerTest {
         proj1.getProjectTeam().saveResource(joana1R);
 
         //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
@@ -117,7 +117,7 @@ public class StartASprintControllerTest {
         proj1.getProjectTeam().saveResource(joana2R);
 
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
@@ -125,7 +125,7 @@ public class StartASprintControllerTest {
         proj1.getProjectTeam().saveResource(joana3R);
 
         //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -133,13 +133,13 @@ public class StartASprintControllerTest {
         proj1.getProjectTeam().saveResource(joana4R);
 
         //Create a Sprint
-        proj1.getSprints().saveSprint(proj1.getSprints().createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
+        proj1.getSprintList().saveSprint(proj1.getSprintList().createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
                 proj1.getSprintDuration()));
 
         //Act
 
         StartASprintDTO sprintDTO = new StartASprintDTO(proj1.getCode(),
-                proj1.getSprints().getSprintList().get(0).getIdSprint(),
+                proj1.getSprintList().getSprints().get(0).getIdSprint(),
                 LocalDate.of(2023, 1, 1));
 
         //Assert

@@ -2,7 +2,9 @@ package switch2021.project.stores;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.factory.BusinessSectorFactoryInterface;
 import switch2021.project.model.BusinessSector;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,49 +19,53 @@ public class BusinessSectorStore {
      **/
 
     private final List<BusinessSector> businessSectorList;
+    private BusinessSectorFactoryInterface businessSectorFI;
+
 
     /**
      * Business Sector Constructor
      **/
 
-    public BusinessSectorStore() {
+    public BusinessSectorStore(BusinessSectorFactoryInterface businessSectorFI) {
         this.businessSectorList = new ArrayList<>();
+        this.businessSectorFI = businessSectorFI;
     }
 
     /**
      * Add Business Sector Method (Creates a new Business Sector object of the customer)
+     * Adds a new Project Status object to the Project Status List)
      **/
 
-    public BusinessSector createBusinessSector(String description) {
-        return new BusinessSector(description);
-    }
+    public boolean createAndAddBusinessSector(String description) {
 
-    /**
-     * Add Project Status Method (Adds a new Project Status object to the Project Status List)
-     **/
-
-    public boolean addBusinessSector(BusinessSector sector) {
-        this.businessSectorList.add(sector);
-        return true;
-    }
-
-    /**
-     * Getter Methods
-     **/
-
-    public List<BusinessSector> getBusinessSectorList() {
-        return new ArrayList<>(businessSectorList);
-    }
-
-    public BusinessSector getBusinessSectorByDescription(String description) {
-        BusinessSector sector = null;
-        for (BusinessSector i : this.businessSectorList)
-            if (i.getDescription().equals(description)) {
-                sector = i;
-                break;
+        if (getBusinessSectorByDescription(description) != null) {
+            return false;
+        }
+        else {
+                this.businessSectorList.add(businessSectorFI.createBusinessSector(description));
             }
+            return true;
+        }
 
-        return sector;
+
+        /**
+         * Getter Methods
+         **/
+
+        public List<BusinessSector> getBusinessSectorList () {
+
+            return new ArrayList<>(businessSectorList);
+        }
+
+        public BusinessSector getBusinessSectorByDescription (String description){
+            BusinessSector sector = null;
+            for (BusinessSector i : this.businessSectorList)  //percorrer o business sector list e encontrar um setor
+                if (i.getDescription().getText().equals(description)) {
+                    sector = i;
+                    break;
+                }
+
+            return sector;
+        }
+
     }
-
-}

@@ -1,9 +1,11 @@
 package switch2021.project.model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class SprintBacklogTest {
 
@@ -56,18 +58,33 @@ class SprintBacklogTest {
     }
 
     @Test
-    @DisplayName("save user story to sprint backlog null")
-    public void getUserStory2() {
-        // Arrange
-        int priority = 5;
-        String description = "Validate";
-        UserStory userstory = new UserStory("US001", priority, description, 5);
-        sprintBacklog.saveUserStoryToSprintBacklog(userstory);
-        UserStory userstory2 = new UserStory("US003", priority, description, 5);
-        // Act
+    public void getUserStoryMock() {
+        //Arrange
+        SprintBacklog sprintBacklog = new SprintBacklog();
 
-        assertNotEquals(sprintBacklog.getUserStory(userstory.getIdUserStory()), userstory2);
+        UserStory newUserStory = mock(UserStory.class);
+        when(newUserStory.hasCode(1)).thenReturn(true);
+
+        sprintBacklog.saveUserStoryToSprintBacklog(newUserStory);
+        //Act
+        UserStory test = sprintBacklog.getUserStory(1);
+        //Assert
+        assertEquals(newUserStory, test);
     }
+
+        @Test
+        @DisplayName("save user story to sprint backlog null")
+        public void getUserStory2 () {
+            // Arrange
+            int priority = 5;
+            String description = "Validate";
+            UserStory userstory = new UserStory("US001", priority, description, 5);
+            sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+            UserStory userstory2 = new UserStory("US003", priority, description, 5);
+            // Act
+
+            assertNotEquals(sprintBacklog.getUserStory(userstory.getIdUserStory()), userstory2);
+        }
 
     @Test
     @DisplayName("save user story to sprint backlog null")
@@ -94,5 +111,18 @@ class SprintBacklogTest {
         assertEquals(sprintBacklog,sprintBacklog1);
         assertNotEquals(sprintBacklog, sprintBacklog2);
         assertNotEquals(sprintBacklog, test);
+    }
+
+    @Test
+    @DisplayName("save user story to sprint backlog with success")
+    public void saveUserStorySuccess() {
+        // Arrange
+        int priority = 5;
+        String description = "Validate";
+        UserStory userstory = new UserStory("US001", priority, description, 5);
+        boolean test = sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+        // Act
+        assertTrue(test);
+
     }
 }

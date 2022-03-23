@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
-import switch2021.project.stores.SprintList;
+
 import java.time.LocalDate;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +22,7 @@ public class CreateSprintControllerTest {
         CreateSprintController controller = new CreateSprintController(company);
 
         ProjectStore projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -31,7 +31,7 @@ public class CreateSprintControllerTest {
         projectStore.saveNewProject(currentProject);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource joana = new Resource(user2, startDateMm, endDateMm, 100, 1);
@@ -52,7 +52,7 @@ public class CreateSprintControllerTest {
         Company company = new Company();
         CreateSprintController controller = new CreateSprintController(company);
         this.projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -66,7 +66,7 @@ public class CreateSprintControllerTest {
         projectStore.saveNewProject(proj1);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource joana = new Resource(user2, startDateMm, endDateMm, 100, 1);
@@ -88,7 +88,7 @@ public class CreateSprintControllerTest {
         Company company = new Company();
         CreateSprintController controller = new CreateSprintController(company);
         this.projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -103,7 +103,7 @@ public class CreateSprintControllerTest {
         projectStore.saveNewProject(proj1);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource joana = new Resource(user2, startDateMm, endDateMm, 100, 1);
@@ -113,10 +113,10 @@ public class CreateSprintControllerTest {
         controller.getCurrentProjectListByUserEmail("joana@beaver.com");
         controller.getProject(proj1.getCode());
         Sprint sprintC = controller.createSprint("Sprint44", LocalDate.of(2022, 3, 1));
-        proj1.getSprints().saveSprint(sprintC);
+        proj1.getSprintList().saveSprint(sprintC);
 
         //Assert
-        assertEquals(sprintC, proj1.getSprints().getSprint(sprintC.getIdSprint()));
+        assertEquals(sprintC, proj1.getSprintList().getSprint(sprintC.getIdSprint()));
     }
 
     @Test
@@ -127,7 +127,7 @@ public class CreateSprintControllerTest {
         Company company = new Company();
         CreateSprintController controller = new CreateSprintController(company);
         this.projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -142,7 +142,7 @@ public class CreateSprintControllerTest {
         projectStore.saveNewProject(proj1);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource joana = new Resource(user2, startDateMm, endDateMm, 100, 1);

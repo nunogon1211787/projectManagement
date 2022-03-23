@@ -1,8 +1,8 @@
 package switch2021.project.dto;
 
 import lombok.Getter;
-
-import java.time.LocalDate;
+import switch2021.project.immutable.Date;
+import switch2021.project.immutable.HoursMinutes;
 
 @Getter
 
@@ -12,9 +12,8 @@ public class TaskEffortDTO {
      * Attributes
      **/
 
-    private int effortHours;
-    private int effortMinutes;
-    private LocalDate effortDate;
+    private HoursMinutes effort;
+    private Date effortDate;
     private String comment;
     private String attachment;
 
@@ -22,9 +21,8 @@ public class TaskEffortDTO {
      * Constructor to test (without SINGLETON)
      **/
 
-    public TaskEffortDTO(int effortHours, int effortMinutes, LocalDate effortDate, String comment, String attachment) {
-        this.effortHours = effortHours;
-        this.effortMinutes = effortMinutes;
+    public TaskEffortDTO(int effortHours, int effortMinutes, Date effortDate, String comment, String attachment) {
+        this.effort = new HoursMinutes(effortHours, effortMinutes);
         this.effortDate = effortDate;
         this.comment = comment;
         this.attachment = attachment;

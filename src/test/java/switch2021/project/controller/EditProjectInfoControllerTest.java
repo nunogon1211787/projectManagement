@@ -2,6 +2,7 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.factory.ResourceFactory;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 class EditProjectInfoControllerTest {
 
@@ -29,7 +31,7 @@ class EditProjectInfoControllerTest {
         EditProjectInfoController edit = new EditProjectInfoController(company);
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
         LocalDate startDate3 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypology("Fixed Cost");
+        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
@@ -46,7 +48,7 @@ class EditProjectInfoControllerTest {
         List<Project> actual = projectStore.getProjects();
 
         //Assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -55,7 +57,7 @@ class EditProjectInfoControllerTest {
         company = new Company();
         this.projectStore = company.getProjectStore();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypology("Fixed Cost");
+        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
@@ -79,12 +81,13 @@ class EditProjectInfoControllerTest {
         company = new Company();
         this.projectStore = company.getProjectStore();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypology("Fixed Cost");
+        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
@@ -92,20 +95,20 @@ class EditProjectInfoControllerTest {
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
         //Act
-        edit.editProject("proto", "test44", LocalDate.of(2022,12,1),
-                LocalDate.of(2023,12,1), 10,10000,
+        edit.editProject("proto", "test44", LocalDate.of(2022, 12, 1),
+                LocalDate.of(2023, 12, 1), 10, 10000,
                 3, projectStatus, projectTeam2);
 
 
         //Assert
-        assertEquals( "proto", project.getProjectName());
-        assertEquals( "test44", project.getDescription());
-        assertEquals(project.getStartDate(),LocalDate.of(2022,12,1));
-        assertEquals(project.getEndDate(),LocalDate.of(2023,12,1));
-        assertEquals( 10, project.getNumberOfSprints());
+        assertEquals("proto", project.getProjectName());
+        assertEquals("test44", project.getDescription().getText());
+        assertEquals(project.getStartDate(), LocalDate.of(2022, 12, 1));
+        assertEquals(project.getEndDate(), LocalDate.of(2023, 12, 1));
+        assertEquals(10, project.getNumberOfSprints());
         assertEquals(10000, project.getBudget());
-        assertEquals( 3, project.getSprintDuration());
-        assertEquals(project.getProjectStatus(),projectStatus);
+        assertEquals(3, project.getSprintDuration());
+        assertEquals(project.getProjectStatus(), projectStatus);
         assertEquals(project.getProjectTeam(), projectTeam2);
     }
 
@@ -116,7 +119,7 @@ class EditProjectInfoControllerTest {
         company = new Company();
         this.projectStore = company.getProjectStore();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypology("Fixed Cost");
+        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
@@ -125,29 +128,30 @@ class EditProjectInfoControllerTest {
 
         //Resource 1
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelbras = new Resource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
         //Resource 2
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelmartins = new Resource(user2, LocalDate.now().minusDays(6), LocalDate.now().plusDays(7), 100, 1);
         //Resource 3
-        SystemUser user3 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user3 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manueljose = new Resource(user3, LocalDate.of(2021, 11, 1), LocalDate.of(2021, 11, 15), 100, .5);
         //Resource 4
-        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manueloliveira = new Resource(user4, LocalDate.now().minusWeeks(1), LocalDate.now().plusWeeks(3), 100, .3333);
         //Resource 5
-        SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelfernandes = new Resource(user5, LocalDate.of(2021, 11, 16), LocalDate.of(2021, 11, 30), 100, 1);
         //Resource 6
-        SystemUser user6 = new SystemUser("manuelgoncalves", "manuelgoncalves@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user6 = new SystemUser("manuelgoncalves", "manuelgoncalves@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelgoncalves = new Resource(user6, LocalDate.of(2021, 11, 16), LocalDate.of(2021, 11, 30), 100, 1);
         //Add resources
         project.getProjectTeam().saveResource(manuelbras);
         project.getProjectTeam().saveResource(manueljose);
         project.getProjectTeam().saveResource(manueloliveira);
+        ResourceFactory resFac = mock(ResourceFactory.class);
 
-        ProjectTeam newProjectTeam = new ProjectTeam();
+        ProjectTeam newProjectTeam = new ProjectTeam(resFac);
         newProjectTeam.saveResource(manuelfernandes);
         newProjectTeam.saveResource(manuelgoncalves);
         newProjectTeam.saveResource(manuelmartins);
@@ -157,14 +161,14 @@ class EditProjectInfoControllerTest {
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
         //Act
-        edit.editProject("proto", "test44", LocalDate.of(2020,12,1),
-                LocalDate.of(2023,12,1), 10,10000,
+        edit.editProject("proto", "test44", LocalDate.of(2020, 12, 1),
+                LocalDate.of(2023, 12, 1), 10, 10000,
                 3, projectStatus, newProjectTeam);
 
 
         //Assert
         ProjectTeam x = project.getProjectTeam();
-        assertEquals( newProjectTeam, x);
+        assertEquals(newProjectTeam, x);
     }
 
     @Test
@@ -173,19 +177,20 @@ class EditProjectInfoControllerTest {
         company = new Company();
         this.projectStore = company.getProjectStore();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypology("Fixed Cost");
+        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
-        String name="1s";
+        String name = "1s";
         // Act
 
         boolean isEdited = edit.editProject(name, "test44", LocalDate.of(2022, 12, 1),
@@ -201,19 +206,20 @@ class EditProjectInfoControllerTest {
         company = new Company();
         this.projectStore = company.getProjectStore();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypology("Fixed Cost");
+        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
-        String name="";
+        String name = "";
         // Act
 
         boolean isEdited = edit.editProject(name, "test44", LocalDate.of(2022, 12, 1),
@@ -229,47 +235,20 @@ class EditProjectInfoControllerTest {
         company = new Company();
         this.projectStore = company.getProjectStore();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypology("Fixed Cost");
+        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
-        String description="";
-        // Act
-
-        boolean isEdited = edit.editProject("proto", description, LocalDate.of(2022, 12, 1),
-                LocalDate.of(2023, 12, 1), 10, 10000,
-                3, projectStatus, projectTeam2);
-        //Assert
-        assertFalse(isEdited);
-    }
-
-    @Test
-    public void validateProjectFieldsProjectDescriptionLessThen5() {
-        //Arrange
-        company = new Company();
-        this.projectStore = company.getProjectStore();
-        LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypology("Fixed Cost");
-        customer = company.getCustomerStore().getCustomerByName("ISEP");
-        sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-        project = company.getProjectStore().createProject("prototype2", "test56", customer,
-                typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
-        ProjectStatus projectStatus = new ProjectStatus("Quase");
-
-        this.projectStore.saveNewProject(project);
-
-        EditProjectInfoController edit = new EditProjectInfoController(company);
-        edit.getProjectRequested(project.getCode());
-        String description="23r";
+        String description = "";
         // Act
 
         boolean isEdited = edit.editProject("proto", description, LocalDate.of(2022, 12, 1),
@@ -285,19 +264,20 @@ class EditProjectInfoControllerTest {
         company = new Company();
         this.projectStore = company.getProjectStore();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypology("Fixed Cost");
+        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
-        int numberOfSprints=0;
+        int numberOfSprints = 0;
         // Act
 
         boolean isEdited = edit.editProject("proto", "test44", LocalDate.of(2022, 12, 1),
@@ -313,19 +293,20 @@ class EditProjectInfoControllerTest {
         company = new Company();
         this.projectStore = company.getProjectStore();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypology("Fixed Cost");
+        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
-        int numberOfSprints=-5;
+        int numberOfSprints = -5;
         // Act
 
         boolean isEdited = edit.editProject("proto", "test44", LocalDate.of(2022, 12, 1),
@@ -341,19 +322,20 @@ class EditProjectInfoControllerTest {
         company = new Company();
         this.projectStore = company.getProjectStore();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypology("Fixed Cost");
+        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
-        int budget=0;
+        int budget = 0;
         // Act
 
         boolean isEdited = edit.editProject("proto", "test44", LocalDate.of(2022, 12, 1),
@@ -369,19 +351,20 @@ class EditProjectInfoControllerTest {
         company = new Company();
         this.projectStore = company.getProjectStore();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypology("Fixed Cost");
+        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectTeam projectTeam2 = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatus projectStatus = new ProjectStatus("Quase");
 
         this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
-        int budget=-50000;
+        int budget = -50000;
         // Act
 
         boolean isEdited = edit.editProject("proto", "test44", LocalDate.of(2022, 12, 1),
@@ -390,21 +373,6 @@ class EditProjectInfoControllerTest {
         //Assert
         assertFalse(isEdited);
     }
-
-
-
-//    @Test
-//    void getProjectRequested() {
-//    }
-//
-//    @Test
-//    void editProject() {
-//    }
-//
-//    @Test
-//    void saveProject() {
-//    }
-
 
 
 }

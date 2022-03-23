@@ -1,11 +1,10 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.model.TaskStatus;
+import switch2021.project.factoryInterface.TaskStatusFactoryInterface;
+import switch2021.project.immutable.TaskStatus;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
 
 @Getter
 public class TaskStatusStore {
@@ -13,57 +12,55 @@ public class TaskStatusStore {
     /**
      * Attributes
      */
-//    private final List<String> taskList; // Review this atributte. The class need to have a list of Objects that are responsible.
-    private List<TaskStatus> taskStatusList;
+    private final List<TaskStatus> taskStatusList;
+    private TaskStatusFactoryInterface taskStatusFactoryInterface;
 
 
     /**
      * Constructor
      */
-    public TaskStatusStore() {
-//        this.taskList = new ArrayList<>(); //Review
+    public TaskStatusStore(TaskStatusFactoryInterface tsf) {
         this.taskStatusList = new ArrayList<>();
+        this.taskStatusFactoryInterface = tsf;
     }
+
 
     /**
-     * Methods to create an object that this class are responsible
+     * Methods to create and add an object that this class are responsible
      */
-    public boolean createTaskStatus(String status) {
-        TaskStatus newStatus = new TaskStatus(status);
+    public boolean createAndAddTaskStatus(String status) {
 
-        return saveTaskStatus(newStatus);
+        if(getTaskStatusByDescription(status) != null) {
+            return false;
+        } else {
+            this.taskStatusList.add(taskStatusFactoryInterface.createTaskStatus(status));
+            return true;
+        }
     }
 
+
+    /**
+     * Methods to populate the Store
+     */
     public void populateDefault() {
-//        this.taskList.add("Planned"); //Review
-//        this.taskList.add("Running"); //Review
-//        this.taskList.add("Finished"); //Review
-//        this.taskList.add("Blocked"); //Review
-
-        saveTaskStatus(new TaskStatus("Planned"));
-        saveTaskStatus(new TaskStatus("Running"));
-        saveTaskStatus(new TaskStatus("Finished"));
-        saveTaskStatus(new TaskStatus("Blocked"));
+        if(this.taskStatusList.size() != 0) {
+            throw new IllegalArgumentException ("Task Status Store is not empty!");
+        }
+        createAndAddTaskStatus("Planned");
+        createAndAddTaskStatus("Running");
+        createAndAddTaskStatus("Finished");
+        createAndAddTaskStatus("Blocked");
     }
+
 
     /**
      * Methods to iterate with the list
      */
-//    public String getTaskStatusDescription(String description) {
-//        String result = "Status not found";
-//        for(String i : taskList) {
-//            if(i.toLowerCase(Locale.ROOT).equals(description.trim().toLowerCase(Locale.ROOT))) {
-//                result = i;
-//            }
-//        }
-//        return result;
-//    }
-
-    public TaskStatus getTaskStatusByDescription(String descript){
+    public TaskStatus getTaskStatusByDescription(String description){
         TaskStatus result = null;
 
         for (TaskStatus status : this.taskStatusList) {
-            if (status.hasDescription(descript)) {
+            if (status.hasDescription(description)) {
                 result = status;
             }
         }
@@ -74,82 +71,19 @@ public class TaskStatusStore {
         TaskStatus status = null;
 
         for (TaskStatus taskStatus : this.taskStatusList) {
-            if (taskStatus.getDescription().equalsIgnoreCase("Planned")) {
+            if (taskStatus.hasDescription("Planned")) {
                 status = taskStatus;
             }
         }
         return status;
     }
 
-    public List<String> getTaskStatusNames(){
-        List<String> taskStatusNames = new ArrayList<>();
+    public List<String> getTaskStatusDescriptions(){
+        List<String> taskStatusDescriptions = new ArrayList<>();
 
         for (TaskStatus taskStatus : this.taskStatusList) {
-            taskStatusNames.add(taskStatus.getDescription());
+            taskStatusDescriptions.add(taskStatus.getDescription().getText());
         }
-        return taskStatusNames;
+        return taskStatusDescriptions;
     }
-
-    /**
-     * Method to save and validate task status in the list
-     */
-    public boolean saveTaskStatus(TaskStatus status) {
-        boolean result = false;
-
-        if(status != null) {
-            result = true;
-            if(this.taskStatusList.size() != 0) {
-                for (int i = 0; i < this.taskStatusList.size(); i++) {
-                    if (validateNewStatusDescription(status)) {
-                        status.setIDTaskStatus(idTaskStatusGenerator());
-                        this.taskStatusList.add(status);
-                    }
-                }
-            } else {
-                status.setIDTaskStatus(idTaskStatusGenerator());
-                this.taskStatusList.add(status);
-            }
-        }
-        return result;
-    }
-
-    private boolean validateNewStatusDescription(TaskStatus status) {
-        boolean result = true;
-
-        for (TaskStatus taskStatus : this.taskStatusList) {
-            if (taskStatus.getDescription().equals(status.getDescription())) {
-                result = false;
-                break;
-            }
-        }
-        return result;
-    }
-
-    /**
-     * ID Generator
-     **/
-    public int idTaskStatusGenerator() {
-        int id = 1;
-        if (this.taskStatusList.size() > 0) {
-            id = this.taskStatusList.get(taskStatusList.size() - 1).getIdTaskStatus() + 1;
-        }
-        return id;
-    }
-
-//    /**
-//     * Override
-//     **/
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof TaskStatusStore)) return false;
-//        TaskStatusStore that = (TaskStatusStore) o;
-//        return Objects.equals(this.taskList, that.taskList);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(taskList);
-//    }
 }

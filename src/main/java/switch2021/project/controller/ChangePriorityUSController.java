@@ -32,8 +32,7 @@ public class ChangePriorityUSController {
      * Methods
      **/
     public ProjectStore getProjectStore (){
-        ProjectStore projectStore = company.getProjectStore();
-        return projectStore;
+        return company.getProjectStore();
     }
 
     public Project getProject (String code){

@@ -1,6 +1,7 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.immutable.Date;
 import switch2021.project.dto.TaskEffortDTO;
 import switch2021.project.dto.TaskIdNameDTO;
 import switch2021.project.dto.UserStorySprintProjectDTO;
@@ -23,7 +24,7 @@ public class RegisterWorkToTaskControllerTest {
         RegisterWorkToTaskController controller = new RegisterWorkToTaskController(company, mapper);
         ProjectStore projectStore = company.getProjectStore();
         //Project
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -33,27 +34,27 @@ public class RegisterWorkToTaskControllerTest {
         String projectCode1 = project1.getCode(); //"Project_2022_1"
         //Resource
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = company.getSystemUserStore().createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = company.getSystemUserStore().createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMm = LocalDate.of(2022, 1, 1);
         LocalDate endDateMm = LocalDate.of(2022, 1, 31);
         Resource resource1 = project1.getProjectTeam().createResource(user2, startDateMm, endDateMm, 100, 1);
         project1.getProjectTeam().saveResource(resource1);
         //Sprint
-        Sprint sprint1 = project1.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
-        project1.getSprints().saveSprint(sprint1);
+        Sprint sprint1 = project1.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
+        project1.getSprintList().saveSprint(sprint1);
         int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
-        UserStory userStory1 = project1.getProductBacklog().createUserStory("US001", 1, "description", 5);
-        project1.getProductBacklog().saveUserStory(userStory1);
-        int id_UserStory1 = userStory1.getIdUserStory(); //1
-        sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(userStory1);
+        project1.getProductBacklog().createAndSaveUserStory("US001", 1, "description", 5);
+        int id_UserStory1 = project1.getProductBacklog().getUserStoryList().get(0).getIdUserStory(); //1
+
+        sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-        Task task1 = userStory1.getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
-        Task task2 = userStory1.getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
-        userStory1.getTasks().saveTask(task1);
-        userStory1.getTasks().saveTask(task2);
+        Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
+        Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
+        project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task1);
+        project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task2);
         //userStorySprintProjectDTO
         UserStorySprintProjectDTO userStorySprintProjectDTO = new UserStorySprintProjectDTO(projectCode1, id_Sprint1, id_UserStory1);
         //Act
@@ -74,7 +75,7 @@ public class RegisterWorkToTaskControllerTest {
         RegisterWorkToTaskController controller = new RegisterWorkToTaskController(company, mapper);
         ProjectStore projectStore = company.getProjectStore();
         //Project
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -84,28 +85,27 @@ public class RegisterWorkToTaskControllerTest {
         String projectCode1 = project1.getCode(); //"Project_2022_1"
         //Resource
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = company.getSystemUserStore().createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = company.getSystemUserStore().createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMm = LocalDate.of(2022, 1, 1);
         LocalDate endDateMm = LocalDate.of(2022, 1, 31);
         Resource resource1 = project1.getProjectTeam().createResource(user2, startDateMm, endDateMm, 100, 1);
         project1.getProjectTeam().saveResource(resource1);
         //Sprint
-        Sprint sprint1 = project1.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
-        project1.getSprints().saveSprint(sprint1);
+        Sprint sprint1 = project1.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
+        project1.getSprintList().saveSprint(sprint1);
         int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
-        UserStory userStory1 = project1.getProductBacklog().createUserStory("US001", 1, "description", 5);
-        project1.getProductBacklog().saveUserStory(userStory1);
-        int id_UserStory1 = userStory1.getIdUserStory(); //1
-        sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(userStory1);
+        project1.getProductBacklog().createAndSaveUserStory("US001", 1, "description", 5);
+        int id_UserStory1 = project1.getProductBacklog().getUserStoryList().get(0).getIdUserStory(); //1
+        sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-        Task task1 = userStory1.getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
-        Task task2 = userStory1.getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
-        userStory1.getTasks().saveTask(task1);
+        Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
+        Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
+        project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task1);
         int id_task1 = task1.getIdTask(); //1
-        userStory1.getTasks().saveTask(task2);
+        project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task2);
         int id_task2 = task2.getIdTask(); //2
         //userStorySprintProjectDTO
         UserStorySprintProjectDTO userStorySprintProjectDTO = new UserStorySprintProjectDTO(projectCode1, id_Sprint1, id_UserStory1);
@@ -128,7 +128,7 @@ public class RegisterWorkToTaskControllerTest {
         RegisterWorkToTaskController controller = new RegisterWorkToTaskController(company, mapper);
         ProjectStore projectStore = company.getProjectStore();
         //Project
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
@@ -138,28 +138,28 @@ public class RegisterWorkToTaskControllerTest {
         String projectCode1 = project1.getCode(); //"Project_2022_1"
         //Resource
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = company.getSystemUserStore().createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = company.getSystemUserStore().createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMm = LocalDate.of(2022, 1, 1);
         LocalDate endDateMm = LocalDate.of(2022, 1, 31);
         Resource resource1 = project1.getProjectTeam().createResource(user2, startDateMm, endDateMm, 100, 1);
         project1.getProjectTeam().saveResource(resource1);
         //Sprint
-        Sprint sprint1 = project1.getSprints().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
-        project1.getSprints().saveSprint(sprint1);
+        Sprint sprint1 = project1.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
+        project1.getSprintList().saveSprint(sprint1);
         int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
-        UserStory userStory1 = project1.getProductBacklog().createUserStory("US001", 1, "description", 5);
-        project1.getProductBacklog().saveUserStory(userStory1);
-        int id_UserStory1 = userStory1.getIdUserStory(); //1
-        sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(userStory1);
+        project1.getProductBacklog().createAndSaveUserStory("US001", 1, "description", 5);
+
+        int id_UserStory1 = project1.getProductBacklog().getUserStoryList().get(0).getIdUserStory(); //1
+        sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-        Task task1 = userStory1.getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
-        Task task2 = userStory1.getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
-        userStory1.getTasks().saveTask(task1);
+        Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
+        Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
+        project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task1);
         int id_task1 = task1.getIdTask(); //1
-        userStory1.getTasks().saveTask(task2);
+        project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task2);
         int id_task2 = task2.getIdTask(); //2
         //userStorySprintProjectDTO
         UserStorySprintProjectDTO userStorySprintProjectDTO = new UserStorySprintProjectDTO(projectCode1, id_Sprint1, id_UserStory1);
@@ -171,16 +171,23 @@ public class RegisterWorkToTaskControllerTest {
         assertEquals(0, task2.getHoursSpent());
         assertEquals(10, task2.getEffortRemaining());
         assertEquals(0, task2.getExecutionPercentage());
-        assertEquals(0, userStory1.getWorkDone());
+        assertEquals(0, project1.getProductBacklog().getUserStoryList().get(0).getWorkDone());
         //TaskEffortDTO
-        LocalDate effortDate = LocalDate.of(2022, 1, 10);
-        TaskEffortDTO taskEffortDTO = new TaskEffortDTO( 4, 30, effortDate, "test", ".pdf");
+        Date effortDate = new Date(LocalDate.of(2022, 1, 10));
+        TaskEffortDTO taskEffortDTO = new TaskEffortDTO(4, 30, effortDate, "test", ".pdf");
+        TaskEffortDTO taskEffortDTO2 = new TaskEffortDTO(4, 30, effortDate, "", "");
         //Assert
         assertTrue(controller.createTaskEffort(taskEffortDTO));
         assertEquals(10, task2.getEffortEstimate());
         assertEquals(4.5, task2.getHoursSpent());
         assertEquals(5.5, task2.getEffortRemaining());
         assertEquals(0.45, task2.getExecutionPercentage());
-        assertEquals(4.5, userStory1.getWorkDone());
+        assertEquals(4.5, project1.getProductBacklog().getUserStoryList().get(0).getWorkDone());
+        assertEquals("test", taskEffortDTO.getComment());
+        assertEquals(".pdf", taskEffortDTO.getAttachment());
+        assertEquals("", taskEffortDTO2.getComment());
+        assertEquals("", taskEffortDTO2.getAttachment());
+
+
     }
 }

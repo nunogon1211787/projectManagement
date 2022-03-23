@@ -14,20 +14,19 @@ public class GetScrumBoardControllerTest {
         //Arrange
         Company company = new Company();
 
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
 
-        Sprint sprint = project.getSprints().createSprint("Sprint 1", LocalDate.now(), 2);
-        project.getSprints().saveSprint(sprint);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.now(), 2);
+        project.getSprintList().saveSprint(sprint);
 
         company.getProjectStore().saveNewProject(project);
-        UserStory userStory = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createUserStory( "US001",
+        boolean userStory = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createAndSaveUserStory( "US001",
                 1, "Fazer coisas cool",5);
-        company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().saveUserStory(userStory);
-        company.getProjectStore().getProjectByCode("Project_2022_1").getSprints().getCurrentSprint().getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        company.getProjectStore().getProjectByCode("Project_2022_1").getSprintList().getCurrentSprint().getSprintBacklog().saveUserStoryToSprintBacklog(project.getProductBacklog().getUserStoryList().get(0));
 
         //Act
         ScrumBoardMapper mapper = new ScrumBoardMapper();
@@ -39,11 +38,11 @@ public class GetScrumBoardControllerTest {
 
 
         //Assert
-        assertEquals(controller.getScrumBoard().get(0).getUserStoryId(),mapper.toDTO(userStory).getUserStoryId());
-        assertEquals(controller.getScrumBoard().get(0).getUserStoryPriority(),mapper.toDTO(userStory).getUserStoryPriority());
-        assertEquals(controller.getScrumBoard().get(0).getUserStoryTimeEstimate(),mapper.toDTO(userStory).getUserStoryTimeEstimate());
-        assertEquals(controller.getScrumBoard().get(0).getUserStoryStatus(),mapper.toDTO(userStory).getUserStoryStatus());
-        assertEquals(controller.getScrumBoard().get(0).getUserStoryName(),mapper.toDTO(userStory).getUserStoryName());
-        assertEquals(controller.getScrumBoard().get(0).getUserStoryDescription(),mapper.toDTO(userStory).getUserStoryDescription());
+        assertEquals(controller.getScrumBoard().get(0).getUserStoryId(),mapper.toDTO(project.getProductBacklog().getUserStoryList().get(0)).getUserStoryId());
+        assertEquals(controller.getScrumBoard().get(0).getUserStoryPriority(),mapper.toDTO(project.getProductBacklog().getUserStoryList().get(0)).getUserStoryPriority());
+        assertEquals(controller.getScrumBoard().get(0).getUserStoryTimeEstimate(),mapper.toDTO(project.getProductBacklog().getUserStoryList().get(0)).getUserStoryTimeEstimate());
+        assertEquals(controller.getScrumBoard().get(0).getUserStoryStatus(),mapper.toDTO(project.getProductBacklog().getUserStoryList().get(0)).getUserStoryStatus());
+        assertEquals(controller.getScrumBoard().get(0).getUserStoryTitle(),mapper.toDTO(project.getProductBacklog().getUserStoryList().get(0)).getUserStoryTitle());
+        assertEquals(controller.getScrumBoard().get(0).getUserStoryDescription(),mapper.toDTO(project.getProductBacklog().getUserStoryList().get(0)).getUserStoryDescription());
     }
 }

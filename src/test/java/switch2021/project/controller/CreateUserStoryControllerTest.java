@@ -19,7 +19,7 @@ public class CreateUserStoryControllerTest {
     Company company = new Company();
     ProjectsMapper mapper = new ProjectsMapper();
     UserStoryMapper mapperUS = new UserStoryMapper();
-    Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+    Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
     Project project = company.getProjectStore().createProject("prototype", "test56", customer,
@@ -27,7 +27,7 @@ public class CreateUserStoryControllerTest {
     Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
             typo, sector, LocalDate.now(), 7, 5000);
     UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-    SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
+    SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
     LocalDate startDate = LocalDate.of(2021, 12, 31);
     LocalDate endDate = LocalDate.of(2022, 1, 5);
     Resource input = new Resource(newUser, startDate, endDate, 100, .5);
@@ -68,7 +68,7 @@ public class CreateUserStoryControllerTest {
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", status, priority, description)));
         Exception exception2 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", status, priority, description2)));
-        Exception exception3 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", status, priority, description3)));
+        Exception exception3 = assertThrows(NullPointerException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", status, priority, description3)));
         //Assert
         assertTrue(exception.getMessage().contains("Description field requires at least " + 1 + " characters"));
         assertTrue(exception2.getMessage().contains("Description field requires at least " + 1 + " characters"));
@@ -129,7 +129,6 @@ public class CreateUserStoryControllerTest {
     public void createUserStorySuccessFull() {
         //Arrange
         company.getProjectStore().saveNewProject(project);
-
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = 1;
         int priority2 = 5;
@@ -145,8 +144,8 @@ public class CreateUserStoryControllerTest {
         //Assert
         assertNotNull(userStoryDto);
         assertEquals(priority, userStoryDto.getPriority());
-        assertEquals(description, userStoryDto.getDescription().getDescriptionF());
-        assertEquals(name, userStoryDto.getName());
+        assertEquals(description, userStoryDto.getDescription().getText());
+        assertEquals(name, userStoryDto.getTitle());
 
     }
 
@@ -168,8 +167,8 @@ public class CreateUserStoryControllerTest {
         //Assert
         assertNotNull(userStoryDto);
         assertEquals(priority, userStoryDto.getPriority());
-        assertEquals(description, userStoryDto.getDescription().getDescriptionF());
-        assertEquals(name, userStoryDto.getName());
+        assertEquals(description, userStoryDto.getDescription().getText());
+        assertEquals(name, userStoryDto.getTitle());
 
     }
 
@@ -185,12 +184,11 @@ public class CreateUserStoryControllerTest {
 
         ProductBacklog project_2022_1 = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog();
         assertEquals(1, project_2022_1.getUserStoryList().size());
-        assertEquals(userStoryDto.getName(), project_2022_1.getUserStoryList().get(0).getName());
+        assertEquals(userStoryDto.getTitle(), project_2022_1.getUserStoryList().get(0).getTitle());
         assertEquals(userStoryDto.getPriority(), project_2022_1.getUserStoryList().get(0).getPriority());
         assertEquals(userStoryDto.getUserStoryStatus(), project_2022_1.getUserStoryList().get(0).getUserStoryStatus());
-        assertEquals(userStoryDto.getDescription().getDescriptionF(), project_2022_1.getUserStoryList().get(0).getDescription().getDescriptionF());
+        assertEquals(userStoryDto.getDescription().getText(), project_2022_1.getUserStoryList().get(0).getDescription().getText());
     }
-    //Arrange
 
 
     @Test
@@ -207,11 +205,11 @@ public class CreateUserStoryControllerTest {
         assertEquals(2, projectList.size());
         assertEquals(project.getCode(), projectList.get(0).getCode());
         assertEquals(project.getProjectName(), projectList.get(0).getProjectName());
-        assertEquals(project.getDescription(), projectList.get(0).getDescription());
+        assertEquals(project.getDescription().getText(), projectList.get(0).getDescription());
         assertEquals(project.getEndDate(), projectList.get(0).getEndDate());
         assertEquals(project2.getCode(), projectList.get(1).getCode());
         assertEquals(project2.getProjectName(), projectList.get(1).getProjectName());
-        assertEquals(project2.getDescription(), projectList.get(1).getDescription());
+        assertEquals(project2.getDescription().getText(), projectList.get(1).getDescription());
         assertEquals(project2.getEndDate(), projectList.get(1).getEndDate());
     }
 
@@ -245,7 +243,7 @@ public class CreateUserStoryControllerTest {
             createUserStoryController.getProjectListByUserEmail("dani@ipp.pt");
         });
         // Assert
-        assertEquals("Email don't exist in system", exception.getMessage());
+        assertEquals("Email is not associated with any project", exception.getMessage());
     }
 }
 

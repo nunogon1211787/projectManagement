@@ -1,8 +1,6 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Description;
-import switch2021.project.stores.ProjectStatusStore;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -15,7 +13,7 @@ public class ProjectStatusTest {
         //Act
         ProjectStatus projStatus = new ProjectStatus("new Project Status");
         //Assert
-        assertEquals(descriptionExpected, projStatus.getDescription().getDescriptionF());
+        assertEquals(descriptionExpected, projStatus.getDescription().getText());
     }
 
     @Test
@@ -27,26 +25,12 @@ public class ProjectStatusTest {
     }
 
     @Test
-    public void createProjectStatusFailDescriptionLengthEquals3() {
+    public void createProjectStatusSuccessDescriptionLengthEquals1() {
         //Arrange
-        String descriptionExpected = "new";
+        String descriptionExpected = "n";
         //Act
-        ProjectStatus projStatus = new ProjectStatus("new");
+        ProjectStatus projStatus = new ProjectStatus("n");
         //Assert
-        assertEquals(descriptionExpected, projStatus.getDescription().getDescriptionF());
-    }
-
-    @Test
-    public void setProjectStatusDescription() {
-        //Arrange
-        Company company = new Company();
-        ProjectStatusStore projectStatusStore = company.getProjectStatusStore();
-        ProjectStatus projStatus = projectStatusStore.getProjectStatusByDescription("Planned");
-
-        Description newStatusDescription = projectStatusStore.getProjectStatusByDescription("Elaboration").getDescription();
-        //Act
-        projStatus.setDescription(newStatusDescription);
-        //Assert
-        assertEquals("Elaboration", projStatus.getDescription().getDescriptionF());
+        assertEquals(descriptionExpected, projStatus.getDescription().getText());
     }
 }

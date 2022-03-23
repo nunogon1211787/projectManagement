@@ -29,7 +29,7 @@ public class AssociateResourceTest {
         company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
         company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste@teste.com", 123456789));
 
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         proj = company.getProjectStore().createProject( "prototype", "test56", customer,
@@ -48,8 +48,8 @@ public class AssociateResourceTest {
     public void addResource() {
         //Arrange
         //User
-        SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456",
-                "123456", "img_123456", userProfile);
+        SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "Qwerty_1",
+                "Qwerty_1", "img_123456", userProfile);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
         Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, 100, .2);
@@ -63,7 +63,7 @@ public class AssociateResourceTest {
     @DisplayName("Get Team Member By Index Test")
     public void getTeamMemberByIndex() {
         //Arrange
-        SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "123456", "123456", "img_123456", userProfile);
+        SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "img_123456", userProfile);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
         Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
@@ -80,7 +80,7 @@ public class AssociateResourceTest {
     public void validateAllocationTrue() {
         //Arrange
         //User
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "img_xyz", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "Qwerty_1", "Qwerty_1", "img_xyz", userProfile);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
         Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .2);
@@ -103,7 +103,7 @@ public class AssociateResourceTest {
     public void validateAllocationFalse() {
         //Arrange
         //User
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "gth", "gth", "img_xyz", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "fase", "des", "Qwerty_1", "Qwerty_1", "img_xyz", userProfile);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
         Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .2);

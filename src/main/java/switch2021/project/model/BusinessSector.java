@@ -1,11 +1,10 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import lombok.Setter;
+import switch2021.project.immutable.Description;
 
 
 @Getter
-@Setter
 public class BusinessSector {
 
     /**
@@ -13,7 +12,7 @@ public class BusinessSector {
      * Business Sector atributes are composed of a description of the business sector
      **/
 
-    private String description;
+    private Description description; // agora é uma classe, não é uma string
 
     /**
      * Business Sector Constructor
@@ -21,7 +20,8 @@ public class BusinessSector {
      **/
 
     public BusinessSector(String description) {
-        this.description = description;
+
+        this.description = new Description(description);
     }
 
 }

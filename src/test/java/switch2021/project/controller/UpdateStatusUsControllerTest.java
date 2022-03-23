@@ -63,7 +63,7 @@ class UpdateStatusUsControllerTest {
         UpdateStatusUsController update = new UpdateStatusUsController(company);
         this.userStoryStatusStore.populateDefault();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypology("Fixed Cost");
+        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
@@ -71,8 +71,8 @@ class UpdateStatusUsControllerTest {
         company.getProjectStore().saveNewProject(project);
         userStory = new UserStory("US001", 2, "Fazer tal",5);
         userStory2 = new UserStory("US001", 3, "Fazer tal e coiso",5);
-        sprint = project.getSprints().createSprint("Sprintao", LocalDate.now(),12);
-        project.getSprints().saveSprint(sprint);
+        sprint = project.getSprintList().createSprint("Sprintao", LocalDate.now(),12);
+        project.getSprintList().saveSprint(sprint);
         project.getCurrentSprint().getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         project.getCurrentSprint().getSprintBacklog().saveUserStoryToSprintBacklog(userStory2);
 

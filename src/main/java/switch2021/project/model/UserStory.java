@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.Immutables.Description;
+import switch2021.project.immutable.Description;
 import switch2021.project.stores.TaskList;
 
 import java.util.Objects;
@@ -20,7 +20,7 @@ public class UserStory {
      **/
 
     private int idUserStory;
-    private String name;
+    private String title; //The title of a US follows AS <role> I WANT <objective> FOR <motivation> https://productcoalition.com/anatomy-of-a-great-user-story-f56fb1b63e38
     private UserStoryStatus userStoryStatus;
     private int priority;
     private Description description;
@@ -32,10 +32,10 @@ public class UserStory {
     /**
      * ---> Constructor <---
      **/
-    public UserStory(String name, int priority, String description, int timeEstimateInHours) {
-        isValidUserStory(name, priority);
+    public UserStory(String title, int priority, String description, int timeEstimateInHours) {
+        isValidUserStory(title, priority);
 
-        this.name = name;
+        this.title = title;
         this.description = new Description(description);
         this.userStoryStatus = new UserStoryStatus("To do");
         this.priority = priority;
@@ -44,9 +44,9 @@ public class UserStory {
     }
 
     public UserStory(UserStory userStoryToRefine, UserStoryStatus userStoryStatus, int priority, String description) {
-        this.name = userStoryToRefine.getName() + " _Refined";
+        this.title = userStoryToRefine.getTitle() + " _Refined";
 
-        isValidUserStory(name, priority);
+        isValidUserStory(title, priority);
 
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
@@ -54,26 +54,17 @@ public class UserStory {
         this.parentUserStory = userStoryToRefine;
     }
 
-    public UserStory(String name, UserStoryStatus userStoryStatus, int priority, String description) {
-        isValidUserStory(name, priority);
+    public UserStory(String title, UserStoryStatus userStoryStatus, int priority, String description) {
+        isValidUserStory(title, priority);
 
-        this.name = name;
+        this.title = title;
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
         this.description = new Description(description);
     }
 
-    public int getIdUserStory() {
-        return idUserStory;
-    }
-
-    public boolean hasCode(long idUserStory) {
-
-        return this.idUserStory == idUserStory;
-    }
-
     /**
-     * ---> Set Priority <---
+     * ---> Methods set <---
      */
 
     public boolean setPriority(int priority) {
@@ -88,41 +79,28 @@ public class UserStory {
         this.description = new Description(description);
     }
 
-    public void setUserStoryStatus(UserStoryStatus userStoryStatus) {
-        this.userStoryStatus = userStoryStatus;
-    }
-
     public boolean setUserStoryStatusBoolean(UserStoryStatus userStoryStatus) {
         this.userStoryStatus = userStoryStatus;
         return true;
     }
 
     /**
-     * ---> Set parentUserStory <---
-     */
-
-    public void setParentUserStory(UserStory parentUserStory) {
-        this.parentUserStory = parentUserStory;
-    }
-
-    /**
      * ---> Method to validate entered info by Product Owner <---
-     * (Cris US009)
+     *
      */
-    public void isValidUserStory(String name, int priority) {
+    public void isValidUserStory(String title, int priority) {
         //check if priority is invalid
         if (priority < 0 || priority > 5) {
             throw new IllegalArgumentException("Check priority, cannot be < 0 or superior to 5.");
         }
-        //check if Name is invalid
-        if (name == null || name.trim().isEmpty()) {
+        //check if title is invalid
+        if (title == null || title.trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be blank.");
         }
-        if (name.length() <= 2) {
+        if (title.length() <= 2) {
             throw new IllegalArgumentException("Name must be at least 3 characters");
         }
     }
-
 
     public boolean validatePriority(int x) {
         return x >= 0 && x <= 5;
@@ -134,6 +112,11 @@ public class UserStory {
         return true;
     }
 
+    public boolean hasCode(long idUserStory) {
+
+        return this.idUserStory == idUserStory;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -142,13 +125,13 @@ public class UserStory {
         return idUserStory == userStory.idUserStory
                 && priority == userStory.priority
                 && timeEstimate == userStory.timeEstimate
-                && Objects.equals(name, userStory.name)
+                && Objects.equals(title, userStory.title)
                 && Objects.equals(description, userStory.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idUserStory, name, userStoryStatus, priority, description, parentUserStory, timeEstimate, tasks);
+        return Objects.hash(idUserStory, title, userStoryStatus, priority, description, parentUserStory, timeEstimate, tasks);
     }
 }
 

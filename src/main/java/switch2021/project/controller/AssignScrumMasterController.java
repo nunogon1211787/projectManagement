@@ -42,7 +42,7 @@ public class AssignScrumMasterController {
      * Method to receive a resource of the project and send to UI
      */
     public ResourceDTO getResource(String email) {
-        this.resource = project.getProjectTeam().getResource(email);
+        this.resource = project.getProjectTeam().getResourceByEmail(email);
         return this.projectTeamMapper.toDto(resource);
     }
 
@@ -53,10 +53,10 @@ public class AssignScrumMasterController {
     public boolean assignRole(String name, String roleName) {
         boolean msg = false;
 
-        LocalDate startDateNextSprint = project.getSprints().getCurrentSprint().getEndDate().plusDays(1);
+        LocalDate startDateNextSprint = project.getSprintList().getCurrentSprint().getEndDate().plusDays(1);
         int sprintDuration = project.getSprintDuration();
         ProjectRole role = company.getProjectRoleStore().getProjectRole(roleName);
-        if (this.resource.getUser().getUserName().equals(name)
+        if (this.resource.getUser().getUserName().getNameF().equals(name)
                 && project.getProjectTeam().assignProjectRole(resource, startDateNextSprint, sprintDuration, role)) {
             msg = true;
         }

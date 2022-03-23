@@ -1,5 +1,6 @@
 package switch2021.project.controller;
 
+import switch2021.project.immutable.Date;
 import switch2021.project.dto.TaskEffortDTO;
 import switch2021.project.dto.TaskIdNameDTO;
 import switch2021.project.dto.UserStorySprintProjectDTO;
@@ -7,9 +8,7 @@ import switch2021.project.mapper.RegisterWorkToTaskMapper;
 import switch2021.project.model.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
-import switch2021.project.stores.TaskList;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class RegisterWorkToTaskController {
@@ -47,7 +46,7 @@ public class RegisterWorkToTaskController {
         ProjectStore projectStore = this.company.getProjectStore();
         Project project = projectStore.getProjectByCode(code);
 
-        SprintList sprintList = project.getSprints();
+        SprintList sprintList = project.getSprintList();
         Sprint sprint = sprintList.getSprint(sprintId);
 
         SprintBacklog sprintBacklog = sprint.getSprintBacklog();
@@ -65,9 +64,9 @@ public class RegisterWorkToTaskController {
 
     public boolean createTaskEffort(TaskEffortDTO taskEffortDTO) {
 
-        int effortHours = taskEffortDTO.getEffortHours();
-        int effortMinutes = taskEffortDTO.getEffortMinutes();
-        LocalDate effortDate = taskEffortDTO.getEffortDate();
+        int effortHours = taskEffortDTO.getEffort().getEffortHours();
+        int effortMinutes = taskEffortDTO.getEffort().getEffortMinutes();
+       Date effortDate = taskEffortDTO.getEffortDate();
         String comment = taskEffortDTO.getComment();
         String attachment = taskEffortDTO.getAttachment();
         TaskEffort taskEffort = this.task.createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);

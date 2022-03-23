@@ -30,9 +30,9 @@ public class UpdateStatusUsController {
         public List<String> getUsAvailableStatusList() {
                 List<UserStoryStatus> statusList = this.company.getUserStoryStatusStore().getUserStoryStatusList();
                 List<String> usList = new ArrayList<>();
-                for (int i = 0; i < statusList.size(); i++) {
-                        if (statusList.get(i).isSprintAvailable())
-                                usList.add(statusList.get(i).getDescription());
+                for (UserStoryStatus userStoryStatus : statusList) {
+                        if (userStoryStatus.isSprintAvailable())
+                                usList.add(userStoryStatus.getDescription().getText());
                 }
                 return Collections.unmodifiableList(usList);
         }
@@ -41,7 +41,7 @@ public class UpdateStatusUsController {
                 UserStoryStatus userStoryStatus = this.company.getUserStoryStatusStore().getUserStoryStatusByDescription(userST);
                 ProjectStore projectStore = company.getProjectStore();
                 Project project = projectStore.getProjectByCode(code);
-                Sprint sprint = project.getSprints().getCurrentSprint();
+                Sprint sprint = project.getSprintList().getCurrentSprint();
                 SprintBacklog sprintBacklog = sprint.getSprintBacklog();
                 UserStory userStory = sprintBacklog.getUserStory(usId);
                 return userStory.setUserStoryStatusBoolean(userStoryStatus);

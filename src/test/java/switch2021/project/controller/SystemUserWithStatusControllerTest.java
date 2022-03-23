@@ -25,8 +25,8 @@ public class SystemUserWithStatusControllerTest {
 
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
-        String password = "ghi";
-        String passwordConfirmation = "ghi";
+        String password = "Qwerty_1";
+        String passwordConfirmation = "Qwerty_1";
         String function = "tester";
         String photo = "photo";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -59,8 +59,8 @@ public class SystemUserWithStatusControllerTest {
 
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
-        String password = "ghi";
-        String passwordConfirmation = "ghi";
+        String password = "Qwerty_1";
+        String passwordConfirmation = "Qwerty_1";
         String function = "tester";
         String photo = "photo";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -93,8 +93,8 @@ public class SystemUserWithStatusControllerTest {
 
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
-        String password = "ghi";
-        String passwordConfirmation = "ghi";
+        String password = "Qwerty_1";
+        String passwordConfirmation = "Qwerty_1";
         String function = "tester";
         String photo = "photo";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -115,10 +115,10 @@ public class SystemUserWithStatusControllerTest {
         List<SystemUserWithStatusDto> systemUserWithStatusDto = systemUserWithStatusController.getListSystemUserWithStatus();
 
         // Assert
-        assertEquals(newUser.getUserName(), systemUserWithStatusDto.get(0).getUserName());
+        assertEquals(newUser.getUserName().getNameF(), systemUserWithStatusDto.get(0).getUserName());
         assertEquals(newUser.getEmail(), systemUserWithStatusDto.get(0).getEmail());
         assertEquals(newUser.isActivateUser(), systemUserWithStatusDto.get(0).isActivateUser());
-        assertEquals(newUser2.getUserName(), systemUserWithStatusDto.get(1).getUserName());
+        assertEquals(newUser2.getUserName().getNameF(), systemUserWithStatusDto.get(1).getUserName());
         assertEquals(newUser2.getEmail(), systemUserWithStatusDto.get(1).getEmail());
         assertEquals(newUser2.isActivateUser(), systemUserWithStatusDto.get(1).isActivateUser());
     }
@@ -133,8 +133,8 @@ public class SystemUserWithStatusControllerTest {
 
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
-        String password = "ghi";
-        String passwordConfirmation = "ghi";
+        String password = "Qwerty_1";
+        String passwordConfirmation = "Qwerty_1";
         String function = "tester";
         String photo = "photo";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");

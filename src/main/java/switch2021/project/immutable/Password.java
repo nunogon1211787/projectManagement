@@ -1,6 +1,8 @@
-package switch2021.project.Immutables;
+package switch2021.project.immutable;
 
 import lombok.Getter;
+
+import java.util.Objects;
 
 @Getter
 public class Password {
@@ -84,4 +86,16 @@ public class Password {
         return stringBuilder.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Password password = (Password) o;
+        return Objects.equals(pwd, password.pwd);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pwd);
+    }
 }

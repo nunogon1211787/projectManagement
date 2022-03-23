@@ -1,10 +1,11 @@
 package switch2021.project.stores;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -12,268 +13,221 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ProjectStoreTest {
 
-    private Project proj1;
-    private Project proj2;
-    private Project proj3;
-    private Project currentProject;
 
-    @BeforeEach
-    public void init() {
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-
-        proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
-        proj1.setEndDate(LocalDate.of(2021, 11, 30));
-
-        proj2 = company.getProjectStore().createProject( "prototype2", "proj2Prototype", customer,
-                typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
-        proj2.setEndDate(LocalDate.of(2021, 11, 30));
-
-        proj3 = company.getProjectStore().createProject( "prototype3", "proj3Prototype", customer,
-                typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
-        proj3.setEndDate(LocalDate.of(2021, 11, 30));
-
-        currentProject = company.getProjectStore().createProject( "prototype4", "proj4Prototype", customer,
-                typo, sector, LocalDate.now().minusDays(7), 2, 4000);
-        currentProject.setEndDate(LocalDate.now().plusDays(7));
-
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
-        LocalDate endDateMb = LocalDate.of(2021, 11, 15);
-        Resource manuelbras = new Resource(user1, startDateMb, endDateMb, 100, .5);
-
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDateMm = LocalDate.now().minusDays(7);
-        LocalDate endDateMm = LocalDate.now().plusDays(7);
-        Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, 100, 1);
-
-        SystemUser user3 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDateMj = LocalDate.of(2021, 11, 1);
-        LocalDate endDateMj = LocalDate.of(2021, 11, 15);
-        Resource manueljose = new Resource(user3, startDateMj, endDateMj, 100, .5);
-
-        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDateMo = LocalDate.of(2021, 11, 1);
-        LocalDate endDateMo = LocalDate.of(2021, 11, 15);
-        Resource manueloliveira = new Resource(user4, startDateMo, endDateMo, 100, .3333);
-
-        SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDateMf = LocalDate.of(2021, 11, 16);
-        LocalDate endDateMf = LocalDate.of(2021, 11, 30);
-        Resource manuelfernandes = new Resource(user5, startDateMf, endDateMf, 100, 1);
-
-        SystemUser user6 = new SystemUser("manuelgoncalves", "manuelgoncalves@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDateMg = LocalDate.of(2021, 11, 16);
-        LocalDate endDateMg = LocalDate.of(2021, 11, 30);
-        Resource manuelgoncalves = new Resource(user6, startDateMg, endDateMg, 100, 1);
-
-        proj1.getProjectTeam().saveResource(manuelbras);
-        proj1.getProjectTeam().saveResource(manueljose);
-        proj1.getProjectTeam().saveResource(manueloliveira);
-        proj1.getProjectTeam().saveResource(manuelfernandes);
-        proj2.getProjectTeam().saveResource(manuelbras);
-        proj2.getProjectTeam().saveResource(manueloliveira);
-        proj2.getProjectTeam().saveResource(manuelgoncalves);
-        proj3.getProjectTeam().saveResource(manueljose);
-        proj3.getProjectTeam().saveResource(manueloliveira);
-        currentProject.getProjectTeam().saveResource(manuelmartins);
-    }
-
-    Company company = new Company();
-    Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-    Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-    BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-    Project project = company.getProjectStore().createProject( "prototype", "test56", customer,
-            typo, sector, LocalDate.now(), 7, 5000);
-    Project project2 = company.getProjectStore().createProject( "prototype", "test56", customer,
-            typo, sector, LocalDate.now(), 7, 5000);
-
-    UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-    SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "gth", "gth", "", userProfile);
-    LocalDate startDate = LocalDate.of(2021, 12, 31);
-    LocalDate endDate = LocalDate.of(2022, 1, 5);
-    Resource input = new Resource(newUser, startDate, endDate, 100, .5);
 
     @Test
-    public void getProjectListByUserEmailWith2Projects() {
+    public void getProjectListByUserEmail() {
         //Arrange
-        company.getProjectStore().saveNewProject(project);
-        company.getProjectStore().saveNewProject(project2);
-        project.addResource(input);
-        project2.addResource(input);
+        ProjectStore store = new ProjectStore();
+        Project proj1 = mock(Project.class);
+        Project proj2 = mock(Project.class);
+
+        when(proj1.hasProjectTeamMember(any())).thenReturn(true);
+        when(proj2.hasProjectTeamMember(any())).thenReturn(true);
+
+        store.saveNewProject(proj1);
+        store.saveNewProject(proj2);
 
         // Act
-        List<Project> projectList = company.getProjectStore().getProjectsByUserEmail("cris@ipp.pt");
+        List<Project> projectList = store.getProjectsByUserEmail("cris@ipp.pt");
+
         // Assert
         assertEquals(2, projectList.size());
     }
 
     @Test
-
     public void getProjectListByUserEmailBlank() {
         //Arrange
-        company.getProjectStore().saveNewProject(project);
-        company.getProjectStore().saveNewProject(project2);
-        project.addResource(input);
-        project2.addResource(input);
+        ProjectStore store = new ProjectStore();
+        Project proj1 = mock(Project.class);
+        Project proj2 = mock(Project.class);
+
+        when(proj1.hasProjectTeamMember(any())).thenReturn(false);
+        when(proj2.hasProjectTeamMember(any())).thenReturn(false);
+
+        store.saveNewProject(proj1);
+        store.saveNewProject(proj2);
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            ProjectStore projectStore = new ProjectStore();
-            List<Project> projectList = projectStore.getProjectsByUserEmail("");
+        assertThrows(IllegalArgumentException.class, () -> {
+            store.getProjectsByUserEmail("cris@ipp.pt");
         });
-        // Assert
-        assertEquals("Email cannot be blank", exception.getMessage());
-    }
 
-    @Test
-
-    public void getAllProjectListByUserEmailDontExist() {
-        //Arrange
-        company.getProjectStore().saveNewProject(project);
-        company.getProjectStore().saveNewProject(project2);
-        project.addResource(input);
-        project2.addResource(input);
-
-        // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            ProjectStore projectStore = new ProjectStore();
-            List<Project> projectList = projectStore.getProjectsByUserEmail("dani@ipp.pt");
-        });
-        // Assert
-        assertEquals("Email don't exist in system", exception.getMessage());
     }
 
     @Test
     public void getProjectByCodeSuccess() {
         // Arrange
-        ProjectStore projectStore = company.getProjectStore();
-        project.addResource(input);
-        projectStore.saveNewProject(this.project);
+        ProjectStore projectStore = new ProjectStore();
+
+        Project proj = mock(Project.class);
+        when(proj.hasCode(anyString())).thenReturn(true);
+
+        projectStore.saveNewProject(proj);
+
         // Act
         Project project1 = projectStore.getProjectByCode("Project_2022_1");
 
         // Assert
-        assertEquals(this.project, project1);
+        assertEquals(proj, project1);
     }
 
     @Test
     public void getProjectByCodeFail() {
         // Arrange
-        ProjectStore projectStore = company.getProjectStore();
-        project.addResource(input);
-        projectStore.saveNewProject(this.project);
+        ProjectStore projectStore = new ProjectStore();
+
+        Project proj = mock(Project.class);
+        when(proj.hasCode(anyString())).thenReturn(false);
+
+        projectStore.saveNewProject(proj);
+
         // Act
-        Project project = projectStore.getProjectByCode("123");
+        Project project1 = projectStore.getProjectByCode("Project_2022_1");
 
         // Assert
-        assertNotEquals(this.project, project);
+        assertNull(project1);
     }
 
-    @Test//US017, US019
-    public void getCurrentProjectListByUserEmailSucess() {
+    @Test
+    public void getCurrentProjectListByUserEmailSuccess() {
         //Arrange
-        company.getProjectStore().saveNewProject(this.proj1);
-        company.getProjectStore().saveNewProject(this.proj2);
-        company.getProjectStore().saveNewProject(this.proj3);
-        company.getProjectStore().saveNewProject(this.currentProject);
+        ProjectStore projectStore = new ProjectStore();
+        LocalDate endDate = LocalDate.now().plusWeeks(2);
+
+        Project proj = mock(Project.class);
+        when(proj.hasCurrentProjectTeamMember(anyString())).thenReturn(true);
+        when(proj.getEndDate()).thenReturn(endDate);
+
+        Project proj2 = mock(Project.class);
+        when(proj2.hasCurrentProjectTeamMember(anyString())).thenReturn(true);
+        when(proj2.getEndDate()).thenReturn(endDate);
+
+        projectStore.saveNewProject(proj);
+        projectStore.saveNewProject(proj2);
+
         // Act
-        List<Project> projectList = company.getProjectStore().getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
-        int sizeExpected = projectList.size();
+        List<Project> projectList = projectStore.getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
+
         // Assert
-        assertEquals(1, sizeExpected);
+        assertEquals(2, projectList.size());
     }
 
-    @Test//US017, US019
+    @Test
     public void getCurrentProjectListByUserEmailFailResourceNotPresent() {
         //Arrange
-        List<Project> projectList = company.getProjectStore().getCurrentProjectsByUserEmail("manuelbras@beaver.com");
+        ProjectStore projectStore = new ProjectStore();
+        LocalDate endDate = LocalDate.now().plusWeeks(2);
+
+        Project proj = mock(Project.class);
+        when(proj.hasCurrentProjectTeamMember(anyString())).thenReturn(false);
+        when(proj.getEndDate()).thenReturn(endDate);
+
+        Project proj2 = mock(Project.class);
+        when(proj2.hasCurrentProjectTeamMember(anyString())).thenReturn(false);
+        when(proj2.getEndDate()).thenReturn(endDate);
+
+        projectStore.saveNewProject(proj);
+        projectStore.saveNewProject(proj2);
+
+        // Act
+        List<Project> projectList = projectStore.getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
+
         // Assert
         assertTrue(projectList.isEmpty());
     }
 
-    @Test//US017
+    @Test
     public void getCurrentProjectListByUserEmailFailResourceNotCurrent() {
         //Arrange
-        List<Project> projectList = company.getProjectStore().getCurrentProjectsByUserEmail("manueloliveira@beaver.com");
+        ProjectStore projectStore = new ProjectStore();
+        LocalDate endDate = LocalDate.now().minusDays(2);
+
+        Project proj = mock(Project.class);
+        when(proj.hasCurrentProjectTeamMember(anyString())).thenReturn(true);
+        when(proj.getEndDate()).thenReturn(endDate);
+
+        Project proj2 = mock(Project.class);
+        when(proj2.hasCurrentProjectTeamMember(anyString())).thenReturn(true);
+        when(proj2.getEndDate()).thenReturn(endDate);
+
+        projectStore.saveNewProject(proj);
+        projectStore.saveNewProject(proj2);
+
+        // Act
+        List<Project> projectList = projectStore.getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
         // Assert
         assertTrue(projectList.isEmpty());
     }
 
-    @Test//US015
-    public void getProjectListEncapsulationSuccess() {
-        ProjectStore projStore = company.getProjectStore();
-
-        projStore.saveNewProject(this.proj1);
-        projStore.saveNewProject(this.proj2);
-        projStore.saveNewProject(this.proj3);
-        projStore.saveNewProject(this.currentProject);
-
-        List<Project> list = company.getProjectStore().getProjects();
-        list.remove(0);
-
-        assertEquals(4, projStore.getProjects().size());
-    }
-
-    @Test//US015
+    @Test
     public void getProjectListSuccessEmpty() {
         //Arrange
-        List<Project> projectList = company.getProjectStore().getProjects();
+        ProjectStore projectStore = new ProjectStore();
+        List<Project> projectList = projectStore.getProjects();
         // Assert
         assertTrue(projectList.isEmpty());
     }
 
-    @Test//US015
+    @Test
     public void getProjectListSuccessWith2Projects() {
         //Arrange
-        ProjectStore projStore = company.getProjectStore();
+        ProjectStore projectStore = new ProjectStore();
 
-        projStore.saveNewProject(this.proj1);
-        projStore.saveNewProject(this.proj2);
+        Project proj = mock(Project.class);
+        Project proj2 = mock(Project.class);
 
-        List<Project> projectList = company.getProjectStore().getProjects();
-        int sizeExpected = projectList.size();
+        projectStore.saveNewProject(proj);
+        projectStore.saveNewProject(proj2);
+
+        List<Project> projectList = projectStore.getProjects();
+
         // Assert
-        assertEquals(2, sizeExpected);
+        assertEquals(2, projectList.size());
     }
 
     @Test
     public void checkProjectExists() {
         //Arrange
-        ProjectStore projStore = company.getProjectStore();
-        projStore.saveNewProject(this.proj1);
-        projStore.saveNewProject(this.proj2);
+        ProjectStore projectStore = new ProjectStore();
+
+        Project proj = mock(Project.class);
+        Project proj2 = mock(Project.class);
+        Project proj3 = mock(Project.class);
+
+        projectStore.saveNewProject(proj);
+        projectStore.saveNewProject(proj2);
+
         // Assert
-        assertTrue(projStore.checkProjectExists(proj1));
-        assertFalse(projStore.checkProjectExists(proj3));
+        assertTrue(projectStore.checkProjectExists(proj));
+        assertFalse(projectStore.checkProjectExists(proj3));
     }
 
     @Test
     public void validateAllocation() {
         //Arrange
-        Company company = new Company();
-        ProjectStore projectStore = company.getProjectStore();
-        //Project
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project project1 = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
-                typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
-        project1.setEndDate(LocalDate.of(2022, 1, 31));
-        projectStore.saveNewProject(project1);
-        //Resource
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = company.getSystemUserStore().createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDateMm = LocalDate.of(2022, 1, 1);
-        LocalDate endDateMm = LocalDate.of(2022, 1, 31);
-        Resource resource1 = project1.getProjectTeam().createResource(user2, startDateMm, endDateMm, 100, .5);
-        project1.getProjectTeam().saveResource(resource1);
+        ProjectStore projectStore = new ProjectStore();
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = LocalDate.now().plusWeeks(2);
+
+        Project proj = mock(Project.class);
+        SystemUser user = mock(SystemUser.class);
+        Resource resource = mock(Resource.class);
+        ProjectTeam projectTeam = mock(ProjectTeam.class);
+
+        projectTeam.saveResource(resource);
+
+        when(proj.getTeamMemberByIndex(anyInt())).thenReturn(resource);
+        when(proj.getProjectTeam()).thenReturn(projectTeam);
+
+        when(resource.getUser()).thenReturn(user);
+        when(resource.checkAllocationPeriod(any(),any())).thenReturn(true);
+        when(resource.getPercentageOfAllocation()).thenReturn(0.4);
+
+        projectStore.saveNewProject(proj);
+
         //Assert
-        assertTrue(projectStore.validateAllocation(user2, 0.5, startDateMm, endDateMm));
+        assertTrue(projectStore.validateAllocation(user, 0.5, startDate, endDate));
     }
 
     @Test
@@ -281,7 +235,7 @@ public class ProjectStoreTest {
         //Arrange
         Company company = new Company();
         //Project
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //list1 and list2 are equals
@@ -292,7 +246,6 @@ public class ProjectStoreTest {
         list1.saveNewProject(project1);
         ProjectStore list2 = new ProjectStore();
         list2.saveNewProject(project1);
-        //project3/list3 is different (different name)
         Project project3 = company.getProjectStore().createProject("prototype3", "proj3Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
         project3.setEndDate(LocalDate.of(2022, 1, 31));

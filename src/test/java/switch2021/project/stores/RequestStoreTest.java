@@ -1,88 +1,132 @@
 package switch2021.project.stores;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.Company;
+import switch2021.project.immutable.Description;
+import switch2021.project.immutable.Name;
 import switch2021.project.model.Request;
 import switch2021.project.model.SystemUser;
 import switch2021.project.model.UserProfile;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class RequestStoreTest {
 
     @Test
-    void createProfileRequestTestFailProfileAlreadyAssigned() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            Company company = new Company();
-            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-            SystemUser user = new SystemUser("Rogério Moreira", "xxx@isep.ipp.pt", "Devop", "1234567",
-                    "1234567", "123", profile);
-            Request request = new Request(profile, user);
-            RequestStore requestTestList = new RequestStore();
-            //Act
-            requestTestList.addProfileRequest(request);
-        });
-
-    }
-
-    @Test
-    void createProfileRequestTestFailAlreadyExists() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            Company company = new Company();
-            UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-            SystemUser user = new SystemUser("Rogério Moreira", "xxx@isep.ipp.pt", "Devop", "1234567",
-                    "1234567", "123", userProfile);
-            UserProfile newUserProfile = new UserProfile("Admin");
-            Request request = new Request(newUserProfile, user);
-            //Act
-            RequestStore requestTestList = new RequestStore();
-            requestTestList.saveRequest(request);
-            requestTestList.addProfileRequest(request);
-        });
-    }
-
-    @Test
-    void addProfileRequestTestSuccess() {
+    @DisplayName("create profile request with success")
+    void createProfileRequestWithSucces() {
         //Arrange
-        Company company = new Company();
-        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("Rogério Moreira", "xxx@isep.ipp.pt", "Devop", "1234567",
-                "1234567", "123", userProfile);
-        UserProfile newUserProfile = new UserProfile("Admin");
-        Request request = new Request(newUserProfile, user);
-        RequestStore requestTestList = new RequestStore();
-        //Assert and Act
-        assertTrue(requestTestList.addProfileRequest(request));
-        assertEquals(1,requestTestList.getRequestProfileList().size());
-
+        UserProfile userProfile = mock(UserProfile.class);
+        SystemUser systemUser = mock(SystemUser.class);
+        RequestStore requestStore = new RequestStore();
+        when(systemUser.getUserName()).thenReturn(new Name("Cris"));
+        //Act
+        Request profileRequest = requestStore.createProfileRequest(userProfile, systemUser);
+        //Assert
+        assertEquals(profileRequest.getUser().getUserName().getNameF(), systemUser.getUserName().getNameF());
     }
+
+
     @Test
+    @DisplayName("add profile request - with success")
+    void addProfileRequestSuccess() {
+        //Arrange
+        UserProfile userProfile = mock(UserProfile.class);
+        SystemUser systemUser = mock(SystemUser.class);
+        RequestStore requestStore = new RequestStore();
+        when(systemUser.getUserName()).thenReturn(new Name("Cris"));
+        Request request = requestStore.createProfileRequest(userProfile, systemUser);
+        //Act
+        boolean req = requestStore.addProfileRequest(request);
+        //Assert
+        assertTrue(req);
+        assertEquals(1, requestStore.getRequestProfileList().size());
+    }
+
+    @Test
+    @DisplayName("add profile request - already assigned")
+    void addProfileRequestFail() {
+        //Arrange
+        UserProfile userProfile = mock(UserProfile.class);
+        SystemUser systemUser = mock(SystemUser.class);
+        RequestStore requestStore = new RequestStore();
+        Description description = mock(Description.class);
+        when(systemUser.getUserName()).thenReturn(new Name("Cris"));
+        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        when(systemUser.hasProfile(userProfile)).thenReturn(true);
+        Request request = requestStore.createProfileRequest(userProfile, systemUser);
+        //Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            requestStore.addProfileRequest(request);
+        });
+        //Assert
+        assertTrue(exception.getMessage().equals("Requested profile is already assigned to the user."));
+    }
+
+    @Test
+    @DisplayName("add profile request - already exists")
+    void addProfileRequestFail2() {
+        //Arrange
+        UserProfile userProfile = mock(UserProfile.class);
+        SystemUser systemUser = mock(SystemUser.class);
+        RequestStore requestStore = new RequestStore();
+        requestStore.getRequestProfileList();
+        Description description = mock(Description.class);
+        Description descrip = mock(Description.class);
+        when(systemUser.getUserName()).thenReturn(new Name("Cris"));
+        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        UserProfile newUserProfile = mock(UserProfile.class);
+        when(newUserProfile.getUserProfileName()).thenReturn(descrip);
+        when(descrip.getText()).thenReturn("Admin");
+        Request request = requestStore.createProfileRequest(newUserProfile, systemUser);
+        requestStore.addProfileRequest(request);
+        //Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            requestStore.addProfileRequest(request);
+        });
+        //Assert
+        assertTrue(exception.getMessage().equals("Request already exists"));
+    }
+
+
+    @Test
+    @DisplayName("Remove profile request with success")
     void removeProfileRequestTestSuccess() {
         //Arrange
-        UserProfile userProfile = new UserProfile("Visitor");
-        SystemUser user = new SystemUser("Rogério Moreira", "xxx@isep.ipp.pt", "Devop", "1234567",
-                "1234567", "123", userProfile);
-        UserProfile newUserProfile = new UserProfile("Admin");
-        Request request = new Request(newUserProfile, user);
-        RequestStore requestTestList = new RequestStore();
-        //Assert and Act
-        assertTrue(requestTestList.addProfileRequest(request));
-        assertEquals(1, requestTestList.getRequestProfileList().size());
-        assertTrue(requestTestList.removeProfileRequest(request));
-        assertEquals(0, requestTestList.getRequestProfileList().size());
-
+        UserProfile userProfile = mock(UserProfile.class);
+        SystemUser systemUser = mock(SystemUser.class);
+        RequestStore requestStore = new RequestStore();
+        requestStore.getRequestProfileList();
+        Description description = mock(Description.class);
+        when(systemUser.getUserName()).thenReturn(new Name("Cris"));
+        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        Request request = requestStore.createProfileRequest(userProfile, systemUser);
+        requestStore.addProfileRequest(request);
+        //Act
+        boolean remove = requestStore.removeProfileRequest(request);
+        //Assert
+        assertTrue(remove);
+        assertEquals(0, requestStore.getRequestProfileList().size());
     }
 
     @Test
+    @DisplayName("Modify profile request status - success")
     void alterProfileRequestStatusTest() {
-        UserProfile userProfile = new UserProfile("Visitor");
-        SystemUser user = new SystemUser("Rogério Moreira", "xxx@isep.ipp.pt", "Devop", "1234567",
-                "1234567", "123", userProfile);
-        UserProfile newUserProfile = new UserProfile("Admin");
-        Request request = new Request(newUserProfile, user);
+        //Arrange
+        UserProfile userProfile = mock(UserProfile.class);
+        SystemUser systemUser = mock(SystemUser.class);
+        RequestStore requestStore = new RequestStore();
+        requestStore.getRequestProfileList();
+        Description description = mock(Description.class);
+        when(systemUser.getUserName()).thenReturn(new Name("Cris"));
+        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        Request request = requestStore.createProfileRequest(userProfile, systemUser);
+        requestStore.addProfileRequest(request);
         //Assert
         assertFalse(request.isRequestStatus());
         //Act
@@ -92,100 +136,120 @@ class RequestStoreTest {
     }
 
     @Test
-    public void testStatusTest() {
-        //Arrange and Act
-        Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "img_123", "img_123", "123456", profile);
-        Request request = new Request(profile, user);
+    @DisplayName("Test Status")
+    void testStatusTest() {
+        //Arrange
+        UserProfile userProfile = mock(UserProfile.class);
+        SystemUser systemUser = mock(SystemUser.class);
+        RequestStore requestStore = new RequestStore();
+        requestStore.getRequestProfileList();
+        Description description = mock(Description.class);
+        when(systemUser.getUserName()).thenReturn(new Name("Cris"));
+        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        Request request = requestStore.createProfileRequest(userProfile, systemUser);
+        requestStore.addProfileRequest(request);
+        //Act
         request.changeRequestStatus();
         //Assert
         assertTrue(request.isRequestStatus());
     }
 
     @Test
-    public void validateRequestTestSuccess() {
+    @DisplayName("validate Request - True")
+    void validateRequestTestTRUE() {
         //Arrange
-        Company company = new Company();
-        RequestStore requestStore = company.getRequestStore();
-        UserProfile userProfile = new UserProfile("Visitor");
-        SystemUser user = new SystemUser("yoga", "xxx@isep.ipp.pt", "Devop", "1234567",
-                "1234567", "123", userProfile);
-        UserProfile newUserProfile = new UserProfile("Admin");
+        UserProfile userProfile = mock(UserProfile.class);
+        SystemUser systemUser = mock(SystemUser.class);
+        RequestStore requestStore = new RequestStore();
+        requestStore.getRequestProfileList();
+        Description description = mock(Description.class);
+        Description descrip = mock(Description.class);
+        when(systemUser.getUserName()).thenReturn(new Name("Cris"));
+        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        UserProfile newUserProfile = mock(UserProfile.class);
+        when(newUserProfile.getUserProfileName()).thenReturn(descrip);
+        when(descrip.getText()).thenReturn("Admin");
         //Act
-        Request request = new Request(newUserProfile, user);
+        Request request = requestStore.createProfileRequest(newUserProfile, systemUser);
+        requestStore.addProfileRequest(request);
+        request.changeRequestStatus();
         //Assert
-        assertTrue(requestStore.saveRequest(request));
+        assertTrue(requestStore.validateStatusOfARequest(request));
     }
 
     @Test
-    public void validateRequestTestFail() {
+    @DisplayName("validate Request - False")
+    void validateRequestFalse() {
         //Arrange
-        Company company = new Company();
-        RequestStore requestStore = company.getRequestStore();
-        UserProfile userProfile = new UserProfile("Visitor");
-        SystemUser user = new SystemUser("yoga", "xxx@isep.ipp.pt", "Devop", "1234567",
-                "1234567", "123", userProfile);
-        UserProfile newUserProfile = new UserProfile("Admin");
+        UserProfile userProfile = mock(UserProfile.class);
+        SystemUser systemUser = mock(SystemUser.class);
+        RequestStore requestStore = new RequestStore();
+        requestStore.getRequestProfileList();
+        Description description = mock(Description.class);
+        Description descrip = mock(Description.class);
+        when(systemUser.getUserName()).thenReturn(new Name("Cris"));
+        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        UserProfile newUserProfile = mock(UserProfile.class);
+        when(newUserProfile.getUserProfileName()).thenReturn(descrip);
+        when(descrip.getText()).thenReturn("Admin");
         //Act
-        Request request = new Request(newUserProfile, user);
-        requestStore.saveRequest(request);
+        Request request = requestStore.createProfileRequest(newUserProfile, systemUser);
+        requestStore.addProfileRequest(request);
+        request.changeRequestStatus();
         //Assert
-        assertFalse(requestStore.saveRequest(request));
+        assertFalse(requestStore.validateRequest(request));
     }
 
     @Test
-    public void setID_RequestTest() {
+    @DisplayName("validate Request - True")
+    void validateRequestTrue() {
         //Arrange
-        UserProfile userProfile = new UserProfile("Visitor");
-        SystemUser user = new SystemUser("yoga", "xxx@isep.ipp.pt", "Devop", "1234567",
-                "1234567", "123", userProfile);
-        UserProfile newUserProfile = new UserProfile("Admin");
+        UserProfile userProfile = mock(UserProfile.class);
+        SystemUser systemUser = mock(SystemUser.class);
+        RequestStore requestStore = new RequestStore();
+        requestStore.getRequestProfileList();
+        Description description = mock(Description.class);
+        Description descrip = mock(Description.class);
+        when(systemUser.getUserName()).thenReturn(new Name("Cris"));
+        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        UserProfile newUserProfile = mock(UserProfile.class);
+        when(newUserProfile.getUserProfileName()).thenReturn(descrip);
+        when(descrip.getText()).thenReturn("Admin");
         //Act
-            //Request 1
-        Request request = new Request(newUserProfile, user);
-        RequestStore requestTestList = new RequestStore();
-        requestTestList.addProfileRequest(request);
-            //Request 2
-        Request request2 = new Request(newUserProfile, user);
-        requestTestList.addProfileRequest(request2);
+        Request request = requestStore.createProfileRequest(newUserProfile, systemUser);
+        requestStore.addProfileRequest(request);
+        Request request2 = requestStore.createProfileRequest(newUserProfile, systemUser);
+        //Assert
+        assertTrue( requestStore.validateRequest(request2));
+    }
+
+    @Test
+    @DisplayName("Validate ID of a request")
+    void idGenerator() {
+        //Arrange
+        UserProfile userProfile = mock(UserProfile.class);
+        SystemUser systemUser = mock(SystemUser.class);
+        RequestStore requestStore = new RequestStore();
+        requestStore.getRequestProfileList();
+        Description description = mock(Description.class);
+        Description descrip = mock(Description.class);
+        when(systemUser.getUserName()).thenReturn(new Name("Cris"));
+        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        UserProfile newUserProfile = mock(UserProfile.class);
+        when(newUserProfile.getUserProfileName()).thenReturn(descrip);
+        when(descrip.getText()).thenReturn("Admin");
+        //Act
+        Request request = requestStore.createProfileRequest(userProfile, systemUser);
+        requestStore.addProfileRequest(request);
+        Request request2 = requestStore.createProfileRequest(newUserProfile, systemUser);
+        requestStore.addProfileRequest(request2);
         //Assert
         assertEquals(1, request.getIdRequest());
         assertEquals(2, request2.getIdRequest());
     }
-
-    @Test
-    public void overrideTest() {
-        //Arrange
-        Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        UserProfile profile2 = company.getUserProfileStore().getUserProfile("User");
-        UserProfile profile3 = company.getUserProfileStore().getUserProfile("Director");
-
-        SystemUser user = company.getSystemUserStore().createSystemUser("shyriu", "xxxx@isep.ipp.pt",
-                "tester", "img_123", "img_123", "123456", profile);
-        SystemUser user3 = company.getSystemUserStore().createSystemUser("shun", "zzzz@isep.ipp.pt",
-                "tester", "img_123", "img_123", "123456", profile);
-        //Act
-        RequestStore requestTestList1 = new RequestStore();
-        Request request1 = company.getRequestStore().createProfileRequest(profile2, user);
-        requestTestList1.addProfileRequest(request1);
-
-        RequestStore requestTestList2 = new RequestStore();
-        Request request2 = new Request(profile2,user);
-        requestTestList2.addProfileRequest(request2);
-
-        RequestStore requestTestList3 = new RequestStore();
-        Request request3 = new Request(profile3,user3);
-        requestTestList3.addProfileRequest(request3);
-
-        //Assert
-        assertEquals(requestTestList1,requestTestList2);
-        assertEquals(requestTestList1.hashCode(),requestTestList2.hashCode());
-        assertNotEquals(requestTestList1,requestTestList3);
-        assertNotEquals(requestTestList1.hashCode(),requestTestList3.hashCode());
-        assertNotNull(request1);
-    }
-
 }

@@ -2,8 +2,13 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.factory.*;
+import switch2021.project.factoryInterface.ResourceFactoryInterface;
+import switch2021.project.factory.ProjectTeamFactory;
+import switch2021.project.factory.ResourceFactory;
+import switch2021.project.factory.UserStoryFactory;
+import switch2021.project.immutable.Description;
 import switch2021.project.stores.SprintList;
-
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -17,16 +22,20 @@ public class Project {
      **/
     private String code;
     private String projectName;
-    private String description;
+    private Description description;
 
     private final Customer customer;
     private Typology typology;
     private ProjectStatus projectStatus;
     private ProductBacklog productBacklog;
+    private UserStoryFactory userStoryFactory;
 
     private final BusinessSector businessSector;
-    private final SprintList sprints;
+    private final SprintList sprintList;
+
     private ProjectTeam projectTeam;
+    private ProjectTeamFactory projectTeamFactory;
+    private ResourceFactoryInterface resFac = new ResourceFactory();
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -42,10 +51,10 @@ public class Project {
     public Project(String name, String description, Customer customer, Typology typology,
                    BusinessSector businessSector, LocalDate startDate, ProjectStatus status, int numberOfSprints, double budget) {
 
-        validateProjectFields(name, description, budget, numberOfSprints);
+        validateProjectFields(name,description, budget, numberOfSprints);
 
         this.projectName = name;
-        this.description = description;
+        this.description = new Description(description);
 
         this.customer = customer;
         this.typology = typology;
@@ -53,24 +62,16 @@ public class Project {
         this.businessSector = businessSector;
 
         this.startDate = startDate;
-        this.sprints = new SprintList();
+        this.sprintList = new SprintList();
 
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
 
+        this.projectTeam = new ProjectTeam(resFac);
+        //this.projectTeam = this.projectTeamFactory.createProjectTeam();
+//        this.projectTeam = new ProjectTeam();
         this.productBacklog = new ProductBacklog();
-        this.projectTeam = new ProjectTeam();
-    }
 
-
-    /**
-     * Set End Date
-     **/
-    //TODO change LocalDate.now() to LocalDate.to()
-    //Gives the project an end date
-    public boolean setEndDate() {
-        this.endDate = LocalDate.now();
-        return true;
     }
 
     /**
@@ -82,10 +83,8 @@ public class Project {
             throw new IllegalArgumentException("Project Name cannot be empty");
         if ((projectName.length() < 3))
             throw new IllegalArgumentException("Project Name must be at least 3 characters");
-        if (description.trim().isEmpty())
-            throw new IllegalArgumentException("Description cannot be empty");
-        if ((description.length() < 5))
-            throw new IllegalArgumentException("Description must be at least 5 characters");
+        if (description.length() <1)
+            throw new IllegalArgumentException("Description must be at least 1 character");
         if (numberOfSprints <= 0)
             throw new IllegalArgumentException("Number of Sprints must be greater than 0");
         if (budget <= 0)
@@ -151,7 +150,7 @@ public class Project {
      * Get the start date of the next Sprint and end date of the current Sprint
      */
     public Sprint getCurrentSprint() {
-      return this.sprints.getCurrentSprint();
+      return this.sprintList.getCurrentSprint();
     }
 
     /**
@@ -173,7 +172,7 @@ public class Project {
                 && Objects.equals(projectStatus, project.projectStatus)
                 && Objects.equals(productBacklog, project.productBacklog)
                 && Objects.equals(businessSector, project.businessSector)
-                && Objects.equals(sprints, project.sprints)
+                && Objects.equals(sprintList, project.sprintList)
                 && Objects.equals(projectTeam, project.projectTeam)
                 && Objects.equals(startDate, project.startDate)
                 && Objects.equals(endDate, project.endDate);
@@ -183,7 +182,7 @@ public class Project {
     public int hashCode() {
         return Objects.hash(code, projectName, description, customer, typology,
                 projectStatus, productBacklog, businessSector,
-                sprints, projectTeam, startDate, endDate, numberOfSprints,
+                sprintList, projectTeam, startDate, endDate, numberOfSprints,
                 budget, sprintDuration);
     }
 
@@ -198,7 +197,7 @@ public class Project {
                 ", projectStatus=" + projectStatus +
                 ", productBacklog=" + productBacklog +
                 ", businessSector=" + businessSector +
-                ", sprints=" + sprints +
+                ", sprints=" + sprintList +
                 ", projectTeam=" + projectTeam +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +

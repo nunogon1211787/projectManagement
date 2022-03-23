@@ -3,10 +3,7 @@ package switch2021.project.stores;
 import lombok.Getter;
 import switch2021.project.mapper.TaskMapper;
 import switch2021.project.dto.CreateTaskDTO;
-import switch2021.project.model.Project;
-import switch2021.project.model.Resource;
-import switch2021.project.model.Task;
-import switch2021.project.model.TaskType;
+import switch2021.project.model.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,7 +22,6 @@ public class TaskList {
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
-
 
     /**
      * Methods to create Task

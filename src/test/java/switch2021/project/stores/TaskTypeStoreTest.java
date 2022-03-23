@@ -2,256 +2,201 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Description;
+import switch2021.project.factory.TaskTypeFactory;
+import switch2021.project.immutable.Description;
 import switch2021.project.model.TaskType;
+
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class TaskTypeStoreTest {
 
     @Test
     @DisplayName("Test to verify the populate method - Test size, with all descriptions.")
-    void populateDefaultTestSuccess_TestSize() {
+    void populateDefaultTestSize_Success() {
         //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        test.populateDefault();
+        TaskTypeFactory taskTypeFactory = mock(TaskTypeFactory.class);
+        TaskTypeStore tasktypestore = new TaskTypeStore(taskTypeFactory);
+        TaskType tasktype = mock(TaskType.class);
         //Act
-        int x = test.getTaskTypesDescription().size();
+        when(taskTypeFactory.createTaskType("Meeting")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("Documentation")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("Design")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("Implementation")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("Testing")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("Deployment")).thenReturn(tasktype);
+        tasktypestore.populateDefault();
         //Assert
-        assertEquals(6, x);
+        assertEquals(6, tasktypestore.getTaskTypeList().size());
     }
 
     @Test
-    @DisplayName("Test to verify the populate method - Test size - position 0.")
-    void populateDefaultTestSuccess_Position0() {
+    @DisplayName("Test to verify the populate method - Test size, with all descriptions.")
+    void populateDefaultTestSize_Fail() {
         //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        test.populateDefault();
+        TaskTypeFactory taskTypeFactory = mock(TaskTypeFactory.class);
+        TaskTypeStore tasktypestore = new TaskTypeStore(taskTypeFactory);
+        TaskType tasktype = mock(TaskType.class);
+        when(taskTypeFactory.createTaskType("Meeting")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("Documentation")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("Design")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("Implementation")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("Testing")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("Deployment")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("New Task Type")).thenReturn(tasktype);
         //Act
-        String x = test.getTaskTypesDescription().get(0);
-        //Asserts
-        assertEquals("Meeting", x);
-    }
-
-    @Test
-    @DisplayName("Test to verify the populate method - Test size - position 1.")
-    void populateDefaultTestSuccess_Position1() {
-        //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        test.populateDefault();
-        //Act
-        String x = test.getTaskTypesDescription().get(1);
+        tasktypestore.populateDefault();
         //Assert
-        assertEquals("Documentation", x);
-    }
-
-    @Test
-    @DisplayName("Test to verify the populate method - Test size - position 2.")
-    void populateDefaultTestSuccess_Position2() {
-        //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        test.populateDefault();
-        //Act
-        String x = test.getTaskTypesDescription().get(2);
-        //Assert
-        assertEquals("Design", x);
-    }
-
-    @Test
-    @DisplayName("Test to verify the populate method - Test size - position 3.")
-    void populateDefaultTestSuccess_Position3() {
-        //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        test.populateDefault();
-        //Act
-        String x = test.getTaskTypesDescription().get(3);
-        //Assert
-        assertEquals("Implementation", x);
-    }
-
-    @Test
-    @DisplayName("Test to verify the populate method - Test size - position 4.")
-    void populateDefaultTestSuccess_Position4() {
-        //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        test.populateDefault();
-        //Act
-        String x = test.getTaskTypesDescription().get(4);
-        //Assert
-        assertEquals("Testing", x);
-    }
-
-    @Test
-    @DisplayName("Test to verify the populate method - Test size - position 5.")
-    void populateDefaultTestSuccess_Position5() {
-        //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        test.populateDefault();
-        //Act
-        String x = test.getTaskTypesDescription().get(5);
-        //Assert
-        assertEquals("Deployment", x);
+        assertNotEquals(7, tasktypestore.getTaskTypeList().size());
     }
 
     @Test
     @DisplayName("Test to verify the creation method, with success.")
-    void createTaskTypeTestSuccess(){
+    void createTaskTypeSuccess() {
         //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        test.createTaskType("test1");
+        TaskTypeStore store = mock(TaskTypeStore.class);
+        when(store.createAndAddTaskType("New Task Type")).thenReturn(true);
         //Act
-        int x = test.getTaskTypesDescription().size();
-        String y = test.getTaskTypesDescription().get(0);
-        int z = test.getTypeByDescription("test1").getTypeID();
-        //Asserts
-        assertEquals(1, x);
-        assertEquals("test1", y);
-        assertEquals(1, z);
+        store.populateDefault();
+        boolean y = store.createAndAddTaskType("New Task Type");
+        //Assert
+        assertTrue(y);
     }
 
     @Test
-    @DisplayName("Test to get all task type description - test size - empty.")
-    void getTaskTypesDescriptionEmptyTest() {
+    @DisplayName("Test to verify the creation method, with success.")
+    void createTaskTypeSuccess_1() {
         //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        List<String> testList = test.getTaskTypesDescription();
+        TaskTypeStore store = mock(TaskTypeStore.class);
+        when(store.createAndAddTaskType("New Task Type")).thenReturn(true);
         //Act
-        int x = testList.size();
+        store.populateDefault();
+        boolean y = store.createAndAddTaskType("New Task Type");
         //Assert
-        assertEquals(0, x);
+        assertTrue(y);
     }
 
     @Test
-    @DisplayName("Test to get task type by description, with success.")
-    void getTypeByDescriptionTestSuccess() {
+    @DisplayName("Test to verify the creation method, with failure (different description).")
+    void createTaskTypeFail_1() {
         //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        test.populateDefault();
+        TaskTypeStore store = mock(TaskTypeStore.class);
+        when(store.createAndAddTaskType("New Task Type")).thenReturn(true);
         //Act
-        Description result = test.getTypeByDescription("Meeting").getDescription();
-        Description expected = new TaskType("Meeting").getDescription();
+        store.populateDefault();
+        boolean y = store.createAndAddTaskType("Old Task Type");
         //Assert
-        assertEquals(expected, result);
+        assertFalse(y);
     }
 
     @Test
-    @DisplayName("Test to save the task type with success.")
-    void saveTaskTypeSuccess() {
+    @DisplayName("Test to verify the creation method, with failure (description already exists).")
+    void createTaskTypeFail_2() {
         //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        TaskType type1 = new TaskType("type1");
-        test.saveTaskType(type1);
+        TaskTypeStore store = mock(TaskTypeStore.class);
+        when(store.createAndAddTaskType("Meeting")).thenReturn(false);
         //Act
-        int x = test.getTaskTypesDescription().size();
+        store.populateDefault();
+        boolean y = store.createAndAddTaskType("Meeting");
         //Assert
-        assertEquals(1, x);
+        assertFalse(y);
     }
 
     @Test
-    @DisplayName("Test to verify if a task is saved, the ID is setted and the same task is getted with success")
-    void saveTaskTypeIDSuccess() {
+    @DisplayName("Test to verify the creation method, with failure (null description).")
+    void createTaskTypeFail_3() {
         //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        TaskType type1 = new TaskType("type1");
-        TaskType type2 = new TaskType("type2");
-        test.saveTaskType(type1);
-        test.saveTaskType(type2);
+        TaskTypeStore store = mock(TaskTypeStore.class);
+        when(store.createAndAddTaskType(null)).thenReturn(false);
         //Act
-        int x = type1.getTypeID();
+        store.populateDefault();
+        boolean y = store.createAndAddTaskType(null);
         //Assert
-        assertEquals(1, x);
+        assertFalse(y);
     }
 
     @Test
-    @DisplayName("Test to verify if a task is saved, the ID is setted and the same task is getted with insuccess")
-    void saveTaskTypeIDInsuccess() {
+    @DisplayName("Test to verify if the description is returned, with success.")
+    void getTypeByDescriptionSuccess() {
         //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        TaskType type1 = new TaskType("type1");
-        TaskType type2 = new TaskType("type2");
-        test.saveTaskType(type1);
-        test.saveTaskType(type2);
+        TaskTypeFactory taskTypeFactory = mock(TaskTypeFactory.class);
+        TaskTypeStore store = new TaskTypeStore(taskTypeFactory);
+        store.getTaskTypeList().add(new TaskType("Meeting"));
+        TaskType tasktype = mock(TaskType.class);
+        Description description = mock(Description.class);
+        when(tasktype.hasDescription("Meeting")).thenReturn(true);
+        when(tasktype.getDescription()).thenReturn(description);
+        when(description.getText()).thenReturn("Meeting");
         //Act
-        int x = type1.getTypeID();
+        String x = store.getTypeByDescription("Meeting").getDescription().getText();
         //Assert
-        assertNotEquals(2, x);
+        assertEquals("Meeting", x);
     }
 
     @Test
-    @DisplayName("Test to verify if is possible to save two task type with repeated description.")
-    void saveTaskTypeRepeatedDescription() {
+    @DisplayName("Test  to verify if the description is returned, with failure.")
+    void getTypeByDescriptionFail() {
         //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        TaskType type1 = new TaskType("type1");
-        TaskType type2 = new TaskType("type1");
-        test.saveTaskType(type1);
-        test.saveTaskType(type2);
+        TaskTypeFactory taskTypeFactory = mock(TaskTypeFactory.class);
+        TaskTypeStore store = new TaskTypeStore(taskTypeFactory);
+        store.getTaskTypeList().add(new TaskType("Meeting"));
+        store.getTaskTypeList().add(new TaskType("Documentation"));
+        TaskType tasktype = mock(TaskType.class);
+        Description description = mock(Description.class);
+        when(tasktype.hasDescription("Meeting")).thenReturn(true);
+        when(tasktype.getDescription()).thenReturn(description);
+        when(description.getText()).thenReturn("Meeting");
         //Act
-        int x = test.getTaskTypesDescription().size();
-        String y = test.getTaskTypesDescription().get(0);
-        //Assert;
-        assertEquals(1, x);
-        assertEquals("type1", y);
+        String x = store.getTypeByDescription("Documentation").getDescription().getText();
+        //Assert
+        assertNotEquals("Meeting", x);
     }
 
     @Test
-    @DisplayName("Test to verify if is possible to save a null task.")
-    void saveTaskTypeNull() {
+    @DisplayName("Test to verify if the list of descriptions is empty.")
+    void getTypeByDescriptionListEmpty() {
         //Arrange
-        TaskTypeStore test = new TaskTypeStore();
-        TaskType type1 = null;
-        test.saveTaskType(type1);
+        TaskTypeFactory taskTypeFactory = mock(TaskTypeFactory.class);
+        TaskTypeStore store = new TaskTypeStore(taskTypeFactory);
+        //Act and Arrange
+        assertTrue(store.getTaskTypeList().isEmpty());
+    }
+
+    @Test
+    @DisplayName("Test to verify if the list of descriptions is equal to 0.")
+    void getTaskTypeDescriptionList() {
+        //Arrange
+        TaskTypeFactory taskTypeFactory = mock(TaskTypeFactory.class);
+        TaskTypeStore store = new TaskTypeStore(taskTypeFactory);
+        //Act and Arrange
+        assertEquals(0, store.getTaskTypesDescription().size());
+    }
+
+
+    @Test
+    @DisplayName("Test to get the list of task type descriptions")
+    void getTaskStatusNamesSizeTest() {
+        //Arrange
+        TaskTypeFactory taskTypeFactory = mock(TaskTypeFactory.class);
+        TaskTypeStore store = new TaskTypeStore(taskTypeFactory);
+        TaskType tasktype = mock(TaskType.class);
+        Description description = mock(Description.class);
         //Act
-        int x = test.getTaskTypesDescription().size();
+        when(taskTypeFactory.createTaskType("Meeting")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("Documentation")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("Design")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("Implementation")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("Testing")).thenReturn(tasktype);
+        when(taskTypeFactory.createTaskType("Deployment")).thenReturn(tasktype);
+        store.populateDefault();
+        when(tasktype.getDescription()).thenReturn(description);
+        when(description.getText()).thenReturn("");
+        List<String> testList = store.getTaskTypesDescription();
         //Assert
-        assertEquals(0, x);
+        assertEquals(6, testList.size());
     }
 
-    @Test
-    @DisplayName("Hash code test - different objects.")
-    void TaskTypeStoreConstructorTest_1() {
-        //Arrange
-        TaskTypeStore test1 = new TaskTypeStore();
-        TaskTypeStore test2 = new TaskTypeStore();
-        //Assert
-        assertNotSame(test1, test2);
-    }
-
-    @Test
-    @DisplayName("Hash code test - equal objects.")
-    void TaskTypeStoreConstructorTest_2() {
-        //Arrange
-        TaskTypeStore test1 = new TaskTypeStore();
-        TaskTypeStore test2 = new TaskTypeStore();
-        //Assert
-        assertEquals(test1, test2);
-    }
-
-    @Test
-    @DisplayName("Hash code test - equals stores.")
-    void TaskTypeStoreConstructorTest_3() {
-        //Arrange
-        TaskTypeStore test1 = new TaskTypeStore();
-        TaskTypeStore test2 = new TaskTypeStore();
-        //Act
-        Object x = test1.hashCode();
-        Object y = test2.hashCode();
-        //Assert
-        assertEquals(x, y);
-    }
-
-    @Test
-    @DisplayName("Hash code test - different lists.")
-    void TaskTypeStoreConstructorTest() {
-        //Arrange
-        TaskTypeStore test1 = new TaskTypeStore();
-        List<TaskType> test1List = test1.getTaskTypeList();
-        TaskTypeStore test2 = new TaskTypeStore();
-        List<TaskType> test2List = test2.getTaskTypeList();
-        //Act
-        int x = test1List.hashCode();
-        int y = test2List.hashCode();
-        //Assert
-        assertEquals(x,y);
-    }
 }

@@ -26,7 +26,7 @@ public class AssociateResourceControllerTest {
         comTest.getProjectStore().saveNewProject(proj1);
         //User
         UserProfile pro = comTest.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "description", "gth", "gth", "", pro);
+        SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "description", "Qwerty_1", "Qwerty_1", "", pro);
         comTest.getSystemUserStore().saveSystemUser(newUser);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
@@ -45,7 +45,7 @@ public class AssociateResourceControllerTest {
         AssociateResourceController controller = new AssociateResourceController(company);
         ProjectStore projectStore = company.getProjectStore();
         //Project1
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = projectStore.createProject("prototype4", "proj4Prototype", customer,
@@ -78,9 +78,9 @@ public class AssociateResourceControllerTest {
         AssociateResourceController controller = new AssociateResourceController(company);
         SystemUserStore systemUserStore = company.getSystemUserStore();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = systemUserStore.createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user = systemUserStore.createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         systemUserStore.saveSystemUser(user);
-        SystemUser user2 = systemUserStore.createSystemUser("manuel", "manuel@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = systemUserStore.createSystemUser("manuel", "manuel@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         systemUserStore.saveSystemUser(user2);
         //Act
         List<SystemUser> users = controller.getSystemUserList();
@@ -107,7 +107,7 @@ public class AssociateResourceControllerTest {
         comTest.getProjectStore().saveNewProject(proj2);
         //User
         UserProfile pro = comTest.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "description", "gth", "gth", "", pro);
+        SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "description", "Qwerty_1", "Qwerty_1", "", pro);
         comTest.getSystemUserStore().saveSystemUser(newUser);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);

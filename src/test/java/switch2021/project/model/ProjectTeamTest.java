@@ -2,15 +2,17 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
+import switch2021.project.factory.ResourceFactory;
+import switch2021.project.immutable.Description;
+import switch2021.project.immutable.Name;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class ProjectTeamTest {
-
 
     /**
      * Constructor Test
@@ -18,63 +20,37 @@ public class ProjectTeamTest {
     @Test
     public void projectTeamTest() {
         //Arrange
-        ProjectTeam test = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam test = new ProjectTeam(resFac);
         //Assert
-        assertEquals(new ProjectTeam(), test);
+        assertEquals(new ProjectTeam(resFac), test);
     }
 
     @Test
     public void projectTeamListTest() {
         //Arrange
-        ProjectTeam test = new ProjectTeam();
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam test = new ProjectTeam(resFac);
         //Assert
-        assertEquals(new ProjectTeam().getProjectTeamList(), test.getProjectTeamList());
+        assertEquals(new ProjectTeam(resFac).getProjectTeamList(), test.getProjectTeamList());
     }
 
     @Test
-    public void projectTeamNotEqualsTest() {
-        //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelbras = new Resource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
-        //Act
-        proj1.getProjectTeam().saveResource(manuelbras);
-        ProjectTeam test = new ProjectTeam();
-        //Assert
-        assertNotEquals(test, proj1.getProjectTeam());
-    }
-
-
-    /**
-     * Get Current Resource Test
-     */
-    @Test
+    @DisplayName("Test with mock if the resource is returned")
     public void getResourceByEmailTestSuccess() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelbras = new Resource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
-        proj1.getProjectTeam().saveResource(manuelbras);
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourEmail("manuelbras@beaver.com")).thenReturn(true);
+        when(manuelbras.isCurrent()).thenReturn(true);
+
+        projectTeam.saveResource(manuelbras);
+
         //Act
-        Resource testRes = proj1.getProjectTeam().getResource("manuelbras@beaver.com");
+        Resource testRes = projectTeam.getResourceByEmail("manuelbras@beaver.com");
+
         //Assert
         assertEquals(manuelbras, testRes);
     }
@@ -82,43 +58,75 @@ public class ProjectTeamTest {
     @Test
     public void getResourceByEmailTestFail() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelbras = new Resource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
-        proj1.getProjectTeam().saveResource(manuelbras);
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourEmail("manuelbras@beaver.com")).thenReturn(false);
+        when(manuelbras.isCurrent()).thenReturn(false);
+
+        projectTeam.saveResource(manuelbras);
+
         //Act
-        Resource testRes = proj1.getProjectTeam().getResource("manuel@beaver.com");
+        Resource testRes = projectTeam.getResourceByEmail("manuelbras@beaver.com");
+
         //Assert
-        assertNotEquals(manuelbras, testRes);
+        assertNull(testRes);
+    }
+
+    @Test
+    public void getResourceByEmailTestIsYourEmailFail() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourEmail("manuelbras@beaver.com")).thenReturn(false);
+        when(manuelbras.isCurrent()).thenReturn(true);
+
+        projectTeam.saveResource(manuelbras);
+
+        //Act
+        Resource testRes = projectTeam.getResourceByEmail("manuelbras@beaver.com");
+
+        //Assert
+        assertNull(testRes);
+    }
+
+    @Test
+    public void getResourceByEmailIsCurrentFail() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourEmail("manuelbras@beaver.com")).thenReturn(true);
+        when(manuelbras.isCurrent()).thenReturn(false);
+
+        projectTeam.saveResource(manuelbras);
+
+        //Act
+        Resource testRes = projectTeam.getResourceByEmail("manuelbras@beaver.com");
+
+        //Assert
+        assertNull(testRes);
     }
 
     @Test
     public void getResourceByUserTestSuccess() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelbras = new Resource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
-        proj1.getProjectTeam().saveResource(manuelbras);
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        SystemUser user = mock(SystemUser.class);
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourEmail(user)).thenReturn(true);
+        when(manuelbras.isCurrent()).thenReturn(true);
+
+        projectTeam.saveResource(manuelbras);
+
         //Act
-        Resource testRes = proj1.getProjectTeam().getResource(user1);
+        Resource testRes = projectTeam.getResourceByUser(user);
+
         //Assert
         assertEquals(manuelbras, testRes);
     }
@@ -126,43 +134,38 @@ public class ProjectTeamTest {
     @Test
     public void getResourceByUserTestFail() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelbras = new Resource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+
+        SystemUser user = mock(SystemUser.class);
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourEmail(user)).thenReturn(false);
+        when(manuelbras.isCurrent()).thenReturn(false);
+
+        projectTeam.saveResource(manuelbras);
+
         //Act
-        Resource testRes = proj1.getProjectTeam().getResource(user1);
+        Resource testRes = projectTeam.getResourceByUser(user);
+
         //Assert
-        assertNotEquals(manuelbras, testRes);
+        assertNull(testRes);
     }
 
     @Test
     public void getResourceByRoleTestSuccess() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelbras = new Resource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
-        manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
-        proj1.getProjectTeam().saveResource(manuelbras);
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        ProjectRole role = mock(ProjectRole.class);
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourEmail(role)).thenReturn(true);
+        when(manuelbras.isCurrent()).thenReturn(true);
+
+        projectTeam.saveResource(manuelbras);
+
         //Act
-        Resource testRes = proj1.getProjectTeam().getResource(company.getProjectRoleStore().getProjectRole("Team Member"));
+        Resource testRes = projectTeam.getResourceByRole(role);
+
         //Assert
         assertEquals(manuelbras, testRes);
     }
@@ -170,43 +173,56 @@ public class ProjectTeamTest {
     @Test
     public void getResourceByRoleTestFail() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelbras = proj1.createResource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
-        proj1.getProjectTeam().saveResource(manuelbras);
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        ProjectRole role = mock(ProjectRole.class);
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourEmail(role)).thenReturn(false);
+        when(manuelbras.isCurrent()).thenReturn(false);
+
+        projectTeam.saveResource(manuelbras);
+
         //Act
-        Resource testRes = proj1.getProjectTeam().getResource(company.getProjectRoleStore().getProjectRole("Scrum Master"));
+        Resource testRes = projectTeam.getResourceByRole(role);
+
         //Assert
-        assertNotEquals(manuelbras, testRes);
+        assertNull(testRes);
+    }
+
+    @Test
+    public void getResourceByRoleTestFailOneCondition() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        ProjectRole role = mock(ProjectRole.class);
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourEmail(role)).thenReturn(false);
+        when(manuelbras.isCurrent()).thenReturn(true);
+
+        projectTeam.saveResource(manuelbras);
+
+        //Act
+        Resource testRes = projectTeam.getResourceByRole(role);
+
+        //Assert
+        assertNull(testRes);
     }
 
     @Test
     public void getResourceByNameTestSuccess() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelbras = proj1.createResource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
-        proj1.getProjectTeam().saveResource(manuelbras);
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourName("jorgebras")).thenReturn(true);
+        when(manuelbras.isCurrent()).thenReturn(true);
+
+        projectTeam.saveResource(manuelbras);
+
         //Act
-        Resource testRes = proj1.getProjectTeam().getResourceByName("manuelbras");
+        Resource testRes = projectTeam.getResourceByName("jorgebras");
+
         //Assert
         assertEquals(manuelbras, testRes);
     }
@@ -214,23 +230,20 @@ public class ProjectTeamTest {
     @Test
     public void getResourceByNameTestFail() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelbras = new Resource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
-        proj1.getProjectTeam().saveResource(manuelbras);
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourName("jorgebras")).thenReturn(false);
+        when(manuelbras.isCurrent()).thenReturn(false);
+
+        projectTeam.saveResource(manuelbras);
+
         //Act
-        Resource testRes = proj1.getProjectTeam().getResourceByName("jorgebras");
+        Resource testRes = projectTeam.getResourceByName("jorgebras");
+
         //Assert
-        assertNotEquals(manuelbras, testRes);
+        assertNull(testRes);
     }
 
     /**
@@ -239,141 +252,102 @@ public class ProjectTeamTest {
     @Test
     public void getCurrentResourcesNamesTestSuccess() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelbras = new Resource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelmartins = new Resource(user2, LocalDate.now().minusDays(6), LocalDate.now().plusDays(7), 100, 1);
-        proj1.getProjectTeam().saveResource(manuelbras);
-        proj1.getProjectTeam().saveResource(manuelmartins);
+        ResourceFactory resourceFactory = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resourceFactory);
+
+        SystemUser user = mock(SystemUser.class);
+        Name name = mock(Name.class);
+
+        when(name.getNameF()).thenReturn("chico");
+        when(user.getUserName()).thenReturn(name);
+
+        Resource chico = mock(Resource.class);
+        when(chico.getUser()).thenReturn(user);
+        when(chico.isCurrent()).thenReturn(true);
+
+        projectTeam.saveResource(chico);
+
+        SystemUser user2 = mock(SystemUser.class);
+        Name name2 = mock(Name.class);
+
+        when(name2.getNameF()).thenReturn("jorgebras");
+        when(user2.getUserName()).thenReturn(name2);
+
+        Resource jorgebras = mock(Resource.class);
+        when(jorgebras.getUser()).thenReturn(user2);
+        when(jorgebras.isCurrent()).thenReturn(true);
+
+        projectTeam.saveResource(jorgebras);
+
         //Act
-        List<String> testRes = new ArrayList<>();
-        testRes.add("manuelbras");
-        testRes.add("manuelmartins");
+        List<String> testRes = projectTeam.getCurrentResourcesNames();
+
         //Assert
-        assertEquals(proj1.getProjectTeam().getCurrentResourcesNames(), testRes);
+        assertEquals("chico", testRes.get(0));
+        assertEquals("jorgebras", testRes.get(1));
     }
 
     @Test
     public void getCurrentResourcesNamesTestFail() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelbras = proj1.createResource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        proj1.createResource(user2, LocalDate.now().minusDays(6), LocalDate.now().plusDays(7), 100, 1);
-        proj1.getProjectTeam().saveResource(manuelbras);
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+
+        SystemUser user = mock(SystemUser.class);
+        Name name = mock(Name.class);
+
+        when(name.getNameF()).thenReturn("chico");
+        when(user.getUserName()).thenReturn(name);
+
+        Resource chico = mock(Resource.class);
+        when(chico.getUser()).thenReturn(user);
+        when(chico.isCurrent()).thenReturn(false);
+
+        projectTeam.saveResource(chico);
+
+        SystemUser user2 = mock(SystemUser.class);
+        Name name2 = mock(Name.class);
+
+        when(name.getNameF()).thenReturn("jorgebras");
+        when(user2.getUserName()).thenReturn(name2);
+
+        Resource jorgebras = mock(Resource.class);
+        when(jorgebras.getUser()).thenReturn(user2);
+        when(jorgebras.isCurrent()).thenReturn(false);
+
+        projectTeam.saveResource(jorgebras);
+
         //Act
-        List<String> testRes = new ArrayList<>();
-        testRes.add("manuelbras");
-        testRes.add("manuelmartins");
-        //Assert
-        assertNotEquals(proj1.getProjectTeam().getCurrentResourcesNames(), testRes);
-    }
+        List<String> testRes = projectTeam.getCurrentResourcesNames();
 
-    /**
-     * Create a new Resource Test
-     */
-    @Test
-    public void createResourceTestSuccess() {
-        //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelbras = new Resource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
-        //Act
-        Resource test = proj1.getProjectTeam().createResource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
         //Assert
-        assertEquals(test, manuelbras);
-    }
-
-    @Test
-    public void createResourceTestFail() {
-        //Assert
-        assertThrows(NullPointerException.class, () -> {
-            //Arrange
-            Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-            Customer customer = company.getCustomerStore().getCustomerByName("isep");
-            BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-            //Project 1
-            Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                    typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-            proj1.setEndDate(LocalDate.now().plusYears(1));
-            company.getProjectStore().saveNewProject(proj1);
-            //Act
-            proj1.getProjectTeam().createResource(null, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
-        });
+        assertTrue(testRes.isEmpty());
     }
 
 
-    /**
-     * Save Test
-     */
     @Test
     public void saveResourceTestSuccess() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelbras = proj1.createResource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
-        //Act
-        assertTrue(proj1.getProjectTeam().saveResource(manuelbras));
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+
+        Resource chico = mock(Resource.class);
+
+        //Assert
+        assertTrue(projectTeam.saveResource(chico));
     }
 
     @Test
-    public void saveResourceTestFail() {
-        //Assert
+    public void saveResourceTestFailResourceNull() {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
-            Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-            Customer customer = company.getCustomerStore().getCustomerByName("isep");
-            BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-            //Project 1
-            Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                    typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-            proj1.setEndDate(LocalDate.now().plusYears(1));
-            company.getProjectStore().saveNewProject(proj1);
-            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-            SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-            proj1.createResource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
-            //Act
-            assertFalse(proj1.getProjectTeam().saveResource(null));
+            ResourceFactory resFac = mock(ResourceFactory.class);
+            ProjectTeam projectTeam = new ProjectTeam(resFac);
+
+            Resource chico = null;
+
+            //Assert
+            projectTeam.saveResource(chico);
         });
     }
 
@@ -384,7 +358,7 @@ public class ProjectTeamTest {
     public void assignProjectRoleTestSuccessWithRoleInTheTeam() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -393,29 +367,41 @@ public class ProjectTeamTest {
         proj1.setEndDate(LocalDate.now().plusYears(1));
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+
         //Resource 1
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelbras = proj1.createResource(user1, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, .5);
         manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
-        proj1.getProjectTeam().saveResource(manuelbras);
+        ProjectRole projRol = manuelbras.getRole();
+          proj1.getProjectTeam().saveResource(manuelbras);
+//        ResourceFactory resFac = mock(ResourceFactory.class);
+//        Resource res = mock(Resource.class);
+//        ProjectTeam projTem = mock(ProjectTeam.class);
+//        SystemUser syUse = mock(SystemUser.class);
+//        when(resFac.createResource(user1, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, .5)).thenReturn(res);
+//        when(res.getRole()).thenReturn(projRol);
+//        proj1.getProjectTeam().saveResource(manuelbras);
         //Resource 2
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelmartins = proj1.createResource(user2, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, 1);
+//        Resource manuelmartins = proj1.createResource(user2, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, 1);
+//        when(resFac.createResource(user2, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, 1)).thenReturn(res);
+
         proj1.getProjectTeam().saveResource(manuelmartins);
         //Act
         proj1.getProjectTeam().assignProjectRole(manuelmartins, LocalDate.now(), 2, company.getProjectRoleStore().getProjectRole("Scrum Master"));
         //Assert
-        assertEquals(proj1.getProjectTeam().getResource(user1).getRole(), company.getProjectRoleStore().getProjectRole("Team Member"));
-        assertEquals(proj1.getProjectTeam().getResource(user2).getRole(), company.getProjectRoleStore().getProjectRole("Scrum Master"));
+        assertEquals(proj1.getProjectTeam().getResourceByUser(user1).getRole(), company.getProjectRoleStore().getProjectRole("Team Member"));
+        assertEquals(proj1.getProjectTeam().getResourceByUser(user2).getRole(), company.getProjectRoleStore().getProjectRole("Scrum Master"));
         assertEquals(4, proj1.getProjectTeam().getProjectTeamList().size());
-        assertEquals(LocalDate.now(), proj1.getProjectTeam().getResource(user2).getStartDate());
+        assertEquals(LocalDate.now(), proj1.getProjectTeam().getResourceByUser(user2).getStartDate());
     }
 
     @Test //At this test the project role already exist in the team
     public void assignProjectRoleTestSuccessWithOutRoleInTheTeam() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -425,19 +411,19 @@ public class ProjectTeamTest {
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Resource 1
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelbras = proj1.createResource(user1, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, .5);
         manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         proj1.getProjectTeam().saveResource(manuelbras);
         //Resource 2
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelmartins = proj1.createResource(user2, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, 1);
         proj1.getProjectTeam().saveResource(manuelmartins);
         //Act
         proj1.getProjectTeam().assignProjectRole(manuelmartins, LocalDate.now(), 2, company.getProjectRoleStore().getProjectRole("Scrum Master"));
         //Assert
-        assertEquals(proj1.getProjectTeam().getResource(user1).getRole(), company.getProjectRoleStore().getProjectRole("Team Member"));
-        assertEquals(proj1.getProjectTeam().getResource(user2).getRole(), company.getProjectRoleStore().getProjectRole("Scrum Master"));
+        assertEquals(proj1.getProjectTeam().getResourceByUser(user1).getRole(), company.getProjectRoleStore().getProjectRole("Team Member"));
+        assertEquals(proj1.getProjectTeam().getResourceByUser(user2).getRole(), company.getProjectRoleStore().getProjectRole("Scrum Master"));
         assertEquals(3, proj1.getProjectTeam().getProjectTeamList().size());
     }
 
@@ -447,7 +433,7 @@ public class ProjectTeamTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             //Project 1
@@ -457,12 +443,12 @@ public class ProjectTeamTest {
             company.getProjectStore().saveNewProject(proj1);
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             //Resource 1
-            SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+            SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
             Resource manuelbras = proj1.createResource(user1, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, .5);
             manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
             proj1.getProjectTeam().saveResource(manuelbras);
             //Resource 2
-            SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+            SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
             Resource manuelmartins = proj1.createResource(user2, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, 1);
             proj1.getProjectTeam().saveResource(manuelmartins);
             //Act
@@ -476,7 +462,7 @@ public class ProjectTeamTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             //Project 1
@@ -486,7 +472,7 @@ public class ProjectTeamTest {
             company.getProjectStore().saveNewProject(proj1);
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             //Resource 1
-            SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+            SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
             Resource manuelbras = proj1.createResource(user1, LocalDate.now().plusWeeks(1), LocalDate.now().plusWeeks(4), 100, .5);
             proj1.getProjectTeam().saveResource(manuelbras);
             //Act and Assert
@@ -495,209 +481,91 @@ public class ProjectTeamTest {
     }
 
     @Test
+    public void hasResourceTestSuccess() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        Resource chico = mock(Resource.class);
+        when(chico.isYourEmail("chico@beaver.com")).thenReturn(true);
+
+        //Act
+        projectTeam.saveResource(chico);
+
+        //Assert
+        assertTrue(projectTeam.hasResource(("chico@beaver.com")));
+    }
+
+    @Test
+    public void hasResourceTestFail() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        Resource chico = mock(Resource.class);
+        when(chico.isYourEmail("chico@beaver.com")).thenReturn(false);
+
+        //Act
+        projectTeam.saveResource(chico);
+
+        //Assert
+        assertFalse(projectTeam.hasResource(("chico@beaver.com")));
+    }
+
+    @Test
     public void hasCurrentResourceTestSuccess() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        //Project 2
-        Project proj2 = company.getProjectStore().createProject("prototype2", "proj2Prototype", customer,
-                typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
-        proj2.setEndDate(LocalDate.of(2021, 11, 30));
-        //Project 3
-        Project proj3 = company.getProjectStore().createProject("prototype3", "proj3Prototype", customer,
-                typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
-        proj3.setEndDate(LocalDate.of(2021, 11, 30));
-        //Project 4
-        Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
-                typo, sector, LocalDate.now().minusDays(7), 2, 4000);
-        currentProject.setEndDate(LocalDate.now().plusDays(7));
-        //Resource 1
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelbras = new Resource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
-        //Resource 2
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelmartins = new Resource(user2, LocalDate.now().minusDays(6), LocalDate.now().plusDays(7), 100, 1);
-        //Resource 3
-        SystemUser user3 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manueljose = new Resource(user3, LocalDate.of(2021, 11, 1), LocalDate.of(2021, 11, 15), 100, .5);
-        //Resource 4
-        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manueloliveira = new Resource(user4, LocalDate.now().minusWeeks(1), LocalDate.now().plusWeeks(3), 100, .3333);
-        //Resource 5
-        SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelfernandes = new Resource(user5, LocalDate.of(2021, 11, 16), LocalDate.of(2021, 11, 30), 100, 1);
-        //Resource 6
-        SystemUser user6 = new SystemUser("manuelgoncalves", "manuelgoncalves@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelgoncalves = new Resource(user6, LocalDate.of(2021, 11, 16), LocalDate.of(2021, 11, 30), 100, 1);
-        //Add resources
-        proj1.getProjectTeam().saveResource(manuelbras);
-        proj1.getProjectTeam().saveResource(manueljose);
-        proj1.getProjectTeam().saveResource(manueloliveira);
-        proj1.getProjectTeam().saveResource(manuelfernandes);
-        proj2.getProjectTeam().saveResource(manuelbras);
-        proj2.getProjectTeam().saveResource(manueloliveira);
-        proj2.getProjectTeam().saveResource(manuelgoncalves);
-        proj3.getProjectTeam().saveResource(manueljose);
-        proj3.getProjectTeam().saveResource(manueloliveira);
-        currentProject.getProjectTeam().saveResource(manuelmartins);
-        //Act and Assert
-        assertTrue(currentProject.getProjectTeam().hasCurrentResource(("manuelmartins@beaver.com")));
-    }
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        Resource chico = mock(Resource.class);
+        when(chico.isYourEmail("chico@beaver.com")).thenReturn(true);
+        when(chico.isCurrent()).thenReturn(true);
 
-    @Test
-    void getResource() {
-        //Arrange
-        Company company = new Company();
-        ProjectTeam test = new ProjectTeam();
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbrasil", "manuelbrasil@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        SystemUser user2 = new SystemUser("manueltest", "manueltest@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
-        LocalDate endDateMb = LocalDate.of(2022, 11, 15);
-        Resource manuelbrasil = new Resource(user1, startDateMb, endDateMb, 100, .5);
-        Resource manueltest = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, .5);
-        test.saveResource(manueltest);
-        test.saveResource(manuelbrasil);
-        //Assert
-        assertEquals(manueltest, test.getResource(user2));
-        assertEquals(manuelbrasil, test.getResource(user1));
-    }
-
-    @Test
-    void getCurrentResourcesNames() {
-        Company company = new Company();
-        ProjectTeam test = new ProjectTeam();
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbrasil", "manuelbrasil@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        SystemUser user2 = new SystemUser("manueltest", "manueltest@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
-        LocalDate endDateMb = LocalDate.of(2022, 11, 15);
-        Resource manuelbrasil = new Resource(user1, startDateMb, endDateMb, 100, .5);
-        Resource manueltest = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, .5);
-        test.saveResource(manueltest);
-        test.saveResource(manuelbrasil);
-        List<String> testList = new ArrayList<>();
-        testList.add("manueltest");
-        testList.add("manuelbrasil");
-        //Assert
-        assertEquals(testList, test.getCurrentResourcesNames());
-    }
-
-    @Test
-    public void hasCurrentResourceFailResourceNotPresent() {
-        //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
-                typo, sector, LocalDate.now().minusDays(7), 2, 4000);
-        currentProject.setEndDate(LocalDate.now().plusDays(7));
-        //Resource 1
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelbras = new Resource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
-        //Resource 2
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelmartins = new Resource(user2, LocalDate.now().minusDays(6), LocalDate.now().plusDays(7), 100, 1);
-        //Resource 3
-        SystemUser user3 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manueljose = new Resource(user3, LocalDate.of(2021, 11, 1), LocalDate.of(2021, 11, 15), 100, .5);
-        //Resource 4
-        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manueloliveira = new Resource(user4, LocalDate.now().minusWeeks(1), LocalDate.now().plusWeeks(3), 100, .3333);
-        //Resource 5
-        SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelfernandes = new Resource(user5, LocalDate.of(2021, 11, 16), LocalDate.of(2021, 11, 30), 100, 1);
-        //Resource 6
-        SystemUser user6 = new SystemUser("manuelgoncalves", "manuelgoncalves@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        Resource manuelgoncalves = new Resource(user6, LocalDate.of(2021, 11, 16), LocalDate.of(2021, 11, 30), 100, 1);
         //Act
-        currentProject.getProjectTeam().saveResource(manuelbras);
-        currentProject.getProjectTeam().saveResource(manuelfernandes);
-        currentProject.getProjectTeam().saveResource(manuelgoncalves);
-        currentProject.getProjectTeam().saveResource(manueljose);
-        currentProject.getProjectTeam().saveResource(manueloliveira);
-        currentProject.getProjectTeam().saveResource(manuelmartins);
+        projectTeam.saveResource(chico);
+
         //Assert
-        assertFalse(currentProject.getProjectTeam().hasCurrentResource(("manuelsilva@beaver.com")));
+        assertTrue(projectTeam.hasCurrentResource(("chico@beaver.com")));
+    }
+
+    @Test
+    public void hasCurrentResourceTestFail() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        Resource chico = mock(Resource.class);
+        when(chico.isYourEmail("chico@beaver.com")).thenReturn(false);
+        when(chico.isCurrent()).thenReturn(false);
+
+        //Act
+        projectTeam.saveResource(chico);
+
+        //Assert
+        assertFalse(projectTeam.hasCurrentResource(("chico@beaver.com")));
     }
 
 
-        @Test
+    @Test
     public void hasCurrentResourceFailResourceNotCurrent() {
-            //Arrange
-            Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-            Customer customer = company.getCustomerStore().getCustomerByName("isep");
-            BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-                //Project 1
-            Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                    typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-            proj1.setEndDate(LocalDate.now().plusYears(1));
-            //Act
-            company.getProjectStore().saveNewProject(proj1);
-            //Assert
-            assertFalse(proj1.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
-    }
-
-    @Test
-    @DisplayName("Get current resource by email")
-    public void getCurrentResource() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
         proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDateMo = LocalDate.now().minusWeeks(1);
-        LocalDate endDateMo = LocalDate.now().plusWeeks(3);
-        Resource manueloliveira = proj1.createResource(user4, startDateMo, endDateMo, 100, .3333);
-        proj1.getProjectTeam().saveResource(manueloliveira);
         //Act
-        Resource teste = proj1.getProjectTeam().getResource("manueloliveira@beaver.com");
-        //Assert
-        assertEquals(teste, manueloliveira);
-    }
-
-    @Test
-    @DisplayName("Get current resource by email")
-    public void getCurrentResourceNull() {
-        //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-            //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
         company.getProjectStore().saveNewProject(proj1);
         //Assert
-        assertNull(proj1.getProjectTeam().getResource("manuelbraga@beaver.com"));
+        assertFalse(proj1.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
     }
-
 
     @Test
     @DisplayName("Assign New Role for a resource")
     public void assignScrumMasterWithoutRepeatedTestSize() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -705,25 +573,25 @@ public class ProjectTeamTest {
                 typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
         proj1.setEndDate(LocalDate.now().plusYears(1));
         company.getProjectStore().saveNewProject(proj1);
-            //Resource 1
+        //Resource 1
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelbras = new Resource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), 100, .5);
-            //Resource 2
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        //Resource 2
+        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelmartins = new Resource(user2, LocalDate.now().minusDays(6), LocalDate.now().plusDays(7), 100, 1);
-            //Resource 3
-        SystemUser user3 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        //Resource 3
+        SystemUser user3 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manueljose = new Resource(user3, LocalDate.of(2021, 11, 1), LocalDate.of(2021, 11, 15), 100, .5);
-            //Resource 4
-        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        //Resource 4
+        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manueloliveira = new Resource(user4, LocalDate.now().minusWeeks(1), LocalDate.now().plusWeeks(3), 100, .3333);
         manueloliveira.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
-            //Resource 5
-        SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        //Resource 5
+        SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelfernandes = new Resource(user5, LocalDate.of(2021, 11, 16), LocalDate.of(2021, 11, 30), 100, 1);
-            //Resource 6
-        SystemUser user6 = new SystemUser("manuelgoncalves", "manuelgoncalves@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        //Resource 6
+        SystemUser user6 = new SystemUser("manuelgoncalves", "manuelgoncalves@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelgoncalves = new Resource(user6, LocalDate.of(2021, 11, 16), LocalDate.of(2021, 11, 30), 100, 1);
         proj1.getProjectTeam().saveResource(manuelbras);
         proj1.getProjectTeam().saveResource(manuelgoncalves);
@@ -732,9 +600,9 @@ public class ProjectTeamTest {
         proj1.getProjectTeam().saveResource(manueloliveira);
         proj1.getProjectTeam().saveResource(manuelmartins);
         //Act
-        Resource manuelTest = proj1.getProjectTeam().getResource("manuelbras@beaver.com");
+        Resource manuelTest = proj1.getProjectTeam().getResourceByEmail("manuelbras@beaver.com");
         manuelTest.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
-        proj1.getProjectTeam().assignProjectRole(manuelTest, LocalDate.of(2021,11,16), 2, company.getProjectRoleStore().getProjectRole("Scrum Master"));
+        proj1.getProjectTeam().assignProjectRole(manuelTest, LocalDate.of(2021, 11, 16), 2, company.getProjectRoleStore().getProjectRole("Scrum Master"));
         //Assert
         assertEquals(8, proj1.getProjectTeam().getProjectTeamList().size());
     }
@@ -744,7 +612,7 @@ public class ProjectTeamTest {
     public void assignScrumMasterWithRepeatedTestSize() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -752,18 +620,18 @@ public class ProjectTeamTest {
                 typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
         proj1.setEndDate(LocalDate.now().plusYears(1));
         company.getProjectStore().saveNewProject(proj1);
-            //Resource
+        //Resource
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbrasil", "manuelbrasil@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user1 = new SystemUser("manuelbrasil", "manuelbrasil@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMb = LocalDate.of(2021, 11, 1);
         LocalDate endDateMb = LocalDate.of(2022, 11, 15);
         Resource manuelbrasil = proj1.createResource(user1, startDateMb, endDateMb, 100, .5);
         manuelbrasil.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
         //Act
         proj1.getProjectTeam().saveResource(manuelbrasil);
-        Resource manuelTest = proj1.getProjectTeam().getResource("manuelbrasil@beaver.com");
+        Resource manuelTest = proj1.getProjectTeam().getResourceByEmail("manuelbrasil@beaver.com");
         manuelTest.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
-        proj1.getProjectTeam().assignProjectRole(manuelTest, LocalDate.of(2021,11,16), 2, company.getProjectRoleStore().getProjectRole("Scrum Master"));
+        proj1.getProjectTeam().assignProjectRole(manuelTest, LocalDate.of(2021, 11, 16), 2, company.getProjectRoleStore().getProjectRole("Scrum Master"));
         //Assert
         assertEquals(2, proj1.getProjectTeam().getProjectTeamList().size());
     }
@@ -772,351 +640,362 @@ public class ProjectTeamTest {
     @DisplayName("Test to Validate Project Team - Success To Get PO and SM")
     public void validateProjectTeamSuccess() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-            //Project 1
-        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
-        proj1.setEndDate(LocalDate.of(2022, 12, 31));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-            //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
-        Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
-        joana1R.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
-            //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
-        Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
-        joana2R.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
-            //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
-        Resource joana3R= proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
-        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
-            //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
-        Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
-        joana4R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
-        //Act
-        proj1.getProjectTeam().saveResource(joana1R);
-        proj1.getProjectTeam().saveResource(joana2R);
-        proj1.getProjectTeam().saveResource(joana3R);
-        proj1.getProjectTeam().saveResource(joana4R);
-        //Assert
-        assertTrue(joana1R.isYour(company.getProjectRoleStore().getProjectRole("Scrum Master")));
-        assertTrue(joana2R.isYour(company.getProjectRoleStore().getProjectRole("Product Owner")));
-        assertTrue(joana3R.isYour(company.getProjectRoleStore().getProjectRole("Project Manager")));
-        assertTrue(joana4R.isYour(company.getProjectRoleStore().getProjectRole("Team Member")));
-        assertTrue(proj1.getProjectTeam().validateProjectTeam(startDatej2, 2));
-        assertTrue(proj1.getProjectTeam().validateProjectTeam(startDatej1, 1));
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
+
+        Resource po = mock(Resource.class);
+        Resource sm = mock(Resource.class);
+
+        when(po.isYourRole("Product Owner")).thenReturn(true);
+        when(po.isAvailableToSprint(startDateMb,2)).thenReturn(true);
+
+        when(sm.isYourRole("Scrum Master")).thenReturn(true);
+        when(sm.isAvailableToSprint(startDateMb,2)).thenReturn(true);
+
+        projectTeam.saveResource(po);
+        projectTeam.saveResource(sm);
+
+        assertTrue(projectTeam.validateProjectTeam(startDateMb,2));
     }
 
     @Test
     @DisplayName("Test to Validate Project Team - The team does not have a PO and a SM")
     public void validateProjectTeamGlobalFail() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
-        proj1.setEndDate(LocalDate.of(2022, 12, 31));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
-        Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
-        joana1R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
-        //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
-        Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
-        joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
-        //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
-        Resource joana3R= proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
-        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
-        //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
-        Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
-        joana4R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
-        //Act
-        proj1.getProjectTeam().saveResource(joana1R);
-        proj1.getProjectTeam().saveResource(joana2R);
-        proj1.getProjectTeam().saveResource(joana3R);
-        proj1.getProjectTeam().saveResource(joana4R);
-        //Assert
-        assertFalse(proj1.getProjectTeam().validateProjectTeam(startDatej1, 2));
-        assertFalse(proj1.getProjectTeam().validateProjectTeam(startDatej2, 2));
-        assertFalse(proj1.getProjectTeam().validateProjectTeam(startDatej3, 2));
-        assertFalse(proj1.getProjectTeam().validateProjectTeam(startDatej4, 2));
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
+
+        Resource po = mock(Resource.class);
+        Resource sm = mock(Resource.class);
+
+        when(po.isYourRole("Product Owner")).thenReturn(false);
+        when(po.isAvailableToSprint(startDateMb,2)).thenReturn(false);
+
+        when(sm.isYourRole("Scrum Master")).thenReturn(false);
+        when(sm.isAvailableToSprint(startDateMb,2)).thenReturn(false);
+
+        projectTeam.saveResource(po);
+        projectTeam.saveResource(sm);
+
+        assertFalse(projectTeam.validateProjectTeam(startDateMb,2));
     }
 
     @Test
     @DisplayName("Test to Validate Project Team - The Team does not have a PO but has a Scrum Master")
     public void validateProjectTeamPOFail() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
-        proj1.setEndDate(LocalDate.of(2022, 12, 31));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
-        Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
-        joana1R.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
-        //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
-        Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
-        joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
-        //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej3 = LocalDate.of(2022, 1, 31);
-        Resource joana3R= proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
-        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
-        //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej4 = LocalDate.of(2022, 1, 31);
-        Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
-        joana4R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
-        //Act
-        proj1.getProjectTeam().saveResource(joana1R);
-        proj1.getProjectTeam().saveResource(joana2R);
-        proj1.getProjectTeam().saveResource(joana3R);
-        proj1.getProjectTeam().saveResource(joana4R);
-        //Assert
-        assertFalse(proj1.getProjectTeam().validateProjectTeam(startDatej1, 2));
-        assertFalse(proj1.getProjectTeam().validateProjectTeam(startDatej2, 2));
-        assertFalse(proj1.getProjectTeam().validateProjectTeam(startDatej3, 2));
-        assertFalse(proj1.getProjectTeam().validateProjectTeam(startDatej4, 2));
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
+
+        Resource po = mock(Resource.class);
+        Resource sm = mock(Resource.class);
+
+        when(po.isYourRole("Product Owner")).thenReturn(false);
+        when(po.isAvailableToSprint(startDateMb,2)).thenReturn(false);
+
+        when(sm.isYourRole("Scrum Master")).thenReturn(true);
+        when(sm.isAvailableToSprint(startDateMb,2)).thenReturn(true);
+
+        projectTeam.saveResource(po);
+        projectTeam.saveResource(sm);
+
+        assertFalse(projectTeam.validateProjectTeam(startDateMb,2));
     }
+
 
     @Test
     @DisplayName("Test to Validate Project Team - The Team does not have a SM but has a Product Owner")
     public void validateProjectTeamSMFail() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
-        proj1.setEndDate(LocalDate.of(2022, 12, 31));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
-        Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
-        joana1R.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
-        //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
-        Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
-        joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
-        //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej3 = LocalDate.of(2022, 1, 31);
-        Resource joana3R= proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
-        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
-        //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej4 = LocalDate.of(2022, 1, 31);
-        Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
-        joana4R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
-        //Act
-        proj1.getProjectTeam().saveResource(joana1R);
-        proj1.getProjectTeam().saveResource(joana2R);
-        proj1.getProjectTeam().saveResource(joana3R);
-        proj1.getProjectTeam().saveResource(joana4R);
-        //Assert
-        assertFalse(proj1.getProjectTeam().validateProjectTeam(startDatej1, 2));
-        assertFalse(proj1.getProjectTeam().validateProjectTeam(startDatej2, 2));
-        assertFalse(proj1.getProjectTeam().validateProjectTeam(startDatej3, 2));
-        assertFalse(proj1.getProjectTeam().validateProjectTeam(startDatej4, 2));
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        LocalDate startDateMb = LocalDate.of(2021, 11, 1);
+
+        Resource po = mock(Resource.class);
+        Resource sm = mock(Resource.class);
+
+        when(po.isYourRole("Product Owner")).thenReturn(true);
+        when(po.isAvailableToSprint(startDateMb,2)).thenReturn(true);
+
+        when(sm.isYourRole("Scrum Master")).thenReturn(false);
+        when(sm.isAvailableToSprint(startDateMb,2)).thenReturn(false);
+
+        projectTeam.saveResource(po);
+        projectTeam.saveResource(sm);
+
+        assertFalse(projectTeam.validateProjectTeam(startDateMb,2));
     }
+
     @Test
     @DisplayName("Check if role exist and is current - null and team Member")
     public void checkIfTheRoleExistAndIsCurrentFalseNullandTeamMember() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
-        proj1.setEndDate(LocalDate.of(2022, 12, 31));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
-        Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
-        joana1R.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
-        //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
-        Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
-        joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
-        //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej3 = LocalDate.of(2022, 1, 31);
-        Resource joana3R= proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
-        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
-        //Resource 4
-        SystemUser joana4 = new SystemUser("joana4", "joana4@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej4 = LocalDate.of(2022, 1, 31);
-        Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
-        joana4R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        LocalDate date = LocalDate.now().plusDays(3);
+        LocalDate endDate = LocalDate.now();
 
-        ProjectRole joana4role = joana4R.getRole();
+        //Mock results of other class mehtods
+        ProjectRole role = mock(ProjectRole.class);
+        Description description = mock(Description.class);
+        Resource resource = mock(Resource.class);
 
-        //Resource 5
-        SystemUser joana5 = new SystemUser("joana5", "joana5@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej5 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej5 = LocalDate.of(2022, 1, 31);
-        Resource joana5R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
-//        joana4R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
+        when(role.getName()).thenReturn(description);
+        when(description.getText()).thenReturn("Team Member");
+        when(resource.isYourEmail(any(ProjectRole.class))).thenReturn(false);
+        when(resource.getEndDate()).thenReturn(endDate);
 
-        //Act
-        proj1.getProjectTeam().saveResource(joana1R);
-        proj1.getProjectTeam().saveResource(joana2R);
-        proj1.getProjectTeam().saveResource(joana3R);
-        proj1.getProjectTeam().saveResource(joana4R);
-        proj1.getProjectTeam().saveResource(joana5R);
-        //Assert
-        assertFalse(proj1.getProjectTeam().checkIfTheRoleExistAndIsCurrent(joana4role, startDatej4));
-        assertFalse(proj1.getProjectTeam().checkIfTheRoleExistAndIsCurrent(null, startDatej5));
+        projectTeam.saveResource(resource);
+
+        //Assert expected result for this method
+        assertFalse(projectTeam.checkIfTheRoleExistAndIsCurrent(role,date));
     }
 
     @Test
     @DisplayName("Check if role exist and is current - Product Owner")
     public void checkIfTheRoleExistAndIsCurrentTrueProductOwner() {
         //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
-        proj1.setEndDate(LocalDate.of(2022, 12, 31));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
-        Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
-        joana1R.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        LocalDate date = LocalDate.now();
+        LocalDate endDate = LocalDate.now().plusDays(3);
 
-        ProjectRole joana1role = joana1R.getRole();
+        //Mock results of other class mehtods
+        ProjectRole role = mock(ProjectRole.class);
+        Description description = mock(Description.class);
+        Resource resource = mock(Resource.class);
 
-        //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
-        Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
-        joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
-        //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej3 = LocalDate.of(2022, 1, 31);
-        Resource joana3R= proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
-        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
+        when(role.getName()).thenReturn(description);
+        when(description.getText()).thenReturn("Product Owner");
+        when(resource.isYourEmail(any(ProjectRole.class))).thenReturn(true);
+        when(resource.getEndDate()).thenReturn(endDate);
 
-        //Act
-        proj1.getProjectTeam().saveResource(joana1R);
-        proj1.getProjectTeam().saveResource(joana2R);
-        proj1.getProjectTeam().saveResource(joana3R);
+        projectTeam.saveResource(resource);
 
-        //Assert
-        assertTrue(proj1.getProjectTeam().checkIfTheRoleExistAndIsCurrent(joana1role, startDatej1));
+        //Assert expected result for this method
+        assertTrue(projectTeam.checkIfTheRoleExistAndIsCurrent(role,date));
     }
 
     @Test
     @DisplayName("Check if role exist and is current - Product Owner - startDate before - fail")
     public void checkIfTheRoleExistAndIsCurrentTrueProductOwnerFail() {
         //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        LocalDate date = LocalDate.now().plusDays(3);
+        LocalDate endDate = LocalDate.now();
+
+        //Mock results of other class mehtods
+        ProjectRole role = mock(ProjectRole.class);
+        Description description = mock(Description.class);
+        Resource resource = mock(Resource.class);
+
+        when(role.getName()).thenReturn(description);
+        when(description.getText()).thenReturn("Product Owner");
+        when(resource.isYourEmail(any(ProjectRole.class))).thenReturn(true);
+        when(resource.getEndDate()).thenReturn(endDate);
+
+        projectTeam.saveResource(resource);
+
+        //Assert expected result for this method
+        assertFalse(projectTeam.checkIfTheRoleExistAndIsCurrent(role,date));
+    }
+
+    @Test
+    void overrideEqualsTestTrue() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
+        ProjectTeam expected = new ProjectTeam(resFac);
+        //Assert
+        assertEquals(pt, expected);
+    }
+
+    @Test
+    void overrideEqualsTestObjectTrue() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
+        ProjectTeam expected = pt;
+        //Assert
+        assertEquals(pt, expected);
+    }
+
+    @Test
+    void overrideEqualsTestFalseNull() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
+        ProjectTeam expected = null;
+        //Assert
+        assertNotEquals(pt, expected);
+    }
+
+    @Test
+    void overrideEqualsTestFalseInstanceOf() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
+        Description expected = new Description("s");
+        //Assert
+        assertNotEquals(pt, expected);
+    }
+
+    @Test
+    void overrideEqualsTestFalse() {
+        //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
-        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
-        proj1.setEndDate(LocalDate.of(2022, 12, 31));
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.now(), 2, 3000);
+        proj1.setEndDate(LocalDate.now().plusWeeks(10));
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        //Resource 1
-        SystemUser joana1 = new SystemUser("joana1", "joana1@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
-        Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
-        joana1R.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
-
-        ProjectRole joana1role = joana1R.getRole();
-
-        //Resource 2
-        SystemUser joana2 = new SystemUser("joana2", "joana2@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
-        Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
-        joana2R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Resource 3
-        SystemUser joana3 = new SystemUser("joana3", "joana3@beaver.com", "tester", "ghi", "ghi", "photo", profile);
-        LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
-        LocalDate endDatej3 = LocalDate.of(2022, 1, 31);
-        Resource joana3R= proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
+        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
+        LocalDate startDatej3 = LocalDate.now();
+        LocalDate endDatej3 = LocalDate.now().plusWeeks(2);
+        Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
         joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
 
-
-        //Act
-        proj1.getProjectTeam().saveResource(joana1R);
-        proj1.getProjectTeam().saveResource(joana2R);
-        proj1.getProjectTeam().saveResource(joana3R);
-
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
+        ProjectTeam expected = new ProjectTeam(resFac);
+        expected.saveResource(joana3R);
         //Assert
-        assertFalse(proj1.getProjectTeam().checkIfTheRoleExistAndIsCurrent(joana1role, endDatej1));
+        assertNotEquals(pt, expected);
     }
+
+
+    @Test
+    void overrideHashCodeTestTrue() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
+        ProjectTeam expected = new ProjectTeam(resFac);
+        //Assert
+        assertEquals(pt.hashCode(), expected.hashCode());
     }
+
+    @Test
+    void overrideHashCodeTestFalse() {
+        //Arrange
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+        //Project 1
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.now(), 2, 3000);
+        proj1.setEndDate(LocalDate.now().plusWeeks(10));
+        company.getProjectStore().saveNewProject(proj1);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+            //Resource 3
+        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
+        LocalDate startDatej3 = LocalDate.now();
+        LocalDate endDatej3 = LocalDate.now().plusWeeks(2);
+        Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
+        joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
+
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam pt = new ProjectTeam(resFac);
+        ProjectTeam expected = new ProjectTeam(resFac);
+        expected.saveResource(joana3R);
+        //Assert
+        assertNotEquals(pt.hashCode(), expected.hashCode());
+    }
+
+    @Test
+    public void shouldCreateAndAddProject() throws Exception
+    {
+        // Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
+        LocalDate startDate = LocalDate.now().minusWeeks(1);
+        LocalDate endDate = LocalDate.now().plusYears(1);
+        Double costPerHour = 100.0;
+        Double percAlloc = 0.5;
+
+        Resource res = mock( Resource.class );
+        SystemUser user = mock(SystemUser.class);
+
+        ResourceFactory resFac =  mock( ResourceFactory.class );
+        when(resFac.createResource(joana3, startDate, endDate, costPerHour, percAlloc)).thenReturn( res );
+
+        ProjectTeam projTeam = new ProjectTeam( resFac );
+        boolean hasCreated = projTeam.createAndAddResourceWithFac( joana3, startDate, endDate ,costPerHour,percAlloc);
+
+        assertTrue( hasCreated );
+    }
+
+    @Test
+    public void shouldCreateAndAddProjectFail() throws Exception
+    {
+        // Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+//        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
+        SystemUser joana3 = null;
+        LocalDate startDate = LocalDate.now().minusWeeks(1);
+        LocalDate endDate = LocalDate.now().plusYears(1);
+        Double costPerHour = 100.0;
+        Double percAlloc = 0.5;
+
+        Resource res = mock( Resource.class );
+        SystemUser user = mock(SystemUser.class);
+
+        ResourceFactory resFac =  mock( ResourceFactory.class );
+        when(resFac.createResource(joana3, startDate, endDate, costPerHour, percAlloc)).thenReturn( res );
+
+        ProjectTeam projTeam = new ProjectTeam( resFac );
+        boolean hasCreated = projTeam.createAndAddResourceWithFac( joana3, startDate, endDate ,costPerHour,percAlloc);
+
+        assertFalse( hasCreated );
+    }
+
+//    @Test
+//    public void shouldNotCreateAndAddRepeatedTitleProject() throws Exception
+//    {
+//        // Arrange
+//        Company company = new Company();
+//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+//        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
+//        LocalDate startDate = LocalDate.now().minusWeeks(1);
+//        LocalDate endDate = LocalDate.now().plusYears(1);
+//        Double costPerHour = 100.0;
+//        Double percAlloc = 0.5;
+//
+//        Resource res = mock(Resource.class );
+//        when( res.hasTitle( titulo ) ).thenReturn( true );
+//
+//        ProjectFactory projectFactoryDouble =  mock( ProjectFactory.class );
+//        when(projectFactoryDouble.createProject(titulo, startDate, endDate) ).thenReturn( projectDouble );
+//
+//        StoreProjectReeng storeProjectReeng = new StoreProjectReeng( projectFactoryDouble );
+//
+//        // should work fine
+//        boolean hasCreated = storeProjectReeng.createAndAddProject( titulo, startDate, endDate );
+//
+//        // Act + Assert
+//        // throws IllegalArgumentException, because repeated title
+//        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+//            storeProjectReeng.createAndAddProject( titulo, startDate, endDate );
+//        });
+//
+//        String expectedMessage = "Título já existente.";
+//        String actualMessage = exception.getMessage();
+//
+//        assertTrue(actualMessage.contains(expectedMessage));
+//    }
+
+
+
+}
 

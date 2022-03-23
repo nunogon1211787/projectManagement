@@ -19,7 +19,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
 
         Company company = new Company();
         ProjectTeamTest projectTeamTest = new ProjectTeamTest();
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
@@ -32,7 +32,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = company.getSystemUserStore().createSystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user = company.getSystemUserStore().createSystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
@@ -44,7 +44,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         sprint1.getTaskList().saveTask(taskTest);
         List<Task> taskList = new ArrayList<>();
 
-        project2.getSprints().saveSprint(sprint1);
+        project2.getSprintList().saveSprint(sprint1);
         taskList.add(taskTest);
         taskList.add(taskTest2);
 
@@ -55,7 +55,9 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         viewStatusTester.getProjectByCode("Project_2022_1");
         listTest = viewStatusTester.getListOfProjectActivities();
 
-        assertEquals(listTest, project2.getSprints().getListOfAllAActivitiesOfAProject());
+        assertEquals(listTest, project2.getSprintList().getListOfAllAActivitiesOfAProject());
+        assertNull(viewStatusTester.getProjectByCode(null));
+        assertNotNull(viewStatusTester.getProjectByCode("Project_2022_1"));
 
     }
 
@@ -67,7 +69,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         ProjectStore projectStore = company.getProjectStore();
         SystemUserStore systemUserStore = company.getSystemUserStore();
         //Project1
-        Typology typo = company.getTypologyStore().getTypology("Fixed Cost");
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = projectStore.createProject("prototype4", "proj4Prototype", customer,
@@ -86,13 +88,13 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         projectStore.saveNewProject(project3);
         //Resource1
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = systemUserStore.createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+        SystemUser user = systemUserStore.createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         systemUserStore.saveSystemUser(user);
         LocalDate startDateMm = LocalDate.of(2021, 12, 15);
         LocalDate endDateMm = LocalDate.of(2021, 12, 31);
         Resource resource1 = project1.getProjectTeam().createResource(user, startDateMm, endDateMm, 100, .5);
         //Resource2
-       SystemUser user2 = systemUserStore.createSystemUser("manuel", "manuel@beaver.com", "tester", "ghi", "ghi", "photo", profile);
+       SystemUser user2 = systemUserStore.createSystemUser("manuel", "manuel@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         systemUserStore.saveSystemUser(user2);
         LocalDate startDateM = LocalDate.of(2022, 1, 1);
         LocalDate endDateM = LocalDate.of(2022, 1, 31);
