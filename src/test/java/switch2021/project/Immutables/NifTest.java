@@ -2,7 +2,7 @@ package switch2021.project.Immutables;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Nif;
+import switch2021.project.immutable.Nif;
 
 class NifTest {
 

@@ -33,7 +33,7 @@ public class SprintListTest {
         projectStore = company.getProjectStore();
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         company.getBusinessSectorStore().createAndAddBusinessSector("sector");
-        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste", 123456789));
+        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste@teste.com", 123456789));
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         date = LocalDate.of(2022, 1, 1);

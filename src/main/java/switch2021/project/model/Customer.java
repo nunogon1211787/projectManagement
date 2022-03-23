@@ -2,9 +2,9 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.Immutables.Description;
-import switch2021.project.Immutables.Email;
-import switch2021.project.Immutables.Nif;
+import switch2021.project.immutable.Description;
+import switch2021.project.immutable.Email;
+import switch2021.project.immutable.Nif;
 
 @Getter
 @Setter

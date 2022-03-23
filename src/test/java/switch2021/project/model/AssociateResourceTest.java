@@ -26,7 +26,7 @@ public class AssociateResourceTest {
         userProfile = company.getUserProfileStore().getUserProfile("Visitor");
 
         LocalDate date = LocalDate.of(2021, 12, 12);
-        company.getBusinessSectorStore().addBusinessSector(company.getBusinessSectorStore().createBusinessSector("sector"));
+        company.getBusinessSectorStore().createAndAddBusinessSector("sector");
         company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste@teste.com", 123456789));
 
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");

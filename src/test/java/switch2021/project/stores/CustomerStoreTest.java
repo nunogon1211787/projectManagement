@@ -1,8 +1,9 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.Immutables.Email;
-import switch2021.project.Immutables.Nif;
+import switch2021.project.immutable.Description;
+import switch2021.project.immutable.Email;
+import switch2021.project.immutable.Nif;
 import switch2021.project.model.Customer;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ class CustomerStoreTest {
         Customer customer2 = store.createCustomer("teste","teste@teste.com", 123456789);
 
         long id_value= customer.getCustomerId();
-        String name_value = customer.getCustomerName().getDescriptionF();
+        String name_value = customer.getCustomerName().getText();
         customer2.setNipc(null);
         Nif nipc = customer.getNipc();
 
@@ -76,12 +77,13 @@ class CustomerStoreTest {
         CustomerStore store = new CustomerStore();
         Customer customer = store.createCustomer("teste","teste@teste.com", 123456789);
         Email change = new Email("setemail@teste.com");
+        Description changeDesc = new Description("setname");
         store.saveNewCustomer(customer);
 
         store.getCustomerList().get(0).setCustomerEmail(change);
-        store.getCustomerList().get(0).getCustomerName().setDescriptionF("setname");
+        store.getCustomerList().get(0).setCustomerName(changeDesc);
 
-        assertEquals("setname",store.getCustomerList().get(0).getCustomerName().getDescriptionF());
+        assertEquals("setname",store.getCustomerList().get(0).getCustomerName().getText());
         assertTrue(store.getCustomerList().get(0).getCustomerEmail().hasEmail("setemail@teste.com"));
     }
 
