@@ -1,7 +1,8 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.immutable.Nif;
+import switch2021.project.Immutables.Email;
+import switch2021.project.Immutables.Nif;
 import switch2021.project.model.Customer;
 
 import java.util.ArrayList;
@@ -18,17 +19,16 @@ class CustomerStoreTest {
         Customer customer2 = store.createCustomer("teste","teste@teste.com", 123456789);
 
         long id_value= customer.getCustomerId();
-        String email_value = customer.getCustomerEmail();
-        String name_value = customer.getCustomerName();
+        String name_value = customer.getCustomerName().getDescriptionF();
         customer2.setNipc(null);
         Nif nipc = customer.getNipc();
 
         assertEquals(0,id_value);
         assertEquals("teste", name_value);
-        assertEquals("teste@teste.com", email_value);
+        assertTrue(customer.getCustomerEmail().hasEmail("teste@teste.com"));
         assertNull(customer2.getNipc());
         assertNotNull(customer.getNipc());
-        assertEquals(null,customer2.getNipc());
+        assertNull(customer2.getNipc());
         assertEquals(nipc,customer.getNipc());
     }
 
@@ -75,13 +75,14 @@ class CustomerStoreTest {
     void setAttributes() {
         CustomerStore store = new CustomerStore();
         Customer customer = store.createCustomer("teste","teste@teste.com", 123456789);
+        Email change = new Email("setemail@teste.com");
         store.saveNewCustomer(customer);
 
-        store.getCustomerList().get(0).setCustomerEmail("setemail");
-        store.getCustomerList().get(0).setCustomerName("setname");
+        store.getCustomerList().get(0).setCustomerEmail(change);
+        store.getCustomerList().get(0).getCustomerName().setDescriptionF("setname");
 
-        assertEquals("setname",store.getCustomerList().get(0).getCustomerName());
-        assertEquals("setemail",store.getCustomerList().get(0).getCustomerEmail());
+        assertEquals("setname",store.getCustomerList().get(0).getCustomerName().getDescriptionF());
+        assertTrue(store.getCustomerList().get(0).getCustomerEmail().hasEmail("setemail@teste.com"));
     }
 
     @Test

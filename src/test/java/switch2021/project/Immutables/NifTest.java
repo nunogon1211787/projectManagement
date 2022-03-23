@@ -1,7 +1,8 @@
-package switch2021.project.immutable;
+package switch2021.project.Immutables;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import switch2021.project.Immutables.Nif;
 
 class NifTest {
 
@@ -45,7 +46,7 @@ class NifTest {
         //Act
         Nif test = new Nif(num);
         //Assert
-        assertEquals(num, test.getNif());
+        assertTrue(test.hasSameNif(num));
 
     }
 
@@ -67,10 +68,19 @@ class NifTest {
         //Act
         Nif test = new Nif(num);
         //Assert
-        assertEquals(num, test.getNif());
+        assertTrue(test.hasSameNif(num));
 
     }
 
-
+    @Test
+    void checkDifferentNifs(){
+        //Arrange
+        long num1 = 123456789;
+        long num2 = 987654322;
+        //Act
+        Nif test = new Nif(num1);
+        //Assert
+        assertFalse(test.hasSameNif(num2));
+    }
 
 }
