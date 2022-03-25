@@ -2,6 +2,8 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.factory.ProjectRoleFactory;
+import switch2021.project.immutable.Description;
+import switch2021.project.immutable.Name;
 import switch2021.project.model.Company;
 import switch2021.project.model.ProjectRole;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -27,20 +29,55 @@ class ProjectRoleStoreTest {
 //        assertEquals(test.getProjectRoleList(),company.getProjectRoleStore().getProjectRoleList());
 //    }
 //
-//    @Test
-//    public void shouldCreateAndAddProject(){
-//        // Arrange
-//        String titulo = "Título";
-//
-//        ProjectRole projectRoleDouble = mock( ProjectRole.class );
-//        ProjectRoleFactory projectRoleFactoryDouble =  mock( ProjectRoleFactory.class );
-//        when(projectRoleFactoryDouble.createProjectRole(anyString()) ).thenReturn( projectRoleDouble );
-//
-//        ProjectRoleStore sp = new ProjectRoleStore( projectRoleFactoryDouble );
-//        boolean hasCreated = sp.createAndAddProjectRole( titulo);
-//
-//        assertTrue( hasCreated );
-//    }
+    @Test
+    public void shouldCreateAndAddProject(){
+        // Arrange
+        String titulo = "Título";
+
+        ProjectRole projectRoleDouble = mock( ProjectRole.class );
+        ProjectRoleFactory projectRoleFactoryDouble =  mock( ProjectRoleFactory.class );
+        when(projectRoleFactoryDouble.createProjectRole(anyString()) ).thenReturn( projectRoleDouble );
+
+        ProjectRoleStore sp = new ProjectRoleStore( projectRoleFactoryDouble );
+        boolean hasCreated = sp.createAndAddProjectRole( titulo);
+
+        assertTrue( hasCreated );
+    }
+
+    @Test
+    public void shouldCreateAndAddExistentProject() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            // Arrange
+            String titulo = "Título";
+
+            ProjectRole projectRoleDouble = mock(ProjectRole.class);
+            ProjectRoleFactory projectRoleFactoryDouble = mock(ProjectRoleFactory.class);
+            Description name = mock(Description.class);
+            when(projectRoleFactoryDouble.createProjectRole(anyString())).thenReturn(projectRoleDouble);
+            when(projectRoleDouble.getName()).thenReturn(name);
+            when(name.getText()).thenReturn("Título");
+
+            ProjectRoleStore sp = new ProjectRoleStore(projectRoleFactoryDouble);
+            sp.createAndAddProjectRole(titulo);
+            sp.createAndAddProjectRole(titulo);
+
+        });
+    }
+
+    @Test
+    public void shouldCreateAndAddExistentProject3() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            // Arrange
+            String titulo = "Título";
+
+            ProjectRoleFactory projectRoleFactory = new ProjectRoleFactory();
+
+            ProjectRoleStore store = new ProjectRoleStore(projectRoleFactory);
+            store.createAndAddProjectRole(titulo);
+            store.createAndAddProjectRole(titulo);
+
+        });
+    }
 //
 //    @Test
 //    public void createProjectRoleTestSuccess() {

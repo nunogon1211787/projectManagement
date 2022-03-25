@@ -41,7 +41,9 @@ public class ProjectRoleStore {
         if( getProjectRole(title) != null ) {
             throw new IllegalArgumentException("Title already exist.");
         }
-        return this.projectRoleList.add(this.projectRoleFactory.createProjectRole(title));
+        ProjectRole x = this.projectRoleFactory.createProjectRole(title);
+         this.projectRoleList.add(x);
+        return true;
     }
 
     /**
