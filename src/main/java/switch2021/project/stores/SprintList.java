@@ -2,7 +2,7 @@ package switch2021.project.stores;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.factory.SprintFactory;
+import switch2021.project.factory.SprintFactoryInterface;
 import switch2021.project.model.ProjectTeam;
 import switch2021.project.model.Sprint;
 import switch2021.project.model.Task;
@@ -19,22 +19,21 @@ public class SprintList {
     /**
      * Class Attributes
      **/
-    //private SprintFactory sprintFactory;
     private final List<Sprint> sprints;
-    private SprintFactory sprintFactory;
+    private SprintFactoryInterface sprintFactory;
 
     /**
      * Constructors with data
      **/
-    public SprintList(SprintFactory sprintFactory1) {
+    public SprintList(SprintFactoryInterface sprintF) {
         this.sprints = new ArrayList<>();
-        this.sprintFactory=sprintFactory1;
+        this.sprintFactory = sprintF;
     }
 
-    public SprintList() {
+    /*public SprintList() {
         this.sprints = new ArrayList<>();
         //this.sprintFactory = sprintFact;
-    }
+    }*/
 
     /**
      * Sprint creator
@@ -42,13 +41,31 @@ public class SprintList {
     public Sprint createSprint(String name, LocalDate startDate, int sprintDuration) {
         Sprint sprint = null;
 
-        if(validateStartDate(startDate)) {
+        if (validateStartDate(startDate)) {
             sprint = new Sprint(name, startDate);
             //sprint = this.sprintFactory.createSprint(name, startDate);
             sprint.changeEndDate(sprintDuration);
         }
         return sprint;
     }
+
+    /**
+     * Method to Save a Sprint
+     */
+
+    public boolean saveSprint(Sprint sprint) {
+
+        boolean result = true;
+
+        if (validateIfSprintAlreadyExists(sprint)) {
+            result = false;
+        } else {
+            sprint.setIdSprint(idSprintGenerator());
+            this.sprints.add(sprint);
+        }
+        return result;
+    }
+
 
     /**
      * ID_Sprint Generator
@@ -63,10 +80,14 @@ public class SprintList {
     }
 
     /**
-     * Sprint Methods
-     */
+     * Get Methods
+     **/
 
-    public Sprint getSprint(int id) {
+    public List<Sprint> getSprints() {
+        return new ArrayList<>(this.sprints);
+    }
+
+    public Sprint getSprintById(int id) {
         Sprint sprint = null;
         for (Sprint sprt : sprints) {
             if (sprt.hasSprintID(id)) {
@@ -77,13 +98,30 @@ public class SprintList {
         return sprint;
     }
 
+    public Sprint getCurrentSprint() {
+        Sprint sprint = null;
+        for (Sprint i : this.sprints) {
+            if (i.isCurrentSprint()) {
+                sprint = i;
+            }
+        }
+        if (sprint == null) {
+            throw new NullPointerException("Do not exist a current sprint.");
+        }
+        return sprint;
+    }
+
     /**
-     * Get Method
-     **/
+     * Method to return all activities in a project
+     */
 
-    public List<Sprint> getSprints() {
+    public List<Task> getListOfAllAActivitiesOfAProject() {
+        List<Task> allActivitiesInAProject = new ArrayList<>();
 
-        return new ArrayList<>(this.sprints);
+        for (Sprint i : sprints) {
+            allActivitiesInAProject.addAll(i.getListOfTasksOfASprint());
+        }
+        return allActivitiesInAProject;
     }
 
 
@@ -122,27 +160,10 @@ public class SprintList {
 
         if (validateStartDate(startDate) && projectTeam.validateProjectTeam(startDate, sprintDuration)) {
             msg = true;
-            Sprint sprint = getSprint(sprintID);
+            Sprint sprint = getSprintById(sprintID);
             sprint.setStartDate(startDate);
         }
         return msg;
-    }
-
-    /**
-     * Method to Save a Sprint
-     */
-
-    public boolean saveSprint(Sprint sprint) {
-
-        boolean result = true;
-
-        if (validateIfSprintAlreadyExists(sprint)) {
-            result = false;
-        } else {
-            sprint.setIdSprint(idSprintGenerator());
-            this.sprints.add(sprint);
-        }
-        return result;
     }
 
 
@@ -163,31 +184,6 @@ public class SprintList {
 //        return nextSprint;
 //    }
 
-    public Sprint getCurrentSprint() {
-        Sprint sprint = null;
-        for (Sprint i : this.sprints) {
-            if (i.isCurrentSprint()) {
-                sprint = i;
-            }
-        }
-        if(sprint == null) {
-            throw new NullPointerException("Do not exist a current sprint.");
-        }
-        return sprint;
-    }
-
-    /**
-     * Method to return all activities in a project
-     */
-
-    public List<Task> getListOfAllAActivitiesOfAProject(){
-        List<Task> allActivitiesInAProject = new ArrayList<>();
-
-        for (Sprint i : sprints) {
-            allActivitiesInAProject.addAll(i.getListOfTasksOfASprint());
-        }
-        return allActivitiesInAProject;
-    }
 
     /**
      * Override

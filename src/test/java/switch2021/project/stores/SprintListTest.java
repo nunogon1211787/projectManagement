@@ -3,6 +3,7 @@ package switch2021.project.stores;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.factory.SprintFactory;
 import switch2021.project.model.*;
 
 import java.time.LocalDate;
@@ -40,7 +41,7 @@ public class SprintListTest {
         project = projectStore.createProject("prototype", "test1234", customer,
                 typo, sector, date, 7, 5000);
         project.setSprintDuration(2);
-        sprintList = new SprintList();
+        sprintList = new SprintList(new SprintFactory());
         sprint = sprintList.createSprint("Sprint_1", LocalDate.of(2022, 1, 1), project.getSprintDuration());
         sprint2 = sprintList.createSprint("Sprint_2", LocalDate.of(2022, 1, 16), project.getSprintDuration());
         sprint3 = sprintList.createSprint("Sprint_3", LocalDate.of(2021, 12, 19), project.getSprintDuration());
@@ -93,7 +94,7 @@ public class SprintListTest {
     @DisplayName("Verification Test, to create a Sprint with start date failure")
     public void createSprintFail_StartDate() {
         //Arrange
-        SprintList sprintListTest = new SprintList();
+        SprintList sprintListTest = new SprintList(new SprintFactory());
         Sprint sprintTest = sprintListTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 2), project.getSprintDuration());
         //Act
         String name = "Sprint_1";
@@ -109,7 +110,7 @@ public class SprintListTest {
     @DisplayName("Verification Test, to create a Sprint with sprint duration failure")
     public void createSprintFail_SprintDuration() {
         //Arrange
-        SprintList sprintListTest = new SprintList();
+        SprintList sprintListTest = new SprintList(new SprintFactory());
         Sprint sprintTest = sprintListTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 1), project.getSprintDuration());
         //Act
         String name = "Sprint_1";
@@ -126,7 +127,7 @@ public class SprintListTest {
     @DisplayName("Verification Test, to create a Sprint with failure (all parameters)")
     public void createSprintFailAll() {
         //Arrange
-        SprintList sprintListTest = new SprintList();
+        SprintList sprintListTest = new SprintList(new SprintFactory());
         Sprint sprintTest = sprintListTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 2), project.getSprintDuration());
         //Act
         String name = "Sprint_2";
@@ -144,7 +145,7 @@ public class SprintListTest {
     public void createEqualsSprint() {
 
         //Arrange
-        SprintList sprintStore1 = new SprintList();
+        SprintList sprintStore1 = new SprintList(new SprintFactory());
         Sprint sprint1 = sprintStore1.createSprint("Sprint_0", LocalDate.of(2022, 1, 1), 2);
         //Act
         Sprint sprint2 = sprintStore1.createSprint("Sprint_0", LocalDate.of(2022, 1, 1), 2);
@@ -158,12 +159,12 @@ public class SprintListTest {
     public void catchSprintByID() {
 
         //Arrange
-        SprintList sprintListTest = new SprintList();
+        SprintList sprintListTest = new SprintList(new SprintFactory());
         Sprint sprintTest = sprintListTest.createSprint("Sprint_0", LocalDate.of(2022, 1, 1), 2);
         //Act
         sprintListTest.saveSprint(sprintTest);
         //Assert
-        assertEquals(sprintTest, sprintListTest.getSprint(1));
+        assertEquals(sprintTest, sprintListTest.getSprintById(1));
 
     }
 
@@ -172,7 +173,7 @@ public class SprintListTest {
     public void validateSprintExists() {
 
         //Arrange
-        SprintList sprintListTest = new SprintList();
+        SprintList sprintListTest = new SprintList(new SprintFactory());
         Sprint sprintTest = sprintListTest.createSprint("Sprint_0", LocalDate.of(2022, 1, 1), 2);
         //Act
         sprintListTest.saveSprint(sprintTest);
@@ -185,7 +186,7 @@ public class SprintListTest {
     public void checkSaveTheSprint() {
 
         //Arrange
-        SprintList sprintListTest = new SprintList();
+        SprintList sprintListTest = new SprintList(new SprintFactory());
         Sprint sprintTest = sprintListTest.createSprint("String_0", LocalDate.of(2022, 1, 1), 2);
         //Act and Assert
         assertTrue(sprintListTest.saveSprint(sprintTest));
@@ -197,12 +198,12 @@ public class SprintListTest {
     public void checkIfSprintWasSaved() {
 
         //Arrange
-        SprintList sprintListTest = new SprintList();
+        SprintList sprintListTest = new SprintList(new SprintFactory());
         Sprint sprintTest = sprintListTest.createSprint("String_0", LocalDate.of(2022, 1, 1), 2);
         //Act
         sprintListTest.saveSprint(sprintTest);
         // Assert
-        assertEquals(sprintTest, sprintListTest.getSprint(1));
+        assertEquals(sprintTest, sprintListTest.getSprintById(1));
 
     }
 
@@ -210,7 +211,7 @@ public class SprintListTest {
     @DisplayName("Get the next start Sprint")
     public void getCurrentSprintTest() {
         //Arrange
-        SprintList storeTest = new SprintList();
+        SprintList storeTest = new SprintList(new SprintFactory());
         storeTest.saveSprint(sprint8);
         storeTest.saveSprint(sprint9);
         storeTest.saveSprint(sprint10);
@@ -226,7 +227,7 @@ public class SprintListTest {
         //Assert
         assertThrows(NullPointerException.class, () -> {
             //Arrange
-            SprintList storeTest = new SprintList();
+            SprintList storeTest = new SprintList(new SprintFactory());
             storeTest.saveSprint(sprint);
             storeTest.saveSprint(sprint3);
             storeTest.saveSprint(sprint4);
@@ -284,7 +285,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana4R);
 
         //Create a Sprint
-        SprintList sprintListTest1 = new SprintList();
+        SprintList sprintListTest1 = new SprintList(new SprintFactory());
         Sprint sprint1 = sprintListTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
                 project.getSprintDuration());
         sprintListTest1.saveSprint(sprint1);
@@ -346,7 +347,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana4R);
 
         //Create a Sprint
-        SprintList sprintListTest1 = new SprintList();
+        SprintList sprintListTest1 = new SprintList(new SprintFactory());
         Sprint sprint1 = sprintListTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
                 project.getSprintDuration());
         sprintListTest1.saveSprint(sprint1);
@@ -405,7 +406,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana4R);
 
         //Create a Sprint
-        SprintList sprintListTest1 = new SprintList();
+        SprintList sprintListTest1 = new SprintList(new SprintFactory());
         Sprint sprint1 = sprintListTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
                 project.getSprintDuration());
         sprintListTest1.saveSprint(sprint1);
@@ -464,7 +465,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana4R);
 
         //Create a Sprint
-        SprintList sprintListTest1 = new SprintList();
+        SprintList sprintListTest1 = new SprintList(new SprintFactory());
         Sprint sprint1 = sprintListTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
                 project.getSprintDuration());
         sprintListTest1.saveSprint(sprint1);
@@ -523,7 +524,7 @@ public class SprintListTest {
         proj1.getProjectTeam().saveResource(joana4R);
 
         //Create a Sprint
-        SprintList sprintListTest1 = new SprintList();
+        SprintList sprintListTest1 = new SprintList(new SprintFactory());
         Sprint sprint1 = sprintListTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
                 project.getSprintDuration());
         sprintListTest1.saveSprint(sprint1);
@@ -540,7 +541,7 @@ public class SprintListTest {
         LocalDate startDatej4 = LocalDate.of(2022, 1, 15);
         LocalDate startDatej5 = LocalDate.of(2022, 1, 1);
 
-        SprintList sprintListTest = new SprintList();
+        SprintList sprintListTest = new SprintList(new SprintFactory());
         Sprint sprintTest = sprintListTest.createSprint("String_0", startDatej4, 2);
         Sprint sprintTest2 = sprintListTest.createSprint("String_0", startDatej5, 2);
         //Act

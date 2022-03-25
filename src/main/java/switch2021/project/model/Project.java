@@ -58,7 +58,7 @@ public class Project {
         this.businessSector = businessSector;
 
         this.startDate = startDate;
-        this.sprintList = new SprintList();
+        this.sprintList = new SprintList(new SprintFactory());
 
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
