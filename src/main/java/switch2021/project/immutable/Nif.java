@@ -1,24 +1,25 @@
 package switch2021.project.immutable;
 
-import lombok.Getter;
-
-@Getter
 public class Nif {
 
     /**
      * Attributes
      */
 
-    private final long nif;
+    private final long number;
     private final int NIF_LENGTH = 9;
 
 
-    public Nif(long nif) {
+    public Nif(long number) {
 
-        checkNifRules(nif);
+        checkNifRules(number);
 
-        this.nif = nif;
+        this.number = number;
     }
+
+    /**
+     * Methods to verify the rules to NIF number.
+     */
 
     private void checkNifRules(long nif) {
 
@@ -34,6 +35,7 @@ public class Nif {
 
     }
 
+    // NIF number has 9 digits. The method below check this.
     private int nifSize(long nif) {
 
         int size = 1;
@@ -47,6 +49,7 @@ public class Nif {
 
     }
 
+    //The last number of the NIF is the digit control and has a rule to generate it. The method below will verify this rule.
     private boolean checkLastDigit(long nif) {
 
         int validDigitControl = 0;
@@ -71,4 +74,10 @@ public class Nif {
 
         return validDigitControl == typedDigitControl;
     }
+
+    //Method to compare two if the number received are equal to the object.
+    public boolean hasSameNif(long num){
+        return this.number == num;
+    }
+
 }

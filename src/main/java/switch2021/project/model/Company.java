@@ -1,11 +1,7 @@
 package switch2021.project.model;
 
 import lombok.Getter;
-import switch2021.project.factory.ProjectRoleFactory;
-import switch2021.project.factory.ProjectStatusFactory;
-import switch2021.project.factory.TaskStatusFactory;
-import switch2021.project.factory.TaskTypeFactory;
-import switch2021.project.factory.UserStoryFactory;
+import switch2021.project.factory.*;
 import switch2021.project.stores.*;
 
 
@@ -46,7 +42,7 @@ public class Company {
         this.projectRoleStore = new ProjectRoleStore(projectRoleFactory);
         this.typologyStore = new TypologyStore();
         this.customerStore = new CustomerStore();
-        this.businessSectorStore = new BusinessSectorStore();
+        this.businessSectorStore = new BusinessSectorStore(new BusinessSectorFactory());
         this.projectStatusStore = new ProjectStatusStore(new ProjectStatusFactory());
         this.userStoryStatusStore = new UserStoryStatusStore();
         this.requestStore = new RequestStore();

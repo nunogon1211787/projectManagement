@@ -2,6 +2,8 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.immutable.Description;
+import switch2021.project.immutable.Email;
 import switch2021.project.immutable.Nif;
 
 @Getter
@@ -13,8 +15,8 @@ public class Customer {
      * Attributes - The customer is composed of an automatically generated ID, an email address and a customer name.
      **/
     private int customerId;
-    private String customerName;
-    private String customerEmail;
+    private Description customerName;
+    private Email customerEmail;
     private Nif nipc;
 
     /**
@@ -23,8 +25,8 @@ public class Customer {
      **/
 
     public Customer(String customerName, String customerEmail, long nif) {
-        this.customerEmail = customerEmail;
-        this.customerName = customerName;
+        this.customerEmail = new Email(customerEmail);
+        this.customerName = new Description(customerName);
         this.nipc = new Nif(nif);
     }
     

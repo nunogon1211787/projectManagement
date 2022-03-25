@@ -23,8 +23,8 @@ public class ProjectTeamMapperTest {
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
         company.getCustomerStore().saveNewCustomer(customer);
-        BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
-        company.getBusinessSectorStore().addBusinessSector(sector);
+        company.getBusinessSectorStore().createAndAddBusinessSector("it");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         company.getProjectStore().saveNewProject(proj1);
@@ -76,8 +76,8 @@ public class ProjectTeamMapperTest {
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
         company.getCustomerStore().saveNewCustomer(customer);
-        BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
-        company.getBusinessSectorStore().addBusinessSector(sector);
+        company.getBusinessSectorStore().createAndAddBusinessSector("it");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         company.getProjectStore().saveNewProject(proj1);
@@ -129,7 +129,8 @@ public class ProjectTeamMapperTest {
         //create project and save it
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
-        BusinessSector sector = company.getBusinessSectorStore().createBusinessSector("it");
+        company.getBusinessSectorStore().createAndAddBusinessSector("it");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         ProjectRole projectRole = company.getProjectRoleStore().getProjectRole("Team Member");
 

@@ -2,12 +2,10 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatchers;
 import switch2021.project.factory.ResourceFactory;
 import switch2021.project.immutable.Description;
 import switch2021.project.immutable.Name;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -38,7 +36,7 @@ public class ProjectTeamTest {
     }
 
     @Test
-    @DisplayName("Test with mock if the resource is returned ")
+    @DisplayName("Test with mock if the resource is returned")
     public void getResourceByEmailTestSuccess() {
         //Arrange
         ResourceFactory resFac = mock(ResourceFactory.class);
@@ -77,6 +75,44 @@ public class ProjectTeamTest {
     }
 
     @Test
+    public void getResourceByEmailTestIsYourEmailFail() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourEmail("manuelbras@beaver.com")).thenReturn(false);
+        when(manuelbras.isCurrent()).thenReturn(true);
+
+        projectTeam.saveResource(manuelbras);
+
+        //Act
+        Resource testRes = projectTeam.getResourceByEmail("manuelbras@beaver.com");
+
+        //Assert
+        assertNull(testRes);
+    }
+
+    @Test
+    public void getResourceByEmailIsCurrentFail() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourEmail("manuelbras@beaver.com")).thenReturn(true);
+        when(manuelbras.isCurrent()).thenReturn(false);
+
+        projectTeam.saveResource(manuelbras);
+
+        //Act
+        Resource testRes = projectTeam.getResourceByEmail("manuelbras@beaver.com");
+
+        //Assert
+        assertNull(testRes);
+    }
+
+    @Test
     public void getResourceByUserTestSuccess() {
         //Arrange
         ResourceFactory resFac = mock(ResourceFactory.class);
@@ -100,6 +136,7 @@ public class ProjectTeamTest {
         //Arrange
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
+
         SystemUser user = mock(SystemUser.class);
         Resource manuelbras = mock(Resource.class);
         when(manuelbras.isYourEmail(user)).thenReturn(false);
@@ -142,6 +179,25 @@ public class ProjectTeamTest {
         Resource manuelbras = mock(Resource.class);
         when(manuelbras.isYourEmail(role)).thenReturn(false);
         when(manuelbras.isCurrent()).thenReturn(false);
+
+        projectTeam.saveResource(manuelbras);
+
+        //Act
+        Resource testRes = projectTeam.getResourceByRole(role);
+
+        //Assert
+        assertNull(testRes);
+    }
+
+    @Test
+    public void getResourceByRoleTestFailOneCondition() {
+        //Arrange
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        ProjectRole role = mock(ProjectRole.class);
+        Resource manuelbras = mock(Resource.class);
+        when(manuelbras.isYourEmail(role)).thenReturn(false);
+        when(manuelbras.isCurrent()).thenReturn(true);
 
         projectTeam.saveResource(manuelbras);
 
@@ -196,8 +252,8 @@ public class ProjectTeamTest {
     @Test
     public void getCurrentResourcesNamesTestSuccess() {
         //Arrange
-        ResourceFactory resFac = mock(ResourceFactory.class);
-        ProjectTeam projectTeam = new ProjectTeam(resFac);
+        ResourceFactory resourceFactory = mock(ResourceFactory.class);
+        ProjectTeam projectTeam = new ProjectTeam(resourceFactory);
 
         SystemUser user = mock(SystemUser.class);
         Name name = mock(Name.class);
@@ -229,7 +285,6 @@ public class ProjectTeamTest {
         //Assert
         assertEquals("chico", testRes.get(0));
         assertEquals("jorgebras", testRes.get(1));
-        assertEquals(2, testRes.size());
     }
 
     @Test
@@ -269,52 +324,6 @@ public class ProjectTeamTest {
         assertTrue(testRes.isEmpty());
     }
 
-    /**
-     * Create a new Resource Test
-     */
-    @Test  //TODO Vai passar a factory
-    public void createResourceTestSuccess() {
-        //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com",
-                "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource manuelbras = new Resource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
-        ResourceFactory resFac = mock(ResourceFactory.class);
-        when(resFac.createResource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5)).thenReturn(manuelbras);
-        //Act
-
-        Resource test = resFac.createResource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
-        //Assert
-        assertEquals(test, manuelbras);
-    }
-
-    @Test  //TODO Vai passar a factory
-    public void createResourceTestFail() {
-        //Assert
-        assertThrows(NullPointerException.class, () -> {
-            //Arrange
-            Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-            Customer customer = company.getCustomerStore().getCustomerByName("isep");
-            BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-            //Project 1
-            Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                    typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-            proj1.setEndDate(LocalDate.now().plusYears(1));
-            company.getProjectStore().saveNewProject(proj1);
-            //Act
-            proj1.getProjectTeam().createResource(null, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
-        });
-    }
 
     @Test
     public void saveResourceTestSuccess() {
@@ -802,7 +811,7 @@ public class ProjectTeamTest {
         ProjectTeam pt = new ProjectTeam(resFac);
         ProjectTeam expected = new ProjectTeam(resFac);
         //Assert
-        assertTrue(pt.equals(expected));
+        assertEquals(pt, expected);
     }
 
     @Test
@@ -812,7 +821,7 @@ public class ProjectTeamTest {
         ProjectTeam pt = new ProjectTeam(resFac);
         ProjectTeam expected = pt;
         //Assert
-        assertTrue(pt.equals(expected));
+        assertEquals(pt, expected);
     }
 
     @Test
@@ -822,7 +831,7 @@ public class ProjectTeamTest {
         ProjectTeam pt = new ProjectTeam(resFac);
         ProjectTeam expected = null;
         //Assert
-        assertFalse(pt.equals(expected));
+        assertNotEquals(pt, expected);
     }
 
     @Test
@@ -832,7 +841,7 @@ public class ProjectTeamTest {
         ProjectTeam pt = new ProjectTeam(resFac);
         Description expected = new Description("s");
         //Assert
-        assertFalse(pt.equals(expected));
+        assertNotEquals(pt, expected);
     }
 
     @Test
@@ -860,7 +869,7 @@ public class ProjectTeamTest {
         ProjectTeam expected = new ProjectTeam(resFac);
         expected.saveResource(joana3R);
         //Assert
-        assertFalse(pt.equals(expected));
+        assertNotEquals(pt, expected);
     }
 
 

@@ -36,9 +36,9 @@ public class ProductBacklog {
      * Methods for create UserStory to the productBacklog
      **/
 
-    public boolean createAndSaveUserStory(String name, int priority, String description, int estimateEffort) {
+    public boolean createAndSaveUserStory(String title, int priority, String description, int estimateEffort) {
 
-        UserStory newUserStory = this.userStoryFactory.createUserStory(name, priority, description, estimateEffort);
+        UserStory newUserStory = this.userStoryFactory.createUserStory(title, priority, description, estimateEffort);
 
         validateUserStory(newUserStory);
 
@@ -48,13 +48,10 @@ public class ProductBacklog {
         return this.userStoryList.add(newUserStory);
     }
 
-    public UserStory createUserStoryRefine(UserStory userStoryParent, UserStoryStatus userStoryStatus, int priority, String description) {
+    public UserStory RefineUserStory(UserStory userStoryParent, UserStoryStatus userStoryStatus, int priority, String description) {
         UserStory userStory = new UserStory(userStoryParent, userStoryStatus, priority, description);
         validateUserStory(userStory);
 
-        if (validateIdUserStory(userStory)) {
-            userStory.setIdUserStory(idUserStoryGenerator());
-        }
         return userStory;
     }
 

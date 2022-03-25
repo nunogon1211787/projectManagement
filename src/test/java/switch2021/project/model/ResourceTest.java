@@ -2,8 +2,12 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.factory.ResourceFactory;
+
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class ResourceTest {
 
@@ -652,4 +656,52 @@ class ResourceTest {
         assertEquals(resExpected,res);
         assertEquals(newStartDateAllocated,res.getStartDate());
     }
+
+    /**
+     * Create a new Resource Test
+     */
+    @Test  //TODO Passou de ProjectTeamTest para aqui, é preciso rever se vai continuar aqui
+    public void createResourceTestSuccess() {
+        //Arrange
+        Company company = new Company();
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+        //Project 1
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
+        proj1.setEndDate(LocalDate.now().plusYears(1));
+        company.getProjectStore().saveNewProject(proj1);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com",
+                "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        Resource manuelbras = new Resource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
+        ResourceFactory resFac = mock(ResourceFactory.class);
+        when(resFac.createResource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5)).thenReturn(manuelbras);
+        //Act
+
+        Resource test = resFac.createResource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
+        //Assert
+        assertEquals(test, manuelbras);
+    }
+
+    @Test  //TODO Passou de ProjectTeamTest para aqui, é preciso rever se vai continuar aqui
+    public void createResourceTestFail() {
+        //Assert
+        assertThrows(NullPointerException.class, () -> {
+            //Arrange
+            Company company = new Company();
+            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+            Customer customer = company.getCustomerStore().getCustomerByName("isep");
+            BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+            //Project 1
+            Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+                    typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
+            proj1.setEndDate(LocalDate.now().plusYears(1));
+            company.getProjectStore().saveNewProject(proj1);
+            //Act
+            proj1.getProjectTeam().createResource(null, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
+        });
+    }
+
 }

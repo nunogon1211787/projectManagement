@@ -12,7 +12,6 @@ import java.util.Objects;
 
 @Getter
 @Setter
-
 public class ProjectStore{
 
 
@@ -51,12 +50,8 @@ public class ProjectStore{
      **/
 
     public List<Project> getProjects() {
-        List<Project> copyList = new ArrayList<>();
 
-        for (Project project : this.projectList) {
-            copyList.add(project);
-        }
-        return copyList;
+        return new ArrayList<>(this.projectList);
     }
 
     //This method was changed to implement encapsulation.
@@ -158,7 +153,7 @@ public class ProjectStore{
             }
         }
         if (!isEmailExist) {
-            throw new IllegalArgumentException("Email don't exist in system");
+            throw new IllegalArgumentException("Email is not associated with any project");
         }
         return true;
     }

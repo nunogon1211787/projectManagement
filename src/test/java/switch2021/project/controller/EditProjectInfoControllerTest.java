@@ -48,7 +48,7 @@ class EditProjectInfoControllerTest {
         List<Project> actual = projectStore.getProjects();
 
         //Assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -95,20 +95,20 @@ class EditProjectInfoControllerTest {
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
         //Act
-        edit.editProject("proto", "test44", LocalDate.of(2022,12,1),
-                LocalDate.of(2023,12,1), 10,10000,
+        edit.editProject("proto", "test44", LocalDate.of(2022, 12, 1),
+                LocalDate.of(2023, 12, 1), 10, 10000,
                 3, projectStatus, projectTeam2);
 
 
         //Assert
-        assertEquals( "proto", project.getProjectName());
-        assertEquals( "test44", project.getDescription());
-        assertEquals(project.getStartDate(),LocalDate.of(2022,12,1));
-        assertEquals(project.getEndDate(),LocalDate.of(2023,12,1));
-        assertEquals( 10, project.getNumberOfSprints());
+        assertEquals("proto", project.getProjectName());
+        assertEquals("test44", project.getDescription().getText());
+        assertEquals(project.getStartDate(), LocalDate.of(2022, 12, 1));
+        assertEquals(project.getEndDate(), LocalDate.of(2023, 12, 1));
+        assertEquals(10, project.getNumberOfSprints());
         assertEquals(10000, project.getBudget());
-        assertEquals( 3, project.getSprintDuration());
-        assertEquals(project.getProjectStatus(),projectStatus);
+        assertEquals(3, project.getSprintDuration());
+        assertEquals(project.getProjectStatus(), projectStatus);
         assertEquals(project.getProjectTeam(), projectTeam2);
     }
 
@@ -161,14 +161,14 @@ class EditProjectInfoControllerTest {
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
         //Act
-        edit.editProject("proto", "test44", LocalDate.of(2020,12,1),
-                LocalDate.of(2023,12,1), 10,10000,
+        edit.editProject("proto", "test44", LocalDate.of(2020, 12, 1),
+                LocalDate.of(2023, 12, 1), 10, 10000,
                 3, projectStatus, newProjectTeam);
 
 
         //Assert
         ProjectTeam x = project.getProjectTeam();
-        assertEquals( newProjectTeam, x);
+        assertEquals(newProjectTeam, x);
     }
 
     @Test
@@ -190,7 +190,7 @@ class EditProjectInfoControllerTest {
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
-        String name="1s";
+        String name = "1s";
         // Act
 
         boolean isEdited = edit.editProject(name, "test44", LocalDate.of(2022, 12, 1),
@@ -219,7 +219,7 @@ class EditProjectInfoControllerTest {
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
-        String name="";
+        String name = "";
         // Act
 
         boolean isEdited = edit.editProject(name, "test44", LocalDate.of(2022, 12, 1),
@@ -248,36 +248,7 @@ class EditProjectInfoControllerTest {
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
-        String description="";
-        // Act
-
-        boolean isEdited = edit.editProject("proto", description, LocalDate.of(2022, 12, 1),
-                LocalDate.of(2023, 12, 1), 10, 10000,
-                3, projectStatus, projectTeam2);
-        //Assert
-        assertFalse(isEdited);
-    }
-
-    @Test
-    public void validateProjectFieldsProjectDescriptionLessThen5() {
-        //Arrange
-        company = new Company();
-        this.projectStore = company.getProjectStore();
-        LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        customer = company.getCustomerStore().getCustomerByName("ISEP");
-        sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-        project = company.getProjectStore().createProject("prototype2", "test56", customer,
-                typo, sector, startDate2, 7, 5000);
-        ResourceFactory resFac = mock(ResourceFactory.class);
-        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
-        ProjectStatus projectStatus = new ProjectStatus("Quase");
-
-        this.projectStore.saveNewProject(project);
-
-        EditProjectInfoController edit = new EditProjectInfoController(company);
-        edit.getProjectRequested(project.getCode());
-        String description="23r";
+        String description = "";
         // Act
 
         boolean isEdited = edit.editProject("proto", description, LocalDate.of(2022, 12, 1),
@@ -306,7 +277,7 @@ class EditProjectInfoControllerTest {
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
-        int numberOfSprints=0;
+        int numberOfSprints = 0;
         // Act
 
         boolean isEdited = edit.editProject("proto", "test44", LocalDate.of(2022, 12, 1),
@@ -335,7 +306,7 @@ class EditProjectInfoControllerTest {
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
-        int numberOfSprints=-5;
+        int numberOfSprints = -5;
         // Act
 
         boolean isEdited = edit.editProject("proto", "test44", LocalDate.of(2022, 12, 1),
@@ -364,7 +335,7 @@ class EditProjectInfoControllerTest {
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
-        int budget=0;
+        int budget = 0;
         // Act
 
         boolean isEdited = edit.editProject("proto", "test44", LocalDate.of(2022, 12, 1),
@@ -393,7 +364,7 @@ class EditProjectInfoControllerTest {
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getCode());
-        int budget=-50000;
+        int budget = -50000;
         // Act
 
         boolean isEdited = edit.editProject("proto", "test44", LocalDate.of(2022, 12, 1),
@@ -402,21 +373,6 @@ class EditProjectInfoControllerTest {
         //Assert
         assertFalse(isEdited);
     }
-
-
-
-//    @Test
-//    void getProjectRequested() {
-//    }
-//
-//    @Test
-//    void editProject() {
-//    }
-//
-//    @Test
-//    void saveProject() {
-//    }
-
 
 
 }

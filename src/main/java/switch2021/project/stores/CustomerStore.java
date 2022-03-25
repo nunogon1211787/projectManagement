@@ -66,7 +66,7 @@ public class CustomerStore {
     public Customer getCustomerByName(String name) {
         Customer cust = null;
         for (Customer i : this.customerList)
-            if (i.getCustomerName().equals(name)) {
+            if (i.getCustomerName().getText().equals(name)) {
                 cust = i;
                 break;
             }

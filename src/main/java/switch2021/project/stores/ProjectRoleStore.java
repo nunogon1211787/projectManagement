@@ -1,8 +1,7 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.factory.ProjectRoleFactory;
-import switch2021.project.factory.ProjectRoleFactoryInterface;
+import switch2021.project.factoryInterface.ProjectRoleFactoryInterface;
 import switch2021.project.model.ProjectRole;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +41,9 @@ public class ProjectRoleStore {
         if( getProjectRole(title) != null ) {
             throw new IllegalArgumentException("Title already exist.");
         }
-        return this.projectRoleList.add(this.projectRoleFactory.createProjectRole(title));
+        ProjectRole x = this.projectRoleFactory.createProjectRole(title);
+         this.projectRoleList.add(x);
+        return true;
     }
 
     /**

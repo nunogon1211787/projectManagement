@@ -46,7 +46,7 @@ class TaskTypeTest {
     }
 
     @Test
-    @DisplayName("Test to verify if task type description is valid.")
+    @DisplayName("Test to verify if task type description is invalid.")
     void getDescriptionFail() {
         //Arrange
         TaskType type1 = new TaskType("test1");
@@ -70,7 +70,7 @@ class TaskTypeTest {
 
 
     @Test
-    @DisplayName("Test 2 to check Override Method, two different objects.")
+    @DisplayName("Test 1 to check Override Method, two different objects.")
     void overrideTest_True_1(){
         //Arrange
         TaskType taskType = new TaskType("name");
@@ -80,7 +80,7 @@ class TaskTypeTest {
     }
 
     @Test
-    @DisplayName("Test 3 to check Override Method, with one null object.")
+    @DisplayName("Test 2 to check Override Method, with one null object.")
     void overrideTest_True_2(){
         //Arrange
         TaskType taskType = new TaskType("TaskType");
@@ -100,7 +100,7 @@ class TaskTypeTest {
     }
 
     @Test
-    @DisplayName("Test 3 to check Override Method, with one null object.")
+    @DisplayName("Test 4 to check Override Method, with one null object.")
     void overrideTest_False(){
         //Arrange
         TaskType taskType = new TaskType("TaskType");

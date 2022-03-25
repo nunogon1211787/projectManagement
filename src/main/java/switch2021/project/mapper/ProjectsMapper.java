@@ -50,7 +50,7 @@ public class ProjectsMapper {
     public List<ProjectDTO> toDtoByUser(List<Project> projectListByUser) {
         List<ProjectDTO> projectListByUserDtoList = new ArrayList<>();
         for (Project project : projectListByUser) {
-            ProjectDTO projectListByUserDto = new ProjectDTO(project.getCode(), project.getProjectName(), project.getDescription());
+            ProjectDTO projectListByUserDto = new ProjectDTO(project.getCode(), project.getProjectName(), project.getDescription().getText());
             projectListByUserDtoList.add(projectListByUserDto);
         }
         return projectListByUserDtoList;

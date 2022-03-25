@@ -1,5 +1,6 @@
 package switch2021.project.factory;
 
+import switch2021.project.factoryInterface.TaskTypeFactoryInterface;
 import switch2021.project.model.TaskType;
 
 public class TaskTypeFactory implements TaskTypeFactoryInterface {
