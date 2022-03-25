@@ -7,7 +7,6 @@ import switch2021.project.model.BusinessSector;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -19,7 +18,7 @@ public class BusinessSectorStore {
      **/
 
     private final List<BusinessSector> businessSectorList;
-    private BusinessSectorFactoryInterface businessSectorFI;
+    private BusinessSectorFactoryInterface businessSectorFactoryInterface;
 
 
     /**
@@ -28,7 +27,7 @@ public class BusinessSectorStore {
 
     public BusinessSectorStore(BusinessSectorFactoryInterface businessSectorFI) {
         this.businessSectorList = new ArrayList<>();
-        this.businessSectorFI = businessSectorFI;
+        this.businessSectorFactoryInterface = businessSectorFI;
     }
 
     /**
@@ -42,7 +41,7 @@ public class BusinessSectorStore {
             return false;
         }
         else {
-                this.businessSectorList.add(businessSectorFI.createBusinessSector(description));
+                this.businessSectorList.add(businessSectorFactoryInterface.createBusinessSector(description));
             }
             return true;
         }
