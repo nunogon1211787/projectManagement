@@ -106,13 +106,6 @@ public class SystemUser {
      **/
 
 
-    private void checkEmailRules(String email) {
-        if (email.trim().isEmpty())
-            throw new IllegalArgumentException("Email cannot be empty.");
-        if ((email.length() < 2))
-            throw new IllegalArgumentException("Email must be at least 2 characters");
-    }
-
 
 //    private void checkPasswordRules(String password) {
 //        if (password.trim().isEmpty())
