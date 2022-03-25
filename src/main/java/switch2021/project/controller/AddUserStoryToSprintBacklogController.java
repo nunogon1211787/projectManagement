@@ -38,7 +38,7 @@ public class AddUserStoryToSprintBacklogController {
     }
 
     public Sprint getSprint(int sprintId) {
-        this.sprint = this.sprintList.getSprint(sprintId);
+        this.sprint = this.sprintList.getSprintById(sprintId);
         return this.sprint;
     }
 

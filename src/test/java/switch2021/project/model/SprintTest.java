@@ -30,7 +30,7 @@ public class SprintTest {
     public void sprintConstructorFail_ID() {
         //Arrange
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
-        SprintList sprintList = new SprintList();
+        SprintList sprintList = new SprintList(new SprintFactory());
         //Act
         sprintList.saveSprint(sprint);
         int x = sprint.getIdSprint();
@@ -173,7 +173,7 @@ public class SprintTest {
         LocalDate startDate2 = LocalDate.of(2022, 1, 1);
         Sprint sprint1 = new Sprint("Sprint_1", startDate1);
         Sprint sprint2 = new Sprint("Sprint_12", startDate2);
-        SprintList sprintList = new SprintList();
+        SprintList sprintList = new SprintList(new SprintFactory());
         sprintList.saveSprint(sprint1);
         sprintList.saveSprint(sprint2);
         assertNotEquals(sprint1, sprint2);

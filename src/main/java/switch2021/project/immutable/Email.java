@@ -2,6 +2,7 @@ package switch2021.project.immutable;
 
 import lombok.NonNull;
 
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Email {
@@ -26,6 +27,10 @@ public class Email {
         checkAllEmailRules(input);
 
         this.email = input;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     /**
@@ -161,5 +166,16 @@ public class Email {
         return this.email.equals(toCompare);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Email email1 = (Email) o;
+        return MAX_LENGTH == email1.MAX_LENGTH && MIN_LENGTH == email1.MIN_LENGTH && MAX_LENGTH_LAST_PART == email1.MAX_LENGTH_LAST_PART && MIN_LENGTH_LAST_PART == email1.MIN_LENGTH_LAST_PART && Objects.equals(email, email1.email);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, MAX_LENGTH, MIN_LENGTH, MAX_LENGTH_LAST_PART, MIN_LENGTH_LAST_PART);
+    }
 }

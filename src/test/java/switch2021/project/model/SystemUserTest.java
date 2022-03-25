@@ -32,7 +32,7 @@ class SystemUserTest {
         //Arrange
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xx", "tester", "Qwerty_1",
+        SystemUser test = new SystemUser("Test", "xxkjbjsdaf@gndfsf.com", "tester", "Qwerty_1",
                 "Qwerty_1", "img_123456", userProfile);
         //Act
         String emailCheck = "xx";
@@ -59,7 +59,7 @@ class SystemUserTest {
         //Arrange
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser test = new SystemUser("Te", "xx", "tester", "Querty_1",
+        SystemUser test = new SystemUser("Te", "xxkjfnsd@alksda.com", "tester", "Querty_1",
                 "Querty_1", "img_123456", userProfile);
         //Act
         String userName = "Te";
@@ -404,7 +404,7 @@ class SystemUserTest {
         Password passwordExpected = new Password("Qwerty_1");
         //Assert
         assertEquals(userName, newUser.getUserName().getNameF());
-        assertEquals(email, newUser.getEmail());
+        assertEquals(email, newUser.getEmail().getEmail());
         assertEquals(passwordExpected, newUser.getPassword());
         assertEquals(function, newUser.getFunction().getText());
         assertEquals(photo, newUser.getPhoto());

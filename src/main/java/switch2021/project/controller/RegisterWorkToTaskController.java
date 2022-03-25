@@ -47,7 +47,7 @@ public class RegisterWorkToTaskController {
         Project project = projectStore.getProjectByCode(code);
 
         SprintList sprintList = project.getSprintList();
-        Sprint sprint = sprintList.getSprint(sprintId);
+        Sprint sprint = sprintList.getSprintById(sprintId);
 
         SprintBacklog sprintBacklog = sprint.getSprintBacklog();
         this.userStory = sprintBacklog.getUserStory(userStoryId);

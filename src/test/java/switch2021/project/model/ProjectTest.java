@@ -3,6 +3,7 @@ package switch2021.project.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.factory.SprintFactory;
 import switch2021.project.immutable.Description;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
@@ -307,7 +308,7 @@ class ProjectTest {
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTest() {
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
-        SprintList sprintList1 = new SprintList();
+        SprintList sprintList1 = new SprintList(new SprintFactory());
         sprintList1.saveSprint(sprint1);
         SprintList projectSprintList = this.project2.getSprintList();
         projectSprintList.saveSprint(sprint1);
@@ -318,7 +319,7 @@ class ProjectTest {
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTestFail() {
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
-        SprintList sprintList1 = new SprintList();
+        SprintList sprintList1 = new SprintList(new SprintFactory());
         sprintList1.saveSprint(sprint1);
         Sprint sprint2 = new Sprint("Effort View 1", LocalDate.now());
         SprintList projectSprintList = this.project2.getSprintList();
@@ -348,7 +349,7 @@ class ProjectTest {
         project2.getSprintList().saveSprint(sprint1);
         taskList.add(taskTest);
         //Assert
-        assertEquals(taskList, project2.getSprintList().getSprint(1).getListOfTasksOfASprint());
+        assertEquals(taskList, project2.getSprintList().getSprintById(1).getListOfTasksOfASprint());
     }
 
     @Test
