@@ -374,18 +374,10 @@ public class ProjectTeamTest {
         manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
         ProjectRole projRol = manuelbras.getRole();
           proj1.getProjectTeam().saveResource(manuelbras);
-//        ResourceFactory resFac = mock(ResourceFactory.class);
-//        Resource res = mock(Resource.class);
-//        ProjectTeam projTem = mock(ProjectTeam.class);
-//        SystemUser syUse = mock(SystemUser.class);
-//        when(resFac.createResource(user1, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, .5)).thenReturn(res);
-//        when(res.getRole()).thenReturn(projRol);
-//        proj1.getProjectTeam().saveResource(manuelbras);
+
         //Resource 2
         SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         Resource manuelmartins = proj1.createResource(user2, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, 1);
-//        Resource manuelmartins = proj1.createResource(user2, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, 1);
-//        when(resFac.createResource(user2, LocalDate.now().minusWeeks(2), LocalDate.now().plusWeeks(4), 100, 1)).thenReturn(res);
 
         proj1.getProjectTeam().saveResource(manuelmartins);
         //Act
@@ -940,8 +932,6 @@ public class ProjectTeamTest {
     {
         // Arrange
         Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-//        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
         SystemUser joana3 = null;
         LocalDate startDate = LocalDate.now().minusWeeks(1);
         LocalDate endDate = LocalDate.now().plusYears(1);
@@ -960,42 +950,27 @@ public class ProjectTeamTest {
         assertFalse( hasCreated );
     }
 
-//    @Test
-//    public void shouldNotCreateAndAddRepeatedTitleProject() throws Exception
-//    {
-//        // Arrange
-//        Company company = new Company();
-//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-//        SystemUser joana3 = new SystemUser("joana", "joana3@beaver.com", "tester", "Switch_22", "Switch_22", "photo", profile);
-//        LocalDate startDate = LocalDate.now().minusWeeks(1);
-//        LocalDate endDate = LocalDate.now().plusYears(1);
-//        Double costPerHour = 100.0;
-//        Double percAlloc = 0.5;
-//
-//        Resource res = mock(Resource.class );
-//        when( res.hasTitle( titulo ) ).thenReturn( true );
-//
-//        ProjectFactory projectFactoryDouble =  mock( ProjectFactory.class );
-//        when(projectFactoryDouble.createProject(titulo, startDate, endDate) ).thenReturn( projectDouble );
-//
-//        StoreProjectReeng storeProjectReeng = new StoreProjectReeng( projectFactoryDouble );
-//
-//        // should work fine
-//        boolean hasCreated = storeProjectReeng.createAndAddProject( titulo, startDate, endDate );
-//
-//        // Act + Assert
-//        // throws IllegalArgumentException, because repeated title
-//        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-//            storeProjectReeng.createAndAddProject( titulo, startDate, endDate );
-//        });
-//
-//        String expectedMessage = "Título já existente.";
-//        String actualMessage = exception.getMessage();
-//
-//        assertTrue(actualMessage.contains(expectedMessage));
-//    }
+        @Test
+    public void shouldCreateAndAddProject2() throws Exception
+    {
+        // Arrange
+        LocalDate startDate = LocalDate.now().minusWeeks(1);
+        LocalDate endDate = LocalDate.now().plusYears(1);
+        Double costPerHour = 100.0;
+        Double percAlloc = 0.5;
 
+        //Act
+        SystemUser user = mock(SystemUser.class);
+        ResourceFactory resFac =  new ResourceFactory();
+        Resource res = resFac.createResource(user, startDate, endDate, costPerHour, percAlloc);
 
+        //Assert
+        assertEquals(user, res.getUser());
+        assertEquals(startDate, res.getStartDate());
+        assertEquals(endDate, res.getEndDate());
+        assertEquals(costPerHour,res.getCostPerHour());
+        assertEquals(percAlloc,res.getPercentageOfAllocation());
+    }
 
 }
 
