@@ -1,13 +1,16 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.immutable.Date;
-import switch2021.project.immutable.TaskStatus;
+import switch2021.project.immutable.*;
+import switch2021.project.stores.UserProfileStore;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class TaskTest {
 
@@ -150,6 +153,69 @@ class TaskTest {
         assertEquals(12.00, task.getEffortRemaining());
         assertEquals(8, task.getHoursSpent());
         assertEquals(0.4, task.getExecutionPercentage());
+    }
+
+    @Test
+    public void createTaskEffortSuccessMock() {
+        //Arrange
+        Company company = mock(Company.class);
+        //    Profile
+        UserProfileStore userProfileStore = mock(UserProfileStore.class);
+        UserProfile userProfile = mock(UserProfile.class);
+        when(company.getUserProfileStore()).thenReturn(userProfileStore);
+        when(userProfileStore.getUserProfile("Visitor")).thenReturn(userProfile);
+        //    System User
+        SystemUser systemUser = mock(SystemUser.class);
+        Name name = mock(Name.class);
+        when(systemUser.getUserName()).thenReturn(name);
+        when(name.getNameF()).thenReturn("manuelbras");
+        when(systemUser.getEmail()).thenReturn("manuelbras@beaver.com");
+        Function function = mock(Function.class);
+        when(systemUser.getFunction()).thenReturn(function);
+        when(function.getText()).thenReturn(("tester"));
+        Password password = mock(Password.class);
+        when(systemUser.getPassword()).thenReturn(password);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(systemUser.getPhoto()).thenReturn("photo");
+        //    Resource
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = mock(Resource.class);
+        when(resource.getUser()).thenReturn(systemUser);
+        when(resource.getStartDate()).thenReturn(startDateMb);
+        when(resource.getEndDate()).thenReturn(endDateMb);
+        when(resource.getCostPerHour()).thenReturn(100.0);
+        when(resource.getPercentageOfAllocation()).thenReturn(0.5);
+        //    Task
+        String taskDescription = "must be at least 20 characters";
+        Task task = new Task("test", taskDescription, 16.00, new TaskType("User Story"), resource);
+        //    TaskEffort
+        TaskEffort taskEffort = mock(TaskEffort.class);
+        HoursMinutes hoursMinutes = mock(HoursMinutes.class);
+        when(taskEffort.getEffort()).thenReturn(hoursMinutes);
+        when(hoursMinutes.getEffortHours()).thenReturn(4);
+        when(taskEffort.getEffort()).thenReturn(hoursMinutes);
+        when(hoursMinutes.getEffortMinutes()).thenReturn(30);
+        when(taskEffort.getComment()).thenReturn("test");
+        when(taskEffort.getAttachment()).thenReturn(".pdf");
+        Date effortDate = new Date(LocalDate.of(2022, 1, 27));
+        when(taskEffort.getEffortDate()).thenReturn(effortDate);
+
+        int effortHours = 4;
+        int effortMinutes = 30;
+        String comment = "test";
+        String attachment = ".pdf";
+
+        //Act
+        TaskEffort taskEffort1 = task.createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
+        task.getTaskEffortList().add(taskEffort1);
+
+        //Assert
+        assertEquals(effortHours, task.getTaskEffortList().get(0).getEffort().getEffortHours());
+        assertEquals(effortMinutes, task.getTaskEffortList().get(0).getEffort().getEffortMinutes());
+        assertEquals(effortDate, task.getTaskEffortList().get(0).getEffortDate());
+        assertEquals(comment, task.getTaskEffortList().get(0).getComment());
+        assertEquals(attachment, task.getTaskEffortList().get(0).getAttachment());
     }
 
     @Test
