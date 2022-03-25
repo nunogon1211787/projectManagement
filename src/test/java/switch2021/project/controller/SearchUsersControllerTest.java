@@ -19,9 +19,9 @@ class SearchUsersControllerTest {
         UserProfile p1 = company.getUserProfileStore().getUserProfile("visitor");
         //UserProfile p2 = company.getUserProfileStore().getUserProfile("director");
        // UserProfile p3 = company.getUserProfileStore().getUserProfile("administrator");
-        SystemUser usr1 = new SystemUser("Romulo", "rom@rom.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
-        SystemUser usr2 = new SystemUser("Maria", "ma@ma.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
-        SystemUser usr3 = new SystemUser("Joao", "jo@jo.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
+        SystemUser usr1 = new SystemUser("Romulo", "romulo@romulo.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
+        SystemUser usr2 = new SystemUser("Maria", "maria@maria.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
+        SystemUser usr3 = new SystemUser("Joao", "joao@joao.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
         company.getSystemUserStore().saveSystemUser(usr1);
         company.getSystemUserStore().saveSystemUser(usr2);
         company.getSystemUserStore().saveSystemUser(usr3);
@@ -42,9 +42,9 @@ class SearchUsersControllerTest {
         UserProfile p1 = company.getUserProfileStore().getUserProfile("visitor");
         //UserProfile p2 = company.getUserProfileStore().getUserProfile("director");
         // UserProfile p3 = company.getUserProfileStore().getUserProfile("administrator");
-        SystemUser usr1 = new SystemUser("Romulo", "rom@rom.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
-        SystemUser usr2 = new SystemUser("Maria", "ma@ma.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
-        SystemUser usr3 = new SystemUser("Joao", "jo@jo.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
+        SystemUser usr1 = new SystemUser("Romulo", "romulo@romulo.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
+        SystemUser usr2 = new SystemUser("Maria", "maria@maria.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
+        SystemUser usr3 = new SystemUser("Joao", "joao@joao.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
         company.getSystemUserStore().saveSystemUser(usr1);
         company.getSystemUserStore().saveSystemUser(usr2);
         company.getSystemUserStore().saveSystemUser(usr3);

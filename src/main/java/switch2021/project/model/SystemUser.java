@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.immutable.Email;
 import switch2021.project.immutable.Function;
 import switch2021.project.immutable.Name;
 import switch2021.project.immutable.Password;
@@ -19,7 +20,7 @@ public class SystemUser {
      * Attributes of systemUser´s class
      **/
     private Name userName;
-    private final String email;
+    private final Email email;
     private String photo;
     private Password password;
     private Function function;
@@ -31,11 +32,11 @@ public class SystemUser {
      **/
     public SystemUser (String userName, String email, String function, String password, String passwordConfirmation,
                        String photo, UserProfile profile) {
-        checkEmailRules(email);
+//        checkEmailRules(email);
 //        checkPasswordRules(password);
         checkProfileRules(profile);
         this.userName = new Name(userName);
-        this.email = email;
+        this.email = new Email(email);
         this.photo = photo;
         this.function = new Function(function);
         if (password.equals(passwordConfirmation)) {
@@ -202,7 +203,7 @@ public class SystemUser {
     public boolean isYourEmail(String email) {
 
         boolean result = false;
-        int idxString = this.email.indexOf(email.toLowerCase());
+        int idxString = this.email.getEmail().indexOf(email.toLowerCase());
 
         if (idxString != -1) {
             result = true;
@@ -253,7 +254,7 @@ public class SystemUser {
         int result = 0;
 
         if (!email.isEmpty()) {
-            int idxString = this.email.toLowerCase().indexOf(email.toLowerCase());
+            int idxString = this.email.getEmail().toLowerCase().indexOf(email.toLowerCase());
             if (idxString != -1) {
                 result = 1;
             } else {

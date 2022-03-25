@@ -116,10 +116,10 @@ public class SystemUserWithStatusControllerTest {
 
         // Assert
         assertEquals(newUser.getUserName().getNameF(), systemUserWithStatusDto.get(0).getUserName());
-        assertEquals(newUser.getEmail(), systemUserWithStatusDto.get(0).getEmail());
+        assertEquals(newUser.getEmail().getEmail(), systemUserWithStatusDto.get(0).getEmail());
         assertEquals(newUser.isActivateUser(), systemUserWithStatusDto.get(0).isActivateUser());
         assertEquals(newUser2.getUserName().getNameF(), systemUserWithStatusDto.get(1).getUserName());
-        assertEquals(newUser2.getEmail(), systemUserWithStatusDto.get(1).getEmail());
+        assertEquals(newUser2.getEmail().getEmail(), systemUserWithStatusDto.get(1).getEmail());
         assertEquals(newUser2.isActivateUser(), systemUserWithStatusDto.get(1).isActivateUser());
     }
 

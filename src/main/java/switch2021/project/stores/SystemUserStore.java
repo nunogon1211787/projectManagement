@@ -66,7 +66,7 @@ public class SystemUserStore {
      * Validation Methods
      */
     public boolean validateSystemUser(SystemUser user) {
-        if (user == null || hasEmail(user.getEmail())) {
+        if (user == null || hasEmail(user.getEmail().getEmail())) {
             return false;
         }
         return !this.systemUserList.contains(user);
@@ -74,7 +74,7 @@ public class SystemUserStore {
 
     boolean hasEmail(String newUserEmail) {
         for (SystemUser newUser : systemUserList) {
-            if (newUser.getEmail().trim().equalsIgnoreCase(newUserEmail.trim())) {
+            if (newUser.getEmail().getEmail().trim().equalsIgnoreCase(newUserEmail.trim())) {
                 return true;
             }
         }

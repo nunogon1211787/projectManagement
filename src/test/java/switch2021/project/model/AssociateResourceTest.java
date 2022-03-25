@@ -80,7 +80,7 @@ public class AssociateResourceTest {
     public void validateAllocationTrue() {
         //Arrange
         //User
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "Qwerty_1", "Qwerty_1", "img_xyz", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "img_xyz", userProfile);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
         Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .2);
@@ -103,7 +103,7 @@ public class AssociateResourceTest {
     public void validateAllocationFalse() {
         //Arrange
         //User
-        SystemUser newUser = new SystemUser("xyz", "fase", "des", "Qwerty_1", "Qwerty_1", "img_xyz", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "img_xyz", userProfile);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
         Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .2);

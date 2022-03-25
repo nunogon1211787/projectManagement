@@ -37,7 +37,7 @@ public class SystemUserStoreTest {
         assignedProfileExpected.add(profile);
         //Act
         String userNameResult = newUser.getUserName().getNameF();
-        String emailResult = newUser.getEmail();
+        String emailResult = newUser.getEmail().getEmail();
         String passwordResult = newUser.getPassword().getPwd();
         String functionResult = newUser.getFunction().getText();
         String photoResult = newUser.getPhoto();
