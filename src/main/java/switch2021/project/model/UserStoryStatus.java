@@ -8,9 +8,9 @@ import switch2021.project.immutable.Description;
 import java.util.Objects;
 
 @Getter
-@Setter
 public class UserStoryStatus {
-    /** Classe UserStoryStatus Atributes **/
+
+    /** Class UserStoryStatus Attributes **/
     private Description description;
     private boolean sprintAvailable;  //this attribute determines if the status is available as a sprint backlog status
 

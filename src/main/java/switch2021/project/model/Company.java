@@ -25,9 +25,9 @@ public class Company {
     private final TaskStatusStore taskStatusStore;
     private final TaskTypeStore taskTypeStore;
 
-    private final ProjectRoleFactory projectRoleFactory;
+    //private final ProjectRoleFactory projectRoleFactory;
     private final ProductBacklog productBacklog;
-    private final UserStoryFactory userStoryFactory;
+    //private final UserStoryFactory userStoryFactory;
 
 
     /**
@@ -38,8 +38,8 @@ public class Company {
         this.systemUserStore = new SystemUserStore();
         this.projectStore = new ProjectStore();
         this.userProfileStore = new UserProfileStore();
-        this.projectRoleFactory = new ProjectRoleFactory();
-        this.projectRoleStore = new ProjectRoleStore(projectRoleFactory);
+        //this.projectRoleFactory = new ProjectRoleFactory();
+        this.projectRoleStore = new ProjectRoleStore(new ProjectRoleFactory());
         this.typologyStore = new TypologyStore();
         this.customerStore = new CustomerStore();
         this.businessSectorStore = new BusinessSectorStore(new BusinessSectorFactory());
@@ -48,8 +48,8 @@ public class Company {
         this.requestStore = new RequestStore();
         this.taskStatusStore = new TaskStatusStore(new TaskStatusFactory());
         this.taskTypeStore = new TaskTypeStore(new TaskTypeFactory());
-        this.userStoryFactory = new UserStoryFactory();
-        this.productBacklog = new ProductBacklog(this.userStoryFactory );
+        //this.userStoryFactory = new UserStoryFactory();
+        this.productBacklog = new ProductBacklog( new UserStoryFactory());
 
         this.userProfileStore.populateDefault();
         this.projectRoleStore.populateDefault();

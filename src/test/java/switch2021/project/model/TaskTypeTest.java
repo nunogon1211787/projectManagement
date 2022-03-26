@@ -4,6 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.immutable.Description;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 class TaskTypeTest {
@@ -12,10 +14,12 @@ class TaskTypeTest {
     @DisplayName("Test to verify if task type description is valid.")
     void hasDescriptionSuccess() {
         //Arrange
-        TaskType type = new TaskType("tes");
-        String testDescription = "tes";
+        TaskType type = mock(TaskType.class);
+        Description description = mock(Description.class);
+        when(type.hasDescription("test")).thenReturn(true);
+        when(description.getText()).thenReturn("test");
         //Act
-        boolean x = type.hasDescription(testDescription);
+        boolean x = type.hasDescription("test");
         //Assert
         assertTrue(x);
     }
@@ -24,12 +28,14 @@ class TaskTypeTest {
     @DisplayName("Test to verify if task type description is valid.")
     void getDescriptionSuccess() {
         //Arrange
-        TaskType type1 = new TaskType("test1");
+        TaskType type1 = mock(TaskType.class);
+        Description description = mock(Description.class);
+        when(type1.getDescription()).thenReturn(description);
+        when(description.getText()).thenReturn("test");
         //Act
-        Description description = new Description("test1");
-        Description x = type1.getDescription();
+        String x = type1.getDescription().getText();
         //Assert
-        assertEquals(description, x);
+        assertEquals("test", x);
     }
 
 
@@ -37,10 +43,12 @@ class TaskTypeTest {
     @DisplayName("Test to verify if task type description is invalid.")
     void hasDescriptionFail() {
         //Arrange
-        TaskType type = new TaskType("test");
-        String testDescription = "fail";
+        TaskType type = mock(TaskType.class);
+        Description description = mock(Description.class);
+        when(type.hasDescription("fail")).thenReturn(false);
+        when(description.getText()).thenReturn("test");
         //Act
-        boolean x = type.hasDescription(testDescription);
+        boolean x = type.hasDescription("fail");
         //Assert
         assertFalse(x);
     }
@@ -49,19 +57,24 @@ class TaskTypeTest {
     @DisplayName("Test to verify if task type description is invalid.")
     void getDescriptionFail() {
         //Arrange
-        TaskType type1 = new TaskType("test1");
+        TaskType type1 = mock(TaskType.class);
+        Description description = mock(Description.class);
+        when(type1.getDescription()).thenReturn(description);
+        when(description.getText()).thenReturn("Test");
         //Act
-        Description description = new Description("test2");
-        Description x = type1.getDescription();
+        String x = type1.getDescription().getText();
         //Assert
-        assertNotEquals(description, x);
+        assertNotEquals("Test_1", x);
     }
 
     @Test
     @DisplayName("Test to verify if task type description has a null field.")
     void hasDescriptionNull() {
         //Arrange
-        TaskType type = new TaskType("test");
+        TaskType type = mock(TaskType.class);
+        Description description = mock(Description.class);
+        when(type.hasDescription(null)).thenReturn(false);
+        when(description.getText()).thenReturn(null);
         //Act
         boolean x = type.hasDescription(null);
         //Assert

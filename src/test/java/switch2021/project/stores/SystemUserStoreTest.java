@@ -200,10 +200,11 @@ public class SystemUserStoreTest {
         list3.saveSystemUser(newUser3);
         //Assert
         assertNotSame(list1, list2);
-//        assertEquals(list1.getSystemUserList(), list2.getSystemUserList());
-//        assertEquals(list1.getSystemUserList().hashCode(), list2.getSystemUserList().hashCode());
+        assertEquals(list1.getSystemUserList(), list2.getSystemUserList());
+        assertTrue(newUser.equals(newUser2));
+        assertEquals(list1.getSystemUserList().hashCode(), list2.getSystemUserList().hashCode());
         assertNotEquals(list1, list3);
-//        assertNotEquals(list1.hashCode(), list3.hashCode());
+        assertNotEquals(list1.hashCode(), list3.hashCode());
     }
 
     @Test

@@ -3,6 +3,7 @@ package switch2021.project.stores;
 import org.junit.jupiter.api.Test;
 import switch2021.project.factory.BusinessSectorFactory;
 import switch2021.project.factory.ResourceFactory;
+import switch2021.project.factory.TaskTypeFactory;
 import switch2021.project.immutable.Description;
 import switch2021.project.model.BusinessSector;
 import switch2021.project.model.ProjectTeam;
@@ -130,6 +131,16 @@ class BusinessSectorStoreTest {
         //Act & Assert
         assertNotEquals(sector.hashCode(), sector2.hashCode());
         assertEquals(sector.hashCode(), x.hashCode());
+    }
+
+    @Test
+    void constructorFactory() {
+        //Arrange
+        BusinessSectorFactory businessSectorFactory = new BusinessSectorFactory();
+        //Act
+        BusinessSectorStore businessSectorStore = new BusinessSectorStore(businessSectorFactory);
+        //Assert
+        assertEquals(businessSectorFactory,businessSectorStore.getBusinessSectorFactoryInterface());
     }
 
 }

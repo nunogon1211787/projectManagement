@@ -2,6 +2,8 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.factory.ProjectRoleFactory;
+import switch2021.project.factory.TaskTypeFactory;
+import switch2021.project.factoryInterface.ProjectRoleFactoryInterface;
 import switch2021.project.immutable.Description;
 import switch2021.project.immutable.Name;
 import switch2021.project.model.Company;
@@ -17,18 +19,17 @@ import static org.mockito.Mockito.when;
 class ProjectRoleStoreTest {
 
 
-//
-//    @Test
-//    public void projectRoleStoreConstructorTest() {
-//        //Arrange
-//        Company company = new Company();
-//        //Act
-//        ProjectRoleStore test = new ProjectRoleStore();
-//        test.populateDefault();
-//        //Assert
-//        assertEquals(test.getProjectRoleList(),company.getProjectRoleStore().getProjectRoleList());
-//    }
-//
+
+    @Test
+    public void projectRoleStoreConstructorTest() {
+        //Arrange
+        ProjectRoleFactory projectRoleFactory = new ProjectRoleFactory();
+        //Act
+        ProjectRoleStore projectRoleStore = new ProjectRoleStore(projectRoleFactory);
+        //Assert
+        assertEquals(projectRoleFactory, projectRoleStore.getProjectRoleFactory());
+    }
+
     @Test
     public void shouldCreateAndAddProject(){
         // Arrange

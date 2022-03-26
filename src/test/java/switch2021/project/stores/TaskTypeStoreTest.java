@@ -2,6 +2,7 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.factory.TaskStatusFactory;
 import switch2021.project.factory.TaskTypeFactory;
 import switch2021.project.immutable.Description;
 import switch2021.project.model.TaskType;
@@ -197,6 +198,16 @@ class TaskTypeStoreTest {
         List<String> testList = store.getTaskTypesDescription();
         //Assert
         assertEquals(6, testList.size());
+    }
+
+    @Test
+    void constructorFactory() {
+        //Arrange
+        TaskTypeFactory taskTypeFactory = new TaskTypeFactory();
+        //Act
+        TaskTypeStore taskTypeStore = new TaskTypeStore(taskTypeFactory);
+        //Assert
+        assertEquals(taskTypeFactory,taskTypeStore.getTaskTypeFactoryInterface());
     }
 
 }

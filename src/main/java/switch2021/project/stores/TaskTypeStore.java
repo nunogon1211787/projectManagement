@@ -13,14 +13,14 @@ public class TaskTypeStore {
      * Attributes
      */
     private List<TaskType> taskTypeList;
-    private TaskTypeFactoryInterface taskTypeFactory;
+    private TaskTypeFactoryInterface taskTypeFactoryInterface;
 
     /**
      * Constructor
      */
     public TaskTypeStore(TaskTypeFactoryInterface taskTypeFactory) {
         this.taskTypeList = new ArrayList<>();
-        this.taskTypeFactory = taskTypeFactory;
+        this.taskTypeFactoryInterface = taskTypeFactory;
     }
 
     /**
@@ -43,7 +43,7 @@ public class TaskTypeStore {
         if(getTypeByDescription(description) != null) {
             return false;
         } else {
-            this.taskTypeList.add(taskTypeFactory.createTaskType(description));
+            this.taskTypeList.add(taskTypeFactoryInterface.createTaskType(description));
             return true;
         }
     }
