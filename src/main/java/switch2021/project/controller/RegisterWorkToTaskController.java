@@ -6,6 +6,7 @@ import switch2021.project.dto.TaskIdNameDTO;
 import switch2021.project.dto.UserStorySprintProjectDTO;
 import switch2021.project.mapper.RegisterWorkToTaskMapper;
 import switch2021.project.model.*;
+import switch2021.project.model.Project.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
 

@@ -1,8 +1,8 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.Company;
-import switch2021.project.model.Project;
-import switch2021.project.model.Sprint;
+import switch2021.project.model.Project.Project;
+import switch2021.project.model.Project.Sprint;
 import switch2021.project.stores.ProjectStore;
 
 import java.time.LocalDate;

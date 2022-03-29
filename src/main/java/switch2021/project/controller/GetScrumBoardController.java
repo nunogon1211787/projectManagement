@@ -3,6 +3,10 @@ package switch2021.project.controller;
 import switch2021.project.dto.UserStoryStatusDTO;
 import switch2021.project.mapper.ScrumBoardMapper;
 import switch2021.project.model.*;
+import switch2021.project.model.Project.Project;
+import switch2021.project.model.Project.Sprint;
+import switch2021.project.model.Project.SprintBacklog;
+import switch2021.project.model.Project.UserStory;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +19,7 @@ public class GetScrumBoardController {
 
     private final Company company;
     private final ScrumBoardMapper mapper;
-    private  Sprint sprint;
+    private Sprint sprint;
     private Project project;
     private SprintBacklog sprintBacklog;
     private List<UserStory> userStoryList;

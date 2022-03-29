@@ -1,7 +1,7 @@
 package switch2021.project.factory;
 
 import switch2021.project.factoryInterface.ProjectRoleFactoryInterface;
-import switch2021.project.model.ProjectRole;
+import switch2021.project.model.ProjectRole.ProjectRole;
 
 public class ProjectRoleFactory implements ProjectRoleFactoryInterface {
 

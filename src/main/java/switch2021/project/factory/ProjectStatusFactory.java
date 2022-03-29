@@ -1,7 +1,7 @@
 package switch2021.project.factory;
 
 import switch2021.project.factoryInterface.ProjectStatusFactoryInterface;
-import switch2021.project.model.ProjectStatus;
+import switch2021.project.model.ProjectStatus.ProjectStatus;
 
 public class ProjectStatusFactory implements ProjectStatusFactoryInterface {
 

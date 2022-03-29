@@ -1,7 +1,6 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.Company;
-import switch2021.project.model.Typology;
 
 public class CreateNewTypologyController {
 

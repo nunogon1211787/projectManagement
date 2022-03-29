@@ -1,7 +1,7 @@
 package switch2021.project.stores;
 
 import switch2021.project.factoryInterface.ProjectStatusFactoryInterface;
-import switch2021.project.model.ProjectStatus;
+import switch2021.project.model.ProjectStatus.ProjectStatus;
 import java.util.ArrayList;
 import java.util.List;
 

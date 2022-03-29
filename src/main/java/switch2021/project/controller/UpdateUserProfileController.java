@@ -1,6 +1,8 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.*;
+import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.stores.SystemUserStore;
 import switch2021.project.stores.UserProfileStore;
 import java.util.List;

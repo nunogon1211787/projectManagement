@@ -1,4 +1,4 @@
-package switch2021.project.model;
+package switch2021.project.model.SystemUser;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,6 +6,8 @@ import switch2021.project.immutable.Email;
 import switch2021.project.immutable.Function;
 import switch2021.project.immutable.Name;
 import switch2021.project.immutable.Password;
+import switch2021.project.model.Company;
+import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.stores.UserProfileStore;
 import switch2021.project.utils.App;
 import java.util.ArrayList;

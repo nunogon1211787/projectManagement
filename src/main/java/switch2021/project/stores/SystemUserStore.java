@@ -1,8 +1,8 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.model.SystemUser;
-import switch2021.project.model.UserProfile;
+import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.UserProfile.UserProfile;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

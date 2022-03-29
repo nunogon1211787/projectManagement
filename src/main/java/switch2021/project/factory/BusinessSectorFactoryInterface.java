@@ -1,8 +1,6 @@
 package switch2021.project.factory;
 
-import switch2021.project.immutable.Description;
-import switch2021.project.model.BusinessSector;
-import switch2021.project.model.ProjectTeam;
+import switch2021.project.model.Project.BusinessSector;
 
 public interface BusinessSectorFactoryInterface {
 

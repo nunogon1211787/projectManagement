@@ -2,7 +2,7 @@ package switch2021.project.factory;
 
 import switch2021.project.factoryInterface.ProjectTeamFactoryInterface;
 import switch2021.project.factoryInterface.ResourceFactoryInterface;
-import switch2021.project.model.ProjectTeam;
+import switch2021.project.model.Project.ProjectTeam;
 
 public class ProjectTeamFactory implements ProjectTeamFactoryInterface {
 

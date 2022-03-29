@@ -1,10 +1,11 @@
-package switch2021.project.model;
+package switch2021.project.model.Project;
 
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.dto.UserStoryDto;
 import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.mapper.UserStoryMapper;
+import switch2021.project.model.UserStoryStatus.UserStoryStatus;
 
 import java.util.*;
 

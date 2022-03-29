@@ -2,6 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import switch2021.project.factory.*;
+import switch2021.project.model.Project.ProductBacklog;
 import switch2021.project.stores.*;
 
 

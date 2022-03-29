@@ -2,9 +2,9 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
-import switch2021.project.model.Request;
-import switch2021.project.model.SystemUser;
-import switch2021.project.model.UserProfile;
+import switch2021.project.model.SystemUser.Request;
+import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.UserProfile.UserProfile;
 
 import java.time.LocalDate;
 

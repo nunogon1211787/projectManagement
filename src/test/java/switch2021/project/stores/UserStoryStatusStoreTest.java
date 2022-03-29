@@ -3,7 +3,7 @@ package switch2021.project.stores;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.immutable.Description;
-import switch2021.project.model.UserStoryStatus;
+import switch2021.project.model.UserStoryStatus.UserStoryStatus;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

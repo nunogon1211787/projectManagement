@@ -3,6 +3,8 @@ package switch2021.project.controller;
 import switch2021.project.dto.CreateTaskDTO;
 import switch2021.project.mapper.TaskMapper;
 import switch2021.project.model.*;
+import switch2021.project.model.Project.Project;
+import switch2021.project.model.Project.UserStory;
 import switch2021.project.stores.TaskList;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package switch2021.project.factory;
 
-import switch2021.project.model.BusinessSector;
+import switch2021.project.model.Project.BusinessSector;
 
 public class BusinessSectorFactory implements BusinessSectorFactoryInterface {
 

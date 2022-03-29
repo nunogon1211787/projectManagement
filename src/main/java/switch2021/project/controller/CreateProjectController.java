@@ -1,6 +1,10 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.*;
+import switch2021.project.model.Project.BusinessSector;
+import switch2021.project.model.Project.Customer;
+import switch2021.project.model.Project.Project;
+import switch2021.project.model.Typology.Typology;
 
 import java.time.LocalDate;
 

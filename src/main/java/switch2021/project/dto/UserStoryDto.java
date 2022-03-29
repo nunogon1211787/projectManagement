@@ -2,7 +2,7 @@ package switch2021.project.dto;
 
 import lombok.Getter;
 import switch2021.project.immutable.Description;
-import switch2021.project.model.UserStoryStatus;
+import switch2021.project.model.UserStoryStatus.UserStoryStatus;
 
 @Getter
 public class UserStoryDto {

@@ -2,6 +2,9 @@ package switch2021.project.controller;
 
 import switch2021.project.immutable.Description;
 import switch2021.project.model.*;
+import switch2021.project.model.Project.Project;
+import switch2021.project.model.Project.ProjectTeam;
+import switch2021.project.model.ProjectStatus.ProjectStatus;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -2,15 +2,8 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.factory.BusinessSectorFactory;
-import switch2021.project.factory.ResourceFactory;
-import switch2021.project.factory.TaskTypeFactory;
 import switch2021.project.immutable.Description;
-import switch2021.project.model.BusinessSector;
-import switch2021.project.model.ProjectTeam;
-
-import javax.xml.bind.annotation.XmlType;
-import java.util.ArrayList;
-import java.util.List;
+import switch2021.project.model.Project.BusinessSector;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;

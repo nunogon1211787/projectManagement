@@ -5,6 +5,14 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.dto.ResourceDTO;
 import switch2021.project.mapper.ProjectTeamMapper;
 import switch2021.project.model.*;
+import switch2021.project.model.Project.BusinessSector;
+import switch2021.project.model.Project.Customer;
+import switch2021.project.model.Project.Project;
+import switch2021.project.model.Project.Resource;
+import switch2021.project.model.ProjectRole.ProjectRole;
+import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.UserProfile.UserProfile;
 
 import java.time.LocalDate;
 import java.util.List;

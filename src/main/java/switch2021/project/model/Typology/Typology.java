@@ -1,4 +1,4 @@
-package switch2021.project.model;
+package switch2021.project.model.Typology;
 
 import lombok.Getter;
 import switch2021.project.immutable.Description;

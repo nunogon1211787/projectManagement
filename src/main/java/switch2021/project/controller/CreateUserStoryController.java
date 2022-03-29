@@ -5,6 +5,9 @@ import switch2021.project.dto.UserStoryDto;
 import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.mapper.UserStoryMapper;
 import switch2021.project.model.*;
+import switch2021.project.model.Project.ProductBacklog;
+import switch2021.project.model.Project.Project;
+import switch2021.project.model.Project.UserStory;
 import switch2021.project.stores.ProjectStore;
 
 import java.util.Collections;

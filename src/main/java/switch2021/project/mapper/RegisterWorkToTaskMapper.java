@@ -1,7 +1,7 @@
 package switch2021.project.mapper;
 
 import switch2021.project.dto.TaskIdNameDTO;
-import switch2021.project.model.Task;
+import switch2021.project.model.Project.Task;
 
 import java.util.ArrayList;
 import java.util.List;

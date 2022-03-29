@@ -3,7 +3,11 @@ package switch2021.project.stores;
 import lombok.Getter;
 import switch2021.project.mapper.TaskMapper;
 import switch2021.project.dto.CreateTaskDTO;
-import switch2021.project.model.*;
+import switch2021.project.model.Project.Project;
+import switch2021.project.model.Project.Resource;
+import switch2021.project.model.Project.Task;
+import switch2021.project.model.TaskType.TaskType;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

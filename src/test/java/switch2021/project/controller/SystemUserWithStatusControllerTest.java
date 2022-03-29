@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.dto.SystemUserWithStatusDto;
 import switch2021.project.mapper.SystemUserWithStatusMapper;
 import switch2021.project.model.Company;
-import switch2021.project.model.SystemUser;
-import switch2021.project.model.UserProfile;
+import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.UserProfile.UserProfile;
 
 import java.util.ArrayList;
 import java.util.List;

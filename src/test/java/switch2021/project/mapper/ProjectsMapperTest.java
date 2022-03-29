@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.factory.ResourceFactory;
 import switch2021.project.model.*;
+import switch2021.project.model.Project.*;
+import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.UserProfile.UserProfile;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

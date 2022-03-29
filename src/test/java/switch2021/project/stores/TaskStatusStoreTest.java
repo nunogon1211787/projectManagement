@@ -3,7 +3,7 @@ package switch2021.project.stores;
 import org.junit.jupiter.api.Test;
 import switch2021.project.factory.TaskStatusFactory;
 import switch2021.project.immutable.Description;
-import switch2021.project.immutable.TaskStatus;
+import switch2021.project.model.TaskStatus.TaskStatus;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;

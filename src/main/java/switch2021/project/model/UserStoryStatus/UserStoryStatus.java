@@ -1,8 +1,7 @@
-package switch2021.project.model;
+package switch2021.project.model.UserStoryStatus;
 
 
 import lombok.Getter;
-import lombok.Setter;
 import switch2021.project.immutable.Description;
 
 import java.util.Objects;

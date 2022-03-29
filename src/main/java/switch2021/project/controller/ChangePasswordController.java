@@ -1,7 +1,7 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.Company;
-import switch2021.project.model.SystemUser;
+import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.stores.SystemUserStore;
 
 public class ChangePasswordController {

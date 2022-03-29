@@ -2,7 +2,13 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.immutable.*;
-import switch2021.project.stores.UserProfileStore;
+import switch2021.project.model.Project.Resource;
+import switch2021.project.model.Project.Task;
+import switch2021.project.model.Project.TaskEffort;
+import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.TaskStatus.TaskStatus;
+import switch2021.project.model.TaskType.TaskType;
+import switch2021.project.model.UserProfile.UserProfile;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,7 +16,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class TaskTest {
 

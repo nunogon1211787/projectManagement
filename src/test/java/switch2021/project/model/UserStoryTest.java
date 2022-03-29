@@ -1,8 +1,10 @@
 package switch2021.project.model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import switch2021.project.immutable.Date;
+import switch2021.project.model.Project.Sprint;
+import switch2021.project.model.Project.Task;
+import switch2021.project.model.Project.UserStory;
+import switch2021.project.model.UserStoryStatus.UserStoryStatus;
 
 import java.time.LocalDate;
 

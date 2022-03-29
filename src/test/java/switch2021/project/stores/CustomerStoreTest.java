@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.immutable.Description;
 import switch2021.project.immutable.Email;
 import switch2021.project.immutable.Nif;
-import switch2021.project.model.Customer;
+import switch2021.project.model.Project.Customer;
 
 import java.util.ArrayList;
 import java.util.List;

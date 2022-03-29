@@ -1,7 +1,7 @@
 package switch2021.project.mapper;
 
 import switch2021.project.dto.SystemUserWithStatusDto;
-import switch2021.project.model.SystemUser;
+import switch2021.project.model.SystemUser.SystemUser;
 
 import java.util.ArrayList;
 import java.util.List;

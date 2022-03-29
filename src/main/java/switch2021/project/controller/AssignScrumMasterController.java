@@ -5,6 +5,10 @@ import switch2021.project.dto.ResourceDTO;
 import switch2021.project.mapper.ProjectTeamMapper;
 import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.model.*;
+import switch2021.project.model.Project.Project;
+import switch2021.project.model.Project.Resource;
+import switch2021.project.model.ProjectRole.ProjectRole;
+
 import java.time.LocalDate;
 
 public class AssignScrumMasterController {

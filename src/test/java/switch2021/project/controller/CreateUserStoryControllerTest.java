@@ -7,6 +7,11 @@ import switch2021.project.dto.UserStoryDto;
 import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.mapper.UserStoryMapper;
 import switch2021.project.model.*;
+import switch2021.project.model.Project.*;
+import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.model.UserStoryStatus.UserStoryStatus;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -3,6 +3,10 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
+import switch2021.project.model.Project.*;
+import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.stores.ProjectStore;
 
 import java.time.LocalDate;

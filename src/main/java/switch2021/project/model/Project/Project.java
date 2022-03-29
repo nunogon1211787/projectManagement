@@ -1,4 +1,4 @@
-package switch2021.project.model;
+package switch2021.project.model.Project;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +8,9 @@ import switch2021.project.factory.ProjectTeamFactory;
 import switch2021.project.factory.ResourceFactory;
 import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.immutable.Description;
+import switch2021.project.model.ProjectStatus.ProjectStatus;
+import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.Typology.Typology;
 import switch2021.project.stores.SprintList;
 import java.time.LocalDate;
 import java.util.Objects;

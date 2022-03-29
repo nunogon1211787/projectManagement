@@ -2,7 +2,7 @@ package switch2021.project.stores;
 
 import lombok.Getter;
 import switch2021.project.factoryInterface.TaskTypeFactoryInterface;
-import switch2021.project.model.TaskType;
+import switch2021.project.model.TaskType.TaskType;
 import java.util.ArrayList;
 import java.util.List;
 

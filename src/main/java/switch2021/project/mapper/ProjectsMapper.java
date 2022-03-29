@@ -2,7 +2,7 @@ package switch2021.project.mapper;
 
 import lombok.Getter;
 import switch2021.project.dto.ProjectDTO;
-import switch2021.project.model.Project;
+import switch2021.project.model.Project.Project;
 import java.util.ArrayList;
 import java.util.List;
 

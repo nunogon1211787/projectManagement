@@ -2,7 +2,7 @@ package switch2021.project.stores;
 
 import lombok.Getter;
 import switch2021.project.factoryInterface.ProjectRoleFactoryInterface;
-import switch2021.project.model.ProjectRole;
+import switch2021.project.model.ProjectRole.ProjectRole;
 import java.util.ArrayList;
 import java.util.List;
 

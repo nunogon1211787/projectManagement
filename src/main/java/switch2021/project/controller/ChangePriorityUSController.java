@@ -1,9 +1,9 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.Company;
-import switch2021.project.model.ProductBacklog;
-import switch2021.project.model.Project;
-import switch2021.project.model.UserStory;
+import switch2021.project.model.Project.ProductBacklog;
+import switch2021.project.model.Project.Project;
+import switch2021.project.model.Project.UserStory;
 import switch2021.project.stores.ProjectStore;
 import java.util.List;
 

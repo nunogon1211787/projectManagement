@@ -1,6 +1,7 @@
-package switch2021.project.immutable;
+package switch2021.project.model.TaskStatus;
 
 import lombok.Getter;
+import switch2021.project.immutable.Description;
 
 import java.util.Objects;
 

@@ -2,6 +2,8 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.UserStoryStatus.UserStoryStatus;
 import switch2021.project.stores.UserStoryStatusStore;
 
 import static org.junit.jupiter.api.Assertions.*;

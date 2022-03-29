@@ -1,6 +1,6 @@
 package switch2021.project.factory;
 
-import switch2021.project.model.Sprint;
+import switch2021.project.model.Project.Sprint;
 
 import java.time.LocalDate;
 
