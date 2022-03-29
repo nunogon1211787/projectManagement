@@ -54,7 +54,7 @@ public class TaskList {
         List<String> tasksNames = new ArrayList<>();
 
         for (Task task : this.taskList) {
-            tasksNames.add(task.getName());
+            tasksNames.add(task.getName().getNameF());
         }
         return tasksNames;
     }

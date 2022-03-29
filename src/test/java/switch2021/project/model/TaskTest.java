@@ -26,7 +26,7 @@ class TaskTest {
 
         String expectedTask = "test";
 
-        assertEquals(expectedTask, tastkTest.getDescription());
+        assertEquals(expectedTask, tastkTest.getDescription().getText());
     }
 
     @Test
@@ -42,13 +42,13 @@ class TaskTest {
         Task tastkTest2 = new Task("test", "Planear fazer totil coisas de cenas", 22, taskType, resource);
 
         List<String> precedence = new ArrayList<>();
-        precedence.add(tastkTest2.getDescription());
+        precedence.add(tastkTest2.getDescription().getText());
 
-        Task tastkTest3 = new Task("test2", "Planear fazer totil coisas de cenas", 21, taskType, resource, precedence);
+        Task tastkTest3 = new Task("testdois", "Planear fazer totil coisas de cenas", 21, taskType, resource, precedence);
 
         String expectedTask = "Planear fazer totil coisas de cenas";
 
-        assertEquals(expectedTask, tastkTest2.getDescription());
+        assertEquals(expectedTask, tastkTest2.getDescription().getText());
     }
 
     @Test
@@ -66,8 +66,8 @@ class TaskTest {
         //Act
         Task task = new Task("test", taskDescription, 16.00, taskType, resource);
         //Assert
-        assertEquals("test", task.getName());
-        assertEquals(taskDescription, task.getDescription());
+        assertEquals("test", task.getName().getNameF());
+        assertEquals(taskDescription, task.getDescription().getText());
         assertEquals(16.00, task.getEffortEstimate());
         assertEquals(taskType, task.getType());
         assertEquals(resource, task.getResponsible());
@@ -627,9 +627,9 @@ class TaskTest {
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
         //Act
-        Task task = new Task("t31", taskDescription, 20.00, taskType, resource);
+        Task task = new Task("tttr", taskDescription, 20.00, taskType, resource);
         //Assert
-        assertEquals("t31", task.getName());
+        assertEquals("tttr", task.getName().getNameF());
 
     }
 
@@ -759,7 +759,7 @@ class TaskTest {
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task1 = new Task("test", taskDescription, 20.00, taskType, resource);
         Task task2 = new Task("test", taskDescription, 20.00, taskType, resource);
-        Task task3 = new Task("test3", taskDescription, 20.00, taskType, resource);
+        Task task3 = new Task("testtres", taskDescription, 20.00, taskType, resource);
         TaskStatus taskStatus = new TaskStatus("Cris");
         TaskType taskType1 = new TaskType("Cris");
         Resource resource1 = new Resource(resource2);

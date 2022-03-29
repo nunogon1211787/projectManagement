@@ -56,8 +56,8 @@ public class RegisterWorkToTaskControllerTest {
         //Tasks
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-        Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
-        Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
+        Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("taskum", taskDescription, 20.0, taskType, resource1);
+        Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("taskdois", taskDescription, 10.0, taskType, resource1);
         project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task1);
         project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task2);
         //userStorySprintProjectDTO
@@ -68,8 +68,8 @@ public class RegisterWorkToTaskControllerTest {
         assertEquals(2, taskIdNameDTOList.size());
         assertEquals(1, taskIdNameDTOList.get(0).getTaskId());
         assertEquals(2, taskIdNameDTOList.get(1).getTaskId());
-        assertEquals("task1", taskIdNameDTOList.get(0).getTaskName());
-        assertEquals("task2", taskIdNameDTOList.get(1).getTaskName());
+        assertEquals("taskum", taskIdNameDTOList.get(0).getTaskName());
+        assertEquals("taskdois", taskIdNameDTOList.get(1).getTaskName());
     }
 
     @Test
@@ -106,8 +106,8 @@ public class RegisterWorkToTaskControllerTest {
         //Tasks
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-        Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
-        Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
+        Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("taskum", taskDescription, 20.0, taskType, resource1);
+        Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("taskdois", taskDescription, 10.0, taskType, resource1);
         project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task1);
         int id_task1 = task1.getIdTask(); //1
         project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task2);
@@ -119,8 +119,8 @@ public class RegisterWorkToTaskControllerTest {
         TaskIdNameDTO wantedTask1 = controller.getTask(id_task1);
         TaskIdNameDTO wantedTask2 = controller.getTask(id_task2);
         //Assert
-        assertEquals("task1", wantedTask1.getTaskName());
-        assertEquals("task2", wantedTask2.getTaskName());
+        assertEquals("taskum", wantedTask1.getTaskName());
+        assertEquals("taskdois", wantedTask2.getTaskName());
         assertEquals(1, wantedTask1.getTaskId());
         assertEquals(2, wantedTask2.getTaskId());
     }
@@ -160,8 +160,8 @@ public class RegisterWorkToTaskControllerTest {
         //Tasks
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-        Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task1", taskDescription, 20.0, taskType, resource1);
-        Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("task2", taskDescription, 10.0, taskType, resource1);
+        Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("taskum", taskDescription, 20.0, taskType, resource1);
+        Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("taskdois", taskDescription, 10.0, taskType, resource1);
         project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task1);
         int id_task1 = task1.getIdTask(); //1
         project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task2);

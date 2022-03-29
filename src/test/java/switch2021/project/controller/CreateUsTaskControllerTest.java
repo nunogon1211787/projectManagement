@@ -60,7 +60,7 @@ class CreateUsTaskControllerTest {
         Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         TaskType type = new TaskType("type");
         Task newTask = new Task("test", "test test test tests", 10, type, resource);
-        Task newTask2 = new Task("test2", "test2 test2 test2 test2", 10, type, resource);
+        Task newTask2 = new Task("testdois", "test2 test2 test2 test2", 10, type, resource);
         userStory.getTasks().saveTask(newTask);
         userStory.getTasks().saveTask(newTask2);
 
@@ -70,7 +70,7 @@ class CreateUsTaskControllerTest {
         //Asserts
         assertEquals(2, tasksNames.size());
         assertEquals("test", tasksNames.get(0));
-        assertEquals("test2", tasksNames.get(1));
+        assertEquals("testdois", tasksNames.get(1));
     }
 
     @Test
@@ -266,7 +266,7 @@ class CreateUsTaskControllerTest {
         //Create tasks
         TaskType type = new TaskType("type");
         Task newTask = new Task("test", "test test test tests", 10, type, res1);
-        Task newTask2 = new Task("test2", "test2 test2 test2 test2", 10, type, res2);
+        Task newTask2 = new Task("testdois", "test2 test2 test2 test2", 10, type, res2);
         userStory.getTasks().saveTask(newTask);
         userStory.getTasks().saveTask(newTask2);
 
@@ -319,12 +319,12 @@ class CreateUsTaskControllerTest {
         //Create tasks
         TaskType type = new TaskType("type");
         Task newTask = new Task("test", "test test test tests", 10, type, res1);
-        Task newTask2 = new Task("test2", "test2 test2 test2 test2", 10, type, res2);
+        Task newTask2 = new Task("testdois", "test2 test2 test2 test2", 10, type, res2);
         userStory.getTasks().saveTask(newTask);
         userStory.getTasks().saveTask(newTask2);
         List <String> precedenceList = new ArrayList<>();
-        precedenceList.add(newTask.getName());
-        precedenceList.add(newTask2.getName());
+        precedenceList.add(newTask.getName().getNameF());
+        precedenceList.add(newTask2.getName().getNameF());
 
         //Create a new us Task
         controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());

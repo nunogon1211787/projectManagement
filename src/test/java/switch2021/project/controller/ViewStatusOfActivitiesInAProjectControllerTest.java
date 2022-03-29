@@ -46,7 +46,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
         Task taskTest = sprint1.getTaskList().createTask("test", taskDescription, 8.0, taskType, resource);
-        Task taskTest2 = sprint1.getTaskList().createTask("test2", taskDescription, 8.0, taskType, resource);
+        Task taskTest2 = sprint1.getTaskList().createTask("testdois", taskDescription, 8.0, taskType, resource);
         sprint1.getTaskList().saveTask(taskTest);
         List<Task> taskList = new ArrayList<>();
 

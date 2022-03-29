@@ -13,7 +13,7 @@ public class RegisterWorkToTaskMapper {
      **/
 
     public TaskIdNameDTO toDTO (Task task) {
-        return new TaskIdNameDTO(task.getIdTask(), task.getName());
+        return new TaskIdNameDTO(task.getIdTask(), task.getName().getNameF());
     }
 
     /**

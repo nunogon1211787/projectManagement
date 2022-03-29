@@ -3,6 +3,8 @@ package switch2021.project.model.Project;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.immutable.Date;
+import switch2021.project.immutable.Description;
+import switch2021.project.immutable.Name;
 import switch2021.project.model.TaskStatus.TaskStatus;
 import switch2021.project.model.TaskType.TaskType;
 import switch2021.project.utils.App;
@@ -20,8 +22,8 @@ public class Task {
      * Attributes.
      */
     private int idTask;
-    private String name;
-    private String description;
+    private Name name;
+    private Description description;
     private TaskType type;
     private double effortEstimate;
     private double effortRemaining; // Initially equal effortEstimate, but can be change by user to update the effort to the task.
@@ -39,7 +41,7 @@ public class Task {
      * Constructors.
      */
     public Task(String description) {
-        this.description = description;
+        this.description = new Description(description);
         this.status = App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Planned");
     }
 
@@ -51,8 +53,8 @@ public class Task {
         checkTypeNotNull(type);
         checkResponsibleNotNull(responsible);
 
-        this.name = name;
-        this.description = description;
+        this.name = new Name(name);
+        this.description = new Description(description);
         this.effortEstimate = effortEstimate;
         this.effortRemaining = effortEstimate;
         this.type = type;
@@ -72,7 +74,7 @@ public class Task {
      */
 
     public boolean hasName(String taskName) {
-        return Objects.equals(this.name, taskName);
+        return Objects.equals(this.name.getNameF(), taskName);
     }
 
     public boolean hasType(TaskType taskType) {

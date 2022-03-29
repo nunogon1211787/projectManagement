@@ -52,7 +52,7 @@ public class TaskListTest {
         Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         TaskType type = new TaskType("type");
         Task newTask = new Task("test", "test test test tests", 10, type, resource);
-        Task newTask2 = new Task("test2", "test2 test2 test2 test2", 10, type, resource);
+        Task newTask2 = new Task("testdois", "test2 test2 test2 test2", 10, type, resource);
         //Assert
         test.saveTask(newTask);
         test.saveTask(newTask2);
@@ -194,7 +194,7 @@ public class TaskListTest {
         TaskList test = new TaskList();
         TaskMapper map = new TaskMapper();
         CreateTaskDTO dto = new CreateTaskDTO("test", "test test test tests", 10, "Meeting", "user test");
-        CreateTaskDTO dto2 = new CreateTaskDTO("test2", "test2 test2 test2 test2", 10, "Meeting", "user test");
+        CreateTaskDTO dto2 = new CreateTaskDTO("testdois", "test2 test2 test2 test2", 10, "Meeting", "user test");
 
         // Create Project
         Customer cust = new Customer("test", "test@test.pt", 123456789);
@@ -213,7 +213,7 @@ public class TaskListTest {
 
         //Asserts
         assertEquals(new Task("test", "test test test tests", 10, comp.getTaskTypeStore().getTypeByDescription("Meeting"), resource), test.getTaskById(1));
-        assertEquals(new Task("test2", "test2 test2 test2 test2", 10, comp.getTaskTypeStore().getTypeByDescription("Meeting"), resource), test.getTaskById(2));
+        assertEquals(new Task("testdois", "test2 test2 test2 test2", 10, comp.getTaskTypeStore().getTypeByDescription("Meeting"), resource), test.getTaskById(2));
     }
 
     @Test
@@ -223,7 +223,7 @@ public class TaskListTest {
         TaskList test = new TaskList();
         TaskMapper map = new TaskMapper();
         CreateTaskDTO dto = new CreateTaskDTO("test", "test test test tests", 10, "Meeting", "user test");
-        CreateTaskDTO dto2 = new CreateTaskDTO("test2", "test2 test2 test2 test2", 10, "Meeting", "user test");
+        CreateTaskDTO dto2 = new CreateTaskDTO("testdois", "test2 test2 test2 test2", 10, "Meeting", "user test");
 
         // Create Project
         Customer cust = new Customer("test", "test@test.pt", 123456789);
@@ -242,6 +242,6 @@ public class TaskListTest {
 
         //Asserts
         assertEquals(new Task("test", "test test test tests", 10, comp.getTaskTypeStore().getTypeByDescription("Meeting"), resource), test.getTaskByName("test"));
-        assertEquals(new Task("test2", "test2 test2 test2 test2", 10, comp.getTaskTypeStore().getTypeByDescription("Meeting"), resource), test.getTaskByName("test2"));
+        assertEquals(new Task("testdois", "test2 test2 test2 test2", 10, comp.getTaskTypeStore().getTypeByDescription("Meeting"), resource), test.getTaskByName("testdois"));
     }
 }
