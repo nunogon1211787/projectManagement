@@ -1,6 +1,7 @@
 package switch2021.project.controller;
 
 import switch2021.project.immutable.Description;
+import switch2021.project.immutable.Name;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Project.ProjectTeam;
@@ -57,7 +58,7 @@ public class EditProjectInfoController {
         }
 
         if (result) {
-            this.project.setProjectName(name);
+            this.project.setProjectName(new Description (name));
             this.project.setDescription(new Description(description));
             this.project.setStartDate(startDate);
             this.project.setEndDate(endDate);

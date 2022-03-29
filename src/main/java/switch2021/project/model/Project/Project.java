@@ -24,7 +24,7 @@ public class Project {
      * Class Attributes
      **/
     private String code;
-    private String projectName;
+    private Description projectName;
     private Description description;
 
     private final Customer customer;
@@ -56,7 +56,7 @@ public class Project {
 
         validateProjectFields(name,description, budget, numberOfSprints);
 
-        this.projectName = name;
+        this.projectName = new Description(name);
         this.description = new Description(description);
 
         this.customer = customer;

@@ -653,58 +653,58 @@ class TaskTest {
         });
     }
 
-    @Test
-    void constructorCheckDescriptionSizeTest() {
-        //Arrange
-        Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
-        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
-        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
-        String taskDescription = "must be at";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+//    @Test
+//    void constructorCheckDescriptionSizeTest() {
+//        //Arrange
+//        Company company = new Company();
+//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+//        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+//        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+//        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+//        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+//        String taskDescription = "must be at";
+//        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+//
+//        //Asserts
+//        assertThrows(IllegalArgumentException.class, () -> {
+//            //Arrange
+//            new Task("test", taskDescription, 20.00, taskType, resource);
+//        });
+//    }
 
-        //Asserts
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            new Task("test", taskDescription, 20.00, taskType, resource);
-        });
-    }
+//    @Test
+//    void constructorCheckTypeNotNullTest() {
+//        //Arrange
+//        Company company = new Company();
+//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+//        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+//        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+//        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+//        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+//        String taskDescription = "must be at least 20 characters";
+//        TaskType taskType = null;
+//
+//        //Asserts
+//        assertThrows(IllegalArgumentException.class, () -> {
+//            //Arrange
+//            new Task("test", taskDescription, 20.00, taskType, resource);
+//        });
+//    }
 
-    @Test
-    void constructorCheckTypeNotNullTest() {
-        //Arrange
-        Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
-        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
-        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
-        String taskDescription = "must be at least 20 characters";
-        TaskType taskType = null;
-
-        //Asserts
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            new Task("test", taskDescription, 20.00, taskType, resource);
-        });
-    }
-
-    @Test
-    void constructorCheckResponsibleNotNullTest() {
-        //Arrange
-        Company company = new Company();
-        Resource resource = null;
-        String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-
-        //Asserts
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            new Task("test", taskDescription, 20.00, taskType, resource);
-        });
-    }
+//    @Test
+//    void constructorCheckResponsibleNotNullTest() {
+//        //Arrange
+//        Company company = new Company();
+//        Resource resource = null;
+//        String taskDescription = "must be at least 20 characters";
+//        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+//
+//        //Asserts
+//        assertThrows(IllegalArgumentException.class, () -> {
+//            //Arrange
+//            new Task("test", taskDescription, 20.00, taskType, resource);
+//        });
+//    }
 
     @Test
     void checkIdRulesTest() {

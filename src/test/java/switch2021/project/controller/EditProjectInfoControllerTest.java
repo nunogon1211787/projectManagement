@@ -106,7 +106,7 @@ class EditProjectInfoControllerTest {
 
 
         //Assert
-        assertEquals("proto", project.getProjectName());
+        assertEquals("proto", project.getProjectName().getText());
         assertEquals("test44", project.getDescription().getText());
         assertEquals(project.getStartDate(), LocalDate.of(2022, 12, 1));
         assertEquals(project.getEndDate(), LocalDate.of(2023, 12, 1));

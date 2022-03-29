@@ -47,11 +47,7 @@ public class Task {
 
     public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible) {
 
-        checkNameRules(name);
-        checkDescriptionRules(description);
         checkEffortRules(effortEstimate);
-        checkTypeNotNull(type);
-        checkResponsibleNotNull(responsible);
 
         this.name = new Name(name);
         this.description = new Description(description);
@@ -101,40 +97,15 @@ public class Task {
     /**
      * Methods to validate attributes data.
      */
-    private void checkNameRules(String name) {
-        if (name.trim().isEmpty())
-            throw new IllegalArgumentException("Name cannot be empty.");
-        if ((name.length() < 3))
-            throw new IllegalArgumentException("Name must be at least 3 characters");
-    }
 
     private void checkIdRules(int id) {
         if (id < 1)
             throw new IllegalArgumentException("Type ID cannot be negative.");
     }
 
-    private void checkDescriptionRules(String description) {
-        if (description.trim().isEmpty())
-            throw new IllegalArgumentException("Description cannot be empty.");
-        if ((description.length() < 20))
-            throw new IllegalArgumentException("Description must be at least 20 characters");
-    }
-
     private void checkEffortRules(double effort) {
         if (effort <= 0) {
             throw new IllegalArgumentException("Effort can be bigger than zero.");
-        }
-    }
-
-    private void checkTypeNotNull(TaskType type) {
-        if (type == null) {
-            throw new IllegalArgumentException("Type can be a valid(not null) object.");
-        }
-    }
-
-    private void checkResponsibleNotNull(Resource responsible) {
-        if (responsible == null) {
-            throw new IllegalArgumentException("Responsible can be a valid(not null) object.");
         }
     }
 

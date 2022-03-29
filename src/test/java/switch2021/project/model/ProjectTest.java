@@ -54,7 +54,7 @@ class ProjectTest {
         String code = proj.getCode();
         String valueCode = "Project_2022_1";
 
-        String name = proj.getProjectName();
+        String name = proj.getProjectName().getText();
         String valueName = "prototype";
 
         Description description = proj.getDescription();
@@ -450,7 +450,7 @@ class ProjectTest {
         assertNotEquals(list1.hashCode(), list3.hashCode());
         assertEquals(7, project.getNumberOfSprints());
         assertEquals(project.getCode(), list1.getProjectByCode(project.getCode()).getCode());
-        assertEquals("prototype", project.getProjectName());
+        assertEquals("prototype", project.getProjectName().getText());
         assertEquals("test1234", project.getDescription().getText());
         assertEquals(sector, project.getBusinessSector());
 
@@ -489,7 +489,7 @@ class ProjectTest {
         assertNotEquals(project, project2);
 
         project.setDescription(new Description("test"));
-        project2.setProjectName("erro");
+        project2.setProjectName(new Description("erro"));
 
         assertNotEquals(project, project2);
     }
@@ -526,7 +526,7 @@ class ProjectTest {
         assertNotEquals(project, project2);
 
         project.setDescription(new Description("test"));
-        project2.setProjectName("erro");
+        project2.setProjectName(new Description("erro"));
 
         assertNotEquals(project, project2);
 
