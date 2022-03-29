@@ -1,7 +1,7 @@
 package switch2021.project.model.ProjectStatus;
 
 import lombok.Getter;
-import switch2021.project.immutable.Description;
+import switch2021.project.valueObject.Description;
 
 @Getter
 public class ProjectStatus {

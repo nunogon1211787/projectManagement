@@ -1,4 +1,4 @@
-package switch2021.project.immutable;
+package switch2021.project.valueObject;
 
 import lombok.Getter;
 import java.time.LocalDate;

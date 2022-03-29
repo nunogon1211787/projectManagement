@@ -1,7 +1,6 @@
-package switch2021.project.model.ProjectRole;
+package switch2021.project.valueObject;
 
 import lombok.Getter;
-import switch2021.project.immutable.Description;
 
 import java.util.Objects;
 

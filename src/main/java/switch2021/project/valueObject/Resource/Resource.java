@@ -1,10 +1,9 @@
-package switch2021.project.model.Project;
+package switch2021.project.valueObject.Resource;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.model.ProjectRole.ProjectRole;
+import switch2021.project.valueObject.ProjectRole;
 import switch2021.project.model.SystemUser.SystemUser;
-
 import java.time.LocalDate;
 import java.util.Objects;
 

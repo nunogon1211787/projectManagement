@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.immutable.Date;
+import switch2021.project.valueObject.Date;
 import switch2021.project.model.Project.TaskEffort;
 
 import java.time.LocalDate;

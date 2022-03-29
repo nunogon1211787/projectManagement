@@ -1,6 +1,6 @@
 package switch2021.project.factoryInterface;
 
-import switch2021.project.model.ProjectRole.ProjectRole;
+import switch2021.project.valueObject.ProjectRole;
 
 public interface ProjectRoleFactoryInterface {
 

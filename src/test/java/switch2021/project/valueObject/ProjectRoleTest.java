@@ -1,8 +1,6 @@
-package switch2021.project.model;
+package switch2021.project.valueObject;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.immutable.Description;
-import switch2021.project.model.ProjectRole.ProjectRole;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;

@@ -2,7 +2,7 @@ package switch2021.project.model.UserStoryStatus;
 
 
 import lombok.Getter;
-import switch2021.project.immutable.Description;
+import switch2021.project.valueObject.Description;
 
 import java.util.Objects;
 
@@ -17,7 +17,6 @@ public class UserStoryStatus {
     public UserStoryStatus(String description) {
         this.description = new Description(description);
     }
-
     public boolean isSprintAvailable() {
         return sprintAvailable;
     }
@@ -25,6 +24,7 @@ public class UserStoryStatus {
     public void setSprintAvailable(boolean sprintAvailable) {
         this.sprintAvailable = sprintAvailable;
     }
+
 
 
     @Override

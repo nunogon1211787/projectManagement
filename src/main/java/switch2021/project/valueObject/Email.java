@@ -1,9 +1,6 @@
-package switch2021.project.immutable;
-
-import lombok.NonNull;
+package switch2021.project.valueObject;
 
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 public class Email {
 

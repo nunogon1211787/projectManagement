@@ -1,4 +1,4 @@
-package switch2021.project.immutable;
+package switch2021.project.valueObject;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.TaskStatus.TaskStatus;

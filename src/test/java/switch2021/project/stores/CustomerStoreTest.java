@@ -1,9 +1,9 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.immutable.Description;
-import switch2021.project.immutable.Email;
-import switch2021.project.immutable.Nif;
+import switch2021.project.valueObject.Description;
+import switch2021.project.valueObject.Email;
+import switch2021.project.valueObject.Nif;
 import switch2021.project.model.Project.Customer;
 
 import java.util.ArrayList;

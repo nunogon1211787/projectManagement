@@ -2,10 +2,9 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.factory.ProjectRoleFactory;
-import switch2021.project.immutable.Description;
-import switch2021.project.model.ProjectRole.ProjectRole;
+import switch2021.project.valueObject.Description;
+import switch2021.project.valueObject.ProjectRole;
 import static org.mockito.ArgumentMatchers.anyString;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

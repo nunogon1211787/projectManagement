@@ -2,8 +2,8 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.immutable.Description;
-import switch2021.project.immutable.Name;
+import switch2021.project.valueObject.Description;
+import switch2021.project.valueObject.Name;
 import switch2021.project.model.SystemUser.Request;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.UserProfile.UserProfile;

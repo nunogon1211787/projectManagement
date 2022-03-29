@@ -1,9 +1,8 @@
-package switch2021.project.Immutables;
+package switch2021.project.valueObject;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import switch2021.project.immutable.Email;
 
 import java.util.Arrays;
 

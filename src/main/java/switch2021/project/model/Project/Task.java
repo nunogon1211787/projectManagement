@@ -2,9 +2,10 @@ package switch2021.project.model.Project;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.immutable.Date;
-import switch2021.project.immutable.Description;
-import switch2021.project.immutable.Name;
+import switch2021.project.valueObject.Date;
+import switch2021.project.valueObject.Description;
+import switch2021.project.valueObject.Name;
+import switch2021.project.valueObject.Resource.Resource;
 import switch2021.project.model.TaskStatus.TaskStatus;
 import switch2021.project.model.TaskType.TaskType;
 import switch2021.project.utils.App;

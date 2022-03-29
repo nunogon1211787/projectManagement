@@ -4,7 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.factory.SprintFactory;
-import switch2021.project.immutable.Description;
+import switch2021.project.valueObject.Description;
+import switch2021.project.valueObject.Resource.Resource;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.ProjectStatus.ProjectStatus;
 import switch2021.project.model.SystemUser.SystemUser;
@@ -13,11 +14,9 @@ import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProjectTest {

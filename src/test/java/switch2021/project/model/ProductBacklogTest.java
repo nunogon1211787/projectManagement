@@ -3,7 +3,7 @@ package switch2021.project.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.factory.UserStoryFactory;
-import switch2021.project.immutable.Description;
+import switch2021.project.valueObject.Description;
 import switch2021.project.model.Project.ProductBacklog;
 import switch2021.project.model.Project.UserStory;
 import switch2021.project.model.UserStoryStatus.UserStoryStatus;

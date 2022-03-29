@@ -1,10 +1,9 @@
 package switch2021.project.controller;
 
+import switch2021.project.valueObject.Resource.Resource;
 import switch2021.project.model.Company;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Project.Resource;
 import switch2021.project.model.SystemUser.SystemUser;
-
 import java.time.LocalDate;
 import java.util.List;
 

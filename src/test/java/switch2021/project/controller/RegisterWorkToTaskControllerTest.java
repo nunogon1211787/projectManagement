@@ -1,10 +1,11 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.immutable.Date;
+import switch2021.project.valueObject.Date;
 import switch2021.project.dto.TaskEffortDTO;
 import switch2021.project.dto.TaskIdNameDTO;
 import switch2021.project.dto.UserStorySprintProjectDTO;
+import switch2021.project.valueObject.Resource.Resource;
 import switch2021.project.mapper.RegisterWorkToTaskMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
@@ -13,10 +14,8 @@ import switch2021.project.model.TaskType.TaskType;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.stores.ProjectStore;
-
 import java.time.LocalDate;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

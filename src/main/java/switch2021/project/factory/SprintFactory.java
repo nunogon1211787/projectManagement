@@ -1,7 +1,7 @@
 package switch2021.project.factory;
 
+import switch2021.project.factoryInterface.SprintFactoryInterface;
 import switch2021.project.model.Project.Sprint;
-
 import java.time.LocalDate;
 
 public class SprintFactory implements SprintFactoryInterface {

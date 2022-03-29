@@ -1,9 +1,8 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.factory.BusinessSectorFactoryInterface;
+import switch2021.project.factoryInterface.BusinessSectorFactoryInterface;
 import switch2021.project.model.Project.BusinessSector;
-
 import java.util.ArrayList;
 import java.util.List;
 

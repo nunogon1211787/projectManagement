@@ -2,11 +2,10 @@ package switch2021.project.stores;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.factory.SprintFactoryInterface;
+import switch2021.project.factoryInterface.SprintFactoryInterface;
 import switch2021.project.model.Project.ProjectTeam;
 import switch2021.project.model.Project.Sprint;
 import switch2021.project.model.Project.Task;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
