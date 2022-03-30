@@ -2,7 +2,8 @@ package switch2021.project.dto;
 
 import lombok.Getter;
 import switch2021.project.valueObject.Date;
-import switch2021.project.valueObject.HoursMinutes;
+import switch2021.project.valueObject.Hours;
+import switch2021.project.valueObject.Minutes;
 
 @Getter
 
@@ -12,7 +13,8 @@ public class TaskEffortDTO {
      * Attributes
      **/
 
-    private HoursMinutes effort;
+    private Hours effortHours;
+    private Minutes effortMinutes;
     private Date effortDate;
     private String comment;
     private String attachment;
@@ -22,7 +24,8 @@ public class TaskEffortDTO {
      **/
 
     public TaskEffortDTO(int effortHours, int effortMinutes, Date effortDate, String comment, String attachment) {
-        this.effort = new HoursMinutes(effortHours, effortMinutes);
+        this.effortHours = new Hours(effortHours);
+        this.effortMinutes = new Minutes(effortMinutes);
         this.effortDate = effortDate;
         this.comment = comment;
         this.attachment = attachment;

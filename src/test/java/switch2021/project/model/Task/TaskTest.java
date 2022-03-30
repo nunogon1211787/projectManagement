@@ -92,8 +92,8 @@ class TaskTest {
         //Act
         TaskEffort taskEffort = task.createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         //Assert
-        assertEquals(effortHours, taskEffort.getEffort().getEffortHours());
-        assertEquals(effortMinutes, taskEffort.getEffort().getEffortMinutes());
+        assertEquals(effortHours, taskEffort.getEffortHours().getEffortHours());
+        assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());

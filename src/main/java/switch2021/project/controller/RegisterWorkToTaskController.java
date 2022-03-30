@@ -67,8 +67,8 @@ public class RegisterWorkToTaskController {
 
     public boolean createTaskEffort(TaskEffortDTO taskEffortDTO) {
 
-        int effortHours = taskEffortDTO.getEffort().getEffortHours();
-        int effortMinutes = taskEffortDTO.getEffort().getEffortMinutes();
+        int effortHours = taskEffortDTO.getEffortHours().getEffortHours();
+        int effortMinutes = taskEffortDTO.getEffortMinutes().getEffortMinutes();
         Date effortDate = taskEffortDTO.getEffortDate();
         String comment = taskEffortDTO.getComment();
         String attachment = taskEffortDTO.getAttachment();

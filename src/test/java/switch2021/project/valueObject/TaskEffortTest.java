@@ -2,6 +2,8 @@ package switch2021.project.valueObject;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.Task.Task;
+
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,16 +13,17 @@ public class TaskEffortTest {
     @DisplayName("create task effort with success")
     public void createTaskEffortSuccess() {
         //Arrange
+        Task task = new Task("Make test");
         int effortHours = 4;
         int effortMinutes = 30;
         Date effortDate = new Date (LocalDate.of(2022, 1, 27));
         String comment = "design";
         String attachment = "photo";
         //Act
-        TaskEffort taskEffort = new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
+        TaskEffort taskEffort = task.createTaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
         //Assert
-        assertEquals(effortHours, taskEffort.getEffort().getEffortHours());
-        assertEquals(effortMinutes, taskEffort.getEffort().getEffortMinutes());
+        assertEquals(effortHours, taskEffort.getEffortHours().getEffortHours());
+        assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
@@ -38,8 +41,8 @@ public class TaskEffortTest {
         //Act
         TaskEffort taskEffort = new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
         //Assert
-        assertEquals(effortHours, taskEffort.getEffort().getEffortHours());
-        assertEquals(effortMinutes, taskEffort.getEffort().getEffortMinutes());
+        assertEquals(effortHours, taskEffort.getEffortHours().getEffortHours());
+        assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
@@ -57,8 +60,8 @@ public class TaskEffortTest {
         //Act
         TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         //Assert
-        assertEquals(effortHours, taskEffort.getEffort().getEffortHours());
-        assertEquals(effortMinutes, taskEffort.getEffort().getEffortMinutes());
+        assertEquals(effortHours, taskEffort.getEffortHours().getEffortHours());
+        assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
@@ -76,8 +79,8 @@ public class TaskEffortTest {
         //Act
         TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         //Assert
-        assertEquals(effortHours, taskEffort.getEffort().getEffortHours());
-        assertEquals(effortMinutes, taskEffort.getEffort().getEffortMinutes());
+        assertEquals(effortHours, taskEffort.getEffortHours().getEffortHours());
+        assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
@@ -95,11 +98,10 @@ public class TaskEffortTest {
         String attachment = "";
         //Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TaskEffort taskEffort = new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
+            new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
         });
         //Assert
-        assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
-                " || Hour interval: [" + 0 + " - " + 23 + "]"));
+        assertTrue(exception.getMessage().equals("Not valid work time values." + "Hour interval: [" + 0 + " - " + 23 + "]"));
     }
 
     @Test
@@ -113,17 +115,17 @@ public class TaskEffortTest {
         String attachment = "";
         //Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TaskEffort taskEffort = new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
+            new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
         });
         //Assert
-        assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
-                " || Hour interval: [" + 0 + " - " + 23 + "]"));
+        assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]"));
     }
 
     @Test
     @DisplayName("create effort with hours and minutes without time")
     public void createTaskEffortFailNoWorkingTime() {
         //Arrange
+        Task task = new Task("Make test");
         int effortHours = 0;
         int effortMinutes = 0;
         Date effortDate = new Date (LocalDate.of(2022, 1, 27));
@@ -131,11 +133,10 @@ public class TaskEffortTest {
         String attachment = "";
         //Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TaskEffort taskEffort = new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
+            task.createTaskEffort(effortHours,effortMinutes,effortDate,comment,attachment);
         });
         //Assert
-        assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
-                " || Hour interval: [" + 0 + " - " + 23 + "]"));
+        assertTrue(exception.getMessage().equals("Not work time values insert"));
     }
 
     @Test
@@ -149,11 +150,10 @@ public class TaskEffortTest {
         String attachment = "";
         //Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TaskEffort taskEffort = new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
+            new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
         });
         //Assert
-        assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
-                " || Hour interval: [" + 0 + " - " + 23 + "]"));
+        assertTrue(exception.getMessage().equals("Not valid work time values." + "Hour interval: [" + 0 + " - " + 23 + "]"));
     }
 
     @Test
@@ -168,8 +168,8 @@ public class TaskEffortTest {
         //Act
         TaskEffort taskEffort = new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
         //Assert
-        assertEquals(effortHours, taskEffort.getEffort().getEffortHours());
-        assertEquals(effortMinutes, taskEffort.getEffort().getEffortMinutes());
+        assertEquals(effortHours, taskEffort.getEffortHours().getEffortHours());
+        assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment());
         assertEquals(attachment, taskEffort.getAttachment());
@@ -187,11 +187,10 @@ public class TaskEffortTest {
         String attachment = "";
         //Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TaskEffort taskEffort = new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
+           new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
         });
         //Assert
-        assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
-                " || Hour interval: [" + 0 + " - " + 23 + "]"));
+        assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]"));
     }
 
     @Test
@@ -205,11 +204,10 @@ public class TaskEffortTest {
         String attachment = "";
         //Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TaskEffort taskEffort = new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
+            new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
         });
         //Assert
-        assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]" +
-                " || Hour interval: [" + 0 + " - " + 23 + "]"));
+        assertTrue(exception.getMessage().equals("Not valid work time values." + " Minute interval: [" + 0 + " - " + 60 + "]"));
     }
 
     @Test

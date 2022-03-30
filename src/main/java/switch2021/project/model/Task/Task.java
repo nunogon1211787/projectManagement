@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.valueObject.*;
 import switch2021.project.utils.App;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -56,7 +57,7 @@ public class Task {
     }
 
     public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible, List<String> precedenceList) {
-        new Task(name, description,effortEstimate, type, responsible);
+        new Task(name, description, effortEstimate, type, responsible);
         this.precedenceList = Collections.unmodifiableList(precedenceList);
 
     }
@@ -106,7 +107,10 @@ public class Task {
     }
 
     public TaskEffort createTaskEffort(int effortHours, int effortMinutes, Date effortDate, String comment, String attachment) {
-        return new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
+        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
+        if (taskEffort.getEffortHours().getEffortHours() == 0 && taskEffort.getEffortMinutes().getEffortMinutes() == 0)
+            throw new IllegalArgumentException("Not work time values insert");
+        return taskEffort;
     }
 
     public boolean validateTaskEffort(TaskEffort effort) {
@@ -147,7 +151,7 @@ public class Task {
     }
 
     private double effortInHours(TaskEffort effort) {
-        return (double) effort.getEffort().getEffortHours() + ((double) effort.getEffort().getEffortMinutes() / 60);
+        return (double) effort.getEffortHours().getEffortHours() + ((double) effort.getEffortMinutes().getEffortMinutes() / 60);
     }
 
     public double updateHoursSpent(TaskEffort effort) {

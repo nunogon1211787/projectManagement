@@ -8,7 +8,8 @@ public class TaskEffort {
     /**
      * Attributes
      **/
-    private final HoursMinutes effort;
+    private final Hours effortHours;
+    private final Minutes effortMinutes;
     private final Date effortDate;
     private final String comment;
     private final String attachment;
@@ -19,7 +20,8 @@ public class TaskEffort {
      **/
     public TaskEffort(int effortHours, int effortMinutes, Date effortDate, String comment, String attachment) {
         this.effortDate = effortDate;
-        this.effort = new HoursMinutes(effortHours, effortMinutes);
+        this.effortHours = new Hours(effortHours);
+        this.effortMinutes = new Minutes(effortMinutes);
         this.comment = comment;
         this.attachment = attachment;
     }
