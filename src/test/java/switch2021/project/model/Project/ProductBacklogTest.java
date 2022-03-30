@@ -40,7 +40,7 @@ public class ProductBacklogTest {
         productBacklog.createAndSaveUserStory(title, priority, descriptionUS, 5);
         // Assert
         assertEquals(status.getDescription().getText(), productBacklog.getUserStoryList().get(0).getUserStoryStatus().getDescription().getText());
-        assertEquals(priority, productBacklog.getUserStoryList().get(0).getPriority());
+        assertEquals(priority, productBacklog.getUserStoryList().get(0).getPriority().getUsPriority());
         assertEquals(descriptionUS, productBacklog.getUserStoryList().get(0).getDescription().getText());
         assertEquals(title, productBacklog.getUserStoryList().get(0).getTitle().getUsTitle());
     }
@@ -97,7 +97,7 @@ public class ProductBacklogTest {
         productBacklog.createAndSaveUserStory(title, priority, description, 5);
         // Assert
         assertEquals(status, productBacklog.getUserStoryList().get(0).getUserStoryStatus());
-        assertEquals(priority, productBacklog.getUserStoryList().get(0).getPriority());
+        assertEquals(priority, productBacklog.getUserStoryList().get(0).getPriority().getUsPriority());
         assertEquals(description, productBacklog.getUserStoryList().get(0).getDescription().getText());
         assertEquals(title, productBacklog.getUserStoryList().get(0).getTitle().getUsTitle());
     }
@@ -170,10 +170,10 @@ public class ProductBacklogTest {
 
         // Assert
         assertEquals(4, userStoryList.size());
-        assertEquals(1, userStoryList.get(0).getPriority());
-        assertEquals(2, userStoryList.get(1).getPriority());
-        assertEquals(3, userStoryList.get(2).getPriority());
-        assertEquals(5, userStoryList.get(3).getPriority());
+        assertEquals(1, userStoryList.get(0).getPriority().getUsPriority());
+        assertEquals(2, userStoryList.get(1).getPriority().getUsPriority());
+        assertEquals(3, userStoryList.get(2).getPriority().getUsPriority());
+        assertEquals(5, userStoryList.get(3).getPriority().getUsPriority());
 
     }
 
@@ -200,11 +200,11 @@ public class ProductBacklogTest {
 
         // Assert
         assertEquals(5, userStoryList.size());
-        assertEquals(1, userStoryList.get(0).getPriority());
-        assertEquals(5, userStoryList.get(1).getPriority());
-        assertEquals(0, userStoryList.get(2).getPriority());
-        assertEquals(1, userStoryList.get(3).getPriority());
-        assertEquals(3, userStoryList.get(4).getPriority());
+        assertEquals(1, userStoryList.get(0).getPriority().getUsPriority());
+        assertEquals(5, userStoryList.get(1).getPriority().getUsPriority());
+        assertEquals(0, userStoryList.get(2).getPriority().getUsPriority());
+        assertEquals(1, userStoryList.get(3).getPriority().getUsPriority());
+        assertEquals(3, userStoryList.get(4).getPriority().getUsPriority());
 
     }
 
@@ -225,7 +225,7 @@ public class ProductBacklogTest {
         });
 
         // Assert
-        assertTrue(exception.getMessage().contains("Check priority, cannot be < 0 or superior to 5."));
+        assertTrue(exception.getMessage().contains("Check priority, cannot be < 0 or superior to 5"));
     }
 
     @Test
@@ -244,7 +244,7 @@ public class ProductBacklogTest {
         // Assert
         assertEquals(userStory.getUserStoryStatus(), company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do"));
         assertEquals(userStory.getParentUserStory(), productBacklog.getUserStoryList().get(0));
-        assertEquals(5, userStory.getPriority());
+        assertEquals(5, userStory.getPriority().getUsPriority());
         assertEquals("234test234", userStory.getDescription().getText());
 
     }
@@ -281,7 +281,7 @@ public class ProductBacklogTest {
         // Assert
         assertEquals(userStory.getUserStoryStatus(), company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do"));
         assertEquals(userStory.getParentUserStory(), productBacklog.getUserStoryList().get(0));
-        assertEquals(5, userStory.getPriority());
+        assertEquals(5, userStory.getPriority().getUsPriority());
         assertEquals("2", userStory.getDescription().getText());
     }
 

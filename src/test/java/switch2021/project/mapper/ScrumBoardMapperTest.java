@@ -29,7 +29,7 @@ public class ScrumBoardMapperTest {
         assertEquals("As a PO, i want to test this string",dto.getUserStoryTitle());
         assertEquals(dto.getUserStoryDescription(),userStory.getDescription().getText());
         assertEquals("description", dto.getUserStoryDescription());
-        assertEquals(dto.getUserStoryPriority(),userStory.getPriority());
+        assertEquals(dto.getUserStoryPriority(),userStory.getPriority().getUsPriority());
         assertEquals(5, dto.getUserStoryPriority());
         assertEquals(dto.getUserStoryTimeEstimate(),userStory.getTimeEstimate());
         assertEquals(5, dto.getUserStoryPriority());

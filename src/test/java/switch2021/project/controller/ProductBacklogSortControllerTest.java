@@ -238,7 +238,7 @@ public class ProductBacklogSortControllerTest {
             productBacklogSortController.getUsSortedByPriority("123testcode");
         });
         // Assert
-        assertTrue(exception.getMessage().contains("Check priority, cannot be < 0 or superior to 5."));
+        assertTrue(exception.getMessage().contains("Check priority, cannot be < 0 or superior to 5"));
     }
 
     @Test
@@ -278,19 +278,19 @@ public class ProductBacklogSortControllerTest {
 
         assertEquals(project.getProductBacklog().getUserStoryList().get(0).getTitle().getUsTitle(), userStoryListDtoList.get(0).getTitle());
         assertEquals(project.getProductBacklog().getUserStoryList().get(0).getUserStoryStatus(), userStoryListDtoList.get(0).getUserStoryStatus());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(0).getPriority(), userStoryListDtoList.get(0).getPriority());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(0).getPriority().getUsPriority(), userStoryListDtoList.get(0).getPriority());
         assertEquals(project.getProductBacklog().getUserStoryList().get(0).getDescription().getText(), userStoryListDtoList.get(0).getDescription().getText());
         assertEquals(project.getProductBacklog().getUserStoryList().get(1).getTitle().getUsTitle(), userStoryListDtoList.get(1).getTitle());
         assertEquals(project.getProductBacklog().getUserStoryList().get(1).getUserStoryStatus(), userStoryListDtoList.get(1).getUserStoryStatus());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(1).getPriority(), userStoryListDtoList.get(1).getPriority());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(1).getPriority().getUsPriority(), userStoryListDtoList.get(1).getPriority());
         assertEquals(project.getProductBacklog().getUserStoryList().get(1).getDescription().getText(), userStoryListDtoList.get(1).getDescription().getText());
         assertEquals(project.getProductBacklog().getUserStoryList().get(2).getTitle().getUsTitle(), userStoryListDtoList.get(2).getTitle());
         assertEquals(project.getProductBacklog().getUserStoryList().get(2).getUserStoryStatus(), userStoryListDtoList.get(2).getUserStoryStatus());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(2).getPriority(), userStoryListDtoList.get(2).getPriority());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(2).getPriority().getUsPriority(), userStoryListDtoList.get(2).getPriority());
         assertEquals(project.getProductBacklog().getUserStoryList().get(2).getDescription().getText(), userStoryListDtoList.get(2).getDescription().getText());
         assertEquals(project.getProductBacklog().getUserStoryList().get(3).getTitle().getUsTitle(), userStoryListDtoList.get(3).getTitle());
         assertEquals(project.getProductBacklog().getUserStoryList().get(3).getUserStoryStatus(), userStoryListDtoList.get(3).getUserStoryStatus());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(3).getPriority(), userStoryListDtoList.get(3).getPriority());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(3).getPriority().getUsPriority(), userStoryListDtoList.get(3).getPriority());
         assertEquals(project.getProductBacklog().getUserStoryList().get(3).getDescription().getText(), userStoryListDtoList.get(3).getDescription().getText());
     }
 }

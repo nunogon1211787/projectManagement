@@ -10,8 +10,8 @@ public class Hours {
      **/
 
     private final int effortHours;
-    private static final int MIN_HOUR = 0;
-    private static final int MAX_HOUR = 23;
+    private final int MIN_HOUR = 0;
+    private final int MAX_HOUR = 23;
 
     /**
      * Constructor (without SINGLETON)

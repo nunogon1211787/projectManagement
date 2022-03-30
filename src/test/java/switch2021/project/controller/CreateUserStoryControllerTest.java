@@ -45,14 +45,16 @@ public class CreateUserStoryControllerTest {
         int priority = -1;
         String description = "teste";
         UserStoryStatus status = new UserStoryStatus("To do");
-        UserStoryDto userStoryDto = new UserStoryDto("Teste", status, priority, description);
 
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                createUserStoryController.createUserStory("Project_2022_1", userStoryDto));
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->{
+            UserStoryDto userStoryDto = new UserStoryDto("As a PO, i want to test this string", status, priority, description);
+            createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
+
+    });
         //Assert
-        assertEquals("Check priority, cannot be < 0 or superior to 5.", exception.getMessage());
+        assertTrue(exception.getMessage().equals("Check priority, cannot be < 0 or superior to 5"));
     }
 
 
@@ -119,10 +121,10 @@ public class CreateUserStoryControllerTest {
         int priority = 6;
         String description = "teste";
         UserStoryStatus status = new UserStoryStatus("To do");
-        UserStoryDto userStoryDto = new UserStoryDto("Teste", status, priority, description);
+        UserStoryDto userStoryDto = new UserStoryDto("As a PO, i want to test this string", status, priority, description);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto));
-        assertEquals("Check priority, cannot be < 0 or superior to 5.", exception.getMessage());
+        assertEquals("Check priority, cannot be < 0 or superior to 5", exception.getMessage());
     }
 
     @Test
@@ -131,8 +133,6 @@ public class CreateUserStoryControllerTest {
         company.getProjectStore().saveNewProject(project);
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = 1;
-//        int priority2 = 5;
-//        int priority3 = 0;
         String description = "teste";
         String title = "As a PO, i want to test this string";
         UserStoryStatus status = new UserStoryStatus("To do");
@@ -185,7 +185,7 @@ public class CreateUserStoryControllerTest {
         ProductBacklog project_2022_1 = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog();
         assertEquals(1, project_2022_1.getUserStoryList().size());
         assertEquals(userStoryDto.getTitle(), project_2022_1.getUserStoryList().get(0).getTitle().getUsTitle());
-        assertEquals(userStoryDto.getPriority(), project_2022_1.getUserStoryList().get(0).getPriority());
+        assertEquals(userStoryDto.getPriority(), project_2022_1.getUserStoryList().get(0).getPriority().getUsPriority());
         assertEquals(userStoryDto.getUserStoryStatus(), project_2022_1.getUserStoryList().get(0).getUserStoryStatus());
         assertEquals(userStoryDto.getDescription().getText(), project_2022_1.getUserStoryList().get(0).getDescription().getText());
     }

@@ -6,7 +6,9 @@ import switch2021.project.dto.UserStoryDto;
 import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.mapper.UserStoryMapper;
 import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.valueObject.UsPriority;
 import switch2021.project.valueObject.UserStoryStatus;
+
 import java.util.*;
 
 @Getter
@@ -84,6 +86,7 @@ public class ProductBacklog {
         return msg;
     }
 
+//TODO Ver comparingINT
 
     /**
      * Get Methods.
@@ -94,14 +97,15 @@ public class ProductBacklog {
         List<UserStory> noPriorityStories = new LinkedList<>();
         List<UserStory> closeAndDoneUserStories = new LinkedList<>();
 
-        userStoryList.sort(Comparator.comparingInt(UserStory::getPriority));
+        userStoryList.sort(Comparator.comparing(userStory -> userStory.getPriority().getUsPriority(), Comparator.naturalOrder()));
+
 
         for (UserStory userStory : userStoryList) {
             if (!userStory.getUserStoryStatus().getDescription().getText().equals("Cancelled") &&
                     !userStory.getUserStoryStatus().getDescription().getText().equals("Done") &&
-                    userStory.getPriority() != 0) {
+                    userStory.getPriority().getUsPriority() != 0) {
                 returnList.add(userStory);
-            } else if (userStory.getPriority() == 0) {
+            } else if (userStory.getPriority().getUsPriority() == 0) {
                 noPriorityStories.add(userStory);
             } else {
                 closeAndDoneUserStories.add(userStory);

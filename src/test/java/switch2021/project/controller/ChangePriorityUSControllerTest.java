@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ChangePriorityUSControllerTest {
 
@@ -156,7 +156,7 @@ public class ChangePriorityUSControllerTest {
         // Act
         change.setPriority(4);
         int expected = 4;
-        int actual = userStory.getPriority();
+        int actual = userStory.getPriority().getUsPriority();
 
         // Assert
         assertEquals(expected, actual);
@@ -284,7 +284,7 @@ public class ChangePriorityUSControllerTest {
 
         userStory3.setPriority(3);
 
-        assertEquals(3, userStory3.getPriority());
+        assertEquals(3, userStory3.getPriority().getUsPriority());
 
     }
 
@@ -292,9 +292,11 @@ public class ChangePriorityUSControllerTest {
     void setPriorityInvalid() {
         project.addResource(input);
 
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
         userStory3.setPriority(6);
+        });
 
-        assertEquals(4, userStory3.getPriority());
+        assertTrue(exception.getMessage().equals("Check priority, cannot be < 0 or superior to 5"));
 
     }
 }

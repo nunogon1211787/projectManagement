@@ -6,6 +6,7 @@ import switch2021.project.model.Task.Task;
 import switch2021.project.valueObject.UserStoryStatus;
 
 import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -27,13 +28,13 @@ class UserStoryTest {
     void setPriorityTest() {
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
         userStory.setPriority(4);
-        assertEquals(4, userStory.getPriority());
+        assertEquals(4, userStory.getPriority().getUsPriority());
     }
 
 
     @Test
     void hasCodeTest() {
-       UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
 
         boolean expected = userStory.hasCode(userStory.getIdUserStory());
         assertTrue(expected);
@@ -41,7 +42,7 @@ class UserStoryTest {
 
     @Test
     void hasCodeTest2() {
-       UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
 
         boolean expected = userStory.hasCode(4);
         assertFalse(expected);
@@ -49,7 +50,7 @@ class UserStoryTest {
 
     @Test
     void setDescriptionTest() {
-       UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
 
         userStory.setDescription("Fazer coiso");
         assertEquals("Fazer coiso", userStory.getDescription().getText());
@@ -93,51 +94,12 @@ class UserStoryTest {
         assertEquals(12, userStory.getWorkDone());
     }
 
-    @Test
-    void validatePriorityTestFail() {
-      UserStory  userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-
-        boolean expected = userStory.validatePriority(6);
-        assertFalse(expected);
-    }
-
-    @Test
-    void validatePriorityTestSuccess() {
-      UserStory  userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-
-        boolean expected = userStory.validatePriority(1);
-        assertTrue(expected);
-    }
-
-    @Test
-    void validatePriorityTestFailNegative() {
-     UserStory   userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-
-        boolean expected = userStory.validatePriority(-1);
-        assertFalse(expected);
-    }
-
-    @Test
-    void validatePriorityTestSuccessHighLimit() {
-     UserStory   userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-
-        boolean expected = userStory.validatePriority(5);
-        assertTrue(expected);
-    }
-
-    @Test
-    void validatePriorityTestSuccessLowLimit() {
-      UserStory  userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-
-        boolean expected = userStory.validatePriority(0);
-        assertTrue(expected);
-    }
 
     @Test
     void isValidUserStoryDescription() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-        UserStory    userStory = new UserStory("As a PO, i want to test this string", 2, "", 5);
+            UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }
@@ -146,7 +108,7 @@ class UserStoryTest {
     void isValidUserStoryDescription2() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-          UserStory  userStory = new UserStory("As a PO, i want to test this string", 2, "    ", 5);
+            UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "    ", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }
@@ -156,7 +118,7 @@ class UserStoryTest {
     void isValidUserStoryName() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-       UserStory     userStory = new UserStory("", 2, "Fazer tal", 5);
+            UserStory userStory = new UserStory("", 2, "Fazer tal", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }
@@ -165,7 +127,7 @@ class UserStoryTest {
     void isValidUserStoryName2() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-      UserStory      userStory = new UserStory("C", 2, "Fazer tal", 5);
+            UserStory userStory = new UserStory("C", 2, "Fazer tal", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }
@@ -174,7 +136,7 @@ class UserStoryTest {
     void isValidUserStoryName3() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-       UserStory     userStory = new UserStory("   ", 2, "Fazer tal", 5);
+            UserStory userStory = new UserStory("   ", 2, "Fazer tal", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }
@@ -183,21 +145,22 @@ class UserStoryTest {
     void isValidUserStoryName5() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-       UserStory     userStory = new UserStory("CC", 2, "Fazer tal", 5);
+            UserStory userStory = new UserStory("CC", 2, "Fazer tal", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }
 
     @Test
     void hashCodeTest() {
-        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 1, "Fazer tal", 5);
+        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 1, "Fazer tal", 0);
         UserStory userStory2 = new UserStory("As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
         UserStory userStory3 = new UserStory("As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
         UserStoryStatus status4 = new UserStoryStatus("teste5");
 
         assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
+        assertEquals(0, userStory1.getTimeEstimate());
         assertEquals(userStory2.getDescription().getText(), userStory3.getDescription().getText());
-        assertEquals(userStory2.getPriority(), userStory3.getPriority());
+        assertEquals(userStory2.getPriority().getUsPriority(), userStory3.getPriority().getUsPriority());
         assertEquals(userStory2.getTitle().getUsTitle(), userStory3.getTitle().getUsTitle());
         assertEquals(userStory2.getTimeEstimate(), userStory3.getTimeEstimate());
         assertNotEquals(userStory2.getDescription().getText(), userStory1.getDescription().getText());
@@ -226,18 +189,19 @@ class UserStoryTest {
         userStory1.setPriority(4);
 
         assertTrue(userStory1.setPriority(3));
-        assertEquals(3, userStory1.getPriority());
+        assertEquals(3, userStory1.getPriority().getUsPriority());
 
     }
+
     @Test
     void setPriorityFalse() {
         UserStory userStory1 = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
         UserStory userStory2 = new UserStory("As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
         userStory2.setPriority(1);
-        userStory1.setPriority(6);
-
-        assertFalse(userStory1.setPriority(6));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            userStory1.setPriority(6);
+        });
         assertNotEquals(6, userStory1.getPriority());
-
+        assertTrue(exception.getMessage().equals("Check priority, cannot be < 0 or superior to 5"));
     }
 }

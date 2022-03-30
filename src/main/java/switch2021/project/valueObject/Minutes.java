@@ -10,8 +10,8 @@ public class Minutes {
      **/
 
     private final int effortMinutes;
-    private static final int MIN_MINUTE = 0;
-    private static final int MAX_MINUTE = 60;
+    private final int MIN_MINUTE = 0;
+    private final int MAX_MINUTE = 60;
 
     /**
      * Constructor (without SINGLETON)
