@@ -3,16 +3,18 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
-import switch2021.project.model.Project.BusinessSector;
-import switch2021.project.model.Project.Customer;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SystemUserStore;
+import switch2021.project.valueObject.BusinessSector;
+import switch2021.project.valueObject.Customer;
+import switch2021.project.valueObject.Typology;
+import switch2021.project.valueObject.UserProfile;
+
 import java.time.LocalDate;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AssociateResourceControllerTest {
@@ -25,7 +27,7 @@ public class AssociateResourceControllerTest {
         Company comTest = new Company();
         //Project
         LocalDate startProjectDate = LocalDate.of(2021, 2, 25);
-        Customer cust = new Customer("Name","ght@gmail.com",  123456789);
+        Customer cust = new Customer("Name", "ght@gmail.com", 123456789);
         Typology typo = new Typology("typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
         Project proj1 = comTest.getProjectStore().createProject("gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);
@@ -71,11 +73,12 @@ public class AssociateResourceControllerTest {
         //Act
         List<Project> projects = controller.getProjectList();
         //Assert
-        assertEquals(3,projects.size());
+        assertEquals(3, projects.size());
         assertTrue(projects.contains(project1));
         assertTrue(projects.contains(project2));
         assertTrue(projects.contains(project3));
     }
+
     @Test
     @DisplayName("Test to get the SystemUser List with Success")
     void getSystemUserListSuccess() {
@@ -91,7 +94,7 @@ public class AssociateResourceControllerTest {
         //Act
         List<SystemUser> users = controller.getSystemUserList();
         //Assert
-        assertEquals(2,users.size());
+        assertEquals(2, users.size());
         assertTrue(users.contains(user));
         assertTrue(users.contains(user2));
     }
@@ -104,7 +107,7 @@ public class AssociateResourceControllerTest {
         Company comTest = new Company();
         //Project
         LocalDate startProjectDate = LocalDate.of(2021, 2, 25);
-        Customer cust = new Customer("Name","ght@gmail.com",  123456789);
+        Customer cust = new Customer("Name", "ght@gmail.com", 123456789);
         Typology typo = new Typology("typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
         Project proj1 = comTest.getProjectStore().createProject("gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);

@@ -3,7 +3,8 @@ package switch2021.project.stores;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.valueObject.Description;
-import switch2021.project.model.Typology.Typology;
+import switch2021.project.valueObject.Typology;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -206,40 +207,6 @@ public class TypologyStoreTest {
             when(typo2.createTypology("Te")).thenReturn(false);
             assertFalse(typo2.createTypology("Te"));
     }
-
-//    @Test
-//    public void shouldNotCreateAndAddRepeatedTitleProject() throws Exception
-//    {
-//        // Arrange
-//        String titulo = "Título";
-//
-//        Typology projectDouble = mock( Typology.class );
-//        Description desc = mock(Description.class);
-//        when( projectDouble.getDescription()).thenReturn( desc );
-//        when( desc.getText()).thenReturn( titulo );
-//
-//
-//        TypologyStore projectFactoryDouble =  mock( TypologyStore.class );
-//        when(projectFactoryDouble.createTypology(titulo) ).thenReturn( true );
-//
-//        TypologyStore storeProjectReeng = new TypologyStore();
-//
-//        // should work fine
-//        boolean hasCreated = storeProjectReeng.createTypology( titulo);
-//
-//        // Act + Assert
-//        // throws IllegalArgumentException, because repeated title
-//        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-//            storeProjectReeng.createTypology( titulo);
-//        });
-//
-//        String expectedMessage = "Repeated typology description inserted.";
-//        String actualMessage = exception.getMessage();
-//
-//        assertTrue(actualMessage.contains(expectedMessage));
-//    }
-
-
 
     @DisplayName("Create Typology True")
     @Test

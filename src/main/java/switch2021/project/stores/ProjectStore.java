@@ -3,13 +3,13 @@ package switch2021.project.stores;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.*;
-import switch2021.project.model.Project.BusinessSector;
-import switch2021.project.model.Project.Customer;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.ProjectStatus.ProjectStatus;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
 import switch2021.project.utils.App;
+import switch2021.project.valueObject.BusinessSector;
+import switch2021.project.valueObject.Customer;
+import switch2021.project.valueObject.ProjectStatus;
+import switch2021.project.valueObject.Typology;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,20 +18,17 @@ import java.util.Objects;
 
 @Getter
 @Setter
-public class ProjectStore{
-
+public class ProjectStore {
 
     /**
      * Class Attributes
      **/
-
     private final List<Project> projectList;
 
 
     /**
      * Constructors with data
      **/
-
     public ProjectStore() {
         this.projectList = new ArrayList<>();
     }
@@ -40,7 +37,6 @@ public class ProjectStore{
     /**
      * Project creator
      **/
-
     public Project createProject(String name, String description, Customer customer, Typology typology,
                                  BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
 
@@ -51,10 +47,10 @@ public class ProjectStore{
                 startDate, status, numberOfSprints, budget);
     }
 
+
     /**
      * Getters Methods
      **/
-
     public List<Project> getProjects() {
 
         return new ArrayList<>(this.projectList);
@@ -71,10 +67,10 @@ public class ProjectStore{
         return res;
     }
 
+
     /**
      * Validation Methods
      **/
-
     public boolean checkProjectExists(Project project) {
 
         for (Project proj : projectList) {
@@ -104,13 +100,13 @@ public class ProjectStore{
         return msg;
     }
 
+
     /**
      * Save Methods
      */
-
     public boolean saveNewProject(Project proj) {
         boolean status = false;
-        String codeG = "Project_" + LocalDate.now().getYear() + "_" + (this.projectList.size()+1);
+        String codeG = "Project_" + LocalDate.now().getYear() + "_" + (this.projectList.size() + 1);
         if (!checkProjectExists(proj)) {
             proj.setCode(codeG);
             this.projectList.add(proj);
@@ -164,10 +160,10 @@ public class ProjectStore{
         return true;
     }
 
-    /**
-     * Override
-     **/
 
+    /**
+     * Override Methods
+     **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -175,10 +171,6 @@ public class ProjectStore{
         ProjectStore that = (ProjectStore) o;
         return Objects.equals(this.projectList, that.projectList);
     }
-
-    /**
-     * Hash
-     **/
 
     @Override
     public int hashCode() {

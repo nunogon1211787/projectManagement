@@ -1,7 +1,8 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.valueObject.UserProfile;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,12 +15,14 @@ public class UserProfileStore {
      **/
     private final List<UserProfile> userProfileList;
 
+
     /**
      * UserProfile Store Constructor
      **/
     public UserProfileStore() {
         userProfileList = new ArrayList<>();
     }
+
 
     /**
      * UserProfile Populator, that populates the UserProfile List with pre-set objects.
@@ -30,6 +33,7 @@ public class UserProfileStore {
         saveUserProfile(createProfile("Director"));
         saveUserProfile(createProfile("User"));
     }
+
 
     /**
      * Get UserProfile By Name Method
@@ -46,12 +50,14 @@ public class UserProfileStore {
         return profile;
     }
 
+
     /**
      * Create Method
      **/
     public UserProfile createProfile(String name) {
         return new UserProfile(name);
     }
+
 
     /**
      * Save UserProfile Method (Save a new UserProfile object to the UserProfile List)
@@ -63,10 +69,10 @@ public class UserProfileStore {
         return userProfileList.add(profile);
     }
 
+
     /**
      * Validation Methods
      **/
-
     private boolean validateProfile(UserProfile profile) {
         //Check if profile already exist
         boolean msg = true;
@@ -79,8 +85,9 @@ public class UserProfileStore {
         return msg;
     }
 
+
     /**
-     * Override
+     * Override Methods
      **/
     @Override
     public boolean equals(Object obj) {

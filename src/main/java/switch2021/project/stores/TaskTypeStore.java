@@ -2,7 +2,8 @@ package switch2021.project.stores;
 
 import lombok.Getter;
 import switch2021.project.factoryInterface.TaskTypeFactoryInterface;
-import switch2021.project.model.TaskType.TaskType;
+import switch2021.project.valueObject.TaskType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class TaskTypeStore {
     private List<TaskType> taskTypeList;
     private TaskTypeFactoryInterface taskTypeFactoryInterface;
 
+
     /**
      * Constructor
      */
@@ -22,6 +24,7 @@ public class TaskTypeStore {
         this.taskTypeList = new ArrayList<>();
         this.taskTypeFactoryInterface = taskTypeFactory;
     }
+
 
     /**
      * Method to populate the class with default objects
@@ -35,12 +38,13 @@ public class TaskTypeStore {
         createAndAddTaskType("Deployment");
     }
 
+
     /**
      * Method to create TaskType
      */
-    public boolean createAndAddTaskType(String description){
+    public boolean createAndAddTaskType(String description) {
 
-        if(getTypeByDescription(description) != null) {
+        if (getTypeByDescription(description) != null) {
             return false;
         } else {
             this.taskTypeList.add(taskTypeFactoryInterface.createTaskType(description));
@@ -48,10 +52,11 @@ public class TaskTypeStore {
         }
     }
 
+
     /**
      * Methods to iterate with the list
      */
-    public List<String> getTaskTypesDescription(){
+    public List<String> getTaskTypesDescription() {
         List<String> taskTypesDescription = new ArrayList<>();
 
         for (TaskType taskType : this.taskTypeList) {

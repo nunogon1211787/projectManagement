@@ -3,32 +3,31 @@ package switch2021.project.controller;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.ProductBacklog;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Project.UserStory;
-import switch2021.project.model.UserStoryStatus.UserStoryStatus;
+import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.valueObject.UserStoryStatus;
 
 public class RefineUserStoryController {
 
     /**
      * Attributes
      **/
-
     private final Company company;
     private Project project;
     private ProductBacklog productBacklog;
     private UserStory userStoryParent;
 
+
     /**
      * Constructor to test (without SINGLETON).
      **/
-
     public RefineUserStoryController(Company company){
         this.company = company;
     }
 
+
     /**
      * Methods
      **/
-
     public Project getProject(String projectCode){
         this.project = company.getProjectStore().getProjectByCode(projectCode);
         return this.project;

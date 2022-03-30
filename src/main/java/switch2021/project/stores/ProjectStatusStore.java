@@ -1,7 +1,8 @@
 package switch2021.project.stores;
 
 import switch2021.project.factoryInterface.ProjectStatusFactoryInterface;
-import switch2021.project.model.ProjectStatus.ProjectStatus;
+import switch2021.project.valueObject.ProjectStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class ProjectStatusStore {
     private final List<ProjectStatus> projectStatusList;
     private final ProjectStatusFactoryInterface projectStatusFactory;
 
+
     /**
      * Project Status Constructor
      **/
@@ -20,6 +22,7 @@ public class ProjectStatusStore {
         this.projectStatusList = new ArrayList<>();
         this.projectStatusFactory = projStatusFactory;
     }
+
 
     /**
      * Project Status Populator (Populates the Project Status List with pre-set objects)
@@ -34,6 +37,7 @@ public class ProjectStatusStore {
         createAndSaveProjectStatus("Closed");
     }
 
+
     /**
      * Create and Add Project Status (Creates a new Project Status object and add it to the list)
      **/
@@ -45,6 +49,7 @@ public class ProjectStatusStore {
 
         return this.projectStatusList.add(newProjectStatus);
     }
+
 
     /**
      * Getter Methods

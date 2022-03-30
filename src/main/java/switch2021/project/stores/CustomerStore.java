@@ -1,7 +1,8 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.model.Project.Customer;
+import switch2021.project.valueObject.Customer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +14,10 @@ public class CustomerStore {
      **/
     private final List<Customer> customerList;
 
+
     /**
      * Customer Store Constructor
      **/
-
     public CustomerStore() {
         this.customerList = new ArrayList<>();
     }
@@ -25,43 +26,16 @@ public class CustomerStore {
     /**
      * Create Customer (Creates a new Customer object)
      **/
-
-    public Customer createCustomer(String name, String email, long nif) {
-        return new Customer(name, email, nif);
-    }
-
-
-    /**
-     * Add Customer Method (Adds a Customer object to the customer list)
-     **/
-    public boolean saveNewCustomer(Customer customer) {
-        if (!validateCustomer(customer)) {
-            customer.setCustomerId(idGenerator());
-            this.customerList.add(customer);
+    public void createAndAddCustomer(String name, String email, long nif) {
+        if (getCustomerByName(name) != null) {
+            throw new IllegalArgumentException("Customer already exist!");
         }
-        return true;
+        customerList.add(new Customer(name, email, nif));
     }
-
-    public boolean validateCustomer(Customer customer) {
-        boolean status = false;
-        for (Customer i : customerList) {
-            if (i.getCustomerName().equals(customer.getCustomerName())) {
-                status = true;
-                break;
-            }
-        }
-        return status;
-    }
-
 
     /**
      * Getter Method
      **/
-
-    public List<Customer> getCustomerList() {
-        return new ArrayList<>(customerList);
-    }
-
     public Customer getCustomerByName(String name) {
         Customer cust = null;
         for (Customer i : this.customerList)
@@ -71,18 +45,4 @@ public class CustomerStore {
             }
         return cust;
     }
-
-    /**
-     * ID Generator - to generate a new ID to the Customer Object when it is saved.
-     */
-
-    private int idGenerator(){
-        int id = 1;
-        if(!this.customerList.isEmpty()){
-            id = this.customerList.get(this.customerList.size() - 1).getCustomerId() + 1;
-        }
-
-        return id;
-    }
-
 }

@@ -2,7 +2,7 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.valueObject.UserProfile;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserProfileStoreTest {
 
     /**
-     * >>>>>> Testes de UserProfile <<<<<<
+     * UserProfile's Tests
      **/
 
     // Test add UserProfile in company (Cris US013)

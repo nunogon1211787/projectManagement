@@ -2,7 +2,8 @@ package switch2021.project.stores;
 
 import lombok.Getter;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.valueObject.UserProfile;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +16,7 @@ public class SystemUserStore {
      */
     private final List<SystemUser> systemUserList;
 
+
     /**
      * Constructor
      */
@@ -22,12 +24,14 @@ public class SystemUserStore {
         this.systemUserList = new ArrayList<>();
     }
 
+
     /**
      * Create Method
      */
     public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor) {
         return new SystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);
     }
+
 
     /**
      * Getter Methods
@@ -48,7 +52,7 @@ public class SystemUserStore {
         return user;
     }
 
-   ///// ----->>>>>>  Rever Método
+    ///// ----->>>>>>  Rever Método
     public List<SystemUser> searchUsers(String name, String email, String function, int state, List<UserProfile> profileChoosenList) {
         int listSize = this.systemUserList.size();
         List<SystemUser> foundUsersList = new ArrayList<>();
@@ -61,6 +65,7 @@ public class SystemUserStore {
         }
         return foundUsersList;
     }
+
 
     /**
      * Validation Methods
@@ -81,6 +86,7 @@ public class SystemUserStore {
         return false;
     }
 
+
     /**
      * Save Method
      */
@@ -95,9 +101,10 @@ public class SystemUserStore {
         return result;
     }
 
-     /**
-      * Override
-      **/
+
+    /**
+     * Override
+     **/
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -110,5 +117,4 @@ public class SystemUserStore {
     public int hashCode() {
         return Objects.hash(systemUserList);
     }
-
 }

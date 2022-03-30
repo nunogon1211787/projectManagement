@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.valueObject.Password;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.valueObject.UserProfile;
+
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -200,7 +201,7 @@ public class SystemUserStoreTest {
         //Assert
         assertNotSame(list1, list2);
         assertEquals(list1.getSystemUserList(), list2.getSystemUserList());
-        assertTrue(newUser.equals(newUser2));
+        assertEquals(newUser, newUser2);
         assertEquals(list1.getSystemUserList().hashCode(), list2.getSystemUserList().hashCode());
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
@@ -238,7 +239,6 @@ public class SystemUserStoreTest {
     @Test
     public void validateSystemUser3() {
         Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser systemUser = null;
         boolean expected = company.getSystemUserStore().validateSystemUser(systemUser);
         company.getSystemUserStore().saveSystemUser(systemUser);

@@ -2,7 +2,8 @@ package switch2021.project.stores;
 
 import lombok.Getter;
 import switch2021.project.factoryInterface.TaskStatusFactoryInterface;
-import switch2021.project.model.TaskStatus.TaskStatus;
+import switch2021.project.valueObject.TaskStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class TaskStatusStore {
      */
     public boolean createAndAddTaskStatus(String status) {
 
-        if(getTaskStatusByDescription(status) != null) {
+        if (getTaskStatusByDescription(status) != null) {
             return false;
         } else {
             this.taskStatusList.add(taskStatusFactoryInterface.createTaskStatus(status));
@@ -43,8 +44,8 @@ public class TaskStatusStore {
      * Methods to populate the Store
      */
     public void populateDefault() {
-        if(this.taskStatusList.size() != 0) {
-            throw new IllegalArgumentException ("Task Status Store is not empty!");
+        if (this.taskStatusList.size() != 0) {
+            throw new IllegalArgumentException("Task Status Store is not empty!");
         }
         createAndAddTaskStatus("Planned");
         createAndAddTaskStatus("Running");
@@ -56,7 +57,7 @@ public class TaskStatusStore {
     /**
      * Methods to iterate with the list
      */
-    public TaskStatus getTaskStatusByDescription(String description){
+    public TaskStatus getTaskStatusByDescription(String description) {
         TaskStatus result = null;
 
         for (TaskStatus status : this.taskStatusList) {
@@ -67,7 +68,7 @@ public class TaskStatusStore {
         return result;
     }
 
-    public TaskStatus getInitialStatus(){
+    public TaskStatus getInitialStatus() {
         TaskStatus status = null;
 
         for (TaskStatus taskStatus : this.taskStatusList) {
@@ -78,7 +79,7 @@ public class TaskStatusStore {
         return status;
     }
 
-    public List<String> getTaskStatusDescriptions(){
+    public List<String> getTaskStatusDescriptions() {
         List<String> taskStatusDescriptions = new ArrayList<>();
 
         for (TaskStatus taskStatus : this.taskStatusList) {

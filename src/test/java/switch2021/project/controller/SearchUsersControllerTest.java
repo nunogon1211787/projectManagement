@@ -3,7 +3,7 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.valueObject.UserProfile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,8 +20,6 @@ class SearchUsersControllerTest {
         SearchSystemUsersController test = new SearchSystemUsersController(company);
        // company.getUserProfileStore().populateDefault();
         UserProfile p1 = company.getUserProfileStore().getUserProfile("visitor");
-        //UserProfile p2 = company.getUserProfileStore().getUserProfile("director");
-       // UserProfile p3 = company.getUserProfileStore().getUserProfile("administrator");
         SystemUser usr1 = new SystemUser("Romulo", "romulo@romulo.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
         SystemUser usr2 = new SystemUser("Maria", "maria@maria.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
         SystemUser usr3 = new SystemUser("Joao", "joao@joao.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
@@ -43,8 +41,6 @@ class SearchUsersControllerTest {
         SearchSystemUsersController test = new SearchSystemUsersController(company);
         // company.getUserProfileStore().populateDefault();
         UserProfile p1 = company.getUserProfileStore().getUserProfile("visitor");
-        //UserProfile p2 = company.getUserProfileStore().getUserProfile("director");
-        // UserProfile p3 = company.getUserProfileStore().getUserProfile("administrator");
         SystemUser usr1 = new SystemUser("Romulo", "romulo@romulo.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
         SystemUser usr2 = new SystemUser("Maria", "maria@maria.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
         SystemUser usr3 = new SystemUser("Joao", "joao@joao.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
@@ -85,7 +81,6 @@ class SearchUsersControllerTest {
     void getProfileListSuccessValidateInfo(){
         //Input
         Company co = new Company();
-        SearchSystemUsersController test = new SearchSystemUsersController(co);
         //Expected
         UserProfile p1 = co.getUserProfileStore().getUserProfile("visitor");
         UserProfile p2 = co.getUserProfileStore().getUserProfile("administrator");

@@ -1,18 +1,16 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.valueObject.Resource.Resource;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
-import switch2021.project.model.ProjectStatus.ProjectStatus;
+import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.TaskType.TaskType;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.model.Task.Task;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SystemUserStore;
+import switch2021.project.valueObject.*;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +21,6 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
 
 
         Company company = new Company();
-        ProjectTeamTest projectTeamTest = new ProjectTeamTest();
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
@@ -45,13 +42,9 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
         Task taskTest = sprint1.getTaskList().createTask("test", taskDescription, 8.0, taskType, resource);
-        Task taskTest2 = sprint1.getTaskList().createTask("testdois", taskDescription, 8.0, taskType, resource);
         sprint1.getTaskList().saveTask(taskTest);
-        List<Task> taskList = new ArrayList<>();
 
         project2.getSprintList().saveSprint(sprint1);
-        taskList.add(taskTest);
-        taskList.add(taskTest2);
 
         List<Task> listTest;
 

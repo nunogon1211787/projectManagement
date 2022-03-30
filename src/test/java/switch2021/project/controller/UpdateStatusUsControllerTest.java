@@ -3,8 +3,12 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
-import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.stores.UserStoryStatusStore;
+import switch2021.project.valueObject.BusinessSector;
+import switch2021.project.valueObject.Customer;
+import switch2021.project.valueObject.Typology;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -15,14 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UpdateStatusUsControllerTest {
 
     private Company company;
-    private Project project;
-    private UserStory userStory;
-    private UserStory userStory2;
-    private Typology typo;
-    private Customer customer;
-    private BusinessSector sector;
-    private Sprint sprint;
-    private UserStoryStatusStore userStoryStatusStore = new UserStoryStatusStore();
+    private final UserStoryStatusStore userStoryStatusStore = new UserStoryStatusStore();
 
     @Test
     void getUsAvailableStatusList() {
@@ -65,15 +62,15 @@ class UpdateStatusUsControllerTest {
         UpdateStatusUsController update = new UpdateStatusUsController(company);
         this.userStoryStatusStore.populateDefault();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        customer = company.getCustomerStore().getCustomerByName("ISEP");
-        sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-        project = company.getProjectStore().createProject("prototype2", "test56", customer,
+        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Customer customer = company.getCustomerStore().getCustomerByName("ISEP");
+        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
+        Project project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
         company.getProjectStore().saveNewProject(project);
-        userStory = new UserStory("US001", 2, "Fazer tal",5);
-        userStory2 = new UserStory("US001", 3, "Fazer tal e coiso",5);
-        sprint = project.getSprintList().createSprint("Sprintao", LocalDate.now(),12);
+        UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("US001", 3, "Fazer tal e coiso", 5);
+        Sprint sprint = project.getSprintList().createSprint("Sprintao", LocalDate.now(), 12);
         project.getSprintList().saveSprint(sprint);
         project.getCurrentSprint().getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         project.getCurrentSprint().getSprintBacklog().saveUserStoryToSprintBacklog(userStory2);

@@ -1,7 +1,8 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.model.UserStoryStatus.UserStoryStatus;
+import switch2021.project.valueObject.UserStoryStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,21 +12,20 @@ public class UserStoryStatusStore {
     /**
      * Project Status Store Attributes (Contains a Project Status list)
      **/
-
     private final List<UserStoryStatus> userStoryStatusList;
+
 
     /**
      * Project Status Constructor
      **/
-
     public UserStoryStatusStore() {
         this.userStoryStatusList = new ArrayList<>();
     }
 
+
     /**
      * Populate default for status
      **/
-
     public void populateDefault() {
         this.userStoryStatusList.add(new UserStoryStatus("To do"));
         userStoryStatusList.get(0).setSprintAvailable(true);
@@ -38,14 +38,14 @@ public class UserStoryStatusStore {
         this.userStoryStatusList.add(new UserStoryStatus("Refined"));
     }
 
+
     /**
      * Methods
      **/
-
-    public UserStoryStatus getUserStoryStatusByDescription(String description){
+    public UserStoryStatus getUserStoryStatusByDescription(String description) {
         UserStoryStatus userStoryStatus = null;
-        for(UserStoryStatus uss : this.userStoryStatusList){
-            if(uss.getDescription().getText().equals(description)){
+        for (UserStoryStatus uss : this.userStoryStatusList) {
+            if (uss.getDescription().getText().equals(description)) {
                 userStoryStatus = uss;
             }
         }

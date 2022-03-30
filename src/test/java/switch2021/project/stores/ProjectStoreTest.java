@@ -1,11 +1,14 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.valueObject.Resource.Resource;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
+import switch2021.project.valueObject.BusinessSector;
+import switch2021.project.valueObject.Customer;
+import switch2021.project.valueObject.Resource;
+import switch2021.project.valueObject.Typology;
+
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -14,8 +17,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ProjectStoreTest {
-
-
 
     @Test
     public void getProjectListByUserEmail() {
@@ -39,22 +40,20 @@ public class ProjectStoreTest {
 
     @Test
     public void getProjectListByUserEmailBlank() {
-        //Arrange
-        ProjectStore store = new ProjectStore();
-        Project proj1 = mock(Project.class);
-        Project proj2 = mock(Project.class);
-
-        when(proj1.hasProjectTeamMember(any())).thenReturn(false);
-        when(proj2.hasProjectTeamMember(any())).thenReturn(false);
-
-        store.saveNewProject(proj1);
-        store.saveNewProject(proj2);
-
-        // Act
+        //Assert
         assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            ProjectStore store = new ProjectStore();
+            Project proj1 = mock(Project.class);
+            Project proj2 = mock(Project.class);
+
+            when(proj1.hasProjectTeamMember(any())).thenReturn(false);
+            when(proj2.hasProjectTeamMember(any())).thenReturn(false);
+            // Act
+            store.saveNewProject(proj1);
+            store.saveNewProject(proj2);
             store.getProjectsByUserEmail("cris@ipp.pt");
         });
-
     }
 
     @Test

@@ -5,16 +5,16 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.dto.UserStoryDto;
 import switch2021.project.factory.ResourceFactory;
-import switch2021.project.valueObject.Resource.Resource;
 import switch2021.project.mapper.ProductBacklogMapper;
 import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.valueObject.*;
+
 import java.time.LocalDate;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
@@ -40,8 +40,6 @@ public class ProductBacklogSortControllerTest {
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
-        ResourceFactory resFac = mock(ResourceFactory.class);
-        ProjectTeam projectTeam = new ProjectTeam(resFac);
         company.getProjectStore().saveNewProject(project);
         company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
@@ -74,8 +72,6 @@ public class ProductBacklogSortControllerTest {
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
-        ResourceFactory resFac = mock(ResourceFactory.class);
-        ProjectTeam projectTeam = new ProjectTeam(resFac);
         company.getProjectStore().saveNewProject(project);
         company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
@@ -113,8 +109,6 @@ public class ProductBacklogSortControllerTest {
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
-        ResourceFactory resFac = mock(ResourceFactory.class);
-        ProjectTeam projectTeam = new ProjectTeam(resFac);
 
         company.getProjectStore().saveNewProject(project);
         company.getProjectStore().saveNewProject(project2);
@@ -150,8 +144,6 @@ public class ProductBacklogSortControllerTest {
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
-        ResourceFactory resFac = mock(ResourceFactory.class);
-        ProjectTeam projectTeam = new ProjectTeam(resFac);
 
         company.getProjectStore().saveNewProject(project);
         company.getProjectStore().saveNewProject(project2);
@@ -179,8 +171,6 @@ public class ProductBacklogSortControllerTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
@@ -194,7 +184,6 @@ public class ProductBacklogSortControllerTest {
         project.getProductBacklog().createAndSaveUserStory("US001", 1, "sort user story", 5);
         project.getProductBacklog().createAndSaveUserStory("US001", 3, "backlog sorted", 5);
         project.getProductBacklog().createAndSaveUserStory("US001", 5, "show sorted", 5);
-
 
         projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
@@ -225,8 +214,6 @@ public class ProductBacklogSortControllerTest {
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject("prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
-        Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
@@ -264,8 +251,6 @@ public class ProductBacklogSortControllerTest {
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject("prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
-        Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "", userProfile);

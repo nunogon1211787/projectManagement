@@ -4,29 +4,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.factory.SprintFactory;
-import switch2021.project.valueObject.Resource.Resource;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
+import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.valueObject.*;
+
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SprintListTest {
 
-    private Company company;
-    private ProjectStore projectStore;
     private Project project;
-    private SprintList sprintList;
     LocalDate date;
     private Sprint sprint;
-    private Sprint sprint2;
     private Sprint sprint3;
     private Sprint sprint4;
-    private Sprint sprint5;
-    private Sprint sprint6;
-    private Sprint sprint7;
     private Sprint sprint8;
     private Sprint sprint9;
     private Sprint sprint10;
@@ -34,25 +27,25 @@ public class SprintListTest {
 
     @BeforeEach
     public void initialize() {
-        company = new Company();
-        projectStore = company.getProjectStore();
+        Company company = new Company();
+        ProjectStore projectStore = company.getProjectStore();
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         company.getBusinessSectorStore().createAndAddBusinessSector("sector");
-        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste@teste.com", 123456789));
+        company.getCustomerStore().createAndAddCustomer("Teste", "Teste@teste.com", 123456789);
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         date = LocalDate.of(2022, 1, 1);
         project = projectStore.createProject("prototype", "test1234", customer,
                 typo, sector, date, 7, 5000);
         project.setSprintDuration(2);
-        sprintList = new SprintList(new SprintFactory());
+        SprintList sprintList = new SprintList(new SprintFactory());
         sprint = sprintList.createSprint("Sprint_1", LocalDate.of(2022, 1, 1), project.getSprintDuration());
-        sprint2 = sprintList.createSprint("Sprint_2", LocalDate.of(2022, 1, 16), project.getSprintDuration());
+        Sprint sprint2 = sprintList.createSprint("Sprint_2", LocalDate.of(2022, 1, 16), project.getSprintDuration());
         sprint3 = sprintList.createSprint("Sprint_3", LocalDate.of(2021, 12, 19), project.getSprintDuration());
         sprint4 = sprintList.createSprint("Sprint_4", LocalDate.of(2021, 12, 5), project.getSprintDuration());
-        sprint5 = sprintList.createSprint("Sprint_5", LocalDate.of(2022, 1, 30), project.getSprintDuration());
-        sprint6 = sprintList.createSprint("Sprint_6", LocalDate.of(2022, 2, 13), project.getSprintDuration());
-        sprint7 = sprintList.createSprint("Sprint_7", LocalDate.of(2022, 2, 27), project.getSprintDuration());
+        Sprint sprint5 = sprintList.createSprint("Sprint_5", LocalDate.of(2022, 1, 30), project.getSprintDuration());
+        Sprint sprint6 = sprintList.createSprint("Sprint_6", LocalDate.of(2022, 2, 13), project.getSprintDuration());
+        Sprint sprint7 = sprintList.createSprint("Sprint_7", LocalDate.of(2022, 2, 27), project.getSprintDuration());
         sprint8 = sprintList.createSprint("Sprint_8", LocalDate.now().minusWeeks(2), project.getSprintDuration());
         sprint9 = sprintList.createSprint("Sprint_9", LocalDate.now(), project.getSprintDuration());
         sprint10 = sprintList.createSprint("Sprint_10", LocalDate.now().plusWeeks(2), project.getSprintDuration());

@@ -1,9 +1,8 @@
 package switch2021.project.factoryInterface;
 
-import switch2021.project.model.Project.BusinessSector;
+import switch2021.project.valueObject.BusinessSector;
 
 public interface BusinessSectorFactoryInterface {
-
-     public BusinessSector createBusinessSector(String description);
+     BusinessSector createBusinessSector(String description);
 
 }

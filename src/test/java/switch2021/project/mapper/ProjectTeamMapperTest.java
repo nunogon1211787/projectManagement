@@ -3,15 +3,11 @@ package switch2021.project.mapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.dto.ResourceDTO;
-import switch2021.project.valueObject.ProjectRole;
-import switch2021.project.valueObject.Resource.Resource;
+import switch2021.project.valueObject.*;
 import switch2021.project.model.*;
-import switch2021.project.model.Project.BusinessSector;
-import switch2021.project.model.Project.Customer;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
+
 import java.time.LocalDate;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,8 +23,8 @@ public class ProjectTeamMapperTest {
 
         //create project and save it
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
-        company.getCustomerStore().saveNewCustomer(customer);
+        company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
         company.getBusinessSectorStore().createAndAddBusinessSector("it");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
@@ -36,7 +32,6 @@ public class ProjectTeamMapperTest {
         company.getProjectStore().saveNewProject(proj1);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        ProjectRole projectRole = company.getProjectRoleStore().getProjectRole("Team Member");
 
         //Create resource
         SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
@@ -80,8 +75,8 @@ public class ProjectTeamMapperTest {
 
         //create project and save it
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
-        company.getCustomerStore().saveNewCustomer(customer);
+        company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
         company.getBusinessSectorStore().createAndAddBusinessSector("it");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
@@ -134,11 +129,11 @@ public class ProjectTeamMapperTest {
 
         //create project and save it
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
+        company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
         company.getBusinessSectorStore().createAndAddBusinessSector("it");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        ProjectRole projectRole = company.getProjectRoleStore().getProjectRole("Team Member");
 
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
@@ -147,7 +142,6 @@ public class ProjectTeamMapperTest {
         LocalDate endDateMb = LocalDate.of(2022, 11, 15);
         Resource manuelbras = proj1.getProjectTeam().createResource(user1, startDateMb, endDateMb, 100, .5);
 
-        Resource resource = new Resource(user1, startDateMb, endDateMb, 100, .5);
         ProjectTeamMapper projectTeamMapper1 = new ProjectTeamMapper();
         manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
 

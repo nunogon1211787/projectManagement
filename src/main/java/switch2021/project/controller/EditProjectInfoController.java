@@ -4,19 +4,16 @@ import switch2021.project.valueObject.Description;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Project.ProjectTeam;
-import switch2021.project.model.ProjectStatus.ProjectStatus;
+import switch2021.project.valueObject.ProjectStatus;
 
 import java.time.LocalDate;
 import java.util.List;
 
-
 public class EditProjectInfoController {
-
 
     /**
      * Attributes
      **/
-
     private final Company company;
     private Project project;
     List<Project> arrayProject;
@@ -25,7 +22,6 @@ public class EditProjectInfoController {
     /**
      * Constructor to test (without SINGLETON)
      **/
-
     public EditProjectInfoController(Company company) {
         this.company = company;
     }
@@ -34,7 +30,6 @@ public class EditProjectInfoController {
     /**
      * Methods
      **/
-
     public List<Project> getProjectList() {
         this.arrayProject = this.company.getProjectStore().getProjects();
         return arrayProject;
@@ -51,13 +46,13 @@ public class EditProjectInfoController {
         boolean result = true;
 
         try {
-            project.validateProjectFields(name,description, budget, numberOfSprints);
+            project.validateProjectFields(name, description, budget, numberOfSprints);
         } catch (IllegalArgumentException e) {
             result = false;
         }
 
         if (result) {
-            this.project.setProjectName(new Description (name));
+            this.project.setProjectName(new Description(name));
             this.project.setDescription(new Description(description));
             this.project.setStartDate(startDate);
             this.project.setEndDate(endDate);
@@ -67,7 +62,6 @@ public class EditProjectInfoController {
             this.project.setSprintDuration(sprintDuration);
             this.project.setProjectTeam(projectTeam);
         }
-
         return result;
     }
 }

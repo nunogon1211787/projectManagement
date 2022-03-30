@@ -3,16 +3,12 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.dto.ResourceDTO;
-import switch2021.project.valueObject.ProjectRole;
-import switch2021.project.valueObject.Resource.Resource;
+import switch2021.project.valueObject.*;
 import switch2021.project.mapper.ProjectTeamMapper;
 import switch2021.project.model.*;
-import switch2021.project.model.Project.BusinessSector;
-import switch2021.project.model.Project.Customer;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -29,8 +25,9 @@ public class GetListHResourceProjectControllerTest {
         GetListHResourceProjectController controller = new GetListHResourceProjectController(company, projectTeamMapper);
         //create project and save it
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
-        company.getCustomerStore().saveNewCustomer(customer);
+        company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+//        company.getCustomerStore().saveNewCustomer(customer);
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         company.getBusinessSectorStore().createAndAddBusinessSector("it");
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
@@ -73,6 +70,6 @@ public class GetListHResourceProjectControllerTest {
         assertEquals("2022/11/15", resDtoList.get(0).getEndDate());
         assertEquals(100, resDtoList.get(0).getCostPerHour());
         assertEquals(.5, resDtoList.get(0).getPercentageOfAllocation());
-        assertEquals(3,resDtoList.size());
+        assertEquals(3, resDtoList.size());
     }
 }

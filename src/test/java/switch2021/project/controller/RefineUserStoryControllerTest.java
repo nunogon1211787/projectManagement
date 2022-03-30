@@ -3,12 +3,12 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
-import switch2021.project.model.Project.BusinessSector;
-import switch2021.project.model.Project.Customer;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Project.UserStory;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserStoryStatus.UserStoryStatus;
+import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.valueObject.BusinessSector;
+import switch2021.project.valueObject.Customer;
+import switch2021.project.valueObject.Typology;
+import switch2021.project.valueObject.UserStoryStatus;
 
 import java.time.LocalDate;
 
@@ -16,14 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RefineUserStoryControllerTest {
-//    Company company;
-
-    Company company = new Company();
-   RefineUserStoryController refineUserStoryController = new RefineUserStoryController(company);
 
     @Test
     @DisplayName("Refine User Story Controller - Check if project was saved on the list")
-    public void RefineUserStoryController(){
+    public void RefineUserStoryController() {
         Company company = new Company();
         RefineUserStoryController refineUserStoryController = new RefineUserStoryController(company);
 
@@ -33,7 +29,7 @@ public class RefineUserStoryControllerTest {
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
-        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2022, 11, 30));
 
@@ -41,16 +37,16 @@ public class RefineUserStoryControllerTest {
 
         //UserStory Creation and save on Product Backlog
         UserStoryStatus statusToDo = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
-        UserStory userStory1 = new UserStory("US001",4,"userstory1",5);
+        UserStory userStory1 = new UserStory("US001", 4, "userstory1", 5);
         userStory1.setIdUserStory(0);
         proj1.getProductBacklog().getUserStoryList().add(userStory1);
-        UserStory userStory2 = new UserStory("US002",3,"userstory2",5);
+        UserStory userStory2 = new UserStory("US002", 3, "userstory2", 5);
         userStory2.setIdUserStory(1);
         proj1.getProductBacklog().getUserStoryList().add(userStory2);
-        UserStory userStory3 = new UserStory("US003",1,"userstory3",5);
+        UserStory userStory3 = new UserStory("US003", 1, "userstory3", 5);
         userStory3.setIdUserStory(2);
         proj1.getProductBacklog().getUserStoryList().add(userStory3);
-        UserStory userStory4 = new UserStory("US004",0,"userstory4",5);
+        UserStory userStory4 = new UserStory("US004", 0, "userstory4", 5);
         userStory4.setIdUserStory(3);
         proj1.getProductBacklog().getUserStoryList().add(userStory4);
 
@@ -64,11 +60,12 @@ public class RefineUserStoryControllerTest {
 
         //Assert
         //check if project was saved on the list
-        assertEquals(proj1,refineUserStoryController.getProject("Project_2022_1"));
+        assertEquals(proj1, refineUserStoryController.getProject("Project_2022_1"));
     }
+
     @Test
     @DisplayName("Refine User Story Controller - Check Product Backlog")
-    public void RefineUserStoryController2(){
+    public void RefineUserStoryController2() {
         Company company = new Company();
         RefineUserStoryController refineUserStoryController = new RefineUserStoryController(company);
 
@@ -78,7 +75,7 @@ public class RefineUserStoryControllerTest {
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
-        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2022, 11, 30));
 
@@ -86,16 +83,16 @@ public class RefineUserStoryControllerTest {
 
         //UserStory Creation and save on Product Backlog
         UserStoryStatus statusToDo = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
-        UserStory userStory1 = new UserStory("US001",4,"userstory1",5);
+        UserStory userStory1 = new UserStory("US001", 4, "userstory1", 5);
         userStory1.setIdUserStory(0);
         proj1.getProductBacklog().getUserStoryList().add(userStory1);
-        UserStory userStory2 = new UserStory("US002",3,"userstory2",5);
+        UserStory userStory2 = new UserStory("US002", 3, "userstory2", 5);
         userStory2.setIdUserStory(1);
         proj1.getProductBacklog().getUserStoryList().add(userStory2);
-        UserStory userStory3 = new UserStory("US003",1,"userstory3",5);
+        UserStory userStory3 = new UserStory("US003", 1, "userstory3", 5);
         userStory3.setIdUserStory(2);
         proj1.getProductBacklog().getUserStoryList().add(userStory3);
-        UserStory userStory4 = new UserStory("US004",0,"userstory4",5);
+        UserStory userStory4 = new UserStory("US004", 0, "userstory4", 5);
         userStory4.setIdUserStory(3);
         proj1.getProductBacklog().getUserStoryList().add(userStory4);
 
@@ -119,7 +116,7 @@ public class RefineUserStoryControllerTest {
 
     @Test
     @DisplayName("Refine User Story Controller - Check if status of user story refined changed")
-    public void RefineUserStoryController3(){
+    public void RefineUserStoryController3() {
         Company company = new Company();
         RefineUserStoryController refineUserStoryController = new RefineUserStoryController(company);
 
@@ -129,21 +126,20 @@ public class RefineUserStoryControllerTest {
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
-        Project proj1 = company.getProjectStore().createProject( "prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2022, 11, 30));
 
         company.getProjectStore().saveNewProject(proj1);
 
         //UserStory Creation and save on Product Backlog
-        UserStoryStatus statusToDo = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
-        UserStory userStory1 = new UserStory("US001",4,"userstory1",5);
+        UserStory userStory1 = new UserStory("US001", 4, "userstory1", 5);
         proj1.getProductBacklog().getUserStoryList().add(userStory1);
-        UserStory userStory2 = new UserStory("US002",3,"userstory2",5);
+        UserStory userStory2 = new UserStory("US002", 3, "userstory2", 5);
         proj1.getProductBacklog().getUserStoryList().add(userStory2);
-        UserStory userStory3 = new UserStory("US003",1,"userstory3",5);
+        UserStory userStory3 = new UserStory("US003", 1, "userstory3", 5);
         proj1.getProductBacklog().getUserStoryList().add(userStory3);
-        UserStory userStory4 = new UserStory("US004",0,"userstory4",5);
+        UserStory userStory4 = new UserStory("US004", 0, "userstory4", 5);
         proj1.getProductBacklog().getUserStoryList().add(userStory4);
 
         //Act
@@ -154,7 +150,7 @@ public class RefineUserStoryControllerTest {
         String refinedUserStoryStatus = userStory2.getUserStoryStatus().getDescription().getText();
 
         //Assert
-        assertEquals("Refined",refinedUserStoryStatus);
+        assertEquals("Refined", refinedUserStoryStatus);
         assertTrue(result);
     }
 }

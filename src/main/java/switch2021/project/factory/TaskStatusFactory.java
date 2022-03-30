@@ -1,7 +1,7 @@
 package switch2021.project.factory;
 
 import switch2021.project.factoryInterface.TaskStatusFactoryInterface;
-import switch2021.project.model.TaskStatus.TaskStatus;
+import switch2021.project.valueObject.TaskStatus;
 
 public class TaskStatusFactory implements TaskStatusFactoryInterface {
 

@@ -4,9 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.stores.SystemUserStore;
 import switch2021.project.stores.UserProfileStore;
+import switch2021.project.valueObject.UserProfile;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +15,6 @@ public class UpdateUserProfileControllerTest {
     private Company company;
     private SystemUserStore systemUserStore;
     private UserProfileStore userProfileStore;
-    private SystemUser user;
 
 
     @BeforeEach
@@ -24,7 +23,7 @@ public class UpdateUserProfileControllerTest {
         systemUserStore = company.getSystemUserStore();
         userProfileStore = company.getUserProfileStore();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
+        SystemUser user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
                 "tester", "Qwerty_1", "Qwerty_1", "IMG_123", userProfile);
         systemUserStore.saveSystemUser(user);
     }

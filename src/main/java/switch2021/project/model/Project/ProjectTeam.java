@@ -3,9 +3,9 @@ package switch2021.project.model.Project;
 import lombok.Getter;
 import switch2021.project.factoryInterface.ResourceFactoryInterface;
 import switch2021.project.valueObject.ProjectRole;
-import switch2021.project.valueObject.Resource.Resource;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.utils.App;
+import switch2021.project.valueObject.Resource;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,7 @@ public class ProjectTeam {
 
     private final List<Resource> projectTeamList;  //Resource´s List in a Project.
 
+
     /**
      * ProjectTeam's Constructor
      **/
@@ -29,9 +30,6 @@ public class ProjectTeam {
         this.projectTeamList = new ArrayList<>();
     }
 
-//    public ProjectTeam(){
-//        this.projectTeamList = new ArrayList<>();
-//    }
 
     /**
      * Getters and Setters

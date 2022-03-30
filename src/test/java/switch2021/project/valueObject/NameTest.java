@@ -2,7 +2,6 @@ package switch2021.project.valueObject;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.Typology.Typology;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +25,7 @@ class NameTest {
             //Arrange
             String atual = "";
             //Act
-            Name expected = new Name(atual);
+            new Name(atual);
         });
     }
 
@@ -37,7 +36,7 @@ class NameTest {
             //Arrange
             String atual = "   ";
             //Act
-            Name expected = new Name(atual);
+            new Name(atual);
         });
     }
 
@@ -48,7 +47,7 @@ class NameTest {
             //Arrange
             String atual = "Zé 44";
             //Act
-            Name expected = new Name(atual);
+            new Name(atual);
         });
     }
 
@@ -59,7 +58,7 @@ class NameTest {
             //Arrange
             String atual = "#*ZÉ*#";
             //Act
-            Name expected = new Name(atual);
+            new Name(atual);
         });
     }
 
@@ -70,7 +69,7 @@ class NameTest {
         Name function = new Name("Test");
         Name function1 = new Name("Test");
         //Act and Assert
-        assertEquals(function,function1);
+        assertEquals(function, function1);
     }
 
     @Test
@@ -80,7 +79,7 @@ class NameTest {
         Name function = new Name("TestTest");
         Name function1 = new Name("Test");
         //Act and Assert
-        assertNotEquals(function,function1);
+        assertNotEquals(function, function1);
     }
 
     @Test
@@ -90,26 +89,26 @@ class NameTest {
         Name function = new Name("Test");
         Name function1 = null;
         //Act and Assert
-        assertNotEquals(function,function1);
+        assertNotEquals(function, function1);
     }
 
     @Test
     @DisplayName("Test hashcode conditions for coverage purposes")
-    void hashCodeTest_Success(){
+    void hashCodeTest_Success() {
         //Arrange
         Name function = new Name("Test");
         Name function1 = new Name("Test");
         //Act and Assert
-        assertEquals(function.hashCode(),function1.hashCode());
+        assertEquals(function.hashCode(), function1.hashCode());
     }
 
     @Test
     @DisplayName("Test hashcode conditions for coverage purposes")
-    void hashCodeTest_Fail_1(){
+    void hashCodeTest_Fail_1() {
         //Arrange
         Name function = new Name("Test");
         Typology function1 = new Typology("Test");
         //Act and Assert
-        assertNotEquals(function.hashCode(),function1.hashCode());
+        assertNotEquals(function.hashCode(), function1.hashCode());
     }
 }

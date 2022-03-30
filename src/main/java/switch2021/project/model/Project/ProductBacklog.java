@@ -5,8 +5,8 @@ import lombok.Setter;
 import switch2021.project.dto.UserStoryDto;
 import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.mapper.UserStoryMapper;
-import switch2021.project.model.UserStoryStatus.UserStoryStatus;
-
+import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.valueObject.UserStoryStatus;
 import java.util.*;
 
 @Getter
@@ -20,10 +20,10 @@ public class ProductBacklog {
     private List<UserStory> userStoryList;
     private UserStoryFactory userStoryFactory;
 
+
     /**
      * Constructor
      **/
-
     public ProductBacklog(UserStoryFactory userStoryFactory) {
         this.userStoryList = new ArrayList<>();
         this.userStoryFactory = userStoryFactory == null ? new UserStoryFactory() : userStoryFactory;
@@ -33,10 +33,10 @@ public class ProductBacklog {
         this(null);
     }
 
+
     /**
      * Methods for create UserStory to the productBacklog
      **/
-
     public boolean createAndSaveUserStory(String title, int priority, String description, int estimateEffort) {
 
         UserStory newUserStory = this.userStoryFactory.createUserStory(title, priority, description, estimateEffort);
@@ -59,6 +59,7 @@ public class ProductBacklog {
     public UserStory createUserStoryWithDto(UserStoryDto createUserStoryDto, UserStoryMapper mapperUS) {
         return mapperUS.toModel(createUserStoryDto);
     }
+
 
     /**
      * Validation Methods.
@@ -83,10 +84,10 @@ public class ProductBacklog {
         return msg;
     }
 
+
     /**
      * Get Methods.
      **/
-
     public List<UserStory> getUsSortedByPriority() {
 
         List<UserStory> returnList = new LinkedList<>();
@@ -112,7 +113,6 @@ public class ProductBacklog {
         return Collections.unmodifiableList(userStoryList);
     }
 
-
     public List<UserStory> getActiveUserStoryList() {
         List<UserStory> activeUSList = new ArrayList<>();
         for (UserStory us : userStoryList) {
@@ -134,6 +134,7 @@ public class ProductBacklog {
         return userStory;
     }
 
+
     /**
      * ID_UserStory Generator
      **/
@@ -144,6 +145,5 @@ public class ProductBacklog {
         }
         return id;
     } //if the object isn´t saved on the list, the id will be the same for all
-
     //objects. This issue will be solved when calling the save method.
 }

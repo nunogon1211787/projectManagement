@@ -1,17 +1,14 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.valueObject.Resource.Resource;
 import switch2021.project.model.Project.*;
-import switch2021.project.model.ProjectStatus.ProjectStatus;
-import switch2021.project.model.TaskStatus.TaskStatus;
 import switch2021.project.dto.CreateTaskDTO;
 import switch2021.project.mapper.TaskMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.TaskType.TaskType;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.model.Task.Task;
+import switch2021.project.valueObject.*;
+
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -84,16 +81,6 @@ public class TaskListTest {
         assertEquals("test123", status.getDescription().getText());
     }
 
-//    @Test
-//    void getTaskStatusByDescription() {
-//        //Arrange
-//        TaskStatusStore store = new TaskStatusStore();
-//        //Act
-//        store.populateDefault();
-//        //Assert
-//        assertEquals("Planned", store.getTaskStatusByDescription("Planned").getDescription().getText());
-//    }
-
     @Test
     void taskStatus() {
         //Arranje
@@ -115,21 +102,6 @@ public class TaskListTest {
         assertNotEquals(status.hashCode(),status2.hashCode());
         assertEquals(status.hashCode(),status.hashCode());
     }
-
-//    @Test
-//    void taskStatusStoreHash() {
-//        //Arranje
-//        TaskStatusStore status = new TaskStatusStore();
-//        status.populateDefault();
-//        TaskStatusStore status2 = new TaskStatusStore();
-//        status2.populateDefault();
-//        TaskStatus teste = new TaskStatus("Teste");
-//        status2.getTaskStatusList().set(0,teste);
-//
-//        //Assert
-//        assertNotEquals(status.hashCode(),status2.hashCode());
-//        assertEquals(status.hashCode(),status.hashCode());
-//    }
 
     @Test
     void createSprintTaskTestSuccess() {

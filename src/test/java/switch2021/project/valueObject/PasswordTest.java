@@ -2,7 +2,6 @@ package switch2021.project.valueObject;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.Typology.Typology;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -22,33 +21,25 @@ public class PasswordTest {
     @DisplayName("Password Fail - less 8")
     @Test
     public void PasswordFailLess8() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Password("Qwert_1");
-        });
+        assertThrows(IllegalArgumentException.class, () -> new Password("Qwert_1"));
     }
 
     @DisplayName("Password Fail - no number")
     @Test
     public void PasswordFailNoNumber() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Password("Qwerty_q");
-        });
+        assertThrows(IllegalArgumentException.class, () -> new Password("Qwerty_q"));
     }
 
     @DisplayName("Password Fail - no Upper Case")
     @Test
     public void PasswordFailNoUpperCase() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Password("qwerty_1");
-        });
+        assertThrows(IllegalArgumentException.class, () -> new Password("qwerty_1"));
     }
 
     @DisplayName("Password Fail - no Lower Case")
     @Test
     public void PasswordFailNoLowerCase() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Password("QWERTY_1");
-        });
+        assertThrows(IllegalArgumentException.class, () -> new Password("QWERTY_1"));
     }
 
     @DisplayName("Encrypt Password Success")

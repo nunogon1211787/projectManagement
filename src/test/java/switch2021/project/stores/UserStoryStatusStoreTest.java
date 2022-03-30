@@ -3,7 +3,8 @@ package switch2021.project.stores;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.valueObject.Description;
-import switch2021.project.model.UserStoryStatus.UserStoryStatus;
+import switch2021.project.valueObject.UserStoryStatus;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -86,11 +87,10 @@ class UserStoryStatusStoreTest {
         UserStoryStatusStore userStoryStatusStore = new UserStoryStatusStore();
         userStoryStatusStore.populateDefault();
         UserStoryStatus userStoryStatus = mock(UserStoryStatus.class);
-        boolean usTest = userStoryStatusStore.saveNewUserStoryStatus(userStoryStatus);
         //Act
-        boolean expected2 = userStoryStatusStore.saveNewUserStoryStatus(userStoryStatus);
+        userStoryStatusStore.saveNewUserStoryStatus(userStoryStatus);
         //Assert
-        assertFalse(expected2);
+        assertFalse(userStoryStatusStore.saveNewUserStoryStatus(userStoryStatus));
     }
 
     @Test

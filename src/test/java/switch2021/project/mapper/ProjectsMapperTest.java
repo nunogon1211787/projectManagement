@@ -3,18 +3,15 @@ package switch2021.project.mapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.dto.ProjectDTO;
-import switch2021.project.factory.ResourceFactory;
-import switch2021.project.valueObject.Resource.Resource;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.valueObject.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 
 public class ProjectsMapperTest {
 
@@ -24,8 +21,8 @@ public class ProjectsMapperTest {
         Company company = new Company();
         ProjectsMapper projectsMapper = new ProjectsMapper();
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
-        company.getCustomerStore().saveNewCustomer(customer);
+        company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
         company.getBusinessSectorStore().createAndAddBusinessSector("it");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -70,8 +67,8 @@ public class ProjectsMapperTest {
         Company company = new Company();
         ProjectsMapper projectsMapper = new ProjectsMapper();
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
-        company.getCustomerStore().saveNewCustomer(customer);
+        company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
         company.getBusinessSectorStore().createAndAddBusinessSector("it");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -93,8 +90,8 @@ public class ProjectsMapperTest {
         Company company = new Company();
         ProjectsMapper projectsMapper = new ProjectsMapper();
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
-        company.getCustomerStore().saveNewCustomer(customer);
+        company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
         company.getBusinessSectorStore().createAndAddBusinessSector("it");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -117,8 +114,8 @@ public class ProjectsMapperTest {
         Company company = new Company();
         ProjectsMapper projectsMapper = new ProjectsMapper();
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
-        company.getCustomerStore().saveNewCustomer(customer);
+        company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
         company.getBusinessSectorStore().createAndAddBusinessSector("it");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -152,8 +149,8 @@ public class ProjectsMapperTest {
         Company company = new Company();
         ProjectsMapper projectsMapper = new ProjectsMapper();
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().createCustomer("isep", "xxx@sss.sss", 123456789);
-        company.getCustomerStore().saveNewCustomer(customer);
+        company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
+        Customer customer = company.getCustomerStore().getCustomerByName("isep");
         company.getBusinessSectorStore().createAndAddBusinessSector("it");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -205,9 +202,7 @@ public class ProjectsMapperTest {
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
-        ResourceFactory resourceFactory = new ResourceFactory();
 
-        ProjectTeam projectTeam = new ProjectTeam(resourceFactory);
         company.getProjectStore().saveNewProject(project);
         company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
@@ -238,8 +233,6 @@ public class ProjectsMapperTest {
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
-        ResourceFactory resFac = mock(ResourceFactory.class);
-        ProjectTeam projectTeam = new ProjectTeam(resFac);
         company.getProjectStore().saveNewProject(project);
         company.getProjectStore().saveNewProject(project2);
         project.addResource(input);

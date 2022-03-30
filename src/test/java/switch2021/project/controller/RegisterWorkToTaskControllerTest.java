@@ -1,21 +1,21 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.valueObject.Date;
+import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Task.Task;
+import switch2021.project.valueObject.*;
 import switch2021.project.dto.TaskEffortDTO;
 import switch2021.project.dto.TaskIdNameDTO;
 import switch2021.project.dto.UserStorySprintProjectDTO;
-import switch2021.project.valueObject.Resource.Resource;
 import switch2021.project.mapper.RegisterWorkToTaskMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.TaskType.TaskType;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.stores.ProjectStore;
+
 import java.time.LocalDate;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -162,15 +162,12 @@ public class RegisterWorkToTaskControllerTest {
         Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("taskum", taskDescription, 20.0, taskType, resource1);
         Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("taskdois", taskDescription, 10.0, taskType, resource1);
         project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task1);
-        int id_task1 = task1.getIdTask(); //1
         project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task2);
-        int id_task2 = task2.getIdTask(); //2
         //userStorySprintProjectDTO
         UserStorySprintProjectDTO userStorySprintProjectDTO = new UserStorySprintProjectDTO(projectCode1, id_Sprint1, id_UserStory1);
 
         controller.getTasks(userStorySprintProjectDTO);
         //taskEffort
-        TaskIdNameDTO taskIdNameDTO = controller.getTask(id_task2);
         assertEquals(10, task2.getEffortEstimate());
         assertEquals(0, task2.getHoursSpent());
         assertEquals(10, task2.getEffortRemaining());
@@ -180,6 +177,8 @@ public class RegisterWorkToTaskControllerTest {
         Date effortDate = new Date(LocalDate.of(2022, 1, 10));
         TaskEffortDTO taskEffortDTO = new TaskEffortDTO(4, 30, effortDate, "test", ".pdf");
         TaskEffortDTO taskEffortDTO2 = new TaskEffortDTO(4, 30, effortDate, "", "");
+        //Act
+        controller.getTask(2);
         //Assert
         assertTrue(controller.createTaskEffort(taskEffortDTO));
         assertEquals(10, task2.getEffortEstimate());
@@ -191,7 +190,5 @@ public class RegisterWorkToTaskControllerTest {
         assertEquals(".pdf", taskEffortDTO.getAttachment());
         assertEquals("", taskEffortDTO2.getComment());
         assertEquals("", taskEffortDTO2.getAttachment());
-
-
     }
 }

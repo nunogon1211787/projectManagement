@@ -2,21 +2,20 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import switch2021.project.valueObject.Resource.Resource;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.model.UserStoryStatus.UserStoryStatus;
+import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.stores.ProjectStore;
+import switch2021.project.valueObject.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ChangePriorityUSControllerTest {
-
 
     private Company company;
     private ProjectStore projectStore;
@@ -31,11 +30,11 @@ public class ChangePriorityUSControllerTest {
     private Typology typo;
     private Customer customer;
     private BusinessSector sector;
-    private UserProfile userProfile;
+    //    private UserProfile userProfile;
     private SystemUser newUser;
     private SystemUser newUser2;
     private UserStoryStatus userStoryStatus;
-    private ProductBacklog productBacklog;
+//    private ProductBacklog productBacklog;
 
 
     @BeforeEach
@@ -189,7 +188,6 @@ public class ChangePriorityUSControllerTest {
     }
 
 
-
     @Test
     void getCurrentProjectListByUserEmailSizeTest() {
         //Arrange
@@ -208,7 +206,7 @@ public class ChangePriorityUSControllerTest {
 
         project.addResource(input);
         project2.addResource(input);
-        LocalDate endDate = LocalDate.of(2021,1,2);
+        LocalDate endDate = LocalDate.of(2021, 1, 2);
         company.getProjectStore().getProjectByCode("Project_2022_1").setEndDate(endDate);
 
 
@@ -222,7 +220,7 @@ public class ChangePriorityUSControllerTest {
     void getCurrentProjectListByUserEmailCorrectList() {
         //Arrange
 
-        LocalDate endDate = LocalDate.of(2021,1,2);
+        LocalDate endDate = LocalDate.of(2021, 1, 2);
         company.getProjectStore().getProjectByCode("Project_2022_1").setEndDate(endDate);
         project.addResource(input);
         project2.addResource(input);
@@ -230,8 +228,8 @@ public class ChangePriorityUSControllerTest {
 
         // Act
         List<Project> projectList2 = new ArrayList<>();
-                projectList2.add(project2);
-                projectList2.add(project3);
+        projectList2.add(project2);
+        projectList2.add(project3);
         List<Project> projectList = company.getProjectStore().getCurrentProjectsByUserEmail("batatinha@cartoon.com");
         // Assert
         assertEquals(projectList, projectList2);
@@ -245,10 +243,10 @@ public class ChangePriorityUSControllerTest {
         // Act
         Project project3 = company.getProjectStore().getProjectByCode("Project_2022_1");
         // Assert
-        assertEquals(project,project3);
+        assertEquals(project, project3);
     }
 
-        // TESTE AINDA NÃO FUNCIONA PORQUE O CODE DO PROJECT NAO TA VALIDADO
+    // TESTE AINDA NÃO FUNCIONA PORQUE O CODE DO PROJECT NAO TA VALIDADO
 //    @Test
 //    void getCurrentProjectByInvalidCode() {
 //        assertThrows(IllegalArgumentException.class, () -> {//Arrange
@@ -271,7 +269,7 @@ public class ChangePriorityUSControllerTest {
 
         List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryList();
 
-        assertEquals(usList,this.project.getProductBacklog().getUserStoryList());
+        assertEquals(usList, this.project.getProductBacklog().getUserStoryList());
     }
 
     @Test
@@ -280,7 +278,7 @@ public class ChangePriorityUSControllerTest {
 
         List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryList();
 
-        assertEquals(3,usList.size());
+        assertEquals(3, usList.size());
     }
 
     @Test
@@ -292,7 +290,7 @@ public class ChangePriorityUSControllerTest {
 
         List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getActiveUserStoryList();
 
-        assertEquals(2,usList.size());
+        assertEquals(2, usList.size());
     }
 
     //        TEST NOT WORKING SINCE US ID GENERATOR IS NOT WORKING PROPERLY
@@ -311,7 +309,7 @@ public class ChangePriorityUSControllerTest {
 
         userStory3.setPriority(3);
 
-        assertEquals(3,userStory3.getPriority());
+        assertEquals(3, userStory3.getPriority());
 
     }
 
@@ -321,7 +319,7 @@ public class ChangePriorityUSControllerTest {
 
         userStory3.setPriority(6);
 
-        assertEquals(4,userStory3.getPriority());
+        assertEquals(4, userStory3.getPriority());
 
     }
 }

@@ -4,9 +4,9 @@ import switch2021.project.dto.UserStoryStatusDTO;
 import switch2021.project.mapper.ScrumBoardMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Project.Sprint;
-import switch2021.project.model.Project.SprintBacklog;
-import switch2021.project.model.Project.UserStory;
+import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Sprint.SprintBacklog;
+import switch2021.project.model.UserStory.UserStory;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,7 +16,6 @@ public class GetScrumBoardController {
     /**
      * Attributes
      **/
-
     private final Company company;
     private final ScrumBoardMapper mapper;
     private Sprint sprint;
@@ -24,19 +23,19 @@ public class GetScrumBoardController {
     private SprintBacklog sprintBacklog;
     private List<UserStory> userStoryList;
 
+
     /**
      * Constructor to test (without SINGLETON)
      **/
-
     public GetScrumBoardController(Company company, ScrumBoardMapper mapper) {
         this.company = company;
         this.mapper = mapper;
     }
 
-    /**
-     *Getter's
-     */
 
+    /**
+     * Getter's
+     */
     public Project getProject(String projectCode) {
         project = company.getProjectStore().getProjectByCode(projectCode);
         return project;
@@ -57,11 +56,11 @@ public class GetScrumBoardController {
         return Collections.unmodifiableList(userStoryList);
     }
 
+
     /**
      * Method
      **/
-
-    public List<UserStoryStatusDTO> getScrumBoard(){
+    public List<UserStoryStatusDTO> getScrumBoard() {
         return this.mapper.toDtoList(userStoryList);
     }
 

@@ -2,7 +2,6 @@ package switch2021.project.valueObject;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.Typology.Typology;
 
 import java.util.Arrays;
 
@@ -37,7 +36,7 @@ class FunctionTest {
             //Arrange
             String actual = "";
             //Act
-            Function expected = new Function(actual);
+            new Function(actual);
         });
     }
 
@@ -48,7 +47,7 @@ class FunctionTest {
             //Arrange
             String actual = null;
             //Act
-            Function expected = new Function(actual);
+            new Function(actual);
         });
     }
 
@@ -59,7 +58,7 @@ class FunctionTest {
             //Arrange
             String actual = "   ";
             //Act
-            Function expected = new Function(actual);
+            new Function(actual);
         });
     }
 
@@ -84,49 +83,49 @@ class FunctionTest {
         Function function2 = null;
         Description test = new Description("test");
         // Act
-        assertEquals(function,function1);
+        assertEquals(function, function1);
         assertNotEquals(function, function2);
         assertNotEquals(function, test);
-        assertEquals(function,function);
+        assertEquals(function, function);
     }
 
     @Test
     @DisplayName("Test hashcode conditions for coverage purposes")
-    void hashCodeTest_Success(){
+    void hashCodeTest_Success() {
         //Arrange
         Function function = new Function("Test");
         Function function1 = new Function("Test");
         //Act and Assert
-        assertEquals(function.hashCode(),function1.hashCode());
+        assertEquals(function.hashCode(), function1.hashCode());
     }
 
     @Test
     @DisplayName("Test hashcode conditions for coverage purposes")
-    void hashCodeTest_Fail(){
+    void hashCodeTest_Fail() {
         //Arrange
         Function function = new Function("Test");
         Typology function1 = new Typology("Test");
         //Act and Assert
-        assertNotEquals(function.hashCode(),function1.hashCode());
+        assertNotEquals(function.hashCode(), function1.hashCode());
     }
 
     @Test
     @DisplayName("Test check minimum length conditions for coverage purposes")
-    void MinimumLengthTest(){
+    void MinimumLengthTest() {
         //Arrange
         Function function = new Function("Te");
         Function function1 = new Function("Te");
         //Act and Assert
-        assertEquals(function.getText(),function1.getText());
+        assertEquals(function.getText(), function1.getText());
     }
 
     @Test
     @DisplayName("Test check maximum length conditions for coverage purposes")
-    void MaximumLengthTest(){
+    void MaximumLengthTest() {
         //Arrange
         Function function = new Function("12345678998765432123");
         Function function1 = new Function("12345678998765432123");
         //Act and Assert
-        assertEquals(function.getText(),function1.getText());
+        assertEquals(function.getText(), function1.getText());
     }
 }

@@ -2,8 +2,8 @@ package switch2021.project.controller;
 
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Project.Sprint;
-import switch2021.project.model.Project.SprintBacklog;
+import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Sprint.SprintBacklog;
 import switch2021.project.stores.*;
 
 import java.util.ArrayList;
@@ -15,7 +15,6 @@ public class UserStoryEffortController {
     /**
      * Attributes
      **/
-
     private final Company company;
     private Project proj;
     private SprintList sprintList;
@@ -23,18 +22,18 @@ public class UserStoryEffortController {
     private Sprint sprint;
     private SprintBacklog sprintBacklog;
 
+
     /**
      * Constructor to test (without SINGLETON)
      **/
-
     public UserStoryEffortController(Company company) { //tem como função o dominio para os proximos passos
         this.company = company;
     }
 
+
     /**
      * Methods
      **/
-
     public List<Project> getCurrentProjectListByUserEmail(String email) {
         ProjectStore projStore = this.company.getProjectStore();
         List<Project> projectList = projStore.getCurrentProjectsByUserEmail(email);
@@ -63,6 +62,5 @@ public class UserStoryEffortController {
         this.sprintBacklog = this.sprint.getSprintBacklog();
         return this.sprintBacklog;
     }
-
 }
 

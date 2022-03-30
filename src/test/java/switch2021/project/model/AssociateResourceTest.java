@@ -3,20 +3,17 @@ package switch2021.project.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.valueObject.Resource.Resource;
-import switch2021.project.model.Project.BusinessSector;
-import switch2021.project.model.Project.Customer;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.stores.ProjectStore;
+import switch2021.project.valueObject.*;
+
 import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AssociateResourceTest {
 
-    private Company company;
     private UserProfile userProfile;
     private Project proj;
     private Project proj1;
@@ -26,23 +23,23 @@ public class AssociateResourceTest {
 
     @BeforeEach
     public void init() {
-        company = new Company();
+        Company company = new Company();
         userProfile = company.getUserProfileStore().getUserProfile("Visitor");
 
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().createAndAddBusinessSector("sector");
-        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste@teste.com", 123456789));
+        company.getCustomerStore().createAndAddCustomer("Test", "Teste@teste.com", 123456789);
 
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        proj = company.getProjectStore().createProject( "prototype", "test56", customer,
+        proj = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, date, 7, 5000);
-        proj1 = company.getProjectStore().createProject( "prototype2", "test57", customer,
+        proj1 = company.getProjectStore().createProject("prototype2", "test57", customer,
                 typo, sector, date, 7, 5000);
-        proj2 = company.getProjectStore().createProject( "prototype2", "test58", customer,
+        proj2 = company.getProjectStore().createProject("prototype2", "test58", customer,
                 typo, sector, date, 7, 5000);
-        proj3 = company.getProjectStore().createProject( "prototype3", "test59", customer,
+        proj3 = company.getProjectStore().createProject("prototype3", "test59", customer,
                 typo, sector, date, 7, 5000);
         projectList = company.getProjectStore();
     }
@@ -97,7 +94,7 @@ public class AssociateResourceTest {
         proj1.addResource(resAllo1);
         proj3.addResource(resAllo1);
         //Act
-        boolean result = projectList.validateAllocation(newUser,0.2, startDateToAllocate, endDateToAllocate);
+        boolean result = projectList.validateAllocation(newUser, 0.2, startDateToAllocate, endDateToAllocate);
         //Assert
         assertTrue(result);
     }
@@ -120,7 +117,7 @@ public class AssociateResourceTest {
         proj1.addResource(resAllo1);
         proj3.addResource(resAllo1);
         //Act
-        boolean result = projectList.validateAllocation(newUser,0.7, startDateToAllocate, endDateToAllocate);
+        boolean result = projectList.validateAllocation(newUser, 0.7, startDateToAllocate, endDateToAllocate);
         //Assert
         assertFalse(result);
     }

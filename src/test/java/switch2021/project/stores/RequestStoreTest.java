@@ -4,9 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.valueObject.Description;
 import switch2021.project.valueObject.Name;
-import switch2021.project.model.SystemUser.Request;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.valueObject.Request;
+import switch2021.project.valueObject.UserProfile;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -47,50 +48,46 @@ class RequestStoreTest {
     @Test
     @DisplayName("add profile request - already assigned")
     void addProfileRequestFail() {
-        //Arrange
-        UserProfile userProfile = mock(UserProfile.class);
-        SystemUser systemUser = mock(SystemUser.class);
-        RequestStore requestStore = new RequestStore();
-        Description description = mock(Description.class);
-        when(systemUser.getUserName()).thenReturn(new Name("Cris"));
-        when(userProfile.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        when(systemUser.hasProfile(userProfile)).thenReturn(true);
-        Request request = requestStore.createProfileRequest(userProfile, systemUser);
-        //Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile userProfile = mock(UserProfile.class);
+            SystemUser systemUser = mock(SystemUser.class);
+            RequestStore requestStore = new RequestStore();
+            Description description = mock(Description.class);
+            when(systemUser.getUserName()).thenReturn(new Name("Cris"));
+            when(userProfile.getUserProfileName()).thenReturn(description);
+            when(description.getText()).thenReturn("Visitor");
+            when(systemUser.hasProfile(userProfile)).thenReturn(true);
+            Request request = requestStore.createProfileRequest(userProfile, systemUser);
+            //Act
             requestStore.addProfileRequest(request);
         });
-        //Assert
-        assertTrue(exception.getMessage().equals("Requested profile is already assigned to the user."));
     }
 
     @Test
     @DisplayName("add profile request - already exists")
     void addProfileRequestFail2() {
-        //Arrange
-        UserProfile userProfile = mock(UserProfile.class);
-        SystemUser systemUser = mock(SystemUser.class);
-        RequestStore requestStore = new RequestStore();
-        requestStore.getRequestProfileList();
-        Description description = mock(Description.class);
-        Description descrip = mock(Description.class);
-        when(systemUser.getUserName()).thenReturn(new Name("Cris"));
-        when(userProfile.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        UserProfile newUserProfile = mock(UserProfile.class);
-        when(newUserProfile.getUserProfileName()).thenReturn(descrip);
-        when(descrip.getText()).thenReturn("Admin");
-        Request request = requestStore.createProfileRequest(newUserProfile, systemUser);
-        requestStore.addProfileRequest(request);
-        //Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile userProfile = mock(UserProfile.class);
+            SystemUser systemUser = mock(SystemUser.class);
+            RequestStore requestStore = new RequestStore();
+            Description description = mock(Description.class);
+            Description descrip = mock(Description.class);
+            when(systemUser.getUserName()).thenReturn(new Name("Cris"));
+            when(userProfile.getUserProfileName()).thenReturn(description);
+            when(description.getText()).thenReturn("Visitor");
+            UserProfile newUserProfile = mock(UserProfile.class);
+            when(newUserProfile.getUserProfileName()).thenReturn(descrip);
+            when(descrip.getText()).thenReturn("Admin");
+            Request request = requestStore.createProfileRequest(newUserProfile, systemUser);
+            requestStore.addProfileRequest(request);
+            //Act
             requestStore.addProfileRequest(request);
         });
-        //Assert
-        assertTrue(exception.getMessage().equals("Request already exists"));
     }
-
 
     @Test
     @DisplayName("Remove profile request with success")
@@ -99,7 +96,6 @@ class RequestStoreTest {
         UserProfile userProfile = mock(UserProfile.class);
         SystemUser systemUser = mock(SystemUser.class);
         RequestStore requestStore = new RequestStore();
-        requestStore.getRequestProfileList();
         Description description = mock(Description.class);
         when(systemUser.getUserName()).thenReturn(new Name("Cris"));
         when(userProfile.getUserProfileName()).thenReturn(description);
@@ -120,7 +116,6 @@ class RequestStoreTest {
         UserProfile userProfile = mock(UserProfile.class);
         SystemUser systemUser = mock(SystemUser.class);
         RequestStore requestStore = new RequestStore();
-        requestStore.getRequestProfileList();
         Description description = mock(Description.class);
         when(systemUser.getUserName()).thenReturn(new Name("Cris"));
         when(userProfile.getUserProfileName()).thenReturn(description);
@@ -142,7 +137,7 @@ class RequestStoreTest {
         UserProfile userProfile = mock(UserProfile.class);
         SystemUser systemUser = mock(SystemUser.class);
         RequestStore requestStore = new RequestStore();
-        requestStore.getRequestProfileList();
+
         Description description = mock(Description.class);
         when(systemUser.getUserName()).thenReturn(new Name("Cris"));
         when(userProfile.getUserProfileName()).thenReturn(description);
@@ -162,7 +157,6 @@ class RequestStoreTest {
         UserProfile userProfile = mock(UserProfile.class);
         SystemUser systemUser = mock(SystemUser.class);
         RequestStore requestStore = new RequestStore();
-        requestStore.getRequestProfileList();
         Description description = mock(Description.class);
         Description descrip = mock(Description.class);
         when(systemUser.getUserName()).thenReturn(new Name("Cris"));
@@ -186,7 +180,6 @@ class RequestStoreTest {
         UserProfile userProfile = mock(UserProfile.class);
         SystemUser systemUser = mock(SystemUser.class);
         RequestStore requestStore = new RequestStore();
-        requestStore.getRequestProfileList();
         Description description = mock(Description.class);
         Description descrip = mock(Description.class);
         when(systemUser.getUserName()).thenReturn(new Name("Cris"));
@@ -210,7 +203,6 @@ class RequestStoreTest {
         UserProfile userProfile = mock(UserProfile.class);
         SystemUser systemUser = mock(SystemUser.class);
         RequestStore requestStore = new RequestStore();
-        requestStore.getRequestProfileList();
         Description description = mock(Description.class);
         Description descrip = mock(Description.class);
         when(systemUser.getUserName()).thenReturn(new Name("Cris"));
@@ -234,7 +226,6 @@ class RequestStoreTest {
         UserProfile userProfile = mock(UserProfile.class);
         SystemUser systemUser = mock(SystemUser.class);
         RequestStore requestStore = new RequestStore();
-        requestStore.getRequestProfileList();
         Description description = mock(Description.class);
         Description descrip = mock(Description.class);
         when(systemUser.getUserName()).thenReturn(new Name("Cris"));

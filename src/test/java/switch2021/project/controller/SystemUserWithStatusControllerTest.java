@@ -6,9 +6,8 @@ import switch2021.project.dto.SystemUserWithStatusDto;
 import switch2021.project.mapper.SystemUserWithStatusMapper;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.valueObject.UserProfile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,9 +29,6 @@ public class SystemUserWithStatusControllerTest {
         String function = "tester";
         String photo = "photo";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-
-        List<UserProfile> assignedProfileExpected = new ArrayList<>();
-        assignedProfileExpected.add(profile);
 
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
                 passwordConfirmation, photo, profile);
@@ -65,9 +61,6 @@ public class SystemUserWithStatusControllerTest {
         String photo = "photo";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
-        List<UserProfile> assignedProfileExpected = new ArrayList<>();
-        assignedProfileExpected.add(profile);
-
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
                 passwordConfirmation, photo, profile);
         newUser.setActivateUser(true);
@@ -98,9 +91,6 @@ public class SystemUserWithStatusControllerTest {
         String function = "tester";
         String photo = "photo";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-
-        List<UserProfile> assignedProfileExpected = new ArrayList<>();
-        assignedProfileExpected.add(profile);
 
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
                 passwordConfirmation, photo, profile);
@@ -138,9 +128,6 @@ public class SystemUserWithStatusControllerTest {
         String function = "tester";
         String photo = "photo";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-
-        List<UserProfile> assignedProfileExpected = new ArrayList<>();
-        assignedProfileExpected.add(profile);
 
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
                 passwordConfirmation, photo, profile);

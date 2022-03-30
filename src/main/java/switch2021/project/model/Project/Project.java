@@ -7,11 +7,9 @@ import switch2021.project.factoryInterface.ResourceFactoryInterface;
 import switch2021.project.factory.ProjectTeamFactory;
 import switch2021.project.factory.ResourceFactory;
 import switch2021.project.factory.UserStoryFactory;
-import switch2021.project.valueObject.Description;
-import switch2021.project.valueObject.Resource.Resource;
-import switch2021.project.model.ProjectStatus.ProjectStatus;
+import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
 import switch2021.project.stores.SprintList;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -75,8 +73,8 @@ public class Project {
         //this.projectTeam = this.projectTeamFactory.createProjectTeam();
 //        this.projectTeam = new ProjectTeam();
         this.productBacklog = new ProductBacklog();
-
     }
+
 
     /**
      * Validates Project Creation Fields
@@ -150,12 +148,14 @@ public class Project {
 
     public boolean hasCode(String code){ return this.code.equalsIgnoreCase(code); }
 
+
     /**
      * Get the start date of the next Sprint and end date of the current Sprint
      */
     public Sprint getCurrentSprint() {
       return this.sprintList.getCurrentSprint();
     }
+
 
     /**
      * Override

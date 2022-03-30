@@ -2,9 +2,10 @@ package switch2021.project.controller;
 
 import switch2021.project.model.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.stores.SystemUserStore;
 import switch2021.project.stores.UserProfileStore;
+import switch2021.project.valueObject.UserProfile;
+
 import java.util.List;
 
 public class UpdateUserProfileController {
@@ -12,7 +13,6 @@ public class UpdateUserProfileController {
     /**
      * Attributes
      **/
-    private final Company company;
     private final UserProfileStore userProfileStore;
     private final SystemUserStore systemUserStore;
     private SystemUser user;
@@ -22,7 +22,6 @@ public class UpdateUserProfileController {
      * Constructor to test (without SINGLETON)
      **/
     public UpdateUserProfileController(Company company) {
-        this.company = company;
         this.userProfileStore = company.getUserProfileStore();
         this.systemUserStore = company.getSystemUserStore();
         this.user = null;
@@ -51,5 +50,4 @@ public class UpdateUserProfileController {
 
         return true;
     }
-
 }

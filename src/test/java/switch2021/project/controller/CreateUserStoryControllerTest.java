@@ -4,17 +4,16 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.dto.UserStoryDto;
-import switch2021.project.valueObject.Resource.Resource;
 import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.mapper.UserStoryMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.model.UserStoryStatus.UserStoryStatus;
+import switch2021.project.valueObject.*;
+
 import java.time.LocalDate;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -135,8 +134,8 @@ public class CreateUserStoryControllerTest {
         company.getProjectStore().saveNewProject(project);
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = 1;
-        int priority2 = 5;
-        int priority3 = 0;
+//        int priority2 = 5;
+//        int priority3 = 0;
         String description = "teste";
         String name = "teste";
         UserStoryStatus status = new UserStoryStatus("To do");
@@ -219,18 +218,17 @@ public class CreateUserStoryControllerTest {
 
     @Test
     public void getAllProjectListByUserEmailIsBlank() {
-        //Arrange
-        company.getProjectStore().saveNewProject(project);
-        company.getProjectStore().saveNewProject(project2);
-        project.addResource(input);
-        project2.addResource(input);
-        // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        // Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            company.getProjectStore().saveNewProject(project);
+            company.getProjectStore().saveNewProject(project2);
+            project.addResource(input);
+            project2.addResource(input);
+            // Act
             CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
             createUserStoryController.getProjectListByUserEmail("");
         });
-        // Assert
-        assertEquals("Email cannot be blank", exception.getMessage());
     }
 
     @Test

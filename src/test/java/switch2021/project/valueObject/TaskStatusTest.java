@@ -1,8 +1,6 @@
 package switch2021.project.valueObject;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.TaskStatus.TaskStatus;
-import switch2021.project.model.Typology.Typology;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskStatusTest {
@@ -61,16 +59,16 @@ class TaskStatusTest {
         TaskStatus status1= new TaskStatus("test1");
         TaskStatus status2 = new TaskStatus("test1");
         //Assert
-        assertTrue(status1.equals(status2));
+        assertEquals(status1, status2);
     }
 
     @Test
     void overrideTestTrue1() {
         //Arrange
         TaskStatus status1= new TaskStatus("test1");
-        TaskStatus status2 = status1;
+        TaskStatus status2 = new TaskStatus("test1");
         //Assert
-        assertTrue(status1.equals(status2));
+        assertEquals(status1, status2);
     }
 
     @Test
@@ -79,7 +77,7 @@ class TaskStatusTest {
         TaskStatus status5= new TaskStatus("test1");
         TaskStatus status6= new TaskStatus("test2");
         //Assert
-        assertFalse(status5.equals(status6));
+        assertNotEquals(status5, status6);
     }
 
     @Test
@@ -88,7 +86,7 @@ class TaskStatusTest {
         TaskStatus status4 = null;
         Typology typo = new Typology("test");
         //Assert
-        assertFalse(typo.equals(status4));
+        assertNotEquals(typo, status4);
     }
 
     @Test
@@ -97,7 +95,7 @@ class TaskStatusTest {
         TaskStatus status3 = new TaskStatus("test3");
         Description des = new Description("test3");
         //Assert
-        assertFalse(status3.equals(des));
+        assertNotEquals(status3, des);
     }
 
     @Test

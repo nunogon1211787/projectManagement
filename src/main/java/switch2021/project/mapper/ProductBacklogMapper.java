@@ -1,16 +1,12 @@
 package switch2021.project.mapper;
 
-
 import switch2021.project.dto.UserStoryDto;
-
-import switch2021.project.model.Project.UserStory;
-
+import switch2021.project.model.UserStory.UserStory;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class ProductBacklogMapper {
-
 
     public List<UserStoryDto> toDto(List<UserStory> userStoryList) {
         List<UserStoryDto> userStoryListDtoList = new LinkedList<>();

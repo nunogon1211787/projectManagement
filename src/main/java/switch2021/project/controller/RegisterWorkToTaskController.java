@@ -1,5 +1,9 @@
 package switch2021.project.controller;
 
+import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Sprint.SprintBacklog;
+import switch2021.project.model.Task.Task;
+import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.valueObject.Date;
 import switch2021.project.dto.TaskEffortDTO;
 import switch2021.project.dto.TaskIdNameDTO;
@@ -9,6 +13,7 @@ import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
+import switch2021.project.valueObject.TaskEffort;
 
 import java.util.List;
 
@@ -17,10 +22,8 @@ public class RegisterWorkToTaskController {
     /**
      * Attributes
      **/
-
     private final Company company;
     private final RegisterWorkToTaskMapper mapper;
- //   private Project project;
     private UserStory userStory;
     private List<Task> taskList;
     private Task task;
@@ -29,16 +32,15 @@ public class RegisterWorkToTaskController {
     /**
      * Constructor to test (without SINGLETON)
      **/
-
     public RegisterWorkToTaskController(Company company, RegisterWorkToTaskMapper mapper) {
         this.company = company;
         this.mapper = mapper;
     }
 
+
     /**
      * Methods
      **/
-
     public List<TaskIdNameDTO> getTasks(UserStorySprintProjectDTO userStorySprintProjectDTO) {
         String code = userStorySprintProjectDTO.getProjectCode();
         int sprintId = userStorySprintProjectDTO.getSprintId();
@@ -67,12 +69,11 @@ public class RegisterWorkToTaskController {
 
         int effortHours = taskEffortDTO.getEffort().getEffortHours();
         int effortMinutes = taskEffortDTO.getEffort().getEffortMinutes();
-       Date effortDate = taskEffortDTO.getEffortDate();
+        Date effortDate = taskEffortDTO.getEffortDate();
         String comment = taskEffortDTO.getComment();
         String attachment = taskEffortDTO.getAttachment();
         TaskEffort taskEffort = this.task.createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         this.task.saveTaskEffort(taskEffort);
         return this.userStory.updateWorkDone(this.task);
     }
-
 }

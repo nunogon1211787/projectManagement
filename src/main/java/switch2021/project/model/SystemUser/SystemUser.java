@@ -2,14 +2,11 @@ package switch2021.project.model.SystemUser;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.valueObject.Email;
-import switch2021.project.valueObject.Function;
-import switch2021.project.valueObject.Name;
-import switch2021.project.valueObject.Password;
+import switch2021.project.valueObject.*;
 import switch2021.project.model.Company;
-import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.stores.UserProfileStore;
 import switch2021.project.utils.App;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -29,11 +26,12 @@ public class SystemUser {
     private boolean activateUser;
     private final List<UserProfile> assignedProfileList;
 
+
     /**
      * Constructor
      **/
-    public SystemUser (String userName, String email, String function, String password, String passwordConfirmation,
-                       String photo, UserProfile profile) {
+    public SystemUser(String userName, String email, String function, String password, String passwordConfirmation,
+                      String photo, UserProfile profile) {
 //        checkEmailRules(email);
 //        checkPasswordRules(password);
         checkProfileRules(profile);
@@ -58,6 +56,7 @@ public class SystemUser {
     public List<UserProfile> getAssignedProfileList() {
         return new ArrayList<>(assignedProfileList);
     }
+
 
     /**
      * Setting Methods (outside of lombock)
@@ -98,24 +97,21 @@ public class SystemUser {
         return msg;
     }
 
-    public boolean setActivateUser(Boolean x){
+    public boolean setActivateUser(Boolean x) {
         this.activateUser = x;
         return true;
     }
 
+
     /**
      * Validation Methods
      **/
-
-
-
 //    private void checkPasswordRules(String password) {
 //        if (password.trim().isEmpty())
 //            throw new IllegalArgumentException("Password cannot be empty.");
 //        if ((password.length() < 2))
 //            throw new IllegalArgumentException("Password must be at least 2 characters");
 //    }
-
     private void checkProfileRules(UserProfile profile) {
         Company company = App.getInstance().getCompany();
         UserProfileStore profileStore = company.getUserProfileStore();
@@ -231,7 +227,7 @@ public class SystemUser {
      * Method to verify if the object has the received parameters.
      */
     //REVIEW
-    private int hasPartiallyName (String name){
+    private int hasPartiallyName(String name) {
         int result = 0;
 
         if (!name.isEmpty()) {
@@ -244,8 +240,9 @@ public class SystemUser {
         }
         return result;
     }
+
     //REVIEW
-    private int hasPartiallyEmail (String email){
+    private int hasPartiallyEmail(String email) {
         int result = 0;
 
         if (!email.isEmpty()) {
@@ -258,8 +255,9 @@ public class SystemUser {
         }
         return result;
     }
+
     //REVIEW
-    private int hasPartiallyFunction (String function){
+    private int hasPartiallyFunction(String function) {
         int result = 0;
 
         if (!function.isEmpty()) {
@@ -272,8 +270,9 @@ public class SystemUser {
         }
         return result;
     }
+
     //REVIEW
-    private int hasState (int state) {
+    private int hasState(int state) {
         int result = 0;
         int check = this.activateUser ? 1 : 0;
 
@@ -286,29 +285,31 @@ public class SystemUser {
         }
         return result;
     }
+
     //REVIEW
-    private int hasAllProfilesInTheList (List<UserProfile> profiles){
+    private int hasAllProfilesInTheList(List<UserProfile> profiles) {
         int result = 0;
 
         if (!profiles.isEmpty()) {
             //Review, the assignedProfileList isn't null because is created in the constructor...
 //            if (this.assignedProfileList != null) {
-                int count = 0;
+            int count = 0;
 
-                for (UserProfile k : profiles) {
-                    if (this.assignedProfileList.contains(k)) {
-                        count++;
-                    }
-                }
-                if (count == profiles.size()) {
-                    result = 1;
-                } else{
-                    result = -1;
+            for (UserProfile k : profiles) {
+                if (this.assignedProfileList.contains(k)) {
+                    count++;
                 }
             }
+            if (count == profiles.size()) {
+                result = 1;
+            } else {
+                result = -1;
+            }
+        }
 //        }
         return result;
     }
+
     //REVIEW
     public boolean hasThisData(String userName, String email, String function, int state, List<UserProfile> profileChoosenList) {
         boolean result = false;
@@ -328,7 +329,7 @@ public class SystemUser {
         // Check if the object has the list profiles parameter.
         int res5 = hasAllProfilesInTheList(profileChoosenList);
 
-        if(res1 != -1 && res2 != -1 && res3 != -1 && res4 != -1 && res5 != -1) {
+        if (res1 != -1 && res2 != -1 && res3 != -1 && res4 != -1 && res5 != -1) {
             int match = res1 + res2 + res3 + res4 + res5;
 
             if (match > 0) {
@@ -337,6 +338,7 @@ public class SystemUser {
         }
         return result;
     }
+
 
     /**
      * Method to update old password with the new password
@@ -351,16 +353,17 @@ public class SystemUser {
         return msg;
     }
 
+
     /**
      * Method to validate the oldpassword from the UI with thew old password from the System User
      **/
-
     private boolean validateOldPassword(String oldpasswordUI) {
 
         String oldpasswordSU = decryptPassword(this.password.getPwd());
 
         return oldpasswordUI.equals(oldpasswordSU);
     }
+
 
     /**
      * Override Methods

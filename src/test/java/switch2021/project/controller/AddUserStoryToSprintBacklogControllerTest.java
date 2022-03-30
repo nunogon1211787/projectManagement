@@ -3,11 +3,11 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
-import switch2021.project.model.Project.BusinessSector;
-import switch2021.project.model.Project.Customer;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Project.Sprint;
-import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.valueObject.BusinessSector;
+import switch2021.project.valueObject.Customer;
+import switch2021.project.valueObject.Typology;
 
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,7 +31,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
 
         company.getProjectStore().saveNewProject(project);
 
-        boolean userStory = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createAndSaveUserStory( "US001",
+        company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createAndSaveUserStory( "US001",
                 1, "Fazer coisas cool",5);
 
         //Act

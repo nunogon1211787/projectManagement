@@ -1,12 +1,11 @@
 package switch2021.project.mapper;
 
 import switch2021.project.dto.CreateTaskDTO;
-import switch2021.project.valueObject.Resource.Resource;
+import switch2021.project.model.Task.Task;
+import switch2021.project.valueObject.Resource;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Project.Task;
-import switch2021.project.model.TaskType.TaskType;
 import switch2021.project.utils.App;
-
+import switch2021.project.valueObject.TaskType;
 import java.util.List;
 
 public class TaskMapper {
@@ -14,7 +13,6 @@ public class TaskMapper {
     /**
      * Method to break a Create Task DTO data
      **/
-
     public Task toModel(CreateTaskDTO dto, Project proj){
 
         String name = dto.getName();
@@ -26,8 +24,7 @@ public class TaskMapper {
         if(dto.getPrecedenceList() == null) {
             return new Task(name, description, effortEstimate, type, responsible);
         }
-
-        else{
+        else {
             List<String> precedenceList = dto.getPrecedenceList();
             return new Task(name, description, effortEstimate, type, responsible, precedenceList);
         }

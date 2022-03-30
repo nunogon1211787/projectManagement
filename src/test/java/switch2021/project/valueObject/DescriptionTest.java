@@ -2,8 +2,9 @@ package switch2021.project.valueObject;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.Typology.Typology;
+
 import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DescriptionTest {
@@ -26,16 +27,12 @@ class DescriptionTest {
 
     @Test
     public void shouldThrowException_becauseDescriptionIsNull() {
-        assertThrows(NullPointerException.class, () -> {
-            new Description(null);
-        });
+        assertThrows(NullPointerException.class, () -> new Description(null));
     }
 
     @Test
     public void shouldThrowException_becauseDescriptionIsEmpty() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new Description("");
-        });
+        assertThrows(IllegalArgumentException.class, () -> new Description(""));
     }
 
     @Test
@@ -57,7 +54,7 @@ class DescriptionTest {
         Description description = new Description("Test");
         Description description2 = new Description("Test");
         //Assert
-        assertTrue(description.equals(description2));
+        assertEquals(description, description2);
     }
 
     @Test
@@ -65,9 +62,9 @@ class DescriptionTest {
     public void overrideTestEqualTrue() {
         //Arrange
         Description description = new Description("Test");
-        Description description2 = description;
+        Description description2 = new Description("Test");
         //Assert
-        assertTrue(description.equals(description2));
+        assertEquals(description, description2);
     }
 
     @Test
@@ -77,7 +74,7 @@ class DescriptionTest {
         Description description = new Description("Test1");
         Description description3 = new Description("Test");
         //Assert
-        assertFalse(description.equals(description3));
+        assertNotEquals(description, description3);
     }
 
     @Test
@@ -87,7 +84,7 @@ class DescriptionTest {
         Description description = new Description("Test");
         Description description3 = null;
         //Assert
-        assertFalse(description.equals(description3));
+        assertNotEquals(description, description3);
     }
 
     @Test
@@ -97,7 +94,7 @@ class DescriptionTest {
         Description description = new Description("Test");
         Typology test = new Typology("test");
         //Assert
-        assertFalse(description.equals(test));
+        assertNotEquals(description, test);
     }
 
     @Test
@@ -106,7 +103,7 @@ class DescriptionTest {
         Description description = new Description("Test");
         Description description2 = new Description("Test");
         //Assert
-        assertEquals(description.hashCode(),description2.hashCode());
+        assertEquals(description.hashCode(), description2.hashCode());
     }
 
     @Test
@@ -115,6 +112,6 @@ class DescriptionTest {
         Description description = new Description("Test");
         Typology description2 = new Typology("Test");
         //Assert
-        assertNotEquals(description.hashCode(),description2.hashCode());
+        assertNotEquals(description.hashCode(), description2.hashCode());
     }
 }

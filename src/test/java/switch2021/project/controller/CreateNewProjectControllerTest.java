@@ -16,7 +16,7 @@ public class CreateNewProjectControllerTest {
         //Arrange
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().createAndAddBusinessSector("sector");
-        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "Teste@teste.com", 123456789));
+        company.getCustomerStore().createAndAddCustomer("Teste", "Teste@teste.com", 123456789);
 
         //Act
         CreateProjectController controller = new CreateProjectController(company);
@@ -36,7 +36,7 @@ public class CreateNewProjectControllerTest {
         //Arrange
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().createAndAddBusinessSector("sector");
-        company.getCustomerStore().saveNewCustomer(company.getCustomerStore().createCustomer("Teste", "teste@teste.com", 123456789));
+        company.getCustomerStore().createAndAddCustomer("Teste", "teste@teste.com", 123456789);
 
         //Act
         CreateProjectController controller = new CreateProjectController(company);
