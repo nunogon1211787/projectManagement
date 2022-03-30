@@ -68,8 +68,8 @@ class UpdateStatusUsControllerTest {
         Project project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
         company.getProjectStore().saveNewProject(project);
-        UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
-        UserStory userStory2 = new UserStory("US001", 3, "Fazer tal e coiso", 5);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("As a PO, i want to test this string", 3, "Fazer tal e coiso", 5);
         Sprint sprint = project.getSprintList().createSprint("Sprintao", LocalDate.now(), 12);
         project.getSprintList().saveSprint(sprint);
         project.getCurrentSprint().getSprintBacklog().saveUserStoryToSprintBacklog(userStory);

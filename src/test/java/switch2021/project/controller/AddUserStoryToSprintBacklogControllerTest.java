@@ -31,7 +31,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
 
         company.getProjectStore().saveNewProject(project);
 
-        company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createAndSaveUserStory( "US001",
+        company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createAndSaveUserStory( "As a PO, i want to test this string",
                 1, "Fazer coisas cool",5);
 
         //Act

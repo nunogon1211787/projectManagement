@@ -48,7 +48,7 @@ public class RegisterWorkToTaskControllerTest {
         project1.getSprintList().saveSprint(sprint1);
         int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
-        project1.getProductBacklog().createAndSaveUserStory("US001", 1, "description", 5);
+        project1.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "description", 5);
         int id_UserStory1 = project1.getProductBacklog().getUserStoryList().get(0).getIdUserStory(); //1
 
         sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
@@ -99,7 +99,7 @@ public class RegisterWorkToTaskControllerTest {
         project1.getSprintList().saveSprint(sprint1);
         int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
-        project1.getProductBacklog().createAndSaveUserStory("US001", 1, "description", 5);
+        project1.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "description", 5);
         int id_UserStory1 = project1.getProductBacklog().getUserStoryList().get(0).getIdUserStory(); //1
         sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
@@ -152,7 +152,7 @@ public class RegisterWorkToTaskControllerTest {
         project1.getSprintList().saveSprint(sprint1);
         int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
-        project1.getProductBacklog().createAndSaveUserStory("US001", 1, "description", 5);
+        project1.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "description", 5);
 
         int id_UserStory1 = project1.getProductBacklog().getUserStoryList().get(0).getIdUserStory(); //1
         sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));

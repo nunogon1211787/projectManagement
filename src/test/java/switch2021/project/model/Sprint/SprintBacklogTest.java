@@ -49,7 +49,7 @@ class SprintBacklogTest {
         // Arrange
         int priority = 5;
         String description = "Validate";
-        UserStory userstory = new UserStory("US001", priority, description, 5);
+        UserStory userstory = new UserStory("As a PO, i want to test this string", priority, description, 5);
         sprintBacklog.saveUserStoryToSprintBacklog(userstory);
         // Act
 
@@ -78,9 +78,9 @@ class SprintBacklogTest {
         // Arrange
         int priority = 5;
         String description = "Validate";
-        UserStory userstory = new UserStory("US001", priority, description, 5);
+        UserStory userstory = new UserStory("As a PO, i want to test this string", priority, description, 5);
         sprintBacklog.saveUserStoryToSprintBacklog(userstory);
-        UserStory userstory2 = new UserStory("US003", priority, description, 5);
+        UserStory userstory2 = new UserStory("As a PO, i want to test this string", priority, description, 5);
         // Act
 
         assertNotEquals(sprintBacklog.getUserStory(userstory.getIdUserStory()), userstory2);
@@ -92,7 +92,7 @@ class SprintBacklogTest {
         // Arrange
         int priority = 5;
         String description = "Validate";
-        UserStory userstory = new UserStory("US001", priority, description, 5);
+        UserStory userstory = new UserStory("As a PO, i want to test this string", priority, description, 5);
         sprintBacklog.saveUserStoryToSprintBacklog(userstory);
 
         // Act
@@ -134,7 +134,7 @@ class SprintBacklogTest {
         // Arrange
         int priority = 5;
         String description = "Validate";
-        UserStory userstory = new UserStory("US001", priority, description, 5);
+        UserStory userstory = new UserStory("As a PO, i want to test this string", priority, description, 5);
         boolean test = sprintBacklog.saveUserStoryToSprintBacklog(userstory);
         // Act
         assertTrue(test);

@@ -51,7 +51,7 @@ class CreateUsTaskControllerTest {
         project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
-        UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
 
 
@@ -94,7 +94,7 @@ class CreateUsTaskControllerTest {
         project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
-        UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
 
         //Get us task list
@@ -125,7 +125,7 @@ class CreateUsTaskControllerTest {
         project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
-        UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
 
         //Create project team
@@ -172,7 +172,7 @@ class CreateUsTaskControllerTest {
         project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
-        UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
 
         //Get project team names
@@ -203,7 +203,7 @@ class CreateUsTaskControllerTest {
         project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
-        UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
 
         //Create project team
@@ -249,7 +249,7 @@ class CreateUsTaskControllerTest {
         project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
-        UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
 
         //Create project team
@@ -302,7 +302,7 @@ class CreateUsTaskControllerTest {
         project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
-        UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
         sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
 
         //Create project team

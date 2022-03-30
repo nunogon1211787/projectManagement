@@ -87,28 +87,25 @@ public class CreateUserStoryControllerTest {
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = 1;
         String description = "Make test";
-        String name = null;
-        String name2 = "d";
-        String name3 = "dd";
-        String name4 = "";
+        String title2 = "d";
+        String title3 = "As a PO, i to test this string";
+        String title4 = "";
         UserStoryStatus status = new UserStoryStatus("To do");
-        UserStoryDto userStoryDto = new UserStoryDto(name, status, priority, description);
-        UserStoryDto userStoryDto2 = new UserStoryDto(name2, status, priority, description);
-        UserStoryDto userStoryDto3 = new UserStoryDto(name3, status, priority, description);
-        UserStoryDto userStoryDto4 = new UserStoryDto(name4, status, priority, description);
+        UserStoryDto userStoryDto2 = new UserStoryDto(title2, status, priority, description);
+        UserStoryDto userStoryDto3 = new UserStoryDto(title3, status, priority, description);
+        UserStoryDto userStoryDto4 = new UserStoryDto(title4, status, priority, description);
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto));
         Exception exception2 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto2));
         Exception exception3 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto3));
         Exception exception4 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto4));
 
 
         //Assert
-        assertTrue(exception.getMessage().contains("Name cannot be blank."));
-        assertTrue(exception2.getMessage().contains("Name must be at least 3 characters"));
-        assertTrue(exception3.getMessage().contains("Name must be at least 3 characters"));
-        assertTrue(exception4.getMessage().contains("Name cannot be blank."));
+
+        assertTrue(exception2.getMessage().contains("Title need to begin with - as"));
+        assertTrue(exception3.getMessage().contains("Title don't contain the word want"));
+        assertTrue(exception4.getMessage().contains("Title cannot be blank"));
 
     }
 
@@ -137,9 +134,9 @@ public class CreateUserStoryControllerTest {
 //        int priority2 = 5;
 //        int priority3 = 0;
         String description = "teste";
-        String name = "teste";
+        String title = "As a PO, i want to test this string";
         UserStoryStatus status = new UserStoryStatus("To do");
-        UserStoryDto userStoryDto = new UserStoryDto(name, status, priority, description);
+        UserStoryDto userStoryDto = new UserStoryDto(title, status, priority, description);
 
         // Act
         createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
@@ -148,7 +145,7 @@ public class CreateUserStoryControllerTest {
         assertNotNull(userStoryDto);
         assertEquals(priority, userStoryDto.getPriority());
         assertEquals(description, userStoryDto.getDescription().getText());
-        assertEquals(name, userStoryDto.getTitle());
+        assertEquals(title, userStoryDto.getTitle());
 
     }
 
@@ -160,9 +157,9 @@ public class CreateUserStoryControllerTest {
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = 1;
         String description = "t";
-        String name = "teste";
+        String title = "As a PO, i want to test this string";
         UserStoryStatus status = new UserStoryStatus("To do");
-        UserStoryDto userStoryDto = new UserStoryDto(name, status, priority, description);
+        UserStoryDto userStoryDto = new UserStoryDto(title, status, priority, description);
 
         // Act
         createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
@@ -171,7 +168,7 @@ public class CreateUserStoryControllerTest {
         assertNotNull(userStoryDto);
         assertEquals(priority, userStoryDto.getPriority());
         assertEquals(description, userStoryDto.getDescription().getText());
-        assertEquals(name, userStoryDto.getTitle());
+        assertEquals(title, userStoryDto.getTitle());
 
     }
 
@@ -181,13 +178,13 @@ public class CreateUserStoryControllerTest {
         UserStoryStatus status = new UserStoryStatus("To do");
         int priority = 1;
         String description = "teste";
-        UserStoryDto userStoryDto = new UserStoryDto("Teste", status, priority, description);
+        UserStoryDto userStoryDto = new UserStoryDto("As a PO, i want to test this string", status, priority, description);
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
 
         ProductBacklog project_2022_1 = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog();
         assertEquals(1, project_2022_1.getUserStoryList().size());
-        assertEquals(userStoryDto.getTitle(), project_2022_1.getUserStoryList().get(0).getTitle());
+        assertEquals(userStoryDto.getTitle(), project_2022_1.getUserStoryList().get(0).getTitle().getUsTitle());
         assertEquals(userStoryDto.getPriority(), project_2022_1.getUserStoryList().get(0).getPriority());
         assertEquals(userStoryDto.getUserStoryStatus(), project_2022_1.getUserStoryList().get(0).getUserStoryStatus());
         assertEquals(userStoryDto.getDescription().getText(), project_2022_1.getUserStoryList().get(0).getDescription().getText());

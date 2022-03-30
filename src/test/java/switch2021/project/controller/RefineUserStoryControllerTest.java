@@ -37,16 +37,16 @@ public class RefineUserStoryControllerTest {
 
         //UserStory Creation and save on Product Backlog
         UserStoryStatus statusToDo = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
-        UserStory userStory1 = new UserStory("US001", 4, "userstory1", 5);
+        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 4, "userstory1", 5);
         userStory1.setIdUserStory(0);
         proj1.getProductBacklog().getUserStoryList().add(userStory1);
-        UserStory userStory2 = new UserStory("US002", 3, "userstory2", 5);
+        UserStory userStory2 = new UserStory("As a sm, i want to test this string", 3, "userstory2", 5);
         userStory2.setIdUserStory(1);
         proj1.getProductBacklog().getUserStoryList().add(userStory2);
-        UserStory userStory3 = new UserStory("US003", 1, "userstory3", 5);
+        UserStory userStory3 = new UserStory("As a user, i want to test this string", 1, "userstory3", 5);
         userStory3.setIdUserStory(2);
         proj1.getProductBacklog().getUserStoryList().add(userStory3);
-        UserStory userStory4 = new UserStory("US004", 0, "userstory4", 5);
+        UserStory userStory4 = new UserStory("As a diretor, i want to test this string", 0, "userstory4", 5);
         userStory4.setIdUserStory(3);
         proj1.getProductBacklog().getUserStoryList().add(userStory4);
 
@@ -83,16 +83,16 @@ public class RefineUserStoryControllerTest {
 
         //UserStory Creation and save on Product Backlog
         UserStoryStatus statusToDo = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
-        UserStory userStory1 = new UserStory("US001", 4, "userstory1", 5);
+        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 4, "userstory1", 5);
         userStory1.setIdUserStory(0);
         proj1.getProductBacklog().getUserStoryList().add(userStory1);
-        UserStory userStory2 = new UserStory("US002", 3, "userstory2", 5);
+        UserStory userStory2 = new UserStory("As a SO, i want to test this string", 3, "userstory2", 5);
         userStory2.setIdUserStory(1);
         proj1.getProductBacklog().getUserStoryList().add(userStory2);
-        UserStory userStory3 = new UserStory("US003", 1, "userstory3", 5);
+        UserStory userStory3 = new UserStory("As a APO, i want to test this string", 1, "userstory3", 5);
         userStory3.setIdUserStory(2);
         proj1.getProductBacklog().getUserStoryList().add(userStory3);
-        UserStory userStory4 = new UserStory("US004", 0, "userstory4", 5);
+        UserStory userStory4 = new UserStory("As a dPO, i want to test this string", 0, "userstory4", 5);
         userStory4.setIdUserStory(3);
         proj1.getProductBacklog().getUserStoryList().add(userStory4);
 
@@ -133,13 +133,13 @@ public class RefineUserStoryControllerTest {
         company.getProjectStore().saveNewProject(proj1);
 
         //UserStory Creation and save on Product Backlog
-        UserStory userStory1 = new UserStory("US001", 4, "userstory1", 5);
+        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 4, "userstory1", 5);
         proj1.getProductBacklog().getUserStoryList().add(userStory1);
-        UserStory userStory2 = new UserStory("US002", 3, "userstory2", 5);
+        UserStory userStory2 = new UserStory("As a SPO, i want to test this string", 3, "userstory2", 5);
         proj1.getProductBacklog().getUserStoryList().add(userStory2);
-        UserStory userStory3 = new UserStory("US003", 1, "userstory3", 5);
+        UserStory userStory3 = new UserStory("As a APO, i want to test this string", 1, "userstory3", 5);
         proj1.getProductBacklog().getUserStoryList().add(userStory3);
-        UserStory userStory4 = new UserStory("US004", 0, "userstory4", 5);
+        UserStory userStory4 = new UserStory("As a SPO, i want to test this string", 0, "userstory4", 5);
         proj1.getProductBacklog().getUserStoryList().add(userStory4);
 
         //Act

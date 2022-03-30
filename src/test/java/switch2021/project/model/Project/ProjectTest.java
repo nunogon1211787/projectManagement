@@ -274,9 +274,9 @@ class ProjectTest {
     @DisplayName("validate that list have results (not null) and check list size are correct")
     public void getProductBacklogWithResults() {
         // Arrange
-        proj1.getProductBacklog().createAndSaveUserStory("US001", 1, "making test", 5);
-        proj1.getProductBacklog().createAndSaveUserStory("US002", 1, "making other test", 5);
-        proj1.getProductBacklog().createAndSaveUserStory("US003", 1, "making test 4", 5);
+        proj1.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "making test", 5);
+        proj1.getProductBacklog().createAndSaveUserStory("As a TO, i want to test this string", 1, "making other test", 5);
+        proj1.getProductBacklog().createAndSaveUserStory("As a SO, i want to test this string", 1, "making test 4", 5);
         // Act
         //Assert
         assertNotNull(proj1.getProductBacklog());

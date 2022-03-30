@@ -130,7 +130,7 @@ class UserStoryEffortControllerTest {
         Sprint sprint1 = new Sprint("teste1", LocalDate.now());
         sprint1.setIdSprint(1);
         project1.getSprintList().saveSprint(sprint1);
-        UserStory story = new UserStory("teste", 5, "validate", 5);
+        UserStory story = new UserStory("As a PO, i want to test this string", 5, "validate", 5);
         project1.getSprintList().getSprintById(1).getSprintBacklog().saveUserStoryToSprintBacklog(story);
         company.getProjectStore().saveNewProject(project1);
         controller.getProjectByCode("Project_2022_1");

@@ -59,11 +59,11 @@ public class ChangePriorityUSControllerTest {
         input = new Resource(newUser, startDate, endDate, 100, .5);
         input2 = new Resource(newUser2, startDate, endDate, 100, .5);
         userStoryStatus = new UserStoryStatus("coiso");
-        userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
         userStory.setIdUserStory(0);
-        userStory2 = new UserStory("US001", 3, "Fazer tal e coiso", 5);
+        userStory2 = new UserStory("As a diretor, i want to test this string", 3, "Fazer tal e coiso", 5);
         userStory2.setIdUserStory(1);
-        userStory3 = new UserStory("US001", 4, "Fazer tal e coiso também", 5);
+        userStory3 = new UserStory("As a SM, i want to test this string", 4, "Fazer tal e coiso também", 5);
         userStory3.setIdUserStory(2);
         project.getProductBacklog().getUserStoryList().add(userStory);
         project.getProductBacklog().getUserStoryList().add(userStory2);
@@ -74,31 +74,6 @@ public class ChangePriorityUSControllerTest {
         project.addResource(input);
         project2.addResource(input);
 
-    }
-
-    @Test
-    void getUserStoryTest() {
-        //Arrange
-        ChangePriorityUSController change = new ChangePriorityUSController(company);
-        UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
-        userStory.setIdUserStory(0);
-        UserStory userStory2 = new UserStory("US001", 3, "Fazer tal e coiso", 5);
-        userStory2.setIdUserStory(1);
-        UserStory userStory3 = new UserStory("US001", 4, "Fazer tal e coiso também", 5);
-        userStory3.setIdUserStory(2);
-        //Act
-        change.getProjectStore();
-        change.getProject("Project_2022_1");
-        change.getProductBacklog();
-
-        ProductBacklog testPB = new ProductBacklog();
-        testPB.getUserStoryList().add(userStory);
-        testPB.getUserStoryList().add(userStory2);
-        testPB.getUserStoryList().add(userStory3);
-        //Assert
-        assertEquals(testPB.getUserStoryList().get(0), change.getUserStory(0));
-        assertEquals(testPB.getUserStoryList().get(1), change.getUserStory(1));
-        assertEquals(testPB.getUserStoryList().get(2), change.getUserStory(2));
     }
 
 

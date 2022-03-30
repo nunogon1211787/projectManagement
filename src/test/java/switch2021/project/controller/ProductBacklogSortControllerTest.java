@@ -180,10 +180,10 @@ public class ProductBacklogSortControllerTest {
         ProjectTeam projectTeam = new ProjectTeam(resFac);// Arrange
 
         company.getProjectStore().saveNewProject(project);
-        project.getProductBacklog().createAndSaveUserStory("US001", 2, "create user story", 5);
-        project.getProductBacklog().createAndSaveUserStory("US001", 1, "sort user story", 5);
-        project.getProductBacklog().createAndSaveUserStory("US001", 3, "backlog sorted", 5);
-        project.getProductBacklog().createAndSaveUserStory("US001", 5, "show sorted", 5);
+        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 2, "create user story", 5);
+        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "sort user story", 5);
+        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 3, "backlog sorted", 5);
+        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 5, "show sorted", 5);
 
         projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
@@ -223,9 +223,9 @@ public class ProductBacklogSortControllerTest {
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         company.getProjectStore().saveNewProject(project);
-        project.getProductBacklog().createAndSaveUserStory("US001", 2, "create user story", 5);
-        project.getProductBacklog().createAndSaveUserStory("US001", 1, "sort user story", 5);
-        project.getProductBacklog().createAndSaveUserStory("US001", 3, "backlog sorted", 5);
+        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 2, "create user story", 5);
+        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "sort user story", 5);
+        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 3, "backlog sorted", 5);
 
         projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
@@ -234,7 +234,7 @@ public class ProductBacklogSortControllerTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company, mapper, mapperPB);
             productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
-            project.getProductBacklog().createAndSaveUserStory("US001", 6, "show sorted", 5);
+            project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 6, "show sorted", 5);
             productBacklogSortController.getUsSortedByPriority("123testcode");
         });
         // Assert
@@ -261,10 +261,10 @@ public class ProductBacklogSortControllerTest {
         ProjectTeam projectTeam = new ProjectTeam(resFac);// Arrange
 
         company.getProjectStore().saveNewProject(project);
-        project.getProductBacklog().createAndSaveUserStory("US001", 2, "create user story", 5);
-        project.getProductBacklog().createAndSaveUserStory("US001", 1, "sort user story", 5);
-        project.getProductBacklog().createAndSaveUserStory("US001", 3, "backlog sorted", 5);
-        project.getProductBacklog().createAndSaveUserStory("US001", 5, "show sorted", 5);
+        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 2, "create user story", 5);
+        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "sort user story", 5);
+        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 3, "backlog sorted", 5);
+        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 5, "show sorted", 5);
 
         projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
@@ -276,19 +276,19 @@ public class ProductBacklogSortControllerTest {
 
         // Assert
 
-        assertEquals(project.getProductBacklog().getUserStoryList().get(0).getTitle(), userStoryListDtoList.get(0).getTitle());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(0).getTitle().getUsTitle(), userStoryListDtoList.get(0).getTitle());
         assertEquals(project.getProductBacklog().getUserStoryList().get(0).getUserStoryStatus(), userStoryListDtoList.get(0).getUserStoryStatus());
         assertEquals(project.getProductBacklog().getUserStoryList().get(0).getPriority(), userStoryListDtoList.get(0).getPriority());
         assertEquals(project.getProductBacklog().getUserStoryList().get(0).getDescription().getText(), userStoryListDtoList.get(0).getDescription().getText());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(1).getTitle(), userStoryListDtoList.get(1).getTitle());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(1).getTitle().getUsTitle(), userStoryListDtoList.get(1).getTitle());
         assertEquals(project.getProductBacklog().getUserStoryList().get(1).getUserStoryStatus(), userStoryListDtoList.get(1).getUserStoryStatus());
         assertEquals(project.getProductBacklog().getUserStoryList().get(1).getPriority(), userStoryListDtoList.get(1).getPriority());
         assertEquals(project.getProductBacklog().getUserStoryList().get(1).getDescription().getText(), userStoryListDtoList.get(1).getDescription().getText());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(2).getTitle(), userStoryListDtoList.get(2).getTitle());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(2).getTitle().getUsTitle(), userStoryListDtoList.get(2).getTitle());
         assertEquals(project.getProductBacklog().getUserStoryList().get(2).getUserStoryStatus(), userStoryListDtoList.get(2).getUserStoryStatus());
         assertEquals(project.getProductBacklog().getUserStoryList().get(2).getPriority(), userStoryListDtoList.get(2).getPriority());
         assertEquals(project.getProductBacklog().getUserStoryList().get(2).getDescription().getText(), userStoryListDtoList.get(2).getDescription().getText());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(3).getTitle(), userStoryListDtoList.get(3).getTitle());
+        assertEquals(project.getProductBacklog().getUserStoryList().get(3).getTitle().getUsTitle(), userStoryListDtoList.get(3).getTitle());
         assertEquals(project.getProductBacklog().getUserStoryList().get(3).getUserStoryStatus(), userStoryListDtoList.get(3).getUserStoryStatus());
         assertEquals(project.getProductBacklog().getUserStoryList().get(3).getPriority(), userStoryListDtoList.get(3).getPriority());
         assertEquals(project.getProductBacklog().getUserStoryList().get(3).getDescription().getText(), userStoryListDtoList.get(3).getDescription().getText());

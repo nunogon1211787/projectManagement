@@ -29,20 +29,20 @@ public class ProductBacklogTest {
 
         int priority = 1;
         String descriptionUS = "Default Story";
-        String name = "usmake";
+        String title = "As a PO, i want to test this string";
 
-        UserStory newUserStory = new UserStory(name, priority, descriptionUS, 5);
+        UserStory newUserStory = new UserStory(title, priority, descriptionUS, 5);
         when(status.getDescription()).thenReturn(description);
         when(description.getText()).thenReturn("To do");
 
-        when(userStoryFactory.createUserStory(name, priority, descriptionUS, 5)).thenReturn(newUserStory);
+        when(userStoryFactory.createUserStory(title, priority, descriptionUS, 5)).thenReturn(newUserStory);
         //Act
-        productBacklog.createAndSaveUserStory(name, priority, descriptionUS, 5);
+        productBacklog.createAndSaveUserStory(title, priority, descriptionUS, 5);
         // Assert
         assertEquals(status.getDescription().getText(), productBacklog.getUserStoryList().get(0).getUserStoryStatus().getDescription().getText());
         assertEquals(priority, productBacklog.getUserStoryList().get(0).getPriority());
         assertEquals(descriptionUS, productBacklog.getUserStoryList().get(0).getDescription().getText());
-        assertEquals(name, productBacklog.getUserStoryList().get(0).getTitle());
+        assertEquals(title, productBacklog.getUserStoryList().get(0).getTitle().getUsTitle());
     }
 
     @Test
@@ -92,14 +92,14 @@ public class ProductBacklogTest {
         UserStoryStatus status = new UserStoryStatus("To do");
         int priority = 1;
         String description = "D";
-        String name = "US001";
+        String title = "As a PO, i want to test this string";
         //Act
-        productBacklog.createAndSaveUserStory(name, priority, description, 5);
+        productBacklog.createAndSaveUserStory(title, priority, description, 5);
         // Assert
         assertEquals(status, productBacklog.getUserStoryList().get(0).getUserStoryStatus());
         assertEquals(priority, productBacklog.getUserStoryList().get(0).getPriority());
         assertEquals(description, productBacklog.getUserStoryList().get(0).getDescription().getText());
-        assertEquals(name, productBacklog.getUserStoryList().get(0).getTitle());
+        assertEquals(title, productBacklog.getUserStoryList().get(0).getTitle().getUsTitle());
     }
 
 
@@ -160,10 +160,10 @@ public class ProductBacklogTest {
         // Arrange
         UserStoryFactory userStoryFactory = new UserStoryFactory();
         ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
-        productBacklog.createAndSaveUserStory("US001", 1, "create user story", 5);
-        productBacklog.createAndSaveUserStory("US001", 3, "sort user story", 5);
-        productBacklog.createAndSaveUserStory("US001", 2, "backlog sorted", 5);
-        productBacklog.createAndSaveUserStory("US001", 5, "show sorted", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 1, "create user story", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 3, "sort user story", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 2, "backlog sorted", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 5, "show sorted", 5);
 
         // Act
         List<UserStory> userStoryList = productBacklog.getUsSortedByPriority();
@@ -184,11 +184,11 @@ public class ProductBacklogTest {
         Company company = new Company();
         UserStoryFactory userStoryFactory = new UserStoryFactory();
         ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
-        productBacklog.createAndSaveUserStory("US001", 1, "create user story", 5);
-        productBacklog.createAndSaveUserStory("US001", 3, "sort user story", 5);
-        productBacklog.createAndSaveUserStory("US001", 1, "backlog sorted", 5);
-        productBacklog.createAndSaveUserStory("US001", 5, "show sorted", 5);
-        productBacklog.createAndSaveUserStory("US001", 0, "show US", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 1, "create user story", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 3, "sort user story", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 1, "backlog sorted", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 5, "show sorted", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 0, "show US", 5);
         productBacklog.getActiveUserStoryList().get(0).setUserStoryStatus((company.getUserStoryStatusStore().getUserStoryStatusByDescription("Done")));
         productBacklog.getActiveUserStoryList().get(1).setUserStoryStatus((company.getUserStoryStatusStore().getUserStoryStatusByDescription("Cancelled")));
         productBacklog.getActiveUserStoryList().get(2).setUserStoryStatus((company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do")));
@@ -214,13 +214,13 @@ public class ProductBacklogTest {
         // Arrange
         UserStoryFactory userStoryFactory = new UserStoryFactory();
         ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
-        productBacklog.createAndSaveUserStory("US001", 1, "create user story", 5);
-        productBacklog.createAndSaveUserStory("US001", 2, "backlog sorted", 5);
-        productBacklog.createAndSaveUserStory("US001", 5, "show sorted", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 1, "create user story", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 2, "backlog sorted", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 5, "show sorted", 5);
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            productBacklog.createAndSaveUserStory("US001", 6, "sort user story", 5);
+            productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 6, "sort user story", 5);
             productBacklog.getUsSortedByPriority();
         });
 
@@ -235,7 +235,7 @@ public class ProductBacklogTest {
         Company company = new Company();
         UserStoryFactory userStoryFactory = new UserStoryFactory();
         ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
-        productBacklog.createAndSaveUserStory("US001", 4, "123testtest", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
         UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
 
         // Act
@@ -259,7 +259,7 @@ public class ProductBacklogTest {
             Company company = new Company();
             UserStoryFactory userStoryFactory = new UserStoryFactory();
             ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
-            productBacklog.createAndSaveUserStory("US001", 4, "123testtest", 5);
+            productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
             UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
             // Act
             new UserStory(productBacklog.getUserStoryList().get(0), userStoryStatus, 5, "");
@@ -273,7 +273,7 @@ public class ProductBacklogTest {
         Company company = new Company();
         UserStoryFactory userStoryFactory = new UserStoryFactory();
         ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
-        productBacklog.createAndSaveUserStory("US001", 4, "123testtest", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
         UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
 
         // Act
@@ -289,7 +289,7 @@ public class ProductBacklogTest {
     @DisplayName("Create/save UserStory Refine Fail - Description already Exist")
     public void createUserStoryRefineDescriptionAlreadyExistFail() {
         Company company = new Company();
-        company.getProductBacklog().createAndSaveUserStory("US001", 4, "123testtest", 5);
+        company.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
 
         assertThrows(IllegalArgumentException.class, () -> {
             UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
@@ -301,7 +301,7 @@ public class ProductBacklogTest {
     @DisplayName("Create/save UserStory Refine Fail - Priority Low")
     public void createUserStoryRefinePriorityLowFail() {
         Company company = new Company();
-        company.getProductBacklog().createAndSaveUserStory("US001", 4, "123testtest", 5);
+        company.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
 
         assertThrows(IllegalArgumentException.class, () -> {
             UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
@@ -313,7 +313,7 @@ public class ProductBacklogTest {
     @DisplayName("Create/save UserStory Refine Fail - Priority High")
     public void createUserStoryRefinePriorityHighFail() {
         Company company = new Company();
-        company.getProductBacklog().createAndSaveUserStory("US001", 4, "123testtest", 5);
+        company.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
 
         assertThrows(IllegalArgumentException.class, () -> {
             UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
@@ -325,7 +325,7 @@ public class ProductBacklogTest {
     @DisplayName("get User Story By Id Success")
     public void getUserStoryByIdSucess() {
         Company company = new Company();
-        company.getProductBacklog().createAndSaveUserStory("US001", 4, "123testtest", 5);
+        company.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
 
         assertEquals(company.getProductBacklog().getUserStoryList().get(0), company.getProductBacklog().getUserStoryById(1));
     }
@@ -334,7 +334,7 @@ public class ProductBacklogTest {
     @DisplayName("get User Story By Id Fail")
     public void getUserStoryByIdFail() {
         Company company = new Company();
-        company.getProductBacklog().createAndSaveUserStory("US001", 4, "123testtest", 5);
+        company.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
 
         assertNull(company.getProductBacklog().getUserStoryById(2));
         assertNotEquals(1, company.getProductBacklog().getUserStoryById(0));
@@ -351,7 +351,7 @@ public class ProductBacklogTest {
         String description = "Create user story";
 
         productBacklog.createAndSaveUserStory(
-                "US001", priority, description, 5);
+                "As a PO, i want to test this string", priority, description, 5);
         productBacklog.getUserStoryList().get(0).setUserStoryStatus(new UserStoryStatus("Completed"));
 
         // Act
@@ -401,9 +401,9 @@ public class ProductBacklogTest {
         ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
 
         // Act
-        productBacklog.createAndSaveUserStory("US001", 1, "create user story", 5);
-        productBacklog.createAndSaveUserStory("US001", 3, "sort user story", 5);
-        productBacklog.createAndSaveUserStory("US001", 1, "backlog sorted", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 1, "create user story", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 3, "sort user story", 5);
+        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 1, "backlog sorted", 5);
 
         // Assert
 

@@ -25,7 +25,7 @@ public class GetScrumBoardControllerTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        project.getProductBacklog().createAndSaveUserStory("Test", 3, "Description", 12);
+        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 3, "Description", 12);
         Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.now(), 2);
         project.getSprintList().saveSprint(sprint);
 

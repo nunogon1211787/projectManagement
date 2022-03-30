@@ -16,16 +16,16 @@ class UserStoryTest {
     void ValidateInfoUserStory() {
         //Arrange
         //Act
-        UserStory userStory = new UserStory("US001", 1, "US001 - Test", 40);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 1, "As a PO, i want to test this string - Test", 40);
         //Assert
-        assertEquals("US001", userStory.getTitle());
-        assertEquals("US001 - Test", userStory.getDescription().getText());
+        assertEquals("As a PO, i want to test this string", userStory.getTitle().getUsTitle());
+        assertEquals("As a PO, i want to test this string - Test", userStory.getDescription().getText());
     }
 
 
     @Test
     void setPriorityTest() {
-        UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
         userStory.setPriority(4);
         assertEquals(4, userStory.getPriority());
     }
@@ -33,7 +33,7 @@ class UserStoryTest {
 
     @Test
     void hasCodeTest() {
-       UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
+       UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
 
         boolean expected = userStory.hasCode(userStory.getIdUserStory());
         assertTrue(expected);
@@ -41,7 +41,7 @@ class UserStoryTest {
 
     @Test
     void hasCodeTest2() {
-       UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
+       UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
 
         boolean expected = userStory.hasCode(4);
         assertFalse(expected);
@@ -49,7 +49,7 @@ class UserStoryTest {
 
     @Test
     void setDescriptionTest() {
-       UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
+       UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
 
         userStory.setDescription("Fazer coiso");
         assertEquals("Fazer coiso", userStory.getDescription().getText());
@@ -59,8 +59,8 @@ class UserStoryTest {
     @Test
     void setParentUserStoryTest() {
         //Arrange
-        UserStory userStory = new UserStory("US001", 1, "US001 - Test", 40);
-        UserStory userStory_parent = new UserStory("US002", 1, "US002 - Test", 40);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 1, "US001 - Test", 40);
+        UserStory userStory_parent = new UserStory("As a PO, i want to test this string", 1, "As a PO, i want to test this string - Test", 40);
 
         //Act
         userStory.setParentUserStory(userStory_parent);
@@ -71,7 +71,7 @@ class UserStoryTest {
 
     @Test
     void setUserStoryStatusBooleanTest() {
-        UserStory userStory = new UserStory("US001", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
 
         UserStoryStatus userStoryStatus = mock(UserStoryStatus.class);
         userStory.setUserStoryStatusBoolean(userStoryStatus);
@@ -82,7 +82,7 @@ class UserStoryTest {
     @Test
     void setUpdateUserStoryWorkDoneTest() {
         //Arrange
-        UserStory userStory = new UserStory("US001", 1, "US001 - Test", 40);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 1, "US001 - Test", 40);
         Task task = mock(Task.class);
         when(task.getHoursSpent()).thenReturn(12.0);
 
@@ -95,7 +95,7 @@ class UserStoryTest {
 
     @Test
     void validatePriorityTestFail() {
-      UserStory  userStory = new UserStory("US001", 2, "Fazer tal", 5);
+      UserStory  userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
 
         boolean expected = userStory.validatePriority(6);
         assertFalse(expected);
@@ -103,7 +103,7 @@ class UserStoryTest {
 
     @Test
     void validatePriorityTestSuccess() {
-      UserStory  userStory = new UserStory("US001", 2, "Fazer tal", 5);
+      UserStory  userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
 
         boolean expected = userStory.validatePriority(1);
         assertTrue(expected);
@@ -111,7 +111,7 @@ class UserStoryTest {
 
     @Test
     void validatePriorityTestFailNegative() {
-     UserStory   userStory = new UserStory("US001", 2, "Fazer tal", 5);
+     UserStory   userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
 
         boolean expected = userStory.validatePriority(-1);
         assertFalse(expected);
@@ -119,7 +119,7 @@ class UserStoryTest {
 
     @Test
     void validatePriorityTestSuccessHighLimit() {
-     UserStory   userStory = new UserStory("US001", 2, "Fazer tal", 5);
+     UserStory   userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
 
         boolean expected = userStory.validatePriority(5);
         assertTrue(expected);
@@ -127,7 +127,7 @@ class UserStoryTest {
 
     @Test
     void validatePriorityTestSuccessLowLimit() {
-      UserStory  userStory = new UserStory("US001", 2, "Fazer tal", 5);
+      UserStory  userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
 
         boolean expected = userStory.validatePriority(0);
         assertTrue(expected);
@@ -137,7 +137,7 @@ class UserStoryTest {
     void isValidUserStoryDescription() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-        UserStory    userStory = new UserStory("US001", 2, "", 5);
+        UserStory    userStory = new UserStory("As a PO, i want to test this string", 2, "", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }
@@ -146,7 +146,7 @@ class UserStoryTest {
     void isValidUserStoryDescription2() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-          UserStory  userStory = new UserStory("US001", 2, "    ", 5);
+          UserStory  userStory = new UserStory("As a PO, i want to test this string", 2, "    ", 5);
             sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
         });
     }
@@ -180,15 +180,6 @@ class UserStoryTest {
     }
 
     @Test
-    void isValidUserStoryName4() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
-         UserStory   userStory = new UserStory(null, 2, "Fazer tal", 5);
-            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
-        });
-    }
-
-    @Test
     void isValidUserStoryName5() {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
@@ -199,15 +190,15 @@ class UserStoryTest {
 
     @Test
     void hashCodeTest() {
-        UserStory userStory1 = new UserStory("CCC", 1, "Fazer tal", 5);
-        UserStory userStory2 = new UserStory("AAA", 2, "Fazer tal e coiso", 5);
-        UserStory userStory3 = new UserStory("AAA", 2, "Fazer tal e coiso", 5);
+        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 1, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
+        UserStory userStory3 = new UserStory("As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
         UserStoryStatus status4 = new UserStoryStatus("teste5");
 
         assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
         assertEquals(userStory2.getDescription().getText(), userStory3.getDescription().getText());
         assertEquals(userStory2.getPriority(), userStory3.getPriority());
-        assertEquals(userStory2.getTitle(), userStory3.getTitle());
+        assertEquals(userStory2.getTitle().getUsTitle(), userStory3.getTitle().getUsTitle());
         assertEquals(userStory2.getTimeEstimate(), userStory3.getTimeEstimate());
         assertNotEquals(userStory2.getDescription().getText(), userStory1.getDescription().getText());
         assertNotEquals(null, userStory1);
@@ -219,8 +210,8 @@ class UserStoryTest {
 
     @Test
     void setID() {
-        UserStory userStory1 = new UserStory("CCC", 2, "Fazer tal", 5);
-        UserStory userStory2 = new UserStory("AAA", 2, "Fazer tal e coiso", 5);
+        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("As a IO, i want to test this string", 2, "Fazer tal e coiso", 5);
         userStory2.setIdUserStory(2);
 
         assertEquals(2, userStory2.getIdUserStory());
@@ -229,8 +220,8 @@ class UserStoryTest {
 
     @Test
     void setPriorityTrue() {
-        UserStory userStory1 = new UserStory("US001", 2, "Fazer tal", 5);
-        UserStory userStory2 = new UserStory("US002", 2, "Fazer tal e coiso", 5);
+        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("As a SO, i want to test this string", 2, "Fazer tal e coiso", 5);
         userStory2.setPriority(1);
         userStory1.setPriority(4);
 
@@ -240,8 +231,8 @@ class UserStoryTest {
     }
     @Test
     void setPriorityFalse() {
-        UserStory userStory1 = new UserStory("US001", 2, "Fazer tal", 5);
-        UserStory userStory2 = new UserStory("US002", 2, "Fazer tal e coiso", 5);
+        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
         userStory2.setPriority(1);
         userStory1.setPriority(6);
 

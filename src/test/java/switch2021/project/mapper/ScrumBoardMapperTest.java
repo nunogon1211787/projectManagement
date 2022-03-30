@@ -18,15 +18,15 @@ public class ScrumBoardMapperTest {
     public void scrumBoardDTOTest() {
         //Arrange
         ScrumBoardMapper mapper = new ScrumBoardMapper();
-        UserStory userStory = new UserStory("name", 5, "description", 5);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 5, "description", 5);
         userStory.setIdUserStory(0);
 
         //Act
         UserStoryStatusDTO dto = mapper.toDTO(userStory);
 
         //Assert
-        assertEquals(dto.getUserStoryTitle(),userStory.getTitle());
-        assertEquals("name",dto.getUserStoryTitle());
+        assertEquals(dto.getUserStoryTitle(),userStory.getTitle().getUsTitle());
+        assertEquals("As a PO, i want to test this string",dto.getUserStoryTitle());
         assertEquals(dto.getUserStoryDescription(),userStory.getDescription().getText());
         assertEquals("description", dto.getUserStoryDescription());
         assertEquals(dto.getUserStoryPriority(),userStory.getPriority());
@@ -45,11 +45,11 @@ public class ScrumBoardMapperTest {
         //Arrange
         List<UserStory> list = new ArrayList<>();
         ScrumBoardMapper mapper = new ScrumBoardMapper();
-        UserStory userStory = new UserStory("name", 5, "description", 5);
+        UserStory userStory = new UserStory("As a PO, i want to test this string", 5, "description", 5);
         userStory.setIdUserStory(0);
-        UserStory userStory2 = new UserStory("nameC", 4, "description2", 4);
+        UserStory userStory2 = new UserStory("As a VO, i want to test this string", 4, "description2", 4);
         userStory2.setIdUserStory(1);
-        UserStory userStory3 = new UserStory("nameD", 3, "description3", 3);
+        UserStory userStory3 = new UserStory("As a TO, i want to test this string", 3, "description3", 3);
         userStory3.setIdUserStory(2);
         list.add(userStory);
         list.add(userStory2);

@@ -6,6 +6,8 @@ import switch2021.project.model.Task.Task;
 import switch2021.project.valueObject.Description;
 import switch2021.project.stores.TaskList;
 import switch2021.project.valueObject.UserStoryStatus;
+import switch2021.project.valueObject.UsTitle;
+
 import java.util.Objects;
 
 /**
@@ -20,7 +22,7 @@ public class UserStory {
      * Attributes
      **/
     private int idUserStory;
-    private String title; //The title of a US follows AS <role> I WANT <objective> FOR <motivation> https://productcoalition.com/anatomy-of-a-great-user-story-f56fb1b63e38
+    private UsTitle title; //The title of a US follows AS <role> I WANT <objective> https://productcoalition.com/anatomy-of-a-great-user-story-f56fb1b63e38
     private UserStoryStatus userStoryStatus;
     private int priority;
     private Description description;
@@ -34,9 +36,9 @@ public class UserStory {
      * Constructor
      **/
     public UserStory(String title, int priority, String description, int timeEstimateInHours) {
-        isValidUserStory(title, priority);
+        isValidUserStory(priority);
 
-        this.title = title;
+        this.title = new UsTitle(title);
         this.description = new Description(description);
         this.userStoryStatus = new UserStoryStatus("To do");
         this.priority = priority;
@@ -45,9 +47,9 @@ public class UserStory {
     }
 
     public UserStory(UserStory userStoryToRefine, UserStoryStatus userStoryStatus, int priority, String description) {
-        this.title = userStoryToRefine.getTitle() + " _Refined";
+        this.title = new UsTitle(userStoryToRefine.getTitle().getUsTitle() + " _Refined");
 
-        isValidUserStory(title, priority);
+        isValidUserStory(priority);
 
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
@@ -56,9 +58,9 @@ public class UserStory {
     }
 
     public UserStory(String title, UserStoryStatus userStoryStatus, int priority, String description) {
-        isValidUserStory(title, priority);
+        isValidUserStory(priority);
 
-        this.title = title;
+        this.title = new UsTitle(title);
         this.userStoryStatus = userStoryStatus;
         this.priority = priority;
         this.description = new Description(description);
@@ -95,17 +97,10 @@ public class UserStory {
     /**
      * Method to validate entered info by Product Owner
      */
-    public void isValidUserStory(String title, int priority) {
+    public void isValidUserStory(int priority) {
         //check if priority is invalid
         if (priority < 0 || priority > 5) {
             throw new IllegalArgumentException("Check priority, cannot be < 0 or superior to 5.");
-        }
-        //check if title is invalid
-        if (title == null || title.trim().isEmpty()) {
-            throw new IllegalArgumentException("Name cannot be blank.");
-        }
-        if (title.length() <= 2) {
-            throw new IllegalArgumentException("Name must be at least 3 characters");
         }
     }
 
