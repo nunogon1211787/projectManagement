@@ -2,6 +2,8 @@ package switch2021.project.model.valueObject;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+
 @Getter
 public class TaskEffort {
 
@@ -12,7 +14,7 @@ public class TaskEffort {
     private final Minutes effortMinutes;
     private final Date effortDate;
     private final Description comment;
-    private final String attachment;
+    private final Attachment attachment;
 
 
     /**
@@ -23,6 +25,6 @@ public class TaskEffort {
         this.effortHours = new Hours(effortHours);
         this.effortMinutes = new Minutes(effortMinutes);
         this.comment = new Description(comment);
-        this.attachment = attachment;
+        this.attachment = new Attachment(attachment);
     }
 }

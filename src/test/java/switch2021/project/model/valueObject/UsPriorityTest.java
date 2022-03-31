@@ -20,7 +20,7 @@ public class UsPriorityTest {
 
     @Test
     @DisplayName("Validate that priority is correct - limit bound")
-    public void usPrioritySucessLimit2() {
+    public void usPrioritySuccessLimit2() {
         //Arrange
         int priority2 = 5;
         //Act

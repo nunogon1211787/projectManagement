@@ -69,7 +69,7 @@ class TaskTest {
         assertEquals(effortMinutes, task.getTaskEffortList().get(0).getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, task.getTaskEffortList().get(0).getEffortDate());
         assertEquals(comment, task.getTaskEffortList().get(0).getComment().getText());
-        assertEquals(attachment, task.getTaskEffortList().get(0).getAttachment());
+        assertEquals(attachment, task.getTaskEffortList().get(0).getAttachment().getExtension());
     }
 
     @Test
@@ -145,7 +145,7 @@ class TaskTest {
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
         task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
         Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
-        task.createAndSaveTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
+        task.createAndSaveTaskEffort(4, 0, effortDate2, "test2", ".xls");
 
         //Assert
         assertEquals(2, task.getTaskEffortList().size());
@@ -175,9 +175,9 @@ class TaskTest {
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
         task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
         Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
-        task.createAndSaveTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
+        task.createAndSaveTaskEffort(4, 0, effortDate2, "test2", ".doc");
         Date effortDate3 = new Date(LocalDate.of(2022, 1, 22));
-        task.createAndSaveTaskEffort(8, 0, effortDate3, "test3", ".pdf3");
+        task.createAndSaveTaskEffort(8, 0, effortDate3, "test3", ".xls");
 
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Finished");
 
@@ -212,8 +212,8 @@ class TaskTest {
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Finished");
         //Act
         task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
-        task.createAndSaveTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
-        task.createAndSaveTaskEffort(10, 0, effortDate3, "test3", ".pdf3");
+        task.createAndSaveTaskEffort(4, 0, effortDate2, "test2", ".doc");
+        task.createAndSaveTaskEffort(10, 0, effortDate3, "test3", ".pdf");
 
         //Assert
         assertEquals(3, task.getTaskEffortList().size());
@@ -247,9 +247,9 @@ class TaskTest {
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Finished");
         //Act
         task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
-        task.createAndSaveTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
-        task.createAndSaveTaskEffort(8, 0, effortDate3, "test3", ".pdf3");
-        task.createAndSaveTaskEffort(4, 0, effortDate4, "test4", ".pdf4");
+        task.createAndSaveTaskEffort(4, 0, effortDate2, "test2", ".pdf");
+        task.createAndSaveTaskEffort(8, 0, effortDate3, "test3", ".doc");
+        task.createAndSaveTaskEffort(4, 0, effortDate4, "test4", ".txt");
 
         //Assert
         assertEquals(4, task.getTaskEffortList().size());
@@ -378,7 +378,7 @@ class TaskTest {
         Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
         //Act
         task.createAndSaveTaskEffort(6, 0, effortDate, "test", ".pdf");
-        task.createAndSaveTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
+        task.createAndSaveTaskEffort(4, 0, effortDate2, "test2", ".doc");
         //Assert
         assertEquals(0.0, task.getEffortRemaining());
         assertEquals(10.0, task.getHoursSpent());

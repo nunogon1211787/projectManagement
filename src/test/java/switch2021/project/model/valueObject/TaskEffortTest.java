@@ -28,7 +28,7 @@ public class TaskEffortTest {
         assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment().getText());
-        assertEquals(attachment, taskEffort.getAttachment());
+        assertEquals(attachment, taskEffort.getAttachment().getExtension());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class TaskEffortTest {
         assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment().getText());
-        assertEquals(attachment, taskEffort.getAttachment());
+        assertEquals(attachment, taskEffort.getAttachment().getExtension());
     }
 
     @Test
@@ -66,7 +66,7 @@ public class TaskEffortTest {
         assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment().getText());
-        assertEquals(attachment, taskEffort.getAttachment());
+        assertEquals(attachment, taskEffort.getAttachment().getExtension());
     }
 
     @Test
@@ -154,7 +154,7 @@ public class TaskEffortTest {
         assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
         assertEquals(comment, taskEffort.getComment().getText());
-        assertEquals(attachment, taskEffort.getAttachment());
+        assertEquals(attachment, taskEffort.getAttachment().getExtension());
     }
 
 
