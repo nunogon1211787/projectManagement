@@ -5,6 +5,7 @@ import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Project.ProjectTeam;
 import switch2021.project.model.valueObject.ProjectStatus;
+import switch2021.project.model.valueObject.SprintDuration;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -59,7 +60,7 @@ public class EditProjectInfoController {
             this.project.setNumberOfSprints(numberOfSprints);
             this.project.setBudget(budget);
             this.project.setProjectStatus(status);
-            this.project.setSprintDuration(sprintDuration);
+            this.project.setSprintDuration(new SprintDuration(sprintDuration));
             this.project.setProjectTeam(projectTeam);
         }
         return result;

@@ -60,9 +60,10 @@ public class StartASprintControllerTest {
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
         joana4R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         proj1.getProjectTeam().saveResource(joana4R);
+        proj1.setSprintDuration(new SprintDuration(14));
         //Create a Sprint
         proj1.getSprintList().saveSprint(proj1.getSprintList().createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
-                proj1.getSprintDuration()));
+                proj1.getSprintDuration().getSprintDurationDays()));
         //Act
         StartASprintDTO sprintDTO = new StartASprintDTO(proj1.getCode(),
                 proj1.getSprintList().getSprints().get(0).getIdSprint(),
@@ -118,8 +119,9 @@ public class StartASprintControllerTest {
         joana4R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         proj1.getProjectTeam().saveResource(joana4R);
         //Create a Sprint
+        proj1.setSprintDuration(new SprintDuration(14));
         proj1.getSprintList().saveSprint(proj1.getSprintList().createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
-                proj1.getSprintDuration()));
+                proj1.getSprintDuration().getSprintDurationDays()));
         //Act
         StartASprintDTO sprintDTO = new StartASprintDTO(proj1.getCode(),
                 proj1.getSprintList().getSprints().get(0).getIdSprint(),

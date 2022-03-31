@@ -89,7 +89,7 @@ public class ProductBacklogTest {
         // Arrange
         UserStoryFactory userStoryFactory = new UserStoryFactory();
         ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
-        UserStoryStatus status = new UserStoryStatus("To do");
+        UserStoryStatus status = new UserStoryStatus("To do", true);
         int priority = 1;
         String description = "D";
         String title = "As a PO, i want to test this string";
@@ -352,7 +352,7 @@ public class ProductBacklogTest {
 
         productBacklog.createAndSaveUserStory(
                 "As a PO, i want to test this string", priority, description, 5);
-        productBacklog.getUserStoryList().get(0).setUserStoryStatus(new UserStoryStatus("Completed"));
+        productBacklog.getUserStoryList().get(0).setUserStoryStatus(new UserStoryStatus("Completed", true));
 
         // Act
         List<UserStory> userStoryList = productBacklog.getActiveUserStoryList();

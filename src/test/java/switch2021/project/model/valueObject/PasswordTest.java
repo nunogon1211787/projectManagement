@@ -18,6 +18,37 @@ public class PasswordTest {
         assertEquals("´ÚÈÕ×ÜÂ\u0094", pwdRes);
     }
 
+    @DisplayName("Password Success - 2 numbers")
+    @Test
+    public void ValidPasswordNumbers() {
+        //Arrange
+        Password pwd = new Password("Qwerty_12");
+        Password pwdRes = new Password("Qwerty_12");
+
+        //Assert
+        assertEquals(pwdRes, pwd);
+    }
+
+    @DisplayName("Password Success - lower case limit")
+    @Test
+    public void ValidPasswordLowerCaseLimit() {
+        //Arrange
+        Password pwd = new Password("QWERTy_1");
+        Password pwdRes = new Password("QWERTy_1");
+        //Assert
+        assertEquals(pwdRes, pwd);
+    }
+
+    @DisplayName("Password Success")
+    @Test
+    public void ValidPasswordMinLength() {
+        //Arrange
+        Password pwd = new Password("Qwerty_1");
+        String pwdRes = pwd.getPwd();
+        //Assert
+        assertEquals(pwd.getMIN_PASSWORD_LENGTH(),pwd.getPwd().length());
+    }
+
     @DisplayName("Password Fail - less 8")
     @Test
     public void PasswordFailLess8() {

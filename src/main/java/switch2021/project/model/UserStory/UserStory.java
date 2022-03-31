@@ -40,7 +40,7 @@ public class UserStory {
     public UserStory(String title, int priority, String description, int timeEstimateInHours) {
         this.title = new UsTitle(title);
         this.description = new Description(description);
-        this.userStoryStatus = new UserStoryStatus("To do");
+        this.userStoryStatus = new UserStoryStatus("To do", true);
         this.priority = new UsPriority(priority);
         this.timeEstimate = timeEstimateInHours;
         this.tasks = new TaskList();

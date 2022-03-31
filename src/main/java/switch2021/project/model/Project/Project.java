@@ -44,7 +44,7 @@ public class Project {
 
     private int numberOfSprints;
     private double budget;
-    private int sprintDuration;
+    private SprintDuration sprintDuration;
 
 
     /**
@@ -167,7 +167,7 @@ public class Project {
         Project project = (Project) o;
         return numberOfSprints == project.numberOfSprints
                 && Double.compare(project.budget, budget) == 0
-                && sprintDuration == project.sprintDuration
+                && Objects.equals(sprintDuration, project.sprintDuration)
                 && Objects.equals(code, project.code)
                 && Objects.equals(projectName, project.projectName)
                 && Objects.equals(description, project.description)

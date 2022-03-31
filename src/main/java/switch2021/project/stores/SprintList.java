@@ -106,7 +106,7 @@ public class SprintList {
             }
         }
         if (sprint == null) {
-            throw new NullPointerException("Do not exist a current sprint.");
+            throw new NullPointerException("Current sprint doesn't exist");
         }
         return sprint;
     }

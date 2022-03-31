@@ -155,7 +155,7 @@ class UserStoryTest {
         UserStory userStory1 = new UserStory("As a PO, i want to test this string", 1, "Fazer tal", 0);
         UserStory userStory2 = new UserStory("As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
         UserStory userStory3 = new UserStory("As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
-        UserStoryStatus status4 = new UserStoryStatus("teste5");
+        UserStoryStatus status4 = new UserStoryStatus("teste5", true);
 
         assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
         assertEquals(0, userStory1.getTimeEstimate());

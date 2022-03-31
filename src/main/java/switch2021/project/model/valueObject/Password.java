@@ -9,6 +9,7 @@ public class Password {
 
     /** Attributes **/
     private final String pwd;
+    private final int MIN_PASSWORD_LENGTH = 8;
 
     /** Constructor **/
     public Password (String pwd) {
@@ -20,33 +21,36 @@ public class Password {
     }
 
     public void checkPwdSize(String pwd){
-        if(pwd.length() < 8){
+        if(pwd.length() < MIN_PASSWORD_LENGTH){
             throw new IllegalArgumentException("Password too short.");
         }
     }
 
-    public void checkNumberPresence(String pwd){
+    public void checkNumberPresence(String pwd) {
         int count = 0;
         char[] chars = pwd.toCharArray();
-        for(char c : chars) {
+        for (char c : chars) {
             if (Character.isDigit(c)) {
-                count = count + 1;
+                count = 1;
+                break;
             }
         }
-        if(count == 0){
-                throw new IllegalArgumentException("Password should contain at least 1 number");
+        if (count == 0) {
+            throw new IllegalArgumentException("Password should contain at least 1 number");
         }
     }
+
 
     public void checkUpperCasePresence(String pwd){
         int count = 0;
         char[] chars = pwd.toCharArray();
         for(char c : chars) {
             if (Character.isUpperCase(c)) {
-                count = count + 1;
+                count = 1;
+                break;
             }
         }
-        if(count == 0){
+        if (count == 0) {
             throw new IllegalArgumentException("Password should contain at least 1 upper case");
         }
     }
@@ -56,11 +60,12 @@ public class Password {
         char[] chars = pwd.toCharArray();
         for(char c : chars) {
             if (Character.isLowerCase(c)) {
-                count = count + 1;
+                count = 1;
+                break;
             }
         }
-        if(count == 0){
-            throw new IllegalArgumentException("Password should contain at least 1 lower case");
+        if (count == 0) {
+            throw new IllegalArgumentException("Password should contain at least 1 upper case");
         }
     }
 

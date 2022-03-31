@@ -106,6 +106,16 @@ class SystemUserTest {
     }
 
     @Test
+    public void NewUserWithProfileDifferentFromVisitor() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserProfile profile = new UserProfile("Notvisitor");
+            SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "123456", "123456", "img_123", profile);
+        });
+    }
+
+    @Test
     public void verifyUpdateAndEncryptationOfPassword() {
 
         //Test to verify if the oldpassword is updated by the newpassword, and this last one is

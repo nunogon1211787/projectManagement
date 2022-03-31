@@ -103,7 +103,7 @@ public class CreateSprintControllerTest {
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 3000);
         proj1.setEndDate(LocalDate.now().plusDays(7));
-        proj1.setSprintDuration(10);
+        proj1.setSprintDuration(new SprintDuration(31));
         projectStore.saveNewProject(proj1);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -142,7 +142,7 @@ public class CreateSprintControllerTest {
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 3000);
         proj1.setEndDate(LocalDate.now().plusDays(7));
-        proj1.setSprintDuration(10);
+        proj1.setSprintDuration(new SprintDuration(31));
         projectStore.saveNewProject(proj1);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");

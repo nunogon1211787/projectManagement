@@ -99,7 +99,7 @@ class EditProjectInfoControllerTest {
         //Act
         edit.editProject("proto", "test44", LocalDate.of(2022, 12, 1),
                 LocalDate.of(2023, 12, 1), 10, 10000,
-                3, projectStatus, projectTeam2);
+                7, projectStatus, projectTeam2);
 
 
         //Assert
@@ -109,7 +109,7 @@ class EditProjectInfoControllerTest {
         assertEquals(project.getEndDate(), LocalDate.of(2023, 12, 1));
         assertEquals(10, project.getNumberOfSprints());
         assertEquals(10000, project.getBudget());
-        assertEquals(3, project.getSprintDuration());
+        assertEquals(7, project.getSprintDuration().getSprintDurationDays());
         assertEquals(project.getProjectStatus(), projectStatus);
         assertEquals(project.getProjectTeam(), projectTeam2);
     }
@@ -165,7 +165,7 @@ class EditProjectInfoControllerTest {
         //Act
         edit.editProject("proto", "test44", LocalDate.of(2020, 12, 1),
                 LocalDate.of(2023, 12, 1), 10, 10000,
-                3, projectStatus, newProjectTeam);
+                7, projectStatus, newProjectTeam);
 
 
         //Assert

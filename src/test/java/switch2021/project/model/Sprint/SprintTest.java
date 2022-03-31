@@ -102,7 +102,7 @@ public class SprintTest {
     public void changeEndDateSuccess() {
         //Assert
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 2, 1));
-        sprint.changeEndDate(2);
+        sprint.changeEndDate(14);
         LocalDate endadate = sprint.getEndDate();
         //Assert
         assertEquals(LocalDate.of(2022, 2, 14), endadate);
@@ -131,7 +131,7 @@ public class SprintTest {
     @DisplayName("Verification test if is a current Sprint")
     public void isCurrentSprintTrueTest() {
         Sprint sprint = new Sprint("Sprint_1", LocalDate.now().minusWeeks(1));
-        sprint.changeEndDate(2);
+        sprint.changeEndDate(14);
         assertTrue(sprint.isCurrentSprint());
     }
 
