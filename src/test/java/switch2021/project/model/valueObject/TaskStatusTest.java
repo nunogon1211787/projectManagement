@@ -1,7 +1,9 @@
 package switch2021.project.model.valueObject;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class TaskStatusTest {
 
@@ -32,40 +34,22 @@ class TaskStatusTest {
         assertFalse(status.hasDescription(null));
     }
 
-
     @Test
-    void getDescriptionSuccess() {
+    void getDescriptionTest() {
         //Arrange
-        TaskStatus status1= new TaskStatus("test1");
+        TaskStatus status1 = new TaskStatus("test1");
+        Description des = mock(Description.class);
+        when(des.getText()).thenReturn("test1");
         //Act
-        Description des = new Description("test1");
+        Description desSt1 = status1.getDescription();
         //Assert
-        assertEquals(des, status1.getDescription());
-    }
-
-    @Test
-    void getDescriptionFail() {
-        //Arrange
-        TaskStatus status1= new TaskStatus("test1");
-        //Act
-        Description des = new Description("test");
-        //Assert
-        assertNotEquals(des, status1.getDescription());
+        assertNotEquals(desSt1, null);
     }
 
     @Test
     void overrideTestTrue() {
         //Arrange
-        TaskStatus status1= new TaskStatus("test1");
-        TaskStatus status2 = new TaskStatus("test1");
-        //Assert
-        assertEquals(status1, status2);
-    }
-
-    @Test
-    void overrideTestTrue1() {
-        //Arrange
-        TaskStatus status1= new TaskStatus("test1");
+        TaskStatus status1 = new TaskStatus("test1");
         TaskStatus status2 = new TaskStatus("test1");
         //Assert
         assertEquals(status1, status2);
@@ -73,27 +57,26 @@ class TaskStatusTest {
 
     @Test
     void overrideTestFalse() {
-        //Arrenge
-        TaskStatus status5= new TaskStatus("test1");
-        TaskStatus status6= new TaskStatus("test2");
+        //Arrange
+        TaskStatus status5 = new TaskStatus("test1");
+        TaskStatus status6 = new TaskStatus("test2");
         //Assert
         assertNotEquals(status5, status6);
     }
 
     @Test
     void overrideTestNull() {
-        //Arrenge
-        TaskStatus status4 = null;
-        Typology typo = new Typology("test");
+        //Arrange
+        TaskStatus status4 = new TaskStatus("test1");
         //Assert
-        assertNotEquals(typo, status4);
+        assertNotEquals(status4, null);
     }
 
     @Test
     void overrideTestClass() {
         //Arrange
         TaskStatus status3 = new TaskStatus("test3");
-        Description des = new Description("test3");
+        Description des = mock(Description.class);
         //Assert
         assertNotEquals(status3, des);
     }

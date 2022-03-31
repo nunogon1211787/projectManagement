@@ -9,6 +9,7 @@ public class Password {
 
     /** Attributes **/
     private final String pwd;
+    private final int MIN_PASSWORD_LENGTH = 8;
 
     /** Constructor **/
     public Password (String pwd) {
@@ -20,7 +21,7 @@ public class Password {
     }
 
     public void checkPwdSize(String pwd){
-        if(pwd.length() < 8){
+        if(pwd.length() < MIN_PASSWORD_LENGTH){
             throw new IllegalArgumentException("Password too short.");
         }
     }
@@ -33,8 +34,10 @@ public class Password {
                 count = count + 1;
             }
         }
-        if(count == 0){
-                throw new IllegalArgumentException("Password should contain at least 1 number");
+        if(count >= 1) {
+
+        } else {
+            throw new IllegalArgumentException("Password should contain at least 1 number");
         }
     }
 
@@ -46,7 +49,9 @@ public class Password {
                 count = count + 1;
             }
         }
-        if(count == 0){
+        if(count >= 1) {
+
+        } else {
             throw new IllegalArgumentException("Password should contain at least 1 upper case");
         }
     }
@@ -59,7 +64,9 @@ public class Password {
                 count = count + 1;
             }
         }
-        if(count == 0){
+        if(count >= 1) {
+
+        } else {
             throw new IllegalArgumentException("Password should contain at least 1 lower case");
         }
     }

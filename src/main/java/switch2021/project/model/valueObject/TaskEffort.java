@@ -11,7 +11,7 @@ public class TaskEffort {
     private final Hours effortHours;
     private final Minutes effortMinutes;
     private final Date effortDate;
-    private final String comment;
+    private final Description comment;
     private final String attachment;
 
 
@@ -22,7 +22,7 @@ public class TaskEffort {
         this.effortDate = effortDate;
         this.effortHours = new Hours(effortHours);
         this.effortMinutes = new Minutes(effortMinutes);
-        this.comment = comment;
+        this.comment = new Description(comment);
         this.attachment = attachment;
     }
 }

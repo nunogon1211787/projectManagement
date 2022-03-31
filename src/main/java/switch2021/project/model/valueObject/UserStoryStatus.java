@@ -1,29 +1,39 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+
 import java.util.Objects;
 
 @Getter
 public class UserStoryStatus {
 
-    /** Class UserStoryStatus Attributes **/
-    private Description description;
-    private boolean sprintAvailable;  //this attribute determines if the status is available as a sprint backlog status
+    /**
+     * Class UserStoryStatus Attributes
+     **/
+    private final Description description;
+    private final boolean sprintAvailable;  //this attribute determines if the status is available as a sprint backlog status
 
-    /** Constructor **/
-    public UserStoryStatus(String description) {
+
+    /**
+     * Constructor
+     **/
+    public UserStoryStatus(String description, boolean sprintAvailable) {
         this.description = new Description(description);
-    }
-    public boolean isSprintAvailable() {
-        return sprintAvailable;
-    }
-
-    public void setSprintAvailable(boolean sprintAvailable) {
         this.sprintAvailable = sprintAvailable;
     }
 
 
+    /**
+     * Methods to iterate with attributes
+     */
+    public boolean hasDescription(String description) {
+        return this.description.getText().equals(description);
+    }
 
+
+    /**
+     * Override
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
