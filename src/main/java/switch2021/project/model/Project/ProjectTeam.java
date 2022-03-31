@@ -2,6 +2,8 @@ package switch2021.project.model.Project;
 
 import lombok.Getter;
 import switch2021.project.factoryInterface.ResourceFactoryInterface;
+import switch2021.project.model.valueObject.CostPerHour;
+import switch2021.project.model.valueObject.PercentageOfAllocation;
 import switch2021.project.model.valueObject.ProjectRole;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.utils.App;
@@ -163,7 +165,9 @@ public class ProjectTeam {
     }
 
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
-        return new Resource(user, startDate, endDate, costPerHour, percentageOfAllocation);
+        CostPerHour coPeHo = new CostPerHour(costPerHour);
+        PercentageOfAllocation percentage = new PercentageOfAllocation(percentageOfAllocation);
+        return new Resource(user, startDate, endDate, coPeHo, percentage);
     }
 
 

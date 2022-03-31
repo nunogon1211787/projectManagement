@@ -229,32 +229,32 @@ class ProjectTest {
         SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMb = LocalDate.of(2021, 11, 1);
         LocalDate endDateMb = LocalDate.of(2021, 11, 15);
-        Resource manuelbras = new Resource(user1, startDateMb, endDateMb, 100, .5);
+        Resource manuelbras = new Resource(user1, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
-        Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, 100, 1);
+        Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, new CostPerHour(100), new PercentageOfAllocation(1));
 
         SystemUser user3 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMj = LocalDate.of(2021, 11, 1);
         LocalDate endDateMj = LocalDate.of(2021, 11, 15);
-        Resource manueljose = new Resource(user3, startDateMj, endDateMj, 100, .5);
+        Resource manueljose = new Resource(user3, startDateMj, endDateMj, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMo = LocalDate.of(2021, 11, 1);
         LocalDate endDateMo = LocalDate.of(2021, 11, 15);
-        Resource manueloliveira = new Resource(user4, startDateMo, endDateMo, 100, .3333);
+        Resource manueloliveira = new Resource(user4, startDateMo, endDateMo, new CostPerHour(100), new PercentageOfAllocation(.3333));
 
         SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMf = LocalDate.of(2021, 11, 16);
         LocalDate endDateMf = LocalDate.of(2021, 11, 30);
-        Resource manuelfernandes = new Resource(user5, startDateMf, endDateMf, 100, 1);
+        Resource manuelfernandes = new Resource(user5, startDateMf, endDateMf, new CostPerHour(100), new PercentageOfAllocation(1));
 
         SystemUser user6 = new SystemUser("manuelgoncalves", "manuelgoncalves@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMg = LocalDate.of(2021, 11, 16);
         LocalDate endDateMg = LocalDate.of(2021, 11, 30);
-        Resource manuelgoncalves = new Resource(user6, startDateMg, endDateMg, 100, 1);
+        Resource manuelgoncalves = new Resource(user6, startDateMg, endDateMg, new CostPerHour(100), new PercentageOfAllocation(1));
 
         proj1.getProjectTeam().saveResource(manuelbras);
         proj1.getProjectTeam().saveResource(manueljose);
@@ -331,7 +331,7 @@ class ProjectTest {
         SystemUser user = company.getSystemUserStore().createSystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100),new PercentageOfAllocation( .5));
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
@@ -387,7 +387,7 @@ class ProjectTest {
         SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "Querty_1", "Querty_1", "photo", profile);
         LocalDate startDateMo = LocalDate.of(2021, 11, 1);
         LocalDate endDateMo = LocalDate.of(2021, 11, 15);
-        Resource manueloliveira = new Resource(user4, startDateMo, endDateMo, 100, .3333);
+        Resource manueloliveira = new Resource(user4, startDateMo, endDateMo, new CostPerHour(100), new PercentageOfAllocation(.3333));
         //Act
         boolean addResource = proj3.addResource(manueloliveira);
         //Assert
@@ -402,7 +402,7 @@ class ProjectTest {
         SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira2@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMo = LocalDate.of(2021, 11, 1);
         LocalDate endDateMo = LocalDate.of(2021, 11, 15);
-        Resource manueloliveira = new Resource(user4, startDateMo, endDateMo, 100, .3333);
+        Resource manueloliveira = new Resource(user4, startDateMo, endDateMo, new CostPerHour(100), new PercentageOfAllocation(.3333));
         //Act
         boolean addResource = proj3.addResource(manueloliveira);
         //Assert

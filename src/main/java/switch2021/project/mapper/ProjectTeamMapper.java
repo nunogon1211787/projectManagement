@@ -22,7 +22,7 @@ public class ProjectTeamMapper {
             role = resource.getRole().getName().getText();
         }
         return new ResourceDTO(resource.getUser().getUserName().getNameF(),
-                role, startDate, endDate, resource.getCostPerHour(), resource.getPercentageOfAllocation());
+                role, startDate, endDate, resource.getCostPerHour().getCost(), resource.getPercentageOfAllocation().getPercentage());
     }
 
 
