@@ -48,6 +48,18 @@ class DescriptionTest {
     }
 
     @Test
+    public void shouldThrowException_becauseDescriptionLongerThan() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            char[] data = new char[1001];
+            Arrays.fill(data, 'a');
+            String str = new String(data);
+            //Assert
+            new Description(str);
+        });
+    }
+
+    @Test
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTestEqual() {
         //Arrange
