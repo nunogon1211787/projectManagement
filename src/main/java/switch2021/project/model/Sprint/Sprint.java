@@ -41,7 +41,7 @@ public class Sprint {
 
 
     public void changeEndDate(int sprintDurationInDays) {
-        this.endDate = startDate.plusDays(sprintDurationInDays - 1);
+        this.endDate = startDate.plusDays(sprintDurationInDays - 1L);
     }
 
     public boolean hasSprintID(int id) {

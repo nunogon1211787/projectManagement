@@ -28,13 +28,30 @@ class SprintDurationTest {
     }
 
     @Test
-    void shouldTrowNullException() {
+    void shouldTrowNullExceptionValueToHigh() {
         assertThrows(NullPointerException.class, () -> {
 
         new SprintDuration(35);
 
         });
+    }
 
+    @Test
+    void shouldTrowNullExceptionNegative() {
+        assertThrows(NullPointerException.class, () -> {
+
+            new SprintDuration(-1);
+
+        });
+    }
+
+    @Test
+    void shouldTrowNullExceptionZero() {
+        assertThrows(NullPointerException.class, () -> {
+
+            new SprintDuration(0);
+
+        });
     }
 
     @Test

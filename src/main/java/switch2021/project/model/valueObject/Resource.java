@@ -103,7 +103,7 @@ public class Resource {
     public boolean isAvailableToSprint(LocalDate sprintStartDate, int sprintDurationDays) {
         boolean msg = false;
 
-        LocalDate sprintEndDate = sprintStartDate.plusDays(sprintDurationDays - 1);
+        LocalDate sprintEndDate = sprintStartDate.plusDays(sprintDurationDays - 1L);
 
         if((this.startDate.isBefore(sprintStartDate) || this.startDate.isEqual(sprintStartDate)) &&
                 (this.endDate.isAfter(sprintEndDate) || this.endDate.isEqual(sprintEndDate))){
