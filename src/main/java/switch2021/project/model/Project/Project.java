@@ -70,7 +70,7 @@ public class Project {
         this.budget = budget;
 
         this.projectTeam = new ProjectTeam(resFac);
-        //this.projectTeam = this.projectTeamFactory.createProjectTeam();
+//        this.projectTeam = this.projectTeamFactory.createProjectTeam();
 //        this.projectTeam = new ProjectTeam();
         this.productBacklog = new ProductBacklog();
     }

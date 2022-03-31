@@ -134,23 +134,9 @@ class SystemUserTest {
         SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
                 "Qwerty_1", "Qwerty_1", "png_123", userProfile);
         //Act
-        assertFalse(joana.updatePassword("HELLO_02", "GOODBYE", "GOODBYE"));
+        assertFalse(joana.updatePassword("HElLO_02", "GOODBYE", "GOODBYE"));
 
     }
-
-//    @Test
-//    public void InvalidPasswordInput() {
-//        //Assert
-//        assertThrows(IllegalArgumentException.class, () -> {
-//            //Arrange
-//            Company company = new Company();
-//            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-//            SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "*#&", "123456", "img_123", profile);
-//            //Act
-//            UserProfile newProfile = company.getUserProfileStore().getUserProfile("Visitor");
-//            user.updateProfile(profile, newProfile);
-//        });
-//    }
 
     @Test
     public void setAllDataSuccess() {
@@ -176,7 +162,7 @@ class SystemUserTest {
         SystemUser cris = new SystemUser("Joana", "1211770@isep.ipp.pt", "Aluna_10",
                 "Querty_1", "Querty_1", "img_123", userProfile);
         //Act and Assert
-        assertTrue(cris.checkAllData("CDC", "ALN", "img_900"));
+        assertTrue(cris.checkAllData("img_900"));
     }
 
     @Test
@@ -187,7 +173,7 @@ class SystemUserTest {
             UserProfile tes = new UserProfile("ddd");
             SystemUser newUser = new SystemUser(" ", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
-            newUser.checkAllData(" ", "Aluna_10", "img_123");
+            newUser.checkAllData( "img_123");
         });
     }
 
@@ -200,7 +186,7 @@ class SystemUserTest {
             UserProfile tes = new UserProfile("ddd");
             SystemUser newUser = new SystemUser("J", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
-            newUser.checkAllData("J", "Aluna_10", "img_123");
+            newUser.checkAllData("img_123");
         });
     }
 
@@ -212,7 +198,7 @@ class SystemUserTest {
             UserProfile tes = new UserProfile("ddd");
             SystemUser newUser = new SystemUser("J", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
-            newUser.checkAllData("JJ", "Aluna_10", "img_123");
+            newUser.checkAllData("img_123");
         });
     }
 
@@ -224,7 +210,7 @@ class SystemUserTest {
             UserProfile tes = new UserProfile("ddd");
             SystemUser newUser = new SystemUser("J", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
-            newUser.checkAllData("", "Aluna_10", "img_123");
+            newUser.checkAllData("img_123");
         });
     }
 
@@ -285,7 +271,7 @@ class SystemUserTest {
             UserProfile tes = new UserProfile("ddd");
             SystemUser newUser = new SystemUser("Joana Silva", "112@isep.ipp.pt",
                     "", "123", "123", "img_900", tes);
-            newUser.checkAllData("Joana Silva", "", "img_123");
+            newUser.checkAllData( "img_123");
         });
     }
 
@@ -297,7 +283,7 @@ class SystemUserTest {
             UserProfile tes = new UserProfile("ddd");
             SystemUser newUser = new SystemUser("Joana Silva", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
-            newUser.checkAllData("Joana Silva", "A", "img_123");
+            newUser.checkAllData( "img_123");
         });
     }
 
@@ -321,7 +307,7 @@ class SystemUserTest {
             UserProfile tes = new UserProfile("ddd");
             SystemUser newUser = new SystemUser("Joana Silva", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
-            newUser.checkAllData("Joana Silva", "AA", "img_123");
+            newUser.checkAllData("img_123");
         });
     }
 
@@ -345,7 +331,7 @@ class SystemUserTest {
             UserProfile tes = new UserProfile("ddd");
             SystemUser newUser = new SystemUser("Joana Silva", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "img_900", tes);
-            newUser.checkAllData("Joana Silva", "   ", "img_123");
+            newUser.checkAllData("img_123");
         });
     }
 
@@ -357,7 +343,7 @@ class SystemUserTest {
             UserProfile tes = new UserProfile("ddd");
             SystemUser newUser = new SystemUser("Joana Silva", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "", tes);
-            newUser.checkAllData("Joana Silva", "Aluna_10", "");
+            newUser.checkAllData("");
         });
     }
 
@@ -369,7 +355,7 @@ class SystemUserTest {
             UserProfile tes = new UserProfile("ddd");
             SystemUser newUser = new SystemUser("Joana Silva", "112@isep.ipp.pt",
                     "Aluna_10", "123", "123", "", tes);
-            newUser.checkAllData("Joana Silva", "Aluna_10", "  ");
+            newUser.checkAllData("  ");
         });
     }
 
@@ -413,81 +399,6 @@ class SystemUserTest {
         assertEquals(assignedProfileExpected, newUser.getAssignedProfileList());
     }
 
-//    @Test
-//    public void encryptPasswordSuccess() {
-//        //Arrange
-//        String userName = "manueloliveira";
-//        String email = "manueloliveira@beaver.com";
-//        String password = "ghi";
-//        String passwordConfirmation = "ghi";
-//        String function = "tester";
-//        String photo = "photo";
-//        Company company = new Company();
-//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-//        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
-//        //Act
-//        String result = newUser.encryptPassword(password);
-//        //Assert
-//        assertEquals("ÊËÌ", result);
-//    }
-
-//    @Test
-//    public void encryptPasswordFail() {
-//        //Arrange
-//        String userName = "manueloliveira";
-//        String email = "manueloliveira@beaver.com";
-//        String password = "ghi";
-//        String passwordConfirmation = "ghi";
-//        String function = "tester";
-//        String photo = "photo";
-//        Company company = new Company();
-//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-//        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
-//        //Act
-//        String result = newUser.encryptPassword(password);
-//        //Assert
-//        assertNotEquals("ghi", result);
-//    }
-
-//    @Test
-//    public void decryptPasswordSuccess() {
-//        //Arrange
-//        String userName = "manueloliveira";
-//        String email = "manueloliveira@beaver.com";
-//        String password = "a1b2c3";
-//        String passwordConfirmation = "a1b2c3";
-//        String function = "tester";
-//        String photo = "photo";
-//        Company company = new Company();
-//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-//        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
-//
-//        String encryptedPassword = newUser.getPassword();//encryptedPassword = "Ä\u0094Å\u0095Æ\u0096";
-//        //Act
-//        String result = newUser.decryptPassword(encryptedPassword);
-//        //Assert
-//        assertEquals("a1b2c3", result);
-//    }
-//
-//    @Test
-//    public void decryptPasswordFail() {
-//        //Arrange
-//        String userName = "manueloliveira";
-//        String email = "manueloliveira@beaver.com";
-//        String password = "a1b2c3";
-//        String passwordConfirmation = "a1b2c3";
-//        String function = "tester";
-//        String photo = "photo";
-//        Company company = new Company();
-//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-//        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
-//
-//        String encryptedPassword = newUser.getPassword();//encryptedPassword = "Ä\u0094Å\u0095Æ\u0096";
-//        //Act
-//        String result = newUser.decryptPassword(encryptedPassword);
-//        //Assert
-//        assertNotEquals("Ä\\u0094Å\\u0095Æ\\u0096", result);
-//    }
 
     @Test
     public void createSystemUserFailUserNameIsEmpty() {
@@ -1131,31 +1042,35 @@ class SystemUserTest {
         assertFalse(ana.isActivateUser());
     }
 
-    @Test
-    public void setAllDataFail() {
-        //Arrange
-        Company company = new Company();
-        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
-                "Querty_1", "Querty_1", "img_123", userProfile);
-        //Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            assertFalse(joana.setAllData("", "User_12", "img_900"));
-        });
-    }
+//    @Test
+//    public void setAllDataFail() {
+//
+//        //Arrange
+//
+//        Company company = new Company();
+//        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+//        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
+//                "Querty_1", "Querty_1", "img_123", userProfile);
+//        //Act and Assert
+//        assertThrows(IllegalArgumentException.class, () -> {
+//            assertFalse(joana.setAllData("", "User_12", "img_900"));
+//        });
+//    }
 
-    @Test
-    public void setAllDataFail2() {
-        //Arrange
-        Company company = new Company();
-        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "img_123", userProfile);
-        //Act and Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            assertFalse(joana.setAllData("Cris", "X", "img_900"));
-        });
-    }
+//    @Test
+//    public void setAllDataFail2() {
+//
+//        //Arrange
+//
+//        Company company = new Company();
+//        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+//        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
+//                "Qwerty_1", "Qwerty_1", "img_123", userProfile);
+//        //Act and Assert
+//        assertThrows(IllegalArgumentException.class, () -> {
+//            assertFalse(joana.setAllData("Cris", "X", "img_900"));
+//        });
+//    }
 
     @Test
     public void setAllDataFail3() {

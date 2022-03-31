@@ -3,9 +3,6 @@ package switch2021.project.model.SystemUser;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.valueObject.*;
-import switch2021.project.model.Company;
-import switch2021.project.stores.UserProfileStore;
-import switch2021.project.utils.App;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +29,6 @@ public class SystemUser {
      **/
     public SystemUser(String userName, String email, String function, String password, String passwordConfirmation,
                       String photo, UserProfile profile) {
-//        checkEmailRules(email);
-//        checkPasswordRules(password);
         checkProfileRules(profile);
         this.userName = new Name(userName);
         this.email = new Email(email);
@@ -74,7 +69,6 @@ public class SystemUser {
     }
 
     private void setPassword(String password) {
-//        checkPasswordRules(password);
         this.password = new Password(password);
     }
 
@@ -88,7 +82,7 @@ public class SystemUser {
 
         boolean msg = false;
 
-        if (checkAllData(userName, function, photo)) {
+        if (checkAllData(photo)) {
             setUserName(userName);
             setFunction(function);
             setPhoto(photo);
@@ -106,28 +100,16 @@ public class SystemUser {
     /**
      * Validation Methods
      **/
-//    private void checkPasswordRules(String password) {
-//        if (password.trim().isEmpty())
-//            throw new IllegalArgumentException("Password cannot be empty.");
-//        if ((password.length() < 2))
-//            throw new IllegalArgumentException("Password must be at least 2 characters");
-//    }
-    private void checkProfileRules(UserProfile profile) {
-        Company company = App.getInstance().getCompany();
-        UserProfileStore profileStore = company.getUserProfileStore();
-        UserProfile visitorProfile = profileStore.getUserProfile("Visitor");
 
-        if (!profile.equals(visitorProfile))
+    private void checkProfileRules(UserProfile profile) {
+
+        if (!profile.getUserProfileName().getText().equals("Visitor"))
             throw new IllegalArgumentException("at registration visitor profile must be associated");
     }
 
-    public boolean checkAllData(String userName, String function, String photo) {
+    public boolean checkAllData(String photo) {
         if (photo.trim().isEmpty())
             throw new IllegalArgumentException("Photo cannot be empty.");
-        if (function.trim().isEmpty() || function.length() < 2)
-            throw new IllegalArgumentException("Function cannot be empty or less then 2 characters.");
-        if (userName.trim().isEmpty() || userName.length() < 2)
-            throw new IllegalArgumentException("Username cannot be empty or less then 2 characters.");
         return true;
     }
 
@@ -141,33 +123,6 @@ public class SystemUser {
         }
         return msg;
     }
-
-
-    /**
-     * Encryption/Decryption Methods
-     **/
-//    public String encryptPassword(String password) {
-//        int codigoASCII;
-//        StringBuilder stringBuilder = new StringBuilder();
-//
-//        for (int i = 0; i < password.length(); i++) {
-//            codigoASCII = password.charAt(i) + 99;
-//            stringBuilder.append((char) codigoASCII);
-//        }
-//        return stringBuilder.toString();
-//    }
-//
-    public String decryptPassword(String password) {
-        int codigoASCII;
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (int i = 0; i < password.length(); i++) {
-            codigoASCII = password.charAt(i) - 99;
-            stringBuilder.append((char) codigoASCII);
-        }
-        return stringBuilder.toString();
-    }
-
 
     /**
      * AssignProfileList´s methods
@@ -355,13 +310,14 @@ public class SystemUser {
 
 
     /**
-     * Method to validate the oldpassword from the UI with thew old password from the System User
+     * Method to validate the old password from the UI with thew old password from the System User
      **/
     private boolean validateOldPassword(String oldpasswordUI) {
 
-        String oldpasswordSU = decryptPassword(this.password.getPwd());
+        Password pwd = new Password(oldpasswordUI);
 
-        return oldpasswordUI.equals(oldpasswordSU);
+        return pwd.equals(this.password);
+
     }
 
 
