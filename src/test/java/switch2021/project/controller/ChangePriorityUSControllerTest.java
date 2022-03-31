@@ -58,7 +58,7 @@ public class ChangePriorityUSControllerTest {
         LocalDate endDate = LocalDate.of(2023, 3, 5);
         input = new Resource(newUser, startDate, endDate, 100, .5);
         input2 = new Resource(newUser2, startDate, endDate, 100, .5);
-        userStoryStatus = new UserStoryStatus("coiso");
+        userStoryStatus = new UserStoryStatus("coiso", true);
         userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
         userStory.setIdUserStory(0);
         userStory2 = new UserStory("As a diretor, i want to test this string", 3, "Fazer tal e coiso", 5);
@@ -260,7 +260,7 @@ public class ChangePriorityUSControllerTest {
     void getUserStoryListFromProjectOnlyActive() {
         project.addResource(input);
 
-        UserStoryStatus usStatus2 = new UserStoryStatus("Completed");
+        UserStoryStatus usStatus2 = new UserStoryStatus("Completed", true);
         userStory3.setUserStoryStatus(usStatus2);
 
         List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getActiveUserStoryList();
