@@ -4,9 +4,11 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskTest {
@@ -44,35 +46,6 @@ class TaskTest {
     }
 
     @Test
-    public void createTaskSuccessWithNoTaskEffort() {
-        //Arrange
-        Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
-        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
-        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
-        String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-        TaskStatus taskStatus = company.getTaskStatusStore().getTaskStatusByDescription("Planned");
-        //Act
-        Task task = new Task("test", taskDescription, 16.00, taskType, resource);
-        //Assert
-        assertEquals("test", task.getName().getNameF());
-        assertEquals(taskDescription, task.getDescription().getText());
-        assertEquals(16.00, task.getEffortEstimate());
-        assertEquals(taskType, task.getType());
-        assertEquals(resource, task.getResponsible());
-        assertEquals(16.00, task.getEffortRemaining());
-        assertEquals(taskStatus.getDescription().getText(), task.getStatus().getDescription().getText());
-        assertTrue(task.getTaskEffortList().isEmpty());
-        assertEquals(0, task.getHoursSpent());
-        assertEquals(0, task.getExecutionPercentage());
-        assertNull(task.getStartDate());
-        assertNull(task.getEndDate());
-    }
-
-    @Test
     public void createTaskEffortSuccess() {
         //Arrange
         Company company = new Company();
@@ -90,13 +63,13 @@ class TaskTest {
         String comment = "test";
         String attachment = ".pdf";
         //Act
-        TaskEffort taskEffort = task.createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
+        task.createAndSaveTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         //Assert
-        assertEquals(effortHours, taskEffort.getEffortHours().getEffortHours());
-        assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
-        assertEquals(effortDate, taskEffort.getEffortDate());
-        assertEquals(comment, taskEffort.getComment().getText());
-        assertEquals(attachment, taskEffort.getAttachment());
+        assertEquals(effortHours, task.getTaskEffortList().get(0).getEffortHours().getEffortHours());
+        assertEquals(effortMinutes, task.getTaskEffortList().get(0).getEffortMinutes().getEffortMinutes());
+        assertEquals(effortDate, task.getTaskEffortList().get(0).getEffortDate());
+        assertEquals(comment, task.getTaskEffortList().get(0).getComment().getText());
+        assertEquals(attachment, task.getTaskEffortList().get(0).getAttachment());
     }
 
     @Test
@@ -118,7 +91,7 @@ class TaskTest {
             String comment = "test";
             String attachment = ".pdf";
             //Act
-            task.validateTaskEffort(task.createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment));
+            task.validateTaskEffort(new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment));
         });
     }
 
@@ -136,11 +109,11 @@ class TaskTest {
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 27));
-        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
 
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
         //Act
-        task.saveTaskEffort(taskEffort);
+        task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
+
         //Assert
         assertEquals(1, task.getTaskEffortList().size());
         assertEquals(taskStatusExpected.getDescription().getText(), task.getStatus().getDescription().getText()); //change status to Running
@@ -152,68 +125,6 @@ class TaskTest {
         assertEquals(0.4, task.getExecutionPercentage());
     }
 
-//    @Test
-//    public void createTaskEffortSuccessMock() {
-//        //Arrange
-//        Company company = mock(Company.class);
-//        //    Profile
-//        UserProfileStore userProfileStore = mock(UserProfileStore.class);
-//        UserProfile userProfile = mock(UserProfile.class);
-//        when(company.getUserProfileStore()).thenReturn(userProfileStore);
-//        when(userProfileStore.getUserProfile("Visitor")).thenReturn(userProfile);
-//        //    System User
-//        SystemUser systemUser = mock(SystemUser.class);
-//        Name name = mock(Name.class);
-//        when(systemUser.getUserName()).thenReturn(name);
-//        when(name.getNameF()).thenReturn("manuelbras");
-//        when(systemUser.getEmail()).thenReturn("manuelbras@beaver.com");
-//        Function function = mock(Function.class);
-//        when(systemUser.getFunction()).thenReturn(function);
-//        when(function.getText()).thenReturn(("tester"));
-//        Password password = mock(Password.class);
-//        when(systemUser.getPassword()).thenReturn(password);
-//        when(password.getPwd()).thenReturn("Qwerty_1");
-//        when(systemUser.getPhoto()).thenReturn("photo");
-//        //    Resource
-//        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
-//        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-//        Resource resource = mock(Resource.class);
-//        when(resource.getUser()).thenReturn(systemUser);
-//        when(resource.getStartDate()).thenReturn(startDateMb);
-//        when(resource.getEndDate()).thenReturn(endDateMb);
-//        when(resource.getCostPerHour()).thenReturn(100.0);
-//        when(resource.getPercentageOfAllocation()).thenReturn(0.5);
-//        //    Task
-//        String taskDescription = "must be at least 20 characters";
-//        Task task = new Task("test", taskDescription, 16.00, new TaskType("User Story"), resource);
-//        //    TaskEffort
-//        TaskEffort taskEffort = mock(TaskEffort.class);
-//        HoursMinutes hoursMinutes = mock(HoursMinutes.class);
-//        when(taskEffort.getEffort()).thenReturn(hoursMinutes);
-//        when(hoursMinutes.getEffortHours()).thenReturn(4);
-//        when(taskEffort.getEffort()).thenReturn(hoursMinutes);
-//        when(hoursMinutes.getEffortMinutes()).thenReturn(30);
-//        when(taskEffort.getComment()).thenReturn("test");
-//        when(taskEffort.getAttachment()).thenReturn(".pdf");
-//        Date effortDate = new Date(LocalDate.of(2022, 1, 27));
-//        when(taskEffort.getEffortDate()).thenReturn(effortDate);
-//
-//        int effortHours = 4;
-//        int effortMinutes = 30;
-//        String comment = "test";
-//        String attachment = ".pdf";
-//
-//        //Act
-//        TaskEffort taskEffort1 = task.createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
-//        task.getTaskEffortList().add(taskEffort1);
-//
-//        //Assert
-//        assertEquals(effortHours, task.getTaskEffortList().get(0).getEffort().getEffortHours());
-//        assertEquals(effortMinutes, task.getTaskEffortList().get(0).getEffort().getEffortMinutes());
-//        assertEquals(effortDate, task.getTaskEffortList().get(0).getEffortDate());
-//        assertEquals(comment, task.getTaskEffortList().get(0).getComment());
-//        assertEquals(attachment, task.getTaskEffortList().get(0).getAttachment());
-//    }
 
     @Test
     public void saveTwoTaskEffortSuccess() {
@@ -228,15 +139,14 @@ class TaskTest {
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
-        Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
-        Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
-        TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
 
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
         //Act
-        task.saveTaskEffort(taskEffort);
-        task.saveTaskEffort(taskEffort2);
+        Date effortDate = new Date(LocalDate.of(2022, 1, 20));
+        task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
+        Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
+        task.createAndSaveTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
+
         //Assert
         assertEquals(2, task.getTaskEffortList().size());
         assertEquals(taskStatusExpected.getDescription().getText(), task.getStatus().getDescription().getText());
@@ -261,18 +171,16 @@ class TaskTest {
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
+        //Act
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
+        task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
         Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
-        TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
+        task.createAndSaveTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
         Date effortDate3 = new Date(LocalDate.of(2022, 1, 22));
-        TaskEffort taskEffort3 = task.createTaskEffort(8, 0, effortDate3, "test3", ".pdf3");
+        task.createAndSaveTaskEffort(8, 0, effortDate3, "test3", ".pdf3");
 
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Finished");
-        //Act
-        task.saveTaskEffort(taskEffort);
-        task.saveTaskEffort(taskEffort2);
-        task.saveTaskEffort(taskEffort3);
+
         //Assert
         assertEquals(3, task.getTaskEffortList().size());
         assertEquals(taskStatusExpected.getDescription().getText(), task.getStatus().getDescription().getText()); //change status to Finished
@@ -298,17 +206,15 @@ class TaskTest {
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
         Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
-        TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
         Date effortDate3 = new Date(LocalDate.of(2022, 1, 22));
-        TaskEffort taskEffort3 = task.createTaskEffort(10, 0, effortDate3, "test3", ".pdf3");
 
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Finished");
         //Act
-        task.saveTaskEffort(taskEffort);
-        task.saveTaskEffort(taskEffort2);
-        task.saveTaskEffort(taskEffort3);
+        task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
+        task.createAndSaveTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
+        task.createAndSaveTaskEffort(10, 0, effortDate3, "test3", ".pdf3");
+
         //Assert
         assertEquals(3, task.getTaskEffortList().size());
         assertEquals(taskStatusExpected.getDescription().getText(), task.getStatus().getDescription().getText());
@@ -334,20 +240,17 @@ class TaskTest {
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
         Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
-        TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
         Date effortDate3 = new Date(LocalDate.of(2022, 1, 22));
-        TaskEffort taskEffort3 = task.createTaskEffort(8, 0, effortDate3, "test3", ".pdf3");
         Date effortDate4 = new Date(LocalDate.of(2022, 1, 23));
-        TaskEffort taskEffort4 = task.createTaskEffort(4, 0, effortDate4, "test4", ".pdf4");
 
         TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Finished");
         //Act
-        task.saveTaskEffort(taskEffort);
-        task.saveTaskEffort(taskEffort2);
-        task.saveTaskEffort(taskEffort3);
-        task.saveTaskEffort(taskEffort4);
+        task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
+        task.createAndSaveTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
+        task.createAndSaveTaskEffort(8, 0, effortDate3, "test3", ".pdf3");
+        task.createAndSaveTaskEffort(4, 0, effortDate4, "test4", ".pdf4");
+
         //Assert
         assertEquals(4, task.getTaskEffortList().size());
         assertEquals(taskStatusExpected.getDescription().getText(), task.getStatus().getDescription().getText());
@@ -374,10 +277,10 @@ class TaskTest {
             Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
             Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-            TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
             //Act
-            task.saveTaskEffort(taskEffort);
-            task.saveTaskEffort(taskEffort);
+            task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
+            task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
+
         });
     }
 
@@ -396,31 +299,12 @@ class TaskTest {
             Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
             Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-            TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
-            TaskEffort taskEffort2 = task.createTaskEffort(1, 30, effortDate, "test", ".pdf");
             //Act
-            task.saveTaskEffort(taskEffort);
-            task.saveTaskEffort(taskEffort2);
+            task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
+            task.createAndSaveTaskEffort(1, 30, effortDate, "test", ".pdf");
         });
     }
 
-    @Test //Fail
-    public void saveNullTaskEffort() {
-        //Arrange
-        Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
-        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
-        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
-        String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-        Task task = new Task("test", taskDescription, 20.00, taskType, resource);
-
-        TaskEffort taskEffort = null;
-        //Assert
-        assertFalse(task.saveTaskEffort(taskEffort));
-    }
 
     @Test
     public void updateHoursSpentPositivo() {
@@ -438,10 +322,10 @@ class TaskTest {
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-        TaskEffort taskEffort = task.createTaskEffort(19, 0, effortDate, "test", ".pdf");
 
-       //Act
-        task.saveTaskEffort(taskEffort);
+        //Act
+        task.createAndSaveTaskEffort(19, 0, effortDate, "test", ".pdf");
+
 
         //Assert
         assertEquals(1.0, task.getEffortRemaining());
@@ -465,10 +349,9 @@ class TaskTest {
         Task task = new Task("test", taskDescription, 8.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
 
         //Act
-        task.saveTaskEffort(taskEffort);
+        task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
 
         //Assert
         assertEquals(0.0, task.getEffortRemaining());
@@ -492,12 +375,10 @@ class TaskTest {
         Task task = new Task("test", taskDescription, 8.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-        TaskEffort taskEffort = task.createTaskEffort(6, 0, effortDate, "test", ".pdf");
         Date effortDate2 = new Date(LocalDate.of(2022, 1, 21));
-        TaskEffort taskEffort2 = task.createTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
-        task.saveTaskEffort(taskEffort);
         //Act
-        task.saveTaskEffort(taskEffort2);
+        task.createAndSaveTaskEffort(6, 0, effortDate, "test", ".pdf");
+        task.createAndSaveTaskEffort(4, 0, effortDate2, "test2", ".pdf2");
         //Assert
         assertEquals(0.0, task.getEffortRemaining());
         assertEquals(10.0, task.getHoursSpent());
@@ -520,9 +401,8 @@ class TaskTest {
         Task task = new Task("test", taskDescription, 8.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-        TaskEffort taskEffort = task.createTaskEffort(9, 0, effortDate, "test", ".pdf");
         //Act
-        task.saveTaskEffort(taskEffort);
+        task.createAndSaveTaskEffort(9, 0, effortDate, "test", ".pdf");
         //Assert
         assertEquals(0.0, task.getEffortRemaining());
         assertEquals(9.0, task.getHoursSpent());
@@ -543,8 +423,8 @@ class TaskTest {
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
         //Assert
         assertTrue(task.hasType(taskType));
-        //review
-//        assertTrue(task.hasStatus(company.getTaskStatusStore().getInitialStatus()));
+        //Act
+        assertTrue(task.hasStatus(company.getTaskStatusStore().getInitialStatus()));
         assertTrue(task.hasResponsible(resource));
         assertTrue(task.hasName("test"));
     }
@@ -645,58 +525,25 @@ class TaskTest {
         });
     }
 
-//    @Test
-//    void constructorCheckDescriptionSizeTest() {
-//        //Arrange
-//        Company company = new Company();
-//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-//        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
-//        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
-//        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-//        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
-//        String taskDescription = "must be at";
-//        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-//
-//        //Asserts
-//        assertThrows(IllegalArgumentException.class, () -> {
-//            //Arrange
-//            new Task("test", taskDescription, 20.00, taskType, resource);
-//        });
-//    }
+    @Test
+    void constructorCheckDescriptionSizeTest() {
+        //Arrange
+        Company company = new Company();
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        String taskDescription = "";
+        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
-//    @Test
-//    void constructorCheckTypeNotNullTest() {
-//        //Arrange
-//        Company company = new Company();
-//        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-//        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
-//        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
-//        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-//        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
-//        String taskDescription = "must be at least 20 characters";
-//        TaskType taskType = null;
-//
-//        //Asserts
-//        assertThrows(IllegalArgumentException.class, () -> {
-//            //Arrange
-//            new Task("test", taskDescription, 20.00, taskType, resource);
-//        });
-//    }
+        //Asserts
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            new Task("test", taskDescription, 20.00, taskType, resource);
+        });
+    }
 
-//    @Test
-//    void constructorCheckResponsibleNotNullTest() {
-//        //Arrange
-//        Company company = new Company();
-//        Resource resource = null;
-//        String taskDescription = "must be at least 20 characters";
-//        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-//
-//        //Asserts
-//        assertThrows(IllegalArgumentException.class, () -> {
-//            //Arrange
-//            new Task("test", taskDescription, 20.00, taskType, resource);
-//        });
-//    }
 
     @Test
     void checkIdRulesTest() {
@@ -787,21 +634,19 @@ class TaskTest {
         Task task2 = new Task("test", taskDescription, 8.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-        TaskEffort taskEffort = task.createTaskEffort(8, 0, effortDate, "test", ".pdf");
-        TaskEffort taskEffort2 = task.createTaskEffort(1, 1, effortDate, "test", ".pdf");
+       task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
 
-        TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
-        task.saveTaskEffort(taskEffort);
-        task.updateHoursSpent(taskEffort2);
-        task2.updateEffortRemaining(taskEffort2);
+        company.getTaskStatusStore().getTaskStatusByDescription("Running");
+        task.updateHoursSpent(task.getTaskEffortList().get(0));
+        task2.updateEffortRemaining(task.getTaskEffortList().get(0));
         //Act
 
         //Assert
         assertEquals(0.0, task.getEffortRemaining());
-        assertEquals(9.016666666666666, task.getHoursSpent());
+        assertEquals(16.0, task.getHoursSpent());
         assertEquals(1.0, task.getExecutionPercentage());
-        assertEquals(10.033333333333331, task.updateHoursSpent(taskEffort2));
-        assertEquals(5.966666666666667, task2.updateEffortRemaining(taskEffort2));
+        assertEquals(24.0, task.updateHoursSpent(task.getTaskEffortList().get(0)));
+        assertEquals(0.0, task2.updateEffortRemaining(task.getTaskEffortList().get(0)));
     }
 
 }
