@@ -8,6 +8,20 @@ class SprintDurationTest {
 
     @Test
     void getSprintDurationDays() {
+        SprintDuration duration = new SprintDuration(7);
+
+        assertEquals(7, duration.getSprintDurationDays());
+    }
+
+    @Test
+    void getSprintDurationDays_2() {
+        SprintDuration duration = new SprintDuration(31);
+
+        assertEquals(31, duration.getSprintDurationDays());
+    }
+
+    @Test
+    void getSprintDurationDays_3() {
         SprintDuration duration = new SprintDuration(14);
 
         assertEquals(14, duration.getSprintDurationDays());
@@ -17,7 +31,7 @@ class SprintDurationTest {
     void getMIN() {
         SprintDuration duration = new SprintDuration(14);
 
-        assertEquals(1, duration.getMIN());
+        assertEquals(7, duration.getMIN());
     }
 
     @Test
@@ -40,16 +54,7 @@ class SprintDurationTest {
     void shouldTrowNullExceptionNegative() {
         assertThrows(NullPointerException.class, () -> {
 
-            new SprintDuration(-1);
-
-        });
-    }
-
-    @Test
-    void shouldTrowNullExceptionZero() {
-        assertThrows(NullPointerException.class, () -> {
-
-            new SprintDuration(0);
+            new SprintDuration(3);
 
         });
     }

@@ -15,7 +15,7 @@ public class SprintDuration {
     /**
      * Constants
      **/
-    int MIN = 1;
+    int MIN = 7;
     int MAX = 31;
 
     /**
@@ -28,7 +28,7 @@ public class SprintDuration {
 
     private void checkRules(int sprintDuration) {
         if(sprintDuration < MIN || sprintDuration > MAX) {
-            throw new NullPointerException("The sprint duration must be within " + MIN + " and " +  MAX + " weeks ");
+            throw new NullPointerException("The sprint duration must be within " + MIN + " and " +  MAX + " days");
         }
     }
 
