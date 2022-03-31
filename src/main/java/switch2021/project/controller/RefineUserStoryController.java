@@ -4,7 +4,7 @@ import switch2021.project.model.*;
 import switch2021.project.model.Project.ProductBacklog;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.valueObject.UserStoryStatus;
+import switch2021.project.model.valueObject.UserStoryStatus;
 
 public class RefineUserStoryController {
 

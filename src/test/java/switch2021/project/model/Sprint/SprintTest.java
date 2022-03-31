@@ -93,7 +93,7 @@ public class SprintTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            Sprint sprint = new Sprint(" ", LocalDate.now());
+            new Sprint(" ", LocalDate.now());
         });
     }
 

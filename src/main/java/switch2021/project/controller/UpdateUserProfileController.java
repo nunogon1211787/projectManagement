@@ -4,7 +4,7 @@ import switch2021.project.model.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.stores.SystemUserStore;
 import switch2021.project.stores.UserProfileStore;
-import switch2021.project.valueObject.UserProfile;
+import switch2021.project.model.valueObject.UserProfile;
 
 import java.util.List;
 

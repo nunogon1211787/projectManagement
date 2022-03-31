@@ -3,7 +3,7 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Task.Task;
-import switch2021.project.valueObject.*;
+import switch2021.project.model.valueObject.*;
 import switch2021.project.dto.TaskEffortDTO;
 import switch2021.project.dto.TaskIdNameDTO;
 import switch2021.project.dto.UserStorySprintProjectDTO;

@@ -6,8 +6,8 @@ import switch2021.project.dto.UserStoryDto;
 import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.mapper.UserStoryMapper;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.valueObject.UsPriority;
-import switch2021.project.valueObject.UserStoryStatus;
+import switch2021.project.model.valueObject.UsPriority;
+import switch2021.project.model.valueObject.UserStoryStatus;
 
 import java.util.*;
 

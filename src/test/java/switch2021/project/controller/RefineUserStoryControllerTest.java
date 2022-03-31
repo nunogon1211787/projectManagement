@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.valueObject.BusinessSector;
-import switch2021.project.valueObject.Customer;
-import switch2021.project.valueObject.Typology;
-import switch2021.project.valueObject.UserStoryStatus;
+import switch2021.project.model.valueObject.BusinessSector;
+import switch2021.project.model.valueObject.Customer;
+import switch2021.project.model.valueObject.Typology;
+import switch2021.project.model.valueObject.UserStoryStatus;
 
 import java.time.LocalDate;
 

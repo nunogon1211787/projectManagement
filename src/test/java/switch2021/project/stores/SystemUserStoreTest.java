@@ -1,10 +1,10 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.valueObject.Password;
+import switch2021.project.model.valueObject.Password;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.valueObject.UserProfile;
+import switch2021.project.model.valueObject.UserProfile;
 
 import java.util.ArrayList;
 import java.util.List;

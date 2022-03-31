@@ -2,8 +2,8 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.factory.ProjectStatusFactory;
-import switch2021.project.valueObject.Description;
-import switch2021.project.valueObject.ProjectStatus;
+import switch2021.project.model.valueObject.Description;
+import switch2021.project.model.valueObject.ProjectStatus;
 
 import java.util.List;
 

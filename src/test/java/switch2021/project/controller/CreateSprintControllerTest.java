@@ -6,8 +6,8 @@ import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.valueObject.*;
 import switch2021.project.stores.ProjectStore;
-import switch2021.project.valueObject.*;
 
 import java.time.LocalDate;
 import java.util.List;

@@ -9,7 +9,7 @@ import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Task.Task;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.valueObject.*;
+import switch2021.project.model.valueObject.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

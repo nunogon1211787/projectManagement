@@ -3,7 +3,7 @@ package switch2021.project.model.Sprint;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.valueObject.Typology;
+import switch2021.project.model.valueObject.Typology;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -52,9 +52,7 @@ class SprintBacklogTest {
         UserStory userstory = new UserStory("As a PO, i want to test this string", priority, description, 5);
         sprintBacklog.saveUserStoryToSprintBacklog(userstory);
         // Act
-
         assertEquals(sprintBacklog.getUserStory(userstory.getIdUserStory()), userstory);
-
     }
 
     @Test
@@ -82,7 +80,6 @@ class SprintBacklogTest {
         sprintBacklog.saveUserStoryToSprintBacklog(userstory);
         UserStory userstory2 = new UserStory("As a PO, i want to test this string", priority, description, 5);
         // Act
-
         assertNotEquals(sprintBacklog.getUserStory(userstory.getIdUserStory()), userstory2);
     }
 
@@ -94,7 +91,6 @@ class SprintBacklogTest {
         String description = "Validate";
         UserStory userstory = new UserStory("As a PO, i want to test this string", priority, description, 5);
         sprintBacklog.saveUserStoryToSprintBacklog(userstory);
-
         // Act
         assertNull(sprintBacklog.getUserStory(55));
     }
@@ -138,6 +134,5 @@ class SprintBacklogTest {
         boolean test = sprintBacklog.saveUserStoryToSprintBacklog(userstory);
         // Act
         assertTrue(test);
-
     }
 }

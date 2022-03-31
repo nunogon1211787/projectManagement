@@ -1,7 +1,7 @@
 package switch2021.project.factoryInterface;
 
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.valueObject.Resource;
+import switch2021.project.model.valueObject.Resource;
 
 import java.time.LocalDate;
 

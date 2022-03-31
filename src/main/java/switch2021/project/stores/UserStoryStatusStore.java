@@ -1,7 +1,7 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.valueObject.UserStoryStatus;
+import switch2021.project.model.valueObject.UserStoryStatus;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,7 +3,7 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.valueObject.UserProfile;
+import switch2021.project.model.valueObject.UserProfile;
 
 import java.util.ArrayList;
 import java.util.Arrays;

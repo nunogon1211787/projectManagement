@@ -6,9 +6,9 @@ import switch2021.project.model.Project.*;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Task.Task;
+import switch2021.project.model.valueObject.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SystemUserStore;
-import switch2021.project.valueObject.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,8 +18,6 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
 
     @Test
     void getListOfProjectActivities() {
-
-
         Company company = new Company();
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
@@ -56,7 +54,6 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         assertEquals(listTest, project2.getSprintList().getListOfAllAActivitiesOfAProject());
         assertNull(viewStatusTester.getProjectByCode(null));
         assertNotNull(viewStatusTester.getProjectByCode("Project_2022_1"));
-
     }
 
     @Test

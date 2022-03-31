@@ -6,9 +6,9 @@ import switch2021.project.model.Project.*;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.stores.UserStoryStatusStore;
-import switch2021.project.valueObject.BusinessSector;
-import switch2021.project.valueObject.Customer;
-import switch2021.project.valueObject.Typology;
+import switch2021.project.model.valueObject.BusinessSector;
+import switch2021.project.model.valueObject.Customer;
+import switch2021.project.model.valueObject.Typology;
 
 import java.time.LocalDate;
 import java.util.Arrays;

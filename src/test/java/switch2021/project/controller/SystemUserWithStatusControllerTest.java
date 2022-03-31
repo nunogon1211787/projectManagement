@@ -6,7 +6,7 @@ import switch2021.project.dto.SystemUserWithStatusDto;
 import switch2021.project.mapper.SystemUserWithStatusMapper;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.valueObject.UserProfile;
+import switch2021.project.model.valueObject.UserProfile;
 
 import java.util.List;
 

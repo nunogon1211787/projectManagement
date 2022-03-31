@@ -2,10 +2,10 @@ package switch2021.project.model.Project;
 
 import lombok.Getter;
 import switch2021.project.factoryInterface.ResourceFactoryInterface;
-import switch2021.project.valueObject.ProjectRole;
+import switch2021.project.model.valueObject.ProjectRole;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.utils.App;
-import switch2021.project.valueObject.Resource;
+import switch2021.project.model.valueObject.Resource;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

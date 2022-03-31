@@ -2,8 +2,8 @@ package switch2021.project.stores;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.valueObject.Description;
-import switch2021.project.valueObject.Typology;
+import switch2021.project.model.valueObject.Description;
+import switch2021.project.model.valueObject.Typology;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;

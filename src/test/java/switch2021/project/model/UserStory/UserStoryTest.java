@@ -3,7 +3,7 @@ package switch2021.project.model.UserStory;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Task.Task;
-import switch2021.project.valueObject.UserStoryStatus;
+import switch2021.project.model.valueObject.UserStoryStatus;
 
 import java.time.LocalDate;
 

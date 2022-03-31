@@ -7,7 +7,7 @@ import switch2021.project.factory.SprintFactory;
 import switch2021.project.model.Company;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Task.Task;
-import switch2021.project.valueObject.*;
+import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
@@ -81,8 +81,6 @@ class ProjectTest {
 
         double budget = company.getProjectStore().getProjectByCode("Project_2022_1").getBudget();
         double valueBudget = 5000;
-
-
         //Result
         assertEquals(valueCode, code);
         assertEquals(valueName, name);
@@ -430,7 +428,6 @@ class ProjectTest {
         list3.saveNewProject(list3.createProject("prototype4", "test123456", customer,
                 typo, sector, LocalDate.now(), 10, 6000));
 
-
         //Assert
         assertNotSame(list1, list2);
         assertEquals(list1, list2);
@@ -442,7 +439,6 @@ class ProjectTest {
         assertEquals("prototype", project.getProjectName().getText());
         assertEquals("test1234", project.getDescription().getText());
         assertEquals(sector, project.getBusinessSector());
-
     }
 
     @Test

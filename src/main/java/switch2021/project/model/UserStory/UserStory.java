@@ -3,12 +3,13 @@ package switch2021.project.model.UserStory;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.Task.Task;
-import switch2021.project.valueObject.Description;
+import switch2021.project.model.valueObject.Description;
 import switch2021.project.stores.TaskList;
-import switch2021.project.valueObject.UsPriority;
-import switch2021.project.valueObject.UserStoryStatus;
-import switch2021.project.valueObject.UsTitle;
+import switch2021.project.model.valueObject.UsPriority;
+import switch2021.project.model.valueObject.UserStoryStatus;
+import switch2021.project.model.valueObject.UsTitle;
 
+import switch2021.project.model.valueObject.UserStoryStatus;
 import java.util.Objects;
 
 /**

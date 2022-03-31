@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.factory.ResourceFactory;
 import switch2021.project.model.Company;
-import switch2021.project.valueObject.*;
+import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
 
 import java.time.LocalDate;

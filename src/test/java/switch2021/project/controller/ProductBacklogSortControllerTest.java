@@ -10,7 +10,7 @@ import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.valueObject.*;
+import switch2021.project.model.valueObject.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -44,7 +44,6 @@ public class ProductBacklogSortControllerTest {
         company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
-
         // Act
         ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company, mapper, mapperPB);
         List<ProjectDTO> projectList = productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
@@ -76,11 +75,9 @@ public class ProductBacklogSortControllerTest {
         company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
-
         // Act
         ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company, mapper, mapperPB);
         List<ProjectDTO> projectList = productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
-
         // Assert
         assertEquals(project.getCode(), projectList.get(0).getCode());
         assertEquals(project.getProjectName().getText(), projectList.get(0).getProjectName());
@@ -114,7 +111,6 @@ public class ProductBacklogSortControllerTest {
         company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
-
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company, mapper, mapperPB);
@@ -122,7 +118,6 @@ public class ProductBacklogSortControllerTest {
         });
         // Assert
         assertEquals("Email cannot be blank", exception.getMessage());
-
     }
 
     @Test
@@ -149,7 +144,6 @@ public class ProductBacklogSortControllerTest {
         company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
-
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company, mapper, mapperPB);
@@ -187,15 +181,12 @@ public class ProductBacklogSortControllerTest {
 
         projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
-
         // Act
         ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company, mapper, mapperPB);
         productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
         List<UserStoryDto> userStoryListDtoList = productBacklogSortController.getUsSortedByPriority("Project_2022_1");
-
         // Assert
         assertEquals(4, userStoryListDtoList.size());
-
         assertEquals(1, userStoryListDtoList.get(0).getPriority());
         assertEquals(2, userStoryListDtoList.get(1).getPriority());
         assertEquals(3, userStoryListDtoList.get(2).getPriority());
@@ -268,14 +259,11 @@ public class ProductBacklogSortControllerTest {
 
         projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
-
         // Act
         ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company, mapper, mapperPB);
         productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
         List<UserStoryDto> userStoryListDtoList = productBacklogSortController.getUsSortedByPriority("Project_2022_1");
-
         // Assert
-
         assertEquals(project.getProductBacklog().getUserStoryList().get(0).getTitle().getUsTitle(), userStoryListDtoList.get(0).getTitle());
         assertEquals(project.getProductBacklog().getUserStoryList().get(0).getUserStoryStatus(), userStoryListDtoList.get(0).getUserStoryStatus());
         assertEquals(project.getProductBacklog().getUserStoryList().get(0).getPriority().getUsPriority(), userStoryListDtoList.get(0).getPriority());

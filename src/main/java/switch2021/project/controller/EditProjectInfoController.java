@@ -1,10 +1,10 @@
 package switch2021.project.controller;
 
-import switch2021.project.valueObject.Description;
+import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Project.ProjectTeam;
-import switch2021.project.valueObject.ProjectStatus;
+import switch2021.project.model.valueObject.ProjectStatus;
 
 import java.time.LocalDate;
 import java.util.List;

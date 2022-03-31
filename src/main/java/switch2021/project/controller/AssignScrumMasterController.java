@@ -2,12 +2,12 @@ package switch2021.project.controller;
 
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.dto.ResourceDTO;
-import switch2021.project.valueObject.ProjectRole;
+import switch2021.project.model.valueObject.ProjectRole;
 import switch2021.project.mapper.ProjectTeamMapper;
 import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
-import switch2021.project.valueObject.Resource;
+import switch2021.project.model.valueObject.Resource;
 
 import java.time.LocalDate;
 

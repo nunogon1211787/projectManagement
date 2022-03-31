@@ -2,7 +2,7 @@ package switch2021.project.controller;
 
 import switch2021.project.model.Company;
 import switch2021.project.stores.UserProfileStore;
-import switch2021.project.valueObject.UserProfile;
+import switch2021.project.model.valueObject.UserProfile;
 
 //https://www.devmedia.com.br/padrao-de-projeto-singleton-em-java/26392
 //https://www.geeksforgeeks.org/singleton-class-java/

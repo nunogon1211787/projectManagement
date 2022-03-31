@@ -4,7 +4,7 @@ import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintBacklog;
 import switch2021.project.model.Task.Task;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.valueObject.Date;
+import switch2021.project.model.valueObject.Date;
 import switch2021.project.dto.TaskEffortDTO;
 import switch2021.project.dto.TaskIdNameDTO;
 import switch2021.project.dto.UserStorySprintProjectDTO;
@@ -13,7 +13,7 @@ import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
-import switch2021.project.valueObject.TaskEffort;
+import switch2021.project.model.valueObject.TaskEffort;
 
 import java.util.List;
 

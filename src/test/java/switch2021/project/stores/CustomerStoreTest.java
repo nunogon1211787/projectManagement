@@ -1,10 +1,10 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.valueObject.Customer;
-import switch2021.project.valueObject.Description;
-import switch2021.project.valueObject.Email;
-import switch2021.project.valueObject.Nif;
+import switch2021.project.model.valueObject.Customer;
+import switch2021.project.model.valueObject.Description;
+import switch2021.project.model.valueObject.Email;
+import switch2021.project.model.valueObject.Nif;
 
 import java.util.List;
 

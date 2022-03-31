@@ -2,8 +2,8 @@ package switch2021.project.controller;
 
 import switch2021.project.model.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.valueObject.Request;
-import switch2021.project.valueObject.UserProfile;
+import switch2021.project.model.valueObject.Request;
+import switch2021.project.model.valueObject.UserProfile;
 
 public class ProfileRequestController {
 

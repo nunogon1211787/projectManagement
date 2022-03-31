@@ -1,9 +1,9 @@
 package switch2021.project.dto;
 
 import lombok.Getter;
-import switch2021.project.valueObject.Date;
-import switch2021.project.valueObject.Hours;
-import switch2021.project.valueObject.Minutes;
+import switch2021.project.model.valueObject.Date;
+import switch2021.project.model.valueObject.Hours;
+import switch2021.project.model.valueObject.Minutes;
 
 @Getter
 

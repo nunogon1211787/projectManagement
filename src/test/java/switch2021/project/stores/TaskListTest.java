@@ -7,7 +7,7 @@ import switch2021.project.mapper.TaskMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Task.Task;
-import switch2021.project.valueObject.*;
+import switch2021.project.model.valueObject.*;
 
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
