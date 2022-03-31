@@ -44,8 +44,6 @@ public class Project {
 
     private int numberOfSprints;
     private Budget budget;
-    private int sprintDuration;
-    private double budget;
     private SprintDuration sprintDuration;
 
 
