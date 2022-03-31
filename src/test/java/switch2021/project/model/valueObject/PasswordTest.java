@@ -39,16 +39,6 @@ public class PasswordTest {
         assertEquals(pwdRes, pwd);
     }
 
-    @DisplayName("Password Success")
-    @Test
-    public void ValidPasswordMinLength() {
-        //Arrange
-        Password pwd = new Password("Qwerty_1");
-        String pwdRes = pwd.getPwd();
-        //Assert
-        assertEquals(pwd.getMIN_PASSWORD_LENGTH(),pwd.getPwd().length());
-    }
-
     @DisplayName("Password Fail - less 8")
     @Test
     public void PasswordFailLess8() {

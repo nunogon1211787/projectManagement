@@ -5,11 +5,8 @@ import lombok.Setter;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.valueObject.*;
 import switch2021.project.utils.App;
-import switch2021.project.model.valueObject.BusinessSector;
-import switch2021.project.model.valueObject.Customer;
-import switch2021.project.model.valueObject.ProjectStatus;
-import switch2021.project.model.valueObject.Typology;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -90,7 +87,7 @@ public class ProjectStore {
             for (int j = 0; j < project.getProjectTeam().getProjectTeamList().size(); j++) {
                 if (project.getTeamMemberByIndex(j).getUser().equals(user) &&
                         project.getTeamMemberByIndex(j).checkAllocationPeriod(startDate, endDate)) {
-                    sum = sum + project.getTeamMemberByIndex(j).getPercentageOfAllocation();
+                    sum = sum + project.getTeamMemberByIndex(j).getPercentageOfAllocation().getPercentage();
                 }
             }
         }

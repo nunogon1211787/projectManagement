@@ -13,19 +13,23 @@ public class SprintDuration {
     private final int sprintDurationDays;
 
     /**
-     * Constants
+     * Constants -
+     * Minimum and maximum days per sprint
      **/
-    int MIN = 7;
-    int MAX = 31;
+    final int MIN = 7;
+    final int MAX = 31;
 
     /**
-     * Constructor (without SINGLETON)
+     * Constructor
      **/
     public SprintDuration (int sprintDurationDays) {
         checkRules(sprintDurationDays);
         this.sprintDurationDays = sprintDurationDays;
     }
 
+    /**
+     * Validate whether input parameter is within the permitted interval of days
+     */
     private void checkRules(int sprintDuration) {
         if(sprintDuration < MIN || sprintDuration > MAX) {
             throw new NullPointerException("The sprint duration must be within " + MIN + " and " +  MAX + " days");
@@ -37,7 +41,7 @@ public class SprintDuration {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SprintDuration that = (SprintDuration) o;
-        return sprintDurationDays == that.sprintDurationDays && MIN == that.MIN && MAX == that.MAX;
+        return sprintDurationDays == that.sprintDurationDays;
     }
 
     @Override

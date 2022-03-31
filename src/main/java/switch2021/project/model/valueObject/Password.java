@@ -9,7 +9,7 @@ public class Password {
 
     /** Attributes **/
     private final String pwd;
-    private final int MIN_PASSWORD_LENGTH = 8;
+    private static final int MIN_PASSWORD_LENGTH = 8;
 
     /** Constructor **/
     public Password (String pwd) {

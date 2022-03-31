@@ -53,7 +53,7 @@ public class AssociateResourceTest {
                 "Qwerty_1", "img_123456", userProfile);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
-        Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, 100, .2);
+        Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, new CostPerHour(100), new PercentageOfAllocation(.2));
         //Act
         boolean result = proj.addResource(resAllo2);
         //Assert
@@ -67,7 +67,7 @@ public class AssociateResourceTest {
         SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "img_123456", userProfile);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
-        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.5));
         proj1.addResource(resAllo1);
         proj3.addResource(resAllo1);
         //Act
@@ -84,7 +84,7 @@ public class AssociateResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "img_xyz", userProfile);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
-        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .2);
+        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.2));
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
         //Save Project and Add Resource to Project
@@ -107,7 +107,7 @@ public class AssociateResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "img_xyz", userProfile);
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
-        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .2);
+        Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.2));
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
         //Save Project and Add Resource to Project

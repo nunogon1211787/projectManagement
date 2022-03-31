@@ -46,7 +46,7 @@ public class TaskListTest {
         TaskList test = new TaskList();
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         TaskType type = new TaskType("type");
         Task newTask = new Task("test", "test test test tests", 10, type, resource);
         Task newTask2 = new Task("testdois", "test2 test2 test2 test2", 10, type, resource);
@@ -65,7 +65,7 @@ public class TaskListTest {
         TaskList test = new TaskList();
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         TaskType type = new TaskType("type");
         Task newTask = new Task("test", "test test test tests", 10, type, resource);
         //Assert

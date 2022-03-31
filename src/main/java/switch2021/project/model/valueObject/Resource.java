@@ -17,16 +17,16 @@ public class Resource {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    private double costPerHour;
-    private double percentageOfAllocation;
+    private CostPerHour costPerHour;
+    private PercentageOfAllocation percentageOfAllocation;
 
 
     /**
      * Resource's Constructor
      **/
-    public Resource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
+    public Resource(SystemUser user, LocalDate startDate, LocalDate endDate, CostPerHour costPerHour, PercentageOfAllocation percentageOfAllocation) {
         checkStartDateEndDate(startDate, endDate);
-        checkCostPerHour(costPerHour);
+//        checkCostPerHour(costPerHour);
         checkSystemUser(user);
 
         this.user = user;
@@ -133,11 +133,11 @@ public class Resource {
         }
     }
 
-    private void checkCostPerHour(double costPerHour) {
-        if (costPerHour < 0) {
-            throw new IllegalArgumentException("Cost Per Hour must be valid.");
-        }
-    }
+//    private void checkCostPerHour(double costPerHour) {
+//        if (costPerHour < 0) {
+//            throw new IllegalArgumentException("Cost Per Hour must be valid.");
+//        }
+//    }
 
     private void checkSystemUser(SystemUser user) {
         if(user == null) {
@@ -155,7 +155,7 @@ public class Resource {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Resource resource = (Resource) o;
-        return Double.compare(resource.costPerHour, costPerHour) == 0 && Double.compare(resource.percentageOfAllocation, percentageOfAllocation)
+        return Double.compare(resource.costPerHour.getCost(), costPerHour.getCost()) == 0 && Double.compare(resource.percentageOfAllocation.getPercentage(), percentageOfAllocation.getPercentage())
                 == 0 && user.equals(resource.user) && Objects.equals(role, resource.role) && Objects.equals(startDate,
                 resource.startDate) && Objects.equals(endDate, resource.endDate);
 

@@ -53,7 +53,7 @@ class CreateSprintTaskControllerTest {
         //Create tasks
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         TaskType type = new TaskType("type");
         Task newTask = new Task("test", "test test test tests", 10, type, resource);
         Task newTask2 = new Task("testdois", "test2 test2 test2 test2", 10, type, resource);
@@ -117,11 +117,11 @@ class CreateSprintTaskControllerTest {
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);
         project.getProjectTeam().saveResource(res3);
@@ -186,11 +186,11 @@ class CreateSprintTaskControllerTest {
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);
         project.getProjectTeam().saveResource(res3);
@@ -227,11 +227,11 @@ class CreateSprintTaskControllerTest {
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);
         project.getProjectTeam().saveResource(res3);
@@ -275,11 +275,11 @@ class CreateSprintTaskControllerTest {
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
+        Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);
         project.getProjectTeam().saveResource(res3);

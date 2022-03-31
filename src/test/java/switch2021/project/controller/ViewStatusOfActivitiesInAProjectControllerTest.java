@@ -35,7 +35,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         SystemUser user = company.getSystemUserStore().createSystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-        Resource resource = new Resource(user, startDateMb, endDateMb, 100, .5);
+        Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 

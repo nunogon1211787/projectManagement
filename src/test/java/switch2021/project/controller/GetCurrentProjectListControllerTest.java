@@ -33,7 +33,7 @@ public class GetCurrentProjectListControllerTest {
         SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
-        Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, 100, 1);
+        Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, new CostPerHour(100), new PercentageOfAllocation(1));
         currentProject.getProjectTeam().saveResource(manuelmartins);
         projectStore.saveNewProject(currentProject);
         // Act
@@ -61,7 +61,7 @@ public class GetCurrentProjectListControllerTest {
         SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
-        Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, 100, .5);
+        Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, new CostPerHour(100), new PercentageOfAllocation(.5));
         currentProject.getProjectTeam().saveResource(manuelmartins);
         projectStore.saveNewProject(currentProject);
 
@@ -107,7 +107,7 @@ public class GetCurrentProjectListControllerTest {
         SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
-        Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, 100, .5);
+        Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, new CostPerHour(100), new PercentageOfAllocation(.5));
         currentProject.getProjectTeam().saveResource(manuelmartins);
         projectStore.saveNewProject(currentProject);
 

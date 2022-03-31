@@ -38,7 +38,7 @@ public class CreateSprintControllerTest {
         SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
-        Resource joana = new Resource(user2, startDateMm, endDateMm, 100, 1);
+        Resource joana = new Resource(user2, startDateMm, endDateMm, new CostPerHour(100), new PercentageOfAllocation(1));
         currentProject.getProjectTeam().saveResource(joana);
 
         // Act
@@ -73,7 +73,7 @@ public class CreateSprintControllerTest {
         SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
-        Resource joana = new Resource(user2, startDateMm, endDateMm, 100, 1);
+        Resource joana = new Resource(user2, startDateMm, endDateMm, new CostPerHour(100), new PercentageOfAllocation(1));
         currentProject.getProjectTeam().saveResource(joana);
         proj1.getProjectTeam().saveResource(joana);
 
@@ -110,7 +110,7 @@ public class CreateSprintControllerTest {
         SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
-        Resource joana = new Resource(user2, startDateMm, endDateMm, 100, 1);
+        Resource joana = new Resource(user2, startDateMm, endDateMm, new CostPerHour(100), new PercentageOfAllocation(1));
         currentProject.getProjectTeam().saveResource(joana);
         proj1.getProjectTeam().saveResource(joana);
 
@@ -149,7 +149,7 @@ public class CreateSprintControllerTest {
         SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
-        Resource joana = new Resource(user2, startDateMm, endDateMm, 100, 1);
+        Resource joana = new Resource(user2, startDateMm, endDateMm, new CostPerHour(100), new PercentageOfAllocation(1));
         currentProject.getProjectTeam().saveResource(joana);
         proj1.getProjectTeam().saveResource(joana);
 

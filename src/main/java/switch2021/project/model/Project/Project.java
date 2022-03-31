@@ -43,7 +43,7 @@ public class Project {
     private LocalDate endDate;
 
     private int numberOfSprints;
-    private double budget;
+    private Budget budget;
     private SprintDuration sprintDuration;
 
 
@@ -53,7 +53,7 @@ public class Project {
     public Project(String name, String description, Customer customer, Typology typology,
                    BusinessSector businessSector, LocalDate startDate, ProjectStatus status, int numberOfSprints, double budget) {
 
-        validateProjectFields(name,description, budget, numberOfSprints);
+        validateProjectFields(numberOfSprints);
 
         this.projectName = new Description(name);
         this.description = new Description(description);
@@ -67,7 +67,7 @@ public class Project {
         this.sprintList = new SprintList(new SprintFactory());
 
         this.numberOfSprints = numberOfSprints;
-        this.budget = budget;
+        this.budget = new Budget(budget);
 
         this.projectTeam = new ProjectTeam(resFac);
 //        this.projectTeam = this.projectTeamFactory.createProjectTeam();
@@ -80,17 +80,9 @@ public class Project {
      * Validates Project Creation Fields
      * Checks if @param projectName and @param description are empty or have the minimum characters necessary
      */
-    public void validateProjectFields(String projectName, String description, double budget, int numberOfSprints) {
-        if (projectName.trim().isEmpty())
-            throw new IllegalArgumentException("Project Name cannot be empty");
-        if ((projectName.length() < 3))
-            throw new IllegalArgumentException("Project Name must be at least 3 characters");
-        if (description.length() <1)
-            throw new IllegalArgumentException("Description must be at least 1 character");
+    public void validateProjectFields( int numberOfSprints) {
         if (numberOfSprints <= 0)
             throw new IllegalArgumentException("Number of Sprints must be greater than 0");
-        if (budget <= 0)
-            throw new IllegalArgumentException("Budget must be greater than 0");
     }
 
 
@@ -166,8 +158,7 @@ public class Project {
         if (!(o instanceof Project)) return false;
         Project project = (Project) o;
         return numberOfSprints == project.numberOfSprints
-                && Double.compare(project.budget, budget) == 0
-                && Objects.equals(sprintDuration, project.sprintDuration)
+                && sprintDuration == project.sprintDuration
                 && Objects.equals(code, project.code)
                 && Objects.equals(projectName, project.projectName)
                 && Objects.equals(description, project.description)
@@ -179,7 +170,8 @@ public class Project {
                 && Objects.equals(sprintList, project.sprintList)
                 && Objects.equals(projectTeam, project.projectTeam)
                 && Objects.equals(startDate, project.startDate)
-                && Objects.equals(endDate, project.endDate);
+                && Objects.equals(endDate, project.endDate)
+                && Objects.equals(budget, project.budget);
     }
 
     @Override
