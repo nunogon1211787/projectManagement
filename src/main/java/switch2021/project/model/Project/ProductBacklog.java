@@ -86,8 +86,6 @@ public class ProductBacklog {
         return msg;
     }
 
-//TODO Ver comparingINT
-
     /**
      * Get Methods.
      **/

@@ -42,7 +42,7 @@ public class CreateSprintController {
     }
 
     public Sprint createSprint(String name, LocalDate startDate) {
-        int sprintDuration = this.proj.getSprintDuration();
+        int sprintDuration = this.proj.getSprintDuration().getSprintDurationDays();
         return this.proj.getSprintList().createSprint(name, startDate, sprintDuration);
     }
 

@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.valueObject.BusinessSector;
-import switch2021.project.model.valueObject.Customer;
-import switch2021.project.model.valueObject.Resource;
-import switch2021.project.model.valueObject.Typology;
+import switch2021.project.model.valueObject.*;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
@@ -215,6 +212,7 @@ public class ProjectStoreTest {
         SystemUser user = mock(SystemUser.class);
         Resource resource = mock(Resource.class);
         ProjectTeam projectTeam = mock(ProjectTeam.class);
+        PercentageOfAllocation percOfAllo = mock(PercentageOfAllocation.class);
 
         projectTeam.saveResource(resource);
 
@@ -223,7 +221,8 @@ public class ProjectStoreTest {
 
         when(resource.getUser()).thenReturn(user);
         when(resource.checkAllocationPeriod(any(),any())).thenReturn(true);
-        when(resource.getPercentageOfAllocation()).thenReturn(0.4);
+        when(resource.getPercentageOfAllocation()).thenReturn(percOfAllo);
+        when(percOfAllo.getPercentage()).thenReturn(0.5);
 
         projectStore.saveNewProject(proj);
 

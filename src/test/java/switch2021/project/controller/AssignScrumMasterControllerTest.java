@@ -52,10 +52,11 @@ class AssignScrumMasterControllerTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        proj1.setSprintDuration(new SprintDuration(14));
         company.getProjectStore().saveNewProject(proj1);
-        Sprint sprint1 = proj1.getSprintList().createSprint("Sprint1", LocalDate.now().minusWeeks(1), 2);
+        Sprint sprint1 = proj1.getSprintList().createSprint("Sprint1", LocalDate.now().minusWeeks(1), 14);
         proj1.getSprintList().saveSprint(sprint1);
-        Sprint sprint2 = proj1.getSprintList().createSprint("Sprint2", LocalDate.now().plusWeeks(1), 2);
+        Sprint sprint2 = proj1.getSprintList().createSprint("Sprint2", LocalDate.now().plusWeeks(1), 14);
         proj1.getSprintList().saveSprint(sprint2);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Create resource 1
@@ -105,10 +106,11 @@ class AssignScrumMasterControllerTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        proj1.setSprintDuration(new SprintDuration(14));
         company.getProjectStore().saveNewProject(proj1);
-        Sprint sprint1 = proj1.getSprintList().createSprint("Sprint1", LocalDate.now().minusWeeks(1), 2);
+        Sprint sprint1 = proj1.getSprintList().createSprint("Sprint1", LocalDate.now().minusWeeks(1), 14);
         proj1.getSprintList().saveSprint(sprint1);
-        Sprint sprint2 = proj1.getSprintList().createSprint("Sprint2", LocalDate.now().plusWeeks(1), 2);
+        Sprint sprint2 = proj1.getSprintList().createSprint("Sprint2", LocalDate.now().plusWeeks(1), 14);
         proj1.getSprintList().saveSprint(sprint2);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Create resource 1
@@ -160,7 +162,7 @@ class AssignScrumMasterControllerTest {
             Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
             company.getProjectStore().saveNewProject(proj1);
-            proj1.setSprintDuration(2);
+            proj1.setSprintDuration(new SprintDuration(14));
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             // Create Resource 1
             SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
@@ -210,7 +212,7 @@ class AssignScrumMasterControllerTest {
             Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
             company.getProjectStore().saveNewProject(proj1);
-            proj1.setSprintDuration(2);
+            proj1.setSprintDuration(new SprintDuration(14));
             Sprint current = proj1.getSprintList().createSprint("Current", LocalDate.now().minusWeeks(2).plusDays(1), 2);
             proj1.getSprintList().saveSprint(current);
             Sprint next = proj1.getSprintList().createSprint("Next", LocalDate.now().plusDays(1), 2);
@@ -238,7 +240,7 @@ class AssignScrumMasterControllerTest {
             Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
             company.getProjectStore().saveNewProject(proj1);
-            proj1.setSprintDuration(2);
+            proj1.setSprintDuration(new SprintDuration(14));
             Sprint current = proj1.getSprintList().createSprint("Current", LocalDate.now().minusWeeks(2).plusDays(1), 2);
             proj1.getSprintList().saveSprint(current);
             Sprint next = proj1.getSprintList().createSprint("Next", LocalDate.now().plusDays(1), 2);
@@ -263,11 +265,12 @@ class AssignScrumMasterControllerTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        proj1.setSprintDuration(new SprintDuration(14));
         company.getProjectStore().saveNewProject(proj1);
-        proj1.setSprintDuration(2);
-        Sprint current = proj1.getSprintList().createSprint("Current", LocalDate.now().minusWeeks(2).plusDays(1), 2);
+        proj1.setSprintDuration(new SprintDuration(14));
+        Sprint current = proj1.getSprintList().createSprint("Current", LocalDate.now().minusWeeks(2).plusDays(1), 14);
         proj1.getSprintList().saveSprint(current);
-        Sprint next = proj1.getSprintList().createSprint("Next", LocalDate.now().plusDays(1), 2);
+        Sprint next = proj1.getSprintList().createSprint("Next", LocalDate.now().plusDays(1), 14);
         proj1.getSprintList().saveSprint(next);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
              //Create resource 1

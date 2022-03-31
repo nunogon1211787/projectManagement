@@ -22,21 +22,21 @@ class ResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "as", userProfile);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act
         SystemUser newUser2 = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "as", userProfile);
         LocalDate startDate2 = LocalDate.of(2021, 12, 31);
         LocalDate endDate2 = LocalDate.of(2022, 1, 5);
-        Resource expected = new Resource(newUser2, startDate2, endDate2, 100, .5);
+        Resource expected = new Resource(newUser2, startDate2, endDate2, new CostPerHour(100), new PercentageOfAllocation(.5));
         expected.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Assert
         assertEquals(input, expected);
         assertEquals(newUser, input.getUser());
         assertEquals(startDate, input.getStartDate());
         assertEquals(endDate, input.getEndDate());
-        assertEquals(100, input.getCostPerHour());
-        assertEquals(.5, input.getPercentageOfAllocation());
+        assertEquals(100, input.getCostPerHour().getCost());
+        assertEquals(.5, input.getPercentageOfAllocation().getPercentage());
     }
 
     @Test
@@ -48,13 +48,13 @@ class ResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "as", userProfile);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
-        Resource input = new Resource(newUser, startDate, endDate, 0, .5);
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(0), new PercentageOfAllocation(.5));
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act
         SystemUser newUser2 = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "as", userProfile);
         LocalDate startDate2 = LocalDate.of(2021, 12, 31);
         LocalDate endDate2 = LocalDate.of(2022, 1, 5);
-        Resource expected = new Resource(newUser2, startDate2, endDate2, 0, .5);
+        Resource expected = new Resource(newUser2, startDate2, endDate2, new CostPerHour(0), new PercentageOfAllocation(.5));
         expected.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Assert
         assertEquals(input, expected);
@@ -71,7 +71,7 @@ class ResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         //Act
         Resource expected = new Resource(input);
         //Assert
@@ -87,7 +87,7 @@ class ResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1","", userProfile);
         LocalDate startDate = LocalDate.of(2022,1,1);
         LocalDate endDate = LocalDate.of(2022, 1,20);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         //Act
         LocalDate date = LocalDate.of(2022, 1, 10);
         //Assert
@@ -103,7 +103,7 @@ class ResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1","", userProfile);
         LocalDate startDate = LocalDate.of(2022,1,1);
         LocalDate endDate = LocalDate.of(2022, 1,15);
-        Resource input = new Resource(newUser, startDate, endDate, 100, 1);
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         //Act
         LocalDate date = LocalDate.of(2022, 1, 2);
         //Assert
@@ -119,7 +119,7 @@ class ResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1","", userProfile);
         LocalDate startDate = LocalDate.of(2022,1,1);
         LocalDate endDate = LocalDate.of(2022, 1,20);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         //Act
         LocalDate date = LocalDate.of(2022, 1, 14);
         //Assert
@@ -135,7 +135,7 @@ class ResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1","", userProfile);
         LocalDate startDate = LocalDate.of(2022,1,1);
         LocalDate endDate = LocalDate.of(2022, 1,20);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         //Act
         LocalDate date = LocalDate.of(2022, 1, 22);
         //Assert
@@ -151,7 +151,7 @@ class ResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.now().minusWeeks(1);
         LocalDate endDate = LocalDate.now().plusWeeks(1);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
         assertTrue(input.isYourEmail("fase"));
@@ -170,7 +170,7 @@ class ResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = LocalDate.now().plusWeeks(1);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
         assertTrue(input.isYourEmail("fase"));
@@ -189,7 +189,7 @@ class ResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.now().minusWeeks(1);
         LocalDate endDate = LocalDate.now();
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
         assertTrue(input.isYourEmail("fase"));
@@ -209,8 +209,8 @@ class ResourceTest {
         SystemUser testUser = new SystemUser("xyz", "fase1@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.now().minusWeeks(1);
         LocalDate endDate = LocalDate.now().plusWeeks(1);
-        Resource test = new Resource(testUser, LocalDate.now().plusWeeks(1), LocalDate.now().plusWeeks(3), 100, .5);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource test = new Resource(testUser, LocalDate.now().plusWeeks(1), LocalDate.now().plusWeeks(3), new CostPerHour(100), new PercentageOfAllocation(.5));
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
         assertFalse(test.isYourEmail("fase@beaver.com"));
@@ -230,8 +230,8 @@ class ResourceTest {
         SystemUser testUser = new SystemUser("xyz", "fas1e@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = LocalDate.now().plusWeeks(1);
-        Resource test = new Resource(testUser, LocalDate.now().plusWeeks(1), LocalDate.now().plusWeeks(3), 100, .5);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource test = new Resource(testUser, LocalDate.now().plusWeeks(1), LocalDate.now().plusWeeks(3), new CostPerHour(100), new PercentageOfAllocation(.5));
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
         assertFalse(test.isYourEmail("fase"));
@@ -249,7 +249,7 @@ class ResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.now().minusWeeks(1);
         LocalDate endDate = LocalDate.now().plusWeeks(10);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
         assertTrue(input.isAvailableToSprint(LocalDate.now(),2));
@@ -262,7 +262,7 @@ class ResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.now().minusWeeks(1);
         LocalDate endDate = LocalDate.now().plusWeeks(10);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
         assertTrue(input.isAvailableToSprint(LocalDate.now().plusWeeks(1),2));
@@ -276,10 +276,10 @@ class ResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.now().minusWeeks(1);
         LocalDate endDate = LocalDate.now().plusWeeks(1);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
-        assertFalse(input.isAvailableToSprint(LocalDate.now(),3));
+        assertFalse(input.isAvailableToSprint(LocalDate.now(),21));
     }
 
 
@@ -292,19 +292,19 @@ class ResourceTest {
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1","", company.getUserProfileStore().getUserProfile("Visitor"));
         LocalDate startDate = LocalDate.of(2021,12,31);
         LocalDate endDate = LocalDate.of(2022, 4,5);
-        Resource original = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource original = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         original.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
             //Set Copy
         SystemUser newUserCopy = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1","", company.getUserProfileStore().getUserProfile("Visitor"));
         LocalDate startDateCopy = LocalDate.of(2021,1,15);
         LocalDate endDateCopy = LocalDate.of(2022, 4,5);
-        Resource copySet = new Resource(newUserCopy, startDateCopy, endDateCopy, 100, .5);
+        Resource copySet = new Resource(newUserCopy, startDateCopy, endDateCopy, new CostPerHour(100), new PercentageOfAllocation(.5));
         copySet.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
             //Set Original
         SystemUser newUserSet = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1","", company.getUserProfileStore().getUserProfile("Visitor"));
         LocalDate startDateSet = LocalDate.of(2021,12,31);
         LocalDate endDateSet = LocalDate.of(2022, 1,14);
-        Resource originalSet = new Resource(newUserSet, startDateSet, endDateSet, 100, .5);
+        Resource originalSet = new Resource(newUserSet, startDateSet, endDateSet, new CostPerHour(100), new PercentageOfAllocation(.5));
         originalSet.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act
         Resource copy = new Resource(original);
@@ -326,12 +326,12 @@ class ResourceTest {
         SystemUser joana = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1","", userProfile);
         LocalDate startDate = LocalDate.of(2021,12,31);
         LocalDate endDate = LocalDate.of(2022, 4,5);
-        Resource original = new Resource(joana, startDate, endDate, 100, .5);
+        Resource original = new Resource(joana, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         original.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Copy
         LocalDate startDateSet = LocalDate.of(2021,12,31);
         LocalDate endDateSet = LocalDate.of(2022, 4,5);
-        Resource copy = new Resource(joana, startDateSet, endDateSet, 100, .5);
+        Resource copy = new Resource(joana, startDateSet, endDateSet, new CostPerHour(100), new PercentageOfAllocation(.5));
         copy.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Assert
         assertNotSame(original,copy);
@@ -339,8 +339,8 @@ class ResourceTest {
         assertEquals(company.getProjectRoleStore().getProjectRole("Team Member"), copy.getRole());
         assertEquals(startDate, copy.getStartDate());
         assertEquals(endDate, copy.getEndDate());
-        assertEquals(original.getCostPerHour(),copy.getCostPerHour());
-        assertEquals(original.getPercentageOfAllocation(), copy.getPercentageOfAllocation());
+        assertEquals(original.getCostPerHour().getCost(),copy.getCostPerHour().getCost());
+        assertEquals(original.getPercentageOfAllocation().getPercentage(), copy.getPercentageOfAllocation().getPercentage());
     }
 
     @Test
@@ -353,13 +353,13 @@ class ResourceTest {
         SystemUser joana = new SystemUser("jose", "fase@beaver.com", "abc", "Qwerty_1", "Qwerty_1","456", userProfile);
         LocalDate startDate = LocalDate.of(2021,12,31);
         LocalDate endDate = LocalDate.of(2022, 4,5);
-        Resource original = new Resource(joana, startDate, endDate, 100, .5);
+        Resource original = new Resource(joana, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         original.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Copy
         SystemUser joana1 = new SystemUser("jose um", "fase1@beaver.com", "123", "Qwerty_1", "Qwerty_1","img", userProfile);
         LocalDate startDateSet = LocalDate.of(2022,1,1);
         LocalDate endDateSet = LocalDate.of(2022, 1,15);
-        Resource copy = new Resource(joana1, startDateSet, endDateSet, 10, .2);
+        Resource copy = new Resource(joana1, startDateSet, endDateSet, new CostPerHour(10), new PercentageOfAllocation(.2));
         copy.setRole(company.getProjectRoleStore().getProjectRole("Developer"));
         //Assert
         assertNotEquals(original,copy);
@@ -385,7 +385,7 @@ class ResourceTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
-        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         //Act
         boolean result = resAllo.checkAllocationPeriod(startDateToAllocate, endDateToAllocate);
@@ -408,7 +408,7 @@ class ResourceTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
-        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         //Act
         boolean result = resAllo.checkAllocationPeriod(startDateToAllocate, endDateToAllocate);
@@ -431,7 +431,7 @@ class ResourceTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
-        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         //Act
         boolean result = resAllo.checkAllocationPeriod(startDateToAllocate, endDateToAllocate);
@@ -454,7 +454,7 @@ class ResourceTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
-        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         //Act
         boolean result = resAllo.checkAllocationPeriod(startDateToAllocate, endDateToAllocate);
@@ -477,7 +477,7 @@ class ResourceTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
-        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         //Act
         boolean result = resAllo.checkAllocationPeriod(startDateToAllocate, endDateToAllocate);
@@ -500,7 +500,7 @@ class ResourceTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
-        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         //Act
         boolean result = resAllo.checkAllocationPeriod(startDateToAllocate, endDateToAllocate);
@@ -523,7 +523,7 @@ class ResourceTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
-        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         //Act
         boolean result = resAllo.checkAllocationPeriod(startDateToAllocate, endDateToAllocate);
@@ -546,7 +546,7 @@ class ResourceTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
-        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         //Act
         boolean result = resAllo.checkAllocationPeriod(startDateToAllocate, endDateToAllocate);
@@ -569,7 +569,7 @@ class ResourceTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
-        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         //Act
         boolean result = resAllo.checkAllocationPeriod(startDateToAllocate, endDateToAllocate);
@@ -589,7 +589,7 @@ class ResourceTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
-        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
+        Resource resAllo = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         //Act
         boolean result = resAllo.isYourEmail(newUser);
@@ -609,7 +609,7 @@ class ResourceTest {
             SystemUser newUser = new SystemUser("xyz", "fase", "des", "Switch_22", "Switch_22", "", userProfile);
             LocalDate startDate = LocalDate.of(2021, 12, 31);
             LocalDate endDate = LocalDate.of(2021, 1, 5);
-            new Resource(newUser, startDate, endDate, 100, .5);
+            new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         });
     }
 
@@ -624,7 +624,7 @@ class ResourceTest {
             SystemUser newUser = new SystemUser("xyz", "fase", "des", "Switch_22", "Switch_22", "", userProfile);
             LocalDate startDate = LocalDate.of(2021, 12, 31);
             LocalDate endDate = LocalDate.of(2022, 1, 5);
-            new Resource(newUser, startDate, endDate, -1, .5);
+            new Resource(newUser, startDate, endDate, new CostPerHour(-1), new PercentageOfAllocation(.5));
         });
     }
 
@@ -641,8 +641,8 @@ class ResourceTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
-        Resource res = new Resource(newUser, startDateAllocated, endDateAllocated, 100, .5);
-        Resource resExpected = new Resource(newUser, newStartDateAllocated, endDateAllocated, 100, .5);
+        Resource res = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.5));
+        Resource resExpected = new Resource(newUser, newStartDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         //Act
         res.setStartDate(newStartDateAllocated);
@@ -670,7 +670,7 @@ class ResourceTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com",
                 "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
-        Resource manuelbras = new Resource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
+        Resource manuelbras = new Resource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), new CostPerHour(100),new PercentageOfAllocation( .5));
         ResourceFactory resFac = mock(ResourceFactory.class);
         when(resFac.createResource(user1, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5)).thenReturn(manuelbras);
         //Act

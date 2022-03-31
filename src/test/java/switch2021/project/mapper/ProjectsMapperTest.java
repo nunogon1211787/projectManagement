@@ -201,7 +201,7 @@ public class ProjectsMapperTest {
         SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         company.getProjectStore().saveNewProject(project);
         company.getProjectStore().saveNewProject(project2);
@@ -232,7 +232,7 @@ public class ProjectsMapperTest {
         SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
-        Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         company.getProjectStore().saveNewProject(project);
         company.getProjectStore().saveNewProject(project2);
         project.addResource(input);

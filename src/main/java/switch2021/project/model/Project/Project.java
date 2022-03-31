@@ -45,6 +45,8 @@ public class Project {
     private int numberOfSprints;
     private Budget budget;
     private int sprintDuration;
+    private double budget;
+    private SprintDuration sprintDuration;
 
 
     /**
@@ -70,7 +72,7 @@ public class Project {
         this.budget = new Budget(budget);
 
         this.projectTeam = new ProjectTeam(resFac);
-        //this.projectTeam = this.projectTeamFactory.createProjectTeam();
+//        this.projectTeam = this.projectTeamFactory.createProjectTeam();
 //        this.projectTeam = new ProjectTeam();
         this.productBacklog = new ProductBacklog();
     }

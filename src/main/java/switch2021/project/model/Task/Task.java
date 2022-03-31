@@ -106,11 +106,28 @@ public class Task {
         }
     }
 
-    public TaskEffort createTaskEffort(int effortHours, int effortMinutes, Date effortDate, String comment, String attachment) {
+    public void createAndSaveTaskEffort(int effortHours, int effortMinutes, Date effortDate, String comment, String attachment) {
         TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
-        if (taskEffort.getEffortHours().getEffortHours() == 0 && taskEffort.getEffortMinutes().getEffortMinutes() == 0)
+        if (taskEffort.getEffortHours().getEffortHours() == 0 && taskEffort.getEffortMinutes().getEffortMinutes() == 0) {
             throw new IllegalArgumentException("Not work time values insert");
-        return taskEffort;
+        }
+
+        if (!validateTaskEffort(taskEffort)) {
+
+        } else {
+            if (taskEffortList.isEmpty()) {
+                setStartDate(taskEffort.getEffortDate().getEffortDate());
+                setStatus(App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Running"));
+            }
+            updateHoursSpent(taskEffort);
+            updateEffortRemaining(taskEffort);
+            updateExecutionPercentage();
+            if (this.effortRemaining == 0) {
+                setStatus(App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Finished"));
+                setEndDate(taskEffort.getEffortDate().getEffortDate());
+            }
+        }
+        this.taskEffortList.add(taskEffort);
     }
 
     public boolean validateTaskEffort(TaskEffort effort) {
@@ -128,27 +145,6 @@ public class Task {
         return !this.taskEffortList.contains(effort);
     }
 
-    public boolean saveTaskEffort(TaskEffort effort) {
-        boolean result = true;
-
-        if (!validateTaskEffort(effort)) {
-            result = false;
-        } else {
-            if (taskEffortList.isEmpty()) {
-                setStartDate(effort.getEffortDate().getEffortDate());
-                setStatus(App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Running"));
-            }
-            this.taskEffortList.add(effort);
-            updateHoursSpent(effort);
-            updateEffortRemaining(effort);
-            updateExecutionPercentage();
-            if (this.effortRemaining == 0) {
-                setStatus(App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Finished"));
-                setEndDate(effort.getEffortDate().getEffortDate());
-            }
-        }
-        return result;
-    }
 
     private double effortInHours(TaskEffort effort) {
         return (double) effort.getEffortHours().getEffortHours() + ((double) effort.getEffortMinutes().getEffortMinutes() / 60);

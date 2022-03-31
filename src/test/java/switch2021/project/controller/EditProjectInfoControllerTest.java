@@ -127,7 +127,7 @@ class EditProjectInfoControllerTest {
         //Act
         edit.editProject("proto", "test44", LocalDate.of(2022, 12, 1),
                 LocalDate.of(2023, 12, 1), 10, 10000,
-                3, projectStatus, projectTeam2);
+                7, projectStatus, projectTeam2);
 
 
         //Assert
@@ -138,12 +138,73 @@ class EditProjectInfoControllerTest {
         assertEquals(10, project.getNumberOfSprints());
         assertEquals(10000, project.getBudget().getBudget());
         assertEquals(3, project.getSprintDuration());
+        assertEquals(10000, project.getBudget());
+        assertEquals(7, project.getSprintDuration().getSprintDurationDays());
         assertEquals(project.getProjectStatus(), projectStatus);
         assertEquals(project.getProjectTeam(), projectTeam2);
     }
 
     @Test
     void editProjectTest_Success() {
+    void editProjectTestWithProjectTeam() {
+        //Arrange
+        company = new Company();
+        this.projectStore = company.getProjectStore();
+        LocalDate startDate2 = LocalDate.of(2022, 12, 31);
+        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        customer = company.getCustomerStore().getCustomerByName("ISEP");
+        sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
+        project = company.getProjectStore().createProject("prototype2", "test56", customer,
+                typo, sector, startDate2, 7, 5000);
+        ProjectStatus projectStatus = new ProjectStatus("Quase");
+
+        //Resource 1
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        Resource manuelbras = new Resource(user1, LocalDate.of(2021, 11, 1), LocalDate.of(2022, 11, 15), new CostPerHour(100), new PercentageOfAllocation(.5));
+        //Resource 2
+        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        Resource manuelmartins = new Resource(user2, LocalDate.now().minusDays(6), LocalDate.now().plusDays(7), new CostPerHour(100), new PercentageOfAllocation(1));
+        //Resource 3
+        SystemUser user3 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        Resource manueljose = new Resource(user3, LocalDate.of(2021, 11, 1), LocalDate.of(2021, 11, 15), new CostPerHour(100), new PercentageOfAllocation(.5));
+        //Resource 4
+        SystemUser user4 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        Resource manueloliveira = new Resource(user4, LocalDate.now().minusWeeks(1), LocalDate.now().plusWeeks(3), new CostPerHour(100), new PercentageOfAllocation(.3333));
+        //Resource 5
+        SystemUser user5 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        Resource manuelfernandes = new Resource(user5, LocalDate.of(2021, 11, 16), LocalDate.of(2021, 11, 30), new CostPerHour(100), new PercentageOfAllocation(1));
+        //Resource 6
+        SystemUser user6 = new SystemUser("manuelgoncalves", "manuelgoncalves@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        Resource manuelgoncalves = new Resource(user6, LocalDate.of(2021, 11, 16), LocalDate.of(2021, 11, 30), new CostPerHour(100), new PercentageOfAllocation(1));
+        //Add resources
+        project.getProjectTeam().saveResource(manuelbras);
+        project.getProjectTeam().saveResource(manueljose);
+        project.getProjectTeam().saveResource(manueloliveira);
+        ResourceFactory resFac = mock(ResourceFactory.class);
+
+        ProjectTeam newProjectTeam = new ProjectTeam(resFac);
+        newProjectTeam.saveResource(manuelfernandes);
+        newProjectTeam.saveResource(manuelgoncalves);
+        newProjectTeam.saveResource(manuelmartins);
+
+        this.projectStore.saveNewProject(project);
+
+        EditProjectInfoController edit = new EditProjectInfoController(company);
+        edit.getProjectRequested(project.getCode());
+        //Act
+        edit.editProject("proto", "test44", LocalDate.of(2020, 12, 1),
+                LocalDate.of(2023, 12, 1), 10, 10000,
+                7, projectStatus, newProjectTeam);
+
+
+        //Assert
+        ProjectTeam x = project.getProjectTeam();
+        assertEquals(newProjectTeam, x);
+    }
+
+    @Test
+    public void validateProjectFieldsProjectNameLessThen3characters() {
         //Arrange
         company = new Company();
         this.projectStore = company.getProjectStore();

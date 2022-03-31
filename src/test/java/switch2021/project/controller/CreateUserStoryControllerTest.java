@@ -33,7 +33,7 @@ public class CreateUserStoryControllerTest {
     SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
     LocalDate startDate = LocalDate.of(2021, 12, 31);
     LocalDate endDate = LocalDate.of(2022, 1, 5);
-    Resource input = new Resource(newUser, startDate, endDate, 100, .5);
+    Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
 
 
     @Test
@@ -44,7 +44,7 @@ public class CreateUserStoryControllerTest {
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = -1;
         String description = "teste";
-        UserStoryStatus status = new UserStoryStatus("To do");
+        UserStoryStatus status = new UserStoryStatus("To do", true);
 
 
         // Act
@@ -68,7 +68,7 @@ public class CreateUserStoryControllerTest {
         String description = "";
         String description2 = "   ";
         String description3 = null;
-        UserStoryStatus status = new UserStoryStatus("To do");
+        UserStoryStatus status = new UserStoryStatus("To do", true);
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", status, priority, description)));
@@ -92,7 +92,7 @@ public class CreateUserStoryControllerTest {
         String title2 = "d";
         String title3 = "As a PO, i to test this string";
         String title4 = "";
-        UserStoryStatus status = new UserStoryStatus("To do");
+        UserStoryStatus status = new UserStoryStatus("To do", true);
         UserStoryDto userStoryDto2 = new UserStoryDto(title2, status, priority, description);
         UserStoryDto userStoryDto3 = new UserStoryDto(title3, status, priority, description);
         UserStoryDto userStoryDto4 = new UserStoryDto(title4, status, priority, description);
@@ -120,7 +120,7 @@ public class CreateUserStoryControllerTest {
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = 6;
         String description = "teste";
-        UserStoryStatus status = new UserStoryStatus("To do");
+        UserStoryStatus status = new UserStoryStatus("To do", true);
         UserStoryDto userStoryDto = new UserStoryDto("As a PO, i want to test this string", status, priority, description);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto));
@@ -135,7 +135,7 @@ public class CreateUserStoryControllerTest {
         int priority = 1;
         String description = "teste";
         String title = "As a PO, i want to test this string";
-        UserStoryStatus status = new UserStoryStatus("To do");
+        UserStoryStatus status = new UserStoryStatus("To do", true);
         UserStoryDto userStoryDto = new UserStoryDto(title, status, priority, description);
 
         // Act
@@ -158,7 +158,7 @@ public class CreateUserStoryControllerTest {
         int priority = 1;
         String description = "t";
         String title = "As a PO, i want to test this string";
-        UserStoryStatus status = new UserStoryStatus("To do");
+        UserStoryStatus status = new UserStoryStatus("To do", true);
         UserStoryDto userStoryDto = new UserStoryDto(title, status, priority, description);
 
         // Act
@@ -175,7 +175,7 @@ public class CreateUserStoryControllerTest {
     @Test
     public void createUserStorySuccessFullValidateInfo() {
         company.getProjectStore().saveNewProject(project);
-        UserStoryStatus status = new UserStoryStatus("To do");
+        UserStoryStatus status = new UserStoryStatus("To do", true);
         int priority = 1;
         String description = "teste";
         UserStoryDto userStoryDto = new UserStoryDto("As a PO, i want to test this string", status, priority, description);

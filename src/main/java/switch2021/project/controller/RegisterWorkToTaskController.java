@@ -13,7 +13,6 @@ import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
-import switch2021.project.model.valueObject.TaskEffort;
 
 import java.util.List;
 
@@ -72,8 +71,7 @@ public class RegisterWorkToTaskController {
         Date effortDate = taskEffortDTO.getEffortDate();
         String comment = taskEffortDTO.getComment();
         String attachment = taskEffortDTO.getAttachment();
-        TaskEffort taskEffort = this.task.createTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
-        this.task.saveTaskEffort(taskEffort);
+        this.task.createAndSaveTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
         return this.userStory.updateWorkDone(this.task);
     }
 }

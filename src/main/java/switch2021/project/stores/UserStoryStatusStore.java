@@ -10,13 +10,13 @@ import java.util.List;
 public class UserStoryStatusStore {
 
     /**
-     * Project Status Store Attributes (Contains a Project Status list)
+     * User Story Status Store Attributes (Contains a Project Status list)
      **/
     private final List<UserStoryStatus> userStoryStatusList;
 
 
     /**
-     * Project Status Constructor
+     * User Story Status Constructor
      **/
     public UserStoryStatusStore() {
         this.userStoryStatusList = new ArrayList<>();
@@ -27,15 +27,12 @@ public class UserStoryStatusStore {
      * Populate default for status
      **/
     public void populateDefault() {
-        this.userStoryStatusList.add(new UserStoryStatus("To do"));
-        userStoryStatusList.get(0).setSprintAvailable(true);
-        this.userStoryStatusList.add(new UserStoryStatus("In progress"));
-        userStoryStatusList.get(1).setSprintAvailable(true);
-        this.userStoryStatusList.add(new UserStoryStatus("Done"));
-        userStoryStatusList.get(2).setSprintAvailable(true);
-        this.userStoryStatusList.add(new UserStoryStatus("Cancelled"));
-        this.userStoryStatusList.add(new UserStoryStatus("In test"));
-        this.userStoryStatusList.add(new UserStoryStatus("Refined"));
+        this.userStoryStatusList.add(new UserStoryStatus("To do", true));
+        this.userStoryStatusList.add(new UserStoryStatus("In progress", true));
+        this.userStoryStatusList.add(new UserStoryStatus("Done", true));
+        this.userStoryStatusList.add(new UserStoryStatus("Cancelled", false));
+        this.userStoryStatusList.add(new UserStoryStatus("In test", false));
+        this.userStoryStatusList.add(new UserStoryStatus("Refined", false));
     }
 
 
