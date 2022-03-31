@@ -22,14 +22,14 @@ class ProjectTest {
 
 
     /**
-     * Project creation Test (US005)
+     * Project creation Test
      **/
 
     Company company = new Company();
     Project proj;
 
     @BeforeEach
-    public void init() throws Exception {
+    public void init() {
         //Arrange
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().createAndAddBusinessSector("sector");
@@ -79,7 +79,7 @@ class ProjectTest {
         int numberOfSprints = company.getProjectStore().getProjectByCode("Project_2022_1").getNumberOfSprints();
         int valueNrSprint = 7;
 
-        double budget = company.getProjectStore().getProjectByCode("Project_2022_1").getBudget();
+        double budget = company.getProjectStore().getProjectByCode("Project_2022_1").getBudget().getBudget();
         double valueBudget = 5000;
         //Result
         assertEquals(valueCode, code);
@@ -102,38 +102,6 @@ class ProjectTest {
         String code = test.get(0).getCode();
         String expectedCode = "Project_2022_1";
         assertEquals(expectedCode, code);
-    }
-
-    @Test
-    @DisplayName("Project exceptions test")
-    public void createProjectExceptionsTest_name() {
-        //Arrange
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        LocalDate date = LocalDate.now();
-        // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                company.getProjectStore().createProject("", "test1234", customer,
-                        typo, sector, date, 7, 5000));
-        //Assert
-        assertTrue(exception.getMessage().contains("Project Name cannot be empty"));
-    }
-
-    @Test
-    @DisplayName("Project exceptions test")
-    public void createProjectExceptionsTest_nameLength() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-            Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-            BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-            LocalDate date = LocalDate.now();
-            // Act
-            company.getProjectStore().createProject("pr", "test1234", customer,
-                    typo, sector, date, 7, 5000);
-        });
     }
 
     @Test
@@ -429,6 +397,8 @@ class ProjectTest {
                 typo, sector, LocalDate.now(), 10, 6000));
 
         //Assert
+        assertTrue(project.equals(project));
+        assertFalse(project.equals(project2));
         assertNotSame(list1, list2);
         assertEquals(list1, list2);
         assertEquals(list1.hashCode(), list2.hashCode());
@@ -479,45 +449,4 @@ class ProjectTest {
         assertNotEquals(project, project2);
     }
 
-    @Test
-    public void overrideTest2() {
-        //Arrange
-        ProductBacklog backlog = new ProductBacklog();
-        LocalDate date = LocalDate.of(2024, 12, 12);
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
-        project.setCode("1");
-        project.setProductBacklog(backlog);
-        project.setEndDate(date);
-        Project project2 = company.getProjectStore().createProject("prototype", "test1234", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
-        project2.setCode("1");
-        project2.setEndDate(date);
-        project2.setProductBacklog(backlog);
-
-        assertEquals(project.toString(), project2.toString());
-        assertEquals(project, project2);
-
-        project2.setProjectStatus(new ProjectStatus("test"));
-
-        assertNotEquals(project, project2);
-
-        project.setProjectStatus(new ProjectStatus("test"));
-        project2.setDescription(new Description("test"));
-
-        assertNotEquals(project, project2);
-
-        project.setDescription(new Description("test"));
-        project2.setProjectName(new Description("erro"));
-
-        assertNotEquals(project, project2);
-
-        assertEquals(project.getBusinessSector(), sector);
-        assertEquals(project.getCustomer(), customer);
-        assertEquals(project.getTypology(), typo);
-        assertEquals(project.getEndDate(), date);
-    }
 }
