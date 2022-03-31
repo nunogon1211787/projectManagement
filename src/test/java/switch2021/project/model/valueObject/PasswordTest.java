@@ -18,6 +18,17 @@ public class PasswordTest {
         assertEquals("´ÚÈÕ×ÜÂ\u0094", pwdRes);
     }
 
+    @DisplayName("Password Success - 2 numbers")
+    @Test
+    public void ValidPasswordNumbers() {
+        //Arrange
+        Password pwd = new Password("Qwerty_12");
+        Password pwdRes = new Password("Qwerty_12");
+
+        //Assert
+        assertEquals(pwdRes, pwd);
+    }
+
     @DisplayName("Password Success - lower case limit")
     @Test
     public void ValidPasswordLowerCaseLimit() {
