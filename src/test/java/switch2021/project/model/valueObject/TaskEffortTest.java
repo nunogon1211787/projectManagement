@@ -5,7 +5,11 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.Task.Task;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class TaskEffortTest {
 
@@ -25,26 +29,7 @@ public class TaskEffortTest {
         assertEquals(effortHours, taskEffort.getEffortHours().getEffortHours());
         assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
-        assertEquals(comment, taskEffort.getComment());
-        assertEquals(attachment, taskEffort.getAttachment());
-    }
-
-    @Test
-    @DisplayName("create effort with no comments or attachments")
-    public void createTaskEffortSuccessOptionalValuesEmpty() {
-        //Arrange
-        int effortHours = 4;
-        int effortMinutes = 30;
-        Date effortDate = new Date (LocalDate.of(2022, 1, 27));
-        String comment = "";
-        String attachment = "";
-        //Act
-        TaskEffort taskEffort = new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
-        //Assert
-        assertEquals(effortHours, taskEffort.getEffortHours().getEffortHours());
-        assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
-        assertEquals(effortDate, taskEffort.getEffortDate());
-        assertEquals(comment, taskEffort.getComment());
+        assertEquals(comment, taskEffort.getComment().getText());
         assertEquals(attachment, taskEffort.getAttachment());
     }
 
@@ -63,7 +48,7 @@ public class TaskEffortTest {
         assertEquals(effortHours, taskEffort.getEffortHours().getEffortHours());
         assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
-        assertEquals(comment, taskEffort.getComment());
+        assertEquals(comment, taskEffort.getComment().getText());
         assertEquals(attachment, taskEffort.getAttachment());
     }
 
@@ -82,7 +67,7 @@ public class TaskEffortTest {
         assertEquals(effortHours, taskEffort.getEffortHours().getEffortHours());
         assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
-        assertEquals(comment, taskEffort.getComment());
+        assertEquals(comment, taskEffort.getComment().getText());
         assertEquals(attachment, taskEffort.getAttachment());
     }
 
@@ -171,7 +156,7 @@ public class TaskEffortTest {
         assertEquals(effortHours, taskEffort.getEffortHours().getEffortHours());
         assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
-        assertEquals(comment, taskEffort.getComment());
+        assertEquals(comment, taskEffort.getComment().getText());
         assertEquals(attachment, taskEffort.getAttachment());
     }
 

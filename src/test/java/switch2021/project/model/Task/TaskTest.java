@@ -95,7 +95,7 @@ class TaskTest {
         assertEquals(effortHours, taskEffort.getEffortHours().getEffortHours());
         assertEquals(effortMinutes, taskEffort.getEffortMinutes().getEffortMinutes());
         assertEquals(effortDate, taskEffort.getEffortDate());
-        assertEquals(comment, taskEffort.getComment());
+        assertEquals(comment, taskEffort.getComment().getText());
         assertEquals(attachment, taskEffort.getAttachment());
     }
 
