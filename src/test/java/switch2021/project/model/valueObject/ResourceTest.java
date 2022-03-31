@@ -279,7 +279,7 @@ class ResourceTest {
         Resource input = new Resource(newUser, startDate, endDate, 100, .5);
         input.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         //Act and Assert
-        assertFalse(input.isAvailableToSprint(LocalDate.now(),3));
+        assertFalse(input.isAvailableToSprint(LocalDate.now(),21));
     }
 
 

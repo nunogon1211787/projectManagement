@@ -109,7 +109,7 @@ class EditProjectInfoControllerTest {
         assertEquals(project.getEndDate(), LocalDate.of(2023, 12, 1));
         assertEquals(10, project.getNumberOfSprints());
         assertEquals(10000, project.getBudget());
-        assertEquals(3, project.getSprintDuration());
+        assertEquals(3, project.getSprintDuration().getSprintDurationDays());
         assertEquals(project.getProjectStatus(), projectStatus);
         assertEquals(project.getProjectTeam(), projectTeam2);
     }

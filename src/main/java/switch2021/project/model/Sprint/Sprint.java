@@ -38,11 +38,10 @@ public class Sprint {
     /**
      * Method to change Sprint EndDate
      **/
-    long SEM = 7;
-    int DIA = 1;
 
-    public void changeEndDate(int sprintDurationInWeeks) {
-        this.endDate = startDate.plusDays((sprintDurationInWeeks * SEM) - DIA);
+
+    public void changeEndDate(int sprintDurationInDays) {
+        this.endDate = startDate.plusDays(sprintDurationInDays - 1);
     }
 
     public boolean hasSprintID(int id) {
@@ -56,7 +55,8 @@ public class Sprint {
         if(this.endDate == null) {
             throw new NullPointerException();
         }
-        return ((this.startDate.isBefore(LocalDate.now()) || this.startDate.equals(LocalDate.now())) && (this.endDate.isAfter(LocalDate.now()) || this.endDate.equals(LocalDate.now())));
+        return ((this.startDate.isBefore(LocalDate.now()) || this.startDate.equals(LocalDate.now()))
+                && (this.endDate.isAfter(LocalDate.now()) || this.endDate.equals(LocalDate.now())));
     }
 
     /**

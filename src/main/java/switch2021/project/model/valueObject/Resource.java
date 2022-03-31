@@ -100,10 +100,10 @@ public class Resource {
      * Method to Check if the Resource is Available in this Period of Time (starDate to endDate)
      **/
 
-    public boolean isAvailableToSprint(LocalDate sprintStartDate, int sprintDuration) {
+    public boolean isAvailableToSprint(LocalDate sprintStartDate, int sprintDurationDays) {
         boolean msg = false;
 
-        LocalDate sprintEndDate = sprintStartDate.plusDays(sprintDuration * 7L - 1);
+        LocalDate sprintEndDate = sprintStartDate.plusDays(sprintDurationDays - 1);
 
         if((this.startDate.isBefore(sprintStartDate) || this.startDate.isEqual(sprintStartDate)) &&
                 (this.endDate.isAfter(sprintEndDate) || this.endDate.isEqual(sprintEndDate))){
