@@ -156,6 +156,7 @@ public class ProjectsMapperTest {
         //Project 1
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
+        company.getProjectStore().saveNewProject(proj1);
         //Act
         List<ProjectDTO> toDTO = projectsMapper.toDTO(company.getProjectStore().getProjectList());
         List<ProjectDTO> test = projectsMapper.getProjectDTOList();
@@ -243,10 +244,10 @@ public class ProjectsMapperTest {
         List<ProjectDTO> projectList = mapper.toDtoByUser(company.getProjectStore().getProjectList());
 
         // Assert
-        assertEquals(project.getCode(),projectList.get(0).getCode());
+        assertEquals(project.getCode().getText(),projectList.get(0).getCode());
         assertEquals(project.getProjectName().getText(), projectList.get(0).getProjectName());
         assertEquals(project.getDescription().getText(), projectList.get(0).getDescription());
-        assertEquals(project2.getCode(),projectList.get(1).getCode());
+        assertEquals(project2.getCode().getText(),projectList.get(1).getCode());
         assertEquals(project2.getProjectName().getText(), projectList.get(1).getProjectName());
         assertEquals(project2.getDescription().getText(), projectList.get(1).getDescription());
     }

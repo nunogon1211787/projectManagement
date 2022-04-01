@@ -3,7 +3,7 @@ package switch2021.project.model.UserStory;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Task.Task;
-import switch2021.project.model.valueObject.UserStoryStatus;
+import switch2021.project.model.valueObject.*;
 
 import java.time.LocalDate;
 
@@ -19,7 +19,7 @@ class UserStoryTest {
         //Act
         UserStory userStory = new UserStory("As a PO, i want to test this string", 1, "As a PO, i want to test this string - Test", 40);
         //Assert
-        assertEquals("As a PO, i want to test this string", userStory.getTitle().getUsTitle());
+        assertEquals("As a PO, i want to test this string", userStory.getTitle().getTitleUs());
         assertEquals("As a PO, i want to test this string - Test", userStory.getDescription().getText());
     }
 
@@ -28,7 +28,7 @@ class UserStoryTest {
     void setPriorityTest() {
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
         userStory.setPriority(4);
-        assertEquals(4, userStory.getPriority().getUsPriority());
+        assertEquals(4, userStory.getPriority().getPriorityUs());
     }
 
 
@@ -160,8 +160,8 @@ class UserStoryTest {
         assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
         assertEquals(0, userStory1.getTimeEstimate());
         assertEquals(userStory2.getDescription().getText(), userStory3.getDescription().getText());
-        assertEquals(userStory2.getPriority().getUsPriority(), userStory3.getPriority().getUsPriority());
-        assertEquals(userStory2.getTitle().getUsTitle(), userStory3.getTitle().getUsTitle());
+        assertEquals(userStory2.getPriority().getPriorityUs(), userStory3.getPriority().getPriorityUs());
+        assertEquals(userStory2.getTitle().getTitleUs(), userStory3.getTitle().getTitleUs());
         assertEquals(userStory2.getTimeEstimate(), userStory3.getTimeEstimate());
         assertNotEquals(userStory2.getDescription().getText(), userStory1.getDescription().getText());
         assertNotEquals(null, userStory1);
@@ -189,7 +189,7 @@ class UserStoryTest {
         userStory1.setPriority(4);
 
         assertTrue(userStory1.setPriority(3));
-        assertEquals(3, userStory1.getPriority().getUsPriority());
+        assertEquals(3, userStory1.getPriority().getPriorityUs());
 
     }
 
@@ -204,4 +204,25 @@ class UserStoryTest {
         assertNotEquals(6, userStory1.getPriority());
         assertTrue(exception.getMessage().equals("Check priority, cannot be < 0 or superior to 5"));
     }
+
+    @Test
+    public void overrideTest() {
+        //Arrange
+
+        UserStory userStory1 = new UserStory("As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 10);
+        UserStory userStory2 = new UserStory("As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 10);
+        UserStory userStory3 = new UserStory("As coise, I want to tal12132", 4, "Fazer totil de cenas bueda fixes", 10);
+
+
+        //Assert
+        assertNotSame(userStory1, userStory2);
+        assertEquals(userStory1, userStory2);
+        assertEquals(userStory1.getTitle(), userStory2.getTitle());
+        assertNotEquals(userStory1, userStory3);
+        assertNotSame("saffdf", userStory1.getTitle().getTitleUs());
+        assertFalse(userStory1.hasCode(213));
+        assertTrue(userStory1.setPriority(2));
+
+    }
+
 }

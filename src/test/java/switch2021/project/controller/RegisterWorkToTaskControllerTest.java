@@ -35,7 +35,7 @@ public class RegisterWorkToTaskControllerTest {
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
         project1.setEndDate(LocalDate.of(2022, 1, 31));
         projectStore.saveNewProject(project1);
-        String projectCode1 = project1.getCode(); //"Project_2022_1"
+        String projectCode1 = project1.getCode().getText(); //"Project_2022_1"
         //Resource
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user2 = company.getSystemUserStore().createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
@@ -86,7 +86,7 @@ public class RegisterWorkToTaskControllerTest {
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
         project1.setEndDate(LocalDate.of(2022, 1, 31));
         projectStore.saveNewProject(project1);
-        String projectCode1 = project1.getCode(); //"Project_2022_1"
+        String projectCode1 = project1.getCode().getText(); //"Project_2022_1"
         //Resource
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user2 = company.getSystemUserStore().createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
@@ -139,7 +139,7 @@ public class RegisterWorkToTaskControllerTest {
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
         project1.setEndDate(LocalDate.of(2022, 1, 31));
         projectStore.saveNewProject(project1);
-        String projectCode1 = project1.getCode(); //"Project_2022_1"
+        String projectCode1 = project1.getCode().getText(); //"Project_2022_1"
         //Resource
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user2 = company.getSystemUserStore().createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);

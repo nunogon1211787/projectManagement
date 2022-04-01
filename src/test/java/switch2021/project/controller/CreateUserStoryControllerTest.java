@@ -184,8 +184,8 @@ public class CreateUserStoryControllerTest {
 
         ProductBacklog project_2022_1 = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog();
         assertEquals(1, project_2022_1.getUserStoryList().size());
-        assertEquals(userStoryDto.getTitle(), project_2022_1.getUserStoryList().get(0).getTitle().getUsTitle());
-        assertEquals(userStoryDto.getPriority(), project_2022_1.getUserStoryList().get(0).getPriority().getUsPriority());
+        assertEquals(userStoryDto.getTitle(), project_2022_1.getUserStoryList().get(0).getTitle().getTitleUs());
+        assertEquals(userStoryDto.getPriority(), project_2022_1.getUserStoryList().get(0).getPriority().getPriorityUs());
         assertEquals(userStoryDto.getUserStoryStatus(), project_2022_1.getUserStoryList().get(0).getUserStoryStatus());
         assertEquals(userStoryDto.getDescription().getText(), project_2022_1.getUserStoryList().get(0).getDescription().getText());
     }
@@ -203,14 +203,12 @@ public class CreateUserStoryControllerTest {
         List<ProjectDTO> projectList = createUserStoryController.getProjectListByUserEmail("cris@ipp.pt");
         // Assert
         assertEquals(2, projectList.size());
-        assertEquals(project.getCode(), projectList.get(0).getCode());
+        assertEquals(project.getCode().getText(), projectList.get(0).getCode());
         assertEquals(project.getProjectName().getText(), projectList.get(0).getProjectName());
         assertEquals(project.getDescription().getText(), projectList.get(0).getDescription());
-        assertEquals(project.getEndDate(), projectList.get(0).getEndDate());
-        assertEquals(project2.getCode(), projectList.get(1).getCode());
+        assertEquals(project2.getCode().getText(), projectList.get(1).getCode());
         assertEquals(project2.getProjectName().getText(), projectList.get(1).getProjectName());
         assertEquals(project2.getDescription().getText(), projectList.get(1).getDescription());
-        assertEquals(project2.getEndDate(), projectList.get(1).getEndDate());
     }
 
     @Test

@@ -65,14 +65,4 @@ public class PercentageOfAllocationTest {
         });
     }
 
-    @Test
-    @DisplayName("Validate that percentage is correct - other values")
-    public void percentageGetMaxPerc() {
-        //Arrange
-        double percentage = 1.0;
-        //Act
-        PercentageOfAllocation percOfAllo = new PercentageOfAllocation(percentage);
-        //Assert
-        assertEquals(percentage, percOfAllo.getMAX_PERCENTAGE());
-    }
 }

@@ -10,8 +10,8 @@ public class Minutes {
      **/
 
     private final int effortMinutes;
-    private final int MIN_MINUTE = 0;
-    private final int MAX_MINUTE = 60;
+    private static final int MINMINUTE = 0;
+    private static final int MAXMINUTE = 60;
 
     /**
      * Constructor (without SINGLETON)
@@ -27,7 +27,7 @@ public class Minutes {
      **/
 
     private void checkMinutesTimeRules ( int effortMinutes){
-        if (effortMinutes < MIN_MINUTE  || effortMinutes >= MAX_MINUTE)
-            throw new IllegalArgumentException("Not valid work time values." + " Minute interval: [" + MIN_MINUTE + " - " + MAX_MINUTE + "]");
+        if (effortMinutes < MINMINUTE || effortMinutes >= MAXMINUTE)
+            throw new IllegalArgumentException("Not valid work time values." + " Minute interval: [" + MINMINUTE + " - " + MAXMINUTE + "]");
     }
 }

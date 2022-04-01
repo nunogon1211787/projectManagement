@@ -17,9 +17,9 @@ public class UsTitleTest {
         UsTitle expected = new UsTitle(usTitle);
         UsTitle expected2 = new UsTitle(usTitle2);
         //Assert
-        assertEquals(expected.getUsTitle(), usTitle);
+        assertEquals(expected.getTitleUs(), usTitle);
         assertNotNull(expected);
-        assertEquals(expected2.getUsTitle(), usTitle2);
+        assertEquals(expected2.getTitleUs(), usTitle2);
         assertNotNull(expected2);
     }
 

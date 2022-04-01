@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class TaskTest {
 
@@ -46,17 +48,54 @@ class TaskTest {
     }
 
     @Test
-    public void createTaskEffortSuccess() {
+    public void createTaskEffortSuccessMock() {
         //Arrange
-        Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        //UserProfile
+        UserProfile profile = mock(UserProfile.class);
+        Description description = mock(Description.class);
+        when(profile.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        //SystemUser
+        SystemUser user = mock(SystemUser.class);
+        Name name = mock(Name.class);
+        when(user.getUserName()).thenReturn(name);
+        when(name.getNameF()).thenReturn("manuelbras");
+        Email email = mock(Email.class);
+        when(user.getEmail()).thenReturn(email);
+        when(email.getEmail()).thenReturn("manuelbras@beaver.com");
+        Function function = mock(Function.class);
+        when(user.getFunction()).thenReturn(function);
+        when(function.getText()).thenReturn("tester");
+        Password password = mock(Password.class);
+        when(user.getPassword()).thenReturn(password);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(user.getPhoto()).thenReturn("photo");
+        //Resource
+        Resource resource = mock(Resource.class);
+        when(resource.getUser()).thenReturn(user);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-        Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation ( .5));
+        when(resource.getStartDate()).thenReturn(startDateMb);
+        when(resource.getEndDate()).thenReturn(endDateMb);
+        CostPerHour costPerHour = mock(CostPerHour.class);
+        when(resource.getCostPerHour()).thenReturn(costPerHour);
+        when(costPerHour.getCost()).thenReturn(100.00);
+        PercentageOfAllocation percentageOfAllocation = mock(PercentageOfAllocation.class);
+        when(resource.getPercentageOfAllocation()).thenReturn(percentageOfAllocation);
+        when(percentageOfAllocation.getPercentage()).thenReturn(0.5);
+        //TaskType
+        TaskType taskType = mock(TaskType.class);
+        Description descType = mock(Description.class);
+        when(taskType.getDescription()).thenReturn(descType);
+        when(descType.getText()).thenReturn("Testing");
+        //TaskStatus
+        TaskStatus taskStatus = mock(TaskStatus.class);
+        Description descTaskStatys = mock(Description.class);
+        when(taskStatus.getDescription()).thenReturn(descTaskStatys);
+        when(descTaskStatys.getText()).thenReturn("Running");
         String taskDescription = "must be at least 20 characters";
-        Task task = new Task("test", taskDescription, 16.00, new TaskType("User Story"), resource);
-
+        //Task
+        Task task = new Task("test", taskDescription, 16.00, taskType, resource);
         int effortHours = 4;
         int effortMinutes = 30;
         Date effortDate = new Date(LocalDate.of(2022, 1, 27));
@@ -81,7 +120,7 @@ class TaskTest {
             SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "ghi", "ghi", "photo", profile);
             LocalDate startDateMb = LocalDate.of(2022, 1, 1);
             LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-            Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation( .5));
+            Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
             String taskDescription = "must be at least 20 characters";
             Task task = new Task("test", taskDescription, 16.00, new TaskType("User Story"), resource);
 
@@ -95,28 +134,65 @@ class TaskTest {
         });
     }
 
+
     @Test
-    public void saveTaskEffortSuccess() {
+    public void createAndSaveTaskEffortSuccessMock() {
         //Arrange
-        Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+
+        //UserProfile
+        UserProfile profile = mock(UserProfile.class);
+        Description description = mock(Description.class);
+        when(profile.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        //SystemUser
+        SystemUser user = mock(SystemUser.class);
+        Name name = mock(Name.class);
+        when(user.getUserName()).thenReturn(name);
+        when(name.getNameF()).thenReturn("manuelbras");
+        Email email = mock(Email.class);
+        when(user.getEmail()).thenReturn(email);
+        when(email.getEmail()).thenReturn("manuelbras@beaver.com");
+        Function function = mock(Function.class);
+        when(user.getFunction()).thenReturn(function);
+        when(function.getText()).thenReturn("tester");
+        Password password = mock(Password.class);
+        when(user.getPassword()).thenReturn(password);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(user.getPhoto()).thenReturn("photo");
+        //Resource
+        Resource resource = mock(Resource.class);
+        when(resource.getUser()).thenReturn(user);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-        Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100),new PercentageOfAllocation( .5));
+        when(resource.getStartDate()).thenReturn(startDateMb);
+        when(resource.getEndDate()).thenReturn(endDateMb);
+        CostPerHour costPerHour = mock(CostPerHour.class);
+        when(resource.getCostPerHour()).thenReturn(costPerHour);
+        when(costPerHour.getCost()).thenReturn(100.00);
+        PercentageOfAllocation percentageOfAllocation = mock(PercentageOfAllocation.class);
+        when(resource.getPercentageOfAllocation()).thenReturn(percentageOfAllocation);
+        when(percentageOfAllocation.getPercentage()).thenReturn(0.5);
+        //TaskType
+        TaskType taskType = mock(TaskType.class);
+        Description descType = mock(Description.class);
+        when(taskType.getDescription()).thenReturn(descType);
+        when(descType.getText()).thenReturn("Testing");
+        //TaskStatus
+        TaskStatus taskStatus = mock(TaskStatus.class);
+        Description descTaskStatys = mock(Description.class);
+        when(taskStatus.getDescription()).thenReturn(descTaskStatys);
+        when(descTaskStatys.getText()).thenReturn("Running");
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-        Task task = new Task("test", taskDescription, 20.00, taskType, resource);
-
+        //TaskStatus
+        Task task = new Task("test", taskDescription, 20.00, taskType, resource); // same class don't mock?
         Date effortDate = new Date(LocalDate.of(2022, 1, 27));
 
-        TaskStatus taskStatusExpected = company.getTaskStatusStore().getTaskStatusByDescription("Running");
         //Act
         task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
 
         //Assert
         assertEquals(1, task.getTaskEffortList().size());
-        assertEquals(taskStatusExpected.getDescription().getText(), task.getStatus().getDescription().getText()); //change status to Running
+        assertEquals("Running", task.getStatus().getDescription().getText()); //change status to Running
         assertEquals(effortDate.getEffortDate(), task.getStartDate()); //set start date
         assertNull(task.getEndDate());
         assertEquals(20.00, task.getEffortEstimate()); //keep the same estimated effort
@@ -368,7 +444,7 @@ class TaskTest {
 
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-        Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation( .5));
+        Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
@@ -494,7 +570,7 @@ class TaskTest {
         SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-        Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100),new PercentageOfAllocation( .5));
+        Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
@@ -533,7 +609,7 @@ class TaskTest {
         SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-        Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100),new PercentageOfAllocation( .5));
+        Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
@@ -634,7 +710,7 @@ class TaskTest {
         Task task2 = new Task("test", taskDescription, 8.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-       task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
+        task.createAndSaveTaskEffort(8, 0, effortDate, "test", ".pdf");
 
         company.getTaskStatusStore().getTaskStatusByDescription("Running");
         task.updateHoursSpent(task.getTaskEffortList().get(0));

@@ -1,8 +1,6 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
-
-import java.io.File;
 import java.util.*;
 
 @Getter
@@ -21,12 +19,12 @@ public class Attachment {
 
     private void validateExtension(String fileName) {
 
-        String extension = "";
+        String ext = "";
         if (fileName.contains(".")) {
-            extension = Arrays.stream(fileName.split("\\.")).reduce((a, b) -> b).orElse(null);
+            ext = Arrays.stream(fileName.split("\\.")).reduce((a, b) -> b).orElse(null);
         }
 
-        if (!possibleExtensions.contains(extension))
+        if (!possibleExtensions.contains(ext))
             throw new IllegalArgumentException("Invalid format document");
     }
 
