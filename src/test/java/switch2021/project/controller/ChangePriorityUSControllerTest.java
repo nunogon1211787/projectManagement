@@ -156,7 +156,7 @@ public class ChangePriorityUSControllerTest {
         // Act
         change.setPriority(4);
         int expected = 4;
-        int actual = userStory.getPriority().getUsPriority();
+        int actual = userStory.getPriority().getPriorityUs();
 
         // Assert
         assertEquals(expected, actual);
@@ -284,7 +284,7 @@ public class ChangePriorityUSControllerTest {
 
         userStory3.setPriority(3);
 
-        assertEquals(3, userStory3.getPriority().getUsPriority());
+        assertEquals(3, userStory3.getPriority().getPriorityUs());
 
     }
 

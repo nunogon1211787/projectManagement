@@ -10,8 +10,8 @@ public class Hours {
      **/
 
     private final int effortHours;
-    private final int MIN_HOUR = 0;
-    private final int MAX_HOUR = 23;
+    private static final int MINHOUR = 0;
+    private static final int MAXHOUR = 23;
 
     /**
      * Constructor (without SINGLETON)
@@ -27,7 +27,7 @@ public class Hours {
      **/
 
     private void checkWorkTimeRules(int effortHours) {
-        if (effortHours < MIN_HOUR || effortHours > MAX_HOUR)
-            throw new IllegalArgumentException("Not valid work time values." + "Hour interval: [" + MIN_HOUR + " - " + MAX_HOUR + "]");
+        if (effortHours < MINHOUR || effortHours > MAXHOUR)
+            throw new IllegalArgumentException("Not valid work time values." + "Hour interval: [" + MINHOUR + " - " + MAXHOUR + "]");
     }
 }

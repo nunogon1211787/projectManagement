@@ -9,7 +9,6 @@ import switch2021.project.model.valueObject.UsPriority;
 import switch2021.project.model.valueObject.UserStoryStatus;
 import switch2021.project.model.valueObject.UsTitle;
 
-import switch2021.project.model.valueObject.UserStoryStatus;
 import java.util.Objects;
 
 /**
@@ -47,7 +46,7 @@ public class UserStory {
     }
 
     public UserStory(UserStory userStoryToRefine, UserStoryStatus userStoryStatus, int priority, String description) {
-        this.title = new UsTitle(userStoryToRefine.getTitle().getUsTitle() + " _Refined");
+        this.title = new UsTitle(userStoryToRefine.getTitle().getTitleUs() + " _Refined");
         this.userStoryStatus = userStoryStatus;
         this.priority = new UsPriority(priority);
         this.description = new Description(description);

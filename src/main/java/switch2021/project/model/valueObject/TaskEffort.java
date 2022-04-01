@@ -2,8 +2,6 @@ package switch2021.project.model.valueObject;
 
 import lombok.Getter;
 
-import java.util.Arrays;
-
 @Getter
 public class TaskEffort {
 

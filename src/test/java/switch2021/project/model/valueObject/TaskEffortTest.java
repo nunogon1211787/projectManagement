@@ -203,7 +203,7 @@ public class TaskEffortTest {
         //Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             Date effortDate = new Date (LocalDate.now().plusDays(1));
-            TaskEffort taskEffort = new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
+            new TaskEffort(effortHours,effortMinutes, effortDate, comment, attachment);
         });
         //Assert
         assertTrue(exception.getMessage().equals("Invalid workHours value."));

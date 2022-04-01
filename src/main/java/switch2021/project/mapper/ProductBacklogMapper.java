@@ -11,8 +11,8 @@ public class ProductBacklogMapper {
     public List<UserStoryDto> toDto(List<UserStory> userStoryList) {
         List<UserStoryDto> userStoryListDtoList = new LinkedList<>();
         for (UserStory userStory : userStoryList) {
-            UserStoryDto userStoryListDto = new UserStoryDto(userStory.getTitle().getUsTitle(), userStory.getUserStoryStatus(),
-                    userStory.getPriority().getUsPriority(), userStory.getDescription().getText());
+            UserStoryDto userStoryListDto = new UserStoryDto(userStory.getTitle().getTitleUs(), userStory.getUserStoryStatus(),
+                    userStory.getPriority().getPriorityUs(), userStory.getDescription().getText());
             userStoryListDtoList.add(userStoryListDto);
         }
         return userStoryListDtoList;

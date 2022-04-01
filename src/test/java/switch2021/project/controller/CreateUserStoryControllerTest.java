@@ -184,8 +184,8 @@ public class CreateUserStoryControllerTest {
 
         ProductBacklog project_2022_1 = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog();
         assertEquals(1, project_2022_1.getUserStoryList().size());
-        assertEquals(userStoryDto.getTitle(), project_2022_1.getUserStoryList().get(0).getTitle().getUsTitle());
-        assertEquals(userStoryDto.getPriority(), project_2022_1.getUserStoryList().get(0).getPriority().getUsPriority());
+        assertEquals(userStoryDto.getTitle(), project_2022_1.getUserStoryList().get(0).getTitle().getTitleUs());
+        assertEquals(userStoryDto.getPriority(), project_2022_1.getUserStoryList().get(0).getPriority().getPriorityUs());
         assertEquals(userStoryDto.getUserStoryStatus(), project_2022_1.getUserStoryList().get(0).getUserStoryStatus());
         assertEquals(userStoryDto.getDescription().getText(), project_2022_1.getUserStoryList().get(0).getDescription().getText());
     }

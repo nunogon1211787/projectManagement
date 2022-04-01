@@ -10,15 +10,15 @@ public class UsTitle {
     /**
      * Attributes
      **/
-    private final String usTitle; //As a //I want to
+    private final String titleUs; //As a //I want to
 
 
     /**
      * Constructor
      **/
-    public UsTitle(String usTitle) {
-        checkUsTile(usTitle);
-        this.usTitle = usTitle;
+    public UsTitle(String titleUs) {
+        checkUsTile(titleUs);
+        this.titleUs = titleUs;
     }
 
 
@@ -42,12 +42,12 @@ public class UsTitle {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UsTitle usTitle1 = (UsTitle) o;
-        return Objects.equals(usTitle, usTitle1.usTitle);
+        return Objects.equals(titleUs, usTitle1.titleUs);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(usTitle);
+        return Objects.hash(titleUs);
     }
 }
 

@@ -15,7 +15,7 @@ public class UsPriorityTest {
         //Act
         UsPriority usPriority = new UsPriority(priority);
         //Assert
-        assertEquals(priority, usPriority.getUsPriority());
+        assertEquals(priority, usPriority.getPriorityUs());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class UsPriorityTest {
         //Act
         UsPriority usPriority2 = new UsPriority(priority2);
         //Assert
-        assertEquals(priority2, usPriority2.getUsPriority());
+        assertEquals(priority2, usPriority2.getPriorityUs());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class UsPriorityTest {
         //Act
         UsPriority usPriority = new UsPriority(priority);
         //Assert
-        assertEquals(priority, usPriority.getUsPriority());
+        assertEquals(priority, usPriority.getPriorityUs());
     }
 
     @Test

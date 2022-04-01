@@ -25,11 +25,11 @@ public class ScrumBoardMapperTest {
         UserStoryStatusDTO dto = mapper.toDTO(userStory);
 
         //Assert
-        assertEquals(dto.getUserStoryTitle(),userStory.getTitle().getUsTitle());
+        assertEquals(dto.getUserStoryTitle(),userStory.getTitle().getTitleUs());
         assertEquals("As a PO, i want to test this string",dto.getUserStoryTitle());
         assertEquals(dto.getUserStoryDescription(),userStory.getDescription().getText());
         assertEquals("description", dto.getUserStoryDescription());
-        assertEquals(dto.getUserStoryPriority(),userStory.getPriority().getUsPriority());
+        assertEquals(dto.getUserStoryPriority(),userStory.getPriority().getPriorityUs());
         assertEquals(5, dto.getUserStoryPriority());
         assertEquals(dto.getUserStoryTimeEstimate(),userStory.getTimeEstimate());
         assertEquals(5, dto.getUserStoryPriority());

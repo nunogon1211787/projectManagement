@@ -10,7 +10,7 @@ public class CostPerHour {
      **/
 
     private double cost;
-    private final double MIN_COST = 0.0;
+    private static final double MINCOST = 0.0;
 
     /**
      * Constructor
@@ -25,7 +25,7 @@ public class CostPerHour {
      **/
 
     private void isValidCostPerHour(double costPerHour) {
-        if (costPerHour < MIN_COST) {
+        if (costPerHour < MINCOST) {
             throw new IllegalArgumentException("Check cost per hour, cannot be < 0");
         }
     }
