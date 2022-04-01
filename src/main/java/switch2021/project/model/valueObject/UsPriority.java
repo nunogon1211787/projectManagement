@@ -2,6 +2,8 @@ package switch2021.project.model.valueObject;
 
 import lombok.Getter;
 
+import java.util.Objects;
+
 @Getter
 public class UsPriority {
 
@@ -31,4 +33,16 @@ public class UsPriority {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UsPriority that = (UsPriority) o;
+        return usPriority == that.usPriority;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(usPriority, MIN_PRIORITY, MAX_PRIORITY);
+    }
 }

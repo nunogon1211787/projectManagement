@@ -91,24 +91,21 @@ public class UserStory {
     }
 
 
-    /**
-     * Override Methods
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserStory userStory = (UserStory) o;
-        return idUserStory == userStory.idUserStory
-                && Objects.equals(priority,userStory.priority)
-                && timeEstimate == userStory.timeEstimate
-                && Objects.equals(title, userStory.title)
-                && Objects.equals(description, userStory.description);
+        return idUserStory == userStory.idUserStory && timeEstimate == userStory.timeEstimate &&
+               Double.compare(userStory.workDone, workDone) == 0 &&  Objects.equals(title, userStory.title) &&
+                Objects.equals(userStoryStatus, userStory.userStoryStatus) && Objects.equals(priority, userStory.priority) &&
+                Objects.equals(description, userStory.description) && Objects.equals(parentUserStory, userStory.parentUserStory) &&
+                Objects.equals(tasks, userStory.tasks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idUserStory, title, userStoryStatus, priority, description, parentUserStory, timeEstimate, tasks);
+        return Objects.hash(idUserStory, title, userStoryStatus, priority, description, parentUserStory, timeEstimate, tasks, workDone);
     }
 }
 

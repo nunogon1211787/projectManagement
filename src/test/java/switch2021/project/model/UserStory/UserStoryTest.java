@@ -1,9 +1,11 @@
 package switch2021.project.model.UserStory;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.Company;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Task.Task;
-import switch2021.project.model.valueObject.UserStoryStatus;
+import switch2021.project.model.valueObject.*;
 
 import java.time.LocalDate;
 
@@ -204,4 +206,25 @@ class UserStoryTest {
         assertNotEquals(6, userStory1.getPriority());
         assertTrue(exception.getMessage().equals("Check priority, cannot be < 0 or superior to 5"));
     }
+
+    @Test
+    public void overrideTest() {
+        //Arrange
+
+        UserStory userStory1 = new UserStory("As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 10);
+        UserStory userStory2 = new UserStory("As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 10);
+        UserStory userStory3 = new UserStory("As coise, I want to tal12132", 4, "Fazer totil de cenas bueda fixes", 10);
+
+
+        //Assert
+        assertNotSame(userStory1, userStory2);
+        assertEquals(userStory1, userStory2);
+        assertEquals(userStory1.getTitle(), userStory2.getTitle());
+        assertNotEquals(userStory1, userStory3);
+        assertNotSame("saffdf", userStory1.getTitle().getUsTitle());
+        assertFalse(userStory1.hasCode(213));
+        assertTrue(userStory1.setPriority(2));
+
+    }
+
 }
