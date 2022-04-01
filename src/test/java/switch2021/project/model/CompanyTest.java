@@ -29,7 +29,7 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "Qwerty_1", "Qwerty_1", "", profile);
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "Qwerty_1", "Qwerty_1", ".jpg", profile);
         company.getSystemUserStore().saveSystemUser(joana);
         //Act
         SystemUser joanasilva = company.getSystemUserStore().getUserByEmail("1235@isep.ipp.pt");
@@ -43,7 +43,7 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "Qwerty_1", "Qwerty_1", "", profile);
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "Qwerty_1", "Qwerty_1", ".png", profile);
         company.getSystemUserStore().saveSystemUser(joana);
         //Act
         SystemUser joanasilva = company.getSystemUserStore().getUserByEmail("4321@ipp.pt");

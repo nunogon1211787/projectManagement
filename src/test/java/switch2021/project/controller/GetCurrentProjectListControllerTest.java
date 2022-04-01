@@ -30,7 +30,7 @@ public class GetCurrentProjectListControllerTest {
                 typo, sector, LocalDate.now().minusDays(7), 2, 4000);
         currentProject.setEndDate(LocalDate.now().plusDays(7));
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, new CostPerHour(100), new PercentageOfAllocation(1));
@@ -58,7 +58,7 @@ public class GetCurrentProjectListControllerTest {
                 typo, sector, LocalDate.now().minusDays(7), 2, 4000);
         currentProject.setEndDate(LocalDate.now().plusDays(7));
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -104,7 +104,7 @@ public class GetCurrentProjectListControllerTest {
                 typo, sector, LocalDate.now().minusDays(7), 2, 4000);
         currentProject.setEndDate(LocalDate.now().plusDays(7));
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMm = LocalDate.now().minusDays(7);
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, new CostPerHour(100), new PercentageOfAllocation(.5));

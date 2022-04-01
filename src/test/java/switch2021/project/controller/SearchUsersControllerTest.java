@@ -20,9 +20,9 @@ class SearchUsersControllerTest {
         SearchSystemUsersController test = new SearchSystemUsersController(company);
        // company.getUserProfileStore().populateDefault();
         UserProfile p1 = company.getUserProfileStore().getUserProfile("visitor");
-        SystemUser usr1 = new SystemUser("Romulo", "romulo@romulo.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
-        SystemUser usr2 = new SystemUser("Maria", "maria@maria.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
-        SystemUser usr3 = new SystemUser("Joao", "joao@joao.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
+        SystemUser usr1 = new SystemUser("Romulo", "romulo@romulo.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1);
+        SystemUser usr2 = new SystemUser("Maria", "maria@maria.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1);
+        SystemUser usr3 = new SystemUser("Joao", "joao@joao.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1);
         company.getSystemUserStore().saveSystemUser(usr1);
         company.getSystemUserStore().saveSystemUser(usr2);
         company.getSystemUserStore().saveSystemUser(usr3);
@@ -41,9 +41,9 @@ class SearchUsersControllerTest {
         SearchSystemUsersController test = new SearchSystemUsersController(company);
         // company.getUserProfileStore().populateDefault();
         UserProfile p1 = company.getUserProfileStore().getUserProfile("visitor");
-        SystemUser usr1 = new SystemUser("Romulo", "romulo@romulo.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
-        SystemUser usr2 = new SystemUser("Maria", "maria@maria.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
-        SystemUser usr3 = new SystemUser("Joao", "joao@joao.pt", "any", "Qwerty_1", "Qwerty_1", "", p1);
+        SystemUser usr1 = new SystemUser("Romulo", "romulo@romulo.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1);
+        SystemUser usr2 = new SystemUser("Maria", "maria@maria.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1);
+        SystemUser usr3 = new SystemUser("Joao", "joao@joao.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1);
         company.getSystemUserStore().saveSystemUser(usr1);
         company.getSystemUserStore().saveSystemUser(usr2);
         company.getSystemUserStore().saveSystemUser(usr3);

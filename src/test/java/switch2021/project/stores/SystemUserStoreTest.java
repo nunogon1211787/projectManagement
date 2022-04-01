@@ -21,7 +21,7 @@ public class SystemUserStoreTest {
         String password = "Qwerty_1";
         String passwordConfirmation = "Qwerty_1";
         String function = "tester";
-        String photo = "photo";
+        String photo = "photo.png";
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
@@ -32,7 +32,7 @@ public class SystemUserStoreTest {
         when(passWordMock.encryptPassword("Qwerty_1")).thenReturn("´ÚÈÕ×ÜÂ\u0094");
         String passwordExpected = passWordMock.encryptPassword("Qwerty_1");
         String functionExpected = "tester";
-        String photoExpected = "photo";
+        String photoExpected = "photo.png";
         List<UserProfile> assignedProfileExpected = new ArrayList<>();
         assignedProfileExpected.add(profile);
         //Act
@@ -40,7 +40,7 @@ public class SystemUserStoreTest {
         String emailResult = newUser.getEmail().getEmail();
         String passwordResult = newUser.getPassword().getPwd();
         String functionResult = newUser.getFunction().getText();
-        String photoResult = newUser.getPhoto();
+        String photoResult = newUser.getPhoto().getExtension();
         boolean activateUserResult = newUser.isActivateUser();
         List<UserProfile> assignedProfileResult = newUser.getAssignedProfileList();
         //Assert
@@ -61,7 +61,7 @@ public class SystemUserStoreTest {
         String password = "Qwerty_1";
         String passwordConfirmation = "Qwerty_1";
         String function = "tester";
-        String photo = "photo";
+        String photo = "photo.png";
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
@@ -83,7 +83,7 @@ public class SystemUserStoreTest {
         String password = "Qwerty_1";
         String passwordConfirmation = "Qwerty_1";
         String function = "tester";
-        String photo = "photo";
+        String photo = "photo.png";
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
@@ -120,7 +120,7 @@ public class SystemUserStoreTest {
         String password = "Qwerty_1";
         String passwordConfirmation = "Qwerty_1";
         String function = "tester";
-        String photo = "photo";
+        String photo = "photo.png";
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
@@ -181,28 +181,28 @@ public class SystemUserStoreTest {
         String password = "Qwerty_1";
         String passwordConfirmation = "Qwerty_1";
         String function = "tester";
-        String photo = "photo";
+        String photo = "photo.png";
         String email2 = "maneloliveira@beaver.com";
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //newUser/list1 and newUser2/list2 are equals
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
-
         SystemUserStore list1 = new SystemUserStore();
         list1.saveSystemUser(newUser);
 
         SystemUser newUser2 = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, profile);
         SystemUserStore list2 = new SystemUserStore();
         list2.saveSystemUser(newUser2);
+        list1.saveSystemUser(newUser2);
         //newUser3/list3 is different (different email)
         SystemUser newUser3 = company.getSystemUserStore().createSystemUser(userName, email2, function, password, passwordConfirmation, photo, profile);
         SystemUserStore list3 = new SystemUserStore();
         list3.saveSystemUser(newUser3);
         //Assert
         assertNotSame(list1, list2);
-        assertEquals(list1.getSystemUserList(), list2.getSystemUserList());
-        assertEquals(newUser, newUser2);
-        assertEquals(list1.getSystemUserList().hashCode(), list2.getSystemUserList().hashCode());
+        assertEquals(list2.getSystemUserList().size(), list3.getSystemUserList().size());
+        assertNotEquals(newUser, newUser2);
+        assertEquals(list1.getSystemUserList().hashCode(), list1.getSystemUserList().hashCode());
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
     }

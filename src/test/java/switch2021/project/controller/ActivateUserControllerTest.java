@@ -15,7 +15,7 @@ public class ActivateUserControllerTest {
         Company company = new Company();
         ActivateUserController controller = new ActivateUserController(company);
         SystemUser user = new SystemUser("Ana", "xxx@isep.ipp.pt",
-                "User_12", "Qwerty_1", "Qwerty_1", "",company.getUserProfileStore().getUserProfile("Visitor"));
+                "User_12", "Qwerty_1", "Qwerty_1", "photo.png",company.getUserProfileStore().getUserProfile("Visitor"));
         company.getSystemUserStore().saveSystemUser(user);
 
         // Act

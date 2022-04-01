@@ -45,7 +45,7 @@ public class TaskListTest {
         Company comp = new Company();
         TaskList test = new TaskList();
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         TaskType type = new TaskType("type");
         Task newTask = new Task("test", "test test test tests", 10, type, resource);
@@ -64,7 +64,7 @@ public class TaskListTest {
         Company comp = new Company();
         TaskList test = new TaskList();
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         TaskType type = new TaskType("type");
         Task newTask = new Task("test", "test test test tests", 10, type, resource);
@@ -119,7 +119,7 @@ public class TaskListTest {
         Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);
         comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         Resource resource = proj.getProjectTeam().createResource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         proj.getProjectTeam().saveResource(resource);
 
@@ -147,7 +147,7 @@ public class TaskListTest {
         Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);
         comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         Resource resource = proj.getProjectTeam().createResource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         proj.getProjectTeam().saveResource(resource);
 
@@ -176,7 +176,7 @@ public class TaskListTest {
         Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);
         comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         Resource resource = proj.getProjectTeam().createResource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         proj.getProjectTeam().saveResource(resource);
 
@@ -205,7 +205,7 @@ public class TaskListTest {
         Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);
         comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         Resource resource = proj.getProjectTeam().createResource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
         proj.getProjectTeam().saveResource(resource);
 

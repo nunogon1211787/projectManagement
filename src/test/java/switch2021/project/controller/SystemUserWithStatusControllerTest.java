@@ -27,7 +27,7 @@ public class SystemUserWithStatusControllerTest {
         String password = "Qwerty_1";
         String passwordConfirmation = "Qwerty_1";
         String function = "tester";
-        String photo = "photo";
+        String photo = "photo.png";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
@@ -58,7 +58,7 @@ public class SystemUserWithStatusControllerTest {
         String password = "Qwerty_1";
         String passwordConfirmation = "Qwerty_1";
         String function = "tester";
-        String photo = "photo";
+        String photo = "photo.png";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
@@ -89,7 +89,7 @@ public class SystemUserWithStatusControllerTest {
         String password = "Qwerty_1";
         String passwordConfirmation = "Qwerty_1";
         String function = "tester";
-        String photo = "photo";
+        String photo = "photo.png";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
@@ -126,7 +126,7 @@ public class SystemUserWithStatusControllerTest {
         String password = "Qwerty_1";
         String passwordConfirmation = "Qwerty_1";
         String function = "tester";
-        String photo = "photo";
+        String photo = "photo.png";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,

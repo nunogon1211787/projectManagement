@@ -29,7 +29,7 @@ class TaskTest {
         TaskType taskType = new TaskType("Coisa");
         Task tastkTest = new Task("test");
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -50,7 +50,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation ( .5));
@@ -100,7 +100,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100),new PercentageOfAllocation( .5));
@@ -131,7 +131,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -163,7 +163,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -197,7 +197,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -231,7 +231,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -311,7 +311,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
 
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
@@ -338,7 +338,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
 
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
@@ -364,7 +364,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
 
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
@@ -390,7 +390,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
 
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
@@ -414,7 +414,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -434,7 +434,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -453,7 +453,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -472,7 +472,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -491,7 +491,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100),new PercentageOfAllocation( .5));
@@ -511,7 +511,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -530,7 +530,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100),new PercentageOfAllocation( .5));
@@ -550,7 +550,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -588,8 +588,8 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
-        SystemUser user2 = new SystemUser("Cris", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user2 = new SystemUser("Cris", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -622,7 +622,7 @@ class TaskTest {
         //Arrange
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
 
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);

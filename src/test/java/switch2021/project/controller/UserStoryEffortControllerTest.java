@@ -26,7 +26,7 @@ class UserStoryEffortControllerTest {
         SystemUserStore systemUserStore = company.getSystemUserStore();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "IMG_123", userProfile);
+                "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
         systemUserStore.saveSystemUser(user); //salvo o user
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
@@ -69,7 +69,7 @@ class UserStoryEffortControllerTest {
         SystemUserStore systemUserStore = company.getSystemUserStore(); //chamo a systemUserStore
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "IMG_123", userProfile);
+                "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
         systemUserStore.saveSystemUser(user); //salvo o user
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");

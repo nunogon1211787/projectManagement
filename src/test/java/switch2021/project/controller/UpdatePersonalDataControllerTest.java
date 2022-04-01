@@ -16,7 +16,7 @@ public class UpdatePersonalDataControllerTest {
         Company company = new Company();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser joana = new SystemUser("Joana", "123@isep.pt",
-                "Aluna", "Qwerty_1","Qwerty_1","img_123",
+                "Aluna", "Qwerty_1","Qwerty_1","photo.png",
                 userProfile);
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
         company.getSystemUserStore().saveSystemUser(joana);
@@ -33,12 +33,12 @@ public class UpdatePersonalDataControllerTest {
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
         SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "Qwerty_1",
-                "Qwerty_1","img_123", userProfile);
+                "Qwerty_1","photo.png", userProfile);
         company.getSystemUserStore().saveSystemUser(user1);
         //Act
         controllerTest.getUser("123@isep.ipp.pt");
         //Assert
-        assertTrue(controllerTest.updateSystemUserData("Joana Isabel Silva", "Aluna_numero10", "imagem_300"));
+        assertTrue(controllerTest.updateSystemUserData("Joana Isabel Silva", "Aluna_numero10", "photo1.png"));
     }
 
     @Test
@@ -48,12 +48,12 @@ public class UpdatePersonalDataControllerTest {
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
         SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "Qwerty_1",
-                "Qwerty_1","img_12", userProfile);
+                "Qwerty_1","photo.png", userProfile);
         company.getSystemUserStore().saveSystemUser(user1);
         //Act
         controllerTest.getUser("123@isep.ipp.pt");
         //Assert
-        assertTrue(controllerTest.updateSystemUserData("Jo", "Aluna_numero10", "imagem_300"));
+        assertTrue(controllerTest.updateSystemUserData("Jo", "Aluna_numero10", "photo.png"));
     }
 
     @Test
@@ -63,12 +63,12 @@ public class UpdatePersonalDataControllerTest {
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
         SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "Qwerty_1",
-                "Qwerty_1","img_12", userProfile);
+                "Qwerty_1","photo.png", userProfile);
         company.getSystemUserStore().saveSystemUser(user1);
         //Act
         controllerTest.getUser("123@isep.ipp.pt");
         //Assert
-        assertTrue(controllerTest.updateSystemUserData("Joana Isabel Silva", "Al", "imagem_300"));
+        assertTrue(controllerTest.updateSystemUserData("Joana Isabel Silva", "Al", "photo.png"));
     }
 
     @Test
@@ -78,12 +78,12 @@ public class UpdatePersonalDataControllerTest {
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
         SystemUser user1 = new SystemUser("Joana", "123@isep.ipp.pt", "Aluna", "Qwerty_1",
-                "Qwerty_1","img_12", userProfile);
+                "Qwerty_1","photo.png", userProfile);
         company.getSystemUserStore().saveSystemUser(user1);
         //Act
         controllerTest.getUser("123@isep.ipp.pt");
         //Assert
-        assertTrue(controllerTest.updateSystemUserData("Joana Isabel Silva", "Aluna_numero10", "im"));
+        assertTrue(controllerTest.updateSystemUserData("Joana Isabel Silva", "Aluna_numero10", "photo.jpg"));
     }
 
 }

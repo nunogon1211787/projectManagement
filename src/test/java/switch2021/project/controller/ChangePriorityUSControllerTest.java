@@ -52,8 +52,8 @@ public class ChangePriorityUSControllerTest {
         project3 = company.getProjectStore().createProject("prototype8", "test56", customer,
                 typo, sector, startDate3, 4, 3000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        newUser = new SystemUser("batatinha", "batatinha@cartoon.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
-        newUser2 = new SystemUser("companhia", "companhia@cartoon.com", "des", "Qwerty_1", "Qwerty_1", "", userProfile);
+        newUser = new SystemUser("batatinha", "batatinha@cartoon.com", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+        newUser2 = new SystemUser("companhia", "companhia@cartoon.com", "des", "Qwerty_1", "Qwerty_1", "photo1.png", userProfile);
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2023, 3, 5);
         input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));

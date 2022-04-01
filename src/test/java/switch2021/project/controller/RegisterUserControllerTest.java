@@ -18,7 +18,7 @@ public class RegisterUserControllerTest {
         String password = "Qwerty_1";
         String passwordConfirmation = "Qwerty_1";
         String function = "tester";
-        String photo = "photo";
+        String photo = "photo.png";
 
         assertTrue(controller.createSystemUser(userName, email, function, password, passwordConfirmation, photo));
     }

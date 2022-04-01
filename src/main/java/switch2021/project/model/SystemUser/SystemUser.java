@@ -17,7 +17,7 @@ public class SystemUser {
      **/
     private Name userName;
     private final Email email;
-    private String photo;
+    private Photo photo;
     private Password password;
     private Function function;
     private boolean activateUser;
@@ -32,7 +32,7 @@ public class SystemUser {
         checkProfileRules(profile);
         this.userName = new Name(userName);
         this.email = new Email(email);
-        this.photo = photo;
+        this.photo = new Photo (photo);
         this.function = new Function(function);
         if (password.equals(passwordConfirmation)) {
             this.password = new Password(password);
@@ -57,25 +57,19 @@ public class SystemUser {
      * Setting Methods (outside of lombock)
      **/
     public void setUserName(String userName) {
-        if (!userName.trim().isEmpty() && (userName.length() >= 1)) {
             this.userName = new Name(userName);
         }
-    }
 
     public void setFunction(String function) {
-        if (!function.trim().isEmpty() && (function.length() > 2)) {
             this.function = new Function(function);
         }
-    }
 
     private void setPassword(String password) {
         this.password = new Password(password);
     }
 
     public void setPhoto(String photo) {
-        if (!photo.trim().isEmpty()) {
-            this.photo = photo;
-        }
+            this.photo = new Photo(photo);
     }
 
     public boolean setAllData(String userName, String function, String photo) {

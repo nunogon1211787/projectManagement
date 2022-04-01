@@ -24,7 +24,7 @@ public class UpdateUserProfileControllerTest {
         userProfileStore = company.getUserProfileStore();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "IMG_123", userProfile);
+                "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
         systemUserStore.saveSystemUser(user);
     }
 
@@ -66,7 +66,7 @@ public class UpdateUserProfileControllerTest {
     public void updateProfileTest() {
         //Arrange
         SystemUser user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "", userProfileStore.getUserProfile("Visitor"));
+                "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfileStore.getUserProfile("Visitor"));
         UpdateUserProfileController controllerTest = new UpdateUserProfileController(company);
         //Act
         company.getSystemUserStore().getSystemUsers().add(user);
