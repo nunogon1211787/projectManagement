@@ -51,7 +51,7 @@ public class RegisterWorkToTaskControllerTest {
         project1.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "description", 5);
         int id_UserStory1 = project1.getProductBacklog().getUserStoryList().get(0).getIdUserStory(); //1
 
-        sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
+        sprint1.saveUsInSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
@@ -101,7 +101,7 @@ public class RegisterWorkToTaskControllerTest {
         //UserStory
         project1.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "description", 5);
         int id_UserStory1 = project1.getProductBacklog().getUserStoryList().get(0).getIdUserStory(); //1
-        sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
+        sprint1.saveUsInSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
@@ -155,7 +155,7 @@ public class RegisterWorkToTaskControllerTest {
         project1.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "description", 5);
 
         int id_UserStory1 = project1.getProductBacklog().getUserStoryList().get(0).getIdUserStory(); //1
-        sprint1.getSprintBacklog().saveUserStoryToSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
+        sprint1.saveUsInSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");

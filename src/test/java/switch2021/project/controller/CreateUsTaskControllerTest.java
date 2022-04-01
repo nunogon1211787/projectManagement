@@ -52,7 +52,7 @@ class CreateUsTaskControllerTest {
 
         //Create a UserStory
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        sprint.saveUsInSprintBacklog(userStory);
 
 
         //Create tasks
@@ -95,7 +95,7 @@ class CreateUsTaskControllerTest {
 
         //Create a UserStory
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        sprint.saveUsInSprintBacklog(userStory);
 
         //Get us task list
         List<String> tasksNames = controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
@@ -126,7 +126,7 @@ class CreateUsTaskControllerTest {
 
         //Create a UserStory
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        sprint.saveUsInSprintBacklog(userStory);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -173,7 +173,7 @@ class CreateUsTaskControllerTest {
 
         //Create a UserStory
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        sprint.saveUsInSprintBacklog(userStory);
 
         //Get project team names
         controller.getUsTasks(project.getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
@@ -204,7 +204,7 @@ class CreateUsTaskControllerTest {
 
         //Create a UserStory
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        sprint.saveUsInSprintBacklog(userStory);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -250,7 +250,7 @@ class CreateUsTaskControllerTest {
 
         //Create a UserStory
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        sprint.saveUsInSprintBacklog(userStory);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -303,7 +303,7 @@ class CreateUsTaskControllerTest {
 
         //Create a UserStory
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        sprint.saveUsInSprintBacklog(userStory);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");

@@ -52,7 +52,7 @@ public class AddUserStoryToSprintBacklogController {
 
     public boolean addUserStoryToSprintBacklog(int userStoryId) {
         UserStory userStory = this.productBacklog.getUserStoryById(userStoryId);
-        this.sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+        this.sprint.saveUsInSprintBacklog(userStory);
         return true;
     }
 }

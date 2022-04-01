@@ -5,7 +5,6 @@ import switch2021.project.mapper.ScrumBoardMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.Sprint.SprintBacklog;
 import switch2021.project.model.UserStory.UserStory;
 
 import java.util.Collections;
@@ -20,7 +19,6 @@ public class GetScrumBoardController {
     private final ScrumBoardMapper mapper;
     private Sprint sprint;
     private Project project;
-    private SprintBacklog sprintBacklog;
     private List<UserStory> userStoryList;
 
 
@@ -46,13 +44,13 @@ public class GetScrumBoardController {
         return sprint;
     }
 
-    public SprintBacklog getSprintBacklog() {
-        sprintBacklog = sprint.getSprintBacklog();
-        return sprintBacklog;
-    }
+//    public SprintBacklog getSprintBacklog() {
+//        sprint.getSprintBacklog();
+//        return sprintBacklog;
+//    }
 
     public List<UserStory> getUserStoryList() {
-        userStoryList = sprintBacklog.getUserStoryList();
+        userStoryList = sprint.getListOfUsFromSprintBacklog();
         return Collections.unmodifiableList(userStoryList);
     }
 

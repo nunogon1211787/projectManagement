@@ -3,6 +3,7 @@ package switch2021.project.model.Sprint;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.Task.Task;
+import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.stores.TaskList;
 import java.time.LocalDate;
@@ -70,6 +71,19 @@ public class Sprint {
         return taskList2;
     }
 
+    public List<UserStory> getListOfUsFromSprintBacklog(){
+        List<UserStory> listaA = this.sprintBacklog.getUserStoryList();
+        return listaA;
+    }
+
+    public UserStory getUsById(int id){
+        return this.sprintBacklog.getUserStory(id);
+    }
+
+    public boolean saveUsInSprintBacklog(UserStory userStory){
+        sprintBacklog.saveUserStoryToSprintBacklog(userStory);
+        return true;
+    }
     /**
      * Override Methods
      */

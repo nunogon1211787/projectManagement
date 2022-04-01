@@ -3,7 +3,6 @@ package switch2021.project.controller;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.Sprint.SprintBacklog;
 import switch2021.project.stores.*;
 
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ public class UserStoryEffortController {
     private SprintList sprintList;
     private List<Sprint> sprintsList;
     private Sprint sprint;
-    private SprintBacklog sprintBacklog;
 
 
     /**
@@ -58,9 +56,9 @@ public class UserStoryEffortController {
         return this.sprint;
     }
 
-    public SprintBacklog getSprintBacklog() {
-        this.sprintBacklog = this.sprint.getSprintBacklog();
-        return this.sprintBacklog;
-    }
+//    public SprintBacklog getSprintBacklog() {
+//        this.sprintBacklog = this.sprint.getSprintBacklog();
+//        return this.sprintBacklog;
+//    }
 }
 

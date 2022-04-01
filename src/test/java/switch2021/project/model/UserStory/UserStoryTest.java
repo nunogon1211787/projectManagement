@@ -100,7 +100,7 @@ class UserStoryTest {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
             UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "", 5);
-            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+            sprint.saveUsInSprintBacklog(userStory);
         });
     }
 
@@ -109,7 +109,7 @@ class UserStoryTest {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
             UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "    ", 5);
-            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+            sprint.saveUsInSprintBacklog(userStory);
         });
     }
 
@@ -119,7 +119,7 @@ class UserStoryTest {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
             UserStory userStory = new UserStory("", 2, "Fazer tal", 5);
-            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+            sprint.saveUsInSprintBacklog(userStory);
         });
     }
 
@@ -128,7 +128,7 @@ class UserStoryTest {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
             UserStory userStory = new UserStory("C", 2, "Fazer tal", 5);
-            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+            sprint.saveUsInSprintBacklog(userStory);
         });
     }
 
@@ -137,7 +137,7 @@ class UserStoryTest {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
             UserStory userStory = new UserStory("   ", 2, "Fazer tal", 5);
-            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+            sprint.saveUsInSprintBacklog(userStory);
         });
     }
 
@@ -146,7 +146,7 @@ class UserStoryTest {
         assertThrows(IllegalArgumentException.class, () -> {
             Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
             UserStory userStory = new UserStory("CC", 2, "Fazer tal", 5);
-            sprint.getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
+            sprint.saveUsInSprintBacklog(userStory);
         });
     }
 

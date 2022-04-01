@@ -98,7 +98,7 @@ class SystemUserTest {
             //Arrange
             Company company = new Company();
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-            SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "123456", "123456", "img_123", profile);
+            SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "img_123", profile);
             //Act
             UserProfile newProfile = company.getUserProfileStore().getUserProfile("Visitor");
             user.updateProfile(profile, newProfile);
@@ -111,7 +111,7 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile profile = new UserProfile("Notvisitor");
-            SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "123456", "123456", "img_123", profile);
+            SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "img_123", profile);
         });
     }
 

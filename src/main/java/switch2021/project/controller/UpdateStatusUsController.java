@@ -3,7 +3,6 @@ package switch2021.project.controller;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.Sprint.SprintBacklog;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.model.valueObject.UserStoryStatus;
@@ -46,8 +45,7 @@ public class UpdateStatusUsController {
         ProjectStore projectStore = company.getProjectStore();
         Project project = projectStore.getProjectByCode(code);
         Sprint sprint = project.getSprintList().getCurrentSprint();
-        SprintBacklog sprintBacklog = sprint.getSprintBacklog();
-        UserStory userStory = sprintBacklog.getUserStory(usId);
+        UserStory userStory = sprint.getUsById(usId);
         return userStory.setUserStoryStatusBoolean(userStoryStatus);
     }
 }

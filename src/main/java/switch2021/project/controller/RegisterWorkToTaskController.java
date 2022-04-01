@@ -1,7 +1,6 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.Sprint.SprintBacklog;
 import switch2021.project.model.Task.Task;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.Date;
@@ -51,8 +50,7 @@ public class RegisterWorkToTaskController {
         SprintList sprintList = project.getSprintList();
         Sprint sprint = sprintList.getSprintById(sprintId);
 
-        SprintBacklog sprintBacklog = sprint.getSprintBacklog();
-        this.userStory = sprintBacklog.getUserStory(userStoryId);
+        this.userStory = sprint.getUsById(userStoryId);
 
         this.taskList = this.userStory.getTasks().getTaskList();
 

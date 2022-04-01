@@ -72,8 +72,8 @@ class UpdateStatusUsControllerTest {
         UserStory userStory2 = new UserStory("As a PO, i want to test this string", 3, "Fazer tal e coiso", 5);
         Sprint sprint = project.getSprintList().createSprint("Sprintao", LocalDate.now(), 12);
         project.getSprintList().saveSprint(sprint);
-        project.getCurrentSprint().getSprintBacklog().saveUserStoryToSprintBacklog(userStory);
-        project.getCurrentSprint().getSprintBacklog().saveUserStoryToSprintBacklog(userStory2);
+        project.getCurrentSprint().saveUsInSprintBacklog(userStory);
+        project.getCurrentSprint().saveUsInSprintBacklog(userStory2);
 
         //act
 

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-public class SprintBacklog {
+class SprintBacklog {
 
     /** Class Attributes **/
     private final List<UserStory> userStoryList;
