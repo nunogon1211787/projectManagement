@@ -5,6 +5,7 @@ import switch2021.project.model.Company;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
 
+import java.awt.print.PrinterJob;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +70,9 @@ class TaskTest {
         Password password = mock(Password.class);
         when(user.getPassword()).thenReturn(password);
         when(password.getPwd()).thenReturn("Qwerty_1");
-        when(user.getPhoto()).thenReturn("photo");
+        Photo photo = mock(Photo.class);
+        when(user.getPhoto()).thenReturn(photo);
+        when(user.getPhoto().getExtension()).thenReturn("photo.png");
         //Resource
         Resource resource = mock(Resource.class);
         when(resource.getUser()).thenReturn(user);
@@ -158,7 +161,9 @@ class TaskTest {
         Password password = mock(Password.class);
         when(user.getPassword()).thenReturn(password);
         when(password.getPwd()).thenReturn("Qwerty_1");
-        when(user.getPhoto()).thenReturn("photo");
+        Photo photo = mock(Photo.class);
+        when(user.getPhoto()).thenReturn(photo);
+        when(user.getPhoto().getExtension()).thenReturn("photo.png");
         //Resource
         Resource resource = mock(Resource.class);
         when(resource.getUser()).thenReturn(user);
