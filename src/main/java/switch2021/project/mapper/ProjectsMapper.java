@@ -25,7 +25,7 @@ public class ProjectsMapper {
             endDate = project.getEndDate().getYear()
                     + "/" + project.getEndDate().getMonthValue() + "/" + project.getEndDate().getDayOfMonth();
         }
-        return new ProjectDTO(project.getCode(), project.getProjectName().getText(),
+        return new ProjectDTO(project.getCode().getText(), project.getProjectName().getText(),
                 startDate, endDate);
     }
 
@@ -50,7 +50,7 @@ public class ProjectsMapper {
     public List<ProjectDTO> toDtoByUser(List<Project> projectListByUser) {
         List<ProjectDTO> projectListByUserDtoList = new ArrayList<>();
         for (Project project : projectListByUser) {
-            ProjectDTO projectListByUserDto = new ProjectDTO(project.getCode(), project.getProjectName().getText(), project.getDescription().getText());
+            ProjectDTO projectListByUserDto = new ProjectDTO(project.getCode().getText(), project.getProjectName().getText(), project.getDescription().getText());
             projectListByUserDtoList.add(projectListByUserDto);
         }
         return projectListByUserDtoList;

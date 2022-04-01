@@ -22,7 +22,7 @@ public class Project {
     /**
      * Class Attributes
      **/
-    private String code;
+    private Description code;
     private Description projectName;
     private Description description;
 
@@ -138,7 +138,7 @@ public class Project {
         return this.projectTeam.hasResource(email);
     }
 
-    public boolean hasCode(String code){ return this.code.equalsIgnoreCase(code); }
+    public boolean hasCode(String code){ return this.code.getText().equalsIgnoreCase(code); }
 
 
     /**

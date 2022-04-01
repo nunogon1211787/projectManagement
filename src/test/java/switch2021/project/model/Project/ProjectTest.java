@@ -42,14 +42,14 @@ class ProjectTest {
         proj = company.getProjectStore().createProject("prototype", "test1", customer,
                 typo, sector, date, 7, 5000);
         company.getProjectStore().saveNewProject(proj);
-        company.getProjectStore().getProjectByCode(proj.getCode()).setEndDate(LocalDate.now());
+        company.getProjectStore().getProjectByCode(proj.getCode().getText()).setEndDate(LocalDate.now());
     }
 
     @Test
     @DisplayName("Project Creation Test")
     public void checkProjectCreation() {
         //Real and Expected
-        String code = proj.getCode();
+        String code = proj.getCode().getText();
         String valueCode = "Project_2022_1";
 
         String name = proj.getProjectName().getText();
@@ -99,7 +99,7 @@ class ProjectTest {
     @DisplayName("Project addition to list test")
     public void saveProjectTest() {
         List<Project> test = company.getProjectStore().getProjects();
-        String code = test.get(0).getCode();
+        String code = test.get(0).getCode().getText();
         String expectedCode = "Project_2022_1";
         assertEquals(expectedCode, code);
     }
@@ -405,7 +405,7 @@ class ProjectTest {
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
         assertEquals(7, project.getNumberOfSprints());
-        assertEquals(project.getCode(), list1.getProjectByCode(project.getCode()).getCode());
+        assertEquals(project.getCode(), list1.getProjectByCode(project.getCode().getText()).getCode());
         assertEquals("prototype", project.getProjectName().getText());
         assertEquals("test1234", project.getDescription().getText());
         assertEquals(sector, project.getBusinessSector());
@@ -422,12 +422,12 @@ class ProjectTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        project.setCode("1");
+        project.setCode(new Description("1"));
         project.setProductBacklog(backlog);
         project.setEndDate(date);
         Project project2 = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        project2.setCode("1");
+        project2.setCode(new Description("1"));
         project2.setEndDate(date);
         project2.setProductBacklog(backlog);
 

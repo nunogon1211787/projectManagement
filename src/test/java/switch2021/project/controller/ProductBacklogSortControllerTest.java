@@ -79,10 +79,10 @@ public class ProductBacklogSortControllerTest {
         ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company, mapper, mapperPB);
         List<ProjectDTO> projectList = productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
         // Assert
-        assertEquals(project.getCode(), projectList.get(0).getCode());
+        assertEquals(project.getCode().getText(), projectList.get(0).getCode());
         assertEquals(project.getProjectName().getText(), projectList.get(0).getProjectName());
         assertEquals(project.getDescription().getText(), projectList.get(0).getDescription());
-        assertEquals(project2.getCode(), projectList.get(1).getCode());
+        assertEquals(project2.getCode().getText(), projectList.get(1).getCode());
         assertEquals(project2.getProjectName().getText(), projectList.get(1).getProjectName());
         assertEquals(project2.getDescription().getText(), projectList.get(1).getDescription());
     }
