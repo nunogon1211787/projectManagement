@@ -80,7 +80,7 @@ class SprintBacklogTest {
         sprintBacklog.saveUserStoryToSprintBacklog(userstory);
         UserStory userstory2 = new UserStory("As a PO, i want to test this string", priority, description, 5);
         // Act
-        assertNotEquals(sprintBacklog.getUserStory(userstory.getIdUserStory()), userstory2);
+        assertNotSame(sprintBacklog.getUserStory(userstory.getIdUserStory()), userstory2);
     }
 
     @Test

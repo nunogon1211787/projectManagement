@@ -71,6 +71,10 @@ public class Sprint {
         return taskList2;
     }
 
+    /**
+     * Methods to call methods from sprint backlog
+     */
+
     public List<UserStory> getListOfUsFromSprintBacklog(){
         List<UserStory> listaA = this.sprintBacklog.getUserStoryList();
         return listaA;
