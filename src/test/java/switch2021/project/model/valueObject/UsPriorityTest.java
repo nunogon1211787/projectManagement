@@ -63,4 +63,63 @@ public class UsPriorityTest {
             new UsPriority(priority2);
         });
     }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTest() {
+        //Arrange
+        UsPriority usPriority = new UsPriority(1);
+        //Act and Assert
+        assertEquals(usPriority, usPriority);
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTestSuccess() {
+        //Arrange
+        UsPriority usPriority = new UsPriority(1);
+        UsPriority usPriority1 = new UsPriority(1);
+        //Act and Assert
+        assertEquals(usPriority, usPriority1);
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTestFail_1() {
+        //Arrange
+        UsPriority usPriority = new UsPriority(1);
+        UsPriority usPriority1 = new UsPriority(2);
+        //Act and Assert
+        assertNotEquals(usPriority, usPriority1);
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTestFail_2() {
+        //Arrange
+        UsPriority usPriority = new UsPriority(2);
+        Typology budget1 = new Typology("test");
+        //Act and Assert
+        assertNotEquals(usPriority, budget1);
+    }
+
+    @Test
+    @DisplayName("Test hashcode conditions for coverage purposes")
+    public void hashCodeSuccess() {
+        //Arrange
+        UsPriority usPriority = new UsPriority(1);
+        UsPriority usPriority1 = new UsPriority(1);
+        //Act and Arrange
+        assertEquals(usPriority.hashCode(), usPriority1.hashCode());
+    }
+
+    @Test
+    @DisplayName("Test hashcode conditions for coverage purposes")
+    public void hashCodeFail() {
+        //Arrange
+        UsPriority usPriority1 = new UsPriority(2);
+        UsPriority usPriority = new UsPriority(4);
+        //Act and Arrange
+        assertNotEquals(usPriority.hashCode(), usPriority1.hashCode());
+    }
 }

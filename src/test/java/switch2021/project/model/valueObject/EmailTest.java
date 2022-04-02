@@ -1,5 +1,6 @@
 package switch2021.project.model.valueObject;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -301,6 +302,92 @@ class EmailTest {
         Email test = new Email(text1);
         //Assert
         assertFalse(test.hasEmail(text2));
+    }
+
+    @Test
+    @DisplayName("Test to check Override Method.")
+    void overrideTest_Success(){
+        //Arrange
+        Email email = new Email("xpto@xpto.pt");
+        Email email1 = new Email("xpto@xpto.pt");
+        //Assert
+        assertTrue(email.equals(email1));
+    }
+
+    @Test
+    @DisplayName("Test to check Override Method.")
+    void overrideTest_Success_1(){
+        //Arrange
+        Email email = new Email("xpto@xpto.pt");
+        Email email1 = new Email("xpto@xpto.pt");
+        //Assert
+        assertEquals(email, email1);
+    }
+
+    @Test
+    @DisplayName("Test to check Override Method.")
+    void overrideTest_Success_2(){
+        //Arrange
+        Email email = new Email("xpto@xpto.pt");
+        Email email1 = email;
+        //Act and Assert
+        assertTrue(email.equals(email1));
+    }
+
+    @Test
+    @DisplayName("Test to check Override Method.")
+    void overrideTest_Fail(){
+        //Arrange
+        Email email = new Email("xpto@xpto.pt");
+        Email email1 = new Email("xpto12@xpto.pt");
+        //Assert
+        assertFalse(email.equals(email1));
+    }
+
+    @Test
+    @DisplayName("Test to check Override Method.")
+    void overrideTest_Fail_2(){
+        //Arrange
+        Email email = new Email("xpto@xpto.pt");
+        Email email1 = new Email("xpto12@xpto.pt");
+        //Assert
+        assertNotEquals(email, email1);
+    }
+
+    @Test
+    @DisplayName("Test 3 to check Override Method, with one null object.")
+    void overrideTest_NotEquals(){
+        //Arrange
+        Email email = new Email("xpto@xpto.pt");
+        Email email1 = null;
+        //Act and Assert
+        assertNotEquals(email,email1);
+    }
+
+    @Test
+    @DisplayName("Test to check HashCode Method.")
+    void hashCodeTest_Success(){
+        //Arrange
+        Email email = new Email("xpto@xpto.pt");
+        Email email1 = new Email("xpto@xpto.pt");
+        //Act
+        Object x = email.hashCode();
+        Object y = email1.hashCode();
+        //Assert
+        assertEquals(x,y);
+    }
+
+    @Test
+    @DisplayName("Test to check HashCode Method.")
+    void hashCodeTest_Fail(){
+        //Arrange
+        Email email = new Email("xpto@xpto.pt");
+        Email email1 = new Email("xpto12@xpto.pt");
+        //Act
+        Object x = email.hashCode();
+        Object y = email1.hashCode();
+        //Assert
+        assertNotEquals(x,y);
     }
 
 }

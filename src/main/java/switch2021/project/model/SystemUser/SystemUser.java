@@ -72,18 +72,9 @@ public class SystemUser {
             this.photo = new Photo(photo);
     }
 
-    public boolean setAllData(String userName, String function, String photo) {
-
-        boolean msg = false;
-
-        if (checkAllData(photo)) {
-            setUserName(userName);
-            setFunction(function);
-            setPhoto(photo);
-            msg = true;
-        }
-        return msg;
-    }
+//    public boolean setAllData(String userName, String function, String photo) {
+//        this.setUserName(userName);
+//    }
 
     public boolean setActivateUser(Boolean x) {
         this.activateUser = x;
@@ -101,11 +92,6 @@ public class SystemUser {
             throw new IllegalArgumentException("at registration visitor profile must be associated");
     }
 
-    public boolean checkAllData(String photo) {
-        if (photo.trim().isEmpty())
-            throw new IllegalArgumentException("Photo cannot be empty.");
-        return true;
-    }
 
     public boolean checkAssignedProfileList(UserProfile profile) {
         boolean msg = true;

@@ -21,9 +21,9 @@ public class BudgetTest {
     @DisplayName("Test to create valid budget")
     public void createNewBudget_LimitConditions() {
         //Arrange
-        Budget budget = new Budget(1);
+        Budget budget = new Budget(0.1);
         //Assert
-        assertEquals(1, budget.getBudget());
+        assertEquals(0.1, budget.getBudget());
     }
 
     @Test
@@ -44,7 +44,19 @@ public class BudgetTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            double budget = -10;
+            double budget = -0.1;
+            //Act
+            new Budget(budget);
+        });
+    }
+
+    @Test
+    @DisplayName("Test throw illegal argument exceptions (Budget field cannot be under 0)")
+    public void checkBudgetUnder0_LimitConditions_1() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            double budget = -6789;
             //Act
             new Budget(budget);
         });

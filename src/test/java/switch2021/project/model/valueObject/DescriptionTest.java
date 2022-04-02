@@ -60,6 +60,17 @@ class DescriptionTest {
     }
 
     @Test
+    public void shouldThrowException_becauseDescriptionLongerThan_1() {
+        //Arrange
+        char[] data = new char[1000];
+        Arrays.fill(data, 'a');
+        String str = new String(data);
+        Description description = new Description(str);
+        //Assert
+        assertEquals(1000, description.getText().length());
+    }
+
+    @Test
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTestEqual() {
         //Arrange
@@ -71,12 +82,12 @@ class DescriptionTest {
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")
-    public void overrideTestEqualTrue() {
+    public void overrideTestEqual_1() {
         //Arrange
         Description description = new Description("Test");
         Description description2 = new Description("Test");
         //Assert
-        assertEquals(description, description2);
+        assertTrue(description.equals(description2));
     }
 
     @Test
@@ -122,7 +133,7 @@ class DescriptionTest {
     public void hashCodeTestFail() {
         // Arrange
         Description description = new Description("Test");
-        Typology description2 = new Typology("Test");
+        Description description2 = new Description("Test123");
         //Assert
         assertNotEquals(description.hashCode(), description2.hashCode());
     }

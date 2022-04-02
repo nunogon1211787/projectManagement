@@ -153,6 +153,15 @@ public class SprintTest {
     }
 
     @Test
+    @DisplayName("Verification test of hasSprintID method")
+    public void hasSprintIDTest_Fail() {
+        Sprint sprint = new Sprint("Sprint_1", LocalDate.now().minusWeeks(1));
+        sprint.setIdSprint(1);
+        assertFalse(sprint.hasSprintID(9));
+    }
+
+
+    @Test
     @DisplayName("HashCode Verification")
     public void hashCodeTest() {
         //Arrange
@@ -164,6 +173,16 @@ public class SprintTest {
         assertEquals(sprint, sprint2);
         assertNotEquals(sprint3.hashCode(), sprint2.hashCode());
         assertNotEquals(sprint3, sprint2);
+    }
+
+    @Test
+    @DisplayName("Override Verification")
+    public void overrideTest_null() {
+        //Arrange
+        Sprint sprint = new Sprint("Sprint_1", LocalDate.now().minusWeeks(1));
+        Sprint sprint2 = null;
+        //Assert
+        assertNotEquals(sprint, sprint2);
     }
 
     @Test
