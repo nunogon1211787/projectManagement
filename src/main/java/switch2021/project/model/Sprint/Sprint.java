@@ -76,8 +76,7 @@ public class Sprint {
      */
 
     public List<UserStory> getListOfUsFromSprintBacklog(){
-        List<UserStory> listaA = this.sprintBacklog.getUserStoryList();
-        return listaA;
+        return this.sprintBacklog.getUserStoryList();
     }
 
     public UserStory getUsById(int id){

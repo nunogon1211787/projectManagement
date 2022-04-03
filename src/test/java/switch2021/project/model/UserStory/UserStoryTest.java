@@ -62,12 +62,14 @@ class UserStoryTest {
         //Arrange
         UserStory userStory = new UserStory("As a PO, i want to test this string", 1, "US001 - Test", 40);
         UserStory userStory_parent = new UserStory("As a PO, i want to test this string", 1, "As a PO, i want to test this string - Test", 40);
+        UserStory userStory_parent2 = new UserStory("As a PO, i want to test", 2, "make testes", 20);
 
         //Act
         userStory.setParentUserStory(userStory_parent);
 
         //Assert
         assertEquals(userStory.getParentUserStory(), userStory_parent);
+        assertNotEquals(userStory.getParentUserStory(), userStory_parent2);
     }
 
     @Test
@@ -182,6 +184,17 @@ class UserStoryTest {
     }
 
     @Test
+    void getTimeEstimate() {
+        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("As a IO, i want to test this string", 2, "Fazer tal e coiso", 5);
+        userStory2.setTimeEstimate(0);
+
+        assertEquals(0, userStory2.getTimeEstimate());
+        assertNotEquals(0, userStory1.getTimeEstimate());
+    }
+
+
+    @Test
     void setPriorityTrue() {
         UserStory userStory1 = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
         UserStory userStory2 = new UserStory("As a SO, i want to test this string", 2, "Fazer tal e coiso", 5);
@@ -217,11 +230,43 @@ class UserStoryTest {
         //Assert
         assertNotSame(userStory1, userStory2);
         assertEquals(userStory1, userStory2);
+        assertEquals(userStory1.getDescription(), userStory2.getDescription());
         assertEquals(userStory1.getTitle(), userStory2.getTitle());
         assertNotEquals(userStory1, userStory3);
         assertNotSame("saffdf", userStory1.getTitle().getTitleUs());
         assertFalse(userStory1.hasCode(213));
         assertTrue(userStory1.setPriority(2));
+
+    }
+
+    @Test
+    public void overrideStatus() {
+        //Arrange
+
+        UserStory userStory1 = new UserStory("As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 0);
+        UserStory userStory2 = new UserStory("As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 0);
+        UserStory userStory3 = new UserStory("As coise, I want to tal12132", 4, "Fazer totil de cenas bueda fixes", 10);
+        UserStoryStatus userStoryStatus = new UserStoryStatus("Não sei", true);
+        UserStory userStory4 = new UserStory(userStory3, userStoryStatus, 4, "Fazer totil de cenas bueda fixes");
+        UserStory userStory5 = new UserStory(userStory3, userStoryStatus, 4, "Fazer totil de cenas bueda fixes");
+        boolean result = userStory1.equals(userStory2);
+
+        //Assert
+        assertNotSame(userStory1, userStory2);
+        assertEquals(userStory1, userStory2);
+        assertEquals(userStory1.getTitle(), userStory2.getTitle());
+        assertEquals(userStory1.getPriority(), userStory2.getPriority());
+        assertEquals(userStory1.getTimeEstimate(), userStory2.getTimeEstimate());
+        assertEquals(userStory1.getIdUserStory(), userStory2.getIdUserStory());
+        assertEquals(userStory1.getWorkDone(), userStory2.getWorkDone());
+        assertEquals(userStory4.getParentUserStory(), userStory5.getParentUserStory());
+        assertEquals(userStory1.getTasks(), userStory2.getTasks());
+        assertNotEquals(userStory1, userStory3);
+        assertNotSame("saffdf", userStory1.getTitle().getTitleUs());
+        assertFalse(userStory1.hasCode(213));
+        assertTrue(userStory1.setPriority(2));
+        assertEquals(0, userStory1.getTimeEstimate());
+        assertTrue(result);
 
     }
 

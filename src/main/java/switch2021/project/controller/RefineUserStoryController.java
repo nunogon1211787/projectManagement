@@ -48,7 +48,7 @@ public class RefineUserStoryController {
     }
 
     public boolean createUserStory(String description, int priority, UserStoryStatus userStoryStatus){
-        UserStory userStoryCreated = this.productBacklog.RefineUserStory(userStoryParent, userStoryStatus, priority, description);
+        UserStory userStoryCreated = this.productBacklog.refineUserStory(userStoryParent, userStoryStatus, priority, description);
         this.productBacklog.getUserStoryList().add(userStoryCreated);
         return true;
     }

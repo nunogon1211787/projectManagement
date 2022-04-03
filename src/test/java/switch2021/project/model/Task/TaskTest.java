@@ -5,10 +5,10 @@ import switch2021.project.model.Company;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
 
-import java.awt.print.PrinterJob;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -18,33 +18,32 @@ class TaskTest {
 
     @Test
 
-    public void taskCreatorTest() {
+    public void createTaskOnlyWithDescription() {
+        //Arrange
         Task tastkTest = new Task("test");
-
+        //Act
         String expectedTask = "test";
-
+        //Assert
         assertEquals(expectedTask, tastkTest.getDescription().getText());
     }
 
     @Test
     public void taskWithPrecedenceCreatorTest() {
+        //Arrange
         Company company = new Company();
         TaskType taskType = new TaskType("Coisa");
-        Task tastkTest = new Task("test");
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         Task tastkTest2 = new Task("test", "Planear fazer totil coisas de cenas", 22, taskType, resource);
-
+        //Act
         List<String> precedence = new ArrayList<>();
         precedence.add(tastkTest2.getDescription().getText());
-
-        Task tastkTest3 = new Task("testdois", "Planear fazer totil coisas de cenas", 21, taskType, resource, precedence);
-
+        new Task("testdois", "Planear fazer totil coisas de cenas", 21, taskType, resource, precedence);
         String expectedTask = "Planear fazer totil coisas de cenas";
-
+        //Assert
         assertEquals(expectedTask, tastkTest2.getDescription().getText());
     }
 
@@ -112,6 +111,7 @@ class TaskTest {
         assertEquals(effortDate, task.getTaskEffortList().get(0).getEffortDate());
         assertEquals(comment, task.getTaskEffortList().get(0).getComment().getText());
         assertEquals(attachment, task.getTaskEffortList().get(0).getAttachment().getExtension());
+        assertEquals(taskType, task.getType());
     }
 
     @Test
@@ -393,21 +393,16 @@ class TaskTest {
         Company company = new Company();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
-
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
-
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
-
         //Act
         task.createAndSaveTaskEffort(19, 0, effortDate, "test", ".pdf");
-
-
         //Assert
         assertEquals(1.0, task.getEffortRemaining());
         assertEquals(19.0, task.getHoursSpent());
@@ -578,7 +573,6 @@ class TaskTest {
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
-
         //Act
         Task task = new Task("tttr", taskDescription, 20.00, taskType, resource);
         //Assert
@@ -590,14 +584,53 @@ class TaskTest {
     @Test
     void constructorCheckDescriptionEmptyTest() {
         //Arrange
-        Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+
+        //UserProfile
+        UserProfile profile = mock(UserProfile.class);
+        Description description = mock(Description.class);
+        when(profile.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        //SystemUser
+        SystemUser user = mock(SystemUser.class);
+        Name name = mock(Name.class);
+        when(user.getUserName()).thenReturn(name);
+        when(name.getNameF()).thenReturn("manuelbras");
+        Email email = mock(Email.class);
+        when(user.getEmail()).thenReturn(email);
+        when(email.getEmail()).thenReturn("manuelbras@beaver.com");
+        Function function = mock(Function.class);
+        when(user.getFunction()).thenReturn(function);
+        when(function.getText()).thenReturn("tester");
+        Password password = mock(Password.class);
+        when(user.getPassword()).thenReturn(password);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        Photo photo = mock(Photo.class);
+        when(user.getPhoto()).thenReturn(photo);
+        when(user.getPhoto().getExtension()).thenReturn("photo.png");
+        //Resource
+        Resource resource = mock(Resource.class);
+        when(resource.getUser()).thenReturn(user);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-        Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
+        when(resource.getStartDate()).thenReturn(startDateMb);
+        when(resource.getEndDate()).thenReturn(endDateMb);
+        CostPerHour costPerHour = mock(CostPerHour.class);
+        when(resource.getCostPerHour()).thenReturn(costPerHour);
+        when(costPerHour.getCost()).thenReturn(100.00);
+        PercentageOfAllocation percentageOfAllocation = mock(PercentageOfAllocation.class);
+        when(resource.getPercentageOfAllocation()).thenReturn(percentageOfAllocation);
+        when(percentageOfAllocation.getPercentage()).thenReturn(0.5);
+        //TaskType
+        TaskType taskType = mock(TaskType.class);
+        Description descType = mock(Description.class);
+        when(taskType.getDescription()).thenReturn(descType);
+        when(descType.getText()).thenReturn("Testing");
+        //TaskStatus
+        TaskStatus taskStatus = mock(TaskStatus.class);
+        Description descTaskStatys = mock(Description.class);
+        when(taskStatus.getDescription()).thenReturn(descTaskStatys);
+        when(descTaskStatys.getText()).thenReturn("Running");
         String taskDescription = "";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
         //Asserts
         assertThrows(IllegalArgumentException.class, () -> {
@@ -647,21 +680,176 @@ class TaskTest {
 
 
     @Test
-    void checkEffortRulesTest() {
+    void checkEffortRulesEqual0() {
         //Asserts
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            Company company = new Company();
-            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-            SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo", profile);
+
+            //UserProfile
+            UserProfile profile = mock(UserProfile.class);
+            Description description = mock(Description.class);
+            when(profile.getUserProfileName()).thenReturn(description);
+            when(description.getText()).thenReturn("Visitor");
+            //SystemUser
+            SystemUser user = mock(SystemUser.class);
+            Name name = mock(Name.class);
+            when(user.getUserName()).thenReturn(name);
+            when(name.getNameF()).thenReturn("manuelbras");
+            Email email = mock(Email.class);
+            when(user.getEmail()).thenReturn(email);
+            when(email.getEmail()).thenReturn("manuelbras@beaver.com");
+            Function function = mock(Function.class);
+            when(user.getFunction()).thenReturn(function);
+            when(function.getText()).thenReturn("tester");
+            Password password = mock(Password.class);
+            when(user.getPassword()).thenReturn(password);
+            when(password.getPwd()).thenReturn("Qwerty_1");
+            Photo photo = mock(Photo.class);
+            when(user.getPhoto()).thenReturn(photo);
+            when(user.getPhoto().getExtension()).thenReturn("photo.png");
+            //Resource
+            Resource resource = mock(Resource.class);
+            when(resource.getUser()).thenReturn(user);
             LocalDate startDateMb = LocalDate.of(2022, 1, 1);
             LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-            Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
+            when(resource.getStartDate()).thenReturn(startDateMb);
+            when(resource.getEndDate()).thenReturn(endDateMb);
+            CostPerHour costPerHour = mock(CostPerHour.class);
+            when(resource.getCostPerHour()).thenReturn(costPerHour);
+            when(costPerHour.getCost()).thenReturn(100.00);
+            PercentageOfAllocation percentageOfAllocation = mock(PercentageOfAllocation.class);
+            when(resource.getPercentageOfAllocation()).thenReturn(percentageOfAllocation);
+            when(percentageOfAllocation.getPercentage()).thenReturn(0.5);
+            //TaskType
+            TaskType taskType = mock(TaskType.class);
+            Description descType = mock(Description.class);
+            when(taskType.getDescription()).thenReturn(descType);
+            when(descType.getText()).thenReturn("Testing");
+            //TaskStatus
+            TaskStatus taskStatus = mock(TaskStatus.class);
+            Description descTaskStatys = mock(Description.class);
+            when(taskStatus.getDescription()).thenReturn(descTaskStatys);
+            when(descTaskStatys.getText()).thenReturn("Running");
             String taskDescription = "must be at least 20 characters";
-            TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
             //Act
-            new Task("test", taskDescription, 00.00, taskType, resource);
+            new Task("test", taskDescription, 0.00, taskType, resource);
         });
+    }
+
+    @Test
+    void checkEffortRulesLessthan0() {
+        //Arrange
+
+        //UserProfile
+        UserProfile profile = mock(UserProfile.class);
+        Description description = mock(Description.class);
+        when(profile.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        //SystemUser
+        SystemUser user = mock(SystemUser.class);
+        Name name = mock(Name.class);
+        when(user.getUserName()).thenReturn(name);
+        when(name.getNameF()).thenReturn("manuelbras");
+        Email email = mock(Email.class);
+        when(user.getEmail()).thenReturn(email);
+        when(email.getEmail()).thenReturn("manuelbras@beaver.com");
+        Function function = mock(Function.class);
+        when(user.getFunction()).thenReturn(function);
+        when(function.getText()).thenReturn("tester");
+        Password password = mock(Password.class);
+        when(user.getPassword()).thenReturn(password);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        Photo photo = mock(Photo.class);
+        when(user.getPhoto()).thenReturn(photo);
+        when(user.getPhoto().getExtension()).thenReturn("photo.png");
+        //Resource
+        Resource resource = mock(Resource.class);
+        when(resource.getUser()).thenReturn(user);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        when(resource.getStartDate()).thenReturn(startDateMb);
+        when(resource.getEndDate()).thenReturn(endDateMb);
+        CostPerHour costPerHour = mock(CostPerHour.class);
+        when(resource.getCostPerHour()).thenReturn(costPerHour);
+        when(costPerHour.getCost()).thenReturn(100.00);
+        PercentageOfAllocation percentageOfAllocation = mock(PercentageOfAllocation.class);
+        when(resource.getPercentageOfAllocation()).thenReturn(percentageOfAllocation);
+        when(percentageOfAllocation.getPercentage()).thenReturn(0.5);
+        //TaskType
+        TaskType taskType = mock(TaskType.class);
+        Description descType = mock(Description.class);
+        when(taskType.getDescription()).thenReturn(descType);
+        when(descType.getText()).thenReturn("Testing");
+        //TaskStatus
+        TaskStatus taskStatus = mock(TaskStatus.class);
+        Description descTaskStatys = mock(Description.class);
+        when(taskStatus.getDescription()).thenReturn(descTaskStatys);
+        when(descTaskStatys.getText()).thenReturn("Running");
+        String taskDescription = "must be at least 20 characters";
+
+        //Asserts
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            new Task("test", taskDescription, -1.00, taskType, resource);
+        });
+    }
+
+    @Test
+    void checkEffortRulesGreaterThan0() {
+        //Arrange
+
+        //UserProfile
+        UserProfile profile = mock(UserProfile.class);
+        Description description = mock(Description.class);
+        when(profile.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        //SystemUser
+        SystemUser user = mock(SystemUser.class);
+        Name name = mock(Name.class);
+        when(user.getUserName()).thenReturn(name);
+        when(name.getNameF()).thenReturn("manuelbras");
+        Email email = mock(Email.class);
+        when(user.getEmail()).thenReturn(email);
+        when(email.getEmail()).thenReturn("manuelbras@beaver.com");
+        Function function = mock(Function.class);
+        when(user.getFunction()).thenReturn(function);
+        when(function.getText()).thenReturn("tester");
+        Password password = mock(Password.class);
+        when(user.getPassword()).thenReturn(password);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        Photo photo = mock(Photo.class);
+        when(user.getPhoto()).thenReturn(photo);
+        when(user.getPhoto().getExtension()).thenReturn("photo.png");
+        //Resource
+        Resource resource = mock(Resource.class);
+        when(resource.getUser()).thenReturn(user);
+        LocalDate startDateMb = LocalDate.of(2022, 1, 1);
+        LocalDate endDateMb = LocalDate.of(2022, 1, 31);
+        when(resource.getStartDate()).thenReturn(startDateMb);
+        when(resource.getEndDate()).thenReturn(endDateMb);
+        CostPerHour costPerHour = mock(CostPerHour.class);
+        when(resource.getCostPerHour()).thenReturn(costPerHour);
+        when(costPerHour.getCost()).thenReturn(100.00);
+        PercentageOfAllocation percentageOfAllocation = mock(PercentageOfAllocation.class);
+        when(resource.getPercentageOfAllocation()).thenReturn(percentageOfAllocation);
+        when(percentageOfAllocation.getPercentage()).thenReturn(0.5);
+        //TaskType
+        TaskType taskType = mock(TaskType.class);
+        Description descType = mock(Description.class);
+        when(taskType.getDescription()).thenReturn(descType);
+        when(descType.getText()).thenReturn("Testing");
+        //TaskStatus
+        TaskStatus taskStatus = mock(TaskStatus.class);
+        Description descTaskStatys = mock(Description.class);
+        when(taskStatus.getDescription()).thenReturn(descTaskStatys);
+        when(descTaskStatys.getText()).thenReturn("Running");
+        String taskDescription = "must be at least 20 characters";
+
+        //Act
+        Task task = new Task("Test", taskDescription, 1.00, taskType, resource);
+        //Assert
+        assertEquals("Test", task.getName().getNameF());
+
     }
 
     @Test
@@ -728,6 +916,14 @@ class TaskTest {
         assertEquals(1.0, task.getExecutionPercentage());
         assertEquals(24.0, task.updateHoursSpent(task.getTaskEffortList().get(0)));
         assertEquals(0.0, task2.updateEffortRemaining(task.getTaskEffortList().get(0)));
+    }
+
+    @Test
+    public void validateTaskEffortNull() {
+        //Arrange & act
+        TaskEffort taskEffort = null;
+        //Assert
+        assertNull(taskEffort);
     }
 
 }

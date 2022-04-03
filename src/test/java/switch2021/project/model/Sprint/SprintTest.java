@@ -183,6 +183,7 @@ public class SprintTest {
         Sprint sprint2 = null;
         //Assert
         assertNotEquals(sprint, sprint2);
+       assertNull(sprint2);
     }
 
     @Test
@@ -195,7 +196,11 @@ public class SprintTest {
         SprintList sprintList = new SprintList(new SprintFactory());
         sprintList.saveSprint(sprint1);
         sprintList.saveSprint(sprint2);
+        sprintList.getSprints().get(0).setEndDate(LocalDate.of(2022, 5, 1));
+        sprintList.getSprints().get(1).setEndDate(LocalDate.of(2022, 5, 1));
         assertNotEquals(sprint1, sprint2);
         assertTrue(sprintList.validateIfSprintAlreadyExists(sprint2));
+        assertEquals(sprint1.getStartDate(),sprint2.getStartDate());
+        assertEquals(sprint1.getEndDate(),sprint2.getEndDate());
     }
 }

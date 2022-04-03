@@ -293,7 +293,7 @@ public class ProductBacklogTest {
 
         assertThrows(IllegalArgumentException.class, () -> {
             UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
-            company.getProductBacklog().RefineUserStory(company.getProductBacklog().getUserStoryList().get(0), userStoryStatus, 4, "123testtest");
+            company.getProductBacklog().refineUserStory(company.getProductBacklog().getUserStoryList().get(0), userStoryStatus, 4, "123testtest");
         });
     }
 
@@ -408,8 +408,21 @@ public class ProductBacklogTest {
         // Assert
 
         assertEquals(3, productBacklog.getUserStoryList().size());
+        assertEquals(userStoryFactory,productBacklog.getUserStoryFactory());
         assertEquals(1, productBacklog.getUserStoryList().get(0).getIdUserStory());
         assertEquals(2, productBacklog.getUserStoryList().get(1).getIdUserStory());
         assertEquals(3, productBacklog.getUserStoryList().get(2).getIdUserStory());
+    }
+
+    @Test
+    @DisplayName("getUserStoryFactory - success")
+    public void getUsFactory() {
+        // Arrange & Act
+        UserStoryFactory userStoryFactory = new UserStoryFactory();
+        ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
+        // Assert
+        assertEquals(userStoryFactory,productBacklog.getUserStoryFactory());
+        assertNotNull(userStoryFactory);
+
     }
 }

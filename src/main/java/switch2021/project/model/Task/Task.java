@@ -101,7 +101,7 @@ public class Task {
     }
 
     private void checkEffortRules(double effort) {
-        if (effort <= 0) {
+        if (effort <= 0.00) {
             throw new IllegalArgumentException("Effort can be bigger than zero.");
         }
     }
@@ -112,9 +112,7 @@ public class Task {
             throw new IllegalArgumentException("Not work time values insert");
         }
 
-        if (!validateTaskEffort(taskEffort)) {
-
-        } else {
+        if (validateTaskEffort(taskEffort)) {
             if (taskEffortList.isEmpty()) {
                 setStartDate(taskEffort.getEffortDate().getEffortDate());
                 setStatus(App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Running"));
@@ -155,10 +153,10 @@ public class Task {
     }
 
     public double updateEffortRemaining(TaskEffort effort) {
-        double EFFORT_TO_COMPLETE = 0.0;
+        double EFFORTTOCOMPLETE = 0.0;
 
         if (this.effortRemaining <= effortInHours(effort)) {
-            this.effortRemaining = EFFORT_TO_COMPLETE;
+            this.effortRemaining = EFFORTTOCOMPLETE;
         } else {
             this.effortRemaining -= effortInHours(effort);
         }
@@ -167,13 +165,13 @@ public class Task {
     }
 
     private double updateExecutionPercentage() {
-        double EFFORT_COMPLETED = 1.0;
+        double EFFORTCOMPLETED = 1.0;
 
         double workTotal = this.hoursSpent + this.effortRemaining;
         double workDone = this.hoursSpent;
 
         if (workDone >= workTotal) {
-            this.executionPercentage = EFFORT_COMPLETED;
+            this.executionPercentage = EFFORTCOMPLETED;
         } else {
             this.executionPercentage = workDone / workTotal;
         }
