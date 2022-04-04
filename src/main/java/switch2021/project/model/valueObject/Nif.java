@@ -1,5 +1,8 @@
 package switch2021.project.model.valueObject;
 
+import lombok.Getter;
+
+@Getter
 public class Nif {
 
     /**

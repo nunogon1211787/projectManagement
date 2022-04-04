@@ -14,7 +14,7 @@ public class BudgetTest {
         //Arrange
         Budget budget = new Budget(2500);
         //Assert
-        assertEquals(2500, budget.getBudget());
+        assertEquals(2500, budget.getBudgetP());
     }
 
     @Test
@@ -23,7 +23,7 @@ public class BudgetTest {
         //Arrange
         Budget budget = new Budget(0.1);
         //Assert
-        assertEquals(0.1, budget.getBudget());
+        assertEquals(0.1, budget.getBudgetP());
     }
 
     @Test
@@ -68,7 +68,7 @@ public class BudgetTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            double budget = 0;
+            double budget = 0.0;
             //Act
             new Budget(budget);
         });

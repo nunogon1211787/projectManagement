@@ -25,17 +25,17 @@ public class Resource {
      * Resource's Constructor
      **/
     public Resource(SystemUser user, LocalDate startDate, LocalDate endDate, CostPerHour costPerHour, PercentageOfAllocation percentageOfAllocation) {
-        checkStartDateEndDate(startDate, endDate);
+        if (checkStartDateEndDate(startDate, endDate)) {
 //        checkCostPerHour(costPerHour);
-        checkSystemUser(user);
+            checkSystemUser(user);
 
-        this.user = user;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.costPerHour = costPerHour;
-        this.percentageOfAllocation = percentageOfAllocation;
+            this.user = user;
+            this.startDate = startDate;
+            this.endDate = endDate;
+            this.costPerHour = costPerHour;
+            this.percentageOfAllocation = percentageOfAllocation;
+        }
     }
-
 
     /**
      * Resource's Copy
@@ -127,10 +127,11 @@ public class Resource {
         return msg;
     }
 
-    public void checkStartDateEndDate(LocalDate startDate, LocalDate endDate) {
+    public boolean checkStartDateEndDate(LocalDate startDate, LocalDate endDate) {
         if (endDate.isBefore(startDate)) {
             throw new IllegalArgumentException("End Date must be after Start Date");
         }
+        return true;
     }
 
 //    private void checkCostPerHour(double costPerHour) {

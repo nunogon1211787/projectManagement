@@ -15,8 +15,7 @@ class UserStoryTest {
 
     @Test
     void ValidateInfoUserStory() {
-        //Arrange
-        //Act
+        //Arrange & Act
         UserStory userStory = new UserStory("As a PO, i want to test this string", 1, "As a PO, i want to test this string - Test", 40);
         //Assert
         assertEquals("As a PO, i want to test this string", userStory.getTitle().getTitleUs());
@@ -50,9 +49,11 @@ class UserStoryTest {
 
     @Test
     void setDescriptionTest() {
+        //Arrange
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-
+        //Act
         userStory.setDescription("Fazer coiso");
+        //Assert
         assertEquals("Fazer coiso", userStory.getDescription().getText());
     }
 
@@ -74,11 +75,12 @@ class UserStoryTest {
 
     @Test
     void setUserStoryStatusBooleanTest() {
+        //Arrange
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-
+        //Act
         UserStoryStatus userStoryStatus = mock(UserStoryStatus.class);
         userStory.setUserStoryStatusBoolean(userStoryStatus);
-
+        //Assert
         assertEquals(userStoryStatus, userStory.getUserStoryStatus());
     }
 
@@ -100,7 +102,12 @@ class UserStoryTest {
     @Test
     void isValidUserStoryDescription() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            Sprint sprint = mock(Sprint.class);
+            Description description = mock(Description.class);
+            when(sprint.getSprintName()).thenReturn(description);
+            when(description.getText()).thenReturn("Super");
+            when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
+
             UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "", 5);
             sprint.saveUsInSprintBacklog(userStory);
         });
@@ -109,7 +116,12 @@ class UserStoryTest {
     @Test
     void isValidUserStoryDescription2() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            Sprint sprint = mock(Sprint.class);
+            Description description = mock(Description.class);
+            when(sprint.getSprintName()).thenReturn(description);
+            when(description.getText()).thenReturn("Super");
+            when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
+
             UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "    ", 5);
             sprint.saveUsInSprintBacklog(userStory);
         });
@@ -119,7 +131,12 @@ class UserStoryTest {
     @Test
     void isValidUserStoryName() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            Sprint sprint = mock(Sprint.class);
+            Description description = mock(Description.class);
+            when(sprint.getSprintName()).thenReturn(description);
+            when(description.getText()).thenReturn("Super");
+            when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
+
             UserStory userStory = new UserStory("", 2, "Fazer tal", 5);
             sprint.saveUsInSprintBacklog(userStory);
         });
@@ -128,7 +145,13 @@ class UserStoryTest {
     @Test
     void isValidUserStoryName2() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            Sprint sprint = mock(Sprint.class);
+            Description description = mock(Description.class);
+            when(sprint.getSprintName()).thenReturn(description);
+            when(description.getText()).thenReturn("Super");
+            when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
+
+
             UserStory userStory = new UserStory("C", 2, "Fazer tal", 5);
             sprint.saveUsInSprintBacklog(userStory);
         });
@@ -137,7 +160,12 @@ class UserStoryTest {
     @Test
     void isValidUserStoryName3() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            Sprint sprint = mock(Sprint.class);
+            Description description = mock(Description.class);
+            when(sprint.getSprintName()).thenReturn(description);
+            when(description.getText()).thenReturn("Super");
+            when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
+
             UserStory userStory = new UserStory("   ", 2, "Fazer tal", 5);
             sprint.saveUsInSprintBacklog(userStory);
         });
@@ -146,7 +174,13 @@ class UserStoryTest {
     @Test
     void isValidUserStoryName5() {
         assertThrows(IllegalArgumentException.class, () -> {
-            Sprint sprint = new Sprint("Super", LocalDate.of(2022, 3, 1));
+            Sprint sprint = mock(Sprint.class);
+            Description description = mock(Description.class);
+            when(sprint.getSprintName()).thenReturn(description);
+            when(description.getText()).thenReturn("Super");
+            when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
+
+
             UserStory userStory = new UserStory("CC", 2, "Fazer tal", 5);
             sprint.saveUsInSprintBacklog(userStory);
         });
@@ -157,7 +191,11 @@ class UserStoryTest {
         UserStory userStory1 = new UserStory("As a PO, i want to test this string", 1, "Fazer tal", 0);
         UserStory userStory2 = new UserStory("As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
         UserStory userStory3 = new UserStory("As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
-        UserStoryStatus status4 = new UserStoryStatus("teste5", true);
+       UserStoryStatus status4 = mock(UserStoryStatus.class);
+       Description description = mock(Description.class);
+       when(status4.getDescription()).thenReturn(description);
+       when(description.getText()).thenReturn("teste5");
+       when(status4.isSprintAvailable()).thenReturn(true);
 
         assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
         assertEquals(0, userStory1.getTimeEstimate());

@@ -42,12 +42,13 @@ public class ProductBacklog {
 
         UserStory newUserStory = this.userStoryFactory.createUserStory(title, priority, description, estimateEffort);
 
-        validateUserStory(newUserStory);
+        if (!validateUserStory(newUserStory)) {
 
-        if (validateIdUserStory(newUserStory)) {
-            newUserStory.setIdUserStory(idUserStoryGenerator());
+            if (validateIdUserStory(newUserStory)) {
+                newUserStory.setIdUserStory(idUserStoryGenerator());
+            }
+            this.userStoryList.add(newUserStory);
         }
-        this.userStoryList.add(newUserStory);
     }
 
     public UserStory refineUserStory(UserStory userStoryParent, UserStoryStatus userStoryStatus, int priority, String description) {
@@ -64,14 +65,17 @@ public class ProductBacklog {
 
     /**
      * Validation Methods.
-     **/
-    private void validateUserStory(UserStory newUserStory) {
+     *
+     * @return
+     */
+    private boolean validateUserStory(UserStory newUserStory) {
         // check duplicate story
         for (UserStory us : userStoryList) {
             if (us.getDescription().getText().trim().equalsIgnoreCase(newUserStory.getDescription().getText().trim())) {
                 throw new IllegalArgumentException("Repeated user story inserted, same code project and description.");
             }
         }
+        return false;
     }
 
     private boolean validateIdUserStory(UserStory newUserStory) {

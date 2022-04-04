@@ -865,6 +865,7 @@ class TaskTest {
         Resource resource2 = new Resource(user2, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+
         Task task1 = new Task("test", taskDescription, 20.00, taskType, resource);
         Task task2 = new Task("test", taskDescription, 20.00, taskType, resource);
         Task task3 = new Task("testtres", taskDescription, 20.00, taskType, resource);
@@ -925,5 +926,4 @@ class TaskTest {
         //Assert
         assertNull(taskEffort);
     }
-
 }

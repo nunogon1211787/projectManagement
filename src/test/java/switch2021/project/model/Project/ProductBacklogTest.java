@@ -406,7 +406,6 @@ public class ProductBacklogTest {
         productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 1, "backlog sorted", 5);
 
         // Assert
-
         assertEquals(3, productBacklog.getUserStoryList().size());
         assertEquals(userStoryFactory,productBacklog.getUserStoryFactory());
         assertEquals(1, productBacklog.getUserStoryList().get(0).getIdUserStory());
@@ -418,11 +417,10 @@ public class ProductBacklogTest {
     @DisplayName("getUserStoryFactory - success")
     public void getUsFactory() {
         // Arrange & Act
-        UserStoryFactory userStoryFactory = new UserStoryFactory();
+        UserStoryFactory userStoryFactory = mock(UserStoryFactory.class);
         ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
         // Assert
         assertEquals(userStoryFactory,productBacklog.getUserStoryFactory());
         assertNotNull(userStoryFactory);
-
     }
 }

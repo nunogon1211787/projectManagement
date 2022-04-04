@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class ProjectTest {
 
@@ -32,6 +34,7 @@ class ProjectTest {
     public void init() {
         //Arrange
         LocalDate date = LocalDate.of(2021, 12, 12);
+
         company.getBusinessSectorStore().createAndAddBusinessSector("sector");
         company.getCustomerStore().createAndAddCustomer("Teste", "Teste@teste.com", 123456789);
 
@@ -79,7 +82,7 @@ class ProjectTest {
         int numberOfSprints = company.getProjectStore().getProjectByCode("Project_2022_1").getNumberOfSprints();
         int valueNrSprint = 7;
 
-        double budget = company.getProjectStore().getProjectByCode("Project_2022_1").getBudget().getBudget();
+        double budget = company.getProjectStore().getProjectByCode("Project_2022_1").getBudget().getBudgetP();
         double valueBudget = 5000;
         //Result
         assertEquals(valueCode, code);
@@ -110,9 +113,18 @@ class ProjectTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-            Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-            BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+            Typology typo = mock(Typology.class);
+            Description description = mock(Description.class);
+            when(typo.getDescription()).thenReturn(description);
+            when(description.getText()).thenReturn("Fixed Cost");
+            Customer customer = mock(Customer.class);
+            Description description1 = mock(Description.class);
+            when(customer.getCustomerName()).thenReturn(description1);
+            when(description1.getText()).thenReturn("Teste");
+            BusinessSector sector = mock(BusinessSector.class);
+            Description description2 = mock(Description.class);
+            when(sector.getDescription()).thenReturn(description2);
+            when(description2.getText()).thenReturn("sector");
             LocalDate date = LocalDate.now();
             // Act
             company.getProjectStore().createProject("prototype", "", customer,
@@ -126,9 +138,18 @@ class ProjectTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-            Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-            BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+            Typology typo = mock(Typology.class);
+            Description description = mock(Description.class);
+            when(typo.getDescription()).thenReturn(description);
+            when(description.getText()).thenReturn("Fixed Cost");
+            Customer customer = mock(Customer.class);
+            Description description1 = mock(Description.class);
+            when(customer.getCustomerName()).thenReturn(description1);
+            when(description1.getText()).thenReturn("Teste");
+            BusinessSector sector = mock(BusinessSector.class);
+            Description description2 = mock(Description.class);
+            when(sector.getDescription()).thenReturn(description2);
+            when(description2.getText()).thenReturn("sector");
             LocalDate date = LocalDate.now();
             // Act
             company.getProjectStore().createProject("prototype", "test1234", customer,
@@ -142,9 +163,18 @@ class ProjectTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-            Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-            BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+            Typology typo = mock(Typology.class);
+            Description description = mock(Description.class);
+            when(typo.getDescription()).thenReturn(description);
+            when(description.getText()).thenReturn("Fixed Cost");
+            Customer customer = mock(Customer.class);
+            Description description1 = mock(Description.class);
+            when(customer.getCustomerName()).thenReturn(description1);
+            when(description1.getText()).thenReturn("Teste");
+            BusinessSector sector = mock(BusinessSector.class);
+            Description description2 = mock(Description.class);
+            when(sector.getDescription()).thenReturn(description2);
+            when(description2.getText()).thenReturn("sector");
             LocalDate date = LocalDate.now();
             // Act
             company.getProjectStore().createProject("prototype", "test1234", customer,
@@ -321,10 +351,10 @@ class ProjectTest {
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2021, 11, 30));
-
+        //Act
         store.saveNewProject(proj1);
         store.saveNewProject(proj1);
-
+        //Act
         assertEquals(1, store.getProjects().size());
     }
 
