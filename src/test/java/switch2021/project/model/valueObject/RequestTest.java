@@ -3,7 +3,10 @@ package switch2021.project.model.valueObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
+import switch2021.project.model.SystemUser.Request;
 import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.UserProfile.UserProfile;
+
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;

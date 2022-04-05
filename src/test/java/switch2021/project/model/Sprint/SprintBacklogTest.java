@@ -3,8 +3,8 @@ package switch2021.project.model.Sprint;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.valueObject.TaskType;
-import switch2021.project.model.valueObject.Typology;
+import switch2021.project.repositories.SprintBacklog;
+import switch2021.project.model.Typology.Typology;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;

@@ -5,7 +5,7 @@ import switch2021.project.model.Company;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.Password;
 import switch2021.project.stores.SystemUserStore;
-import switch2021.project.model.valueObject.UserProfile;
+import switch2021.project.model.UserProfile.UserProfile;
 
 import java.util.ArrayList;
 import java.util.List;

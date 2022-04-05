@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.Name;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.valueObject.Request;
-import switch2021.project.model.valueObject.UserProfile;
+import switch2021.project.model.SystemUser.Request;
+import switch2021.project.model.UserProfile.UserProfile;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;

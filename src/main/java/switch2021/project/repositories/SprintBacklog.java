@@ -1,4 +1,4 @@
-package switch2021.project.model.Sprint;
+package switch2021.project.repositories;
 
 import lombok.Getter;
 import switch2021.project.model.UserStory.UserStory;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-class SprintBacklog {
+public class SprintBacklog {
 
     /** Class Attributes **/
     private final List<UserStory> userStoryList;

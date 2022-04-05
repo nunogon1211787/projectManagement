@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.model.Company;
 import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.repositories.ProductBacklog;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.UserStoryStatus;
 

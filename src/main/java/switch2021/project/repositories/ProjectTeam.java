@@ -1,4 +1,4 @@
-package switch2021.project.model.Project;
+package switch2021.project.repositories;
 
 import lombok.Getter;
 import switch2021.project.factoryInterface.ResourceFactoryInterface;
@@ -7,7 +7,7 @@ import switch2021.project.model.valueObject.PercentageOfAllocation;
 import switch2021.project.model.valueObject.ProjectRole;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.utils.App;
-import switch2021.project.model.valueObject.Resource;
+import switch2021.project.model.Resource.Resource;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

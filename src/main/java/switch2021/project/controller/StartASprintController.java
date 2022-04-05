@@ -3,7 +3,7 @@ package switch2021.project.controller;
 import switch2021.project.dto.StartASprintDTO;
 import switch2021.project.model.Company;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Project.ProjectTeam;
+import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SprintList;
 

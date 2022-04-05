@@ -7,7 +7,7 @@ import switch2021.project.mapper.ProjectTeamMapper;
 import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.valueObject.Resource;
+import switch2021.project.model.Resource.Resource;
 
 import java.time.LocalDate;
 

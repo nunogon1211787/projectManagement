@@ -3,7 +3,7 @@ package switch2021.project.stores;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.factoryInterface.SprintFactoryInterface;
-import switch2021.project.model.Project.ProjectTeam;
+import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Task.Task;
 import java.time.LocalDate;

@@ -2,6 +2,7 @@ package switch2021.project.model.Task;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.utils.App;
 

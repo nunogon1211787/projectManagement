@@ -1,6 +1,8 @@
-package switch2021.project.model.valueObject;
+package switch2021.project.model.UserProfile;
 
 import lombok.Getter;
+import switch2021.project.model.valueObject.Description;
+
 import java.util.Objects;
 
 @Getter

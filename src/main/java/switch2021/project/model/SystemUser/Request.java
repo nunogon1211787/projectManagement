@@ -1,8 +1,8 @@
-package switch2021.project.model.valueObject;
+package switch2021.project.model.SystemUser;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.UserProfile.UserProfile;
 
 import java.time.LocalDate;
 import java.util.Objects;

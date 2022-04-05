@@ -7,7 +7,7 @@ import switch2021.project.model.Project.Project;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.BusinessSector;
 import switch2021.project.model.valueObject.Customer;
-import switch2021.project.model.valueObject.Typology;
+import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.UserStoryStatus;
 
 import java.time.LocalDate;

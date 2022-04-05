@@ -5,7 +5,7 @@ import switch2021.project.mapper.TaskMapper;
 import switch2021.project.dto.CreateTaskDTO;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Task.Task;
-import switch2021.project.model.valueObject.Resource;
+import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.valueObject.TaskType;
 import java.util.ArrayList;
 import java.util.List;

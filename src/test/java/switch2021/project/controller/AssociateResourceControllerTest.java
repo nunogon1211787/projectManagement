@@ -9,8 +9,8 @@ import switch2021.project.stores.ProjectStore;
 import switch2021.project.stores.SystemUserStore;
 import switch2021.project.model.valueObject.BusinessSector;
 import switch2021.project.model.valueObject.Customer;
-import switch2021.project.model.valueObject.Typology;
-import switch2021.project.model.valueObject.UserProfile;
+import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.UserProfile.UserProfile;
 
 import java.time.LocalDate;
 import java.util.List;

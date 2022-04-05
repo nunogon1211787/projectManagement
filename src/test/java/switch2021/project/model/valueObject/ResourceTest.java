@@ -5,7 +5,11 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.factory.ResourceFactory;
 import switch2021.project.model.Company;
 import switch2021.project.model.Project.Project;
+import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.UserProfile.UserProfile;
+
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;

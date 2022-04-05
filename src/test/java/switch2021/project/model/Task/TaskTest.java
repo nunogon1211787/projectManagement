@@ -2,13 +2,14 @@ package switch2021.project.model.Task;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
+import switch2021.project.model.Resource.Resource;
+import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;

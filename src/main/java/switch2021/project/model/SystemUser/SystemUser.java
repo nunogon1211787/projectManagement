@@ -2,6 +2,7 @@ package switch2021.project.model.SystemUser;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
 
 import java.util.ArrayList;

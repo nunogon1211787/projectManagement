@@ -1,4 +1,4 @@
-package switch2021.project.model.Project;
+package switch2021.project.repositories;
 
 import lombok.Getter;
 import lombok.Setter;

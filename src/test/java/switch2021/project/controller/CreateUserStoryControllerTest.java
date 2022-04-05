@@ -8,7 +8,11 @@ import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.mapper.UserStoryMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
+import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.repositories.ProductBacklog;
 import switch2021.project.model.valueObject.*;
 
 import java.time.LocalDate;

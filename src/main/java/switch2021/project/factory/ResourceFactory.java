@@ -4,7 +4,7 @@ import switch2021.project.factoryInterface.ResourceFactoryInterface;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.valueObject.CostPerHour;
 import switch2021.project.model.valueObject.PercentageOfAllocation;
-import switch2021.project.model.valueObject.Resource;
+import switch2021.project.model.Resource.Resource;
 
 import java.time.LocalDate;
 

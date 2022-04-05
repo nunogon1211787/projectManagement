@@ -1,6 +1,6 @@
 package switch2021.project.factoryInterface;
 
-import switch2021.project.model.Project.ProjectTeam;
+import switch2021.project.repositories.ProjectTeam;
 
 public interface ProjectTeamFactoryInterface {
 

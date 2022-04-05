@@ -4,7 +4,7 @@ import switch2021.project.model.valueObject.Budget;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Project.ProjectTeam;
+import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.valueObject.ProjectStatus;
 import switch2021.project.model.valueObject.SprintDuration;
 
