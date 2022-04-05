@@ -83,7 +83,7 @@ class ProjectTest {
         LocalDate endDate = company.getProjectStore().getProjectByCode("Project_2022_1").getEndDate();
         LocalDate valueEndDate = LocalDate.now();
 
-        int numberOfSprints = company.getProjectStore().getProjectByCode("Project_2022_1").getNumberOfSprints();
+        NumberOfSprints numberOfSprints = company.getProjectStore().getProjectByCode("Project_2022_1").getNumberOfSprints();
         int valueNrSprint = 7;
 
         double budget = company.getProjectStore().getProjectByCode("Project_2022_1").getBudget().getBudgetP();
@@ -98,7 +98,7 @@ class ProjectTest {
         assertEquals(valueStatus.getDescription(), status.getDescription());
         assertEquals(valueDate, date);
         assertEquals(valueEndDate, endDate);
-        assertEquals(valueNrSprint, numberOfSprints);
+        assertEquals(valueNrSprint, numberOfSprints.getNumberOfSprintsVO());
         assertEquals(valueBudget, budget);
     }
 
@@ -136,30 +136,6 @@ class ProjectTest {
         });
     }
 
-    @Test
-    @DisplayName("Project exceptions test")
-    public void createProjectExceptionsTest_numberOfSprints() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            Typology typo = mock(Typology.class);
-            Description description = mock(Description.class);
-            when(typo.getDescription()).thenReturn(description);
-            when(description.getText()).thenReturn("Fixed Cost");
-            Customer customer = mock(Customer.class);
-            Description description1 = mock(Description.class);
-            when(customer.getCustomerName()).thenReturn(description1);
-            when(description1.getText()).thenReturn("Teste");
-            BusinessSector sector = mock(BusinessSector.class);
-            Description description2 = mock(Description.class);
-            when(sector.getDescription()).thenReturn(description2);
-            when(description2.getText()).thenReturn("sector");
-            LocalDate date = LocalDate.now();
-            // Act
-            company.getProjectStore().createProject("prototype", "test1234", customer,
-                    typo, sector, date, 0, 5000);
-        });
-    }
 
     @Test
     @DisplayName("Project exceptions test")
@@ -438,7 +414,8 @@ class ProjectTest {
         assertEquals(list1.hashCode(), list2.hashCode());
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
-        assertEquals(7, project.getNumberOfSprints());
+        assertEquals(7, project.getNumberOfSprints().getNumberOfSprintsVO());
+        assertEquals(7, project.getNumberOfSprints().getNumberOfSprintsVO());
         assertEquals(project.getCode(), list1.getProjectByCode(project.getCode().getCode()).getCode());
         assertEquals("prototype", project.getProjectName().getText());
         assertEquals("test1234", project.getDescription().getText());
@@ -454,11 +431,13 @@ class ProjectTest {
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+
         Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         project.setCode(new ProjectCode(1));
         project.setProductBacklog(backlog);
         project.setEndDate(date);
+
         Project project2 = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         project2.setCode(new ProjectCode(1));

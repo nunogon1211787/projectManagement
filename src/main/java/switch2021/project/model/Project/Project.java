@@ -34,7 +34,6 @@ public class Project {
     private Typology typology;
     private ProjectStatus projectStatus;
     private ProductBacklog productBacklog;
-    private UserStoryFactory userStoryFactory;
 
     private final BusinessSector businessSector;
     private final SprintList sprintList;
@@ -46,7 +45,7 @@ public class Project {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    private int numberOfSprints;
+    private NumberOfSprints numberOfSprints;
     private Budget budget;
     private SprintDuration sprintDuration;
 
@@ -56,8 +55,6 @@ public class Project {
      **/
     public Project(String name, String description, Customer customer, Typology typology,
                    BusinessSector businessSector, LocalDate startDate, ProjectStatus status, int numberOfSprints, double budget) {
-
-        validateProjectFields(numberOfSprints);
 
         this.projectName = new Description(name);
         this.description = new Description(description);
@@ -70,7 +67,7 @@ public class Project {
         this.startDate = startDate;
         this.sprintList = new SprintList(new SprintFactory());
 
-        this.numberOfSprints = numberOfSprints;
+        this.numberOfSprints = new NumberOfSprints(numberOfSprints);
         this.budget = new Budget(budget);
 
         this.projectTeam = new ProjectTeam(resFac);
@@ -79,15 +76,6 @@ public class Project {
         this.productBacklog = new ProductBacklog();
     }
 
-
-    /**
-     * Validates Project Creation Fields
-     * Checks if @param projectName and @param description are empty or have the minimum characters necessary
-     */
-    public void validateProjectFields( int numberOfSprints) {
-        if (numberOfSprints <= 0)
-            throw new IllegalArgumentException("Number of Sprints must be greater than 0");
-    }
 
 
     /**
@@ -161,8 +149,8 @@ public class Project {
         if (this == o) return true;
         if (!(o instanceof Project)) return false;
         Project project = (Project) o;
-        return numberOfSprints == project.numberOfSprints
-                && sprintDuration == project.sprintDuration
+        return Objects.equals(numberOfSprints, project.numberOfSprints)
+                && Objects.equals(sprintDuration, project.sprintDuration)
                 && Objects.equals(code, project.code)
                 && Objects.equals(projectName, project.projectName)
                 && Objects.equals(description, project.description)

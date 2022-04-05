@@ -139,7 +139,7 @@ class EditProjectInfoControllerTest {
         assertEquals("test44", project.getDescription().getText());
         assertEquals(project.getStartDate(), LocalDate.of(2022, 12, 1));
         assertEquals(project.getEndDate(), LocalDate.of(2023, 12, 1));
-        assertEquals(10, project.getNumberOfSprints());
+        assertEquals(10, project.getNumberOfSprints().getNumberOfSprintsVO());
         assertEquals(10000, project.getBudget().getBudgetP());
         assertEquals(7, project.getSprintDuration().getSprintDurationDays());
         assertEquals(10000, project.getBudget().getBudgetP());
@@ -206,34 +206,6 @@ class EditProjectInfoControllerTest {
         assertEquals(newProjectTeam, x);
     }
 
-    @Test
-    void editProjectTest_Fail() {
-        //Arrange
-        company = new Company();
-        this.projectStore = company.getProjectStore();
-        LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        customer = company.getCustomerStore().getCustomerByName("ISEP");
-        sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-        project = company.getProjectStore().createProject("prototype2", "test56", customer,
-                typo, sector, startDate2, 7, 5000);
-        ResourceFactory resFac = mock(ResourceFactory.class);
-        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
-        ProjectStatus projectStatus = new ProjectStatus("Quase");
-        this.projectStore.saveNewProject(project);
-
-        EditProjectInfoController edit = new EditProjectInfoController(company);
-        edit.getProjectRequested(project.getCode().getCode());
-        //Act
-        boolean x = edit.editProject("prototype2", "test56", LocalDate.of(2022, 12, 31),
-                LocalDate.of(2023, 12, 1), 0, 5000,
-                3, projectStatus, projectTeam2);
-
-
-        //Assert
-        assertFalse(x);
-    }
-
     @DisplayName("Edit project - with project team")
     @Test
     void editProjectTestWithProjectTeam() {
@@ -296,64 +268,5 @@ class EditProjectInfoControllerTest {
         ProjectTeam x = project.getProjectTeam();
         assertEquals(newProjectTeam, x);
     }
-
-    @Test
-    public void validateProjectFieldsProjectNumberOfSprints0() {
-        //Arrange
-        company = new Company();
-        this.projectStore = company.getProjectStore();
-        LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        customer = company.getCustomerStore().getCustomerByName("ISEP");
-        sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-        project = company.getProjectStore().createProject("prototype2", "test56", customer,
-                typo, sector, startDate2, 7, 5000);
-        ResourceFactory resFac = mock(ResourceFactory.class);
-        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
-        ProjectStatus projectStatus = new ProjectStatus("Quase");
-
-        this.projectStore.saveNewProject(project);
-
-        EditProjectInfoController edit = new EditProjectInfoController(company);
-        edit.getProjectRequested(project.getCode().getCode());
-        int numberOfSprints = 0;
-        // Act
-
-        boolean isEdited = edit.editProject("proto", "test44", LocalDate.of(2022, 12, 1),
-                LocalDate.of(2023, 12, 1), numberOfSprints, 10000,
-                3, projectStatus, projectTeam2);
-        //Assert
-        assertFalse(isEdited);
-    }
-
-    @Test
-    public void validateProjectFieldsProjectNumberOfSprintsNegative() {
-        //Arrange
-        company = new Company();
-        this.projectStore = company.getProjectStore();
-        LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
-        customer = company.getCustomerStore().getCustomerByName("ISEP");
-        sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-        project = company.getProjectStore().createProject("prototype2", "test56", customer,
-                typo, sector, startDate2, 7, 5000);
-        ResourceFactory resFac = mock(ResourceFactory.class);
-        ProjectTeam projectTeam2 = new ProjectTeam(resFac);
-        ProjectStatus projectStatus = new ProjectStatus("Quase");
-
-        this.projectStore.saveNewProject(project);
-
-        EditProjectInfoController edit = new EditProjectInfoController(company);
-        edit.getProjectRequested(project.getCode().getCode());
-        int numberOfSprints = -5;
-        // Act
-
-        boolean isEdited = edit.editProject("proto", "test44", LocalDate.of(2022, 12, 1),
-                LocalDate.of(2023, 12, 1), numberOfSprints, 10000,
-                3, projectStatus, projectTeam2);
-        //Assert
-        assertFalse(isEdited);
-    }
-
 
 }

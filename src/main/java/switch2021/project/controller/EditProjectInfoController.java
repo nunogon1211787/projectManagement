@@ -4,6 +4,7 @@ import switch2021.project.model.valueObject.Budget;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
+import switch2021.project.model.valueObject.NumberOfSprints;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.valueObject.ProjectStatus;
 import switch2021.project.model.valueObject.SprintDuration;
@@ -47,18 +48,12 @@ public class EditProjectInfoController {
 
         boolean result = true;
 
-        try {
-            project.validateProjectFields(numberOfSprints);
-        } catch (IllegalArgumentException e) {
-            result = false;
-        }
-
         if (result) {
             this.project.setProjectName(new Description(name));
             this.project.setDescription(new Description(description));
             this.project.setStartDate(startDate);
             this.project.setEndDate(endDate);
-            this.project.setNumberOfSprints(numberOfSprints);
+            this.project.setNumberOfSprints(new NumberOfSprints(numberOfSprints));
             this.project.setBudget(new Budget(budget));
             this.project.setProjectStatus(status);
             this.project.setSprintDuration(new SprintDuration(sprintDuration));

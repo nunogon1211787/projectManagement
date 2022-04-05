@@ -24,7 +24,6 @@ public class ProductBacklogTest {
         // Arrange
         UserStoryFactory userStoryFactory = mock(UserStoryFactory.class);
         ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
-
         UserStoryStatus status = mock(UserStoryStatus.class);
         Description description = mock(Description.class);
 
