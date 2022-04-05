@@ -68,7 +68,7 @@ public class StartASprintControllerTest {
         proj1.getSprintList().saveSprint(proj1.getSprintList().createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
                 proj1.getSprintDuration().getSprintDurationDays()));
         //Act
-        StartASprintDTO sprintDTO = new StartASprintDTO(proj1.getCode().getText(),
+        StartASprintDTO sprintDTO = new StartASprintDTO(proj1.getCode().getCode(),
                 proj1.getSprintList().getSprints().get(0).getIdSprint(),
                 LocalDate.of(2022, 1, 16));
         //Assert
@@ -126,7 +126,7 @@ public class StartASprintControllerTest {
         proj1.getSprintList().saveSprint(proj1.getSprintList().createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
                 proj1.getSprintDuration().getSprintDurationDays()));
         //Act
-        StartASprintDTO sprintDTO = new StartASprintDTO(proj1.getCode().getText(),
+        StartASprintDTO sprintDTO = new StartASprintDTO(proj1.getCode().getCode(),
                 proj1.getSprintList().getSprints().get(0).getIdSprint(),
                 LocalDate.of(2023, 1, 1));
         //Assert

@@ -99,7 +99,7 @@ public class ChangePriorityUSControllerTest {
 
         // Act
         Project expected = project;
-        Project actual = change.getProjectByCode(project.getCode().getText());
+        Project actual = change.getProjectByCode(project.getCode().getCode());
 
         // Assert
         assertEquals(expected, actual);
@@ -123,7 +123,7 @@ public class ChangePriorityUSControllerTest {
     void getUserStoryListSuccess() {
         //Arrange
         ChangePriorityUSController change = new ChangePriorityUSController(company);
-        change.getProject(project.getCode().getText());
+        change.getProject(project.getCode().getCode());
         // Act
         List<UserStory> expected = change.getUserStoryList();
         change.getUserStoryList().add(userStory);
@@ -139,7 +139,7 @@ public class ChangePriorityUSControllerTest {
     void getUSSuccess() {
         //Arrange
         ChangePriorityUSController change = new ChangePriorityUSController(company);
-        change.getProject(project.getCode().getText());
+        change.getProject(project.getCode().getCode());
         change.getProductBacklog();
         // Act
         UserStory expected = userStory2;
@@ -152,7 +152,7 @@ public class ChangePriorityUSControllerTest {
     void setPrioritySuccess() {
         //Arrange
         ChangePriorityUSController change = new ChangePriorityUSController(company);
-        change.getProject(project.getCode().getText());
+        change.getProject(project.getCode().getCode());
         change.getProductBacklog();
         change.getUserStory(userStory.getIdUserStory());
 

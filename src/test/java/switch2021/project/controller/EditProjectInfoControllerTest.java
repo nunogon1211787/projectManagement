@@ -101,7 +101,7 @@ class EditProjectInfoControllerTest {
         EditProjectInfoController edit = new EditProjectInfoController(company);
 
         //Act
-        String code = project.getCode().getText();
+        String code = project.getCode().getCode();
         Project expected = edit.getProjectRequested(code);
 
 
@@ -127,7 +127,7 @@ class EditProjectInfoControllerTest {
         this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
-        edit.getProjectRequested(project.getCode().getText());
+        edit.getProjectRequested(project.getCode().getCode());
         //Act
         edit.editProject("proto", "test44", LocalDate.of(2022, 12, 1),
                 LocalDate.of(2023, 12, 1), 10, 10000,
@@ -194,7 +194,7 @@ class EditProjectInfoControllerTest {
         this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
-        edit.getProjectRequested(project.getCode().getText());
+        edit.getProjectRequested(project.getCode().getCode());
         //Act
         edit.editProject("proto", "test44", LocalDate.of(2020, 12, 1),
                 LocalDate.of(2023, 12, 1), 10, 10000,
@@ -223,7 +223,7 @@ class EditProjectInfoControllerTest {
         this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
-        edit.getProjectRequested(project.getCode().getText());
+        edit.getProjectRequested(project.getCode().getCode());
         //Act
         boolean x = edit.editProject("prototype2", "test56", LocalDate.of(2022, 12, 31),
                 LocalDate.of(2023, 12, 1), 0, 5000,
@@ -285,7 +285,7 @@ class EditProjectInfoControllerTest {
         this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
-        edit.getProjectRequested(project.getCode().getText());
+        edit.getProjectRequested(project.getCode().getCode());
         //Act
         edit.editProject("proto", "test44", LocalDate.of(2020, 12, 1),
                 LocalDate.of(2023, 12, 1), 10, 10000,
@@ -315,7 +315,7 @@ class EditProjectInfoControllerTest {
         this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
-        edit.getProjectRequested(project.getCode().getText());
+        edit.getProjectRequested(project.getCode().getCode());
         int numberOfSprints = 0;
         // Act
 
@@ -344,7 +344,7 @@ class EditProjectInfoControllerTest {
         this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
-        edit.getProjectRequested(project.getCode().getText());
+        edit.getProjectRequested(project.getCode().getCode());
         int numberOfSprints = -5;
         // Act
 

@@ -114,7 +114,7 @@ class UserStoryEffortControllerTest {
         SprintList sprintList = project1.getSprintList(); //objeto
         sprintList.saveSprint(sprint1);
         project1.getSprintList().saveSprint(sprint1);
-        controller.getProjectByCode(project1.getCode().getText());
+        controller.getProjectByCode(project1.getCode().getCode());
         //Assert
         assertEquals(sprint1, controller.getSprint(1));
     }
@@ -155,7 +155,7 @@ class UserStoryEffortControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().saveNewProject(project1);
         //Assert
-        assertEquals(project1, controller.getProjectByCode(project1.getCode().getText()));
+        assertEquals(project1, controller.getProjectByCode(project1.getCode().getCode()));
     }
 
 }

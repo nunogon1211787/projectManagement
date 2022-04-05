@@ -104,9 +104,9 @@ public class ProjectStore {
      */
     public boolean saveNewProject(Project proj) {
         boolean status = false;
-        String codeG = "Project_" + LocalDate.now().getYear() + "_" + (this.projectList.size() + 1);
+
         if (!checkProjectExists(proj)) {
-            proj.setCode(new Description(codeG));
+            proj.setCode(new ProjectCode(this.projectList.size() + 1));
             this.projectList.add(proj);
 
             status = true;

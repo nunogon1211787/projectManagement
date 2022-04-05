@@ -118,7 +118,7 @@ public class CreateSprintControllerTest {
         proj1.getProjectTeam().saveResource(joana);
 
         controller.getCurrentProjectListByUserEmail("joana@beaver.com");
-        controller.getProject(proj1.getCode().getText());
+        controller.getProject(proj1.getCode().getCode());
         Sprint sprintC = controller.createSprint("Sprint44", LocalDate.of(2022, 3, 1));
         proj1.getSprintList().saveSprint(sprintC);
 
@@ -158,7 +158,7 @@ public class CreateSprintControllerTest {
         proj1.getProjectTeam().saveResource(joana);
 
         controller.getCurrentProjectListByUserEmail("joana@beaver.com");
-        controller.getProject(proj1.getCode().getText());
+        controller.getProject(proj1.getCode().getCode());
 
         Sprint sprintC = controller.createSprint("Sprint44", LocalDate.of(2022,3,1));
 

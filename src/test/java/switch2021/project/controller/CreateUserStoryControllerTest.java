@@ -207,10 +207,10 @@ public class CreateUserStoryControllerTest {
         List<ProjectDTO> projectList = createUserStoryController.getProjectListByUserEmail("cris@ipp.pt");
         // Assert
         assertEquals(2, projectList.size());
-        assertEquals(project.getCode().getText(), projectList.get(0).getCode());
+        assertEquals(project.getCode().getCode(), projectList.get(0).getCode());
         assertEquals(project.getProjectName().getText(), projectList.get(0).getProjectName());
         assertEquals(project.getDescription().getText(), projectList.get(0).getDescription());
-        assertEquals(project2.getCode().getText(), projectList.get(1).getCode());
+        assertEquals(project2.getCode().getCode(), projectList.get(1).getCode());
         assertEquals(project2.getProjectName().getText(), projectList.get(1).getProjectName());
         assertEquals(project2.getDescription().getText(), projectList.get(1).getDescription());
     }
