@@ -26,7 +26,7 @@ public class Project {
     /**
      * Class Attributes
      **/
-    private ProjectCode code;
+    private ProjectCode projectCode;
     private Description projectName;
     private Description description;
 
@@ -142,7 +142,7 @@ public class Project {
         return this.projectTeam.hasResource(email);
     }
 
-    public boolean hasCode(String code){ return this.code.getCode().equalsIgnoreCase(code); }
+    public boolean hasCode(String code){ return this.projectCode.getCode().equalsIgnoreCase(code); }
 
 
     /**
@@ -163,7 +163,7 @@ public class Project {
         Project project = (Project) o;
         return numberOfSprints == project.numberOfSprints
                 && sprintDuration == project.sprintDuration
-                && Objects.equals(code, project.code)
+                && Objects.equals(projectCode, project.projectCode)
                 && Objects.equals(projectName, project.projectName)
                 && Objects.equals(description, project.description)
                 && Objects.equals(customer, project.customer)
@@ -180,7 +180,7 @@ public class Project {
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, projectName, description, customer, typology,
+        return Objects.hash(projectCode, projectName, description, customer, typology,
                 projectStatus, productBacklog, businessSector,
                 sprintList, projectTeam, startDate, endDate, numberOfSprints,
                 budget, sprintDuration);
@@ -189,7 +189,7 @@ public class Project {
     @Override
     public String toString() {
         return "Project{" +
-                "code='" + code + '\'' +
+                "code='" + projectCode + '\'' +
                 ", projectName='" + projectName + '\'' +
                 ", description='" + description + '\'' +
                 ", customer=" + customer +
