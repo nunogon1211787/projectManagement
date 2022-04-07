@@ -1,39 +1,41 @@
-package switch2021.project.model.valueObject;
+package switch2021.project.model.Task;
 
 import lombok.Getter;
+import switch2021.project.model.valueObject.Description;
+
 import java.util.Objects;
 
 @Getter
-public class TaskType {
+public class TaskStatus {
 
     /**
      * Attributes
-     */
-
+     **/
     private final Description description;
+
 
     /**
      * Constructor
-     */
-
-    public TaskType(String description){
+     **/
+    public TaskStatus(String description) {
         this.description = new Description(description);
     }
+
 
     /**
      * Methods to iterate with attributes
      */
-
-    public boolean hasDescription(String typeDescription) {
-        return this.description.getText().equalsIgnoreCase(typeDescription);
+    public boolean hasDescription(String description) {
+        return this.description.getText().equals(description);
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof TaskType)) return false;
-        TaskType taskType = (TaskType) o;
-        return Objects.equals(description, taskType.description);
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskStatus that = (TaskStatus) o;
+        return description.equals(that.description);
     }
 
     @Override
@@ -41,4 +43,3 @@ public class TaskType {
         return Objects.hash(description);
     }
 }
-

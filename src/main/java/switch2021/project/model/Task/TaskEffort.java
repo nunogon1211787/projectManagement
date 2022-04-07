@@ -1,6 +1,7 @@
-package switch2021.project.model.valueObject;
+package switch2021.project.model.Task;
 
 import lombok.Getter;
+import switch2021.project.model.valueObject.*;
 
 @Getter
 public class TaskEffort {

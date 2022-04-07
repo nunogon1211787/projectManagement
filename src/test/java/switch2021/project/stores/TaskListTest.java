@@ -8,6 +8,9 @@ import switch2021.project.model.*;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Task.Task;
+import switch2021.project.model.Task.TaskStatus;
+import switch2021.project.model.Task.TaskStore;
+import switch2021.project.model.Task.TaskType;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
@@ -22,7 +25,7 @@ public class TaskListTest {
     void testIfCreatedListStartsEmpty() {
 
         //Arrange
-        TaskList test = new TaskList();
+        TaskStore test = new TaskStore();
         //Assert
         int listSizeResult = test.getTaskList().size();
         assertEquals( 0, listSizeResult);
@@ -33,7 +36,7 @@ public class TaskListTest {
     void addTaskToTheList() {
 
         //Arrange
-        TaskList test = new TaskList();
+        TaskStore test = new TaskStore();
         Task newTask = new Task("teste");
         test.saveTask(newTask);
         //Assert
@@ -46,7 +49,7 @@ public class TaskListTest {
 
         //Arrange
         Company comp = new Company();
-        TaskList test = new TaskList();
+        TaskStore test = new TaskStore();
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
@@ -65,7 +68,7 @@ public class TaskListTest {
 
         //Arrange
         Company comp = new Company();
-        TaskList test = new TaskList();
+        TaskStore test = new TaskStore();
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
@@ -110,7 +113,7 @@ public class TaskListTest {
     void createSprintTaskTestSuccess() {
         //Arrange
         Company comp = new Company();
-        TaskList test = new TaskList();
+        TaskStore test = new TaskStore();
         TaskMapper map = new TaskMapper();
         CreateTaskDTO dto = new CreateTaskDTO("test", "test test test tests", 10, "Meeting", "user test");
 
@@ -137,7 +140,7 @@ public class TaskListTest {
     void createSprintTaskTestRepeated() {
         //Arrange
         Company comp = new Company();
-        TaskList test = new TaskList();
+        TaskStore test = new TaskStore();
         TaskMapper map = new TaskMapper();
         CreateTaskDTO dto = new CreateTaskDTO("test", "test test test tests", 10, "Meeting", "user test");
         CreateTaskDTO dto2 = new CreateTaskDTO("test", "test test test tests", 10, "Meeting", "user test");
@@ -166,7 +169,7 @@ public class TaskListTest {
     void getTaskByIdTestSuccess() {
         //Arrange
         Company comp = new Company();
-        TaskList test = new TaskList();
+        TaskStore test = new TaskStore();
         TaskMapper map = new TaskMapper();
         CreateTaskDTO dto = new CreateTaskDTO("test", "test test test tests", 10, "Meeting", "user test");
         CreateTaskDTO dto2 = new CreateTaskDTO("testdois", "test2 test2 test2 test2", 10, "Meeting", "user test");
@@ -195,7 +198,7 @@ public class TaskListTest {
     void getTaskByDescription() {
         //Arrange
         Company comp = new Company();
-        TaskList test = new TaskList();
+        TaskStore test = new TaskStore();
         TaskMapper map = new TaskMapper();
         CreateTaskDTO dto = new CreateTaskDTO("test", "test test test tests", 10, "Meeting", "user test");
         CreateTaskDTO dto2 = new CreateTaskDTO("testdois", "test2 test2 test2 test2", 10, "Meeting", "user test");

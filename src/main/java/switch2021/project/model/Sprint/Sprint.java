@@ -6,7 +6,7 @@ import switch2021.project.model.Task.Task;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.repositories.SprintBacklog;
 import switch2021.project.model.valueObject.Description;
-import switch2021.project.stores.TaskList;
+import switch2021.project.model.Task.TaskStore;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public class Sprint {
      **/
     private int idSprint;
     private Description sprintName;
-    private final TaskList taskList;
+    private final TaskStore taskStore;
     private final SprintBacklog sprintBacklog;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -34,7 +34,7 @@ public class Sprint {
         this.sprintName = new Description(name);
         this.startDate = startDate;
         this.sprintBacklog = new SprintBacklog();
-        this.taskList = new TaskList();
+        this.taskStore = new TaskStore();
     }
 
     /**
@@ -68,7 +68,7 @@ public class Sprint {
     public List<Task> getListOfTasksOfASprint(){
         List<Task> taskList2 = new ArrayList<>();
 
-        taskList2.addAll(this.taskList.getTaskList());
+        taskList2.addAll(this.taskStore.getTaskList());
         return taskList2;
     }
 
@@ -97,12 +97,12 @@ public class Sprint {
         if (o == null || getClass() != o.getClass()) return false;
         Sprint sprint = (Sprint) o;
         return idSprint == sprint.idSprint && Objects.equals(sprintName, sprint.sprintName) &&
-                Objects.equals(taskList, sprint.taskList) && Objects.equals(sprintBacklog, sprint.sprintBacklog) &&
+                Objects.equals(taskStore, sprint.taskStore) && Objects.equals(sprintBacklog, sprint.sprintBacklog) &&
                 Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idSprint, sprintName, taskList, sprintBacklog, startDate, endDate);
+        return Objects.hash(idSprint, sprintName, taskStore, sprintBacklog, startDate, endDate);
     }
 }

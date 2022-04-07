@@ -2,6 +2,8 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import switch2021.project.factory.*;
+import switch2021.project.model.Task.TaskStatusStore;
+import switch2021.project.model.Task.TaskTypeStore;
 import switch2021.project.repositories.ProductBacklog;
 import switch2021.project.stores.*;
 

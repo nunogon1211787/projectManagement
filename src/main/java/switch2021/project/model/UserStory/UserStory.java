@@ -3,8 +3,8 @@ package switch2021.project.model.UserStory;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.Task.Task;
+import switch2021.project.model.Task.TaskStore;
 import switch2021.project.model.valueObject.Description;
-import switch2021.project.stores.TaskList;
 import switch2021.project.model.valueObject.UsPriority;
 import switch2021.project.model.valueObject.UserStoryStatus;
 import switch2021.project.model.valueObject.UsTitle;
@@ -29,7 +29,7 @@ public class UserStory {
     private Description description;
     private UserStory parentUserStory;
     private int timeEstimate;
-    private TaskList tasks;
+    private TaskStore tasks;
     private double workDone;
 
 
@@ -42,7 +42,7 @@ public class UserStory {
         this.userStoryStatus = new UserStoryStatus("To do", true);
         this.priority = new UsPriority(priority);
         this.timeEstimate = timeEstimateInHours;
-        this.tasks = new TaskList();
+        this.tasks = new TaskStore();
     }
 
     public UserStory(UserStory userStoryToRefine, UserStoryStatus userStoryStatus, int priority, String description) {

@@ -7,6 +7,7 @@ import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Task.Task;
+import switch2021.project.model.Task.TaskType;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
@@ -42,8 +43,8 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         String taskDescription = "must be at least 20 characters";
         TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
 
-        Task taskTest = sprint1.getTaskList().createTask("test", taskDescription, 8.0, taskType, resource);
-        sprint1.getTaskList().saveTask(taskTest);
+        Task taskTest = sprint1.getTaskStore().createTask("test", taskDescription, 8.0, taskType, resource);
+        sprint1.getTaskStore().saveTask(taskTest);
 
         project2.getSprintList().saveSprint(sprint1);
 
