@@ -26,7 +26,7 @@ public class Project {
     /**
      * Class Attributes
      **/
-    private ProjectCode code;
+    private ProjectCode projectCode;
     private Description projectName;
     private Description description;
 
@@ -34,6 +34,7 @@ public class Project {
     private Typology typology;
     private ProjectStatus projectStatus;
     private ProductBacklog productBacklog;
+    private UserStoryFactory userStoryFactory;
 
     private final BusinessSector businessSector;
     private final SprintList sprintList;
@@ -45,7 +46,7 @@ public class Project {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    private NumberOfSprints numberOfSprints;
+    private int numberOfSprints;
     private Budget budget;
     private SprintDuration sprintDuration;
 
@@ -55,6 +56,8 @@ public class Project {
      **/
     public Project(String name, String description, Customer customer, Typology typology,
                    BusinessSector businessSector, LocalDate startDate, ProjectStatus status, int numberOfSprints, double budget) {
+
+        validateProjectFields(numberOfSprints);
 
         this.projectName = new Description(name);
         this.description = new Description(description);
@@ -67,7 +70,7 @@ public class Project {
         this.startDate = startDate;
         this.sprintList = new SprintList(new SprintFactory());
 
-        this.numberOfSprints = new NumberOfSprints(numberOfSprints);
+        this.numberOfSprints = numberOfSprints;
         this.budget = new Budget(budget);
 
         this.projectTeam = new ProjectTeam(resFac);
@@ -76,6 +79,15 @@ public class Project {
         this.productBacklog = new ProductBacklog();
     }
 
+
+    /**
+     * Validates Project Creation Fields
+     * Checks if @param projectName and @param description are empty or have the minimum characters necessary
+     */
+    public void validateProjectFields( int numberOfSprints) {
+        if (numberOfSprints <= 0)
+            throw new IllegalArgumentException("Number of Sprints must be greater than 0");
+    }
 
 
     /**
@@ -130,7 +142,7 @@ public class Project {
         return this.projectTeam.hasResource(email);
     }
 
-    public boolean hasCode(String code){ return this.code.getCode().equalsIgnoreCase(code); }
+    public boolean hasCode(String code){ return this.projectCode.getCode().equalsIgnoreCase(code); }
 
 
     /**
@@ -149,9 +161,9 @@ public class Project {
         if (this == o) return true;
         if (!(o instanceof Project)) return false;
         Project project = (Project) o;
-        return Objects.equals(numberOfSprints, project.numberOfSprints)
-                && Objects.equals(sprintDuration, project.sprintDuration)
-                && Objects.equals(code, project.code)
+        return numberOfSprints == project.numberOfSprints
+                && sprintDuration == project.sprintDuration
+                && Objects.equals(projectCode, project.projectCode)
                 && Objects.equals(projectName, project.projectName)
                 && Objects.equals(description, project.description)
                 && Objects.equals(customer, project.customer)
@@ -168,7 +180,7 @@ public class Project {
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, projectName, description, customer, typology,
+        return Objects.hash(projectCode, projectName, description, customer, typology,
                 projectStatus, productBacklog, businessSector,
                 sprintList, projectTeam, startDate, endDate, numberOfSprints,
                 budget, sprintDuration);
@@ -177,7 +189,7 @@ public class Project {
     @Override
     public String toString() {
         return "Project{" +
-                "code='" + code + '\'' +
+                "code='" + projectCode + '\'' +
                 ", projectName='" + projectName + '\'' +
                 ", description='" + description + '\'' +
                 ", customer=" + customer +

@@ -106,7 +106,7 @@ public class ProjectStore {
         boolean status = false;
 
         if (!checkProjectExists(proj)) {
-            proj.setCode(new ProjectCode(this.projectList.size() + 1));
+            proj.setProjectCode(new ProjectCode(this.projectList.size() + 1));
             this.projectList.add(proj);
 
             status = true;

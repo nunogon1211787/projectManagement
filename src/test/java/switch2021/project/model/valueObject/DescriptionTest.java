@@ -81,15 +81,6 @@ class DescriptionTest {
         assertEquals(description, description2);
     }
 
-    @Test
-    @DisplayName("Test override conditions for coverage purposes")
-    public void overrideTestEqual_1() {
-        //Arrange
-        Description description = new Description("Test");
-        Description description2 = new Description("Test");
-        //Assert
-        assertTrue(description.equals(description2));
-    }
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")

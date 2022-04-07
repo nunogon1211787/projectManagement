@@ -49,14 +49,14 @@ class ProjectTest {
         proj = company.getProjectStore().createProject("prototype", "test1", customer,
                 typo, sector, date, 7, 5000);
         company.getProjectStore().saveNewProject(proj);
-        company.getProjectStore().getProjectByCode(proj.getCode().getCode()).setEndDate(LocalDate.now());
+        company.getProjectStore().getProjectByCode(proj.getProjectCode().getCode()).setEndDate(LocalDate.now());
     }
 
     @Test
     @DisplayName("Project Creation Test")
     public void checkProjectCreation() {
         //Real and Expected
-        String code = proj.getCode().getCode();
+        String code = proj.getProjectCode().getCode();
         String valueCode = "Project_2022_1";
 
         String name = proj.getProjectName().getText();
@@ -83,7 +83,7 @@ class ProjectTest {
         LocalDate endDate = company.getProjectStore().getProjectByCode("Project_2022_1").getEndDate();
         LocalDate valueEndDate = LocalDate.now();
 
-        NumberOfSprints numberOfSprints = company.getProjectStore().getProjectByCode("Project_2022_1").getNumberOfSprints();
+        int numberOfSprints = company.getProjectStore().getProjectByCode("Project_2022_1").getNumberOfSprints();
         int valueNrSprint = 7;
 
         double budget = company.getProjectStore().getProjectByCode("Project_2022_1").getBudget().getBudgetP();
@@ -98,7 +98,7 @@ class ProjectTest {
         assertEquals(valueStatus.getDescription(), status.getDescription());
         assertEquals(valueDate, date);
         assertEquals(valueEndDate, endDate);
-        assertEquals(valueNrSprint, numberOfSprints.getNumberOfSprintsVO());
+        assertEquals(valueNrSprint, numberOfSprints);
         assertEquals(valueBudget, budget);
     }
 
@@ -106,7 +106,7 @@ class ProjectTest {
     @DisplayName("Project addition to list test")
     public void saveProjectTest() {
         List<Project> test = company.getProjectStore().getProjects();
-        String code = test.get(0).getCode().getCode();
+        String code = test.get(0).getProjectCode().getCode();
         String expectedCode = "Project_2022_1";
         assertEquals(expectedCode, code);
     }
@@ -136,6 +136,30 @@ class ProjectTest {
         });
     }
 
+    @Test
+    @DisplayName("Project exceptions test")
+    public void createProjectExceptionsTest_numberOfSprints() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            Typology typo = mock(Typology.class);
+            Description description = mock(Description.class);
+            when(typo.getDescription()).thenReturn(description);
+            when(description.getText()).thenReturn("Fixed Cost");
+            Customer customer = mock(Customer.class);
+            Description description1 = mock(Description.class);
+            when(customer.getCustomerName()).thenReturn(description1);
+            when(description1.getText()).thenReturn("Teste");
+            BusinessSector sector = mock(BusinessSector.class);
+            Description description2 = mock(Description.class);
+            when(sector.getDescription()).thenReturn(description2);
+            when(description2.getText()).thenReturn("sector");
+            LocalDate date = LocalDate.now();
+            // Act
+            company.getProjectStore().createProject("prototype", "test1234", customer,
+                    typo, sector, date, 0, 5000);
+        });
+    }
 
     @Test
     @DisplayName("Project exceptions test")
@@ -414,9 +438,8 @@ class ProjectTest {
         assertEquals(list1.hashCode(), list2.hashCode());
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
-        assertEquals(7, project.getNumberOfSprints().getNumberOfSprintsVO());
-        assertEquals(7, project.getNumberOfSprints().getNumberOfSprintsVO());
-        assertEquals(project.getCode(), list1.getProjectByCode(project.getCode().getCode()).getCode());
+        assertEquals(7, project.getNumberOfSprints());
+        assertEquals(project.getProjectCode(), list1.getProjectByCode(project.getProjectCode().getCode()).getProjectCode());
         assertEquals("prototype", project.getProjectName().getText());
         assertEquals("test1234", project.getDescription().getText());
         assertEquals(sector, project.getBusinessSector());
@@ -434,13 +457,13 @@ class ProjectTest {
 
         Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        project.setCode(new ProjectCode(1));
+        project.setProjectCode(new ProjectCode(1));
         project.setProductBacklog(backlog);
         project.setEndDate(date);
 
         Project project2 = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        project2.setCode(new ProjectCode(1));
+        project2.setProjectCode(new ProjectCode(1));
         project2.setEndDate(date);
         project2.setProductBacklog(backlog);
 
