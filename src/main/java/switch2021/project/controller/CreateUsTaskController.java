@@ -5,7 +5,7 @@ import switch2021.project.mapper.TaskMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.stores.TaskList;
+import switch2021.project.model.Task.TaskStore;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class CreateUsTaskController {
      **/
     private final Company company;
     private Project project;
-    private TaskList taskList;
+    private TaskStore taskStore;
     private final TaskMapper taskMapper;
 
 
@@ -38,9 +38,9 @@ public class CreateUsTaskController {
     public List<String> getUsTasks(String projCode, int sprintID, int usId){
         this.project = this.company.getProjectStore().getProjectByCode(projCode);
         UserStory userStory = this.project.getSprintList().getSprintById(sprintID).getUsById(usId);
-        this.taskList = userStory.getTasks();
+        this.taskStore = userStory.getTasks();
 
-        return this.taskList.getTasksNames();
+        return this.taskStore.getTasksNames();
     }
 
     public List<String> getCurrentProjectTeam(){
@@ -51,6 +51,6 @@ public class CreateUsTaskController {
     }
 
     public boolean createUsTask(CreateTaskDTO createTaskDTO){
-        return this.taskList.createUsTask(createTaskDTO, this.taskMapper, this.project);
+        return this.taskStore.createUsTask(createTaskDTO, this.taskMapper, this.project);
     }
 }

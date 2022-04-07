@@ -1,18 +1,17 @@
-package switch2021.project.stores;
+package switch2021.project.model.Task;
 
 import lombok.Getter;
 import switch2021.project.mapper.TaskMapper;
 import switch2021.project.dto.CreateTaskDTO;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Task.Task;
 import switch2021.project.model.Resource.Resource;
-import switch2021.project.model.valueObject.TaskType;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Getter
-public class TaskList {
+public class TaskStore {
 
     /**
      * Attributes
@@ -22,7 +21,7 @@ public class TaskList {
     /**
      * Constructor
      */
-    public TaskList() {
+    public TaskStore() {
         this.taskList = new ArrayList<>();
     }
 
@@ -143,8 +142,8 @@ public class TaskList {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TaskList taskList = (TaskList) o;
-        return Objects.equals(this.taskList, taskList.taskList);
+        TaskStore taskStore = (TaskStore) o;
+        return Objects.equals(this.taskList, taskStore.taskList);
     }
 
     @Override

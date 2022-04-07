@@ -3,6 +3,7 @@ package switch2021.project.model.valueObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Task.Task;
+import switch2021.project.model.Task.TaskEffort;
 
 import java.time.LocalDate;
 

@@ -5,7 +5,7 @@ import switch2021.project.model.Task.Task;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Project.Project;
 import switch2021.project.utils.App;
-import switch2021.project.model.valueObject.TaskType;
+import switch2021.project.model.Task.TaskType;
 import java.util.List;
 
 public class TaskMapper {

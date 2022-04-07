@@ -9,6 +9,7 @@ import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Task.Task;
+import switch2021.project.model.Task.TaskType;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
@@ -60,8 +61,8 @@ class CreateSprintTaskControllerTest {
         TaskType type = new TaskType("type");
         Task newTask = new Task("test", "test test test tests", 10, type, resource);
         Task newTask2 = new Task("testdois", "test2 test2 test2 test2", 10, type, resource);
-        sprint.getTaskList().saveTask(newTask);
-        sprint.getTaskList().saveTask(newTask2);
+        sprint.getTaskStore().saveTask(newTask);
+        sprint.getTaskStore().saveTask(newTask2);
 
         //Get sprint task list
         List<String> tasksNames = controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getIdSprint());
@@ -204,8 +205,8 @@ class CreateSprintTaskControllerTest {
 
         //Asserts
         assertTrue(controller.createSprintTask(dto));
-        assertEquals(1, sprint.getTaskList().getTasksNames().size());
-        assertEquals("newTask", sprint.getTaskList().getTasksNames().get(0));
+        assertEquals(1, sprint.getTaskStore().getTasksNames().size());
+        assertEquals("newTask", sprint.getTaskStore().getTasksNames().get(0));
     }
 
     @Test
@@ -243,8 +244,8 @@ class CreateSprintTaskControllerTest {
         TaskType type = new TaskType("type");
         Task newTask = new Task("test", "test test test tests", 10, type, res1);
         Task newTask2 = new Task("testdois", "test2 test2 test2 test2", 10, type, res2);
-        sprint.getTaskList().saveTask(newTask);
-        sprint.getTaskList().saveTask(newTask2);
+        sprint.getTaskStore().saveTask(newTask);
+        sprint.getTaskStore().saveTask(newTask2);
 
         //Create a new Sprint Task
         controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getIdSprint());
@@ -252,8 +253,8 @@ class CreateSprintTaskControllerTest {
 
         //Asserts
         assertTrue(controller.createSprintTask(dto));
-        assertEquals(3, sprint.getTaskList().getTasksNames().size());
-        assertEquals("newTask", sprint.getTaskList().getTasksNames().get(2));
+        assertEquals(3, sprint.getTaskStore().getTasksNames().size());
+        assertEquals("newTask", sprint.getTaskStore().getTasksNames().get(2));
     }
 
     @Test
@@ -291,8 +292,8 @@ class CreateSprintTaskControllerTest {
         TaskType type = new TaskType("type");
         Task newTask = new Task("test", "test test test tests", 10, type, res1);
         Task newTask2 = new Task("testdois", "test2 test2 test2 test2", 10, type, res2);
-        sprint.getTaskList().saveTask(newTask);
-        sprint.getTaskList().saveTask(newTask2);
+        sprint.getTaskStore().saveTask(newTask);
+        sprint.getTaskStore().saveTask(newTask2);
         List<String> precedenceList = new ArrayList<>();
         precedenceList.add(newTask.getName().getNameF());
         precedenceList.add(newTask2.getName().getNameF());
@@ -303,7 +304,7 @@ class CreateSprintTaskControllerTest {
 
         //Asserts
         assertTrue(controller.createSprintTask(dto));
-        assertEquals(2, sprint.getTaskList().getTaskById(3).getPrecedenceList().size());
-        assertEquals("test", sprint.getTaskList().getTaskById(3).getPrecedenceList().get(0));
+        assertEquals(2, sprint.getTaskStore().getTaskById(3).getPrecedenceList().size());
+        assertEquals("test", sprint.getTaskStore().getTaskById(3).getPrecedenceList().get(0));
     }
 }

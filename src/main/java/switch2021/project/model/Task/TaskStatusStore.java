@@ -1,8 +1,8 @@
-package switch2021.project.stores;
+package switch2021.project.model.Task;
 
 import lombok.Getter;
 import switch2021.project.factoryInterface.TaskStatusFactoryInterface;
-import switch2021.project.model.valueObject.TaskStatus;
+import switch2021.project.model.Task.TaskStatus;
 
 import java.util.ArrayList;
 import java.util.List;

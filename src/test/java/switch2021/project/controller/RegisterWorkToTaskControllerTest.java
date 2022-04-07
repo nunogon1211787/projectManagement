@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Task.Task;
+import switch2021.project.model.Task.TaskType;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
