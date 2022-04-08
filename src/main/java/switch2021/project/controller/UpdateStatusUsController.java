@@ -4,7 +4,7 @@ import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.stores.ProjectStore;
+import switch2021.project.repositories.ProjectStore;
 import switch2021.project.model.valueObject.UserStoryStatus;
 
 import java.util.ArrayList;

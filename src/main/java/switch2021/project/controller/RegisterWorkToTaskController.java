@@ -1,6 +1,7 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.Task.Task;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.Date;
@@ -10,8 +11,8 @@ import switch2021.project.dto.UserStorySprintProjectDTO;
 import switch2021.project.mapper.RegisterWorkToTaskMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
-import switch2021.project.stores.ProjectStore;
-import switch2021.project.stores.SprintList;
+import switch2021.project.repositories.ProjectStore;
+
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class RegisterWorkToTaskController {
         ProjectStore projectStore = this.company.getProjectStore();
         Project project = projectStore.getProjectByCode(code);
 
-        SprintList sprintList = project.getSprintList();
+        SprintStore sprintList = project.getSprintList();
         Sprint sprint = sprintList.getSprintById(sprintId);
 
         this.userStory = sprint.getUsById(userStoryId);

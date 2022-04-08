@@ -1,10 +1,9 @@
-package switch2021.project.stores;
+package switch2021.project.model.Sprint;
 
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.factoryInterface.SprintFactoryInterface;
 import switch2021.project.repositories.ProjectTeam;
-import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Task.Task;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
-public class SprintList {
+public class SprintStore {
 
     /**
      * Class Attributes
@@ -25,7 +24,7 @@ public class SprintList {
     /**
      * Constructors with data
      **/
-    public SprintList(SprintFactoryInterface sprintF) {
+    public SprintStore(SprintFactoryInterface sprintF) {
         this.sprints = new ArrayList<>();
         this.sprintFactory = sprintF;
     }
@@ -189,8 +188,8 @@ public class SprintList {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SprintList)) return false;
-        SprintList that = (SprintList) o;
+        if (!(o instanceof SprintStore)) return false;
+        SprintStore that = (SprintStore) o;
         return sprints.equals(that.sprints);
     }
 

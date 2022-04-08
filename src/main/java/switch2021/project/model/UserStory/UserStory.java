@@ -9,6 +9,7 @@ import switch2021.project.model.valueObject.UsPriority;
 import switch2021.project.model.valueObject.UserStoryStatus;
 import switch2021.project.model.valueObject.UsTitle;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -31,6 +32,8 @@ public class UserStory {
     private int timeEstimate;
     private TaskStore tasks;
     private double workDone;
+    private LocalDate usEndDate;
+    private LocalDate usCancelled;
 
 
     /**

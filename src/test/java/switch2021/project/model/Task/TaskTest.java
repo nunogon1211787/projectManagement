@@ -32,7 +32,7 @@ class TaskTest {
     public void taskWithPrecedenceCreatorTest() {
         //Arrange
         Company company = new Company();
-        TaskType taskType = new TaskType("Coisa");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
@@ -87,9 +87,9 @@ class TaskTest {
         when(resource.getPercentageOfAllocation()).thenReturn(percentageOfAllocation);
         when(percentageOfAllocation.getPercentage()).thenReturn(0.5);
         //TaskType
-        TaskType taskType = mock(TaskType.class);
+        TaskTypeEnum taskType = TaskTypeEnum.Testing;
         Description descType = mock(Description.class);
-        when(taskType.getDescription()).thenReturn(descType);
+
         when(descType.getText()).thenReturn("Testing");
         //TaskStatus
         TaskStatus taskStatus = mock(TaskStatus.class);
@@ -126,7 +126,7 @@ class TaskTest {
             LocalDate endDateMb = LocalDate.of(2022, 1, 31);
             Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
             String taskDescription = "must be at least 20 characters";
-            Task task = new Task("test", taskDescription, 16.00, new TaskType("User Story"), resource);
+            Task task = new Task("test", taskDescription, 16.00,TaskTypeEnum.Design, resource);
 
             int effortHours = 4;
             int effortMinutes = 30;
@@ -179,9 +179,9 @@ class TaskTest {
         when(resource.getPercentageOfAllocation()).thenReturn(percentageOfAllocation);
         when(percentageOfAllocation.getPercentage()).thenReturn(0.5);
         //TaskType
-        TaskType taskType = mock(TaskType.class);
+        TaskTypeEnum taskType = TaskTypeEnum.Testing;
         Description descType = mock(Description.class);
-        when(taskType.getDescription()).thenReturn(descType);
+
         when(descType.getText()).thenReturn("Testing");
         //TaskStatus
         TaskStatus taskStatus = mock(TaskStatus.class);
@@ -218,7 +218,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
 
@@ -250,7 +250,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         //Act
@@ -284,7 +284,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
@@ -318,7 +318,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
@@ -355,7 +355,7 @@ class TaskTest {
             LocalDate endDateMb = LocalDate.of(2022, 1, 31);
             Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
             String taskDescription = "must be at least 20 characters";
-            TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+            TaskTypeEnum taskType = TaskTypeEnum.Design;
             Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
             Date effortDate = new Date(LocalDate.of(2022, 1, 20));
@@ -377,7 +377,7 @@ class TaskTest {
             LocalDate endDateMb = LocalDate.of(2022, 1, 31);
             Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
             String taskDescription = "must be at least 20 characters";
-            TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+            TaskTypeEnum taskType = TaskTypeEnum.Design;
             Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
             Date effortDate = new Date(LocalDate.of(2022, 1, 20));
@@ -398,7 +398,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
@@ -422,7 +422,7 @@ class TaskTest {
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         Task task = new Task("test", taskDescription, 8.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
@@ -448,7 +448,7 @@ class TaskTest {
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         Task task = new Task("test", taskDescription, 8.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
@@ -474,7 +474,7 @@ class TaskTest {
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         Task task = new Task("test", taskDescription, 8.00, taskType, resource);
 
         Date effortDate = new Date(LocalDate.of(2022, 1, 20));
@@ -496,10 +496,10 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         Task task = new Task("test", taskDescription, 20.00, taskType, resource);
         //Assert
-        assertTrue(task.hasType(taskType));
+//        assertTrue(task.hasType(taskType));
         //Act
         assertTrue(task.hasStatus(company.getTaskStatusStore().getInitialStatus()));
         assertTrue(task.hasResponsible(resource));
@@ -516,7 +516,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
 
         //Asserts
         assertThrows(IllegalArgumentException.class, () -> {
@@ -535,7 +535,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
 
         //Asserts
         assertThrows(IllegalArgumentException.class, () -> {
@@ -554,7 +554,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
 
         //Act
         assertThrows(IllegalArgumentException.class, () -> {
@@ -573,7 +573,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         //Act
         Task task = new Task("tttr", taskDescription, 20.00, taskType, resource);
         //Assert
@@ -622,9 +622,9 @@ class TaskTest {
         when(resource.getPercentageOfAllocation()).thenReturn(percentageOfAllocation);
         when(percentageOfAllocation.getPercentage()).thenReturn(0.5);
         //TaskType
-        TaskType taskType = mock(TaskType.class);
+        TaskTypeEnum taskType = TaskTypeEnum.Testing;
         Description descType = mock(Description.class);
-        when(taskType.getDescription()).thenReturn(descType);
+
         when(descType.getText()).thenReturn("Testing");
         //TaskStatus
         TaskStatus taskStatus = mock(TaskStatus.class);
@@ -650,7 +650,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
 
         //Asserts
         assertThrows(IllegalArgumentException.class, () -> {
@@ -670,7 +670,7 @@ class TaskTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         Task test = new Task("test", taskDescription, 20.00, taskType, resource);
         //Asserts
         assertThrows(IllegalArgumentException.class, () -> {
@@ -722,9 +722,9 @@ class TaskTest {
             when(resource.getPercentageOfAllocation()).thenReturn(percentageOfAllocation);
             when(percentageOfAllocation.getPercentage()).thenReturn(0.5);
             //TaskType
-            TaskType taskType = mock(TaskType.class);
+            TaskTypeEnum taskType = TaskTypeEnum.Testing;
             Description descType = mock(Description.class);
-            when(taskType.getDescription()).thenReturn(descType);
+
             when(descType.getText()).thenReturn("Testing");
             //TaskStatus
             TaskStatus taskStatus = mock(TaskStatus.class);
@@ -777,9 +777,8 @@ class TaskTest {
         when(resource.getPercentageOfAllocation()).thenReturn(percentageOfAllocation);
         when(percentageOfAllocation.getPercentage()).thenReturn(0.5);
         //TaskType
-        TaskType taskType = mock(TaskType.class);
+        TaskTypeEnum taskType = TaskTypeEnum.Testing;
         Description descType = mock(Description.class);
-        when(taskType.getDescription()).thenReturn(descType);
         when(descType.getText()).thenReturn("Testing");
         //TaskStatus
         TaskStatus taskStatus = mock(TaskStatus.class);
@@ -835,9 +834,9 @@ class TaskTest {
         when(resource.getPercentageOfAllocation()).thenReturn(percentageOfAllocation);
         when(percentageOfAllocation.getPercentage()).thenReturn(0.5);
         //TaskType
-        TaskType taskType = mock(TaskType.class);
+        TaskTypeEnum taskType = TaskTypeEnum.Testing;
         Description descType = mock(Description.class);
-        when(taskType.getDescription()).thenReturn(descType);
+
         when(descType.getText()).thenReturn("Testing");
         //TaskStatus
         TaskStatus taskStatus = mock(TaskStatus.class);
@@ -865,13 +864,13 @@ class TaskTest {
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         Resource resource2 = new Resource(user2, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
 
         Task task1 = new Task("test", taskDescription, 20.00, taskType, resource);
         Task task2 = new Task("test", taskDescription, 20.00, taskType, resource);
         Task task3 = new Task("testtres", taskDescription, 20.00, taskType, resource);
         TaskStatus taskStatus = new TaskStatus("Cris");
-        TaskType taskType1 = new TaskType("Cris");
+        TaskTypeEnum taskType1 = TaskTypeEnum.Testing;
         Resource resource1 = new Resource(resource2);
 
 
@@ -884,7 +883,6 @@ class TaskTest {
         assertNotEquals(task1.hashCode(), task3.hashCode());
         assertFalse(task1.hasName("cris"));
         assertFalse(task1.hasStatus(taskStatus));
-        assertFalse(task1.hasType(taskType1));
         assertFalse(task1.hasResponsible(resource1));
     }
 
@@ -900,7 +898,7 @@ class TaskTest {
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
 
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         Task task = new Task("test", taskDescription, 8.00, taskType, resource);
         Task task2 = new Task("test", taskDescription, 8.00, taskType, resource);
 

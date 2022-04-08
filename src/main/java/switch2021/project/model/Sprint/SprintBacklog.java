@@ -1,4 +1,4 @@
-package switch2021.project.repositories;
+package switch2021.project.model.Sprint;
 
 import lombok.Getter;
 import switch2021.project.model.UserStory.UserStory;
@@ -17,7 +17,7 @@ public class SprintBacklog {
         this.userStoryList = new ArrayList<>();
     }
 
-    /**Save new User Story in Sprintbacklog **/
+    /**Save new User Story in SprintBacklog **/
     public boolean saveUserStoryToSprintBacklog(UserStory userStory) {
         boolean status = false;
         if(validateUserStory(userStory)) {

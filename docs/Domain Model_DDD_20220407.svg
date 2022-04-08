@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="663px" preserveAspectRatio="none" style="width:1465px;height:663px;background:#FFFFFF;" version="1.1" viewBox="0 0 1465 663" width="1465px" zoomAndPan="magnify"><defs><filter height="300%" id="f14vgq8ou6hjo9" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="126" x="663" y="17.4023">Domain Model</text><!--MD5=[15636c1ca4a123c16a2a1a8e90aca7a9]
+cluster Model--><polygon fill="#FFFFFF" filter="url(#f14vgq8ou6hjo9)" points="16,27.1992,66,27.1992,73,49.6875,1448,49.6875,1448,656.1992,16,656.1992,16,27.1992" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="16" x2="73" y1="49.6875" y2="49.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="44" x="20" y="42.7344">Model</text><!--MD5=[0f05b381ce972810648735ab0813e8dd]
+cluster Project--><polygon fill="#FFFFFF" filter="url(#f14vgq8ou6hjo9)" points="1312,70.1992,1368,70.1992,1375,92.6875,1424,92.6875,1424,304.1992,1312,304.1992,1312,70.1992" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1312" x2="1375" y1="92.6875" y2="92.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="50" x="1316" y="85.7344">Project</text><!--MD5=[a8621f786b421b40515673e2d966a1c3]
+cluster Sprint--><polygon fill="#FFFFFF" filter="url(#f14vgq8ou6hjo9)" points="40,199.1992,89,199.1992,96,221.6875,212,221.6875,212,632.1992,40,632.1992,40,199.1992" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="40" x2="96" y1="221.6875" y2="221.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="43" x="44" y="214.7344">Sprint</text><!--MD5=[70ce3a0b7249b89e7183e518c52a7191]
+cluster UserStory--><polygon fill="#FFFFFF" filter="url(#f14vgq8ou6hjo9)" points="1055,70.1992,1130,70.1992,1137,92.6875,1147,92.6875,1147,175.1992,1055,175.1992,1055,70.1992" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1055" x2="1137" y1="92.6875" y2="92.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="69" x="1059" y="85.7344">UserStory</text><!--MD5=[996a0e22aa5fcad0a8b55c37b2fd323d]
+cluster Task--><polygon fill="#FFFFFF" filter="url(#f14vgq8ou6hjo9)" points="705,70.1992,746,70.1992,753,92.6875,1004,92.6875,1004,304.1992,705,304.1992,705,70.1992" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="705" x2="753" y1="92.6875" y2="92.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="35" x="709" y="85.7344">Task</text><!--MD5=[c49de2a178ec89eae0d3b1e1329d186f]
+cluster SystemUser--><polygon fill="#FFFFFF" filter="url(#f14vgq8ou6hjo9)" points="364,70.1992,454,70.1992,461,92.6875,557,92.6875,557,175.1992,364,175.1992,364,70.1992" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="364" x2="461" y1="92.6875" y2="92.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="84" x="368" y="85.7344">SystemUser</text><!--MD5=[99b6005fb0c05032b9e942ec0f628b67]
+cluster Typology--><polygon fill="#FFFFFF" filter="url(#f14vgq8ou6hjo9)" points="1198,70.1992,1271,70.1992,1278,92.6875,1288,92.6875,1288,175.1992,1198,175.1992,1198,70.1992" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="1198" x2="1278" y1="92.6875" y2="92.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="67" x="1202" y="85.7344">Typology</text><!--MD5=[73424d2176fe6edd5dc9e6e93f7901c1]
+cluster UserProfile--><polygon fill="#FFFFFF" filter="url(#f14vgq8ou6hjo9)" points="581,70.1992,667,70.1992,674,92.6875,681,92.6875,681,175.1992,581,175.1992,581,70.1992" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="581" x2="674" y1="92.6875" y2="92.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="80" x="585" y="85.7344">UserProfile</text><!--MD5=[39e750ed8fd817ac372d7da55c795c85]
+cluster Resource--><polygon fill="#FFFFFF" filter="url(#f14vgq8ou6hjo9)" points="236,70.1992,307,70.1992,314,92.6875,340,92.6875,340,304.1992,236,304.1992,236,70.1992" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="236" x2="314" y1="92.6875" y2="92.6875"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="65" x="240" y="85.7344">Resource</text><!--MD5=[63f6ec7c26fa50f63d575e54d140c17e]
+class ProjectID--><rect codeLine="79" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="ProjectID" style="stroke:#A80036;stroke-width:1.5;" width="58" x="1023" y="234.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="29" x="1037.5" y="250.8008">«VO»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="52" x="1026" y="264.9336">ProjectID</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1024" x2="1080" y1="272.4648" y2="272.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1024" x2="1080" y1="280.4648" y2="280.4648"/><!--MD5=[6695eb794ea0123c727123f73647074a]
+class SystemUserID--><rect codeLine="81" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="SystemUserID" style="stroke:#A80036;stroke-width:1.5;" width="84" x="359" y="234.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="29" x="386.5" y="250.8008">«VO»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="78" x="362" y="264.9336">SystemUserID</text><line style="stroke:#A80036;stroke-width:1.5;" x1="360" x2="442" y1="272.4648" y2="272.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="360" x2="442" y1="280.4648" y2="280.4648"/><!--MD5=[e98f05372d25a3a7c070b97ec805badf]
+class UserStoryID--><rect codeLine="131" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="UserStoryID" style="stroke:#A80036;stroke-width:1.5;" width="72" x="1116" y="234.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="29" x="1137.5" y="250.8008">«VO»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="66" x="1119" y="264.9336">UserStoryID</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1117" x2="1187" y1="272.4648" y2="272.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1117" x2="1187" y1="280.4648" y2="280.4648"/><!--MD5=[da2fc41701290679746579175e0925e6]
+class ResourceID--><rect codeLine="133" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="ResourceID" style="stroke:#A80036;stroke-width:1.5;" width="71" x="478.5" y="234.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="29" x="499.5" y="250.8008">«VO»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="65" x="481.5" y="264.9336">ResourceID</text><line style="stroke:#A80036;stroke-width:1.5;" x1="479.5" x2="548.5" y1="272.4648" y2="272.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="479.5" x2="548.5" y1="280.4648" y2="280.4648"/><!--MD5=[9ad4036dd028425989883104bd9f35de]
+class SprintID--><rect codeLine="135" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="SprintID" style="stroke:#A80036;stroke-width:1.5;" width="51" x="100.5" y="105.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="29" x="111.5" y="121.8008">«VO»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="45" x="103.5" y="135.9336">SprintID</text><line style="stroke:#A80036;stroke-width:1.5;" x1="101.5" x2="150.5" y1="143.4648" y2="143.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="101.5" x2="150.5" y1="151.4648" y2="151.4648"/><!--MD5=[1ccb7fadae385f8989fe59db149041f9]
+class UserProfileID--><rect codeLine="137" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="UserProfileID" style="stroke:#A80036;stroke-width:1.5;" width="80" x="585" y="234.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="29" x="610.5" y="250.8008">«VO»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="74" x="588" y="264.9336">UserProfileID</text><line style="stroke:#A80036;stroke-width:1.5;" x1="586" x2="664" y1="272.4648" y2="272.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="586" x2="664" y1="280.4648" y2="280.4648"/><!--MD5=[723774d55ec4c59fc9f414f9b42b484f]
+class TypologyID--><rect codeLine="139" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="TypologyID" style="stroke:#A80036;stroke-width:1.5;" width="70" x="1223" y="234.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="29" x="1243.5" y="250.8008">«VO»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="64" x="1226" y="264.9336">TypologyID</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1224" x2="1292" y1="272.4648" y2="272.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1224" x2="1292" y1="280.4648" y2="280.4648"/><!--MD5=[79d378210367c0c6ec62ef762ddfbd1b]
+class Project--><rect codeLine="11" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="Project" style="stroke:#A80036;stroke-width:1.5;" width="46" x="1328" y="105.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="35" x="1333.5" y="121.8008">«root»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="40" x="1331" y="135.9336">Project</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1329" x2="1373" y1="143.4648" y2="143.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1329" x2="1373" y1="151.4648" y2="151.4648"/><!--MD5=[3ab895b9d042fb04bd9a00cbdf39bb54]
+class ProjectStatus--><rect codeLine="13" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="ProjectStatus" style="stroke:#A80036;stroke-width:1.5;" width="80" x="1328" y="234.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="46" x="1345" y="250.8008">«ENUM»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="74" x="1331" y="264.9336">ProjectStatus</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1329" x2="1407" y1="272.4648" y2="272.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1329" x2="1407" y1="280.4648" y2="280.4648"/><!--MD5=[452a66c2e8d45f5bd209be454bbcd04f]
+class Sprint--><rect codeLine="19" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="Sprint" style="stroke:#A80036;stroke-width:1.5;" width="39" x="106.5" y="234.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="35" x="108.5" y="250.8008">«root»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="33" x="109.5" y="264.9336">Sprint</text><line style="stroke:#A80036;stroke-width:1.5;" x1="107.5" x2="144.5" y1="272.4648" y2="272.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="107.5" x2="144.5" y1="280.4648" y2="280.4648"/><!--MD5=[5ca54b8a236761790da7620b7631cea8]
+class ScrumBoard--><rect codeLine="21" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="40.1328" id="ScrumBoard" style="stroke:#A80036;stroke-width:1.5;" width="75" x="88.5" y="348.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="69" x="91.5" y="364.8008">ScrumBoard</text><line style="stroke:#A80036;stroke-width:1.5;" x1="89.5" x2="162.5" y1="372.332" y2="372.332"/><line style="stroke:#A80036;stroke-width:1.5;" x1="89.5" x2="162.5" y1="380.332" y2="380.332"/><!--MD5=[f6008fb08f9cbd0b3addcba5108c5fe6]
+class UserStoryOfSprintStatus--><rect codeLine="23" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="UserStoryOfSprintStatus" style="stroke:#A80036;stroke-width:1.5;" width="140" x="56" y="562.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="46" x="103" y="578.8008">«ENUM»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="134" x="59" y="592.9336">UserStoryOfSprintStatus</text><line style="stroke:#A80036;stroke-width:1.5;" x1="57" x2="195" y1="600.4648" y2="600.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="57" x2="195" y1="608.4648" y2="608.4648"/><!--MD5=[beef2f656c50846944fe9f730b1b3b34]
+class UserStoryOfSprint--><rect codeLine="25" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="UserStoryOfSprint" style="stroke:#A80036;stroke-width:1.5;" width="106" x="73" y="448.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="29" x="111.5" y="464.8008">«VO»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="100" x="76" y="478.9336">UserStoryOfSprint</text><line style="stroke:#A80036;stroke-width:1.5;" x1="74" x2="178" y1="486.4648" y2="486.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="74" x2="178" y1="494.4648" y2="494.4648"/><!--MD5=[daa6dd44d8f60c5a9cd695bb66773862]
+class UserStory--><rect codeLine="31" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="UserStory" style="stroke:#A80036;stroke-width:1.5;" width="60" x="1071" y="105.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="35" x="1083.5" y="121.8008">«root»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="54" x="1074" y="135.9336">UserStory</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1072" x2="1130" y1="143.4648" y2="143.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1072" x2="1130" y1="151.4648" y2="151.4648"/><!--MD5=[b34797a66dc35cbf1d65f7e3ca75530e]
+class Task--><rect codeLine="37" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="Task" style="stroke:#A80036;stroke-width:1.5;" width="37" x="784.5" y="105.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="35" x="785.5" y="121.8008">«root»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="28" x="789" y="135.9336">Task</text><line style="stroke:#A80036;stroke-width:1.5;" x1="785.5" x2="820.5" y1="143.4648" y2="143.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="785.5" x2="820.5" y1="151.4648" y2="151.4648"/><!--MD5=[bac55b868ac9340fa140d91cd9486221]
+class TaskEffort--><rect codeLine="39" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="TaskEffort" style="stroke:#A80036;stroke-width:1.5;" width="65" x="721.5" y="234.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="29" x="739.5" y="250.8008">«VO»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="59" x="724.5" y="264.9336">TaskEffort</text><line style="stroke:#A80036;stroke-width:1.5;" x1="722.5" x2="785.5" y1="272.4648" y2="272.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="722.5" x2="785.5" y1="280.4648" y2="280.4648"/><!--MD5=[88ee21eff3843b66d49ba6da731dc29a]
+class TaskType--><rect codeLine="41" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="TaskType" style="stroke:#A80036;stroke-width:1.5;" width="63" x="821.5" y="234.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="46" x="830" y="250.8008">«ENUM»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="57" x="824.5" y="264.9336">TaskType</text><line style="stroke:#A80036;stroke-width:1.5;" x1="822.5" x2="883.5" y1="272.4648" y2="272.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="822.5" x2="883.5" y1="280.4648" y2="280.4648"/><!--MD5=[007b513da6771087a86fbb3bd355c48d]
+class TaskStatus--><rect codeLine="43" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="TaskStatus" style="stroke:#A80036;stroke-width:1.5;" width="68" x="920" y="234.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="46" x="931" y="250.8008">«ENUM»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="62" x="923" y="264.9336">TaskStatus</text><line style="stroke:#A80036;stroke-width:1.5;" x1="921" x2="987" y1="272.4648" y2="272.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="921" x2="987" y1="280.4648" y2="280.4648"/><!--MD5=[bc064d979c32666ae52f3d7624591b7b]
+class SystemUser--><rect codeLine="49" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="SystemUser" style="stroke:#A80036;stroke-width:1.5;" width="72" x="380" y="105.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="35" x="398.5" y="121.8008">«root»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="66" x="383" y="135.9336">SystemUser</text><line style="stroke:#A80036;stroke-width:1.5;" x1="381" x2="451" y1="143.4648" y2="143.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="381" x2="451" y1="151.4648" y2="151.4648"/><!--MD5=[0851f84a889f989e7bb0bebc385d0f09]
+class Request--><rect codeLine="51" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="Request" style="stroke:#A80036;stroke-width:1.5;" width="53" x="487.5" y="105.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="29" x="499.5" y="121.8008">«VO»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="47" x="490.5" y="135.9336">Request</text><line style="stroke:#A80036;stroke-width:1.5;" x1="488.5" x2="539.5" y1="143.4648" y2="143.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="488.5" x2="539.5" y1="151.4648" y2="151.4648"/><!--MD5=[024d6bb17f4c47f299ed89907d0655d2]
+class Typology--><rect codeLine="57" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="Typology" style="stroke:#A80036;stroke-width:1.5;" width="58" x="1214" y="105.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="35" x="1225.5" y="121.8008">«root»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="52" x="1217" y="135.9336">Typology</text><line style="stroke:#A80036;stroke-width:1.5;" x1="1215" x2="1271" y1="143.4648" y2="143.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="1215" x2="1271" y1="151.4648" y2="151.4648"/><!--MD5=[7dde244f1b93ccf44d7f9e836b89e039]
+class UserProfile--><rect codeLine="63" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="UserProfile" style="stroke:#A80036;stroke-width:1.5;" width="68" x="597" y="105.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="35" x="613.5" y="121.8008">«root»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="62" x="600" y="135.9336">UserProfile</text><line style="stroke:#A80036;stroke-width:1.5;" x1="598" x2="664" y1="143.4648" y2="143.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="598" x2="664" y1="151.4648" y2="151.4648"/><!--MD5=[6b13f1b330d33795af281e5c1dfe1e98]
+class Resource--><rect codeLine="69" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="Resource" style="stroke:#A80036;stroke-width:1.5;" width="59" x="264.5" y="105.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="35" x="276.5" y="121.8008">«root»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="53" x="267.5" y="135.9336">Resource</text><line style="stroke:#A80036;stroke-width:1.5;" x1="265.5" x2="322.5" y1="143.4648" y2="143.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="265.5" x2="322.5" y1="151.4648" y2="151.4648"/><!--MD5=[72c2b38f0075f7c9d19a6864453fbfd6]
+class ProjectRole--><rect codeLine="71" fill="#FEFECE" filter="url(#f14vgq8ou6hjo9)" height="54.2656" id="ProjectRole" style="stroke:#A80036;stroke-width:1.5;" width="71" x="252.5" y="234.1992"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="29" x="273.5" y="250.8008">«VO»</text><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="65" x="255.5" y="264.9336">ProjectRole</text><line style="stroke:#A80036;stroke-width:1.5;" x1="253.5" x2="322.5" y1="272.4648" y2="272.4648"/><line style="stroke:#A80036;stroke-width:1.5;" x1="253.5" x2="322.5" y1="280.4648" y2="280.4648"/><!--MD5=[32299e40f929d2b209ddd380e5116b30]
+link SystemUser to SystemUserID--><path codeLine="144" d="M412.93,159.2092 C410.55,179.3592 407.24,207.3692 404.71,228.7792 " fill="none" id="SystemUser-to-SystemUserID" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="404.12,233.7892,409.1484,225.3207,404.7067,228.8238,401.2037,224.382,404.12,233.7892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="403.2067" y="180.1949">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="395.9165" y="223.2898">1</text><!--MD5=[3fb1fcfd8823eb51a22481ef851830f5]
+link Request to UserProfileID--><path codeLine="145" d="M538.24,159.2692 C547.35,169.1792 557.74,180.6292 567,191.1992 C578.03,203.7792 589.96,217.8892 600.12,230.0492 " fill="none" id="Request-to-UserProfileID" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="603.49,234.0992,600.8047,224.6235,600.2905,230.2569,594.657,229.7427,603.49,234.0992" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="534.9205" y="179.8371">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="599.4408" y="223.6715">1</text><!--MD5=[1f1ce7a516c2aa37df9180ea99deacd4]
+link UserProfile to UserProfileID--><path codeLine="146" d="M629.77,159.2092 C628.82,179.3592 627.5,207.3692 626.48,228.7792 " fill="none" id="UserProfile-to-UserProfileID" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="626.25,233.7892,630.6831,224.9945,626.4933,228.7951,622.6926,224.6053,626.25,233.7892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="620.4952" y="180.1949">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="617.6141" y="223.2898">1</text><!--MD5=[617b6f4088ea0f7a7e6f038550a994c6]
+link SystemUser to UserProfileID--><path codeLine="147" d="M437.38,159.2192 C446.43,168.4092 457.72,177.7992 470,183.1992 C509.59,200.6292 528.57,171.3392 567,191.1992 C583.63,199.7992 597.38,215.4192 607.32,229.6392 " fill="none" id="SystemUser-to-UserProfileID" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="610.28,233.9892,608.5159,224.2996,607.4638,229.8578,601.9056,228.8056,610.28,233.9892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="433.6164" y="180.2073">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="582.3322" y="223.5361">1..*</text><!--MD5=[eae7c83b3993c98e9484d0f1eef6253a]
+link Resource to SystemUserID--><path codeLine="148" d="M315.91,159.2092 C333.18,179.6992 357.29,208.3192 375.43,229.8592 " fill="none" id="Resource-to-SystemUserID" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="378.75,233.7892,376.0059,224.3304,375.5267,229.9669,369.8902,229.4877,378.75,233.7892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="312.2756" y="180.1949">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="364.6797" y="223.2898">1</text><!--MD5=[0ea620fd38f2b11c906917631b4f4cb3]
+link Resource to ProjectID--><path codeLine="149" d="M322.1,159.2392 C334.09,168.6792 348.81,178.2292 364,183.1992 C397.79,194.2592 972.59,174.5392 1004,191.1992 C1019.4,199.3692 1030.89,214.9492 1038.75,229.2392 " fill="none" id="Resource-to-ProjectID" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1041.28,234.0192,1040.5939,224.1943,1038.936,229.6027,1033.5275,227.9447,1041.28,234.0192" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="6" x="322.2181" y="180.2322">*</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1029.876" y="223.573">1</text><!--MD5=[631b830c5341a7207c76652dbd6bc9cc]
+link Resource to ResourceID--><path codeLine="150" d="M322.96,159.2292 C334.85,168.4192 349.28,177.7992 364,183.1992 C384.31,190.6392 442.01,180.8492 461,191.1992 C476.87,199.8492 489.48,215.4792 498.41,229.6792 " fill="none" id="Resource-to-ResourceID" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="501.06,234.0292,499.7735,224.2647,498.4499,229.7646,492.95,228.441,501.06,234.0292" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="330.994" y="180.2197">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="489.1426" y="223.5853">1</text><!--MD5=[1610863e6964f45ac3f1f15f4d049456]
+link Resource to ProjectRole--><path codeLine="151" d="M292.77,159.2092 C291.82,179.3592 290.5,207.3692 289.48,228.7792 " fill="none" id="Resource-to-ProjectRole" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="289.25,233.7892,293.6831,224.9945,289.4933,228.7951,285.6926,224.6053,289.25,233.7892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="283.4952" y="180.1949">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="280.6141" y="223.2898">1</text><!--MD5=[11a9b10f8a1c3af5028b066010f1abba]
+reverse link SprintID to Sprint--><path codeLine="152" d="M126,164.4692 C126,185.7592 126,213.6192 126,233.7892 " fill="none" id="SprintID-backto-Sprint" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="126,159.2092,122,168.2092,126,164.2092,130,168.2092,126,159.2092" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="117.025" y="180.1949">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="117.075" y="223.2898">1</text><!--MD5=[d887c0fac5b0e8aef47974363e2e4cb9]
+link Project to ProjectID--><path codeLine="153" d="M1327.83,157.4192 C1316.79,167.2992 1302.79,177.6892 1288,183.1992 C1248.61,197.8692 1135.74,170.7692 1099,191.1992 C1083.98,199.5492 1072.79,214.9792 1065.1,229.1192 " fill="none" id="Project-to-ProjectID" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1062.63,233.8592,1070.3435,227.7353,1064.9458,229.4278,1063.2533,224.0301,1062.63,233.8592" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1311.8488" y="160.1994">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1066.0132" y="223.376">1</text><!--MD5=[cc6f7cab7f77a39f738e7a4de5f9f0fc]
+link UserStory to ProjectID--><path codeLine="154" d="M1090.97,159.2092 C1083.16,179.4492 1072.29,207.5992 1064.02,229.0492 " fill="none" id="UserStory-to-ProjectID" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1062.19,233.7892,1069.1656,226.8365,1063.9926,229.1254,1061.7036,223.9524,1062.19,233.7892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1079.5502" y="180.1949">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1055.6214" y="223.2898">1</text><!--MD5=[4b94e64ce3ed725bef6263e3e4dd608f]
+link Project to TypologyID--><path codeLine="155" d="M1331.96,159.2092 C1317.01,179.6192 1296.17,208.0792 1280.42,229.5892 " fill="none" id="Project-to-TypologyID" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1277.34,233.7892,1285.8901,228.901,1280.2987,229.7586,1279.4411,224.1671,1277.34,233.7892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1318.344" y="180.1949">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1272.8874" y="223.2898">1</text><!--MD5=[44c4ad71da5131a9ce68098205bf3374]
+link Project to ProjectStatus--><path codeLine="156" d="M1354.48,159.2092 C1357.18,179.3592 1360.93,207.3692 1363.79,228.7792 " fill="none" id="Project-to-ProjectStatus" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1364.47,233.7892,1367.2258,224.3338,1363.7989,228.8345,1359.2982,225.4075,1364.47,233.7892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1346.3533" y="180.1949">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1354.7287" y="223.2898">1</text><!--MD5=[c3362b9f7bec8d10b95d375af0a476c1]
+link Typology to TypologyID--><path codeLine="157" d="M1246.07,159.2092 C1248.45,179.3592 1251.76,207.3692 1254.29,228.7792 " fill="none" id="Typology-to-TypologyID" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1254.88,233.7892,1257.7963,224.382,1254.2933,228.8238,1249.8516,225.3207,1254.88,233.7892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1237.8433" y="180.1949">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1245.2335" y="223.2898">1</text><!--MD5=[1c1d80ef05e4bfa2ce74ce6f532c55fa]
+link UserStory to UserStoryID--><path codeLine="158" d="M1111.44,159.2092 C1119.57,179.4492 1130.88,207.5992 1139.49,229.0492 " fill="none" id="UserStory-to-UserStoryID" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="1141.4,233.7892,1141.7714,223.9474,1139.543,229.1468,1134.3436,226.9185,1141.4,233.7892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1105.0098" y="180.1949">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="1130.0238" y="223.2898">1</text><!--MD5=[fcf65268c80f727d5a9966184c5b5585]
+link Sprint to ScrumBoard--><path codeLine="159" d="M126,288.4292 C126,305.0192 126,326.3192 126,342.5892 " fill="none" id="Sprint-to-ScrumBoard" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="126,347.8992,130,338.8992,126,342.8992,122,338.8992,126,347.8992" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="117.075" y="309.0341">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="116.825" y="337.3274">1</text><!--MD5=[a0ccc77e8f3dbe1bf9c17da8d90c95a4]
+link ScrumBoard to UserStoryOfSprint--><path codeLine="160" d="M126,388.4592 C126,403.5892 126,424.9792 126,442.6092 " fill="none" id="ScrumBoard-to-UserStoryOfSprint" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="126,447.9492,130,438.9492,126,442.9492,122,438.9492,126,447.9492" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="116.875" y="408.8601">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="117.075" y="437.4868">1</text><!--MD5=[f075b785664f480ec53a4a3bcdb0768b]
+link UserStoryOfSprint to UserStoryOfSprintStatus--><path codeLine="161" d="M126,502.4592 C126,518.7492 126,539.7692 126,556.9192 " fill="none" id="UserStoryOfSprint-to-UserStoryOfSprintStatus" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="126,562.1092,130,553.1092,126,557.1092,122,553.1092,126,562.1092" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="117.075" y="523.071">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="117.025" y="551.2517">1</text><!--MD5=[b18b878d158f6ac057394796b298e10d]
+link Task to ResourceID--><path codeLine="162" d="M784.19,143.1292 C760.74,154.9692 719.11,174.2792 681,183.1992 C656.49,188.9292 590.23,179.3792 568,191.1992 C551.93,199.7392 539.09,215.3692 529.97,229.5892 " fill="none" id="Task-to-ResourceID" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="527.26,233.9492,535.4136,228.4249,529.9036,229.7052,528.6232,224.1952,527.26,233.9492" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="768.6342" y="141.8412">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="521.4014" y="223.4868">1</text><!--MD5=[73952f855041b549baeea6233d10d386]
+link Task to TaskEffort--><path codeLine="163" d="M792.97,159.2092 C785.16,179.4492 774.29,207.5992 766.02,229.0492 " fill="none" id="Task-to-TaskEffort" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="764.19,233.7892,771.1656,226.8365,765.9926,229.1254,763.7036,223.9524,764.19,233.7892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="781.5502" y="180.1949">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="757.6214" y="223.2898">1</text><!--MD5=[e7470f68175942cba5d83e095e35829d]
+link Task to TaskStatus--><path codeLine="164" d="M821.57,141.3392 C842.6,151.1392 877.15,169.0792 902,191.1992 C914.48,202.3092 925.95,216.8192 934.92,229.6592 " fill="none" id="Task-to-TaskStatus" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="937.86,233.9492,936.0574,224.2667,935.0274,229.829,929.4651,228.799,937.86,233.9492" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="829.6106" y="139.4998">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="925.2026" y="223.4868">1</text><!--MD5=[8d0d839979bc5a6cc84fbc9930d69b0d]
+link Task to TaskType--><path codeLine="165" d="M813.24,159.2092 C821.21,179.4492 832.29,207.5992 840.74,229.0492 " fill="none" id="Task-to-TaskType" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="842.6,233.7892,843.034,223.9499,840.7726,229.1351,835.5874,226.8737,842.6,233.7892" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="806.761" y="180.1949">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="831.27" y="223.2898">1</text><!--MD5=[caef11d823c59f96c1ef50197af0fbde]
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title Domain Model
+package Model {
+
+
+package Project {
+class Project <<root>>{
+}
+class ProjectStatus <<ENUM>>{
+}
+}
+
+
+package Sprint {
+class Sprint <<root>>{
+}
+class ScrumBoard{
+}
+class UserStoryOfSprintStatus <<ENUM>>{
+}
+class UserStoryOfSprint <<VO>>{
+}
+}
+
+
+package UserStory {
+class UserStory <<root>>{
+}
+}
+
+
+package Task {
+class Task <<root>>{
+}
+class TaskEffort <<VO>>{
+}
+class TaskType <<ENUM>>{
+}
+class TaskStatus <<ENUM>>{
+}
+}
+
+
+package SystemUser {
+class SystemUser <<root>>{
+}
+class Request <<VO>>{
+}
+}
+
+
+package Typology {
+class Typology <<root>>{
+}
+}
+
+
+package UserProfile {
+class UserProfile <<root>>{
+}
+}
+
+
+package Resource{
+class Resource <<root>>{
+}
+class ProjectRole <<VO>>{
+}
+}
+
+
+'package Value-Object {
+'class Description <VO>{
+'}
+class ProjectID <<VO>>{
+}
+class SystemUserID <<VO>>{
+}
+'class Name <VO>{
+'}
+'class CostPerHour <VO>{
+'}
+'class PercentageOfAllocation <VO>{
+'}
+'class ProjectRole <VO>{
+'}
+'class Photo <VO>{
+'}
+'class Function <VO>{
+'}
+'class Password <VO>{
+'}
+'class TaskEffort <VO>{
+'}
+'class Effort_Hour <VO>{
+'}
+'class Effort_Date <VO>{
+'}
+'class Comment <VO>{
+'}
+'class Attachment <VO>{
+'}
+'class Effort_Minutes <VO>{
+'}
+'class TaskStatus <VO>{
+'}
+'class TaskType <VO>{
+'}
+'class Title_UserStory <VO>{
+'}
+'class UserStoryStatus <VO>{
+'}
+'class BusinessSector <VO>{
+'}
+'class Customer <VO>{
+'}
+'class ProjectCode <VO>{
+'}
+'class Budget <VO>{
+'}
+'class SprintDuration <VO>{
+'}
+'class NumberOfSprints <VO>{
+'}
+'class ProjectStatus <VO>{
+'}
+class UserStoryID <<VO>>{
+}
+class ResourceID <<VO>>{
+}
+class SprintID <<VO>>{
+}
+class UserProfileID <<VO>>{
+}
+class TypologyID <<VO>>{
+}
+'}
+'}
+
+SystemUser "1" - -> "1" SystemUserID
+Request "1" - -> "1" UserProfileID
+UserProfile "1" - -> "1" UserProfileID
+SystemUser "1" - -> "1..*" UserProfileID
+Resource "1" - -> "1" SystemUserID
+Resource "*" - -> "1" ProjectID
+Resource "1" - -> "1" ResourceID
+Resource "1" - -> "1" ProjectRole
+Sprint "1" -up-> "1" SprintID
+Project "1" - -> "1" ProjectID
+UserStory "1" - -> "1" ProjectID
+Project "1" - -> "1" TypologyID
+Project "1" - -> "1" ProjectStatus
+Typology "1" - -> "1" TypologyID
+UserStory "1" - -> "1" UserStoryID
+Sprint "1" - -> "1" ScrumBoard
+ScrumBoard "1" - -> "1" UserStoryOfSprint
+UserStoryOfSprint "1" - -> "1" UserStoryOfSprintStatus
+Task "1" - -> "1" ResourceID
+Task "1" - -> "1" TaskEffort
+Task "1" - -> "1" TaskStatus
+Task "1" - -> "1" TaskType
+
+
+
+@enduml
+
+@startuml
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title Domain Model
+package Model {
+
+
+package Project {
+class Project <<root>>{
+}
+class ProjectStatus <<ENUM>>{
+}
+}
+
+
+package Sprint {
+class Sprint <<root>>{
+}
+class ScrumBoard{
+}
+class UserStoryOfSprintStatus <<ENUM>>{
+}
+class UserStoryOfSprint <<VO>>{
+}
+}
+
+
+package UserStory {
+class UserStory <<root>>{
+}
+}
+
+
+package Task {
+class Task <<root>>{
+}
+class TaskEffort <<VO>>{
+}
+class TaskType <<ENUM>>{
+}
+class TaskStatus <<ENUM>>{
+}
+}
+
+
+package SystemUser {
+class SystemUser <<root>>{
+}
+class Request <<VO>>{
+}
+}
+
+
+package Typology {
+class Typology <<root>>{
+}
+}
+
+
+package UserProfile {
+class UserProfile <<root>>{
+}
+}
+
+
+package Resource{
+class Resource <<root>>{
+}
+class ProjectRole <<VO>>{
+}
+}
+
+
+class ProjectID <<VO>>{
+}
+class SystemUserID <<VO>>{
+}
+class UserStoryID <<VO>>{
+}
+class ResourceID <<VO>>{
+}
+class SprintID <<VO>>{
+}
+class UserProfileID <<VO>>{
+}
+class TypologyID <<VO>>{
+}
+
+SystemUser "1" - -> "1" SystemUserID
+Request "1" - -> "1" UserProfileID
+UserProfile "1" - -> "1" UserProfileID
+SystemUser "1" - -> "1..*" UserProfileID
+Resource "1" - -> "1" SystemUserID
+Resource "*" - -> "1" ProjectID
+Resource "1" - -> "1" ResourceID
+Resource "1" - -> "1" ProjectRole
+Sprint "1" -up-> "1" SprintID
+Project "1" - -> "1" ProjectID
+UserStory "1" - -> "1" ProjectID
+Project "1" - -> "1" TypologyID
+Project "1" - -> "1" ProjectStatus
+Typology "1" - -> "1" TypologyID
+UserStory "1" - -> "1" UserStoryID
+Sprint "1" - -> "1" ScrumBoard
+ScrumBoard "1" - -> "1" UserStoryOfSprint
+UserStoryOfSprint "1" - -> "1" UserStoryOfSprintStatus
+Task "1" - -> "1" ResourceID
+Task "1" - -> "1" TaskEffort
+Task "1" - -> "1" TaskStatus
+Task "1" - -> "1" TaskType
+
+
+
+@enduml
+
+PlantUML version 1.2022.1(Tue Feb 01 18:19:58 WET 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: pt
+Country: PT
+--></g></svg>

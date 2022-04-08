@@ -178,37 +178,6 @@ public class ProductBacklogTest {
     }
 
     @Test
-    @DisplayName("grants a list of US that is sorted by priority. It keeps the done and/or cancelled US on the end\n")
-    public void getSortedListWithSuccess2() {
-        // Arrange
-        Company company = new Company();
-        UserStoryFactory userStoryFactory = new UserStoryFactory();
-        ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
-        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 1, "create user story", 5);
-        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 3, "sort user story", 5);
-        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 1, "backlog sorted", 5);
-        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 5, "show sorted", 5);
-        productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 0, "show US", 5);
-        productBacklog.getActiveUserStoryList().get(0).setUserStoryStatus((company.getUserStoryStatusStore().getUserStoryStatusByDescription("Done")));
-        productBacklog.getActiveUserStoryList().get(1).setUserStoryStatus((company.getUserStoryStatusStore().getUserStoryStatusByDescription("Cancelled")));
-        productBacklog.getActiveUserStoryList().get(2).setUserStoryStatus((company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do")));
-        productBacklog.getActiveUserStoryList().get(3).setUserStoryStatus((company.getUserStoryStatusStore().getUserStoryStatusByDescription("In progress")));
-        productBacklog.getActiveUserStoryList().get(4).setUserStoryStatus((company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do")));
-
-        // Act
-        List<UserStory> userStoryList = productBacklog.getUsSortedByPriority();
-
-        // Assert
-        assertEquals(5, userStoryList.size());
-        assertEquals(1, userStoryList.get(0).getPriority().getPriorityUs());
-        assertEquals(5, userStoryList.get(1).getPriority().getPriorityUs());
-        assertEquals(0, userStoryList.get(2).getPriority().getPriorityUs());
-        assertEquals(1, userStoryList.get(3).getPriority().getPriorityUs());
-        assertEquals(3, userStoryList.get(4).getPriority().getPriorityUs());
-
-    }
-
-    @Test
     @DisplayName("get exception message \"Check priority, cannot be < 0 or superior to 5.“")
     public void getSortedListFailWrongPriority() {
         // Arrange

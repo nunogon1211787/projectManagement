@@ -11,7 +11,7 @@ import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.valueObject.*;
-import switch2021.project.stores.ProjectStore;
+import switch2021.project.repositories.ProjectStore;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -122,7 +122,7 @@ class EditProjectInfoControllerTest {
                 typo, sector, startDate2, 7, 5000);
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam2 = new ProjectTeam(resFac);
-        ProjectStatus projectStatus = new ProjectStatus("Quase");
+        ProjectStatusEnum projectStatus = ProjectStatusEnum.TRANSITION;
 
         this.projectStore.saveNewProject(project);
 
@@ -159,7 +159,7 @@ class EditProjectInfoControllerTest {
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectStatus projectStatus = new ProjectStatus("Quase");
+        ProjectStatusEnum projectStatus = ProjectStatusEnum.INCEPTION;
 
         //Resource 1
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -219,7 +219,7 @@ class EditProjectInfoControllerTest {
                 typo, sector, startDate2, 7, 5000);
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam2 = new ProjectTeam(resFac);
-        ProjectStatus projectStatus = new ProjectStatus("Quase");
+        ProjectStatusEnum projectStatus = ProjectStatusEnum.TRANSITION;
         this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
@@ -246,7 +246,7 @@ class EditProjectInfoControllerTest {
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        ProjectStatus projectStatus = new ProjectStatus("Quase");
+        ProjectStatusEnum projectStatus = ProjectStatusEnum.INCEPTION;
         CostPerHour costPerHour = new CostPerHour(100);
         PercentageOfAllocation percentageOfAllocation = new PercentageOfAllocation(0.5);
         PercentageOfAllocation percentageOfAllocation1 = new PercentageOfAllocation(1);
@@ -310,7 +310,7 @@ class EditProjectInfoControllerTest {
                 typo, sector, startDate2, 7, 5000);
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam2 = new ProjectTeam(resFac);
-        ProjectStatus projectStatus = new ProjectStatus("Quase");
+        ProjectStatusEnum projectStatus = ProjectStatusEnum.INCEPTION;
 
         this.projectStore.saveNewProject(project);
 
@@ -339,7 +339,7 @@ class EditProjectInfoControllerTest {
                 typo, sector, startDate2, 7, 5000);
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam2 = new ProjectTeam(resFac);
-        ProjectStatus projectStatus = new ProjectStatus("Quase");
+        ProjectStatusEnum projectStatus = ProjectStatusEnum.INCEPTION;
 
         this.projectStore.saveNewProject(project);
 

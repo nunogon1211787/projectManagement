@@ -2,7 +2,7 @@ package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.stores.ProjectStore;
+import switch2021.project.repositories.ProjectStore;
 import switch2021.project.model.UserProfile.UserProfile;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,8 +18,7 @@ class CompanyTest {
         assertEquals(2, company.getTypologyStore().getTypologyList().size());
         assertEquals(0, company.getCustomerStore().getCustomerList().size());
         assertEquals(0, company.getBusinessSectorStore().getBusinessSectorList().size());
-        assertEquals(7, company.getProjectStatusStore().getProjectStatusList().size());
-        assertEquals(6, company.getUserStoryStatusStore().getUserStoryStatusList().size());
+        assertEquals(3, company.getUserStoryStatusStore().getUserStoryStatusList().size());
         assertEquals(0, company.getRequestStore().getRequestProfileList().size());
     }
 

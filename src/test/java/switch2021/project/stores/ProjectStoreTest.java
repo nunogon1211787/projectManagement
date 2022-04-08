@@ -6,6 +6,7 @@ import switch2021.project.model.Project.*;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
+import switch2021.project.repositories.ProjectStore;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.valueObject.*;
 

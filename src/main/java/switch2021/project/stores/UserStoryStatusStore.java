@@ -27,9 +27,9 @@ public class UserStoryStatusStore {
      * Populate default for status
      **/
     public void populateDefault() {
-        this.userStoryStatusList.add(new UserStoryStatus("To do", true));
-        this.userStoryStatusList.add(new UserStoryStatus("In progress", true));
-        this.userStoryStatusList.add(new UserStoryStatus("Done", true));
+        //this.userStoryStatusList.add(new UserStoryStatus("To do", true));
+        //this.userStoryStatusList.add(new UserStoryStatus("In progress", true));
+        //this.userStoryStatusList.add(new UserStoryStatus("Done", true));
         this.userStoryStatusList.add(new UserStoryStatus("Cancelled", false));
         this.userStoryStatusList.add(new UserStoryStatus("In test", false));
         this.userStoryStatusList.add(new UserStoryStatus("Refined", false));

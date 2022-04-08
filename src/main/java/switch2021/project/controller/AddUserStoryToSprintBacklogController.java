@@ -1,11 +1,11 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.*;
+import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.repositories.ProductBacklog;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.stores.SprintList;
 
 public class AddUserStoryToSprintBacklogController {
 
@@ -14,7 +14,7 @@ public class AddUserStoryToSprintBacklogController {
      **/
     private final Company company;
     private Project project;
-    private SprintList sprintList;
+    private SprintStore sprintList;
     private ProductBacklog productBacklog;
     private Sprint sprint;
 
@@ -35,7 +35,7 @@ public class AddUserStoryToSprintBacklogController {
         return this.project;
     }
 
-    public SprintList getSprintStore() {
+    public SprintStore getSprintStore() {
         sprintList = this.project.getSprintList();
         return sprintList;
     }

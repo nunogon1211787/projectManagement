@@ -3,7 +3,6 @@ package switch2021.project.model.Sprint;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.factory.SprintFactory;
-import switch2021.project.stores.SprintList;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,7 +29,7 @@ public class SprintTest {
     public void sprintConstructorFail_ID() {
         //Arrange
         Sprint sprint = new Sprint("Sprint_1", LocalDate.of(2022, 1, 1));
-        SprintList sprintList = new SprintList(new SprintFactory());
+        SprintStore sprintList = new SprintStore(new SprintFactory());
         //Act
         sprintList.saveSprint(sprint);
         int x = sprint.getIdSprint();
@@ -193,7 +192,7 @@ public class SprintTest {
         LocalDate startDate2 = LocalDate.of(2022, 1, 1);
         Sprint sprint1 = new Sprint("Sprint_1", startDate1);
         Sprint sprint2 = new Sprint("Sprint_12", startDate2);
-        SprintList sprintList = new SprintList(new SprintFactory());
+        SprintStore sprintList = new SprintStore(new SprintFactory());
         sprintList.saveSprint(sprint1);
         sprintList.saveSprint(sprint2);
         sprintList.getSprints().get(0).setEndDate(LocalDate.of(2022, 5, 1));

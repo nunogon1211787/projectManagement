@@ -9,12 +9,12 @@ import switch2021.project.factory.ResourceFactory;
 import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.repositories.ProductBacklog;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.stores.SprintList;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -32,12 +32,12 @@ public class Project {
 
     private final Customer customer;
     private Typology typology;
-    private ProjectStatus projectStatus;
+    private ProjectStatusEnum projectStatus;
     private ProductBacklog productBacklog;
     private UserStoryFactory userStoryFactory;
 
     private final BusinessSector businessSector;
-    private final SprintList sprintList;
+    private final SprintStore sprintList;
 
     private ProjectTeam projectTeam;
     private ProjectTeamFactory projectTeamFactory;
@@ -55,7 +55,7 @@ public class Project {
      * Project Constructor
      **/
     public Project(String name, String description, Customer customer, Typology typology,
-                   BusinessSector businessSector, LocalDate startDate, ProjectStatus status, int numberOfSprints, double budget) {
+                   BusinessSector businessSector, LocalDate startDate, int numberOfSprints, double budget) {
 
         validateProjectFields(numberOfSprints);
 
@@ -64,18 +64,16 @@ public class Project {
 
         this.customer = customer;
         this.typology = typology;
-        this.projectStatus = status;
+        this.projectStatus = ProjectStatusEnum.PLANNED;
         this.businessSector = businessSector;
 
         this.startDate = startDate;
-        this.sprintList = new SprintList(new SprintFactory());
+        this.sprintList = new SprintStore(new SprintFactory());
 
         this.numberOfSprints = numberOfSprints;
         this.budget = new Budget(budget);
 
         this.projectTeam = new ProjectTeam(resFac);
-//        this.projectTeam = this.projectTeamFactory.createProjectTeam();
-//        this.projectTeam = new ProjectTeam();
         this.productBacklog = new ProductBacklog();
     }
 
@@ -88,7 +86,6 @@ public class Project {
         if (numberOfSprints <= 0)
             throw new IllegalArgumentException("Number of Sprints must be greater than 0");
     }
-
 
     /**
      * Resource Allocation Methods - (Carolina US007)

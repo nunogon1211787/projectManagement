@@ -7,15 +7,16 @@ import switch2021.project.factory.SprintFactory;
 import switch2021.project.model.Company;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.Task.Task;
-import switch2021.project.model.Task.TaskType;
+import switch2021.project.model.Task.TaskTypeEnum;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.repositories.ProductBacklog;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.stores.ProjectStore;
-import switch2021.project.stores.SprintList;
+import switch2021.project.repositories.ProjectStore;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -75,8 +76,8 @@ class ProjectTest {
         BusinessSector sector = company.getProjectStore().getProjectByCode("Project_2022_1").getBusinessSector();
         BusinessSector valueSector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
-        ProjectStatus status = company.getProjectStore().getProjectByCode("Project_2022_1").getProjectStatus();
-        ProjectStatus valueStatus = company.getProjectStatusStore().getProjectStatusByDescription("Planned");
+        ProjectStatusEnum status = ProjectStatusEnum.PLANNED;
+        ProjectStatusEnum valueStatus = company.getProjectStore().getProjectByCode("Project_2022_1").getProjectStatus();
 
         LocalDate date = company.getProjectStore().getProjectByCode("Project_2022_1").getStartDate();
         LocalDate valueDate = LocalDate.of(2021, 12, 12);
@@ -96,7 +97,7 @@ class ProjectTest {
         assertEquals(valueCustomer, customer);
         assertEquals(valueTypology, typology);
         assertEquals(valueSector, sector);
-        assertEquals(valueStatus.getDescription(), status.getDescription());
+        assertEquals(valueStatus, status);
         assertEquals(valueDate, date);
         assertEquals(valueEndDate, endDate);
         assertEquals(valueNrSprint, numberOfSprints);
@@ -201,9 +202,8 @@ class ProjectTest {
     Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-    ProjectStatus projectStatus = new ProjectStatus("ToStart");
     Project project2 = new Project("prototype", "test56", customer,
-            typo, sector, LocalDate.now(), projectStatus, 7, 5000);
+            typo, sector, LocalDate.now(), 7, 5000);
 
     @BeforeEach
     public void init_2() {
@@ -304,9 +304,9 @@ class ProjectTest {
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTest() {
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
-        SprintList sprintList1 = new SprintList(new SprintFactory());
+        SprintStore sprintList1 = new SprintStore(new SprintFactory());
         sprintList1.saveSprint(sprint1);
-        SprintList projectSprintList = this.project2.getSprintList();
+        SprintStore projectSprintList = this.project2.getSprintList();
         projectSprintList.saveSprint(sprint1);
         assertEquals(sprintList1, projectSprintList);
     }
@@ -315,10 +315,10 @@ class ProjectTest {
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTestFail() {
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
-        SprintList sprintList1 = new SprintList(new SprintFactory());
+        SprintStore sprintList1 = new SprintStore(new SprintFactory());
         sprintList1.saveSprint(sprint1);
         Sprint sprint2 = new Sprint("Effort View 1", LocalDate.now());
-        SprintList projectSprintList = this.project2.getSprintList();
+        SprintStore projectSprintList = this.project2.getSprintList();
         projectSprintList.saveSprint(sprint1);
         projectSprintList.saveSprint(sprint2);
         assertNotEquals(sprintList1, projectSprintList);
@@ -336,7 +336,7 @@ class ProjectTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100),new PercentageOfAllocation( .5));
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
 
         Task taskTest = sprint1.getTaskStore().createTask("test", taskDescription, 8.0, taskType, resource);
         sprint1.getTaskStore().saveTask(taskTest);
@@ -471,11 +471,11 @@ class ProjectTest {
         assertEquals(project.toString(), project2.toString());
         assertEquals(project, project2);
 
-        project2.setProjectStatus(new ProjectStatus("test"));
+        project2.setProjectStatus(ProjectStatusEnum.CLOSED);
 
         assertNotEquals(project, project2);
 
-        project.setProjectStatus(new ProjectStatus("test"));
+        project.setProjectStatus(ProjectStatusEnum.CLOSED);
         project2.setDescription(new Description("test"));
 
         assertNotEquals(project, project2);
