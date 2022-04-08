@@ -11,7 +11,7 @@ import switch2021.project.model.Task.TaskTypeEnum;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
-import switch2021.project.stores.ProjectStore;
+import switch2021.project.repositories.ProjectStore;
 import switch2021.project.stores.SystemUserStore;
 
 import java.time.LocalDate;
@@ -27,9 +27,8 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
-        ProjectStatus projectStatus = new ProjectStatus("ToStart");
         Project project2 = new Project("Project_test", "prototype", customer,
-                typo, sector, LocalDate.now(), projectStatus, 7, 5000);
+                typo, sector, LocalDate.now(), 7, 5000);
 
         company.getProjectStore().saveNewProject(project2);
 

@@ -10,7 +10,7 @@ import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.*;
-import switch2021.project.stores.ProjectStore;
+import switch2021.project.repositories.ProjectStore;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

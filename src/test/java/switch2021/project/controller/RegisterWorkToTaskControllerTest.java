@@ -15,7 +15,7 @@ import switch2021.project.mapper.RegisterWorkToTaskMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.stores.ProjectStore;
+import switch2021.project.repositories.ProjectStore;
 
 import java.time.LocalDate;
 import java.util.List;

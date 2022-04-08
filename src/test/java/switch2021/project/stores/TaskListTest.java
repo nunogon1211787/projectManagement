@@ -118,8 +118,7 @@ public class TaskListTest {
         Customer cust = new Customer("test", "test@test.pt", 123456789);
         Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
-        ProjectStatus status = new ProjectStatus("test1234");
-        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);
+        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), 4, 7000);
         comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
@@ -146,8 +145,7 @@ public class TaskListTest {
         Customer cust = new Customer("test", "test@test.pt", 123456789);
         Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
-        ProjectStatus status = new ProjectStatus("test1234");
-        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);
+        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), 4, 7000);
         comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
@@ -175,8 +173,7 @@ public class TaskListTest {
         Customer cust = new Customer("test", "test@test.pt", 123456789);
         Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
-        ProjectStatus status = new ProjectStatus("test1234");
-        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);
+        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), 4, 7000);
         comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
@@ -204,8 +201,7 @@ public class TaskListTest {
         Customer cust = new Customer("test", "test@test.pt", 123456789);
         Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
-        ProjectStatus status = new ProjectStatus("test1234");
-        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);
+        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), 4, 7000);
         comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);

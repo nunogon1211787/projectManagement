@@ -1,11 +1,11 @@
 package switch2021.project.controller;
 
+import switch2021.project.model.Project.ProjectStatusEnum;
 import switch2021.project.model.valueObject.Budget;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.repositories.ProjectTeam;
-import switch2021.project.model.Project.ProjectStatus;
 import switch2021.project.model.valueObject.SprintDuration;
 
 import java.time.LocalDate;
@@ -43,7 +43,7 @@ public class EditProjectInfoController {
     }
 
     public boolean editProject(String name, String description, LocalDate startDate, LocalDate endDate, int numberOfSprints,
-                               double budget, int sprintDuration, ProjectStatus status, ProjectTeam projectTeam) {
+                               double budget, int sprintDuration, ProjectStatusEnum status, ProjectTeam projectTeam) {
 
         boolean result = true;
 
