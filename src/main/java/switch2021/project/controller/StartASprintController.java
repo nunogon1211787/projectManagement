@@ -6,7 +6,6 @@ import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.repositories.ProjectStore;
-import switch2021.project.stores.ProjectStore;
 
 import java.time.LocalDate;
 

@@ -14,6 +14,7 @@ class Project{
 - endDate
 - numberOfSprints
 - sprintDuration
+- budget
 }
 
 class Typology{
@@ -65,7 +66,7 @@ class UserStoryStatus{
 }
 
 class UserStory{
-- name
+- usTitle
 - priority
 - description
 - parentUserStory
@@ -77,9 +78,6 @@ class BusinessSector{
 - description
 }
 
-class Budget{
-- amount
-}
 
 class ProjectStatus{
 - description
@@ -88,6 +86,7 @@ class ProjectStatus{
 class Customer{
 - name
 - email
+- nipc
 }
 
 class Company{
@@ -128,12 +127,12 @@ class ProjectTeam{
 
 SystemUser "1" -- "*" Request: sent by
 SystemUser "1" -- "*" Resource: act as
-Company "1" -left- "*" SystemUser: employed by
+Company "1" <-left- "*" SystemUser: employed by
 UserProfile "1..*" -- "*" SystemUser: is assigned
 Request "*" <-- "1" UserProfile: asks for a
 Resource "1..*" -up- "*" Sprint: participates
 Resource "1" -down- "*" Task: under responsibility of
-Resource "*" -left- "1" ProjectRole: plays a
+Resource "*" -left-> "1" ProjectRole: plays a
 Resource "*" -left-> "1" ProjectTeam: is associate
 Resource "1" --> "*" TaskEffort: register work
 SprintBacklog "1" -up- "1" Sprint: origins
@@ -141,18 +140,17 @@ Task "1..*" -up- "1" Sprint: contains
 Task "*" -- "1" TaskStatus: includes
 Task "*" -- "1" TaskType: is classified by
 Task "1" -- "*" TaskEffort: is measured by
-Task "1..*" -up- "1" UserStory: contains
+Task "1..*" <-up- "1" UserStory: contains
 Task "1" -left- "*" Task: is preceded by
 UserStoryStatus "1" <-right- "*" UserStory: includes
 UserStory "1" -- "*" UserStory: is groomed
-UserStory "*" -- "1" ProductBacklog: includes
-UserStory "1..*" -right- "*" SprintBacklog: is composed by
+UserStory "*" <-- "1" ProductBacklog: includes
+UserStory "1..*" <-right- "*" SprintBacklog: is composed by
 ProductBacklog "1" <-- "1" Project: contains
 Project "1" -- "*" Sprint: is divided in
-Budget "1" <-- "1" Project: financed by
 Project "*" -up-> "1" ProjectStatus: includes
 Project "1" -- "1" Customer: requested by
-Project "*" -left- "1" Company: belongs to
+Project "*" -left-> "1" Company: belongs to
 Project "1" -- "1" ProjectTeam: worked by
 Project "1" -- "1" BusinessSector: correlates
 Typology "1" <-right- "*" Project: characterized by

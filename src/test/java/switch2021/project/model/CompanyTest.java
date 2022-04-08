@@ -18,7 +18,7 @@ class CompanyTest {
         assertEquals(2, company.getTypologyStore().getTypologyList().size());
         assertEquals(0, company.getCustomerStore().getCustomerList().size());
         assertEquals(0, company.getBusinessSectorStore().getBusinessSectorList().size());
-        assertEquals(6, company.getUserStoryStatusStore().getUserStoryStatusList().size());
+        assertEquals(3, company.getUserStoryStatusStore().getUserStoryStatusList().size());
         assertEquals(0, company.getRequestStore().getRequestProfileList().size());
     }
 
