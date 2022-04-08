@@ -7,10 +7,7 @@ import switch2021.project.mapper.TaskMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Task.Task;
-import switch2021.project.model.Task.TaskStatus;
-import switch2021.project.model.Task.TaskStore;
-import switch2021.project.model.Task.TaskType;
+import switch2021.project.model.Task.*;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
@@ -53,7 +50,7 @@ public class TaskListTest {
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
-        TaskType type = new TaskType("type");
+        TaskTypeEnum type = TaskTypeEnum.Design;
         Task newTask = new Task("test", "test test test tests", 10, type, resource);
         Task newTask2 = new Task("testdois", "test2 test2 test2 test2", 10, type, resource);
         //Assert
@@ -72,7 +69,7 @@ public class TaskListTest {
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
-        TaskType type = new TaskType("type");
+        TaskTypeEnum type = TaskTypeEnum.Design;
         Task newTask = new Task("test", "test test test tests", 10, type, resource);
         //Assert
         assertTrue(test.saveTask(newTask));
@@ -121,8 +118,7 @@ public class TaskListTest {
         Customer cust = new Customer("test", "test@test.pt", 123456789);
         Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
-        ProjectStatus status = new ProjectStatus("test1234");
-        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);
+        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), 4, 7000);
         comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
@@ -149,8 +145,7 @@ public class TaskListTest {
         Customer cust = new Customer("test", "test@test.pt", 123456789);
         Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
-        ProjectStatus status = new ProjectStatus("test1234");
-        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);
+        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), 4, 7000);
         comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
@@ -178,8 +173,7 @@ public class TaskListTest {
         Customer cust = new Customer("test", "test@test.pt", 123456789);
         Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
-        ProjectStatus status = new ProjectStatus("test1234");
-        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);
+        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), 4, 7000);
         comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
@@ -190,8 +184,8 @@ public class TaskListTest {
         test.createSprintTask(dto2, map, proj);
 
         //Asserts
-        assertEquals(new Task("test", "test test test tests", 10, comp.getTaskTypeStore().getTypeByDescription("Meeting"), resource), test.getTaskById(1));
-        assertEquals(new Task("testdois", "test2 test2 test2 test2", 10, comp.getTaskTypeStore().getTypeByDescription("Meeting"), resource), test.getTaskById(2));
+        assertEquals(new Task("test", "test test test tests", 10, TaskTypeEnum.valueOf("Meeting"), resource), test.getTaskById(1));
+        assertEquals(new Task("testdois", "test2 test2 test2 test2", 10, TaskTypeEnum.valueOf("Meeting"), resource), test.getTaskById(2));
     }
 
     @Test
@@ -207,8 +201,7 @@ public class TaskListTest {
         Customer cust = new Customer("test", "test@test.pt", 123456789);
         Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
-        ProjectStatus status = new ProjectStatus("test1234");
-        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), status, 4, 7000);
+        Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), 4, 7000);
         comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
@@ -219,7 +212,7 @@ public class TaskListTest {
         test.createSprintTask(dto2, map, proj);
 
         //Asserts
-        assertEquals(new Task("test", "test test test tests", 10, comp.getTaskTypeStore().getTypeByDescription("Meeting"), resource), test.getTaskByName("test"));
-        assertEquals(new Task("testdois", "test2 test2 test2 test2", 10, comp.getTaskTypeStore().getTypeByDescription("Meeting"), resource), test.getTaskByName("testdois"));
+        assertEquals(new Task("test", "test test test tests", 10, TaskTypeEnum.valueOf("Meeting"), resource), test.getTaskByName("test"));
+        assertEquals(new Task("testdois", "test2 test2 test2 test2", 10, TaskTypeEnum.valueOf("Meeting"), resource), test.getTaskByName("testdois"));
     }
 }

@@ -66,7 +66,7 @@ public class ProductBacklog {
     /**
      * Validation Methods.
      *
-     * @return
+     * @return boolean
      */
     private boolean validateUserStory(UserStory newUserStory) {
         // check duplicate story

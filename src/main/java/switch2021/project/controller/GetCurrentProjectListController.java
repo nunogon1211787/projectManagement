@@ -2,7 +2,7 @@ package switch2021.project.controller;
 
 import switch2021.project.model.Company;
 import switch2021.project.model.Project.Project;
-import switch2021.project.stores.ProjectStore;
+import switch2021.project.repositories.ProjectStore;
 
 import java.util.Collections;
 import java.util.List;
