@@ -7,7 +7,7 @@ import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Task.Task;
-import switch2021.project.model.Task.TaskType;
+import switch2021.project.model.Task.TaskTypeEnum;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
@@ -41,7 +41,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
 
         Task taskTest = sprint1.getTaskStore().createTask("test", taskDescription, 8.0, taskType, resource);
         sprint1.getTaskStore().saveTask(taskTest);

@@ -22,7 +22,7 @@ public class Task {
     private int idTask;
     private Name name;
     private Description description;
-    private TaskType type;
+    private TaskTypeEnum type;
     private double effortEstimate;
     private double effortRemaining; // Initially equal effortEstimate, but can be change by user to update the effort to the task.
     private LocalDate startDate;
@@ -43,7 +43,7 @@ public class Task {
         this.status = App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Planned");
     }
 
-    public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible) {
+    public Task(String name, String description, double effortEstimate, TaskTypeEnum type, Resource responsible) {
 
         checkEffortRules(effortEstimate);
 
@@ -57,7 +57,7 @@ public class Task {
         this.taskEffortList = new ArrayList<>();
     }
 
-    public Task(String name, String description, double effortEstimate, TaskType type, Resource responsible, List<String> precedenceList) {
+    public Task(String name, String description, double effortEstimate, TaskTypeEnum type, Resource responsible, List<String> precedenceList) {
         new Task(name, description, effortEstimate, type, responsible);
         this.precedenceList = Collections.unmodifiableList(precedenceList);
 
@@ -71,8 +71,8 @@ public class Task {
         return Objects.equals(this.name.getNameF(), taskName);
     }
 
-    public boolean hasType(TaskType taskType) {
-        return Objects.equals(this.type, taskType);
+    public boolean hasTaskTypeEnum(String taskType) {
+        return Objects.equals(this.type.toString(), taskType);
     }
 
     public boolean hasStatus(TaskStatus taskStatus) {

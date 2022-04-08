@@ -1,6 +1,7 @@
 package switch2021.project.model.valueObject;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.model.Project.ProjectStatus;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Task.Task;
-import switch2021.project.model.Task.TaskType;
+import switch2021.project.model.Task.TaskTypeEnum;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
@@ -58,7 +58,7 @@ public class RegisterWorkToTaskControllerTest {
         sprint1.saveUsInSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("taskum", taskDescription, 20.0, taskType, resource1);
         Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("taskdois", taskDescription, 10.0, taskType, resource1);
         project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task1);
@@ -108,7 +108,7 @@ public class RegisterWorkToTaskControllerTest {
         sprint1.saveUsInSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("taskum", taskDescription, 20.0, taskType, resource1);
         Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("taskdois", taskDescription, 10.0, taskType, resource1);
         project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task1);
@@ -162,7 +162,7 @@ public class RegisterWorkToTaskControllerTest {
         sprint1.saveUsInSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
         String taskDescription = "must be at least 20 characters";
-        TaskType taskType = company.getTaskTypeStore().getTypeByDescription("Testing");
+        TaskTypeEnum taskType = TaskTypeEnum.Design;
         Task task1 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("taskum", taskDescription, 20.0, taskType, resource1);
         Task task2 = project1.getProductBacklog().getUserStoryList().get(0).getTasks().createTask("taskdois", taskDescription, 10.0, taskType, resource1);
         project1.getProductBacklog().getUserStoryList().get(0).getTasks().saveTask(task1);

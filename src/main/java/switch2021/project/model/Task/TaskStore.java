@@ -28,7 +28,7 @@ public class TaskStore {
     /**
      * Methods to create Task
      */
-    public Task createTask(String name, String description, double effortEstimate, TaskType type, Resource responsible){
+    public Task createTask(String name, String description, double effortEstimate, TaskTypeEnum type, Resource responsible){
         return new Task(name, description, effortEstimate, type, responsible);
     }
 

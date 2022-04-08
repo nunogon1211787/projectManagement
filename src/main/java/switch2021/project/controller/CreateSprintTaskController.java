@@ -5,6 +5,7 @@ import switch2021.project.dto.CreateTaskDTO;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Task.TaskStore;
+import switch2021.project.model.Task.TaskTypeEnum;
 
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class CreateSprintTaskController {
 
         List<String> taskTypesNames;
 
-        taskTypesNames = this.company.getTaskTypeStore().getTaskTypesDescription();
+        taskTypesNames = TaskTypeEnum.getTaskTypesDescriptionEnums();
 
         return taskTypesNames;
     }

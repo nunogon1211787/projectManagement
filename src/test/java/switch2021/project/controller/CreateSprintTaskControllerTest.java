@@ -9,7 +9,7 @@ import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Task.Task;
-import switch2021.project.model.Task.TaskType;
+import switch2021.project.model.Task.TaskTypeEnum;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
@@ -29,7 +29,7 @@ class CreateSprintTaskControllerTest {
         TaskMapper mapper = new TaskMapper();
         CreateSprintTaskController controller = new CreateSprintTaskController(company, mapper);
         List<String> result = controller.getTaskTypes();
-        List<String> test = new ArrayList<>(company.getTaskTypeStore().getTaskTypesDescription());
+        List<String> test = TaskTypeEnum.getTaskTypesDescriptionEnums();
         //Assert
         assertEquals(6, result.size());
         assertEquals(result, test);
@@ -58,7 +58,7 @@ class CreateSprintTaskControllerTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
-        TaskType type = new TaskType("type");
+        TaskTypeEnum type = TaskTypeEnum.Design;
         Task newTask = new Task("test", "test test test tests", 10, type, resource);
         Task newTask2 = new Task("testdois", "test2 test2 test2 test2", 10, type, resource);
         sprint.getTaskStore().saveTask(newTask);
@@ -201,7 +201,7 @@ class CreateSprintTaskControllerTest {
 
         //Create a new Sprint Task
         controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getIdSprint());
-        CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test tres");
+        CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "Design", "user test tres");
 
         //Asserts
         assertTrue(controller.createSprintTask(dto));
@@ -241,7 +241,7 @@ class CreateSprintTaskControllerTest {
         project.getProjectTeam().saveResource(res3);
 
         //Create tasks
-        TaskType type = new TaskType("type");
+        TaskTypeEnum type = TaskTypeEnum.Design;
         Task newTask = new Task("test", "test test test tests", 10, type, res1);
         Task newTask2 = new Task("testdois", "test2 test2 test2 test2", 10, type, res2);
         sprint.getTaskStore().saveTask(newTask);
@@ -249,7 +249,7 @@ class CreateSprintTaskControllerTest {
 
         //Create a new Sprint Task
         controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getIdSprint());
-        CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test tres");
+        CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "Design", "user test tres");
 
         //Asserts
         assertTrue(controller.createSprintTask(dto));
@@ -289,7 +289,7 @@ class CreateSprintTaskControllerTest {
         project.getProjectTeam().saveResource(res3);
 
         //Create tasks
-        TaskType type = new TaskType("type");
+        TaskTypeEnum type = TaskTypeEnum.Design;
         Task newTask = new Task("test", "test test test tests", 10, type, res1);
         Task newTask2 = new Task("testdois", "test2 test2 test2 test2", 10, type, res2);
         sprint.getTaskStore().saveTask(newTask);
@@ -300,7 +300,7 @@ class CreateSprintTaskControllerTest {
 
         //Create a new Sprint Task
         controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getIdSprint());
-        CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "deployment", "user test tres", precedenceList);
+        CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "Design", "user test tres", precedenceList);
 
         //Asserts
         assertTrue(controller.createSprintTask(dto));

@@ -4,6 +4,7 @@ import switch2021.project.dto.CreateTaskDTO;
 import switch2021.project.mapper.TaskMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
+import switch2021.project.model.Task.TaskTypeEnum;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.Task.TaskStore;
 
@@ -31,7 +32,7 @@ public class CreateUsTaskController {
     public List<String> getTaskTypes(){
         List<String> taskTypesNames;
 
-        taskTypesNames = this.company.getTaskTypeStore().getTaskTypesDescription();
+        taskTypesNames = TaskTypeEnum.getTaskTypesDescriptionEnums();
         return taskTypesNames;
     }
 
