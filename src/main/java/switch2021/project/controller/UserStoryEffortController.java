@@ -3,6 +3,7 @@ package switch2021.project.controller;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.stores.*;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class UserStoryEffortController {
      **/
     private final Company company;
     private Project proj;
-    private SprintList sprintList;
+    private SprintStore sprintList;
     private List<Sprint> sprintsList;
     private Sprint sprint;
 

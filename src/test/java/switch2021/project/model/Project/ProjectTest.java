@@ -7,6 +7,7 @@ import switch2021.project.factory.SprintFactory;
 import switch2021.project.model.Company;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.Task.Task;
 import switch2021.project.model.Task.TaskType;
 import switch2021.project.model.Typology.Typology;
@@ -15,7 +16,6 @@ import switch2021.project.repositories.ProductBacklog;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.stores.ProjectStore;
-import switch2021.project.stores.SprintList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -304,9 +304,9 @@ class ProjectTest {
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTest() {
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
-        SprintList sprintList1 = new SprintList(new SprintFactory());
+        SprintStore sprintList1 = new SprintStore(new SprintFactory());
         sprintList1.saveSprint(sprint1);
-        SprintList projectSprintList = this.project2.getSprintList();
+        SprintStore projectSprintList = this.project2.getSprintList();
         projectSprintList.saveSprint(sprint1);
         assertEquals(sprintList1, projectSprintList);
     }
@@ -315,10 +315,10 @@ class ProjectTest {
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTestFail() {
         Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
-        SprintList sprintList1 = new SprintList(new SprintFactory());
+        SprintStore sprintList1 = new SprintStore(new SprintFactory());
         sprintList1.saveSprint(sprint1);
         Sprint sprint2 = new Sprint("Effort View 1", LocalDate.now());
-        SprintList projectSprintList = this.project2.getSprintList();
+        SprintStore projectSprintList = this.project2.getSprintList();
         projectSprintList.saveSprint(sprint1);
         projectSprintList.saveSprint(sprint2);
         assertNotEquals(sprintList1, projectSprintList);

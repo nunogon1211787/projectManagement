@@ -5,11 +5,11 @@ import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
-import switch2021.project.stores.SprintList;
 import switch2021.project.stores.SystemUserStore;
 
 import java.time.LocalDate;
@@ -86,7 +86,7 @@ class UserStoryEffortControllerTest {
         project1.getProjectTeam().saveResource(person2);
         company.getProjectStore().saveNewProject(project1);
         Sprint sprint1 = new Sprint("Hello1", LocalDate.now());
-        SprintList sprintList = project1.getSprintList(); //objeto
+        SprintStore sprintList = project1.getSprintList(); //objeto
         sprintList.saveSprint(sprint1);
 
         //Act
@@ -111,7 +111,7 @@ class UserStoryEffortControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().saveNewProject(project1);
         Sprint sprint1 = new Sprint("Hello1", LocalDate.now());
-        SprintList sprintList = project1.getSprintList(); //objeto
+        SprintStore sprintList = project1.getSprintList(); //objeto
         sprintList.saveSprint(sprint1);
         project1.getSprintList().saveSprint(sprint1);
         controller.getProjectByCode(project1.getProjectCode().getCode());

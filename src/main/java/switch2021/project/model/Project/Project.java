@@ -9,12 +9,12 @@ import switch2021.project.factory.ResourceFactory;
 import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.repositories.ProductBacklog;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.stores.SprintList;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -37,7 +37,7 @@ public class Project {
     private UserStoryFactory userStoryFactory;
 
     private final BusinessSector businessSector;
-    private final SprintList sprintList;
+    private final SprintStore sprintList;
 
     private ProjectTeam projectTeam;
     private ProjectTeamFactory projectTeamFactory;
@@ -68,7 +68,7 @@ public class Project {
         this.businessSector = businessSector;
 
         this.startDate = startDate;
-        this.sprintList = new SprintList(new SprintFactory());
+        this.sprintList = new SprintStore(new SprintFactory());
 
         this.numberOfSprints = numberOfSprints;
         this.budget = new Budget(budget);

@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.Task.Task;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.repositories.SprintBacklog;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.Task.TaskStore;
 import java.time.LocalDate;
@@ -17,7 +16,7 @@ import java.util.Objects;
 public class Sprint {
 
     /**
-     * Atributos da classe Sprint
+     * Attributes of Sprint
      **/
     private int idSprint;
     private Description sprintName;
