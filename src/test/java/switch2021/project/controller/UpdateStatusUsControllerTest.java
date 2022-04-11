@@ -74,7 +74,6 @@ class UpdateStatusUsControllerTest {
         Sprint sprint = project.getSprintList().createSprint("Sprintao", LocalDate.now(), 12);
         project.getSprintList().saveSprint(sprint);
         project.getCurrentSprint().saveUsInSprintBacklog(userStory);
-        project.getCurrentSprint().saveUsInSprintBacklog(userStory2);
 
         //act
 

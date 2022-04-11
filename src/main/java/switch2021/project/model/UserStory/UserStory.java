@@ -5,9 +5,7 @@ import lombok.Setter;
 import switch2021.project.model.Task.Task;
 import switch2021.project.model.Task.TaskStore;
 import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.UsPriority;
 import switch2021.project.model.valueObject.UserStoryStatus;
-import switch2021.project.model.valueObject.UsTitle;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -29,7 +27,7 @@ public class UserStory {
     private UsPriority priority;
     private Description description;
     private UserStory parentUserStory;
-    private int timeEstimate;
+    private UsHour timeEstimate;
     private TaskStore tasks;
     private double workDone;
     private LocalDate usEndDate;
@@ -44,7 +42,7 @@ public class UserStory {
         this.description = new Description(description);
         this.userStoryStatus = new UserStoryStatus("To do", true);
         this.priority = new UsPriority(priority);
-        this.timeEstimate = timeEstimateInHours;
+        this.timeEstimate = new UsHour(timeEstimateInHours);
         this.tasks = new TaskStore();
     }
 
@@ -87,28 +85,27 @@ public class UserStory {
         return true;
     }
 
-
-    public boolean hasCode(long idUserStory) {
-        return this.idUserStory == idUserStory;
-    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserStory userStory = (UserStory) o;
-        return idUserStory == userStory.idUserStory && timeEstimate == userStory.timeEstimate &&
-               Double.compare(userStory.workDone, workDone) == 0 &&  Objects.equals(title, userStory.title) &&
-                Objects.equals(userStoryStatus, userStory.userStoryStatus) && Objects.equals(priority, userStory.priority) &&
-                Objects.equals(description, userStory.description) && Objects.equals(parentUserStory, userStory.parentUserStory) &&
-                Objects.equals(tasks, userStory.tasks);
+        return idUserStory == userStory.idUserStory && userStory.workDone == workDone
+                && title.equals(userStory.title) && userStoryStatus.equals(userStory.userStoryStatus)
+                && priority.equals(userStory.priority) && description.equals(userStory.description)
+                && timeEstimate.equals(userStory.timeEstimate)
+                && (usEndDate == null || usEndDate.equals(userStory.usEndDate)) && (usCancelled == null || usCancelled.equals(userStory.usCancelled));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idUserStory, title, userStoryStatus, priority, description, parentUserStory, timeEstimate, tasks, workDone);
+        return Objects.hash(idUserStory, title, userStoryStatus, priority, description, parentUserStory, timeEstimate, tasks, workDone, usEndDate, usCancelled);
     }
+
+    public boolean hasCode(long idUserStory) {
+        return this.idUserStory == idUserStory;
+    }
+
 }
 
 

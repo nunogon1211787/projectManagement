@@ -2,7 +2,7 @@ package switch2021.project.controller;
 
 import switch2021.project.model.*;
 import switch2021.project.model.Sprint.SprintStore;
-import switch2021.project.repositories.ProductBacklog;
+import switch2021.project.model.UserStory.ProductBacklog;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.UserStory.UserStory;

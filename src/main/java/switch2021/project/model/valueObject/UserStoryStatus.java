@@ -39,7 +39,7 @@ public class UserStoryStatus {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserStoryStatus that = (UserStoryStatus) o;
-        return sprintAvailable == that.sprintAvailable && Objects.equals(description, that.description);
+        return sprintAvailable == that.sprintAvailable;
     }
 
     @Override

@@ -198,11 +198,11 @@ class UserStoryTest {
        when(status4.isSprintAvailable()).thenReturn(true);
 
         assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
-        assertEquals(0, userStory1.getTimeEstimate());
+        assertEquals(0, userStory1.getTimeEstimate().getUsHours());
         assertEquals(userStory2.getDescription().getText(), userStory3.getDescription().getText());
         assertEquals(userStory2.getPriority().getPriorityUs(), userStory3.getPriority().getPriorityUs());
         assertEquals(userStory2.getTitle().getTitleUs(), userStory3.getTitle().getTitleUs());
-        assertEquals(userStory2.getTimeEstimate(), userStory3.getTimeEstimate());
+        assertEquals(userStory2.getTimeEstimate().getUsHours(), userStory3.getTimeEstimate().getUsHours());
         assertNotEquals(userStory2.getDescription().getText(), userStory1.getDescription().getText());
         assertNotEquals(null, userStory1);
         assertEquals(userStory1.getClass(), userStory2.getClass());
@@ -225,10 +225,10 @@ class UserStoryTest {
     void getTimeEstimate() {
         UserStory userStory1 = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
         UserStory userStory2 = new UserStory("As a IO, i want to test this string", 2, "Fazer tal e coiso", 5);
-        userStory2.setTimeEstimate(0);
+        userStory2.setTimeEstimate(new UsHour(0));
 
-        assertEquals(0, userStory2.getTimeEstimate());
-        assertNotEquals(0, userStory1.getTimeEstimate());
+        assertEquals(0, userStory2.getTimeEstimate().getUsHours());
+        assertNotEquals(0, userStory1.getTimeEstimate().getUsHours());
     }
 
 
@@ -303,7 +303,7 @@ class UserStoryTest {
         assertNotSame("saffdf", userStory1.getTitle().getTitleUs());
         assertFalse(userStory1.hasCode(213));
         assertTrue(userStory1.setPriority(2));
-        assertEquals(0, userStory1.getTimeEstimate());
+        assertEquals(0, userStory1.getTimeEstimate().getUsHours());
         assertTrue(result);
 
     }

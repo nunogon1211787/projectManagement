@@ -12,7 +12,7 @@ import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.repositories.ProductBacklog;
+import switch2021.project.model.UserStory.ProductBacklog;
 import switch2021.project.model.valueObject.*;
 
 import java.time.LocalDate;
