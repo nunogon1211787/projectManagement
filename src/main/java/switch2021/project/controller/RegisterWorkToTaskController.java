@@ -63,7 +63,7 @@ public class RegisterWorkToTaskController {
         return this.mapper.toDTO(this.task);
     }
 
-    public boolean createTaskEffort(TaskEffortDTO taskEffortDTO) {
+    public void createTaskEffort(TaskEffortDTO taskEffortDTO) {
 
         int effortHours = taskEffortDTO.getEffortHours().getEffortHours();
         int effortMinutes = taskEffortDTO.getEffortMinutes().getEffortMinutes();
@@ -71,6 +71,6 @@ public class RegisterWorkToTaskController {
         String comment = taskEffortDTO.getComment();
         String attachment = taskEffortDTO.getAttachment();
         this.task.createAndSaveTaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
-        return this.userStory.updateWorkDone(this.task);
+//        return this.userStory.updateWorkDone(this.task);
     }
 }

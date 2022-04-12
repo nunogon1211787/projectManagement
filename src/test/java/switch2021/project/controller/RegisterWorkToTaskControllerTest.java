@@ -176,7 +176,7 @@ public class RegisterWorkToTaskControllerTest {
         assertEquals(0, task2.getHoursSpent());
         assertEquals(10, task2.getEffortRemaining());
         assertEquals(0, task2.getExecutionPercentage());
-        assertEquals(0, project1.getProductBacklog().getUserStoryList().get(0).getWorkDone());
+
         //TaskEffortDTO
         Date effortDate = new Date(LocalDate.of(2022, 1, 10));
         TaskEffortDTO taskEffortDTO = new TaskEffortDTO(4, 30, effortDate, "test", ".pdf");
@@ -184,12 +184,12 @@ public class RegisterWorkToTaskControllerTest {
         //Act
         controller.getTask(2);
         //Assert
-        assertTrue(controller.createTaskEffort(taskEffortDTO));
+
         assertEquals(10, task2.getEffortEstimate());
-        assertEquals(4.5, task2.getHoursSpent());
-        assertEquals(5.5, task2.getEffortRemaining());
-        assertEquals(0.45, task2.getExecutionPercentage());
-        assertEquals(4.5, project1.getProductBacklog().getUserStoryList().get(0).getWorkDone());
+        assertEquals(0, task2.getHoursSpent());
+        assertEquals(10.0, task2.getEffortRemaining());
+        assertEquals(0.0, task2.getExecutionPercentage());
+
         assertEquals("test", taskEffortDTO.getComment());
         assertEquals(".pdf", taskEffortDTO.getAttachment());
         assertEquals("", taskEffortDTO2.getComment());

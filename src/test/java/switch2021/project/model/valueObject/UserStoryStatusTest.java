@@ -84,15 +84,15 @@ class UserStoryStatusTest {
         assertNotEquals(status, test);
     }
 
-    @Test
-    @DisplayName("Test override conditions for coverage purposes")
-    public void overrideTestFalseDescription() {
-        // Arrange
-        UserStoryStatus status = new UserStoryStatus("Test", true);
-        UserStoryStatus testFalse = new UserStoryStatus("TestFalse", true);
-        // Act
-        assertNotEquals(status, testFalse);
-    }
+//    @Test //TODO CDC - teste comentado vai deixar de ter status
+//    @DisplayName("Test override conditions for coverage purposes")
+//    public void overrideTestFalseDescription() {
+//        // Arrange
+//        UserStoryStatus status = new UserStoryStatus("Test", true);
+//        UserStoryStatus testFalse = new UserStoryStatus("TestFalse", true);
+//        // Act
+//        assertNotEquals(status, testFalse);
+//    }
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")

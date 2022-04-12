@@ -1,7 +1,7 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.*;
-import switch2021.project.repositories.ProductBacklog;
+import switch2021.project.model.UserStory.ProductBacklog;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.UserStoryStatus;
@@ -42,13 +42,14 @@ public class RefineUserStoryController {
         this.userStoryParent = this.productBacklog.getUserStoryById(idUserStory);
         return userStoryParent;
     }
+//TODO CDC ver como podemos fazer update status us refined
 
-    public boolean updateRefinedUserStoryStatus(UserStory userStoryParent){
-        return userStoryParent.setUserStoryStatusBoolean(company.getUserStoryStatusStore().getUserStoryStatusByDescription("Refined"));
-    }
+//    public boolean updateRefinedUserStoryStatus(UserStory userStoryParent){
+//        return userStoryParent.setUserStoryStatusBoolean(company.getUserStoryStatusStore().getUserStoryStatusByDescription("Refined"));
+//    }
 
-    public boolean createUserStory(String description, int priority, UserStoryStatus userStoryStatus){
-        UserStory userStoryCreated = this.productBacklog.refineUserStory(userStoryParent, userStoryStatus, priority, description);
+    public boolean createUserStory(String description, int priority){
+        UserStory userStoryCreated = this.productBacklog.refineUserStory(userStoryParent, priority, description);
         this.productBacklog.getUserStoryList().add(userStoryCreated);
         return true;
     }

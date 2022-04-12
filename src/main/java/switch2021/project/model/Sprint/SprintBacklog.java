@@ -19,15 +19,15 @@ public class SprintBacklog {
 
     /**Save new User Story in SprintBacklog **/
     public boolean saveUserStoryToSprintBacklog(UserStory userStory) {
-        boolean status = false;
+//        boolean status = false;
         if(validateUserStory(userStory)) {
-            UserStoryStatusStore statusStore = new UserStoryStatusStore();
-            statusStore.populateDefault();
-            status = userStory.setUserStoryStatusBoolean(statusStore.getUserStoryStatusByDescription("To do"));
-            userStoryList.add(userStory);
+//            UserStoryStatusStore statusStore = new UserStoryStatusStore();
+//            statusStore.populateDefault();
+//            status = userStory.setUserStoryStatusBoolean(statusStore.getUserStoryStatusByDescription("To do"));
+//            userStoryList.add(userStory);
         }
 
-        return status;
+        return userStoryList.add(userStory);
     }
 
     /**Validate User Story in Sprintbacklog **/

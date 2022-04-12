@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.model.Company;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.repositories.ProductBacklog;
+import switch2021.project.model.UserStory.ProductBacklog;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.UserStoryStatus;
 
@@ -39,7 +39,6 @@ public class ProductBacklogTest {
         //Act
         productBacklog.createAndSaveUserStory(title, priority, descriptionUS, 5);
         // Assert
-        assertEquals(status.getDescription().getText(), productBacklog.getUserStoryList().get(0).getUserStoryStatus().getDescription().getText());
         assertEquals(priority, productBacklog.getUserStoryList().get(0).getPriority().getPriorityUs());
         assertEquals(descriptionUS, productBacklog.getUserStoryList().get(0).getDescription().getText());
         assertEquals(title, productBacklog.getUserStoryList().get(0).getTitle().getTitleUs());
@@ -96,7 +95,6 @@ public class ProductBacklogTest {
         //Act
         productBacklog.createAndSaveUserStory(title, priority, description, 5);
         // Assert
-        assertEquals(status, productBacklog.getUserStoryList().get(0).getUserStoryStatus());
         assertEquals(priority, productBacklog.getUserStoryList().get(0).getPriority().getPriorityUs());
         assertEquals(description, productBacklog.getUserStoryList().get(0).getDescription().getText());
         assertEquals(title, productBacklog.getUserStoryList().get(0).getTitle().getTitleUs());
@@ -205,13 +203,12 @@ public class ProductBacklogTest {
         UserStoryFactory userStoryFactory = new UserStoryFactory();
         ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
         productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
-        UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
+
 
         // Act
-        UserStory userStory = new UserStory(productBacklog.getUserStoryList().get(0), userStoryStatus, 5, "234test234");
+        UserStory userStory = new UserStory(productBacklog.getUserStoryList().get(0), 5, "234test234");
 
         // Assert
-        assertEquals(userStory.getUserStoryStatus(), company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do"));
         assertEquals(userStory.getParentUserStory(), productBacklog.getUserStoryList().get(0));
         assertEquals(5, userStory.getPriority().getPriorityUs());
         assertEquals("234test234", userStory.getDescription().getText());
@@ -229,9 +226,8 @@ public class ProductBacklogTest {
             UserStoryFactory userStoryFactory = new UserStoryFactory();
             ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
             productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
-            UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
             // Act
-            new UserStory(productBacklog.getUserStoryList().get(0), userStoryStatus, 5, "");
+            new UserStory(productBacklog.getUserStoryList().get(0),  5, "");
         });
     }
 
@@ -243,12 +239,10 @@ public class ProductBacklogTest {
         UserStoryFactory userStoryFactory = new UserStoryFactory();
         ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
         productBacklog.createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
-        UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
 
         // Act
-        UserStory userStory = new UserStory(productBacklog.getUserStoryList().get(0), userStoryStatus, 5, "2");
+        UserStory userStory = new UserStory(productBacklog.getUserStoryList().get(0),  5, "2");
         // Assert
-        assertEquals(userStory.getUserStoryStatus(), company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do"));
         assertEquals(userStory.getParentUserStory(), productBacklog.getUserStoryList().get(0));
         assertEquals(5, userStory.getPriority().getPriorityUs());
         assertEquals("2", userStory.getDescription().getText());
@@ -261,8 +255,7 @@ public class ProductBacklogTest {
         company.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
-            company.getProductBacklog().refineUserStory(company.getProductBacklog().getUserStoryList().get(0), userStoryStatus, 4, "123testtest");
+            company.getProductBacklog().refineUserStory(company.getProductBacklog().getUserStoryList().get(0), 4, "123testtest");
         });
     }
 
@@ -273,8 +266,7 @@ public class ProductBacklogTest {
         company.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
-            new UserStory(company.getProductBacklog().getUserStoryList().get(0), userStoryStatus, -1, "456testtest");
+            new UserStory(company.getProductBacklog().getUserStoryList().get(0), -1, "456testtest");
         });
     }
 
@@ -285,8 +277,8 @@ public class ProductBacklogTest {
         company.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            UserStoryStatus userStoryStatus = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
-            new UserStory(company.getProductBacklog().getUserStoryList().get(0), userStoryStatus, 6, "456testtest");
+
+            new UserStory(company.getProductBacklog().getUserStoryList().get(0), 6, "456testtest");
         });
     }
 
@@ -310,25 +302,27 @@ public class ProductBacklogTest {
 
     }
 
-    @Test
-    @DisplayName("getActiveUserStoryList_fail_not active")
-    public void getActiveUserStoryListFailCompleted() {
-        // Arrange
-        UserStoryFactory userStoryFactory = new UserStoryFactory();
-        ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
-        int priority = 1;
-        String description = "Create user story";
+    //TODO CDC alterar teste uma vez que deixamos de ter status completed - alterar para data introduzida
 
-        productBacklog.createAndSaveUserStory(
-                "As a PO, i want to test this string", priority, description, 5);
-        productBacklog.getUserStoryList().get(0).setUserStoryStatus(new UserStoryStatus("Completed", true));
-
-        // Act
-        List<UserStory> userStoryList = productBacklog.getActiveUserStoryList();
-        // Assert
-        assertEquals(0, userStoryList.size());
-
-    }
+//    @Test
+//    @DisplayName("getActiveUserStoryList_fail_not active")
+//    public void getActiveUserStoryListFailCompleted() {
+//        // Arrange
+//        UserStoryFactory userStoryFactory = new UserStoryFactory();
+//        ProductBacklog productBacklog = new ProductBacklog(userStoryFactory);
+//        int priority = 1;
+//        String description = "Create user story";
+//
+//        productBacklog.createAndSaveUserStory(
+//                "As a PO, i want to test this string", priority, description, 5);
+//        productBacklog.getUserStoryList().get(0).setUserStoryStatus(new UserStoryStatus("Completed", true));
+//
+//        // Act
+//        List<UserStory> userStoryList = productBacklog.getActiveUserStoryList();
+//        // Assert
+//        assertEquals(0, userStoryList.size());
+//
+//    }
 
     @Test
     @DisplayName("set user story list")
