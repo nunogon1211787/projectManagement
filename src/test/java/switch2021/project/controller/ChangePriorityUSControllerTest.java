@@ -263,12 +263,9 @@ public class ChangePriorityUSControllerTest {
     void getUserStoryListFromProjectOnlyActive() {
         project.addResource(input);
 
-        UserStoryStatus usStatus2 = new UserStoryStatus("Completed", true);
-        userStory3.setUserStoryStatus(usStatus2);
-
         List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getActiveUserStoryList();
 
-        assertEquals(2, usList.size());
+        assertEquals(0, usList.size());
     }
 
     //        TEST NOT WORKING SINCE US ID GENERATOR IS NOT WORKING PROPERLY

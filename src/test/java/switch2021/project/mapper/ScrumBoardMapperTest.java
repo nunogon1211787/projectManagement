@@ -33,8 +33,6 @@ public class ScrumBoardMapperTest {
         assertEquals(5, dto.getUserStoryPriority());
         assertEquals(dto.getUserStoryTimeEstimate(),userStory.getTimeEstimate().getUsHours());
         assertEquals(5, dto.getUserStoryPriority());
-        assertEquals(dto.getUserStoryStatus(),userStory.getUserStoryStatus().getDescription().getText());
-        assertEquals("To do", dto.getUserStoryStatus());
         assertEquals(dto.getUserStoryId(),userStory.getIdUserStory());
         assertEquals(0, dto.getUserStoryId());
     }
@@ -66,7 +64,6 @@ public class ScrumBoardMapperTest {
         assertEquals(3, dtoList.size());
         assertEquals(dto.getUserStoryTitle(), dtoList.get(0).getUserStoryTitle());
         assertEquals(dto2.getUserStoryDescription(), dtoList.get(1).getUserStoryDescription());
-        assertEquals(dto3.getUserStoryStatus(), dtoList.get(2).getUserStoryStatus());
         assertEquals(dto3.getUserStoryId(), dtoList.get(2).getUserStoryId());
 
     }

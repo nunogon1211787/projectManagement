@@ -39,13 +39,14 @@ public class UpdateStatusUsController {
         }
         return Collections.unmodifiableList(usList);
     }
+    //TODO CDC ver metodo changestatus tendo em conta que US nao tem status
 
-    public boolean changeStatusOfUs(String code, int usId, String userST) {
-        UserStoryStatus userStoryStatus = this.company.getUserStoryStatusStore().getUserStoryStatusByDescription(userST);
-        ProjectStore projectStore = company.getProjectStore();
-        Project project = projectStore.getProjectByCode(code);
-        Sprint sprint = project.getSprintList().getCurrentSprint();
-        UserStory userStory = sprint.getUsById(usId);
-        return userStory.setUserStoryStatusBoolean(userStoryStatus);
-    }
+//    public boolean changeStatusOfUs(String code, int usId, String userST) {
+//        UserStoryStatus userStoryStatus = this.company.getUserStoryStatusStore().getUserStoryStatusByDescription(userST);
+//        ProjectStore projectStore = company.getProjectStore();
+//        Project project = projectStore.getProjectByCode(code);
+//        Sprint sprint = project.getSprintList().getCurrentSprint();
+//        UserStory userStory = sprint.getUsById(usId);
+//        return userStory.setUserStoryStatusBoolean(userStoryStatus);
+//    }
 }

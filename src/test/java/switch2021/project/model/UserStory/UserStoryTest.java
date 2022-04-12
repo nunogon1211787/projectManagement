@@ -2,7 +2,6 @@ package switch2021.project.model.UserStory;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.Task.Task;
 import switch2021.project.model.valueObject.*;
 
 import java.time.LocalDate;
@@ -72,32 +71,6 @@ class UserStoryTest {
         assertEquals(userStory.getParentUserStory(), userStory_parent);
         assertNotEquals(userStory.getParentUserStory(), userStory_parent2);
     }
-
-    @Test
-    void setUserStoryStatusBooleanTest() {
-        //Arrange
-        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        //Act
-        UserStoryStatus userStoryStatus = mock(UserStoryStatus.class);
-        userStory.setUserStoryStatusBoolean(userStoryStatus);
-        //Assert
-        assertEquals(userStoryStatus, userStory.getUserStoryStatus());
-    }
-
-    @Test
-    void setUpdateUserStoryWorkDoneTest() {
-        //Arrange
-        UserStory userStory = new UserStory("As a PO, i want to test this string", 1, "US001 - Test", 40);
-        Task task = mock(Task.class);
-        when(task.getHoursSpent()).thenReturn(12.0);
-
-        //Act
-        userStory.updateWorkDone(task);
-
-        //Assert
-        assertEquals(12, userStory.getWorkDone());
-    }
-
 
     @Test
     void isValidUserStoryDescription() {
@@ -284,9 +257,8 @@ class UserStoryTest {
         UserStory userStory1 = new UserStory("As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 0);
         UserStory userStory2 = new UserStory("As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 0);
         UserStory userStory3 = new UserStory("As coise, I want to tal12132", 4, "Fazer totil de cenas bueda fixes", 10);
-        UserStoryStatus userStoryStatus = new UserStoryStatus("Não sei", true);
-        UserStory userStory4 = new UserStory(userStory3, userStoryStatus, 4, "Fazer totil de cenas bueda fixes");
-        UserStory userStory5 = new UserStory(userStory3, userStoryStatus, 4, "Fazer totil de cenas bueda fixes");
+        UserStory userStory4 = new UserStory(userStory3, 4, "Fazer totil de cenas bueda fixes");
+        UserStory userStory5 = new UserStory(userStory3,  4, "Fazer totil de cenas bueda fixes");
         boolean result = userStory1.equals(userStory2);
 
         //Assert
@@ -296,7 +268,6 @@ class UserStoryTest {
         assertEquals(userStory1.getPriority(), userStory2.getPriority());
         assertEquals(userStory1.getTimeEstimate(), userStory2.getTimeEstimate());
         assertEquals(userStory1.getIdUserStory(), userStory2.getIdUserStory());
-        assertEquals(userStory1.getWorkDone(), userStory2.getWorkDone());
         assertEquals(userStory4.getParentUserStory(), userStory5.getParentUserStory());
         assertEquals(userStory1.getTasks(), userStory2.getTasks());
         assertNotEquals(userStory1, userStory3);

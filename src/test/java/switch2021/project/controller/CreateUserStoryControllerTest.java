@@ -48,12 +48,11 @@ public class CreateUserStoryControllerTest {
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = -1;
         String description = "teste";
-        UserStoryStatus status = new UserStoryStatus("To do", true);
 
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () ->{
-            UserStoryDto userStoryDto = new UserStoryDto("As a PO, i want to test this string", status, priority, description);
+            UserStoryDto userStoryDto = new UserStoryDto("As a PO, i want to test this string", priority, description,10);
             createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
 
     });
@@ -72,12 +71,11 @@ public class CreateUserStoryControllerTest {
         String description = "";
         String description2 = "   ";
         String description3 = null;
-        UserStoryStatus status = new UserStoryStatus("To do", true);
 
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", status, priority, description)));
-        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", status, priority, description2)));
-        Exception exception3 = assertThrows(NullPointerException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", status, priority, description3)));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", priority, description,10)));
+        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste", priority, description2,10)));
+        Exception exception3 = assertThrows(NullPointerException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("Teste",  priority, description3,8)));
         //Assert
         assertTrue(exception.getMessage().contains("Description field requires at least " + 1 + " characters"));
         assertTrue(exception2.getMessage().contains("Description field requires at least " + 1 + " characters"));
@@ -96,10 +94,9 @@ public class CreateUserStoryControllerTest {
         String title2 = "d";
         String title3 = "As a PO, i to test this string";
         String title4 = "";
-        UserStoryStatus status = new UserStoryStatus("To do", true);
-        UserStoryDto userStoryDto2 = new UserStoryDto(title2, status, priority, description);
-        UserStoryDto userStoryDto3 = new UserStoryDto(title3, status, priority, description);
-        UserStoryDto userStoryDto4 = new UserStoryDto(title4, status, priority, description);
+        UserStoryDto userStoryDto2 = new UserStoryDto(title2, priority, description,7);
+        UserStoryDto userStoryDto3 = new UserStoryDto(title3,  priority, description,9);
+        UserStoryDto userStoryDto4 = new UserStoryDto(title4,  priority, description,54);
 
         // Act
         Exception exception2 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto2));
@@ -124,8 +121,8 @@ public class CreateUserStoryControllerTest {
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = 6;
         String description = "teste";
-        UserStoryStatus status = new UserStoryStatus("To do", true);
-        UserStoryDto userStoryDto = new UserStoryDto("As a PO, i want to test this string", status, priority, description);
+
+        UserStoryDto userStoryDto = new UserStoryDto("As a PO, i want to test this string", priority, description,40);
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", userStoryDto));
         assertEquals("Check priority, cannot be < 0 or superior to 5", exception.getMessage());
@@ -139,8 +136,7 @@ public class CreateUserStoryControllerTest {
         int priority = 1;
         String description = "teste";
         String title = "As a PO, i want to test this string";
-        UserStoryStatus status = new UserStoryStatus("To do", true);
-        UserStoryDto userStoryDto = new UserStoryDto(title, status, priority, description);
+        UserStoryDto userStoryDto = new UserStoryDto(title, priority, description,4);
 
         // Act
         createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
@@ -162,8 +158,8 @@ public class CreateUserStoryControllerTest {
         int priority = 1;
         String description = "t";
         String title = "As a PO, i want to test this string";
-        UserStoryStatus status = new UserStoryStatus("To do", true);
-        UserStoryDto userStoryDto = new UserStoryDto(title, status, priority, description);
+
+        UserStoryDto userStoryDto = new UserStoryDto(title, priority, description,7);
 
         // Act
         createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
@@ -179,18 +175,16 @@ public class CreateUserStoryControllerTest {
     @Test
     public void createUserStorySuccessFullValidateInfo() {
         company.getProjectStore().saveNewProject(project);
-        UserStoryStatus status = new UserStoryStatus("To do", true);
         int priority = 1;
         String description = "teste";
-        UserStoryDto userStoryDto = new UserStoryDto("As a PO, i want to test this string", status, priority, description);
+        UserStoryDto userStoryDto = new UserStoryDto("As a PO, i want to test this string", priority, description,6);
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
 
         ProductBacklog project_2022_1 = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog();
         assertEquals(1, project_2022_1.getUserStoryList().size());
         assertEquals(userStoryDto.getTitle(), project_2022_1.getUserStoryList().get(0).getTitle().getTitleUs());
-        assertEquals(userStoryDto.getPriority(), project_2022_1.getUserStoryList().get(0).getPriority().getPriorityUs());
-        assertEquals(userStoryDto.getUserStoryStatus(), project_2022_1.getUserStoryList().get(0).getUserStoryStatus());
+        assertEquals(userStoryDto.getPriority(), project_2022_1.getUserStoryList().get(0).getPriority().getPriorityUs());;
         assertEquals(userStoryDto.getDescription().getText(), project_2022_1.getUserStoryList().get(0).getDescription().getText());
     }
 

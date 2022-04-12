@@ -51,8 +51,8 @@ public class ProductBacklog {
         }
     }
 
-    public UserStory refineUserStory(UserStory userStoryParent, UserStoryStatus userStoryStatus, int priority, String description) {
-        UserStory userStory = new UserStory(userStoryParent, userStoryStatus, priority, description);
+    public UserStory refineUserStory(UserStory userStoryParent, int priority, String description) {
+        UserStory userStory = new UserStory(userStoryParent, priority, description);
         validateUserStory(userStory);
 
         return userStory;
@@ -102,8 +102,7 @@ public class ProductBacklog {
 
 
         for (UserStory userStory : userStoryList) {
-            if (!userStory.getUserStoryStatus().getDescription().getText().equals("Cancelled") &&
-                    !userStory.getUserStoryStatus().getDescription().getText().equals("Done") &&
+            if (userStory.getUsCancelled() != null && userStory.getUsEndDate()!= null &&
                     userStory.getPriority().getPriorityUs() != 0) {
                 returnList.add(userStory);
             } else if (userStory.getPriority().getPriorityUs() == 0) {
@@ -121,7 +120,7 @@ public class ProductBacklog {
     public List<UserStory> getActiveUserStoryList() {
         List<UserStory> activeUSList = new ArrayList<>();
         for (UserStory us : userStoryList) {
-            if (!us.getUserStoryStatus().getDescription().getText().equals("Completed")) {
+            if (us.getUsCancelled() != null && us.getUsEndDate()!= null) {
                 activeUSList.add(us);
             }
         }
