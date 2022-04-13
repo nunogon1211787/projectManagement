@@ -1,4 +1,4 @@
-package switch2021.project.model.valueObject;
+package switch2021.project.model.UserStory;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,11 +30,9 @@ public class UsTitleTest {
         //Arrange
         String usTitle = "PO, i want to test this string";
         //Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new UsTitle(usTitle);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new UsTitle(usTitle));
         //Assert
-        assertTrue(exception.getMessage().equals("Title need to begin with - as"));
+        assertEquals("Title need to begin with - as", exception.getMessage());
     }
 
     @Test
@@ -43,11 +41,9 @@ public class UsTitleTest {
         //Arrange
         String usTitle = "As a PO, test this string";
         //Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new UsTitle(usTitle);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new UsTitle(usTitle));
         //Assert
-        assertTrue(exception.getMessage().equals("Title don't contain the word want"));
+        assertEquals("Title don't contain the word want", exception.getMessage());
     }
 
     @Test
@@ -56,11 +52,9 @@ public class UsTitleTest {
         //Arrange
         String usTitle = "";
         //Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new UsTitle(usTitle);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new UsTitle(usTitle));
         //Assert
-        assertTrue(exception.getMessage().equals("Title cannot be blank"));
+        assertEquals("Title cannot be blank", exception.getMessage());
     }
 
 }

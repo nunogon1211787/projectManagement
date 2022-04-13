@@ -1,12 +1,10 @@
 package switch2021.project.model.UserStory;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import switch2021.project.dto.UserStoryDto;
 import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.mapper.UserStoryMapper;
-import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.valueObject.UserStoryStatus;
+import switch2021.project.model.valueObject.ProjectCode;
 
 import java.util.*;
 
@@ -90,7 +88,7 @@ public class ProductBacklog {
     }
 
     /**
-     * Get Methods.
+     * Get US sorted by Priority
      **/
     public List<UserStory> getUsSortedByPriority() {
 
@@ -117,20 +115,30 @@ public class ProductBacklog {
         return Collections.unmodifiableList(userStoryList);
     }
 
-    public List<UserStory> getActiveUserStoryList() {
+    /**
+     * Finds all user story all activeUserStoryList.
+     * @return userStoryList if found, else {@code null}
+     */
+
+        public List<UserStory> findActiveUserStoryList() {
         List<UserStory> activeUSList = new ArrayList<>();
         for (UserStory us : userStoryList) {
-            if (us.getUsCancelled() != null && us.getUsEndDate()!= null) {
+            if (us.getUsEndDate()!= null && us.getUsCancelled() != null ) {
                 activeUSList.add(us);
             }
         }
         return activeUSList;
     }
 
-    public UserStory getUserStoryById(int id) {
+    /**
+     * Finds a user story using given ID.
+     * @param  idUserStory id
+     * @return userStory if found, else {@code null}
+     */
+    public UserStory findUserStoryById(int idUserStory) {
         UserStory userStory = null;
         for (UserStory us : userStoryList) {
-            if (us.getIdUserStory() == id) {
+            if (us.getIdUserStory() == idUserStory) {
                 userStory = us;
                 break;
             }
@@ -138,16 +146,42 @@ public class ProductBacklog {
         return userStory;
     }
 
+    /**
+     * Finds a user story using given projectID.
+     * @param projectID id
+     * @return allUserStoriesInAProject if found, else {@code null}
+     */
+    public List<UserStory> findAllUserStoryByProjectID(ProjectCode projectID) {
+        List<UserStory> allUserStoriesInAProject = new ArrayList<>();
+        for (UserStory us : userStoryList) {
+            if (us.hasProjectID(projectID)) {
+                allUserStoriesInAProject.add(us);
+            }
+        }
+        return allUserStoriesInAProject;
+    }
 
+    /**
+     * Delete a user story using given ID.
+     * @param idUserStory id
+     * @return UserStorybyID if found, else {@code null}
+     */
+
+    public void removeUserStoryById (int idUserStory){
+        this.userStoryList.remove(idUserStory);
+    }
+
+    //TODO CDC ver questão de gerar ID
     /**
      * ID_UserStory Generator
      **/
+    //if the object isn´t saved on the list, the id will be the same for all
+    //objects. This issue will be solved when calling the save method.
     public int idUserStoryGenerator() {
         int id = 1;
         if (!this.userStoryList.isEmpty()) {
             id = this.userStoryList.get(userStoryList.size() - 1).getIdUserStory() + 1;
         }
         return id;
-    } //if the object isn´t saved on the list, the id will be the same for all
-    //objects. This issue will be solved when calling the save method.
+    }
 }
