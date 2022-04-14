@@ -82,7 +82,7 @@ class UserStoryTest {
             when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
 
             UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
@@ -96,7 +96,7 @@ class UserStoryTest {
             when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
 
             UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "    ", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
@@ -111,7 +111,7 @@ class UserStoryTest {
             when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
 
             UserStory userStory = new UserStory("", 2, "Fazer tal", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
@@ -126,7 +126,7 @@ class UserStoryTest {
 
 
             UserStory userStory = new UserStory("C", 2, "Fazer tal", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
@@ -140,7 +140,7 @@ class UserStoryTest {
             when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
 
             UserStory userStory = new UserStory("   ", 2, "Fazer tal", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
@@ -155,7 +155,7 @@ class UserStoryTest {
 
 
             UserStory userStory = new UserStory("CC", 2, "Fazer tal", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 

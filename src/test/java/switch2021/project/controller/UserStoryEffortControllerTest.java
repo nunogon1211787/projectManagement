@@ -85,13 +85,13 @@ class UserStoryEffortControllerTest {
         project1.getProjectTeam().saveResource(person1);
         project1.getProjectTeam().saveResource(person2);
         company.getProjectStore().saveNewProject(project1);
-        Sprint sprint1 = new Sprint("Hello1", LocalDate.now());
-        SprintStore sprintList = project1.getSprintList(); //objeto
+        Sprint sprint1 = new Sprint("Hello1");
+        SprintStore sprintList = project1.getSprintList();
         sprintList.saveSprint(sprint1);
 
         //Act
         controller.getProjectByCode("Project_2022_1");
-        List<Sprint> sprint = sprintList.getSprints();
+        List<Sprint> sprint = sprintList.findSprints();
         List<Sprint> sprint2 = controller.getSprintsList();
 
         //Assert
@@ -110,8 +110,8 @@ class UserStoryEffortControllerTest {
         Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().saveNewProject(project1);
-        Sprint sprint1 = new Sprint("Hello1", LocalDate.now());
-        SprintStore sprintList = project1.getSprintList(); //objeto
+        Sprint sprint1 = new Sprint("Hello1");
+        SprintStore sprintList = project1.getSprintList();
         sprintList.saveSprint(sprint1);
         project1.getSprintList().saveSprint(sprint1);
         controller.getProjectByCode(project1.getProjectCode().getCode());

@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
 
 class SprintBacklogTest {
 
-    SprintBacklog sprintBacklog = new SprintBacklog();
+    ScrumBoard scrumBoard = new ScrumBoard();
 
     @Test
     @DisplayName("save user story to sprint backlog fail")
@@ -22,9 +22,9 @@ class SprintBacklogTest {
             int priority = 5;
             String description = "Validate";
             UserStory userstory = new UserStory("US001", priority, description, 5);
-            sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+            scrumBoard.saveUserStoryToSprintBacklog(userstory);
             // Act
-            sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+            scrumBoard.saveUserStoryToSprintBacklog(userstory);
         });
     }
 
@@ -37,9 +37,9 @@ class SprintBacklogTest {
             int priority = 5;
             String description = "Validate";
             UserStory userstory = new UserStory("US001", priority, description, 5);
-            sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+            scrumBoard.saveUserStoryToSprintBacklog(userstory);
             // Act
-            sprintBacklog.saveUserStoryToSprintBacklog(null);
+            scrumBoard.saveUserStoryToSprintBacklog(null);
         });
     }
 
@@ -50,22 +50,22 @@ class SprintBacklogTest {
         int priority = 5;
         String description = "Validate";
         UserStory userstory = new UserStory("As a PO, i want to test this string", priority, description, 5);
-        sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+        scrumBoard.saveUserStoryToSprintBacklog(userstory);
         // Act
-        assertEquals(sprintBacklog.getUserStory(userstory.getIdUserStory()), userstory);
+        assertEquals(scrumBoard.getUserStory(userstory.getIdUserStory()), userstory);
     }
 
     @Test
     public void getUserStoryMock() {
         //Arrange
-        SprintBacklog sprintBacklog = new SprintBacklog();
+        ScrumBoard scrumBoard = new ScrumBoard();
 
         UserStory newUserStory = mock(UserStory.class);
         when(newUserStory.hasCode(1)).thenReturn(true);
 
-        sprintBacklog.saveUserStoryToSprintBacklog(newUserStory);
+        scrumBoard.saveUserStoryToSprintBacklog(newUserStory);
         //Act
-        UserStory test = sprintBacklog.getUserStory(1);
+        UserStory test = scrumBoard.getUserStory(1);
         //Assert
         assertEquals(newUserStory, test);
     }
@@ -77,10 +77,10 @@ class SprintBacklogTest {
         int priority = 5;
         String description = "Validate";
         UserStory userstory = new UserStory("As a PO, i want to test this string", priority, description, 5);
-        sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+        scrumBoard.saveUserStoryToSprintBacklog(userstory);
         UserStory userstory2 = new UserStory("As a PO, i want to test this string", priority, description, 5);
         // Act
-        assertNotSame(sprintBacklog.getUserStory(userstory.getIdUserStory()), userstory2);
+        assertNotSame(scrumBoard.getUserStory(userstory.getIdUserStory()), userstory2);
     }
 
     @Test
@@ -90,53 +90,53 @@ class SprintBacklogTest {
         int priority = 5;
         String description = "Validate";
         UserStory userstory = new UserStory("As a PO, i want to test this string", priority, description, 5);
-        sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+        scrumBoard.saveUserStoryToSprintBacklog(userstory);
         // Act
-        assertNull(sprintBacklog.getUserStory(55));
+        assertNull(scrumBoard.getUserStory(55));
     }
 
     @Test
     @DisplayName("Test override conditions")
     public void overrideTestTrue() {
         // Arrange
-        SprintBacklog sprintBacklog = new SprintBacklog();
-        SprintBacklog sprintBacklog1 = new SprintBacklog();
+        ScrumBoard scrumBoard = new ScrumBoard();
+        ScrumBoard scrumBoard1 = new ScrumBoard();
         // Act
-        assertEquals(sprintBacklog, sprintBacklog1);
+        assertEquals(scrumBoard, scrumBoard1);
     }
 
     @Test
     @DisplayName("Test override conditions")
     public void overrideTestTrue_1() {
         // Arrange
-        SprintBacklog sprintBacklog = new SprintBacklog();
-        SprintBacklog sprintBacklog1 = new SprintBacklog();
+        ScrumBoard scrumBoard = new ScrumBoard();
+        ScrumBoard scrumBoard1 = new ScrumBoard();
         // Act
-        assertTrue(sprintBacklog.equals(sprintBacklog1));
+        assertTrue(scrumBoard.equals(scrumBoard1));
     }
 
     @Test
     @DisplayName("Test override conditions")
     public void overrideTestTrue_2() {
         // Arrange
-        SprintBacklog sprintBacklog = new SprintBacklog();
-        SprintBacklog sprintBacklog1 = new SprintBacklog();
+        ScrumBoard scrumBoard = new ScrumBoard();
+        ScrumBoard scrumBoard1 = new ScrumBoard();
         // Act
         UserStory userStory = new UserStory("As Product Owner i want to create something", 1, "Userstory", 5);
-        sprintBacklog.saveUserStoryToSprintBacklog(userStory);
+        scrumBoard.saveUserStoryToSprintBacklog(userStory);
         //Assert
-        assertFalse(sprintBacklog.equals(sprintBacklog1));
+        assertFalse(scrumBoard.equals(scrumBoard1));
     }
 
     @Test
     @DisplayName("Test to check HashCode Method.")
     void hashCodeTest_Success(){
         //Arrange
-        SprintBacklog sprintBacklog = new SprintBacklog();
-        SprintBacklog sprintBacklog1 = new SprintBacklog();
+        ScrumBoard scrumBoard = new ScrumBoard();
+        ScrumBoard scrumBoard1 = new ScrumBoard();
         //Act
-        Object x = sprintBacklog1.hashCode();
-        Object y = sprintBacklog.hashCode();
+        Object x = scrumBoard1.hashCode();
+        Object y = scrumBoard.hashCode();
         //Assert
         assertEquals(x,y);
     }
@@ -145,33 +145,33 @@ class SprintBacklogTest {
     @DisplayName("Test to check HashCode Method.")
     void hashCodeTest_Success_1(){
         //Arrange
-        SprintBacklog sprintBacklog = new SprintBacklog();
-        SprintBacklog sprintBacklog1 = new SprintBacklog();
+        ScrumBoard scrumBoard = new ScrumBoard();
+        ScrumBoard scrumBoard1 = new ScrumBoard();
         //Act and Assert
-        assertEquals(sprintBacklog.getUserStoryList(),sprintBacklog1.getUserStoryList());
+        assertEquals(scrumBoard.getUserStoryList(),scrumBoard1.getUserStoryList());
     }
 
     @Test
     @DisplayName("Test to check HashCode Method.")
     void hashCodeTest_Success_List(){
         //Arrange
-        SprintBacklog sprintBacklog = new SprintBacklog();
-        SprintBacklog sprintBacklog1 = new SprintBacklog();
+        ScrumBoard scrumBoard = new ScrumBoard();
+        ScrumBoard scrumBoard1 = new ScrumBoard();
         //Act and Assert
-        assertEquals(sprintBacklog.getUserStoryList().hashCode(),sprintBacklog1.getUserStoryList().hashCode());
+        assertEquals(scrumBoard.getUserStoryList().hashCode(),scrumBoard1.getUserStoryList().hashCode());
     }
 
     @Test
     @DisplayName("Test to check HashCode Method.")
     void hashCodeTest_Fail_List(){
         //Arrange
-        SprintBacklog sprintBacklog = new SprintBacklog();
-        SprintBacklog sprintBacklog1 = new SprintBacklog();
+        ScrumBoard scrumBoard = new ScrumBoard();
+        ScrumBoard scrumBoard1 = new ScrumBoard();
         UserStory userStory = new UserStory("As Product Owner i want to create something", 1, "Userstory", 5);
         //Act
-        sprintBacklog.saveUserStoryToSprintBacklog(userStory);
+        scrumBoard.saveUserStoryToSprintBacklog(userStory);
         //Assert
-        assertNotEquals(sprintBacklog.getUserStoryList().hashCode(),sprintBacklog1.getUserStoryList().hashCode());
+        assertNotEquals(scrumBoard.getUserStoryList().hashCode(),scrumBoard1.getUserStoryList().hashCode());
     }
 
 
@@ -179,29 +179,29 @@ class SprintBacklogTest {
     @DisplayName("Test to check HashCode Method.")
     void hashCodeTest_Success_2(){
         //Arrange
-        SprintBacklog sprintBacklog = new SprintBacklog();
-        SprintBacklog sprintBacklog1 = new SprintBacklog();
+        ScrumBoard scrumBoard = new ScrumBoard();
+        ScrumBoard scrumBoard1 = new ScrumBoard();
         //Act and Assert
-        assertEquals(sprintBacklog.getUserStoryList().size(),sprintBacklog1.getUserStoryList().size());
+        assertEquals(scrumBoard.getUserStoryList().size(),scrumBoard1.getUserStoryList().size());
     }
 
     @Test
     @DisplayName("Test override conditions")
     public void overrideTestFalse() {
         // Arrange
-        SprintBacklog sprintBacklog = new SprintBacklog();
+        ScrumBoard scrumBoard = new ScrumBoard();
         Typology test = new Typology("test");
         // Act
-        assertNotEquals(sprintBacklog, test);
+        assertNotEquals(scrumBoard, test);
     }
 
     @Test
     @DisplayName("Test override conditions")
     public void overrideTestNull() {
         // Arrange
-        SprintBacklog sprintBacklog = new SprintBacklog();
+        ScrumBoard scrumBoard = new ScrumBoard();
         // Act
-        assertNotEquals(null, sprintBacklog);
+        assertNotEquals(null, scrumBoard);
     }
 
     @Test
@@ -211,7 +211,7 @@ class SprintBacklogTest {
         int priority = 5;
         String description = "Validate";
         UserStory userstory = new UserStory("As a PO, i want to test this string", priority, description, 5);
-        boolean test = sprintBacklog.saveUserStoryToSprintBacklog(userstory);
+        boolean test = scrumBoard.saveUserStoryToSprintBacklog(userstory);
         // Act
         assertTrue(test);
     }

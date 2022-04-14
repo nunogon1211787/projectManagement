@@ -51,7 +51,7 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", 2);
         project.getSprintList().saveSprint(sprint);
 
         //Create tasks
@@ -89,7 +89,7 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", 2);
         project.getSprintList().saveSprint(sprint);
 
         //Get sprint task list
@@ -115,7 +115,7 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", 2);
         project.getSprintList().saveSprint(sprint);
 
         //Create project team
@@ -157,7 +157,7 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", 2);
         project.getSprintList().saveSprint(sprint);
 
         //Get project team names
@@ -184,7 +184,7 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", 2);
         project.getSprintList().saveSprint(sprint);
 
         //Create project team
@@ -225,7 +225,7 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", 2);
         project.getSprintList().saveSprint(sprint);
 
         //Create project team
@@ -273,7 +273,7 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1",2);
         project.getSprintList().saveSprint(sprint);
 
         //Create project team

@@ -8,9 +8,9 @@ import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.valueObject.BusinessSector;
 import switch2021.project.model.valueObject.Customer;
 import switch2021.project.model.Typology.Typology;
-
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class AddUserStoryToSprintBacklogControllerTest {
 
@@ -26,7 +26,8 @@ public class AddUserStoryToSprintBacklogControllerTest {
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
 
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.now(), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", 2);
+        sprint.setStartDate(LocalDate.now());
         project.getSprintList().saveSprint(sprint);
 
         company.getProjectStore().saveNewProject(project);
@@ -44,7 +45,8 @@ public class AddUserStoryToSprintBacklogControllerTest {
         addStory.addUserStoryToSprintBacklog(1);
 
         //Assert
-        assertEquals(company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryList().get(0), company.getProjectStore().getProjectByCode("Project_2022_1").getCurrentSprint().getListOfUsFromSprintBacklog().get(0));
+        assertEquals(company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryList().get(0),
+                company.getProjectStore().getProjectByCode("Project_2022_1").getCurrentSprint().getListOfUsFromScrumBoard().get(0));
     }
 }
 

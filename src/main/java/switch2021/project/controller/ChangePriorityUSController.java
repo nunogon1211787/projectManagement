@@ -47,7 +47,7 @@ public class ChangePriorityUSController {
     }
 
     public UserStory getUserStory(int id) {
-        this.userStory = this.productBacklog.getUserStoryById(id);
+        this.userStory = this.productBacklog.findUserStoryById(id);
         return this.userStory;
     }
 
@@ -63,12 +63,12 @@ public class ChangePriorityUSController {
 
     public List<UserStory> getUserStoryList() {
         this.productBacklog = this.project.getProductBacklog();
-        this.userStoryList = this.productBacklog.getActiveUserStoryList();
+        this.userStoryList = this.productBacklog.findActiveUserStoryList();
         return this.userStoryList;
     }
 
     public UserStory getUS(int idUS) {
-        this.userStory = this.productBacklog.getUserStoryById(idUS);
+        this.userStory = this.productBacklog.findUserStoryById(idUS);
         return this.userStory;
     }
 

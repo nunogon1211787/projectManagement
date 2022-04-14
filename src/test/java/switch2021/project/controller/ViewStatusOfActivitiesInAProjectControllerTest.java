@@ -32,7 +32,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
 
         company.getProjectStore().saveNewProject(project2);
 
-        Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
+        Sprint sprint1 = new Sprint("Effort View");
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());

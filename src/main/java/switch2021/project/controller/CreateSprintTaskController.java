@@ -44,7 +44,7 @@ public class CreateSprintTaskController {
 
         this.proj = this.company.getProjectStore().getProjectByCode(projCode);
 
-        this.taskStore = this.proj.getSprintList().getSprintById(sprintID).getTaskStore();
+        this.taskStore = this.proj.getSprintList().findSprintById(sprintID).getTaskStore();
 
         return this.taskStore.getTasksNames();
     }

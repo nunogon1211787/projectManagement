@@ -263,7 +263,7 @@ public class ChangePriorityUSControllerTest {
     void getUserStoryListFromProjectOnlyActive() {
         project.addResource(input);
 
-        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getActiveUserStoryList();
+        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().findActiveUserStoryList();
 
         assertEquals(0, usList.size());
     }

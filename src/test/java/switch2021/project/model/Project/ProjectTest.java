@@ -303,7 +303,7 @@ class ProjectTest {
     @Test
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTest() {
-        Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
+        Sprint sprint1 = new Sprint("Effort View");
         SprintStore sprintList1 = new SprintStore(new SprintFactory());
         sprintList1.saveSprint(sprint1);
         SprintStore projectSprintList = this.project2.getSprintList();
@@ -314,10 +314,10 @@ class ProjectTest {
     @Test
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTestFail() {
-        Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
+        Sprint sprint1 = new Sprint("Effort View");
         SprintStore sprintList1 = new SprintStore(new SprintFactory());
         sprintList1.saveSprint(sprint1);
-        Sprint sprint2 = new Sprint("Effort View 1", LocalDate.now());
+        Sprint sprint2 = new Sprint("Effort View 1");
         SprintStore projectSprintList = this.project2.getSprintList();
         projectSprintList.saveSprint(sprint1);
         projectSprintList.saveSprint(sprint2);
@@ -328,7 +328,7 @@ class ProjectTest {
     @DisplayName("Create task")
     void getActivitiesOfAProject() {
         //Arrange
-        Sprint sprint1 = new Sprint("Effort View", LocalDate.now());
+        Sprint sprint1 = new Sprint("Effort View");
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
@@ -345,7 +345,7 @@ class ProjectTest {
         project2.getSprintList().saveSprint(sprint1);
         taskList.add(taskTest);
         //Assert
-        assertEquals(taskList, project2.getSprintList().getSprintById(1).getListOfTasksOfASprint());
+        assertEquals(taskList, project2.getSprintList().findSprintById(1).getListOfTasksOfASprint());
     }
 
     @Test

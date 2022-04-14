@@ -119,11 +119,11 @@ public class CreateSprintControllerTest {
 
         controller.getCurrentProjectListByUserEmail("joana@beaver.com");
         controller.getProject(proj1.getProjectCode().getCode());
-        Sprint sprintC = controller.createSprint("Sprint44", LocalDate.of(2022, 3, 1));
+        Sprint sprintC = controller.createSprint("Sprint44");
         proj1.getSprintList().saveSprint(sprintC);
 
         //Assert
-        assertEquals(sprintC, proj1.getSprintList().getSprintById(sprintC.getIdSprint()));
+        assertEquals(sprintC, proj1.getSprintList().findSprintById(sprintC.getIdSprint()));
     }
 
     @Test
@@ -160,7 +160,7 @@ public class CreateSprintControllerTest {
         controller.getCurrentProjectListByUserEmail("joana@beaver.com");
         controller.getProject(proj1.getProjectCode().getCode());
 
-        Sprint sprintC = controller.createSprint("Sprint44", LocalDate.of(2022,3,1));
+        Sprint sprintC = controller.createSprint("Sprint44");
 
         //Assert
         assertTrue(controller.saveSprint(sprintC));

@@ -289,7 +289,7 @@ public class ProductBacklogTest {
         Company company = new Company();
         company.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
 
-        assertEquals(company.getProductBacklog().getUserStoryList().get(0), company.getProductBacklog().getUserStoryById(1));
+        assertEquals(company.getProductBacklog().getUserStoryList().get(0), company.getProductBacklog().findUserStoryById(1));
     }
 
     @Test
@@ -298,8 +298,8 @@ public class ProductBacklogTest {
         Company company = new Company();
         company.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 4, "123testtest", 5);
 
-        assertNull(company.getProductBacklog().getUserStoryById(2));
-        assertNotEquals(1, company.getProductBacklog().getUserStoryById(0));
+        assertNull(company.getProductBacklog().findUserStoryById(2));
+        assertNotEquals(1, company.getProductBacklog().findUserStoryById(0));
 
     }
 
