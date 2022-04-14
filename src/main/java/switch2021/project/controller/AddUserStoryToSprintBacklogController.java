@@ -51,6 +51,8 @@ public class AddUserStoryToSprintBacklogController {
     }
 
     public boolean addUserStoryToSprintBacklog(int userStoryId) {
+        UserStory userStory = this.productBacklog.findUserStoryById(userStoryId);
+        this.sprint.saveUsInSprintBacklog(userStory);
         UserStory userStory = this.productBacklog.getUserStoryById(userStoryId);
         this.sprint.saveUsInScrumBoard(userStory);
         return true;

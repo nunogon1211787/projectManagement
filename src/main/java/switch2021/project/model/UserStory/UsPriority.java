@@ -1,16 +1,19 @@
 package switch2021.project.model.UserStory;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import switch2021.project.utils.ValueObject;
 
 import java.util.Objects;
 
 @Getter
-public class UsPriority {
+@EqualsAndHashCode
+public class UsPriority implements ValueObject<UsPriority> {
 
     /**
      * Attributes
      **/
-    private int priorityUs;
+    private final int priorityUs;
     private static final int MINPRIORITY = 0;
     private static final int MAXPRIORITY = 5;
 
@@ -34,15 +37,7 @@ public class UsPriority {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UsPriority that = (UsPriority) o;
-        return priorityUs == that.priorityUs;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(priorityUs, MINPRIORITY, MAXPRIORITY);
+    public boolean sameValueAs(UsPriority other) {
+        return false;
     }
 }

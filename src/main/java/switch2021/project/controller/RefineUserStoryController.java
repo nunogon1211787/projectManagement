@@ -4,7 +4,6 @@ import switch2021.project.model.*;
 import switch2021.project.model.UserStory.ProductBacklog;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.valueObject.UserStoryStatus;
 
 public class RefineUserStoryController {
 
@@ -39,7 +38,7 @@ public class RefineUserStoryController {
     }
 
     public UserStory getUserStory(int idUserStory){
-        this.userStoryParent = this.productBacklog.getUserStoryById(idUserStory);
+        this.userStoryParent = this.productBacklog.findUserStoryById(idUserStory);
         return userStoryParent;
     }
 //TODO CDC ver como podemos fazer update status us refined
