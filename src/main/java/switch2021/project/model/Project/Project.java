@@ -146,7 +146,7 @@ public class Project {
      * Get the start date of the next Sprint and end date of the current Sprint
      */
     public Sprint getCurrentSprint() {
-      return this.sprintList.getCurrentSprint();
+      return this.sprintList.findCurrentSprint();
     }
 
 

@@ -41,7 +41,7 @@ public class AddUserStoryToSprintBacklogController {
     }
 
     public Sprint getSprint(int sprintId) {
-        this.sprint = this.sprintList.getSprintById(sprintId);
+        this.sprint = this.sprintList.findSprintById(sprintId);
         return this.sprint;
     }
 
@@ -52,7 +52,7 @@ public class AddUserStoryToSprintBacklogController {
 
     public boolean addUserStoryToSprintBacklog(int userStoryId) {
         UserStory userStory = this.productBacklog.getUserStoryById(userStoryId);
-        this.sprint.saveUsInSprintBacklog(userStory);
+        this.sprint.saveUsInScrumBoard(userStory);
         return true;
     }
 }

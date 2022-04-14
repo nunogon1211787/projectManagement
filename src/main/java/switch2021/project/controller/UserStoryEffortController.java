@@ -5,7 +5,6 @@ import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.repositories.ProjectStore;
-import switch2021.project.stores.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,13 +47,13 @@ public class UserStoryEffortController {
     public List<Sprint> getSprintsList() {
         this.sprintsList = new ArrayList<>();
         this.sprintList = this.proj.getSprintList();
-        this.sprintsList = this.sprintList.getSprints();
+        this.sprintsList = this.sprintList.findSprints();
         return Collections.unmodifiableList(sprintsList);
     }
 
     public Sprint getSprint(int id) {
         this.sprintList = this.proj.getSprintList();
-        this.sprint = this.sprintList.getSprintById(id);
+        this.sprint = this.sprintList.findSprintById(id);
         return this.sprint;
     }
 

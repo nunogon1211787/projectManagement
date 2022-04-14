@@ -48,14 +48,14 @@ public class RegisterWorkToTaskControllerTest {
         Resource resource1 = project1.getProjectTeam().createResource(user2, startDateMm, endDateMm, 100, 1);
         project1.getProjectTeam().saveResource(resource1);
         //Sprint
-        Sprint sprint1 = project1.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
+        Sprint sprint1 = project1.getSprintList().createSprint("Sprint 1", 2);
         project1.getSprintList().saveSprint(sprint1);
         int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
         project1.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "description", 5);
         int id_UserStory1 = project1.getProductBacklog().getUserStoryList().get(0).getIdUserStory(); //1
 
-        sprint1.saveUsInSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
+        sprint1.saveUsInScrumBoard(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
         String taskDescription = "must be at least 20 characters";
         TaskTypeEnum taskType = TaskTypeEnum.Design;
@@ -99,13 +99,13 @@ public class RegisterWorkToTaskControllerTest {
         Resource resource1 = project1.getProjectTeam().createResource(user2, startDateMm, endDateMm, 100, 1);
         project1.getProjectTeam().saveResource(resource1);
         //Sprint
-        Sprint sprint1 = project1.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
+        Sprint sprint1 = project1.getSprintList().createSprint("Sprint 1", 2);
         project1.getSprintList().saveSprint(sprint1);
         int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
         project1.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "description", 5);
         int id_UserStory1 = project1.getProductBacklog().getUserStoryList().get(0).getIdUserStory(); //1
-        sprint1.saveUsInSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
+        sprint1.saveUsInScrumBoard(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
         String taskDescription = "must be at least 20 characters";
         TaskTypeEnum taskType = TaskTypeEnum.Design;
@@ -152,14 +152,14 @@ public class RegisterWorkToTaskControllerTest {
         Resource resource1 = project1.getProjectTeam().createResource(user2, startDateMm, endDateMm, 100, 1);
         project1.getProjectTeam().saveResource(resource1);
         //Sprint
-        Sprint sprint1 = project1.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 1, 1), 2);
+        Sprint sprint1 = project1.getSprintList().createSprint("Sprint 1", 2);
         project1.getSprintList().saveSprint(sprint1);
         int id_Sprint1 = sprint1.getIdSprint(); //1
         //UserStory
         project1.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "description", 5);
 
         int id_UserStory1 = project1.getProductBacklog().getUserStoryList().get(0).getIdUserStory(); //1
-        sprint1.saveUsInSprintBacklog(project1.getProductBacklog().getUserStoryList().get(0));
+        sprint1.saveUsInScrumBoard(project1.getProductBacklog().getUserStoryList().get(0));
         //Tasks
         String taskDescription = "must be at least 20 characters";
         TaskTypeEnum taskType = TaskTypeEnum.Design;

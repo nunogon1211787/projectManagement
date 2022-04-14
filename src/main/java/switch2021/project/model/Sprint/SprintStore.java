@@ -3,6 +3,7 @@ package switch2021.project.model.Sprint;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.factoryInterface.SprintFactoryInterface;
+import switch2021.project.model.valueObject.ProjectCode;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.Task.Task;
 import java.time.LocalDate;
@@ -14,49 +15,27 @@ import java.util.Objects;
 @Setter
 public class SprintStore {
 
-    /**
-     * Class Attributes
-     **/
+    /** Class Attributes **/
     private final List<Sprint> sprints;
     private SprintFactoryInterface sprintFactory;
 
 
-    /**
-     * Constructors with data
-     **/
-    public SprintStore(SprintFactoryInterface sprintF) {
+    /** Constructors with data **/
+    public SprintStore(SprintFactoryInterface sprintFactoryInterface) {
         this.sprints = new ArrayList<>();
-        this.sprintFactory = sprintF;
+        this.sprintFactory = sprintFactoryInterface;
     }
 
-    /*public SprintList() {
-        this.sprints = new ArrayList<>();
-        //this.sprintFactory = sprintFact;
-    }*/
-
-
-    /**
-     * Sprint creator
-     **/
-    public Sprint createSprint(String name, LocalDate startDate, int sprintDuration) {
-        Sprint sprint = null;
-
-        if (validateStartDate(startDate)) {
-            sprint = new Sprint(name, startDate);
-            //sprint = this.sprintFactory.createSprint(name, startDate);
-            sprint.changeEndDate(sprintDuration);
-        }
+    /** Sprint creator **/
+    public Sprint createSprint(String name, int sprintDuration) {
+           Sprint sprint = new Sprint(name);
+           sprint.changeEndDate(sprintDuration);
         return sprint;
     }
 
-
-    /**
-     * Method to Save a Sprint
-     */
+    /** Method to Save a Sprint **/
     public boolean saveSprint(Sprint sprint) {
-
         boolean result = true;
-
         if (validateIfSprintAlreadyExists(sprint)) {
             result = false;
         } else {
@@ -65,7 +44,6 @@ public class SprintStore {
         }
         return result;
     }
-
 
     /**
      * ID_Sprint Generator
@@ -79,14 +57,13 @@ public class SprintStore {
     }
 
 
-    /**
-     * Get Methods
-     **/
-    public List<Sprint> getSprints() {
+    /** Find List of Sprints Method **/
+    public List<Sprint> findSprints() {
         return new ArrayList<>(this.sprints);
     }
 
-    public Sprint getSprintById(int id) {
+    /** Find Sprint By ID Method **/
+    public Sprint findSprintById(int id) {
         Sprint sprint = null;
         for (Sprint sprt : sprints) {
             if (sprt.hasSprintID(id)) {
@@ -97,7 +74,19 @@ public class SprintStore {
         return sprint;
     }
 
-    public Sprint getCurrentSprint() {
+    /** Find all sprints associated to a Project ID Method **/
+    public List<Sprint> findAllSprintsByProjectID(ProjectCode projectID) {
+        List<Sprint> allSprintsInAProject = new ArrayList<>();
+        for (Sprint x : sprints) {
+            if (x.hasProjectID(projectID)) {
+                allSprintsInAProject.add(x);
+            }
+        }
+        return allSprintsInAProject;
+    }
+
+    /** Find Current Sprint Method **/
+    public Sprint findCurrentSprint() {
         Sprint sprint = null;
         for (Sprint i : this.sprints) {
             if (i.isCurrentSprint()) {
@@ -116,7 +105,6 @@ public class SprintStore {
      */
     public List<Task> getListOfAllAActivitiesOfAProject() {
         List<Task> allActivitiesInAProject = new ArrayList<>();
-
         for (Sprint i : sprints) {
             allActivitiesInAProject.addAll(i.getListOfTasksOfASprint());
         }
@@ -124,21 +112,15 @@ public class SprintStore {
     }
 
 
-    /**
-     * Method to Validate a Sprint
-     **/
+    /** Method to Validate a Sprint **/
     public boolean validateIfSprintAlreadyExists(Sprint sprint) {
         return this.sprints.contains(sprint);
     }
 
 
-    /**
-     * Method to Validate if StartDate is later than the EndDate of the last Sprint
-     */
+    /** Method to Validate if StartDate is later than the EndDate of the last Sprint **/
     private boolean validateStartDate(LocalDate startDate) {
-
         boolean msg = true;
-
         for (int i = 0; i < sprints.size() - 1; i++) {
             if (!sprints.get(i).getEndDate().isBefore(startDate) || sprints.get(i).getEndDate().isEqual(startDate)) {
                 msg = false;
@@ -147,44 +129,18 @@ public class SprintStore {
         return msg;
     }
 
-
-    /**
-     * Method to Start the Sprint
-     */
+    /** Method to Start the Sprint **/
     public boolean startASprint (int sprintID, LocalDate startDate, ProjectTeam projectTeam, int sprintDuration) {
-
         boolean msg = false;
-
         if (validateStartDate(startDate) && projectTeam.validateProjectTeam(startDate, sprintDuration)) {
             msg = true;
-            Sprint sprint = getSprintById(sprintID);
+            Sprint sprint = findSprintById(sprintID);
             sprint.setStartDate(startDate);
         }
         return msg;
     }
 
-
-//    /**
-//     * Get the start and end date of the current Sprint
-//     */
-//    public Sprint getNextSprint() {
-//        Sprint nextSprint = null;
-//        for(Sprint i : this.sprintList) {
-//            if(i.getStartDate().isAfter(getCurrentSprint().getEndDate())) {
-//                nextSprint = i;
-//                break;
-//            }
-//        }
-//        if(nextSprint == null) {
-//            throw new NullPointerException("Do not exist the next sprint.");
-//        }
-//        return nextSprint;
-//    }
-
-
-    /**
-     * Override Methods
-     */
+    /** Override Methods **/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

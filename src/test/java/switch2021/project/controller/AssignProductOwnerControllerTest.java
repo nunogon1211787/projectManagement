@@ -55,10 +55,12 @@ public class AssignProductOwnerControllerTest {
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         proj1.setSprintDuration(new SprintDuration(14));
         company.getProjectStore().saveNewProject(proj1);
-        Sprint sprint1 = proj1.getSprintList().createSprint("Sprint1", LocalDate.now().minusWeeks(1), 14);
+        Sprint sprint1 = proj1.getSprintList().createSprint("Sprint1", 14);
+        sprint1.setStartDate(LocalDate.now());
         proj1.getSprintList().saveSprint(sprint1);
-        Sprint sprint2 = proj1.getSprintList().createSprint("Sprint2", LocalDate.now().plusWeeks(1), 14);
+        Sprint sprint2 = proj1.getSprintList().createSprint("Sprint2", 14);
         proj1.getSprintList().saveSprint(sprint2);
+        sprint2.setStartDate(LocalDate.of(2022, 4, 13));
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Create resource 1
         SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
@@ -107,9 +109,11 @@ public class AssignProductOwnerControllerTest {
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         proj1.setSprintDuration(new SprintDuration(14));
         company.getProjectStore().saveNewProject(proj1);
-        Sprint sprint1 = proj1.getSprintList().createSprint("Sprint1", LocalDate.now().minusWeeks(1), 14);
+        Sprint sprint1 = proj1.getSprintList().createSprint("Sprint1",14);
+        sprint1.setStartDate(LocalDate.now());
         proj1.getSprintList().saveSprint(sprint1);
-        Sprint sprint2 = proj1.getSprintList().createSprint("Sprint2", LocalDate.now().plusWeeks(1), 14);
+        Sprint sprint2 = proj1.getSprintList().createSprint("Sprint2", 14);
+        sprint2.setStartDate(LocalDate.of(2022, 4, 13));
         proj1.getSprintList().saveSprint(sprint2);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -263,9 +267,9 @@ public class AssignProductOwnerControllerTest {
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
             company.getProjectStore().saveNewProject(proj1);
             proj1.setSprintDuration(new SprintDuration(14));
-            Sprint current = proj1.getSprintList().createSprint("Current", LocalDate.now().minusWeeks(2).plusDays(1), 2);
+            Sprint current = proj1.getSprintList().createSprint("Current", 2);
             proj1.getSprintList().saveSprint(current);
-            Sprint next = proj1.getSprintList().createSprint("Next", LocalDate.now().plusDays(1), 2);
+            Sprint next = proj1.getSprintList().createSprint("Next", 2);
             proj1.getSprintList().saveSprint(next);
             //Act
             controller.getProject("project_2022_1");
@@ -291,9 +295,9 @@ public class AssignProductOwnerControllerTest {
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
             company.getProjectStore().saveNewProject(proj1);
             proj1.setSprintDuration(new SprintDuration(14));
-            Sprint current = proj1.getSprintList().createSprint("Current", LocalDate.now().minusWeeks(2).plusDays(1), 2);
+            Sprint current = proj1.getSprintList().createSprint("Current",2);
             proj1.getSprintList().saveSprint(current);
-            Sprint next = proj1.getSprintList().createSprint("Next", LocalDate.now().plusDays(1), 2);
+            Sprint next = proj1.getSprintList().createSprint("Next", 2);
             proj1.getSprintList().saveSprint(next);
             //Act
             controller.getProject("project_2022_1");
@@ -318,9 +322,11 @@ public class AssignProductOwnerControllerTest {
         proj1.setSprintDuration(new SprintDuration(14));
         company.getProjectStore().saveNewProject(proj1);
         proj1.setSprintDuration(new SprintDuration(14));
-        Sprint current = proj1.getSprintList().createSprint("Current", LocalDate.now().minusWeeks(2).plusDays(1), 14);
+        Sprint current = proj1.getSprintList().createSprint("Current", 14);
+        current.setStartDate(LocalDate.now());
         proj1.getSprintList().saveSprint(current);
-        Sprint next = proj1.getSprintList().createSprint("Next", LocalDate.now().plusDays(1), 14);
+        Sprint next = proj1.getSprintList().createSprint("Next", 14);
+        next.setStartDate(LocalDate.of(2022, 4, 13));
         proj1.getSprintList().saveSprint(next);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Create resource 1

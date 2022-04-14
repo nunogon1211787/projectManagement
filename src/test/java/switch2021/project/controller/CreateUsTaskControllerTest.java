@@ -51,12 +51,12 @@ class CreateUsTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", 2);
         project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        sprint.saveUsInSprintBacklog(userStory);
+        sprint.saveUsInScrumBoard(userStory);
 
 
         //Create tasks
@@ -94,12 +94,12 @@ class CreateUsTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", 2);
         project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        sprint.saveUsInSprintBacklog(userStory);
+        sprint.saveUsInScrumBoard(userStory);
 
         //Get us task list
         List<String> tasksNames = controller.getUsTasks(project.getProjectCode().getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
@@ -125,12 +125,12 @@ class CreateUsTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", 2);
         project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        sprint.saveUsInSprintBacklog(userStory);
+        sprint.saveUsInScrumBoard(userStory);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -172,12 +172,12 @@ class CreateUsTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1",2);
         project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        sprint.saveUsInSprintBacklog(userStory);
+        sprint.saveUsInScrumBoard(userStory);
 
         //Get project team names
         controller.getUsTasks(project.getProjectCode().getCode(), sprint.getIdSprint(), userStory.getIdUserStory());
@@ -203,12 +203,12 @@ class CreateUsTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", 2);
         project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        sprint.saveUsInSprintBacklog(userStory);
+        sprint.saveUsInScrumBoard(userStory);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -249,12 +249,12 @@ class CreateUsTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", 2);
         project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        sprint.saveUsInSprintBacklog(userStory);
+        sprint.saveUsInScrumBoard(userStory);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -302,12 +302,12 @@ class CreateUsTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.of(2022, 2, 1), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", 2);
         project.getSprintList().saveSprint(sprint);
 
         //Create a UserStory
         UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        sprint.saveUsInSprintBacklog(userStory);
+        sprint.saveUsInScrumBoard(userStory);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
