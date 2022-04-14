@@ -273,7 +273,7 @@ class ProjectTest {
 
     @Test
     @DisplayName("validate that list have results (not null) and check list size are correct")
-    public void getProductBacklogWithResults() {
+    public void getUserStoryStoreWithResults() {
         // Arrange
         proj1.getUserStoryStore().createAndSaveUserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 1, "making test", 5);
         proj1.getUserStoryStore().createAndSaveUserStory("Project_2022_2_As a PO, i want to test this string","As a TO, i want to test this string", 1, "making other test", 5);

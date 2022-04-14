@@ -41,7 +41,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
         addStory.getProject("Project_2022_1");
         addStory.getSprintStore();
         addStory.getSprint(1);
-        addStory.getProductBacklog();
+        addStory.getUserStoryStore();
 
 
         addStory.addUserStoryToSprintBacklog(userStoryId);

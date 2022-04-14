@@ -13,7 +13,7 @@ class AddUserStoryController {
     +getProject(String code)
     +getSprintStore()
     +getSprint()
-    +getProductBacklog()
+    +getUserStoryStore()
     +addUserStoryToSprintBacklog(int userStoryId)
 }
 
@@ -38,7 +38,7 @@ class Sprint {
 class Project {
 -code : String
 -productBacklog : ProductBacklog
-+getProductBacklog()
++getUserStoryStore()
 }
 
 class ProductBacklog {

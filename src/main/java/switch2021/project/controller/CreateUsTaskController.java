@@ -37,13 +37,13 @@ public class CreateUsTaskController {
         return taskTypesNames;
     }
 
-    public List<String> getUsTasks(String projCode, int sprintID){
-        this.project = this.company.getProjectStore().getProjectByCode(projCode);
-        UserStory userStory = this.project.getSprintList().findSprintById(sprintID).getUsByIdFromScrumBoard(usId);
-//        this.taskStore = userStory.getTasks();
-
-        return this.taskStore.getTasksNames();
-    }
+//    public List<String> getUsTasks(String projCode, int sprintID){
+//        this.project = this.company.getProjectStore().getProjectByCode(projCode);
+//        UserStory userStory = this.project.getSprintList().findSprintById(sprintID).getUsByIdFromScrumBoard(usId);
+////        this.taskStore = userStory.getTasks();
+//
+//        return this.taskStore.getTasksNames();
+//    }
 
     public List<String> getCurrentProjectTeam(){
         List<String> currentResourcesNames;

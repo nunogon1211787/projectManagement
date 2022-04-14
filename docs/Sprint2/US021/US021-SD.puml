@@ -41,7 +41,7 @@ Ctrl --> System: proj
 System --> PO: Shows project information
 PO -> System: Access product backlog
 System -> Ctrl: getUserStoryList()
-Ctrl -> C3: getProductBacklog
+Ctrl -> C3: getUserStoryStore
 C3 --> Ctrl: prodBack
 Ctrl -> C4: getUserStoryList()
 C4 --> Ctrl: usList

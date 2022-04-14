@@ -137,7 +137,7 @@ public class ChangePriorityUSControllerTest {
         //Arrange
         ChangePriorityUSController change = new ChangePriorityUSController(company);
         change.getProject(project.getProjectCode().getCode());
-        change.getProductBacklog();
+        change.getUserStoryStore();
         // Act
         UserStory expected = userStory2;
         UserStory actual = change.getUS(userStory2.getUserStoryId());
@@ -150,7 +150,7 @@ public class ChangePriorityUSControllerTest {
         //Arrange
         ChangePriorityUSController change = new ChangePriorityUSController(company);
         change.getProject(project.getProjectCode().getCode());
-        change.getProductBacklog();
+        change.getUserStoryStore();
         change.getUserStory(userStory.getUserStoryId());
 
         // Act
@@ -270,7 +270,7 @@ public class ChangePriorityUSControllerTest {
 //    void getUSCorrect() {
 //        project.addResource(input);
 //
-//        UserStory us1 = project.getProductBacklog().getUserStoryById(2);
+//        UserStory us1 = project.getUserStoryStore().getUserStoryById(2);
 //
 //        assertEquals(userStory2,us1);
 //    }

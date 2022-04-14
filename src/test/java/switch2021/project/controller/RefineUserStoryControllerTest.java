@@ -48,7 +48,7 @@ public class RefineUserStoryControllerTest {
 
         //Act
         refineUserStoryController.getProject("Project_2022_1");
-        refineUserStoryController.getProductBacklog();
+        refineUserStoryController.getUserStoryStore();
         //TODO CDC ver ID US refined
         refineUserStoryController.getUserStory(userStory2.getUserStoryId());
         refineUserStoryController.createUserStory("newUserStoryCreated", 3);
@@ -90,7 +90,7 @@ public class RefineUserStoryControllerTest {
 //
 //        //Act
 //        refineUserStoryController.getProject("Project_2022_1");
-//        refineUserStoryController.getProductBacklog();
+//        refineUserStoryController.getUserStoryStore();
 //        //TODO CDC ver id usrefined
 ////        refineUserStoryController.getUserStory(2);
 //        boolean newUserStory = refineUserStoryController.createUserStory("newUserStoryCreated", 3);
@@ -98,7 +98,7 @@ public class RefineUserStoryControllerTest {
 //
 //        //Assert
 //        //check if User Stories were added on product Backlog (4 created + 2 added after refine)
-//        assertEquals(6, refineUserStoryController.getProductBacklog().getUserStoryList().size());
+//        assertEquals(6, refineUserStoryController.getUserStoryStore().getUserStoryList().size());
 //        //check if User Story2 is added and we can get
 ////        assertEquals(proj1.getUserStoryStore().getUserStoryList().get(2), refineUserStoryController.getUserStory(2));
 //        //check New User Story Creation
@@ -128,17 +128,17 @@ public class RefineUserStoryControllerTest {
 //
 //        //UserStory Creation and save on Product Backlog
 //        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 4, "userstory1", 5);
-//        proj1.getProductBacklog().getUserStoryList().add(userStory1);
+//        proj1.getUserStoryStore().getUserStoryList().add(userStory1);
 //        UserStory userStory2 = new UserStory("As a SPO, i want to test this string", 3, "userstory2", 5);
-//        proj1.getProductBacklog().getUserStoryList().add(userStory2);
+//        proj1.getUserStoryStore().getUserStoryList().add(userStory2);
 //        UserStory userStory3 = new UserStory("As a APO, i want to test this string", 1, "userstory3", 5);
-//        proj1.getProductBacklog().getUserStoryList().add(userStory3);
+//        proj1.getUserStoryStore().getUserStoryList().add(userStory3);
 //        UserStory userStory4 = new UserStory("As a SPO, i want to test this string", 0, "userstory4", 5);
-//        proj1.getProductBacklog().getUserStoryList().add(userStory4);
+//        proj1.getUserStoryStore().getUserStoryList().add(userStory4);
 //
 //        //Act
 //        refineUserStoryController.getProject("Project_2022_1");
-//        refineUserStoryController.getProductBacklog();
+//        refineUserStoryController.getUserStoryStore();
 //        refineUserStoryController.getUserStory(2);
 //        boolean result = refineUserStoryController.updateRefinedUserStoryStatus(userStory2);
 //        String refinedUserStoryStatus = userStory2.getUserStoryStatus().getDescription().getText();

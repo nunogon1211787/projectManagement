@@ -86,7 +86,7 @@ public class Sprint {
         return this.scrumBoard.getUserStoryList();
     }
 
-    public UserStory getUsByIdFromScrumBoard(serStoryId id){
+    public UserStory getUsByIdFromScrumBoard(UserStoryId id){
         return this.scrumBoard.getUserStory(id);
     }
 

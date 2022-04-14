@@ -46,7 +46,7 @@ public class AddUserStoryToSprintBacklogController {
         return this.sprint;
     }
 
-    public UserStoryStore getProductBacklog() {
+    public UserStoryStore getUserStoryStore() {
         this.userStoryStore = this.project.getUserStoryStore();
         return this.userStoryStore;
     }

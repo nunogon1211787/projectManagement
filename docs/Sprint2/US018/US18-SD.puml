@@ -43,7 +43,7 @@ System --> User :Shows project information
 
 User -> System: Access product backlog
 System -> Ctrl: getUsSortedByPriority()
-Ctrl-> C3 : getProductBacklog()
+Ctrl-> C3 : getUserStoryStore()
 C3 --> Ctrl : productBacklog
 Ctrl -> C4 : getUsSortedByPriority()
 C4 -> C4.1 ** : createUserStoryList
