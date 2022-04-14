@@ -7,6 +7,7 @@ import switch2021.project.mapper.SystemUserWithStatusMapper;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.model.valueObject.SystemUserId;
 
 import java.util.List;
 
@@ -30,13 +31,13 @@ public class SystemUserWithStatusControllerTest {
         String photo = "photo.png";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
-        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
-                passwordConfirmation, photo, profile);
-        newUser.setActivateUser(true);
+        SystemUser newUser = new SystemUser(userName, email, function, password,
+                passwordConfirmation, photo, profile.getUserProfileId());
+        newUser.setActive(true);
         company.getSystemUserStore().saveSystemUser(newUser);
-        SystemUser newUser2 = company.getSystemUserStore().createSystemUser("Cris", "Cris@ipp.pt",
-                function, password, passwordConfirmation, photo, profile);
-        newUser2.setActivateUser(true);
+        SystemUser newUser2 = new SystemUser("Cris", "Cris@ipp.pt",
+                function, password, passwordConfirmation, photo, profile.getUserProfileId());
+        newUser2.setActive(true);
         company.getSystemUserStore().saveSystemUser(newUser2);
         // Act
         List<SystemUserWithStatusDto> systemUserWithStatusDto = systemUserWithStatusController.getListSystemUserWithStatus();
@@ -61,12 +62,12 @@ public class SystemUserWithStatusControllerTest {
         String photo = "photo.png";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
-        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
-                passwordConfirmation, photo, profile);
-        newUser.setActivateUser(true);
-        SystemUser newUser2 = company.getSystemUserStore().createSystemUser("Cris", "Cris@ipp.pt",
-                function, password, passwordConfirmation, photo, profile);
-        newUser2.setActivateUser(false);
+        SystemUser newUser = new SystemUser(userName, email, function, password,
+                passwordConfirmation, photo, profile.getUserProfileId());
+        newUser.setActive(true);
+        SystemUser newUser2 = new SystemUser("Cris", "Cris@ipp.pt",
+                function, password, passwordConfirmation, photo, profile.getUserProfileId());
+        newUser2.setActive(false);
         // Act
         List<SystemUserWithStatusDto> systemUserWithStatusDto = systemUserWithStatusController.getListSystemUserWithStatus();
 
@@ -92,13 +93,13 @@ public class SystemUserWithStatusControllerTest {
         String photo = "photo.png";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
-        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
-                passwordConfirmation, photo, profile);
-        newUser.setActivateUser(true);
+        SystemUser newUser = new SystemUser(userName, email, function, password,
+                passwordConfirmation, photo, profile.getUserProfileId());
+        newUser.setActive(true);
         company.getSystemUserStore().saveSystemUser(newUser);
-        SystemUser newUser2 = company.getSystemUserStore().createSystemUser("Cris", "Cris@ipp.pt",
-                function, password, passwordConfirmation, photo, profile);
-        newUser2.setActivateUser(true);
+        SystemUser newUser2 = new SystemUser("Cris", "Cris@ipp.pt",
+                function, password, passwordConfirmation, photo, profile.getUserProfileId());
+        newUser2.setActive(true);
         company.getSystemUserStore().saveSystemUser(newUser2);
 
         // Act
@@ -106,11 +107,11 @@ public class SystemUserWithStatusControllerTest {
 
         // Assert
         assertEquals(newUser.getUserName().getNameF(), systemUserWithStatusDto.get(0).getUserName());
-        assertEquals(newUser.getEmail().getEmail(), systemUserWithStatusDto.get(0).getEmail());
-        assertEquals(newUser.isActivateUser(), systemUserWithStatusDto.get(0).isActivateUser());
+        assertEquals(newUser.getSystemUserId().getEmail().getEmail(), systemUserWithStatusDto.get(0).getEmail());
+        assertEquals(newUser.isActive(), systemUserWithStatusDto.get(0).isActivateUser());
         assertEquals(newUser2.getUserName().getNameF(), systemUserWithStatusDto.get(1).getUserName());
-        assertEquals(newUser2.getEmail().getEmail(), systemUserWithStatusDto.get(1).getEmail());
-        assertEquals(newUser2.isActivateUser(), systemUserWithStatusDto.get(1).isActivateUser());
+        assertEquals(newUser2.getSystemUserId().getEmail().getEmail(), systemUserWithStatusDto.get(1).getEmail());
+        assertEquals(newUser2.isActive(), systemUserWithStatusDto.get(1).isActivateUser());
     }
 
     @Test
@@ -129,13 +130,13 @@ public class SystemUserWithStatusControllerTest {
         String photo = "photo.png";
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
-        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password,
-                passwordConfirmation, photo, profile);
-        newUser.setActivateUser(false);
+        SystemUser newUser = new SystemUser(userName, email, function, password,
+                passwordConfirmation, photo, profile.getUserProfileId());
+        newUser.setActive(false);
         company.getSystemUserStore().saveSystemUser(newUser);
-        SystemUser newUser2 = company.getSystemUserStore().createSystemUser("Cris", "Cris@ipp.pt",
-                function, password, passwordConfirmation, photo, profile);
-        newUser2.setActivateUser(true);
+        SystemUser newUser2 = new SystemUser("Cris", "Cris@ipp.pt",
+                function, password, passwordConfirmation, photo, profile.getUserProfileId());
+        newUser2.setActive(true);
         company.getSystemUserStore().saveSystemUser(newUser2);
 
         // Act
@@ -143,8 +144,8 @@ public class SystemUserWithStatusControllerTest {
 
         // Assert
         assertEquals(2, systemUserWithStatusDto.size());
-        assertEquals(newUser.isActivateUser(), systemUserWithStatusDto.get(0).isActivateUser());
-        assertEquals(newUser2.isActivateUser(), systemUserWithStatusDto.get(1).isActivateUser());
+        assertEquals(newUser.isActive(), systemUserWithStatusDto.get(0).isActivateUser());
+        assertEquals(newUser2.isActive(), systemUserWithStatusDto.get(1).isActivateUser());
 
     }
 }

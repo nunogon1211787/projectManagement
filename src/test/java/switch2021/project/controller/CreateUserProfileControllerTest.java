@@ -23,7 +23,7 @@ public class CreateUserProfileControllerTest {
         createUserProfileController.createUserProfile(name);
         // Assert
         assertNotNull(name);
-        assertEquals(name, up.getUserProfileName().getText());
+        assertEquals(name, up.getUserProfileId().getUserProfileName().getText());
     }
 
     @Test

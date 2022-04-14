@@ -23,7 +23,7 @@ public class Company {
     private final CustomerStore customerStore;
     private final BusinessSectorStore businessSectorStore;
     private final UserStoryStatusStore userStoryStatusStore;
-    private final RequestStore requestStore;
+    //private final RequestStore requestStore;
     private final TaskStatusStore taskStatusStore;
 
     //private final ProjectRoleFactory projectRoleFactory;
@@ -45,7 +45,7 @@ public class Company {
         this.customerStore = new CustomerStore();
         this.businessSectorStore = new BusinessSectorStore(new BusinessSectorFactory());
         this.userStoryStatusStore = new UserStoryStatusStore();
-        this.requestStore = new RequestStore();
+        //this.requestStore = new RequestStore();
         this.taskStatusStore = new TaskStatusStore(new TaskStatusFactory());
         //this.userStoryFactory = new UserStoryFactory();
         this.userStoryStore = new UserStoryStore( new UserStoryFactory());

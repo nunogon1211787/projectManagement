@@ -58,7 +58,7 @@ class CreateUsTaskControllerTest {
 //        //Create a UserStory
 //        String userStoryId1 = "Project_2022_1_As a PO, i want to test this string";
 //        UserStory userStory = new UserStory(userStoryId1,"As a PO, i want to test this string", 2, "Fazer tal", 5);
-//        sprint.saveUsInSprintBacklog(userStory);
+//        sprint.saveUsInScrumBoard(userStory);
 //
 //
 //        //Create tasks
@@ -102,7 +102,7 @@ class CreateUsTaskControllerTest {
 //        //Create a UserStory
 //        String userStoryId1 = "Project_2022_1_As a PO, i want to test this string";
 //        UserStory userStory = new UserStory(userStoryId1,"As a PO, i want to test this string", 2, "Fazer tal", 5);
-//        sprint.saveUsInSprintBacklog(userStory);
+//        sprint.saveUsInScrumBoard(userStory);
 //
 //        //Get us task list
 //        List<String> tasksNames = controller.getUsTasks(project.getProjectCode().getCode(), sprint.getIdSprint());
@@ -134,7 +134,7 @@ class CreateUsTaskControllerTest {
 //        //Create a UserStory
 //        String userStoryId1 = "Project_2022_1_As a PO, i want to test this string";
 //        UserStory userStory = new UserStory(userStoryId1,"As a PO, i want to test this string", 2, "Fazer tal", 5);
-//        sprint.saveUsInSprintBacklog(userStory);
+//        sprint.saveUsInScrumBoard(userStory);
 //
 //        //Create project team
 //        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -182,7 +182,7 @@ class CreateUsTaskControllerTest {
 //        //Create a UserStory
 //        String userStoryId1 = "Project_2022_1_As a PO, i want to test this string";
 //        UserStory userStory = new UserStory(userStoryId1,"As a PO, i want to test this string", 2, "Fazer tal", 5);
-//        sprint.saveUsInSprintBacklog(userStory);
+//        sprint.saveUsInScrumBoard(userStory);
 //
 //        //Get project team names
 //        controller.getUsTasks(project.getProjectCode().getCode(), sprint.getIdSprint());
@@ -214,7 +214,7 @@ class CreateUsTaskControllerTest {
 //        //Create a UserStory
 //        String userStoryId1 = "Project_2022_1_As a PO, i want to test this string";
 //        UserStory userStory = new UserStory(userStoryId1 ,"As a PO, i want to test this string", 2, "Fazer tal", 5);
-//        sprint.saveUsInSprintBacklog(userStory);
+//        sprint.saveUsInScrumBoard(userStory);
 //
 //        //Create project team
 //        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -261,7 +261,7 @@ class CreateUsTaskControllerTest {
 //        //Create a UserStory
 //        String userStoryId1 = "Project_2022_1_As a PO, i want to test this string";
 //        UserStory userStory = new UserStory(userStoryId1,"As a PO, i want to test this string", 2, "Fazer tal", 5);
-//        sprint.saveUsInSprintBacklog(userStory);
+//        sprint.saveUsInScrumBoard(userStory);
 //
 //        //Create project team
 //        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -315,7 +315,7 @@ class CreateUsTaskControllerTest {
 //        //Create a UserStory
 //        String userStoryId1 = "Project_2022_1_As a PO, i want to test this string";
 //        UserStory userStory = new UserStory(userStoryId1,"As a PO, i want to test this string", 2, "Fazer tal", 5);
-//        sprint.saveUsInSprintBacklog(userStory);
+//        sprint.saveUsInScrumBoard(userStory);
 //
 //        //Create project team
 //        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");

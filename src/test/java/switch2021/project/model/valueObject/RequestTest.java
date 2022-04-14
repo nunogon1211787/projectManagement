@@ -1,55 +1,47 @@
 package switch2021.project.model.valueObject;
 
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.Company;
-import switch2021.project.model.SystemUser.Request;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.UserProfile.UserProfile;
 
 import java.time.LocalDate;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class RequestTest {
 
-
-     //arrange
-
     @Test
-    public void newRequestTest(){
+    @DisplayName("create and save profile request - profile already assigned")
+    void createAndSaveProfileRequestFail() {
         //Arrange
-        Company company = new Company();
-        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("joaquim", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
-        java.time.LocalDate datateste = LocalDate.now();
-        //Act
-        Request req = new Request(company.getUserProfileStore().getUserProfile("Director"),user);
-        //Assert
-        assertEquals(datateste,req.getRequestDate());
-        Assertions.assertEquals(company.getUserProfileStore().getUserProfile("Director"),req.getProfileRequested());
-        assertEquals(user,req.getUser());
-        assertFalse(req.isRequestStatus());
+        UserProfileId visitorProfileIdDouble = mock(UserProfileId.class);
+        Description descriptionDouble = mock(Description.class);
+        when(visitorProfileIdDouble.getUserProfileName()).thenReturn(descriptionDouble);
+        when(descriptionDouble.getText()).thenReturn("Visitor");
+
+        Request testRequest = new Request(visitorProfileIdDouble);
+        //Act + Assert
+        assertEquals("Visitor", testRequest.getProfileIdRequested().getUserProfileName().getText());
+        assertEquals(LocalDate.now(), testRequest.getRequestDate());
     }
 
-
     @Test
-    public void overrideTest(){
+    public void overrideTest() {
         //Arrange
         SystemUser user = mock(SystemUser.class);
-        UserProfile profile = mock(UserProfile.class);
-
+        UserProfileId profileId = mock(UserProfileId.class);
         //Act
-        Request req = new Request(profile,user);
-        Request req2 = new Request(profile,user);
+        Request req = new Request(profileId);
+        Request req2 = new Request(profileId);
         Request req3 = null;
-
         //Assert
-        assertEquals(req,req2);
-        assertNotEquals(req,req3);
-        assertNotEquals(req,user);
-        assertEquals(req.hashCode(),req2.hashCode());
+        assertEquals(req, req2);
+        assertNotEquals(req, req3);
+        assertNotEquals(req, user);
+        assertEquals(req.hashCode(), req2.hashCode());
     }
-
 }

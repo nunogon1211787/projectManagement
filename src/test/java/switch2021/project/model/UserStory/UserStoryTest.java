@@ -82,7 +82,7 @@ UserStoryId userStoryId =new UserStoryId("Project_2022_1_As a PO, i want to test
             when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
 
             UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
@@ -96,7 +96,7 @@ UserStoryId userStoryId =new UserStoryId("Project_2022_1_As a PO, i want to test
             when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
 
             UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "    ", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
@@ -111,7 +111,7 @@ UserStoryId userStoryId =new UserStoryId("Project_2022_1_As a PO, i want to test
             when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
 
             UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","", 2, "Fazer tal", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
@@ -126,7 +126,7 @@ UserStoryId userStoryId =new UserStoryId("Project_2022_1_As a PO, i want to test
 
 
             UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","C", 2, "Fazer tal", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
@@ -140,7 +140,7 @@ UserStoryId userStoryId =new UserStoryId("Project_2022_1_As a PO, i want to test
             when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
 
             UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","   ", 2, "Fazer tal", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
@@ -155,7 +155,7 @@ UserStoryId userStoryId =new UserStoryId("Project_2022_1_As a PO, i want to test
 
 
             UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","CC", 2, "Fazer tal", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 

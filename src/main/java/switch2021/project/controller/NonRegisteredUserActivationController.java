@@ -24,7 +24,7 @@ public class NonRegisteredUserActivationController {
      **/
 
     public boolean activateNonRegisteredUser (String email) {
-        return this.company.getSystemUserStore().getUserByEmail(email).setActivateUser(true);
+        return this.company.getSystemUserStore().findSystemUserByEmail(email).setActive(true);
     }
 
 }

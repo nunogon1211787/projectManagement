@@ -1,41 +1,48 @@
 package switch2021.project.model.UserProfile;
 
 import lombok.Getter;
-import switch2021.project.model.valueObject.Description;
-
-import java.util.Objects;
+import lombok.Setter;
+import switch2021.project.model.valueObject.UserProfileId;
+import switch2021.project.utils.Entity;
 
 @Getter
-public class UserProfile {
+@Setter
+public class UserProfile implements Entity<UserProfile> {
 
     /**
      * Class Profile Attributes
      **/
-    private final Description userProfileName;
-
+    //private final Description userProfileName;
+    private final UserProfileId userProfileId;
 
     /**
      * Profile Constructors
      */
     public UserProfile(String userProfileName) {
-        this.userProfileName = new Description(userProfileName);
+        //this.userProfileName = new Description(userProfileName);
+        this.userProfileId = new UserProfileId(userProfileName);
     }
-
 
     /**
      * Override Methods
      **/
     @Override
+    public boolean sameIdentityAs(UserProfile other) {
+        return other != null && userProfileId.sameValueAs(other.userProfileId);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         UserProfile that = (UserProfile) o;
-        return (this.userProfileName.equals(that.userProfileName));
+        return sameIdentityAs(that);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userProfileName);
+        return userProfileId.hashCode();
     }
 }
 

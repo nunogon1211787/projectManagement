@@ -57,7 +57,7 @@ public class AssignProductOwnerController {
     public boolean assignRole(String name, String roleName) {
         boolean msg = false;
 
-        LocalDate startDateNextSprint = project.getSprintList().getCurrentSprint().getEndDate().plusDays(1);
+        LocalDate startDateNextSprint = project.getSprintList().findCurrentSprint().getEndDate().plusDays(1);
         int sprintDuration = project.getSprintDuration().getSprintDurationDays();
         ProjectRole role = company.getProjectRoleStore().getProjectRole(roleName);
         if (this.resource.getUser().getUserName().getNameF().equals(name)

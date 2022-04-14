@@ -42,7 +42,7 @@ public class UserProfileStore {
         UserProfile profile = null;
 
         for (UserProfile i : userProfileList) {
-            if (i.getUserProfileName().getText().equalsIgnoreCase(profileName)) {
+            if (i.getUserProfileId().getUserProfileName().getText().equalsIgnoreCase(profileName)) {
                 profile = i;
                 break;
             }

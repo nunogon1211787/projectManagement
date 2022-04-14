@@ -7,6 +7,7 @@ import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.UserStory.UserStoryId;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.Task.TaskStore;
+import switch2021.project.model.valueObject.ProjectCode;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +20,11 @@ public class Sprint {
     /**
      * Attributes of Sprint
      **/
+    private ProjectCode projectID;
     private int idSprint;
     private Description sprintName;
     private final TaskStore taskStore;
-    private final SprintBacklog sprintBacklog;
+    private ScrumBoard scrumBoard;
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -30,10 +32,9 @@ public class Sprint {
     /**
      * Constructor of Sprint
      **/
-    public Sprint(String name, LocalDate startDate) {
+    public Sprint(String name) {
         this.sprintName = new Description(name);
-        this.startDate = startDate;
-        this.sprintBacklog = new SprintBacklog();
+        this.scrumBoard = new ScrumBoard();
         this.taskStore = new TaskStore();
     }
 
@@ -41,14 +42,19 @@ public class Sprint {
      * Method to change Sprint EndDate
      **/
 
-
     public void changeEndDate(int sprintDurationInDays) {
-        this.endDate = startDate.plusDays(sprintDurationInDays - 1L);
+        this.endDate = LocalDate.now().plusDays(sprintDurationInDays -1L);
     }
+
 
     public boolean hasSprintID(int id) {
         return this.idSprint == id;
     }
+
+    public boolean hasProjectID(ProjectCode projectID) {
+        return this.projectID == projectID;
+    }
+
 
     /**
      * Check if this Sprint is the current Sprint
@@ -76,33 +82,61 @@ public class Sprint {
      * Methods to call methods from sprint backlog
      */
 
-    public List<UserStory> getListOfUsFromSprintBacklog(){
-        return this.sprintBacklog.getUserStoryList();
+    public List<UserStory> getListOfUsFromScrumBoard(){
+        return this.scrumBoard.getUserStoryList();
     }
 
-    public UserStory getUsById(UserStoryId id){
-        return this.sprintBacklog.getUserStory(id);
+    public UserStory getUsByIdFromScrumBoard(serStoryId id){
+        return this.scrumBoard.getUserStory(id);
     }
 
-    public boolean saveUsInSprintBacklog(UserStory userStory){
-        sprintBacklog.saveUserStoryToSprintBacklog(userStory);
+    public boolean saveUsInScrumBoard(UserStory userStory){
+        scrumBoard.saveUserStoryToSprintBacklog(userStory);
         return true;
     }
     /**
      * Override Methods
      */
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Sprint sprint = (Sprint) o;
+//        return idSprint == sprint.idSprint && Objects.equals(sprintName, sprint.sprintName) &&
+//                Objects.equals(taskStore, sprint.taskStore) && Objects.equals(sprintBacklog, sprint.sprintBacklog) &&
+//                Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(idSprint, sprintName, taskStore, sprintBacklog, startDate, endDate);
+//    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Sprint)) return false;
         Sprint sprint = (Sprint) o;
-        return idSprint == sprint.idSprint && Objects.equals(sprintName, sprint.sprintName) &&
-                Objects.equals(taskStore, sprint.taskStore) && Objects.equals(sprintBacklog, sprint.sprintBacklog) &&
-                Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
+        return idSprint == sprint.idSprint &&
+                Objects.equals(projectID, sprint.projectID) &&
+                Objects.equals(sprintName, sprint.sprintName) &&
+                Objects.equals(taskStore, sprint.taskStore) &&
+                Objects.equals(scrumBoard, sprint.scrumBoard) &&
+                Objects.equals(startDate, sprint.startDate) &&
+                Objects.equals(endDate, sprint.endDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idSprint, sprintName, taskStore, sprintBacklog, startDate, endDate);
+        return Objects.hash(projectID, idSprint, sprintName, taskStore, scrumBoard, startDate, endDate);
     }
 }
+
+
+
+
+
+
+
+

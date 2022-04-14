@@ -39,7 +39,7 @@ public class CreateUsTaskController {
 
     public List<String> getUsTasks(String projCode, int sprintID){
         this.project = this.company.getProjectStore().getProjectByCode(projCode);
-        this.project.getSprintList().getSprintById(sprintID);
+        UserStory userStory = this.project.getSprintList().findSprintById(sprintID).getUsByIdFromScrumBoard(usId);
 //        this.taskStore = userStory.getTasks();
 
         return this.taskStore.getTasksNames();

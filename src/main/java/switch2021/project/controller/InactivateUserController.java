@@ -23,7 +23,7 @@ public class InactivateUserController {
      **/
 
     public boolean inactivateUser (String email) {
-        return this.company.getSystemUserStore().getUserByEmail(email).setActivateUser(false);
+        return this.company.getSystemUserStore().findSystemUserByEmail(email).setActive(false);
     }
 
 }
