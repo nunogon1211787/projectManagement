@@ -3,7 +3,6 @@ package switch2021.project.model.UserStory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserStory.UsPriority;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +10,7 @@ public class UsPriorityTest {
 
     @Test
     @DisplayName("Validate that priority is correct - limit bound")
-    public void usPrioritySucessLimit1() {
+    public void usPrioritySuccessLimit1() {
         //Arrange
         int priority = 0;
         //Act
@@ -33,7 +32,7 @@ public class UsPriorityTest {
 
     @Test
     @DisplayName("Validate that priority is correct - other values")
-    public void usPrioritySucessInBound() {
+    public void usPrioritySuccessInBound() {
         //Arrange
         int priority = 3;
         //Act
@@ -123,5 +122,15 @@ public class UsPriorityTest {
         UsPriority usPriority = new UsPriority(4);
         //Act and Arrange
         assertNotEquals(usPriority.hashCode(), usPriority1.hashCode());
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void sameValueOf() {
+        //Arrange
+        UsPriority usPriority = new UsPriority(1);
+        UsPriority usPriority1 = new UsPriority(2);
+        //Act and Assert
+        assertFalse(usPriority.sameValueAs(usPriority1));
     }
 }

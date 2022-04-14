@@ -76,8 +76,8 @@ Controller --> UI: sprint
 UI --> TM: Shows Sprint
 
 TM -> UI: Asks for user story list
-UI -> Controller: getProductBacklog()
-Controller -> proj: getProductBacklog()
+UI -> Controller: getUserStoryStore()
+Controller -> proj: getUserStoryStore()
 proj --> Controller: productBacklog
 Controller --> UI: productBacklog
 UI --> TM: Shows product backlog

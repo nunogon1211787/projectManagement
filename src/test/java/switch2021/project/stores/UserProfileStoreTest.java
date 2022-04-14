@@ -34,7 +34,7 @@ public class UserProfileStoreTest {
         // Act
         UserProfile up = userProfileStore.createProfile(name);
         //Assert
-        assertEquals("Cris", up.getUserProfileName().getText());
+        assertEquals("Cris", up.getUserProfileId().getUserProfileName().getText());
     }
 
     @Test

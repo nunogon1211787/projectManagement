@@ -55,31 +55,33 @@ public class AssignProductOwnerControllerTest {
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         proj1.setSprintDuration(new SprintDuration(14));
         company.getProjectStore().saveNewProject(proj1);
-        Sprint sprint1 = proj1.getSprintList().createSprint("Sprint1", LocalDate.now().minusWeeks(1), 14);
+        Sprint sprint1 = proj1.getSprintList().createSprint("Sprint1", 14);
+        sprint1.setStartDate(LocalDate.now());
         proj1.getSprintList().saveSprint(sprint1);
-        Sprint sprint2 = proj1.getSprintList().createSprint("Sprint2", LocalDate.now().plusWeeks(1), 14);
+        Sprint sprint2 = proj1.getSprintList().createSprint("Sprint2", 14);
         proj1.getSprintList().saveSprint(sprint2);
+        sprint2.setStartDate(LocalDate.of(2022, 4, 13));
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Create resource 1
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMb = LocalDate.of(2021, 11, 1);
         LocalDate endDateMb = LocalDate.of(2022, 11, 15);
         Resource manuelbras = proj1.getProjectTeam().createResource(user1, startDateMb, endDateMb, 100, .5);
         proj1.getProjectTeam().saveResource(manuelbras);
         //Create resource 2
-        SystemUser user2 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user2 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMj = LocalDate.of(2021, 11, 1);
         LocalDate endDateMj = LocalDate.of(2022, 11, 15);
         Resource manueljose = proj1.getProjectTeam().createResource(user2, startDateMj, endDateMj, 100, .5);
         proj1.getProjectTeam().saveResource(manueljose);
         //Create resource 3
-        SystemUser user3 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user3 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMo = LocalDate.now().minusWeeks(1);
         LocalDate endDateMo = LocalDate.now().plusWeeks(51);
         Resource manueloliveira = proj1.getProjectTeam().createResource(user3, startDateMo, endDateMo, 100, .3333);
         proj1.getProjectTeam().saveResource(manueloliveira);
         //Create resource 4
-        SystemUser user4 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user4 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMf = LocalDate.of(2021, 11, 16);
         LocalDate endDateMf = LocalDate.of(2022, 11, 30);
         Resource manuelfernandes = proj1.getProjectTeam().createResource(user4, startDateMf, endDateMf, 100, 1);
@@ -107,33 +109,35 @@ public class AssignProductOwnerControllerTest {
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         proj1.setSprintDuration(new SprintDuration(14));
         company.getProjectStore().saveNewProject(proj1);
-        Sprint sprint1 = proj1.getSprintList().createSprint("Sprint1", LocalDate.now().minusWeeks(1), 14);
+        Sprint sprint1 = proj1.getSprintList().createSprint("Sprint1",14);
+        sprint1.setStartDate(LocalDate.now());
         proj1.getSprintList().saveSprint(sprint1);
-        Sprint sprint2 = proj1.getSprintList().createSprint("Sprint2", LocalDate.now().plusWeeks(1), 14);
+        Sprint sprint2 = proj1.getSprintList().createSprint("Sprint2", 14);
+        sprint2.setStartDate(LocalDate.of(2022, 4, 13));
         proj1.getSprintList().saveSprint(sprint2);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Create resource 1
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMb = LocalDate.of(2021, 11, 1);
         LocalDate endDateMb = LocalDate.of(2022, 11, 15);
         Resource manuelbras = proj1.getProjectTeam().createResource(user1, startDateMb, endDateMb, 100, .5);
         manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
         proj1.getProjectTeam().saveResource(manuelbras);
         //Create resource 2
-        SystemUser user2 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user2 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMj = LocalDate.of(2021, 11, 1);
         LocalDate endDateMj = LocalDate.of(2022, 11, 15);
         Resource manueljose = proj1.getProjectTeam().createResource(user2, startDateMj, endDateMj, 100, .5);
         proj1.getProjectTeam().saveResource(manueljose);
         //Create resource 3
-        SystemUser user3 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user3 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMo = LocalDate.now().minusWeeks(1);
         LocalDate endDateMo = LocalDate.now().plusWeeks(51);
         Resource manueloliveira = proj1.getProjectTeam().createResource(user3, startDateMo, endDateMo, 100, .3333);
         proj1.getProjectTeam().saveResource(manueloliveira);
         //Create resource 4
-        SystemUser user4 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user4 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMf = LocalDate.of(2021, 11, 16);
         LocalDate endDateMf = LocalDate.of(2022, 11, 30);
         Resource manuelfernandes = proj1.getProjectTeam().createResource(user4, startDateMf, endDateMf, 100, 1);
@@ -165,25 +169,25 @@ public class AssignProductOwnerControllerTest {
             proj1.setSprintDuration(new SprintDuration(14));
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             // Create Resource 1
-            SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+            SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
             LocalDate startDateMb = LocalDate.of(2021, 11, 1);
             LocalDate endDateMb = LocalDate.of(2022, 11, 15);
             Resource manuelbras = proj1.createResource(user1, startDateMb, endDateMb, 100, .5);
             proj1.getProjectTeam().saveResource(manuelbras);
             // Create Resource 2
-            SystemUser user2 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+            SystemUser user2 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
             LocalDate startDateMj = LocalDate.of(2021, 11, 1);
             LocalDate endDateMj = LocalDate.of(2022, 1, 31);
             Resource manueljose = proj1.createResource(user2, startDateMj, endDateMj, 100, .5);
             proj1.getProjectTeam().saveResource(manueljose);
             // Create Resource 3
-            SystemUser user3 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+            SystemUser user3 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
             LocalDate startDateMo = LocalDate.now().minusWeeks(1);
             LocalDate endDateMo = LocalDate.now().plusWeeks(51);
             Resource manueloliveira = proj1.createResource(user3, startDateMo, endDateMo, 100, .3333);
             proj1.getProjectTeam().saveResource(manueloliveira);
             // Create Resource 4
-            SystemUser user4 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+            SystemUser user4 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
             LocalDate startDateMf = LocalDate.of(2021, 11, 16);
             LocalDate endDateMf = LocalDate.of(2022, 11, 30);
             Resource manuelfernandes = proj1.createResource(user4, startDateMf, endDateMf, 100, 1);
@@ -215,25 +219,25 @@ public class AssignProductOwnerControllerTest {
             proj1.setSprintDuration(new SprintDuration(14));
             UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
             // Create Resource 1
-            SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+            SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
             LocalDate startDateMb = LocalDate.of(2021, 11, 1);
             LocalDate endDateMb = LocalDate.of(2022, 11, 15);
             Resource manuelbras = proj1.createResource(user1, startDateMb, endDateMb, 100, .5);
             proj1.getProjectTeam().saveResource(manuelbras);
             // Create Resource 2
-            SystemUser user2 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+            SystemUser user2 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
             LocalDate startDateMj = LocalDate.of(2021, 11, 1);
             LocalDate endDateMj = LocalDate.of(2022, 1, 31);
             Resource manueljose = proj1.createResource(user2, startDateMj, endDateMj, 100, .5);
             proj1.getProjectTeam().saveResource(manueljose);
             // Create Resource 3
-            SystemUser user3 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+            SystemUser user3 = new SystemUser("manueloliveira", "manueloliveira@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
             LocalDate startDateMo = LocalDate.now().minusWeeks(1);
             LocalDate endDateMo = LocalDate.now().plusWeeks(51);
             Resource manueloliveira = proj1.createResource(user3, startDateMo, endDateMo, 100, .3333);
             proj1.getProjectTeam().saveResource(manueloliveira);
             // Create Resource 4
-            SystemUser user4 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+            SystemUser user4 = new SystemUser("manuelfernandes", "manuelfernandes@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
             LocalDate startDateMf = LocalDate.of(2021, 11, 16);
             LocalDate endDateMf = LocalDate.of(2022, 11, 30);
             Resource manuelfernandes = proj1.createResource(user4, startDateMf, endDateMf, 100, 1);
@@ -263,9 +267,9 @@ public class AssignProductOwnerControllerTest {
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
             company.getProjectStore().saveNewProject(proj1);
             proj1.setSprintDuration(new SprintDuration(14));
-            Sprint current = proj1.getSprintList().createSprint("Current", LocalDate.now().minusWeeks(2).plusDays(1), 2);
+            Sprint current = proj1.getSprintList().createSprint("Current", 2);
             proj1.getSprintList().saveSprint(current);
-            Sprint next = proj1.getSprintList().createSprint("Next", LocalDate.now().plusDays(1), 2);
+            Sprint next = proj1.getSprintList().createSprint("Next", 2);
             proj1.getSprintList().saveSprint(next);
             //Act
             controller.getProject("project_2022_1");
@@ -291,9 +295,9 @@ public class AssignProductOwnerControllerTest {
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
             company.getProjectStore().saveNewProject(proj1);
             proj1.setSprintDuration(new SprintDuration(14));
-            Sprint current = proj1.getSprintList().createSprint("Current", LocalDate.now().minusWeeks(2).plusDays(1), 2);
+            Sprint current = proj1.getSprintList().createSprint("Current",2);
             proj1.getSprintList().saveSprint(current);
-            Sprint next = proj1.getSprintList().createSprint("Next", LocalDate.now().plusDays(1), 2);
+            Sprint next = proj1.getSprintList().createSprint("Next", 2);
             proj1.getSprintList().saveSprint(next);
             //Act
             controller.getProject("project_2022_1");
@@ -318,19 +322,21 @@ public class AssignProductOwnerControllerTest {
         proj1.setSprintDuration(new SprintDuration(14));
         company.getProjectStore().saveNewProject(proj1);
         proj1.setSprintDuration(new SprintDuration(14));
-        Sprint current = proj1.getSprintList().createSprint("Current", LocalDate.now().minusWeeks(2).plusDays(1), 14);
+        Sprint current = proj1.getSprintList().createSprint("Current", 14);
+        current.setStartDate(LocalDate.now());
         proj1.getSprintList().saveSprint(current);
-        Sprint next = proj1.getSprintList().createSprint("Next", LocalDate.now().plusDays(1), 14);
+        Sprint next = proj1.getSprintList().createSprint("Next", 14);
+        next.setStartDate(LocalDate.of(2022, 4, 13));
         proj1.getSprintList().saveSprint(next);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Create resource 1
-        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMb = LocalDate.of(2021, 11, 1);
         LocalDate endDateMb = LocalDate.of(2022, 11, 15);
         Resource manuelbras = proj1.getProjectTeam().createResource(user1, startDateMb, endDateMb, 100, .5);
         proj1.getProjectTeam().saveResource(manuelbras);
         //Create resource 2
-        SystemUser user2 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user2 = new SystemUser("manueljose", "manueljose@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMj = LocalDate.of(2021, 11, 1);
         LocalDate endDateMj = LocalDate.of(2022, 11, 15);
         Resource manueljose = proj1.getProjectTeam().createResource(user2, startDateMj, endDateMj, 100, .5);

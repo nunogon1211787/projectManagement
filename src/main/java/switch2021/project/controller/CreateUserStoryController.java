@@ -5,7 +5,7 @@ import switch2021.project.dto.UserStoryDto;
 import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.mapper.UserStoryMapper;
 import switch2021.project.model.*;
-import switch2021.project.model.UserStory.ProductBacklog;
+import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.repositories.ProjectStore;
@@ -45,8 +45,8 @@ public class CreateUserStoryController {
 
     public void createUserStory(String code, UserStoryDto createUserStoryDto) {
         Project project = this.company.getProjectStore().getProjectByCode(code);
-        ProductBacklog productBacklog = project.getProductBacklog();
-        UserStory us = project.getProductBacklog().createUserStoryWithDto(createUserStoryDto, this.mapperUS);
-        productBacklog.getUserStoryList().add(us);
+        UserStoryStore userStoryStore = project.getUserStoryStore();
+        UserStory us = project.getUserStoryStore().createUserStoryWithDto(createUserStoryDto, this.mapperUS);
+        userStoryStore.getUserStoryList().add(us);
     }
 }

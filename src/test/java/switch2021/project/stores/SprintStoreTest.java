@@ -44,16 +44,17 @@ public class SprintStoreTest {
                 typo, sector, date, 7, 5000);
         project.setSprintDuration(new SprintDuration(14));
         SprintStore sprintList = new SprintStore(new SprintFactory());
-        sprint = sprintList.createSprint("Sprint_1", LocalDate.of(2022, 1, 1), project.getSprintDuration().getSprintDurationDays());
-        Sprint sprint2 = sprintList.createSprint("Sprint_2", LocalDate.of(2022, 1, 16), project.getSprintDuration().getSprintDurationDays());
-        sprint3 = sprintList.createSprint("Sprint_3", LocalDate.of(2021, 12, 19), project.getSprintDuration().getSprintDurationDays());
-        sprint4 = sprintList.createSprint("Sprint_4", LocalDate.of(2021, 12, 5), project.getSprintDuration().getSprintDurationDays());
-        Sprint sprint5 = sprintList.createSprint("Sprint_5", LocalDate.of(2022, 1, 30), project.getSprintDuration().getSprintDurationDays());
-        Sprint sprint6 = sprintList.createSprint("Sprint_6", LocalDate.of(2022, 2, 13), project.getSprintDuration().getSprintDurationDays());
-        Sprint sprint7 = sprintList.createSprint("Sprint_7", LocalDate.of(2022, 2, 27), project.getSprintDuration().getSprintDurationDays());
-        sprint8 = sprintList.createSprint("Sprint_8", LocalDate.now().minusWeeks(2), project.getSprintDuration().getSprintDurationDays());
-        sprint9 = sprintList.createSprint("Sprint_9", LocalDate.now(), project.getSprintDuration().getSprintDurationDays());
-        sprint10 = sprintList.createSprint("Sprint_10", LocalDate.now().plusWeeks(2), project.getSprintDuration().getSprintDurationDays());
+        sprint = sprintList.createSprint("Sprint_1", project.getSprintDuration().getSprintDurationDays());
+        sprint.setStartDate(LocalDate.of(2022, 1, 1));
+        Sprint sprint2 = sprintList.createSprint("Sprint_2", project.getSprintDuration().getSprintDurationDays());
+        sprint3 = sprintList.createSprint("Sprint_3", project.getSprintDuration().getSprintDurationDays());
+        sprint4 = sprintList.createSprint("Sprint_4", project.getSprintDuration().getSprintDurationDays());
+        Sprint sprint5 = sprintList.createSprint("Sprint_5", project.getSprintDuration().getSprintDurationDays());
+        Sprint sprint6 = sprintList.createSprint("Sprint_6", project.getSprintDuration().getSprintDurationDays());
+        Sprint sprint7 = sprintList.createSprint("Sprint_7",  project.getSprintDuration().getSprintDurationDays());
+        sprint8 = sprintList.createSprint("Sprint_8", project.getSprintDuration().getSprintDurationDays());
+        sprint9 = sprintList.createSprint("Sprint_9", project.getSprintDuration().getSprintDurationDays());
+        sprint10 = sprintList.createSprint("Sprint_10", project.getSprintDuration().getSprintDurationDays());
         sprintList.saveSprint(sprint);
         sprintList.saveSprint(sprint2);
         sprintList.saveSprint(sprint3);
@@ -71,24 +72,26 @@ public class SprintStoreTest {
     @DisplayName("Verification Test, to create a Sprint with success")
     public void createSprintSuccess() {
         //Act
-        String name = "Sprint_1";
+        Sprint x = new Sprint("Sprint_X");
+        x.setStartDate(LocalDate.of(2022, 1, 1));
+        x.setEndDate(LocalDate.of(2022, 1, 15));
         //Assert
-        assertEquals(name, sprint.getSprintName().getText());
-        assertEquals(date, sprint.getStartDate());
-        assertEquals(LocalDate.of(2022, 1, 14), sprint.getEndDate());
-
+        assertEquals("Sprint_X", x.getSprintName().getText());
+        assertEquals(LocalDate.of(2022, 1,1), x.getStartDate());
+        assertEquals(LocalDate.of(2022, 1, 15), x.getEndDate());
     }
 
     @Test
     @DisplayName("Verification Test, to create a Sprint with name failure")
     public void createSprintFail_Name() {
         //Act
-        String name = "Sprint_2";
-
+        Sprint y = new Sprint("Sprint_Z");
+        y.setStartDate(LocalDate.of(2022, 1, 1));
+        y.setEndDate(LocalDate.of(2022, 1, 15));
         //Assert
-        assertNotEquals(name, sprint.getSprintName());
-        assertEquals(date, sprint.getStartDate());
-        assertEquals(LocalDate.of(2022, 1, 14), sprint.getEndDate());
+        assertNotEquals("Sprint_Z", y.getSprintName());
+        assertEquals(LocalDate.of(2022, 1, 1), y.getStartDate());
+        assertEquals(LocalDate.of(2022, 1, 15), y.getEndDate());
 
     }
 
@@ -97,14 +100,15 @@ public class SprintStoreTest {
     public void createSprintFail_StartDate() {
         //Arrange
         SprintStore sprintListTest = new SprintStore(new SprintFactory());
-        Sprint sprintTest = sprintListTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 2),
+        Sprint sprintTest = sprintListTest.createSprint("Sprint_1",
                 project.getSprintDuration().getSprintDurationDays());
         //Act
         String name = "Sprint_1";
-
+        sprintTest.setStartDate(LocalDate.of(2022, 1, 1));
+        sprintTest.setEndDate(LocalDate.of(2022, 1, 15));
         //Assert
         assertEquals(name, sprintTest.getSprintName().getText());
-        assertNotEquals(date, sprintTest.getStartDate());
+        assertNotEquals(LocalDate.of(2022, 1, 3), sprintTest.getStartDate());
         assertEquals(LocalDate.of(2022, 1, 15), sprintTest.getEndDate());
 
     }
@@ -114,7 +118,8 @@ public class SprintStoreTest {
     public void createSprintFail_SprintDuration() {
         //Arrange
         SprintStore sprintListTest = new SprintStore(new SprintFactory());
-        Sprint sprintTest = sprintListTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 1), project.getSprintDuration().getSprintDurationDays());
+        Sprint sprintTest = sprintListTest.createSprint("Sprint_1", project.getSprintDuration().getSprintDurationDays());
+        sprintTest.setStartDate(LocalDate.of(2022, 1, 1));
         //Act
         String name = "Sprint_1";
 
@@ -131,13 +136,13 @@ public class SprintStoreTest {
     public void createSprintFailAll() {
         //Arrange
         SprintStore sprintListTest = new SprintStore(new SprintFactory());
-        Sprint sprintTest = sprintListTest.createSprint("Sprint_1", LocalDate.of(2022, 1, 2), project.getSprintDuration().getSprintDurationDays());
+        Sprint sprintTest = sprintListTest.createSprint("Sprint_1", project.getSprintDuration().getSprintDurationDays());
         //Act
         String name = "Sprint_2";
 
         //Assert
         assertNotEquals(name, sprintTest.getSprintName());
-        assertNotEquals(date, sprintTest.getStartDate());
+        assertNotEquals(date, LocalDate.of(2020, 1, 1));
         assertNotEquals(LocalDate.of(2022, 2, 16), sprintTest.getEndDate());
 
     }
@@ -149,9 +154,9 @@ public class SprintStoreTest {
 
         //Arrange
         SprintStore sprintStore1 = new SprintStore(new SprintFactory());
-        Sprint sprint1 = sprintStore1.createSprint("Sprint_0", LocalDate.of(2022, 1, 1), 2);
+        Sprint sprint1 = sprintStore1.createSprint("Sprint_0", 2);
         //Act
-        Sprint sprint2 = sprintStore1.createSprint("Sprint_0", LocalDate.of(2022, 1, 1), 2);
+        Sprint sprint2 = sprintStore1.createSprint("Sprint_0", 2);
         //Assert
         assertEquals(sprint1, sprint2);
 
@@ -163,11 +168,11 @@ public class SprintStoreTest {
 
         //Arrange
         SprintStore sprintListTest = new SprintStore(new SprintFactory());
-        Sprint sprintTest = sprintListTest.createSprint("Sprint_0", LocalDate.of(2022, 1, 1), 2);
+        Sprint sprintTest = sprintListTest.createSprint("Sprint_0", 2);
         //Act
         sprintListTest.saveSprint(sprintTest);
         //Assert
-        assertEquals(sprintTest, sprintListTest.getSprintById(1));
+        assertEquals(sprintTest, sprintListTest.findSprintById(1));
 
     }
 
@@ -177,7 +182,7 @@ public class SprintStoreTest {
 
         //Arrange
         SprintStore sprintListTest = new SprintStore(new SprintFactory());
-        Sprint sprintTest = sprintListTest.createSprint("Sprint_0", LocalDate.of(2022, 1, 1), 2);
+        Sprint sprintTest = sprintListTest.createSprint("Sprint_0",2);
         //Act
         sprintListTest.saveSprint(sprintTest);
         //Assert
@@ -190,7 +195,7 @@ public class SprintStoreTest {
 
         //Arrange
         SprintStore sprintListTest = new SprintStore(new SprintFactory());
-        Sprint sprintTest = sprintListTest.createSprint("String_0", LocalDate.of(2022, 1, 1), 2);
+        Sprint sprintTest = sprintListTest.createSprint("String_0", 2);
         //Act and Assert
         assertTrue(sprintListTest.saveSprint(sprintTest));
 
@@ -202,26 +207,25 @@ public class SprintStoreTest {
 
         //Arrange
         SprintStore sprintListTest = new SprintStore(new SprintFactory());
-        Sprint sprintTest = sprintListTest.createSprint("String_0", LocalDate.of(2022, 1, 1), 2);
+        Sprint sprintTest = sprintListTest.createSprint("String_0", 2);
         //Act
         sprintListTest.saveSprint(sprintTest);
         // Assert
-        assertEquals(sprintTest, sprintListTest.getSprintById(1));
+        assertEquals(sprintTest, sprintListTest.findSprintById(1));
 
     }
 
     @Test
     @DisplayName("Get the next start Sprint")
-    public void getCurrentSprintTest() {
+    public void getCurrentSprintList() {
         //Arrange
         SprintStore storeTest = new SprintStore(new SprintFactory());
-        storeTest.saveSprint(sprint8);
-        storeTest.saveSprint(sprint9);
-        storeTest.saveSprint(sprint10);
-        //Act
-        Sprint sprintTest = storeTest.getCurrentSprint();
+        Sprint x = new Sprint("Sprint");
+        Sprint y = new Sprint("Sprint1");
+        storeTest.saveSprint(x);
+        storeTest.saveSprint(y);
         //Assert
-        assertEquals(sprint9, sprintTest);
+        assertEquals(2, storeTest.findSprints().size());
     }
 
     @Test
@@ -231,11 +235,11 @@ public class SprintStoreTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             SprintStore storeTest = new SprintStore(new SprintFactory());
-            storeTest.saveSprint(sprint);
-            storeTest.saveSprint(sprint3);
-            storeTest.saveSprint(sprint4);
+            Sprint x = new Sprint("Sprint");
+            x.setStartDate(LocalDate.of(2022, 5, 1));
+            storeTest.saveSprint(x);
             //Act
-            storeTest.getCurrentSprint();
+            storeTest.findCurrentSprint();
         });
     }
 
@@ -247,58 +251,48 @@ public class SprintStoreTest {
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-
         //Project 1
         Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2022, 12, 31));
         company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-
         //Resource 1
-        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
         joana1R.setRole(company.getProjectRoleStore().getProjectRole("Scrum Master"));
         proj1.getProjectTeam().saveResource(joana1R);
-
         //Resource 2
-        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
         joana2R.setRole(company.getProjectRoleStore().getProjectRole("Product Owner"));
         proj1.getProjectTeam().saveResource(joana2R);
-
         //Resource 3
-        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
         joana3R.setRole(company.getProjectRoleStore().getProjectRole("Project Manager"));
         proj1.getProjectTeam().saveResource(joana3R);
-
         //Resource 4
-        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
         joana4R.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
         proj1.getProjectTeam().saveResource(joana4R);
-
         //Create a Sprint
         SprintStore sprintListTest1 = new SprintStore(new SprintFactory());
-        Sprint sprint1 = sprintListTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
+        Sprint sprint1 = sprintListTest1.createSprint("Sprint_1",
                 project.getSprintDuration().getSprintDurationDays());
+        sprint1.setStartDate(LocalDate.of(2022, 1, 1));
         sprintListTest1.saveSprint(sprint1);
-        Sprint sprint2 = sprintListTest1.createSprint("Sprint_2", LocalDate.of(2022, 1, 15),
-                project.getSprintDuration().getSprintDurationDays());
-        sprintListTest1.saveSprint(sprint2);
-
         //Assert
-        assertTrue(sprintListTest1.startASprint(2, LocalDate.of(2022, 1, 15),
-                proj1.getProjectTeam(), 2));
+        assertTrue(sprintListTest1.startASprint(1, LocalDate.of(2022, 1, 3), proj1.getProjectTeam(), 2));
     }
 
     @Test
@@ -318,7 +312,7 @@ public class SprintStoreTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
-        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
@@ -326,7 +320,7 @@ public class SprintStoreTest {
         proj1.getProjectTeam().saveResource(joana1R);
 
         //Resource 2
-        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
@@ -334,7 +328,7 @@ public class SprintStoreTest {
         proj1.getProjectTeam().saveResource(joana2R);
 
         //Resource 3
-        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
@@ -342,7 +336,7 @@ public class SprintStoreTest {
         proj1.getProjectTeam().saveResource(joana3R);
 
         //Resource 4
-        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -351,7 +345,7 @@ public class SprintStoreTest {
 
         //Create a Sprint
         SprintStore sprintListTest1 = new SprintStore(new SprintFactory());
-        Sprint sprint1 = sprintListTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
+        Sprint sprint1 = sprintListTest1.createSprint("Sprint_1",
                 project.getSprintDuration().getSprintDurationDays());
         sprintListTest1.saveSprint(sprint1);
 
@@ -377,7 +371,7 @@ public class SprintStoreTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
-        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
@@ -385,7 +379,7 @@ public class SprintStoreTest {
         proj1.getProjectTeam().saveResource(joana1R);
 
         //Resource 2
-        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
@@ -393,7 +387,7 @@ public class SprintStoreTest {
         proj1.getProjectTeam().saveResource(joana2R);
 
         //Resource 3
-        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
@@ -401,7 +395,7 @@ public class SprintStoreTest {
         proj1.getProjectTeam().saveResource(joana3R);
 
         //Resource 4
-        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -410,7 +404,7 @@ public class SprintStoreTest {
 
         //Create a Sprint
         SprintStore sprintListTest1 = new SprintStore(new SprintFactory());
-        Sprint sprint1 = sprintListTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
+        Sprint sprint1 = sprintListTest1.createSprint("Sprint_1",
                 project.getSprintDuration().getSprintDurationDays());
         sprintListTest1.saveSprint(sprint1);
 
@@ -436,7 +430,7 @@ public class SprintStoreTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
-        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
@@ -444,7 +438,7 @@ public class SprintStoreTest {
         proj1.getProjectTeam().saveResource(joana1R);
 
         //Resource 2
-        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
@@ -452,7 +446,7 @@ public class SprintStoreTest {
         proj1.getProjectTeam().saveResource(joana2R);
 
         //Resource 3
-        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
@@ -460,7 +454,7 @@ public class SprintStoreTest {
         proj1.getProjectTeam().saveResource(joana3R);
 
         //Resource 4
-        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -469,7 +463,7 @@ public class SprintStoreTest {
 
         //Create a Sprint
         SprintStore sprintListTest1 = new SprintStore(new SprintFactory());
-        Sprint sprint1 = sprintListTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
+        Sprint sprint1 = sprintListTest1.createSprint("Sprint_1",
                 project.getSprintDuration().getSprintDurationDays());
         sprintListTest1.saveSprint(sprint1);
 
@@ -495,7 +489,7 @@ public class SprintStoreTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
-        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej1 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej1 = LocalDate.of(2022, 1, 30);
         Resource joana1R = proj1.createResource(joana1, startDatej1, endDatej1, 100, .5);
@@ -503,7 +497,7 @@ public class SprintStoreTest {
         proj1.getProjectTeam().saveResource(joana1R);
 
         //Resource 2
-        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana2 = new SystemUser("joanadois", "joana2@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej2 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej2 = LocalDate.of(2022, 1, 30);
         Resource joana2R = proj1.createResource(joana2, startDatej2, endDatej2, 100, 1);
@@ -511,7 +505,7 @@ public class SprintStoreTest {
         proj1.getProjectTeam().saveResource(joana2R);
 
         //Resource 3
-        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana3 = new SystemUser("joanatres", "joana3@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej3 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej3 = LocalDate.of(2022, 12, 31);
         Resource joana3R = proj1.createResource(joana3, startDatej3, endDatej3, 100, .5);
@@ -519,7 +513,7 @@ public class SprintStoreTest {
         proj1.getProjectTeam().saveResource(joana3R);
 
         //Resource 4
-        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser joana4 = new SystemUser("joanaquatro", "joana4@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDatej4 = LocalDate.of(2022, 1, 1);
         LocalDate endDatej4 = LocalDate.of(2022, 12, 31);
         Resource joana4R = proj1.createResource(joana4, startDatej4, endDatej4, 100, .3333);
@@ -528,7 +522,7 @@ public class SprintStoreTest {
 
         //Create a Sprint
         SprintStore sprintListTest1 = new SprintStore(new SprintFactory());
-        Sprint sprint1 = sprintListTest1.createSprint("Sprint_1", LocalDate.of(2022, 1, 1),
+        Sprint sprint1 = sprintListTest1.createSprint("Sprint_1",
                 project.getSprintDuration().getSprintDurationDays());
         sprintListTest1.saveSprint(sprint1);
 
@@ -541,18 +535,46 @@ public class SprintStoreTest {
     @DisplayName("Validate start date")
     public void validateStartDate() {
         //Arrange
-        LocalDate startDatej4 = LocalDate.of(2022, 1, 15);
-        LocalDate startDatej5 = LocalDate.of(2022, 1, 1);
+        LocalDate startDatej4 = LocalDate.now();
 
         SprintStore sprintListTest = new SprintStore(new SprintFactory());
-        Sprint sprintTest = sprintListTest.createSprint("String_0", startDatej4, 2);
-        Sprint sprintTest2 = sprintListTest.createSprint("String_0", startDatej5, 2);
+        Sprint sprintTest = sprintListTest.createSprint("String_0", 2);
+        sprintTest.setStartDate(LocalDate.now());
+        Sprint sprintTest2 = sprintListTest.createSprint("String_0",2);
         //Act
         sprintListTest.saveSprint(sprintTest);
         sprintListTest.saveSprint(sprintTest2);
 
         //Assert
         assertEquals(startDatej4, sprintTest.getStartDate());
+    }
+
+
+    @Test
+    @DisplayName("Test to search all sprint by project id")
+    public void catchAllSprintsByProjectID() {
+        //Arrange
+        Customer costumer = new Customer("Customer_1", "customer1@email.com", 123456789);
+        Typology typology = new Typology("Typology_1");
+        BusinessSector businessSector = new BusinessSector("sector_1");
+        ProjectCode projectCode = new ProjectCode(1);
+        Project project = new Project("Project_1", "Project_named_1", costumer, typology,
+                businessSector, LocalDate.of(2022, 1, 1),
+                10, 30000);
+        project.setEndDate(LocalDate.of(2022, 12, 31));
+        ProjectStore projectStore = new ProjectStore();
+        projectStore.saveNewProject(project);
+        SprintStore sprintStore = new SprintStore(new SprintFactory());
+        Sprint sprint = sprintStore.createSprint("Sprint_0", 2);
+        Sprint sprint1 = sprintStore.createSprint("Sprint_1", 2);
+        Sprint sprint2 = sprintStore.createSprint("Sprint_2", 2);
+        //Act
+        sprintStore.saveSprint(sprint);
+        sprintStore.saveSprint(sprint1);
+        sprintStore.saveSprint(sprint2);
+        //Assert
+        assertEquals(0, sprintStore.findAllSprintsByProjectID(projectCode).size());
+
     }
 
 }

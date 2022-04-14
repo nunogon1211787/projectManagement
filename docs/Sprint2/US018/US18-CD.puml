@@ -33,7 +33,7 @@ class Project {
 +getCode()
 +getProjectName()
 +getDescription()
-+getProductBacklog()
++getUserStoryStore()
 }
 
 class ProductBacklog {

@@ -53,7 +53,7 @@ public class AssociateResourceTest {
         //Arrange
         //User
         SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "Qwerty_1",
-                "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "photo.png", userProfile.getUserProfileId());
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
         Resource resAllo2 = new Resource(newUser, startDateToAllocate, endDateToAllocate, new CostPerHour(100), new PercentageOfAllocation(.2));
@@ -67,7 +67,7 @@ public class AssociateResourceTest {
     @DisplayName("Get Team Member By Index Test")
     public void getTeamMemberByIndex() {
         //Arrange
-        SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+        SystemUser newUser = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
         Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -84,7 +84,7 @@ public class AssociateResourceTest {
     public void validateAllocationTrue() {
         //Arrange
         //User
-        SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
         Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.2));
@@ -107,7 +107,7 @@ public class AssociateResourceTest {
     public void validateAllocationFalse() {
         //Arrange
         //User
-        SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "fase@beaver.com", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());
         LocalDate startDateAllocated = LocalDate.of(2021, 12, 12);
         LocalDate endDateAllocated = LocalDate.of(2021, 12, 24);
         Resource resAllo1 = new Resource(newUser, startDateAllocated, endDateAllocated, new CostPerHour(100), new PercentageOfAllocation(.2));

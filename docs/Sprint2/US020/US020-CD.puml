@@ -28,7 +28,7 @@ class ProjectStore {
 class Project {
 -code : String
 -productBacklog : ProductBacklog
-+getProductBacklog()
++getUserStoryStore()
 }
 
 class ProductBacklog {

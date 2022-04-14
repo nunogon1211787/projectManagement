@@ -60,7 +60,7 @@ User -> System: Choose project to access product backlog
 System -> Ctrl: getUsSortedByPriority()
 Ctrl -> C2 : getProjectByCode(code)
 C2 --> Ctrl : proj
-Ctrl-> C3 : getProductBacklog()
+Ctrl-> C3 : getUserStoryStore()
 C3 --> Ctrl : productBacklog
 Ctrl -> C4 : getUsSortedByPriority()
 C4 -> C4.1 ** : createUserStoryList

@@ -6,6 +6,6 @@ import switch2021.project.model.UserStory.UserStory;
 public class UserStoryMapper {
 
     public UserStory toModel(UserStoryDto createUserStoryDto) {
-        return new UserStory(createUserStoryDto.getTitle(), createUserStoryDto.getPriority(), createUserStoryDto.getDescription().getText(), createUserStoryDto.getPriority());
+        return new UserStory(createUserStoryDto.getTitle().getTitleUs(), createUserStoryDto.getPriority().getPriorityUs(), createUserStoryDto.getDescription().getText());
     }
 }

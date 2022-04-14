@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.model.valueObject.SystemUserId;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,9 +21,9 @@ class SearchUsersControllerTest {
         SearchSystemUsersController test = new SearchSystemUsersController(company);
        // company.getUserProfileStore().populateDefault();
         UserProfile p1 = company.getUserProfileStore().getUserProfile("visitor");
-        SystemUser usr1 = new SystemUser("Romulo", "romulo@romulo.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1);
-        SystemUser usr2 = new SystemUser("Maria", "maria@maria.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1);
-        SystemUser usr3 = new SystemUser("Joao", "joao@joao.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1);
+        SystemUser usr1 = new SystemUser("Romulo", "romulo@romulo.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1.getUserProfileId());
+        SystemUser usr2 = new SystemUser("Maria", "maria@maria.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1.getUserProfileId());
+        SystemUser usr3 = new SystemUser("Joao", "joao@joao.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1.getUserProfileId());
         company.getSystemUserStore().saveSystemUser(usr1);
         company.getSystemUserStore().saveSystemUser(usr2);
         company.getSystemUserStore().saveSystemUser(usr3);
@@ -41,9 +42,9 @@ class SearchUsersControllerTest {
         SearchSystemUsersController test = new SearchSystemUsersController(company);
         // company.getUserProfileStore().populateDefault();
         UserProfile p1 = company.getUserProfileStore().getUserProfile("visitor");
-        SystemUser usr1 = new SystemUser("Romulo", "romulo@romulo.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1);
-        SystemUser usr2 = new SystemUser("Maria", "maria@maria.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1);
-        SystemUser usr3 = new SystemUser("Joao", "joao@joao.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1);
+        SystemUser usr1 = new SystemUser("Romulo", "romulo@romulo.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1.getUserProfileId());
+        SystemUser usr2 = new SystemUser("Maria", "maria@maria.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1.getUserProfileId());
+        SystemUser usr3 = new SystemUser("Joao", "joao@joao.pt", "any", "Qwerty_1", "Qwerty_1", ".png", p1.getUserProfileId());
         company.getSystemUserStore().saveSystemUser(usr1);
         company.getSystemUserStore().saveSystemUser(usr2);
         company.getSystemUserStore().saveSystemUser(usr3);
@@ -92,9 +93,9 @@ class SearchUsersControllerTest {
         list.add(p3);
         list.add(p4);
         //Result
-        assertEquals(p1.getUserProfileName(), list.get(0).getUserProfileName());
-        assertEquals(p2.getUserProfileName(), list.get(1).getUserProfileName());
-        assertEquals(p3.getUserProfileName(), list.get(2).getUserProfileName());
-        assertEquals(p4.getUserProfileName(), list.get(3).getUserProfileName());
+        assertEquals(p1.getUserProfileId().getUserProfileName(), list.get(0).getUserProfileId().getUserProfileName());
+        assertEquals(p2.getUserProfileId().getUserProfileName(), list.get(1).getUserProfileId().getUserProfileName());
+        assertEquals(p3.getUserProfileId().getUserProfileName(), list.get(2).getUserProfileId().getUserProfileName());
+        assertEquals(p4.getUserProfileId().getUserProfileName(), list.get(3).getUserProfileId().getUserProfileName());
     }
 }

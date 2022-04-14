@@ -22,7 +22,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
-public class ProductBacklogSortControllerTest {
+public class UserStoryStoreSortControllerTest {
 
 
     @Test
@@ -40,7 +40,7 @@ public class ProductBacklogSortControllerTest {
         Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -71,7 +71,7 @@ public class ProductBacklogSortControllerTest {
         Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -106,7 +106,7 @@ public class ProductBacklogSortControllerTest {
         Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -139,7 +139,7 @@ public class ProductBacklogSortControllerTest {
         Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -170,7 +170,7 @@ public class ProductBacklogSortControllerTest {
         Project project = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -178,10 +178,10 @@ public class ProductBacklogSortControllerTest {
         ProjectTeam projectTeam = new ProjectTeam(resFac);// Arrange
 
         company.getProjectStore().saveNewProject(project);
-        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 2, "create user story", 5);
-        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "sort user story", 5);
-        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 3, "backlog sorted", 5);
-        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 5, "show sorted", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "create user story", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_2022_2_As a PO, i want to test this string","As a PO, i want to test this string", 1, "sort user story", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_2022_3_As a PO, i want to test this string","As a PO, i want to test this string", 3, "backlog sorted", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_2022_4_As a PO, i want to test this string","As a PO, i want to test this string", 5, "show sorted", 5);
 
         projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
@@ -191,10 +191,10 @@ public class ProductBacklogSortControllerTest {
         List<UserStoryDto> userStoryListDtoList = productBacklogSortController.getUsSortedByPriority("Project_2022_1");
         // Assert
         assertEquals(4, userStoryListDtoList.size());
-        assertEquals(1, userStoryListDtoList.get(0).getPriority());
-        assertEquals(2, userStoryListDtoList.get(1).getPriority());
-        assertEquals(3, userStoryListDtoList.get(2).getPriority());
-        assertEquals(5, userStoryListDtoList.get(3).getPriority());
+        assertEquals(1, userStoryListDtoList.get(0).getPriority().getPriorityUs());
+        assertEquals(2, userStoryListDtoList.get(1).getPriority().getPriorityUs());
+        assertEquals(3, userStoryListDtoList.get(2).getPriority().getPriorityUs());
+        assertEquals(5, userStoryListDtoList.get(3).getPriority().getPriorityUs());
     }
 
     @Test
@@ -211,16 +211,16 @@ public class ProductBacklogSortControllerTest {
         Project project = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         company.getProjectStore().saveNewProject(project);
-        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 2, "create user story", 5);
-        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "sort user story", 5);
-        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 3, "backlog sorted", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "create user story", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_2022_2_As a PO, i want to test this string","As a PO, i want to test this string", 1, "sort user story", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_2022_3_As a PO, i want to test this string","As a PO, i want to test this string", 3, "backlog sorted", 5);
 
         projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
@@ -229,7 +229,7 @@ public class ProductBacklogSortControllerTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company, mapper, mapperPB);
             productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
-            project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 6, "show sorted", 5);
+            project.getUserStoryStore().createAndSaveUserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 6, "show sorted", 5);
             productBacklogSortController.getUsSortedByPriority("123testcode");
         });
         // Assert
@@ -248,7 +248,7 @@ public class ProductBacklogSortControllerTest {
         Project project = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2022, 1, 5);
         Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -256,10 +256,10 @@ public class ProductBacklogSortControllerTest {
         ProjectTeam projectTeam = new ProjectTeam(resFac);// Arrange
 
         company.getProjectStore().saveNewProject(project);
-        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 2, "create user story", 5);
-        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "sort user story", 5);
-        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 3, "backlog sorted", 5);
-        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 5, "show sorted", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "create user story", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_2022_2_As a PO, i want to test this string","As a PO, i want to test this string", 1, "sort user story", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_2022_3_As a PO, i want to test this string","As a PO, i want to test this string", 3, "backlog sorted", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_2022_4_As a PO, i want to test this string","As a PO, i want to test this string", 5, "show sorted", 5);
 
         projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
@@ -268,17 +268,17 @@ public class ProductBacklogSortControllerTest {
         productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
         List<UserStoryDto> userStoryListDtoList = productBacklogSortController.getUsSortedByPriority("Project_2022_1");
         // Assert
-        assertEquals(project.getProductBacklog().getUserStoryList().get(0).getTitle().getTitleUs(), userStoryListDtoList.get(0).getTitle());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(0).getPriority().getPriorityUs(), userStoryListDtoList.get(0).getPriority());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(0).getDescription().getText(), userStoryListDtoList.get(0).getDescription().getText());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(1).getTitle().getTitleUs(), userStoryListDtoList.get(1).getTitle());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(1).getPriority().getPriorityUs(), userStoryListDtoList.get(1).getPriority());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(1).getDescription().getText(), userStoryListDtoList.get(1).getDescription().getText());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(2).getTitle().getTitleUs(), userStoryListDtoList.get(2).getTitle());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(2).getPriority().getPriorityUs(), userStoryListDtoList.get(2).getPriority());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(2).getDescription().getText(), userStoryListDtoList.get(2).getDescription().getText());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(3).getTitle().getTitleUs(), userStoryListDtoList.get(3).getTitle());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(3).getPriority().getPriorityUs(), userStoryListDtoList.get(3).getPriority());
-        assertEquals(project.getProductBacklog().getUserStoryList().get(3).getDescription().getText(), userStoryListDtoList.get(3).getDescription().getText());
+        assertEquals(project.getUserStoryStore().getUserStoryList().get(0).getTitle().getTitleUs(), userStoryListDtoList.get(0).getTitle().getTitleUs());
+        assertEquals(project.getUserStoryStore().getUserStoryList().get(0).getPriority().getPriorityUs(), userStoryListDtoList.get(0).getPriority().getPriorityUs());
+        assertEquals(project.getUserStoryStore().getUserStoryList().get(0).getDescription().getText(), userStoryListDtoList.get(0).getDescription().getText());
+        assertEquals(project.getUserStoryStore().getUserStoryList().get(1).getTitle().getTitleUs(), userStoryListDtoList.get(1).getTitle().getTitleUs());
+        assertEquals(project.getUserStoryStore().getUserStoryList().get(1).getPriority().getPriorityUs(), userStoryListDtoList.get(1).getPriority().getPriorityUs());
+        assertEquals(project.getUserStoryStore().getUserStoryList().get(1).getDescription().getText(), userStoryListDtoList.get(1).getDescription().getText());
+        assertEquals(project.getUserStoryStore().getUserStoryList().get(2).getTitle().getTitleUs(), userStoryListDtoList.get(2).getTitle().getTitleUs());
+        assertEquals(project.getUserStoryStore().getUserStoryList().get(2).getPriority().getPriorityUs(), userStoryListDtoList.get(2).getPriority().getPriorityUs());
+        assertEquals(project.getUserStoryStore().getUserStoryList().get(2).getDescription().getText(), userStoryListDtoList.get(2).getDescription().getText());
+        assertEquals(project.getUserStoryStore().getUserStoryList().get(3).getTitle().getTitleUs(), userStoryListDtoList.get(3).getTitle().getTitleUs());
+        assertEquals(project.getUserStoryStore().getUserStoryList().get(3).getPriority().getPriorityUs(), userStoryListDtoList.get(3).getPriority().getPriorityUs());
+        assertEquals(project.getUserStoryStore().getUserStoryList().get(3).getDescription().getText(), userStoryListDtoList.get(3).getDescription().getText());
     }
 }

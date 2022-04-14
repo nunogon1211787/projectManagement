@@ -4,10 +4,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import switch2021.project.utils.ValueObject;
 
-import java.util.Objects;
-
 @Getter
 @EqualsAndHashCode
+
 public class UsPriority implements ValueObject<UsPriority> {
 
     /**
@@ -26,7 +25,6 @@ public class UsPriority implements ValueObject<UsPriority> {
         this.priorityUs = priorityUs;
     }
 
-
     /**
      * Methods
      **/
@@ -36,6 +34,9 @@ public class UsPriority implements ValueObject<UsPriority> {
         }
     }
 
+    /**
+     * Override
+     **/
     @Override
     public boolean sameValueAs(UsPriority other) {
         return false;

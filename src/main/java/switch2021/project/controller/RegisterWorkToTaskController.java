@@ -4,6 +4,7 @@ import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.Task.Task;
 import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.model.UserStory.UserStoryId;
 import switch2021.project.model.valueObject.Date;
 import switch2021.project.dto.TaskEffortDTO;
 import switch2021.project.dto.TaskIdNameDTO;
@@ -36,30 +37,30 @@ public class RegisterWorkToTaskController {
         this.mapper = mapper;
     }
 
-
+//TODO ver como vamos buscar lista de tasks nao vamos buscar a US
     /**
      * Methods
      **/
     public List<TaskIdNameDTO> getTasks(UserStorySprintProjectDTO userStorySprintProjectDTO) {
         String code = userStorySprintProjectDTO.getProjectCode();
         int sprintId = userStorySprintProjectDTO.getSprintId();
-        int userStoryId = userStorySprintProjectDTO.getUserStoryId();
+        UserStoryId userStoryId = userStorySprintProjectDTO.getUserStoryId();
 
         ProjectStore projectStore = this.company.getProjectStore();
         Project project = projectStore.getProjectByCode(code);
 
         SprintStore sprintList = project.getSprintList();
-        Sprint sprint = sprintList.getSprintById(sprintId);
+        Sprint sprint = sprintList.findSprintById(sprintId);
 
-        this.userStory = sprint.getUsById(userStoryId);
+        this.userStory = sprint.getUsByIdFromScrumBoard(userStoryId);
 
-        this.taskList = this.userStory.getTasks().getTaskList();
+//        this.taskList = this.userStory.getTasks().getTaskList();
 
         return this.mapper.toDtoList(this.taskList);
     }
 
     public TaskIdNameDTO getTask(int taskId) {
-        this.task = this.userStory.getTasks().getTaskById(taskId);
+//        this.task = this.userStory.getTasks().getTaskById(taskId);
         return this.mapper.toDTO(this.task);
     }
 

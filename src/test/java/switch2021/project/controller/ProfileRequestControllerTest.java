@@ -3,8 +3,9 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.SystemUser.Request;
+import switch2021.project.model.valueObject.Request;
 import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.model.valueObject.SystemUserId;
 
 import java.time.LocalDate;
 
@@ -13,62 +14,59 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProfileRequestControllerTest {
 
     @Test
-    public void createRequestTest() {
+    public void createRequestSuccess() {
+        //Arrange
+        Company company = new Company();
+        ProfileRequestController controller = new ProfileRequestController(company);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser testUser = new SystemUser("joaquim", "xxxx@isep.ipp.pt",
+                "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
+        company.getSystemUserStore().saveSystemUser(testUser);
+        //Act + Assert
+        assertTrue(controller.createProfileRequest("xxxx@isep.ipp.pt","User"));
+    }
+
+    @Test
+    public void createRequestSuccessRequestAThirdProfile() {
+        //Arrange
+        Company company = new Company();
+        ProfileRequestController controller = new ProfileRequestController(company);
+        UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
+        SystemUser testUser = new SystemUser("joaquim", "xxxx@isep.ipp.pt",
+                "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
+        company.getSystemUserStore().saveSystemUser(testUser);
+        controller.createProfileRequest("xxxx@isep.ipp.pt","User");
+        //Act + Assert
+        assertTrue(controller.createProfileRequest("xxxx@isep.ipp.pt","Director"));
+    }
+
+    @Test
+    public void createRequestFailSameProfile() {
         //Arrange
         Company company = new Company();
         ProfileRequestController controller = new ProfileRequestController(company);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("joaquim", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+                "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         company.getSystemUserStore().saveSystemUser(user);
-        java.time.LocalDate datateste = LocalDate.now();
-        //Act
-        Request request = controller.createProfileRequest("xxxx@isep.ipp.pt", "Director");
-        controller.saveRequest();
-        //Assert
-        assertEquals(datateste, request.getRequestDate());
-        assertEquals(company.getUserProfileStore().getUserProfile("Director"), request.getProfileRequested());
-        assertEquals(user, request.getUser());
-        assertFalse(request.isRequestStatus());
+        //Act + Assert
+        assertFalse(controller.createProfileRequest("xxxx@isep.ipp.pt","Visitor"));
     }
 
     @Test
-    public void saveRequest() {
+    public void createRequestFailSameRequestSameDay() {
         //Arrange
         Company company = new Company();
         ProfileRequestController controller = new ProfileRequestController(company);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("joaquim", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+                "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         company.getSystemUserStore().saveSystemUser(user);
-        java.time.LocalDate datateste = LocalDate.now();
-        //Act
-        Request request = controller.createProfileRequest("xxxx@isep.ipp.pt", "Director");
-        boolean test = controller.saveRequest();
-        //Assert
-        assertEquals(datateste, request.getRequestDate());
-        assertEquals(company.getUserProfileStore().getUserProfile("Director"), request.getProfileRequested());
-        assertEquals(user, request.getUser());
-        assertFalse(request.isRequestStatus());
-        assertTrue(test);
+        controller.createProfileRequest("xxxx@isep.ipp.pt","User");
+        //Act + Assert
+        assertFalse(controller.createProfileRequest("xxxx@isep.ipp.pt","User"));
     }
 
-    @Test
-    public void saveRequestFalse() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            Company company = new Company();
-            ProfileRequestController controller = new ProfileRequestController(company);
-            UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-            SystemUser user = new SystemUser("joaquim", "xxxx@isep.ipp.pt",
-                    "tester", "Qwerty_1", "Qwerty_1", "123456", profile);
-            company.getSystemUserStore().saveSystemUser(user);
-            //Act
-            controller.createProfileRequest("xxxx@isep.ipp.pt", "Director");
-            controller.createProfileRequest("xxxx@isep.ipp.pt", "Director");
-            controller.saveRequest();
-            controller.saveRequest();
-        });
-    }
+
+
 }

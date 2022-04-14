@@ -50,7 +50,7 @@ public class GetScrumBoardController {
 //    }
 
     public List<UserStory> getUserStoryList() {
-        userStoryList = sprint.getListOfUsFromSprintBacklog();
+        userStoryList = sprint.getListOfUsFromScrumBoard();
         return Collections.unmodifiableList(userStoryList);
     }
 

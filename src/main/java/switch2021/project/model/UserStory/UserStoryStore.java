@@ -11,7 +11,7 @@ import java.util.*;
 @Getter
 @Setter
 
-public class ProductBacklog {
+public class UserStoryStore {
 
     /**
      * UserStory Store Attributes (backlog). Contains a UserStory list.
@@ -23,12 +23,12 @@ public class ProductBacklog {
     /**
      * Constructor
      **/
-    public ProductBacklog(UserStoryFactory userStoryFactory) {
+    public UserStoryStore(UserStoryFactory userStoryFactory) {
         this.userStoryList = new ArrayList<>();
         this.userStoryFactory = userStoryFactory == null ? new UserStoryFactory() : userStoryFactory;
     }
 
-    public ProductBacklog() {
+    public UserStoryStore() {
         this(null);
     }
 
@@ -36,18 +36,14 @@ public class ProductBacklog {
     /**
      * Methods for create UserStory to the productBacklog
      **/
-    public void createAndSaveUserStory(String title, int priority, String description, int estimateEffort) {
+    public void createAndSaveUserStory(String userStoryId, String title, int priority, String description, int estimateEffort) {
 
-        UserStory newUserStory = this.userStoryFactory.createUserStory(title, priority, description, estimateEffort);
+        UserStory newUserStory = this.userStoryFactory.createUserStory(userStoryId, title, priority, description, estimateEffort);
+        validateIdUserStory(newUserStory);
 
-        if (!validateUserStory(newUserStory)) {
-
-            if (validateIdUserStory(newUserStory)) {
-                newUserStory.setIdUserStory(idUserStoryGenerator());
-            }
-            this.userStoryList.add(newUserStory);
-        }
+        this.userStoryList.add(newUserStory);
     }
+
 
     public UserStory refineUserStory(UserStory userStoryParent, int priority, String description) {
         UserStory userStory = new UserStory(userStoryParent, priority, description);
@@ -64,27 +60,22 @@ public class ProductBacklog {
     /**
      * Validation Methods.
      *
-     * @return boolean
+     * return exception if case
      */
-    private boolean validateUserStory(UserStory newUserStory) {
-        // check duplicate story
+    private void validateUserStory(UserStory newUserStory) {
         for (UserStory us : userStoryList) {
-            if (us.getDescription().getText().trim().equalsIgnoreCase(newUserStory.getDescription().getText().trim())) {
-                throw new IllegalArgumentException("Repeated user story inserted, same code project and description.");
+            if (us.getDescription().getText().trim().equalsIgnoreCase(newUserStory.getDescription().getText())) {
+                throw new IllegalArgumentException("Repeated user story, inserted same title");
             }
         }
-        return false;
     }
 
-    private boolean validateIdUserStory(UserStory newUserStory) {
-        boolean msg = true;
-        for (UserStory i : userStoryList) {
-            if (i.getIdUserStory() == newUserStory.getIdUserStory()) {
-                msg = false;
-                break;
+    private void validateIdUserStory(UserStory newUserStory) {
+        for (UserStory id : userStoryList) {
+            if (Objects.equals(id.getUserStoryId().toString(), newUserStory.getUserStoryId().toString())) {
+                throw new IllegalArgumentException("Repeated user story inserted, same code project and title.");
             }
         }
-        return msg;
     }
 
     /**
@@ -100,7 +91,7 @@ public class ProductBacklog {
 
 
         for (UserStory userStory : userStoryList) {
-            if (userStory.getUsCancelled() != null && userStory.getUsEndDate()!= null &&
+            if (userStory.getUsCancelled() != null && userStory.getUsEndDate() != null &&
                     userStory.getPriority().getPriorityUs() != 0) {
                 returnList.add(userStory);
             } else if (userStory.getPriority().getPriorityUs() == 0) {
@@ -117,13 +108,14 @@ public class ProductBacklog {
 
     /**
      * Finds all user story all activeUserStoryList.
+     *
      * @return userStoryList if found, else {@code null}
      */
 
-        public List<UserStory> findActiveUserStoryList() {
+    public List<UserStory> findActiveUserStoryList() {
         List<UserStory> activeUSList = new ArrayList<>();
         for (UserStory us : userStoryList) {
-            if (us.getUsEndDate()!= null && us.getUsCancelled() != null ) {
+            if (us.getUsEndDate() != null && us.getUsCancelled() != null) {
                 activeUSList.add(us);
             }
         }
@@ -132,13 +124,14 @@ public class ProductBacklog {
 
     /**
      * Finds a user story using given ID.
-     * @param  idUserStory id
+     *
+     * @param idUserStory id
      * @return userStory if found, else {@code null}
      */
-    public UserStory findUserStoryById(int idUserStory) {
+    public UserStory findUserStoryById(UserStoryId idUserStory) {
         UserStory userStory = null;
         for (UserStory us : userStoryList) {
-            if (us.getIdUserStory() == idUserStory) {
+            if (Objects.equals(us.getUserStoryId().toString(), idUserStory.toString())) {
                 userStory = us;
                 break;
             }
@@ -148,6 +141,7 @@ public class ProductBacklog {
 
     /**
      * Finds a user story using given projectID.
+     *
      * @param projectID id
      * @return allUserStoriesInAProject if found, else {@code null}
      */
@@ -163,25 +157,12 @@ public class ProductBacklog {
 
     /**
      * Delete a user story using given ID.
+     *
      * @param idUserStory id
-     * @return UserStorybyID if found, else {@code null}
+     * return UserStory byID if found, else {@code null}
      */
 
-    public void removeUserStoryById (int idUserStory){
+    public void removeUserStoryById(UserStoryId idUserStory) {
         this.userStoryList.remove(idUserStory);
-    }
-
-    //TODO CDC ver questão de gerar ID
-    /**
-     * ID_UserStory Generator
-     **/
-    //if the object isn´t saved on the list, the id will be the same for all
-    //objects. This issue will be solved when calling the save method.
-    public int idUserStoryGenerator() {
-        int id = 1;
-        if (!this.userStoryList.isEmpty()) {
-            id = this.userStoryList.get(userStoryList.size() - 1).getIdUserStory() + 1;
-        }
-        return id;
     }
 }

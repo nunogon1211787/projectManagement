@@ -35,13 +35,13 @@ public class AssociateResourceController {
     }
 
     public List<SystemUser> getSystemUserList() {
-        this.arraySystemUser = this.company.getSystemUserStore().getSystemUsers();
+        this.arraySystemUser = this.company.getSystemUserStore().findAllSystemUsers();
         return arraySystemUser;
     }
 
     public boolean associateResource(String email, String projectCode, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
         boolean msg = false;
-        SystemUser user = this.company.getSystemUserStore().getUserByEmail(email);
+        SystemUser user = this.company.getSystemUserStore().findSystemUserByEmail(email);
         if (this.company.getProjectStore().validateAllocation(user, percentageOfAllocation, startDate, endDate)) {
             Project project = this.company.getProjectStore().getProjectByCode(projectCode);
             Resource resource = project.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);

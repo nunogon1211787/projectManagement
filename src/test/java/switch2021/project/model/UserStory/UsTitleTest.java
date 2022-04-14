@@ -2,7 +2,7 @@ package switch2021.project.model.UserStory;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.UserStory.UsTitle;
+import switch2021.project.model.Typology.Typology;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -57,4 +57,81 @@ public class UsTitleTest {
         assertEquals("Title cannot be blank", exception.getMessage());
     }
 
+    @Test
+    @DisplayName("Test hashcode conditions for coverage purposes")
+    public void hasCodeSuccess() {
+        //Arrange
+        UsTitle usTitle = new UsTitle("As a PO, i want to test this string");
+        UsTitle usTitle2 = new UsTitle("As a PO, i want to test this string");
+        //Act and Assert
+        assertEquals(usTitle.hashCode(), usTitle2.hashCode());
+    }
+
+    @Test
+    @DisplayName("Test hashcode conditions for coverage purposes")
+    public void hashCodeFail() {
+        //Arrange
+        UsTitle usTitle = new UsTitle("As a PO, i want to test this string");
+        UsTitle usTitle2 = new UsTitle("As a PO, i want to test");
+        //Act and Assert
+        assertNotEquals(usTitle.hashCode(), usTitle2.hashCode());
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTestNull() {
+        //Arrange
+        UsTitle usTitle = null;
+        //Act and Assert
+        assertNull(usTitle);
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTestFail() {
+        //Arrange
+        UsTitle usTitle = new UsTitle("As a PO, i want to test this string");
+        Typology usTitle1 = new Typology("test");
+        //Act and Assert
+        assertNotEquals(usTitle, usTitle1);
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTestFail_1() {
+        //Arrange
+        UsTitle usTitle = new UsTitle("As a PO, i want to test this string");
+        UsTitle usTitle2 = new UsTitle("As a PO, i want to test this");
+        //Act and Assert
+        assertNotEquals(usTitle, usTitle2);
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTestSuccess() {
+        //Arrange
+        UsTitle usTitle = new UsTitle("As a PO, i want to test this string");
+        UsTitle usTitle2 = new UsTitle("As a PO, i want to test this string");
+        //Act and Assert
+        assertEquals(usTitle, usTitle2);
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTest() {
+        //Arrange
+        UsTitle usTitle = new UsTitle("As a PO, i want to test this string");
+        //Act and Assert
+        assertEquals(usTitle, usTitle);
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void sameValueOf() {
+        //Arrange
+        UsTitle usTitle = new UsTitle("As a PO, i want to test this string");
+        UsTitle usTitle2 = new UsTitle("As a PO, i want to test");
+        //Act and Assert
+        assertFalse(usTitle.sameValueAs(usTitle2));
+    }
 }

@@ -5,12 +5,13 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.UserStory.UserStoryId;
 import switch2021.project.model.valueObject.BusinessSector;
 import switch2021.project.model.valueObject.Customer;
 import switch2021.project.model.Typology.Typology;
-
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class AddUserStoryToSprintBacklogControllerTest {
 
@@ -26,12 +27,13 @@ public class AddUserStoryToSprintBacklogControllerTest {
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
 
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.now(), 2);
+        Sprint sprint = project.getSprintList().createSprint("Sprint 1", 2);
+        sprint.setStartDate(LocalDate.now());
         project.getSprintList().saveSprint(sprint);
 
         company.getProjectStore().saveNewProject(project);
-
-        company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().createAndSaveUserStory( "As a PO, i want to test this string",
+        UserStoryId userStoryId = new UserStoryId("Project_2022_1_As a PO, i want to test this string");
+        company.getProjectStore().getProjectByCode("Project_2022_1").getUserStoryStore().createAndSaveUserStory(userStoryId.toString(),"As a PO, i want to test this string",
                 1, "Fazer coisas cool",5);
 
         //Act
@@ -39,12 +41,14 @@ public class AddUserStoryToSprintBacklogControllerTest {
         addStory.getProject("Project_2022_1");
         addStory.getSprintStore();
         addStory.getSprint(1);
-        addStory.getProductBacklog();
+        addStory.getUserStoryStore();
 
-        addStory.addUserStoryToSprintBacklog(1);
+
+        addStory.addUserStoryToSprintBacklog(userStoryId);
 
         //Assert
-        assertEquals(company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryList().get(0), company.getProjectStore().getProjectByCode("Project_2022_1").getCurrentSprint().getListOfUsFromSprintBacklog().get(0));
+        assertEquals(company.getProjectStore().getProjectByCode("Project_2022_1").getUserStoryStore().getUserStoryList().get(0),
+                company.getProjectStore().getProjectByCode("Project_2022_1").getCurrentSprint().getListOfUsFromScrumBoard().get(0));
     }
 }
 

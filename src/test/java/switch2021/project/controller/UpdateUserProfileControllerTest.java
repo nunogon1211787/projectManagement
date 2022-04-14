@@ -24,14 +24,14 @@ public class UpdateUserProfileControllerTest {
         userProfileStore = company.getUserProfileStore();
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+                "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());
         systemUserStore.saveSystemUser(user);
     }
 
     @Test
     public void constructorUpdateUserProfileTest() {
         //Arrange
-        SystemUser user = systemUserStore.getUserByEmail("xxxx@isep.ipp.pt");
+        SystemUser user = systemUserStore.findSystemUserByEmail("xxxx@isep.ipp.pt");
         Company company2 = new Company();
         UpdateUserProfileController controllerTest2 = new UpdateUserProfileController(company2);
         //Act
@@ -66,10 +66,10 @@ public class UpdateUserProfileControllerTest {
     public void updateProfileTest() {
         //Arrange
         SystemUser user = new SystemUser("Ivan Aguiar", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfileStore.getUserProfile("Visitor"));
+                "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfileStore.getUserProfile("Visitor").getUserProfileId());
         UpdateUserProfileController controllerTest = new UpdateUserProfileController(company);
         //Act
-        company.getSystemUserStore().getSystemUsers().add(user);
+        company.getSystemUserStore().findAllSystemUsers().add(user);
         //Assert
         assertTrue(controllerTest.updateProfile(user, userProfileStore.getUserProfile("Administrator"), userProfileStore.getUserProfile("Director")));
     }

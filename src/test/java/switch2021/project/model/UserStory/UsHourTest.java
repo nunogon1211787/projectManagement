@@ -3,7 +3,6 @@ package switch2021.project.model.UserStory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.valueObject.Budget;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -118,7 +117,7 @@ public class UsHourTest {
         //Arrange
         UsHour usHour = new UsHour(2);
         UsHour usHour1 = new UsHour(2);
-        //Act and Arrange
+        //Act and Assert
         assertEquals(usHour.hashCode(), usHour1.hashCode());
     }
 
@@ -128,8 +127,18 @@ public class UsHourTest {
         //Arrange
         UsHour usHour = new UsHour(2);
         UsHour usHour1 = new UsHour(3);
-        //Act and Arrange
+        //Act and Assert
         assertNotEquals(usHour.hashCode(), usHour1.hashCode());
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void sameValueOf() {
+        //Arrange
+        UsHour usHour = new UsHour(2);
+        UsHour usHour1 = new UsHour(3);
+        //Act and Assert
+        assertFalse(usHour.sameValueAs(usHour1));
     }
 }
 

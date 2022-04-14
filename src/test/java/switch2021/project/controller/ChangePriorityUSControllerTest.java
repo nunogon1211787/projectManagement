@@ -55,22 +55,19 @@ public class ChangePriorityUSControllerTest {
         project3 = company.getProjectStore().createProject("prototype8", "test56", customer,
                 typo, sector, startDate3, 4, 3000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        newUser = new SystemUser("batatinha", "batatinha@cartoon.com", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
-        newUser2 = new SystemUser("companhia", "companhia@cartoon.com", "des", "Qwerty_1", "Qwerty_1", "photo1.png", userProfile);
+        newUser = new SystemUser("batatinha", "batatinha@cartoon.com", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());
+        newUser2 = new SystemUser("companhia", "companhia@cartoon.com", "des", "Qwerty_1", "Qwerty_1", "photo1.png", userProfile.getUserProfileId());
         LocalDate startDate = LocalDate.of(2021, 12, 31);
         LocalDate endDate = LocalDate.of(2023, 3, 5);
         input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         input2 = new Resource(newUser2, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         userStoryStatus = new UserStoryStatus("coiso", true);
-        userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        userStory.setIdUserStory(0);
-        userStory2 = new UserStory("As a diretor, i want to test this string", 3, "Fazer tal e coiso", 5);
-        userStory2.setIdUserStory(1);
-        userStory3 = new UserStory("As a SM, i want to test this string", 4, "Fazer tal e coiso também", 5);
-        userStory3.setIdUserStory(2);
-        project.getProductBacklog().getUserStoryList().add(userStory);
-        project.getProductBacklog().getUserStoryList().add(userStory2);
-        project.getProductBacklog().getUserStoryList().add(userStory3);
+        userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "Fazer tal", 5);
+        userStory2 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a diretor, i want to test this string", 3, "Fazer tal e coiso", 5);
+        userStory3 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a SM, i want to test this string", 4, "Fazer tal e coiso também", 5);
+        project.getUserStoryStore().getUserStoryList().add(userStory);
+        project.getUserStoryStore().getUserStoryList().add(userStory2);
+        project.getUserStoryStore().getUserStoryList().add(userStory3);
         company.getProjectStore().saveNewProject(project);
         company.getProjectStore().saveNewProject(project2);
         company.getProjectStore().saveNewProject(project3);
@@ -140,12 +137,12 @@ public class ChangePriorityUSControllerTest {
         //Arrange
         ChangePriorityUSController change = new ChangePriorityUSController(company);
         change.getProject(project.getProjectCode().getCode());
-        change.getProductBacklog();
+        change.getUserStoryStore();
         // Act
         UserStory expected = userStory2;
-        UserStory actual = change.getUS(userStory2.getIdUserStory());
+        UserStory actual = change.getUS(userStory2.getUserStoryId());
         // Assert
-        assertEquals(expected.getIdUserStory(), actual.getIdUserStory());
+        assertEquals(expected.getUserStoryId(), actual.getUserStoryId());
     }
 
     @Test
@@ -153,8 +150,8 @@ public class ChangePriorityUSControllerTest {
         //Arrange
         ChangePriorityUSController change = new ChangePriorityUSController(company);
         change.getProject(project.getProjectCode().getCode());
-        change.getProductBacklog();
-        change.getUserStory(userStory.getIdUserStory());
+        change.getUserStoryStore();
+        change.getUserStory(userStory.getUserStoryId());
 
         // Act
         change.setPriority(4);
@@ -245,16 +242,16 @@ public class ChangePriorityUSControllerTest {
 
         project.addResource(input);
 
-        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryList();
+        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getUserStoryStore().getUserStoryList();
 
-        assertEquals(usList, this.project.getProductBacklog().getUserStoryList());
+        assertEquals(usList, this.project.getUserStoryStore().getUserStoryList());
     }
 
     @Test
     void getUserStoryListFromProjectSizeTest() {
         project.addResource(input);
 
-        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().getUserStoryList();
+        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getUserStoryStore().getUserStoryList();
 
         assertEquals(3, usList.size());
     }
@@ -263,7 +260,7 @@ public class ChangePriorityUSControllerTest {
     void getUserStoryListFromProjectOnlyActive() {
         project.addResource(input);
 
-        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog().findActiveUserStoryList();
+        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getUserStoryStore().findActiveUserStoryList();
 
         assertEquals(0, usList.size());
     }
@@ -273,7 +270,7 @@ public class ChangePriorityUSControllerTest {
 //    void getUSCorrect() {
 //        project.addResource(input);
 //
-//        UserStory us1 = project.getProductBacklog().getUserStoryById(2);
+//        UserStory us1 = project.getUserStoryStore().getUserStoryById(2);
 //
 //        assertEquals(userStory2,us1);
 //    }
@@ -296,7 +293,7 @@ public class ChangePriorityUSControllerTest {
         userStory3.setPriority(6);
         });
 
-        assertTrue(exception.getMessage().equals("Check priority, cannot be < 0 or superior to 5"));
+        assertEquals("Check priority, cannot be < 0 or superior to 5", exception.getMessage());
 
     }
 }

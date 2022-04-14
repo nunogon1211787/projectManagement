@@ -15,7 +15,7 @@ class UserStoryTest {
     @Test
     void ValidateInfoUserStory() {
         //Arrange & Act
-        UserStory userStory = new UserStory("As a PO, i want to test this string", 1, "As a PO, i want to test this string - Test", 40);
+        UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 1, "As a PO, i want to test this string - Test", 40);
         //Assert
         assertEquals("As a PO, i want to test this string", userStory.getTitle().getTitleUs());
         assertEquals("As a PO, i want to test this string - Test", userStory.getDescription().getText());
@@ -24,7 +24,7 @@ class UserStoryTest {
 
     @Test
     void setPriorityTest() {
-        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "Fazer tal", 5);
         userStory.setPriority(4);
         assertEquals(4, userStory.getPriority().getPriorityUs());
     }
@@ -32,24 +32,24 @@ class UserStoryTest {
 
     @Test
     void hasCodeTest() {
-        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "Fazer tal", 5);
 
-        boolean expected = userStory.hasCode(userStory.getIdUserStory());
+        boolean expected = userStory.hasCode(userStory.getUserStoryId());
         assertTrue(expected);
     }
 
     @Test
     void hasCodeTest2() {
-        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-
-        boolean expected = userStory.hasCode(4);
+        UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "Fazer tal", 5);
+UserStoryId userStoryId =new UserStoryId("Project_2022_1_As a PO, i want to test this string");
+        boolean expected = userStory.hasCode(userStoryId);
         assertFalse(expected);
     }
 
     @Test
     void setDescriptionTest() {
         //Arrange
-        UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
+        UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "Fazer tal", 5);
         //Act
         userStory.setDescription("Fazer coiso");
         //Assert
@@ -60,9 +60,9 @@ class UserStoryTest {
     @Test
     void setParentUserStoryTest() {
         //Arrange
-        UserStory userStory = new UserStory("As a PO, i want to test this string", 1, "US001 - Test", 40);
-        UserStory userStory_parent = new UserStory("As a PO, i want to test this string", 1, "As a PO, i want to test this string - Test", 40);
-        UserStory userStory_parent2 = new UserStory("As a PO, i want to test", 2, "make testes", 20);
+        UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 1, "US001 - Test", 40);
+        UserStory userStory_parent = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 1, "As a PO, i want to test this string - Test", 40);
+        UserStory userStory_parent2 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test", 2, "make testes", 20);
 
         //Act
         userStory.setParentUserStory(userStory_parent);
@@ -81,8 +81,8 @@ class UserStoryTest {
             when(description.getText()).thenReturn("Super");
             when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
 
-            UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "", 5);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
@@ -95,8 +95,8 @@ class UserStoryTest {
             when(description.getText()).thenReturn("Super");
             when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
 
-            UserStory userStory = new UserStory("As a PO, i want to test this string", 2, "    ", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "    ", 5);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
@@ -110,8 +110,8 @@ class UserStoryTest {
             when(description.getText()).thenReturn("Super");
             when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
 
-            UserStory userStory = new UserStory("", 2, "Fazer tal", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","", 2, "Fazer tal", 5);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
@@ -125,8 +125,8 @@ class UserStoryTest {
             when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
 
 
-            UserStory userStory = new UserStory("C", 2, "Fazer tal", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","C", 2, "Fazer tal", 5);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
@@ -139,8 +139,8 @@ class UserStoryTest {
             when(description.getText()).thenReturn("Super");
             when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
 
-            UserStory userStory = new UserStory("   ", 2, "Fazer tal", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","   ", 2, "Fazer tal", 5);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
@@ -154,16 +154,16 @@ class UserStoryTest {
             when(sprint.getStartDate()).thenReturn(LocalDate.of(2022, 3, 1));
 
 
-            UserStory userStory = new UserStory("CC", 2, "Fazer tal", 5);
-            sprint.saveUsInSprintBacklog(userStory);
+            UserStory userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","CC", 2, "Fazer tal", 5);
+            sprint.saveUsInScrumBoard(userStory);
         });
     }
 
     @Test
     void hashCodeTest() {
-        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 1, "Fazer tal", 0);
-        UserStory userStory2 = new UserStory("As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
-        UserStory userStory3 = new UserStory("As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
+        UserStory userStory1 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 1, "Fazer tal", 0);
+        UserStory userStory2 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
+        UserStory userStory3 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
        UserStoryStatus status4 = mock(UserStoryStatus.class);
        Description description = mock(Description.class);
        when(status4.getDescription()).thenReturn(description);
@@ -180,24 +180,23 @@ class UserStoryTest {
         assertNotEquals(null, userStory1);
         assertEquals(userStory1.getClass(), userStory2.getClass());
         assertNotEquals(userStory1.hashCode(), userStory3.hashCode());
-        assertEquals(0, userStory1.getIdUserStory());
+        assertEquals("Project_2022_1_As a PO, i want to test this string", userStory1.getUserStoryId().toString());
         assertNotEquals(null, status4);
     }
 
     @Test
     void setID() {
-        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        UserStory userStory2 = new UserStory("As a IO, i want to test this string", 2, "Fazer tal e coiso", 5);
-        userStory2.setIdUserStory(2);
+        UserStory userStory1 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("Project_2022_2_As a PO, i want to test this string","As a IO, i want to test this string", 2, "Fazer tal e coiso", 5);
 
-        assertEquals(2, userStory2.getIdUserStory());
-        assertNotEquals(2, userStory1.getIdUserStory());
+        assertEquals("Project_2022_2_As a PO, i want to test this string", userStory2.getUserStoryId().toString());
+        assertNotEquals("2", userStory1.getUserStoryId());
     }
 
     @Test
     void getTimeEstimate() {
-        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        UserStory userStory2 = new UserStory("As a IO, i want to test this string", 2, "Fazer tal e coiso", 5);
+        UserStory userStory1 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a IO, i want to test this string", 2, "Fazer tal e coiso", 5);
         userStory2.setTimeEstimate(new UsHour(0));
 
         assertEquals(0, userStory2.getTimeEstimate().getUsHours());
@@ -207,8 +206,8 @@ class UserStoryTest {
 
     @Test
     void setPriorityTrue() {
-        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        UserStory userStory2 = new UserStory("As a SO, i want to test this string", 2, "Fazer tal e coiso", 5);
+        UserStory userStory1 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a SO, i want to test this string", 2, "Fazer tal e coiso", 5);
         userStory2.setPriority(1);
         userStory1.setPriority(4);
 
@@ -219,8 +218,8 @@ class UserStoryTest {
 
     @Test
     void setPriorityFalse() {
-        UserStory userStory1 = new UserStory("As a PO, i want to test this string", 2, "Fazer tal", 5);
-        UserStory userStory2 = new UserStory("As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
+        UserStory userStory1 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "Fazer tal", 5);
+        UserStory userStory2 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
         userStory2.setPriority(1);
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             userStory1.setPriority(6);
@@ -233,9 +232,9 @@ class UserStoryTest {
     public void overrideTest() {
         //Arrange
 
-        UserStory userStory1 = new UserStory("As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 10);
-        UserStory userStory2 = new UserStory("As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 10);
-        UserStory userStory3 = new UserStory("As coise, I want to tal12132", 4, "Fazer totil de cenas bueda fixes", 10);
+        UserStory userStory1 = new UserStory("Project_2022_1_As a PO, i want to test this string","As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 10);
+        UserStory userStory2 = new UserStory("Project_2022_1_As a PO, i want to test this string","As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 10);
+        UserStory userStory3 = new UserStory("Project_2022_1_As a PO, i want to test this string","As coise, I want to tal12132", 4, "Fazer totil de cenas bueda fixes", 10);
 
 
         //Assert
@@ -245,7 +244,6 @@ class UserStoryTest {
         assertEquals(userStory1.getTitle(), userStory2.getTitle());
         assertNotEquals(userStory1, userStory3);
         assertNotSame("saffdf", userStory1.getTitle().getTitleUs());
-        assertFalse(userStory1.hasCode(213));
         assertTrue(userStory1.setPriority(2));
 
     }
@@ -254,9 +252,9 @@ class UserStoryTest {
     public void overrideStatus() {
         //Arrange
 
-        UserStory userStory1 = new UserStory("As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 0);
-        UserStory userStory2 = new UserStory("As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 0);
-        UserStory userStory3 = new UserStory("As coise, I want to tal12132", 4, "Fazer totil de cenas bueda fixes", 10);
+        UserStory userStory1 = new UserStory("Project_2022_1_As a PO, i want to test this string","As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 0);
+        UserStory userStory2 = new UserStory("Project_2022_1_As a PO, i want to test this string","As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 0);
+        UserStory userStory3 = new UserStory("Project_2022_1_As a PO, i want to test this string","As coise, I want to tal12132", 4, "Fazer totil de cenas bueda fixes", 10);
         UserStory userStory4 = new UserStory(userStory3, 4, "Fazer totil de cenas bueda fixes");
         UserStory userStory5 = new UserStory(userStory3,  4, "Fazer totil de cenas bueda fixes");
         boolean result = userStory1.equals(userStory2);
@@ -267,12 +265,12 @@ class UserStoryTest {
         assertEquals(userStory1.getTitle(), userStory2.getTitle());
         assertEquals(userStory1.getPriority(), userStory2.getPriority());
         assertEquals(userStory1.getTimeEstimate(), userStory2.getTimeEstimate());
-        assertEquals(userStory1.getIdUserStory(), userStory2.getIdUserStory());
+        assertEquals(userStory1.getUserStoryId(), userStory2.getUserStoryId());
         assertEquals(userStory4.getParentUserStory(), userStory5.getParentUserStory());
-        assertEquals(userStory1.getTasks(), userStory2.getTasks());
         assertNotEquals(userStory1, userStory3);
         assertNotSame("saffdf", userStory1.getTitle().getTitleUs());
-        assertFalse(userStory1.hasCode(213));
+        //TODO CDC ver hascode
+//        assertFalse(userStory1.hasCode(213));
         assertTrue(userStory1.setPriority(2));
         assertEquals(0, userStory1.getTimeEstimate().getUsHours());
         assertTrue(result);

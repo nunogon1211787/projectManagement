@@ -2,7 +2,8 @@ package switch2021.project.controller;
 
 import switch2021.project.model.*;
 import switch2021.project.model.Sprint.SprintStore;
-import switch2021.project.model.UserStory.ProductBacklog;
+import switch2021.project.model.UserStory.UserStoryId;
+import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.UserStory.UserStory;
@@ -15,7 +16,7 @@ public class AddUserStoryToSprintBacklogController {
     private final Company company;
     private Project project;
     private SprintStore sprintList;
-    private ProductBacklog productBacklog;
+    private UserStoryStore userStoryStore;
     private Sprint sprint;
 
 
@@ -41,18 +42,18 @@ public class AddUserStoryToSprintBacklogController {
     }
 
     public Sprint getSprint(int sprintId) {
-        this.sprint = this.sprintList.getSprintById(sprintId);
+        this.sprint = this.sprintList.findSprintById(sprintId);
         return this.sprint;
     }
 
-    public ProductBacklog getProductBacklog() {
-        this.productBacklog = this.project.getProductBacklog();
-        return this.productBacklog;
+    public UserStoryStore getUserStoryStore() {
+        this.userStoryStore = this.project.getUserStoryStore();
+        return this.userStoryStore;
     }
 
-    public boolean addUserStoryToSprintBacklog(int userStoryId) {
-        UserStory userStory = this.productBacklog.findUserStoryById(userStoryId);
-        this.sprint.saveUsInSprintBacklog(userStory);
+    public boolean addUserStoryToSprintBacklog(UserStoryId userStoryId) {
+        UserStory userStory = this.userStoryStore.findUserStoryById(userStoryId);
+        this.sprint.saveUsInScrumBoard(userStory);
         return true;
     }
 }

@@ -24,7 +24,7 @@ public class ChangePasswordController {
 
     public boolean changePassword(String email, String oldPasswordUI, String newPassword, String newPasswordConfirmation) {
         SystemUserStore systemUserStore = company.getSystemUserStore();
-       SystemUser user = systemUserStore.getUserByEmail(email);
+       SystemUser user = systemUserStore.findSystemUserByEmail(email);
        return user.updatePassword(oldPasswordUI, newPassword, newPasswordConfirmation);
     }
 }

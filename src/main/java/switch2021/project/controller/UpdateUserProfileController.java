@@ -32,7 +32,7 @@ public class UpdateUserProfileController {
      * Methods
      **/
     public SystemUser getUser(String email) {
-        SystemUser user = systemUserStore.getUserByEmail(email);
+        SystemUser user = systemUserStore.findSystemUserByEmail(email);
         if (user == null) {
             throw new IllegalArgumentException("This email doesn't exist.");
         }

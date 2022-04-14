@@ -1,11 +1,13 @@
 package switch2021.project.model.SystemUser;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
+import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.Password;
-import switch2021.project.stores.SystemUserStore;
-import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.model.valueObject.SystemUserId;
+import switch2021.project.model.valueObject.UserProfileId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +17,16 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class SystemUserTest {
-
     @Test
     public void verifyEmail() {
 
         //Arrange
-        UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId profileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(profileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester", "Qwerty_1",
-                "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "photo.png", profileId);
         //Act
         String emailCheck = "xxxx@isep.ipp.pt";
         //Assert
@@ -36,12 +37,12 @@ class SystemUserTest {
     public void verifyEmailSuccess() {
 
         //Arrange
-        UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId profileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(profileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
-        SystemUser test = new SystemUser("Test", "xxkjbjsdaf@gndfsf.com", "tester", "Qwerty_1",
-                "Qwerty_1", "photo.png", userProfile);
+        SystemUser test = new SystemUser("Test","xxkjbjsdaf@gndfsf.com", "tester", "Qwerty_1",
+                "Qwerty_1", "photo.png", profileId);
         //Act
         String emailCheck = "xx";
         //Assert
@@ -52,11 +53,11 @@ class SystemUserTest {
     public void verifyEmailFail() {
 
         //Arrange
-        UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId profileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(profileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
-        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "Qwerty_1", "Qwerty_1", "photo.png", profileId);
         //Act
         String emailCheck = "4321@isep.ipp.pt";
         //Assert
@@ -67,12 +68,12 @@ class SystemUserTest {
     public void verifyUserNameSuccess() {
 
         //Arrange
-        UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId profileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(profileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
         SystemUser test = new SystemUser("Te", "xxkjfnsd@alksda.com", "tester", "Querty_1",
-                "Querty_1", "photo.png", userProfile);
+                "Querty_1", "photo.png", profileId);
         //Act
         String userName = "Te";
         //Assert
@@ -84,11 +85,11 @@ class SystemUserTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            UserProfile userProfile = mock(UserProfile.class);
+            UserProfileId profileId = mock(UserProfileId.class);
             Description description = mock(Description.class);
-            when(userProfile.getUserProfileName()).thenReturn(description);
+            when(profileId.getUserProfileName()).thenReturn(description);
             when(description.getText()).thenReturn("Visitor");
-            new SystemUser(" ", "1234@isep.ipp.pt", "Aluna", "abcde", "abcde", "123_img", userProfile);
+            new SystemUser(" ", "1234@isep.ipp.pt", "Aluna", "abcde", "abcde", "123_img", profileId);
         });
     }
 
@@ -96,14 +97,18 @@ class SystemUserTest {
     public void UpdateProfile() {
         //Arrange
         UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId userProfileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+        when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
-        SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+        SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         //Act
         UserProfile newProfile = mock(UserProfile.class);
-        Description newdescription = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(newdescription);
+        UserProfileId newUserProfileId = mock(UserProfileId.class);
+        Description newDescription = mock(Description.class);
+        when(newProfile.getUserProfileId()).thenReturn(newUserProfileId);
+        when(newUserProfileId.getUserProfileName()).thenReturn(newDescription);
         when(description.getText()).thenReturn("User");
         // Assert
         assertTrue(user.updateProfile(userProfile, newProfile));
@@ -115,15 +120,19 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile userProfile = mock(UserProfile.class);
+            UserProfileId userProfileId = mock(UserProfileId.class);
             Description description = mock(Description.class);
-            when(userProfile.getUserProfileName()).thenReturn(description);
+            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+            when(userProfileId.getUserProfileName()).thenReturn(description);
             when(description.getText()).thenReturn("Visitor");
-            SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "img_123", userProfile);
+            SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
             //Act
             UserProfile newProfile = mock(UserProfile.class);
-            Description newdescription = mock(Description.class);
-            when(userProfile.getUserProfileName()).thenReturn(newdescription);
-            when(description.getText()).thenReturn("Visitor");
+            UserProfileId newUserProfileId = mock(UserProfileId.class);
+            Description newDescription = mock(Description.class);
+            when(newProfile.getUserProfileId()).thenReturn(newUserProfileId);
+            when(newUserProfileId.getUserProfileName()).thenReturn(newDescription);
+            when(newDescription.getText()).thenReturn("Visitor");
             user.updateProfile(userProfile, newProfile);
         });
     }
@@ -134,10 +143,12 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             UserProfile userProfile = mock(UserProfile.class);
+            UserProfileId userProfileId = mock(UserProfileId.class);
             Description description = mock(Description.class);
-            when(userProfile.getUserProfileName()).thenReturn(description);
+            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+            when(userProfileId.getUserProfileName()).thenReturn(description);
             when(description.getText()).thenReturn("Notvisitor");
-            new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "img_123", userProfile);
+            new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "img_123", userProfileId);
         });
     }
 
@@ -149,10 +160,12 @@ class SystemUserTest {
 
         //Arrange
         UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId userProfileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+        when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
-        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10", "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10", "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         //Act
         joana.updatePassword("Qwerty_1", "Qwerty_2", "Qwerty_2");
         Password pwdExp = new Password("Qwerty_2");
@@ -168,11 +181,13 @@ class SystemUserTest {
         //password that came from User Interface (UI).
         //Arrange
         UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId userProfileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+        when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
         SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         //Act
         assertFalse(joana.updatePassword("HElLO_02", "GOODBYE", "GOODBYE"));
 
@@ -183,11 +198,13 @@ class SystemUserTest {
 
         //Arrange
         UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId userProfileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+        when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
         SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         //Act and Assert
         assertEquals("Joana", joana.getUserName().getNameF());
     }
@@ -198,11 +215,13 @@ class SystemUserTest {
 
         //Arrange
         UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId userProfileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+        when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
         SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         //Act and Assert
         assertEquals("Aluna_10", joana.getFunction().getText());
     }
@@ -213,11 +232,13 @@ class SystemUserTest {
 
         //Arrange
         UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId userProfileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+        when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
         SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         //Act and Assert
         assertEquals("photo.png", joana.getPhoto().getExtension());
     }
@@ -234,23 +255,25 @@ class SystemUserTest {
         String photo = "photo.png";
 
         UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId userProfileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+        when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfile);
+        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
 
-        List<UserProfile> assignedProfileExpected = new ArrayList<>();
-        assignedProfileExpected.add(userProfile);
+        List<UserProfileId> assignedProfileIdExpected = new ArrayList<>();
+        assignedProfileIdExpected.add(userProfileId);
 
         Password passwordExpected = new Password("Qwerty_1");
         //Assert
         assertEquals(userName, newUser.getUserName().getNameF());
-        assertEquals(email, newUser.getEmail().getEmail());
+        assertEquals(email, newUser.getSystemUserId().getEmail().getEmail());
         assertEquals(passwordExpected, newUser.getPassword());
         assertEquals(function, newUser.getFunction().getText());
         assertEquals(photo, newUser.getPhoto().getExtension());
-        assertFalse(newUser.isActivateUser());
-        assertEquals(assignedProfileExpected, newUser.getAssignedProfileList());
+        assertFalse(newUser.isActive());
+        assertEquals(assignedProfileIdExpected, newUser.getAssignedProfiles());
     }
 
 
@@ -266,10 +289,12 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             UserProfile userProfile = mock(UserProfile.class);
+            UserProfileId userProfileId = mock(UserProfileId.class);
             Description description = mock(Description.class);
-            when(userProfile.getUserProfileName()).thenReturn(description);
+            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+            when(userProfileId.getUserProfileName()).thenReturn(description);
             when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfile);
+            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
         });
     }
 
@@ -285,10 +310,12 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             UserProfile userProfile = mock(UserProfile.class);
+            UserProfileId userProfileId = mock(UserProfileId.class);
             Description description = mock(Description.class);
-            when(userProfile.getUserProfileName()).thenReturn(description);
+            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+            when(userProfileId.getUserProfileName()).thenReturn(description);
             when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfile);
+            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
         });
     }
 
@@ -304,10 +331,12 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             UserProfile userProfile = mock(UserProfile.class);
+            UserProfileId userProfileId = mock(UserProfileId.class);
             Description description = mock(Description.class);
-            when(userProfile.getUserProfileName()).thenReturn(description);
+            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+            when(userProfileId.getUserProfileName()).thenReturn(description);
             when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfile);
+            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
         });
     }
 
@@ -323,10 +352,12 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             UserProfile userProfile = mock(UserProfile.class);
+            UserProfileId userProfileId = mock(UserProfileId.class);
             Description description = mock(Description.class);
-            when(userProfile.getUserProfileName()).thenReturn(description);
+            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+            when(userProfileId.getUserProfileName()).thenReturn(description);
             when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfile);
+            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
         });
     }
 
@@ -342,10 +373,12 @@ class SystemUserTest {
             String function = "";
             String photo = "photo";
             UserProfile userProfile = mock(UserProfile.class);
+            UserProfileId userProfileId = mock(UserProfileId.class);
             Description description = mock(Description.class);
-            when(userProfile.getUserProfileName()).thenReturn(description);
+            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+            when(userProfileId.getUserProfileName()).thenReturn(description);
             when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfile);
+            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
         });
     }
 
@@ -361,10 +394,12 @@ class SystemUserTest {
             String function = "t";
             String photo = "photo";
             UserProfile userProfile = mock(UserProfile.class);
+            UserProfileId userProfileId = mock(UserProfileId.class);
             Description description = mock(Description.class);
-            when(userProfile.getUserProfileName()).thenReturn(description);
+            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+            when(userProfileId.getUserProfileName()).thenReturn(description);
             when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfile);
+            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
         });
     }
 
@@ -380,10 +415,12 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             UserProfile userProfile = mock(UserProfile.class);
+            UserProfileId userProfileId = mock(UserProfileId.class);
             Description description = mock(Description.class);
-            when(userProfile.getUserProfileName()).thenReturn(description);
+            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+            when(userProfileId.getUserProfileName()).thenReturn(description);
             when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfile);
+            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
         });
     }
 
@@ -399,10 +436,12 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             UserProfile userProfile = mock(UserProfile.class);
+            UserProfileId userProfileId = mock(UserProfileId.class);
             Description description = mock(Description.class);
-            when(userProfile.getUserProfileName()).thenReturn(description);
+            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+            when(userProfileId.getUserProfileName()).thenReturn(description);
             when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfile);
+            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
         });
     }
 
@@ -418,10 +457,12 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             UserProfile userProfile = mock(UserProfile.class);
+            UserProfileId userProfileId = mock(UserProfileId.class);
             Description description = mock(Description.class);
-            when(userProfile.getUserProfileName()).thenReturn(description);
+            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+            when(userProfileId.getUserProfileName()).thenReturn(description);
             when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfile);
+            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
         });
     }
 
@@ -437,10 +478,12 @@ class SystemUserTest {
             String function = "tester";
             String photo = "photo";
             UserProfile userProfile = mock(UserProfile.class);
+            UserProfileId userProfileId = mock(UserProfileId.class);
             Description description = mock(Description.class);
-            when(userProfile.getUserProfileName()).thenReturn(description);
+            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+            when(userProfileId.getUserProfileName()).thenReturn(description);
             when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfile);
+            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
         });
     }
 
@@ -455,18 +498,20 @@ class SystemUserTest {
         String photo = "photo.png";
         String email2 = "maneloliveira@beaver.com";
         UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId userProfileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+        when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
         Company company = new Company();
         //newUser and newUser2 are equals
-        SystemUser newUser = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, userProfile);
-        SystemUser newUser2 = company.getSystemUserStore().createSystemUser(userName, email, function, password, passwordConfirmation, photo, userProfile);
+        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
+        SystemUser newUser2 = new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
         //newUser3 is different (different email)
-        SystemUser newUser3 = company.getSystemUserStore().createSystemUser(userName, email2, function, password, passwordConfirmation, photo, userProfile);
+        SystemUser newUser3 = new SystemUser(userName, email2, function, password, passwordConfirmation, photo, userProfileId);
         //Assert
         assertNotSame(newUser, newUser2);
-        assertNotEquals(newUser, newUser2);
+        assertEquals(newUser, newUser2);
         assertEquals(newUser2.hashCode(), newUser2.hashCode());
         assertNotEquals(newUser, newUser3);
         assertNotEquals(newUser.hashCode(), newUser3.hashCode());
@@ -482,15 +527,17 @@ class SystemUserTest {
         String function = "tester";
         String photo = "photo.png";
         UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId userProfileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+        when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfile);
-        assertFalse(newUser.isActivateUser());
+        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
+        assertFalse(newUser.isActive());
         //Act
-        newUser.setActivateUser(true);
+        newUser.setActive(true);
         //Assert
-        assertTrue(newUser.isActivateUser());
+        assertTrue(newUser.isActive());
     }
 
     @Test
@@ -498,7 +545,7 @@ class SystemUserTest {
         //Input
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test tester", "xxxx@isep.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro);
+                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "Test tester";
         String email = "xxxx";
         String func = "test";
@@ -513,7 +560,7 @@ class SystemUserTest {
         //Input
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Querty_1", "Querty_1", "photo.png", pro);
+                "Querty_1", "Querty_1", "photo.png", pro.getUserProfileId());
         String name = "";
         String email = "";
         String func = "";
@@ -528,7 +575,7 @@ class SystemUserTest {
         //Input
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro);
+                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "test";
         String email = "";
         String func = "";
@@ -542,8 +589,8 @@ class SystemUserTest {
     void hasThisDataWithEmailSuccess() {
         //Input
         UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro);
+        SystemUser test = new SystemUser("Test","xxxx@isep.ipp.pt",
+                "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "";
         String email = "xxxx";
         String func = "";
@@ -558,7 +605,7 @@ class SystemUserTest {
         //Input
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro);
+                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "";
         String email = "";
         String func = "test";
@@ -573,7 +620,7 @@ class SystemUserTest {
         //Input
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro);
+                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "";
         String email = "";
         String func = "";
@@ -588,7 +635,7 @@ class SystemUserTest {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro);
+                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "Test";
         String email = "xxxx@isep.ipp.pt";
         String func = "tester";
@@ -600,25 +647,11 @@ class SystemUserTest {
     }
 
     @Test
-    void hasThisDataWithTwoProfilesSuccess() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        UserProfile pro1 = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro);
-        //Act
-        test.assignProfileToUser(pro1);
-        //Assert
-        assertTrue(test.hasProfile(pro1));
-        assertTrue(test.hasProfile(pro));
-    }
-
-    @Test
     void hasThisDataWithTwoParametersSuccess() {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro);
+                "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "Test";
         String email = "xxxx";
         String func = "";
@@ -633,7 +666,7 @@ class SystemUserTest {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "Querty_1", "Querty_1", "photo.png", pro);
+                "tester", "Querty_1", "Querty_1", "photo.png", pro.getUserProfileId());
         String name = "Test";
         String email = "xxxx";
         String func = "test";
@@ -648,7 +681,7 @@ class SystemUserTest {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro);
+                "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "Test";
         String email = "xxxx";
         String func = "test";
@@ -658,16 +691,16 @@ class SystemUserTest {
         assertTrue(test.hasThisData(name, email, func, state, profiles));
     }
 
-
     /**
      * FAIL TESTS
      */
+
     @Test
     void hasThisDataWithAllFail() {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("test", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro);
+                "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "lest";
         String email = "xxxx";
         String func = "test";
@@ -681,7 +714,7 @@ class SystemUserTest {
     void hasThisDataWithNameFail() {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.pt", "tester", "Querty_1", "Querty_1", "photo.png", pro);
+        SystemUser test = new SystemUser("Test", "xxxx@isep.pt", "tester", "Querty_1", "Querty_1", "photo.png", pro.getUserProfileId());
         String name = "tesq";
         String email = "";
         String func = "";
@@ -696,7 +729,7 @@ class SystemUserTest {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "Querty_1", "Querty_1", "photo.png", pro);
+                "tester", "Querty_1", "Querty_1", "photo.png", pro.getUserProfileId());
         String name = "";
         String email = "yxxx";
         String func = "";
@@ -711,7 +744,7 @@ class SystemUserTest {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "Querty_1", "Querty_1", "photo.png", pro);
+                "tester", "Querty_1", "Querty_1", "photo.png", pro.getUserProfileId());
         String name = "";
         String email = "";
         String func = "tesq";
@@ -726,7 +759,7 @@ class SystemUserTest {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Querty_1", "Querty_1", "photo.png", pro);
+                "Querty_1", "Querty_1", "photo.png", pro.getUserProfileId());
         String name = "";
         String email = "";
         String func = "";
@@ -741,7 +774,7 @@ class SystemUserTest {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro);
+                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "";
         String email = "";
         String func = "";
@@ -756,7 +789,7 @@ class SystemUserTest {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro);
+                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "";
         String email = "";
         String func = "";
@@ -771,7 +804,7 @@ class SystemUserTest {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro);
+                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "";
         String email = "";
         String func = "";
@@ -785,43 +818,7 @@ class SystemUserTest {
     void hasThisDataWithProfilesFail() {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro);
-        String name = "";
-        String email = "";
-        String func = "";
-        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithTwoProfilesFail() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        UserProfile pre = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro);
-        test.assignProfileToUser(pre);
-        test.assignProfileToUser(pro);
-        String name = "";
-        String email = "";
-        String func = "";
-        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithTwoProfilesFail2() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        UserProfile pre = new UserProfile("A");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro);
-        test.assignProfileToUser(pre);
-        test.assignProfileToUser(pro);
+        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "";
         String email = "";
         String func = "";
@@ -835,7 +832,7 @@ class SystemUserTest {
     void hasThisDataWithTwoParametersFail() {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro);
+        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "test";
         String email = "axxx";
         String func = "";
@@ -850,8 +847,8 @@ class SystemUserTest {
         //Arrange
         Company company = new Company();
         UserProfile visitor = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser test = new SystemUserStore().createSystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "photo.png", visitor);
+        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt",
+                "tester", "Qwerty_1", "Qwerty_1", "photo.png", visitor.getUserProfileId());
 
         String name = "test";
         String email = "xxxx";
@@ -867,7 +864,7 @@ class SystemUserTest {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro);
+                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "test";
         String email = "xxxx";
         String func = "test";
@@ -883,7 +880,7 @@ class SystemUserTest {
         UserProfile pro = new UserProfile("Visitor");
         UserProfile tes = new UserProfile("Director");
         SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro);
+                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
         String name = "test";
         String email = "xxxx";
         String func = "test";
@@ -901,11 +898,11 @@ class SystemUserTest {
         //Arrange
         UserProfile tes = new UserProfile("Visitor");
         SystemUser ana = new SystemUser("Ana", "1211@isep.ipp.pt", "User_12",
-                "Qwerty_1", "Qwerty_1", "photo.png", tes);
+                "Qwerty_1", "Qwerty_1", "photo.png", tes.getUserProfileId());
         //Act
-        ana.setActivateUser(true);
+        ana.setActive(true);
         //Assert
-        assertTrue(ana.isActivateUser());
+        assertTrue(ana.isActive());
     }
 
     @Test
@@ -914,28 +911,30 @@ class SystemUserTest {
         //Arrange
         UserProfile tes = new UserProfile("Visitor");
         SystemUser ana = new SystemUser("Ana", "1211@isep.ipp.pt", "User_12",
-                "Qwerty_1", "Qwerty_1", "photo.png", tes);
+                "Qwerty_1", "Qwerty_1", "photo.png", tes.getUserProfileId());
         //Act
-        ana.setActivateUser(false);
+        ana.setActive(false);
         //Assert
-        assertFalse(ana.isActivateUser());
+        assertFalse(ana.isActive());
     }
 
     @Test
     public void setUserNameIsEmpty() {
         //Arrange
         UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId userProfileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+        when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
         SystemUser teste = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         String originalValue = teste.getUserName().getNameF();
         SystemUser teste3 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         String originalValue3 = teste.getUserName().getNameF();
         SystemUser teste4 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         //Act
         teste.setUserName("D");
         teste3.setUserName("CDC");
@@ -952,19 +951,21 @@ class SystemUserTest {
 
         //Arrange
         UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId userProfileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+        when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
         SystemUser teste = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         SystemUser teste2 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         SystemUser teste3 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         SystemUser teste4 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         SystemUser teste5 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         //Act
         teste.setFunction("Dop");
         teste2.setFunction("Pop");
@@ -984,14 +985,16 @@ class SystemUserTest {
     public void setPhoto() {
         //Arrange
         UserProfile userProfile = mock(UserProfile.class);
+        UserProfileId userProfileId = mock(UserProfileId.class);
         Description description = mock(Description.class);
-        when(userProfile.getUserProfileName()).thenReturn(description);
+        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
+        when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
         SystemUser teste = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         String originalValue = teste.getPhoto().getExtension();
         SystemUser teste2 = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfile);
+                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
         String originalValue2 = teste.getPhoto().getExtension();
         //Act
         teste.setPhoto("photo1.jpg");
@@ -1000,5 +1003,80 @@ class SystemUserTest {
         assertEquals(originalValue2, teste2.getPhoto().getExtension());
         assertNotEquals(originalValue, teste.getPhoto().getExtension());
         assertEquals("photo1.jpg", teste.getPhoto().getExtension());
+    }
+
+    @Test
+    @DisplayName("create and save profile request with success")
+    void createAndSaveProfileRequestWithSuccess() {
+        //Arrange
+        UserProfile visitorProfile = mock(UserProfile.class);
+        UserProfileId visitorProfileId = mock(UserProfileId.class);
+        Description descriptionDouble = mock(Description.class);
+        when(visitorProfile.getUserProfileId()).thenReturn(visitorProfileId);
+        when(visitorProfileId.getUserProfileName()).thenReturn(descriptionDouble);
+        when(descriptionDouble.getText()).thenReturn("Visitor");
+        SystemUser testUser = new SystemUser("Manuel", "1211770@isep.ipp.pt", "Aluno",
+                "Qwerty_1", "Qwerty_1", "photo.png", visitorProfileId);
+
+        UserProfile regularProfile = mock(UserProfile.class);
+        UserProfileId regularProfileId = mock(UserProfileId.class);
+        Description descriptionDouble2 = mock(Description.class);
+        when(regularProfile.getUserProfileId()).thenReturn(regularProfileId);
+        when(regularProfileId.getUserProfileName()).thenReturn(descriptionDouble2);
+        when(descriptionDouble2.getText()).thenReturn("Regular User");
+        //Act
+        boolean hasCreated = testUser.createAndSaveProfileRequest(regularProfileId);
+        //Assert
+        assertTrue(hasCreated);
+        assertEquals(1, testUser.getRequestedProfiles().size());
+        assertEquals(1, testUser.getAssignedProfiles().size());
+    }
+
+    @Test
+    @DisplayName("create and save profile request - profile already assigned")
+    void createAndSaveProfileRequestFail() {
+        //Arrange
+        UserProfile visitorProfile = mock(UserProfile.class);
+        UserProfileId visitorProfileId = mock(UserProfileId.class);
+        Description descriptionDouble = mock(Description.class);
+        when(visitorProfile.getUserProfileId()).thenReturn(visitorProfileId);
+        when(visitorProfileId.getUserProfileName()).thenReturn(descriptionDouble);
+        when(descriptionDouble.getText()).thenReturn("Visitor");
+        SystemUser testUser = new SystemUser("Manuel", "1211770@isep.ipp.pt", "Aluno",
+                "Qwerty_1", "Qwerty_1", "photo.png", visitorProfileId);
+        //Act
+        boolean hasCreated = testUser.createAndSaveProfileRequest(visitorProfileId);
+        //Assert
+        assertFalse(hasCreated);
+        assertEquals(0, testUser.getRequestedProfiles().size());
+        assertEquals(1, testUser.getAssignedProfiles().size());
+    }
+
+    @Test
+    @DisplayName("create and save profile request - request already made")
+    void createAndSaveProfileRequestFail2() {
+        //Arrange
+        UserProfile visitorProfile = mock(UserProfile.class);
+        UserProfileId visitorProfileId = mock(UserProfileId.class);
+        Description descriptionDouble = mock(Description.class);
+        when(visitorProfile.getUserProfileId()).thenReturn(visitorProfileId);
+        when(visitorProfileId.getUserProfileName()).thenReturn(descriptionDouble);
+        when(descriptionDouble.getText()).thenReturn("Visitor");
+        SystemUser testUser = new SystemUser("Manuel", "1211770@isep.ipp.pt", "Aluno",
+                "Qwerty_1", "Qwerty_1", "photo.png", visitorProfileId);
+
+        UserProfile regularProfile = mock(UserProfile.class);
+        UserProfileId regularProfileId = mock(UserProfileId.class);
+        Description descriptionDouble2 = mock(Description.class);
+        when(regularProfile.getUserProfileId()).thenReturn(regularProfileId);
+        when(regularProfileId.getUserProfileName()).thenReturn(descriptionDouble2);
+        when(descriptionDouble2.getText()).thenReturn("Regular User");
+        testUser.createAndSaveProfileRequest(regularProfileId);
+        //Act
+        boolean hasCreated = testUser.createAndSaveProfileRequest(regularProfileId);
+        //Assert
+        assertFalse(hasCreated);
+        assertEquals(1, testUser.getRequestedProfiles().size());
+        assertEquals(1, testUser.getAssignedProfiles().size());
     }
 }

@@ -44,7 +44,7 @@ System --> User :Shows project information
 
 User -> System: Starting creating a user story (status,priority,description)
 System -> Ctrl: createUserStory(status, priority, description)
-Ctrl-> C3 : getProductBacklog()
+Ctrl-> C3 : getUserStoryStore()
 C3 --> Ctrl : productBacklog
 Ctrl -> C4 : createUserStory(status, priority, description)
 C4->C4 : isValidUserStory(status, priority, description)

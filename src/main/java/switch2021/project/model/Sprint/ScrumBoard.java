@@ -2,23 +2,24 @@ package switch2021.project.model.Sprint;
 
 import lombok.Getter;
 import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.model.UserStory.UserStoryId;
 import switch2021.project.stores.UserStoryStatusStore;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Getter
-public class SprintBacklog {
+class ScrumBoard {
 
     /** Class Attributes **/
     private final List<UserStory> userStoryList;
 
-    public SprintBacklog() {
+    protected ScrumBoard() {
         this.userStoryList = new ArrayList<>();
     }
 
     /**Save new User Story in SprintBacklog **/
-    public boolean saveUserStoryToSprintBacklog(UserStory userStory) {
+    protected boolean saveUserStoryToSprintBacklog(UserStory userStory) {
 //        boolean status = false;
         if(validateUserStory(userStory)) {
 //            UserStoryStatusStore statusStore = new UserStoryStatusStore();
@@ -30,8 +31,8 @@ public class SprintBacklog {
         return userStoryList.add(userStory);
     }
 
-    /**Validate User Story in Sprintbacklog **/
-    public boolean validateUserStory(UserStory userStory){
+    /**Validate User Story in SprintBacklog **/
+    protected boolean validateUserStory(UserStory userStory){
         for(UserStory i: userStoryList)
             if(i.equals(userStory) || userStory == null) {
                 throw new IllegalArgumentException("User Story already exists in the sprintbacklog or is null");  //Improve Method
@@ -40,7 +41,7 @@ public class SprintBacklog {
         return true;
     }
 
-    public UserStory getUserStory(int idUs){
+    protected UserStory getUserStory(UserStoryId idUs){
         UserStory us = null;
         for (UserStory i : this.userStoryList) {
             if (i.hasCode(idUs)) {
@@ -55,7 +56,7 @@ public class SprintBacklog {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SprintBacklog that = (SprintBacklog) o;
+        ScrumBoard that = (ScrumBoard) o;
         return Objects.equals(userStoryList, that.userStoryList);
     }
 

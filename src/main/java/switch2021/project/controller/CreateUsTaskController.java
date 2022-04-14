@@ -7,6 +7,7 @@ import switch2021.project.model.Project.Project;
 import switch2021.project.model.Task.TaskTypeEnum;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.Task.TaskStore;
+import switch2021.project.model.UserStory.UserStoryId;
 
 import java.util.List;
 
@@ -36,13 +37,13 @@ public class CreateUsTaskController {
         return taskTypesNames;
     }
 
-    public List<String> getUsTasks(String projCode, int sprintID, int usId){
-        this.project = this.company.getProjectStore().getProjectByCode(projCode);
-        UserStory userStory = this.project.getSprintList().getSprintById(sprintID).getUsById(usId);
-        this.taskStore = userStory.getTasks();
-
-        return this.taskStore.getTasksNames();
-    }
+//    public List<String> getUsTasks(String projCode, int sprintID){
+//        this.project = this.company.getProjectStore().getProjectByCode(projCode);
+//        UserStory userStory = this.project.getSprintList().findSprintById(sprintID).getUsByIdFromScrumBoard(usId);
+////        this.taskStore = userStory.getTasks();
+//
+//        return this.taskStore.getTasksNames();
+//    }
 
     public List<String> getCurrentProjectTeam(){
         List<String> currentResourcesNames;
