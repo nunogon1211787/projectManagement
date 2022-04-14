@@ -12,7 +12,7 @@ import switch2021.project.model.Task.Task;
 import switch2021.project.model.Task.TaskTypeEnum;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.model.UserStory.ProductBacklog;
+import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.repositories.ProjectStore;
@@ -275,13 +275,13 @@ class ProjectTest {
     @DisplayName("validate that list have results (not null) and check list size are correct")
     public void getProductBacklogWithResults() {
         // Arrange
-        proj1.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 1, "making test", 5);
-        proj1.getProductBacklog().createAndSaveUserStory("As a TO, i want to test this string", 1, "making other test", 5);
-        proj1.getProductBacklog().createAndSaveUserStory("As a SO, i want to test this string", 1, "making test 4", 5);
+        proj1.getUserStoryStore().createAndSaveUserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 1, "making test", 5);
+        proj1.getUserStoryStore().createAndSaveUserStory("Project_2022_2_As a PO, i want to test this string","As a TO, i want to test this string", 1, "making other test", 5);
+        proj1.getUserStoryStore().createAndSaveUserStory("Project_2022_3_As a PO, i want to test this string","As a SO, i want to test this string", 1, "making test 4", 5);
         // Act
         //Assert
-        assertNotNull(proj1.getProductBacklog());
-        assertEquals(3, proj1.getProductBacklog().getUserStoryList().size());
+        assertNotNull(proj1.getUserStoryStore());
+        assertEquals(3, proj1.getUserStoryStore().getUserStoryList().size());
 
     }
 
@@ -450,7 +450,7 @@ class ProjectTest {
     @DisplayName("Test Override")
     public void overrideTest() {
         //Arrange
-        ProductBacklog backlog = new ProductBacklog();
+        UserStoryStore backlog = new UserStoryStore();
         LocalDate date = LocalDate.of(2024, 12, 12);
         Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
@@ -459,14 +459,14 @@ class ProjectTest {
         Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         project.setProjectCode(new ProjectCode(1));
-        project.setProductBacklog(backlog);
+        project.setUserStoryStore(backlog);
         project.setEndDate(date);
 
         Project project2 = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         project2.setProjectCode(new ProjectCode(1));
         project2.setEndDate(date);
-        project2.setProductBacklog(backlog);
+        project2.setUserStoryStore(backlog);
 
         assertEquals(project.toString(), project2.toString());
         assertEquals(project, project2);

@@ -1,13 +1,11 @@
 package switch2021.project.model.UserStory;
 
 import lombok.*;
-import switch2021.project.model.Project.Project;
-import switch2021.project.model.Task.Task;
-import switch2021.project.model.Task.TaskStore;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.ProjectCode;
 
 import java.time.LocalDate;
+
 
 @EqualsAndHashCode
 @Setter
@@ -18,15 +16,14 @@ public class UserStory  {
      * Attributes
      **/
 
-    private int idUserStory; //TODO CDC como gerar iD?
-    private ProjectCode projectID;//Para receber o ID do projeto
+    private UserStoryId userStoryId;
+    private ProjectCode projectID;
 
     private UsTitle title; //The title of a US follows AS <role> I WANT <objective> https://productcoalition.com/anatomy-of-a-great-user-story-f56fb1b63e38
     private UsPriority priority;
     private Description description;
     private UserStory parentUserStory;
     private UsHour timeEstimate;
-    private TaskStore tasks; //TODO CDC Atributo deve ser removido mas é preciso metodo em task para taskUS (ver com David)
 
     private LocalDate usStartDate; //US começou a ser trabalhada num sprint - conseguimos apurar a "antiguidade/pendencia"
     private LocalDate usEndDate; //Significa que está em "done"
@@ -36,13 +33,19 @@ public class UserStory  {
     /**
      * Constructor User Story
      **/
-    public UserStory(String title, int priority, String description, int timeEstimateInHours) {
+    public UserStory(String userStoryId, String title, int priority, String description, int timeEstimateInHours) {
+        this.userStoryId = new UserStoryId(userStoryId);
         this.title = new UsTitle(title);
         this.description = new Description(description);
         this.priority = new UsPriority(priority);
         this.timeEstimate = new UsHour(timeEstimateInHours);
-        this.tasks = new TaskStore();
     }
+    public UserStory(String title, int priority, String description) {
+        this.title = new UsTitle(title);
+        this.description = new Description(description);
+        this.priority = new UsPriority(priority);
+    }
+
     /**
      * Constructor User Story Refined
      **/
@@ -70,8 +73,8 @@ public class UserStory  {
      * Methods has
      */
 
-    public boolean hasCode(long idUserStory) {
-        return this.idUserStory == idUserStory;
+    public boolean hasCode(UserStoryId idUserStory) {
+        return this.userStoryId == idUserStory;
     }
 
     public boolean hasProjectID(ProjectCode projectID) {

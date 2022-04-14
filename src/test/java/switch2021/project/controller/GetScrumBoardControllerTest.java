@@ -11,8 +11,6 @@ import switch2021.project.model.Typology.Typology;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class GetScrumBoardControllerTest {
 
     @Test
@@ -25,12 +23,12 @@ public class GetScrumBoardControllerTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        project.getProductBacklog().createAndSaveUserStory("As a PO, i want to test this string", 3, "Description", 12);
+        project.getUserStoryStore().createAndSaveUserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 3, "Description", 12);
         Sprint sprint = project.getSprintList().createSprint("Sprint 1", LocalDate.now(), 2);
         project.getSprintList().saveSprint(sprint);
 
         company.getProjectStore().saveNewProject(project);
-        company.getProjectStore().getProjectByCode("Project_2022_1").getSprintList().getCurrentSprint().saveUsInSprintBacklog(project.getProductBacklog().getUserStoryList().get(0));
+        company.getProjectStore().getProjectByCode("Project_2022_1").getSprintList().getCurrentSprint().saveUsInSprintBacklog(project.getUserStoryStore().getUserStoryList().get(0));
 
         //Act
         ScrumBoardMapper mapper = new ScrumBoardMapper();

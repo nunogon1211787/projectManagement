@@ -1,6 +1,11 @@
 package switch2021.project.dto;
 
 import lombok.Getter;
+import switch2021.project.model.UserStory.UsHour;
+import switch2021.project.model.UserStory.UsPriority;
+import switch2021.project.model.UserStory.UsTitle;
+import switch2021.project.model.UserStory.UserStoryId;
+import switch2021.project.model.valueObject.Description;
 
 @Getter
 public class UserStoryStatusDTO {
@@ -9,22 +14,22 @@ public class UserStoryStatusDTO {
          * Attributes
          **/
 
-        private final String userStoryTitle;
-        private final String userStoryDescription;
-        private final int userStoryTimeEstimate;
-        private final int userStoryPriority;
-        private final int userStoryId;
+        private final UserStoryId userStoryId;
+        private final UsTitle title;
+        private final Description description;
+        private final UsHour timeEstimate;
+        private final UsPriority priority;
 
         /**
          * Constructor to test (without SINGLETON)
          **/
 
-        public UserStoryStatusDTO(String title, String description, int timeEstimate, int priority, int userStoryId) {
-                this.userStoryTitle = title;
-                this.userStoryDescription = description;
-                this.userStoryTimeEstimate = timeEstimate;
-                this.userStoryPriority = priority;
-                this.userStoryId = userStoryId;
+        public UserStoryStatusDTO(String userStoryId,String title, String description, int timeEstimate, int priority) {
+                this.title = new UsTitle(title);
+                this.description = new Description(description);
+                this.timeEstimate = new UsHour(timeEstimate);
+                this.priority = new UsPriority(priority);
+                this.userStoryId = new UserStoryId(userStoryId);
         }
 
 }

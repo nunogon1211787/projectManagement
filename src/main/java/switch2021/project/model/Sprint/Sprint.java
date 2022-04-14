@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.Task.Task;
 import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.model.UserStory.UserStoryId;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.Task.TaskStore;
 import java.time.LocalDate;
@@ -79,7 +80,7 @@ public class Sprint {
         return this.sprintBacklog.getUserStoryList();
     }
 
-    public UserStory getUsById(int id){
+    public UserStory getUsById(UserStoryId id){
         return this.sprintBacklog.getUserStory(id);
     }
 

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.UserStory.UserStoryId;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -21,7 +22,7 @@ class SprintBacklogTest {
             // Arrange
             int priority = 5;
             String description = "Validate";
-            UserStory userstory = new UserStory("US001", priority, description, 5);
+            UserStory userstory = new UserStory("Project_2022_1_As a PO, i want to test this string","US001", priority, description, 5);
             sprintBacklog.saveUserStoryToSprintBacklog(userstory);
             // Act
             sprintBacklog.saveUserStoryToSprintBacklog(userstory);
@@ -36,7 +37,8 @@ class SprintBacklogTest {
             // Arrange
             int priority = 5;
             String description = "Validate";
-            UserStory userstory = new UserStory("US001", priority, description, 5);
+            String userStoryId = "Project_2022_1_As a PO, i want to test this string";
+            UserStory userstory = new UserStory(userStoryId, "US001", priority, description, 5);
             sprintBacklog.saveUserStoryToSprintBacklog(userstory);
             // Act
             sprintBacklog.saveUserStoryToSprintBacklog(null);
@@ -49,10 +51,11 @@ class SprintBacklogTest {
         // Arrange
         int priority = 5;
         String description = "Validate";
-        UserStory userstory = new UserStory("As a PO, i want to test this string", priority, description, 5);
+        String userStoryId = "Project_2022_1_As a PO, i want to test this string";
+        UserStory userstory = new UserStory(userStoryId,"As a PO, i want to test this string", priority, description, 5);
         sprintBacklog.saveUserStoryToSprintBacklog(userstory);
         // Act
-        assertEquals(sprintBacklog.getUserStory(userstory.getIdUserStory()), userstory);
+        assertEquals(sprintBacklog.getUserStory(userstory.getUserStoryId()), userstory);
     }
 
     @Test
@@ -61,11 +64,11 @@ class SprintBacklogTest {
         SprintBacklog sprintBacklog = new SprintBacklog();
 
         UserStory newUserStory = mock(UserStory.class);
-        when(newUserStory.hasCode(1)).thenReturn(true);
+        when(newUserStory.hasCode(new UserStoryId("Project_2022_1_As a PO, i want to test this string"))).thenReturn(true);
 
         sprintBacklog.saveUserStoryToSprintBacklog(newUserStory);
         //Act
-        UserStory test = sprintBacklog.getUserStory(1);
+        UserStory test = sprintBacklog.getUserStory(new UserStoryId("Project_2022_1_As a PO, i want to test this string"));
         //Assert
         assertEquals(newUserStory, test);
     }
@@ -76,11 +79,12 @@ class SprintBacklogTest {
         // Arrange
         int priority = 5;
         String description = "Validate";
-        UserStory userstory = new UserStory("As a PO, i want to test this string", priority, description, 5);
+        String userStoryId = "Project_2022_1_As a PO, i want to test this string";
+        UserStory userstory = new UserStory(userStoryId,"As a PO, i want to test this string", priority, description, 5);
         sprintBacklog.saveUserStoryToSprintBacklog(userstory);
-        UserStory userstory2 = new UserStory("As a PO, i want to test this string", priority, description, 5);
+        UserStory userstory2 = new UserStory(userStoryId,"As a PO, i want to test this string", priority, description, 5);
         // Act
-        assertNotSame(sprintBacklog.getUserStory(userstory.getIdUserStory()), userstory2);
+        assertNotSame(sprintBacklog.getUserStory(userstory.getUserStoryId()), userstory2);
     }
 
     @Test
@@ -89,10 +93,11 @@ class SprintBacklogTest {
         // Arrange
         int priority = 5;
         String description = "Validate";
-        UserStory userstory = new UserStory("As a PO, i want to test this string", priority, description, 5);
+        String userStoryId = "Project_2022_1_As a PO, i want to test this string";
+        UserStory userstory = new UserStory(userStoryId,"As a PO, i want to test this string", priority, description, 5);
         sprintBacklog.saveUserStoryToSprintBacklog(userstory);
         // Act
-        assertNull(sprintBacklog.getUserStory(55));
+        assertNull(sprintBacklog.getUserStory(null));
     }
 
     @Test
@@ -121,8 +126,9 @@ class SprintBacklogTest {
         // Arrange
         SprintBacklog sprintBacklog = new SprintBacklog();
         SprintBacklog sprintBacklog1 = new SprintBacklog();
+        String userStoryId = "Project_2022_1_As a PO, i want to test this string";
         // Act
-        UserStory userStory = new UserStory("As Product Owner i want to create something", 1, "Userstory", 5);
+        UserStory userStory = new UserStory(userStoryId,"As Product Owner i want to create something", 1, "Userstory", 5);
         sprintBacklog.saveUserStoryToSprintBacklog(userStory);
         //Assert
         assertFalse(sprintBacklog.equals(sprintBacklog1));
@@ -167,7 +173,8 @@ class SprintBacklogTest {
         //Arrange
         SprintBacklog sprintBacklog = new SprintBacklog();
         SprintBacklog sprintBacklog1 = new SprintBacklog();
-        UserStory userStory = new UserStory("As Product Owner i want to create something", 1, "Userstory", 5);
+        String userStoryId = "Project_2022_1_As a PO, i want to test this string";
+        UserStory userStory = new UserStory(userStoryId,"As Product Owner i want to create something", 1, "Userstory", 5);
         //Act
         sprintBacklog.saveUserStoryToSprintBacklog(userStory);
         //Assert
@@ -210,7 +217,8 @@ class SprintBacklogTest {
         // Arrange
         int priority = 5;
         String description = "Validate";
-        UserStory userstory = new UserStory("As a PO, i want to test this string", priority, description, 5);
+        String userStoryId = "Project_2022_1_As a PO, i want to test this string";
+        UserStory userstory = new UserStory(userStoryId,"As a PO, i want to test this string", priority, description, 5);
         boolean test = sprintBacklog.saveUserStoryToSprintBacklog(userstory);
         // Act
         assertTrue(test);

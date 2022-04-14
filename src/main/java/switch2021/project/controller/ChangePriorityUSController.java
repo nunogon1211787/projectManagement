@@ -1,7 +1,8 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.Company;
-import switch2021.project.model.UserStory.ProductBacklog;
+import switch2021.project.model.UserStory.UserStoryId;
+import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.repositories.ProjectStore;
@@ -15,7 +16,7 @@ public class ChangePriorityUSController {
      **/
     private final Company company;
     private Project project;
-    private ProductBacklog productBacklog;
+    private UserStoryStore userStoryStore;
     private UserStory userStory;
     List<Project> arrayProject;
     List<UserStory> userStoryList;
@@ -41,13 +42,13 @@ public class ChangePriorityUSController {
         return this.project;
     }
 
-    public ProductBacklog getProductBacklog() {
-        this.productBacklog = this.project.getProductBacklog();
-        return this.productBacklog;
+    public UserStoryStore getProductBacklog() {
+        this.userStoryStore = this.project.getUserStoryStore();
+        return this.userStoryStore;
     }
 
-    public UserStory getUserStory(int id) {
-        this.userStory = this.productBacklog.findUserStoryById(id);
+    public UserStory getUserStory(UserStoryId userStoryId) {
+        this.userStory = this.userStoryStore.findUserStoryById(userStoryId);
         return this.userStory;
     }
 
@@ -62,13 +63,13 @@ public class ChangePriorityUSController {
     }
 
     public List<UserStory> getUserStoryList() {
-        this.productBacklog = this.project.getProductBacklog();
-        this.userStoryList = this.productBacklog.findActiveUserStoryList();
+        this.userStoryStore = this.project.getUserStoryStore();
+        this.userStoryList = this.userStoryStore.findActiveUserStoryList();
         return this.userStoryList;
     }
 
-    public UserStory getUS(int idUS) {
-        this.userStory = this.productBacklog.findUserStoryById(idUS);
+    public UserStory getUS(UserStoryId userStoryId) {
+        this.userStory = this.userStoryStore.findUserStoryById(userStoryId);
         return this.userStory;
     }
 

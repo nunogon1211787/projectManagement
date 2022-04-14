@@ -11,7 +11,7 @@ import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserStory.ProductBacklog;
+import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
@@ -33,7 +33,7 @@ public class Project {
     private final Customer customer;
     private Typology typology;
     private ProjectStatusEnum projectStatus;
-    private ProductBacklog productBacklog;
+    private UserStoryStore userStoryStore;
     private UserStoryFactory userStoryFactory;
 
     private final BusinessSector businessSector;
@@ -74,7 +74,7 @@ public class Project {
         this.budget = new Budget(budget);
 
         this.projectTeam = new ProjectTeam(resFac);
-        this.productBacklog = new ProductBacklog();
+        this.userStoryStore = new UserStoryStore();
     }
 
 
@@ -166,7 +166,7 @@ public class Project {
                 && Objects.equals(customer, project.customer)
                 && Objects.equals(typology, project.typology)
                 && Objects.equals(projectStatus, project.projectStatus)
-                && Objects.equals(productBacklog, project.productBacklog)
+                && Objects.equals(userStoryStore, project.userStoryStore)
                 && Objects.equals(businessSector, project.businessSector)
                 && Objects.equals(sprintList, project.sprintList)
                 && Objects.equals(projectTeam, project.projectTeam)
@@ -178,7 +178,7 @@ public class Project {
     @Override
     public int hashCode() {
         return Objects.hash(projectCode, projectName, description, customer, typology,
-                projectStatus, productBacklog, businessSector,
+                projectStatus, userStoryStore, businessSector,
                 sprintList, projectTeam, startDate, endDate, numberOfSprints,
                 budget, sprintDuration);
     }
@@ -192,7 +192,7 @@ public class Project {
                 ", customer=" + customer +
                 ", typology=" + typology +
                 ", projectStatus=" + projectStatus +
-                ", productBacklog=" + productBacklog +
+                ", productBacklog=" + userStoryStore +
                 ", businessSector=" + businessSector +
                 ", sprints=" + sprintList +
                 ", projectTeam=" + projectTeam +

@@ -1,7 +1,8 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.*;
-import switch2021.project.model.UserStory.ProductBacklog;
+import switch2021.project.model.UserStory.UserStoryId;
+import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.UserStory.UserStory;
 
@@ -12,7 +13,7 @@ public class RefineUserStoryController {
      **/
     private final Company company;
     private Project project;
-    private ProductBacklog productBacklog;
+    private UserStoryStore userStoryStore;
     private UserStory userStoryParent;
 
 
@@ -32,13 +33,13 @@ public class RefineUserStoryController {
         return this.project;
     }
 
-    public ProductBacklog getProductBacklog(){
-        this.productBacklog = this.project.getProductBacklog();
-        return this.productBacklog;
+    public UserStoryStore getProductBacklog(){
+        this.userStoryStore = this.project.getUserStoryStore();
+        return this.userStoryStore;
     }
 
-    public UserStory getUserStory(int idUserStory){
-        this.userStoryParent = this.productBacklog.findUserStoryById(idUserStory);
+    public UserStory getUserStory(UserStoryId idUserStory){
+        this.userStoryParent = this.userStoryStore.findUserStoryById(idUserStory);
         return userStoryParent;
     }
 //TODO CDC ver como podemos fazer update status us refined
@@ -48,8 +49,8 @@ public class RefineUserStoryController {
 //    }
 
     public boolean createUserStory(String description, int priority){
-        UserStory userStoryCreated = this.productBacklog.refineUserStory(userStoryParent, priority, description);
-        this.productBacklog.getUserStoryList().add(userStoryCreated);
+        UserStory userStoryCreated = this.userStoryStore.refineUserStory(userStoryParent, priority, description);
+        this.userStoryStore.getUserStoryList().add(userStoryCreated);
         return true;
     }
 }
