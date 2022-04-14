@@ -23,6 +23,6 @@ public class UpdatePersonalDataController {
      **/
 
     public SystemUser getUser(String email) {
-        this.user = this.company.getSystemUserStore().getUserByEmail(email);
+        this.user = this.company.getSystemUserStore().findSystemUserByEmail(email);
         return this.user; }
 }

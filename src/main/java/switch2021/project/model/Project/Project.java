@@ -120,10 +120,10 @@ public class Project {
 
     public boolean validateResource(Resource resource) {
         boolean msg = true;
-        String x = resource.getUser().getEmail().getEmail();
+        String x = resource.getUser().getSystemUserId().getEmail().getEmail();
 
         for(Resource i : projectTeam.getProjectTeamList()){
-            if (i.getUser().getEmail().getEmail().equals(x)) {
+            if (i.getUser().getSystemUserId().getEmail().getEmail().equals(x)) {
                 msg = false;
                 break;
             }

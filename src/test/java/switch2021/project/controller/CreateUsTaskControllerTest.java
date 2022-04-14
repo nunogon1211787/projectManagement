@@ -61,7 +61,7 @@ class CreateUsTaskControllerTest {
 
         //Create tasks
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource resource = new Resource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         TaskTypeEnum type = TaskTypeEnum.Design;
         Task newTask = new Task("test", "test test test tests", 10, type, resource);
@@ -134,11 +134,11 @@ class CreateUsTaskControllerTest {
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
-        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
-        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);
@@ -212,11 +212,11 @@ class CreateUsTaskControllerTest {
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
-        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
-        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);
@@ -258,11 +258,11 @@ class CreateUsTaskControllerTest {
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
-        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
-        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);
@@ -311,11 +311,11 @@ class CreateUsTaskControllerTest {
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user1 = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource res1 = new Resource(user1, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
-        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user2 = new SystemUser("user test dois", "test2@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource res2 = new Resource(user2, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
-        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user3 = new SystemUser("user test tres", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource res3 = new Resource(user3, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), new CostPerHour(100), new PercentageOfAllocation(1));
         project.getProjectTeam().saveResource(res1);
         project.getProjectTeam().saveResource(res2);

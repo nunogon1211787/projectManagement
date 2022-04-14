@@ -16,7 +16,7 @@ class UserProfileTest {
         //Arrange
        UserProfile userProfile = new UserProfile("Teste");
        //Assert
-       assertEquals("Teste", userProfile.getUserProfileName().getText());
+       assertEquals("Teste", userProfile.getUserProfileId().getUserProfileName().getText());
     }
 
     @Test

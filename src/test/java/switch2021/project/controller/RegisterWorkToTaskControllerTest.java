@@ -42,7 +42,7 @@ public class RegisterWorkToTaskControllerTest {
         String projectCode1 = project1.getProjectCode().getCode(); //"Project_2022_1"
         //Resource
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = company.getSystemUserStore().createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMm = LocalDate.of(2022, 1, 1);
         LocalDate endDateMm = LocalDate.of(2022, 1, 31);
         Resource resource1 = project1.getProjectTeam().createResource(user2, startDateMm, endDateMm, 100, 1);
@@ -93,7 +93,7 @@ public class RegisterWorkToTaskControllerTest {
         String projectCode1 = project1.getProjectCode().getCode(); //"Project_2022_1"
         //Resource
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = company.getSystemUserStore().createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMm = LocalDate.of(2022, 1, 1);
         LocalDate endDateMm = LocalDate.of(2022, 1, 31);
         Resource resource1 = project1.getProjectTeam().createResource(user2, startDateMm, endDateMm, 100, 1);
@@ -146,7 +146,7 @@ public class RegisterWorkToTaskControllerTest {
         String projectCode1 = project1.getProjectCode().getCode(); //"Project_2022_1"
         //Resource
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user2 = company.getSystemUserStore().createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        SystemUser user2 = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMm = LocalDate.of(2022, 1, 1);
         LocalDate endDateMm = LocalDate.of(2022, 1, 31);
         Resource resource1 = project1.getProjectTeam().createResource(user2, startDateMm, endDateMm, 100, 1);

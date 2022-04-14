@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.model.valueObject.SystemUserId;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,7 +18,7 @@ public class UpdatePersonalDataControllerTest {
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser joana = new SystemUser("Joana", "123@isep.pt",
                 "Aluna", "Qwerty_1","Qwerty_1","photo.png",
-                userProfile);
+                userProfile.getUserProfileId());
         UpdatePersonalDataController controllerTest = new UpdatePersonalDataController(company);
         company.getSystemUserStore().saveSystemUser(joana);
         //Act

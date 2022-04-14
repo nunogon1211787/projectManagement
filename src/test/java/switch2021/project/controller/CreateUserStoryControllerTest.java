@@ -34,7 +34,7 @@ public class CreateUserStoryControllerTest {
     Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
             typo, sector, LocalDate.now(), 7, 5000);
     UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-    SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", ".png", userProfile);
+    SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", ".png", userProfile.getUserProfileId());
     LocalDate startDate = LocalDate.of(2021, 12, 31);
     LocalDate endDate = LocalDate.of(2022, 1, 5);
     Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
@@ -57,7 +57,7 @@ public class CreateUserStoryControllerTest {
 
     });
         //Assert
-        assertTrue(exception.getMessage().equals("Check priority, cannot be < 0 or superior to 5"));
+        assertEquals("Check priority, cannot be < 0 or superior to 5", exception.getMessage());
     }
 
 
@@ -184,7 +184,7 @@ public class CreateUserStoryControllerTest {
         ProductBacklog project_2022_1 = company.getProjectStore().getProjectByCode("Project_2022_1").getProductBacklog();
         assertEquals(1, project_2022_1.getUserStoryList().size());
         assertEquals(userStoryDto.getTitle(), project_2022_1.getUserStoryList().get(0).getTitle().getTitleUs());
-        assertEquals(userStoryDto.getPriority(), project_2022_1.getUserStoryList().get(0).getPriority().getPriorityUs());;
+        assertEquals(userStoryDto.getPriority(), project_2022_1.getUserStoryList().get(0).getPriority().getPriorityUs());
         assertEquals(userStoryDto.getDescription().getText(), project_2022_1.getUserStoryList().get(0).getDescription().getText());
     }
 

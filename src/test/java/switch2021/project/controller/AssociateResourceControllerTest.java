@@ -5,12 +5,15 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.SystemUser.SystemUserService;
+import switch2021.project.model.valueObject.SystemUserId;
 import switch2021.project.repositories.ProjectStore;
 import switch2021.project.stores.SystemUserStore;
 import switch2021.project.model.valueObject.BusinessSector;
 import switch2021.project.model.valueObject.Customer;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.stores.UserProfileStore;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -34,7 +37,7 @@ public class AssociateResourceControllerTest {
         comTest.getProjectStore().saveNewProject(proj1);
         //User
         UserProfile pro = comTest.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "description", "Qwerty_1", "Qwerty_1", ".png", pro);
+        SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "description", "Qwerty_1", "Qwerty_1", ".png", pro.getUserProfileId());
         comTest.getSystemUserStore().saveSystemUser(newUser);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
@@ -87,10 +90,15 @@ public class AssociateResourceControllerTest {
         AssociateResourceController controller = new AssociateResourceController(company);
         SystemUserStore systemUserStore = company.getSystemUserStore();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser user = systemUserStore.createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        /*SystemUser user = systemUserStore.createSystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
         systemUserStore.saveSystemUser(user);
         SystemUser user2 = systemUserStore.createSystemUser("manuel", "manuel@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile);
+        systemUserStore.saveSystemUser(user2);*/
+        SystemUser user = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
+        systemUserStore.saveSystemUser(user);
+        SystemUser user2 = new SystemUser("manuel", "manuel@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         systemUserStore.saveSystemUser(user2);
+
         //Act
         List<SystemUser> users = controller.getSystemUserList();
         //Assert
@@ -116,7 +124,7 @@ public class AssociateResourceControllerTest {
         comTest.getProjectStore().saveNewProject(proj2);
         //User
         UserProfile pro = comTest.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "description", "Qwerty_1", "Qwerty_1", "photo1.png", pro);
+        SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "description", "Qwerty_1", "Qwerty_1", "photo1.png", pro.getUserProfileId());
         comTest.getSystemUserStore().saveSystemUser(newUser);
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);

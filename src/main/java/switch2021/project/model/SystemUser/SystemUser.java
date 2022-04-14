@@ -4,65 +4,75 @@ import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
+import switch2021.project.utils.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Getter
 @Setter
-public class SystemUser {
+public class SystemUser implements Entity<SystemUser> {
 
     /**
      * Attributes of systemUser´s class
      **/
+    private SystemUserId systemUserId;
     private Name userName;
-    private final Email email;
     private Photo photo;
     private Password password;
     private Function function;
-    private boolean activateUser;
-    private final List<UserProfile> assignedProfileList;
-
+    private boolean isActive;
+    private final List<UserProfileId> assignedIdProfiles;
+    private List<Request> requestedProfiles;
+    //private final Email email;
 
     /**
      * Constructor
      **/
     public SystemUser(String userName, String email, String function, String password, String passwordConfirmation,
-                      String photo, UserProfile profile) {
-        checkProfileRules(profile);
+                      String photo, UserProfileId profileId) {
+        checkProfileRules(profileId);
+        //this.systemUserId = systemUserId;
+        this.systemUserId = new SystemUserId(email);
         this.userName = new Name(userName);
-        this.email = new Email(email);
-        this.photo = new Photo (photo);
+        this.photo = new Photo(photo);
         this.function = new Function(function);
         if (password.equals(passwordConfirmation)) {
             this.password = new Password(password);
         } else {
             throw new IllegalArgumentException("passwords not match");
         }
-        this.activateUser = false;
-        this.assignedProfileList = new ArrayList<>();
-        this.assignedProfileList.add(profile);
+        this.isActive = false;
+        this.assignedIdProfiles = new ArrayList<>();
+        this.assignedIdProfiles.add(profileId);
+        this.requestedProfiles = new ArrayList<>();
+        //this.email = new Email(email);
     }
 
-    public boolean getActivateUserStatus() {
-        return activateUser;
+    /*public boolean getActivateUserStatus() { NÃO É PRECISO (NUNO)
+        return isActive;
+    }*/
+
+    /**
+     * getting Methods (outside of lombock)
+     **/
+    public List<UserProfileId> getAssignedProfiles() {
+        return new ArrayList<>(assignedIdProfiles);
     }
 
-    public List<UserProfile> getAssignedProfileList() {
-        return new ArrayList<>(assignedProfileList);
+    public List<Request> getRequestedProfiles() {
+        return new ArrayList<>(requestedProfiles);
     }
-
 
     /**
      * Setting Methods (outside of lombock)
      **/
     public void setUserName(String userName) {
-            this.userName = new Name(userName);
-        }
+        this.userName = new Name(userName);
+    }
 
     public void setFunction(String function) {
-            this.function = new Function(function);
+        this.function = new Function(function);
         }
 
     private void setPassword(String password) {
@@ -70,34 +80,49 @@ public class SystemUser {
     }
 
     public void setPhoto(String photo) {
-            this.photo = new Photo(photo);
+        this.photo = new Photo(photo);
     }
 
 //    public boolean setAllData(String userName, String function, String photo) {
 //        this.setUserName(userName);
 //    }
 
-    public boolean setActivateUser(Boolean x) {
-        this.activateUser = x;
+    public boolean setActive(Boolean x) {
+        this.isActive = x;
         return true;
     }
 
+    /**
+     * AssignProfileList´s methods
+     */
+    /*public void assignProfileToUser(UserProfile profile) { NÃO É PRECISO (NUNO)
+        this.assignedProfiles.add(profile);
+    }*/
+    public boolean updateProfile(UserProfile oldProfile, UserProfile newProfile) {
+
+        if (!checkAssignedProfileList(newProfile)) {
+            throw new IllegalArgumentException("Repeated user profile inserted.");
+        } else {
+            this.assignedIdProfiles.remove(oldProfile.getUserProfileId());
+            this.assignedIdProfiles.add(newProfile.getUserProfileId());
+        }
+        return true;
+    }
 
     /**
      * Validation Methods
      **/
 
-    private void checkProfileRules(UserProfile profile) {
-
-        if (!profile.getUserProfileName().getText().equals("Visitor"))
+    private void checkProfileRules(UserProfileId profileId) {
+        if (!profileId.getUserProfileName().getText().equals("Visitor"))
             throw new IllegalArgumentException("at registration visitor profile must be associated");
     }
 
-
-    public boolean checkAssignedProfileList(UserProfile profile) {
+    //?????????????????????????? (Nuno)
+    private boolean checkAssignedProfileList(UserProfile profile) {
         boolean msg = true;
-        for (UserProfile i : assignedProfileList) {
-            if (i.equals(profile)) {
+        for (UserProfileId i : assignedIdProfiles) {
+            if (i.getUserProfileName().getText().equals(profile.getUserProfileId().getUserProfileName().getText())) {
                 msg = false;
                 break;
             }
@@ -106,31 +131,12 @@ public class SystemUser {
     }
 
     /**
-     * AssignProfileList´s methods
-     */
-    public void assignProfileToUser(UserProfile profile) {
-        this.assignedProfileList.add(profile);
-    }
-
-    public boolean updateProfile(UserProfile oldProfile, UserProfile newProfile) {
-
-        if (!checkAssignedProfileList(newProfile)) {
-            throw new IllegalArgumentException("Repeated user profile inserted.");
-        } else {
-            this.assignedProfileList.remove(oldProfile);
-            this.assignedProfileList.add(newProfile);
-        }
-        return true;
-    }
-
-
-    /**
      * Método para validar se o email (ou parte dele) é deste objeto.
      */
     public boolean isYourEmail(String email) {
 
         boolean result = false;
-        int idxString = this.email.getEmail().indexOf(email.toLowerCase());
+        int idxString = this.getSystemUserId().getEmail().getEmail().indexOf(email.toLowerCase());
 
         if (idxString != -1) {
             result = true;
@@ -144,20 +150,19 @@ public class SystemUser {
 
 
     /**
-     * Method to validate if user as already has the profile requested
+     * Method to validate if user already has the profile requested
      */
-    public boolean hasProfile(UserProfile profile) {
+    private boolean hasProfileId(UserProfileId profileId) {
         boolean profileStatus = false;
 
-        for (UserProfile profileCheck : assignedProfileList) {
-            if (profile.equals(profileCheck)) {
+        for (UserProfileId profileIdCheck : assignedIdProfiles) {
+            if (profileId.equals(profileIdCheck)) {
                 profileStatus = true;
                 break;
             }
         }
         return profileStatus;
     }
-
 
     /**
      * Method to verify if the object has the received parameters.
@@ -182,7 +187,7 @@ public class SystemUser {
         int result = 0;
 
         if (!email.isEmpty()) {
-            int idxString = this.email.getEmail().toLowerCase().indexOf(email.toLowerCase());
+            int idxString = this.getSystemUserId().getEmail().getEmail().toLowerCase().indexOf(email.toLowerCase());
             if (idxString != -1) {
                 result = 1;
             } else {
@@ -210,7 +215,7 @@ public class SystemUser {
     //REVIEW
     private int hasState(int state) {
         int result = 0;
-        int check = this.activateUser ? 1 : 0;
+        int check = this.isActive ? 1 : 0;
 
         if (state != -1) {
             if (state == check) {
@@ -232,7 +237,7 @@ public class SystemUser {
             int count = 0;
 
             for (UserProfile k : profiles) {
-                if (this.assignedProfileList.contains(k)) {
+                if (this.assignedIdProfiles.contains(k.getUserProfileId())) {
                     count++;
                 }
             }
@@ -300,26 +305,49 @@ public class SystemUser {
         return pwd.equals(this.password);
 
     }
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * Request Creator Method
+     **/
+    public boolean createAndSaveProfileRequest(UserProfileId profileId) {
+        Request newRequest = new Request(profileId);
+
+        if (hasProfileId(profileId) || this.requestedProfiles.contains(newRequest)) {
+            return false;
+        }
+        return this.requestedProfiles.add(newRequest);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * Override Methods
      **/
     @Override
+    public boolean sameIdentityAs(SystemUser other) {
+        return other != null && systemUserId.sameValueAs(other.systemUserId);
+    }
+
+    /**
+     * @param o to compare
+     * @return True if they have the same identity
+     * @see #sameIdentityAs(SystemUser)
+     */
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         SystemUser that = (SystemUser) o;
-        return (this.userName.equals(that.userName)) && (this.email.equals(that.email)) &&
-                (this.photo.equals(that.photo)) && (this.password.equals(that.password)) &&
-                (this.function.equals(that.function)) && (this.activateUser == that.activateUser)
-                && (this.assignedProfileList.equals(that.assignedProfileList));
+        return sameIdentityAs(that);
     }
 
+    /**
+     * @return Hash code of systemUser id.
+     */
     @Override
     public int hashCode() {
-        return Objects.hash(userName, email, photo, password, function, activateUser, assignedProfileList);
+        return systemUserId.hashCode();
     }
-
-
 }

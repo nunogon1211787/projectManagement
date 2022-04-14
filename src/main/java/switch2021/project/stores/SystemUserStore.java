@@ -1,6 +1,7 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
+import switch2021.project.interfaces.SystemUserRepositoryInterface;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.UserProfile.UserProfile;
 
@@ -9,13 +10,14 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-public class SystemUserStore {
+public class SystemUserStore implements SystemUserRepositoryInterface {
 
     /**
      * Class Attributes
      */
     private final List<SystemUser> systemUserList;
 
+    private SystemUserRepositoryInterface systemUserRepositoryInterface;
 
     /**
      * Constructor
@@ -24,23 +26,8 @@ public class SystemUserStore {
         this.systemUserList = new ArrayList<>();
     }
 
-
-    /**
-     * Create Method
-     */
-    public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfile visitor) {
-        return new SystemUser(userName, email, function, password, passwordConfirmation, photo, visitor);
-    }
-
-
-    /**
-     * Getter Methods
-     */
-    public List<SystemUser> getSystemUsers() {
-        return new ArrayList<>(this.systemUserList);
-    }
-
-    public SystemUser getUserByEmail(String email) {
+    @Override
+    public SystemUser findSystemUserByEmail(String email) {
         SystemUser user = null;
 
         for (SystemUser i : this.systemUserList) {
@@ -50,6 +37,36 @@ public class SystemUserStore {
             }
         }
         return user;
+    }
+
+    @Override
+    public List<SystemUser> findAllSystemUsers() {
+        return new ArrayList<>(this.systemUserList);
+    }
+
+    /**
+     * Save Method
+     */
+    @Override
+    public boolean saveSystemUser(SystemUser user) {
+        boolean result = true;
+
+        if (!validateSystemUser(user)) {
+            result = false;
+        } else {
+            this.systemUserList.add(user);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean existsByEmail(String newUserEmail) {
+        for (SystemUser newUser : systemUserList) {
+            if (newUser.getSystemUserId().getEmail().getEmail().trim().equalsIgnoreCase(newUserEmail.trim())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     ///// ----->>>>>>  Rever Método
@@ -66,41 +83,15 @@ public class SystemUserStore {
         return foundUsersList;
     }
 
-
     /**
      * Validation Methods
      */
-    public boolean validateSystemUser(SystemUser user) {
-        if (user == null || hasEmail(user.getEmail().getEmail())) {
+    private boolean validateSystemUser(SystemUser user) {
+        if (user == null || existsByEmail(user.getSystemUserId().getEmail().getEmail())) {
             return false;
         }
         return !this.systemUserList.contains(user);
     }
-
-    boolean hasEmail(String newUserEmail) {
-        for (SystemUser newUser : systemUserList) {
-            if (newUser.getEmail().getEmail().trim().equalsIgnoreCase(newUserEmail.trim())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    /**
-     * Save Method
-     */
-    public boolean saveSystemUser(SystemUser user) {
-        boolean result = true;
-
-        if (!validateSystemUser(user)) {
-            result = false;
-        } else {
-            this.systemUserList.add(user);
-        }
-        return result;
-    }
-
 
     /**
      * Override
@@ -117,4 +108,14 @@ public class SystemUserStore {
     public int hashCode() {
         return Objects.hash(systemUserList);
     }
+
+/**
+ * Create Method
+ */
+    /*public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfileId visitorId) {
+
+        SystemUserId systemUserId = new SystemUserId(email); //not sure (Nuno)
+
+        return new SystemUser(systemUserId, userName, function, password, passwordConfirmation, photo, visitorId);
+    }*/
 }
