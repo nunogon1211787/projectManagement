@@ -549,5 +549,33 @@ public class SprintStoreTest {
         assertEquals(startDatej4, sprintTest.getStartDate());
     }
 
+
+    @Test
+    @DisplayName("Test to search all sprint by project id")
+    public void catchAllSprintsByProjectID() {
+        //Arrange
+        Customer costumer = new Customer("Customer_1", "customer1@email.com", 123456789);
+        Typology typology = new Typology("Typology_1");
+        BusinessSector businessSector = new BusinessSector("sector_1");
+        ProjectCode projectCode = new ProjectCode(1);
+        Project project = new Project("Project_1", "Project_named_1", costumer, typology,
+                businessSector, LocalDate.of(2022, 1, 1),
+                10, 30000);
+        project.setEndDate(LocalDate.of(2022, 12, 31));
+        ProjectStore projectStore = new ProjectStore();
+        projectStore.saveNewProject(project);
+        SprintStore sprintStore = new SprintStore(new SprintFactory());
+        Sprint sprint = sprintStore.createSprint("Sprint_0", 2);
+        Sprint sprint1 = sprintStore.createSprint("Sprint_1", 2);
+        Sprint sprint2 = sprintStore.createSprint("Sprint_2", 2);
+        //Act
+        sprintStore.saveSprint(sprint);
+        sprintStore.saveSprint(sprint1);
+        sprintStore.saveSprint(sprint2);
+        //Assert
+        assertEquals(0, sprintStore.findAllSprintsByProjectID(projectCode).size());
+
+    }
+
 }
 
