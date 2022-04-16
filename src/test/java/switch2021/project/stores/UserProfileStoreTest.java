@@ -3,6 +3,7 @@ package switch2021.project.stores;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.model.valueObject.Description;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,9 +20,7 @@ public class UserProfileStoreTest {
     public void createNewUserProfileWithFailNameEmpty() {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            UserProfileStore userProfileStore = new UserProfileStore();
-            String name = "";
-            userProfileStore.createProfile(name);
+            new UserProfile("User");
         });
     }
 

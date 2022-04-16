@@ -6,7 +6,6 @@ import switch2021.project.factory.*;
 import switch2021.project.factoryInterface.ResourceFactoryInterface;
 import switch2021.project.factory.ProjectTeamFactory;
 import switch2021.project.factory.ResourceFactory;
-import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintStore;
