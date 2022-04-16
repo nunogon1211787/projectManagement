@@ -20,7 +20,7 @@ public class UserProfileStoreTest {
     public void createNewUserProfileWithFailNameEmpty() {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            new UserProfile("User");
+            new UserProfile("");
         });
     }
 
