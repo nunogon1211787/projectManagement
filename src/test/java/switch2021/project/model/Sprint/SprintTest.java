@@ -6,82 +6,68 @@ import switch2021.project.factory.SprintFactory;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
+
 public class SprintTest {
 
 
     @Test
-    @DisplayName("Constructor test, verification of success")
-    public void sprintConstructorSuccess() {
+    @DisplayName("Constructor test, verification of success, get ID")
+    public void sprintConstructorSuccess_getID() {
         //Arrange
-        Sprint sprint = new Sprint("S");
+        Sprint sprint = new Sprint("Project_2022_1_Sprint 1", "SprintName");
+        //Assert
+        assertEquals("Project_2022_1_Sprint 1", sprint.getSprintID().toString());
+    }
+
+    @Test
+    @DisplayName("Constructor test, verification of success, get name")
+    public void sprintConstructorSuccess_getName() {
+        //Arrange
+        Sprint sprint = new Sprint("Project_2022_1_Sprint 1", "Sprint Name");
         //Act
-        int x = sprint.getIdSprint();
         String name = sprint.getSprintName().getText();
         //Assert
-        assertEquals(0, x);
-        assertEquals("S", name);
+        assertEquals("Sprint Name", name);
     }
 
     @Test
     @DisplayName("Constructor test, verification of failure by ID")
     public void sprintConstructorFail_ID() {
         //Arrange
-        Sprint sprint = new Sprint("Sprint_1");
         SprintStore sprintList = new SprintStore(new SprintFactory());
         //Act
-        sprintList.saveSprint(sprint);
-        int x = sprint.getIdSprint();
-        String name = sprint.getSprintName().getText();
-        sprint.setStartDate(LocalDate.of(2022, 1, 1));
+        Sprint sprint = sprintList.createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        String x = sprint.getSprintID().toString();
         //Assert
-        assertNotEquals(2, x);
-        assertEquals("Sprint_1", name);
-        assertEquals(LocalDate.of(2022, 1, 1), sprint.getStartDate());
+        assertNotEquals("Project_2022_1_Sprint 2", x);
     }
 
     @Test
     @DisplayName("Constructor test, verification of failure by Name")
     public void sprintConstructorFail_Name() {
         //Arrange
-        Sprint sprint = new Sprint("Sprint_1");
+        SprintStore sprintStore = new SprintStore(new SprintFactory());
         //Act
-        int x = sprint.getIdSprint();
+        sprintStore.createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = new Sprint("Project_2022_1_Sprint 2", "Name of the Sprint");
         String name = sprint.getSprintName().getText();
-        sprint.setStartDate(LocalDate.of(2022, 1, 1));
         //Assert
-        assertNotEquals(1, x);
-        assertNotEquals("Sprint_2", name);
-        assertEquals(LocalDate.of(2022, 1, 1), sprint.getStartDate());
-    }
-
-    @Test
-    @DisplayName("Constructor test, verification of failure by StartDate")
-    public void sprintConstructorFail_Date() {
-        //Arrange
-        Sprint sprint = new Sprint("Sprint_1");
-        //Act
-        int x = sprint.getIdSprint();
-        String name = sprint.getSprintName().getText();
-        LocalDate date = sprint.getStartDate();
-        //Assert
-        assertNotEquals(1, x);
-        assertEquals("Sprint_1", name);
-        assertNotEquals(LocalDate.of(2022, 1, 2), date);
+        assertNotEquals("Sprint Name", name);
     }
 
     @Test
     @DisplayName("Constructor test, verification of total failure (all parameters)")
     public void sprintConstructorFail_All() {
         //Arrange
-        Sprint sprint = new Sprint("Sprint_1");
+        SprintStore sprintStore = new SprintStore(new SprintFactory());
         //Act
-        int x = sprint.getIdSprint();
-        String name = sprint.getSprintName().getText();
-        LocalDate date = sprint.getStartDate();
+        Sprint sprint1 = sprintStore.createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        String x = sprint1.getSprintName().getText();
+        Sprint sprint2 = new Sprint("Project_2022_1_Sprint 2", "Name of the Sprint");
+        String name = sprint2.getSprintName().getText();
         //Assert
-        assertNotEquals(2, x);
-        assertNotEquals("Sprint_2", name);
-        assertNotEquals(LocalDate.of(2022, 1, 2), date);
+        assertNotEquals(x, name);
+        assertNotEquals("Project_2022_1_Sprint 1", name);
     }
 
     @Test
@@ -90,7 +76,7 @@ public class SprintTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            new Sprint(" ");
+            new Sprint("Project_2022_1_Sprint 1", " ");
         });
     }
 
@@ -98,7 +84,7 @@ public class SprintTest {
     @DisplayName("Verification test if EndDate is set with failure")
     public void changeEndDateFail() {
         //Assert
-        Sprint sprint = new Sprint("Sprint_1");
+        Sprint sprint = new Sprint("Project_2022_1_Sprint 1", "Sprint Name");
         sprint.changeEndDate(300);
         LocalDate endDate = sprint.getEndDate();
         //Assert
@@ -108,7 +94,7 @@ public class SprintTest {
     @Test
     @DisplayName("Verification test if is a current Sprint")
     public void isCurrentSprintFalseTest() {
-        Sprint sprint = new Sprint("Sprint_1");
+        Sprint sprint = new Sprint("Project_2022_1_Sprint 1", "Sprint Name");
         sprint.setStartDate(LocalDate.of(2021, 1, 1));
         sprint.setEndDate(LocalDate.of(2020, 1, 1));
         assertFalse(sprint.isCurrentSprint());
@@ -117,7 +103,7 @@ public class SprintTest {
     @Test
     @DisplayName("Verification test if is a current Sprint")
     public void isCurrentSprintTrueTest() {
-        Sprint sprint = new Sprint("Sprint_1");
+        Sprint sprint = new Sprint("Project_2022_1_Sprint 1", "Sprint Name");
         sprint.setStartDate(LocalDate.of(2022, 1, 1));
         sprint.setEndDate(LocalDate.of(2022, 1, 15));
         sprint.changeEndDate(14);
@@ -128,7 +114,7 @@ public class SprintTest {
     @DisplayName("Verification test if is a current Sprint")
     public void isCurrentSprintEndDateNullTest() {
         assertThrows(NullPointerException.class, () -> {
-            Sprint sprint = new Sprint("Sprint_1");
+            Sprint sprint = new Sprint("Project_2022_1_Sprint 1", "Sprint Name");
             sprint.isCurrentSprint();
         });
     }
@@ -136,17 +122,20 @@ public class SprintTest {
     @Test
     @DisplayName("Verification test of hasSprintID method")
     public void hasSprintIDTest() {
-        Sprint sprint = new Sprint("Sprint_1");
-        sprint.setIdSprint(1);
-        assertTrue(sprint.hasSprintID(1));
+        Sprint sprint = new Sprint("Project_2022_1_Sprint 1", "SprintName");
+        SprintID sprintID = new SprintID("Project_2022_1_Sprint New");
+        sprint.setSprintID(sprintID);
+        assertTrue(sprint.hasSprintID(sprintID));
     }
 
     @Test
     @DisplayName("Verification test of hasSprintID method")
     public void hasSprintIDTest_Fail() {
-        Sprint sprint = new Sprint("Sprint_1");
-        sprint.setIdSprint(1);
-        assertFalse(sprint.hasSprintID(9));
+        //Arrange
+        Sprint sprint = new Sprint("Project_2022_1_Sprint 1", "Sprint Name");
+        SprintID sprintID = new SprintID("Project_2022_1_Sprint 1");
+        //Assert
+        assertFalse(sprint.hasSprintID(sprintID));
     }
 
 
@@ -154,39 +143,29 @@ public class SprintTest {
     @DisplayName("HashCode Verification")
     public void hashCodeTest() {
         //Arrange
-        Sprint sprint = new Sprint("Sprint_1");
-        Sprint sprint2 = new Sprint("Sprint_1");
-        Sprint sprint3 = new Sprint("Sprint_2");
+        Sprint sprint = new Sprint("Project_2022_1_Sprint 1", "Sprint Name");
+        Sprint sprint2 = new Sprint("Project_2022_1_Sprint 1", "Sprint Name");
+        Sprint sprint3 = new Sprint("Project_2022_1_Sprint 2", "Sprint New");
         //Assert
         assertEquals(sprint.hashCode(), sprint2.hashCode());
-        assertEquals(sprint, sprint2);
+        assertTrue(sprint.equals(sprint));
         assertNotEquals(sprint3.hashCode(), sprint2.hashCode());
         assertNotEquals(sprint3, sprint2);
     }
 
     @Test
-    @DisplayName("Override Verification")
-    public void overrideTest_null() {
-        //Arrange
-        Sprint sprint = new Sprint("Sprint_1");
-        Sprint sprint2 = null;
-        //Assert
-        assertNotEquals(sprint, sprint2);
-       assertNull(sprint2);
-    }
-
-    @Test
     @DisplayName("Test to validate start date")
     public void validateStartDate() {
-        Sprint sprint1 = new Sprint("Sprint_1");
-        Sprint sprint2 = new Sprint("Sprint_12");
+        //Arrange
         SprintStore sprintList = new SprintStore(new SprintFactory());
-        sprintList.saveSprint(sprint1);
-        sprintList.saveSprint(sprint2);
-        sprintList.findSprints().get(0).setEndDate(LocalDate.of(2022, 5, 1));
-        sprintList.findSprints().get(1).setEndDate(LocalDate.of(2022, 5, 1));
+        Sprint sprint1 = sprintList.createAndSaveSprint("Project_2022_1_Sprint 1", "New Sprint", 2);
+        Sprint sprint2 = sprintList.createAndSaveSprint("Project_2022_1_Sprint 2", "New New Sprint", 2);
+        sprint1.setStartDate(LocalDate.of(2022, 4, 1));
+        sprint2.setStartDate(LocalDate.of(2022, 4, 1));
+        sprint1.setEndDate(LocalDate.of(2022, 5, 1));
+        sprint2.setEndDate(LocalDate.of(2022, 5, 1));
+        //Assert
         assertNotEquals(sprint1, sprint2);
-        assertTrue(sprintList.validateIfSprintAlreadyExists(sprint2));
         assertEquals(sprint1.getStartDate(),sprint2.getStartDate());
         assertEquals(sprint1.getEndDate(),sprint2.getEndDate());
     }

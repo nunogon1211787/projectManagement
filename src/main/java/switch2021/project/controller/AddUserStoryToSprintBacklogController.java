@@ -1,6 +1,7 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.*;
+import switch2021.project.model.Sprint.SprintID;
 import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.UserStory.UserStoryId;
 import switch2021.project.model.UserStory.UserStoryStore;
@@ -41,7 +42,7 @@ public class AddUserStoryToSprintBacklogController {
         return sprintList;
     }
 
-    public Sprint getSprint(int sprintId) {
+    public Sprint getSprint(SprintID sprintId) {
         this.sprint = this.sprintList.findSprintById(sprintId);
         return this.sprint;
     }

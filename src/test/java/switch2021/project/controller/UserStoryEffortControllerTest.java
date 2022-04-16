@@ -5,6 +5,7 @@ import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Sprint.SprintID;
 import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
@@ -85,9 +86,8 @@ class UserStoryEffortControllerTest {
         project1.getProjectTeam().saveResource(person1);
         project1.getProjectTeam().saveResource(person2);
         company.getProjectStore().saveNewProject(project1);
-        Sprint sprint1 = new Sprint("Hello1");
         SprintStore sprintList = project1.getSprintList();
-        sprintList.saveSprint(sprint1);
+        sprintList.createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Act
         controller.getProjectByCode("Project_2022_1");
@@ -110,13 +110,11 @@ class UserStoryEffortControllerTest {
         Project project1 = company.getProjectStore().createProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().saveNewProject(project1);
-        Sprint sprint1 = new Sprint("Hello1");
         SprintStore sprintList = project1.getSprintList();
-        sprintList.saveSprint(sprint1);
-        project1.getSprintList().saveSprint(sprint1);
+        Sprint sprint = sprintList.createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
         controller.getProjectByCode(project1.getProjectCode().getCode());
         //Assert
-        assertEquals(sprint1, controller.getSprint(1));
+        assertEquals(sprint, controller.getSprintsList().get(0));
     }
 
 //    @Test   // controller incomplete and incorrect, commenting until fixed

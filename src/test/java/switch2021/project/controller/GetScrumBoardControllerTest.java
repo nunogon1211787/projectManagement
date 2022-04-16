@@ -24,9 +24,8 @@ public class GetScrumBoardControllerTest {
         Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         project.getUserStoryStore().createAndSaveUserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 3, "Description", 12);
-        Sprint sprint = project.getSprintList().createSprint("Sprint 1", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name 1", 2);
         sprint.setStartDate(LocalDate.now());
-        project.getSprintList().saveSprint(sprint);
 
         company.getProjectStore().saveNewProject(project);
         company.getProjectStore().getProjectByCode("Project_2022_1").getSprintList().findCurrentSprint().saveUsInScrumBoard(project.getUserStoryStore().getUserStoryList().get(0));
