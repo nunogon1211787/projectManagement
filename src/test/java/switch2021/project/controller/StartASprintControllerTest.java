@@ -11,7 +11,6 @@ import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
 import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -65,11 +64,11 @@ public class StartASprintControllerTest {
         proj1.getProjectTeam().saveResource(joana4R);
         proj1.setSprintDuration(new SprintDuration(14));
         //Create a Sprint
-        proj1.getSprintList().saveSprint(proj1.getSprintList().createSprint("Sprint_1", proj1.getSprintDuration().getSprintDurationDays()));
+        proj1.setSprintDuration(new SprintDuration(14));
+        proj1.getSprintList().createAndSaveSprint("Project_2022_1_Sprint 1", "SprintName", 2);
         //Act
-        StartASprintDTO sprintDTO = new StartASprintDTO(proj1.getProjectCode().getCode(),
-                proj1.getSprintList().findSprints().get(0).getIdSprint(),
-                LocalDate.of(2022, 1, 16));
+        StartASprintDTO sprintDTO = new StartASprintDTO("Project_2022_1", "Project_2022_1_Sprint 1",
+                LocalDate.of(2022, 1, 1));
         //Assert
         assertTrue(startASprintController.startASprint(sprintDTO));
     }
@@ -122,11 +121,9 @@ public class StartASprintControllerTest {
         proj1.getProjectTeam().saveResource(joana4R);
         //Create a Sprint
         proj1.setSprintDuration(new SprintDuration(14));
-        proj1.getSprintList().saveSprint(proj1.getSprintList().createSprint("Sprint_1",
-                proj1.getSprintDuration().getSprintDurationDays()));
+        proj1.getSprintList().createAndSaveSprint("Project_2022_1_Sprint 1", "SprintName", 2);
         //Act
-        StartASprintDTO sprintDTO = new StartASprintDTO(proj1.getProjectCode().getCode(),
-                proj1.getSprintList().findSprints().get(0).getIdSprint(),
+        StartASprintDTO sprintDTO = new StartASprintDTO("Project_2022_1", "Project_2022_1_Sprint 1",
                 LocalDate.of(2023, 1, 1));
         //Assert
         assertFalse(startASprintController.startASprint(sprintDTO));

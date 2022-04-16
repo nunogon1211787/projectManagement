@@ -27,34 +27,36 @@ public class SprintStore {
     }
 
     /** Sprint creator **/
-    public Sprint createSprint(String name, int sprintDuration) {
-           Sprint sprint = new Sprint(name);
-           sprint.changeEndDate(sprintDuration);
+    public Sprint createAndSaveSprint(String sprintID, String name, int sprintDuration) {
+        Sprint sprint = this.sprintFactory.createSprint(sprintID, name);
+        validateIfSprintAlreadyExists(sprint);
+        sprint.changeEndDate(sprintDuration);
+        this.sprints.add(sprint);
         return sprint;
     }
 
-    /** Method to Save a Sprint **/
-    public boolean saveSprint(Sprint sprint) {
-        boolean result = true;
-        if (validateIfSprintAlreadyExists(sprint)) {
-            result = false;
-        } else {
-            sprint.setIdSprint(idSprintGenerator());
-            this.sprints.add(sprint);
-        }
-        return result;
-    }
+//    /** Method to Save a Sprint **/
+//    public boolean saveSprint(Sprint sprint) {
+//        boolean result = true;
+//        if (validateIfSprintAlreadyExists(sprint)) {
+//            result = false;
+//        } else {
+//            sprint.setSprintID(idSprintGenerator());
+//            this.sprints.add(sprint);
+//        }
+//        return result;
+//    }
 
-    /**
-     * ID_Sprint Generator
-     */
-    private int idSprintGenerator() {
-        int id = 1;
-        if (this.sprints.size() > 0) {
-            id = (this.sprints.get(sprints.size() - 1).getIdSprint() + 1);
-        }
-        return id;
-    }
+//    /**
+//     * ID_Sprint Generator
+//     */
+//    private int idSprintGenerator() {
+//        int id = 1;
+//        if (this.sprints.size() > 0) {
+//            id = (this.sprints.get(sprints.size() - 1).getSprintID() + 1);
+//        }
+//        return id;
+//    }
 
 
     /** Find List of Sprints Method **/
@@ -63,10 +65,10 @@ public class SprintStore {
     }
 
     /** Find Sprint By ID Method **/
-    public Sprint findSprintById(int id) {
+    public Sprint findSprintById(SprintID sprintID) {
         Sprint sprint = null;
         for (Sprint sprt : sprints) {
-            if (sprt.hasSprintID(id)) {
+            if (sprt.hasSprintID(sprintID)) {
                 sprint = sprt;
                 break;
             }
@@ -130,12 +132,12 @@ public class SprintStore {
     }
 
     /** Method to Start the Sprint **/
-    public boolean startASprint (int sprintID, LocalDate startDate, ProjectTeam projectTeam, int sprintDuration) {
+    public boolean startASprint (SprintID sprintID, LocalDate startDate, ProjectTeam projectTeam, int sprintDuration) {
         boolean msg = false;
         if (validateStartDate(startDate) && projectTeam.validateProjectTeam(startDate, sprintDuration)) {
             msg = true;
-            Sprint sprint = findSprintById(sprintID);
-            sprint.setStartDate(startDate);
+            findSprintById(sprintID);
+            //sprint.setStartDate(startDate);
         }
         return msg;
     }

@@ -20,8 +20,8 @@ public class Sprint {
     /**
      * Attributes of Sprint
      **/
+    private SprintID sprintID;
     private ProjectCode projectID;
-    private int idSprint;
     private Description sprintName;
     private final TaskStore taskStore;
     private ScrumBoard scrumBoard;
@@ -32,7 +32,8 @@ public class Sprint {
     /**
      * Constructor of Sprint
      **/
-    public Sprint(String name) {
+    public Sprint(String sprintID ,String name) {
+        this.sprintID = new SprintID(sprintID);
         this.sprintName = new Description(name);
         this.scrumBoard = new ScrumBoard();
         this.taskStore = new TaskStore();
@@ -47,9 +48,8 @@ public class Sprint {
     }
 
 
-    public boolean hasSprintID(int id) {
-        return this.idSprint == id;
-    }
+    public boolean hasSprintID(SprintID sprintID) {
+         return this.sprintID == sprintID;}
 
     public boolean hasProjectID(ProjectCode projectID) {
         return this.projectID == projectID;
@@ -97,28 +97,12 @@ public class Sprint {
     /**
      * Override Methods
      */
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Sprint sprint = (Sprint) o;
-//        return idSprint == sprint.idSprint && Objects.equals(sprintName, sprint.sprintName) &&
-//                Objects.equals(taskStore, sprint.taskStore) && Objects.equals(sprintBacklog, sprint.sprintBacklog) &&
-//                Objects.equals(startDate, sprint.startDate) && Objects.equals(endDate, sprint.endDate);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(idSprint, sprintName, taskStore, sprintBacklog, startDate, endDate);
-//    }
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Sprint)) return false;
         Sprint sprint = (Sprint) o;
-        return idSprint == sprint.idSprint &&
+        return sprintID == sprint.sprintID &&
                 Objects.equals(projectID, sprint.projectID) &&
                 Objects.equals(sprintName, sprint.sprintName) &&
                 Objects.equals(taskStore, sprint.taskStore) &&
@@ -129,7 +113,7 @@ public class Sprint {
 
     @Override
     public int hashCode() {
-        return Objects.hash(projectID, idSprint, sprintName, taskStore, scrumBoard, startDate, endDate);
+        return Objects.hash(projectID, sprintID, sprintName, taskStore, scrumBoard, startDate, endDate);
     }
 }
 
