@@ -2,7 +2,6 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import switch2021.project.factory.*;
-import switch2021.project.model.Task.TaskStatusStore;
 import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.repositories.ProjectStore;
 import switch2021.project.stores.*;
@@ -24,7 +23,7 @@ public class Company {
     private final BusinessSectorStore businessSectorStore;
     private final UserStoryStatusStore userStoryStatusStore;
     //private final RequestStore requestStore;
-    private final TaskStatusStore taskStatusStore;
+
 
     //private final ProjectRoleFactory projectRoleFactory;
     private final UserStoryStore userStoryStore;
@@ -46,7 +45,6 @@ public class Company {
         this.businessSectorStore = new BusinessSectorStore(new BusinessSectorFactory());
         this.userStoryStatusStore = new UserStoryStatusStore();
         //this.requestStore = new RequestStore();
-        this.taskStatusStore = new TaskStatusStore(new TaskStatusFactory());
         //this.userStoryFactory = new UserStoryFactory();
         this.userStoryStore = new UserStoryStore( new UserStoryFactory());
 
@@ -54,6 +52,5 @@ public class Company {
         this.projectRoleStore.populateDefault();
         this.typologyStore.populateDefault();
         this.userStoryStatusStore.populateDefault();
-        this.taskStatusStore.populateDefault();
     }
 }

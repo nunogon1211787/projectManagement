@@ -16,7 +16,7 @@ public class TaskStore {
     /**
      * Attributes
      */
-    private List<Task> taskList;
+    private final List<Task> taskList;
 
     /**
      * Constructor
@@ -123,6 +123,18 @@ public class TaskStore {
     private boolean validateIfTaskAlreadyExists(Task task) {
         return this.taskList.contains(task);
     }
+
+
+    /**
+     * Method to get list of tasks within a sprint
+     */
+//It hasn't tests
+//    public List<Task> getListOfTasksOfASprint(){
+//        List<Task> taskList2 = new ArrayList<>();
+//        taskList2.addAll(this.taskStore.getTaskList());
+//        return taskList2;
+//    }
+    
 
     /**
      * ID Generator

@@ -76,35 +76,6 @@ public class TaskListTest {
         assertEquals(1, test.getTasksNames().size());
     }
 
-    @Test
-    void createTaskStatus() {
-        //Arrange
-        TaskStatus status = new TaskStatus("test123");
-        //Assert
-        assertEquals("test123", status.getDescription().getText());
-    }
-
-    @Test
-    void taskStatus() {
-        //Arranje
-        Task task = new Task("test");
-        TaskStatus status = new TaskStatus("test");
-        task.setStatus(status);
-
-        //Assert
-        assertEquals(status,task.getStatus());
-    }
-
-    @Test
-    void taskStatusHash() {
-        //Arranje
-        TaskStatus status = new TaskStatus("test");
-        TaskStatus status2 = new TaskStatus("test_2");
-
-        //Assert
-        assertNotEquals(status.hashCode(),status2.hashCode());
-        assertEquals(status.hashCode(),status.hashCode());
-    }
 
     @Test
     void createSprintTaskTestSuccess() {
