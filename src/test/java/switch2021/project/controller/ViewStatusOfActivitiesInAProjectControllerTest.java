@@ -23,7 +23,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
     @Test
     void getListOfProjectActivities() {
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
@@ -65,7 +65,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         ProjectStore projectStore = company.getProjectStore();
         SystemUserStore systemUserStore = company.getSystemUserStore();
         //Project1
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = projectStore.createProject("prototype4", "proj4Prototype", customer,

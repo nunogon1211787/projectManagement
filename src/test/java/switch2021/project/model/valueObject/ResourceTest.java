@@ -650,7 +650,7 @@ class ResourceTest {
     public void createResourceTestSuccess() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -677,7 +677,7 @@ class ResourceTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+            Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             //Project 1

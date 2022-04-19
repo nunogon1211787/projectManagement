@@ -31,7 +31,7 @@ public class CreateProjectController {
      * Methods
      **/
     public Typology getTypology(String typo) {
-        this.typology = company.getTypologyStore().getTypologyByDescription(typo);
+        this.typology = company.getTypologyRepository().findTypologyByDescription(typo);
         return this.typology;
     }
 

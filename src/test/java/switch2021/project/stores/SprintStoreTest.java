@@ -34,7 +34,7 @@ public class SprintStoreTest {
     public void initialize() {
         Company company = new Company();
         ProjectStore projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         company.getBusinessSectorStore().createAndAddBusinessSector("sector");
         company.getCustomerStore().createAndAddCustomer("Teste", "Teste@teste.com", 123456789);
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
@@ -228,7 +228,7 @@ public class SprintStoreTest {
     public void startASprintSuccess() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
@@ -280,7 +280,7 @@ public class SprintStoreTest {
     public void startASprintFail_ProjectTeam() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -339,7 +339,7 @@ public class SprintStoreTest {
     public void startASprintFail_SprintID() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -398,7 +398,7 @@ public class SprintStoreTest {
     public void startASprintFail_StartDate() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -457,7 +457,7 @@ public class SprintStoreTest {
     public void startASprintFail() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 

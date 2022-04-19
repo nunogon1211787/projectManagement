@@ -2,11 +2,10 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import switch2021.project.factory.*;
-import switch2021.project.model.Task.TaskStatusStore;
 import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.repositories.ProjectStore;
+import switch2021.project.repositories.TypologyRepository;
 import switch2021.project.stores.*;
-
 
 @Getter
 public class Company {
@@ -19,12 +18,12 @@ public class Company {
     private final ProjectStore projectStore;
     private final UserProfileStore userProfileStore;
     private final ProjectRoleStore projectRoleStore;
-    private final TypologyStore typologyStore;
+    private final TypologyRepository typologyRepository;
     private final CustomerStore customerStore;
     private final BusinessSectorStore businessSectorStore;
     private final UserStoryStatusStore userStoryStatusStore;
     //private final RequestStore requestStore;
-    private final TaskStatusStore taskStatusStore;
+
 
     //private final ProjectRoleFactory projectRoleFactory;
     private final UserStoryStore userStoryStore;
@@ -41,19 +40,17 @@ public class Company {
         this.userProfileStore = new UserProfileStore();
         //this.projectRoleFactory = new ProjectRoleFactory();
         this.projectRoleStore = new ProjectRoleStore(new ProjectRoleFactory());
-        this.typologyStore = new TypologyStore();
+        this.typologyRepository = new TypologyRepository();
         this.customerStore = new CustomerStore();
         this.businessSectorStore = new BusinessSectorStore(new BusinessSectorFactory());
         this.userStoryStatusStore = new UserStoryStatusStore();
         //this.requestStore = new RequestStore();
-        this.taskStatusStore = new TaskStatusStore(new TaskStatusFactory());
         //this.userStoryFactory = new UserStoryFactory();
         this.userStoryStore = new UserStoryStore( new UserStoryFactory());
 
         this.userProfileStore.populateDefault();
         this.projectRoleStore.populateDefault();
-        this.typologyStore.populateDefault();
+//        this.typologyRepository.populateDefault();
         this.userStoryStatusStore.populateDefault();
-        this.taskStatusStore.populateDefault();
     }
 }

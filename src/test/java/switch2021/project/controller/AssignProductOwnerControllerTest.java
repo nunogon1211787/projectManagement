@@ -27,7 +27,7 @@ public class AssignProductOwnerControllerTest {
             ProjectsMapper projectsMapper = new ProjectsMapper();
             ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
             AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
-            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+            Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
             company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             company.getBusinessSectorStore().createAndAddBusinessSector("it");
@@ -47,7 +47,7 @@ public class AssignProductOwnerControllerTest {
         ProjectsMapper projectsMapper = new ProjectsMapper();
         ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
         AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
         Customer customer = company.getCustomerStore().getCustomerByName("isep");        company.getBusinessSectorStore().createAndAddBusinessSector("it");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
@@ -99,7 +99,7 @@ public class AssignProductOwnerControllerTest {
         ProjectsMapper projectsMapper = new ProjectsMapper();
         ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
         AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
         Customer customer = company.getCustomerStore().getCustomerByName("isep");        company.getBusinessSectorStore().createAndAddBusinessSector("it");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
@@ -155,7 +155,7 @@ public class AssignProductOwnerControllerTest {
             ProjectsMapper projectsMapper = new ProjectsMapper();
             ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
             AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
-            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+            Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
             company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
@@ -205,7 +205,7 @@ public class AssignProductOwnerControllerTest {
             ProjectsMapper projectsMapper = new ProjectsMapper();
             ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
             AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
-            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+            Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
             company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
@@ -255,7 +255,7 @@ public class AssignProductOwnerControllerTest {
             ProjectsMapper projectsMapper = new ProjectsMapper();
             ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
             AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
-            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+            Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
             company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
@@ -281,7 +281,7 @@ public class AssignProductOwnerControllerTest {
             ProjectsMapper projectsMapper = new ProjectsMapper();
             ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
             AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
-            Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+            Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
             company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
@@ -305,7 +305,7 @@ public class AssignProductOwnerControllerTest {
         ProjectsMapper projectsMapper = new ProjectsMapper();
         ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
         AssignProductOwnerController controller = new AssignProductOwnerController(company, projectsMapper,projectTeamMapper);
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");

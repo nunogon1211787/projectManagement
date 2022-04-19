@@ -12,8 +12,10 @@ public class CreateNewTypologyControllerTest {
         Company company = new Company();
         CreateNewTypologyController controller = new CreateNewTypologyController
                 (company);
-        //Act and Assert
-        assertTrue(controller.createTypology("TypoTest"));
+        //Act
+        controller.createTypology("TypoTest");
+        //Assert
+        assertEquals(1, company.getTypologyRepository().getTypologyList().size());
     }
 
     @Test
