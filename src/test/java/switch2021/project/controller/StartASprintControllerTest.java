@@ -65,7 +65,7 @@ public class StartASprintControllerTest {
         proj1.setSprintDuration(new SprintDuration(14));
         //Create a Sprint
         proj1.setSprintDuration(new SprintDuration(14));
-        proj1.getSprintList().createAndSaveSprint("Project_2022_1_Sprint 1", "SprintName", 2);
+        proj1.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "SprintName", 2);
         //Act
         StartASprintDTO sprintDTO = new StartASprintDTO("Project_2022_1", "Project_2022_1_Sprint 1",
                 LocalDate.of(2022, 1, 1));
@@ -121,7 +121,7 @@ public class StartASprintControllerTest {
         proj1.getProjectTeam().saveResource(joana4R);
         //Create a Sprint
         proj1.setSprintDuration(new SprintDuration(14));
-        proj1.getSprintList().createAndSaveSprint("Project_2022_1_Sprint 1", "SprintName", 2);
+        proj1.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "SprintName", 2);
         //Act
         StartASprintDTO sprintDTO = new StartASprintDTO("Project_2022_1", "Project_2022_1_Sprint 1",
                 LocalDate.of(2023, 1, 1));

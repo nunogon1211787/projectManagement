@@ -42,9 +42,9 @@ public class CreateSprintController {
         return this.proj;
     }
 
-    public boolean createAndSaveSprint(String sprintID, String name) {
+    public boolean createAndSaveSprint(int projectID, String sprintID, String name) {
         int sprintDuration = this.proj.getSprintDuration().getSprintDurationDays();
-        this.proj.getSprintList().createAndSaveSprint(sprintID, name, sprintDuration);
+        this.proj.getSprintList().createAndSaveSprint(projectID, sprintID, name, sprintDuration);
         return true;
     }
 }

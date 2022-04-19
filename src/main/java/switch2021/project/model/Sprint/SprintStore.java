@@ -27,8 +27,8 @@ public class SprintStore {
     }
 
     /** Sprint creator **/
-    public Sprint createAndSaveSprint(String sprintID, String name, int sprintDuration) {
-        Sprint sprint = this.sprintFactory.createSprint(sprintID, name);
+    public Sprint createAndSaveSprint(int projectID, String sprintID, String name, int sprintDuration) {
+        Sprint sprint = this.sprintFactory.createSprint(projectID, sprintID, name);
         validateIfSprintAlreadyExists(sprint);
         sprint.changeEndDate(sprintDuration);
         this.sprints.add(sprint);

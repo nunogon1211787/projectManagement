@@ -7,7 +7,7 @@ import switch2021.project.model.Sprint.Sprint;
 public class SprintFactory implements SprintFactoryInterface {
 
     @Override
-    public Sprint createSprint(String sprintId, String name) {
-        return new Sprint(sprintId, name);
+    public Sprint createSprint(int projectID, String sprintId, String name) {
+        return new Sprint(projectID, sprintId, name);
     }
 }

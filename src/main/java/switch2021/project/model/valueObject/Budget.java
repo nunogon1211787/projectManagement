@@ -1,7 +1,6 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
-
 import java.util.Objects;
 
 @Getter
@@ -17,10 +16,8 @@ public class Budget {
      * Constructor
      */
     public Budget (double budgetP) {
-        if (budgetP < 0)
-            throw new IllegalArgumentException("Budget field cannot be under 0.");
-        if (budgetP == 0)
-            throw new IllegalArgumentException("Budget field cannot be 0.");
+        if (budgetP <= 0)
+            throw new IllegalArgumentException("Budget field cannot be under or equal to 0.");
         this.budgetP = budgetP;
     }
 

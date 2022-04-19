@@ -87,7 +87,7 @@ class UserStoryEffortControllerTest {
         project1.getProjectTeam().saveResource(person2);
         company.getProjectStore().saveNewProject(project1);
         SprintStore sprintList = project1.getSprintList();
-        sprintList.createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        sprintList.createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Act
         controller.getProjectByCode("Project_2022_1");
@@ -111,7 +111,7 @@ class UserStoryEffortControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
         company.getProjectStore().saveNewProject(project1);
         SprintStore sprintList = project1.getSprintList();
-        Sprint sprint = sprintList.createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = sprintList.createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
         controller.getProjectByCode(project1.getProjectCode().getCode());
         //Assert
         assertEquals(sprint, controller.getSprintsList().get(0));

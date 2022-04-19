@@ -13,7 +13,6 @@ import switch2021.project.model.valueObject.Customer;
 import switch2021.project.model.Typology.Typology;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class AddUserStoryToSprintBacklogControllerTest {
@@ -28,7 +27,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
         sprint.setStartDate(LocalDate.now());
         SprintID sprintID = new SprintID("Project_2022_1_Sprint 1");
         company.getProjectStore().saveNewProject(project);

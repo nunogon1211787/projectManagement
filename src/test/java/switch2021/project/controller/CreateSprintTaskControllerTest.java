@@ -51,7 +51,7 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Create tasks
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -88,7 +88,7 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Get sprint task list
         List<String> tasksNames = controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID());
@@ -113,7 +113,7 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -154,7 +154,7 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Get project team names
         controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID());
@@ -180,7 +180,7 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -220,7 +220,7 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -267,7 +267,7 @@ class CreateSprintTaskControllerTest {
         company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");

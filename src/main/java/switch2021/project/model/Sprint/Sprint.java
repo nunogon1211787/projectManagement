@@ -8,7 +8,6 @@ import switch2021.project.model.UserStory.UserStoryId;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.Task.TaskStore;
 import switch2021.project.model.valueObject.ProjectID;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,8 @@ public class Sprint {
     /**
      * Constructor of Sprint
      **/
-    public Sprint(String sprintID ,String name) {
+    public Sprint(int projectID, String sprintID ,String name) {
+        this.projectID = new ProjectID(projectID);
         this.sprintID = new SprintID(sprintID);
         this.sprintName = new Description(name);
         this.scrumBoard = new ScrumBoard();
