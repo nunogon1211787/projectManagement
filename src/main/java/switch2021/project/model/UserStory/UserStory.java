@@ -1,25 +1,25 @@
 package switch2021.project.model.UserStory;
 
 import lombok.*;
-import switch2021.project.model.Task.TaskStore;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.ProjectID;
 
+import switch2021.project.utils.Entity;
+
 import java.time.LocalDate;
+
 
 
 @EqualsAndHashCode
 @Setter
 @Getter
-public class UserStory  {
+public class UserStory implements Entity<UserStory> {
 
     /**
      * Attributes
      **/
-
     private UserStoryId userStoryId;
-    private int idUserStory; //TODO CDC como gerar iD?
-    private ProjectID projectID;//Para receber o ID do projeto
+    private ProjectID projectID;
 
     private UsTitle title; //The title of a US follows AS <role> I WANT <objective> https://productcoalition.com/anatomy-of-a-great-user-story-f56fb1b63e38
     private UsPriority priority;
@@ -27,9 +27,9 @@ public class UserStory  {
     private UserStory parentUserStory;
     private UsHour timeEstimate;
 
-    private LocalDate usStartDate; //US começou a ser trabalhada num sprint - conseguimos apurar a "antiguidade/pendencia"
-    private LocalDate usEndDate; //Significa que está em "done"
-    private LocalDate usCancelled; //Significa que está "cancelled"
+    private LocalDate usStartDate; //US started to be worked on a sprint - we were able to determine the "age/pending"
+    private LocalDate usEndDate; // It means it's "done"
+    private LocalDate usCancelled; //It means it's  "cancelled"
 
 
     /**
@@ -42,16 +42,10 @@ public class UserStory  {
         this.priority = new UsPriority(priority);
         this.timeEstimate = new UsHour(timeEstimateInHours);
     }
-    public UserStory(String title, int priority, String description) {
-        this.title = new UsTitle(title);
-        this.description = new Description(description);
-        this.priority = new UsPriority(priority);
-    }
 
     /**
      * Constructor User Story Refined
      **/
-
     public UserStory(UserStory userStoryToRefine, int priority, String description) {
         this.title = new UsTitle(userStoryToRefine.getTitle().getTitleUs() + " _Refined");
         this.priority = new UsPriority(priority);
@@ -60,7 +54,7 @@ public class UserStory  {
     }
 
     /**
-     * Methods set
+     * Methods set (outside lombok)
      */
     public boolean setPriority(int priority) {
         this.priority = new UsPriority(priority);
@@ -71,6 +65,10 @@ public class UserStory  {
         this.description = new Description(description);
     }
 
+    public void setTimeEstimate(int timeEstimate) {
+        this.timeEstimate = new UsHour(timeEstimate);
+    }
+
     /**
      * Methods has
      */
@@ -79,8 +77,10 @@ public class UserStory  {
         return this.userStoryId == idUserStory;
     }
 
-    public boolean hasProjectID(ProjectID projectID) {
-        return this.projectID == projectID;
+
+    @Override
+    public boolean sameIdentityAs(UserStory other) {
+        return other !=null && userStoryId.sameValueAs(other.userStoryId);
     }
 }
 

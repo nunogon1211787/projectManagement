@@ -29,7 +29,6 @@ public class ChangePriorityUSController {
         this.company = company;
     }
 
-
     /**
      * Methods
      **/
@@ -48,7 +47,7 @@ public class ChangePriorityUSController {
     }
 
     public UserStory getUserStory(UserStoryId userStoryId) {
-        this.userStory = this.userStoryStore.findUserStoryById(userStoryId);
+        this.userStory = this.userStoryStore.findUserStoryById(userStoryId.toString());
         return this.userStory;
     }
 
@@ -69,7 +68,7 @@ public class ChangePriorityUSController {
     }
 
     public UserStory getUS(UserStoryId userStoryId) {
-        this.userStory = this.userStoryStore.findUserStoryById(userStoryId);
+        this.userStory = this.userStoryStore.findUserStoryById(userStoryId.toString());
         return this.userStory;
     }
 

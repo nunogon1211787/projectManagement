@@ -52,7 +52,7 @@ public class CreateUserStoryControllerTest {
 
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () ->{
-            UserStoryDto userStoryDto = new UserStoryDto("As a PO, i want to test this string", priority, description,10);
+            UserStoryDto userStoryDto = new UserStoryDto("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", priority, description,10);
             createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
 
     });
@@ -92,11 +92,14 @@ public class CreateUserStoryControllerTest {
         String title2 = "d";
         String title3 = "As a PO, i to test this string";
         String title4 = "";
+        String id = "Project_2022_1_As a PO, i want to test this string";
+        String id2 = "Project_2022_2_As a PO, i want to test this string";
+        String id3 = "Project_2022_3_As a PO, i want to test this string";
 
         // Act
-        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto(title2, priority, description,7)));
-        Exception exception3 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto(title3,  priority, description,9)));
-        Exception exception4 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto(title4,  priority, description,54)));
+        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto(id,title2, priority, description,7)));
+        Exception exception3 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto(id2,title3,  priority, description,9)));
+        Exception exception4 = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto(id3,title4,  priority, description,54)));
 
 
         //Assert
@@ -114,8 +117,9 @@ public class CreateUserStoryControllerTest {
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = 6;
         String description = "teste";
+        String id = "Project_2022_1_As a PO, i want to test this string";
         // Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto("As a PO, i want to test this string", priority, description,40)));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> createUserStoryController.createUserStory("Project_2022_1", new UserStoryDto(id,"As a PO, i want to test this string", priority, description,40)));
         assertEquals("Check priority, cannot be < 0 or superior to 5", exception.getMessage());
     }
 
@@ -127,7 +131,8 @@ public class CreateUserStoryControllerTest {
         int priority = 1;
         String description = "teste";
         String title = "As a PO, i want to test this string";
-        UserStoryDto userStoryDto = new UserStoryDto(title, priority, description,4);
+        String id="Project_2022_1_As a PO, i want to test this string";
+        UserStoryDto userStoryDto = new UserStoryDto(id,title, priority, description,4);
 
         // Act
         createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
@@ -149,8 +154,9 @@ public class CreateUserStoryControllerTest {
         int priority = 1;
         String description = "t";
         String title = "As a PO, i want to test this string";
+        String id="Project_2022_1_As a PO, i want to test this string";
 
-        UserStoryDto userStoryDto = new UserStoryDto(title, priority, description,7);
+        UserStoryDto userStoryDto = new UserStoryDto(id, title, priority, description,7);
 
         // Act
         createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
@@ -168,7 +174,7 @@ public class CreateUserStoryControllerTest {
         company.getProjectStore().saveNewProject(project);
         int priority = 1;
         String description = "teste";
-        UserStoryDto userStoryDto = new UserStoryDto("As a PO, i want to test this string", priority, description,6);
+        UserStoryDto userStoryDto = new UserStoryDto("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", priority, description,6);
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
 

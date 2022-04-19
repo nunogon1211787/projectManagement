@@ -39,7 +39,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
         AddUserStoryToSprintBacklogController addStory = new AddUserStoryToSprintBacklogController(company);
         addStory.getProject(code);
         addStory.getSprintStore().findSprintById(sprintID);
-        addStory.getUserStoryStore().findUserStoryById(userStoryId);
+        addStory.getUserStoryStore().findUserStoryById(userStoryId.toString());
         //Assert
         assertEquals(1, addStory.getUserStoryStore().getUserStoryList().size());
     }

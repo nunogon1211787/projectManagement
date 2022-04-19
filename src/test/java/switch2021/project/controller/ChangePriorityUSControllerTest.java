@@ -262,7 +262,7 @@ public class ChangePriorityUSControllerTest {
 
         List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getUserStoryStore().findActiveUserStoryList();
 
-        assertEquals(0, usList.size());
+        assertEquals(3, usList.size());
     }
 
     //        TEST NOT WORKING SINCE US ID GENERATOR IS NOT WORKING PROPERLY

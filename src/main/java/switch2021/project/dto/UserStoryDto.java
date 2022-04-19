@@ -15,16 +15,18 @@ public class UserStoryDto {
      * Attributes
      **/
 
-    private UsTitle title;
-    private UsPriority priority;
-    private Description description;
-    private UsHour timeEstimate;
+    private final UserStoryId userStoryId;
+    private final UsTitle title;
+    private final UsPriority priority;
+    private final Description description;
+    private final UsHour timeEstimate;
 
     /**
      * Constructor to test (without SINGLETON)
      **/
 
-    public UserStoryDto(String title, int priority, String description, int timeEstimate) {
+    public UserStoryDto(String userStoryId, String title, int priority, String description, int timeEstimate) {
+        this.userStoryId = new UserStoryId(userStoryId);
         this.title = new UsTitle(title);
         this.priority = new UsPriority(priority);
         this.description = new Description(description);

@@ -20,14 +20,25 @@ public class UserStoryId implements ValueObject<UserStoryId> {
      * Constructor
      **/
     public UserStoryId(ProjectID projectID, UsTitle usTitle) {
+        checkUsID(projectID,usTitle);
         this.projectID = projectID;
         this.usTitle = usTitle;
     }
 
-    public UserStoryId(String userStoryIdString){
-        String [] values = userStoryIdString.split("_");// Project_2022_1_As a PO, i want to test this string
+    public UserStoryId(String userStoryIdString) {
+        String[] values = userStoryIdString.split("_");// Project_2022_1_As a PO, want to test this string
         this.projectID = new ProjectID(Integer.parseInt(values[2]));
         this.usTitle = new UsTitle(values[3]);
+    }
+
+
+    /**
+     * Methods
+     **/
+    private void checkUsID(ProjectID projectID, UsTitle usTitle) {
+        if (projectID.getCode().trim().isEmpty() || usTitle.getTitleUs().trim().isEmpty()){
+            throw new IllegalArgumentException("Not valid projectCode and/or US title inserted");
+        }
     }
 
 
@@ -37,7 +48,7 @@ public class UserStoryId implements ValueObject<UserStoryId> {
 
     @Override
     public String toString() {
-        return projectID.getCode() + "_" +  usTitle.getTitleUs();
+        return projectID.getCode() + "_" + usTitle.getTitleUs();
     }
 
     @Override
