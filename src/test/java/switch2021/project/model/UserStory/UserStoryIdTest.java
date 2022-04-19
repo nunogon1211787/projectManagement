@@ -3,7 +3,7 @@ package switch2021.project.model.UserStory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.valueObject.ProjectCode;
+import switch2021.project.model.valueObject.ProjectID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -15,7 +15,7 @@ public class UserStoryIdTest {
     @DisplayName("Validate that ID is correct")
     public void usIDSuccess() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
@@ -30,7 +30,7 @@ public class UserStoryIdTest {
     @DisplayName("Validate that ID is correct - Same ID")
     public void SameId() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
@@ -45,11 +45,11 @@ public class UserStoryIdTest {
     @DisplayName("Validate that ID is correct but not the same")
     public void NotSameId() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
-        ProjectCode projectCode2 = mock(ProjectCode.class);
+        ProjectID projectCode2 = mock(ProjectID.class);
         when(projectCode2.getCode()).thenReturn("Project_4022_1");
         //Act
         UserStoryId userStoryId = new UserStoryId(projectCode,usTitle);
@@ -75,7 +75,7 @@ public class UserStoryIdTest {
     @DisplayName("User Story title Null")
     public void usTitleNull() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         //Act
         UserStoryId userStoryId = new UserStoryId(projectCode,null);
@@ -88,7 +88,7 @@ public class UserStoryIdTest {
     @DisplayName("Test hashcode conditions for coverage purposes")
     public void hasCodeSuccess() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
@@ -103,11 +103,11 @@ public class UserStoryIdTest {
     @DisplayName("Test hashcode conditions for coverage purposes")
     public void hasCodeFail() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
-        ProjectCode projectCode2 = mock(ProjectCode.class);
+        ProjectID projectCode2 = mock(ProjectID.class);
         when(projectCode2.getCode()).thenReturn("Project_4022_1");
         //Act
         UserStoryId userStoryId = new UserStoryId(projectCode,usTitle);
@@ -120,7 +120,7 @@ public class UserStoryIdTest {
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTest() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
@@ -134,7 +134,7 @@ public class UserStoryIdTest {
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTestFail() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
@@ -149,7 +149,7 @@ public class UserStoryIdTest {
     @DisplayName("Test override conditions for coverage purposes")
     public void SameValueAs() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
@@ -163,7 +163,7 @@ public class UserStoryIdTest {
     @DisplayName("Test override conditions for coverage purposes")
     public void userStoryToString() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
@@ -178,7 +178,7 @@ public class UserStoryIdTest {
     @DisplayName("Validate that projectID is correct")
     public void getProjectIdWithSuccess() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
@@ -192,7 +192,7 @@ public class UserStoryIdTest {
     @DisplayName("Validate that usTitle is correct")
     public void getUsTitleWithSuccess() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");

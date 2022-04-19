@@ -7,7 +7,8 @@ import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.UserStory.UserStoryId;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.Task.TaskStore;
-import switch2021.project.model.valueObject.ProjectCode;
+import switch2021.project.model.valueObject.ProjectID;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,8 @@ public class Sprint {
     /**
      * Attributes of Sprint
      **/
+    private ProjectID projectID;
     private SprintID sprintID;
-    private ProjectCode projectID;
     private Description sprintName;
     private final TaskStore taskStore;
     private ScrumBoard scrumBoard;
@@ -51,7 +52,7 @@ public class Sprint {
     public boolean hasSprintID(SprintID sprintID) {
          return this.sprintID == sprintID;}
 
-    public boolean hasProjectID(ProjectCode projectID) {
+    public boolean hasProjectID(ProjectID projectID) {
         return this.projectID == projectID;
     }
 

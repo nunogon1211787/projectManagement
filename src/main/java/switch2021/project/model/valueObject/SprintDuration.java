@@ -1,11 +1,12 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import switch2021.project.utils.ValueObject;
 
 import java.util.Objects;
 
 @Getter
-public class SprintDuration {
+public class SprintDuration implements ValueObject<SprintDuration> {
 
     /**
      * Attribute
@@ -47,5 +48,10 @@ public class SprintDuration {
     @Override
     public int hashCode() {
         return Objects.hash(sprintDurationDays, MIN, MAX);
+    }
+
+    @Override
+    public boolean sameValueAs(SprintDuration other) {
+        return false;
     }
 }

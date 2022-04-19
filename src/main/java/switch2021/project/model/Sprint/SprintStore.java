@@ -3,7 +3,7 @@ package switch2021.project.model.Sprint;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.factoryInterface.SprintFactoryInterface;
-import switch2021.project.model.valueObject.ProjectCode;
+import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.Task.Task;
 import java.time.LocalDate;
@@ -77,7 +77,7 @@ public class SprintStore {
     }
 
     /** Find all sprints associated to a Project ID Method **/
-    public List<Sprint> findAllSprintsByProjectID(ProjectCode projectID) {
+    public List<Sprint> findAllSprintsByProjectID(ProjectID projectID) {
         List<Sprint> allSprintsInAProject = new ArrayList<>();
         for (Sprint x : sprints) {
             if (x.hasProjectID(projectID)) {

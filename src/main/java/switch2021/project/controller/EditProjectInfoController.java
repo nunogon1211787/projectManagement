@@ -43,12 +43,9 @@ public class EditProjectInfoController {
         return this.project;
     }
 
-    public boolean editProject(String name, String description, LocalDate startDate, LocalDate endDate, int nrSprints,
+    public void editProject(String name, String description, LocalDate startDate, LocalDate endDate, int nrSprints,
                                double budget, int sprintDuration, ProjectStatusEnum status, ProjectTeam projectTeam) {
 
-        boolean result = true;
-
-        if (result) {
             this.project.setProjectName(new Description(name));
             this.project.setDescription(new Description(description));
             this.project.setStartDate(startDate);
@@ -58,8 +55,7 @@ public class EditProjectInfoController {
             this.project.setProjectStatus(status);
             this.project.setSprintDuration(new SprintDuration(sprintDuration));
             this.project.setProjectTeam(projectTeam);
-        }
-        return result;
+
     }
 }
 

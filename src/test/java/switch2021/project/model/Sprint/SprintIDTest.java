@@ -4,7 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.valueObject.Budget;
 import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.ProjectCode;
+import switch2021.project.model.valueObject.ProjectID;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -16,7 +17,7 @@ public class SprintIDTest {
     @Test
     public void sprintIDSuccess() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         Description description = mock(Description.class);
         when(description.getText()).thenReturn("Sprint 1");
@@ -32,7 +33,7 @@ public class SprintIDTest {
     @Test
     public void sprintIDFail() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         Description description = mock(Description.class);
         when(description.getText()).thenReturn("Sprint 1");
@@ -47,7 +48,7 @@ public class SprintIDTest {
     @Test
     public void sameSprintID() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         Description description = mock(Description.class);
         when(description.getText()).thenReturn("Sprint 1");
@@ -63,11 +64,11 @@ public class SprintIDTest {
     @Test
     public void notSameSprintID() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         Description description = mock(Description.class);
         when(description.getText()).thenReturn("Sprint 1");
-        ProjectCode projectCode1 = mock(ProjectCode.class);
+        ProjectID projectCode1 = mock(ProjectID.class);
         when(projectCode1.getCode()).thenReturn("Project_2022_2");
         Description description1 = mock(Description.class);
         when(description1.getText()).thenReturn("Sprint 2");
@@ -95,7 +96,7 @@ public class SprintIDTest {
     @Test
     public void sprintNameNull() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         //Act
         SprintID sprintID = new SprintID(projectCode, null);
@@ -107,7 +108,7 @@ public class SprintIDTest {
     @Test
     public void hashCodeSuccess() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         Description description = mock(Description.class);
         when(description.getText()).thenReturn("Sprint 1");
@@ -122,11 +123,11 @@ public class SprintIDTest {
     @Test
     public void hashCodeFailure() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         Description description = mock(Description.class);
         when(description.getText()).thenReturn("Sprint 1");
-        ProjectCode projectCode1 = mock(ProjectCode.class);
+        ProjectID projectCode1 = mock(ProjectID.class);
         when(projectCode1.getCode()).thenReturn("Project_2022_2");
         Description description1 = mock(Description.class);
         when(description1.getText()).thenReturn("Sprint 2");
@@ -141,7 +142,7 @@ public class SprintIDTest {
     @Test
     public void overrideTestSuccess() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         Description description = mock(Description.class);
         when(description.getText()).thenReturn("Sprint");
@@ -155,11 +156,11 @@ public class SprintIDTest {
     @Test
     public void overrideTestFailure() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         Description description = mock(Description.class);
         when(description.getText()).thenReturn("Sprint 1");
-        ProjectCode projectCode1 = mock(ProjectCode.class);
+        ProjectID projectCode1 = mock(ProjectID.class);
         when(projectCode1.getCode()).thenReturn("Project_2022_1");
         Description description1 = mock(Description.class);
         when(description1.getText()).thenReturn("Sprint 1");
@@ -174,7 +175,7 @@ public class SprintIDTest {
     @Test
     public void sameValueAs() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         Description description = mock(Description.class);
         when(description.getText()).thenReturn("Sprint 1");
@@ -188,7 +189,7 @@ public class SprintIDTest {
     @Test
     public void sprintIDToString () {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         Description description = mock(Description.class);
         when(description.getText()).thenReturn("Sprint 1");
@@ -202,7 +203,7 @@ public class SprintIDTest {
     @Test
     public void getProjectIDSuccess() {
         //Arrange
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         Description description = mock(Description.class);
         when(description.getText()).thenReturn("Sprint 1");
@@ -215,7 +216,7 @@ public class SprintIDTest {
     @DisplayName("Check If Sprint Name is correct")
     @Test
     public void getSprintNameSuccess() {
-        ProjectCode projectCode = mock(ProjectCode.class);
+        ProjectID projectCode = mock(ProjectID.class);
         when(projectCode.getCode()).thenReturn("Project_2022_1");
         Description description = mock(Description.class);
         when(description.getText()).thenReturn("Sprint 1");

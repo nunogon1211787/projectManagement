@@ -1,11 +1,12 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import switch2021.project.utils.ValueObject;
 
 import java.util.Objects;
 
 @Getter
-public class Description {
+public class Description implements ValueObject<Description> {
 
     /**
      * Attributes
@@ -38,5 +39,10 @@ public class Description {
     @Override
     public int hashCode() {
         return Objects.hash(text);
+    }
+
+    @Override
+    public boolean sameValueAs(Description other) {
+        return false;
     }
 }

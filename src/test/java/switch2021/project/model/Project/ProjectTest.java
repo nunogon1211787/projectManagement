@@ -458,13 +458,13 @@ class ProjectTest {
 
         Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        project.setProjectCode(new ProjectCode(1));
+        project.setProjectCode(new ProjectID(1));
         project.setUserStoryStore(backlog);
         project.setEndDate(date);
 
         Project project2 = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        project2.setProjectCode(new ProjectCode(1));
+        project2.setProjectCode(new ProjectID(1));
         project2.setEndDate(date);
         project2.setUserStoryStore(backlog);
 

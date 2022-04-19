@@ -533,7 +533,7 @@ public class SprintStoreTest {
         Customer costumer = new Customer("Customer_1", "customer1@email.com", 123456789);
         Typology typology = new Typology("Typology_1");
         BusinessSector businessSector = new BusinessSector("sector_1");
-        ProjectCode projectCode = new ProjectCode(1);
+        ProjectID projectCode = new ProjectID(1);
         Project project = new Project("Project_1", "Project_named_1", costumer, typology,
                 businessSector, LocalDate.of(2022, 1, 1),
                 10, 30000);
