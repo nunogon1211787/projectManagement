@@ -15,10 +15,8 @@ class EmailTest {
     void NullTest(){
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
-           //Arrange
-            String test = null;
             //Act
-            new Email(test);
+            new Email(null);
         });
 
     }
@@ -219,7 +217,7 @@ class EmailTest {
     }
 
     @Test
-    void twoConsecutiveDotsAfterAtSignTest(){
+    void twoConsecutiveDotsAfterAtSignFailTest(){
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
@@ -296,12 +294,66 @@ class EmailTest {
     @Test
     void checkDifferentEmails(){
         //Arrange
-        String text1 = "123@test.pt";
-        String text2 = "1234@test.pt";
+        Email test = new Email("123@test.pt");
+        Email test2 = new Email("1234@test.pt");
         //Act
-        Email test = new Email(text1);
+        String text1 = test.getEmail();
         //Assert
-        assertFalse(test.hasEmail(text2));
+        assertFalse(test2.hasEmail(text1));
+    }
+
+    @Test
+    void getEmail(){
+        //Arrange
+        Email test = new Email("123@test.pt");
+        //Act
+        //Assert
+        assertEquals("123@test.pt", test.getEmail());
+    }
+
+    @Test
+    public void equalsSuccessTest() {
+        //Arrange
+        Email email = new Email("Test@gmail.com");
+        Email test = new Email("Test@gmail.com");
+        //Assert
+        assertEquals(test, email);
+    }
+
+
+    @Test
+    public void equalsFailTest() {
+        //Arrange
+        Email email = new Email("Test@gmail.com");
+        Email test = new Email("Test1@gmail.com");
+        //Assert
+        assertNotEquals(test, email);
+    }
+
+    @Test
+    public void equalsClassFailTest() {
+        //Arrange
+        Email email = new Email("Test@gmail.com");
+        Description test = new Description("Test@gmail.com");
+        //Assert
+        assertNotEquals(test.getClass(), email.getClass());
+    }
+
+    @Test
+    public void equalsNullTest() {
+        //Arrange
+        Email email = new Email("Test@gmail.com");
+        //Assert
+        assertNotEquals(null, email);
+    }
+
+    @Test
+    public void hashCodeSuccessTest() {
+        //Arrange
+        Email email = new Email("Test@gmail.com");
+        Email test = new Email("Test@gmail.com");
+        //Assert
+        assertEquals(test.hashCode(), email.hashCode());
     }
 
     @Test
@@ -390,4 +442,12 @@ class EmailTest {
         assertNotEquals(x,y);
     }
 
+    @Test
+    public void hashCodeFailTest() {
+        //Arrange
+        Email email = new Email("Test@gmail.com");
+        Email test = new Email("Test1@gmail.com");
+        //Assert
+        assertNotEquals(test.hashCode(), email.hashCode());
+    }
 }

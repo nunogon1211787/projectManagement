@@ -5,15 +5,12 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.SystemUser.SystemUserService;
-import switch2021.project.model.valueObject.SystemUserId;
 import switch2021.project.repositories.ProjectStore;
 import switch2021.project.stores.SystemUserStore;
 import switch2021.project.model.valueObject.BusinessSector;
 import switch2021.project.model.valueObject.Customer;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.stores.UserProfileStore;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -56,7 +53,7 @@ public class AssociateResourceControllerTest {
         AssociateResourceController controller = new AssociateResourceController(company);
         ProjectStore projectStore = company.getProjectStore();
         //Project1
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = projectStore.createProject("prototype4", "proj4Prototype", customer,

@@ -4,7 +4,6 @@ import switch2021.project.model.valueObject.ProjectRole;
 
 public interface ProjectRoleFactoryInterface {
 
-
     ProjectRole createProjectRole(String x);
 
 }

@@ -25,7 +25,7 @@ public class ProjectTeamMapperTest {
         ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
 
         //create project and save it
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         company.getBusinessSectorStore().createAndAddBusinessSector("it");
@@ -77,7 +77,7 @@ public class ProjectTeamMapperTest {
         ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
 
         //create project and save it
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         company.getBusinessSectorStore().createAndAddBusinessSector("it");
@@ -131,7 +131,7 @@ public class ProjectTeamMapperTest {
         Company company = new Company();
 
         //create project and save it
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         company.getBusinessSectorStore().createAndAddBusinessSector("it");

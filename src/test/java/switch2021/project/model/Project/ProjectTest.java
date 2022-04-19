@@ -42,7 +42,7 @@ class ProjectTest {
         company.getBusinessSectorStore().createAndAddBusinessSector("sector");
         company.getCustomerStore().createAndAddCustomer("Teste", "Teste@teste.com", 123456789);
 
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
@@ -69,7 +69,7 @@ class ProjectTest {
         Customer valueCustomer = company.getCustomerStore().getCustomerByName("Teste");
 
         Typology typology = company.getProjectStore().getProjectByCode("Project_2022_1").getTypology();
-        Typology valueTypology = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology valueTypology = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
 
         BusinessSector sector = company.getProjectStore().getProjectByCode("Project_2022_1").getBusinessSector();
         BusinessSector valueSector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
@@ -118,9 +118,6 @@ class ProjectTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             Typology typo = mock(Typology.class);
-            Description description = mock(Description.class);
-            when(typo.getDescription()).thenReturn(description);
-            when(description.getText()).thenReturn("Fixed Cost");
             Customer customer = mock(Customer.class);
             Description description1 = mock(Description.class);
             when(customer.getCustomerName()).thenReturn(description1);
@@ -143,9 +140,6 @@ class ProjectTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             Typology typo = mock(Typology.class);
-            Description description = mock(Description.class);
-            when(typo.getDescription()).thenReturn(description);
-            when(description.getText()).thenReturn("Fixed Cost");
             Customer customer = mock(Customer.class);
             Description description1 = mock(Description.class);
             when(customer.getCustomerName()).thenReturn(description1);
@@ -168,9 +162,6 @@ class ProjectTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             Typology typo = mock(Typology.class);
-            Description description = mock(Description.class);
-            when(typo.getDescription()).thenReturn(description);
-            when(description.getText()).thenReturn("Fixed Cost");
             Customer customer = mock(Customer.class);
             Description description1 = mock(Description.class);
             when(customer.getCustomerName()).thenReturn(description1);
@@ -197,7 +188,7 @@ class ProjectTest {
     private Project proj3;
     private Project currentProject;
 
-    Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+    Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
     Project project2 = new Project("prototype", "test56", customer,
@@ -206,7 +197,7 @@ class ProjectTest {
     @BeforeEach
     public void init_2() {
         Company company = new Company();
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
@@ -417,7 +408,7 @@ class ProjectTest {
         //Arrange
         ProjectStore list1 = new ProjectStore();
 
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
@@ -452,7 +443,7 @@ class ProjectTest {
         //Arrange
         UserStoryStore backlog = new UserStoryStore();
         LocalDate date = LocalDate.of(2024, 12, 12);
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 

@@ -27,7 +27,7 @@ public class GetListHResourceProjectControllerTest {
         ProjectTeamMapper projectTeamMapper = new ProjectTeamMapper();
         GetListHResourceProjectController controller = new GetListHResourceProjectController(company, projectTeamMapper);
         //create project and save it
-        Typology typo = company.getTypologyStore().getTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         company.getCustomerStore().createAndAddCustomer("isep","xxx@sss.sss", 123456789);
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
 //        company.getCustomerStore().saveNewCustomer(customer);
