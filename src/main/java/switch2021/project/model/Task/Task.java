@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.valueObject.*;
-import switch2021.project.utils.App;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,13 +22,9 @@ public class Task {
     private Name name;
     private Description description;
     private TaskTypeEnum type;
-    private double effortEstimate;
-    private double effortRemaining; // Initially equal effortEstimate, but can be change by user to update the effort to the task.
+    private double effortEstimate;  // em horas
     private LocalDate startDate;
     private LocalDate endDate;
-    private TaskStatus status;
-    private double hoursSpent; // Initially zero and will be updated by effort register.
-    private double executionPercentage; // Calculated by divide hoursSpent to effortRemaining.
     private Resource responsible;
     private List<TaskEffort> taskEffortList;
     private List<String> precedenceList;
@@ -40,7 +35,6 @@ public class Task {
      */
     public Task(String description) {
         this.description = new Description(description);
-        this.status = App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Planned");
     }
 
     public Task(String name, String description, double effortEstimate, TaskTypeEnum type, Resource responsible) {
@@ -50,10 +44,8 @@ public class Task {
         this.name = new Name(name);
         this.description = new Description(description);
         this.effortEstimate = effortEstimate;
-        this.effortRemaining = effortEstimate;
         this.type = type;
         this.responsible = responsible;
-        this.status = App.getInstance().getCompany().getTaskStatusStore().getInitialStatus();
         this.taskEffortList = new ArrayList<>();
     }
 
@@ -73,10 +65,6 @@ public class Task {
 
     public boolean hasTaskTypeEnum(String taskType) {
         return Objects.equals(this.type.toString(), taskType);
-    }
-
-    public boolean hasStatus(TaskStatus taskStatus) {
-        return Objects.equals(this.status, taskStatus);
     }
 
     public boolean hasResponsible(Resource resp) {
@@ -113,35 +101,16 @@ public class Task {
             throw new IllegalArgumentException("Not work time values insert");
         }
 
-        if (validateTaskEffort(taskEffort)) {
             if (taskEffortList.isEmpty()) {
                 setStartDate(taskEffort.getEffortDate().getEffortDate());
-                setStatus(App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Running"));
-            }
-            updateHoursSpent(taskEffort);
-            updateEffortRemaining(taskEffort);
-            updateExecutionPercentage();
-            if (this.effortRemaining == 0) {
-                setStatus(App.getInstance().getCompany().getTaskStatusStore().getTaskStatusByDescription("Finished"));
-                setEndDate(taskEffort.getEffortDate().getEffortDate());
-            }
-        }
-        this.taskEffortList.add(taskEffort);
-    }
 
-    public boolean validateTaskEffort(TaskEffort effort) {
-        for (TaskEffort i : this.taskEffortList) {
-            if (!effort.getEffortDate().getEffortDate().isAfter(i.getEffortDate().getEffortDate())) {
-                throw new IllegalArgumentException("Effort for this day is already saved.");
             }
-        }
-        if (effort == null) {
-            return false;
-        }
-        if (effort.getEffortDate().getEffortDate().isAfter(this.getResponsible().getEndDate()) || effort.getEffortDate().getEffortDate().isBefore(this.getResponsible().getStartDate())) {
-            throw new IllegalArgumentException("work date not match with the resource allocation dates");
-        }
-        return !this.taskEffortList.contains(effort);
+
+            validateEffortPercentage(effortHours, effortMinutes);
+
+        this.taskEffortList.add(taskEffort);
+        if(getHoursSpent() == this.effortEstimate)
+            setEndDate(effortDate.getEffortDate());
     }
 
 
@@ -149,36 +118,53 @@ public class Task {
         return (double) effort.getEffortHours().getEffortHours() + ((double) effort.getEffortMinutes().getEffortMinutes() / 60);
     }
 
-    public double updateHoursSpent(TaskEffort effort) {
-        return this.hoursSpent += effortInHours(effort);
-    }
 
-    public double updateEffortRemaining(TaskEffort effort) {
-        double EFFORTTOCOMPLETE = 0.0;
 
-        if (this.effortRemaining <= effortInHours(effort)) {
-            this.effortRemaining = EFFORTTOCOMPLETE;
-        } else {
-            this.effortRemaining -= effortInHours(effort);
+    public String getStatus() {
+        String status = "Blocked";
+        double x = getExecutionPercentage();
+
+
+        if(x == 0){
+            status = "Planned";
         }
 
-        return this.effortRemaining;
-    }
-
-    private double updateExecutionPercentage() {
-        double EFFORTCOMPLETED = 1.0;
-
-        double workTotal = this.hoursSpent + this.effortRemaining;
-        double workDone = this.hoursSpent;
-
-        if (workDone >= workTotal) {
-            this.executionPercentage = EFFORTCOMPLETED;
-        } else {
-            this.executionPercentage = workDone / workTotal;
+        if(x == 1){
+            status = "Finished";
         }
-        return this.executionPercentage;
+
+        if(x > 0 && x < 1){
+            status = "Running";
+        }
+
+        return status;
     }
 
+    public double getHoursSpent() {
+        double x = 0;
+        for (TaskEffort i : this.taskEffortList) {
+            x = x + effortInHours(i);
+        }
+        return x;
+    }
+
+    public double getExecutionPercentage() {
+        double x = getHoursSpent();
+        double result = (x / this.effortEstimate);
+
+        return result;
+    }
+
+    public void validateEffortPercentage(int hours, int minutes) {
+        double x = getHoursSpent();
+        double y = getEffortEstimate();
+        double z = hours + (minutes / 60);
+
+        if(x + z > y){
+            throw new IllegalArgumentException("Hours spent is higher then effort estimated, please update effort estimate");
+
+        }
+    }
 
     /**
      * Override methods.
@@ -189,11 +175,11 @@ public class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return Double.compare(task.effortEstimate, effortEstimate) == 0 && Double.compare(task.effortRemaining, effortRemaining) == 0 && Double.compare(task.hoursSpent, hoursSpent) == 0 && Double.compare(task.executionPercentage, executionPercentage) == 0 && name.equals(task.name) && description.equals(task.description) && type.equals(task.type) && Objects.equals(endDate, task.endDate) && status.equals(task.status) && responsible.equals(task.responsible);
+        return Double.compare(task.effortEstimate, effortEstimate) == 0 && name.equals(task.name) && description.equals(task.description) && type.equals(task.type) && Objects.equals(endDate, task.endDate) && responsible.equals(task.responsible);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, type, effortEstimate, effortRemaining, endDate, status, hoursSpent, executionPercentage, responsible);
+        return Objects.hash(name, description, type, effortEstimate, endDate, responsible);
     }
 }

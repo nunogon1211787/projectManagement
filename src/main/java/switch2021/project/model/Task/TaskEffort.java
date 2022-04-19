@@ -2,9 +2,10 @@ package switch2021.project.model.Task;
 
 import lombok.Getter;
 import switch2021.project.model.valueObject.*;
+import switch2021.project.utils.ValueObject;
 
 @Getter
-public class TaskEffort {
+public class TaskEffort implements ValueObject<TaskEffort> {
 
     /**
      * Attributes
@@ -25,5 +26,10 @@ public class TaskEffort {
         this.effortMinutes = new Minutes(effortMinutes);
         this.comment = new Description(comment);
         this.attachment = new Attachment(attachment);
+    }
+
+    @Override
+    public boolean sameValueAs(TaskEffort other) {
+        return false;
     }
 }
