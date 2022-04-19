@@ -15,7 +15,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
-public class ProjectStore {
+public class ProjectStore /*implements CrudRepository <Project, >*/ {
 
     /**
      * Class Attributes
@@ -102,7 +102,7 @@ public class ProjectStore {
         boolean status = false;
 
         if (!checkProjectExists(proj)) {
-            proj.setProjectCode(new ProjectCode(this.projectList.size() + 1));
+            proj.setProjectCode(new ProjectID(this.projectList.size() + 1));
             this.projectList.add(proj);
 
             status = true;

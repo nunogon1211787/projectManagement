@@ -2,6 +2,7 @@ package switch2021.project.model.UserProfile;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.model.valueObject.Function;
 import switch2021.project.model.valueObject.UserProfileId;
 import switch2021.project.utils.Entity;
 
@@ -44,6 +45,7 @@ public class UserProfile implements Entity<UserProfile> {
     public int hashCode() {
         return userProfileId.hashCode();
     }
+
 }
 
 

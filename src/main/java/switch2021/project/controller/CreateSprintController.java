@@ -3,6 +3,7 @@ package switch2021.project.controller;
 import switch2021.project.model.Company;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Sprint.SprintID;
 import switch2021.project.repositories.ProjectStore;
 
 import java.time.LocalDate;
@@ -41,13 +42,10 @@ public class CreateSprintController {
         return this.proj;
     }
 
-    public Sprint createSprint(String name) {
+    public boolean createAndSaveSprint(String sprintID, String name) {
         int sprintDuration = this.proj.getSprintDuration().getSprintDurationDays();
-        return this.proj.getSprintList().createSprint(name, sprintDuration);
-    }
-
-    public boolean saveSprint(Sprint sprint) {
-        return this.proj.getSprintList().saveSprint(sprint);
+        this.proj.getSprintList().createAndSaveSprint(sprintID, name, sprintDuration);
+        return true;
     }
 }
 

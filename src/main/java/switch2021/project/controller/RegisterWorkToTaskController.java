@@ -1,6 +1,7 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Sprint.SprintID;
 import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.Task.Task;
 import switch2021.project.model.UserStory.UserStory;
@@ -43,7 +44,7 @@ public class RegisterWorkToTaskController {
      **/
     public List<TaskIdNameDTO> getTasks(UserStorySprintProjectDTO userStorySprintProjectDTO) {
         String code = userStorySprintProjectDTO.getProjectCode();
-        int sprintId = userStorySprintProjectDTO.getSprintId();
+        SprintID sprintId = userStorySprintProjectDTO.getSprintId();
         UserStoryId userStoryId = userStorySprintProjectDTO.getUserStoryId();
 
         ProjectStore projectStore = this.company.getProjectStore();

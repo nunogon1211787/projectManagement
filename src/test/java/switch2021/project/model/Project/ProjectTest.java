@@ -7,6 +7,7 @@ import switch2021.project.factory.SprintFactory;
 import switch2021.project.model.Company;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Sprint.SprintID;
 import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.Task.Task;
 import switch2021.project.model.Task.TaskTypeEnum;
@@ -16,12 +17,9 @@ import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.repositories.ProjectStore;
-
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -303,33 +301,30 @@ class ProjectTest {
     @Test
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTest() {
-        Sprint sprint1 = new Sprint("Effort View");
         SprintStore sprintList1 = new SprintStore(new SprintFactory());
-        sprintList1.saveSprint(sprint1);
-        SprintStore projectSprintList = this.project2.getSprintList();
-        projectSprintList.saveSprint(sprint1);
-        assertEquals(sprintList1, projectSprintList);
+        sprintList1.createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        SprintStore projectSprintList = new SprintStore(new SprintFactory());
+        projectSprintList.createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        assertEquals(sprintList1.findSprints().size(), projectSprintList.findSprints().size());
     }
 
     @Test
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTestFail() {
-        Sprint sprint1 = new Sprint("Effort View");
+        //Arrange
         SprintStore sprintList1 = new SprintStore(new SprintFactory());
-        sprintList1.saveSprint(sprint1);
-        Sprint sprint2 = new Sprint("Effort View 1");
-        SprintStore projectSprintList = this.project2.getSprintList();
-        projectSprintList.saveSprint(sprint1);
-        projectSprintList.saveSprint(sprint2);
-        assertNotEquals(sprintList1, projectSprintList);
+        sprintList1.createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Effort View", 2);
+        sprintList1.createAndSaveSprint("Project_2022_1_Sprint 2", "Sprint Effort View View", 2);
+        SprintStore projectSprintList = new SprintStore(new SprintFactory());
+        projectSprintList.createAndSaveSprint("Project_2022_1_Sprint 2", "Sprint Effort View 1", 2);
+        //Assert
+        assertNotEquals(sprintList1.findSprints().size(), projectSprintList.findSprints().size());
     }
 
     @Test
     @DisplayName("Create task")
     void getActivitiesOfAProject() {
         //Arrange
-        Sprint sprint1 = new Sprint("Effort View");
-
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
@@ -337,15 +332,20 @@ class ProjectTest {
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100),new PercentageOfAllocation( .5));
         String taskDescription = "must be at least 20 characters";
         TaskTypeEnum taskType = TaskTypeEnum.Design;
-
+        SprintStore sprintStore = new SprintStore(new SprintFactory());
+        Sprint sprint1 = sprintStore.createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
+        sprint1.setStartDate(LocalDate.of(2022, 1, 1));
+        SprintID id = new SprintID("Project_2022_1_Sprint 1");
+        boolean x = sprint1.isCurrentSprint();
         Task taskTest = sprint1.getTaskStore().createTask("test", taskDescription, 8.0, taskType, resource);
         sprint1.getTaskStore().saveTask(taskTest);
         List<Task> taskList = new ArrayList<>();
+        List<Task> taskSprintList = sprint1.getListOfTasksOfASprint();
         //Act
-        project2.getSprintList().saveSprint(sprint1);
         taskList.add(taskTest);
         //Assert
-        assertEquals(taskList, project2.getSprintList().findSprintById(1).getListOfTasksOfASprint());
+        assertTrue(x);
+        assertEquals(taskList.size(), taskSprintList.size());
     }
 
     @Test
@@ -458,13 +458,13 @@ class ProjectTest {
 
         Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        project.setProjectCode(new ProjectCode(1));
+        project.setProjectCode(new ProjectID(1));
         project.setUserStoryStore(backlog);
         project.setEndDate(date);
 
         Project project2 = company.getProjectStore().createProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        project2.setProjectCode(new ProjectCode(1));
+        project2.setProjectCode(new ProjectID(1));
         project2.setEndDate(date);
         project2.setUserStoryStore(backlog);
 

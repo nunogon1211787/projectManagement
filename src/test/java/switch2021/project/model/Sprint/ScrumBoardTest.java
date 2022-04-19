@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class SprintBacklogTest {
+class ScrumBoardTest {
 
     ScrumBoard scrumBoard = new ScrumBoard();
 

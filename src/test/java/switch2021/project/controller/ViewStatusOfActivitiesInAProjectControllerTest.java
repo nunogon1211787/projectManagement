@@ -32,7 +32,7 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
 
         company.getProjectStore().saveNewProject(project2);
 
-        Sprint sprint1 = new Sprint("Effort View");
+        Sprint sprint1 = project2.getSprintList().createAndSaveSprint("Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
@@ -44,8 +44,6 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
 
         Task taskTest = sprint1.getTaskStore().createTask("test", taskDescription, 8.0, taskType, resource);
         sprint1.getTaskStore().saveTask(taskTest);
-
-        project2.getSprintList().saveSprint(sprint1);
 
         List<Task> listTest;
 

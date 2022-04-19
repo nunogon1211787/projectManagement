@@ -4,6 +4,7 @@ import switch2021.project.mapper.TaskMapper;
 import switch2021.project.dto.CreateTaskDTO;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
+import switch2021.project.model.Sprint.SprintID;
 import switch2021.project.model.Task.TaskStore;
 import switch2021.project.model.Task.TaskTypeEnum;
 
@@ -40,7 +41,7 @@ public class CreateSprintTaskController {
         return taskTypesNames;
     }
 
-    public List<String> getSprintTasks(String projCode, int sprintID){
+    public List<String> getSprintTasks(String projCode, SprintID sprintID){
 
         this.proj = this.company.getProjectStore().getProjectByCode(projCode);
 

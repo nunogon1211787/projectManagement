@@ -6,12 +6,12 @@ import switch2021.project.model.Typology.Typology;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProjectCodeTest {
+class ProjectIDTest {
 
     @Test
     public void shouldCreateAValidProjectCode() {
         //Arrange
-        ProjectCode code = new ProjectCode(1);
+        ProjectID code = new ProjectID(1);
         //Assert
         assertEquals("Project_2022_1", code.getCode());
     }
@@ -19,15 +19,15 @@ class ProjectCodeTest {
     @Test
     public void shouldCreateAValidDescriptionLengthLimit() {
         //Arrange
-        assertThrows(IllegalArgumentException.class, () -> new ProjectCode(0));
+        assertThrows(IllegalArgumentException.class, () -> new ProjectID(0));
     }
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTestNotEqual() {
         //Arrange
-        ProjectCode code = new ProjectCode(1);
-        ProjectCode code2 = new ProjectCode(2);
+        ProjectID code = new ProjectID(1);
+        ProjectID code2 = new ProjectID(2);
         //Assert
         assertNotEquals(code, code2);
     }
@@ -36,8 +36,8 @@ class ProjectCodeTest {
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTestEqual() {
         //Arrange
-        ProjectCode code = new ProjectCode(1);
-        ProjectCode code2 = new ProjectCode(1);
+        ProjectID code = new ProjectID(1);
+        ProjectID code2 = new ProjectID(1);
         //Assert
         assertEquals(code, code2);
     }
@@ -46,8 +46,8 @@ class ProjectCodeTest {
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTestENull() {
         //Arrange
-        ProjectCode code = new ProjectCode(1);
-        ProjectCode code2 = null;
+        ProjectID code = new ProjectID(1);
+        ProjectID code2 = null;
         //Assert
         assertNotEquals(code, code2);
     }
@@ -56,7 +56,7 @@ class ProjectCodeTest {
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTestClass() {
         // Arrange
-        ProjectCode code = new ProjectCode(1);
+        ProjectID code = new ProjectID(1);
         Typology test = new Typology("test");
         //Assert
         assertNotEquals(code, test);
@@ -65,8 +65,8 @@ class ProjectCodeTest {
     @Test
     public void hashCodeTestEqual() {
         // Arrange
-        ProjectCode code = new ProjectCode(1);
-        ProjectCode code2 = new ProjectCode(1);
+        ProjectID code = new ProjectID(1);
+        ProjectID code2 = new ProjectID(1);
         //Assert
         assertEquals(code.hashCode(), code2.hashCode());
     }
@@ -74,8 +74,8 @@ class ProjectCodeTest {
     @Test
     public void hashCodeTestNotEquals() {
         // Arrange
-        ProjectCode code = new ProjectCode(1);
-        ProjectCode code2 = new ProjectCode(2);
+        ProjectID code = new ProjectID(1);
+        ProjectID code2 = new ProjectID(2);
         //Assert
         assertNotEquals(code.hashCode(), code2.hashCode());
     }

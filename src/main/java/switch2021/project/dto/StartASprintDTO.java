@@ -1,6 +1,7 @@
 package switch2021.project.dto;
 
 import lombok.Getter;
+import switch2021.project.model.Sprint.SprintID;
 
 import java.time.LocalDate;
 
@@ -12,7 +13,7 @@ public class StartASprintDTO {
      **/
 
     private String projectCode;
-    private int sprintID;
+    private SprintID sprintID;
     private LocalDate startDate;
 
 
@@ -20,10 +21,10 @@ public class StartASprintDTO {
      * Constructor to test (without SINGLETON)
      **/
 
-    public StartASprintDTO (String projectCode, int sprintID, LocalDate startDate) {
+    public StartASprintDTO (String projectCode, String sprintID, LocalDate startDate) {
 
         this.projectCode = projectCode;
-        this.sprintID = sprintID;
+        this.sprintID = new SprintID(sprintID);
         this.startDate = startDate;
     }
 }

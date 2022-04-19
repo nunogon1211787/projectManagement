@@ -6,7 +6,6 @@ import switch2021.project.factory.*;
 import switch2021.project.factoryInterface.ResourceFactoryInterface;
 import switch2021.project.factory.ProjectTeamFactory;
 import switch2021.project.factory.ResourceFactory;
-import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintStore;
@@ -15,18 +14,20 @@ import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.utils.Entity;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Getter
 @Setter
-public class Project {
+public class Project implements Entity {
 
 
     /**
      * Class Attributes
      **/
-    private ProjectCode projectCode;
+    private ProjectID projectCode;
     private Description projectName;
     private Description description;
 
@@ -159,7 +160,7 @@ public class Project {
         if (!(o instanceof Project)) return false;
         Project project = (Project) o;
         return numberOfSprints == project.numberOfSprints
-                && sprintDuration == project.sprintDuration
+                && Objects.equals(sprintDuration, project.sprintDuration)
                 && Objects.equals(projectCode, project.projectCode)
                 && Objects.equals(projectName, project.projectName)
                 && Objects.equals(description, project.description)
@@ -202,6 +203,11 @@ public class Project {
                 ", budget=" + budget +
                 ", sprintDuration=" + sprintDuration +
                 '}';
+    }
+
+    @Override
+    public boolean sameIdentityAs(Object other) {
+        return false;
     }
 }
 

@@ -1,8 +1,9 @@
 package switch2021.project.model.UserStory;
 
 import lombok.*;
+import switch2021.project.model.Task.TaskStore;
 import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.ProjectCode;
+import switch2021.project.model.valueObject.ProjectID;
 
 import java.time.LocalDate;
 
@@ -17,7 +18,8 @@ public class UserStory  {
      **/
 
     private UserStoryId userStoryId;
-    private ProjectCode projectID;
+    private int idUserStory; //TODO CDC como gerar iD?
+    private ProjectID projectID;//Para receber o ID do projeto
 
     private UsTitle title; //The title of a US follows AS <role> I WANT <objective> https://productcoalition.com/anatomy-of-a-great-user-story-f56fb1b63e38
     private UsPriority priority;
@@ -77,7 +79,7 @@ public class UserStory  {
         return this.userStoryId == idUserStory;
     }
 
-    public boolean hasProjectID(ProjectCode projectID) {
+    public boolean hasProjectID(ProjectID projectID) {
         return this.projectID == projectID;
     }
 }

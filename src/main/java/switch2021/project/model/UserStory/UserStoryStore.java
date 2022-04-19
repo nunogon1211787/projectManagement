@@ -4,7 +4,7 @@ import lombok.*;
 import switch2021.project.dto.UserStoryDto;
 import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.mapper.UserStoryMapper;
-import switch2021.project.model.valueObject.ProjectCode;
+import switch2021.project.model.valueObject.ProjectID;
 
 import java.util.*;
 
@@ -145,7 +145,7 @@ public class UserStoryStore {
      * @param projectID id
      * @return allUserStoriesInAProject if found, else {@code null}
      */
-    public List<UserStory> findAllUserStoryByProjectID(ProjectCode projectID) {
+    public List<UserStory> findAllUserStoryByProjectID(ProjectID projectID) {
         List<UserStory> allUserStoriesInAProject = new ArrayList<>();
         for (UserStory us : userStoryList) {
             if (us.hasProjectID(projectID)) {
