@@ -388,7 +388,7 @@ class ProjectTest {
         assertEquals(list1.hashCode(), list2.hashCode());
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
-        assertEquals(7, project.getNumberOfSprints());
+        assertEquals(7, project.getNumberOfSprints().getNumberOfSprintsVO());
         assertEquals(project.getProjectCode(), list1.findProjectByID(project.getProjectCode().getCode()).getProjectCode());
         assertEquals("prototype", project.getProjectName().getText());
         assertEquals("test1234", project.getDescription().getText());

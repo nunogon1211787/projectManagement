@@ -71,7 +71,7 @@ public class Project implements Entity {
         this.startDate = startDate;
         this.sprintList = new SprintStore(new SprintFactory());
 
-        this.numberOfSprints = new NumberOfSprints (numberOfSprints);
+        this.numberOfSprints = new NumberOfSprints(numberOfSprints);
         this.budget = new Budget(budget);
 
         this.projectTeam = new ProjectTeam(resFac);
@@ -83,7 +83,7 @@ public class Project implements Entity {
      * Validates Project Creation Fields
      * Checks if @param projectName and @param description are empty or have the minimum characters necessary
      */
-    public void validateProjectFields( int numberOfSprints) {
+    public void validateProjectFields(int numberOfSprints) {
         if (numberOfSprints <= 0)
             throw new IllegalArgumentException("Number of Sprints must be greater than 0");
     }
@@ -113,7 +113,7 @@ public class Project implements Entity {
 
     public Resource getTeamMemberByIndex(int index) {
         Resource res = null;
-        for(Resource i : projectTeam.getProjectTeamList()){
+        for (Resource i : projectTeam.getProjectTeamList()) {
             res = projectTeam.getProjectTeamList().get(index);
         }
         return res;
@@ -123,7 +123,7 @@ public class Project implements Entity {
         boolean msg = true;
         String x = resource.getUser().getSystemUserId().getEmail().getEmail();
 
-        for(Resource i : projectTeam.getProjectTeamList()){
+        for (Resource i : projectTeam.getProjectTeamList()) {
             if (i.getUser().getSystemUserId().getEmail().getEmail().equals(x)) {
                 msg = false;
                 break;
@@ -140,14 +140,16 @@ public class Project implements Entity {
         return this.projectTeam.hasResource(email);
     }
 
-    public boolean hasCode(String code){ return this.projectCode.getCode().equalsIgnoreCase(code); }
+    public boolean hasCode(String code) {
+        return this.projectCode.getCode().equalsIgnoreCase(code);
+    }
 
 
     /**
      * Get the start date of the next Sprint and end date of the current Sprint
      */
     public Sprint getCurrentSprint() {
-      return this.sprintList.findCurrentSprint();
+        return this.sprintList.findCurrentSprint();
     }
 
 
@@ -159,21 +161,22 @@ public class Project implements Entity {
         if (this == o) return true;
         if (!(o instanceof Project)) return false;
         Project project = (Project) o;
-        return numberOfSprints == project.numberOfSprints
-                && Objects.equals(sprintDuration, project.sprintDuration)
-                && Objects.equals(projectCode, project.projectCode)
-                && Objects.equals(projectName, project.projectName)
-                && Objects.equals(description, project.description)
-                && Objects.equals(customer, project.customer)
-                && Objects.equals(typology, project.typology)
-                && Objects.equals(projectStatus, project.projectStatus)
-                && Objects.equals(userStoryStore, project.userStoryStore)
-                && Objects.equals(businessSector, project.businessSector)
-                && Objects.equals(sprintList, project.sprintList)
-                && Objects.equals(projectTeam, project.projectTeam)
-                && Objects.equals(startDate, project.startDate)
-                && Objects.equals(endDate, project.endDate)
-                && Objects.equals(budget, project.budget);
+        return
+                Objects.equals(sprintDuration, project.sprintDuration)
+                        && Objects.equals(projectCode, project.projectCode)
+                        && Objects.equals(projectName, project.projectName)
+                        && Objects.equals(description, project.description)
+                        && Objects.equals(customer, project.customer)
+                        && Objects.equals(typology, project.typology)
+                        && Objects.equals(projectStatus, project.projectStatus)
+                        && Objects.equals(userStoryStore, project.userStoryStore)
+                        && Objects.equals(businessSector, project.businessSector)
+                        && Objects.equals(sprintList, project.sprintList)
+                        && Objects.equals(projectTeam, project.projectTeam)
+                        && Objects.equals(startDate, project.startDate)
+                        && Objects.equals(endDate, project.endDate)
+                        && Objects.equals(budget, project.budget)
+                        && Objects.equals(numberOfSprints, project.numberOfSprints);
     }
 
     @Override
