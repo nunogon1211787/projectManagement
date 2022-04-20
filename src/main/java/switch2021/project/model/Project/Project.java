@@ -47,7 +47,7 @@ public class Project implements Entity {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    private int numberOfSprints;
+    private NumberOfSprints numberOfSprints;
     private Budget budget;
     private SprintDuration sprintDuration;
 
@@ -71,7 +71,7 @@ public class Project implements Entity {
         this.startDate = startDate;
         this.sprintList = new SprintStore(new SprintFactory());
 
-        this.numberOfSprints = numberOfSprints;
+        this.numberOfSprints = new NumberOfSprints (numberOfSprints);
         this.budget = new Budget(budget);
 
         this.projectTeam = new ProjectTeam(resFac);

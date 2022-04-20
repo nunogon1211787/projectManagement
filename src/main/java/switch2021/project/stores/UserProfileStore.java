@@ -20,6 +20,7 @@ public class UserProfileStore {
      * UserProfile Store Constructor
      **/
     public UserProfileStore() {
+
         userProfileList = new ArrayList<>();
     }
 
