@@ -3,7 +3,7 @@ package switch2021.project.controller;
 import switch2021.project.model.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.stores.SystemUserStore;
-import switch2021.project.stores.UserProfileStore;
+import switch2021.project.repositories.UserProfileRepository;
 import switch2021.project.model.UserProfile.UserProfile;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public class UpdateUserProfileController {
     /**
      * Attributes
      **/
-    private final UserProfileStore userProfileStore;
+    private final UserProfileRepository userProfileStore;
     private final SystemUserStore systemUserStore;
     private SystemUser user;
 

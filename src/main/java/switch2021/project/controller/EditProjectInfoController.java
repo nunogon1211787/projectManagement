@@ -5,6 +5,7 @@ import switch2021.project.model.valueObject.Budget;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
+import switch2021.project.model.valueObject.NumberOfSprints;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.valueObject.SprintDuration;
 
@@ -49,7 +50,7 @@ public class EditProjectInfoController {
             this.project.setDescription(new Description(description));
             this.project.setStartDate(startDate);
             this.project.setEndDate(endDate);
-            this.project.setNumberOfSprints(nrSprints);
+            this.project.setNumberOfSprints(new NumberOfSprints(nrSprints));
             this.project.setBudget(new Budget(budget));
             this.project.setProjectStatus(status);
             this.project.setSprintDuration(new SprintDuration(sprintDuration));

@@ -82,7 +82,7 @@ class ProjectTest {
         LocalDate endDate = company.getProjectStore().findProjectByID("Project_2022_1").getEndDate();
         LocalDate valueEndDate = LocalDate.now();
 
-        int numberOfSprints = company.getProjectStore().findProjectByID("Project_2022_1").getNumberOfSprints();
+        int numberOfSprints = company.getProjectStore().findProjectByID("Project_2022_1").getNumberOfSprints().getNumberOfSprintsVO();
         int valueNrSprint = 7;
 
         double budget = company.getProjectStore().findProjectByID("Project_2022_1").getBudget().getBudgetVO();

@@ -3,7 +3,7 @@ package switch2021.project.stores;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.model.valueObject.Description;
+import switch2021.project.repositories.UserProfileRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +28,7 @@ public class UserProfileStoreTest {
     @DisplayName("Create new profile with success")
     public void createNewUserProfileWithSuccess() {
         //Arrange
-        UserProfileStore userProfileStore = new UserProfileStore();
+        UserProfileRepository userProfileStore = new UserProfileRepository();
         String name = "Cris";
         // Act
         UserProfile up = userProfileStore.createProfile(name);
@@ -40,7 +40,7 @@ public class UserProfileStoreTest {
     @DisplayName("Return exception message, profile already exist")
     public void createNewUserProfileAlreadyExist() {
         //Arrange
-        UserProfileStore userProfileStore = new UserProfileStore();
+        UserProfileRepository userProfileStore = new UserProfileRepository();
         String name = "Cris";
         UserProfile up = userProfileStore.createProfile(name);
         UserProfile up1 = userProfileStore.createProfile(name);
@@ -58,7 +58,7 @@ public class UserProfileStoreTest {
     @DisplayName("Return exception message, profile already exist")
     public void saveNewUserProfileAlreadyExist() {
         //Arrange
-        UserProfileStore userProfileStore = new UserProfileStore();
+        UserProfileRepository userProfileStore = new UserProfileRepository();
         String name = "Cris";
         UserProfile up = userProfileStore.createProfile(name);
         UserProfile up1 = userProfileStore.createProfile(name);
@@ -75,7 +75,7 @@ public class UserProfileStoreTest {
     @DisplayName("Create new profile with success")
     public void saveNewUserProfileWithSuccess() {
         //Arrange
-        UserProfileStore userProfileStore = new UserProfileStore();
+        UserProfileRepository userProfileStore = new UserProfileRepository();
         String name = "Cris";
         UserProfile up = userProfileStore.createProfile(name);
         userProfileStore.saveUserProfile(up);
@@ -92,7 +92,7 @@ public class UserProfileStoreTest {
     @DisplayName("Create new profile with success")
     public void saveNewUserProfileWithSuccess2() {
         //Arrange
-        UserProfileStore userProfileStore = new UserProfileStore();
+        UserProfileRepository userProfileStore = new UserProfileRepository();
         String name = "Cris";
         UserProfile up = userProfileStore.createProfile(name);
         userProfileStore.saveUserProfile(up);
@@ -109,7 +109,7 @@ public class UserProfileStoreTest {
     @Test
     public void addNewUserProfileAlreadyExist() {
         //Arrange
-        UserProfileStore userProfileStore = new UserProfileStore();
+        UserProfileRepository userProfileStore = new UserProfileRepository();
         String name = "Cris";
         UserProfile up = userProfileStore.createProfile(name);
         UserProfile up1 = userProfileStore.createProfile(name);
@@ -126,7 +126,7 @@ public class UserProfileStoreTest {
     @Test
     public void addNewUserProfileWithSuccess() {
         //Arrange
-        UserProfileStore userProfileStore = new UserProfileStore();
+        UserProfileRepository userProfileStore = new UserProfileRepository();
         String name = "Cris";
         UserProfile up = userProfileStore.createProfile(name);
         userProfileStore.saveUserProfile(up);
@@ -142,7 +142,7 @@ public class UserProfileStoreTest {
     @Test
     public void addNewUserProfileWithSuccess2() {
         //Arrange
-        UserProfileStore userProfileStore = new UserProfileStore();
+        UserProfileRepository userProfileStore = new UserProfileRepository();
         String name = "Cris";
         UserProfile up = userProfileStore.createProfile(name);
         userProfileStore.saveUserProfile(up);
@@ -159,11 +159,11 @@ public class UserProfileStoreTest {
     @Test
     public void overrideAndHashCodeTest() {
         //Arrange
-        UserProfileStore list1 = new UserProfileStore();
+        UserProfileRepository list1 = new UserProfileRepository();
         list1.saveUserProfile(list1.createProfile("new"));
-        UserProfileStore list2 = new UserProfileStore();
+        UserProfileRepository list2 = new UserProfileRepository();
         list2.saveUserProfile(list1.createProfile("new"));
-        UserProfileStore list3 = new UserProfileStore();
+        UserProfileRepository list3 = new UserProfileRepository();
         list3.saveUserProfile(list3.createProfile("not new"));
         //Assert
         assertNotSame(list1, list2);
