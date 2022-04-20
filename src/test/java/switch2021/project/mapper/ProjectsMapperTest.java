@@ -57,7 +57,7 @@ public class ProjectsMapperTest {
         assertNull(projectDTO4.getCode());
         assertNull(projectDTO4.getProjectName());
         assertNull(projectDTO4.getStartDate());
-        assertNull(projectDTO4.getEndDate());
+        assertEquals("No end date defined", projectDTO4.getEndDate());
     }
 
     @Test
@@ -79,7 +79,7 @@ public class ProjectsMapperTest {
         assertEquals("Project_2022_1", test.getCode());
         assertEquals("prototype1", test.getProjectName());
         assertEquals("2021/11/1", test.getStartDate());
-        assertNull(test.getEndDate());
+        assertEquals("No end date defined", test.getEndDate());
     }
 
     @Test
