@@ -5,7 +5,6 @@ import switch2021.project.model.valueObject.Budget;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.valueObject.NumberOfSprints;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.valueObject.SprintDuration;
 
@@ -34,12 +33,12 @@ public class EditProjectInfoController {
      * Methods
      **/
     public List<Project> getProjectList() {
-        this.arrayProject = this.company.getProjectStore().getProjects();
+        this.arrayProject = this.company.getProjectStore().findAllProjects();
         return arrayProject;
     }
 
     public Project getProjectRequested(String code) {
-        this.project = this.company.getProjectStore().getProjectByCode(code);
+        this.project = this.company.getProjectStore().findProjectByID(code);
         return this.project;
     }
 

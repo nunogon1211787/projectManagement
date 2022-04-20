@@ -14,7 +14,7 @@ public class BudgetTest {
         //Arrange
         Budget budget = new Budget(2500);
         //Assert
-        assertEquals(2500, budget.getBudgetP());
+        assertEquals(2500, budget.getBudgetVO());
     }
 
     @Test
@@ -23,7 +23,7 @@ public class BudgetTest {
         //Arrange
         Budget budget = new Budget(0.1);
         //Assert
-        assertEquals(0.1, budget.getBudgetP());
+        assertEquals(0.1, budget.getBudgetVO());
     }
 
     @Test

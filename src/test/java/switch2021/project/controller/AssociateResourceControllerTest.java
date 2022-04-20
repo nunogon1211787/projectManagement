@@ -30,8 +30,7 @@ public class AssociateResourceControllerTest {
         Customer cust = new Customer("Name", "ght@gmail.com", 123456789);
         Typology typo = new Typology("typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
-        Project proj1 = comTest.getProjectStore().createProject("gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);
-        comTest.getProjectStore().saveNewProject(proj1);
+        Project proj1 = comTest.getProjectStore().createAndSaveProject("gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);
         //User
         UserProfile pro = comTest.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "description", "Qwerty_1", "Qwerty_1", ".png", pro.getUserProfileId());
@@ -56,20 +55,17 @@ public class AssociateResourceControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project project1 = projectStore.createProject("prototype4", "proj4Prototype", customer,
+        Project project1 = projectStore.createAndSaveProject("prototype4", "proj4Prototype", customer,
                 typo, sector, LocalDate.of(2021, 12, 1), 2, 4000);
         project1.setEndDate(LocalDate.of(2021, 12, 31));
-        projectStore.saveNewProject(project1);
         //Project2
-        Project project2 = projectStore.createProject("prototype3", "proj3Prototype", customer,
+        Project project2 = projectStore.createAndSaveProject("prototype3", "proj3Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
         project1.setEndDate(LocalDate.of(2022, 1, 31));
-        projectStore.saveNewProject(project2);
         //Project3
-        Project project3 = projectStore.createProject("prototype2", "proj2Prototype", customer,
+        Project project3 = projectStore.createAndSaveProject("prototype2", "proj2Prototype", customer,
                 typo, sector, LocalDate.of(2021, 12, 1), 2, 4000);
         project1.setEndDate(LocalDate.of(2021, 12, 31));
-        projectStore.saveNewProject(project3);
         //Act
         List<Project> projects = controller.getProjectList();
         //Assert
@@ -115,10 +111,8 @@ public class AssociateResourceControllerTest {
         Customer cust = new Customer("Name", "ght@gmail.com", 123456789);
         Typology typo = new Typology("typo1");
         BusinessSector busSector = new BusinessSector("busSec1");
-        Project proj1 = comTest.getProjectStore().createProject("gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);
-        Project proj2 = comTest.getProjectStore().createProject("ghj", "testtestest", cust, typo, busSector, startProjectDate, 30, 4500);
-        comTest.getProjectStore().saveNewProject(proj1);
-        comTest.getProjectStore().saveNewProject(proj2);
+        Project proj1 = comTest.getProjectStore().createAndSaveProject("gfd", "ghjsasd", cust, typo, busSector, startProjectDate, 30, 4500);
+        Project proj2 = comTest.getProjectStore().createAndSaveProject("ghj", "testtestest", cust, typo, busSector, startProjectDate, 30, 4500);
         //User
         UserProfile pro = comTest.getUserProfileStore().getUserProfile("Visitor");
         SystemUser newUser = new SystemUser("xyz", "fase@gmail.com", "description", "Qwerty_1", "Qwerty_1", "photo1.png", pro.getUserProfileId());

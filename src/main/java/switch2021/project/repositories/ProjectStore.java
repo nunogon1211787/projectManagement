@@ -1,8 +1,8 @@
 package switch2021.project.repositories;
 
 import lombok.Getter;
-import lombok.Setter;
 
+import switch2021.project.interfaces.ProjectRepositoryInterface;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
@@ -14,8 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-@Setter
-public class ProjectStore /*implements CrudRepository <Project, >*/ {
+public class ProjectStore implements ProjectRepositoryInterface {
 
     /**
      * Class Attributes
@@ -34,24 +33,28 @@ public class ProjectStore /*implements CrudRepository <Project, >*/ {
     /**
      * Project creator
      **/
-    public Project createProject(String name, String description, Customer customer, Typology typology,
-                                 BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
-
-        return new Project(name, description, customer, typology, businessSector,
+    public Project createAndSaveProject(String name, String description, Customer customer, Typology typology,
+                                        BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
+        Project newProject = new Project(name, description, customer, typology, businessSector,
                 startDate, numberOfSprints, budget);
+
+        newProject.setProjectCode(new ProjectID(projectList.size()+1));
+        projectList.add(newProject);
+
+        return newProject;
     }
 
 
     /**
      * Getters Methods
      **/
-    public List<Project> getProjects() {
+    public List<Project> findAllProjects() {
 
         return new ArrayList<>(this.projectList);
     }
 
 
-    public Project getProjectByCode(String code) {
+    public Project findProjectByID(String code) {
         Project res = null;
         for (Project proj : projectList) {
             if (proj.hasCode(code)) {
@@ -61,14 +64,10 @@ public class ProjectStore /*implements CrudRepository <Project, >*/ {
         return res;
     }
 
-
-    /**
-     * Validation Methods
-     **/
-    public boolean checkProjectExists(Project project) {
+    public boolean hasProjectId(String id) {
 
         for (Project proj : projectList) {
-            if (proj.equals(project)) {
+            if (proj.getProjectCode().getCode().equals(id)) {
                 return true;
             }
         }
@@ -94,21 +93,6 @@ public class ProjectStore /*implements CrudRepository <Project, >*/ {
         return msg;
     }
 
-
-    /**
-     * Save Methods
-     */
-    public boolean saveNewProject(Project proj) {
-        boolean status = false;
-
-        if (!checkProjectExists(proj)) {
-            proj.setProjectCode(new ProjectID(this.projectList.size() + 1));
-            this.projectList.add(proj);
-
-            status = true;
-        }
-        return status;
-    }
 
     public List<Project> getProjectsByUserEmail(String email) {
         List<Project> projectListByUser = new ArrayList<>();

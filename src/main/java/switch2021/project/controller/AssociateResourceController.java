@@ -30,7 +30,7 @@ public class AssociateResourceController {
      * Methods
      **/
     public List<Project> getProjectList() {
-        this.arrayProject = this.company.getProjectStore().getProjects();
+        this.arrayProject = this.company.getProjectStore().findAllProjects();
         return arrayProject;
     }
 
@@ -43,7 +43,7 @@ public class AssociateResourceController {
         boolean msg = false;
         SystemUser user = this.company.getSystemUserStore().findSystemUserByEmail(email);
         if (this.company.getProjectStore().validateAllocation(user, percentageOfAllocation, startDate, endDate)) {
-            Project project = this.company.getProjectStore().getProjectByCode(projectCode);
+            Project project = this.company.getProjectStore().findProjectByID(projectCode);
             Resource resource = project.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);
             project.addResource(resource);
             msg = true;

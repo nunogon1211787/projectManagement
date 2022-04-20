@@ -46,9 +46,8 @@ class CreateSprintTaskControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
+        Project project = company.getProjectStore().createAndSaveProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
         Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
@@ -83,9 +82,8 @@ class CreateSprintTaskControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
+        Project project = company.getProjectStore().createAndSaveProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
         Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
@@ -108,9 +106,8 @@ class CreateSprintTaskControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
+        Project project = company.getProjectStore().createAndSaveProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
         Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
@@ -149,9 +146,8 @@ class CreateSprintTaskControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
+        Project project = company.getProjectStore().createAndSaveProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
         Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
@@ -175,9 +171,8 @@ class CreateSprintTaskControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
+        Project project = company.getProjectStore().createAndSaveProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
         Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
@@ -215,9 +210,8 @@ class CreateSprintTaskControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
+        Project project = company.getProjectStore().createAndSaveProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
         Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
@@ -262,9 +256,8 @@ class CreateSprintTaskControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
+        Project project = company.getProjectStore().createAndSaveProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        company.getProjectStore().saveNewProject(project);
 
         //Create a sprint
         Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);

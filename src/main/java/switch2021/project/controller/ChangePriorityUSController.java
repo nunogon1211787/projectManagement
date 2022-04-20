@@ -37,7 +37,7 @@ public class ChangePriorityUSController {
     }
 
     public Project getProject(String code) {
-        this.project = company.getProjectStore().getProjectByCode(code);
+        this.project = company.getProjectStore().findProjectByID(code);
         return this.project;
     }
 
@@ -57,7 +57,7 @@ public class ChangePriorityUSController {
     }
 
     public Project getProjectByCode(String code) {
-        this.project = this.company.getProjectStore().getProjectByCode(code);
+        this.project = this.company.getProjectStore().findProjectByID(code);
         return this.project;
     }
 

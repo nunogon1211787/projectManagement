@@ -90,7 +90,6 @@ public class TaskListTest {
         Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
         Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), 4, 7000);
-        comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource resource = proj.getProjectTeam().createResource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
@@ -117,7 +116,6 @@ public class TaskListTest {
         Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
         Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), 4, 7000);
-        comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource resource = proj.getProjectTeam().createResource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
@@ -145,7 +143,6 @@ public class TaskListTest {
         Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
         Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), 4, 7000);
-        comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource resource = proj.getProjectTeam().createResource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);
@@ -173,7 +170,6 @@ public class TaskListTest {
         Typology typo = new Typology("test123");
         BusinessSector busSec = new BusinessSector("t1234");
         Project proj = new Project("project", "project test", cust, typo, busSec, LocalDate.of(2022, 2, 1), 4, 7000);
-        comp.getProjectStore().saveNewProject(proj);
         UserProfile profile = comp.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("user test", "test@test.pt", "test", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         Resource resource = proj.getProjectTeam().createResource(user, LocalDate.of(2022, 2, 1), LocalDate.of(2023, 2, 1), 100, 1);

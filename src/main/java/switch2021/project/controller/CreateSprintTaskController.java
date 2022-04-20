@@ -43,7 +43,7 @@ public class CreateSprintTaskController {
 
     public List<String> getSprintTasks(String projCode, SprintID sprintID){
 
-        this.proj = this.company.getProjectStore().getProjectByCode(projCode);
+        this.proj = this.company.getProjectStore().findProjectByID(projCode);
 
         this.taskStore = this.proj.getSprintList().findSprintById(sprintID).getTaskStore();
 

@@ -29,7 +29,7 @@ public class RefineUserStoryController {
      * Methods
      **/
     public Project getProject(String projectCode){
-        this.project = company.getProjectStore().getProjectByCode(projectCode);
+        this.project = company.getProjectStore().findProjectByID(projectCode);
         return this.project;
     }
 

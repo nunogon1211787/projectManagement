@@ -33,7 +33,7 @@ public class AddUserStoryToSprintBacklogController {
      * Methods
      **/
     public Project getProject(String code) {
-        this.project = company.getProjectStore().getProjectByCode(code);
+        this.project = company.getProjectStore().findProjectByID(code);
         return this.project;
     }
 

@@ -35,7 +35,7 @@ public class GetScrumBoardController {
      * Getter's
      */
     public Project getProject(String projectCode) {
-        project = company.getProjectStore().getProjectByCode(projectCode);
+        project = company.getProjectStore().findProjectByID(projectCode);
         return project;
     }
 

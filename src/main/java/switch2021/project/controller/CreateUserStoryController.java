@@ -44,7 +44,7 @@ public class CreateUserStoryController {
     }
 
     public void createUserStory(String code, UserStoryDto createUserStoryDto) {
-        Project project = this.company.getProjectStore().getProjectByCode(code);
+        Project project = this.company.getProjectStore().findProjectByID(code);
          project.getUserStoryStore().createAndSaveUserStoryWithDto(createUserStoryDto, this.mapperUS);
 
     }

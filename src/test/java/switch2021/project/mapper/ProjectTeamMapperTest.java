@@ -30,9 +30,8 @@ public class ProjectTeamMapperTest {
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         company.getBusinessSectorStore().createAndAddBusinessSector("it");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
-        company.getProjectStore().saveNewProject(proj1);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
@@ -82,9 +81,8 @@ public class ProjectTeamMapperTest {
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         company.getBusinessSectorStore().createAndAddBusinessSector("it");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
-        company.getProjectStore().saveNewProject(proj1);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
@@ -138,7 +136,7 @@ public class ProjectTeamMapperTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMb = LocalDate.of(2021, 11, 1);

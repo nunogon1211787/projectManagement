@@ -654,10 +654,9 @@ class ResourceTest {
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
         proj1.setEndDate(LocalDate.now().plusYears(1));
-        company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user1 = new SystemUser("manuelbras", "manuelbras@beaver.com",
                 "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
@@ -681,10 +680,9 @@ class ResourceTest {
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             //Project 1
-            Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+            Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
             proj1.setEndDate(LocalDate.now().plusYears(1));
-            company.getProjectStore().saveNewProject(proj1);
             //Act
             proj1.getProjectTeam().createResource(null, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
         });

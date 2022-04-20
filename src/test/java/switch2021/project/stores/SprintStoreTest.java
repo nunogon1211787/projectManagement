@@ -40,7 +40,7 @@ public class SprintStoreTest {
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         date = LocalDate.of(2022, 1, 1);
-        project = projectStore.createProject("prototype", "test1234", customer,
+        project = projectStore.createAndSaveProject("prototype", "test1234", customer,
                 typo, sector, date, 7, 5000);
         project.setSprintDuration(new SprintDuration(14));
         SprintStore sprintList = new SprintStore(new SprintFactory());
@@ -232,10 +232,9 @@ public class SprintStoreTest {
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2022, 12, 31));
-        company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //Resource 1
         SystemUser joana1 = new SystemUser("joanaum", "joana1@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
@@ -285,10 +284,9 @@ public class SprintStoreTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
         //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2022, 12, 31));
-        company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
@@ -344,10 +342,9 @@ public class SprintStoreTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
         //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2022, 12, 31));
-        company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
@@ -403,10 +400,9 @@ public class SprintStoreTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
         //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2022, 12, 31));
-        company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
@@ -462,10 +458,9 @@ public class SprintStoreTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
         //Project 1
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2022, 12, 31));
-        company.getProjectStore().saveNewProject(proj1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
         //Resource 1
@@ -539,7 +534,6 @@ public class SprintStoreTest {
                 10, 30000);
         project.setEndDate(LocalDate.of(2022, 12, 31));
         ProjectStore projectStore = new ProjectStore();
-        projectStore.saveNewProject(project);
         SprintStore sprintStore = new SprintStore(new SprintFactory());
         Sprint sprint = sprintStore.createAndSaveSprint(1, "Project_2022_1_Sprint 0", "Sprint Name 0", 2);
         Sprint sprint1 = sprintStore.createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name 1", 2);

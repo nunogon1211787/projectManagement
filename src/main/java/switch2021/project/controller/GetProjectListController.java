@@ -27,7 +27,7 @@ public class GetProjectListController {
 
     public List<Project> getProjects() {
         ProjectStore projStore = this.company.getProjectStore();
-        List<Project> projectList = projStore.getProjects();
+        List<Project> projectList = projStore.findAllProjects();
         return Collections.unmodifiableList(projectList);
     }
 }

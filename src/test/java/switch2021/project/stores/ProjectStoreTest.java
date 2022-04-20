@@ -29,8 +29,8 @@ public class ProjectStoreTest {
         when(proj1.hasProjectTeamMember(any())).thenReturn(true);
         when(proj2.hasProjectTeamMember(any())).thenReturn(true);
 
-        store.saveNewProject(proj1);
-        store.saveNewProject(proj2);
+        store.getProjectList().add(proj1);
+        store.getProjectList().add(proj2);
 
         // Act
         List<Project> projectList = store.getProjectsByUserEmail("cris@ipp.pt");
@@ -50,9 +50,8 @@ public class ProjectStoreTest {
 
             when(proj1.hasProjectTeamMember(any())).thenReturn(false);
             when(proj2.hasProjectTeamMember(any())).thenReturn(false);
+
             // Act
-            store.saveNewProject(proj1);
-            store.saveNewProject(proj2);
             store.getProjectsByUserEmail("cris@ipp.pt");
         });
     }
@@ -65,10 +64,10 @@ public class ProjectStoreTest {
         Project proj = mock(Project.class);
         when(proj.hasCode(anyString())).thenReturn(true);
 
-        projectStore.saveNewProject(proj);
+        projectStore.getProjectList().add(proj);
 
         // Act
-        Project project1 = projectStore.getProjectByCode("Project_2022_1");
+        Project project1 = projectStore.findProjectByID("Project_2022_1");
 
         // Assert
         assertEquals(proj, project1);
@@ -82,10 +81,8 @@ public class ProjectStoreTest {
         Project proj = mock(Project.class);
         when(proj.hasCode(anyString())).thenReturn(false);
 
-        projectStore.saveNewProject(proj);
-
         // Act
-        Project project1 = projectStore.getProjectByCode("Project_2022_1");
+        Project project1 = projectStore.findProjectByID("Project_2022_1");
 
         // Assert
         assertNull(project1);
@@ -105,8 +102,8 @@ public class ProjectStoreTest {
         when(proj2.hasCurrentProjectTeamMember(anyString())).thenReturn(true);
         when(proj2.getEndDate()).thenReturn(endDate);
 
-        projectStore.saveNewProject(proj);
-        projectStore.saveNewProject(proj2);
+        projectStore.getProjectList().add(proj);
+        projectStore.getProjectList().add(proj2);
 
         // Act
         List<Project> projectList = projectStore.getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
@@ -129,8 +126,6 @@ public class ProjectStoreTest {
         when(proj2.hasCurrentProjectTeamMember(anyString())).thenReturn(false);
         when(proj2.getEndDate()).thenReturn(endDate);
 
-        projectStore.saveNewProject(proj);
-        projectStore.saveNewProject(proj2);
 
         // Act
         List<Project> projectList = projectStore.getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
@@ -153,9 +148,6 @@ public class ProjectStoreTest {
         when(proj2.hasCurrentProjectTeamMember(anyString())).thenReturn(true);
         when(proj2.getEndDate()).thenReturn(endDate);
 
-        projectStore.saveNewProject(proj);
-        projectStore.saveNewProject(proj2);
-
         // Act
         List<Project> projectList = projectStore.getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
         // Assert
@@ -166,7 +158,7 @@ public class ProjectStoreTest {
     public void getProjectListSuccessEmpty() {
         //Arrange
         ProjectStore projectStore = new ProjectStore();
-        List<Project> projectList = projectStore.getProjects();
+        List<Project> projectList = projectStore.findAllProjects();
         // Assert
         assertTrue(projectList.isEmpty());
     }
@@ -179,30 +171,13 @@ public class ProjectStoreTest {
         Project proj = mock(Project.class);
         Project proj2 = mock(Project.class);
 
-        projectStore.saveNewProject(proj);
-        projectStore.saveNewProject(proj2);
+        projectStore.getProjectList().add(proj);
+        projectStore.getProjectList().add(proj2);
 
-        List<Project> projectList = projectStore.getProjects();
+        List<Project> projectList = projectStore.findAllProjects();
 
         // Assert
         assertEquals(2, projectList.size());
-    }
-
-    @Test
-    public void checkProjectExists() {
-        //Arrange
-        ProjectStore projectStore = new ProjectStore();
-
-        Project proj = mock(Project.class);
-        Project proj2 = mock(Project.class);
-        Project proj3 = mock(Project.class);
-
-        projectStore.saveNewProject(proj);
-        projectStore.saveNewProject(proj2);
-
-        // Assert
-        assertTrue(projectStore.checkProjectExists(proj));
-        assertFalse(projectStore.checkProjectExists(proj3));
     }
 
     @Test
@@ -228,8 +203,6 @@ public class ProjectStoreTest {
         when(resource.getPercentageOfAllocation()).thenReturn(percOfAllo);
         when(percOfAllo.getPercentage()).thenReturn(0.5);
 
-        projectStore.saveNewProject(proj);
-
         //Assert
         assertTrue(projectStore.validateAllocation(user, 0.5, startDate, endDate));
     }
@@ -243,18 +216,18 @@ public class ProjectStoreTest {
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //list1 and list2 are equals
-        Project project1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project project1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
         project1.setEndDate(LocalDate.of(2022, 1, 31));
         ProjectStore list1 = new ProjectStore();
-        list1.saveNewProject(project1);
         ProjectStore list2 = new ProjectStore();
-        list2.saveNewProject(project1);
-        Project project3 = company.getProjectStore().createProject("prototype3", "proj3Prototype", customer,
+        list1.getProjectList().add(project1);
+        list2.getProjectList().add(project1);
+        Project project3 = company.getProjectStore().createAndSaveProject("prototype3", "proj3Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
         project3.setEndDate(LocalDate.of(2022, 1, 31));
         ProjectStore list3 = new ProjectStore();
-        list3.saveNewProject(project3);
+        list3.getProjectList().add(project3);
         //Assert
         assertNotSame(list1, list2);
         assertEquals(list1, list2);

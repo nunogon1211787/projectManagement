@@ -44,9 +44,9 @@ public class CreateProjectController {
     }
 
     public boolean createProject(String name, String description, LocalDate startDate, int numberOfSprints, int budget) {
-        Project project = this.company.getProjectStore().createProject(name, description, customer,
+        Project project = this.company.getProjectStore().createAndSaveProject(name, description, customer,
                 typology, sector, startDate, numberOfSprints, budget);
 
-        return this.company.getProjectStore().saveNewProject(project);
+        return project != null;
     }
 }

@@ -36,13 +36,13 @@ public class AssociateResourceTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        proj = company.getProjectStore().createProject("prototype", "test56", customer,
+        proj = company.getProjectStore().createAndSaveProject("prototype", "test56", customer,
                 typo, sector, date, 7, 5000);
-        proj1 = company.getProjectStore().createProject("prototype2", "test57", customer,
+        proj1 = company.getProjectStore().createAndSaveProject("prototype2", "test57", customer,
                 typo, sector, date, 7, 5000);
-        proj2 = company.getProjectStore().createProject("prototype2", "test58", customer,
+        proj2 = company.getProjectStore().createAndSaveProject("prototype2", "test58", customer,
                 typo, sector, date, 7, 5000);
-        proj3 = company.getProjectStore().createProject("prototype3", "test59", customer,
+        proj3 = company.getProjectStore().createAndSaveProject("prototype3", "test59", customer,
                 typo, sector, date, 7, 5000);
         projectList = company.getProjectStore();
     }
@@ -91,9 +91,6 @@ public class AssociateResourceTest {
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
         //Save Project and Add Resource to Project
-        projectList.saveNewProject(proj1);
-        projectList.saveNewProject(proj2);
-        projectList.saveNewProject(proj3);
         proj1.addResource(resAllo1);
         proj3.addResource(resAllo1);
         //Act
@@ -114,9 +111,6 @@ public class AssociateResourceTest {
         LocalDate startDateToAllocate = LocalDate.of(2021, 12, 13);
         LocalDate endDateToAllocate = LocalDate.of(2021, 12, 14);
         //Save Project and Add Resource to Project
-        projectList.saveNewProject(proj1);
-        projectList.saveNewProject(proj2);
-        projectList.saveNewProject(proj3);
         proj1.addResource(resAllo1);
         proj3.addResource(resAllo1);
         //Act

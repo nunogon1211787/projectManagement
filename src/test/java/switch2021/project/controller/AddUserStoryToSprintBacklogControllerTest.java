@@ -25,12 +25,11 @@ public class AddUserStoryToSprintBacklogControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject( "prototype", "test1234", customer,
+        Project project = company.getProjectStore().createAndSaveProject( "prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
         sprint.setStartDate(LocalDate.now());
         SprintID sprintID = new SprintID("Project_2022_1_Sprint 1");
-        company.getProjectStore().saveNewProject(project);
         UserStoryId userStoryId = new UserStoryId("Project_2022_1_As a PO, i want to test this string");
         String code = project.getProjectCode().getCode();
         project.getUserStoryStore().createAndSaveUserStory(userStoryId.toString(), "As a PO, i want to test this string", 1, "Fazer coisas cool",5);

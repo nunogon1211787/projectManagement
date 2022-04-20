@@ -46,10 +46,9 @@ class ProjectTest {
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
-        proj = company.getProjectStore().createProject("prototype", "test1", customer,
+        proj = company.getProjectStore().createAndSaveProject("prototype", "test1", customer,
                 typo, sector, date, 7, 5000);
-        company.getProjectStore().saveNewProject(proj);
-        company.getProjectStore().getProjectByCode(proj.getProjectCode().getCode()).setEndDate(LocalDate.now());
+        company.getProjectStore().findProjectByID(proj.getProjectCode().getCode()).setEndDate(LocalDate.now());
     }
 
     @Test
@@ -65,28 +64,28 @@ class ProjectTest {
         Description description = proj.getDescription();
         Description valueDescription = new Description("test1");
 
-        Customer customer = company.getProjectStore().getProjectByCode("Project_2022_1").getCustomer();
+        Customer customer = company.getProjectStore().findProjectByID("Project_2022_1").getCustomer();
         Customer valueCustomer = company.getCustomerStore().getCustomerByName("Teste");
 
-        Typology typology = company.getProjectStore().getProjectByCode("Project_2022_1").getTypology();
+        Typology typology = company.getProjectStore().findProjectByID("Project_2022_1").getTypology();
         Typology valueTypology = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
 
-        BusinessSector sector = company.getProjectStore().getProjectByCode("Project_2022_1").getBusinessSector();
+        BusinessSector sector = company.getProjectStore().findProjectByID("Project_2022_1").getBusinessSector();
         BusinessSector valueSector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
         ProjectStatusEnum status = ProjectStatusEnum.PLANNED;
-        ProjectStatusEnum valueStatus = company.getProjectStore().getProjectByCode("Project_2022_1").getProjectStatus();
+        ProjectStatusEnum valueStatus = company.getProjectStore().findProjectByID("Project_2022_1").getProjectStatus();
 
-        LocalDate date = company.getProjectStore().getProjectByCode("Project_2022_1").getStartDate();
+        LocalDate date = company.getProjectStore().findProjectByID("Project_2022_1").getStartDate();
         LocalDate valueDate = LocalDate.of(2021, 12, 12);
 
-        LocalDate endDate = company.getProjectStore().getProjectByCode("Project_2022_1").getEndDate();
+        LocalDate endDate = company.getProjectStore().findProjectByID("Project_2022_1").getEndDate();
         LocalDate valueEndDate = LocalDate.now();
 
-        int numberOfSprints = company.getProjectStore().getProjectByCode("Project_2022_1").getNumberOfSprints();
+        int numberOfSprints = company.getProjectStore().findProjectByID("Project_2022_1").getNumberOfSprints();
         int valueNrSprint = 7;
 
-        double budget = company.getProjectStore().getProjectByCode("Project_2022_1").getBudget().getBudgetP();
+        double budget = company.getProjectStore().findProjectByID("Project_2022_1").getBudget().getBudgetVO();
         double valueBudget = 5000;
         //Result
         assertEquals(valueCode, code);
@@ -105,7 +104,7 @@ class ProjectTest {
     @Test
     @DisplayName("Project addition to list test")
     public void saveProjectTest() {
-        List<Project> test = company.getProjectStore().getProjects();
+        List<Project> test = company.getProjectStore().findAllProjects();
         String code = test.get(0).getProjectCode().getCode();
         String expectedCode = "Project_2022_1";
         assertEquals(expectedCode, code);
@@ -128,7 +127,7 @@ class ProjectTest {
             when(description2.getText()).thenReturn("sector");
             LocalDate date = LocalDate.now();
             // Act
-            company.getProjectStore().createProject("prototype", "", customer,
+            company.getProjectStore().createAndSaveProject("prototype", "", customer,
                     typo, sector, date, 7, 5000);
         });
     }
@@ -150,7 +149,7 @@ class ProjectTest {
             when(description2.getText()).thenReturn("sector");
             LocalDate date = LocalDate.now();
             // Act
-            company.getProjectStore().createProject("prototype", "test1234", customer,
+            company.getProjectStore().createAndSaveProject("prototype", "test1234", customer,
                     typo, sector, date, 0, 5000);
         });
     }
@@ -172,16 +171,9 @@ class ProjectTest {
             when(description2.getText()).thenReturn("sector");
             LocalDate date = LocalDate.now();
             // Act
-            company.getProjectStore().createProject("prototype", "test1234", customer,
+            company.getProjectStore().createAndSaveProject("prototype", "test1234", customer,
                     typo, sector, date, 7, 0);
         });
-    }
-
-    @Test
-    @DisplayName("Project Creation validation test")
-    public void checkValidation() {
-        boolean test = company.getProjectStore().saveNewProject(proj);
-        assertFalse(test);
     }
 
     private Project proj1;
@@ -201,19 +193,19 @@ class ProjectTest {
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
 
-        proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2021, 11, 30));
 
-        Project proj2 = company.getProjectStore().createProject("prototype2", "proj2Prototype", customer,
+        Project proj2 = company.getProjectStore().createAndSaveProject("prototype2", "proj2Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
         proj2.setEndDate(LocalDate.of(2021, 11, 30));
 
-        proj3 = company.getProjectStore().createProject("prototype3", "proj3Prototype", customer,
+        proj3 = company.getProjectStore().createAndSaveProject("prototype3", "proj3Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
         proj3.setEndDate(LocalDate.of(2021, 11, 30));
 
-        currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
+        currentProject = company.getProjectStore().createAndSaveProject("prototype4", "proj4Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 4000);
         currentProject.setEndDate(LocalDate.now().plusDays(7));
 
@@ -339,39 +331,6 @@ class ProjectTest {
         assertEquals(taskList.size(), taskSprintList.size());
     }
 
-    @Test
-    @DisplayName("Validate Save Project")
-    void saveNewProject() {
-        //Arrange
-        ProjectStore store = new ProjectStore();
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
-        proj1.setEndDate(LocalDate.of(2021, 11, 30));
-        //Act
-        store.saveNewProject(proj1);
-        store.saveNewProject(proj1);
-        //Act
-        assertEquals(1, store.getProjects().size());
-    }
-
-    @Test
-    @DisplayName("Validate Save Project")
-    void saveNewProject_2() {
-        //Arrange
-        ProjectStore store = new ProjectStore();
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
-        proj1.setEndDate(LocalDate.of(2021, 11, 30));
-
-        Project proj2 = company.getProjectStore().createProject("prototype2", "proj1Prototype", customer,
-                typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
-        proj1.setEndDate(LocalDate.of(2021, 11, 30));
-
-        store.saveNewProject(proj1);
-        store.saveNewProject(proj2);
-
-        assertEquals(2, store.getProjects().size());
-    }
 
     @Test
     @DisplayName("Validate resource - add fail")
@@ -411,16 +370,15 @@ class ProjectTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
+        Project project = company.getProjectStore().createAndSaveProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        company.getProjectStore().saveNewProject(project);
+        list1.getProjectList().add(project);
 
-        list1.saveNewProject(project);
         ProjectStore list2 = new ProjectStore();
-        list2.saveNewProject(project);
+        list2.getProjectList().add(project);
         ProjectStore list3 = new ProjectStore();
-        list3.saveNewProject(list3.createProject("prototype4", "test123456", customer,
-                typo, sector, LocalDate.now(), 10, 6000));
+        list3.createAndSaveProject("prototype4", "test123456", customer,
+                typo, sector, LocalDate.now(), 10, 6000);
 
         //Assert
         assertEquals(project, project);
@@ -431,7 +389,7 @@ class ProjectTest {
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
         assertEquals(7, project.getNumberOfSprints());
-        assertEquals(project.getProjectCode(), list1.getProjectByCode(project.getProjectCode().getCode()).getProjectCode());
+        assertEquals(project.getProjectCode(), list1.findProjectByID(project.getProjectCode().getCode()).getProjectCode());
         assertEquals("prototype", project.getProjectName().getText());
         assertEquals("test1234", project.getDescription().getText());
         assertEquals(sector, project.getBusinessSector());
@@ -447,13 +405,13 @@ class ProjectTest {
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
-        Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
+        Project project = company.getProjectStore().createAndSaveProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         project.setProjectCode(new ProjectID(1));
         project.setUserStoryStore(backlog);
         project.setEndDate(date);
 
-        Project project2 = company.getProjectStore().createProject("prototype", "test1234", customer,
+        Project project2 = company.getProjectStore().createAndSaveProject("prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         project2.setProjectCode(new ProjectID(1));
         project2.setEndDate(date);

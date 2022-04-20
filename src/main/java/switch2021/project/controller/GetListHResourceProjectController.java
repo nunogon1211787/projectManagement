@@ -29,7 +29,7 @@ public class GetListHResourceProjectController {
      * Method
      **/
     public List<ResourceDTO> getProjectTeam(String projectCode) {
-        List<Resource> projectTeamList = company.getProjectStore().getProjectByCode(projectCode).getProjectTeam().getProjectTeamList();
+        List<Resource> projectTeamList = company.getProjectStore().findProjectByID(projectCode).getProjectTeam().getProjectTeamList();
         return this.projectTeamMapper.toDto(projectTeamList);
     }
 }
