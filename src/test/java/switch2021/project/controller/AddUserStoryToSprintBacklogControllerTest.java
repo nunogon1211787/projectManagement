@@ -11,7 +11,9 @@ import switch2021.project.model.UserStory.UserStoryId;
 import switch2021.project.model.valueObject.BusinessSector;
 import switch2021.project.model.valueObject.Customer;
 import switch2021.project.model.Typology.Typology;
+
 import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
@@ -32,8 +34,9 @@ public class AddUserStoryToSprintBacklogControllerTest {
         SprintID sprintID = new SprintID("Project_2022_1_Sprint 1");
         UserStoryId userStoryId = new UserStoryId("Project_2022_1_As a PO, i want to test this string");
         String code = project.getProjectCode().getCode();
-        project.getUserStoryStore().createAndSaveUserStory(userStoryId.toString(), "As a PO, i want to test this string", 1, "Fazer coisas cool",5);
-        UserStory us = new UserStory (userStoryId.toString(), "As a PO, i want to test this string", 1, "UserStory description", 5);
+
+        project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId.toString(), "As a PO, i want to test this string", 1, "Fazer coisas cool", 5);
+        UserStory us = new UserStory(code, userStoryId.toString(), "As a PO, i want to test this string", 1, "UserStory description", 5);
         //Act
         AddUserStoryToSprintBacklogController addStory = new AddUserStoryToSprintBacklogController(company);
         addStory.getProject(code);

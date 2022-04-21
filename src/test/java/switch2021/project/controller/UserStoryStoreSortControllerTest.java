@@ -168,11 +168,12 @@ public class UserStoryStoreSortControllerTest {
         Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);// Arrange
+        ProjectID projectID = new ProjectID("Project_2022_1");
 
-        project.getUserStoryStore().createAndSaveUserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "create user story", 5);
-        project.getUserStoryStore().createAndSaveUserStory("Project_2022_2_As a PO, i want to test this string","As a PO, i want to test this string", 1, "sort user story", 5);
-        project.getUserStoryStore().createAndSaveUserStory("Project_2022_3_As a PO, i want to test this string","As a PO, i want to test this string", 3, "backlog sorted", 5);
-        project.getUserStoryStore().createAndSaveUserStory("Project_2022_4_As a PO, i want to test this string","As a PO, i want to test this string", 5, "show sorted", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "create user story", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_2_As a PO, i want to test this string","As a PO, i want to test this string", 1, "sort user story", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_3_As a PO, i want to test this string","As a PO, i want to test this string", 3, "backlog sorted", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_4_As a PO, i want to test this string","As a PO, i want to test this string", 5, "show sorted", 5);
 
         projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
@@ -208,9 +209,10 @@ public class UserStoryStoreSortControllerTest {
         Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
-        project.getUserStoryStore().createAndSaveUserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "create user story", 5);
-        project.getUserStoryStore().createAndSaveUserStory("Project_2022_2_As a PO, i want to test this string","As a PO, i want to test this string", 1, "sort user story", 5);
-        project.getUserStoryStore().createAndSaveUserStory("Project_2022_3_As a PO, i want to test this string","As a PO, i want to test this string", 3, "backlog sorted", 5);
+        ProjectID projectID = new ProjectID("Project_2022_1");
+        project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "create user story", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_2_As a PO, i want to test this string","As a PO, i want to test this string", 1, "sort user story", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_3_As a PO, i want to test this string","As a PO, i want to test this string", 3, "backlog sorted", 5);
 
         projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);
@@ -219,7 +221,7 @@ public class UserStoryStoreSortControllerTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             ProductBacklogSortController productBacklogSortController = new ProductBacklogSortController(company, mapper, mapperPB);
             productBacklogSortController.getProjectListByUserEmail("cris@ipp.pt");
-            project.getUserStoryStore().createAndSaveUserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 6, "show sorted", 5);
+            project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 6, "show sorted", 5);
             productBacklogSortController.getUsSortedByPriority("123testcode");
         });
         // Assert
@@ -244,11 +246,12 @@ public class UserStoryStoreSortControllerTest {
         Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);// Arrange
+        ProjectID projectID = new ProjectID("Project_2022_1");
 
-        project.getUserStoryStore().createAndSaveUserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "create user story", 5);
-        project.getUserStoryStore().createAndSaveUserStory("Project_2022_2_As a PO, i want to test this string","As a PO, i want to test this string", 1, "sort user story", 5);
-        project.getUserStoryStore().createAndSaveUserStory("Project_2022_3_As a PO, i want to test this string","As a PO, i want to test this string", 3, "backlog sorted", 5);
-        project.getUserStoryStore().createAndSaveUserStory("Project_2022_4_As a PO, i want to test this string","As a PO, i want to test this string", 5, "show sorted", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "create user story", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_2_As a PO, i want to test this string","As a PO, i want to test this string", 1, "sort user story", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_3_As a PO, i want to test this string","As a PO, i want to test this string", 3, "backlog sorted", 5);
+        project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_4_As a PO, i want to test this string","As a PO, i want to test this string", 5, "show sorted", 5);
 
         projectTeam.saveResource(input);
         project.setProjectTeam(projectTeam);

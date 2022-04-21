@@ -61,10 +61,9 @@ public class ChangePriorityUSControllerTest {
         LocalDate endDate = LocalDate.of(2023, 3, 5);
         input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
         input2 = new Resource(newUser2, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
-        userStoryStatus = new UserStoryStatus("coiso", true);
-        userStory = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "Fazer tal", 5);
-        userStory2 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a diretor, i want to test this string", 3, "Fazer tal e coiso", 5);
-        userStory3 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a SM, i want to test this string", 4, "Fazer tal e coiso também", 5);
+        userStory = new UserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 2, "Fazer tal", 5);
+        userStory2 = new UserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_1_As a PO, i want to test this string","As a diretor, i want to test this string", 3, "Fazer tal e coiso", 5);
+        userStory3 = new UserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_1_As a PO, i want to test this string","As a SM, i want to test this string", 4, "Fazer tal e coiso também", 5);
         project.getUserStoryStore().getUserStoryList().add(userStory);
         project.getUserStoryStore().getUserStoryList().add(userStory2);
         project.getUserStoryStore().getUserStoryList().add(userStory3);

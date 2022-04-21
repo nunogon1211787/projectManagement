@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.dto.UserStoryStatusDTO;
 import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.model.valueObject.ProjectID;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,22 +20,24 @@ public class ScrumBoardMapperTest {
         //Arrange
         ScrumBoardMapper mapper = new ScrumBoardMapper();
         String userStoryId1 = "Project_2022_1_As a PO, i want to test this string";
-        UserStory userStory = new UserStory(userStoryId1,"As a PO, i want to test this string", 5, "description", 5);
+        String projectID = "Project_2022_1";
+        UserStory userStory = new UserStory(projectID, userStoryId1, "As a PO, i want to test this string", 5, "description", 5);
 
         //Act
         UserStoryStatusDTO dto = mapper.toDTO(userStory);
 
         //Assert
-        assertEquals(dto.getTitle().getTitleUs(),userStory.getTitle().getTitleUs());
-        assertEquals("As a PO, i want to test this string",dto.getTitle().getTitleUs());
-        assertEquals(dto.getDescription().getText(),userStory.getDescription().getText());
+        assertEquals(dto.getTitle().getTitleUs(), userStory.getTitle().getTitleUs());
+        assertEquals("As a PO, i want to test this string", dto.getTitle().getTitleUs());
+        assertEquals(dto.getDescription().getText(), userStory.getDescription().getText());
         assertEquals("description", dto.getDescription().getText());
-        assertEquals(dto.getPriority().getPriorityUs(),userStory.getPriority().getPriorityUs());
+        assertEquals(dto.getPriority().getPriorityUs(), userStory.getPriority().getPriorityUs());
         assertEquals(5, dto.getPriority().getPriorityUs());
-        assertEquals(dto.getTimeEstimate().getUsHours(),userStory.getTimeEstimate().getUsHours());
+        assertEquals(dto.getTimeEstimate().getUsHours(), userStory.getTimeEstimate().getUsHours());
         assertEquals(5, dto.getPriority().getPriorityUs());
-        assertEquals(dto.getUserStoryId().toString(),userStory.getUserStoryId().toString());
+        assertEquals(dto.getUserStoryId().toString(), userStory.getUserStoryId().toString());
         assertEquals("Project_2022_1_As a PO, i want to test this string", dto.getUserStoryId().toString());
+        assertEquals(projectID,userStory.getProjectID().getCode());
     }
 
     @Test
@@ -44,9 +47,10 @@ public class ScrumBoardMapperTest {
         List<UserStory> list = new ArrayList<>();
         ScrumBoardMapper mapper = new ScrumBoardMapper();
         String userStoryId1 = "Project_2022_1_As a PO, i want to test this string";
-        UserStory userStory = new UserStory(userStoryId1,"As a PO, i want to test this string", 5, "description", 5);
-        UserStory userStory2 = new UserStory(userStoryId1,"As a VO, i want to test this string", 4, "description2", 4);
-        UserStory userStory3 = new UserStory(userStoryId1,"As a TO, i want to test this string", 3, "description3", 3);
+        String projectID = "Project_2022_1";
+        UserStory userStory = new UserStory(projectID, userStoryId1, "As a PO, i want to test this string", 5, "description", 5);
+        UserStory userStory2 = new UserStory(projectID, userStoryId1, "As a VO, i want to test this string", 4, "description2", 4);
+        UserStory userStory3 = new UserStory(projectID, userStoryId1, "As a TO, i want to test this string", 3, "description3", 3);
         list.add(userStory);
         list.add(userStory2);
         list.add(userStory3);

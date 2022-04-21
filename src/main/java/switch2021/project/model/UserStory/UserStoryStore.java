@@ -41,13 +41,14 @@ public class UserStoryStore implements UserStoryRepositoryInterface {
      *
      * @param userStoryId @param title @param priority @param description @param estimateEffort
      */
-    public void createAndSaveUserStory(String userStoryId, String title, int priority, String description, int estimateEffort) {
+    public void createAndSaveUserStory(String projectId, String userStoryId, String title, int priority, String description, int estimateEffort) {
 
-        UserStory newUserStory = this.userStoryFactory.createUserStory(userStoryId, title, priority, description, estimateEffort);
+        UserStory newUserStory = this.userStoryFactory.createUserStory(projectId, userStoryId, title, priority, description, estimateEffort);
         existsByUserStoryId(userStoryId);
 
         this.userStoryList.add(newUserStory);
     }
+
 
     /**
      * Create user story using DTO
