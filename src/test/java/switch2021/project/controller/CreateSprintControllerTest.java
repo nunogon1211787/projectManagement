@@ -31,10 +31,9 @@ public class CreateSprintControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
+        Project currentProject = company.getProjectStore().createAndSaveProject("prototype4", "proj4Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 4000);
         currentProject.setEndDate(LocalDate.now().plusDays(7));
-        projectStore.saveNewProject(currentProject);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
@@ -61,15 +60,13 @@ public class CreateSprintControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
+        Project currentProject = company.getProjectStore().createAndSaveProject("prototype4", "proj4Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 4000);
         currentProject.setEndDate(LocalDate.now().plusDays(7));
-        projectStore.saveNewProject(currentProject);
 
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 3000);
         proj1.setEndDate(LocalDate.now().plusDays(7));
-        projectStore.saveNewProject(proj1);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
@@ -97,16 +94,14 @@ public class CreateSprintControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
+        Project currentProject = company.getProjectStore().createAndSaveProject("prototype4", "proj4Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 4000);
         currentProject.setEndDate(LocalDate.now().plusDays(7));
-        projectStore.saveNewProject(currentProject);
 
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 3000);
         proj1.setEndDate(LocalDate.now().plusDays(7));
         proj1.setSprintDuration(new SprintDuration(31));
-        projectStore.saveNewProject(proj1);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
@@ -135,16 +130,14 @@ public class CreateSprintControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
+        Project currentProject = company.getProjectStore().createAndSaveProject("prototype4", "proj4Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 4000);
         currentProject.setEndDate(LocalDate.now().plusDays(7));
-        projectStore.saveNewProject(currentProject);
 
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 3000);
         proj1.setEndDate(LocalDate.now().plusDays(7));
         proj1.setSprintDuration(new SprintDuration(31));
-        projectStore.saveNewProject(proj1);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user2 = new SystemUser("joana", "joana@beaver.com", "tester",

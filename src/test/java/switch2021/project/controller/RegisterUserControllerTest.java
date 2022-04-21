@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser.SystemUserService;
 import switch2021.project.stores.SystemUserStore;
-import switch2021.project.stores.UserProfileStore;
+import switch2021.project.repositories.UserProfileRepository;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,7 +16,7 @@ public class RegisterUserControllerTest {
         //Arrange
         Company company = new Company();
         SystemUserStore systemUserStore = company.getSystemUserStore();
-        UserProfileStore userProfileStore = company.getUserProfileStore();
+        UserProfileRepository userProfileStore = company.getUserProfileStore();
         SystemUserService systemUserService = new SystemUserService(systemUserStore,userProfileStore);
         RegisterUserController controller = new RegisterUserController(company,systemUserService);
         String userName = "manueloliveira";
@@ -36,7 +36,7 @@ public class RegisterUserControllerTest {
             //Arrange
             Company company = new Company();
             SystemUserStore systemUserStore = company.getSystemUserStore();
-            UserProfileStore userProfileStore = company.getUserProfileStore();
+            UserProfileRepository userProfileStore = company.getUserProfileStore();
             SystemUserService systemUserService = new SystemUserService(systemUserStore,userProfileStore);
             RegisterUserController controller = new RegisterUserController(company,systemUserService);
             String userName = "";

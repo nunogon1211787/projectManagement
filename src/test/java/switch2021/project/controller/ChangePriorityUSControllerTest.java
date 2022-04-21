@@ -48,11 +48,11 @@ public class ChangePriorityUSControllerTest {
         typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-        project = company.getProjectStore().createProject("prototype2", "test56", customer,
+        project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        project2 = company.getProjectStore().createProject("prototype5", "test56", customer,
+        project2 = company.getProjectStore().createAndSaveProject("prototype5", "test56", customer,
                 typo, sector, startDate3, 7, 5000);
-        project3 = company.getProjectStore().createProject("prototype8", "test56", customer,
+        project3 = company.getProjectStore().createAndSaveProject("prototype8", "test56", customer,
                 typo, sector, startDate3, 4, 3000);
         UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
         newUser = new SystemUser("batatinha", "batatinha@cartoon.com", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());
@@ -67,9 +67,6 @@ public class ChangePriorityUSControllerTest {
         project.getUserStoryStore().getUserStoryList().add(userStory);
         project.getUserStoryStore().getUserStoryList().add(userStory2);
         project.getUserStoryStore().getUserStoryList().add(userStory3);
-        company.getProjectStore().saveNewProject(project);
-        company.getProjectStore().saveNewProject(project2);
-        company.getProjectStore().saveNewProject(project3);
         project.addResource(input);
         project2.addResource(input);
 
@@ -181,7 +178,7 @@ public class ChangePriorityUSControllerTest {
         project.addResource(input);
         project2.addResource(input);
         LocalDate endDate = LocalDate.of(2021, 1, 2);
-        company.getProjectStore().getProjectByCode("Project_2022_1").setEndDate(endDate);
+        company.getProjectStore().findProjectByID("Project_2022_1").setEndDate(endDate);
 
 
         // Act
@@ -195,7 +192,7 @@ public class ChangePriorityUSControllerTest {
         //Arrange
 
         LocalDate endDate = LocalDate.of(2021, 1, 2);
-        company.getProjectStore().getProjectByCode("Project_2022_1").setEndDate(endDate);
+        company.getProjectStore().findProjectByID("Project_2022_1").setEndDate(endDate);
         project.addResource(input);
         project2.addResource(input);
         project3.addResource(input);
@@ -215,7 +212,7 @@ public class ChangePriorityUSControllerTest {
         project.addResource(input);
         project2.addResource(input);
         // Act
-        Project project3 = company.getProjectStore().getProjectByCode("Project_2022_1");
+        Project project3 = company.getProjectStore().findProjectByID("Project_2022_1");
         // Assert
         assertEquals(project, project3);
     }
@@ -241,7 +238,7 @@ public class ChangePriorityUSControllerTest {
 
         project.addResource(input);
 
-        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getUserStoryStore().getUserStoryList();
+        List<UserStory> usList = company.getProjectStore().findProjectByID("Project_2022_1").getUserStoryStore().getUserStoryList();
 
         assertEquals(usList, this.project.getUserStoryStore().getUserStoryList());
     }
@@ -250,7 +247,7 @@ public class ChangePriorityUSControllerTest {
     void getUserStoryListFromProjectSizeTest() {
         project.addResource(input);
 
-        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getUserStoryStore().getUserStoryList();
+        List<UserStory> usList = company.getProjectStore().findProjectByID("Project_2022_1").getUserStoryStore().getUserStoryList();
 
         assertEquals(3, usList.size());
     }
@@ -259,7 +256,7 @@ public class ChangePriorityUSControllerTest {
     void getUserStoryListFromProjectOnlyActive() {
         project.addResource(input);
 
-        List<UserStory> usList = company.getProjectStore().getProjectByCode("Project_2022_1").getUserStoryStore().findActiveUserStoryList();
+        List<UserStory> usList = company.getProjectStore().findProjectByID("Project_2022_1").getUserStoryStore().findActiveUserStoryList();
 
         assertEquals(3, usList.size());
     }

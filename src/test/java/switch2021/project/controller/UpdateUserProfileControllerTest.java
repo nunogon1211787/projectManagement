@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.stores.SystemUserStore;
-import switch2021.project.stores.UserProfileStore;
+import switch2021.project.repositories.UserProfileRepository;
 import switch2021.project.model.UserProfile.UserProfile;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +14,7 @@ public class UpdateUserProfileControllerTest {
 
     private Company company;
     private SystemUserStore systemUserStore;
-    private UserProfileStore userProfileStore;
+    private UserProfileRepository userProfileStore;
 
 
     @BeforeEach

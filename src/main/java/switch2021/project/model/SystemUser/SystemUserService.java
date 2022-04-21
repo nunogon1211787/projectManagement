@@ -2,17 +2,17 @@ package switch2021.project.model.SystemUser;
 
 import switch2021.project.model.valueObject.UserProfileId;
 import switch2021.project.stores.SystemUserStore;
-import switch2021.project.stores.UserProfileStore;
+import switch2021.project.repositories.UserProfileRepository;
 
 public class SystemUserService {
 
     private final SystemUserStore systemUserStore;
-    private final UserProfileStore userProfileStore;
+    private final UserProfileRepository userProfileStore;
 
     /**
      * Constructor.
      */
-    public SystemUserService(SystemUserStore systemUserStore, UserProfileStore userProfileStore) {
+    public SystemUserService(SystemUserStore systemUserStore, UserProfileRepository userProfileStore) {
         this.systemUserStore = systemUserStore;
         this.userProfileStore = userProfileStore;
     }

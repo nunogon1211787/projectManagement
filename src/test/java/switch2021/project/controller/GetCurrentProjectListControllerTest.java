@@ -29,7 +29,7 @@ public class GetCurrentProjectListControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
+        Project currentProject = company.getProjectStore().createAndSaveProject("prototype4", "proj4Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 4000);
         currentProject.setEndDate(LocalDate.now().plusDays(7));
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -38,7 +38,6 @@ public class GetCurrentProjectListControllerTest {
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, new CostPerHour(100), new PercentageOfAllocation(1));
         currentProject.getProjectTeam().saveResource(manuelmartins);
-        projectStore.saveNewProject(currentProject);
         // Act
         List<Project> projectListActual = controller.getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
         int sizeExpected = projectListActual.size();
@@ -57,7 +56,7 @@ public class GetCurrentProjectListControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
+        Project currentProject = company.getProjectStore().createAndSaveProject("prototype4", "proj4Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 4000);
         currentProject.setEndDate(LocalDate.now().plusDays(7));
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -66,13 +65,11 @@ public class GetCurrentProjectListControllerTest {
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, new CostPerHour(100), new PercentageOfAllocation(.5));
         currentProject.getProjectTeam().saveResource(manuelmartins);
-        projectStore.saveNewProject(currentProject);
 
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 3000);
         proj1.setEndDate(LocalDate.now().plusDays(7));
         proj1.getProjectTeam().saveResource(manuelmartins);
-        projectStore.saveNewProject(proj1);
         // Act
         List<Project> projectListActual = controller.getCurrentProjectsByUserEmail("manuelmartins@beaver.com");
         int sizeExpected = projectListActual.size();
@@ -103,7 +100,7 @@ public class GetCurrentProjectListControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project currentProject = company.getProjectStore().createProject("prototype4", "proj4Prototype", customer,
+        Project currentProject = company.getProjectStore().createAndSaveProject("prototype4", "proj4Prototype", customer,
                 typo, sector, LocalDate.now().minusDays(7), 2, 4000);
         currentProject.setEndDate(LocalDate.now().plusDays(7));
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -112,7 +109,6 @@ public class GetCurrentProjectListControllerTest {
         LocalDate endDateMm = LocalDate.now().plusDays(7);
         Resource manuelmartins = new Resource(user2, startDateMm, endDateMm, new CostPerHour(100), new PercentageOfAllocation(.5));
         currentProject.getProjectTeam().saveResource(manuelmartins);
-        projectStore.saveNewProject(currentProject);
 
         List<Project> projectListExpected = new ArrayList<>();
         projectListExpected.add(currentProject);

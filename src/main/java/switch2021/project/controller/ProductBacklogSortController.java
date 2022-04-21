@@ -49,7 +49,7 @@ public class ProductBacklogSortController {
     }
 
     public List<UserStoryDto> getUsSortedByPriority(String code) {
-        Project project = this.company.getProjectStore().getProjectByCode(code);
+        Project project = this.company.getProjectStore().findProjectByID(code);
         List<UserStory> userStoryList = project.getUserStoryStore().findUsSortedByPriority();
         List<UserStoryDto> userStoryListDtoList = this.mapperPB.toDto(userStoryList);
         return Collections.unmodifiableList(userStoryListDtoList);

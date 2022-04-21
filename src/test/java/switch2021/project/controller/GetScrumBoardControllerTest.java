@@ -23,15 +23,13 @@ public class GetScrumBoardControllerTest {
 //        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
 //        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
 //        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-//        Project project = company.getProjectStore().createProject("prototype", "test1234", customer,
+//        Project project = company.getProjectStore().createAndSaveProject("prototype", "test1234", customer,
 //                typo, sector, LocalDate.now(), 7, 5000);
-//
-////        project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"As a PO, i want to test this string","Project_2022_1_As a PO, i want to test this string", 3, "Description", 12);
+//        project.getUserStoryStore().createAndSaveUserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 3, "Description", 12);
 //        Sprint sprint = project.getSprintList().createAndSaveSprint(1,"Project_2022_1_Sprint 1", "Sprint Name 1", 2);
 //        sprint.setStartDate(LocalDate.now());
 //
-//        company.getProjectStore().saveNewProject(project);
-//        company.getProjectStore().getProjectByCode("Project_2022_1").getSprintList().findCurrentSprint().saveUsInScrumBoard(project.getUserStoryStore().getUserStoryList().get(0));
+//        company.getProjectStore().findProjectByID("Project_2022_1").getSprintList().findCurrentSprint().saveUsInScrumBoard(project.getUserStoryStore().getUserStoryList().get(0));
 //
 //        //Act
 //        ScrumBoardMapper mapper = new ScrumBoardMapper();

@@ -2,11 +2,8 @@ package switch2021.project.controller;
 
 import switch2021.project.model.Company;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.Sprint.SprintID;
 import switch2021.project.repositories.ProjectStore;
 
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,7 +35,7 @@ public class CreateSprintController {
     }
 
     public Project getProject(String code) {
-        this.proj = this.projectStore.getProjectByCode(code);
+        this.proj = this.projectStore.findProjectByID(code);
         return this.proj;
     }
 

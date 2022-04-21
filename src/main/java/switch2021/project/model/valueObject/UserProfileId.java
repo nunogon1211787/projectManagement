@@ -12,6 +12,7 @@ public class UserProfileId implements ValueObject<UserProfileId> {
      * Constructor.
      */
     public UserProfileId(String userProfileName) {
+
         this.userProfileName = new Description(userProfileName);
     }
 

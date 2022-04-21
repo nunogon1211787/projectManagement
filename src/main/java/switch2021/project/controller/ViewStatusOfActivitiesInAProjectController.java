@@ -40,7 +40,7 @@ public class ViewStatusOfActivitiesInAProjectController {
      **/
     public Project getProjectByCode(String code) {
         ProjectStore projectStore = this.company.getProjectStore();
-        this.project = projectStore.getProjectByCode(code);
+        this.project = projectStore.findProjectByID(code);
         return this.project;
     }
 

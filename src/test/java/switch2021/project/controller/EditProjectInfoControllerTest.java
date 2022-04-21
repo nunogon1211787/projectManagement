@@ -40,18 +40,18 @@ class EditProjectInfoControllerTest {
         typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-        project = company.getProjectStore().createProject("prototype2", "test56", customer,
+        project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        project2 = company.getProjectStore().createProject("prototype5", "test56", customer,
+        project2 = company.getProjectStore().createAndSaveProject("prototype5", "test56", customer,
                 typo, sector, startDate3, 7, 5000);
-        project3 = company.getProjectStore().createProject("prototype8", "test56", customer,
+        project3 = company.getProjectStore().createAndSaveProject("prototype8", "test56", customer,
                 typo, sector, startDate3, 4, 3000);
         this.projectStore = company.getProjectStore();
 
         //Act
 
         List<Project> expected = edit.getProjectList();
-        List<Project> actual = projectStore.getProjects();
+        List<Project> actual = projectStore.findAllProjects();
 
         //Assert
         assertEquals(expected, actual);
@@ -67,18 +67,14 @@ class EditProjectInfoControllerTest {
         typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-        project = company.getProjectStore().createProject("prototype2", "test56", customer,
+        project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        project2 = company.getProjectStore().createProject("prototype5", "test56", customer,
+        project2 = company.getProjectStore().createAndSaveProject("prototype5", "test56", customer,
                 typo, sector, startDate3, 7, 5000);
-        project3 = company.getProjectStore().createProject("prototype8", "test56", customer,
+        project3 = company.getProjectStore().createAndSaveProject("prototype8", "test56", customer,
                 typo, sector, startDate3, 4, 3000);
-        company.getProjectStore().saveNewProject(project);
-        company.getProjectStore().saveNewProject(project2);
-        company.getProjectStore().saveNewProject(project3);
 
         //Act
-
         int expected = edit.getProjectList().size();
 
         //Assert
@@ -94,9 +90,8 @@ class EditProjectInfoControllerTest {
         typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-        project = company.getProjectStore().createProject("prototype2", "test56", customer,
+        project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
 
@@ -118,13 +113,12 @@ class EditProjectInfoControllerTest {
         typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-        project = company.getProjectStore().createProject("prototype2", "test56", customer,
+        project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatusEnum projectStatus = ProjectStatusEnum.TRANSITION;
 
-        this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getProjectCode().getCode());
@@ -139,10 +133,10 @@ class EditProjectInfoControllerTest {
         assertEquals("test44", project.getDescription().getText());
         assertEquals(project.getStartDate(), LocalDate.of(2022, 12, 1));
         assertEquals(project.getEndDate(), LocalDate.of(2023, 12, 1));
-        assertEquals(10, project.getNumberOfSprints());
-        assertEquals(10000, project.getBudget().getBudgetP());
+        assertEquals(10, project.getNumberOfSprints().getNumberOfSprintsVO());
+        assertEquals(10000, project.getBudget().getBudgetVO());
         assertEquals(7, project.getSprintDuration().getSprintDurationDays());
-        assertEquals(10000, project.getBudget().getBudgetP());
+        assertEquals(10000, project.getBudget().getBudgetVO());
         assertEquals(7, project.getSprintDuration().getSprintDurationDays());
         assertEquals(project.getProjectStatus(), projectStatus);
         assertEquals(project.getProjectTeam(), projectTeam2);
@@ -157,7 +151,7 @@ class EditProjectInfoControllerTest {
         typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-        project = company.getProjectStore().createProject("prototype2", "test56", customer,
+        project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
         ProjectStatusEnum projectStatus = ProjectStatusEnum.INCEPTION;
 
@@ -191,7 +185,6 @@ class EditProjectInfoControllerTest {
         newProjectTeam.saveResource(manuelgoncalves);
         newProjectTeam.saveResource(manuelmartins);
 
-        this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getProjectCode().getCode());
@@ -217,7 +210,7 @@ class EditProjectInfoControllerTest {
         typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
-        project = company.getProjectStore().createProject("prototype2", "test56", customer,
+        project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
         ProjectStatusEnum projectStatus = ProjectStatusEnum.INCEPTION;
         CostPerHour costPerHour = new CostPerHour(100);
@@ -255,7 +248,6 @@ class EditProjectInfoControllerTest {
         newProjectTeam.saveResource(manuelgoncalves);
         newProjectTeam.saveResource(manuelmartins);
 
-        this.projectStore.saveNewProject(project);
 
         EditProjectInfoController edit = new EditProjectInfoController(company);
         edit.getProjectRequested(project.getProjectCode().getCode());

@@ -33,9 +33,8 @@ public class GetListHResourceProjectControllerTest {
 //        company.getCustomerStore().saveNewCustomer(customer);
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         company.getBusinessSectorStore().createAndAddBusinessSector("it");
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
-        company.getProjectStore().saveNewProject(proj1);
 
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         ProjectRole projectRole = company.getProjectRoleStore().getProjectRole("Team Member");

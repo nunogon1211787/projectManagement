@@ -5,6 +5,7 @@ import switch2021.project.factory.*;
 import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.repositories.ProjectStore;
 import switch2021.project.repositories.TypologyRepository;
+import switch2021.project.repositories.UserProfileRepository;
 import switch2021.project.stores.*;
 
 @Getter
@@ -16,7 +17,7 @@ public class Company {
      **/
     private final SystemUserStore systemUserStore;
     private final ProjectStore projectStore;
-    private final UserProfileStore userProfileStore;
+    private final UserProfileRepository userProfileStore;
     private final ProjectRoleStore projectRoleStore;
     private final TypologyRepository typologyRepository;
     private final CustomerStore customerStore;
@@ -37,7 +38,7 @@ public class Company {
     public Company() {
         this.systemUserStore = new SystemUserStore();
         this.projectStore = new ProjectStore();
-        this.userProfileStore = new UserProfileStore();
+        this.userProfileStore = new UserProfileRepository();
         //this.projectRoleFactory = new ProjectRoleFactory();
         this.projectRoleStore = new ProjectRoleStore(new ProjectRoleFactory());
         this.typologyRepository = new TypologyRepository();

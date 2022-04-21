@@ -34,12 +34,12 @@ public class EditProjectInfoController {
      * Methods
      **/
     public List<Project> getProjectList() {
-        this.arrayProject = this.company.getProjectStore().getProjects();
+        this.arrayProject = this.company.getProjectStore().findAllProjects();
         return arrayProject;
     }
 
     public Project getProjectRequested(String code) {
-        this.project = this.company.getProjectStore().getProjectByCode(code);
+        this.project = this.company.getProjectStore().findProjectByID(code);
         return this.project;
     }
 
@@ -50,7 +50,7 @@ public class EditProjectInfoController {
             this.project.setDescription(new Description(description));
             this.project.setStartDate(startDate);
             this.project.setEndDate(endDate);
-            this.project.setNumberOfSprints(nrSprints);
+            this.project.setNumberOfSprints(new NumberOfSprints(nrSprints));
             this.project.setBudget(new Budget(budget));
             this.project.setProjectStatus(status);
             this.project.setSprintDuration(new SprintDuration(sprintDuration));

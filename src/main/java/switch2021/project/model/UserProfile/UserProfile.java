@@ -1,8 +1,7 @@
 package switch2021.project.model.UserProfile;
 
 import lombok.Getter;
-import lombok.Setter;
-import switch2021.project.model.valueObject.Function;
+import lombok.Setter;;
 import switch2021.project.model.valueObject.UserProfileId;
 import switch2021.project.utils.Entity;
 
@@ -13,7 +12,6 @@ public class UserProfile implements Entity<UserProfile> {
     /**
      * Class Profile Attributes
      **/
-    //private final Description userProfileName;
     private final UserProfileId userProfileId;
 
     /**
@@ -23,6 +21,8 @@ public class UserProfile implements Entity<UserProfile> {
         //this.userProfileName = new Description(userProfileName);
         this.userProfileId = new UserProfileId(userProfileName);
     }
+
+
 
     /**
      * Override Methods

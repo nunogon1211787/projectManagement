@@ -29,9 +29,9 @@ public class CreateUserStoryControllerTest {
     Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
     Customer customer = company.getCustomerStore().getCustomerByName("Teste");
     BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-    Project project = company.getProjectStore().createProject("prototype", "test56", customer,
+    Project project = company.getProjectStore().createAndSaveProject("prototype", "test56", customer,
             typo, sector, LocalDate.now(), 7, 5000);
-    Project project2 = company.getProjectStore().createProject("prototype", "test56", customer,
+    Project project2 = company.getProjectStore().createAndSaveProject("prototype", "test56", customer,
             typo, sector, LocalDate.now(), 7, 5000);
     UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
     SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", ".png", userProfile.getUserProfileId());
@@ -44,7 +44,6 @@ public class CreateUserStoryControllerTest {
     @DisplayName("Test create userStory - US009")
     public void createUserStoryPriorityInvalidInf() {
         //Arrange
-        company.getProjectStore().saveNewProject(project);
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = -1;
         String description = "teste";
@@ -85,7 +84,6 @@ public class CreateUserStoryControllerTest {
     @Test
     public void createUserStoryTitleInvalid() {
         //Arrange
-        company.getProjectStore().saveNewProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = 1;
@@ -114,7 +112,6 @@ public class CreateUserStoryControllerTest {
     @Test
     public void createUserStoryPriorityInvalidSup() {
         //Arrange
-        company.getProjectStore().saveNewProject(project);
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = 6;
         String description = "teste";
@@ -127,7 +124,6 @@ public class CreateUserStoryControllerTest {
     @Test
     public void createUserStorySuccessFull() {
         //Arrange
-        company.getProjectStore().saveNewProject(project);
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = 1;
         String description = "teste";
@@ -149,7 +145,6 @@ public class CreateUserStoryControllerTest {
     @Test
     public void createUserStorySuccessFullDescriptionOnLimitSize() {
         //Arrange
-        company.getProjectStore().saveNewProject(project);
 
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         int priority = 1;
@@ -172,14 +167,13 @@ public class CreateUserStoryControllerTest {
 
     @Test
     public void createUserStorySuccessFullValidateInfo() {
-        company.getProjectStore().saveNewProject(project);
         int priority = 1;
         String description = "teste";
         UserStoryDto userStoryDto = new UserStoryDto("Project_2022_1","Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", priority, description,6);
         CreateUserStoryController createUserStoryController = new CreateUserStoryController(company, mapper, mapperUS);
         createUserStoryController.createUserStory("Project_2022_1", userStoryDto);
 
-        UserStoryStore project_2022_1 = company.getProjectStore().getProjectByCode("Project_2022_1").getUserStoryStore();
+        UserStoryStore project_2022_1 = company.getProjectStore().findProjectByID("Project_2022_1").getUserStoryStore();
         assertEquals(1, project_2022_1.getUserStoryList().size());
         assertEquals(userStoryDto.getTitle().getTitleUs(), project_2022_1.getUserStoryList().get(0).getTitle().getTitleUs());
         assertEquals(userStoryDto.getPriority().getPriorityUs(), project_2022_1.getUserStoryList().get(0).getPriority().getPriorityUs());
@@ -190,8 +184,6 @@ public class CreateUserStoryControllerTest {
     @Test
     public void getAllProjectListByUserEmail() {
         //Arrange
-        company.getProjectStore().saveNewProject(project);
-        company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
         // Act
@@ -212,8 +204,6 @@ public class CreateUserStoryControllerTest {
         // Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            company.getProjectStore().saveNewProject(project);
-            company.getProjectStore().saveNewProject(project2);
             project.addResource(input);
             project2.addResource(input);
             // Act
@@ -226,8 +216,6 @@ public class CreateUserStoryControllerTest {
     @DisplayName("Create company + projets(2) + system user + resource ")
     public void getAllProjectListByUserEmailDontExist() {
         //Arrange
-        company.getProjectStore().saveNewProject(project);
-        company.getProjectStore().saveNewProject(project2);
         project.addResource(input);
         project2.addResource(input);
         // Act

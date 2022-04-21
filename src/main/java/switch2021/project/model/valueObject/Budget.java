@@ -9,16 +9,16 @@ public class Budget {
     /**
      * Attributes
      */
-    private double budgetP;
+    private double budgetVO;
 
 
     /**
      * Constructor
      */
-    public Budget (double budgetP) {
-        if (budgetP <= 0)
+    public Budget (double budget) {
+        if (budget <= 0)
             throw new IllegalArgumentException("Budget field cannot be under or equal to 0.");
-        this.budgetP = budgetP;
+        this.budgetVO = budget;
     }
 
     @Override
@@ -26,11 +26,11 @@ public class Budget {
         if (this == o) return true;
         if (!(o instanceof Budget)) return false;
         Budget budget1 = (Budget) o;
-        return Double.compare(budget1.budgetP, budgetP) == 0;
+        return Double.compare(budget1.budgetVO, budgetVO) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(budgetP);
+        return Objects.hash(budgetVO);
     }
 }

@@ -1,4 +1,4 @@
-package switch2021.project.stores;
+package switch2021.project.repositories;
 
 import lombok.Getter;
 import switch2021.project.model.UserProfile.UserProfile;
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-public class UserProfileStore {
+public class UserProfileRepository {
 
     /**
      * Attributes
@@ -19,7 +19,8 @@ public class UserProfileStore {
     /**
      * UserProfile Store Constructor
      **/
-    public UserProfileStore() {
+    public UserProfileRepository() {
+
         userProfileList = new ArrayList<>();
     }
 
@@ -92,8 +93,8 @@ public class UserProfileStore {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof UserProfileStore)) return false;
-        UserProfileStore that = (UserProfileStore) obj;
+        if (!(obj instanceof UserProfileRepository)) return false;
+        UserProfileRepository that = (UserProfileRepository) obj;
         return (this.userProfileList.equals(that.userProfileList));
     }
 

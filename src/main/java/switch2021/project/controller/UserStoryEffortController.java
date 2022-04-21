@@ -41,7 +41,7 @@ public class UserStoryEffortController {
     }
 
     public Project getProjectByCode(String code) {
-        this.proj = this.company.getProjectStore().getProjectByCode(code);
+        this.proj = this.company.getProjectStore().findProjectByID(code);
         return this.proj;
     }
 

@@ -37,7 +37,7 @@ public class AssignScrumMasterController {
      * Method to receive a project and then send to UI
      **/
     public ProjectDTO getProject(String code) {
-        this.project = company.getProjectStore().getProjectByCode(code);
+        this.project = company.getProjectStore().findProjectByID(code);
         return this.projectsMapper.toDTO(project);
     }
 

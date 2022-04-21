@@ -29,8 +29,9 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
 
         Project project2 = new Project("Project_test", "prototype", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
+        project2.setProjectCode(new ProjectID(1));
 
-        company.getProjectStore().saveNewProject(project2);
+        company.getProjectStore().getProjectList().add(project2);
 
         Sprint sprint1 = project2.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
@@ -68,20 +69,17 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project project1 = projectStore.createProject("prototype4", "proj4Prototype", customer,
+        Project project1 = projectStore.createAndSaveProject("prototype4", "proj4Prototype", customer,
                 typo, sector, LocalDate.of(2021, 12, 1), 2, 4000);
         project1.setEndDate(LocalDate.of(2021, 12, 31));
-        projectStore.saveNewProject(project1);
         //Project2
-        Project project2 = projectStore.createProject("prototype3", "proj3Prototype", customer,
+        Project project2 = projectStore.createAndSaveProject("prototype3", "proj3Prototype", customer,
                 typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
         project1.setEndDate(LocalDate.of(2022, 1, 31));
-        projectStore.saveNewProject(project2);
         //Project3
-        Project project3 = projectStore.createProject("prototype2", "proj2Prototype", customer,
+        Project project3 = projectStore.createAndSaveProject("prototype2", "proj2Prototype", customer,
                 typo, sector, LocalDate.of(2021, 12, 1), 2, 4000);
         project1.setEndDate(LocalDate.of(2021, 12, 31));
-        projectStore.saveNewProject(project3);
         //Resource1
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manuelmartins", "manuelmartins@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());

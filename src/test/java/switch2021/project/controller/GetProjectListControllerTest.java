@@ -99,14 +99,12 @@ public class GetProjectListControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project proj1 = company.getProjectStore().createProject("prototype1", "proj1Prototype", customer,
+        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
         proj1.setEndDate(LocalDate.of(2021, 11, 30));
-        projectStore.saveNewProject(proj1);
-        Project proj2 = company.getProjectStore().createProject("prototype2", "proj2Prototype", customer,
+        Project proj2 = company.getProjectStore().createAndSaveProject("prototype2", "proj2Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
         proj2.setEndDate(LocalDate.of(2021, 11, 30));
-        projectStore.saveNewProject(proj2);
         // Act
         List<Project> projectListActual = controller.getProjects();
         int sizeActual = projectListActual.size();
@@ -137,10 +135,9 @@ public class GetProjectListControllerTest {
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project proj3 = company.getProjectStore().createProject("prototype3", "proj3Prototype", customer,
+        Project proj3 = company.getProjectStore().createAndSaveProject("prototype3", "proj3Prototype", customer,
                 typo, sector, LocalDate.of(2021, 11, 1), 2, 2000);
         proj3.setEndDate(LocalDate.of(2021, 11, 30));
-        projectStore.saveNewProject(proj3);
 
         List<Project> projectListExpected = new ArrayList<>();
         projectListExpected.add(proj3);
