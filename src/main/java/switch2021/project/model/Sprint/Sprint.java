@@ -16,7 +16,6 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@EqualsAndHashCode
 public class Sprint {
 
     /**
@@ -97,7 +96,27 @@ public class Sprint {
         scrumBoard.saveUserStoryToSprintBacklog(userStory);
         return true;
     }
+    /**
+     * Override Methods
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Sprint)) return false;
+        Sprint sprint = (Sprint) o;
+        return sprintID == sprint.sprintID &&
+                Objects.equals(projectID, sprint.projectID) &&
+                Objects.equals(sprintName, sprint.sprintName) &&
+                Objects.equals(taskStore, sprint.taskStore) &&
+                Objects.equals(scrumBoard, sprint.scrumBoard) &&
+                Objects.equals(startDate, sprint.startDate) &&
+                Objects.equals(endDate, sprint.endDate);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(projectID, sprintID, sprintName, taskStore, scrumBoard, startDate, endDate);
+    }
 }
 
 
