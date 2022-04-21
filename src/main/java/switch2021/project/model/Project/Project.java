@@ -2,18 +2,19 @@ package switch2021.project.model.Project;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.factory.*;
-import switch2021.project.factoryInterface.ResourceFactoryInterface;
 import switch2021.project.factory.ProjectTeamFactory;
 import switch2021.project.factory.ResourceFactory;
+import switch2021.project.factory.SprintFactory;
+import switch2021.project.factory.UserStoryFactory;
+import switch2021.project.factoryInterface.ResourceFactoryInterface;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintStore;
+import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserStory.UserStoryStore;
-import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.valueObject.*;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.utils.Entity;
 
 import java.time.LocalDate;
@@ -24,22 +25,19 @@ import java.util.Objects;
 public class Project implements Entity {
 
 
+    private final Customer customer;
+    private final BusinessSector businessSector;
+    private final SprintStore sprintList;
     /**
      * Class Attributes
      **/
     private ProjectID projectCode;
     private Description projectName;
     private Description description;
-
-    private final Customer customer;
     private Typology typology;
     private ProjectStatusEnum projectStatus;
     private UserStoryStore userStoryStore;
     private UserStoryFactory userStoryFactory;
-
-    private final BusinessSector businessSector;
-    private final SprintStore sprintList;
-
     private ProjectTeam projectTeam;
     private ProjectTeamFactory projectTeamFactory;
     private ResourceFactoryInterface resFac = new ResourceFactory();
@@ -107,7 +105,8 @@ public class Project implements Entity {
         return msg;
     }
 
-    public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
+    public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour,
+                                   double percentageOfAllocation) {
         return this.projectTeam.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);
     }
 
@@ -182,9 +181,9 @@ public class Project implements Entity {
     @Override
     public int hashCode() {
         return Objects.hash(projectCode, projectName, description, customer, typology,
-                projectStatus, userStoryStore, businessSector,
-                sprintList, projectTeam, startDate, endDate, numberOfSprints,
-                budget, sprintDuration);
+                            projectStatus, userStoryStore, businessSector,
+                            sprintList, projectTeam, startDate, endDate, numberOfSprints,
+                            budget, sprintDuration);
     }
 
     @Override

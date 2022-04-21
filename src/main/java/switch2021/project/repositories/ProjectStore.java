@@ -1,12 +1,14 @@
 package switch2021.project.repositories;
 
 import lombok.Getter;
-
+import switch2021.project.dto.ProjectDTO;
 import switch2021.project.interfaces.ProjectRepositoryInterface;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.valueObject.*;
+import switch2021.project.model.valueObject.BusinessSector;
+import switch2021.project.model.valueObject.Customer;
+import switch2021.project.model.valueObject.ProjectID;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,15 +37,34 @@ public class ProjectStore implements ProjectRepositoryInterface {
      **/
     public Project createAndSaveProject(String name, String description, Customer customer, Typology typology,
                                         BusinessSector businessSector, LocalDate startDate, int numberOfSprints, int budget) {
+
         Project newProject = new Project(name, description, customer, typology, businessSector,
                 startDate, numberOfSprints, budget);
 
-        newProject.setProjectCode(new ProjectID(projectList.size()+1));
+        newProject.setProjectCode(new ProjectID(projectList.size() + 1));
+
+        if (hasProjectId(newProject.getProjectCode().getCode())) {
+            throw new IllegalArgumentException("Error: Project already exists!");
+        }
+
         projectList.add(newProject);
 
         return newProject;
     }
 
+/*    public Project createAndSaveProject(ProjectDTO projectDTO) {
+
+
+        newProject.setProjectCode(new ProjectID(projectList.size() + 1));
+
+        if (hasProjectId(newProject.getProjectCode().getCode())) {
+            throw new IllegalArgumentException("Error: Project already exists!");
+        }
+
+        projectList.add(newProject);
+
+        return newProject;
+    }*/
 
     /**
      * Getters Methods
