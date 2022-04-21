@@ -17,9 +17,11 @@ import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.repositories.ProjectStore;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -264,9 +266,9 @@ class ProjectTest {
     @DisplayName("validate that list have results (not null) and check list size are correct")
     public void getUserStoryStoreWithResults() {
         // Arrange
-        proj1.getUserStoryStore().createAndSaveUserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 1, "making test", 5);
-        proj1.getUserStoryStore().createAndSaveUserStory("Project_2022_2_As a PO, i want to test this string","As a TO, i want to test this string", 1, "making other test", 5);
-        proj1.getUserStoryStore().createAndSaveUserStory("Project_2022_3_As a PO, i want to test this string","As a SO, i want to test this string", 1, "making test 4", 5);
+        proj1.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, "Project_2022_1_As a PO, i want to test this string", "As a PO, i want to test this string", 1, "making test", 5);
+        proj1.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, "Project_2022_2_As a PO, i want to test this string", "As a TO, i want to test this string", 1, "making other test", 5);
+        proj1.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, "Project_2022_3_As a PO, i want to test this string", "As a SO, i want to test this string", 1, "making test 4", 5);
         // Act
         //Assert
         assertNotNull(proj1.getUserStoryStore());
@@ -320,7 +322,7 @@ class ProjectTest {
         SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
         LocalDate endDateMb = LocalDate.of(2022, 1, 31);
-        Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100),new PercentageOfAllocation( .5));
+        Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
         TaskTypeEnum taskType = TaskTypeEnum.Design;
         SprintStore sprintStore = new SprintStore(new SprintFactory());

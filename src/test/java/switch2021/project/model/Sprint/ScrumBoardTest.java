@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserStory.UserStoryId;
+import switch2021.project.model.valueObject.ProjectID;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -22,7 +25,8 @@ class ScrumBoardTest {
             // Arrange
             int priority = 5;
             String description = "Validate";
-            UserStory userstory = new UserStory("Project_2022_1_As a PO, i want to test this string","US001", priority, description, 5);
+            String projectID = "Project_2022_1";
+            UserStory userstory = new UserStory(projectID, "Project_2022_1_As a PO, i want to test this string", "US001", priority, description, 5);
             scrumBoard.saveUserStoryToSprintBacklog(userstory);
             // Act
             scrumBoard.saveUserStoryToSprintBacklog(userstory);
@@ -38,7 +42,8 @@ class ScrumBoardTest {
             int priority = 5;
             String description = "Validate";
             String userStoryId = "Project_2022_1_As a PO, i want to test this string";
-            UserStory userstory = new UserStory(userStoryId, "US001", priority, description, 5);
+            String projectID = "Project_2022_1";
+            UserStory userstory = new UserStory(projectID, userStoryId, "US001", priority, description, 5);
             scrumBoard.saveUserStoryToSprintBacklog(userstory);
             // Act
             scrumBoard.saveUserStoryToSprintBacklog(null);
@@ -52,7 +57,8 @@ class ScrumBoardTest {
         int priority = 5;
         String description = "Validate";
         String userStoryId = "Project_2022_1_As a PO, i want to test this string";
-        UserStory userstory = new UserStory(userStoryId,"As a PO, i want to test this string", priority, description, 5);
+        String projectID = "Project_2022_1";
+        UserStory userstory = new UserStory(projectID, userStoryId, "As a PO, i want to test this string", priority, description, 5);
         scrumBoard.saveUserStoryToSprintBacklog(userstory);
         // Act
         assertEquals(scrumBoard.getUserStory(userstory.getUserStoryId()), userstory);
@@ -80,9 +86,10 @@ class ScrumBoardTest {
         int priority = 5;
         String description = "Validate";
         String userStoryId = "Project_2022_1_As a PO, i want to test this string";
-        UserStory userstory = new UserStory(userStoryId,"As a PO, i want to test this string", priority, description, 5);
+        String projectID = "Project_2022_1";
+        UserStory userstory = new UserStory(projectID, userStoryId, "As a PO, i want to test this string", priority, description, 5);
         scrumBoard.saveUserStoryToSprintBacklog(userstory);
-        UserStory userstory2 = new UserStory(userStoryId,"As a PO, i want to test this string", priority, description, 5);
+        UserStory userstory2 = new UserStory(projectID, userStoryId, "As a PO, i want to test this string", priority, description, 5);
         // Act
         assertNotSame(scrumBoard.getUserStory(userstory.getUserStoryId()), userstory2);
     }
@@ -94,7 +101,8 @@ class ScrumBoardTest {
         int priority = 5;
         String description = "Validate";
         String userStoryId = "Project_2022_1_As a PO, i want to test this string";
-        UserStory userstory = new UserStory(userStoryId,"As a PO, i want to test this string", priority, description, 5);
+        String projectID = "Project_2022_1";
+        UserStory userstory = new UserStory(projectID, userStoryId, "As a PO, i want to test this string", priority, description, 5);
         scrumBoard.saveUserStoryToSprintBacklog(userstory);
         // Act
         assertNull(scrumBoard.getUserStory(null));
@@ -127,8 +135,9 @@ class ScrumBoardTest {
         ScrumBoard scrumBoard = new ScrumBoard();
         ScrumBoard scrumBoard1 = new ScrumBoard();
         String userStoryId = "Project_2022_1_As a PO, i want to test this string";
+        String projectID = "Project_2022_1";
         // Act
-        UserStory userStory = new UserStory(userStoryId,"As Product Owner i want to create something", 1, "Userstory", 5);
+        UserStory userStory = new UserStory(projectID, userStoryId, "As Product Owner i want to create something", 1, "Userstory", 5);
         scrumBoard.saveUserStoryToSprintBacklog(userStory);
         //Assert
         assertFalse(scrumBoard.equals(scrumBoard1));
@@ -136,7 +145,7 @@ class ScrumBoardTest {
 
     @Test
     @DisplayName("Test to check HashCode Method.")
-    void hashCodeTest_Success(){
+    void hashCodeTest_Success() {
         //Arrange
         ScrumBoard scrumBoard = new ScrumBoard();
         ScrumBoard scrumBoard1 = new ScrumBoard();
@@ -144,52 +153,53 @@ class ScrumBoardTest {
         Object x = scrumBoard1.hashCode();
         Object y = scrumBoard.hashCode();
         //Assert
-        assertEquals(x,y);
+        assertEquals(x, y);
     }
 
     @Test
     @DisplayName("Test to check HashCode Method.")
-    void hashCodeTest_Success_1(){
+    void hashCodeTest_Success_1() {
         //Arrange
         ScrumBoard scrumBoard = new ScrumBoard();
         ScrumBoard scrumBoard1 = new ScrumBoard();
         //Act and Assert
-        assertEquals(scrumBoard.getUserStoryList(),scrumBoard1.getUserStoryList());
+        assertEquals(scrumBoard.getUserStoryList(), scrumBoard1.getUserStoryList());
     }
 
     @Test
     @DisplayName("Test to check HashCode Method.")
-    void hashCodeTest_Success_List(){
+    void hashCodeTest_Success_List() {
         //Arrange
         ScrumBoard scrumBoard = new ScrumBoard();
         ScrumBoard scrumBoard1 = new ScrumBoard();
         //Act and Assert
-        assertEquals(scrumBoard.getUserStoryList().hashCode(),scrumBoard1.getUserStoryList().hashCode());
+        assertEquals(scrumBoard.getUserStoryList().hashCode(), scrumBoard1.getUserStoryList().hashCode());
     }
 
     @Test
     @DisplayName("Test to check HashCode Method.")
-    void hashCodeTest_Fail_List(){
+    void hashCodeTest_Fail_List() {
         //Arrange
         ScrumBoard scrumBoard = new ScrumBoard();
         ScrumBoard scrumBoard1 = new ScrumBoard();
         String userStoryId = "Project_2022_1_As a PO, i want to test this string";
-        UserStory userStory = new UserStory(userStoryId,"As Product Owner i want to create something", 1, "Userstory", 5);
+        String projectID = "Project_2022_1";
+        UserStory userStory = new UserStory(projectID, userStoryId, "As Product Owner i want to create something", 1, "Userstory", 5);
         //Act
         scrumBoard.saveUserStoryToSprintBacklog(userStory);
         //Assert
-        assertNotEquals(scrumBoard.getUserStoryList().hashCode(),scrumBoard1.getUserStoryList().hashCode());
+        assertNotEquals(scrumBoard.getUserStoryList().hashCode(), scrumBoard1.getUserStoryList().hashCode());
     }
 
 
     @Test
     @DisplayName("Test to check HashCode Method.")
-    void hashCodeTest_Success_2(){
+    void hashCodeTest_Success_2() {
         //Arrange
         ScrumBoard scrumBoard = new ScrumBoard();
         ScrumBoard scrumBoard1 = new ScrumBoard();
         //Act and Assert
-        assertEquals(scrumBoard.getUserStoryList().size(),scrumBoard1.getUserStoryList().size());
+        assertEquals(scrumBoard.getUserStoryList().size(), scrumBoard1.getUserStoryList().size());
     }
 
     @Test
@@ -218,7 +228,8 @@ class ScrumBoardTest {
         int priority = 5;
         String description = "Validate";
         String userStoryId = "Project_2022_1_As a PO, i want to test this string";
-        UserStory userstory = new UserStory(userStoryId,"As a PO, i want to test this string", priority, description, 5);
+        String projectID = "Project_2022_1";
+        UserStory userstory = new UserStory(projectID, userStoryId, "As a PO, i want to test this string", priority, description, 5);
         boolean test = scrumBoard.saveUserStoryToSprintBacklog(userstory);
         // Act
         assertTrue(test);

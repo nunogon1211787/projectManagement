@@ -7,7 +7,7 @@ import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.utils.Entity;
 
 import java.time.LocalDate;
-
+import java.util.Objects;
 
 
 @EqualsAndHashCode
@@ -35,7 +35,8 @@ public class UserStory implements Entity<UserStory> {
     /**
      * Constructor User Story
      **/
-    public UserStory(String userStoryId, String title, int priority, String description, int timeEstimateInHours) {
+    public UserStory(String projectID, String userStoryId, String title, int priority, String description, int timeEstimateInHours) {
+        this.projectID = new ProjectID(projectID);
         this.userStoryId = new UserStoryId(userStoryId);
         this.title = new UsTitle(title);
         this.description = new Description(description);

@@ -8,6 +8,7 @@ import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.BusinessSector;
 import switch2021.project.model.valueObject.Customer;
 import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.model.valueObject.UserStoryStatus;
 
 import java.time.LocalDate;
@@ -36,14 +37,14 @@ public class RefineUserStoryControllerTest {
         company.getProjectStore().saveNewProject(proj1);
 
         //UserStory Creation and save on Product Backlog
-        UserStoryStatus statusToDo = company.getUserStoryStatusStore().getUserStoryStatusByDescription("To do");
-        UserStory userStory1 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 4, "userstory1", 5);;
+
+        UserStory userStory1 = new UserStory("Project_" + LocalDate.now().getYear() + "_" + 1, "Project_2022_1_As a PO, i want to test this string","As a PO, i want to test this string", 4, "userstory1", 5);;
         proj1.getUserStoryStore().getUserStoryList().add(userStory1);
-        UserStory userStory2 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a sm, i want to test this string", 3, "userstory2", 5);
+        UserStory userStory2 = new UserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_1_As a PO, i want to test this string","As a sm, i want to test this string", 3, "userstory2", 5);
         proj1.getUserStoryStore().getUserStoryList().add(userStory2);
-        UserStory userStory3 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a user, i want to test this string", 1, "userstory3", 5);
+        UserStory userStory3 = new UserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_1_As a PO, i want to test this string","As a user, i want to test this string", 1, "userstory3", 5);
         proj1.getUserStoryStore().getUserStoryList().add(userStory3);
-        UserStory userStory4 = new UserStory("Project_2022_1_As a PO, i want to test this string","As a diretor, i want to test this string", 0, "userstory4", 5);
+        UserStory userStory4 = new UserStory("Project_" + LocalDate.now().getYear() + "_" + 1,"Project_2022_1_As a PO, i want to test this string","As a diretor, i want to test this string", 0, "userstory4", 5);
         proj1.getUserStoryStore().getUserStoryList().add(userStory4);
 
         //Act
