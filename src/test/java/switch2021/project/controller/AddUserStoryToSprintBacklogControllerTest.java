@@ -27,7 +27,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createAndSaveProject( "prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
         sprint.setStartDate(LocalDate.now());
         SprintID sprintID = new SprintID("Project_2022_1_Sprint 1");
         UserStoryId userStoryId = new UserStoryId("Project_2022_1_As a PO, i want to test this string");
@@ -37,7 +37,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
         //Act
         AddUserStoryToSprintBacklogController addStory = new AddUserStoryToSprintBacklogController(company);
         addStory.getProject(code);
-        addStory.getSprintStore().findSprintById(sprintID);
+        addStory.getSprintStore().findSprintById("Project_2022_1_Sprint 1");
         addStory.getUserStoryStore().findUserStoryById(userStoryId.toString());
         //Assert
         assertEquals(1, addStory.getUserStoryStore().getUserStoryList().size());

@@ -3,7 +3,6 @@ package switch2021.project.model.Sprint;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.factoryInterface.SprintFactoryInterface;
-import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.Task.Task;
 import java.time.LocalDate;
@@ -13,7 +12,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
-public class SprintStore {
+public class SprintStore{
 
     /** Class Attributes **/
     private final List<Sprint> sprints;
@@ -27,7 +26,7 @@ public class SprintStore {
     }
 
     /** Sprint creator **/
-    public Sprint createAndSaveSprint(int projectID, String sprintID, String name, int sprintDuration) {
+    public Sprint createAndSaveSprint(String projectID, String sprintID, String name, int sprintDuration) {
         Sprint sprint = this.sprintFactory.createSprint(projectID, sprintID, name);
         validateIfSprintAlreadyExists(sprint);
         sprint.changeEndDate(sprintDuration);
@@ -35,37 +34,13 @@ public class SprintStore {
         return sprint;
     }
 
-//    /** Method to Save a Sprint **/
-//    public boolean saveSprint(Sprint sprint) {
-//        boolean result = true;
-//        if (validateIfSprintAlreadyExists(sprint)) {
-//            result = false;
-//        } else {
-//            sprint.setSprintID(idSprintGenerator());
-//            this.sprints.add(sprint);
-//        }
-//        return result;
-//    }
-
-//    /**
-//     * ID_Sprint Generator
-//     */
-//    private int idSprintGenerator() {
-//        int id = 1;
-//        if (this.sprints.size() > 0) {
-//            id = (this.sprints.get(sprints.size() - 1).getSprintID() + 1);
-//        }
-//        return id;
-//    }
-
-
     /** Find List of Sprints Method **/
     public List<Sprint> findSprints() {
         return new ArrayList<>(this.sprints);
     }
 
     /** Find Sprint By ID Method **/
-    public Sprint findSprintById(SprintID sprintID) {
+    public Sprint findSprintById(String sprintID) {
         Sprint sprint = null;
         for (Sprint sprt : sprints) {
             if (sprt.hasSprintID(sprintID)) {
@@ -77,7 +52,7 @@ public class SprintStore {
     }
 
     /** Find all sprints associated to a Project ID Method **/
-    public List<Sprint> findAllSprintsByProjectID(ProjectID projectID) {
+    public List<Sprint> findAllSprintsByProjectID(String projectID) {
         List<Sprint> allSprintsInAProject = new ArrayList<>();
         for (Sprint x : sprints) {
             if (x.hasProjectID(projectID)) {
@@ -132,7 +107,7 @@ public class SprintStore {
     }
 
     /** Method to Start the Sprint **/
-    public boolean startASprint (SprintID sprintID, LocalDate startDate, ProjectTeam projectTeam, int sprintDuration) {
+    public boolean startASprint (String sprintID, LocalDate startDate, ProjectTeam projectTeam, int sprintDuration) {
         boolean msg = false;
         if (validateStartDate(startDate) && projectTeam.validateProjectTeam(startDate, sprintDuration)) {
             msg = true;

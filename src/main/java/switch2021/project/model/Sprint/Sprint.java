@@ -32,7 +32,7 @@ public class Sprint {
     /**
      * Constructor of Sprint
      **/
-    public Sprint(int projectID, String sprintID ,String name) {
+    public Sprint(String projectID, String sprintID ,String name) {
         this.projectID = new ProjectID(projectID);
         this.sprintID = new SprintID(sprintID);
         this.sprintName = new Description(name);
@@ -49,11 +49,11 @@ public class Sprint {
     }
 
 
-    public boolean hasSprintID(SprintID sprintID) {
-         return this.sprintID == sprintID;}
+    public boolean hasSprintID(String sprID) {
+         return Objects.equals(this.sprintID.toString(), sprID);}
 
-    public boolean hasProjectID(ProjectID projectID) {
-        return this.projectID == projectID;
+    public boolean hasProjectID(String projectID) {
+        return Objects.equals(this.projectID.toString(), projectID);
     }
 
 

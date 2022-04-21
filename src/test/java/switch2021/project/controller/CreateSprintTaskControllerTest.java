@@ -50,7 +50,7 @@ class CreateSprintTaskControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Create tasks
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -63,7 +63,7 @@ class CreateSprintTaskControllerTest {
         sprint.getTaskStore().saveTask(newTask2);
 
         //Get sprint task list
-        List<String> tasksNames = controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID());
+        List<String> tasksNames = controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID().toString());
 
         //Asserts
         assertEquals(2, tasksNames.size());
@@ -86,10 +86,10 @@ class CreateSprintTaskControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Get sprint task list
-        List<String> tasksNames = controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID());
+        List<String> tasksNames = controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID().toString());
 
         //Asserts
         assertEquals(0, tasksNames.size());
@@ -110,7 +110,7 @@ class CreateSprintTaskControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -125,7 +125,7 @@ class CreateSprintTaskControllerTest {
         project.getProjectTeam().saveResource(res3);
 
         //Get project team names
-        controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID());
+        controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID().toString());
         List<String> test = controller.getCurrentProjectTeam();
 
         //Asserts
@@ -150,10 +150,10 @@ class CreateSprintTaskControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Get project team names
-        controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID());
+        controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID().toString());
         List<String> test = controller.getCurrentProjectTeam();
 
         //Asserts
@@ -175,7 +175,7 @@ class CreateSprintTaskControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -190,7 +190,7 @@ class CreateSprintTaskControllerTest {
         project.getProjectTeam().saveResource(res3);
 
         //Create a new Sprint Task
-        controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID());
+        controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID().toString());
         CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "Design", "user test tres");
 
         //Asserts
@@ -214,7 +214,7 @@ class CreateSprintTaskControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -236,7 +236,7 @@ class CreateSprintTaskControllerTest {
         sprint.getTaskStore().saveTask(newTask2);
 
         //Create a new Sprint Task
-        controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID());
+        controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID().toString());
         CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test", 10, "Design", "user test tres");
 
         //Asserts
@@ -260,7 +260,7 @@ class CreateSprintTaskControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = project.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
 
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -285,7 +285,7 @@ class CreateSprintTaskControllerTest {
         precedenceList.add(newTask2.getName().getNameF());
 
         //Create a new Sprint Task
-        controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID());
+        controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID().toString());
         CreateTaskDTO dto = new CreateTaskDTO("newTask", "newTask to a controller test",
                 10, "Design", "user test tres", precedenceList);
 

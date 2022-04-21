@@ -25,6 +25,12 @@ public class ProjectID implements ValueObject<ProjectID> {
         this.code = "Project_" + LocalDate.now().getYear() + "_" + x;
     }
 
+    public ProjectID(String projectCode) {
+        if (projectCode == null)
+            throw new IllegalArgumentException("Project number cannot be null");
+        this.code = projectCode;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
