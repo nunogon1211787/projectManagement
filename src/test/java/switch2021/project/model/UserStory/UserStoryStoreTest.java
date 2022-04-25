@@ -22,7 +22,7 @@ public class UserStoryStoreTest {
         UserStoryFactory userStoryFactory = mock(UserStoryFactory.class);
         UserStoryStore userStoryStore = new UserStoryStore(userStoryFactory);
         UserStory newUserStory = mock(UserStory.class);
-        UserStoryId userStoryId = mock(UserStoryId.class);
+        UserStoryID userStoryId = mock(UserStoryID.class);
         UsTitle title = mock(UsTitle.class);
         UsPriority priority = mock(UsPriority.class);
         Description description = mock(Description.class);
@@ -60,7 +60,7 @@ public class UserStoryStoreTest {
         UserStoryFactory userStoryFactory = mock(UserStoryFactory.class);
         UserStoryStore userStoryStore = new UserStoryStore(userStoryFactory);
         UserStory newUserStory = mock(UserStory.class);
-        UserStoryId userStoryId = mock(UserStoryId.class);
+        UserStoryID userStoryId = mock(UserStoryID.class);
         UsTitle title = mock(UsTitle.class);
         UsPriority priority = mock(UsPriority.class);
         Description description = mock(Description.class);
@@ -95,7 +95,7 @@ public class UserStoryStoreTest {
             UserStoryFactory userStoryFactory = mock(UserStoryFactory.class);
             UserStoryStore userStoryStore = new UserStoryStore(userStoryFactory);
             UserStory newUserStory = mock(UserStory.class);
-            UserStoryId userStoryId = mock(UserStoryId.class);
+            UserStoryID userStoryId = mock(UserStoryID.class);
             UsTitle title = mock(UsTitle.class);
             UsPriority priority = mock(UsPriority.class);
             Description description = mock(Description.class);
@@ -125,7 +125,7 @@ public class UserStoryStoreTest {
         UserStoryFactory userStoryFactory = mock(UserStoryFactory.class);
         UserStoryStore userStoryStore = new UserStoryStore(userStoryFactory);
         UserStory newUserStory = mock(UserStory.class);
-        UserStoryId userStoryId = mock(UserStoryId.class);
+        UserStoryID userStoryId = mock(UserStoryID.class);
         UsTitle title = mock(UsTitle.class);
         UsPriority priority = mock(UsPriority.class);
         Description description = mock(Description.class);
@@ -268,7 +268,7 @@ public class UserStoryStoreTest {
         int priority = 1;
         String description = "D";
         String title = "As a PO, i want to test this string";
-        UserStoryId userStoryId = new UserStoryId(new ProjectID(1), new UsTitle("As a PO, i want to test this string"));
+        UserStoryID userStoryId = new UserStoryID(new ProjectID(1), new UsTitle("As a PO, i want to test this string"));
         ProjectID projectID = new ProjectID("Project_2022_1");
         //Act
         userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId.toString(), title, priority, description, 5);
@@ -285,15 +285,15 @@ public class UserStoryStoreTest {
         // Arrange
         UserStoryFactory userStoryFactory = new UserStoryFactory();
         UserStoryStore userStoryStore = new UserStoryStore(userStoryFactory);
-        UserStoryId userStoryId = new UserStoryId("Project_2022_1_As a PO, i want to test this string");
-        UserStoryId userStoryId2 = new UserStoryId("Project_2022_2_As a PO, i want to test this string");
-        UserStoryId userStoryId3 = new UserStoryId("Project_2022_3_As a PO, i want to test this string");
-        UserStoryId userStoryId4 = new UserStoryId("Project_2022_4_As a PO, i want to test this string");
+        UserStoryID userStoryId = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
+        UserStoryID userStoryID2 = new UserStoryID("Project_2022_2_As a PO, i want to test this string");
+        UserStoryID userStoryID3 = new UserStoryID("Project_2022_3_As a PO, i want to test this string");
+        UserStoryID userStoryID4 = new UserStoryID("Project_2022_4_As a PO, i want to test this string");
         ProjectID projectID = new ProjectID("Project_2022_1");
         userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId.toString(), "As a PO, i want to test this string", 1, "create user story", 5);
-        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId2.toString(), "As a PO, i want to test this string", 3, "sort user story", 5);
-        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId3.toString(), "As a PO, i want to test this string", 2, "backlog sorted", 5);
-        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId4.toString(), "As a PO, i want to test this string", 5, "show sorted", 5);
+        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryID2.toString(), "As a PO, i want to test this string", 3, "sort user story", 5);
+        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryID3.toString(), "As a PO, i want to test this string", 2, "backlog sorted", 5);
+        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryID4.toString(), "As a PO, i want to test this string", 5, "show sorted", 5);
 
         // Act
         List<UserStory> userStoryList = userStoryStore.findUsSortedByPriority();
@@ -312,17 +312,17 @@ public class UserStoryStoreTest {
         // Arrange
         UserStoryFactory userStoryFactory = new UserStoryFactory();
         UserStoryStore userStoryStore = new UserStoryStore(userStoryFactory);
-        UserStoryId userStoryId = new UserStoryId("Project_2022_1_As a PO, i want to test this string");
-        UserStoryId userStoryId2 = new UserStoryId("Project_2022_2_As a PO, i want to test this string");
-        UserStoryId userStoryId3 = new UserStoryId("Project_2022_3_As a PO, i want to test this string");
-        UserStoryId userStoryId4 = new UserStoryId("Project_2022_4_As a PO, i want to test this string");
+        UserStoryID userStoryId = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
+        UserStoryID userStoryID2 = new UserStoryID("Project_2022_2_As a PO, i want to test this string");
+        UserStoryID userStoryID3 = new UserStoryID("Project_2022_3_As a PO, i want to test this string");
+        UserStoryID userStoryID4 = new UserStoryID("Project_2022_4_As a PO, i want to test this string");
         ProjectID projectID = new ProjectID("Project_2022_1");
         userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId.toString(), "As a PO, i want to test this string", 1, "create user story", 5);
-        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId2.toString(), "As a PO, i want to test this string", 3, "sort user story", 5);
-        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId3.toString(), "As a PO, i want to test this string", 2, "backlog sorted", 5);
-        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId4.toString(), "As a PO, i want to test this string", 5, "show sorted", 5);
+        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryID2.toString(), "As a PO, i want to test this string", 3, "sort user story", 5);
+        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryID3.toString(), "As a PO, i want to test this string", 2, "backlog sorted", 5);
+        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryID4.toString(), "As a PO, i want to test this string", 5, "show sorted", 5);
         userStoryStore.findUserStoryById(userStoryId.toString()).setUsCancelled(LocalDate.now());
-        userStoryStore.findUserStoryById(userStoryId2.toString()).setUsEndDate(LocalDate.now());
+        userStoryStore.findUserStoryById(userStoryID2.toString()).setUsEndDate(LocalDate.now());
 
         // Act
         List<UserStory> userStoryList = userStoryStore.findUsSortedByPriority();
@@ -342,7 +342,7 @@ public class UserStoryStoreTest {
         // Arrange
         UserStoryFactory userStoryFactory = new UserStoryFactory();
         UserStoryStore userStoryStore = new UserStoryStore(userStoryFactory);
-        UserStoryId userStoryId = new UserStoryId("Project_2022_1_As a PO, i want to test this string");
+        UserStoryID userStoryId = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
         ProjectID projectID = new ProjectID("Project_2022_1");
         // Act
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -412,7 +412,7 @@ public class UserStoryStoreTest {
     @DisplayName("Create/save UserStory Refine Fail - Description already Exist")
     public void createUserStoryRefineDescriptionAlreadyExistFail() {
         UserStoryStore userStoryStore = new UserStoryStore();
-        UserStoryId userStoryId = new UserStoryId("Project_2022_1_As a PO, i want to test this string");
+        UserStoryID userStoryId = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
         ProjectID projectID = new ProjectID("Project_2022_1");
         userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId.toString(), "As a PO, i want to test this string", 4, "123testTest", 5);
 
@@ -445,7 +445,7 @@ public class UserStoryStoreTest {
     @DisplayName("get User Story By Id Success")
     public void getUserStoryByIdSuccess() {
         UserStoryStore userStoryStore = new UserStoryStore();
-        UserStoryId userStoryId = new UserStoryId("Project_2022_1_As a PO, i want to test this string");
+        UserStoryID userStoryId = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
         userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId.toString(), "As a PO, i want to test this string", 4, "123testTest", 5);
 
         assertEquals("Project_2022_1_As a PO, i want to test this string", userStoryStore.getUserStoryList().get(0).getUserStoryId().toString());
@@ -456,7 +456,7 @@ public class UserStoryStoreTest {
     public void getUserStoryByIdFail() {
         UserStoryStore userStoryStore = new UserStoryStore();
         String userStoryId1 = "Project_2022_2_As a PO, i want to test this string";
-        UserStoryId userStoryId = new UserStoryId("Project_2022_1_As a PO, i want to test this string");
+        UserStoryID userStoryId = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
 
         userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId1, "As a PO, i want to test this string", 4, "123testTest", 5);
 
@@ -520,7 +520,7 @@ public class UserStoryStoreTest {
 
         UserStory userStory = mock(UserStory.class);
         Description description1 = mock(Description.class);
-        UserStoryId userStoryId = mock(UserStoryId.class);
+        UserStoryID userStoryId = mock(UserStoryID.class);
         ProjectID projectID = mock(ProjectID.class);
 
         when(userStory.getDescription()).thenReturn(description1);
@@ -548,14 +548,14 @@ public class UserStoryStoreTest {
         // Arrange
         UserStoryFactory userStoryFactory = new UserStoryFactory();
         UserStoryStore userStoryStore = new UserStoryStore(userStoryFactory);
-        UserStoryId userStoryId = new UserStoryId("Project_2022_1_As a PO, i want to test this string");
-        UserStoryId userStoryId2 = new UserStoryId("Project_2022_2_As a PO, i want to test this string");
-        UserStoryId userStoryId3 = new UserStoryId("Project_2022_3_As a PO, i want to test this string");
+        UserStoryID userStoryId = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
+        UserStoryID userStoryID2 = new UserStoryID("Project_2022_2_As a PO, i want to test this string");
+        UserStoryID userStoryID3 = new UserStoryID("Project_2022_3_As a PO, i want to test this string");
         ProjectID projectID = new ProjectID("Project_2022_1");
         // Act
         userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId.toString(), "As a PO, i want to test this string", 1, "create user story", 5);
-        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId2.toString(), "As a PO, i want to test this string", 3, "sort user story", 5);
-        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId3.toString(), "As a PO, i want to test this string", 1, "backlog sorted", 5);
+        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryID2.toString(), "As a PO, i want to test this string", 3, "sort user story", 5);
+        userStoryStore.createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryID3.toString(), "As a PO, i want to test this string", 1, "backlog sorted", 5);
 
         // Assert
         assertEquals(3, userStoryStore.getUserStoryList().size());

@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class UserStoryIdTest {
+public class UserStoryIDTest {
 
     @Test
     @DisplayName("Validate that ID is correct")
@@ -20,7 +20,7 @@ public class UserStoryIdTest {
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         //Act
-        UserStoryId userStoryId = new UserStoryId(projectCode, usTitle);
+        UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
         String expected = "Project_2022_1_As a PO, i want to test this string";
         //Assert
         assertEquals(expected, userStoryId.toString());
@@ -35,7 +35,7 @@ public class UserStoryIdTest {
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         //Act
-        UserStoryId userStoryId = new UserStoryId(projectCode, usTitle);
+        UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
         boolean expected = userStoryId.toString().isEmpty();
         boolean expected2 = userStoryId.toString().equalsIgnoreCase("Project_2022_1_As a PO, i want to test this string");
         //Assert
@@ -52,10 +52,10 @@ public class UserStoryIdTest {
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         //Act
-        UserStoryId userStoryId = new UserStoryId(projectCode, usTitle);
-        UserStoryId userStoryId2 = new UserStoryId(projectCode, usTitle);
+        UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
+        UserStoryID userStoryID2 = new UserStoryID(projectCode, usTitle);
         //Assert
-        assertEquals(userStoryId, userStoryId2);
+        assertEquals(userStoryId, userStoryID2);
     }
 
     @Test
@@ -71,10 +71,10 @@ public class UserStoryIdTest {
         UsTitle usTitle2 = mock(UsTitle.class);
         when(usTitle2.getTitleUs()).thenReturn("As a PO, i want to test");
         //Act
-        UserStoryId userStoryId = new UserStoryId(projectCode, usTitle);
-        UserStoryId userStoryId2 = new UserStoryId(projectCode2, usTitle2);
+        UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
+        UserStoryID userStoryID2 = new UserStoryID(projectCode2, usTitle2);
         //Assert
-        assertNotEquals(userStoryId, userStoryId2);
+        assertNotEquals(userStoryId, userStoryID2);
     }
 
     @Test
@@ -86,10 +86,10 @@ public class UserStoryIdTest {
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         //Act
-        UserStoryId userStoryId = new UserStoryId(projectCode, usTitle);
-        UserStoryId userStoryId2 = new UserStoryId(projectCode, usTitle);
+        UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
+        UserStoryID userStoryID2 = new UserStoryID(projectCode, usTitle);
         //Assert
-        assertEquals(userStoryId.hashCode(), userStoryId2.hashCode());
+        assertEquals(userStoryId.hashCode(), userStoryID2.hashCode());
     }
 
     @Test
@@ -103,10 +103,10 @@ public class UserStoryIdTest {
         ProjectID projectCode2 = mock(ProjectID.class);
         when(projectCode2.getCode()).thenReturn("Project_4022_1");
         //Act
-        UserStoryId userStoryId = new UserStoryId(projectCode, usTitle);
-        UserStoryId userStoryId2 = new UserStoryId(projectCode2, usTitle);
+        UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
+        UserStoryID userStoryID2 = new UserStoryID(projectCode2, usTitle);
         //Assert
-        assertNotEquals(userStoryId.hashCode(), userStoryId2.hashCode());
+        assertNotEquals(userStoryId.hashCode(), userStoryID2.hashCode());
     }
 
     @Test
@@ -118,7 +118,7 @@ public class UserStoryIdTest {
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         //Act
-        UserStoryId userStoryId = new UserStoryId(projectCode, usTitle);
+        UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
         //Assert
         assertEquals(userStoryId, userStoryId);
     }
@@ -132,7 +132,7 @@ public class UserStoryIdTest {
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         //Act
-        UserStoryId userStoryId = new UserStoryId(projectCode, usTitle);
+        UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
         Typology budget1 = new Typology("test");
         //Assert
         assertNotEquals(userStoryId, budget1);
@@ -147,7 +147,7 @@ public class UserStoryIdTest {
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         //Act
-        UserStoryId userStoryId = new UserStoryId(projectCode, usTitle);
+        UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
         //Assert
         assertFalse(userStoryId.sameValueAs(userStoryId));
     }
@@ -161,7 +161,7 @@ public class UserStoryIdTest {
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         //Act
-        UserStoryId userStoryId = new UserStoryId(projectCode, usTitle);
+        UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
         //Assert
         assertEquals(userStoryId.toString(), userStoryId.toString());
     }
@@ -176,7 +176,7 @@ public class UserStoryIdTest {
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         //Act
-        UserStoryId userStoryId = new UserStoryId(projectCode, usTitle);
+        UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
         //Assert
         assertEquals("Project_2022_1", userStoryId.getProjectID().getCode());
     }
@@ -190,7 +190,7 @@ public class UserStoryIdTest {
         UsTitle usTitle = mock(UsTitle.class);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         //Act
-        UserStoryId userStoryId = new UserStoryId(projectCode, usTitle);
+        UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
         //Assert
         assertEquals("As a PO, i want to test this string", userStoryId.getUsTitle().getTitleUs());
     }
@@ -206,7 +206,7 @@ public class UserStoryIdTest {
             UsTitle usTitle = mock(UsTitle.class);
             when(usTitle.getTitleUs()).thenReturn("");
             // Act
-            new UserStoryId(projectCode, usTitle);
+            new UserStoryID(projectCode, usTitle);
 
         });
     }
@@ -222,7 +222,7 @@ public class UserStoryIdTest {
             UsTitle usTitle = mock(UsTitle.class);
             when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
             // Act
-            new UserStoryId(projectCode, usTitle);
+            new UserStoryID(projectCode, usTitle);
 
         });
     }
@@ -238,7 +238,7 @@ public class UserStoryIdTest {
             UsTitle usTitle = mock(UsTitle.class);
             when(usTitle.getTitleUs()).thenReturn("");
             // Act
-            new UserStoryId(projectCode, usTitle);
+            new UserStoryID(projectCode, usTitle);
 
         });
     }

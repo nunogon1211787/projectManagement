@@ -7,7 +7,6 @@ import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.utils.Entity;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 
 @EqualsAndHashCode
@@ -18,7 +17,7 @@ public class UserStory implements Entity<UserStory> {
     /**
      * Attributes
      **/
-    private UserStoryId userStoryId;
+    private UserStoryID userStoryId;
     private ProjectID projectID;
 
     private UsTitle title; //The title of a US follows AS <role> I WANT <objective> https://productcoalition.com/anatomy-of-a-great-user-story-f56fb1b63e38
@@ -37,7 +36,7 @@ public class UserStory implements Entity<UserStory> {
      **/
     public UserStory(String projectID, String userStoryId, String title, int priority, String description, int timeEstimateInHours) {
         this.projectID = new ProjectID(projectID);
-        this.userStoryId = new UserStoryId(userStoryId);
+        this.userStoryId = new UserStoryID(userStoryId);
         this.title = new UsTitle(title);
         this.description = new Description(description);
         this.priority = new UsPriority(priority);
@@ -74,7 +73,7 @@ public class UserStory implements Entity<UserStory> {
      * Methods has
      */
 
-    public boolean hasCode(UserStoryId idUserStory) {
+    public boolean hasCode(UserStoryID idUserStory) {
         return this.userStoryId == idUserStory;
     }
 

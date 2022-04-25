@@ -1,7 +1,7 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.Company;
-import switch2021.project.model.UserStory.UserStoryId;
+import switch2021.project.model.UserStory.UserStoryID;
 import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.UserStory.UserStory;
@@ -46,7 +46,7 @@ public class ChangePriorityUSController {
         return this.userStoryStore;
     }
 
-    public UserStory getUserStory(UserStoryId userStoryId) {
+    public UserStory getUserStory(UserStoryID userStoryId) {
         this.userStory = this.userStoryStore.findUserStoryById(userStoryId.toString());
         return this.userStory;
     }
@@ -67,7 +67,7 @@ public class ChangePriorityUSController {
         return this.userStoryList;
     }
 
-    public UserStory getUS(UserStoryId userStoryId) {
+    public UserStory getUS(UserStoryID userStoryId) {
         this.userStory = this.userStoryStore.findUserStoryById(userStoryId.toString());
         return this.userStory;
     }

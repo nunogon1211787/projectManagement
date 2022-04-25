@@ -2,7 +2,7 @@ package switch2021.project.dto;
 
 import lombok.Getter;
 import switch2021.project.model.Sprint.SprintID;
-import switch2021.project.model.UserStory.UserStoryId;
+import switch2021.project.model.UserStory.UserStoryID;
 
 @Getter
 
@@ -14,7 +14,7 @@ public class UserStorySprintProjectDTO {
 
     private String projectCode;
     private SprintID sprintId;
-    private UserStoryId userStoryId;
+    private UserStoryID userStoryId;
 
     /**
      * Constructor to test (without SINGLETON)
@@ -23,7 +23,7 @@ public class UserStorySprintProjectDTO {
     public UserStorySprintProjectDTO(String projectCode, String sprintId, String userStoryId) {
         this.projectCode = projectCode;
         this.sprintId = new SprintID(sprintId);
-        this.userStoryId = new UserStoryId(userStoryId);
+        this.userStoryId = new UserStoryID(userStoryId);
     }
 
 }

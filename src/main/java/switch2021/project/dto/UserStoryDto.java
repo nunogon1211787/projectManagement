@@ -4,10 +4,9 @@ import lombok.Getter;
 import switch2021.project.model.UserStory.UsHour;
 import switch2021.project.model.UserStory.UsPriority;
 import switch2021.project.model.UserStory.UsTitle;
-import switch2021.project.model.UserStory.UserStoryId;
+import switch2021.project.model.UserStory.UserStoryID;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.ProjectID;
-import switch2021.project.model.valueObject.UserStoryStatus;
 
 @Getter
 public class UserStoryDto {
@@ -17,7 +16,7 @@ public class UserStoryDto {
      **/
 
     private final ProjectID projectId;
-    private final UserStoryId userStoryId;
+    private final UserStoryID userStoryId;
     private final UsTitle title;
     private final UsPriority priority;
     private final Description description;
@@ -29,7 +28,7 @@ public class UserStoryDto {
 
     public UserStoryDto(String projectId, String userStoryId, String title, int priority, String description, int timeEstimate) {
         this.projectId = new ProjectID(projectId);
-        this.userStoryId = new UserStoryId(userStoryId);
+        this.userStoryId = new UserStoryID(userStoryId);
         this.title = new UsTitle(title);
         this.priority = new UsPriority(priority);
         this.description = new Description(description);

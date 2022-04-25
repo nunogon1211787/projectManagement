@@ -1,7 +1,7 @@
 package switch2021.project.controller;
 
 import switch2021.project.model.*;
-import switch2021.project.model.UserStory.UserStoryId;
+import switch2021.project.model.UserStory.UserStoryID;
 import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.UserStory.UserStory;
@@ -38,7 +38,7 @@ public class RefineUserStoryController {
         return this.userStoryStore;
     }
 
-    public UserStory getUserStory(UserStoryId idUserStory){
+    public UserStory getUserStory(UserStoryID idUserStory){
         this.userStoryParent = this.userStoryStore.findUserStoryById(idUserStory.toString());
         return userStoryParent;
     }

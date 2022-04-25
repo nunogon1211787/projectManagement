@@ -7,7 +7,7 @@ import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintID;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.UserStory.UserStoryId;
+import switch2021.project.model.UserStory.UserStoryID;
 import switch2021.project.model.valueObject.BusinessSector;
 import switch2021.project.model.valueObject.Customer;
 import switch2021.project.model.Typology.Typology;
@@ -32,7 +32,7 @@ public class AddUserStoryToSprintBacklogControllerTest {
         Sprint sprint = project.getSprintList().createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
         sprint.setStartDate(LocalDate.now());
         SprintID sprintID = new SprintID("Project_2022_1_Sprint 1");
-        UserStoryId userStoryId = new UserStoryId("Project_2022_1_As a PO, i want to test this string");
+        UserStoryID userStoryId = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
         String code = project.getProjectCode().getCode();
 
         project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId.toString(), "As a PO, i want to test this string", 1, "Fazer coisas cool", 5);

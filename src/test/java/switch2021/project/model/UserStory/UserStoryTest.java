@@ -41,7 +41,7 @@ class UserStoryTest {
     @Test
     void hasCodeTest2() {
         UserStory userStory = new UserStory("Project_2022_1","Project_2022_1_As a PO, i want to test this string", "As a PO, i want to test this string", 2, "Fazer tal", 5);
-        UserStoryId userStoryId = new UserStoryId("Project_2022_1_As a PO, i want to test this string");
+        UserStoryID userStoryId = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
         boolean expected = userStory.hasCode(userStoryId);
         assertFalse(expected);
     }
