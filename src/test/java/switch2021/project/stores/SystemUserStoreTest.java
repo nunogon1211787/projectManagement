@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SystemUserStoreTest {
-    @Test
+/*    @Test
     public void saveSystemUserSuccess() {
         //Arrange
         String userName = "manueloliveira";
@@ -145,5 +145,5 @@ public class SystemUserStoreTest {
         assertEquals(list1.getSystemUserList().hashCode(), list1.getSystemUserList().hashCode());
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
-    }
+    }*/
 }

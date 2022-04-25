@@ -17,7 +17,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class SystemUserTest {
-    @Test
+/*    @Test
     public void verifyEmail() {
 
         //Arrange
@@ -690,11 +690,11 @@ class SystemUserTest {
         //Assert
         assertTrue(test.hasThisData(name, email, func, state, profiles));
     }
-
+*/
     /**
      * FAIL TESTS
      */
-
+/*
     @Test
     void hasThisDataWithAllFail() {
         //Arrange
@@ -1078,5 +1078,5 @@ class SystemUserTest {
         assertFalse(hasCreated);
         assertEquals(1, testUser.getRequestedProfiles().size());
         assertEquals(1, testUser.getAssignedProfiles().size());
-    }
+    }*/
 }

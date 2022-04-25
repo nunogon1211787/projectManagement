@@ -1,0 +1,57 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title US001 - As Non-Registered User, I want to register as an application user.
+
+autoactivate on
+autonumber
+
+actor "SM/Team Member" as User
+participant ": RegisterUserUI" as Ui
+participant ": RegisterUserController" as Ctrl
+participant ": RegisterUserService" as Serv
+participant "dto: RegisterUserDTO" as RUDTO
+participant ": UserProfileStore" as UPStore
+participant "visitor : UserProfile" as UP
+participant "visitorID : UserProfileID" as UPID
+'participant "visitorDesc : Description" as Desc
+participant ": SystemUserFactory" as Fact
+participant "newUser : SystemUser" as SU
+participant ": SystemUserStore" as SUStore
+participant ": SystemUserMapper" as mapper
+participant "outDTO : OutputUserDTO" as OutDTO
+
+User->Ui : starts the registration\n of a new SystemUser
+Ui--> User: requests data (userName,\n email, function, password,\n passwordConfirmation, photo)
+User->Ui: types requested data
+Ui->Ctrl: registerUser(dto)
+Ctrl->Serv: createAndSaveSystemUser(dto)
+deactivate UPStore
+Serv->UPStore: getUserProfile("Visitor")
+/'loop for each known userProfile
+UPStore->UP: getUserProfileID()
+UP->UPID: getUserProfileName()
+UPID->Desc: hasText("Visitor")
+Desc-->UPID: True
+UPID-->UP: visitorDesc
+UP-->UPStore:visitorID
+end´'/
+UPStore-->Serv:visitor
+Serv->UP: getUserProfileID()
+UP-->Serv:visitorID
+Serv->Fact: createSystemUser(dto.userName, dto.email, dto.funcion, dto.password, dto.passwordConfirmation, dto.photo, visitorID)
+Fact->SU**: createSystemUser(userName,\n email, function, password,\n passwordConfirmation,\n photo, visitorId)
+Fact-->Serv: newUser
+Serv->SUStore: saveSystemUser(newUser)
+SUStore->SUStore: existsByEmail(email)
+deactivate SUStore
+SUStore->SUStore: add(newUser)
+deactivate SUStore
+SUStore-->Serv: True
+Serv->mapper:toDto(newUser)
+mapper->OutDTO**: create()
+mapper-->Serv:outDTO
+Serv-->Ctrl:outDTO
+Ctrl-->Ui:outDTO
+Ui-->User:Informs Operation Success
+@enduml
