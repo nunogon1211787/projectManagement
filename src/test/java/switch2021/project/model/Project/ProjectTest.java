@@ -287,9 +287,9 @@ class ProjectTest {
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTest() {
         SprintStore sprintList1 = new SprintStore(new SprintFactory());
-        sprintList1.createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        sprintList1.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
         SprintStore projectSprintList = new SprintStore(new SprintFactory());
-        projectSprintList.createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        projectSprintList.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
         assertEquals(sprintList1.findSprints().size(), projectSprintList.findSprints().size());
     }
 
@@ -298,10 +298,10 @@ class ProjectTest {
     void getSprintStoreTestFail() {
         //Arrange
         SprintStore sprintList1 = new SprintStore(new SprintFactory());
-        sprintList1.createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Effort View", 2);
-        sprintList1.createAndSaveSprint(1, "Project_2022_1_Sprint 2", "Sprint Effort View View", 2);
+        sprintList1.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Effort View", 2);
+        sprintList1.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 2", "Sprint Effort View View", 2);
         SprintStore projectSprintList = new SprintStore(new SprintFactory());
-        projectSprintList.createAndSaveSprint(1, "Project_2022_1_Sprint 2", "Sprint Effort View 1", 2);
+        projectSprintList.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 2", "Sprint Effort View 1", 2);
         //Assert
         assertNotEquals(sprintList1.findSprints().size(), projectSprintList.findSprints().size());
     }
@@ -318,7 +318,7 @@ class ProjectTest {
         String taskDescription = "must be at least 20 characters";
         TaskTypeEnum taskType = TaskTypeEnum.Design;
         SprintStore sprintStore = new SprintStore(new SprintFactory());
-        Sprint sprint1 = sprintStore.createAndSaveSprint(1, "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint1 = sprintStore.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
         sprint1.setStartDate(LocalDate.of(2022, 1, 1));
         SprintID id = new SprintID("Project_2022_1_Sprint 1");
         boolean x = sprint1.isCurrentSprint();

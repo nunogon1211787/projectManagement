@@ -44,7 +44,7 @@ public class RegisterWorkToTaskController {
      **/
     public List<TaskIdNameDTO> getTasks(UserStorySprintProjectDTO userStorySprintProjectDTO) {
         String code = userStorySprintProjectDTO.getProjectCode();
-        SprintID sprintId = userStorySprintProjectDTO.getSprintId();
+        String sprintId = userStorySprintProjectDTO.getSprintId().toString();
         UserStoryID userStoryId = userStorySprintProjectDTO.getUserStoryId();
 
         ProjectStore projectStore = this.company.getProjectStore();

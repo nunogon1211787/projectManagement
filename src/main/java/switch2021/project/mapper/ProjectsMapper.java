@@ -3,6 +3,7 @@ package switch2021.project.mapper;
 import lombok.Getter;
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.model.Project.Project;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +22,18 @@ public class ProjectsMapper {
         String startDate = project.getStartDate().getYear()
                 + "/" + project.getStartDate().getMonthValue() + "/" + project.getStartDate().getDayOfMonth();
         String endDate = null;
-        if(project.getEndDate() != null) {
+        if (project.getEndDate() != null) {
             endDate = project.getEndDate().getYear()
                     + "/" + project.getEndDate().getMonthValue() + "/" + project.getEndDate().getDayOfMonth();
         }
-        return new ProjectDTO(project.getProjectCode().getCode(), project.getProjectName().getText(),
-                startDate, endDate);
+        ProjectDTO projectDTO = new ProjectDTO();
+
+        projectDTO.code = project.getProjectCode().getCode();
+        projectDTO.projectName = project.getProjectName().getText();
+        projectDTO.startDate = project.getStartDate().toString();
+        projectDTO.endDate = project.getEndDate().toString();
+
+        return projectDTO;
     }
 
 
@@ -36,7 +43,7 @@ public class ProjectsMapper {
     public List<ProjectDTO> toDTO(List<Project> projectList) {
         this.projectDTOList = new ArrayList<>();
 
-        for(Project project : projectList) {
+        for (Project project : projectList) {
             ProjectDTO projectDTO = toDTO(project);
             this.projectDTOList.add(projectDTO);
         }
@@ -50,7 +57,10 @@ public class ProjectsMapper {
     public List<ProjectDTO> toDtoByUser(List<Project> projectListByUser) {
         List<ProjectDTO> projectListByUserDtoList = new ArrayList<>();
         for (Project project : projectListByUser) {
-            ProjectDTO projectListByUserDto = new ProjectDTO(project.getProjectCode().getCode(), project.getProjectName().getText(), project.getDescription().getText());
+            ProjectDTO projectListByUserDto = new ProjectDTO();
+            projectListByUserDto.code = project.getProjectCode().getCode();
+            projectListByUserDto.projectName = project.getProjectName().getText();
+            projectListByUserDto.description = project.getDescription().getText();
             projectListByUserDtoList.add(projectListByUserDto);
         }
         return projectListByUserDtoList;

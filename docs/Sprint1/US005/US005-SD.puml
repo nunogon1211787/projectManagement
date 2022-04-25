@@ -6,63 +6,52 @@ title US005 - As a Director, I want to create/register a new project
 autoactivate on
 autonumber
 
-actor "Director" as Director
+actor "Director" as director
 
-participant ":CreateProjectUI " as UI
-participant ":CreateProjectController " as Controller
-participant ":Company " as Company
-participant ":CostumerStore " as CostumerStore
-participant ":TypologyStore " as TypologyStore
-participant ":BusinessSectorStore " as BSStore
-participant ":ProjectStore " as ProjectStore
-participant "proj:Project " as Project
+participant ":CreateProjectUI " as ui
+participant ":CreateProjectController " as controller
+participant ":ProjectService " as service
+participant ":ProjectFactory " as factory
+participant ":ProjectMapper " as mapper
+participant "projDTO:ProjectDTO " as dto
+participant ":ProjectStore " as store
+participant "proj:Project " as project
 
-activate "Director"
-Director -> UI: Starts the creation of a new Project
-UI --> Director: Requests data(name,description,startDate,numberOfSprints,typology, business, customer, budget)
+activate director
+director -> ui: Requests creation of a new Project
+ui --> director: Requests Project Data
 
-"Director" -> UI: Types and selects data
-UI -> Controller: createProject(name,description,startDate,numberOfSprints,typologyID, businessID, customerID, budget)
+director -> ui: Types required project data
+ui -> controller: createProject(dto)
 
-Controller -> Company:getTypologyStore()
-Company -> TypologyStore:getTypology(typologyID)
-deactivate Company
-TypologyStore --> Controller:typology
+controller -> service: createProject(dto)
+service -> factory: createAndSaveProject(dto.getName, dto.getDescription, dto.getStartDate, dto.getNumberOfSprints, dto.getBudget)
 
-Controller -> Company:getCostumerStore()
-Company -> CostumerStore:getCostumer(costumerID)
-deactivate Company
-CostumerStore --> Controller:customer
+factory -> project**: createProject(dto.getName, dto.getDescription, dto.getStartDate, dto.getNumberOfSprints, dto.getBudget)
+activate project
 
-Controller -> Company:getBusinessSectorStore()
-Company -> BSStore:getBusinessSector(businessSectorID)
-deactivate Company
-BSStore --> Controller:business
+project --> factory: proj
 
-Controller -> Company:getProjectStore()
-Company -> ProjectStore:createProject:name,description,startDate,numberOfSprints,typology, business, customer, budget)
-deactivate Company
+factory -> store: saveProject(proj)
+store -> store: add(proj)
+deactivate store
+deactivate store
 
-ProjectStore -> Project**:create:name,description,startDate,numberOfSprints,typology, business, customer, budget)
-deactivate ProjectStore
+factory -> mapper: toDTO(proj)
 
+mapper -> dto**: toDTO(proj)
+activate dto
+deactivate mapper
 
-Project -> Project:validate()
-Project --> Controller:proj
+dto --> factory: projDTO
 
-Controller -> Company:getProjectStore()
-Company -> ProjectStore:saveNewProject(proj)
-deactivate Company
-ProjectStore -> ProjectStore:validateProject(proj)
-ProjectStore -> ProjectStore:addProject(proj)
-deactivate ProjectStore
-deactivate ProjectStore
+factory --> service: projDTO
 
-ProjectStore --> Controller:true
+service --> controller: projDTO
 
-Controller --> UI:true
+controller --> ui: projDTO
 
-UI --> Director:Confirms project creation
+ui --> director: confirms successful creation
 
 @enduml
 

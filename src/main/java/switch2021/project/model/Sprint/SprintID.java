@@ -2,13 +2,14 @@ package switch2021.project.model.Sprint;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import switch2021.project.interfaces.TaskContainerID;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.utils.ValueObject;
 
 @Getter
 @EqualsAndHashCode
-public class SprintID implements ValueObject<SprintID> {
+public class SprintID implements ValueObject<SprintID>, TaskContainerID {
 
     /** Attributes */
     private final ProjectID projectID;

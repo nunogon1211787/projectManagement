@@ -52,7 +52,7 @@ public class UserStoryEffortController {
         return Collections.unmodifiableList(sprintsList);
     }
 
-    public Sprint getSprint(SprintID sprintID) {
+    public Sprint getSprint(String sprintID) {
         this.sprintList = this.proj.getSprintList();
         this.sprint = this.sprintList.findSprintById(sprintID);
         return this.sprint;

@@ -1,33 +1,49 @@
 package switch2021.project.model.SystemUser;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import switch2021.project.dto.RegisterUserDTO;
+import switch2021.project.dto.OutputUserDTO;
+import switch2021.project.factoryInterface.SystemUserFactoryInterface;
+import switch2021.project.interfaces.SystemUserRepositoryInterface;
+import switch2021.project.mapper.SystemUserMapper;
 import switch2021.project.model.valueObject.UserProfileId;
-import switch2021.project.stores.SystemUserStore;
 import switch2021.project.repositories.UserProfileRepository;
 
+@Service
 public class SystemUserService {
 
-    private final SystemUserStore systemUserStore;
-    private final UserProfileRepository userProfileStore;
+    private SystemUserRepositoryInterface systemUserRepositoryInterface;
+    private UserProfileRepository userProfileRepository; //terá uma interface...
+    private SystemUserMapper systemUserMapper;
+    private SystemUserFactoryInterface systemUserFactoryInterface;
 
-    /**
-     * Constructor.
-     */
-    public SystemUserService(SystemUserStore systemUserStore, UserProfileRepository userProfileStore) {
-        this.systemUserStore = systemUserStore;
-        this.userProfileStore = userProfileStore;
+    @Autowired
+    public SystemUserService(SystemUserRepositoryInterface systemUserRepositoryInterface,
+                             UserProfileRepository userProfileRepository, SystemUserMapper systemUserMapper,
+                             SystemUserFactoryInterface systemUserFactoryInterface) {
+        this.systemUserRepositoryInterface = systemUserRepositoryInterface;
+        this.userProfileRepository = userProfileRepository;
+        this.systemUserMapper = systemUserMapper;
+        this.systemUserFactoryInterface = systemUserFactoryInterface;
     }
 
-    //TODO implement SystemUserDTO instead of boolean
-    public boolean createAndSaveSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo) {
-        if (this.systemUserStore.existsByEmail(email))
-            return false;
+    public OutputUserDTO createAndSaveSystemUser(RegisterUserDTO dto) {
+        UserProfileId visitorId = userProfileRepository.getUserProfile("Visitor").getUserProfileId();
 
-        //SystemUserId systemUserId = new SystemUserId(email);
-        UserProfileId visitorId = this.userProfileStore.getUserProfile("Visitor").getUserProfileId();
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo,visitorId);
+        SystemUser newUser = systemUserFactoryInterface.createSystemUser(dto.userName, dto.email,
+                dto.function, dto.password, dto.passwordConfirmation, dto.photo, visitorId);
 
-        //newUser.getAssignedProfiles().add(visitorId);
+        systemUserRepositoryInterface.saveSystemUser(newUser);
 
-        return this.systemUserStore.saveSystemUser(newUser);
+        return systemUserMapper.toDto(newUser);
     }
+
+    public OutputUserDTO findSystemUserByEmail(String email) {//showDTO ou OutputDTO
+        SystemUser found = this.systemUserRepositoryInterface.findSystemUserByEmail(email);
+
+        return this.systemUserMapper.toDto(found);
+    }
+
+
 }

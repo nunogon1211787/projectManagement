@@ -9,7 +9,7 @@ public class BusinessSector {
      * Business Sector class
      * Business Sector atributes are composed of a description of the business sector
      **/
-    private Description description;
+    private final Description description;
 
 
     /**
