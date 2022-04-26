@@ -28,7 +28,7 @@ User -> System: Enter requested information
 System -> Ctrl: createUserStory(userStoryDto)
 Ctrl -> appService: createAndSaveUserStory(userStoryDto)
 appService -> factory:  createUserStory(dto.getProjectID, dto.getUserStoryID, dto.getTitle,\n dto.getPriority, dto.getDescription, dto.getTimeEstimate)
-factory -> us **: create()
+factory -> us **: createUserStory(projectID, userStoryID, \n title, priority, description, timeEstimate)
 factory --> appService: us
 appService -> appService: save(us)
 
@@ -41,11 +41,10 @@ usStore --> appService : true
 deactivate
 appService-> usMapper : toDto(us)
 usMapper-> outDto **:create()
-outDto-->usMapper: outputUsDto
 usMapper --> appService: outputUsDto
 appService -> usMapper: dtoToJson(outputUsDto)
 usMapper-> outJson **:create()
-outJson-->usMapper: outputUsJson
+
 usMapper --> appService: outputUsJson
 appService --> Ctrl: outputUsJson
 Ctrl-->System: outputUsJson

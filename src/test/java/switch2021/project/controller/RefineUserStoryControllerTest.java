@@ -8,8 +8,6 @@ import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.BusinessSector;
 import switch2021.project.model.valueObject.Customer;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.valueObject.ProjectID;
-import switch2021.project.model.valueObject.UserStoryStatus;
 
 import java.time.LocalDate;
 
@@ -50,7 +48,7 @@ public class RefineUserStoryControllerTest {
         refineUserStoryController.getProject("Project_2022_1");
         refineUserStoryController.getUserStoryStore();
         //TODO CDC ver ID US refined
-        refineUserStoryController.getUserStory(userStory2.getUserStoryId());
+        refineUserStoryController.getUserStory(userStory2.getUserStoryID());
         refineUserStoryController.createUserStory("newUserStoryCreated", 3);
         refineUserStoryController.createUserStory("newUserStoryCreated2", 5);
 

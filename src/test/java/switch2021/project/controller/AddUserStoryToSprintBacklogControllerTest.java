@@ -8,6 +8,7 @@ import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintID;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.UserStory.UserStoryID;
+import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.model.valueObject.BusinessSector;
 import switch2021.project.model.valueObject.Customer;
 import switch2021.project.model.Typology.Typology;
@@ -35,13 +36,15 @@ public class AddUserStoryToSprintBacklogControllerTest {
         UserStoryID userStoryId = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
         String code = project.getProjectCode().getCode();
 
-        project.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, userStoryId.toString(), "As a PO, i want to test this string", 1, "Fazer coisas cool", 5);
         UserStory us = new UserStory(code, userStoryId.toString(), "As a PO, i want to test this string", 1, "UserStory description", 5);
+        UserStoryStore userStoryStore = new UserStoryStore();
+        userStoryStore.save(us);
         //Act
         AddUserStoryToSprintBacklogController addStory = new AddUserStoryToSprintBacklogController(company);
         addStory.getProject(code);
         addStory.getSprintStore().findSprintById("Project_2022_1_Sprint 1");
         addStory.getUserStoryStore().findUserStoryById(userStoryId.toString());
+        addStory.getUserStoryStore().save(us);
         //Assert
         assertEquals(1, addStory.getUserStoryStore().getUserStoryList().size());
     }

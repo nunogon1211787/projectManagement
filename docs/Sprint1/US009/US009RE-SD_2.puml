@@ -12,10 +12,10 @@ participant ": CreateUserStoryController" as Ctrl
 participant ": CreateUserStoryService" as appService
 participant " dto : UserStoryDto" as usDto
 participant ": UserStoryFactory" as factory
-participant "us : UserStory" as us
+participant "newUserStory : UserStory" as us
 participant ": UserStoryStore " as usStore
 participant ": UserStoryMapper" as usMapper
-participant "outputUsDto : OutputDto" as outDto
+participant "outputUsDto : OutputUsDto" as outDto
 
 
 activate User
@@ -24,23 +24,21 @@ activate User
 User -> System: Start to create a user story
 System --> User : Requests information: \n  (projectID, userStoryID, title, \n  priority, description, timeEstimate)
 User -> System: Enter requested information
-System -> Ctrl: createUserStory(userStoryDto)
-Ctrl -> appService: createAndSaveUserStory(userStoryDto)
+System -> Ctrl: createUserStory(dto)
+Ctrl -> appService: createAndSaveUserStory(dto)
 appService -> factory:  createUserStory(dto.getProjectID, dto.getUserStoryID, dto.getTitle,\n dto.getPriority, dto.getDescription, dto.getTimeEstimate)
-factory -> us **: create()
-factory --> appService: us
-appService -> appService: save(us)
+factory -> us **: createUserStory(projectID, userStoryID, \n title, priority, description, timeEstimate)
+factory --> appService: newUserStory
 
-appService-> usStore: save(us)
-usStore-> usStore: existsByUserStoryId(us.getUserStoryId())
+appService-> usStore: save(newUserStory)
+usStore-> usStore: existsByUserStoryId(newUserStory.getUserStoryId())
 deactivate
-usStore-> usStore: add(us)
+usStore-> usStore: add(newUserStory)
 deactivate
 usStore --> appService : true
 deactivate
-appService-> usMapper : toDto(us)
+appService-> usMapper : toDto(newUserStory)
 usMapper-> outDto **:create()
-outDto-->usMapper: outputUsDto
 usMapper --> appService: outputUsDto
 appService --> Ctrl: outputUsDto
 Ctrl --> System: outputUsDto

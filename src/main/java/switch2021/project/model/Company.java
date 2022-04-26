@@ -47,7 +47,7 @@ public class Company {
         this.userStoryStatusStore = new UserStoryStatusStore();
         //this.requestStore = new RequestStore();
         //this.userStoryFactory = new UserStoryFactory();
-        this.userStoryStore = new UserStoryStore( new UserStoryFactory());
+        this.userStoryStore = new UserStoryStore();
 
         this.userProfileStore.populateDefault();
         this.projectRoleStore.populateDefault();

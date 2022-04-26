@@ -1,11 +1,20 @@
 package switch2021.project.mapper;
 
-import switch2021.project.dto.UserStoryDto;
+import switch2021.project.dto.OutputUsDTO;
 import switch2021.project.model.UserStory.UserStory;
 
 public class UserStoryMapper {
 
-    public UserStory toModel(UserStoryDto createUserStoryDto) {
-        return new UserStory(createUserStoryDto.getProjectId().getCode(), createUserStoryDto.getUserStoryId().toString(), createUserStoryDto.getTitle().getTitleUs(), createUserStoryDto.getPriority().getPriorityUs(), createUserStoryDto.getDescription().getText(), createUserStoryDto.getTimeEstimate().getUsHours());
+    private UserStoryMapper() {
+    }
+
+    public OutputUsDTO toDto(UserStory newUserStory) {
+        OutputUsDTO outputUsDto = new OutputUsDTO();
+        outputUsDto.userStoryID = newUserStory.getUserStoryID().toString();
+        outputUsDto.projectID = newUserStory.getProjectID().toString();
+        outputUsDto.title = newUserStory.getTitle().getTitleUs();
+
+        return outputUsDto;
+
     }
 }

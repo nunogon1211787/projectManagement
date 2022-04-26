@@ -1,7 +1,7 @@
 package switch2021.project.controller;
 
 import switch2021.project.dto.ProjectDTO;
-import switch2021.project.dto.UserStoryDto;
+import switch2021.project.dto.UserStoryDTO;
 import switch2021.project.mapper.ProductBacklogMapper;
 import switch2021.project.mapper.ProjectsMapper;
 import switch2021.project.model.Company;
@@ -41,17 +41,12 @@ public class ProductBacklogSortController {
      * Instead use an unmodifiable Collection (via Collections.unmodifiableCollection, Collections.unmodifiableList, ...)
      * or make a copy of the mutable object, and store or return the copy instead.
      **/
-    public List<ProjectDTO> getProjectListByUserEmail(String email) {
-        ProjectStore projStore = this.company.getProjectStore();
-        List<Project> projectListByUser = projStore.getProjectsByUserEmail(email);
-        List<ProjectDTO> projectListByUserDtoList = this.mapper.toDtoByUser(projectListByUser);
-        return Collections.unmodifiableList(projectListByUserDtoList);
-    }
 
-    public List<UserStoryDto> getUsSortedByPriority(String code) {
+    //TODO -----> testar método CDC
+    public List<UserStoryDTO> getUsSortedByPriority(String code) {
         Project project = this.company.getProjectStore().findProjectByID(code);
         List<UserStory> userStoryList = project.getUserStoryStore().findUsSortedByPriority();
-        List<UserStoryDto> userStoryListDtoList = this.mapperPB.toDto(userStoryList);
+        List<UserStoryDTO> userStoryListDtoList = this.mapperPB.toDto(userStoryList);
         return Collections.unmodifiableList(userStoryListDtoList);
     }
 }

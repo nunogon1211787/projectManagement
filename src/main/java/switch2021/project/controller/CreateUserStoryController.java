@@ -1,51 +1,46 @@
 package switch2021.project.controller;
 
-import switch2021.project.dto.ProjectDTO;
-import switch2021.project.dto.UserStoryDto;
-import switch2021.project.mapper.ProjectsMapper;
-import switch2021.project.mapper.UserStoryMapper;
-import switch2021.project.model.*;
-import switch2021.project.model.UserStory.UserStoryStore;
-import switch2021.project.model.Project.Project;
-import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.repositories.ProjectStore;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import switch2021.project.dto.OutputUsDTO;
+import switch2021.project.dto.UserStoryDTO;
+import switch2021.project.model.UserStory.UserStoryService;
 
-import java.util.Collections;
-import java.util.List;
-
+@Controller
+@RestController
+@RequestMapping()
 public class CreateUserStoryController {
 
     /**
      * Attributes
      **/
-    private final Company company;
-    private final ProjectsMapper mapper;
-    private final UserStoryMapper mapperUS;
+    @Autowired
+    private final UserStoryService userStoryService;
 
 
     /**
-     * Constructor to test (without SINGLETON)
+     * Constructor
      **/
-    public CreateUserStoryController(Company company, ProjectsMapper mapper, UserStoryMapper mapperUS) {
-        this.company = company;
-        this.mapper = mapper;
-        this.mapperUS = mapperUS;
+    public CreateUserStoryController(UserStoryService userStoryService) {
+        this.userStoryService = userStoryService;
     }
-
 
     /**
-     * Methods
-     **/
-    public List<ProjectDTO> getProjectListByUserEmail(String email) {
-        ProjectStore projStore = this.company.getProjectStore();
-        List<Project> projectListByUser = projStore.getProjectsByUserEmail(email);
-        List<ProjectDTO> projectListByUserDtoList = this.mapper.toDtoByUser(projectListByUser);
-        return Collections.unmodifiableList(projectListByUserDtoList);
-    }
+     * Create a User Story
+     *
+     * @param dto
+     */
+    @PostMapping("")
+    public ResponseEntity<Object> createUserStory(@RequestBody UserStoryDTO dto) {
 
-    public void createUserStory(String code, UserStoryDto createUserStoryDto) {
-        Project project = this.company.getProjectStore().findProjectByID(code);
-         project.getUserStoryStore().createAndSaveUserStoryWithDto(createUserStoryDto, this.mapperUS);
+        OutputUsDTO newUserStory = userStoryService.createAndSaveUserStory(dto);
 
+        return new ResponseEntity<>(newUserStory, HttpStatus.CREATED);
     }
 }

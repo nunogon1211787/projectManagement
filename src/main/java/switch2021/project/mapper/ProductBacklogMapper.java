@@ -1,6 +1,6 @@
 package switch2021.project.mapper;
 
-import switch2021.project.dto.UserStoryDto;
+import switch2021.project.dto.UserStoryDTO;
 import switch2021.project.model.UserStory.UserStory;
 
 import java.util.LinkedList;
@@ -8,11 +8,18 @@ import java.util.List;
 
 public class ProductBacklogMapper {
 
-    public List<UserStoryDto> toDto(List<UserStory> userStoryList) {
-        List<UserStoryDto> userStoryListDtoList = new LinkedList<>();
+    //TODO -----> Validar testes CDC
+
+    public List<UserStoryDTO> toDto(List<UserStory> userStoryList) {
+        List<UserStoryDTO> userStoryListDtoList = new LinkedList<>();
         for (UserStory userStory : userStoryList) {
-            UserStoryDto userStoryListDto = new UserStoryDto(userStory.getProjectID().getCode(), userStory.getUserStoryId().toString(), userStory.getTitle().getTitleUs(),
-                    userStory.getPriority().getPriorityUs(), userStory.getDescription().getText(), userStory.getTimeEstimate().getUsHours());
+            UserStoryDTO userStoryListDto = new UserStoryDTO();
+            userStoryListDto.projectId =userStory.getProjectID().toString();
+            userStoryListDto.userStoryId = userStory.getUserStoryID().toString();
+            userStoryListDto.title=userStory.getTitle().getTitleUs();
+            userStoryListDto.priority=userStory.getPriority().getPriorityUs();
+            userStoryListDto.description=userStory.getDescription().getText();
+            userStoryListDto.timeEstimate=userStory.getTimeEstimate().getUsHours();
             userStoryListDtoList.add(userStoryListDto);
         }
         return userStoryListDtoList;

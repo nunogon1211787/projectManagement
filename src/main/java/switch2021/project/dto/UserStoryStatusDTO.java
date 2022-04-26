@@ -24,7 +24,7 @@ public class UserStoryStatusDTO {
          * Constructor to test (without SINGLETON)
          **/
 
-        public UserStoryStatusDTO(String userStoryId,String title, String description, int timeEstimate, int priority) {
+        public UserStoryStatusDTO(String userStoryId,String title, String description, double timeEstimate, int priority) {
                 this.title = new UsTitle(title);
                 this.description = new Description(description);
                 this.timeEstimate = new UsHour(timeEstimate);

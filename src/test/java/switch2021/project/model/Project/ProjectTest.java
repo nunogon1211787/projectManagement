@@ -13,6 +13,7 @@ import switch2021.project.model.Task.Task;
 import switch2021.project.model.Task.TaskTypeEnum;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
@@ -254,19 +255,6 @@ class ProjectTest {
         currentProject.getProjectTeam().saveResource(manuelmartins);
     }
 
-    @Test
-    @DisplayName("validate that list have results (not null) and check list size are correct")
-    public void getUserStoryStoreWithResults() {
-        // Arrange
-        proj1.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, "Project_2022_1_As a PO, i want to test this string", "As a PO, i want to test this string", 1, "making test", 5);
-        proj1.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, "Project_2022_2_As a PO, i want to test this string", "As a TO, i want to test this string", 1, "making other test", 5);
-        proj1.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, "Project_2022_3_As a PO, i want to test this string", "As a SO, i want to test this string", 1, "making test 4", 5);
-        // Act
-        //Assert
-        assertNotNull(proj1.getUserStoryStore());
-        assertEquals(3, proj1.getUserStoryStore().getUserStoryList().size());
-
-    }
 
     @Test
     public void hasCurrentProjectTeamMemberEmailSuccess() {

@@ -34,7 +34,7 @@ class UserStoryTest {
     void hasCodeTest() {
         UserStory userStory = new UserStory("Project_2022_1","Project_2022_1_As a PO, i want to test this string", "As a PO, i want to test this string", 2, "Fazer tal", 5);
 
-        boolean expected = userStory.hasCode(userStory.getUserStoryId());
+        boolean expected = userStory.hasCode(userStory.getUserStoryID());
         assertTrue(expected);
     }
 
@@ -182,7 +182,7 @@ class UserStoryTest {
         assertNotEquals(null, userStory1);
         assertEquals(userStory1.getClass(), userStory2.getClass());
         assertNotEquals(userStory1.hashCode(), userStory3.hashCode());
-        assertEquals("Project_2022_1_As a PO, i want to test this string", userStory1.getUserStoryId().toString());
+        assertEquals("Project_2022_1_As a PO, i want to test this string", userStory1.getUserStoryID().toString());
         assertNotEquals(null, status4);
     }
 
@@ -191,8 +191,8 @@ class UserStoryTest {
         UserStory userStory1 = new UserStory("Project_2022_1","Project_2022_1_As a PO, i want to test this string", "As a PO, i want to test this string", 2, "Fazer tal", 5);
         UserStory userStory2 = new UserStory("Project_2022_1","Project_2022_2_As a PO, i want to test this string", "As a IO, i want to test this string", 2, "Fazer tal e coiso", 5);
 
-        assertEquals("Project_2022_2_As a PO, i want to test this string", userStory2.getUserStoryId().toString());
-        assertNotEquals("2", userStory1.getUserStoryId());
+        assertEquals("Project_2022_2_As a PO, i want to test this string", userStory2.getUserStoryID().toString());
+        assertNotEquals("2", userStory1.getUserStoryID());
     }
 
     @Test
@@ -267,7 +267,7 @@ class UserStoryTest {
         assertEquals(userStory1.getPriority(), userStory2.getPriority());
         assertEquals(userStory1.getDescription(), userStory2.getDescription());
         assertEquals(userStory1.getTimeEstimate(), userStory2.getTimeEstimate());
-        assertEquals(userStory1.getUserStoryId(), userStory2.getUserStoryId());
+        assertEquals(userStory1.getUserStoryID(), userStory2.getUserStoryID());
         assertEquals(userStory4.getParentUserStory(), userStory5.getParentUserStory());
         assertEquals(userStory1.getUsCancelled(), userStory2.getUsCancelled());
         assertEquals(userStory1.getUsEndDate(), userStory2.getUsEndDate());

@@ -12,7 +12,7 @@ public class ScrumBoardMapper {
      * Method to change data in to a Scrum Board DTO
      **/
     public UserStoryStatusDTO toDTO(UserStory userStory) {
-        return new UserStoryStatusDTO(userStory.getUserStoryId().toString(),userStory.getTitle().getTitleUs(), userStory.getDescription().getText(), userStory.getTimeEstimate().getUsHours(), userStory.getPriority().getPriorityUs());
+        return new UserStoryStatusDTO(userStory.getUserStoryID().toString(),userStory.getTitle().getTitleUs(), userStory.getDescription().getText(), userStory.getTimeEstimate().getUsHours(), userStory.getPriority().getPriorityUs());
     }
 
 

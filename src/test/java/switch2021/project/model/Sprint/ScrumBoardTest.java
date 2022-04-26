@@ -58,7 +58,7 @@ class ScrumBoardTest {
         UserStory userstory = new UserStory(projectID, userStoryId, "As a PO, i want to test this string", priority, description, 5);
         scrumBoard.saveUserStoryToSprintBacklog(userstory);
         // Act
-        assertEquals(scrumBoard.getUserStory(userstory.getUserStoryId()), userstory);
+        assertEquals(scrumBoard.getUserStory(userstory.getUserStoryID()), userstory);
     }
 
     @Test
@@ -88,7 +88,7 @@ class ScrumBoardTest {
         scrumBoard.saveUserStoryToSprintBacklog(userstory);
         UserStory userstory2 = new UserStory(projectID, userStoryId, "As a PO, i want to test this string", priority, description, 5);
         // Act
-        assertNotSame(scrumBoard.getUserStory(userstory.getUserStoryId()), userstory2);
+        assertNotSame(scrumBoard.getUserStory(userstory.getUserStoryID()), userstory2);
     }
 
     @Test
