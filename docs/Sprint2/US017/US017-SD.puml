@@ -1,0 +1,104 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title US017 - As Authenticated User, I want to get a list of all projects I'm currently allocated to
+
+autonumber
+
+actor "Authenticated User" as actor
+participant ": GetCurrentProjectsByUserRoute" as route
+participant ": GetCurrentProjectsByUserController" as ctrl
+participant ": GetCurrentProjectsByUserService" as srv
+participant ": IRepositorySystemUser" as userStore
+participant ": IRepositoryResource" as resStore
+participant "resources : List<Resource>" as resList
+participant ": FilterResourcesService" as dsrv
+participant "currentResources : List<Resource>" as resList2
+participant "currentResourcesByUser : List<Resource>" as resList3
+participant "resourceProjects : List<ProjectId>" as resList4
+participant "res : Resource" as res
+participant "projId : ProjectId" as pId
+participant "projects : List<Project>" as projList
+participant ": IRepositoryProject" as projStore
+participant "proj : Project" as proj
+participant ": GetCurrentProjectsByUserMapper" as map
+participant "dataDto : DataDto" as dataDto
+participant "projectsDto : List<ProjectDto>" as listDto
+participant "projDto : ProjectDto" as dto
+participant "projectsJson : List<ProjectJson>" as listJson
+participant "projJson : ProjectJson" as json
+
+activate actor
+autoactivate on
+
+actor -> route : GET /users/{userId}/resources?date="today"
+note over actor, route : The expression "today" represent the actual date in the moment of the request.
+route -> ctrl : getCurrentProjectsByUser()
+ctrl -> map : data2dto(data)
+map --> dataDto**: create()
+note over map : The sequence of this method are hidden to simplify the diagram.
+map --> ctrl : dataDto
+ctrl -> srv : getCurrentProjectsByUser(dataDto)
+srv -> userStore : existById(dataDto.userId) : true
+deactivate
+srv -> resStore : findAll()
+resStore --> resList** : create()
+resStore --> srv : resources
+srv -> dsrv : getCurrentResources()
+dsrv --> resList2**: create()
+loop for all known resource in the list
+dsrv -> resList : get(i) : res
+deactivate
+dsrv -> res : isCurrent()
+res --> dsrv : result
+opt if result is true
+dsrv -> resList2 : add(res) : true
+deactivate
+end
+end
+dsrv --> srv : currentResources
+srv -> dsrv : getResourcesByUser(dataDto.userId)
+dsrv --> resList3**: create()
+loop for all known resource in the list
+dsrv -> resList2 : get(i) : res
+deactivate
+dsrv -> res : isCurrent()
+res --> dsrv : result
+opt if result is true
+dsrv -> resList3 : add(res) : true
+deactivate
+end
+end
+dsrv --> srv : currentResourcesByUser
+srv -> dsrv : getResourceProjects()
+dsrv --> resList4**: create()
+loop for all known resource in the list
+dsrv -> resList3 : get(i) : res
+deactivate
+dsrv -> res : getProjectId() : projId
+deactivate
+dsrv -> resList4 : add(projId) : true
+deactivate
+end
+dsrv --> srv : currentResourceProjectsByUser
+srv --> projList**: create()
+loop for all known projectId in the list
+srv -> projStore : findByProjectId(projId)
+projStore --> srv : proj
+srv -> projList : add(proj) : true
+deactivate
+end
+srv -> map : model2Dto()
+map --> listDto**: create()
+note over map : The sequence of this method are hidden to simplify the diagram.
+map --> srv : projectsDto
+srv --> ctrl : projectsDto
+ctrl -> map : dto2Json()
+map --> listJson**: create()
+note over map : The sequence of this method are hidden to simplify the diagram.
+map --> ctrl : projectsJson
+ctrl --> route : projectsJson
+route --> actor : Show all projects that the user are currently allocated to
+
+
+@enduml
