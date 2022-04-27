@@ -11,7 +11,9 @@ participant ":System" as System
 
 activate Administrator
 
-Administrator -> System: Get list all user accounts and their status
-System --> Administrator: Show requested list user accounts with status
+Administrator -> System: Get list of all user accounts and their status
+System -> System : GetAllUsersAndTheirStatus()
+deactivate
+System --> Administrator: Show the list of all user accounts with their status
 
 @enduml
