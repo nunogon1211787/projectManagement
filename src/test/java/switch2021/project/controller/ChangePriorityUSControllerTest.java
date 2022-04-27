@@ -2,6 +2,7 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import switch2021.project.controller.old.ChangePriorityUSController;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Resource.Resource;
@@ -178,7 +179,7 @@ public class ChangePriorityUSControllerTest {
         project.addResource(input);
         project2.addResource(input);
         LocalDate endDate = LocalDate.of(2021, 1, 2);
-        company.getProjectStore().findProjectByID("Project_2022_1").setEndDate(endDate);
+        company.getProjectStore().findById("Project_2022_1").setEndDate(endDate);
 
 
         // Act
@@ -192,7 +193,7 @@ public class ChangePriorityUSControllerTest {
         //Arrange
 
         LocalDate endDate = LocalDate.of(2021, 1, 2);
-        company.getProjectStore().findProjectByID("Project_2022_1").setEndDate(endDate);
+        company.getProjectStore().findById("Project_2022_1").setEndDate(endDate);
         project.addResource(input);
         project2.addResource(input);
         project3.addResource(input);
@@ -212,7 +213,7 @@ public class ChangePriorityUSControllerTest {
         project.addResource(input);
         project2.addResource(input);
         // Act
-        Project project3 = company.getProjectStore().findProjectByID("Project_2022_1");
+        Project project3 = company.getProjectStore().findById("Project_2022_1");
         // Assert
         assertEquals(project, project3);
     }
@@ -238,7 +239,7 @@ public class ChangePriorityUSControllerTest {
 
         project.addResource(input);
 
-        List<UserStory> usList = company.getProjectStore().findProjectByID("Project_2022_1").getUserStoryStore().getUserStoryList();
+        List<UserStory> usList = company.getProjectStore().findById("Project_2022_1").getUserStoryStore().getUserStoryList();
 
         assertEquals(usList, this.project.getUserStoryStore().getUserStoryList());
     }
@@ -247,7 +248,7 @@ public class ChangePriorityUSControllerTest {
     void getUserStoryListFromProjectSizeTest() {
         project.addResource(input);
 
-        List<UserStory> usList = company.getProjectStore().findProjectByID("Project_2022_1").getUserStoryStore().getUserStoryList();
+        List<UserStory> usList = company.getProjectStore().findById("Project_2022_1").getUserStoryStore().getUserStoryList();
 
         assertEquals(3, usList.size());
     }
@@ -256,7 +257,7 @@ public class ChangePriorityUSControllerTest {
     void getUserStoryListFromProjectOnlyActive() {
         project.addResource(input);
 
-        List<UserStory> usList = company.getProjectStore().findProjectByID("Project_2022_1").getUserStoryStore().findActiveUserStoryList();
+        List<UserStory> usList = company.getProjectStore().findById("Project_2022_1").getUserStoryStore().findActiveUserStoryList();
 
         assertEquals(3, usList.size());
     }

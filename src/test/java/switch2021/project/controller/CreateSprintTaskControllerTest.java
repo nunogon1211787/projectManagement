@@ -1,8 +1,9 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.dto.CreateTaskDTO;
-import switch2021.project.mapper.TaskMapper;
+import switch2021.project.controller.old.CreateSprintTaskController;
+import switch2021.project.dto.old.CreateTaskDTO;
+import switch2021.project.mapper.old.TaskMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Resource.Resource;

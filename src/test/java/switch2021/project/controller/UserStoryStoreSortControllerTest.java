@@ -1,27 +1,5 @@
 package switch2021.project.controller;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import switch2021.project.dto.ProjectDTO;
-import switch2021.project.dto.UserStoryDTO;
-import switch2021.project.factory.ResourceFactory;
-import switch2021.project.mapper.ProductBacklogMapper;
-import switch2021.project.mapper.ProjectsMapper;
-import switch2021.project.model.*;
-import switch2021.project.model.Project.*;
-import switch2021.project.model.Resource.Resource;
-import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.UserStory.UserStoryService;
-import switch2021.project.repositories.ProjectTeam;
-import switch2021.project.model.valueObject.*;
-
-import java.time.LocalDate;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 public class UserStoryStoreSortControllerTest {

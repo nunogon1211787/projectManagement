@@ -1,6 +1,7 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.controller.old.ActivateUserController;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.valueObject.SystemUserId;

@@ -1,15 +1,5 @@
 package switch2021.project.controller;
 
-import org.junit.jupiter.api.Test;
-import switch2021.project.dto.RegisterUserDTO;
-import switch2021.project.factory.SystemUserFactory;
-import switch2021.project.factoryInterface.SystemUserFactoryInterface;
-import switch2021.project.mapper.SystemUserMapper;
-import switch2021.project.model.Company;
-import switch2021.project.model.SystemUser.SystemUserService;
-import switch2021.project.stores.SystemUserStore;
-import switch2021.project.repositories.UserProfileRepository;
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

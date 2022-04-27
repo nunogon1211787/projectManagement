@@ -8,6 +8,7 @@ import switch2021.project.interfaces.UserStoryRepositoryInterface;
 import switch2021.project.mapper.UserStoryMapper;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.service.UserStoryService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;

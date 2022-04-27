@@ -2,6 +2,7 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.controller.old.EditProjectInfoController;
 import switch2021.project.factory.ResourceFactory;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
@@ -51,7 +52,7 @@ class EditProjectInfoControllerTest {
         //Act
 
         List<Project> expected = edit.getProjectList();
-        List<Project> actual = projectStore.findAllProjects();
+        List<Project> actual = projectStore.findAll();
 
         //Assert
         assertEquals(expected, actual);

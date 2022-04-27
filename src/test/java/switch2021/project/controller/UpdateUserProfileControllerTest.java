@@ -2,6 +2,7 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import switch2021.project.controller.old.UpdateUserProfileController;
 import switch2021.project.model.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.stores.SystemUserStore;

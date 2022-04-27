@@ -13,7 +13,6 @@ import switch2021.project.model.Task.Task;
 import switch2021.project.model.Task.TaskTypeEnum;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
@@ -51,7 +50,7 @@ class ProjectTest {
 
         proj = company.getProjectStore().createAndSaveProject("prototype", "test1", customer,
                 typo, sector, date, 7, 5000);
-        company.getProjectStore().findProjectByID(proj.getProjectCode().getCode()).setEndDate(LocalDate.now());
+        company.getProjectStore().findById(proj.getProjectCode().getCode()).setEndDate(LocalDate.now());
     }
 
     @Test
@@ -67,28 +66,28 @@ class ProjectTest {
         Description description = proj.getDescription();
         Description valueDescription = new Description("test1");
 
-        Customer customer = company.getProjectStore().findProjectByID("Project_2022_1").getCustomer();
+        Customer customer = company.getProjectStore().findById("Project_2022_1").getCustomer();
         Customer valueCustomer = company.getCustomerStore().getCustomerByName("Teste");
 
-        Typology typology = company.getProjectStore().findProjectByID("Project_2022_1").getTypology();
+        Typology typology = company.getProjectStore().findById("Project_2022_1").getTypology();
         Typology valueTypology = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
 
-        BusinessSector sector = company.getProjectStore().findProjectByID("Project_2022_1").getBusinessSector();
+        BusinessSector sector = company.getProjectStore().findById("Project_2022_1").getBusinessSector();
         BusinessSector valueSector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
         ProjectStatusEnum status = ProjectStatusEnum.PLANNED;
-        ProjectStatusEnum valueStatus = company.getProjectStore().findProjectByID("Project_2022_1").getProjectStatus();
+        ProjectStatusEnum valueStatus = company.getProjectStore().findById("Project_2022_1").getProjectStatus();
 
-        LocalDate date = company.getProjectStore().findProjectByID("Project_2022_1").getStartDate();
+        LocalDate date = company.getProjectStore().findById("Project_2022_1").getStartDate();
         LocalDate valueDate = LocalDate.of(2021, 12, 12);
 
-        LocalDate endDate = company.getProjectStore().findProjectByID("Project_2022_1").getEndDate();
+        LocalDate endDate = company.getProjectStore().findById("Project_2022_1").getEndDate();
         LocalDate valueEndDate = LocalDate.now();
 
-        int numberOfSprints = company.getProjectStore().findProjectByID("Project_2022_1").getNumberOfSprints().getNumberOfSprintsVO();
+        int numberOfSprints = company.getProjectStore().findById("Project_2022_1").getNumberOfSprints().getNumberOfSprintsVO();
         int valueNrSprint = 7;
 
-        double budget = company.getProjectStore().findProjectByID("Project_2022_1").getBudget().getBudgetVO();
+        double budget = company.getProjectStore().findById("Project_2022_1").getBudget().getBudgetVO();
         double valueBudget = 5000;
         //Result
         assertEquals(valueCode, code);
@@ -107,7 +106,7 @@ class ProjectTest {
     @Test
     @DisplayName("Project addition to list test")
     public void saveProjectTest() {
-        List<Project> test = company.getProjectStore().findAllProjects();
+        List<Project> test = company.getProjectStore().findAll();
         String code = test.get(0).getProjectCode().getCode();
         String expectedCode = "Project_2022_1";
         assertEquals(expectedCode, code);
@@ -379,7 +378,7 @@ class ProjectTest {
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
         assertEquals(7, project.getNumberOfSprints().getNumberOfSprintsVO());
-        assertEquals(project.getProjectCode(), list1.findProjectByID(project.getProjectCode().getCode()).getProjectCode());
+        assertEquals(project.getProjectCode(), list1.findById(project.getProjectCode().getCode()).getProjectCode());
         assertEquals("prototype", project.getProjectName().getText());
         assertEquals("test1234", project.getDescription().getText());
         assertEquals(sector, project.getBusinessSector());

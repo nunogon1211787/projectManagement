@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import switch2021.project.dto.OutputUsDTO;
 import switch2021.project.dto.UserStoryDTO;
-import switch2021.project.model.UserStory.UserStoryService;
+import switch2021.project.service.UserStoryService;
 
 @Controller
 @RestController

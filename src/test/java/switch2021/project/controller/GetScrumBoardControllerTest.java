@@ -1,17 +1,5 @@
 package switch2021.project.controller;
 
-import org.junit.jupiter.api.Test;
-import switch2021.project.mapper.ScrumBoardMapper;
-import switch2021.project.model.*;
-import switch2021.project.model.Project.Project;
-import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.valueObject.BusinessSector;
-import switch2021.project.model.valueObject.Customer;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.valueObject.ProjectID;
-
-import java.time.LocalDate;
-
 
 public class GetScrumBoardControllerTest {
 

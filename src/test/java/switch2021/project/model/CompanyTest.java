@@ -66,6 +66,6 @@ class CompanyTest {
         //Arrange
         Company c = new Company();
         // Assert
-        assertTrue(c.getProjectStore().findAllProjects().isEmpty());
+        assertTrue(c.getProjectStore().findAll().isEmpty());
     }
 }

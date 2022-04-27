@@ -1,6 +1,7 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.controller.old.UserStoryEffortController;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Resource.Resource;
@@ -56,7 +57,7 @@ class UserStoryEffortControllerTest {
         Company company = new Company();
         UserStoryEffortController controller = new UserStoryEffortController(company);
         //Act
-        Project project = company.getProjectStore().findProjectByID("123");
+        Project project = company.getProjectStore().findById("123");
         Project expected = controller.getProjectByCode("123");
         // Arrange
         assertEquals(project, expected);

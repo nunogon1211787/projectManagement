@@ -1,7 +1,8 @@
 package switch2021.project.mapper;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.dto.TypologyDTO;
+import switch2021.project.dto.old.TypologyDTO;
+import switch2021.project.mapper.old.TypologyMapper;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.ID_Typology;

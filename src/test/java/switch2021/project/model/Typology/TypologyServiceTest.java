@@ -2,9 +2,7 @@ package switch2021.project.model.Typology;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.repositories.TypologyRepository;
-
-import java.util.ArrayList;
-import java.util.List;
+import switch2021.project.service.TypologyService;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
