@@ -1,58 +1,125 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-hide circle
 skinparam classAttributeIconSize 0
 
-title Class Diagram Get List of Human Resources in a Project
+title US028 - As Director, I want to get a list of all human resources in a project
 
-class GetListHResourceProjectUI {
+package "System" <<Rectangle>> {
 
+package "Infrastructure" <<Rectangle>> #lightblue  {
+class "GetAllResourcesInProjectRoute" as route << Component >>
 }
 
-class GetListHResourceProjectController {
-    +getProjectTeam()
+package "Interface Adapters" <<Rectangle>> #lightgreen {
+package "Controllers" <<rectangle>>{
+class "GetAllResourcesInProjectController" as ctrl << Component >> {
++getAllResourcesInProject()
+}
+}
+package "Repositories" <<rectangle>>{
+class "ResourceStore" as rStore <<Repository>> {
+-resources : List<Resource>
++findByProject()
+}
+class "ProjectStore" as pStore <<Repository>> {
+-projects : List<Project>
++existById()
+}
+}
 }
 
-class Company {
-    +getProjectStore()
+package "Application Service" <<Rectangle>> #lightpink{
+package "App Services" <<rectangle>>{
+class "GetAllResourcesInProjectService" as srv <<Service>> {
++getAllResourcesInProject()
+}
+}
+package "IRepositories" <<rectangle>>{
+interface "IProjectRepository" as projRepo{
+existById()
+}
+interface "IResourceRepository" as resRepo{
+findByProject()
+}
+}
 }
 
-class ProjectStore {
-    +getProjectByCode(projCode)
+package "Domain" <<Rectangle>> #burlywood{
+
+package "Aggregates" <<Rectangle>>{
+package "Project" <<Rectangle>>{
+entity "Project" as proj << Root >>
 }
 
-class Project {
-    +getProjectTeam()
+package "Resource" <<Rectangle>>{
+entity "Resource" as res << Root >>
 }
 
-class ProjectTeam {
-    +getProjectTeamList()
-    +get(i)
+package "SystemUser" <<Rectangle>>{
+entity "SystemUser" as user << Root >>
+}
 }
 
-class ProjectTeamMapper {
-    +toDTO(projectTeamList)
-    +createResourceDTO(res)
+package "Value Objects" <<Rectangle>>{
+class "SystemUserId" as userId << Value Object >> {
+systemUserId : Email
+}
+class "ResourceId" as resId << Value Object >>
+class "ProjectId" as pId << Value Object >>
 }
 
-class Resource {
-    +Resource()
+package "Services" <<Rectangle>>{
+class "FilterResourcesByUsersService" as dsrv <<Service>>{
++filterByUsers()
+}
+}
 }
 
-GetListHResourceProjectUI ..> GetListHResourceProjectController
+package "DTO" <<Rectangle>>{
+class "ResourcesInProjectMapper" as map << Component >>{
++data2Dto()
++model2Dto()
++dto2Json()
+}
+class "DataDto" as dataDto << Component >>{
+projectId : String
+}
+class "ResourceDto" as dto << Component >>{
+email : String
+}
+class "ResourceJson" as json << Component >>{
+email : String
+}
+}
+}
 
-GetListHResourceProjectController ..> ProjectTeam
-GetListHResourceProjectController ..> Company
-GetListHResourceProjectController ..> ProjectStore
-GetListHResourceProjectController ..> Project
-GetListHResourceProjectController ..> ProjectTeamMapper
+res "1"*-d-"1" resId
+proj "1"*-d-"1" pId
+user "1"*-d-"1" userId
+resId "1" o- "1" pId
+resId "1" o- "1" userId
 
+projRepo <|.u. pStore
+resRepo <|.u. rStore
 
-'GetListHResourceProjectController -> Company
-Company "1" o-- "1" ProjectStore: has
-ProjectStore"1" *-- "*"Project: contains
-Project"1" *-- "1"ProjectTeam: contains
-ProjectTeamMapper "1" *-- "*"Resource: creates
-ProjectTeamMapper "1" *-- "*"ProjectTeam: creates
+rStore "1"*--"*" res
+pStore "1"*--"*" proj
+
+srv .u.> projRepo
+srv .u.> resRepo
+srv ...> dsrv
+srv .u.> map
+
+dsrv ..> res
+
+map ..> dataDto
+map .r.> dto
+map .l.> json
+
+ctrl .d.> srv
+ctrl .d.> map
+
+route .d.> ctrl
+
 @enduml

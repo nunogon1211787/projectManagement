@@ -6,58 +6,55 @@ title Sequence Diagram US 028 "As Director, I want to get a list of all human re
 autoactivate on
 autonumber
 
-actor "Director" as Director
-participant ":GetListHResourceProjectUI" as UI
-participant ":GetListHResourceProjectController" as Controller
-participant ":Company" as Company
-participant "projSt:ProjectStore" as ProjectStore
-participant "proj:Project" as Project
-participant "projTeam:ProjectTeam" as ProjectTeam
-participant "ProjectTeamMapper" as ProjectTeamMapper
-participant "projTeam:List<Resource>" as ProjectTeam2
-participant "res:Resource" as Resource
-participant "projectTeamListDTO:List<ResourcesDTO>" as ProjectTeamDTO
-participant "resDTO:ResourceDTO" as ResourceDTO
+actor "Director" as actor
+participant ":GetAllResourcesInProjectRoute" as route
+participant ":GetAllResourcesInProjectController" as ctrl
+participant ":GetAllResourcesInProjectService" as srv
+participant ":IRepositoryProject" as projrepo
+participant ":IRepositoryResource" as resrepo
+participant "resources :List<Resource>" as resList
+participant ":FilterResourcesByUsersService" as dsrv
+participant "finalResources:List<Resource>" as resList2
+participant "res :Resource" as res
+participant ":ResourceId" as resId
+participant ":ResourcesInProjectMapper" as map
+participant "dataDto :DataDto" as dataDto
+participant "resourcesDto :List<ResourceDto>" as dtoList
+participant ":ResourceDto" as dto
+participant "resourcesJson :List<ResourceJson>" as jsonList
+participant ":ResourceJson" as json
 
-activate Director
+activate actor
+autoactivate on
 
-Director -> UI: Ask to access project team of a project
-UI -> Controller: getProjectTeam()
-Controller -> Company: getProjectStore()
-Company --> Controller: projSt
-Controller -> ProjectStore: getProjectByCode(projectCode)
-ProjectStore --> Controller: proj
-Controller -> Project: getProjectTeam()
-Project --> Controller: projTeam
-Controller -> ProjectTeam: get ProjectTeamList()
-ProjectTeam --> Controller: projTeamList
-Controller -> ProjectTeamMapper : toDTO(projectTeamList)
-ProjectTeamMapper --> ProjectTeamDTO**: create()
-loop for each resource in projectTeamList
-ProjectTeamMapper -> ProjectTeam2: get(i)
-ProjectTeam2 --> ProjectTeamMapper: res
-ProjectTeamMapper -> Resource: getName()
-Resource --> ProjectTeamMapper: name
-ProjectTeamMapper -> Resource: getEmail()
-Resource --> ProjectTeamMapper: email
-ProjectTeamMapper -> Resource: getStartDate()
-Resource --> ProjectTeamMapper: startdate
-ProjectTeamMapper -> Resource: getEndDate()
-Resource --> ProjectTeamMapper: enddate
-ProjectTeamMapper -> Resource: getRole()
-Resource --> ProjectTeamMapper: role
-ProjectTeamMapper -> Resource: getCostPerHour()
-Resource --> ProjectTeamMapper: costPerHour
-ProjectTeamMapper -> Resource: getPercentageOfAllocation()
-Resource --> ProjectTeamMapper: percentageOfAllocation
-ProjectTeamMapper -> ProjectTeamMapper: resDTO = toDTO(res)
-ProjectTeamMapper --> ResourceDTO**: create()
-deactivate ProjectTeamMapper
-ProjectTeamMapper -> ProjectTeamDTO: add(resDTO)
-ProjectTeamDTO --> ProjectTeamMapper: true
-end
-ProjectTeamMapper --> Controller: projTeamListDTO
-Controller --> UI: projTeamListDTO
-UI --> Director: projTeamListDTO
+actor -> route : GET /projects/{projectId}/resources
+route -> ctrl : getAllResourcesInProject()
+ctrl -> map: data2Dto(data)
+map --> dataDto**: create()
+note over map : The sequence of this method are hidden to simplify the diagram.
+map --> ctrl: dataDto
+ctrl -> srv : getAllResourcesInProject(dataDto)
+srv -> projrepo: existById(dataDto.projectId) : true
+deactivate
+srv -> resrepo : findByProject(dataDto.projectId)
+resrepo --> resList** : create()
+note over resrepo : The sequence of this method are hidden to simplify the diagram.
+resrepo --> srv : resources
+srv -> dsrv : filterByUsers(resources)
+dsrv --> resList2** : create()
+note over dsrv : The sequence of this method are hidden to simplify the diagram.
+dsrv --> srv : finalResources
+srv -> map : model2Dto(finalResources)
+map --> dtoList** : create()
+note over map : The sequence of this method are hidden to simplify the diagram.
+map --> srv : resourcesDto
+srv --> ctrl : resourcesDto
+ctrl -> map : dto2Json(resourcesDto)
+map --> jsonList**
+note over map : The sequence of this method are hidden to simplify the diagram.
+map --> ctrl : resourcesJson
+ctrl --> route : resourcesJson
+route --> actor : Show all resources of the project
+
 
 @enduml
