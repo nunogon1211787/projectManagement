@@ -1,6 +1,6 @@
 package switch2021.project.stores;
 
-import lombok.Getter;
+import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.SystemUserRepositoryInterface;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.UserProfile.UserProfile;
@@ -9,15 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
+@Repository
 public class SystemUserStore implements SystemUserRepositoryInterface {
 
     /**
      * Class Attributes
      */
     private final List<SystemUser> systemUserList;
-
-    private SystemUserRepositoryInterface systemUserRepositoryInterface;
 
     /**
      * Constructor
@@ -49,19 +47,16 @@ public class SystemUserStore implements SystemUserRepositoryInterface {
      */
     @Override
     public boolean saveSystemUser(SystemUser user) {
-        boolean result = true;
-
-        if (!validateSystemUser(user)) {
-            result = false;
+        if (user == null || existsByEmail(user.getSystemUserId().getEmail().getEmail())) {
+            return false;
         } else {
-            this.systemUserList.add(user);
+            return this.systemUserList.add(user);
         }
-        return result;
     }
 
     @Override
     public boolean existsByEmail(String newUserEmail) {
-        for (SystemUser newUser : systemUserList) {
+        for (SystemUser newUser : this.systemUserList) {
             if (newUser.getSystemUserId().getEmail().getEmail().trim().equalsIgnoreCase(newUserEmail.trim())) {
                 return true;
             }
@@ -84,16 +79,6 @@ public class SystemUserStore implements SystemUserRepositoryInterface {
     }
 
     /**
-     * Validation Methods
-     */
-    private boolean validateSystemUser(SystemUser user) {
-        if (user == null || existsByEmail(user.getSystemUserId().getEmail().getEmail())) {
-            return false;
-        }
-        return !this.systemUserList.contains(user);
-    }
-
-    /**
      * Override
      **/
     @Override
@@ -108,14 +93,4 @@ public class SystemUserStore implements SystemUserRepositoryInterface {
     public int hashCode() {
         return Objects.hash(systemUserList);
     }
-
-/**
- * Create Method
- */
-    /*public SystemUser createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo, UserProfileId visitorId) {
-
-        SystemUserId systemUserId = new SystemUserId(email); //not sure (Nuno)
-
-        return new SystemUser(systemUserId, userName, function, password, passwordConfirmation, photo, visitorId);
-    }*/
 }

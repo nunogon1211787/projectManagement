@@ -1,0 +1,97 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'hide circle
+skinparam classAttributeIconSize 0
+
+title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
+
+class CreateUserStoryRoute {
+
+}
+
+class CreateUserStoryController {
+    +createUserStory(userStoryDto)
+}
+
+
+
+class CreateUserStoryService {
+- userStoryFactory : UserStoryFactory
++createAndSaveUserStory(userStoryDto)
+
+}
+
+class UserStoryDto {
+- userStoryID : UserStoryID
+- projectID : ProjectID
+- title : UsTitle
+- priority : UsPriority
+- description : Description
+- timeEstimate : UsHour
++ getProjectID()
++ getUserStoryID()
++ getTitle()
++ getPriority()
++ getDescription()
++ getTimeEstimate()
+'+ UserStoryDto(projectID, userStoryID, \n title, priority, description, timeEstimate))
+
+}
+
+class UserStoryFactory {
++createUserStory(projectID, userStoryID, title, \n priority, description, timeEstimate)
+
+
+}
+
+
+class UserStoryStore {
+- userStoryList : List<UserStory>
+-userStoryRepositoryInterface : UserStoryRepositoryInterface
++ save(us)
++ existsByUserStoryId(us.getUserStoryId())
+}
+
+class UserStory {
+- userStoryID : UserStoryID
+- projectID : ProjectID
+- title : UsTitle
+- priority : UsPriority
+- description : Description
+- timeEstimate : UsHour
+- parentUserStory : UserStory
+- usStartDate : LocalDate
+- usEndDate : LocalDate
+- usCancelled : LocalDate
++ UserStory(projectID, userStoryID, title, priority, \n description, timeEstimate)
+}
+
+class UserStoryMapper {
++ toDto(us)
+}
+
+class OutputUsDto {
+- userStoryID : UserStoryID
+- projectID : ProjectID
+- title : UsTitle
+- priority : UsPriority
+- description : Description
+- timeEstimate : UsHour
++create(projectID, userStoryID, title, priority, \n description, timeEstimate)
+}
+
+CreateUserStoryRoute ..> CreateUserStoryController
+
+CreateUserStoryController..>CreateUserStoryService
+CreateUserStoryService..>UserStoryDto
+CreateUserStoryService..>UserStoryFactory
+CreateUserStoryService..>UserStoryStore
+CreateUserStoryService..>UserStoryMapper
+
+
+UserStoryStore "1" -down-> "0..*" UserStory
+UserStoryMapper -down->  OutputUsDto
+
+
+@enduml

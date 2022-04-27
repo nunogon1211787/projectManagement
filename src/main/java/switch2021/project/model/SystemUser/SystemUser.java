@@ -32,7 +32,6 @@ public class SystemUser implements Entity<SystemUser> {
     public SystemUser(String userName, String email, String function, String password, String passwordConfirmation,
                       String photo, UserProfileId profileId) {
         checkProfileRules(profileId);
-        //this.systemUserId = systemUserId;
         this.systemUserId = new SystemUserId(email);
         this.userName = new Name(userName);
         this.photo = new Photo(photo);
@@ -46,12 +45,7 @@ public class SystemUser implements Entity<SystemUser> {
         this.assignedIdProfiles = new ArrayList<>();
         this.assignedIdProfiles.add(profileId);
         this.requestedProfiles = new ArrayList<>();
-        //this.email = new Email(email);
     }
-
-    /*public boolean getActivateUserStatus() { NÃO É PRECISO (NUNO)
-        return isActive;
-    }*/
 
     /**
      * getting Methods (outside of lombock)

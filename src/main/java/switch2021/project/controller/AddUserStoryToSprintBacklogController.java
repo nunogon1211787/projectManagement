@@ -3,7 +3,7 @@ package switch2021.project.controller;
 import switch2021.project.model.*;
 import switch2021.project.model.Sprint.SprintID;
 import switch2021.project.model.Sprint.SprintStore;
-import switch2021.project.model.UserStory.UserStoryId;
+import switch2021.project.model.UserStory.UserStoryID;
 import switch2021.project.model.UserStory.UserStoryStore;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
@@ -52,7 +52,7 @@ public class AddUserStoryToSprintBacklogController {
         return this.userStoryStore;
     }
 
-    public boolean addUserStoryToSprintBacklog(UserStoryId userStoryId) {
+    public boolean addUserStoryToSprintBacklog(UserStoryID userStoryId) {
         UserStory userStory = this.userStoryStore.findUserStoryById(userStoryId.toString());
         this.sprint.saveUsInScrumBoard(userStory);
         return true;

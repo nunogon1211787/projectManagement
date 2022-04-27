@@ -136,9 +136,9 @@ public class ChangePriorityUSControllerTest {
         change.getUserStoryStore();
         // Act
         UserStory expected = userStory2;
-        UserStory actual = change.getUS(userStory2.getUserStoryId());
+        UserStory actual = change.getUS(userStory2.getUserStoryID());
         // Assert
-        assertEquals(expected.getUserStoryId(), actual.getUserStoryId());
+        assertEquals(expected.getUserStoryID(), actual.getUserStoryID());
     }
 
     @Test
@@ -147,7 +147,7 @@ public class ChangePriorityUSControllerTest {
         ChangePriorityUSController change = new ChangePriorityUSController(company);
         change.getProject(project.getProjectCode().getCode());
         change.getUserStoryStore();
-        change.getUserStory(userStory.getUserStoryId());
+        change.getUserStory(userStory.getUserStoryID());
 
         // Act
         change.setPriority(4);

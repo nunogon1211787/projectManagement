@@ -8,7 +8,7 @@ import switch2021.project.utils.ValueObject;
 
 @Getter
 @EqualsAndHashCode
-public class UserStoryId implements ValueObject<UserStoryId> {
+public class UserStoryID implements ValueObject<UserStoryID> {
 
     /**
      * Attributes
@@ -19,13 +19,13 @@ public class UserStoryId implements ValueObject<UserStoryId> {
     /**
      * Constructor
      **/
-    public UserStoryId(ProjectID projectID, UsTitle usTitle) {
+    public UserStoryID(ProjectID projectID, UsTitle usTitle) {
         checkUsID(projectID,usTitle);
         this.projectID = projectID;
         this.usTitle = usTitle;
     }
 
-    public UserStoryId(String userStoryIdString) {
+    public UserStoryID(String userStoryIdString) {
         String[] values = userStoryIdString.split("_");// Project_2022_1_As a PO, want to test this string
         this.projectID = new ProjectID(Integer.parseInt(values[2]));
         this.usTitle = new UsTitle(values[3]);
@@ -52,7 +52,7 @@ public class UserStoryId implements ValueObject<UserStoryId> {
     }
 
     @Override
-    public boolean sameValueAs(UserStoryId other) {
+    public boolean sameValueAs(UserStoryID other) {
         return false;
     }
 }

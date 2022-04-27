@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
+
+autoactivate on
+autonumber
+
+actor "Product Owner" as User #lightgreen
+participant ": CreateUserStoryRoute" as System
+participant ": CreateUserStoryController" as Ctrl
+participant ": CreateUserStoryService" as appService
+participant " userStoryDto : UserStoryDto" as usDto
+participant ": UserStoryFactory" as factory
+participant "us : UserStory" as us
+participant ": UserStoryStore " as usStore
+participant ": UserStoryMapper" as usMapper
+participant "outputDto : OutputDto" as outDto
+
+
+activate User
+
+
+User -> System: Start to create a user story
+System --> User : Requests information: \n  (projectID, userStoryID, title, \n  priority, description, timeEstimate)
+User -> System: Enter requested information
+System -> Ctrl: createUserStory(userStoryDto)
+Ctrl -> appService: createUserStory(userStoryDto)
+appService -> usDto: projectID = getProjectID()
+deactivate
+appService -> usDto: userStoryID = getUserStoryID()
+deactivate
+appService -> usDto: title = title()
+deactivate
+appService -> usDto: priority = getPriority()
+deactivate
+appService -> usDto: description = getDescription()
+deactivate
+appService -> usDto: timeEstimate = getTimeEstimate()
+deactivate
+appService -> factory:  <back:yellow> createUserStory(projectID, userStoryID, title, priority, description, timeEstimate)</back>
+factory -> us **: create()
+factory --> appService: us
+appService-> usStore: save(us)
+usStore-> usStore: existsByUserStoryId(us.getUserStoryId())
+deactivate
+usStore-> usStore: add(us)
+deactivate
+usStore --> appService : true
+
+appService-> usMapper : toDto(us)
+usMapper-> outDto **:create()
+outDto-->usMapper: outputDTO
+usMapper --> appService: outputDTO
+appService --> Ctrl: outputDTO
+Ctrl --> System: outputDTO
+System--> User: Informs that user story was created
+
+@enduml
+

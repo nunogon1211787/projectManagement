@@ -5,7 +5,7 @@ import lombok.Setter;
 import switch2021.project.factory.ProjectTeamFactory;
 import switch2021.project.factory.ResourceFactory;
 import switch2021.project.factory.SprintFactory;
-import switch2021.project.factory.UserStoryFactory;
+import switch2021.project.factory.IUserStoryFactory;
 import switch2021.project.factoryInterface.ResourceFactoryInterface;
 import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.Sprint.Sprint;
@@ -37,7 +37,7 @@ public class Project implements Entity {
     private Typology typology;
     private ProjectStatusEnum projectStatus;
     private UserStoryStore userStoryStore;
-    private UserStoryFactory userStoryFactory;
+    private IUserStoryFactory userStoryFactory;
     private ProjectTeam projectTeam;
     private ProjectTeamFactory projectTeamFactory;
     private ResourceFactoryInterface resFac = new ResourceFactory();

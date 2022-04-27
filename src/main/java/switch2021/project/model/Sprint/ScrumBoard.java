@@ -2,8 +2,8 @@ package switch2021.project.model.Sprint;
 
 import lombok.Getter;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.UserStory.UserStoryId;
-import switch2021.project.stores.UserStoryStatusStore;
+import switch2021.project.model.UserStory.UserStoryID;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -41,7 +41,7 @@ class ScrumBoard {
         return true;
     }
 
-    protected UserStory getUserStory(UserStoryId idUs){
+    protected UserStory getUserStory(UserStoryID idUs){
         UserStory us = null;
         for (UserStory i : this.userStoryList) {
             if (i.hasCode(idUs)) {

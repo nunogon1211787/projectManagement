@@ -1,5 +1,7 @@
 package switch2021.project.controller;
 
+import switch2021.project.dto.RegisterUserDTO;
+import switch2021.project.dto.OutputUserDTO;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser.SystemUserService;
 
@@ -11,7 +13,6 @@ public class RegisterUserController {
     private final Company company;
     private final SystemUserService systemUserService;
 
-
     /**
      * Constructor to test (without SINGLETON)
      **/
@@ -20,21 +21,7 @@ public class RegisterUserController {
         this.systemUserService = systemUserService;
     }
 
-    /**
-     * Methods
-     **/
-    public boolean registerUser(String userName, String email, String function, String password, String passwordConfirmation, String photo) {
-        return this.systemUserService.createAndSaveSystemUser(userName, email, function, password, passwordConfirmation, photo);
+    public OutputUserDTO registerUser(RegisterUserDTO dto) {
+        return systemUserService.createAndSaveSystemUser(dto);
     }
-/*
-    public boolean createSystemUser(String userName, String email, String function, String password, String passwordConfirmation, String photo) {
-        UserProfileStore profileStore = company.getUserProfileStore();
-        UserProfile visitorProfile = profileStore.getUserProfile("Visitor");
-
-        SystemUserStore usersStore = company.getSystemUserStore();
-
-        SystemUser user = usersStore.createSystemUser(userName, email, function, password, passwordConfirmation, photo, visitorProfile);
-
-        return usersStore.saveSystemUser(user);
-    }*/
 }
