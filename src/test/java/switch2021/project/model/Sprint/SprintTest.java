@@ -36,7 +36,8 @@ public class SprintTest {
         //Arrange
         SprintStore sprintList = new SprintStore(new SprintFactory());
         //Act
-        Sprint sprint = sprintList.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint = sprintList.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        sprintList.saveSprint(sprint);
         String x = sprint.getSprintID().toString();
         //Assert
         assertNotEquals("Project_2022_1_Sprint 2", x);
@@ -48,9 +49,10 @@ public class SprintTest {
         //Arrange
         SprintStore sprintStore = new SprintStore(new SprintFactory());
         //Act
-        sprintStore.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
-        Sprint sprint = new Sprint("Project_2022_1", "Project_2022_1_Sprint 2", "Name of the Sprint");
-        String name = sprint.getSprintName().getText();
+        Sprint sprint1 = sprintStore.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        sprintStore.saveSprint(sprint1);
+        Sprint sprint2 = new Sprint("Project_2022_1", "Project_2022_1_Sprint 2", "Name of the Sprint");
+        String name = sprint2.getSprintName().getText();
         //Assert
         assertNotEquals("Sprint Name", name);
     }
@@ -61,8 +63,9 @@ public class SprintTest {
         //Arrange
         SprintStore sprintStore = new SprintStore(new SprintFactory());
         //Act
-        Sprint sprint1 = sprintStore.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint1 = sprintStore.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
         String x = sprint1.getSprintName().getText();
+        sprintStore.saveSprint(sprint1);
         Sprint sprint2 = new Sprint("Project_2022_1", "Project_2022_1_Sprint 2", "Name of the Sprint");
         String name = sprint2.getSprintName().getText();
         //Assert
@@ -158,8 +161,10 @@ public class SprintTest {
     public void validateStartDate() {
         //Arrange
         SprintStore sprintList = new SprintStore(new SprintFactory());
-        Sprint sprint1 = sprintList.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "New Sprint", 2);
-        Sprint sprint2 = sprintList.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 2", "New New Sprint", 2);
+        Sprint sprint1 = sprintList.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "New Sprint");
+        sprintList.saveSprint(sprint1);
+        Sprint sprint2 = sprintList.createSprint("Project_2022_1", "Project_2022_1_Sprint 2", "New New Sprint");
+        sprintList.saveSprint(sprint2);
         sprint1.setStartDate(LocalDate.of(2022, 4, 1));
         sprint2.setStartDate(LocalDate.of(2022, 4, 1));
         sprint1.setEndDate(LocalDate.of(2022, 5, 1));

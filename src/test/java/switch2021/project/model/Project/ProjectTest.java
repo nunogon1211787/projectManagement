@@ -287,9 +287,11 @@ class ProjectTest {
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTest() {
         SprintStore sprintList1 = new SprintStore(new SprintFactory());
-        sprintList1.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint x = sprintList1.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        sprintList1.saveSprint(x);
         SprintStore projectSprintList = new SprintStore(new SprintFactory());
-        projectSprintList.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint y = projectSprintList.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        projectSprintList.saveSprint(y);
         assertEquals(sprintList1.findSprints().size(), projectSprintList.findSprints().size());
     }
 
@@ -298,10 +300,13 @@ class ProjectTest {
     void getSprintStoreTestFail() {
         //Arrange
         SprintStore sprintList1 = new SprintStore(new SprintFactory());
-        sprintList1.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Effort View", 2);
-        sprintList1.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 2", "Sprint Effort View View", 2);
+        Sprint x = sprintList1.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Effort View");
+        Sprint y = sprintList1.createSprint("Project_2022_1", "Project_2022_1_Sprint 2", "Sprint Effort View View");
+        sprintList1.saveSprint(x);
+        sprintList1.saveSprint(y);
         SprintStore projectSprintList = new SprintStore(new SprintFactory());
-        projectSprintList.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 2", "Sprint Effort View 1", 2);
+        Sprint z = projectSprintList.createSprint("Project_2022_1", "Project_2022_1_Sprint 2", "Sprint Effort View 1");
+        projectSprintList.saveSprint(z);
         //Assert
         assertNotEquals(sprintList1.findSprints().size(), projectSprintList.findSprints().size());
     }
@@ -318,8 +323,10 @@ class ProjectTest {
         String taskDescription = "must be at least 20 characters";
         TaskTypeEnum taskType = TaskTypeEnum.Design;
         SprintStore sprintStore = new SprintStore(new SprintFactory());
-        Sprint sprint1 = sprintStore.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        Sprint sprint1 = sprintStore.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        sprintStore.saveSprint(sprint1);
         sprint1.setStartDate(LocalDate.of(2022, 1, 1));
+        sprint1.setEndDate(LocalDate.of(2022, 1, 15));
         SprintID id = new SprintID("Project_2022_1_Sprint 1");
         boolean x = sprint1.isCurrentSprint();
         Task taskTest = sprint1.getTaskStore().createTask("test", taskDescription, 8.0, taskType, resource);

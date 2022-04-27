@@ -153,8 +153,10 @@ public class AssignProductOwnerControllerTest {
             Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
             proj1.setSprintDuration(new SprintDuration(14));
-            proj1.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint Current", "Sprint Current", 2);
-            proj1.getSprintList().createAndSaveSprint("Project_2022_1","Project_2022_1_Sprint Next", "Sprint Next", 2);
+            Sprint sprint1 = proj1.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint Current", "Sprint Current");
+            proj1.getSprintList().saveSprint(sprint1);
+            Sprint sprint2 = proj1.getSprintList().createSprint("Project_2022_1","Project_2022_1_Sprint Next", "Sprint Next");
+            proj1.getSprintList().saveSprint(sprint2);
             //Act
             controller.getProject("project_2022_1");
             controller.getResource("manueljose");
@@ -178,8 +180,10 @@ public class AssignProductOwnerControllerTest {
             Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
             proj1.setSprintDuration(new SprintDuration(14));
-            proj1.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint Current", "Sprint Name Current", 2);
-            proj1.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint Next", "Sprint Name Next", 2);
+            Sprint sprint1 = proj1.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint Current", "Sprint Name Current");
+            proj1.getSprintList().saveSprint(sprint1);
+            Sprint sprint2 = proj1.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint Next", "Sprint Name Next");
+            proj1.getSprintList().saveSprint(sprint2);
             //Act
             controller.getProject("project_2022_1");
             controller.getResource("manueljose");

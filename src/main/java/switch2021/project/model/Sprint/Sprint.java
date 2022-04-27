@@ -49,7 +49,6 @@ public class Sprint {
         this.endDate = LocalDate.now().plusDays(sprintDurationInDays -1L);
     }
 
-
     public boolean hasSprintID(String sprID) {
          return Objects.equals(this.sprintID.toString(), sprID);}
 
@@ -65,8 +64,8 @@ public class Sprint {
         if(this.endDate == null) {
             throw new NullPointerException();
         }
-        return ((this.startDate.isBefore(LocalDate.now()) || this.startDate.equals(LocalDate.now()))
-                && (this.endDate.isAfter(LocalDate.now()) || this.endDate.equals(LocalDate.now())));
+        return ((this.startDate.isBefore(endDate) || this.startDate.equals(endDate))
+                && (this.endDate.isAfter(startDate) || this.endDate.equals(startDate)));
     }
 
     /**

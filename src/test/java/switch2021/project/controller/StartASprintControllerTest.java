@@ -6,6 +6,7 @@ import switch2021.project.dto.StartASprintDTO;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Resource.Resource;
+import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
@@ -64,7 +65,8 @@ public class StartASprintControllerTest {
         proj1.setSprintDuration(new SprintDuration(14));
         //Create a Sprint
         proj1.setSprintDuration(new SprintDuration(14));
-        proj1.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "SprintName", 2);
+        Sprint sprint = proj1.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "SprintName");
+        proj1.getSprintList().saveSprint(sprint);
         //Act
         StartASprintDTO sprintDTO = new StartASprintDTO("Project_2022_1", "Project_2022_1_Sprint 1",
                 LocalDate.of(2022, 1, 1));
@@ -119,7 +121,8 @@ public class StartASprintControllerTest {
         proj1.getProjectTeam().saveResource(joana4R);
         //Create a Sprint
         proj1.setSprintDuration(new SprintDuration(14));
-        proj1.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "SprintName", 2);
+        Sprint sprint = proj1.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "SprintName");
+        proj1.getSprintList().saveSprint(sprint);
         //Act
         StartASprintDTO sprintDTO = new StartASprintDTO("Project_2022_1", "Project_2022_1_Sprint 1",
                 LocalDate.of(2023, 1, 1));

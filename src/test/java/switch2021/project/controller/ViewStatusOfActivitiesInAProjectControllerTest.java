@@ -33,8 +33,8 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
 
         company.getProjectStore().getProjectList().add(project2);
 
-        Sprint sprint1 = project2.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
-
+        Sprint sprint1 = project2.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        project2.getSprintList().saveSprint(sprint1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());
         LocalDate startDateMb = LocalDate.of(2022, 1, 1);
