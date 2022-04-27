@@ -1,13 +1,10 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.controller.old.ProfileRequestController;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.valueObject.Request;
 import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.model.valueObject.SystemUserId;
-
-import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 

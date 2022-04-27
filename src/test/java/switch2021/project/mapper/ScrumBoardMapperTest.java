@@ -2,9 +2,9 @@ package switch2021.project.mapper;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.dto.UserStoryStatusDTO;
+import switch2021.project.dto.old.UserStoryStatusDTO;
+import switch2021.project.mapper.old.ScrumBoardMapper;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.valueObject.ProjectID;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class ScrumBoardMapperTest {
         assertEquals(5, dto.getPriority().getPriorityUs());
         assertEquals(dto.getTimeEstimate().getUsHours(), userStory.getTimeEstimate().getUsHours());
         assertEquals(5, dto.getPriority().getPriorityUs());
-        assertEquals(dto.getUserStoryId().toString(), userStory.getUserStoryId().toString());
+        assertEquals(dto.getUserStoryId().toString(), userStory.getUserStoryID().toString());
         assertEquals("Project_2022_1_As a PO, i want to test this string", dto.getUserStoryId().toString());
         assertEquals(projectID,userStory.getProjectID().getCode());
     }

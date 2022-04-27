@@ -2,14 +2,13 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.controller.old.RefineUserStoryController;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.BusinessSector;
 import switch2021.project.model.valueObject.Customer;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.valueObject.ProjectID;
-import switch2021.project.model.valueObject.UserStoryStatus;
 
 import java.time.LocalDate;
 
@@ -50,7 +49,7 @@ public class RefineUserStoryControllerTest {
         refineUserStoryController.getProject("Project_2022_1");
         refineUserStoryController.getUserStoryStore();
         //TODO CDC ver ID US refined
-        refineUserStoryController.getUserStory(userStory2.getUserStoryId());
+        refineUserStoryController.getUserStory(userStory2.getUserStoryID());
         refineUserStoryController.createUserStory("newUserStoryCreated", 3);
         refineUserStoryController.createUserStory("newUserStoryCreated2", 5);
 

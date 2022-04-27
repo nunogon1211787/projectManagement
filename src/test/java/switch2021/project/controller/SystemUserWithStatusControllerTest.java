@@ -2,12 +2,12 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.dto.SystemUserWithStatusDto;
-import switch2021.project.mapper.SystemUserWithStatusMapper;
+import switch2021.project.controller.old.SystemUserWithStatusController;
+import switch2021.project.dto.old.SystemUserWithStatusDto;
+import switch2021.project.mapper.old.SystemUserWithStatusMapper;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.model.valueObject.SystemUserId;
 
 import java.util.List;
 

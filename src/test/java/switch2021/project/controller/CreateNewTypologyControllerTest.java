@@ -1,6 +1,7 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.controller.old.CreateNewTypologyController;
 import switch2021.project.model.Company;
 import static org.junit.jupiter.api.Assertions.*;
 

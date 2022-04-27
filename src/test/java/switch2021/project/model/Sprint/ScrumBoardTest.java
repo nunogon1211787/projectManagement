@@ -4,10 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserStory.UserStoryId;
-import switch2021.project.model.valueObject.ProjectID;
-
-import java.time.LocalDate;
+import switch2021.project.model.UserStory.UserStoryID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -61,7 +58,7 @@ class ScrumBoardTest {
         UserStory userstory = new UserStory(projectID, userStoryId, "As a PO, i want to test this string", priority, description, 5);
         scrumBoard.saveUserStoryToSprintBacklog(userstory);
         // Act
-        assertEquals(scrumBoard.getUserStory(userstory.getUserStoryId()), userstory);
+        assertEquals(scrumBoard.getUserStory(userstory.getUserStoryID()), userstory);
     }
 
     @Test
@@ -70,11 +67,11 @@ class ScrumBoardTest {
         ScrumBoard scrumBoard = new ScrumBoard();
 
         UserStory newUserStory = mock(UserStory.class);
-        when(newUserStory.hasCode(new UserStoryId("Project_2022_1_As a PO, i want to test this string"))).thenReturn(true);
+        when(newUserStory.hasCode(new UserStoryID("Project_2022_1_As a PO, i want to test this string"))).thenReturn(true);
 
         scrumBoard.saveUserStoryToSprintBacklog(newUserStory);
         //Act
-        UserStory test = scrumBoard.getUserStory(new UserStoryId("Project_2022_1_As a PO, i want to test this string"));
+        UserStory test = scrumBoard.getUserStory(new UserStoryID("Project_2022_1_As a PO, i want to test this string"));
         //Assert
         assertEquals(newUserStory, test);
     }
@@ -91,7 +88,7 @@ class ScrumBoardTest {
         scrumBoard.saveUserStoryToSprintBacklog(userstory);
         UserStory userstory2 = new UserStory(projectID, userStoryId, "As a PO, i want to test this string", priority, description, 5);
         // Act
-        assertNotSame(scrumBoard.getUserStory(userstory.getUserStoryId()), userstory2);
+        assertNotSame(scrumBoard.getUserStory(userstory.getUserStoryID()), userstory2);
     }
 
     @Test

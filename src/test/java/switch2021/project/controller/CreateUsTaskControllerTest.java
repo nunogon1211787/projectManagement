@@ -1,26 +1,5 @@
 package switch2021.project.controller;
 
-import org.junit.jupiter.api.Test;
-import switch2021.project.dto.CreateTaskDTO;
-import switch2021.project.mapper.TaskMapper;
-import switch2021.project.model.*;
-import switch2021.project.model.Project.*;
-import switch2021.project.model.Resource.Resource;
-import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Task.Task;
-import switch2021.project.model.Task.TaskTypeEnum;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.valueObject.*;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 //TODO ver task deixou de haver store de task na US
 class CreateUsTaskControllerTest {
 

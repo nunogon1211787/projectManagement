@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.Task.Task;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.UserStory.UserStoryId;
+import switch2021.project.model.UserStory.UserStoryID;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.Task.TaskStore;
 import switch2021.project.model.valueObject.ProjectID;
@@ -87,7 +87,7 @@ public class Sprint {
         return this.scrumBoard.getUserStoryList();
     }
 
-    public UserStory getUsByIdFromScrumBoard(UserStoryId id){
+    public UserStory getUsByIdFromScrumBoard(UserStoryID id){
         return this.scrumBoard.getUserStory(id);
     }
 

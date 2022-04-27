@@ -50,7 +50,7 @@ class ProjectTest {
 
         proj = company.getProjectStore().createAndSaveProject("prototype", "test1", customer,
                 typo, sector, date, 7, 5000);
-        company.getProjectStore().findProjectByID(proj.getProjectCode().getCode()).setEndDate(LocalDate.now());
+        company.getProjectStore().findById(proj.getProjectCode().getCode()).setEndDate(LocalDate.now());
     }
 
     @Test
@@ -66,28 +66,28 @@ class ProjectTest {
         Description description = proj.getDescription();
         Description valueDescription = new Description("test1");
 
-        Customer customer = company.getProjectStore().findProjectByID("Project_2022_1").getCustomer();
+        Customer customer = company.getProjectStore().findById("Project_2022_1").getCustomer();
         Customer valueCustomer = company.getCustomerStore().getCustomerByName("Teste");
 
-        Typology typology = company.getProjectStore().findProjectByID("Project_2022_1").getTypology();
+        Typology typology = company.getProjectStore().findById("Project_2022_1").getTypology();
         Typology valueTypology = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
 
-        BusinessSector sector = company.getProjectStore().findProjectByID("Project_2022_1").getBusinessSector();
+        BusinessSector sector = company.getProjectStore().findById("Project_2022_1").getBusinessSector();
         BusinessSector valueSector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
         ProjectStatusEnum status = ProjectStatusEnum.PLANNED;
-        ProjectStatusEnum valueStatus = company.getProjectStore().findProjectByID("Project_2022_1").getProjectStatus();
+        ProjectStatusEnum valueStatus = company.getProjectStore().findById("Project_2022_1").getProjectStatus();
 
-        LocalDate date = company.getProjectStore().findProjectByID("Project_2022_1").getStartDate();
+        LocalDate date = company.getProjectStore().findById("Project_2022_1").getStartDate();
         LocalDate valueDate = LocalDate.of(2021, 12, 12);
 
-        LocalDate endDate = company.getProjectStore().findProjectByID("Project_2022_1").getEndDate();
+        LocalDate endDate = company.getProjectStore().findById("Project_2022_1").getEndDate();
         LocalDate valueEndDate = LocalDate.now();
 
-        int numberOfSprints = company.getProjectStore().findProjectByID("Project_2022_1").getNumberOfSprints().getNumberOfSprintsVO();
+        int numberOfSprints = company.getProjectStore().findById("Project_2022_1").getNumberOfSprints().getNumberOfSprintsVO();
         int valueNrSprint = 7;
 
-        double budget = company.getProjectStore().findProjectByID("Project_2022_1").getBudget().getBudgetVO();
+        double budget = company.getProjectStore().findById("Project_2022_1").getBudget().getBudgetVO();
         double valueBudget = 5000;
         //Result
         assertEquals(valueCode, code);
@@ -106,7 +106,7 @@ class ProjectTest {
     @Test
     @DisplayName("Project addition to list test")
     public void saveProjectTest() {
-        List<Project> test = company.getProjectStore().findAllProjects();
+        List<Project> test = company.getProjectStore().findAll();
         String code = test.get(0).getProjectCode().getCode();
         String expectedCode = "Project_2022_1";
         assertEquals(expectedCode, code);
@@ -254,19 +254,6 @@ class ProjectTest {
         currentProject.getProjectTeam().saveResource(manuelmartins);
     }
 
-    @Test
-    @DisplayName("validate that list have results (not null) and check list size are correct")
-    public void getUserStoryStoreWithResults() {
-        // Arrange
-        proj1.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, "Project_2022_1_As a PO, i want to test this string", "As a PO, i want to test this string", 1, "making test", 5);
-        proj1.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, "Project_2022_2_As a PO, i want to test this string", "As a TO, i want to test this string", 1, "making other test", 5);
-        proj1.getUserStoryStore().createAndSaveUserStory("Project_" + LocalDate.now().getYear() + "_" + 1, "Project_2022_3_As a PO, i want to test this string", "As a SO, i want to test this string", 1, "making test 4", 5);
-        // Act
-        //Assert
-        assertNotNull(proj1.getUserStoryStore());
-        assertEquals(3, proj1.getUserStoryStore().getUserStoryList().size());
-
-    }
 
     @Test
     public void hasCurrentProjectTeamMemberEmailSuccess() {
@@ -398,7 +385,7 @@ class ProjectTest {
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
         assertEquals(7, project.getNumberOfSprints().getNumberOfSprintsVO());
-        assertEquals(project.getProjectCode(), list1.findProjectByID(project.getProjectCode().getCode()).getProjectCode());
+        assertEquals(project.getProjectCode(), list1.findById(project.getProjectCode().getCode()).getProjectCode());
         assertEquals("prototype", project.getProjectName().getText());
         assertEquals("test1234", project.getDescription().getText());
         assertEquals(sector, project.getBusinessSector());

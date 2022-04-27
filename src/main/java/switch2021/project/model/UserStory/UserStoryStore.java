@@ -1,65 +1,26 @@
 package switch2021.project.model.UserStory;
 
 import lombok.*;
-import switch2021.project.dto.UserStoryDto;
-import switch2021.project.factory.UserStoryFactory;
+import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.UserStoryRepositoryInterface;
-import switch2021.project.mapper.UserStoryMapper;
-import switch2021.project.model.valueObject.ProjectID;
 
 import java.util.*;
 
 @Getter
 @Setter
-
+@Repository
 public class UserStoryStore implements UserStoryRepositoryInterface {
 
     /**
      * UserStory Store Attributes (backlog). Contains a UserStory list.
      **/
     private List<UserStory> userStoryList;
-    private UserStoryFactory userStoryFactory;
-    private UserStoryRepositoryInterface userStoryRepositoryInterface;
-
 
     /**
      * Constructor
      **/
-    public UserStoryStore(UserStoryFactory userStoryFactory) {
-        this.userStoryList = new ArrayList<>();
-
-        this.userStoryFactory = userStoryFactory == null ? new UserStoryFactory() : userStoryFactory;
-    }
-
     public UserStoryStore() {
-        this(null);
-    }
-
-
-    /**
-     * Create and save a User Story
-     *
-     * @param userStoryId @param title @param priority @param description @param estimateEffort
-     */
-    public void createAndSaveUserStory(String projectId, String userStoryId, String title, int priority, String description, int estimateEffort) {
-
-        UserStory newUserStory = this.userStoryFactory.createUserStory(projectId, userStoryId, title, priority, description, estimateEffort);
-        existsByUserStoryId(userStoryId);
-
-        this.userStoryList.add(newUserStory);
-    }
-
-
-    /**
-     * Create user story using DTO
-     *
-     * @param createUserStoryDto @param mapperUS
-     */
-
-    public void createAndSaveUserStoryWithDto(UserStoryDto createUserStoryDto, UserStoryMapper mapperUS){
-        UserStory userStory = mapperUS.toModel(createUserStoryDto);
-        existsByUserStoryId(userStory.getUserStoryId().toString());
-        this.userStoryList.add(userStory);
+        this.userStoryList = new ArrayList<>();
     }
 
     /**
@@ -69,6 +30,7 @@ public class UserStoryStore implements UserStoryRepositoryInterface {
      * @return user story, else {exception}
      */
 
+    //TODO -----> método fica aqui? CDC
     public UserStory refineUserStory(UserStory userStoryParent, int priority, String description) {
         UserStory userStory = new UserStory(userStoryParent, priority, description);
         validateUserStory(userStory);
@@ -81,12 +43,26 @@ public class UserStoryStore implements UserStoryRepositoryInterface {
      * <p>
      * return exception if case
      */
+
+    //TODO -----> método fica aqui? CDC
     private void validateUserStory(UserStory newUserStory) {
         for (UserStory us : userStoryList) {
             if (us.getDescription().getText().trim().equalsIgnoreCase(newUserStory.getDescription().getText())) {
                 throw new IllegalArgumentException("Repeated user story, inserted same title");
             }
         }
+    }
+
+    /**
+     * Save User Story
+     *
+     * @param newUserStory
+     * @return boolean result
+     */
+    @Override
+    public boolean save(UserStory newUserStory) {
+        existsByUserStoryId(newUserStory.getUserStoryID().toString());
+        return this.userStoryList.add(newUserStory);
     }
 
     /**
@@ -103,7 +79,8 @@ public class UserStoryStore implements UserStoryRepositoryInterface {
         List<UserStory> noPriorityStories = new LinkedList<>();
         List<UserStory> closeAndDoneUserStories = new LinkedList<>();
 
-        userStoryList.sort(Comparator.comparing(userStory -> userStory.getPriority().getPriorityUs(), Comparator.naturalOrder()));
+        userStoryList.sort(Comparator.comparing(userStory -> userStory.getPriority().getPriorityUs(),
+                Comparator.naturalOrder()));
 
         for (UserStory userStory : userStoryList) {
             if (userStory.getUsCancelled() == null && userStory.getUsEndDate() == null &&
@@ -147,8 +124,8 @@ public class UserStoryStore implements UserStoryRepositoryInterface {
 
     @Override
     public UserStory findUserStoryById(String userStoryId) {
-        for (UserStory us : userStoryList){
-            if (us.getUserStoryId().toString().equalsIgnoreCase(userStoryId)){
+        for (UserStory us : userStoryList) {
+            if (us.getUserStoryID().toString().equalsIgnoreCase(userStoryId)) {
                 return us;
             }
         }
@@ -166,7 +143,7 @@ public class UserStoryStore implements UserStoryRepositoryInterface {
     public List<UserStory> findAllUserStoryByProjectID(String projectID) {
         List<UserStory> allUserStoriesInAProject = new ArrayList<>();
         for (UserStory us : userStoryList) {
-            if (us.getUserStoryId().getProjectID().getCode().trim().equalsIgnoreCase(projectID)){
+            if (us.getUserStoryID().getProjectID().getCode().trim().equalsIgnoreCase(projectID)) {
                 allUserStoriesInAProject.add(us);
             }
         }
@@ -193,9 +170,22 @@ public class UserStoryStore implements UserStoryRepositoryInterface {
     @Override
     public void existsByUserStoryId(String userStoryId) {
         for (UserStory us : userStoryList) {
-            if (us.getUserStoryId().toString().equalsIgnoreCase(userStoryId.trim())) {
+            if (us.getUserStoryID().toString().equalsIgnoreCase(userStoryId.trim())) {
                 throw new IllegalArgumentException("Repeated user story inserted, same code project and title.");
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserStoryStore)) return false;
+        UserStoryStore that = (UserStoryStore) o;
+        return Objects.equals(userStoryList, that.userStoryList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userStoryList);
     }
 }

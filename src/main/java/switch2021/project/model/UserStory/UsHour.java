@@ -12,13 +12,13 @@ public class UsHour implements ValueObject<UsHour> {
     /**
      * Attributes
      **/
-    private final int usHours;
+    private final double usHours;
     private static final int MINHOUR = 0;
 
     /**
      * Constructor
      **/
-    public UsHour(int usHours) {
+    public UsHour(double usHours) {
         checkWorkTimeRules(usHours);
         this.usHours = usHours;
     }
@@ -26,7 +26,7 @@ public class UsHour implements ValueObject<UsHour> {
     /**
      * Methods
      **/
-    private void checkWorkTimeRules(int usHours) {
+    private void checkWorkTimeRules(double usHours) {
         if (usHours < MINHOUR)
             throw new IllegalArgumentException("Not valid work time values." + "Hour interval: [" + MINHOUR + "]");
     }

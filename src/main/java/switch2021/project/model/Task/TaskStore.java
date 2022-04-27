@@ -1,8 +1,8 @@
 package switch2021.project.model.Task;
 
 import lombok.Getter;
-import switch2021.project.mapper.TaskMapper;
-import switch2021.project.dto.CreateTaskDTO;
+import switch2021.project.mapper.old.TaskMapper;
+import switch2021.project.dto.old.CreateTaskDTO;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Resource.Resource;
 
