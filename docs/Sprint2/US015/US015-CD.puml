@@ -1,63 +1,88 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-hide circle
+title US015 - As Director, I want to get a list of all projects
+
 skinparam classAttributeIconSize 0
 
-title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
+package "System" <<Rectangle>> {
 
-class CreateUserStoryUI {
-
+package "Infrastructure" <<Rectangle>> #lightblue  {
+class "GetAllProjectsRoute" as route << Component >>
 }
 
-class CreateUserStoryController {
-    +getProjectListByUserEmail(String email)
-    +getProjectByCode(String code)
-    +createUserStory(status, priority, description)
+package "Interface Adapters" <<Rectangle>> #lightgreen {
+package "Controllers" <<rectangle>>{
+class "GetAllProjectsController" as ctrl << Component >> {
++getAllProjects()
+}
+}
+package "Repositories" <<rectangle>>{
+class "ProjectStore" as store << Component >> {
+-projects : List<Project>
++findAll()
+}
+}
 }
 
-class Company {
-    +getProjectStore()
+package "Application Service" <<Rectangle>> #lightpink{
+package "App Services" <<rectangle>>{
+class "GetAllProjectsService" as srv << Component >> {
++getAllProjects()
+}
+}
+package "IRepositories" <<rectangle>>{
+interface "IProjectRepository" as repo{
+findAll()
+}
+}
 }
 
-class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
+package "Domain" <<Rectangle>> #burlywood{
+package "Aggregates" <<rectangle>>{
+package "Project" <<Rectangle>>{
+entity "Project" as proj << Root >> {
+-projectName : Description
+-projectStatus : ProjectStatus
+}
+}
+}
+package "Value Object" <<rectangle>>{
+class "ProjectId" as pId << Value Object >> {
+projectId : ProjectCode
+}
+}
 }
 
-class Project {
--code : String
--productBacklog : ProductBacklog
-+getUserStoryStore()
+package "DTO" <<rectangle>>{
+class "ProjectsMapper" as map <<Component>> {
++ model2Dto()
++ dto2Json()
+}
+class "ProjectDTO" as dto <<Component>>{
++ projectCode : String
++ projectName : String
++ projectStatus : String
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+createUserStory(status, priority, description)
-+isValideUserStory(status, priority, description)
-+saveUserStory(us)
-+validateUserStory(us)
+class "ProjectJson" as json <<Component>>{
++ projectCode : String
++ projectName : String
++ projectStatus : String
+}
+}
 }
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
-+UserStory(status, priority,description)
-}
-
-CreateUserStoryUI ..> CreateUserStoryController
-
-CreateUserStoryController ..> Company
-CreateUserStoryController ..> ProjectStore
-CreateUserStoryController ..> Project
-CreateUserStoryController ..> ProductBacklog
-
-Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+route .d.> ctrl
+ctrl .d..> srv
+srv .r.> repo
+repo <|.. store
+store "1"*----"*" proj
+proj "1"*-l-"1" pId
+ctrl .d.> map
+srv .u.> map
+map .r.> dto
+map .l.> json
+map ..> proj
 
 @enduml
