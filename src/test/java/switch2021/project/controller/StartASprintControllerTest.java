@@ -6,7 +6,7 @@ import switch2021.project.controller.old.StartASprintController;
 import switch2021.project.dto.old.StartASprintDTO;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Resource.Resource;
+import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
