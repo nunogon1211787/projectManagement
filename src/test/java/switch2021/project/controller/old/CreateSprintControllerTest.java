@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
-import switch2021.project.model.Resource.Resource;
+//import switch2021.project.model.Resource.Resource;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CreateSprintControllerTest {
 
-    private ProjectStore projectStore;
+    //private ProjectStore projectStore;
 
 //    @Test
 //    @DisplayName("To search the list of projects that the PM is current in")
