@@ -1,12 +1,9 @@
 package switch2021.project.stores;
 
-import switch2021.project.interfaces.ResourceRepositoryInterface;
-import switch2021.project.model.Resource.Resource;
-import switch2021.project.model.valueObject.SystemUserId;
+import switch2021.project.model.Resource.old.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class ResourceStore { //implements ResourceRepositoryInterface {
 

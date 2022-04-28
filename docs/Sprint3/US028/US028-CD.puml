@@ -8,13 +8,13 @@ title US028 - As Director, I want to get a list of all human resources in a proj
 package "System" <<Rectangle>> {
 
 package "Infrastructure" <<Rectangle>> #lightblue  {
-class "GetAllResourcesInProjectRoute" as route << Component >>
+class "ShowCurrentProjectTeamRoute" as route << Component >>
 }
 
 package "Interface Adapters" <<Rectangle>> #lightgreen {
 package "Controllers" <<rectangle>>{
-class "GetAllResourcesInProjectController" as ctrl << Component >> {
-+getAllResourcesInProject()
+class "ShowCurrentProjectTeamController" as ctrl << Component >> {
++showCurrentProjectTeam()
 }
 }
 package "Repositories" <<rectangle>>{
@@ -31,8 +31,8 @@ class "ProjectStore" as pStore <<Repository>> {
 
 package "Application Service" <<Rectangle>> #lightpink{
 package "App Services" <<rectangle>>{
-class "GetAllResourcesInProjectService" as srv <<Service>> {
-+getAllResourcesInProject()
+class "ShowCurrentProjectTeamService" as srv <<Service>> {
++showCurrentProjectTeam()
 }
 }
 package "IRepositories" <<rectangle>>{
@@ -53,7 +53,9 @@ entity "Project" as proj << Root >>
 }
 
 package "Resource" <<Rectangle>>{
-entity "Resource" as res << Root >>
+entity "Resource" as res << Root >>{
++isActiveToThisDate()
+}
 }
 
 package "SystemUser" <<Rectangle>>{
@@ -62,37 +64,33 @@ entity "SystemUser" as user << Root >>
 }
 
 package "Value Objects" <<Rectangle>>{
-class "SystemUserId" as userId << Value Object >> {
-systemUserId : Email
-}
+class "SystemUserId" as userId << Value Object >>
 class "ResourceId" as resId << Value Object >>
 class "ProjectId" as pId << Value Object >>
 }
 
 package "Services" <<Rectangle>>{
-class "FilterResourcesByUsersService" as dsrv <<Service>>{
-+filterByUsers()
+class "ManageResourcesService" as dsrv <<Service>>{
++currentProjectTeam()
 }
 }
 }
 
 package "DTO" <<Rectangle>>{
-class "ResourcesInProjectMapper" as map << Component >>{
-+data2Dto()
+class "ResourceMapper" as map << Component >>{
 +model2Dto()
-+dto2Json()
 }
-class "DataDto" as dataDto << Component >>{
-projectId : String
+class "IdDto" as dataDto {
+id : String
 }
-class "ResourceDto" as dto << Component >>{
-email : String
+class "OutputResourceDto" as dto
 }
-class "ResourceJson" as json << Component >>{
-email : String
+
+class "ResponseEntity" as json
+
 }
-}
-}
+
+
 
 res "1"*-d-"1" resId
 proj "1"*-d-"1" pId
@@ -113,12 +111,11 @@ srv .u.> map
 
 dsrv ..> res
 
-map ..> dataDto
-map .r.> dto
-map .l.> json
+ctrl ..> dataDto
+map .l.> dto
+ctrl .l.> json
 
 ctrl .d.> srv
-ctrl .d.> map
 
 route .d.> ctrl
 

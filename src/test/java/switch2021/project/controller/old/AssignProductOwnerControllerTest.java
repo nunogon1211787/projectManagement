@@ -7,7 +7,7 @@ import switch2021.project.mapper.old.ProjectTeamMapper;
 import switch2021.project.mapper.old.ProjectsMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
-import switch2021.project.model.Resource.Resource;
+import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;

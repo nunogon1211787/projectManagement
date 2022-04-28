@@ -5,7 +5,7 @@ import switch2021.project.controller.old.UserStoryEffortController;
 import switch2021.project.factory.SprintFactory;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
-import switch2021.project.model.Resource.Resource;
+import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.SystemUser.SystemUser;

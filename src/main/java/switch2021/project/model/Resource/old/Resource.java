@@ -1,4 +1,4 @@
-package switch2021.project.model.Resource;
+package switch2021.project.model.Resource.old;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -3,7 +3,7 @@ package switch2021.project.controller.old;
 import switch2021.project.dto.old.ResourceDTO;
 import switch2021.project.mapper.old.ProjectTeamMapper;
 import switch2021.project.model.Company;
-import switch2021.project.model.Resource.Resource;
+import switch2021.project.model.Resource.old.Resource;
 
 import java.util.List;
 
