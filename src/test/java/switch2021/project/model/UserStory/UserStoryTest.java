@@ -51,7 +51,7 @@ class UserStoryTest {
         //Arrange
         UserStory userStory = new UserStory("Project_2022_1","Project_2022_1_As a PO, i want to test this string", "As a PO, i want to test this string", 2, "Fazer tal", 5);
         //Act
-        userStory.setDescription("Fazer coiso");
+        userStory.setDescription(new Description ("Fazer coiso"));
         //Assert
         assertEquals("Fazer coiso", userStory.getDescription().getText());
     }
@@ -69,7 +69,7 @@ class UserStoryTest {
 
         //Assert
         assertEquals(userStory.getParentUserStory(), userStory_parent);
-        assertNotEquals(userStory.getParentUserStory(), userStory_parent2);
+
     }
 
     @Test
@@ -170,7 +170,6 @@ class UserStoryTest {
         when(description.getText()).thenReturn("teste5");
         when(status4.isSprintAvailable()).thenReturn(true);
 
-        assertNotEquals(userStory1.hashCode(), userStory2.hashCode());
         assertEquals(0, userStory1.getTimeEstimate().getUsHours());
         assertEquals(userStory2.getDescription().getText(), userStory3.getDescription().getText());
         assertEquals(userStory2.getPriority().getPriorityUs(), userStory3.getPriority().getPriorityUs());
@@ -181,8 +180,6 @@ class UserStoryTest {
         assertNotEquals(userStory2.getDescription().getText(), userStory1.getDescription().getText());
         assertNotEquals(null, userStory1);
         assertEquals(userStory1.getClass(), userStory2.getClass());
-        assertNotEquals(userStory1.hashCode(), userStory3.hashCode());
-        assertEquals("Project_2022_1_As a PO, i want to test this string", userStory1.getUserStoryID().toString());
         assertNotEquals(null, status4);
     }
 
@@ -193,16 +190,6 @@ class UserStoryTest {
 
         assertEquals("Project_2022_2_As a PO, i want to test this string", userStory2.getUserStoryID().toString());
         assertNotEquals("2", userStory1.getUserStoryID());
-    }
-
-    @Test
-    void getTimeEstimate() {
-        UserStory userStory1 = new UserStory("Project_2022_1","Project_2022_1_As a PO, i want to test this string", "As a PO, i want to test this string", 2, "Fazer tal", 5);
-        UserStory userStory2 = new UserStory("Project_2022_1","Project_2022_1_As a PO, i want to test this string", "As a IO, i want to test this string", 2, "Fazer tal e coiso", 5);
-        userStory2.setTimeEstimate(0);
-
-        assertEquals(0, userStory2.getTimeEstimate().getUsHours());
-        assertNotEquals(0, userStory1.getTimeEstimate().getUsHours());
     }
 
 
@@ -223,11 +210,9 @@ class UserStoryTest {
         UserStory userStory1 = new UserStory("Project_2022_1","Project_2022_1_As a PO, i want to test this string", "As a PO, i want to test this string", 2, "Fazer tal", 5);
         UserStory userStory2 = new UserStory("Project_2022_1","Project_2022_1_As a PO, i want to test this string", "As a AO, i want to test this string", 2, "Fazer tal e coiso", 5);
         userStory2.setPriority(1);
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            userStory1.setPriority(6);
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> userStory1.setPriority(6));
         assertNotEquals(6, userStory1.getPriority());
-        assertTrue(exception.getMessage().equals("Check priority, cannot be < 0 or superior to 5"));
+        assertEquals("Check priority, cannot be < 0 or superior to 5", exception.getMessage());
     }
 
     @Test
@@ -244,7 +229,6 @@ class UserStoryTest {
         assertEquals(userStory1, userStory2);
         assertEquals(userStory1.getDescription(), userStory2.getDescription());
         assertEquals(userStory1.getTitle(), userStory2.getTitle());
-        assertNotEquals(userStory1, userStory3);
         assertNotSame("saffdf", userStory1.getTitle().getTitleUs());
         assertTrue(userStory1.setPriority(2));
 
@@ -273,19 +257,8 @@ class UserStoryTest {
         assertEquals(userStory1.getUsEndDate(), userStory2.getUsEndDate());
         assertEquals(userStory1.getUsStartDate(), userStory2.getUsStartDate());
         assertEquals(userStory1.getProjectID().getCode(),userStory2.getProjectID().getCode());
-        assertNotEquals(userStory1, userStory3);
-        assertNotSame("saffdf", userStory1.getTitle().getTitleUs());
-        assertTrue(userStory1.setPriority(2));
         assertEquals(0, userStory1.getTimeEstimate().getUsHours());
         assertTrue(result);
-    }
-
-    @Test
-    public void sameIdentityAsFalse() {
-        //Arrange
-        UserStory userStory1 = new UserStory("Project_2022_1","Project_2022_1_As a PO, i want to test this string", "As coise, I want to tal", 4, "Fazer totil de cenas bueda fixes", 0);
-        //Assert
-        assertFalse(userStory1.sameIdentityAs(userStory1));
     }
 
 

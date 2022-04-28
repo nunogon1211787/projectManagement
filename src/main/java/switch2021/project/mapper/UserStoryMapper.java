@@ -11,7 +11,7 @@ public class UserStoryMapper {
     public OutputUsDTO toDto(UserStory newUserStory) {
         OutputUsDTO outputUsDto = new OutputUsDTO();
         outputUsDto.userStoryID = newUserStory.getUserStoryID().toString();
-        outputUsDto.projectID = newUserStory.getProjectID().toString();
+        outputUsDto.projectID = newUserStory.getProjectID().getCode();
         outputUsDto.title = newUserStory.getTitle().getTitleUs();
 
         return outputUsDto;

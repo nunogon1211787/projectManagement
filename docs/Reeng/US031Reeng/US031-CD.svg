@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="1378.4px" preserveAspectRatio="none" style="width:937px;height:1378px;background:#FFFFFF;" version="1.1" viewBox="0 0 937 1378" width="937.6px" zoomAndPan="magnify"><defs><filter height="300%" id="f1826as1sehhw8" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="1.6000000000000003"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="3.2000000000000006" dy="3.2000000000000006" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="14.4" lengthAdjust="spacing" textLength="543.2" x="192" y="14.9484">US032 - As SM/Team Member, I want to create task outside the scope of a user story</text><!--MD5=[5eae6a65540786c72d0f8b2b435eea8e]
+class CreateSprintTaskUI--><rect codeLine="8" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="32.875" id="CreateSprintTaskUI" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="91.2" x="624.8" y="23.7125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="86.4" x="627.2" y="37.6781">CreateSprintTaskUI</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="625.6" x2="715.2" y1="43.7875" y2="43.7875"/><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="625.6" x2="715.2" y1="50.1875" y2="50.1875"/><!--MD5=[7048fefae9dd9bc494b3003ac7426005]
+class CreateSprintTaskController--><rect codeLine="10" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="121.425" id="CreateSprintTaskController" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="161.6" x="368" y="104.5125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="120" x="388.8" y="118.4781">CreateSprintTaskController</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="368.8" x2="528.8" y1="124.5875" y2="124.5875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="76.8" x="372.8" y="136.9227">-Company company</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="46.4" x="372.8" y="147.9914">-Project proj</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="67.2" x="372.8" y="159.0602">-TaskList taskStore</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="97.6" x="372.8" y="170.1289">-TaskMapper taskMapper</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="368.8" x2="528.8" y1="175.2625" y2="175.2625"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="65.6" x="372.8" y="187.5977">+getTaskTypes()</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="135.2" x="372.8" y="198.6664">+getSprintTasks(String code, int id)</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="99.2" x="372.8" y="209.7352">+getCurrentProjectTeam()</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="152" x="372.8" y="220.8039">+createSprintTask(CreateTaskDTO dto)</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect codeLine="21" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="55.0125" id="Company" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="91.2" x="491.2" y="274.1125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="42.4" x="515.6" y="288.0781">Company</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="492" x2="581.6" y1="294.1875" y2="294.1875"/><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="492" x2="581.6" y1="300.5875" y2="300.5875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="81.6" x="496" y="312.9227">+getTaskTypeStore()</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="70.4" x="496" y="323.9914">+getProjectStore()</text><!--MD5=[a141ca14a25eba5a40f0266b8b699ea4]
+class TaskTypeStore--><rect codeLine="26" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="55.0125" id="TaskTypeStore" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="124.8" x="655.2" y="426.9125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="65.6" x="684.8" y="440.8781">TaskTypeStore</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="656" x2="779.2" y1="446.9875" y2="446.9875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="115.2" x="660" y="459.3227">-List&lt;TaskType&gt; taskTypeList</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="656" x2="779.2" y1="464.4563" y2="464.4563"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="92" x="660" y="476.7914">+getTaskTypesNames()</text><!--MD5=[88ee21eff3843b66d49ba6da731dc29a]
+class TaskType--><rect codeLine="31" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="55.0125" id="TaskType" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="58.4" x="669.2" y="596.1125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="42.4" x="677.2" y="610.0781">TaskType</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="670" x2="726.8" y1="616.1875" y2="616.1875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="48.8" x="674" y="628.5227">-String name</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="670" x2="726.8" y1="633.6563" y2="633.6563"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="44.8" x="674" y="645.9914">+getName()</text><!--MD5=[9a036bac734f9d7b07033aa043650493]
+class TaskStatusStore--><rect codeLine="36" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="55.0125" id="TaskStatusStore" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="136" x="491.2" y="426.9125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="72.8" x="522.8" y="440.8781">TaskStatusStore</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="492" x2="626.4" y1="446.9875" y2="446.9875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="126.4" x="496" y="459.3227">-List&lt;TaskStatus&gt; taskStatusList</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="492" x2="626.4" y1="464.4563" y2="464.4563"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="109.6" x="496" y="476.7914">+getTaskStatusDescription()</text><!--MD5=[007b513da6771087a86fbb3bd355c48d]
+class TaskStatus--><rect codeLine="41" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="55.0125" id="TaskStatus" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="80" x="519.2" y="721.3125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="49.6" x="534.4" y="735.2781">TaskStatus</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="520" x2="598.4" y1="741.3875" y2="741.3875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="70.4" x="524" y="753.7227">-String description</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="520" x2="598.4" y1="758.8563" y2="758.8563"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="66.4" x="524" y="771.1914">+getDescription()</text><!--MD5=[0cf43f64de24b70e8ffe65ff9ee7abee]
+class ProjectStore--><rect codeLine="46" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="55.0125" id="ProjectStore" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="133.6" x="272.4" y="426.9125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="53.6" x="312.4" y="440.8781">ProjectStore</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="273.2" x2="405.2" y1="446.9875" y2="446.9875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="95.2" x="277.2" y="459.3227">-List&lt;Project&gt; projectList</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="273.2" x2="405.2" y1="464.4563" y2="464.4563"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="124" x="277.2" y="476.7914">+getProjectByCode(String code)</text><!--MD5=[79d378210367c0c6ec62ef762ddfbd1b]
+class Project--><rect codeLine="51" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="88.2188" id="Project" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="109.6" x="254.8" y="579.7125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="30.4" x="294.4" y="593.6781">Project</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="255.6" x2="363.6" y1="599.7875" y2="599.7875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="60" x="259.6" y="612.1227">-SprintList sList</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="100" x="259.6" y="623.1914">-ProjectTeam projectTeam</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="255.6" x2="363.6" y1="628.325" y2="628.325"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="89.6" x="259.6" y="640.6602">+hasCode(String code)</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="50.4" x="259.6" y="651.7289">+getSprints()</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="70.4" x="259.6" y="662.7977">+getProjectTeam()</text><!--MD5=[65512b4198a937e8c73da9f2b73fc58d]
+class SprintList--><rect codeLine="59" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="55.0125" id="SprintList" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="96" x="47.2" y="721.3125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="41.6" x="74.4" y="735.2781">SprintList</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="48" x2="142.4" y1="741.3875" y2="741.3875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="86.4" x="52" y="753.7227">-List&lt;Sprint&gt; sprintList</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="48" x2="142.4" y1="758.8563" y2="758.8563"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="63.2" x="52" y="771.1914">+getSprint(int id)</text><!--MD5=[452a66c2e8d45f5bd209be454bbcd04f]
+class Sprint--><rect codeLine="64" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="99.2875" id="Sprint" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="100.8" x="42.4" y="830.1125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="25.6" x="80" y="844.0781">Sprint</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="43.2" x2="142.4" y1="850.1875" y2="850.1875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="48" x="47.2" y="862.5227">-int sprint_ID</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="79.2" x="47.2" y="873.5914">-LocalDate startDate</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="76" x="47.2" y="884.6602">-LocalDate endDate</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="91.2" x="47.2" y="895.7289">-TaskList sprintTaskList</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="43.2" x2="142.4" y1="900.8625" y2="900.8625"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="50.4" x="47.2" y="913.1977">+hasID(int id)</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="55.2" x="47.2" y="924.2664">+getTaskList()</text><!--MD5=[cf2635f8a68afd84898027166f4516bc]
+class TaskList--><rect codeLine="73" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="99.2875" id="TaskList" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="160.8" x="105.2" y="977.3125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="37.6" x="166.8" y="991.2781">TaskList</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="106" x2="265.2" y1="997.3875" y2="997.3875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="76.8" x="110" y="1009.7227">-List&lt;Task&gt; taskStore</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="106" x2="265.2" y1="1014.8563" y2="1014.8563"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="72.8" x="110" y="1027.1914">+getTasksNames()</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="151.2" x="110" y="1038.2602">+createSprintTask(createTaskDTO dto)</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="85.6" x="110" y="1049.3289">+saveTask(Task task)</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="76" x="110" y="1060.3977">-validate(Task task)</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="60.8" x="110" y="1071.4664">-add(Task task)</text><!--MD5=[b34797a66dc35cbf1d65f7e3ca75530e]
+class Task--><rect codeLine="82" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="243.1813" id="Task" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="428.8" x="344.8" y="1124.5125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="21.6" x="548.4" y="1138.4781">Task</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="345.6" x2="772.8" y1="1144.5875" y2="1144.5875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="48.8" x="349.6" y="1156.9227">-String name</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="70.4" x="349.6" y="1167.9914">-String description</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="79.2" x="349.6" y="1179.0602">-LocalDate startDate</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="76" x="349.6" y="1190.1289">-LocalDate endDate</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="84.8" x="349.6" y="1201.1977">-double effortEstimate</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="85.6" x="349.6" y="1212.2664">-double effortRemaing</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="76" x="349.6" y="1223.3352">-double hoursSpent</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="122.4" x="349.6" y="1234.4039">-double percentageOfExecution</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="89.6" x="349.6" y="1245.4727">-TaskStatus taskStatus</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="78.4" x="349.6" y="1256.5414">-TaskType taskType</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="114.4" x="349.6" y="1267.6102">-List&lt;Task&gt; tasksPrecedence</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="88" x="349.6" y="1278.6789">-Resource responsible</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="101.6" x="349.6" y="1289.7477">-List&lt;Effort&gt; taskEffortList</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="345.6" x2="772.8" y1="1294.8813" y2="1294.8813"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="419.2" x="349.6" y="1307.2164">+Task(String name,String description,int effort,TaskType type,List&lt;Task&gt; precedence,Resource responsible)</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="44.8" x="349.6" y="1318.2852">+getName()</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="66.4" x="349.6" y="1329.3539">+getDescription()</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="76.8" x="349.6" y="1340.4227">+getEffortEstimate()</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="82.4" x="349.6" y="1351.4914">+getTaskTypeName()</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="89.6" x="349.6" y="1362.5602">+getResponsibleEmail()</text><!--MD5=[ea85c9eeae48c9b9754651e25079a913]
+class ProjectTeam--><rect codeLine="104" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="66.0813" id="ProjectTeam" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="148" x="309.2" y="715.7125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="56" x="355.2" y="729.6781">ProjectTeam</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="310" x2="456.4" y1="735.7875" y2="735.7875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="113.6" x="314" y="748.1227">-List&lt;Resource&gt; projectTeam</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="310" x2="456.4" y1="753.2563" y2="753.2563"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="120.8" x="314" y="765.5914">+getCurrentResourcesNames()</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="138.4" x="314" y="776.6602">+getResourceByName(String name)</text><!--MD5=[6b13f1b330d33795af281e5c1dfe1e98]
+class Resource--><rect codeLine="110" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="88.2188" id="Resource" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="113.6" x="326.4" y="835.7125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="43.2" x="361.6" y="849.6781">Resource</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="327.2" x2="439.2" y1="855.7875" y2="855.7875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="70.4" x="331.2" y="868.1227">-SystemUser user</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="79.2" x="331.2" y="879.1914">-LocalDate startDate</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="76" x="331.2" y="890.2602">-LocalDate endDate</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="327.2" x2="439.2" y1="895.3938" y2="895.3938"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="46.4" x="331.2" y="907.7289">+isCurrent()</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="104" x="331.2" y="918.7977">+isYourName(String name)</text><!--MD5=[bc064d979c32666ae52f3d7624591b7b]
+class SystemUser--><rect codeLine="118" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="55.0125" id="SystemUser" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="102.4" x="332" y="999.3125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="54.4" x="356" y="1013.2781">SystemUser</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="332.8" x2="433.6" y1="1019.3875" y2="1019.3875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="48.8" x="336.8" y="1031.7227">-String name</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="332.8" x2="433.6" y1="1036.8563" y2="1036.8563"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="92.8" x="336.8" y="1049.1914">+hasName(String name)</text><!--MD5=[0b7edbc2b4475105b526287ad26632a5]
+class TaskMapper--><rect codeLine="123" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="55.0125" id="TaskMapper" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="125.6" x="667.6" y="274.1125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="54.4" x="703.2" y="288.0781">TaskMapper</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="668.4" x2="792.4" y1="294.1875" y2="294.1875"/><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="668.4" x2="792.4" y1="300.5875" y2="300.5875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="116" x="672.4" y="312.9227">+toModel(CreateTaskDTO dto)</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="72" x="672.4" y="323.9914">+toDTO(Task task)</text><!--MD5=[735e0f3cecf8dd6f89af49545a4cd878]
+class CreateTaskDTO--><rect codeLine="128" fill="#FEFECE" filter="url(#f1826as1sehhw8)" height="154.6313" id="CreateTaskDTO" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="118.4" x="808" y="377.3125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="71.2" x="831.6" y="391.2781">CreateTaskDTO</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="808.8" x2="925.6" y1="397.3875" y2="397.3875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="48.8" x="812.8" y="409.7227">-String name</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="70.4" x="812.8" y="420.7914">-String description</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="68" x="812.8" y="431.8602">-int effortEstimate</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="84.8" x="812.8" y="442.9289">-String taskTypeName</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="92" x="812.8" y="453.9977">-String responsibleEmail</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="808.8" x2="925.6" y1="459.1313" y2="459.1313"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="108.8" x="812.8" y="471.4664">+CreateTaskDTO(Task task)</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="44.8" x="812.8" y="482.5352">+getName()</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="66.4" x="812.8" y="493.6039">+getDescription()</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="76.8" x="812.8" y="504.6727">+getEffortEstimate()</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="82.4" x="812.8" y="515.7414">+getTaskTypeName()</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="70.4" x="812.8" y="526.8102">+getResponsible()</text><!--MD5=[2168617d38efad8c11d67ddb1f720ad3]
+link CreateSprintTaskUI to CreateSprintTaskController--><path codeLine="142" d="M642.336,56.5685 C614.976,71.8245 571.976,95.8085 533.456,117.2965 " fill="none" id="CreateSprintTaskUI-to-CreateSprintTaskController" style="stroke:#A80036;stroke-width:0.8000000000000002;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="529.736,119.3685,537.584,118.6692,533.2326,117.4259,534.4759,113.0746,529.736,119.3685" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><!--MD5=[78ba28a827edeb16815761255df5ca33]
+link CreateSprintTaskUI to CreateTaskDTO--><path codeLine="143" d="M687,56.5365 C723.008,91.5605 808.032,180.6085 845.6,274.1125 C858.04,305.0725 863.872,341.2645 866.44,373.0085 " fill="none" id="CreateSprintTaskUI-to-CreateTaskDTO" style="stroke:#A80036;stroke-width:0.8000000000000002;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="866.768,377.2565,869.4242,369.8387,866.4708,373.2676,863.0419,370.3141,866.768,377.2565" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><!--MD5=[81c31aee71198078eb3f6bdf3832ea21]
+link CreateSprintTaskController to Company--><path codeLine="145" d="M488.168,226.4165 C498.12,241.6645 508.4,257.4085 516.928,270.4645 " fill="none" id="CreateSprintTaskController-to-Company" style="stroke:#A80036;stroke-width:0.8000000000000002;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="519.28,274.0725,518.0288,266.2934,517.0956,270.7216,512.6674,269.7884,519.28,274.0725" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><!--MD5=[f944b58cf21e873f3887f42a9b7008bc]
+link CreateSprintTaskController to TaskTypeStore--><path codeLine="146" d="M529.744,217.4325 C552.76,234.0165 576.952,253.4885 596.8,274.1125 C641.48,320.5365 680.504,385.3445 701.4,423.0805 " fill="none" id="CreateSprintTaskController-to-TaskTypeStore" style="stroke:#A80036;stroke-width:0.8000000000000002;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="703.368,426.6485,702.6991,418.7979,701.439,423.1444,697.0925,421.8842,703.368,426.6485" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><!--MD5=[b3b551e9216831697590d64bb20734f8]
+link CreateSprintTaskController to ProjectStore--><path codeLine="147" d="M425.824,226.4005 C402.928,286.4805 368.696,376.3205 350.896,423.0325 " fill="none" id="CreateSprintTaskController-to-ProjectStore" style="stroke:#A80036;stroke-width:0.8000000000000002;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="349.432,426.8645,354.9919,421.2817,350.8603,423.1282,349.0138,418.9965,349.432,426.8645" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><!--MD5=[6aaa55f5cfcbbf7b3ee809ecc31a16e1]
+link CreateSprintTaskController to Project--><path codeLine="148" d="M372.072,226.1445 C329.784,264.2885 281.328,317.6325 258.4,377.3125 C233.792,441.3685 241.04,465.3205 258.4,531.7125 C262.368,546.8885 269.488,562.2005 277.176,575.8405 " fill="none" id="CreateSprintTaskController-to-Project" style="stroke:#A80036;stroke-width:0.8000000000000002;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="279.36,579.6405,278.5301,571.8052,277.3595,576.1767,272.988,575.0061,279.36,579.6405" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><!--MD5=[111dcc2aa0e50703689f5ef06da84adb]
+link CreateSprintTaskController to SprintList--><path codeLine="149" d="M367.968,172.6725 C299.336,182.8085 203.96,208.6005 152,274.1125 C45.512,408.3765 73.984,634.9525 88.88,717.1525 " fill="none" id="CreateSprintTaskController-to-SprintList" style="stroke:#A80036;stroke-width:0.8000000000000002;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="89.616,721.1925,91.4666,713.5338,88.8954,717.2579,85.1713,714.6867,89.616,721.1925" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><!--MD5=[1f9f3e164ddc990f82d4bd4b843b7518]
+link CreateSprintTaskController to Sprint--><path codeLine="150" d="M367.688,175.6325 C294.264,187.7925 186.512,214.8965 112,274.1125 C39.224,331.9445 4.8,360.7525 4.8,453.7125 C4.8,453.7125 4.8,453.7125 4.8,624.5125 C4.8,695.6565 7.384,715.6645 32.8,782.1125 C38.592,797.2645 46.84,812.6485 55.368,826.5525 " fill="none" id="CreateSprintTaskController-to-Sprint" style="stroke:#A80036;stroke-width:0.8000000000000002;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="57.536,830.0565,56.4572,822.2516,55.4263,826.6581,51.0198,825.6272,57.536,830.0565" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><!--MD5=[5f2c93e5228716bbf0eab5d8f4cfa281]
+link CreateSprintTaskController to TaskList--><path codeLine="151" d="M367.808,203.2485 C336.24,221.0005 301.88,244.8245 277.6,274.1125 C246.12,312.0805 247.928,329.2645 236.8,377.3125 C186.608,593.9845 183.336,861.0485 184.496,972.9045 " fill="none" id="CreateSprintTaskController-to-TaskList" style="stroke:#A80036;stroke-width:0.8000000000000002;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="184.544,977.1365,187.6615,969.9004,184.4983,973.1368,181.2619,969.9735,184.544,977.1365" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><!--MD5=[7017e3d433150041510a2bf5396a28f8]
+link CreateSprintTaskController to ProjectTeam--><path codeLine="152" d="M445.728,226.1205 C441.64,298.6965 433.32,424.4565 420,531.7125 C412.104,595.2805 398.712,668.6565 390.448,711.5605 " fill="none" id="CreateSprintTaskController-to-ProjectTeam" style="stroke:#A80036;stroke-width:0.8000000000000002;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="389.664,715.6165,394.1814,709.1611,390.4287,711.6903,387.8995,707.9375,389.664,715.6165" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><!--MD5=[10d81607b047a2a63fdb4cf205f57ef1]
+link CreateSprintTaskController to TaskMapper--><path codeLine="153" d="M529.872,204.9205 C574.824,226.4405 629.744,252.7285 670.736,272.3525 " fill="none" id="CreateSprintTaskController-to-TaskMapper" style="stroke:#A80036;stroke-width:0.8000000000000002;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="674.408,274.1125,669.3067,268.1078,670.8033,272.3786,666.5325,273.8752,674.408,274.1125" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><!--MD5=[533fea1f0c5ff90aa8adfed37fc4e3d5]
+link CreateSprintTaskController to CreateTaskDTO--><path codeLine="154" d="M529.968,169.6565 C610.488,177.4565 732.36,201.4645 807.2,274.1125 C834.056,300.1845 848.896,338.5925 857.088,373.2085 " fill="none" id="CreateSprintTaskController-to-CreateTaskDTO" style="stroke:#A80036;stroke-width:0.8000000000000002;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="858.008,377.1925,859.5004,369.4561,857.1052,373.2957,853.2656,370.9005,858.008,377.1925" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><!--MD5=[0f8bd3b94b24d858dc4a73216c40eeb3]
+reverse link Company to TaskTypeStore--><path codeLine="157" d="M586.392,335.3525 C604.288,347.8565 624.32,362.6405 641.6,377.3125 C659.712,392.6885 678.56,411.6165 692.952,426.7765 " fill="none" id="Company-backto-TaskTypeStore" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="577.8,329.4005,579.9243,334.764,585.6923,334.866,583.568,329.5025,577.8,329.4005" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="579.0044" y="346.3103">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="682.1197" y="418.3101">1</text><!--MD5=[b96c1c3218821051c40697af9c9aee65]
+reverse link Company to TaskStatusStore--><path codeLine="158" d="M542.368,340.1125 C546.352,366.9925 551.616,402.5365 555.192,426.6645 " fill="none" id="Company-backto-TaskStatusStore" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="540.808,329.5445,538.3498,334.7634,542.2217,339.0398,544.68,333.8209,540.808,329.5445" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="535.4156" y="346.2645">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="548.2942" y="418.1767">1</text><!--MD5=[5080d0b1308565521d8577f7e8059843]
+reverse link Company to ProjectStore--><path codeLine="159" d="M493.392,335.7285 C457.632,363.0885 407.576,401.3925 374.304,426.8485 " fill="none" id="Company-backto-ProjectStore" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="501.704,329.3685,495.9473,329.7429,494.0788,335.2008,499.8355,334.8264,501.704,329.3685" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="489.3538" y="346.2726">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="375.0639" y="418.1844">1</text><!--MD5=[1dfb19dbfc4c5e30f7d9ff4877022e26]
+reverse link TaskTypeStore to TaskType--><path codeLine="161" d="M713.312,492.7605 C709.72,524.1125 704.68,568.0965 701.48,596.0485 " fill="none" id="TaskTypeStore-backto-TaskType" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="714.512,482.2405,710.7892,486.6474,713.4252,491.7788,717.148,487.3719,714.512,482.2405" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="707.8632" y="499.1574">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="697.6926" y="587.3844">*</text><!--MD5=[401b6443e36f5169b0b432151ed4772b]
+reverse link TaskStatusStore to TaskStatus--><path codeLine="162" d="M559.2,492.8485 C559.2,552.7845 559.2,668.6965 559.2,721.1605 " fill="none" id="TaskStatusStore-backto-TaskStatus" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="559.2,482.3365,556,487.1365,559.2,491.9365,562.4,487.1365,559.2,482.3365" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="553.1188" y="499.0551">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="554.8188" y="712.691">*</text><!--MD5=[92e069c52d232f723d55a16706bedc60]
+link TaskType to Task--><path codeLine="164" d="M692.376,651.3845 C674.712,730.1605 622.2,964.3445 588.64,1114.0325 " fill="none" id="TaskType-to-Task" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#FFFFFF" points="586.352,1124.2165,590.5242,1120.2324,588.4513,1114.8488,584.2791,1118.8329,586.352,1124.2165" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="685.2042" y="668.2914">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="583.5703" y="1116.0055">*</text><!--MD5=[a815dd5e56924b162d2a946a93b1a52e]
+link TaskStatus to Task--><path codeLine="165" d="M559.2,776.7125 C559.2,839.3925 559.2,998.2245 559.2,1113.6325 " fill="none" id="TaskStatus-to-Task" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#FFFFFF" points="559.2,1124.3125,562.4,1119.5125,559.2,1114.7125,556,1119.5125,559.2,1124.3125" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="553.1188" y="793.427">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="555.0969" y="1115.706">*</text><!--MD5=[c2999c5e21c0a7115ef87c36c02875b6]
+reverse link ProjectStore to Project--><path codeLine="167" d="M332.592,492.7125 C328.048,518.4725 321.984,552.7765 317.232,579.7045 " fill="none" id="ProjectStore-backto-Project" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="334.448,482.2405,330.4631,486.4119,332.7809,491.6946,336.7658,487.5233,334.448,482.2405" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="327.5028" y="499.1574">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="313.9888" y="570.9312">*</text><!--MD5=[f9d8fe6ce79c321ab87967b8c43ad885]
+reverse link Project to SprintList--><path codeLine="169" d="M245.472,661.4805 C212.216,680.6565 172.32,703.6485 142,721.1365 " fill="none" id="Project-backto-SprintList" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="254.664,656.1845,248.9074,655.808,246.3458,660.977,252.1024,661.3535,254.664,656.1845" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="242.7491" y="657.0356">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="144.7875" y="712.6625">1</text><!--MD5=[352310352512ea7c8ebcd3b871b8d730]
+reverse link Project to ProjectTeam--><path codeLine="170" d="M340.704,676.7445 C348.56,689.9365 356.768,703.7205 363.856,715.6245 " fill="none" id="Project-backto-ProjectTeam" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="335.344,667.7445,335.0468,673.5057,340.2505,675.9959,340.5477,670.2347,335.344,667.7445" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="332.6837" y="685.0062">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="354.5884" y="707.097">1</text><!--MD5=[726d7aaf8cff47432ba29bbb11d1a704]
+reverse link SprintList to Sprint--><path codeLine="172" d="M94.496,787.4565 C94.256,800.7445 93.968,815.8645 93.712,829.9445 " fill="none" id="SprintList-backto-Sprint" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="94.696,776.8005,91.4069,781.5399,94.5167,786.3988,97.8058,781.6594,94.696,776.8005" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="88.5281" y="793.5301">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="89.5862" y="821.4574">*</text><!--MD5=[422490b50760826a4a578fe5d6834bcc]
+reverse link Sprint to TaskList--><path codeLine="174" d="M129.56,938.1925 C137.776,951.0725 146.4,964.6165 154.368,977.1045 " fill="none" id="Sprint-backto-TaskList" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="123.96,929.4005,123.8421,935.1682,129.1208,937.4953,129.2387,931.7276,123.96,929.4005" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="121.6391" y="946.693">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="144.8331" y="968.6127">1</text><!--MD5=[a0d6d3bda0e77d5fa3c036b9b28c4636]
+reverse link TaskList to Task--><path codeLine="176" d="M275.336,1079.9765 C298.656,1093.5605 324.76,1108.7685 351.448,1124.3125 " fill="none" id="TaskList-backto-Task" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="266.208,1074.6645,268.7442,1079.846,274.5026,1079.4977,271.9664,1074.3163,266.208,1074.6645" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="272.3333" y="1075.7045">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="336.6327" y="1115.706">*</text><!--MD5=[12ab16047cb79fbb7abfb3b5c3592b87]
+reverse link ProjectTeam to Resource--><path codeLine="178" d="M383.2,792.7525 C383.2,806.5285 383.2,821.7765 383.2,835.5765 " fill="none" id="ProjectTeam-backto-Resource" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="383.2,782.3125,380,787.1125,383.2,791.9125,386.4,787.1125,383.2,782.3125" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="377.1888" y="798.9983">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="378.9438" y="827.1017">*</text><!--MD5=[74d758dd36ab3b4a677120f49b0ea586]
+reverse link Resource to SystemUser--><path codeLine="180" d="M383.2,934.4085 C383.2,956.4965 383.2,981.0885 383.2,999.2325 " fill="none" id="Resource-backto-SystemUser" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#FFFFFF" points="383.2,923.8005,380,928.6005,383.2,933.4005,386.4,928.6005,383.2,923.8005" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="378.9438" y="941.0694">*</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="377.0488" y="990.5652">1</text><!--MD5=[1c25199284504ad66de0c161dd40abb0]
+link TaskMapper to CreateTaskDTO--><path codeLine="182" d="M754.856,329.5445 C768.936,345.1045 787.32,365.4245 805.136,385.1125 " fill="none" id="TaskMapper-to-CreateTaskDTO" style="stroke:#A80036;stroke-width:0.8000000000000002;stroke-dasharray:7.0,7.0;"/><polygon fill="#A80036" points="807.984,388.2645,805.5158,380.782,805.2962,385.3022,800.776,385.0826,807.984,388.2645" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><!--MD5=[f9672d43bf3553902dfaa42590ce76c7]
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title US032 - As SM/Team Member, I want to create task outside the scope of a user story
+
+class CreateSprintTaskUI{}
+
+class CreateSprintTaskController{
+-Company company
+-Project proj
+-TaskList taskStore
+-TaskMapper taskMapper
++getTaskTypes()
++getSprintTasks(String code, int id)
++getCurrentProjectTeam()
++createSprintTask(CreateTaskDTO dto)
+}
+
+class Company{
++getTaskTypeStore()
++getProjectStore()
+}
+
+class TaskTypeStore{
+-List<TaskType> taskTypeList
++getTaskTypesNames()
+}
+
+class TaskType{
+-String name
++getName()
+}
+
+class TaskStatusStore{
+-List<TaskStatus> taskStatusList
++getTaskStatusDescription()
+}
+
+class TaskStatus{
+-String description
++getDescription()
+}
+
+class ProjectStore{
+-List<Project> projectList
++getProjectByCode(String code)
+}
+
+class Project{
+-SprintList sList
+-ProjectTeam projectTeam
++hasCode(String code)
++getSprints()
++getProjectTeam()
+}
+
+class SprintList{
+-List<Sprint> sprintList
++getSprint(int id)
+}
+
+class Sprint{
+-int sprint_ID
+-LocalDate startDate
+-LocalDate endDate
+-TaskList sprintTaskList
++hasID(int id)
++getTaskList()
+}
+
+class TaskList{
+-List<Task> taskStore
++getTasksNames()
++createSprintTask(createTaskDTO dto)
++saveTask(Task task)
+-validate(Task task)
+-add(Task task)
+}
+
+class Task{
+-String name
+-String description
+-LocalDate startDate
+-LocalDate endDate
+-double effortEstimate
+-double effortRemaing
+-double hoursSpent
+-double percentageOfExecution
+-TaskStatus taskStatus
+-TaskType taskType
+-List<Task> tasksPrecedence
+-Resource responsible
+-List<Effort> taskEffortList
++Task(String name,String description,int effort,TaskType type,List<Task> precedence,Resource responsible)
++getName()
++getDescription()
++getEffortEstimate()
++getTaskTypeName()
++getResponsibleEmail()
+}
+
+class ProjectTeam{
+-List<Resource> projectTeam
++getCurrentResourcesNames()
++getResourceByName(String name)
+}
+
+class Resource{
+-SystemUser user
+-LocalDate startDate
+-LocalDate endDate
++isCurrent()
++isYourName(String name)
+}
+
+class SystemUser{
+-String name
++hasName(String name)
+}
+
+class TaskMapper{
++toModel(CreateTaskDTO dto)
++toDTO(Task task)
+}
+
+class CreateTaskDTO{
+-String name
+-String description
+-int effortEstimate
+-String taskTypeName
+-String responsibleEmail
++CreateTaskDTO(Task task)
++getName()
++getDescription()
++getEffortEstimate()
++getTaskTypeName()
++getResponsible()
+}
+
+CreateSprintTaskUI ..> CreateSprintTaskController
+CreateSprintTaskUI ..> CreateTaskDTO
+
+CreateSprintTaskController ..> Company
+CreateSprintTaskController ..> TaskTypeStore
+CreateSprintTaskController ..> ProjectStore
+CreateSprintTaskController ..> Project
+CreateSprintTaskController ..> SprintList
+CreateSprintTaskController ..> Sprint
+CreateSprintTaskController ..> TaskList
+CreateSprintTaskController ..> ProjectTeam
+CreateSprintTaskController ..> TaskMapper
+CreateSprintTaskController ..> CreateTaskDTO
+
+
+Company "1" *- - "1" TaskTypeStore
+Company "1" *- - "1" TaskStatusStore
+Company "1" *- - "1" ProjectStore
+
+TaskTypeStore "1" *- - "*" TaskType
+TaskStatusStore "1" *- - "*" TaskStatus
+
+TaskType "1" - -o "*" Task
+TaskStatus "1" - -o "*" Task
+
+ProjectStore "1" *- - "*" Project
+
+Project "1" *- - "1" SprintList
+Project "1" *- - "1" ProjectTeam
+
+SprintList "1" *- - "*" Sprint
+
+Sprint "1" *- - "1" TaskList
+
+TaskList "1" *- - "*" Task
+
+ProjectTeam "1" *- - "*" Resource
+
+Resource "*" o- - "1" SystemUser
+
+TaskMapper ..> CreateTaskDTO
+
+@enduml
+
+@startuml
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title US032 - As SM/Team Member, I want to create task outside the scope of a user story
+
+class CreateSprintTaskUI{}
+
+class CreateSprintTaskController{
+-Company company
+-Project proj
+-TaskList taskStore
+-TaskMapper taskMapper
++getTaskTypes()
++getSprintTasks(String code, int id)
++getCurrentProjectTeam()
++createSprintTask(CreateTaskDTO dto)
+}
+
+class Company{
++getTaskTypeStore()
++getProjectStore()
+}
+
+class TaskTypeStore{
+-List<TaskType> taskTypeList
++getTaskTypesNames()
+}
+
+class TaskType{
+-String name
++getName()
+}
+
+class TaskStatusStore{
+-List<TaskStatus> taskStatusList
++getTaskStatusDescription()
+}
+
+class TaskStatus{
+-String description
++getDescription()
+}
+
+class ProjectStore{
+-List<Project> projectList
++getProjectByCode(String code)
+}
+
+class Project{
+-SprintList sList
+-ProjectTeam projectTeam
++hasCode(String code)
++getSprints()
++getProjectTeam()
+}
+
+class SprintList{
+-List<Sprint> sprintList
++getSprint(int id)
+}
+
+class Sprint{
+-int sprint_ID
+-LocalDate startDate
+-LocalDate endDate
+-TaskList sprintTaskList
++hasID(int id)
++getTaskList()
+}
+
+class TaskList{
+-List<Task> taskStore
++getTasksNames()
++createSprintTask(createTaskDTO dto)
++saveTask(Task task)
+-validate(Task task)
+-add(Task task)
+}
+
+class Task{
+-String name
+-String description
+-LocalDate startDate
+-LocalDate endDate
+-double effortEstimate
+-double effortRemaing
+-double hoursSpent
+-double percentageOfExecution
+-TaskStatus taskStatus
+-TaskType taskType
+-List<Task> tasksPrecedence
+-Resource responsible
+-List<Effort> taskEffortList
++Task(String name,String description,int effort,TaskType type,List<Task> precedence,Resource responsible)
++getName()
++getDescription()
++getEffortEstimate()
++getTaskTypeName()
++getResponsibleEmail()
+}
+
+class ProjectTeam{
+-List<Resource> projectTeam
++getCurrentResourcesNames()
++getResourceByName(String name)
+}
+
+class Resource{
+-SystemUser user
+-LocalDate startDate
+-LocalDate endDate
++isCurrent()
++isYourName(String name)
+}
+
+class SystemUser{
+-String name
++hasName(String name)
+}
+
+class TaskMapper{
++toModel(CreateTaskDTO dto)
++toDTO(Task task)
+}
+
+class CreateTaskDTO{
+-String name
+-String description
+-int effortEstimate
+-String taskTypeName
+-String responsibleEmail
++CreateTaskDTO(Task task)
++getName()
++getDescription()
++getEffortEstimate()
++getTaskTypeName()
++getResponsible()
+}
+
+CreateSprintTaskUI ..> CreateSprintTaskController
+CreateSprintTaskUI ..> CreateTaskDTO
+
+CreateSprintTaskController ..> Company
+CreateSprintTaskController ..> TaskTypeStore
+CreateSprintTaskController ..> ProjectStore
+CreateSprintTaskController ..> Project
+CreateSprintTaskController ..> SprintList
+CreateSprintTaskController ..> Sprint
+CreateSprintTaskController ..> TaskList
+CreateSprintTaskController ..> ProjectTeam
+CreateSprintTaskController ..> TaskMapper
+CreateSprintTaskController ..> CreateTaskDTO
+
+
+Company "1" *- - "1" TaskTypeStore
+Company "1" *- - "1" TaskStatusStore
+Company "1" *- - "1" ProjectStore
+
+TaskTypeStore "1" *- - "*" TaskType
+TaskStatusStore "1" *- - "*" TaskStatus
+
+TaskType "1" - -o "*" Task
+TaskStatus "1" - -o "*" Task
+
+ProjectStore "1" *- - "*" Project
+
+Project "1" *- - "1" SprintList
+Project "1" *- - "1" ProjectTeam
+
+SprintList "1" *- - "*" Sprint
+
+Sprint "1" *- - "1" TaskList
+
+TaskList "1" *- - "*" Task
+
+ProjectTeam "1" *- - "*" Resource
+
+Resource "*" o- - "1" SystemUser
+
+TaskMapper ..> CreateTaskDTO
+
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 GMT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

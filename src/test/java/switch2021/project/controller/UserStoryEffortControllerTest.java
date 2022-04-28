@@ -1,6 +1,8 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.controller.old.UserStoryEffortController;
+import switch2021.project.factory.SprintFactory;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Resource.Resource;
@@ -56,7 +58,7 @@ class UserStoryEffortControllerTest {
         Company company = new Company();
         UserStoryEffortController controller = new UserStoryEffortController(company);
         //Act
-        Project project = company.getProjectStore().findProjectByID("123");
+        Project project = company.getProjectStore().findById("123");
         Project expected = controller.getProjectByCode("123");
         // Arrange
         assertEquals(project, expected);
@@ -84,8 +86,9 @@ class UserStoryEffortControllerTest {
         project1.getProjectTeam().saveResource(person1);
         project1.getProjectTeam().saveResource(person2);
         SprintStore sprintList = project1.getSprintList();
-        sprintList.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
-
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprintX = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        sprintList.saveSprint(sprintX);
         //Act
         controller.getProjectByCode("Project_2022_1");
         List<Sprint> sprint = sprintList.findSprints();
@@ -107,7 +110,9 @@ class UserStoryEffortControllerTest {
         Project project1 = company.getProjectStore().createAndSaveProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         SprintStore sprintList = project1.getSprintList();
-        Sprint sprint = sprintList.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        sprintList.saveSprint(sprint);
         controller.getProjectByCode(project1.getProjectCode().getCode());
         //Assert
         assertEquals(sprint, controller.getSprintsList().get(0));

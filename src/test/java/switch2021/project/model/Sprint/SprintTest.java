@@ -34,9 +34,11 @@ public class SprintTest {
     @DisplayName("Constructor test, verification of failure by ID")
     public void sprintConstructorFail_ID() {
         //Arrange
-        SprintStore sprintList = new SprintStore(new SprintFactory());
+        SprintStore sprintList = new SprintStore();
         //Act
-        Sprint sprint = sprintList.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        sprintList.saveSprint(sprint);
         String x = sprint.getSprintID().toString();
         //Assert
         assertNotEquals("Project_2022_1_Sprint 2", x);
@@ -46,11 +48,13 @@ public class SprintTest {
     @DisplayName("Constructor test, verification of failure by Name")
     public void sprintConstructorFail_Name() {
         //Arrange
-        SprintStore sprintStore = new SprintStore(new SprintFactory());
+        SprintStore sprintStore = new SprintStore();
         //Act
-        sprintStore.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
-        Sprint sprint = new Sprint("Project_2022_1", "Project_2022_1_Sprint 2", "Name of the Sprint");
-        String name = sprint.getSprintName().getText();
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint1 = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        sprintStore.saveSprint(sprint1);
+        Sprint sprint2 = new Sprint("Project_2022_1", "Project_2022_1_Sprint 2", "Name of the Sprint");
+        String name = sprint2.getSprintName().getText();
         //Assert
         assertNotEquals("Sprint Name", name);
     }
@@ -59,10 +63,12 @@ public class SprintTest {
     @DisplayName("Constructor test, verification of total failure (all parameters)")
     public void sprintConstructorFail_All() {
         //Arrange
-        SprintStore sprintStore = new SprintStore(new SprintFactory());
+        SprintStore sprintStore = new SprintStore();
         //Act
-        Sprint sprint1 = sprintStore.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint1 = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
         String x = sprint1.getSprintName().getText();
+        sprintStore.saveSprint(sprint1);
         Sprint sprint2 = new Sprint("Project_2022_1", "Project_2022_1_Sprint 2", "Name of the Sprint");
         String name = sprint2.getSprintName().getText();
         //Assert
@@ -157,9 +163,12 @@ public class SprintTest {
     @DisplayName("Test to validate start date")
     public void validateStartDate() {
         //Arrange
-        SprintStore sprintList = new SprintStore(new SprintFactory());
-        Sprint sprint1 = sprintList.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "New Sprint", 2);
-        Sprint sprint2 = sprintList.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 2", "New New Sprint", 2);
+        SprintStore sprintList = new SprintStore();
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint1 = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "New Sprint");
+        sprintList.saveSprint(sprint1);
+        Sprint sprint2 = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 2", "New New Sprint");
+        sprintList.saveSprint(sprint2);
         sprint1.setStartDate(LocalDate.of(2022, 4, 1));
         sprint2.setStartDate(LocalDate.of(2022, 4, 1));
         sprint1.setEndDate(LocalDate.of(2022, 5, 1));

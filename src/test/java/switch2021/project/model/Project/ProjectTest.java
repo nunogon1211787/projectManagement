@@ -13,8 +13,7 @@ import switch2021.project.model.Task.Task;
 import switch2021.project.model.Task.TaskTypeEnum;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.UserStory.UserStoryStore;
+import switch2021.project.model.UserStory.RepoUserStory;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.repositories.ProjectStore;
@@ -51,7 +50,7 @@ class ProjectTest {
 
         proj = company.getProjectStore().createAndSaveProject("prototype", "test1", customer,
                 typo, sector, date, 7, 5000);
-        company.getProjectStore().findProjectByID(proj.getProjectCode().getCode()).setEndDate(LocalDate.now());
+        company.getProjectStore().findById(proj.getProjectCode().getCode()).setEndDate(LocalDate.now());
     }
 
     @Test
@@ -67,28 +66,28 @@ class ProjectTest {
         Description description = proj.getDescription();
         Description valueDescription = new Description("test1");
 
-        Customer customer = company.getProjectStore().findProjectByID("Project_2022_1").getCustomer();
+        Customer customer = company.getProjectStore().findById("Project_2022_1").getCustomer();
         Customer valueCustomer = company.getCustomerStore().getCustomerByName("Teste");
 
-        Typology typology = company.getProjectStore().findProjectByID("Project_2022_1").getTypology();
+        Typology typology = company.getProjectStore().findById("Project_2022_1").getTypology();
         Typology valueTypology = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
 
-        BusinessSector sector = company.getProjectStore().findProjectByID("Project_2022_1").getBusinessSector();
+        BusinessSector sector = company.getProjectStore().findById("Project_2022_1").getBusinessSector();
         BusinessSector valueSector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
 
         ProjectStatusEnum status = ProjectStatusEnum.PLANNED;
-        ProjectStatusEnum valueStatus = company.getProjectStore().findProjectByID("Project_2022_1").getProjectStatus();
+        ProjectStatusEnum valueStatus = company.getProjectStore().findById("Project_2022_1").getProjectStatus();
 
-        LocalDate date = company.getProjectStore().findProjectByID("Project_2022_1").getStartDate();
+        LocalDate date = company.getProjectStore().findById("Project_2022_1").getStartDate();
         LocalDate valueDate = LocalDate.of(2021, 12, 12);
 
-        LocalDate endDate = company.getProjectStore().findProjectByID("Project_2022_1").getEndDate();
+        LocalDate endDate = company.getProjectStore().findById("Project_2022_1").getEndDate();
         LocalDate valueEndDate = LocalDate.now();
 
-        int numberOfSprints = company.getProjectStore().findProjectByID("Project_2022_1").getNumberOfSprints().getNumberOfSprintsVO();
+        int numberOfSprints = company.getProjectStore().findById("Project_2022_1").getNumberOfSprints().getNumberOfSprintsVO();
         int valueNrSprint = 7;
 
-        double budget = company.getProjectStore().findProjectByID("Project_2022_1").getBudget().getBudgetVO();
+        double budget = company.getProjectStore().findById("Project_2022_1").getBudget().getBudgetVO();
         double valueBudget = 5000;
         //Result
         assertEquals(valueCode, code);
@@ -107,7 +106,7 @@ class ProjectTest {
     @Test
     @DisplayName("Project addition to list test")
     public void saveProjectTest() {
-        List<Project> test = company.getProjectStore().findAllProjects();
+        List<Project> test = company.getProjectStore().findAll();
         String code = test.get(0).getProjectCode().getCode();
         String expectedCode = "Project_2022_1";
         assertEquals(expectedCode, code);
@@ -274,10 +273,13 @@ class ProjectTest {
     @Test
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTest() {
-        SprintStore sprintList1 = new SprintStore(new SprintFactory());
-        sprintList1.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
-        SprintStore projectSprintList = new SprintStore(new SprintFactory());
-        projectSprintList.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        SprintStore sprintList1 = new SprintStore();
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint x = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        sprintList1.saveSprint(x);
+        SprintStore projectSprintList = new SprintStore();
+        Sprint y = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        projectSprintList.saveSprint(y);
         assertEquals(sprintList1.findSprints().size(), projectSprintList.findSprints().size());
     }
 
@@ -285,11 +287,15 @@ class ProjectTest {
     @DisplayName("Validate the getter of sprint store")
     void getSprintStoreTestFail() {
         //Arrange
-        SprintStore sprintList1 = new SprintStore(new SprintFactory());
-        sprintList1.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Effort View", 2);
-        sprintList1.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 2", "Sprint Effort View View", 2);
-        SprintStore projectSprintList = new SprintStore(new SprintFactory());
-        projectSprintList.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 2", "Sprint Effort View 1", 2);
+        SprintStore sprintList1 = new SprintStore();
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint x = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Effort View");
+        Sprint y = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 2", "Sprint Effort View View");
+        sprintList1.saveSprint(x);
+        sprintList1.saveSprint(y);
+        SprintStore projectSprintList = new SprintStore();
+        Sprint z = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 2", "Sprint Effort View 1");
+        projectSprintList.saveSprint(z);
         //Assert
         assertNotEquals(sprintList1.findSprints().size(), projectSprintList.findSprints().size());
     }
@@ -305,9 +311,12 @@ class ProjectTest {
         Resource resource = new Resource(user, startDateMb, endDateMb, new CostPerHour(100), new PercentageOfAllocation(.5));
         String taskDescription = "must be at least 20 characters";
         TaskTypeEnum taskType = TaskTypeEnum.Design;
-        SprintStore sprintStore = new SprintStore(new SprintFactory());
-        Sprint sprint1 = sprintStore.createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name", 2);
+        SprintStore sprintStore = new SprintStore();
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint1 = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        sprintStore.saveSprint(sprint1);
         sprint1.setStartDate(LocalDate.of(2022, 1, 1));
+        sprint1.setEndDate(LocalDate.of(2022, 1, 15));
         SprintID id = new SprintID("Project_2022_1_Sprint 1");
         boolean x = sprint1.isCurrentSprint();
         Task taskTest = sprint1.getTaskStore().createTask("test", taskDescription, 8.0, taskType, resource);
@@ -379,7 +388,7 @@ class ProjectTest {
         assertNotEquals(list1, list3);
         assertNotEquals(list1.hashCode(), list3.hashCode());
         assertEquals(7, project.getNumberOfSprints().getNumberOfSprintsVO());
-        assertEquals(project.getProjectCode(), list1.findProjectByID(project.getProjectCode().getCode()).getProjectCode());
+        assertEquals(project.getProjectCode(), list1.findById(project.getProjectCode().getCode()).getProjectCode());
         assertEquals("prototype", project.getProjectName().getText());
         assertEquals("test1234", project.getDescription().getText());
         assertEquals(sector, project.getBusinessSector());
@@ -389,7 +398,7 @@ class ProjectTest {
     @DisplayName("Test Override")
     public void overrideTest() {
         //Arrange
-        UserStoryStore backlog = new UserStoryStore();
+        RepoUserStory backlog = new RepoUserStory();
         LocalDate date = LocalDate.of(2024, 12, 12);
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");

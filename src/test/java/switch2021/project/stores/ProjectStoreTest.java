@@ -67,7 +67,7 @@ public class ProjectStoreTest {
         projectStore.getProjectList().add(proj);
 
         // Act
-        Project project1 = projectStore.findProjectByID("Project_2022_1");
+        Project project1 = projectStore.findById("Project_2022_1");
 
         // Assert
         assertEquals(proj, project1);
@@ -82,7 +82,7 @@ public class ProjectStoreTest {
         when(proj.hasCode(anyString())).thenReturn(false);
 
         // Act
-        Project project1 = projectStore.findProjectByID("Project_2022_1");
+        Project project1 = projectStore.findById("Project_2022_1");
 
         // Assert
         assertNull(project1);
@@ -158,7 +158,7 @@ public class ProjectStoreTest {
     public void getProjectListSuccessEmpty() {
         //Arrange
         ProjectStore projectStore = new ProjectStore();
-        List<Project> projectList = projectStore.findAllProjects();
+        List<Project> projectList = projectStore.findAll();
         // Assert
         assertTrue(projectList.isEmpty());
     }
@@ -174,7 +174,7 @@ public class ProjectStoreTest {
         projectStore.getProjectList().add(proj);
         projectStore.getProjectList().add(proj2);
 
-        List<Project> projectList = projectStore.findAllProjects();
+        List<Project> projectList = projectStore.findAll();
 
         // Assert
         assertEquals(2, projectList.size());

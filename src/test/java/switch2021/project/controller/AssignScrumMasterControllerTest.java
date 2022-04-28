@@ -1,8 +1,10 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.mapper.ProjectTeamMapper;
-import switch2021.project.mapper.ProjectsMapper;
+import switch2021.project.controller.old.AssignScrumMasterController;
+import switch2021.project.factory.SprintFactory;
+import switch2021.project.mapper.old.ProjectTeamMapper;
+import switch2021.project.mapper.old.ProjectsMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Resource.Resource;
@@ -104,8 +106,11 @@ class AssignScrumMasterControllerTest {
             Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
             proj1.setSprintDuration(new SprintDuration(14));
-            proj1.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint Current", "Current Sprint", 2);
-            proj1.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint Next", "Next Sprint", 2);
+            SprintFactory sprintFactory = new SprintFactory();
+            Sprint sprint1 = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint Current", "Current Sprint");
+            proj1.getSprintList().saveSprint(sprint1);
+            Sprint sprint2 = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint Next", "Next Sprint");
+            proj1.getSprintList().saveSprint(sprint2);
             //Act
             controller.getProject("project_2022_1");
             controller.getResource("manueljose");
@@ -129,8 +134,11 @@ class AssignScrumMasterControllerTest {
             Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
                     typo, sector, LocalDate.of(2021, 11, 1), 2, 3000);
             proj1.setSprintDuration(new SprintDuration(14));
-            proj1.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint Current", "Sprint Current", 2);
-            proj1.getSprintList().createAndSaveSprint("Project_2022_1", "Project_2022_1_Sprint Next", "Sprint Next", 2);
+            SprintFactory sprintFactory = new SprintFactory();
+            Sprint sprint1 = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint Current", "Sprint Current");
+            proj1.getSprintList().saveSprint(sprint1);
+            Sprint sprint2 = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint Next", "Sprint Next");
+            proj1.getSprintList().saveSprint(sprint2);
             //Act
             controller.getProject("project_2022_1");
             controller.getResource("manueljose");

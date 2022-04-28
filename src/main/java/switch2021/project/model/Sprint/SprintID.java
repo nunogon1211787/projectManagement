@@ -2,6 +2,7 @@ package switch2021.project.model.Sprint;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import switch2021.project.interfaces.TaskContainerID;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.ProjectID;
@@ -28,7 +29,6 @@ public class SprintID implements ValueObject<SprintID>, TaskContainerID {
         this.sprintName = new Description(values[3]);
     }
 
-
     /** Override Methods */
 
     @Override
@@ -37,7 +37,10 @@ public class SprintID implements ValueObject<SprintID>, TaskContainerID {
     }
 
     @Override
-    public boolean sameValueAs(SprintID other) {
-        return false;
+    public boolean sameValueAs(final SprintID other) {
+        return other != null && new EqualsBuilder().
+                append(this.projectID, other.projectID).
+                append(this.sprintName, other.sprintName).
+                isEquals();
     }
 }

@@ -17,6 +17,7 @@ class Class2 {
     -password
 }
 
-Class1 "1" -> "0..*" Class2: knows
+
+
 
 @enduml

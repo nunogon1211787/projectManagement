@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="447.2px" preserveAspectRatio="none" style="width:705px;height:447px;background:#FFFFFF;" version="1.1" viewBox="0 0 705 447" width="705.6px" zoomAndPan="magnify"><defs><filter height="300%" id="f19f5zol28bzw1" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="1.6000000000000003"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="3.2000000000000006" dy="3.2000000000000006" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="14.4" lengthAdjust="spacing" textLength="698.4" x="1.6" y="14.9484">Domain Model excerpt - US032 - As SM/Team Member, I want to create task outside the scope of a user story</text><!--MD5=[02e4b9b7573f1156f41e60aa5b4e25a4]
+class Company--><rect codeLine="9" fill="#FEFECE" filter="url(#f19f5zol28bzw1)" height="32.875" id="Company" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="47.2" x="177.4" y="23.7125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="42.4" x="179.8" y="37.6781">Company</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="178.2" x2="223.8" y1="43.7875" y2="43.7875"/><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="178.2" x2="223.8" y1="50.1875" y2="50.1875"/><!--MD5=[88ee21eff3843b66d49ba6da731dc29a]
+class TaskType--><rect codeLine="11" fill="#FEFECE" filter="url(#f19f5zol28bzw1)" height="43.9438" id="TaskType" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="47.2" x="261.4" y="131.7125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="42.4" x="263.8" y="145.6781">TaskType</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="262.2" x2="307.8" y1="151.7875" y2="151.7875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="24" x="266.2" y="164.1227">-name</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="262.2" x2="307.8" y1="169.2563" y2="169.2563"/><!--MD5=[007b513da6771087a86fbb3bd355c48d]
+class TaskStatus--><rect codeLine="14" fill="#FEFECE" filter="url(#f19f5zol28bzw1)" height="43.9438" id="TaskStatus" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="55.2" x="178.2" y="131.7125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="49.6" x="181" y="145.6781">TaskStatus</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="179" x2="232.6" y1="151.7875" y2="151.7875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="45.6" x="183" y="164.1227">-description</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="179" x2="232.6" y1="169.2563" y2="169.2563"/><!--MD5=[79d378210367c0c6ec62ef762ddfbd1b]
+class Project--><rect codeLine="17" fill="#FEFECE" filter="url(#f19f5zol28bzw1)" height="32.875" id="Project" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="35.2" x="293" y="23.7125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="30.4" x="295.4" y="37.6781">Project</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="293.8" x2="327.4" y1="43.7875" y2="43.7875"/><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="293.8" x2="327.4" y1="50.1875" y2="50.1875"/><!--MD5=[ea85c9eeae48c9b9754651e25079a913]
+class ProjectTeam--><rect codeLine="21" fill="#FEFECE" filter="url(#f19f5zol28bzw1)" height="32.875" id="ProjectTeam" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="60.8" x="449" y="137.3125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="56" x="451.4" y="151.2781">ProjectTeam</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="449.8" x2="509" y1="157.3875" y2="157.3875"/><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="449.8" x2="509" y1="163.7875" y2="163.7875"/><!--MD5=[452a66c2e8d45f5bd209be454bbcd04f]
+class Sprint--><rect codeLine="23" fill="#FEFECE" filter="url(#f19f5zol28bzw1)" height="66.0813" id="Sprint" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="48" x="373" y="120.5125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="25.6" x="384.2" y="134.4781">Sprint</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="373.8" x2="420.2" y1="140.5875" y2="140.5875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="36.8" x="377.8" y="152.9227">-sprint_ID</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="38.4" x="377.8" y="163.9914">-startDate</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="35.2" x="377.8" y="175.0602">-endDate</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="373.8" x2="420.2" y1="180.1938" y2="180.1938"/><!--MD5=[6b13f1b330d33795af281e5c1dfe1e98]
+class Resource--><rect codeLine="30" fill="#FEFECE" filter="url(#f19f5zol28bzw1)" height="55.0125" id="Resource" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="48" x="350.6" y="381.3125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="43.2" x="353" y="395.2781">Resource</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="351.4" x2="397.8" y1="401.3875" y2="401.3875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="38.4" x="355.4" y="413.7227">-startDate</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="35.2" x="355.4" y="424.7914">-endDate</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="351.4" x2="397.8" y1="429.925" y2="429.925"/><!--MD5=[b34797a66dc35cbf1d65f7e3ca75530e]
+class Task--><rect codeLine="34" fill="#FEFECE" filter="url(#f19f5zol28bzw1)" height="66.0813" id="Task" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="66.4" x="251.8" y="252.5125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="21.6" x="274.2" y="266.4781">Task</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="252.6" x2="317.4" y1="272.5875" y2="272.5875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="24" x="256.6" y="284.9227">-name</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="45.6" x="256.6" y="295.9914">-description</text><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="56.8" x="256.6" y="307.0602">-effortEstimate</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="252.6" x2="317.4" y1="312.1938" y2="312.1938"/><!--MD5=[bc064d979c32666ae52f3d7624591b7b]
+class SystemUser--><rect codeLine="40" fill="#FEFECE" filter="url(#f19f5zol28bzw1)" height="43.9438" id="SystemUser" style="stroke:#A80036;stroke-width:1.2000000000000002;" width="59.2" x="469.8" y="386.9125"/><text fill="#000000" font-family="sans-serif" font-size="9.6" lengthAdjust="spacing" textLength="54.4" x="472.2" y="400.8781">SystemUser</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="470.6" x2="528.2" y1="406.9875" y2="406.9875"/><text fill="#000000" font-family="sans-serif" font-size="8.8" lengthAdjust="spacing" textLength="24" x="474.6" y="419.3227">-name</text><line style="stroke:#A80036;stroke-width:1.2000000000000002;" x1="470.6" x2="528.2" y1="424.4563" y2="424.4563"/><!--MD5=[320df5b02082943d077258b26ad4b674]
+link Company to TaskType--><path codeLine="45" d="M224.472,56.6245 C233.192,63.2645 242.68,71.5365 249.8,80.5125 C261,94.6245 269.84,112.8725 275.864,127.5205 " fill="none" id="Company-to-TaskType" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="277.488,131.5525,277.7558,123.678,275.9886,127.8441,271.8225,126.077,277.488,131.5525" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="39.2" x="258.6" y="92.1086">contains</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="224.686" y="73.8936">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="271.2884" y="122.9831">*</text><!--MD5=[06299268e42744d0b4935fc683159716]
+link Company to TaskStatus--><path codeLine="46" d="M201.68,56.7205 C202.464,75.0965 203.776,105.6645 204.704,127.4085 " fill="none" id="Company-to-TaskStatus" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="204.888,131.6325,207.7759,124.3017,204.7162,127.6362,201.3818,124.5765,204.888,131.6325" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="39.2" x="203.4" y="92.1086">contains</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="195.5103" y="73.7277">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="200.2146" y="123.0816">*</text><!--MD5=[4fd7a19b1634c741096f92064b745dd2]
+reverse link Project to Company--><path codeLine="47" d="M288.928,40.1125 C270.424,40.1125 243.864,40.1125 224.784,40.1125 " fill="none" id="Project-backto-Company" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="292.976,40.1125,285.776,36.9125,288.976,40.1125,285.776,43.3125,292.976,40.1125" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="39.2" x="239.2" y="34.9086">contains</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="282.7209" y="36.1015">*</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="230.9316" y="36.6524">1</text><!--MD5=[08da31dc9d8f86fd422e06d9bb19239b]
+reverse link TaskType to Task--><path codeLine="48" d="M285,179.7765 C285,200.4965 285,229.9765 285,252.4485 " fill="none" id="TaskType-backto-Task" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="285,175.7525,281.8,182.9525,285,179.7525,288.2,182.9525,285,175.7525" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="39.2" x="285.8" y="224.1086">contains</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="278.7875" y="192.8068">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="280.6688" y="243.9249">*</text><!--MD5=[667064c297592160201ebcf27f824fa3]
+reverse link TaskStatus to Task--><path codeLine="49" d="M215.032,179.7845 C220.728,194.0805 228.68,212.0245 237.8,226.9125 C243.088,235.5445 249.536,244.3045 255.944,252.3045 " fill="none" id="TaskStatus-backto-Task" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="213.488,175.8485,213.1408,183.7199,214.9499,179.5718,219.0981,181.3809,213.488,175.8485" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="39.2" x="238.6" y="224.1086">contains</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="208.9573" y="192.9238">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="246.8004" y="243.7571">*</text><!--MD5=[ae4b1b71eb317da752f325fb1afab916]
+link Task to Task--><path codeLine="50" d="M318.368,273.8965 C333.288,272.7765 346.2,276.7125 346.2,285.7125 C346.2,293.8725 335.6,297.8645 322.504,297.7045 " fill="none" id="Task-to-Task" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="318.368,297.5285,325.4139,301.0549,322.3638,297.7117,325.707,294.6616,318.368,297.5285" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="79.2" x="351" y="290.1086">has precedences</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="324.6679" y="268.7013">*</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="324.6679" y="296.5428">*</text><!--MD5=[c1411256f47ae1ed9a3bb6846f611a01]
+reverse link Project to Sprint--><path codeLine="51" d="M325.32,59.9925 C338.368,76.9045 357.664,101.9205 372.944,121.7365 " fill="none" id="Project-backto-Sprint" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="322.792,56.7205,324.6615,64.3746,325.2375,59.8859,329.7261,60.4618,322.792,56.7205" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="42.4" x="351.4" y="92.1086">belong to</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="319.7161" y="73.7277">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="363.57" y="111.8794">*</text><!--MD5=[352310352512ea7c8ebcd3b871b8d730]
+reverse link Project to ProjectTeam--><path codeLine="52" d="M332.432,47.6725 C358.96,56.6965 404.056,74.6805 435.4,101.3125 C447.96,111.9845 459.944,126.4165 468.224,137.3045 " fill="none" id="Project-backto-ProjectTeam" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="328.336,46.3045,334.1498,51.6224,332.1296,47.5728,336.1791,45.5526,328.336,46.3045" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="42.4" x="427.4" y="92.1086">belong to</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="334.6252" y="44.2685">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="458.5186" y="128.631">1</text><!--MD5=[49ce8b5086de51f2983c0d635ef2b5cc]
+reverse link Sprint to Task--><path codeLine="53" d="M370.24,185.6645 C352.944,205.8085 330.464,231.9765 312.936,252.3845 " fill="none" id="Sprint-backto-Task" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="372.976,182.4885,365.8607,185.8726,370.3728,185.5255,370.7199,190.0377,372.976,182.4885" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="42.4" x="345" y="224.1086">belong to</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="360.8377" y="186.0119">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="313.2317" y="243.8503">*</text><!--MD5=[12ab16047cb79fbb7abfb3b5c3592b87]
+reverse link ProjectTeam to Resource--><path codeLine="54" d="M476.312,174.3685 C470.904,206.0245 458.088,269.4325 435.4,318.9125 C425.168,341.2325 409.488,364.0645 396.616,381.0405 " fill="none" id="ProjectTeam-backto-Resource" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="477,170.2965,472.6506,176.8663,476.3368,174.2411,478.962,177.9274,477,170.2965" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="42.4" x="464.2" y="290.1086">belong to</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="470.0025" y="187.2973">1</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="396.4316" y="372.5482">*</text><!--MD5=[e438bbbe0cc12af61ed6a0dfa2086895]
+reverse link Task to Resource--><path codeLine="55" d="M311.392,322.3285 C325.264,341.1605 342,363.8645 354.76,381.1845 " fill="none" id="Task-backto-Resource" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="309.008,319.0965,310.7066,326.7903,311.3824,322.3156,315.8571,322.9914,309.008,319.0965" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="64" x="335.4" y="354.5086">is responsible</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="308.2404" y="335.7799">*</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="344.8443" y="372.7196">1</text><!--MD5=[74d758dd36ab3b4a677120f49b0ea586]
+reverse link Resource to SystemUser--><path codeLine="56" d="M402.808,408.9125 C422.744,408.9125 449.424,408.9125 469.688,408.9125 " fill="none" id="Resource-backto-SystemUser" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><polygon fill="#A80036" points="398.664,408.9125,405.864,412.1125,402.664,408.9125,405.864,405.7125,398.664,408.9125" style="stroke:#A80036;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="41.6" x="413.4" y="403.7086">is assign</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="4" x="405.0171" y="405.4057">*</text><text fill="#000000" font-family="sans-serif" font-size="10.4" lengthAdjust="spacing" textLength="5.6" x="457.8904" y="405.7208">1</text><!--MD5=[79a85c642bef0dd6d94970c7f5d0e896]
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title Domain Model excerpt - US032 - As SM/Team Member, I want to create task outside the scope of a user story
+
+together {
+class Company{
+}
+class TaskType{
+- name
+}
+class TaskStatus{
+- description
+}
+class Project{
+}
+}
+together {
+class ProjectTeam{
+}
+class Sprint{
+-sprint_ID
+-startDate
+-endDate
+}
+}
+together {
+class Resource{
+-startDate
+-endDate
+}
+class Task{
+-name
+-description
+-effortEstimate
+}
+}
+class SystemUser{
+-name
+}
+
+
+Company "1" - -> "*" TaskType: contains
+Company "1" - -> "*" TaskStatus: contains
+Company "1" -left-> "*" Project: contains
+TaskType "1" <- - "*" Task: contains
+TaskStatus "1" <- - "*" Task: contains
+Task "*" - -> "*" Task: has precedences
+Project "1" <- - "*" Sprint: belong to
+Project "1" <-right- "1" ProjectTeam: belong to
+Sprint "1" <-right- "*" Task: belong to
+ProjectTeam "1" <- - "*" Resource: belong to
+Task "*" <- - "1" Resource: is responsible
+Resource "*" <-right- "1" SystemUser: is assign
+
+@enduml
+
+@startuml
+
+skinparam classAttributeIconSize 0
+hide circle
+
+title Domain Model excerpt - US032 - As SM/Team Member, I want to create task outside the scope of a user story
+
+together {
+class Company{
+}
+class TaskType{
+- name
+}
+class TaskStatus{
+- description
+}
+class Project{
+}
+}
+together {
+class ProjectTeam{
+}
+class Sprint{
+-sprint_ID
+-startDate
+-endDate
+}
+}
+together {
+class Resource{
+-startDate
+-endDate
+}
+class Task{
+-name
+-description
+-effortEstimate
+}
+}
+class SystemUser{
+-name
+}
+
+
+Company "1" - -> "*" TaskType: contains
+Company "1" - -> "*" TaskStatus: contains
+Company "1" -left-> "*" Project: contains
+TaskType "1" <- - "*" Task: contains
+TaskStatus "1" <- - "*" Task: contains
+Task "*" - -> "*" Task: has precedences
+Project "1" <- - "*" Sprint: belong to
+Project "1" <-right- "1" ProjectTeam: belong to
+Sprint "1" <-right- "*" Task: belong to
+ProjectTeam "1" <- - "*" Resource: belong to
+Task "*" <- - "1" Resource: is responsible
+Resource "*" <-right- "1" SystemUser: is assign
+
+@enduml
+
+PlantUML version 1.2022.0(Tue Jan 11 16:16:42 GMT 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: pt
+Country: PT
+--></g></svg>

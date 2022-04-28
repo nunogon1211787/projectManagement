@@ -2,7 +2,8 @@ package switch2021.project.mapper;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.dto.UserStoryStatusDTO;
+import switch2021.project.dto.old.UserStoryStatusDTO;
+import switch2021.project.mapper.old.ScrumBoardMapper;
 import switch2021.project.model.UserStory.UserStory;
 
 import java.util.ArrayList;

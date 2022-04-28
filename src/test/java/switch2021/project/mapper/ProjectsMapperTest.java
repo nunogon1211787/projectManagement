@@ -3,6 +3,7 @@ package switch2021.project.mapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.dto.ProjectDTO;
+import switch2021.project.mapper.old.ProjectsMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Resource.Resource;

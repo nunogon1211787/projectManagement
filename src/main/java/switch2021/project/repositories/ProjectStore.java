@@ -1,7 +1,7 @@
 package switch2021.project.repositories;
 
 import lombok.Getter;
-import switch2021.project.dto.ProjectDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import switch2021.project.interfaces.ProjectRepositoryInterface;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.SystemUser.SystemUser;
@@ -43,7 +43,7 @@ public class ProjectStore implements ProjectRepositoryInterface {
 
         newProject.setProjectCode(new ProjectID(projectList.size() + 1));
 
-        if (hasProjectId(newProject.getProjectCode().getCode())) {
+        if (existById(newProject.getProjectCode().getCode())) {
             throw new IllegalArgumentException("Error: Project already exists!");
         }
 
@@ -69,13 +69,13 @@ public class ProjectStore implements ProjectRepositoryInterface {
     /**
      * Getters Methods
      **/
-    public List<Project> findAllProjects() {
+    public List<Project> findAll() {
 
         return new ArrayList<>(this.projectList);
     }
 
 
-    public Project findProjectByID(String code) {
+    public Project findById(String code) {
         Project res = null;
         for (Project proj : projectList) {
             if (proj.hasCode(code)) {
@@ -85,7 +85,7 @@ public class ProjectStore implements ProjectRepositoryInterface {
         return res;
     }
 
-    public boolean hasProjectId(String id) {
+    public boolean existById(String id) {
 
         for (Project proj : projectList) {
             if (proj.getProjectCode().getCode().equals(id)) {

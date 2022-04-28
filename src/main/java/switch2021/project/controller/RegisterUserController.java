@@ -3,7 +3,7 @@ package switch2021.project.controller;
 import switch2021.project.dto.RegisterUserDTO;
 import switch2021.project.dto.OutputUserDTO;
 import switch2021.project.model.Company;
-import switch2021.project.model.SystemUser.SystemUserService;
+import switch2021.project.service.SystemUserService;
 
 public class RegisterUserController {
 

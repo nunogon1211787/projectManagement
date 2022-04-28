@@ -8,13 +8,13 @@ skinparam classAttributeIconSize 0
 package "System" <<Rectangle>> {
 
 package "Infrastructure" <<Rectangle>> #lightblue  {
-class "GetAllProjectsRoute" as route << Component >>
+class "ShowAllProjectsRoute" as route << Component >>
 }
 
 package "Interface Adapters" <<Rectangle>> #lightgreen {
 package "Controllers" <<rectangle>>{
-class "GetAllProjectsController" as ctrl << Component >> {
-+getAllProjects()
+class "ShowAllProjectsController" as ctrl << Component >> {
++showAllProjects()
 }
 }
 package "Repositories" <<rectangle>>{
@@ -27,8 +27,8 @@ class "ProjectStore" as store << Component >> {
 
 package "Application Service" <<Rectangle>> #lightpink{
 package "App Services" <<rectangle>>{
-class "GetAllProjectsService" as srv << Component >> {
-+getAllProjects()
+class "ShowAllProjectsService" as srv << Component >> {
++showAllProjects()
 }
 }
 package "IRepositories" <<rectangle>>{
@@ -55,7 +55,7 @@ projectId : ProjectCode
 }
 
 package "DTO" <<rectangle>>{
-class "ProjectsMapper" as map <<Component>> {
+class "ProjectMapper" as map <<Component>> {
 + model2Dto()
 + dto2Json()
 }

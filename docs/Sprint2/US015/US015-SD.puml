@@ -6,13 +6,13 @@ title US015 - As Director, I want to get a list of all projects
 autonumber
 
 actor Director as actor
-participant ": GetAllProjectsRoute" as Route
-participant ": GetAllProjectsController" as Ctrl
-participant ": GetAllProjectsService" as Srv
+participant ": ShowAllProjectsRoute" as Route
+participant ": ShowAllProjectsController" as Ctrl
+participant ": ShowAllProjectsService" as Srv
 participant ": IRepositoryProject" as store
 participant "projects : List<Project>" as list
 participant "proj : Project" as proj
-participant ": ProjectsMapper" as map
+participant ": ProjectMapper" as map
 participant "allProjectsDto : List<ProjectDto>" as listDto
 participant "projDto : ProjectDto" as dto
 participant "allProjectsJson : List<ProjectJson>" as listJson
@@ -23,9 +23,9 @@ autoactivate on
 
 actor -> Route: GET /projects
 
-Route -> Ctrl: getAllProjects()
+Route -> Ctrl: showAllProjects()
 
-Ctrl -> Srv: getAllProjects()
+Ctrl -> Srv: showAllProjects()
 
 Srv -> store: findAll()
 
@@ -33,79 +33,43 @@ store --> list**: create()
 
 store --> Srv: projects
 
-Srv -> map: model2Dto(projects)
-
-map --> listDto**: create()
+Srv --> listDto**: create()
 
 loop for all project (proj) in the list (projects)
 
-map -> list: get(i) : proj
+Srv -> list: get(i) : proj
 deactivate
 
-map -> proj: getProjectId(): id
-deactivate
-
-map -> proj: getProjectName(): name
-deactivate
-
-map -> proj: getProjectStatus(): status
-deactivate
+Srv -> map: model2Dto(proj)
 
 map --> dto**: create()
 
-map -> dto: setCode(id)
-deactivate
+map --> Srv : projDto
 
-map -> dto: setName(name)
-deactivate
-
-map -> dto: setStatus(status)
-deactivate
-
-map -> listDto: add(projDto): true
+Srv -> listDto: add(projDto): true
 deactivate
 
 end
-
-map --> Srv: allProjectsDto
 
 Srv --> Ctrl: allProjectsDto
 
-Ctrl -> map: dto2Json(allProjectsDto)
-
-map --> listJson**: create()
+Ctrl --> listJson**: create()
 
 loop for all project (projDto) in the list (allProjectsDto)
 
-map -> listDto: get(i) : projDto
+Ctrl -> listDto: get(i) : projDto
 deactivate
 
-map -> dto: getCode(): code
-deactivate
-
-map -> dto: getName(): name
-deactivate
-
-map -> dto: getStatus(): status
-deactivate
+Ctrl -> map: dto2Json(projsDto)
 
 map --> json**: create()
 
-map -> json: setCode(code)
-deactivate
+map --> Ctrl : jsonProject
 
-map -> json: setName(name)
-deactivate
-
-map -> json: setStatus(status)
-deactivate
-
-map -> listJson: add(jsonProject): true
+Ctrl -> listJson: add(jsonProject): true
 deactivate
 
 end
-
-map --> Ctrl : allProjectsJson
 
 Ctrl --> Route: allProjectsJson
 

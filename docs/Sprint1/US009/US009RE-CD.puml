@@ -6,23 +6,49 @@ skinparam classAttributeIconSize 0
 
 title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
 
-class CreateUserStoryRoute {
+skinparam classAttributeIconSize 0
 
+package "Infrastructure" <<Folder>> #lightblue  {
+class "CreateUserStoryRoute" as route << Component >>
 }
 
-class CreateUserStoryController {
-    +createUserStory(userStoryDto)
+package "Interface Adapter" <<Folder>> #lightgreen {
+package "Controllers" <<Folder>>{
+class "CreateUserStoryController" as ctrl << Component >> {
++createUserStory(json)
+}
+}
+package "Repositories" <<Folder>>{
+class "RepoUserStory" as store << Repository >> {
+-userStoryList : List<UserStory>
++ save(newUserStory)
++ existsByUserStoryId(tUserStoryId)
+'- add(newUserStory)
+}
+}
 }
 
-
-
-class CreateUserStoryService {
-- userStoryFactory : UserStoryFactory
-+createAndSaveUserStory(userStoryDto)
-
+package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
+package "App Service" <<Folder>>{
+class "CreateUserStoryService" as service << Component >> {
++createAndSaveUserStory(dto)
 }
-
-class UserStoryDto {
+}
+package "Repositories Interface" <<Folder>>{
+interface "IRepoUserStory" as repo << Interface >>{
++ save(newUserStory)
++ existsByUserStoryId(UserStoryId)
+}
+}
+package "Factory Interface" <<Folder>>{
+interface "IUserStoryFactory" as factoryInterface << Interface >>{
++createUserStory(projectID, userStoryID, title, \n priority, description, timeEstimate)
+}
+}
+}
+package "DTO" <<Folder>> #black {
+package "UserStoryDTO" <<Folder>>{
+class "UserStoryDTO" as dto << Component >> {
 - userStoryID : UserStoryID
 - projectID : ProjectID
 - title : UsTitle
@@ -35,63 +61,97 @@ class UserStoryDto {
 + getPriority()
 + getDescription()
 + getTimeEstimate()
-'+ UserStoryDto(projectID, userStoryID, \n title, priority, description, timeEstimate))
-
+}
+}
+package "DTO" <<Folder>> {
+package "OutputUsDTO" <<Folder>>{
+class "OutputUsDTO" as outDto << Component >> {
+- userStoryID : UserStoryID
+- projectID : ProjectID
+- title : UsTitle
+}
+}
+package "DTO" <<Folder>> {
+package "UserStoryMapper" <<Folder>>{
+class "UserStoryMapper" as mapper << Component >> {
++ toDto(newUserStory)
+}
+}
 }
 
-class UserStoryFactory {
-+createUserStory(projectID, userStoryID, title, \n priority, description, timeEstimate)
-
-
-}
-
-
-class UserStoryStore {
-- userStoryList : List<UserStory>
--userStoryRepositoryInterface : UserStoryRepositoryInterface
-+ save(us)
-+ existsByUserStoryId(us.getUserStoryId())
-}
-
-class UserStory {
+package "Entity/Core/Domain" <<Folder>> #burlywood{
+package "Aggregate" <<Folder>>{
+class "UserStory" as userStory << Root >> {
 - userStoryID : UserStoryID
 - projectID : ProjectID
 - title : UsTitle
 - priority : UsPriority
 - description : Description
 - timeEstimate : UsHour
-- parentUserStory : UserStory
-- usStartDate : LocalDate
-- usEndDate : LocalDate
-- usCancelled : LocalDate
 + UserStory(projectID, userStoryID, title, priority, \n description, timeEstimate)
 }
-
-class UserStoryMapper {
-+ toDto(us)
 }
-
-class OutputUsDto {
-- userStoryID : UserStoryID
-- projectID : ProjectID
-- title : UsTitle
-- priority : UsPriority
-- description : Description
-- timeEstimate : UsHour
-+create(projectID, userStoryID, title, priority, \n description, timeEstimate)
+package "Factory" <<Folder>>{
+class "UserStoryFactory" as userStoryF << Factory >> {
++createUserStory(projectID, userStoryID, title, \n priority, description, timeEstimate)
 }
+}
+package "Value Object" <<Folder>>{
+class "UserStoryID" as usID << Value Object >> {
+-userStoryID : UserStoryID
++checkUsID()
+}
+}
+'package "Value Object" <<Folder>>{
+'class "ProjectID" as projID << Value Object >> {
+'-rojectID : ProjectID
+'+checkUsID()
+'}
 
-CreateUserStoryRoute ..> CreateUserStoryController
+'package "Value Object" <<Folder>>{
+'class "UsTitle" as usTitle << Value Object >> {
+'- title : UsTitle
+'+checkUsID()
+'}
 
-CreateUserStoryController..>CreateUserStoryService
-CreateUserStoryService..>UserStoryDto
-CreateUserStoryService..>UserStoryFactory
-CreateUserStoryService..>UserStoryStore
-CreateUserStoryService..>UserStoryMapper
+'package "Value Object" <<Folder>>{
+'class "Priority" as priority << Value Object >> {
+'-priority : UsPriority
+'+checkUsID()
+'}
+'
+'package "Value Object" <<Folder>>{
+'class "Description" as desc << Value Object >> {
+'-description : Description
+'+checkUsID()
+'}
+'
+'package "Value Object" <<Folder>>{
+'class "TimeEstimate" as time << Value Object >> {
+'-timeEstimate : UsHour
+'+checkUsID()
+'}
 
 
-UserStoryStore "1" -down-> "0..*" UserStory
-UserStoryMapper -down->  OutputUsDto
+route ..> ctrl
+'ctrl..> mapper'
+ctrl..> service
+'mapper..> dto
+mapper..>outDto
+store..|> repo
+service..> mapper
+service..> dto
+service..> factoryInterface
+service..left> repo
+userStoryF"1"*-d-"1" usID
+'userStoryF..>projID
+'userStoryF..>usTitle
+'userStoryF..>priority
+'userStoryF..>time
+'userStoryF..>desc
+userStoryF..right>userStory
+userStoryF..up|>factoryInterface
+
 
 
 @enduml

@@ -1,48 +1,45 @@
 package switch2021.project.controller;
 
-import switch2021.project.model.Company;
-import switch2021.project.model.Project.Project;
-import switch2021.project.repositories.ProjectStore;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import switch2021.project.dto.OutputSprintDTO;
+import switch2021.project.dto.SprintDTO;
+import switch2021.project.service.CreateSprintService;
 
-import java.util.Collections;
-import java.util.List;
-
+@Controller
+@RestController
+@RequestMapping("/sprints")
 public class CreateSprintController {
 
     /**
      * Attributes
      **/
-    private final Company company;
-    private Project proj;
-    private ProjectStore projectStore;
+
+    @Autowired
+    private CreateSprintService createSprintService;
 
 
     /**
      * Constructor to test (without SINGLETON)
      **/
-    public CreateSprintController(Company company) {
-        this.company = company;
-    }
-
+    public CreateSprintController() {}
 
     /**
      * Methods
      **/
-    public List<Project> getCurrentProjectListByUserEmail(String email) {
-        this.projectStore = company.getProjectStore();
-        List<Project> currentProjectListByUser = projectStore.getCurrentProjectsByUserEmail(email);
-        return Collections.unmodifiableList(currentProjectListByUser);
-    }
 
-    public Project getProject(String code) {
-        this.proj = this.projectStore.findProjectByID(code);
-        return this.proj;
-    }
+    @PostMapping("")
+    public ResponseEntity<Object> createAndSaveSprint(@RequestBody SprintDTO dto) {
 
-    public boolean createAndSaveSprint(String projectID, String sprintID, String name) {
-        int sprintDuration = this.proj.getSprintDuration().getSprintDurationDays();
-        this.proj.getSprintList().createAndSaveSprint(projectID, sprintID, name, sprintDuration);
-        return true;
+        OutputSprintDTO newSprint = createSprintService.createAndSaveSprint(dto);
+
+        return new ResponseEntity<>(newSprint, HttpStatus.CREATED);
     }
 }
 
