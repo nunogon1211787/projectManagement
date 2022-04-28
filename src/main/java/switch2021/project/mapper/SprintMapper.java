@@ -1,9 +1,11 @@
 package switch2021.project.mapper;
 
+import org.springframework.stereotype.Component;
 import switch2021.project.dto.OutputSprintDTO;
 import switch2021.project.model.Sprint.Sprint;
-public class SprintMapper {
 
+@Component
+public class SprintMapper {
 
     /** Constructor */
     private SprintMapper() {

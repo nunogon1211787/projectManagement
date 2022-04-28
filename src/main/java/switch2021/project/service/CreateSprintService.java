@@ -23,7 +23,11 @@ public class CreateSprintService {
 
 
     /** Constructor */
-    public CreateSprintService() {
+    public CreateSprintService(SprintRepositoryInterface sprintRepositoryInterface, SprintMapper sprintMapper,
+                               ISprintFactory iSprintFactory) {
+        this.sprintRepositoryInterface = sprintRepositoryInterface;
+        this.sprintMapper = sprintMapper;
+        this.iSprintFactory = iSprintFactory;
     }
 
     /** Create and Save a New Sprint */

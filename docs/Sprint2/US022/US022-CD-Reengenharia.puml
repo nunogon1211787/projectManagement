@@ -1,0 +1,108 @@
+@startuml
+'https://plantuml.com/class-diagram'hide circle
+skinparam classAttributeIconSize 0
+
+title US022 - As Project Manager, I want to create a sprint.
+
+skinparam classAttributeIconSize 0
+
+package "Infrastructure" <<Folder>> #lightblue  {
+class "CreateSprintRoute" as route << Component >>
+}
+
+package "Interface Adapter" <<Folder>> #lightgreen {
+package "Controllers" <<Folder>>{
+class "CreateSprintController" as ctrl << Component >> {
++createSprint(json)
+}
+}
+package "Repositories" <<Folder>>{
+class "SprintStore" as store << Repository >> {
+-sprints : List<Sprint>
++ save(newSprint)
++ existsBySprintId(SprintID)
+'-add(newSprint)
+}
+}
+}
+
+package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
+package "App Service" <<Folder>>{
+class "CreateSprintService" as service << Component >> {
++createAndSaveSprint(dto)
+}
+}
+package "Repositories Interface" <<Folder>>{
+interface "SprintRepositoryInterface" as repo << Interface >>{
++ save(newSprint)
++ existsBySprintId(SprintID)
+}
+}
+package "Factory Interface" <<Folder>>{
+interface "ISprintFactory" as factoryInterface << Interface >>{
++createSprint(projectID, sprintID, name)
+}
+}
+}
+package "DTO" <<Folder>> {
+package "SprintDTO" <<Folder>>{
+class "SprintDTO" as dto << Component >> {
+- sprintID : SprintID
+- projectID : ProjectID
+- name : Description
++ getProjectID()
++ getSprintID()
++ getTName()
+}
+}
+package "DTO" <<Folder>> {
+package "OutputSprintDTO" <<Folder>>{
+class "OutputSprintDTO" as outDto << Component >> {
+- sprintID : SprintID
+}
+}
+package "DTO" <<Folder>> {
+package "SprintMapper" <<Folder>>{
+class "SprintMapper" as mapper << Component >> {
++ toDto(newSprint)
+}
+}
+}
+
+package "Entity/Core/Domain" <<Folder>> #burlywood{
+package "Aggregate" <<Folder>>{
+class "Sprint" as sprint << Root >> {
+- sprintID : SprintID
+- projectID : ProjectID
+- name : Description
++ Sprint(projectID, sprintID, name)
+}
+}
+package "Factory" <<Folder>>{
+class "SprintFactory" as sprintF << Factory >> {
++createSprint(projectID, sprintID, name)
+}
+}
+package "Value Object" <<Folder>>{
+class "SprintID" as sprintID << Value Object >> {
+-sprintID : SprintID
++sprintID()
+}
+}
+
+
+route ..> ctrl
+ctrl..> service
+mapper..>outDto
+store..|> repo
+service..> mapper
+service..> dto
+service..> factoryInterface
+service..left> repo
+sprintF"1"*-d-"1" sprintID
+sprintF..right>sprint
+sprintF..up|>factoryInterface
+
+
+
+@enduml
