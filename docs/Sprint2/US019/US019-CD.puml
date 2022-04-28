@@ -1,41 +1,60 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-hide circle
-skinparam classAttributeIconSize 0
+title US019 - As a team member I want to set the effort of a user story
 
-title US018 - As PO/SM/TeamMember, I want to consult the Product Backlog, i. e. to get the list of user stories sorted by priority
-
-class ProductBacklogUI {
-
+package Infrastructure <<Rectangle>> #lightblue {
+class TimeEffortRoute <<component>>{
+}
 }
 
-class ProductBacklogController {
-    +getProjectListByUserEmail(String email)
-    +getProject(String code)
-    +getUsSortedByPriority()
+package Interface_Adapters <<Rectangle>> #lightgreen {
+class TimeEffortController {
++getUserStory()
 }
 
-class Company {
-    +getProjectStore()
-}
-
-class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
-}
-
-class Project {
--code : String
--productBacklog : ProductBacklog
-+getUserStoryStore()
-}
-
-class ProductBacklog {
+class UserStoryStore {
 -userStoryList : List<UserStory>
-+getUsSortedByPriority()
++findByID()
 }
 
+}
+
+
+package Aplication_Service <<Rectangle>> #salmon {
+
+
+package IRepositories <<Rectangle>> {
+class UserStoryInterface {
++findByID()
+}
+}
+
+package App_Service <<Rectangle>> {
+class UserStoryService <<service>> {
++setTimeEffort()
+}
+}
+}
+
+package DTO <<Rectangle>> {
+class UserStoryMapper <<component>> {
++data2Dto()
++model2Dto()
++dto2Json()
+}
+class UserStoryDTO <<component>> {
+    - userStoryId :UserStoryId ;
+    - timeEstimate :UsHour ;
+}
+
+class dataDto <<component>> {
+-data : String
+}
+
+}
+
+package Domain <<Rectangle>> #tan {
 class UserStory {
 - userStoryStatus : UserStoryStatus
 - priority : int
@@ -43,16 +62,11 @@ class UserStory {
 - id_UserStory : int
 - parentUserStory : UserStory
 }
+}
 
-ProductBacklogUI ..> ProductBacklogController
+TimeEffortRoute ..> TimeEffortController
+TimeEffortController ..> UserStoryService
+TimeEffortController ..> UserStoryMapper
+UserStoryService ..> UserStory
 
-ProductBacklogController ..> Company
-ProductBacklogController ..> ProjectStore
-ProductBacklogController ..> Project
-ProductBacklogController ..> ProductBacklog
-
-Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
 @enduml
