@@ -7,9 +7,9 @@ import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.utils.Entity;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 
-@EqualsAndHashCode
 @Setter
 @Getter
 public class UserStory implements Entity<UserStory> {
@@ -61,14 +61,6 @@ public class UserStory implements Entity<UserStory> {
         return true;
     }
 
-    public void setDescription(String description) {
-        this.description = new Description(description);
-    }
-
-    public void setTimeEstimate(int timeEstimate) {
-        this.timeEstimate = new UsHour(timeEstimate);
-    }
-
     /**
      * Methods has
      */
@@ -81,6 +73,19 @@ public class UserStory implements Entity<UserStory> {
     @Override
     public boolean sameIdentityAs(UserStory other) {
         return other !=null && userStoryID.sameValueAs(other.userStoryID);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserStory)) return false;
+        UserStory userStory = (UserStory) o;
+        return sameIdentityAs(userStory);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userStoryID);
     }
 }
 

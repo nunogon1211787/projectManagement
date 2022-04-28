@@ -138,19 +138,6 @@ public class UserStoryIDTest {
         assertNotEquals(userStoryId, budget1);
     }
 
-    @Test
-    @DisplayName("Test override conditions for coverage purposes")
-    public void SameValueAs() {
-        //Arrange
-        ProjectID projectCode = mock(ProjectID.class);
-        when(projectCode.getCode()).thenReturn("Project_2022_1");
-        UsTitle usTitle = mock(UsTitle.class);
-        when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
-        //Act
-        UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
-        //Assert
-        assertFalse(userStoryId.sameValueAs(userStoryId));
-    }
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")

@@ -2,7 +2,7 @@ package switch2021.project.factory;
 
 import switch2021.project.model.UserStory.UserStory;
 
-public class IUserStoryFactory implements switch2021.project.factoryInterface.IUserStoryFactory {
+public class UserStoryFactory implements switch2021.project.factoryInterface.IUserStoryFactory {
 
 
     @Override

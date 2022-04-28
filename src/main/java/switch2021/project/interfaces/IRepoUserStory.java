@@ -5,7 +5,7 @@ import switch2021.project.model.UserStory.UserStory;
 import java.util.List;
 
 
-public interface UserStoryRepositoryInterface {
+public interface IRepoUserStory {
 
     /**
      * Finds all user story all activeUserStoryList.

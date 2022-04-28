@@ -13,7 +13,7 @@ import switch2021.project.model.Task.Task;
 import switch2021.project.model.Task.TaskTypeEnum;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.model.UserStory.UserStoryStore;
+import switch2021.project.model.UserStory.RepoUserStory;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.repositories.ProjectStore;
@@ -388,7 +388,7 @@ class ProjectTest {
     @DisplayName("Test Override")
     public void overrideTest() {
         //Arrange
-        UserStoryStore backlog = new UserStoryStore();
+        RepoUserStory backlog = new RepoUserStory();
         LocalDate date = LocalDate.of(2024, 12, 12);
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");

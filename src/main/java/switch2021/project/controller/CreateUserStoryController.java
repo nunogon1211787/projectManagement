@@ -3,32 +3,30 @@ package switch2021.project.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import switch2021.project.dto.OutputUsDTO;
 import switch2021.project.dto.UserStoryDTO;
-import switch2021.project.service.UserStoryService;
+import switch2021.project.service.CreateUserStoryService;
 
-@Controller
 @RestController
-@RequestMapping()
+@RequestMapping("/userStories")
 public class CreateUserStoryController {
 
     /**
      * Attributes
      **/
     @Autowired
-    private final UserStoryService userStoryService;
+    private CreateUserStoryService createUserStoryService;
 
 
     /**
      * Constructor
      **/
-    public CreateUserStoryController(UserStoryService userStoryService) {
-        this.userStoryService = userStoryService;
+    public CreateUserStoryController() {
+
     }
 
     /**
@@ -39,7 +37,7 @@ public class CreateUserStoryController {
     @PostMapping("")
     public ResponseEntity<Object> createUserStory(@RequestBody UserStoryDTO dto) {
 
-        OutputUsDTO newUserStory = userStoryService.createAndSaveUserStory(dto);
+        OutputUsDTO newUserStory = createUserStoryService.createAndSaveUserStory(dto);
 
         return new ResponseEntity<>(newUserStory, HttpStatus.CREATED);
     }
