@@ -5,5 +5,5 @@ import switch2021.project.model.valueObject.Description;
 
 public interface UserProfileFactoryInterface {
 
-    UserProfile createUserProfile (String userProfileDescription);
+    UserProfile createUserProfile (String description);
 }
