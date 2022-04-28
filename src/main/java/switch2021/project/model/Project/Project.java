@@ -67,7 +67,7 @@ public class Project implements Entity {
         this.businessSector = businessSector;
 
         this.startDate = startDate;
-        this.sprintList = new SprintStore(new SprintFactory());
+        this.sprintList = new SprintStore();
 
         this.numberOfSprints = new NumberOfSprints(numberOfSprints);
         this.budget = new Budget(budget);

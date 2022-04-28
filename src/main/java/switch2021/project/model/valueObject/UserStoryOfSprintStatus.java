@@ -1,4 +1,4 @@
-package switch2021.project.model.Sprint;
+package switch2021.project.model.valueObject;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,6 +2,7 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.controller.old.UserStoryEffortController;
+import switch2021.project.factory.SprintFactory;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Resource.Resource;
@@ -85,7 +86,8 @@ class UserStoryEffortControllerTest {
         project1.getProjectTeam().saveResource(person1);
         project1.getProjectTeam().saveResource(person2);
         SprintStore sprintList = project1.getSprintList();
-        Sprint sprintX = sprintList.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprintX = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
         sprintList.saveSprint(sprintX);
         //Act
         controller.getProjectByCode("Project_2022_1");
@@ -108,7 +110,8 @@ class UserStoryEffortControllerTest {
         Project project1 = company.getProjectStore().createAndSaveProject("prototype", "test56", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
         SprintStore sprintList = project1.getSprintList();
-        Sprint sprint = sprintList.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
         sprintList.saveSprint(sprint);
         controller.getProjectByCode(project1.getProjectCode().getCode());
         //Assert

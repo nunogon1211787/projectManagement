@@ -1,8 +1,7 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
-import switch2021.project.model.Sprint.UserStoryOfSprintStatus;
-import switch2021.project.model.UserStory.UserStoryId;
+import switch2021.project.model.UserStory.UserStoryID;
 
 import java.util.Objects;
 
@@ -12,14 +11,14 @@ public class UserStoryOfSprint {
     /**
      * Attributes
      */
-    private final UserStoryId userStoryId;
+    private final UserStoryID userStoryId;
     private final UserStoryOfSprintStatus userStoryOfSprintStatus;
 
 
     /**
      * Constructor
      */
-    public UserStoryOfSprint(UserStoryId userStoryId, UserStoryOfSprintStatus userStoryOfSprintStatus) {
+    public UserStoryOfSprint(UserStoryID userStoryId, UserStoryOfSprintStatus userStoryOfSprintStatus) {
         this.userStoryId = userStoryId;
         this.userStoryOfSprintStatus = userStoryOfSprintStatus;
     }

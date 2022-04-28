@@ -3,8 +3,6 @@ package switch2021.project.model.Sprint;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Repository;
-import switch2021.project.factory.SprintFactory;
-import switch2021.project.factoryInterface.SprintFactoryInterface;
 import switch2021.project.interfaces.SprintRepositoryInterface;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.Task.Task;
@@ -20,30 +18,10 @@ public class SprintStore implements SprintRepositoryInterface{
 
     /** Attributes **/
     private List<Sprint> sprints;
-    private SprintFactory sprintFactory;
-
 
     /** Constructor **/
-    public SprintStore(SprintFactory sprintFactory) {
-        this.sprints = new ArrayList<>();
-        this.sprintFactory = sprintFactory == null ? new SprintFactory() : sprintFactory;
-    }
+    public SprintStore() { this.sprints = new ArrayList<>(); }
 
-    /** Sprint creator **/
-    public Sprint createSprint(String projectID, String sprintID, String name) {
-        return this.sprintFactory.createSprint(projectID, sprintID, name);
-    }
-
-    /** Save Sprint */
-    public boolean saveSprint (Sprint sprint) {
-        boolean msg = true;
-        if (existsBySprintID(sprint.getSprintID().toString())){
-            msg = false;
-        } else {
-            sprints.add(sprint);
-        }
-        return msg;
-    }
 
     /** Check If Sprint Already Exists */
     public boolean existsBySprintID (String sprintID) {
@@ -98,6 +76,17 @@ public class SprintStore implements SprintRepositoryInterface{
         return sprint;
     }
 
+    /** Save Sprint */
+    public boolean saveSprint (Sprint sprint) {
+        boolean msg = true;
+        if (existsBySprintID(sprint.getSprintID().toString())){
+            msg = false;
+        } else {
+            sprints.add(sprint);
+        }
+        return msg;
+    }
+
     /** Delete Sprint Method **/
     public boolean deleteSprint (Sprint sprint){
         this.sprints.remove(sprint);
@@ -114,7 +103,6 @@ public class SprintStore implements SprintRepositoryInterface{
         }
         return allActivitiesInAProject;
     }
-
 
     /** Method to Validate a Sprint **/
     public boolean validateIfSprintAlreadyExists(Sprint sprint) {

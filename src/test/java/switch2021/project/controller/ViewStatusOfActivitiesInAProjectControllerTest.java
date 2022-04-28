@@ -2,6 +2,7 @@ package switch2021.project.controller;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.controller.old.ViewStatusOfActivitiesInAProjectController;
+import switch2021.project.factory.SprintFactory;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Resource.Resource;
@@ -34,7 +35,8 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
 
         company.getProjectStore().getProjectList().add(project2);
 
-        Sprint sprint1 = project2.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint1 = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
         project2.getSprintList().saveSprint(sprint1);
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         SystemUser user = new SystemUser("manuelbras", "manuelbras@beaver.com", "tester", "Qwerty_1", "Qwerty_1", "photo.png", profile.getUserProfileId());

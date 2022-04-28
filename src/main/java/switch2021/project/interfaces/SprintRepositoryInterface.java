@@ -23,9 +23,13 @@ public interface SprintRepositoryInterface {
 
     Sprint findCurrentSprint();
 
-    /** Delete a Sprint. */ //TODO rever se o método poderá ser boolean
+    /** Save Sprint. */
 
-    //Sprint deleteSprint(Sprint sprint);
+    boolean saveSprint(Sprint sprint);
+
+    /** Delete a Sprint. */
+
+    boolean deleteSprint(Sprint sprint);
 
 }
 

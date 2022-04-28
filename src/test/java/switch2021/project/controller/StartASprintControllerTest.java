@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.controller.old.StartASprintController;
 import switch2021.project.dto.old.StartASprintDTO;
+import switch2021.project.factory.SprintFactory;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Resource.Resource;
@@ -66,7 +67,8 @@ public class StartASprintControllerTest {
         proj1.setSprintDuration(new SprintDuration(14));
         //Create a Sprint
         proj1.setSprintDuration(new SprintDuration(14));
-        Sprint sprint = proj1.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "SprintName");
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "SprintName");
         proj1.getSprintList().saveSprint(sprint);
         //Act
         StartASprintDTO sprintDTO = new StartASprintDTO("Project_2022_1", "Project_2022_1_Sprint 1",
@@ -122,7 +124,8 @@ public class StartASprintControllerTest {
         proj1.getProjectTeam().saveResource(joana4R);
         //Create a Sprint
         proj1.setSprintDuration(new SprintDuration(14));
-        Sprint sprint = proj1.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "SprintName");
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "SprintName");
         proj1.getSprintList().saveSprint(sprint);
         //Act
         StartASprintDTO sprintDTO = new StartASprintDTO("Project_2022_1", "Project_2022_1_Sprint 1",

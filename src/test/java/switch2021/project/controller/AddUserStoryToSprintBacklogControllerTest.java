@@ -3,6 +3,7 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.controller.old.AddUserStoryToSprintBacklogController;
+import switch2021.project.factory.SprintFactory;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
@@ -31,12 +32,12 @@ public class AddUserStoryToSprintBacklogControllerTest {
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         Project project = company.getProjectStore().createAndSaveProject( "prototype", "test1234", customer,
                 typo, sector, LocalDate.now(), 7, 5000);
-        Sprint sprint = project.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
         project.getSprintList().saveSprint(sprint);
         sprint.setStartDate(LocalDate.now());
         SprintID sprintID = new SprintID("Project_2022_1_Sprint 1");
         UserStoryID userStoryId = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
-        UserStoryId userStoryId = new UserStoryId("Project_2022_1_As a PO, i want to test this string");
         String code = project.getProjectCode().getCode();
 
         UserStory us = new UserStory(code, userStoryId.toString(), "As a PO, i want to test this string", 1, "UserStory description", 5);

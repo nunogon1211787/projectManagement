@@ -3,6 +3,7 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.Test;
 import switch2021.project.controller.old.CreateSprintTaskController;
 import switch2021.project.dto.old.CreateTaskDTO;
+import switch2021.project.factory.SprintFactory;
 import switch2021.project.mapper.old.TaskMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
@@ -51,7 +52,8 @@ class CreateSprintTaskControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
         project.getSprintList().saveSprint(sprint);
         //Create tasks
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -87,7 +89,8 @@ class CreateSprintTaskControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
         project.getSprintList().saveSprint(sprint);
         //Get sprint task list
         List<String> tasksNames = controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID().toString());
@@ -111,7 +114,8 @@ class CreateSprintTaskControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
         project.getSprintList().saveSprint(sprint);
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -151,7 +155,8 @@ class CreateSprintTaskControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
         project.getSprintList().saveSprint(sprint);
         //Get project team names
         controller.getSprintTasks(project.getProjectCode().getCode(), sprint.getSprintID().toString());
@@ -176,7 +181,8 @@ class CreateSprintTaskControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
         project.getSprintList().saveSprint(sprint);
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -215,7 +221,8 @@ class CreateSprintTaskControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
         project.getSprintList().saveSprint(sprint);
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
@@ -261,7 +268,8 @@ class CreateSprintTaskControllerTest {
                 typo, sector, LocalDate.now(), 7, 5000);
 
         //Create a sprint
-        Sprint sprint = project.getSprintList().createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
+        SprintFactory sprintFactory = new SprintFactory();
+        Sprint sprint = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
         project.getSprintList().saveSprint(sprint);
         //Create project team
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
