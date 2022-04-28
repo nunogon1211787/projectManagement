@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1536px" preserveAspectRatio="none" style="width:1257px;height:1536px;background:#FFFFFF;" version="1.1" viewBox="0 0 1257 1536" width="1257px" zoomAndPan="magnify"><defs/><g><rect height="27.6094" style="stroke:#00000000;stroke-width:1.0;fill:none;" width="632" x="305.5" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="622" x="310.5" y="24.5332">US009 - As Product Owner, I want to create a user story and add it to the Product Backlog</text><!--MD5=[9ddaf8ee8bcae11a9a9232f969198262]
+cluster Infrastructure--><g id="cluster_Infrastructure"><path d="M821.5,44.6094 L919.5,44.6094 A3.75,3.75 0 0 1 922,47.1094 L929,68.2188 L1024.5,68.2188 A2.5,2.5 0 0 1 1027,70.7188 L1027,153.1094 A2.5,2.5 0 0 1 1024.5,155.6094 L821.5,155.6094 A2.5,2.5 0 0 1 819,153.1094 L819,47.1094 A2.5,2.5 0 0 1 821.5,44.6094 " fill="#ADD8E6" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="819" x2="929" y1="68.2188" y2="68.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="97" x="823" y="61.1426">Infrastructure</text></g><!--MD5=[dbad8618439bb33361aad5781f969acc]
+cluster Interface Adapter--><g id="cluster_Interface Adapter"><path d="M497.5,179.6094 L620.5,179.6094 A3.75,3.75 0 0 1 623,182.1094 L630,203.2188 L1060.5,203.2188 A2.5,2.5 0 0 1 1063,205.7188 L1063,409.1094 A2.5,2.5 0 0 1 1060.5,411.6094 L497.5,411.6094 A2.5,2.5 0 0 1 495,409.1094 L495,182.1094 A2.5,2.5 0 0 1 497.5,179.6094 " fill="#90EE90" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="495" x2="630" y1="203.2188" y2="203.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="122" x="499" y="196.1426">Interface Adapter</text></g><!--MD5=[ed1d20ea533a2a0e7df5ba3c35e56ced]
+cluster Controllers--><g id="cluster_Controllers"><path d="M809.5,241.6094 L889.5,241.6094 A3.75,3.75 0 0 1 892,244.1094 L899,265.2188 L1036.5,265.2188 A2.5,2.5 0 0 1 1039,267.7188 L1039,367.1094 A2.5,2.5 0 0 1 1036.5,369.6094 L809.5,369.6094 A2.5,2.5 0 0 1 807,367.1094 L807,244.1094 A2.5,2.5 0 0 1 809.5,241.6094 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="807" x2="899" y1="265.2188" y2="265.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="79" x="811" y="258.1426">Controllers</text></g><!--MD5=[600c2d25b6889bd4e9f6b335204b22ae]
+cluster Repositories--><g id="cluster_Repositories"><path d="M521.5,223.6094 L612.5,223.6094 A3.75,3.75 0 0 1 615,226.1094 L622,247.2188 L780.5,247.2188 A2.5,2.5 0 0 1 783,249.7188 L783,385.1094 A2.5,2.5 0 0 1 780.5,387.6094 L521.5,387.6094 A2.5,2.5 0 0 1 519,385.1094 L519,226.1094 A2.5,2.5 0 0 1 521.5,223.6094 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="519" x2="622" y1="247.2188" y2="247.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="90" x="523" y="240.1426">Repositories</text></g><!--MD5=[15aeddfaa60540fe98884cf0ce4d516a]
+cluster Application Service API/Use Case Service--><g id="cluster_Application Service API/Use Case Service"><rect fill="#FFB6C1" height="516" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="574" x="496" y="435.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="290" x="638" y="452.1426">Application Service API/Use Case Service</text></g><!--MD5=[eb8fc3c9a0c3710ef0d98933b66cbf91]
+cluster App Service--><g id="cluster_App Service"><path d="M806.5,488.6094 L892.5,488.6094 A3.75,3.75 0 0 1 895,491.1094 L902,512.2188 L1043.5,512.2188 A2.5,2.5 0 0 1 1046,514.7188 L1046,614.1094 A2.5,2.5 0 0 1 1043.5,616.6094 L806.5,616.6094 A2.5,2.5 0 0 1 804,614.1094 L804,491.1094 A2.5,2.5 0 0 1 806.5,488.6094 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="804" x2="902" y1="512.2188" y2="512.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="85" x="808" y="505.1426">App Service</text></g><!--MD5=[3670d4b7ab9fef6336b01ca6aa98c23b]
+cluster Repositories Interface--><g id="cluster_Repositories Interface"><path d="M522.5,479.6094 L680.5,479.6094 A3.75,3.75 0 0 1 683,482.1094 L690,503.2188 L777.5,503.2188 A2.5,2.5 0 0 1 780,505.7188 L780,623.1094 A2.5,2.5 0 0 1 777.5,625.6094 L522.5,625.6094 A2.5,2.5 0 0 1 520,623.1094 L520,482.1094 A2.5,2.5 0 0 1 522.5,479.6094 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="520" x2="690" y1="503.2188" y2="503.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="157" x="524" y="496.1426">Repositories Interface</text></g><!--MD5=[67668ae847fe847218a11ca47c408526]
+cluster Factory Interface--><g id="cluster_Factory Interface"><path d="M712.5,781.6094 L832.5,781.6094 A3.75,3.75 0 0 1 835,784.1094 L842,805.2188 L1043.5,805.2188 A2.5,2.5 0 0 1 1046,807.7188 L1046,925.1094 A2.5,2.5 0 0 1 1043.5,927.6094 L712.5,927.6094 A2.5,2.5 0 0 1 710,925.1094 L710,784.1094 A2.5,2.5 0 0 1 712.5,781.6094 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="710" x2="842" y1="805.2188" y2="805.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="119" x="714" y="798.1426">Factory Interface</text></g><!--MD5=[7b8bc9ee8bb84b99fb3a3f9477c19238]
+cluster DTO--><g id="cluster_DTO"><path d="M8.5,649.6094 L38.5,649.6094 A3.75,3.75 0 0 1 41,652.1094 L48,673.2188 L469.5,673.2188 A2.5,2.5 0 0 1 472,675.7188 L472,1313.1094 A2.5,2.5 0 0 1 469.5,1315.6094 L8.5,1315.6094 A2.5,2.5 0 0 1 6,1313.1094 L6,652.1094 A2.5,2.5 0 0 1 8.5,649.6094 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="6" x2="48" y1="673.2188" y2="673.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="29" x="10" y="666.1426">DTO</text></g><!--MD5=[31665bbab235ef875c041349bf3d8829]
+cluster UserStoryDTO--><g id="cluster_UserStoryDTO"><path d="M240.5,693.6094 L339.5,693.6094 A3.75,3.75 0 0 1 342,696.1094 L349,717.2188 L445.5,717.2188 A2.5,2.5 0 0 1 448,719.7188 L448,1013.1094 A2.5,2.5 0 0 1 445.5,1015.6094 L240.5,1015.6094 A2.5,2.5 0 0 1 238,1013.1094 L238,696.1094 A2.5,2.5 0 0 1 240.5,693.6094 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="238" x2="349" y1="717.2188" y2="717.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="98" x="242" y="710.1426">UserStoryDTO</text></g><!--MD5=[0c8c5eebb99bcffbacb0e562a9045f6b]
+cluster OutputUsDTO--><g id="cluster_OutputUsDTO"><path d="M32.5,1127.6094 L128.5,1127.6094 A3.75,3.75 0 0 1 131,1130.1094 L138,1151.2188 L237.5,1151.2188 A2.5,2.5 0 0 1 240,1153.7188 L240,1289.1094 A2.5,2.5 0 0 1 237.5,1291.6094 L32.5,1291.6094 A2.5,2.5 0 0 1 30,1289.1094 L30,1130.1094 A2.5,2.5 0 0 1 32.5,1127.6094 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="30" x2="138" y1="1151.2188" y2="1151.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="95" x="34" y="1144.1426">OutputUsDTO</text></g><!--MD5=[586dee119f42707bcb6795eb19ed82d4]
+cluster UserStoryMapper--><g id="cluster_UserStoryMapper"><path d="M32.5,790.6094 L156.5,790.6094 A3.75,3.75 0 0 1 159,793.1094 L166,814.2188 L211.5,814.2188 A2.5,2.5 0 0 1 214,816.7188 L214,916.1094 A2.5,2.5 0 0 1 211.5,918.6094 L32.5,918.6094 A2.5,2.5 0 0 1 30,916.1094 L30,793.1094 A2.5,2.5 0 0 1 32.5,790.6094 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="30" x2="166" y1="814.2188" y2="814.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="123" x="34" y="807.1426">UserStoryMapper</text></g><!--MD5=[7041c40c16faf950753b2421e7651212]
+cluster Entity/Core/Domain--><g id="cluster_Entity/Core/Domain"><path d="M498.5,1039.6094 L632.5,1039.6094 A3.75,3.75 0 0 1 635,1042.1094 L642,1063.2188 L1247.5,1063.2188 A2.5,2.5 0 0 1 1250,1065.7188 L1250,1527.1094 A2.5,2.5 0 0 1 1247.5,1529.6094 L498.5,1529.6094 A2.5,2.5 0 0 1 496,1527.1094 L496,1042.1094 A2.5,2.5 0 0 1 498.5,1039.6094 " fill="#DEB887" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="496" x2="642" y1="1063.2188" y2="1063.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="133" x="500" y="1056.1426">Entity/Core/Domain</text></g><!--MD5=[9d1b795d975ab05f601abc37ebe56014]
+cluster Aggregate--><g id="cluster_Aggregate"><path d="M522.5,1083.6094 L596.5,1083.6094 A3.75,3.75 0 0 1 599,1086.1094 L606,1107.2188 L863.5,1107.2188 A2.5,2.5 0 0 1 866,1109.7188 L866,1333.1094 A2.5,2.5 0 0 1 863.5,1335.6094 L522.5,1335.6094 A2.5,2.5 0 0 1 520,1333.1094 L520,1086.1094 A2.5,2.5 0 0 1 522.5,1083.6094 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="520" x2="606" y1="1107.2188" y2="1107.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="73" x="524" y="1100.1426">Aggregate</text></g><!--MD5=[0d5799440b3bfefd92b00abfcd2c79b9]
+cluster Factory--><g id="cluster_Factory"><path d="M892.5,1136.6094 L945.5,1136.6094 A3.75,3.75 0 0 1 948,1139.1094 L955,1160.2188 L1223.5,1160.2188 A2.5,2.5 0 0 1 1226,1162.7188 L1226,1280.1094 A2.5,2.5 0 0 1 1223.5,1282.6094 L892.5,1282.6094 A2.5,2.5 0 0 1 890,1280.1094 L890,1139.1094 A2.5,2.5 0 0 1 892.5,1136.6094 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="890" x2="955" y1="1160.2188" y2="1160.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="52" x="894" y="1153.1426">Factory</text></g><!--MD5=[7ab0bd59f78ce26b580db03c751b80c1]
+cluster Value Object--><g id="cluster_Value Object"><path d="M955.5,1359.6094 L1045.5,1359.6094 A3.75,3.75 0 0 1 1048,1362.1094 L1055,1383.2188 L1160.5,1383.2188 A2.5,2.5 0 0 1 1163,1385.7188 L1163,1503.1094 A2.5,2.5 0 0 1 1160.5,1505.6094 L955.5,1505.6094 A2.5,2.5 0 0 1 953,1503.1094 L953,1362.1094 A2.5,2.5 0 0 1 955.5,1359.6094 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="953" x2="1055" y1="1383.2188" y2="1383.2188"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="89" x="957" y="1376.1426">Value Object</text></g><!--MD5=[64122b82a909dd5dbb35b65fba5c31c2]
+class route--><g id="elem_route"><rect codeLine="11" fill="#F1F1F1" height="58.7031" id="route" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="175" x="835.5" y="80.6094"/><ellipse cx="850.5" cy="101.9609" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M852.5,98.4609 Q852.7031,97.9609 852.9375,97.7109 Q853.1719,97.4609 853.4375,97.4609 Q853.9063,97.4609 854.2031,97.7422 Q854.5,98.0234 854.5,98.6797 L854.5,100.2422 Q854.5,100.8984 854.2188,101.1797 Q853.9375,101.4609 853.5,101.4609 Q853.1094,101.4609 852.8594,101.2891 Q852.6094,101.1172 852.5,100.6641 Q852.4531,100.3516 852.2813,100.1797 Q851.9688,99.8516 851.4063,99.6641 Q850.8438,99.4609 850.2813,99.4609 Q849.5781,99.4609 848.9844,99.7422 Q848.4063,100.0234 847.9531,100.6484 Q847.5,101.2734 847.5,102.1328 L847.5,103.0547 Q847.5,104.0859 848.3438,104.7734 Q849.1875,105.4609 850.6875,105.4609 Q851.5781,105.4609 852.2031,105.2578 Q852.5625,105.1484 852.9688,104.7891 Q853.2344,104.5859 853.375,104.5234 Q853.5156,104.4609 853.6875,104.4609 Q854.0156,104.4609 854.25,104.7266 Q854.5,104.9766 854.5,105.3359 Q854.5,105.6797 854.1563,106.0859 Q853.6563,106.6797 852.8594,107.0078 Q851.8125,107.4609 850.5313,107.4609 Q849.0313,107.4609 847.8281,106.8672 Q846.8594,106.3984 846.1719,105.3828 Q845.5,104.3672 845.5,103.1641 L845.5,102.0703 Q845.5,100.8203 846.0938,99.7266 Q846.7031,98.6328 847.75,98.0547 Q848.8125,97.4609 850,97.4609 Q850.7188,97.4609 851.3438,97.7109 Q851.9688,97.9609 852.5,98.4609 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="79" x="896.5" y="98.0664">«Component»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="864.5" y="115.2363">CreateUserStoryRoute</text><line style="stroke:#181818;stroke-width:0.5;" x1="836.5" x2="1009.5" y1="123.3125" y2="123.3125"/><line style="stroke:#181818;stroke-width:0.5;" x1="836.5" x2="1009.5" y1="131.3125" y2="131.3125"/></g><!--MD5=[fd9cab17099256c8680aa6ea13cc8fa6]
+class ctrl--><g id="elem_ctrl"><rect codeLine="16" fill="#F1F1F1" height="76.3125" id="ctrl" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="199" x="823.5" y="277.6094"/><ellipse cx="838.5" cy="298.9609" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M840.5,295.4609 Q840.7031,294.9609 840.9375,294.7109 Q841.1719,294.4609 841.4375,294.4609 Q841.9063,294.4609 842.2031,294.7422 Q842.5,295.0234 842.5,295.6797 L842.5,297.2422 Q842.5,297.8984 842.2188,298.1797 Q841.9375,298.4609 841.5,298.4609 Q841.1094,298.4609 840.8594,298.2891 Q840.6094,298.1172 840.5,297.6641 Q840.4531,297.3516 840.2813,297.1797 Q839.9688,296.8516 839.4063,296.6641 Q838.8438,296.4609 838.2813,296.4609 Q837.5781,296.4609 836.9844,296.7422 Q836.4063,297.0234 835.9531,297.6484 Q835.5,298.2734 835.5,299.1328 L835.5,300.0547 Q835.5,301.0859 836.3438,301.7734 Q837.1875,302.4609 838.6875,302.4609 Q839.5781,302.4609 840.2031,302.2578 Q840.5625,302.1484 840.9688,301.7891 Q841.2344,301.5859 841.375,301.5234 Q841.5156,301.4609 841.6875,301.4609 Q842.0156,301.4609 842.25,301.7266 Q842.5,301.9766 842.5,302.3359 Q842.5,302.6797 842.1563,303.0859 Q841.6563,303.6797 840.8594,304.0078 Q839.8125,304.4609 838.5313,304.4609 Q837.0313,304.4609 835.8281,303.8672 Q834.8594,303.3984 834.1719,302.3828 Q833.5,301.3672 833.5,300.1641 L833.5,299.0703 Q833.5,297.8203 834.0938,296.7266 Q834.7031,295.6328 835.75,295.0547 Q836.8125,294.4609 838,294.4609 Q838.7188,294.4609 839.3438,294.7109 Q839.9688,294.9609 840.5,295.4609 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="79" x="896.5" y="295.0664">«Component»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="167" x="852.5" y="312.2363">CreateUserStoryController</text><line style="stroke:#181818;stroke-width:0.5;" x1="824.5" x2="1021.5" y1="320.3125" y2="320.3125"/><line style="stroke:#181818;stroke-width:0.5;" x1="824.5" x2="1021.5" y1="328.3125" y2="328.3125"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="146" x="829.5" y="346.8457">+createUserStory(json)</text></g><!--MD5=[e2b9ae9a6f3d968d3533fb88890e19ee]
+class store--><g id="elem_store"><rect codeLine="21" fill="#F1F1F1" height="111.5313" id="store" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="231" x="535.5" y="259.6094"/><ellipse cx="598.75" cy="280.9609" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M600.75,277.4609 Q600.9531,276.9609 601.1875,276.7109 Q601.4219,276.4609 601.6875,276.4609 Q602.1563,276.4609 602.4531,276.7422 Q602.75,277.0234 602.75,277.6797 L602.75,279.2422 Q602.75,279.8984 602.4688,280.1797 Q602.1875,280.4609 601.75,280.4609 Q601.3594,280.4609 601.1094,280.2891 Q600.8594,280.1172 600.75,279.6641 Q600.7031,279.3516 600.5313,279.1797 Q600.2188,278.8516 599.6563,278.6641 Q599.0938,278.4609 598.5313,278.4609 Q597.8281,278.4609 597.2344,278.7422 Q596.6563,279.0234 596.2031,279.6484 Q595.75,280.2734 595.75,281.1328 L595.75,282.0547 Q595.75,283.0859 596.5938,283.7734 Q597.4375,284.4609 598.9375,284.4609 Q599.8281,284.4609 600.4531,284.2578 Q600.8125,284.1484 601.2188,283.7891 Q601.4844,283.5859 601.625,283.5234 Q601.7656,283.4609 601.9375,283.4609 Q602.2656,283.4609 602.5,283.7266 Q602.75,283.9766 602.75,284.3359 Q602.75,284.6797 602.4063,285.0859 Q601.9063,285.6797 601.1094,286.0078 Q600.0625,286.4609 598.7813,286.4609 Q597.2813,286.4609 596.0781,285.8672 Q595.1094,285.3984 594.4219,284.3828 Q593.75,283.3672 593.75,282.1641 L593.75,281.0703 Q593.75,279.8203 594.3438,278.7266 Q594.9531,277.6328 596,277.0547 Q597.0625,276.4609 598.25,276.4609 Q598.9688,276.4609 599.5938,276.7109 Q600.2188,276.9609 600.75,277.4609 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="73" x="630.75" y="277.0664">«Repository»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96" x="619.25" y="294.2363">RepoUserStory</text><line style="stroke:#181818;stroke-width:0.5;" x1="536.5" x2="765.5" y1="302.3125" y2="302.3125"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="200" x="541.5" y="320.8457">-userStoryList : List&lt;UserStory&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="536.5" x2="765.5" y1="327.9219" y2="327.9219"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="135" x="541.5" y="346.4551">+save(newUserStory)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="219" x="541.5" y="364.0645">+existsByUserStoryId(tUserStoryId)</text></g><!--MD5=[f1bd0b2f76a824edc7cdd3a6fd9a2d12]
+class service--><g id="elem_service"><rect codeLine="32" fill="#F1F1F1" height="76.3125" id="service" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="209" x="820.5" y="524.6094"/><ellipse cx="846.75" cy="545.9609" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M848.75,542.4609 Q848.9531,541.9609 849.1875,541.7109 Q849.4219,541.4609 849.6875,541.4609 Q850.1563,541.4609 850.4531,541.7422 Q850.75,542.0234 850.75,542.6797 L850.75,544.2422 Q850.75,544.8984 850.4688,545.1797 Q850.1875,545.4609 849.75,545.4609 Q849.3594,545.4609 849.1094,545.2891 Q848.8594,545.1172 848.75,544.6641 Q848.7031,544.3516 848.5313,544.1797 Q848.2188,543.8516 847.6563,543.6641 Q847.0938,543.4609 846.5313,543.4609 Q845.8281,543.4609 845.2344,543.7422 Q844.6563,544.0234 844.2031,544.6484 Q843.75,545.2734 843.75,546.1328 L843.75,547.0547 Q843.75,548.0859 844.5938,548.7734 Q845.4375,549.4609 846.9375,549.4609 Q847.8281,549.4609 848.4531,549.2578 Q848.8125,549.1484 849.2188,548.7891 Q849.4844,548.5859 849.625,548.5234 Q849.7656,548.4609 849.9375,548.4609 Q850.2656,548.4609 850.5,548.7266 Q850.75,548.9766 850.75,549.3359 Q850.75,549.6797 850.4063,550.0859 Q849.9063,550.6797 849.1094,551.0078 Q848.0625,551.4609 846.7813,551.4609 Q845.2813,551.4609 844.0781,550.8672 Q843.1094,550.3984 842.4219,549.3828 Q841.75,548.3672 841.75,547.1641 L841.75,546.0703 Q841.75,544.8203 842.3438,543.7266 Q842.9531,542.6328 844,542.0547 Q845.0625,541.4609 846.25,541.4609 Q846.9688,541.4609 847.5938,541.7109 Q848.2188,541.9609 848.75,542.4609 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="79" x="899.75" y="542.0664">«Component»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="152" x="863.25" y="559.2363">CreateUserStoryService</text><line style="stroke:#181818;stroke-width:0.5;" x1="821.5" x2="1028.5" y1="567.3125" y2="567.3125"/><line style="stroke:#181818;stroke-width:0.5;" x1="821.5" x2="1028.5" y1="575.3125" y2="575.3125"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="197" x="826.5" y="593.8457">+createAndSaveUserStory(dto)</text></g><!--MD5=[c244c4c85822b61f5f28802e47280205]
+class repo--><g id="elem_repo"><rect codeLine="37" fill="#F1F1F1" height="93.9219" id="repo" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="227" x="536.5" y="515.6094"/><ellipse cx="595.25" cy="536.9609" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M596.25,533.9609 L596.25,539.9609 L598.25,539.9609 L598.7344,539.9609 L599.25,540.5859 L599.25,540.9609 L599.25,541.3359 L598.7344,541.9609 L598.25,541.9609 L592.25,541.9609 L591.7656,541.9609 L591.25,541.3359 L591.25,540.9609 L591.25,540.5859 L591.7656,539.9609 L592.25,539.9609 L594.25,539.9609 L594.25,533.9609 L592.25,533.9609 L591.7656,533.9609 L591.25,533.3359 L591.25,532.9609 L591.25,532.5859 L591.7656,531.9609 L592.25,531.9609 L598.25,531.9609 L598.7344,531.9609 L599.25,532.5859 L599.25,532.9609 L599.25,533.3359 L598.7344,533.9609 L598.25,533.9609 L596.25,533.9609 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="62" x="635.25" y="533.0664">«Interface»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="101" x="615.75" y="550.2363">IRepoUserStory</text><line style="stroke:#181818;stroke-width:0.5;" x1="537.5" x2="762.5" y1="558.3125" y2="558.3125"/><line style="stroke:#181818;stroke-width:0.5;" x1="537.5" x2="762.5" y1="566.3125" y2="566.3125"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="135" x="542.5" y="584.8457">+save(newUserStory)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="215" x="542.5" y="602.4551">+existsByUserStoryId(UserStoryId)</text></g><!--MD5=[269a342b50d5e59d99fdb440a594891d]
+class factoryInterface--><g id="elem_factoryInterface"><rect codeLine="43" fill="#F1F1F1" height="93.9219" id="factoryInterface" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="303" x="726.5" y="817.6094"/><ellipse cx="816.25" cy="838.9609" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M817.25,835.9609 L817.25,841.9609 L819.25,841.9609 L819.7344,841.9609 L820.25,842.5859 L820.25,842.9609 L820.25,843.3359 L819.7344,843.9609 L819.25,843.9609 L813.25,843.9609 L812.7656,843.9609 L812.25,843.3359 L812.25,842.9609 L812.25,842.5859 L812.7656,841.9609 L813.25,841.9609 L815.25,841.9609 L815.25,835.9609 L813.25,835.9609 L812.7656,835.9609 L812.25,835.3359 L812.25,834.9609 L812.25,834.5859 L812.7656,833.9609 L813.25,833.9609 L819.25,833.9609 L819.7344,833.9609 L820.25,834.5859 L820.25,834.9609 L820.25,835.3359 L819.7344,835.9609 L819.25,835.9609 L817.25,835.9609 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="62" x="863.25" y="835.0664">«Interface»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="115" x="836.75" y="852.2363">IUserStoryFactory</text><line style="stroke:#181818;stroke-width:0.5;" x1="727.5" x2="1028.5" y1="860.3125" y2="860.3125"/><line style="stroke:#181818;stroke-width:0.5;" x1="727.5" x2="1028.5" y1="868.3125" y2="868.3125"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="287" x="732.5" y="886.8457">+createUserStory(projectID, userStoryID, title,</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="213" x="736.5" y="904.4551">priority, description, timeEstimate)</text></g><!--MD5=[7a3f677e62d08ccf691684bafc193c34]
+class dto--><g id="elem_dto"><rect codeLine="50" fill="#F1F1F1" height="270.0156" id="dto" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="178" x="254" y="729.6094"/><ellipse cx="293.3" cy="750.9609" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M295.3,747.4609 Q295.5031,746.9609 295.7375,746.7109 Q295.9719,746.4609 296.2375,746.4609 Q296.7063,746.4609 297.0031,746.7422 Q297.3,747.0234 297.3,747.6797 L297.3,749.2422 Q297.3,749.8984 297.0188,750.1797 Q296.7375,750.4609 296.3,750.4609 Q295.9094,750.4609 295.6594,750.2891 Q295.4094,750.1172 295.3,749.6641 Q295.2531,749.3516 295.0813,749.1797 Q294.7688,748.8516 294.2063,748.6641 Q293.6438,748.4609 293.0813,748.4609 Q292.3781,748.4609 291.7844,748.7422 Q291.2063,749.0234 290.7531,749.6484 Q290.3,750.2734 290.3,751.1328 L290.3,752.0547 Q290.3,753.0859 291.1438,753.7734 Q291.9875,754.4609 293.4875,754.4609 Q294.3781,754.4609 295.0031,754.2578 Q295.3625,754.1484 295.7688,753.7891 Q296.0344,753.5859 296.175,753.5234 Q296.3156,753.4609 296.4875,753.4609 Q296.8156,753.4609 297.05,753.7266 Q297.3,753.9766 297.3,754.3359 Q297.3,754.6797 296.9563,755.0859 Q296.4563,755.6797 295.6594,756.0078 Q294.6125,756.4609 293.3313,756.4609 Q291.8313,756.4609 290.6281,755.8672 Q289.6594,755.3984 288.9719,754.3828 Q288.3,753.3672 288.3,752.1641 L288.3,751.0703 Q288.3,749.8203 288.8938,748.7266 Q289.5031,747.6328 290.55,747.0547 Q291.6125,746.4609 292.8,746.4609 Q293.5188,746.4609 294.1438,746.7109 Q294.7688,746.9609 295.3,747.4609 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="79" x="319.2" y="747.0664">«Component»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="92" x="312.7" y="764.2363">UserStoryDTO</text><line style="stroke:#181818;stroke-width:0.5;" x1="255" x2="431" y1="772.3125" y2="772.3125"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="166" x="260" y="790.8457">-userStoryID : UserStoryID</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="260" y="808.4551">-projectID : ProjectID</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="82" x="260" y="826.0645">-title : UsTitle</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="260" y="843.6738">-priority : UsPriority</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="157" x="260" y="861.2832">-description : Description</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="260" y="878.8926">-timeEstimate : UsHour</text><line style="stroke:#181818;stroke-width:0.5;" x1="255" x2="431" y1="885.9688" y2="885.9688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="95" x="260" y="904.502">+getProjectID()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="113" x="260" y="922.1113">+getUserStoryID()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="65" x="260" y="939.7207">+getTitle()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="82" x="260" y="957.3301">+getPriority()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="109" x="260" y="974.9395">+getDescription()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="123" x="260" y="992.5488">+getTimeEstimate()</text></g><!--MD5=[e723f6281e115920c72dcf6b17b9dea6]
+class outDto--><g id="elem_outDto"><rect codeLine="67" fill="#F1F1F1" height="111.5313" id="outDto" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="178" x="46" y="1163.6094"/><ellipse cx="86.65" cy="1184.9609" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M88.65,1181.4609 Q88.8531,1180.9609 89.0875,1180.7109 Q89.3219,1180.4609 89.5875,1180.4609 Q90.0563,1180.4609 90.3531,1180.7422 Q90.65,1181.0234 90.65,1181.6797 L90.65,1183.2422 Q90.65,1183.8984 90.3688,1184.1797 Q90.0875,1184.4609 89.65,1184.4609 Q89.2594,1184.4609 89.0094,1184.2891 Q88.7594,1184.1172 88.65,1183.6641 Q88.6031,1183.3516 88.4313,1183.1797 Q88.1188,1182.8516 87.5563,1182.6641 Q86.9938,1182.4609 86.4313,1182.4609 Q85.7281,1182.4609 85.1344,1182.7422 Q84.5563,1183.0234 84.1031,1183.6484 Q83.65,1184.2734 83.65,1185.1328 L83.65,1186.0547 Q83.65,1187.0859 84.4938,1187.7734 Q85.3375,1188.4609 86.8375,1188.4609 Q87.7281,1188.4609 88.3531,1188.2578 Q88.7125,1188.1484 89.1188,1187.7891 Q89.3844,1187.5859 89.525,1187.5234 Q89.6656,1187.4609 89.8375,1187.4609 Q90.1656,1187.4609 90.4,1187.7266 Q90.65,1187.9766 90.65,1188.3359 Q90.65,1188.6797 90.3063,1189.0859 Q89.8063,1189.6797 89.0094,1190.0078 Q87.9625,1190.4609 86.6813,1190.4609 Q85.1813,1190.4609 83.9781,1189.8672 Q83.0094,1189.3984 82.3219,1188.3828 Q81.65,1187.3672 81.65,1186.1641 L81.65,1185.0703 Q81.65,1183.8203 82.2438,1182.7266 Q82.8531,1181.6328 83.9,1181.0547 Q84.9625,1180.4609 86.15,1180.4609 Q86.8688,1180.4609 87.4938,1180.7109 Q88.1188,1180.9609 88.65,1181.4609 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="79" x="111.35" y="1181.0664">«Component»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89" x="106.35" y="1198.2363">OutputUsDTO</text><line style="stroke:#181818;stroke-width:0.5;" x1="47" x2="223" y1="1206.3125" y2="1206.3125"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="166" x="52" y="1224.8457">-userStoryID : UserStoryID</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="52" y="1242.4551">-projectID : ProjectID</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="82" x="52" y="1260.0645">-title : UsTitle</text><line style="stroke:#181818;stroke-width:0.5;" x1="47" x2="223" y1="1267.1406" y2="1267.1406"/></g><!--MD5=[820c2e2779a22a2878f9d7e65e2b03a5]
+class mapper--><g id="elem_mapper"><rect codeLine="75" fill="#F1F1F1" height="76.3125" id="mapper" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="151" x="46.5" y="826.6094"/><ellipse cx="65.55" cy="847.9609" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M67.55,844.4609 Q67.7531,843.9609 67.9875,843.7109 Q68.2219,843.4609 68.4875,843.4609 Q68.9563,843.4609 69.2531,843.7422 Q69.55,844.0234 69.55,844.6797 L69.55,846.2422 Q69.55,846.8984 69.2688,847.1797 Q68.9875,847.4609 68.55,847.4609 Q68.1594,847.4609 67.9094,847.2891 Q67.6594,847.1172 67.55,846.6641 Q67.5031,846.3516 67.3313,846.1797 Q67.0188,845.8516 66.4563,845.6641 Q65.8938,845.4609 65.3313,845.4609 Q64.6281,845.4609 64.0344,845.7422 Q63.4563,846.0234 63.0031,846.6484 Q62.55,847.2734 62.55,848.1328 L62.55,849.0547 Q62.55,850.0859 63.3938,850.7734 Q64.2375,851.4609 65.7375,851.4609 Q66.6281,851.4609 67.2531,851.2578 Q67.6125,851.1484 68.0188,850.7891 Q68.2844,850.5859 68.425,850.5234 Q68.5656,850.4609 68.7375,850.4609 Q69.0656,850.4609 69.3,850.7266 Q69.55,850.9766 69.55,851.3359 Q69.55,851.6797 69.2063,852.0859 Q68.7063,852.6797 67.9094,853.0078 Q66.8625,853.4609 65.5813,853.4609 Q64.0813,853.4609 62.8781,852.8672 Q61.9094,852.3984 61.2219,851.3828 Q60.55,850.3672 60.55,849.1641 L60.55,848.0703 Q60.55,846.8203 61.1438,845.7266 Q61.7531,844.6328 62.8,844.0547 Q63.8625,843.4609 65.05,843.4609 Q65.7688,843.4609 66.3938,843.7109 Q67.0188,843.9609 67.55,844.4609 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="79" x="95.95" y="844.0664">«Component»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="80.45" y="861.2363">UserStoryMapper</text><line style="stroke:#181818;stroke-width:0.5;" x1="47.5" x2="196.5" y1="869.3125" y2="869.3125"/><line style="stroke:#181818;stroke-width:0.5;" x1="47.5" x2="196.5" y1="877.3125" y2="877.3125"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="139" x="52.5" y="895.8457">+toDto(newUserStory)</text></g><!--MD5=[bc03dd44d21f49742a5c910194d80d3c]
+class userStory--><g id="elem_userStory"><rect codeLine="83" fill="#F1F1F1" height="199.5781" id="userStory" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="314" x="536" y="1119.6094"/><ellipse cx="657.75" cy="1140.9609" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M659.75,1137.4609 Q659.9531,1136.9609 660.1875,1136.7109 Q660.4219,1136.4609 660.6875,1136.4609 Q661.1563,1136.4609 661.4531,1136.7422 Q661.75,1137.0234 661.75,1137.6797 L661.75,1139.2422 Q661.75,1139.8984 661.4688,1140.1797 Q661.1875,1140.4609 660.75,1140.4609 Q660.3594,1140.4609 660.1094,1140.2891 Q659.8594,1140.1172 659.75,1139.6641 Q659.7031,1139.3516 659.5313,1139.1797 Q659.2188,1138.8516 658.6563,1138.6641 Q658.0938,1138.4609 657.5313,1138.4609 Q656.8281,1138.4609 656.2344,1138.7422 Q655.6563,1139.0234 655.2031,1139.6484 Q654.75,1140.2734 654.75,1141.1328 L654.75,1142.0547 Q654.75,1143.0859 655.5938,1143.7734 Q656.4375,1144.4609 657.9375,1144.4609 Q658.8281,1144.4609 659.4531,1144.2578 Q659.8125,1144.1484 660.2188,1143.7891 Q660.4844,1143.5859 660.625,1143.5234 Q660.7656,1143.4609 660.9375,1143.4609 Q661.2656,1143.4609 661.5,1143.7266 Q661.75,1143.9766 661.75,1144.3359 Q661.75,1144.6797 661.4063,1145.0859 Q660.9063,1145.6797 660.1094,1146.0078 Q659.0625,1146.4609 657.7813,1146.4609 Q656.2813,1146.4609 655.0781,1145.8672 Q654.1094,1145.3984 653.4219,1144.3828 Q652.75,1143.3672 652.75,1142.1641 L652.75,1141.0703 Q652.75,1139.8203 653.3438,1138.7266 Q653.9531,1137.6328 655,1137.0547 Q656.0625,1136.4609 657.25,1136.4609 Q657.9688,1136.4609 658.5938,1136.7109 Q659.2188,1136.9609 659.75,1137.4609 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="40" x="689.25" y="1137.0664">«Root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="62" x="678.25" y="1154.2363">UserStory</text><line style="stroke:#181818;stroke-width:0.5;" x1="537" x2="849" y1="1162.3125" y2="1162.3125"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="166" x="542" y="1180.8457">-userStoryID : UserStoryID</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="130" x="542" y="1198.4551">-projectID : ProjectID</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="82" x="542" y="1216.0645">-title : UsTitle</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="542" y="1233.6738">-priority : UsPriority</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="157" x="542" y="1251.2832">-description : Description</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="542" y="1268.8926">-timeEstimate : UsHour</text><line style="stroke:#181818;stroke-width:0.5;" x1="537" x2="849" y1="1275.9688" y2="1275.9688"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="298" x="542" y="1294.502">+UserStory(projectID, userStoryID, title, priority,</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="162" x="546" y="1312.1113">description, timeEstimate)</text></g><!--MD5=[13803892c898a6e2da57d9c73a6c6345]
+class userStoryF--><g id="elem_userStoryF"><rect codeLine="94" fill="#F1F1F1" height="93.9219" id="userStoryF" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="303" x="906.5" y="1172.6094"/><ellipse cx="998.75" cy="1193.9609" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1000.75,1190.4609 Q1000.9531,1189.9609 1001.1875,1189.7109 Q1001.4219,1189.4609 1001.6875,1189.4609 Q1002.1563,1189.4609 1002.4531,1189.7422 Q1002.75,1190.0234 1002.75,1190.6797 L1002.75,1192.2422 Q1002.75,1192.8984 1002.4688,1193.1797 Q1002.1875,1193.4609 1001.75,1193.4609 Q1001.3594,1193.4609 1001.1094,1193.2891 Q1000.8594,1193.1172 1000.75,1192.6641 Q1000.7031,1192.3516 1000.5313,1192.1797 Q1000.2188,1191.8516 999.6563,1191.6641 Q999.0938,1191.4609 998.5313,1191.4609 Q997.8281,1191.4609 997.2344,1191.7422 Q996.6563,1192.0234 996.2031,1192.6484 Q995.75,1193.2734 995.75,1194.1328 L995.75,1195.0547 Q995.75,1196.0859 996.5938,1196.7734 Q997.4375,1197.4609 998.9375,1197.4609 Q999.8281,1197.4609 1000.4531,1197.2578 Q1000.8125,1197.1484 1001.2188,1196.7891 Q1001.4844,1196.5859 1001.625,1196.5234 Q1001.7656,1196.4609 1001.9375,1196.4609 Q1002.2656,1196.4609 1002.5,1196.7266 Q1002.75,1196.9766 1002.75,1197.3359 Q1002.75,1197.6797 1002.4063,1198.0859 Q1001.9063,1198.6797 1001.1094,1199.0078 Q1000.0625,1199.4609 998.7813,1199.4609 Q997.2813,1199.4609 996.0781,1198.8672 Q995.1094,1198.3984 994.4219,1197.3828 Q993.75,1196.3672 993.75,1195.1641 L993.75,1194.0703 Q993.75,1192.8203 994.3438,1191.7266 Q994.9531,1190.6328 996,1190.0547 Q997.0625,1189.4609 998.25,1189.4609 Q998.9688,1189.4609 999.5938,1189.7109 Q1000.2188,1189.9609 1000.75,1190.4609 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54" x="1047.25" y="1190.0664">«Factory»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110" x="1019.25" y="1207.2363">UserStoryFactory</text><line style="stroke:#181818;stroke-width:0.5;" x1="907.5" x2="1208.5" y1="1215.3125" y2="1215.3125"/><line style="stroke:#181818;stroke-width:0.5;" x1="907.5" x2="1208.5" y1="1223.3125" y2="1223.3125"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="287" x="912.5" y="1241.8457">+createUserStory(projectID, userStoryID, title,</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="213" x="916.5" y="1259.4551">priority, description, timeEstimate)</text></g><!--MD5=[fae565a843dfa2bca07b56cfc6c47b32]
+class usID--><g id="elem_usID"><rect codeLine="99" fill="#F1F1F1" height="93.9219" id="usID" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="178" x="969" y="1395.6094"/><ellipse cx="1013.25" cy="1416.9609" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1015.25,1413.4609 Q1015.4531,1412.9609 1015.6875,1412.7109 Q1015.9219,1412.4609 1016.1875,1412.4609 Q1016.6563,1412.4609 1016.9531,1412.7422 Q1017.25,1413.0234 1017.25,1413.6797 L1017.25,1415.2422 Q1017.25,1415.8984 1016.9688,1416.1797 Q1016.6875,1416.4609 1016.25,1416.4609 Q1015.8594,1416.4609 1015.6094,1416.2891 Q1015.3594,1416.1172 1015.25,1415.6641 Q1015.2031,1415.3516 1015.0313,1415.1797 Q1014.7188,1414.8516 1014.1563,1414.6641 Q1013.5938,1414.4609 1013.0313,1414.4609 Q1012.3281,1414.4609 1011.7344,1414.7422 Q1011.1563,1415.0234 1010.7031,1415.6484 Q1010.25,1416.2734 1010.25,1417.1328 L1010.25,1418.0547 Q1010.25,1419.0859 1011.0938,1419.7734 Q1011.9375,1420.4609 1013.4375,1420.4609 Q1014.3281,1420.4609 1014.9531,1420.2578 Q1015.3125,1420.1484 1015.7188,1419.7891 Q1015.9844,1419.5859 1016.125,1419.5234 Q1016.2656,1419.4609 1016.4375,1419.4609 Q1016.7656,1419.4609 1017,1419.7266 Q1017.25,1419.9766 1017.25,1420.3359 Q1017.25,1420.6797 1016.9063,1421.0859 Q1016.4063,1421.6797 1015.6094,1422.0078 Q1014.5625,1422.4609 1013.2813,1422.4609 Q1011.7813,1422.4609 1010.5781,1421.8672 Q1009.6094,1421.3984 1008.9219,1420.3828 Q1008.25,1419.3672 1008.25,1418.1641 L1008.25,1417.0703 Q1008.25,1415.8203 1008.8438,1414.7266 Q1009.4531,1413.6328 1010.5,1413.0547 Q1011.5625,1412.4609 1012.75,1412.4609 Q1013.4688,1412.4609 1014.0938,1412.7109 Q1014.7188,1412.9609 1015.25,1413.4609 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="85" x="1031.75" y="1413.0664">«Value Object»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="1036.75" y="1430.2363">UserStoryID</text><line style="stroke:#181818;stroke-width:0.5;" x1="970" x2="1146" y1="1438.3125" y2="1438.3125"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="166" x="975" y="1456.8457">-userStoryID : UserStoryID</text><line style="stroke:#181818;stroke-width:0.5;" x1="970" x2="1146" y1="1463.9219" y2="1463.9219"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84" x="975" y="1482.4551">+checkUsID()</text></g><!--MD5=[be8155aa76110fd16f9e3ab3814cb608]
+link route to ctrl--><g id="link_route_ctrl"><path codeLine="135" d="M923,139.8294 C923,174.3294 923,232.4994 923,272.1694 " fill="none" id="route-to-ctrl" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="923,277.3994,927,268.3994,923,272.3994,919,268.3994,923,277.3994" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[ca0b874fccd2945c877259f87192b091]
+link ctrl to service--><g id="link_ctrl_service"><path codeLine="137" d="M923.3,353.8194 C923.67,398.2894 924.27,472.5294 924.65,519.1794 " fill="none" id="ctrl-to-service" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="924.7,524.4494,928.6227,515.4154,924.6571,519.4496,920.623,515.484,924.7,524.4494" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[2b3553e4a853f476b2df7427a24302d1]
+link mapper to outDto--><g id="link_mapper_outDto"><path codeLine="139" d="M123.37,902.7194 C125.61,963.5694 130.08,1085.0994 132.78,1158.4094 " fill="none" id="mapper-to-outDto" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="132.97,1163.5994,136.6332,1154.4571,132.7844,1158.6028,128.6387,1154.754,132.97,1163.5994" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[97568fdc4a4d8bdb998cf36bebd56951]
+link store to repo--><g id="link_store_repo"><path codeLine="140" d="M650.77,371.8994 C650.62,408.5394 650.43,456.7994 650.27,495.4794 " fill="none" id="store-to-repo" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="657.27,495.5894,650.19,515.5594,643.27,495.5294,657.27,495.5894" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[97bdd0d48051b8f91e5ed95c1617cb6b]
+link service to mapper--><g id="link_service_mapper"><path codeLine="141" d="M863.34,600.7094 C838.37,613.7394 808.7,626.8194 780,633.6094 C750.69,640.5394 263.64,625.8194 238,641.6094 C173.79,681.1494 143.35,768.9894 130.38,821.5394 " fill="none" id="service-to-mapper" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="129.18,826.5194,135.1734,818.704,130.349,821.658,127.3951,816.8336,129.18,826.5194" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[6b4111d0ed16042980c5cf758f89ebc7]
+link service to dto--><g id="link_service_dto"><path codeLine="142" d="M860.09,600.6994 C835.69,613.0794 807.25,625.7194 780,633.6094 C749.92,642.3194 739.64,631.4994 710,641.6094 C609.64,675.8594 507.36,740.7094 436.36,791.5094 " fill="none" id="service-to-dto" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="432.16,794.5294,441.8033,792.5275,436.2209,791.6124,437.1361,786.03,432.16,794.5294" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[f23388e266a2360630b0e5ee7b817879]
+link service to factoryInterface--><g id="link_service_factoryInterface"><path codeLine="143" d="M919.19,600.6994 C910.84,653.9894 895.42,752.4094 886,812.5494 " fill="none" id="service-to-factoryInterface" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="885.22,817.5294,890.56,809.2538,885.991,812.5892,882.6557,808.0202,885.22,817.5294" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[82aaf8f298a81ef1cb882119ba8e5631]
+reverse link repo to service--><g id="link_repo_service"><path codeLine="144" d="M768.92,562.6094 C786.06,562.6094 803.2,562.6094 820.34,562.6094 " fill="none" id="repo-backto-service" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="763.6,562.6094,772.6,566.6094,768.6,562.6094,772.6,558.6094,763.6,562.6094" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[b027f19b7cbcaa50d9f4f9d8e1d3f0e8]
+reverse link userStoryF to usID--><g id="link_userStoryF_usID"><path codeLine="145" d="M1058,1280.0794 C1058,1316.3694 1058,1362.0794 1058,1395.6094 " fill="none" id="userStoryF-backto-usID" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="1058,1266.6694,1054,1272.6694,1058,1278.6694,1062,1272.6694,1058,1266.6694" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1050.5078" y="1287.9375">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="7" x="1050.4641" y="1384.7155">1</text></g><!--MD5=[7a74aab0f8f36b5b9790bc66685338ac]
+link userStoryF to userStory--><g id="link_userStoryF_userStory"><path codeLine="151" d="M906.2,1219.6094 C889.28,1219.6094 872.36,1219.6094 855.44,1219.6094 " fill="none" id="userStoryF-to-userStory" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="850.19,1219.6094,859.19,1223.6094,855.19,1219.6094,859.19,1215.6094,850.19,1219.6094" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[5ac7a1b9ca90ee4c6bae49a1ccff9e89]
+reverse link factoryInterface to userStoryF--><g id="link_factoryInterface_userStoryF"><path codeLine="152" d="M910.81,929.9594 C946.56,1000.0594 1002.86,1110.4694 1034.46,1172.4494 " fill="none" id="factoryInterface-backto-userStoryF" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="904.38,932.7594,901.53,911.7594,916.85,926.3994,904.38,932.7594" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[0b350e8223b7736b875041cbb268a178]
+@startuml
+'https://plantuml.com/class-diagram
+
+'hide circle
+skinparam classAttributeIconSize 0
+
+title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
+
+skinparam classAttributeIconSize 0
+
+package "Infrastructure" <<Folder>> #lightblue  {
+class "CreateUserStoryRoute" as route << Component >>
+}
+
+package "Interface Adapter" <<Folder>> #lightgreen {
+package "Controllers" <<Folder>>{
+class "CreateUserStoryController" as ctrl << Component >> {
++createUserStory(json)
+}
+}
+package "Repositories" <<Folder>>{
+class "RepoUserStory" as store << Repository >> {
+-userStoryList : List<UserStory>
++ save(newUserStory)
++ existsByUserStoryId(tUserStoryId)
+'- add(newUserStory)
+}
+}
+}
+
+package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
+package "App Service" <<Folder>>{
+class "CreateUserStoryService" as service << Component >> {
++createAndSaveUserStory(dto)
+}
+}
+package "Repositories Interface" <<Folder>>{
+interface "IRepoUserStory" as repo << Interface >>{
++ save(newUserStory)
++ existsByUserStoryId(UserStoryId)
+}
+}
+package "Factory Interface" <<Folder>>{
+interface "IUserStoryFactory" as factoryInterface << Interface >>{
++createUserStory(projectID, userStoryID, title, \n priority, description, timeEstimate)
+}
+}
+}
+package "DTO" <<Folder>> #black {
+package "UserStoryDTO" <<Folder>>{
+class "UserStoryDTO" as dto << Component >> {
+- userStoryID : UserStoryID
+- projectID : ProjectID
+- title : UsTitle
+- priority : UsPriority
+- description : Description
+- timeEstimate : UsHour
++ getProjectID()
++ getUserStoryID()
++ getTitle()
++ getPriority()
++ getDescription()
++ getTimeEstimate()
+}
+}
+package "DTO" <<Folder>> {
+package "OutputUsDTO" <<Folder>>{
+class "OutputUsDTO" as outDto << Component >> {
+- userStoryID : UserStoryID
+- projectID : ProjectID
+- title : UsTitle
+}
+}
+package "DTO" <<Folder>> {
+package "UserStoryMapper" <<Folder>>{
+class "UserStoryMapper" as mapper << Component >> {
++ toDto(newUserStory)
+}
+}
+}
+
+package "Entity/Core/Domain" <<Folder>> #burlywood{
+package "Aggregate" <<Folder>>{
+class "UserStory" as userStory << Root >> {
+- userStoryID : UserStoryID
+- projectID : ProjectID
+- title : UsTitle
+- priority : UsPriority
+- description : Description
+- timeEstimate : UsHour
++ UserStory(projectID, userStoryID, title, priority, \n description, timeEstimate)
+}
+}
+package "Factory" <<Folder>>{
+class "UserStoryFactory" as userStoryF << Factory >> {
++createUserStory(projectID, userStoryID, title, \n priority, description, timeEstimate)
+}
+}
+package "Value Object" <<Folder>>{
+class "UserStoryID" as usID << Value Object >> {
+-userStoryID : UserStoryID
++checkUsID()
+}
+}
+'package "Value Object" <<Folder>>{
+'class "ProjectID" as projID << Value Object >> {
+'-rojectID : ProjectID
+'+checkUsID()
+'}
+
+'package "Value Object" <<Folder>>{
+'class "UsTitle" as usTitle << Value Object >> {
+'- title : UsTitle
+'+checkUsID()
+'}
+
+'package "Value Object" <<Folder>>{
+'class "Priority" as priority << Value Object >> {
+'-priority : UsPriority
+'+checkUsID()
+'}
+'
+'package "Value Object" <<Folder>>{
+'class "Description" as desc << Value Object >> {
+'-description : Description
+'+checkUsID()
+'}
+'
+'package "Value Object" <<Folder>>{
+'class "TimeEstimate" as time << Value Object >> {
+'-timeEstimate : UsHour
+'+checkUsID()
+'}
+
+
+route ..> ctrl
+'ctrl..> mapper'
+ctrl..> service
+'mapper..> dto
+mapper..>outDto
+store..|> repo
+service..> mapper
+service..> dto
+service..> factoryInterface
+service..left> repo
+userStoryF"1"*-d-"1" usID
+'userStoryF..>projID
+'userStoryF..>usTitle
+'userStoryF..>priority
+'userStoryF..>time
+'userStoryF..>desc
+userStoryF..right>userStory
+userStoryF..up|>factoryInterface
+
+
+
+@enduml
+
+@startuml
+
+skinparam classAttributeIconSize 0
+
+title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
+
+skinparam classAttributeIconSize 0
+
+package "Infrastructure" <<Folder>> #lightblue  {
+class "CreateUserStoryRoute" as route << Component >>
+}
+
+package "Interface Adapter" <<Folder>> #lightgreen {
+package "Controllers" <<Folder>>{
+class "CreateUserStoryController" as ctrl << Component >> {
++createUserStory(json)
+}
+}
+package "Repositories" <<Folder>>{
+class "RepoUserStory" as store << Repository >> {
+-userStoryList : List<UserStory>
++ save(newUserStory)
++ existsByUserStoryId(tUserStoryId)
+}
+}
+}
+
+package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
+package "App Service" <<Folder>>{
+class "CreateUserStoryService" as service << Component >> {
++createAndSaveUserStory(dto)
+}
+}
+package "Repositories Interface" <<Folder>>{
+interface "IRepoUserStory" as repo << Interface >>{
++ save(newUserStory)
++ existsByUserStoryId(UserStoryId)
+}
+}
+package "Factory Interface" <<Folder>>{
+interface "IUserStoryFactory" as factoryInterface << Interface >>{
++createUserStory(projectID, userStoryID, title, \n priority, description, timeEstimate)
+}
+}
+}
+package "DTO" <<Folder>> #black {
+package "UserStoryDTO" <<Folder>>{
+class "UserStoryDTO" as dto << Component >> {
+- userStoryID : UserStoryID
+- projectID : ProjectID
+- title : UsTitle
+- priority : UsPriority
+- description : Description
+- timeEstimate : UsHour
++ getProjectID()
++ getUserStoryID()
++ getTitle()
++ getPriority()
++ getDescription()
++ getTimeEstimate()
+}
+}
+package "DTO" <<Folder>> {
+package "OutputUsDTO" <<Folder>>{
+class "OutputUsDTO" as outDto << Component >> {
+- userStoryID : UserStoryID
+- projectID : ProjectID
+- title : UsTitle
+}
+}
+package "DTO" <<Folder>> {
+package "UserStoryMapper" <<Folder>>{
+class "UserStoryMapper" as mapper << Component >> {
++ toDto(newUserStory)
+}
+}
+}
+
+package "Entity/Core/Domain" <<Folder>> #burlywood{
+package "Aggregate" <<Folder>>{
+class "UserStory" as userStory << Root >> {
+- userStoryID : UserStoryID
+- projectID : ProjectID
+- title : UsTitle
+- priority : UsPriority
+- description : Description
+- timeEstimate : UsHour
++ UserStory(projectID, userStoryID, title, priority, \n description, timeEstimate)
+}
+}
+package "Factory" <<Folder>>{
+class "UserStoryFactory" as userStoryF << Factory >> {
++createUserStory(projectID, userStoryID, title, \n priority, description, timeEstimate)
+}
+}
+package "Value Object" <<Folder>>{
+class "UserStoryID" as usID << Value Object >> {
+-userStoryID : UserStoryID
++checkUsID()
+}
+}
+
+
+
+
+route ..> ctrl
+ctrl..> service
+mapper..>outDto
+store..|> repo
+service..> mapper
+service..> dto
+service..> factoryInterface
+service..left> repo
+userStoryF"1"*-d-"1" usID
+userStoryF..right>userStory
+userStoryF..up|>factoryInterface
+
+
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 14:29:17 BST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: US
+--></g></svg>

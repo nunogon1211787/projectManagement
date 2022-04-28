@@ -1,0 +1,105 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+title US013 - "As Administrator, I want to create user profiles"
+
+skinparam classAttributeIconSize 0
+
+package "Infrastruture" <<rectangle>> #lightblue {
+class "CreateUserProfileRoute"  as route << Component >>
+}
+
+
+package "Interface Adapters" <<rectangle>> #lightgreen {
+
+package "Repositories" <<rectangle>>{
+class "UserProfileStore" as Store << Repository >> {
+-ProfileList: List<UserProfile>
++saveUserProfile(userProfileName)
++addUserProfile(userProfileName)
++validateUserProfile(userProfileName)
+}
+}
+
+package "Controllers" <<rectangle>>  {
+class "CreateUserProfileController" as ctrl <<Component>> {
++createUserProfile(json)
+}
+}
+}
+
+
+package "Application Service" <<Rectangle>> #lightpink{
+package "App Services" <<rectangle>>{
+class "CreateUserProfileService" as srv << Service >> {
++createUserProfile(dto)
+}
+}
+
+
+package "IFactory" <<rectangle>>{
+interface "IUserProfileRepository" as ifactory{
++createUserProfile(description)
+}
+}
+
+package "IRepositories" <<rectangle>>{
+interface "IUserProfileRepository" as repo{
++saveUserProfile(userProfileName)
++addUserProfile(userProfileName)
++validateUserProfile(userProfileName)
+}
+}
+
+}
+
+package "Domain" <<Rectangle>> #burlywood{
+package "Aggregates" <<rectangle>>{
+
+package "UserProfile" <<Rectangle>>{
+entity "UserProfile" as profile << Root >>
+}
+}
+package "Value Object" <<rectangle>>{
+class "UserProfileId" as upid << Value Object >> {
+UserProfileId : Description
+}
+}
+
+package "Factory" <<rectangle>>{
+class "UserProfileFactory" as Factory << Factory >> {
++createUserProfile (description)
+}
+}
+}
+
+package "DTO" <<rectangle>>{
+class "UserProfileMapper" as map <<Component>> {
++ datatoDto()
++ modeltoDto()
++ dtotoJson()
+}
+
+class "UserProfileDTO" as dto <<Component>>{
++ userProfileName : String
+}
+
+
+}
+
+route .d.> ctrl
+Store .d.|> repo
+ctrl ..l.> map
+srv .d.> ifactory
+Store "1"*---"*" profile
+srv .d.> repo
+Factory .u.|> ifactory
+profile "1"*--"*" upid
+ctrl .d.> srv
+
+
+
+
+
+
+@enduml

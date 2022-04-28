@@ -18,7 +18,6 @@ public class UserProfile implements Entity<UserProfile> {
      * Profile Constructors
      */
     public UserProfile(String userProfileName) {
-        //this.userProfileName = new Description(userProfileName);
         this.userProfileId = new UserProfileId(userProfileName);
     }
 

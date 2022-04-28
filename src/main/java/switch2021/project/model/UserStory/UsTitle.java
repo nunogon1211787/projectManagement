@@ -4,6 +4,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import switch2021.project.utils.ValueObject;
 
+import java.util.Objects;
+
 @Getter
 @EqualsAndHashCode
 public class UsTitle implements ValueObject<UsTitle> {
@@ -35,13 +37,15 @@ public class UsTitle implements ValueObject<UsTitle> {
             throw new IllegalArgumentException("Title don't contain the word want");
         }
     }
+
     /**
      * Override
      **/
     @Override
-    public boolean sameValueAs(UsTitle other) {
-        return false;
+    public boolean sameValueAs(final UsTitle other) {
+        return other != null && Objects.equals(this.titleUs, other.titleUs);
     }
+
 }
 
 

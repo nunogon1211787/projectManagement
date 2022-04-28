@@ -2,31 +2,39 @@ package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.factoryInterface.ProjectFactoryInterface;
-import switch2021.project.mapper.old.ProjectsMapper;
-import switch2021.project.model.Project.Project;
+import switch2021.project.mapper.ProjectMapper;
+import switch2021.project.model.Project.ProjectReeng;
+import switch2021.project.repositories.ProjectStoreReeng;
 
 @Service
 public class ProjectService {
 
-    private  ProjectFactoryInterface projectFactoryInterface;
-    private ProjectsMapper projectsMapper;
-
     @Autowired
+    private  ProjectFactoryInterface projectFactoryInterface;
+    @Autowired
+    private ProjectMapper projectsMapper;
+    @Autowired
+    ProjectStoreReeng projectRepositoryReeng;
+
     public ProjectService() {
     }
 
-    public ProjectDTO createAndSaveProject(ProjectDTO projDTO) {
-        Project newProject = projectFactoryInterface.createProject(
+    public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) {
+        ProjectReeng newProject = projectFactoryInterface.createProject(
 
                 projDTO.projectName,
                 projDTO.description,
+                projDTO.businessSector,
                 projDTO.startDate,
                 projDTO.numberOfSprints,
                 projDTO.budget);
 
-        return projectsMapper.toDTO(newProject);
+        projectRepositoryReeng.save(newProject);
+
+        return projectsMapper.model2Dto(newProject);
     }
 
 }

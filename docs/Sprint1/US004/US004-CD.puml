@@ -17,6 +17,7 @@ class "SearchUsersByXController" as ctrl << Component >> {
 +getUsersByX()
 }
 }
+
 package "Repositories" <<rectangle>>{
 class "SystemUserStore" as store << Repository >> {
 -users : List<SystemUser>

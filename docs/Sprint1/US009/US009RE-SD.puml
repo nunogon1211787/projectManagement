@@ -6,31 +6,30 @@ title US009 - As Product Owner, I want to create a user story and add it to the 
 autoactivate on
 autonumber
 
-actor "Product Owner" as User #lightgreen
+
 participant ": CreateUserStoryRoute" as System
 participant ": CreateUserStoryController" as Ctrl
 participant ": CreateUserStoryService" as appService
-participant " userStoryDto : UserStoryDto" as usDto
-participant ": UserStoryFactory" as factory
-participant "us : UserStory" as us
-participant ": UserStoryStore " as usStore
+participant ": UserStoryDto" as usDto
+participant ": IUserStoryFactory" as factory
+participant "newUserStory : \n UserStory" as us
+participant ": IRepoUserStory " as usStore
 participant ": UserStoryMapper" as usMapper
-participant "outputDto : OutputDto" as outDto
+participant "outputUsDto : OutputUsDto" as outDto
 
 
-activate User
 
-
-User -> System: Start to create a user story
-System --> User : Requests information: \n  (projectID, userStoryID, title, \n  priority, description, timeEstimate)
-User -> System: Enter requested information
-System -> Ctrl: createUserStory(userStoryDto)
-Ctrl -> appService: createUserStory(userStoryDto)
+[o-> System: POST/userStories(json)
+System -> Ctrl: createUserStory(json)
+note right
+Change from json to dto hidden to simplify diagram
+end note
+Ctrl -> appService: createAndSaveUserStory(dto)
 appService -> usDto: projectID = getProjectID()
 deactivate
 appService -> usDto: userStoryID = getUserStoryID()
 deactivate
-appService -> usDto: title = title()
+appService -> usDto: title = getTitle()
 deactivate
 appService -> usDto: priority = getPriority()
 deactivate
@@ -38,23 +37,25 @@ appService -> usDto: description = getDescription()
 deactivate
 appService -> usDto: timeEstimate = getTimeEstimate()
 deactivate
-appService -> factory:  <back:yellow> createUserStory(projectID, userStoryID, title, priority, description, timeEstimate)</back>
+appService -> factory:  createUserStory(projectID, userStoryID, title,\n priority, description, timeEstimate)
 factory -> us **: create()
-factory --> appService: us
-appService-> usStore: save(us)
-usStore-> usStore: existsByUserStoryId(us.getUserStoryId())
+factory --> appService: newUserStory
+
+appService-> usStore: save(newUserStory)
+usStore-> usStore: existsByUserStoryId\n(UserStoryID)
 deactivate
-usStore-> usStore: add(us)
+usStore-> usStore: add(newUserStory)
 deactivate
 usStore --> appService : true
-
-appService-> usMapper : toDto(us)
+appService-> usMapper : toDto(newUserStory)
 usMapper-> outDto **:create()
-outDto-->usMapper: outputDTO
-usMapper --> appService: outputDTO
-appService --> Ctrl: outputDTO
-Ctrl --> System: outputDTO
-System--> User: Informs that user story was created
+usMapper --> appService: outputUsDto
+appService --> Ctrl: outputUsDto
+Ctrl --> System: outputUsJson
+note right
+Change from json to dto hidden to simplify diagram
+end note
+[<--System : Informs that user story was created
 
 @enduml
 

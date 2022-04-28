@@ -1,0 +1,76 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title US031 - As Team Member, I want to create a task in a user story
+
+autonumber
+autoactivate on
+
+
+participant ": createUS\nTaskRoute" as UI
+participant ": createUS\nTaskController" as Ctrl
+participant "CreateUS\nTaskService" as tService
+participant "dto : TaskDTO" as dtoTask
+participant "FactoryTask" as factoryT
+participant "task: Task" as task
+participant "ITaskStore" as taskStore
+participant "TaskMapper" as mapper
+participant "outputDto \n: TaskDTO" as output
+
+
+[o-> UI: Post/tasks (json)
+deactivate
+UI -> Ctrl: createTask(json)
+deactivate
+
+note right
+    Change from json to dto hidden to simplify diagram
+end note
+
+Ctrl -> tService: createTask(taskDTO)
+
+tService -> dtoTask: name = getName()
+deactivate
+tService -> dtoTask: description = getDescription()
+deactivate
+tService -> dtoTask: effortEstimate = getEffort()
+deactivate
+tService -> dtoTask: type = getTaskType()
+deactivate
+tService -> dtoTask: responsible = getResponsible()
+deactivate
+tService -> dtoTask: usId = getId()
+deactivate
+
+tService -> factoryT: task = createTask(name, description, \neffortEstimate, taskType \nresponsible, usID)
+
+factoryT -> task**: create()
+deactivate
+
+tService -> taskStore: true = save(task)
+
+taskStore -> taskStore: validate(task)
+deactivate
+taskStore -> taskStore: add(task)
+deactivate
+deactivate
+
+tService -> mapper: outputDto = toDTO(task)
+
+mapper -> output**: createOutputDto\n(task)
+deactivate
+
+
+tService --> Ctrl: outputDto
+
+Ctrl --> UI: outputJson
+
+note right
+Change from dto to json hidden to simplify diagram
+end note
+
+[<--UI : response
+
+
+
+@enduml

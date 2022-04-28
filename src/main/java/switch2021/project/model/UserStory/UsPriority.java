@@ -38,7 +38,7 @@ public class UsPriority implements ValueObject<UsPriority> {
      * Override
      **/
     @Override
-    public boolean sameValueAs(UsPriority other) {
-        return false;
+    public boolean sameValueAs(final UsPriority other) {
+        return other !=null && this.priorityUs==(other.priorityUs);
     }
 }

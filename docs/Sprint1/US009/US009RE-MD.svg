@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="285px" preserveAspectRatio="none" style="width:262px;height:285px;background:#FFFFFF;" version="1.1" viewBox="0 0 262 285" width="262px" zoomAndPan="magnify"><defs/><g><rect height="27.6094" style="stroke:#00000000;stroke-width:1.0;fill:none;" width="244" x="5" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="234" x="10" y="24.5332">Example of Domain Model extract</text><!--MD5=[70ce3a0b7249b89e7183e518c52a7191]
+cluster UserStory--><g id="cluster_UserStory"><rect height="92" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;fill:none;" width="126" x="71.5" y="45.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="69" x="100" y="62.1426">UserStory</text></g><!--MD5=[4e16fe2ec13bafe999ab99530e1989fe]
+cluster UserStoryID--><g id="cluster_UserStoryID"><rect height="92" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;fill:none;" width="140" x="64.5" y="187.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="83" x="93" y="204.1426">UserStoryID</text></g><!--MD5=[daa6dd44d8f60c5a9cd695bb66773862]
+class UserStory--><g id="elem_UserStory"><rect codeLine="9" fill="#F1F1F1" height="40" id="UserStory" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="94" x="87.5" y="81.6094"/><ellipse cx="102.5" cy="97.6094" fill="#ADD8E6" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M101,98.6094 L101,100.6094 L102,100.6094 L102.4844,100.6094 L103,101.2344 L103,101.6094 L103,101.9844 L102.4844,102.6094 L102,102.6094 L99,102.6094 L98.5156,102.6094 L98,101.9844 L98,101.6094 L98,101.2344 L98.5156,100.6094 L99,100.6094 L99,100.6094 L99,94.6094 L99,94.6094 L98.5156,94.6094 L98,93.9844 L98,93.6094 L98,93.2344 L98.5156,92.6094 L99,92.6094 L102.5313,92.6094 Q104.1875,92.6094 105.0938,93.4531 Q106,94.2969 106,95.5 Q106,96.2656 105.4844,96.875 Q104.9844,97.4844 103.9688,97.9688 Q104.4219,98.4375 104.9375,99.1563 Q105.25,99.625 105.7969,100.6094 L106.4844,100.6094 L106.4844,100.6094 L107,101.2344 L107,101.6094 L107,101.9844 L106.4844,102.6094 L105.7969,102.6094 L105,102.6094 Q102.75,99.2813 101.9375,98.6094 L101,98.6094 Z M101,96.6094 L102,96.6094 Q102.5625,96.6094 103,96.4531 Q103.5938,96.2344 103.7969,96 Q104,95.7656 104,95.5313 Q104,95.1875 103.6094,94.9063 Q103.2188,94.6094 102.4688,94.6094 L101,94.6094 L101,96.6094 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="62" x="116.5" y="103.3379">UserStory</text><line style="stroke:#181818;stroke-width:0.5;" x1="88.5" x2="180.5" y1="113.6094" y2="113.6094"/></g><!--MD5=[e98f05372d25a3a7c070b97ec805badf]
+class UserStoryID--><g id="elem_UserStoryID"><rect codeLine="15" fill="#F1F1F1" height="40" id="UserStoryID" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="107" x="81" y="223.6094"/><ellipse cx="96" cy="239.6094" fill="#90EE90" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M96,242.8906 L97.5313,237.3594 L97.5313,237.3594 L97.0156,237.3594 L96.5,236.7344 L96.5,236.3594 L96.5,235.9844 L97.0156,235.3594 L97.5313,235.3594 L99.4063,235.3594 L99.9844,235.3594 L100.5,235.9844 L100.5,236.3594 L100.5,236.7344 L99.9844,237.3594 L99.9844,237.3594 L99.5313,237.3594 L97.1875,245.3594 L94.8125,245.3594 L92.3438,237.3594 L92.0156,237.3594 L92.0156,237.3594 L91.5,236.7344 L91.5,236.3594 L91.5,235.9844 L92.0156,235.3594 L92.5938,235.3594 L94.4688,235.3594 L94.9844,235.3594 L95.5,235.9844 L95.5,236.3594 L95.5,236.7344 L94.9844,237.3594 L94.4688,237.3594 L94.4688,237.3594 L96,242.8906 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="110" y="245.3379">UserStoryID</text><line style="stroke:#181818;stroke-width:0.5;" x1="82" x2="187" y1="255.6094" y2="255.6094"/></g><!--MD5=[1c1d80ef05e4bfa2ce74ce6f532c55fa]
+link UserStory to UserStoryID--><g id="link_UserStory_UserStoryID"><path codeLine="19" d="M134.5,121.7794 C134.5,146.7794 134.5,190.5294 134.5,217.9594 " fill="none" id="UserStory-to-UserStoryID" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="134.5,223.2194,138.5,214.2194,134.5,218.2194,130.5,214.2194,134.5,223.2194" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="37" x="135.5" y="168.1045">knows</text></g><!--MD5=[6afb6c69623f924c459eafdb39023915]
+@startuml
+'https://plantuml.com/class-diagram
+'hide circle
+skinparam classAttributeIconSize 0
+hide methods
+
+title Example of Domain Model extract
+
+package UserStory <<Rectangle>>{
+ class UserStory <<(R,lightblue)>>{
+ }
+ }
+
+
+ package UserStoryID <<Rectangle>>{
+ class UserStoryID <<(V,LightGreen)>>{
+ }
+ }
+
+ UserStory -down-> UserStoryID: knows
+
+@enduml
+
+@startuml
+skinparam classAttributeIconSize 0
+hide methods
+
+title Example of Domain Model extract
+
+package UserStory <<Rectangle>>{
+ class UserStory <<(R,lightblue)>>{
+ }
+ }
+
+
+ package UserStoryID <<Rectangle>>{
+ class UserStoryID <<(V,LightGreen)>>{
+ }
+ }
+
+ UserStory -down-> UserStoryID: knows
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 14:29:17 BST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: US
+--></g></svg>
