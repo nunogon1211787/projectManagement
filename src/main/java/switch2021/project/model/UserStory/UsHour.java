@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import switch2021.project.utils.ValueObject;
 
+
 @EqualsAndHashCode
 @Getter
 public class UsHour implements ValueObject<UsHour> {
@@ -36,7 +37,7 @@ public class UsHour implements ValueObject<UsHour> {
      **/
 
     @Override
-    public boolean sameValueAs(UsHour other) {
-        return false;
+    public boolean sameValueAs(final UsHour other) {
+        return other !=null && this.usHours==(other.usHours);
     }
 }
