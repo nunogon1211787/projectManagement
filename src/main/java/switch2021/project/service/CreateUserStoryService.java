@@ -17,48 +17,25 @@ public class CreateUserStoryService {
      * Attributes
      **/
     @Autowired
-    private IRepoUserStory IRepoUserStory;
+    private IRepoUserStory iRepoUserStory;
     @Autowired
     private UserStoryMapper userStoryMapper;
     @Autowired
-    private IUserStoryFactory IUserStoryFactory;
-
-
-    /**
-     * Constructor
-     **/
-
-    public CreateUserStoryService() {
-
-    }
+    private IUserStoryFactory iUserStoryFactory;
 
 
     /**
      * Create and save a User Story
      *
-     * @param dto
      */
     public OutputUsDTO createAndSaveUserStory(UserStoryDTO dto) {
 
-        UserStory newUserStory = IUserStoryFactory.createUserStory(dto.getProjectId(), dto.getUserStoryId(),
-                dto.getTitle(), dto.getPriority(), dto.getDescription(), dto.getTimeEstimate());
+        UserStory newUserStory = iUserStoryFactory.createUserStory(dto.projectID, dto.userStoryID,
+                dto.title, dto.priority, dto.description, dto.timeEstimate);
 
-        IRepoUserStory.save(newUserStory);
+        iRepoUserStory.save(newUserStory);
 
         return userStoryMapper.toDto(newUserStory);
-    }
-
-    /**
-     * Finds a user story using given ID.
-     *
-     * @param userStoryID id
-     * @return userStoryDTO if found, else {@code null}
-     */
-
-    //TODO -----> Manter método aqui?
-    public OutputUsDTO findUserStoryById(String userStoryID) {
-        UserStory userStoryById = this.IRepoUserStory.findUserStoryById(userStoryID);
-        return this.userStoryMapper.toDto(userStoryById);
     }
 
 }

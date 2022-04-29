@@ -29,7 +29,7 @@ public class RepoUserStory implements switch2021.project.interfaces.IRepoUserSto
      * @return user story, else {exception}
      */
 
-    //TODO -----> método fica aqui? CDC
+    //TODO -----> CDC
     public UserStory refineUserStory(UserStory userStoryParent, int priority, String description) {
         UserStory userStory = new UserStory(userStoryParent, priority, description);
         validateUserStory(userStory);
@@ -43,7 +43,7 @@ public class RepoUserStory implements switch2021.project.interfaces.IRepoUserSto
      * return exception if case
      */
 
-    //TODO -----> método fica aqui? CDC
+    //TODO -----> CDC
     private void validateUserStory(UserStory newUserStory) {
         for (UserStory us : userStoryList) {
             if (us.getDescription().getText().trim().equalsIgnoreCase(newUserStory.getDescription().getText())) {
@@ -55,7 +55,6 @@ public class RepoUserStory implements switch2021.project.interfaces.IRepoUserSto
     /**
      * Save User Story
      *
-     * @param newUserStory
      * @return boolean result
      */
     @Override
