@@ -1,5 +1,6 @@
 package switch2021.project.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,16 +24,7 @@ public class CreateUserStoryController {
 
 
     /**
-     * Constructor
-     **/
-    public CreateUserStoryController() {
-
-    }
-
-    /**
      * Create a User Story
-     *
-     * @param dto
      */
     @PostMapping("")
     public ResponseEntity<Object> createUserStory(@RequestBody UserStoryDTO dto) {
