@@ -1,6 +1,7 @@
 package switch2021.project.repositories;
 
 import lombok.Getter;
+import org.springframework.stereotype.Component;
 import switch2021.project.model.UserProfile.UserProfile;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
+@Component
 public class UserProfileRepository {
 
     /**
