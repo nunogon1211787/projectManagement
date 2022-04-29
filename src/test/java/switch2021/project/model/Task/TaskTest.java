@@ -1,11 +1,15 @@
 package switch2021.project.model.Task;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.Resource.Resource;
+import switch2021.project.model.Company;
+import switch2021.project.model.Resource.old.Resource;
+import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -24,7 +28,7 @@ class TaskTest {
         assertEquals(expectedTask, tastkTest.getDescription().getText());
     }
 
-/*    @Test
+    @Test
     public void taskWithPrecedenceCreatorTest() {
         //Arrange
         Company company = new Company();
@@ -56,11 +60,11 @@ class TaskTest {
         SystemUser user = mock(SystemUser.class);
         Name name = mock(Name.class);
         when(user.getUserName()).thenReturn(name);
-        when(name.getText()).thenReturn("manuelbras");
-        SystemUserID systemUserId = mock(SystemUserID.class);//
+        when(name.getNameF()).thenReturn("manuelbras");
+        SystemUserId systemUserId = mock(SystemUserId.class);//
         Email email = mock(Email.class);
         when(systemUserId.getEmail()).thenReturn(email);//
-        when(email.getEmailText()).thenReturn("manuelbras@beaver.com");
+        when(email.getEmail()).thenReturn("manuelbras@beaver.com");
         Function function = mock(Function.class);
         when(user.getFunction()).thenReturn(function);
         when(function.getText()).thenReturn("tester");
@@ -122,11 +126,11 @@ class TaskTest {
         SystemUser user = mock(SystemUser.class);
         Name name = mock(Name.class);
         when(user.getUserName()).thenReturn(name);
-        when(name.getText()).thenReturn("manuelbras");
-        SystemUserID systemUserId = mock(SystemUserID.class);//
+        when(name.getNameF()).thenReturn("manuelbras");
+        SystemUserId systemUserId = mock(SystemUserId.class);//
         Email email = mock(Email.class);
         when(systemUserId.getEmail()).thenReturn(email);//
-        when(email.getEmailText()).thenReturn("manuelbras@beaver.com");
+        when(email.getEmail()).thenReturn("manuelbras@beaver.com");
         Function function = mock(Function.class);
         when(user.getFunction()).thenReturn(function);
         when(function.getText()).thenReturn("tester");
@@ -174,7 +178,7 @@ class TaskTest {
     }
 
 
-/*    @Test
+    @Test
     public void saveTwoTaskEffortSuccess() {
         //Arrange
         Company company = new Company();
@@ -541,11 +545,9 @@ class TaskTest {
         //Act
         Task task = new Task("tttr", taskDescription, 20.00, taskType, resource);
         //Assert
-        assertEquals("tttr", task.getName().getText());
+        assertEquals("tttr", task.getName().getNameF());
 
     }
-
-
 
 
     @Test
@@ -561,11 +563,11 @@ class TaskTest {
         SystemUser user = mock(SystemUser.class);
         Name name = mock(Name.class);
         when(user.getUserName()).thenReturn(name);
-        when(name.getText()).thenReturn("manuelbras");
-        SystemUserID systemUserId = mock(SystemUserID.class);//
+        when(name.getNameF()).thenReturn("manuelbras");
+        SystemUserId systemUserId = mock(SystemUserId.class);//
         Email email = mock(Email.class);
         when(systemUserId.getEmail()).thenReturn(email);//
-        when(email.getEmailText()).thenReturn("manuelbras@beaver.com");
+        when(email.getEmail()).thenReturn("manuelbras@beaver.com");
         Function function = mock(Function.class);
         when(user.getFunction()).thenReturn(function);
         when(function.getText()).thenReturn("tester");
@@ -603,7 +605,7 @@ class TaskTest {
         });
     }
 
-/*    @Test
+    @Test
     void constructorCheckDescriptionSizeTest() {
         //Arrange
         Company company = new Company();
@@ -643,8 +645,6 @@ class TaskTest {
     }
 
 
-
-
     @Test
     void checkEffortRulesEqual0() {
         //Asserts
@@ -660,11 +660,11 @@ class TaskTest {
             SystemUser user = mock(SystemUser.class);
             Name name = mock(Name.class);
             when(user.getUserName()).thenReturn(name);
-            when(name.getText()).thenReturn("manuelbras");
-            SystemUserID systemUserId = mock(SystemUserID.class);//
+            when(name.getNameF()).thenReturn("manuelbras");
+            SystemUserId systemUserId = mock(SystemUserId.class);//
             Email email = mock(Email.class);
             when(systemUserId.getEmail()).thenReturn(email);//
-            when(email.getEmailText()).thenReturn("manuelbras@beaver.com");
+            when(email.getEmail()).thenReturn("manuelbras@beaver.com");
             Function function = mock(Function.class);
             when(user.getFunction()).thenReturn(function);
             when(function.getText()).thenReturn("tester");
@@ -712,11 +712,11 @@ class TaskTest {
         SystemUser user = mock(SystemUser.class);
         Name name = mock(Name.class);
         when(user.getUserName()).thenReturn(name);
-        when(name.getText()).thenReturn("manuelbras");
-        SystemUserID systemUserId = mock(SystemUserID.class);//
+        when(name.getNameF()).thenReturn("manuelbras");
+        SystemUserId systemUserId = mock(SystemUserId.class);//
         Email email = mock(Email.class);
         when(systemUserId.getEmail()).thenReturn(email);//
-        when(email.getEmailText()).thenReturn("manuelbras@beaver.com");
+        when(email.getEmail()).thenReturn("manuelbras@beaver.com");
         Function function = mock(Function.class);
         when(user.getFunction()).thenReturn(function);
         when(function.getText()).thenReturn("tester");
@@ -766,11 +766,11 @@ class TaskTest {
         SystemUser user = mock(SystemUser.class);
         Name name = mock(Name.class);
         when(user.getUserName()).thenReturn(name);
-        when(name.getText()).thenReturn("manuelbras");
-        SystemUserID systemUserId = mock(SystemUserID.class);//
+        when(name.getNameF()).thenReturn("manuelbras");
+        SystemUserId systemUserId = mock(SystemUserId.class);//
         Email email = mock(Email.class);
         when(systemUserId.getEmail()).thenReturn(email);//
-        when(email.getEmailText()).thenReturn("manuelbras@beaver.com");
+        when(email.getEmail()).thenReturn("manuelbras@beaver.com");
         Function function = mock(Function.class);
         when(user.getFunction()).thenReturn(function);
         when(function.getText()).thenReturn("tester");
@@ -804,11 +804,11 @@ class TaskTest {
         //Act
         Task task = new Task("Test", taskDescription, 1.00, taskType, resource);
         //Assert
-        assertEquals("Test", task.getName().getText());
+        assertEquals("Test", task.getName().getNameF());
 
     }
 
-/*    @Test
+    @Test
     public void overrideAndHashCodeTest() {
         //Arrange
         Company company = new Company();
@@ -841,8 +841,6 @@ class TaskTest {
     }
 
 
-
-
     @Test
     public void validateTaskEffortNull() {
         //Arrange & act
@@ -864,11 +862,11 @@ class TaskTest {
         SystemUser user = mock(SystemUser.class);
         Name name = mock(Name.class);
         when(user.getUserName()).thenReturn(name);
-        when(name.getText()).thenReturn("manuelbras");
-        SystemUserID systemUserId = mock(SystemUserID.class);//
+        when(name.getNameF()).thenReturn("manuelbras");
+        SystemUserId systemUserId = mock(SystemUserId.class);//
         Email email = mock(Email.class);
         when(systemUserId.getEmail()).thenReturn(email);//
-        when(email.getEmailText()).thenReturn("manuelbras@beaver.com");
+        when(email.getEmail()).thenReturn("manuelbras@beaver.com");
         Function function = mock(Function.class);
         when(user.getFunction()).thenReturn(function);
         when(function.getText()).thenReturn("tester");
@@ -923,11 +921,11 @@ class TaskTest {
         SystemUser user = mock(SystemUser.class);
         Name name = mock(Name.class);
         when(user.getUserName()).thenReturn(name);
-        when(name.getText()).thenReturn("manuelbras");
-        SystemUserID systemUserId = mock(SystemUserID.class);//
+        when(name.getNameF()).thenReturn("manuelbras");
+        SystemUserId systemUserId = mock(SystemUserId.class);//
         Email email = mock(Email.class);
         when(systemUserId.getEmail()).thenReturn(email);//
-        when(email.getEmailText()).thenReturn("manuelbras@beaver.com");
+        when(email.getEmail()).thenReturn("manuelbras@beaver.com");
         Function function = mock(Function.class);
         when(user.getFunction()).thenReturn(function);
         when(function.getText()).thenReturn("tester");
@@ -970,7 +968,7 @@ class TaskTest {
         assertEquals(0.1, y);
     }
 
-/*   @Test
+    @Test
     public void overrideAndHashCodeTest2() {
         //Arrange
         Company company = new Company();
@@ -994,6 +992,4 @@ class TaskTest {
         assertEquals(-2, task1.getEffortEstimate());
 
     }
-
- */
 }

@@ -2,7 +2,7 @@
 package switch2021.project.mapper.old;
 
 import switch2021.project.dto.old.ResourceDTO;
-import switch2021.project.model.Resource.Resource;
+import switch2021.project.model.Resource.old.Resource;
 
 import java.util.ArrayList;
 import java.util.List;

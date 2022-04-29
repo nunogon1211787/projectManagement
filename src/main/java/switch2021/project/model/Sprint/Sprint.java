@@ -9,6 +9,8 @@ import switch2021.project.model.UserStory.UserStoryID;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.Task.TaskStore;
 import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.utils.Entity;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
-public class Sprint {
+public class Sprint implements Entity<Sprint> {
 
     /**
      * Attributes of Sprint
@@ -33,11 +35,10 @@ public class Sprint {
     /**
      * Constructor of Sprint
      **/
-    public Sprint(String projectID, String sprintID ,String name) {
+    public Sprint(String projectID, String sprintID, String name) {
         this.projectID = new ProjectID(projectID);
         this.sprintID = new SprintID(sprintID);
         this.sprintName = new Description(name);
-        this.scrumBoard = new ScrumBoard();
         this.taskStore = new TaskStore();
     }
 
@@ -48,7 +49,6 @@ public class Sprint {
     public void changeEndDate(int sprintDurationInDays) {
         this.endDate = LocalDate.now().plusDays(sprintDurationInDays -1L);
     }
-
 
     public boolean hasSprintID(String sprID) {
          return Objects.equals(this.sprintID.toString(), sprID);}
@@ -65,8 +65,8 @@ public class Sprint {
         if(this.endDate == null) {
             throw new NullPointerException();
         }
-        return ((this.startDate.isBefore(LocalDate.now()) || this.startDate.equals(LocalDate.now()))
-                && (this.endDate.isAfter(LocalDate.now()) || this.endDate.equals(LocalDate.now())));
+        return ((this.startDate.isBefore(endDate) || this.startDate.equals(endDate))
+                && (this.endDate.isAfter(startDate) || this.endDate.equals(startDate)));
     }
 
     /**
@@ -96,27 +96,25 @@ public class Sprint {
         scrumBoard.saveUserStoryToSprintBacklog(userStory);
         return true;
     }
-    /**
-     * Override Methods
-     */
+
+    @Override
+    public boolean sameIdentityAs(Sprint other) {
+        return other != null && sprintID.sameValueAs(other.sprintID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sprintID);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Sprint)) return false;
         Sprint sprint = (Sprint) o;
-        return sprintID == sprint.sprintID &&
-                Objects.equals(projectID, sprint.projectID) &&
-                Objects.equals(sprintName, sprint.sprintName) &&
-                Objects.equals(taskStore, sprint.taskStore) &&
-                Objects.equals(scrumBoard, sprint.scrumBoard) &&
-                Objects.equals(startDate, sprint.startDate) &&
-                Objects.equals(endDate, sprint.endDate);
+        return sameIdentityAs(sprint);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(projectID, sprintID, sprintName, taskStore, scrumBoard, startDate, endDate);
-    }
 }
 
 

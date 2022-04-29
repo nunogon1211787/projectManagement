@@ -2,7 +2,8 @@ package switch2021.project.model.Task;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.model.Resource.Resource;
+import switch2021.project.interfaces.TaskContainerID;
+import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.valueObject.*;
 
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.util.Objects;
 
 @Setter
 @Getter
+@Deprecated
 public class Task {
 
     /**
@@ -28,6 +30,7 @@ public class Task {
     private Resource responsible;
     private List<TaskEffort> taskEffortList;
     private List<String> precedenceList;
+    private TaskContainerID taskContainerID;
 
 
     /**
@@ -47,6 +50,20 @@ public class Task {
         this.type = type;
         this.responsible = responsible;
         this.taskEffortList = new ArrayList<>();
+
+    }
+
+    public Task(String name, String description, double effortEstimate, TaskTypeEnum type, Resource responsible, TaskContainerID taskContainerID) {
+
+        checkEffortRules(effortEstimate);
+
+        this.name = new Name(name);
+        this.description = new Description(description);
+        this.effortEstimate = effortEstimate;
+        this.type = type;
+        this.responsible = responsible;
+        this.taskEffortList = new ArrayList<>();
+        this.taskContainerID = taskContainerID;
     }
 
     public Task(String name, String description, double effortEstimate, TaskTypeEnum type, Resource responsible, List<String> precedenceList) {

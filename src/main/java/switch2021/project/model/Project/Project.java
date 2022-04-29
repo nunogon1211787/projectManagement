@@ -5,14 +5,14 @@ import lombok.Setter;
 import switch2021.project.factory.ProjectTeamFactory;
 import switch2021.project.factory.ResourceFactory;
 import switch2021.project.factory.SprintFactory;
-import switch2021.project.factory.IUserStoryFactory;
+import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.factoryInterface.ResourceFactoryInterface;
-import switch2021.project.model.Resource.Resource;
+import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserStory.UserStoryStore;
+import switch2021.project.model.UserStory.RepoUserStory;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.utils.Entity;
@@ -22,7 +22,8 @@ import java.util.Objects;
 
 @Getter
 @Setter
-public class Project implements Entity<Project> {
+@Deprecated
+public class Project implements Entity {
 
 
     private final Customer customer;
@@ -36,8 +37,8 @@ public class Project implements Entity<Project> {
     private Description description;
     private Typology typology;
     private ProjectStatusEnum projectStatus;
-    private UserStoryStore userStoryStore;
-    private IUserStoryFactory userStoryFactory;
+    private RepoUserStory userStoryStore;
+    private UserStoryFactory userStoryFactory;
     private ProjectTeam projectTeam;
     private ProjectTeamFactory projectTeamFactory;
     private ResourceFactoryInterface resFac = new ResourceFactory();
@@ -56,8 +57,6 @@ public class Project implements Entity<Project> {
     public Project(String name, String description, Customer customer, Typology typology,
                    BusinessSector businessSector, LocalDate startDate, int numberOfSprints, double budget) {
 
-        validateProjectFields(numberOfSprints);
-
         this.projectName = new Description(name);
         this.description = new Description(description);
 
@@ -67,23 +66,13 @@ public class Project implements Entity<Project> {
         this.businessSector = businessSector;
 
         this.startDate = startDate;
-        this.sprintList = new SprintStore(new SprintFactory());
+        this.sprintList = new SprintStore();
 
         this.numberOfSprints = new NumberOfSprints(numberOfSprints);
         this.budget = new Budget(budget);
 
         this.projectTeam = new ProjectTeam(resFac);
-        this.userStoryStore = new UserStoryStore();
-    }
-
-
-    /**
-     * Validates Project Creation Fields
-     * Checks if @param projectName and @param description are empty or have the minimum characters necessary
-     */
-    public void validateProjectFields(int numberOfSprints) {
-        if (numberOfSprints <= 0)
-            throw new IllegalArgumentException("Number of Sprints must be greater than 0");
+        this.userStoryStore = new RepoUserStory();
     }
 
     /**
@@ -120,10 +109,10 @@ public class Project implements Entity<Project> {
 
     public boolean validateResource(Resource resource) {
         boolean msg = true;
-        String x = resource.getUser().getSystemUserId().getEmail().getEmailText();
+        String x = resource.getUser().getSystemUserId().getEmail().getEmail();
 
         for (Resource i : projectTeam.getProjectTeamList()) {
-            if (i.getUser().getSystemUserId().getEmail().getEmailText().equals(x)) {
+            if (i.getUser().getSystemUserId().getEmail().getEmail().equals(x)) {
                 msg = false;
                 break;
             }
@@ -207,9 +196,8 @@ public class Project implements Entity<Project> {
                 '}';
     }
 
-
     @Override
-    public boolean sameIdentityAs(Project other) {
+    public boolean sameIdentityAs(Object other) {
         return false;
     }
 }

@@ -2,13 +2,15 @@ package switch2021.project.model.UserStory;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import switch2021.project.interfaces.TaskContainerID;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.utils.ValueObject;
 
 
 @Getter
 @EqualsAndHashCode
-public class UserStoryID implements ValueObject<UserStoryID> {
+public class UserStoryID implements ValueObject<UserStoryID>, TaskContainerID {
 
     /**
      * Attributes
@@ -52,7 +54,10 @@ public class UserStoryID implements ValueObject<UserStoryID> {
     }
 
     @Override
-    public boolean sameValueAs(UserStoryID other) {
-        return false;
+    public boolean sameValueAs(final UserStoryID other) {
+        return other != null && new EqualsBuilder().
+                append(this.projectID, other.projectID).
+               append(this.usTitle, other.usTitle).
+                isEquals();
     }
 }

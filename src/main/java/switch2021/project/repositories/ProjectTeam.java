@@ -7,7 +7,7 @@ import switch2021.project.model.valueObject.PercentageOfAllocation;
 import switch2021.project.model.valueObject.ProjectRole;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.utils.App;
-import switch2021.project.model.Resource.Resource;
+import switch2021.project.model.Resource.old.Resource;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.interfaces.ProjectRepositoryInterface;
 import switch2021.project.mapper.ProjectMapper;
-import switch2021.project.model.Project.Project;
+import switch2021.project.model.Project.ProjectReeng;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,16 +20,16 @@ public class ShowAllProjectsService {
 
     public List<OutputProjectDTO> showAllProjects() {
 
-        List<Project> projects = repo.findAll();
+        List<ProjectReeng> projects = repo.findAll();
 
         return createProjectDTOList(projects);
     }
 
-    private List<OutputProjectDTO> createProjectDTOList(List<Project> projects) {
+    private List<OutputProjectDTO> createProjectDTOList(List<ProjectReeng> projects) {
 
         List<OutputProjectDTO> allProjectsDto = new ArrayList<>();
 
-        for (Project project : projects) {
+        for (ProjectReeng project : projects) {
 
             OutputProjectDTO projDto = map.model2Dto(project);
 

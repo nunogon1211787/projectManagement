@@ -1,6 +1,6 @@
 package switch2021.project.stores;
 
-import switch2021.project.model.Resource.Resource;
+import switch2021.project.model.Resource.old.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class ResourceStore { //implements ResourceRepositoryInterface {
         this.projectTeamList = new ArrayList<>();
     }
 
-/*
+
     /**
      * Find methods
      **/
@@ -52,7 +52,7 @@ public class ResourceStore { //implements ResourceRepositoryInterface {
 //    }
 //
 //    //Find all resources associated with system user (systemUserId)
-//    public List<Resource> findAllBySystemUserId(SystemUserID userId){
+//    public List<Resource> findAllBySystemUserId(SystemUserId userId){
 //        List<Resource> resList = new ArrayList<>();
 //
 //        for (Resource resource : this.projectTeamList) {

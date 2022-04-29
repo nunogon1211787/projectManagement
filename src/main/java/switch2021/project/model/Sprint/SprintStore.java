@@ -2,7 +2,8 @@ package switch2021.project.model.Sprint;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.factoryInterface.SprintFactoryInterface;
+import org.springframework.stereotype.Repository;
+import switch2021.project.interfaces.SprintRepositoryInterface;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.Task.Task;
 import java.time.LocalDate;
@@ -12,26 +13,25 @@ import java.util.Objects;
 
 @Getter
 @Setter
-public class SprintStore{
+@Repository
+public class SprintStore implements SprintRepositoryInterface{
 
-    /** Class Attributes **/
-    private final List<Sprint> sprints;
-    private SprintFactoryInterface sprintFactory;
+    /** Attributes **/
+    private List<Sprint> sprints;
+
+    /** Constructor **/
+    public SprintStore() { this.sprints = new ArrayList<>(); }
 
 
-    /** Constructors with data **/
-    public SprintStore(SprintFactoryInterface sprintFactoryInterface) {
-        this.sprints = new ArrayList<>();
-        this.sprintFactory = sprintFactoryInterface;
-    }
-
-    /** Sprint creator **/
-    public Sprint createAndSaveSprint(String projectID, String sprintID, String name, int sprintDuration) {
-        Sprint sprint = this.sprintFactory.createSprint(projectID, sprintID, name);
-        validateIfSprintAlreadyExists(sprint);
-        sprint.changeEndDate(sprintDuration);
-        this.sprints.add(sprint);
-        return sprint;
+    /** Check If Sprint Already Exists */
+    public boolean existsBySprintID (String sprintID) {
+        boolean msg = false;
+        for (Sprint sprint : sprints) {
+            if(sprint.hasSprintID(sprintID)) {
+                msg = true;
+            }
+        }
+        return msg;
     }
 
     /** Find List of Sprints Method **/
@@ -76,6 +76,22 @@ public class SprintStore{
         return sprint;
     }
 
+    /** Save Sprint */
+    public boolean saveSprint (Sprint sprint) {
+        boolean msg = true;
+        if (existsBySprintID(sprint.getSprintID().toString())){
+            msg = false;
+        } else {
+            sprints.add(sprint);
+        }
+        return msg;
+    }
+
+    /** Delete Sprint Method **/
+    public boolean deleteSprint (Sprint sprint){
+        this.sprints.remove(sprint);
+        return true;
+    }
 
     /**
      * Method to return all activities in a project
@@ -87,7 +103,6 @@ public class SprintStore{
         }
         return allActivitiesInAProject;
     }
-
 
     /** Method to Validate a Sprint **/
     public boolean validateIfSprintAlreadyExists(Sprint sprint) {

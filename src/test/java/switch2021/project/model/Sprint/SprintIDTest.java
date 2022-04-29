@@ -171,19 +171,19 @@ public class SprintIDTest {
         assertNotEquals(sprintID, budget);
     }
 
-    @DisplayName("Same Value As - Override Test")
-    @Test
-    public void sameValueAs() {
-        //Arrange
-        ProjectID projectCode = mock(ProjectID.class);
-        when(projectCode.getCode()).thenReturn("Project_2022_1");
-        Description description = mock(Description.class);
-        when(description.getText()).thenReturn("Sprint 1");
-        //Act
-        SprintID sprintID = new SprintID(projectCode, description);
-        //Assert
-        assertFalse(sprintID.sameValueAs(sprintID));
-    }
+//    @DisplayName("Same Value As - Override Test")
+//    @Test
+//    public void sameValueAs() {
+//        //Arrange
+//        ProjectID projectCode = mock(ProjectID.class);
+//        when(projectCode.getCode()).thenReturn("Project_2022_1");
+//        Description description = mock(Description.class);
+//        when(description.getText()).thenReturn("Sprint 1");
+//        //Act
+//        SprintID sprintID = new SprintID(projectCode, description);
+//        //Assert
+//        assertFalse(sprintID.sameValueAs(sprintID));
+//    }
 
     @DisplayName("To String - Override Test")
     @Test
