@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TaskRepositoryTest {
 
-    @Test
+/*    @Test
     void createTaskUSTest() {
 
         UserProfile profile = new UserProfile("Visitor");
@@ -51,6 +51,8 @@ class TaskRepositoryTest {
         assertEquals("Project_2022_1_As a PO, i want to test this string", task.getTaskContainerID().toString());
 
     }
+
+ */
 
 //    @Test
 //    void createTaskSprint() {

@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import switch2021.project.controller.RegisterUserController;
 import switch2021.project.dto.NewUserInfoDTO;
 import switch2021.project.factory.SystemUserFactory;
 import switch2021.project.mapper.SystemUserMapper;

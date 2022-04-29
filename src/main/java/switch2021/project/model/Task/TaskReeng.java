@@ -52,7 +52,7 @@ public class TaskReeng {
     /*** Methods to iterate with attributes */
 
     public boolean hasName(String taskName) {
-        return Objects.equals(this.name.getNameF(), taskName);
+        return Objects.equals(this.name.getText(), taskName);
     }
 
     public boolean hasTaskTypeEnum(String taskType) {

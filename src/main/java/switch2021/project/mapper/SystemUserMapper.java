@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import switch2021.project.dto.OutputUserDTO;
 import switch2021.project.model.SystemUser.SystemUser;
 
-//@Component
+@Component
 public class SystemUserMapper {
 
     public OutputUserDTO toDto(SystemUser user) {
