@@ -1,7 +1,6 @@
 package switch2021.project.model.SystemUser;
 
 import lombok.Getter;
-import lombok.Setter;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.utils.Entity;
@@ -10,46 +9,171 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
 public class SystemUser implements Entity<SystemUser> {
 
     /**
      * Attributes of systemUser´s class
-     **/
-    private SystemUserId systemUserId;
+     */
+    private SystemUserID systemUserId;
     private Name userName;
     private Photo photo;
-    private Password password;
+    private Description encryptedPassword;
     private Function function;
     private boolean isActive;
     private final List<UserProfileId> assignedIdProfiles;
-    private List<Request> requestedProfiles;
-    //private final Email email;
+    private final List<Request> requestedProfiles;
 
     /**
      * Constructor
-     **/
-    public SystemUser(String userName, String email, String function, String password, String passwordConfirmation,
-                      String photo, UserProfileId profileId) {
-        checkProfileRules(profileId);
-        this.systemUserId = new SystemUserId(email);
-        this.userName = new Name(userName);
-        this.photo = new Photo(photo);
-        this.function = new Function(function);
-        if (password.equals(passwordConfirmation)) {
-            this.password = new Password(password);
-        } else {
-            throw new IllegalArgumentException("passwords not match");
-        }
+     */
+    public SystemUser(SystemUserID systemUserId) {
+        this.systemUserId = systemUserId;
         this.isActive = false;
         this.assignedIdProfiles = new ArrayList<>();
-        this.assignedIdProfiles.add(profileId);
         this.requestedProfiles = new ArrayList<>();
     }
 
     /**
+     * Setters
+     */
+    public void setUserName(Name userName) {
+        this.userName = userName;
+    }
+
+    public void setSystemUserId(SystemUserID systemUserId) {
+        this.systemUserId = systemUserId;
+    }
+
+    public void setPhoto(Photo photo) {
+        this.photo = photo;
+    }
+
+    public void setFunction(Function function) {
+        this.function = function;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public void assignProfileIdToUser(UserProfileId profileId) {
+        //checkProfileRule()
+        this.assignedIdProfiles.add(profileId);
+    }
+
+
+    /**
+     * Password validate if passwords are equal and encrypt and assign it to the System User
+     * @param newPassword,newPasswordConfirmation [Password v.o.'s]
+     * @see #encryptPassword(Password)
+     */
+    public void assignValidatedPassword(Password newPassword, Password newPasswordConfirmation) {
+        if (newPassword.equals(newPasswordConfirmation)) {
+            this.encryptedPassword = encryptPassword(newPassword);
+        } else {
+            throw new IllegalArgumentException("passwords not match");
+        }
+    }
+
+    /**
+     * Password encryption
+     * @param password [v.o.]
+     * @return v.o. Description(encrypted string)
+     */
+    public Description encryptPassword(Password password) {
+        int codigoASCII;
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < password.getPwd().length(); i++) {
+            codigoASCII = password.getPwd().charAt(i) + 99;
+            stringBuilder.append((char) codigoASCII);
+        }
+        return new Description(stringBuilder.toString());
+    }
+
+    public Description decryptPassword() {
+        int codigoASCII;
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < this.encryptedPassword.getText().length(); i++) {
+            codigoASCII = this.encryptedPassword.getText().charAt(i) - 99;
+            stringBuilder.append((char) codigoASCII);
+        }
+        return new Description(stringBuilder.toString());
+    }
+
+/*
+    /**
+     * Method to update old password with the new password
+     */
+/*   public boolean updatePassword(String oldPasswordUI, String newPassword, String newPasswordConfirmation) {
+        boolean msg = false;
+
+        if (validateOldPassword(oldPasswordUI) && newPassword.equals(newPasswordConfirmation)) {
+            setPassword(new Password(newPassword));
+            msg = true;
+        }
+        return msg;
+    }
+
+
+    /**
+     * Method to validate the old password from the UI with thew old password from the System User
+     */
+/*    private boolean validateOldPassword(String oldpasswordUI) {
+
+        Password pwd = new Password(oldpasswordUI);
+
+        return pwd.equals(this.password);
+    }
+*/
+    /**
+     * Request Create and Save Method
+     */
+    public boolean createAndSaveProfileRequest(UserProfileId profileId) {
+        Request newRequest = new Request(profileId);
+
+        if (hasProfileId(profileId) || this.requestedProfiles.contains(newRequest)) {
+            return false;
+        }
+        return this.requestedProfiles.add(newRequest);
+    }
+
+    /**
+     * Override Methods
+     *
+     * @param o to compare
+     * @return True if they have the same identity
+     * @see #sameIdentityAs(SystemUser)
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SystemUser that = (SystemUser) o;
+        return sameIdentityAs(that);
+    }
+
+    @Override
+    public boolean sameIdentityAs(SystemUser other) {
+        return other != null && systemUserId.sameValueAs(other.systemUserId);
+    }
+
+    /**
+     * @return Hash code of systemUser id.
+     */
+    @Override
+    public int hashCode() {
+        return systemUserId.hashCode();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //OLD METHODS
+
+    /**
      * getting Methods (outside of lombock)
-     **/
+     */
     public List<UserProfileId> getAssignedProfiles() {
         return new ArrayList<>(assignedIdProfiles);
     }
@@ -58,40 +182,6 @@ public class SystemUser implements Entity<SystemUser> {
         return new ArrayList<>(requestedProfiles);
     }
 
-    /**
-     * Setting Methods (outside of lombock)
-     **/
-    public void setUserName(String userName) {
-        this.userName = new Name(userName);
-    }
-
-    public void setFunction(String function) {
-        this.function = new Function(function);
-        }
-
-    private void setPassword(String password) {
-        this.password = new Password(password);
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = new Photo(photo);
-    }
-
-//    public boolean setAllData(String userName, String function, String photo) {
-//        this.setUserName(userName);
-//    }
-
-    public boolean setActive(Boolean x) {
-        this.isActive = x;
-        return true;
-    }
-
-    /**
-     * AssignProfileList´s methods
-     */
-    /*public void assignProfileToUser(UserProfile profile) { NÃO É PRECISO (NUNO)
-        this.assignedProfiles.add(profile);
-    }*/
     public boolean updateProfile(UserProfile oldProfile, UserProfile newProfile) {
 
         if (!checkAssignedProfileList(newProfile)) {
@@ -107,7 +197,7 @@ public class SystemUser implements Entity<SystemUser> {
      * Validation Methods
      **/
 
-    private void checkProfileRules(UserProfileId profileId) {
+    public void checkProfileRules(UserProfileId profileId) {
         if (!profileId.getUserProfileName().getText().equals("Visitor"))
             throw new IllegalArgumentException("at registration visitor profile must be associated");
     }
@@ -130,7 +220,7 @@ public class SystemUser implements Entity<SystemUser> {
     public boolean isYourEmail(String email) {
 
         boolean result = false;
-        int idxString = this.getSystemUserId().getEmail().getEmail().indexOf(email.toLowerCase());
+        int idxString = this.getSystemUserId().getEmail().getEmailText().indexOf(email.toLowerCase());
 
         if (idxString != -1) {
             result = true;
@@ -139,9 +229,8 @@ public class SystemUser implements Entity<SystemUser> {
     }
 
     public boolean hasName(String name) {
-        return this.userName.getNameF().equals(name);
+        return this.userName.getText().equals(name);
     }
-
 
     /**
      * Method to validate if user already has the profile requested
@@ -166,7 +255,7 @@ public class SystemUser implements Entity<SystemUser> {
         int result = 0;
 
         if (!name.isEmpty()) {
-            int idxString = this.userName.getNameF().toLowerCase().indexOf(name.toLowerCase());
+            int idxString = this.userName.getText().toLowerCase().indexOf(name.toLowerCase());
             if (idxString != -1) {
                 result = 1;
             } else {
@@ -181,7 +270,7 @@ public class SystemUser implements Entity<SystemUser> {
         int result = 0;
 
         if (!email.isEmpty()) {
-            int idxString = this.getSystemUserId().getEmail().getEmail().toLowerCase().indexOf(email.toLowerCase());
+            int idxString = this.getSystemUserId().getEmail().getEmailText().toLowerCase().indexOf(email.toLowerCase());
             if (idxString != -1) {
                 result = 1;
             } else {
@@ -272,76 +361,5 @@ public class SystemUser implements Entity<SystemUser> {
             }
         }
         return result;
-    }
-
-
-    /**
-     * Method to update old password with the new password
-     **/
-    public boolean updatePassword(String oldPasswordUI, String newPassword, String newPasswordConfirmation) {
-        boolean msg = false;
-
-        if (validateOldPassword(oldPasswordUI) && newPassword.equals(newPasswordConfirmation)) {
-            setPassword(newPassword);
-            msg = true;
-        }
-        return msg;
-    }
-
-
-    /**
-     * Method to validate the old password from the UI with thew old password from the System User
-     **/
-    private boolean validateOldPassword(String oldpasswordUI) {
-
-        Password pwd = new Password(oldpasswordUI);
-
-        return pwd.equals(this.password);
-
-    }
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Request Creator Method
-     **/
-    public boolean createAndSaveProfileRequest(UserProfileId profileId) {
-        Request newRequest = new Request(profileId);
-
-        if (hasProfileId(profileId) || this.requestedProfiles.contains(newRequest)) {
-            return false;
-        }
-        return this.requestedProfiles.add(newRequest);
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /**
-     * Override Methods
-     **/
-    @Override
-    public boolean sameIdentityAs(SystemUser other) {
-        return other != null && systemUserId.sameValueAs(other.systemUserId);
-    }
-
-    /**
-     * @param o to compare
-     * @return True if they have the same identity
-     * @see #sameIdentityAs(SystemUser)
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SystemUser that = (SystemUser) o;
-        return sameIdentityAs(that);
-    }
-
-    /**
-     * @return Hash code of systemUser id.
-     */
-    @Override
-    public int hashCode() {
-        return systemUserId.hashCode();
     }
 }

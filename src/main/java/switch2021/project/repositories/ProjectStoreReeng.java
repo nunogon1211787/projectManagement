@@ -32,8 +32,6 @@ public class ProjectStoreReeng implements ProjectRepositoryInterface {
             throw new IllegalArgumentException("Error: Project is null!");
         }
 
-        newProject.setProjectCode(new ProjectID(projectList.size() + 1));
-
         if (existById(newProject.getProjectCode().getCode())) {
             throw new IllegalArgumentException("Error: Project already exists!");
         }

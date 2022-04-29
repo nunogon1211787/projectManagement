@@ -1,6 +1,8 @@
 package switch2021.project.repositories;
 
 import lombok.Getter;
+import org.springframework.stereotype.Repository;
+import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.model.UserProfile.UserProfile;
 
 import java.util.ArrayList;
@@ -8,7 +10,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-public class UserProfileRepository {
+@Repository
+public class UserProfileRepository implements IUserProfileRepo {
 
     /**
      * Attributes

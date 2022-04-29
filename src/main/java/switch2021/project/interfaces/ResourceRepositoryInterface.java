@@ -24,6 +24,8 @@ public interface ResourceRepositoryInterface/* extends CrudRepository<Object, Lo
     //List<Resource> findAllBySystemUserId(SystemUserId userId);
 
 
+    ResourceReeng findById (String resourceId);
+
     /**
      * Save a object in the list of the repository.
      */

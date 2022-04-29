@@ -1,27 +1,32 @@
 package switch2021.project.controller;
 
-import switch2021.project.dto.RegisterUserDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import switch2021.project.dto.OutputUserDTO;
-import switch2021.project.model.Company;
-import switch2021.project.service.SystemUserService;
+import switch2021.project.dto.NewUserInfoDTO;
+import switch2021.project.service.RegisterUserService;
 
+@RestController
+@RequestMapping("/users")
 public class RegisterUserController {
 
-    /**
-     * Attributes
-     **/
-    private final Company company;
-    private final SystemUserService systemUserService;
+    @Autowired
+    private RegisterUserService registerUserService;
 
-    /**
-     * Constructor to test (without SINGLETON)
-     **/
-    public RegisterUserController(Company company, SystemUserService systemUserService) {
-        this.company = company;
-        this.systemUserService = systemUserService;
+    public RegisterUserController(RegisterUserService registerUserService) {
+        this.registerUserService = registerUserService;
     }
 
-    public OutputUserDTO registerUser(RegisterUserDTO dto) {
-        return systemUserService.createAndSaveSystemUser(dto);
+    @PostMapping
+    public ResponseEntity<Object> registerUser(@RequestBody NewUserInfoDTO infoDTO) {
+
+        OutputUserDTO outDTO = registerUserService.createAndSaveSystemUser(infoDTO);
+
+        return new ResponseEntity<>(outDTO, HttpStatus.CREATED);
     }
 }

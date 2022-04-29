@@ -22,7 +22,7 @@ class UserStoryEffortControllerTest {
 
 
 
-    @Test
+/*    @Test
     void catchCurrentProjectListByUserEmail() {
         // Arrange
         Company company = new Company();
@@ -52,6 +52,8 @@ class UserStoryEffortControllerTest {
         assertEquals(companyProjectList, projectList);
     }
 
+ */
+
     @Test
     void getProjectByCode() {
         //Arrange
@@ -64,7 +66,7 @@ class UserStoryEffortControllerTest {
         assertEquals(project, expected);
     }
 
-    @Test
+/*    @Test
     void getSprintList() {
         //Arrange
         Company company = new Company();
@@ -98,6 +100,8 @@ class UserStoryEffortControllerTest {
         assertEquals(sprint, sprint2);
 
     }
+
+ */
 
     @Test
     void getSprint() {

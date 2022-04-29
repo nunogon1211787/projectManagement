@@ -133,7 +133,7 @@ SystemUser --> "1" Function: has
 class Request <<v.o.>>{
 -requestDate
 }
-SystemUser -l-> "1" Request: sends
+SystemUser "1" -l-> "*" Request: sends
 }
 
 class SystemUserID <<v.o.>>{

@@ -22,7 +22,7 @@ class CompanyTest {
         //assertEquals(0, company.getRequestStore().getRequestProfileList().size());
     }
 
-    @Test
+/*    @Test
     public void SearchUserByPartiallySwitchedEmail() {
 
         //Arrange
@@ -49,6 +49,8 @@ class CompanyTest {
         //Assert
         assertNotEquals(joana, joanasilva);
     }
+
+ */
 
     @Test
     public void getProjectStoreIsInstanceOfProjectStore() {

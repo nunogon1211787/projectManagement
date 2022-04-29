@@ -6,15 +6,15 @@ import switch2021.project.model.UserProfile.UserProfile;
 
 import java.util.List;
 
-@Component
-public interface UserProfileRepositoryInterface {
+//@Component
+public interface IUserProfileRepo {
 
     /**
      * Finds all user profile
      *
      * @return userProfileList if found, else {@code null}
      */
-    List<UserProfile> findUserProfile();
+    //List<UserProfile> findUserProfile();
 
     /**
      * Save user story

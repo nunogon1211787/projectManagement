@@ -297,7 +297,7 @@ class EmailTest {
         Email test = new Email("123@test.pt");
         Email test2 = new Email("1234@test.pt");
         //Act
-        String text1 = test.getEmail();
+        String text1 = test.getEmailText();
         //Assert
         assertFalse(test2.hasEmail(text1));
     }
@@ -308,7 +308,7 @@ class EmailTest {
         Email test = new Email("123@test.pt");
         //Act
         //Assert
-        assertEquals("123@test.pt", test.getEmail());
+        assertEquals("123@test.pt", test.getEmailText());
     }
 
     @Test
@@ -363,7 +363,7 @@ class EmailTest {
         Email email = new Email("xpto@xpto.pt");
         Email email1 = new Email("xpto@xpto.pt");
         //Assert
-        assertTrue(email.equals(email1));
+        assertEquals(email, email1);
     }
 
     @Test
@@ -376,7 +376,7 @@ class EmailTest {
         assertEquals(email, email1);
     }
 
-    @Test
+/*    @Test
     @DisplayName("Test to check Override Method.")
     void overrideTest_Success_2(){
         //Arrange
@@ -385,6 +385,7 @@ class EmailTest {
         //Act and Assert
         assertTrue(email.equals(email1));
     }
+ */
 
     @Test
     @DisplayName("Test to check Override Method.")
@@ -393,7 +394,7 @@ class EmailTest {
         Email email = new Email("xpto@xpto.pt");
         Email email1 = new Email("xpto12@xpto.pt");
         //Assert
-        assertFalse(email.equals(email1));
+        assertNotEquals(email, email1);
     }
 
     @Test

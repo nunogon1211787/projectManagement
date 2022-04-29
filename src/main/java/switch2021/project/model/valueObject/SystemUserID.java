@@ -4,22 +4,22 @@ import lombok.Getter;
 import switch2021.project.utils.ValueObject;
 
 @Getter
-public class SystemUserId implements ValueObject<SystemUserId> {
+public class SystemUserID implements ValueObject<SystemUserID> {
 
     private final Email email;
 
     /**
      * Constructor.
      */
-    public SystemUserId(String email) {
-        this.email = new Email(email);
+    public SystemUserID(Email email) {
+        this.email = email;
     }
 
     /**
      * Override Methods
      **/
     @Override
-    public boolean sameValueAs(final SystemUserId other) {
+    public boolean sameValueAs(final SystemUserID other) {
         return other != null && this.email.equals(other.email);
     }
 
@@ -28,7 +28,7 @@ public class SystemUserId implements ValueObject<SystemUserId> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        final SystemUserId that = (SystemUserId) o;
+        final SystemUserID that = (SystemUserID) o;
         return sameValueAs(that);
     }
 
