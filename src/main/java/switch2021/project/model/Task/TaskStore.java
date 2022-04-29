@@ -4,7 +4,7 @@ import lombok.Getter;
 import switch2021.project.mapper.old.TaskMapper;
 import switch2021.project.dto.old.CreateTaskDTO;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Resource.Resource;
+import switch2021.project.model.Resource.old.Resource;
 
 import java.util.ArrayList;
 import java.util.List;

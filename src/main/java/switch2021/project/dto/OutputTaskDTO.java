@@ -1,7 +1,5 @@
 package switch2021.project.dto;
 
-import switch2021.project.model.Resource.Resource;
-import switch2021.project.model.Task.TaskTypeEnum;
 
 public class OutputTaskDTO {
 

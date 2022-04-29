@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1318px" preserveAspectRatio="none" style="width:1309px;height:1318px;background:#FFFFFF;" version="1.1" viewBox="0 0 1309 1318" width="1309px" zoomAndPan="magnify"><defs/><g><rect height="26.4883" style="stroke:#00000000;stroke-width:1.0;fill:none;" width="398" x="448.5" y="5"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="388" x="453.5" y="23.5352">US022 - As Project Manager, I want to create a sprint.</text><!--MD5=[9ddaf8ee8bcae11a9a9232f969198262]
+cluster Infrastructure--><g id="cluster_Infrastructure"><path d="M765.5,43.4883 L865.5,43.4883 A3.75,3.75 0 0 1 868,45.9883 L875,65.9766 L950.5,65.9766 A2.5,2.5 0 0 1 953,68.4766 L953,148.9883 A2.5,2.5 0 0 1 950.5,151.4883 L765.5,151.4883 A2.5,2.5 0 0 1 763,148.9883 L763,45.9883 A2.5,2.5 0 0 1 765.5,43.4883 " fill="#ADD8E6" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="763" x2="875" y1="65.9766" y2="65.9766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="99" x="767" y="59.0234">Infrastructure</text></g><!--MD5=[dbad8618439bb33361aad5781f969acc]
+cluster Interface Adapter--><g id="cluster_Interface Adapter"><path d="M472.5,175.4883 L597.5,175.4883 A3.75,3.75 0 0 1 600,177.9883 L607,197.9766 L989.5,197.9766 A2.5,2.5 0 0 1 992,200.4766 L992,396.9883 A2.5,2.5 0 0 1 989.5,399.4883 L472.5,399.4883 A2.5,2.5 0 0 1 470,396.9883 L470,177.9883 A2.5,2.5 0 0 1 472.5,175.4883 " fill="#90EE90" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="470" x2="607" y1="197.9766" y2="197.9766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="124" x="474" y="191.0234">Interface Adapter</text></g><!--MD5=[ed1d20ea533a2a0e7df5ba3c35e56ced]
+cluster Controllers--><g id="cluster_Controllers"><path d="M750.5,234.9883 L832.5,234.9883 A3.75,3.75 0 0 1 835,237.4883 L842,257.4766 L965.5,257.4766 A2.5,2.5 0 0 1 968,259.9766 L968,356.4883 A2.5,2.5 0 0 1 965.5,358.9883 L750.5,358.9883 A2.5,2.5 0 0 1 748,356.4883 L748,237.4883 A2.5,2.5 0 0 1 750.5,234.9883 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="748" x2="842" y1="257.4766" y2="257.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="81" x="752" y="250.5234">Controllers</text></g><!--MD5=[600c2d25b6889bd4e9f6b335204b22ae]
+cluster Repositories--><g id="cluster_Repositories"><path d="M496.5,218.4883 L588.5,218.4883 A3.75,3.75 0 0 1 591,220.9883 L598,240.9766 L721.5,240.9766 A2.5,2.5 0 0 1 724,243.4766 L724,372.9883 A2.5,2.5 0 0 1 721.5,375.4883 L496.5,375.4883 A2.5,2.5 0 0 1 494,372.9883 L494,220.9883 A2.5,2.5 0 0 1 496.5,218.4883 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="494" x2="598" y1="240.9766" y2="240.9766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="91" x="498" y="234.0234">Repositories</text></g><!--MD5=[15aeddfaa60540fe98884cf0ce4d516a]
+cluster Application Service API/Use Case Service--><g id="cluster_Application Service API/Use Case Service"><rect fill="#FFB6C1" height="440.5" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;" width="540" x="462" y="423.4883"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="294" x="585" y="439.0234">Application Service API/Use Case Service</text></g><!--MD5=[eb8fc3c9a0c3710ef0d98933b66cbf91]
+cluster App Service--><g id="cluster_App Service"><path d="M750.5,474.9883 L834.5,474.9883 A3.75,3.75 0 0 1 837,477.4883 L844,497.4766 L975.5,497.4766 A2.5,2.5 0 0 1 978,499.9766 L978,596.4883 A2.5,2.5 0 0 1 975.5,598.9883 L750.5,598.9883 A2.5,2.5 0 0 1 748,596.4883 L748,477.4883 A2.5,2.5 0 0 1 750.5,474.9883 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="748" x2="844" y1="497.4766" y2="497.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="83" x="752" y="490.5234">App Service</text></g><!--MD5=[3670d4b7ab9fef6336b01ca6aa98c23b]
+cluster Repositories Interface--><g id="cluster_Repositories Interface"><path d="M488.5,466.4883 L648.5,466.4883 A3.75,3.75 0 0 1 651,468.9883 L658,488.9766 L721.5,488.9766 A2.5,2.5 0 0 1 724,491.4766 L724,604.9883 A2.5,2.5 0 0 1 721.5,607.4883 L488.5,607.4883 A2.5,2.5 0 0 1 486,604.9883 L486,468.9883 A2.5,2.5 0 0 1 488.5,466.4883 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="486" x2="658" y1="488.9766" y2="488.9766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="159" x="490" y="482.0234">Repositories Interface</text></g><!--MD5=[67668ae847fe847218a11ca47c408526]
+cluster Factory Interface--><g id="cluster_Factory Interface"><path d="M662.5,715.9883 L783.5,715.9883 A3.75,3.75 0 0 1 786,718.4883 L793,738.4766 L975.5,738.4766 A2.5,2.5 0 0 1 978,740.9766 L978,837.4883 A2.5,2.5 0 0 1 975.5,839.9883 L662.5,839.9883 A2.5,2.5 0 0 1 660,837.4883 L660,718.4883 A2.5,2.5 0 0 1 662.5,715.9883 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="660" x2="793" y1="738.4766" y2="738.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="120" x="664" y="731.5234">Factory Interface</text></g><!--MD5=[7b8bc9ee8bb84b99fb3a3f9477c19238]
+cluster DTO--><g id="cluster_DTO"><path d="M8.5,631.4883 L42.5,631.4883 A3.75,3.75 0 0 1 45,633.9883 L52,653.9766 L435.5,653.9766 A2.5,2.5 0 0 1 438,656.4766 L438,1118.9883 A2.5,2.5 0 0 1 435.5,1121.4883 L8.5,1121.4883 A2.5,2.5 0 0 1 6,1118.9883 L6,633.9883 A2.5,2.5 0 0 1 8.5,631.4883 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="6" x2="52" y1="653.9766" y2="653.9766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="33" x="10" y="647.0234">DTO</text></g><!--MD5=[332b3e3e04c3314ea7dd6b65b2e5ee70]
+cluster SprintDTO--><g id="cluster_SprintDTO"><path d="M228.5,674.4883 L305.5,674.4883 A3.75,3.75 0 0 1 308,676.9883 L315,696.9766 L411.5,696.9766 A2.5,2.5 0 0 1 414,699.4766 L414,878.9883 A2.5,2.5 0 0 1 411.5,881.4883 L228.5,881.4883 A2.5,2.5 0 0 1 226,878.9883 L226,676.9883 A2.5,2.5 0 0 1 228.5,674.4883 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="226" x2="315" y1="696.9766" y2="696.9766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="76" x="230" y="690.0234">SprintDTO</text></g><!--MD5=[e1bfe95258b8c2bfc42f7f5caee023e0]
+cluster OutputSprintDTO--><g id="cluster_OutputSprintDTO"><path d="M32.5,973.4883 L160.5,973.4883 A3.75,3.75 0 0 1 163,975.9883 L170,995.9766 L211.5,995.9766 A2.5,2.5 0 0 1 214,998.4766 L214,1094.9883 A2.5,2.5 0 0 1 211.5,1097.4883 L32.5,1097.4883 A2.5,2.5 0 0 1 30,1094.9883 L30,975.9883 A2.5,2.5 0 0 1 32.5,973.4883 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="30" x2="170" y1="995.9766" y2="995.9766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="127" x="34" y="989.0234">OutputSprintDTO</text></g><!--MD5=[ed20b972b8d0abb990ff13a8a95c327c]
+cluster SprintMapper--><g id="cluster_SprintMapper"><path d="M32.5,715.9883 L129.5,715.9883 A3.75,3.75 0 0 1 132,718.4883 L139,738.4766 L199.5,738.4766 A2.5,2.5 0 0 1 202,740.9766 L202,837.4883 A2.5,2.5 0 0 1 199.5,839.9883 L32.5,839.9883 A2.5,2.5 0 0 1 30,837.4883 L30,718.4883 A2.5,2.5 0 0 1 32.5,715.9883 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="30" x2="139" y1="738.4766" y2="738.4766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="96" x="34" y="731.5234">SprintMapper</text></g><!--MD5=[7041c40c16faf950753b2421e7651212]
+cluster Entity/Core/Domain--><g id="cluster_Entity/Core/Domain"><path d="M638.5,905.4883 L786.5,905.4883 A3.75,3.75 0 0 1 789,907.9883 L796,927.9766 L1299.5,927.9766 A2.5,2.5 0 0 1 1302,930.4766 L1302,1308.9883 A2.5,2.5 0 0 1 1299.5,1311.4883 L638.5,1311.4883 A2.5,2.5 0 0 1 636,1308.9883 L636,907.9883 A2.5,2.5 0 0 1 638.5,905.4883 " fill="#DEB887" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="636" x2="796" y1="927.9766" y2="927.9766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="147" x="640" y="921.0234">Entity/Core/Domain</text></g><!--MD5=[9d1b795d975ab05f601abc37ebe56014]
+cluster Aggregate--><g id="cluster_Aggregate"><path d="M1004.5,948.4883 L1078.5,948.4883 A3.75,3.75 0 0 1 1081,950.9883 L1088,970.9766 L1275.5,970.9766 A2.5,2.5 0 0 1 1278,973.4766 L1278,1119.9883 A2.5,2.5 0 0 1 1275.5,1122.4883 L1004.5,1122.4883 A2.5,2.5 0 0 1 1002,1119.9883 L1002,950.9883 A2.5,2.5 0 0 1 1004.5,948.4883 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="1002" x2="1088" y1="970.9766" y2="970.9766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="73" x="1006" y="964.0234">Aggregate</text></g><!--MD5=[0d5799440b3bfefd92b00abfcd2c79b9]
+cluster Factory--><g id="cluster_Factory"><path d="M662.5,973.4883 L715.5,973.4883 A3.75,3.75 0 0 1 718,975.9883 L725,995.9766 L975.5,995.9766 A2.5,2.5 0 0 1 978,998.4766 L978,1094.9883 A2.5,2.5 0 0 1 975.5,1097.4883 L662.5,1097.4883 A2.5,2.5 0 0 1 660,1094.9883 L660,975.9883 A2.5,2.5 0 0 1 662.5,973.4883 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="660" x2="725" y1="995.9766" y2="995.9766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="52" x="664" y="989.0234">Factory</text></g><!--MD5=[7ab0bd59f78ce26b580db03c751b80c1]
+cluster Value Object--><g id="cluster_Value Object"><path d="M734.5,1146.4883 L827.5,1146.4883 A3.75,3.75 0 0 1 830,1148.9883 L837,1168.9766 L903.5,1168.9766 A2.5,2.5 0 0 1 906,1171.4766 L906,1284.9883 A2.5,2.5 0 0 1 903.5,1287.4883 L734.5,1287.4883 A2.5,2.5 0 0 1 732,1284.9883 L732,1148.9883 A2.5,2.5 0 0 1 734.5,1146.4883 " style="stroke:#000000;stroke-width:1.5;fill:none;"/><line style="stroke:#000000;stroke-width:1.5;fill:none;" x1="732" x2="837" y1="1168.9766" y2="1168.9766"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="92" x="736" y="1162.0234">Value Object</text></g><!--MD5=[64122b82a909dd5dbb35b65fba5c31c2]
+class route--><g id="elem_route"><rect codeLine="9" fill="#F1F1F1" height="56.6211" id="route" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="158" x="779" y="78.4883"/><ellipse cx="794" cy="98.7988" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M796.4731,104.9419 Q795.8921,105.2407 795.2529,105.3901 Q794.6138,105.5396 793.9082,105.5396 Q791.4014,105.5396 790.0815,103.8877 Q788.7617,102.2358 788.7617,99.1147 Q788.7617,95.9854 790.0815,94.3335 Q791.4014,92.6816 793.9082,92.6816 Q794.6138,92.6816 795.2612,92.8311 Q795.9087,92.9805 796.4731,93.2793 L796.4731,96.002 Q795.8423,95.4209 795.2488,95.1511 Q794.6553,94.8813 794.0244,94.8813 Q792.6797,94.8813 791.9949,95.948 Q791.3101,97.0146 791.3101,99.1147 Q791.3101,101.2065 791.9949,102.2732 Q792.6797,103.3398 794.0244,103.3398 Q794.6553,103.3398 795.2488,103.0701 Q795.8423,102.8003 796.4731,102.2192 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="78" x="832" y="95.0898">«Component»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126" x="808" y="111.1563">CreateSprintRoute</text><line style="stroke:#181818;stroke-width:0.5;" x1="780" x2="936" y1="119.1094" y2="119.1094"/><line style="stroke:#181818;stroke-width:0.5;" x1="780" x2="936" y1="127.1094" y2="127.1094"/></g><!--MD5=[fd9cab17099256c8680aa6ea13cc8fa6]
+class ctrl--><g id="elem_ctrl"><rect codeLine="14" fill="#F1F1F1" height="73.1094" id="ctrl" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="188" x="764" y="269.9883"/><ellipse cx="779" cy="290.2988" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M781.4731,296.4419 Q780.8921,296.7407 780.2529,296.8901 Q779.6138,297.0396 778.9082,297.0396 Q776.4014,297.0396 775.0815,295.3877 Q773.7617,293.7358 773.7617,290.6147 Q773.7617,287.4854 775.0815,285.8335 Q776.4014,284.1816 778.9082,284.1816 Q779.6138,284.1816 780.2612,284.3311 Q780.9087,284.4805 781.4731,284.7793 L781.4731,287.502 Q780.8423,286.9209 780.2488,286.6511 Q779.6553,286.3813 779.0244,286.3813 Q777.6797,286.3813 776.9949,287.448 Q776.3101,288.5146 776.3101,290.6147 Q776.3101,292.7065 776.9949,293.7732 Q777.6797,294.8398 779.0244,294.8398 Q779.6553,294.8398 780.2488,294.5701 Q780.8423,294.3003 781.4731,293.7192 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="78" x="832" y="286.5898">«Component»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="156" x="793" y="302.6563">CreateSprintController</text><line style="stroke:#181818;stroke-width:0.5;" x1="765" x2="951" y1="310.6094" y2="310.6094"/><line style="stroke:#181818;stroke-width:0.5;" x1="765" x2="951" y1="318.6094" y2="318.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="133" x="770" y="336.1445">+createSprint(json)</text></g><!--MD5=[e2b9ae9a6f3d968d3533fb88890e19ee]
+class store--><g id="elem_store"><rect codeLine="19" fill="#F1F1F1" height="106.0859" id="store" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="197" x="510.5" y="253.4883"/><ellipse cx="566.25" cy="273.7988" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M568.7231,279.9419 Q568.1421,280.2407 567.5029,280.3901 Q566.8638,280.5396 566.1582,280.5396 Q563.6514,280.5396 562.3315,278.8877 Q561.0117,277.2358 561.0117,274.1147 Q561.0117,270.9854 562.3315,269.3335 Q563.6514,267.6816 566.1582,267.6816 Q566.8638,267.6816 567.5112,267.8311 Q568.1587,267.9805 568.7231,268.2793 L568.7231,271.002 Q568.0923,270.4209 567.4988,270.1511 Q566.9053,269.8813 566.2744,269.8813 Q564.9297,269.8813 564.2449,270.948 Q563.5601,272.0146 563.5601,274.1147 Q563.5601,276.2065 564.2449,277.2732 Q564.9297,278.3398 566.2744,278.3398 Q566.9053,278.3398 567.4988,278.0701 Q568.0923,277.8003 568.7231,277.2192 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="73" x="588.75" y="270.0898">«Repository»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="586.75" y="286.1563">SprintStore</text><line style="stroke:#181818;stroke-width:0.5;" x1="511.5" x2="706.5" y1="294.1094" y2="294.1094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="153" x="516.5" y="311.6445">-sprints : List&lt;Sprint&gt;</text><line style="stroke:#181818;stroke-width:0.5;" x1="511.5" x2="706.5" y1="318.5977" y2="318.5977"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="516.5" y="336.1328">+save(newSprint)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="185" x="516.5" y="352.6211">+existsBySprintId(SprintID)</text></g><!--MD5=[f1bd0b2f76a824edc7cdd3a6fd9a2d12]
+class service--><g id="elem_service"><rect codeLine="30" fill="#F1F1F1" height="73.1094" id="service" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="198" x="764" y="509.9883"/><ellipse cx="793.4" cy="530.2988" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M795.8731,536.4419 Q795.2921,536.7407 794.6529,536.8901 Q794.0138,537.0396 793.3082,537.0396 Q790.8014,537.0396 789.4815,535.3877 Q788.1617,533.7358 788.1617,530.6147 Q788.1617,527.4854 789.4815,525.8335 Q790.8014,524.1816 793.3082,524.1816 Q794.0138,524.1816 794.6612,524.3311 Q795.3087,524.4805 795.8731,524.7793 L795.8731,527.502 Q795.2423,526.9209 794.6488,526.6511 Q794.0553,526.3813 793.4244,526.3813 Q792.0797,526.3813 791.3949,527.448 Q790.7101,528.5146 790.7101,530.6147 Q790.7101,532.7065 791.3949,533.7732 Q792.0797,534.8398 793.4244,534.8398 Q794.0553,534.8398 794.6488,534.5701 Q795.2423,534.3003 795.8731,533.7192 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="78" x="838.6" y="526.5898">«Component»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="134" x="810.6" y="542.6563">CreateSprintService</text><line style="stroke:#181818;stroke-width:0.5;" x1="765" x2="961" y1="550.6094" y2="550.6094"/><line style="stroke:#181818;stroke-width:0.5;" x1="765" x2="961" y1="558.6094" y2="558.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="186" x="770" y="576.1445">+createAndSaveSprint(dto)</text></g><!--MD5=[c244c4c85822b61f5f28802e47280205]
+class repo--><g id="elem_repo"><rect codeLine="35" fill="#F1F1F1" height="89.5977" id="repo" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="206" x="502" y="501.4883"/><ellipse cx="517" cy="521.7988" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M513.4277,518.064 L513.4277,515.9058 L520.8071,515.9058 L520.8071,518.064 L518.3418,518.064 L518.3418,526.1406 L520.8071,526.1406 L520.8071,528.2988 L513.4277,528.2988 L513.4277,526.1406 L515.8931,526.1406 L515.8931,518.064 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="62" x="587" y="518.0898">«Interface»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="174" x="531" y="534.1563">SprintRepositoryInterface</text><line style="stroke:#181818;stroke-width:0.5;" x1="503" x2="707" y1="542.1094" y2="542.1094"/><line style="stroke:#181818;stroke-width:0.5;" x1="503" x2="707" y1="550.1094" y2="550.1094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="120" x="508" y="567.6445">+save(newSprint)</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="185" x="508" y="584.1328">+existsBySprintId(SprintID)</text></g><!--MD5=[269a342b50d5e59d99fdb440a594891d]
+class factoryInterface--><g id="elem_factoryInterface"><rect codeLine="41" fill="#F1F1F1" height="73.1094" id="factoryInterface" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="286" x="676" y="750.9883"/><ellipse cx="767.25" cy="771.2988" fill="#B4A7E5" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M763.6777,767.564 L763.6777,765.4058 L771.0571,765.4058 L771.0571,767.564 L768.5918,767.564 L768.5918,775.6406 L771.0571,775.6406 L771.0571,777.7988 L763.6777,777.7988 L763.6777,775.6406 L766.1431,775.6406 L766.1431,767.564 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="62" x="804.25" y="767.5898">«Interface»</text><text fill="#000000" font-family="sans-serif" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="95" x="787.75" y="783.6563">ISprintFactory</text><line style="stroke:#181818;stroke-width:0.5;" x1="677" x2="961" y1="791.6094" y2="791.6094"/><line style="stroke:#181818;stroke-width:0.5;" x1="677" x2="961" y1="799.6094" y2="799.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="274" x="682" y="817.1445">+createSprint(projectID, sprintID, name)</text></g><!--MD5=[7a3f677e62d08ccf691684bafc193c34]
+class dto--><g id="elem_dto"><rect codeLine="48" fill="#F1F1F1" height="155.5508" id="dto" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="155" x="242.5" y="709.4883"/><ellipse cx="279.55" cy="729.7988" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M282.0231,735.9419 Q281.4421,736.2407 280.8029,736.3901 Q280.1638,736.5396 279.4582,736.5396 Q276.9514,736.5396 275.6315,734.8877 Q274.3117,733.2358 274.3117,730.1147 Q274.3117,726.9854 275.6315,725.3335 Q276.9514,723.6816 279.4582,723.6816 Q280.1638,723.6816 280.8112,723.8311 Q281.4587,723.9805 282.0231,724.2793 L282.0231,727.002 Q281.3923,726.4209 280.7988,726.1511 Q280.2053,725.8813 279.5744,725.8813 Q278.2297,725.8813 277.5449,726.948 Q276.8601,728.0146 276.8601,730.1147 Q276.8601,732.2065 277.5449,733.2732 Q278.2297,734.3398 279.5744,734.3398 Q280.2053,734.3398 280.7988,734.0701 Q281.3923,733.8003 282.0231,733.2192 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="78" x="296.45" y="726.0898">«Component»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="71" x="299.95" y="742.1563">SprintDTO</text><line style="stroke:#181818;stroke-width:0.5;" x1="243.5" x2="396.5" y1="750.1094" y2="750.1094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129" x="248.5" y="767.6445">-sprintID : SprintID</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="248.5" y="784.1328">-projectID : ProjectID</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="248.5" y="800.6211">-name : Description</text><line style="stroke:#181818;stroke-width:0.5;" x1="243.5" x2="396.5" y1="807.5742" y2="807.5742"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="104" x="248.5" y="825.1094">+getProjectID()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="98" x="248.5" y="841.5977">+getSprintID()</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91" x="248.5" y="858.0859">+getTName()</text></g><!--MD5=[e723f6281e115920c72dcf6b17b9dea6]
+class outDto--><g id="elem_outDto"><rect codeLine="59" fill="#F1F1F1" height="73.1094" id="outDto" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="151" x="46.5" y="1008.4883"/><ellipse cx="61.5" cy="1028.7988" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M63.9731,1034.9419 Q63.3921,1035.2407 62.7529,1035.3901 Q62.1138,1035.5396 61.4082,1035.5396 Q58.9014,1035.5396 57.5815,1033.8877 Q56.2617,1032.2358 56.2617,1029.1147 Q56.2617,1025.9854 57.5815,1024.3335 Q58.9014,1022.6816 61.4082,1022.6816 Q62.1138,1022.6816 62.7612,1022.8311 Q63.4087,1022.9805 63.9731,1023.2793 L63.9731,1026.002 Q63.3423,1025.4209 62.7488,1025.1511 Q62.1553,1024.8813 61.5244,1024.8813 Q60.1797,1024.8813 59.4949,1025.948 Q58.8101,1027.0146 58.8101,1029.1147 Q58.8101,1031.2065 59.4949,1032.2732 Q60.1797,1033.3398 61.5244,1033.3398 Q62.1553,1033.3398 62.7488,1033.0701 Q63.3423,1032.8003 63.9731,1032.2192 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="78" x="96" y="1025.0898">«Component»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="119" x="75.5" y="1041.1563">OutputSprintDTO</text><line style="stroke:#181818;stroke-width:0.5;" x1="47.5" x2="196.5" y1="1049.1094" y2="1049.1094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129" x="52.5" y="1066.6445">-sprintID : SprintID</text><line style="stroke:#181818;stroke-width:0.5;" x1="47.5" x2="196.5" y1="1073.5977" y2="1073.5977"/></g><!--MD5=[820c2e2779a22a2878f9d7e65e2b03a5]
+class mapper--><g id="elem_mapper"><rect codeLine="65" fill="#F1F1F1" height="73.1094" id="mapper" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="140" x="46" y="750.9883"/><ellipse cx="67.75" cy="771.2988" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M70.2231,777.4419 Q69.6421,777.7407 69.0029,777.8901 Q68.3638,778.0396 67.6582,778.0396 Q65.1514,778.0396 63.8315,776.3877 Q62.5117,774.7358 62.5117,771.6147 Q62.5117,768.4854 63.8315,766.8335 Q65.1514,765.1816 67.6582,765.1816 Q68.3638,765.1816 69.0112,765.3311 Q69.6587,765.4805 70.2231,765.7793 L70.2231,768.502 Q69.5923,767.9209 68.9988,767.6511 Q68.4053,767.3813 67.7744,767.3813 Q66.4297,767.3813 65.7449,768.448 Q65.0601,769.5146 65.0601,771.6147 Q65.0601,773.7065 65.7449,774.7732 Q66.4297,775.8398 67.7744,775.8398 Q68.4053,775.8398 68.9988,775.5701 Q69.5923,775.3003 70.2231,774.7192 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="78" x="90.75" y="767.5898">«Component»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="93" x="83.25" y="783.6563">SprintMapper</text><line style="stroke:#181818;stroke-width:0.5;" x1="47" x2="185" y1="791.6094" y2="791.6094"/><line style="stroke:#181818;stroke-width:0.5;" x1="47" x2="185" y1="799.6094" y2="799.6094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="128" x="52" y="817.1445">+toDto(newSprint)</text></g><!--MD5=[f5ab3fe9cae210a3abb0773bf356135e]
+class sprint--><g id="elem_sprint"><rect codeLine="73" fill="#F1F1F1" height="122.5742" id="sprint" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="244" x="1018" y="983.4883"/><ellipse cx="1115.25" cy="1003.7988" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M1117.7231,1009.9419 Q1117.1421,1010.2407 1116.5029,1010.3901 Q1115.8638,1010.5396 1115.1582,1010.5396 Q1112.6514,1010.5396 1111.3315,1008.8877 Q1110.0117,1007.2358 1110.0117,1004.1147 Q1110.0117,1000.9854 1111.3315,999.3335 Q1112.6514,997.6816 1115.1582,997.6816 Q1115.8638,997.6816 1116.5112,997.8311 Q1117.1587,997.9805 1117.7231,998.2793 L1117.7231,1001.002 Q1117.0923,1000.4209 1116.4988,1000.1511 Q1115.9053,999.8813 1115.2744,999.8813 Q1113.9297,999.8813 1113.2449,1000.948 Q1112.5601,1002.0146 1112.5601,1004.1147 Q1112.5601,1006.2065 1113.2449,1007.2732 Q1113.9297,1008.3398 1115.2744,1008.3398 Q1115.9053,1008.3398 1116.4988,1008.0701 Q1117.0923,1007.8003 1117.7231,1007.2192 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="38" x="1137.25" y="1000.0898">«Root»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="41" x="1135.75" y="1016.1563">Sprint</text><line style="stroke:#181818;stroke-width:0.5;" x1="1019" x2="1261" y1="1024.1094" y2="1024.1094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129" x="1024" y="1041.6445">-sprintID : SprintID</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="143" x="1024" y="1058.1328">-projectID : ProjectID</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="136" x="1024" y="1074.6211">-name : Description</text><line style="stroke:#181818;stroke-width:0.5;" x1="1019" x2="1261" y1="1081.5742" y2="1081.5742"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="232" x="1024" y="1099.1094">+Sprint(projectID, sprintID, name)</text></g><!--MD5=[38e45b5164d8e9c736fbde1f8a91d2e8]
+class sprintF--><g id="elem_sprintF"><rect codeLine="81" fill="#F1F1F1" height="73.1094" id="sprintF" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="286" x="676" y="1008.4883"/><ellipse cx="769.25" cy="1028.7988" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M771.7231,1034.9419 Q771.1421,1035.2407 770.5029,1035.3901 Q769.8638,1035.5396 769.1582,1035.5396 Q766.6514,1035.5396 765.3315,1033.8877 Q764.0117,1032.2358 764.0117,1029.1147 Q764.0117,1025.9854 765.3315,1024.3335 Q766.6514,1022.6816 769.1582,1022.6816 Q769.8638,1022.6816 770.5112,1022.8311 Q771.1587,1022.9805 771.7231,1023.2793 L771.7231,1026.002 Q771.0923,1025.4209 770.4988,1025.1511 Q769.9053,1024.8813 769.2744,1024.8813 Q767.9297,1024.8813 767.2449,1025.948 Q766.5601,1027.0146 766.5601,1029.1147 Q766.5601,1031.2065 767.2449,1032.2732 Q767.9297,1033.3398 769.2744,1033.3398 Q769.9053,1033.3398 770.4988,1033.0701 Q771.0923,1032.8003 771.7231,1032.2192 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="53" x="808.75" y="1025.0898">«Factory»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="91" x="789.75" y="1041.1563">SprintFactory</text><line style="stroke:#181818;stroke-width:0.5;" x1="677" x2="961" y1="1049.1094" y2="1049.1094"/><line style="stroke:#181818;stroke-width:0.5;" x1="677" x2="961" y1="1057.1094" y2="1057.1094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="274" x="682" y="1074.6445">+createSprint(projectID, sprintID, name)</text></g><!--MD5=[c808696db0fecd3dc19e7862e84fa002]
+class sprintID--><g id="elem_sprintID"><rect codeLine="86" fill="#F1F1F1" height="89.5977" id="sprintID" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="141" x="748.5" y="1181.4883"/><ellipse cx="775.65" cy="1201.7988" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/><path d="M778.1231,1207.9419 Q777.5421,1208.2407 776.9029,1208.3901 Q776.2638,1208.5396 775.5582,1208.5396 Q773.0514,1208.5396 771.7315,1206.8877 Q770.4117,1205.2358 770.4117,1202.1147 Q770.4117,1198.9854 771.7315,1197.3335 Q773.0514,1195.6816 775.5582,1195.6816 Q776.2638,1195.6816 776.9112,1195.8311 Q777.5587,1195.9805 778.1231,1196.2793 L778.1231,1199.002 Q777.4923,1198.4209 776.8988,1198.1511 Q776.3053,1197.8813 775.6744,1197.8813 Q774.3297,1197.8813 773.6449,1198.948 Q772.9601,1200.0146 772.9601,1202.1147 Q772.9601,1204.2065 773.6449,1205.2732 Q774.3297,1206.3398 775.6744,1206.3398 Q776.3053,1206.3398 776.8988,1206.0701 Q777.4923,1205.8003 778.1231,1205.2192 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="86" x="790.35" y="1198.0898">«Value Object»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="805.85" y="1214.1563">SprintID</text><line style="stroke:#181818;stroke-width:0.5;" x1="749.5" x2="888.5" y1="1222.1094" y2="1222.1094"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129" x="754.5" y="1239.6445">-sprintID : SprintID</text><line style="stroke:#181818;stroke-width:0.5;" x1="749.5" x2="888.5" y1="1246.5977" y2="1246.5977"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="754.5" y="1264.1328">+sprintID()</text></g><!--MD5=[be8155aa76110fd16f9e3ab3814cb608]
+link route to ctrl--><g id="link_route_ctrl"><path codeLine="93" d="M858,135.8683 C858,169.4483 858,226.1383 858,264.6583 " fill="none" id="route-to-ctrl" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="858,269.7283,862,260.7283,858,264.7283,854,260.7283,858,269.7283" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[ca0b874fccd2945c877259f87192b091]
+link ctrl to service--><g id="link_ctrl_service"><path codeLine="94" d="M858.75,343.1183 C859.66,386.3183 861.18,458.9883 862.14,504.4783 " fill="none" id="ctrl-to-service" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="862.25,509.6183,866.0692,500.5401,862.15,504.6193,858.0708,500.7001,862.25,509.6183" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[2b3553e4a853f476b2df7427a24302d1]
+link mapper to outDto--><g id="link_mapper_outDto"><path codeLine="95" d="M116.83,824.0183 C117.94,870.9783 119.88,953.5583 121.04,1003.0783 " fill="none" id="mapper-to-outDto" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="121.16,1008.3483,124.9273,999.2484,121.0315,1003.3499,116.93,999.4541,121.16,1008.3483" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[97568fdc4a4d8bdb998cf36bebd56951]
+link store to repo--><g id="link_store_repo"><path codeLine="96" d="M608.12,359.7183 C607.52,395.5083 606.72,443.2183 606.08,481.3183 " fill="none" id="store-to-repo" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="613.08,481.4883,605.74,501.3683,599.08,481.2483,613.08,481.4883" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[97bdd0d48051b8f91e5ed95c1617cb6b]
+link service to mapper--><g id="link_service_mapper"><path codeLine="97" d="M804.62,583.1483 C780.55,595.9183 751.82,608.8083 724,615.4883 C697.09,621.9483 250.33,610.3083 226,623.4883 C177.83,649.5883 146.83,707.0183 130.4,746.2483 " fill="none" id="service-to-mapper" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="128.47,750.9283,135.5881,744.1214,130.3687,746.3028,128.1873,741.0835,128.47,750.9283" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[6b4111d0ed16042980c5cf758f89ebc7]
+link service to dto--><g id="link_service_dto"><path codeLine="98" d="M801.47,583.0283 C777.93,595.1583 750.39,607.6183 724,615.4883 C696.53,623.6783 687.5,615.4083 660,623.4883 C567.66,650.6083 469.24,700.3383 402.18,737.7683 " fill="none" id="service-to-dto" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="397.81,740.2183,407.6165,739.306,402.1713,737.7731,403.7042,732.3279,397.81,740.2183" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[f23388e266a2360630b0e5ee7b817879]
+link service to factoryInterface--><g id="link_service_factoryInterface"><path codeLine="99" d="M856.46,583.0083 C848.46,626.4583 834.95,699.8583 826.53,745.6083 " fill="none" id="service-to-factoryInterface" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="825.58,750.7683,831.1359,742.6361,826.4807,745.8501,823.2667,741.1949,825.58,750.7683" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[82aaf8f298a81ef1cb882119ba8e5631]
+reverse link repo to service--><g id="link_repo_service"><path codeLine="100" d="M713.27,546.4883 C730.09,546.4883 746.91,546.4883 763.73,546.4883 " fill="none" id="repo-backto-service" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="708.05,546.4883,717.05,550.4883,713.05,546.4883,717.05,542.4883,708.05,546.4883" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a1658a04aef972a1fd46af128e8cc5e6]
+reverse link sprintF to sprintID--><g id="link_sprintF_sprintID"><path codeLine="101" d="M819,1094.9683 C819,1121.9683 819,1155.2183 819,1181.3983 " fill="none" id="sprintF-backto-sprintID" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="819,1081.8783,815,1087.8783,819,1093.8783,823,1087.8783,819,1081.8783" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="810.3125" y="1102.0935">1</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="810.3625" y="1170.6419">1</text></g><!--MD5=[c1fc89a6f5c4914436a09c0b468e20e1]
+link sprintF to sprint--><g id="link_sprintF_sprint"><path codeLine="102" d="M962.26,1044.9883 C979.04,1044.9883 995.82,1044.9883 1012.6,1044.9883 " fill="none" id="sprintF-to-sprint" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="1017.8,1044.9883,1008.8,1040.9883,1012.8,1044.9883,1008.8,1048.9883,1017.8,1044.9883" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[7938426e506a955bcba432a67de5c1be]
+reverse link factoryInterface to sprintF--><g id="link_factoryInterface_sprintF"><path codeLine="103" d="M819,844.2483 C819,894.1483 819,965.8083 819,1008.3483 " fill="none" id="factoryInterface-backto-sprintF" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="none" points="812,844.0183,819,824.0183,826,844.0183,812,844.0183" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[695e2b487587d0690787c051368fbb3a]
+@startuml
+'https://plantuml.com/class-diagram'hide circle
+skinparam classAttributeIconSize 0
+
+title US022 - As Project Manager, I want to create a sprint.
+
+skinparam classAttributeIconSize 0
+
+package "Infrastructure" <<Folder>> #lightblue  {
+class "CreateSprintRoute" as route << Component >>
+}
+
+package "Interface Adapter" <<Folder>> #lightgreen {
+package "Controllers" <<Folder>>{
+class "CreateSprintController" as ctrl << Component >> {
++createSprint(json)
+}
+}
+package "Repositories" <<Folder>>{
+class "SprintStore" as store << Repository >> {
+-sprints : List<Sprint>
++ save(newSprint)
++ existsBySprintId(SprintID)
+'-add(newSprint)
+}
+}
+}
+
+package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
+package "App Service" <<Folder>>{
+class "CreateSprintService" as service << Component >> {
++createAndSaveSprint(dto)
+}
+}
+package "Repositories Interface" <<Folder>>{
+interface "SprintRepositoryInterface" as repo << Interface >>{
++ save(newSprint)
++ existsBySprintId(SprintID)
+}
+}
+package "Factory Interface" <<Folder>>{
+interface "ISprintFactory" as factoryInterface << Interface >>{
++createSprint(projectID, sprintID, name)
+}
+}
+}
+package "DTO" <<Folder>> {
+package "SprintDTO" <<Folder>>{
+class "SprintDTO" as dto << Component >> {
+- sprintID : SprintID
+- projectID : ProjectID
+- name : Description
++ getProjectID()
++ getSprintID()
++ getTName()
+}
+}
+package "DTO" <<Folder>> {
+package "OutputSprintDTO" <<Folder>>{
+class "OutputSprintDTO" as outDto << Component >> {
+- sprintID : SprintID
+}
+}
+package "DTO" <<Folder>> {
+package "SprintMapper" <<Folder>>{
+class "SprintMapper" as mapper << Component >> {
++ toDto(newSprint)
+}
+}
+}
+
+package "Entity/Core/Domain" <<Folder>> #burlywood{
+package "Aggregate" <<Folder>>{
+class "Sprint" as sprint << Root >> {
+- sprintID : SprintID
+- projectID : ProjectID
+- name : Description
++ Sprint(projectID, sprintID, name)
+}
+}
+package "Factory" <<Folder>>{
+class "SprintFactory" as sprintF << Factory >> {
++createSprint(projectID, sprintID, name)
+}
+}
+package "Value Object" <<Folder>>{
+class "SprintID" as sprintID << Value Object >> {
+-sprintID : SprintID
++sprintID()
+}
+}
+
+
+route ..> ctrl
+ctrl..> service
+mapper..>outDto
+store..|> repo
+service..> mapper
+service..> dto
+service..> factoryInterface
+service..left> repo
+sprintF"1"*-d-"1" sprintID
+sprintF..right>sprint
+sprintF..up|>factoryInterface
+
+
+
+@enduml
+
+@startuml
+skinparam classAttributeIconSize 0
+
+title US022 - As Project Manager, I want to create a sprint.
+
+skinparam classAttributeIconSize 0
+
+package "Infrastructure" <<Folder>> #lightblue  {
+class "CreateSprintRoute" as route << Component >>
+}
+
+package "Interface Adapter" <<Folder>> #lightgreen {
+package "Controllers" <<Folder>>{
+class "CreateSprintController" as ctrl << Component >> {
++createSprint(json)
+}
+}
+package "Repositories" <<Folder>>{
+class "SprintStore" as store << Repository >> {
+-sprints : List<Sprint>
++ save(newSprint)
++ existsBySprintId(SprintID)
+}
+}
+}
+
+package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
+package "App Service" <<Folder>>{
+class "CreateSprintService" as service << Component >> {
++createAndSaveSprint(dto)
+}
+}
+package "Repositories Interface" <<Folder>>{
+interface "SprintRepositoryInterface" as repo << Interface >>{
++ save(newSprint)
++ existsBySprintId(SprintID)
+}
+}
+package "Factory Interface" <<Folder>>{
+interface "ISprintFactory" as factoryInterface << Interface >>{
++createSprint(projectID, sprintID, name)
+}
+}
+}
+package "DTO" <<Folder>> {
+package "SprintDTO" <<Folder>>{
+class "SprintDTO" as dto << Component >> {
+- sprintID : SprintID
+- projectID : ProjectID
+- name : Description
++ getProjectID()
++ getSprintID()
++ getTName()
+}
+}
+package "DTO" <<Folder>> {
+package "OutputSprintDTO" <<Folder>>{
+class "OutputSprintDTO" as outDto << Component >> {
+- sprintID : SprintID
+}
+}
+package "DTO" <<Folder>> {
+package "SprintMapper" <<Folder>>{
+class "SprintMapper" as mapper << Component >> {
++ toDto(newSprint)
+}
+}
+}
+
+package "Entity/Core/Domain" <<Folder>> #burlywood{
+package "Aggregate" <<Folder>>{
+class "Sprint" as sprint << Root >> {
+- sprintID : SprintID
+- projectID : ProjectID
+- name : Description
++ Sprint(projectID, sprintID, name)
+}
+}
+package "Factory" <<Folder>>{
+class "SprintFactory" as sprintF << Factory >> {
++createSprint(projectID, sprintID, name)
+}
+}
+package "Value Object" <<Folder>>{
+class "SprintID" as sprintID << Value Object >> {
+-sprintID : SprintID
++sprintID()
+}
+}
+
+
+route ..> ctrl
+ctrl..> service
+mapper..>outDto
+store..|> repo
+service..> mapper
+service..> dto
+service..> factoryInterface
+service..left> repo
+sprintF"1"*-d-"1" sprintID
+sprintF..right>sprint
+sprintF..up|>factoryInterface
+
+
+
+@enduml
+
+PlantUML version 1.2022.4(Sat Apr 09 14:29:17 WEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: pt
+Country: PT
+--></g></svg>

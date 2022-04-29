@@ -1,8 +1,6 @@
 package switch2021.project.repositories;
 
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
-import switch2021.project.interfaces.ProjectRepositoryInterface;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
@@ -16,7 +14,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-public class ProjectStore implements ProjectRepositoryInterface {
+@Deprecated
+public class ProjectStore {
 
     /**
      * Class Attributes

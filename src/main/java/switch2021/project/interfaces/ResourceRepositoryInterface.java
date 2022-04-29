@@ -1,10 +1,9 @@
 package switch2021.project.interfaces;
 
-import switch2021.project.model.Resource.Resource;
-import switch2021.project.model.valueObject.SystemUserId;
+import switch2021.project.model.Resource.ResourceReeng;
+import switch2021.project.model.Resource.old.Resource;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ResourceRepositoryInterface/* extends CrudRepository<Object, Long> */{
 
@@ -16,8 +15,8 @@ public interface ResourceRepositoryInterface/* extends CrudRepository<Object, Lo
     /**
      * Finds all objects from this repository with any parameter.
      */
-    //List<Resource> findAllByProjectId(ProjectId projId);
 
+    List<ResourceReeng> findByProject(String projectId);
 
     //List<Resource> findAllBySystemUserId(SystemUserId userId);
 
@@ -26,5 +25,4 @@ public interface ResourceRepositoryInterface/* extends CrudRepository<Object, Lo
      * Save a object in the list of the repository.
      */
     boolean saveResource(Resource resource);
-
 }

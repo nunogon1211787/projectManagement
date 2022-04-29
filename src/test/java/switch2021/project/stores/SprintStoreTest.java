@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.factory.SprintFactory;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
-import switch2021.project.model.Resource.Resource;
+import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintID;
 import switch2021.project.model.Sprint.SprintStore;

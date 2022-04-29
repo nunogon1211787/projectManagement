@@ -6,52 +6,54 @@ title US005 - As a Director, I want to create/register a new project
 autoactivate on
 autonumber
 
-actor "Director" as director
 
-participant ":CreateProjectUI " as ui
+participant ":CreateProjectRoute " as route
 participant ":CreateProjectController " as controller
 participant ":ProjectService " as service
+participant ":ProjectStore " as store
 participant ":ProjectFactory " as factory
 participant ":ProjectMapper " as mapper
 participant "projDTO:ProjectDTO " as dto
-participant ":ProjectStore " as store
 participant "proj:Project " as project
 
-activate director
-director -> ui: Requests creation of a new Project
-ui --> director: Requests Project Data
 
-director -> ui: Types required project data
-ui -> controller: createProject(dto)
+[o->  route: CreateProject/Projects
+route -> controller: createProject(jsonDto)
+
+note right
+Change from json to dto hidden to simplify diagram
+end note
 
 controller -> service: createProject(dto)
 service -> factory: createAndSaveProject(dto.getName, dto.getDescription, dto.getStartDate, dto.getNumberOfSprints, dto.getBudget)
 
-factory -> project**: createProject(dto.getName, dto.getDescription, dto.getStartDate, dto.getNumberOfSprints, dto.getBudget)
-activate project
+factory -> project**: createProject(name, description, startDate, numberOfSprints,budget)
 
-project --> factory: proj
+factory --> service: proj
 
-factory -> store: saveProject(proj)
+service -> store: saveProject(proj)
+store -> store: validate(proj)
+deactivate store
 store -> store: add(proj)
 deactivate store
-deactivate store
 
-factory -> mapper: toDTO(proj)
+store --> service: true
 
-mapper -> dto**: toDTO(proj)
-activate dto
-deactivate mapper
+service -> mapper: model2DTO(proj)
 
-dto --> factory: projDTO
+mapper -> dto**: model2DTO(proj)
 
-factory --> service: projDTO
+mapper --> service: outputDTO
 
-service --> controller: projDTO
+service --> controller: outputDTO
 
-controller --> ui: projDTO
+note right
+Change from json to dto hidden to simplify diagram
+end note
 
-ui --> director: confirms successful creation
+controller --> route: outputJson
+
+[<-- route: response
 
 @enduml
 

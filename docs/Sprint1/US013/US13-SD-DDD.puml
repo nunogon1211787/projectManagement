@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+autonumber
+
+title US013 - "As Administrator, I want to create user profiles"
+participant ": CreateUserProfileRouter" as System
+participant ": CreateUserProfileController" as Ctrl
+participant ": CreateUserProfileService" as C1
+participant "dto: UserProfileDTO" as C2
+participant ": IUserProfileFactory" as C3
+participant "newUserProfile:UserProfile" as C4
+participant "UserProfileStore" as C5
+participant "UserProfileMapper" as C6
+participant "outDTO:OutputUserProfileDTO" as C7
+
+[o-> System: POST/profiles (json)
+System -> Ctrl: createUserProfile(json)
+Ctrl -> C1: createUserProfile(dto)
+C1 -> C3: createUserProfile(dto.userProfileName)
+C3 --> C4 **: create(userProfileName)
+return newUserProfile
+C1 -> C5 : saveUserProfile (newUserProfile)
+C5 -> C5 : validateUserProfile(newUserProfile)
+deactivate
+C5 -> C5: addUserProfile (newUserProfile)
+deactivate
+return true
+C1 -> C6: toDTO(newUserProfile)
+C6 -> C7 **: create()
+return outDTO
+return outDTO
+return outJson
+return Operation Success
+
+
+
+@enduml

@@ -7,7 +7,7 @@ import switch2021.project.factory.ResourceFactory;
 import switch2021.project.factory.SprintFactory;
 import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.factoryInterface.ResourceFactoryInterface;
-import switch2021.project.model.Resource.Resource;
+import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.SystemUser.SystemUser;
@@ -22,6 +22,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@Deprecated
 public class Project implements Entity {
 
 
@@ -56,8 +57,6 @@ public class Project implements Entity {
     public Project(String name, String description, Customer customer, Typology typology,
                    BusinessSector businessSector, LocalDate startDate, int numberOfSprints, double budget) {
 
-        validateProjectFields(numberOfSprints);
-
         this.projectName = new Description(name);
         this.description = new Description(description);
 
@@ -74,16 +73,6 @@ public class Project implements Entity {
 
         this.projectTeam = new ProjectTeam(resFac);
         this.userStoryStore = new RepoUserStory();
-    }
-
-
-    /**
-     * Validates Project Creation Fields
-     * Checks if @param projectName and @param description are empty or have the minimum characters necessary
-     */
-    public void validateProjectFields(int numberOfSprints) {
-        if (numberOfSprints <= 0)
-            throw new IllegalArgumentException("Number of Sprints must be greater than 0");
     }
 
     /**

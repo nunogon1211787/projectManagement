@@ -2,15 +2,10 @@ package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-//import switch2021.project.dto.TaskDTO;
 import switch2021.project.dto.OutputTaskDTO;
 import switch2021.project.dto.TaskDTO;
-import switch2021.project.factoryInterface.ProjectFactoryInterface;
 import switch2021.project.factoryInterface.TaskFactoryInterface;
 import switch2021.project.mapper.TaskMapperNew;
-import switch2021.project.mapper.old.ProjectsMapper;
-import switch2021.project.mapper.old.TaskMapper;
-import switch2021.project.model.Project.Project;
 import switch2021.project.model.Task.Task;
 
 @Service
