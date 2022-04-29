@@ -8,11 +8,11 @@ import switch2021.project.factoryInterface.ResourceFactoryInterfaceReeng;
 import switch2021.project.interfaces.ProjectRepositoryInterface;
 import switch2021.project.interfaces.ResourceRepositoryInterface;
 import switch2021.project.mapper.ResourceMapper;
-import switch2021.project.model.Project.Project;
+
 import switch2021.project.model.Project.ProjectReeng;
 import switch2021.project.model.Resource.ManageResourcesService;
 import switch2021.project.model.Resource.ResourceReeng;
-import switch2021.project.model.valueObject.SystemUserId;
+
 
 import java.time.LocalDate;
 import java.util.List;
@@ -39,16 +39,16 @@ public class CreateResourceInAProjectService {
         LocalDate endDate = LocalDate.of(dto.yearEndDate, dto.monthEndDate, dto.dayEndDate);
 
         List<ResourceReeng> projectTeamList = iRepoResource.findAllByProject(dto.projectId);
-        List<ResourceReeng> resourceProjectsList = iRepoResource.findAllByUser(dto.systemUserId);
+        List<ResourceReeng> resourceProjectsList = iRepoResource.findAllByUser(dto.systemUserID);
 
         ProjectReeng project = iRepoProject.findById(dto.projectId);
 
-        boolean systemUserExists = iRepoResource.existsById(dto.systemUserId);
+        boolean systemUserExists = iRepoResource.existsById(dto.systemUserID);
         boolean projectExists = iRepoProject.existById(dto.projectId);
         boolean isValidToProject = project.isActiveInThisDate(startDate) && project.isActiveInThisDate(endDate);
         boolean isValidToCreate = manageResourcesService.resourceCreationValidation(startDate, endDate, projectTeamList, resourceProjectsList);
 
-        if(iRepoResource.existsById(dto.systemUserId) && iRepoProject.existById(dto.projectId)){
+        if(iRepoResource.existsById(dto.systemUserID) && iRepoProject.existById(dto.projectId)){
 
         ResourceReeng newResource = iResourceFactory.createResource(dto);
 

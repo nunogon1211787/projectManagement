@@ -1,7 +1,7 @@
 package switch2021.project.dto;
 
 public class ResourceDTOReeng {
-    public String systemUserId;
+    public String systemUserID;
     public String projectId;
     public String projectRole;
     //    public String startDate;

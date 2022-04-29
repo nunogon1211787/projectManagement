@@ -2,8 +2,7 @@ package switch2021.project.interfaces;
 
 import org.springframework.stereotype.Component;
 import switch2021.project.model.Resource.ResourceReeng;
-import switch2021.project.model.Resource.old.Resource;
-import switch2021.project.model.valueObject.SystemUserId;
+
 
 import java.util.List;
 

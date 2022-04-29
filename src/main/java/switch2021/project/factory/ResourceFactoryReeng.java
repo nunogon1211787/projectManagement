@@ -12,7 +12,7 @@ public class ResourceFactoryReeng implements ResourceFactoryInterfaceReeng {
 
     public ResourceReeng createResource(ResourceDTOReeng resourceDTO){
 
-        SystemUserId sysUserId = new SystemUserId(resourceDTO.systemUserId);
+        SystemUserID sysUserId = new SystemUserID(new Email(resourceDTO.systemUserID));
         ProjectID projectID = new ProjectID(resourceDTO.projectId);
         LocalDate startDate = LocalDate.of(resourceDTO.yearStartDate, resourceDTO.monthStartDate, resourceDTO.dayStartDate);
         LocalDate endDate = LocalDate.of(resourceDTO.yearEndDate, resourceDTO.monthEndDate, resourceDTO.dayEndDate);
