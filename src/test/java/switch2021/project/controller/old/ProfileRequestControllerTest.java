@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProfileRequestControllerTest {
 
-    @Test
+/*    @Test
     public void createRequestSuccess() {
         //Arrange
         Company company = new Company();
@@ -63,6 +63,8 @@ class ProfileRequestControllerTest {
         //Act + Assert
         assertFalse(controller.createProfileRequest("xxxx@isep.ipp.pt","User"));
     }
+
+ */
 
 
 

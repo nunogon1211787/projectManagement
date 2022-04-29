@@ -8,23 +8,6 @@ import switch2021.project.model.Project.ProjectReeng;
 @Component
 public class ProjectMapper {
 
-    public OutputProjectDTO model2Dto(Project project) {
-
-        OutputProjectDTO projDto = new OutputProjectDTO();
-
-        projDto.code = project.getProjectCode().getCode();
-        projDto.name = project.getProjectName().getText();
-        projDto.desc = project.getDescription().getText();
-        projDto.customer = project.getCustomer().getCustomerName().getText();
-        projDto.sector = project.getBusinessSector().getDescription().getText();
-        projDto.typo = project.getTypology().getId_description().getDescription().getText();
-        projDto.budget = project.getBudget().toString();
-        projDto.status = project.getProjectStatus().toString();
-        projDto.startDate = project.getStartDate().toString();
-
-        return projDto;
-    }
-
     public OutputProjectDTO model2Dto(ProjectReeng project) {
 
         OutputProjectDTO projDto = new OutputProjectDTO();
@@ -32,12 +15,19 @@ public class ProjectMapper {
         projDto.code = project.getProjectCode().getCode();
         projDto.name = project.getProjectName().getText();
         projDto.desc = project.getDescription().getText();
-        projDto.customer = project.getCustomer().getCustomerName().getText();
         projDto.sector = project.getBusinessSector().getDescription().getText();
-        projDto.typo = project.getTypology().getId_description().getDescription().getText();
+        projDto.numberOfSprints = project.getNumberOfSprints().toString();
         projDto.budget = project.getBudget().toString();
         projDto.status = project.getProjectStatus().toString();
         projDto.startDate = project.getStartDate().toString();
+
+        if (project.getTypology() != null) {
+            projDto.typo = project.getTypology().getId_description().getDescription().getText();
+        }
+
+        if (project.getCustomer() != null) {
+            projDto.customer = project.getCustomer().getCustomerName().getText();
+        }
 
         return projDto;
     }

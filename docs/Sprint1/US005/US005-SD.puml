@@ -24,10 +24,10 @@ note right
 Change from json to dto hidden to simplify diagram
 end note
 
-controller -> service: createProject(dto)
-service -> factory: createAndSaveProject(dto.getName, dto.getDescription, dto.getStartDate, dto.getNumberOfSprints, dto.getBudget)
+controller -> service: createAndSave(dto)
+service -> factory: createProject(dto.getName, dto.getDescription, dto.getStartDate, dto.getNumberOfSprints, dto.getBudget)
 
-factory -> project**: createProject(name, description, startDate, numberOfSprints,budget)
+factory -> project**: create()
 
 factory --> service: proj
 

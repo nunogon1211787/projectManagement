@@ -188,7 +188,7 @@ public class SprintStoreTest {
         Sprint sprint = new Sprint("Project_2022_1", "Project_2022_1_Sprint 1", "Sprint Name");
         SprintID x = sprint.getSprintID();
         //Assert
-        assertTrue(x.equals(x));
+        assertEquals(x, x);
     }
 
     @Test
@@ -250,7 +250,7 @@ public class SprintStoreTest {
         });
     }
 
-    @Test
+/*    @Test
     @DisplayName("Verification Test, to Start a Sprint")
     public void startASprintSuccess() {
         //Arrange
@@ -541,6 +541,8 @@ public class SprintStoreTest {
         assertFalse(sprintListTest1.startASprint(sprintID, LocalDate.of(2022, 2, 1),
                 proj1.getProjectTeam(), 2));
     }
+
+ */
 
     @Test
     @DisplayName("Validate start date")

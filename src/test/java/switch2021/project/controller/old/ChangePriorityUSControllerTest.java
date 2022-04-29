@@ -293,4 +293,27 @@
 //        assertEquals("Check priority, cannot be < 0 or superior to 5", exception.getMessage());
 //
 //    }
+//
+//    @Test
+//    void setPriorityCorrect() {
+//        project.addResource(input);
+//
+//        userStory3.setPriority(3);
+//
+//        assertEquals(3, userStory3.getPriority().getPriorityUs());
+//
+//    }
+//
+//    @Test
+//    void setPriorityInvalid() {
+//        project.addResource(input);
+//
+//        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+//        userStory3.setPriority(6);
+//        });
+//
+//        assertEquals("Check priority, cannot be < 0 or superior to 5", exception.getMessage());
+//
+//    }*/
+//}
 //}

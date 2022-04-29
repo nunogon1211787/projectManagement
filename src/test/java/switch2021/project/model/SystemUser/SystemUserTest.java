@@ -1,23 +1,9 @@
 package switch2021.project.model.SystemUser;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import switch2021.project.model.Company;
-import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.Password;
-import switch2021.project.model.valueObject.SystemUserId;
-import switch2021.project.model.valueObject.UserProfileId;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class SystemUserTest {
-/*    @Test
+/*   @Test
     public void verifyEmail() {
 
         //Arrange
@@ -691,6 +677,7 @@ class SystemUserTest {
         assertTrue(test.hasThisData(name, email, func, state, profiles));
     }
 */
+    /*
     /**
      * FAIL TESTS
      */

@@ -12,7 +12,7 @@ public class RegisterWorkToTaskMapper {
      * Method to change data in to a Task ID Name DTO
      **/
     public TaskIdNameDTO toDTO(Task task) {
-        return new TaskIdNameDTO(task.getIdTask(), task.getName().getNameF());
+        return new TaskIdNameDTO(task.getIdTask(), task.getName().getText());
     }
 
 

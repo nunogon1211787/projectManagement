@@ -1,16 +1,15 @@
 package switch2021.project.model.valueObject;
 
-import java.util.Objects;
+import switch2021.project.utils.ValueObject;
 
-public class Email {
+public class Email implements ValueObject<Email> {
 
     /**
-     * Attribuites
+     * Attributes
      */
-
-    private final String email;
-    private int MAX_LENGTH = 50;
-    private int MIN_LENGTH = 3;
+    private final String emailText;
+    private final int MAX_LENGTH = 50;
+    private final int MIN_LENGTH = 3;
     private final int MAX_LENGTH_LAST_PART = 3;
     private final int MIN_LENGTH_LAST_PART = 2;
 
@@ -18,16 +17,15 @@ public class Email {
     /**
      * Constructor
      */
-
     public Email(String input) {
 
         checkAllEmailRules(input);
 
-        this.email = input;
+        this.emailText = input;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailText() {
+        return emailText;
     }
 
     /**
@@ -160,19 +158,24 @@ public class Email {
      */
 
     public boolean hasEmail(String toCompare) {
-        return this.email.equals(toCompare);
+        return this.emailText.equals(toCompare);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Email email1 = (Email) o;
-        return MAX_LENGTH == email1.MAX_LENGTH && MIN_LENGTH == email1.MIN_LENGTH && MAX_LENGTH_LAST_PART == email1.MAX_LENGTH_LAST_PART && MIN_LENGTH_LAST_PART == email1.MIN_LENGTH_LAST_PART && Objects.equals(email, email1.email);
+        Email that = (Email) o;
+        return sameValueAs(that);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, MAX_LENGTH, MIN_LENGTH, MAX_LENGTH_LAST_PART, MIN_LENGTH_LAST_PART);
+        return emailText.hashCode();
+    }
+
+    @Override
+    public boolean sameValueAs(Email other) {
+        return other != null && this.emailText.equals(other.emailText);
     }
 }

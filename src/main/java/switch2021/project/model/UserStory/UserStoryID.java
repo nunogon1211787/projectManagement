@@ -2,6 +2,7 @@ package switch2021.project.model.UserStory;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import switch2021.project.interfaces.TaskContainerID;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.utils.ValueObject;
@@ -9,7 +10,7 @@ import switch2021.project.utils.ValueObject;
 
 @Getter
 @EqualsAndHashCode
-public class UserStoryID implements ValueObject<UserStoryID> {
+public class UserStoryID implements ValueObject<UserStoryID>, TaskContainerID {
 
     /**
      * Attributes
