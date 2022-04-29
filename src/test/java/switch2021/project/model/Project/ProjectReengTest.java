@@ -28,7 +28,7 @@ class ProjectReengTest {
     void getProjectCode() {
     }
 
-    @Test
+/*    @Test
     void getProjectName() {
 
         ProjectReeng projectReeng = new ProjectReeng("name", "description", "businessSector",
@@ -41,7 +41,7 @@ class ProjectReengTest {
 
         assertEquals(projectReeng.hashCode(),projectReeng.hashCode());
         assertNotEquals(projectReeng.hashCode(),projectReeng_2.hashCode());
-    }
+    }*/
 
     @Test
     void getDescription() {

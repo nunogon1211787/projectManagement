@@ -1,9 +1,9 @@
 package switch2021.project.model.valueObject;
 
-import java.util.Objects;
+import switch2021.project.utils.ValueObject;
 
 
-public class Function {
+public class Function implements ValueObject<Function> {
 
     /*** Attributes **/
     private final String text;
@@ -11,7 +11,7 @@ public class Function {
     private final int MAX_DESCRIPTION_LENGTH = 20;
 
     /*** Constructor **/
-    public Function (String function) {
+    public Function(String function) {
         String x = " characters";
         if (function == null)
             throw new IllegalArgumentException("Description field requires at least " + MIN_DESCRIPTION_LENGTH + x);
@@ -31,12 +31,17 @@ public class Function {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Function function = (Function) o;
-        return Objects.equals(text, function.text);
+        Function that = (Function) o;
+        return sameValueAs(that);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text, MIN_DESCRIPTION_LENGTH, MAX_DESCRIPTION_LENGTH);
+        return text.hashCode();
+    }
+
+    @Override
+    public boolean sameValueAs(Function other) {
+        return other != null && this.text.equals(other.text);
     }
 }

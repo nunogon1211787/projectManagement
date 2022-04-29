@@ -9,14 +9,16 @@ public class ProjectDTO {
     public String projectName;
     public String description;
     public String businessSector;
+    public String typology;
+    public String customer;
     public String startDate;
     public String endDate;
-    public int numberOfSprints;
-    public double budget;
+    public String numberOfSprints;
+    public String budget;
+    public String projectStatus;
 
-    /**
-     * Constructor to test (without SINGLETON)
-     **/
+
+    /**Constructor**/
     public ProjectDTO() {
     }
 

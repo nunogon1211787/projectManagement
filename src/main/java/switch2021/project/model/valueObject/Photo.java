@@ -1,15 +1,16 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import switch2021.project.utils.ValueObject;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Getter
 
-public class Photo {
+public class Photo implements ValueObject<Photo> {
 
-    private String extension;
+    private final String extension;
 
     private final List<String> possibleExtensions = Arrays.asList("jpg", "png");
 
@@ -28,5 +29,24 @@ public class Photo {
 
         if (!possibleExtensions.contains(extension))
             throw new IllegalArgumentException("Invalid photo format.");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final Photo that = (Photo) o;
+        return sameValueAs(that);
+    }
+
+    @Override
+    public int hashCode() {
+        return extension.hashCode();
+    }
+
+    @Override
+    public boolean sameValueAs(Photo other) {
+        return other != null && this.extension.equals(other.extension);
     }
 }

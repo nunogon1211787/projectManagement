@@ -18,7 +18,7 @@ public class UpdateUserProfileControllerTest {
     private UserProfileRepository userProfileStore;
 
 
-    @BeforeEach
+/*    @BeforeEach
     public void init() {
         company = new Company(); // sempre a mesma instancia
         systemUserStore = company.getSystemUserStore();
@@ -42,6 +42,8 @@ public class UpdateUserProfileControllerTest {
         assertEquals(user, expected);
     }
 
+ */
+
     @Test
     public void getUserTest() {
         //Assert
@@ -54,7 +56,7 @@ public class UpdateUserProfileControllerTest {
         });
     }
 
-    @Test
+/*    @Test
     public void getUserProfileListTest() {
         //Arrange
         UpdateUserProfileController controllerTest1 = new UpdateUserProfileController(company);
@@ -74,4 +76,6 @@ public class UpdateUserProfileControllerTest {
         //Assert
         assertTrue(controllerTest.updateProfile(user, userProfileStore.getUserProfile("Administrator"), userProfileStore.getUserProfile("Director")));
     }
+
+ */
 }

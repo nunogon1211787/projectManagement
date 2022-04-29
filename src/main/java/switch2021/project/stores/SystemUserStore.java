@@ -1,7 +1,7 @@
 package switch2021.project.stores;
 
 import org.springframework.stereotype.Repository;
-import switch2021.project.interfaces.SystemUserRepositoryInterface;
+import switch2021.project.interfaces.ISystemUserRepo;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.UserProfile.UserProfile;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Repository
-public class SystemUserStore implements SystemUserRepositoryInterface {
+public class SystemUserStore implements ISystemUserRepo {
 
     /**
      * Class Attributes
@@ -47,7 +47,7 @@ public class SystemUserStore implements SystemUserRepositoryInterface {
      */
     @Override
     public boolean saveSystemUser(SystemUser user) {
-        if (user == null || existsByEmail(user.getSystemUserId().getEmail().getEmail())) {
+        if (user == null || existsByEmail(user.getSystemUserId().getEmail().getEmailText())) {
             return false;
         } else {
             return this.systemUserList.add(user);
@@ -57,7 +57,7 @@ public class SystemUserStore implements SystemUserRepositoryInterface {
     @Override
     public boolean existsByEmail(String newUserEmail) {
         for (SystemUser newUser : this.systemUserList) {
-            if (newUser.getSystemUserId().getEmail().getEmail().trim().equalsIgnoreCase(newUserEmail.trim())) {
+            if (newUser.getSystemUserId().getEmail().getEmailText().trim().equalsIgnoreCase(newUserEmail.trim())) {
                 return true;
             }
         }

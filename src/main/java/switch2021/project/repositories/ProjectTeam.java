@@ -93,7 +93,7 @@ public class ProjectTeam {
 
         for (Resource resource : this.projectTeamList) {
             if (resource.isCurrent()) {
-                currentResourcesNames.add(resource.getUser().getUserName().getNameF());
+                currentResourcesNames.add(resource.getUser().getUserName().getText());
             }
         }
         return currentResourcesNames;

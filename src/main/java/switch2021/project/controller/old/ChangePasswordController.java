@@ -17,15 +17,17 @@ public class ChangePasswordController {
      */
 
     public ChangePasswordController(Company company) { this.company = company; }
-
+/*
     /**
      * Methods
      */
 
-    public boolean changePassword(String email, String oldPasswordUI, String newPassword, String newPasswordConfirmation) {
+/*    public boolean changePassword(String email, String oldPasswordUI, String newPassword, String newPasswordConfirmation) {
         SystemUserStore systemUserStore = company.getSystemUserStore();
        SystemUser user = systemUserStore.findSystemUserByEmail(email);
        return user.updatePassword(oldPasswordUI, newPassword, newPasswordConfirmation);
     }
+
+ */
 }
 

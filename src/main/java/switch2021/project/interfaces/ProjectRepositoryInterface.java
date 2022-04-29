@@ -19,7 +19,10 @@ public interface ProjectRepositoryInterface {
      */
     ProjectReeng findById(String code);
 
-
+    /**Check if project exists in repository**/
     boolean existById(String id);
+
+    /**Save Projects Method**/
+    ProjectReeng save(ProjectReeng newProject);
 
 }
