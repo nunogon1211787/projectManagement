@@ -8,12 +8,12 @@ autonumber
 participant ": CreateSprintRoute" as UI
 participant ": CreateSprintController" as Ctrl
 participant ": CreateSprintService" as createSprintService
-participant ": SprintDTO" as sprintDTO
 participant ": ISprintFactory" as sprintFactory
+participant " sprintDTO : SprintDTO" as sprintDTO
 participant " newSprint : Sprint" as sprint
 participant ": ISprintStore" as sprintStore
 participant ": SprintMapper" as sprintMapper
-participant "outputDTO: OutPutSprintDTO" as outputDTO
+participant "outPutSprintDTO: SprintDTO" as outPutSprintDTO
 
 
 [o-> UI: POST/sprints(json)
@@ -22,13 +22,13 @@ note right
 Change from json to dto hidden to simplify diagram
 end note
 Ctrl -> createSprintService: createSprint(sprintDTO)
-createSprintService -> sprintDTO: projectID = getProjectID()
+createSprintService -> sprintFactory: createSprint(sprintDTO)
+sprintFactory -> sprintDTO: projectID = getProjectID()
 deactivate
-createSprintService -> sprintDTO: sprintID = getSprintID()
+sprintFactory -> sprintDTO: sprintID = getSprintID()
 deactivate
-createSprintService -> sprintDTO: name = getName()
+sprintFactory -> sprintDTO: name = getName()
 deactivate
-createSprintService -> sprintFactory: createSprint(projectID, sprintID, name)
 sprintFactory -> sprint**: create()
 sprintFactory --> createSprintService: newSprint
 createSprintService -> sprintStore: saveSprint(newSprint)
@@ -38,9 +38,9 @@ sprintStore -> sprintStore: add(newSprint)
 deactivate
 sprintStore --> createSprintService: true
 createSprintService -> sprintMapper: toDTO(newsprint)
-sprintMapper -> outputDTO**: create()
-sprintMapper --> createSprintService: outputDTO
-createSprintService --> Ctrl: outputDTO
+sprintMapper -> outPutSprintDTO**: create()
+sprintMapper --> createSprintService: outPutSprintDTO
+createSprintService --> Ctrl: outPutSprintDTO
 Ctrl --> UI: outputJson
 note right
 Change from json to dto hidden to simplify diagram
