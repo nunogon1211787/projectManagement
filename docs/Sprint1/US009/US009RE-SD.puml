@@ -10,12 +10,12 @@ autonumber
 participant ": CreateUserStoryRoute" as System
 participant ": CreateUserStoryController" as Ctrl
 participant ": CreateUserStoryService" as appService
-participant ": UserStoryDto" as usDto
 participant ": IUserStoryFactory" as factory
+participant ": UserStoryDto" as usDto
 participant "newUserStory : \n UserStory" as us
 participant ": IRepoUserStory " as usStore
 participant ": UserStoryMapper" as usMapper
-participant "outputUsDto : OutputUsDto" as outDto
+participant "outputUsDto : \n UserStoryDto" as outDto
 
 
 
@@ -24,20 +24,15 @@ System -> Ctrl: createUserStory(json)
 note right
 Change from json to dto hidden to simplify diagram
 end note
-Ctrl -> appService: createAndSaveUserStory(dto)
-appService -> usDto: projectID = getProjectID()
+Ctrl -> appService: createAndSaveUserStory(userStoryDTO)
+appService -> factory:  createUserStory(userStoryDTO)
+factory -> usDto: projectID = getProjectID()
 deactivate
-appService -> usDto: userStoryID = getUserStoryID()
+factory -> usDto: userStoryID = getUserStoryID()
 deactivate
-appService -> usDto: title = getTitle()
+factory -> usDto: title = getTitle()
 deactivate
-appService -> usDto: priority = getPriority()
-deactivate
-appService -> usDto: description = getDescription()
-deactivate
-appService -> usDto: timeEstimate = getTimeEstimate()
-deactivate
-appService -> factory:  createUserStory(projectID, userStoryID, title,\n priority, description, timeEstimate)
+
 factory -> us **: create()
 factory --> appService: newUserStory
 

@@ -1,12 +1,19 @@
 package switch2021.project.factory;
 
+import switch2021.project.dto.SprintDTO;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.Sprint.SprintID;
+import switch2021.project.model.valueObject.Description;
+import switch2021.project.model.valueObject.ProjectID;
 
 
 public class SprintFactory implements switch2021.project.factoryInterface.ISprintFactory {
 
     @Override
-    public Sprint createSprint(String projectID, String sprintId, String name) {
-        return new Sprint(projectID, sprintId, name);
+    public Sprint createSprint(SprintDTO dto) {
+        ProjectID projectID = new ProjectID(dto.projectID);
+        Description name = new Description(dto.name);
+        SprintID sprintID = new SprintID(projectID, name);
+        return new Sprint(sprintID);
     }
 }

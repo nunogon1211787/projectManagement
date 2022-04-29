@@ -40,14 +40,14 @@ public class CreateSprintTaskController {
         return taskTypesNames;
     }
 
-    public List<String> getSprintTasks(String projCode, String sprintID){
-
-        this.proj = this.company.getProjectStore().findById(projCode);
-
-        this.taskStore = this.proj.getSprintList().findSprintById(sprintID).getTaskStore();
-
-        return this.taskStore.getTasksNames();
-    }
+//    public List<String> getSprintTasks(String projCode, String sprintID){
+//
+//        this.proj = this.company.getProjectStore().findById(projCode);
+//
+//        this.taskStore = this.proj.getSprintList().findSprintById(sprintID).getTaskStore();
+//
+//        return this.taskStore.getTasksNames();
+//    }
 
     public List<String> getCurrentProjectTeam(){
 

@@ -22,7 +22,7 @@ package "Repositories" <<Folder>>{
 class "RepoUserStory" as store << Repository >> {
 -userStoryList : List<UserStory>
 + save(newUserStory)
-+ existsByUserStoryId(tUserStoryId)
++ existsByUserStoryId(tUserStoryID)
 '- add(newUserStory)
 }
 }
@@ -31,18 +31,18 @@ class "RepoUserStory" as store << Repository >> {
 package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
 package "App Service" <<Folder>>{
 class "CreateUserStoryService" as service << Component >> {
-+createAndSaveUserStory(dto)
++createAndSaveUserStory(userStoryDTO)
 }
 }
 package "Repositories Interface" <<Folder>>{
 interface "IRepoUserStory" as repo << Interface >>{
 + save(newUserStory)
-+ existsByUserStoryId(UserStoryId)
++ existsByUserStoryId(UserStoryID)
 }
 }
 package "Factory Interface" <<Folder>>{
 interface "IUserStoryFactory" as factoryInterface << Interface >>{
-+createUserStory(projectID, userStoryID, title, \n priority, description, timeEstimate)
++createUserStory(userStoryDTO)
 }
 }
 }
@@ -55,22 +55,9 @@ class "UserStoryDTO" as dto << Component >> {
 - priority : UsPriority
 - description : Description
 - timeEstimate : UsHour
-+ getProjectID()
-+ getUserStoryID()
-+ getTitle()
-+ getPriority()
-+ getDescription()
-+ getTimeEstimate()
 }
 }
-package "DTO" <<Folder>> {
-package "OutputUsDTO" <<Folder>>{
-class "OutputUsDTO" as outDto << Component >> {
-- userStoryID : UserStoryID
-- projectID : ProjectID
-- title : UsTitle
-}
-}
+
 package "DTO" <<Folder>> {
 package "UserStoryMapper" <<Folder>>{
 class "UserStoryMapper" as mapper << Component >> {
@@ -88,18 +75,19 @@ class "UserStory" as userStory << Root >> {
 - priority : UsPriority
 - description : Description
 - timeEstimate : UsHour
-+ UserStory(projectID, userStoryID, title, priority, \n description, timeEstimate)
++ UserStory(userStoryID)
 }
 }
 package "Factory" <<Folder>>{
 class "UserStoryFactory" as userStoryF << Factory >> {
-+createUserStory(projectID, userStoryID, title, \n priority, description, timeEstimate)
++createUserStory(userStoryDTO)
 }
 }
 package "Value Object" <<Folder>>{
 class "UserStoryID" as usID << Value Object >> {
--userStoryID : UserStoryID
-+checkUsID()
+-projectID : ProjectID
+-usTitle : UsTitle
++checkUsID(projectID, usTitle)
 }
 }
 'package "Value Object" <<Folder>>{
@@ -137,10 +125,10 @@ route ..> ctrl
 'ctrl..> mapper'
 ctrl..> service
 'mapper..> dto
-mapper..>outDto
 store..|> repo
 service..> mapper
-service..> dto
+mapper..>dto
+userStoryF..> dto
 service..> factoryInterface
 service..left> repo
 userStoryF"1"*-d-"1" usID

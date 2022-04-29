@@ -72,7 +72,7 @@ public class ChangePriorityUSController {
         return this.userStory;
     }
 
-    public boolean setPriority(int x) {
-        return this.userStory.setPriority(x);
-    }
+//    public boolean setPriority(int x) {
+//        return this.userStory.setPriority(x);
+//    }
 }

@@ -10,9 +10,7 @@ import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.Task.TaskStore;
 import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.utils.Entity;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,10 +21,7 @@ public class Sprint implements Entity<Sprint> {
     /**
      * Attributes of Sprint
      **/
-    private ProjectID projectID;
     private SprintID sprintID;
-    private Description sprintName;
-    private final TaskStore taskStore;
     private ScrumBoard scrumBoard;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -35,11 +30,8 @@ public class Sprint implements Entity<Sprint> {
     /**
      * Constructor of Sprint
      **/
-    public Sprint(String projectID, String sprintID, String name) {
-        this.projectID = new ProjectID(projectID);
-        this.sprintID = new SprintID(sprintID);
-        this.sprintName = new Description(name);
-        this.taskStore = new TaskStore();
+    public Sprint(SprintID sprintID) {
+        this.sprintID = sprintID;
     }
 
     /**
@@ -54,7 +46,7 @@ public class Sprint implements Entity<Sprint> {
          return Objects.equals(this.sprintID.toString(), sprID);}
 
     public boolean hasProjectID(String projectID) {
-        return Objects.equals(this.projectID.toString(), projectID);
+        return Objects.equals(projectID, projectID);
     }
 
 
@@ -69,16 +61,16 @@ public class Sprint implements Entity<Sprint> {
                 && (this.endDate.isAfter(startDate) || this.endDate.equals(startDate)));
     }
 
-    /**
-     * Method to get list of tasks within a sprint
-     */
-    //It hasn't tests
-    public List<Task> getListOfTasksOfASprint(){
-        List<Task> taskList2 = new ArrayList<>();
-
-        taskList2.addAll(this.taskStore.getTaskList());
-        return taskList2;
-    }
+//    /**
+//     * Method to get list of tasks within a sprint - Método David
+//     */
+//    //It hasn't tests
+//    public List<Task> getListOfTasksOfASprint(){
+//        List<Task> taskList2 = new ArrayList<>();
+//
+//        taskList2.addAll(this.taskStore.getTaskList());
+//        return taskList2;
+//    }
 
     /**
      * Methods to call methods from sprint backlog
