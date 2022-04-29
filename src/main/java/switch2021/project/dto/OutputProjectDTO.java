@@ -8,6 +8,7 @@ public class OutputProjectDTO {
     public String customer;
     public String sector;
     public String typo;
+    public String numberOfSprints;
     public String budget;
     public String status;
     public String startDate;

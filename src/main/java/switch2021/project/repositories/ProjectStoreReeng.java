@@ -1,15 +1,12 @@
 package switch2021.project.repositories;
 
-import lombok.Getter;
 import org.springframework.stereotype.Component;
 import switch2021.project.interfaces.ProjectRepositoryInterface;
 import switch2021.project.model.Project.ProjectReeng;
-import switch2021.project.model.valueObject.ProjectID;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Component
 public class ProjectStoreReeng implements ProjectRepositoryInterface {
 
@@ -31,8 +28,6 @@ public class ProjectStoreReeng implements ProjectRepositoryInterface {
         if(newProject == null) {
             throw new IllegalArgumentException("Error: Project is null!");
         }
-
-        newProject.setProjectCode(new ProjectID(projectList.size() + 1));
 
         if (existById(newProject.getProjectCode().getCode())) {
             throw new IllegalArgumentException("Error: Project already exists!");
