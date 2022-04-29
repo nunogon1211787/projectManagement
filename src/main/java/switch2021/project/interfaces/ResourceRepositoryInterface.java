@@ -1,10 +1,12 @@
 package switch2021.project.interfaces;
 
+import org.springframework.stereotype.Component;
 import switch2021.project.model.Resource.ResourceReeng;
 import switch2021.project.model.Resource.old.Resource;
 
 import java.util.List;
 
+@Component
 public interface ResourceRepositoryInterface/* extends CrudRepository<Object, Long> */{
 
     /**
@@ -20,6 +22,8 @@ public interface ResourceRepositoryInterface/* extends CrudRepository<Object, Lo
 
     //List<Resource> findAllBySystemUserId(SystemUserId userId);
 
+
+    ResourceReeng findById (String resourceId);
 
     /**
      * Save a object in the list of the repository.
