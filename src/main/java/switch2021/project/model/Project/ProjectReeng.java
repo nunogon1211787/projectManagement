@@ -57,4 +57,20 @@ public class ProjectReeng {
         return this.projectCode.getCode().equalsIgnoreCase(code);
     }
 
+    public boolean isActiveInThisDate(LocalDate date) {
+
+        boolean result = false;
+
+        if(this.startDate.isBefore(date) || this.startDate.isEqual(date)){
+
+            if(this.endDate.isEqual(date) || this.endDate.isAfter(date)){
+                result = true;
+            }
+
+        }
+
+        return result;
+    }
+
+
 }
