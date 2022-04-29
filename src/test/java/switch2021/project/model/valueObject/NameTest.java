@@ -16,7 +16,7 @@ class NameTest {
         //Act
         Name expected = new Name(actual);
         //Assert
-        assertEquals(expected.getNameF(), actual);
+        assertEquals(expected.getText(), actual);
     }
 
     @Test

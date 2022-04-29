@@ -188,7 +188,7 @@ class ProjectTest {
     Project project2 = new Project("prototype", "test56", customer,
             typo, sector, LocalDate.now(), 7, 5000);
 
-    @BeforeEach
+/*    @BeforeEach
     public void init_2() {
         Company company = new Company();
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
@@ -254,8 +254,10 @@ class ProjectTest {
         currentProject.getProjectTeam().saveResource(manuelmartins);
     }
 
+ */
 
-    @Test
+
+/*    @Test
     public void hasCurrentProjectTeamMemberEmailSuccess() {
         assertTrue(this.currentProject.getProjectTeam().hasCurrentResource(("manuelmartins@beaver.com")));
     }
@@ -269,6 +271,8 @@ class ProjectTest {
     public void hasCurrentProjectTeamMemberEmailFailResourceNotCurrent() {
         assertFalse(this.proj3.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
     }
+
+ */
 
     @Test
     @DisplayName("Validate the getter of sprint store")
@@ -293,7 +297,7 @@ class ProjectTest {
         assertNotEquals(sprintList1.findSprints().size(), projectSprintList.findSprints().size());
     }
 
-    @Test
+/*    @Test
     @DisplayName("Create task")
     void getActivitiesOfAProject() {
         //Arrange
@@ -350,6 +354,8 @@ class ProjectTest {
         //Assert
         assertTrue(addResource);
     }
+
+ */
 
     @Test
     public void overrideAndHashCodeTest() {

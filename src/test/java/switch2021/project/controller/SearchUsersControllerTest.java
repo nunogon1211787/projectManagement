@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SearchUsersControllerTest {
 
-    @Test
+/*    @Test
     void searchUsersSuccess() {
         //Input
         Company company = new Company();
@@ -55,6 +55,8 @@ class SearchUsersControllerTest {
         //Result
         assertNotEquals(expectedList, resultList);
     }
+
+ */
 
     @Test
     void getProfileListSuccess(){

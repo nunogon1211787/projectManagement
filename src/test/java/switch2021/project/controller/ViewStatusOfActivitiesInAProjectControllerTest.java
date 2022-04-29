@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ViewStatusOfActivitiesInAProjectControllerTest {
 
-    @Test
+/*    @Test
     void getListOfProjectActivities() {
         Company company = new Company();
         Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
@@ -108,4 +108,6 @@ class ViewStatusOfActivitiesInAProjectControllerTest {
         assertTrue(user2List.contains(project2));
         assertTrue(userList.contains(project3));
     }
+
+ */
 }

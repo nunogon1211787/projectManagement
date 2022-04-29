@@ -39,7 +39,7 @@ class AssignScrumMasterControllerTest {
         });
     }
 
-    @Test
+/*    @Test
     void assignRoleTestSprintNullFailure() {
         //Assert
         assertThrows(NullPointerException.class, () -> {
@@ -87,6 +87,8 @@ class AssignScrumMasterControllerTest {
             controller.assignRole("manueljose", "Scrum Master"); //Resource without possible dates
         });
     }
+
+ */
 
     @Test
     void assignRoleTestResourceNullFailure() {

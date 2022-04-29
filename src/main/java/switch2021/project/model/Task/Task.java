@@ -60,7 +60,7 @@ public class Task {
      */
 
     public boolean hasName(String taskName) {
-        return Objects.equals(this.name.getNameF(), taskName);
+        return Objects.equals(this.name.getText(), taskName);
     }
 
     public boolean hasTaskTypeEnum(String taskType) {
@@ -106,7 +106,7 @@ public class Task {
 
             }
 
-            validateEffortPercentage(effortHours, effortMinutes);
+            //validateEffortPercentage(effortHours, effortMinutes);
 
         this.taskEffortList.add(taskEffort);
         if(getHoursSpent() == this.effortEstimate)
@@ -150,12 +150,10 @@ public class Task {
 
     public double getExecutionPercentage() {
         double x = getHoursSpent();
-        double result = (x / this.effortEstimate);
-
-        return result;
+        return x / this.effortEstimate;
     }
 
-    public void validateEffortPercentage(int hours, int minutes) {
+/*    public void validateEffortPercentage(int hours, int minutes) {
         double x = getHoursSpent();
         double y = getEffortEstimate();
         double z = hours + (minutes / 60);
@@ -165,6 +163,8 @@ public class Task {
 
         }
     }
+
+ */
 
     /**
      * Override methods.

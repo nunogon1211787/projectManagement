@@ -41,7 +41,7 @@ public class TaskListTest {
         assertTrue(test.getTaskList().contains(newTask));
     }
 
-    @Test
+/*    @Test
     void removeTaskFromTheList() {
 
         //Arrange
@@ -182,4 +182,6 @@ public class TaskListTest {
         assertEquals(new Task("test", "test test test tests", 10, TaskTypeEnum.valueOf("Meeting"), resource), test.getTaskByName("test"));
         assertEquals(new Task("testdois", "test2 test2 test2 test2", 10, TaskTypeEnum.valueOf("Meeting"), resource), test.getTaskByName("testdois"));
     }
+
+ */
 }

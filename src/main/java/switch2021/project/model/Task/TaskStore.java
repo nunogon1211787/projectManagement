@@ -52,7 +52,7 @@ public class TaskStore {
         List<String> tasksNames = new ArrayList<>();
 
         for (Task task : this.taskList) {
-            tasksNames.add(task.getName().getNameF());
+            tasksNames.add(task.getName().getText());
         }
         return tasksNames;
     }
@@ -124,7 +124,7 @@ public class TaskStore {
         return this.taskList.contains(task);
     }
 
-
+/*
     /**
      * Method to get list of tasks within a sprint
      */

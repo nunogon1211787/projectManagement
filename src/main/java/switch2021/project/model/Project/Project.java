@@ -22,7 +22,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
-public class Project implements Entity {
+public class Project implements Entity<Project> {
 
 
     private final Customer customer;
@@ -120,10 +120,10 @@ public class Project implements Entity {
 
     public boolean validateResource(Resource resource) {
         boolean msg = true;
-        String x = resource.getUser().getSystemUserId().getEmail().getEmail();
+        String x = resource.getUser().getSystemUserId().getEmail().getEmailText();
 
         for (Resource i : projectTeam.getProjectTeamList()) {
-            if (i.getUser().getSystemUserId().getEmail().getEmail().equals(x)) {
+            if (i.getUser().getSystemUserId().getEmail().getEmailText().equals(x)) {
                 msg = false;
                 break;
             }
@@ -207,8 +207,9 @@ public class Project implements Entity {
                 '}';
     }
 
+
     @Override
-    public boolean sameIdentityAs(Object other) {
+    public boolean sameIdentityAs(Project other) {
         return false;
     }
 }

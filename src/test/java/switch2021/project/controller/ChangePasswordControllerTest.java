@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ChangePasswordControllerTest {
 
-    @Test
+/*    @Test
     public void changePasswordSuccess() {
         //Arrange
         Company company = new Company();
@@ -79,4 +79,6 @@ public class ChangePasswordControllerTest {
             controller.changePassword("123@isep.ipp.pt", "AAA", "1", "1");
         });
     }
+
+ */
 }
