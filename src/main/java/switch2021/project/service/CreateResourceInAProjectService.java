@@ -12,6 +12,8 @@ import switch2021.project.mapper.ResourceMapper;
 import switch2021.project.model.Project.ProjectReeng;
 import switch2021.project.model.Resource.ManageResourcesService;
 import switch2021.project.model.Resource.ResourceReeng;
+import switch2021.project.model.valueObject.PercentageOfAllocation;
+import switch2021.project.model.valueObject.ProjectRoleReeng;
 
 
 import java.time.LocalDate;
@@ -37,6 +39,8 @@ public class CreateResourceInAProjectService {
         OutputResourceDTO response;
         LocalDate startDate = LocalDate.of(dto.yearStartDate, dto.monthStartDate, dto.dayStartDate);
         LocalDate endDate = LocalDate.of(dto.yearEndDate, dto.monthEndDate, dto.dayEndDate);
+        ProjectRoleReeng projRole = ProjectRoleReeng.valueOf(dto.projectRole);
+        PercentageOfAllocation percAllo = new PercentageOfAllocation(dto.percentageOfAllocation);
 
         List<ResourceReeng> projectTeamList = iRepoResource.findAllByProject(dto.projectId);
         List<ResourceReeng> resourceProjectsList = iRepoResource.findAllByUser(dto.systemUserID);
@@ -46,9 +50,9 @@ public class CreateResourceInAProjectService {
         boolean systemUserExists = iRepoResource.existsById(dto.systemUserID);
         boolean projectExists = iRepoProject.existById(dto.projectId);
         boolean isValidToProject = project.isActiveInThisDate(startDate) && project.isActiveInThisDate(endDate);
-        boolean isValidToCreate = manageResourcesService.resourceCreationValidation(startDate, endDate, projectTeamList, resourceProjectsList);
+        boolean isValidToCreate = manageResourcesService.resourceCreationValidation(projRole, percAllo, startDate, endDate, projectTeamList, resourceProjectsList);
 
-        if(iRepoResource.existsById(dto.systemUserID) && iRepoProject.existById(dto.projectId)){
+        if(systemUserExists && projectExists && isValidToProject && isValidToCreate){
 
         ResourceReeng newResource = iResourceFactory.createResource(dto);
 
@@ -57,8 +61,6 @@ public class CreateResourceInAProjectService {
         } else {
             throw new IllegalArgumentException(("ID inválido"));
         }
-
-
         return response;
     }
 }

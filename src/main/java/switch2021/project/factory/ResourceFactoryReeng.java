@@ -30,10 +30,5 @@ public class ResourceFactoryReeng implements ResourceFactoryInterfaceReeng {
         return newResource;
     }
 
-//    public ResourceReeng createResource(ResourceDTOReeng resourceDTO) {
-//
-////        CostPerHour coPeHo = new CostPerHour(costPerHour);
-////        PercentageOfAllocation percentage = new PercentageOfAllocation(percentageOfAllocation);
-//        return new ResourceReeng(resourceId);
-//    }
+
 }
