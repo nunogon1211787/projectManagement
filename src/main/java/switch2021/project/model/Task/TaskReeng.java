@@ -58,7 +58,7 @@ public class TaskReeng {
         return Objects.equals(this.type.toString(), taskType);
     }
 
-    public boolean hasResponsible(Resource resp) {
+    public boolean hasResponsible(ResourceIDReeng resp) {
         return Objects.equals(this.responsible, resp);
     }
 
