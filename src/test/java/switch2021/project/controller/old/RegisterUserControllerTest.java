@@ -7,7 +7,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import switch2021.project.controller.RegisterUserController;
 import switch2021.project.dto.NewUserInfoDTO;
-import switch2021.project.factory.SystemUserFactory;
+import switch2021.project.factory.*;
 import switch2021.project.mapper.SystemUserMapper;
 import switch2021.project.repositories.UserProfileRepository;
 import switch2021.project.service.RegisterUserService;
@@ -36,12 +36,20 @@ public class RegisterUserControllerTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
-        UserProfileRepository userProfileStore = new UserProfileRepository();
-
         SystemUserStore systemUserStore = new SystemUserStore();
+        UserProfileRepository userProfileStore = new UserProfileRepository();
         SystemUserMapper mapper = new SystemUserMapper();
-        SystemUserFactory factory = new SystemUserFactory();
-        RegisterUserService service = new RegisterUserService(systemUserStore,userProfileStore,mapper,factory);
+
+        EmailFactory emailFactory = new EmailFactory();
+        SystemUserIDFactory idFactory = new SystemUserIDFactory(emailFactory);
+        NameFactory nameFactory = new NameFactory();
+        FunctionFactory functionFactory = new FunctionFactory();
+        PasswordFactory passwordFactory = new PasswordFactory();
+        PhotoFactory photoFactory = new PhotoFactory();
+        SystemUserFactory factory = new SystemUserFactory(idFactory, nameFactory, functionFactory, passwordFactory,
+                photoFactory);
+
+        RegisterUserService service = new RegisterUserService(systemUserStore, userProfileStore, mapper, factory);
         //RegisterUserService service = new RegisterUserService();
 
         userProfileStore.populateDefault();

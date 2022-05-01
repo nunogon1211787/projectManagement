@@ -1,7 +1,5 @@
 package switch2021.project.interfaces;
 
-import org.springframework.stereotype.Component;
-import switch2021.project.factory.UserProfileFactory;
 import switch2021.project.model.UserProfile.UserProfile;
 
 import java.util.List;
@@ -10,11 +8,16 @@ import java.util.List;
 public interface IUserProfileRepo {
 
     /**
+     * The repository should be able to find a object using given Identity.
+     */
+    UserProfile findUserProfileByDescription(String userProfileName);
+
+    /**
      * Finds all user profile
      *
      * @return userProfileList if found, else {@code null}
      */
-    //List<UserProfile> findUserProfile();
+    List<UserProfile> findAllUserProfiles();
 
     /**
      * Save user story
@@ -22,7 +25,7 @@ public interface IUserProfileRepo {
      * @param profile
      * @return boolean result
      */
-
     boolean saveUserProfile(UserProfile profile);
 
+    boolean existsByDescription(String userProfileName);
 }

@@ -1,6 +1,5 @@
 package switch2021.project.repositories;
 
-import lombok.Getter;
 import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.model.UserProfile.UserProfile;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
 @Repository
 public class UserProfileRepository implements IUserProfileRepo {
 
@@ -18,31 +16,15 @@ public class UserProfileRepository implements IUserProfileRepo {
      **/
     private final List<UserProfile> userProfileList;
 
-
     /**
      * UserProfile Store Constructor
      **/
     public UserProfileRepository() {
-
         userProfileList = new ArrayList<>();
     }
 
-
-    /**
-     * UserProfile Populator, that populates the UserProfile List with pre-set objects.
-     **/
-    public void populateDefault() {
-        saveUserProfile(createProfile("Visitor"));
-        saveUserProfile(createProfile("Administrator"));
-        saveUserProfile(createProfile("Director"));
-        saveUserProfile(createProfile("User"));
-    }
-
-
-    /**
-     * Get UserProfile By Name Method
-     **/
-    public UserProfile getUserProfile(String profileName) {
+    @Override
+    public UserProfile findUserProfileByDescription(String profileName) {
         UserProfile profile = null;
 
         for (UserProfile i : userProfileList) {
@@ -52,6 +34,43 @@ public class UserProfileRepository implements IUserProfileRepo {
             }
         }
         return profile;
+    }
+
+    @Override
+    public List<UserProfile> findAllUserProfiles() {
+        return new ArrayList<>(this.userProfileList);
+    }
+
+    /**
+     * Save UserProfile Method (Save a new UserProfile object to the UserProfile List)
+     **/
+    @Override
+    public boolean saveUserProfile(UserProfile profile) {
+        if (profile == null || existsByDescription(profile.getUserProfileId().getUserProfileName().getText())) {
+            return false;
+        } else {
+            return this.userProfileList.add(profile);
+        }
+    }
+
+    @Override
+    public boolean existsByDescription(String userProfileText) {
+        for (UserProfile userProfile : this.userProfileList) {
+            if (userProfile.getUserProfileId().getUserProfileName().getText().equalsIgnoreCase(userProfileText.trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * UserProfile Populator, that populates the UserProfile List with pre-set objects.
+     **/
+    public void populateDefault() {
+        saveUserProfile(createProfile("Visitor"));
+        saveUserProfile(createProfile("Administrator"));
+        saveUserProfile(createProfile("Director"));
+        saveUserProfile(createProfile("User"));
     }
 
  // mudar para o service
@@ -64,20 +83,9 @@ public class UserProfileRepository implements IUserProfileRepo {
 
 
     /**
-     * Save UserProfile Method (Save a new UserProfile object to the UserProfile List)
-     **/
-    public boolean saveUserProfile(UserProfile profile) {
-        if (!validateProfile(profile)) {
-            throw new IllegalArgumentException("Repeated user profile name inserted.");
-        }
-        return userProfileList.add(profile);
-    }
-
-
-    /**
      * Validation Methods
      **/
-    private boolean validateProfile(UserProfile profile) {
+/*    private boolean validateProfile(UserProfile profile) {
         //Check if profile already exist
         boolean msg = true;
         for (UserProfile up : userProfileList) {
@@ -88,6 +96,8 @@ public class UserProfileRepository implements IUserProfileRepo {
         }
         return msg;
     }
+
+ */
 
 
     /**

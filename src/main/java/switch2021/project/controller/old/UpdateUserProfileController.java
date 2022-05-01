@@ -40,7 +40,7 @@ public class UpdateUserProfileController {
     }
 
     public List<UserProfile> getUserProfileList() {
-        return userProfileStore.getUserProfileList();
+        return userProfileStore.findAllUserProfiles();
     }
 
     public boolean updateProfile(SystemUser user, UserProfile oldProfile, UserProfile newProfile) {

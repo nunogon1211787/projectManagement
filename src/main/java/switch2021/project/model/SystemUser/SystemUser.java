@@ -34,21 +34,21 @@ public class SystemUser implements Entity<SystemUser> {
     }
 
     /**
-     * Setters
+     * Setters assign????
      */
-    public void setUserName(Name userName) {
+    public void assignName(Name userName) {
         this.userName = userName;
     }
 
-    public void setSystemUserId(SystemUserID systemUserId) {
+    public void assignId(SystemUserID systemUserId) {
         this.systemUserId = systemUserId;
     }
 
-    public void setPhoto(Photo photo) {
+    public void assignPhoto(Photo photo) {
         this.photo = photo;
     }
 
-    public void setFunction(Function function) {
+    public void assignFunction(Function function) {
         this.function = function;
     }
 
@@ -56,7 +56,7 @@ public class SystemUser implements Entity<SystemUser> {
         isActive = active;
     }
 
-    public void assignProfileIdToUser(UserProfileId profileId) {
+    public void assignProfileId(UserProfileId profileId) {
         //checkProfileRule()
         this.assignedIdProfiles.add(profileId);
     }

@@ -26,7 +26,7 @@ public class ProfileRequestController {
      * Methods
      **/
     public boolean createProfileRequest(String email, String nameProfile) {
-        UserProfileId profileIdRequest = this.company.getUserProfileStore().getUserProfile(nameProfile).getUserProfileId();
+        UserProfileId profileIdRequest = this.company.getUserProfileStore().findUserProfileByDescription(nameProfile).getUserProfileId();
         SystemUser user = this.company.getSystemUserStore().findSystemUserByEmail(email);
         /*this.request = this.company.getRequestStore().createProfileRequest(profRequest, user);
         return this.request;*/

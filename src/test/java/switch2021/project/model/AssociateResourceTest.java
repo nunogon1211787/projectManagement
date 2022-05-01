@@ -1,19 +1,13 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Resource.old.Resource;
-import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.repositories.ProjectStore;
 
 import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class AssociateResourceTest {
 
@@ -27,7 +21,7 @@ public class AssociateResourceTest {
     @BeforeEach
     public void init() {
         Company company = new Company();
-        userProfile = company.getUserProfileStore().getUserProfile("Visitor");
+        userProfile = company.getUserProfileStore().findUserProfileByDescription("Visitor");
 
         LocalDate date = LocalDate.of(2021, 12, 12);
         company.getBusinessSectorStore().createAndAddBusinessSector("sector");

@@ -7,7 +7,6 @@ import switch2021.project.model.UserProfile.UserProfile;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 public class SystemUserStore implements ISystemUserRepo {
@@ -76,21 +75,5 @@ public class SystemUserStore implements ISystemUserRepo {
                 }
         }
         return foundUsersList;
-    }
-
-    /**
-     * Override
-     **/
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof SystemUserStore)) return false;
-        SystemUserStore that = (SystemUserStore) obj;
-        return (this.systemUserList.equals(that.systemUserList));
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(systemUserList);
     }
 }
