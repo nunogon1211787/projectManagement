@@ -5,7 +5,7 @@ import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.model.valueObject.SystemUserID;
 
 import java.time.LocalDate;
-@Deprecated
+
 @Getter
 public class ResourceId {
 

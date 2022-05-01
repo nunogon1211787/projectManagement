@@ -13,13 +13,13 @@ import java.time.LocalDate;
 public class ResourceReeng {
 
 
-    private ResourceId id;
+    private ResourceIDReeng id;
     private PercentageOfAllocation allocation;
     private CostPerHour cost;
     private ProjectRoleReeng role;
     private LocalDate endDate;
 
-    public ResourceReeng(ResourceId id) {
+    public ResourceReeng(ResourceIDReeng id) {
         this.id = id;
     }
 

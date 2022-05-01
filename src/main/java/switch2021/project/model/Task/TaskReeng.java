@@ -3,7 +3,7 @@ package switch2021.project.model.Task;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.interfaces.TaskContainerID;
-import switch2021.project.model.Resource.ResourceId;
+import switch2021.project.model.Resource.ResourceIDReeng;
 import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.EffortEstimate;
@@ -11,7 +11,6 @@ import switch2021.project.model.valueObject.Name;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,7 +27,7 @@ public class TaskReeng {
     private EffortEstimate effortEstimate;  // em horas
     private LocalDate startDate;
     private LocalDate endDate;
-    private ResourceId responsible;
+    private ResourceIDReeng responsible;
     private List<TaskEffort> taskEffortList;
     private List<String> precedenceList;
     private TaskContainerID taskContainerID;

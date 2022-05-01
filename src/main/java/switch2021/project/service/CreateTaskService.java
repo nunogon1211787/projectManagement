@@ -7,12 +7,10 @@ import switch2021.project.dto.TaskDTO;
 import switch2021.project.factoryInterface.TaskFactoryInterface;
 import switch2021.project.interfaces.*;
 import switch2021.project.mapper.TaskMapperNew;
-import switch2021.project.model.Resource.ResourceId;
+import switch2021.project.model.Resource.ResourceIDReeng;
 import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.Sprint.SprintID;
 import switch2021.project.model.Task.TaskReeng;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.UserStory.UserStoryID;
 
 @Service
     public class CreateTaskService {
@@ -44,7 +42,7 @@ import switch2021.project.model.UserStory.UserStoryID;
 
         public OutputTaskDTO createAndSaveTask(TaskDTO taskDTO) {
 
-            ResourceId resId = resourceRepositoryInterface.findById(taskDTO.responsible).getId();
+            ResourceIDReeng resId = resourceRepositoryInterface.findById(taskDTO.responsible).getId();
 
             TaskContainerID z;
 
