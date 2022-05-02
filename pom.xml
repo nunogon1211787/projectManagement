@@ -143,11 +143,11 @@
             <artifactId>spring-beans</artifactId>
             <version>5.3.18</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.commons</groupId>-->
+        <!--            <artifactId>commons-lang3</artifactId>-->
+        <!--            <version>3.12.0</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.netbeans.lib</groupId>
             <artifactId>cvsclient</artifactId>
@@ -163,7 +163,7 @@
     </dependencies>
     <build>
         <plugins>
-            <!-- Required for compiling the project usign maven -->
+            <!-- Required for compiling the project using maven -->
             <plugin><!-- Compiler configuration-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -187,6 +187,7 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
+
                 <configuration>
                     <!-- new configuration needed for coverage per test -->
                     <properties>

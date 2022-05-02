@@ -1,10 +1,8 @@
 package switch2021.project.model.Resource;
 
 import org.springframework.stereotype.Component;
-import switch2021.project.model.Project.Project;
-import switch2021.project.model.Project.ProjectReeng;
-import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.valueObject.PercentageOfAllocation;
+import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.model.valueObject.ProjectRoleReeng;
 
 import java.time.LocalDate;
@@ -14,17 +12,17 @@ import java.util.List;
 @Component
 public class ManageResourcesService {
 
-    public List<ResourceReeng> currentProjectTeam(List<ResourceReeng> resourcesInProject) {
+    public List<ResourceReeng> currentResourcesByDate(List<ResourceReeng> resourcesInProject, LocalDate date) {
 
-        List<ResourceReeng> projectTeam = new ArrayList<>();
+        List<ResourceReeng> currentResources = new ArrayList<>();
 
         for (ResourceReeng res : resourcesInProject) {
 
-            if (res.isActiveToThisDate(LocalDate.now())) {
-                projectTeam.add(res);
+            if (res.isActiveToThisDate(date)) {
+                currentResources.add(res);
             }
         }
-        return projectTeam;
+        return currentResources;
     }
 
     public boolean resourceCreationValidation(ProjectRoleReeng projectRole, PercentageOfAllocation allocation, LocalDate startDate, LocalDate endDate, List<ResourceReeng> projectTeam, List<ResourceReeng> resourceProjectsList) {
@@ -59,4 +57,20 @@ public class ManageResourcesService {
             }
             return msg;
         }
+
+    public List<ProjectID> listProjectsOfResources(List<ResourceReeng> currentUserResources) {
+
+        List<ProjectID> resourceProjects = new ArrayList<>();
+
+        for (ResourceReeng res : currentUserResources){
+
+            ProjectID projId = res.getId().getProject();
+
+            resourceProjects.add(projId);
+
+        }
+
+        return resourceProjects;
+
     }
+}
