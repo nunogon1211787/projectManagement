@@ -2,6 +2,7 @@ package switch2021.project.model.Task;
 
 import lombok.Getter;
 import lombok.Setter;
+import switch2021.project.interfaces.TaskContainerID;
 import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.valueObject.*;
 
@@ -13,6 +14,7 @@ import java.util.Objects;
 
 @Setter
 @Getter
+@Deprecated
 public class Task {
 
     /**
@@ -28,6 +30,7 @@ public class Task {
     private Resource responsible;
     private List<TaskEffort> taskEffortList;
     private List<String> precedenceList;
+    private TaskContainerID taskContainerID;
 
 
     /**
@@ -47,6 +50,20 @@ public class Task {
         this.type = type;
         this.responsible = responsible;
         this.taskEffortList = new ArrayList<>();
+
+    }
+
+    public Task(String name, String description, double effortEstimate, TaskTypeEnum type, Resource responsible, TaskContainerID taskContainerID) {
+
+        checkEffortRules(effortEstimate);
+
+        this.name = new Name(name);
+        this.description = new Description(description);
+        this.effortEstimate = effortEstimate;
+        this.type = type;
+        this.responsible = responsible;
+        this.taskEffortList = new ArrayList<>();
+        this.taskContainerID = taskContainerID;
     }
 
     public Task(String name, String description, double effortEstimate, TaskTypeEnum type, Resource responsible, List<String> precedenceList) {
@@ -60,7 +77,7 @@ public class Task {
      */
 
     public boolean hasName(String taskName) {
-        return Objects.equals(this.name.getNameF(), taskName);
+        return Objects.equals(this.name.getText(), taskName);
     }
 
     public boolean hasTaskTypeEnum(String taskType) {
@@ -106,7 +123,7 @@ public class Task {
 
             }
 
-            validateEffortPercentage(effortHours, effortMinutes);
+            //validateEffortPercentage(effortHours, effortMinutes);
 
         this.taskEffortList.add(taskEffort);
         if(getHoursSpent() == this.effortEstimate)
@@ -150,12 +167,10 @@ public class Task {
 
     public double getExecutionPercentage() {
         double x = getHoursSpent();
-        double result = (x / this.effortEstimate);
-
-        return result;
+        return x / this.effortEstimate;
     }
 
-    public void validateEffortPercentage(int hours, int minutes) {
+/*    public void validateEffortPercentage(int hours, int minutes) {
         double x = getHoursSpent();
         double y = getEffortEstimate();
         double z = hours + (minutes / 60);
@@ -165,6 +180,8 @@ public class Task {
 
         }
     }
+
+ */
 
     /**
      * Override methods.

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import switch2021.project.dto.OutputUsDTO;
 import switch2021.project.dto.UserStoryDTO;
 import switch2021.project.service.CreateUserStoryService;
 
@@ -27,9 +26,9 @@ public class CreateUserStoryController {
      * Create a User Story
      */
     @PostMapping("")
-    public ResponseEntity<Object> createUserStory(@RequestBody UserStoryDTO dto) {
+    public ResponseEntity<Object> createUserStory(@RequestBody UserStoryDTO userStoryDTO) {
 
-        OutputUsDTO newUserStory = createUserStoryService.createAndSaveUserStory(dto);
+        UserStoryDTO newUserStory = createUserStoryService.createAndSaveUserStory(userStoryDTO);
 
         return new ResponseEntity<>(newUserStory, HttpStatus.CREATED);
     }

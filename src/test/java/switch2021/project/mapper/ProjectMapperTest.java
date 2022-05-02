@@ -32,7 +32,7 @@ public class ProjectMapperTest {
     }
 
 
-    @Test
+/*    @Test
     @DisplayName("check if the list size is correct")
     public void getProjectListByUserEmailWith2Projects() {
         //Arrange
@@ -60,5 +60,7 @@ public class ProjectMapperTest {
         assertEquals(2, projectList.size());
 
     }
+
+ */
 
 }

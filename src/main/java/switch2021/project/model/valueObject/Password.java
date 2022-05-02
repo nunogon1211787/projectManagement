@@ -1,27 +1,30 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
-
-import java.util.Objects;
+import switch2021.project.utils.ValueObject;
 
 @Getter
-public class Password {
+public class Password implements ValueObject<Password> {
 
-    /** Attributes **/
+    /**
+     * Attributes
+     **/
     private final String pwd;
     private static final int MIN_PASSWORD_LENGTH = 8;
 
-    /** Constructor **/
-    public Password (String pwd) {
+    /**
+     * Constructor
+     **/
+    public Password(String pwd) {
         checkPwdSize(pwd);
         checkNumberPresence(pwd);
         checkUpperCasePresence(pwd);
         checkLowerCasePresence(pwd);
-        this.pwd = encryptPassword(pwd);
+        this.pwd = pwd;
     }
 
-    public void checkPwdSize(String pwd){
-        if(pwd.length() < MIN_PASSWORD_LENGTH){
+    public void checkPwdSize(String pwd) {
+        if (pwd.length() < MIN_PASSWORD_LENGTH) {
             throw new IllegalArgumentException("Password too short.");
         }
     }
@@ -69,38 +72,21 @@ public class Password {
         }
     }
 
-    public String encryptPassword(String password) {
-        int codigoASCII;
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (int i = 0; i < password.length(); i++) {
-            codigoASCII = password.charAt(i) + 99;
-            stringBuilder.append((char) codigoASCII);
-        }
-        return stringBuilder.toString();
-    }
-
-    public String decryptPassword(String password) {
-        int codigoASCII;
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (int i = 0; i < password.length(); i++) {
-            codigoASCII = password.charAt(i) - 99;
-            stringBuilder.append((char) codigoASCII);
-        }
-        return stringBuilder.toString();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Password password = (Password) o;
-        return Objects.equals(pwd, password.pwd);
+        Password that = (Password) o;
+        return sameValueAs(that);
+    }
+
+    @Override
+    public boolean sameValueAs(Password other) {
+        return other != null && this.pwd.equals(other.pwd);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pwd);
+        return pwd.hashCode();
     }
 }

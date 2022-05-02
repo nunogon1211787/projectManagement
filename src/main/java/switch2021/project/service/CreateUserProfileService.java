@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.UserProfileDTO;
 import switch2021.project.factoryInterface.UserProfileFactoryInterface;
-import switch2021.project.interfaces.UserProfileRepositoryInterface;
+import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.mapper.UserProfileMapper;
 import switch2021.project.model.UserProfile.UserProfile;
 
@@ -17,7 +17,7 @@ public class CreateUserProfileService {
      * Attributes
      **/
     @Autowired
-    private UserProfileRepositoryInterface userProfileRepositoryInterface;
+    private IUserProfileRepo userProfileRepositoryInterface;
     @Autowired
     private UserProfileFactoryInterface userProfileFactoryInterface;
     @Autowired

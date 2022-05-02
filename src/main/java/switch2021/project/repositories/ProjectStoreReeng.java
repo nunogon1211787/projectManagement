@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Component
+//@Component
 public class ProjectStoreReeng implements ProjectRepositoryInterface {
 
     /**
@@ -31,8 +31,6 @@ public class ProjectStoreReeng implements ProjectRepositoryInterface {
         if(newProject == null) {
             throw new IllegalArgumentException("Error: Project is null!");
         }
-
-        newProject.setProjectCode(new ProjectID(projectList.size() + 1));
 
         if (existById(newProject.getProjectCode().getCode())) {
             throw new IllegalArgumentException("Error: Project already exists!");

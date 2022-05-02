@@ -1,13 +1,15 @@
 package switch2021.project.model.valueObject;
 
+import switch2021.project.utils.ValueObject;
+
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Name {
+public class Name implements ValueObject<Name> {
 
     /*** Attributes **/
-    private final String nameF;
+    private final String text;
 
 
     /*** Constructor **/
@@ -16,12 +18,12 @@ public class Name {
         checkIfNumber(name);
         checkIfSpecialChar(name);
 
-        this.nameF = name;
+        this.text = name;
     }
 
     /*** Getter **/
-    public String getNameF() {
-        return nameF;
+    public String getText() {
+        return text;
     }
 
     /*** Methods **/
@@ -49,12 +51,18 @@ public class Name {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Name name = (Name) o;
-        return Objects.equals(nameF, name.nameF);
+
+        final Name that = (Name) o;
+        return sameValueAs(that);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nameF);
+        return text.hashCode();
+    }
+
+    @Override
+    public boolean sameValueAs(Name other) {
+        return other != null && this.text.equals(other.text);
     }
 }
