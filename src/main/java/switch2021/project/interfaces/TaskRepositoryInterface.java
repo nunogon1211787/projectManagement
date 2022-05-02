@@ -1,23 +1,25 @@
 package switch2021.project.interfaces;
 
 import org.springframework.stereotype.Component;
-import switch2021.project.model.Project.Project;
+import switch2021.project.model.Task.TaskReeng;
+
 
 import java.util.List;
 
 @Component
 public interface TaskRepositoryInterface {
 
-
     /**
      * Finds all objects from this repository.
      */
-    List<Project> findAll();
+    List<TaskReeng> findAll();
 
     /**
      * The repository should be able to find a object using given Identity.
      */
-    Project findById(String id);
+    TaskReeng findById(String code);
+
+    TaskReeng save (TaskReeng taskReeng);
 
 
     boolean existById(String id);

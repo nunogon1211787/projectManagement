@@ -2,7 +2,6 @@ package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import switch2021.project.dto.OutputSprintDTO;
 import switch2021.project.dto.SprintDTO;
 import switch2021.project.factoryInterface.ISprintFactory;
 import switch2021.project.interfaces.SprintRepositoryInterface;
@@ -22,17 +21,9 @@ public class CreateSprintService {
     private ISprintFactory iSprintFactory;
 
 
-    /** Constructor */
-    public CreateSprintService(SprintRepositoryInterface sprintRepositoryInterface, SprintMapper sprintMapper,
-                               ISprintFactory iSprintFactory) {
-        this.sprintRepositoryInterface = sprintRepositoryInterface;
-        this.sprintMapper = sprintMapper;
-        this.iSprintFactory = iSprintFactory;
-    }
-
     /** Create and Save a New Sprint */
-    public OutputSprintDTO createAndSaveSprint(SprintDTO dto) {
-        Sprint newSprint = iSprintFactory.createSprint(dto.projectID, dto.sprintID, dto.name);
+    public SprintDTO createAndSaveSprint(SprintDTO dto) {
+        Sprint newSprint = iSprintFactory.createSprint(dto);
         sprintRepositoryInterface.saveSprint(newSprint);
         return sprintMapper.toDTO(newSprint);
     }

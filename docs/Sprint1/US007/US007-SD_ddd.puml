@@ -1,0 +1,72 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title US007 - As Director, I want to associate a human resource (user) to a project
+
+autoactivate on
+autonumber
+
+participant ":createResourceInAProjectRoute" as Route
+participant ":createResourceInAProjectController" as Ctrl
+participant "createResourceService:createResourceInAProjectService" as resourceService
+participant "sysUsRepo:ISystemUserRepository" as systemUserStore
+participant "projRepo:IProjectRepository" as projectStore
+participant "resFac:IResourceFactory" as resourceFactory
+participant "resRepo:IResourceRepository" as resourceStore
+'participant "resRepo:IResourceRepository" as resourceStore
+participant "res : Resource" as resource
+participant "projectTeamList : List<Resources>" as projectTeam
+participant "resourceProjectsList : List<Resources>" as resourceProjects
+participant "project:Project" as project
+participant "domainServiceResourceVal:DomainServiceResourceValidation" as domainService
+
+[o-> Route:  POST/resources(json)
+Route -> Ctrl: associateResource (json)
+note right
+Change from json to dto hidden to simplify diagram
+end note
+Ctrl -> resourceService: createAndSaveResource (newResDto)
+resourceService -> systemUserStore: existsById(newResDto.systemUserId)
+systemUserStore --> resourceService: true
+resourceService -> projectStore: existsById(newResDto.projectId)
+projectStore --> resourceService: true
+resourceService -> resourceFactory: createResource(newResDto)
+'resourceFactory -> resource**: createResource(projectId, systemUserId, startDate)
+resourceFactory -> resource**: createResource()
+resourceFactory -> resourceFactory: setProjectRole(projectRole) explicitar a busca da lista?
+deactivate
+resourceFactory -> resourceFactory: setEndDate(endDate)
+deactivate
+resourceFactory -> resourceFactory: setPercentageOfAllocation(percentageOfAllocation)
+deactivate
+resourceFactory -> resourceFactory: setCostPerHour(costPerHour)
+deactivate
+resourceFactory --> resourceService: res
+resourceService -> resourceStore: findAllByProjectId(projectId)
+resourceStore-> projectTeam**: create()
+resourceStore --> resourceService: projectTeamList
+resourceService -> resourceStore: findAllBySystemUserId(systemUserId)
+resourceStore -> resourceProjects**: create()
+resourceStore --> resourceService: resourceProjectsList
+resourceService -> projectStore: findProjectById(newResDto.projectId)
+projectStore --> resourceService: project
+resourceService -> project: isInsideProjectPeriod(res)ver metodo resource para aplicar 2x em project??
+project --> resourceService: true
+resourceService -> domainService: validate(res, projectTeamList, resourceProjectsList)
+domainService -> domainService: validateAllocation(resourceProjectsList, res)
+deactivate
+domainService -> domainService: validateProjectRole(res, projectTeamList)
+deactivate
+domainService --> resourceService: result
+opt if result is true
+resourceService -> resourceStore: save(res)
+resourceStore --> resourceService:true
+end
+resourceService --> Ctrl: outputDto
+Ctrl --> Route: responseJson
+note right
+Change from json to dto hidden to simplify diagram
+end note
+[<--Route: response
+
+@enduml

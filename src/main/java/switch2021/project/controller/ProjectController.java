@@ -28,10 +28,20 @@ public class ProjectController {
         if (projStore.existByName(projectDTO.projectName)) {
             return ResponseEntity
                     .badRequest()
-                    .body(new String("Project name already exists")); //TODO criar uma Response Class para menssagens
+                    .body(new String("Project name already exists")); //TODO criar uma Response Class para mensagens
         }
 
         return new ResponseEntity<>(service.createAndSaveProject(projectDTO), HttpStatus.CREATED);
     }
 
+    @PostMapping("/editProject")
+    public ResponseEntity <?> editProject (@Valid @RequestBody ProjectDTO projectDTO) {
+        if (projStore.existByName(projectDTO.projectName)) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new String("Project name already exists")); //TODO criar uma Response Class para mensagens
+        }
+
+        return new ResponseEntity<>(service.editProject(projectDTO), HttpStatus.OK);
+    }
 }

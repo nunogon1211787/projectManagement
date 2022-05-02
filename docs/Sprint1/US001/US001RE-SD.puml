@@ -7,27 +7,34 @@ autoactivate on
 autonumber
 
 actor "SM/Team Member" as User
-participant ": RegisterUserUI" as Ui
+participant ": RegisterUserRoute" as Ui
 participant ": RegisterUserController" as Ctrl
 participant ": RegisterUserService" as Serv
-participant "dto: RegisterUserDTO" as RUDTO
-participant ": UserProfileStore" as UPStore
-participant "visitor : UserProfile" as UP
-participant "visitorID : UserProfileID" as UPID
+'participant "dto: RegisterUserDTO" as RUDTO
+participant ": IUserProfileRepo" as UPStore
+participant "visitor\n : UserProfile" as UP
+participant "visitorID\n : UserProfileID" as UPID
 'participant "visitorDesc : Description" as Desc
-participant ": SystemUserFactory" as Fact
-participant "newUser : SystemUser" as SU
-participant ": SystemUserStore" as SUStore
+participant ": ISystemUserFactory" as Fact
+participant " email\n : Email" as email
+participant " systemUserID\n : SystemUserID" as SUID
+participant "newUser\n : SystemUser" as SU
+participant " name : Name" as name
+participant ": ISystemUserRepo" as SUStore
 participant ": SystemUserMapper" as mapper
 participant "outDTO : OutputUserDTO" as OutDTO
 
 User->Ui : starts the registration\n of a new SystemUser
 Ui--> User: requests data (userName,\n email, function, password,\n passwordConfirmation, photo)
 User->Ui: types requested data
-Ui->Ctrl: registerUser(dto)
-Ctrl->Serv: createAndSaveSystemUser(dto)
-deactivate UPStore
+Ui->Ctrl: registerUser(infoDTO)
+Ctrl->Serv: createAndSaveSystemUser(infoDTO)
+opt validate return true
+Serv->Serv:password = validatePasswords(\ninfoDTO.password,\n infoDTO.passwordConfirmation)
+deactivate
+end
 Serv->UPStore: getUserProfile("Visitor")
+note over UPStore: loop hidden to simplify the diagram
 /'loop for each known userProfile
 UPStore->UP: getUserProfileID()
 UP->UPID: getUserProfileName()
@@ -39,11 +46,19 @@ end´'/
 UPStore-->Serv:visitor
 Serv->UP: getUserProfileID()
 UP-->Serv:visitorID
-Serv->Fact: createSystemUser(dto.userName, dto.email, dto.funcion, dto.password, dto.passwordConfirmation, dto.photo, visitorID)
-Fact->SU**: createSystemUser(userName,\n email, function, password,\n passwordConfirmation,\n photo, visitorId)
+Serv->Fact: createSystemUser(infoDTO.userName, infoDTO.email, infoDTO.function, password, infoDTO.photo, visitorID)
+Fact->email**: createEmail(emailText)
+Fact->SUID**: createSystemUserID(email)
+Fact->SU**: createSystemUser(systemUserID)
+Fact->name**: createName(nameText)
+SU->SU: setUserName(name)
+deactivate
+note over SU: other v.o.'s creation and, respectively, System User setters are hidden to simplify the diagram
+SU->SU: assignProfileIdToUser(visitorId)
+deactivate
 Fact-->Serv: newUser
 Serv->SUStore: saveSystemUser(newUser)
-SUStore->SUStore: existsByEmail(email)
+SUStore->SUStore: existsByEmail(emailText)
 deactivate SUStore
 SUStore->SUStore: add(newUser)
 deactivate SUStore
@@ -52,6 +67,6 @@ Serv->mapper:toDto(newUser)
 mapper->OutDTO**: create()
 mapper-->Serv:outDTO
 Serv-->Ctrl:outDTO
-Ctrl-->Ui:outDTO
-Ui-->User:Informs Operation Success
+Ctrl-->Ui:response
+Ui-->User:User registered successfully!
 @enduml

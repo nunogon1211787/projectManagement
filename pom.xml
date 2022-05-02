@@ -78,7 +78,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>3.2.4</version>
+            <version>3.7.7</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -143,11 +143,11 @@
             <artifactId>spring-beans</artifactId>
             <version>5.3.18</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.commons</groupId>-->
+        <!--            <artifactId>commons-lang3</artifactId>-->
+        <!--            <version>3.12.0</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>org.netbeans.lib</groupId>
             <artifactId>cvsclient</artifactId>
@@ -187,6 +187,7 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
+
                 <configuration>
                     <!-- new configuration needed for coverage per test -->
                     <properties>
@@ -239,19 +240,19 @@
                 <configuration>
                     <targetClasses>
                         <param>switch2021.project.model.*</param>
-<!--                        <param>switch2021.project.utils.*</param>-->
+                        <!--                        <param>switch2021.project.utils.*</param>-->
                         <param>switch2021.project.controller.*</param>
                     </targetClasses>
                     <targetTests>
                         <param>switch2021.project.model.*</param>
-<!--                        <param>switch2021.project.utils.*</param>-->
+                        <!--                        <param>switch2021.project.utils.*</param>-->
                         <param>switch2021.project.controller.*</param>
                     </targetTests>
                     <outputFormats>
                         <outputFormat>XML</outputFormat>
                         <outputFormat>HTML</outputFormat>
                     </outputFormats>
-<!--                    <verbose>true</verbose>-->
+                    <!--                    <verbose>true</verbose>-->
                 </configuration>
             </plugin>
 

@@ -32,20 +32,9 @@ public class ProjectReeng {
     private LocalDate endDate;
 
 
-    public ProjectReeng(String name, String description, String businessSector, LocalDate startDate,
-                        int numberOfSprints, double budget) {
+    public ProjectReeng(ProjectID id) {
 
-        if(startDate.isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("Project can´t start before today's date");
-        }
-
-        this.projectName = new Description(name);
-        this.description = new Description(description);
-        this.businessSector = new BusinessSector(businessSector);
-        this.projectStatus = ProjectStatusEnum.PLANNED;
-        this.startDate = startDate;
-        this.numberOfSprints = new NumberOfSprints(numberOfSprints);
-        this.budget = new Budget(budget);
+        this.projectCode = id;
 
     }
 
@@ -56,5 +45,21 @@ public class ProjectReeng {
     public boolean hasCode(String code) {
         return this.projectCode.getCode().equalsIgnoreCase(code);
     }
+
+    public boolean isActiveInThisDate(LocalDate date) {
+
+        boolean result = false;
+
+        if(this.startDate.isBefore(date) || this.startDate.isEqual(date)){
+
+            if(this.endDate.isEqual(date) || this.endDate.isAfter(date)){
+                result = true;
+            }
+
+        }
+
+        return result;
+    }
+
 
 }

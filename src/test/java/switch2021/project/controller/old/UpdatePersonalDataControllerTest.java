@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UpdatePersonalDataControllerTest {
 
 
-    @Test
+/*    @Test
     public void getUser() {
         //Arrange
         Company company = new Company();
@@ -26,6 +26,8 @@ public class UpdatePersonalDataControllerTest {
         //Assert
         assertEquals(joana, userResult);
     }
+
+ */
 
 }
 

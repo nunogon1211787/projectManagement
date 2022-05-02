@@ -21,15 +21,13 @@ class "SprintStore" as store << Repository >> {
 -sprints : List<Sprint>
 + save(newSprint)
 + existsBySprintId(SprintID)
-'-add(newSprint)
 }
 }
 }
-
 package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
 package "App Service" <<Folder>>{
 class "CreateSprintService" as service << Component >> {
-+createAndSaveSprint(dto)
++createAndSaveSprint(SprintDTO)
 }
 }
 package "Repositories Interface" <<Folder>>{
@@ -40,7 +38,7 @@ interface "SprintRepositoryInterface" as repo << Interface >>{
 }
 package "Factory Interface" <<Folder>>{
 interface "ISprintFactory" as factoryInterface << Interface >>{
-+createSprint(projectID, sprintID, name)
++createSprint(SprintDTO)
 }
 }
 }
@@ -50,15 +48,6 @@ class "SprintDTO" as dto << Component >> {
 - sprintID : SprintID
 - projectID : ProjectID
 - name : Description
-+ getProjectID()
-+ getSprintID()
-+ getTName()
-}
-}
-package "DTO" <<Folder>> {
-package "OutputSprintDTO" <<Folder>>{
-class "OutputSprintDTO" as outDto << Component >> {
-- sprintID : SprintID
 }
 }
 package "DTO" <<Folder>> {
@@ -75,33 +64,34 @@ class "Sprint" as sprint << Root >> {
 - sprintID : SprintID
 - projectID : ProjectID
 - name : Description
-+ Sprint(projectID, sprintID, name)
++ Sprint(sprintID)
 }
 }
 package "Factory" <<Folder>>{
 class "SprintFactory" as sprintF << Factory >> {
-+createSprint(projectID, sprintID, name)
++createSprint(SprintDTO)
 }
 }
 package "Value Object" <<Folder>>{
 class "SprintID" as sprintID << Value Object >> {
--sprintID : SprintID
-+sprintID()
+-projectID : ProjectID
+-sprintName : Description
++sprintID(projectID, sprintName)
 }
 }
 
 
 route ..> ctrl
 ctrl..> service
-mapper..>outDto
 store..|> repo
 service..> mapper
-service..> dto
+sprintF..> dto
 service..> factoryInterface
 service..left> repo
 sprintF"1"*-d-"1" sprintID
 sprintF..right>sprint
 sprintF..up|>factoryInterface
+mapper ..> dto
 
 
 

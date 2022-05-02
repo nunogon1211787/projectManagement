@@ -2,7 +2,6 @@ package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import switch2021.project.dto.OutputUsDTO;
 import switch2021.project.dto.UserStoryDTO;
 import switch2021.project.factoryInterface.IUserStoryFactory;
 import switch2021.project.interfaces.IRepoUserStory;
@@ -17,48 +16,24 @@ public class CreateUserStoryService {
      * Attributes
      **/
     @Autowired
-    private IRepoUserStory IRepoUserStory;
+    private IRepoUserStory iRepoUserStory;
     @Autowired
     private UserStoryMapper userStoryMapper;
     @Autowired
-    private IUserStoryFactory IUserStoryFactory;
-
-
-    /**
-     * Constructor
-     **/
-
-    public CreateUserStoryService() {
-
-    }
+    private IUserStoryFactory iUserStoryFactory;
 
 
     /**
      * Create and save a User Story
      *
-     * @param dto
      */
-    public OutputUsDTO createAndSaveUserStory(UserStoryDTO dto) {
+    public UserStoryDTO createAndSaveUserStory(UserStoryDTO userStoryDTO) {
 
-        UserStory newUserStory = IUserStoryFactory.createUserStory(dto.getProjectId(), dto.getUserStoryId(),
-                dto.getTitle(), dto.getPriority(), dto.getDescription(), dto.getTimeEstimate());
+        UserStory newUserStory = iUserStoryFactory.createUserStory(userStoryDTO);
 
-        IRepoUserStory.save(newUserStory);
+        iRepoUserStory.save(newUserStory);
 
         return userStoryMapper.toDto(newUserStory);
-    }
-
-    /**
-     * Finds a user story using given ID.
-     *
-     * @param userStoryID id
-     * @return userStoryDTO if found, else {@code null}
-     */
-
-    //TODO -----> Manter método aqui?
-    public OutputUsDTO findUserStoryById(String userStoryID) {
-        UserStory userStoryById = this.IRepoUserStory.findUserStoryById(userStoryID);
-        return this.userStoryMapper.toDto(userStoryById);
     }
 
 }

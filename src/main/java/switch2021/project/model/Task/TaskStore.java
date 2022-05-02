@@ -1,6 +1,7 @@
 package switch2021.project.model.Task;
 
 import lombok.Getter;
+import switch2021.project.interfaces.TaskContainerID;
 import switch2021.project.mapper.old.TaskMapper;
 import switch2021.project.dto.old.CreateTaskDTO;
 import switch2021.project.model.Project.Project;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
+@Deprecated
 public class TaskStore {
 
     /**
@@ -32,6 +34,10 @@ public class TaskStore {
         return new Task(name, description, effortEstimate, type, responsible);
     }
 
+    public Task createTaskContainerID(String name, String description, double effortEstimate, TaskTypeEnum type, Resource responsible, TaskContainerID taskContainerID){
+        return new Task(name, description, effortEstimate, type, responsible, taskContainerID);
+    }
+
     // Create task with DTO and Mapper. US032 - Sprint 3
     public boolean createSprintTask(CreateTaskDTO dto, TaskMapper mapper, Project proj){
         Task newTask = mapper.toModel(dto, proj);
@@ -41,6 +47,8 @@ public class TaskStore {
 
     public boolean createUsTask(CreateTaskDTO dto, TaskMapper mapper, Project proj){
         Task newTask = mapper.toModel(dto, proj);
+
+//        newTask.setIdTask(new ProjectID(projectList.size() + 1));
 
         return saveTask(newTask);
     }
@@ -52,7 +60,7 @@ public class TaskStore {
         List<String> tasksNames = new ArrayList<>();
 
         for (Task task : this.taskList) {
-            tasksNames.add(task.getName().getNameF());
+            tasksNames.add(task.getName().getText());
         }
         return tasksNames;
     }
@@ -124,7 +132,7 @@ public class TaskStore {
         return this.taskList.contains(task);
     }
 
-
+/*
     /**
      * Method to get list of tasks within a sprint
      */

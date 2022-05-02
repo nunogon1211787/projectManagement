@@ -109,10 +109,10 @@ public class Project implements Entity {
 
     public boolean validateResource(Resource resource) {
         boolean msg = true;
-        String x = resource.getUser().getSystemUserId().getEmail().getEmail();
+        String x = resource.getUser().getSystemUserId().getEmail().getEmailText();
 
         for (Resource i : projectTeam.getProjectTeamList()) {
-            if (i.getUser().getSystemUserId().getEmail().getEmail().equals(x)) {
+            if (i.getUser().getSystemUserId().getEmail().getEmailText().equals(x)) {
                 msg = false;
                 break;
             }

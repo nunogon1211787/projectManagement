@@ -43,12 +43,12 @@ public class ViewStatusOfActivitiesInAProjectController {
         this.project = projectStore.findById(code);
         return this.project;
     }
-
-
-    /**
-     * Method to get list of project activities
-     **/
-    public List<Task> getListOfProjectActivities() {
-        return new ArrayList<>(project.getSprintList().getListOfAllAActivitiesOfAProject());
-    }
+//
+//
+//    /**
+//     * Method to get list of project activities
+//     **/
+//    public List<Task> getListOfProjectActivities() {
+//        return new ArrayList<>(project.getSprintList().getListOfAllAActivitiesOfAProject());
+//    }
 }

@@ -38,7 +38,7 @@ public class CreateUserProfileControllerTest {
             createUserProfileController.createUserProfile(name);
         });
     }
-
+/*
     @Test
     @DisplayName("Return exception message, profile already exist")
     public void createProfileAlreadyExist() {
@@ -54,5 +54,7 @@ public class CreateUserProfileControllerTest {
         // Assert
         assertTrue(exception.getMessage().contains("Repeated user profile name inserted."));
     }
+
+ */
 
 }

@@ -27,7 +27,7 @@ public class SearchSystemUsersController {
      * Getter method to receive an user profile list to send to UI
      **/
     public List<UserProfile> getUserProfileList() {
-        return company.getUserProfileStore().getUserProfileList();
+        return company.getUserProfileStore().findAllUserProfiles();
     }
 
 
@@ -38,7 +38,7 @@ public class SearchSystemUsersController {
         List<UserProfile> profileChoosenList = new ArrayList<>();
 
         for (String s : profileChoosenNameList) {
-            profileChoosenList.add(this.company.getUserProfileStore().getUserProfile(s));
+            profileChoosenList.add(this.company.getUserProfileStore().findUserProfileByDescription(s));
         }
         return company.getSystemUserStore().searchUsers(name, email, function, state, profileChoosenList);
     }

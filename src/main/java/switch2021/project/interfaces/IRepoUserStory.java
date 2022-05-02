@@ -62,7 +62,6 @@ public interface IRepoUserStory {
     /**
      * Save user story
      *
-     * @param newUserStory
      * @return boolean result
      */
 

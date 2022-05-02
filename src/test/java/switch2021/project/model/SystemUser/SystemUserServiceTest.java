@@ -23,7 +23,7 @@ public class SystemUserServiceTest {
         SystemUserStore systemUserStore = company.getSystemUserStore();
         UserProfileRepository userProfileStore = company.getUserProfileStore();
         SystemUserFactory systemUserFactory = new SystemUserFactory();
-        SystemUserService systemUserService = new SystemUserService(systemUserStore, userProfileStore, systemUserFactory);
+        RegisterUserService systemUserService = new RegisterUserService(systemUserStore, userProfileStore, systemUserFactory);
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
         String password = "Qwerty_1";
@@ -48,7 +48,7 @@ public class SystemUserServiceTest {
         Company company = new Company();
         SystemUserStore systemUserStore = company.getSystemUserStore();
         UserProfileRepository userProfileStore = company.getUserProfileStore();
-        SystemUserService systemUserService = new SystemUserService(systemUserStore, userProfileStore);
+        RegisterUserService systemUserService = new RegisterUserService(systemUserStore, userProfileStore);
         String userName = "manueloliveira";
         String email = "manueloliveira@beaver.com";
         String password = "Qwerty_1";

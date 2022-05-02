@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.SprintRepositoryInterface;
 import switch2021.project.repositories.ProjectTeam;
-import switch2021.project.model.Task.Task;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -92,17 +91,17 @@ public class SprintStore implements SprintRepositoryInterface{
         this.sprints.remove(sprint);
         return true;
     }
-
-    /**
-     * Method to return all activities in a project
-     */
-    public List<Task> getListOfAllAActivitiesOfAProject() {
-        List<Task> allActivitiesInAProject = new ArrayList<>();
-        for (Sprint i : sprints) {
-            allActivitiesInAProject.addAll(i.getListOfTasksOfASprint());
-        }
-        return allActivitiesInAProject;
-    }
+//
+//    /**
+//     * Method to return all activities in a project - //TODO Método David
+//     */
+//    public List<Task> getListOfAllAActivitiesOfAProject() {
+//        List<Task> allActivitiesInAProject = new ArrayList<>();
+//        for (Sprint i : sprints) {
+//            allActivitiesInAProject.addAll(i.getListOfTasksOfASprint());
+//        }
+//        return allActivitiesInAProject;
+//    }
 
     /** Method to Validate a Sprint **/
     public boolean validateIfSprintAlreadyExists(Sprint sprint) {

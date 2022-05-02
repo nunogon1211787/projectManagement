@@ -12,6 +12,6 @@ participant ":System" as System
 activate ProjectManager
 
 ProjectManager -> System: Asks to Start a Sprint
-System --> ProjectManager: Confirmation Information Success
+System --> ProjectManager: Informs Operation Success
 
 @enduml

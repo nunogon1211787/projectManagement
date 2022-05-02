@@ -1,7 +1,6 @@
 package switch2021.project.controller.old;
 
 import switch2021.project.dto.old.UserStoryStatusDTO;
-import switch2021.project.mapper.old.ScrumBoardMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
@@ -15,29 +14,29 @@ public class GetScrumBoardController {
     /**
      * Attributes
      **/
-    private final Company company;
-    private final ScrumBoardMapper mapper;
+//    private final Company company;
+//    private final ScrumBoardMapper mapper;
     private Sprint sprint;
     private Project project;
     private List<UserStory> userStoryList;
 
 
-    /**
-     * Constructor to test (without SINGLETON)
-     **/
-    public GetScrumBoardController(Company company, ScrumBoardMapper mapper) {
-        this.company = company;
-        this.mapper = mapper;
-    }
+//    /**
+//     * Constructor to test (without SINGLETON)
+//     **/
+//    public GetScrumBoardController(Company company, ScrumBoardMapper mapper) {
+//        this.company = company;
+//        this.mapper = mapper;
+//    }
 
 
     /**
      * Getter's
      */
-    public Project getProject(String projectCode) {
-        project = company.getProjectStore().findById(projectCode);
-        return project;
-    }
+//    public Project getProject(String projectCode) {
+//        project = company.getProjectStore().findById(projectCode);
+//        return project;
+//    }
 
     public Sprint getCurrentSprint() {
         sprint = project.getCurrentSprint();
@@ -55,12 +54,12 @@ public class GetScrumBoardController {
     }
 
 
-    /**
-     * Method
-     **/
-    public List<UserStoryStatusDTO> getScrumBoard() {
-        return this.mapper.toDtoList(userStoryList);
-    }
+//    /**
+//     * Method
+//     **/
+//    public List<UserStoryStatusDTO> getScrumBoard() {
+//        return this.mapper.toDtoList(userStoryList);
+//    }
 
     //Direct Method
    /* public List<ScrumBoardDTO> getScrumBoard2(String projectCode) {
