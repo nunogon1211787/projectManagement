@@ -1,8 +1,6 @@
 package switch2021.project.controller.old;
 
 import switch2021.project.model.Company;
-import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.stores.SystemUserStore;
 
 public class ChangePasswordController {
 
@@ -23,7 +21,7 @@ public class ChangePasswordController {
      */
 
 /*    public boolean changePassword(String email, String oldPasswordUI, String newPassword, String newPasswordConfirmation) {
-        SystemUserStore systemUserStore = company.getSystemUserStore();
+        SystemUserRepository systemUserStore = company.getSystemUserStore();
        SystemUser user = systemUserStore.findSystemUserByEmail(email);
        return user.updatePassword(oldPasswordUI, newPassword, newPasswordConfirmation);
     }
