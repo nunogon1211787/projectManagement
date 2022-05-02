@@ -2,7 +2,7 @@ package switch2021.project.controller.old;
 
 import switch2021.project.model.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.stores.SystemUserStore;
+import switch2021.project.repositories.SystemUserRepository;
 import switch2021.project.repositories.UserProfileRepository;
 import switch2021.project.model.UserProfile.UserProfile;
 
@@ -14,7 +14,7 @@ public class UpdateUserProfileController {
      * Attributes
      **/
     private final UserProfileRepository userProfileStore;
-    private final SystemUserStore systemUserStore;
+    private final SystemUserRepository systemUserStore;
     private SystemUser user;
 
 
