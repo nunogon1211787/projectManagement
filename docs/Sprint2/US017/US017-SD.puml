@@ -8,12 +8,13 @@ autonumber
 actor "Authenticated User" as actor
 participant ": GetCurrentProjectsByUserRoute" as route
 participant ": GetCurrentProjectsByUserController" as ctrl
+participant "dataDto : DataDto" as dataDto
 participant ": GetCurrentProjectsByUserService" as srv
 participant ": IRepositorySystemUser" as userStore
 participant ": IRepositoryResource" as resStore
-participant "resources : List<Resource>" as resList
+participant "userResources : List<Resource>" as resList
 participant ": FilterResourcesService" as dsrv
-participant "currentResources : List<Resource>" as resList2
+participant "currentUserResources : List<Resource>" as resList2
 participant "currentResourcesByUser : List<Resource>" as resList3
 participant "resourceProjects : List<ProjectId>" as resList4
 participant "res : Resource" as res
@@ -22,55 +23,36 @@ participant "projects : List<Project>" as projList
 participant ": IRepositoryProject" as projStore
 participant "proj : Project" as proj
 participant ": GetCurrentProjectsByUserMapper" as map
-participant "dataDto : DataDto" as dataDto
 participant "projectsDto : List<ProjectDto>" as listDto
 participant "projDto : ProjectDto" as dto
-participant "projectsJson : List<ProjectJson>" as listJson
-participant "projJson : ProjectJson" as json
+participant "ProjectsResponse : ResponseEntity" as json
 
 activate actor
 autoactivate on
 
-actor -> route : GET /users/{userId}/resources?date="today"
-note over actor, route : The expression "today" represent the actual date in the moment of the request.
+actor -> route : GET /users/{userId}/resources?date={date}
 route -> ctrl : getCurrentProjectsByUser()
-ctrl -> map : data2dto(data)
-map --> dataDto**: create()
-note over map : The sequence of this method are hidden to simplify the diagram.
-map --> ctrl : dataDto
 ctrl -> srv : getCurrentProjectsByUser(dataDto)
+note over ctrl, srv : The object dataDto is created with variables userId and date in the path.
 srv -> userStore : existById(dataDto.userId) : true
 deactivate
-srv -> resStore : findAll()
+srv -> resStore : findAllByUser()
 resStore --> resList** : create()
-resStore --> srv : resources
-srv -> dsrv : getCurrentResources()
+resStore --> srv : userResources
+srv -> dsrv : currentResourcesByDate(userResources, dataDto.date)
 dsrv --> resList2**: create()
 loop for all known resource in the list
 dsrv -> resList : get(i) : res
 deactivate
-dsrv -> res : isCurrent()
+dsrv -> res : isCurrentByDate(dataDto.date)
 res --> dsrv : result
 opt if result is true
 dsrv -> resList2 : add(res) : true
 deactivate
 end
 end
-dsrv --> srv : currentResources
-srv -> dsrv : getResourcesByUser(dataDto.userId)
-dsrv --> resList3**: create()
-loop for all known resource in the list
-dsrv -> resList2 : get(i) : res
-deactivate
-dsrv -> res : isCurrent()
-res --> dsrv : result
-opt if result is true
-dsrv -> resList3 : add(res) : true
-deactivate
-end
-end
-dsrv --> srv : currentResourcesByUser
-srv -> dsrv : getResourceProjects()
+dsrv --> srv : currentUserResources
+srv -> dsrv : listProjectsOfResources(currentUserResources)
 dsrv --> resList4**: create()
 loop for all known resource in the list
 dsrv -> resList3 : get(i) : res
@@ -83,21 +65,19 @@ end
 dsrv --> srv : currentResourceProjectsByUser
 srv --> projList**: create()
 loop for all known projectId in the list
-srv -> projStore : findByProjectId(projId)
+srv -> projStore : findById(projId)
 projStore --> srv : proj
 srv -> projList : add(proj) : true
 deactivate
 end
-srv -> map : model2Dto()
+srv -> map : model2Dto(projects)
 map --> listDto**: create()
 note over map : The sequence of this method are hidden to simplify the diagram.
 map --> srv : projectsDto
 srv --> ctrl : projectsDto
-ctrl -> map : dto2Json()
-map --> listJson**: create()
-note over map : The sequence of this method are hidden to simplify the diagram.
-map --> ctrl : projectsJson
-ctrl --> route : projectsJson
+ctrl --> json**: create()
+note over ctrl, json : The Controller uses the Response Entity class to create a response in JSON format using the dto received from Service layer and defining the HTTP status.
+ctrl --> route : projectsResponse
 route --> actor : Show all projects that the user are currently allocated to
 
 

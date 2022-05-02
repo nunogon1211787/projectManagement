@@ -8,22 +8,22 @@ import switch2021.project.model.Project.ProjectReeng;
 @Component
 public class ProjectMapper {
 
-    public OutputProjectDTO model2Dto(Project project) {
-
-        OutputProjectDTO projDto = new OutputProjectDTO();
-
-        projDto.code = project.getProjectCode().getCode();
-        projDto.name = project.getProjectName().getText();
-        projDto.desc = project.getDescription().getText();
-        projDto.customer = project.getCustomer().getCustomerName().getText();
-        projDto.sector = project.getBusinessSector().getDescription().getText();
-        projDto.typo = project.getTypology().getId_description().getDescription().getText();
-        projDto.budget = project.getBudget().toString();
-        projDto.status = project.getProjectStatus().toString();
-        projDto.startDate = project.getStartDate().toString();
-
-        return projDto;
-    }
+//    public OutputProjectDTO model2Dto(Project project) {
+//
+//        OutputProjectDTO projDto = new OutputProjectDTO();
+//
+//        projDto.code = project.getProjectCode().getCode();
+//        projDto.name = project.getProjectName().getText();
+//        projDto.desc = project.getDescription().getText();
+//        projDto.customer = project.getCustomer().getCustomerName().getText();
+//        projDto.sector = project.getBusinessSector().getDescription().getText();
+//        projDto.typo = project.getTypology().getId_description().getDescription().getText();
+//        projDto.budget = project.getBudget().toString();
+//        projDto.status = project.getProjectStatus().toString();
+//        projDto.startDate = project.getStartDate().toString();
+//
+//        return projDto;
+//    }
 
     public OutputProjectDTO model2Dto(ProjectReeng project) {
 
@@ -35,8 +35,8 @@ public class ProjectMapper {
         projDto.customer = project.getCustomer().getCustomerName().getText();
         projDto.sector = project.getBusinessSector().getDescription().getText();
         projDto.typo = project.getTypology().getId_description().getDescription().getText();
-        projDto.budget = project.getBudget().toString();
-        projDto.status = project.getProjectStatus().toString();
+        projDto.budget = String.valueOf(project.getBudget().getBudgetVO());
+        projDto.status = project.getProjectStatus().name();
         projDto.startDate = project.getStartDate().toString();
 
         return projDto;

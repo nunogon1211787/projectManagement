@@ -163,7 +163,7 @@
     </dependencies>
     <build>
         <plugins>
-            <!-- Required for compiling the project usign maven -->
+            <!-- Required for compiling the project using maven -->
             <plugin><!-- Compiler configuration-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
