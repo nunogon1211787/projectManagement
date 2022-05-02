@@ -10,12 +10,13 @@ actor "Director" as actor
 participant ":ShowCurrentProjectTeamRoute" as route
 participant ":ShowCurrentProjectTeamController" as ctrl
 participant "dto :IdDto" as dataDto
+participant "dateDto :DateDto" as dateDto
 participant "srv :ShowCurrentProjectTeamService" as srv
 participant "projRepo :ProjectRepositoryInterface" as projrepo
 participant "resRepo :ResourceRepositoryInterface" as resrepo
 participant "resources :List<Resource>" as resList
 participant "dsrv :ManageResourcesService" as dsrv
-participant "projectTeam :List<Resource>" as resList2
+participant "currentResources :List<Resource>" as resList2
 participant "res :Resource" as res
 participant "map :ResourceMapper" as map
 participant "resourcesDto :List<OutputResourceDto>" as dtoList
@@ -26,27 +27,27 @@ activate actor
 autoactivate on
 
 actor -> route : GET /projects/{id}/resources
-route -> ctrl : showCurrentProjectTeam(dto)
-ctrl -> srv : showCurrentProjectTeam(dto)
+route -> ctrl : showCurrentProjectTeam()
+ctrl -> srv : showCurrentProjectTeam(dto, dateDto)
 srv -> projrepo: existById(dto.id) : true
 deactivate
 srv -> resrepo : findByProject(dto.id)
 resrepo --> resList** : create()
 note over resrepo : The implementation of this method will be done in any class that implements this interface.
 resrepo --> srv : resources
-srv -> dsrv : currentProjectTeam(resources, dto.date)
+srv -> dsrv : currentResourcesByDate(resources, dateDto.date)
 dsrv --> resList2** : create()
 loop for all resources (res) in the resources list
 dsrv -> resList : get() : res
 deactivate
-dsrv -> res : isActiveToThisDate(dto.date)
+dsrv -> res : isActiveToThisDate(dateDto.date)
 res --> dsrv : result
 opt if result is true
 dsrv -> resList2 : add(res)
 deactivate
 end
 end
-dsrv --> srv : projectTeam
+dsrv --> srv : currentResources
 srv --> dtoList** : create()
 loop for all resources (res) in the projectTeam list
 srv -> map : model2Dto(res)

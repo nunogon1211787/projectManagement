@@ -8,13 +8,13 @@ skinparam classAttributeIconSize 0
 package "System" <<Rectangle>> {
 
 package "Infrastructure" <<Rectangle>> #lightblue  {
-class "GetCurrentProjectsByUserRoute" as route << Component >>
+class "ShowAllCurrentProjectsByUserRoute" as route << Component >>
 }
 
 package "Interface Adapters" <<Rectangle>> #lightgreen {
 package "Controllers" <<rectangle>>{
-class "GetCurrentProjectsByUserController" as ctrl << Component >> {
-+getCurrentProjectsBySystemUser()
+class "ShowAllCurrentProjectsByUserController" as ctrl << Component >> {
++showCurrentProjectsBySystemUser()
 }
 }
 package "Repositories" <<rectangle>>{
@@ -24,19 +24,19 @@ class "SystemUserStore" as userStore << Repository >> {
 }
 class "ResourceStore" as resStore << Repository >> {
 -resources : List<Resource>
-+findAll()
++findAllByUser()
 }
 class "ProjectStore" as projStore << Repository >> {
 -projects : List<Project>
-+findByProjectId()
++findById()
 }
 }
 }
 
 package "Application Service" <<Rectangle>> #lightpink{
 package "App Services" <<rectangle>>{
-class "GetCurrentProjectsByUserService" as srv << Service >> {
-+getCurrentProjectsBySystemUser()
+class "ShowAllCurrentProjectsByUserService" as srv << Service >> {
++showCurrentProjectsBySystemUser()
 }
 }
 package "IRepositories" <<rectangle>>{
@@ -44,35 +44,29 @@ interface "ISystemUserRepository" as userRepo{
 existById()
 }
 interface "IResourceRepository" as resRepo{
-findAll()
+findAllByUser()
 }
 interface "IProjectRepository" as projRepo{
-findByProjectId()
+findById()
 }
 }
 }
 
 package "Domain" <<Rectangle>> #burlywood{
 package "Services" <<Rectangle>>{
-class "FilterResourcesService" as dsrv <<Service>>{
-+getCurrentResources()
-+getResourcesByUser()
-+getResourceProjects()
+class "ManageResourcesService" as dsrv <<Service>>{
++currentResourcesByDate()
++listProjectsOfTheResources()
 }
 }
 package "Aggregates" <<rectangle>>{
 package "SystemUser" <<Rectangle>>{
-entity "SystemUser" as user << Root >> {
-
-}
+entity "SystemUser" as user << Root >>
 }
 package "Resource" <<Rectangle>>{
 entity "Resource" as res << Root >>{
--startDate : LocalDate
--endDate : LocalDate
-+hasSystemUserId()
-+isCurrent()
-+getProjectId()
++isActiveToThisDate()
++getProject()
 }
 }
 package "Project" <<Rectangle>>{
@@ -91,24 +85,14 @@ projectId : ProjectCode
 }
 
 package "DTO" <<rectangle>>{
-class "GetCurrentProjectsByUserMapper" as map <<Component>> {
-+ data2Dto()
+class "ProjectMapper" as map <<Component>> {
 + model2Dto()
-+ dto2Json()
 }
-class "DataDTO" as dataDto <<Component>>{
-+ userId : String
+class "DateDTO" as dataDto <<Component>>
+class "IdDTO" as idDto <<Component>>
+class "ProjectDTO" as dto <<Component>>
 }
-class "ProjectDTO" as dto <<Component>>{
-+ projectName : String
-+ projectCode : String
-}
-
-class "ProjectJson" as json <<Component>>{
-+ projectName : String
-+ projectCode : String
-}
-}
+class "ResponseEntity" as json <<Component>>
 }
 
 route .d.> ctrl
@@ -129,11 +113,13 @@ res "1"*-d-"1" rId
 proj "1"*-d-"1" pId
 rId "1" o- "1" pId
 rId "1" o- "1" uId
-ctrl .d.> map
 srv .u.> map
 map .l.> dto
-map .l.> json
+ctrl .l.> json
 map ..> proj
-map ..> dataDto
+ctrl .r.> dataDto
+ctrl .r.> idDto
+srv .r.> dataDto
+srv .r.> idDto
 
 @enduml

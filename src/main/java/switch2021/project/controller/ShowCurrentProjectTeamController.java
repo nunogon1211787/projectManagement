@@ -3,10 +3,8 @@ package switch2021.project.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import switch2021.project.dto.DateDTO;
 import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.OutputResourceDTO;
 import switch2021.project.service.ShowCurrentProjectTeamService;
@@ -22,9 +20,9 @@ public class ShowCurrentProjectTeamController {
 
 
     @GetMapping
-    public ResponseEntity<Object> showCurrentProjectTeam(@PathVariable IdDTO dto){
+    public ResponseEntity<Object> showCurrentProjectTeam(@RequestParam("project") IdDTO dto, @RequestParam("date") DateDTO dateDto){
 
-        List<OutputResourceDTO> resourcesDto = srv.showCurrentProjectTeam(dto);
+        List<OutputResourceDTO> resourcesDto = srv.showCurrentProjectTeam(dto, dateDto);
 
         return new ResponseEntity<>(resourcesDto, HttpStatus.OK);
 

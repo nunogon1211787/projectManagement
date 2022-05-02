@@ -71,7 +71,7 @@ class "ProjectId" as pId << Value Object >>
 
 package "Services" <<Rectangle>>{
 class "ManageResourcesService" as dsrv <<Service>>{
-+currentProjectTeam()
++currentResourcesByDate()
 }
 }
 }
@@ -80,9 +80,8 @@ package "DTO" <<Rectangle>>{
 class "ResourceMapper" as map << Component >>{
 +model2Dto()
 }
-class "IdDto" as dataDto {
-id : String
-}
+class "IdDto" as dataDto
+class "DateDto" as dateDto
 class "OutputResourceDto" as dto
 }
 
@@ -111,7 +110,10 @@ srv .u.> map
 
 dsrv ..> res
 
-ctrl ..> dataDto
+ctrl .r.> dataDto
+ctrl .r.> dateDto
+srv .r.> dataDto
+srv .r.> dateDto
 map .l.> dto
 ctrl .l.> json
 
