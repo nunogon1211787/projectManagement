@@ -1,38 +1,93 @@
 @startuml
 
-hide circle
 skinparam classAttributeIconSize 0
 
 title US012 - "As Director, I want to create a new project typology."
 
-class CreateUpdateUserProfileUI {
+package "Infraestructure" #application {
+    class CreateTypologyRoute <<Component>>{
+    }
 }
 
-class CreateUpdateUserProfileController {
-+CreateUpdateUserProfileController()
-+createTypology (description)
+package "Interface Adapter" #technology {
+    class CreateTypologyController <<Component>>{
+    +createTypology(inputDto)
+    }
+
+    class TypologyRepository <<Repository>>{
+    +RepositoryTypology()
+    +findById (id_Typology)
+    +findAll ()
+    +saveTypology (id_Typology)
+    +validateTypology (id_Typology)
+    +delete(id_Typology)
+    }
 }
 
-class Company {
-+Company()
-+getTypologyStore()
+package "DTO" #motivation {
+    class TypologyDTO <<Component>> {
+    +TypologyDTO()
+    }
+
+    class TypologyMapper <<Component>> {
+    +TypologyMapper (typology)
+    +toDto (typology)
+    }
 }
 
-class TypologyStore {
-+TypologyStore()
-+createTypology (description)
-+saveTypology (typo)
-+validateTypology (typo)
+package "App Service API/Use Case Service" #implementation {
+    package "App Service" {
+        class CreateTypologyService <<Service>>{
+        +CreateTypologyService()
+        +createAndSaveTypology(dto.description)
+        +
+        }
+    }
+    package "Repositories Interface" {
+        class IRepositoryTypology <<(I, Violet) Interface>> {
+            +IRepositoryTypology()
+            +findById (id_Typology)
+            +findAll ()
+            +saveTypology (id_Typology)
+            +validateTypology (id_Typology)
+            +delete(id_Typology)
+        }
+    }
 }
 
-class Typology {
-+Typology (description)
+
+package "Entity/Core/Domain" #strategy {
+    package "Factory" {
+        class TypologyFactory <<"Factory">> {
+        +create (description)
+        }
+    }
+    package "Aggregate" {
+        class Typology <<Root>>{
+            +Typology (id_Typology)
+        }
+    }
+    package "Value Object"  {
+        class ID_Typology <<Value Object>>{
+        +ID_Typology (description)
+        }
+        class Description {
+        +Description(description)
+        }
+    }
 }
 
-CreateUpdateUserProfileUI ..> CreateUpdateUserProfileController
-CreateUpdateUserProfileController ..> Company
-CreateUpdateUserProfileController ..> Typology
-Company "1" o-- "1" TypologyStore: has
-TypologyStore "1" *-- "*" Typology: has
+CreateTypologyRoute -down..> CreateTypologyController
+CreateTypologyController -down..> CreateTypologyService
+CreateTypologyController -right..> TypologyMapper
+CreateTypologyService -right..> TypologyMapper
+TypologyMapper -left..>TypologyDTO
+CreateTypologyService -down..> TypologyFactory
+TypologyFactory -left..> Typology
+CreateTypologyService -right..> IRepositoryTypology
+IRepositoryTypology -up[hidden]..> TypologyRepository
+class TypologyRepository implements IRepositoryTypology
+TypologyFactory -down..> ID_Typology
+ID_Typology -left..> Description
 
 @enduml

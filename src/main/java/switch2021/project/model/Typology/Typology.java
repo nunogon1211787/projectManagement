@@ -1,6 +1,5 @@
 package switch2021.project.model.Typology;
 
-import lombok.Getter;
 import switch2021.project.model.valueObject.ID_Typology;
 import switch2021.project.utils.Entity;
 
@@ -15,7 +14,6 @@ import java.util.Objects;
  * and that will be considerate as ID for itself.
  */
 
-@Getter
 public class Typology implements Entity<Typology> {
 
     /**
@@ -27,19 +25,18 @@ public class Typology implements Entity<Typology> {
     /**
      * Constructors of typology´s class. Creates a new typology instance.
      **/
-    public Typology(String description) {
-        this.id_description = new ID_Typology(description);
+    public Typology(ID_Typology id) {
+        this.id_description = id;
     }
 
 
     /**
      * Methods
      */
+    public ID_Typology getId_description() {return this.id_description;}
+
     public boolean hasID_Description(String description) {
-       if(this.id_description.hasDescription(description)) {
-           return true;
-       }
-       return false;
+        return this.id_description.hasDescription(description);
     }
 
 
@@ -51,7 +48,7 @@ public class Typology implements Entity<Typology> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Typology that = (Typology) o;
-        return (this.id_description.equals(that.id_description));
+        return sameIdentityAs(that);
     }
 
     @Override
@@ -61,6 +58,6 @@ public class Typology implements Entity<Typology> {
 
     @Override
     public boolean sameIdentityAs(Typology other) {
-        return this.id_description.sameValueAs(other.getId_description());
+        return other != null && this.id_description.sameValueAs(other.getId_description());
     }
 }

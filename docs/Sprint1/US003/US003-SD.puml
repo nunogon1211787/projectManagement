@@ -1,0 +1,30 @@
+@startuml
+
+title US003 - "As Visitor, I want to send a request to the administrator to assign him/her a given profile."
+
+autoactivate on
+autonumber
+
+participant ":SendRequestToAssignProfileRoute" as Route
+participant ":SendRequestToAssignProfileController" as Ctrl
+participant ":SendRequestToAssignProfileService" as Service
+participant ":RepositorySystemUser" as Repository
+participant "user : SystemUser" as User
+participant "newRequest : Request" as Request
+
+
+[o-> Route: POST/users/{ID}/requests
+Route -> Ctrl: createAndAddRequest(Json)
+Ctrl -> Service: createAndAddRequest(requestDto)
+Service -> Repository: findById(requestDto.SystemUserId)
+return user
+Service -> User: createAndAddRequest(userProfileId)
+User -> Request**: create(userProfileId)
+User -> User: add(newRequest)
+deactivate User
+return true
+return true
+return response
+return response
+
+@enduml

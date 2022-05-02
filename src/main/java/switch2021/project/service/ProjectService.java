@@ -1,15 +1,16 @@
 package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.factoryInterface.ProjectFactoryInterface;
+import switch2021.project.interfaces.IRepoTypology;
 import switch2021.project.interfaces.ProjectRepositoryInterface;
 import switch2021.project.mapper.ProjectMapper;
 import switch2021.project.model.Project.ProjectReeng;
 import switch2021.project.model.Project.ProjectStatusEnum;
-import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.*;
 
 import java.time.LocalDate;
@@ -17,6 +18,8 @@ import java.time.LocalDate;
 @Service
 public class ProjectService {
 
+    @Autowired
+    private IRepoTypology iRepoTypology;
     @Autowired
     ProjectRepositoryInterface projectRepositoryInterface;
     @Autowired
@@ -52,7 +55,8 @@ public class ProjectService {
             proj.setBusinessSector(new BusinessSector(projectDTO.businessSector));
         }
         if (!projectDTO.typology.isEmpty()) {
-            proj.setTypology(new Typology(projectDTO.typology));
+            proj.setTypology(iRepoTypology.findTypologyByDescription(projectDTO.typology)); //It's a entity, should be search at the repository!
+            //This alteration must be checked!
         }
         if (!projectDTO.numberOfSprints.isEmpty()) {
             proj.setNumberOfSprints(new NumberOfSprints(Integer.parseInt(projectDTO.numberOfSprints)));
