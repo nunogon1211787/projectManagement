@@ -19,10 +19,10 @@ public interface UserProfileRepositoryInterface {
     /**
      * Save user story
      *
-     * @param profile
+     * @param newUserProfile
      * @return boolean result
      */
 
-    boolean saveUserProfile(UserProfile profile);
+    boolean saveUserProfile(UserProfile newUserProfile);
 
 }

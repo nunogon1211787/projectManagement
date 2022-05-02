@@ -7,28 +7,27 @@ import switch2021.project.utils.Entity;
 
 @Getter
 @Setter
-public class UserProfile implements Entity<UserProfile> {
+public class UserProfileReeng implements Entity<UserProfileReeng> {
 
     /**
      * Class Profile Attributes
      **/
     private final UserProfileId userProfileId;
 
-
     /**
      * Profile Constructors
      */
-    public UserProfile(String userProfileName) {
-        this.userProfileId = new UserProfileId(userProfileName);
-    }
+    public UserProfileReeng(UserProfileId userProfileName) {
 
+        this.userProfileId = userProfileName;
+    }
 
 
     /**
      * Override Methods
      **/
     @Override
-    public boolean sameIdentityAs(UserProfile other) {
+    public boolean sameIdentityAs(UserProfileReeng other) {
         return other != null && userProfileId.sameValueAs(other.userProfileId);
     }
 
@@ -37,7 +36,7 @@ public class UserProfile implements Entity<UserProfile> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserProfile that = (UserProfile) o;
+        UserProfileReeng that = (UserProfileReeng) o;
         return sameIdentityAs(that);
     }
 
@@ -47,5 +46,3 @@ public class UserProfile implements Entity<UserProfile> {
     }
 
 }
-
-
