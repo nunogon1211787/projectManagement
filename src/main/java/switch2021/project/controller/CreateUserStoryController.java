@@ -22,6 +22,10 @@ public class CreateUserStoryController {
     private CreateUserStoryService createUserStoryService;
 
 
+    public CreateUserStoryController(CreateUserStoryService createUserStoryService) {
+        this.createUserStoryService = createUserStoryService;
+    }
+
     /**
      * Create a User Story
      */

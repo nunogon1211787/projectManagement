@@ -9,6 +9,17 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UsTitleTest {
 
     @Test
+    @DisplayName("Fail create title - blank")
+    public void usTitleBlank() {
+        //Arrange
+        String usTitle = "";
+        //Act
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> new UsTitle(usTitle));
+        //Assert
+        assertEquals("Title cannot be blank", exception.getMessage());
+    }
+
+    @Test
     @DisplayName("Validate that tile begins with As")
     public void checkBeginsWithAsA() {
         //Arrange
@@ -25,7 +36,7 @@ public class UsTitleTest {
     }
 
     @Test
-    @DisplayName("Fail create title - dont begin with word as")
+    @DisplayName("Fail create title - don't begin with word as")
     public void usTitleDontBeginWithAs() {
         //Arrange
         String usTitle = "PO, i want to test this string";
@@ -47,18 +58,7 @@ public class UsTitleTest {
     }
 
     @Test
-    @DisplayName("Fail create title - blank")
-    public void usTitleBlank() {
-        //Arrange
-        String usTitle = "";
-        //Act
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> new UsTitle(usTitle));
-        //Assert
-        assertEquals("Title cannot be blank", exception.getMessage());
-    }
-
-    @Test
-    @DisplayName("Test hashcode conditions for coverage purposes")
+    @DisplayName("Test hasCode conditions for coverage purposes")
     public void hasCodeSuccess() {
         //Arrange
         UsTitle usTitle = new UsTitle("As a PO, i want to test this string");

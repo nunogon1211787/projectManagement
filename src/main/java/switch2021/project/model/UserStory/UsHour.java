@@ -1,11 +1,11 @@
 package switch2021.project.model.UserStory;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import switch2021.project.utils.ValueObject;
 
+import java.util.Objects;
 
-@EqualsAndHashCode
+
 @Getter
 public class UsHour implements ValueObject<UsHour> {
 
@@ -39,5 +39,18 @@ public class UsHour implements ValueObject<UsHour> {
     @Override
     public boolean sameValueAs(final UsHour other) {
         return other !=null && this.usHours==(other.usHours);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final UsHour usHour = (UsHour) o;
+        return sameValueAs(usHour);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(usHours);
     }
 }

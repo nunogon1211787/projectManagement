@@ -31,7 +31,7 @@ public class UsHourTest {
     }
 
     @Test
-    @DisplayName("create timeEstimate hours - field on limit day")
+    @DisplayName("create timeEstimate hours - field on limit day - success")
     public void hoursOnLimit() {
         //Arrange
         int timeEstimate = 23;
@@ -84,7 +84,7 @@ public class UsHourTest {
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")
-    public void overrideTesteFail_1() {
+    public void overrideTestFail_1() {
         //Arrange
         UsHour usHour = new UsHour(2);
         UsHour usHour1 = new UsHour(3);

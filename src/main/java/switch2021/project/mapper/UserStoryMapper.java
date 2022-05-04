@@ -7,8 +7,6 @@ import switch2021.project.model.UserStory.UserStory;
 @Component
 public class UserStoryMapper {
 
-    private UserStoryMapper() {
-    }
 
     public UserStoryDTO toDto(UserStory newUserStory) {
         UserStoryDTO outputUsDto = new UserStoryDTO();

@@ -1,14 +1,21 @@
 package switch2021.project.controller.old;
 
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import switch2021.project.controller.CreateUserStoryController;
 import switch2021.project.dto.UserStoryDTO;
 import switch2021.project.service.CreateUserStoryService;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 public class CreateUserStoryControllerTest {
@@ -18,29 +25,25 @@ public class CreateUserStoryControllerTest {
     CreateUserStoryController createUserStoryController;
 
     @Mock
+    UserStoryDTO userStoryDTO;
+    @Mock
     CreateUserStoryService createUserStoryService;
+    @Mock
+    MockHttpServletRequest request;
+
 
     @Test
-    public void createUserStory (){
+    @DisplayName("Test to create a user story - with success")
+    public void createUserStory() {
         //Arrange
-        UserStoryDTO userStoryDTO = new UserStoryDTO();
-        userStoryDTO.projectID = "Project_2022_1";
-        userStoryDTO.title = "As a PO, i want to test this string";
-        userStoryDTO.priority = 1;
-        userStoryDTO.description = "Default Story";
-        userStoryDTO.timeEstimate = 5.0;
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        when(createUserStoryService.createAndSaveUserStory(userStoryDTO)).thenReturn(userStoryDTO);
         //Act
-
+        ResponseEntity<Object> responseEntity = createUserStoryController.createUserStory(userStoryDTO);
         //Assert
-
-
-
+        assertEquals(responseEntity.getStatusCodeValue(), 201);
 
     }
-
-
-
-
 }
 
 
