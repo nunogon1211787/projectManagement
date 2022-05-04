@@ -57,10 +57,8 @@ public class SystemUser implements Entity<SystemUser> {
     }
 
     public void assignProfileId(UserProfileId profileId) {
-        //checkProfileRule()
         this.assignedIdProfiles.add(profileId);
     }
-
 
     /**
      * Password validate if passwords are equal and encrypt and assign it to the System User
@@ -75,12 +73,13 @@ public class SystemUser implements Entity<SystemUser> {
         }
     }
 
+
     /**
      * Password encryption
      * @param password [v.o.]
      * @return v.o. Description(encrypted string)
      */
-    public Description encryptPassword(Password password) {
+    private Description encryptPassword(Password password) {
         int codigoASCII;
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -182,6 +181,7 @@ public class SystemUser implements Entity<SystemUser> {
         return new ArrayList<>(requestedProfiles);
     }
 
+    /*
     public boolean updateProfile(UserProfile oldProfile, UserProfile newProfile) {
 
         if (!checkAssignedProfileList(newProfile)) {
@@ -197,11 +197,7 @@ public class SystemUser implements Entity<SystemUser> {
      * Validation Methods
      **/
 
-    public void checkProfileRules(UserProfileId profileId) {
-        if (!profileId.getUserProfileName().getText().equals("Visitor"))
-            throw new IllegalArgumentException("at registration visitor profile must be associated");
-    }
-
+/*
     //?????????????????????????? (Nuno)
     private boolean checkAssignedProfileList(UserProfile profile) {
         boolean msg = true;
@@ -213,6 +209,7 @@ public class SystemUser implements Entity<SystemUser> {
         }
         return msg;
     }
+    /*
 
     /**
      * Método para validar se o email (ou parte dele) é deste objeto.
@@ -227,7 +224,7 @@ public class SystemUser implements Entity<SystemUser> {
         }
         return result;
     }
-
+/*
     public boolean hasName(String name) {
         return this.userName.getText().equals(name);
     }
@@ -251,7 +248,7 @@ public class SystemUser implements Entity<SystemUser> {
      * Method to verify if the object has the received parameters.
      */
     //REVIEW
-    private int hasPartiallyName(String name) {
+/*    private int hasPartiallyName(String name) {
         int result = 0;
 
         if (!name.isEmpty()) {
@@ -362,4 +359,6 @@ public class SystemUser implements Entity<SystemUser> {
         }
         return result;
     }
+
+ */
 }

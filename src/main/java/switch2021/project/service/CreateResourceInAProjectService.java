@@ -1,6 +1,7 @@
 package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.OutputResourceDTO;
 import switch2021.project.dto.ResourceDTOReeng;
@@ -21,9 +22,10 @@ import java.util.List;
 
 @Service
 public class CreateResourceInAProjectService {
-    @Autowired
+//    @Autowired
     private ResourceRepositoryInterface iRepoResource;
-    @Autowired
+//    @Qualifier("projectStoreReeng")
+//    @Autowired
     private ProjectRepositoryInterface iRepoProject;
     @Autowired
     private ResourceMapper resourceMapper;

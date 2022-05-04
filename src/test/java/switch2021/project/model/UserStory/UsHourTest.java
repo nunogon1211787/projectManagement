@@ -3,6 +3,8 @@ package switch2021.project.model.UserStory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.valueObject.Description;
+import switch2021.project.model.valueObject.ID_Typology;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,7 +33,7 @@ public class UsHourTest {
     }
 
     @Test
-    @DisplayName("create timeEstimate hours - field on limit day")
+    @DisplayName("create timeEstimate hours - field on limit day - success")
     public void hoursOnLimit() {
         //Arrange
         int timeEstimate = 23;
@@ -84,7 +86,7 @@ public class UsHourTest {
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")
-    public void overrideTesteFail_1() {
+    public void overrideTestFail_1() {
         //Arrange
         UsHour usHour = new UsHour(2);
         UsHour usHour1 = new UsHour(3);
@@ -97,7 +99,7 @@ public class UsHourTest {
     public void overrideTestFail_2() {
         //Arrange
         UsHour usHour = new UsHour(2);
-        Typology usHour1 = new Typology("test");
+        Typology usHour1 = new Typology(new ID_Typology(new Description("Test")));
         //Act and Assert
         assertNotEquals(usHour, usHour1);
     }

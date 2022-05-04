@@ -9,8 +9,8 @@ actor "Director" as Director
 participant ":System" as System
 
 Director -> System: Starts the creation of a new typology
-return Request data (description)
-Director -> System: types required data
+System -> System: create Typology
+deactivate
 return Informs operation success
 
 @enduml

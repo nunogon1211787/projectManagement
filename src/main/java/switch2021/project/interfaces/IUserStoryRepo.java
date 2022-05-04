@@ -1,11 +1,12 @@
 package switch2021.project.interfaces;
 
+
 import switch2021.project.model.UserStory.UserStory;
 
 import java.util.List;
 
-
-public interface IRepoUserStory {
+//@Repository
+public interface IUserStoryRepo /* extends JpaRepository <UserStory, String>*/  {
 
     /**
      * Finds all user story all activeUserStoryList.

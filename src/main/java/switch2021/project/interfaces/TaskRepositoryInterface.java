@@ -6,7 +6,7 @@ import switch2021.project.model.Task.TaskReeng;
 
 import java.util.List;
 
-@Component
+//@Component
 public interface TaskRepositoryInterface {
 
     /**

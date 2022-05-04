@@ -105,7 +105,7 @@ class FunctionTest {
     void hashCodeTest_Fail() {
         //Arrange
         Function function = new Function("Test");
-        Typology function1 = new Typology("Test");
+        Typology function1 = new Typology(new ID_Typology(new Description("Test")));
         //Act and Assert
         assertNotEquals(function.hashCode(), function1.hashCode());
     }

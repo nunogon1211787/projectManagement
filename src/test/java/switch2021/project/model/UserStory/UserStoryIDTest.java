@@ -2,7 +2,10 @@ package switch2021.project.model.UserStory;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import switch2021.project.factory.FactoryTypology;
 import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.valueObject.Description;
+import switch2021.project.model.valueObject.ID_Typology;
 import switch2021.project.model.valueObject.ProjectID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -133,7 +136,7 @@ public class UserStoryIDTest {
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         //Act
         UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
-        Typology budget1 = new Typology("test");
+        Typology budget1 =  new Typology(new ID_Typology(new Description("Test")));
         //Assert
         assertNotEquals(userStoryId, budget1);
     }
@@ -228,5 +231,16 @@ public class UserStoryIDTest {
             new UserStoryID(projectCode, usTitle);
 
         });
+    }
+
+    @Test
+    @DisplayName("Validate that ID is correct")
+    public void usIDSuccessString() {
+        //Arrange
+      UserStoryID userStoryID = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
+
+        //Act & Assert
+        assertEquals("Project_2022_1", userStoryID.getProjectID().getCode());
+        assertEquals("As a PO, i want to test this string", userStoryID.getUsTitle().getTitleUs());
     }
 }

@@ -13,7 +13,7 @@ participant ": CreateUserStoryService" as appService
 participant ": IUserStoryFactory" as factory
 participant ": UserStoryDto" as usDto
 participant "newUserStory : \n UserStory" as us
-participant ": IRepoUserStory " as usStore
+participant ": IUserStoryRepo " as usStore
 participant ": UserStoryMapper" as usMapper
 participant "outputUsDto : \n UserStoryDto" as outDto
 

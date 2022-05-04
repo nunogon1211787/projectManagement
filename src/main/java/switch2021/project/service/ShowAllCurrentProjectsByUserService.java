@@ -23,7 +23,7 @@ public class ShowAllCurrentProjectsByUserService {
 
     @Autowired
     ISystemUserRepo userRepo;
-    @Autowired
+    //@Autowired
     ResourceRepositoryInterface resRepo;
     @Autowired
     ProjectRepositoryInterface projRepo;

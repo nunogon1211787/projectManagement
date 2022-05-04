@@ -2,6 +2,7 @@ package switch2021.project.repositories;
 
 import lombok.Getter;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.ProjectRepositoryInterface;
 import switch2021.project.model.Project.ProjectReeng;
 import switch2021.project.model.valueObject.ProjectID;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-//@Component
+@Repository
 public class ProjectStoreReeng implements ProjectRepositoryInterface {
 
     /**

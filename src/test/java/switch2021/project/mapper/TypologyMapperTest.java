@@ -1,7 +1,7 @@
 package switch2021.project.mapper;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.dto.old.TypologyDTO;
+import switch2021.project.dto.TypologyDTO;
 import switch2021.project.mapper.old.TypologyMapper;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.Description;
@@ -37,7 +37,7 @@ public class TypologyMapperTest {
         when(typo4.getId_description()).thenReturn(id);
         when(id.getDescription()).thenReturn(des);
         when(des.getText()).thenReturn("Test");
-        List<TypologyDTO> dto = mapper.toDTO(list);
+        List<TypologyDTO> dto = mapper.modelToDto(list);
         //Assert
         assertEquals(4, dto.size());
     }
@@ -53,9 +53,9 @@ public class TypologyMapperTest {
         when(typo.getId_description()).thenReturn(id);
         when(id.getDescription()).thenReturn(des);
         when(des.getText()).thenReturn("Test");
-        TypologyDTO dto = mapper.toDTO(typo);
+        TypologyDTO dto = mapper.modelToDto(typo);
         //Assert
-        assertEquals("Test", dto.getDescription());
+        assertEquals("Test", dto.description);
     }
 
     @Test
@@ -71,6 +71,6 @@ public class TypologyMapperTest {
         when(des.getText()).thenReturn("Test");
         TypologyDTO dto = null;
         //Assert
-        assertNotEquals(dto, mapper.toDTO(typo));
+        assertNotEquals(dto, mapper.modelToDto(typo));
     }
 }
