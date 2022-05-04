@@ -22,10 +22,10 @@ import java.util.List;
 
 @Service
 public class CreateResourceInAProjectService {
-    @Autowired
+//    @Autowired
     private ResourceRepositoryInterface iRepoResource;
-    @Qualifier("projectStoreReeng")
-    @Autowired
+//    @Qualifier("projectStoreReeng")
+//    @Autowired
     private ProjectRepositoryInterface iRepoProject;
     @Autowired
     private ResourceMapper resourceMapper;

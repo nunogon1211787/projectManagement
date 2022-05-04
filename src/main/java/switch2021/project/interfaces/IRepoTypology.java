@@ -5,7 +5,7 @@ import switch2021.project.model.Typology.Typology;
 
 import java.util.List;
 
-@Component
+//@Component
 public interface IRepoTypology {
 
     List<Typology> getTypologyList();

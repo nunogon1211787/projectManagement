@@ -17,9 +17,9 @@ public class CreateTypologyService {
     /**
      * Attributes.
      */
-    @Autowired
+//    @Autowired
     private IRepoTypology iRepoTypology;
-    @Autowired
+//    @Autowired
     private IFactoryTypology iFactoryTypology;
     @Autowired
     private TypologyMapper mapper;
