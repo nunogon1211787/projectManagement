@@ -83,7 +83,7 @@ public class PhotoTest {
     void hashCodeTest_Fail(){
         //Arrange
         Photo pwd = new Photo("Photo.png");
-        Typology pwd1 = new Typology("Test");
+        Name pwd1 = new Name("Test");
         //Act and Assert
         assertNotEquals(pwd.hashCode(),pwd1.hashCode());
     }

@@ -39,7 +39,7 @@ public class SystemUserIDTest {
     void hashCodeTest_Fail(){
         //Arrange
         SystemUserID pwd = new SystemUserID(new Email("oliveira@beaver.com"));
-        Typology pwd1 = new Typology("Test");
+        Name pwd1 = new Name("Test");
         //Act and Assert
         assertNotEquals(pwd.hashCode(),pwd1.hashCode());
     }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.NewUserInfoDTO;
 import switch2021.project.dto.OutputUserDTO;
+import switch2021.project.dto.UserProfileDTO;
 import switch2021.project.factoryInterface.ISystemUserFactory;
 import switch2021.project.factoryInterface.UserProfileFactoryInterface;
 import switch2021.project.interfaces.ISystemUserRepo;
@@ -32,7 +33,9 @@ public class RegisterUserService {
     }
 
     public OutputUserDTO createAndSaveSystemUser(NewUserInfoDTO infoDTO) {
-        UserProfileId visitorID = userProfileFactory.createUserProfile("Visitor").getUserProfileId();
+        UserProfileDTO userProfileDTO = new UserProfileDTO();
+        userProfileDTO.userProfileName="Visitor";
+        UserProfileId visitorID = userProfileFactory.createUserProfile(userProfileDTO).getUserProfileId();
         SystemUser newUser = systemUserFactory.createSystemUser(infoDTO, visitorID);
 
         systemUserRepo.saveSystemUser(newUser);
