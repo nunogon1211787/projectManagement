@@ -26,7 +26,7 @@ public class CreateUserProfileControllerTest {
     CreateUserProfileService service;
 
     @Test
-    public void createNewTypologyControllerTest() {
+    public void createUserProfileControllerTest() {
         //Arrange
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
