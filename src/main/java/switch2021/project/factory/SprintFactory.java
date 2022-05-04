@@ -4,7 +4,9 @@ import switch2021.project.dto.SprintDTO;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintID;
 import switch2021.project.model.valueObject.Description;
+import switch2021.project.model.valueObject.Email;
 import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.model.valueObject.SystemUserID;
 
 
 public class SprintFactory implements switch2021.project.factoryInterface.ISprintFactory {

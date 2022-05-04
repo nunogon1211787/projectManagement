@@ -33,11 +33,8 @@ public class RegisterUserController {
 
     }
 
-
-
     @PostMapping
     public ResponseEntity<Object> registerUser(@RequestBody NewUserInfoDTO infoDTO) {
-
         OutputUserDTO outDTO = registerUserService.createAndSaveSystemUser(infoDTO);
 
         return new ResponseEntity<>(outDTO, HttpStatus.CREATED);

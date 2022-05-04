@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import switch2021.project.dto.NewUserInfoDTO;
 import switch2021.project.dto.OutputUserDTO;
 import switch2021.project.factoryInterface.ISystemUserFactory;
+import switch2021.project.factoryInterface.UserProfileFactoryInterface;
 import switch2021.project.interfaces.ISystemUserRepo;
-import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.mapper.SystemUserMapper;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.valueObject.UserProfileId;
@@ -17,26 +17,23 @@ public class RegisterUserService {
     @Autowired
     private ISystemUserRepo systemUserRepo;
     @Autowired
-    private IUserProfileRepo userProfileRepo;
+    private UserProfileFactoryInterface userProfileFactory;
     @Autowired
     private SystemUserMapper systemUserMapper;
     @Autowired
     private ISystemUserFactory systemUserFactory;
 
-    public RegisterUserService(ISystemUserRepo systemUserRepo, IUserProfileRepo userProfileRepo,
+    public RegisterUserService(ISystemUserRepo systemUserRepo, UserProfileFactoryInterface userProfileFactory,
                                SystemUserMapper systemUserMapper, ISystemUserFactory systemUserFactory) {
         this.systemUserRepo = systemUserRepo;
-        this.userProfileRepo = userProfileRepo;
+        this.userProfileFactory = userProfileFactory;
         this.systemUserMapper = systemUserMapper;
         this.systemUserFactory = systemUserFactory;
     }
 
     public OutputUserDTO createAndSaveSystemUser(NewUserInfoDTO infoDTO) {
-        UserProfileId visitorId = userProfileRepo.findUserProfileByDescription("Visitor").getUserProfileId();
-        if (visitorId == null)
-            return null;//must be dto null
-
-        SystemUser newUser = systemUserFactory.createSystemUser(infoDTO, visitorId);
+        UserProfileId visitorID = userProfileFactory.createUserProfile("Visitor").getUserProfileId();
+        SystemUser newUser = systemUserFactory.createSystemUser(infoDTO, visitorID);
 
         systemUserRepo.saveSystemUser(newUser);
 

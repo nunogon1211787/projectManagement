@@ -13,22 +13,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-
 //@ExtendWith(SpringExtension.class)
 //@SpringBootApplication
 //@SpringBootTest //Useful for integration tests
 //@SpringJUnitConfig
 public class SystemUserRepositoryTest {
 
-    /*@MockBean
-    private ISystemUserRepo underTest;*/
-
     @Test
     @DisplayName(".findSystemUserByEmail(String email)")
     void itShouldFindASystemUser() {
         //Arrange
-        //MockitoAnnotations.openMocks(this);
-        ISystemUserRepo underTest = new SystemUserRepository(); //until spring annotations resolution
+        ISystemUserRepo underTest = new SystemUserRepository();
 
         String email = "oliveira@beaver.com";
         SystemUser userDouble = mock(SystemUser.class);
@@ -46,15 +41,13 @@ public class SystemUserRepositoryTest {
         SystemUser actual = underTest.findSystemUserByEmail(email);
         //Assert
         assertNotNull(actual);
-        //assertEquals(email, actual.getSystemUserId().getEmail().getEmailText());
     }
 
     @Test
     @DisplayName(".findSystemUserByEmail(String email)")
     void itShouldNotFindTheSystemUser() {
         //Arrange
-        //MockitoAnnotations.openMocks(this);
-        ISystemUserRepo underTest = new SystemUserRepository(); //until spring annotations resolution
+        ISystemUserRepo underTest = new SystemUserRepository();
         //User1
         String email = "oliveira@beaver.com";
         SystemUser userDouble = mock(SystemUser.class);
@@ -82,8 +75,7 @@ public class SystemUserRepositoryTest {
     @DisplayName(".findAllSystemUsers()")
     void itShouldFindAnEmptyList() {
         //Arrange
-        //MockitoAnnotations.openMocks(this);
-        ISystemUserRepo underTest = new SystemUserRepository(); //until spring annotations resolution
+        ISystemUserRepo underTest = new SystemUserRepository();
         //Act
         List<SystemUser> actualList = underTest.findAllSystemUsers();
         //Assert
@@ -94,8 +86,7 @@ public class SystemUserRepositoryTest {
     @DisplayName(".findAllSystemUsers()")
     void itShouldFindAList() {
         //Arrange
-        //MockitoAnnotations.openMocks(this);
-        ISystemUserRepo underTest = new SystemUserRepository(); //until spring annotations resolution
+        ISystemUserRepo underTest = new SystemUserRepository();
 
         String email = "oliveira@beaver.com";
         SystemUser userDouble = mock(SystemUser.class);
@@ -117,8 +108,7 @@ public class SystemUserRepositoryTest {
     @DisplayName(".saveSystemUser(SystemUser user)")
     void itShouldSaveSystemUser() {
         //Arrange
-        //MockitoAnnotations.openMocks(this);
-        ISystemUserRepo underTest = new SystemUserRepository(); //until spring annotations resolution
+        ISystemUserRepo underTest = new SystemUserRepository();
 
         String email = "oliveira@beaver.com";
         SystemUser userDouble = mock(SystemUser.class);
@@ -138,8 +128,7 @@ public class SystemUserRepositoryTest {
     @DisplayName(".saveSystemUser(SystemUser user)")
     void itShouldFailSaveSystemUserPresent() {
         //Arrange
-        //MockitoAnnotations.openMocks(this);
-        ISystemUserRepo underTest = new SystemUserRepository(); //until spring annotations resolution
+        ISystemUserRepo underTest = new SystemUserRepository();
 
         String email = "oliveira@beaver.com";
         SystemUser userDouble = mock(SystemUser.class);
@@ -160,8 +149,7 @@ public class SystemUserRepositoryTest {
     @DisplayName(".saveSystemUser(SystemUser user)")
     void itShouldFailSaveNull() {
         //Arrange
-        //MockitoAnnotations.openMocks(this);
-        ISystemUserRepo underTest = new SystemUserRepository(); //until spring annotations resolution
+        ISystemUserRepo underTest = new SystemUserRepository();
 
         SystemUser user = null;
         //Act

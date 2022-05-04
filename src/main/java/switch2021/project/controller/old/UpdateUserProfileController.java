@@ -42,7 +42,7 @@ public class UpdateUserProfileController {
     public List<UserProfile> getUserProfileList() {
         return userProfileStore.findAllUserProfiles();
     }
-
+/*
     public boolean updateProfile(SystemUser user, UserProfile oldProfile, UserProfile newProfile) {
         this.user = user;
         this.user.updateProfile(oldProfile, newProfile);
@@ -50,4 +50,6 @@ public class UpdateUserProfileController {
 
         return true;
     }
+
+ */
 }
