@@ -6,6 +6,7 @@ import switch2021.project.model.Typology.Typology;
 public class TypologyFactory implements TypologyFactoryInterface {
     @Override
     public Typology createTypology(String description) {
-       return new Typology(description);
+
+        return new Typology(description);
     }
 }

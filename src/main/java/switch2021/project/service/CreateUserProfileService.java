@@ -7,7 +7,7 @@ import switch2021.project.factoryInterface.UserProfileFactoryInterface;
 import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.mapper.UserProfileMapper;
 import switch2021.project.model.UserProfile.UserProfile;
-
+import switch2021.project.model.UserProfile.UserProfileReeng;
 
 
 @Service
@@ -40,7 +40,7 @@ public class CreateUserProfileService {
      */
     public UserProfileDTO createAndSaveUserProfile(UserProfileDTO dto) {
 
-        UserProfile newUserProfile = userProfileFactoryInterface.createUserProfile(dto);
+        UserProfileReeng newUserProfile = userProfileFactoryInterface.createUserProfile(dto);
 
         userProfileRepositoryInterface.saveUserProfile(newUserProfile);
 
