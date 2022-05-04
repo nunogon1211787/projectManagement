@@ -1,4 +1,4 @@
-package switch2021.project.model.SystemUser;
+package switch2021.project.service;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

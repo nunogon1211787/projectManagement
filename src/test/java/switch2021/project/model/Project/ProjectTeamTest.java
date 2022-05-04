@@ -214,7 +214,7 @@ public class ProjectTeamTest {
         assertNull(testRes);
     }
 
-    @Test
+/*    @Test
     public void getResourceByNameTestSuccess() {
         //Arrange
         ResourceFactory resFac = mock(ResourceFactory.class);
@@ -251,7 +251,7 @@ public class ProjectTeamTest {
         //Assert
         assertNull(testRes);
     }
-
+ */
     /**
      * Get Current Resource List Test
      */
