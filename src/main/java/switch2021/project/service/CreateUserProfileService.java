@@ -21,7 +21,7 @@ public class CreateUserProfileService {
     @Autowired
     private UserProfileFactoryInterface userProfileFactoryInterface;
     @Autowired
-    private UserProfileMapper userProfileyMapper;
+    private UserProfileMapper userProfileMapper;
 
 
 
@@ -40,11 +40,11 @@ public class CreateUserProfileService {
      */
     public UserProfileDTO createAndSaveUserProfile(UserProfileDTO dto) {
 
-        UserProfile newUserProfile = userProfileFactoryInterface.createUserProfile(dto.userProfileName);
+        UserProfile newUserProfile = userProfileFactoryInterface.createUserProfile(dto);
 
         userProfileRepositoryInterface.saveUserProfile(newUserProfile);
 
-        return userProfileyMapper.toDto(newUserProfile);
+        return userProfileMapper.toDto(newUserProfile);
     }
 
 

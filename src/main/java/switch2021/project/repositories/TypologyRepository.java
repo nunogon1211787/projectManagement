@@ -1,14 +1,14 @@
 package switch2021.project.repositories;
 
 import lombok.Getter;
-import switch2021.project.interfaces.TypologyRepositoryInterface;
+import org.springframework.stereotype.Repository;
+import switch2021.project.interfaces.IRepoTypology;
 import switch2021.project.model.Typology.Typology;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-public class TypologyRepository implements TypologyRepositoryInterface {
+public class TypologyRepository implements IRepoTypology {
 
     /**
      * Attributes
@@ -27,6 +27,8 @@ public class TypologyRepository implements TypologyRepositoryInterface {
     /**
      * Methods.
      */
+    public List<Typology> getTypologyList() {return this.typologyList;}
+
     @Override
     public Typology findTypologyByDescription(String description) {
         Typology typo = null;
@@ -49,7 +51,7 @@ public class TypologyRepository implements TypologyRepositoryInterface {
     public boolean saveTypology(Typology typology) {
         boolean result = true;
 
-        if (existsByDescription(typology.getId_description().getDescription().getText())) {
+        if (existsByTypologyId(typology.getId_description().getDescription().getText())) {
             result = false;
         } else{
             typologyList.add(typology);
@@ -58,7 +60,7 @@ public class TypologyRepository implements TypologyRepositoryInterface {
     }
 
     @Override
-    public boolean existsByDescription(String description) {
+    public boolean existsByTypologyId(String description) {
         for (Typology typo : typologyList) {
             if (typo.hasID_Description(description)) {
                 return true;
