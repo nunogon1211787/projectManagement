@@ -34,11 +34,9 @@ class UserProfileIdTest {
         UserProfileId description = new UserProfileId("Teste");
         UserProfileId description2 = new UserProfileId("Teste");
         UserProfileId description3 = null;
-        Typology test = new Typology("test");
         // Act
         assertEquals(description,description2);
         assertNotEquals(description, description3);
-        assertNotEquals(description, test);
     }
 
 }

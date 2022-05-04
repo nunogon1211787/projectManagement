@@ -13,7 +13,7 @@ import static org.mockito.Mockito.*;
 
 public class UserProfileRepositoryReengTest {
 
-    @DisplayName("Test controller")
+    @DisplayName("Test constructor")
     @Test
     public void createUserProfile() {
         //Arrange
