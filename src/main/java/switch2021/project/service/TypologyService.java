@@ -15,7 +15,7 @@ public class TypologyService {
     /**
      * Attributes.
      */
-    @Autowired
+    //@Autowired
     private final TypologyRepository repository;
     private final TypologyFactory typologyFactory = new TypologyFactory();
 

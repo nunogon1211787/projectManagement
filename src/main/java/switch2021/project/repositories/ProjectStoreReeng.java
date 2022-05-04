@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-//@Component
+@Component
 public class ProjectStoreReeng implements ProjectRepositoryInterface {
 
     /**

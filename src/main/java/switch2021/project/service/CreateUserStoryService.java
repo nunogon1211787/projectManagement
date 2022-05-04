@@ -2,6 +2,7 @@ package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import switch2021.project.dto.OutPutUsDTO;
 import switch2021.project.dto.UserStoryDTO;
 import switch2021.project.factoryInterface.IUserStoryFactory;
 import switch2021.project.interfaces.IUserStoryRepo;
@@ -15,7 +16,7 @@ public class CreateUserStoryService {
     /**
      * Attributes
      **/
-    @Autowired
+    //@Autowired
     private IUserStoryRepo iUserStoryRepo;
     @Autowired
     private UserStoryMapper userStoryMapper;
@@ -32,7 +33,7 @@ public class CreateUserStoryService {
     /**
      * Create and save a User Story
      */
-    public UserStoryDTO createAndSaveUserStory(UserStoryDTO userStoryDTO) {
+    public OutPutUsDTO createAndSaveUserStory(UserStoryDTO userStoryDTO) {
 
         UserStory newUserStory = iUserStoryFactory.createUserStory(userStoryDTO);
 

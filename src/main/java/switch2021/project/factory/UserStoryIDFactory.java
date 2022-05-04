@@ -1,9 +1,9 @@
 package switch2021.project.factory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import switch2021.project.factoryInterface.VOFactoryInterface;
+import org.springframework.stereotype.Component;;
 import switch2021.project.factoryInterface.IValueObjectsFactory;
+import switch2021.project.factoryInterface.VOFactoryInterface;
 import switch2021.project.model.UserStory.UsTitle;
 import switch2021.project.model.UserStory.UserStoryID;
 import switch2021.project.model.valueObject.ProjectID;

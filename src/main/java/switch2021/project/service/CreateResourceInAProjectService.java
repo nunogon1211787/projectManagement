@@ -21,9 +21,9 @@ import java.util.List;
 
 @Service
 public class CreateResourceInAProjectService {
-    @Autowired
+    //@Autowired
     private ResourceRepositoryInterface iRepoResource;
-    @Autowired
+    //@Autowired
     private ProjectRepositoryInterface iRepoProject;
     @Autowired
     private ResourceMapper resourceMapper;

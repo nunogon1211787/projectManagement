@@ -3,7 +3,7 @@ package switch2021.project.utils;
 import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
-public interface RepositoryTemplate extends CrudRepository<Object, Long> {
+public interface RepositoryTemplate /*extends CrudRepository<Object, Long>*/ {
 
     /**
      * The repository should be able to find an object using given Identity.

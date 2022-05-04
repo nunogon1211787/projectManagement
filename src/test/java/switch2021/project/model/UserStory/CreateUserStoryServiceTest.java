@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import switch2021.project.dto.OutPutUsDTO;
 import switch2021.project.dto.UserStoryDTO;
 import switch2021.project.factoryInterface.IUserStoryFactory;
 import switch2021.project.interfaces.IUserStoryRepo;
@@ -34,20 +35,35 @@ public class CreateUserStoryServiceTest {
     @Mock
     private UserStory newUserStory;
     @Mock
-    private UserStoryDTO outputUsDto;
+    private OutPutUsDTO outputUsDto;
 
 
     @Test
     @DisplayName("Test to create and save user story - with success")
-    public void createAndSaveUserStoryWithSuccess() {
+    public void createAndSaveUserStoryWithSuccessGetProjectID() {
 
         //Arrange
         when(iUserStoryFactory.createUserStory(userStoryDTO)).thenReturn(newUserStory);
         when(iUserStoryRepo.save(newUserStory)).thenReturn(true);
         when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
         //Act
-        UserStoryDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(userStoryDTO);
+        OutPutUsDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(userStoryDTO);
         //Assert
-        assertEquals(userStoryDTO.userStoryID, andSaveUserStory.userStoryID);
+        assertEquals(userStoryDTO.projectID, andSaveUserStory.projectID);
+
+    }
+
+    @Test
+    @DisplayName("Test to create and save user story - with success")
+    public void createAndSaveUserStoryWithSuccessGetUsTitle() {
+
+        //Arrange
+        when(iUserStoryFactory.createUserStory(userStoryDTO)).thenReturn(newUserStory);
+        when(iUserStoryRepo.save(newUserStory)).thenReturn(true);
+        when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
+        //Act
+        OutPutUsDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(userStoryDTO);
+        //Assert
+        assertEquals(userStoryDTO.title, andSaveUserStory.title);
     }
 }

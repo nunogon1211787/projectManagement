@@ -29,7 +29,7 @@ public class ProjectService {
 
     public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) {
 
-        int nextId = projectRepositoryInterface.findAll().size();
+        int nextId = 1; //projectRepositoryInterface.findAll().size();
 
         ProjectReeng newProject = projectFactoryInterface.createProject(projDTO, nextId);
 

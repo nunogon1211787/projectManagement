@@ -1,5 +1,6 @@
 package switch2021.project.factory;
 
+import org.springframework.stereotype.Component;
 import switch2021.project.dto.ResourceDTOReeng;
 import switch2021.project.factoryInterface.ResourceFactoryInterfaceReeng;
 import switch2021.project.model.Resource.ResourceIDReeng;
@@ -8,6 +9,7 @@ import switch2021.project.model.valueObject.*;
 
 import java.time.LocalDate;
 
+@Component
 public class ResourceFactoryReeng implements ResourceFactoryInterfaceReeng {
 
     public ResourceReeng createResource(ResourceDTOReeng resourceDTO){

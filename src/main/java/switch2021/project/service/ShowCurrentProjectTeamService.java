@@ -1,6 +1,7 @@
 package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.OutputResourceDTO;
 import switch2021.project.interfaces.ProjectRepositoryInterface;
@@ -12,11 +13,12 @@ import switch2021.project.model.Resource.ResourceReeng;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ShowCurrentProjectTeamService {
 
     @Autowired
     ProjectRepositoryInterface projRepo;
-    @Autowired
+    //@Autowired
     ResourceRepositoryInterface resRepo;
     @Autowired
     ResourceMapper map;

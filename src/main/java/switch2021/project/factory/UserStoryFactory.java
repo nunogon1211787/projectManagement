@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import switch2021.project.dto.UserStoryDTO;
 import switch2021.project.factoryInterface.IUserStoryFactory;
-import switch2021.project.factoryInterface.VOFactoryInterface;
 import switch2021.project.factoryInterface.IValueObjectsFactory;
+import switch2021.project.factoryInterface.VOFactoryInterface;
 import switch2021.project.model.UserStory.*;
 import switch2021.project.model.valueObject.Description;
 
@@ -37,7 +37,7 @@ public class UserStoryFactory implements IUserStoryFactory {
 
         newUserStory.setPriority(priority.create(userStoryDTO.priority));
         newUserStory.setDescription(description.create(userStoryDTO.description));
-        newUserStory.setTimeEstimate(timeEstimate.create(timeEstimate));
+        newUserStory.setTimeEstimate(timeEstimate.create(userStoryDTO.timeEstimate));
 
         return newUserStory;
     }

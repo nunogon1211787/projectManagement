@@ -1,6 +1,8 @@
 package switch2021.project.repositories;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 import switch2021.project.interfaces.TypologyRepositoryInterface;
 import switch2021.project.model.Typology.Typology;
 
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Component
 public class TypologyRepository implements TypologyRepositoryInterface {
 
     /**

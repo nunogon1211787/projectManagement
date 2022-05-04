@@ -12,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import switch2021.project.controller.CreateUserStoryController;
+import switch2021.project.dto.OutPutUsDTO;
 import switch2021.project.dto.UserStoryDTO;
 import switch2021.project.service.CreateUserStoryService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,6 +31,8 @@ public class CreateUserStoryControllerTest {
     CreateUserStoryService createUserStoryService;
     @Mock
     MockHttpServletRequest request;
+    @Mock
+    OutPutUsDTO outPutUsDTO;
 
 
     @Test
@@ -37,7 +40,7 @@ public class CreateUserStoryControllerTest {
     public void createUserStory() {
         //Arrange
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-        when(createUserStoryService.createAndSaveUserStory(userStoryDTO)).thenReturn(userStoryDTO);
+        when(createUserStoryService.createAndSaveUserStory(userStoryDTO)).thenReturn(outPutUsDTO);
         //Act
         ResponseEntity<Object> responseEntity = createUserStoryController.createUserStory(userStoryDTO);
         //Assert
