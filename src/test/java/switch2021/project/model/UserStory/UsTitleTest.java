@@ -3,6 +3,8 @@ package switch2021.project.model.UserStory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.valueObject.Description;
+import switch2021.project.model.valueObject.ID_Typology;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -91,7 +93,7 @@ public class UsTitleTest {
     public void overrideTestFail() {
         //Arrange
         UsTitle usTitle = new UsTitle("As a PO, i want to test this string");
-        Typology usTitle1 = new Typology("test");
+        Typology usTitle1 = new Typology(new ID_Typology(new Description("Test")));
         //Act and Assert
         assertNotEquals(usTitle, usTitle1);
     }

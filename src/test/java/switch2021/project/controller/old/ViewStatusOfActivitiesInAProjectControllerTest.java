@@ -14,7 +14,7 @@
 //import switch2021.project.model.UserProfile.UserProfile;
 //import switch2021.project.model.valueObject.*;
 //import switch2021.project.repositories.ProjectStore;
-//import switch2021.project.stores.SystemUserStore;
+//import switch2021.project.repositories.SystemUserRepository;
 //
 //import java.time.LocalDate;
 //import java.util.List;
@@ -67,7 +67,7 @@
 //        Company company = new Company();
 //        ViewStatusOfActivitiesInAProjectController controller = new ViewStatusOfActivitiesInAProjectController(company);
 //        ProjectStore projectStore = company.getProjectStore();
-//        SystemUserStore systemUserStore = company.getSystemUserStore();
+//        SystemUserRepository systemUserStore = company.getSystemUserStore();
 //        //Project1
 //        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
 //        Customer customer = company.getCustomerStore().getCustomerByName("isep");

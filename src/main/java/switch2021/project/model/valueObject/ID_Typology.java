@@ -1,7 +1,8 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
-import switch2021.project.model.Typology.Typology;
+import org.springframework.beans.factory.annotation.Value;
+import switch2021.project.model.valueObject.Description;
 import switch2021.project.utils.ValueObject;
 
 import java.util.Objects;
@@ -23,8 +24,8 @@ public class ID_Typology implements ValueObject<ID_Typology> {
     /**
      * Constructor
      */
-    public ID_Typology(String description) {
-        this.description = new Description(description);
+    public ID_Typology(Description description) {
+        this.description = description;
     }
 
 
@@ -47,7 +48,7 @@ public class ID_Typology implements ValueObject<ID_Typology> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ID_Typology that = (ID_Typology) o;
-        return Objects.equals(description, that.description);
+        return sameValueAs(that);
     }
 
     @Override
@@ -57,6 +58,6 @@ public class ID_Typology implements ValueObject<ID_Typology> {
 
     @Override
     public boolean sameValueAs(ID_Typology other) {
-        return this.description.getText() == other.getDescription().getText();
+        return this.description.getText().equals(other.getDescription().getText());
     }
 }

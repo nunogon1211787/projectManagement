@@ -67,7 +67,7 @@ public class SystemUserStoreTest {
 
         String email2 = "maneloliveira@beaver.com";
         SystemUser newUser2 = new SystemUser(userName, email2, function, password, passwordConfirmation, photo, profile.getUserProfileId());
-        SystemUserStore systemUserStore = new SystemUserStore();
+        SystemUserRepository systemUserStore = new SystemUserRepository();
 
         systemUserStore.saveSystemUser(newUser);
         systemUserStore.saveSystemUser(newUser2);
@@ -127,16 +127,16 @@ public class SystemUserStoreTest {
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
         //newUser/list1 and newUser2/list2 are equals
         SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile.getUserProfileId());
-        SystemUserStore list1 = new SystemUserStore();
+        SystemUserRepository list1 = new SystemUserRepository();
         list1.saveSystemUser(newUser);
 
         SystemUser newUser2 = new SystemUser(userName, email, function, password, passwordConfirmation, photo, profile.getUserProfileId());
-        SystemUserStore list2 = new SystemUserStore();
+        SystemUserRepository list2 = new SystemUserRepository();
         list2.saveSystemUser(newUser2);
         list1.saveSystemUser(newUser2);
         //newUser3/list3 is different (different email)
         SystemUser newUser3 = new SystemUser(userName, email2, function, password, passwordConfirmation, photo, profile.getUserProfileId());
-        SystemUserStore list3 = new SystemUserStore();
+        SystemUserRepository list3 = new SystemUserRepository();
         list3.saveSystemUser(newUser3);
         //Assert
         assertNotSame(list1, list2);

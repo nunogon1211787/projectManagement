@@ -1,6 +1,7 @@
 package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.interfaces.ProjectRepositoryInterface;
@@ -29,9 +30,9 @@ public class ShowAllProjectsService {
 
         List<OutputProjectDTO> allProjectsDto = new ArrayList<>();
 
-        for (ProjectReeng project : projects) {
+        for (ProjectReeng proj : projects) {
 
-            OutputProjectDTO projDto = map.model2Dto(project);
+            OutputProjectDTO projDto = map.model2Dto(proj);
 
             allProjectsDto.add(projDto);
 

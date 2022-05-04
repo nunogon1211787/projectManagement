@@ -3,6 +3,8 @@ package switch2021.project.model.UserStory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.valueObject.Description;
+import switch2021.project.model.valueObject.ID_Typology;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -97,7 +99,7 @@ public class UsHourTest {
     public void overrideTestFail_2() {
         //Arrange
         UsHour usHour = new UsHour(2);
-        Typology usHour1 = new Typology("test");
+        Typology usHour1 = new Typology(new ID_Typology(new Description("Test")));
         //Act and Assert
         assertNotEquals(usHour, usHour1);
     }

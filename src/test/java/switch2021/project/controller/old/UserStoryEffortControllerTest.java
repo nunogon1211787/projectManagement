@@ -12,7 +12,7 @@
 //import switch2021.project.model.Typology.Typology;
 //import switch2021.project.model.UserProfile.UserProfile;
 //import switch2021.project.model.valueObject.*;
-//import switch2021.project.stores.SystemUserStore;
+//import switch2021.project.repositories.SystemUserRepository;
 //
 //import java.time.LocalDate;
 //import java.util.List;
@@ -27,7 +27,7 @@
 //        // Arrange
 //        Company company = new Company();
 //        UserStoryEffortController controller = new UserStoryEffortController(company);
-//        SystemUserStore systemUserStore = company.getSystemUserStore();
+//        SystemUserRepository systemUserStore = company.getSystemUserStore();
 //        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
 //        SystemUser user = new SystemUser("Test", "xxxx@isep.ipp.pt",
 //                "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());
@@ -69,7 +69,7 @@
 //        //Arrange
 //        Company company = new Company();
 //        UserStoryEffortController controller = new UserStoryEffortController(company);
-//        SystemUserStore systemUserStore = company.getSystemUserStore(); //chamo a systemUserStore
+//        SystemUserRepository systemUserStore = company.getSystemUserStore(); //chamo a systemUserStore
 //        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
 //        SystemUser user = new SystemUser("Test", "xxxx@isep.ipp.pt",
 //                "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());

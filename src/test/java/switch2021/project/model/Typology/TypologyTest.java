@@ -10,13 +10,12 @@ import static org.mockito.Mockito.*;
 
 public class TypologyTest {
 
-    @DisplayName("Get Typology test")
     @Test
     public void get_TypologyTest() {
         //Arrange
-        Typology typo = new Typology("Test");
-        ID_Typology id = mock(ID_Typology.class);
         Description des = mock(Description.class);
+        ID_Typology id = mock(ID_Typology.class);
+        Typology typo = new Typology(id);
         //Act
         when(id.getDescription()).thenReturn(des);
         when(des.getText()).thenReturn("Test");
@@ -27,8 +26,8 @@ public class TypologyTest {
     @Test
     public void hasID_DescriptionSuccess() {
         //Arrange
-        Typology typo = new Typology("Test");
         ID_Typology id = mock(ID_Typology.class);
+        Typology typo = new Typology(id);
         //Act
         when(id.hasDescription("Test")).thenReturn(true);
         //Assert
@@ -38,8 +37,8 @@ public class TypologyTest {
     @Test
     public void hasID_DescriptionFail() {
         //Arrange
-        Typology typo = new Typology("Test");
         ID_Typology id = mock(ID_Typology.class);
+        Typology typo = new Typology(id);
         //Act
         when(id.hasDescription("Test")).thenReturn(false);
         //Assert
@@ -49,17 +48,24 @@ public class TypologyTest {
     @Test
     public void equalsTestSuccess() {
         //Arrange
-        Typology typo = new Typology("Test");
-        Typology typo2 = new Typology("Test");
+        Description des = mock(Description.class);
+        ID_Typology id = mock(ID_Typology.class);
+        Typology typo = new Typology(id);
+        Typology typo2 = new Typology(id);
+        //Act
+        when(id.getDescription()).thenReturn(des);
+        when(des.getText()).thenReturn("Test");
         //Assert
-        assertTrue(typo.sameIdentityAs(typo2));
+        assertEquals(typo.toString(), typo2.toString());
     }
 
     @Test
     public void equalsTestFail() {
         //Arrange
-        Typology typo = new Typology("Test");
-        Typology typo2 = new Typology("Fixed Cost");
+        ID_Typology id = mock(ID_Typology.class);
+        ID_Typology id2 = mock(ID_Typology.class);
+        Typology typo = new Typology(id);
+        Typology typo2 = new Typology(id2);
         //Assert
         assertNotEquals(typo, typo2);
     }
@@ -67,9 +73,10 @@ public class TypologyTest {
     @Test
     public void typologyClass() {
         //Arrange
-        Typology typo = new Typology("Fixed Cost");
-        Typology typo2 = new Typology("Fixed Cost2");
-
+        ID_Typology id = mock(ID_Typology.class);
+        ID_Typology id2 = mock(ID_Typology.class);
+        Typology typo = new Typology(id);
+        Typology typo2 = new Typology(id2);
         //Assert
         assertEquals(typo.getClass(), typo2.getClass());
     }
@@ -77,7 +84,8 @@ public class TypologyTest {
     @Test
     public void typologyNull() {
         //Arrange
-        Typology typo = new Typology("Fixed Cost2");
+        ID_Typology id = mock(ID_Typology.class);
+        Typology typo = new Typology(id);
         Typology typo2 = null;
         //Assert
         assertNotEquals(typo, typo2);
@@ -86,8 +94,9 @@ public class TypologyTest {
     @Test
     public void hashCodeSuccess() {
         //Arrange
-        Typology typo1 = new Typology("Fixed Cost");
-        Typology typo2 = new Typology("Fixed Cost");
+        ID_Typology id = mock(ID_Typology.class);
+        Typology typo1 = new Typology(id);
+        Typology typo2 = new Typology(id);
         //Act
         int t1 = typo1.hashCode();
         int t2 = typo2.hashCode();
@@ -98,8 +107,10 @@ public class TypologyTest {
     @Test
     public void hashCodeFail() {
         //Arrange
-        Typology typo1 = new Typology("Fixed Cost");
-        Typology typo2 = new Typology("Fixed Cost2");
+        ID_Typology id = mock(ID_Typology.class);
+        ID_Typology id2 = mock(ID_Typology.class);
+        Typology typo1 = new Typology(id);
+        Typology typo2 = new Typology(id2);
         //Act
         int t1 = typo1.hashCode();
         int t2 = typo2.hashCode();

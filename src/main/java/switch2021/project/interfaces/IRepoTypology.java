@@ -1,10 +1,14 @@
 package switch2021.project.interfaces;
 
+import org.springframework.stereotype.Component;
 import switch2021.project.model.Typology.Typology;
 
 import java.util.List;
 
-public interface TypologyRepositoryInterface {
+@Component
+public interface IRepoTypology {
+
+    List<Typology> getTypologyList();
 
     /**
      * The repository should be able to find an object using given Identity.
@@ -27,7 +31,10 @@ public interface TypologyRepositoryInterface {
     /**
      * Check if the description already exists.
      */
-    boolean existsByDescription(String description);
+    boolean existsByTypologyId(String description);
 
+    /**
+     * Delete the object from this repository.
+     */
     void deleteTypology(String description);
 }

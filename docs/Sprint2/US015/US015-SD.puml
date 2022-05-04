@@ -15,8 +15,7 @@ participant "proj : Project" as proj
 participant ": ProjectMapper" as map
 participant "allProjectsDto : List<ProjectDto>" as listDto
 participant "projDto : ProjectDto" as dto
-participant "allProjectsJson : List<ProjectJson>" as listJson
-participant "jsonProject : ProjectJson" as json
+participant "allProjectsResponse : ResponseEntity" as json
 
 activate actor
 autoactivate on
@@ -53,25 +52,11 @@ end
 
 Srv --> Ctrl: allProjectsDto
 
-Ctrl --> listJson**: create()
+Ctrl --> json**: create(allProjectsDto)
 
-loop for all project (projDto) in the list (allProjectsDto)
+note over Ctrl, json : The Controller uses the Response Entity class to create a response in JSON format using the dto received from Service layer and defining the HTTP status.
 
-Ctrl -> listDto: get(i) : projDto
-deactivate
-
-Ctrl -> map: dto2Json(projsDto)
-
-map --> json**: create()
-
-map --> Ctrl : jsonProject
-
-Ctrl -> listJson: add(jsonProject): true
-deactivate
-
-end
-
-Ctrl --> Route: allProjectsJson
+Ctrl --> Route: allProjectsResponse
 
 Route --> actor: Show a list of all projects
 

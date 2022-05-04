@@ -8,18 +8,21 @@ title US013 - "As Administrator, I want to create user profiles"
 participant ": CreateUserProfileRouter" as System
 participant ": CreateUserProfileController" as Ctrl
 participant ": CreateUserProfileService" as C1
-participant "dto: UserProfileDTO" as C2
-participant ": IUserProfileFactory" as C3
+participant ": UserProfileFactoryInterface" as C3
+participant ":UserProfileDTO" as C2
 participant "newUserProfile:UserProfile" as C4
-participant "UserProfileStore" as C5
-participant "UserProfileMapper" as C6
-participant "outDTO:OutputUserProfileDTO" as C7
+participant ":UserProfileRepositoryInterface" as C5
+participant ":UserProfileMapper" as C6
+participant "outputDTO: OutPutUserProfileDTO" as C2.1
+
 
 [o-> System: POST/profiles (json)
 System -> Ctrl: createUserProfile(json)
-Ctrl -> C1: createUserProfile(dto)
-C1 -> C3: createUserProfile(dto.userProfileName)
-C3 --> C4 **: create(userProfileName)
+Ctrl -> C1: createAndSaveUserProfile(dto)
+C1 -> C3: createUserProfile(dto)
+C3 -> C2 : userProfileID = getUserProfileID()
+C2 --> C4 **: create()
+deactivate
 return newUserProfile
 C1 -> C5 : saveUserProfile (newUserProfile)
 C5 -> C5 : validateUserProfile(newUserProfile)
@@ -28,11 +31,14 @@ C5 -> C5: addUserProfile (newUserProfile)
 deactivate
 return true
 C1 -> C6: toDTO(newUserProfile)
-C6 -> C7 **: create()
-return outDTO
-return outDTO
-return outJson
-return Operation Success
+C6 -> C2.1 **: create()
+
+return outputdto
+return outputdto
+return outputjson
+return Informs that user profile was created
+
+
 
 
 

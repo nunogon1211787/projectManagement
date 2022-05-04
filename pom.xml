@@ -158,12 +158,18 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.9</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.1</version>
+            <scope>test</scope>
+        </dependency>
         <!-- End Tests for spring boot-->
 
     </dependencies>
     <build>
         <plugins>
-            <!-- Required for compiling the project usign maven -->
+            <!-- Required for compiling the project using maven -->
             <plugin><!-- Compiler configuration-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

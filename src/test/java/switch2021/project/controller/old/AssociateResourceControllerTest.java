@@ -2,16 +2,12 @@ package switch2021.project.controller.old;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.controller.old.AssociateResourceController;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.repositories.ProjectStore;
-import switch2021.project.stores.SystemUserStore;
 import switch2021.project.model.valueObject.BusinessSector;
 import switch2021.project.model.valueObject.Customer;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -84,7 +80,7 @@ public class AssociateResourceControllerTest {
         //Arrange
         Company company = new Company();
         AssociateResourceController controller = new AssociateResourceController(company);
-        SystemUserStore systemUserStore = company.getSystemUserStore();
+        SystemUserRepository systemUserStore = company.getSystemUserStore();
         UserProfile profile = company.getUserProfileStore().getUserProfile("Visitor");
 
  */

@@ -9,9 +9,9 @@ import switch2021.project.controller.RegisterUserController;
 import switch2021.project.dto.NewUserInfoDTO;
 import switch2021.project.factory.*;
 import switch2021.project.mapper.SystemUserMapper;
+import switch2021.project.repositories.SystemUserRepository;
 import switch2021.project.repositories.UserProfileRepository;
 import switch2021.project.service.RegisterUserService;
-import switch2021.project.stores.SystemUserStore;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -36,7 +36,7 @@ public class RegisterUserControllerTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
-        SystemUserStore systemUserStore = new SystemUserStore();
+        SystemUserRepository systemUserStore = new SystemUserRepository();
         UserProfileRepository userProfileStore = new UserProfileRepository();
         SystemUserMapper mapper = new SystemUserMapper();
 
@@ -132,7 +132,7 @@ public class CreateUserStoryServiceTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             Company company = new Company();
-            SystemUserStore systemUserStore = company.getSystemUserStore();
+            SystemUserRepository systemUserStore = company.getSystemUserStore();
             UserProfileRepository userProfileStore = company.getUserProfileStore();
             RegisterUserService systemUserService = new RegisterUserService(systemUserStore, userProfileStore);
             RegisterUserController controller = new RegisterUserController(company, systemUserService);

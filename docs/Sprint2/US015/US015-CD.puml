@@ -41,36 +41,23 @@ findAll()
 package "Domain" <<Rectangle>> #burlywood{
 package "Aggregates" <<rectangle>>{
 package "Project" <<Rectangle>>{
-entity "Project" as proj << Root >> {
--projectName : Description
--projectStatus : ProjectStatus
-}
+entity "Project" as proj << Root >>
 }
 }
 package "Value Object" <<rectangle>>{
-class "ProjectId" as pId << Value Object >> {
-projectId : ProjectCode
-}
+class "ProjectId" as pId << Value Object >>
 }
 }
 
 package "DTO" <<rectangle>>{
 class "ProjectMapper" as map <<Component>> {
 + model2Dto()
-+ dto2Json()
 }
-class "ProjectDTO" as dto <<Component>>{
-+ projectCode : String
-+ projectName : String
-+ projectStatus : String
+class "ProjectDTO" as dto <<Component>>
 }
 
-class "ProjectJson" as json <<Component>>{
-+ projectCode : String
-+ projectName : String
-+ projectStatus : String
-}
-}
+class "ResponseEntity" as json <<Component>>
+
 }
 
 route .d.> ctrl
@@ -79,10 +66,9 @@ srv .r.> repo
 repo <|.. store
 store "1"*----"*" proj
 proj "1"*-l-"1" pId
-ctrl .d.> map
 srv .u.> map
 map .r.> dto
-map .l.> json
+ctrl .l.> json
 map ..> proj
 
 @enduml
