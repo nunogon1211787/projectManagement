@@ -35,7 +35,7 @@ public class ShowCurrentProjectTeamService {
 
         if (projRepo.existById(projectId)){
 
-            List<ResourceReeng> resources = resRepo.findByProject(projectId);
+            List<ResourceReeng> resources = resRepo.findAllByProject(projectId);
 
             List<ResourceReeng> projectTeam = dsrv.currentResourcesByDate(resources, LocalDate.parse(dateDto.date));
 

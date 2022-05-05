@@ -15,8 +15,11 @@ import java.util.List;
 @RequestMapping("/projects")
 public class ShowAllProjectsController {
 
-    @Autowired
     ShowAllProjectsService srv;
+
+    public ShowAllProjectsController(ShowAllProjectsService srv) {
+        this.srv = srv;
+    }
 
     @GetMapping
     public ResponseEntity<Object> showAllProjects(){
