@@ -22,7 +22,6 @@ public class TaskFactory implements TaskFactoryInterface {
         Description description1 = new Description(taskDTO.description);
         EffortEstimate effortEstimate1 = new EffortEstimate(taskDTO.effortEstimate);
         TaskTypeEnum taskTypeEnum = TaskTypeEnum.valueOf(taskDTO.type);
-
         TaskID newTaskID = new TaskID(taskContainerID, newName);
 
         TaskReeng newTask = new TaskReeng(newTaskID);
