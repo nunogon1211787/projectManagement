@@ -20,14 +20,13 @@ participant "outputDTO: OutPutUserProfileDTO" as C2.1
 System -> Ctrl: createUserProfile(json)
 Ctrl -> C1: createAndSaveUserProfile(dto)
 C1 -> C3: createUserProfile(dto)
-C3 -> C2 : userProfileID = getUserProfileID()
+C3 -> C2 : dto.userProfileName
 C2 --> C4 **: create()
 deactivate
 return newUserProfile
 C1 -> C5 : saveUserProfile (newUserProfile)
-C5 -> C5 : validateUserProfile(newUserProfile)
-deactivate
-C5 -> C5: addUserProfile (newUserProfile)
+C5 -> C5 : existsByDescription(userProfileName)
+
 deactivate
 return true
 C1 -> C6: toDTO(newUserProfile)

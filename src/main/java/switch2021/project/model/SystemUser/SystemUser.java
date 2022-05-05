@@ -34,7 +34,7 @@ public class SystemUser implements Entity<SystemUser> {
     }
 
     /**
-     * Setters assign????
+     * Assigns
      */
     public void assignName(Name userName) {
         this.userName = userName;
@@ -72,7 +72,6 @@ public class SystemUser implements Entity<SystemUser> {
             throw new IllegalArgumentException("passwords not match");
         }
     }
-
 
     /**
      * Password encryption
@@ -243,7 +242,7 @@ public class SystemUser implements Entity<SystemUser> {
         }
         return profileStatus;
     }
-
+/*
     /**
      * Method to verify if the object has the received parameters.
      */
