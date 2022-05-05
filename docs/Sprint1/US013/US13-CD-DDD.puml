@@ -6,48 +6,46 @@ title US013 - "As Administrator, I want to create user profiles"
 skinparam classAttributeIconSize 0
 
 package "Infrastruture" <<rectangle>> #lightblue {
-class "CreateUserProfileRoute"  as route << Component >>
+class "CreateUserProfileRouter"  as route << Component >>
 }
 
 
 package "Interface Adapters" <<rectangle>> #lightgreen {
-
-package "Repositories" <<rectangle>>{
-class "UserProfileStore" as Store << Repository >> {
--ProfileList: List<UserProfile>
-+saveUserProfile(userProfileName)
-+addUserProfile(userProfileName)
-+validateUserProfile(userProfileName)
-}
-}
 
 package "Controllers" <<rectangle>>  {
 class "CreateUserProfileController" as ctrl <<Component>> {
 +createUserProfile(json)
 }
 }
+
+package "Repositories" <<rectangle>>{
+class "UserProfileStore" as Store << Repository >> {
+-profiles: List<UserProfile>
++saveUserProfile(userProfileName)
++existsByDescription(userProfileName)
+}
+}
 }
 
 
 package "Application Service" <<Rectangle>> #lightpink{
-package "App Services" <<rectangle>>{
+package "UserProfile Service" <<rectangle>>{
 class "CreateUserProfileService" as srv << Service >> {
++createAndSaveUserProfile(dto)
+}
+}
+
+
+package "Factory Interface" <<rectangle>>{
+interface "UserProfileFactoryRepository" as ifactory{
 +createUserProfile(dto)
 }
 }
 
-
-package "IFactory" <<rectangle>>{
-interface "IUserProfileRepository" as ifactory{
-+createUserProfile(description)
-}
-}
-
-package "IRepositories" <<rectangle>>{
-interface "IUserProfileRepository" as repo{
-+saveUserProfile(userProfileName)
-+addUserProfile(userProfileName)
-+validateUserProfile(userProfileName)
+package "Repository Interface" <<rectangle>>{
+interface "UserProfileRepository" as repo{
++saveUserProfile(newUserProfile)
++existsByDescription(userProfileName)
 }
 }
 
@@ -57,46 +55,54 @@ package "Domain" <<Rectangle>> #burlywood{
 package "Aggregates" <<rectangle>>{
 
 package "UserProfile" <<Rectangle>>{
-entity "UserProfile" as profile << Root >>
+entity "UserProfile" as profile << Root >> {
+- userProfileId : UserProfileID
++ getUserProfileID()
 }
 }
+}
+
 package "Value Object" <<rectangle>>{
 class "UserProfileId" as upid << Value Object >> {
-UserProfileId : Description
+-userProfileID : UserProfileID
++userProfileID()
 }
 }
 
 package "Factory" <<rectangle>>{
 class "UserProfileFactory" as Factory << Factory >> {
-+createUserProfile (description)
++createUserProfile (userProfileID)
 }
 }
 }
 
 package "DTO" <<rectangle>>{
 class "UserProfileMapper" as map <<Component>> {
-+ datatoDto()
-+ modeltoDto()
-+ dtotoJson()
++ toDto(newUserProfile)
 }
 
 class "UserProfileDTO" as dto <<Component>>{
-+ userProfileName : String
+- dto.userProfileName
 }
 
 
+class "OutputUserProfileDTO" as output <<Component>>{
+- dto.userProfileName
 }
+}
+
 
 route .d.> ctrl
 Store .d.|> repo
-ctrl ..l.> map
+srv ..l.> map
 srv .d.> ifactory
 Store "1"*---"*" profile
 srv .d.> repo
-Factory .u.|> ifactory
+Factory ..u..|> ifactory
 profile "1"*--"*" upid
-ctrl .d.> srv
-
+ctrl ...d.> srv
+srv .d.> dto
+srv .d.> output
 
 
 

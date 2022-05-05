@@ -2,7 +2,7 @@ package switch2021.project.controller.old;
 
 import switch2021.project.model.*;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.stores.SystemUserStore;
+import switch2021.project.repositories.SystemUserRepository;
 import switch2021.project.repositories.UserProfileRepository;
 import switch2021.project.model.UserProfile.UserProfile;
 
@@ -14,7 +14,7 @@ public class UpdateUserProfileController {
      * Attributes
      **/
     private final UserProfileRepository userProfileStore;
-    private final SystemUserStore systemUserStore;
+    private final SystemUserRepository systemUserStore;
     private SystemUser user;
 
 
@@ -42,7 +42,7 @@ public class UpdateUserProfileController {
     public List<UserProfile> getUserProfileList() {
         return userProfileStore.findAllUserProfiles();
     }
-
+/*
     public boolean updateProfile(SystemUser user, UserProfile oldProfile, UserProfile newProfile) {
         this.user = user;
         this.user.updateProfile(oldProfile, newProfile);
@@ -50,4 +50,6 @@ public class UpdateUserProfileController {
 
         return true;
     }
+
+ */
 }

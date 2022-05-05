@@ -1,20 +1,16 @@
 package switch2021.project.controller.old;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import switch2021.project.controller.old.UpdateUserProfileController;
 import switch2021.project.model.*;
-import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.stores.SystemUserStore;
+import switch2021.project.repositories.SystemUserRepository;
 import switch2021.project.repositories.UserProfileRepository;
-import switch2021.project.model.UserProfile.UserProfile;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UpdateUserProfileControllerTest {
 
     private Company company;
-    private SystemUserStore systemUserStore;
+    private SystemUserRepository systemUserStore;
     private UserProfileRepository userProfileStore;
 
 

@@ -6,5 +6,5 @@ import switch2021.project.model.valueObject.UserProfileId;
 
 //@Component
 public interface ISystemUserFactory {
-    SystemUser createSystemUser(NewUserInfoDTO infoDTO, UserProfileId visitorId);
+    SystemUser createSystemUser(NewUserInfoDTO infoDTO);
 }

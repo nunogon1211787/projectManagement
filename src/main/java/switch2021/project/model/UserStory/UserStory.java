@@ -2,7 +2,6 @@ package switch2021.project.model.UserStory;
 
 import lombok.*;
 import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.ProjectID;
 
 import switch2021.project.utils.Entity;
 
@@ -20,9 +19,9 @@ public class UserStory implements Entity<UserStory> {
     private UserStoryID userStoryID;
     private UsPriority priority;
     private Description description;
-    private UserStory parentUserStory;
     private UsHour timeEstimate;
 
+    private UserStory parentUserStory;
     private LocalDate usStartDate; //US started to be worked on a sprint - we were able to determine the "age/pending"
     private LocalDate usEndDate; // It means it's "done"
     private LocalDate usCancelled; //It means it's  "cancelled"
@@ -38,29 +37,24 @@ public class UserStory implements Entity<UserStory> {
     /**
      * Constructor User Story Refined
      **/
-    public UserStory(UserStory userStoryToRefine, int priority, String description) {
-//        this.title = new UsTitle(userStoryToRefine.getTitle().getTitleUs() + " _Refined");
-        this.priority = new UsPriority(priority);
-        this.description = new Description(description);
-        this.parentUserStory = userStoryToRefine;
+    public UserStory(UserStory parentUserStory) {
+        this.userStoryID = new UserStoryID(parentUserStory.userStoryID.toString() + " - Refined");
     }
 
-//    /**
-//     * Methods set (outside lombok)
-//     */
-//    public boolean setPriority(int priority) {
-//        this.priority = new UsPriority(priority);
-//        return true;
-//    }
 
     /**
-     * Methods has
+     * Methods has - used in scrum board
      */
-
     public boolean hasCode(UserStoryID idUserStory) {
-        return this.userStoryID == idUserStory;
+        return this.userStoryID.equals(idUserStory);
     }
 
+    /**
+     * Override Methods
+     *
+     * @param other to compare
+     * @return True if they have the same identity
+     */
 
     @Override
     public boolean sameIdentityAs(UserStory other) {

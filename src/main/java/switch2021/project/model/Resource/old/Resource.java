@@ -78,9 +78,11 @@ public class Resource {
     }
 
     // Check Resource Name
-    public boolean isYourName(String name) {
+/*    public boolean isYourName(String name) {
         return this.user.hasName(name);
     }
+
+ */
 
     //Check Resource Role
     public boolean isYourRole(String role) {

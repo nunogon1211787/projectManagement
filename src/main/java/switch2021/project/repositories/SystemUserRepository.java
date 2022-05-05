@@ -1,4 +1,4 @@
-package switch2021.project.stores;
+package switch2021.project.repositories;
 
 import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.ISystemUserRepo;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class SystemUserStore implements ISystemUserRepo {
+public class SystemUserRepository implements ISystemUserRepo {
 
     /**
      * Class Attributes
@@ -19,7 +19,7 @@ public class SystemUserStore implements ISystemUserRepo {
     /**
      * Constructor
      */
-    public SystemUserStore() {
+    public SystemUserRepository() {
         this.systemUserList = new ArrayList<>();
     }
 
@@ -55,14 +55,17 @@ public class SystemUserStore implements ISystemUserRepo {
 
     @Override
     public boolean existsByEmail(String newUserEmail) {
+        boolean result = false;
+
         for (SystemUser newUser : this.systemUserList) {
             if (newUser.getSystemUserId().getEmail().getEmailText().trim().equalsIgnoreCase(newUserEmail.trim())) {
-                return true;
+                result = true;
+                break;
             }
         }
-        return false;
+        return result;
     }
-
+/*
     ///// ----->>>>>>  Rever Método
     public List<SystemUser> searchUsers(String name, String email, String function, int state, List<UserProfile> profileChoosenList) {
         int listSize = this.systemUserList.size();
@@ -76,4 +79,6 @@ public class SystemUserStore implements ISystemUserRepo {
         }
         return foundUsersList;
     }
+
+ */
 }

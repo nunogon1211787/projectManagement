@@ -2,8 +2,9 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import switch2021.project.factory.*;
-import switch2021.project.model.UserStory.RepoUserStory;
+import switch2021.project.model.UserStory.UserStoryRepository;
 import switch2021.project.repositories.ProjectStore;
+import switch2021.project.repositories.SystemUserRepository;
 import switch2021.project.repositories.TypologyRepository;
 import switch2021.project.repositories.UserProfileRepository;
 import switch2021.project.stores.*;
@@ -15,7 +16,7 @@ public class Company {
      * Company Attributes
      * The company attributes are composed by all the store lists of a given project
      **/
-    private final SystemUserStore systemUserStore;
+    private final SystemUserRepository systemUserStore;
     private final ProjectStore projectStore;
     private final UserProfileRepository userProfileStore;
     private final ProjectRoleStore projectRoleStore;
@@ -27,7 +28,7 @@ public class Company {
 
 
     //private final ProjectRoleFactory projectRoleFactory;
-    private final RepoUserStory userStoryStore;
+    private final UserStoryRepository userStoryStore;
     //private final UserStoryFactory userStoryFactory;
 
 
@@ -36,7 +37,7 @@ public class Company {
      * The company constructor initializes and populates all the store lists
      **/
     public Company() {
-        this.systemUserStore = new SystemUserStore();
+        this.systemUserStore = new SystemUserRepository();
         this.projectStore = new ProjectStore();
         this.userProfileStore = new UserProfileRepository();
         //this.projectRoleFactory = new ProjectRoleFactory();
@@ -47,7 +48,7 @@ public class Company {
         this.userStoryStatusStore = new UserStoryStatusStore();
         //this.requestStore = new RequestStore();
         //this.userStoryFactory = new UserStoryFactory();
-        this.userStoryStore = new RepoUserStory();
+        this.userStoryStore = new UserStoryRepository();
 
         this.userProfileStore.populateDefault();
         this.projectRoleStore.populateDefault();

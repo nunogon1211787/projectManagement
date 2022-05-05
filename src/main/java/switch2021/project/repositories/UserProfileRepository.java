@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Repository
-public class UserProfileRepository implements IUserProfileRepo {
+public class UserProfileRepository  {
 
     /**
      * Attributes
@@ -23,7 +23,7 @@ public class UserProfileRepository implements IUserProfileRepo {
         userProfileList = new ArrayList<>();
     }
 
-    @Override
+
     public UserProfile findUserProfileByDescription(String profileName) {
         UserProfile profile = null;
 
@@ -36,7 +36,7 @@ public class UserProfileRepository implements IUserProfileRepo {
         return profile;
     }
 
-    @Override
+
     public List<UserProfile> findAllUserProfiles() {
         return new ArrayList<>(this.userProfileList);
     }
@@ -44,7 +44,7 @@ public class UserProfileRepository implements IUserProfileRepo {
     /**
      * Save UserProfile Method (Save a new UserProfile object to the UserProfile List)
      **/
-    @Override
+
     public boolean saveUserProfile(UserProfile profile) {
         if (profile == null || existsByDescription(profile.getUserProfileId().getUserProfileName().getText())) {
             return false;
@@ -53,7 +53,6 @@ public class UserProfileRepository implements IUserProfileRepo {
         }
     }
 
-    @Override
     public boolean existsByDescription(String userProfileText) {
         for (UserProfile userProfile : this.userProfileList) {
             if (userProfile.getUserProfileId().getUserProfileName().getText().equalsIgnoreCase(userProfileText.trim())) {

@@ -34,7 +34,7 @@ public class SearchSystemUsersController {
     /**
      * Method to search users in the domain
      **/
-    public List<SystemUser> searchUsers(String name, String email, String function, int state, String[] profileChoosenNameList) {
+/*    public List<SystemUser> searchUsers(String name, String email, String function, int state, String[] profileChoosenNameList) {
         List<UserProfile> profileChoosenList = new ArrayList<>();
 
         for (String s : profileChoosenNameList) {
@@ -42,4 +42,6 @@ public class SearchSystemUsersController {
         }
         return company.getSystemUserStore().searchUsers(name, email, function, state, profileChoosenList);
     }
+
+ */
 }

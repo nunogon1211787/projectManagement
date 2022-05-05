@@ -76,7 +76,7 @@ public class ProjectTeam {
     }
 
     //Get current resource by name
-    public Resource getResourceByName(String name) {
+/*    public Resource getResourceByName(String name) {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
@@ -87,6 +87,8 @@ public class ProjectTeam {
         }
         return resource;
     }
+
+ */
 
     public List<String> getCurrentResourcesNames() {
         List<String> currentResourcesNames = new ArrayList<>();

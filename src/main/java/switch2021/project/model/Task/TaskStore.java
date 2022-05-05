@@ -39,7 +39,7 @@ public class TaskStore {
     }
 
     // Create task with DTO and Mapper. US032 - Sprint 3
-    public boolean createSprintTask(CreateTaskDTO dto, TaskMapper mapper, Project proj){
+/*    public boolean createSprintTask(CreateTaskDTO dto, TaskMapper mapper, Project proj){
         Task newTask = mapper.toModel(dto, proj);
 
         return saveTask(newTask);
@@ -52,6 +52,8 @@ public class TaskStore {
 
         return saveTask(newTask);
     }
+
+ */
 
     /**
      * Getter methods

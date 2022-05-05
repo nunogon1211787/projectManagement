@@ -5,28 +5,32 @@ title US012 - "As Director, I want to create a new project typology."
 autoactivate on
 autonumber
 
-actor "Director" as Director
-participant ":CreateNewTypologyUI" as UI
-participant ":CreateNewTypologyController" as Controller
-participant ":Company" as Company
-participant "typologyStore:TypologyStore" as Store
-participant "typo:Typology" as Typology
+participant ":CreateTypologyRoute" as Router
+participant "Ctrl:CreateTypologyController" as Controller
+participant "service:CreateTypologyService" as Service
+participant "factTypo:ITypologyFactory" as Factory
+participant "newTypo:Typology" as Typology
+participant "repoTypo:IRepositoryTypology" as Repository
+participant "savedTypoDto:DtoTypology" as outputDTO
+participant "mapper:TypologyMapper" as Mapper
 
-Director -> UI: Starts the creation of a new typology
-return Request data (description)
-Director -> UI: types required data
-UI -> Controller: createTypology (description)
-Controller -> Company: getTypologyStore()
-return typologyStore
-Controller -> Store: createTypology (description)
-Store -> Typology**: Typology (description)
-return typology
-Controller -> Store: saveTypology (typo)
-Store -> Store: validateTypology (typo)
+[o-> Router: Post/Typologies/(inputDto)
+Router -> Controller: createTypology (inputDto)
+Controller -> Service: createAndSaveTypology(newTypoDto)
+Service -> Factory: create(newTypoDto)
+Factory --> Typology**: create(newTypoDto.description)
+return newTypo
+Service -> Service: saveTypology(newTypo)
+Service -> Repository: saveTypology(newTypo)
+Repository -> Repository: existsByTypologyId(newTypo)
+deactivate Repository
 return true
-return true
-return true
-return Informs operation success
-
+deactivate Service
+Service -> Mapper: toDTO(newTypo)
+Mapper --> outputDTO**: create(newTypoAttr)
+return savedTypoDto
+return savedTypoDto
+return outputDto
+[<--o Router: response
 
 @enduml

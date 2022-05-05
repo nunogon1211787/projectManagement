@@ -2,13 +2,14 @@ package switch2021.project.model.UserStory;
 
 import lombok.*;
 import org.springframework.stereotype.Repository;
+import switch2021.project.interfaces.IUserStoryRepo;
 
 import java.util.*;
 
 @Getter
 @Setter
 @Repository
-public class RepoUserStory implements switch2021.project.interfaces.IRepoUserStory {
+public class UserStoryRepository implements IUserStoryRepo {
 
     /**
      * UserStory Store Attributes (backlog). Contains a UserStory list.
@@ -18,7 +19,7 @@ public class RepoUserStory implements switch2021.project.interfaces.IRepoUserSto
     /**
      * Constructor
      **/
-    public RepoUserStory() {
+    public UserStoryRepository() {
         this.userStoryList = new ArrayList<>();
     }
 
@@ -31,7 +32,7 @@ public class RepoUserStory implements switch2021.project.interfaces.IRepoUserSto
 
     //TODO -----> CDC
     public UserStory refineUserStory(UserStory userStoryParent, int priority, String description) {
-        UserStory userStory = new UserStory(userStoryParent, priority, description);
+        UserStory userStory = new UserStory(userStoryParent);
         validateUserStory(userStory);
 
         return userStory;
@@ -177,8 +178,8 @@ public class RepoUserStory implements switch2021.project.interfaces.IRepoUserSto
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof RepoUserStory)) return false;
-        RepoUserStory that = (RepoUserStory) o;
+        if (!(o instanceof UserStoryRepository)) return false;
+        UserStoryRepository that = (UserStoryRepository) o;
         return Objects.equals(userStoryList, that.userStoryList);
     }
 

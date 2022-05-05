@@ -1,5 +1,6 @@
 package switch2021.project.factory;
 
+import org.springframework.stereotype.Component;
 import switch2021.project.dto.TaskDTO;
 import switch2021.project.factoryInterface.TaskFactoryInterface;
 import switch2021.project.interfaces.TaskContainerID;
@@ -10,7 +11,7 @@ import switch2021.project.model.Task.TaskTypeEnum;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.EffortEstimate;
 import switch2021.project.model.valueObject.Name;
-
+@Component
 public class TaskFactory implements TaskFactoryInterface {
 
 
@@ -21,7 +22,6 @@ public class TaskFactory implements TaskFactoryInterface {
         Description description1 = new Description(taskDTO.description);
         EffortEstimate effortEstimate1 = new EffortEstimate(taskDTO.effortEstimate);
         TaskTypeEnum taskTypeEnum = TaskTypeEnum.valueOf(taskDTO.type);
-
         TaskID newTaskID = new TaskID(taskContainerID, newName);
 
         TaskReeng newTask = new TaskReeng(newTaskID);

@@ -1,13 +1,11 @@
 package switch2021.project.model.UserStory;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import switch2021.project.utils.ValueObject;
 
 import java.util.Objects;
 
 @Getter
-@EqualsAndHashCode
 public class UsTitle implements ValueObject<UsTitle> {
 
     /**
@@ -46,6 +44,18 @@ public class UsTitle implements ValueObject<UsTitle> {
         return other != null && Objects.equals(this.titleUs, other.titleUs);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final UsTitle usTitle = (UsTitle) o;
+        return sameValueAs(usTitle);
+    }
+
+    @Override
+    public int hashCode() {
+        return titleUs.hashCode();
+    }
 }
 
 

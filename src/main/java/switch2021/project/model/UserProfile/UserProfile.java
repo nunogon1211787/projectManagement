@@ -14,6 +14,7 @@ public class UserProfile implements Entity<UserProfile> {
      **/
     private final UserProfileId userProfileId;
 
+
     /**
      * Profile Constructors
      */

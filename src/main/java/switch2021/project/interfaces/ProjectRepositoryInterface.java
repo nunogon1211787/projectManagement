@@ -6,7 +6,7 @@ import switch2021.project.model.Project.ProjectReeng;
 
 import java.util.List;
 
-@Component
+
 public interface ProjectRepositoryInterface {
 
     /**

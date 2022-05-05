@@ -20,7 +20,7 @@ public class ShowCurrentProjectTeamService {
 
     @Autowired
     ProjectRepositoryInterface projRepo;
-    @Autowired
+    //@Autowired
     ResourceRepositoryInterface resRepo;
     @Autowired
     ResourceMapper map;

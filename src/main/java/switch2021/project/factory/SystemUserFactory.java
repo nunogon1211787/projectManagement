@@ -1,6 +1,7 @@
 package switch2021.project.factory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.NewUserInfoDTO;
 import switch2021.project.factoryInterface.ISystemUserFactory;
@@ -8,7 +9,7 @@ import switch2021.project.factoryInterface.IValueObjectsFactory;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.valueObject.*;
 
-@Service
+@Component
 public class SystemUserFactory implements ISystemUserFactory {
 
     @Autowired
@@ -33,7 +34,7 @@ public class SystemUserFactory implements ISystemUserFactory {
     }
 
     @Override
-    public SystemUser createSystemUser(NewUserInfoDTO infoDTO, UserProfileId visitorId) {
+    public SystemUser createSystemUser(NewUserInfoDTO infoDTO) {
         SystemUser newUser = new SystemUser(idFactory.create(infoDTO.email));
 
         newUser.assignName(nameFactory.create(infoDTO.userName));
@@ -41,7 +42,7 @@ public class SystemUserFactory implements ISystemUserFactory {
         newUser.assignValidatedPassword(passwordFactory.create(infoDTO.password),
                 passwordFactory.create(infoDTO.passwordConfirmation));
         newUser.assignPhoto(photoFactory.create(infoDTO.photo));
-        newUser.assignProfileId(visitorId);
+        newUser.assignProfileId(new UserProfileId("Visitor"));
 
         return newUser;
     }

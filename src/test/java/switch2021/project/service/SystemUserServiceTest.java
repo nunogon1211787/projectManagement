@@ -1,26 +1,15 @@
-package switch2021.project.model.SystemUser;
-
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import switch2021.project.factory.SystemUserFactory;
-import switch2021.project.model.Company;
-import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.UserProfileId;
-import switch2021.project.stores.SystemUserStore;
-import switch2021.project.repositories.UserProfileRepository;
+package switch2021.project.service;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class SystemUserServiceTest {
 /*    @Test
     public void createAndSaveSystemUserSuccess() {
         //Arrange
         Company company = new Company();
-        SystemUserStore systemUserStore = company.getSystemUserStore();
+        SystemUserRepository systemUserStore = company.getSystemUserStore();
         UserProfileRepository userProfileStore = company.getUserProfileStore();
         SystemUserFactory systemUserFactory = new SystemUserFactory();
         RegisterUserService systemUserService = new RegisterUserService(systemUserStore, userProfileStore, systemUserFactory);
@@ -46,7 +35,7 @@ public class SystemUserServiceTest {
     public void createAndSaveSystemUserFail() {
         //Arrange
         Company company = new Company();
-        SystemUserStore systemUserStore = company.getSystemUserStore();
+        SystemUserRepository systemUserStore = company.getSystemUserStore();
         UserProfileRepository userProfileStore = company.getUserProfileStore();
         RegisterUserService systemUserService = new RegisterUserService(systemUserStore, userProfileStore);
         String userName = "manueloliveira";
