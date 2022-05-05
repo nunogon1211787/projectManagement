@@ -1,19 +1,35 @@
 package switch2021.project.factory;
 
-import switch2021.project.dto.SprintDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import switch2021.project.dto.NewSprintDTO;
+import switch2021.project.factoryInterface.ISprintFactory;
+import switch2021.project.factoryInterface.VOFactoryInterface;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintID;
-import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.ProjectID;
 
+@Component
+public class SprintFactory implements ISprintFactory {
 
-public class SprintFactory implements switch2021.project.factoryInterface.ISprintFactory {
+    /**
+     * Attributes
+     */
+    @Autowired
+    private VOFactoryInterface<SprintID> sprintIDFactory;
 
+    /**
+     * Constructor
+     */
+    public SprintFactory(VOFactoryInterface<SprintID> id) {
+        this.sprintIDFactory = id;
+    }
+
+    /**
+     * Method
+     */
     @Override
-    public Sprint createSprint(SprintDTO dto) {
-        ProjectID projectID = new ProjectID(dto.projectID);
-        Description name = new Description(dto.name);
-        SprintID sprintID = new SprintID(projectID, name);
-        return new Sprint(sprintID);
+    public Sprint createSprint(NewSprintDTO dto) {
+        Sprint newSprint = new Sprint(sprintIDFactory.create(dto.projectID, dto.name));
+        return newSprint;
     }
 }

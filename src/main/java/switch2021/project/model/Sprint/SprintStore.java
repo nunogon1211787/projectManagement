@@ -54,7 +54,7 @@ public class SprintStore implements SprintRepositoryInterface{
     public List<Sprint> findAllSprintsByProjectID(String projectID) {
         List<Sprint> allSprintsInAProject = new ArrayList<>();
         for (Sprint x : sprints) {
-            if (x.hasProjectID(projectID)) {
+            if (x.getSprintID().getProjectID().getCode().equalsIgnoreCase(projectID)) {
                 allSprintsInAProject.add(x);
             }
         }
@@ -91,23 +91,6 @@ public class SprintStore implements SprintRepositoryInterface{
         this.sprints.remove(sprint);
         return true;
     }
-//
-//    /**
-//     * Method to return all activities in a project - //TODO Método David
-//     */
-//    public List<Task> getListOfAllAActivitiesOfAProject() {
-//        List<Task> allActivitiesInAProject = new ArrayList<>();
-//        for (Sprint i : sprints) {
-//            allActivitiesInAProject.addAll(i.getListOfTasksOfASprint());
-//        }
-//        return allActivitiesInAProject;
-//    }
-
-    /** Method to Validate a Sprint **/
-    public boolean validateIfSprintAlreadyExists(Sprint sprint) {
-        return this.sprints.contains(sprint);
-    }
-
 
     /** Method to Validate if StartDate is later than the EndDate of the last Sprint **/
     private boolean validateStartDate(LocalDate startDate) {
