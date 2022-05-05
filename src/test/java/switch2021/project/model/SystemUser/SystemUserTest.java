@@ -1,9 +1,21 @@
 package switch2021.project.model.SystemUser;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import switch2021.project.interfaces.ISystemUserRepo;
+import switch2021.project.model.valueObject.Email;
+import switch2021.project.model.valueObject.Password;
+import switch2021.project.model.valueObject.SystemUserID;
+import switch2021.project.repositories.SystemUserRepository;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class SystemUserTest {
-/*   @Test
+    /*
+   @Test
     public void verifyEmail() {
 
         //Arrange

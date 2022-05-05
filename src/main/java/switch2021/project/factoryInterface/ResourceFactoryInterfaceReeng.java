@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import switch2021.project.dto.ResourceDTOReeng;
 import switch2021.project.model.Resource.ResourceReeng;
 
-@Component
 public interface ResourceFactoryInterfaceReeng {
 
     ResourceReeng createResource(ResourceDTOReeng resourceDTO);

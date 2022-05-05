@@ -6,6 +6,7 @@ import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.ID_Typology;
 
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,9 +27,8 @@ public class TypologyRepositoryTest {
         when(typo.getId_description()).thenReturn(id);
         when(id.getDescription()).thenReturn(des);
         when(des.getText()).thenReturn("Test");
-        test.saveTypology(typo);
         //Assert
-        assertEquals(1, test.getTypologyList().size());
+        assertTrue(test.saveTypology(typo));
     }
 
     @DisplayName("Add and save several typologies at same time")
@@ -36,15 +36,17 @@ public class TypologyRepositoryTest {
     public void typologySaveFail() {
         //Arrange
         TypologyRepository test = new TypologyRepository();
-        Typology typo = new Typology("Test"); //It is correct?
+        Typology typo = mock(Typology.class);
         Typology typo2 = mock(Typology.class);
         ID_Typology id = mock(ID_Typology.class);
         Description des = mock(Description.class);
         //Act
+        when(typo.getId_description()).thenReturn(id);
         when(typo2.getId_description()).thenReturn(id);
         when(id.getDescription()).thenReturn(des);
         when(des.getText()).thenReturn("Test");
         test.saveTypology(typo);
+        when(typo.hasID_Description(des.getText())).thenReturn(true);
         //Assert
         assertFalse(test.saveTypology(typo2));
     }

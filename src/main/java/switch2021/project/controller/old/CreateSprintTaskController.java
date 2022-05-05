@@ -58,7 +58,7 @@ public class CreateSprintTaskController {
         return currentResourcesNames;
     }
 
-    public boolean createSprintTask(CreateTaskDTO createTaskDTO){ return this.taskStore.createSprintTask(createTaskDTO, this.taskMapper, this.proj); }
+//    public boolean createSprintTask(CreateTaskDTO createTaskDTO){ return this.taskStore.createSprintTask(createTaskDTO, this.taskMapper, this.proj); }
 
 
 }

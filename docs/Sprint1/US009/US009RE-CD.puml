@@ -19,7 +19,7 @@ class "CreateUserStoryController" as ctrl << Component >> {
 }
 }
 package "Repositories" <<Folder>>{
-class "RepoUserStory" as store << Repository >> {
+class "UserStoryRepository" as store << Repository >> {
 -userStoryList : List<UserStory>
 + save(newUserStory)
 + existsByUserStoryId(tUserStoryID)
@@ -35,7 +35,7 @@ class "CreateUserStoryService" as service << Component >> {
 }
 }
 package "Repositories Interface" <<Folder>>{
-interface "IRepoUserStory" as repo << Interface >>{
+interface "IUserStoryRepo" as repo << Interface >>{
 + save(newUserStory)
 + existsByUserStoryId(UserStoryID)
 }

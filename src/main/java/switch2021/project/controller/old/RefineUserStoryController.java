@@ -2,7 +2,7 @@ package switch2021.project.controller.old;
 
 import switch2021.project.model.*;
 import switch2021.project.model.UserStory.UserStoryID;
-import switch2021.project.model.UserStory.RepoUserStory;
+import switch2021.project.model.UserStory.UserStoryRepository;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.UserStory.UserStory;
 
@@ -13,7 +13,7 @@ public class RefineUserStoryController {
      **/
     private final Company company;
     private Project project;
-    private RepoUserStory userStoryStore;
+    private UserStoryRepository userStoryStore;
     private UserStory userStoryParent;
 
 
@@ -33,7 +33,7 @@ public class RefineUserStoryController {
         return this.project;
     }
 
-    public RepoUserStory getUserStoryStore(){
+    public UserStoryRepository getUserStoryStore(){
         this.userStoryStore = this.project.getUserStoryStore();
         return this.userStoryStore;
     }

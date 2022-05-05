@@ -45,10 +45,12 @@ public class AssignProductOwnerController {
     /**
      * Method to receive a resource of the project and send to UI
      */
-    public ResourceDTO getResource(String name) {
+/*    public ResourceDTO getResource(String name) {
         this.resource = project.getProjectTeam().getResourceByName(name);
         return projectTeamMapper.toDto(resource);
     }
+
+ */
 
 
     /**

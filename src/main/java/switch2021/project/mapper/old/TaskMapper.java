@@ -13,7 +13,7 @@ public class TaskMapper {
     /**
      * Method to break a Create Task DTO data
      **/
-    public Task toModel(CreateTaskDTO dto, Project proj){
+/*    public Task toModel(CreateTaskDTO dto, Project proj){
 
         String name = dto.getName();
         String description = dto.getDescription();
@@ -29,4 +29,6 @@ public class TaskMapper {
             return new Task(name, description, effortEstimate, type, responsible, precedenceList);
         }
     }
+
+ */
 }

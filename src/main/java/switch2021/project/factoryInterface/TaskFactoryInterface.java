@@ -8,7 +8,7 @@ import switch2021.project.model.Resource.ResourceIDReeng;
 import switch2021.project.model.Task.TaskReeng;
 
 
-@Component
+
 public interface TaskFactoryInterface {
 
     TaskReeng createTask(TaskDTO taskDTO, ResourceIDReeng resourceId, TaskContainerID taskContainerID);

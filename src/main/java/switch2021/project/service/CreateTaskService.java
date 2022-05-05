@@ -24,17 +24,17 @@ import switch2021.project.model.UserStory.UserStory;
         @Autowired
         public TaskRepositoryInterface taskRepositoryInterface;
 
-        @Autowired
-        public TaskContainerID taskContainerID;
+        //@Autowired
+        //public TaskContainerID taskContainerID;
 
-        @Autowired
+        //@Autowired
         public ResourceRepositoryInterface resourceRepositoryInterface;
 
         @Autowired
         public SprintRepositoryInterface sprintRepositoryInterface;
 
         @Autowired
-        public IRepoUserStory iRepoUserStory;
+        public IUserStoryRepo iUserStoryRepo;
 
         @Autowired
         public CreateTaskService() {
@@ -46,7 +46,7 @@ import switch2021.project.model.UserStory.UserStory;
 
             TaskContainerID z;
 
-            UserStory y = iRepoUserStory.findUserStoryById(taskDTO.taskContainerID);
+            UserStory y = iUserStoryRepo.findUserStoryById(taskDTO.taskContainerID);
             if(y != null){
                 z = y.getUserStoryID();
             }else{

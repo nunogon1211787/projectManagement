@@ -22,8 +22,7 @@ package "Repositories" <<rectangle>>{
 class "UserProfileStore" as Store << Repository >> {
 -profiles: List<UserProfile>
 +saveUserProfile(userProfileName)
-+addUserProfile(userProfileName)
-+validateUserProfile(userProfileName)
++existsByDescription(userProfileName)
 }
 }
 }
@@ -46,8 +45,7 @@ interface "UserProfileFactoryRepository" as ifactory{
 package "Repository Interface" <<rectangle>>{
 interface "UserProfileRepository" as repo{
 +saveUserProfile(newUserProfile)
-+addUserProfile(newUserProfile)
-+validateUserProfile(newUserProfile)
++existsByDescription(userProfileName)
 }
 }
 
@@ -84,13 +82,12 @@ class "UserProfileMapper" as map <<Component>> {
 }
 
 class "UserProfileDTO" as dto <<Component>>{
-- userProfileID : UserProfileID
-+ getUserProfileID()
+- dto.userProfileName
 }
 
 
 class "OutputUserProfileDTO" as output <<Component>>{
-- userProfileId : UserProfileID
+- dto.userProfileName
 }
 }
 

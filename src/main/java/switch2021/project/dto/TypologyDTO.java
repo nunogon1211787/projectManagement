@@ -1,4 +1,5 @@
-package switch2021.project.dto.old;
+package switch2021.project.dto;
+
 
 import lombok.Getter;
 
@@ -13,14 +14,12 @@ import lombok.Getter;
 public class TypologyDTO {
 
     /**
-     * Attribute.
+     * Attributes.
      */
-    private String description;
+    public String description;
 
     /**
      * Constructor.
      */
-    public TypologyDTO (String desc) {
-        this.description = desc;
-    }
+    public TypologyDTO() {}
 }

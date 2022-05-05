@@ -6,7 +6,6 @@ import switch2021.project.model.Resource.ResourceReeng;
 
 import java.util.List;
 
-@Component
 public interface ResourceRepositoryInterface/* extends CrudRepository<Object, Long> */{
 
     /**
