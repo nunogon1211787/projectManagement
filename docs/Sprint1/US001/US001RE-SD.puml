@@ -11,9 +11,9 @@ participant ": RegisterUserRoute" as Ui
 participant ": RegisterUserController" as Ctrl
 participant ": RegisterUserService" as Serv
 'participant "dto: RegisterUserDTO" as RUDTO
-participant ": IUserProfileRepo" as UPStore
-participant "visitor\n : UserProfile" as UP
-participant "visitorID\n : UserProfileID" as UPID
+'participant ": IUserProfileRepo" as UPStore
+'participant "visitor\n : UserProfile" as UP
+'participant "visitorID\n : UserProfileID" as UPID
 'participant "visitorDesc : Description" as Desc
 participant ": ISystemUserFactory" as Fact
 participant ": IValueObjectsFactory\n<SystemUserID>" as SUIDFact
@@ -23,6 +23,7 @@ participant " systemUserID\n : SystemUserID" as SUID
 participant "newUser\n : SystemUser" as SU
 participant ": IValueObjectsFactory\n<Name>" as nameFact
 participant " name : Name" as name
+'participant "visitorID\n : UserProfileID" as UPID
 participant ": ISystemUserRepo" as SUStore
 participant ": SystemUserMapper" as mapper
 participant "outDTO : OutputUserDTO" as OutDTO
@@ -32,8 +33,8 @@ Ui--> User: requests data (userName,\n email, function, password,\n passwordConf
 User->Ui:  POST /users
 Ui->Ctrl: registerUser(infoDTO)
 Ctrl->Serv: createAndSaveSystemUser(infoDTO)
-Serv->UPStore: findUserProfileByDescription("Visitor")
-note over UPStore: steps hidden to simplify the diagram
+'Serv->UPStore: findUserProfileByDescription("Visitor")
+'note over UPStore: steps hidden to simplify the diagram
 /'loop for each known userProfile
 UPStore->UP: getUserProfileID()
 UP->UPID: getUserProfileName()
@@ -42,10 +43,10 @@ Desc-->UPID: True
 UPID-->UP: visitorDesc
 UP-->UPStore:visitorID
 end´'/
-UPStore-->Serv:visitor
-Serv->UP: getUserProfileID()
-UP-->Serv:visitorID
-Serv->Fact: createSystemUser(infoDTO, visitorID)
+'UPStore-->Serv:visitor
+'Serv->UP: getUserProfileID()
+'UP-->Serv:visitorID
+Serv->Fact: createSystemUser(infoDTO)
 Fact->SUIDFact: create(infoDTO.email)
 SUIDFact->emailFact: create(emailText)
 emailFact->email**: createEmail(emailText)

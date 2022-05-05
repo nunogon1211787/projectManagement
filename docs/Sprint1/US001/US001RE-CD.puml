@@ -6,149 +6,141 @@ title US001 - As Non-Registered User, I want to register as an application user.
 
 skinparam classAttributeIconSize 0
 
+'''''''''''''''''''''''''''''''
 package "Infrastructure" <<Folder>> #lightblue  {
 class "RegisterUserRoute" as route << Component >>
 }
-
+'''''''''''''''''''''''''''''''
 package "Interface Adapter" <<Folder>> #lightgreen {
-package "Controllers" <<Folder>>{
-class "RegisterUserController" as ctrl << Component >> {
-+registerUser(NewUserInfoDTO)
-}
-}
-package "Repositories" <<Folder>>{
-class "SystemUserRepository" as SUrepo << Repository >> {
-- SystemUsers : List<SystemUser>
-+ saveSystemUser(newUser)
-+ existsByEmail(email)
-}
-class "UserProfileRepository" as UPrepo << Repository >> {
-- userProfiles : List<UserProfile>
-+ findUserProfileByDescription(profileName)
-}
 
+  package "Controllers" <<Folder>>{
+    class "RegisterUserController" as ctrl << Component >> {
+    +registerUser(NewUserInfoDTO)
+    }
+  }
+  package "Repositories" <<Folder>>{
+    class "SystemUserRepository" as SUrepo << Repository >> {
+    + saveSystemUser(newUser)
+    + existsByEmail(email)
+    }
+  }
 }
-}
+'''''''''''''''''''''''''''''''
 class "ResponseEntity" as json <<Component>>
-
+'''''''''''''''''''''''''''''''
 package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
-package "App Service" <<Folder>>{
-class "RegisterUserService" as service << Component >> {
-+createAndSaveSystemUser(NewUserInfoDTO)
+  package "App Service" <<Folder>>{
+    class "RegisterUserService" as service << Component >> {
+    +createAndSaveSystemUser(NewUserInfoDTO)
+    }
+  }
+  package "Repositories Interface" <<Folder>>{
+    interface "ISystemUserRepo" as ISUrepo << Interface >>{
+    + saveSystemUser(newUser)
+    + existsByEmail(email)
+    }
+  }
+
+  package "Factory Interface" <<Folder>>{
+    interface "ISystemUserFactory" as ISUFact << Interface >>{
+    +createSystemUser(NewUserInfoDTO)
+    }
+  }
 }
-}
-package "Repositories Interface" <<Folder>>{
-interface "ISystemUserRepo" as ISUrepo << Interface >>{
-+ saveSystemUser(newUser)
-+ existsByEmail(email)
-}
-interface "IUserProfileRepo" as IUPrepo << Interface >>{
-+ findUserProfileByDescription(profileName)
-}
-}
-package "Factory Interface" <<Folder>>{
-interface "ISystemUserFactory" as ISUFact << Interface >>{
-+createSystemUser(NewUserInfoDTO, UserProfileId)
-}
-}
-}
+'''''''''''''''''''''''''''''''
 package "DTO" <<Folder>> {
-package "NewUserInfoDTO" <<Folder>>{
-class "NewUserInfoDTO" as infoDto << Component >> {
-- userName : String
-- email : String
-- function : String
-- password : String
-- passwordConfirmation : String
-- photo : String
-}
-}
+  package "NewUserInfoDTO" <<Folder>>{
+    class "NewUserInfoDTO" as infoDto << Component >> {
+    - userName : String
+    - email : String
+    - function : String
+    - password : String
+    - passwordConfirmation : String
+    - photo : String
+    }
+  }
 
-package "OutputDTO" <<Folder>>{
-class "OutputDTO" as outDto << Component >> {
-- userName : String
-- email : String
-- function : String
-- photo : String
-- isActive : boolean
-}
-}
+  package "OutputDTO" <<Folder>>{
+    class "OutputDTO" as outDto << Component >> {
+    - userName : String
+    - email : String
+    - function : String
+    - photo : String
+    - isActive : boolean
+    }
+  }
 
-package "DTO" <<Folder>> {
-package "SystemUserMapper" <<Folder>>{
-class "SystemUserMapper" as mapper << Component >> {
-+ toDto(newUser)
+  package "SystemUserMapper" <<Folder>>{
+    class "SystemUserMapper" as mapper << Component >> {
+    + toDto(newUser)
+    }
+  }
 }
-}
-}
-
+'''''''''''''''''''''''''''''''
 package "Entity/Core/Domain" <<Folder>> #burlywood{
-package "SystemUserAggregate" <<Folder>>{
-class "SystemUser" as SU << Root >> {
-- userName : Name
-- photo : Photo
-- encryptedPassword : Description
-- function : Function
-- isActive : boolean
-- assignedIdProfiles : List<UserProfileId>
-- requestedProfiles : List<Request>
-+ SystemUser(systemUserID)
+  package "SystemUserAggregate" as SUAggregate <<Folder>>{
+    class "SystemUser" as SU << Root >> {
+    - userName : Name
+    - photo : Photo
+    - encryptedPassword : Description
+    - function : Function
+    - isActive : boolean
+    - requestedProfiles : List<Request>
+    + SystemUser(systemUserID)
+    }
+  }
+  /'package "UserProfileAggregate" <<Folder>>{
+    class "UserProfile" as UP << Root >> {
+    + UserProfile(userProfileId)
+    }
+  }'/
+  package "Factory" as factory <<Folder>>{
+    class "SystemUserFactory" as SUFact << Factory >> {
+    +createSystemUser(NewUserInfoDTO)
+    }
+  }
+  package "Value Object" as valueObject <<Folder>>{
+    class "SystemUserID" as SUID << Value Object >> {
+    -email : Email
+    +SystemUserID(email)
+    }
+    class "UserProfileID" as UPID << Value Object >> {
+    -profileName : Description
+    +UserProfileID(profileName)
+    }
+  }
 }
-}
-package "UserProfileAggregate" <<Folder>>{
-class "UserProfile" as UP << Root >> {
-+ UserProfile(userProfileId)
-}
-}
-package "Factory" <<Folder>>{
-class "SystemUserFactory" as SUFact << Factory >> {
-+createSystemUser(NewUserInfoDTO, UserProfileId)
-}
-}
-package "Value Object" <<Folder>>{
-class "SystemUserID" as SUID << Value Object >> {
--email : Email
-+SystemUserID(email)
-}
-class "UserProfileID" as UPID << Value Object >> {
--profileName : Description
-+UserProfileID(profileName)
-}
-}
-
+'''''''''''''''''''''''''''''''
 Class SUrepo implements ISUrepo
-Class UPrepo implements IUPrepo
 Class SUFact implements ISUFact
 
 route..d->ctrl
 route--[hidden]d->SUrepo
-route--[hidden]d->UPrepo
 
 ctrl-d[hidden]->ISUrepo
-ctrl-d[hidden]->IUPrepo
 ctrl-d[hidden]->ISUFact
 ctrl..d->service : uses
 ctrl..l>json: uses
-
-SUrepo "1"*-"*" SU
-UPrepo "1"*-"*" UP
-SUrepo-d[hidden]->ISUrepo
-UPrepo-d[hidden]->IUPrepo
 ctrl-d[hidden]->ISUFact
 
-service..u>IUPrepo : uses
-service..u>ISUrepo : uses
+SUrepo "1"*-"*" SU
+SUrepo-d[hidden]->ISUrepo
+
 service..d>ISUFact : uses
+service..u>ISUrepo: uses
 service..r>mapper : uses
 service..r>infoDto : uses
-mapper..r>outDto : uses
-
-SUFact..d>SU : uses
+mapper..d>outDto : uses
+mapper..u[hidden]>infoDto
+SUFact..r>SU : uses
 SUFact..d>UPID : uses
+SUFact..d>SUID : uses
 
-UP "1"-d>"1"UPID: is identified by
+'UP "1"-d>"1"UPID: is identified by
 SU "1"-d>"1"SUID: is identified by
-SU "1"-d>"1..*"UPID: is assigned
+SU "*"-d>"1..*"UPID: is assigned
+factory-r[hidden]>SUAggregate
+factory-l[hidden]>valueObject
 
 
 

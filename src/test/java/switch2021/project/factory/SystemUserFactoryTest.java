@@ -36,12 +36,12 @@ public class SystemUserFactoryTest {
     SystemUserFactory underTest;
 
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp()/* throws Exception*/ {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    @DisplayName(".createSystemUser(NewUserInfoDTO infoDTO, UserProfileId visitorId)")
+    @DisplayName(".createSystemUser(NewUserInfoDTO infoDTO)")
     void itShouldCreateASystemUser() {
         //Arrange
         NewUserInfoDTO infoDTODouble = mock(NewUserInfoDTO.class);
@@ -72,10 +72,8 @@ public class SystemUserFactoryTest {
 
         Photo photoDouble = mock(Photo.class);
         when(photoFactory.create(infoDTODouble.photo)).thenReturn(photoDouble);
-
-        UserProfileId userProfileIdDouble = mock(UserProfileId.class);
         //Act
-        SystemUser isCreated = underTest.createSystemUser(infoDTODouble, userProfileIdDouble);
+        SystemUser isCreated = underTest.createSystemUser(infoDTODouble);
         //Assert
         assertNotNull(isCreated);
     }
