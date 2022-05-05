@@ -24,9 +24,6 @@ import switch2021.project.model.UserStory.UserStory;
         @Autowired
         public TaskRepositoryInterface taskRepositoryInterface;
 
-        @Autowired
-        public TaskContainerID taskContainerID;
-
 //        @Autowired
         public ResourceRepositoryInterface resourceRepositoryInterface;
 

@@ -86,7 +86,7 @@ public class RegisterUserControllerTest {
         assertEquals(201, responseEntity.getStatusCodeValue());
     }
 
-    @Test
+/*    @Test
     @DisplayName("registerUser(NewUserInfoDTO infoDTO)")
     void itShouldFailToRegisterAUserPasswordsNotMatch() {
         assertThrows(IllegalArgumentException.class, () -> {
@@ -118,4 +118,6 @@ public class RegisterUserControllerTest {
             controller.registerUser(dto);
         });
     }
+
+ */
 }

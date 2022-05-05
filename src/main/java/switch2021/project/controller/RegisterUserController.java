@@ -35,7 +35,7 @@ public class RegisterUserController {
 
     @PostMapping
     public ResponseEntity<Object> registerUser(@RequestBody NewUserInfoDTO infoDTO) {
-        /*OutputUserDTO outDTO;
+        OutputUserDTO outDTO;
         try {
             outDTO = registerUserService.createAndSaveSystemUser(infoDTO);
             return new ResponseEntity<>(outDTO, HttpStatus.CREATED);
@@ -45,10 +45,5 @@ public class RegisterUserController {
             message.errorMessage = e.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-
-         */
-        OutputUserDTO outDTO = registerUserService.createAndSaveSystemUser(infoDTO);
-
-        return new ResponseEntity<>(outDTO, HttpStatus.CREATED);
     }
 }
