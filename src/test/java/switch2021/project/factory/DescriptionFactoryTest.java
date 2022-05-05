@@ -6,28 +6,28 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import switch2021.project.model.UserStory.UsHour;
+import switch2021.project.model.valueObject.Description;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
-public class UsHourFactoryTest {
+public class DescriptionFactoryTest {
 
     @InjectMocks
-    UsHourFactory usHourFactory;
+    DescriptionFactory descriptionFactory;
 
     @Mock
-    UsHour usHour;
+    Description description;
 
     @Test
-    @DisplayName("Test to create time estimate - with success")
+    @DisplayName("Test to create description - with success")
     public void createTimeEstimateUsSuccess() {
         //Arrange
-        double expected = 1.0;
+        String expected = "Making some tests";
         // Act
-        usHour = usHourFactory.create(expected);
+        description = descriptionFactory.create(expected);
         //Assert
-        assertEquals(expected, usHour.getUsHours());
+        assertEquals(expected, description.getText());
 
     }
 }

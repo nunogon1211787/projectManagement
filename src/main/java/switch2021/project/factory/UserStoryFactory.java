@@ -1,11 +1,10 @@
 package switch2021.project.factory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import switch2021.project.dto.UserStoryDTO;
-import switch2021.project.factoryInterface.IUserStoryFactory;
-import switch2021.project.factoryInterface.IValueObjectsFactory;
-import switch2021.project.factoryInterface.VOFactoryInterface;
+import switch2021.project.factoryInterface.*;
 import switch2021.project.model.UserStory.*;
 import switch2021.project.model.valueObject.Description;
 
@@ -13,18 +12,19 @@ import switch2021.project.model.valueObject.Description;
 public class UserStoryFactory implements IUserStoryFactory {
 
 
+//    @Qualifier("IUserStoryIDFactory")
+@Autowired
+    private IUserStoryIDFactory userStoryID;
     @Autowired
-    private VOFactoryInterface<UserStoryID> userStoryID;
+    private IUsPriorityFactory priority;
     @Autowired
-    private IValueObjectsFactory<UsPriority> priority;
+    private IDescriptionFactory description;
     @Autowired
-    private IValueObjectsFactory<Description> description;
-    @Autowired
-    private IValueObjectsFactory<UsHour> timeEstimate;
+    private IUsHourFactory timeEstimate;
 
 
-    public UserStoryFactory(VOFactoryInterface<UserStoryID> userStoryID, IValueObjectsFactory<UsPriority> priority,
-                            IValueObjectsFactory<Description> description, IValueObjectsFactory<UsHour> timeEstimate) {
+    public UserStoryFactory(IUserStoryIDFactory userStoryID, IUsPriorityFactory priority,
+                            IDescriptionFactory description, IUsHourFactory timeEstimate) {
         this.userStoryID = userStoryID;
         this.priority = priority;
         this.description = description;
@@ -33,13 +33,10 @@ public class UserStoryFactory implements IUserStoryFactory {
 
     @Override
     public UserStory createUserStory(UserStoryDTO userStoryDTO) {
-        UserStory newUserStory = new UserStory(userStoryID.create(userStoryDTO.projectID, userStoryDTO.title));
-
-        newUserStory.setPriority(priority.create(userStoryDTO.priority));
-        newUserStory.setDescription(description.create(userStoryDTO.description));
-        newUserStory.setTimeEstimate(timeEstimate.create(userStoryDTO.timeEstimate));
-
-        return newUserStory;
+        return new UserStory(userStoryID.create(userStoryDTO.projectID, userStoryDTO.title),
+                priority.create(userStoryDTO.priority),
+                description.create(userStoryDTO.description),
+                timeEstimate.create(userStoryDTO.timeEstimate));
     }
 
 }
