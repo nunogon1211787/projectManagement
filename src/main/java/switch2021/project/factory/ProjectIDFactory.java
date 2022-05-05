@@ -13,7 +13,3 @@ public class ProjectIDFactory implements IValueObjectsFactory<ProjectID> {
     }
 
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
