@@ -1,15 +1,13 @@
 package switch2021.project.factory;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import switch2021.project.factoryInterface.IUsTitleFactory;
-import switch2021.project.model.UserStory.UsTitle;
+import switch2021.project.model.valueObject.UsTitle;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 

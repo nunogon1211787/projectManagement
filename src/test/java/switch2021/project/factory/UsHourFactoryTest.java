@@ -6,7 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import switch2021.project.model.UserStory.UsHour;
+import switch2021.project.model.valueObject.UsHour;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

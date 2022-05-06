@@ -1,7 +1,7 @@
 package switch2021.project.factoryInterface;
 
 
-import switch2021.project.model.UserStory.UserStoryID;
+import switch2021.project.model.valueObject.UserStoryID;
 
 
 public interface IUserStoryIDFactory {

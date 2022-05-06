@@ -1,12 +1,9 @@
-package switch2021.project.model.UserStory;
+package switch2021.project.model.valueObject;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.factory.FactoryTypology;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.ID_Typology;
-import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.model.valueObject.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;

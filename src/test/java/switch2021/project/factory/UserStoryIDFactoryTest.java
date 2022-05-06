@@ -6,8 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import switch2021.project.model.UserStory.UsTitle;
-import switch2021.project.model.UserStory.UserStoryID;
+import switch2021.project.model.valueObject.UsTitle;
+import switch2021.project.model.valueObject.UserStoryID;
 import switch2021.project.model.valueObject.ProjectID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
