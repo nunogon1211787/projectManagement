@@ -1,14 +1,14 @@
 package switch2021.project.factory;
 
 import org.springframework.stereotype.Component;
-import switch2021.project.factoryInterface.IValueObjectsFactory;
+import switch2021.project.factoryInterface.IUsPriorityFactory;
 import switch2021.project.model.UserStory.UsPriority;
 
 @Component
-public class UsPriorityFactory implements IValueObjectsFactory<UsPriority> {
+public class UsPriorityFactory implements IUsPriorityFactory {
     @Override
-    public UsPriority create(Object o){
-        return new UsPriority((Integer) o);
+    public UsPriority create(int priority){
+        return new UsPriority(priority);
     }
 
 }
