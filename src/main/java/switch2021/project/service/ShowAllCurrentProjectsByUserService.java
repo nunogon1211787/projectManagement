@@ -21,16 +21,11 @@ import java.util.List;
 @Service
 public class ShowAllCurrentProjectsByUserService {
 
-    @Autowired
-    ISystemUserRepo userRepo;
-    //@Autowired
-    ResourceRepositoryInterface resRepo;
-    @Autowired
-    ProjectRepositoryInterface projRepo;
-    @Autowired
-    ManageResourcesService dsrv;
-    @Autowired
-    ProjectMapper map;
+    @Autowired ISystemUserRepo userRepo;
+    @Autowired ResourceRepositoryInterface resRepo;
+    @Autowired ProjectRepositoryInterface projRepo;
+    @Autowired ManageResourcesService dsrv;
+    @Autowired ProjectMapper map;
 
     public List<OutputProjectDTO> showCurrentProjectsByUser(IdDTO dto, DateDTO dateDto){
 

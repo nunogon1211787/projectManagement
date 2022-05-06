@@ -1,6 +1,12 @@
 package switch2021.project.service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import switch2021.project.controller.ShowAllProjectsController;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.interfaces.ProjectRepositoryInterface;
 import switch2021.project.mapper.ProjectMapper;
@@ -12,15 +18,22 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@SpringBootTest
 class ShowAllProjectsServiceTest {
+
+    @MockBean ProjectMapper map;
+    @MockBean ProjectRepositoryInterface repo;
+    @InjectMocks ShowAllProjectsService srv;
+
+    @BeforeEach
+    void TestConfiguration(){
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     void returnAllProjectsSuccess(){
 
         //Arrange
-        ProjectMapper map = mock(ProjectMapper.class);
-        ProjectRepositoryInterface repo = mock(ProjectRepositoryInterface.class);
-        ShowAllProjectsService srv = new ShowAllProjectsService(repo, map);
         ProjectReeng proj1 = mock(ProjectReeng.class);
         ProjectReeng proj2 = mock(ProjectReeng.class);
         ProjectReeng proj3 = mock(ProjectReeng.class);
@@ -44,9 +57,6 @@ class ShowAllProjectsServiceTest {
     void returnAllProjectsFail(){
 
         //Arrange
-        ProjectMapper map = mock(ProjectMapper.class);
-        ProjectRepositoryInterface repo = mock(ProjectRepositoryInterface.class);
-        ShowAllProjectsService srv = new ShowAllProjectsService(repo, map);
         ProjectReeng proj1 = mock(ProjectReeng.class);
         ProjectReeng proj2 = mock(ProjectReeng.class);
         ProjectReeng proj3 = mock(ProjectReeng.class);
@@ -70,12 +80,7 @@ class ShowAllProjectsServiceTest {
     @Test
     void returnEmpty(){
 
-        //Arrange
-        ProjectMapper map = mock(ProjectMapper.class);
-        ProjectRepositoryInterface repo = mock(ProjectRepositoryInterface.class);
-        ShowAllProjectsService srv = new ShowAllProjectsService(repo, map);
-
-        //Act
+        //Arrange and Act
         List<ProjectReeng> projects = new ArrayList<>();
         when(repo.findAll()).thenReturn(projects);
         List<OutputProjectDTO> result = srv.showAllProjects();

@@ -18,14 +18,10 @@ import java.util.List;
 @Service
 public class ShowCurrentProjectTeamService {
 
-    @Autowired
-    ProjectRepositoryInterface projRepo;
-    //@Autowired
-    ResourceRepositoryInterface resRepo;
-    @Autowired
-    ResourceMapper map;
-    @Autowired
-    ManageResourcesService dsrv;
+    @Autowired ProjectRepositoryInterface projRepo;
+    @Autowired ResourceRepositoryInterface resRepo;
+    @Autowired ResourceMapper map;
+    @Autowired ManageResourcesService dsrv;
 
     public List<OutputResourceDTO> showCurrentProjectTeam(IdDTO dto, DateDTO dateDto) {
 

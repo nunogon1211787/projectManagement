@@ -5,7 +5,6 @@ import switch2021.project.model.UserProfile.UserProfileReeng;
 
 import java.util.List;
 
-//@Component
 public interface IUserProfileRepo {
 
     /**

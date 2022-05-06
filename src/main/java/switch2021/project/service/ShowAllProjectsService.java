@@ -14,13 +14,9 @@ import java.util.List;
 public class ShowAllProjectsService {
 
 
-    ProjectRepositoryInterface repo;
-    ProjectMapper map;
+    @Autowired ProjectRepositoryInterface repo;
+    @Autowired ProjectMapper map;
 
-    public ShowAllProjectsService(ProjectRepositoryInterface repo, ProjectMapper map) {
-        this.repo = repo;
-        this.map = map;
-    }
 
     public List<OutputProjectDTO> showAllProjects() {
 
