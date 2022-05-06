@@ -20,32 +20,53 @@ public class UserProfileRepositoryReengTest {
         UserProfileRepositoryReeng userProfileRepositoryReeng = new UserProfileRepositoryReeng();
         UserProfileId userProfileId = mock(UserProfileId.class);
         Description userProfileName = mock(Description.class);
-        UserProfileReeng userProfile = new UserProfileReeng(userProfileId);
+        UserProfileReeng userProfileReeng = mock(UserProfileReeng.class);
 
         //Act
         when(userProfileId.getUserProfileName()).thenReturn(userProfileName);
         when(userProfileName.getText()).thenReturn("Developer");
-        userProfileRepositoryReeng.saveUserProfile(userProfile);
+        when(userProfileReeng.getUserProfileId()).thenReturn(userProfileId);
+        userProfileRepositoryReeng.saveUserProfile(userProfileReeng);
 
         //Assert
-        assertEquals(1,userProfileRepositoryReeng.getUserProfileList().size());
+        assertTrue(userProfileRepositoryReeng.existsByDescription("Developer"));
     }
 
     @DisplayName("Confirm if there is a User Profile created")
     @Test
-    public void findUserProfileByDescription() {
+    public void existsUserProfileByDescription() {
         //Arrange
         UserProfileRepositoryReeng userProfileRepositoryReeng = new UserProfileRepositoryReeng();
-        UserProfileId userProfileId = mock(UserProfileId.class);
+        UserProfileId userProfileId = mock(UserProfileId.class); //@Mock UserProfileId userProfileId;
         Description userProfileName = mock(Description.class);
-        UserProfileReeng userProfile = new UserProfileReeng(userProfileId);
+        UserProfileReeng userProfileReeng = mock(UserProfileReeng.class);
 
         //Act
         when(userProfileId.getUserProfileName()).thenReturn(userProfileName);
         when(userProfileName.getText()).thenReturn("Developer");
-        userProfileRepositoryReeng.saveUserProfile(userProfile);
+        when(userProfileReeng.getUserProfileId()).thenReturn(userProfileId);
+        userProfileRepositoryReeng.saveUserProfile(userProfileReeng);
 
         //Assert
-        assertNotNull(userProfileRepositoryReeng.findUserProfileByDescription("Developer"));
+        assertTrue(userProfileRepositoryReeng.existsByDescription("Developer"));
+    }
+
+    @DisplayName("Confirm if there is a User Profile already created")
+    @Test
+    public void repeatedUserProfileCreation() {
+        //Arrange
+        UserProfileRepositoryReeng userProfileRepositoryReeng = new UserProfileRepositoryReeng();
+        UserProfileId userProfileId = mock(UserProfileId.class);
+        Description userProfileName = mock(Description.class);
+        UserProfileReeng userProfileReeng = mock(UserProfileReeng.class);
+
+        //Act
+        when(userProfileId.getUserProfileName()).thenReturn(userProfileName);
+        when(userProfileName.getText()).thenReturn("Developer");
+        when(userProfileReeng.getUserProfileId()).thenReturn(userProfileId);
+        userProfileRepositoryReeng.saveUserProfile(userProfileReeng);
+
+        //Assert
+        assertFalse(userProfileRepositoryReeng.saveUserProfile(userProfileReeng));
     }
 }
