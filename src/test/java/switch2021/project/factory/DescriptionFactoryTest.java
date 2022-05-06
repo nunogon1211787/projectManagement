@@ -26,7 +26,7 @@ public class DescriptionFactoryTest {
         //Arrange
         String expected = "Making some tests";
         // Act
-        description = descriptionFactory.create(expected);
+        description = descriptionFactory.createDescription(expected);
         //Assert
         assertEquals(expected, description.getText());
 

@@ -35,7 +35,7 @@ public class UserStoryFactory implements IUserStoryFactory {
     public UserStory createUserStory(UserStoryDTO userStoryDTO) {
         return new UserStory(userStoryID.create(userStoryDTO.projectID, userStoryDTO.title),
                 priority.create(userStoryDTO.priority),
-                description.create(userStoryDTO.description),
+                description.createDescription(userStoryDTO.description),
                 timeEstimate.create(userStoryDTO.timeEstimate));
     }
 

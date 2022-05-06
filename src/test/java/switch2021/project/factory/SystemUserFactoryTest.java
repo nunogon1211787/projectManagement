@@ -9,7 +9,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import switch2021.project.dto.NewUserInfoDTO;
-import switch2021.project.factoryInterface.IValueObjectsFactory;
+import switch2021.project.factoryInterface.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.valueObject.*;
 
@@ -21,17 +21,19 @@ import static org.mockito.Mockito.when;
 public class SystemUserFactoryTest {
 
     @Mock
-    IValueObjectsFactory<Email> emailFactory;
+    IEmailFactory emailFactory;
     @Mock
-    IValueObjectsFactory<SystemUserID> idFactory;
+    ISystemUserIDFactory idFactory;
     @Mock
-    IValueObjectsFactory<Name> nameFactory;
+    INameFactory nameFactory;
     @Mock
-    IValueObjectsFactory<Function> functionFactory;
+    IFunctionFactory functionFactory;
     @Mock
-    IValueObjectsFactory<Password> passwordFactory;
+    IPasswordFactory passwordFactory;
     @Mock
-    IValueObjectsFactory<Photo> photoFactory;
+    IPhotoFactory photoFactory;
+    @Mock
+    IUserProfileIDFactory userProfileIDFactory;
     @InjectMocks
     SystemUserFactory underTest;
 
@@ -53,25 +55,29 @@ public class SystemUserFactoryTest {
         infoDTODouble.photo = "photo.png";
 
         Name nameDouble = mock(Name.class);
-        when(nameFactory.create(infoDTODouble.userName)).thenReturn(nameDouble);
+        when(nameFactory.createName(infoDTODouble.userName)).thenReturn(nameDouble);
 
-        Email emailDouble = mock(Email.class);
-        when(emailFactory.create(infoDTODouble.email)).thenReturn(emailDouble);
+        /*Email emailDouble = mock(Email.class);
+        when(emailFactory.createEmail(infoDTODouble.email)).thenReturn(emailDouble);
+         */
 
         SystemUserID idDouble = mock(SystemUserID.class);
-        when(idFactory.create(emailDouble)).thenReturn(idDouble);
+        when(idFactory.createSystemUserID(infoDTODouble.email)).thenReturn(idDouble);
 
         Password passwordDouble = mock(Password.class);
         Password passwordConfirmationDouble = mock(Password.class);
-        when(passwordFactory.create(infoDTODouble.password)).thenReturn(passwordDouble);
-        when(passwordFactory.create(infoDTODouble.passwordConfirmation)).thenReturn(passwordConfirmationDouble);
+        when(passwordFactory.createPassword(infoDTODouble.password)).thenReturn(passwordDouble);
+        when(passwordFactory.createPassword(infoDTODouble.passwordConfirmation)).thenReturn(passwordConfirmationDouble);
         when(passwordConfirmationDouble.getPwd()).thenReturn("Qwerty_1");
 
         Function functionDouble = mock(Function.class);
-        when(functionFactory.create(infoDTODouble.function)).thenReturn(functionDouble);
+        when(functionFactory.createFunction(infoDTODouble.function)).thenReturn(functionDouble);
 
         Photo photoDouble = mock(Photo.class);
-        when(photoFactory.create(infoDTODouble.photo)).thenReturn(photoDouble);
+        when(photoFactory.createPhoto(infoDTODouble.photo)).thenReturn(photoDouble);
+
+        UserProfileId userProfileIdDouble = mock(UserProfileId.class);
+        when(userProfileIDFactory.createUserProfileID("Visitor")).thenReturn(userProfileIdDouble);
         //Act
         SystemUser isCreated = underTest.createSystemUser(infoDTODouble);
         //Assert
