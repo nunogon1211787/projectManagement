@@ -5,7 +5,6 @@ import switch2021.project.model.UserStory.UserStory;
 
 import java.util.List;
 
-//@Repository
 public interface IUserStoryRepo /* extends JpaRepository <UserStory, String>*/  {
 
     /**

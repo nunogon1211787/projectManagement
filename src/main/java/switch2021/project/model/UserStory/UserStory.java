@@ -3,6 +3,9 @@ package switch2021.project.model.UserStory;
 import lombok.*;
 import switch2021.project.model.valueObject.Description;
 
+import switch2021.project.model.valueObject.UsHour;
+import switch2021.project.model.valueObject.UsPriority;
+import switch2021.project.model.valueObject.UserStoryID;
 import switch2021.project.utils.Entity;
 
 import java.time.LocalDate;
@@ -30,8 +33,11 @@ public class UserStory implements Entity<UserStory> {
     /**
      * Constructor User Story
      **/
-    public UserStory(UserStoryID userStoryID) {
+    public UserStory(UserStoryID userStoryID, UsPriority priority, Description description, UsHour timeEstimate) {
         this.userStoryID = userStoryID;
+        this.priority = priority;
+        this.description = description;
+        this.timeEstimate = timeEstimate;
     }
 
     /**
@@ -58,7 +64,7 @@ public class UserStory implements Entity<UserStory> {
 
     @Override
     public boolean sameIdentityAs(UserStory other) {
-        return other !=null && userStoryID.sameValueAs(other.userStoryID);
+        return other != null && userStoryID.sameValueAs(other.userStoryID);
     }
 
     @Override

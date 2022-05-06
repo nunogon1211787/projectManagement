@@ -7,6 +7,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import switch2021.project.model.valueObject.Description;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
@@ -19,14 +21,14 @@ public class DescriptionFactoryTest {
     Description description;
 
     @Test
-    @DisplayName("Test to create a description - success")
-    public void createDescription_Success() {
+    @DisplayName("Test to create description - with success")
+    public void createTimeEstimateUsSuccess() {
         //Arrange
-        String x = "Description";
+        String expected = "Making some tests";
         // Act
-        description = descriptionFactory.create(x);
+        description = descriptionFactory.create(expected);
         //Assert
-        assertEquals(x, description.getText());
-    }
+        assertEquals(expected, description.getText());
 
+    }
 }

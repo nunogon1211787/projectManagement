@@ -18,10 +18,13 @@ class UserStoryTest {
     void CreateUserStoryWithSuccess() {
         //Arrange
         UserStoryID usID = mock(UserStoryID.class);
-        UserStory userStory = new UserStory(usID);
         ProjectID projID = mock(ProjectID.class);
         UsTitle usTitle = mock(UsTitle.class);
+        Description description = mock(Description.class);
+        UsPriority usPriority = mock(UsPriority.class);
+        UsHour timeEstimate = mock(UsHour.class);
         //Act
+        UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
         when(usID.getProjectID()).thenReturn(projID);
         when(projID.getCode()).thenReturn("Project_2022_1");
         when(usID.getUsTitle()).thenReturn(usTitle);
@@ -35,9 +38,12 @@ class UserStoryTest {
     void CreateUserStoryParentWithSuccess() {
         //Arrange
         UserStoryID usID = mock(UserStoryID.class);
-        UserStory userStory = new UserStory(usID);
         ProjectID projID = mock(ProjectID.class);
         UsTitle usTitle = mock(UsTitle.class);
+        Description description = mock(Description.class);
+        UsPriority usPriority = mock(UsPriority.class);
+        UsHour timeEstimate = mock(UsHour.class);
+        UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
 
         when(usID.getProjectID()).thenReturn(projID);
         when(projID.getCode()).thenReturn("Project_2022_1");
@@ -55,7 +61,6 @@ class UserStoryTest {
     public void getUserStoryAttributes() {
         //Arrange
         UserStoryID usID = mock(UserStoryID.class);
-        UserStory userStory = new UserStory(usID);
         ProjectID projID = mock(ProjectID.class);
         UsTitle usTitle = mock(UsTitle.class);
         UsPriority usPriority = mock(UsPriority.class);
@@ -66,17 +71,14 @@ class UserStoryTest {
         when(projID.getCode()).thenReturn("Project_2022_1");
         when(usID.getUsTitle()).thenReturn(usTitle);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
-        when(userStory.getUserStoryID().toString()).thenReturn("Project_2022_1_As a PO, i want to test this string");
         when(usPriority.getPriorityUs()).thenReturn(1);
         when(description.getText()).thenReturn("Make mock test");
         when(timeEstimate.getUsHours()).thenReturn(5.0);
         //Act
-        userStory.setPriority(usPriority);
-        userStory.setDescription(description);
-        userStory.setTimeEstimate(timeEstimate);
-        userStory.setUsCancelled(LocalDate.now());
-        userStory.setUsEndDate(LocalDate.now());
+        UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
         userStory.setUsStartDate(LocalDate.now());
+        userStory.setUsEndDate(LocalDate.now());
+        userStory.setUsCancelled(LocalDate.now());
         userStory.setParentUserStory(userStory);
         //Assert
         assertEquals(1, userStory.getPriority().getPriorityUs());
@@ -95,39 +97,38 @@ class UserStoryTest {
     void hasCodeTest() {
         //Arrange
         UserStoryID usID = mock(UserStoryID.class);
-        UserStory userStory = new UserStory(usID);
         ProjectID projID = mock(ProjectID.class);
         UsTitle usTitle = mock(UsTitle.class);
-
         when(usID.getProjectID()).thenReturn(projID);
         when(projID.getCode()).thenReturn("Project_2022_1");
         when(usID.getUsTitle()).thenReturn(usTitle);
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
+        UsPriority usPriority = mock(UsPriority.class);
+        Description description = mock(Description.class);
+        UsHour timeEstimate = mock(UsHour.class);
+        UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
         when(userStory.getUserStoryID().toString()).thenReturn("Project_2022_1_As a PO, i want to test this string");
 
         UserStoryID usID2 = mock(UserStoryID.class);
-        UserStory userStory2 = new UserStory(usID2);
         ProjectID projID2 = mock(ProjectID.class);
         UsTitle usTitle2 = mock(UsTitle.class);
-
         when(usID2.getProjectID()).thenReturn(projID2);
         when(projID2.getCode()).thenReturn("Project_2022_1");
         when(usID2.getUsTitle()).thenReturn(usTitle2);
         when(usTitle2.getTitleUs()).thenReturn("As a PO, i want to test this string");
+        UserStory userStory2 = new UserStory(usID2, usPriority, description, timeEstimate);
         when(userStory2.getUserStoryID().toString()).thenReturn("Project_2022_1_As a PO, i want to test this string");
 
         UserStoryID usID3 = mock(UserStoryID.class);
-        UserStory userStory3 = new UserStory(usID3);
         ProjectID projID3 = mock(ProjectID.class);
         UsTitle usTitle3 = mock(UsTitle.class);
-
         when(usID3.getProjectID()).thenReturn(projID3);
         when(projID3.getCode()).thenReturn("Project_2024_1");
         when(usID3.getUsTitle()).thenReturn(usTitle3);
         when(usTitle3.getTitleUs()).thenReturn("As a PO, i want to test this override method");
+        UserStory userStory3 = new UserStory(usID3, usPriority, description, timeEstimate);
         when(userStory3.getUserStoryID().toString()).thenReturn("Project_2024_1_As a PO, i want to test this override" +
                 " method");
-
         //Act
         boolean expected = userStory.hasCode(userStory.getUserStoryID());
         boolean expectedF = userStory.hasCode(userStory3.getUserStoryID());
@@ -143,7 +144,13 @@ class UserStoryTest {
     public void sameIdentityAs() {
         //Arrange
         UserStoryID usID = mock(UserStoryID.class);
-        UserStory userStory = new UserStory(usID);
+        Description description = mock(Description.class);
+        UsPriority usPriority = mock(UsPriority.class);
+        UsHour timeEstimate = mock(UsHour.class);
+        when(usPriority.getPriorityUs()).thenReturn(1);
+        when(description.getText()).thenReturn("Make mock test");
+        when(timeEstimate.getUsHours()).thenReturn(5.0);
+        UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
         ProjectID projID = mock(ProjectID.class);
         UsTitle usTitle = mock(UsTitle.class);
 
@@ -153,8 +160,9 @@ class UserStoryTest {
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         when(userStory.getUserStoryID().toString()).thenReturn("Project_2022_1_As a PO, i want to test this string");
 
+
         UserStoryID usID2 = mock(UserStoryID.class);
-        UserStory userStory2 = new UserStory(usID2);
+        UserStory userStory2 = new UserStory(usID2, usPriority, description, timeEstimate);
         ProjectID projID2 = mock(ProjectID.class);
         UsTitle usTitle2 = mock(UsTitle.class);
 
@@ -171,10 +179,13 @@ class UserStoryTest {
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTest() {
         //Arrange & Act
-        UserStoryID usID = mock(UserStoryID.class);
-        UserStory userStory = new UserStory(usID);
         ProjectID projID = mock(ProjectID.class);
         UsTitle usTitle = mock(UsTitle.class);
+        UserStoryID usID = mock(UserStoryID.class);
+        UsHour timeEstimate = mock(UsHour.class);
+        Description description = mock(Description.class);
+        UsPriority usPriority = mock(UsPriority.class);
+        UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
 
         when(usID.getProjectID()).thenReturn(projID);
         when(projID.getCode()).thenReturn("Project_2022_1");
@@ -182,10 +193,10 @@ class UserStoryTest {
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         when(userStory.getUserStoryID().toString()).thenReturn("Project_2022_1_As a PO, i want to test this string");
 
-        UserStory userStory2 = new UserStory(usID);
+        UserStory userStory2 = new UserStory(usID, usPriority, description, timeEstimate);
 
         UserStoryID usID3 = mock(UserStoryID.class);
-        UserStory userStory3 = new UserStory(usID3);
+        UserStory userStory3 = new UserStory(usID3, usPriority, description, timeEstimate);
         ProjectID projID3 = mock(ProjectID.class);
         UsTitle usTitle3 = mock(UsTitle.class);
 
@@ -209,7 +220,10 @@ class UserStoryTest {
     public void hashCodeTest() {
         //Arrange
         UserStoryID usID = mock(UserStoryID.class);
-        UserStory userStory = new UserStory(usID);
+        UsHour timeEstimate = mock(UsHour.class);
+        Description description = mock(Description.class);
+        UsPriority usPriority = mock(UsPriority.class);
+        UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
         ProjectID projID = mock(ProjectID.class);
         UsTitle usTitle = mock(UsTitle.class);
 
@@ -220,7 +234,7 @@ class UserStoryTest {
         when(userStory.getUserStoryID().toString()).thenReturn("Project_2022_1_As a PO, i want to test this string");
 
         UserStoryID usID2 = mock(UserStoryID.class);
-        UserStory userStory2 = new UserStory(usID);
+        UserStory userStory2 = new UserStory(usID, usPriority, description, timeEstimate);
         ProjectID projID2 = mock(ProjectID.class);
         UsTitle usTitle2 = mock(UsTitle.class);
 
@@ -231,7 +245,7 @@ class UserStoryTest {
         when(userStory2.getUserStoryID().toString()).thenReturn("Project_2022_1_As a PO, i want to test this string");
 
         UserStoryID usID3 = mock(UserStoryID.class);
-        UserStory userStory3 = new UserStory(usID);
+        UserStory userStory3 = new UserStory(usID, usPriority, description, timeEstimate);
         ProjectID projID3 = mock(ProjectID.class);
         UsTitle usTitle3 = mock(UsTitle.class);
 
@@ -241,7 +255,7 @@ class UserStoryTest {
         when(usTitle3.getTitleUs()).thenReturn("As a PO, i want to test this override method");
         when(userStory3.getUserStoryID().toString()).thenReturn("Project_2024_1_As a PO, i want to test this override" +
                 " method");
-       //Act
+        //Act
         boolean result = userStory.getUserStoryID().equals(userStory2.getUserStoryID());
         boolean result2 = userStory.equals(userStory3);
 
@@ -252,7 +266,7 @@ class UserStoryTest {
         assertTrue(result);
         assertFalse(result2);
     }
-
+//______________________________________________________
 
 //    @Test
 //    void setParentUserStoryTest() {

@@ -3,7 +3,7 @@ package switch2021.project.model.Sprint;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.UserStory.UserStoryID;
+import switch2021.project.model.valueObject.UserStoryID;
 import switch2021.project.utils.Entity;
 import java.time.LocalDate;
 import java.util.List;
@@ -51,6 +51,17 @@ public class Sprint implements Entity<Sprint> {
         return ((this.startDate.isBefore(endDate) || this.startDate.equals(endDate))
                 && (this.endDate.isAfter(startDate) || this.endDate.equals(startDate)));
     }
+
+//    /**
+//     * Method to get list of tasks within a sprint - Método David
+//     */
+//    //It hasn't tests
+//    public List<Task> getListOfTasksOfASprint(){
+//        List<Task> taskList2 = new ArrayList<>();
+//
+//        taskList2.addAll(this.taskStore.getTaskList());
+//        return taskList2;
+//    }
 
     /**
      * Methods to call methods from sprint backlog

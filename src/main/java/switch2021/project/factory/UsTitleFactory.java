@@ -1,13 +1,13 @@
 package switch2021.project.factory;
 
 import org.springframework.stereotype.Component;
-import switch2021.project.factoryInterface.IValueObjectsFactory;
-import switch2021.project.model.UserStory.UsTitle;
+import switch2021.project.factoryInterface.IUsTitleFactory;
+import switch2021.project.model.valueObject.UsTitle;
 
 @Component
-public class UsTitleFactory implements IValueObjectsFactory<UsTitle> {
+public class UsTitleFactory implements IUsTitleFactory {
     @Override
-    public  UsTitle create (Object o){
-        return new UsTitle(o.toString());
+    public UsTitle create(String usTitle) {
+        return new UsTitle(usTitle);
     }
 }

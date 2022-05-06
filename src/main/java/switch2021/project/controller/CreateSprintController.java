@@ -12,7 +12,6 @@ import switch2021.project.dto.NewSprintDTO;
 import switch2021.project.dto.OutPutSprintDTO;
 import switch2021.project.service.CreateSprintService;
 
-@Controller
 @RestController
 @RequestMapping("/sprints")
 public class CreateSprintController {

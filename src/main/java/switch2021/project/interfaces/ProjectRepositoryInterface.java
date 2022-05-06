@@ -1,9 +1,6 @@
 package switch2021.project.interfaces;
 
-
-import org.springframework.stereotype.Component;
 import switch2021.project.model.Project.ProjectReeng;
-
 import java.util.List;
 
 
@@ -21,6 +18,8 @@ public interface ProjectRepositoryInterface {
 
     /**Check if project exists in repository**/
     boolean existById(String id);
+
+    boolean existByName(String id);
 
     /**Save Projects Method**/
     ProjectReeng save(ProjectReeng newProject);
