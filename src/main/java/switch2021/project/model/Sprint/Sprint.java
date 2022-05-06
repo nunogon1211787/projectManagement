@@ -1,14 +1,9 @@
 package switch2021.project.model.Sprint;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.model.Task.Task;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.UserStory.UserStoryID;
-import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.Task.TaskStore;
-import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.model.valueObject.UserStoryID;
 import switch2021.project.utils.Entity;
 import java.time.LocalDate;
 import java.util.List;

@@ -1,7 +1,6 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
-import switch2021.project.model.UserStory.UserStoryID;
 
 import java.util.Objects;
 

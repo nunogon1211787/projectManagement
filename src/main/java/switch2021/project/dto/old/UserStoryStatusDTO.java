@@ -1,10 +1,10 @@
 package switch2021.project.dto.old;
 
 import lombok.Getter;
-import switch2021.project.model.UserStory.UsHour;
-import switch2021.project.model.UserStory.UsPriority;
-import switch2021.project.model.UserStory.UsTitle;
-import switch2021.project.model.UserStory.UserStoryID;
+import switch2021.project.model.valueObject.UsHour;
+import switch2021.project.model.valueObject.UsPriority;
+import switch2021.project.model.valueObject.UsTitle;
+import switch2021.project.model.valueObject.UserStoryID;
 import switch2021.project.model.valueObject.Description;
 
 @Getter

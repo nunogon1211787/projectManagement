@@ -11,7 +11,7 @@ import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Sprint.SprintStore;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserStory.UserStoryRepository;
+import switch2021.project.repositories.UserStoryRepository;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.utils.Entity;

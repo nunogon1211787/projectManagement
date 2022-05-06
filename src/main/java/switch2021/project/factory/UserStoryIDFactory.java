@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 import switch2021.project.factoryInterface.IProjectIDFactory;
 import switch2021.project.factoryInterface.IUsTitleFactory;
 import switch2021.project.factoryInterface.IUserStoryIDFactory;
-import switch2021.project.model.UserStory.UsTitle;
-import switch2021.project.model.UserStory.UserStoryID;
+import switch2021.project.model.valueObject.UsTitle;
+import switch2021.project.model.valueObject.UserStoryID;
 import switch2021.project.model.valueObject.ProjectID;
 
 @Component

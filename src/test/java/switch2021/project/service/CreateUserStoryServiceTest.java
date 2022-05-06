@@ -1,4 +1,4 @@
-package switch2021.project.model.UserStory;
+package switch2021.project.service;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,6 +12,7 @@ import switch2021.project.dto.UserStoryDTO;
 import switch2021.project.factoryInterface.IUserStoryFactory;
 import switch2021.project.interfaces.IUserStoryRepo;
 import switch2021.project.mapper.UserStoryMapper;
+import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.service.CreateUserStoryService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;

@@ -6,8 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import switch2021.project.factoryInterface.IUsPriorityFactory;
-import switch2021.project.model.UserStory.UsPriority;
+import switch2021.project.model.valueObject.UsPriority;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

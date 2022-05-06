@@ -3,6 +3,9 @@ package switch2021.project.model.UserStory;
 import lombok.*;
 import switch2021.project.model.valueObject.Description;
 
+import switch2021.project.model.valueObject.UsHour;
+import switch2021.project.model.valueObject.UsPriority;
+import switch2021.project.model.valueObject.UserStoryID;
 import switch2021.project.utils.Entity;
 
 import java.time.LocalDate;
