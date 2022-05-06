@@ -27,7 +27,7 @@ public class SprintIDFactory implements VOFactoryInterface<SprintID> {
     /** Method */
     public SprintID create(Object p, Object d) {
         ProjectID projectID = projectIDFactory.create(p.toString());
-        Description sprintName = descriptionFactory.create(d.toString());
+        Description sprintName = descriptionFactory.createDescription(d.toString());
         return new SprintID(projectID, sprintName);
     }
 

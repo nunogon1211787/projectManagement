@@ -42,7 +42,7 @@ public class SprintIDFactoryTest {
         when(projectIDFactory.create(project)).thenReturn(projectID);
         String des = "Sprint Name";
         description = new Description(des);
-        when(descriptionFactory.create(des)).thenReturn(description);
+        when(descriptionFactory.createDescription(des)).thenReturn(description);
         //Act
         sprintID = sprintIDFactory.create(project, des);
         String x = "Project_2022_1_Sprint Name";
