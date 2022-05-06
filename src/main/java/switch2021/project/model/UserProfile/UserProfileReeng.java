@@ -1,7 +1,7 @@
 package switch2021.project.model.UserProfile;
 
 import lombok.Getter;
-import lombok.Setter;;
+import lombok.Setter;
 import switch2021.project.model.valueObject.UserProfileId;
 import switch2021.project.utils.Entity;
 
@@ -17,9 +17,9 @@ public class UserProfileReeng implements Entity<UserProfileReeng> {
     /**
      * Profile Constructors
      */
-    public UserProfileReeng(UserProfileId userProfileName) {
+    public UserProfileReeng(UserProfileId userProfileId) {
 
-        this.userProfileId = userProfileName;
+        this.userProfileId = userProfileId;
     }
 
 

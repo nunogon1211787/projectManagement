@@ -2,7 +2,7 @@ package switch2021.project.dto.old;
 
 import lombok.Getter;
 import switch2021.project.model.Sprint.SprintID;
-import switch2021.project.model.UserStory.UserStoryID;
+import switch2021.project.model.valueObject.UserStoryID;
 
 @Getter
 

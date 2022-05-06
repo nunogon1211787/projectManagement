@@ -1,48 +1,49 @@
 package switch2021.project.factory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import switch2021.project.dto.NewUserInfoDTO;
-import switch2021.project.factoryInterface.ISystemUserFactory;
-import switch2021.project.factoryInterface.IValueObjectsFactory;
+import switch2021.project.factoryInterface.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.valueObject.*;
 
-@Service
+@Component
 public class SystemUserFactory implements ISystemUserFactory {
 
     @Autowired
-    private IValueObjectsFactory<SystemUserID> idFactory;
+    private ISystemUserIDFactory idFactory;
     @Autowired
-    private IValueObjectsFactory<Name> nameFactory;
+    private INameFactory nameFactory;
     @Autowired
-    private IValueObjectsFactory<Function> functionFactory;
+    private IFunctionFactory functionFactory;
     @Autowired
-    private IValueObjectsFactory<Password> passwordFactory;
+    private IPasswordFactory passwordFactory;
     @Autowired
-    private IValueObjectsFactory<Photo> photoFactory;
+    private IPhotoFactory photoFactory;
+    @Autowired
+    private IUserProfileIDFactory userProfileIDFactory;
 
-    public SystemUserFactory(IValueObjectsFactory<SystemUserID> idFactory, IValueObjectsFactory<Name> nameFactory,
-                             IValueObjectsFactory<Function> functionFactory,
-                             IValueObjectsFactory<Password> passwordFactory, IValueObjectsFactory<Photo> photoFactory) {
+    public SystemUserFactory(ISystemUserIDFactory idFactory, INameFactory nameFactory,
+                             IFunctionFactory functionFactory, IPasswordFactory passwordFactory,
+                             IPhotoFactory photoFactory, IUserProfileIDFactory userProfileIDFactory) {
         this.idFactory = idFactory;
         this.nameFactory = nameFactory;
         this.functionFactory = functionFactory;
         this.passwordFactory = passwordFactory;
         this.photoFactory = photoFactory;
+        this.userProfileIDFactory = userProfileIDFactory;
     }
 
     @Override
-    public SystemUser createSystemUser(NewUserInfoDTO infoDTO, UserProfileId visitorId) {
-        SystemUser newUser = new SystemUser(idFactory.create(infoDTO.email));
+    public SystemUser createSystemUser(NewUserInfoDTO infoDTO) {
+        SystemUserID systemUserID = idFactory.createSystemUserID(infoDTO.email);
+        Name userName = nameFactory.createName(infoDTO.userName);
+        Photo photo = photoFactory.createPhoto(infoDTO.photo);
+        Password password = passwordFactory.createPassword(infoDTO.password);
+        Password passwordConfirmation = passwordFactory.createPassword(infoDTO.passwordConfirmation);
+        Function function = functionFactory.createFunction(infoDTO.function);
+        UserProfileId visitorID = userProfileIDFactory.createUserProfileID("Visitor");
 
-        newUser.assignName(nameFactory.create(infoDTO.userName));
-        newUser.assignFunction(functionFactory.create(infoDTO.function));
-        newUser.assignValidatedPassword(passwordFactory.create(infoDTO.password),
-                passwordFactory.create(infoDTO.passwordConfirmation));
-        newUser.assignPhoto(photoFactory.create(infoDTO.photo));
-        newUser.assignProfileId(visitorId);
-
-        return newUser;
+        return new SystemUser(systemUserID, userName, photo, password, passwordConfirmation, function, visitorID);
     }
 }

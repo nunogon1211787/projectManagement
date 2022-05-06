@@ -1,29 +1,52 @@
 package switch2021.project.stores;
 
-import switch2021.project.model.Resource.old.Resource;
+import org.springframework.stereotype.Repository;
+import switch2021.project.interfaces.ResourceRepositoryInterface;
+import switch2021.project.model.Resource.ResourceReeng;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResourceStore { //implements ResourceRepositoryInterface {
+@Repository
+public class ResourceStore implements ResourceRepositoryInterface {
 
     /**
      * ProjectTeam's Attribute
      **/
-    private final List<Resource> projectTeamList;  //Resource´s List in a Project.
+    private final List<ResourceReeng> resources;  //Resource´s List in a Project.
 
 
     /**
      * ProjectTeam's Constructor
      **/
     public ResourceStore() {
-        this.projectTeamList = new ArrayList<>();
+        this.resources = new ArrayList<>();
     }
 
 
     /**
-     * Find methods
+     * Implementing Find methods of the Interface.
      **/
+
+    @Override
+    public ResourceReeng findById(String id) { //TODO Must implement
+        return null;
+    }
+
+    @Override
+    public boolean existsById(String id) {
+        return false;
+    }
+
+    @Override
+    public List<ResourceReeng> findAllByProject(String projectId) {
+        return null;
+    }
+
+    @Override
+    public List<ResourceReeng> findAllByUser(String systemUserId) {
+        return null;
+    }
 //    //Find the resource with resourceID in the list
 //    public Optional<Resource> findByResourceId(ResourceId resId){
 //        Optional<Resource> res = Optional.empty();
@@ -211,10 +234,11 @@ public class ResourceStore { //implements ResourceRepositoryInterface {
     /**
      * Method which saves new resource at ResourceStore List
      **/
-    public boolean saveResource(Resource resource) {
+    @Override
+    public boolean saveResource(ResourceReeng resource) {
         boolean msg = false;
         if (resource != null) {
-            this.projectTeamList.add(resource);
+            this.resources.add(resource);
             msg = true;
         }
         return msg;

@@ -1,7 +1,6 @@
 package switch2021.project.model.SystemUser;
 
 import lombok.Getter;
-import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.utils.Entity;
 
@@ -26,15 +25,26 @@ public class SystemUser implements Entity<SystemUser> {
     /**
      * Constructor
      */
-    public SystemUser(SystemUserID systemUserId) {
+    public SystemUser(SystemUserID systemUserId, Name userName, Photo photo, Password password,
+                      Password passwordConfirmation,
+                      Function function, UserProfileId visitorID) {
         this.systemUserId = systemUserId;
+        this.userName = userName;
+        this.photo = photo;
+        if (password.equals(passwordConfirmation)) {
+            this.encryptedPassword = encryptPassword(password);
+        } else {
+            throw new IllegalArgumentException("passwords not match");
+        }
+        this.function = function;
         this.isActive = false;
         this.assignedIdProfiles = new ArrayList<>();
+        this.assignedIdProfiles.add(visitorID);
         this.requestedProfiles = new ArrayList<>();
     }
 
     /**
-     * Setters assign????
+     * Assigns
      */
     public void assignName(Name userName) {
         this.userName = userName;
@@ -72,7 +82,6 @@ public class SystemUser implements Entity<SystemUser> {
             throw new IllegalArgumentException("passwords not match");
         }
     }
-
 
     /**
      * Password encryption
@@ -243,7 +252,7 @@ public class SystemUser implements Entity<SystemUser> {
         }
         return profileStatus;
     }
-
+/*
     /**
      * Method to verify if the object has the received parameters.
      */

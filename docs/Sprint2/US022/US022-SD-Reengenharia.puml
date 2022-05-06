@@ -9,11 +9,13 @@ participant ": CreateSprintRoute" as UI
 participant ": CreateSprintController" as Ctrl
 participant ": CreateSprintService" as createSprintService
 participant ": ISprintFactory" as sprintFactory
-participant " sprintDTO : SprintDTO" as sprintDTO
+participant " newSprintDTO : NewSprintDTO" as sprintDTO
+participant " : VOFactoryInterface<SprintID>" as voSprint
+participant " sprintID : SprintID" as sprintID
 participant " newSprint : Sprint" as sprint
 participant ": ISprintStore" as sprintStore
 participant ": SprintMapper" as sprintMapper
-participant "outPutSprintDTO: SprintDTO" as outPutSprintDTO
+participant "outPutSprintDTO: OutPutSprintDTO" as outPutSprintDTO
 
 
 [o-> UI: POST/sprints(json)
@@ -21,15 +23,16 @@ UI -> Ctrl: createSprint(json)
 note right
 Change from json to dto hidden to simplify diagram
 end note
-Ctrl -> createSprintService: createSprint(sprintDTO)
-createSprintService -> sprintFactory: createSprint(sprintDTO)
+Ctrl -> createSprintService: createSprint(newSprintDTO)
+createSprintService -> sprintFactory: createSprint(newSprintDTO)
 sprintFactory -> sprintDTO: projectID = getProjectID()
-deactivate
-sprintFactory -> sprintDTO: sprintID = getSprintID()
 deactivate
 sprintFactory -> sprintDTO: name = getName()
 deactivate
-sprintFactory -> sprint**: create()
+sprintFactory -> voSprint: createSprint(projectID, name)
+voSprint -> sprintID**: create()
+voSprint --> sprintFactory: sprintID
+sprintFactory -> sprint**: create(sprintID)
 sprintFactory --> createSprintService: newSprint
 createSprintService -> sprintStore: saveSprint(newSprint)
 sprintStore -> sprintStore: existsBySprintID(sprintID)

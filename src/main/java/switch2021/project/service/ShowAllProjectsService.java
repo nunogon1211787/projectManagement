@@ -1,7 +1,6 @@
 package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.interfaces.ProjectRepositoryInterface;
@@ -14,10 +13,10 @@ import java.util.List;
 @Service
 public class ShowAllProjectsService {
 
-   @Autowired
-    ProjectRepositoryInterface repo;
-    @Autowired
-    ProjectMapper map;
+
+    @Autowired ProjectRepositoryInterface repo;
+    @Autowired ProjectMapper map;
+
 
     public List<OutputProjectDTO> showAllProjects() {
 

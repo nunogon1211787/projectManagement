@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import switch2021.project.dto.ProjectDTO;
+import switch2021.project.interfaces.ProjectRepositoryInterface;
 import switch2021.project.repositories.ProjectStoreReeng;
 import switch2021.project.service.ProjectService;
 
@@ -20,7 +21,7 @@ public class ProjectController {
     @Autowired
     ProjectService service;
     @Autowired
-    ProjectStoreReeng projStore;
+    ProjectRepositoryInterface projStore;
 
     @PostMapping("/createProject")
     public ResponseEntity <?> createProject (@Valid @RequestBody ProjectDTO projectDTO) {

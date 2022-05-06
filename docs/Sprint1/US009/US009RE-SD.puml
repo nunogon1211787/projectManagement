@@ -11,8 +11,12 @@ participant ": CreateUserStoryRoute" as System
 participant ": CreateUserStoryController" as Ctrl
 participant ": CreateUserStoryService" as appService
 participant ": IUserStoryFactory" as factory
-participant ": UserStoryDto" as usDto
+participant ": UserStoryDTO" as usDto
+participant ": IUserStoryIDFactory" as IusID
+participant " userStoryID : UserStoryID" as usID
 participant "newUserStory : \n UserStory" as us
+participant ": IUsPriorityFactory" as IusPrio
+participant "usPriority : UsPriority" as usPrio
 participant ": IUserStoryRepo " as usStore
 participant ": UserStoryMapper" as usMapper
 participant "outputUsDto : \n UserStoryDto" as outDto
@@ -28,12 +32,25 @@ Ctrl -> appService: createAndSaveUserStory(userStoryDTO)
 appService -> factory:  createUserStory(userStoryDTO)
 factory -> usDto: projectID = getProjectID()
 deactivate
-factory -> usDto: userStoryID = getUserStoryID()
-deactivate
 factory -> usDto: title = getTitle()
 deactivate
+factory -> IusID: create(projectID, title)
+ IusID-> usID **: create()
+ IusID--> factory : userStoryID
 
-factory -> us **: create()
+factory-> usDto: priority = getPriority()
+deactivate
+factory -> IusPrio: create(priority)
+ IusPrio-> usPrio **: create()
+ IusPrio--> factory : usPriority
+ note over us: other v.o.'s creation  are hidden to simplify the diagram
+factory-> usDto: description = getDescription()
+ deactivate
+ factory-> usDto: timeEstimate = getTimeEstimate()
+  deactivate
+
+
+factory -> us **: create(userStoryID, usPriority, usDescription, usTimeEstimate)
 factory --> appService: newUserStory
 
 appService-> usStore: save(newUserStory)

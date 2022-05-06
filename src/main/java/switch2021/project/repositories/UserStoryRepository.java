@@ -1,8 +1,9 @@
-package switch2021.project.model.UserStory;
+package switch2021.project.repositories;
 
 import lombok.*;
 import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.IUserStoryRepo;
+import switch2021.project.model.UserStory.UserStory;
 
 import java.util.*;
 

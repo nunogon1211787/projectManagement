@@ -1,5 +1,6 @@
 package switch2021.project.service;
 
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.OutPutUsDTO;
@@ -11,6 +12,7 @@ import switch2021.project.model.UserStory.UserStory;
 
 
 @Service
+@NoArgsConstructor
 public class CreateUserStoryService {
 
     /**

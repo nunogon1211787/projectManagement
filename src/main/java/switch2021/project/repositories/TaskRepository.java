@@ -29,8 +29,6 @@ public class TaskRepository implements TaskRepositoryInterface {
             throw new IllegalArgumentException("Error: Task is null!");
         }
 
-        newTask.setIdTask(new TaskID(newTask.getTaskContainerID(), newTask.getName()));
-
         if (existById(newTask.getIdTask().toString())) {
             throw new IllegalArgumentException("Error: Task already exists!");
         }
@@ -47,7 +45,7 @@ public class TaskRepository implements TaskRepositoryInterface {
     public TaskReeng findById(String code) {
         TaskReeng task = null;
         for (TaskReeng task1 : taskList) {
-            if(task.getIdTask().toString().equals(code)){
+            if(task1.getIdTask().toString().equals(code)){
                 task = task1;
                 break;
             }

@@ -13,25 +13,24 @@ public interface ResourceRepositoryInterface/* extends CrudRepository<Object, Lo
      */
     //Optional<Resource> findByResourceId(ResourceId resId);
 
+    ResourceReeng findById (String resourceId);
+
+    boolean existsById(String resourceId);
+
     /**
      * Finds all objects from this repository with any parameter.
      */
 
-    List<ResourceReeng> findByProject(String projectId);
+//    List<ResourceReeng> findByProject(String projectId);
 
-    //List<Resource> findAllBySystemUserId(SystemUserId userId);
+    List<ResourceReeng> findAllByProject(String projectId);
 
+    List<ResourceReeng> findAllByUser(String systemUserId);
 
-    ResourceReeng findById (String resourceId);
 
     /**
      * Save a object in the list of the repository.
      */
     boolean saveResource(ResourceReeng resource);
 
-    boolean existsById(String systemUserId);
-
-    List<ResourceReeng> findAllByProject(String projectId);
-
-    List<ResourceReeng> findAllByUser(String systemUserId);
 }

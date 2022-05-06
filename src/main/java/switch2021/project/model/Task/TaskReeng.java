@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.interfaces.TaskContainerID;
 import switch2021.project.model.Resource.ResourceIDReeng;
-import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.EffortEstimate;
 import switch2021.project.model.valueObject.Name;
@@ -107,5 +106,16 @@ public class TaskReeng {
         return (double) effort.getEffortHours().getEffortHours() + ((double) effort.getEffortMinutes().getEffortMinutes() / 60);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskReeng taskReeng = (TaskReeng) o;
+        return Objects.equals(idTask, taskReeng.idTask) && Objects.equals(name, taskReeng.name) && Objects.equals(description, taskReeng.description) && type == taskReeng.type && Objects.equals(effortEstimate, taskReeng.effortEstimate) && Objects.equals(startDate, taskReeng.startDate) && Objects.equals(endDate, taskReeng.endDate) && Objects.equals(responsible, taskReeng.responsible) && Objects.equals(taskEffortList, taskReeng.taskEffortList) && Objects.equals(precedenceList, taskReeng.precedenceList) && Objects.equals(taskContainerID, taskReeng.taskContainerID);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(idTask, name, description, type, effortEstimate, startDate, endDate, responsible, taskEffortList, precedenceList, taskContainerID);
+    }
 }
