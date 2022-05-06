@@ -1,4 +1,4 @@
-package switch2021.project.controller.old;
+package switch2021.project.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -66,11 +66,16 @@ public class RegisterUserControllerTest {
         FunctionFactory functionFactory = new FunctionFactory();
         PasswordFactory passwordFactory = new PasswordFactory();
         PhotoFactory photoFactory = new PhotoFactory();
+        DescriptionFactory descriptionFactory = new DescriptionFactory();
+        UserProfileIDFactory userProfileIDFactory = new UserProfileIDFactory(descriptionFactory);
         SystemUserFactory factory = new SystemUserFactory(idFactory, nameFactory, functionFactory, passwordFactory,
-                photoFactory);
+                photoFactory,userProfileIDFactory);
         SystemUserRepository systemUserRepository = new SystemUserRepository();
         SystemUserMapper mapper = new SystemUserMapper();
+
+
         RegisterUserService service = new RegisterUserService(systemUserRepository, mapper, factory);
+
         RegisterUserController controller = new RegisterUserController(service);
 
         NewUserInfoDTO dto = new NewUserInfoDTO();
