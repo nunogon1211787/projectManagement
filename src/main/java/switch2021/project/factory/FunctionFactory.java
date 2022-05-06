@@ -1,10 +1,10 @@
 package switch2021.project.factory;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import switch2021.project.factoryInterface.IFunctionFactory;
 import switch2021.project.model.valueObject.Function;
 
-@Service
+@Component
 public class FunctionFactory implements IFunctionFactory {
     @Override
     public Function createFunction(String function) {

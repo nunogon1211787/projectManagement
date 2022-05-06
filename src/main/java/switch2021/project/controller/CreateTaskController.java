@@ -15,29 +15,27 @@ import switch2021.project.dto.TaskDTO;
 import switch2021.project.service.CreateTaskService;
 
 
-
 @Controller
-    @RestController
-    @RequestMapping("/tasks")
-    public class CreateTaskController {
+@RestController
+@RequestMapping("/tasks")
+public class CreateTaskController {
 
-        /*** Attributes **/
-        @Autowired
-        CreateTaskService createTaskService;
+    /*** Attributes **/
+    @Autowired
+    CreateTaskService createTaskService;
 
-        /*** Methods **/
-        @PostMapping("")
-        public ResponseEntity<Object> createAndSaveTask(@RequestBody TaskDTO dto) {
-            OutputTaskDTO newTask;
-            try {
-                newTask = createTaskService.createAndSaveTask(dto);
-            }
-            catch (Exception exception){
-                ErrorMessage message = new ErrorMessage();
-                message.errorMessage = exception.getMessage();
-                return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-            }
+    /*** Methods **/
+    @PostMapping("")
+    public ResponseEntity<Object> createAndSaveTask(@RequestBody TaskDTO dto) {
+        OutputTaskDTO newTask;
+        try {
+            newTask = createTaskService.createAndSaveTask(dto);
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
 
-            return new ResponseEntity<>(newTask, HttpStatus.CREATED);
+        return new ResponseEntity<>(newTask, HttpStatus.CREATED);
     }
 }

@@ -1,5 +1,7 @@
 package switch2021.project.factory;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import switch2021.project.factoryInterface.ResourceFactoryInterface;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.valueObject.CostPerHour;

@@ -1,36 +1,42 @@
 package switch2021.project.factory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;;
-import switch2021.project.factoryInterface.IValueObjectsFactory;
-import switch2021.project.factoryInterface.VOFactoryInterface;
-import switch2021.project.model.UserStory.UsTitle;
-import switch2021.project.model.UserStory.UserStoryID;
+import org.springframework.stereotype.Component;
+import switch2021.project.factoryInterface.IProjectIDFactory;
+import switch2021.project.factoryInterface.IUsTitleFactory;
+import switch2021.project.factoryInterface.IUserStoryIDFactory;
+import switch2021.project.model.valueObject.UsTitle;
+import switch2021.project.model.valueObject.UserStoryID;
 import switch2021.project.model.valueObject.ProjectID;
 
 @Component
-public class UserStoryIDFactory implements VOFactoryInterface<UserStoryID> {
+public class UserStoryIDFactory implements IUserStoryIDFactory {
 
-    /** Attributes*/
-
+    /**
+     * Attributes
+     */
     @Autowired
-   private final IValueObjectsFactory<ProjectID> projectIDFactory;
-
+    private IProjectIDFactory projectIDFactory;
     @Autowired
-    private final IValueObjectsFactory<UsTitle> usTitleFactory;
+    private IUsTitleFactory usTitleFactory;
 
 
-    /** Constructor*/
-    public UserStoryIDFactory(IValueObjectsFactory<ProjectID> projectIDFactory,
-                              IValueObjectsFactory<UsTitle> usTitleFactory) {
+    public UserStoryIDFactory(){}
+    /**
+     * Constructor
+     */
+    public UserStoryIDFactory(IProjectIDFactory projectIDFactory, IUsTitleFactory usTitleFactory) {
         this.projectIDFactory = projectIDFactory;
         this.usTitleFactory = usTitleFactory;
     }
 
-    /** Method */
-    public UserStoryID create(Object p, Object d) {
-        ProjectID projectID = projectIDFactory.create(p.toString());
-        UsTitle usTitle = usTitleFactory.create(d.toString());
+    /**
+     * Method
+     */
+    @Override
+    public UserStoryID create(String pID, String usT) {
+        ProjectID projectID = projectIDFactory.create(pID);
+        UsTitle usTitle = usTitleFactory.create(usT);
         return new UserStoryID(projectID, usTitle);
     }
 

@@ -2,7 +2,7 @@ package switch2021.project.model.Sprint;
 
 import lombok.Getter;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.UserStory.UserStoryID;
+import switch2021.project.model.valueObject.UserStoryID;
 
 import java.util.ArrayList;
 import java.util.List;

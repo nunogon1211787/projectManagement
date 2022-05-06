@@ -18,14 +18,10 @@ import java.util.List;
 @Service
 public class ShowCurrentProjectTeamService {
 
-    @Autowired
-    ProjectRepositoryInterface projRepo;
-    //@Autowired
-    ResourceRepositoryInterface resRepo;
-    @Autowired
-    ResourceMapper map;
-    @Autowired
-    ManageResourcesService dsrv;
+    @Autowired ProjectRepositoryInterface projRepo;
+    @Autowired ResourceRepositoryInterface resRepo;
+    @Autowired ResourceMapper map;
+    @Autowired ManageResourcesService dsrv;
 
     public List<OutputResourceDTO> showCurrentProjectTeam(IdDTO dto, DateDTO dateDto) {
 
@@ -35,7 +31,7 @@ public class ShowCurrentProjectTeamService {
 
         if (projRepo.existById(projectId)){
 
-            List<ResourceReeng> resources = resRepo.findByProject(projectId);
+            List<ResourceReeng> resources = resRepo.findAllByProject(projectId);
 
             List<ResourceReeng> projectTeam = dsrv.currentResourcesByDate(resources, LocalDate.parse(dateDto.date));
 

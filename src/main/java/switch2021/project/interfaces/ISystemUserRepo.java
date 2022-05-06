@@ -4,7 +4,6 @@ import switch2021.project.model.SystemUser.SystemUser;
 
 import java.util.List;
 
-//@Component
 public interface ISystemUserRepo/* extends CrudRepository<Object, Long> */{
 
     SystemUser findSystemUserByEmail(String email);

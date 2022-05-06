@@ -4,8 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.dto.OutPutUsDTO;
 import switch2021.project.model.UserStory.*;
-import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.model.valueObject.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;

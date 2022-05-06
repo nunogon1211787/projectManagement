@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import switch2021.project.dto.SprintDTO;
 import switch2021.project.service.CreateSprintService;
 
-@Controller
 @RestController
 @RequestMapping("/sprints")
 public class CreateSprintController {
