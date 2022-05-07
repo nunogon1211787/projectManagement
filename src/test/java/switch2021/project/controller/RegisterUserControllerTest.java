@@ -15,7 +15,7 @@ public class RegisterUserControllerTest {
     @Autowired
     RegisterUserController registerUserController;
 
-    @Test //Integration Test
+    /*@Test //Integration Test
     @DisplayName(".registerUser(NewUserInfoDTO infoDTO)")
     void itShouldRegisterAUserIntegration() {
         //Arrange
@@ -31,6 +31,8 @@ public class RegisterUserControllerTest {
         //Assert
         assertEquals(201, responseEntity.getStatusCodeValue());
     }
+
+     */
 
     @Test
     @DisplayName("registerUser(NewUserInfoDTO infoDTO)")
