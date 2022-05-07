@@ -23,17 +23,6 @@ public class SystemUserFactory implements ISystemUserFactory {
     @Autowired
     private IUserProfileIDFactory userProfileIDFactory;
 
-    public SystemUserFactory(ISystemUserIDFactory idFactory, INameFactory nameFactory,
-                             IFunctionFactory functionFactory, IPasswordFactory passwordFactory,
-                             IPhotoFactory photoFactory, IUserProfileIDFactory userProfileIDFactory) {
-        this.idFactory = idFactory;
-        this.nameFactory = nameFactory;
-        this.functionFactory = functionFactory;
-        this.passwordFactory = passwordFactory;
-        this.photoFactory = photoFactory;
-        this.userProfileIDFactory = userProfileIDFactory;
-    }
-
     @Override
     public SystemUser createSystemUser(NewUserInfoDTO infoDTO) {
         SystemUserID systemUserID = idFactory.createSystemUserID(infoDTO.email);

@@ -8,7 +8,6 @@ import switch2021.project.dto.*;
 import switch2021.project.service.RegisterUserService;
 import switch2021.project.service.ShowAllCurrentProjectsByUserService;
 
-
 import java.util.List;
 
 @RestController
@@ -20,17 +19,12 @@ public class RegisterUserController {
     @Autowired
     private ShowAllCurrentProjectsByUserService showAllCurrentProjectsByUserService;
 
-    public RegisterUserController(RegisterUserService registerUserService) {
-        this.registerUserService = registerUserService;
-    }
-
     @GetMapping("/{id}/resources")
     public ResponseEntity<Object> showCurrentProjectsByUser(@PathVariable IdDTO id, @RequestParam("date") DateDTO dateDto){
 
         List<OutputProjectDTO> projectsDto = showAllCurrentProjectsByUserService.showCurrentProjectsByUser(id, dateDto);
 
         return new ResponseEntity<>(projectsDto, HttpStatus.OK);
-
     }
 
     @PostMapping

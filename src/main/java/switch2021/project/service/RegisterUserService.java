@@ -19,16 +19,10 @@ public class RegisterUserService {
     @Autowired
     private ISystemUserFactory systemUserFactory;
 
-    public RegisterUserService(ISystemUserRepo systemUserRepo, SystemUserMapper systemUserMapper,
-                               ISystemUserFactory systemUserFactory) {
-        this.systemUserRepo = systemUserRepo;
-        this.systemUserMapper = systemUserMapper;
-        this.systemUserFactory = systemUserFactory;
-    }
-
     public OutputUserDTO createAndSaveSystemUser(NewUserInfoDTO infoDTO) {
         SystemUser newUser = systemUserFactory.createSystemUser(infoDTO);
-        systemUserRepo.saveSystemUser(newUser);
+        if (!systemUserRepo.saveSystemUser(newUser))
+            throw new IllegalArgumentException("email already exists");
         return systemUserMapper.toDto(newUser);
     }
 
