@@ -1,6 +1,5 @@
 package switch2021.project.interfaces;
 
-import org.springframework.stereotype.Component;
 import switch2021.project.model.Typology.Typology;
 
 import java.util.List;
@@ -12,7 +11,7 @@ public interface IRepoTypology {
     /**
      * The repository should be able to find an object using given Identity.
      */
-    Typology findTypologyByDescription(String description);
+    Typology findTypologyById(String description);
 
 
     /**

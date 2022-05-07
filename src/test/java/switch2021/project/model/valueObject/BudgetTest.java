@@ -109,7 +109,7 @@ public class BudgetTest {
     public void overrideTestFail_2() {
         //Arrange
         Budget budget = new Budget(3000);
-        Typology budget1 =  new Typology(new ID_Typology(new Description("Test")));
+        Typology budget1 =  new Typology(new TypologyID(new Description("Test")));
         //Act and Assert
         assertNotEquals(budget, budget1);
     }

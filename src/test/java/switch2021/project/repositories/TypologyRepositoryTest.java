@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.ID_Typology;
+import switch2021.project.model.valueObject.TypologyID;
 
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class TypologyRepositoryTest {
         //Arrange
         TypologyRepository test = new TypologyRepository();
         Typology typo = mock(Typology.class);
-        ID_Typology id = mock(ID_Typology.class);
+        TypologyID id = mock(TypologyID.class);
         Description des = mock(Description.class);
         //Act
         when(typo.getId_description()).thenReturn(id);
@@ -38,7 +38,7 @@ public class TypologyRepositoryTest {
         TypologyRepository test = new TypologyRepository();
         Typology typo = mock(Typology.class);
         Typology typo2 = mock(Typology.class);
-        ID_Typology id = mock(ID_Typology.class);
+        TypologyID id = mock(TypologyID.class);
         Description des = mock(Description.class);
         //Act
         when(typo.getId_description()).thenReturn(id);
@@ -56,7 +56,7 @@ public class TypologyRepositoryTest {
         //Arrange
         TypologyRepository typologyRepository = new TypologyRepository();
         Typology typo = mock(Typology.class);
-        ID_Typology id = mock(ID_Typology.class);
+        TypologyID id = mock(TypologyID.class);
         Description des = mock(Description.class);
         // Act
         when(typo.getId_description()).thenReturn(id);
@@ -65,7 +65,7 @@ public class TypologyRepositoryTest {
         when(id.hasDescription("Time and Materials")).thenReturn(true);
         typologyRepository.saveTypology(typo);
         //Assert
-        assertNotNull(typologyRepository.findTypologyByDescription("Time and Materials"));
+        assertNotNull(typologyRepository.findTypologyById("Time and Materials"));
     }
 
     @Test
@@ -73,7 +73,7 @@ public class TypologyRepositoryTest {
         //Arrange
         TypologyRepository typologyRepository = new TypologyRepository();
         // Act
-        Typology nullTypology = typologyRepository.findTypologyByDescription("Time and Materials");
+        Typology nullTypology = typologyRepository.findTypologyById("Time and Materials");
         //Assert
         assertNull(nullTypology);
     }
@@ -84,8 +84,8 @@ public class TypologyRepositoryTest {
         TypologyRepository typologyRepository = new TypologyRepository();
         Typology typo1 = mock(Typology.class);
         Typology typo2 = mock(Typology.class);
-        ID_Typology id1 = mock(ID_Typology.class);
-        ID_Typology id2 = mock(ID_Typology.class);
+        TypologyID id1 = mock(TypologyID.class);
+        TypologyID id2 = mock(TypologyID.class);
         Description des1 = mock(Description.class);
         Description des2 = mock(Description.class);
         //Act
@@ -109,9 +109,9 @@ public class TypologyRepositoryTest {
         Typology typo1 = mock(Typology.class);
         Typology typo2 = mock(Typology.class);
         Typology typo3 = mock(Typology.class);
-        ID_Typology id1 = mock(ID_Typology.class);
-        ID_Typology id2 = mock(ID_Typology.class);
-        ID_Typology id3 = mock(ID_Typology.class);
+        TypologyID id1 = mock(TypologyID.class);
+        TypologyID id2 = mock(TypologyID.class);
+        TypologyID id3 = mock(TypologyID.class);
         Description des1 = mock(Description.class);
         Description des2 = mock(Description.class);
         Description des3 = mock(Description.class);

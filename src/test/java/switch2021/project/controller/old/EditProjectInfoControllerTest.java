@@ -1,15 +1,10 @@
 package switch2021.project.controller.old;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.controller.old.EditProjectInfoController;
 import switch2021.project.factory.ResourceFactory;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
-import switch2021.project.model.Resource.old.Resource;
-import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.repositories.ProjectStore;
@@ -38,7 +33,7 @@ class EditProjectInfoControllerTest {
         EditProjectInfoController edit = new EditProjectInfoController(company);
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
         LocalDate startDate3 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
+        typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,
@@ -65,7 +60,7 @@ class EditProjectInfoControllerTest {
         EditProjectInfoController edit = new EditProjectInfoController(company);
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
         LocalDate startDate3 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
+        typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,
@@ -88,7 +83,7 @@ class EditProjectInfoControllerTest {
         company = new Company();
         this.projectStore = company.getProjectStore();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
+        typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,
@@ -111,7 +106,7 @@ class EditProjectInfoControllerTest {
         company = new Company();
         this.projectStore = company.getProjectStore();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
+        typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,

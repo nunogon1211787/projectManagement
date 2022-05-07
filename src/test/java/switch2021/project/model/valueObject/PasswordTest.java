@@ -115,7 +115,7 @@ public class PasswordTest {
     void hashCodeTest_Fail(){
         //Arrange
         Password pwd = new Password("Qwerty_1");
-        Typology pwd1 = new Typology(new ID_Typology(new Description("Test")));
+        Typology pwd1 = new Typology(new TypologyID(new Description("Test")));
         //Act and Assert
         assertNotEquals(pwd.hashCode(),pwd1.hashCode());
     }

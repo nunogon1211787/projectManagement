@@ -1,4 +1,4 @@
-package switch2021.project.mapper.old;
+package switch2021.project.mapper;
 
 import org.springframework.stereotype.Component;
 import switch2021.project.dto.TypologyDTO;

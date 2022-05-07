@@ -2,18 +2,17 @@ package switch2021.project.model.valueObject;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.valueObject.Description;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class ID_TypologyTest {
+class _TypologyIDTest {
 
     @Test
     public void getDescription_Success() {
         //Arrange
         Description des = mock(Description.class);
-        ID_Typology id = new ID_Typology(des);
+        TypologyID id = new TypologyID(des);
         //Act
         when(des.getText()).thenReturn("Test");
         Description id_des = id.getDescription();
@@ -26,7 +25,7 @@ class ID_TypologyTest {
     public void hasDescriptionSuccess() {
         //Arrange
         Description des = mock(Description.class);
-        ID_Typology id = new ID_Typology(des);
+        TypologyID id = new TypologyID(des);
         //Act
         when(des.getText()).thenReturn("Test");
         //Assert
@@ -36,7 +35,7 @@ class ID_TypologyTest {
     @Test
     public void hasDescriptionFail() {
         //Arrange
-        ID_Typology id = mock(ID_Typology.class);
+        TypologyID id = mock(TypologyID.class);
         Description des = mock(Description.class);
         //Act
         when(des.getText()).thenReturn("Fail");
@@ -48,8 +47,8 @@ class ID_TypologyTest {
     public void equalsSuccess() {
         //Arrange
         Description des = mock(Description.class);
-        ID_Typology id = new ID_Typology(des);
-        ID_Typology expected = new ID_Typology(des);
+        TypologyID id = new TypologyID(des);
+        TypologyID expected = new TypologyID(des);
         //Act
         when(des.getText()).thenReturn("Test");
         //Assert
@@ -61,8 +60,8 @@ class ID_TypologyTest {
         //Arrange
         Description des = mock(Description.class);
         Description desEx = mock(Description.class);
-        ID_Typology id = new ID_Typology(des);
-        ID_Typology expected = new ID_Typology(desEx);
+        TypologyID id = new TypologyID(des);
+        TypologyID expected = new TypologyID(desEx);
         //Act
         when(des.getText()).thenReturn("Test");
         when(desEx.getText()).thenReturn("Fail");
@@ -74,7 +73,7 @@ class ID_TypologyTest {
     public void ClassFail() {
         //Arrange
         Description des = mock(Description.class);
-        ID_Typology id = new ID_Typology(des);
+        TypologyID id = new TypologyID(des);
         Typology expected = new Typology(id);
         //Act and Assert
         assertNotEquals(expected, id);
@@ -84,7 +83,7 @@ class ID_TypologyTest {
     public void EqualsNullFail() {
         //Arrange
         Description des = mock(Description.class);
-        ID_Typology id = new ID_Typology(des);
+        TypologyID id = new TypologyID(des);
         Typology expected = null;
         //Act and Assert
         assertNotEquals(expected, id);
@@ -94,8 +93,8 @@ class ID_TypologyTest {
     public void hashSuccess() {
         //Arrange
         Description des = mock(Description.class);
-        ID_Typology id = new ID_Typology(des);
-        ID_Typology expected = new ID_Typology(des);
+        TypologyID id = new TypologyID(des);
+        TypologyID expected = new TypologyID(des);
         //Act
         int hash_id = id.hashCode();
         int hash_exp = expected.hashCode();
@@ -108,8 +107,8 @@ class ID_TypologyTest {
         //Arrange
         Description des = mock(Description.class);
         Description desEx = mock(Description.class);
-        ID_Typology id = new ID_Typology(des);
-        ID_Typology expected = new ID_Typology(desEx);
+        TypologyID id = new TypologyID(des);
+        TypologyID expected = new TypologyID(desEx);
         //Act
         int hash_id = id.hashCode();
         int hash_exp = expected.hashCode();
@@ -121,8 +120,8 @@ class ID_TypologyTest {
     public void sameValueAs_True() {
         //Arrange
         Description des = mock(Description.class);
-        ID_Typology id = new ID_Typology(des);
-        ID_Typology expected = new ID_Typology(des);
+        TypologyID id = new TypologyID(des);
+        TypologyID expected = new TypologyID(des);
         //Act
         when(des.getText()).thenReturn("Test");
         //Assert
@@ -133,8 +132,8 @@ class ID_TypologyTest {
     public void sameValueAs_False() {
         //Arrange
         Description des = mock(Description.class);
-        ID_Typology id = new ID_Typology(des);
-        ID_Typology expected = mock(ID_Typology.class);
+        TypologyID id = new TypologyID(des);
+        TypologyID expected = mock(TypologyID.class);
         Description des_ex = mock(Description.class);
         //Act
         when(des.getText()).thenReturn("Test");

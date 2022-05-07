@@ -39,7 +39,7 @@ package "App Service API/Use Case Service" #implementation {
     package "App Service" {
         class CreateTypologyService <<Service>>{
         +CreateTypologyService()
-        +createAndSaveTypology(dto.description)
+        +createAndSaveTypology(inputDto)
         +
         }
     }
@@ -59,7 +59,7 @@ package "App Service API/Use Case Service" #implementation {
 package "Entity/Core/Domain" #strategy {
     package "Factory" {
         class TypologyFactory <<"Factory">> {
-        +create (description)
+        +create (inputDto)
         }
     }
     package "Aggregate" {
@@ -72,7 +72,7 @@ package "Entity/Core/Domain" #strategy {
         +ID_Typology (description)
         }
         class Description {
-        +Description(description)
+        +Description(inputDto.description)
         }
     }
 }
@@ -88,6 +88,6 @@ CreateTypologyService -right..> IRepositoryTypology
 IRepositoryTypology -up[hidden]..> TypologyRepository
 class TypologyRepository implements IRepositoryTypology
 TypologyFactory -down..> ID_Typology
-ID_Typology -left..> Description
+TypologyFactory -left..> Description
 
 @enduml

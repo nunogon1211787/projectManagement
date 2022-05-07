@@ -8,29 +8,48 @@ autonumber
 participant ":CreateTypologyRoute" as Router
 participant "Ctrl:CreateTypologyController" as Controller
 participant "service:CreateTypologyService" as Service
-participant "factTypo:ITypologyFactory" as Factory
+participant "typoFacty:IFactoryTypology" as TypoFactory
+participant "typoIDFact: ITypologyIDFactory" as IdFactory
+participant "descFact:IDescriptionFactory" as DesFactory
 participant "newTypo:Typology" as Typology
-participant "repoTypo:IRepositoryTypology" as Repository
-participant "savedTypoDto:DtoTypology" as outputDTO
+participant "typologyID:TypologyID" as Id
+participant "description:Description" as Description
+participant "iRepoTypology:IRepoTypology" as Repository
 participant "mapper:TypologyMapper" as Mapper
+participant "savedTypoDto:DtoTypology" as outputDTO
+participant "typologyResponse : ResponseEntity" as json
 
-[o-> Router: Post/Typologies/(inputDto)
+[o-> Router: Post/typologies/(inputDto)
 Router -> Controller: createTypology (inputDto)
-Controller -> Service: createAndSaveTypology(newTypoDto)
-Service -> Factory: create(newTypoDto)
-Factory --> Typology**: create(newTypoDto.description)
+note over Controller: Service is parameter with @Autowired
+Controller -> Service: createAndSaveTypology(inputDto)
+note over Service: typoFact, repoTypo and mapper are parameters with @Autowired
+Service -> TypoFactory: createTypology(inputDto)
+TypoFactory -> IdFactory: createId(inputDto)
+note over TypoFactory: The typoIDFact is parameter with @Autowired
+IdFactory -> DesFactory: createDescription(inputDto.description)
+note over IdFactory: The descFact is parameter with @Autowired
+DesFactory --> Description**: create(inputDto.description)
+return description
+IdFactory --> Id**: create(description)
+return typologyID
+TypoFactory --> Typology**: create(typologyID)
 return newTypo
-Service -> Service: saveTypology(newTypo)
-Service -> Repository: saveTypology(newTypo)
-Repository -> Repository: existsByTypologyId(newTypo)
-deactivate Repository
+alt successful case
+    Service -> Repository: saveTypology(newTypo)
+    alt successful case
+        Repository -> Repository: existsByTypologyId(newTypo)
+        deactivate Repository
+    end
 return true
-deactivate Service
-Service -> Mapper: toDTO(newTypo)
-Mapper --> outputDTO**: create(newTypoAttr)
-return savedTypoDto
-return savedTypoDto
+end
+Service -> Mapper: modelToDTO(newTypo)
+Mapper --> outputDTO**: create(newTypo.attr)
 return outputDto
-[<--o Router: response
+return outputDto
+note over Controller: The Controller uses the Response Entity class to create a response in JSON format using the dto received from Service layer and defining the HTTP status.
+Controller --> json**: create(outputDto)
+return typologyResponse
+[<--o Router: Shows typology informations
 
 @enduml

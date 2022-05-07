@@ -1,9 +1,8 @@
 package switch2021.project.model.Typology;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.ID_Typology;
+import switch2021.project.model.valueObject.TypologyID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -14,7 +13,7 @@ public class TypologyTest {
     public void get_TypologyTest() {
         //Arrange
         Description des = mock(Description.class);
-        ID_Typology id = mock(ID_Typology.class);
+        TypologyID id = mock(TypologyID.class);
         Typology typo = new Typology(id);
         //Act
         when(id.getDescription()).thenReturn(des);
@@ -26,7 +25,7 @@ public class TypologyTest {
     @Test
     public void hasID_DescriptionSuccess() {
         //Arrange
-        ID_Typology id = mock(ID_Typology.class);
+        TypologyID id = mock(TypologyID.class);
         Typology typo = new Typology(id);
         //Act
         when(id.hasDescription("Test")).thenReturn(true);
@@ -37,7 +36,7 @@ public class TypologyTest {
     @Test
     public void hasID_DescriptionFail() {
         //Arrange
-        ID_Typology id = mock(ID_Typology.class);
+        TypologyID id = mock(TypologyID.class);
         Typology typo = new Typology(id);
         //Act
         when(id.hasDescription("Test")).thenReturn(false);
@@ -49,7 +48,7 @@ public class TypologyTest {
     public void equalsTestSuccess() {
         //Arrange
         Description des = mock(Description.class);
-        ID_Typology id = mock(ID_Typology.class);
+        TypologyID id = mock(TypologyID.class);
         Typology typo = new Typology(id);
         Typology typo2 = new Typology(id);
         //Act
@@ -62,8 +61,8 @@ public class TypologyTest {
     @Test
     public void equalsTestFail() {
         //Arrange
-        ID_Typology id = mock(ID_Typology.class);
-        ID_Typology id2 = mock(ID_Typology.class);
+        TypologyID id = mock(TypologyID.class);
+        TypologyID id2 = mock(TypologyID.class);
         Typology typo = new Typology(id);
         Typology typo2 = new Typology(id2);
         //Assert
@@ -73,8 +72,8 @@ public class TypologyTest {
     @Test
     public void typologyClass() {
         //Arrange
-        ID_Typology id = mock(ID_Typology.class);
-        ID_Typology id2 = mock(ID_Typology.class);
+        TypologyID id = mock(TypologyID.class);
+        TypologyID id2 = mock(TypologyID.class);
         Typology typo = new Typology(id);
         Typology typo2 = new Typology(id2);
         //Assert
@@ -84,7 +83,7 @@ public class TypologyTest {
     @Test
     public void typologyNull() {
         //Arrange
-        ID_Typology id = mock(ID_Typology.class);
+        TypologyID id = mock(TypologyID.class);
         Typology typo = new Typology(id);
         Typology typo2 = null;
         //Assert
@@ -94,7 +93,7 @@ public class TypologyTest {
     @Test
     public void hashCodeSuccess() {
         //Arrange
-        ID_Typology id = mock(ID_Typology.class);
+        TypologyID id = mock(TypologyID.class);
         Typology typo1 = new Typology(id);
         Typology typo2 = new Typology(id);
         //Act
@@ -107,8 +106,8 @@ public class TypologyTest {
     @Test
     public void hashCodeFail() {
         //Arrange
-        ID_Typology id = mock(ID_Typology.class);
-        ID_Typology id2 = mock(ID_Typology.class);
+        TypologyID id = mock(TypologyID.class);
+        TypologyID id2 = mock(TypologyID.class);
         Typology typo1 = new Typology(id);
         Typology typo2 = new Typology(id2);
         //Act
@@ -123,8 +122,8 @@ public class TypologyTest {
         //Arrange
         Typology typo1 = mock(Typology.class);
         Typology typo2 = mock(Typology.class);
-        ID_Typology id = mock(ID_Typology.class);
-        ID_Typology id2 = mock(ID_Typology.class);
+        TypologyID id = mock(TypologyID.class);
+        TypologyID id2 = mock(TypologyID.class);
         //Act
         when(typo1.getId_description()).thenReturn(id);
         when(typo2.getId_description()).thenReturn(id2);
@@ -138,8 +137,8 @@ public class TypologyTest {
         //Arrange
         Typology typo1 = mock(Typology.class);
         Typology typo2 = mock(Typology.class);
-        ID_Typology id = mock(ID_Typology.class);
-        ID_Typology id2 = mock(ID_Typology.class);
+        TypologyID id = mock(TypologyID.class);
+        TypologyID id2 = mock(TypologyID.class);
         //Act
         when(typo1.getId_description()).thenReturn(id);
         when(typo2.getId_description()).thenReturn(id2);

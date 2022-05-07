@@ -2,7 +2,6 @@ package switch2021.project.controller.old;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.controller.old.GetProjectListController;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.repositories.ProjectStore;
@@ -97,7 +96,7 @@ public class GetProjectListControllerTest {
         GetProjectListController controller = new GetProjectListController(company);
 
         ProjectStore projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
@@ -133,7 +132,7 @@ public class GetProjectListControllerTest {
         GetProjectListController controller = new GetProjectListController(company);
 
         ProjectStore projectStore = company.getProjectStore();
-        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project proj3 = company.getProjectStore().createAndSaveProject("prototype3", "proj3Prototype", customer,

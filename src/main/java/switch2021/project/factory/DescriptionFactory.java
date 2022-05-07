@@ -4,11 +4,11 @@ import org.springframework.stereotype.Component;
 import switch2021.project.factoryInterface.IDescriptionFactory;
 import switch2021.project.model.valueObject.Description;
 
-
 @Component
 public class DescriptionFactory implements IDescriptionFactory {
-    @Override
-    public Description createDescription(String description) {
-        return new Description(description);
-    }
+
+        @Override
+        public Description createDescription(String description) {
+            return new Description(description);
+        }
 }
