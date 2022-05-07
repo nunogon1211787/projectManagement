@@ -47,7 +47,7 @@ public class RegisterUserServiceTest {
     void itShouldRegisterAUser(){
         //Arrange
         NewUserInfoDTO dto = new NewUserInfoDTO();
-        dto.userName = "manuelOliveira";
+        dto.userName = "manuel";
         dto.email = "manuel@beaver.com";
         dto.password = "Qwerty_1";
         dto.passwordConfirmation = "Qwerty_1";
@@ -66,7 +66,7 @@ public class RegisterUserServiceTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             NewUserInfoDTO dto = new NewUserInfoDTO();
-            dto.userName = "manuelOliveira";
+            dto.userName = "Oliveira";
             dto.email = "oliveira@beaver.com";
             dto.password = "Qwerty_1";
             dto.passwordConfirmation = "Qwerty_1";

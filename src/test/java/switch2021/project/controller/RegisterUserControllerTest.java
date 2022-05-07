@@ -20,7 +20,7 @@ public class RegisterUserControllerTest {
     void itShouldRegisterAUserIntegration() {
         //Arrange
         NewUserInfoDTO dto = new NewUserInfoDTO();
-        dto.userName = "manuelOliveira";
+        dto.userName = "maneloliveira";
         dto.email = "maneloliveira@beaver.com";
         dto.password = "Qwerty_1";
         dto.passwordConfirmation = "Qwerty_1";
