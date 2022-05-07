@@ -9,6 +9,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import switch2021.project.model.valueObject.Description;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 public class DescriptionFactoryTest {

@@ -40,10 +40,6 @@ public class Sprint implements Entity<Sprint> {
     public boolean hasSprintID(String sprID) {
          return Objects.equals(this.sprintID.toString(), sprID);}
 
-    public boolean hasProjectID(String projectID) {
-        return Objects.equals(projectID, projectID);
-    }
-
 
     /**
      * Check if this Sprint is the current Sprint
@@ -55,17 +51,6 @@ public class Sprint implements Entity<Sprint> {
         return ((this.startDate.isBefore(endDate) || this.startDate.equals(endDate))
                 && (this.endDate.isAfter(startDate) || this.endDate.equals(startDate)));
     }
-
-//    /**
-//     * Method to get list of tasks within a sprint - Método David
-//     */
-//    //It hasn't tests
-//    public List<Task> getListOfTasksOfASprint(){
-//        List<Task> taskList2 = new ArrayList<>();
-//
-//        taskList2.addAll(this.taskStore.getTaskList());
-//        return taskList2;
-//    }
 
     /**
      * Methods to call methods from sprint backlog
