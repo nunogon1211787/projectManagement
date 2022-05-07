@@ -40,7 +40,9 @@ public class CreateTypologyServiceTest {
     CreateTypologyService service1;
 
     @BeforeEach
-    void setUp() throws Exception {MockitoAnnotations.openMocks(this);}
+    void setUp() throws Exception {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     public void createAndSaveTypologySuccess() {
@@ -103,22 +105,25 @@ public class CreateTypologyServiceTest {
 
     @Test
     public void findTypologyByDescription_Null() {
-        //Arrange
-        TypologyDTO dto = mock(TypologyDTO.class);
-        Description des = mock(Description.class);
-        TypologyID id = mock((TypologyID.class));
-        Typology typo = mock(Typology.class);
-        //Act
-        when(dto.getDescription()).thenReturn("Fixed Cost");
-        when(iFactoryTypology.createTypology(dto)).thenReturn(typo);
-        when(iRepoTypology.saveTypology(typo)).thenReturn(false);
-        when(des.getText()).thenReturn("Fixed Cost");
-        when(id.getDescription()).thenReturn(des);
-        when(typo.getId_description()).thenReturn(id);
-        when(typo.hasID_Description(des.getText())).thenReturn(true);
-        when(iRepoTypology.findTypologyById("Fixed Cost")).thenReturn(null);
         //Assert
-        assertNull(createTypologyService.findTypologyByDescription(dto));
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            TypologyDTO dto = mock(TypologyDTO.class);
+            Description des = mock(Description.class);
+            TypologyID id = mock((TypologyID.class));
+            Typology typo = mock(Typology.class);
+            //Act
+            when(dto.getDescription()).thenReturn("Fixed Cost");
+            when(iFactoryTypology.createTypology(dto)).thenReturn(typo);
+            when(iRepoTypology.saveTypology(typo)).thenReturn(false);
+            when(des.getText()).thenReturn("Fixed Cost");
+            when(id.getDescription()).thenReturn(des);
+            when(typo.getId_description()).thenReturn(id);
+            when(typo.hasID_Description(des.getText())).thenReturn(true);
+            when(iRepoTypology.findTypologyById("Fixed Cost")).thenReturn(null);
+
+            createTypologyService.findTypologyByDescription(dto);
+        });
     }
 
     @Test

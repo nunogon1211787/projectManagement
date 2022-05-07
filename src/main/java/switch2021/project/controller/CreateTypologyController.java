@@ -27,15 +27,15 @@ public class CreateTypologyController {
      */
     @PostMapping("/")
     public ResponseEntity<Object> createTypology(@RequestBody TypologyDTO inputDto) {
+        ErrorMessage message = new ErrorMessage();
         if(inputDto.getDescription() == null || inputDto.getDescription().isEmpty()) {
-            String responseMessege = "Needs to provide an acceptable argument";
-            return new ResponseEntity<>(responseMessege ,HttpStatus.NOT_ACCEPTABLE);}
+            message.errorMessage = "Needs to provide an acceptable argument";
+            return new ResponseEntity<>(message ,HttpStatus.NOT_ACCEPTABLE);}
 
         TypologyDTO outputDto;
         try {
             outputDto = service.createAndSaveTypology(inputDto);
         } catch (Exception exception) {
-            ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
@@ -44,15 +44,15 @@ public class CreateTypologyController {
 
     @GetMapping("/id")
     public ResponseEntity<Object> findTypologyByDescription(@RequestBody TypologyDTO inputDto) {
-        if(inputDto.description == null || inputDto.description.isEmpty()) {
-            String responseMessege = "Needs to provide an acceptable argument";
-            return new ResponseEntity<>(responseMessege ,HttpStatus.NOT_ACCEPTABLE);}
+        ErrorMessage message = new ErrorMessage();
+        if(inputDto.getDescription() == null || inputDto.getDescription().isEmpty()) {
+            message.errorMessage = "Needs to provide an acceptable argument";
+            return new ResponseEntity<>(message ,HttpStatus.NOT_ACCEPTABLE);}
 
         TypologyDTO outputDto;
         try {
             outputDto = service.findTypologyByDescription(inputDto);
         } catch (Exception exception) {
-            ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
@@ -74,9 +74,10 @@ public class CreateTypologyController {
 
     @DeleteMapping("/id")
     public ResponseEntity<Object> deleteTypology(@RequestBody TypologyDTO inputDto) {
+        ErrorMessage message = new ErrorMessage();
         if(inputDto.description == null || inputDto.description.isEmpty()) {
-            String responseMessege = "Needs to provide an acceptable argument";
-            return new ResponseEntity<>(responseMessege ,HttpStatus.NOT_ACCEPTABLE);}
+            message.errorMessage = "Needs to provide an acceptable argument";
+            return new ResponseEntity<>(message ,HttpStatus.NOT_ACCEPTABLE);}
 
         TypologyDTO outputDto;
         try {
@@ -84,7 +85,6 @@ public class CreateTypologyController {
             outputDto = new TypologyDTO();
             outputDto.description = "Deleted successfully";
         } catch (Exception exception) {
-            ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }

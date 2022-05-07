@@ -41,6 +41,10 @@ public class CreateTypologyService {
      */
     public TypologyDTO findTypologyByDescription(TypologyDTO inputDto) {
         Typology outputTypology = iRepoTypology.findTypologyById(inputDto.description);
+
+        if(outputTypology == null){
+            throw new IllegalArgumentException("This Typology does not exist!");
+        }
        return mapper.modelToDto(outputTypology);
     }
 
