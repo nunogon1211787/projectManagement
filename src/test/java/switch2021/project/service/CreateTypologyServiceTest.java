@@ -155,6 +155,7 @@ public class CreateTypologyServiceTest {
         when(typo.hasID_Description(des.getText())).thenReturn(false);
         when(typo1.hasID_Description(des1.getText())).thenReturn(false);
         when(typo2.hasID_Description(des2.getText())).thenReturn(false);
+        when(iRepoTypology.findAllTypology()).thenReturn(List.of(new Typology[]{typo, typo1, typo2}));
         when(typologyMapper.modelToDto(iRepoTypology.findAllTypology())).thenReturn(List.of(new TypologyDTO[]{dto,
                 dto1, dto2}));
         //Assert

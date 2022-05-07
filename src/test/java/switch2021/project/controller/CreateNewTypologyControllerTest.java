@@ -38,10 +38,13 @@ public class CreateNewTypologyControllerTest {
         //Arrange
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-        TypologyDTO dto = mock(TypologyDTO.class);
+        TypologyDTO inputDto = mock(TypologyDTO.class);
+        TypologyDTO outputDto = mock(TypologyDTO.class);
         //Act
-        when(service.createAndSaveTypology(dto)).thenReturn(dto);
-        ResponseEntity<?> response = controller.createTypology(dto);
+        when(inputDto.getDescription()).thenReturn("Test");
+        when(outputDto.getDescription()).thenReturn("Test");
+        when(service.createAndSaveTypology(inputDto)).thenReturn(outputDto);
+        ResponseEntity<?> response = controller.createTypology(inputDto);
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(201);
     }
@@ -51,10 +54,12 @@ public class CreateNewTypologyControllerTest {
         //Arrange
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        TypologyDTO dto = mock(TypologyDTO.class);
         //Act
+        when(dto.getDescription()).thenReturn(null);
         when(service.createAndSaveTypology(null)).thenReturn(null);
-        ResponseEntity<?> response = controller.createTypology(null);
+        ResponseEntity<?> response = controller.createTypology(dto);
         //Assert
-        assertThat(response.getStatusCodeValue()).isEqualTo(201);
+        assertThat(response.getStatusCodeValue()).isEqualTo(406);
     }
 }

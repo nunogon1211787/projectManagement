@@ -27,7 +27,7 @@ public class CreateTypologyController {
      */
     @PostMapping("/")
     public ResponseEntity<Object> createTypology(@RequestBody TypologyDTO inputDto) {
-        if(inputDto.description == null || inputDto.description.isEmpty()) {
+        if(inputDto.getDescription() == null || inputDto.getDescription().isEmpty()) {
             String responseMessege = "Needs to provide an acceptable argument";
             return new ResponseEntity<>(responseMessege ,HttpStatus.NOT_ACCEPTABLE);}
 
