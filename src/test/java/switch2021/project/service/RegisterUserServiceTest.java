@@ -1,22 +1,11 @@
 package switch2021.project.service;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import switch2021.project.dto.NewUserInfoDTO;
 import switch2021.project.dto.OutputUserDTO;
-import switch2021.project.factoryInterface.ISystemUserFactory;
-import switch2021.project.interfaces.ISystemUserRepo;
-import switch2021.project.mapper.SystemUserMapper;
-import switch2021.project.model.SystemUser.SystemUser;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class RegisterUserServiceTest {
@@ -78,7 +67,7 @@ public class RegisterUserServiceTest {
             //Arrange
             NewUserInfoDTO dto = new NewUserInfoDTO();
             dto.userName = "manuelOliveira";
-            dto.email = "manuelOliveira@beaver.com";
+            dto.email = "oliveira@beaver.com";
             dto.password = "Qwerty_1";
             dto.passwordConfirmation = "Qwerty_1";
             dto.function = "tester";
