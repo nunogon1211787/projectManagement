@@ -35,8 +35,8 @@ class _TypologyIDTest {
     @Test
     public void hasDescriptionFail() {
         //Arrange
-        TypologyID id = mock(TypologyID.class);
         Description des = mock(Description.class);
+        TypologyID id = new TypologyID(des);
         //Act
         when(des.getText()).thenReturn("Fail");
         //Assert

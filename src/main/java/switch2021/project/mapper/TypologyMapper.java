@@ -19,9 +19,9 @@ public class TypologyMapper {
     /**
      * Methods to change data in to a Typology DTO.
      */
-    public TypologyDTO modelToDto(Typology typo) {
+    public TypologyDTO modelToDto(Typology typology) {
         TypologyDTO typologyDTO = new TypologyDTO();
-        typologyDTO.description = typo.getId_description().getDescription().getText();
+        typologyDTO.description = typology.getId_description().getDescription().getText();
         return typologyDTO;
     }
 

@@ -75,7 +75,7 @@ public class CreateTypologyController {
     @DeleteMapping("/id")
     public ResponseEntity<Object> deleteTypology(@RequestBody TypologyDTO inputDto) {
         ErrorMessage message = new ErrorMessage();
-        if(inputDto.description == null || inputDto.description.isEmpty()) {
+        if(inputDto.getDescription() == null || inputDto.getDescription().isEmpty()) {
             message.errorMessage = "Needs to provide an acceptable argument";
             return new ResponseEntity<>(message ,HttpStatus.NOT_ACCEPTABLE);}
 

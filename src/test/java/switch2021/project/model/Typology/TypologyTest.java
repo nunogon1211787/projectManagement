@@ -47,15 +47,13 @@ public class TypologyTest {
     @Test
     public void equalsTestSuccess() {
         //Arrange
-        Description des = mock(Description.class);
         TypologyID id = mock(TypologyID.class);
         Typology typo = new Typology(id);
         Typology typo2 = new Typology(id);
         //Act
-        when(id.getDescription()).thenReturn(des);
-        when(des.getText()).thenReturn("Test");
+        when(id.sameValueAs(id)).thenReturn(true);
         //Assert
-        assertEquals(typo.toString(), typo2.toString());
+        assertEquals(typo, typo2);
     }
 
     @Test
@@ -65,19 +63,33 @@ public class TypologyTest {
         TypologyID id2 = mock(TypologyID.class);
         Typology typo = new Typology(id);
         Typology typo2 = new Typology(id2);
+        //Act
+        when(id.sameValueAs(id2)).thenReturn(false);
         //Assert
         assertNotEquals(typo, typo2);
     }
 
     @Test
-    public void typologyClass() {
+    public void typologyClass_True() {
         //Arrange
         TypologyID id = mock(TypologyID.class);
         TypologyID id2 = mock(TypologyID.class);
         Typology typo = new Typology(id);
         Typology typo2 = new Typology(id2);
+        //Act
+        when(id.sameValueAs(id2)).thenReturn(true);
         //Assert
         assertEquals(typo.getClass(), typo2.getClass());
+    }
+
+    @Test
+    public void typologyClass_False() {
+        //Arrange
+        TypologyID id = mock(TypologyID.class);
+        Typology typo = new Typology(id);
+        Description typo2 = new Description("Test");
+        //Assert
+        assertNotEquals(typo.getClass(), typo2.getClass());
     }
 
     @Test
@@ -120,29 +132,36 @@ public class TypologyTest {
     @Test
     public void sameIdentityAs_true() {
         //Arrange
-        Typology typo1 = mock(Typology.class);
-        Typology typo2 = mock(Typology.class);
         TypologyID id = mock(TypologyID.class);
-        TypologyID id2 = mock(TypologyID.class);
+        Typology typo1 = new Typology(id);
+        Typology typo2 = new Typology(id);
         //Act
-        when(typo1.getId_description()).thenReturn(id);
-        when(typo2.getId_description()).thenReturn(id2);
-        when(id.sameValueAs(id2)).thenReturn(true);
+        when(id.sameValueAs(id)).thenReturn(true);
         //Assert
-        assertFalse(typo1.sameIdentityAs(typo2));
+        assertTrue(typo1.sameIdentityAs(typo2));
     }
 
     @Test
     public void sameIdentityAs_false() {
         //Arrange
-        Typology typo1 = mock(Typology.class);
-        Typology typo2 = mock(Typology.class);
         TypologyID id = mock(TypologyID.class);
         TypologyID id2 = mock(TypologyID.class);
+        Typology typo1 = new Typology(id);
+        Typology typo2 = new Typology(id2);
         //Act
-        when(typo1.getId_description()).thenReturn(id);
-        when(typo2.getId_description()).thenReturn(id2);
         when(id.sameValueAs(id2)).thenReturn(false);
+        //Assert
+        assertFalse(typo1.sameIdentityAs(typo2));
+    }
+
+    @Test
+    public void sameIdentityAs_Null() {
+        //Arrange
+        TypologyID id = mock(TypologyID.class);
+        Typology typo1 = new Typology(id);
+        Typology typo2 = new Typology(null);
+        //Act
+        when(id.sameValueAs(null)).thenReturn(false);
         //Assert
         assertFalse(typo1.sameIdentityAs(typo2));
     }
