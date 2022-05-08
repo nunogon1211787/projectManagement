@@ -37,7 +37,7 @@ package "DTO" #motivation {
     }
 }
 
-package "App Service API/Use Case Service" #implementation {
+package "Application Service" #implementation {
     package "App Service" {
         class CreateTypologyService <<Service>>{
         +createAndSaveTypology(inputDto)
@@ -63,7 +63,7 @@ package "App Service API/Use Case Service" #implementation {
 }
 
 
-package "Entity/Core/Domain" #strategy {
+package "Domain" #strategy {
     package "Factory" {
         class TypologyFactory <<"Factory">> {
         +createTypology(inputDto)
