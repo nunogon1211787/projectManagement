@@ -47,6 +47,5 @@ public class CreateUserProfileService {
         return userProfileMapper.toDto(newUserProfile);
     }
 
-
 }
 

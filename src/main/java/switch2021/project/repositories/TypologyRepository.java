@@ -1,7 +1,5 @@
 package switch2021.project.repositories;
 
-import lombok.Getter;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.IRepoTypology;
 import switch2021.project.model.Typology.Typology;
@@ -9,7 +7,7 @@ import switch2021.project.model.Typology.Typology;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Repository
 public class TypologyRepository implements IRepoTypology {
 
     /**
@@ -32,7 +30,7 @@ public class TypologyRepository implements IRepoTypology {
     public List<Typology> getTypologyList() {return this.typologyList;}
 
     @Override
-    public Typology findTypologyByDescription(String description) {
+    public Typology findTypologyById(String description) {
         Typology typo = null;
 
         for (Typology i : typologyList) {

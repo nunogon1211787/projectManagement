@@ -6,7 +6,6 @@ import switch2021.project.factory.ResourceFactory;
 import switch2021.project.model.Company;
 import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.model.SystemUser.SystemUser;
@@ -542,7 +541,7 @@ public class ProjectTeamTest {
     public void hasCurrentResourceFailResourceNotCurrent() {
         //Arrange
         Company company = new Company();
-        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //Project 1

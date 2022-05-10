@@ -27,7 +27,7 @@ public class AssociateResourceTest {
         company.getBusinessSectorStore().createAndAddBusinessSector("sector");
         company.getCustomerStore().createAndAddCustomer("Test", "Teste@teste.com", 123456789);
 
-        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("Teste");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
         proj = company.getProjectStore().createAndSaveProject("prototype", "test56", customer,

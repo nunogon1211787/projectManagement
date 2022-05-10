@@ -14,7 +14,7 @@ class UserProfileIdTest {
     public void createUserProfileTest()
     {
         //Arrange
-       UserProfileId userProfile = new UserProfileId("Teste");
+       UserProfileId userProfile = new UserProfileId(new Description("Teste"));
        //Assert
        assertEquals("Teste", userProfile.getUserProfileName().getText());
     }
@@ -22,17 +22,15 @@ class UserProfileIdTest {
     @Test
     @DisplayName("Throw exception when creating profile")
     public void shouldThrowException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            new UserProfileId("");
-        });
+        assertThrows(IllegalArgumentException.class, () -> new UserProfileId(new Description("")));
     }
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTests() {
         // Arrange
-        UserProfileId description = new UserProfileId("Teste");
-        UserProfileId description2 = new UserProfileId("Teste");
+        UserProfileId description = new UserProfileId(new Description("Teste"));
+        UserProfileId description2 = new UserProfileId(new Description("Teste"));
         UserProfileId description3 = null;
         // Act
         assertEquals(description,description2);

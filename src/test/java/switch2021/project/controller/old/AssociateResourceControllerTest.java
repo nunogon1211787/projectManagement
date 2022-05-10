@@ -51,7 +51,7 @@ public class AssociateResourceControllerTest {
         AssociateResourceController controller = new AssociateResourceController(company);
         ProjectStore projectStore = company.getProjectStore();
         //Project1
-        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         Project project1 = projectStore.createAndSaveProject("prototype4", "proj4Prototype", customer,

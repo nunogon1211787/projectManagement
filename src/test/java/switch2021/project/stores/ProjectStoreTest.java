@@ -212,7 +212,7 @@ public class ProjectStoreTest {
         //Arrange
         Company company = new Company();
         //Project
-        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
+        Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
         Customer customer = company.getCustomerStore().getCustomerByName("isep");
         BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
         //list1 and list2 are equals

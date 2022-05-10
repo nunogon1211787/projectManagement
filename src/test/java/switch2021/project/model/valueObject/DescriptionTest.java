@@ -129,7 +129,7 @@ class DescriptionTest {
     public void overrideTestClass() {
         // Arrange
         Description description = new Description("Test");
-        Typology test = new Typology(new ID_Typology(new Description("Test")));
+        Typology test = new Typology(new TypologyID(new Description("Test")));
         //Assert
         assertNotEquals(description, test);
     }

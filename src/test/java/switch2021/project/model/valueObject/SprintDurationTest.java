@@ -64,7 +64,7 @@ class SprintDurationTest {
     void overrideTestDifferentClass() {
         // Arrange
         SprintDuration duration = new SprintDuration(15);
-        Typology test = new Typology(new ID_Typology(new Description("Test")));
+        Typology test = new Typology(new TypologyID(new Description("Test")));
         //Assert
         assertNotEquals(duration, test);
 

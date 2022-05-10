@@ -108,7 +108,7 @@ class NameTest {
     void hashCodeTest_Fail_1() {
         //Arrange
         Name function = new Name("Test");
-        Typology function1 = new Typology(new ID_Typology(new Description("Test")));
+        Typology function1 = new Typology(new TypologyID(new Description("Test")));
         //Act and Assert
         assertNotEquals(function.hashCode(), function1.hashCode());
     }

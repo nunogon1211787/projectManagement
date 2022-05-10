@@ -1,19 +1,13 @@
 package switch2021.project.model.valueObject;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.factory.ResourceFactory;
 import switch2021.project.model.Company;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Resource.old.Resource;
-import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
 
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class ResourceTest {
 
@@ -680,7 +674,7 @@ class ResourceTest {
         assertThrows(NullPointerException.class, () -> {
             //Arrange
             Company company = new Company();
-            Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
+            Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
             Customer customer = company.getCustomerStore().getCustomerByName("isep");
             BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
             //Project 1

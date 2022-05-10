@@ -1,6 +1,6 @@
 package switch2021.project.model.Typology;
 
-import switch2021.project.model.valueObject.ID_Typology;
+import switch2021.project.model.valueObject.TypologyID;
 import switch2021.project.utils.Entity;
 
 import java.util.Objects;
@@ -19,13 +19,13 @@ public class Typology implements Entity<Typology> {
     /**
      * Typology attributes are composed of a description of the Typology.
      **/
-    private final ID_Typology id_description;
+    private final TypologyID id_description;
 
 
     /**
      * Constructors of typology´s class. Creates a new typology instance.
      **/
-    public Typology(ID_Typology id) {
+    public Typology(TypologyID id) {
         this.id_description = id;
     }
 
@@ -33,7 +33,7 @@ public class Typology implements Entity<Typology> {
     /**
      * Methods
      */
-    public ID_Typology getId_description() {return this.id_description;}
+    public TypologyID getId_description() {return this.id_description;}
 
     public boolean hasID_Description(String description) {
         return this.id_description.hasDescription(description);

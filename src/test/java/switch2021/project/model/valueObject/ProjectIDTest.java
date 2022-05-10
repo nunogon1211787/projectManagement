@@ -57,7 +57,7 @@ class ProjectIDTest {
     public void overrideTestClass() {
         // Arrange
         ProjectID code = new ProjectID(1);
-        Typology test = new Typology(new ID_Typology(new Description("Test")));
+        Typology test = new Typology(new TypologyID(new Description("Test")));
         //Assert
         assertNotEquals(code, test);
     }

@@ -3,14 +3,12 @@ package switch2021.project.repositories;
 import lombok.Getter;
 import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.IUserProfileRepo;
-import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.UserProfile.UserProfileReeng;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Getter
 @Repository
 public class UserProfileRepositoryReeng implements IUserProfileRepo {
 

@@ -27,7 +27,7 @@ class "SprintStore" as store << Repository >> {
 package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
 package "App Service" <<Folder>>{
 class "CreateSprintService" as service << Component >> {
-+createAndSaveSprint(SprintDTO)
++createAndSaveSprint(newSprintDTO)
 }
 }
 package "Repositories Interface" <<Folder>>{
@@ -38,13 +38,17 @@ interface "SprintRepositoryInterface" as repo << Interface >>{
 }
 package "Factory Interface" <<Folder>>{
 interface "ISprintFactory" as factoryInterface << Interface >>{
-+createSprint(SprintDTO)
++createSprint(newSprintDTO)
 }
 }
 }
 package "DTO" <<Folder>> {
-package "SprintDTO" <<Folder>>{
-class "SprintDTO" as dto << Component >> {
+package "NewSprintDTO" <<Folder>>{
+class "NewSprintDTO" as dto << Component >> {
+- projectID : ProjectID
+- name : Description
+}
+class "OutPutSprintDTO" as outdto << Component >> {
 - sprintID : SprintID
 - projectID : ProjectID
 - name : Description
@@ -69,7 +73,7 @@ class "Sprint" as sprint << Root >> {
 }
 package "Factory" <<Folder>>{
 class "SprintFactory" as sprintF << Factory >> {
-+createSprint(SprintDTO)
++createSprint(newSprintDTO)
 }
 }
 package "Value Object" <<Folder>>{
@@ -92,6 +96,7 @@ sprintF"1"*-d-"1" sprintID
 sprintF..right>sprint
 sprintF..up|>factoryInterface
 mapper ..> dto
+mapper ..> outdto
 
 
 

@@ -3,7 +3,6 @@ package switch2021.project.model.valueObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.valueObject.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -133,7 +132,7 @@ public class UserStoryIDTest {
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         //Act
         UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
-        Typology budget1 =  new Typology(new ID_Typology(new Description("Test")));
+        Typology budget1 =  new Typology(new TypologyID(new Description("Test")));
         //Assert
         assertNotEquals(userStoryId, budget1);
     }

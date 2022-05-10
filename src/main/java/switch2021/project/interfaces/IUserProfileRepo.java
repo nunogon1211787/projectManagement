@@ -1,9 +1,9 @@
 package switch2021.project.interfaces;
 
-import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.UserProfile.UserProfileReeng;
 
 import java.util.List;
+
 
 public interface IUserProfileRepo {
 

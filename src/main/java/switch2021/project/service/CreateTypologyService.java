@@ -1,12 +1,11 @@
 package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.TypologyDTO;
 import switch2021.project.factoryInterface.IFactoryTypology;
 import switch2021.project.interfaces.IRepoTypology;
-import switch2021.project.mapper.old.TypologyMapper;
+import switch2021.project.mapper.TypologyMapper;
 import switch2021.project.model.Typology.Typology;
 
 import java.util.List;
@@ -17,42 +16,44 @@ public class CreateTypologyService {
     /**
      * Attributes.
      */
-//    @Autowired
+    @Autowired
     private IRepoTypology iRepoTypology;
-//    @Autowired
+    @Autowired
     private IFactoryTypology iFactoryTypology;
     @Autowired
     private TypologyMapper mapper;
 
     /**
+     *
      * Create and save a new typology in the repository.
      **/
     public TypologyDTO createAndSaveTypology(TypologyDTO inputDto) {
         Typology newTypo = this.iFactoryTypology.createTypology(inputDto);
-        this.iRepoTypology.saveTypology(newTypo);
+        if(!iRepoTypology.saveTypology(newTypo)) {
+            throw new IllegalArgumentException("Typology already exists!");
+        }
         return mapper.modelToDto(newTypo);
     }
-
-
-//    /**
-//     * Typology populator, that populates the typology repository with pre-set objects.
-//     **/
-//    public void populateDefault() {
-//        iRepoTypology.saveTypology(iFactoryTypology.createTypology("Fixed Cost"));
-//        iRepoTypology.saveTypology(iFactoryTypology.createTypology("Time and Materials"));
-//    } >>>>>>>>>>>>>> Needs to define where this method will be or if it needs this method <<<<<<<<<<<<<<<<<<
 
 
     /**
      * Typology Find's Methods
      */
-    public TypologyDTO findTypologyByDescription(String description) {
-        Typology outputTypology = iRepoTypology.findTypologyByDescription(description);
+    public TypologyDTO findTypologyByDescription(TypologyDTO inputDto) {
+        Typology outputTypology = iRepoTypology.findTypologyById(inputDto.description);
+
+        if(outputTypology == null){
+            throw new IllegalArgumentException("This Typology does not exist!");
+        }
        return mapper.modelToDto(outputTypology);
     }
 
-    public List<TypologyDTO> findAllTypology() {
+    public List<TypologyDTO> findAllTypologies() {
         List<Typology> repositoryList = iRepoTypology.findAllTypology();
+
+        if(repositoryList.isEmpty()) {
+            throw new NullPointerException("Does not exists any Typology at this moment!");
+        }
         return mapper.modelToDto(repositoryList);
     }
 
@@ -60,7 +61,11 @@ public class CreateTypologyService {
     /**
      * Typology Delete's Methods
      */
-    public void deleteTypology(String description) {
-        iRepoTypology.deleteTypology(description);
+    public void deleteTypology(TypologyDTO inputDto) {
+        if (!iRepoTypology.existsByTypologyId(inputDto.getDescription())) {
+            throw new IllegalArgumentException("Typology does not exists!");
+        } else {
+            iRepoTypology.deleteTypology(inputDto.description);
+        }
     }
 }
