@@ -51,6 +51,25 @@ class ProjectReengTest {
 
     @Test
     void testEquals() {
+        Description name_2 = mock(Description.class);
+        ProjectID id_2 = mock(ProjectID.class);
+
+        ProjectReeng proj_1 = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
+                ,sprintDuration,budget);
+        proj_1.setProjectCode(projectID);
+
+        ProjectReeng proj_2 = new ProjectReeng(name_2,description,businessSector,startDate,numberOfSprints
+                ,sprintDuration,budget);
+        proj_2.setProjectCode(id_2);
+
+        ProjectReeng proj_3 = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
+                ,sprintDuration,budget);
+        proj_3.setProjectCode(id_2);
+
+        assertEquals(proj_1,proj_1);
+        assertNotEquals(proj_1,proj_2);
+        assertNotEquals(proj_3,proj_1);
+        assertNotEquals(customer,proj_2);
     }
 
     @Test
@@ -59,6 +78,18 @@ class ProjectReengTest {
 
     @Test
     void testHashCode() {
+        ProjectID id_2 = mock(ProjectID.class);
+
+        ProjectReeng proj_1 = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
+                ,sprintDuration,budget);
+        proj_1.setProjectCode(projectID);
+
+        ProjectReeng proj_2 = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
+                ,sprintDuration,budget);
+        proj_2.setProjectCode(id_2);
+
+        assertEquals(proj_1.hashCode(),proj_1.hashCode());
+        assertNotEquals(proj_1.hashCode(),proj_2.hashCode());
     }
 
     @Test
