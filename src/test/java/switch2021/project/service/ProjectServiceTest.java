@@ -1,18 +1,19 @@
 package switch2021.project.service;
 
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.factoryInterface.ProjectFactoryInterface;
 import switch2021.project.interfaces.ProjectRepositoryInterface;
 import switch2021.project.mapper.ProjectMapper;
 import switch2021.project.model.Project.ProjectReeng;
-import switch2021.project.repositories.ProjectStoreReeng;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,35 +22,40 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(SpringExtension.class)
+@SpringBootTest
 class ProjectServiceTest {
 
-    @InjectMocks
-    ProjectService projectService;
-
-    @Mock
+    @MockBean
     private ProjectFactoryInterface projectFactoryInterface;
-    @Mock
+    @MockBean
     private ProjectMapper projectsMapper;
-    @Mock
-    private ProjectStoreReeng projectStore;
+    @MockBean
+    private ProjectRepositoryInterface projectRepositoryInterface;
+
     @Mock
     private ProjectReeng projectReeng;
     @Mock
     private ProjectDTO projectDTO;
     @Mock
     private OutputProjectDTO outputProjectDTO;
-    @Mock
-    private ProjectRepositoryInterface projectRepositoryInterface;
+
+    @InjectMocks
+    ProjectService projectService;
+
+    @BeforeEach
+    void TestConfiguration(){
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     public void shouldCreateProject() {
         //Arrange
         List <ProjectReeng> list = new ArrayList<>();
-        list.add(projectReeng);
+
         when(projectFactoryInterface.createProject(projectDTO,1)).thenReturn(projectReeng);
-        when(projectStore.save(projectReeng)).thenReturn(projectReeng);
+        when(projectRepositoryInterface.save(projectReeng)).thenReturn(projectReeng);
         when(projectsMapper.model2Dto(projectReeng)).thenReturn(outputProjectDTO);
+
         when(projectRepositoryInterface.findAll()).thenReturn(list);
 
         //Act
@@ -62,7 +68,7 @@ class ProjectServiceTest {
     @Test
     public void shouldEditProject() {
         //Arrange
-        when(projectStore.findById(any())).thenReturn(projectReeng);
+        when(projectRepositoryInterface.findById(any())).thenReturn(projectReeng);
         when(projectsMapper.model2Dto(any())).thenReturn(outputProjectDTO);
         when(projectRepositoryInterface.findById(any())).thenReturn(projectReeng);
 
