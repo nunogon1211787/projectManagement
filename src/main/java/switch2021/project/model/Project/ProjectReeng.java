@@ -32,9 +32,16 @@ public class ProjectReeng {
     private LocalDate endDate;
 
 
-    public ProjectReeng(ProjectID id) {
+    public ProjectReeng(Description name, Description description, BusinessSector sector, LocalDate startDate,
+                        NumberOfSprints numberOfSprints, SprintDuration sprintDuration, Budget budget) {
 
-        this.projectCode = id;
+        this.projectName = name;
+        this.description = description;
+        this.businessSector = sector;
+        this.startDate = startDate;
+        this.numberOfSprints = numberOfSprints;
+        this.sprintDuration = sprintDuration;
+        this.budget = budget;
 
     }
 
