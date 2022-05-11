@@ -13,7 +13,7 @@ class "ShowCurrentProjectTeamRoute" as route << Component >>
 
 package "Interface Adapters" <<Rectangle>> #lightgreen {
 package "Controllers" <<rectangle>>{
-class "ShowCurrentProjectTeamController" as ctrl << Component >> {
+class "ResourcesController" as ctrl << Component >> {
 +showCurrentProjectTeam()
 }
 }
