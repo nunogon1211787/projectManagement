@@ -1,20 +1,61 @@
 package switch2021.project.model.SystemUser;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.interfaces.ISystemUserRepo;
-import switch2021.project.model.valueObject.Email;
-import switch2021.project.model.valueObject.Password;
-import switch2021.project.model.valueObject.SystemUserID;
-import switch2021.project.repositories.SystemUserRepository;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import switch2021.project.model.valueObject.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.mockito.Mockito.mock;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(SpringExtension.class)
 class SystemUserTest {
-    /*
+
+    @Mock
+    SystemUserID idDouble;
+    @Mock
+    Name nameDouble;
+    @Mock
+    Photo photoDouble;
+    @Mock
+    Password passwordDouble;
+    @Mock
+    Function functionDouble;
+    @Mock
+    UserProfileId userProfileIdDouble;
+    @Mock
+    Description descriptionDouble;
+
+    @Test
+    void itShouldCreateASystemUser() {
+        //S.U.T. {SystemUser}
+        //Arrange
+        when(passwordDouble.getPwd()).thenReturn("Qwerty_1");
+        when(userProfileIdDouble.getUserProfileName()).thenReturn(descriptionDouble);
+        when(descriptionDouble.getText()).thenReturn("Visitor");
+        //Act
+        SystemUser underTest = new SystemUser(idDouble, nameDouble, photoDouble, passwordDouble, passwordDouble,
+                functionDouble, userProfileIdDouble);
+        //Assert
+        assertEquals("Visitor", underTest.getAssignedProfiles().get(0).getUserProfileName().getText());
+        assertFalse(underTest.isActive());
+    }
+
+    @Test
+    void itShouldNotCreateASystemUser() {
+        //S.U.T. {SystemUser}
+        assertThrows(IllegalArgumentException.class, () -> {
+        //Arrange
+        when(passwordDouble.getPwd()).thenReturn("Qwerty_1");
+        when(userProfileIdDouble.getUserProfileName()).thenReturn(descriptionDouble);
+        when(descriptionDouble.getText()).thenReturn("regular");
+        //Act
+        new SystemUser(idDouble, nameDouble, photoDouble, passwordDouble, passwordDouble,
+                functionDouble, userProfileIdDouble);
+        });
+    }
+/*
    @Test
     public void verifyEmail() {
 

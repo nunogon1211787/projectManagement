@@ -6,7 +6,4 @@ public class OutputUserDTO {
     public String function;
     public String photo;
     public boolean isActive;
-
-    public OutputUserDTO() {
-    }
 }

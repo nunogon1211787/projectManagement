@@ -7,7 +7,4 @@ public class NewUserInfoDTO {
     public String password;
     public String passwordConfirmation;
     public String photo;
-
-    public NewUserInfoDTO() {
-    }
 }
