@@ -13,7 +13,7 @@ participant ":ProjectService " as service
 participant ":ProjectStore " as store
 participant ":ProjectFactory " as factory
 participant ":ProjectMapper " as mapper
-participant "projDTO:ProjectDTO " as dto
+participant "outputDTO: OutputProjectDTO " as dto
 participant "proj:Project " as project
 
 

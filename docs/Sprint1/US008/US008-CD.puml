@@ -1,63 +1,90 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-hide circle
-skinparam classAttributeIconSize 0
+title US005 - As a Director, I want to create/register a new project
 
-title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
-
-class CreateUserStoryUI {
-
+package Infrastructure <<Rectangle>> #lightblue {
+class CreateProjectRoute <<Component>>{
+}
 }
 
-class CreateUserStoryController {
-    +getProjectListByUserEmail(String email)
-    +getProjectByCode(String code)
-    +createUserStory(status, priority, description)
+package Interface_Adapters <<Rectangle>> #lightgreen{
+package Controllers <<Rectangle>> {
+class CreateProjectController <<component>> {
++createProject(name,description,startDate,numberOfSprints, budget)
+}
+}
+package Repositories <<Rectangle>> {
+class ProjectStore <<repository>> {
+-projects : List<Project>
++addProject()
+}
+}
 }
 
-class Company {
-    +getProjectStore()
+package Domain <<Rectangle>> #burlywood{
+package Aggregates <<Rectangle>> {
+class Project <<root>> {
+-name : Name
+-description : Description
+-startDate : LocalDate
+-numberOfSprints : NumberOfSprints
+-budget : Budget
++Project(name,description,startDate,numberOfSprints,typology, business, customer, budget)
+}
+}
+package Factories <<Rectangle>> {
+class ProjectFactory <<service>> {
++createProject(name,description,startDate,numberOfSprints, budget)
+}
+}
 }
 
-class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
+package DTO <<Rectangle>> #lightgrey{
+class ProjectMapper <<component>> {
++data2Dto()
++model2Dto()
++dto2Json()
 }
 
-class Project {
--code : String
--productBacklog : ProductBacklog
-+getUserStoryStore()
+class ProjectDTO <<component>> {
+-name : String
+-description : String
+-startDate : LocalDate
+-numberOfSprints : int
+}
 }
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+createUserStory(status, priority, description)
-+isValideUserStory(status, priority, description)
-+saveUserStory(us)
-+validateUserStory(us)
+package Aplication_Service <<Rectangle>> #salmon {
+
+package IFactory <<Rectangle>> {
+interface ProjectFactoryInterface <<interface>>{
++createProject()
+}
+}
+package IRepositories <<Rectangle>> {
+interface ProjectStoreInterface <<interface>>{
++createProject()
+}
 }
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
-+UserStory(status, priority,description)
+package App_Service <<Rectangle>> {
+class ProjectService <<service>> {
++createProject()
+}
+}
 }
 
-CreateUserStoryUI ..> CreateUserStoryController
-
-CreateUserStoryController ..> Company
-CreateUserStoryController ..> ProjectStore
-CreateUserStoryController ..> Project
-CreateUserStoryController ..> ProductBacklog
-
-Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+Infrastructure ..> Controllers
+Controllers ..> App_Service
+Controllers ..> ProjectMapper
+ProjectMapper ...> ProjectFactory
+ProjectFactory ..> Project
+App_Service ..> ProjectStoreInterface
+App_Service .> ProjectFactoryInterface
+App_Service .> ProjectMapper
+ProjectMapper ..> ProjectDTO
+ProjectStore *-- Project
+ProjectStore ..> ProjectStoreInterface
 
 @enduml

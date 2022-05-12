@@ -18,20 +18,26 @@ import java.time.LocalDate;
 public class ProjectService {
 
     @Autowired
-    private IRepoTypology iRepoTypology;
+    private ProjectRepositoryInterface projectRepositoryInterface;
     @Autowired
-    ProjectRepositoryInterface projectRepositoryInterface;
+    private IRepoTypology iRepoTypology;
     @Autowired
     private ProjectFactoryInterface projectFactoryInterface;
     @Autowired
     private ProjectMapper projectsMapper;
 
+
     public ProjectService() {
     }
 
     public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) {
+        int nextId;
 
-        int nextId = 1; //projectRepositoryInterface.findAll().size();
+        if (projectRepositoryInterface.findAll().isEmpty()) {
+            nextId = 1;
+        } else {
+            nextId = projectRepositoryInterface.findAll().size();
+        }
 
         ProjectReeng newProject = projectFactoryInterface.createProject(projDTO, nextId);
 
@@ -54,8 +60,7 @@ public class ProjectService {
             proj.setBusinessSector(new BusinessSector(projectDTO.businessSector));
         }
         if (!projectDTO.typology.isEmpty()) {
-            proj.setTypology(iRepoTypology.findTypologyById(projectDTO.typology)); //It's a entity, should be search at the repository!
-            //This alteration must be checked!
+            proj.setTypology(iRepoTypology.findTypologyById(projectDTO.typology));
         }
         if (!projectDTO.numberOfSprints.isEmpty()) {
             proj.setNumberOfSprints(new NumberOfSprints(Integer.parseInt(projectDTO.numberOfSprints)));
@@ -68,6 +73,9 @@ public class ProjectService {
         }
         if (!projectDTO.projectStatus.isEmpty()) {
             proj.setProjectStatus(ProjectStatusEnum.valueOf(projectDTO.projectStatus));
+        }
+        if (!projectDTO.sprintDuration.isEmpty()) {
+            proj.setSprintDuration(new SprintDuration(Integer.parseInt(projectDTO.sprintDuration)));
         }
 
         return projectsMapper.model2Dto(proj);

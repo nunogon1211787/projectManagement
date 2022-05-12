@@ -1,6 +1,8 @@
 package switch2021.project.model.valueObject;
 
-public class EffortEstimate {
+import switch2021.project.utils.ValueObject;
+
+public class EffortEstimate implements ValueObject<EffortEstimate> {
 
     /**
      * Attributes
@@ -30,5 +32,10 @@ public class EffortEstimate {
     private void checkEffortEstimateRules(double hours) {
         if (hours < MINHOUR || hours > MAXHOUR)
             throw new IllegalArgumentException("Not valid effort estimate values." + "Hour interval: [" + MINHOUR + " - " + MAXHOUR + "]");
+    }
+
+    @Override
+    public boolean sameValueAs(EffortEstimate other) {
+        return false;
     }
 }
