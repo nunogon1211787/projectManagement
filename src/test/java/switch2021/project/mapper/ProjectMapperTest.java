@@ -3,7 +3,7 @@ package switch2021.project.mapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.dto.ProjectDTO;
-import switch2021.project.mapper.old.ProjectsMapper;
+
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Resource.old.Resource;
@@ -20,16 +20,16 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProjectMapperTest {
 
 
-    @Test
-    public void ProjectMappertoDTOListNullTest() {
-        //Arrange
-        Company company = new Company();
-        ProjectsMapper projectsMapper = new ProjectsMapper();
-        //Act
-        List<ProjectDTO> test = new ArrayList<>();
-        //Assert
-        assertEquals(test, projectsMapper.toDTO(company.getProjectStore().getProjectList()));
-    }
+//    @Test
+//    public void ProjectMappertoDTOListNullTest() {
+//        //Arrange
+//        Company company = new Company();
+//        ProjectsMapper projectsMapper = new ProjectsMapper();
+//        //Act
+//        List<ProjectDTO> test = new ArrayList<>();
+//        //Assert
+//        assertEquals(test, projectsMapper.toDTO(company.getProjectStore().getProjectList()));
+//    }
 
 
 /*    @Test

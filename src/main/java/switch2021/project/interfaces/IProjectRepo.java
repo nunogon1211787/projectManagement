@@ -1,10 +1,9 @@
 package switch2021.project.interfaces;
 
-import org.springframework.stereotype.Component;
 import switch2021.project.model.Project.ProjectReeng;
 import java.util.List;
 
-public interface ProjectRepositoryInterface {
+public interface IProjectRepo {
 
     /**
      * Finds all objects from this repository.
@@ -22,6 +21,6 @@ public interface ProjectRepositoryInterface {
     boolean existByName(String id);
 
     /**Save Projects Method**/
-    ProjectReeng save(ProjectReeng newProject);
+    ProjectReeng saveProject(ProjectReeng newProject);
 
 }

@@ -2,7 +2,6 @@ package switch2021.project.factory;
 
 import org.springframework.stereotype.Component;
 import switch2021.project.dto.ProjectDTO;
-import switch2021.project.factoryInterface.ProjectFactoryInterface;
 import switch2021.project.model.Project.ProjectReeng;
 import switch2021.project.model.Project.ProjectStatusEnum;
 import switch2021.project.model.valueObject.*;
@@ -10,7 +9,7 @@ import switch2021.project.model.valueObject.*;
 import java.time.LocalDate;
 
 @Component
-public class ProjectFactory implements ProjectFactoryInterface {
+public class IProjectFactory implements switch2021.project.factoryInterface.IProjectFactory {
 
     @Override
     public ProjectReeng createProject(ProjectDTO projectDTO, int nextId) {

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import switch2021.project.dto.DateDTO;
 import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.OutputResourceDTO;
-import switch2021.project.interfaces.ProjectRepositoryInterface;
+import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.interfaces.ResourceRepositoryInterface;
 import switch2021.project.mapper.ResourceMapper;
 import switch2021.project.model.Resource.ManageResourcesService;
@@ -18,7 +18,8 @@ import java.util.List;
 @Service
 public class ShowCurrentProjectTeamService {
 
-    @Autowired ProjectRepositoryInterface projRepo;
+    @Autowired
+    IProjectRepo projRepo;
     @Autowired ResourceRepositoryInterface resRepo;
     @Autowired ResourceMapper map;
     @Autowired ManageResourcesService dsrv;
