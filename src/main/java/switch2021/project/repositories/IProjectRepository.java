@@ -2,16 +2,15 @@ package switch2021.project.repositories;
 
 import lombok.Getter;
 import org.springframework.stereotype.Component;
-import switch2021.project.interfaces.ProjectRepositoryInterface;
+import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.model.Project.ProjectReeng;
-import switch2021.project.model.valueObject.ProjectID;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Component
-public class ProjectStoreReeng implements ProjectRepositoryInterface {
+public class IProjectRepository implements IProjectRepo {
 
     /**
      * Class Attributes
@@ -22,12 +21,12 @@ public class ProjectStoreReeng implements ProjectRepositoryInterface {
     /**
      * Constructors with data
      **/
-    public ProjectStoreReeng() {
+    public IProjectRepository() {
         this.projectList = new ArrayList<>();
     }
 
 
-    public ProjectReeng save(ProjectReeng newProject) {
+    public ProjectReeng saveProject(ProjectReeng newProject) {
         if(newProject == null) {
             throw new IllegalArgumentException("Error: Project is null!");
         }

@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import switch2021.project.dto.ProjectDTO;
-import switch2021.project.interfaces.ProjectRepositoryInterface;
-import switch2021.project.repositories.ProjectStoreReeng;
-import switch2021.project.service.ProjectService;
+import switch2021.project.interfaces.IProjectRepo;
+import switch2021.project.service.CreateProjectService;
 
 import javax.validation.Valid;
 
@@ -19,9 +18,9 @@ import javax.validation.Valid;
 public class ProjectController {
 
     @Autowired
-    ProjectService service;
+    CreateProjectService service;
     @Autowired
-    ProjectRepositoryInterface projStore;
+    IProjectRepo projStore;
 
     @PostMapping("/createProject")
     public ResponseEntity <?> createProject (@Valid @RequestBody ProjectDTO projectDTO) {
@@ -29,7 +28,7 @@ public class ProjectController {
         if (projStore.existByName(projectDTO.projectName)) {
             return ResponseEntity
                     .badRequest()
-                    .body(new String("Project name already exists")); //TODO criar uma Response Class para mensagens
+                    .body("Project name already exists"); //TODO criar uma Response Class para mensagens
         }
 
         return new ResponseEntity<>(service.createAndSaveProject(projectDTO), HttpStatus.CREATED);
@@ -40,7 +39,7 @@ public class ProjectController {
         if (projStore.existByName(projectDTO.projectName)) {
             return ResponseEntity
                     .badRequest()
-                    .body(new String("Project name already exists")); //TODO criar uma Response Class para mensagens
+                    .body("Project name already exists"); //TODO criar uma Response Class para mensagens
         }
 
         return new ResponseEntity<>(service.editProject(projectDTO), HttpStatus.OK);

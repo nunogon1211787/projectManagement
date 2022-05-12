@@ -1,5 +1,11 @@
 package switch2021.project.dto;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+
+@Getter
+@NoArgsConstructor
 public class ProjectDTO {
 
     /**
@@ -18,9 +24,14 @@ public class ProjectDTO {
     public String projectStatus;
     public String sprintDuration;
 
-
-    /**Constructor**/
-    public ProjectDTO() {
+    public ProjectDTO(String projectName, String description, String businessSector, String startDate,
+                      String numberOfSprints, String budget, String sprintDuration) {
+        this.projectName = projectName;
+        this.description = description;
+        this.businessSector = businessSector;
+        this.startDate = startDate;
+        this.numberOfSprints = numberOfSprints;
+        this.budget = budget;
+        this.sprintDuration = sprintDuration;
     }
-
 }

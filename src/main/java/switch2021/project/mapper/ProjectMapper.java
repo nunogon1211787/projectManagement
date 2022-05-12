@@ -7,25 +7,23 @@ import switch2021.project.model.Project.ProjectReeng;
 @Component
 public class ProjectMapper {
 
-    public OutputProjectDTO model2Dto(ProjectReeng project) {
+    public OutputProjectDTO model2Dto(ProjectReeng newProject) {
+        String code = newProject.getProjectCode().getCode();
+        String projectName = newProject.getProjectName().getText();
+        String description = newProject.getDescription().getText();
+        String businessSector = newProject.getBusinessSector().getDescription().getText();
+        String numberOfSprints = newProject.getNumberOfSprints().toString();
+        String budget = newProject.getBudget().toString();
+        String status = newProject.getProjectStatus().toString();
+       String startDate = newProject.getStartDate().toString();
+        OutputProjectDTO projDto = new OutputProjectDTO(code,projectName,description,businessSector,startDate, numberOfSprints,budget,status);
 
-        OutputProjectDTO projDto = new OutputProjectDTO();
-
-        projDto.code = project.getProjectCode().getCode();
-        projDto.projectName = project.getProjectName().getText();
-        projDto.description = project.getDescription().getText();
-        projDto.businessSector = project.getBusinessSector().getDescription().getText();
-        projDto.numberOfSprints = project.getNumberOfSprints().toString();
-        projDto.budget = project.getBudget().toString();
-        projDto.status = project.getProjectStatus().toString();
-        projDto.startDate = project.getStartDate().toString();
-
-        if (project.getTypology() != null) {
-            projDto.typo = project.getTypology().getId_description().getDescription().getText();
+        if (newProject.getTypology() != null) {
+            projDto.typo = newProject.getTypology().getId_description().getDescription().getText();
         }
 
-        if (project.getCustomer() != null) {
-            projDto.customer = project.getCustomer().getCustomerName().getText();
+        if (newProject.getCustomer() != null) {
+            projDto.customer = newProject.getCustomer().getCustomerName().getText();
         }
 
         return projDto;

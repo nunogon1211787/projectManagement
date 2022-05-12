@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.dto.ProjectDTO;
-import switch2021.project.factoryInterface.ProjectFactoryInterface;
+import switch2021.project.factoryInterface.IProjectFactory;
 import switch2021.project.interfaces.IRepoTypology;
-import switch2021.project.interfaces.ProjectRepositoryInterface;
+import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.mapper.ProjectMapper;
 import switch2021.project.model.Project.ProjectReeng;
 import switch2021.project.model.Project.ProjectStatusEnum;
@@ -15,40 +15,40 @@ import switch2021.project.model.valueObject.*;
 import java.time.LocalDate;
 
 @Service
-public class ProjectService {
+public class CreateProjectService {
 
     @Autowired
-    private ProjectRepositoryInterface projectRepositoryInterface;
+    private IProjectRepo IProjectRepo;
     @Autowired
     private IRepoTypology iRepoTypology;
     @Autowired
-    private ProjectFactoryInterface projectFactoryInterface;
+    private IProjectFactory IProjectFactory;
     @Autowired
     private ProjectMapper projectsMapper;
 
 
-    public ProjectService() {
+    public CreateProjectService() {
     }
 
     public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) {
         int nextId;
 
-        if (projectRepositoryInterface.findAll().isEmpty()) {
+        if (IProjectRepo.findAll().isEmpty()) {
             nextId = 1;
         } else {
-            nextId = projectRepositoryInterface.findAll().size();
+            nextId = IProjectRepo.findAll().size();
         }
 
-        ProjectReeng newProject = projectFactoryInterface.createProject(projDTO, nextId);
+        ProjectReeng newProject = IProjectFactory.createProject(projDTO, nextId);
 
-        projectRepositoryInterface.save(newProject);
+        IProjectRepo.saveProject(newProject);
 
         return projectsMapper.model2Dto(newProject);
     }
 
     public OutputProjectDTO editProject(ProjectDTO projectDTO) {
 
-        ProjectReeng proj = projectRepositoryInterface.findById(projectDTO.code);
+        ProjectReeng proj = IProjectRepo.findById(projectDTO.code);
 
         if (!projectDTO.projectName.isEmpty()) {
             proj.setProjectName(new Description(projectDTO.projectName));
