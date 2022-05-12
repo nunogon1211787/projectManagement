@@ -2,11 +2,9 @@ package switch2021.project.model.Task;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.interfaces.TaskContainerID;
 import switch2021.project.model.Resource.ResourceIDReeng;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.EffortEstimate;
-import switch2021.project.model.valueObject.Name;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,7 +18,6 @@ public class TaskReeng {
 
     /*** Attributes*/
     private TaskID idTask;
-    private Name name;
     private Description description;
     private TaskTypeEnum type;
     private EffortEstimate effortEstimate;  // em horas
@@ -29,7 +26,7 @@ public class TaskReeng {
     private ResourceIDReeng responsible;
     private List<TaskEffort> taskEffortList;
     private List<String> precedenceList;
-    private TaskContainerID taskContainerID;
+
 
 
     /*** Constructor */
@@ -37,6 +34,18 @@ public class TaskReeng {
     public TaskReeng(TaskID taskID) {
         this.idTask = taskID;
         this.taskEffortList = new ArrayList<>();
+
+    }
+
+        public TaskReeng(TaskID taskID, Description description,
+                         EffortEstimate effortEstimate, TaskTypeEnum type,
+                         ResourceIDReeng responsible) {
+        this.idTask = taskID;
+        this.description = description;
+        this.effortEstimate = effortEstimate;
+        this.type = type;
+        this.responsible = responsible;
+
 
     }
 
@@ -50,7 +59,7 @@ public class TaskReeng {
     /*** Methods to iterate with attributes */
 
     public boolean hasName(String taskName) {
-        return Objects.equals(this.name.getText(), taskName);
+        return Objects.equals(this.idTask.getTaskName().getText(), taskName);
     }
 
     public boolean hasTaskTypeEnum(String taskType) {
@@ -111,11 +120,11 @@ public class TaskReeng {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TaskReeng taskReeng = (TaskReeng) o;
-        return Objects.equals(idTask, taskReeng.idTask) && Objects.equals(name, taskReeng.name) && Objects.equals(description, taskReeng.description) && type == taskReeng.type && Objects.equals(effortEstimate, taskReeng.effortEstimate) && Objects.equals(startDate, taskReeng.startDate) && Objects.equals(endDate, taskReeng.endDate) && Objects.equals(responsible, taskReeng.responsible) && Objects.equals(taskEffortList, taskReeng.taskEffortList) && Objects.equals(precedenceList, taskReeng.precedenceList) && Objects.equals(taskContainerID, taskReeng.taskContainerID);
+        return Objects.equals(idTask, taskReeng.idTask) && Objects.equals(description, taskReeng.description) && type == taskReeng.type && Objects.equals(effortEstimate, taskReeng.effortEstimate) && Objects.equals(startDate, taskReeng.startDate) && Objects.equals(endDate, taskReeng.endDate) && Objects.equals(responsible, taskReeng.responsible) && Objects.equals(taskEffortList, taskReeng.taskEffortList) && Objects.equals(precedenceList, taskReeng.precedenceList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idTask, name, description, type, effortEstimate, startDate, endDate, responsible, taskEffortList, precedenceList, taskContainerID);
+        return Objects.hash(idTask, description, type, effortEstimate, startDate, endDate, responsible, taskEffortList, precedenceList);
     }
 }

@@ -1,8 +1,9 @@
 package switch2021.project.dto;
 
-import switch2021.project.interfaces.TaskContainerID;
+import lombok.Getter;
 
 
+@Getter
 public class TaskDTO {
 
     /*** Attributes **/
@@ -12,7 +13,7 @@ public class TaskDTO {
     public String type;
     public String responsible;
     public String taskContainerID;
-    public String projectID;
+
 
 
 
