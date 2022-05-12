@@ -4,12 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import switch2021.project.model.Resource.ResourceIDReeng;
-import switch2021.project.model.Sprint.SprintID;
-import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.EffortEstimate;
-
-import switch2021.project.model.valueObject.Name;
-import switch2021.project.model.valueObject.UserStoryID;
+import switch2021.project.model.valueObject.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
