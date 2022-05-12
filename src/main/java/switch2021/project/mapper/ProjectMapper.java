@@ -2,7 +2,6 @@ package switch2021.project.mapper;
 
 import org.springframework.stereotype.Component;
 import switch2021.project.dto.OutputProjectDTO;
-import switch2021.project.model.Project.Project;
 import switch2021.project.model.Project.ProjectReeng;
 
 @Component
@@ -13,9 +12,9 @@ public class ProjectMapper {
         OutputProjectDTO projDto = new OutputProjectDTO();
 
         projDto.code = project.getProjectCode().getCode();
-        projDto.name = project.getProjectName().getText();
-        projDto.desc = project.getDescription().getText();
-        projDto.sector = project.getBusinessSector().getDescription().getText();
+        projDto.projectName = project.getProjectName().getText();
+        projDto.description = project.getDescription().getText();
+        projDto.businessSector = project.getBusinessSector().getDescription().getText();
         projDto.numberOfSprints = project.getNumberOfSprints().toString();
         projDto.budget = project.getBudget().toString();
         projDto.status = project.getProjectStatus().toString();

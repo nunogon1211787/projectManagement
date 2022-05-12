@@ -45,6 +45,7 @@ public class RegisterUserControllerTest {
         dto.passwordConfirmation = "Qwerty_2";
         dto.function = "tester";
         dto.photo = "photo.png";
+
         //Act
         ResponseEntity<Object> responseEntity = registerUserController.registerUser(dto);
         //Assert

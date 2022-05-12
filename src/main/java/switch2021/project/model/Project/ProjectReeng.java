@@ -9,10 +9,10 @@ import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.utils.Entity;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Getter
 @Setter
-@EqualsAndHashCode
 public class ProjectReeng {
 
     /**
@@ -32,9 +32,16 @@ public class ProjectReeng {
     private LocalDate endDate;
 
 
-    public ProjectReeng(ProjectID id) {
+    public ProjectReeng(Description name, Description description, BusinessSector sector, LocalDate startDate,
+                        NumberOfSprints numberOfSprints, SprintDuration sprintDuration, Budget budget) {
 
-        this.projectCode = id;
+        this.projectName = name;
+        this.description = description;
+        this.businessSector = sector;
+        this.startDate = startDate;
+        this.numberOfSprints = numberOfSprints;
+        this.sprintDuration = sprintDuration;
+        this.budget = budget;
 
     }
 
@@ -61,5 +68,16 @@ public class ProjectReeng {
         return result;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProjectReeng that = (ProjectReeng) o;
+        return Objects.equals(projectCode, that.projectCode) && Objects.equals(projectName, that.projectName);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(projectCode, projectName);
+    }
 }
