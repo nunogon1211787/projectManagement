@@ -1,109 +1,96 @@
 @startuml
-'https://plantuml.com/class-diagram
-
-title US013 - "As Administrator, I want to create user profiles"
 
 skinparam classAttributeIconSize 0
 
-package "Infrastruture" <<rectangle>> #lightblue {
-class "CreateUserProfileRouter"  as route << Component >>
+title US013 - "As Administrator, I want to create user profiles."
+
+package "InfraEstructure" #lightblue {
+    class "CreateUserProfilesRoute" as route <<Component>>{
+    }
 }
 
-
-package "Interface Adapters" <<rectangle>> #lightgreen {
-
-package "Controllers" <<rectangle>>  {
-class "CreateUserProfileController" as ctrl <<Component>> {
-+createUserProfile(json)
-}
-}
-
-package "Repositories" <<rectangle>>{
-class "UserProfileStore" as Store << Repository >> {
--profiles: List<UserProfile>
-+saveUserProfile(userProfileName)
-+existsByDescription(userProfileName)
-}
-}
-}
-
-
-package "Application Service" <<Rectangle>> #lightpink{
-package "UserProfile Service" <<rectangle>>{
-class "CreateUserProfileService" as srv << Service >> {
-+createAndSaveUserProfile(dto)
+package "Interface Adapter" #lightgreen{
+package "Controllers" <<Folder>>{
+    class "UserProfileController" as ctrl <<Component>>{
+    +createUserProfile(json)
+    }
+    }
+    package "Repositories" <<Folder>>{
+    class "UserProfileRepository" as uRepo <<Repository>>{
+    +saveUserProfiles(newUserProfile)
+    +existsByDescription(description)
+    }
 }
 }
 
+package "DTO" {
+    class "UserProfileDTO" as dto <<Component>> {
+    -userProfileName : String
+    }
 
-package "Factory Interface" <<rectangle>>{
-interface "UserProfileFactoryRepository" as ifactory{
-+createUserProfile(dto)
-}
-}
-
-package "Repository Interface" <<rectangle>>{
-interface "UserProfileRepository" as repo{
-+saveUserProfile(newUserProfile)
-+existsByDescription(userProfileName)
-}
+    class "UserProfileMapper" as mapper <<Component>> {
+    +toDto(newUserProfile)
+    }
 }
 
+package "Application Service" #implementation {
+    package "App Service" {
+        class "CreateUserProfileService" as service <<Service>>{
+        +createAndSaveUserProfile(dto)
+        }
+    }
+    package "Repositories Interface" {
+        class "IUserProfileRepo" as iUserProfileRepo <<(I, Violet) Interface>> {
+            +saveUserProfile(newUserProfile)
+            +existsByDescription(description)
+        }
+    }
+    package "User Profile Factory Interface" {
+    class "IUserProfileFactory" as iUserProfileFactory <<(I, Violet) Interface>> {
+            +createUserProfile(dto)
+            }
+    }
 }
 
-package "Domain" <<Rectangle>> #burlywood{
-package "Aggregates" <<rectangle>>{
+package "Domain" #burlywood  {
+    package "Factory" {
+        class "UserProfileFactory" as userProfileFactory <<Factory>> {
+        +createUserProfile(dto)
+        }
 
-package "UserProfile" <<Rectangle>>{
-entity "UserProfile" as profile << Root >> {
-- userProfileId : UserProfileID
-+ getUserProfileID()
-}
-}
-}
+        class "UserProfileIDFactory" as userProfileIDFactory <<Factory>> {
+        +createUserProfileID(userProfileName)
+        }
+        class "IUserProfileIDFactory" as iUserProfileIDFactory <<(I, Violet) Interface>> {
+        +createUserProfileID(userProfileName)
+        }
+    }
 
-package "Value Object" <<rectangle>>{
-class "UserProfileId" as upid << Value Object >> {
--userProfileID : UserProfileID
-+userProfileID()
-}
-}
-
-package "Factory" <<rectangle>>{
-class "UserProfileFactory" as Factory << Factory >> {
-+createUserProfile (userProfileID)
-}
-}
-}
-
-package "DTO" <<rectangle>>{
-class "UserProfileMapper" as map <<Component>> {
-+ toDto(newUserProfile)
+    package "Aggregate" {
+        class "UserProfile" as userProfile <<Root>>{
+            +UserProfile (userProfileID)
+        }
+    }
+    package "Value Object"  {
+        class "UserProfileID" as userProfileID <<Value Object>>{
+        +UserProfileID (description)
+        }
+    }
 }
 
-class "UserProfileDTO" as dto <<Component>>{
-- dto.userProfileName
-}
-
-
-class "OutputUserProfileDTO" as output <<Component>>{
-- dto.userProfileName
-}
-}
-
-
-route .d.> ctrl
-Store .d.|> repo
-srv ..l.> map
-srv .d.> ifactory
-Store "1"*---"*" profile
-srv .d.> repo
-Factory ..u..|> ifactory
-profile "1"*--"*" upid
-ctrl ...d.> srv
-srv .d.> dto
-srv .d.> output
-
+route ..> ctrl
+ctrl ..> service
+uRepo ..> iUserProfileRepo
+service .left.> iUserProfileRepo
+service ..|> iUserProfileFactory
+service .down.> dto
+service .down.> mapper
+userProfileFactory ..|> iUserProfileFactory
+userProfileIDFactory ..|> iUserProfileIDFactory
+userProfileFactory ..> iUserProfileIDFactory
+userProfileFactory ..> userProfile
+userProfileFactory .down.> dto
+userProfileIDFactory ..> userProfileID
 
 
 

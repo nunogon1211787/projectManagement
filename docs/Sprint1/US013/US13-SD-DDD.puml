@@ -6,32 +6,37 @@ autonumber
 
 title US013 - "As Administrator, I want to create user profiles"
 participant ": CreateUserProfileRouter" as System
-participant ": CreateUserProfileController" as Ctrl
+participant ": UserProfileController" as Ctrl
 participant ": CreateUserProfileService" as C1
-participant ": UserProfileFactoryInterface" as C3
+participant ": IUserProfileFactory" as C3
 participant ":UserProfileDTO" as C2
-participant "newUserProfile:UserProfile" as C4
-participant ":UserProfileRepositoryInterface" as C5
+participant ":IUserProfileIDFactory" as iFactory
+participant "userProfileID:UserProfileID" as C4
+participant "newUserProfile:UserProfile" as newUserProfile
+participant ":IUserProfileRepo" as C5
 participant ":UserProfileMapper" as C6
-participant "outputDTO: OutPutUserProfileDTO" as C2.1
+participant "outputDTO: UserProfileDTO" as C2.1
 
 
 [o-> System: POST/profiles (json)
 System -> Ctrl: createUserProfile(json)
 Ctrl -> C1: createAndSaveUserProfile(dto)
 C1 -> C3: createUserProfile(dto)
-C3 -> C2 : dto.userProfileName
-C2 --> C4 **: create()
+C3 -> C2 : name = getUserProfileName()
 deactivate
+C3 -> iFactory: create(name)
+iFactory -> C4 **: create()
+iFactory --> C3: userProfileID
+C3 -> newUserProfile **: create(userProfileID)
 return newUserProfile
 C1 -> C5 : saveUserProfile (newUserProfile)
 C5 -> C5 : existsByDescription(userProfileName)
-
+deactivate
+C5 -> C5 : add(userProfileName)
 deactivate
 return true
 C1 -> C6: toDTO(newUserProfile)
 C6 -> C2.1 **: create()
-
 return outputdto
 return outputdto
 return outputjson

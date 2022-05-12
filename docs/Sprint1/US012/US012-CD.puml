@@ -4,36 +4,39 @@ skinparam classAttributeIconSize 0
 
 title US012 - "As Director, I want to create a new project typology."
 
-package "Infraestructure" #application {
+package "InfraEstructure" #lightblue {
     class CreateTypologyRoute <<Component>>{
     }
 }
 
-package "Interface Adapter" #technology {
-    class CreateTypologyController <<Component>>{
-    +createTypology(inputDto)
-    +findTypologyByDescription(inputDto)
-    +findTypologyList()
-    +deleteTypology(inputDto)
+package "Interface Adapter" #lightgreen{
+package "Controllers" <<Folder>>{
+    class TypologyController <<Component>>{
+    +createTypology(json)
+    '+findTypologyByDescription(inputDto)
+    '+findTypologyList()
+    '+deleteTypology(inputDto)
     }
-
+    }
+    package "Repositories" <<Folder>>{
     class TypologyRepository <<Repository>>{
-    +findTypologyById(description)
-    +findAllTypology()
+    '+findTypologyById(description)
+    '+findAllTypology()
     +saveTypology(typology)
     +existsByTypologyId(description)
-    +deleteTypology(description)
+    '+deleteTypology(description)
     }
 }
+}
 
-package "DTO" #motivation {
+package "DTO" {
     class TypologyDTO <<Component>> {
-    +TypologyDTO()
+    -description : String
     }
 
     class TypologyMapper <<Component>> {
     +modelToDto(typology)
-    +modelToDto(typologyList)
+    '+modelToDto(typologyList)
     }
 }
 
@@ -41,18 +44,18 @@ package "Application Service" #implementation {
     package "App Service" {
         class CreateTypologyService <<Service>>{
         +createAndSaveTypology(inputDto)
-        +findTypologyByDescription(inputDto)
-        +findAllTypologies()
-        +deleteTypology(inputDto)
+        '+findTypologyByDescription(inputDto)
+        '+findAllTypologies()
+        '+deleteTypology(inputDto)
         }
     }
     package "Repositories Interface" {
-        class IRepositoryTypology <<(I, Violet) Interface>> {
-            +findTypologyById(description)
-            +findAllTypology()
+        class "ITypologyRepo" as repo <<(I, Violet) Interface>> {
+            '+findTypologyById(description)
+            '+findAllTypology()
             +saveTypology(typology)
             +existsByTypologyId(description)
-            +deleteTypology(description)
+            '+deleteTypology(description)
         }
     }
     package "Typology Factory Interface" {
@@ -63,19 +66,19 @@ package "Application Service" #implementation {
 }
 
 
-package "Domain" #strategy {
+package "Domain" #burlywood  {
     package "Factory" {
-        class TypologyFactory <<"Factory">> {
+        class TypologyFactory <<Factory>> {
         +createTypology(inputDto)
         }
 
-        class TypologyIDFactory <<"Factory">> {
+        class TypologyIDFactory <<Factory>> {
         +createId(inputDto)
         }
         class ITypologyIDFactory <<(I, Violet) Interface>> {
         +createId(inputDto)
         }
-        class DescriptionFactory <<"Factory">> {
+        class DescriptionFactory <<Factory>> {
         +createDescription(inputDto.description)
         }
         class IDescriptionFactory <<(I, Violet) Interface>> {
@@ -92,24 +95,24 @@ package "Domain" #strategy {
         class TypologyID <<Value Object>>{
         +TypologyID (description)
         }
-        class Description {
+        class Description <<Value Object>>{
         +Description(inputDto.description)
         }
     }
 }
 
-CreateTypologyRoute -down..> CreateTypologyController
-CreateTypologyController -down..> CreateTypologyService
-CreateTypologyController -right..> TypologyMapper
+CreateTypologyRoute -down..> TypologyController
+TypologyController -down..> CreateTypologyService
+TypologyController -right..> TypologyMapper
 CreateTypologyService -right..> TypologyMapper
 TypologyMapper -left..>TypologyDTO
-CreateTypologyService -right..> IRepositoryTypology
+CreateTypologyService -right..> repo
 CreateTypologyService -down..> ITypologyFactory
 TypologyFactory -up[hidden]..> ITypologyFactory
 class TypologyFactory implements ITypologyFactory
 TypologyFactory -left..> Typology
-IRepositoryTypology -up[hidden]..> TypologyRepository
-class TypologyRepository implements IRepositoryTypology
+repo -up[hidden]..> TypologyRepository
+class TypologyRepository implements repo
 TypologyFactory -right..> ITypologyIDFactory
 TypologyIDFactory -up[hidden]..> ITypologyIDFactory
 class TypologyIDFactory implements ITypologyIDFactory
