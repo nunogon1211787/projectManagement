@@ -1,50 +1,60 @@
 package switch2021.project.controller;
 
 
-import org.junit.jupiter.api.DisplayName;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.http.ResponseEntity;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import switch2021.project.controller.CreateUserStoryController;
-import switch2021.project.dto.OutPutUsDTO;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import switch2021.project.dto.UserStoryDTO;
-import switch2021.project.service.CreateUserStoryService;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(SpringExtension.class)
+@AutoConfigureMockMvc
+@SpringBootTest
 public class CreateUserStoryControllerTest {
 
+    @Autowired
+    private MockMvc mockMvc;
 
-    @InjectMocks
-    CreateUserStoryController createUserStoryController;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-    @Mock
-    UserStoryDTO userStoryDTO;
-    @Mock
-    CreateUserStoryService createUserStoryService;
-    @Mock
-    MockHttpServletRequest request;
-    @Mock
-    OutPutUsDTO outPutUsDTO;
-
+    @BeforeEach
+    public void setUp() throws Exception {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
-    @DisplayName("Test to create a user story - with success")
-    public void createUserStory() {
-        //Arrange
-        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-        when(createUserStoryService.createAndSaveUserStory(userStoryDTO)).thenReturn(outPutUsDTO);
-        //Act
-        ResponseEntity<Object> responseEntity = createUserStoryController.createUserStory(userStoryDTO);
-        //Assert
-        assertEquals(responseEntity.getStatusCodeValue(), 201);
+    void createNewUserStoryWithSuccess() throws Exception {
+        String userStoryID ="Project_2022_1_As a PO, i want to test this string";
+        String projectID = "Project_2022_1";
+        String title = "As a PO, i want to test this string";
+        int priority = 1;
+        String description = "Make some tests";
+        double timeEstimate = 5.0;
+
+        UserStoryDTO userStoryDTO = new UserStoryDTO(projectID, title, priority, description,timeEstimate);
+
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.post("/userStories")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(userStoryDTO)) // or newCountryInfoMap
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        String resultContent = result.getResponse().getContentAsString();
+        assertNotNull(resultContent);
+        assertEquals(201, result.getResponse().getStatus());
+
 
     }
 }

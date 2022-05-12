@@ -15,14 +15,14 @@ class "CreateUserStoryRoute" as route << Component >>
 package "Interface Adapter" <<Folder>> #lightgreen {
 package "Controllers" <<Folder>>{
 class "CreateUserStoryController" as ctrl << Component >> {
-+createUserStory(json)
++createUserStory(userStoryDTO)
 }
 }
 package "Repositories" <<Folder>>{
 class "UserStoryRepository" as store << Repository >> {
 -userStoryList : List<UserStory>
 + save(newUserStory)
-+ existsByUserStoryId(tUserStoryID)
++ existsByUserStoryId(UserStoryID)
 '- add(newUserStory)
 }
 }
@@ -49,12 +49,11 @@ interface "IUserStoryFactory" as factoryInterface << Interface >>{
 package "DTO" <<Folder>> #black {
 package "UserStoryDTO" <<Folder>>{
 class "UserStoryDTO" as dto << Component >> {
-- userStoryID : UserStoryID
-- projectID : ProjectID
-- title : UsTitle
-- priority : UsPriority
-- description : Description
-- timeEstimate : UsHour
+- projectID : String
+- title : String
+- priority : int
+- description : String
+- timeEstimate : double
 }
 }
 
@@ -64,6 +63,18 @@ class "UserStoryMapper" as mapper << Component >> {
 + toDto(newUserStory)
 }
 }
+package "DTO" <<Folder>>  {
+package "OutPutUsDTO" <<Folder>>{
+class "OutPutUsDTO" as outdto << Component >> {
+- userStoryID : String
+- projectID : String
+- title : String
+- priority : int
+- description : String
+- timeEstimate : double
+}
+}
+
 }
 
 package "Entity/Core/Domain" <<Folder>> #burlywood{
@@ -90,35 +101,35 @@ class "UserStoryID" as usID << Value Object >> {
 +checkUsID(projectID, usTitle)
 }
 }
-'package "Value Object" <<Folder>>{
-'class "ProjectID" as projID << Value Object >> {
-'-rojectID : ProjectID
-'+checkUsID()
-'}
+package "Value Object" <<Folder>>{
+class "ProjectID" as projID << Value Object >> {
+-rojectID : ProjectID
++checkUsID()
+}
 
-'package "Value Object" <<Folder>>{
-'class "UsTitle" as usTitle << Value Object >> {
-'- title : UsTitle
-'+checkUsID()
-'}
+package "Value Object" <<Folder>>{
+class "UsTitle" as usTitle << Value Object >> {
+- title : UsTitle
++checkUsID()
+}
 
-'package "Value Object" <<Folder>>{
-'class "Priority" as priority << Value Object >> {
-'-priority : UsPriority
-'+checkUsID()
-'}
-'
-'package "Value Object" <<Folder>>{
-'class "Description" as desc << Value Object >> {
-'-description : Description
-'+checkUsID()
-'}
-'
-'package "Value Object" <<Folder>>{
-'class "TimeEstimate" as time << Value Object >> {
-'-timeEstimate : UsHour
-'+checkUsID()
-'}
+package "Value Object" <<Folder>>{
+class "Priority" as priority << Value Object >> {
+-priority : UsPriority
++checkUsID()
+}
+
+package "Value Object" <<Folder>>{
+class "Description" as desc << Value Object >> {
+-description : Description
++checkUsID()
+}
+
+package "Value Object" <<Folder>>{
+class "TimeEstimate" as time << Value Object >> {
+-timeEstimate : UsHour
++checkUsID()
+}
 
 
 route ..> ctrl
@@ -127,16 +138,17 @@ ctrl..> service
 'mapper..> dto
 store..|> repo
 service..> mapper
-mapper..>dto
+service..> dto
+mapper..>outdto
 userStoryF..> dto
 service..> factoryInterface
 service..left> repo
-userStoryF"1"*-d-"1" usID
-'userStoryF..>projID
-'userStoryF..>usTitle
-'userStoryF..>priority
-'userStoryF..>time
-'userStoryF..>desc
+userStoryF..> usID
+userStoryF..>projID
+userStoryF..>usTitle
+userStoryF..>priority
+userStoryF..up>time
+userStoryF..>desc
 userStoryF..right>userStory
 userStoryF..up|>factoryInterface
 
