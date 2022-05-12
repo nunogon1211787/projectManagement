@@ -3,88 +3,105 @@
 
 title US005 - As a Director, I want to create/register a new project
 
-package Infrastructure <<Rectangle>> #lightblue {
-class CreateProjectRoute <<Component>>{
+package "Infrastructure" <<Package>>  #lightblue {
+class "CreateProjectRoute" as infra <<Component>>{
 }
 }
 
-package Interface_Adapters <<Rectangle>> #lightgreen{
-package Controllers <<Rectangle>> {
-class CreateProjectController <<component>> {
-+createProject(name,description,startDate,numberOfSprints, budget)
+package Interface_Adapters <<Package>> #lightgreen{
+package "Controllers" <<Package>> {
+class "ProjectController" as Ctrl <<component>> {
++createProject(jsonDTO)
 }
 }
-package Repositories <<Rectangle>> {
-class ProjectStore <<repository>> {
+package Repositories <<Package>> {
+class "ProjectRepository" as projectRepo <<repository>> {
 -projects : List<Project>
-+addProject()
++saveProject(newProject)
+-validateProject(newProject)
+-add(newProject)
 }
 }
 }
 
-package Domain <<Rectangle>> #burlywood{
-package Aggregates <<Rectangle>> {
-class Project <<root>> {
+package Domain <<Package>> #burlywood{
+package "Aggregates" <<Package>> {
+class "Project" as project <<root>> {
 -name : Name
 -description : Description
+-businessSector : BusinessSector
 -startDate : LocalDate
 -numberOfSprints : NumberOfSprints
+-sprintDuration : SprintDuration
 -budget : Budget
-+Project(name,description,startDate,numberOfSprints,typology, business, customer, budget)
++Project(name, description, businessSector, startDate, numberOfSprints, sprintDuration, budget)
 }
 }
-package Factories <<Rectangle>> {
-class ProjectFactory <<service>> {
-+createProject(name,description,startDate,numberOfSprints, budget)
+package "Factories" <<Package>> {
+class "ProjectFactory" as factory <<service>> {
++createProject(projectDTO, nextID)
 }
 }
 }
 
-package DTO <<Rectangle>> #lightgrey{
-class ProjectMapper <<component>> {
-+data2Dto()
+package "DTO" <<Package>> #lightgrey{
+class "ProjectMapper" as mapper <<component>> {
 +model2Dto()
-+dto2Json()
 }
 
-class ProjectDTO <<component>> {
+class "ProjectDTO" as projectDTO <<component>> {
 -name : String
 -description : String
--startDate : LocalDate
--numberOfSprints : int
+-businessSector: String
+-startDate : String
+-numberOfSprints : String
+-budget : String
+-sprintDuration : String
+}
+
+class "OutPutProjectDTO" as outPutDTO <<component>> {
+-code : String
+-name : String
+-description : String
+-businessSector: String
+-numberOfSprints : String
+-budget : String
+-status : String
+-startDate : String
 }
 }
 
-package Aplication_Service <<Rectangle>> #salmon {
-
-package IFactory <<Rectangle>> {
-interface ProjectFactoryInterface <<interface>>{
-+createProject()
+package Application_Service <<Package>> #salmon {
+package IFactory <<Package>> {
+interface "IProjectFactory" as inter <<interface>>{
++createProject(projectDTO, nextID)
 }
 }
-package IRepositories <<Rectangle>> {
-interface ProjectStoreInterface <<interface>>{
-+createProject()
-}
-}
-
-package App_Service <<Rectangle>> {
-class ProjectService <<service>> {
-+createProject()
-}
+package IRepositories <<Package>> {
+interface "IProjectRepo" as iRepo <<interface>>{
++saveProject(newProject)
++existsById(id)
 }
 }
 
-Infrastructure ..> Controllers
-Controllers ..> App_Service
-Controllers ..> ProjectMapper
-ProjectMapper ...> ProjectFactory
-ProjectFactory ..> Project
-App_Service ..> ProjectStoreInterface
-App_Service .> ProjectFactoryInterface
-App_Service .> ProjectMapper
-ProjectMapper ..> ProjectDTO
-ProjectStore *-- Project
-ProjectStore ..> ProjectStoreInterface
+package "App Service" <<Package>> {
+class "CreateProjectService" as service <<service>> {
++createAndSaveProject()
+}
+}
+}
+
+infra ..> Ctrl
+Ctrl ..> service
+projectRepo ..|> iRepo
+service .left.> iRepo
+service ..> inter
+service ..> mapper
+factory .up.|> inter
+factory .right.> project
+factory ..> projectDTO
+mapper ..> projectDTO
+mapper ..> outPutDTO
+
 
 @enduml

@@ -8,44 +8,44 @@ autonumber
 
 
 participant ":CreateProjectRoute " as route
-participant ":CreateProjectController " as controller
-participant ":ProjectService " as service
-participant ":ProjectStore " as store
+participant ":ProjectController " as controller
+participant ":CreateProjectService " as service
+participant ":ProjectRepository " as store
 participant ":ProjectFactory " as factory
 participant ":ProjectMapper " as mapper
-participant "outputDTO: OutputProjectDTO " as dto
-participant "proj:Project " as project
+participant "projDTO: OutputProjectDTO " as dto
+participant "newProject:Project " as project
 
 
-[o->  route: CreateProject/Projects
+[o->  route: POST/projects/createProject(json)
 route -> controller: createProject(jsonDto)
 
 note right
 Change from json to dto hidden to simplify diagram
 end note
 
-controller -> service: createAndSave(dto)
-service -> factory: createProject(dto.getName, dto.getDescription, dto.getStartDate, dto.getNumberOfSprints, dto.getBudget)
+controller -> service: createAndSaveProject(projDTO)
+service -> factory: createProject(dto.getName, dto.getDescription, dto.getSector, dto.getStartDate, dto.getNumberOfSprints, dto.getSprintDuration, dto.getBudget)
 
 factory -> project**: create()
 
-factory --> service: proj
+factory --> service: newProject
 
-service -> store: saveProject(proj)
-store -> store: validate(proj)
+service -> store: saveProject(newProject)
+store -> store: validate(newProject)
 deactivate store
-store -> store: add(proj)
+store -> store: add(newProject)
 deactivate store
 
 store --> service: true
 
-service -> mapper: model2DTO(proj)
+service -> mapper: model2Dto(newProject)
 
-mapper -> dto**: model2DTO(proj)
+mapper -> dto**: model2Dto(proj)
 
-mapper --> service: outputDTO
+mapper --> service: projDTO
 
-service --> controller: outputDTO
+service --> controller: projDTO
 
 note right
 Change from json to dto hidden to simplify diagram
