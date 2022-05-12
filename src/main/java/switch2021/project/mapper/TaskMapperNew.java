@@ -11,7 +11,7 @@ public class TaskMapperNew {
 
         OutputTaskDTO taskDto = new OutputTaskDTO();
 
-        taskDto.name = task.getName().getText();
+        taskDto.name = task.getIdTask().getTaskName().getText();
         taskDto.description = task.getDescription().getText();
         taskDto.effortEstimate = task.getEffortEstimate()+"";
         taskDto.type = task.getType().toString();

@@ -2,25 +2,17 @@ package switch2021.project.factory;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import switch2021.project.factoryInterface.IUsTitleFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import switch2021.project.model.valueObject.UsTitle;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class UsTitleFactoryTest {
 
-    @Mock
-    UsTitle usTitle;
-
-    @Mock
-    IUsTitleFactory iUsTitle;
-
-    @InjectMocks
+    @Autowired
     UsTitleFactory usTitleFactory;
 
     @Test
@@ -28,11 +20,8 @@ public class UsTitleFactoryTest {
     public void createUsTitleWithSuccess() {
         //Arrange
         String expected = "As a PO, i want to test this string";
-//        when(usTitle.getTitleUs()).thenReturn(expected);
-//        when(iUsTitle.create(expected)).thenReturn(usTitle);
-//        when(usTitleFactory.create(expected)).thenReturn(usTitle);
         // Act
-        usTitle = usTitleFactory.create(expected);
+        UsTitle usTitle = usTitleFactory.create(expected);
         //Assert
         assertEquals(expected, usTitle.getTitleUs());
 

@@ -1,6 +1,8 @@
 package switch2021.project.dto;
 
+import lombok.Getter;
 
+@Getter
 public class OutputTaskDTO {
 
     public String name;

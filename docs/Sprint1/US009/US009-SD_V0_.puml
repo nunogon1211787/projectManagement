@@ -6,7 +6,7 @@ title US009 - As Product Owner, I want to create a user story and add it to the 
 autoactivate on
 autonumber
 
-actor "Product Owner" as User
+actor "user" as User #lightblue
 participant ": CreateUserStoryUI" as System
 participant ": CreateUserStoryController" as Ctrl
 participant ": Company" as C1

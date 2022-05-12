@@ -1,11 +1,13 @@
 package switch2021.project.model.Task;
 
+import lombok.Getter;
 import switch2021.project.interfaces.TaskContainerID;
 import switch2021.project.model.valueObject.Name;
 import switch2021.project.utils.ValueObject;
 
 import java.util.Objects;
 
+@Getter
 public class TaskID implements ValueObject<TaskID> {
 
     /** Attributes */

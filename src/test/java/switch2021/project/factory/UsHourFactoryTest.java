@@ -2,22 +2,17 @@ package switch2021.project.factory;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import switch2021.project.model.valueObject.UsHour;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class UsHourFactoryTest {
 
-    @InjectMocks
+    @Autowired
     UsHourFactory usHourFactory;
-
-    @Mock
-    UsHour usHour;
 
     @Test
     @DisplayName("Test to create time estimate - with success")
@@ -25,7 +20,7 @@ public class UsHourFactoryTest {
         //Arrange
         double expected = 1.0;
         // Act
-        usHour = usHourFactory.create(expected);
+        UsHour usHour = usHourFactory.create(expected);
         //Assert
         assertEquals(expected, usHour.getUsHours());
 

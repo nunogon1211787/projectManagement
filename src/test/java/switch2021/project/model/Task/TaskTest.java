@@ -17,16 +17,16 @@ import static org.mockito.Mockito.when;
 
 class TaskTest {
 
-    @Test
-
-    public void createTaskOnlyWithDescription() {
-        //Arrange
-        Task tastkTest = new Task("test");
-        //Act
-        String expectedTask = "test";
-        //Assert
-        assertEquals(expectedTask, tastkTest.getDescription().getText());
-    }
+//    @Test
+//
+//    public void createTaskOnlyWithDescription() {
+//        //Arrange
+//        Task tastkTest = new Task("test");
+//        //Act
+//        String expectedTask = "test";
+//        //Assert
+//        assertEquals(expectedTask, tastkTest.getDescription().getText());
+//    }
 
 /*    @Test
     public void taskWithPrecedenceCreatorTest() {

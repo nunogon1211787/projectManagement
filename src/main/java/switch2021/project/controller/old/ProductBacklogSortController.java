@@ -39,12 +39,12 @@ public class ProductBacklogSortController {
      * Instead use an unmodifiable Collection (via Collections.unmodifiableCollection, Collections.unmodifiableList, ...)
      * or make a copy of the mutable object, and store or return the copy instead.
      **/
-
-    //TODO -----> testar método CDC
-    public List<UserStoryDTO> getUsSortedByPriority(String code) {
-        Project project = this.company.getProjectStore().findById(code);
-        List<UserStory> userStoryList = project.getUserStoryStore().findUsSortedByPriority();
-        List<UserStoryDTO> userStoryListDtoList = this.mapperPB.toDto(userStoryList);
-        return Collections.unmodifiableList(userStoryListDtoList);
-    }
+//
+//    //TODO -----> testar método CDC
+//    public List<UserStoryDTO> getUsSortedByPriority(String code) {
+//        Project project = this.company.getProjectStore().findById(code);
+//        List<UserStory> userStoryList = project.getUserStoryStore().findUsSortedByPriority();
+//        List<UserStoryDTO> userStoryListDtoList = this.mapperPB.toDto(userStoryList);
+//        return Collections.unmodifiableList(userStoryListDtoList);
+//    }
 }

@@ -62,7 +62,7 @@ class TaskRepositoryTest {
         task.setEffortEstimate(new EffortEstimate(12));
         task.setType(TaskTypeEnum.Design);
         task.setResponsible(resourceIDReeng);
-        task.setTaskContainerID(taskContainerID);
+
 
         TaskRepository x = new TaskRepository();
         x.save(task);
@@ -72,7 +72,7 @@ class TaskRepositoryTest {
 
         List<TaskReeng> taskLe =  x.findAll();
 
-        assertEquals("Project_2022_1_Sprint 1", task.getTaskContainerID().toString());
+        assertEquals("Project_2022_1_Sprint 1", task.getIdTask().getTaskContainerID().toString());
         assertEquals(taskL, x.getTaskList());
         assertEquals(taskLe, x.getTaskList());
 

@@ -1,10 +1,11 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import lombok.ToString;
 import switch2021.project.utils.ValueObject;
 
 import java.util.Objects;
-
+@ToString
 @Getter
 public class Description implements ValueObject<Description> {
 

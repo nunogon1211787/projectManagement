@@ -1,13 +1,14 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import lombok.ToString;
 import switch2021.project.interfaces.TaskContainerID;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import switch2021.project.utils.ValueObject;
 
 import java.util.Objects;
 
-
+@ToString
 @Getter
 public class UserStoryID implements ValueObject<UserStoryID>, TaskContainerID {
 
