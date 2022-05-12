@@ -5,6 +5,6 @@ import switch2021.project.model.Resource.old.Resource;
 
 import java.time.LocalDate;
 
-public interface ResourceFactoryInterface {
+public interface IResourceFactory {
     Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation);
 }

@@ -1,12 +1,11 @@
 package switch2021.project.interfaces;
 
-import org.springframework.stereotype.Component;
 import switch2021.project.model.Resource.ResourceReeng;
 
 
 import java.util.List;
 
-public interface ResourceRepositoryInterface/* extends CrudRepository<Object, Long> */{
+public interface IResourceRepo/* extends CrudRepository<Object, Long> */{
 
     /**
      * The repository should be able to find a object using given Identity.

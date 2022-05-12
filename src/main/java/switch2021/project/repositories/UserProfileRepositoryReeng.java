@@ -1,6 +1,5 @@
 package switch2021.project.repositories;
 
-import lombok.Getter;
 import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.model.UserProfile.UserProfileReeng;

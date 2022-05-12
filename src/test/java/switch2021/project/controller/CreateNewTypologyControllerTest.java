@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 public class CreateNewTypologyControllerTest {
 
     @InjectMocks
-    CreateTypologyController controller;
+    TypologyController controller;
     @MockBean
     CreateTypologyService service;
 
@@ -174,7 +174,7 @@ public class CreateNewTypologyControllerTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
         TypologyDTO dto = mock(TypologyDTO.class);
-        CreateTypologyController controller1 = new CreateTypologyController();
+        TypologyController controller1 = new TypologyController();
         //Act
         when(dto.getDescription()).thenReturn("Test");
             //At this point have no typologies saved in the repository!

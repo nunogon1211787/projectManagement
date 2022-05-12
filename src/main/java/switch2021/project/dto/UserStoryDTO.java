@@ -1,11 +1,11 @@
 package switch2021.project.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 
 
-//@JsonInclude(JsonInclude.Include.NON_NULL)
+
 @AllArgsConstructor
 @Getter
 public class UserStoryDTO extends RepresentationModel<UserStoryDTO> {

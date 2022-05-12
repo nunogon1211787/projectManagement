@@ -13,19 +13,13 @@ import switch2021.project.service.CreateUserProfileService;
 
 @RestController
 @RequestMapping("/profiles")
-public class CreateUserProfileController {
+public class UserProfileController {
     /**
      * Attributes
      **/
     @Autowired
     private CreateUserProfileService createUserProfileService;
 
-    /**
-     * Constructor
-     **/
-    public CreateUserProfileController() {
-
-    }
 
     /**
      * Create a User Profile

@@ -13,9 +13,8 @@ public class UserProfileMapper {
     }
 
     public UserProfileDTO toDto(UserProfileReeng newUserProfile) {
-        UserProfileDTO outDto = new UserProfileDTO();
-        outDto.userProfileName = newUserProfile.getUserProfileId().getUserProfileName().getText();
-        return outDto;
+        String userProfileName = newUserProfile.getUserProfileId().getUserProfileName().getText();
+        return new UserProfileDTO(userProfileName);
 
     }
 }

@@ -1,14 +1,14 @@
 package switch2021.project.repositories;
 
 import org.springframework.stereotype.Repository;
-import switch2021.project.interfaces.IRepoTypology;
+import switch2021.project.interfaces.ITypologyRepo;
 import switch2021.project.model.Typology.Typology;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class TypologyRepository implements IRepoTypology {
+public class TypologyRepository implements ITypologyRepo {
 
     /**
      * Attributes

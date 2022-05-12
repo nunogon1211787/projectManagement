@@ -1,14 +1,14 @@
-package switch2021.project.stores;
+package switch2021.project.repositories;
 
 import org.springframework.stereotype.Repository;
-import switch2021.project.interfaces.ResourceRepositoryInterface;
+import switch2021.project.interfaces.IResourceRepo;
 import switch2021.project.model.Resource.ResourceReeng;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class ResourceStore implements ResourceRepositoryInterface {
+public class ResourceRepository implements IResourceRepo {
 
     /**
      * ProjectTeam's Attribute
@@ -19,7 +19,7 @@ public class ResourceStore implements ResourceRepositoryInterface {
     /**
      * ProjectTeam's Constructor
      **/
-    public ResourceStore() {
+    public ResourceRepository() {
         this.resources = new ArrayList<>();
     }
 

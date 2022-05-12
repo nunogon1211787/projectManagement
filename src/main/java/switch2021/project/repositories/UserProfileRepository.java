@@ -1,7 +1,6 @@
 package switch2021.project.repositories;
 
 import org.springframework.stereotype.Repository;
-import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.model.UserProfile.UserProfile;
 
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Repository
-public class UserProfileRepository  {
+public class UserProfileRepository {
 
     /**
      * Attributes

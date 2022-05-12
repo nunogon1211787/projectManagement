@@ -14,7 +14,7 @@ import java.util.List;
 @Controller
 @RestController
 @RequestMapping("/typologies")
-public class CreateTypologyController {
+public class TypologyController {
 
     /**
      * Attributes
@@ -82,7 +82,7 @@ public class CreateTypologyController {
         TypologyDTO outputDto;
         try {
             service.deleteTypology(inputDto);
-            outputDto = new TypologyDTO();
+            outputDto = new TypologyDTO(inputDto.getDescription());
             outputDto.description = "Deleted successfully";
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();

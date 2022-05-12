@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import switch2021.project.dto.TypologyDTO;
 import switch2021.project.dto.UserProfileDTO;
 import switch2021.project.service.CreateUserProfileService;
 
@@ -18,10 +17,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class CreateUserProfileControllerTest {
+public class UserProfileControllerTest {
 
     @InjectMocks
-    CreateUserProfileController controller;
+    UserProfileController controller;
     @Mock
     CreateUserProfileService service;
 

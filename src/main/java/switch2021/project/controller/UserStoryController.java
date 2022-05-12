@@ -17,7 +17,7 @@ import switch2021.project.service.CreateUserStoryService;
 @Controller
 @RestController
 @RequestMapping("/userStories")
-public class CreateUserStoryController {
+public class UserStoryController {
 
     /**
      * Attributes
