@@ -8,15 +8,12 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import switch2021.project.dto.NewSprintDTO;
 import switch2021.project.dto.OutPutSprintDTO;
 import switch2021.project.factoryInterface.ISprintFactory;
-import switch2021.project.interfaces.SprintRepositoryInterface;
+import switch2021.project.interfaces.ISprintRepo;
 import switch2021.project.mapper.SprintMapper;
 import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.Sprint.SprintID;
-import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.ProjectID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -26,7 +23,7 @@ public class CreateSprintServiceTest {
     @InjectMocks
     CreateSprintService createSprintService;
     @Mock
-    SprintRepositoryInterface sprintRepositoryInterface;
+    ISprintRepo ISprintRepo;
     @Mock
     SprintMapper sprintMapper;
     @Mock
@@ -44,7 +41,7 @@ public class CreateSprintServiceTest {
 
         //Arrange
         when(iSprintFactory.createSprint(newSprintDTO)).thenReturn(sprint);
-        when(sprintRepositoryInterface.saveSprint(sprint)).thenReturn(true);
+        when(ISprintRepo.saveSprint(sprint)).thenReturn(true);
         when(sprintMapper.toDTO(sprint)).thenReturn(outPutSprintDTO);
         //Act
         OutPutSprintDTO outPut = createSprintService.createAndSaveSprint(newSprintDTO);
@@ -58,7 +55,7 @@ public class CreateSprintServiceTest {
 
         //Arrange
         when(iSprintFactory.createSprint(newSprintDTO)).thenReturn(sprint);
-        when(sprintRepositoryInterface.saveSprint(sprint)).thenReturn(true);
+        when(ISprintRepo.saveSprint(sprint)).thenReturn(true);
         when(sprintMapper.toDTO(sprint)).thenReturn(outPutSprintDTO);
         //Act
         OutPutSprintDTO outPut = createSprintService.createAndSaveSprint(newSprintDTO);

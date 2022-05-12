@@ -4,7 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.dto.OutPutSprintDTO;
 import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.Sprint.SprintID;
+import switch2021.project.model.valueObject.SprintID;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.ProjectID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,9 +28,11 @@ public class SprintMapperTest {
         when(description.getText()).thenReturn("Sprint Name");
         when(sprintID.getProjectID()).thenReturn(projectID);
         when(projectID.getCode()).thenReturn("Project_2022_1");
+
         OutPutSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
+
         //Assert
-        assertEquals(sprintID.toString(), outPutSprintDTO.getSprintID());
+        assertEquals(sprint.getSprintID().toString(), outPutSprintDTO.sprintID);
     }
 
     @Test
@@ -50,7 +52,7 @@ public class SprintMapperTest {
         when(projectID.getCode()).thenReturn("Project_2022_1");
         OutPutSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
         //Assert
-        assertEquals(sprintID.toString(), outPutSprintDTO.getSprintID());
+        assertEquals(sprintID.toString(), outPutSprintDTO.sprintID);
     }
 
     @Test
@@ -70,7 +72,7 @@ public class SprintMapperTest {
         when(projectID.getCode()).thenReturn("Project_2022_1");
         OutPutSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
         //Assert
-        assertEquals(description.getText(), outPutSprintDTO.getName());
+        assertEquals(description.getText(), outPutSprintDTO.name);
     }
 
     @Test
@@ -90,6 +92,6 @@ public class SprintMapperTest {
         when(projectID.getCode()).thenReturn("Project_2022_1");
         OutPutSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
         //Assert
-        assertEquals(projectID.getCode(), outPutSprintDTO.getProjectID());
+        assertEquals(projectID.getCode(), outPutSprintDTO.projectID);
     }
 }

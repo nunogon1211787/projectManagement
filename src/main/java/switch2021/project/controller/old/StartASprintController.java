@@ -3,7 +3,7 @@ package switch2021.project.controller.old;
 import switch2021.project.dto.old.StartASprintDTO;
 import switch2021.project.model.Company;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Sprint.SprintStore;
+import switch2021.project.repositories.SprintRepository;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.repositories.ProjectStore;
 
@@ -39,7 +39,7 @@ public class StartASprintController {
         LocalDate startDate = sprintDTO.getStartDate();
         ProjectTeam projectTeam = proj.getProjectTeam();
         int sprintDuration = proj.getSprintDuration().getSprintDurationDays();
-        SprintStore sprintList = proj.getSprintList();
+        SprintRepository sprintList = proj.getSprintList();
         return sprintList.startASprint(sprintID, startDate, projectTeam, sprintDuration);
 
     }

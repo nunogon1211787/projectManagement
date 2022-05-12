@@ -1,11 +1,9 @@
-package switch2021.project.model.Sprint;
+package switch2021.project.model.valueObject;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import switch2021.project.interfaces.TaskContainerID;
-import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.utils.ValueObject;
 
 @Getter

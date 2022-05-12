@@ -28,7 +28,7 @@ import switch2021.project.model.UserStory.UserStory;
         public ResourceRepositoryInterface resourceRepositoryInterface;
 
         @Autowired
-        public SprintRepositoryInterface sprintRepositoryInterface;
+        public ISprintRepo iSprintRepo;
 
         @Autowired
         public IUserStoryRepo iUserStoryRepo;
@@ -56,7 +56,7 @@ import switch2021.project.model.UserStory.UserStory;
             if(y != null){
                 z = y.getUserStoryID();
             }else{
-                Sprint x = sprintRepositoryInterface.findSprintById(taskContainerID);
+                Sprint x = iSprintRepo.findSprintById(taskContainerID);
                 if(x != null){
                     z = x.getSprintID();
                 } else{

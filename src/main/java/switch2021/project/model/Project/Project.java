@@ -8,7 +8,7 @@ import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.factoryInterface.ResourceFactoryInterface;
 import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.Sprint.SprintStore;
+import switch2021.project.repositories.SprintRepository;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.repositories.UserStoryRepository;
@@ -27,7 +27,7 @@ public class Project implements Entity {
 
     private final Customer customer;
     private final BusinessSector businessSector;
-    private final SprintStore sprintList;
+    private final SprintRepository sprintList;
     /**
      * Class Attributes
      **/
@@ -65,7 +65,7 @@ public class Project implements Entity {
         this.businessSector = businessSector;
 
         this.startDate = startDate;
-        this.sprintList = new SprintStore();
+        this.sprintList = new SprintRepository();
 
         this.numberOfSprints = new NumberOfSprints(numberOfSprints);
         this.budget = new Budget(budget);

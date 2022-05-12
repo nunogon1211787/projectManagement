@@ -1,10 +1,11 @@
-package switch2021.project.model.Sprint;
+package switch2021.project.repositories;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Repository;
-import switch2021.project.interfaces.SprintRepositoryInterface;
-import switch2021.project.repositories.ProjectTeam;
+import switch2021.project.interfaces.ISprintRepo;
+import switch2021.project.model.Sprint.Sprint;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +14,13 @@ import java.util.Objects;
 @Getter
 @Setter
 @Repository
-public class SprintStore implements SprintRepositoryInterface{
+public class SprintRepository implements ISprintRepo {
 
     /** Attributes **/
     private List<Sprint> sprints;
 
     /** Constructor **/
-    public SprintStore() { this.sprints = new ArrayList<>(); }
+    public SprintRepository() { this.sprints = new ArrayList<>(); }
 
 
     /** Check If Sprint Already Exists */
@@ -118,8 +119,8 @@ public class SprintStore implements SprintRepositoryInterface{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SprintStore)) return false;
-        SprintStore that = (SprintStore) o;
+        if (!(o instanceof SprintRepository)) return false;
+        SprintRepository that = (SprintRepository) o;
         return sprints.equals(that.sprints);
     }
 

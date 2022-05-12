@@ -3,14 +3,8 @@ package switch2021.project.model.Task;
 import org.junit.jupiter.api.Test;
 import switch2021.project.interfaces.TaskContainerID;
 //import switch2021.project.model.Resource.ResourceId;
-import switch2021.project.model.Project.ProjectReeng;
 import switch2021.project.model.Resource.ResourceIDReeng;
-import switch2021.project.model.Resource.ResourceReeng;
-import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.Sprint.SprintID;
-import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.model.valueObject.SprintID;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.repositories.TaskRepository;
 

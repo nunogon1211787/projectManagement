@@ -3,6 +3,7 @@ package switch2021.project.model.Sprint;
 import lombok.Getter;
 import lombok.Setter;
 import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.model.valueObject.SprintID;
 import switch2021.project.model.valueObject.UserStoryID;
 import switch2021.project.utils.Entity;
 import java.time.LocalDate;

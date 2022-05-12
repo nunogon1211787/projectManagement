@@ -1,7 +1,7 @@
 package switch2021.project.controller.old;
 
 import switch2021.project.model.*;
-import switch2021.project.model.Sprint.SprintStore;
+import switch2021.project.repositories.SprintRepository;
 import switch2021.project.model.valueObject.UserStoryID;
 import switch2021.project.repositories.UserStoryRepository;
 import switch2021.project.model.Project.Project;
@@ -15,7 +15,7 @@ public class AddUserStoryToSprintBacklogController {
      **/
     private final Company company;
     private Project project;
-    private SprintStore sprintList;
+    private SprintRepository sprintList;
     private UserStoryRepository userStoryStore;
     private Sprint sprint;
 
@@ -36,7 +36,7 @@ public class AddUserStoryToSprintBacklogController {
         return this.project;
     }
 
-    public SprintStore getSprintStore() {
+    public SprintRepository getSprintRepository() {
         sprintList = this.project.getSprintList();
         return sprintList;
     }

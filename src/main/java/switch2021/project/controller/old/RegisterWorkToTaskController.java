@@ -1,7 +1,7 @@
 package switch2021.project.controller.old;
 
 import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.Sprint.SprintStore;
+import switch2021.project.repositories.SprintRepository;
 import switch2021.project.model.Task.Task;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.UserStoryID;
@@ -49,7 +49,7 @@ public class RegisterWorkToTaskController {
         ProjectStore projectStore = this.company.getProjectStore();
         Project project = projectStore.findById(code);
 
-        SprintStore sprintList = project.getSprintList();
+        SprintRepository sprintList = project.getSprintList();
         Sprint sprint = sprintList.findSprintById(sprintId);
 
         this.userStory = sprint.getUsByIdFromScrumBoard(userStoryId);

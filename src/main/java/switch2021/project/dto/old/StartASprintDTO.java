@@ -1,7 +1,7 @@
 package switch2021.project.dto.old;
 
 import lombok.Getter;
-import switch2021.project.model.Sprint.SprintID;
+import switch2021.project.model.valueObject.SprintID;
 
 import java.time.LocalDate;
 
