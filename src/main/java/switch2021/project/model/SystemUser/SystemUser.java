@@ -13,12 +13,12 @@ public class SystemUser implements Entity<SystemUser> {
     /**
      * Attributes of systemUser´s class
      */
-    private SystemUserID systemUserId;
-    private Name userName;
-    private Photo photo;
+    private final SystemUserID systemUserId;
+    private final Name userName;
+    private final Photo photo;
     private Description encryptedPassword;
-    private Function function;
-    private boolean isActive;
+    private final Function function;
+    private final boolean isActive;
     private final List<UserProfileId> assignedIdProfiles;
     private final List<Request> requestedProfiles;
 
@@ -31,21 +31,18 @@ public class SystemUser implements Entity<SystemUser> {
         this.systemUserId = systemUserId;
         this.userName = userName;
         this.photo = photo;
-        if (password.equals(passwordConfirmation)) {
-            this.encryptedPassword = encryptPassword(password);
-        } else {
-            throw new IllegalArgumentException("passwords not match");
-        }
         this.function = function;
         this.isActive = false;
         this.assignedIdProfiles = new ArrayList<>();
-        this.assignedIdProfiles.add(visitorID);
         this.requestedProfiles = new ArrayList<>();
+        assignValidatedPassword(password, passwordConfirmation);
+        assignProfileId(visitorID);
     }
 
     /**
      * Assigns
      */
+    /*
     public void assignName(Name userName) {
         this.userName = userName;
     }
@@ -65,9 +62,14 @@ public class SystemUser implements Entity<SystemUser> {
     public void setActive(boolean active) {
         isActive = active;
     }
+     */
 
-    public void assignProfileId(UserProfileId profileId) {
-        this.assignedIdProfiles.add(profileId);
+    private void assignProfileId(UserProfileId profileId) {
+        if (profileId.getUserProfileName().getText().trim().equalsIgnoreCase("visitor")){
+            this.assignedIdProfiles.add(profileId);
+        } else {
+            throw new IllegalArgumentException("at registration visitor profile must be assigned!");
+        }
     }
 
     /**
@@ -75,7 +77,7 @@ public class SystemUser implements Entity<SystemUser> {
      * @param newPassword,newPasswordConfirmation [Password v.o.'s]
      * @see #encryptPassword(Password)
      */
-    public void assignValidatedPassword(Password newPassword, Password newPasswordConfirmation) {
+    private void assignValidatedPassword(Password newPassword, Password newPasswordConfirmation) {
         if (newPassword.equals(newPasswordConfirmation)) {
             this.encryptedPassword = encryptPassword(newPassword);
         } else {
@@ -99,7 +101,7 @@ public class SystemUser implements Entity<SystemUser> {
         return new Description(stringBuilder.toString());
     }
 
-    public Description decryptPassword() {
+    private Description decryptPassword() {
         int codigoASCII;
         StringBuilder stringBuilder = new StringBuilder();
 

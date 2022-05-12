@@ -1,38 +1,38 @@
 package switch2021.project.factory;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import switch2021.project.dto.NewUserInfoDTO;
 import switch2021.project.factoryInterface.*;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.valueObject.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class SystemUserFactoryTest {
 
-    @Mock
+    @MockBean
     IEmailFactory emailFactory;
-    @Mock
+    @MockBean
     ISystemUserIDFactory idFactory;
-    @Mock
+    @MockBean
     INameFactory nameFactory;
-    @Mock
+    @MockBean
     IFunctionFactory functionFactory;
-    @Mock
+    @MockBean
     IPasswordFactory passwordFactory;
-    @Mock
+    @MockBean
     IPhotoFactory photoFactory;
-    @Mock
+    @MockBean
     IUserProfileIDFactory userProfileIDFactory;
     @InjectMocks
     SystemUserFactory underTest;
@@ -43,44 +43,34 @@ public class SystemUserFactoryTest {
     }
 
     @Test
-    @DisplayName(".createSystemUser(NewUserInfoDTO infoDTO)")
     void itShouldCreateASystemUser() {
+        //S.U.T. {SystemUserFactory, SystemUser}
         //Arrange
         NewUserInfoDTO infoDTODouble = mock(NewUserInfoDTO.class);
-        infoDTODouble.userName = "manueloliveira";
-        infoDTODouble.email = "manueloliveira@beaver.com";
-        infoDTODouble.password = "Qwerty_1";
-        infoDTODouble.passwordConfirmation = "Qwerty_1";
-        infoDTODouble.function = "tester";
-        infoDTODouble.photo = "photo.png";
 
         Name nameDouble = mock(Name.class);
-        when(nameFactory.createName(infoDTODouble.userName)).thenReturn(nameDouble);
-
-        /*Email emailDouble = mock(Email.class);
-        when(emailFactory.createEmail(infoDTODouble.email)).thenReturn(emailDouble);
-         */
-
         SystemUserID idDouble = mock(SystemUserID.class);
-        when(idFactory.createSystemUserID(infoDTODouble.email)).thenReturn(idDouble);
-
         Password passwordDouble = mock(Password.class);
-        Password passwordConfirmationDouble = mock(Password.class);
-        when(passwordFactory.createPassword(infoDTODouble.password)).thenReturn(passwordDouble);
-        when(passwordFactory.createPassword(infoDTODouble.passwordConfirmation)).thenReturn(passwordConfirmationDouble);
-        when(passwordConfirmationDouble.getPwd()).thenReturn("Qwerty_1");
-
         Function functionDouble = mock(Function.class);
-        when(functionFactory.createFunction(infoDTODouble.function)).thenReturn(functionDouble);
-
         Photo photoDouble = mock(Photo.class);
-        when(photoFactory.createPhoto(infoDTODouble.photo)).thenReturn(photoDouble);
-
         UserProfileId userProfileIdDouble = mock(UserProfileId.class);
-        when(userProfileIDFactory.createUserProfileID("Visitor")).thenReturn(userProfileIdDouble);
+        Description descriptionDouble = mock(Description.class);
+
+        when(nameFactory.createName(any())).thenReturn(nameDouble);
+        when(idFactory.createSystemUserID(any())).thenReturn(idDouble);
+        when(functionFactory.createFunction(any())).thenReturn(functionDouble);
+        when(photoFactory.createPhoto(any())).thenReturn(photoDouble);
+
+        when(passwordFactory.createPassword(any())).thenReturn(passwordDouble);
+        when(passwordDouble.getPwd()).thenReturn("Qwerty_1");
+
+        when(userProfileIDFactory.createUserProfileID(any())).thenReturn(userProfileIdDouble);
+        when(userProfileIdDouble.getUserProfileName()).thenReturn(descriptionDouble);
+        when(descriptionDouble.getText()).thenReturn("Visitor");
         //Act
         SystemUser isCreated = underTest.createSystemUser(infoDTODouble);
         //Assert
         assertNotNull(isCreated);
+        assertEquals("Visitor",isCreated.getAssignedProfiles().get(0).getUserProfileName().getText());
     }
 }

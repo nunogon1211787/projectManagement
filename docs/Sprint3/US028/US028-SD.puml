@@ -8,7 +8,7 @@ autonumber
 
 actor "Director" as actor
 participant ":ShowCurrentProjectTeamRoute" as route
-participant ":ShowCurrentProjectTeamController" as ctrl
+participant ":ResourcesController" as ctrl
 participant "dto :IdDto" as dataDto
 participant "dateDto :DateDto" as dateDto
 participant "srv :ShowCurrentProjectTeamService" as srv
@@ -26,7 +26,7 @@ participant "resourcesJson :ResponseEntity" as jsonList
 activate actor
 autoactivate on
 
-actor -> route : GET /projects/{id}/resources
+actor -> route : GET /resources
 route -> ctrl : showCurrentProjectTeam()
 ctrl -> srv : showCurrentProjectTeam(dto, dateDto)
 srv -> projrepo: existById(dto.id) : true

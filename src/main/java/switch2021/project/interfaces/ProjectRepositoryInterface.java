@@ -1,8 +1,8 @@
 package switch2021.project.interfaces;
 
+import org.springframework.stereotype.Component;
 import switch2021.project.model.Project.ProjectReeng;
 import java.util.List;
-
 
 public interface ProjectRepositoryInterface {
 

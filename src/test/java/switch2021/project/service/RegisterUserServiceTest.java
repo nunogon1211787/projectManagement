@@ -1,17 +1,28 @@
 package switch2021.project.service;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
-import switch2021.project.dto.NewUserInfoDTO;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import switch2021.project.dto.OutputUserDTO;
-import static org.junit.jupiter.api.Assertions.*;
+import switch2021.project.factoryInterface.ISystemUserFactory;
+import switch2021.project.interfaces.ISystemUserRepo;
+import switch2021.project.mapper.SystemUserMapper;
+import switch2021.project.model.SystemUser.SystemUser;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class RegisterUserServiceTest {
 
-    @Autowired
-    RegisterUserService registerUserService; //for integration tests purpose
+    //@Autowired
+    //RegisterUserService registerUserService; //for integration tests purpose
 
     //@Autowired
     //private final CacheManager cacheManager = new SimpleCacheManager();
@@ -30,7 +41,6 @@ public class RegisterUserServiceTest {
         clear();
     }*/
 
-/*
     //for unit tests purpose:
     @MockBean
     private ISystemUserRepo systemUserRepo;
@@ -40,10 +50,46 @@ public class RegisterUserServiceTest {
     private ISystemUserFactory systemUserFactory;
     @InjectMocks
     RegisterUserService underTest;
- */
+
+    @BeforeEach
+    void setUp()/* throws Exception*/ {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    //Unit Test Success
+    @Test
+    void itShouldRegisterAUser() {
+        //S.U.T. {RegisterUserService}
+        //Arrange
+        SystemUser userDouble = mock(SystemUser.class);
+        OutputUserDTO outUserDTODouble = mock(OutputUserDTO.class);
+        outUserDTODouble.email = "mano@beaver.com";
+
+        when(systemUserFactory.createSystemUser(any())).thenReturn(userDouble);
+        when(systemUserRepo.saveSystemUser(userDouble)).thenReturn(true);
+        when(systemUserMapper.toDto(userDouble)).thenReturn(outUserDTODouble);
+        //Act
+        OutputUserDTO outDTO = underTest.createAndSaveSystemUser(any());
+        //Assert
+        assertEquals("mano@beaver.com", outDTO.email);
+    }
+
+    @Test
+    void itShouldNotRegisterAUser() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            //S.U.T. {RegisterUserService}
+            //Arrange
+            SystemUser userDouble = mock(SystemUser.class);
+
+            when(systemUserFactory.createSystemUser(any())).thenReturn(userDouble);
+            when(systemUserRepo.saveSystemUser(userDouble)).thenReturn(false);
+            //Act
+            underTest.createAndSaveSystemUser(any());
+        });
+    }
 
     //Integration Test Success
-    @Test
+/*    @Test
     void itShouldRegisterAUser(){
         //Arrange
         NewUserInfoDTO dto = new NewUserInfoDTO();
@@ -78,24 +124,6 @@ public class RegisterUserServiceTest {
         });
     }
 /*
-    //Unit Test Success
-    @Test
-    void itShouldRegisterAUserMcks() throws Exception {
-        MockitoAnnotations.openMocks(this);
-        //Arrange
-        SystemUser userDouble = mock(SystemUser.class);
-        OutputUserDTO outUserDTODouble = mock(OutputUserDTO.class);
-        outUserDTODouble.email="mano@beaver.com";
-
-        when(systemUserFactory.createSystemUser(any())).thenReturn(userDouble);
-        when(systemUserRepo.saveSystemUser(userDouble)).thenReturn(true);
-        when(systemUserMapper.toDto(userDouble)).thenReturn(outUserDTODouble);
-        //when(outUserDTODouble.email).thenReturn("mano@beaver.com");
-        //Act
-        OutputUserDTO outDTO = underTest.createAndSaveSystemUser(any());
-        //Assert
-        assertEquals("mano@beaver.com", outDTO.email);
-    }
 
  */
 }

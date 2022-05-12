@@ -21,20 +21,17 @@ public class ProjectFactory implements ProjectFactoryInterface {
         BusinessSector businessSector = new BusinessSector(projectDTO.businessSector);
         LocalDate date = LocalDate.parse(projectDTO.startDate);
         NumberOfSprints numberOfSprints = new NumberOfSprints(Integer.parseInt(projectDTO.numberOfSprints));
+        SprintDuration sprintDuration = new SprintDuration(Integer.parseInt(projectDTO.sprintDuration));
         Budget budget = new Budget(Integer.parseInt(projectDTO.budget));
 
         if (date.isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("Project can´t start before today's date");
         }
 
-        ProjectReeng newProject = new ProjectReeng(projectID);
+        ProjectReeng newProject = new ProjectReeng(name,description,businessSector,date,numberOfSprints,
+                                                   sprintDuration,budget);
 
-        newProject.setProjectName(name);
-        newProject.setDescription(description);
-        newProject.setBusinessSector(businessSector);
-        newProject.setStartDate(date);
-        newProject.setNumberOfSprints(numberOfSprints);
-        newProject.setBudget(budget);
+        newProject.setProjectCode(projectID);
         newProject.setProjectStatus(ProjectStatusEnum.PLANNED);
 
         return newProject;

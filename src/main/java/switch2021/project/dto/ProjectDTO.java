@@ -16,6 +16,7 @@ public class ProjectDTO {
     public String numberOfSprints;
     public String budget;
     public String projectStatus;
+    public String sprintDuration;
 
 
     /**Constructor**/
