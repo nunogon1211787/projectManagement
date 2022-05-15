@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ITypologyRepo {
 
-    List<Typology> getTypologyList();
+//    List<Typology> getTypologyList();
 
     /**
      * The repository should be able to find an object using given Identity.

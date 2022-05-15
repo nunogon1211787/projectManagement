@@ -33,7 +33,7 @@ class EditProjectInfoControllerTest {
         EditProjectInfoController edit = new EditProjectInfoController(company);
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
         LocalDate startDate3 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
+//        typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,
@@ -60,7 +60,7 @@ class EditProjectInfoControllerTest {
         EditProjectInfoController edit = new EditProjectInfoController(company);
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
         LocalDate startDate3 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
+//        typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,
@@ -83,7 +83,7 @@ class EditProjectInfoControllerTest {
         company = new Company();
         this.projectStore = company.getProjectStore();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
+//        typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,
@@ -106,7 +106,7 @@ class EditProjectInfoControllerTest {
         company = new Company();
         this.projectStore = company.getProjectStore();
         LocalDate startDate2 = LocalDate.of(2022, 12, 31);
-        typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
+//        typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
         customer = company.getCustomerStore().getCustomerByName("ISEP");
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,

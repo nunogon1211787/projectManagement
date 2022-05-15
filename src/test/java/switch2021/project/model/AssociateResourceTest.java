@@ -18,28 +18,28 @@ public class AssociateResourceTest {
     private Project proj3;
     private ProjectStore projectList;
 
-    @BeforeEach
-    public void init() {
-        Company company = new Company();
-        userProfile = company.getUserProfileStore().findUserProfileByDescription("Visitor");
-
-        LocalDate date = LocalDate.of(2021, 12, 12);
-        company.getBusinessSectorStore().createAndAddBusinessSector("sector");
-        company.getCustomerStore().createAndAddCustomer("Test", "Teste@teste.com", 123456789);
-
-        Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        proj = company.getProjectStore().createAndSaveProject("prototype", "test56", customer,
-                typo, sector, date, 7, 5000);
-        proj1 = company.getProjectStore().createAndSaveProject("prototype2", "test57", customer,
-                typo, sector, date, 7, 5000);
-        proj2 = company.getProjectStore().createAndSaveProject("prototype2", "test58", customer,
-                typo, sector, date, 7, 5000);
-        proj3 = company.getProjectStore().createAndSaveProject("prototype3", "test59", customer,
-                typo, sector, date, 7, 5000);
-        projectList = company.getProjectStore();
-    }
+//    @BeforeEach
+//    public void init() {
+//        Company company = new Company();
+//        userProfile = company.getUserProfileStore().findUserProfileByDescription("Visitor");
+//
+//        LocalDate date = LocalDate.of(2021, 12, 12);
+//        company.getBusinessSectorStore().createAndAddBusinessSector("sector");
+//        company.getCustomerStore().createAndAddCustomer("Test", "Teste@teste.com", 123456789);
+//
+//        Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
+//        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
+//        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
+//        proj = company.getProjectStore().createAndSaveProject("prototype", "test56", customer,
+//                typo, sector, date, 7, 5000);
+//        proj1 = company.getProjectStore().createAndSaveProject("prototype2", "test57", customer,
+//                typo, sector, date, 7, 5000);
+//        proj2 = company.getProjectStore().createAndSaveProject("prototype2", "test58", customer,
+//                typo, sector, date, 7, 5000);
+//        proj3 = company.getProjectStore().createAndSaveProject("prototype3", "test59", customer,
+//                typo, sector, date, 7, 5000);
+//        projectList = company.getProjectStore();
+//    }
 
 /*    @Test
     @DisplayName("Add Resource")
