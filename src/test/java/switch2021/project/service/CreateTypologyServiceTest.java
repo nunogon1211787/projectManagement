@@ -29,7 +29,7 @@ public class CreateTypologyServiceTest {
     @MockBean
     TypologyMapper typologyMapper;
     @InjectMocks
-    CreateTypologyService createTypologyService;
+    TypologyService typologyService;
 
     @BeforeEach
     void setUp() throws Exception {
@@ -52,7 +52,7 @@ public class CreateTypologyServiceTest {
         when(typo.hasID_Description(des.getText())).thenReturn(false);
         when(typologyMapper.modelToDto(typo)).thenReturn(dto);
         //Assert
-        assertEquals("Fixed Cost", createTypologyService.createAndSaveTypology(dto).getDescription());
+        assertEquals("Fixed Cost", typologyService.createAndSaveTypology(dto).getDescription());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class CreateTypologyServiceTest {
             when(des.getText()).thenReturn("Fixed Cost");
             when(id.getDescription()).thenReturn(des);
             when(typo.hasID_Description(des.getText())).thenReturn(true);
-            createTypologyService.createAndSaveTypology(dto);
+            typologyService.createAndSaveTypology(dto);
         });
     }
 
@@ -93,7 +93,7 @@ public class CreateTypologyServiceTest {
             when(typo.hasID_Description(des.getText())).thenReturn(true);
             when(iTypologyRepo.findTypologyById("Fixed Cost")).thenReturn(null);
             //Act
-            createTypologyService.findTypologyByDescription(dto);
+            typologyService.findTypologyByDescription(dto);
         });
     }
 
@@ -135,7 +135,7 @@ public class CreateTypologyServiceTest {
         when(typologyMapper.modelToDto(iTypologyRepo.findAllTypology())).thenReturn(List.of(new TypologyDTO[]{dto,
                 dto1, dto2}));
         //Assert
-        assertEquals(3, createTypologyService.findAllTypologies().size());
+        assertEquals(3, typologyService.findAllTypologies().size());
     }
 
     @Test
@@ -145,7 +145,7 @@ public class CreateTypologyServiceTest {
             //Arrange
             when(iTypologyRepo.findAllTypology()).thenReturn(List.of(new Typology[]{}));
             //Act
-            createTypologyService.findAllTypologies();
+            typologyService.findAllTypologies();
         });
     }
 
@@ -157,7 +157,7 @@ public class CreateTypologyServiceTest {
             TypologyDTO dto = mock(TypologyDTO.class);
             //Act
             when(dto.getDescription()).thenReturn("Test2");
-            createTypologyService.deleteTypology(dto);
+            typologyService.deleteTypology(dto);
         });
     }
 }
