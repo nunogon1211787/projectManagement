@@ -11,7 +11,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import switch2021.project.dto.TypologyDTO;
-import switch2021.project.service.CreateTypologyService;
+import switch2021.project.service.TypologyService;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class CreateNewTypologyControllerTest {
     @InjectMocks
     TypologyController controller;
     @MockBean
-    CreateTypologyService service;
+    TypologyService service;
 
     @BeforeEach
     public void setUp() throws Exception {

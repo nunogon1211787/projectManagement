@@ -207,32 +207,32 @@ public class ProjectStoreTest {
         assertTrue(projectStore.validateAllocation(user, 0.5, startDate, endDate));
     }
 
-    @Test
-    public void overrideAndHashCodeTest() {
-        //Arrange
-        Company company = new Company();
-        //Project
-        Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //list1 and list2 are equals
-        Project project1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
-        project1.setEndDate(LocalDate.of(2022, 1, 31));
-        ProjectStore list1 = new ProjectStore();
-        ProjectStore list2 = new ProjectStore();
-        list1.getProjectList().add(project1);
-        list2.getProjectList().add(project1);
-        Project project3 = company.getProjectStore().createAndSaveProject("prototype3", "proj3Prototype", customer,
-                typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
-        project3.setEndDate(LocalDate.of(2022, 1, 31));
-        ProjectStore list3 = new ProjectStore();
-        list3.getProjectList().add(project3);
-        //Assert
-        assertNotSame(list1, list2);
-        assertEquals(list1, list2);
-        assertEquals(list1.hashCode(), list2.hashCode());
-        assertNotEquals(list1, list3);
-        assertNotEquals(list1.hashCode(), list3.hashCode());
-    }
+//    @Test
+//    public void overrideAndHashCodeTest() {
+//        //Arrange
+//        Company company = new Company();
+//        //Project
+//        Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
+//        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+//        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+//        //list1 and list2 are equals
+//        Project project1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
+//                typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
+//        project1.setEndDate(LocalDate.of(2022, 1, 31));
+//        ProjectStore list1 = new ProjectStore();
+//        ProjectStore list2 = new ProjectStore();
+//        list1.getProjectList().add(project1);
+//        list2.getProjectList().add(project1);
+//        Project project3 = company.getProjectStore().createAndSaveProject("prototype3", "proj3Prototype", customer,
+//                typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
+//        project3.setEndDate(LocalDate.of(2022, 1, 31));
+//        ProjectStore list3 = new ProjectStore();
+//        list3.getProjectList().add(project3);
+//        //Assert
+//        assertNotSame(list1, list2);
+//        assertEquals(list1, list2);
+//        assertEquals(list1.hashCode(), list2.hashCode());
+//        assertNotEquals(list1, list3);
+//        assertNotEquals(list1.hashCode(), list3.hashCode());
+//    }
 }

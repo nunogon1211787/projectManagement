@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.ErrorMessage;
 import switch2021.project.dto.TypologyDTO;
-import switch2021.project.service.CreateTypologyService;
+import switch2021.project.service.TypologyService;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class TypologyController {
      * Attributes
      **/
     @Autowired
-    private CreateTypologyService service;
+    private TypologyService service;
 
     /**
      * Methods
