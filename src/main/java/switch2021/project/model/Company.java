@@ -2,11 +2,7 @@ package switch2021.project.model;
 
 import lombok.Getter;
 import switch2021.project.factory.*;
-import switch2021.project.repositories.UserStoryRepository;
-import switch2021.project.repositories.ProjectStore;
-import switch2021.project.repositories.SystemUserRepository;
-import switch2021.project.repositories.TypologyRepository;
-import switch2021.project.repositories.UserProfileRepository;
+import switch2021.project.repositories.*;
 import switch2021.project.stores.*;
 
 @Getter
@@ -50,7 +46,7 @@ public class Company {
         //this.userStoryFactory = new UserStoryFactory();
         this.userStoryStore = new UserStoryRepository();
 
-        this.userProfileStore.populateDefault();
+        //this.userProfileStore.populateDefault();
         this.projectRoleStore.populateDefault();
 //        this.typologyRepository.populateDefault();
         this.userStoryStatusStore.populateDefault();

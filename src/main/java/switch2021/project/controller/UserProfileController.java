@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import switch2021.project.dto.ErrorMessage;
 import switch2021.project.dto.UserProfileDTO;
 import switch2021.project.service.CreateUserProfileService;
 
@@ -14,6 +15,7 @@ import switch2021.project.service.CreateUserProfileService;
 @RestController
 @RequestMapping("/profiles")
 public class UserProfileController {
+
     /**
      * Attributes
      **/
@@ -23,15 +25,22 @@ public class UserProfileController {
 
     /**
      * Create a User Profile
-     *
-     * @param dto
      */
     @PostMapping("")
     public ResponseEntity<Object> createUserProfile(@RequestBody UserProfileDTO dto) {
-
-        UserProfileDTO newUserProfile = createUserProfileService.createAndSaveUserProfile(dto);
-
-        return new ResponseEntity<>(newUserProfile, HttpStatus.CREATED);
+        ErrorMessage message = new ErrorMessage();
+        if(dto.userProfileName == null || dto.userProfileName.isEmpty()){
+            message.errorMessage = "User Profile Name cannot be empty.";
+            return new ResponseEntity<>(message, HttpStatus.NOT_ACCEPTABLE);
+        }
+        UserProfileDTO outPutDTO;
+        try {
+            outPutDTO = createUserProfileService.createAndSaveUserProfile(dto);
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(outPutDTO, HttpStatus.CREATED);
     }
 }
 

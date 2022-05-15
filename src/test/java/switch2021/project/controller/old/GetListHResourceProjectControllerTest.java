@@ -6,7 +6,6 @@ import switch2021.project.controller.old.GetListHResourceProjectController;
 import switch2021.project.dto.old.ResourceDTO;
 import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.mapper.old.ProjectTeamMapper;
 import switch2021.project.model.*;

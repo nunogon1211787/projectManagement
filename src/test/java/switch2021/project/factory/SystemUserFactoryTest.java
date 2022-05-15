@@ -53,7 +53,7 @@ public class SystemUserFactoryTest {
         Password passwordDouble = mock(Password.class);
         Function functionDouble = mock(Function.class);
         Photo photoDouble = mock(Photo.class);
-        UserProfileId userProfileIdDouble = mock(UserProfileId.class);
+        UserProfileID userProfileIDDouble = mock(UserProfileID.class);
         Description descriptionDouble = mock(Description.class);
 
         when(nameFactory.createName(any())).thenReturn(nameDouble);
@@ -64,8 +64,8 @@ public class SystemUserFactoryTest {
         when(passwordFactory.createPassword(any())).thenReturn(passwordDouble);
         when(passwordDouble.getPwd()).thenReturn("Qwerty_1");
 
-        when(userProfileIDFactory.createUserProfileID(any())).thenReturn(userProfileIdDouble);
-        when(userProfileIdDouble.getUserProfileName()).thenReturn(descriptionDouble);
+        when(userProfileIDFactory.createUserProfileID(any())).thenReturn(userProfileIDDouble);
+        when(userProfileIDDouble.getUserProfileName()).thenReturn(descriptionDouble);
         when(descriptionDouble.getText()).thenReturn("Visitor");
         //Act
         SystemUser isCreated = underTest.createSystemUser(infoDTODouble);

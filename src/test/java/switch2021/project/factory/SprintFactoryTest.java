@@ -1,58 +1,62 @@
 package switch2021.project.factory;
 
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import switch2021.project.dto.NewSprintDTO;
+import switch2021.project.factoryInterface.IDescriptionFactory;
+import switch2021.project.factoryInterface.IProjectIDFactory;
+import switch2021.project.factoryInterface.ISprintIDFactory;
 import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.valueObject.SprintID;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.model.valueObject.SprintID;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
-@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class SprintFactoryTest {
 
+    @Mock
+    private IDescriptionFactory iDescriptionFactory;
+    @Mock
+    private Description name;
+    @Mock
+    private IProjectIDFactory iProjectIDFactory;
+    @Mock
+    private ProjectID projectID;
+    @Mock
+    private ISprintIDFactory iSprintIDFactory;
+    @Mock
+    private SprintID sprintID;
+    @Mock
+    private NewSprintDTO newSprintDTO;
+
     @InjectMocks
-    SprintFactory sprintFactory;
+    private SprintFactory sprintFactory;
 
-    @Mock
-    Sprint sprint;
+    @BeforeEach
+    public void setUp(){
+        MockitoAnnotations.openMocks(this);
+    }
 
-    @Mock
-    SprintIDFactory sprintIDFactory;
+    @Test
+    @DisplayName("Test to create a sprint, with success")
+    public void createSprint_Success(){
+        //Arrange
 
-    @Mock
-    SprintID sprintID;
+        when(iDescriptionFactory.createDescription(newSprintDTO.name)).thenReturn(name);
+        when(iProjectIDFactory.create(newSprintDTO.projectID)).thenReturn(projectID);
+        when(iSprintIDFactory.create(newSprintDTO.name, newSprintDTO.projectID)).thenReturn(sprintID);
 
-    @Mock
-    ProjectIDFactory projectIDFactory;
+        //Act
+        Sprint sprint = sprintFactory.createSprint(newSprintDTO);
 
-    @Mock
-    ProjectID projectID;
-
-    @Mock
-    DescriptionFactory descriptionFactory;
-
-    @Mock
-    Description description;
-
-
-//    @Test
-//    @DisplayName("Test to create a sprint, with success")
-//    public void createSprint_Success(){
-//        //Arrange
-//        String project = "Project_2022_1";
-//        String des = "Sprint Name";
-//        //Act
-//        projectID = projectIDFactory.create(project);
-//        description = descriptionFactory.create(des);
-//        sprintID = sprintIDFactory.create(project, des);
-//        NewSprintDTO newSprintDTO = new NewSprintDTO();
-//        sprint = sprintFactory.createSprint(newSprintDTO);
-//        SprintID abc = new SprintID("Project_2022_1_Sprint that we need to test");
-//        Sprint sprintX = new Sprint (abc);
-//        //Assert
-//        assertFalse(sprintX.sameIdentityAs(sprint));
-//    }
-
+        //Assert
+        assertNotNull(sprint);
+    }
 }

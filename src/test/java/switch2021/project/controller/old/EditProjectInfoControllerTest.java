@@ -1,7 +1,7 @@
 package switch2021.project.controller.old;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.factory.IResourceFactory;
+import switch2021.project.factory.ResourceFactory;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Typology.Typology;
@@ -111,7 +111,7 @@ class EditProjectInfoControllerTest {
         sector = company.getBusinessSectorStore().getBusinessSectorByDescription("Balloons");
         project = company.getProjectStore().createAndSaveProject("prototype2", "test56", customer,
                 typo, sector, startDate2, 7, 5000);
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam2 = new ProjectTeam(resFac);
         ProjectStatusEnum projectStatus = ProjectStatusEnum.TRANSITION;
 

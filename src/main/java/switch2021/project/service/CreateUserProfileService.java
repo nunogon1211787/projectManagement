@@ -3,10 +3,10 @@ package switch2021.project.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.UserProfileDTO;
-import switch2021.project.factoryInterface.UserProfileFactoryInterface;
+import switch2021.project.factoryInterface.IUserProfileFactory;
 import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.mapper.UserProfileMapper;
-import switch2021.project.model.UserProfile.UserProfileReeng;
+import switch2021.project.model.UserProfile.UserProfile;
 
 
 @Service
@@ -18,24 +18,21 @@ public class CreateUserProfileService {
     @Autowired
     private IUserProfileRepo userProfileRepositoryInterface;
     @Autowired
-    private UserProfileFactoryInterface userProfileFactoryInterface;
+    private IUserProfileFactory iUserProfileFactory;
     @Autowired
     private UserProfileMapper userProfileMapper;
 
 
     /**
      * Create and save a User Profile
-     *
-     * @param dto
      */
     public UserProfileDTO createAndSaveUserProfile(UserProfileDTO dto) {
 
-        UserProfileReeng newUserProfile = userProfileFactoryInterface.createUserProfile(dto);
-
-        userProfileRepositoryInterface.saveUserProfile(newUserProfile);
-
+        UserProfile newUserProfile = iUserProfileFactory.createUserProfile(dto);
+        if(!userProfileRepositoryInterface.saveUserProfile(newUserProfile)){
+            throw new IllegalArgumentException("User Profile Already exists!");
+        }
         return userProfileMapper.toDto(newUserProfile);
     }
-
 }
 

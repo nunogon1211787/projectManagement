@@ -5,7 +5,7 @@ title US009 - As Product Owner, I want to create a user story and add it to the 
 
 autoactivate on
 autonumber
-actor "Product Owner" as ProjectManager #lightgreen
+actor "Product Owner" as ProjectManager
 participant ":System" as System
 
 activate ProjectManager

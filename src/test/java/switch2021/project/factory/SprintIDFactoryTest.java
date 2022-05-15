@@ -19,19 +19,19 @@ public class SprintIDFactoryTest {
     SprintIDFactory sprintIDFactory;
 
     @Mock
-    ProjectIDFactory projectIDFactory;
+    private ProjectIDFactory projectIDFactory;
 
     @Mock
-    DescriptionFactory descriptionFactory;
+    private DescriptionFactory descriptionFactory;
 
     @Mock
-    ProjectID projectID;
+    private ProjectID projectID;
 
     @Mock
-    Description description;
+    private Description description;
 
     @Mock
-    SprintID sprintID;
+    private SprintID sprintID;
 
     @Test
     @DisplayName("Test to create a SprintID - success")

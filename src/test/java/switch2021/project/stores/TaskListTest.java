@@ -9,7 +9,6 @@ import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Task.*;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.*;
 
 import java.time.LocalDate;

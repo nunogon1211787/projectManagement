@@ -9,8 +9,6 @@ actor "Director" as Director
 participant ":System" as System
 
 Director -> System: Starts the creation of a new typology
-System -> System: create Typology
-deactivate
 return Informs operation status
 
 @enduml

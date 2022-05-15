@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+skinparam classAttributeIconSize 0
+
 title US005 - As a Director, I want to create/register a new project
 
 package "Infrastructure" <<Package>>  #lightblue {

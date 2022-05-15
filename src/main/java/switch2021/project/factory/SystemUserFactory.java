@@ -31,7 +31,7 @@ public class SystemUserFactory implements ISystemUserFactory {
         Password password = passwordFactory.createPassword(infoDTO.password);
         Password passwordConfirmation = passwordFactory.createPassword(infoDTO.passwordConfirmation);
         Function function = functionFactory.createFunction(infoDTO.function);
-        UserProfileId visitorID = userProfileIDFactory.createUserProfileID("Visitor");
+        UserProfileID visitorID = userProfileIDFactory.createUserProfileID("Visitor");
 
         return new SystemUser(systemUserID, userName, photo, password, passwordConfirmation, function, visitorID);
     }

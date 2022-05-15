@@ -19,7 +19,7 @@ public class SystemUser implements Entity<SystemUser> {
     private Description encryptedPassword;
     private final Function function;
     private final boolean isActive;
-    private final List<UserProfileId> assignedIdProfiles;
+    private final List<UserProfileID> assignedIdProfiles;
     private final List<Request> requestedProfiles;
 
     /**
@@ -27,7 +27,7 @@ public class SystemUser implements Entity<SystemUser> {
      */
     public SystemUser(SystemUserID systemUserId, Name userName, Photo photo, Password password,
                       Password passwordConfirmation,
-                      Function function, UserProfileId visitorID) {
+                      Function function, UserProfileID visitorID) {
         this.systemUserId = systemUserId;
         this.userName = userName;
         this.photo = photo;
@@ -64,7 +64,7 @@ public class SystemUser implements Entity<SystemUser> {
     }
      */
 
-    private void assignProfileId(UserProfileId profileId) {
+    private void assignProfileId(UserProfileID profileId) {
         if (profileId.getUserProfileName().getText().trim().equalsIgnoreCase("visitor")){
             this.assignedIdProfiles.add(profileId);
         } else {
@@ -140,7 +140,7 @@ public class SystemUser implements Entity<SystemUser> {
     /**
      * Request Create and Save Method
      */
-    public boolean createAndSaveProfileRequest(UserProfileId profileId) {
+    public boolean createAndSaveProfileRequest(UserProfileID profileId) {
         Request newRequest = new Request(profileId);
 
         if (hasProfileId(profileId) || this.requestedProfiles.contains(newRequest)) {
@@ -184,7 +184,7 @@ public class SystemUser implements Entity<SystemUser> {
     /**
      * getting Methods (outside of lombock)
      */
-    public List<UserProfileId> getAssignedProfiles() {
+    public List<UserProfileID> getAssignedProfiles() {
         return new ArrayList<>(assignedIdProfiles);
     }
 
@@ -243,10 +243,10 @@ public class SystemUser implements Entity<SystemUser> {
     /**
      * Method to validate if user already has the profile requested
      */
-    private boolean hasProfileId(UserProfileId profileId) {
+    private boolean hasProfileId(UserProfileID profileId) {
         boolean profileStatus = false;
 
-        for (UserProfileId profileIdCheck : assignedIdProfiles) {
+        for (UserProfileID profileIdCheck : assignedIdProfiles) {
             if (profileId.equals(profileIdCheck)) {
                 profileStatus = true;
                 break;

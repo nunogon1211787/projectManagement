@@ -1,9 +1,7 @@
 package switch2021.project.model;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.repositories.ProjectStore;
-import switch2021.project.model.UserProfile.UserProfile;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +12,7 @@ class CompanyTest {
         //Arrange
         Company company = new Company();
         //Assert
-        assertEquals(4, company.getUserProfileStore().findAllUserProfiles().size());
+        assertEquals(0, company.getUserProfileStore().findAllUserProfiles().size());
         assertEquals(0, company.getTypologyRepository().getTypologyList().size());
         assertEquals(0, company.getCustomerStore().getCustomerList().size());
         assertEquals(0, company.getBusinessSectorStore().getBusinessSectorList().size());

@@ -12,8 +12,6 @@ participant ":System" as System
 activate User
 
 User -> System: Starts the creation of a new Project
-System -> System: create Project
-deactivate
 System --> User: Informs of operation success
 
 @enduml
