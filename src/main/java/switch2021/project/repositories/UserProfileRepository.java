@@ -1,28 +1,31 @@
 package switch2021.project.repositories;
 
 import org.springframework.stereotype.Repository;
+import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.model.valueObject.UserProfileID;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Repository
-public class UserProfileRepository {
+public class UserProfileRepository implements IUserProfileRepo {
 
     /**
-     * Attributes
+     * List of User Profiles
      **/
     private final List<UserProfile> userProfileList;
 
     /**
-     * UserProfile Store Constructor
+     * Constructor
      **/
     public UserProfileRepository() {
-        userProfileList = new ArrayList<>();
+        this.userProfileList = new ArrayList<>();
     }
 
 
+    @Override
     public UserProfile findUserProfileByDescription(String profileName) {
         UserProfile profile = null;
 
@@ -35,7 +38,7 @@ public class UserProfileRepository {
         return profile;
     }
 
-
+    @Override
     public List<UserProfile> findAllUserProfiles() {
         return new ArrayList<>(this.userProfileList);
     }
@@ -43,7 +46,7 @@ public class UserProfileRepository {
     /**
      * Save UserProfile Method (Save a new UserProfile object to the UserProfile List)
      **/
-
+    @Override
     public boolean saveUserProfile(UserProfile profile) {
         if (profile == null || existsByDescription(profile.getUserProfileId().getUserProfileName().getText())) {
             return false;
@@ -52,6 +55,7 @@ public class UserProfileRepository {
         }
     }
 
+    @Override
     public boolean existsByDescription(String userProfileText) {
         for (UserProfile userProfile : this.userProfileList) {
             if (userProfile.getUserProfileId().getUserProfileName().getText().equalsIgnoreCase(userProfileText.trim())) {
@@ -61,42 +65,20 @@ public class UserProfileRepository {
         return false;
     }
 
-    /**
-     * UserProfile Populator, that populates the UserProfile List with pre-set objects.
-     **/
-    public void populateDefault() {
-        saveUserProfile(createProfile("Visitor"));
-        saveUserProfile(createProfile("Administrator"));
-        saveUserProfile(createProfile("Director"));
-        saveUserProfile(createProfile("User"));
+    @Override
+    public boolean existsByUserProfileId(UserProfileID profile) {
+        return false;
     }
 
- // mudar para o service
-    /**
-     * Create Method
-     **/
-    public UserProfile createProfile(String name) {
-        return new UserProfile(name);
-    }
-
-
-    /**
-     * Validation Methods
-     **/
-/*    private boolean validateProfile(UserProfile profile) {
-        //Check if profile already exist
-        boolean msg = true;
-        for (UserProfile up : userProfileList) {
-            if (up.equals(profile)) {
-                msg = false;
-                break;
-            }
-        }
-        return msg;
-    }
-
- */
-
+    //    /**
+//     * UserProfile Populator, that populates the UserProfile List with pre-set objects.
+//     **/
+//    public void populateDefault() {
+//        saveUserProfile(createProfile("Visitor"));
+//        saveUserProfile(createProfile("Administrator"));
+//        saveUserProfile(createProfile("Director"));
+//        saveUserProfile(createProfile("User"));
+//    }
 
     /**
      * Override Methods

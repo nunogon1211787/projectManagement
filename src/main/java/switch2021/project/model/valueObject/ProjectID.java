@@ -1,18 +1,21 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import switch2021.project.utils.ValueObject;
-
+import javax.persistence.Embeddable;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Getter
+@Embeddable
+@NoArgsConstructor
 public class ProjectID implements ValueObject<ProjectID> {
 
     /**
      * Attributes
      **/
-    private final String code;
+    private String code;
 
     /**
      * Constructor
@@ -26,6 +29,7 @@ public class ProjectID implements ValueObject<ProjectID> {
     }
 
     public ProjectID(String projectCode) {
+
         if (projectCode == null)
             throw new IllegalArgumentException("Project number cannot be null");
         this.code = projectCode;

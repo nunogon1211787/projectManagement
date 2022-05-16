@@ -1,0 +1,57 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title US010 - As Authenticated User, i want to update its own data (e.g. photo, function,...)
+
+autoactivate on
+autonumber
+
+participant ":UpdatePersonalDataRoute" as route
+participant ":SystemUserController" as Ctrl
+participant ":UpdatePersonalDataService" as service
+participant ":UpdateUserDTO" as dto
+participant "systemUser : ISystemUserRepo" as iRepo
+participant ":SystemUser" as systemUser
+participant ":SystemUserMapper" as mapper
+participant ":OutPutUpdateUserDTO" as outPutDTO
+
+[o-> route: PUT/{ID}/edit(json)
+route -> Ctrl: updatePersonalData(json)
+note right
+Change from json to dto hidden to simplify diagram
+end note
+Ctrl -> service: updatePersonalData(updateUserDTO)
+service -> dto: email = getEmail()
+deactivate
+service -> dto: username = getUserName()
+deactivate
+service -> dto: function = getFunction()
+deactivate
+service -> dto: photo = getPhoto()
+deactivate
+service -> iRepo: findSystemUserByEmail(email)
+loop for each known System User in System User Repository
+iRepo -> systemUser: isYourEmail(email)
+systemUser --> iRepo: true
+end
+iRepo --> service: systemUser
+service -> systemUser: updatePersonalData(username, function, photo)
+note right
+NOTA!!! Nestes métodos assign poderiam ser os set's mas com as suas próprias validações.
+end note
+systemUser -> systemUser: assignUserName()
+deactivate
+systemUser -> systemUser: assignFunction()
+deactivate
+systemUser -> systemUser: assignPhoto()
+deactivate
+systemUser --> service: true
+service -> mapper: modelToDTO(user)
+mapper -> outPutDTO**: create()
+mapper --> service: outPutUpdateUserDTO
+service --> Ctrl: outPutUpdateUserDTO
+Ctrl --> route: outPutUpdateUserJSON
+[<--route : Informs Operation Success
+
+
+@enduml

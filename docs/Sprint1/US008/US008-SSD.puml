@@ -1,19 +1,17 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title US005- "As a Poject Manager i want to edit some project information"
+title US008- As a Project Manager i want to edit some project information
 
 autoactivate on
 autonumber
 
-actor "User" as User
+actor "Project Manager" as User
 participant ":System" as System
 
 activate User
 
-User -> System: Searches a Project
-System -> System: edit Project
-deactivate
-System --> User: Informs of operation success
+User -> System: edit a project
+System --> User: Operation success. Show a modified project
 
 @enduml

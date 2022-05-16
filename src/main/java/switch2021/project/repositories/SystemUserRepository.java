@@ -3,6 +3,7 @@ package switch2021.project.repositories;
 import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.ISystemUserRepo;
 import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.valueObject.UserProfileID;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +64,26 @@ public class SystemUserRepository implements ISystemUserRepo {
             }
         }
         return result;
+    }
+
+    @Override
+    public List<SystemUser> findAllBySystemUserIdContains(String id) {
+        return null;
+    }
+
+    @Override
+    public List<SystemUser> findAllByNameContains(String name) {
+        return null;
+    }
+
+    @Override
+    public List<SystemUser> findAllByFunctionContains(String function) {
+        return null;
+    }
+
+    @Override
+    public List<SystemUser> findAllByUserProfileId(UserProfileID profile) {
+        return null;
     }
 /*
     ///// ----->>>>>>  Rever Método

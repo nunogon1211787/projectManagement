@@ -43,36 +43,36 @@ public class AssociateResourceControllerTest {
 
  */
 
-    @Test
-    @DisplayName("Test to get the Project List with Success")
-    void getProjectListSuccess() {
-        //Arrange
-        Company company = new Company();
-        AssociateResourceController controller = new AssociateResourceController(company);
-        ProjectStore projectStore = company.getProjectStore();
-        //Project1
-        Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        Project project1 = projectStore.createAndSaveProject("prototype4", "proj4Prototype", customer,
-                typo, sector, LocalDate.of(2021, 12, 1), 2, 4000);
-        project1.setEndDate(LocalDate.of(2021, 12, 31));
-        //Project2
-        Project project2 = projectStore.createAndSaveProject("prototype3", "proj3Prototype", customer,
-                typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
-        project1.setEndDate(LocalDate.of(2022, 1, 31));
-        //Project3
-        Project project3 = projectStore.createAndSaveProject("prototype2", "proj2Prototype", customer,
-                typo, sector, LocalDate.of(2021, 12, 1), 2, 4000);
-        project1.setEndDate(LocalDate.of(2021, 12, 31));
-        //Act
-        List<Project> projects = controller.getProjectList();
-        //Assert
-        assertEquals(3, projects.size());
-        assertTrue(projects.contains(project1));
-        assertTrue(projects.contains(project2));
-        assertTrue(projects.contains(project3));
-    }
+//    @Test
+//    @DisplayName("Test to get the Project List with Success")
+//    void getProjectListSuccess() {
+//        //Arrange
+//        Company company = new Company();
+//        AssociateResourceController controller = new AssociateResourceController(company);
+//        ProjectStore projectStore = company.getProjectStore();
+//        //Project1
+//        Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
+//        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+//        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+//        Project project1 = projectStore.createAndSaveProject("prototype4", "proj4Prototype", customer,
+//                typo, sector, LocalDate.of(2021, 12, 1), 2, 4000);
+//        project1.setEndDate(LocalDate.of(2021, 12, 31));
+//        //Project2
+//        Project project2 = projectStore.createAndSaveProject("prototype3", "proj3Prototype", customer,
+//                typo, sector, LocalDate.of(2022, 1, 1), 2, 4000);
+//        project1.setEndDate(LocalDate.of(2022, 1, 31));
+//        //Project3
+//        Project project3 = projectStore.createAndSaveProject("prototype2", "proj2Prototype", customer,
+//                typo, sector, LocalDate.of(2021, 12, 1), 2, 4000);
+//        project1.setEndDate(LocalDate.of(2021, 12, 31));
+//        //Act
+//        List<Project> projects = controller.getProjectList();
+//        //Assert
+//        assertEquals(3, projects.size());
+//        assertTrue(projects.contains(project1));
+//        assertTrue(projects.contains(project2));
+//        assertTrue(projects.contains(project3));
+//    }
 
 /*    @Test
     @DisplayName("Test to get the SystemUser List with Success")

@@ -11,9 +11,6 @@ participant ":System" as System
 
 activate user
 
-user -> System: Start looking for Personal Data
-System --> user: Shows System User Data
-
 user -> System: Update System User Data
 System --> user: Informs Operation Success
 

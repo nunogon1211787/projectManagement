@@ -1,7 +1,7 @@
 package switch2021.project.factoryInterface;
 
-import switch2021.project.model.valueObject.UserProfileId;
+import switch2021.project.model.valueObject.UserProfileID;
 
 public interface IUserProfileIDFactory {
-    UserProfileId createUserProfileID (String userProfileName);
+    UserProfileID createUserProfileID (String userProfileName);
 }

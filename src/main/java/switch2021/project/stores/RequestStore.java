@@ -1,24 +1,19 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.valueObject.Request;
-import switch2021.project.model.UserProfile.UserProfile;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 
 public class RequestStore {
 
-    /**
+    /*
      * Class Attributes
      **/
     //private List<Request> requestProfileList;
 
 
-    /**
+    /*
      * Constructor
      */
     /*public RequestStore() {

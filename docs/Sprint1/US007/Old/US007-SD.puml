@@ -1,0 +1,80 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title US007 - As Director, I want to associate a human resource (user) to a project
+
+autoactivate on
+autonumber
+
+actor "Director" as director
+participant ":associateResourceUI" as UI
+participant ":associateResourceController" as Ctrl
+participant ":Company" as company
+participant "projectStore:ProjectStore" as projectStore
+participant "systemUserStore:SystemUserStore" as systemUserStore
+participant "projectList : List<Project>" as projectList
+participant "project:Project" as project
+participant "projectTeam:ProjectTeam" as projectTeam
+participant "systemUserList : List<SystemUser>" as systemUserList
+participant "user:SystemUser" as user
+participant "resource : Resource" as resource
+
+
+activate director
+
+
+director -> UI: Asks to associate a human resource (user) to a project
+UI --> director: Search for the Data
+director -> UI: Asks for Project List
+UI -> Ctrl: getProjectList()
+Ctrl -> company: getProjectStore()
+company -> projectStore: getProjects
+projectStore --> company: projectList
+company --> Ctrl: projectList
+Ctrl --> UI: projectList
+UI --> director: Shows Project List
+director -> UI: Asks for System User List
+UI -> Ctrl: getSystemUserList()
+Ctrl -> company: getSystemUserStore()
+company -> systemUserStore: getSystemUsers()
+systemUserStore --> company: systemUserList
+company --> Ctrl: systemUserList
+Ctrl --> UI: systemUserList
+UI --> director: Shows System User List
+
+director -> UI: Types data (email, projectCode, startDate, endDate, costPerHour, percentageOfAllocation)
+UI -> Ctrl: associateResource (email, projectCode, startDate, endDate, costPerHour, percentageOfAllocation)
+Ctrl -> projectStore: getProjectByCode(code)
+loop  for each known project in projectList
+projectStore -> projectList: get(i)
+projectList --> projectStore: project
+projectStore -> project: hasCode(code)
+return true
+end
+return project
+Ctrl -> systemUserStore: getUserByEmail(email)
+loop  for each known system user in systemUserList
+systemUserStore -> systemUserList: get(i)
+systemUserList --> systemUserStore: user
+systemUserStore -> user: isYourEmail(email)
+return true
+end
+return user
+Ctrl -> projectStore: validateAllocation(user, percentageOfAllocation, startDate, endDate)
+projectStore --> Ctrl: true
+Ctrl -> project: createResource(user, startDate, endDate, costPerHour, percentageOfAllocation)
+project -> resource**: createResource(user, startDate, endDate, costPerHour, percentageOfAllocation)
+project --> Ctrl: resource
+Ctrl -> project: addResource(resource)
+project -> project: validateResource(resource)
+deactivate project
+project -> project: saveResource(resource)
+alt  resource = true
+project -> projectTeam: saveResource(resource)
+return true
+end
+deactivate project
+project --> Ctrl: true
+Ctrl --> UI: true
+UI --> director: Shows Information Success
+@enduml

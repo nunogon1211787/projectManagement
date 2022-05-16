@@ -1,14 +1,5 @@
 package switch2021.project.controller.old;
 
-import org.junit.jupiter.api.Test;
-import switch2021.project.model.*;
-import switch2021.project.model.UserProfile.UserProfile;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class SearchUsersControllerTest {
 
 /*    @Test
@@ -55,46 +46,46 @@ class SearchUsersControllerTest {
 
  */
 
-    @Test
-    void getProfileListSuccess(){
-        //Input
-        Company co = new Company();
-        SearchSystemUsersController test = new SearchSystemUsersController(co);
-        List<UserProfile> profileList = test.getUserProfileList();
-        //Expected
-        List<UserProfile> expectedList = co.getUserProfileStore().findAllUserProfiles();
-        UserProfile p1 = co.getUserProfileStore().findUserProfileByDescription("visitor");
-        UserProfile p2 = co.getUserProfileStore().findUserProfileByDescription("administrator");
-        UserProfile p3 = co.getUserProfileStore().findUserProfileByDescription("director");
-        UserProfile p4 = co.getUserProfileStore().findUserProfileByDescription("user");
-        List<UserProfile> nominalList = new ArrayList<>();
-        nominalList.add(p1);
-        nominalList.add(p2);
-        nominalList.add(p3);
-        nominalList.add(p4);
-        //Result
-        assertEquals(expectedList, profileList);
-        assertEquals(nominalList, profileList);
-    }
-
-    @Test
-    void getProfileListSuccessValidateInfo(){
-        //Input
-        Company co = new Company();
-        //Expected
-        UserProfile p1 = co.getUserProfileStore().findUserProfileByDescription("visitor");
-        UserProfile p2 = co.getUserProfileStore().findUserProfileByDescription("administrator");
-        UserProfile p3 = co.getUserProfileStore().findUserProfileByDescription("director");
-        UserProfile p4 = co.getUserProfileStore().findUserProfileByDescription("user");
-        List<UserProfile> list = new ArrayList<>();
-        list.add(p1);
-        list.add(p2);
-        list.add(p3);
-        list.add(p4);
-        //Result
-        assertEquals(p1.getUserProfileId().getUserProfileName(), list.get(0).getUserProfileId().getUserProfileName());
-        assertEquals(p2.getUserProfileId().getUserProfileName(), list.get(1).getUserProfileId().getUserProfileName());
-        assertEquals(p3.getUserProfileId().getUserProfileName(), list.get(2).getUserProfileId().getUserProfileName());
-        assertEquals(p4.getUserProfileId().getUserProfileName(), list.get(3).getUserProfileId().getUserProfileName());
-    }
+//    @Test
+//    void getProfileListSuccess(){
+//        //Input
+//        Company co = new Company();
+//        SearchSystemUsersController test = new SearchSystemUsersController(co);
+//        List<UserProfileReeng> profileList = test.getUserProfileList();
+//        //Expected
+//        List<UserProfileReeng> expectedList = co.getUserProfileStore().findAllUserProfiles();
+//        UserProfileReeng p1 = co.getUserProfileStore().findUserProfileByDescription("visitor");
+//        UserProfileReeng p2 = co.getUserProfileStore().findUserProfileByDescription("administrator");
+//        UserProfileReeng p3 = co.getUserProfileStore().findUserProfileByDescription("director");
+//        UserProfileReeng p4 = co.getUserProfileStore().findUserProfileByDescription("user");
+//        List<UserProfileReeng> nominalList = new ArrayList<>();
+//        nominalList.add(p1);
+//        nominalList.add(p2);
+//        nominalList.add(p3);
+//        nominalList.add(p4);
+//        //Result
+//        assertEquals(expectedList, profileList);
+//        assertEquals(nominalList, profileList);
+//    }
+//
+//    @Test
+//    void getProfileListSuccessValidateInfo(){
+//        //Input
+//        Company co = new Company();
+//        //Expected
+//        UserProfileReeng p1 = co.getUserProfileStore().findUserProfileByDescription("visitor");
+//        UserProfileReeng p2 = co.getUserProfileStore().findUserProfileByDescription("administrator");
+//        UserProfileReeng p3 = co.getUserProfileStore().findUserProfileByDescription("director");
+//        UserProfileReeng p4 = co.getUserProfileStore().findUserProfileByDescription("user");
+//        List<UserProfileReeng> list = new ArrayList<>();
+//        list.add(p1);
+//        list.add(p2);
+//        list.add(p3);
+//        list.add(p4);
+//        //Result
+//        assertEquals(p1.getUserProfileId().getUserProfileName(), list.get(0).getUserProfileId().getUserProfileName());
+//        assertEquals(p2.getUserProfileId().getUserProfileName(), list.get(1).getUserProfileId().getUserProfileName());
+//        assertEquals(p3.getUserProfileId().getUserProfileName(), list.get(2).getUserProfileId().getUserProfileName());
+//        assertEquals(p4.getUserProfileId().getUserProfileName(), list.get(3).getUserProfileId().getUserProfileName());
+//    }
 }

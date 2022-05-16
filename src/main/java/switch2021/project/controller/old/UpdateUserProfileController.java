@@ -2,9 +2,9 @@ package switch2021.project.controller.old;
 
 import switch2021.project.model.*;
 import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.repositories.SystemUserRepository;
 import switch2021.project.repositories.UserProfileRepository;
-import switch2021.project.model.UserProfile.UserProfile;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class UpdateUserProfileController {
     }
 
     public List<UserProfile> getUserProfileList() {
-        return userProfileStore.findAllUserProfiles();
+        return getUserProfileList();
     }
 /*
     public boolean updateProfile(SystemUser user, UserProfile oldProfile, UserProfile newProfile) {

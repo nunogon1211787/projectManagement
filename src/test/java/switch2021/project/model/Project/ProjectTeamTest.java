@@ -2,7 +2,7 @@ package switch2021.project.model.Project;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.factory.IResourceFactory;
+import switch2021.project.factory.ResourceFactory;
 import switch2021.project.model.Company;
 import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.Typology.Typology;
@@ -25,7 +25,7 @@ public class ProjectTeamTest {
     @Test
     public void projectTeamTest() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam test = new ProjectTeam(resFac);
         //Assert
         assertEquals(new ProjectTeam(resFac), test);
@@ -34,7 +34,7 @@ public class ProjectTeamTest {
     @Test
     public void projectTeamListTest() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam test = new ProjectTeam(resFac);
         //Assert
         assertEquals(new ProjectTeam(resFac).getProjectTeamList(), test.getProjectTeamList());
@@ -44,7 +44,7 @@ public class ProjectTeamTest {
     @DisplayName("Test with mock if the resource is returned")
     public void getResourceByEmailTestSuccess() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
 
         Resource manuelbras = mock(Resource.class);
@@ -63,7 +63,7 @@ public class ProjectTeamTest {
     @Test
     public void getResourceByEmailTestFail() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
 
         Resource manuelbras = mock(Resource.class);
@@ -82,7 +82,7 @@ public class ProjectTeamTest {
     @Test
     public void getResourceByEmailTestIsYourEmailFail() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
 
         Resource manuelbras = mock(Resource.class);
@@ -101,7 +101,7 @@ public class ProjectTeamTest {
     @Test
     public void getResourceByEmailIsCurrentFail() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
 
         Resource manuelbras = mock(Resource.class);
@@ -120,7 +120,7 @@ public class ProjectTeamTest {
     @Test
     public void getResourceByUserTestSuccess() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         SystemUser user = mock(SystemUser.class);
         Resource manuelbras = mock(Resource.class);
@@ -139,7 +139,7 @@ public class ProjectTeamTest {
     @Test
     public void getResourceByUserTestFail() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
 
         SystemUser user = mock(SystemUser.class);
@@ -159,7 +159,7 @@ public class ProjectTeamTest {
     @Test
     public void getResourceByRoleTestSuccess() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         ProjectRole role = mock(ProjectRole.class);
         Resource manuelbras = mock(Resource.class);
@@ -178,7 +178,7 @@ public class ProjectTeamTest {
     @Test
     public void getResourceByRoleTestFail() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         ProjectRole role = mock(ProjectRole.class);
         Resource manuelbras = mock(Resource.class);
@@ -197,7 +197,7 @@ public class ProjectTeamTest {
     @Test
     public void getResourceByRoleTestFailOneCondition() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         ProjectRole role = mock(ProjectRole.class);
         Resource manuelbras = mock(Resource.class);
@@ -257,7 +257,7 @@ public class ProjectTeamTest {
     @Test
     public void getCurrentResourcesNamesTestSuccess() {
         //Arrange
-        IResourceFactory resourceFactory = mock(IResourceFactory.class);
+        ResourceFactory resourceFactory = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resourceFactory);
 
         SystemUser user = mock(SystemUser.class);
@@ -295,7 +295,7 @@ public class ProjectTeamTest {
     @Test
     public void getCurrentResourcesNamesTestFail() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
 
         SystemUser user = mock(SystemUser.class);
@@ -333,7 +333,7 @@ public class ProjectTeamTest {
     @Test
     public void saveResourceTestSuccess() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
 
         Resource chico = mock(Resource.class);
@@ -347,7 +347,7 @@ public class ProjectTeamTest {
         //Assert
         assertThrows(NullPointerException.class, () -> {
             //Arrange
-            IResourceFactory resFac = mock(IResourceFactory.class);
+            ResourceFactory resFac = mock(ResourceFactory.class);
             ProjectTeam projectTeam = new ProjectTeam(resFac);
             //Act
             projectTeam.saveResource(null);
@@ -477,7 +477,7 @@ public class ProjectTeamTest {
     @Test
     public void hasResourceTestSuccess() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         Resource chico = mock(Resource.class);
         when(chico.isYourEmail("chico@beaver.com")).thenReturn(true);
@@ -492,7 +492,7 @@ public class ProjectTeamTest {
     @Test
     public void hasResourceTestFail() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         Resource chico = mock(Resource.class);
         when(chico.isYourEmail("chico@beaver.com")).thenReturn(false);
@@ -507,7 +507,7 @@ public class ProjectTeamTest {
     @Test
     public void hasCurrentResourceTestSuccess() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         Resource chico = mock(Resource.class);
         when(chico.isYourEmail("chico@beaver.com")).thenReturn(true);
@@ -523,7 +523,7 @@ public class ProjectTeamTest {
     @Test
     public void hasCurrentResourceTestFail() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         Resource chico = mock(Resource.class);
         when(chico.isYourEmail("chico@beaver.com")).thenReturn(false);
@@ -537,21 +537,21 @@ public class ProjectTeamTest {
     }
 
 
-    @Test
-    public void hasCurrentResourceFailResourceNotCurrent() {
-        //Arrange
-        Company company = new Company();
-        Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("isep");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-        //Project 1
-        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
-                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-        proj1.setEndDate(LocalDate.now().plusYears(1));
-
-        //Assert
-        assertFalse(proj1.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
-    }
+//    @Test
+//    public void hasCurrentResourceFailResourceNotCurrent() {
+//        //Arrange
+//        Company company = new Company();
+//        Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
+//        Customer customer = company.getCustomerStore().getCustomerByName("isep");
+//        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+//        //Project 1
+//        Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
+//                typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
+//        proj1.setEndDate(LocalDate.now().plusYears(1));
+//
+//        //Assert
+//        assertFalse(proj1.getProjectTeam().hasCurrentResource(("manueloliveira@beaver.com")));
+//    }
 
 /*    @Test
     @DisplayName("Assign New Role for a resource")
@@ -633,7 +633,7 @@ public class ProjectTeamTest {
     @DisplayName("Test to Validate Project Team - Success To Get PO and SM")
     public void validateProjectTeamSuccess() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         LocalDate startDateMb = LocalDate.of(2021, 11, 1);
 
@@ -656,7 +656,7 @@ public class ProjectTeamTest {
     @DisplayName("Test to Validate Project Team - The team does not have a PO and a SM")
     public void validateProjectTeamGlobalFail() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         LocalDate startDateMb = LocalDate.of(2021, 11, 1);
 
@@ -679,7 +679,7 @@ public class ProjectTeamTest {
     @DisplayName("Test to Validate Project Team - The Team does not have a PO but has a Scrum Master")
     public void validateProjectTeamPOFail() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         LocalDate startDateMb = LocalDate.of(2021, 11, 1);
 
@@ -703,7 +703,7 @@ public class ProjectTeamTest {
     @DisplayName("Test to Validate Project Team - The Team does not have a SM but has a Product Owner")
     public void validateProjectTeamSMFail() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         LocalDate startDateMb = LocalDate.of(2021, 11, 1);
 
@@ -726,7 +726,7 @@ public class ProjectTeamTest {
     @DisplayName("Check if role exist and is current - null and team Member")
     public void checkIfTheRoleExistAndIsCurrentFalseNullandTeamMember() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         LocalDate date = LocalDate.now().plusDays(3);
         LocalDate endDate = LocalDate.now();
@@ -751,7 +751,7 @@ public class ProjectTeamTest {
     @DisplayName("Check if role exist and is current - Product Owner")
     public void checkIfTheRoleExistAndIsCurrentTrueProductOwner() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         LocalDate date = LocalDate.now();
         LocalDate endDate = LocalDate.now().plusDays(3);
@@ -776,7 +776,7 @@ public class ProjectTeamTest {
     @DisplayName("Check if role exist and is current - Product Owner - startDate before - fail")
     public void checkIfTheRoleExistAndIsCurrentTrueProductOwnerFail() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
         LocalDate date = LocalDate.now().plusDays(3);
         LocalDate endDate = LocalDate.now();
@@ -800,7 +800,7 @@ public class ProjectTeamTest {
     @Test
     void overrideEqualsTestTrue() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam pt = new ProjectTeam(resFac);
         ProjectTeam expected = new ProjectTeam(resFac);
         //Assert
@@ -810,7 +810,7 @@ public class ProjectTeamTest {
     @Test
     void overrideEqualsTestObjectTrue() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam pt = new ProjectTeam(resFac);
         ProjectTeam expected = new ProjectTeam(resFac);
         //Assert
@@ -820,7 +820,7 @@ public class ProjectTeamTest {
     @Test
     void overrideEqualsTestFalseNull() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam pt = new ProjectTeam(resFac);
         ProjectTeam expected = null;
         //Assert
@@ -830,7 +830,7 @@ public class ProjectTeamTest {
     @Test
     void overrideEqualsTestFalseInstanceOf() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam pt = new ProjectTeam(resFac);
         Description expected = new Description("s");
         //Assert
@@ -870,7 +870,7 @@ public class ProjectTeamTest {
     @Test
     void overrideHashCodeTestTrue() {
         //Arrange
-        IResourceFactory resFac = mock(IResourceFactory.class);
+        ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam pt = new ProjectTeam(resFac);
         ProjectTeam expected = new ProjectTeam(resFac);
         //Assert
@@ -943,7 +943,7 @@ public class ProjectTeamTest {
         Resource res = mock( Resource.class );
         SystemUser user = mock(SystemUser.class);
 
-        IResourceFactory resFac =  mock( IResourceFactory.class );
+        ResourceFactory resFac =  mock( ResourceFactory.class );
         when(resFac.createResource(joana3, startDate, endDate, costPerHour, percAlloc)).thenReturn( res );
 
         ProjectTeam projTeam = new ProjectTeam( resFac );
@@ -963,7 +963,7 @@ public class ProjectTeamTest {
 
         //Act
         SystemUser user = mock(SystemUser.class);
-        IResourceFactory resFac =  new IResourceFactory();
+        ResourceFactory resFac =  new ResourceFactory();
         Resource res = resFac.createResource(user, startDate, endDate, costPerHour, percAlloc);
 
         //Assert

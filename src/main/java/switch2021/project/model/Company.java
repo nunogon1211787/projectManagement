@@ -5,8 +5,9 @@ import switch2021.project.factory.*;
 import switch2021.project.repositories.UserStoryRepository;
 import switch2021.project.repositories.ProjectStore;
 import switch2021.project.repositories.SystemUserRepository;
-import switch2021.project.repositories.TypologyRepository;
+//import switch2021.project.repositories.TypologyRepository;
 import switch2021.project.repositories.UserProfileRepository;
+import switch2021.project.repositories.*;
 import switch2021.project.stores.*;
 
 @Getter
@@ -20,7 +21,7 @@ public class Company {
     private final ProjectStore projectStore;
     private final UserProfileRepository userProfileStore;
     private final ProjectRoleStore projectRoleStore;
-    private final TypologyRepository typologyRepository;
+//    private final TypologyRepository typologyRepository;
     private final CustomerStore customerStore;
     private final BusinessSectorStore businessSectorStore;
     private final UserStoryStatusStore userStoryStatusStore;
@@ -42,7 +43,7 @@ public class Company {
         this.userProfileStore = new UserProfileRepository();
         //this.projectRoleFactory = new ProjectRoleFactory();
         this.projectRoleStore = new ProjectRoleStore(new ProjectRoleFactory());
-        this.typologyRepository = new TypologyRepository();
+//        this.typologyRepository = new TypologyRepository();
         this.customerStore = new CustomerStore();
         this.businessSectorStore = new BusinessSectorStore(new BusinessSectorFactory());
         this.userStoryStatusStore = new UserStoryStatusStore();
@@ -50,7 +51,7 @@ public class Company {
         //this.userStoryFactory = new UserStoryFactory();
         this.userStoryStore = new UserStoryRepository();
 
-        this.userProfileStore.populateDefault();
+        //this.userProfileStore.populateDefault();
         this.projectRoleStore.populateDefault();
 //        this.typologyRepository.populateDefault();
         this.userStoryStatusStore.populateDefault();

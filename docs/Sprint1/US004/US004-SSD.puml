@@ -12,8 +12,6 @@ participant ":System" as System
 activate User
 
 User -> System: wants to search for users by name, email, profile or function
-System->System: get the user list founded
-deactivate System
 System-->User: Show the list of user founded by typed/chosen parameters
 
 @enduml
