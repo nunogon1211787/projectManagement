@@ -8,7 +8,7 @@ title Domain Model
 
 
 'Project Aggregate:--------------------------------------------------
-class UserProfile #Yellow{
+class Typology #Yellow{
 - description
 }
 

@@ -63,7 +63,7 @@ package "Domain" <<Folder>> #burlywood{
 package "Aggregate" <<Folder>>{
 class "SystemUser" as systemuser << Root >> {
 - systemUserID : SystemUserID
-- userName : UserName
+- userName : Name
 - photo : Photo
 - password : Password
 - function : Function
