@@ -10,10 +10,10 @@ import switch2021.project.dto.NewUserInfoDTO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class RegisterUserControllerTest {
+public class SystemUserControllerTest {
 
     @Autowired
-    RegisterUserController registerUserController;
+    SystemUserController systemUserController;
 
     /*@Test //Integration Test
     @DisplayName(".registerUser(NewUserInfoDTO infoDTO)")
@@ -47,7 +47,7 @@ public class RegisterUserControllerTest {
         dto.photo = "photo.png";
 
         //Act
-        ResponseEntity<Object> responseEntity = registerUserController.registerUser(dto);
+        ResponseEntity<Object> responseEntity = systemUserController.registerUser(dto);
         //Assert
         assertEquals(400, responseEntity.getStatusCodeValue());
     }

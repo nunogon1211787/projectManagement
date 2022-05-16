@@ -1,6 +1,5 @@
 package switch2021.project.controller.old;
 
-import switch2021.project.dto.old.UserStoryStatusDTO;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Sprint.Sprint;
