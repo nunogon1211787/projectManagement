@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 class ShowAllProjectsControllerTest {
 
     @MockBean ShowAllProjectsService srv;
-    @InjectMocks ShowAllProjectsController ctrl;
+    @InjectMocks ProjectController ctrl;
 
     @BeforeEach
     void TestConfiguration(){

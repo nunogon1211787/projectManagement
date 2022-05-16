@@ -10,10 +10,10 @@ import switch2021.project.dto.NewUserInfoDTO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class RegisterUserControllerTest {
+public class UserControllerTest {
 
     @Autowired
-    RegisterUserController registerUserController;
+    UserController registerUserController;
 
     /*@Test //Integration Test
     @DisplayName(".registerUser(NewUserInfoDTO infoDTO)")

@@ -6,75 +6,76 @@ title US007 - As Director, I want to associate a human resource (user) to a proj
 autoactivate on
 autonumber
 
-actor "Director" as director
-participant ":associateResourceUI" as UI
-participant ":associateResourceController" as Ctrl
-participant ":Company" as company
-participant "projectStore:ProjectStore" as projectStore
-participant "systemUserStore:SystemUserStore" as systemUserStore
-participant "projectList : List<Project>" as projectList
+participant ":CreateResourceInAProjectRoute" as Route
+participant "inDto :CreateResourceDto" as dto
+participant ":ResourceController" as Ctrl
+participant "srv:CreateResourceInAProjectService" as srv
+participant "sysUsRepo:ISystemUserRepo" as systemUserStore
+participant "projRepo:IProjectRepo" as projectStore
+participant "resFac:IResourceFactory" as resourceFactory
+participant "resRepo:IResourceRepo" as resourceStore
+participant "res : Resource" as resource
+participant "projectTeam : List<Resources>" as projectTeam
+participant "userResources : List<Resources>" as resourceProjects
 participant "project:Project" as project
-participant "projectTeam:ProjectTeam" as projectTeam
-participant "systemUserList : List<SystemUser>" as systemUserList
-participant "user:SystemUser" as user
-participant "resource : Resource" as resource
+participant "dsrv:DomainServiceResourceValidation" as domainService
+participant "map:ResourceMapper" as map
+participant "outDto:OutputResourceDto" as outDto
+participant "exception :Exception" as exc
+participant "responseJson:ResponseEntity" as json
 
-
-activate director
-
-
-director -> UI: Asks to associate a human resource (user) to a project
-UI --> director: Search for the Data
-director -> UI: Asks for Project List
-UI -> Ctrl: getProjectList()
-Ctrl -> company: getProjectStore()
-company -> projectStore: getProjects
-projectStore --> company: projectList
-company --> Ctrl: projectList
-Ctrl --> UI: projectList
-UI --> director: Shows Project List
-director -> UI: Asks for System User List
-UI -> Ctrl: getSystemUserList()
-Ctrl -> company: getSystemUserStore()
-company -> systemUserStore: getSystemUsers()
-systemUserStore --> company: systemUserList
-company --> Ctrl: systemUserList
-Ctrl --> UI: systemUserList
-UI --> director: Shows System User List
-
-director -> UI: Types data (email, projectCode, startDate, endDate, costPerHour, percentageOfAllocation)
-UI -> Ctrl: associateResource (email, projectCode, startDate, endDate, costPerHour, percentageOfAllocation)
-Ctrl -> projectStore: getProjectByCode(code)
-loop  for each known project in projectList
-projectStore -> projectList: get(i)
-projectList --> projectStore: project
-projectStore -> project: hasCode(code)
-return true
+[o-> Route:  POST/resources(json)
+Route -> Ctrl: associateResource (inDto)
+note right Route: Json object was deserialize to a CreateResourceDto object
+Ctrl -> srv: createAndSaveResource (inDto)
+note over srv : The creation of these ids are hidden to simplify the diagram.
+srv -> systemUserStore: findUserResult : existsBySystemUserId(systemUserId)
+deactivate systemUserStore
+srv -> projectStore: findProjectResult : findByProjectId(projectId)
+deactivate projectStore
+alt if user and project exist
+srv -> resourceFactory: createResource(inDto)
+note over resourceFactory : All parameters (value objects) are instantiated in their own factory.
+resourceFactory -> resource**: createResource(resourceId, endDate, costPerHour, allocation)
+opt if the request has a role
+note over resourceFactory : Chose a role to creation of the resource are optional
+resourceFactory -> resource :defineRole(role)
+deactivate resource
 end
-return project
-Ctrl -> systemUserStore: getUserByEmail(email)
-loop  for each known system user in systemUserList
-systemUserStore -> systemUserList: get(i)
-systemUserList --> systemUserStore: user
-systemUserStore -> user: isYourEmail(email)
-return true
+resourceFactory --> srv: res
+srv -> resourceStore: findAllByProjectId(projectId)
+resourceStore-> projectTeam**: create()
+resourceStore --> srv: projectTeam
+srv -> resourceStore: findAllBySystemUserId(systemUserId)
+resourceStore -> resourceProjects**: create()
+resourceStore --> srv: userResources
+srv -> domainService: validateResourceCreation(project, res, projectTeamList, resourceProjectsList)
+domainService -> project: isInsideProjectPeriod(date)
+deactivate
+domainService -> domainService: validateAllocation(resourceProjectsList, res)
+deactivate
+domainService -> domainService: validateProjectRole(res, projectTeamList)
+deactivate
+domainService --> srv: validateNewResourceResult
+alt if the criteria of the allocation a resource in a project are met
+srv -> resourceStore: save(res)
+resourceStore --> srv: saveResult
+alt if the new resource was successfully saved
+srv -> map : model2Dto(res)
+map --> outDto** : create()
+map --> srv : outDto
+else new resource was not saved
+srv --> exc** : create(errorMessage)
 end
-return user
-Ctrl -> projectStore: validateAllocation(user, percentageOfAllocation, startDate, endDate)
-projectStore --> Ctrl: true
-Ctrl -> project: createResource(user, startDate, endDate, costPerHour, percentageOfAllocation)
-project -> resource**: createResource(user, startDate, endDate, costPerHour, percentageOfAllocation)
-project --> Ctrl: resource
-Ctrl -> project: addResource(resource)
-project -> project: validateResource(resource)
-deactivate project
-project -> project: saveResource(resource)
-alt  resource = true
-project -> projectTeam: saveResource(resource)
-return true
+else new resource not be valid
+srv --> exc** : create(errorMessage)
 end
-deactivate project
-project --> Ctrl: true
-Ctrl --> UI: true
-UI --> director: Shows Information Success
+else user or project does not exist
+srv --> exc** : create(errorMessage)
+end
+srv --> Ctrl: outDto
+Ctrl --> json**: create(outDto)
+Ctrl --> Route: responseJson
+[<--Route: response
+
 @enduml

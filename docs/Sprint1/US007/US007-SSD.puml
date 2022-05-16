@@ -6,20 +6,13 @@ title US007 - As Director, I want to associate a human resource (user) to a proj
 autoactivate on
 autonumber
 
-actor "Authenticated User" as user
+actor "Director" as user
 participant ":System" as System
 
 activate user
 
 user -> System: Asks to associate a human resource (user) to a project
-System --> user: Search for the Data
-
-user -> System: Asks for Project List
-System --> user: Shows Project List
-
-user -> System: Asks for System User List
-System --> user: Shows System User List
-
-user -> System: Types data (email, projectCode, startDate, endDate, costPerHour, percentageOfAllocation)
+System -> System : create a human resource
 System --> user: Shows Information Success
+
 @enduml

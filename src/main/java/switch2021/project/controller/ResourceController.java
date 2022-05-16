@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/resources")
-public class ResourcesController {
+public class ResourceController {
 
     /**
      * Attributes
