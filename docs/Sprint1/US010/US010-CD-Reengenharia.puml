@@ -14,14 +14,14 @@ class "UpdatePersonalDataRoute" as route << Component >>
 
 package "Interface Adapter" <<Folder>> #lightgreen {
 package "Controllers" <<Folder>>{
-class "SystemUserController" as ctrl << Component >> {
+class "SystemUserController" as controller << Component >> {
 +updatePersonalData(json)
 }
 }
 package "Repositories" <<Folder>>{
 class "SystemUserRepository" as repository << Repository >> {
 -systemUser : List<SystemUser>
-+ findSystemUserByEmail(email)
++ findSystemUserByID(email)
 }
 }
 }
@@ -33,7 +33,7 @@ class "UpdatePersonalDataService" as service << Component >> {
 }
 package "Repositories Interface" <<Folder>>{
 interface "ISystemUserRepository" as interfaceSystemUserRepo << Interface >>{
-+ findSystemUserByEmail(email)
++ findSystemUserByID(email)
 }
 }
 }
@@ -45,42 +45,40 @@ class "UpdateUserDTO" as dto << Component >> {
 - function : Function
 - photo : Photo
 }
-class "OutPutUpdateUserDTO" as outDTO << Component >> {
-- sprintID : SprintID
-- projectID : ProjectID
-- name : Description
+class "OutPutUpdateUserDTO" as outputDTO << Component >> {
+- userName : Name
+- function : Function
+- photo : Photo
 }
 }
 package "DTO" <<Folder>> {
-package "SprintMapper" <<Folder>>{
-class "SprintMapper" as mapper << Component >> {
-+ toDto(newSprint)
+package "SystemUserMapper" <<Folder>>{
+class "SystemUserMapper" as mapper << Component >> {
++ modelToDto(systemUser)
 }
 }
 }
 
-package "Entity/Core/Domain" <<Folder>> #burlywood{
+package "Domain" <<Folder>> #burlywood{
 package "Aggregate" <<Folder>>{
-class "Sprint" as sprint << Root >> {
-- sprintID : SprintID
-- projectID : ProjectID
-- name : Description
-+ Sprint(sprintID)
-}
-}
-package "Factory" <<Folder>>{
-class "SprintFactory" as sprintF << Factory >> {
-+createSprint(newSprintDTO)
-}
-}
-package "Value Object" <<Folder>>{
-class "SprintID" as sprintID << Value Object >> {
--projectID : ProjectID
--sprintName : Description
-+sprintID(projectID, sprintName)
+class "SystemUser" as systemuser << Root >> {
+- systemUserID : SystemUserID
+- userName : UserName
+- photo : Photo
+- password : Password
+- function : Function
+- isActive : false
++ SystemUser(systemUserID, username, photo, password, \n passwordConfirmation, function, userProfileID)
 }
 }
 
-
+route ..> controller
+controller ..> service
+service .right.> dto
+service ..|> interfaceSystemUserRepo
+repository ..> interfaceSystemUserRepo
+service ..> systemuser
+service .down.> mapper
+mapper ..> outputDTO
 
 @enduml

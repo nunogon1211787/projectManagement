@@ -13,7 +13,7 @@ participant ":UpdateUserDTO" as dto
 participant "systemUser : ISystemUserRepo" as iRepo
 participant ":SystemUser" as systemUser
 participant ":SystemUserMapper" as mapper
-participant ":OutPutUpdateUserDTO" as outPutDTO
+participant "outPutUpdateUserDTO : OutPutUpdateUserDTO" as outPutDTO
 
 [o-> route: PUT/{ID}/edit(json)
 route -> Ctrl: updatePersonalData(json)
@@ -29,24 +29,14 @@ service -> dto: function = getFunction()
 deactivate
 service -> dto: photo = getPhoto()
 deactivate
-service -> iRepo: findSystemUserByEmail(email)
-loop for each known System User in System User Repository
-iRepo -> systemUser: isYourEmail(email)
-systemUser --> iRepo: true
-end
-iRepo --> service: systemUser
-service -> systemUser: updatePersonalData(username, function, photo)
 note right
-NOTA!!! Nestes métodos assign poderiam ser os set's mas com as suas próprias validações.
+All the following objects were created with factories, but the process is hidden in SD to simplify
 end note
-systemUser -> systemUser: assignUserName()
-deactivate
-systemUser -> systemUser: assignFunction()
-deactivate
-systemUser -> systemUser: assignPhoto()
-deactivate
+service -> iRepo: findSystemUserByID(email)
+iRepo --> service: systemUser
+service -> systemUser: editPersonalData (username, function, photo)
 systemUser --> service: true
-service -> mapper: modelToDTO(user)
+service -> mapper: modelToDTO(systemUser)
 mapper -> outPutDTO**: create()
 mapper --> service: outPutUpdateUserDTO
 service --> Ctrl: outPutUpdateUserDTO
