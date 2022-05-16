@@ -22,7 +22,6 @@ participant "dsrv:DomainServiceResourceValidation" as domainService
 participant "map:ResourceMapper" as map
 participant "outDto:OutputResourceDto" as outDto
 participant "exception :Exception" as exc
-participant "finalResult :Result" as result
 participant "responseJson:ResponseEntity" as json
 
 [o-> Route:  POST/resources(json)
@@ -65,7 +64,6 @@ alt if the new resource was successfully saved
 srv -> map : model2Dto(res)
 map --> outDto** : create()
 map --> srv : outDto
-srv --> result** : create(outDto)
 else new resource was not saved
 srv --> exc** : create(errorMessage)
 end
@@ -75,8 +73,8 @@ end
 else user or project does not exist
 srv --> exc** : create(errorMessage)
 end
-srv --> Ctrl: finalResult
-Ctrl --> json**: create(finalResult)
+srv --> Ctrl: outDto
+Ctrl --> json**: create(outDto)
 Ctrl --> Route: responseJson
 [<--Route: response
 

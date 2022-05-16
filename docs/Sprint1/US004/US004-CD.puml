@@ -84,7 +84,6 @@ package "SystemUser" <<Rectangle>>{
 entity "SystemUser" as user << Root >> {
 -userName : Name
 -userFunction : Function
--userState : Boolean
 }
 }
 package "UserProfile" <<Rectangle>>{
@@ -106,7 +105,7 @@ class "SystemUserMapper" as map <<Component>> {
 + model2Dto()
 }
 class "SearchUserDto" as dataDto <<Component>>
-class "UserDto" as dto <<Component>>
+class "OutputUserDto" as dto <<Component>>
 }
 class "ResponseEntity" as json <<Component>>
 }

@@ -6,7 +6,7 @@ title US005- "As a director i want to create/register a new project"
 autoactivate on
 autonumber
 
-actor "User" as User
+actor "Director" as User
 participant ":System" as System
 
 activate User
