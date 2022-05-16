@@ -6,15 +6,14 @@ title US010 - As Authenticated User, i want to update its own data (e.g. photo, 
 autoactivate on
 autonumber
 
-actor "Authenticated User" as user
+actor "Authenticated User" as User
 participant ":System" as System
 
-activate user
+activate User
 
-user -> System: Start looking for Personal Data
-System --> user: Shows System User Data
-
-user -> System: Update System User Data
-System --> user: Informs Operation Success
+User -> System: wants to update its own information
+System->System: update the user
+deactivate System
+System-->User: Show to Authenticated User its own information modified
 
 @enduml

@@ -1,102 +1,125 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-'hide circle
+title US004 - As Administrator, I want to search for users
+
 skinparam classAttributeIconSize 0
 
-title US007 - As Director, I want to associate a human resource (user) to a project
+package "System" <<Rectangle>> {
 
-class AssociateResourceUI {
-}
-
-class AssociateResourceController {
-    +getProjectList()
-    +getSystemUserList()
-    +associateResource(email, projectCode, startDate, endDate, costPerHour, percentageOfAllocation)
-}
-
-class Company {
-    +getProjectStore()
-    +getSystemUserStore()
-}
-
-class ProjectStore {
-+getProjects()
-+getProjectByCode(code)
-+validateAllocation(user, percentageOfAllocation, startDate, endDate)
-}
-
-class Project {
-code : String
-projectName : String
-description : String
-customer : Customer
-typology : Typology
-projectStatus : ProjectStatus
-productBacklog : ProductBacklog
-businessSector : BusinessSector
-projectTeam : ProjectTeam
-startDate : LocalDate
-endDate : LocalDate
-numberOfSprints : int
-budget : double
-sprintDuration : int
-+hasCode(code)
-+createResource(user, startDate, endDate, costPerHour, percentageOfAllocation)
-+addResource(resource)
--validateResource(resource)
--saveResource(resource)
-}
-
-class ProjectTeam {
--addResource(resource)
-}
-
-class SystemUserStore {
-+getSystemUsers()
-+getUserByEmail(email)
-}
-
-class SystemUser {
-username : String
-email : String
-photo : String
-password : String
-passwordConfirmation : String
-function : String
-activateUser : boolean = False
-+SystemUser(username, email, photo, password, passwordConfirmation, function, profile)
-+isYourEmail(email)
+'-------------------INFRASTRUCTURE-----------------------'
+package "Infrastructure" <<Rectangle>> #lightblue  {
+class "CreateResourceInAProjectRoute" as route << Component >>
 }
 
 
-class Resource {
-user : SystemUser
-role : ProjectRole
-startDate : LocalDate
-endDate : LocalDate
-costPerHour : double
-percentageOfAllocation : double
-+getUser()
-+getPercentageOfAllocation()
-+checkAllocationPeriod(startDate, endDate)
+
+
+'-------------------INTERFACE ADAPTERS-------------------'
+package "Interface Adapters" <<Rectangle>> #lightgreen {
+package "Controllers" <<rectangle>>{
+class "ResourceController" as ctrl << Component >> {
+}
 }
 
-AssociateResourceUI ..> AssociateResourceController
+package "Repositories" <<rectangle>>{
+class "ResourceStore" as resStore << Repository >> {
+}
+class "SystemUserStore" as userStore << Repository >> {
+}
+class "ProjectStore" as projStore << Repository >> {
+}
+}
+}
 
-AssociateResourceController ..> Company
-AssociateResourceController ..> ProjectStore
-AssociateResourceController ..> SystemUserStore
-SystemUserStore ..> SystemUser
-ProjectStore ..> Project
-ProjectStore ..> Resource
-Project ..> ProjectTeam
 
 
-Company "1" o-- "1" SystemUserStore: has
-SystemUserStore "1" *-- "0..*" SystemUser: has
-Project "1" *-- "1" ProjectTeam: has
-ProjectTeam "1" *-- "0..*" Resource: has
+'-------------------APPLICATION SERVICE------------------'
+package "Application Service" <<Rectangle>> #lightpink{
+package "App Services" <<rectangle>>{
+class "CreateResourceInAProjectService" as srv << Service >> {
+}
+}
+package "IRepositories" <<rectangle>>{
+interface "IResourceRepo" as resRepo{
+}
+interface "ISystemUserRepo" as userRepo{
+}
+interface "IProjectRepo" as projRepo{
+}
+}
+}
+
+
+
+
+'-------------------DOMAIN-------------------------------'
+package "Domain" <<Rectangle>> #burlywood{
+package "Domain Service" <<Rectangle>>{
+entity "Service" as dsrv << Root >>
+}
+package "Aggregates" <<rectangle>>{
+package "Resource" <<Rectangle>>{
+entity "Resource" as res << Root >>
+}
+package "SystemUser" <<Rectangle>>{
+entity "SystemUser" as user << Root >>
+}
+package "Project" <<Rectangle>>{
+entity "Project" as project << Root >>
+}
+}
+package "Value Object" <<rectangle>>{
+class "ResourceId" as resId << Value Object >>
+class "SystemUserId" as userId << Value Object >>
+class "ProjectId" as projId << Value Object >>
+}
+}
+
+
+'-------------------DTO----------------------------------'
+package "DTO" <<rectangle>>{
+class "ResourceMapper" as map <<Component>> {
++ model2Dto()
+}
+class "createResourceDto" as inDto <<Component>>
+class "OutputResourceDto" as outDto <<Component>>
+}
+
+
+
+'-------------------OTHERS-------------------------------'
+class "ResponseEntity" as json <<Component>>
+}
+
+
+
+'-------------------RELATIONSHIPS------------------------'
+route ..> ctrl
+ctrl .d..> srv
+srv .d..> dsrv
+
+srv .r.> userRepo
+srv .r.> projRepo
+srv .r.> resRepo
+
+userRepo <|.u. userStore
+projRepo <|.u. projStore
+resRepo <|.u. resStore
+
+srv .l.> map
+map ..> outDto
+ctrl ..> inDto
+srv ..> inDto
+
+ctrl .l.> json
+
+project *--> projId
+user *--> userId
+res *--> resId
+resId o--> projId
+resId o--> userId
+
 
 
 @enduml

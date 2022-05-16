@@ -6,67 +6,78 @@ title US007 - As Director, I want to associate a human resource (user) to a proj
 autoactivate on
 autonumber
 
-participant ":createResourceInAProjectRoute" as Route
-participant ":createResourceInAProjectController" as Ctrl
-participant "createResourceService:createResourceInAProjectService" as resourceService
-participant "sysUsRepo:ISystemUserRepository" as systemUserStore
-participant "projRepo:IProjectRepository" as projectStore
+participant ":CreateResourceInAProjectRoute" as Route
+participant "inDto :CreateResourceDto" as dto
+participant ":ResourceController" as Ctrl
+participant "srv:CreateResourceInAProjectService" as srv
+participant "sysUsRepo:ISystemUserRepo" as systemUserStore
+participant "projRepo:IProjectRepo" as projectStore
 participant "resFac:IResourceFactory" as resourceFactory
-participant "resRepo:IResourceRepository" as resourceStore
-'participant "resRepo:IResourceRepository" as resourceStore
+participant "resRepo:IResourceRepo" as resourceStore
 participant "res : Resource" as resource
-participant "projectTeamList : List<Resources>" as projectTeam
-participant "resourceProjectsList : List<Resources>" as resourceProjects
+participant "projectTeam : List<Resources>" as projectTeam
+participant "userResources : List<Resources>" as resourceProjects
 participant "project:Project" as project
-participant "domainServiceResourceVal:DomainServiceResourceValidation" as domainService
+participant "dsrv:DomainServiceResourceValidation" as domainService
+participant "map:ResourceMapper" as map
+participant "outDto:OutputResourceDto" as outDto
+participant "exception :Exception" as exc
+participant "finalResult :Result" as result
+participant "responseJson:ResponseEntity" as json
 
 [o-> Route:  POST/resources(json)
-Route -> Ctrl: associateResource (json)
-note right
-Change from json to dto hidden to simplify diagram
-end note
-Ctrl -> resourceService: createAndSaveResource (newResDto)
-resourceService -> systemUserStore: existsById(newResDto.systemUserId)
-systemUserStore --> resourceService: true
-resourceService -> projectStore: existsById(newResDto.projectId)
-projectStore --> resourceService: true
-resourceService -> resourceFactory: createResource(newResDto)
-'resourceFactory -> resource**: createResource(projectId, systemUserId, startDate)
-resourceFactory -> resource**: createResource()
-resourceFactory -> resourceFactory: setProjectRole(projectRole) explicitar a busca da lista?
-deactivate
-resourceFactory -> resourceFactory: setEndDate(endDate)
-deactivate
-resourceFactory -> resourceFactory: setPercentageOfAllocation(percentageOfAllocation)
-deactivate
-resourceFactory -> resourceFactory: setCostPerHour(costPerHour)
-deactivate
-resourceFactory --> resourceService: res
-resourceService -> resourceStore: findAllByProjectId(projectId)
+Route -> Ctrl: associateResource (inDto)
+note right Route: Json object was deserialize to a CreateResourceDto object
+Ctrl -> srv: createAndSaveResource (inDto)
+note over srv : The creation of these ids are hidden to simplify the diagram.
+srv -> systemUserStore: findUserResult : existsBySystemUserId(systemUserId)
+deactivate systemUserStore
+srv -> projectStore: findProjectResult : findByProjectId(projectId)
+deactivate projectStore
+alt if user and project exist
+srv -> resourceFactory: createResource(inDto)
+note over resourceFactory : All parameters (value objects) are instantiated in their own factory.
+resourceFactory -> resource**: createResource(resourceId, endDate, costPerHour, allocation)
+opt if the request has a role
+note over resourceFactory : Chose a role to creation of the resource are optional
+resourceFactory -> resource :defineRole(role)
+deactivate resource
+end
+resourceFactory --> srv: res
+srv -> resourceStore: findAllByProjectId(projectId)
 resourceStore-> projectTeam**: create()
-resourceStore --> resourceService: projectTeamList
-resourceService -> resourceStore: findAllBySystemUserId(systemUserId)
+resourceStore --> srv: projectTeam
+srv -> resourceStore: findAllBySystemUserId(systemUserId)
 resourceStore -> resourceProjects**: create()
-resourceStore --> resourceService: resourceProjectsList
-resourceService -> projectStore: findProjectById(newResDto.projectId)
-projectStore --> resourceService: project
-resourceService -> project: isInsideProjectPeriod(res)ver metodo resource para aplicar 2x em project??
-project --> resourceService: true
-resourceService -> domainService: validate(res, projectTeamList, resourceProjectsList)
+resourceStore --> srv: userResources
+srv -> domainService: validateResourceCreation(project, res, projectTeamList, resourceProjectsList)
+domainService -> project: isInsideProjectPeriod(date)
+deactivate
 domainService -> domainService: validateAllocation(resourceProjectsList, res)
 deactivate
 domainService -> domainService: validateProjectRole(res, projectTeamList)
 deactivate
-domainService --> resourceService: result
-opt if result is true
-resourceService -> resourceStore: save(res)
-resourceStore --> resourceService:true
+domainService --> srv: validateNewResourceResult
+alt if the criteria of the allocation a resource in a project are met
+srv -> resourceStore: save(res)
+resourceStore --> srv: saveResult
+alt if the new resource was successfully saved
+srv -> map : model2Dto(res)
+map --> outDto** : create()
+map --> srv : outDto
+srv --> result** : create(outDto)
+else new resource was not saved
+srv --> exc** : create(errorMessage)
 end
-resourceService --> Ctrl: outputDto
+else new resource not be valid
+srv --> exc** : create(errorMessage)
+end
+else user or project does not exist
+srv --> exc** : create(errorMessage)
+end
+srv --> Ctrl: finalResult
+Ctrl --> json**: create(finalResult)
 Ctrl --> Route: responseJson
-note right
-Change from json to dto hidden to simplify diagram
-end note
 [<--Route: response
 
 @enduml
