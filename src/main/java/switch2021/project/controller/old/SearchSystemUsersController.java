@@ -1,10 +1,7 @@
 package switch2021.project.controller.old;
 
 import switch2021.project.model.*;
-import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.UserProfile.UserProfile;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class SearchSystemUsersController {
@@ -31,7 +28,7 @@ public class SearchSystemUsersController {
     }
 
 
-    /**
+    /*
      * Method to search users in the domain
      **/
 /*    public List<SystemUser> searchUsers(String name, String email, String function, int state, String[] profileChoosenNameList) {

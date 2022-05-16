@@ -1,7 +1,7 @@
 package switch2021.project.repositories;
 
 import lombok.Getter;
-import switch2021.project.factoryInterface.ResourceFactoryInterface;
+import switch2021.project.factoryInterface.IResourceFactory;
 import switch2021.project.model.valueObject.CostPerHour;
 import switch2021.project.model.valueObject.PercentageOfAllocation;
 import switch2021.project.model.valueObject.ProjectRole;
@@ -19,7 +19,7 @@ public class ProjectTeam {
     /**
      * ProjectTeam's Attribute
      **/
-    private ResourceFactoryInterface resFac;
+    private IResourceFactory resFac;
 
     private final List<Resource> projectTeamList;  //Resource´s List in a Project.
 
@@ -27,7 +27,7 @@ public class ProjectTeam {
     /**
      * ProjectTeam's Constructor
      **/
-    public ProjectTeam(ResourceFactoryInterface resourceFac) {
+    public ProjectTeam(IResourceFactory resourceFac) {
         this.resFac = resourceFac;
         this.projectTeamList = new ArrayList<>();
     }

@@ -3,6 +3,10 @@ package switch2021.project.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.DateDTO;
 import switch2021.project.dto.IdDTO;
@@ -39,7 +43,7 @@ public class ResourcesController {
      * Create a Resource
      */
 
-//    @PostMapping("");
+    @PostMapping("")
     public ResponseEntity<Object> createResource(@RequestBody ResourceDTOReeng dto) {
 
         OutputResourceDTO newResource = createResourceService.createAndSaveResource(dto);

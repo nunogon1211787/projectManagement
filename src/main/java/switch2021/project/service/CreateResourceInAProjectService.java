@@ -6,7 +6,7 @@ import switch2021.project.dto.OutputResourceDTO;
 import switch2021.project.dto.ResourceDTOReeng;
 import switch2021.project.factoryInterface.ResourceFactoryInterfaceReeng;
 import switch2021.project.interfaces.IProjectRepo;
-import switch2021.project.interfaces.ResourceRepositoryInterface;
+import switch2021.project.interfaces.IResourceRepo;
 import switch2021.project.mapper.ResourceMapper;
 
 import switch2021.project.model.Project.ProjectReeng;
@@ -21,10 +21,10 @@ import java.util.List;
 
 @Service
 public class CreateResourceInAProjectService {
-//    @Autowired
-    private ResourceRepositoryInterface iRepoResource;
+    @Autowired
+    private IResourceRepo iRepoResource;
 //    @Qualifier("projectStoreReeng")
-//    @Autowired
+    @Autowired
     private IProjectRepo iRepoProject;
     @Autowired
     private ResourceMapper resourceMapper;

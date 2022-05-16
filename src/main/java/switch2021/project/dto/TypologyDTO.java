@@ -1,7 +1,9 @@
 package switch2021.project.dto;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.hateoas.RepresentationModel;
 
 /**
  * The DTO calls for the use of objects that aggregate and encapsulate
@@ -11,15 +13,11 @@ import lombok.Getter;
  */
 
 @Getter
-public class TypologyDTO {
+@AllArgsConstructor
+public class TypologyDTO extends RepresentationModel<TypologyDTO> {
 
     /**
      * Attributes.
      */
     public String description;
-
-    /**
-     * Constructor.
-     */
-    public TypologyDTO() {}
 }

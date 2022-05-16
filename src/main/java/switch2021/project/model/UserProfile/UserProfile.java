@@ -2,8 +2,7 @@ package switch2021.project.model.UserProfile;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.UserProfileId;
+import switch2021.project.model.valueObject.UserProfileID;
 import switch2021.project.utils.Entity;
 
 @Getter
@@ -11,17 +10,17 @@ import switch2021.project.utils.Entity;
 public class UserProfile implements Entity<UserProfile> {
 
     /**
-     * Class Profile Attributes
+     * Attributes
      **/
-    private final UserProfileId userProfileId;
-
+    private final UserProfileID userProfileId;
 
     /**
-     * Profile Constructors
+     * Constructor
      */
-    public UserProfile(String userProfileName) {
-        this.userProfileId = new UserProfileId(new Description(userProfileName));
+    public UserProfile(UserProfileID userProfileId) {
+        this.userProfileId = userProfileId;
     }
+
 
     /**
      * Override Methods
@@ -46,5 +45,3 @@ public class UserProfile implements Entity<UserProfile> {
     }
 
 }
-
-

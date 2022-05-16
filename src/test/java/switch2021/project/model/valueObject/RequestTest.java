@@ -3,7 +3,6 @@ package switch2021.project.model.valueObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.UserProfile.UserProfile;
 
 import java.time.LocalDate;
 
@@ -18,7 +17,7 @@ class RequestTest {
     @DisplayName("create and save profile request - profile already assigned")
     void createAndSaveProfileRequestFail() {
         //Arrange
-        UserProfileId visitorProfileIdDouble = mock(UserProfileId.class);
+        UserProfileID visitorProfileIdDouble = mock(UserProfileID.class);
         Description descriptionDouble = mock(Description.class);
         when(visitorProfileIdDouble.getUserProfileName()).thenReturn(descriptionDouble);
         when(descriptionDouble.getText()).thenReturn("Visitor");
@@ -33,7 +32,7 @@ class RequestTest {
     public void overrideTest() {
         //Arrange
         SystemUser user = mock(SystemUser.class);
-        UserProfileId profileId = mock(UserProfileId.class);
+        UserProfileID profileId = mock(UserProfileID.class);
         //Act
         Request req = new Request(profileId);
         Request req2 = new Request(profileId);

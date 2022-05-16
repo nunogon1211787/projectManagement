@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.controller.old.UpdatePersonalDataController;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.UserProfile.UserProfile;
 
 import static org.junit.jupiter.api.Assertions.*;
 

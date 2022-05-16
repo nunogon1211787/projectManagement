@@ -668,22 +668,22 @@ class ResourceTest {
 
  */
 
-    @Test  //TODO Passou de ProjectTeamTest para aqui, é preciso rever se vai continuar aqui
-    public void createResourceTestFail() {
-        //Assert
-        assertThrows(NullPointerException.class, () -> {
-            //Arrange
-            Company company = new Company();
-            Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
-            Customer customer = company.getCustomerStore().getCustomerByName("isep");
-            BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
-            //Project 1
-            Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
-                    typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
-            proj1.setEndDate(LocalDate.now().plusYears(1));
-            //Act
-            proj1.getProjectTeam().createResource(null, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
-        });
-    }
+//    @Test  //TODO Passou de ProjectTeamTest para aqui, é preciso rever se vai continuar aqui
+//    public void createResourceTestFail() {
+//        //Assert
+//        assertThrows(NullPointerException.class, () -> {
+//            //Arrange
+//            Company company = new Company();
+//            Typology typo = company.getTypologyRepository().findTypologyById("Fixed Cost");
+//            Customer customer = company.getCustomerStore().getCustomerByName("isep");
+//            BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("it");
+//            //Project 1
+//            Project proj1 = company.getProjectStore().createAndSaveProject("prototype1", "proj1Prototype", customer,
+//                    typo, sector, LocalDate.now().minusWeeks(2), 2, 3000);
+//            proj1.setEndDate(LocalDate.now().plusYears(1));
+//            //Act
+//            proj1.getProjectTeam().createResource(null, LocalDate.now(), LocalDate.now().plusWeeks(4), 100, .5);
+//        });
+//    }
 
 }

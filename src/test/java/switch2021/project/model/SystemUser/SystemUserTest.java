@@ -23,7 +23,7 @@ class SystemUserTest {
     @Mock
     Function functionDouble;
     @Mock
-    UserProfileId userProfileIdDouble;
+    UserProfileID userProfileIDDouble;
     @Mock
     Description descriptionDouble;
 
@@ -32,11 +32,11 @@ class SystemUserTest {
         //S.U.T. {SystemUser}
         //Arrange
         when(passwordDouble.getPwd()).thenReturn("Qwerty_1");
-        when(userProfileIdDouble.getUserProfileName()).thenReturn(descriptionDouble);
+        when(userProfileIDDouble.getUserProfileName()).thenReturn(descriptionDouble);
         when(descriptionDouble.getText()).thenReturn("Visitor");
         //Act
         SystemUser underTest = new SystemUser(idDouble, nameDouble, photoDouble, passwordDouble, passwordDouble,
-                functionDouble, userProfileIdDouble);
+                functionDouble, userProfileIDDouble);
         //Assert
         assertEquals("Visitor", underTest.getAssignedProfiles().get(0).getUserProfileName().getText());
         assertFalse(underTest.isActive());
@@ -48,11 +48,11 @@ class SystemUserTest {
         assertThrows(IllegalArgumentException.class, () -> {
         //Arrange
         when(passwordDouble.getPwd()).thenReturn("Qwerty_1");
-        when(userProfileIdDouble.getUserProfileName()).thenReturn(descriptionDouble);
+        when(userProfileIDDouble.getUserProfileName()).thenReturn(descriptionDouble);
         when(descriptionDouble.getText()).thenReturn("regular");
         //Act
         new SystemUser(idDouble, nameDouble, photoDouble, passwordDouble, passwordDouble,
-                functionDouble, userProfileIdDouble);
+                functionDouble, userProfileIDDouble);
         });
     }
 /*

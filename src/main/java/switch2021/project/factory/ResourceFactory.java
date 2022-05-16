@@ -1,8 +1,5 @@
 package switch2021.project.factory;
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import switch2021.project.factoryInterface.ResourceFactoryInterface;
 import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.valueObject.CostPerHour;
 import switch2021.project.model.valueObject.PercentageOfAllocation;
@@ -10,7 +7,7 @@ import switch2021.project.model.Resource.old.Resource;
 
 import java.time.LocalDate;
 
-public class ResourceFactory implements ResourceFactoryInterface {
+public class ResourceFactory implements switch2021.project.factoryInterface.IResourceFactory {
 
     public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
         CostPerHour coPeHo = new CostPerHour(costPerHour);

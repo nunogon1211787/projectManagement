@@ -14,8 +14,8 @@ class "CreateUserStoryRoute" as route << Component >>
 
 package "Interface Adapter" <<Folder>> #lightgreen {
 package "Controllers" <<Folder>>{
-class "CreateUserStoryController" as ctrl << Component >> {
-+createUserStory(userStoryDTO)
+class "UserStoryController" as ctrl << Component >> {
++createUserStory(json)
 }
 }
 package "Repositories" <<Folder>>{
@@ -23,12 +23,11 @@ class "UserStoryRepository" as store << Repository >> {
 -userStoryList : List<UserStory>
 + save(newUserStory)
 + existsByUserStoryId(UserStoryID)
-'- add(newUserStory)
 }
 }
 }
 
-package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
+package "Application Service API/Use Case Service" <<Package>> #lightpink{
 package "App Service" <<Folder>>{
 class "CreateUserStoryService" as service << Component >> {
 +createAndSaveUserStory(userStoryDTO)
@@ -133,9 +132,7 @@ class "TimeEstimate" as time << Value Object >> {
 
 
 route ..> ctrl
-'ctrl..> mapper'
 ctrl..> service
-'mapper..> dto
 store..|> repo
 service..> mapper
 service..> dto

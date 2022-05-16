@@ -7,7 +7,7 @@ import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.interfaces.ISystemUserRepo;
 import switch2021.project.interfaces.IProjectRepo;
-import switch2021.project.interfaces.ResourceRepositoryInterface;
+import switch2021.project.interfaces.IResourceRepo;
 import switch2021.project.mapper.ProjectMapper;
 import switch2021.project.model.Project.ProjectReeng;
 import switch2021.project.model.Resource.ManageResourcesService;
@@ -22,7 +22,8 @@ import java.util.List;
 public class ShowAllCurrentProjectsByUserService {
 
     @Autowired ISystemUserRepo userRepo;
-    @Autowired ResourceRepositoryInterface resRepo;
+    @Autowired
+    IResourceRepo resRepo;
     @Autowired
     IProjectRepo projRepo;
     @Autowired ManageResourcesService dsrv;

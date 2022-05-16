@@ -25,7 +25,7 @@ import switch2021.project.model.UserStory.UserStory;
         public TaskRepositoryInterface taskRepositoryInterface;
 
 //        @Autowired
-        public ResourceRepositoryInterface resourceRepositoryInterface;
+        public IResourceRepo IResourceRepo;
 
         @Autowired
         public ISprintRepo iSprintRepo;
@@ -38,7 +38,7 @@ import switch2021.project.model.UserStory.UserStory;
         }
 
         public OutputTaskDTO createAndSaveTask(TaskDTO taskDTO) {
-            ResourceIDReeng resId = resourceRepositoryInterface.findById(taskDTO.responsible).getId();
+            ResourceIDReeng resId = IResourceRepo.findById(taskDTO.responsible).getId();
 
             TaskContainerID taskConId = returnTaskContainerID(taskDTO.taskContainerID);
 

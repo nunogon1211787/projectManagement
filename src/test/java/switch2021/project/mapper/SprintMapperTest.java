@@ -94,4 +94,73 @@ public class SprintMapperTest {
         //Assert
         assertEquals(projectID.getCode(), outPutSprintDTO.projectID);
     }
+
+    @Test
+    @DisplayName("Test OutPutSprintDTO - SprintID")
+    public void outPutSprintDTO_SprintID() {
+        //Arrange
+        SprintMapper sprintMapper = new SprintMapper();
+        Sprint sprint = mock(Sprint.class);
+        SprintID sprintID = mock(SprintID.class);
+        Description description = mock(Description.class);
+        ProjectID projectID = mock(ProjectID.class);
+
+        //Act
+        when(sprint.getSprintID()).thenReturn(sprintID);
+        when(sprintID.getProjectID()).thenReturn(projectID);
+        when(projectID.getCode()).thenReturn("Project_2022_1");
+        when(sprintID.getSprintName()).thenReturn(description);
+        when(description.getText()).thenReturn("Sprint Name");
+
+        OutPutSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
+
+        //Assert
+        assertEquals(outPutSprintDTO.getSprintID(), sprintID.toString());
+    }
+
+    @Test
+    @DisplayName("Test OutPutSprintDTO - ProjectID")
+    public void outPutSprintDTO_ProjectID() {
+        //Arrange
+        SprintMapper sprintMapper = new SprintMapper();
+        Sprint sprint = mock(Sprint.class);
+        SprintID sprintID = mock(SprintID.class);
+        Description description = mock(Description.class);
+        ProjectID projectID = mock(ProjectID.class);
+
+        //Act
+        when(sprint.getSprintID()).thenReturn(sprintID);
+        when(sprintID.getProjectID()).thenReturn(projectID);
+        when(projectID.getCode()).thenReturn("Project_2022_1");
+        when(sprintID.getSprintName()).thenReturn(description);
+        when(description.getText()).thenReturn("Sprint Name");
+
+        OutPutSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
+
+        //Assert
+        assertEquals(outPutSprintDTO.getProjectID(), "Project_2022_1");
+    }
+
+    @Test
+    @DisplayName("Test OutPutSprintDTO - Sprint Name")
+    public void outPutSprintDTO_SprintName() {
+        //Arrange
+        SprintMapper sprintMapper = new SprintMapper();
+        Sprint sprint = mock(Sprint.class);
+        SprintID sprintID = mock(SprintID.class);
+        Description description = mock(Description.class);
+        ProjectID projectID = mock(ProjectID.class);
+
+        //Act
+        when(sprint.getSprintID()).thenReturn(sprintID);
+        when(sprintID.getProjectID()).thenReturn(projectID);
+        when(projectID.getCode()).thenReturn("Project_2022_1");
+        when(sprintID.getSprintName()).thenReturn(description);
+        when(description.getText()).thenReturn("Sprint Name");
+
+        OutPutSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
+
+        //Assert
+        assertEquals(outPutSprintDTO.getName(), "Sprint Name");
+    }
 }

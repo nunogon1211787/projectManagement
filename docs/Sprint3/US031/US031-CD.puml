@@ -2,103 +2,83 @@
 'https://plantuml.com/class-diagram
 
 skinparam classAttributeIconSize 0
-hide circle
+'hide circle
 
 title US031 - As Team Member, I want to create a task in a user story
 
-class CreateUsTaskUI{}
 
-class TaskUSController{
-+getTaskTypes()
-+createUsTask(createUsTaskDTO)
+package System <<Rectangle>>{
+
+package Infrastructure <<Rectangle>> #lightblue {
+class "CreateUsTaskRoute" as route<<Component>>{
+}
 }
 
-class Company{
-+getTaskTypeStore()
-+getProjectStore()
-+createUsTask(createUsTaskDTO)
+package InterfaceAdapters <<Rectangle>> #lightgreen{
+class "CreateUsTaskController" as ctrl <<Component>>{
++createUsTask(CreateTaskDTO dto)
 }
 
-class TaskTypeStore{
--List<TaskType> taskTypeList
-+createTaskTypesNames()
+class "TaskStore" as store <<Repository>>{
+-taskList: List<Task>
++saveTask(Task task)
+-validate()
+-add()
+}
 }
 
-class TaskType{
--String name
-+getName()
+package ApplicationService <<Rectangle>> #lightpink{
+interface "ITaskStore" as istore {
++saveTask(Task task)
 }
 
-class ProjectStore{
--List<Project> projectList
-+getProjectByCode(String code)
+class "CreateUsTaskService" as service <<Service>>{
++createUsTask(taskDto)
+}
 }
 
-class Project{
--List<Sprint> sprintList
-+getSprints()
-+getProjectTeam()
-}
+package Domain <<Rectangle>> #burlywood{
 
-class SprintList{
--Sprint
-+getSprint(sprintID)
-}
+package Aggregates <<Rectangle>>{
 
-class Sprint{
--int sprint_ID
+package Task <<Rectangle>>{
+
+entity "Task" as task <<root>>{
+-int idTask
+-Name name
+-Description description
+-TaskTypeEnum type
+-double effortEstimate
 -LocalDate startDate
 -LocalDate endDate
--TaskList sprintTaskList
-+getBacklog()
-}
-
-class SprintBacklog{
-+getUSList()
-}
-
-class UserStoryList {
-+getUs(usId)
-}
-
-class UserStory{
-+getUsTaskList()
-}
-
-class USTaskList{
--String name
--String description
--int effortEstimate
--TaskType taskType
+-Resource responsible
 -List<Task> tasksPrecedence
-+getTasksNames()
-+createUsTask(createUsTaskDTO)
+-List<Effort> taskEffortList
++Task(String name,String description,int effort,\nTaskType type,List<Task> precedence,Resource responsible)
 }
 
-
-class ProjectTeam{
--List<Resource> projectTeam
-getCurrentResourcesNames()
+}
+}
+package ValueObjects <<Rectangle>>{
+class taskId{
+}
+}
 }
 
-class Resource{
--String name
--LocalDate startDate
--LocalDate endDate
-+isCurrent()
-+getName()
+package DTO <<Rectangle>> #lightgray {
+
+class "TaskMapper" as mapper <<Component>>{
++toModel(CreateTaskDTO dto)
++toDTO(Task task)
 }
 
-class TaskMapper{
-+toModel(createUsTaskDTO)
-}
-
-class TaskDTO{
+class CreateTaskDTO <<Component>>{
 -String name
 -String description
 -int effortEstimate
 -String taskTypeName
 -String responsibleEmail
++CreateTaskDTO(Task task)
 +getName()
 +getDescription()
 +getEffortEstimate()
@@ -106,55 +86,22 @@ class TaskDTO{
 +getResponsible()
 }
 
-CreateUsTaskUI ..> TaskUSController
+class DataDto <<Component>> {
++toModel(CreateTaskDTO dto)
++toDTO(Task task)
+}
+}
+}
+
+route .d.> ctrl
+
+ctrl .d.> service
+ctrl .d.> mapper
 
 
-TaskUSController ..> Company
-TaskUSController ..> TaskTypeStore
-TaskUSController ..> TaskType
-TaskUSController ..> ProjectStore
-TaskUSController ..> Project
-TaskUSController ..> SprintList
-TaskUSController ..> Sprint
-TaskUSController ..> SprintBacklog
-TaskUSController ..> UserStoryList
-TaskUSController ..> UserStory
-TaskUSController ..> USTaskList
-TaskUSController ..> ProjectTeam
-TaskUSController ..> Resource
-TaskUSController ..> TaskMapper
+mapper ..> task
 
 
 
-Company "1" *-- "1" TaskTypeStore
-Company "1" *-- "1" ProjectStore
-
-
-TaskTypeStore "1" *-- "*" TaskType
-
-TaskType "*" --o "1" Task
-
-ProjectStore "1" *-- "*" Project
-
-Project "1" *-- "1" SprintList
-Project "1" *-- "1" ProjectTeam
-
-SprintList "1" *-- "*" Sprint
-
-Sprint "1" *-- "1" SprintBacklog
-
-SprintBacklog "1" *-- "1" UserStoryList
-
-UserStoryList "1" *-- "*" UserStory
-
-UserStory "1" *-- "1" TaskList
-
-TaskList "1" *-- "*" Task
-
-ProjectTeam "1" *-- "*" Resource
-
-USTaskList "1" *-- "1" TaskMapper
-
-TaskMapper *-- TaskDTO
 
 @enduml

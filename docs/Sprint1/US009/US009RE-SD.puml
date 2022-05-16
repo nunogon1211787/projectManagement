@@ -8,7 +8,7 @@ autonumber
 
 
 participant ": CreateUserStoryRoute" as System
-participant ": CreateUserStoryController" as Ctrl
+participant ": UserStoryController" as Ctrl
 participant ": CreateUserStoryService" as appService
 participant ": IUserStoryFactory" as factory
 participant ": UserStoryDTO" as usDto

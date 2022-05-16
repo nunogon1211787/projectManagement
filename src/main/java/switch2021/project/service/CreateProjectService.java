@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.factoryInterface.IProjectFactory;
-import switch2021.project.interfaces.IRepoTypology;
+import switch2021.project.interfaces.ITypologyRepo;
 import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.mapper.ProjectMapper;
 import switch2021.project.model.Project.ProjectReeng;
@@ -20,7 +20,7 @@ public class CreateProjectService {
     @Autowired
     private IProjectRepo IProjectRepo;
     @Autowired
-    private IRepoTypology iRepoTypology;
+    private ITypologyRepo iTypologyRepo;
     @Autowired
     private IProjectFactory IProjectFactory;
     @Autowired
@@ -60,7 +60,7 @@ public class CreateProjectService {
             proj.setBusinessSector(new BusinessSector(projectDTO.businessSector));
         }
         if (!projectDTO.typology.isEmpty()) {
-            proj.setTypology(iRepoTypology.findTypologyById(projectDTO.typology));
+            proj.setTypology(iTypologyRepo.findTypologyById(projectDTO.typology));
         }
         if (!projectDTO.numberOfSprints.isEmpty()) {
             proj.setNumberOfSprints(new NumberOfSprints(Integer.parseInt(projectDTO.numberOfSprints)));

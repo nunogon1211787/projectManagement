@@ -13,7 +13,7 @@ public class Request implements ValueObject<Request> {
      * Class attributes
      **/
     private LocalDate requestDate;
-    private UserProfileId profileIdRequested;
+    private UserProfileID profileIdRequested;
     //private int idRequest;
     //private SystemUser user;
     //private UserProfile profileRequested;
@@ -22,16 +22,14 @@ public class Request implements ValueObject<Request> {
     /**
      * Constructor.
      */
-    public Request(UserProfileId profileId) {
+    public Request(UserProfileID profileId) {
         this.requestDate = LocalDate.now();
         //this.user = user;
         //this.profileRequested = profile;
         this.profileIdRequested = profileId;
     }
 
-    /** //Não é preciso (Nuno)
-     * Method to change request status
-     */
+    /** //Não é preciso (Nuno) Method to change request status */
     /*public void changeRequestStatus() {
         this.requestStatus = true;
     }*/

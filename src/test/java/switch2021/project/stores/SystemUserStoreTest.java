@@ -3,8 +3,6 @@ package switch2021.project.stores;
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.Company;
 import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.UserProfile.UserProfile;
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,5 +1,6 @@
 package switch2021.project.service;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -11,10 +12,7 @@ import switch2021.project.factoryInterface.ISprintFactory;
 import switch2021.project.interfaces.ISprintRepo;
 import switch2021.project.mapper.SprintMapper;
 import switch2021.project.model.Sprint.Sprint;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.mockito.Mockito.mock;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -23,7 +21,7 @@ public class CreateSprintServiceTest {
     @InjectMocks
     CreateSprintService createSprintService;
     @Mock
-    ISprintRepo ISprintRepo;
+    ISprintRepo iSprintRepo;
     @Mock
     SprintMapper sprintMapper;
     @Mock
@@ -37,11 +35,12 @@ public class CreateSprintServiceTest {
 
 
     @Test
+    @DisplayName("Test to create and save sprint - get SprintName")
     public void createAndSaveSprint_SprintName() {
 
         //Arrange
         when(iSprintFactory.createSprint(newSprintDTO)).thenReturn(sprint);
-        when(ISprintRepo.saveSprint(sprint)).thenReturn(true);
+        when(iSprintRepo.saveSprint(sprint)).thenReturn(true);
         when(sprintMapper.toDTO(sprint)).thenReturn(outPutSprintDTO);
         //Act
         OutPutSprintDTO outPut = createSprintService.createAndSaveSprint(newSprintDTO);
@@ -51,17 +50,32 @@ public class CreateSprintServiceTest {
     }
 
     @Test
+    @DisplayName("Test to create and save sprint - get ProjectID")
     public void createAndSaveSprint_ProjectID() {
 
         //Arrange
         when(iSprintFactory.createSprint(newSprintDTO)).thenReturn(sprint);
-        when(ISprintRepo.saveSprint(sprint)).thenReturn(true);
+        when(iSprintRepo.saveSprint(sprint)).thenReturn(true);
         when(sprintMapper.toDTO(sprint)).thenReturn(outPutSprintDTO);
         //Act
         OutPutSprintDTO outPut = createSprintService.createAndSaveSprint(newSprintDTO);
         //Assert
         assertEquals(outPut.projectID,
                 createSprintService.createAndSaveSprint(newSprintDTO).projectID);
+    }
+
+    @Test
+    @DisplayName("Test to create a repeated sprint")
+    public void createAndSaveRepeatedSprint() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            when(iSprintFactory.createSprint(newSprintDTO)).thenReturn(sprint);
+            when(iSprintRepo.saveSprint(sprint)).thenReturn(false);
+            when(sprintMapper.toDTO(sprint)).thenReturn(outPutSprintDTO);
+            //Act
+            createSprintService.createAndSaveSprint(newSprintDTO);
+        });
     }
 }
 

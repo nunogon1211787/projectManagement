@@ -5,9 +5,7 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.model.valueObject.SprintID;
-
 import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -18,7 +16,7 @@ public class SprintTest {
 
     @Test
     @DisplayName("Constructor Test, with success")
-    void CreateSprintWithSuccess() {
+    void ConstructorSprint_Success() {
         //Arrange
         SprintID sprintID = mock(SprintID.class);
         Sprint sprint = new Sprint(sprintID);
@@ -35,7 +33,7 @@ public class SprintTest {
 
     @Test
     @DisplayName("Constructor Test, with failure")
-    void CreateSprintWithFailure() {
+    void ConstructorSprint_Failure() {
         //Arrange
         SprintID sprintID = mock(SprintID.class);
         Sprint sprint = new Sprint(sprintID);
@@ -128,24 +126,45 @@ public class SprintTest {
         assertNotEquals(sprint3.hashCode(), sprint2.hashCode());
         assertNotEquals(sprint3, sprint2);
     }
-//
-//    @Test
-//    @DisplayName("Test to validate start date")
-//    public void validateStartDate() {
-//        //Arrange
-//        SprintStore sprintList = new SprintStore();
-//        SprintFactory sprintFactory = new SprintFactory();
-//        Sprint sprint1 = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 1", "New Sprint");
-//        sprintList.saveSprint(sprint1);
-//        Sprint sprint2 = sprintFactory.createSprint("Project_2022_1", "Project_2022_1_Sprint 2", "New New Sprint");
-//        sprintList.saveSprint(sprint2);
-//        sprint1.setStartDate(LocalDate.of(2022, 4, 1));
-//        sprint2.setStartDate(LocalDate.of(2022, 4, 1));
-//        sprint1.setEndDate(LocalDate.of(2022, 5, 1));
-//        sprint2.setEndDate(LocalDate.of(2022, 5, 1));
-//        //Assert
-//        assertNotEquals(sprint1, sprint2);
-//        assertEquals(sprint1.getStartDate(),sprint2.getStartDate());
-//        assertEquals(sprint1.getEndDate(),sprint2.getEndDate());
-//    }
+
+    @Test
+    @DisplayName("Same Identify As - True")
+    public void sameIdentityAs_true() {
+        //Arrange
+        SprintID sprintID = mock(SprintID.class);
+        Sprint sprint1 = new Sprint(sprintID);
+        Sprint sprint2 = new Sprint(sprintID);
+        //Act
+        when(sprintID.sameValueAs(sprintID)).thenReturn(true);
+        //Assert
+        assertTrue(sprint1.sameIdentityAs(sprint2));
+    }
+
+    @Test
+    @DisplayName("Same Identify As - False")
+    public void sameIdentityAs_false() {
+        //Arrange
+        SprintID sprintID1 = mock(SprintID.class);
+        SprintID sprintID2 = mock(SprintID.class);
+        Sprint sprint1 = new Sprint(sprintID1);
+        Sprint sprint2 = new Sprint(sprintID2);
+        //Act
+        when(sprintID1.sameValueAs(sprintID2)).thenReturn(false);
+        //Assert
+        assertFalse(sprint1.sameIdentityAs(sprint2));
+    }
+
+    @Test
+    @DisplayName("Same Identify As - Null")
+    public void sameIdentityAs_Null() {
+        //Arrange
+        SprintID sprintID1 = mock(SprintID.class);
+        Sprint sprint1 = new Sprint(sprintID1);
+        Sprint sprint2 = new Sprint(null);
+        //Act
+        when(sprintID1.sameValueAs(null)).thenReturn(false);
+        //Assert
+        assertFalse(sprint1.sameIdentityAs(sprint2));
+    }
+
 }

@@ -12,8 +12,6 @@ participant ":System" as System
 activate User
 
 User -> System: Searches a Project
-System -> System: edit Project
-deactivate
 System --> User: Informs of operation success
 
 @enduml
