@@ -2,7 +2,7 @@ package switch2021.project.mapper;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.dto.OutPutUsDTO;
+import switch2021.project.dto.OutputUserStoryDTO;
 import switch2021.project.model.UserStory.*;
 import switch2021.project.model.valueObject.*;
 
@@ -39,13 +39,13 @@ public class UserStoryMapperTest {
         when(newUserStory.getTimeEstimate()).thenReturn(timeEstimate);
         when(timeEstimate.getUsHours()).thenReturn(5.0);
 
-        OutPutUsDTO outPutUsDTO = userStoryMapper.toDto(newUserStory);
+        OutputUserStoryDTO outputUserStoryDTO = userStoryMapper.toDto(newUserStory);
 
         //Assert
-        assertEquals(newUserStory.getUserStoryID().toString(), outPutUsDTO.userStoryID);
-        assertEquals(newUserStory.getPriority().getPriorityUs(), outPutUsDTO.priority);
-        assertEquals(newUserStory.getDescription().getText(), outPutUsDTO.description);
-        assertEquals(newUserStory.getTimeEstimate().getUsHours(), outPutUsDTO.timeEstimate);
+//        assertEquals(newUserStory.getUserStoryID().toString(), outputUserStoryDTO.getUserStoryID().toString());
+        assertEquals(newUserStory.getPriority().getPriorityUs(), outputUserStoryDTO.priority);
+        assertEquals(newUserStory.getDescription().getText(), outputUserStoryDTO.description);
+        assertEquals(newUserStory.getTimeEstimate().getUsHours(), outputUserStoryDTO.timeEstimate);
     }
 
     @Test
@@ -73,10 +73,10 @@ public class UserStoryMapperTest {
         when(newUserStory.getTimeEstimate()).thenReturn(timeEstimate);
         when(timeEstimate.getUsHours()).thenReturn(5.0);
 
-        OutPutUsDTO outPutUsDTO = userStoryMapper.toDto(newUserStory);
+        OutputUserStoryDTO outputUserStoryDTO = userStoryMapper.toDto(newUserStory);
 
         //Assert
-        assertEquals(projectID.getCode(), outPutUsDTO.projectID);
+        assertEquals(projectID.getCode(), outputUserStoryDTO.userStoryID.projectID);
 
     }
 
@@ -105,10 +105,10 @@ public class UserStoryMapperTest {
         when(newUserStory.getTimeEstimate()).thenReturn(timeEstimate);
         when(timeEstimate.getUsHours()).thenReturn(5.0);
 
-        OutPutUsDTO outPutUsDTO = userStoryMapper.toDto(newUserStory);
+        OutputUserStoryDTO outputUserStoryDTO = userStoryMapper.toDto(newUserStory);
 
         //Assert
-        assertEquals(usTitle.getTitleUs(), outPutUsDTO.title);
+        assertEquals(usTitle.getTitleUs(), outputUserStoryDTO.userStoryID.title);
     }
 
     @Test
@@ -136,15 +136,15 @@ public class UserStoryMapperTest {
         when(newUserStory.getTimeEstimate()).thenReturn(timeEstimate);
         when(timeEstimate.getUsHours()).thenReturn(5.0);
 
-        OutPutUsDTO outPutUsDTO = userStoryMapper.toDto(newUserStory);
+        OutputUserStoryDTO outputUserStoryDTO = userStoryMapper.toDto(newUserStory);
 
         //Assert
-        assertEquals(outPutUsDTO.getUserStoryID(),userStoryID.toString() );
-        assertEquals(outPutUsDTO.getProjectID(),"Project_2022_1" );
-        assertEquals(outPutUsDTO.getTitle(),"As a PO, i want to test this string" );
-        assertEquals(outPutUsDTO.getPriority(),1 );
-        assertEquals(outPutUsDTO.getDescription(),"Make Test" );
-        assertEquals(outPutUsDTO.getTimeEstimate(),5.0 );
+//        assertEquals(outputUserStoryDTO.getUserStoryID().toString(),userStoryID.toString() );
+        assertEquals(outputUserStoryDTO.getUserStoryID().projectID,"Project_2022_1" );
+        assertEquals(outputUserStoryDTO.getUserStoryID().title,"As a PO, i want to test this string" );
+        assertEquals(outputUserStoryDTO.getPriority(),1 );
+        assertEquals(outputUserStoryDTO.getDescription(),"Make Test" );
+        assertEquals(outputUserStoryDTO.getTimeEstimate(),5.0 );
     }
 
 }

@@ -8,17 +8,17 @@ title US009 - As Product Owner, I want to create a user story and add it to the 
 
 skinparam classAttributeIconSize 0
 
-package "Infrastructure" <<Folder>> #lightblue  {
+package "Infrastructure" <<Rectangle>> #lightblue  {
 class "CreateUserStoryRoute" as route << Component >>
 }
 
-package "Interface Adapter" <<Folder>> #lightgreen {
-package "Controllers" <<Folder>>{
+package "Interface Adapter" <<Rectangle>> #lightgreen {
+package "Controllers" <<Rectangle>>{
 class "UserStoryController" as ctrl << Component >> {
 +createUserStory(json)
 }
 }
-package "Repositories" <<Folder>>{
+package "Repositories" <<Rectangle>>{
 class "UserStoryRepository" as store << Repository >> {
 -userStoryList : List<UserStory>
 + save(newUserStory)
@@ -27,44 +27,30 @@ class "UserStoryRepository" as store << Repository >> {
 }
 }
 
-package "Application Service API/Use Case Service" <<Package>> #lightpink{
-package "App Service" <<Folder>>{
+package "Application Service" <<Rectangle>> #lightpink{
+package "App Service" <<Rectangle>>{
 class "CreateUserStoryService" as service << Component >> {
-+createAndSaveUserStory(userStoryDTO)
++createAndSaveUserStory(createUserStoryDTO)
 }
 }
-package "Repositories Interface" <<Folder>>{
+package "Repositories Interface" <<Rectangle>>{
 interface "IUserStoryRepo" as repo << Interface >>{
-+ save(newUserStory)
-+ existsByUserStoryId(UserStoryID)
+save(newUserStory)
+existsByUserStoryId(UserStoryID)
 }
 }
-package "Factory Interface" <<Folder>>{
+package "Factory Interface" <<Rectangle>>{
 interface "IUserStoryFactory" as factoryInterface << Interface >>{
-+createUserStory(userStoryDTO)
+createUserStory(createUserStoryDTO)
 }
-}
-}
-package "DTO" <<Folder>> #black {
-package "UserStoryDTO" <<Folder>>{
-class "UserStoryDTO" as dto << Component >> {
-- projectID : String
-- title : String
-- priority : int
-- description : String
-- timeEstimate : double
 }
 }
 
-package "DTO" <<Folder>> {
-package "UserStoryMapper" <<Folder>>{
+package "DTO" <<Rectangle>> {
 class "UserStoryMapper" as mapper << Component >> {
 + toDto(newUserStory)
 }
-}
-package "DTO" <<Folder>>  {
-package "OutPutUsDTO" <<Folder>>{
-class "OutPutUsDTO" as outdto << Component >> {
+class "OutputUserStoryDTO" as outdto << Component >> {
 - userStoryID : String
 - projectID : String
 - title : String
@@ -72,12 +58,17 @@ class "OutPutUsDTO" as outdto << Component >> {
 - description : String
 - timeEstimate : double
 }
+class "CreateUserStoryDTO" as dto << Component >> {
+- projectID : String
+- title : String
+- priority : int
+- description : String
+- timeEstimate : double
+}
 }
 
-}
-
-package "Entity/Core/Domain" <<Folder>> #burlywood{
-package "Aggregate" <<Folder>>{
+package "Domain" <<Rectangle>> #burlywood{
+package "Aggregate" <<Rectangle>>{
 class "UserStory" as userStory << Root >> {
 - userStoryID : UserStoryID
 - projectID : ProjectID
@@ -88,56 +79,47 @@ class "UserStory" as userStory << Root >> {
 + UserStory(userStoryID)
 }
 }
-package "Factory" <<Folder>>{
+package "Factory" <<Rectangle>>{
 class "UserStoryFactory" as userStoryF << Factory >> {
-+createUserStory(userStoryDTO)
++createUserStory(createUserStoryDTO)
 }
 }
-package "Value Object" <<Folder>>{
+package "Value Object" <<Rectangle>>{
 class "UserStoryID" as usID << Value Object >> {
 -projectID : ProjectID
 -usTitle : UsTitle
 +checkUsID(projectID, usTitle)
 }
-}
-package "Value Object" <<Folder>>{
 class "ProjectID" as projID << Value Object >> {
 -rojectID : ProjectID
 +checkUsID()
 }
-
-package "Value Object" <<Folder>>{
 class "UsTitle" as usTitle << Value Object >> {
 - title : UsTitle
 +checkUsID()
 }
-
-package "Value Object" <<Folder>>{
 class "Priority" as priority << Value Object >> {
 -priority : UsPriority
 +checkUsID()
 }
-
-package "Value Object" <<Folder>>{
 class "Description" as desc << Value Object >> {
 -description : Description
 +checkUsID()
 }
-
-package "Value Object" <<Folder>>{
 class "TimeEstimate" as time << Value Object >> {
 -timeEstimate : UsHour
 +checkUsID()
+}
 }
 
 
 route ..> ctrl
 ctrl..> service
 store..|> repo
-service..> mapper
-service..> dto
-mapper..>outdto
-userStoryF..> dto
+service .r.> mapper
+service .r.> dto
+mapper ..> outdto
+userStoryF .u.> dto
 service..> factoryInterface
 service..left> repo
 userStoryF..> usID

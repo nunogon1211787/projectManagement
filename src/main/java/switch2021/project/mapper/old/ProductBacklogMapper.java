@@ -1,11 +1,5 @@
 package switch2021.project.mapper.old;
 
-import switch2021.project.dto.UserStoryDTO;
-import switch2021.project.model.UserStory.UserStory;
-
-import java.util.LinkedList;
-import java.util.List;
-
 public class ProductBacklogMapper {
 
     //TODO -----> Validar testes CDC

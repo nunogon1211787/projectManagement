@@ -1,6 +1,5 @@
 package switch2021.project.repositories;
 
-import javassist.runtime.Desc;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -191,8 +190,8 @@ public class UserStoryRepositoryTest {
         userStoryRepo.save(userStory3);
 
         //Act
-        userStoryRepo.findUserStoryById(userStoryID2.toString()).setUsCancelled(LocalDate.now());
-        userStoryRepo.findUserStoryById(userStoryID3.toString()).setUsEndDate(LocalDate.now());
+        userStoryRepo.findByUserStoryId(userStoryID2.toString()).setUsCancelled(LocalDate.now());
+        userStoryRepo.findByUserStoryId(userStoryID3.toString()).setUsEndDate(LocalDate.now());
         List<UserStory> userStoryList = userStoryRepo.findUsSortedByPriority();
 
         //Assert
@@ -233,7 +232,7 @@ public class UserStoryRepositoryTest {
         when(usPriority3.getPriorityUs()).thenReturn(2);
         when(userStory3.getUsEndDate()).thenReturn(LocalDate.now());
         userStoryRepo.save(userStory3);
-        userStoryRepo.findUserStoryById(userStoryID3.toString()).setUsEndDate(LocalDate.now());
+        userStoryRepo.findByUserStoryId(userStoryID3.toString()).setUsEndDate(LocalDate.now());
 
         // Act
         List<UserStory> userStoryList = userStoryRepo.findActiveUserStoryList();
@@ -263,7 +262,7 @@ public class UserStoryRepositoryTest {
         userStoryRepo.save(userStory3);
 
         //Act
-        List<UserStory> userStoryList = userStoryRepo.findAllUserStoryByProjectID("Project_2020_1");
+        List<UserStory> userStoryList = userStoryRepo.findAllByProjectID(projectID3);
         //Assert
         assertEquals(1, userStoryList.size());
     }
@@ -275,9 +274,11 @@ public class UserStoryRepositoryTest {
         UserStory userStory3 = mock(UserStory.class);
         UserStoryID userStoryID3 = mock(UserStoryID.class);
         ProjectID projectID3 = mock(ProjectID.class);
+        ProjectID projectID4 = mock(ProjectID.class);
         UsTitle usTitle3 = mock(UsTitle.class);
         when(userStoryID3.getProjectID()).thenReturn(projectID3);
         when(projectID3.getCode()).thenReturn("Project_2020_1");
+        when(projectID4.getCode()).thenReturn("Project_2020_2");
         when(userStoryID3.getUsTitle()).thenReturn(usTitle3);
         when(usTitle3.getTitleUs()).thenReturn("As a PO, i want to test this string");
         when(userStory3.getUserStoryID()).thenReturn(userStoryID3);
@@ -290,7 +291,7 @@ public class UserStoryRepositoryTest {
         userStoryRepo.save(userStory3);
 
         //Act
-        List<UserStory> userStoryList = userStoryRepo.findAllUserStoryByProjectID("Project_2021_1");
+        List<UserStory> userStoryList = userStoryRepo.findAllByProjectID(projectID4);
         //Assert
         assertEquals(0, userStoryList.size());
     }
