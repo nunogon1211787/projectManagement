@@ -29,12 +29,17 @@ public class UserController {
     @Autowired
     private SystemUserRepositoryInterface sURepository;
 
+    @PostMapping("users")
+    public SystemUserJpa addUser(@RequestBody SystemUserJpa a) {
+        return this.sURepository.save(a);
+    }
+
     @GetMapping("users")
     public List<SystemUserJpa> getUsers() {
         return this.sURepository.findAll();
     }
 
-    @GetMapping
+//    @GetMapping
     public ResponseEntity<Object> searchUsersByTypedParams(@RequestParam SearchUserDTO inDto){
 
         try {
@@ -60,7 +65,7 @@ public class UserController {
         return new ResponseEntity<>(projectsDto, HttpStatus.OK);
     }
 
-    @PostMapping
+//    @PostMapping
     public ResponseEntity<Object> registerUser(@RequestBody NewUserInfoDTO infoDTO) {
         OutputUserDTO outDTO;
         try {

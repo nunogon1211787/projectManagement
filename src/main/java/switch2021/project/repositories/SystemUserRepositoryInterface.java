@@ -6,4 +6,5 @@ import switch2021.project.repositories.jpa.SystemUserJpa;
 
 @Repository
 public interface SystemUserRepositoryInterface extends JpaRepository<SystemUserJpa, Long> {
+
 }

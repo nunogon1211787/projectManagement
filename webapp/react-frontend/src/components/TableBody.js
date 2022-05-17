@@ -26,7 +26,7 @@ function TableBody() {
                 <tr key={index} onClick={() => handleOnClick(row.userName)} style={{ cursor: "pointer" }}>
                     <td>{row.userName}</td>
                     <td>{row.email}</td>
-                    <td>{row.function}</td>
+                    <td>{row.function1}</td>
                     <td>{row.photo}</td>
                 </tr>
             )
@@ -38,7 +38,7 @@ function TableBody() {
                             <tr key={index}>
                                 <td style={{ width: "50px" }}>{row.userName}</td>
                                 <td style={{ width: "200px" }}>{row.email}</td>
-                                <td style={{ width: "200px" }}>{row.function}</td>
+                                <td style={{ width: "200px" }}>{row.function1}</td>
                                 <td style={{ width: "300px" }}>{row.photo}</td>
                             </tr>
                             <tr><td colspan="4"><TodosList /></td>

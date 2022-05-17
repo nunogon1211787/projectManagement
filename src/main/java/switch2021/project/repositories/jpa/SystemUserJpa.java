@@ -17,13 +17,13 @@ public class SystemUserJpa {
     private long id;
     private String userName;
     private String email;
-    private String function;
+    private String function1;
     private String photo;
 
     public SystemUserJpa(String userName, String email, String function, String photo) {
         this.userName = userName;
         this.email = email;
-        this.function = function;
+        this.function1 = function;
         this.photo = photo;
     }
 }

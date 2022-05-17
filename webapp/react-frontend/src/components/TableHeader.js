@@ -7,7 +7,7 @@ function TableHeader() {
     return(
         <thead>
                 <tr>
-                    <th style={{width:"50px"}}>{headers.username}</th>
+                    <th style={{width:"50px"}}>{headers.userName}</th>
                     <th style={{width:"200px"}}>{headers.email}</th>
                     <th style={{width:"200px"}}>{headers.function1}</th>
                     <th style={{width:"300px"}}>{headers.photo}</th>

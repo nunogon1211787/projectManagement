@@ -7,6 +7,8 @@ import {
   FETCH_USER_TODOS_SUCCESS,
   FETCH_USER_TODOS_FAILURE,
   DELETE_USER_TODOS,
+  ADD_USER_SUCCESS,
+  ADD_USER_FAILURE
 } from './Actions'
 
 
@@ -80,6 +82,25 @@ function reducer(state, action) {
             data: [],
             userid: 0,
           }
+      }
+    case ADD_USER_SUCCESS:
+      return {
+        ...state,
+        users: {
+          loading: false,
+          error: null,
+          data: []
+        }
+      }
+
+    case ADD_USER_FAILURE:
+      return {
+        ...state,
+        users: {
+          loading: false,
+          error: null,
+          data: []
+        }
       }
     default:
       return state
