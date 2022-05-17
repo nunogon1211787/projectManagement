@@ -5,8 +5,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import switch2021.project.datamodel.ProjectJpa;
+import switch2021.project.model.Project.ProjectReeng;
+import switch2021.project.model.valueObject.*;
+import switch2021.project.repositories.ProjectRepository;
 import switch2021.project.repositories.SystemUserRepositoryInterface;
+import switch2021.project.repositories.jpa.ProjectJpaRepository;
 import switch2021.project.repositories.jpa.SystemUserJpa;
+
+import java.time.LocalDate;
 
 @SpringBootApplication
 public class SwitchApp implements CommandLineRunner {
@@ -24,6 +31,7 @@ public class SwitchApp implements CommandLineRunner {
         this.sURepository.save(new SystemUserJpa("Ramesh Fadatare", "ramesh@gmail.com", "tester", "photo.png"));
         this.sURepository.save(new SystemUserJpa("Tom Cruise", "tom@gmail.com", "actor", "photo.png"));
         this.sURepository.save(new SystemUserJpa("Tony Stark", "tony@gmail.com", "tester", "photo.png"));
+
     }
 
     @Bean
@@ -32,4 +40,5 @@ public class SwitchApp implements CommandLineRunner {
 
         };
     }
+
 }

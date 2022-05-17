@@ -2,10 +2,12 @@ package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import switch2021.project.datamodel.assembler.ProjectJpaAssembler;
 import switch2021.project.dto.OutputResourceDTO;
 import switch2021.project.dto.ResourceDTOReeng;
 import switch2021.project.factoryInterface.ResourceFactoryInterfaceReeng;
-import switch2021.project.interfaces.IProjectRepo;
+import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.repositories.ProjectRepository;
 import switch2021.project.interfaces.IResourceRepo;
 import switch2021.project.mapper.ResourceMapper;
 
@@ -25,14 +27,15 @@ public class CreateResourceInAProjectService {
     private IResourceRepo iRepoResource;
 //    @Qualifier("projectStoreReeng")
     @Autowired
-    private IProjectRepo iRepoProject;
+    private ProjectRepository iRepoProject;
     @Autowired
     private ResourceMapper resourceMapper;
     @Autowired
     private ResourceFactoryInterfaceReeng iResourceFactory;
     @Autowired
     private ManageResourcesService manageResourcesService;
-
+    @Autowired
+    private ProjectJpaAssembler assembler;
 
 
     public OutputResourceDTO createAndSaveResource(ResourceDTOReeng dto){
@@ -46,10 +49,13 @@ public class CreateResourceInAProjectService {
         List<ResourceReeng> projectTeamList = iRepoResource.findAllByProject(dto.projectId);
         List<ResourceReeng> resourceProjectsList = iRepoResource.findAllByUser(dto.systemUserID);
 
-        ProjectReeng project = iRepoProject.findById(dto.projectId);
+        ProjectReeng project = iRepoProject.findById(dto.projectId).get();
 
         boolean systemUserExists = iRepoResource.existsById(dto.systemUserID);
-        boolean projectExists = iRepoProject.existById(dto.projectId);
+        // ------------- new
+        ProjectID projectID = new ProjectID(dto.projectId);
+        // ------------- new
+        boolean projectExists = iRepoProject.existsById(projectID);
         boolean isValidToProject = project.isActiveInThisDate(startDate) && project.isActiveInThisDate(endDate);
         boolean isValidToCreate = manageResourcesService.resourceCreationValidation(projRole, percAllo, startDate, endDate, projectTeamList, resourceProjectsList);
 

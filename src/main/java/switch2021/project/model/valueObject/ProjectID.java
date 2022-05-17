@@ -20,19 +20,9 @@ public class ProjectID implements ValueObject<ProjectID> {
     /**
      * Constructor
      **/
-    public ProjectID(int x) {
-        if (x <= 0)
-            throw new IllegalArgumentException("Project code number cannot be negative");
-
+    public ProjectID(String x) {
 
         this.code = "Project_" + LocalDate.now().getYear() + "_" + x;
-    }
-
-    public ProjectID(String projectCode) {
-
-        if (projectCode == null)
-            throw new IllegalArgumentException("Project number cannot be null");
-        this.code = projectCode;
     }
 
     @Override

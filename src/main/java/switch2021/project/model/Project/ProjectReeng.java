@@ -39,6 +39,7 @@ public class ProjectReeng {
         this.numberOfSprints = numberOfSprints;
         this.sprintDuration = sprintDuration;
         this.budget = budget;
+        this.projectStatus = ProjectStatusEnum.PLANNED;
 
     }
 

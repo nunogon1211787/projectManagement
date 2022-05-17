@@ -12,21 +12,5 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(SpringExtension.class)
 public class ProjectIDFactoryTest {
 
-    @InjectMocks
-    ProjectIDFactory projectIDFactory;
-
-    @Mock
-    ProjectID projectID;
-
-    @Test
-    @DisplayName("Test to create a projectID, success")
-    public void createProjectID_Success(){
-        //Arrange
-        String x = "Project_2022_1";
-        //Act
-        projectID = projectIDFactory.create(x);
-        //Assert
-        assertEquals(x, projectID.getCode());
-    }
 
 }

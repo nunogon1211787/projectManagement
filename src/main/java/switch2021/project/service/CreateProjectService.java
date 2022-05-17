@@ -6,49 +6,39 @@ import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.factoryInterface.IProjectFactory;
 import switch2021.project.interfaces.ITypologyRepo;
-import switch2021.project.interfaces.IProjectRepo;
+import switch2021.project.repositories.ProjectRepository;
 import switch2021.project.mapper.ProjectMapper;
 import switch2021.project.model.Project.ProjectReeng;
-import switch2021.project.model.Project.ProjectStatusEnum;
-import switch2021.project.model.valueObject.*;
 
-import java.time.LocalDate;
 
 @Service
 public class CreateProjectService {
 
     @Autowired
-    private IProjectRepo IProjectRepo;
+    private ProjectRepository projRepo;
     @Autowired
     private ITypologyRepo iTypologyRepo;
     @Autowired
-    private IProjectFactory IProjectFactory;
+    private IProjectFactory iProjectFactory;
     @Autowired
     private ProjectMapper projectsMapper;
 
-
     public CreateProjectService() {
+
     }
 
     public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) {
-        int nextId;
 
-        if (IProjectRepo.findAll().isEmpty()) {
-            nextId = 1;
-        } else {
-            nextId = IProjectRepo.findAll().size();
-        }
+        ProjectReeng newProject = iProjectFactory.createProject(projDTO);
 
-        ProjectReeng newProject = IProjectFactory.createProject(projDTO, nextId);
+        ProjectReeng savedProject = projRepo.save(newProject);
 
-        IProjectRepo.save(newProject);
-
-        return projectsMapper.model2Dto(newProject);
+        return projectsMapper.model2Dto(savedProject);
     }
 
-    public OutputProjectDTO editProject(ProjectDTO projectDTO) {
+/*    public OutputProjectDTO editProject(ProjectDTO projectDTO) {
 
-        ProjectReeng proj = IProjectRepo.findById(projectDTO.code);
+        ProjectReeng proj = projRepo.findById(projectDTO.code);
 
         if (!projectDTO.projectName.isEmpty()) {
             proj.setProjectName(new Description(projectDTO.projectName));
@@ -79,6 +69,6 @@ public class CreateProjectService {
         }
 
         return projectsMapper.model2Dto(proj);
-    }
+    }*/
 
 }

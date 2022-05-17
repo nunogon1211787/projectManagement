@@ -3,7 +3,7 @@ package switch2021.project.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.OutputProjectDTO;
-import switch2021.project.interfaces.IProjectRepo;
+import switch2021.project.repositories.ProjectRepository;
 import switch2021.project.mapper.ProjectMapper;
 import switch2021.project.model.Project.ProjectReeng;
 
@@ -15,7 +15,7 @@ public class ShowAllProjectsService {
 
 
     @Autowired
-    IProjectRepo repo;
+    ProjectRepository repo;
     @Autowired ProjectMapper map;
 
 
