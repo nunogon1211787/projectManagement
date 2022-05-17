@@ -2,6 +2,7 @@ package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.TypologyDTO;
 import switch2021.project.factoryInterface.ITypologyFactory;
 import switch2021.project.interfaces.ITypologyRepo;
@@ -29,7 +30,7 @@ public class TypologyService {
      **/
     public TypologyDTO createAndSaveTypology(TypologyDTO inputDto) {
         Typology newTypo = this.iTypologyFactory.createTypology(inputDto);
-        if(!iTypologyRepo.saveTypology(newTypo)) {
+        if(!iTypologyRepo.save(newTypo)) {
             throw new IllegalArgumentException("Typology already exists!");
         }
         return mapper.modelToDto(newTypo);
@@ -39,8 +40,8 @@ public class TypologyService {
     /**
      * Typology Find's Methods
      */
-    public TypologyDTO findTypologyByDescription(TypologyDTO inputDto) {
-        Typology outputTypology = iTypologyRepo.findTypologyById(inputDto.description);
+    public TypologyDTO findTypologyByDescription(IdDTO idDTO) {
+        Typology outputTypology = iTypologyRepo.findTypologyById(idDTO.id);
 
         if(outputTypology == null){
             throw new IllegalArgumentException("This Typology does not exist!");
@@ -61,11 +62,11 @@ public class TypologyService {
     /**
      * Typology Delete's Methods
      */
-    public void deleteTypology(TypologyDTO inputDto) {
-        if (!iTypologyRepo.existsByTypologyId(inputDto.getDescription())) {
+    public void deleteTypology(IdDTO idDTO) {
+        if (!iTypologyRepo.existsByTypologyId(idDTO.getId())) {
             throw new IllegalArgumentException("Typology does not exists!");
         } else {
-            iTypologyRepo.deleteTypology(inputDto.description);
+            iTypologyRepo.deleteTypology(idDTO.id);
         }
     }
 }

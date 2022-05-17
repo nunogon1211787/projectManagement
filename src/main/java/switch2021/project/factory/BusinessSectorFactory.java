@@ -1,9 +1,10 @@
 package switch2021.project.factory;
 
-import switch2021.project.factoryInterface.BusinessSectorFactoryInterface;
+import org.springframework.stereotype.Component;
 import switch2021.project.model.valueObject.BusinessSector;
 
-public class BusinessSectorFactory implements BusinessSectorFactoryInterface {
+@Component
+public class BusinessSectorFactory implements switch2021.project.factoryInterface.IBusinessSectorFactory {
 
     @Override
     public BusinessSector createBusinessSector(String description) {

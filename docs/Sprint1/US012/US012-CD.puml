@@ -4,13 +4,13 @@ skinparam classAttributeIconSize 0
 
 title US012 - "As Director, I want to create a new project typology."
 
-package "InfraEstructure" #lightblue {
+package "InfraEstructure" <<Rectangle>> #lightblue {
     class CreateTypologyRoute <<Component>>{
     }
 }
 
-package "Interface Adapter" #lightgreen{
-package "Controllers" <<Folder>>{
+package "Interface Adapter" <<Rectangle>> #lightgreen{
+package "Controllers" <<Re>>{
     class TypologyController <<Component>>{
     +createTypology(json)
     '+findTypologyByDescription(inputDto)
@@ -29,7 +29,7 @@ package "Controllers" <<Folder>>{
 }
 }
 
-package "DTO" {
+package "DTO" <<Rectangle>> {
     class TypologyDTO <<Component>> {
     -description : String
     }
@@ -40,7 +40,7 @@ package "DTO" {
     }
 }
 
-package "Application Service" #implementation {
+package "Application Service" <<Rectangle>> #implementation {
     package "App Service" {
         class CreateTypologyService <<Service>>{
         +createAndSaveTypology(inputDto)
@@ -66,7 +66,7 @@ package "Application Service" #implementation {
 }
 
 
-package "Domain" #burlywood  {
+package "Domain" <<Rectangle>>#burlywood  {
     package "Factory" {
         class TypologyFactory <<Factory>> {
         +createTypology(inputDto)

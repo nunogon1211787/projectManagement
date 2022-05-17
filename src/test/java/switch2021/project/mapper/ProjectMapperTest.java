@@ -1,49 +1,111 @@
 package switch2021.project.mapper;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import switch2021.project.dto.OutputProjectDTO;
+import switch2021.project.dto.ProjectDTO;
+
+import switch2021.project.model.*;
+import switch2021.project.model.Project.*;
+import switch2021.project.model.Resource.old.Resource;
+import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.valueObject.*;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static switch2021.project.model.Project.ProjectStatusEnum.CLOSED;
+
+
 public class ProjectMapperTest {
 
-
-//    @Test
-//    public void ProjectMappertoDTOListNullTest() {
-//        //Arrange
-//        Company company = new Company();
-//        ProjectsMapper projectsMapper = new ProjectsMapper();
-//        //Act
-//        List<ProjectDTO> test = new ArrayList<>();
-//        //Assert
-//        assertEquals(test, projectsMapper.toDTO(company.getProjectStore().getProjectList()));
-//    }
-
-
-/*    @Test
-    @DisplayName("check if the list size is correct")
-    public void getProjectListByUserEmailWith2Projects() {
+    @Test
+    @DisplayName("Transform newProject into DTO")
+    public void ToDtoNewProject() {
         //Arrange
-        Company company = new Company();
-        ProjectsMapper mapper = new ProjectsMapper();
-        Typology typo = company.getTypologyRepository().findTypologyByDescription("Fixed Cost");
-        Customer customer = company.getCustomerStore().getCustomerByName("Teste");
-        BusinessSector sector = company.getBusinessSectorStore().getBusinessSectorByDescription("sector");
-        Project project = company.getProjectStore().createAndSaveProject( "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
-        Project project2 = company.getProjectStore().createAndSaveProject( "prototype", "test56", customer,
-                typo, sector, LocalDate.now(), 7, 5000);
-        UserProfile userProfile = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser newUser = new SystemUser("xyz", "cris@ipp.pt", "des", "Qwerty_1", "Qwerty_1", "photo.png", userProfile.getUserProfileId());
-        LocalDate startDate = LocalDate.of(2021, 12, 31);
-        LocalDate endDate = LocalDate.of(2022, 1, 5);
-        Resource input = new Resource(newUser, startDate, endDate, new CostPerHour(100), new PercentageOfAllocation(.5));
+        ProjectMapper projectMapper = new ProjectMapper();
+        ProjectReeng project = mock(ProjectReeng.class);
+        ProjectID projectID = mock(ProjectID.class);
+        Description name = mock(Description.class);
+        Description description = mock(Description.class);
+        BusinessSector businessSector = mock(BusinessSector.class);
+        Description bs = mock(Description.class);
+        NumberOfSprints numberOfSprints = mock(NumberOfSprints.class);
+        Budget budget = mock(Budget.class);
 
-        project.addResource(input);
-        project2.addResource(input);
+        when(project.getProjectCode()).thenReturn(projectID);
+        when(projectID.getCode()).thenReturn("Project_2021_2");
+        when(project.getProjectName()).thenReturn(name);
+        when(name.getText()).thenReturn("Make test");
+        when(project.getDescription()).thenReturn(description);
+        when(description.getText()).thenReturn("make DS");
+        when(project.getBusinessSector()).thenReturn(businessSector);
+        when(businessSector.getDescription()).thenReturn(bs);
+        when(bs.getText()).thenReturn("Medical");
+        when(project.getNumberOfSprints()).thenReturn(numberOfSprints);
+        when(numberOfSprints.getNumberOfSprintsVO()).thenReturn(1);
+        when(project.getProjectStatus()).thenReturn(CLOSED);
+        when(project.getBudget()).thenReturn(budget);
+        when(budget.getBudgetVO()).thenReturn(5.0);
+        when(project.getStartDate()).thenReturn(LocalDate.now());
 
-        // Act
-        List<ProjectDTO> projectList = mapper.toDtoByUser(company.getProjectStore().getProjectList());
-        // Assert
-        assertEquals(2, projectList.size());
+        //Act
+        OutputProjectDTO outputProjectDTO = projectMapper.model2Dto(project);
 
+        //Assert
+        assertEquals(project.getProjectCode().getCode(), outputProjectDTO.code);
+        assertEquals(project.getProjectName().getText(), outputProjectDTO.projectName);
+        assertEquals(project.getBusinessSector().getDescription().getText(), outputProjectDTO.businessSector);
+        assertEquals(project.getDescription().getText(), outputProjectDTO.description);
     }
 
- */
+    @Test
+    @DisplayName("Validate data from outputDTO")
+    public void getInfoFromOutPutProjectDTO() {
+        //Arrange
+        ProjectMapper projectMapper = new ProjectMapper();
+        ProjectReeng project = mock(ProjectReeng.class);
+        ProjectID projectID = mock(ProjectID.class);
+        Description name = mock(Description.class);
+        Description description = mock(Description.class);
+        BusinessSector businessSector = mock(BusinessSector.class);
+        Description bs = mock(Description.class);
+        NumberOfSprints numberOfSprints = mock(NumberOfSprints.class);
+        Budget budget = mock(Budget.class);
+
+        when(project.getProjectCode()).thenReturn(projectID);
+        when(projectID.getCode()).thenReturn("Project_2021_2");
+        when(project.getProjectName()).thenReturn(name);
+        when(name.getText()).thenReturn("Make test");
+        when(project.getDescription()).thenReturn(description);
+        when(description.getText()).thenReturn("make DS");
+        when(project.getBusinessSector()).thenReturn(businessSector);
+        when(businessSector.getDescription()).thenReturn(bs);
+        when(bs.getText()).thenReturn("Medical");
+        when(project.getNumberOfSprints()).thenReturn(numberOfSprints);
+        when(numberOfSprints.getNumberOfSprintsVO()).thenReturn(1);
+        when(project.getProjectStatus()).thenReturn(CLOSED);
+        when(project.getBudget()).thenReturn(budget);
+        when(budget.getBudgetVO()).thenReturn(5.0);
+        when(project.getStartDate()).thenReturn(LocalDate.now());
+
+        //Act
+        OutputProjectDTO outputProjectDTO = projectMapper.model2Dto(project);
+
+        //Assert
+        assertEquals(outputProjectDTO.getProjectName(), "Make test");
+        assertEquals(outputProjectDTO.getCode(), "Project_2021_2");
+        assertEquals(outputProjectDTO.getDescription(), "make DS");
+        assertEquals(outputProjectDTO.getBusinessSector(), "Medical");
+    }
 
 }

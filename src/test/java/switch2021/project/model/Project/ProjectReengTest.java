@@ -1,16 +1,17 @@
 package switch2021.project.model.Project;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.*;
-
 import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(SpringExtension.class)
 class ProjectReengTest {
 
     @Mock
@@ -30,173 +31,267 @@ class ProjectReengTest {
     @Mock
     NumberOfSprints numberOfSprints;
     @Mock
-    LocalDate startDate;
-    @Mock
     SprintDuration sprintDuration;
-    @Mock
-    LocalDate endDate;
+
 
 
     @Test
-    void hasCode() {
+    void hasCodeTrue() {
+        //Arrange
         ProjectID code = mock(ProjectID.class);
         when(code.getCode()).thenReturn("test");
-
-        ProjectReeng projectReeng = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
+        LocalDate startDate = LocalDate.now();
+        //Act
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints, sprintDuration, budget);
         projectReeng.setProjectCode(code);
-
+        //Assert
         assertTrue(projectReeng.hasCode("test"));
     }
 
     @Test
-    void testEquals() {
-        Description name_2 = mock(Description.class);
-        ProjectID id_2 = mock(ProjectID.class);
-
-        ProjectReeng proj_1 = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
-        proj_1.setProjectCode(projectID);
-
-        ProjectReeng proj_2 = new ProjectReeng(name_2,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
-        proj_2.setProjectCode(id_2);
-
-        ProjectReeng proj_3 = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
-        proj_3.setProjectCode(id_2);
-
-        assertEquals(proj_1,proj_1);
-        assertNotEquals(proj_1,proj_2);
-        assertNotEquals(proj_3,proj_1);
-        assertNotEquals(customer,proj_2);
+    void hasCodeFalse() {
+        //Arrange
+        ProjectID code = mock(ProjectID.class);
+        when(code.getCode()).thenReturn("test");
+        LocalDate startDate = LocalDate.now();
+        //Act
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints, sprintDuration, budget);
+        projectReeng.setProjectCode(code);
+        //Assert
+        assertFalse(projectReeng.hasCode("testX"));
     }
 
+
     @Test
+    void testEquals() {
+        //Arrange
+        ProjectID code = mock(ProjectID.class);
+        when(code.getCode()).thenReturn("test");
+        LocalDate startDate = LocalDate.now();
+        Description name_2 = mock(Description.class);
+        ProjectID id_2 = mock(ProjectID.class);
+        //Act
+        ProjectReeng proj_1 = new ProjectReeng(projectName, description, businessSector, startDate, numberOfSprints
+                , sprintDuration, budget);
+
+        proj_1.setProjectCode(code);
+        ProjectReeng proj_2 = new ProjectReeng(name_2, description, businessSector, startDate, numberOfSprints
+                , sprintDuration, budget);
+        proj_2.setProjectCode(id_2);
+
+        ProjectReeng proj_3 = new ProjectReeng(projectName, description, businessSector, startDate, numberOfSprints
+                , sprintDuration, budget);
+        proj_3.setProjectCode(id_2);
+        //Assert
+        assertEquals(proj_1, proj_1);
+        assertNotEquals(proj_1, proj_2);
+        assertNotEquals(proj_3, proj_1);
+        assertNotEquals(customer, proj_2);
+    }
+
+        @Test
     void canEqual() {
     }
 
     @Test
     void testHashCode() {
+        //Arrange
         ProjectID id_2 = mock(ProjectID.class);
-
-        ProjectReeng proj_1 = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
+        LocalDate startDate = LocalDate.now();
+        //Act
+        ProjectReeng proj_1 = new ProjectReeng(projectName, description, businessSector, startDate, numberOfSprints
+                , sprintDuration, budget);
         proj_1.setProjectCode(projectID);
 
-        ProjectReeng proj_2 = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
+        ProjectReeng proj_2 = new ProjectReeng(projectName, description, businessSector, startDate, numberOfSprints
+                , sprintDuration, budget);
         proj_2.setProjectCode(id_2);
-
-        assertEquals(proj_1.hashCode(),proj_1.hashCode());
-        assertNotEquals(proj_1.hashCode(),proj_2.hashCode());
+        //Assert
+        assertEquals(proj_1.hashCode(), proj_1.hashCode());
+        assertNotEquals(proj_1.hashCode(), proj_2.hashCode());
     }
 
     @Test
     void setAndGetProjectCode() {
-        ProjectReeng projectReeng = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
-
-        assertEquals(projectID,projectReeng.getProjectCode());
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        //Act
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints, sprintDuration, budget);
+        projectReeng.setProjectCode(projectID);
+        //Assert
+        assertEquals(projectID, projectReeng.getProjectCode());
     }
 
     @Test
     void setAndGetProjectName() {
-        ProjectReeng projectReeng = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        //Act
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints, sprintDuration, budget);
         projectReeng.setProjectName(projectName);
-
+        //Assert
         assertEquals(projectName, projectReeng.getProjectName());
     }
 
     @Test
     void setAndGetDescription() {
-        ProjectReeng projectReeng = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        //Act
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints, sprintDuration, budget);
         projectReeng.setDescription(description);
-
-        assertEquals(description, projectReeng.getProjectName());
+        //Assert
+        assertEquals(description, projectReeng.getDescription());
     }
 
     @Test
     void setAndGetTypology() {
-        ProjectReeng projectReeng = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        //Act
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints, sprintDuration, budget);
         projectReeng.setTypology(typology);
-
+        //Assert
         assertEquals(typology, projectReeng.getTypology());
     }
 
     @Test
     void setAndGetProjectStatus() {
-        ProjectReeng projectReeng = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        //Act
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints
+                , sprintDuration, budget);
         projectReeng.setProjectStatus(ProjectStatusEnum.PLANNED);
-
+        //Assert
         assertEquals(ProjectStatusEnum.PLANNED, projectReeng.getProjectStatus());
     }
 
     @Test
     void setAndGetCustomer() {
-        ProjectReeng projectReeng = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        //Act
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints
+                , sprintDuration, budget);
         projectReeng.setCustomer(customer);
-
+        //Assert
         assertEquals(customer, projectReeng.getCustomer());
     }
 
     @Test
     void setAndGetBusinessSector() {
-        ProjectReeng projectReeng = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        //Act
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints
+                , sprintDuration, budget);
         projectReeng.setBusinessSector(businessSector);
-
+        //Assert
         assertEquals(businessSector, projectReeng.getBusinessSector());
     }
 
     @Test
     void setAndGetNumberOfSprints() {
-        ProjectReeng projectReeng = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        //Act
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints
+                , sprintDuration, budget);
         projectReeng.setNumberOfSprints(numberOfSprints);
-
+        //Assert
         assertEquals(numberOfSprints, projectReeng.getNumberOfSprints());
     }
 
     @Test
     void setAndGetBudget() {
-        ProjectReeng projectReeng = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        //Act
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints
+                , sprintDuration, budget);
         projectReeng.setBudget(budget);
-
+        //Assert
         assertEquals(budget, projectReeng.getBudget());
     }
 
     @Test
     void setAndGetSprintDuration() {
-        ProjectReeng projectReeng = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        //Act
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints
+                , sprintDuration, budget);
         projectReeng.setSprintDuration(sprintDuration);
-
+        //Assert
         assertEquals(sprintDuration, projectReeng.getSprintDuration());
     }
 
     @Test
     void setAndGetStartDate() {
-        ProjectReeng projectReeng = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        //Act
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints
+                , sprintDuration, budget);
         projectReeng.setStartDate(startDate);
-
+        //Assert
         assertEquals(startDate, projectReeng.getStartDate());
     }
 
     @Test
     void setAndGetEndDate() {
-        ProjectReeng projectReeng = new ProjectReeng(projectName,description,businessSector,startDate,numberOfSprints
-                ,sprintDuration,budget);
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = LocalDate.now();
+        //Act
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints
+                , sprintDuration, budget);
         projectReeng.setEndDate(endDate);
-
+        //Assert
         assertEquals(endDate, projectReeng.getEndDate());
     }
+
+    @Test
+    void isActiveInThisDateFalse() {
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints
+                , sprintDuration, budget);
+        //Act
+        boolean expected = projectReeng.isActiveInThisDate(LocalDate.now().minusDays(1));
+        //Assert
+        assertFalse(expected);
+    }
+
+    @Test
+    void isActiveInThisDateTrue() {
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
+                numberOfSprints
+                , sprintDuration, budget);
+        //Act
+        projectReeng.setEndDate(LocalDate.now().plusDays(10));
+        boolean expected = projectReeng.isActiveInThisDate(LocalDate.now().plusDays(10));
+        //Assert
+        assertTrue(expected);
+    }
+
 
 }

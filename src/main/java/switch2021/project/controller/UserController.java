@@ -5,14 +5,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.*;
+import switch2021.project.repositories.SystemUserRepositoryInterface;
+import switch2021.project.repositories.jpa.SystemUserJpa;
 import switch2021.project.service.RegisterUserService;
 import switch2021.project.service.SearchUsersByParamsService;
 import switch2021.project.service.ShowAllCurrentProjectsByUserService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/")
 public class UserController {
 
     @Autowired
@@ -21,6 +24,15 @@ public class UserController {
     private ShowAllCurrentProjectsByUserService showAllCurrentProjectsByUserService;
     @Autowired
     private SearchUsersByParamsService searchUsersByParamsService;
+
+
+    @Autowired
+    private SystemUserRepositoryInterface sURepository;
+
+    @GetMapping("users")
+    public List<SystemUserJpa> getUsers() {
+        return this.sURepository.findAll();
+    }
 
     @GetMapping
     public ResponseEntity<Object> searchUsersByTypedParams(@RequestParam SearchUserDTO inDto){

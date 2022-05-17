@@ -7,6 +7,7 @@ import switch2021.project.utils.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Getter
 public class User implements Entity<User> {
 
