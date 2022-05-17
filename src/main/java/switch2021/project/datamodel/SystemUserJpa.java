@@ -1,4 +1,4 @@
-package switch2021.project.repositories.jpa;
+package switch2021.project.datamodel;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

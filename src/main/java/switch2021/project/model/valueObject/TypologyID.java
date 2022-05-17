@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import switch2021.project.utils.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.util.Objects;
 
 /**
@@ -18,6 +19,7 @@ public class TypologyID implements ValueObject<TypologyID> {
     /**
      * Attributes
      */
+    @Embedded
     private Description description;
 
 

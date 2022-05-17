@@ -30,7 +30,7 @@ public class TypologyRepositoryReeg implements ITypologyRepo {
         Optional<TypologyJpa> opTypology = jpaRepository.findById(new TypologyID(new Description(description)));
         Typology typology = null;
 
-        if(opTypology.isPresent()) {
+        if (opTypology.isPresent()) {
             typology = assembler.toDomain(opTypology.get());
         }
         return typology;
@@ -41,7 +41,7 @@ public class TypologyRepositoryReeg implements ITypologyRepo {
         List<TypologyJpa> jpaList = jpaRepository.findAll();
         List<Typology> typologyList = new ArrayList<>();
 
-        for (TypologyJpa i: jpaList) {
+        for (TypologyJpa i : jpaList) {
             typologyList.add(assembler.toDomain(i));
         }
         return typologyList;
@@ -50,12 +50,15 @@ public class TypologyRepositoryReeg implements ITypologyRepo {
     @Override
     public boolean saveTypology(Typology typology) {
         TypologyJpa typologyJpa = assembler.toData(typology);
-        if(jpaRepository.save(typologyJpa) != null) {
+
+        if (!jpaRepository.existsById(typologyJpa.getId())) {
+            jpaRepository.save(typologyJpa);
             return true;
-        } else {
+        } else
             return false;
-        }
     }
+
+
 
     @Override
     public boolean existsByTypologyId(String description) {
