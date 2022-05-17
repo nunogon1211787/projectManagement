@@ -25,7 +25,7 @@ public interface IUserProfileRepo {
      */
     boolean save(UserProfile profile);
 
-    boolean existsByDescription(String userProfileName);
+     boolean existsByDescription(String userProfileName);
 
-    boolean existsByUserProfileId(UserProfileID profile);
+     boolean existsByUserProfileId(UserProfileID userProfileID);
 }

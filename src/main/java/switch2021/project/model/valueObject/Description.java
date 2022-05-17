@@ -11,8 +11,9 @@ import java.util.Objects;
 
 @ToString
 @Getter
+@Setter
 @Embeddable
-@NoArgsConstructor @Setter
+@NoArgsConstructor
 public class Description implements ValueObject<Description> {
 
     /**

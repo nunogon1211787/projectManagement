@@ -1,15 +1,22 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
 @Getter
+@Embeddable
+@NoArgsConstructor
 public class UserProfileID implements ValueObject<UserProfileID> {
 
     /**
      * Attributes
      * */
-    private final Description userProfileName;
+    @Embedded
+    private Description userProfileName;
 
     /**
      * Constructor
