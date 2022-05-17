@@ -10,6 +10,7 @@ import switch2021.project.repositories.jpa.SystemUserJpa;
 import switch2021.project.service.RegisterUserService;
 import switch2021.project.service.SearchUsersByParamsService;
 import switch2021.project.service.ShowAllCurrentProjectsByUserService;
+import switch2021.project.service.UpdatePersonalDataService;
 
 import java.util.List;
 
@@ -24,6 +25,8 @@ public class UserController {
     private ShowAllCurrentProjectsByUserService showAllCurrentProjectsByUserService;
     @Autowired
     private SearchUsersByParamsService searchUsersByParamsService;
+    @Autowired
+    private UpdatePersonalDataService updatePersonalDataService;
 
 
     @Autowired
@@ -73,4 +76,22 @@ public class UserController {
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
     }
+
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Object> updatePersonalData(@PathVariable("id") IdDTO idDTO ,
+                                                     @RequestBody UpdateDataDTO updateDataDTO) {
+
+        OutputUserDTO outputUserDTO;
+        try {
+            outputUserDTO = updatePersonalDataService.updatePersonalData(idDTO, updateDataDTO);
+            return new ResponseEntity<>(outputUserDTO, HttpStatus.OK);
+        }
+        catch (Exception error) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = error.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

@@ -17,6 +17,5 @@ public class UpdateDataDTO extends RepresentationModel<UpdateDataDTO> {
     public String photo;
     public String oldPassword;
     public String newPassword;
-    public String newPasswordConfirmation;
 
 }

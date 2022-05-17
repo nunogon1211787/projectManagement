@@ -1,6 +1,7 @@
 package switch2021.project.model.SystemUser;
 
 import lombok.Getter;
+import switch2021.project.dto.UpdateDataDTO;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.utils.Entity;
 
@@ -15,10 +16,10 @@ public class User implements Entity<User> {
      * Attributes of systemUser´s class
      */
     private final SystemUserID systemUserId;
-    private final Name userName;
-    private final Photo photo;
+    private Name userName;
+    private Photo photo;
     private Description encryptedPassword;
-    private final Function function;
+    private Function function;
     private final boolean isActive;
     private final List<UserProfileID> assignedIdProfiles;
     private final List<Request> requestedProfiles;
@@ -43,13 +44,9 @@ public class User implements Entity<User> {
     /**
      * Assigns
      */
-    /*
+
     public void assignName(Name userName) {
         this.userName = userName;
-    }
-
-    public void assignId(SystemUserID systemUserId) {
-        this.systemUserId = systemUserId;
     }
 
     public void assignPhoto(Photo photo) {
@@ -60,10 +57,6 @@ public class User implements Entity<User> {
         this.function = function;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-     */
 
     private void assignProfileId(UserProfileID profileId) {
         if (profileId.getUserProfileName().getText().trim().equalsIgnoreCase("visitor")){
@@ -113,31 +106,27 @@ public class User implements Entity<User> {
         return new Description(stringBuilder.toString());
     }
 
-/*
+
     /**
      * Method to update old password with the new password
      */
-/*   public boolean updatePassword(String oldPasswordUI, String newPassword, String newPasswordConfirmation) {
+  public boolean updatePassword(String oldPassword, String newPassword){
         boolean msg = false;
-
-        if (validateOldPassword(oldPasswordUI) && newPassword.equals(newPasswordConfirmation)) {
-            setPassword(new Password(newPassword));
+        if (validateOldPassword(oldPassword)) {
+            encryptPassword(new Password(newPassword));
             msg = true;
         }
         return msg;
     }
 
-
     /**
      * Method to validate the old password from the UI with thew old password from the System User
      */
-/*    private boolean validateOldPassword(String oldpasswordUI) {
-
-        Password pwd = new Password(oldpasswordUI);
-
-        return pwd.equals(this.password);
+    private boolean validateOldPassword(String oldPassword) {
+        Password pwd = new Password(oldPassword);
+        return pwd.toString().equals(oldPassword);
     }
-*/
+
     /**
      * Request Create and Save Method
      */
@@ -149,6 +138,23 @@ public class User implements Entity<User> {
         }
         return this.requestedProfiles.add(newRequest);
     }
+
+
+    /**
+     * Method to Edit Personal Data
+     */
+
+    public boolean editPersonalData(String userName, String function, String photo) {
+        boolean msg = false;
+        if(!(userName.isEmpty()) && !(function.isEmpty())) {
+            assignName(new Name(userName));
+            assignFunction(new Function(function));
+            assignPhoto(new Photo(photo));
+            msg = true;
+        }
+        return msg;
+    }
+
 
     /**
      * Override Methods
