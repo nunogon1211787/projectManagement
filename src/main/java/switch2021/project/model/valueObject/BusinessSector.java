@@ -1,6 +1,7 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 public class BusinessSector {

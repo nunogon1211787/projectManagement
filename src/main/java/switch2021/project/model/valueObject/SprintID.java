@@ -23,7 +23,7 @@ public class SprintID implements ValueObject<SprintID>, TaskContainerID {
 
     public SprintID(String sprintIdString){
         String [] values = sprintIdString.split("_");
-        this.projectID = new ProjectID(Integer.parseInt(values[2]));
+        this.projectID = new ProjectID(values[2]);
         this.sprintName = new Description(values[3]);
     }
 

@@ -7,6 +7,7 @@ import switch2021.project.utils.ValueObject;
 
 import javax.persistence.Embeddable;
 import java.util.Objects;
+
 @ToString
 @Getter
 @Embeddable

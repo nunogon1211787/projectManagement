@@ -1,10 +1,15 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Embeddable;
 
 @Getter
 @Setter
+@Embeddable
+@NoArgsConstructor
 public class Customer {
 
     /**

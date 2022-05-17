@@ -2,6 +2,8 @@ package switch2021.project.model.Project;
 
 import lombok.Getter;
 
+import javax.persistence.Embeddable;
+
 @Getter
 public enum ProjectStatusEnum {
 

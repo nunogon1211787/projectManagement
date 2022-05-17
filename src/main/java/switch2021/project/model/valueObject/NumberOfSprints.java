@@ -1,7 +1,9 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Getter
@@ -10,7 +12,7 @@ public class NumberOfSprints {
     /**
      * Attributes
      **/
-    private int numberOfSprintsVO;
+    private final int numberOfSprintsVO;
 
 
     /**

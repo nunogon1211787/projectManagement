@@ -45,7 +45,7 @@ public class SprintIDFactoryTest {
         when(descriptionFactory.createDescription(des)).thenReturn(description);
         //Act
         sprintID = sprintIDFactory.create(project, des);
-        String x = "Project_2022_1_Sprint Name";
+        String x = "Project_2022_Project_2022_1_Sprint Name";
         //Assert
         assertEquals(x, sprintID.toString());
     }
