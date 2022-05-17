@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.datamodel.TypologyJpa;
 import switch2021.project.datamodel.assembler.TypologyDomainDataAssembler;
-import switch2021.project.factory.TypologyFactory;
-import switch2021.project.factory.TypologyIDFactory;
 import switch2021.project.interfaces.ITypologyRepo;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.Description;
@@ -48,7 +46,7 @@ public class TypologyRepositoryReeg implements ITypologyRepo {
     }
 
     @Override
-    public boolean saveTypology(Typology typology) {
+    public boolean save(Typology typology) {
         TypologyJpa typologyJpa = assembler.toData(typology);
         if(jpaRepository.save(typologyJpa) != null) {
             return true;

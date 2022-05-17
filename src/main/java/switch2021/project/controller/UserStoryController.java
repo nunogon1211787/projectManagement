@@ -28,7 +28,7 @@ public class UserStoryController {
     /**
      * Create a User Story
      */
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<Object> createUserStory(@RequestBody UserStoryDTO userStoryDTO) {
         ErrorMessage message = new ErrorMessage();
         if (userStoryDTO.projectID == null || userStoryDTO.title == null || userStoryDTO.projectID.isEmpty() ||
