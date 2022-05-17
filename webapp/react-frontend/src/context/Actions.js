@@ -6,6 +6,9 @@ export const FETCH_USERS_STARTED = 'FETCH_USERS_STARTED';
 export const FETCH_USERS_SUCCESS = 'FETCH_USERS_SUCCESS';
 export const FETCH_USERS_FAILURE = 'FETCH_USERS_FAILURE';
 
+export const ADD_USER_SUCCESS = 'ADD_USER_SUCCESS';
+export const ADD_USER_FAILURE = 'FAILURE';
+
 export function fetchUsers(url, request, dispatch) {
   //função ser executado em caso de sucesso
   const success = (res) => dispatch(fetchUsersSuccess(res));
@@ -18,6 +21,12 @@ export function fetchUserTodos(url, request, dispatch) {
   const success = (res) => dispatch(fetchUserTodosSuccess(res));
   //função ser executado em caso de falha
   const failure = (err) => dispatch(fetchUserTodosFailure(err.message));
+  makeHTTPRequest(url, request, success, failure);
+}
+
+export function addUser(url, request, dispatch){
+  const success = (res) => dispatch(addUserSuccess(res));
+  const failure = (err) => dispatch(addUserFailure(err.message));
   makeHTTPRequest(url, request, success, failure);
 }
 
@@ -41,9 +50,30 @@ export function fetchUsersSuccess(users) {
 
   }
 }
+
+export function addUserSuccess(userName, email, function1, photo) {
+  return {
+    type: ADD_USER_SUCCESS,
+    payload: {
+      data:
+          [...userName, email, function1, photo]
+    }
+  }
+}
+
+
 export function fetchUsersFailure(message) {
   return {
     type: FETCH_USERS_FAILURE,
+    payload: {
+      error: message
+    }
+  }
+}
+
+export function addUserFailure(message) {
+  return {
+    type: ADD_USER_FAILURE,
     payload: {
       error: message
     }

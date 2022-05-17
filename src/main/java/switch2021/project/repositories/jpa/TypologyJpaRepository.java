@@ -9,28 +9,13 @@ import java.util.Optional;
 
 public interface TypologyJpaRepository extends JpaRepository<TypologyJpa, TypologyID> {
 
-    @Override
-    default <S extends TypologyJpa> S save(S s) {
-        return null;
-    }
+    TypologyJpa save(TypologyJpa typologyJpa);
 
-    @Override
-    default Optional<TypologyJpa> findById(TypologyID typologyID) {
-        return Optional.empty();
-    }
+    Optional<TypologyJpa> findById(TypologyID typologyID);
 
-    @Override
-    default boolean existsById(TypologyID typologyID) {
-        return false;
-    }
+    boolean existsById(TypologyID typologyID);
 
-    @Override
-    default List<TypologyJpa> findAll() {
-        return null;
-    }
+    List<TypologyJpa> findAll();
 
-    @Override
-    default void deleteById(TypologyID typologyID) {
-
-    }
+    void deleteById(TypologyID typologyID);
 }

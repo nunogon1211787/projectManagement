@@ -9,65 +9,43 @@ autonumber
 
 participant ": CreateUserStoryRoute" as System
 participant ": UserStoryController" as Ctrl
+participant "inDto : CreateUserStory" as dto
 participant ": CreateUserStoryService" as appService
 participant ": IUserStoryFactory" as factory
-participant ": UserStoryDTO" as usDto
-participant ": IUserStoryIDFactory" as IusID
-participant " userStoryID : UserStoryID" as usID
-participant "newUserStory : \n UserStory" as us
-participant ": IUsPriorityFactory" as IusPrio
-participant "usPriority : UsPriority" as usPrio
 participant ": IUserStoryRepo " as usStore
 participant ": UserStoryMapper" as usMapper
-participant "outputUsDto : \n OutputUsDTO" as outDto
+participant "newUserStory : \n UserStory" as us
+participant "outputUsDto : \n OutputUserStoryDTO" as outDto
+participant "exception :Exception" as exc
+participant "response:ResponseEntity" as json
 
 
 
-[o-> System: POST/userStories(json)
+[o-> System: POST/userstories(json)
 System -> Ctrl: createUserStory(json)
 note right
-Change from json to dto hidden to simplify diagram
+Json object was deserialize to a CreateUserStoryDTO object
 end note
-Ctrl -> appService: createAndSaveUserStory(userStoryDTO)
-appService -> factory:  createUserStory(userStoryDTO)
-factory -> usDto: projectID = getProjectID()
-deactivate
-factory -> usDto: title = getTitle()
-deactivate
-factory -> IusID: create(projectID, title)
- IusID-> usID **: create()
- IusID--> factory : userStoryID
+Ctrl -> appService: createAndSaveUserStory(inDto)
+appService -> factory:  createUserStory(inDto)
 
-factory-> usDto: priority = getPriority()
-deactivate
-factory -> IusPrio: create(priority)
- IusPrio-> usPrio **: create()
- IusPrio--> factory : usPriority
- note over us: other v.o.'s creation  are hidden to simplify the diagram
-factory-> usDto: description = getDescription()
- deactivate
- factory-> usDto: timeEstimate = getTimeEstimate()
-  deactivate
-
+note over factory : All parameters (value objects) are instantiated in their own factories.
 
 factory -> us **: create(userStoryID, usPriority, usDescription, usTimeEstimate)
 factory --> appService: newUserStory
 
 appService-> usStore: save(newUserStory)
-usStore-> usStore: existsByUserStoryId\n(UserStoryID)
-deactivate
-usStore-> usStore: add(newUserStory)
-deactivate
-usStore --> appService : true
+usStore --> appService : result
+opt if the new userstory already exist
+appService --> exc** : create(errorMessage)
+end
 appService-> usMapper : toDto(newUserStory)
 usMapper-> outDto **:create()
 usMapper --> appService: outputUsDto
 appService --> Ctrl: outputUsDto
-Ctrl --> System: outputUsJson
-note right
-Change from json to dto hidden to simplify diagram
-end note
-[<--System : Informs that user story was created
+Ctrl --> json**: create(outputUsDto)
+Ctrl --> System: response
+[<--System : Shows the user story created
 
 @enduml
 

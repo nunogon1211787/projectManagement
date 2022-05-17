@@ -39,7 +39,7 @@ public class RefineUserStoryController {
     }
 
     public UserStory getUserStory(UserStoryID idUserStory){
-        this.userStoryParent = this.userStoryStore.findUserStoryById(idUserStory.toString());
+        this.userStoryParent = this.userStoryStore.findByUserStoryId(idUserStory.toString());
         return userStoryParent;
     }
 //TODO CDC ver como podemos fazer update status us refined

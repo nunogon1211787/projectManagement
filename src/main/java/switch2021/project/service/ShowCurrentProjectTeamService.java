@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import switch2021.project.dto.DateDTO;
 import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.OutputResourceDTO;
-import switch2021.project.interfaces.IProjectRepo;
+import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.repositories.ProjectRepository;
+import switch2021.project.repositories.jpa.ProjectJpaRepository;
 import switch2021.project.interfaces.IResourceRepo;
 import switch2021.project.mapper.ResourceMapper;
 import switch2021.project.model.Resource.ManageResourcesService;
@@ -19,11 +21,13 @@ import java.util.List;
 public class ShowCurrentProjectTeamService {
 
     @Autowired
-    IProjectRepo projRepo;
+    ProjectRepository projRepo;
     @Autowired
     IResourceRepo resRepo;
-    @Autowired ResourceMapper map;
-    @Autowired ManageResourcesService dsrv;
+    @Autowired
+    ResourceMapper map;
+    @Autowired
+    ManageResourcesService dsrv;
 
     public List<OutputResourceDTO> showCurrentProjectTeam(IdDTO dto, DateDTO dateDto) {
 
@@ -31,7 +35,11 @@ public class ShowCurrentProjectTeamService {
 
         List<OutputResourceDTO> resourcesDto = new ArrayList<>();
 
-        if (projRepo.existById(projectId)){
+        // ------------- new ------------
+        ProjectID projectID = new ProjectID(projectId);
+        // ------------- new ------------
+
+        if (projRepo.existsById(projectID)){
 
             List<ResourceReeng> resources = resRepo.findAllByProject(projectId);
 

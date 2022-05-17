@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.*;
 import switch2021.project.repositories.SystemUserRepositoryInterface;
-import switch2021.project.repositories.jpa.SystemUserJpa;
+import switch2021.project.datamodel.SystemUserJpa;
 import switch2021.project.service.RegisterUserService;
 import switch2021.project.service.SearchUsersByParamsService;
 import switch2021.project.service.ShowAllCurrentProjectsByUserService;
@@ -32,12 +32,17 @@ public class UserController {
     @Autowired
     private SystemUserRepositoryInterface sURepository;
 
+    @PostMapping("users")
+    public SystemUserJpa addUser(@RequestBody SystemUserJpa a) {
+        return this.sURepository.save(a);
+    }
+
     @GetMapping("users")
     public List<SystemUserJpa> getUsers() {
         return this.sURepository.findAll();
     }
 
-    @GetMapping
+//    @GetMapping
     public ResponseEntity<Object> searchUsersByTypedParams(@RequestParam SearchUserDTO inDto){
 
         try {
@@ -63,7 +68,7 @@ public class UserController {
         return new ResponseEntity<>(projectsDto, HttpStatus.OK);
     }
 
-    @PostMapping
+//    @PostMapping
     public ResponseEntity<Object> registerUser(@RequestBody NewUserInfoDTO infoDTO) {
         OutputUserDTO outDTO;
         try {

@@ -47,7 +47,7 @@ public class UserStoryIDFactoryTest {
         when(usTitleFactory.create(titleUS)).thenReturn(usTitle);
         // Act
         userStoryID = userStoryIDFactory.create(projID, titleUS);
-        String expected = "Project_2022_1_As a PO, i want to test this string";
+        String expected = "Project_2022_Project_2022_1_As a PO, i want to test this string";
         //Assert
         assertEquals(expected, userStoryID.toString());
     }
@@ -56,7 +56,7 @@ public class UserStoryIDFactoryTest {
     @DisplayName("Test to create user story - projectID - with success")
     public void createUserStoryIDSuccessProjID() {
         //Arrange
-        String projID = "Project_2022_1";
+        String projID = "Project_2022_Project_2022_Project_2022_Project_2022_1";
         projectID = new ProjectID(projID);
         when(projectIDFactory.create(projID)).thenReturn(projectID);
         String titleUS = "As a PO, i want to test this string";
@@ -65,7 +65,7 @@ public class UserStoryIDFactoryTest {
         // Act
         userStoryID = userStoryIDFactory.create(projID, titleUS);
         //Assert
-        assertEquals(projID, userStoryID.getProjectID().getCode());
+        assertEquals("Project_2022_Project_2022_Project_2022_Project_2022_Project_2022_1", userStoryID.getProjectID().getCode());
 
     }
 

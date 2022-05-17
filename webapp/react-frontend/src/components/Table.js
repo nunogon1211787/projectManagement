@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import AppContext from '../context/AppContext';
-import { fetchUsers } from '../context/Actions';
+import {fetchUsers} from '../context/Actions';
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 import { URL_API } from '../services/Service';

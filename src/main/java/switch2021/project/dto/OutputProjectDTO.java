@@ -18,9 +18,10 @@ public class OutputProjectDTO {
     public String budget;
     public String status;
     public String startDate;
+    public String sprintDuration;
 
-    public OutputProjectDTO(String code, String projectName, String description, String businessSector,
-                            String numberOfSprints, String budget, String status, String startDate) {
+    public OutputProjectDTO(String code,String projectName,String description,String businessSector,String startDate,
+                            String numberOfSprints,String budget,String status, String sprintDuration) {
         this.code = code;
         this.projectName = projectName;
         this.description = description;
@@ -29,5 +30,6 @@ public class OutputProjectDTO {
         this.budget = budget;
         this.status = status;
         this.startDate = startDate;
+        this.sprintDuration = sprintDuration;
     }
 }

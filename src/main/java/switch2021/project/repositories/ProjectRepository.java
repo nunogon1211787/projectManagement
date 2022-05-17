@@ -1,79 +1,83 @@
 package switch2021.project.repositories;
 
-import lombok.Getter;
-import org.springframework.stereotype.Component;
-import switch2021.project.interfaces.IProjectRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import switch2021.project.datamodel.ProjectJpa;
 import switch2021.project.model.Project.ProjectReeng;
+import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.repositories.jpa.ProjectJpaRepository;
+import switch2021.project.datamodel.assembler.ProjectJpaAssembler;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-@Getter
-@Component
-public class ProjectRepository implements IProjectRepo {
+@Repository
+public class ProjectRepository {
 
-    /**
-     * Class Attributes
-     **/
-    private final List<ProjectReeng> projectList;
+    @Autowired
+    ProjectJpaRepository projectJpaRepository;
+
+    @Autowired
+    ProjectJpaAssembler projectJpaAssembler;
 
 
-    /**
-     * Constructors with data
-     **/
-    public ProjectRepository() {
-        this.projectList = new ArrayList<>();
+    public ProjectReeng save(ProjectReeng project) {
+        ProjectJpa projectJpa = projectJpaAssembler.toJpaData(project);
+
+        ProjectJpa savedProj = projectJpaRepository.save(projectJpa);
+
+        return projectJpaAssembler.toDomain(savedProj);
+    }
+
+    @Transactional
+    public Optional<ProjectReeng> findById(ProjectID id) {
+        Optional<ProjectJpa> opPersonJpa = projectJpaRepository.findById(id);
+
+        if(opPersonJpa.isPresent()) {
+            ProjectJpa personJpa = opPersonJpa.get();
+
+            ProjectReeng person = projectJpaAssembler.toDomain(personJpa);
+            return Optional.of(person);
+        }
+        else
+            return Optional.empty();
+    }
+
+    public Optional<ProjectReeng> findById(String id) {
+        ProjectID id_proj = new ProjectID(id);
+        Optional<ProjectJpa> opPersonJpa = projectJpaRepository.findById(id_proj);
+
+        if(opPersonJpa.isPresent()) {
+            ProjectJpa personJpa = opPersonJpa.get();
+
+            ProjectReeng person = projectJpaAssembler.toDomain(personJpa);
+            return Optional.of(person);
+        }
+        else
+            return Optional.empty();
     }
 
 
-    public ProjectReeng save(ProjectReeng newProject) {
-        if(newProject == null) {
-            throw new IllegalArgumentException("Error: Project is null!");
-        }
-
-        if (existById(newProject.getProjectCode().getCode())) {
-            throw new IllegalArgumentException("Error: Project already exists!");
-        }
-
-        projectList.add(newProject);
-
-        return newProject;
-    }
-
-
+    @Transactional
     public List<ProjectReeng> findAll() {
-        return new ArrayList<>(this.projectList);
-    }
+        List<ProjectJpa> setProjectJpa = projectJpaRepository.findAll();
 
+        List<ProjectReeng> setProject = new ArrayList<ProjectReeng>();
 
-    public ProjectReeng findById(String code) {
-        ProjectReeng projectReeng = null;
-        for (ProjectReeng proj : projectList) {
-            if(proj.getProjectCode().getCode().equals(code)){
-               projectReeng = proj;
-               break;
-            }
+        for( ProjectJpa projectJpa : setProjectJpa ) {
+            ProjectReeng projectReeng = projectJpaAssembler.toDomain(projectJpa);
+            setProject.add(projectReeng);
         }
-        return projectReeng;
+
+        return setProject;
     }
 
 
-    public boolean existById(String id) {
-        for (ProjectReeng proj : projectList) {
-            if (proj.getProjectCode().getCode().equals(id)) {
-                return true;
-            }
-        }
-        return false;
+    @Transactional
+    public boolean existsById(ProjectID id) {
+        return projectJpaRepository.existsById(id);
     }
 
-    public boolean existByName(String id) {
-        for (ProjectReeng proj : projectList) {
-            if (proj.getProjectName().getText().equals(id)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
-
