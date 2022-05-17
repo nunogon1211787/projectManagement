@@ -22,11 +22,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-class ResourcesControllerTest {
+class ResourceControllerTest {
 
     @MockBean private CreateResourceInAProjectService createResourceService;
     @MockBean private ShowCurrentProjectTeamService currentProjectTeamService;
-    @InjectMocks private ResourcesController ctrl;
+    @InjectMocks private ResourceController ctrl;
 
     @BeforeEach
     void TestConfiguration(){ MockitoAnnotations.openMocks(this); }

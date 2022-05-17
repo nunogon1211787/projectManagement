@@ -14,6 +14,7 @@ import java.util.Objects;
 
 @Setter
 @Getter
+@NoArgsConstructor
 public class UserStory implements Entity<UserStory> {
 
     /**

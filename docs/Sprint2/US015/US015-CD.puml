@@ -13,7 +13,7 @@ class "ShowAllProjectsRoute" as route << Component >>
 
 package "Interface Adapters" <<Rectangle>> #lightgreen {
 package "Controllers" <<rectangle>>{
-class "ShowAllProjectsController" as ctrl << Component >> {
+class "ProjectController" as ctrl << Component >> {
 +showAllProjects()
 }
 }

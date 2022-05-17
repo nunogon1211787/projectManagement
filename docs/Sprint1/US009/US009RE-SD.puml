@@ -19,7 +19,7 @@ participant ": IUsPriorityFactory" as IusPrio
 participant "usPriority : UsPriority" as usPrio
 participant ": IUserStoryRepo " as usStore
 participant ": UserStoryMapper" as usMapper
-participant "outputUsDto : \n UserStoryDto" as outDto
+participant "outputUsDto : \n OutputUsDTO" as outDto
 
 
 

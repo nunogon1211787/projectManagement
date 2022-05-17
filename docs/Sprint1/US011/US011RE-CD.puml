@@ -1,0 +1,66 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'hide circle
+skinparam classAttributeIconSize 0
+
+title US011 - As Authenticated User, i want to change his/her password
+
+
+class "ChangePasswordRoute" as route {
+}
+
+class "SystemUserController" as ctrl {
++changePassword(json)
+}
+
+class "ChangePasswordService" as service {
++changePassword(passwordDTO)
+}
+
+class "ChangePasswordDTO" as dto {
+-email : String
+-oldPassword : String
+-newPassword : String
+}
+
+interface "ISystemUserRepo" as repo {
++findSystemUserByID(email)
+}
+
+
+class "SystemUserRepository" as repoC {
++findSystemUserByID(email)
+}
+
+
+
+class "SystemUser"  as user {
+- systemUserId : SystemUserID
+- encryptedPassword : Description
++validateOldPassword(oldPassword)
++updatePassword(newPassword)
+}
+
+
+class "SystemUserMapper" as mapper {
+-modelToDTO(systemUser)
+}
+
+class "OutPutChangePassDTO" as outdto {
+-email : String
+-oldPassword : String
+-newPassword : String
+}
+
+route ..> ctrl
+ctrl..>service
+service..>repo
+repoC ..up|>repo
+repoC  "1" *-- "0..*" user : has
+service..>dto
+service..>mapper
+mapper..>outdto
+
+
+@enduml

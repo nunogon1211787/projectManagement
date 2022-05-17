@@ -1,0 +1,56 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+title US011 - As Authenticated User, i want to change his/her password
+
+autoactivate on
+autonumber
+
+
+participant ": ChangePasswordRoute" as UI
+participant ": SystemUserController" as Ctrl
+participant ": ChangePasswordService" as service
+participant ": ChangePasswordDTO" as dto
+participant "systemUser : ISystemUserRepo" as repo
+participant ": System User" as user
+participant ": SystemUserMapper" as mapper
+participant " outPutChangePassDTO : OutPutChangePassDTO" as outdto
+
+
+
+[o-> UI: PATCH/{ID}/changePassword(json)
+UI -> Ctrl: changePassword(json)
+note right
+Change from json to dto hidden to simplify diagram
+end note
+Ctrl -> service : changePassword(passwordDTO)
+service -> dto: email = getEmail()
+deactivate
+service -> dto: newPassword = getPassword()
+deactivate
+service -> dto: newPasswordConfirmation = getPassword()
+deactivate
+service -> dto: oldPassword = getPassword()
+deactivate
+note over dto: All the following objects were created with factories, but the SD is simplified
+service -> repo: findSystemUserByID (email)
+repo --> service : systemUser
+service->user: changePassword(oldPassword, newPassword, newPasswordConfirmation)
+user -> user: validateOldPassword(oldPassword)
+deactivate user
+user -> user: updatePassword(oldPassword, newPassword,\n newPasswordConfirmation)
+deactivate user
+user-->service : true
+
+service->mapper : modelToDTO(systemUser)
+mapper -> outdto **: create()
+mapper-->service : outPutChangePassDTO
+service-->Ctrl : outPutChangePassDTO
+Ctrl -->UI : outPutChangePassJson
+note right
+Change from json to dto hidden to simplify diagram
+end note
+[<--UI : Informs that user story was created
+
+
+@enduml

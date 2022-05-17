@@ -7,7 +7,7 @@ autonumber
 
 actor Director as actor
 participant ": ShowAllProjectsRoute" as Route
-participant ": ShowAllProjectsController" as Ctrl
+participant ": ProjectController" as Ctrl
 participant ": ShowAllProjectsService" as Srv
 participant ": IRepositoryProject" as store
 participant "projects : List<Project>" as list

@@ -1,13 +1,10 @@
 package switch2021.project.model.Project;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import switch2021.project.model.Project.ProjectStatusEnum;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.*;
-import switch2021.project.utils.Entity;
 import java.time.LocalDate;
 import java.util.Objects;
 

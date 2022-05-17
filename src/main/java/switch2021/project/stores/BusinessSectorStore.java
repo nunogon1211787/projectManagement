@@ -1,7 +1,7 @@
 package switch2021.project.stores;
 
 import lombok.Getter;
-import switch2021.project.factoryInterface.BusinessSectorFactoryInterface;
+import switch2021.project.factoryInterface.IBusinessSectorFactory;
 import switch2021.project.model.valueObject.BusinessSector;
 
 import java.util.ArrayList;
@@ -15,15 +15,15 @@ public class BusinessSectorStore {
      * Business Sector Store Attributes (Contains a Business Sector list)
      **/
     private final List<BusinessSector> businessSectorList;
-    private BusinessSectorFactoryInterface businessSectorFactoryInterface;
+    private final IBusinessSectorFactory IBusinessSectorFactory;
 
 
     /**
      * Business Sector Constructor
      **/
-    public BusinessSectorStore(BusinessSectorFactoryInterface businessSectorFI) {
+    public BusinessSectorStore(IBusinessSectorFactory businessSectorFI) {
         this.businessSectorList = new ArrayList<>();
-        this.businessSectorFactoryInterface = businessSectorFI;
+        this.IBusinessSectorFactory = businessSectorFI;
     }
 
 
@@ -36,7 +36,7 @@ public class BusinessSectorStore {
         if (getBusinessSectorByDescription(description) != null) {
             return false;
         } else {
-            this.businessSectorList.add(businessSectorFactoryInterface.createBusinessSector(description));
+            this.businessSectorList.add(IBusinessSectorFactory.createBusinessSector(description));
         }
         return true;
     }

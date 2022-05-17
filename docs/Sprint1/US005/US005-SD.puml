@@ -8,50 +8,58 @@ autonumber
 
 
 participant ":CreateProjectRoute " as route
+participant "inDto: CreateProjectDTO " as inDto
 participant ":ProjectController " as controller
 participant ":CreateProjectService " as service
-participant ":ProjectRepository " as store
 participant ":ProjectFactory " as factory
 participant ":ProjectMapper " as mapper
-participant "projDTO: OutputProjectDTO " as dto
-participant "newProject:Project " as project
+participant ":ProjectRepository " as store
+participant "newProject :Project " as project
+participant "projDto: OutputProjectDTO " as dto
+participant "exception :Exception" as exc
+participant "response:ResponseEntity" as json
 
 
-[o->  route: POST/projects/createProject(json)
-route -> controller: createProject(jsonDto)
+[o->  route: POST /projects (json)
+route -> controller: createProject(inDto)
 
-note right
-Change from json to dto hidden to simplify diagram
-end note
+note right route: Json object was deserialize to a CreateProjectDto object
 
-controller -> service: createAndSaveProject(projDTO)
-service -> factory: createProject(dto.getName, dto.getDescription, dto.getSector, dto.getStartDate, dto.getNumberOfSprints, dto.getSprintDuration, dto.getBudget)
+controller -> service: createAndSaveProject(inDto)
 
-factory -> project**: create()
+service -> factory: createProject(inDto)
+
+note over factory : All parameters (value objects) are instantiated in their own factories.
+
+factory -> project**: create(name, description, ...)
 
 factory --> service: newProject
 
-service -> store: saveProject(newProject)
-store -> store: validate(newProject)
-deactivate store
-store -> store: add(newProject)
+service -> store: save(newProject)
+store -> store: existByProjectId(newProject)
 deactivate store
 
-store --> service: true
+store --> service: result
+
+alt if the new project was correctly saved
 
 service -> mapper: model2Dto(newProject)
 
-mapper -> dto**: model2Dto(proj)
+mapper -> dto**: create()
 
 mapper --> service: projDTO
 
-service --> controller: projDTO
+else if the new project was not saved
 
-note right
-Change from json to dto hidden to simplify diagram
-end note
+service --> exc** : create(errorMessage)
 
-controller --> route: outputJson
+end
+
+service --> controller: projDto
+
+controller --> json**: create(projDto)
+
+controller --> route: response
 
 [<-- route: response
 

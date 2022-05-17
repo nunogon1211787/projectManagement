@@ -3,6 +3,8 @@ package switch2021.project.repositories;
 import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.model.valueObject.UserProfileID;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -60,6 +62,11 @@ public class UserProfileRepository implements IUserProfileRepo {
                 return true;
             }
         }
+        return false;
+    }
+
+    @Override
+    public boolean existsByUserProfileId(UserProfileID profile) {
         return false;
     }
 

@@ -8,6 +8,7 @@ import switch2021.project.dto.*;
 import switch2021.project.repositories.SystemUserRepositoryInterface;
 import switch2021.project.repositories.jpa.SystemUserJpa;
 import switch2021.project.service.RegisterUserService;
+import switch2021.project.service.SearchUsersByParamsService;
 import switch2021.project.service.ShowAllCurrentProjectsByUserService;
 
 import java.util.List;
@@ -15,12 +16,16 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("api/")
-public class RegisterUserController {
+public class UserController {
 
     @Autowired
     private RegisterUserService registerUserService;
     @Autowired
     private ShowAllCurrentProjectsByUserService showAllCurrentProjectsByUserService;
+    @Autowired
+    private SearchUsersByParamsService searchUsersByParamsService;
+
+
     @Autowired
     private SystemUserRepositoryInterface sURepository;
 
@@ -28,6 +33,24 @@ public class RegisterUserController {
     public List<SystemUserJpa> getUsers() {
         return this.sURepository.findAll();
     }
+
+    @GetMapping
+    public ResponseEntity<Object> searchUsersByTypedParams(@RequestParam SearchUserDTO inDto){
+
+        try {
+
+            List<OutputUserDTO> usersFoundedDto = searchUsersByParamsService.searchUsersByParams(inDto);
+
+            return new ResponseEntity<>(usersFoundedDto, HttpStatus.OK);
+
+        } catch (Exception e){
+            ErrorMessage error = new ErrorMessage();
+            error.errorMessage = e.getMessage();
+
+            return new ResponseEntity<>(error, HttpStatus.OK);
+        }
+    }
+
 
     @GetMapping("/{id}/resources")
     public ResponseEntity<Object> showCurrentProjectsByUser(@PathVariable IdDTO id, @RequestParam("date") DateDTO dateDto){

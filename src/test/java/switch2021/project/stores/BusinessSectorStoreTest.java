@@ -119,10 +119,10 @@ class BusinessSectorStoreTest {
         //Arrange
         BusinessSector sector = new BusinessSector("sector");
         BusinessSector sector2 = new BusinessSector("sector2");
-        BusinessSector x = sector;
+        BusinessSector businessSector = sector;
         //Act & Assert
         assertNotEquals(sector.hashCode(), sector2.hashCode());
-        assertEquals(sector.hashCode(), x.hashCode());
+        assertEquals(sector.hashCode(), businessSector.hashCode());
     }
 
     @Test
@@ -132,7 +132,7 @@ class BusinessSectorStoreTest {
         //Act
         BusinessSectorStore businessSectorStore = new BusinessSectorStore(businessSectorFactory);
         //Assert
-        assertEquals(businessSectorFactory,businessSectorStore.getBusinessSectorFactoryInterface());
+        assertEquals(businessSectorFactory,businessSectorStore.getIBusinessSectorFactory());
     }
 
 }

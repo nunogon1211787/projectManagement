@@ -15,8 +15,9 @@ public class ProjectMapper {
         String numberOfSprints = newProject.getNumberOfSprints().toString();
         String budget = newProject.getBudget().toString();
         String status = newProject.getProjectStatus().toString();
-       String startDate = newProject.getStartDate().toString();
-        OutputProjectDTO projDto = new OutputProjectDTO(code,projectName,description,businessSector,startDate, numberOfSprints,budget,status);
+        String startDate = newProject.getStartDate().toString();
+        OutputProjectDTO projDto = new OutputProjectDTO(code, projectName, description, businessSector, startDate,
+                numberOfSprints, budget, status);
 
         if (newProject.getTypology() != null) {
             projDto.typo = newProject.getTypology().getId_description().getDescription().getText();
