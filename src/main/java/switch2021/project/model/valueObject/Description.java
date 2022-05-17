@@ -2,6 +2,7 @@ package switch2021.project.model.valueObject;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import switch2021.project.utils.ValueObject;
 
@@ -11,12 +12,13 @@ import java.util.Objects;
 @ToString
 @Getter
 @Embeddable
-@NoArgsConstructor
+@NoArgsConstructor @Setter
 public class Description implements ValueObject<Description> {
 
     /**
      * Attributes
      **/
+
     private String text;
     private static final int MINDESCRIPTIONLENGTH = 1;
     private static final int MAXDESCRIPTIONLENGTH = 1000;

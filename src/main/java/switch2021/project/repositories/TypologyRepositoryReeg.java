@@ -56,8 +56,6 @@ public class TypologyRepositoryReeg implements ITypologyRepo {
             return false;
     }
 
-
-
     @Override
     public boolean existsByTypologyId(String description) {
         return jpaRepository.existsById(new TypologyID(new Description(description)));

@@ -9,13 +9,13 @@ import java.util.Optional;
 
 public interface TypologyJpaRepository extends JpaRepository<TypologyJpa, TypologyID> {
 
-    public TypologyJpa save(TypologyJpa typologyJpa);
+    TypologyJpa save(TypologyJpa typologyJpa);
 
-    public Optional<TypologyJpa> findById(TypologyID typologyID);
+    Optional<TypologyJpa> findById(TypologyID typologyID);
 
-    public boolean existsById(TypologyID typologyID);
+    boolean existsById(TypologyID typologyID);
 
-    public List<TypologyJpa> findAll();
+    List<TypologyJpa> findAll();
 
-    public void deleteById(TypologyID typologyID);
+    void deleteById(TypologyID typologyID);
 }

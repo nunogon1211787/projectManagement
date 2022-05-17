@@ -36,8 +36,8 @@ public class SwitchApp implements CommandLineRunner {
             this.sURepository.save(new SystemUserJpa("Tom Cruise", "tom@gmail.com", "actor", "photo.png"));
             this.sURepository.save(new SystemUserJpa("Tony Stark", "tony@gmail.com", "tester", "photo.png"));
 
-            typologyService.createAndSaveTypology(new TypologyDTO("Fixed Cost"));
-            typologyService.createAndSaveTypology(new TypologyDTO("Time and Materials"));
+//            typologyService.createAndSaveTypology(new TypologyDTO("Fixed Cost"));
+//            typologyService.createAndSaveTypology(new TypologyDTO("Time and Materials"));
         };
     }
 }

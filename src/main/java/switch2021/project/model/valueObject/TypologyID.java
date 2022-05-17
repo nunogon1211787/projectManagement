@@ -2,6 +2,7 @@ package switch2021.project.model.valueObject;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import switch2021.project.utils.ValueObject;
 
 import javax.persistence.Embeddable;
@@ -13,7 +14,10 @@ import java.util.Objects;
  * a unique value.
  */
 
-@Getter @Embeddable @NoArgsConstructor
+@Getter
+@Embeddable
+@NoArgsConstructor
+@Setter
 public class TypologyID implements ValueObject<TypologyID> {
 
     /**
