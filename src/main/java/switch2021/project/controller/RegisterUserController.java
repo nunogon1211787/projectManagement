@@ -5,19 +5,29 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.*;
+import switch2021.project.repositories.SystemUserRepositoryInterface;
+import switch2021.project.repositories.jpa.SystemUserJpa;
 import switch2021.project.service.RegisterUserService;
 import switch2021.project.service.ShowAllCurrentProjectsByUserService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/")
 public class RegisterUserController {
 
     @Autowired
     private RegisterUserService registerUserService;
     @Autowired
     private ShowAllCurrentProjectsByUserService showAllCurrentProjectsByUserService;
+    @Autowired
+    private SystemUserRepositoryInterface sURepository;
+
+    @GetMapping("users")
+    public List<SystemUserJpa> getUsers() {
+        return this.sURepository.findAll();
+    }
 
     @GetMapping("/{id}/resources")
     public ResponseEntity<Object> showCurrentProjectsByUser(@PathVariable IdDTO id, @RequestParam("date") DateDTO dateDto){

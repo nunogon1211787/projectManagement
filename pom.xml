@@ -99,7 +99,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <!-- ver se é mesmo preciso esta de devtools:-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- se não apagar e não fazer push-->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
