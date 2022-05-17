@@ -5,10 +5,10 @@ import org.springframework.stereotype.Service;
 import switch2021.project.dto.OutputUserDTO;
 import switch2021.project.dto.SearchUserDTO;
 import switch2021.project.factoryInterface.IUserProfileIDFactory;
-import switch2021.project.interfaces.ISystemUserRepo;
+import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.interfaces.IUserProfileRepo;
-import switch2021.project.mapper.SystemUserMapper;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.mapper.UserMapper;
+import switch2021.project.model.SystemUser.User;
 import switch2021.project.model.valueObject.UserProfileID;
 
 import java.util.ArrayList;
@@ -18,20 +18,20 @@ import java.util.List;
 public class SearchUsersByParamsService {
 
     @Autowired
-    private ISystemUserRepo userRepo;
+    private IUserRepo userRepo;
     @Autowired
     private IUserProfileRepo profRepo;
     @Autowired
-    private SystemUserMapper map;
+    private UserMapper map;
     @Autowired
     private IUserProfileIDFactory profFactory;
 
 
     public List<OutputUserDTO> searchUsersByParams(SearchUserDTO inDto) {
 
-        List<SystemUser> allFounded = new ArrayList<>();
+        List<User> allFounded = new ArrayList<>();
 
-        List<SystemUser> usersFounded = new ArrayList<>();
+        List<User> usersFounded = new ArrayList<>();
 
         List<OutputUserDTO> usersFoundedDto = new ArrayList<>();
 

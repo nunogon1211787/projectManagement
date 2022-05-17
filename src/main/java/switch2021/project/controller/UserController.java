@@ -52,7 +52,7 @@ public class UserController {
     public ResponseEntity<Object> registerUser(@RequestBody NewUserInfoDTO infoDTO) {
         OutputUserDTO outDTO;
         try {
-            outDTO = registerUserService.createAndSaveSystemUser(infoDTO);
+            outDTO = registerUserService.createAndSaveUser(infoDTO);
             return new ResponseEntity<>(outDTO, HttpStatus.CREATED);
         }
         catch (Exception e){

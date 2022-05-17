@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Component
-public class IProjectRepository implements IProjectRepo {
+public class ProjectRepository implements IProjectRepo {
 
     /**
      * Class Attributes
@@ -21,12 +21,12 @@ public class IProjectRepository implements IProjectRepo {
     /**
      * Constructors with data
      **/
-    public IProjectRepository() {
+    public ProjectRepository() {
         this.projectList = new ArrayList<>();
     }
 
 
-    public ProjectReeng saveProject(ProjectReeng newProject) {
+    public ProjectReeng save(ProjectReeng newProject) {
         if(newProject == null) {
             throw new IllegalArgumentException("Error: Project is null!");
         }

@@ -1,23 +1,20 @@
 package switch2021.project.repositories;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.ISprintRepo;
 import switch2021.project.model.Sprint.Sprint;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Getter
-@Setter
 @Repository
 public class SprintRepository implements ISprintRepo {
 
     /** Attributes **/
-    private List<Sprint> sprints;
+    private final List<Sprint> sprints;
 
     /** Constructor **/
     public SprintRepository() { this.sprints = new ArrayList<>(); }
@@ -35,12 +32,12 @@ public class SprintRepository implements ISprintRepo {
     }
 
     /** Find List of Sprints Method **/
-    public List<Sprint> findSprints() {
+    public List<Sprint> findAllSprints() {
         return new ArrayList<>(this.sprints);
     }
 
     /** Find Sprint By ID Method **/
-    public Sprint findSprintById(String sprintID) {
+    public Sprint findBySprintID(String sprintID) {
         Sprint sprint = null;
         for (Sprint sprt : sprints) {
             if (sprt.hasSprintID(sprintID)) {
@@ -77,7 +74,7 @@ public class SprintRepository implements ISprintRepo {
     }
 
     /** Save Sprint */
-    public boolean saveSprint (Sprint sprint) {
+    public boolean save(Sprint sprint) {
         boolean msg = true;
         if (existsBySprintID(sprint.getSprintID().toString())){
             msg = false;
@@ -109,7 +106,7 @@ public class SprintRepository implements ISprintRepo {
         boolean msg = false;
         if (validateStartDate(startDate) && projectTeam.validateProjectTeam(startDate, sprintDuration)) {
             msg = true;
-            findSprintById(sprintID);
+            findBySprintID(sprintID);
             //sprint.setStartDate(startDate);
         }
         return msg;

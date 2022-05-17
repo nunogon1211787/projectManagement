@@ -1,15 +1,5 @@
 package switch2021.project.controller.old;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import switch2021.project.controller.old.SystemUserWithStatusController;
-import switch2021.project.dto.old.SystemUserWithStatusDto;
-import switch2021.project.mapper.old.SystemUserWithStatusMapper;
-import switch2021.project.model.Company;
-import switch2021.project.model.SystemUser.SystemUser;
-
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SystemUserWithStatusControllerTest {

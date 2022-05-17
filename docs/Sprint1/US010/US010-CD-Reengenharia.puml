@@ -8,77 +8,83 @@ title US010 - As Authenticated user, i want to update its own data (e.g. photo, 
 
 skinparam classAttributeIconSize 0
 
-package "Infrastructure" <<Folder>> #lightblue  {
+package "Infrastructure" <<Rectangle>> #lightblue  {
 class "UpdatePersonalDataRoute" as route << Component >>
 }
 
-package "Interface Adapter" <<Folder>> #lightgreen {
+package "Interface Adapter" <<Rectangle>> #lightgreen {
 package "Controllers" <<Folder>>{
-class "SystemUserController" as controller << Component >> {
+class "UserController" as controller << Component >> {
 +updatePersonalData(json)
 }
 }
-package "Repositories" <<Folder>>{
-class "SystemUserRepository" as repository << Repository >> {
--systemUser : List<SystemUser>
-+ findSystemUserByID(email)
+package "Repositories" <<Rectangle>>{
+class "UserRepository" as repository << Repository >> {
+-user : List<User>
++ findByUserID(userID)
 }
 }
 }
-package "Application Service API" <<Package>> #lightpink{
+package "Application Service API" <<Rectangle>> #lightpink{
 package "App Service" <<Folder>>{
 class "UpdatePersonalDataService" as service << Component >> {
-+updatePersonalData(updateUserDTO)
++updatePersonalData(idDTO, updateDataDTO)
 }
 }
 package "Repositories Interface" <<Folder>>{
-interface "ISystemUserRepository" as interfaceSystemUserRepo << Interface >>{
-+ findSystemUserByID(email)
+interface "IUserRepository" as interfaceSystemUserRepo << Interface >>{
++ findByUserID(userID)
 }
+}
+}
+package "DTO" <<Rectangle>> {
+package "DTO " <<Folder>>{
+class "UpdateDataDTO" as dto << Component >> {
+- userName : String
+- function : String
+- photo : String
+- oldPassword : String
+- newPassword : String
+- newPasswordConfirmation : String
+}
+class "OutPutUserDTO" as outputUserDTO << Component >> {
+- userName : String
+- function : String
+- photo : String
+}
+class "IdDTO" as idDTO << Component >> {
+- id : String
 }
 }
 package "DTO" <<Folder>> {
-package "UpdateUserDTO" <<Folder>>{
-class "UpdateUserDTO" as dto << Component >> {
-- email : Email
-- userName : Name
-- function : Function
-- photo : Photo
-}
-class "OutPutUpdateUserDTO" as outputDTO << Component >> {
-- userName : Name
-- function : Function
-- photo : Photo
-}
-}
-package "DTO" <<Folder>> {
-package "SystemUserMapper" <<Folder>>{
-class "SystemUserMapper" as mapper << Component >> {
-+ modelToDto(systemUser)
+package "UserMapper" <<Folder>>{
+class "UserMapper" as mapper << Component >> {
++ toDto(user)
 }
 }
 }
 
-package "Domain" <<Folder>> #burlywood{
+package "Domain" <<Rectangle>> #burlywood{
 package "Aggregate" <<Folder>>{
-class "SystemUser" as systemuser << Root >> {
-- systemUserID : SystemUserID
+class "User" as systemuser << Root >> {
+- userID : UserID
 - userName : Name
 - photo : Photo
 - password : Password
 - function : Function
 - isActive : false
-+ SystemUser(systemUserID, username, photo, password, \n passwordConfirmation, function, userProfileID)
++ editPersonalData(username, function, photo)
 }
 }
 
 route ..> controller
 controller ..> service
 service .right.> dto
+service ..> idDTO
 service ..|> interfaceSystemUserRepo
 repository ..> interfaceSystemUserRepo
 service ..> systemuser
 service .down.> mapper
-mapper ..> outputDTO
+mapper ..> outputUserDTO
 
 @enduml

@@ -2,7 +2,7 @@ package switch2021.project.model.Resource.old;
 
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.SystemUser.User;
 import switch2021.project.model.valueObject.CostPerHour;
 import switch2021.project.model.valueObject.PercentageOfAllocation;
 import switch2021.project.model.valueObject.ProjectRole;
@@ -17,7 +17,7 @@ public class Resource {
     /**
      * Resource's Attribute
      **/
-    private SystemUser user;
+    private User user;
     private ProjectRole role;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -29,7 +29,7 @@ public class Resource {
     /**
      * Resource's Constructor
      **/
-    public Resource(SystemUser user, LocalDate startDate, LocalDate endDate, CostPerHour costPerHour, PercentageOfAllocation percentageOfAllocation) {
+    public Resource(User user, LocalDate startDate, LocalDate endDate, CostPerHour costPerHour, PercentageOfAllocation percentageOfAllocation) {
         if (checkStartDateEndDate(startDate, endDate)) {
 //        checkCostPerHour(costPerHour);
             checkSystemUser(user);
@@ -59,7 +59,7 @@ public class Resource {
      * This method checks if the Resource is that what we are looking for
      **/
     // Check by User
-    public boolean isYourEmail(SystemUser user) {
+    public boolean isYourEmail(User user) {
         return this.user == user;
     }
 
@@ -147,7 +147,7 @@ public class Resource {
 //        }
 //    }
 
-    private void checkSystemUser(SystemUser user) {
+    private void checkSystemUser(User user) {
         if(user == null) {
             throw new NullPointerException("Resource can not have a System User as null.");
         }

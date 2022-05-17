@@ -41,7 +41,7 @@ public class CreateProjectService {
 
         ProjectReeng newProject = IProjectFactory.createProject(projDTO, nextId);
 
-        IProjectRepo.saveProject(newProject);
+        IProjectRepo.save(newProject);
 
         return projectsMapper.model2Dto(newProject);
     }

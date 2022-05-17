@@ -4,30 +4,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.NewUserInfoDTO;
 import switch2021.project.dto.OutputUserDTO;
-import switch2021.project.factoryInterface.ISystemUserFactory;
-import switch2021.project.interfaces.ISystemUserRepo;
-import switch2021.project.mapper.SystemUserMapper;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.factoryInterface.IUserFactory;
+import switch2021.project.interfaces.IUserRepo;
+import switch2021.project.mapper.UserMapper;
+import switch2021.project.model.SystemUser.User;
 
 @Service
 public class RegisterUserService {
 
     @Autowired
-    private ISystemUserRepo systemUserRepo;
+    private IUserRepo systemUserRepo;
     @Autowired
-    private SystemUserMapper systemUserMapper;
+    private UserMapper userMapper;
     @Autowired
-    private ISystemUserFactory systemUserFactory;
+    private IUserFactory systemUserFactory;
 
-    public OutputUserDTO createAndSaveSystemUser(NewUserInfoDTO infoDTO) {
-        SystemUser newUser = systemUserFactory.createSystemUser(infoDTO);
-        if (!systemUserRepo.saveSystemUser(newUser))
+    public OutputUserDTO createAndSaveUser(NewUserInfoDTO infoDTO) {
+        User newUser = systemUserFactory.createUser(infoDTO);
+        if (!systemUserRepo.save(newUser))
             throw new IllegalArgumentException("email already exists");
-        return systemUserMapper.toDto(newUser);
+        return userMapper.toDto(newUser);
     }
 
     public OutputUserDTO findSystemUserByEmail(String email) {
-        SystemUser found = this.systemUserRepo.findSystemUserByEmail(email);
-        return this.systemUserMapper.toDto(found);
+        User found = this.systemUserRepo.findByUserID(email);
+        return this.userMapper.toDto(found);
     }
 }

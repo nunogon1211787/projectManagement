@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import switch2021.project.dto.DateDTO;
 import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.OutputProjectDTO;
-import switch2021.project.interfaces.ISystemUserRepo;
+import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.interfaces.IResourceRepo;
 import switch2021.project.mapper.ProjectMapper;
@@ -21,7 +21,8 @@ import java.util.List;
 @Service
 public class ShowAllCurrentProjectsByUserService {
 
-    @Autowired ISystemUserRepo userRepo;
+    @Autowired
+    IUserRepo userRepo;
     @Autowired
     IResourceRepo resRepo;
     @Autowired

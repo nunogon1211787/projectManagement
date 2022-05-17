@@ -7,26 +7,26 @@ title US001 - As Non-Registered User, I want to register as an application user.
 skinparam classAttributeIconSize 0
 
 '''''''''''''''''''''''''''''''
-package "Infrastructure" <<Folder>> #lightblue  {
+package "Infrastructure" <<Rectangle>> #lightblue  {
 class "RegisterUserRoute" as route << Component >>
 }
 '''''''''''''''''''''''''''''''
-package "Interface Adapter" <<Folder>> #lightgreen {
+package "Interface Adapter" <<Rectangle>> #lightgreen {
 
   package "Controllers" <<Folder>>{
-    class "RegisterUserController" as ctrl << Component >> {
+    class "UserController" as ctrl << Component >> {
     +registerUser(NewUserInfoDTO)
     }
   }
   package "Repositories" <<Folder>>{
-    class "SystemUserRepository" as SUrepo << Repository >> {
-    + saveSystemUser(newUser)
+    class "UserRepo" as SUrepo << Repository >> {
+    + save(newUser)
     + existsByEmail(email)
     }
   }
 }
 '''''''''''''''''''''''''''''''
-class "ResponseEntity" as json <<Component>>
+'class "ResponseEntity" as json <<Component>>
 '''''''''''''''''''''''''''''''
 package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
   package "App Service" <<Folder>>{
@@ -35,20 +35,20 @@ package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
     }
   }
   package "Repositories Interface" <<Folder>>{
-    interface "ISystemUserRepo" as ISUrepo << Interface >>{
-    + saveSystemUser(newUser)
+    interface "IUserRepo" as ISUrepo << Interface >>{
+    + save(newUser)
     + existsByEmail(email)
     }
   }
 
   package "Factory Interface" <<Folder>>{
-    interface "ISystemUserFactory" as ISUFact << Interface >>{
+    interface "IUserFactory" as ISUFact << Interface >>{
     +createSystemUser(NewUserInfoDTO)
     }
   }
 }
 '''''''''''''''''''''''''''''''
-package "DTO" <<Folder>> {
+package "DTO" <<Rectangle>> {
   package "NewUserInfoDTO" <<Folder>>{
     class "NewUserInfoDTO" as infoDto << Component >> {
     - userName : String
@@ -60,8 +60,8 @@ package "DTO" <<Folder>> {
     }
   }
 
-  package "OutputDTO" <<Folder>>{
-    class "OutputDTO" as outDto << Component >> {
+  package "OutputUserDTO" <<Folder>>{
+    class "OutputUserDTO" as outDto << Component >> {
     - userName : String
     - email : String
     - function : String
@@ -70,16 +70,16 @@ package "DTO" <<Folder>> {
     }
   }
 
-  package "SystemUserMapper" <<Folder>>{
-    class "SystemUserMapper" as mapper << Component >> {
+  package "UserMapper" <<Folder>>{
+    class "UserMapper" as mapper << Component >> {
     + toDto(newUser)
     }
   }
 }
 '''''''''''''''''''''''''''''''
-package "Entity/Core/Domain" <<Folder>> #burlywood{
-  package "SystemUserAggregate" as SUAggregate <<Folder>>{
-    class "SystemUser" as SU << Root >> {
+package "Domain" <<Rectangle>> #burlywood{
+  package "UserAggregate" as SUAggregate <<Folder>>{
+    class "User" as SU << Root >> {
     - userName : Name
     - photo : Photo
     - encryptedPassword : Description
@@ -95,12 +95,12 @@ package "Entity/Core/Domain" <<Folder>> #burlywood{
     }
   }'/
   package "Factory" as factory <<Folder>>{
-    class "SystemUserFactory" as SUFact << Factory >> {
+    class "UserFactory" as SUFact << Factory >> {
     +createSystemUser(NewUserInfoDTO)
     }
   }
   package "Value Object" as valueObject <<Folder>>{
-    class "SystemUserID" as SUID << Value Object >> {
+    class "UserID" as SUID << Value Object >> {
     -email : Email
     +SystemUserID(email)
     }
@@ -120,7 +120,7 @@ route--[hidden]d->SUrepo
 ctrl-d[hidden]->ISUrepo
 ctrl-d[hidden]->ISUFact
 ctrl..d->service : uses
-ctrl..l>json: uses
+'ctrl..l>json: uses
 ctrl-d[hidden]->ISUFact
 
 SUrepo "1"*-"*" SU

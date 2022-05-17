@@ -47,13 +47,13 @@ public class UserStoryEffortController {
     public List<Sprint> getSprintsList() {
         this.sprintsList = new ArrayList<>();
         this.sprintList = this.proj.getSprintList();
-        this.sprintsList = this.sprintList.findSprints();
+        this.sprintsList = this.sprintList.findAllSprints();
         return Collections.unmodifiableList(sprintsList);
     }
 
     public Sprint getSprint(String sprintID) {
         this.sprintList = this.proj.getSprintList();
-        this.sprint = this.sprintList.findSprintById(sprintID);
+        this.sprint = this.sprintList.findBySprintID(sprintID);
         return this.sprint;
     }
 

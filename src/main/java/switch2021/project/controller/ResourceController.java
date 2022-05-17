@@ -43,7 +43,7 @@ public class ResourceController {
      * Create a Resource
      */
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<Object> createResource(@RequestBody ResourceDTOReeng dto) {
 
         OutputResourceDTO newResource = createResourceService.createAndSaveResource(dto);

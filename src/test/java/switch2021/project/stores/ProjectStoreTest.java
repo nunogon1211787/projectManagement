@@ -1,11 +1,9 @@
 package switch2021.project.stores;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Resource.old.Resource;
-import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.SystemUser.User;
 import switch2021.project.repositories.ProjectStore;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.valueObject.*;
@@ -188,7 +186,7 @@ public class ProjectStoreTest {
         LocalDate endDate = LocalDate.now().plusWeeks(2);
 
         Project proj = mock(Project.class);
-        SystemUser user = mock(SystemUser.class);
+        User user = mock(User.class);
         Resource resource = mock(Resource.class);
         ProjectTeam projectTeam = mock(ProjectTeam.class);
         PercentageOfAllocation percOfAllo = mock(PercentageOfAllocation.class);

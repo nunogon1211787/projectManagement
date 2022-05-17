@@ -3,8 +3,8 @@ package switch2021.project.controller.old;
 import switch2021.project.mapper.old.SystemUserWithStatusMapper;
 import switch2021.project.dto.old.SystemUserWithStatusDto;
 import switch2021.project.model.Company;
-import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.repositories.SystemUserRepository;
+import switch2021.project.model.SystemUser.User;
+import switch2021.project.repositories.UserRepository;
 
 import java.util.Collections;
 import java.util.List;
@@ -38,9 +38,9 @@ public class SystemUserWithStatusController {
      **/
 
     public List<SystemUserWithStatusDto> getListSystemUserWithStatus() {
-        SystemUserRepository sysUserStore = this.company.getSystemUserStore();
-        List<SystemUser> systemUserList = sysUserStore.findAllSystemUsers();
-        List<SystemUserWithStatusDto> systemUserWithStatusDtoList = this.mapper.toDto(systemUserList);
+        UserRepository sysUserStore = this.company.getSystemUserStore();
+        List<User> userList = sysUserStore.findAllSystemUsers();
+        List<SystemUserWithStatusDto> systemUserWithStatusDtoList = this.mapper.toDto(userList);
         return Collections.unmodifiableList(systemUserWithStatusDtoList);
     }
 }

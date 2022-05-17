@@ -1,10 +1,5 @@
 package switch2021.project.controller.old;
 
-import org.junit.jupiter.api.Test;
-import switch2021.project.controller.old.NonRegisteredUserActivationController;
-import switch2021.project.model.Company;
-import switch2021.project.model.SystemUser.SystemUser;
-
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 

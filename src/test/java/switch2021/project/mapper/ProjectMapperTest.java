@@ -1,21 +1,5 @@
 package switch2021.project.mapper;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import switch2021.project.dto.ProjectDTO;
-
-import switch2021.project.model.*;
-import switch2021.project.model.Project.*;
-import switch2021.project.model.Resource.old.Resource;
-import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.valueObject.*;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import static org.junit.jupiter.api.Assertions.*;
-
 public class ProjectMapperTest {
 
 

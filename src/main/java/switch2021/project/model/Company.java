@@ -4,10 +4,9 @@ import lombok.Getter;
 import switch2021.project.factory.*;
 import switch2021.project.repositories.UserStoryRepository;
 import switch2021.project.repositories.ProjectStore;
-import switch2021.project.repositories.SystemUserRepository;
+import switch2021.project.repositories.UserRepository;
 //import switch2021.project.repositories.TypologyRepository;
 import switch2021.project.repositories.UserProfileRepository;
-import switch2021.project.repositories.*;
 import switch2021.project.stores.*;
 
 @Getter
@@ -17,7 +16,7 @@ public class Company {
      * Company Attributes
      * The company attributes are composed by all the store lists of a given project
      **/
-    private final SystemUserRepository systemUserStore;
+    private final UserRepository systemUserStore;
     private final ProjectStore projectStore;
     private final UserProfileRepository userProfileStore;
     private final ProjectRoleStore projectRoleStore;
@@ -38,7 +37,7 @@ public class Company {
      * The company constructor initializes and populates all the store lists
      **/
     public Company() {
-        this.systemUserStore = new SystemUserRepository();
+        this.systemUserStore = new UserRepository();
         this.projectStore = new ProjectStore();
         this.userProfileStore = new UserProfileRepository();
         //this.projectRoleFactory = new ProjectRoleFactory();

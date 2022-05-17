@@ -32,7 +32,7 @@ public class ProjectController {
         return new ResponseEntity<>(allProjectsDto, HttpStatus.OK);
     }
 
-    @PostMapping("/createProject")
+    @PostMapping
     public ResponseEntity <?> createProject (@Valid @RequestBody ProjectDTO projectDTO) {
 
         if (projStore.existByName(projectDTO.projectName)) {

@@ -1,33 +1,33 @@
 package switch2021.project.repositories;
 
 import org.springframework.stereotype.Repository;
-import switch2021.project.interfaces.ISystemUserRepo;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.interfaces.IUserRepo;
+import switch2021.project.model.SystemUser.User;
 import switch2021.project.model.valueObject.UserProfileID;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class SystemUserRepository implements ISystemUserRepo {
+public class UserRepository implements IUserRepo {
 
     /**
      * Class Attributes
      */
-    private final List<SystemUser> systemUserList;
+    private final List<User> userList;
 
     /**
      * Constructor
      */
-    public SystemUserRepository() {
-        this.systemUserList = new ArrayList<>();
+    public UserRepository() {
+        this.userList = new ArrayList<>();
     }
 
     @Override
-    public SystemUser findSystemUserByEmail(String email) {
-        SystemUser user = null;
+    public User findByUserID(String email) {
+        User user = null;
 
-        for (SystemUser i : this.systemUserList) {
+        for (User i : this.userList) {
             if (i.isYourEmail(email)) {
                 user = i;
                 break;
@@ -37,19 +37,19 @@ public class SystemUserRepository implements ISystemUserRepo {
     }
 
     @Override
-    public List<SystemUser> findAllSystemUsers() {
-        return new ArrayList<>(this.systemUserList);
+    public List<User> findAllSystemUsers() {
+        return new ArrayList<>(this.userList);
     }
 
     /**
      * Save Method
      */
     @Override
-    public boolean saveSystemUser(SystemUser user) {
+    public boolean save(User user) {
         if (user == null || existsByEmail(user.getSystemUserId().getEmail().getEmailText())) {
             return false;
         } else {
-            return this.systemUserList.add(user);
+            return this.userList.add(user);
         }
     }
 
@@ -57,7 +57,7 @@ public class SystemUserRepository implements ISystemUserRepo {
     public boolean existsByEmail(String newUserEmail) {
         boolean result = false;
 
-        for (SystemUser newUser : this.systemUserList) {
+        for (User newUser : this.userList) {
             if (newUser.getSystemUserId().getEmail().getEmailText().trim().equalsIgnoreCase(newUserEmail.trim())) {
                 result = true;
                 break;
@@ -67,22 +67,22 @@ public class SystemUserRepository implements ISystemUserRepo {
     }
 
     @Override
-    public List<SystemUser> findAllBySystemUserIdContains(String id) {
+    public List<User> findAllBySystemUserIdContains(String id) {
         return null;
     }
 
     @Override
-    public List<SystemUser> findAllByNameContains(String name) {
+    public List<User> findAllByNameContains(String name) {
         return null;
     }
 
     @Override
-    public List<SystemUser> findAllByFunctionContains(String function) {
+    public List<User> findAllByFunctionContains(String function) {
         return null;
     }
 
     @Override
-    public List<SystemUser> findAllByUserProfileId(UserProfileID profile) {
+    public List<User> findAllByUserProfileId(UserProfileID profile) {
         return null;
     }
 /*

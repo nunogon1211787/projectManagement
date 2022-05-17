@@ -2,8 +2,8 @@ package switch2021.project.repositories;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.interfaces.ISystemUserRepo;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.interfaces.IUserRepo;
+import switch2021.project.model.SystemUser.User;
 import switch2021.project.model.valueObject.Email;
 import switch2021.project.model.valueObject.SystemUserID;
 
@@ -17,16 +17,16 @@ import static org.mockito.Mockito.when;
 //@SpringBootApplication
 //@SpringBootTest //Useful for integration tests
 //@SpringJUnitConfig
-public class SystemUserRepositoryTest {
+public class UserRepositoryTest {
 
     @Test
     @DisplayName(".findSystemUserByEmail(String email)")
     void itShouldFindASystemUser() {
         //Arrange
-        ISystemUserRepo underTest = new SystemUserRepository();
+        IUserRepo underTest = new UserRepository();
 
         String email = "oliveira@beaver.com";
-        SystemUser userDouble = mock(SystemUser.class);
+        User userDouble = mock(User.class);
         SystemUserID idDouble = mock(SystemUserID.class);
         Email emailDouble = mock(Email.class);
 
@@ -34,11 +34,11 @@ public class SystemUserRepositoryTest {
         when(userDouble.getSystemUserId()).thenReturn(idDouble);
         when(idDouble.getEmail()).thenReturn(emailDouble);
         when(emailDouble.getEmailText()).thenReturn(email);
-        underTest.saveSystemUser(userDouble);
+        underTest.save(userDouble);
 
         when(userDouble.isYourEmail(email)).thenReturn(true);
         //Act
-        SystemUser actual = underTest.findSystemUserByEmail(email);
+        User actual = underTest.findByUserID(email);
         //Assert
         assertNotNull(actual);
     }
@@ -47,26 +47,26 @@ public class SystemUserRepositoryTest {
     @DisplayName(".findSystemUserByEmail(String email)")
     void itShouldNotFindTheSystemUser() {
         //Arrange
-        ISystemUserRepo underTest = new SystemUserRepository();
+        IUserRepo underTest = new UserRepository();
         //User1
         String email = "oliveira@beaver.com";
-        SystemUser userDouble = mock(SystemUser.class);
+        User userDouble = mock(User.class);
         SystemUserID idDouble = mock(SystemUserID.class);
         Email emailDouble = mock(Email.class);
         //Stubbing behaviour of User1
         when(userDouble.getSystemUserId()).thenReturn(idDouble);
         when(idDouble.getEmail()).thenReturn(emailDouble);
         when(emailDouble.getEmailText()).thenReturn(email);
-        underTest.saveSystemUser(userDouble);
+        underTest.save(userDouble);
         when(userDouble.isYourEmail(email)).thenReturn(true);
 
         //User2
         String email2 = "pereira@beaver.com";
-        SystemUser user2Double = mock(SystemUser.class);
+        User user2Double = mock(User.class);
         //Stubbing behaviour of User2
         when(user2Double.isYourEmail(email2)).thenReturn(false);
         //Act
-        SystemUser actual = underTest.findSystemUserByEmail(email2);
+        User actual = underTest.findByUserID(email2);
         //Assert
         assertNull(actual);
     }
@@ -75,9 +75,9 @@ public class SystemUserRepositoryTest {
     @DisplayName(".findAllSystemUsers()")
     void itShouldFindAnEmptyList() {
         //Arrange
-        ISystemUserRepo underTest = new SystemUserRepository();
+        IUserRepo underTest = new UserRepository();
         //Act
-        List<SystemUser> actualList = underTest.findAllSystemUsers();
+        List<User> actualList = underTest.findAllSystemUsers();
         //Assert
         assertEquals(0, actualList.size());
     }
@@ -86,10 +86,10 @@ public class SystemUserRepositoryTest {
     @DisplayName(".findAllSystemUsers()")
     void itShouldFindAList() {
         //Arrange
-        ISystemUserRepo underTest = new SystemUserRepository();
+        IUserRepo underTest = new UserRepository();
 
         String email = "oliveira@beaver.com";
-        SystemUser userDouble = mock(SystemUser.class);
+        User userDouble = mock(User.class);
         SystemUserID idDouble = mock(SystemUserID.class);
         Email emailDouble = mock(Email.class);
 
@@ -97,9 +97,9 @@ public class SystemUserRepositoryTest {
         when(idDouble.getEmail()).thenReturn(emailDouble);
         when(emailDouble.getEmailText()).thenReturn(email);
 
-        underTest.saveSystemUser(userDouble);
+        underTest.save(userDouble);
         //Act
-        List<SystemUser> actualList = underTest.findAllSystemUsers();
+        List<User> actualList = underTest.findAllSystemUsers();
         //Assert
         assertEquals(1, actualList.size());
     }
@@ -108,10 +108,10 @@ public class SystemUserRepositoryTest {
     @DisplayName(".saveSystemUser(SystemUser user)")
     void itShouldSaveSystemUser() {
         //Arrange
-        ISystemUserRepo underTest = new SystemUserRepository();
+        IUserRepo underTest = new UserRepository();
 
         String email = "oliveira@beaver.com";
-        SystemUser userDouble = mock(SystemUser.class);
+        User userDouble = mock(User.class);
         SystemUserID idDouble = mock(SystemUserID.class);
         Email emailDouble = mock(Email.class);
 
@@ -119,7 +119,7 @@ public class SystemUserRepositoryTest {
         when(idDouble.getEmail()).thenReturn(emailDouble);
         when(emailDouble.getEmailText()).thenReturn(email);
         //Act
-        boolean isSaved = underTest.saveSystemUser(userDouble);
+        boolean isSaved = underTest.save(userDouble);
         //Assert
         assertTrue(isSaved);
     }
@@ -128,19 +128,19 @@ public class SystemUserRepositoryTest {
     @DisplayName(".saveSystemUser(SystemUser user)")
     void itShouldFailSaveSystemUserPresent() {
         //Arrange
-        ISystemUserRepo underTest = new SystemUserRepository();
+        IUserRepo underTest = new UserRepository();
 
         String email = "oliveira@beaver.com";
-        SystemUser userDouble = mock(SystemUser.class);
+        User userDouble = mock(User.class);
         SystemUserID idDouble = mock(SystemUserID.class);
         Email emailDouble = mock(Email.class);
 
         when(userDouble.getSystemUserId()).thenReturn(idDouble);
         when(idDouble.getEmail()).thenReturn(emailDouble);
         when(emailDouble.getEmailText()).thenReturn(email);
-        underTest.saveSystemUser(userDouble);
+        underTest.save(userDouble);
         //Act
-        boolean isSaved = underTest.saveSystemUser(userDouble);
+        boolean isSaved = underTest.save(userDouble);
         //Assert
         assertFalse(isSaved);
     }
@@ -149,11 +149,11 @@ public class SystemUserRepositoryTest {
     @DisplayName(".saveSystemUser(SystemUser user)")
     void itShouldFailSaveNull() {
         //Arrange
-        ISystemUserRepo underTest = new SystemUserRepository();
+        IUserRepo underTest = new UserRepository();
 
-        SystemUser user = null;
+        User user = null;
         //Act
-        boolean isSaved = underTest.saveSystemUser(user);
+        boolean isSaved = underTest.save(user);
         //Assert
         assertFalse(isSaved);
     }

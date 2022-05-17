@@ -5,7 +5,7 @@ import switch2021.project.factoryInterface.IResourceFactory;
 import switch2021.project.model.valueObject.CostPerHour;
 import switch2021.project.model.valueObject.PercentageOfAllocation;
 import switch2021.project.model.valueObject.ProjectRole;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.SystemUser.User;
 import switch2021.project.utils.App;
 import switch2021.project.model.Resource.old.Resource;
 import java.time.LocalDate;
@@ -37,7 +37,7 @@ public class ProjectTeam {
      * Getters and Setters
      **/
     //Get resource by User
-    public Resource getResourceByUser(SystemUser user) {
+    public Resource getResourceByUser(User user) {
         Resource resource = null;
 
         for (Resource i : projectTeamList) {
@@ -156,7 +156,7 @@ public class ProjectTeam {
     /**
      * Create a new Resource
      */
-    public boolean createAndAddResourceWithFac(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
+    public boolean createAndAddResourceWithFac(User user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
         boolean msg;
         if(user != null) {
             msg = this.projectTeamList.add(this.resFac.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation));
@@ -166,7 +166,7 @@ public class ProjectTeam {
         return msg;
     }
 
-    public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
+    public Resource createResource(User user, LocalDate startDate, LocalDate endDate, double costPerHour, double percentageOfAllocation) {
         CostPerHour coPeHo = new CostPerHour(costPerHour);
         PercentageOfAllocation percentage = new PercentageOfAllocation(percentageOfAllocation);
         return new Resource(user, startDate, endDate, coPeHo, percentage);
