@@ -1,7 +1,7 @@
 package switch2021.project.controller.old;
 
 import switch2021.project.model.Company;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.SystemUser.User;
 import switch2021.project.model.valueObject.Request;
 import switch2021.project.model.valueObject.UserProfileID;
 import switch2021.project.repositories.UserProfileRepository;
@@ -28,8 +28,8 @@ public class ProfileRequestController {
      * Methods
      **/
     public boolean createProfileRequest(String email, String nameProfile) {
-        UserProfileID profileIdRequest = userProfileRepository.findUserProfileByDescription(nameProfile).getUserProfileId();
-        SystemUser user = this.company.getSystemUserStore().findSystemUserByEmail(email);
+        UserProfileID profileIdRequest = userProfileRepository.findByUserProfileID(nameProfile).getUserProfileId();
+        User user = this.company.getSystemUserStore().findByUserID(email);
         /*this.request = this.company.getRequestStore().createProfileRequest(profRequest, user);
         return this.request;*/
         return user.createAndSaveProfileRequest(profileIdRequest);

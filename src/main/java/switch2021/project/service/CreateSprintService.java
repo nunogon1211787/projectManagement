@@ -24,7 +24,7 @@ public class CreateSprintService {
     /** Create and Save a New Sprint */
     public OutPutSprintDTO createAndSaveSprint(NewSprintDTO dto) {
         Sprint newSprint = iSprintFactory.createSprint(dto);
-        if (!iSprintRepo.saveSprint(newSprint)){
+        if (!iSprintRepo.save(newSprint)){
             throw  new IllegalArgumentException("Sprint already exists!");
         }
         return sprintMapper.toDTO(newSprint);

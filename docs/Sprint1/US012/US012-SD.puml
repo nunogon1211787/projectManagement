@@ -8,12 +8,12 @@ autonumber
 participant ":CreateTypologyRoute" as Router
 participant ":TypologyController" as Controller
 participant ":CreateTypologyService" as Service
-participant "typoFacty:ITypologyFactory" as TypoFactory
-participant "typoIDFact: ITypologyIDFactory" as IdFactory
-participant "descFact:IDescriptionFactory" as DesFactory
+participant ":ITypologyFactory" as TypoFactory
+'participant "typoIDFact: ITypologyIDFactory" as IdFactory
+'participant "descFact:IDescriptionFactory" as DesFactory
 participant "newTypo:Typology" as Typology
-participant "typologyID:TypologyID" as Id
-participant "description:Description" as Description
+'participant "typologyID:TypologyID" as Id
+'participant "description:Description" as Description
 participant "iRepoTypology:ITypologyRepo" as Repository
 participant "mapper:TypologyMapper" as Mapper
 participant "outputDto:TypologyDTO" as outputDTO
@@ -27,21 +27,23 @@ end note
 Controller -> Service: createAndSaveTypology(inputDto)
 'note over Service: typoFact, repoTypo and mapper are parameters with @Autowired
 Service -> TypoFactory: createTypology(inputDto)
-TypoFactory -> IdFactory: createId(inputDto)
+note over TypoFactory : The creation of the id are hidden to simplify the diagram.
+
+'TypoFactory -> IdFactory: createId(inputDto)
 'note over TypoFactory: The typoIDFact is parameter with @Autowired
-IdFactory -> DesFactory: createDescription(inputDto.description)
+'IdFactory -> DesFactory: createDescription(inputDto.description)
 'note over IdFactory: The descFact is parameter with @Autowired
-DesFactory --> Description**: create(inputDto.description)
-return description
-IdFactory --> Id**: create(description)
-return typologyID
+'DesFactory --> Description**: create(inputDto.description)
+'return description
+'IdFactory --> Id**: create(description)
+'return typologyID
 TypoFactory --> Typology**: create(typologyID)
 return newTypo
 'alt successful case
-    Service -> Repository: saveTypology(newTypo)
+    Service -> Repository: save(newTypo)
     'alt successful case
-        Repository -> Repository: existsByTypologyId(newTypo)
-        deactivate Repository
+      '  Repository -> Repository: existsByTypologyID(newTypo)
+      '  deactivate Repository
     'end
 return true
 'end
@@ -50,6 +52,9 @@ Mapper --> outputDTO**: create()
 return outputDto
 return outputDto
 return outputJson
+note right
+Change from json to dto hidden to simplify diagram
+end note
 'note over Controller: The Controller uses the Response Entity class to create a response in JSON format using the dto received from Service layer and defining the HTTP status.
 [<--o Router: Shows typology informations
 

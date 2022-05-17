@@ -50,7 +50,7 @@ public class RegisterWorkToTaskController {
         Project project = projectStore.findById(code);
 
         SprintRepository sprintList = project.getSprintList();
-        Sprint sprint = sprintList.findSprintById(sprintId);
+        Sprint sprint = sprintList.findBySprintID(sprintId);
 
         this.userStory = sprint.getUsByIdFromScrumBoard(userStoryId);
 

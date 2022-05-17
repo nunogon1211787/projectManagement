@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Getter
-public class SystemUser implements Entity<SystemUser> {
+public class User implements Entity<User> {
 
     /**
      * Attributes of systemUser´s class
@@ -26,9 +26,9 @@ public class SystemUser implements Entity<SystemUser> {
     /**
      * Constructor
      */
-    public SystemUser(SystemUserID systemUserId, Name userName, Photo photo, Password password,
-                      Password passwordConfirmation,
-                      Function function, UserProfileID visitorID) {
+    public User(SystemUserID systemUserId, Name userName, Photo photo, Password password,
+                Password passwordConfirmation,
+                Function function, UserProfileID visitorID) {
         this.systemUserId = systemUserId;
         this.userName = userName;
         this.photo = photo;
@@ -155,19 +155,19 @@ public class SystemUser implements Entity<SystemUser> {
      *
      * @param o to compare
      * @return True if they have the same identity
-     * @see #sameIdentityAs(SystemUser)
+     * @see #sameIdentityAs(User)
      */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SystemUser that = (SystemUser) o;
+        User that = (User) o;
         return sameIdentityAs(that);
     }
 
     @Override
-    public boolean sameIdentityAs(SystemUser other) {
+    public boolean sameIdentityAs(User other) {
         return other != null && systemUserId.sameValueAs(other.systemUserId);
     }
 

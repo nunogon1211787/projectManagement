@@ -1,15 +1,11 @@
-import React from 'react';
-import './App.css';
-import UserComponent from './components/UserComponent';
-import TypologyForm from "./components/TypologyForm";
+import TodosPage from './pages/TodosPage';
 
 function App() {
-    return (
-        <div className="App">
-            <UserComponent/>
-            <TypologyForm/>
-        </div>
-    );
+  return (<div>
+      <h1>Oix</h1>
+    <TodosPage />
+      </div>
+  );
 }
 
 export default App;

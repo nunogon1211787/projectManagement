@@ -2,12 +2,12 @@ package switch2021.project.mapper;
 
 import org.springframework.stereotype.Component;
 import switch2021.project.dto.OutputUserDTO;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.SystemUser.User;
 
 @Component
-public class SystemUserMapper {
+public class UserMapper {
 
-    public OutputUserDTO toDto(SystemUser user) {
+    public OutputUserDTO toDto(User user) {
         OutputUserDTO outDTO = new OutputUserDTO();
         outDTO.userName=user.getUserName().getText();
         outDTO.email=user.getSystemUserId().getEmail().getEmailText();

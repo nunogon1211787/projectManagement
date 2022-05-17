@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import switch2021.project.dto.NewUserInfoDTO;
 import switch2021.project.factoryInterface.*;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.SystemUser.User;
 import switch2021.project.model.valueObject.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,12 +18,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-public class SystemUserFactoryTest {
+public class UserFactoryTest {
 
     @MockBean
     IEmailFactory emailFactory;
     @MockBean
-    ISystemUserIDFactory idFactory;
+    IUserIDFactory idFactory;
     @MockBean
     INameFactory nameFactory;
     @MockBean
@@ -35,7 +35,7 @@ public class SystemUserFactoryTest {
     @MockBean
     IUserProfileIDFactory userProfileIDFactory;
     @InjectMocks
-    SystemUserFactory underTest;
+    UserFactory underTest;
 
     @BeforeEach
     public void setUp()/* throws Exception*/ {
@@ -57,7 +57,7 @@ public class SystemUserFactoryTest {
         Description descriptionDouble = mock(Description.class);
 
         when(nameFactory.createName(any())).thenReturn(nameDouble);
-        when(idFactory.createSystemUserID(any())).thenReturn(idDouble);
+        when(idFactory.createUserID(any())).thenReturn(idDouble);
         when(functionFactory.createFunction(any())).thenReturn(functionDouble);
         when(photoFactory.createPhoto(any())).thenReturn(photoDouble);
 
@@ -68,7 +68,7 @@ public class SystemUserFactoryTest {
         when(userProfileIDDouble.getUserProfileName()).thenReturn(descriptionDouble);
         when(descriptionDouble.getText()).thenReturn("Visitor");
         //Act
-        SystemUser isCreated = underTest.createSystemUser(infoDTODouble);
+        User isCreated = underTest.createUser(infoDTODouble);
         //Assert
         assertNotNull(isCreated);
         assertEquals("Visitor",isCreated.getAssignedProfiles().get(0).getUserProfileName().getText());

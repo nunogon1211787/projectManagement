@@ -2,7 +2,7 @@ package switch2021.project.controller.old;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.model.*;
-import switch2021.project.repositories.SystemUserRepository;
+import switch2021.project.repositories.UserRepository;
 import switch2021.project.repositories.UserProfileRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UpdateUserProfileControllerTest {
 
     private Company company;
-    private SystemUserRepository systemUserStore;
+    private UserRepository systemUserStore;
     private UserProfileRepository userProfileStore;
 
 

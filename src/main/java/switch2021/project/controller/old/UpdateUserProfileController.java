@@ -1,9 +1,9 @@
 package switch2021.project.controller.old;
 
 import switch2021.project.model.*;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.SystemUser.User;
 import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.repositories.SystemUserRepository;
+import switch2021.project.repositories.UserRepository;
 import switch2021.project.repositories.UserProfileRepository;
 
 import java.util.List;
@@ -14,8 +14,8 @@ public class UpdateUserProfileController {
      * Attributes
      **/
     private final UserProfileRepository userProfileStore;
-    private final SystemUserRepository systemUserStore;
-    private SystemUser user;
+    private final UserRepository systemUserStore;
+    private User user;
 
 
     /**
@@ -31,8 +31,8 @@ public class UpdateUserProfileController {
     /**
      * Methods
      **/
-    public SystemUser getUser(String email) {
-        SystemUser user = systemUserStore.findSystemUserByEmail(email);
+    public User getUser(String email) {
+        User user = systemUserStore.findByUserID(email);
         if (user == null) {
             throw new IllegalArgumentException("This email doesn't exist.");
         }

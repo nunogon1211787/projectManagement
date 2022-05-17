@@ -52,7 +52,7 @@ class CreateProjectServiceTest {
         List <ProjectReeng> list = new ArrayList<>();
 
         when(IProjectFactory.createProject(projectDTO,1)).thenReturn(projectReeng);
-        when(IProjectRepo.saveProject(projectReeng)).thenReturn(projectReeng);
+        when(IProjectRepo.save(projectReeng)).thenReturn(projectReeng);
         when(projectsMapper.model2Dto(projectReeng)).thenReturn(outputProjectDTO);
 
         when(IProjectRepo.findAll()).thenReturn(list);

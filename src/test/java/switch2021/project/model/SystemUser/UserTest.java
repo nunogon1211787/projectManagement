@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-class SystemUserTest {
+class UserTest {
 
     @Mock
     SystemUserID idDouble;
@@ -35,7 +35,7 @@ class SystemUserTest {
         when(userProfileIDDouble.getUserProfileName()).thenReturn(descriptionDouble);
         when(descriptionDouble.getText()).thenReturn("Visitor");
         //Act
-        SystemUser underTest = new SystemUser(idDouble, nameDouble, photoDouble, passwordDouble, passwordDouble,
+        User underTest = new User(idDouble, nameDouble, photoDouble, passwordDouble, passwordDouble,
                 functionDouble, userProfileIDDouble);
         //Assert
         assertEquals("Visitor", underTest.getAssignedProfiles().get(0).getUserProfileName().getText());
@@ -51,7 +51,7 @@ class SystemUserTest {
         when(userProfileIDDouble.getUserProfileName()).thenReturn(descriptionDouble);
         when(descriptionDouble.getText()).thenReturn("regular");
         //Act
-        new SystemUser(idDouble, nameDouble, photoDouble, passwordDouble, passwordDouble,
+        new User(idDouble, nameDouble, photoDouble, passwordDouble, passwordDouble,
                 functionDouble, userProfileIDDouble);
         });
     }

@@ -2,7 +2,7 @@ package switch2021.project.model.valueObject;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.SystemUser.User;
 
 import java.time.LocalDate;
 
@@ -31,7 +31,7 @@ class RequestTest {
     @Test
     public void overrideTest() {
         //Arrange
-        SystemUser user = mock(SystemUser.class);
+        User user = mock(User.class);
         UserProfileID profileId = mock(UserProfileID.class);
         //Act
         Request req = new Request(profileId);

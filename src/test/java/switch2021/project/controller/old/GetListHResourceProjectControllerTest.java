@@ -1,20 +1,5 @@
 package switch2021.project.controller.old;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import switch2021.project.controller.old.GetListHResourceProjectController;
-import switch2021.project.dto.old.ResourceDTO;
-import switch2021.project.model.Resource.old.Resource;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.valueObject.*;
-import switch2021.project.mapper.old.ProjectTeamMapper;
-import switch2021.project.model.*;
-import switch2021.project.model.Project.Project;
-import switch2021.project.model.SystemUser.SystemUser;
-
-import java.time.LocalDate;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GetListHResourceProjectControllerTest {

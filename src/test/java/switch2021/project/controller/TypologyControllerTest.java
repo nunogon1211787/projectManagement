@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.TypologyDTO;
 import switch2021.project.service.TypologyService;
 
@@ -19,7 +20,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class CreateNewTypologyControllerTest {
+public class TypologyControllerTest {
 
     @InjectMocks
     TypologyController controller;
@@ -93,10 +94,11 @@ public class CreateNewTypologyControllerTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
         TypologyDTO dto = mock(TypologyDTO.class);
+        IdDTO idDTO = mock(IdDTO.class);
         //Act
-        when(dto.getDescription()).thenReturn("Test");
-        when(service.findTypologyByDescription(dto)).thenReturn(dto);
-        ResponseEntity<?> response = controller.findTypologyByDescription(dto);
+        when(idDTO.getId()).thenReturn("Test");
+        when(service.findTypologyByDescription(idDTO)).thenReturn(dto);
+        ResponseEntity<?> response = controller.findTypologyByDescription(idDTO);
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
@@ -106,11 +108,11 @@ public class CreateNewTypologyControllerTest {
         //Arrange
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-        TypologyDTO dto = mock(TypologyDTO.class);
+        IdDTO idDTO = mock(IdDTO.class);
         //Act
-        when(dto.getDescription()).thenReturn("Test");
-        when(service.findTypologyByDescription(dto)).thenThrow(IllegalArgumentException.class);
-        ResponseEntity<?> response = controller.findTypologyByDescription(dto);
+        when(idDTO.getId()).thenReturn("Test");
+        when(service.findTypologyByDescription(idDTO)).thenThrow(IllegalArgumentException.class);
+        ResponseEntity<?> response = controller.findTypologyByDescription(idDTO);
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(404);
     }
@@ -121,9 +123,10 @@ public class CreateNewTypologyControllerTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
         TypologyDTO dto = mock(TypologyDTO.class);
+        IdDTO idDTO = mock(IdDTO.class);
         //Act
         when(dto.getDescription()).thenReturn(null);
-        ResponseEntity<?> response = controller.findTypologyByDescription(dto);
+        ResponseEntity<?> response = controller.findTypologyByDescription(idDTO);
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(406);
     }
@@ -134,9 +137,10 @@ public class CreateNewTypologyControllerTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
         TypologyDTO dto = mock(TypologyDTO.class);
+        IdDTO idDTO = mock(IdDTO.class);
         //Act
         when(dto.getDescription()).thenReturn("");
-        ResponseEntity<?> response = controller.findTypologyByDescription(dto);
+        ResponseEntity<?> response = controller.findTypologyByDescription(idDTO);
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(406);
     }
@@ -150,7 +154,7 @@ public class CreateNewTypologyControllerTest {
         TypologyDTO dto1 = mock((TypologyDTO.class));
         TypologyDTO dto2 = mock((TypologyDTO.class));
         //Act
-        when(service.findAllTypologies()).thenReturn(List.of(new TypologyDTO[]{dto,dto1,dto2}));
+        when(service.findAllTypologies()).thenReturn(List.of(new TypologyDTO[]{dto, dto1, dto2}));
         ResponseEntity<?> response = controller.findTypologyList();
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
@@ -173,12 +177,12 @@ public class CreateNewTypologyControllerTest {
         //Arrange
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-        TypologyDTO dto = mock(TypologyDTO.class);
         TypologyController controller1 = new TypologyController();
+        IdDTO idDTO = mock(IdDTO.class);
         //Act
-        when(dto.getDescription()).thenReturn("Test");
-            //At this point have no typologies saved in the repository!
-        ResponseEntity<?> response = controller1.deleteTypology(dto);
+        when(idDTO.getId()).thenReturn("Test");
+        //At this point have no typologies saved in the repository!
+        ResponseEntity<?> response = controller1.deleteTypology(idDTO);
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(404);
     }
@@ -189,9 +193,10 @@ public class CreateNewTypologyControllerTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
         TypologyDTO dto = mock(TypologyDTO.class);
+        IdDTO idDTO = mock(IdDTO.class);
         //Act
         when(dto.getDescription()).thenReturn("");
-        ResponseEntity<?> response = controller.deleteTypology(dto);
+        ResponseEntity<?> response = controller.deleteTypology(idDTO);
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(406);
     }
@@ -202,9 +207,10 @@ public class CreateNewTypologyControllerTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
         TypologyDTO dto = mock(TypologyDTO.class);
+        IdDTO idDTO = mock(IdDTO.class);
         //Act
         when(dto.getDescription()).thenReturn(null);
-        ResponseEntity<?> response = controller.deleteTypology(dto);
+        ResponseEntity<?> response = controller.deleteTypology(idDTO);
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(406);
     }
