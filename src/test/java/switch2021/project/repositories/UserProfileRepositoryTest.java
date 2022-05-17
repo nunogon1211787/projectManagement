@@ -25,7 +25,7 @@ public class UserProfileRepositoryTest {
         when(userProfileId.getUserProfileName()).thenReturn(userProfileName);
         when(userProfileName.getText()).thenReturn("Developer");
         when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-        userProfileRepository.saveUserProfile(userProfile);
+        userProfileRepository.save(userProfile);
 
         //Assert
         assertTrue(userProfileRepository.existsByDescription("Developer"));
@@ -44,7 +44,7 @@ public class UserProfileRepositoryTest {
         when(userProfileId.getUserProfileName()).thenReturn(userProfileName);
         when(userProfileName.getText()).thenReturn("Developer");
         when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-        userProfileRepository.saveUserProfile(userProfile);
+        userProfileRepository.save(userProfile);
 
         //Assert
         assertFalse(userProfileRepository.existsByDescription("Project Manager"));
@@ -63,7 +63,7 @@ public class UserProfileRepositoryTest {
         when(userProfileID.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("User Profile");
         //Assert
-        assertTrue(userProfileRepository.saveUserProfile(userProfile));
+        assertTrue(userProfileRepository.save(userProfile));
     }
 
     @DisplayName("Confirm if there is a User Profile already created")
@@ -79,10 +79,10 @@ public class UserProfileRepositoryTest {
         when(userProfileId.getUserProfileName()).thenReturn(userProfileName);
         when(userProfileName.getText()).thenReturn("Developer");
         when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-        userProfileRepository.saveUserProfile(userProfile);
+        userProfileRepository.save(userProfile);
 
         //Assert
-        assertFalse(userProfileRepository.saveUserProfile(userProfile));
+        assertFalse(userProfileRepository.save(userProfile));
     }
 
     @Test
@@ -91,7 +91,7 @@ public class UserProfileRepositoryTest {
         //Arrange
         UserProfileRepository userProfileRepository = new UserProfileRepository();
         // Act
-        UserProfile x = userProfileRepository.findUserProfileByDescription("User Profile");
+        UserProfile x = userProfileRepository.findByUserProfileID("User Profile");
         //Assert
         assertNull(x);
     }
@@ -114,8 +114,8 @@ public class UserProfileRepositoryTest {
         when(id2.getUserProfileName()).thenReturn(description2);
         when(description1.getText()).thenReturn("User Profile 1");
         when(description2.getText()).thenReturn("User Profile 2");
-        userProfileRepository.saveUserProfile(user1);
-        userProfileRepository.saveUserProfile(user2);
+        userProfileRepository.save(user1);
+        userProfileRepository.save(user2);
         List<UserProfile> list = userProfileRepository.findAllUserProfiles();
         //Assert
         assertEquals(2, list.size());
@@ -139,8 +139,8 @@ public class UserProfileRepositoryTest {
         when(id2.getUserProfileName()).thenReturn(description2);
         when(description1.getText()).thenReturn("User Profile 1");
         when(description2.getText()).thenReturn("User Profile 2");
-        userProfileRepository.saveUserProfile(user1);
-        userProfileRepository.saveUserProfile(user2);
+        userProfileRepository.save(user1);
+        userProfileRepository.save(user2);
         List<UserProfile> list = userProfileRepository.findAllUserProfiles();
         //Assert
         assertEquals(user1, user1);
@@ -166,8 +166,8 @@ public class UserProfileRepositoryTest {
         when(id2.getUserProfileName()).thenReturn(description2);
         when(description1.getText()).thenReturn("User Profile 1");
         when(description2.getText()).thenReturn("User Profile 2");
-        userProfileRepository.saveUserProfile(user1);
-        userProfileRepository.saveUserProfile(user2);
+        userProfileRepository.save(user1);
+        userProfileRepository.save(user2);
         List<UserProfile> list = userProfileRepository.findAllUserProfiles();
         //Assert
         assertEquals(user1.hashCode(), user1.hashCode());

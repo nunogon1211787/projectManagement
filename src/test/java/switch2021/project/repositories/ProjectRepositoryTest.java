@@ -51,7 +51,7 @@ public class ProjectRepositoryTest {
         when(project.getSprintDuration()).thenReturn(sprintDuration);
         when(project.getBudget()).thenReturn(budget);
         //Act
-        projectRepository.saveProject(project);
+        projectRepository.save(project);
         //Assert
         assertEquals(1, projectRepository.getProjectList().size());
     }
@@ -73,8 +73,8 @@ public class ProjectRepositoryTest {
             when(project.getBudget()).thenReturn(budget);
 
             //Act
-            projectRepository.saveProject(project);
-            projectRepository.saveProject(project);
+            projectRepository.save(project);
+            projectRepository.save(project);
         });
     }
 
@@ -86,7 +86,7 @@ public class ProjectRepositoryTest {
             //Arrange
             project = null;
             //Act
-            projectRepository.saveProject(project);
+            projectRepository.save(project);
 
         });
     }
@@ -104,7 +104,7 @@ public class ProjectRepositoryTest {
         when(project.getNumberOfSprints()).thenReturn(numberOfSprints);
         when(project.getSprintDuration()).thenReturn(sprintDuration);
         when(project.getBudget()).thenReturn(budget);
-        projectRepository.saveProject(project);
+        projectRepository.save(project);
 
         ProjectReeng project2 = mock(ProjectReeng.class);
         ProjectID projectID2 = mock(ProjectID.class);
@@ -117,7 +117,7 @@ public class ProjectRepositoryTest {
         when(project2.getNumberOfSprints()).thenReturn(numberOfSprints);
         when(project2.getSprintDuration()).thenReturn(sprintDuration);
         when(project2.getBudget()).thenReturn(budget);
-        projectRepository.saveProject(project2);
+        projectRepository.save(project2);
 
         //Act
         List<ProjectReeng>  projectReengList = projectRepository.findAll();
@@ -139,7 +139,7 @@ public class ProjectRepositoryTest {
         when(project.getNumberOfSprints()).thenReturn(numberOfSprints);
         when(project.getSprintDuration()).thenReturn(sprintDuration);
         when(project.getBudget()).thenReturn(budget);
-        projectRepository.saveProject(project);
+        projectRepository.save(project);
 
         ProjectReeng project2 = mock(ProjectReeng.class);
         ProjectID projectID2 = mock(ProjectID.class);
@@ -152,7 +152,7 @@ public class ProjectRepositoryTest {
         when(project2.getNumberOfSprints()).thenReturn(numberOfSprints);
         when(project2.getSprintDuration()).thenReturn(sprintDuration);
         when(project2.getBudget()).thenReturn(budget);
-        projectRepository.saveProject(project2);
+        projectRepository.save(project2);
         //Act
         project = projectRepository.findById("Test");
         //Assert
@@ -172,7 +172,7 @@ public class ProjectRepositoryTest {
         when(project.getNumberOfSprints()).thenReturn(numberOfSprints);
         when(project.getSprintDuration()).thenReturn(sprintDuration);
         when(project.getBudget()).thenReturn(budget);
-        projectRepository.saveProject(project);
+        projectRepository.save(project);
         //Act
         boolean expected = projectRepository.existById("Test");
         //Assert
@@ -192,7 +192,7 @@ public class ProjectRepositoryTest {
         when(project.getNumberOfSprints()).thenReturn(numberOfSprints);
         when(project.getSprintDuration()).thenReturn(sprintDuration);
         when(project.getBudget()).thenReturn(budget);
-        projectRepository.saveProject(project);
+        projectRepository.save(project);
         //Act
         boolean expected = projectRepository.existById("");
         //Assert
@@ -212,7 +212,7 @@ public class ProjectRepositoryTest {
         when(project.getNumberOfSprints()).thenReturn(numberOfSprints);
         when(project.getSprintDuration()).thenReturn(sprintDuration);
         when(project.getBudget()).thenReturn(budget);
-        projectRepository.saveProject(project);
+        projectRepository.save(project);
         //Act
         boolean expected = projectRepository.existByName("Test");
         //Assert
@@ -232,7 +232,7 @@ public class ProjectRepositoryTest {
         when(project.getNumberOfSprints()).thenReturn(numberOfSprints);
         when(project.getSprintDuration()).thenReturn(sprintDuration);
         when(project.getBudget()).thenReturn(budget);
-        projectRepository.saveProject(project);
+        projectRepository.save(project);
         //Act
         boolean expected = projectRepository.existByName("");
         //Assert

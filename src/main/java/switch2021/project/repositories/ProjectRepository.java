@@ -26,7 +26,7 @@ public class ProjectRepository implements IProjectRepo {
     }
 
 
-    public ProjectReeng saveProject(ProjectReeng newProject) {
+    public ProjectReeng save(ProjectReeng newProject) {
         if(newProject == null) {
             throw new IllegalArgumentException("Error: Project is null!");
         }

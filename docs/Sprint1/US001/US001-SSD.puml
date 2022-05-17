@@ -11,9 +11,9 @@ participant ":System" as System
 
 activate User
 
-User -> System:starts the resgistration of new user
-System --> User: request the required data: Name, E-mail, Function, Password, Password Confirmation and photo(optional)
+User -> System:Starts the resgistration of new user
+'System --> User: request the required data: Name, E-mail, Function, Password, Password Confirmation and photo(optional)
 
-User -> System: Types required data
-User <-- System: informs operation success
+'User -> System: Types required data
+User <-- System: Informs operation success
 @enduml

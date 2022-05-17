@@ -31,8 +31,8 @@ participant "outDTO : OutputUserDTO" as OutDTO
 User->Ui : starts the registration\n of a new SystemUser
 Ui--> User: requests data (userName,\n email, function, password,\n passwordConfirmation, photo)
 User->Ui:  POST /users
-Ui->Ctrl: registerUser(infoDTO)
-Ctrl->Serv: createAndSaveSystemUser(infoDTO)
+Ui->Ctrl: registerUser(newUserInfoDTO)
+Ctrl->Serv: createAndSaveUser(newUserInfoDTO)
 'Serv->UPStore: findUserProfileByDescription("Visitor")
 'note over UPStore: steps hidden to simplify the diagram
 /'loop for each known userProfile
@@ -46,14 +46,14 @@ end´'/
 'UPStore-->Serv:visitor
 'Serv->UP: getUserProfileID()
 'UP-->Serv:visitorID
-Serv->Fact: createSystemUser(infoDTO)
+Serv->Fact: createUser(newUserInfoDTO)
 Fact->SUIDFact: create(infoDTO.email)
 SUIDFact->emailFact: create(emailText)
 emailFact->email**: createEmail(emailText)
 emailFact-->SUIDFact: email
 SUIDFact->SUID**: createSystemUserID(email)
 SUIDFact-->Fact: systemUserID
-Fact->SU**: createSystemUser(systemUserID)
+Fact->SU**: createUser(systemUserID)
 Fact->nameFact: create(infoDTO.name)
 nameFact->name**: createName(text)
 nameFact-->Fact: name
@@ -67,9 +67,9 @@ end'/
 SU->SU: assignProfileId(visitorId)
 deactivate
 Fact-->Serv: newUser
-Serv->SUStore: saveSystemUser(newUser)
-SUStore->SUStore: existsByEmail(emailText)
-deactivate SUStore
+Serv->SUStore: save(newUser)
+'SUStore->SUStore: existsByEmail(emailText)
+'deactivate SUStore
 SUStore-->Serv: True
 Serv->mapper:toDto(newUser)
 mapper->OutDTO**: create()

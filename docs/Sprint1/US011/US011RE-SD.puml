@@ -8,49 +8,43 @@ autonumber
 
 
 participant ": ChangePasswordRoute" as UI
-participant ": SystemUserController" as Ctrl
-participant ": ChangePasswordService" as service
-participant ": ChangePasswordDTO" as dto
-participant "systemUser : ISystemUserRepo" as repo
-participant ": System User" as user
-participant ": SystemUserMapper" as mapper
-participant " outPutChangePassDTO : OutPutChangePassDTO" as outdto
+participant ": UserController" as Ctrl
+participant ": UpdatePersonalDataService" as service
+participant "user : IUserRepo" as repo
+participant ": User" as user
+participant ": UserMapper" as mapper
+participant " outputUserDTO : OutputUserDTO" as outdto
 
 
 
 [o-> UI: PATCH/{ID}/changePassword(json)
-UI -> Ctrl: changePassword(json)
+UI -> Ctrl: UpdatePersonalData(json)
 note right
 Change from json to dto hidden to simplify diagram
 end note
-Ctrl -> service : changePassword(passwordDTO)
-service -> dto: email = getEmail()
-deactivate
-service -> dto: newPassword = getPassword()
-deactivate
-service -> dto: newPasswordConfirmation = getPassword()
-deactivate
-service -> dto: oldPassword = getPassword()
-deactivate
-note over dto: All the following objects were created with factories, but the SD is simplified
-service -> repo: findSystemUserByID (email)
-repo --> service : systemUser
-service->user: changePassword(oldPassword, newPassword, newPasswordConfirmation)
+Ctrl -> service : UpdatePersonalData(idDTO, updateDataDTO)
+note over service : The creation of the id are hidden to simplify the diagram.
+
+service -> repo: findByUserID (userID)
+repo --> service : user
+service->user: changePassword(updateDataDTO)
+note over user : The changes of attributes are hidden to simplify the diagram .
+
 user -> user: validateOldPassword(oldPassword)
 deactivate user
 user -> user: updatePassword(oldPassword, newPassword,\n newPasswordConfirmation)
 deactivate user
 user-->service : true
 
-service->mapper : modelToDTO(systemUser)
+service->mapper : toDto(user)
 mapper -> outdto **: create()
-mapper-->service : outPutChangePassDTO
-service-->Ctrl : outPutChangePassDTO
-Ctrl -->UI : outPutChangePassJson
+mapper-->service : outPutUserDTO
+service-->Ctrl : outPutUserDTO
+Ctrl -->UI : outPutUserJson
 note right
 Change from json to dto hidden to simplify diagram
 end note
-[<--UI : Informs that user story was created
+[<--UI : Informs that operation success
 
 
 @enduml

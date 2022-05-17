@@ -25,7 +25,7 @@ public class CreateTaskController {
     CreateTaskService createTaskService;
 
     /*** Methods **/
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<Object> createAndSaveTask(@RequestBody TaskDTO dto) {
         OutputTaskDTO newTask;
         try {

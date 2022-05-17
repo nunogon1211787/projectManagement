@@ -29,7 +29,7 @@ public class CreateUserProfileService {
     public UserProfileDTO createAndSaveUserProfile(UserProfileDTO dto) {
 
         UserProfile newUserProfile = iUserProfileFactory.createUserProfile(dto);
-        if(!userProfileRepositoryInterface.saveUserProfile(newUserProfile)){
+        if(!userProfileRepositoryInterface.save(newUserProfile)){
             throw new IllegalArgumentException("User Profile Already exists!");
         }
         return userProfileMapper.toDto(newUserProfile);

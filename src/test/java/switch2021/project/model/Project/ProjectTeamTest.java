@@ -5,10 +5,9 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.factory.ResourceFactory;
 import switch2021.project.model.Company;
 import switch2021.project.model.Resource.old.Resource;
-import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.SystemUser.User;
 import switch2021.project.repositories.ProjectTeam;
 import switch2021.project.model.valueObject.*;
-import switch2021.project.model.SystemUser.SystemUser;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -122,7 +121,7 @@ public class ProjectTeamTest {
         //Arrange
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
-        SystemUser user = mock(SystemUser.class);
+        User user = mock(User.class);
         Resource manuelbras = mock(Resource.class);
         when(manuelbras.isYourEmail(user)).thenReturn(true);
         when(manuelbras.isCurrent()).thenReturn(true);
@@ -142,7 +141,7 @@ public class ProjectTeamTest {
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
 
-        SystemUser user = mock(SystemUser.class);
+        User user = mock(User.class);
         Resource manuelbras = mock(Resource.class);
         when(manuelbras.isYourEmail(user)).thenReturn(false);
         when(manuelbras.isCurrent()).thenReturn(false);
@@ -260,7 +259,7 @@ public class ProjectTeamTest {
         ResourceFactory resourceFactory = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resourceFactory);
 
-        SystemUser user = mock(SystemUser.class);
+        User user = mock(User.class);
         Name name = mock(Name.class);
 
         when(name.getText()).thenReturn("chico");
@@ -272,7 +271,7 @@ public class ProjectTeamTest {
 
         projectTeam.saveResource(chico);
 
-        SystemUser user2 = mock(SystemUser.class);
+        User user2 = mock(User.class);
         Name name2 = mock(Name.class);
 
         when(name2.getText()).thenReturn("jorgebras");
@@ -298,7 +297,7 @@ public class ProjectTeamTest {
         ResourceFactory resFac = mock(ResourceFactory.class);
         ProjectTeam projectTeam = new ProjectTeam(resFac);
 
-        SystemUser user = mock(SystemUser.class);
+        User user = mock(User.class);
         Name name = mock(Name.class);
 
         when(name.getText()).thenReturn("chico");
@@ -310,7 +309,7 @@ public class ProjectTeamTest {
 
         projectTeam.saveResource(chico);
 
-        SystemUser user2 = mock(SystemUser.class);
+        User user2 = mock(User.class);
         Name name2 = mock(Name.class);
 
         when(name.getText()).thenReturn("jorgebras");
@@ -934,14 +933,14 @@ public class ProjectTeamTest {
     {
         // Arrange
         Company company = new Company();
-        SystemUser joana3 = null;
+        User joana3 = null;
         LocalDate startDate = LocalDate.now().minusWeeks(1);
         LocalDate endDate = LocalDate.now().plusYears(1);
         double costPerHour = 100.0;
         double percAlloc = 0.5;
 
         Resource res = mock( Resource.class );
-        SystemUser user = mock(SystemUser.class);
+        User user = mock(User.class);
 
         ResourceFactory resFac =  mock( ResourceFactory.class );
         when(resFac.createResource(joana3, startDate, endDate, costPerHour, percAlloc)).thenReturn( res );
@@ -962,7 +961,7 @@ public class ProjectTeamTest {
         Double percAlloc = 0.5;
 
         //Act
-        SystemUser user = mock(SystemUser.class);
+        User user = mock(User.class);
         ResourceFactory resFac =  new ResourceFactory();
         Resource res = resFac.createResource(user, startDate, endDate, costPerHour, percAlloc);
 

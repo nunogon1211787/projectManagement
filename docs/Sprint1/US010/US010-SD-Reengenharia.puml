@@ -7,50 +7,44 @@ autoactivate on
 autonumber
 
 participant ":UpdatePersonalDataRoute" as route
-participant ":SystemUserController" as Ctrl
+participant ":UserController" as Ctrl
 participant ":UpdatePersonalDataService" as service
-participant ":UpdateUserDTO" as dto
-participant "systemUser : ISystemUserRepo" as iRepo
-participant ":SystemUser" as systemUser
-participant ":SystemUserMapper" as mapper
-participant ":OutPutUpdateUserDTO" as outPutDTO
+participant "user : IUserRepo" as iRepo
+participant ":User" as systemUser
+participant ":UserMapper" as mapper
+participant "outputUserDTO : OutputUserDTO" as outPutDTO
 
-[o-> route: PUT/{ID}/edit(json)
+[o-> route: PATCH/users/{ID}(json)
+
 route -> Ctrl: updatePersonalData(json)
+
 note right
 Change from json to dto hidden to simplify diagram
 end note
-Ctrl -> service: updatePersonalData(updateUserDTO)
-service -> dto: email = getEmail()
-deactivate
-service -> dto: username = getUserName()
-deactivate
-service -> dto: function = getFunction()
-deactivate
-service -> dto: photo = getPhoto()
-deactivate
-service -> iRepo: findSystemUserByEmail(email)
-loop for each known System User in System User Repository
-iRepo -> systemUser: isYourEmail(email)
-systemUser --> iRepo: true
-end
+
+Ctrl -> service: updatePersonalData(idDTO, updateDataDTO)
+note over service : The creation of the id are hidden to simplify the diagram.
+'note right
+'All the following objects were created with factories, but the process is hidden in SD to simplify
+'end note
+
+service -> iRepo: findByUserID(systemUserID)
 iRepo --> service: systemUser
-service -> systemUser: updatePersonalData(username, function, photo)
-note right
-NOTA!!! Nestes métodos assign poderiam ser os set's mas com as suas próprias validações.
-end note
-systemUser -> systemUser: assignUserName()
-deactivate
-systemUser -> systemUser: assignFunction()
-deactivate
-systemUser -> systemUser: assignPhoto()
-deactivate
+
+service -> systemUser: editPersonalData (updateDataDTO)
+
+note over systemUser : The changes of attributes are hidden to simplify the diagram .
+
 systemUser --> service: true
-service -> mapper: modelToDTO(user)
+
+service -> mapper: toDto(systemUser)
 mapper -> outPutDTO**: create()
-mapper --> service: outPutUpdateUserDTO
-service --> Ctrl: outPutUpdateUserDTO
-Ctrl --> route: outPutUpdateUserJSON
+mapper --> service: outPutUserDTO
+service --> Ctrl: outPutUserDTO
+Ctrl --> route: outPutUserJSON
+note right
+Change from json to dto hidden to simplify diagram
+end note
 [<--route : Informs Operation Success
 
 

@@ -56,7 +56,7 @@ import switch2021.project.model.UserStory.UserStory;
             if(y != null){
                 z = y.getUserStoryID();
             }else{
-                Sprint x = iSprintRepo.findSprintById(taskContainerID);
+                Sprint x = iSprintRepo.findBySprintID(taskContainerID);
                 if(x != null){
                     z = x.getSprintID();
                 } else{
