@@ -26,7 +26,7 @@ public class UserProfileController {
     /**
      * Create a User Profile
      */
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<Object> createUserProfile(@RequestBody UserProfileDTO dto) {
         ErrorMessage message = new ErrorMessage();
         if(dto.userProfileName == null || dto.userProfileName.isEmpty()){

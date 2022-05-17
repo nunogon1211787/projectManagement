@@ -12,9 +12,8 @@ import java.time.LocalDate;
 public class ProjectFactory implements switch2021.project.factoryInterface.IProjectFactory {
 
     @Override
-    public ProjectReeng createProject(ProjectDTO projectDTO, int nextId) {
+    public ProjectReeng createProject(ProjectDTO projectDTO) {
 
-        ProjectID projectID = new ProjectID(nextId);
         Description name = new Description(projectDTO.projectName);
         Description description = new Description(projectDTO.description);
         BusinessSector businessSector = new BusinessSector(projectDTO.businessSector);
@@ -27,13 +26,12 @@ public class ProjectFactory implements switch2021.project.factoryInterface.IProj
             throw new IllegalArgumentException("Project can´t start before today's date");
         }
 
-        ProjectReeng newProject = new ProjectReeng(name,description,businessSector,date,numberOfSprints,
-                                                   sprintDuration,budget);
+        ProjectReeng projectReeng = new ProjectReeng(name, description, businessSector, date, numberOfSprints,
+                                                     sprintDuration, budget);
 
-        newProject.setProjectCode(projectID);
-        newProject.setProjectStatus(ProjectStatusEnum.PLANNED);
+        projectReeng.setProjectCode(new ProjectID(name.getText()));
 
-        return newProject;
+        return projectReeng;
     }
 
 }

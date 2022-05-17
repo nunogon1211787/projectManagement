@@ -8,11 +8,11 @@ public interface ISprintRepo {
 
     /** Find a List Of Sprints. */
 
-    List<Sprint> findSprints();
+    List<Sprint> findAllSprints();
 
     /** Find a List Of Sprint by ID. */
 
-    Sprint findSprintById(String id);
+    Sprint findBySprintID(String id);
 
     /** Find a List Of All Sprints by Project ID. */
 
@@ -24,7 +24,7 @@ public interface ISprintRepo {
 
     /** Save Sprint. */
 
-    boolean saveSprint(Sprint sprint);
+    boolean save(Sprint sprint);
 
     /** Delete a Sprint. */
 

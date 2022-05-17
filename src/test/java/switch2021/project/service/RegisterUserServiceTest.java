@@ -7,10 +7,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import switch2021.project.dto.OutputUserDTO;
-import switch2021.project.factoryInterface.ISystemUserFactory;
-import switch2021.project.interfaces.ISystemUserRepo;
-import switch2021.project.mapper.SystemUserMapper;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.factoryInterface.IUserFactory;
+import switch2021.project.interfaces.IUserRepo;
+import switch2021.project.mapper.UserMapper;
+import switch2021.project.model.SystemUser.User;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -43,11 +43,11 @@ public class RegisterUserServiceTest {
 
     //for unit tests purpose:
     @MockBean
-    private ISystemUserRepo systemUserRepo;
+    private IUserRepo systemUserRepo;
     @MockBean
-    private SystemUserMapper systemUserMapper;
+    private UserMapper userMapper;
     @MockBean
-    private ISystemUserFactory systemUserFactory;
+    private IUserFactory systemUserFactory;
     @InjectMocks
     RegisterUserService underTest;
 
@@ -61,15 +61,15 @@ public class RegisterUserServiceTest {
     void itShouldRegisterAUser() {
         //S.U.T. {RegisterUserService}
         //Arrange
-        SystemUser userDouble = mock(SystemUser.class);
+        User userDouble = mock(User.class);
         OutputUserDTO outUserDTODouble = mock(OutputUserDTO.class);
         outUserDTODouble.email = "mano@beaver.com";
 
-        when(systemUserFactory.createSystemUser(any())).thenReturn(userDouble);
-        when(systemUserRepo.saveSystemUser(userDouble)).thenReturn(true);
-        when(systemUserMapper.toDto(userDouble)).thenReturn(outUserDTODouble);
+        when(systemUserFactory.createUser(any())).thenReturn(userDouble);
+        when(systemUserRepo.save(userDouble)).thenReturn(true);
+        when(userMapper.toDto(userDouble)).thenReturn(outUserDTODouble);
         //Act
-        OutputUserDTO outDTO = underTest.createAndSaveSystemUser(any());
+        OutputUserDTO outDTO = underTest.createAndSaveUser(any());
         //Assert
         assertEquals("mano@beaver.com", outDTO.email);
     }
@@ -79,12 +79,12 @@ public class RegisterUserServiceTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //S.U.T. {RegisterUserService}
             //Arrange
-            SystemUser userDouble = mock(SystemUser.class);
+            User userDouble = mock(User.class);
 
-            when(systemUserFactory.createSystemUser(any())).thenReturn(userDouble);
-            when(systemUserRepo.saveSystemUser(userDouble)).thenReturn(false);
+            when(systemUserFactory.createUser(any())).thenReturn(userDouble);
+            when(systemUserRepo.save(userDouble)).thenReturn(false);
             //Act
-            underTest.createAndSaveSystemUser(any());
+            underTest.createAndSaveUser(any());
         });
     }
 

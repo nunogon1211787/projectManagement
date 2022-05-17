@@ -7,7 +7,7 @@ import switch2021.project.model.Typology.Typology;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class SystemUserIDTest {
+public class UserIDTest {
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")

@@ -1,18 +1,25 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.Embeddable;
 import java.util.Objects;
+
 @ToString
 @Getter
+@Embeddable
+@NoArgsConstructor @Setter
 public class Description implements ValueObject<Description> {
 
     /**
      * Attributes
      **/
-    private final String text;
+
+    private String text;
     private static final int MINDESCRIPTIONLENGTH = 1;
     private static final int MAXDESCRIPTIONLENGTH = 1000;
 

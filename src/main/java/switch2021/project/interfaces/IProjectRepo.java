@@ -2,6 +2,7 @@ package switch2021.project.interfaces;
 
 import switch2021.project.model.Project.ProjectReeng;
 import java.util.List;
+import java.util.Optional;
 
 public interface IProjectRepo {
 
@@ -13,14 +14,16 @@ public interface IProjectRepo {
     /**
      * The repository should be able to find a object using given Identity.
      */
-    ProjectReeng findById(String code);
+    Optional<ProjectReeng> findById(String code);
+
+    ProjectReeng findByIdDeprecated(String code);
 
     /**Check if project exists in repository**/
-    boolean existById(String id);
+    boolean existsById(String id);
 
-    boolean existByName(String id);
+    boolean existsByName(String id);
 
     /**Save Projects Method**/
-    ProjectReeng saveProject(ProjectReeng newProject);
+    ProjectReeng save(ProjectReeng newProject);
 
 }

@@ -11,7 +11,7 @@ public interface IUserProfileRepo {
     /**
      * The repository should be able to find a object using given Identity.
      */
-    UserProfile findUserProfileByDescription(String userProfileName);
+    UserProfile findByUserProfileID(String userProfileName);
 
     /**
      * Finds all user profile
@@ -23,7 +23,7 @@ public interface IUserProfileRepo {
     /**
      * Save user story
      */
-    boolean saveUserProfile(UserProfile profile);
+    boolean save(UserProfile profile);
 
     boolean existsByDescription(String userProfileName);
 

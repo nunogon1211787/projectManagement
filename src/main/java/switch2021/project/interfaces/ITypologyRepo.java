@@ -23,7 +23,7 @@ public interface ITypologyRepo {
     /**
      * Save an object in the list of the repository.
      */
-    boolean saveTypology(Typology typology);
+    boolean save(Typology typology);
 
 
     /**

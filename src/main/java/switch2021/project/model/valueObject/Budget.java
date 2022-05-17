@@ -1,6 +1,9 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Getter
@@ -9,7 +12,7 @@ public class Budget {
     /**
      * Attributes
      */
-    private double budgetVO;
+    private final double budgetVO;
 
 
     /**

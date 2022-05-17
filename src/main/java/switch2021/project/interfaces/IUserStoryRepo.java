@@ -2,10 +2,11 @@ package switch2021.project.interfaces;
 
 
 import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.model.valueObject.ProjectID;
 
 import java.util.List;
 
-public interface IUserStoryRepo /* extends JpaRepository <UserStory, String>*/  {
+public interface IUserStoryRepo {
 
     /**
      * Finds all user story all activeUserStoryList.
@@ -21,7 +22,7 @@ public interface IUserStoryRepo /* extends JpaRepository <UserStory, String>*/  
      * @return userStory if found, else {@code null}
      */
 
-    UserStory findUserStoryById(String userStoryID);
+    UserStory findByUserStoryId(String userStoryID);
 
 
     /**
@@ -31,7 +32,7 @@ public interface IUserStoryRepo /* extends JpaRepository <UserStory, String>*/  
      * @return allUserStoriesInAProject if found, else {@code null}
      */
 
-    List<UserStory> findAllUserStoryByProjectID(String projectID);
+    List<UserStory> findAllByProjectID(ProjectID projectID);
 
     /**
      * Finds all user story

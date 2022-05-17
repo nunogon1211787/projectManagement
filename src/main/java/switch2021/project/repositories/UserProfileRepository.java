@@ -26,7 +26,7 @@ public class UserProfileRepository implements IUserProfileRepo {
 
 
     @Override
-    public UserProfile findUserProfileByDescription(String profileName) {
+    public UserProfile findByUserProfileID(String profileName) {
         UserProfile profile = null;
 
         for (UserProfile i : userProfileList) {
@@ -47,7 +47,7 @@ public class UserProfileRepository implements IUserProfileRepo {
      * Save UserProfile Method (Save a new UserProfile object to the UserProfile List)
      **/
     @Override
-    public boolean saveUserProfile(UserProfile profile) {
+    public boolean save(UserProfile profile) {
         if (profile == null || existsByDescription(profile.getUserProfileId().getUserProfileName().getText())) {
             return false;
         } else {

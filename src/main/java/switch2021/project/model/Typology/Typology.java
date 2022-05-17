@@ -1,8 +1,10 @@
 package switch2021.project.model.Typology;
 
+import lombok.NoArgsConstructor;
 import switch2021.project.model.valueObject.TypologyID;
 import switch2021.project.utils.Entity;
 
+import javax.persistence.Embeddable;
 import java.util.Objects;
 
 /**
@@ -13,6 +15,7 @@ import java.util.Objects;
  * Typology has as attribute a description which will provide the typology´s value
  * and that will be considerate as ID for itself.
  */
+
 
 public class Typology implements Entity<Typology> {
 

@@ -52,11 +52,11 @@ import switch2021.project.model.UserStory.UserStory;
         private TaskContainerID returnTaskContainerID(String taskContainerID){
             TaskContainerID z;
 
-            UserStory y = iUserStoryRepo.findUserStoryById(taskContainerID);
+            UserStory y = iUserStoryRepo.findByUserStoryId(taskContainerID);
             if(y != null){
                 z = y.getUserStoryID();
             }else{
-                Sprint x = iSprintRepo.findSprintById(taskContainerID);
+                Sprint x = iSprintRepo.findBySprintID(taskContainerID);
                 if(x != null){
                     z = x.getSprintID();
                 } else{

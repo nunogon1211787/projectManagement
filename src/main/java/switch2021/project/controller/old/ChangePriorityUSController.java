@@ -47,7 +47,7 @@ public class ChangePriorityUSController {
     }
 
     public UserStory getUserStory(UserStoryID userStoryId) {
-        this.userStory = this.userStoryStore.findUserStoryById(userStoryId.toString());
+        this.userStory = this.userStoryStore.findByUserStoryId(userStoryId.toString());
         return this.userStory;
     }
 
@@ -68,7 +68,7 @@ public class ChangePriorityUSController {
     }
 
     public UserStory getUS(UserStoryID userStoryId) {
-        this.userStory = this.userStoryStore.findUserStoryById(userStoryId.toString());
+        this.userStory = this.userStoryStore.findByUserStoryId(userStoryId.toString());
         return this.userStory;
     }
 

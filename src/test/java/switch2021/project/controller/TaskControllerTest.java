@@ -1,26 +1,17 @@
 package switch2021.project.controller;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.ResponseEntity;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import switch2021.project.dto.OutputTaskDTO;
-import switch2021.project.dto.TaskDTO;
 import switch2021.project.mapper.TaskMapperNew;
 import switch2021.project.repositories.TaskRepository;
 import switch2021.project.service.CreateTaskService;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-class CreateTaskControllerTest {
+class TaskControllerTest {
 
     @InjectMocks
     CreateTaskController controller;

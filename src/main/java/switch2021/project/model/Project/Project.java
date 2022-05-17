@@ -7,8 +7,8 @@ import switch2021.project.factory.ResourceFactory;
 import switch2021.project.factory.UserStoryFactory;
 import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.SystemUser.User;
 import switch2021.project.repositories.SprintRepository;
-import switch2021.project.model.SystemUser.SystemUser;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.repositories.UserStoryRepository;
 import switch2021.project.model.valueObject.*;
@@ -92,7 +92,7 @@ public class Project implements Entity {
         return msg;
     }
 
-    public Resource createResource(SystemUser user, LocalDate startDate, LocalDate endDate, double costPerHour,
+    public Resource createResource(User user, LocalDate startDate, LocalDate endDate, double costPerHour,
                                    double percentageOfAllocation) {
         return this.projectTeam.createResource(user, startDate, endDate, costPerHour, percentageOfAllocation);
     }

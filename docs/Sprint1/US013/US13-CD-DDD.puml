@@ -4,12 +4,12 @@ skinparam classAttributeIconSize 0
 
 title US013 - "As Administrator, I want to create user profiles."
 
-package "InfraEstructure" #lightblue {
+package "InfraEstructure" <<Rectangle>> #lightblue {
     class "CreateUserProfilesRoute" as route <<Component>>{
     }
 }
 
-package "Interface Adapter" #lightgreen{
+package "Interface Adapter" <<Rectangle>> #lightgreen{
 package "Controllers" <<Folder>>{
     class "UserProfileController" as ctrl <<Component>>{
     +createUserProfile(json)
@@ -17,13 +17,13 @@ package "Controllers" <<Folder>>{
     }
     package "Repositories" <<Folder>>{
     class "UserProfileRepository" as uRepo <<Repository>>{
-    +saveUserProfiles(newUserProfile)
+    +save(newUserProfile)
     +existsByDescription(description)
     }
 }
 }
 
-package "DTO" {
+package "DTO" <<Rectangle>>{
     class "UserProfileDTO" as dto <<Component>> {
     -userProfileName : String
     }
@@ -33,7 +33,7 @@ package "DTO" {
     }
 }
 
-package "Application Service" #implementation {
+package "Application Service"<<Rectangle>> #implementation {
     package "App Service" {
         class "CreateUserProfileService" as service <<Service>>{
         +createAndSaveUserProfile(dto)
@@ -41,7 +41,7 @@ package "Application Service" #implementation {
     }
     package "Repositories Interface" {
         class "IUserProfileRepo" as iUserProfileRepo <<(I, Violet) Interface>> {
-            +saveUserProfile(newUserProfile)
+            +save(newUserProfile)
             +existsByDescription(description)
         }
     }
@@ -52,7 +52,7 @@ package "Application Service" #implementation {
     }
 }
 
-package "Domain" #burlywood  {
+package "Domain" <<Rectangle>>#burlywood  {
     package "Factory" {
         class "UserProfileFactory" as userProfileFactory <<Factory>> {
         +createUserProfile(dto)

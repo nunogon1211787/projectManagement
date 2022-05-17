@@ -40,7 +40,7 @@ public class CreateSprintServiceTest {
 
         //Arrange
         when(iSprintFactory.createSprint(newSprintDTO)).thenReturn(sprint);
-        when(iSprintRepo.saveSprint(sprint)).thenReturn(true);
+        when(iSprintRepo.save(sprint)).thenReturn(true);
         when(sprintMapper.toDTO(sprint)).thenReturn(outPutSprintDTO);
         //Act
         OutPutSprintDTO outPut = createSprintService.createAndSaveSprint(newSprintDTO);
@@ -55,7 +55,7 @@ public class CreateSprintServiceTest {
 
         //Arrange
         when(iSprintFactory.createSprint(newSprintDTO)).thenReturn(sprint);
-        when(iSprintRepo.saveSprint(sprint)).thenReturn(true);
+        when(iSprintRepo.save(sprint)).thenReturn(true);
         when(sprintMapper.toDTO(sprint)).thenReturn(outPutSprintDTO);
         //Act
         OutPutSprintDTO outPut = createSprintService.createAndSaveSprint(newSprintDTO);
@@ -71,7 +71,7 @@ public class CreateSprintServiceTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             when(iSprintFactory.createSprint(newSprintDTO)).thenReturn(sprint);
-            when(iSprintRepo.saveSprint(sprint)).thenReturn(false);
+            when(iSprintRepo.save(sprint)).thenReturn(false);
             when(sprintMapper.toDTO(sprint)).thenReturn(outPutSprintDTO);
             //Act
             createSprintService.createAndSaveSprint(newSprintDTO);

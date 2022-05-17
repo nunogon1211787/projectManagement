@@ -29,7 +29,7 @@ public class UserStoryID implements ValueObject<UserStoryID>, TaskContainerID {
 
     public UserStoryID(String userStoryIdString) {
         String[] values = userStoryIdString.split("_");// Project_2022_1_As a PO, want to test this string
-        this.projectID = new ProjectID(Integer.parseInt(values[2]));
+        this.projectID = new ProjectID(values[2]);
         this.usTitle = new UsTitle(values[3]);
     }
 

@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import switch2021.project.dto.NewUserInfoDTO;
 import switch2021.project.factoryInterface.*;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.SystemUser.User;
 import switch2021.project.model.valueObject.*;
 
 @Component
-public class SystemUserFactory implements ISystemUserFactory {
+public class UserFactory implements IUserFactory {
 
     @Autowired
-    private ISystemUserIDFactory idFactory;
+    private IUserIDFactory idFactory;
     @Autowired
     private INameFactory nameFactory;
     @Autowired
@@ -24,8 +24,8 @@ public class SystemUserFactory implements ISystemUserFactory {
     private IUserProfileIDFactory userProfileIDFactory;
 
     @Override
-    public SystemUser createSystemUser(NewUserInfoDTO infoDTO) {
-        SystemUserID systemUserID = idFactory.createSystemUserID(infoDTO.email);
+    public User createUser(NewUserInfoDTO infoDTO) {
+        SystemUserID systemUserID = idFactory.createUserID(infoDTO.email);
         Name userName = nameFactory.createName(infoDTO.userName);
         Photo photo = photoFactory.createPhoto(infoDTO.photo);
         Password password = passwordFactory.createPassword(infoDTO.password);
@@ -33,6 +33,6 @@ public class SystemUserFactory implements ISystemUserFactory {
         Function function = functionFactory.createFunction(infoDTO.function);
         UserProfileID visitorID = userProfileIDFactory.createUserProfileID("Visitor");
 
-        return new SystemUser(systemUserID, userName, photo, password, passwordConfirmation, function, visitorID);
+        return new User(systemUserID, userName, photo, password, passwordConfirmation, function, visitorID);
     }
 }

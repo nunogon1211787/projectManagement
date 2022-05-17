@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.dto.ProjectDTO;
-import switch2021.project.interfaces.IProjectRepo;
+import switch2021.project.repositories.ProjectRepository;
 import switch2021.project.service.CreateProjectService;
 import switch2021.project.service.ShowAllProjectsService;
 
@@ -20,7 +20,7 @@ public class ProjectController {
     @Autowired
     CreateProjectService service;
     @Autowired
-    IProjectRepo projStore;
+    ProjectRepository projStore;
     @Autowired
     ShowAllProjectsService srv;
 
@@ -32,19 +32,19 @@ public class ProjectController {
         return new ResponseEntity<>(allProjectsDto, HttpStatus.OK);
     }
 
-    @PostMapping("/createProject")
+    @PostMapping("/create")
     public ResponseEntity <?> createProject (@Valid @RequestBody ProjectDTO projectDTO) {
 
-        if (projStore.existByName(projectDTO.projectName)) {
+/*        if (projStore.existsByName(projectDTO.projectName)) {
             return ResponseEntity
                     .badRequest()
                     .body("Project name already exists"); //TODO criar uma Response Class para mensagens
-        }
+        }*/
 
         return new ResponseEntity<>(service.createAndSaveProject(projectDTO), HttpStatus.CREATED);
     }
 
-    @PostMapping("/editProject")
+/*    @PostMapping("/edit")
     public ResponseEntity <?> editProject (@Valid @RequestBody ProjectDTO projectDTO) {
         if (projStore.existByName(projectDTO.projectName)) {
             return ResponseEntity
@@ -53,5 +53,5 @@ public class ProjectController {
         }
 
         return new ResponseEntity<>(service.editProject(projectDTO), HttpStatus.OK);
-    }
+    }*/
 }

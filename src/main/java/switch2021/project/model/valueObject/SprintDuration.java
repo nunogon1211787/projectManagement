@@ -1,8 +1,11 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Getter

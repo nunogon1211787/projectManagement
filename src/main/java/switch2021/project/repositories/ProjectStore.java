@@ -2,7 +2,7 @@ package switch2021.project.repositories;
 
 import lombok.Getter;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.SystemUser.SystemUser;
+import switch2021.project.model.SystemUser.User;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.BusinessSector;
 import switch2021.project.model.valueObject.Customer;
@@ -40,7 +40,7 @@ public class ProjectStore {
         Project newProject = new Project(name, description, customer, typology, businessSector,
                 startDate, numberOfSprints, budget);
 
-        newProject.setProjectCode(new ProjectID(projectList.size() + 1));
+        newProject.setProjectCode(new ProjectID(name));
 
         if (existById(newProject.getProjectCode().getCode())) {
             throw new IllegalArgumentException("Error: Project already exists!");
@@ -94,7 +94,7 @@ public class ProjectStore {
         return false;
     }
 
-    public boolean validateAllocation(SystemUser user, double percentageOfAllocation, LocalDate startDate, LocalDate
+    public boolean validateAllocation(User user, double percentageOfAllocation, LocalDate startDate, LocalDate
             endDate) {
         double sum = 0;
         boolean msg = false;

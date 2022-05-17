@@ -2,17 +2,9 @@ package switch2021.project.controller.old;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.controller.old.GetCurrentProjectListController;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Resource.old.Resource;
-import switch2021.project.model.SystemUser.SystemUser;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.valueObject.*;
-import switch2021.project.repositories.ProjectStore;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.*;
 import switch2021.project.repositories.SystemUserRepositoryInterface;
-import switch2021.project.repositories.jpa.SystemUserJpa;
+import switch2021.project.datamodel.SystemUserJpa;
 import switch2021.project.service.RegisterUserService;
 import switch2021.project.service.SearchUsersByParamsService;
 import switch2021.project.service.ShowAllCurrentProjectsByUserService;
@@ -69,7 +69,7 @@ public class UserController {
     public ResponseEntity<Object> registerUser(@RequestBody NewUserInfoDTO infoDTO) {
         OutputUserDTO outDTO;
         try {
-            outDTO = registerUserService.createAndSaveSystemUser(infoDTO);
+            outDTO = registerUserService.createAndSaveUser(infoDTO);
             return new ResponseEntity<>(outDTO, HttpStatus.CREATED);
         }
         catch (Exception e){

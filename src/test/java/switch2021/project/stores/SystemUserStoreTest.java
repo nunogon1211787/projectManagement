@@ -1,12 +1,5 @@
 package switch2021.project.stores;
 
-import org.junit.jupiter.api.Test;
-import switch2021.project.model.Company;
-import switch2021.project.model.SystemUser.SystemUser;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 public class SystemUserStoreTest {
 /*    @Test
     public void saveSystemUserSuccess() {

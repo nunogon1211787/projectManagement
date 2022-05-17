@@ -6,5 +6,5 @@ import switch2021.project.model.Project.ProjectReeng;
 
 public interface IProjectFactory {
 
-    ProjectReeng createProject(ProjectDTO projectDTO, int nextId);
+    ProjectReeng createProject(ProjectDTO projectDTO);
 }

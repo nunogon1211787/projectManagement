@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.TypologyDTO;
 import switch2021.project.factoryInterface.ITypologyFactory;
 import switch2021.project.interfaces.ITypologyRepo;
@@ -46,7 +47,7 @@ public class CreateTypologyServiceTest {
         //Act
         when(dto.getDescription()).thenReturn("Fixed Cost");
         when(iTypologyFactory.createTypology(dto)).thenReturn(typo);
-        when(iTypologyRepo.saveTypology(typo)).thenReturn(true);
+        when(iTypologyRepo.save(typo)).thenReturn(true);
         when(des.getText()).thenReturn("Fixed Cost");
         when(id.getDescription()).thenReturn(des);
         when(typo.hasID_Description(des.getText())).thenReturn(false);
@@ -67,7 +68,7 @@ public class CreateTypologyServiceTest {
             //Act
             when(dto.getDescription()).thenReturn("Fixed Cost");
             when(iTypologyFactory.createTypology(dto)).thenReturn(typo);
-            when(iTypologyRepo.saveTypology(typo)).thenReturn(false);
+            when(iTypologyRepo.save(typo)).thenReturn(false);
             when(des.getText()).thenReturn("Fixed Cost");
             when(id.getDescription()).thenReturn(des);
             when(typo.hasID_Description(des.getText())).thenReturn(true);
@@ -83,17 +84,18 @@ public class CreateTypologyServiceTest {
             TypologyDTO dto = mock(TypologyDTO.class);
             Description des = mock(Description.class);
             TypologyID id = mock((TypologyID.class));
+            IdDTO idDTO = mock(IdDTO.class);
             Typology typo = mock(Typology.class);
             when(dto.getDescription()).thenReturn("Fixed Cost");
             when(iTypologyFactory.createTypology(dto)).thenReturn(typo);
-            when(iTypologyRepo.saveTypology(typo)).thenReturn(false);
+            when(iTypologyRepo.save(typo)).thenReturn(false);
             when(des.getText()).thenReturn("Fixed Cost");
             when(id.getDescription()).thenReturn(des);
             when(typo.getId_description()).thenReturn(id);
             when(typo.hasID_Description(des.getText())).thenReturn(true);
             when(iTypologyRepo.findTypologyById("Fixed Cost")).thenReturn(null);
             //Act
-            typologyService.findTypologyByDescription(dto);
+            typologyService.findTypologyByDescription(idDTO);
         });
     }
 
@@ -119,9 +121,9 @@ public class CreateTypologyServiceTest {
         when(iTypologyFactory.createTypology(dto)).thenReturn(typo);
         when(iTypologyFactory.createTypology(dto1)).thenReturn(typo1);
         when(iTypologyFactory.createTypology(dto2)).thenReturn(typo2);
-        when(iTypologyRepo.saveTypology(typo)).thenReturn(true);
-        when(iTypologyRepo.saveTypology(typo1)).thenReturn(true);
-        when(iTypologyRepo.saveTypology(typo2)).thenReturn(true);
+        when(iTypologyRepo.save(typo)).thenReturn(true);
+        when(iTypologyRepo.save(typo1)).thenReturn(true);
+        when(iTypologyRepo.save(typo2)).thenReturn(true);
         when(des.getText()).thenReturn("Test");
         when(des.getText()).thenReturn("Test1");
         when(des.getText()).thenReturn("Test2");
@@ -155,9 +157,10 @@ public class CreateTypologyServiceTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             TypologyDTO dto = mock(TypologyDTO.class);
+            IdDTO idDTO = mock(IdDTO.class);
             //Act
             when(dto.getDescription()).thenReturn("Test2");
-            typologyService.deleteTypology(dto);
+            typologyService.deleteTypology(idDTO);
         });
     }
 }

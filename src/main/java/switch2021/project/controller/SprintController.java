@@ -27,7 +27,7 @@ public class SprintController {
      * Methods
      **/
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<Object> createAndSaveSprint(@RequestBody NewSprintDTO dto) {
         ErrorMessage message = new ErrorMessage();
         if(dto.name == null || dto.name.isEmpty() || dto.projectID == null
