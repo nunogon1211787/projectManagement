@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.IUserStoryRepo;
 import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.model.valueObject.ProjectID;
 
 import java.util.*;
 
@@ -123,7 +124,7 @@ public class UserStoryRepository implements IUserStoryRepo {
      */
 
     @Override
-    public UserStory findUserStoryById(String userStoryId) {
+    public UserStory findByUserStoryId(String userStoryId) {
         for (UserStory us : userStoryList) {
             if (us.getUserStoryID().toString().equalsIgnoreCase(userStoryId)) {
                 return us;
@@ -140,10 +141,10 @@ public class UserStoryRepository implements IUserStoryRepo {
      */
 
     @Override
-    public List<UserStory> findAllUserStoryByProjectID(String projectID) {
+    public List<UserStory> findAllByProjectID(ProjectID projectID) {
         List<UserStory> allUserStoriesInAProject = new ArrayList<>();
         for (UserStory us : userStoryList) {
-            if (us.getUserStoryID().getProjectID().getCode().trim().equalsIgnoreCase(projectID)) {
+            if (us.getUserStoryID().getProjectID().equals(projectID)) {
                 allUserStoriesInAProject.add(us);
             }
         }

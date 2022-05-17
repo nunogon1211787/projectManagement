@@ -6,8 +6,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import switch2021.project.dto.OutPutUsDTO;
-import switch2021.project.dto.UserStoryDTO;
+import switch2021.project.dto.OutputUserStoryDTO;
+import switch2021.project.dto.CreateUserStoryDTO;
+import switch2021.project.dto.UserStoryIdDTO;
 import switch2021.project.factoryInterface.IUserStoryFactory;
 import switch2021.project.interfaces.IUserStoryRepo;
 import switch2021.project.mapper.UserStoryMapper;
@@ -16,6 +17,7 @@ import switch2021.project.model.UserStory.UserStory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
@@ -27,7 +29,7 @@ public class CreateUserStoryServiceTest {
     CreateUserStoryService createUserStoryService;
 
     @Mock
-    private UserStoryDTO userStoryDTO;
+    private CreateUserStoryDTO createUserStoryDTO;
     @Mock
     private IUserStoryFactory iUserStoryFactory;
     @Mock
@@ -37,7 +39,7 @@ public class CreateUserStoryServiceTest {
     @Mock
     private UserStory newUserStory;
     @Mock
-    private OutPutUsDTO outputUsDto;
+    private OutputUserStoryDTO outputUsDto;
 
 
     @Test
@@ -45,13 +47,15 @@ public class CreateUserStoryServiceTest {
     public void createAndSaveUserStoryWithSuccessGetProjectID() {
 
         //Arrange
-        when(iUserStoryFactory.createUserStory(userStoryDTO)).thenReturn(newUserStory);
+        when(iUserStoryFactory.createUserStory(createUserStoryDTO)).thenReturn(newUserStory);
         when(iUserStoryRepo.save(newUserStory)).thenReturn(true);
         when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
+        UserStoryIdDTO usIdDto = mock(UserStoryIdDTO.class);
+        when(outputUsDto.getUserStoryID()).thenReturn(usIdDto);
         //Act
-        OutPutUsDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(userStoryDTO);
+        OutputUserStoryDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
         //Assert
-        assertEquals(userStoryDTO.getProjectID(), andSaveUserStory.getProjectID());
+        assertEquals(createUserStoryDTO.projectID, andSaveUserStory.getUserStoryID().projectID);
 
     }
 
@@ -60,13 +64,15 @@ public class CreateUserStoryServiceTest {
     public void createAndSaveUserStoryWithSuccessGetUsTitle() {
 
         //Arrange
-        when(iUserStoryFactory.createUserStory(userStoryDTO)).thenReturn(newUserStory);
+        when(iUserStoryFactory.createUserStory(createUserStoryDTO)).thenReturn(newUserStory);
         when(iUserStoryRepo.save(newUserStory)).thenReturn(true);
         when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
+        UserStoryIdDTO usIdDto = mock(UserStoryIdDTO.class);
+        when(outputUsDto.getUserStoryID()).thenReturn(usIdDto);
         //Act
-        OutPutUsDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(userStoryDTO);
+        OutputUserStoryDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
         //Assert
-        assertEquals(userStoryDTO.getTitle(), andSaveUserStory.getTitle());
+        assertEquals(createUserStoryDTO.title, andSaveUserStory.getUserStoryID().title);
     }
 
     @Test
@@ -74,13 +80,13 @@ public class CreateUserStoryServiceTest {
     public void createAndSaveUserStoryWithSuccessGetPriority() {
 
         //Arrange
-        when(iUserStoryFactory.createUserStory(userStoryDTO)).thenReturn(newUserStory);
+        when(iUserStoryFactory.createUserStory(createUserStoryDTO)).thenReturn(newUserStory);
         when(iUserStoryRepo.save(newUserStory)).thenReturn(true);
         when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
         //Act
-        OutPutUsDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(userStoryDTO);
+        OutputUserStoryDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
         //Assert
-        assertEquals(userStoryDTO.getPriority(), andSaveUserStory.getPriority());
+        assertEquals(createUserStoryDTO.getPriority(), andSaveUserStory.getPriority());
     }
 
     @Test
@@ -88,13 +94,13 @@ public class CreateUserStoryServiceTest {
     public void createAndSaveUserStoryWithSuccessGetDescription() {
 
         //Arrange
-        when(iUserStoryFactory.createUserStory(userStoryDTO)).thenReturn(newUserStory);
+        when(iUserStoryFactory.createUserStory(createUserStoryDTO)).thenReturn(newUserStory);
         when(iUserStoryRepo.save(newUserStory)).thenReturn(true);
         when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
         //Act
-        OutPutUsDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(userStoryDTO);
+        OutputUserStoryDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
         //Assert
-        assertEquals(userStoryDTO.getDescription(), andSaveUserStory.getDescription());
+        assertEquals(createUserStoryDTO.getDescription(), andSaveUserStory.getDescription());
     }
 
     @Test
@@ -103,11 +109,11 @@ public class CreateUserStoryServiceTest {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
-            when(iUserStoryFactory.createUserStory(userStoryDTO)).thenReturn(newUserStory);
+            when(iUserStoryFactory.createUserStory(createUserStoryDTO)).thenReturn(newUserStory);
             when(iUserStoryRepo.save(newUserStory)).thenReturn(false);
             when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
             //Act
-           createUserStoryService.createAndSaveUserStory(userStoryDTO);
+           createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
         });
     }
 }
