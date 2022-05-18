@@ -146,7 +146,8 @@ public class User implements Entity<User> {
 
     public boolean editPersonalData(String userName, String function, String photo) {
         boolean msg = false;
-        if(!(userName.isBlank()) && !(function.isBlank())) {
+        if(userName.trim().equalsIgnoreCase(userName) && function.trim().equalsIgnoreCase(function) &&
+                photo.trim().equalsIgnoreCase(photo)) {
             assignName(new Name(userName));
             assignFunction(new Function(function));
             assignPhoto(new Photo(photo));

@@ -17,7 +17,7 @@ participant " outputUserDTO : OutputUserDTO" as outdto
 
 
 
-[o-> UI: PATCH/{ID}/changePassword(json)
+[o-> UI: PATCH/users/{ID}(json)
 UI -> Ctrl: UpdatePersonalData(json)
 note right
 Change from json to dto hidden to simplify diagram
@@ -27,13 +27,13 @@ note over service : The creation of the id are hidden to simplify the diagram.
 
 service -> repo: findByUserID (userID)
 repo --> service : user
-service->user: changePassword(updateDataDTO)
+service->user: updatePersonalData(updateDataDTO)
 note over user : The changes of attributes are hidden to simplify the diagram .
 
-user -> user: validateOldPassword(oldPassword)
-deactivate user
-user -> user: updatePassword(oldPassword, newPassword,\n newPasswordConfirmation)
-deactivate user
+'user -> user: validateOldPassword(oldPassword)
+'deactivate user
+'user -> user: updatePassword(oldPassword, newPassword,\n newPasswordConfirmation)
+'deactivate user
 user-->service : true
 
 service->mapper : toDto(user)

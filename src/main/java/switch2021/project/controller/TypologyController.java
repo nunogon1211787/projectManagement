@@ -44,7 +44,7 @@ public class TypologyController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> findTypologyByDescription(@PathVariable IdDTO idDTO) {
+    public ResponseEntity<Object> findTypologyByDescription(@PathVariable("id") IdDTO idDTO) {
         ErrorMessage message = new ErrorMessage();
         if(idDTO.getId() == null || idDTO.getId().isEmpty()) {
             message.errorMessage = "Needs to provide an acceptable argument";
@@ -74,7 +74,7 @@ public class TypologyController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteTypology(@PathVariable IdDTO idDTO) {
+    public ResponseEntity<Object> deleteTypology(@PathVariable ("id") IdDTO idDTO) {
         ErrorMessage message = new ErrorMessage();
         if(idDTO.getId() == null || idDTO.getId().isEmpty()) {
             message.errorMessage = "Needs to provide an acceptable argument";

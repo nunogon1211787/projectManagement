@@ -9,6 +9,8 @@ import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.mapper.UserMapper;
 import switch2021.project.model.SystemUser.User;
 
+import java.util.Optional;
+
 
 @Service
 public class UpdatePersonalDataService {
@@ -23,11 +25,11 @@ public class UpdatePersonalDataService {
 
         User user = iUserRepo.findByUserID(idDTO.id);
 
-        if (!(updateDataDTO.newPassword == null) && !(updateDataDTO.oldPassword == null)) {
-            user.updatePassword(updateDataDTO.oldPassword, updateDataDTO.newPassword);
-        }
-        if (!(updateDataDTO.userName == null) && !(updateDataDTO.function == null) && !(updateDataDTO.photo == null)) {
+        if (updateDataDTO.newPassword == null && updateDataDTO.oldPassword == null) {
             user.editPersonalData(updateDataDTO.userName, updateDataDTO.function, updateDataDTO.photo);
+        }
+        if (updateDataDTO.userName == null && updateDataDTO.function == null) {
+            user.updatePassword(updateDataDTO.oldPassword, updateDataDTO.newPassword);
         }
         return userMapper.toDto(user);
     }
