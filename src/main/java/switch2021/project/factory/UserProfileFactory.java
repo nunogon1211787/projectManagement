@@ -17,7 +17,7 @@ public class UserProfileFactory implements IUserProfileFactory {
 
     @Override
     public UserProfile createUserProfile(UserProfileDTO dto) {
-        UserProfileID userProfileID = idFactory.createUserProfileID(dto.userProfileName);
+        UserProfileID userProfileID = idFactory.createUserProfileID(dto.description);
         return new UserProfile(userProfileID);
     }
 }

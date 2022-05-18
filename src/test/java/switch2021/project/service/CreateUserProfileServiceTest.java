@@ -43,7 +43,7 @@ public class CreateUserProfileServiceTest {
         //Act
         UserProfileDTO dto = createUserProfileService.createAndSaveUserProfile(userProfileDTO);
         //Assert
-        assertEquals(dto.userProfileName, createUserProfileService.createAndSaveUserProfile(userProfileDTO).userProfileName);
+        assertEquals(dto.description, createUserProfileService.createAndSaveUserProfile(userProfileDTO).description);
     }
 
     @Test

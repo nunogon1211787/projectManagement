@@ -29,7 +29,7 @@ public class UserProfileController {
     @PostMapping
     public ResponseEntity<Object> createUserProfile(@RequestBody UserProfileDTO dto) {
         ErrorMessage message = new ErrorMessage();
-        if(dto.userProfileName == null || dto.userProfileName.isEmpty()){
+        if(dto.description == null || dto.description.isEmpty()){
             message.errorMessage = "User Profile Name cannot be empty.";
             return new ResponseEntity<>(message, HttpStatus.NOT_ACCEPTABLE);
         }

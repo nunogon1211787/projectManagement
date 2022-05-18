@@ -8,11 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
-import switch2021.project.dto.DateDTO;
-import switch2021.project.dto.IdDTO;
-import switch2021.project.dto.OutputResourceDTO;
-import switch2021.project.dto.ResourceDTOReeng;
+import switch2021.project.dto.*;
 import switch2021.project.service.CreateResourceInAProjectService;
+import switch2021.project.service.ShowAllCurrentProjectsByUserService;
 import switch2021.project.service.ShowCurrentProjectTeamService;
 
 import java.util.List;
@@ -28,6 +26,8 @@ public class ResourceController {
 
     @Autowired private ShowCurrentProjectTeamService srv;
 
+//    @Autowired private ShowAllCurrentProjectsByUserService showAllCurrentProjectsByUserService;
+
 
     @GetMapping
     public ResponseEntity<Object> showCurrentProjectTeam(@RequestParam("project") IdDTO dto, @RequestParam("date") DateDTO dateDto){
@@ -37,6 +37,14 @@ public class ResourceController {
         return new ResponseEntity<>(resourcesDto, HttpStatus.OK);
 
     }
+
+//    @GetMapping
+//    public ResponseEntity<Object> showCurrentProjectsByUser(@RequestParam("user") IdDTO id, @RequestParam("date") DateDTO dateDto){
+//
+//        List<OutputProjectDTO> projectsDto = showAllCurrentProjectsByUserService.showCurrentProjectsByUser(id, dateDto);
+//
+//        return new ResponseEntity<>(projectsDto, HttpStatus.OK);
+//    }
 
 
     /**
@@ -50,4 +58,6 @@ public class ResourceController {
 
         return new ResponseEntity<>(newResource, HttpStatus.CREATED);
     }
+
+
 }

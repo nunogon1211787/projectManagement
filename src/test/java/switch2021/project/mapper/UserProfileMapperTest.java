@@ -26,7 +26,7 @@ public class UserProfileMapperTest {
         when(description.getText()).thenReturn("User Profile");
         UserProfileDTO userProfileDTO = mapper.toDto(userProfile);
         //Assert
-        assertEquals(userProfile.getUserProfileId().getUserProfileName().getText(), userProfileDTO.userProfileName);
+        assertEquals(userProfile.getUserProfileId().getUserProfileName().getText(), userProfileDTO.description);
     }
 
     @Test
@@ -43,6 +43,6 @@ public class UserProfileMapperTest {
         when(description.getText()).thenReturn("User Profile");
         UserProfileDTO userProfileDTO = userProfileMapper.toDto(userProfile);
         //Assert
-        assertEquals(userProfileDTO.getUserProfileName(), "User Profile");
+        assertEquals(userProfileDTO.getDescription(), "User Profile");
     }
 }

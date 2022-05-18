@@ -12,7 +12,6 @@ import switch2021.project.service.TypologyService;
 
 import java.util.List;
 
-@Controller
 @RestController
 @RequestMapping("/typologies")
 public class TypologyController {
