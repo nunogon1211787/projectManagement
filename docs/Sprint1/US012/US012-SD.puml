@@ -11,12 +11,12 @@ participant ":CreateTypologyService" as Service
 participant ":ITypologyFactory" as TypoFactory
 'participant "typoIDFact: ITypologyIDFactory" as IdFactory
 'participant "descFact:IDescriptionFactory" as DesFactory
-participant "newTypo:Typology" as Typology
+participant "newTypo: \nTypology" as Typology
 'participant "typologyID:TypologyID" as Id
 'participant "description:Description" as Description
-participant "iRepoTypology:ITypologyRepo" as Repository
-participant "mapper:TypologyMapper" as Mapper
-participant "outputDto:TypologyDTO" as outputDTO
+participant "iRepoTypology: \nITypologyRepo" as Repository
+participant "mapper: \nTypologyMapper" as Mapper
+participant "outputDto: \nTypologyDTO" as outputDTO
 
 [o-> Router: Post/typologies/(json)
 Router -> Controller: createTypology (json)
@@ -24,7 +24,7 @@ note right
 Change from json to dto hidden to simplify diagram
 end note
 'note over Controller: Service is parameter with @Autowired
-Controller -> Service: createAndSaveTypology(inputDto)
+Controller -> Service: createAndSaveTypology\n(inputDto)
 'note over Service: typoFact, repoTypo and mapper are parameters with @Autowired
 Service -> TypoFactory: createTypology(inputDto)
 note over TypoFactory : The creation of the id are hidden to simplify the diagram.
@@ -37,7 +37,7 @@ note over TypoFactory : The creation of the id are hidden to simplify the diagra
 'return description
 'IdFactory --> Id**: create(description)
 'return typologyID
-TypoFactory --> Typology**: create(typologyID)
+TypoFactory --> Typology**: create\n(typologyID)
 return newTypo
 'alt successful case
     Service -> Repository: save(newTypo)

@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.SystemUser.User;
-import switch2021.project.repositories.ProjectStore;
-import switch2021.project.repositories.ProjectTeam;
+import switch2021.project.repositories.old.ProjectStore;
+import switch2021.project.repositories.old.ProjectTeam;
 import switch2021.project.model.valueObject.*;
 
 import static org.mockito.ArgumentMatchers.*;

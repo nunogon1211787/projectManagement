@@ -4,6 +4,8 @@ import lombok.Getter;
 import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.ISprintRepo;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.repositories.old.ProjectTeam;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

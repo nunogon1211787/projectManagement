@@ -10,10 +10,10 @@ autonumber
 participant ": ChangePasswordRoute" as UI
 participant ": UserController" as Ctrl
 participant ": UpdatePersonalDataService" as service
-participant "user : IUserRepo" as repo
+participant "user: \n IUserRepo" as repo
 participant ": User" as user
 participant ": UserMapper" as mapper
-participant " outputUserDTO : OutputUserDTO" as outdto
+participant " outputUserDTO: \n OutputUserDTO" as outdto
 
 
 

@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.repositories.ProjectRepository;
-import switch2021.project.repositories.jpa.ProjectJpaRepository;
 import switch2021.project.mapper.ProjectMapper;
 import switch2021.project.model.Project.ProjectReeng;
 
@@ -21,10 +20,12 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class ShowAllProjectsServiceTest {
 
-    @MockBean ProjectMapper map;
+    @MockBean
+    ProjectMapper map;
     @MockBean
     ProjectRepository repo;
-    @InjectMocks ShowAllProjectsService srv;
+    @InjectMocks
+    CreateProjectService srv;
 
     @BeforeEach
     void TestConfiguration(){

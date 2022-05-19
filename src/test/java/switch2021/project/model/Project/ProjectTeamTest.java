@@ -6,7 +6,7 @@ import switch2021.project.factory.ResourceFactory;
 import switch2021.project.model.Company;
 import switch2021.project.model.Resource.old.Resource;
 import switch2021.project.model.SystemUser.User;
-import switch2021.project.repositories.ProjectTeam;
+import switch2021.project.repositories.old.ProjectTeam;
 import switch2021.project.model.valueObject.*;
 
 import java.time.LocalDate;

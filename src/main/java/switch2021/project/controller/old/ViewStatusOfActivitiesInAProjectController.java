@@ -3,9 +3,8 @@ package switch2021.project.controller.old;
 import switch2021.project.model.Company;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.Task.Task;
-import switch2021.project.repositories.ProjectStore;
+import switch2021.project.repositories.old.ProjectStore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ViewStatusOfActivitiesInAProjectController {
