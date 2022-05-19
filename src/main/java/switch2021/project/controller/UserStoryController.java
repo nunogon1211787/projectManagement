@@ -50,4 +50,20 @@ public class UserStoryController {
         }
         return new ResponseEntity<>(newUserStory, HttpStatus.CREATED);
     }
+
+    @PostMapping("/jpa")
+    public ResponseEntity<Object> createAndSaveUserStoryJPA(@RequestBody CreateUserStoryDTO inDto) {
+        ErrorMessage message = new ErrorMessage();
+        OutputUserStoryDTO newUserStory;
+        try {
+            newUserStory = createUserStoryService.createAndSaveUserStoryJPA(inDto);
+
+            newUserStory.add(linkTo(methodOn(UserStoryController.class).showUserStoryRequested(1)).withSelfRel());
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(newUserStory, HttpStatus.CREATED);
+    }
 }

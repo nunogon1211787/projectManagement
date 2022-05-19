@@ -1,22 +1,28 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import switch2021.project.interfaces.TaskContainerID;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.util.Objects;
 
-@ToString
 @Getter
+@Embeddable
+@NoArgsConstructor
 public class UserStoryID implements ValueObject<UserStoryID>, TaskContainerID {
 
     /**
      * Attributes
      **/
-    private final ProjectID projectID;
-    private final UsTitle usTitle;
+    @Embedded
+    private ProjectID projectID;
+    @Embedded
+    private UsTitle usTitle;
 
     /**
      * Constructor
