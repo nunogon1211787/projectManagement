@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.*;
 import switch2021.project.service.CreateResourceInAProjectService;
-import switch2021.project.service.ShowAllCurrentProjectsByUserService;
 import switch2021.project.service.ShowCurrentProjectTeamService;
 
 import java.util.List;

@@ -8,7 +8,6 @@ import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.repositories.ProjectRepository;
 import switch2021.project.service.CreateProjectService;
-import switch2021.project.service.ShowAllProjectsService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -21,13 +20,12 @@ public class ProjectController {
     CreateProjectService service;
     @Autowired
     ProjectRepository projStore;
-    @Autowired
-    ShowAllProjectsService srv;
+
 
     @GetMapping
     public ResponseEntity<Object> showAllProjects(){
 
-        List<OutputProjectDTO> allProjectsDto = srv.showAllProjects();
+        List<OutputProjectDTO> allProjectsDto = service.showAllProjects();
 
         return new ResponseEntity<>(allProjectsDto, HttpStatus.OK);
     }

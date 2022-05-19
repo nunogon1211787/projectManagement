@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.*;
 import switch2021.project.repositories.SystemUserRepositoryInterface;
 import switch2021.project.datamodel.SystemUserJpa;
+import switch2021.project.service.CreateProjectService;
 import switch2021.project.service.RegisterUserService;
 import switch2021.project.service.SearchUsersByParamsService;
-import switch2021.project.service.ShowAllCurrentProjectsByUserService;
 import switch2021.project.service.UpdatePersonalDataService;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class UserController {
     @Autowired
     private RegisterUserService registerUserService;
     @Autowired
-    private ShowAllCurrentProjectsByUserService showAllCurrentProjectsByUserService;
+    private CreateProjectService showAllCurrentProjectsByUserService;
     @Autowired
     private SearchUsersByParamsService searchUsersByParamsService;
     @Autowired
