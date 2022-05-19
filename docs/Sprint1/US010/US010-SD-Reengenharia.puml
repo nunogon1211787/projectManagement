@@ -12,7 +12,7 @@ participant ":UpdatePersonalDataService" as service
 participant "user : IUserRepo" as iRepo
 participant ":User" as systemUser
 participant ":UserMapper" as mapper
-participant "outputUserDTO : OutputUserDTO" as outPutDTO
+participant "outputUserDTO : \nOutputUserDTO" as outPutDTO
 
 [o-> route: PATCH/users/{ID}(json)
 
@@ -22,7 +22,7 @@ note right
 Change from json to dto hidden to simplify diagram
 end note
 
-Ctrl -> service: updatePersonalData(idDTO, updateDataDTO)
+Ctrl -> service: updatePersonalData\n(idDTO, updateDataDTO)
 note over service : The creation of the id are hidden to simplify the diagram.
 'note right
 'All the following objects were created with factories, but the process is hidden in SD to simplify

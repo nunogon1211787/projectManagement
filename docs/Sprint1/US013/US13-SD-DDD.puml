@@ -12,10 +12,10 @@ participant ": IUserProfileFactory" as C3
 'participant ":UserProfileDTO" as C2
 'participant ":IUserProfileIDFactory" as iFactory
 'participant "userProfileID:UserProfileID" as C4
-participant "newUserProfile:UserProfile" as newUserProfile
+participant "newUserProfile: \nUserProfile" as newUserProfile
 participant ":IUserProfileRepo" as C5
 participant ":UserProfileMapper" as C6
-participant "outputDTO: UserProfileDTO" as C2.1
+participant "outputDTO: \nUserProfileDTO" as C2.1
 
 
 [o-> System: POST/profiles (json)
@@ -31,7 +31,7 @@ note over C3 : The changes of attributes are hidden to simplify the diagram .
 'C3 -> iFactory: create(name)
 'iFactory -> C4 **: create()
 'iFactory --> C3: userProfileID
-C3 -> newUserProfile **: create(userProfileID)
+C3 -> newUserProfile **: create\n(userProfileID)
 return newUserProfile
 C1 -> C5 : save (newUserProfile)
 'C5 -> C5 : existsByDescription(userProfileName)
@@ -47,7 +47,7 @@ return outputjson
 note right
 Change from json to dto hidden to simplify diagram
 end note
-return Informs that user profile was created
+return Informs that user \nprofile was created
 
 
 

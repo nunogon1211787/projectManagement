@@ -8,15 +8,15 @@ autonumber
 
 
 participant ":EditProjectRoute " as route
-participant "inDto: EditProjectDTO " as inDto
+participant "inDto: \nEditProjectDTO " as inDto
 participant ":ProjectController " as controller
 participant ":EditProjectService " as service
 participant ":IProjectRepo " as store
 participant ":ProjectMapper " as mapper
-participant "outputDTO: OutputProjectDTO " as dto
-participant "exception :Exception" as exc
+participant "outputDTO: \nOutputProjectDTO " as dto
+participant "exception: \nException" as exc
 participant "proj:Project " as project
-participant "response:ResponseEntity" as json
+participant "response: \nResponseEntity" as json
 
 
 [o->  route: PATCH /projects/{id}

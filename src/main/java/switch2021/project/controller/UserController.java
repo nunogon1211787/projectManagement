@@ -28,7 +28,6 @@ public class UserController {
     @Autowired
     private UpdatePersonalDataService updatePersonalDataService;
 
-
     @Autowired
     private SystemUserRepositoryInterface sURepository;
 
