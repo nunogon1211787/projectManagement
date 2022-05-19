@@ -10,7 +10,7 @@ import switch2021.project.model.UserProfile.UserProfile;
 
 
 @Service
-public class CreateUserProfileService {
+public class UserProfileService {
 
     /**
      * Attributes

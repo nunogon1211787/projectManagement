@@ -16,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-public class CreateUserProfileServiceTest {
+public class UserProfileServiceTest {
 
     @InjectMocks
-    CreateUserProfileService createUserProfileService;
+    UserProfileService createUserProfileService;
 
     @Mock
     IUserProfileRepo iUserProfileRepo;

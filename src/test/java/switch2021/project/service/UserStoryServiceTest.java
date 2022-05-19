@@ -23,10 +23,10 @@ import static org.mockito.Mockito.when;
 
 
 @ExtendWith(SpringExtension.class)
-public class CreateUserStoryServiceTest {
+public class UserStoryServiceTest {
 
     @InjectMocks
-    CreateUserStoryService createUserStoryService;
+    UserStoryService createUserStoryService;
 
     @Mock
     private CreateUserStoryDTO createUserStoryDTO;

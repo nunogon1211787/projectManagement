@@ -2,11 +2,11 @@ package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import switch2021.project.dto.OutputUserDTO;
-import switch2021.project.dto.SearchUserDTO;
+import switch2021.project.dto.*;
+import switch2021.project.factoryInterface.IUserFactory;
 import switch2021.project.factoryInterface.IUserProfileIDFactory;
-import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.interfaces.IUserProfileRepo;
+import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.mapper.UserMapper;
 import switch2021.project.model.SystemUser.User;
 import switch2021.project.model.valueObject.UserProfileID;
@@ -15,17 +15,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class SearchUsersByParamsService {
+public class UserService {
 
     @Autowired
     private IUserRepo userRepo;
     @Autowired
-    private IUserProfileRepo profRepo;
+    private UserMapper userMapper;
     @Autowired
-    private UserMapper map;
+    private IUserFactory userFactory;
     @Autowired
-    private IUserProfileIDFactory profFactory;
+    private IUserProfileRepo profileRepo;
+    @Autowired
+    private IUserProfileIDFactory profileIDFactory;
 
+    public OutputUserDTO createAndSaveUser(NewUserInfoDTO infoDTO) {
+        User newUser = userFactory.createUser(infoDTO);
+        if (!userRepo.save(newUser))
+            throw new IllegalArgumentException("email already exists");
+        return userMapper.toDto(newUser);
+    }
+
+    public OutputUserDTO findSystemUserByEmail(String email) {
+        User found = this.userRepo.findByUserID(email);
+        return this.userMapper.toDto(found);
+    }
+
+    public OutputUserDTO updatePersonalData(IdDTO idDTO, UpdateDataDTO updateDataDTO) {
+
+        User user = userRepo.findByUserID(idDTO.id);
+
+        if (updateDataDTO.newPassword == null && updateDataDTO.oldPassword == null) {
+            user.editPersonalData(updateDataDTO.userName, updateDataDTO.function, updateDataDTO.photo);
+        }
+        if (updateDataDTO.userName == null && updateDataDTO.function == null) {
+            user.updatePassword(updateDataDTO.oldPassword, updateDataDTO.newPassword);
+        }
+        return userMapper.toDto(user);
+    }
 
     public List<OutputUserDTO> searchUsersByParams(SearchUserDTO inDto) {
 
@@ -45,9 +71,9 @@ public class SearchUsersByParamsService {
             allFounded.addAll(userRepo.findAllByFunctionContains(inDto.function));
 
         if (!inDto.profile.isEmpty() || !inDto.profile.isBlank()) {
-            UserProfileID profile = profFactory.createUserProfileID(inDto.profile);
+            UserProfileID profile = profileIDFactory.createUserProfileID(inDto.profile);
 
-            if (profRepo.existsByUserProfileId(profile)) {
+            if (profileRepo.existsByUserProfileId(profile)) {
 
                 allFounded.addAll(userRepo.findAllByUserProfileId(profile));
 
@@ -60,9 +86,8 @@ public class SearchUsersByParamsService {
             }
         });
 
-        usersFounded.forEach(user -> usersFoundedDto.add(map.toDto(user)));
+        usersFounded.forEach(user -> usersFoundedDto.add(userMapper.toDto(user)));
 
         return usersFoundedDto;
     }
-
 }

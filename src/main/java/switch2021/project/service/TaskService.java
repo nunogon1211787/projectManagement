@@ -13,7 +13,7 @@ import switch2021.project.model.Task.TaskReeng;
 import switch2021.project.model.UserStory.UserStory;
 
 @Service
-    public class CreateTaskService {
+    public class TaskService {
 
         @Autowired
         public TaskFactoryInterface taskFactoryInterface;
@@ -34,7 +34,7 @@ import switch2021.project.model.UserStory.UserStory;
         public IUserStoryRepo iUserStoryRepo;
 
         @Autowired
-        public CreateTaskService() {
+        public TaskService() {
         }
 
         public OutputTaskDTO createAndSaveTask(TaskDTO taskDTO) {

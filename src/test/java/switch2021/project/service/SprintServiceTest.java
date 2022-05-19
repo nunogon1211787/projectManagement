@@ -16,10 +16,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-public class CreateSprintServiceTest {
+public class SprintServiceTest {
 
     @InjectMocks
-    CreateSprintService createSprintService;
+    SprintService createSprintService;
     @Mock
     ISprintRepo iSprintRepo;
     @Mock

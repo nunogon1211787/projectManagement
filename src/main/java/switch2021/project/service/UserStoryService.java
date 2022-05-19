@@ -10,7 +10,7 @@ import switch2021.project.mapper.UserStoryMapper;
 import switch2021.project.model.UserStory.UserStory;
 
 @Service
-public class CreateUserStoryService {
+public class UserStoryService {
 
     /**
      * Attributes

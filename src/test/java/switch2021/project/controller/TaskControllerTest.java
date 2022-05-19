@@ -6,7 +6,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import switch2021.project.mapper.TaskMapperNew;
 import switch2021.project.repositories.TaskRepository;
-import switch2021.project.service.CreateTaskService;
+import switch2021.project.service.TaskService;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.mock;
@@ -14,10 +14,10 @@ import static org.mockito.Mockito.mock;
 class TaskControllerTest {
 
     @InjectMocks
-    CreateTaskController controller;
+    TaskController controller;
 
     @MockBean
-    CreateTaskService service;
+    TaskService service;
 
     @MockBean
     TaskRepository repository;

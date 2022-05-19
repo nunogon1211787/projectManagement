@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.ErrorMessage;
 import switch2021.project.dto.OutputUserStoryDTO;
 import switch2021.project.dto.CreateUserStoryDTO;
-import switch2021.project.service.CreateUserStoryService;
+import switch2021.project.service.UserStoryService;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -20,7 +20,7 @@ public class UserStoryController {
      * Attributes
      **/
     @Autowired
-    private CreateUserStoryService createUserStoryService;
+    private UserStoryService createUserStoryService;
 
 
     @GetMapping("/{id}") //TODO must be implemented. Used to test HATEOAS.

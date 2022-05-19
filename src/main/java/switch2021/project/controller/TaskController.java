@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 import switch2021.project.dto.ErrorMessage;
 import switch2021.project.dto.OutputTaskDTO;
 import switch2021.project.dto.TaskDTO;
-import switch2021.project.service.CreateTaskService;
+import switch2021.project.service.TaskService;
 
 
 @Controller
 @RestController
 @RequestMapping("/tasks")
-public class CreateTaskController {
+public class TaskController {
 
     /*** Attributes **/
     @Autowired
-    CreateTaskService createTaskService;
+    TaskService createTaskService;
 
     /*** Methods **/
     @PostMapping

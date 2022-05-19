@@ -8,9 +8,7 @@ import switch2021.project.dto.*;
 import switch2021.project.repositories.SystemUserRepositoryInterface;
 import switch2021.project.datamodel.SystemUserJpa;
 import switch2021.project.service.CreateProjectService;
-import switch2021.project.service.RegisterUserService;
-import switch2021.project.service.SearchUsersByParamsService;
-import switch2021.project.service.UpdatePersonalDataService;
+import switch2021.project.service.UserService;
 
 import java.util.List;
 
@@ -20,14 +18,11 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private RegisterUserService registerUserService;
+    private UserService userService;
     @Autowired
-    private CreateProjectService showAllCurrentProjectsByUserService;
-    @Autowired
-    private SearchUsersByParamsService searchUsersByParamsService;
-    @Autowired
-    private UpdatePersonalDataService updatePersonalDataService;
+    private CreateProjectService projectService;
 
+    //for webApp demo testing
     @Autowired
     private SystemUserRepositoryInterface sURepository;
 
@@ -40,13 +35,15 @@ public class UserController {
     public List<SystemUserJpa> getUsers() {
         return this.sURepository.findAll();
     }
+    //finish webApp demo testing
+
 
 //    @GetMapping
     public ResponseEntity<Object> searchUsersByTypedParams(@RequestParam SearchUserDTO inDto){
 
         try {
 
-            List<OutputUserDTO> usersFoundedDto = searchUsersByParamsService.searchUsersByParams(inDto);
+            List<OutputUserDTO> usersFoundedDto = userService.searchUsersByParams(inDto);
 
             return new ResponseEntity<>(usersFoundedDto, HttpStatus.OK);
 
@@ -62,7 +59,7 @@ public class UserController {
     @GetMapping("/{id}/resources")
     public ResponseEntity<Object> showCurrentProjectsByUser(@PathVariable IdDTO id, @RequestParam("date") DateDTO dateDto){
 
-        List<OutputProjectDTO> projectsDto = showAllCurrentProjectsByUserService.showCurrentProjectsByUser(id, dateDto);
+        List<OutputProjectDTO> projectsDto = projectService.showCurrentProjectsByUser(id, dateDto);
 
         return new ResponseEntity<>(projectsDto, HttpStatus.OK);
     }
@@ -71,7 +68,7 @@ public class UserController {
     public ResponseEntity<Object> registerUser(@RequestBody NewUserInfoDTO infoDTO) {
         OutputUserDTO outDTO;
         try {
-            outDTO = registerUserService.createAndSaveUser(infoDTO);
+            outDTO = userService.createAndSaveUser(infoDTO);
             return new ResponseEntity<>(outDTO, HttpStatus.CREATED);
         }
         catch (Exception e){
@@ -88,7 +85,7 @@ public class UserController {
 
         OutputUserDTO outputUserDTO;
         try {
-            outputUserDTO = updatePersonalDataService.updatePersonalData(idDTO, updateDataDTO);
+            outputUserDTO = userService.updatePersonalData(idDTO, updateDataDTO);
             return new ResponseEntity<>(outputUserDTO, HttpStatus.OK);
         }
         catch (Exception error) {

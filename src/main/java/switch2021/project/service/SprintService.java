@@ -10,7 +10,7 @@ import switch2021.project.mapper.SprintMapper;
 import switch2021.project.model.Sprint.Sprint;
 
 @Service
-public class CreateSprintService {
+public class SprintService {
 
     /** Attributes */
     @Autowired

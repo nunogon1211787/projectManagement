@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class CreateTypologyServiceTest {
+public class TypologyServiceTest {
 
     @MockBean
     ITypologyRepo iTypologyRepo;
@@ -33,7 +33,7 @@ public class CreateTypologyServiceTest {
     TypologyService typologyService;
 
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
