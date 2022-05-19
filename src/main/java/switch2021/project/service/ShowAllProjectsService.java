@@ -16,7 +16,8 @@ public class ShowAllProjectsService {
 
     @Autowired
     ProjectRepository repo;
-    @Autowired ProjectMapper map;
+    @Autowired
+    ProjectMapper map;
 
 
     public List<OutputProjectDTO> showAllProjects() {

@@ -12,7 +12,7 @@ import switch2021.project.repositories.SprintRepository;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.repositories.UserStoryRepository;
 import switch2021.project.model.valueObject.*;
-import switch2021.project.repositories.ProjectTeam;
+import switch2021.project.repositories.old.ProjectTeam;
 import switch2021.project.utils.Entity;
 
 import java.time.LocalDate;

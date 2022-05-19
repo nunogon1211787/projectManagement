@@ -1,4 +1,4 @@
-package switch2021.project.repositories;
+package switch2021.project.repositories.old;
 
 import lombok.Getter;
 import switch2021.project.factoryInterface.IResourceFactory;
