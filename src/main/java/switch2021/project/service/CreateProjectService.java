@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.factoryInterface.IProjectFactory;
+import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.interfaces.ITypologyRepo;
 import switch2021.project.repositories.ProjectRepository;
 import switch2021.project.mapper.ProjectMapper;
