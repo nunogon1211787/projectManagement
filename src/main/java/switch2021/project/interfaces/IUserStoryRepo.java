@@ -5,6 +5,7 @@ import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.ProjectID;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IUserStoryRepo {
 
@@ -67,5 +68,7 @@ public interface IUserStoryRepo {
      */
 
     boolean save(UserStory newUserStory);
+
+    Optional<UserStory> saveReeng(UserStory newUserStory);
 
 }

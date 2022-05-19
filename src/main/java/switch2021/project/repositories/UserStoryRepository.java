@@ -1,10 +1,14 @@
 package switch2021.project.repositories;
 
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import switch2021.project.datamodel.UserStoryJpa;
+import switch2021.project.datamodel.assembler.UserStoryJpaAssembler;
 import switch2021.project.interfaces.IUserStoryRepo;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.repositories.jpa.UserStoryJpaRepository;
 
 import java.util.*;
 
@@ -17,6 +21,12 @@ public class UserStoryRepository implements IUserStoryRepo {
      * UserStory Store Attributes (backlog). Contains a UserStory list.
      **/
     private List<UserStory> userStoryList;
+
+    @Autowired
+    private UserStoryJpaRepository jpaRepository;
+
+    @Autowired
+    private UserStoryJpaAssembler assembler;
 
     /**
      * Constructor
@@ -64,6 +74,20 @@ public class UserStoryRepository implements IUserStoryRepo {
     public boolean save(UserStory newUserStory) {
         existsByUserStoryId(newUserStory.getUserStoryID().toString());
         return this.userStoryList.add(newUserStory);
+    }
+
+    @Override
+    public Optional<UserStory> saveReeng(UserStory newUserStory) {
+
+        UserStoryJpa usJpa = assembler.toData(newUserStory);
+        Optional<UserStory> userStory = Optional.empty();
+
+        if(!jpaRepository.existsById(usJpa.getId())) {
+            UserStoryJpa usJpaSaved = jpaRepository.save(usJpa);
+            userStory = Optional.of(assembler.toDomain(usJpaSaved));
+        }
+
+        return userStory;
     }
 
     /**
