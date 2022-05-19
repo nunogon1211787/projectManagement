@@ -12,8 +12,8 @@ participant ": UsersController" as ctrl
 participant ": SearchUsersByParamsService" as srv
 participant ": ISystemUserRepo" as userStore
 participant ": IUserProfileRepo" as profileStore
-participant "usersFounded : List<SystemUser>" as users
-participant "usersFoundedDto : List<UserDto>" as usersDto
+participant "usersFound : List<SystemUser>" as users
+participant "usersFoundDto : List<UserDto>" as usersDto
 participant "user : SystemUser" as user
 participant ": SystemUserMapper" as map
 participant "userDto : OutputUserDto" as dto
@@ -33,20 +33,20 @@ end
 alt depending on which params came from inputDto, the service class will invoke the respective method
 srv -> userStore: findAllBy...()
 userStore --> users**: create()
-userStore --> srv: usersFounded
+userStore --> srv: usersFound
 end
 srv --> usersDto**: create()
-loop for which user founded at the list
+loop for which user found at the list
 srv -> map: model2Dto(user)
 map --> dto**: create()
 map --> srv: userDto
 srv -> usersDto: add(userDto)
 deactivate
 end
-srv --> ctrl: usersFoundedDto
-ctrl --> listJson**: create(usersFoundedDto)
+srv --> ctrl: usersFoundDto
+ctrl --> listJson**: create(usersFoundDto)
 ctrl --> route: usersJson
-route --> actor: Show the list of user founded by typed/chosen parameters
+route --> actor: Show the list of user found by typed/chosen parameters
 
 
 @enduml

@@ -3,7 +3,7 @@ package switch2021.project.model;
 import lombok.Getter;
 import switch2021.project.factory.*;
 import switch2021.project.repositories.UserStoryRepository;
-import switch2021.project.repositories.ProjectStore;
+import switch2021.project.repositories.old.ProjectStore;
 import switch2021.project.repositories.UserRepository;
 //import switch2021.project.repositories.TypologyRepository;
 //import switch2021.project.repositories.UserProfileRepository;

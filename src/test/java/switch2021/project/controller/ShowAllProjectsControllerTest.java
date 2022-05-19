@@ -3,14 +3,13 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import switch2021.project.dto.OutputProjectDTO;
-import switch2021.project.service.ShowAllProjectsService;
+import switch2021.project.service.CreateProjectService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,8 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class ShowAllProjectsControllerTest {
 
-    @MockBean ShowAllProjectsService srv;
+    @MockBean
+    CreateProjectService srv;
     @InjectMocks ProjectController ctrl;
 
     @BeforeEach

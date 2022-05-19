@@ -5,7 +5,7 @@ import switch2021.project.repositories.UserStoryRepository;
 import switch2021.project.model.valueObject.UserStoryID;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.repositories.ProjectStore;
+import switch2021.project.repositories.old.ProjectStore;
 
 import java.util.List;
 

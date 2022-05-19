@@ -3,6 +3,7 @@ package switch2021.project.repositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.datamodel.ProjectJpa;
+import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.model.Project.ProjectReeng;
 import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.repositories.jpa.ProjectJpaRepository;
@@ -58,6 +59,21 @@ public class ProjectRepository {
         else
             return Optional.empty();
     }
+
+//    @Override
+//    public ProjectReeng findByIdDeprecated(String code) {
+//        return null;
+//    }
+//
+//    @Override
+//    public boolean existsById(String id) {
+//        return false;
+//    }
+
+//    @Override
+//    public boolean existsByName(String id) {
+//        return false;
+//    }
 
 
     @Transactional

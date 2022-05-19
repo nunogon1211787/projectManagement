@@ -12,7 +12,7 @@ import switch2021.project.dto.old.UserStorySprintProjectDTO;
 import switch2021.project.mapper.old.RegisterWorkToTaskMapper;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
-import switch2021.project.repositories.ProjectStore;
+import switch2021.project.repositories.old.ProjectStore;
 
 
 import java.util.List;

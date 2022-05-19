@@ -6,7 +6,7 @@ import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.Project;
 import switch2021.project.model.valueObject.NumberOfSprints;
-import switch2021.project.repositories.ProjectTeam;
+import switch2021.project.repositories.old.ProjectTeam;
 import switch2021.project.model.valueObject.SprintDuration;
 
 import java.time.LocalDate;

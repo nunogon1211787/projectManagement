@@ -5,9 +5,9 @@ import switch2021.project.factory.ResourceFactory;
 import switch2021.project.model.*;
 import switch2021.project.model.Project.*;
 import switch2021.project.model.Typology.Typology;
-import switch2021.project.repositories.ProjectTeam;
+import switch2021.project.repositories.old.ProjectTeam;
 import switch2021.project.model.valueObject.*;
-import switch2021.project.repositories.ProjectStore;
+import switch2021.project.repositories.old.ProjectStore;
 
 import java.time.LocalDate;
 import java.util.List;

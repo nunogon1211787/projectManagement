@@ -12,7 +12,7 @@ import switch2021.project.dto.DateDTO;
 import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.OutputResourceDTO;
 import switch2021.project.service.CreateResourceInAProjectService;
-import switch2021.project.service.ShowCurrentProjectTeamService;
+import switch2021.project.service.ResourceService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
 class ResourceControllerTest {
 
     @MockBean private CreateResourceInAProjectService createResourceService;
-    @MockBean private ShowCurrentProjectTeamService currentProjectTeamService;
+    @MockBean private ResourceService currentProjectTeamService;
     @InjectMocks private ResourceController ctrl;
 
     @BeforeEach

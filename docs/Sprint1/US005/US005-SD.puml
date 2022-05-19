@@ -8,16 +8,17 @@ autonumber
 
 
 participant ":CreateProjectRoute " as route
-participant "inDto: CreateProjectDTO " as inDto
+participant "inDto: \nCreateProjectDTO " as inDto
 participant ":ProjectController " as controller
 participant ":CreateProjectService " as service
 participant ":ProjectFactory " as factory
 participant ":ProjectMapper " as mapper
 participant ":ProjectRepository " as store
-participant "newProject :Project " as project
-participant "projDto: OutputProjectDTO " as dto
-participant "exception :Exception" as exc
-participant "response:ResponseEntity" as json
+participant "newProject \n:Project " as project
+participant "projDto: \nOutputProjectDTO " as dto
+participant "exception: \nException" as exc
+participant "response: \nResponseEntity" as json
+
 
 
 [o->  route: POST /projects (json)
@@ -25,7 +26,7 @@ route -> controller: createProject(inDto)
 
 note right route: Json object was deserialize to a CreateProjectDto object
 
-controller -> service: createAndSaveProject(inDto)
+controller -> service: createAndSave\nProject(inDto)
 
 service -> factory: createProject(inDto)
 
@@ -36,7 +37,7 @@ factory -> project**: create(name, description, ...)
 factory --> service: newProject
 
 service -> store: save(newProject)
-store -> store: existByProjectId(newProject)
+store -> store: existByProjectId\n(newProject)
 deactivate store
 
 store --> service: result

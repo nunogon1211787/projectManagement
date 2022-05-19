@@ -1,13 +1,8 @@
 package switch2021.project.model;
 
-import org.junit.jupiter.api.BeforeEach;
 import switch2021.project.model.Project.Project;
-import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.UserProfile.UserProfile;
-import switch2021.project.model.valueObject.*;
-import switch2021.project.repositories.ProjectStore;
-
-import java.time.LocalDate;
+import switch2021.project.repositories.old.ProjectStore;
 
 public class AssociateResourceTest {
 

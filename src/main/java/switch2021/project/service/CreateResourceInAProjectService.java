@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import switch2021.project.datamodel.assembler.ProjectJpaAssembler;
 import switch2021.project.dto.OutputResourceDTO;
-import switch2021.project.dto.ResourceDTOReeng;
+import switch2021.project.dto.CreateResourceDTO;
 import switch2021.project.factoryInterface.ResourceFactoryInterfaceReeng;
+import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.repositories.ProjectRepository;
 import switch2021.project.interfaces.IResourceRepo;
@@ -21,6 +22,7 @@ import switch2021.project.model.valueObject.ProjectRoleReeng;
 import java.time.LocalDate;
 import java.util.List;
 
+@Deprecated
 @Service
 public class CreateResourceInAProjectService {
     @Autowired
@@ -38,7 +40,7 @@ public class CreateResourceInAProjectService {
     private ProjectJpaAssembler assembler;
 
 
-    public OutputResourceDTO createAndSaveResource(ResourceDTOReeng dto){
+    public OutputResourceDTO createAndSaveResource(CreateResourceDTO dto){
 
         OutputResourceDTO response;
         LocalDate startDate = LocalDate.of(dto.yearStartDate, dto.monthStartDate, dto.dayStartDate);

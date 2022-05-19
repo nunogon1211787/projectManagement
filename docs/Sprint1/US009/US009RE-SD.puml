@@ -9,15 +9,15 @@ autonumber
 
 participant ": CreateUserStoryRoute" as System
 participant ": UserStoryController" as Ctrl
-participant "inDto : CreateUserStory" as dto
+participant "inDto: \nCreateUserStory" as dto
 participant ": CreateUserStoryService" as appService
 participant ": IUserStoryFactory" as factory
 participant ": IUserStoryRepo " as usStore
 participant ": UserStoryMapper" as usMapper
 participant "newUserStory : \n UserStory" as us
 participant "outputUsDto : \n OutputUserStoryDTO" as outDto
-participant "exception :Exception" as exc
-participant "response:ResponseEntity" as json
+participant "exception: \nException" as exc
+participant "response: \nResponseEntity" as json
 
 
 
@@ -31,7 +31,7 @@ appService -> factory:  createUserStory(inDto)
 
 note over factory : All parameters (value objects) are instantiated in their own factories.
 
-factory -> us **: create(userStoryID, usPriority, usDescription, usTimeEstimate)
+factory -> us **: create(userStoryID, usPriority, \nusDescription, usTimeEstimate)
 factory --> appService: newUserStory
 
 appService-> usStore: save(newUserStory)
