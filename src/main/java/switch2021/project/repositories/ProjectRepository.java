@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ProjectRepository {
+public class ProjectRepository implements IProjectRepo {
 
     @Autowired
     ProjectJpaRepository projectJpaRepository;
@@ -74,6 +74,21 @@ public class ProjectRepository {
 //    public boolean existsByName(String id) {
 //        return false;
 //    }
+
+    @Override
+    public ProjectReeng findByIdDeprecated(String code) {
+        return null;
+    }
+
+    @Override
+    public boolean existsById(String id) {
+        return false;
+    }
+
+    @Override
+    public boolean existsByName(String id) {
+        return false;
+    }
 
 
     @Transactional

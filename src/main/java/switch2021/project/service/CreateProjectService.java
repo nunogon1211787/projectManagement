@@ -8,6 +8,7 @@ import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.factoryInterface.IProjectFactory;
+import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.interfaces.IResourceRepo;
 import switch2021.project.interfaces.ITypologyRepo;
 import switch2021.project.interfaces.IUserRepo;
@@ -26,8 +27,10 @@ import java.util.List;
 @Service
 public class CreateProjectService {
 
+
+
     @Autowired
-    private ProjectRepository projRepo;
+    private IProjectRepo projRepo;
     @Autowired
     private ITypologyRepo iTypologyRepo;
     @Autowired
@@ -130,7 +133,7 @@ public class CreateProjectService {
 
             for(ProjectID projId : resourceProjects){
 
-                ProjectReeng proj = projRepo.findById(projId).get();
+                ProjectReeng proj = projRepo.findById(projId.toString()).get();
 
                 projects.add(proj);
 
