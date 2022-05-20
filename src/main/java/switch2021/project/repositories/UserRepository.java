@@ -25,7 +25,6 @@ public class UserRepository implements IUserRepo {
 
     @Autowired
     private UserJpaRepository userJpaRepository;
-
     @Autowired
     private UserJpaAssembler userJpaAssembler;
 

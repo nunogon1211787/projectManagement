@@ -1,13 +1,11 @@
 package switch2021.project.interfaces;
 
-import org.springframework.stereotype.Repository;
 import switch2021.project.model.Project.ProjectReeng;
 import switch2021.project.model.valueObject.ProjectID;
-
 import java.util.List;
 import java.util.Optional;
 
-//@Repository
+
 public interface IProjectRepo {
 
     /**

@@ -4,15 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import switch2021.project.datamodel.SystemUserJpa;
 import switch2021.project.dto.*;
 import switch2021.project.repositories.jpa.UserJpaRepository;
 import switch2021.project.datamodel.UserJpa;
 import switch2021.project.service.CreateProjectService;
 import switch2021.project.service.UserService;
 import java.util.List;
+import java.util.Optional;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -26,12 +27,12 @@ public class UserController {
     @Autowired
     private UserJpaRepository sURepository;
 
-    @PostMapping
+    @PostMapping("users")
     public UserJpa addUser(@RequestBody UserJpa a) {
         return this.sURepository.save(a);
     }
 
-    @GetMapping
+    @GetMapping("users")
     public List<UserJpa> getUsers() {
         return this.sURepository.findAll();
     }
@@ -77,20 +78,19 @@ public class UserController {
         }
         return new ResponseEntity<>(allUsersDto, HttpStatus.OK);
     }
-
-    @GetMapping("/{id}")
-    //@ResponseBody
-    public ResponseEntity<Object> getUserById(@PathVariable ("id") IdDTO idDTO) {
-
-        Optional<OutputUserDTO> opOutUser = userService.getUserById(idDTO);
-
-        if(opOutUser.isPresent()) {
-            OutputUserDTO outDTO = opOutUser.get();
-            return new ResponseEntity<>(outDTO, HttpStatus.OK);
-        }
-        else
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-    }
+//
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Object> getUserById(@PathVariable ("id") String idDTO) {
+//
+//        Optional<OutputUserDTO> opOutUser = userService.getUserById(idDTO);
+//
+//        if(opOutUser.isPresent()) {
+//            OutputUserDTO outDTO = opOutUser.get();
+//            return new ResponseEntity<>(outDTO, HttpStatus.OK);
+//        }
+//        else
+//            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+//    }
 
     //@PostMapping
     public ResponseEntity<Object> registerUser(@RequestBody NewUserInfoDTO infoDTO) {
@@ -130,7 +130,7 @@ public class UserController {
 
         OutputUserDTO user;
 
-        try {
+        try { /////NÃO ESTÁ TERMINADO!!!! (JOANA)
             user = userService.findSystemUserByEmail(id);
 
             user.add(linkTo(methodOn(UserController.class).getUser(user.email)).withSelfRel());

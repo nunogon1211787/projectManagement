@@ -50,9 +50,9 @@ public class UserService {
         return userMapper.toDto(newUser);
     }
 
-    @Transactional
-    public Optional<OutputUserDTO> getUserById(IdDTO idDTO) {
-        SystemUserID userID = userIDFactory.createUserID(idDTO.id);
+
+    public Optional<OutputUserDTO> getUserById(String idDTO) {
+        SystemUserID userID = userIDFactory.createUserID(idDTO);
         Optional<User> opUser = userRepo.findUserById(userID);
         if (opUser.isPresent()) {
             User user = opUser.get();
@@ -60,6 +60,12 @@ public class UserService {
             return Optional.of(outUserDTO);
         }
         return Optional.empty();
+    }
+
+    public OutputUserDTO findSystemUserByEmail (String email) {
+
+        User newUser = userRepo.findByUserID(email);
+        return  this.userMapper.toDto(newUser);
     }
 
     public OutputUserDTO createAndSaveUserJPA (NewUserInfoDTO infoDTO) throws Exception{

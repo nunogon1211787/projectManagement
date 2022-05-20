@@ -1,12 +1,9 @@
 package switch2021.project;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import switch2021.project.repositories.jpa.UserJpaRepository;
-import switch2021.project.datamodel.UserJpa;
+
 
 @SpringBootApplication
 public class SwitchApp /*implements CommandLineRunner*/ {

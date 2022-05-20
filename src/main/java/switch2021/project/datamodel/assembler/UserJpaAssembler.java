@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 import switch2021.project.datamodel.UserJpa;
 import switch2021.project.model.SystemUser.User;
 import switch2021.project.model.valueObject.*;
-
 import java.util.List;
 
 @Component
