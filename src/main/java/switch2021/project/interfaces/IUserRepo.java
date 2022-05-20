@@ -2,6 +2,7 @@ package switch2021.project.interfaces;
 
 import switch2021.project.model.SystemUser.User;
 import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.model.valueObject.UserProfileID;
 
 import java.util.List;
@@ -9,7 +10,8 @@ import java.util.Optional;
 
 public interface IUserRepo/* extends CrudRepository<Object, Long> */{
 
-    User findByUserID(String email);
+    User findByUserID(String email);//delete when not needed (must return an Optional<User>)
+    Optional<User> findUserById(SystemUserID id);
 
     List<User> findAllSystemUsers();
 

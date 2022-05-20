@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import switch2021.project.datamodel.assembler.ProjectJpaAssembler;
 import switch2021.project.dto.OutputResourceDTO;
 import switch2021.project.dto.CreateResourceDTO;
+import switch2021.project.factoryInterface.IProjectIDFactory;
 import switch2021.project.factoryInterface.ResourceFactoryInterfaceReeng;
 import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.model.valueObject.ProjectID;
@@ -35,6 +36,8 @@ public class CreateResourceInAProjectService {
     @Autowired
     private ResourceFactoryInterfaceReeng iResourceFactory;
     @Autowired
+    private IProjectIDFactory projIDFactory;
+    @Autowired
     private ManageResourcesService manageResourcesService;
     @Autowired
     private ProjectJpaAssembler assembler;
@@ -50,12 +53,12 @@ public class CreateResourceInAProjectService {
 
         List<ResourceReeng> projectTeamList = iRepoResource.findAllByProject(dto.projectId);
         List<ResourceReeng> resourceProjectsList = iRepoResource.findAllByUser(dto.systemUserID);
-
-        ProjectReeng project = iRepoProject.findById(dto.projectId).get();
+        ProjectID projectID = projIDFactory.create(dto.projectId);
+        ProjectReeng project = iRepoProject.findById(projectID).get();
 
         boolean systemUserExists = iRepoResource.existsById(dto.systemUserID);
         // ------------- new
-        ProjectID projectID = new ProjectID(dto.projectId);
+
         // ------------- new
         boolean projectExists = iRepoProject.existsById(projectID);
         boolean isValidToProject = project.isActiveInThisDate(startDate) && project.isActiveInThisDate(endDate);
