@@ -123,6 +123,8 @@ public class UserController {
 
     }
 
+    //TODO -> NÃO ESTÁ TERMINADO!!!! (JOANA)
+
     @GetMapping("/{id}")
     public ResponseEntity<Object> getUser(@PathVariable("id") String id){
 
@@ -130,7 +132,7 @@ public class UserController {
 
         OutputUserDTO user;
 
-        try { /////NÃO ESTÁ TERMINADO!!!! (JOANA)
+        try {
             user = userService.findSystemUserByEmail(id);
 
             user.add(linkTo(methodOn(UserController.class).getUser(user.email)).withSelfRel());
