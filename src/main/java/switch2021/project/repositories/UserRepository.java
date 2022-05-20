@@ -3,10 +3,12 @@ package switch2021.project.repositories;
 import org.springframework.stereotype.Repository;
 import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.model.SystemUser.User;
+import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.model.valueObject.UserProfileID;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserRepository implements IUserRepo {
@@ -24,7 +26,7 @@ public class UserRepository implements IUserRepo {
     }
 
     @Override
-    public User findByUserID(String email) {
+    public User findByUserID(String email) {//apagar qd o debaixo estiver ok
         User user = null;
 
         for (User i : this.userList) {
@@ -34,6 +36,30 @@ public class UserRepository implements IUserRepo {
             }
         }
         return user;
+    }
+
+    @Override
+    public Optional<User> findUserById(SystemUserID id) {
+        /*Optional<UserJpa> opUserJpa = userJpaRepository.findById(id);
+
+        if (opUserJpa.isPresent()) {
+            UserJpa userJpa = opUserJpa.get();
+
+            User user = userAssembler.toDomain(userJpa);
+            return Optional.of(user);
+        }
+        else
+            return Optional.empty();
+         */
+
+        Optional<User> opUser =Optional.empty();
+
+        for (User i : this.userList) {
+            if (i.isYourEmail(id.getEmail().getEmailText())) {
+                opUser = Optional.of(i);
+            }
+        }
+        return opUser;
     }
 
     @Override

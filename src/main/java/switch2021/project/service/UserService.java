@@ -2,17 +2,21 @@ package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import switch2021.project.dto.*;
 import switch2021.project.factoryInterface.IUserFactory;
+import switch2021.project.factoryInterface.IUserIDFactory;
 import switch2021.project.factoryInterface.IUserProfileIDFactory;
 import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.mapper.UserMapper;
 import switch2021.project.model.SystemUser.User;
+import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.model.valueObject.UserProfileID;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -24,9 +28,20 @@ public class UserService {
     @Autowired
     private IUserFactory userFactory;
     @Autowired
+    private IUserIDFactory userIDFactory;
+    @Autowired
     private IUserProfileRepo profileRepo;
     @Autowired
     private IUserProfileIDFactory profileIDFactory;
+
+    public List<OutputUserDTO> findAllUsers() {
+        List<User> usersList = userRepo.findAllSystemUsers();
+
+        if (usersList.isEmpty()) {
+            throw new NullPointerException("Does not exists any User at this moment!");
+        }
+        return userMapper.usersToDto(usersList);
+    }
 
     public OutputUserDTO createAndSaveUser(NewUserInfoDTO infoDTO) {
         User newUser = userFactory.createUser(infoDTO);
@@ -35,22 +50,33 @@ public class UserService {
         return userMapper.toDto(newUser);
     }
 
-    public OutputUserDTO findSystemUserByEmail(String email) {
-        User found = this.userRepo.findByUserID(email);
-        return this.userMapper.toDto(found);
+    @Transactional
+    public Optional<OutputUserDTO> getUserById(IdDTO idDTO) {
+        SystemUserID userID = userIDFactory.createUserID(idDTO.id);
+        Optional<User> opUser = userRepo.findUserById(userID);
+        if (opUser.isPresent()) {
+            User user = opUser.get();
+            OutputUserDTO outUserDTO = this.userMapper.toDto(user);
+            return Optional.of(outUserDTO);
+        }
+        return Optional.empty();
     }
 
     public OutputUserDTO updatePersonalData(IdDTO idDTO, UpdateDataDTO updateDataDTO) {
+        SystemUserID userID = userIDFactory.createUserID(idDTO.id);
+        Optional<User> opUser = userRepo.findUserById(userID);
+        if (opUser.isPresent()) {
+            User user = opUser.get();
 
-        User user = userRepo.findByUserID(idDTO.id);
-
-        if (updateDataDTO.newPassword == null && updateDataDTO.oldPassword == null) {
-            user.editPersonalData(updateDataDTO.userName, updateDataDTO.function, updateDataDTO.photo);
-        }
-        if (updateDataDTO.userName == null && updateDataDTO.function == null) {
-            user.updatePassword(updateDataDTO.oldPassword, updateDataDTO.newPassword);
-        }
-        return userMapper.toDto(user);
+            if (updateDataDTO.newPassword == null && updateDataDTO.oldPassword == null) {
+                user.editPersonalData(updateDataDTO.userName, updateDataDTO.function, updateDataDTO.photo);
+            }
+            if (updateDataDTO.userName == null && updateDataDTO.function == null) {
+                user.updatePassword(updateDataDTO.oldPassword, updateDataDTO.newPassword);
+            }
+            return userMapper.toDto(user);
+        } else
+            return null;
     }
 
     public List<OutputUserDTO> searchUsersByParams(SearchUserDTO inDto) {

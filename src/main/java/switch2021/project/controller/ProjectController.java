@@ -4,15 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import switch2021.project.dto.OutputProjectDTO;
-import switch2021.project.dto.ProjectDTO;
-import switch2021.project.interfaces.IProjectRepo;
+import switch2021.project.dto.*;
 import switch2021.project.repositories.ProjectRepository;
 import switch2021.project.service.CreateProjectService;
 
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/projects")
 public class ProjectController {
@@ -43,14 +42,17 @@ public class ProjectController {
         return new ResponseEntity<>(service.createAndSaveProject(projectDTO), HttpStatus.CREATED);
     }
 
-/*    @PostMapping("/edit")
-    public ResponseEntity <?> editProject (@Valid @RequestBody ProjectDTO projectDTO) {
-        if (projStore.existByName(projectDTO.projectName)) {
-            return ResponseEntity
-                    .badRequest()
-                    .body("Project name already exists"); //TODO criar uma Response Class para mensagens
+    @PatchMapping("/{id}")
+    public ResponseEntity<Object> updateProjectPartially(@PathVariable("id") IdDTO idDTO,
+                                                         @RequestBody EditProjectInfoDTO editProjectInfoDTO) {
+        OutputProjectDTO outputProjectDTO;
+        try {
+            outputProjectDTO = service.updateProjectPartially(idDTO, editProjectInfoDTO);
+            return new ResponseEntity<>(outputProjectDTO, HttpStatus.OK);
+        } catch (Exception error) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = error.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-
-        return new ResponseEntity<>(service.editProject(projectDTO), HttpStatus.OK);
-    }*/
+    }
 }

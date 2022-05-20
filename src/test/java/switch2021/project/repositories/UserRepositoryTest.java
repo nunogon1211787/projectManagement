@@ -8,6 +8,7 @@ import switch2021.project.model.valueObject.Email;
 import switch2021.project.model.valueObject.SystemUserID;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -38,7 +39,8 @@ public class UserRepositoryTest {
 
         when(userDouble.isYourEmail(email)).thenReturn(true);
         //Act
-        User actual = underTest.findByUserID(email);
+        //User actual = underTest.findByUserID(email);
+        Optional<User> actual = underTest.findUserById(idDouble);
         //Assert
         assertNotNull(actual);
     }
@@ -63,12 +65,18 @@ public class UserRepositoryTest {
         //User2
         String email2 = "pereira@beaver.com";
         User user2Double = mock(User.class);
+        SystemUserID id2Double = mock(SystemUserID.class);
+        Email email2Double = mock(Email.class);
+        when(user2Double.getSystemUserId()).thenReturn(id2Double);
+        when(id2Double.getEmail()).thenReturn(email2Double);
+        when(email2Double.getEmailText()).thenReturn(email2);
         //Stubbing behaviour of User2
         when(user2Double.isYourEmail(email2)).thenReturn(false);
         //Act
-        User actual = underTest.findByUserID(email2);
+        //User actual = underTest.findByUserID(email2);
+        Optional<User> actual = underTest.findUserById(id2Double);
         //Assert
-        assertNull(actual);
+        assertTrue(actual.isEmpty());
     }
 
     @Test

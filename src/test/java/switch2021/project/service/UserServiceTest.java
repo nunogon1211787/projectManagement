@@ -94,7 +94,7 @@ public class UserServiceTest {
         });
     }
 
-    @Test
+/*    @Test
     @DisplayName("Update Personal Data, with Success")
     public void updatePersonalDataSuccess_1(){
         //Arrange
@@ -144,6 +144,8 @@ public class UserServiceTest {
         //Assert
         assertEquals(out.getUserName(), result.getUserName());
     }
+
+ */
 
     //Integration Test Success
 /*    @Test

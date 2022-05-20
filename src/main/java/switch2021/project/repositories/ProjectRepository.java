@@ -34,19 +34,19 @@ public class ProjectRepository {
 
     @Transactional
     public Optional<ProjectReeng> findById(ProjectID id) {
-        Optional<ProjectJpa> opPersonJpa = projectJpaRepository.findById(id);
+        Optional<ProjectJpa> opProjJpa = projectJpaRepository.findById(id);
 
-        if(opPersonJpa.isPresent()) {
-            ProjectJpa personJpa = opPersonJpa.get();
+        if(opProjJpa.isPresent()) {
+            ProjectJpa projJpa = opProjJpa.get();
 
-            ProjectReeng person = projectJpaAssembler.toDomain(personJpa);
-            return Optional.of(person);
+            ProjectReeng proj = projectJpaAssembler.toDomain(projJpa);
+            return Optional.of(proj);
         }
         else
             return Optional.empty();
     }
 
-    public Optional<ProjectReeng> findById(String id) {
+    public Optional<ProjectReeng> findById(String id) {//not needed
         ProjectID id_proj = new ProjectID(id);
         Optional<ProjectJpa> opPersonJpa = projectJpaRepository.findById(id_proj);
 
@@ -80,7 +80,7 @@ public class ProjectRepository {
     public List<ProjectReeng> findAll() {
         List<ProjectJpa> setProjectJpa = projectJpaRepository.findAll();
 
-        List<ProjectReeng> setProject = new ArrayList<ProjectReeng>();
+        List<ProjectReeng> setProject = new ArrayList<>();
 
         for( ProjectJpa projectJpa : setProjectJpa ) {
             ProjectReeng projectReeng = projectJpaAssembler.toDomain(projectJpa);
