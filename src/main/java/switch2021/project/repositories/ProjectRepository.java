@@ -25,6 +25,7 @@ public class ProjectRepository implements IProjectRepo {
 
 
     public ProjectReeng save(ProjectReeng project) {
+        project.setProjectCode(new ProjectID("2"));
         ProjectJpa projectJpa = projectJpaAssembler.toJpaData(project);
 
         ProjectJpa savedProj = projectJpaRepository.save(projectJpa);
