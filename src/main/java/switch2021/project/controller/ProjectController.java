@@ -43,7 +43,7 @@ public class ProjectController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Object> updateProjectPartially(@PathVariable("id") IdDTO idDTO,
+    public ResponseEntity<Object> updateProjectPartially(@PathVariable("id") String idDTO,
                                                          @RequestBody EditProjectInfoDTO editProjectInfoDTO) {
         OutputProjectDTO outputProjectDTO;
         try {

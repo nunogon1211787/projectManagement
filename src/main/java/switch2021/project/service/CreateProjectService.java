@@ -61,8 +61,8 @@ public class CreateProjectService {
         return projMapper.model2Dto(savedProject);
     }
 
-    public OutputProjectDTO updateProjectPartially(IdDTO idDTO, EditProjectInfoDTO editProjectInfoDTO) {
-        ProjectID projectID = projIDFactory.create(idDTO.id);
+    public OutputProjectDTO updateProjectPartially(String idDTO, EditProjectInfoDTO editProjectInfoDTO) {
+        ProjectID projectID = projIDFactory.create(idDTO);
         Optional<ProjectReeng> opProject = projRepo.findById(projectID);
         if (opProject.isPresent()) {
             ProjectReeng proj = opProject.get();
@@ -135,7 +135,7 @@ public class CreateProjectService {
 
             for(ProjectID projId : resourceProjects){
 
-                ProjectReeng proj = projRepo.findById(projId.toString()).get();
+                ProjectReeng proj = projRepo.findById(projId).get();
 
                 projects.add(proj);
 

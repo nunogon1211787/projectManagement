@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.datamodel.SystemUserJpa;
 import switch2021.project.dto.*;
-import switch2021.project.model.SystemUser.User;
 import switch2021.project.repositories.SystemUserRepositoryInterface;
 import switch2021.project.service.CreateProjectService;
 import switch2021.project.service.UserService;

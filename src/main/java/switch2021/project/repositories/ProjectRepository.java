@@ -32,7 +32,7 @@ public class ProjectRepository implements IProjectRepo {
         return projectJpaAssembler.toDomain(savedProj);
     }
 
-    @Transactional
+    @Override
     public Optional<ProjectReeng> findById(ProjectID id) {
         Optional<ProjectJpa> opProjJpa = projectJpaRepository.findById(id);
 
@@ -46,40 +46,6 @@ public class ProjectRepository implements IProjectRepo {
             return Optional.empty();
     }
 
-    public Optional<ProjectReeng> findById(String id) {//not needed
-        ProjectID id_proj = new ProjectID(id);
-        Optional<ProjectJpa> opPersonJpa = projectJpaRepository.findById(id_proj);
-
-        if(opPersonJpa.isPresent()) {
-            ProjectJpa personJpa = opPersonJpa.get();
-
-            ProjectReeng person = projectJpaAssembler.toDomain(personJpa);
-            return Optional.of(person);
-        }
-        else
-            return Optional.empty();
-    }
-
-//    @Override
-//    public ProjectReeng findByIdDeprecated(String code) {
-//        return null;
-//    }
-//
-//    @Override
-//    public boolean existsById(String id) {
-//        return false;
-//    }
-
-//    @Override
-//    public boolean existsByName(String id) {
-//        return false;
-//    }
-
-    @Override
-    public ProjectReeng findByIdDeprecated(String code) {
-        return null;
-    }
-
     @Override
     public boolean existsById(String id) {
         return false;
@@ -89,7 +55,6 @@ public class ProjectRepository implements IProjectRepo {
     public boolean existsByName(String id) {
         return false;
     }
-
 
     @Transactional
     public List<ProjectReeng> findAll() {
