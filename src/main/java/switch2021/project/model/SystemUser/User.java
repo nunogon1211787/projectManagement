@@ -1,5 +1,6 @@
 package switch2021.project.model.SystemUser;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import switch2021.project.dto.UpdateDataDTO;
 import switch2021.project.model.valueObject.*;
@@ -10,6 +11,7 @@ import java.util.List;
 
 
 @Getter
+@AllArgsConstructor
 public class User implements Entity<User> {
 
     /**

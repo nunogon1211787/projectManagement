@@ -1,12 +1,19 @@
 package switch2021.project.repositories;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import switch2021.project.datamodel.UserJpa;
+import switch2021.project.datamodel.assembler.UserJpaAssembler;
 import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.model.SystemUser.User;
+import switch2021.project.model.valueObject.Email;
+import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.model.valueObject.UserProfileID;
+import switch2021.project.repositories.jpa.UserJpaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserRepository implements IUserRepo {
@@ -15,6 +22,12 @@ public class UserRepository implements IUserRepo {
      * Class Attributes
      */
     private final List<User> userList;
+
+    @Autowired
+    private UserJpaRepository userJpaRepository;
+
+    @Autowired
+    private UserJpaAssembler userJpaAssembler;
 
     /**
      * Constructor
@@ -51,6 +64,18 @@ public class UserRepository implements IUserRepo {
         } else {
             return this.userList.add(user);
         }
+    }
+
+    public Optional<User> saveReeng (User newUser) {
+
+        UserJpa userJpa = userJpaAssembler.toData(newUser);
+        Optional<User> user = Optional.empty();
+
+        if(!userJpaRepository.existsById(userJpa.getEmail())){
+            UserJpa userSaved = userJpaRepository.save(userJpa);
+            user = Optional.of(userJpaAssembler.toDomain(userSaved));
+        }
+        return  user;
     }
 
     @Override

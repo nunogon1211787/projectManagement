@@ -13,6 +13,7 @@ import switch2021.project.model.valueObject.UserProfileID;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -38,6 +39,22 @@ public class UserService {
     public OutputUserDTO findSystemUserByEmail(String email) {
         User found = this.userRepo.findByUserID(email);
         return this.userMapper.toDto(found);
+    }
+
+    public OutputUserDTO createAndSaveUserJPA (NewUserInfoDTO infoDTO) throws Exception{
+        User user = userFactory.createUser(infoDTO);
+
+        Optional<User> userSaved = userRepo.saveReeng(user);
+
+        OutputUserDTO outputUserDTO;
+
+        if (userSaved.isPresent()) {
+            outputUserDTO = userMapper.toDto(userSaved.get());
+        } else {
+            throw new Exception("System User Already exists!");
+        }
+
+        return outputUserDTO;
     }
 
     public OutputUserDTO updatePersonalData(IdDTO idDTO, UpdateDataDTO updateDataDTO) {

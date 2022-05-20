@@ -3,6 +3,7 @@ package switch2021.project.model.valueObject;
 import lombok.Getter;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.util.Objects;
 

@@ -13,7 +13,7 @@ public class UserMapper {
         outDTO.email=user.getSystemUserId().getEmail().getEmailText();
         outDTO.function=user.getFunction().getText();
         outDTO.photo=user.getPhoto().getExtension();
-        outDTO.isActive=user.isActive();
+        outDTO.isActive=user.isActive() ? "True" : "False";
 
         return outDTO;
     }

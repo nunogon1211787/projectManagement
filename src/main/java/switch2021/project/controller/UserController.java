@@ -5,37 +5,35 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.*;
-import switch2021.project.repositories.SystemUserRepositoryInterface;
-import switch2021.project.datamodel.SystemUserJpa;
+import switch2021.project.repositories.jpa.UserJpaRepository;
+import switch2021.project.datamodel.UserJpa;
 import switch2021.project.service.CreateProjectService;
 import switch2021.project.service.UserService;
-
 import java.util.List;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-@RequestMapping("api/")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
     @Autowired
     private CreateProjectService projectService;
-
-    //for webApp demo testing
     @Autowired
-    private SystemUserRepositoryInterface sURepository;
+    private UserJpaRepository sURepository;
 
-    @PostMapping("users")
-    public SystemUserJpa addUser(@RequestBody SystemUserJpa a) {
+    @PostMapping
+    public UserJpa addUser(@RequestBody UserJpa a) {
         return this.sURepository.save(a);
     }
 
-    @GetMapping("users")
-    public List<SystemUserJpa> getUsers() {
+    @GetMapping
+    public List<UserJpa> getUsers() {
         return this.sURepository.findAll();
     }
-    //finish webApp demo testing
 
 
 //    @GetMapping
@@ -79,8 +77,45 @@ public class UserController {
     }
 
 
+    @PostMapping("/jpa")
+    public ResponseEntity<Object> createAndSaveUserJPA(@RequestBody NewUserInfoDTO newUserInfoDTO) {
+        ErrorMessage message = new ErrorMessage();
+        OutputUserDTO outputUserDTO;
+        try {
+            outputUserDTO = userService.createAndSaveUserJPA(newUserInfoDTO);
+
+            outputUserDTO.add(linkTo(methodOn(UserController.class).getUser(outputUserDTO.email)).withSelfRel());
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(outputUserDTO, HttpStatus.CREATED);
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getUser(@PathVariable("id") String id){
+
+        ErrorMessage message = new ErrorMessage();
+
+        OutputUserDTO user;
+
+        try {
+            user = userService.findSystemUserByEmail(id);
+
+            user.add(linkTo(methodOn(UserController.class).getUser(user.email)).withSelfRel());
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+
     @PatchMapping("/{id}")
-    public ResponseEntity<Object> updatePersonalData(@PathVariable("id") IdDTO idDTO ,
+    public ResponseEntity<Object> updatePersonalData(@PathVariable("id") IdDTO idDTO,
                                                      @RequestBody UpdateDataDTO updateDataDTO) {
 
         OutputUserDTO outputUserDTO;
