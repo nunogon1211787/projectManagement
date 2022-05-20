@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    position: fixed;
+    padding: 30px 8px 30px 16px;
+    background-color: #5584AC;
+    display: inline-block;
+    flex: 2;
+}
+
+.columns {
+    background-color: #5584AC;
+    display: inline-block;
+
+}
+
+.ul {
+    padding: 6px 8px 20px 16px;
+    text-decoration: solid;
+    text-align: center;
+    background-color: #5584AC;
+    font-size: 30px;
+    color: #ffffff;
+    display: inline-list-item;
+}
+
+.logo {
+    background-color: #5584AC;
+}

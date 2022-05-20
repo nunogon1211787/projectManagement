@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import switch2021.project.dto.ErrorMessage;
+import switch2021.project.dto.OutputProjectDTO;
+import switch2021.project.dto.ProjectDTO;
 import switch2021.project.dto.*;
 import switch2021.project.repositories.ProjectRepository;
 import switch2021.project.service.CreateProjectService;
@@ -11,7 +14,6 @@ import switch2021.project.service.CreateProjectService;
 import javax.validation.Valid;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/projects")
 public class ProjectController {
@@ -19,7 +21,7 @@ public class ProjectController {
     @Autowired
     CreateProjectService service;
     @Autowired
-    ProjectRepository projStore;
+    ProjectRepository projRepo;
 
 
     @GetMapping
@@ -33,13 +35,17 @@ public class ProjectController {
     @PostMapping("/create")
     public ResponseEntity <?> createProject (@Valid @RequestBody ProjectDTO projectDTO) {
 
-/*        if (projStore.existsByName(projectDTO.projectName)) {
-            return ResponseEntity
-                    .badRequest()
-                    .body("Project name already exists"); //TODO criar uma Response Class para mensagens
-        }*/
+        try {
 
-        return new ResponseEntity<>(service.createAndSaveProject(projectDTO), HttpStatus.CREATED);
+            return new ResponseEntity<>(service.createAndSaveProject(projectDTO), HttpStatus.CREATED);
+
+        } catch (Exception e){
+            ErrorMessage error = new ErrorMessage();
+            error.errorMessage = e.getMessage();
+
+            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
+
     }
 
     @PatchMapping("/{id}")

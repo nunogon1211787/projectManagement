@@ -36,15 +36,14 @@ factory -> project**: create(name, description, ...)
 
 factory --> service: newProject
 
-service -> store: save(newProject)
-store -> store: existByProjectId\n(newProject)
-deactivate store
+service -> store: savedProject = save(newProject)
+note over store : Saving project in Repository returns a new project created by jpa assembler
 
-store --> service: result
+deactivate store
 
 alt if the new project was correctly saved
 
-service -> mapper: model2Dto(newProject)
+service -> mapper: model2Dto(savedProject)
 
 mapper -> dto**: create()
 

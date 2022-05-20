@@ -49,7 +49,6 @@ public class CreateProjectService {
     private ProjectJpaAssembler assembler;
 
     public CreateProjectService() {
-
     }
 
     public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) {
