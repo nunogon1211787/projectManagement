@@ -1,6 +1,9 @@
 package switch2021.project.datamodel;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.ParamDef;
+import org.springframework.data.repository.query.Param;
 import switch2021.project.model.Project.ProjectStatusEnum;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.*;

@@ -8,8 +8,10 @@ import switch2021.project.datamodel.assembler.UserStoryJpaAssembler;
 import switch2021.project.interfaces.IUserStoryRepo;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.model.valueObject.UserStoryID;
 import switch2021.project.repositories.jpa.UserStoryJpaRepository;
 
+import javax.swing.text.html.Option;
 import java.util.*;
 
 @Getter
@@ -155,6 +157,20 @@ public class UserStoryRepository implements IUserStoryRepo {
             }
         }
         return null;
+    }
+
+    @Override
+    public Optional<UserStory> findByUserStoryIdJPA(UserStoryID userStoryID) {
+
+        Optional<UserStoryJpa> usJpa = jpaRepository.findById(userStoryID);
+
+        Optional<UserStory> result = Optional.empty();
+
+        if(usJpa.isPresent()){
+            result = Optional.of(assembler.toDomain(usJpa.get()));
+        }
+
+        return result;
     }
 
     /**

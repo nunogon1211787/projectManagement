@@ -42,38 +42,38 @@ public class CreateUserStoryServiceTest {
     private OutputUserStoryDTO outputUsDto;
 
 
-    @Test
-    @DisplayName("Test to create and save user story - with success")
-    public void createAndSaveUserStoryWithSuccessGetProjectID() {
-
-        //Arrange
-        when(iUserStoryFactory.createUserStory(createUserStoryDTO)).thenReturn(newUserStory);
-        when(iUserStoryRepo.save(newUserStory)).thenReturn(true);
-        when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
-        UserStoryIdDTO usIdDto = mock(UserStoryIdDTO.class);
-        when(outputUsDto.getUserStoryID()).thenReturn(usIdDto);
-        //Act
-        OutputUserStoryDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
-        //Assert
-        assertEquals(createUserStoryDTO.projectID, andSaveUserStory.getUserStoryID().projectID);
-
-    }
-
-    @Test
-    @DisplayName("Test to create and save user story - with success")
-    public void createAndSaveUserStoryWithSuccessGetUsTitle() {
-
-        //Arrange
-        when(iUserStoryFactory.createUserStory(createUserStoryDTO)).thenReturn(newUserStory);
-        when(iUserStoryRepo.save(newUserStory)).thenReturn(true);
-        when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
-        UserStoryIdDTO usIdDto = mock(UserStoryIdDTO.class);
-        when(outputUsDto.getUserStoryID()).thenReturn(usIdDto);
-        //Act
-        OutputUserStoryDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
-        //Assert
-        assertEquals(createUserStoryDTO.title, andSaveUserStory.getUserStoryID().title);
-    }
+//    @Test
+//    @DisplayName("Test to create and save user story - with success")
+//    public void createAndSaveUserStoryWithSuccessGetProjectID() {
+//
+//        //Arrange
+//        when(iUserStoryFactory.createUserStory(createUserStoryDTO)).thenReturn(newUserStory);
+//        when(iUserStoryRepo.save(newUserStory)).thenReturn(true);
+//        when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
+//        UserStoryIdDTO usIdDto = mock(UserStoryIdDTO.class);
+//        when(outputUsDto.getUserStoryID()).thenReturn(usIdDto);
+//        //Act
+//        OutputUserStoryDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
+//        //Assert
+//        assertEquals(createUserStoryDTO.projectID, andSaveUserStory.getUserStoryID().projectID);
+//
+//    }
+//
+//    @Test
+//    @DisplayName("Test to create and save user story - with success")
+//    public void createAndSaveUserStoryWithSuccessGetUsTitle() {
+//
+//        //Arrange
+//        when(iUserStoryFactory.createUserStory(createUserStoryDTO)).thenReturn(newUserStory);
+//        when(iUserStoryRepo.save(newUserStory)).thenReturn(true);
+//        when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
+//        UserStoryIdDTO usIdDto = mock(UserStoryIdDTO.class);
+//        when(outputUsDto.getUserStoryID()).thenReturn(usIdDto);
+//        //Act
+//        OutputUserStoryDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
+//        //Assert
+//        assertEquals(createUserStoryDTO.title, andSaveUserStory.getUserStoryID().title);
+//    }
 
     @Test
     @DisplayName("Test to create and save user story - with success")
@@ -116,4 +116,16 @@ public class CreateUserStoryServiceTest {
            createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
         });
     }
+//
+//    @Test
+//    void showAUserStory() throws Exception {
+//
+//        CreateUserStoryService srv = new CreateUserStoryService();
+//
+//        String id = "Project_2022_1&As%20fulano%20i%20want%20to%20teste";
+//
+//        srv.showAUserStory(id);
+//
+//
+//    }
 }

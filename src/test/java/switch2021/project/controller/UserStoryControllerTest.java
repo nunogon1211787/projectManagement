@@ -1,4 +1,4 @@
-//package switch2021.project.controller;
+package switch2021.project.controller;
 //
 //
 //import com.fasterxml.jackson.databind.ObjectMapper;
@@ -7,7 +7,9 @@
 //import org.mockito.MockitoAnnotations;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-//import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.http.MediaType;
 //import org.springframework.test.web.servlet.MockMvc;
 //import org.springframework.test.web.servlet.MvcResult;
@@ -18,8 +20,8 @@
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 //
 //@AutoConfigureMockMvc
-//@SpringBootTest
-//public class CreateUserStoryControllerTest {
+@SpringBootTest
+public class UserStoryControllerTest {
 //
 //    @Autowired
 //    private MockMvc mockMvc;
@@ -57,6 +59,18 @@
 //
 //
 //    }
-//}
+//
+//    @Autowired UserStoryController ctrl;
+//
+//    @Test
+//    void intTest(){
+//
+//        String test = "Project_2022_1&As%20fulano%20i%20want%20to%20teste";
+//
+//        ctrl.showUserStoryRequested(test);
+//
+//    }
+
+}
 //
 //

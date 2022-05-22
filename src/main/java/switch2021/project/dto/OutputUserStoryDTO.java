@@ -11,7 +11,7 @@ public class OutputUserStoryDTO extends RepresentationModel<OutputUserStoryDTO> 
     /**
      * Attributes
      **/
-    public UserStoryIdDTO userStoryID;
+    public String id;
     public int priority;
     public String description;
     public double timeEstimate;

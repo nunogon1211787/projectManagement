@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.util.Objects;
 
@@ -17,6 +18,7 @@ public class UsTitle implements ValueObject<UsTitle> {
     /**
      * Attributes
      **/
+    @Column(name = "title")
     private String titleUs; //As a //I want to
 
     /**

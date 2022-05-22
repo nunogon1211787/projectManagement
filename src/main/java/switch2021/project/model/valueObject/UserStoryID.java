@@ -7,6 +7,7 @@ import switch2021.project.interfaces.TaskContainerID;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import java.util.Objects;
