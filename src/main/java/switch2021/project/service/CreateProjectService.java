@@ -3,35 +3,40 @@ package switch2021.project.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import switch2021.project.datamodel.assembler.ProjectJpaAssembler;
-import switch2021.project.dto.DateDTO;
-import switch2021.project.dto.IdDTO;
-import switch2021.project.dto.OutputProjectDTO;
-import switch2021.project.dto.ProjectDTO;
+import switch2021.project.dto.*;
 import switch2021.project.factoryInterface.IProjectFactory;
+import switch2021.project.factoryInterface.IProjectIDFactory;
+import switch2021.project.interfaces.IProjectRepo;
+import switch2021.project.factoryInterface.IProjectIDFactory;
+import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.interfaces.IResourceRepo;
 import switch2021.project.interfaces.ITypologyRepo;
 import switch2021.project.interfaces.IUserRepo;
-import switch2021.project.model.Resource.ManageResourcesService;
-import switch2021.project.model.Resource.ResourceReeng;
-import switch2021.project.model.valueObject.ProjectID;
-import switch2021.project.repositories.ProjectRepository;
 import switch2021.project.mapper.ProjectMapper;
 import switch2021.project.model.Project.ProjectReeng;
+import switch2021.project.model.Project.ProjectStatusEnum;
+import switch2021.project.model.Resource.ManageResourcesService;
+import switch2021.project.model.Resource.ResourceReeng;
+import switch2021.project.model.valueObject.*;
+import switch2021.project.repositories.ProjectRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
 public class CreateProjectService {
 
     @Autowired
-    private ProjectRepository projRepo;
+    private IProjectRepo projRepo;
     @Autowired
     private ITypologyRepo iTypologyRepo;
     @Autowired
     private IProjectFactory iProjectFactory;
+    @Autowired
+    private IProjectIDFactory projIDFactory;
     @Autowired
     private ProjectMapper projMapper;
     @Autowired
@@ -44,7 +49,6 @@ public class CreateProjectService {
     private ProjectJpaAssembler assembler;
 
     public CreateProjectService() {
-
     }
 
     public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) {
@@ -56,40 +60,40 @@ public class CreateProjectService {
         return projMapper.model2Dto(savedProject);
     }
 
-/*    public OutputProjectDTO editProject(ProjectDTO projectDTO) {
+    public OutputProjectDTO updateProjectPartially(String idDTO, EditProjectInfoDTO editProjectInfoDTO) {
+        ProjectID projectID = projIDFactory.create(idDTO);
+        Optional<ProjectReeng> opProject = projRepo.findById(projectID);
+        if (opProject.isPresent()) {
+            ProjectReeng proj = opProject.get();
 
-        ProjectReeng proj = projRepo.findById(projectDTO.code);
-
-        if (!projectDTO.projectName.isEmpty()) {
-            proj.setProjectName(new Description(projectDTO.projectName));
-        }
-        if (!projectDTO.description.isEmpty()) {
-            proj.setDescription(new Description(projectDTO.description));
-        }
-        if (!projectDTO.businessSector.isEmpty()) {
-            proj.setBusinessSector(new BusinessSector(projectDTO.businessSector));
-        }
-        if (!projectDTO.typology.isEmpty()) {
-            proj.setTypology(iTypologyRepo.findTypologyById(projectDTO.typology));
-        }
-        if (!projectDTO.numberOfSprints.isEmpty()) {
-            proj.setNumberOfSprints(new NumberOfSprints(Integer.parseInt(projectDTO.numberOfSprints)));
-        }
-        if (!projectDTO.budget.isEmpty()) {
-            proj.setBudget(new Budget(Integer.parseInt(projectDTO.budget)));
-        }
-        if (!projectDTO.startDate.isEmpty()) {
-            proj.setStartDate(LocalDate.parse(projectDTO.startDate));
-        }
-        if (!projectDTO.projectStatus.isEmpty()) {
-            proj.setProjectStatus(ProjectStatusEnum.valueOf(projectDTO.projectStatus));
-        }
-        if (!projectDTO.sprintDuration.isEmpty()) {
-            proj.setSprintDuration(new SprintDuration(Integer.parseInt(projectDTO.sprintDuration)));
-        }
-
-        return projectsMapper.model2Dto(proj);
-    }*/
+            if (!editProjectInfoDTO.projectName.isEmpty()) {
+                proj.setProjectName(new Description(editProjectInfoDTO.projectName));
+            }
+            if (!editProjectInfoDTO.description.isEmpty()) {
+                proj.setDescription(new Description(editProjectInfoDTO.description));
+            }
+            if (!editProjectInfoDTO.startDate.isEmpty()) {
+                proj.setStartDate(LocalDate.parse(editProjectInfoDTO.startDate));
+            }
+            if (!editProjectInfoDTO.endDate.isEmpty()) {
+                proj.setStartDate(LocalDate.parse(editProjectInfoDTO.endDate));
+            }
+            if (!editProjectInfoDTO.numberOfSprints.isEmpty()) {
+                proj.setNumberOfSprints(new NumberOfSprints(Integer.parseInt(editProjectInfoDTO.numberOfSprints)));
+            }
+            if (!editProjectInfoDTO.budget.isEmpty()) {
+                proj.setBudget(new Budget(Integer.parseInt(editProjectInfoDTO.budget)));
+            }
+            if (!editProjectInfoDTO.projectStatus.isEmpty()) {
+                proj.setProjectStatus(ProjectStatusEnum.valueOf(editProjectInfoDTO.projectStatus));
+            }
+            if (!editProjectInfoDTO.sprintDuration.isEmpty()) {
+                proj.setSprintDuration(new SprintDuration(Integer.parseInt(editProjectInfoDTO.sprintDuration)));
+            }
+            return projMapper.model2Dto(proj);
+        } else
+            return null;
+    }
 
     public List<OutputProjectDTO> showAllProjects() {
 

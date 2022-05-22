@@ -3,7 +3,7 @@ package switch2021.project.repositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.datamodel.UserProfileJpa;
-import switch2021.project.datamodel.assembler.UserProfileDomainDataAssembler;
+import switch2021.project.datamodel.assembler.UserProfileJpaAssembler;
 import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.Description;
@@ -21,7 +21,7 @@ public class UserProfileRepositoryReeng implements IUserProfileRepo {
     UserProfileJpaRepository userProfileJpaRepository;
 
     @Autowired
-    UserProfileDomainDataAssembler assembler;
+    UserProfileJpaAssembler assembler;
 
 
     public UserProfile findByUserProfileID (String userProfileName) {

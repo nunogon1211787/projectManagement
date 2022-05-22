@@ -7,8 +7,6 @@ import switch2021.project.model.valueObject.Description;
 import switch2021.project.model.valueObject.UsHour;
 import switch2021.project.model.valueObject.UsPriority;
 import switch2021.project.model.valueObject.UserStoryID;
-
-import javax.annotation.Priority;
 import java.time.LocalDate;
 
 @Component

@@ -29,17 +29,13 @@ public class ProjectJpaAssembler {
     public ProjectReeng toDomain(ProjectJpa projectJpa) {
         LocalDate date = LocalDate.parse(projectJpa.getStartDate());
 
-        ProjectReeng projects = new ProjectReeng(new Description(projectJpa.getName()),
+        return new ProjectReeng(new Description(projectJpa.getName()),
                                 new Description(projectJpa.getDescription()),
                                 new BusinessSector(projectJpa.getBusinessSector()),
                                 date,
                                 new NumberOfSprints(projectJpa.getNumberOfSprints()),
                                 new SprintDuration(projectJpa.getSprintDuration()),
                                 new Budget(projectJpa.getBudget()));
-
-        projects.setProjectCode(new ProjectID(projectJpa.getName()));
-
-        return projects;
     }
 
 }

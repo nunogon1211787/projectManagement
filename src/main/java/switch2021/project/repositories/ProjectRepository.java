@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ProjectRepository {
+public class ProjectRepository implements IProjectRepo {
 
     @Autowired
     ProjectJpaRepository projectJpaRepository;
@@ -25,6 +25,7 @@ public class ProjectRepository {
 
 
     public ProjectReeng save(ProjectReeng project) {
+        project.setProjectCode(new ProjectID("2"));
         ProjectJpa projectJpa = projectJpaAssembler.toJpaData(project);
 
         ProjectJpa savedProj = projectJpaRepository.save(projectJpa);
@@ -32,55 +33,35 @@ public class ProjectRepository {
         return projectJpaAssembler.toDomain(savedProj);
     }
 
-    @Transactional
+    @Override
     public Optional<ProjectReeng> findById(ProjectID id) {
-        Optional<ProjectJpa> opPersonJpa = projectJpaRepository.findById(id);
+        Optional<ProjectJpa> opProjJpa = projectJpaRepository.findById(id);
 
-        if(opPersonJpa.isPresent()) {
-            ProjectJpa personJpa = opPersonJpa.get();
+        if(opProjJpa.isPresent()) {
+            ProjectJpa projJpa = opProjJpa.get();
 
-            ProjectReeng person = projectJpaAssembler.toDomain(personJpa);
-            return Optional.of(person);
+            ProjectReeng proj = projectJpaAssembler.toDomain(projJpa);
+            return Optional.of(proj);
         }
         else
             return Optional.empty();
     }
 
-    public Optional<ProjectReeng> findById(String id) {
-        ProjectID id_proj = new ProjectID(id);
-        Optional<ProjectJpa> opPersonJpa = projectJpaRepository.findById(id_proj);
-
-        if(opPersonJpa.isPresent()) {
-            ProjectJpa personJpa = opPersonJpa.get();
-
-            ProjectReeng person = projectJpaAssembler.toDomain(personJpa);
-            return Optional.of(person);
-        }
-        else
-            return Optional.empty();
+    @Override
+    public boolean existsById(String id) {
+        return false;
     }
 
-//    @Override
-//    public ProjectReeng findByIdDeprecated(String code) {
-//        return null;
-//    }
-//
-//    @Override
-//    public boolean existsById(String id) {
-//        return false;
-//    }
-
-//    @Override
-//    public boolean existsByName(String id) {
-//        return false;
-//    }
-
+    @Override
+    public boolean existsByName(String id) {
+        return false;
+    }
 
     @Transactional
     public List<ProjectReeng> findAll() {
         List<ProjectJpa> setProjectJpa = projectJpaRepository.findAll();
 
-        List<ProjectReeng> setProject = new ArrayList<ProjectReeng>();
+        List<ProjectReeng> setProject = new ArrayList<>();
 
         for( ProjectJpa projectJpa : setProjectJpa ) {
             ProjectReeng projectReeng = projectJpaAssembler.toDomain(projectJpa);

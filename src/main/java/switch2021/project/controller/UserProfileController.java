@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import switch2021.project.dto.ErrorMessage;
 import switch2021.project.dto.UserProfileDTO;
-import switch2021.project.service.CreateUserProfileService;
+import switch2021.project.service.UserProfileService;
 
 
 @RestController
@@ -20,7 +20,7 @@ public class UserProfileController {
      * Attributes
      **/
     @Autowired
-    private CreateUserProfileService createUserProfileService;
+    private UserProfileService createUserProfileService;
 
 
     /**

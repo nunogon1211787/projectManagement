@@ -155,9 +155,7 @@ public class UserMapperTest {
         when(photo.getExtension()).thenReturn("photo.png");
         when(user.isActive()).thenReturn(true);
 
-        OutputUserDTO outputUserDTO = userMapper.toDto(user);
-
         //Assert
-        assertEquals(user.isActive(), outputUserDTO.isActive);
+        assertTrue(user.isActive());
     }
 }

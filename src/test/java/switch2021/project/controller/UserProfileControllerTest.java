@@ -10,7 +10,7 @@
 //import org.springframework.web.context.request.RequestContextHolder;
 //import org.springframework.web.context.request.ServletRequestAttributes;
 //import switch2021.project.dto.UserProfileDTO;
-//import switch2021.project.service.CreateUserProfileService;
+//import switch2021.project.service.UserProfileService;
 //
 //import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 //import static org.mockito.Mockito.mock;
@@ -22,7 +22,7 @@
 //    @InjectMocks
 //    UserProfileController controller;
 //    @Mock
-//    CreateUserProfileService service;
+//    UserProfileService service;
 //
 //    @Test
 //    public void createUserProfileControllerTest() {

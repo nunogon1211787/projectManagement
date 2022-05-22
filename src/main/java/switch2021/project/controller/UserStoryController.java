@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.*;
-import switch2021.project.service.CreateUserStoryService;
+import switch2021.project.service.UserStoryService;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -18,7 +18,7 @@ public class UserStoryController {
      * Attributes
      **/
     @Autowired
-    private CreateUserStoryService createUserStoryService;
+    private UserStoryService createUserStoryService;
 
 
     @GetMapping("/{id}")

@@ -3,7 +3,7 @@ package switch2021.project.repositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.datamodel.TypologyJpa;
-import switch2021.project.datamodel.assembler.TypologyDomainDataAssembler;
+import switch2021.project.datamodel.assembler.TypologyJpaAssembler;
 import switch2021.project.interfaces.ITypologyRepo;
 import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.Description;
@@ -20,7 +20,7 @@ public class TypologyRepositoryReeg implements ITypologyRepo {
     @Autowired
     TypologyJpaRepository jpaRepository;
     @Autowired
-    TypologyDomainDataAssembler assembler;
+    TypologyJpaAssembler assembler;
 
 
     @Override

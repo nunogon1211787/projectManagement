@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import switch2021.project.dto.ErrorMessage;
 import switch2021.project.dto.NewSprintDTO;
 import switch2021.project.dto.OutPutSprintDTO;
-import switch2021.project.service.CreateSprintService;
+import switch2021.project.service.SprintService;
 
 @RestController
 @RequestMapping("/sprints")
@@ -21,7 +21,7 @@ public class SprintController {
      **/
 
     @Autowired
-    private CreateSprintService createSprintService;
+    private SprintService createSprintService;
 
     /**
      * Methods

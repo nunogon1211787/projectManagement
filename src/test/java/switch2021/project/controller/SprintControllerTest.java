@@ -1,20 +1,9 @@
 package switch2021.project.controller;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.http.ResponseEntity;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-import switch2021.project.dto.NewSprintDTO;
-import switch2021.project.dto.OutPutSprintDTO;
-import switch2021.project.service.CreateSprintService;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 
 @ExtendWith(SpringExtension.class)
@@ -24,7 +13,7 @@ public class SprintControllerTest {
 //    CreateSprintController createSprintController;
 //
 //    @Mock
-//    CreateSprintService createSprintService;
+//    SprintService createSprintService;
 //    @Mock
 //    NewSprintDTO newSprintDTO;
 //    @Mock
