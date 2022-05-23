@@ -39,7 +39,7 @@ public class RefineUserStoryController {
     }
 
     public UserStory getUserStory(UserStoryID idUserStory){
-        this.userStoryParent = this.userStoryStore.findByUserStoryId(idUserStory.toString());
+        this.userStoryParent = this.userStoryStore.findByUserStoryId(idUserStory).get();
         return userStoryParent;
     }
 //TODO CDC ver como podemos fazer update status us refined
@@ -48,9 +48,9 @@ public class RefineUserStoryController {
 //        return userStoryParent.setUserStoryStatusBoolean(company.getUserStoryStatusStore().getUserStoryStatusByDescription("Refined"));
 //    }
 
-    public boolean createUserStory(String description, int priority){
-        UserStory userStoryCreated = this.userStoryStore.refineUserStory(userStoryParent, priority, description);
-        this.userStoryStore.getUserStoryList().add(userStoryCreated);
-        return true;
-    }
+//    public boolean createUserStory(String description, int priority){
+//        UserStory userStoryCreated = this.userStoryStore.refineUserStory(userStoryParent, priority, description);
+//        this.userStoryStore.getUserStoryList().add(userStoryCreated);
+//        return true;
+//    }
 }

@@ -11,6 +11,7 @@ import switch2021.project.dto.CreateUserStoryDTO;
 import switch2021.project.dto.UserStoryIdDTO;
 import switch2021.project.factoryInterface.IProjectIDFactory;
 import switch2021.project.factoryInterface.IUserStoryFactory;
+import switch2021.project.factoryInterface.IUserStoryIDFactory;
 import switch2021.project.interfaces.IUserStoryRepo;
 import switch2021.project.mapper.UserStoryMapper;
 import switch2021.project.model.SystemUser.User;
@@ -19,6 +20,8 @@ import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.model.valueObject.UsTitle;
 import switch2021.project.model.valueObject.UserStoryID;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,34 +36,16 @@ public class UserStoryService {
     private UserStoryMapper userStoryMapper;
     @Autowired
     private IUserStoryFactory iUserStoryFactory;
+    @Autowired
+    private IUserStoryIDFactory factoryId;
 
     /**
      * Create and save a User Story
      */
-    public OutputUserStoryDTO createAndSaveUserStory(CreateUserStoryDTO inDto) {
+    public OutputUserStoryDTO createAndSaveUserStory(CreateUserStoryDTO inDto) throws Exception {
         UserStory newUserStory = iUserStoryFactory.createUserStory(inDto);
 
-
-        //Must be checked which return the save method will have when the user story already exist.
-
-        if(!iUserStoryRepo.save(newUserStory)){
-            throw new IllegalArgumentException("User Story already exists");
-        }
-
-        return userStoryMapper.toDto(newUserStory);
-    }
-
-    public OutputUserStoryDTO createAndSaveUserStoryJPA(CreateUserStoryDTO inDto) throws Exception {
-        UserStory newUserStory = iUserStoryFactory.createUserStory(inDto);
-
-
-        //Must be checked which return the save method will have when the user story already exist.
-
-//        if(!iUserStoryRepo.save(newUserStory)){
-//            throw new IllegalArgumentException("User Story already exists");
-//        }
-
-        Optional<UserStory> usSaved = iUserStoryRepo.saveReeng(newUserStory);
+        Optional<UserStory> usSaved = iUserStoryRepo.save(newUserStory);
 
         OutputUserStoryDTO usDto;
 
@@ -75,20 +60,9 @@ public class UserStoryService {
 
     public OutputUserStoryDTO showAUserStory(String id) throws Exception {
 
+        UserStoryID usId = createUserStoryIdByStringInputFromController(id);
 
-        String[] x = id.split("&");
-
-        String pId = x[0].replaceAll("Project_2022_", "");
-
-        String uTitle = x[1].replaceAll("%20", " ");
-
-        ProjectID projId = new ProjectID(pId);
-
-        UsTitle title = new UsTitle(uTitle);
-
-        UserStoryID usId = new UserStoryID(projId, title);
-
-        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryIdJPA(usId);
+        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(usId);
 
         if(foundUs.isEmpty()){
             throw new Exception("User story does not exist");
@@ -96,5 +70,38 @@ public class UserStoryService {
 
         return userStoryMapper.toDto(foundUs.get());
 
+    }
+
+    public List<OutputUserStoryDTO> showAllUserStories() {
+
+        List<OutputUserStoryDTO> result = new ArrayList<>();
+
+        List<UserStory> allUserStories = iUserStoryRepo.findAll();
+
+        allUserStories.forEach(us -> result.add(userStoryMapper.toDto(us)));
+
+        return result;
+
+    }
+
+    public void deleteAUserStory(String id) throws Exception {
+
+        UserStoryID usId = createUserStoryIdByStringInputFromController(id);
+
+        if(!iUserStoryRepo.deleteByUserStoryId(usId)){
+            throw new Exception("User Story does not exist");
+        }
+
+    }
+
+    private UserStoryID createUserStoryIdByStringInputFromController(String id){
+
+        String[] x = id.split("&");
+
+        String pId = x[0].replaceAll("Project_2022_", "");
+
+        String uTitle = x[1].replaceAll("%20", " ");
+
+        return factoryId.create(pId, uTitle);
     }
 }

@@ -24,18 +24,18 @@ public class TypologyRepositoryReeg implements ITypologyRepo {
 
 
     @Override
-    public Typology findTypologyById(String description) {
-        Optional<TypologyJpa> opTypology = jpaRepository.findById(new TypologyID(new Description(description)));
-        Typology typology = null;
+    public Optional<Typology> findByTypologyId(TypologyID typoId) {
+        Optional<TypologyJpa> opTypology = jpaRepository.findById(typoId);
+        Optional<Typology> typology = Optional.empty();
 
         if (opTypology.isPresent()) {
-            typology = assembler.toDomain(opTypology.get());
+            typology = Optional.of(assembler.toDomain(opTypology.get()));
         }
         return typology;
     }
 
     @Override
-    public List<Typology> findAllTypology() {
+    public List<Typology> findAll() {
         List<TypologyJpa> jpaList = jpaRepository.findAll();
         List<Typology> typologyList = new ArrayList<>();
 
@@ -52,18 +52,24 @@ public class TypologyRepositoryReeg implements ITypologyRepo {
         if (!jpaRepository.existsById(typologyJpa.getId())) {
             jpaRepository.save(typologyJpa);
             return true;
-        } else
-            return false;
+        }
+
+        return false;
     }
 
     @Override
-    public boolean existsByTypologyId(String description) {
-        return jpaRepository.existsById(new TypologyID(new Description(description)));
+    public boolean existsByTypologyId(TypologyID typoId) {
+        return jpaRepository.existsById(typoId);
     }
 
     @Override
-    public void deleteTypology(String description) {
-        TypologyID id = new TypologyID(new Description(description));
-        jpaRepository.deleteById(id);
+    public boolean deleteByTypologyId(TypologyID typoId) {
+
+        if (jpaRepository.existsById(typoId)) {
+            jpaRepository.deleteById(typoId);
+            return true;
+        }
+
+        return false;
     }
 }

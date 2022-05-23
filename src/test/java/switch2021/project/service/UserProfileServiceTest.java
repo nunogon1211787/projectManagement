@@ -11,6 +11,9 @@ import switch2021.project.factoryInterface.IUserProfileFactory;
 import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.mapper.UserProfileMapper;
 import switch2021.project.model.UserProfile.UserProfile;
+
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
@@ -38,7 +41,7 @@ public class UserProfileServiceTest {
 
         //Arrange
         when(iUserProfileFactory.createUserProfile(userProfileDTO)).thenReturn(userProfile);
-        when(iUserProfileRepo.save(userProfile)).thenReturn(true);
+        when(iUserProfileRepo.save(userProfile)).thenReturn(Optional.of(userProfile));
         when(userProfileMapper.toDto(userProfile)).thenReturn(userProfileDTO);
         //Act
         UserProfileDTO dto = createUserProfileService.createAndSaveUserProfile(userProfileDTO);
@@ -53,7 +56,7 @@ public class UserProfileServiceTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             when(iUserProfileFactory.createUserProfile(userProfileDTO)).thenReturn(userProfile);
-            when(iUserProfileRepo.save(userProfile)).thenReturn(false);
+            when(iUserProfileRepo.save(userProfile)).thenReturn(Optional.empty());
             when(userProfileMapper.toDto(userProfile)).thenReturn(userProfileDTO);
             //Act
             createUserProfileService.createAndSaveUserProfile(userProfileDTO);

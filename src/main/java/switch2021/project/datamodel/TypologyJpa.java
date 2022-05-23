@@ -1,5 +1,6 @@
 package switch2021.project.datamodel;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,14 +12,13 @@ import javax.persistence.Table;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "typologies")
-@Getter @Setter
+@Getter
+@Setter
 public class TypologyJpa {
 
     @EmbeddedId
     private TypologyID id;
 
-    public TypologyJpa(TypologyID id) {
-        this.id = id;
-    }
 }
