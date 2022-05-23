@@ -1,13 +1,12 @@
 package switch2021.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.*;
 import switch2021.project.service.UserStoryService;
-
-import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -29,17 +28,17 @@ public class UserStoryController {
     @GetMapping
     public ResponseEntity<Object> showAllUserStories(){
         ErrorMessage message = new ErrorMessage();
-        List<OutputUserStoryDTO> newUserStory;
+        CollectionModel<OutputUserStoryDTO> result;
 
         try {
 
-            newUserStory = createUserStoryService.showAllUserStories();
+            result = CollectionModel.of(createUserStoryService.showAllUserStories());
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(newUserStory, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 
@@ -52,11 +51,8 @@ public class UserStoryController {
         OutputUserStoryDTO newUserStory;
 
         try {
-            newUserStory = createUserStoryService.showAUserStory(id);
 
-            newUserStory.add(linkTo(methodOn(UserStoryController.class).showUserStoryRequested(newUserStory.id)).withSelfRel());
-            newUserStory.add(linkTo(methodOn(UserStoryController.class).deleteAUserStory(newUserStory.id)).withRel("Delete"));
-            newUserStory.add(linkTo(methodOn(UserStoryController.class).showAllUserStories()).withRel("Collection"));
+            newUserStory = createUserStoryService.showAUserStory(id);
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
@@ -73,11 +69,8 @@ public class UserStoryController {
         ErrorMessage message = new ErrorMessage();
         OutputUserStoryDTO newUserStory;
         try {
-            newUserStory = createUserStoryService.createAndSaveUserStory(inDto);
 
-            newUserStory.add(linkTo(methodOn(UserStoryController.class).showUserStoryRequested(newUserStory.id)).withSelfRel());
-            newUserStory.add(linkTo(methodOn(UserStoryController.class).deleteAUserStory(newUserStory.id)).withRel("Delete"));
-            newUserStory.add(linkTo(methodOn(UserStoryController.class).showAllUserStories()).withRel("Collection"));
+            newUserStory = createUserStoryService.createAndSaveUserStory(inDto);
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
@@ -92,7 +85,7 @@ public class UserStoryController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteAUserStory(@PathVariable String id){
         ErrorMessage message = new ErrorMessage();
-        OutputUserStoryDTO newUserStory;
+
         try {
             createUserStoryService.deleteAUserStory(id);
             message.errorMessage = "User Story was deleted successfully";

@@ -1,6 +1,7 @@
 package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.TypologyDTO;
@@ -58,13 +59,14 @@ public class TypologyService {
        return mapper.modelToDto(outputTypology.get());
     }
 
-    public List<TypologyDTO> findAllTypologies() {
+    public CollectionModel<TypologyDTO> findAllTypologies() {
         List<Typology> repositoryList = iTypologyRepo.findAll();
 
         if(repositoryList.isEmpty()) {
             throw new NullPointerException("Does not exists any Typology at this moment!");
         }
-        return mapper.modelToDto(repositoryList);
+
+        return mapper.toCollectionModel(repositoryList);
     }
 
 

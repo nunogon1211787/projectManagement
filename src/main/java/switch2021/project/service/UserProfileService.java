@@ -1,6 +1,7 @@
 package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.UserProfileDTO;
 import switch2021.project.factoryInterface.IUserProfileFactory;
@@ -46,14 +47,10 @@ public class UserProfileService {
     /**
      * To get all profiles
      */
-    public List<UserProfileDTO> showAllProfiles() {
+    public CollectionModel<UserProfileDTO> showAllProfiles() {
 
-        List<UserProfile> profiles = userProfileRepositoryInterface.findAll();
-        List<UserProfileDTO> profilesDto = new ArrayList<>();
+        return userProfileMapper.toCollectionModel(userProfileRepositoryInterface.findAll());
 
-        profiles.forEach(profile -> profilesDto.add(userProfileMapper.toDto(profile)));
-
-        return profilesDto;
     }
 
     /**

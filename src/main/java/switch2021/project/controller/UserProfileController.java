@@ -1,6 +1,7 @@
 package switch2021.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class UserProfileController {
     @GetMapping
     public ResponseEntity<Object> showAllProfiles(){
         ErrorMessage message = new ErrorMessage();
-        List<UserProfileDTO> outPutDTO;
+        CollectionModel<UserProfileDTO> outPutDTO;
 
         try {
 
@@ -56,11 +57,6 @@ public class UserProfileController {
          try {
 
              outPutDTO = createUserProfileService.showUserProfileRequested(id);
-
-             outPutDTO.add(linkTo(methodOn(UserProfileController.class).showUserProfileRequested(id)).withSelfRel());
-             outPutDTO.add(linkTo(methodOn(UserProfileController.class).deleteAUserProfile(id)).withRel("Delete"));
-             outPutDTO.add(linkTo(methodOn(UserProfileController.class).editAUserProfile(id, outPutDTO)).withRel("Edit"));
-             outPutDTO.add(linkTo(methodOn(UserProfileController.class).showAllProfiles()).withRel("Collection"));
 
          } catch (Exception exception) {
              message.errorMessage = exception.getMessage();
@@ -86,11 +82,6 @@ public class UserProfileController {
 
             outPutDTO = createUserProfileService.createAndSaveUserProfile(dto);
 
-            outPutDTO.add(linkTo(methodOn(UserProfileController.class).showUserProfileRequested(outPutDTO.description)).withSelfRel());
-            outPutDTO.add(linkTo(methodOn(UserProfileController.class).deleteAUserProfile(outPutDTO.description)).withRel("Delete"));
-            outPutDTO.add(linkTo(methodOn(UserProfileController.class).editAUserProfile(outPutDTO.description, outPutDTO)).withRel("Edit"));
-            outPutDTO.add(linkTo(methodOn(UserProfileController.class).showAllProfiles()).withRel("Collection"));
-
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
@@ -109,11 +100,6 @@ public class UserProfileController {
         try {
 
             outPutDTO = createUserProfileService.editARequestedUserProfile(id, dto);
-
-            outPutDTO.add(linkTo(methodOn(UserProfileController.class).showUserProfileRequested(outPutDTO.description)).withSelfRel());
-            outPutDTO.add(linkTo(methodOn(UserProfileController.class).deleteAUserProfile(outPutDTO.description)).withRel("Delete"));
-            outPutDTO.add(linkTo(methodOn(UserProfileController.class).editAUserProfile(outPutDTO.description, outPutDTO)).withRel("Edit"));
-            outPutDTO.add(linkTo(methodOn(UserProfileController.class).showAllProfiles()).withRel("Collection"));
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();

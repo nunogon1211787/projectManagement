@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.hateoas.CollectionModel;
 import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.TypologyDTO;
 import switch2021.project.factory.TypologyIDFactory;
@@ -136,10 +137,10 @@ public class TypologyServiceTest {
         when(typo1.hasID_Description(des1.getText())).thenReturn(false);
         when(typo2.hasID_Description(des2.getText())).thenReturn(false);
         when(iTypologyRepo.findAll()).thenReturn(List.of(new Typology[]{typo, typo1, typo2}));
-        when(typologyMapper.modelToDto(iTypologyRepo.findAll())).thenReturn(List.of(new TypologyDTO[]{dto,
-                dto1, dto2}));
+        when(typologyMapper.toCollectionModel(iTypologyRepo.findAll())).thenReturn(CollectionModel.of(List.of(new TypologyDTO[]{dto,
+                dto1, dto2})));
         //Assert
-        assertEquals(3, typologyService.findAllTypologies().size());
+        assertEquals(3, typologyService.findAllTypologies().getContent().size());
     }
 
     @Test
