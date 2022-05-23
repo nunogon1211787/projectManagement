@@ -1,6 +1,7 @@
 package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.datamodel.assembler.ProjectJpaAssembler;
 import switch2021.project.dto.*;
@@ -45,8 +46,7 @@ public class CreateProjectService {
     private IResourceRepo resRepo;
     @Autowired
     private ManageResourcesService resService;
-    @Autowired
-    private ProjectJpaAssembler assembler;
+
 
     public CreateProjectService() {
     }
@@ -55,7 +55,7 @@ public class CreateProjectService {
 
         ProjectReeng newProject = iProjectFactory.createProject(projDTO);
 
-        Optional<ProjectReeng> savedProject = Optional.ofNullable(projRepo.save(newProject));
+        Optional<ProjectReeng> savedProject = projRepo.save(newProject);
 
         OutputProjectDTO projectDTO;
 
@@ -67,9 +67,9 @@ public class CreateProjectService {
         return projectDTO;
     }
 
-    public OutputProjectDTO updateProjectPartially(String idDTO, EditProjectInfoDTO editProjectInfoDTO) {
-        ProjectID projectID = projIDFactory.create(idDTO);
-        Optional<ProjectReeng> opProject = projRepo.findById(projectID.getCode());
+    public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) {
+
+        Optional<ProjectReeng> opProject = projRepo.findById(id);
         if (opProject.isPresent()) {
             ProjectReeng proj = opProject.get();
 
@@ -102,12 +102,6 @@ public class CreateProjectService {
             return null;
     }
 
-//    public List<OutputProjectDTO> showAllProjects() {
-//
-//        List<ProjectReeng> projects = projRepo.findAll();
-//
-//        return createProjectDTOList(projects);
-//    }
 
     private List<OutputProjectDTO> createProjectDTOList(List<ProjectReeng> projects) {
 
@@ -125,11 +119,11 @@ public class CreateProjectService {
 
     }
 
-    public List<OutputProjectDTO> showAllProjects() {
+    public CollectionModel<OutputProjectDTO> showAllProjects() {
 
         List<ProjectReeng> projects = projRepo.findAll();
 
-        return createProjectDTOList(projects);
+        return projMapper.toCollectionDto(projects);
     }
 
     public OutputProjectDTO showProject(String id) throws Exception {
@@ -177,4 +171,9 @@ public class CreateProjectService {
         return projectsDto;
     }
 
+    public void deleteProjectRequest(String id) throws Exception {
+        if(!projRepo.deleteByProjectID(id)){
+            throw new Exception("User Story does not exist");
+        }
+    }
 }

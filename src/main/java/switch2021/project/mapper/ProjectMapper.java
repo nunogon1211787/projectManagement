@@ -1,9 +1,17 @@
 package switch2021.project.mapper;
 
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Component;
+import switch2021.project.controller.ProjectController;;
+import switch2021.project.dto.EditProjectInfoDTO;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.model.Project.ProjectReeng;
-import switch2021.project.model.Project.ProjectStatusEnum;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class ProjectMapper {
@@ -31,6 +39,34 @@ public class ProjectMapper {
             projDto.customer = newProject.getCustomer().getCustomerName().getText();
         }
 
+        //Show a project
+        projDto.add(linkTo(methodOn(ProjectController.class).showProjectRequested(projDto.code))
+                .withSelfRel());
+
+        //Show all projects
+        projDto.add(linkTo(methodOn(ProjectController.class).showAllProjects()).withRel("Collection"));
+
+        //Delete
+        projDto.add(linkTo(methodOn(ProjectController.class).deleteProjectRequest(projDto.code)).withRel("Delete"));
+
+        //Edit a project
+
+        projDto.add(linkTo(methodOn(ProjectController.class).updateProjectPartially(projDto.code,
+                new EditProjectInfoDTO())).withRel("Edit"));
+
+
         return projDto;
+    }
+
+    public CollectionModel<OutputProjectDTO> toCollectionDto(List<ProjectReeng> projects) {
+
+        CollectionModel<OutputProjectDTO> result = CollectionModel.of(projects.stream()
+                .map(this::model2Dto)
+                .collect(Collectors.toList()));
+
+
+        result.add(linkTo(methodOn(ProjectController.class).showAllProjects()).withSelfRel());
+
+        return result;
     }
 }

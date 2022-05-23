@@ -24,6 +24,7 @@ public interface IProjectRepo {
     boolean existsByName(String id);
 
     /**Save Projects Method**/
-    ProjectReeng save(ProjectReeng newProject);
+   Optional<ProjectReeng> save(ProjectReeng newProject);
 
+    boolean deleteByProjectID(String id);
 }
