@@ -1,6 +1,7 @@
 package switch2021.project.controller;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,11 +41,6 @@ public class TypologyController {
 
             outputDto = service.createAndSaveTypology(inputDto);
 
-            outputDto.add(linkTo(methodOn(TypologyController.class).findTypologyRequested(outputDto.getDescription())).withSelfRel());
-            outputDto.add(linkTo(methodOn(TypologyController.class).deleteTypology(outputDto.getDescription())).withRel("Delete"));
-            outputDto.add(linkTo(methodOn(TypologyController.class).findTypologyList()).withRel("Collection"));
-
-
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
@@ -67,10 +63,6 @@ public class TypologyController {
 
             outputDto = service.findTypologyRequested(id);
 
-            outputDto.add(linkTo(methodOn(TypologyController.class).findTypologyRequested(outputDto.getDescription())).withSelfRel());
-            outputDto.add(linkTo(methodOn(TypologyController.class).deleteTypology(outputDto.getDescription())).withRel("Delete"));
-            outputDto.add(linkTo(methodOn(TypologyController.class).findTypologyList()).withRel("Collection"));
-
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
@@ -83,7 +75,7 @@ public class TypologyController {
      */
     @GetMapping
     public ResponseEntity<Object> findTypologyList() {
-        List<TypologyDTO> typologyDTOList;
+        CollectionModel<TypologyDTO> typologyDTOList;
         try {
 
             typologyDTOList = service.findAllTypologies();

@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -148,7 +149,7 @@ public class TypologyControllerTest {
         TypologyDTO dto1 = mock((TypologyDTO.class));
         TypologyDTO dto2 = mock((TypologyDTO.class));
         //Act
-        when(service.findAllTypologies()).thenReturn(List.of(new TypologyDTO[]{dto, dto1, dto2}));
+        when(service.findAllTypologies()).thenReturn(CollectionModel.of(List.of(new TypologyDTO[]{dto, dto1, dto2})));
         ResponseEntity<?> response = controller.findTypologyList();
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(200);

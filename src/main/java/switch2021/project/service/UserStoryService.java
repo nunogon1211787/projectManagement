@@ -3,6 +3,7 @@ package switch2021.project.service;
 import ch.qos.logback.classic.spi.IThrowableProxy;
 import org.aspectj.apache.bcel.classfile.Code;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.datamodel.UserStoryJpa;
 import switch2021.project.dto.IdDTO;
@@ -72,15 +73,11 @@ public class UserStoryService {
 
     }
 
-    public List<OutputUserStoryDTO> showAllUserStories() {
-
-        List<OutputUserStoryDTO> result = new ArrayList<>();
+    public CollectionModel<OutputUserStoryDTO> showAllUserStories() {
 
         List<UserStory> allUserStories = iUserStoryRepo.findAll();
 
-        allUserStories.forEach(us -> result.add(userStoryMapper.toDto(us)));
-
-        return result;
+        return userStoryMapper.toCollectionDto(allUserStories);
 
     }
 

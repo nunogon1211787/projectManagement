@@ -1,11 +1,19 @@
 package switch2021.project.mapper;
 
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Component;
+import switch2021.project.controller.TypologyController;
+import switch2021.project.controller.UserProfileController;
 import switch2021.project.dto.TypologyDTO;
 import switch2021.project.model.Typology.Typology;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class TypologyMapper {
@@ -21,7 +29,21 @@ public class TypologyMapper {
      */
     public TypologyDTO modelToDto(Typology typology) {
         String description = typology.getId_description().getDescription().getText();
-        return new TypologyDTO(description);
+
+        TypologyDTO result = new TypologyDTO(description);
+
+        //Add HATEOAS to OUTPUT DTOs
+
+        //Add self relation
+        result.add(linkTo(methodOn(TypologyController.class).findTypologyRequested(result.description)).withSelfRel());
+
+        //Add collection relation
+        result.add(linkTo(methodOn(TypologyController.class).findTypologyList()).withRel("Collection"));
+
+        //Add delete option
+        result.add(linkTo(methodOn(TypologyController.class).deleteTypology(result.description)).withRel("Delete"));
+
+        return result;
     }
 
     public List<TypologyDTO> modelToDto(List<Typology> typologyList) {
@@ -32,5 +54,19 @@ public class TypologyMapper {
             this.typologyDTOList.add(typoDTO);
         }
         return this.typologyDTOList;
+    }
+
+    public CollectionModel<TypologyDTO> toCollectionModel(List<Typology> typologies){
+
+        CollectionModel<TypologyDTO> result = CollectionModel.of(typologies.stream()
+                .map(typo -> modelToDto(typo))
+                .collect(Collectors.toList()));
+
+        //Add HATEOAS to OUTPUT DTOs
+
+        //Add self relation
+        result.add(linkTo(methodOn(TypologyController.class).findTypologyList()).withSelfRel());
+
+        return result;
     }
 }
