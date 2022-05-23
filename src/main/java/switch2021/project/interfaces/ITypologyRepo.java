@@ -1,23 +1,23 @@
 package switch2021.project.interfaces;
 
 import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.valueObject.TypologyID;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ITypologyRepo {
-
-//    List<Typology> getTypologyList();
 
     /**
      * The repository should be able to find an object using given Identity.
      */
-    Typology findTypologyById(String description);
+    Optional<Typology> findByTypologyId(TypologyID id);
 
 
     /**
      * Finds all objects from this repository.
      */
-    List<Typology> findAllTypology();
+    List<Typology> findAll();
 
 
     /**
@@ -29,10 +29,10 @@ public interface ITypologyRepo {
     /**
      * Check if the description already exists.
      */
-    boolean existsByTypologyId(String description);
+    boolean existsByTypologyId(TypologyID id);
 
     /**
      * Delete the object from this repository.
      */
-    void deleteTypology(String description);
+    boolean deleteByTypologyId(TypologyID id);
 }

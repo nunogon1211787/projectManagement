@@ -11,6 +11,9 @@ import switch2021.project.model.Resource.ResourceIDReeng;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Task.TaskReeng;
 import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.model.valueObject.UserStoryID;
+
+import java.util.Optional;
 
 @Service
     public class TaskService {
@@ -52,9 +55,9 @@ import switch2021.project.model.UserStory.UserStory;
         private TaskContainerID returnTaskContainerID(String taskContainerID){
             TaskContainerID z;
 
-            UserStory y = iUserStoryRepo.findByUserStoryId(taskContainerID);
-            if(y != null){
-                z = y.getUserStoryID();
+            Optional<UserStory> y = iUserStoryRepo.findByUserStoryId(new UserStoryID(taskContainerID));
+            if(y.isPresent()){
+                z = y.get().getUserStoryID();
             }else{
                 Sprint x = iSprintRepo.findBySprintID(taskContainerID);
                 if(x != null){
