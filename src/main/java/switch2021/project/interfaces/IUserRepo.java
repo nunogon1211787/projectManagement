@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface IUserRepo/* extends CrudRepository<Object, Long> */{
 
     User findByUserID(String email);//delete when not needed (must return an Optional<User>)
+
     Optional<User> findUserById(SystemUserID id);
 
     List<User> findAllSystemUsers();

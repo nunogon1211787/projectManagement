@@ -51,7 +51,7 @@ public class UserService {
     }
 
 
-    public Optional<OutputUserDTO> getUserById(String idDTO) {
+    public Optional<OutputUserDTO> findUserById(String idDTO) {
         SystemUserID userID = userIDFactory.createUserID(idDTO);
         Optional<User> opUser = userRepo.findUserById(userID);
         if (opUser.isPresent()) {
