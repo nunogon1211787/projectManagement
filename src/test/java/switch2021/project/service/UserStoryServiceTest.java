@@ -75,47 +75,47 @@ public class UserStoryServiceTest {
 //        assertEquals(createUserStoryDTO.title, andSaveUserStory.getUserStoryID().title);
 //    }
 
-    @Test
-    @DisplayName("Test to create and save user story - with success")
-    public void createAndSaveUserStoryWithSuccessGetPriority() {
+//    @Test
+//    @DisplayName("Test to create and save user story - with success")
+//    public void createAndSaveUserStoryWithSuccessGetPriority() {
+//
+//        //Arrange
+//        when(iUserStoryFactory.createUserStory(createUserStoryDTO)).thenReturn(newUserStory);
+//        when(iUserStoryRepo.save(newUserStory)).thenReturn(true);
+//        when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
+//        //Act
+//        OutputUserStoryDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
+//        //Assert
+//        assertEquals(createUserStoryDTO.getPriority(), andSaveUserStory.getPriority());
+//    }
+//
+//    @Test
+//    @DisplayName("Test to create and save user story - with success")
+//    public void createAndSaveUserStoryWithSuccessGetDescription() {
+//
+//        //Arrange
+//        when(iUserStoryFactory.createUserStory(createUserStoryDTO)).thenReturn(newUserStory);
+//        when(iUserStoryRepo.save(newUserStory)).thenReturn(true);
+//        when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
+//        //Act
+//        OutputUserStoryDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
+//        //Assert
+//        assertEquals(createUserStoryDTO.getDescription(), andSaveUserStory.getDescription());
+//    }
 
-        //Arrange
-        when(iUserStoryFactory.createUserStory(createUserStoryDTO)).thenReturn(newUserStory);
-        when(iUserStoryRepo.save(newUserStory)).thenReturn(true);
-        when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
-        //Act
-        OutputUserStoryDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
-        //Assert
-        assertEquals(createUserStoryDTO.getPriority(), andSaveUserStory.getPriority());
-    }
-
-    @Test
-    @DisplayName("Test to create and save user story - with success")
-    public void createAndSaveUserStoryWithSuccessGetDescription() {
-
-        //Arrange
-        when(iUserStoryFactory.createUserStory(createUserStoryDTO)).thenReturn(newUserStory);
-        when(iUserStoryRepo.save(newUserStory)).thenReturn(true);
-        when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
-        //Act
-        OutputUserStoryDTO andSaveUserStory = createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
-        //Assert
-        assertEquals(createUserStoryDTO.getDescription(), andSaveUserStory.getDescription());
-    }
-
-    @Test
-    @DisplayName("Test to create and save user story - with success")
-    public void createAndSaveUserStoryFailRepeated() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            when(iUserStoryFactory.createUserStory(createUserStoryDTO)).thenReturn(newUserStory);
-            when(iUserStoryRepo.save(newUserStory)).thenReturn(false);
-            when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
-            //Act
-           createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
-        });
-    }
+//    @Test
+//    @DisplayName("Test to create and save user story - with success")
+//    public void createAndSaveUserStoryFailRepeated() {
+//        //Assert
+//        assertThrows(IllegalArgumentException.class, () -> {
+//            //Arrange
+//            when(iUserStoryFactory.createUserStory(createUserStoryDTO)).thenReturn(newUserStory);
+//            when(iUserStoryRepo.save(newUserStory)).thenReturn(false);
+//            when(userStoryMapper.toDto(newUserStory)).thenReturn(outputUsDto);
+//            //Act
+//           createUserStoryService.createAndSaveUserStory(createUserStoryDTO);
+//        });
+//    }
 //
 //    @Test
 //    void showAUserStory() throws Exception {
