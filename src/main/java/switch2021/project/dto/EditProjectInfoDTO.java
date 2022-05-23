@@ -1,6 +1,8 @@
 package switch2021.project.dto;
 
 public class EditProjectInfoDTO {
+
+    public String projectCode;
     public String projectName;
     public String description;
     public String startDate;

@@ -51,8 +51,6 @@ public class ProjectFactory implements switch2021.project.factoryInterface.IProj
         ProjectReeng projectReeng = new ProjectReeng(name, description, businessSector, date, numberOfSprints,
                                                      sprintDuration, budget);
 
-        projectReeng.setProjectCode(new ProjectID(name.getText()));
-
         return projectReeng;
     }
 

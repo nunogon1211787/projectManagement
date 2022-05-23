@@ -15,7 +15,7 @@ public class ProjectReeng {
     /**
      * Class Attributes
      **/
-    private ProjectID projectCode;
+    private String projectCode;
     private Description projectName;
     private Description description;
     private Typology typology;
@@ -48,7 +48,7 @@ public class ProjectReeng {
      * **/
 
     public boolean hasCode(String code) {
-        return this.projectCode.getCode().equalsIgnoreCase(code);
+        return this.projectCode.equalsIgnoreCase(code);
     }
 
     public boolean isActiveInThisDate(LocalDate date) {
@@ -65,6 +65,8 @@ public class ProjectReeng {
 
         return result;
     }
+
+
 
     @Override
     public boolean equals(Object o) {

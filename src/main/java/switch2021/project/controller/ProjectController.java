@@ -14,6 +14,9 @@ import switch2021.project.service.CreateProjectService;
 import javax.validation.Valid;
 import java.util.List;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
 @RequestMapping("/projects")
 public class ProjectController {
@@ -24,36 +27,90 @@ public class ProjectController {
     ProjectRepository projRepo;
 
 
-    @GetMapping
-    public ResponseEntity<Object> showAllProjects(){
+//    @GetMapping
+//    public ResponseEntity<Object> showAllProjects(){
+//
+//        List<OutputProjectDTO> allProjectsDto = service.showAllProjects();
+//
+//        return new ResponseEntity<>(allProjectsDto, HttpStatus.OK);
+//    }
 
-        List<OutputProjectDTO> allProjectsDto = service.showAllProjects();
+
+    /**
+     * Find all projects
+     *
+     * @return List Projects
+     */
+
+    @GetMapping
+    public ResponseEntity<Object> showAllProjects() {
+        ErrorMessage message = new ErrorMessage();
+        List<OutputProjectDTO> allProjectsDto;
+
+        try {
+            allProjectsDto = service.showAllProjects();
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
 
         return new ResponseEntity<>(allProjectsDto, HttpStatus.OK);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity <?> createProject (@Valid @RequestBody ProjectDTO projectDTO) {
+    /**
+     * Find by id
+     *
+     * @return project
+     */
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> showProjectRequested(@PathVariable("id") String id) {
+        ErrorMessage message = new ErrorMessage();
+        OutputProjectDTO newProject;
 
         try {
+            newProject = service.showProject(id);
 
-            return new ResponseEntity<>(service.createAndSaveProject(projectDTO), HttpStatus.CREATED);
+            newProject.add(linkTo(methodOn(ProjectController.class).showProjectRequested(newProject.code)).withSelfRel());
+            newProject.add(linkTo(methodOn(ProjectController.class).showAllProjects()).withSelfRel());
+       //     newProject.add(linkTo(methodOn(ProjectController.class).updateProjectPartially(newProject.code )).withSelfRel());
 
-        } catch (Exception e){
-            ErrorMessage error = new ErrorMessage();
-            error.errorMessage = e.getMessage();
 
-            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
 
+        return new ResponseEntity<>(newProject, HttpStatus.OK);
     }
 
+
+    @PostMapping
+    public ResponseEntity<Object> createProject( @RequestBody ProjectDTO projectDTO) {
+        ErrorMessage message = new ErrorMessage();
+        OutputProjectDTO newProject;
+
+        try {
+            newProject = service.createAndSaveProject(projectDTO);
+
+            newProject.add(linkTo(methodOn(ProjectController.class).showProjectRequested(newProject.code)).withSelfRel());
+            newProject.add(linkTo(methodOn(ProjectController.class).showAllProjects()).withSelfRel());
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(newProject, HttpStatus.CREATED);
+    }
+
+
     @PatchMapping("/{id}")
-    public ResponseEntity<Object> updateProjectPartially(@PathVariable("id") String idDTO,
+    public ResponseEntity<Object> updateProjectPartially(@PathVariable("id") String id,
                                                          @RequestBody EditProjectInfoDTO editProjectInfoDTO) {
         OutputProjectDTO outputProjectDTO;
         try {
-            outputProjectDTO = service.updateProjectPartially(idDTO, editProjectInfoDTO);
+            outputProjectDTO = service.updateProjectPartially(id, editProjectInfoDTO);
             return new ResponseEntity<>(outputProjectDTO, HttpStatus.OK);
         } catch (Exception error) {
             ErrorMessage message = new ErrorMessage();
@@ -61,4 +118,21 @@ public class ProjectController {
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
     }
+
+
+//    @PostMapping("/create")
+//    public ResponseEntity<?> createProject(@Valid @RequestBody ProjectDTO projectDTO) {
+//
+//        try {
+//
+//            return new ResponseEntity<>(service.createAndSaveProject(projectDTO), HttpStatus.CREATED);
+//
+//        } catch (Exception e) {
+//            ErrorMessage error = new ErrorMessage();
+//            error.errorMessage = e.getMessage();
+//
+//            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+//        }
+//
+//    }
 }

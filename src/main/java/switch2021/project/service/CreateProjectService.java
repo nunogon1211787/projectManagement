@@ -51,18 +51,25 @@ public class CreateProjectService {
     public CreateProjectService() {
     }
 
-    public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) {
+    public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) throws Exception {
 
         ProjectReeng newProject = iProjectFactory.createProject(projDTO);
 
-        ProjectReeng savedProject = projRepo.save(newProject);
+        Optional<ProjectReeng> savedProject = Optional.ofNullable(projRepo.save(newProject));
 
-        return projMapper.model2Dto(savedProject);
+        OutputProjectDTO projectDTO;
+
+        if (savedProject.isPresent()) {
+            projectDTO = projMapper.model2Dto(savedProject.get());
+        } else {
+            throw new Exception("Project already exist.");
+        }
+        return projectDTO;
     }
 
     public OutputProjectDTO updateProjectPartially(String idDTO, EditProjectInfoDTO editProjectInfoDTO) {
         ProjectID projectID = projIDFactory.create(idDTO);
-        Optional<ProjectReeng> opProject = projRepo.findById(projectID);
+        Optional<ProjectReeng> opProject = projRepo.findById(projectID.getCode());
         if (opProject.isPresent()) {
             ProjectReeng proj = opProject.get();
 
@@ -95,12 +102,12 @@ public class CreateProjectService {
             return null;
     }
 
-    public List<OutputProjectDTO> showAllProjects() {
-
-        List<ProjectReeng> projects = projRepo.findAll();
-
-        return createProjectDTOList(projects);
-    }
+//    public List<OutputProjectDTO> showAllProjects() {
+//
+//        List<ProjectReeng> projects = projRepo.findAll();
+//
+//        return createProjectDTOList(projects);
+//    }
 
     private List<OutputProjectDTO> createProjectDTOList(List<ProjectReeng> projects) {
 
@@ -118,29 +125,48 @@ public class CreateProjectService {
 
     }
 
-    public List<OutputProjectDTO> showCurrentProjectsByUser(IdDTO dto, DateDTO dateDto){
+    public List<OutputProjectDTO> showAllProjects() {
+
+        List<ProjectReeng> projects = projRepo.findAll();
+
+        return createProjectDTOList(projects);
+    }
+
+    public OutputProjectDTO showProject(String id) throws Exception {
+
+        Optional<ProjectReeng> foundProject = projRepo.findById(id);
+
+        if(foundProject.isEmpty()){
+            throw new Exception("Project does not exist");
+        }
+
+        return projMapper.model2Dto(foundProject.get());
+    }
+
+    public List<OutputProjectDTO> showCurrentProjectsByUser(IdDTO dto, DateDTO dateDto) {
 
         List<OutputProjectDTO> projectsDto = new ArrayList<>();
 
-        if(userRepo.existsByEmail(dto.id)){
+        if (userRepo.existsByEmail(dto.id)) {
 
             List<ResourceReeng> userResources = resRepo.findAllByUser(dto.id);
 
-            List<ResourceReeng> currentUserResources = resService.currentResourcesByDate(userResources, LocalDate.parse(dateDto.date));
+            List<ResourceReeng> currentUserResources = resService.currentResourcesByDate(userResources,
+                    LocalDate.parse(dateDto.date));
 
             List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
 
             List<ProjectReeng> projects = new ArrayList<>();
 
-            for(ProjectID projId : resourceProjects){
+            for (ProjectID projId : resourceProjects) {
 
-                ProjectReeng proj = projRepo.findById(projId).get();
+                ProjectReeng proj = projRepo.findById(projId.getCode()).get();
 
                 projects.add(proj);
 
             }
 
-            for(ProjectReeng proj : projects){
+            for (ProjectReeng proj : projects) {
 
                 OutputProjectDTO projDto = projMapper.model2Dto(proj);
 

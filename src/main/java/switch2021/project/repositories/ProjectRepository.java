@@ -25,7 +25,6 @@ public class ProjectRepository implements IProjectRepo {
 
 
     public ProjectReeng save(ProjectReeng project) {
-        project.setProjectCode(new ProjectID("2"));
         ProjectJpa projectJpa = projectJpaAssembler.toJpaData(project);
 
         ProjectJpa savedProj = projectJpaRepository.save(projectJpa);
@@ -34,7 +33,7 @@ public class ProjectRepository implements IProjectRepo {
     }
 
     @Override
-    public Optional<ProjectReeng> findById(ProjectID id) {
+    public Optional<ProjectReeng> findById(String id) {
         Optional<ProjectJpa> opProjJpa = projectJpaRepository.findById(id);
 
         if(opProjJpa.isPresent()) {
@@ -74,7 +73,7 @@ public class ProjectRepository implements IProjectRepo {
 
     @Transactional
     public boolean existsById(ProjectID id) {
-        return projectJpaRepository.existsById(id);
+        return projectJpaRepository.existsById(id.getCode());
     }
 
 }

@@ -54,7 +54,7 @@ public class CreateResourceInAProjectService {
         List<ResourceReeng> projectTeamList = iRepoResource.findAllByProject(dto.projectId);
         List<ResourceReeng> resourceProjectsList = iRepoResource.findAllByUser(dto.systemUserID);
         ProjectID projectID = projIDFactory.create(dto.projectId);
-        ProjectReeng project = iRepoProject.findById(projectID).get();
+        ProjectReeng project = iRepoProject.findById(projectID.getCode()).get();
 
         boolean systemUserExists = iRepoResource.existsById(dto.systemUserID);
         // ------------- new

@@ -10,7 +10,7 @@ public class ProjectMapper {
 
     public OutputProjectDTO model2Dto(ProjectReeng newProject) {
 
-        String code = newProject.getProjectCode().getCode();
+        String code = newProject.getProjectCode();
         String projectName = newProject.getProjectName().getText();
         String description = newProject.getDescription().getText();
         String businessSector = newProject.getBusinessSector().getDescription().getText();

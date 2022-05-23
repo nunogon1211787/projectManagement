@@ -3,10 +3,11 @@ package switch2021.project.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
 @NoArgsConstructor
 @Getter
-public class OutputProjectDTO {
+public class OutputProjectDTO extends RepresentationModel<OutputProjectDTO> {
 
     public String code;
     public String projectName;

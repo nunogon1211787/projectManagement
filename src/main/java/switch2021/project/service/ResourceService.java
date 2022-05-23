@@ -55,7 +55,7 @@ public class ResourceService {
         List<ResourceReeng> projectTeamList = resRepo.findAllByProject(dto.projectId);
         List<ResourceReeng> resourceProjectsList = resRepo.findAllByUser(dto.systemUserID);
         ProjectID projID = projIDFactory.create(dto.projectId);
-        ProjectReeng project = projRepo.findById(projID).get();
+        ProjectReeng project = projRepo.findById(projID.getCode()).get();
 
         boolean systemUserExists = userRepo.existsByEmail(dto.systemUserID);
         // ------------- new
