@@ -3,7 +3,6 @@ package switch2021.project.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import switch2021.project.dto.*;
 import switch2021.project.factoryInterface.IUserFactory;
 import switch2021.project.factoryInterface.IUserIDFactory;
@@ -12,7 +11,6 @@ import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.mapper.UserMapper;
 import switch2021.project.model.SystemUser.User;
-import switch2021.project.model.valueObject.Email;
 import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.model.valueObject.UserProfileID;
 
