@@ -1,12 +1,11 @@
 package switch2021.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.*;
-import switch2021.project.repositories.jpa.UserJpaRepository;
-import switch2021.project.datamodel.UserJpa;
 import switch2021.project.service.CreateProjectService;
 import switch2021.project.service.UserService;
 import java.util.List;
@@ -27,22 +26,18 @@ public class UserController {
     private UserService userService;
     @Autowired
     private CreateProjectService projectService;
-    @Autowired
-    private UserJpaRepository sURepository;
 
 
     /**
      * Register an User (US001)
      */
 
-    @PostMapping("/jpa")
+    @PostMapping
     public ResponseEntity<Object> registerUser(@RequestBody NewUserInfoDTO newUserInfoDTO) {
         ErrorMessage message = new ErrorMessage();
         OutputUserDTO outputUserDTO;
         try {
-            outputUserDTO = userService.createAndSaveUserJPA(newUserInfoDTO);
-
-            outputUserDTO.add(linkTo(methodOn(UserController.class).getUser(outputUserDTO.email)).withSelfRel());
+            outputUserDTO = userService.createAndSaveUser(newUserInfoDTO);
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
@@ -64,7 +59,7 @@ public class UserController {
         OutputUserDTO user;
 
         try {
-            user = userService.findSystemUserByEmail(id);
+            user = userService.findUserById(id);
 
             user.add(linkTo(methodOn(UserController.class).getUser(user.email)).withSelfRel());
 
@@ -74,6 +69,26 @@ public class UserController {
         }
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
+    /**
+     * Show All Users in the System
+     */
+
+    @GetMapping
+    public ResponseEntity<Object> showAllUsers() {
+
+        ErrorMessage message = new ErrorMessage();
+        CollectionModel<OutputUserDTO> allUsersDto;
+
+        try {
+            allUsersDto = CollectionModel.of(userService.findAllUsers());
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(allUsersDto, HttpStatus.OK);
+    }
+
 
     /**
      * Update User Data (UserName, Function, Photo) (US010)
@@ -97,18 +112,31 @@ public class UserController {
         }
     }
 
+    /**
+     * Delete User
+     */
 
+    @DeleteMapping ("/{id}")
+    public ResponseEntity<Object> deleteUser(@PathVariable String id) {
 
-    @PostMapping("users")
-    public UserJpa addUser(@RequestBody UserJpa a) {
-        return this.sURepository.save(a);
+        ErrorMessage msg = new ErrorMessage();
+
+        try {
+            userService.deleteUser(id);
+            msg.errorMessage = "User was deleted successfully!";
+
+            msg.add(linkTo(methodOn(UserController.class).showAllUsers()).withRel("Collection"));
+
+        } catch (Exception exception) {
+            msg.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 
-    @GetMapping("users")
-    public List<UserJpa> getUsers() {
-        return this.sURepository.findAll();
-    }
-
+    /**
+     * Show All User, By some Parameters
+     */
 
     //@GetMapping
     public ResponseEntity<Object> searchUsersByTypedParams(@RequestParam SearchUserDTO inDto){
@@ -137,20 +165,8 @@ public class UserController {
         return new ResponseEntity<>(projectsDto, HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<Object> showAllUsers() {
-        List<OutputUserDTO> allUsersDto;
 
-        try {
-            allUsersDto = userService.findAllUsers();
-        } catch (Exception exception) {
-            ErrorMessage message = new ErrorMessage();
-            message.errorMessage = exception.getMessage();
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(allUsersDto, HttpStatus.OK);
-    }
-//~
+
 //
 //    Método Nuno -> DUPLICADO!!!
 

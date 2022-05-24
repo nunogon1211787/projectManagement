@@ -11,7 +11,7 @@ public class UserJpaAssembler {
 
     public UserJpa toData(User user) {
 
-        String email = user.getSystemUserId().getEmail().getEmailText();
+        SystemUserID email = user.getSystemUserId();
         String userName = user.getUserName().getText();
         String photo = user.getPhoto().getExtension();
         String function = user.getFunction().getText();
@@ -26,7 +26,7 @@ public class UserJpaAssembler {
 
     public User toDomain (UserJpa userJpa) {
 
-        SystemUserID systemUserID = new SystemUserID(new Email(userJpa.getEmail()));
+        SystemUserID systemUserID = userJpa.getEmail();
         Name userName = new Name(userJpa.getUserName());
         Photo photo = new Photo(userJpa.getPhoto());
         Function function = new Function(userJpa.getFunction());

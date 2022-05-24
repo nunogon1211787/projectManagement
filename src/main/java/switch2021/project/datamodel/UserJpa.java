@@ -2,6 +2,7 @@ package switch2021.project.datamodel;
 
 import lombok.*;
 import switch2021.project.model.valueObject.Request;
+import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.model.valueObject.UserProfileID;
 import javax.persistence.*;
 import java.util.List;
@@ -15,8 +16,8 @@ import java.util.List;
 @Table(name = "systemUsers")
 public class UserJpa {
 
-    @Id
-    private String email;
+    @EmbeddedId
+    private SystemUserID email;
     private String userName;
     private String function;
     private String photo;
