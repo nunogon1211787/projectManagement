@@ -60,7 +60,7 @@ public class CreateResourceInAProjectService {
         // ------------- new
 
         // ------------- new
-        boolean projectExists = iRepoProject.existsById(projectID);
+        boolean projectExists = iRepoProject.existsById(projectID.getCode());
         boolean isValidToProject = project.isActiveInThisDate(startDate) && project.isActiveInThisDate(endDate);
         boolean isValidToCreate = manageResourcesService.resourceCreationValidation(projRole, percAllo, startDate, endDate, projectTeamList, resourceProjectsList);
 

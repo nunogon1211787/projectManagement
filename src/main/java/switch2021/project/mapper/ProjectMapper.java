@@ -7,6 +7,7 @@ import switch2021.project.dto.EditProjectInfoDTO;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.model.Project.ProjectReeng;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,10 @@ public class ProjectMapper {
 
         OutputProjectDTO projDto = new OutputProjectDTO(code, projectName, description, businessSector, startDate,
                 numberOfSprints, budget, status, sprintDuration);
+
+        if(newProject.getEndDate() != null){
+            projDto.endDate = newProject.getEndDate().toString();
+        }
 
         if (newProject.getTypology() != null) {
             projDto.typo = newProject.getTypology().getId_description().getDescription().getText();

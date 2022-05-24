@@ -2,6 +2,7 @@ package switch2021.project.datamodel;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import switch2021.project.controller.ProjectController;
 import switch2021.project.model.Project.ProjectIDGeneratorStrategy;
 import switch2021.project.model.Project.ProjectStatusEnum;
 import switch2021.project.model.Typology.Typology;
@@ -40,7 +41,6 @@ public class ProjectJpa {
     private String startDate;
     private int numberOfSprints;
     private int sprintDuration;
-    //@Column(name = "Budget", nullable = false)
     private double budget;
     private String endDate;
     private String typology;
@@ -48,31 +48,31 @@ public class ProjectJpa {
     private String status;
 
 
-    public ProjectJpa(Description projectName,
-                      Description description,
-                      BusinessSector businessSector,
-                      LocalDate startDate,
-                      NumberOfSprints numberOfSprints,
-                      SprintDuration sprintDuration,
-                      Budget budget
-//                      LocalDate endDate
+//    public ProjectJpa(Description projectName,
+//                      Description description,
+//                      BusinessSector businessSector,
+//                      LocalDate startDate,
+//                      NumberOfSprints numberOfSprints,
+//                      SprintDuration sprintDuration,
+//                      Budget budget,
+//                      LocalDate endDate,
 //                      Typology typology,
 //                      Customer customer
-    ) {
-
-
-        this.name = projectName.getText();
-        this.description = description.getText();
-        this.businessSector = businessSector.getDescription().getText();
-        this.startDate = startDate.toString();
-        this.numberOfSprints = numberOfSprints.getNumberOfSprintsVO();
-        this.sprintDuration = sprintDuration.getSprintDurationDays();
-        this.budget = budget.getBudgetVO();
+//    ) {
+//
+//
+//        this.name = projectName.getText();
+//        this.description = description.getText();
+//        this.businessSector = businessSector.getDescription().getText();
+//        this.startDate = startDate.toString();
+//        this.numberOfSprints = numberOfSprints.getNumberOfSprintsVO();
+//        this.sprintDuration = sprintDuration.getSprintDurationDays();
+//        this.budget = budget.getBudgetVO();
 //        this.endDate = endDate.toString();
 //        this.typology = typology.getId_description().getDescription().getText();
 //        this.customer = customer.getCustomerName().getText();
-        this.status = ProjectStatusEnum.PLANNED.toString();
+//        this.status = ProjectStatusEnum.PLANNED.toString();
 
-    }
+//    }
 
 }

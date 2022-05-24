@@ -61,7 +61,7 @@ public class ResourceService {
         // ------------- new
 
         // ------------- new
-        boolean projectExists = projRepo.existsById(projID);
+        boolean projectExists = projRepo.existsById(projID.getCode());
         boolean isValidToProject = project.isActiveInThisDate(startDate) && project.isActiveInThisDate(endDate);
         boolean isValidToCreate = manageResourcesService.resourceCreationValidation(projRole, percAllo, startDate,
                 endDate, projectTeamList, resourceProjectsList);
@@ -88,7 +88,7 @@ public class ResourceService {
         ProjectID projectID = new ProjectID(projectId);
 //        // ------------- new ------------
 
-        if (projRepo.existsById(projectID)){
+        if (projRepo.existsById(projectID.getCode())){
 
             List<ResourceReeng> resources = resRepo.findAllByProject(projectId);
 

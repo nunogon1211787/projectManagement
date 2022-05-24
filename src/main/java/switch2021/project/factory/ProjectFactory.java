@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.factoryInterface.*;
 import switch2021.project.model.Project.ProjectReeng;
+import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.*;
 
 import java.time.LocalDate;
@@ -31,7 +32,6 @@ public class ProjectFactory implements switch2021.project.factoryInterface.IProj
     private IBudgetFactory budgetF;
 
 
-
     @Override
     public ProjectReeng createProject(ProjectDTO projectDTO) {
 
@@ -48,7 +48,18 @@ public class ProjectFactory implements switch2021.project.factoryInterface.IProj
         }
 
         ProjectReeng projectReeng = new ProjectReeng(name, description, businessSector, date, numberOfSprints,
-                                                     sprintDuration, budget);
+                sprintDuration, budget);
+
+        if (projectDTO.getCustomer() != null) {
+            Customer cust = new Customer();
+            cust.setCustomerName(new Description(projectDTO.getCustomer()));
+            projectReeng.setCustomer(cust);
+        }
+
+        if (projectDTO.getTypology() != null)
+            projectReeng.setTypology(new Typology(new TypologyID(new Description(projectDTO.getTypology()))));
+        if (projectDTO.getEndDate() != null)
+            projectReeng.setEndDate(LocalDate.parse(projectDTO.getEndDate()));
 
         return projectReeng;
     }

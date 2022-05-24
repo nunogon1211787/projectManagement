@@ -1,6 +1,8 @@
 package switch2021.project.model.Project;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import switch2021.project.model.Typology.Typology;
@@ -10,6 +12,8 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProjectReeng {
 
     /**

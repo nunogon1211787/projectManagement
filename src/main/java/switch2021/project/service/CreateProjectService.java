@@ -1,5 +1,6 @@
 package switch2021.project.service;
 
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import switch2021.project.model.Project.ProjectReeng;
 import switch2021.project.model.Project.ProjectStatusEnum;
 import switch2021.project.model.Resource.ManageResourcesService;
 import switch2021.project.model.Resource.ResourceReeng;
+import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.repositories.ProjectRepository;
 
@@ -96,6 +98,15 @@ public class CreateProjectService {
             }
             if (!editProjectInfoDTO.sprintDuration.isEmpty()) {
                 proj.setSprintDuration(new SprintDuration(Integer.parseInt(editProjectInfoDTO.sprintDuration)));
+            }
+            if(!editProjectInfoDTO.customer.isEmpty()){
+                proj.setCustomer(new Customer(editProjectInfoDTO.customer, "email@email.pt", 123456789));//TODO change here with new properties
+            }
+            if(!editProjectInfoDTO.endDate.isEmpty()){
+                proj.setEndDate(LocalDate.parse(editProjectInfoDTO.endDate));
+            }
+            if(!editProjectInfoDTO.typology.isEmpty()){
+                proj.setTypology(new Typology(new TypologyID(new Description(editProjectInfoDTO.description))));
             }
             return projMapper.model2Dto(proj);
         } else

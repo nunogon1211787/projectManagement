@@ -34,10 +34,8 @@ public class ProjectRepository implements IProjectRepo {
     public Optional<ProjectReeng> save(ProjectReeng newProject) {
         ProjectJpa projectJpa = projectJpaAssembler.toJpaData(newProject);
 
-
         ProjectJpa savedProj = projectJpaRepository.save(projectJpa);
         return Optional.of(projectJpaAssembler.toDomain(savedProj));
-
 
     }
 

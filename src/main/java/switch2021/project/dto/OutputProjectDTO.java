@@ -19,6 +19,7 @@ public class OutputProjectDTO extends RepresentationModel<OutputProjectDTO> {
     public String budget;
     public String status;
     public String startDate;
+    public String endDate;
     public String sprintDuration;
 
     public OutputProjectDTO(String code,String projectName,String description,String businessSector,String startDate,

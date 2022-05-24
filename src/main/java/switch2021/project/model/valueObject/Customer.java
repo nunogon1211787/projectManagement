@@ -5,10 +5,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 
 @Getter
 @Setter
-@Embeddable
+//@Embeddable
 @NoArgsConstructor
 public class Customer {
 
