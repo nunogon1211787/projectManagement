@@ -1,6 +1,13 @@
 package switch2021.project.dto;
 
-public class NewUserInfoDTO {
+import org.springframework.hateoas.RepresentationModel;
+
+public class NewUserInfoDTO extends RepresentationModel<NewUserInfoDTO> {
+
+    /**
+     * Attributes
+     */
+
     public String userName;
     public String email;
     public String function;

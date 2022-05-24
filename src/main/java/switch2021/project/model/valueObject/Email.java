@@ -12,10 +12,10 @@ public class Email implements ValueObject<Email> {
      * Attributes
      */
     private String emailText;
-    private int MAX_LENGTH = 50;
-    private int MIN_LENGTH = 3;
-    private int MAX_LENGTH_LAST_PART = 3;
-    private int MIN_LENGTH_LAST_PART = 2;
+    private static final int MAX_LENGTH = 50;
+    private static final int MIN_LENGTH = 3;
+    private static final int MAX_LENGTH_LAST_PART = 3;
+    private static final int MIN_LENGTH_LAST_PART = 2;
 
 
     /**

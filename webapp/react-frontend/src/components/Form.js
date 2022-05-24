@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import SaveProject from "./ProjectPostRequest";
 
 class Form extends Component {
     constructor(props) {
@@ -20,13 +21,6 @@ class Form extends Component {
 
         this.setState({
             [name] : value,        });
-    }
-
-    onFormSubmit = (event) => {
-        event.preventDefault();
-
-        this.props.handleSubmit(this.state);
-        this.setState(this.initialState);
     }
 
     render() {
@@ -62,7 +56,7 @@ class Form extends Component {
                     id="photo"
                     value={photo}
                     onChange={this.handleChange}/>
-                <input type="button" value="Submit" onClick={this.onFormSubmit} />
+                <input type="button" value="Submit" onClick={SaveProject} />
 
             </form>
         );

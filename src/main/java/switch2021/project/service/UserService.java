@@ -1,8 +1,8 @@
 package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import switch2021.project.dto.*;
 import switch2021.project.factoryInterface.IUserFactory;
 import switch2021.project.factoryInterface.IUserIDFactory;
@@ -21,6 +21,10 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+    /**
+     * Attributes
+     */
+
     @Autowired
     private IUserRepo userRepo;
     @Autowired
@@ -34,41 +38,13 @@ public class UserService {
     @Autowired
     private IUserProfileIDFactory profileIDFactory;
 
-    public List<OutputUserDTO> findAllUsers() {
-        List<User> usersList = userRepo.findAllSystemUsers();
 
-        if (usersList.isEmpty()) {
-            throw new NullPointerException("Does not exists any User at this moment!");
-        }
-        return userMapper.usersToDto(usersList);
-    }
+    /**
+     * Register User
+     */
 
-    public OutputUserDTO createAndSaveUser(NewUserInfoDTO infoDTO) {
-        User newUser = userFactory.createUser(infoDTO);
-        if (!userRepo.save(newUser))
-            throw new IllegalArgumentException("email already exists");
-        return userMapper.toDto(newUser);
-    }
+    public OutputUserDTO createAndSaveUser (NewUserInfoDTO infoDTO) throws Exception{
 
-
-    public Optional<OutputUserDTO> getUserById(String idDTO) {
-        SystemUserID userID = userIDFactory.createUserID(idDTO);
-        Optional<User> opUser = userRepo.findUserById(userID);
-        if (opUser.isPresent()) {
-            User user = opUser.get();
-            OutputUserDTO outUserDTO = this.userMapper.toDto(user);
-            return Optional.of(outUserDTO);
-        }
-        return Optional.empty();
-    }
-
-    public OutputUserDTO findSystemUserByEmail (String email) {
-
-        User newUser = userRepo.findByUserID(email);
-        return  this.userMapper.toDto(newUser);
-    }
-
-    public OutputUserDTO createAndSaveUserJPA (NewUserInfoDTO infoDTO) throws Exception{
         User user = userFactory.createUser(infoDTO);
 
         Optional<User> userSaved = userRepo.saveReeng(user);
@@ -83,6 +59,39 @@ public class UserService {
 
         return outputUserDTO;
     }
+
+    /**
+     * Find All Users
+     */
+
+    public CollectionModel<OutputUserDTO> findAllUsers() {
+
+        List<User> usersList = userRepo.findAllSystemUsers();
+
+        return userMapper.toCollectionDTO(usersList);
+    }
+
+
+    /**
+     * Find User, by ID
+     */
+
+    public OutputUserDTO findUserById(String idDTO) throws Exception{
+
+        SystemUserID userID = userIDFactory.createUserID(idDTO);
+
+        Optional<User> opUser = userRepo.findUserById(userID);
+
+        if (opUser.isEmpty()) {
+            throw new Exception("User does not exists!");
+        }
+        return userMapper.toDto(opUser.get());
+    }
+
+
+    /**
+     * Update Personal Data and Change Password
+     */
 
     public OutputUserDTO updatePersonalData(IdDTO idDTO, UpdateDataDTO updateDataDTO) {
         SystemUserID userID = userIDFactory.createUserID(idDTO.id);
@@ -100,6 +109,10 @@ public class UserService {
         } else
             return null;
     }
+
+    /**
+     * Search User By Parameters
+     */
 
     public List<OutputUserDTO> searchUsersByParams(SearchUserDTO inDto) {
 
@@ -138,4 +151,19 @@ public class UserService {
 
         return usersFoundedDto;
     }
+
+    /**
+     * Delete User
+     */
+
+    public void deleteUser (String id) throws Exception {
+
+        SystemUserID systemUserID = userIDFactory.createUserID(id);
+
+        if(!userRepo.deleteUser(systemUserID)) {
+            throw new IllegalArgumentException("User does not exists!");
+        }
+
+    }
+
 }
