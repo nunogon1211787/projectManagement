@@ -48,7 +48,7 @@ public class UserRepository implements IUserRepo {
     }
 
     @Override
-    public List<User> findAllSystemUsers() {
+    public List<User> findAll() {
 
         List<UserJpa> userJpaList = userJpaRepository.findAll();
         List<User> userList = new ArrayList<>();
@@ -97,7 +97,7 @@ public class UserRepository implements IUserRepo {
 
 
     @Override
-    public boolean deleteUser (SystemUserID systemUserID) {
+    public boolean delete(SystemUserID systemUserID) {
 
         if(userJpaRepository.existsById(systemUserID)) {
             userJpaRepository.deleteById(systemUserID);

@@ -11,7 +11,7 @@ public interface IUserRepo{
 
     Optional<User> findUserById(SystemUserID id);
 
-    List<User> findAllSystemUsers();
+    List<User> findAll();
 
     boolean save(User user); //Delete when nor needed (must return an Optional)
 
@@ -27,5 +27,5 @@ public interface IUserRepo{
 
     Optional<User> saveReeng(User newUser);
 
-    boolean deleteUser(SystemUserID systemUserID);
+    boolean delete(SystemUserID systemUserID);
 }

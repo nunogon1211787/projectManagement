@@ -66,7 +66,7 @@ public class UserService {
 
     public CollectionModel<OutputUserDTO> findAllUsers() {
 
-        List<User> usersList = userRepo.findAllSystemUsers();
+        List<User> usersList = userRepo.findAll();
 
         return userMapper.toCollectionDTO(usersList);
     }
@@ -93,8 +93,8 @@ public class UserService {
      * Update Personal Data and Change Password
      */
 
-    public OutputUserDTO updatePersonalData(IdDTO idDTO, UpdateDataDTO updateDataDTO) {
-        SystemUserID userID = userIDFactory.createUserID(idDTO.id);
+    public OutputUserDTO updatePersonalData(String idDTO, UpdateDataDTO updateDataDTO) {
+        SystemUserID userID = userIDFactory.createUserID(idDTO);
         Optional<User> opUser = userRepo.findUserById(userID);
         if (opUser.isPresent()) {
             User user = opUser.get();
@@ -160,7 +160,7 @@ public class UserService {
 
         SystemUserID systemUserID = userIDFactory.createUserID(id);
 
-        if(!userRepo.deleteUser(systemUserID)) {
+        if(!userRepo.delete(systemUserID)) {
             throw new IllegalArgumentException("User does not exists!");
         }
 
