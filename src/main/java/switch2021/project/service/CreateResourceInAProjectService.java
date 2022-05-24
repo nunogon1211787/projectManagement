@@ -54,13 +54,13 @@ public class CreateResourceInAProjectService {
         List<ResourceReeng> projectTeamList = iRepoResource.findAllByProject(dto.projectId);
         List<ResourceReeng> resourceProjectsList = iRepoResource.findAllByUser(dto.systemUserID);
         ProjectID projectID = projIDFactory.create(dto.projectId);
-        ProjectReeng project = iRepoProject.findById(projectID).get();
+        ProjectReeng project = iRepoProject.findById(projectID.getCode()).get();
 
         boolean systemUserExists = iRepoResource.existsById(dto.systemUserID);
         // ------------- new
 
         // ------------- new
-        boolean projectExists = iRepoProject.existsById(projectID);
+        boolean projectExists = iRepoProject.existsById(projectID.getCode());
         boolean isValidToProject = project.isActiveInThisDate(startDate) && project.isActiveInThisDate(endDate);
         boolean isValidToCreate = manageResourcesService.resourceCreationValidation(projRole, percAllo, startDate, endDate, projectTeamList, resourceProjectsList);
 

@@ -1,9 +1,9 @@
 import TodosPage from './pages/TodosPage';
-import FormTo from "./components/FormTo";
 import {Component} from "react";
 import "./App.css";
 import Footer from "./components/Footer";
 import HeaderIndex from "./components/HeaderIndex";
+import ProjectPostRequest from "./components/ProjectPostRequest";
 
 
 class App extends Component {
@@ -22,7 +22,7 @@ class App extends Component {
                 </div>
                 <div>
                     <h3>Add New</h3>
-                    <FormTo />
+                    <ProjectPostRequest/>
                 </div>
                 <Footer />
             </div>
