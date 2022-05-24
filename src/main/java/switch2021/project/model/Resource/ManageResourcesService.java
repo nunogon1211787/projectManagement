@@ -1,6 +1,7 @@
 package switch2021.project.model.Resource;
 
 import org.springframework.stereotype.Component;
+import switch2021.project.dto.CreateResourceDTO;
 import switch2021.project.model.valueObject.PercentageOfAllocation;
 import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.model.valueObject.ProjectRoleReeng;
@@ -25,33 +26,27 @@ public class ManageResourcesService {
         return currentResources;
     }
 
-    public boolean resourceCreationValidation(ProjectRoleReeng projectRole, PercentageOfAllocation allocation, LocalDate startDate, LocalDate endDate, List<ResourceReeng> projectTeam, List<ResourceReeng> resourceProjectsList) {
-        boolean msg = false;
-        if (validateAllocation(resourceProjectsList, allocation, startDate, endDate) && validateProjectRole(projectTeam, projectRole, startDate, endDate)){
-            msg = true;
-    }
-    return msg;
-    }
 
-    public boolean validateAllocation(List<ResourceReeng> resourceProjectsList, PercentageOfAllocation allocation, LocalDate startDate, LocalDate endDate) {
+    public boolean validateAllocation(List<ResourceReeng> resourceProjectsList, CreateResourceDTO dto) {
         double sum = 0;
         boolean msg = false;
 
         for (ResourceReeng res : resourceProjectsList) {
-            if (res.isActiveToThisDate(startDate) && res.isActiveToThisDate(endDate)) {
+            if (res.isActiveToThisDate(LocalDate.parse(dto.startDate)) && res.isActiveToThisDate(LocalDate.parse(dto.endDate))) {
                 sum = sum + res.getAllocation().getPercentage();
             }
         }
-        if ((sum + allocation.getPercentage()) <= 1) {
+        if ((sum + dto.percentageOfAllocation) <= 1) {
             msg = true;
         }
         return msg;
     }
-    public boolean validateProjectRole(List<ResourceReeng> projectTeamList, ProjectRoleReeng projectRole, LocalDate startDate, LocalDate endDate) {
+    public boolean validateProjectRole(List<ResourceReeng> projectTeamList, CreateResourceDTO dto) {
         boolean msg = false;
 
         for (ResourceReeng res : projectTeamList) {
-            if (projectRole.equals(ProjectRoleReeng.TeamMember) || (!projectRole.equals(ProjectRoleReeng.TeamMember) && res.isActiveToThisDate(startDate) && res.isActiveToThisDate(endDate))) {
+            if (ProjectRoleReeng.valueOf(dto.projectRole).equals(ProjectRoleReeng.TeamMember) ||
+                    !(res.isActiveToThisDate(LocalDate.parse(dto.startDate)) && res.isActiveToThisDate(LocalDate.parse(dto.endDate)))) {
                     msg = true;
                 }
             }

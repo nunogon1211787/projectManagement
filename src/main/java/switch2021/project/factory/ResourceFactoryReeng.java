@@ -16,20 +16,12 @@ public class ResourceFactoryReeng implements ResourceFactoryInterfaceReeng {
 
         SystemUserID sysUserId = new SystemUserID(new Email(resourceDTO.systemUserID));
         ProjectID projectID = new ProjectID(resourceDTO.projectId);
-        LocalDate startDate = LocalDate.of(resourceDTO.yearStartDate, resourceDTO.monthStartDate, resourceDTO.dayStartDate);
-        LocalDate endDate = LocalDate.of(resourceDTO.yearEndDate, resourceDTO.monthEndDate, resourceDTO.dayEndDate);
-        ResourceIDReeng resourceId = new ResourceIDReeng(sysUserId,projectID, startDate);
+        ResourceIDReeng resourceId = new ResourceIDReeng(sysUserId,projectID, LocalDate.parse(resourceDTO.startDate));
         ProjectRoleReeng projRole = ProjectRoleReeng.valueOf(resourceDTO.projectRole);
         CostPerHour coPeHo = new CostPerHour(resourceDTO.costPerHour);
         PercentageOfAllocation percOfAll = new PercentageOfAllocation(resourceDTO.percentageOfAllocation);
 
-        ResourceReeng newResource = new ResourceReeng(resourceId);
-        newResource.setEndDate(endDate);
-        newResource.setRole(projRole);
-        newResource.setCost(coPeHo);
-        newResource.setAllocation(percOfAll);
-
-        return newResource;
+        return new ResourceReeng(resourceId, percOfAll, coPeHo, projRole, LocalDate.parse(resourceDTO.endDate));
     }
 
 
