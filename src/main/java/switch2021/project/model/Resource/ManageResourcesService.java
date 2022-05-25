@@ -45,10 +45,15 @@ public class ManageResourcesService {
         boolean msg = false;
 
         for (ResourceReeng res : projectTeamList) {
-            if (ProjectRoleReeng.valueOf(dto.projectRole).equals(ProjectRoleReeng.TeamMember) ||
-                    !(res.isActiveToThisDate(LocalDate.parse(dto.startDate)) && res.isActiveToThisDate(LocalDate.parse(dto.endDate)))) {
+            if (!(res.isActiveToThisDate(LocalDate.parse(dto.startDate)) && res.isActiveToThisDate(LocalDate.parse(dto.endDate)))) {
                     msg = true;
-                }
+                } else if (ProjectRoleReeng.valueOf(dto.projectRole).equals(ProjectRoleReeng.TeamMember)){
+                msg = true;
+            } else if (ProjectRoleReeng.valueOf(dto.projectRole).equals(ProjectRoleReeng.ProjectManager) ||
+                    ProjectRoleReeng.valueOf(dto.projectRole).equals(ProjectRoleReeng.ProductOwner) ||
+                    ProjectRoleReeng.valueOf(dto.projectRole).equals(ProjectRoleReeng.ScrumMaster)){
+                msg = false;
+            }
             }
             return msg;
         }
