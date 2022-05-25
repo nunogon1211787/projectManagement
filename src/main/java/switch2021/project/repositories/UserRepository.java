@@ -35,16 +35,16 @@ public class UserRepository implements IUserRepo {
 
 
     @Override
-    public Optional<User> findUserById(SystemUserID systemUserID) {
+    public Optional<User> findUserById(String systemUserID) {
 
         Optional<UserJpa> userJpa = userJpaRepository.findById(systemUserID);
 
-        Optional<User> user = Optional.empty();
-
         if(userJpa.isPresent()){
-            user = Optional.of(userJpaAssembler.toDomain(userJpa.get()));
-        }
-        return user;
+            UserJpa userJpa1 = userJpa.get();
+            User user = userJpaAssembler.toDomain(userJpa1);
+            return Optional.of(user);
+        } else
+        return Optional.empty();
     }
 
     @Override
@@ -76,10 +76,10 @@ public class UserRepository implements IUserRepo {
         Optional<User> user = Optional.empty();
 
         if(!userJpaRepository.existsById(userJpa.getEmail())){
-            UserJpa userSaved = userJpaRepository.save(userJpa);
-            user = Optional.of(userJpaAssembler.toDomain(userSaved));
+            UserJpa save = userJpaRepository.save(userJpa);
+            user = Optional.of(userJpaAssembler.toDomain(save));
         }
-        return  user;
+        return user;
     }
 
     @Override
@@ -97,7 +97,7 @@ public class UserRepository implements IUserRepo {
 
 
     @Override
-    public boolean delete(SystemUserID systemUserID) {
+    public boolean delete(String systemUserID) {
 
         if(userJpaRepository.existsById(systemUserID)) {
             userJpaRepository.deleteById(systemUserID);

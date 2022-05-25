@@ -99,19 +99,16 @@ public class UserController {
     @PatchMapping("/{id}")
     public ResponseEntity<Object> updatePersonalData(@PathVariable("id") String idDTO,
                                                      @RequestBody UpdateDataDTO updateDataDTO) {
-
-        ErrorMessage message = new ErrorMessage();
         OutputUserDTO outputUserDTO;
+
         try {
-            userService.updatePersonalData(idDTO, updateDataDTO);
-            message.errorMessage = "User was successfully updated!";
-            //return new ResponseEntity<>(outputUserDTO, HttpStatus.OK);
-        }
-        catch (Exception error) {
+            outputUserDTO = userService.updatePersonalData(idDTO, updateDataDTO);
+            return new ResponseEntity<>(outputUserDTO, HttpStatus.OK);
+        } catch (Exception error) {
+            ErrorMessage message = new ErrorMessage();
             message.errorMessage = error.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     /**
