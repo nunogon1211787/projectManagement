@@ -19,7 +19,7 @@ const SaveProject = () => {
 
         setLoading(true)
 
-        fetch('http://localhost:8080/projects/create', {
+        fetch('http://localhost:8080/projects', {
             method: 'POST',
             headers: {"Content-Type" : "application/json" },
             body: JSON.stringify(val)
@@ -87,7 +87,7 @@ const SaveProject = () => {
                 value={budget}
                 onChange={(e) => setBudget(e.target.value)}/>
 
-            {!loading && <button > Save Project </button>}
+            {!loading && <button onClick={handleSubmit}> Save Project </button>}
 
             {loading && <button > Saving </button>}
 

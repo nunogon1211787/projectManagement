@@ -2,7 +2,6 @@ package switch2021.project.service;
 
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -15,14 +14,8 @@ import switch2021.project.repositories.jpa.ProjectJpaRepository;
 import switch2021.project.mapper.ProjectMapper;
 import switch2021.project.model.Project.ProjectReeng;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
-
 @SpringBootTest
-class CreateProjectServiceTest {
+class ProjectServiceTest {
 
     @MockBean
     private IProjectFactory IProjectFactory;
@@ -39,7 +32,7 @@ class CreateProjectServiceTest {
     private OutputProjectDTO outputProjectDTO;
 
     @InjectMocks
-    CreateProjectService createProjectService;
+    ProjectService projectService;
 
     @BeforeEach
     void TestConfiguration(){

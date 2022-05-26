@@ -1,14 +1,10 @@
 package switch2021.project.service;
 
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
-import switch2021.project.datamodel.assembler.ProjectJpaAssembler;
 import switch2021.project.dto.*;
 import switch2021.project.factoryInterface.IProjectFactory;
-import switch2021.project.factoryInterface.IProjectIDFactory;
-import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.factoryInterface.IProjectIDFactory;
 import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.interfaces.IResourceRepo;
@@ -16,12 +12,9 @@ import switch2021.project.interfaces.ITypologyRepo;
 import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.mapper.ProjectMapper;
 import switch2021.project.model.Project.ProjectReeng;
-import switch2021.project.model.Project.ProjectStatusEnum;
 import switch2021.project.model.Resource.ManageResourcesService;
 import switch2021.project.model.Resource.ResourceReeng;
-import switch2021.project.model.Typology.Typology;
 import switch2021.project.model.valueObject.*;
-import switch2021.project.repositories.ProjectRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,7 +23,7 @@ import java.util.Optional;
 
 
 @Service
-public class CreateProjectService {
+public class ProjectService {
 
     @Autowired
     private IProjectRepo projRepo;
@@ -50,7 +43,7 @@ public class CreateProjectService {
     private ManageResourcesService resService;
 
 
-    public CreateProjectService() {
+    public ProjectService() {
     }
 
     public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) throws Exception {
@@ -72,45 +65,28 @@ public class CreateProjectService {
     public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) {
 
         Optional<ProjectReeng> opProject = projRepo.findById(id);
-        if (opProject.isPresent()) {
-            ProjectReeng proj = opProject.get();
+        ProjectReeng proj;
 
-            if (!editProjectInfoDTO.projectName.isEmpty()) {
-                proj.setProjectName(new Description(editProjectInfoDTO.projectName));
-            }
-            if (!editProjectInfoDTO.description.isEmpty()) {
-                proj.setDescription(new Description(editProjectInfoDTO.description));
-            }
-            if (!editProjectInfoDTO.startDate.isEmpty()) {
-                proj.setStartDate(LocalDate.parse(editProjectInfoDTO.startDate));
-            }
-            if (!editProjectInfoDTO.endDate.isEmpty()) {
-                proj.setStartDate(LocalDate.parse(editProjectInfoDTO.endDate));
-            }
-            if (!editProjectInfoDTO.numberOfSprints.isEmpty()) {
-                proj.setNumberOfSprints(new NumberOfSprints(Integer.parseInt(editProjectInfoDTO.numberOfSprints)));
-            }
-            if (!editProjectInfoDTO.budget.isEmpty()) {
-                proj.setBudget(new Budget(Integer.parseInt(editProjectInfoDTO.budget)));
-            }
-            if (!editProjectInfoDTO.projectStatus.isEmpty()) {
-                proj.setProjectStatus(ProjectStatusEnum.valueOf(editProjectInfoDTO.projectStatus));
-            }
-            if (!editProjectInfoDTO.sprintDuration.isEmpty()) {
-                proj.setSprintDuration(new SprintDuration(Integer.parseInt(editProjectInfoDTO.sprintDuration)));
-            }
-            if(!editProjectInfoDTO.customer.isEmpty()){
-                proj.setCustomer(new Customer(editProjectInfoDTO.customer, "email@email.pt", 123456789));//TODO change here with new properties
-            }
-            if(!editProjectInfoDTO.endDate.isEmpty()){
-                proj.setEndDate(LocalDate.parse(editProjectInfoDTO.endDate));
-            }
-            if(!editProjectInfoDTO.typology.isEmpty()){
-                proj.setTypology(new Typology(new TypologyID(new Description(editProjectInfoDTO.description))));
-            }
-            return projMapper.model2Dto(proj);
-        } else
-            return null;
+        if (opProject.isPresent()) {
+            proj = opProject.get();
+            proj.setProjectName(new Description(editProjectInfoDTO.projectName));
+            proj.setDescription(new Description(editProjectInfoDTO.description));
+            proj.setStartDate(LocalDate.parse(editProjectInfoDTO.startDate));
+            proj.setNumberOfSprints(new NumberOfSprints(Integer.parseInt(editProjectInfoDTO.numberOfSprints)));
+            proj.setBudget(new Budget(Integer.parseInt(editProjectInfoDTO.budget)));
+            proj.setSprintDuration(new SprintDuration(Integer.parseInt(editProjectInfoDTO.sprintDuration)));
+
+            /*proj.setProjectStatus(ProjectStatusEnum.valueOf(editProjectInfoDTO.projectStatus));
+            proj.setCustomer(new Customer(editProjectInfoDTO.customer, "email@email.pt", 123456789));
+            proj.setEndDate(LocalDate.parse(editProjectInfoDTO.endDate));
+            proj.setTypology(new Typology(new TypologyID(new Description(editProjectInfoDTO.description))));*/
+
+            Optional<ProjectReeng> savedProject = projRepo.save(proj);
+
+            return savedProject.map(projectReeng -> projMapper.model2Dto(projectReeng)).orElse(null);
+        }
+
+        return null;
     }
 
 
@@ -141,7 +117,7 @@ public class CreateProjectService {
 
         Optional<ProjectReeng> foundProject = projRepo.findById(id);
 
-        if(foundProject.isEmpty()){
+        if (foundProject.isEmpty()) {
             throw new Exception("Project does not exist");
         }
 
@@ -157,7 +133,7 @@ public class CreateProjectService {
             List<ResourceReeng> userResources = resRepo.findAllByUser(dto.id);
 
             List<ResourceReeng> currentUserResources = resService.currentResourcesByDate(userResources,
-                    LocalDate.parse(dateDto.date));
+                                                                                         LocalDate.parse(dateDto.date));
 
             List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
 
@@ -183,7 +159,7 @@ public class CreateProjectService {
     }
 
     public void deleteProjectRequest(String id) throws Exception {
-        if(!projRepo.deleteByProjectID(id)){
+        if (!projRepo.deleteByProjectID(id)) {
             throw new Exception("User Story does not exist");
         }
     }
