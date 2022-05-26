@@ -25,7 +25,7 @@ Change from json to dto hidden to simplify diagram
 end note
 Ctrl -> C1: createAndSaveUserProfile(dto)
 C1 -> C3: createUserProfile(dto)
-note over C3 : The changes of attributes are hidden to simplify the diagram .
+note over C3 : The changes of attributes are hidden to simplify the diagram
 'C3 -> C2 : name = getUserProfileName()
 'deactivate
 'C3 -> iFactory: create(name)
@@ -34,6 +34,7 @@ note over C3 : The changes of attributes are hidden to simplify the diagram .
 C3 -> newUserProfile **: create\n(userProfileID)
 return newUserProfile
 C1 -> C5 : save (newUserProfile)
+ref over C5: [[US13SD_JPA.puml]]
 'C5 -> C5 : existsByDescription(userProfileName)
 'deactivate
 'C5 -> C5 : add(userProfileName)

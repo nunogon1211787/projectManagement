@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class UserProfileRepositoryReeng implements IUserProfileRepo {
+    public class UserProfileRepositoryReeng implements IUserProfileRepo {
 
     @Autowired
     UserProfileJpaRepository userProfileJpaRepository;

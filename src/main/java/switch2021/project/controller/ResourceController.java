@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.*;
-import switch2021.project.service.CreateResourceInAProjectService;
 import switch2021.project.service.ResourceService;
 
 import java.util.List;
@@ -21,11 +20,10 @@ public class ResourceController {
     /**
      * Attributes
      **/
-    @Autowired private CreateResourceInAProjectService createResourceService;
 
-    @Autowired private ResourceService srv;
+    @Autowired
+    private ResourceService srv;
 
-//    @Autowired private ShowAllCurrentProjectsByUserService showAllCurrentProjectsByUserService;
 
 
     @GetMapping
@@ -53,13 +51,9 @@ public class ResourceController {
     @PostMapping
     public ResponseEntity<Object> createResource(@RequestBody CreateResourceDTO dto) {
         ErrorMessage message = new ErrorMessage();
-        OutputResourceDTO newResource = createResourceService.createAndSaveResource(dto);
-
+        OutputResourceDTO newResource;
         try {
-            newResource = createResourceService.createAndSaveResource(dto);
-
-//            newResource.add(linkTo(methodOn(ResourceController.class).showResourceRequested(1)).withSelfRel());
-
+            newResource = srv.createAndSaveResource(dto);
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.CREATED);
@@ -67,5 +61,5 @@ public class ResourceController {
         return new ResponseEntity<>(newResource, HttpStatus.CREATED);
     }
 
-
 }
+

@@ -1,6 +1,5 @@
 package switch2021.project.datamodel.assembler;
 
-import javassist.runtime.Desc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import switch2021.project.datamodel.ProjectJpa;
@@ -17,21 +16,6 @@ public class ProjectJpaAssembler {
 
     @Autowired
     ProjectFactory factory;
-
-//    public ProjectJpa toJpaData(ProjectReeng projectReeng) {
-//
-//        return new ProjectJpa(projectReeng.getProjectName(),
-//                projectReeng.getDescription(),
-//                projectReeng.getBusinessSector(),
-//                projectReeng.getStartDate(),
-//                projectReeng.getNumberOfSprints(),
-//                projectReeng.getSprintDuration(),
-//                projectReeng.getBudget(),
-//                projectReeng.getEndDate(),
-//                projectReeng.getTypology(),
-//                projectReeng.getCustomer()
-//        );
-//    }
 
     public ProjectJpa toJpaData(ProjectReeng projectReeng) {
 

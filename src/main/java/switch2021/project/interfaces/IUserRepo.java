@@ -1,17 +1,15 @@
 package switch2021.project.interfaces;
 
 import switch2021.project.model.SystemUser.User;
-import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.model.valueObject.UserProfileID;
-
 import java.util.List;
 import java.util.Optional;
 
 public interface IUserRepo{
 
-    Optional<User> findUserById(SystemUserID id);
+    Optional<User> findUserById(String id);
 
-    List<User> findAllSystemUsers();
+    List<User> findAll();
 
     boolean save(User user); //Delete when nor needed (must return an Optional)
 
@@ -27,5 +25,5 @@ public interface IUserRepo{
 
     Optional<User> saveReeng(User newUser);
 
-    boolean deleteUser(SystemUserID systemUserID);
+    boolean delete(String systemUserID);
 }

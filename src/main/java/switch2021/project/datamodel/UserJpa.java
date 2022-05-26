@@ -17,8 +17,8 @@ import java.util.List;
 @Table(name = "systemUsers")
 public class UserJpa {
 
-    @EmbeddedId
-    private SystemUserID email;
+    @Id
+    private String email;
     private String userName;
     private String function;
     private String photo;
