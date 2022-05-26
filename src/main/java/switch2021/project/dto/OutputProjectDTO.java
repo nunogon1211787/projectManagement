@@ -3,10 +3,11 @@ package switch2021.project.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
 @NoArgsConstructor
 @Getter
-public class OutputProjectDTO {
+public class OutputProjectDTO extends RepresentationModel<OutputProjectDTO> {
 
     public String code;
     public String projectName;
@@ -18,6 +19,7 @@ public class OutputProjectDTO {
     public String budget;
     public String status;
     public String startDate;
+    public String endDate;
     public String sprintDuration;
 
     public OutputProjectDTO(String code,String projectName,String description,String businessSector,String startDate,

@@ -1,11 +1,13 @@
 package switch2021.project.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class ProjectDTO {
 
     /**

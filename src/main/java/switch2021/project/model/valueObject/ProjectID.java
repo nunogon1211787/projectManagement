@@ -3,6 +3,8 @@ package switch2021.project.model.valueObject;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import switch2021.project.utils.ValueObject;
+
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -15,6 +17,7 @@ public class ProjectID implements ValueObject<ProjectID> {
     /**
      * Attributes
      **/
+    @Column(name = "projectId")
     private String code;
 
     /**

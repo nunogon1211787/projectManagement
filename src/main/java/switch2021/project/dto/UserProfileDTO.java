@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
-public class UserProfileDTO {
+@Relation(collectionRelation = "Profiles")
+public class UserProfileDTO extends RepresentationModel<UserProfileDTO> {
 
     /**
      * Attributes

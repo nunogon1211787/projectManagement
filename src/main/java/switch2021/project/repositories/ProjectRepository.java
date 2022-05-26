@@ -1,11 +1,15 @@
 package switch2021.project.repositories;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.datamodel.ProjectJpa;
 import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.model.Project.ProjectReeng;
+import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.model.valueObject.UserStoryID;
 import switch2021.project.repositories.jpa.ProjectJpaRepository;
 import switch2021.project.datamodel.assembler.ProjectJpaAssembler;
 
@@ -15,6 +19,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+@Getter
+@Setter
 public class ProjectRepository implements IProjectRepo {
 
     @Autowired
@@ -24,61 +30,26 @@ public class ProjectRepository implements IProjectRepo {
     ProjectJpaAssembler projectJpaAssembler;
 
 
-    public ProjectReeng save(ProjectReeng project) {
-        project.setProjectCode(new ProjectID("2"));
-        ProjectJpa projectJpa = projectJpaAssembler.toJpaData(project);
+    @Override
+    public Optional<ProjectReeng> save(ProjectReeng newProject) {
+        ProjectJpa projectJpa = projectJpaAssembler.toJpaData(newProject);
 
         ProjectJpa savedProj = projectJpaRepository.save(projectJpa);
+        return Optional.of(projectJpaAssembler.toDomain(savedProj));
 
-        return projectJpaAssembler.toDomain(savedProj);
     }
-
-    @Transactional
-    public Optional<ProjectReeng> findById(ProjectID id) {
-        Optional<ProjectJpa> opPersonJpa = projectJpaRepository.findById(id);
-
-        if(opPersonJpa.isPresent()) {
-            ProjectJpa personJpa = opPersonJpa.get();
-
-            ProjectReeng person = projectJpaAssembler.toDomain(personJpa);
-            return Optional.of(person);
-        }
-        else
-            return Optional.empty();
-    }
-
-    public Optional<ProjectReeng> findById(String id) {
-        ProjectID id_proj = new ProjectID(id);
-        Optional<ProjectJpa> opPersonJpa = projectJpaRepository.findById(id_proj);
-
-        if(opPersonJpa.isPresent()) {
-            ProjectJpa personJpa = opPersonJpa.get();
-
-            ProjectReeng person = projectJpaAssembler.toDomain(personJpa);
-            return Optional.of(person);
-        }
-        else
-            return Optional.empty();
-    }
-
-//    @Override
-//    public ProjectReeng findByIdDeprecated(String code) {
-//        return null;
-//    }
-//
-//    @Override
-//    public boolean existsById(String id) {
-//        return false;
-//    }
-
-//    @Override
-//    public boolean existsByName(String id) {
-//        return false;
-//    }
 
     @Override
-    public ProjectReeng findByIdDeprecated(String code) {
-        return null;
+    public Optional<ProjectReeng> findById(String id) {
+        Optional<ProjectJpa> opProjJpa = projectJpaRepository.findById(id);
+
+        if (opProjJpa.isPresent()) {
+            ProjectJpa projJpa = opProjJpa.get();
+
+            ProjectReeng proj = projectJpaAssembler.toDomain(projJpa);
+            return Optional.of(proj);
+        } else
+            return Optional.empty();
     }
 
     @Override
@@ -91,14 +62,13 @@ public class ProjectRepository implements IProjectRepo {
         return false;
     }
 
-
-    @Transactional
+    @Override
     public List<ProjectReeng> findAll() {
         List<ProjectJpa> setProjectJpa = projectJpaRepository.findAll();
 
-        List<ProjectReeng> setProject = new ArrayList<ProjectReeng>();
+        List<ProjectReeng> setProject = new ArrayList<>();
 
-        for( ProjectJpa projectJpa : setProjectJpa ) {
+        for (ProjectJpa projectJpa : setProjectJpa) {
             ProjectReeng projectReeng = projectJpaAssembler.toDomain(projectJpa);
             setProject.add(projectReeng);
         }
@@ -107,9 +77,21 @@ public class ProjectRepository implements IProjectRepo {
     }
 
 
+    @Override
+    public boolean deleteByProjectID(String id) {
+
+        if (projectJpaRepository.existsById(id)) {
+            projectJpaRepository.deleteById(id);
+            return true;
+        }
+
+        return false;
+    }
+
+
     @Transactional
     public boolean existsById(ProjectID id) {
-        return projectJpaRepository.existsById(id);
+        return projectJpaRepository.existsById(id.getCode());
     }
 
 }

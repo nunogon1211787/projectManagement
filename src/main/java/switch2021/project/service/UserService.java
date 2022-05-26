@@ -1,6 +1,7 @@
 package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.*;
 import switch2021.project.factoryInterface.IUserFactory;
@@ -10,12 +11,16 @@ import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.mapper.UserMapper;
 import switch2021.project.model.SystemUser.User;
 import switch2021.project.model.valueObject.UserProfileID;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
+
+    /**
+     * Attributes
+     */
 
     @Autowired
     private IUserRepo userRepo;
@@ -28,30 +33,80 @@ public class UserService {
     @Autowired
     private IUserProfileIDFactory profileIDFactory;
 
-    public OutputUserDTO createAndSaveUser(NewUserInfoDTO infoDTO) {
-        User newUser = userFactory.createUser(infoDTO);
-        if (!userRepo.save(newUser))
-            throw new IllegalArgumentException("email already exists");
-        return userMapper.toDto(newUser);
-    }
 
-    public OutputUserDTO findSystemUserByEmail(String email) {
-        User found = this.userRepo.findByUserID(email);
-        return this.userMapper.toDto(found);
-    }
+    /**
+     * Register User
+     */
 
-    public OutputUserDTO updatePersonalData(IdDTO idDTO, UpdateDataDTO updateDataDTO) {
+    public OutputUserDTO createAndSaveUser (NewUserInfoDTO infoDTO) throws Exception{
 
-        User user = userRepo.findByUserID(idDTO.id);
+        User user = userFactory.createUser(infoDTO);
 
-        if (updateDataDTO.newPassword == null && updateDataDTO.oldPassword == null) {
-            user.editPersonalData(updateDataDTO.userName, updateDataDTO.function, updateDataDTO.photo);
+        Optional<User> userSaved = userRepo.saveReeng(user);
+
+        OutputUserDTO outputUserDTO;
+
+        if (userSaved.isPresent()) {
+            outputUserDTO = userMapper.toDto(userSaved.get());
+        } else {
+            throw new Exception("System User Already exists!");
         }
-        if (updateDataDTO.userName == null && updateDataDTO.function == null) {
-            user.updatePassword(updateDataDTO.oldPassword, updateDataDTO.newPassword);
-        }
-        return userMapper.toDto(user);
+        return outputUserDTO;
     }
+
+    /**
+     * Find All Users
+     */
+
+    public CollectionModel<OutputUserDTO> findAllUsers() {
+
+        List<User> usersList = userRepo.findAll();
+
+        return userMapper.toCollectionDTO(usersList);
+    }
+
+
+    /**
+     * Find User, by ID
+     */
+
+    public OutputUserDTO findUserById(String idDTO) throws Exception{
+
+        Optional<User> opUser = userRepo.findUserById(idDTO);
+
+        if (opUser.isEmpty()) {
+            throw new Exception("User does not exists!");
+        }
+        return userMapper.toDto(opUser.get());
+    }
+
+
+    /**
+     * Update Personal Data and Change Password
+     */
+
+    public OutputUserDTO updatePersonalData(String idDTO, UpdateDataDTO updateDataDTO) {
+
+        Optional<User> opUser = userRepo.findUserById(idDTO);
+
+        if (opUser.isPresent()) {
+            User user = opUser.get();
+
+            if (updateDataDTO.newPassword == null && updateDataDTO.oldPassword == null) {
+                user.editPersonalData(updateDataDTO.userName, updateDataDTO.function, updateDataDTO.photo);
+            }
+            if (updateDataDTO.userName == null && updateDataDTO.function == null) {
+                user.updatePassword(updateDataDTO.oldPassword, updateDataDTO.newPassword);
+            }
+            userRepo.saveReeng(user);
+            return userMapper.toDto(user);
+        } else
+            return null;
+    }
+
+    /**
+     * Search User By Parameters
+     */
 
     public List<OutputUserDTO> searchUsersByParams(SearchUserDTO inDto) {
 
@@ -90,4 +145,17 @@ public class UserService {
 
         return usersFoundedDto;
     }
+
+    /**
+     * Delete User
+     */
+
+    public void deleteUser (String id) throws Exception {
+
+        if(!userRepo.delete(id)) {
+            throw new IllegalArgumentException("User does not exists!");
+        }
+
+    }
+
 }

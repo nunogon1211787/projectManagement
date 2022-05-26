@@ -1,16 +1,24 @@
 package switch2021.project.model.valueObject;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.Embeddable;
 
 @Getter
+@Setter
+@Embeddable
+@NoArgsConstructor
 public class Nif {
 
     /**
      * Attributes
      */
 
-    private final long number;
-    private final int NIF_LENGTH = 9;
+    private long number;
+    private static final int NIF_LENGTH = 9;
 
 
     public Nif(long number) {

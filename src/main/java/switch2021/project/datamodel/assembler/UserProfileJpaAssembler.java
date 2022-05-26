@@ -5,7 +5,7 @@ import switch2021.project.datamodel.UserProfileJpa;
 import switch2021.project.model.UserProfile.UserProfile;
 
 @Service
-public class UserProfileDomainDataAssembler {
+public class UserProfileJpaAssembler {
 
     public UserProfileJpa toData (UserProfile userProfile) {
         return new UserProfileJpa(userProfile.getUserProfileId());

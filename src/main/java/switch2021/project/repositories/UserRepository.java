@@ -1,12 +1,17 @@
 package switch2021.project.repositories;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import switch2021.project.datamodel.UserJpa;
+import switch2021.project.datamodel.assembler.UserJpaAssembler;
 import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.model.SystemUser.User;
+import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.model.valueObject.UserProfileID;
-
+import switch2021.project.repositories.jpa.UserJpaRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserRepository implements IUserRepo {
@@ -14,7 +19,12 @@ public class UserRepository implements IUserRepo {
     /**
      * Class Attributes
      */
-    private final List<User> userList;
+    private List<User> userList;
+
+    @Autowired
+    private UserJpaRepository userJpaRepository;
+    @Autowired
+    private UserJpaAssembler userJpaAssembler;
 
     /**
      * Constructor
@@ -23,22 +33,29 @@ public class UserRepository implements IUserRepo {
         this.userList = new ArrayList<>();
     }
 
-    @Override
-    public User findByUserID(String email) {
-        User user = null;
 
-        for (User i : this.userList) {
-            if (i.isYourEmail(email)) {
-                user = i;
-                break;
-            }
-        }
-        return user;
+    @Override
+    public Optional<User> findUserById(String systemUserID) {
+
+        Optional<UserJpa> userJpa = userJpaRepository.findById(systemUserID);
+
+        if(userJpa.isPresent()){
+            UserJpa userJpa1 = userJpa.get();
+            User user = userJpaAssembler.toDomain(userJpa1);
+            return Optional.of(user);
+        } else
+        return Optional.empty();
     }
 
     @Override
-    public List<User> findAllSystemUsers() {
-        return new ArrayList<>(this.userList);
+    public List<User> findAll() {
+
+        List<UserJpa> userJpaList = userJpaRepository.findAll();
+        List<User> userList = new ArrayList<>();
+
+        userJpaList.forEach(userJpa -> userList.add(userJpaAssembler.toDomain(userJpa)));
+
+        return userList;
     }
 
     /**
@@ -53,6 +70,18 @@ public class UserRepository implements IUserRepo {
         }
     }
 
+    public Optional<User> saveReeng (User newUser) {
+
+        UserJpa userJpa = userJpaAssembler.toData(newUser);
+        Optional<User> user = Optional.empty();
+
+        if(!userJpaRepository.existsById(userJpa.getEmail())){
+            UserJpa save = userJpaRepository.save(userJpa);
+            user = Optional.of(userJpaAssembler.toDomain(save));
+        }
+        return user;
+    }
+
     @Override
     public boolean existsByEmail(String newUserEmail) {
         boolean result = false;
@@ -65,6 +94,18 @@ public class UserRepository implements IUserRepo {
         }
         return result;
     }
+
+
+    @Override
+    public boolean delete(String systemUserID) {
+
+        if(userJpaRepository.existsById(systemUserID)) {
+            userJpaRepository.deleteById(systemUserID);
+            return true;
+        }
+        return  false;
+    }
+
 
     @Override
     public List<User> findAllBySystemUserIdContains(String id) {
@@ -85,6 +126,7 @@ public class UserRepository implements IUserRepo {
     public List<User> findAllByUserProfileId(UserProfileID profile) {
         return null;
     }
+
 /*
     ///// ----->>>>>>  Rever Método
     public List<SystemUser> searchUsers(String name, String email, String function, int state, List<UserProfile> profileChoosenList) {

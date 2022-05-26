@@ -1,15 +1,20 @@
 package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.TypologyDTO;
 import switch2021.project.factoryInterface.ITypologyFactory;
+import switch2021.project.factoryInterface.ITypologyIDFactory;
 import switch2021.project.interfaces.ITypologyRepo;
 import switch2021.project.mapper.TypologyMapper;
 import switch2021.project.model.Typology.Typology;
+import switch2021.project.model.valueObject.Description;
+import switch2021.project.model.valueObject.TypologyID;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TypologyService {
@@ -21,6 +26,8 @@ public class TypologyService {
     private ITypologyRepo iTypologyRepo;
     @Autowired
     private ITypologyFactory iTypologyFactory;
+    @Autowired
+    private ITypologyIDFactory factoryId;
     @Autowired
     private TypologyMapper mapper;
 
@@ -40,33 +47,37 @@ public class TypologyService {
     /**
      * Typology Find's Methods
      */
-    public TypologyDTO findTypologyByDescription(IdDTO idDTO) {
-        Typology outputTypology = iTypologyRepo.findTypologyById(idDTO.id);
+    public TypologyDTO findTypologyRequested(String id) {
 
-        if(outputTypology == null){
-            throw new IllegalArgumentException("This Typology does not exist!");
+        TypologyID typoId = factoryId.createId(new TypologyDTO(id));
+
+        Optional<Typology> outputTypology = iTypologyRepo.findByTypologyId(typoId);
+
+        if(outputTypology.isEmpty()){
+            throw new IllegalArgumentException("Typology does not exist!");
         }
-       return mapper.modelToDto(outputTypology);
+       return mapper.modelToDto(outputTypology.get());
     }
 
-    public List<TypologyDTO> findAllTypologies() {
-        List<Typology> repositoryList = iTypologyRepo.findAllTypology();
+    public CollectionModel<TypologyDTO> findAllTypologies() {
+        List<Typology> repositoryList = iTypologyRepo.findAll();
 
         if(repositoryList.isEmpty()) {
             throw new NullPointerException("Does not exists any Typology at this moment!");
         }
-        return mapper.modelToDto(repositoryList);
+
+        return mapper.toCollectionModel(repositoryList);
     }
 
 
     /**
      * Typology Delete's Methods
      */
-    public void deleteTypology(IdDTO idDTO) {
-        if (!iTypologyRepo.existsByTypologyId(idDTO.getId())) {
+    public void deleteTypology(String id) {
+        TypologyID typoId = factoryId.createId(new TypologyDTO(id));
+
+        if (!iTypologyRepo.deleteByTypologyId(typoId)) {
             throw new IllegalArgumentException("Typology does not exists!");
-        } else {
-            iTypologyRepo.deleteTypology(idDTO.id);
         }
     }
 }

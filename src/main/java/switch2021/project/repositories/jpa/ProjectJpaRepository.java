@@ -8,7 +8,7 @@ import switch2021.project.model.valueObject.ProjectID;
 import java.util.List;
 import java.util.Optional;
 
-public interface ProjectJpaRepository extends JpaRepository<ProjectJpa, ProjectID> {
+public interface ProjectJpaRepository extends JpaRepository<ProjectJpa, String> {
 
 //     List<ProjectJpa> findAll();
 //

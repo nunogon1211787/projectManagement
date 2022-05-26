@@ -6,7 +6,7 @@ import switch2021.project.model.valueObject.UserStoryID;
 import javax.persistence.*;
 
 @Entity(name = "UserStoryJpa")
-//@Table(name = "user_stories")
+@Table(name = "userStories")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,7 +21,6 @@ public class UserStoryJpa {
     private double timeEstimate;
 
     @OneToOne
-//    @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private UserStoryJpa parentUserStory;
     private String startDate;
     private String endDate;

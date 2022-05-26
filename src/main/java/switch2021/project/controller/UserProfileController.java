@@ -1,15 +1,19 @@
 package switch2021.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import switch2021.project.dto.ErrorMessage;
 import switch2021.project.dto.UserProfileDTO;
 import switch2021.project.service.UserProfileService;
+
+import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 @RestController
@@ -24,6 +28,46 @@ public class UserProfileController {
 
 
     /**
+     * Find all profiles
+     */
+    @GetMapping
+    public ResponseEntity<Object> showAllProfiles(){
+        ErrorMessage message = new ErrorMessage();
+        CollectionModel<UserProfileDTO> outPutDTO;
+
+        try {
+
+            outPutDTO = createUserProfileService.showAllProfiles();
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(outPutDTO, HttpStatus.OK);
+    }
+
+    /**
+     * Find a requested user profile
+     */
+     @GetMapping("/{id}")
+     public ResponseEntity<Object> showUserProfileRequested(@PathVariable("id") String id){
+         ErrorMessage message = new ErrorMessage();
+         UserProfileDTO outPutDTO;
+
+         try {
+
+             outPutDTO = createUserProfileService.showUserProfileRequested(id);
+
+         } catch (Exception exception) {
+             message.errorMessage = exception.getMessage();
+             return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+         }
+         return new ResponseEntity<>(outPutDTO, HttpStatus.OK);
+     }
+
+
+
+    /**
      * Create a User Profile
      */
     @PostMapping
@@ -35,13 +79,56 @@ public class UserProfileController {
         }
         UserProfileDTO outPutDTO;
         try {
+
             outPutDTO = createUserProfileService.createAndSaveUserProfile(dto);
+
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(outPutDTO, HttpStatus.CREATED);
     }
+
+    /**
+     * Edit a requested profile
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> editAUserProfile(@PathVariable("id") String id, @RequestBody UserProfileDTO dto){
+        ErrorMessage message = new ErrorMessage();
+        UserProfileDTO outPutDTO;
+
+        try {
+
+            outPutDTO = createUserProfileService.editARequestedUserProfile(id, dto);
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(outPutDTO, HttpStatus.ACCEPTED);
+    }
+
+    /**
+     * Delete a requested profile
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteAUserProfile(@PathVariable("id") String id){
+        ErrorMessage message = new ErrorMessage();
+
+        try {
+
+            createUserProfileService.deleteARequestedUserProfile(id);
+            message.errorMessage = "User profile successfully deleted";
+
+            message.add(linkTo(methodOn(UserProfileController.class).showAllProfiles()).withRel("Collection"));
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(message, HttpStatus.ACCEPTED);
+    }
+
 }
 
 

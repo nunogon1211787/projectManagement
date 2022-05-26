@@ -1,12 +1,19 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+
 @Getter
+@Embeddable
+@NoArgsConstructor
 public class SystemUserID implements ValueObject<SystemUserID> {
 
-    private final Email email;
+    @Embedded
+    private Email email;
 
     /**
      * Constructor.

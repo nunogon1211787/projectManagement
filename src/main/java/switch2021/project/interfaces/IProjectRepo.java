@@ -1,11 +1,11 @@
 package switch2021.project.interfaces;
 
-import org.springframework.stereotype.Repository;
 import switch2021.project.model.Project.ProjectReeng;
+import switch2021.project.model.valueObject.ProjectID;
 import java.util.List;
 import java.util.Optional;
 
-//@Repository
+
 public interface IProjectRepo {
 
     /**
@@ -16,9 +16,7 @@ public interface IProjectRepo {
     /**
      * The repository should be able to find a object using given Identity.
      */
-    Optional<ProjectReeng> findById(String code);
-
-    ProjectReeng findByIdDeprecated(String code);
+    Optional<ProjectReeng> findById(String id);
 
     /**Check if project exists in repository**/
     boolean existsById(String id);
@@ -26,6 +24,7 @@ public interface IProjectRepo {
     boolean existsByName(String id);
 
     /**Save Projects Method**/
-    ProjectReeng save(ProjectReeng newProject);
+   Optional<ProjectReeng> save(ProjectReeng newProject);
 
+    boolean deleteByProjectID(String id);
 }

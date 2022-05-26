@@ -1,17 +1,21 @@
 package switch2021.project.model.valueObject;
 
+import lombok.NoArgsConstructor;
 import switch2021.project.utils.ValueObject;
+import javax.persistence.Embeddable;
 
+@Embeddable
+@NoArgsConstructor
 public class Email implements ValueObject<Email> {
 
     /**
      * Attributes
      */
-    private final String emailText;
-    private final int MAX_LENGTH = 50;
-    private final int MIN_LENGTH = 3;
-    private final int MAX_LENGTH_LAST_PART = 3;
-    private final int MIN_LENGTH_LAST_PART = 2;
+    private String emailText;
+    private static final int MAX_LENGTH = 50;
+    private static final int MIN_LENGTH = 3;
+    private static final int MAX_LENGTH_LAST_PART = 3;
+    private static final int MIN_LENGTH_LAST_PART = 2;
 
 
     /**
@@ -26,6 +30,10 @@ public class Email implements ValueObject<Email> {
 
     public String getEmailText() {
         return emailText;
+    }
+
+    public void setEmailText(String emailText) {
+        this.emailText = emailText;
     }
 
     /**

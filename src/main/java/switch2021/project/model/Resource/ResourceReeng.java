@@ -1,18 +1,26 @@
 package switch2021.project.model.Resource;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import switch2021.project.model.valueObject.CostPerHour;
 import switch2021.project.model.valueObject.PercentageOfAllocation;
 import switch2021.project.model.valueObject.ProjectRoleReeng;
+import switch2021.project.utils.Entity;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Getter
 @Setter
-public class ResourceReeng {
+@NoArgsConstructor
+@AllArgsConstructor
+public class ResourceReeng implements Entity<ResourceReeng> {
 
+    /**
+     * Attributes
+     **/
 
     private ResourceIDReeng id;
     private PercentageOfAllocation allocation;
@@ -20,9 +28,6 @@ public class ResourceReeng {
     private ProjectRoleReeng role;
     private LocalDate endDate;
 
-    public ResourceReeng(ResourceIDReeng id) {
-        this.id = id;
-    }
 
     public boolean isActiveToThisDate(LocalDate date) {
 
@@ -51,5 +56,10 @@ public class ResourceReeng {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public boolean sameIdentityAs(ResourceReeng other) {
+        return false;
     }
 }

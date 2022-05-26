@@ -5,7 +5,7 @@ import switch2021.project.datamodel.TypologyJpa;
 import switch2021.project.model.Typology.Typology;
 
 @Service
-public class TypologyDomainDataAssembler {
+public class TypologyJpaAssembler {
 
     public TypologyJpa toData (Typology typology) {
         return new TypologyJpa(typology.getId_description());

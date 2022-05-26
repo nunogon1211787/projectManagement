@@ -1,12 +1,11 @@
 package switch2021.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import switch2021.project.dto.ErrorMessage;
-import switch2021.project.dto.OutputUserStoryDTO;
-import switch2021.project.dto.CreateUserStoryDTO;
+import switch2021.project.dto.*;
 import switch2021.project.service.UserStoryService;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -23,13 +22,43 @@ public class UserStoryController {
     private UserStoryService createUserStoryService;
 
 
-    @GetMapping("/{id}") //TODO must be implemented. Used to test HATEOAS.
-    public ResponseEntity<Object> showUserStoryRequested(@PathVariable long id){
+    /**
+     * Find all user stories
+     */
+    @GetMapping
+    public ResponseEntity<Object> showAllUserStories(){
         ErrorMessage message = new ErrorMessage();
+        CollectionModel<OutputUserStoryDTO> result;
 
-        message.errorMessage = "Must be implemented";
+        try {
 
-        return new ResponseEntity<>(message, HttpStatus.OK);
+            result = CollectionModel.of(createUserStoryService.showAllUserStories());
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+
+    /**
+     * Find a requested user story
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> showUserStoryRequested(@PathVariable("id") String id){
+        ErrorMessage message = new ErrorMessage();
+        OutputUserStoryDTO newUserStory;
+
+        try {
+
+            newUserStory = createUserStoryService.showAUserStory(id);
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(newUserStory, HttpStatus.OK);
     }
 
     /**
@@ -40,9 +69,8 @@ public class UserStoryController {
         ErrorMessage message = new ErrorMessage();
         OutputUserStoryDTO newUserStory;
         try {
-            newUserStory = createUserStoryService.createAndSaveUserStory(inDto);
 
-            newUserStory.add(linkTo(methodOn(UserStoryController.class).showUserStoryRequested(1)).withSelfRel());
+            newUserStory = createUserStoryService.createAndSaveUserStory(inDto);
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
@@ -51,19 +79,23 @@ public class UserStoryController {
         return new ResponseEntity<>(newUserStory, HttpStatus.CREATED);
     }
 
-    @PostMapping("/jpa")
-    public ResponseEntity<Object> createAndSaveUserStoryJPA(@RequestBody CreateUserStoryDTO inDto) {
+    /**
+     * Delete a requested User Story
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteAUserStory(@PathVariable String id){
         ErrorMessage message = new ErrorMessage();
-        OutputUserStoryDTO newUserStory;
-        try {
-            newUserStory = createUserStoryService.createAndSaveUserStoryJPA(inDto);
 
-            newUserStory.add(linkTo(methodOn(UserStoryController.class).showUserStoryRequested(1)).withSelfRel());
+        try {
+            createUserStoryService.deleteAUserStory(id);
+            message.errorMessage = "User Story was deleted successfully";
+
+            message.add(linkTo(methodOn(UserStoryController.class).showAllUserStories()).withRel("Collection"));
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(newUserStory, HttpStatus.CREATED);
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

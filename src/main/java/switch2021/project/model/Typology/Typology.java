@@ -1,5 +1,6 @@
 package switch2021.project.model.Typology;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import switch2021.project.model.valueObject.TypologyID;
 import switch2021.project.utils.Entity;
@@ -16,7 +17,7 @@ import java.util.Objects;
  * and that will be considerate as ID for itself.
  */
 
-
+@Getter
 public class Typology implements Entity<Typology> {
 
     /**

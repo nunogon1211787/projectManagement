@@ -3,7 +3,7 @@ package switch2021.project.repositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.datamodel.UserProfileJpa;
-import switch2021.project.datamodel.assembler.UserProfileDomainDataAssembler;
+import switch2021.project.datamodel.assembler.UserProfileJpaAssembler;
 import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.model.UserProfile.UserProfile;
 import switch2021.project.model.valueObject.Description;
@@ -15,28 +15,28 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class UserProfileRepositoryReeng implements IUserProfileRepo {
+    public class UserProfileRepositoryReeng implements IUserProfileRepo {
 
     @Autowired
     UserProfileJpaRepository userProfileJpaRepository;
 
     @Autowired
-    UserProfileDomainDataAssembler assembler;
+    UserProfileJpaAssembler assembler;
 
 
-    public UserProfile findByUserProfileID (String userProfileName) {
-        UserProfileID userProfileID = new UserProfileID(new Description(userProfileName));
+    public Optional<UserProfile> findByUserProfileID (UserProfileID userProfileID) {
+
         Optional <UserProfileJpa> userProfileJpa = userProfileJpaRepository.findById(userProfileID);
-        UserProfile userProfile = null;
+        Optional<UserProfile> userProfile = Optional.empty();
 
         if (userProfileJpa.isPresent()) {
-            userProfile = assembler.toDomain(userProfileJpa.get());
+            userProfile = Optional.of(assembler.toDomain(userProfileJpa.get()));
         }
         return userProfile;
     }
 
 
-    public List<UserProfile> findAllUserProfiles() {
+    public List<UserProfile> findAll() {
         List<UserProfileJpa> userProfileJpaList = userProfileJpaRepository.findAll();
         List<UserProfile> userProfileList = new ArrayList<>();
 
@@ -47,30 +47,31 @@ public class UserProfileRepositoryReeng implements IUserProfileRepo {
     }
 
 
-    public boolean save (UserProfile profile) {
-        UserProfileJpa userProfileJpa = assembler.toData(profile);
-        UserProfileJpa saved = userProfileJpaRepository.save(userProfileJpa);
-        if (saved != null) {
-            return true;
+    public Optional<UserProfile> save (UserProfile profile) {
+        Optional<UserProfile> result = Optional.empty();
+
+        if(!userProfileJpaRepository.existsById(profile.getUserProfileId())) {
+            UserProfileJpa userProfileJpa = assembler.toData(profile);
+            UserProfileJpa saved = userProfileJpaRepository.save(userProfileJpa);
+            result = Optional.of(assembler.toDomain(saved));
         }
-        return false;
+
+        return result;
     }
 
 
-    public boolean existsByDescription(String userProfileName) {
-        UserProfileID userProfileID = new UserProfileID(new Description(userProfileName));
-        return userProfileJpaRepository.existsById(userProfileID);
-    }
-
-
-    @Override
     public boolean existsByUserProfileId(UserProfileID userProfileID) {
         return userProfileJpaRepository.existsById(userProfileID);
     }
 
-    public void deleteById (String userProfileName) {
-        UserProfileID userProfileID = new UserProfileID(new Description(userProfileName));
-        userProfileJpaRepository.deleteById(userProfileID);
+    public boolean deleteById (UserProfileID userProfileID) {
+
+        if(userProfileJpaRepository.existsById(userProfileID)) {
+            userProfileJpaRepository.deleteById(userProfileID);
+            return true;
+        }
+
+        return false;
     }
 }
 
