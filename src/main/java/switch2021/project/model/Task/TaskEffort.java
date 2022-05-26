@@ -5,11 +5,13 @@ import switch2021.project.model.valueObject.*;
 import switch2021.project.utils.ValueObject;
 
 @Getter
+
 public class TaskEffort implements ValueObject<TaskEffort> {
 
     /**
      * Attributes
      **/
+
     private final Hours effortHours;
     private final Minutes effortMinutes;
     private final Date effortDate;

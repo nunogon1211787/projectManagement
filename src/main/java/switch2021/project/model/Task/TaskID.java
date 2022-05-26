@@ -1,18 +1,26 @@
 package switch2021.project.model.Task;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import switch2021.project.interfaces.TaskContainerID;
 import switch2021.project.model.valueObject.Name;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.util.Objects;
 
 @Getter
+@Embeddable
+@NoArgsConstructor
 public class TaskID implements ValueObject<TaskID> {
 
     /** Attributes */
-    private final TaskContainerID taskContainerID;
-    private final Name taskName;
+    @Embedded
+    private TaskContainerID taskContainerID;
+
+    @Embedded
+    private Name taskName;
 
     public TaskID (TaskContainerID taskContainerID, Name name){
 
