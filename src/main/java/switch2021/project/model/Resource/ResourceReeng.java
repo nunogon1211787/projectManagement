@@ -23,10 +23,11 @@ public class ResourceReeng implements Entity<ResourceReeng> {
      **/
 
     private ResourceIDReeng id;
+    private LocalDate endDate;
     private PercentageOfAllocation allocation;
     private CostPerHour cost;
     private ProjectRoleReeng role;
-    private LocalDate endDate;
+
 
 
     public boolean isActiveToThisDate(LocalDate date) {

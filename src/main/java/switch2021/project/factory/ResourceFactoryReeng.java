@@ -11,7 +11,7 @@ import switch2021.project.model.valueObject.*;
 import java.time.LocalDate;
 
 @Component
-public class ResourceFactoryReeng implements ResourceFactoryInterfaceReeng {
+public class ResourceFactoryReeng implements IResourceFactoryReeng {
 
     @Autowired
     private IResouceIDFactory resourceID;
@@ -27,7 +27,7 @@ public class ResourceFactoryReeng implements ResourceFactoryInterfaceReeng {
         CostPerHour coPeHo = costPerHour.create(resourceDTO.costPerHour);
         PercentageOfAllocation percOfAll = percentageOfAllocation.create(resourceDTO.percentageOfAllocation);
 
-        return new ResourceReeng(resourceId, percOfAll, coPeHo, projRole, LocalDate.parse(resourceDTO.endDate));
+        return new ResourceReeng(resourceId, LocalDate.parse(resourceDTO.endDate), percOfAll, coPeHo, projRole);
     }
 
 
