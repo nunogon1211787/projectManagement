@@ -5,7 +5,12 @@ skinparam classAttributeIconSize 0
 title US013 - "As Administrator, I want to create user profiles."
 
 package "InfraEstructure" <<Rectangle>> #lightblue {
-    class "CreateUserProfilesRoute" as route <<Component>>{
+package "Route"{
+    class "CreateUserProfiles" as route <<Component>>
+    }
+
+    package "Persistence" {
+    class "IUserProfileRepositoryJpa" as jpa <<Interface>>
     }
 }
 
@@ -25,7 +30,7 @@ package "Controllers" <<Folder>>{
 
 package "DTO" <<Rectangle>>{
     class "UserProfileDTO" as dto <<Component>> {
-    -userProfileName : String
+    -userProfileName: String
     }
 
     class "UserProfileMapper" as mapper <<Component>> {
@@ -35,7 +40,7 @@ package "DTO" <<Rectangle>>{
 
 package "Application Service"<<Rectangle>> #implementation {
     package "App Service" {
-        class "CreateUserProfileService" as service <<Service>>{
+        class "UserProfileService" as service <<Service>>{
         +createAndSaveUserProfile(dto)
         }
     }
@@ -78,9 +83,19 @@ package "Domain" <<Rectangle>>#burlywood  {
     }
 }
 
+    package "Data Model" <<Rectangle>>{
+        class "UserProfileJpaAssembler" as assemblerjpa <<Component>> {
+        +toData (userProfile)
+        +toModel(userProfileJpa)
+        }
+
+        class "UserProfileJpa" as UPjpa {
+        -userProfileID: UserProfileID
+        }
+
 route ..> ctrl
 ctrl ..> service
-uRepo ..> iUserProfileRepo
+uRepo ..|> iUserProfileRepo
 service .left.> iUserProfileRepo
 service ..|> iUserProfileFactory
 service .down.> dto
@@ -91,6 +106,10 @@ userProfileFactory ..> iUserProfileIDFactory
 userProfileFactory ..> userProfile
 userProfileFactory .down.> dto
 userProfileIDFactory ..> userProfileID
+uRepo ..> jpa
+uRepo ...> assemblerjpa
+uRepo ...> UPjpa
+
 
 
 

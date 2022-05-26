@@ -19,6 +19,5 @@ public class UserProfileJpa {
     /** Attribute **/
     @EmbeddedId
     private UserProfileID userProfileID;
-
 }
 
