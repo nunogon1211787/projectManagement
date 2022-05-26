@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import switch2021.project.dto.DateDTO;
 import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.OutputResourceDTO;
-import switch2021.project.service.CreateResourceInAProjectService;
 import switch2021.project.service.ResourceService;
 
 import java.util.ArrayList;
@@ -24,7 +23,6 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class ResourceControllerTest {
 
-    @MockBean private CreateResourceInAProjectService createResourceService;
     @MockBean private ResourceService currentProjectTeamService;
     @InjectMocks private ResourceController ctrl;
 
