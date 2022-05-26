@@ -9,13 +9,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class GetScrumBoardController {
-
+/*
     /**
      * Attributes
      **/
 //    private final Company company;
 //    private final ScrumBoardMapper mapper;
-    private Sprint sprint;
+/*    private Sprint sprint;
     private Project project;
     private List<UserStory> userStoryList;
 
@@ -28,7 +28,7 @@ public class GetScrumBoardController {
 //        this.mapper = mapper;
 //    }
 
-
+/*
     /**
      * Getter's
      */
@@ -37,7 +37,7 @@ public class GetScrumBoardController {
 //        return project;
 //    }
 
-    public Sprint getCurrentSprint() {
+/*    public Sprint getCurrentSprint() {
         sprint = project.getCurrentSprint();
         return sprint;
     }

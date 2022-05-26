@@ -6,7 +6,7 @@ import org.springframework.hateoas.RepresentationModel;
 
 @Getter
 @AllArgsConstructor
-public class OutPutSprintDTO extends RepresentationModel<OutPutSprintDTO> {
+public class OutputSprintDTO extends RepresentationModel<OutputSprintDTO> {
 
     /**
      * Attributes

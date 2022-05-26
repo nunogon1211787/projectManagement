@@ -2,7 +2,6 @@ package switch2021.project.model.SystemUser;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import switch2021.project.dto.UpdateDataDTO;
 import switch2021.project.model.valueObject.*;
 import switch2021.project.utils.Entity;
 
@@ -41,6 +40,18 @@ public class User implements Entity<User> {
         this.requestedProfiles = new ArrayList<>();
         assignValidatedPassword(password, passwordConfirmation);
         assignProfileId(visitorID);
+    }
+
+    public User(SystemUserID systemUserId, Name userName, Photo photo, Description encryptedPassword,
+                Function function, boolean isActive, List<UserProfileID> assignedIdProfiles) {
+        this.systemUserId = systemUserId;
+        this.userName = userName;
+        this.photo = photo;
+        this.encryptedPassword = encryptedPassword;
+        this.function = function;
+        this.isActive = isActive;
+        this.assignedIdProfiles = assignedIdProfiles;
+        this.requestedProfiles = new ArrayList<>();
     }
 
     /**

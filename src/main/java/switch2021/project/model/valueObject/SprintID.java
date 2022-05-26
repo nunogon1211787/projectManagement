@@ -1,18 +1,25 @@
 package switch2021.project.model.valueObject;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import switch2021.project.interfaces.TaskContainerID;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+import java.util.Objects;
+
 @Getter
-@EqualsAndHashCode
+@Embeddable
+@NoArgsConstructor
 public class SprintID implements ValueObject<SprintID>, TaskContainerID {
 
     /** Attributes */
-    private final ProjectID projectID;
-    private final Description sprintName;
+    @Embedded
+    private ProjectID projectID;
+    @Embedded
+    private Description sprintName;
 
 
     /** Constructor */
@@ -40,5 +47,18 @@ public class SprintID implements ValueObject<SprintID>, TaskContainerID {
                 append(this.projectID, other.projectID).
                 append(this.sprintName, other.sprintName).
                 isEquals();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final SprintID that = (SprintID) o;
+        return sameValueAs(that);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(projectID, sprintName);
     }
 }

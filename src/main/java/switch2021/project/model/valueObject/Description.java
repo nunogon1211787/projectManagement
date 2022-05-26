@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.util.Objects;
 
@@ -19,7 +20,7 @@ public class Description implements ValueObject<Description> {
     /**
      * Attributes
      **/
-
+    @Column(name = "text")
     private String text;
     private static final int MINDESCRIPTIONLENGTH = 1;
     private static final int MAXDESCRIPTIONLENGTH = 1000;
@@ -38,20 +39,20 @@ public class Description implements ValueObject<Description> {
     }
 
     @Override
+    public boolean sameValueAs(final Description other) {
+        return other != null && this.text.equals(other.text);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Description that = (Description) o;
-        return Objects.equals(text, that.text);
+        final Description that = (Description) o;
+        return sameValueAs(that);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(text);
-    }
-
-    @Override
-    public boolean sameValueAs(Description other) {
-        return false;
+        return text.hashCode();
     }
 }

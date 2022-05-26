@@ -1,15 +1,20 @@
 package switch2021.project.repositories;
 
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import switch2021.project.datamodel.SprintJpa;
+import switch2021.project.datamodel.assembler.SprintJpaAssembler;
 import switch2021.project.interfaces.ISprintRepo;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.repositories.jpa.SprintJpaRepository;
 import switch2021.project.repositories.old.ProjectTeam;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Getter
 @Repository
@@ -17,6 +22,23 @@ public class SprintRepository implements ISprintRepo {
 
     /** Attributes **/
     private final List<Sprint> sprints;
+
+    @Autowired
+    private SprintJpaRepository sprintJpaRepository;
+    @Autowired
+    private SprintJpaAssembler assembler;
+
+    public Optional<Sprint> save(Sprint newSprint){
+        SprintJpa sprintJpa = assembler.toData(newSprint);
+        Optional<Sprint> sprint = Optional.empty();
+
+        if(!sprintJpaRepository.existsById(sprintJpa.getId())){
+          SprintJpa sprintJpaSaved = sprintJpaRepository.save(sprintJpa);
+          sprint = Optional.of(assembler.toDomain(sprintJpaSaved));
+        }
+        return sprint;
+    }
+
 
     /** Constructor **/
     public SprintRepository() { this.sprints = new ArrayList<>(); }
@@ -74,9 +96,9 @@ public class SprintRepository implements ISprintRepo {
         }
         return sprint;
     }
-
+/*
     /** Save Sprint */
-    public boolean save(Sprint sprint) {
+    /*public boolean save(Sprint sprint) {
         boolean msg = true;
         if (existsBySprintID(sprint.getSprintID().toString())){
             msg = false;
@@ -85,6 +107,8 @@ public class SprintRepository implements ISprintRepo {
         }
         return msg;
     }
+
+     */
 
     /** Delete Sprint Method **/
     public boolean deleteSprint (Sprint sprint){

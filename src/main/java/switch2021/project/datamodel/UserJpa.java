@@ -5,6 +5,7 @@ import switch2021.project.model.valueObject.Request;
 import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.model.valueObject.UserProfileID;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -12,7 +13,7 @@ import java.util.List;
 @Entity(name = "UserJpa")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+//@ToString
 @Table(name = "systemUsers")
 public class UserJpa {
 
@@ -25,8 +26,18 @@ public class UserJpa {
     private String isActive;
     @ElementCollection
     private List<UserProfileID> assignedIDProfiles;
-    @ElementCollection
-    private List<Request> requestList;
+    @OneToMany(mappedBy = "userJpa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<RequestJpa> requests;
 
-
+    public UserJpa(SystemUserID email, String userName, String function, String photo, String password,
+                   String isActive, List<UserProfileID> assignedIDProfiles) {
+        this.email = email;
+        this.userName = userName;
+        this.function = function;
+        this.photo = photo;
+        this.password = password;
+        this.isActive = isActive;
+        this.assignedIDProfiles = assignedIDProfiles;
+        this.requests = new ArrayList<>();
+    }
 }

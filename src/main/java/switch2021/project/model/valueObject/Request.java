@@ -1,5 +1,6 @@
 package switch2021.project.model.valueObject;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import switch2021.project.utils.ValueObject;
 
@@ -8,6 +9,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Getter
+@AllArgsConstructor
 public class Request implements ValueObject<Request> {
 
     /**
@@ -29,7 +31,7 @@ public class Request implements ValueObject<Request> {
         //this.profileRequested = profile;
         this.profileIdRequested = profileId;
     }
-
+/*
     /** //Não é preciso (Nuno) Method to change request status */
     /*public void changeRequestStatus() {
         this.requestStatus = true;
