@@ -75,7 +75,7 @@ public class UserRepository implements IUserRepo {
         UserJpa userJpa = userJpaAssembler.toData(newUser);
         Optional<User> user = Optional.empty();
 
-        if(!userJpaRepository.existsById(userJpa.getEmail())){
+        if(!userJpaRepository.existsById(userJpa.getEmail().getEmail().getEmailText())){
             UserJpa save = userJpaRepository.save(userJpa);
             user = Optional.of(userJpaAssembler.toDomain(save));
         }
