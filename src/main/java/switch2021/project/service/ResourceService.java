@@ -88,7 +88,8 @@ public class ResourceService {
     }
 
     private boolean checkSystemUserExists(IUserRepo userRepository, CreateResourceDTO dto){
-        return userRepository.existsByEmail(dto.systemUserID);
+        SystemUserID systemUserID = new SystemUserID(new Email(dto.systemUserID));
+        return userRepository.existsById(systemUserID);
     }
 
     private boolean checkProjectExists(IProjectRepo projectRepo, CreateResourceDTO dto){

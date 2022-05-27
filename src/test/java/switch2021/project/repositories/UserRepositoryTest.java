@@ -112,7 +112,7 @@ public class UserRepositoryTest {
 //        assertEquals(1, actualList.size());
 //    }
 
-    @Test
+ /*   @Test
     @DisplayName(".saveSystemUser(SystemUser user)")
     void itShouldSaveSystemUser() {
         //Arrange
