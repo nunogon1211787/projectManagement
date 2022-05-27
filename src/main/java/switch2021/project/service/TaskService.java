@@ -2,6 +2,7 @@ package switch2021.project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import switch2021.project.datamodel.ResourceIDJpa;
 import switch2021.project.dto.OutputTaskDTO;
 import switch2021.project.dto.TaskDTO;
 import switch2021.project.factoryInterface.TaskFactoryInterface;
@@ -11,8 +12,12 @@ import switch2021.project.model.Resource.ResourceIDReeng;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Task.TaskReeng;
 import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.model.valueObject.Email;
+import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.model.valueObject.UserStoryID;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -41,7 +46,17 @@ import java.util.Optional;
         }
 
         public OutputTaskDTO createAndSaveTask(TaskDTO taskDTO) {
-            ResourceIDReeng resId = IResourceRepo.findById(taskDTO.responsible).getId();
+
+            String[] values = taskDTO.responsible.split("_");// user_project_startDate
+
+
+            SystemUserID sysUserID = new SystemUserID(new Email(values[0]));
+            ProjectID projID = new ProjectID(values[1]);
+            LocalDate startDate = LocalDate.parse(values[2]);
+
+            ResourceIDReeng resId = new ResourceIDReeng(sysUserID, projID, startDate);
+
+//            ResourceIDReeng resId = IResourceRepo.findById(taskDTO.responsible).getId();
 
             TaskContainerID taskConId = returnTaskContainerID(taskDTO.taskContainerID);
 
