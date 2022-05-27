@@ -22,7 +22,7 @@ import java.time.LocalDate;
 public class ResourceJpa {
 
     @EmbeddedId
-    private ResourceIDReeng id;
+    private ResourceIDJpa id;
     private String endDate;
     private double allocation;
     private double cost;

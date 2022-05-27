@@ -1,6 +1,7 @@
 package switch2021.project.datamodel.assembler;
 
 import org.springframework.stereotype.Component;
+import switch2021.project.datamodel.ResourceIDJpa;
 import switch2021.project.datamodel.ResourceJpa;
 import switch2021.project.model.Resource.ResourceIDReeng;
 import switch2021.project.model.Resource.ResourceReeng;
@@ -13,12 +14,12 @@ public class ResourceJpaAssembler {
 
     public ResourceJpa toData(ResourceReeng resource) {
 
-        ResourceIDReeng id = resource.getId();
-//        SystemUserID userId = resource.getId().getUser();
-//        ProjectID projId = resource.getId().getProject();
-//        LocalDate startDate = resource.getId().getStartDate();
-//
-//        ResourceIDReeng id = new ResourceIDReeng(userId, projId, startDate);
+
+        SystemUserID userId = resource.getId().getUser();
+        ProjectID projId = resource.getId().getProject();
+        String startDate = resource.getId().getStartDate().toString();
+
+        ResourceIDJpa id = new ResourceIDJpa(userId, projId, startDate);
 
         double percentageOfAllocation = resource.getAllocation().getPercentage();
         double costPerHour = resource.getCost().getCost();
@@ -32,7 +33,8 @@ public class ResourceJpaAssembler {
 
     public ResourceReeng toDomain(ResourceJpa resourceJpaSaved) {
 
-        ResourceIDReeng id = resourceJpaSaved.getId();
+        ResourceIDReeng id = new ResourceIDReeng(resourceJpaSaved.getId().getUser(), resourceJpaSaved.getId().getProject(),
+                LocalDate.parse(resourceJpaSaved.getId().getStartDate()));
         LocalDate endDate = LocalDate.parse(resourceJpaSaved.getEndDate());
         PercentageOfAllocation percentageOfAllocation = new PercentageOfAllocation(resourceJpaSaved.getAllocation());
         CostPerHour costPerHour = new CostPerHour(resourceJpaSaved.getCost());
