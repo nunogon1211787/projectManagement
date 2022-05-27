@@ -130,7 +130,8 @@ public class ProjectService {
 
         if (userRepo.existsByEmail(dto.id)) {
 
-            List<ResourceReeng> userResources = resRepo.findAllByUser(dto.id);
+            SystemUserID userId = new SystemUserID(new Email(dto.id));
+            List<ResourceReeng> userResources = resRepo.findAllByUser(userId);
 
             List<ResourceReeng> currentUserResources = resService.currentResourcesByDate(userResources,
                                                                                          LocalDate.parse(dateDto.date));

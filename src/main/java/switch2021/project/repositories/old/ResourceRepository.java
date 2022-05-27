@@ -7,8 +7,9 @@ import switch2021.project.model.Resource.ResourceReeng;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 @Repository
-public class ResourceRepository implements IResourceRepo {
+public class ResourceRepository {
 
     /**
      * ProjectTeam's Attribute
@@ -28,25 +29,25 @@ public class ResourceRepository implements IResourceRepo {
      * Implementing Find methods of the Interface.
      **/
 
-    @Override
-    public ResourceReeng findById(String id) { //TODO Must implement
-        return null;
-    }
-
-    @Override
-    public boolean existsById(String id) {
-        return false;
-    }
-
-    @Override
-    public List<ResourceReeng> findAllByProject(String projectId) {
-        return null;
-    }
-
-    @Override
-    public List<ResourceReeng> findAllByUser(String systemUserId) {
-        return null;
-    }
+//    @Override
+//    public ResourceReeng findById(String id) { //TODO Must implement
+//        return null;
+//    }
+//
+//    @Override
+//    public boolean existsById(String id) {
+//        return false;
+//    }
+//
+//    @Override
+//    public List<ResourceReeng> findAllByProject(String projectId) {
+//        return null;
+//    }
+//
+//    @Override
+//    public List<ResourceReeng> findAllByUser(String systemUserId) {
+//        return null;
+//    }
 //    //Find the resource with resourceID in the list
 //    public Optional<Resource> findByResourceId(ResourceId resId){
 //        Optional<Resource> res = Optional.empty();
@@ -234,15 +235,15 @@ public class ResourceRepository implements IResourceRepo {
     /**
      * Method which saves new resource at ResourceStore List
      **/
-    @Override
-    public boolean saveResource(ResourceReeng resource) {
-        boolean msg = false;
-        if (resource != null) {
-            this.resources.add(resource);
-            msg = true;
-        }
-        return msg;
-    }
+//    @Override
+//    public boolean saveResource(ResourceReeng resource) {
+//        boolean msg = false;
+//        if (resource != null) {
+//            this.resources.add(resource);
+//            msg = true;
+//        }
+//        return msg;
+//    }
 
 
 //    /**

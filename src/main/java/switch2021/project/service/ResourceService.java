@@ -14,7 +14,9 @@ import switch2021.project.mapper.ResourceMapper;
 import switch2021.project.model.Project.ProjectReeng;
 import switch2021.project.model.Resource.ManageResourcesService;
 import switch2021.project.model.Resource.ResourceReeng;
+import switch2021.project.model.valueObject.Email;
 import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.repositories.ProjectRepository;
 
 import java.time.LocalDate;
@@ -55,7 +57,7 @@ public class ResourceService {
         } else {
             ResourceReeng newResource = iResourceFactory.createResource(dto);
 
-            resRepo.saveResource(newResource);
+            resRepo.save(newResource);
             response = map.model2Dto(newResource);
         }
 
@@ -73,7 +75,7 @@ public class ResourceService {
 
         if (projRepo.existsById(projectID.getCode())){
 
-            List<ResourceReeng> resources = resRepo.findAllByProject(projectId);
+            List<ResourceReeng> resources = resRepo.findAllByProject(projectID);
 
             List<ResourceReeng> projectTeam = manageResourcesService.currentResourcesByDate(resources, LocalDate.parse(dateDto.date));
 
@@ -99,12 +101,14 @@ public class ResourceService {
     }
 
     private boolean checkAllocation(IResourceRepo resRepo, CreateResourceDTO dto){
-        List<ResourceReeng> resourceProjectsList = resRepo.findAllByUser(dto.systemUserID);
+        SystemUserID sysUserId = new SystemUserID(new Email(dto.systemUserID));
+        List<ResourceReeng> resourceProjectsList = resRepo.findAllByUser(sysUserId);
         return manageResourcesService.validateAllocation(resourceProjectsList, dto);
     }
 
     private boolean checkProjectRole(IResourceRepo resRepo, CreateResourceDTO dto){
-        List<ResourceReeng> projectTeamList = resRepo.findAllByProject(dto.projectId);
+        ProjectID projID = new ProjectID(dto.projectId);
+        List<ResourceReeng> projectTeamList = resRepo.findAllByProject(projID);
         return manageResourcesService.validateProjectRole(projectTeamList, dto);
     }
 }

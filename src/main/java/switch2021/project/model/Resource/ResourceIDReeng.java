@@ -21,10 +21,6 @@ public class ResourceIDReeng implements ValueObject<ResourceIDReeng> {
     private SystemUserID user;
     @Embedded
     private ProjectID project;
-
-//    @Embedded
-//    @Temporal(TemporalType.DATE)
-//    @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
     private LocalDate startDate;
 
         public ResourceIDReeng(SystemUserID user, ProjectID project, LocalDate startDate) {
@@ -52,5 +48,12 @@ public class ResourceIDReeng implements ValueObject<ResourceIDReeng> {
     @Override
     public int hashCode() {
         return Objects.hash(getUser(), getProject(), getStartDate());
+    }
+
+    @Override
+    public String toString() {
+        return  user + "_" +
+                project + "_" +
+                startDate;
     }
 }
