@@ -5,6 +5,8 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.datamodel.ProjectJpa;
+import switch2021.project.datamodel.ResourceIDJpa;
+import switch2021.project.datamodel.ResourceJpa;
 import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.model.Project.ProjectReeng;
 import switch2021.project.model.valueObject.ProjectID;
@@ -40,7 +42,8 @@ public class ProjectRepository implements IProjectRepo {
 
     @Override
     public Optional<ProjectReeng> findById(String id) {
-        Optional<ProjectJpa> opProjJpa = projectJpaRepository.findById(id);
+        ProjectID projID = new ProjectID(id);
+        Optional<ProjectJpa> opProjJpa = projectJpaRepository.findById(projID);
 
         if (opProjJpa.isPresent()) {
             ProjectJpa projJpa = opProjJpa.get();
@@ -51,10 +54,13 @@ public class ProjectRepository implements IProjectRepo {
             return Optional.empty();
     }
 
-    @Override
-    public boolean existsById(String id) {
-        return false;
-    }
+//    @Override
+//    public boolean existsById(ProjectID id) {
+//        Optional<ProjectJpa> projJpa = projectJpaRepository.findById(id);
+//
+//        return projJpa.isPresent();
+//
+//    }
 
 
     @Override
@@ -75,18 +81,18 @@ public class ProjectRepository implements IProjectRepo {
     @Override
     public boolean deleteByProjectID(String id) {
 
-        if (projectJpaRepository.existsById(id)) {
-            projectJpaRepository.deleteById(id);
+        ProjectID projID = new ProjectID(id);
+        if (projectJpaRepository.existsById(projID)) {
+            projectJpaRepository.deleteById(projID);
             return true;
         }
 
         return false;
     }
 
-
-    @Transactional
+//    @Transactional
     public boolean existsById(ProjectID id) {
-        return projectJpaRepository.existsById(id.getCode());
+        return projectJpaRepository.existsById(id);
     }
 
 }

@@ -73,7 +73,7 @@ public class ResourceService {
         ProjectID projectID = new ProjectID(projectId);
 //        // ------------- new ------------
 
-        if (projRepo.existsById(projectID.getCode())){
+        if (projRepo.existsById(projectID)){
 
             List<ResourceReeng> resources = resRepo.findAllByProject(projectID);
 
@@ -93,12 +93,20 @@ public class ResourceService {
     }
 
     private boolean checkProjectExists(IProjectRepo projectRepo, CreateResourceDTO dto){
-        return projectRepo.existsById(dto.projectId);
+        String[] x = dto.projectId.split("_");
+        return projectRepo.existsById(new ProjectID(x[2]));
     }
 
     private boolean checkDatesInsideProject(IProjectRepo projRepo, CreateResourceDTO dto){
+
         ProjectReeng project = projRepo.findById(dto.projectId).get();
-        return project.isActiveInThisDate(LocalDate.parse(dto.startDate)) && project.isActiveInThisDate(LocalDate.parse(dto.endDate));
+        boolean msg;
+        if(project.getEndDate() == null){
+            return project.isActiveInThisDate(LocalDate.parse(dto.startDate));
+        } else {
+            return project.isActiveInThisDate(LocalDate.parse(dto.startDate)) &&
+                    project.isActiveInThisDate(LocalDate.parse(dto.endDate));
+        }
     }
 
     private boolean checkAllocation(IResourceRepo resRepo, CreateResourceDTO dto){
@@ -108,7 +116,8 @@ public class ResourceService {
     }
 
     private boolean checkProjectRole(IResourceRepo resRepo, CreateResourceDTO dto){
-        ProjectID projID = new ProjectID(dto.projectId);
+        String[] x = dto.projectId.split("_");
+        ProjectID projID = new ProjectID(x[2]);
         List<ResourceReeng> projectTeamList = resRepo.findAllByProject(projID);
         return manageResourcesService.validateProjectRole(projectTeamList, dto);
     }

@@ -56,7 +56,7 @@ public class ResourceController {
             newResource = srv.createAndSaveResource(dto);
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
-            return new ResponseEntity<>(message, HttpStatus.CREATED);
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(newResource, HttpStatus.CREATED);
     }

@@ -2,6 +2,8 @@ package switch2021.project.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import switch2021.project.datamodel.ResourceIDJpa;
+import switch2021.project.datamodel.ResourceJpa;
 import switch2021.project.datamodel.UserJpa;
 import switch2021.project.datamodel.assembler.UserJpaAssembler;
 import switch2021.project.interfaces.IUserRepo;
@@ -62,7 +64,9 @@ public class UserRepository implements IUserRepo {
 
     @Override
     public boolean existsById(SystemUserID id) {
-        return false;
+        Optional<UserJpa> userJpa = userJpaRepository.findById(id);
+
+        return userJpa.isPresent();
     }
 
     /**
