@@ -127,8 +127,8 @@ public class ProjectService {
     public List<OutputProjectDTO> showCurrentProjectsByUser(IdDTO dto, DateDTO dateDto) {
 
         List<OutputProjectDTO> projectsDto = new ArrayList<>();
-
-        if (userRepo.existsByEmail(dto.id)) {
+        SystemUserID systemUserID = new SystemUserID(new Email(dto.id));
+        if (userRepo.existsById(systemUserID)) {
 
             List<ResourceReeng> userResources = resRepo.findAllByUser(dto.id);
 

@@ -14,7 +14,9 @@ import switch2021.project.mapper.ResourceMapper;
 import switch2021.project.model.Project.ProjectReeng;
 import switch2021.project.model.Resource.ManageResourcesService;
 import switch2021.project.model.Resource.ResourceReeng;
+import switch2021.project.model.valueObject.Email;
 import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.repositories.ProjectRepository;
 
 import java.time.LocalDate;
@@ -86,7 +88,8 @@ public class ResourceService {
     }
 
     private boolean checkSystemUserExists(IUserRepo userRepository, CreateResourceDTO dto){
-        return userRepository.existsByEmail(dto.systemUserID);
+        SystemUserID systemUserID = new SystemUserID(new Email(dto.systemUserID));
+        return userRepository.existsById(systemUserID);
     }
 
     private boolean checkProjectExists(IProjectRepo projectRepo, CreateResourceDTO dto){
