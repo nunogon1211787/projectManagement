@@ -11,6 +11,7 @@ import switch2021.project.model.Resource.ResourceIDReeng;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.Task.TaskReeng;
 import switch2021.project.model.UserStory.UserStory;
+import switch2021.project.model.valueObject.SprintID;
 import switch2021.project.model.valueObject.UserStoryID;
 
 import java.util.Optional;
@@ -59,9 +60,9 @@ import java.util.Optional;
             if(y.isPresent()){
                 z = y.get().getUserStoryID();
             }else{
-                Sprint x = iSprintRepo.findBySprintID(taskContainerID);
-                if(x != null){
-                    z = x.getSprintID();
+                Optional<Sprint> x = iSprintRepo.findBySprintID(new SprintID(taskContainerID));
+                if(x.isPresent()){
+                    z = x.get().getSprintID();
                 } else{
                     throw new IllegalArgumentException("ID inválido");
                 }

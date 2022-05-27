@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface IUserRepo{
 
-    Optional<User> findUserById(SystemUserID id);
+    Optional<User> findByUserId(SystemUserID id);
 
     List<User> findAll();
 

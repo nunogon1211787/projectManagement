@@ -41,10 +41,12 @@ public class AddUserStoryToSprintBacklogController {
         return sprintList;
     }
 
-    public Sprint getSprint(String sprintId) {
+    /*public Sprint getSprint(String sprintId) {
         this.sprint = this.sprintList.findBySprintID(sprintId);
         return this.sprint;
     }
+
+     */
 
     public UserStoryRepository getUserStoryStore() {
         this.userStoryStore = this.project.getUserStoryStore();

@@ -16,28 +16,13 @@ import java.util.Optional;
 @Repository
 public class UserRepository implements IUserRepo {
 
-    /**
-     * Class Attributes
-     */
-    //private List<User> userList;
-
     @Autowired
     private UserJpaRepository userJpaRepository;
     @Autowired
     private UserJpaAssembler userJpaAssembler;
 
-    /**
-     * Constructor
-     */
-    /*public UserRepository() {
-        this.userList = new ArrayList<>();
-    }
-
-     */
-
-
     @Override
-    public Optional<User> findUserById(SystemUserID systemUserID) {
+    public Optional<User> findByUserId(SystemUserID systemUserID) {
 
         Optional<UserJpa> userJpa = userJpaRepository.findById(systemUserID);
 
@@ -62,23 +47,10 @@ public class UserRepository implements IUserRepo {
 
     @Override
     public boolean existsById(SystemUserID id) {
-        return false;
+        return userJpaRepository.existsById(id);
     }
 
-    /**
-     * Save Method
-     */
-/*    @Override
-    public boolean save(User user) {
-        if (user == null || existsByEmail(user.getSystemUserId().getEmail().getEmailText())) {
-            return false;
-        } else {
-            return this.userList.add(user);
-        }
-    }
-
- */
-
+    @Override
     public Optional<User> save (User newUser) {
 
         UserJpa userJpa = userJpaAssembler.toData(newUser);
@@ -90,22 +62,6 @@ public class UserRepository implements IUserRepo {
         }
         return user;
     }
-
-    /*@Override
-    public boolean existsByEmail(String newUserEmail) {
-        boolean result = false;
-
-        for (User newUser : this.userList) {
-            if (newUser.getSystemUserId().getEmail().getEmailText().trim().equalsIgnoreCase(newUserEmail.trim())) {
-                result = true;
-                break;
-            }
-        }
-        return result;
-    }
-
-     */
-
 
     @Override
     public boolean delete(SystemUserID systemUserID) {

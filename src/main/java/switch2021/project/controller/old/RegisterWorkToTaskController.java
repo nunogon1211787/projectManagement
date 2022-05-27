@@ -49,8 +49,8 @@ public class RegisterWorkToTaskController {
         ProjectStore projectStore = this.company.getProjectStore();
         Project project = projectStore.findById(code);
 
-        SprintRepository sprintList = project.getSprintList();
-        Sprint sprint = sprintList.findBySprintID(sprintId);
+        //SprintRepository sprintList = project.getSprintList();
+        //Sprint sprint = sprintList.findBySprintID(sprintId);
 
         //this.userStory = sprint.getUsByIdFromScrumBoard(userStoryId);
 

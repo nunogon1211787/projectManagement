@@ -11,11 +11,7 @@ import switch2021.project.model.valueObject.SystemUserID;
 public class UserIDFactory implements IUserIDFactory {
 
     @Autowired
-    private final IEmailFactory emailFactory;
-
-    public UserIDFactory(IEmailFactory emailFactory) {
-        this.emailFactory = emailFactory;
-    }
+    private IEmailFactory emailFactory;
 
     @Override
     public SystemUserID createUserID(String emailText) {

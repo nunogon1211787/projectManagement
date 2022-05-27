@@ -7,6 +7,8 @@ import switch2021.project.datamodel.SprintJpa;
 import switch2021.project.datamodel.assembler.SprintJpaAssembler;
 import switch2021.project.interfaces.ISprintRepo;
 import switch2021.project.model.Sprint.Sprint;
+import switch2021.project.model.valueObject.ProjectID;
+import switch2021.project.model.valueObject.SprintID;
 import switch2021.project.repositories.jpa.SprintJpaRepository;
 import switch2021.project.repositories.old.ProjectTeam;
 
@@ -28,24 +30,28 @@ public class SprintRepository implements ISprintRepo {
     @Autowired
     private SprintJpaAssembler assembler;
 
-    public Optional<Sprint> save(Sprint newSprint){
+    /**
+     * Constructor
+     **/
+    public SprintRepository() {
+        this.sprints = new ArrayList<>();
+    }
+
+    public Optional<Sprint> save(Sprint newSprint) {
         SprintJpa sprintJpa = assembler.toData(newSprint);
         Optional<Sprint> sprint = Optional.empty();
 
-        if(!sprintJpaRepository.existsById(sprintJpa.getId())){
-          SprintJpa sprintJpaSaved = sprintJpaRepository.save(sprintJpa);
-          sprint = Optional.of(assembler.toDomain(sprintJpaSaved));
+        if (!sprintJpaRepository.existsById(sprintJpa.getId())) {
+            SprintJpa sprintJpaSaved = sprintJpaRepository.save(sprintJpa);
+            sprint = Optional.of(assembler.toDomain(sprintJpaSaved));
         }
         return sprint;
     }
 
-
-    /** Constructor **/
-    public SprintRepository() { this.sprints = new ArrayList<>(); }
-
-
-    /** Check If Sprint Already Exists */
-    public boolean existsBySprintID (String sprintID) {
+    /**
+     * Check If Sprint Already Exists
+     */
+    public boolean existsBySprintID(String sprintID) {
         boolean msg = false;
         for (Sprint sprint : sprints) {
             if(sprint.hasSprintID(sprintID)) {
@@ -56,27 +62,39 @@ public class SprintRepository implements ISprintRepo {
     }
 
     /** Find List of Sprints Method **/
+    @Override
     public List<Sprint> findAllSprints() {
-        return new ArrayList<>(this.sprints);
+        List<SprintJpa> sprintJpaList = sprintJpaRepository.findAll();
+        List<Sprint> sprints = new ArrayList<>();
+
+        for (SprintJpa sprintJpa : sprintJpaList) {
+            sprints.add(assembler.toDomain(sprintJpa));
+        }
+        return sprints;
     }
 
-    /** Find Sprint By ID Method **/
-    public Sprint findBySprintID(String sprintID) {
-        Sprint sprint = null;
-        for (Sprint sprt : sprints) {
-            if (sprt.hasSprintID(sprintID)) {
-                sprint = sprt;
-                break;
-            }
+    /**
+     * Find Sprint By ID Method
+     **/
+    @Override
+    public Optional<Sprint> findBySprintID(SprintID id) {
+        Optional<SprintJpa> sprintJpa = sprintJpaRepository.findById(id);
+        Optional<Sprint> sprint = Optional.empty();
+
+        if (sprintJpa.isPresent()) {
+            sprint = Optional.of(assembler.toDomain(sprintJpa.get()));
         }
         return sprint;
     }
 
-    /** Find all sprints associated to a Project ID Method **/
-    public List<Sprint> findAllSprintsByProjectID(String projectID) {
+    /**
+     * Find all sprints associated to a Project ID Method
+     **/
+    @Override
+    public List<Sprint> findAllSprintsByProjectID(ProjectID projectID) {
         List<Sprint> allSprintsInAProject = new ArrayList<>();
         for (Sprint x : sprints) {
-            if (x.getSprintID().getProjectID().getCode().equalsIgnoreCase(projectID)) {
+            if (x.getSprintID().getProjectID().getCode().equalsIgnoreCase(projectID.getCode())) {
                 allSprintsInAProject.add(x);
             }
         }
@@ -96,24 +114,15 @@ public class SprintRepository implements ISprintRepo {
         }
         return sprint;
     }
-/*
-    /** Save Sprint */
-    /*public boolean save(Sprint sprint) {
-        boolean msg = true;
-        if (existsBySprintID(sprint.getSprintID().toString())){
-            msg = false;
-        } else {
-            sprints.add(sprint);
-        }
-        return msg;
-    }
-
-     */
 
     /** Delete Sprint Method **/
-    public boolean deleteSprint (Sprint sprint){
-        this.sprints.remove(sprint);
-        return true;
+    @Override
+    public boolean deleteSprint (SprintID sprintID){
+        if(sprintJpaRepository.existsById(sprintID)) {
+            sprintJpaRepository.deleteById(sprintID);
+            return true;
+        }
+        return false;
     }
 
     /** Method to Validate if StartDate is later than the EndDate of the last Sprint **/
@@ -132,23 +141,9 @@ public class SprintRepository implements ISprintRepo {
         boolean msg = false;
         if (validateStartDate(startDate) && projectTeam.validateProjectTeam(startDate, sprintDuration)) {
             msg = true;
-            findBySprintID(sprintID);
+            findBySprintID(new SprintID(sprintID));
             //sprint.setStartDate(startDate);
         }
         return msg;
-    }
-
-    /** Override Methods **/
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof SprintRepository)) return false;
-        SprintRepository that = (SprintRepository) o;
-        return sprints.equals(that.sprints);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(sprints);
     }
 }
