@@ -2,6 +2,7 @@ package switch2021.project.interfaces;
 
 import switch2021.project.model.Sprint.Sprint;
 import java.util.List;
+import java.util.Optional;
 
 public interface ISprintRepo {
 
@@ -24,7 +25,7 @@ public interface ISprintRepo {
 
     /** Save Sprint. */
 
-    boolean save(Sprint sprint);
+    Optional<Sprint> save(Sprint newSprint);
 
     /** Delete a Sprint. */
 

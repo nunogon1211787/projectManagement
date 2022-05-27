@@ -3,7 +3,9 @@ package switch2021.project.mapper;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Component;
 import switch2021.project.controller.UserController;
+import switch2021.project.dto.IdDTO;
 import switch2021.project.dto.OutputUserDTO;
+import switch2021.project.dto.UpdateDataDTO;
 import switch2021.project.model.SystemUser.User;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,17 +25,22 @@ public class UserMapper {
         String active = user.isActive() ? "True" : "False";
 
         OutputUserDTO outputUserDTO = new OutputUserDTO(username, email, function, photo, active);
+        //IdDTO idDTO = new IdDTO(email);
 
         //Add HATEOAS to OutPut DTO
 
         //Self Relation
         outputUserDTO.add(linkTo(methodOn(UserController.class).getUser(outputUserDTO.email)).withSelfRel());
 
-        //Collection (list) Relation
+        //Collection Relation
         outputUserDTO.add(linkTo(methodOn(UserController.class).showAllUsers()).withRel("Collection"));
 
         //Delete option
         outputUserDTO.add(linkTo(methodOn(UserController.class).deleteUser(outputUserDTO.email)).withRel("Delete"));
+
+        //Update
+        outputUserDTO.add(linkTo(methodOn(UserController.class).updatePersonalData(outputUserDTO.getEmail(),
+                new UpdateDataDTO())).withRel("Edit"));
 
         return outputUserDTO;
     }

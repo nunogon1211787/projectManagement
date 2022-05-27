@@ -2,6 +2,8 @@ package switch2021.project.model.valueObject;
 
 import lombok.NoArgsConstructor;
 import switch2021.project.utils.ValueObject;
+
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
@@ -11,6 +13,7 @@ public class Email implements ValueObject<Email> {
     /**
      * Attributes
      */
+    @Column(name = "email")
     private String emailText;
     private static final int MAX_LENGTH = 50;
     private static final int MIN_LENGTH = 3;

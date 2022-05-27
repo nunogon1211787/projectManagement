@@ -1,39 +1,42 @@
-//package switch2021.project.controller;
-//
-//import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.api.extension.ExtendWith;
-//import org.mockito.InjectMocks;
-//import org.mockito.Mock;
-//import org.mockito.junit.jupiter.MockitoExtension;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.mock.web.MockHttpServletRequest;
-//import org.springframework.web.context.request.RequestContextHolder;
-//import org.springframework.web.context.request.ServletRequestAttributes;
-//import switch2021.project.dto.UserProfileDTO;
-//import switch2021.project.service.UserProfileService;
-//
-//import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-//import static org.mockito.Mockito.mock;
-//import static org.mockito.Mockito.when;
-//
+package switch2021.project.controller;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
+import switch2021.project.dto.UserProfileDTO;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 //@ExtendWith(MockitoExtension.class)
-//public class UserProfileControllerTest {
-//
-//    @InjectMocks
-//    UserProfileController controller;
-//    @Mock
-//    UserProfileService service;
-//
-//    @Test
-//    public void createUserProfileControllerTest() {
-//        //Arrange
-//        MockHttpServletRequest request = new MockHttpServletRequest();
-//        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-//        UserProfileDTO dto = mock(UserProfileDTO.class);
-//        //Act
-//        when(service.createAndSaveUserProfile(dto)).thenReturn(dto);
-//        ResponseEntity<Object> response = controller.createUserProfile(dto);
-//        //Assert
-//        assertThat(response.getStatusCodeValue()).isEqualTo(201);
-//    }
-//}
+@SpringBootTest
+public class UserProfileControllerTest {
+/*
+    @MockBean
+    UserProfileService userProfileService;
+
+    @MockBean
+    UserProfile userProfile;
+
+    @InjectMocks
+    UserProfileController userProfileController;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        MockitoAnnotations.openMocks(this);
+    }
+ */
+
+    @Autowired
+    UserProfileController userProfileController;
+
+    @Test
+    void shouldCreateAUserProfile() {
+        // Arrange
+        UserProfileDTO dto = new UserProfileDTO("regular");
+        // Act
+        ResponseEntity<Object> responseEntity = userProfileController.createUserProfile(dto);
+        // Assert
+        assertEquals(201, responseEntity.getStatusCodeValue());
+    }
+}

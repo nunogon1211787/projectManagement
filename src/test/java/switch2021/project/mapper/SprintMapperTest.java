@@ -2,7 +2,7 @@ package switch2021.project.mapper;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.dto.OutPutSprintDTO;
+import switch2021.project.dto.OutputSprintDTO;
 import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.valueObject.SprintID;
 import switch2021.project.model.valueObject.Description;
@@ -29,7 +29,7 @@ public class SprintMapperTest {
         when(sprintID.getProjectID()).thenReturn(projectID);
         when(projectID.getCode()).thenReturn("Project_2022_1");
 
-        OutPutSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
+        OutputSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
 
         //Assert
         assertEquals(sprint.getSprintID().toString(), outPutSprintDTO.sprintID);
@@ -50,7 +50,7 @@ public class SprintMapperTest {
         when(description.getText()).thenReturn("Sprint Name");
         when(sprintID.getProjectID()).thenReturn(projectID);
         when(projectID.getCode()).thenReturn("Project_2022_1");
-        OutPutSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
+        OutputSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
         //Assert
         assertEquals(sprintID.toString(), outPutSprintDTO.sprintID);
     }
@@ -70,7 +70,7 @@ public class SprintMapperTest {
         when(description.getText()).thenReturn("Sprint Name");
         when(sprintID.getProjectID()).thenReturn(projectID);
         when(projectID.getCode()).thenReturn("Project_2022_1");
-        OutPutSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
+        OutputSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
         //Assert
         assertEquals(description.getText(), outPutSprintDTO.name);
     }
@@ -90,13 +90,13 @@ public class SprintMapperTest {
         when(description.getText()).thenReturn("Sprint Name");
         when(sprintID.getProjectID()).thenReturn(projectID);
         when(projectID.getCode()).thenReturn("Project_2022_1");
-        OutPutSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
+        OutputSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
         //Assert
         assertEquals(projectID.getCode(), outPutSprintDTO.projectID);
     }
 
     @Test
-    @DisplayName("Test OutPutSprintDTO - SprintID")
+    @DisplayName("Test OutputSprintDTO - SprintID")
     public void outPutSprintDTO_SprintID() {
         //Arrange
         SprintMapper sprintMapper = new SprintMapper();
@@ -112,14 +112,14 @@ public class SprintMapperTest {
         when(sprintID.getSprintName()).thenReturn(description);
         when(description.getText()).thenReturn("Sprint Name");
 
-        OutPutSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
+        OutputSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
 
         //Assert
         assertEquals(outPutSprintDTO.getSprintID(), sprintID.toString());
     }
 
     @Test
-    @DisplayName("Test OutPutSprintDTO - ProjectID")
+    @DisplayName("Test OutputSprintDTO - ProjectID")
     public void outPutSprintDTO_ProjectID() {
         //Arrange
         SprintMapper sprintMapper = new SprintMapper();
@@ -135,14 +135,14 @@ public class SprintMapperTest {
         when(sprintID.getSprintName()).thenReturn(description);
         when(description.getText()).thenReturn("Sprint Name");
 
-        OutPutSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
+        OutputSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
 
         //Assert
         assertEquals(outPutSprintDTO.getProjectID(), "Project_2022_1");
     }
 
     @Test
-    @DisplayName("Test OutPutSprintDTO - Sprint Name")
+    @DisplayName("Test OutputSprintDTO - Sprint Name")
     public void outPutSprintDTO_SprintName() {
         //Arrange
         SprintMapper sprintMapper = new SprintMapper();
@@ -158,7 +158,7 @@ public class SprintMapperTest {
         when(sprintID.getSprintName()).thenReturn(description);
         when(description.getText()).thenReturn("Sprint Name");
 
-        OutPutSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
+        OutputSprintDTO outPutSprintDTO = sprintMapper.toDTO(sprint);
 
         //Assert
         assertEquals(outPutSprintDTO.getName(), "Sprint Name");

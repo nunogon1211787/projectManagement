@@ -1,11 +1,12 @@
 package switch2021.project.model.Sprint;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.SprintID;
-import switch2021.project.model.valueObject.UserStoryID;
+import switch2021.project.model.valueObject.UserStoryOfSprint;
 import switch2021.project.utils.Entity;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
@@ -30,12 +31,18 @@ public class Sprint implements Entity<Sprint> {
         this.sprintID = sprintID;
     }
 
+    public Sprint(SprintID sprintID, LocalDate startDate, LocalDate endDate) {
+        this.sprintID = sprintID;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     /**
      * Method to change Sprint EndDate
      **/
 
     public void changeEndDate(int sprintDurationInDays) {
-        this.endDate = LocalDate.now().plusDays(sprintDurationInDays -1L);
+        this.endDate = LocalDate.now().plusDays(sprintDurationInDays - 1L);
     }
 
     public boolean hasSprintID(String sprID) {
@@ -54,19 +61,21 @@ public class Sprint implements Entity<Sprint> {
     }
 
     /**
-     * Methods to call methods from sprint backlog
+     * Methods to call methods from scrumBoard
      */
 
-    public List<UserStory> getListOfUsFromScrumBoard(){
-        return this.scrumBoard.getUserStoryList();
+    public List<UserStoryOfSprint> getScrumBoardUserStoriesOfSprint() {
+        return this.scrumBoard.getUserStoriesOfSprint();
     }
 
-    public UserStory getUsByIdFromScrumBoard(UserStoryID id){
+/*    public UserStory getUsByIdFromScrumBoard(UserStoryID id){
         return this.scrumBoard.getUserStory(id);
     }
 
-    public boolean saveUsInScrumBoard(UserStory userStory){
-        scrumBoard.saveUserStoryToSprintBacklog(userStory);
+ */
+
+    public boolean saveUsInScrumBoard(UserStoryOfSprint userStoryOfSprint){
+        scrumBoard.getUserStoriesOfSprint().add(userStoryOfSprint);
         return true;
     }
 

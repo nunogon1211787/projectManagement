@@ -9,7 +9,13 @@ title US009 - As Product Owner, I want to create a user story and add it to the 
 skinparam classAttributeIconSize 0
 
 package "Infrastructure" <<Rectangle>> #lightblue  {
+package "Route" {
 class "CreateUserStoryRoute" as route << Component >>
+}
+
+    package "Persistence" {
+    class "IUserProfileRepositoryJpa" as jpa <<Interface>>
+    }
 }
 
 package "Interface Adapter" <<Rectangle>> #lightgreen {
@@ -111,6 +117,20 @@ class "TimeEstimate" as time << Value Object >> {
 +checkUsID()
 }
 }
+}
+
+  package "Data Model" <<Rectangle>>{
+        class "UserStoryJpaAssembler" as assemblerjpa <<Component>> {
+        +toData (userStory)
+        +toModel(userStoryJpa)
+        }
+
+        class "UserStoryJpa" as USjpa {
+        -userProfileID: UserProfileID
+        }
+
+
+
 
 
 route ..> ctrl
@@ -130,6 +150,9 @@ userStoryF..up>time
 userStoryF..>desc
 userStoryF..right>userStory
 userStoryF..up|>factoryInterface
+store ...> assemblerjpa
+store ...> USjpa
+store ..> jpa
 
 
 

@@ -1,13 +1,38 @@
 package switch2021.project.controller;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import switch2021.project.dto.NewSprintDTO;
+import switch2021.project.service.SprintService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-@ExtendWith(SpringExtension.class)
+//@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class SprintControllerTest {
+/*
+    @Autowired
+    private SprintController sprintController;
+
+    @Test //Integration Test
+    void itShouldRegisterAUserIntegration() {
+        //Arrange
+        NewSprintDTO dto = new NewSprintDTO();
+        dto.projectID = "maneloliveira";
+        dto.name = "maneloliveira@beaver.com";
+        //Act
+        ResponseEntity<Object> responseEntity = sprintController.createAndSaveSprint(dto);
+        //Assert
+        assertEquals(201, responseEntity.getStatusCodeValue());
+    }
+    
+ */
+
 
 //    @InjectMocks
 //    CreateSprintController createSprintController;
@@ -17,7 +42,7 @@ public class SprintControllerTest {
 //    @Mock
 //    NewSprintDTO newSprintDTO;
 //    @Mock
-//    OutPutSprintDTO outPutSprintDTO;
+//    OutputSprintDTO outPutSprintDTO;
 //    @Mock
 //    MockHttpServletRequest mockHttpServletRequest;
 //
