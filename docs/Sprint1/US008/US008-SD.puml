@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-title US008 - As a Project Manager i want to edit some project information
+title US008 - As a Project Manager I want to edit some project information
 
 autoactivate on
 autonumber
@@ -28,9 +28,11 @@ controller -> service: editProject(inDto)
 
 note over service : The creation of the id are hidden to simplify the diagram.
 
-service -> store: findByProjectId(projectId)
+service -> store: updateProjectPartially(projectId, editProjectInfoDTO)
 
-store --> service: project
+ref over store: [[US008jpaGet-SD.puml]]
+
+store --> service: proj
 
 alt if project exist
 
@@ -40,13 +42,19 @@ note over project : The changes of attributes are hidden to simplify the diagram
 
 project --> service : result
 
-service -> mapper: model2DTO(project)
+service -> store : save(proj)
+
+ref over store: [[US008jpaUpdate-SD.puml]]
+store --> service : proj
+
+service -> mapper: model2DTO(proj)
 
 mapper -> dto**: model2DTO(proj)
 
 mapper --> service: outputDto
 
 else if project does not exist
+
 service --> exc** : create(errorMessage)
 
 end

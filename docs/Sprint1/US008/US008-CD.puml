@@ -15,6 +15,10 @@ package Routers <<Rectangle>> {
 class "EditProjectRoute" as route <<Component>>
 }
 
+package "Persistence" <<Rectangle>> {
+    class "IProjectRepositoryJpa" as jpa <<Interface>>
+    }
+
 }
 
 '-------------------INTERFACE ADAPTERS-------------------'
@@ -27,7 +31,7 @@ class ProjectController <<component>> {
 }
 
 package Repositories <<Rectangle>> {
-class ProjectStore <<repository>> {
+class ProjectsRepository <<repository>> {
 +findByProjectId()
 +save()
 }
@@ -87,12 +91,33 @@ class ProjectMapper <<component>> {
 class ProjectDTO <<component>>
 }
 
+package "Data Model" <<Rectangle>>{
+        class "ProjectJpaAssembler" as assemblerjpa <<Component>> {
+        +toData (project)
+        +toModel(projectJpa)
+        }
+
+        class "projectJpa" as ProjJpa {
+        -projectName
+        -description
+        -customer
+        -businessSector
+        -typology
+        -budget
+        -sprintDuration
+        -numberOfSprints
+        -status
+        -startDate
+        }
+}
+
 '-------------------OTHERS-------------------------------'
 class "ResponseEntity" as json <<Component>>
 
 }
 
 '-------------------RELATIONSHIPS------------------------'
+
 route ..> ProjectController
 ProjectController ..> srv
 ProjectController .r> json
@@ -100,8 +125,11 @@ srv .> IProjectRepo
 srv .r.> ProjectMapper
 srv ..> Project
 ProjectMapper .l> ProjectDTO
-ProjectStore ..> Project
-IProjectRepo <|.u. ProjectStore
+ProjectsRepository ..> Project
+IProjectRepo <|.u. ProjectsRepository
 Project -r> projId
+ProjectsRepository ..> jpa
+ProjectsRepository ..> assemblerjpa
+ProjectsRepository ..> ProjJpa
 
 @enduml
