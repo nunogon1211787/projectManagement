@@ -9,7 +9,7 @@ import switch2021.project.dto.ErrorMessage;
 import switch2021.project.dto.OutputProjectDTO;
 import switch2021.project.dto.ProjectDTO;
 import switch2021.project.dto.*;
-import switch2021.project.service.CreateProjectService;
+import switch2021.project.service.ProjectService;
 
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -20,7 +20,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class ProjectController {
 
     @Autowired
-    CreateProjectService service;
+    ProjectService service;
 
     /**
      * Find all projects

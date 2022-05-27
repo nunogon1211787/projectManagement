@@ -3,20 +3,13 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import switch2021.project.datamodel.ProjectJpa;
 import switch2021.project.dto.ProjectDTO;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class ProjectControllerTest {
 
     @Autowired
     ProjectController ctrl;
-
-    @Test
-    void createProject() {
-    }
 
     @Test
     void testCreateProject() {
@@ -35,7 +28,5 @@ class ProjectControllerTest {
         test.sprintDuration = "7";
 
         ctrl.createProject(test);
-
-
     }
 }

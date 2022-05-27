@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import switch2021.project.dto.ErrorMessage;
 import switch2021.project.dto.NewSprintDTO;
-import switch2021.project.dto.OutPutSprintDTO;
+import switch2021.project.dto.OutputSprintDTO;
 import switch2021.project.service.SprintService;
 
 @RestController
@@ -21,7 +21,7 @@ public class SprintController {
      **/
 
     @Autowired
-    private SprintService createSprintService;
+    private SprintService sprintService;
 
     /**
      * Methods
@@ -35,9 +35,9 @@ public class SprintController {
             message.errorMessage = "Needs to provide Sprint Name or Project ID.";
             return new ResponseEntity<>(message, HttpStatus.NOT_ACCEPTABLE);}
 
-        OutPutSprintDTO outPutSprintDTO;
+        OutputSprintDTO outPutSprintDTO;
         try {
-            outPutSprintDTO = createSprintService.createAndSaveSprint(dto);
+            outPutSprintDTO = sprintService.createAndSaveSprint(dto);
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);

@@ -4,25 +4,33 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import switch2021.project.factoryInterface.IResouceIDFactory;
+import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import switch2021.project.model.valueObject.Date;
 import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.model.valueObject.SystemUserID;
-import switch2021.project.model.valueObject.UserStoryID;
 import switch2021.project.utils.ValueObject;
 
 import javax.persistence.Embeddable;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
-
-@Embeddable
-@NoArgsConstructor
 @ToString
 @Getter
+@Embeddable
+@NoArgsConstructor
 public class ResourceIDReeng implements ValueObject<ResourceIDReeng> {
 
-        private SystemUserID user;
-        private ProjectID project;
-        private LocalDate startDate;
+    @Embedded
+    private SystemUserID user;
+    @Embedded
+    private ProjectID project;
+
+//    @Embedded
+//    @Temporal(TemporalType.DATE)
+//    @Convert(converter = Jsr310JpaConverters.LocalDateConverter.class)
+    private LocalDate startDate;
 
         public ResourceIDReeng(SystemUserID user, ProjectID project, LocalDate startDate) {
             this.user = user;
