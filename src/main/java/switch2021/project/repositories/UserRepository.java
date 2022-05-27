@@ -19,7 +19,7 @@ public class UserRepository implements IUserRepo {
     /**
      * Class Attributes
      */
-    private List<User> userList;
+    //private List<User> userList;
 
     @Autowired
     private UserJpaRepository userJpaRepository;
@@ -29,13 +29,15 @@ public class UserRepository implements IUserRepo {
     /**
      * Constructor
      */
-    public UserRepository() {
+    /*public UserRepository() {
         this.userList = new ArrayList<>();
     }
 
+     */
+
 
     @Override
-    public Optional<User> findUserById(String systemUserID) {
+    public Optional<User> findUserById(SystemUserID systemUserID) {
 
         Optional<UserJpa> userJpa = userJpaRepository.findById(systemUserID);
 
@@ -58,10 +60,15 @@ public class UserRepository implements IUserRepo {
         return userList;
     }
 
+    @Override
+    public boolean existsById(SystemUserID id) {
+        return false;
+    }
+
     /**
      * Save Method
      */
-    @Override
+/*    @Override
     public boolean save(User user) {
         if (user == null || existsByEmail(user.getSystemUserId().getEmail().getEmailText())) {
             return false;
@@ -70,19 +77,21 @@ public class UserRepository implements IUserRepo {
         }
     }
 
-    public Optional<User> saveReeng (User newUser) {
+ */
+
+    public Optional<User> save (User newUser) {
 
         UserJpa userJpa = userJpaAssembler.toData(newUser);
         Optional<User> user = Optional.empty();
 
-        if(!userJpaRepository.existsById(userJpa.getEmail().getEmail().getEmailText())){
+        if(!userJpaRepository.existsById(userJpa.getEmail())){
             UserJpa save = userJpaRepository.save(userJpa);
             user = Optional.of(userJpaAssembler.toDomain(save));
         }
         return user;
     }
 
-    @Override
+    /*@Override
     public boolean existsByEmail(String newUserEmail) {
         boolean result = false;
 
@@ -95,9 +104,11 @@ public class UserRepository implements IUserRepo {
         return result;
     }
 
+     */
+
 
     @Override
-    public boolean delete(String systemUserID) {
+    public boolean delete(SystemUserID systemUserID) {
 
         if(userJpaRepository.existsById(systemUserID)) {
             userJpaRepository.deleteById(systemUserID);

@@ -3,14 +3,20 @@ package switch2021.project.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
-import switch2021.project.dto.*;
+import switch2021.project.dto.NewUserInfoDTO;
+import switch2021.project.dto.OutputUserDTO;
+import switch2021.project.dto.SearchUserDTO;
+import switch2021.project.dto.UpdateDataDTO;
 import switch2021.project.factoryInterface.IUserFactory;
 import switch2021.project.factoryInterface.IUserProfileIDFactory;
 import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.mapper.UserMapper;
 import switch2021.project.model.SystemUser.User;
+import switch2021.project.model.valueObject.Email;
+import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.model.valueObject.UserProfileID;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +48,7 @@ public class UserService {
 
         User user = userFactory.createUser(infoDTO);
 
-        Optional<User> userSaved = userRepo.saveReeng(user);
+        Optional<User> userSaved = userRepo.save(user);
 
         OutputUserDTO outputUserDTO;
 
@@ -70,9 +76,9 @@ public class UserService {
      * Find User, by ID
      */
 
-    public OutputUserDTO findUserById(String idDTO) throws Exception{
-
-        Optional<User> opUser = userRepo.findUserById(idDTO);
+    public OutputUserDTO findUserById(String idDTO) throws Exception {
+        SystemUserID systemUserID = new SystemUserID(new Email(idDTO));
+        Optional<User> opUser = userRepo.findUserById(systemUserID);
 
         if (opUser.isEmpty()) {
             throw new Exception("User does not exists!");
@@ -86,11 +92,12 @@ public class UserService {
      */
 
     public OutputUserDTO updatePersonalData(String idDTO, UpdateDataDTO updateDataDTO) {
-
-        Optional<User> opUser = userRepo.findUserById(idDTO);
+        SystemUserID systemUserID = new SystemUserID(new Email(idDTO));
+        Optional<User> opUser = userRepo.findUserById(systemUserID);
+        User user;
 
         if (opUser.isPresent()) {
-            User user = opUser.get();
+            user = opUser.get();
 
             if (updateDataDTO.newPassword == null && updateDataDTO.oldPassword == null) {
                 user.editPersonalData(updateDataDTO.userName, updateDataDTO.function, updateDataDTO.photo);
@@ -98,7 +105,7 @@ public class UserService {
             if (updateDataDTO.userName == null && updateDataDTO.function == null) {
                 user.updatePassword(updateDataDTO.oldPassword, updateDataDTO.newPassword);
             }
-            userRepo.saveReeng(user);
+            userRepo.save(user);
             return userMapper.toDto(user);
         } else
             return null;
@@ -151,8 +158,8 @@ public class UserService {
      */
 
     public void deleteUser (String id) throws Exception {
-
-        if(!userRepo.delete(id)) {
+        SystemUserID systemUserID = new SystemUserID(new Email(id));
+        if (!userRepo.delete(systemUserID)) {
             throw new IllegalArgumentException("User does not exists!");
         }
 
