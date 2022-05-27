@@ -14,8 +14,9 @@ import switch2021.project.mapper.ResourceMapper;
 import switch2021.project.model.Project.ProjectReeng;
 import switch2021.project.model.Resource.ManageResourcesService;
 import switch2021.project.model.Resource.ResourceReeng;
+import switch2021.project.model.valueObject.Email;
 import switch2021.project.model.valueObject.ProjectID;
-import switch2021.project.model.valueObject.*;
+import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.repositories.ProjectRepository;
 
 import java.time.LocalDate;
