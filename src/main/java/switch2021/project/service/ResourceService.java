@@ -102,16 +102,16 @@ public class ResourceService {
 
     private boolean checkDatesInsideProject(IProjectRepo projRepo, CreateResourceDTO dto){
 
-        ProjectReeng project = projRepo.findById(dto.projectId).get();
-        boolean msg;
+        Project project = projRepo.findById(dto.projectId).get();
+//        boolean msg;
         if(project.getEndDate() == null){
             return project.isActiveInThisDate(LocalDate.parse(dto.startDate));
         } else {
             return project.isActiveInThisDate(LocalDate.parse(dto.startDate)) &&
                     project.isActiveInThisDate(LocalDate.parse(dto.endDate));
         }
-        Project project = projRepo.findById(dto.projectId).get();
-        return project.isActiveInThisDate(LocalDate.parse(dto.startDate)) && project.isActiveInThisDate(LocalDate.parse(dto.endDate));
+//        Project project = projRepo.findById(dto.projectId).get();
+//        return project.isActiveInThisDate(LocalDate.parse(dto.startDate)) && project.isActiveInThisDate(LocalDate.parse(dto.endDate));
     }
 
     private boolean checkAllocation(IResourceRepo resRepo, CreateResourceDTO dto){
