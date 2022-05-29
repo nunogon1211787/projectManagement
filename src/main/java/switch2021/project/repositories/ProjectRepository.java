@@ -8,7 +8,7 @@ import switch2021.project.datamodel.ProjectJpa;
 import switch2021.project.datamodel.ResourceIDJpa;
 import switch2021.project.datamodel.ResourceJpa;
 import switch2021.project.interfaces.IProjectRepo;
-import switch2021.project.model.Project.ProjectReeng;
+import switch2021.project.model.Project.Project;
 import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.repositories.jpa.ProjectJpaRepository;
 import switch2021.project.datamodel.assembler.ProjectJpaAssembler;
@@ -31,7 +31,7 @@ public class ProjectRepository implements IProjectRepo {
 
 
     @Override
-    public Optional<ProjectReeng> save(ProjectReeng newProject) {
+    public Optional<Project> save(Project newProject) {
         ProjectJpa projectJpa = projectJpaAssembler.toJpaData(newProject);
 
         ProjectJpa savedProj = projectJpaRepository.save(projectJpa);
@@ -41,6 +41,8 @@ public class ProjectRepository implements IProjectRepo {
 
 
     @Override
+    public Optional<Project> findById(String id) {
+        Optional<ProjectJpa> opProjJpa = projectJpaRepository.findById(id);
     public Optional<ProjectReeng> findById(String id) {
         ProjectID projID = new ProjectID(id);
         Optional<ProjectJpa> opProjJpa = projectJpaRepository.findById(projID);
@@ -48,7 +50,7 @@ public class ProjectRepository implements IProjectRepo {
         if (opProjJpa.isPresent()) {
             ProjectJpa projJpa = opProjJpa.get();
 
-            ProjectReeng proj = projectJpaAssembler.toDomain(projJpa);
+            Project proj = projectJpaAssembler.toDomain(projJpa);
             return Optional.of(proj);
         } else
             return Optional.empty();
@@ -64,14 +66,14 @@ public class ProjectRepository implements IProjectRepo {
 
 
     @Override
-    public List<ProjectReeng> findAll() {
+    public List<Project> findAll() {
         List<ProjectJpa> setProjectJpa = projectJpaRepository.findAll();
 
-        List<ProjectReeng> setProject = new ArrayList<>();
+        List<Project> setProject = new ArrayList<>();
 
         for (ProjectJpa projectJpa : setProjectJpa) {
-            ProjectReeng projectReeng = projectJpaAssembler.toDomain(projectJpa);
-            setProject.add(projectReeng);
+            Project project = projectJpaAssembler.toDomain(projectJpa);
+            setProject.add(project);
         }
 
         return setProject;
@@ -89,6 +91,7 @@ public class ProjectRepository implements IProjectRepo {
 
         return false;
     }
+
 
 //    @Transactional
     public boolean existsById(ProjectID id) {

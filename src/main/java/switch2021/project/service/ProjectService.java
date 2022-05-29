@@ -11,7 +11,7 @@ import switch2021.project.interfaces.IResourceRepo;
 import switch2021.project.interfaces.ITypologyRepo;
 import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.mapper.ProjectMapper;
-import switch2021.project.model.Project.ProjectReeng;
+import switch2021.project.model.Project.Project;
 import switch2021.project.model.Resource.ManageResourcesService;
 import switch2021.project.model.Resource.ResourceReeng;
 import switch2021.project.model.valueObject.*;
@@ -48,9 +48,9 @@ public class ProjectService {
 
     public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) throws Exception {
 
-        ProjectReeng newProject = iProjectFactory.createProject(projDTO);
+        Project newProject = iProjectFactory.createProject(projDTO);
 
-        Optional<ProjectReeng> savedProject = projRepo.save(newProject);
+        Optional<Project> savedProject = projRepo.save(newProject);
 
         OutputProjectDTO projectDTO;
 
@@ -64,8 +64,8 @@ public class ProjectService {
 
     public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) {
 
-        Optional<ProjectReeng> opProject = projRepo.findById(id);
-        ProjectReeng proj;
+        Optional<Project> opProject = projRepo.findById(id);
+        Project proj;
 
         if (opProject.isPresent()) {
             proj = opProject.get();
@@ -81,7 +81,7 @@ public class ProjectService {
             proj.setEndDate(LocalDate.parse(editProjectInfoDTO.endDate));
             proj.setTypology(new Typology(new TypologyID(new Description(editProjectInfoDTO.description))));*/
 
-            Optional<ProjectReeng> savedProject = projRepo.save(proj);
+            Optional<Project> savedProject = projRepo.save(proj);
 
             return savedProject.map(projectReeng -> projMapper.model2Dto(projectReeng)).orElse(null);
         }
@@ -90,11 +90,11 @@ public class ProjectService {
     }
 
 
-    private List<OutputProjectDTO> createProjectDTOList(List<ProjectReeng> projects) {
+    private List<OutputProjectDTO> createProjectDTOList(List<Project> projects) {
 
         List<OutputProjectDTO> allProjectsDto = new ArrayList<>();
 
-        for (ProjectReeng proj : projects) {
+        for (Project proj : projects) {
 
             OutputProjectDTO projDto = projMapper.model2Dto(proj);
 
@@ -108,14 +108,14 @@ public class ProjectService {
 
     public CollectionModel<OutputProjectDTO> showAllProjects() {
 
-        List<ProjectReeng> projects = projRepo.findAll();
+        List<Project> projects = projRepo.findAll();
 
         return projMapper.toCollectionDto(projects);
     }
 
     public OutputProjectDTO showProject(String id) throws Exception {
 
-        Optional<ProjectReeng> foundProject = projRepo.findById(id);
+        Optional<Project> foundProject = projRepo.findById(id);
 
         if (foundProject.isEmpty()) {
             throw new Exception("Project does not exist");
@@ -138,17 +138,17 @@ public class ProjectService {
 
             List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
 
-            List<ProjectReeng> projects = new ArrayList<>();
+            List<Project> projects = new ArrayList<>();
 
             for (ProjectID projId : resourceProjects) {
 
-                ProjectReeng proj = projRepo.findById(projId.getCode()).get();
+                Project proj = projRepo.findById(projId.getCode()).get();
 
                 projects.add(proj);
 
             }
 
-            for (ProjectReeng proj : projects) {
+            for (Project proj : projects) {
 
                 OutputProjectDTO projDto = projMapper.model2Dto(proj);
 

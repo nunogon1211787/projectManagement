@@ -8,12 +8,12 @@ import switch2021.project.dto.OutputUserDTO;
 import switch2021.project.dto.SearchUserDTO;
 import switch2021.project.dto.UpdateDataDTO;
 import switch2021.project.factoryInterface.IUserFactory;
+import switch2021.project.factoryInterface.IUserIDFactory;
 import switch2021.project.factoryInterface.IUserProfileIDFactory;
 import switch2021.project.interfaces.IUserProfileRepo;
 import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.mapper.UserMapper;
 import switch2021.project.model.SystemUser.User;
-import switch2021.project.model.valueObject.Email;
 import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.model.valueObject.UserProfileID;
 
@@ -34,6 +34,8 @@ public class UserService {
     private UserMapper userMapper;
     @Autowired
     private IUserFactory userFactory;
+    @Autowired
+    private IUserIDFactory userIDFactory;
     @Autowired
     private IUserProfileRepo profileRepo;
     @Autowired
@@ -77,8 +79,8 @@ public class UserService {
      */
 
     public OutputUserDTO findUserById(String idDTO) throws Exception {
-        SystemUserID systemUserID = new SystemUserID(new Email(idDTO));
-        Optional<User> opUser = userRepo.findUserById(systemUserID);
+        SystemUserID systemUserID = userIDFactory.createUserID(idDTO);
+        Optional<User> opUser = userRepo.findByUserId(systemUserID);
 
         if (opUser.isEmpty()) {
             throw new Exception("User does not exists!");
@@ -92,8 +94,8 @@ public class UserService {
      */
 
     public OutputUserDTO updatePersonalData(String idDTO, UpdateDataDTO updateDataDTO) {
-        SystemUserID systemUserID = new SystemUserID(new Email(idDTO));
-        Optional<User> opUser = userRepo.findUserById(systemUserID);
+        SystemUserID systemUserID = userIDFactory.createUserID(idDTO);
+        Optional<User> opUser = userRepo.findByUserId(systemUserID);
         User user;
 
         if (opUser.isPresent()) {
@@ -158,7 +160,7 @@ public class UserService {
      */
 
     public void deleteUser (String id) throws Exception {
-        SystemUserID systemUserID = new SystemUserID(new Email(id));
+        SystemUserID systemUserID = userIDFactory.createUserID(id);
         if (!userRepo.delete(systemUserID)) {
             throw new IllegalArgumentException("User does not exists!");
         }

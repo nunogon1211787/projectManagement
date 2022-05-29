@@ -3,7 +3,6 @@ package switch2021.project.mapper.old;
 import switch2021.project.dto.old.CreateTaskDTO;
 import switch2021.project.model.Task.Task;
 import switch2021.project.model.Resource.old.Resource;
-import switch2021.project.model.Project.Project;
 import switch2021.project.model.Task.TaskTypeEnum;
 
 import java.util.List;

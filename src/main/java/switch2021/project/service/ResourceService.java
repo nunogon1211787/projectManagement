@@ -11,7 +11,7 @@ import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.interfaces.IResourceRepo;
 import switch2021.project.interfaces.IUserRepo;
 import switch2021.project.mapper.ResourceMapper;
-import switch2021.project.model.Project.ProjectReeng;
+import switch2021.project.model.Project.Project;
 import switch2021.project.model.Resource.ManageResourcesService;
 import switch2021.project.model.Resource.ResourceReeng;
 import switch2021.project.model.valueObject.Email;
@@ -110,6 +110,8 @@ public class ResourceService {
             return project.isActiveInThisDate(LocalDate.parse(dto.startDate)) &&
                     project.isActiveInThisDate(LocalDate.parse(dto.endDate));
         }
+        Project project = projRepo.findById(dto.projectId).get();
+        return project.isActiveInThisDate(LocalDate.parse(dto.startDate)) && project.isActiveInThisDate(LocalDate.parse(dto.endDate));
     }
 
     private boolean checkAllocation(IResourceRepo resRepo, CreateResourceDTO dto){

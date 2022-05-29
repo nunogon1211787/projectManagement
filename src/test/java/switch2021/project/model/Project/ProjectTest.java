@@ -9,10 +9,9 @@ import switch2021.project.model.valueObject.*;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-class ProjectReengTest {
+class ProjectTest {
 
     @Mock
     ProjectID projectID;
@@ -130,11 +129,11 @@ class ProjectReengTest {
         //Arrange
         LocalDate startDate = LocalDate.now();
         //Act
-        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
-                numberOfSprints, sprintDuration, budget);
-        projectReeng.setProjectName(projectName);
+        Project project = new Project(projectName, description, businessSector, startDate,
+                                      numberOfSprints, sprintDuration, budget);
+        project.setProjectName(projectName);
         //Assert
-        assertEquals(projectName, projectReeng.getProjectName());
+        assertEquals(projectName, project.getProjectName());
     }
 
     @Test
@@ -142,11 +141,11 @@ class ProjectReengTest {
         //Arrange
         LocalDate startDate = LocalDate.now();
         //Act
-        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
-                numberOfSprints, sprintDuration, budget);
-        projectReeng.setDescription(description);
+        Project project = new Project(projectName, description, businessSector, startDate,
+                                      numberOfSprints, sprintDuration, budget);
+        project.setDescription(description);
         //Assert
-        assertEquals(description, projectReeng.getDescription());
+        assertEquals(description, project.getDescription());
     }
 
     @Test
@@ -154,11 +153,11 @@ class ProjectReengTest {
         //Arrange
         LocalDate startDate = LocalDate.now();
         //Act
-        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
-                numberOfSprints, sprintDuration, budget);
-        projectReeng.setTypology(typology);
+        Project project = new Project(projectName, description, businessSector, startDate,
+                                      numberOfSprints, sprintDuration, budget);
+        project.setTypology(typology);
         //Assert
-        assertEquals(typology, projectReeng.getTypology());
+        assertEquals(typology, project.getTypology());
     }
 
     @Test
@@ -166,12 +165,12 @@ class ProjectReengTest {
         //Arrange
         LocalDate startDate = LocalDate.now();
         //Act
-        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
-                numberOfSprints
+        Project project = new Project(projectName, description, businessSector, startDate,
+                                      numberOfSprints
                 , sprintDuration, budget);
-        projectReeng.setProjectStatus(ProjectStatusEnum.PLANNED);
+        project.setProjectStatus(ProjectStatusEnum.PLANNED);
         //Assert
-        assertEquals(ProjectStatusEnum.PLANNED, projectReeng.getProjectStatus());
+        assertEquals(ProjectStatusEnum.PLANNED, project.getProjectStatus());
     }
 
     @Test
@@ -179,12 +178,12 @@ class ProjectReengTest {
         //Arrange
         LocalDate startDate = LocalDate.now();
         //Act
-        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
-                numberOfSprints
+        Project project = new Project(projectName, description, businessSector, startDate,
+                                      numberOfSprints
                 , sprintDuration, budget);
-        projectReeng.setCustomer(customer);
+        project.setCustomer(customer);
         //Assert
-        assertEquals(customer, projectReeng.getCustomer());
+        assertEquals(customer, project.getCustomer());
     }
 
     @Test
@@ -192,12 +191,12 @@ class ProjectReengTest {
         //Arrange
         LocalDate startDate = LocalDate.now();
         //Act
-        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
-                numberOfSprints
+        Project project = new Project(projectName, description, businessSector, startDate,
+                                      numberOfSprints
                 , sprintDuration, budget);
-        projectReeng.setBusinessSector(businessSector);
+        project.setBusinessSector(businessSector);
         //Assert
-        assertEquals(businessSector, projectReeng.getBusinessSector());
+        assertEquals(businessSector, project.getBusinessSector());
     }
 
     @Test
@@ -205,12 +204,12 @@ class ProjectReengTest {
         //Arrange
         LocalDate startDate = LocalDate.now();
         //Act
-        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
-                numberOfSprints
+        Project project = new Project(projectName, description, businessSector, startDate,
+                                      numberOfSprints
                 , sprintDuration, budget);
-        projectReeng.setNumberOfSprints(numberOfSprints);
+        project.setNumberOfSprints(numberOfSprints);
         //Assert
-        assertEquals(numberOfSprints, projectReeng.getNumberOfSprints());
+        assertEquals(numberOfSprints, project.getNumberOfSprints());
     }
 
     @Test
@@ -218,12 +217,12 @@ class ProjectReengTest {
         //Arrange
         LocalDate startDate = LocalDate.now();
         //Act
-        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
-                numberOfSprints
+        Project project = new Project(projectName, description, businessSector, startDate,
+                                      numberOfSprints
                 , sprintDuration, budget);
-        projectReeng.setBudget(budget);
+        project.setBudget(budget);
         //Assert
-        assertEquals(budget, projectReeng.getBudget());
+        assertEquals(budget, project.getBudget());
     }
 
     @Test
@@ -231,12 +230,12 @@ class ProjectReengTest {
         //Arrange
         LocalDate startDate = LocalDate.now();
         //Act
-        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
-                numberOfSprints
+        Project project = new Project(projectName, description, businessSector, startDate,
+                                      numberOfSprints
                 , sprintDuration, budget);
-        projectReeng.setSprintDuration(sprintDuration);
+        project.setSprintDuration(sprintDuration);
         //Assert
-        assertEquals(sprintDuration, projectReeng.getSprintDuration());
+        assertEquals(sprintDuration, project.getSprintDuration());
     }
 
     @Test
@@ -244,12 +243,12 @@ class ProjectReengTest {
         //Arrange
         LocalDate startDate = LocalDate.now();
         //Act
-        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
-                numberOfSprints
+        Project project = new Project(projectName, description, businessSector, startDate,
+                                      numberOfSprints
                 , sprintDuration, budget);
-        projectReeng.setStartDate(startDate);
+        project.setStartDate(startDate);
         //Assert
-        assertEquals(startDate, projectReeng.getStartDate());
+        assertEquals(startDate, project.getStartDate());
     }
 
     @Test
@@ -258,23 +257,23 @@ class ProjectReengTest {
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = LocalDate.now();
         //Act
-        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
-                numberOfSprints
+        Project project = new Project(projectName, description, businessSector, startDate,
+                                      numberOfSprints
                 , sprintDuration, budget);
-        projectReeng.setEndDate(endDate);
+        project.setEndDate(endDate);
         //Assert
-        assertEquals(endDate, projectReeng.getEndDate());
+        assertEquals(endDate, project.getEndDate());
     }
 
     @Test
     void isActiveInThisDateFalse() {
         //Arrange
         LocalDate startDate = LocalDate.now();
-        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
-                numberOfSprints
+        Project project = new Project(projectName, description, businessSector, startDate,
+                                      numberOfSprints
                 , sprintDuration, budget);
         //Act
-        boolean expected = projectReeng.isActiveInThisDate(LocalDate.now().minusDays(1));
+        boolean expected = project.isActiveInThisDate(LocalDate.now().minusDays(1));
         //Assert
         assertFalse(expected);
     }
@@ -283,12 +282,12 @@ class ProjectReengTest {
     void isActiveInThisDateTrue() {
         //Arrange
         LocalDate startDate = LocalDate.now();
-        ProjectReeng projectReeng = new ProjectReeng(projectName, description, businessSector, startDate,
-                numberOfSprints
+        Project project = new Project(projectName, description, businessSector, startDate,
+                                      numberOfSprints
                 , sprintDuration, budget);
         //Act
-        projectReeng.setEndDate(LocalDate.now().plusDays(10));
-        boolean expected = projectReeng.isActiveInThisDate(LocalDate.now().plusDays(10));
+        project.setEndDate(LocalDate.now().plusDays(10));
+        boolean expected = project.isActiveInThisDate(LocalDate.now().plusDays(10));
         //Assert
         assertTrue(expected);
     }
