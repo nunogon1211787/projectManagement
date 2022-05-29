@@ -13,7 +13,6 @@ import java.io.Serializable;
 @Setter
 @Entity(name = "RequestJpa")
 @NoArgsConstructor
-//@ToString
 @Table(name = "requests")
 public class RequestJpa implements Serializable {
     @Id

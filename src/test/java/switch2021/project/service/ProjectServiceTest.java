@@ -12,7 +12,7 @@ import switch2021.project.dto.ProjectDTO;
 import switch2021.project.factoryInterface.IProjectFactory;
 import switch2021.project.repositories.jpa.ProjectJpaRepository;
 import switch2021.project.mapper.ProjectMapper;
-import switch2021.project.model.Project.ProjectReeng;
+import switch2021.project.model.Project.Project;
 
 @SpringBootTest
 class ProjectServiceTest {
@@ -25,7 +25,7 @@ class ProjectServiceTest {
     private ProjectJpaRepository ProjectJpaRepository;
 
     @Mock
-    private ProjectReeng projectReeng;
+    private Project project;
     @Mock
     private ProjectDTO projectDTO;
     @Mock

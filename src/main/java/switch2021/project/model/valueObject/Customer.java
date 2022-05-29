@@ -9,7 +9,6 @@ import javax.persistence.Embedded;
 
 @Getter
 @Setter
-//@Embeddable
 @NoArgsConstructor
 public class Customer {
 

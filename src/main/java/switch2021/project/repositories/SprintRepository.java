@@ -10,7 +10,6 @@ import switch2021.project.model.Sprint.Sprint;
 import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.model.valueObject.SprintID;
 import switch2021.project.repositories.jpa.SprintJpaRepository;
-import switch2021.project.repositories.old.ProjectTeam;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -136,14 +135,4 @@ public class SprintRepository implements ISprintRepo {
         return msg;
     }
 
-    /** Method to Start the Sprint **/
-    public boolean startASprint (String sprintID, LocalDate startDate, ProjectTeam projectTeam, int sprintDuration) {
-        boolean msg = false;
-        if (validateStartDate(startDate) && projectTeam.validateProjectTeam(startDate, sprintDuration)) {
-            msg = true;
-            findBySprintID(new SprintID(sprintID));
-            //sprint.setStartDate(startDate);
-        }
-        return msg;
-    }
 }

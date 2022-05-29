@@ -5,9 +5,8 @@ import org.springframework.stereotype.Component;
 import switch2021.project.controller.ProjectController;;
 import switch2021.project.dto.EditProjectInfoDTO;
 import switch2021.project.dto.OutputProjectDTO;
-import switch2021.project.model.Project.ProjectReeng;
+import switch2021.project.model.Project.Project;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +16,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Component
 public class ProjectMapper {
 
-    public OutputProjectDTO model2Dto(ProjectReeng newProject) {
+    public OutputProjectDTO model2Dto(Project newProject) {
 
         String code = newProject.getProjectCode();
         String projectName = newProject.getProjectName().getText();
@@ -63,7 +62,7 @@ public class ProjectMapper {
         return projDto;
     }
 
-    public CollectionModel<OutputProjectDTO> toCollectionDto(List<ProjectReeng> projects) {
+    public CollectionModel<OutputProjectDTO> toCollectionDto(List<Project> projects) {
 
         CollectionModel<OutputProjectDTO> result = CollectionModel.of(projects.stream()
                 .map(this::model2Dto)
