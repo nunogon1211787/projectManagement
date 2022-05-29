@@ -48,13 +48,16 @@ public class ResourceService {
             throw new IllegalArgumentException(("SystemUser does not exist"));
         } else if (!checkProjectExists(projRepo, dto)) {
             throw new IllegalArgumentException(("Project does not exist"));
-        } else if (!checkDatesInsideProject(projRepo,dto)) {
-            throw new IllegalArgumentException(("Dates are not inside project"));
-        } else if (!checkAllocation(resRepo, dto)) {
-            throw new IllegalArgumentException(("Is not valid to create - Allocation)"));
-        } else if (!checkProjectRole(resRepo, dto)) {
-            throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));
-        } else {
+        }
+//        else if (!checkDatesInsideProject(projRepo,dto)) {
+//            throw new IllegalArgumentException(("Dates are not inside project"));
+//        }
+//        else
+//        if (!checkAllocation(resRepo, dto)) {
+//            throw new IllegalArgumentException(("Is not valid to create - Allocation)"));
+//        } else if (!checkProjectRole(resRepo, dto)) {
+//            throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));}
+            else {
             ResourceReeng newResource = iResourceFactory.createResource(dto);
 
             resRepo.save(newResource);
@@ -93,8 +96,8 @@ public class ResourceService {
     }
 
     private boolean checkProjectExists(IProjectRepo projectRepo, CreateResourceDTO dto){
-        String[] x = dto.projectId.split("_");
-        return projectRepo.existsById(new ProjectID(x[2]));
+//        String[] x = dto.projectId.split("_");
+        return projectRepo.existsById(new ProjectID(dto.projectId));
     }
 
     private boolean checkDatesInsideProject(IProjectRepo projRepo, CreateResourceDTO dto){
