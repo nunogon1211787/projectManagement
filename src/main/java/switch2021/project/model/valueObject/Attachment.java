@@ -1,9 +1,16 @@
 package switch2021.project.model.valueObject;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+import javax.persistence.Embeddable;
 import java.util.*;
 
 @Getter
+@ToString
+@Embeddable
+@NoArgsConstructor
 
 public class Attachment {
 

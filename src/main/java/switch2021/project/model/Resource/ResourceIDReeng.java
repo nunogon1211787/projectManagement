@@ -3,6 +3,7 @@ package switch2021.project.model.Resource;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 import switch2021.project.factoryInterface.IResouceIDFactory;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
@@ -11,15 +12,18 @@ import switch2021.project.model.valueObject.ProjectID;
 import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@ToString
-@Getter
+
 @Embeddable
 @NoArgsConstructor
+@ToString
+@Getter
 public class ResourceIDReeng implements ValueObject<ResourceIDReeng> {
 
     @Embedded

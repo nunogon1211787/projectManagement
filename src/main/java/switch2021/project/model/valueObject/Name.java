@@ -2,6 +2,7 @@ package switch2021.project.model.valueObject;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import switch2021.project.utils.ValueObject;
 
@@ -12,6 +13,7 @@ import java.util.regex.Pattern;
 
 @ToString
 @Getter
+@Setter
 @Embeddable
 @NoArgsConstructor
 
