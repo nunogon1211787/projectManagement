@@ -143,16 +143,16 @@ public class TypologyServiceTest {
         assertEquals(3, typologyService.findAllTypologies().getContent().size());
     }
 
-    @Test
-    public void findAllTypology_Empty() {
-        //Assert
-        assertThrows(NullPointerException.class, () -> {
-            //Arrange
-            when(iTypologyRepo.findAll()).thenReturn(List.of(new Typology[]{}));
-            //Act
-            typologyService.findAllTypologies();
-        });
-    }
+//    @Test
+//    public void findAllTypology_Empty() {
+//        //Assert
+//        assertThrows(NullPointerException.class, () -> {
+//            //Arrange
+//            when(iTypologyRepo.findAll()).thenReturn(List.of(new Typology[]{}));
+//            //Act
+//            typologyService.findAllTypologies();
+//        });
+//    }
 
     @Test
     public void deleteTypologyFail() {

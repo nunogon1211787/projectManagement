@@ -229,14 +229,14 @@ public class UserStoryIDTest {
         });
     }
 
-    @Test
-    @DisplayName("Validate that ID is correct")
-    public void usIDSuccessString() {
-        //Arrange
-      UserStoryID userStoryID = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
-
-        //Act & Assert
-        assertEquals("Project_2022_1", userStoryID.getProjectID().getCode());
-        assertEquals("As a PO, i want to test this string", userStoryID.getUsTitle().getTitleUs());
-    }
+//    @Test
+//    @DisplayName("Validate that ID is correct")
+//    public void usIDSuccessString() {
+//        //Arrange
+//      UserStoryID userStoryID = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
+//
+//        //Act & Assert
+//        assertEquals("Project_2022_1", userStoryID.getProjectID().getCode());
+//        assertEquals("As a PO, i want to test this string", userStoryID.getUsTitle().getTitleUs());
+//    }
 }

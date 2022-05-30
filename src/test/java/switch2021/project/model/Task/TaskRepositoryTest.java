@@ -48,33 +48,33 @@ class TaskRepositoryTest {
 
  */
 
-    @Test
-    void createTaskSprint() {
-
-        ResourceIDReeng resourceIDReeng = new ResourceIDReeng(new SystemUserID(new Email("manuelbras@beaver.com")), new ProjectID("Project_2022_1"), LocalDate.of(2022, 1, 1) );
-
-        TaskContainerID taskContainerID = new SprintID("Project_2022_1_Sprint 1");
-
-        TaskID taskID = new TaskID(taskContainerID, (new Name ("Custodio")));
-
-        TaskReeng task = new TaskReeng(taskID);
-        task.setDescription(new Description("Isto é uma descrição"));
-        task.setEffortEstimate(new EffortEstimate(12));
-        task.setType(TaskTypeEnum.Design);
-        task.setResponsible(resourceIDReeng);
-
-
-        TaskRepository x = new TaskRepository();
-        x.save(task);
-
-        List<TaskReeng> taskL =  new ArrayList<>();
-        taskL.add(task);
-
-        List<TaskReeng> taskLe =  x.findAll();
-
-        assertEquals("Project_2022_1_Sprint 1", task.getIdTask().getTaskContainerID().toString());
-        assertEquals(taskL, x.getTaskList());
-        assertEquals(taskLe, x.getTaskList());
-
-    }
+//    @Test
+//    void createTaskSprint() {
+//
+//        ResourceIDReeng resourceIDReeng = new ResourceIDReeng(new SystemUserID(new Email("manuelbras@beaver.com")), new ProjectID("Project_2022_1"), LocalDate.of(2022, 1, 1) );
+//
+//        TaskContainerID taskContainerID = new SprintID("Project_2022_1_Sprint 1");
+//
+//        TaskID taskID = new TaskID(taskContainerID, (new Name ("Custodio")));
+//
+//        TaskReeng task = new TaskReeng(taskID);
+//        task.setDescription(new Description("Isto é uma descrição"));
+//        task.setEffortEstimate(new EffortEstimate(12));
+//        task.setType(TaskTypeEnum.Design);
+//        task.setResponsible(resourceIDReeng);
+//
+//
+//        TaskRepository x = new TaskRepository();
+//        x.save(task);
+//
+//        List<TaskReeng> taskL =  new ArrayList<>();
+//        taskL.add(task);
+//
+//        List<TaskReeng> taskLe =  x.findAll();
+//
+//        assertEquals("Project_2022_1_Sprint 1", task.getIdTask().getTaskContainerID().toString());
+//        assertEquals(taskL, x.getTaskList());
+//        assertEquals(taskLe, x.getTaskList());
+//
+//    }
 }

@@ -91,14 +91,14 @@ public class SprintTest {
         });
     }
 
-    @Test
-    @DisplayName("Verification test of hasSprintID method")
-    public void hasSprintIDTest() {
-        SprintID sprintID = new SprintID("Project_2022_1_Sprint 1");
-        Sprint sprint = new Sprint(sprintID);
-        sprint.setSprintID(sprintID);
-        assertTrue(sprint.hasSprintID("Project_2022_1_Sprint 1"));
-    }
+//    @Test
+//    @DisplayName("Verification test of hasSprintID method")
+//    public void hasSprintIDTest() {
+//        SprintID sprintID = new SprintID("Project_2022_1_Sprint 1");
+//        Sprint sprint = new Sprint(sprintID);
+//        sprint.setSprintID(sprintID);
+//        assertTrue(sprint.hasSprintID("Project_2022_1_Sprint 1"));
+//    }
 
     @Test
     @DisplayName("Verification test of hasSprintID method")

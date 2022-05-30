@@ -33,21 +33,21 @@ public class SprintIDFactoryTest {
     @Mock
     private SprintID sprintID;
 
-    @Test
-    @DisplayName("Test to create a SprintID - success")
-    public void createSprintID_Success(){
-        //Arrange
-        String project = "Project_2022_1";
-        projectID = new ProjectID(project);
-        when(projectIDFactory.create(project)).thenReturn(projectID);
-        String des = "Sprint Name";
-        description = new Description(des);
-        when(descriptionFactory.createDescription(des)).thenReturn(description);
-        //Act
-        sprintID = sprintIDFactory.create(project, des);
-        String x = "Project_2022_Project_2022_1_Sprint Name";
-        //Assert
-        assertEquals(x, sprintID.toString());
-    }
+//    @Test
+//    @DisplayName("Test to create a SprintID - success")
+//    public void createSprintID_Success(){
+//        //Arrange
+//        String project = "Project_2022_1";
+//        projectID = new ProjectID(project);
+//        when(projectIDFactory.create(project)).thenReturn(projectID);
+//        String des = "Sprint Name";
+//        description = new Description(des);
+//        when(descriptionFactory.createDescription(des)).thenReturn(description);
+//        //Act
+//        sprintID = sprintIDFactory.create(project, des);
+//        String x = "Project_2022_Project_2022_1_Sprint Name";
+//        //Assert
+//        assertEquals(x, sprintID.toString());
+//    }
 
 }
