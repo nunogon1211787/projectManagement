@@ -17,7 +17,8 @@ class ResourceServiceTest {
 
     @MockBean IProjectRepo projRepo;
     @MockBean IResourceRepo resRepo;
-    @MockBean ResourceMapper map;
+    @MockBean
+    ResourceMapper map;
     @MockBean ManageResourcesService dsrv;
     @InjectMocks
     ResourceService srv;
