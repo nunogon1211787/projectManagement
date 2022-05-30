@@ -13,6 +13,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import switch2021.project.dtoModel.dto.TypologyDTO;
 import switch2021.project.applicationServices.service.TypologyService;
+import switch2021.project.interfaceAdapters.controller.TypologyController;
 
 import java.util.List;
 

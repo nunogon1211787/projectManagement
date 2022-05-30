@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import switch2021.project.applicationServices.service.UserProfileService;
 import switch2021.project.dtoModel.dto.UserProfileDTO;
 import switch2021.project.entities.aggregates.UserProfile.UserProfile;
+import switch2021.project.interfaceAdapters.controller.UserProfileController;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -1,4 +1,4 @@
-package switch2021.project.repositories;
+package switch2021.project.interfaceAdapters.repositories;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

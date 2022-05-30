@@ -12,6 +12,7 @@ import switch2021.project.dtoModel.dto.DateDTO;
 import switch2021.project.dtoModel.dto.IdDTO;
 import switch2021.project.dtoModel.dto.OutputResourceDTO;
 import switch2021.project.applicationServices.service.ResourceService;
+import switch2021.project.interfaceAdapters.controller.ResourceController;
 
 import java.util.ArrayList;
 import java.util.List;

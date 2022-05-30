@@ -5,6 +5,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import switch2021.project.dtoModel.mapper.TaskMapperNew;
+import switch2021.project.interfaceAdapters.controller.TaskController;
 import switch2021.project.interfaceAdapters.repositories.TaskRepository;
 import switch2021.project.applicationServices.service.TaskService;
 

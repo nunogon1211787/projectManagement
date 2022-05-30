@@ -1,4 +1,4 @@
-package switch2021.project.repositories;
+package switch2021.project.interfaceAdapters.repositories;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;

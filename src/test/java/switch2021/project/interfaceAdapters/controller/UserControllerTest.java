@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 import switch2021.project.dtoModel.dto.NewUserInfoDTO;
+import switch2021.project.interfaceAdapters.controller.UserController;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
