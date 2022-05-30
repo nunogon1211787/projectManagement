@@ -13,8 +13,10 @@ import switch2021.project.dto.UserStoryIdDTO;
 import switch2021.project.factoryInterface.IProjectIDFactory;
 import switch2021.project.factoryInterface.IUserStoryFactory;
 import switch2021.project.factoryInterface.IUserStoryIDFactory;
+import switch2021.project.interfaces.IProjectRepo;
 import switch2021.project.interfaces.IUserStoryRepo;
 import switch2021.project.mapper.UserStoryMapper;
+import switch2021.project.model.Project.Project;
 import switch2021.project.model.SystemUser.User;
 import switch2021.project.model.UserStory.UserStory;
 import switch2021.project.model.valueObject.ProjectID;
@@ -34,6 +36,8 @@ public class UserStoryService {
     @Autowired
     private IUserStoryRepo iUserStoryRepo;
     @Autowired
+    private IProjectRepo iProjectRepo;
+    @Autowired
     private UserStoryMapper userStoryMapper;
     @Autowired
     private IUserStoryFactory iUserStoryFactory;
@@ -44,6 +48,15 @@ public class UserStoryService {
      * Create and save a User Story
      */
     public OutputUserStoryDTO createAndSaveUserStory(CreateUserStoryDTO inDto) throws Exception {
+
+//        ProjectID projectID = new ProjectID(inDto.projectID);
+
+        Optional<Project> project = iProjectRepo.findById(inDto.projectID);
+
+        if(project.isEmpty()) {
+            throw new Exception("Project does not exist");
+        }
+
         UserStory newUserStory = iUserStoryFactory.createUserStory(inDto);
 
         Optional<UserStory> usSaved = iUserStoryRepo.save(newUserStory);
@@ -95,7 +108,7 @@ public class UserStoryService {
 
         String[] x = id.split("&");
 
-        String pId = x[0].replaceAll("Project_2022_", "");
+        String pId = x[0];
 
         String uTitle = x[1].replaceAll("%20", " ");
 

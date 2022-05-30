@@ -1,5 +1,6 @@
 package switch2021.project.model.valueObject;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import switch2021.project.utils.ValueObject;
@@ -12,6 +13,7 @@ import java.util.Objects;
 @Getter
 @Embeddable
 @NoArgsConstructor
+@AllArgsConstructor
 public class ProjectID implements ValueObject<ProjectID> {
 
     /**
@@ -19,14 +21,6 @@ public class ProjectID implements ValueObject<ProjectID> {
      **/
     @Column(name = "projectId")
     private String code;
-
-    /**
-     * Constructor
-     **/
-    public ProjectID(String x) {
-
-        this.code = "Project_" + LocalDate.now().getYear() + "_" + x;
-    }
 
     @Override
     public boolean equals(Object o) {

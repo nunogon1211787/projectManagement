@@ -10,6 +10,8 @@ package switch2021.project.controller;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import switch2021.project.dto.CreateUserStoryDTO;
+
 //import org.springframework.http.MediaType;
 //import org.springframework.test.web.servlet.MockMvc;
 //import org.springframework.test.web.servlet.MvcResult;
@@ -62,15 +64,23 @@ public class UserStoryControllerTest {
 //
     @Autowired UserStoryController ctrl;
 
+//    @Test
+//    void intTest(){
+//
+//        String test = "Project_2022_1&As%20fulano%20i%20want%20to%20teste";
+//
+//        ctrl.showUserStoryRequested(test);
+//
+//    }
+
     @Test
-    void intTest(){
+    void createAndSaveUserStory() {
 
-        String test = "Project_2022_1&As%20fulano%20i%20want%20to%20teste";
+        CreateUserStoryDTO dto = new CreateUserStoryDTO("Project_2022_1", "As cenas I want cenas", 1, "cenas fixes", 1000);
 
-        ctrl.showUserStoryRequested(test);
+        ctrl.createAndSaveUserStory(dto);
 
     }
-
 }
 //
 //

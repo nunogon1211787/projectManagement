@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import switch2021.project.dto.OutputUserStoryDTO;
 import switch2021.project.dto.CreateUserStoryDTO;
@@ -22,24 +24,33 @@ import static org.mockito.Mockito.when;
 
 
 
-@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class UserStoryServiceTest {
+//
+//    @Autowired
+//    UserStoryService createUserStoryService;
 
-    @InjectMocks
-    UserStoryService createUserStoryService;
+//    @Mock
+//    private CreateUserStoryDTO createUserStoryDTO;
+//    @Mock
+//    private IUserStoryFactory iUserStoryFactory;
+//    @Mock
+//    private IUserStoryRepo iUserStoryRepo;
+//    @Mock
+//    private UserStoryMapper userStoryMapper;
+//    @Mock
+//    private UserStory newUserStory;
+//    @Mock
+//    private OutputUserStoryDTO outputUsDto;
 
-    @Mock
-    private CreateUserStoryDTO createUserStoryDTO;
-    @Mock
-    private IUserStoryFactory iUserStoryFactory;
-    @Mock
-    private IUserStoryRepo iUserStoryRepo;
-    @Mock
-    private UserStoryMapper userStoryMapper;
-    @Mock
-    private UserStory newUserStory;
-    @Mock
-    private OutputUserStoryDTO outputUsDto;
+//    @Test
+//    void createAndSaveUserStory() throws Exception {
+//
+//        CreateUserStoryDTO dto = new CreateUserStoryDTO("Project_2022_1","As director I want cenas", 1, "create project", 1000);
+//
+//        createUserStoryService.createAndSaveUserStory(dto);
+//
+//    }
 
 
 //    @Test

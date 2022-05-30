@@ -41,10 +41,9 @@ public class ProjectRepository implements IProjectRepo {
 
 
     @Override
-
     public Optional<Project> findById(String id) {
         ProjectID projID = new ProjectID(id);
-        Optional<ProjectJpa> opProjJpa = projectJpaRepository.findById(projID);
+        Optional<ProjectJpa> opProjJpa = projectJpaRepository.findById(id);
 
         if (opProjJpa.isPresent()) {
             ProjectJpa projJpa = opProjJpa.get();
@@ -54,14 +53,6 @@ public class ProjectRepository implements IProjectRepo {
         } else
             return Optional.empty();
     }
-
-//    @Override
-//    public boolean existsById(ProjectID id) {
-//        Optional<ProjectJpa> projJpa = projectJpaRepository.findById(id);
-//
-//        return projJpa.isPresent();
-//
-//    }
 
 
     @Override
@@ -83,8 +74,8 @@ public class ProjectRepository implements IProjectRepo {
     public boolean deleteByProjectID(String id) {
 
         ProjectID projID = new ProjectID(id);
-        if (projectJpaRepository.existsById(projID)) {
-            projectJpaRepository.deleteById(projID);
+        if (projectJpaRepository.existsById(id)) {
+            projectJpaRepository.deleteById(id);
             return true;
         }
 
@@ -92,9 +83,9 @@ public class ProjectRepository implements IProjectRepo {
     }
 
 
-//    @Transactional
+    @Override
     public boolean existsById(ProjectID id) {
-        return projectJpaRepository.existsById(id);
+        return projectJpaRepository.existsById(id.getCode());
     }
 
 }
