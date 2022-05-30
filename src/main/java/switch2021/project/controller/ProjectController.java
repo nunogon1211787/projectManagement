@@ -15,6 +15,7 @@ import switch2021.project.service.ProjectService;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/projects")
 public class ProjectController {

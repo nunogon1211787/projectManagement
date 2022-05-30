@@ -62,9 +62,9 @@ public class TypologyService {
     public CollectionModel<TypologyDTO> findAllTypologies() {
         List<Typology> repositoryList = iTypologyRepo.findAll();
 
-        if(repositoryList.isEmpty()) {
-            throw new NullPointerException("Does not exists any Typology at this moment!");
-        }
+//        if(repositoryList.isEmpty()) {
+//            throw new NullPointerException("Does not exists any Typology at this moment!");
+//        }
 
         return mapper.toCollectionModel(repositoryList);
     }

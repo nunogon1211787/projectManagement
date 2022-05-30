@@ -1,13 +1,13 @@
 import React from "react";
 import "./AddInput.css";
 
-const Input = ({children}) => {
+const Input = (props) => {
 
     return (
         <div>
-        <label htmlFor="inputName">{children}</label>
+        <label htmlFor="inputName">{props.children}</label>
         <input
-            className="inputBasic"/>
+            className="inputBasic" onChange={(e) => props.onChange(e.target.value)}/>
         </div>
     );
 };

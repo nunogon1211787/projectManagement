@@ -1,6 +1,7 @@
 package switch2021.project.mapper;
 
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Service;
 import switch2021.project.controller.UserStoryController;
 import switch2021.project.dto.OutputUserStoryDTO;

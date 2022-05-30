@@ -3,7 +3,7 @@ import "./ButtonBasic.css";
 
 const Button = ({ children, onClick }) => {
     return (
-        <button onClick={onClick} className="buttonBasic">
+        <button type="submit" onClick={onClick} className="buttonBasic">
             {children}
         </button>
     );

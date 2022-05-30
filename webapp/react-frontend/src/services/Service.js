@@ -1,6 +1,6 @@
 
 
-export const URL_API = 'http://localhost:8080/api';
+export const URL_API = 'http://localhost:8080/';
 
 export function makeHTTPRequest(url, request, success, failure) {
     fetch(url, request)

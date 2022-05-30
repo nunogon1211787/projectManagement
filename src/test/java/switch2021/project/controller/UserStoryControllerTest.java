@@ -60,16 +60,16 @@ public class UserStoryControllerTest {
 //
 //    }
 //
-//    @Autowired UserStoryController ctrl;
-//
-//    @Test
-//    void intTest(){
-//
-//        String test = "Project_2022_1&As%20fulano%20i%20want%20to%20teste";
-//
-//        ctrl.showUserStoryRequested(test);
-//
-//    }
+    @Autowired UserStoryController ctrl;
+
+    @Test
+    void intTest(){
+
+        String test = "Project_2022_1&As%20fulano%20i%20want%20to%20teste";
+
+        ctrl.showUserStoryRequested(test);
+
+    }
 
 }
 //

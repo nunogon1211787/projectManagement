@@ -11,7 +11,7 @@ function Table() {
     const { loading, error, data } = users;
 
     useEffect(() => {
-        const url = `${URL_API}/users`;
+        const url = `${URL_API}users`;
         const request = {};
         fetchUsers(url, request, dispatch);
         // eslint-disable-next-line
@@ -21,7 +21,7 @@ function Table() {
         return (<h1>Loading ....</h1>);
     }
     else {
-        if (error !== null) {
+        if (error === null) {
             return (<h1>Error ....</h1>);
         } else {
             if (data.length > 0) {
