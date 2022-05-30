@@ -1,17 +1,6 @@
 package switch2021.project.repositories;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.ProjectID;
-import switch2021.project.model.valueObject.SprintID;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class SprintRepositoryTest {
 /*

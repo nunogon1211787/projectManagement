@@ -1,18 +1,6 @@
 package switch2021.project.repositories;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import switch2021.project.interfaces.IUserRepo;
-import switch2021.project.model.SystemUser.User;
-import switch2021.project.model.valueObject.Email;
-import switch2021.project.model.valueObject.SystemUserID;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 //@ExtendWith(SpringExtension.class)
 //@SpringBootApplication
@@ -28,11 +16,11 @@ public class UserRepositoryTest {
 //
 //        String email = "oliveira@beaver.com";
 //        User userDouble = mock(User.class);
-//        SystemUserID idDouble = mock(SystemUserID.class);
+//        UserID idDouble = mock(UserID.class);
 //        Email emailDouble = mock(Email.class);
 //
 //        //Stubbing behaviour of userDouble
-//        when(userDouble.getSystemUserId()).thenReturn(idDouble);
+//        when(userDouble.getUserId()).thenReturn(idDouble);
 //        when(idDouble.getEmail()).thenReturn(emailDouble);
 //        when(emailDouble.getEmailText()).thenReturn(email);
 //        underTest.save(userDouble);
@@ -53,10 +41,10 @@ public class UserRepositoryTest {
 //        //User1
 //        String email = "oliveira@beaver.com";
 //        User userDouble = mock(User.class);
-//        SystemUserID idDouble = mock(SystemUserID.class);
+//        UserID idDouble = mock(UserID.class);
 //        Email emailDouble = mock(Email.class);
 //        //Stubbing behaviour of User1
-//        when(userDouble.getSystemUserId()).thenReturn(idDouble);
+//        when(userDouble.getUserId()).thenReturn(idDouble);
 //        when(idDouble.getEmail()).thenReturn(emailDouble);
 //        when(emailDouble.getEmailText()).thenReturn(email);
 //        underTest.save(userDouble);
@@ -65,9 +53,9 @@ public class UserRepositoryTest {
 //        //User2
 //        String email2 = "pereira@beaver.com";
 //        User user2Double = mock(User.class);
-//        SystemUserID id2Double = mock(SystemUserID.class);
+//        UserID id2Double = mock(UserID.class);
 //        Email email2Double = mock(Email.class);
-//        when(user2Double.getSystemUserId()).thenReturn(id2Double);
+//        when(user2Double.getUserId()).thenReturn(id2Double);
 //        when(id2Double.getEmail()).thenReturn(email2Double);
 //        when(email2Double.getEmailText()).thenReturn(email2);
 //        //Stubbing behaviour of User2
@@ -98,10 +86,10 @@ public class UserRepositoryTest {
 //
 //        String email = "oliveira@beaver.com";
 //        User userDouble = mock(User.class);
-//        SystemUserID idDouble = mock(SystemUserID.class);
+//        UserID idDouble = mock(UserID.class);
 //        Email emailDouble = mock(Email.class);
 //
-//        when(userDouble.getSystemUserId()).thenReturn(idDouble);
+//        when(userDouble.getUserId()).thenReturn(idDouble);
 //        when(idDouble.getEmail()).thenReturn(emailDouble);
 //        when(emailDouble.getEmailText()).thenReturn(email);
 //
@@ -120,10 +108,10 @@ public class UserRepositoryTest {
 
         String email = "oliveira@beaver.com";
         User userDouble = mock(User.class);
-        SystemUserID idDouble = mock(SystemUserID.class);
+        UserID idDouble = mock(UserID.class);
         Email emailDouble = mock(Email.class);
 
-        when(userDouble.getSystemUserId()).thenReturn(idDouble);
+        when(userDouble.getUserId()).thenReturn(idDouble);
         when(idDouble.getEmail()).thenReturn(emailDouble);
         when(emailDouble.getEmailText()).thenReturn(email);
         //Act
@@ -140,10 +128,10 @@ public class UserRepositoryTest {
 
         String email = "oliveira@beaver.com";
         User userDouble = mock(User.class);
-        SystemUserID idDouble = mock(SystemUserID.class);
+        UserID idDouble = mock(UserID.class);
         Email emailDouble = mock(Email.class);
 
-        when(userDouble.getSystemUserId()).thenReturn(idDouble);
+        when(userDouble.getUserId()).thenReturn(idDouble);
         when(idDouble.getEmail()).thenReturn(emailDouble);
         when(emailDouble.getEmailText()).thenReturn(email);
         underTest.save(userDouble);
@@ -174,12 +162,12 @@ public class UserRepositoryTest {
 
         String email = "oliveira@beaver.com";
         SystemUser userDouble = mock(SystemUser.class);
-        SystemUserID idDouble = mock(SystemUserID.class);
+        UserID idDouble = mock(UserID.class);
         Email emailDouble = mock(Email.class);
 
         underTest.saveSystemUser(userDouble);
 
-        when(userDouble.getSystemUserId()).thenReturn(idDouble);
+        when(userDouble.getUserId()).thenReturn(idDouble);
         when(idDouble.getEmail()).thenReturn(emailDouble);
         when(emailDouble.getEmailText()).thenReturn(email);
         //Act

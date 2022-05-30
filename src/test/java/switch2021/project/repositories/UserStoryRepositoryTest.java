@@ -6,11 +6,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.valueObject.*;
-
-import java.time.LocalDate;
-import java.util.List;
+import switch2021.project.entities.valueObjects.vos.Description;
+import switch2021.project.entities.valueObjects.vos.UsHour;
+import switch2021.project.entities.valueObjects.vos.UsPriority;
+import switch2021.project.entities.valueObjects.vos.UserStoryID;
+import switch2021.project.interfaceAdapters.repositories.UserStoryRepository;
+import switch2021.project.entities.aggregates.UserStory.UserStory;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;

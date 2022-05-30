@@ -1,8 +1,8 @@
-package switch2021.project.datamodel.assembler;
+package switch2021.project.dataModel.assembler;
 
 import org.springframework.stereotype.Service;
-import switch2021.project.datamodel.UserProfileJpa;
-import switch2021.project.model.UserProfile.UserProfile;
+import switch2021.project.dataModel.jpa.UserProfileJpa;
+import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 
 @Service
 public class UserProfileJpaAssembler {

@@ -1,13 +1,13 @@
-package switch2021.project.datamodel.assembler;
+package switch2021.project.dataModel.assembler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import switch2021.project.datamodel.ProjectJpa;
-import switch2021.project.factory.ProjectFactory;
-import switch2021.project.model.Project.Project;
-import switch2021.project.model.Project.ProjectStatusEnum;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.valueObject.*;
+import switch2021.project.dataModel.jpa.ProjectJpa;
+import switch2021.project.entities.valueObjects.vos.*;
+import switch2021.project.entities.factories.factories.ProjectFactory;
+import switch2021.project.entities.aggregates.Project.Project;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
+import switch2021.project.entities.aggregates.Typology.Typology;
 
 import java.time.LocalDate;
 

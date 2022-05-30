@@ -9,7 +9,6 @@ autonumber
 
 participant ": CreateUserStoryRoute" as System
 participant ": UserStoryController" as Ctrl
-participant "inDto: \nCreateUserStory" as dto
 participant ": CreateUserStoryService" as appService
 participant ": IUserStoryFactory" as factory
 participant ": IUserStoryRepo " as usStore

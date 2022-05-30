@@ -1,5 +1,5 @@
 //package switch2021.project.repositories;
-//
+// TODO REVIEW
 //import org.junit.jupiter.api.DisplayName;
 //import org.junit.jupiter.api.Test;
 //import switch2021.project.model.Typology.Typology;
@@ -23,7 +23,7 @@
 //    @Test
 //    public void typologySaveSuccess() {
 //        //Arrange
-//        TypologyRepositoryReeg test = new TypologyRepositoryReeg();
+//        TypologyRepository test = new TypologyRepository();
 //        Typology typo = mock(Typology.class);
 //        TypologyID id = mock(TypologyID.class);
 //        Description des = mock(Description.class);
@@ -39,7 +39,7 @@
 //    @Test
 //    public void typologySaveFail() {
 //        //Arrange
-//        TypologyRepositoryReeg test = new TypologyRepositoryReeg();
+//        TypologyRepository test = new TypologyRepository();
 //        Typology typo = mock(Typology.class);
 //        Typology typo2 = mock(Typology.class);
 //        TypologyID id = mock(TypologyID.class);
@@ -58,7 +58,7 @@
 //    @Test
 //    public void getTypologyWithDescriptionTest() {
 //        //Arrange
-//        TypologyRepositoryReeg typologyRepository = new TypologyRepositoryReeg();
+//        TypologyRepository typologyRepository = new TypologyRepository();
 //        Typology typo = mock(Typology.class);
 //        TypologyID id = mock(TypologyID.class);
 //        Description des = mock(Description.class);
@@ -75,7 +75,7 @@
 //    @Test
 //    public void getTypologyWithDescriptionNullTest() {
 //        //Arrange
-//        TypologyRepositoryReeg typologyRepository = new TypologyRepositoryReeg();
+//        TypologyRepository typologyRepository = new TypologyRepository();
 //        // Act
 //        Typology nullTypology = typologyRepository.findTypologyById("Time and Materials");
 //        //Assert
@@ -85,7 +85,7 @@
 //    @Test
 //    public void getTypologyListTest() {
 //        //Arrange
-//        TypologyRepositoryReeg typologyRepository = new TypologyRepositoryReeg();
+//        TypologyRepository typologyRepository = new TypologyRepository();
 //        Typology typo1 = mock(Typology.class);
 //        Typology typo2 = mock(Typology.class);
 //        TypologyID id1 = mock(TypologyID.class);
@@ -109,7 +109,7 @@
 //    @Test
 //    public void deleteTypologyTest() {
 //        //Arrange
-//        TypologyRepositoryReeg typologyRepository = new TypologyRepositoryReeg();
+//        TypologyRepository typologyRepository = new TypologyRepository();
 //        Typology typo1 = mock(Typology.class);
 //        Typology typo2 = mock(Typology.class);
 //        Typology typo3 = mock(Typology.class);

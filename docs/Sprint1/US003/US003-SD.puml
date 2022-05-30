@@ -5,25 +5,59 @@ title US003 - "As Visitor, I want to send a request to the administrator to assi
 autoactivate on
 autonumber
 
-participant ":SendRequestToAssignProfileRoute" as Route
-participant ":SendRequestToAssignProfileController" as Ctrl
-participant ":SendRequestToAssignProfileService" as Service
-participant ":RepositorySystemUser" as Repository
-participant "user : SystemUser" as User
+participant ": UserRoute" as UI
+participant ": UserController" as Ctrl
+participant ": UserService" as Serv
+participant ": IUserRepo" as Repo
+participant "foundUserJpa: UserJpa" as FoundUser
+participant ": UserJpaAssembler" as Assembler
+participant "opUser: User" as Optional
+participant "profileRepo: UserProfileRepository" as ProfileRepo
+participant "userProfileJpaRepository: \n UserProfileJpaRepository" as DriverProfile
 participant "newRequest : Request" as Request
+participant "userJpa: UserJpa" as UserJPA
+participant ":UserJpaRepository" as Driver
+participant "savedUserJpa: UserJpa" as SavedJpa
+participant "savedUser: User" as SavedUser
+participant "response: ResponseEntity" as json
 
 
-[o-> Route: POST/users/{ID}/requests
-Route -> Ctrl: createAndAddRequest(Json)
-Ctrl -> Service: createAndAddRequest(requestDto)
-Service -> Repository: findById(requestDto.SystemUserId)
-return user
-Service -> User: createAndAddRequest(userProfileId)
-User -> Request**: create(userProfileId)
-User -> User: add(newRequest)
-deactivate User
-return true
-return true
+
+[o-> UI: PATCH/users/{ID}/requests
+UI -> Ctrl: createAndAddRequest(Json)
+alt successful case
+    Ctrl -> Serv: createAndAddRequest(requestDto)
+    Serv -> Repo: findByUserId(userID)
+    Repo --> FoundUser**: create()
+    Repo -> Assembler: toDomain(foundUserJpa.get())
+    Assembler --> Optional**: create()
+    return opUser
+    return opUser
+    alt successful case
+        Serv -> ProfileRepo: existsByUserProfileId(userProfileID)
+        ProfileRepo -> DriverProfile: existsById(userProfileID)
+        return true
+        return true
+    end
+    Serv -> Optional: createProfileRequest(profileId)
+    alt successful case
+        Optional -> Request**: create(profileId)
+        Optional -> Optional: add(newRequest)
+    end
+    deactivate Optional
+    return true
+    Serv -> Repo: update(opUser)
+    Repo --> UserJPA**: create()
+    Repo -> Driver: save(userJpa)
+    Driver --> SavedJpa**: create()
+    return savedJpaUser
+    Repo -> Assembler: toDomain(savedUserJpa)
+    Assembler --> SavedUser**: create()
+    return savedUser
+    return savedUser
+    return true
+end
+Ctrl --> json**: create()
 return response
 return response
 

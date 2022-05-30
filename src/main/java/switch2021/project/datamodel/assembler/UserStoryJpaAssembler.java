@@ -1,12 +1,12 @@
-package switch2021.project.datamodel.assembler;
+package switch2021.project.dataModel.assembler;
 
 import org.springframework.stereotype.Component;
-import switch2021.project.datamodel.UserStoryJpa;
-import switch2021.project.model.UserStory.UserStory;
-import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.UsHour;
-import switch2021.project.model.valueObject.UsPriority;
-import switch2021.project.model.valueObject.UserStoryID;
+import switch2021.project.dataModel.jpa.UserStoryJpa;
+import switch2021.project.entities.aggregates.UserStory.UserStory;
+import switch2021.project.entities.valueObjects.vos.Description;
+import switch2021.project.entities.valueObjects.vos.UsHour;
+import switch2021.project.entities.valueObjects.vos.UsPriority;
+import switch2021.project.entities.valueObjects.vos.UserStoryID;
 import java.time.LocalDate;
 
 @Component

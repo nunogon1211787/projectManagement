@@ -1,11 +1,12 @@
-package switch2021.project.datamodel.assembler;
+package switch2021.project.dataModel.assembler;
 
 import org.springframework.stereotype.Component;
-import switch2021.project.datamodel.ResourceIDJpa;
-import switch2021.project.datamodel.ResourceJpa;
-import switch2021.project.model.Resource.ResourceIDReeng;
-import switch2021.project.model.Resource.ResourceReeng;
-import switch2021.project.model.valueObject.*;
+import switch2021.project.dataModel.jpa.ResourceIDJpa;
+import switch2021.project.dataModel.jpa.ResourceJpa;
+import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
+import switch2021.project.entities.aggregates.Resource.ResourceReeng;
+import switch2021.project.entities.valueObjects.vos.*;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectRoleReeng;
 
 import java.time.LocalDate;
 
@@ -15,7 +16,7 @@ public class ResourceJpaAssembler {
     public ResourceJpa toData(ResourceReeng resource) {
 
 
-        SystemUserID userId = resource.getId().getUser();
+        UserID userId = resource.getId().getUser();
         ProjectID projId = resource.getId().getProject();
         String startDate = resource.getId().getStartDate().toString();
 

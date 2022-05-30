@@ -1,6 +1,4 @@
 @startuml
-'https://plantuml.com/sequence-diagram
-
 title US010 - As Authenticated User, i want to update its own data (e.g. photo, function,...)
 
 autoactivate on

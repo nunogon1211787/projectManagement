@@ -7,10 +7,10 @@ autoactivate on
 autonumber
 
 
-participant ": ChangePasswordRoute" as UI
+participant ": UserRoute" as UI
 participant ": UserController" as Ctrl
-participant ": UpdatePersonalDataService" as service
-participant "user: \n IUserRepo" as repo
+participant ": UserService" as service
+participant "userRepo: \n IUserRepo" as repo
 participant ": User" as user
 participant ": UserMapper" as mapper
 participant " outputUserDTO: \n OutputUserDTO" as outdto

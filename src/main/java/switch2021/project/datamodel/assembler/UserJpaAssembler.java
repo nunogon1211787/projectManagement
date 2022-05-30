@@ -1,12 +1,13 @@
-package switch2021.project.datamodel.assembler;
+package switch2021.project.dataModel.assembler;
 
 import org.springframework.stereotype.Component;
-import switch2021.project.datamodel.RequestJpa;
-import switch2021.project.datamodel.UserJpa;
-import switch2021.project.model.SystemUser.User;
-import switch2021.project.model.valueObject.*;
+import switch2021.project.dataModel.jpa.RequestJpa;
+import switch2021.project.dataModel.jpa.UserJpa;
+import switch2021.project.entities.aggregates.User.User;
+import switch2021.project.entities.valueObjects.vos.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -14,7 +15,7 @@ public class UserJpaAssembler {
 
     public UserJpa toData(User user) {
 
-        SystemUserID systemUserId = user.getSystemUserId();
+        UserID userId = user.getUserId();
         String userName = user.getUserName().getText();
         String photo = user.getPhoto().getExtension();
         String function = user.getFunction().getText();
@@ -22,7 +23,7 @@ public class UserJpaAssembler {
         String isActive = user.isActive() ? "True" : "False";
         List<UserProfileID> userProfileIDList = user.getAssignedProfiles();
 
-        UserJpa userJpa =  new UserJpa(systemUserId, userName, function, photo, password, isActive, userProfileIDList);
+        UserJpa userJpa =  new UserJpa(userId, userName, function, photo, password, isActive, userProfileIDList);
 
         List<Request> requestList = user.getRequestedProfiles();
         for (Request request : requestList) {
@@ -36,9 +37,18 @@ public class UserJpaAssembler {
         return userJpa;
     }
 
+    public List<UserJpa> toData(List<User> users) {
+        List<UserJpa> userJpas = new ArrayList<>();
+
+        for (User user : users) {
+            userJpas.add(toData(user));
+        }
+        return userJpas;
+    }
+
     public User toDomain (UserJpa userJpa) {
 
-        SystemUserID systemUserID = userJpa.getEmail();
+        UserID userID = userJpa.getEmail();
         Name userName = new Name(userJpa.getUserName());
         Photo photo = new Photo(userJpa.getPhoto());
         Function function = new Function(userJpa.getFunction());
@@ -46,7 +56,7 @@ public class UserJpaAssembler {
         boolean isActive = userJpa.getIsActive().contains("True");
         List<UserProfileID> userProfileIDList = userJpa.getAssignedIDProfiles();
 
-        User user =  new User(systemUserID, userName, photo, password, function, isActive, userProfileIDList);
+        User user =  new User(userID, userName, photo, password, function, isActive, userProfileIDList);
 
         List<RequestJpa> requestJpaList = userJpa.getRequests();
         for (RequestJpa requestJpa : requestJpaList) {
@@ -58,6 +68,15 @@ public class UserJpaAssembler {
             user.getRequestedProfiles().add(request);
         }
         return user;
+    }
+
+    public List<User> toDomain(List<UserJpa> userJpas) {
+        List<User> users = new ArrayList<>();
+
+        for (UserJpa userJpa : userJpas) {
+            users.add(toDomain(userJpa));
+        }
+        return users;
     }
 }
 
