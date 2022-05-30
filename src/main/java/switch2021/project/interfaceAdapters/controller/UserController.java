@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dtoModel.dto.*;
-import switch2021.project.dtoModel.dto.old.RequestDTO;
+import switch2021.project.dtoModel.dto.RequestDTO;
 import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.applicationServices.service.UserService;
 
@@ -123,6 +123,56 @@ public class UserController {
 
         try {
             outputDTO = userService.updatePersonalData(id, updateDataDTO);
+
+            if (outputDTO == null) {
+                ErrorMessage message = new ErrorMessage();
+                message.errorMessage = "This User does not exist!";
+                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(outputDTO, HttpStatus.OK);
+    }
+
+
+    /**
+     * Assign a User Profiles (US006)
+     */
+    @PatchMapping("/{id}/assignProfile")
+    public ResponseEntity<Object> assignProfile(@PathVariable("id") String id,
+                                                @RequestBody UpdateUserProfileDTO profileDTO) {
+        OutputUserDTO outputDTO;
+
+        try {
+            outputDTO = userService.assignUserProfile(id, profileDTO);
+
+            if (outputDTO == null) {
+                ErrorMessage message = new ErrorMessage();
+                message.errorMessage = "This User does not exist!";
+                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+            return new ResponseEntity<>(outputDTO, HttpStatus.OK);
+    }
+
+
+    /**
+     * Remove a User Profiles (US006)
+     */
+    @PatchMapping("/{id}/removeProfile")
+    public ResponseEntity<Object> removeProfile(@PathVariable("id") String id,
+                                                @RequestBody UpdateUserProfileDTO profileDTO) {
+        OutputUserDTO outputDTO;
+
+        try {
+            outputDTO = userService.removeUserProfile(id, profileDTO);
 
             if (outputDTO == null) {
                 ErrorMessage message = new ErrorMessage();

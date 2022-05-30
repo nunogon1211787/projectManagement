@@ -12,7 +12,7 @@ import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
 import switch2021.project.entities.aggregates.Resource.ResourceReeng;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.UserID;
-import switch2021.project.presistence.ResourceJpaRepository;
+import switch2021.project.persistence.ResourceJpaRepository;
 
 import java.util.ArrayList;
 import java.util.List;

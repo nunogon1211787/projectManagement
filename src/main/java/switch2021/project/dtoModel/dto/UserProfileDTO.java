@@ -18,5 +18,4 @@ public class UserProfileDTO extends RepresentationModel<UserProfileDTO> {
      * Attributes
      **/
     public String description;
-
 }

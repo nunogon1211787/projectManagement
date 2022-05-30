@@ -9,7 +9,7 @@ import switch2021.project.applicationServices.iRepositories.ISprintRepo;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.SprintID;
-import switch2021.project.presistence.SprintJpaRepository;
+import switch2021.project.persistence.SprintJpaRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

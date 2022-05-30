@@ -1,4 +1,4 @@
-package switch2021.project.dtoModel.dto.old;
+package switch2021.project.dtoModel.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
