@@ -1,8 +1,9 @@
 package switch2021.project.datamodel.Task;
 
 import lombok.*;
-import switch2021.project.datamodel.ResourceIDJpa;
+
 import switch2021.project.model.Task.TaskID;
+import switch2021.project.dataModel.jpa.ResourceIDJpa;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 //@ToString
 
 public class TaskJpa {
@@ -28,7 +29,8 @@ public class TaskJpa {
     @Embedded
     private ResourceIDJpa responsible;
 
-    @OneToMany(mappedBy = "taskJpa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany
+//            (mappedBy = "taskJpa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<EffortJpa> taskEffortList;
 
     @ElementCollection

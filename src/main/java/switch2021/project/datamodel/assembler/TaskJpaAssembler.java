@@ -2,17 +2,22 @@ package switch2021.project.datamodel.assembler;
 
 
 import org.springframework.stereotype.Component;
-import switch2021.project.datamodel.ResourceIDJpa;
+
+import switch2021.project.dataModel.jpa.ResourceIDJpa;
 import switch2021.project.datamodel.Task.EffortJpa;
 import switch2021.project.datamodel.Task.TaskJpa;
-import switch2021.project.model.Resource.ResourceIDReeng;
-import switch2021.project.model.Task.TaskEffort;
-import switch2021.project.model.Task.TaskID;
+import switch2021.project.entities.valueObjects.vos.Date;
+import switch2021.project.entities.valueObjects.vos.UserID;
+import switch2021.project.entities.valueObjects.vos.Description;
+import switch2021.project.entities.valueObjects.vos.EffortEstimate;
+import switch2021.project.entities.valueObjects.vos.TaskEffort;
+import switch2021.project.entities.valueObjects.vos.enums.TaskTypeEnum;
+
+import switch2021.project.entities.aggregates.Task.TaskReeng;
 import switch2021.project.model.Task.TaskReeng;
-import switch2021.project.model.Task.TaskTypeEnum;
-import switch2021.project.model.valueObject.Date;
-import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.EffortEstimate;
+import switch2021.project.entities.valueObjects.vos.TaskID;
+import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -70,9 +75,7 @@ public class TaskJpaAssembler {
         String startDate = null;
         String endDate = null;
         List<TaskID> precedenceList = new ArrayList<>();
-
         List<TaskEffort> taskEfList = task.getTaskEffortList();
-
 
         if (!(task.getStartDate() == null)) {
             startDate = task.getStartDate().toString();
