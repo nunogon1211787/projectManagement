@@ -10,6 +10,7 @@ import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.dto.*;
 import switch2021.project.applicationServices.service.ProjectService;
+import switch2021.project.entities.valueObjects.vos.ProjectID;
 
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -107,9 +108,11 @@ public class ProjectController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteProjectRequest(@PathVariable String id) {
         ErrorMessage message = new ErrorMessage();
+        String[] x = id.split("_");
+        ProjectID projID = new ProjectID(x[2]);
 
         try {
-            service.deleteProjectRequest(id);
+            service.deleteProjectRequest(projID);
             message.errorMessage = "Project was deleted successfully";
 
             message.add(linkTo(methodOn(ProjectController.class).showAllProjects()).withRel("Collection"));

@@ -63,7 +63,7 @@ public class Project {
 
         if(this.startDate.isBefore(date) || this.startDate.isEqual(date)){
 
-            if(this.endDate.isEqual(date) || this.endDate.isAfter(date)){
+            if(this.endDate == null || this.endDate.isEqual(date) || this.endDate.isAfter(date)){
                 result = true;
             }
 

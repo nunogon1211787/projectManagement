@@ -22,6 +22,7 @@ import switch2021.project.interfaceAdapters.repositories.ProjectRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ResourceService {
@@ -44,18 +45,19 @@ public class ResourceService {
 
         OutputResourceDTO response;
 
-        if(!checkSystemUserExists(userRepo, dto)) {
+        if(!checkSystemUserExists(dto)) {
             throw new IllegalArgumentException(("SystemUser does not exist"));
-        } else if (!checkProjectExists(projRepo, dto)) {
+        } else if (!checkProjectExists(dto)) {
             throw new IllegalArgumentException(("Project does not exist"));
         }
 //        else if (!checkDatesInsideProject(projRepo,dto)) {
 //            throw new IllegalArgumentException(("Dates are not inside project"));
 //        }
-//        else
-//        if (!checkAllocation(resRepo, dto)) {
-//            throw new IllegalArgumentException(("Is not valid to create - Allocation)"));
-//        } else if (!checkProjectRole(resRepo, dto)) {
+        else
+        if (!checkAllocation(dto)) {
+            throw new IllegalArgumentException(("Is not valid to create - Allocation)"));
+        }
+//        else if (!checkProjectRole(resRepo, dto)) {
 //            throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));}
             else {
             ResourceReeng newResource = iResourceFactory.createResource(dto);
@@ -90,31 +92,32 @@ public class ResourceService {
         return resourcesDto;
     }
 
-    private boolean checkSystemUserExists(IUserRepo userRepository, CreateResourceDTO dto){
+    private boolean checkSystemUserExists(CreateResourceDTO dto){
         UserID userID = new UserID(new Email(dto.systemUserID));
-        return userRepository.existsById(userID);
+        return this.userRepo.existsById(userID);
     }
 
-    private boolean checkProjectExists(IProjectRepo projectRepo, CreateResourceDTO dto){
-//        String[] x = dto.projectId.split("_");
-        return projectRepo.existsById(new ProjectID(dto.projectId));
+    private boolean checkProjectExists(CreateResourceDTO dto){
+        return this.projRepo.existsById(new ProjectID(dto.projectId));
     }
 
-    private boolean checkDatesInsideProject(IProjectRepo projRepo, CreateResourceDTO dto){
+    private boolean checkDatesInsideProject(IProjectRepo projRepo, CreateResourceDTO dto) {
+        String[] x = dto.projectId.split("_");
+        ProjectID projID = new ProjectID(x[2]);
+//        Project project = null;
+        Optional<Project> opProject = projRepo.findById(projID);
+        boolean msg = false;
 
-        Project project = projRepo.findById(dto.projectId).get();
-//        boolean msg;
-        if(project.getEndDate() == null){
-            return project.isActiveInThisDate(LocalDate.parse(dto.startDate));
-        } else {
-            return project.isActiveInThisDate(LocalDate.parse(dto.startDate)) &&
+        if (opProject.isPresent()) {
+            Project project = opProject.get();
+
+            msg = project.isActiveInThisDate(LocalDate.parse(dto.startDate)) &&
                     project.isActiveInThisDate(LocalDate.parse(dto.endDate));
         }
-//        Project project = projRepo.findById(dto.projectId).get();
-//        return project.isActiveInThisDate(LocalDate.parse(dto.startDate)) && project.isActiveInThisDate(LocalDate.parse(dto.endDate));
+        return msg;
     }
 
-    private boolean checkAllocation(IResourceRepo resRepo, CreateResourceDTO dto){
+    private boolean checkAllocation(CreateResourceDTO dto){
         UserID sysUserId = new UserID(new Email(dto.systemUserID));
         List<ResourceReeng> resourceProjectsList = resRepo.findAllByUser(sysUserId);
         return manageResourcesService.validateAllocation(resourceProjectsList, dto);

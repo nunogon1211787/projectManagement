@@ -66,8 +66,10 @@ public class ProjectService {
     }
 
     public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) {
+        String[] x = id.split("_");
+        ProjectID projID = new ProjectID(x[2]);
 
-        Optional<Project> opProject = projRepo.findById(id);
+        Optional<Project> opProject = projRepo.findById(projID);
         Project proj;
 
         if (opProject.isPresent()) {
@@ -117,8 +119,10 @@ public class ProjectService {
     }
 
     public OutputProjectDTO showProject(String id) throws Exception {
+        String[] x = id.split("_");
+        ProjectID projID = new ProjectID(x[2]);
 
-        Optional<Project> foundProject = projRepo.findById(id);
+        Optional<Project> foundProject = projRepo.findById(projID);
 
         if (foundProject.isEmpty()) {
             throw new Exception("Project does not exist");
@@ -143,7 +147,7 @@ public class ProjectService {
 
             for (ProjectID projId : resourceProjects) {
 
-                Project proj = projRepo.findById(projId.getCode()).get();
+                Project proj = projRepo.findById(projId).get();
 
                 projects.add(proj);
 
@@ -160,7 +164,7 @@ public class ProjectService {
         return projectsDto;
     }
 
-    public void deleteProjectRequest(String id) throws Exception {
+    public void deleteProjectRequest(ProjectID id) throws Exception {
         if (!projRepo.deleteByProjectID(id)) {
             throw new Exception("User Story does not exist");
         }

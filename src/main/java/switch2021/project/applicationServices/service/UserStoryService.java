@@ -12,6 +12,7 @@ import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.dtoModel.mapper.UserStoryMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
+import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.UserStoryID;
 
 import java.util.List;
@@ -40,8 +41,10 @@ public class UserStoryService {
     public OutputUserStoryDTO createAndSaveUserStory(CreateUserStoryDTO inDto) throws Exception {
 
 //        ProjectID projectID = new ProjectID(inDto.projectID);
+        String[] x = inDto.projectID.split("_");
+        ProjectID projID = new ProjectID(x[2]);
 
-        Optional<Project> project = iProjectRepo.findById(inDto.projectID);
+        Optional<Project> project = iProjectRepo.findById(projID);
 
         if(project.isEmpty()) {
             throw new Exception("Project does not exist");
