@@ -39,7 +39,7 @@ public class ProjectRepository implements IProjectRepo {
 
     @Override
     public Optional<Project> findById(String id) {
-        ProjectID projID = new ProjectID(id);
+
         Optional<ProjectJpa> opProjJpa = projectJpaRepository.findById(id);
 
         if (opProjJpa.isPresent()) {
