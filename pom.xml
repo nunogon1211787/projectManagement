@@ -241,14 +241,14 @@
                 </dependencies>
                 <configuration>
                     <targetClasses>
-                        <param>switch2021.project.model.*</param>
+                        <param>switch2021.project.entities.*</param>
                         <!--                        <param>switch2021.project.utils.*</param>-->
-                        <param>switch2021.project.controller.*</param>
+                        <param>switch2021.project.interfaceAdapters.controller.*</param>
                     </targetClasses>
                     <targetTests>
-                        <param>switch2021.project.model.*</param>
+                        <param>switch2021.project.entities.*</param>
                         <!--                        <param>switch2021.project.utils.*</param>-->
-                        <param>switch2021.project.controller.*</param>
+                        <param>switch2021.project.interfaceAdapters.controller.*</param>
                     </targetTests>
                     <outputFormats>
                         <outputFormat>XML</outputFormat>

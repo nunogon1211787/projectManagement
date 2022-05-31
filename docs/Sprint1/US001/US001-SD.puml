@@ -1,0 +1,56 @@
+@startuml
+title US001 - As Non-Registered User, I want to register as an application actor.
+
+autoactivate on
+autonumber
+
+participant ": UserRoute" as UI
+participant ": UserController" as Ctrl
+participant ": UserService" as Serv
+participant ": IUserFactory" as Fact
+participant ": IValueObjectsFactory\n<UserID>" as UserIDFact
+participant ": IValueObjectsFactory\n<Email>" as emailFact
+participant "email\n: Email" as email
+participant " userID\n: UserID" as UserID
+participant ": IValueObjectsFactory\n<Name>" as nameFact
+participant "name: Name" as name
+participant "userProfileIDFactory : IUserProfileIDFactory" as ProfileIDFact
+participant "visitorID: UserProfileID" as VisitorID
+participant "newUser\n: User" as User
+participant ": IUserRepo" as Repo
+participant ": UserMapper" as mapper
+participant "outputDTO: OutputUserDTO" as OutDTO
+participant "response: \nResponseEntity" as json
+
+
+[o-> UI:  POST /users
+UI->Ctrl: registerUser(newUserInfoDTO)
+Ctrl->Serv: createAndSaveUser(newUserInfoDTO)
+Serv->Fact: createUser(newUserInfoDTO)
+Fact->UserIDFact: create(infoDTO.email)
+UserIDFact->emailFact: create(emailText)
+emailFact-->email**: createEmail(emailText)
+return email
+UserIDFact-->UserID**: createUserID(email)
+return userID
+Fact -> nameFact: create(infoDTO.name)
+nameFact --> name**: createName(text)
+return name
+Fact->ProfileIDFact: createUserProfileID(visitor)
+note over VisitorID: A new User is always visitor
+ProfileIDFact --> VisitorID**: create(visitor)
+return visitorID
+note over User: other v.o.'s creation and, respectively, User setters are hidden to simplify the diagram
+Fact-->User**: createUser(systemUserID)
+return newUser
+Serv->Repo: save(newUser)
+ref over Repo: [[US001jpa-SD.puml]]
+Repo-->Serv: savedUser
+Serv->mapper:toDto(savedUser)
+mapper-->OutDTO**: create()
+return outputDTO
+return outputDTO
+Ctrl --> json**: create(outputDTO)
+return response
+return Shows the User created
+@enduml

@@ -1,13 +1,13 @@
-package switch2021.project.datamodel.assembler;
+package switch2021.project.dataModel.assembler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import switch2021.project.datamodel.ProjectJpa;
-import switch2021.project.factory.ProjectFactory;
-import switch2021.project.model.Project.ProjectReeng;
-import switch2021.project.model.Project.ProjectStatusEnum;
-import switch2021.project.model.Typology.Typology;
-import switch2021.project.model.valueObject.*;
+import switch2021.project.dataModel.jpa.ProjectJpa;
+import switch2021.project.entities.valueObjects.vos.*;
+import switch2021.project.entities.factories.factories.ProjectFactory;
+import switch2021.project.entities.aggregates.Project.Project;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
+import switch2021.project.entities.aggregates.Typology.Typology;
 
 import java.time.LocalDate;
 
@@ -17,33 +17,33 @@ public class ProjectJpaAssembler {
     @Autowired
     ProjectFactory factory;
 
-    public ProjectJpa toJpaData(ProjectReeng projectReeng) {
+    public ProjectJpa toJpaData(Project project) {
 
-        String projectCode = projectReeng.getProjectCode();
-        String projectName = projectReeng.getProjectName().getText();
-        String description = projectReeng.getDescription().getText();
-        String businessSector = projectReeng.getBusinessSector().getDescription().getText();
-        String startDate = projectReeng.getStartDate().toString();
-        int numberOfSprints = projectReeng.getNumberOfSprints().getNumberOfSprintsVO();
-        int sprintDuration = projectReeng.getSprintDuration().getSprintDurationDays();
-        double budget = projectReeng.getBudget().getBudgetVO();
+        String projectCode = project.getProjectCode();
+        String projectName = project.getProjectName().getText();
+        String description = project.getDescription().getText();
+        String businessSector = project.getBusinessSector().getDescription().getText();
+        String startDate = project.getStartDate().toString();
+        int numberOfSprints = project.getNumberOfSprints().getNumberOfSprintsVO();
+        int sprintDuration = project.getSprintDuration().getSprintDurationDays();
+        double budget = project.getBudget().getBudgetVO();
 
         String endDate = null;
         String typology = null;
         String customer = null;
         String status = null;
 
-        if (!(projectReeng.getEndDate() == null)) {
-            endDate = projectReeng.getEndDate().toString();
+        if (!(project.getEndDate() == null)) {
+            endDate = project.getEndDate().toString();
         }
-        if (!(projectReeng.getTypology() == null)) {
-            typology = projectReeng.getTypology().getId_description().getDescription().getText();
+        if (!(project.getTypology() == null)) {
+            typology = project.getTypology().getId_description().getDescription().getText();
         }
-        if (!(projectReeng.getCustomer() == null)) {
-            customer = projectReeng.getCustomer().getCustomerName().getText();
+        if (!(project.getCustomer() == null)) {
+            customer = project.getCustomer().getCustomerName().getText();
         }
-        if (!(projectReeng.getProjectStatus() == null)) {
-            status = projectReeng.getProjectStatus().toString();
+        if (!(project.getProjectStatus() == null)) {
+            status = project.getProjectStatus().toString();
         }
 
         ProjectJpa projectJpa = new ProjectJpa(projectCode, projectName, description, businessSector, startDate,
@@ -53,7 +53,7 @@ public class ProjectJpaAssembler {
 
     }
 
-    public ProjectReeng toDomain(ProjectJpa projectJpa) {
+    public Project toDomain(ProjectJpa projectJpa) {
         String projectCode = projectJpa.getProjectCode();
         Description projectName = new Description(projectJpa.getName());
         Description description = new Description(projectJpa.getDescription());
@@ -82,10 +82,10 @@ public class ProjectJpaAssembler {
         }
 
 
-        ProjectReeng projectReeng = new ProjectReeng(projectCode, projectName, description, typology, status,
-                customer, businessSector, numberOfSprints, budget, sprintDuration, startDate, endDate);
+        Project project = new Project(projectCode, projectName, description, typology, status,
+                                      customer, businessSector, numberOfSprints, budget, sprintDuration, startDate, endDate);
 
-        return projectReeng;
+        return project;
     }
 
 //    public ProjectReeng toDomain(ProjectJpa projectJpa) {

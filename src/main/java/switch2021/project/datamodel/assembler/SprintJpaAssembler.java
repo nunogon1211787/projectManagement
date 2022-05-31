@@ -1,12 +1,11 @@
-package switch2021.project.datamodel.assembler;
+package switch2021.project.dataModel.assembler;
 
 import org.springframework.stereotype.Component;
-import switch2021.project.datamodel.SprintJpa;
-import switch2021.project.datamodel.UserStoryOfSprintJpa;
-import switch2021.project.model.Project.ProjectStatusEnum;
-import switch2021.project.model.Sprint.Sprint;
-import switch2021.project.model.valueObject.UserStoryOfSprint;
-import switch2021.project.model.valueObject.UserStoryOfSprintStatus;
+import switch2021.project.dataModel.jpa.SprintJpa;
+import switch2021.project.dataModel.jpa.UserStoryOfSprintJpa;
+import switch2021.project.entities.aggregates.Sprint.Sprint;
+import switch2021.project.entities.valueObjects.vos.UserStoryOfSprint;
+import switch2021.project.entities.valueObjects.vos.enums.UserStoryOfSprintStatus;
 
 import java.time.LocalDate;
 import java.util.List;

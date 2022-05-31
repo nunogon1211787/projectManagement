@@ -1,8 +1,8 @@
-package switch2021.project.datamodel.assembler;
+package switch2021.project.dataModel.assembler;
 
 import org.springframework.stereotype.Service;
-import switch2021.project.datamodel.TypologyJpa;
-import switch2021.project.model.Typology.Typology;
+import switch2021.project.dataModel.jpa.TypologyJpa;
+import switch2021.project.entities.aggregates.Typology.Typology;
 
 @Service
 public class TypologyJpaAssembler {
