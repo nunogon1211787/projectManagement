@@ -1,12 +1,9 @@
-package switch2021.project.model.Task;
+package switch2021.project.entities.aggregates.Task;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import switch2021.project.model.Resource.ResourceIDReeng;
-import switch2021.project.model.valueObject.Description;
-import switch2021.project.model.valueObject.EffortEstimate;
 import switch2021.project.utils.Entity;
 import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
 import switch2021.project.entities.valueObjects.vos.*;

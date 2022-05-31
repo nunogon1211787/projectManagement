@@ -3,20 +3,14 @@ package switch2021.project.datamodel.assembler;
 
 import org.springframework.stereotype.Component;
 
-import switch2021.project.dataModel.jpa.ResourceIDJpa;
 import switch2021.project.datamodel.Task.EffortJpa;
+import switch2021.project.datamodel.Task.TaskIDJpa;
 import switch2021.project.datamodel.Task.TaskJpa;
-import switch2021.project.entities.valueObjects.vos.Date;
-import switch2021.project.entities.valueObjects.vos.UserID;
-import switch2021.project.entities.valueObjects.vos.Description;
-import switch2021.project.entities.valueObjects.vos.EffortEstimate;
-import switch2021.project.entities.valueObjects.vos.TaskEffort;
+import switch2021.project.datamodel.jpa.ResourceIDJpa;
+import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.TaskTypeEnum;
 
 import switch2021.project.entities.aggregates.Task.TaskReeng;
-import switch2021.project.model.Task.TaskReeng;
-import switch2021.project.entities.valueObjects.vos.TaskID;
-import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
 
 
 import java.time.LocalDate;
@@ -92,7 +86,7 @@ public class TaskJpaAssembler {
 
         if(!(task.getTaskEffortList() == null)) {
             for(TaskEffort effort: taskEfList ){
-                EffortJpa effortJpa = new EffortJpa(x, effort.getEffortHours().getEffortHours(), effort.getEffortMinutes().getEffortMinutes(), effort.getEffortDate().toString(), effort.getComment().toString(), effort.getAttachment().toString());
+                EffortJpa effortJpa = new EffortJpa(effort.getEffortHours().getEffortHours(), effort.getEffortMinutes().getEffortMinutes(), effort.getEffortDate().toString(), effort.getComment(), effort.getAttachment().toString());
                 x.getTaskEffortList().add(effortJpa);
             }
         }
@@ -101,12 +95,13 @@ public class TaskJpaAssembler {
 
     public TaskReeng toDomain (TaskJpa task){
 
-        TaskID id = task.getId();
+        TaskIDJpa id = task.getId();
         Description description = new Description(task.getDescription());
         EffortEstimate effortEstimate = new EffortEstimate(task.getEffortEstimate());
         TaskTypeEnum type = TaskTypeEnum.valueOf(task.getType());
         ResourceIDReeng responsible = new ResourceIDReeng(task.getResponsible().getUser(), task.getResponsible().getProject(), LocalDate.parse(task.getResponsible().getStartDate()));
 
+        TaskID idFinal = new TaskID( new SprintID(), id.getTaskName());
         LocalDate startDate = null;
         LocalDate endDate = null;
         List<TaskEffort> taskEffortList = new ArrayList<>();
@@ -129,7 +124,7 @@ public class TaskJpaAssembler {
             precedenceList = task.getPrecedenceList();
         }
 
-        return new TaskReeng(id, description, type, effortEstimate, startDate, endDate, responsible, taskEffortList, precedenceList);
+        return new TaskReeng(idFinal, description, type, effortEstimate, startDate, endDate, responsible, taskEffortList, precedenceList);
     }
 
 }

@@ -1,4 +1,4 @@
-package switch2021.project.model.valueObject;
+package switch2021.project.entities.valueObjects.vos;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

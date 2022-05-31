@@ -1,19 +1,8 @@
-package switch2021.project.model.Resource;
+package switch2021.project.entities.valueObjects.vos;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.format.annotation.DateTimeFormat;
-import switch2021.project.factoryInterface.IResouceIDFactory;
-import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
-import switch2021.project.model.valueObject.Date;
-import switch2021.project.model.valueObject.ProjectID;
-import switch2021.project.model.valueObject.SystemUserID;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
-import switch2021.project.model.valueObject.Date;
-import switch2021.project.model.valueObject.ProjectID;
-import switch2021.project.model.valueObject.SystemUserID;
 import switch2021.project.utils.ValueObject;
 
 import javax.persistence.ElementCollection;

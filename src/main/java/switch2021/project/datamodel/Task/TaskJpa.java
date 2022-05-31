@@ -2,8 +2,9 @@ package switch2021.project.datamodel.Task;
 
 import lombok.*;
 
-import switch2021.project.model.Task.TaskID;
-import switch2021.project.dataModel.jpa.ResourceIDJpa;
+import switch2021.project.datamodel.jpa.ResourceIDJpa;
+import switch2021.project.entities.valueObjects.vos.TaskID;
+
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 public class TaskJpa {
 
     @EmbeddedId
-    private TaskID id;
+    private TaskIDJpa id;
     private String description;
     private String type;
     private int effortEstimate;
@@ -29,7 +30,7 @@ public class TaskJpa {
     @Embedded
     private ResourceIDJpa responsible;
 
-    @OneToMany
+    @ElementCollection
 //            (mappedBy = "taskJpa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<EffortJpa> taskEffortList;
 
