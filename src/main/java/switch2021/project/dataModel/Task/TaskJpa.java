@@ -1,8 +1,8 @@
-package switch2021.project.datamodel.Task;
+package switch2021.project.dataModel.Task;
 
 import lombok.*;
 
-import switch2021.project.datamodel.jpa.ResourceIDJpa;
+import switch2021.project.dataModel.jpa.ResourceIDJpa;
 import switch2021.project.entities.valueObjects.vos.TaskID;
 
 

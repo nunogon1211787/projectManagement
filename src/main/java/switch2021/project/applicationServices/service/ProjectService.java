@@ -66,8 +66,8 @@ public class ProjectService {
     }
 
     public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) {
-        String[] x = id.split("_");
-        ProjectID projID = new ProjectID(x[2]);
+//        String[] x = id.split("_");
+        ProjectID projID = new ProjectID(id);
 
         Optional<Project> opProject = projRepo.findById(projID);
         Project proj;
@@ -119,8 +119,8 @@ public class ProjectService {
     }
 
     public OutputProjectDTO showProject(String id) throws Exception {
-        String[] x = id.split("_");
-        ProjectID projID = new ProjectID(x[2]);
+//        String[] x = id.split("_");
+        ProjectID projID = new ProjectID(id);
 
         Optional<Project> foundProject = projRepo.findById(projID);
 
@@ -166,7 +166,7 @@ public class ProjectService {
 
     public void deleteProjectRequest(ProjectID id) throws Exception {
         if (!projRepo.deleteByProjectID(id)) {
-            throw new Exception("User Story does not exist");
+            throw new Exception("Project does not exist");
         }
     }
 }

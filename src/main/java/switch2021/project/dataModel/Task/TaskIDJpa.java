@@ -1,10 +1,9 @@
-package switch2021.project.datamodel.Task;
+package switch2021.project.dataModel.Task;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import switch2021.project.applicationServices.iRepositories.TaskContainerID;
 import switch2021.project.entities.valueObjects.vos.Name;
 
 import javax.persistence.Embeddable;

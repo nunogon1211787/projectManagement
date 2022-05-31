@@ -1,7 +1,6 @@
-package switch2021.project.datamodel.Task;
+package switch2021.project.dataModel.Task;
 
 import lombok.*;
-import switch2021.project.entities.valueObjects.vos.Attachment;
 import switch2021.project.entities.valueObjects.vos.Description;
 
 

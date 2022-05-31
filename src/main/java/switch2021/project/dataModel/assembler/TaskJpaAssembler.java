@@ -1,12 +1,12 @@
-package switch2021.project.datamodel.assembler;
+package switch2021.project.dataModel.assembler;
 
 
 import org.springframework.stereotype.Component;
 
-import switch2021.project.datamodel.Task.EffortJpa;
-import switch2021.project.datamodel.Task.TaskIDJpa;
-import switch2021.project.datamodel.Task.TaskJpa;
-import switch2021.project.datamodel.jpa.ResourceIDJpa;
+import switch2021.project.dataModel.Task.EffortJpa;
+import switch2021.project.dataModel.Task.TaskIDJpa;
+import switch2021.project.dataModel.Task.TaskJpa;
+import switch2021.project.dataModel.jpa.ResourceIDJpa;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.TaskTypeEnum;
 
