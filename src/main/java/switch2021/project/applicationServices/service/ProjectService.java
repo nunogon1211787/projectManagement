@@ -7,6 +7,7 @@ import switch2021.project.applicationServices.iRepositories.IResourceRepo;
 import switch2021.project.applicationServices.iRepositories.ITypologyRepo;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
 import switch2021.project.dtoModel.dto.*;
+import switch2021.project.entities.aggregates.Typology.Typology;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
@@ -16,6 +17,7 @@ import switch2021.project.dtoModel.mapper.ProjectMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManageResourcesService;
 import switch2021.project.entities.aggregates.Resource.ResourceReeng;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -81,10 +83,13 @@ public class ProjectService {
             proj.setBudget(new Budget(Integer.parseInt(editProjectInfoDTO.budget)));
             proj.setSprintDuration(new SprintDuration(Integer.parseInt(editProjectInfoDTO.sprintDuration)));
 
-            /*proj.setProjectStatus(ProjectStatusEnum.valueOf(editProjectInfoDTO.projectStatus));
-            proj.setCustomer(new Customer(editProjectInfoDTO.customer, "email@email.pt", 123456789));
+            proj.setProjectStatus(ProjectStatusEnum.valueOf(editProjectInfoDTO.projectStatus));
+            /*proj.setCustomer(new Customer(editProjectInfoDTO.customer, "email@email.pt", 123456789));*/
             proj.setEndDate(LocalDate.parse(editProjectInfoDTO.endDate));
-            proj.setTypology(new Typology(new TypologyID(new Description(editProjectInfoDTO.description))));*/
+
+            if(iTypologyRepo.existsByTypologyId(new TypologyID(new Description(editProjectInfoDTO.typology)))) {
+                proj.setTypology(new Typology(new TypologyID(new Description(editProjectInfoDTO.typology))));
+            }
 
             Optional<Project> savedProject = projRepo.save(proj);
 

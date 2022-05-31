@@ -3,8 +3,10 @@ package switch2021.project.dataModel.jpa;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import switch2021.project.entities.aggregates.Project.ProjectIDGeneratorStrategy;
+import switch2021.project.entities.valueObjects.vos.Customer;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,6 +30,7 @@ public class ProjectJpa {
                             value = "Project_"),
                     @org.hibernate.annotations.Parameter(name = ProjectIDGeneratorStrategy.NUMBER_FORMAT_PARAMETER,
                             value = "%d")})
+
     @Column(name = "project_code")
     private String projectCode;
     private String name;
@@ -42,32 +45,5 @@ public class ProjectJpa {
     private String customer;
     private String status;
 
-
-//    public ProjectJpa(Description projectName,
-//                      Description description,
-//                      BusinessSector businessSector,
-//                      LocalDate startDate,
-//                      NumberOfSprints numberOfSprints,
-//                      SprintDuration sprintDuration,
-//                      Budget budget,
-//                      LocalDate endDate,
-//                      Typology typology,
-//                      Customer customer
-//    ) {
-//
-//
-//        this.name = projectName.getText();
-//        this.description = description.getText();
-//        this.businessSector = businessSector.getDescription().getText();
-//        this.startDate = startDate.toString();
-//        this.numberOfSprints = numberOfSprints.getNumberOfSprintsVO();
-//        this.sprintDuration = sprintDuration.getSprintDurationDays();
-//        this.budget = budget.getBudgetVO();
-//        this.endDate = endDate.toString();
-//        this.typology = typology.getId_description().getDescription().getText();
-//        this.customer = customer.getCustomerName().getText();
-//        this.status = ProjectStatusEnum.PLANNED.toString();
-
-//    }
 
 }

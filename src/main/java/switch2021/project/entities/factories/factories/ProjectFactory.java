@@ -50,12 +50,6 @@ public class ProjectFactory implements switch2021.project.entities.factories.fac
         Project project = new Project(name, description, businessSector, date, numberOfSprints,
                                       sprintDuration, budget);
 
-        if (projectDTO.getCustomer() != null) {
-            Customer cust = new Customer();
-            cust.setCustomerName(new Description(projectDTO.getCustomer())); //TODO Setter em VO (Customer) Remover!!
-            project.setCustomer(cust);
-        }
-
         if (projectDTO.getTypology() != null)
             project.setTypology(new Typology(new TypologyID(new Description(projectDTO.getTypology()))));
         if (projectDTO.getEndDate() != null)

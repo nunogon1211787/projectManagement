@@ -67,6 +67,9 @@ public class ProjectController {
         return new ResponseEntity<>(newProject, HttpStatus.OK);
     }
 
+    /**
+     * Create Project - US005
+     **/
 
     @PostMapping
     public ResponseEntity<Object> createProject(@RequestBody ProjectDTO projectDTO) {
@@ -84,8 +87,8 @@ public class ProjectController {
     }
 
     /**
-     * Edit project
-     */
+     * Edit project - US008
+     **/
 
     @PatchMapping("/{id}")
     public ResponseEntity<Object> updateProjectPartially(@PathVariable("id") String id,

@@ -46,15 +46,13 @@ public class ProjectJpaAssembler {
             status = project.getProjectStatus().toString();
         }
 
-        ProjectJpa projectJpa = new ProjectJpa(projectCode, projectName, description, businessSector, startDate,
-                numberOfSprints, sprintDuration, budget, endDate, typology, customer, status);
-
-        return projectJpa;
+        return new ProjectJpa(projectCode, projectName, description, businessSector, startDate,
+                              numberOfSprints, sprintDuration, budget, endDate, typology, customer, status);
 
     }
 
     public Project toDomain(ProjectJpa projectJpa) {
-//        ProjectID projectCode = new ProjectID (projectJpa.getProjectCode());
+        String projectCode = projectJpa.getProjectCode();
         Description projectName = new Description(projectJpa.getName());
         Description description = new Description(projectJpa.getDescription());
         BusinessSector businessSector = new BusinessSector(projectJpa.getBusinessSector());
@@ -82,27 +80,10 @@ public class ProjectJpaAssembler {
         }
 
 
-        Project project = new Project(projectJpa.getProjectCode(), projectName, description, typology, status,
-                                      customer, businessSector, numberOfSprints, budget, sprintDuration, startDate, endDate);
-
-        return project;
+        return new Project(projectCode, projectName, description, typology, status,
+                           customer, businessSector, numberOfSprints, budget, sprintDuration, startDate, endDate);
     }
 
-//    public ProjectReeng toDomain(ProjectJpa projectJpa) {
-//        LocalDate startDate = LocalDate.parse(projectJpa.getStartDate());
-//        LocalDate endDate = LocalDate.parse(projectJpa.getEndDate());
-//
-//        ProjectReeng projectReeng = new ProjectReeng(
-//                new Description(projectJpa.getName()),
-//                new Description(projectJpa.getDescription()),
-//                new BusinessSector(projectJpa.getBusinessSector()),
-//                startDate,
-//                new NumberOfSprints(projectJpa.getNumberOfSprints()),
-//                new SprintDuration(projectJpa.getSprintDuration()),
-//                new Budget(projectJpa.getBudget()));
-//        projectReeng.setProjectCode(projectJpa.getProjectCode());
-//        return projectReeng;
-//    }
 
 
 }
