@@ -12,7 +12,6 @@ import java.util.List;
 @Entity(name = "UserJpa")
 @NoArgsConstructor
 @AllArgsConstructor
-//@ToString
 @Table(name = "systemUsers")
 public class UserJpa {
 
