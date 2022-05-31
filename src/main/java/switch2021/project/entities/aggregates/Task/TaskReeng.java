@@ -1,7 +1,10 @@
 package switch2021.project.entities.aggregates.Task;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import switch2021.project.utils.Entity;
 import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.TaskTypeEnum;
@@ -11,9 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-public class TaskReeng {
+public class TaskReeng implements Entity<TaskReeng> {
 
     /*** Attributes*/
     private TaskID idTask;
@@ -24,7 +29,7 @@ public class TaskReeng {
     private LocalDate endDate;
     private ResourceIDReeng responsible;
     private List<TaskEffort> taskEffortList;
-    private List<String> precedenceList;
+    private List<TaskID> precedenceList;
 
 
 
@@ -125,5 +130,10 @@ public class TaskReeng {
     @Override
     public int hashCode() {
         return Objects.hash(idTask, description, type, effortEstimate, startDate, endDate, responsible, taskEffortList, precedenceList);
+    }
+
+    @Override
+    public boolean sameIdentityAs(TaskReeng other) {
+        return false;
     }
 }

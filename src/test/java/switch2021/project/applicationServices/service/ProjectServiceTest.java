@@ -10,7 +10,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
-import switch2021.project.presistence.ProjectJpaRepository;
+import switch2021.project.persistence.ProjectJpaRepository;
 import switch2021.project.dtoModel.mapper.ProjectMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 

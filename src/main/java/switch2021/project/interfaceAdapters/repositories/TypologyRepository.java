@@ -7,7 +7,7 @@ import switch2021.project.dataModel.assembler.TypologyJpaAssembler;
 import switch2021.project.applicationServices.iRepositories.ITypologyRepo;
 import switch2021.project.entities.aggregates.Typology.Typology;
 import switch2021.project.entities.valueObjects.vos.TypologyID;
-import switch2021.project.presistence.TypologyJpaRepository;
+import switch2021.project.persistence.TypologyJpaRepository;
 
 import java.util.ArrayList;
 import java.util.List;

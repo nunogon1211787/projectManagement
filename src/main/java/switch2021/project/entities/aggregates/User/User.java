@@ -40,7 +40,7 @@ public class User implements Entity<User> {
         this.assignedIdProfiles = new ArrayList<>();
         this.requestedProfiles = new ArrayList<>();
         assignValidatedPassword(password, passwordConfirmation);
-        assignProfileId(visitorID);
+        assignProfileVisitor(visitorID);
     }
 
     public User(UserID userId, Name userName, Photo photo, Description encryptedPassword,
@@ -53,6 +53,18 @@ public class User implements Entity<User> {
         this.isActive = isActive;
         this.assignedIdProfiles = assignedIdProfiles;
         this.requestedProfiles = new ArrayList<>();
+    }
+
+
+    /**
+     * Getting Methods (outside lombok)
+     */
+    public List<UserProfileID> getAssignedProfiles() {
+        return new ArrayList<>(assignedIdProfiles);
+    }
+
+    public List<Request> getRequestedProfiles() {
+        return new ArrayList<>(requestedProfiles);
     }
 
 
@@ -71,8 +83,7 @@ public class User implements Entity<User> {
         this.function = function;
     }
 
-
-    private void assignProfileId(UserProfileID profileId) {
+    private void assignProfileVisitor(UserProfileID profileId) {
         if (profileId.getUserProfileName().getText().trim().equalsIgnoreCase("visitor")) {
             this.assignedIdProfiles.add(profileId);
         } else {
@@ -132,7 +143,7 @@ public class User implements Entity<User> {
         if (validateOldPassword(oldPassword)) {
             this.encryptedPassword = encryptPassword(new Password(newPassword));
         } else {
-         throw new IllegalArgumentException("The password is incorrect!");
+            throw new IllegalArgumentException("The password is incorrect!");
         }
     }
 
@@ -141,7 +152,7 @@ public class User implements Entity<User> {
      * Method to validate the old password from the UI with thew old password from the System User
      */
     private boolean validateOldPassword(String oldPassword) {
-        Description password = new Description(oldPassword );
+        Description password = new Description(oldPassword);
         return decryptPassword().equals(password);
     }
 
@@ -156,30 +167,20 @@ public class User implements Entity<User> {
 
 
     /**
-     * Method to Edit Personal Data
+     * Method to edit Personal Data
      */
-//    public boolean editPersonalData(String userName, String function, String photo) {
-//        boolean msg = false;
-//        if(userName.trim().equalsIgnoreCase(userName) && function.trim().equalsIgnoreCase(function) &&
-//                photo.trim().equalsIgnoreCase(photo)) {
-//            assignName(new Name(userName));
-//            assignFunction(new Function(function));
-//            assignPhoto(new Photo(photo));
-//            msg = true;
-//        }
-//        return msg;
-//    }
     public void editPersonalData(String userName, String function, String photo) {
         if (userName != null) {
             assignName(new Name(userName));
         }
-        if(function != null) {
+        if (function != null) {
             assignFunction(new Function(function));
         }
         if (photo != null) {
             assignPhoto(new Photo(photo));
         }
     }
+
 
     /**
      * Activation Status Methods
@@ -206,11 +207,45 @@ public class User implements Entity<User> {
 
 
     /**
+     * Update user profiles methods
+     */
+    public void toAssignProfile(UserProfileID profileID) {
+        this.assignedIdProfiles.add(profileID);
+    }
+
+    public void removeProfile(UserProfileID profileID) {
+        this.assignedIdProfiles.remove(profileID);
+    }
+
+
+    /**
+     * Validation methods
+     */
+    public boolean isYourEmail(String email) {
+        int idxString = this.getUserId().getEmail().getEmailText().indexOf(email.toLowerCase());
+        return idxString != -1;
+    }
+
+    public boolean hasName(String name) {
+        return this.userName.getText().equalsIgnoreCase(name);
+    }
+
+    public boolean hasFunction(String function) {
+        return this.function.getText().equalsIgnoreCase(function);
+    }
+
+    public boolean hasProfile(UserProfileID profileId) {
+        for (UserProfileID inCheck : assignedIdProfiles) {
+            if (inCheck.equals(profileId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
      * Override Methods
-     *
-     * @param o to compare
-     * @return True if they have the same identity
-     * @see #sameIdentityAs(User)
      */
     @Override
     public boolean equals(Object o) {
@@ -226,86 +261,9 @@ public class User implements Entity<User> {
         return other != null && userId.sameValueAs(other.userId);
     }
 
-    /**
-     * @return Hash code of systemUser id.
-     */
     @Override
     public int hashCode() {
         return userId.hashCode();
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    //OLD METHODS
-
-    /**
-     * getting Methods (outside of lombock)
-     */
-    public List<UserProfileID> getAssignedProfiles() {
-        return new ArrayList<>(assignedIdProfiles);
-    }
-
-    public List<Request> getRequestedProfiles() {
-        return new ArrayList<>(requestedProfiles);
-    }
-
-    /*
-    public boolean updateProfile(UserProfile oldProfile, UserProfile newProfile) {
-
-        if (!checkAssignedProfileList(newProfile)) {
-            throw new IllegalArgumentException("Repeated user profile inserted.");
-        } else {
-            this.assignedIdProfiles.remove(oldProfile.getUserProfileId());
-            this.assignedIdProfiles.add(newProfile.getUserProfileId());
-        }
-        return true;
-    }
-
-    /**
-     * Validation Methods
-     **/
-
-/*
-    //?????????????????????????? (Nuno)
-    private boolean checkAssignedProfileList(UserProfile profile) {
-        boolean msg = true;
-        for (UserProfileId i : assignedIdProfiles) {
-            if (i.getUserProfileName().getText().equals(profile.getUserProfileId().getUserProfileName().getText())) {
-                msg = false;
-                break;
-            }
-        }
-        return msg;
-    }
- */
-
-    public boolean isYourEmail(String email) {
-
-        boolean result = false;
-        int idxString = this.getUserId().getEmail().getEmailText().indexOf(email.toLowerCase());
-
-        if (idxString != -1) {
-            result = true;
-        }
-        return result;
-    }
-
-    public boolean hasName(String name) {
-        return this.userName.getText().equals(name);
-    }
-
-    public boolean hasFunction(String function) {
-        return this.function.getText().equals(function);
-    }
-
-    private boolean hasProfileId(UserProfileID profileId) {
-        boolean profileStatus = false;
-
-        for (UserProfileID profileIdCheck : assignedIdProfiles) {
-            if (profileId.equals(profileIdCheck)) {
-                profileStatus = true;
-                break;
-            }
-        }
-        return profileStatus;
-    }
 }

@@ -5,11 +5,7 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.applicationServices.iRepositories.IUserProfileRepo;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
-import switch2021.project.dtoModel.dto.NewUserInfoDTO;
-import switch2021.project.dtoModel.dto.OutputUserDTO;
-import switch2021.project.dtoModel.dto.SearchUserDTO;
-import switch2021.project.dtoModel.dto.UpdateDataDTO;
-import switch2021.project.dtoModel.dto.old.RequestDTO;
+import switch2021.project.dtoModel.dto.*;
 import switch2021.project.entities.factories.factoryInterfaces.IUserFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserProfileIDFactory;
@@ -104,12 +100,11 @@ public class UserService {
             allFounded.addAll(userRepo.findAllByFunctionContains(inDto.function));
 
         if (!inDto.profile.isEmpty() || !inDto.profile.isBlank()) {
-            UserProfileID profile = profileIDFactory.createUserProfileID(inDto.profile);
-
-            if (profileRepo.existsByUserProfileId(profile)) {
-
-                allFounded.addAll(userRepo.findAllByUserProfileId(profile));
-
+            UserProfileID profileId = profileIDFactory.createUserProfileID(inDto.profile);
+            if (profileRepo.existsByUserProfileId(profileId)) {
+                allFounded.addAll(userRepo.findAllByUserProfileId(profileId));
+            } else {
+                throw new IllegalArgumentException("This user profile does not exist!");
             }
         }
 
@@ -120,7 +115,6 @@ public class UserService {
         });
 
         usersFounded.forEach(user -> usersFoundedDto.add(userMapper.toDto(user)));
-
         return usersFoundedDto;
     }
 
@@ -137,7 +131,7 @@ public class UserService {
             user = opUser.get();
 
             if (updateDataDTO.newPassword != null && updateDataDTO.oldPassword != null) {
-                user.updatePassword(updateDataDTO.oldPassword,updateDataDTO.newPassword);
+                user.updatePassword(updateDataDTO.oldPassword, updateDataDTO.newPassword);
             } else {
                 user.editPersonalData(updateDataDTO.userName, updateDataDTO.function, updateDataDTO.photo);
             }
@@ -146,6 +140,69 @@ public class UserService {
         } else
             return null;
     }
+
+
+    /**
+     * Update assigned profiles (US006)
+     */
+    public OutputUserDTO assignUserProfile(String id, UpdateUserProfileDTO profileDTO) {
+        UserID userID = userIDFactory.createUserID(id);
+
+        Optional<User> opUser = userRepo.findByUserId(userID);
+        User user;
+
+        if (opUser.isPresent()) {
+            user = opUser.get();
+
+            UserProfileID profileID = profileIDFactory.createUserProfileID(profileDTO.profileId);
+            //Validate if exist the profile
+            if(!profileRepo.existsByUserProfileId(profileID)) {
+                throw new IllegalArgumentException("This user profile does not exist!");
+            }
+            //Validate if the user has the user profile assigned
+            if(!user.hasProfile(profileID)) {
+                user.toAssignProfile(profileID);
+            } else {
+                throw new IllegalArgumentException("This user profile was already assigned!");
+            }
+            Optional<User> updatedUser = userRepo.update(user);
+            return userMapper.toDto(updatedUser.get());
+        } else
+            return null;
+    }
+
+    public OutputUserDTO removeUserProfile(String id, UpdateUserProfileDTO profileDTO) {
+        UserID userID = userIDFactory.createUserID(id);
+        UserProfileID profileID;
+
+        Optional<User> opUser = userRepo.findByUserId(userID);
+        User user;
+
+        if (opUser.isPresent()) {
+            user = opUser.get();
+
+            //Validate if the profile is Visitor, all Users must have the visitor Profile.
+            if(!profileDTO.profileId.equalsIgnoreCase("visitor")) {
+                profileID = profileIDFactory.createUserProfileID(profileDTO.profileId);
+            } else {
+                throw new IllegalArgumentException("The user profile 'Visitor' can not be removed!");
+            }
+            //Validate if exist the profile
+            if(!profileRepo.existsByUserProfileId(profileID)) {
+                throw new IllegalArgumentException("This user profile does not exist!");
+            }
+            //Validate if the user has the user profile assigned
+            if(user.hasProfile(profileID)){
+                user.removeProfile(profileID);
+            } else {
+                throw new IllegalArgumentException("This user profile was not assigned!");
+            }
+            Optional<User> updatedUser = userRepo.update(user);
+            return userMapper.toDto(updatedUser.get());
+        } else
+            return null;
+    }
+
 
     /**
      * Active and Inactive User (US002, US025 and US026)
@@ -187,6 +244,9 @@ public class UserService {
     }
 
 
+    /**
+     * Create a Request to assign a user profile to a user (US003)
+     */
     public boolean createAndAddRequest(String id, RequestDTO requestDTO) {
         UserID userID = userIDFactory.createUserID(id);
         UserProfileID profileID = profileIDFactory.createUserProfileID(requestDTO.getProfileId());
@@ -207,6 +267,7 @@ public class UserService {
         userRepo.update(user);
         return true;
     }
+
 
     /**
      * Delete User

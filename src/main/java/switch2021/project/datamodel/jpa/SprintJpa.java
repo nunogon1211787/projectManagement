@@ -15,6 +15,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 //@ToString
+
 public class SprintJpa {
     @EmbeddedId
     private SprintID id;

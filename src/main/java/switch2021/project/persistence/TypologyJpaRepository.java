@@ -1,4 +1,4 @@
-package switch2021.project.presistence;
+package switch2021.project.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import switch2021.project.dataModel.jpa.TypologyJpa;

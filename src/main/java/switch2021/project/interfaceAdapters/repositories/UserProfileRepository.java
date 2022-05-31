@@ -7,7 +7,7 @@ import switch2021.project.dataModel.assembler.UserProfileJpaAssembler;
 import switch2021.project.applicationServices.iRepositories.IUserProfileRepo;
 import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
-import switch2021.project.presistence.UserProfileJpaRepository;
+import switch2021.project.persistence.UserProfileJpaRepository;
 
 import java.util.ArrayList;
 import java.util.List;

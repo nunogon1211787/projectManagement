@@ -1,14 +1,27 @@
 package switch2021.project.entities.valueObjects.vos;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.Embeddable;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@ToString
+@Getter
+@Setter
+@Embeddable
+@NoArgsConstructor
+
 public class Name implements ValueObject<Name> {
 
+
     /*** Attributes **/
-    private final String text;
+    private  String text;
 
 
     /*** Constructor **/

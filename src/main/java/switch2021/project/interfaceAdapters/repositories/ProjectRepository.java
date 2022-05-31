@@ -8,7 +8,7 @@ import switch2021.project.dataModel.jpa.ProjectJpa;
 import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
-import switch2021.project.presistence.ProjectJpaRepository;
+import switch2021.project.persistence.ProjectJpaRepository;
 import switch2021.project.dataModel.assembler.ProjectJpaAssembler;
 
 import java.util.ArrayList;

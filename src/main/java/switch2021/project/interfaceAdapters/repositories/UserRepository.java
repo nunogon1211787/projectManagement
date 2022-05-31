@@ -8,7 +8,7 @@ import switch2021.project.applicationServices.iRepositories.IUserRepo;
 import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.valueObjects.vos.UserID;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
-import switch2021.project.presistence.UserJpaRepository;
+import switch2021.project.persistence.UserJpaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,9 +75,19 @@ public class UserRepository implements IUserRepo {
         return usersByFunction;
     }
 
-    @Override //TODO METHOD
+    @Override
     public List<User> findAllByUserProfileId(UserProfileID profile) {
-        return null;
+        List<UserJpa> usersJpa = userJpaRepository.findAll();
+        List<User> users = userJpaAssembler.toDomain(usersJpa);
+
+        List<User> usersByProfile = new ArrayList<>();
+
+        for (User user : users) {
+            if (user.hasProfile(profile)) {
+                usersByProfile.add(user);
+            }
+        }
+        return usersByProfile;
     }
 
     @Override
@@ -91,7 +101,7 @@ public class UserRepository implements IUserRepo {
 
         UserJpa savedUserJpa = userJpaRepository.save(userJpa);
 
-       return Optional.of(userJpaAssembler.toDomain(savedUserJpa));
+        return Optional.of(userJpaAssembler.toDomain(savedUserJpa));
     }
 
     @Override

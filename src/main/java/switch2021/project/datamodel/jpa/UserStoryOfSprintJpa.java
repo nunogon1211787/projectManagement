@@ -10,7 +10,6 @@ import java.io.Serializable;
 @Setter
 @Entity(name = "UserStoryOfSprintJpa")
 @NoArgsConstructor
-//@ToString
 @Table(name = "userStoriesOfSprint")
 public class UserStoryOfSprintJpa implements Serializable {
     @Id

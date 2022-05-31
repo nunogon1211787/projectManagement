@@ -8,7 +8,7 @@ import switch2021.project.dataModel.assembler.UserStoryJpaAssembler;
 import switch2021.project.applicationServices.iRepositories.IUserStoryRepo;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.valueObjects.vos.UserStoryID;
-import switch2021.project.presistence.UserStoryJpaRepository;
+import switch2021.project.persistence.UserStoryJpaRepository;
 
 import java.util.*;
 
