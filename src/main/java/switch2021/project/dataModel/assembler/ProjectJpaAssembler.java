@@ -19,7 +19,7 @@ public class ProjectJpaAssembler {
 
     public ProjectJpa toJpaData(Project project) {
 
-        String projectCode = project.getProjectCode();
+        String projectCode = null;
         String projectName = project.getProjectName().getText();
         String description = project.getDescription().getText();
         String businessSector = project.getBusinessSector().getDescription().getText();
@@ -52,7 +52,8 @@ public class ProjectJpaAssembler {
     }
 
     public Project toDomain(ProjectJpa projectJpa) {
-        String projectCode = projectJpa.getProjectCode();
+//        String projectCode = projectJpa.getProjectCode();
+        ProjectID projectCode = new ProjectID(projectJpa.getProjectCode());
         Description projectName = new Description(projectJpa.getName());
         Description description = new Description(projectJpa.getDescription());
         BusinessSector businessSector = new BusinessSector(projectJpa.getBusinessSector());

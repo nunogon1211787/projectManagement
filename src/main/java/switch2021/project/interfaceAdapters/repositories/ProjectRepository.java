@@ -38,7 +38,7 @@ public class ProjectRepository implements IProjectRepo {
 
 
     @Override
-    public Optional<Project> findById(String id) {
+    public Optional<Project> findById(ProjectID id) {
 
         Optional<ProjectJpa> opProjJpa = projectJpaRepository.findById(id);
 
@@ -68,9 +68,8 @@ public class ProjectRepository implements IProjectRepo {
 
 
     @Override
-    public boolean deleteByProjectID(String id) {
+    public boolean deleteByProjectID(ProjectID id) {
 
-        ProjectID projID = new ProjectID(id);
         if (projectJpaRepository.existsById(id)) {
             projectJpaRepository.deleteById(id);
             return true;
@@ -82,7 +81,7 @@ public class ProjectRepository implements IProjectRepo {
 
     @Override
     public boolean existsById(ProjectID id) {
-        return projectJpaRepository.existsById(id.getCode());
+        return projectJpaRepository.existsById(id);
     }
 
 }

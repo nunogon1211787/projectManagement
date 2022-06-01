@@ -102,10 +102,10 @@ public class ResourceService {
     }
 
     private boolean checkDatesInsideProject(IProjectRepo projRepo, CreateResourceDTO dto) {
-        String[] x = dto.projectId.split("_");
-        ProjectID projID = new ProjectID(x[2]);
+//        String[] x = dto.projectId.split("_");
+        ProjectID projID = new ProjectID(dto.projectId);
 //        Project project = null;
-        Optional<Project> opProject = projRepo.findById(dto.projectId);
+        Optional<Project> opProject = projRepo.findById(projID);
         boolean msg = false;
 
         if (opProject.isPresent()) {

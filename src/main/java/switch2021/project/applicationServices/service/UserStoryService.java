@@ -40,11 +40,11 @@ public class UserStoryService {
      */
     public OutputUserStoryDTO createAndSaveUserStory(CreateUserStoryDTO inDto) throws Exception {
 
-//        ProjectID projectID = new ProjectID(inDto.projectID);
-        String[] x = inDto.projectID.split("_");
-        ProjectID projID = new ProjectID(x[2]);
+        ProjectID projID = new ProjectID(inDto.projectID);
+//        String[] x = inDto.projectID.split("_");
+//        ProjectID projID = new ProjectID(x[2]);
 
-        Optional<Project> project = iProjectRepo.findById(inDto.projectID);
+        Optional<Project> project = iProjectRepo.findById(projID);
 
         if(project.isEmpty()) {
             throw new Exception("Project does not exist");
