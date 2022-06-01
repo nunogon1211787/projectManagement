@@ -71,7 +71,7 @@ public class ProjectService {
 //        String[] x = id.split("_");
         ProjectID projID = new ProjectID(id);
 
-        Optional<Project> opProject = projRepo.findById(projID);
+        Optional<Project> opProject = projRepo.findById(id);
         Project proj;
 
         if (opProject.isPresent()) {
@@ -127,7 +127,7 @@ public class ProjectService {
 //        String[] x = id.split("_");
         ProjectID projID = new ProjectID(id);
 
-        Optional<Project> foundProject = projRepo.findById(projID);
+        Optional<Project> foundProject = projRepo.findById(id);
 
         if (foundProject.isEmpty()) {
             throw new Exception("Project does not exist");
@@ -152,7 +152,7 @@ public class ProjectService {
 
             for (ProjectID projId : resourceProjects) {
 
-                Project proj = projRepo.findById(projId).get();
+                Project proj = projRepo.findById(id).get();
 
                 projects.add(proj);
 
@@ -170,7 +170,7 @@ public class ProjectService {
     }
 
     public void deleteProjectRequest(ProjectID id) throws Exception {
-        if (!projRepo.deleteByProjectID(id)) {
+        if (!projRepo.deleteByProjectID(id.toString())) {
             throw new Exception("Project does not exist");
         }
     }

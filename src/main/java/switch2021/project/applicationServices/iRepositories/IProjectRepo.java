@@ -17,7 +17,7 @@ public interface IProjectRepo {
     /**
      * The repository should be able to find a object using given Identity.
      */
-    Optional<Project> findById(ProjectID id);
+    Optional<Project> findById(String id);
 
     /**Check if project exists in repository**/
     boolean existsById(ProjectID id);
@@ -25,6 +25,6 @@ public interface IProjectRepo {
     /**Save Projects Method**/
    Optional<Project> save(Project newProject);
 
-    boolean deleteByProjectID(ProjectID id);
+    boolean deleteByProjectID(String id);
 
 }

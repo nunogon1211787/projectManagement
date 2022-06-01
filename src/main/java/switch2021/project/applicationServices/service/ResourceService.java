@@ -105,7 +105,7 @@ public class ResourceService {
         String[] x = dto.projectId.split("_");
         ProjectID projID = new ProjectID(x[2]);
 //        Project project = null;
-        Optional<Project> opProject = projRepo.findById(projID);
+        Optional<Project> opProject = projRepo.findById(dto.projectId);
         boolean msg = false;
 
         if (opProject.isPresent()) {

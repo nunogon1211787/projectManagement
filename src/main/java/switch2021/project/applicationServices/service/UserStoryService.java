@@ -44,7 +44,7 @@ public class UserStoryService {
         String[] x = inDto.projectID.split("_");
         ProjectID projID = new ProjectID(x[2]);
 
-        Optional<Project> project = iProjectRepo.findById(projID);
+        Optional<Project> project = iProjectRepo.findById(inDto.projectID);
 
         if(project.isEmpty()) {
             throw new Exception("Project does not exist");
