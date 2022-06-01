@@ -10,7 +10,7 @@ import switch2021.project.dataModel.jpa.ResourceIDJpa;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.TaskTypeEnum;
 
-import switch2021.project.entities.aggregates.Task.TaskReeng;
+import switch2021.project.entities.aggregates.Task.Task;
 
 
 import java.time.LocalDate;
@@ -56,7 +56,7 @@ public class TaskJpaAssembler {
 //        return new TaskJpa(id, description, type, effortEstimate, startDate, endDate, resourceIDJpa, effortJpas, precedenceList);
 //    }
 
-    public TaskJpa toData2 (TaskReeng task){
+    public TaskJpa toData2 (Task task){
 
         TaskID id = task.getIdTask();
         String description = task.getDescription().getText();
@@ -93,7 +93,7 @@ public class TaskJpaAssembler {
         return x;
     }
 
-    public TaskReeng toDomain (TaskJpa task){
+    public Task toDomain (TaskJpa task){
 
         TaskIDJpa id = task.getId();
         Description description = new Description(task.getDescription());
@@ -124,7 +124,7 @@ public class TaskJpaAssembler {
             precedenceList = task.getPrecedenceList();
         }
 
-        return new TaskReeng(idFinal, description, type, effortEstimate, startDate, endDate, responsible, taskEffortList, precedenceList);
+        return new Task(idFinal, description, type, effortEstimate, startDate, endDate, responsible, taskEffortList, precedenceList);
     }
 
 }

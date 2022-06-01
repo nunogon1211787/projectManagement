@@ -19,7 +19,6 @@ public class ProjectJpaAssembler {
 
     public ProjectJpa toJpaData(Project project) {
 
-        String projectCode = null;
         String projectName = project.getProjectName().getText();
         String description = project.getDescription().getText();
         String businessSector = project.getBusinessSector().getDescription().getText();
@@ -46,14 +45,14 @@ public class ProjectJpaAssembler {
             status = project.getProjectStatus().toString();
         }
 
-        return new ProjectJpa(projectCode, projectName, description, businessSector, startDate,
+        return new ProjectJpa(project.getProjectCode(), projectName, description, businessSector, startDate,
                               numberOfSprints, sprintDuration, budget, endDate, typology, customer, status);
 
     }
 
     public Project toDomain(ProjectJpa projectJpa) {
-//        String projectCode = projectJpa.getProjectCode();
-        ProjectID projectCode = new ProjectID(projectJpa.getProjectCode());
+
+        ProjectID projectCode = projectJpa.getProjectCode();
         Description projectName = new Description(projectJpa.getName());
         Description description = new Description(projectJpa.getDescription());
         BusinessSector businessSector = new BusinessSector(projectJpa.getBusinessSector());

@@ -2,12 +2,12 @@ package switch2021.project.dtoModel.mapper;
 
 import org.springframework.stereotype.Component;
 import switch2021.project.dtoModel.dto.OutputResourceDTO;
-import switch2021.project.entities.aggregates.Resource.ResourceReeng;
+import switch2021.project.entities.aggregates.Resource.Resource;
 
 @Component
 public class ResourceMapper {
 
-    public OutputResourceDTO model2Dto(ResourceReeng res) {
+    public OutputResourceDTO model2Dto(Resource res) {
 
         OutputResourceDTO resDto = new OutputResourceDTO();
 

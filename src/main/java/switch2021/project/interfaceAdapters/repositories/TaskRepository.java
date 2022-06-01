@@ -8,7 +8,7 @@ import switch2021.project.applicationServices.iRepositories.TaskRepositoryInterf
 import switch2021.project.dataModel.Task.TaskIDJpa;
 import switch2021.project.dataModel.Task.TaskJpa;
 import switch2021.project.dataModel.assembler.TaskJpaAssembler;
-import switch2021.project.entities.aggregates.Task.TaskReeng;
+import switch2021.project.entities.aggregates.Task.Task;
 import switch2021.project.entities.valueObjects.vos.Name;
 import switch2021.project.persistence.TaskJpaRepository;
 
@@ -31,21 +31,21 @@ public class TaskRepository implements TaskRepositoryInterface {
 
     /*** Class Methods **/
 
-    public TaskReeng save(TaskReeng newTask) {
+    public Task save(Task newTask) {
 
         TaskJpa toSaveTask = assembler.toData2(newTask);
 
         TaskJpa savedTask= jpaRepo.save(toSaveTask);
 
-        TaskReeng finalTask = assembler.toDomain(savedTask);
+        Task finalTask = assembler.toDomain(savedTask);
 
         return finalTask;
     }
 
-    public List<TaskReeng> findAll() {
+    public List<Task> findAll() {
         List <TaskJpa> allTasks = jpaRepo.findAll();
 
-        List <TaskReeng> finalListTask = new ArrayList<>();
+        List <Task> finalListTask = new ArrayList<>();
 
         for(TaskJpa task: allTasks){
             finalListTask.add(assembler.toDomain(task));
@@ -54,7 +54,7 @@ public class TaskRepository implements TaskRepositoryInterface {
         return finalListTask;
     }
 
-    public TaskReeng findById(String code) {
+    public Task findById(String code) {
         Optional<TaskJpa> task = jpaRepo.findById(new TaskIDJpa(code, new Name(code)));
 
         if(task.isPresent())

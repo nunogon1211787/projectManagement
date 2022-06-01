@@ -23,10 +23,10 @@ class ManageResourcesServiceTest {
 
         //Arrange
         ManageResourcesService dsrv = new ManageResourcesService();
-        List<ResourceReeng> initial = new ArrayList<>();
-        ResourceReeng res1 = mock(ResourceReeng.class);
-        ResourceReeng res2 = mock(ResourceReeng.class);
-        ResourceReeng res3 = mock(ResourceReeng.class);
+        List<Resource> initial = new ArrayList<>();
+        Resource res1 = mock(Resource.class);
+        Resource res2 = mock(Resource.class);
+        Resource res3 = mock(Resource.class);
         initial.add(res1);
         initial.add(res2);
         initial.add(res3);
@@ -36,10 +36,10 @@ class ManageResourcesServiceTest {
         when(res1.isActiveToThisDate(date)).thenReturn(true);
         when(res2.isActiveToThisDate(date)).thenReturn(true);
         when(res3.isActiveToThisDate(date)).thenReturn(true);
-        List<ResourceReeng> result = dsrv.currentResourcesByDate(initial, date);
+        List<Resource> result = dsrv.currentResourcesByDate(initial, date);
 
         //Assert
-        List<ResourceReeng> expected = new ArrayList<>(List.of(res1, res2, res3));
+        List<Resource> expected = new ArrayList<>(List.of(res1, res2, res3));
         assertEquals(expected, result);
 
     }
@@ -49,10 +49,10 @@ class ManageResourcesServiceTest {
 
         //Arrange
         ManageResourcesService dsrv = new ManageResourcesService();
-        List<ResourceReeng> initial = new ArrayList<>();
-        ResourceReeng res1 = mock(ResourceReeng.class);
-        ResourceReeng res2 = mock(ResourceReeng.class);
-        ResourceReeng res3 = mock(ResourceReeng.class);
+        List<Resource> initial = new ArrayList<>();
+        Resource res1 = mock(Resource.class);
+        Resource res2 = mock(Resource.class);
+        Resource res3 = mock(Resource.class);
         initial.add(res1);
         initial.add(res2);
         initial.add(res3);
@@ -62,10 +62,10 @@ class ManageResourcesServiceTest {
         when(res1.isActiveToThisDate(date)).thenReturn(false);
         when(res2.isActiveToThisDate(date)).thenReturn(false);
         when(res3.isActiveToThisDate(date)).thenReturn(false);
-        List<ResourceReeng> result = dsrv.currentResourcesByDate(initial, date);
+        List<Resource> result = dsrv.currentResourcesByDate(initial, date);
 
         //Assert
-        List<ResourceReeng> expected = new ArrayList<>();
+        List<Resource> expected = new ArrayList<>();
         assertEquals(expected, result);
 
     }
@@ -75,10 +75,10 @@ class ManageResourcesServiceTest {
 
         //Arrange
         ManageResourcesService dsrv = new ManageResourcesService();
-        List<ResourceReeng> initial = new ArrayList<>();
-        ResourceReeng res1 = mock(ResourceReeng.class);
-        ResourceReeng res2 = mock(ResourceReeng.class);
-        ResourceReeng res3 = mock(ResourceReeng.class);
+        List<Resource> initial = new ArrayList<>();
+        Resource res1 = mock(Resource.class);
+        Resource res2 = mock(Resource.class);
+        Resource res3 = mock(Resource.class);
         initial.add(res1);
         initial.add(res2);
         initial.add(res3);
@@ -88,10 +88,10 @@ class ManageResourcesServiceTest {
         when(res1.isActiveToThisDate(date)).thenReturn(false);
         when(res2.isActiveToThisDate(date)).thenReturn(true);
         when(res3.isActiveToThisDate(date)).thenReturn(false);
-        List<ResourceReeng> result = dsrv.currentResourcesByDate(initial, date);
+        List<Resource> result = dsrv.currentResourcesByDate(initial, date);
 
         //Assert
-        List<ResourceReeng> expected = new ArrayList<>(List.of(res2));
+        List<Resource> expected = new ArrayList<>(List.of(res2));
         assertEquals(expected, result);
 
     }
@@ -101,14 +101,14 @@ class ManageResourcesServiceTest {
 
         //Arrange
         ManageResourcesService dsrv = new ManageResourcesService();
-        List<ResourceReeng> initial = new ArrayList<>();
+        List<Resource> initial = new ArrayList<>();
 
         //Act
         LocalDate date = LocalDate.of(2022, 5, 2);
-        List<ResourceReeng> result = dsrv.currentResourcesByDate(initial, date);
+        List<Resource> result = dsrv.currentResourcesByDate(initial, date);
 
         //Assert
-        List<ResourceReeng> expected = new ArrayList<>();
+        List<Resource> expected = new ArrayList<>();
         assertEquals(expected, result);
 
     }
@@ -118,10 +118,10 @@ class ManageResourcesServiceTest {
 
         //Arrange
         ManageResourcesService dsrv = new ManageResourcesService();
-        List<ResourceReeng> initial = new ArrayList<>();
-        ResourceReeng res1 = mock(ResourceReeng.class);
-        ResourceReeng res2 = mock(ResourceReeng.class);
-        ResourceReeng res3 = mock(ResourceReeng.class);
+        List<Resource> initial = new ArrayList<>();
+        Resource res1 = mock(Resource.class);
+        Resource res2 = mock(Resource.class);
+        Resource res3 = mock(Resource.class);
         initial.add(res1);
         initial.add(res2);
         initial.add(res3);
@@ -146,7 +146,7 @@ class ManageResourcesServiceTest {
 
         //Arrange
         ManageResourcesService dsrv = new ManageResourcesService();
-        List<ResourceReeng> initial = new ArrayList<>();
+        List<Resource> initial = new ArrayList<>();
 
         //Act
         List<ProjectID> result = dsrv.listProjectsOfResources(initial);

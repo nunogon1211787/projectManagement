@@ -10,13 +10,12 @@ import switch2021.project.dtoModel.dto.*;
 import switch2021.project.entities.aggregates.Typology.Typology;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
-import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
 import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.dtoModel.mapper.ProjectMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManageResourcesService;
-import switch2021.project.entities.aggregates.Resource.ResourceReeng;
+import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
 import java.time.LocalDate;
@@ -35,8 +34,6 @@ public class ProjectService {
     @Autowired
     private IProjectFactory iProjectFactory;
     @Autowired
-    private IProjectIDFactory projIDFactory;
-    @Autowired
     private ProjectMapper projMapper;
     @Autowired
     private IUserRepo userRepo;
@@ -54,6 +51,8 @@ public class ProjectService {
     public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) throws Exception {
 
         Project newProject = iProjectFactory.createProject(projDTO);
+
+        newProject.setProjectCode(new ProjectID("Project_"+ LocalDate.now().getYear() + "_" + (projRepo.findAll().size()+1)));
 
         Optional<Project> savedProject = projRepo.save(newProject);
 
@@ -93,7 +92,7 @@ public class ProjectService {
 
             Optional<Project> savedProject = projRepo.save(proj);
 
-            return savedProject.map(projectReeng -> projMapper.model2Dto(projectReeng)).orElse(null);
+            return savedProject.map(project -> projMapper.model2Dto(project)).orElse(null);
         }
 
         return null;
@@ -141,10 +140,10 @@ public class ProjectService {
         UserID userID = userIDFactory.createUserID(id);
 
         if (userRepo.existsById(userID)) {
-            List<ResourceReeng> userResources = resRepo.findAllByUser(userID);
+            List<Resource> userResources = resRepo.findAllByUser(userID);
 
-            List<ResourceReeng> currentUserResources = resService.currentResourcesByDate(userResources,
-                                                                                         LocalDate.parse(dateDto.date));
+            List<Resource> currentUserResources = resService.currentResourcesByDate(userResources,
+                                                                                    LocalDate.parse(dateDto.date));
 
             List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
 

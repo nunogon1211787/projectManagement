@@ -13,7 +13,7 @@ import switch2021.project.applicationServices.iRepositories.IResourceRepo;
 import switch2021.project.dtoModel.mapper.ResourceMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManageResourcesService;
-import switch2021.project.entities.aggregates.Resource.ResourceReeng;
+import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.valueObjects.vos.Email;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.UserID;
@@ -60,7 +60,7 @@ public class ResourceService {
 //        else if (!checkProjectRole(resRepo, dto)) {
 //            throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));}
             else {
-            ResourceReeng newResource = iResourceFactory.createResource(dto);
+            Resource newResource = iResourceFactory.createResource(dto);
 
             resRepo.save(newResource);
             response = map.model2Dto(newResource);
@@ -80,11 +80,11 @@ public class ResourceService {
 
         if (projRepo.existsById(projectID)){
 
-            List<ResourceReeng> resources = resRepo.findAllByProject(projectID);
+            List<Resource> resources = resRepo.findAllByProject(projectID);
 
-            List<ResourceReeng> projectTeam = manageResourcesService.currentResourcesByDate(resources, LocalDate.parse(dateDto.date));
+            List<Resource> projectTeam = manageResourcesService.currentResourcesByDate(resources, LocalDate.parse(dateDto.date));
 
-            for(ResourceReeng res : projectTeam){
+            for(Resource res : projectTeam){
 
                 resourcesDto.add(map.model2Dto(res));
             }
@@ -119,14 +119,14 @@ public class ResourceService {
 
     private boolean checkAllocation(CreateResourceDTO dto){
         UserID sysUserId = new UserID(new Email(dto.systemUserID));
-        List<ResourceReeng> resourceProjectsList = resRepo.findAllByUser(sysUserId);
+        List<Resource> resourceProjectsList = resRepo.findAllByUser(sysUserId);
         return manageResourcesService.validateAllocation(resourceProjectsList, dto);
     }
 
     private boolean checkProjectRole(IResourceRepo resRepo, CreateResourceDTO dto){
         String[] x = dto.projectId.split("_");
         ProjectID projID = new ProjectID(x[2]);
-        List<ResourceReeng> projectTeamList = resRepo.findAllByProject(projID);
+        List<Resource> projectTeamList = resRepo.findAllByProject(projID);
         return manageResourcesService.validateProjectRole(projectTeamList, dto);
     }
 }

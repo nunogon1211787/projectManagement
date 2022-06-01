@@ -12,11 +12,11 @@ import java.util.List;
 @Component
 public class ManageResourcesService {
 
-    public List<ResourceReeng> currentResourcesByDate(List<ResourceReeng> resourcesInProject, LocalDate date) {
+    public List<Resource> currentResourcesByDate(List<Resource> resourcesInProject, LocalDate date) {
 
-        List<ResourceReeng> currentResources = new ArrayList<>();
+        List<Resource> currentResources = new ArrayList<>();
 
-        for (ResourceReeng res : resourcesInProject) {
+        for (Resource res : resourcesInProject) {
 
             if (res.isActiveToThisDate(date)) {
                 currentResources.add(res);
@@ -26,11 +26,11 @@ public class ManageResourcesService {
     }
 
 
-    public boolean validateAllocation(List<ResourceReeng> resourceProjectsList, CreateResourceDTO dto) {
+    public boolean validateAllocation(List<Resource> resourceProjectsList, CreateResourceDTO dto) {
         double sum = 0;
         boolean msg = false;
 
-        for (ResourceReeng res : resourceProjectsList) {
+        for (Resource res : resourceProjectsList) {
             if (res.isActiveToThisDate(LocalDate.parse(dto.startDate)) && res.isActiveToThisDate(LocalDate.parse(dto.endDate))) {
                 sum = sum + res.getAllocation().getPercentage();
             }
@@ -40,10 +40,10 @@ public class ManageResourcesService {
         }
         return msg;
     }
-    public boolean validateProjectRole(List<ResourceReeng> projectTeamList, CreateResourceDTO dto) {
+    public boolean validateProjectRole(List<Resource> projectTeamList, CreateResourceDTO dto) {
         boolean msg = false;
 
-        for (ResourceReeng res : projectTeamList) {
+        for (Resource res : projectTeamList) {
             if (!(res.isActiveToThisDate(LocalDate.parse(dto.startDate)) && res.isActiveToThisDate(LocalDate.parse(dto.endDate)))) {
                     msg = true;
                 } else if (ProjectRoleReeng.valueOf(dto.projectRole).equals(ProjectRoleReeng.TeamMember)){
@@ -57,11 +57,11 @@ public class ManageResourcesService {
             return msg;
         }
 
-    public List<ProjectID> listProjectsOfResources(List<ResourceReeng> currentUserResources) {
+    public List<ProjectID> listProjectsOfResources(List<Resource> currentUserResources) {
 
         List<ProjectID> resourceProjects = new ArrayList<>();
 
-        for (ResourceReeng res : currentUserResources){
+        for (Resource res : currentUserResources){
 
             ProjectID projId = res.getId().getProject();
 
