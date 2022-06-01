@@ -31,7 +31,7 @@ public class UserJpaAssembler {
             if (!(request.getRequestDate() == null)) {
                 requestDate = request.getRequestDate().toString();
             }
-            RequestJpa requestJpa = new RequestJpa(requestDate, request.getProfileIdRequested(), userJpa);
+            RequestJpa requestJpa = new RequestJpa(request.getProfileIdRequested(), requestDate);
             userJpa.getRequests().add(requestJpa);
         }
         return userJpa;

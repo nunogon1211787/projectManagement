@@ -12,8 +12,7 @@ import java.util.List;
 @Entity(name = "UserJpa")
 @NoArgsConstructor
 @AllArgsConstructor
-//@ToString
-@Table(name = "systemUsers")
+@Table(name = "Users")
 public class UserJpa {
 
     @EmbeddedId
@@ -24,8 +23,10 @@ public class UserJpa {
     private String password;
     private String isActive;
     @ElementCollection
+    @CollectionTable(name = "user_assignedProfiles")
     private List<UserProfileID> assignedIDProfiles;
-    @OneToMany(mappedBy = "userJpa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ElementCollection
+    @CollectionTable(name = "requests")
     private List<RequestJpa> requests;
 
     public UserJpa(UserID email, String userName, String function, String photo, String password,
