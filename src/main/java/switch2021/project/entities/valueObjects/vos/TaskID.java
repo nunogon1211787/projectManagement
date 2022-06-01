@@ -1,24 +1,35 @@
 package switch2021.project.entities.valueObjects.vos;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import switch2021.project.applicationServices.iRepositories.TaskContainerID;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.util.Objects;
 
 @Getter
+
+@NoArgsConstructor
+@AllArgsConstructor
 public class TaskID implements ValueObject<TaskID> {
 
     /** Attributes */
-    private final TaskContainerID taskContainerID;
-    private final Name taskName;
 
-    public TaskID (TaskContainerID taskContainerID, Name name){
+    private TaskContainerID taskContainerID;
 
-        this.taskName = name;
-        this.taskContainerID = taskContainerID;
+    @Embedded
+    private Name taskName;
 
-    }
+//    public TaskID (TaskContainerID taskContainerID, Name name){
+//
+//        this.taskName = name;
+//        this.taskContainerID = taskContainerID;
+//
+//    }
 
     @Override
     public boolean equals(Object o) {

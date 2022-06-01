@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import switch2021.project.dataModel.jpa.ResourceIDJpa;
 import switch2021.project.dataModel.jpa.ResourceJpa;
 import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
-import switch2021.project.entities.aggregates.Resource.ResourceReeng;
+import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectRoleReeng;
 
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Component
 public class ResourceJpaAssembler {
 
-    public ResourceJpa toData(ResourceReeng resource) {
+    public ResourceJpa toData(Resource resource) {
 
 
         UserID userId = resource.getId().getUser();
@@ -32,7 +32,7 @@ public class ResourceJpaAssembler {
         return resourceJpa;
     }
 
-    public ResourceReeng toDomain(ResourceJpa resourceJpaSaved) {
+    public Resource toDomain(ResourceJpa resourceJpaSaved) {
 
         ResourceIDReeng id = new ResourceIDReeng(resourceJpaSaved.getId().getUser(), resourceJpaSaved.getId().getProject(),
                 LocalDate.parse(resourceJpaSaved.getId().getStartDate()));
@@ -41,7 +41,7 @@ public class ResourceJpaAssembler {
         CostPerHour costPerHour = new CostPerHour(resourceJpaSaved.getCost());
         ProjectRoleReeng projectRole = ProjectRoleReeng.valueOf(resourceJpaSaved.getRole());
 
-        ResourceReeng resourceSaved = new ResourceReeng(id, endDate, percentageOfAllocation, costPerHour, projectRole);
+        Resource resourceSaved = new Resource(id, endDate, percentageOfAllocation, costPerHour, projectRole);
 
         return resourceSaved;
     }

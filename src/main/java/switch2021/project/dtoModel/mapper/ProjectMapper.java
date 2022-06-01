@@ -18,7 +18,7 @@ public class ProjectMapper {
 
     public OutputProjectDTO model2Dto(Project newProject) {
 
-        String code = newProject.getProjectCode();
+        String code = newProject.getProjectCode().getCode();
         String projectName = newProject.getProjectName().getText();
         String description = newProject.getDescription().getText();
         String businessSector = newProject.getBusinessSector().getDescription().getText();

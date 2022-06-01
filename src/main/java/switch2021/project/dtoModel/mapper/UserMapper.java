@@ -33,7 +33,7 @@ public class UserMapper {
         //Add HATEOAS to OutPut DTO
         outputUserDTO
                 //Self Relation
-                .add(linkTo(methodOn(UserController.class).getUser(outputUserDTO.email)).withSelfRel())
+                .add(linkTo(methodOn(UserController.class).getUser(outputUserDTO.email)).withRel("Find by ID"))
                 //Collection Relation
                 .add(linkTo(methodOn(UserController.class).showAllUsers()).withRel("Collection"))
                 //Delete option

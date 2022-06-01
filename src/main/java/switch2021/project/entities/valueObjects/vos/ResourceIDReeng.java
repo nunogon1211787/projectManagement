@@ -2,15 +2,21 @@ package switch2021.project.entities.valueObjects.vos;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Getter
+
 @Embeddable
 @NoArgsConstructor
+@ToString
+@Getter
 public class ResourceIDReeng implements ValueObject<ResourceIDReeng> {
 
     @Embedded

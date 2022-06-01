@@ -9,7 +9,10 @@ import switch2021.project.entities.aggregates.Typology.Typology;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Objects;
 
 @Getter
@@ -21,7 +24,7 @@ public class Project {
     /**
      * Class Attributes
      **/
-    private String projectCode;
+    private ProjectID projectCode;
     private Description projectName;
     private Description description;
     private Typology typology;
@@ -54,7 +57,8 @@ public class Project {
      * **/
 
     public boolean hasCode(String code) {
-        return this.projectCode.equalsIgnoreCase(code);
+        String projCode = this.projectCode.getCode().toLowerCase(Locale.ROOT);
+        return projCode.equals(code.toLowerCase(Locale.ROOT));
     }
 
     public boolean isActiveInThisDate(LocalDate date) {
@@ -63,7 +67,7 @@ public class Project {
 
         if(this.startDate.isBefore(date) || this.startDate.isEqual(date)){
 
-            if(this.endDate.isEqual(date) || this.endDate.isAfter(date)){
+            if(this.endDate == null || this.endDate.isEqual(date) || this.endDate.isAfter(date)){
                 result = true;
             }
 

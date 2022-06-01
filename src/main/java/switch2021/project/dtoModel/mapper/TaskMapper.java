@@ -2,12 +2,12 @@ package switch2021.project.dtoModel.mapper;
 
 import org.springframework.stereotype.Component;
 import switch2021.project.dtoModel.dto.OutputTaskDTO;
-import switch2021.project.entities.aggregates.Task.TaskReeng;
+import switch2021.project.entities.aggregates.Task.Task;
 
 @Component
-public class TaskMapperNew {
+public class TaskMapper {
 
-    public OutputTaskDTO model2Dto(TaskReeng task) {
+    public OutputTaskDTO model2Dto(Task task) {
 
         OutputTaskDTO taskDto = new OutputTaskDTO();
 

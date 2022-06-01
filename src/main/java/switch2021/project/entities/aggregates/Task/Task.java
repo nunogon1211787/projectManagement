@@ -1,147 +1,89 @@
 package switch2021.project.entities.aggregates.Task;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import switch2021.project.applicationServices.iRepositories.TaskContainerID;
-import switch2021.project.entities.aggregates.Resource.old.Resource;
+import switch2021.project.utils.Entity;
+import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.TaskTypeEnum;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@Deprecated
-public class Task {
+@Setter
+public class Task implements Entity<Task> {
 
-    /**
-     * Attributes.
-     */
-    private int idTask;
-    private Name name;
+    /*** Attributes*/
+    private TaskID idTask;
     private Description description;
     private TaskTypeEnum type;
-    private double effortEstimate;  // em horas
+    private EffortEstimate effortEstimate;  // em horas
     private LocalDate startDate;
     private LocalDate endDate;
-    private Resource responsible;
+    private ResourceIDReeng responsible;
     private List<TaskEffort> taskEffortList;
-    private List<String> precedenceList;
-    private TaskContainerID taskContainerID;
+    private List<TaskID> precedenceList;
 
 
-    /**
-     * Constructors.
-     */
-    public Task(String description) {
-        this.description = new Description(description);
-    }
 
-    public Task(String name, String description, double effortEstimate, TaskTypeEnum type, Resource responsible) {
+    /*** Constructor */
 
-        checkEffortRules(effortEstimate);
-
-        this.name = new Name(name);
-        this.description = new Description(description);
-        this.effortEstimate = effortEstimate;
-        this.type = type;
-        this.responsible = responsible;
+    public Task(TaskID taskID) {
+        this.idTask = taskID;
         this.taskEffortList = new ArrayList<>();
 
     }
 
-    public Task(String name, String description, double effortEstimate, TaskTypeEnum type, Resource responsible, TaskContainerID taskContainerID) {
-
-        checkEffortRules(effortEstimate);
-
-        this.name = new Name(name);
-        this.description = new Description(description);
+        public Task(TaskID taskID, Description description,
+                    EffortEstimate effortEstimate, TaskTypeEnum type,
+                    ResourceIDReeng responsible) {
+        this.idTask = taskID;
+        this.description = description;
         this.effortEstimate = effortEstimate;
         this.type = type;
         this.responsible = responsible;
-        this.taskEffortList = new ArrayList<>();
-        this.taskContainerID = taskContainerID;
-    }
 
-    public Task(String name, String description, double effortEstimate, TaskTypeEnum type, Resource responsible, List<String> precedenceList) {
-        new Task(name, description, effortEstimate, type, responsible);
-        this.precedenceList = Collections.unmodifiableList(precedenceList);
 
     }
 
-    /**
-     * Methods to iterate with attributes,
-     */
+    /*** Constructor with precedence list*/
+
+//    public TaskReeng(Name name, Description description, EffortEstimate effortEstimate, TaskTypeEnum type, Resource responsible, TaskContainerID taskContainerID, List<String> precedenceList) {
+//        new TaskReeng(name, description, effortEstimate, type, responsible, taskContainerID);
+//        this.precedenceList = Collections.unmodifiableList(precedenceList);
+//    }
+
+    /*** Methods to iterate with attributes */
 
     public boolean hasName(String taskName) {
-        return Objects.equals(this.name.getText(), taskName);
+        return Objects.equals(this.idTask.getTaskName().getText(), taskName);
     }
 
     public boolean hasTaskTypeEnum(String taskType) {
         return Objects.equals(this.type.toString(), taskType);
     }
 
-    public boolean hasResponsible(Resource resp) {
+    public boolean hasResponsible(ResourceIDReeng resp) {
         return Objects.equals(this.responsible, resp);
     }
 
-    public boolean hasId(int id) {
-        return Objects.equals(this.idTask, id);
-    }
-
-    public void setIdTask(int id) {
-        checkIdRules(id);
-        this.idTask = id;
-    }
-
-    /**
-     * Methods to validate attributes data.
-     */
-
-    private void checkIdRules(int id) {
-        if (id < 1)
-            throw new IllegalArgumentException("Type ID cannot be negative.");
-    }
-
-    private void checkEffortRules(double effort) {
-        if (effort <= 0.00) {
-            throw new IllegalArgumentException("Effort can be bigger than zero.");
-        }
-    }
-
-    public void createAndSaveTaskEffort(int effortHours, int effortMinutes, Date effortDate, String comment, String attachment) {
-        TaskEffort taskEffort = new TaskEffort(effortHours, effortMinutes, effortDate, comment, attachment);
-        if (taskEffort.getEffortHours().getEffortHours() == 0 && taskEffort.getEffortMinutes().getEffortMinutes() == 0) {
-            throw new IllegalArgumentException("Not work time values insert");
-        }
-
-            if (taskEffortList.isEmpty()) {
-                setStartDate(taskEffort.getEffortDate().getEffortDate());
-
-            }
-
-            //validateEffortPercentage(effortHours, effortMinutes);
-
-        this.taskEffortList.add(taskEffort);
-        if(getHoursSpent() == this.effortEstimate)
-            setEndDate(effortDate.getEffortDate());
+    public boolean hasDescription(Description description) {
+        return Objects.equals(this.description, description);
     }
 
 
-    private double effortInHours(TaskEffort effort) {
-        return (double) effort.getEffortHours().getEffortHours() + ((double) effort.getEffortMinutes().getEffortMinutes() / 60);
-    }
-
-
+    /*** Methods get */
 
     public String getStatus() {
         String status = "Blocked";
         double x = getExecutionPercentage();
-
 
         if(x == 0){
             status = "Planned";
@@ -158,6 +100,13 @@ public class Task {
         return status;
     }
 
+    public double getExecutionPercentage() {
+        double x = getHoursSpent();
+        double result = (x / this.effortEstimate.getEffortHours());
+
+        return result;
+    }
+
     public double getHoursSpent() {
         double x = 0;
         for (TaskEffort i : this.taskEffortList) {
@@ -166,38 +115,25 @@ public class Task {
         return x;
     }
 
-    public double getExecutionPercentage() {
-        double x = getHoursSpent();
-        return x / this.effortEstimate;
+    private double effortInHours(TaskEffort effort) {
+        return (double) effort.getEffortHours().getEffortHours() + ((double) effort.getEffortMinutes().getEffortMinutes() / 60);
     }
-
-/*    public void validateEffortPercentage(int hours, int minutes) {
-        double x = getHoursSpent();
-        double y = getEffortEstimate();
-        double z = hours + (minutes / 60);
-
-        if(x + z > y){
-            throw new IllegalArgumentException("Hours spent is higher then effort estimated, please update effort estimate");
-
-        }
-    }
-
- */
-
-    /**
-     * Override methods.
-     */
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return Double.compare(task.effortEstimate, effortEstimate) == 0 && name.equals(task.name) && description.equals(task.description) && type.equals(task.type) && Objects.equals(endDate, task.endDate) && responsible.equals(task.responsible);
+        return Objects.equals(idTask, task.idTask) && Objects.equals(description, task.description) && type == task.type && Objects.equals(effortEstimate, task.effortEstimate) && Objects.equals(startDate, task.startDate) && Objects.equals(endDate, task.endDate) && Objects.equals(responsible, task.responsible) && Objects.equals(taskEffortList, task.taskEffortList) && Objects.equals(precedenceList, task.precedenceList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, type, effortEstimate, endDate, responsible);
+        return Objects.hash(idTask, description, type, effortEstimate, startDate, endDate, responsible, taskEffortList, precedenceList);
+    }
+
+    @Override
+    public boolean sameIdentityAs(Task other) {
+        return false;
     }
 }
