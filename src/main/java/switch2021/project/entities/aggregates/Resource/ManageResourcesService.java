@@ -44,7 +44,10 @@ public class ManageResourcesService {
         boolean msg = false;
 
         for (Resource res : projectTeamList) {
-            if (!(res.isActiveToThisDate(LocalDate.parse(dto.startDate)) && res.isActiveToThisDate(LocalDate.parse(dto.endDate)))) {
+//            if(res == null){
+//                msg = true;
+//            } else
+            if (!res.isActiveToThisDate(LocalDate.parse(dto.startDate)) && !res.isActiveToThisDate(LocalDate.parse(dto.endDate))) {
                     msg = true;
                 } else if (ProjectRoleReeng.valueOf(dto.projectRole).equals(ProjectRoleReeng.TeamMember)){
                 msg = true;

@@ -50,14 +50,14 @@ public class ResourceService {
         } else if (!checkProjectExists(dto)) {
             throw new IllegalArgumentException(("Project does not exist"));
         }
-//        else if (!checkDatesInsideProject(projRepo,dto)) {
-//            throw new IllegalArgumentException(("Dates are not inside project"));
-//        }
+        else if (!checkDatesInsideProject(dto)) {
+            throw new IllegalArgumentException(("Dates are not inside project"));
+        }
         else
         if (!checkAllocation(dto)) {
             throw new IllegalArgumentException(("Is not valid to create - Allocation)"));
         }
-//        else if (!checkProjectRole(resRepo, dto)) {
+//        else if (!checkProjectRole(dto)) {
 //            throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));}
             else {
             Resource newResource = iResourceFactory.createResource(dto);
@@ -101,10 +101,8 @@ public class ResourceService {
         return this.projRepo.existsById(new ProjectID(dto.projectId));
     }
 
-    private boolean checkDatesInsideProject(IProjectRepo projRepo, CreateResourceDTO dto) {
-//        String[] x = dto.projectId.split("_");
+    private boolean checkDatesInsideProject(CreateResourceDTO dto) {
         ProjectID projID = new ProjectID(dto.projectId);
-//        Project project = null;
         Optional<Project> opProject = projRepo.findById(projID);
         boolean msg = false;
 
@@ -123,9 +121,8 @@ public class ResourceService {
         return manageResourcesService.validateAllocation(resourceProjectsList, dto);
     }
 
-    private boolean checkProjectRole(IResourceRepo resRepo, CreateResourceDTO dto){
-        String[] x = dto.projectId.split("_");
-        ProjectID projID = new ProjectID(x[2]);
+    private boolean checkProjectRole(CreateResourceDTO dto){
+        ProjectID projID = new ProjectID(dto.projectId);
         List<Resource> projectTeamList = resRepo.findAllByProject(projID);
         return manageResourcesService.validateProjectRole(projectTeamList, dto);
     }
