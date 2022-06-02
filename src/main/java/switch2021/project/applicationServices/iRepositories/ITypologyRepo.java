@@ -31,6 +31,7 @@ public interface ITypologyRepo {
      */
     boolean existsByTypologyId(TypologyID id);
 
+
     /**
      * Delete the object from this repository.
      */

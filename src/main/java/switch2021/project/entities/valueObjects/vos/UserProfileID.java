@@ -2,12 +2,14 @@ package switch2021.project.entities.valueObjects.vos;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import switch2021.project.utils.ValueObject;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 
 @Getter
+@Setter
 @Embeddable
 @NoArgsConstructor
 public class UserProfileID implements ValueObject<UserProfileID> {

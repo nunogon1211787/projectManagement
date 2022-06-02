@@ -1,11 +1,8 @@
 package switch2021.project.entities.aggregates.UserStory;
 
 import lombok.*;
-import switch2021.project.entities.valueObjects.vos.Description;
+import switch2021.project.entities.valueObjects.vos.*;
 
-import switch2021.project.entities.valueObjects.vos.UsHour;
-import switch2021.project.entities.valueObjects.vos.UsPriority;
-import switch2021.project.entities.valueObjects.vos.UserStoryID;
 import switch2021.project.utils.Entity;
 
 import java.time.LocalDate;
@@ -42,6 +39,7 @@ public class UserStory implements Entity<UserStory> {
         this.timeEstimate = timeEstimate;
     }
 
+
     /**
      * Constructor User Story Refined
      **/
@@ -57,13 +55,14 @@ public class UserStory implements Entity<UserStory> {
         return this.userStoryID.equals(idUserStory);
     }
 
+    public boolean hasProjectId(String projectId) {
+        return this.userStoryID.getProjectID().getCode().equals(projectId);
+    }
+
+
     /**
      * Override Methods
-     *
-     * @param other to compare
-     * @return True if they have the same identity
      */
-
     @Override
     public boolean sameIdentityAs(UserStory other) {
         return other != null && userStoryID.sameValueAs(other.userStoryID);
@@ -82,5 +81,6 @@ public class UserStory implements Entity<UserStory> {
         return Objects.hash(userStoryID);
     }
 }
+
 
 

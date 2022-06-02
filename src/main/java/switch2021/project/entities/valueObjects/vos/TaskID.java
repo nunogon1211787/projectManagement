@@ -7,12 +7,10 @@ import lombok.NoArgsConstructor;
 import switch2021.project.applicationServices.iRepositories.TaskContainerID;
 import switch2021.project.utils.ValueObject;
 
-import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import java.util.Objects;
 
 @Getter
-
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskID implements ValueObject<TaskID> {
@@ -20,7 +18,6 @@ public class TaskID implements ValueObject<TaskID> {
     /** Attributes */
 
     private TaskContainerID taskContainerID;
-
     @Embedded
     private Name taskName;
 

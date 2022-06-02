@@ -46,7 +46,7 @@ public class UserStoryMapper {
     public CollectionModel<OutputUserStoryDTO> toCollectionDto(List<UserStory> userStories) {
 
         CollectionModel<OutputUserStoryDTO> result = CollectionModel.of(userStories.stream()
-                .map(us -> toDto(us))
+                .map(this::toDto)
                 .collect(Collectors.toList()));
 
         //Add HATEOAS to OUTPUT DTOs
@@ -55,8 +55,5 @@ public class UserStoryMapper {
         result.add(linkTo(methodOn(UserStoryController.class).showAllUserStories()).withSelfRel());
 
         return result;
-
-
     }
-
 }

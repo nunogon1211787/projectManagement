@@ -1,22 +1,21 @@
 package switch2021.project.entities.valueObjects.vos;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.Setter;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.util.*;
 
 @Getter
-@ToString
+@Setter
 @Embeddable
 @NoArgsConstructor
-
-
 public class Attachment implements ValueObject<Attachment> {
 
+    @Column(name = "attachment")
     private String extension;
 
     private static final List<String> possibleExtensions = Arrays.asList("pdf", "txt", "jpg", "doc", "docx", "xls", "csv", "xlsb","");
@@ -38,9 +37,25 @@ public class Attachment implements ValueObject<Attachment> {
             throw new IllegalArgumentException("Invalid format document");
     }
 
+    /**
+     * Override Methods
+     */
+    @Override
+    public boolean sameValueAs(final Attachment other) {
+        return other != null && this.extension.equals(other.extension);
+    }
 
     @Override
-    public boolean sameValueAs(Attachment other) {
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final Attachment that = (Attachment) o;
+        return sameValueAs(that);
     }
+
+    @Override
+    public int hashCode() {
+        return extension.hashCode();
+    }
+
 }

@@ -49,10 +49,12 @@ public class Task implements Entity<Task> {
         this.effortEstimate = effortEstimate;
         this.type = type;
         this.responsible = responsible;
+        this.taskEffortList = new ArrayList<>();
+        this.precedenceList = new ArrayList<>();
 
 
     }
-
+/*
     /*** Constructor with precedence list*/
 
 //    public TaskReeng(Name name, Description description, EffortEstimate effortEstimate, TaskTypeEnum type, Resource responsible, TaskContainerID taskContainerID, List<String> precedenceList) {
@@ -101,10 +103,7 @@ public class Task implements Entity<Task> {
     }
 
     public double getExecutionPercentage() {
-        double x = getHoursSpent();
-        double result = (x / this.effortEstimate.getEffortHours());
-
-        return result;
+        return getHoursSpent() / this.effortEstimate.getEffortHours();
     }
 
     public double getHoursSpent() {

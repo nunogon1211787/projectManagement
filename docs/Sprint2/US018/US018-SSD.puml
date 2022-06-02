@@ -11,9 +11,6 @@ participant ":System" as System
 
 activate User
 
-User -> System: Get list of project where is associated
-System --> User: Shows projectList to select project
-
-User -> System: Choose project to access product backlog
+User -> System:  Get access to project product backlog
 User <-- System: Shows list of User Stories sorted
 @enduml

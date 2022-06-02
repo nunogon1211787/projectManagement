@@ -2,129 +2,101 @@ package switch2021.project.dataModel.assembler;
 
 
 import org.springframework.stereotype.Component;
-
-import switch2021.project.dataModel.Task.EffortJpa;
-import switch2021.project.dataModel.Task.TaskIDJpa;
-import switch2021.project.dataModel.Task.TaskJpa;
-import switch2021.project.dataModel.jpa.ResourceIDJpa;
+import switch2021.project.applicationServices.iRepositories.TaskContainerID;
+import switch2021.project.dataModel.jpa.TaskJpa;
+import switch2021.project.entities.aggregates.Task.Task;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.TaskTypeEnum;
 
-import switch2021.project.entities.aggregates.Task.Task;
-
-
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class TaskJpaAssembler {
 
-//    public TaskJpa toData (TaskReeng task){
-//
-//        TaskID id = task.getIdTask();
-//        String description = task.getDescription().getText();
-//        int effortEstimate = (int) Math.round(task.getEffortEstimate().getEffortHours());
-//        String type = task.getType().toString();
-//        ResourceIDReeng responsible = task.getResponsible();
-//
-//        ResourceIDJpa resourceIDJpa = new ResourceIDJpa(responsible.getUser(), responsible.getProject(), responsible.getStartDate().toString());
-//
-//        String startDate = null;
-//        String endDate = null;
-//        List<TaskID> precedenceList = new ArrayList<>();
-//
-//        List<TaskEffort> taskEfList = task.getTaskEffortList();
-//        List<EffortJpa> effortJpas = new ArrayList<>();
-//
-//        if (!(task.getStartDate() == null)) {
-//            startDate = task.getStartDate().toString();
-//        }
-//        if(!(task.getEndDate() == null)) {
-//            endDate = task.getEndDate().toString();
-//        }
-//        if(!(task.getTaskEffortList() == null)) {
-//            for(TaskEffort effort: taskEfList ){
-//                EffortJpa effortJpa = new EffortJpa(task.getIdTask(), effort.getEffortHours().getEffortHours(), effort.getEffortMinutes().getEffortMinutes(), effort.getEffortDate().toString(), effort.getComment().toString(), effort.getAttachment().toString());
-//                effortJpas.add(effortJpa);
-//            }
-//        }
-//        if(!(task.getPrecedenceList() == null)) {
-//            precedenceList = task.getPrecedenceList();
-//        }
-//
-//        return new TaskJpa(id, description, type, effortEstimate, startDate, endDate, resourceIDJpa, effortJpas, precedenceList);
-//    }
-
-    public TaskJpa toData2 (Task task){
-
-        TaskID id = task.getIdTask();
-        String description = task.getDescription().getText();
-        int effortEstimate = (int) Math.round(task.getEffortEstimate().getEffortHours());
-        String type = task.getType().toString();
-        ResourceIDReeng responsible = task.getResponsible();
-
-        ResourceIDJpa resourceIDJpa = new ResourceIDJpa(responsible.getUser(), responsible.getProject(), responsible.getStartDate().toString());
-
-        String startDate = null;
-        String endDate = null;
-        List<TaskID> precedenceList = new ArrayList<>();
-        List<TaskEffort> taskEfList = task.getTaskEffortList();
-
+    public TaskJpa toData(Task task) {
+        String taskDescription = task.getDescription().getText();
+        String taskType = null;
+        if (!(task.getType() == null)) {
+            taskType = task.getType().toString();
+        }
+        double taskEffortEstimate = task.getEffortEstimate().getEffortHours();
+        String taskStartDate = null;
         if (!(task.getStartDate() == null)) {
-            startDate = task.getStartDate().toString();
+            taskStartDate = task.getStartDate().toString();
         }
-        if(!(task.getEndDate() == null)) {
-            endDate = task.getEndDate().toString();
+        String taskEndDate = null;
+        if (!(task.getEndDate() == null)) {
+            taskEndDate = task.getEndDate().toString();
+        }
+        List<TaskID> taskPrecedenceList = task.getPrecedenceList();
+        List<TaskEffort> taskEffortList = task.getTaskEffortList();
+
+        TaskID taskID = task.getIdTask();
+        Name taskName = taskID.getTaskName();
+        TaskContainerID sprintOrUsID = taskID.getTaskContainerID();
+        ProjectID projectID = null;
+        UsTitle usTitle = null;
+        Description sprintName = null;
+        if (sprintOrUsID instanceof UserStoryID) {
+            projectID = ((UserStoryID) sprintOrUsID).getProjectID();
+            usTitle = ((UserStoryID) sprintOrUsID).getUsTitle();
+        }
+        if (sprintOrUsID instanceof SprintID) {
+            projectID = ((SprintID) sprintOrUsID).getProjectID();
+            sprintName = ((SprintID) sprintOrUsID).getSprintName();
         }
 
-        if(!(task.getPrecedenceList() == null)) {
-            precedenceList = task.getPrecedenceList();
+        ResourceIDReeng taskResponsibleID = task.getResponsible();
+        UserID userId = taskResponsibleID.getUser();
+        String resourceStartDate = null;
+        if (!(taskResponsibleID.getStartDate() == null)) {
+            resourceStartDate = taskResponsibleID.getStartDate().toString();
         }
-
-        TaskJpa x = new TaskJpa(id, description, type, effortEstimate, startDate, endDate, resourceIDJpa, precedenceList);
-
-        if(!(task.getTaskEffortList() == null)) {
-            for(TaskEffort effort: taskEfList ){
-                EffortJpa effortJpa = new EffortJpa(effort.getEffortHours().getEffortHours(), effort.getEffortMinutes().getEffortMinutes(), effort.getEffortDate().toString(), effort.getComment(), effort.getAttachment().toString());
-                x.getTaskEffortList().add(effortJpa);
-            }
-        }
-        return x;
+        return new TaskJpa(projectID, usTitle, sprintName, taskName, taskDescription, taskType, taskEffortEstimate,
+                taskStartDate, taskEndDate, userId, resourceStartDate, taskEffortList, taskPrecedenceList);
     }
 
-    public Task toDomain (TaskJpa task){
-
-        TaskIDJpa id = task.getId();
-        Description description = new Description(task.getDescription());
-        EffortEstimate effortEstimate = new EffortEstimate(task.getEffortEstimate());
-        TaskTypeEnum type = TaskTypeEnum.valueOf(task.getType());
-        ResourceIDReeng responsible = new ResourceIDReeng(task.getResponsible().getUser(), task.getResponsible().getProject(), LocalDate.parse(task.getResponsible().getStartDate()));
-
-        TaskID idFinal = new TaskID( new SprintID(), id.getTaskName());
-        LocalDate startDate = null;
-        LocalDate endDate = null;
-        List<TaskEffort> taskEffortList = new ArrayList<>();
-        List<TaskID> precedenceList = new ArrayList<>();
-
-        List<EffortJpa> effortJpas = task.getTaskEffortList();
-
-        if (!(task.getStartDate2() == null)) {
-            startDate = LocalDate.parse(task.getStartDate2());
+    public Task toDomain(TaskJpa taskJpa) {
+        Description taskDescription = new Description(taskJpa.getTaskDescription());
+        TaskTypeEnum taskType = null;
+        if (!(taskJpa.getTaskType() == null)) {
+            taskType = TaskTypeEnum.valueOf(taskJpa.getTaskType());
         }
-        if(!(task.getEndDate() == null)) {
-            endDate = LocalDate.parse(task.getEndDate());
+        EffortEstimate taskEffortEstimate = new EffortEstimate(taskJpa.getTaskEffortEstimate());
+        LocalDate taskStartDate = null;
+        if (!(taskJpa.getTaskStartDate() == null)) {
+            taskStartDate = LocalDate.parse(taskJpa.getTaskStartDate());
         }
-        if(!(task.getTaskEffortList() == null)) {
-            for (EffortJpa effort : effortJpas) {
-                taskEffortList.add(new TaskEffort(effort.getEffortHours(), effort.getEffortMinutes(), new Date(LocalDate.parse(effort.getEffortDate())), effort.getComment().toString(), effort.getAttachment().toString()));
-            }
+        LocalDate taskEndDate = null;
+        if (!(taskJpa.getTaskEndDate() == null)) {
+            taskEndDate = LocalDate.parse(taskJpa.getTaskEndDate());
         }
-        if(!(task.getPrecedenceList() == null)) {
-            precedenceList = task.getPrecedenceList();
+        List<TaskEffort> taskEffortList = taskJpa.getTaskEffortList();
+        List<TaskID> taskPrecedenceList = taskJpa.getTaskPrecedenceList();
+
+        ProjectID projectID = taskJpa.getProjectID();
+        UsTitle usTitle = taskJpa.getUsTitle();
+        Description sprintName = taskJpa.getSprintName();
+
+        TaskContainerID sprintOrUsID = null;
+        if (usTitle == null && sprintName != null) {
+            sprintOrUsID = new SprintID(projectID, sprintName);
+        }
+        if (usTitle != null && sprintName == null) {
+            sprintOrUsID = new UserStoryID(projectID, usTitle);
         }
 
-        return new Task(idFinal, description, type, effortEstimate, startDate, endDate, responsible, taskEffortList, precedenceList);
+        Name taskName = taskJpa.getTaskName();
+        TaskID taskID = new TaskID(sprintOrUsID, taskName);
+
+        UserID resourceUserID = taskJpa.getResourceUserID();
+        LocalDate resourceStartDate = null;
+        if (!(taskJpa.getResourceStartDate() == null)) {
+            resourceStartDate = LocalDate.parse(taskJpa.getResourceStartDate());
+        }
+        ResourceIDReeng responsible = new ResourceIDReeng(resourceUserID, projectID, resourceStartDate);
+
+        return new Task(taskID,taskDescription,taskType,taskEffortEstimate,taskStartDate,taskEndDate,responsible,taskEffortList,taskPrecedenceList);
     }
-
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import CreateUserStory from '../pages/CreateUserStory';
 import CreateProfile from '../pages/CreateProfile';
 import CreateTypology from '../pages/CreateTypology';
@@ -8,7 +8,7 @@ import { Home } from '../pages/Home';
 
 function MainRoute() {
   return (
-    <Router>
+    // <Router>
       <div>
         <Routes>
             <Route path="/" element={<Home />} />
@@ -18,7 +18,7 @@ function MainRoute() {
             <Route path="projects" element={<CreateProject />} />
         </Routes>
       </div>
-    </Router>
+    // </Router>
 
   );
 }

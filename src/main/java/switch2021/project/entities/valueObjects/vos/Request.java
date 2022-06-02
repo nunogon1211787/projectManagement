@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.Embedded;
 import java.time.LocalDate;
 import java.util.Objects;
 
