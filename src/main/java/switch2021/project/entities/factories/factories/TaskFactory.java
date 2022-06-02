@@ -10,7 +10,7 @@ import switch2021.project.applicationServices.iRepositories.ITaskIDFactory;
 import switch2021.project.applicationServices.iRepositories.TaskContainerID;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ITaskFactory;
 import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
-import switch2021.project.entities.aggregates.Task.TaskReeng;
+import switch2021.project.entities.aggregates.Task.Task;
 import switch2021.project.entities.valueObjects.vos.enums.TaskTypeEnum;
 
 @Component
@@ -31,12 +31,12 @@ public class TaskFactory implements ITaskFactory {
 
 
     @Override
-    public TaskReeng createTask(TaskDTO taskDTO, ResourceIDReeng responsible2, TaskContainerID taskContainerID) {
+    public Task createTask(TaskDTO taskDTO, ResourceIDReeng responsible2, TaskContainerID taskContainerID) {
 
-        return new TaskReeng(taskID.createTaskID(taskContainerID, taskDTO.name),
-                description.createDescription(taskDTO.description),
-                effortEstimate.create(taskDTO.effortEstimate), TaskTypeEnum.valueOf(taskDTO.type),
-                responsible2);
+        return new Task(taskID.createTaskID(taskContainerID, taskDTO.name),
+                        description.createDescription(taskDTO.description),
+                        effortEstimate.create(taskDTO.effortEstimate), TaskTypeEnum.valueOf(taskDTO.type),
+                        responsible2);
 
 
     }

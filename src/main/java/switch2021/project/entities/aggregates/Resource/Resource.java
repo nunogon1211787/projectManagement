@@ -17,7 +17,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResourceReeng implements Entity<ResourceReeng> {
+public class Resource implements Entity<Resource> {
 
     /**
      * Attributes
@@ -51,7 +51,7 @@ public class ResourceReeng implements Entity<ResourceReeng> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ResourceReeng that = (ResourceReeng) o;
+        Resource that = (Resource) o;
         return id.equals(that.id);
     }
 
@@ -61,7 +61,7 @@ public class ResourceReeng implements Entity<ResourceReeng> {
     }
 
     @Override
-    public boolean sameIdentityAs(ResourceReeng other) {
+    public boolean sameIdentityAs(Resource other) {
         return false;
     }
 }

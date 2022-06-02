@@ -13,7 +13,7 @@ import switch2021.project.applicationServices.iRepositories.IResourceRepo;
 import switch2021.project.dtoModel.mapper.ResourceMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManageResourcesService;
-import switch2021.project.entities.aggregates.Resource.ResourceReeng;
+import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.valueObjects.vos.Email;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.UserID;
@@ -22,6 +22,7 @@ import switch2021.project.interfaceAdapters.repositories.ProjectRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ResourceService {
@@ -44,21 +45,22 @@ public class ResourceService {
 
         OutputResourceDTO response;
 
-        if(!checkSystemUserExists(userRepo, dto)) {
+        if(!checkSystemUserExists(dto)) {
             throw new IllegalArgumentException(("SystemUser does not exist"));
-        } else if (!checkProjectExists(projRepo, dto)) {
+        } else if (!checkProjectExists(dto)) {
             throw new IllegalArgumentException(("Project does not exist"));
         }
 //        else if (!checkDatesInsideProject(projRepo,dto)) {
 //            throw new IllegalArgumentException(("Dates are not inside project"));
 //        }
-//        else
-//        if (!checkAllocation(resRepo, dto)) {
-//            throw new IllegalArgumentException(("Is not valid to create - Allocation)"));
-//        } else if (!checkProjectRole(resRepo, dto)) {
+        else
+        if (!checkAllocation(dto)) {
+            throw new IllegalArgumentException(("Is not valid to create - Allocation)"));
+        }
+//        else if (!checkProjectRole(resRepo, dto)) {
 //            throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));}
             else {
-            ResourceReeng newResource = iResourceFactory.createResource(dto);
+            Resource newResource = iResourceFactory.createResource(dto);
 
             resRepo.save(newResource);
             response = map.model2Dto(newResource);
@@ -78,11 +80,11 @@ public class ResourceService {
 
         if (projRepo.existsById(projectID)){
 
-            List<ResourceReeng> resources = resRepo.findAllByProject(projectID);
+            List<Resource> resources = resRepo.findAllByProject(projectID);
 
-            List<ResourceReeng> projectTeam = manageResourcesService.currentResourcesByDate(resources, LocalDate.parse(dateDto.date));
+            List<Resource> projectTeam = manageResourcesService.currentResourcesByDate(resources, LocalDate.parse(dateDto.date));
 
-            for(ResourceReeng res : projectTeam){
+            for(Resource res : projectTeam){
 
                 resourcesDto.add(map.model2Dto(res));
             }
@@ -90,40 +92,41 @@ public class ResourceService {
         return resourcesDto;
     }
 
-    private boolean checkSystemUserExists(IUserRepo userRepository, CreateResourceDTO dto){
+    private boolean checkSystemUserExists(CreateResourceDTO dto){
         UserID userID = new UserID(new Email(dto.systemUserID));
-        return userRepository.existsById(userID);
+        return this.userRepo.existsById(userID);
     }
 
-    private boolean checkProjectExists(IProjectRepo projectRepo, CreateResourceDTO dto){
+    private boolean checkProjectExists(CreateResourceDTO dto){
+        return this.projRepo.existsById(new ProjectID(dto.projectId));
+    }
+
+    private boolean checkDatesInsideProject(IProjectRepo projRepo, CreateResourceDTO dto) {
 //        String[] x = dto.projectId.split("_");
-        return projectRepo.existsById(new ProjectID(dto.projectId));
-    }
+        ProjectID projID = new ProjectID(dto.projectId);
+//        Project project = null;
+        Optional<Project> opProject = projRepo.findById(projID);
+        boolean msg = false;
 
-    private boolean checkDatesInsideProject(IProjectRepo projRepo, CreateResourceDTO dto){
+        if (opProject.isPresent()) {
+            Project project = opProject.get();
 
-        Project project = projRepo.findById(dto.projectId).get();
-//        boolean msg;
-        if(project.getEndDate() == null){
-            return project.isActiveInThisDate(LocalDate.parse(dto.startDate));
-        } else {
-            return project.isActiveInThisDate(LocalDate.parse(dto.startDate)) &&
+            msg = project.isActiveInThisDate(LocalDate.parse(dto.startDate)) &&
                     project.isActiveInThisDate(LocalDate.parse(dto.endDate));
         }
-//        Project project = projRepo.findById(dto.projectId).get();
-//        return project.isActiveInThisDate(LocalDate.parse(dto.startDate)) && project.isActiveInThisDate(LocalDate.parse(dto.endDate));
+        return msg;
     }
 
-    private boolean checkAllocation(IResourceRepo resRepo, CreateResourceDTO dto){
+    private boolean checkAllocation(CreateResourceDTO dto){
         UserID sysUserId = new UserID(new Email(dto.systemUserID));
-        List<ResourceReeng> resourceProjectsList = resRepo.findAllByUser(sysUserId);
+        List<Resource> resourceProjectsList = resRepo.findAllByUser(sysUserId);
         return manageResourcesService.validateAllocation(resourceProjectsList, dto);
     }
 
     private boolean checkProjectRole(IResourceRepo resRepo, CreateResourceDTO dto){
         String[] x = dto.projectId.split("_");
         ProjectID projID = new ProjectID(x[2]);
-        List<ResourceReeng> projectTeamList = resRepo.findAllByProject(projID);
+        List<Resource> projectTeamList = resRepo.findAllByProject(projID);
         return manageResourcesService.validateProjectRole(projectTeamList, dto);
     }
 }

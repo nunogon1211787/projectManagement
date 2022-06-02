@@ -7,15 +7,16 @@ import switch2021.project.applicationServices.iRepositories.IResourceRepo;
 import switch2021.project.applicationServices.iRepositories.ITypologyRepo;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
 import switch2021.project.dtoModel.dto.*;
+import switch2021.project.entities.aggregates.Typology.Typology;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
-import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
 import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.dtoModel.mapper.ProjectMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManageResourcesService;
-import switch2021.project.entities.aggregates.Resource.ResourceReeng;
+import switch2021.project.entities.aggregates.Resource.Resource;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,8 +33,6 @@ public class ProjectService {
     private ITypologyRepo iTypologyRepo;
     @Autowired
     private IProjectFactory iProjectFactory;
-    @Autowired
-    private IProjectIDFactory projIDFactory;
     @Autowired
     private ProjectMapper projMapper;
     @Autowired
@@ -53,6 +52,8 @@ public class ProjectService {
 
         Project newProject = iProjectFactory.createProject(projDTO);
 
+        newProject.setProjectCode(new ProjectID("Project_"+ LocalDate.now().getYear() + "_" + (projRepo.findAll().size()+1)));
+
         Optional<Project> savedProject = projRepo.save(newProject);
 
         OutputProjectDTO projectDTO;
@@ -66,8 +67,10 @@ public class ProjectService {
     }
 
     public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) {
+//        String[] x = id.split("_");
+        ProjectID projID = new ProjectID(id);
 
-        Optional<Project> opProject = projRepo.findById(id);
+        Optional<Project> opProject = projRepo.findById(projID);
         Project proj;
 
         if (opProject.isPresent()) {
@@ -79,14 +82,17 @@ public class ProjectService {
             proj.setBudget(new Budget(Integer.parseInt(editProjectInfoDTO.budget)));
             proj.setSprintDuration(new SprintDuration(Integer.parseInt(editProjectInfoDTO.sprintDuration)));
 
-            /*proj.setProjectStatus(ProjectStatusEnum.valueOf(editProjectInfoDTO.projectStatus));
-            proj.setCustomer(new Customer(editProjectInfoDTO.customer, "email@email.pt", 123456789));
+            proj.setProjectStatus(ProjectStatusEnum.valueOf(editProjectInfoDTO.projectStatus));
+            /*proj.setCustomer(new Customer(editProjectInfoDTO.customer, "email@email.pt", 123456789));*/
             proj.setEndDate(LocalDate.parse(editProjectInfoDTO.endDate));
-            proj.setTypology(new Typology(new TypologyID(new Description(editProjectInfoDTO.description))));*/
+
+            if(iTypologyRepo.existsByTypologyId(new TypologyID(new Description(editProjectInfoDTO.typology)))) {
+                proj.setTypology(new Typology(new TypologyID(new Description(editProjectInfoDTO.typology))));
+            }
 
             Optional<Project> savedProject = projRepo.save(proj);
 
-            return savedProject.map(projectReeng -> projMapper.model2Dto(projectReeng)).orElse(null);
+            return savedProject.map(project -> projMapper.model2Dto(project)).orElse(null);
         }
 
         return null;
@@ -117,8 +123,10 @@ public class ProjectService {
     }
 
     public OutputProjectDTO showProject(String id) throws Exception {
+//        String[] x = id.split("_");
+        ProjectID projID = new ProjectID(id);
 
-        Optional<Project> foundProject = projRepo.findById(id);
+        Optional<Project> foundProject = projRepo.findById(projID);
 
         if (foundProject.isEmpty()) {
             throw new Exception("Project does not exist");
@@ -132,10 +140,10 @@ public class ProjectService {
         UserID userID = userIDFactory.createUserID(id);
 
         if (userRepo.existsById(userID)) {
-            List<ResourceReeng> userResources = resRepo.findAllByUser(userID);
+            List<Resource> userResources = resRepo.findAllByUser(userID);
 
-            List<ResourceReeng> currentUserResources = resService.currentResourcesByDate(userResources,
-                                                                                         LocalDate.parse(dateDto.date));
+            List<Resource> currentUserResources = resService.currentResourcesByDate(userResources,
+                                                                                    LocalDate.parse(dateDto.date));
 
             List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
 
@@ -143,7 +151,7 @@ public class ProjectService {
 
             for (ProjectID projId : resourceProjects) {
 
-                Project proj = projRepo.findById(projId.getCode()).get();
+                Project proj = projRepo.findById(projId).get();
 
                 projects.add(proj);
 
@@ -160,9 +168,9 @@ public class ProjectService {
         return projectsDto;
     }
 
-    public void deleteProjectRequest(String id) throws Exception {
+    public void deleteProjectRequest(ProjectID id) throws Exception {
         if (!projRepo.deleteByProjectID(id)) {
-            throw new Exception("User Story does not exist");
+            throw new Exception("Project does not exist");
         }
     }
 }

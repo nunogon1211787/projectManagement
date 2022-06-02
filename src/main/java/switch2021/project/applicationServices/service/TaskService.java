@@ -7,10 +7,10 @@ import switch2021.project.dtoModel.dto.OutputTaskDTO;
 import switch2021.project.dtoModel.dto.TaskDTO;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ITaskFactory;
-import switch2021.project.dtoModel.mapper.TaskMapperNew;
+import switch2021.project.dtoModel.mapper.TaskMapper;
 import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
-import switch2021.project.entities.aggregates.Task.TaskReeng;
+import switch2021.project.entities.aggregates.Task.Task;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 
 import java.time.LocalDate;
@@ -23,7 +23,7 @@ import java.util.Optional;
         public ITaskFactory ITaskFactory;
 
         @Autowired
-        public TaskMapperNew taskMapper;
+        public TaskMapper taskMapper;
 
         @Autowired
         public TaskRepositoryInterface taskRepositoryInterface;
@@ -56,7 +56,7 @@ import java.util.Optional;
 
             TaskContainerID taskConId = returnTaskContainerID(taskDTO.taskContainerID);
 
-            TaskReeng newTask = ITaskFactory.createTask(taskDTO, resId, taskConId);
+            Task newTask = ITaskFactory.createTask(taskDTO, resId, taskConId);
 
             taskRepositoryInterface.save(newTask);
 

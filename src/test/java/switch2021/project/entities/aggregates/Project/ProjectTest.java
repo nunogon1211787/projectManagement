@@ -9,8 +9,8 @@ import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
 import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
 
 @ExtendWith(SpringExtension.class)
 class ProjectTest {
@@ -33,7 +33,6 @@ class ProjectTest {
     NumberOfSprints numberOfSprints;
     @Mock
     SprintDuration sprintDuration;
-
 
 
 //    @Test
@@ -92,7 +91,7 @@ class ProjectTest {
 //        assertNotEquals(customer, proj_2);
 //    }
 
-        @Test
+    @Test
     void canEqual() {
     }
 

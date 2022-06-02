@@ -1,7 +1,7 @@
 package switch2021.project.applicationServices.iRepositories;
 
 import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
-import switch2021.project.entities.aggregates.Resource.ResourceReeng;
+import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.UserID;
 
@@ -16,7 +16,7 @@ public interface IResourceRepo/* extends CrudRepository<Object, Long> */{
      */
     //Optional<Resource> findByResourceId(ResourceId resId);
 
-    Optional<ResourceReeng> findById (ResourceIDReeng resourceId);
+    Optional<Resource> findById (ResourceIDReeng resourceId);
 
     boolean existsById(ResourceIDReeng resourceId);
 
@@ -24,18 +24,18 @@ public interface IResourceRepo/* extends CrudRepository<Object, Long> */{
      * Finds all objects from this repository with any parameter.
      */
 
-    List<ResourceReeng> findAll();
+    List<Resource> findAll();
 
 //    List<ResourceReeng> findByProject(String projectId);
 
-    List<ResourceReeng> findAllByProject(ProjectID projectId);
+    List<Resource> findAllByProject(ProjectID projectId);
 
-    List<ResourceReeng> findAllByUser(UserID userId);
+    List<Resource> findAllByUser(UserID userId);
 
 
     /**
      * Save a object in the list of the repository.
      */
-    Optional<ResourceReeng> save(ResourceReeng newResource);
+    Optional<Resource> save(Resource newResource);
 
 }
