@@ -27,5 +27,7 @@ public interface IUserStoryRepo {
      */
     Optional<UserStory> save(UserStory newUserStory);
 
+    Optional<UserStory> update(UserStory userStory);
+
     boolean deleteByUserStoryId(UserStoryID usId);
 }

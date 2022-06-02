@@ -1,66 +1,53 @@
 @startuml
-'https://plantuml.com/sequence-diagram
-
 title As Product Owner I want to change the Priority of a user story in the backlog
 
 autoactivate on
 autonumber
 
-actor "Product Owner" as PO
-participant ":ChangePriorityUI" as System
-participant ":ChangePriorityController" as Ctrl
-participant ": Company" as C1
-participant "projStore : ProjectStore" as C2
-participant "projectList : List<Project>" as C2.1
-participant "proj : Project" as C3
-participant "prodBack : ProductBacklog" as C4
-participant "us : UserStory" as C5
+participant ": UserStoryRoute" as Route
+participant ": UserStoryController" as Ctrl
+participant ": UserStoryService" as Service
+participant "iUsIdFactory : IUserStoryIDFactory" as IdFactory
+participant "userStoryID: UserStoryID" as ID
+participant ": IUserStoryRepo" as Repo
+participant "priorityFactory: IUsPriorityFactory" as PriorityFactory
+participant "priority: UsPriority" as Priority
+participant "userStory: UserStory" as US
+participant ": UserStoryJpaRepository" as Driver
+participant ": UserStoryMapper" as usMapper
+participant "exception: \nException" as exc
+participant "updateDto : \n OutputUserStoryDTO" as outDto
+participant "response: \nResponseEntity" as json
 
-activate PO
-
-
-
-PO -> System: Get list of projects associated to user
-System -> Ctrl: getCurrentProjectListByUserEmail(email)
-Ctrl -> C1: getProjectStore()
-C1 --> Ctrl: projStore
-Ctrl --> C2: getCurrentProjectListByUserEmail(email)
-C2 -> C2.1 ** : createProjectList
- loop
-C2 -> C2.1: addProjectToList
-C2.1 --> C2: true
+[o-> Route: Asks for a specific user story
+Route -> Ctrl: estimateEffort(updateDTO)
+Ctrl -> Service: timeEffortEstimation(id, updateDTO)
+Service -> Service: createUserStoryIdByStringInputFromController(id)
+Service -> IdFactory: create(pId, uTitle)
+IdFactory --> ID**: create()
+return userStoryID
+return userStoryID
+Service -> Repo: findByUserStoryId(userStoryID)
+return userStory
+opt if priority is different then 0
+    Service -> PriorityFactory: create(updateDTO.priority)
+    PriorityFactory -> Priority**: create()
+    return usPriority
+    Service -> US: updatePriority(usPriority)
+    deactivate US
 end
-C2 --> Ctrl: projectList
-Ctrl --> System: projectList
-System --> PO: Shows projectList
-PO -> System: Picks project
-System -> Ctrl: getProjectByCode(code)
-Ctrl -> C2: getProjectByCode(code)
-C2 --> Ctrl: proj
-Ctrl --> System: proj
-System --> PO: Shows project information
-PO -> System: Access product backlog
-System -> Ctrl: getUserStoryList()
-Ctrl -> C3: getUserStoryStore
-C3 --> Ctrl: prodBack
-Ctrl -> C4: getUserStoryList()
-C4 --> Ctrl: usList
-Ctrl --> System: usList
-System --> PO: Shows US List
-PO -> System: Picks User Story
-System -> Ctrl: getUserStory(id)
-Ctrl -> C4: getUserStory(id)
-C4 --> Ctrl: us
-Ctrl --> System: us
-System --> PO: Shows US Information
-PO -> System: Set Priority
-System -> Ctrl: setPriority(priority)
-Ctrl -> C5: setPriority(priority)
-C5 -> C5: validatePriority(priority)
-C5 --> Ctrl: true
-Ctrl --> System: true
-System --> PO: Confirms success
-
-
+Service -> Repo: update(userStory)
+ref over Repo: [[US021-SD-JPA.puml]]
+return updated
+opt if the new userstory already exist
+    Service --> exc** : create(errorMessage)
+end
+Service-> usMapper : toDto(updated)
+usMapper-> outDto **:create()
+usMapper --> Service: updatedDto
+Service --> Ctrl: updatedDto
+Ctrl --> json**: create(updatedDto)
+return response
+return response
 
 @enduml

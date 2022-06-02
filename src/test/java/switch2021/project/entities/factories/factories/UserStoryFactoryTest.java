@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import switch2021.project.dtoModel.dto.CreateUserStoryDTO;
+import switch2021.project.dtoModel.dto.UserStoryDTO;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.*;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.aggregates.UserStory.*;
@@ -31,7 +31,7 @@ public class UserStoryFactoryTest {
     @Mock
     private IUsHourFactory timeEstimateF;
     @Mock
-    private CreateUserStoryDTO createUserStoryDTO;
+    private UserStoryDTO userStoryDTO;
     @Mock
     private IProjectIDFactory projectIDF;
     @Mock
@@ -61,14 +61,14 @@ public class UserStoryFactoryTest {
     @DisplayName("createUserStory - with success")
     void createUserStoryWithSuccessGetTitle() {
         //Arrange
-        when(projectIDF.create(createUserStoryDTO.projectID)).thenReturn(projectID);
-        when(usTitleF.create(createUserStoryDTO.title)).thenReturn(title);
-        when(descriptionF.createDescription(createUserStoryDTO.description)).thenReturn(description);
-        when(timeEstimateF.create(createUserStoryDTO.timeEstimate)).thenReturn(timeEstimate);
-        when(priorityF.create(createUserStoryDTO.priority)).thenReturn(priority);
-        when(usIDF.create(createUserStoryDTO.projectID, createUserStoryDTO.title)).thenReturn(usID);
+        when(projectIDF.create(userStoryDTO.projectID)).thenReturn(projectID);
+        when(usTitleF.create(userStoryDTO.title)).thenReturn(title);
+        when(descriptionF.createDescription(userStoryDTO.description)).thenReturn(description);
+        when(timeEstimateF.create(userStoryDTO.timeEstimate)).thenReturn(timeEstimate);
+        when(priorityF.create(userStoryDTO.priority)).thenReturn(priority);
+        when(usIDF.create(userStoryDTO.projectID, userStoryDTO.title)).thenReturn(usID);
         //Act
-        UserStory newUserStory = userStoryFactory.createUserStory(createUserStoryDTO);
+        UserStory newUserStory = userStoryFactory.createUserStory(userStoryDTO);
         //Assert
         assertNotNull(newUserStory);
     }

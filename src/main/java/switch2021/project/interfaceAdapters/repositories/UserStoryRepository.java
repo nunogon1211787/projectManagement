@@ -27,7 +27,7 @@ public class UserStoryRepository implements IUserStoryRepo {
         Optional<UserStoryJpa> usJpa = jpaRepository.findById(userStoryID);
         Optional<UserStory> result = Optional.empty();
 
-        if(usJpa.isPresent()){
+        if (usJpa.isPresent()) {
             result = Optional.of(assembler.toDomain(usJpa.get()));
         }
         return result;
@@ -35,17 +35,17 @@ public class UserStoryRepository implements IUserStoryRepo {
 
     @Override
     public List<UserStory> findAll() {
-     return assembler.toDomain(jpaRepository.findAll());
+        return assembler.toDomain(jpaRepository.findAll());
     }
 
     @Override
-    public List<UserStory>  findProductBacklog(String projectId) {
+    public List<UserStory> findProductBacklog(String projectId) {
 
         List<UserStory> userStories = findAll();
         List<UserStory> produckBacklog = new ArrayList<>();
 
-        for(UserStory us : userStories) {
-            if(us.hasProjectId(projectId)) {
+        for (UserStory us : userStories) {
+            if (us.hasProjectId(projectId)) {
                 produckBacklog.add(us);
             }
         }
@@ -61,12 +61,20 @@ public class UserStoryRepository implements IUserStoryRepo {
         UserStoryJpa usJpa = assembler.toData(newUserStory);
         Optional<UserStory> userStory = Optional.empty();
 
-        if(!jpaRepository.existsById(usJpa.getId())) {
+        if (!jpaRepository.existsById(usJpa.getId())) {
             UserStoryJpa usJpaSaved = jpaRepository.save(usJpa);
             userStory = Optional.of(assembler.toDomain(usJpaSaved));
         }
-
         return userStory;
+    }
+
+    @Override
+    public Optional<UserStory> update(UserStory userStory) {
+        UserStoryJpa usJpa = assembler.toData(userStory);
+
+        UserStoryJpa usJpaSaved = jpaRepository.save(usJpa);
+
+        return Optional.of(assembler.toDomain(usJpaSaved));
     }
 
     @Override

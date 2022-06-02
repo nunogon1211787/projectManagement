@@ -27,17 +27,16 @@ public class UserStoryController {
      * Create a User Story (US009)
      */
     @PostMapping
-    public ResponseEntity<Object> createAndSaveUserStory(@RequestBody CreateUserStoryDTO inDto) {
+    public ResponseEntity<Object> createAndSaveUserStory(@RequestBody UserStoryDTO inDto) {
         ErrorMessage message = new ErrorMessage();
         OutputUserStoryDTO newUserStory;
         try {
-
             newUserStory = service.createAndSaveUserStory(inDto);
-
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
+
         return new ResponseEntity<>(newUserStory, HttpStatus.CREATED);
     }
 
@@ -62,6 +61,7 @@ public class UserStoryController {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
+
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -86,6 +86,7 @@ public class UserStoryController {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
+
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -96,17 +97,35 @@ public class UserStoryController {
     @GetMapping("/{id}")
     public ResponseEntity<Object> showUserStoryRequested(@PathVariable("id") String id){
         ErrorMessage message = new ErrorMessage();
-        OutputUserStoryDTO newUserStory;
+        OutputUserStoryDTO userStory;
 
         try {
-
-            newUserStory = service.showAUserStory(id);
-
+            userStory = service.showAUserStory(id);
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(newUserStory, HttpStatus.OK);
+
+        return new ResponseEntity<>(userStory, HttpStatus.OK);
+    }
+
+
+    /**
+     * Update data of a User Story (US019 and US021)
+     */
+    @PatchMapping("/{id}")
+    public ResponseEntity<Object> estimateEffort(@PathVariable("id") String id, @RequestBody UpdateUserStoryDTO effortDTO) {
+        OutputUserStoryDTO userStory;
+
+        try {
+            userStory = service.updateUSData(id, effortDTO);
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(userStory, HttpStatus.OK);
     }
 
     /**
@@ -114,18 +133,18 @@ public class UserStoryController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteAUserStory(@PathVariable String id){
-        ErrorMessage message = new ErrorMessage();
+        ResponseMessage response = new ResponseMessage();
 
         try {
             service.deleteAUserStory(id);
-            message.errorMessage = "User Story was deleted successfully";
-
-            message.add(linkTo(methodOn(UserStoryController.class).showAllUserStories()).withRel("Collection"));
-
+            response.responseMessage = "User Story was deleted successfully";
+            response.add(linkTo(methodOn(UserStoryController.class).showAllUserStories()).withRel("Collection"));
         } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(message, HttpStatus.OK);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

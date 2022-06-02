@@ -10,8 +10,7 @@ package switch2021.project.interfaceAdapters.controller;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import switch2021.project.dtoModel.dto.CreateUserStoryDTO;
-import switch2021.project.interfaceAdapters.controller.UserStoryController;
+import switch2021.project.dtoModel.dto.UserStoryDTO;
 
 //import org.springframework.http.MediaType;
 //import org.springframework.test.web.servlet.MockMvc;
@@ -78,7 +77,7 @@ UserStoryController ctrl;
     @Test
     void createAndSaveUserStory() {
 
-        CreateUserStoryDTO dto = new CreateUserStoryDTO("Project_2022_1", "As cenas I want cenas", 1, "cenas fixes", 1000);
+        UserStoryDTO dto = new UserStoryDTO("Project_2022_1", "As cenas I want cenas", 1, "cenas fixes", 1000);
 
         ctrl.createAndSaveUserStory(dto);
 
