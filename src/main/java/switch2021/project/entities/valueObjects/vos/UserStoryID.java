@@ -25,11 +25,12 @@ public class UserStoryID implements ValueObject<UserStoryID>, TaskContainerID {
     @Embedded
     private UsTitle usTitle;
 
+
     /**
      * Constructor
      **/
     public UserStoryID(ProjectID projectID, UsTitle usTitle) {
-        checkUsID(projectID,usTitle);
+        checkUsID(projectID, usTitle);
         this.projectID = projectID;
         this.usTitle = usTitle;
     }
@@ -40,11 +41,12 @@ public class UserStoryID implements ValueObject<UserStoryID>, TaskContainerID {
         this.usTitle = new UsTitle(values[3]);
     }
 
+
     /**
      * Methods
      **/
     private void checkUsID(ProjectID projectID, UsTitle usTitle) {
-        if (projectID.getCode().trim().isEmpty() || usTitle.getTitleUs().trim().isEmpty()){
+        if (projectID.getCode().trim().isEmpty() || usTitle.getTitleUs().trim().isEmpty()) {
             throw new IllegalArgumentException("Not valid projectCode and/or US title inserted");
         }
     }
@@ -53,7 +55,6 @@ public class UserStoryID implements ValueObject<UserStoryID>, TaskContainerID {
     /**
      * Override
      **/
-
     @Override
     public String toString() {
         return projectID.getCode() + "_" + usTitle.getTitleUs();
@@ -63,7 +64,7 @@ public class UserStoryID implements ValueObject<UserStoryID>, TaskContainerID {
     public boolean sameValueAs(final UserStoryID other) {
         return other != null && new EqualsBuilder().
                 append(this.projectID, other.projectID).
-               append(this.usTitle, other.usTitle).
+                append(this.usTitle, other.usTitle).
                 isEquals();
     }
 
@@ -71,7 +72,7 @@ public class UserStoryID implements ValueObject<UserStoryID>, TaskContainerID {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-       final UserStoryID that = (UserStoryID) o;
+        final UserStoryID that = (UserStoryID) o;
         return sameValueAs(that);
     }
 

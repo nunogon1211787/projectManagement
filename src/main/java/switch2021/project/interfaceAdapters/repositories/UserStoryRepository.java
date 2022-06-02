@@ -13,16 +13,47 @@ import switch2021.project.persistence.UserStoryJpaRepository;
 import java.util.*;
 
 @Getter
-@Setter
 @Repository
 public class UserStoryRepository implements IUserStoryRepo {
 
     @Autowired
     private UserStoryJpaRepository jpaRepository;
-
     @Autowired
     private UserStoryJpaAssembler assembler;
 
+
+    @Override
+    public Optional<UserStory> findByUserStoryId(UserStoryID userStoryID) {
+        Optional<UserStoryJpa> usJpa = jpaRepository.findById(userStoryID);
+        Optional<UserStory> result = Optional.empty();
+
+        if(usJpa.isPresent()){
+            result = Optional.of(assembler.toDomain(usJpa.get()));
+        }
+        return result;
+    }
+
+    @Override
+    public List<UserStory> findAll() {
+     return assembler.toDomain(jpaRepository.findAll());
+    }
+
+    @Override
+    public List<UserStory>  findProductBacklog(String projectId) {
+
+        List<UserStory> userStories = findAll();
+        List<UserStory> produckBacklog = new ArrayList<>();
+
+        for(UserStory us : userStories) {
+            if(us.hasProjectId(projectId)) {
+                produckBacklog.add(us);
+            }
+        }
+        Comparator<UserStory> compareByPriority = Comparator.comparing(UserStory::getPriority);
+        produckBacklog.sort(compareByPriority);
+
+        return produckBacklog;
+    }
 
     @Override
     public Optional<UserStory> save(UserStory newUserStory) {
@@ -45,39 +76,6 @@ public class UserStoryRepository implements IUserStoryRepo {
             jpaRepository.deleteById(usId);
             return true;
         }
-
         return false;
     }
-
-    @Override
-    public Optional<UserStory> findByUserStoryId(UserStoryID userStoryID) {
-
-        Optional<UserStoryJpa> usJpa = jpaRepository.findById(userStoryID);
-
-        Optional<UserStory> result = Optional.empty();
-
-        if(usJpa.isPresent()){
-            result = Optional.of(assembler.toDomain(usJpa.get()));
-        }
-
-        return result;
-    }
-
-    /**
-     * Finds all user stories.
-     */
-
-    @Override
-    public List<UserStory> findAll() {
-
-        List<UserStoryJpa> jpaList = jpaRepository.findAll();
-
-        List<UserStory> modelList = new ArrayList<>();
-
-        jpaList.forEach(usJpa -> modelList.add(assembler.toDomain(usJpa)));
-
-        return modelList;
-    }
-
-
 }

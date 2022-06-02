@@ -20,7 +20,26 @@ public class UserStoryController {
      * Attributes
      **/
     @Autowired
-    private UserStoryService createUserStoryService;
+    private UserStoryService service;
+
+
+    /**
+     * Create a User Story (US009)
+     */
+    @PostMapping
+    public ResponseEntity<Object> createAndSaveUserStory(@RequestBody CreateUserStoryDTO inDto) {
+        ErrorMessage message = new ErrorMessage();
+        OutputUserStoryDTO newUserStory;
+        try {
+
+            newUserStory = service.createAndSaveUserStory(inDto);
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(newUserStory, HttpStatus.CREATED);
+    }
 
 
     /**
@@ -28,14 +47,42 @@ public class UserStoryController {
      */
     @GetMapping
     public ResponseEntity<Object> showAllUserStories(){
-        ErrorMessage message = new ErrorMessage();
         CollectionModel<OutputUserStoryDTO> result;
 
         try {
+            result = CollectionModel.of(service.showAllUserStories());
 
-            result = CollectionModel.of(createUserStoryService.showAllUserStories());
-
+            if(result.getContent().isEmpty()) {
+                ErrorMessage message = new ErrorMessage();
+                message.errorMessage = "Was not created any user story yet!";
+                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            }
         } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+
+    /**
+     * Consult a Product Backlog of a Project (US018)
+     */
+    @GetMapping("/productBacklog/{id}")
+    public ResponseEntity<Object> consultProductBacklog(@PathVariable("id") String idProject) {
+        CollectionModel<OutputUserStoryDTO> result;
+
+        try {
+            result = CollectionModel.of(service.consultProductBacklog(idProject));
+
+            if(result.getContent().isEmpty()) {
+                ErrorMessage message = new ErrorMessage();
+                message.errorMessage = "Was not created any user story yet!";
+                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
@@ -53,31 +100,13 @@ public class UserStoryController {
 
         try {
 
-            newUserStory = createUserStoryService.showAUserStory(id);
+            newUserStory = service.showAUserStory(id);
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(newUserStory, HttpStatus.OK);
-    }
-
-    /**
-     * Create a User Story
-     */
-    @PostMapping
-    public ResponseEntity<Object> createAndSaveUserStory(@RequestBody CreateUserStoryDTO inDto) {
-        ErrorMessage message = new ErrorMessage();
-        OutputUserStoryDTO newUserStory;
-        try {
-
-            newUserStory = createUserStoryService.createAndSaveUserStory(inDto);
-
-        } catch (Exception exception) {
-            message.errorMessage = exception.getMessage();
-            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(newUserStory, HttpStatus.CREATED);
     }
 
     /**
@@ -88,7 +117,7 @@ public class UserStoryController {
         ErrorMessage message = new ErrorMessage();
 
         try {
-            createUserStoryService.deleteAUserStory(id);
+            service.deleteAUserStory(id);
             message.errorMessage = "User Story was deleted successfully";
 
             message.add(linkTo(methodOn(UserStoryController.class).showAllUserStories()).withRel("Collection"));
