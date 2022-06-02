@@ -8,12 +8,13 @@ import switch2021.project.entities.valueObjects.vos.UsHour;
 import switch2021.project.entities.valueObjects.vos.UsPriority;
 import switch2021.project.entities.valueObjects.vos.UserStoryID;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class UserStoryJpaAssembler {
 
     public UserStoryJpa toData(UserStory userStory) {
-
         UserStoryID id = userStory.getUserStoryID();
         int priority = userStory.getPriority().getPriorityUs();
         String description = userStory.getDescription().getText();
@@ -36,15 +37,10 @@ public class UserStoryJpaAssembler {
         if(!(userStory.getUsCancelled() == null)) {
             cancelled = userStory.getUsCancelled().toString();
         }
-
-
-        UserStoryJpa usJpa = new UserStoryJpa(id, priority, description, timeEstimate, parentJpa, startDate, endDate, cancelled);
-
-        return usJpa;
+        return new UserStoryJpa(id, priority, description, timeEstimate, parentJpa, startDate, endDate, cancelled);
     }
 
     public UserStory toDomain(UserStoryJpa usJpaSaved) {
-
         UserStoryID id = usJpaSaved.getId();
         UsPriority priority = new UsPriority(usJpaSaved.getPriority());
         Description description = new Description(usJpaSaved.getDescription());
@@ -67,11 +63,14 @@ public class UserStoryJpaAssembler {
         if(!(usJpaSaved.getCancelled() == null)) {
             cancelled = LocalDate.parse(usJpaSaved.getCancelled());
         }
-
-
-        UserStory usSaved = new UserStory(id, priority, description, timeEstimate, parent, startDate, endDate, cancelled);
-
-        return usSaved;
+        return new UserStory(id, priority, description, timeEstimate, parent, startDate, endDate, cancelled);
     }
 
+    public List<UserStory> toDomain (List<UserStoryJpa> userStoriesJpa) {
+        List<UserStory> productBacklog = new ArrayList<>();
+
+        userStoriesJpa.forEach(usJpa -> productBacklog.add(toDomain(usJpa)));
+
+        return productBacklog;
+    }
 }

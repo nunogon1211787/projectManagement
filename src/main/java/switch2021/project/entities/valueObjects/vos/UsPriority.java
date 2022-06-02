@@ -9,7 +9,7 @@ import java.util.Objects;
 @Getter
 @ToString
 
-public class UsPriority implements ValueObject<UsPriority> {
+public class UsPriority implements Comparable<UsPriority> {
 
     /**
      * Attributes
@@ -36,24 +36,30 @@ public class UsPriority implements ValueObject<UsPriority> {
         }
     }
 
+
     /**
      * Override
      **/
     @Override
-    public boolean sameValueAs(final UsPriority other) {
-        return other !=null && this.priorityUs==(other.priorityUs);
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-       final UsPriority that = (UsPriority) o;
-        return sameValueAs(that);
+        UsPriority that = (UsPriority) o;
+        return that.priorityUs == this.priorityUs;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(priorityUs);
+    }
+
+    @Override
+    public int compareTo(UsPriority o) {
+        if (this.priorityUs < o.priorityUs) {
+            return -1;
+        } else if (this.priorityUs > o.priorityUs) {
+            return 1;
+        }
+        return 0;
     }
 }

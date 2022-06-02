@@ -44,7 +44,7 @@ note over User: other v.o.'s creation and, respectively, User setters are hidden
 Fact-->User**: createUser(systemUserID)
 return newUser
 Serv->Repo: save(newUser)
-ref over Repo: [[US001jpa-SD.puml]]
+ref over Repo: [[US001-SD-JPA.puml]]
 Repo-->Serv: savedUser
 Serv->mapper:toDto(savedUser)
 mapper-->OutDTO**: create()
