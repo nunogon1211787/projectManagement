@@ -6,7 +6,7 @@ import switch2021.project.applicationServices.iRepositories.*;
 import switch2021.project.dtoModel.dto.OutputTaskDTO;
 import switch2021.project.dtoModel.dto.TaskDTO;
 import switch2021.project.entities.valueObjects.vos.*;
-import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ITaskFactory;
+import switch2021.project.entities.factories.factoryInterfaces.ITaskFactory;
 import switch2021.project.dtoModel.mapper.TaskMapper;
 import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
@@ -26,7 +26,7 @@ import java.util.Optional;
         public TaskMapper taskMapper;
 
         @Autowired
-        public TaskRepositoryInterface taskRepositoryInterface;
+        public ITaskRepo taskRepositoryInterface;
 
 //        @Autowired
         public IResourceRepo iResourceRepo;

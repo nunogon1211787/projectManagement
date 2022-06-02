@@ -24,20 +24,18 @@ public class TaskJpa {
     private Description sprintName;
     @EmbeddedId
     private Name taskName;
-    private String description;
-    private String type;
-    private double effortEstimate;
-    private String startDate;
-    private String endDate;
+    private String taskDescription;
+    private String taskType;
+    private double taskEffortEstimate;
+    private String taskStartDate;
+    private String taskEndDate;
     @Embedded
-    private UserID user;
+    private UserID resourceUserID;
     private String resourceStartDate;
     @ElementCollection
     @CollectionTable(name = "efforts")
     private List<TaskEffort> taskEffortList;
     @ElementCollection
     @CollectionTable(name = "tasks_precedences")
-    private List<String> precedenceList;
-
-
+    private List<TaskID> taskPrecedenceList;
 }
