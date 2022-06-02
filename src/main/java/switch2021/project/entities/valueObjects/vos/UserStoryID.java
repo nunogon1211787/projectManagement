@@ -2,6 +2,7 @@ package switch2021.project.entities.valueObjects.vos;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import switch2021.project.applicationServices.iRepositories.TaskContainerID;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import switch2021.project.utils.ValueObject;
@@ -11,6 +12,7 @@ import javax.persistence.Embedded;
 import java.util.Objects;
 
 @Getter
+@Setter
 @Embeddable
 @NoArgsConstructor
 public class UserStoryID implements ValueObject<UserStoryID>, TaskContainerID {
