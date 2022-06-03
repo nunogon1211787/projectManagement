@@ -47,6 +47,17 @@ public class UserStory implements Entity<UserStory> {
         this.userStoryID = new UserStoryID(parentUserStory.userStoryID.toString() + " - Refined");
     }
 
+    /**
+     * Update Methods
+     */
+    public void updatePriority(UsPriority usPriority) {
+        this.priority = usPriority;
+    }
+
+    public void updateTimeEstimate(UsHour usHour) {
+        this.timeEstimate = usHour;
+    }
+
 
     /**
      * Methods has - used in scrum board

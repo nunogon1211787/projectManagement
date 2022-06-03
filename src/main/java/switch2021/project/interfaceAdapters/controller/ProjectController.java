@@ -24,12 +24,12 @@ public class ProjectController {
     @Autowired
     ProjectService service;
 
+
     /**
      * Find all projects
      *
      * @return List Projects
      */
-
     @GetMapping
     public ResponseEntity<Object> showAllProjects() {
         ErrorMessage message = new ErrorMessage();
@@ -45,12 +45,12 @@ public class ProjectController {
         return new ResponseEntity<>(allProjectsDto, HttpStatus.OK);
     }
 
+
     /**
      * Find by id
      *
      * @return project
      */
-
     @GetMapping("/{id}")
     public ResponseEntity<Object> showProjectRequested(@PathVariable("id") String id) {
         ErrorMessage message = new ErrorMessage();
@@ -67,10 +67,10 @@ public class ProjectController {
         return new ResponseEntity<>(newProject, HttpStatus.OK);
     }
 
+
     /**
      * Create Project - US005
      **/
-
     @PostMapping
     public ResponseEntity<Object> createProject(@RequestBody ProjectDTO projectDTO) {
         ErrorMessage message = new ErrorMessage();
@@ -86,10 +86,10 @@ public class ProjectController {
         return new ResponseEntity<>(newProject, HttpStatus.CREATED);
     }
 
+
     /**
      * Edit project - US008
      **/
-
     @PatchMapping("/{id}")
     public ResponseEntity<Object> updateProjectPartially(@PathVariable("id") String id,
                                                          @RequestBody EditProjectInfoDTO editProjectInfoDTO) {
@@ -104,10 +104,10 @@ public class ProjectController {
         }
     }
 
+
     /**
      * Delete project
      */
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteProjectRequest(@PathVariable String id) {
         ErrorMessage message = new ErrorMessage();

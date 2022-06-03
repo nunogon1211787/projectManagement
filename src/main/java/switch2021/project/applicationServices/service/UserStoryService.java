@@ -5,8 +5,11 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.applicationServices.iRepositories.IUserStoryRepo;
 import switch2021.project.dtoModel.dto.OutputUserStoryDTO;
-import switch2021.project.dtoModel.dto.CreateUserStoryDTO;
+import switch2021.project.dtoModel.dto.UpdateUserStoryDTO;
+import switch2021.project.dtoModel.dto.UserStoryDTO;
 import switch2021.project.entities.factories.factoryInterfaces.IUserStoryFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUsHourFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUsPriorityFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserStoryIDFactory;
 import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.dtoModel.mapper.UserStoryMapper;
@@ -33,12 +36,16 @@ public class UserStoryService {
     @Autowired
     private IUserStoryFactory iUserStoryFactory;
     @Autowired
-    private IUserStoryIDFactory factoryId;
+    private IUserStoryIDFactory usIdFactory;
+    @Autowired
+    private IUsHourFactory usHourFactory;
+    @Autowired
+    private IUsPriorityFactory priorityFactory;
 
     /**
      * Create and save a User Story (US009)
      */
-    public OutputUserStoryDTO createAndSaveUserStory(CreateUserStoryDTO inDto) throws Exception {
+    public OutputUserStoryDTO createAndSaveUserStory(UserStoryDTO inDto) throws Exception {
         ProjectID projID = new ProjectID(inDto.projectID);
 //        String[] x = inDto.projectID.split("_");
 //        ProjectID projID = new ProjectID(x[2]);
@@ -58,6 +65,7 @@ public class UserStoryService {
         }
         return usDto;
     }
+
 
     public OutputUserStoryDTO showAUserStory(String id) throws Exception {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
@@ -91,6 +99,34 @@ public class UserStoryService {
 
 
     /**
+     * Update data of a User Story (US019 and US021)
+     */
+    public OutputUserStoryDTO updateUSData(String id, UpdateUserStoryDTO updateDTO) throws Exception {
+        Optional<UserStory> opUs = iUserStoryRepo.findByUserStoryId( createUserStoryIdByStringInputFromController(id));
+        UserStory userStory;
+        OutputUserStoryDTO updatedDto = null;
+
+        if(opUs.isPresent()){
+            userStory = opUs.get();
+
+            if(updateDTO.priority != 0) {
+                userStory.updatePriority(priorityFactory.create(updateDTO.getPriority()));
+            }
+            if(updateDTO.timeEstimate != 0) {
+                userStory.updateTimeEstimate(usHourFactory.create(updateDTO.getTimeEstimate()));
+            }
+        } else {throw new Exception("User story does not exist");}
+
+        Optional<UserStory> updated = iUserStoryRepo.update(userStory);
+
+        if(updated.isPresent()) {
+           updatedDto = userStoryMapper.toDto(updated.get());
+        }
+        return updatedDto;
+    }
+
+
+    /**
      * Delete User Story
      */
     public void deleteAUserStory(String id) throws Exception {
@@ -109,6 +145,6 @@ public class UserStoryService {
         String[] x = id.split("&");
         String pId = x[0];
         String uTitle = x[1].replaceAll("%20", " ");
-        return factoryId.create(pId, uTitle);
+        return usIdFactory.create(pId, uTitle);
     }
 }

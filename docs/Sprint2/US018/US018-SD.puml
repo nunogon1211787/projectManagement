@@ -7,6 +7,7 @@ autonumber
 participant ": UserStoryRoute" as UI
 participant ": UserStoryController" as Ctrl
 participant ": UserStoryService" as Service
+participant "exception: \nException" as exc
 participant ": iProjectRepo" as ProjectRepo
 participant ": IUserStoryRepo" as Repo
 participant ": UserStoryJpaRepository" as Driver
@@ -20,9 +21,8 @@ participant "productBacklogResponse: \n ResponseEntity" as json
 [o-> UI
 UI -> Ctrl: consultProductBacklog(projectId)
 Ctrl -> Service: findProduckBacklog(projectId)
-alt success case
-    Service -> ProjectRepo: existsById(projectId)
-    return true
+opt if the project does not exist
+    Service --> exc**: create()
 end
 Service -> Repo: findProductBacklog(projectId)
 Repo -> Driver: findAll()

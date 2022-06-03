@@ -2,7 +2,7 @@ package switch2021.project.entities.factories.factories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import switch2021.project.dtoModel.dto.CreateUserStoryDTO;
+import switch2021.project.dtoModel.dto.UserStoryDTO;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IDescriptionFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUsHourFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUsPriorityFactory;
@@ -26,11 +26,11 @@ public class UserStoryFactory implements IUserStoryFactory {
 
 
     @Override
-    public UserStory createUserStory(CreateUserStoryDTO createUserStoryDTO) {
-        return new UserStory(userStoryID.create(createUserStoryDTO.projectID, createUserStoryDTO.title),
-                priority.create(createUserStoryDTO.priority),
-                description.createDescription(createUserStoryDTO.description),
-                timeEstimate.create(createUserStoryDTO.timeEstimate));
+    public UserStory createUserStory(UserStoryDTO userStoryDTO) {
+        return new UserStory(userStoryID.create(userStoryDTO.projectID, userStoryDTO.title),
+                priority.create(userStoryDTO.priority),
+                description.createDescription(userStoryDTO.description),
+                timeEstimate.create(userStoryDTO.timeEstimate));
     }
 
 }

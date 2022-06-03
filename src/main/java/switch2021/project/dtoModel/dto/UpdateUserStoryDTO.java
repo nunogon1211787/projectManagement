@@ -1,21 +1,19 @@
 package switch2021.project.dtoModel.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
-public class CreateUserStoryDTO extends RepresentationModel<CreateUserStoryDTO> {
+public class UpdateUserStoryDTO extends RepresentationModel<UpdateUserStoryDTO> {
 
     /**
      * Attributes
      **/
-
-    public String projectID;
-    public String title;
     public int priority;
-    public String description;
     public double timeEstimate;
-
-
 }
