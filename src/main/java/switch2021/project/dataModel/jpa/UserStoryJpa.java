@@ -19,11 +19,9 @@ public class UserStoryJpa {
     private int priority;
     private String description;
     private double timeEstimate;
-
-    @OneToOne
-    private UserStoryJpa parentUserStory;
+    private String parentUserStory;
     private String startDate;
     private String endDate;
     private String  cancelled;
-
+    private String  refined;
 }

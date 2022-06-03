@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 
-@Setter
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,10 +23,11 @@ public class UserStory implements Entity<UserStory> {
     private Description description;
     private UsHour timeEstimate;
 
-    private UserStory parentUserStory;
+    private UsTitle parentUserStory;
     private LocalDate usStartDate; //US started to be worked on a sprint - we were able to determine the "age/pending"
     private LocalDate usEndDate; // It means it's "done"
     private LocalDate usCancelled; //It means it's  "cancelled"
+    private LocalDate usRefined; //It means it's  "refined"
 
 
     /**
@@ -41,13 +42,6 @@ public class UserStory implements Entity<UserStory> {
 
 
     /**
-     * Constructor User Story Refined
-     **/
-    public UserStory(UserStory parentUserStory) {
-        this.userStoryID = new UserStoryID(parentUserStory.userStoryID.toString() + " - Refined");
-    }
-
-    /**
      * Update Methods
      */
     public void updatePriority(UsPriority usPriority) {
@@ -58,9 +52,17 @@ public class UserStory implements Entity<UserStory> {
         this.timeEstimate = usHour;
     }
 
+    public void refinedUs() {
+        this.usRefined = LocalDate.now();
+    }
+
+    public void assignParentUserStory(UsTitle parentTitle) {
+        this.parentUserStory = parentTitle;
+    }
+
 
     /**
-     * Methods has - used in scrum board
+     * Validate methods - used in scrum board
      */
     public boolean hasCode(UserStoryID idUserStory) {
         return this.userStoryID.equals(idUserStory);

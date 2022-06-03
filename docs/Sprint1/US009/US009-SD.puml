@@ -31,11 +31,11 @@ appService -> factory:  createUserStory(inDto)
 note over factory : All parameters (value objects) are instantiated in their own factories.
 
 factory -> us **: create(userStoryID, usPriority, \nusDescription, usTimeEstimate)
-factory --> appService: newUserStory
+return newUserStory
 
 appService-> usStore: save(newUserStory)
-ref over usStore: [[US009jpa-SD.puml]]
-usStore --> appService : result
+ref over usStore: [[US009-SD-JPA.puml]]
+return result
 opt if the new userstory already exist
 appService --> exc** : create(errorMessage)
 end

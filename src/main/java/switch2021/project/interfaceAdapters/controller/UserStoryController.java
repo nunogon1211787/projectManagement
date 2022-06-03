@@ -28,15 +28,15 @@ public class UserStoryController {
      */
     @PostMapping
     public ResponseEntity<Object> createAndSaveUserStory(@RequestBody UserStoryDTO inDto) {
-        ErrorMessage message = new ErrorMessage();
         OutputUserStoryDTO newUserStory;
+
         try {
             newUserStory = service.createAndSaveUserStory(inDto);
         } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-
         return new ResponseEntity<>(newUserStory, HttpStatus.CREATED);
     }
 
@@ -96,12 +96,12 @@ public class UserStoryController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Object> showUserStoryRequested(@PathVariable("id") String id){
-        ErrorMessage message = new ErrorMessage();
         OutputUserStoryDTO userStory;
 
         try {
             userStory = service.showAUserStory(id);
         } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
@@ -127,6 +127,25 @@ public class UserStoryController {
 
         return new ResponseEntity<>(userStory, HttpStatus.OK);
     }
+
+
+    /**
+     * Refine a board user story of the Product Backlog (US020)
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> refineUserStory(@PathVariable String id, @RequestBody UserStoryDTO inDto) {
+        CollectionModel<OutputUserStoryDTO> refinedStory;
+
+        try {
+            refinedStory = service.refineUserStory(id, inDto);
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(refinedStory, HttpStatus.OK);
+    }
+
 
     /**
      * Delete a requested User Story
