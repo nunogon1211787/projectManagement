@@ -74,3 +74,28 @@ export function deleteDetails() {
     type: DELETE_DETAILS,
   };
 }
+
+// ACTIONS TO NAVIGATE
+
+export const NAV_TO_FORM = "NAV_TO_FORM";
+export const NAV_TO_TABLE = "NAV_TO_TABLE";
+
+export function navToForm(dispatch) {
+  dispatch(formTrue());
+}
+
+export function navToTable(dispatch) {
+  dispatch(tableTrue());
+}
+
+export function formTrue() {
+  return {
+    type: NAV_TO_FORM,
+  };
+}
+
+export function tableTrue() {
+  return {
+    type: NAV_TO_TABLE,
+  };
+}
