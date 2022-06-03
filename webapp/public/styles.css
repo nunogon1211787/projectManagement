@@ -1193,7 +1193,7 @@ pre {
     margin-left: 91.66667%; } }
 
 .table {
-  width: 100%;
+  width: 98%;
   margin-bottom: 1rem;
   background-color: transparent; }
   .table th,
@@ -1764,8 +1764,10 @@ textarea.form-control {
 
 .btn {
   display: inline-block;
-  font-weight: 400;
+  font-weight: 700;
+  color: #fff7f7;
   text-align: center;
+  text-transform: uppercase;
   white-space: nowrap;
   vertical-align: middle;
   user-select: none;
@@ -7305,7 +7307,9 @@ body {
   height: 100%;
   box-sizing: border-box;
   position: relative;
-  max-width: 100%; }
+  max-width: 100%;
+  padding: 2%;
+}
 
 #main-wrapper {
   opacity: 0;
