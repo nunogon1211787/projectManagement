@@ -15,7 +15,7 @@ public class UserStoryServiceTest {
 //    UserStoryService createUserStoryService;
 
 //    @Mock
-//    private CreateUserStoryDTO createUserStoryDTO;
+//    private UserStoryDTO createUserStoryDTO;
 //    @Mock
 //    private IUserStoryFactory iUserStoryFactory;
 //    @Mock
@@ -30,7 +30,7 @@ public class UserStoryServiceTest {
 //    @Test
 //    void createAndSaveUserStory() throws Exception {
 //
-//        CreateUserStoryDTO dto = new CreateUserStoryDTO("Project_2022_1","As director I want cenas", 1, "create project", 1000);
+//        UserStoryDTO dto = new UserStoryDTO("Project_2022_1","As director I want cenas", 1, "create project", 1000);
 //
 //        createUserStoryService.createAndSaveUserStory(dto);
 //

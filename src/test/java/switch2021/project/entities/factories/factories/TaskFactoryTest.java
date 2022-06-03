@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import switch2021.project.applicationServices.iRepositories.ITaskIDFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ITaskIDFactory;
 import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
 import switch2021.project.entities.valueObjects.vos.TaskID;
 import switch2021.project.entities.valueObjects.vos.*;

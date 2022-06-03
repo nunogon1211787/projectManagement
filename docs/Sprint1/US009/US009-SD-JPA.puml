@@ -1,11 +1,8 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+title US09 - "As Product Owner, I want to create a user story and add it to the Product Backlog"
 
 autoactivate on
 autonumber
-
-title US09 - "As Product Owner, I want to create a user story and add it to the Product Backlog"
-
 
 participant ": IUserStoryRepo" as Repository
 participant ": UserStoryJpaAssembler" as Assembler
@@ -21,7 +18,7 @@ Assembler --> Repository : UserStoryJPA
 Repository -> Driver: save(userStoryJpa)
 Driver -> Data**: create(savedUserStoryJpa)
 Driver --> Repository : savedData
-Repository -> Assembler: toModel (savedData)
+Repository -> Assembler: toDomain (savedData)
 Assembler -> US **: create()
 Assembler --> Repository :userStory
 

@@ -134,6 +134,6 @@ public class UsPriorityTest {
         UsPriority usPriority = new UsPriority(1);
         UsPriority usPriority1 = new UsPriority(2);
         //Act and Assert
-        assertFalse(usPriority.sameValueAs(usPriority1));
+        assertNotEquals(usPriority, usPriority1);
     }
 }

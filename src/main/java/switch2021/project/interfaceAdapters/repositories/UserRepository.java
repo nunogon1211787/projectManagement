@@ -24,7 +24,6 @@ public class UserRepository implements IUserRepo {
 
     @Override
     public Optional<User> findByUserId(UserID userID) {
-
         Optional<UserJpa> foundUserJpa = userJpaRepository.findById(userID);
 
         if (foundUserJpa.isPresent()) {
@@ -36,7 +35,6 @@ public class UserRepository implements IUserRepo {
 
     @Override
     public List<User> findAll() {
-
         List<UserJpa> userJpaList = userJpaRepository.findAll();
         List<User> userList = new ArrayList<>();
 
@@ -126,23 +124,4 @@ public class UserRepository implements IUserRepo {
         }
         return false;
     }
-
-
-/*
-    ///// ----->>>>>>  Rever Método
-    public List<SystemUser> searchUsers(String name, String email, String function, int state, List<UserProfile>
-    profileChoosenList) {
-        int listSize = this.systemUserList.size();
-        List<SystemUser> foundUsersList = new ArrayList<>();
-
-        if (listSize != 0) {
-            for (SystemUser systemUser : this.systemUserList)
-                if (systemUser.hasThisData(name, email, function, state, profileChoosenList)) {
-                    foundUsersList.add(systemUser);
-                }
-        }
-        return foundUsersList;
-    }
-
- */
 }

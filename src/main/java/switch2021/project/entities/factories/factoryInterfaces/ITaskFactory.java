@@ -1,4 +1,4 @@
-package switch2021.project.entities.valueObjects.voFactories.voInterfaces;
+package switch2021.project.entities.factories.factoryInterfaces;
 
 import switch2021.project.dtoModel.dto.TaskDTO;
 

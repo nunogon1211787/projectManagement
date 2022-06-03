@@ -4,8 +4,9 @@ import switch2021.project.entities.aggregates.Task.Task;
 
 
 import java.util.List;
+import java.util.Optional;
 
-public interface TaskRepositoryInterface {
+public interface ITaskRepo {
 
     /**
      * Finds all objects from this repository.
@@ -17,7 +18,7 @@ public interface TaskRepositoryInterface {
      */
     Task findById(String code);
 
-    Task save (Task task);
+    Optional<Task> save (Task newTask);
 
 
     boolean existById(String id);
