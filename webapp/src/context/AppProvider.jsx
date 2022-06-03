@@ -14,6 +14,10 @@ const initialState = {
     error: null,
     data: [],
   },
+  navigation: {
+    table: true,
+    form: false,
+  },
 };
 
 // const initialState = {
