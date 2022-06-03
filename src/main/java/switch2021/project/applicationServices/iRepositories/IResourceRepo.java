@@ -38,4 +38,5 @@ public interface IResourceRepo/* extends CrudRepository<Object, Long> */{
      */
     Optional<Resource> save(Resource newResource);
 
+    boolean deleteByResourceID(ResourceIDReeng id);
 }

@@ -16,6 +16,7 @@ import switch2021.project.entities.aggregates.Resource.ManageResourcesService;
 import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.valueObjects.vos.Email;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
+import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
 import switch2021.project.entities.valueObjects.vos.UserID;
 import switch2021.project.interfaceAdapters.repositories.ProjectRepository;
 
@@ -90,6 +91,12 @@ public class ResourceService {
             }
         }
         return resourcesDto;
+    }
+
+    public void deleteResourceRequest(ResourceIDReeng id) throws Exception {
+        if(!resRepo.deleteByResourceID(id)){
+            throw new Exception("Resource does not exist");
+        }
     }
 
     private boolean checkSystemUserExists(CreateResourceDTO dto){
