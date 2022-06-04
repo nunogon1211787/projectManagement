@@ -16,6 +16,7 @@ import switch2021.project.entities.aggregates.Resource.ManageResourcesService;
 import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.valueObjects.vos.Email;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
+import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
 import switch2021.project.entities.valueObjects.vos.UserID;
 import switch2021.project.interfaceAdapters.repositories.ProjectRepository;
 
@@ -50,14 +51,14 @@ public class ResourceService {
         } else if (!checkProjectExists(dto)) {
             throw new IllegalArgumentException(("Project does not exist"));
         }
-//        else if (!checkDatesInsideProject(projRepo,dto)) {
-//            throw new IllegalArgumentException(("Dates are not inside project"));
-//        }
+        else if (!checkDatesInsideProject(dto)) {
+            throw new IllegalArgumentException(("Dates are not inside project"));
+        }
         else
         if (!checkAllocation(dto)) {
             throw new IllegalArgumentException(("Is not valid to create - Allocation)"));
         }
-//        else if (!checkProjectRole(resRepo, dto)) {
+//        else if (!checkProjectRole(dto)) {
 //            throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));}
             else {
             Resource newResource = iResourceFactory.createResource(dto);
@@ -92,6 +93,12 @@ public class ResourceService {
         return resourcesDto;
     }
 
+    public void deleteResourceRequest(ResourceIDReeng id) throws Exception {
+        if(!resRepo.deleteByResourceID(id)){
+            throw new Exception("Resource does not exist");
+        }
+    }
+
     private boolean checkSystemUserExists(CreateResourceDTO dto){
         UserID userID = new UserID(new Email(dto.systemUserID));
         return this.userRepo.existsById(userID);
@@ -101,10 +108,8 @@ public class ResourceService {
         return this.projRepo.existsById(new ProjectID(dto.projectId));
     }
 
-    private boolean checkDatesInsideProject(IProjectRepo projRepo, CreateResourceDTO dto) {
-//        String[] x = dto.projectId.split("_");
+    private boolean checkDatesInsideProject(CreateResourceDTO dto) {
         ProjectID projID = new ProjectID(dto.projectId);
-//        Project project = null;
         Optional<Project> opProject = projRepo.findById(projID);
         boolean msg = false;
 
@@ -123,9 +128,8 @@ public class ResourceService {
         return manageResourcesService.validateAllocation(resourceProjectsList, dto);
     }
 
-    private boolean checkProjectRole(IResourceRepo resRepo, CreateResourceDTO dto){
-        String[] x = dto.projectId.split("_");
-        ProjectID projID = new ProjectID(x[2]);
+    private boolean checkProjectRole(CreateResourceDTO dto){
+        ProjectID projID = new ProjectID(dto.projectId);
         List<Resource> projectTeamList = resRepo.findAllByProject(projID);
         return manageResourcesService.validateProjectRole(projectTeamList, dto);
     }
