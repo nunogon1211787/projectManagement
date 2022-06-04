@@ -104,6 +104,17 @@ public class ResourceRepository implements IResourceRepo {
         return resource;
     }
 
+    @Override
+    public boolean deleteByResourceID(ResourceIDReeng id) {
+        ResourceIDJpa resIdJpa = new ResourceIDJpa(id.getUser(), id.getProject(), id.getStartDate().toString());
+        boolean msg = false;
+        if (jpaRepository.existsById(resIdJpa)) {
+            jpaRepository.deleteById(resIdJpa);
+            msg = true;
+        }
+        return msg;
+    }
+
     /**
      * Finds all resources
      */

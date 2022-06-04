@@ -5,6 +5,8 @@ import {
   FETCH_DETAILS_STARTED,
   FETCH_DETAILS_SUCCESS,
   DELETE_DETAILS,
+  NAV_TO_FORM,
+  NAV_TO_TABLE,
 } from "./Actions";
 
 export default function reducer(state, action) {
@@ -66,6 +68,22 @@ export default function reducer(state, action) {
           error: null,
           data: [],
           userid: 0,
+        },
+      };
+    case NAV_TO_FORM:
+      return {
+        ...state,
+        navigation: {
+          table: false,
+          form: true,
+        },
+      };
+    case NAV_TO_TABLE:
+      return {
+        ...state,
+        navigation: {
+          table: true,
+          form: false,
         },
       };
     default:

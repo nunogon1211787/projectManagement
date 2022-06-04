@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const AppContext = React.createContext(null);
-export const {Provider} = AppContext;
+export const { Provider } = AppContext;
 export default AppContext;
 
 // export const useAuth = () => {
