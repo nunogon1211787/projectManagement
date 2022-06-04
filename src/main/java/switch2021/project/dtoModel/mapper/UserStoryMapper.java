@@ -2,6 +2,7 @@ package switch2021.project.dtoModel.mapper;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
+import switch2021.project.entities.valueObjects.vos.UserStoryID;
 import switch2021.project.interfaceAdapters.controller.UserStoryController;
 import switch2021.project.dtoModel.dto.OutputUserStoryDTO;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
@@ -18,16 +19,16 @@ public class UserStoryMapper {
     public OutputUserStoryDTO toDto(UserStory newUserStory) {
         OutputUserStoryDTO result = new OutputUserStoryDTO();
 
-        result.id = newUserStory.getUserStoryID().getProjectID().getCode() + "&"
-                + newUserStory.getUserStoryID().getUsTitle().getTitleUs();
+        result.id = idToString(newUserStory.getUserStoryID());
         result.priority = newUserStory.getPriority().getPriorityUs();
         result.description = newUserStory.getDescription().getText();
         result.timeEstimate = newUserStory.getTimeEstimate().getUsHours();
 
-        if(newUserStory.getParentUserStory() != null) {result.parentUserStory = newUserStory.getParentUserStory().getTitleUs();}
+        if(newUserStory.getParentUserStory() != null) {
+            result.parentUserStory = idToString(newUserStory.getParentUserStory().getUserStoryID());
+        }
         if(newUserStory.getUsStartDate() != null) {result.usStartDate = newUserStory.getUsStartDate().toString();}
         if(newUserStory.getUsEndDate() != null) {result.usEndDate = newUserStory.getUsEndDate().toString();}
-        if(newUserStory.getUsCancelled() != null) {result.usCancelled = newUserStory.getUsCancelled().toString();}
         if(newUserStory.getUsRefined() != null) {result.usRefined = newUserStory.getUsRefined().toString();}
 
 
@@ -61,5 +62,9 @@ public class UserStoryMapper {
         result.add(linkTo(methodOn(UserStoryController.class).showAllUserStories()).withSelfRel());
 
         return result;
+    }
+
+    private String idToString(UserStoryID id) {
+        return id.getProjectID().getCode() + "&" + id.getUsTitle().getTitleUs();
     }
 }

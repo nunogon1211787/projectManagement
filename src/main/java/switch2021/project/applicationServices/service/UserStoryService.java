@@ -126,6 +126,80 @@ public class UserStoryService {
         return updatedDto;
     }
 
+    public OutputUserStoryDTO startUserStory(String id) throws Exception {
+        Optional<UserStory> opUs = iUserStoryRepo.findByUserStoryId(createUserStoryIdByStringInputFromController(id));
+        UserStory userStory;
+        OutputUserStoryDTO updatedDto = null;
+
+        if (opUs.isPresent()) {
+            userStory = opUs.get();
+            if(userStory.getUsEndDate() != null) {
+                throw new IllegalArgumentException("This User Story is already closed!");
+            } else
+                if(userStory.getUsStartDate() != null) {
+                    throw new IllegalArgumentException("This User Story is already started!");
+            } else {
+                userStory.startUserStory();
+            }
+        } else {
+                throw new Exception("User story does not exist");
+            }
+            Optional<UserStory> updated = iUserStoryRepo.update(userStory);
+
+            if (updated.isPresent()) {
+                updatedDto = userStoryMapper.toDto(updated.get());
+            }
+            return updatedDto;
+    }
+
+    public OutputUserStoryDTO cancelUserStory(String id) throws Exception {
+        Optional<UserStory> opUs = iUserStoryRepo.findByUserStoryId(createUserStoryIdByStringInputFromController(id));
+        UserStory userStory;
+        OutputUserStoryDTO updatedDto = null;
+
+        if (opUs.isPresent()) {
+            userStory = opUs.get();
+            if(userStory.getUsEndDate() != null) {
+                throw new IllegalArgumentException("This User Story is already closed!");
+            } else {
+                userStory.cancelUserStory();
+            }
+        } else {
+            throw new Exception("User story does not exist");
+        }
+
+        Optional<UserStory> updated = iUserStoryRepo.update(userStory);
+
+        if (updated.isPresent()) {
+            updatedDto = userStoryMapper.toDto(updated.get());
+        }
+        return updatedDto;
+    }
+
+    public OutputUserStoryDTO finishUserStory(String id) throws Exception {
+        Optional<UserStory> opUs = iUserStoryRepo.findByUserStoryId(createUserStoryIdByStringInputFromController(id));
+        UserStory userStory;
+        OutputUserStoryDTO updatedDto = null;
+
+        if (opUs.isPresent()) {
+            userStory = opUs.get();
+            if(userStory.getUsEndDate() != null) {
+                throw new IllegalArgumentException("This User Story is already closed!");
+            } else {
+                userStory.finishUserStory();
+            }
+        } else {
+            throw new IllegalArgumentException("User story does not exist");
+        }
+
+        Optional<UserStory> updated = iUserStoryRepo.update(userStory);
+
+        if (updated.isPresent()) {
+            updatedDto = userStoryMapper.toDto(updated.get());
+        }
+        return updatedDto;
+    }
+
 
     /**
      * Refine a board user story of the Product Backlog (US020)
@@ -139,7 +213,7 @@ public class UserStoryService {
             UserStory us = opUs.get();
 
             UserStory refinedUs = iUserStoryFactory.createUserStory(inDto);
-            refinedUs.assignParentUserStory(us.getUserStoryID().getUsTitle());
+            refinedUs.assignParentUserStory(us);
             Optional<UserStory> saved = iUserStoryRepo.save(refinedUs);
 
             if (saved.isPresent()) {

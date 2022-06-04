@@ -18,14 +18,14 @@ public class UserStoryJpaAssembler {
         String description = userStory.getDescription().getText();
         double timeEstimate = userStory.getTimeEstimate().getUsHours();
 
+        String usStatus = userStory.getUsStatus();
         String startDate = null;
-        String parent = null;
+        UserStoryJpa parent = null;
         String endDate = null;
-        String cancelled = null;
         String refined = null;
 
         if(userStory.getParentUserStory() != null) {
-            parent = userStory.getParentUserStory().getTitleUs();
+            parent = toData(userStory.getParentUserStory());
         }
         if (userStory.getUsStartDate() != null) {
             startDate = userStory.getUsStartDate().toString();
@@ -33,13 +33,10 @@ public class UserStoryJpaAssembler {
         if(userStory.getUsEndDate() != null) {
             endDate = userStory.getUsEndDate().toString();
         }
-        if(userStory.getUsCancelled() != null) {
-            cancelled = userStory.getUsCancelled().toString();
-        }
         if(userStory.getUsRefined() != null) {
             refined = userStory.getUsRefined().toString();
         }
-        return new UserStoryJpa(id, priority, description, timeEstimate, parent, startDate, endDate, cancelled, refined);
+        return new UserStoryJpa(id, priority, description, timeEstimate, usStatus, parent, startDate, endDate, refined);
     }
 
     public UserStory toDomain(UserStoryJpa usJpaSaved) {
@@ -48,14 +45,14 @@ public class UserStoryJpaAssembler {
         Description description = new Description(usJpaSaved.getDescription());
         UsHour timeEstimate = new UsHour(usJpaSaved.getTimeEstimate());
 
+        String usStatus = usJpaSaved.getUsStatus();
         LocalDate startDate = null;
-        UsTitle parent = null;
+        UserStory parent = null;
         LocalDate endDate = null;
-        LocalDate cancelled = null;
         LocalDate refined = null;
 
         if(usJpaSaved.getParentUserStory() != null) {
-            parent = new UsTitle(usJpaSaved.getParentUserStory());
+            parent = toDomain(usJpaSaved.getParentUserStory());
         }
         if (usJpaSaved.getStartDate() != null) {
             startDate = LocalDate.parse(usJpaSaved.getStartDate());
@@ -63,13 +60,11 @@ public class UserStoryJpaAssembler {
         if(usJpaSaved.getEndDate() != null) {
             endDate = LocalDate.parse(usJpaSaved.getEndDate());
         }
-        if(usJpaSaved.getCancelled() != null) {
-            cancelled = LocalDate.parse(usJpaSaved.getCancelled());
-        }
         if(usJpaSaved.getRefined() != null) {
             refined = LocalDate.parse(usJpaSaved.getRefined());
         }
-        return new UserStory(id, priority, description, timeEstimate, parent, startDate, endDate, cancelled, refined);
+        return new UserStory(id, priority, description, timeEstimate, usStatus,
+                parent, startDate, endDate, refined);
     }
 
     public List<UserStory> toDomain (List<UserStoryJpa> userStoriesJpa) {

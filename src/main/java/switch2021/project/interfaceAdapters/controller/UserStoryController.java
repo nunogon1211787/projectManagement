@@ -124,7 +124,48 @@ public class UserStoryController {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
+        return new ResponseEntity<>(userStory, HttpStatus.OK);
+    }
 
+    @PatchMapping("/{id}/start")
+    public ResponseEntity<Object> startUserStory(@PathVariable String id) {
+        OutputUserStoryDTO userStory;
+
+        try {
+            userStory = service.startUserStory(id);
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(userStory, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}/cancel")
+    public ResponseEntity<Object> cancelUserStory(@PathVariable String id) {
+        OutputUserStoryDTO userStory;
+
+        try {
+            userStory = service.cancelUserStory(id);
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(userStory, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}/finish")
+    public ResponseEntity<Object> finishUserStory(@PathVariable String id) {
+        OutputUserStoryDTO userStory;
+
+        try {
+            userStory = service.finishUserStory(id);
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(userStory, HttpStatus.OK);
     }
 
