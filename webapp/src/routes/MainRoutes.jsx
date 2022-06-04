@@ -7,6 +7,7 @@ import CreateProject from '../pages/CreateProject';
 import CreateSprint from '../pages/CreateSprint';
 import RegisterUser from '../pages/RegisterUser';
 import { Home } from '../pages/Home';
+import {TheBeaver} from '../pages/TheBeaver';
 
 function MainRoute() {
   return (
@@ -14,6 +15,7 @@ function MainRoute() {
       <div>
         <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/" element={<TheBeaver />} />
             <Route path="userstories" element={<CreateUserStory />} />
             <Route path="profiles" element={<CreateProfile />} />
             <Route path="typologies" element={<CreateTypology />} />

@@ -1,39 +1,41 @@
-import Table from "../components/Table";
+import Button from "../components/Button";
+import { useContext } from "react";
 import Form from "../components/Form";
-
-const url = "http://localhost:8080/sprints";
+import Table from "../components/Table";
+import AppContext from "../context/AppContext";
+import { navToForm } from "../context/Actions";
 
 const postBody = {
   projectID: "",
-  name: "",
-
+  name: ""
 };
 
-const inputTypes = ["text", "text"];
+const inputTypes = ["text"];
 
 export default function CreateSprint() {
-  //POST REQUEST TO API
+  const { state, dispatch } = useContext(AppContext);
+  const { navigation } = state;
+  const { table, form } = navigation;
 
-  const makePostRequest = (data) => {
-    const postRequest = {
-      method: "POST",
-      headers: {
-        "content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
-
-    fetch(url, postRequest)
-      .then((res) => res.json())
-      .then()
-      .catch((err) => console.log(err));
+  const buttonNavigate = () => {
+    navToForm(dispatch);
   };
 
-  return (
-    <>
-      <h1>Sprints</h1>
-      <Table collections="sprints" />
-      <Form label={postBody} rules={inputTypes} request={makePostRequest} />
-    </>
-  );
+  if (table) {
+    return (
+      <>
+        <h1>Sprints</h1>
+        <Table collections="sprints" />
+        <Button name="Create Sprint" function={buttonNavigate} />
+      </>
+    );
+  } else {
+    if (form) {
+      return (
+        <>
+          <Form label={postBody} rules={inputTypes} collections="sprints" />
+        </>
+      );
+    }
+  }
 }

@@ -9,7 +9,7 @@ export default function Login(){
                     <div class="form-input-content">
                         <div class="card login-form mb-0" style={{display: 'flex', alignItems: 'center', justifyContent: 'center',}}>
                             <div class="card-body pt-5">
-                                <a class="text-center" href="index.html"> <h4>Beaver App</h4></a>
+                                <a class="text-center" href="TheBeaver"> <h4>Beaver App</h4></a>
         
                                 <form class="mt-5 mb-5 login-input">
                                     <div class="form-group">

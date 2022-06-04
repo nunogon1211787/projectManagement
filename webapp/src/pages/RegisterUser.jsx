@@ -1,7 +1,9 @@
-import Table from "../components/Table";
+import Button from "../components/Button";
+import { useContext } from "react";
 import Form from "../components/Form";
-
-const url = "http://localhost:8080/users";
+import Table from "../components/Table";
+import AppContext from "../context/AppContext";
+import { navToForm } from "../context/Actions";
 
 const postBody = {
   userName: "",
@@ -9,34 +11,35 @@ const postBody = {
   function: "",
   password: "",
   passwordConfirmation: "",
-  photo: "",
+  photo: ""
 };
 
 const inputTypes = ["text", "text", "text", "text", "text", "text"];
 
 export default function RegisterUser() {
-  //POST REQUEST TO API
+  const { state, dispatch } = useContext(AppContext);
+  const { navigation } = state;
+  const { table, form } = navigation;
 
-  const makePostRequest = (data) => {
-    const postRequest = {
-      method: "POST",
-      headers: {
-        "content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
-
-    fetch(url, postRequest)
-      .then((res) => res.json())
-      .then()
-      .catch((err) => console.log(err));
+  const buttonNavigate = () => {
+    navToForm(dispatch);
   };
 
-  return (
-    <>
-      <h1>Users</h1>
-      <Table collections="users" />
-      <Form label={postBody} rules={inputTypes} request={makePostRequest} />
-    </>
-  );
+  if (table) {
+    return (
+      <>
+        <h1>User</h1>
+        <Table collections="users" />
+        <Button name="Register User" function={buttonNavigate} />
+      </>
+    );
+  } else {
+    if (form) {
+      return (
+        <>
+          <Form label={postBody} rules={inputTypes} collections="users" />
+        </>
+      );
+    }
+  }
 }
