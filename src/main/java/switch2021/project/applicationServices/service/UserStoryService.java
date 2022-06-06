@@ -18,8 +18,7 @@ import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.UserStoryID;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserStoryService {
@@ -51,14 +50,14 @@ public class UserStoryService {
 //        ProjectID projID = new ProjectID(x[2]);
         Optional<Project> project = iProjectRepo.findById(projID);
 
-        if(project.isEmpty()) {
+        if (project.isEmpty()) {
             throw new Exception("Project does not exist");
         }
         UserStory newUserStory = iUserStoryFactory.createUserStory(inDto);
         Optional<UserStory> usSaved = iUserStoryRepo.save(newUserStory);
         OutputUserStoryDTO usDto;
 
-        if(usSaved.isPresent()) {
+        if (usSaved.isPresent()) {
             usDto = userStoryMapper.toDto(usSaved.get());
         } else {
             throw new Exception("User story already exist.");
@@ -71,7 +70,7 @@ public class UserStoryService {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
         Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(usId);
 
-        if(foundUs.isEmpty()){
+        if (foundUs.isEmpty()) {
             throw new Exception("User story does not exist");
         }
         return userStoryMapper.toDto(foundUs.get());
@@ -89,7 +88,7 @@ public class UserStoryService {
     public CollectionModel<OutputUserStoryDTO> consultProductBacklog(String projectId) throws Exception {
         ProjectID projID = new ProjectID(projectId);
 
-        if(!iProjectRepo.existsById(projID)) {
+        if (!iProjectRepo.existsById(projID)) {
             throw new Exception("Project does not exist");
         }
 
@@ -102,27 +101,136 @@ public class UserStoryService {
      * Update data of a User Story (US019 and US021)
      */
     public OutputUserStoryDTO updateUSData(String id, UpdateUserStoryDTO updateDTO) throws Exception {
-        Optional<UserStory> opUs = iUserStoryRepo.findByUserStoryId( createUserStoryIdByStringInputFromController(id));
+        Optional<UserStory> opUs = iUserStoryRepo.findByUserStoryId(createUserStoryIdByStringInputFromController(id));
         UserStory userStory;
         OutputUserStoryDTO updatedDto = null;
 
-        if(opUs.isPresent()){
+        if (opUs.isPresent()) {
             userStory = opUs.get();
 
-            if(updateDTO.priority != 0) {
+            if (updateDTO.priority != 0) {
                 userStory.updatePriority(priorityFactory.create(updateDTO.getPriority()));
             }
-            if(updateDTO.timeEstimate != 0) {
+            if (updateDTO.timeEstimate != 0) {
                 userStory.updateTimeEstimate(usHourFactory.create(updateDTO.getTimeEstimate()));
             }
-        } else {throw new Exception("User story does not exist");}
+        } else {
+            throw new Exception("User story does not exist");
+        }
 
         Optional<UserStory> updated = iUserStoryRepo.update(userStory);
 
-        if(updated.isPresent()) {
-           updatedDto = userStoryMapper.toDto(updated.get());
+        if (updated.isPresent()) {
+            updatedDto = userStoryMapper.toDto(updated.get());
         }
         return updatedDto;
+    }
+
+    public OutputUserStoryDTO startUserStory(String id) throws Exception {
+        Optional<UserStory> opUs = iUserStoryRepo.findByUserStoryId(createUserStoryIdByStringInputFromController(id));
+        UserStory userStory;
+        OutputUserStoryDTO updatedDto = null;
+
+        if (opUs.isPresent()) {
+            userStory = opUs.get();
+            if(userStory.getUsEndDate() != null) {
+                throw new IllegalArgumentException("This User Story is already closed!");
+            } else
+                if(userStory.getUsStartDate() != null) {
+                    throw new IllegalArgumentException("This User Story is already started!");
+            } else {
+                userStory.startUserStory();
+            }
+        } else {
+                throw new Exception("User story does not exist");
+            }
+            Optional<UserStory> updated = iUserStoryRepo.update(userStory);
+
+            if (updated.isPresent()) {
+                updatedDto = userStoryMapper.toDto(updated.get());
+            }
+            return updatedDto;
+    }
+
+    public OutputUserStoryDTO cancelUserStory(String id) throws Exception {
+        Optional<UserStory> opUs = iUserStoryRepo.findByUserStoryId(createUserStoryIdByStringInputFromController(id));
+        UserStory userStory;
+        OutputUserStoryDTO updatedDto = null;
+
+        if (opUs.isPresent()) {
+            userStory = opUs.get();
+            if(userStory.getUsEndDate() != null) {
+                throw new IllegalArgumentException("This User Story is already closed!");
+            } else {
+                userStory.cancelUserStory();
+            }
+        } else {
+            throw new Exception("User story does not exist");
+        }
+
+        Optional<UserStory> updated = iUserStoryRepo.update(userStory);
+
+        if (updated.isPresent()) {
+            updatedDto = userStoryMapper.toDto(updated.get());
+        }
+        return updatedDto;
+    }
+
+    public OutputUserStoryDTO finishUserStory(String id) throws Exception {
+        Optional<UserStory> opUs = iUserStoryRepo.findByUserStoryId(createUserStoryIdByStringInputFromController(id));
+        UserStory userStory;
+        OutputUserStoryDTO updatedDto = null;
+
+        if (opUs.isPresent()) {
+            userStory = opUs.get();
+            if(userStory.getUsEndDate() != null) {
+                throw new IllegalArgumentException("This User Story is already closed!");
+            } else {
+                userStory.finishUserStory();
+            }
+        } else {
+            throw new IllegalArgumentException("User story does not exist");
+        }
+
+        Optional<UserStory> updated = iUserStoryRepo.update(userStory);
+
+        if (updated.isPresent()) {
+            updatedDto = userStoryMapper.toDto(updated.get());
+        }
+        return updatedDto;
+    }
+
+
+    /**
+     * Refine a board user story of the Product Backlog (US020)
+     */
+    public CollectionModel<OutputUserStoryDTO> refineUserStory(String id, UserStoryDTO inDto) throws Exception {
+        Optional<UserStory> opUs = iUserStoryRepo.findByUserStoryId(createUserStoryIdByStringInputFromController(id));
+        List<UserStory> userStories = new ArrayList<>();
+        CollectionModel<OutputUserStoryDTO> savedDto;
+
+        if (opUs.isPresent()) {
+            UserStory us = opUs.get();
+
+            UserStory refinedUs = iUserStoryFactory.createUserStory(inDto);
+            refinedUs.assignParentUserStory(us);
+            Optional<UserStory> saved = iUserStoryRepo.save(refinedUs);
+
+            if (saved.isPresent()) {
+                userStories.add(saved.get());
+
+                us.refinedUs();
+                Optional<UserStory> updated = iUserStoryRepo.update(us);
+
+                updated.ifPresent(userStories::add);
+            } else {
+                throw new IllegalArgumentException("This User Story could not be refined!");
+            }
+            savedDto = userStoryMapper.toCollectionDto(userStories);
+        } else {
+            throw new Exception("User story does not exist");
+        }
+        return savedDto;
     }
 
 
@@ -132,7 +240,7 @@ public class UserStoryService {
     public void deleteAUserStory(String id) throws Exception {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
 
-        if(!iUserStoryRepo.deleteByUserStoryId(usId)){
+        if (!iUserStoryRepo.deleteByUserStoryId(usId)) {
             throw new Exception("User Story does not exist");
         }
     }
@@ -141,7 +249,7 @@ public class UserStoryService {
     /**
      * Create User Story ID method
      */
-    private UserStoryID createUserStoryIdByStringInputFromController(String id){
+    private UserStoryID createUserStoryIdByStringInputFromController(String id) {
         String[] x = id.split("&");
         String pId = x[0];
         String uTitle = x[1].replaceAll("%20", " ");

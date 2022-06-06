@@ -2,6 +2,7 @@ package switch2021.project.dtoModel.mapper;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
+import switch2021.project.entities.valueObjects.vos.UserStoryID;
 import switch2021.project.interfaceAdapters.controller.UserStoryController;
 import switch2021.project.dtoModel.dto.OutputUserStoryDTO;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
@@ -15,19 +16,25 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Service
 public class UserStoryMapper {
 
-
-
     public OutputUserStoryDTO toDto(UserStory newUserStory) {
+        OutputUserStoryDTO result = new OutputUserStoryDTO();
 
-        int priority = newUserStory.getPriority().getPriorityUs();
-        String description = newUserStory.getDescription().getText();
-        double timeEstimate = newUserStory.getTimeEstimate().getUsHours();
+        result.id = idToString(newUserStory.getUserStoryID());
+        result.priority = newUserStory.getPriority().getPriorityUs();
+        result.description = newUserStory.getDescription().getText();
+        result.timeEstimate = newUserStory.getTimeEstimate().getUsHours();
 
-        String userStoryID = newUserStory.getUserStoryID().getProjectID().getCode() + "&" + newUserStory.getUserStoryID().getUsTitle().getTitleUs();
+        if(newUserStory.getParentUserStory() != null) {
+            result.parentUserStory = idToString(newUserStory.getParentUserStory().getUserStoryID());
+        }
+        if(newUserStory.getUsStartDate() != null) {result.usStartDate = newUserStory.getUsStartDate().toString();}
+        if(newUserStory.getUsEndDate() != null) {result.usEndDate = newUserStory.getUsEndDate().toString();}
+        if(newUserStory.getUsRefined() != null) {result.usRefined = newUserStory.getUsRefined().toString();}
 
-        OutputUserStoryDTO result = new OutputUserStoryDTO(userStoryID, priority, description, timeEstimate);
 
-        //Add HATEOAS to OUTPUT DTOs
+        /**
+         * Add HATEOAS to OUTPUT DTOs
+         */
 
         //Add self relation
         result.add(linkTo(methodOn(UserStoryController.class).showUserStoryRequested(result.id)).withSelfRel());
@@ -55,5 +62,9 @@ public class UserStoryMapper {
         result.add(linkTo(methodOn(UserStoryController.class).showAllUserStories()).withSelfRel());
 
         return result;
+    }
+
+    private String idToString(UserStoryID id) {
+        return id.getProjectID().getCode() + "&" + id.getUsTitle().getTitleUs();
     }
 }
