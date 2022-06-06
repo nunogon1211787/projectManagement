@@ -31,48 +31,56 @@ export default function Table(props) {
 
         return (
           <>
-            <table className="table table-primary table-hover">
-              <thead>
-                <tr style={{ textTransform: "uppercase" }} key="headers">
-                  {
-                    // eslint-disable-next-line
-                    header.map((key, idx) => {
-                      if (key !== "_links") {
-                        return (
-                          <th key={idx} style={{ textTransform: "uppercase" }}>
-                            {key}
-                          </th>
-                        );
-                      }
-                    })
-                  }
-                </tr>
-              </thead>
-              <tbody>
-                {response.map((row, index) => {
-                  const id = row[Object.keys(row)[0]];
-                  return (
-                    <tr
-                      key={index}
-                      onClick={() => handleOnClick(id)}
-                      style={{
-                        cursor: "pointer",
-                        textTransform: "capitalize",
-                      }}
-                    >
-                      {
-                        // eslint-disable-next-line
-                        Object.keys(row).map((attr, idx) => {
-                          if (attr !== "_links") {
-                            return <td key={idx}>{row[attr]}</td>;
-                          }
-                        })
-                      }
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <div className="card bg-light">
+              <table
+                className="card-body table table-primary table-hover"
+                style={{ margin: "1%", borderRadius: "10px" }}
+              >
+                <thead>
+                  <tr style={{ textTransform: "uppercase" }} key="headers">
+                    {
+                      // eslint-disable-next-line
+                      header.map((key, idx) => {
+                        if (key !== "_links") {
+                          return (
+                            <th
+                              key={idx}
+                              style={{ textTransform: "uppercase" }}
+                            >
+                              {key}
+                            </th>
+                          );
+                        }
+                      })
+                    }
+                  </tr>
+                </thead>
+                <tbody>
+                  {response.map((row, index) => {
+                    const id = row[Object.keys(row)[0]];
+                    return (
+                      <tr
+                        key={index}
+                        onClick={() => handleOnClick(id)}
+                        style={{
+                          cursor: "pointer",
+                          textTransform: "capitalize",
+                        }}
+                      >
+                        {
+                          // eslint-disable-next-line
+                          Object.keys(row).map((attr, idx) => {
+                            if (attr !== "_links") {
+                              return <td key={idx}>{row[attr]}</td>;
+                            }
+                          })
+                        }
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </>
         );
       } else {

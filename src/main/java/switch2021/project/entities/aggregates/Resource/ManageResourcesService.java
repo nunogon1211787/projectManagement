@@ -41,17 +41,19 @@ public class ManageResourcesService {
         return msg;
     }
     public boolean validateProjectRole(List<Resource> projectTeamList, CreateResourceDTO dto) {
+
+
         boolean msg = false;
 
         for (Resource res : projectTeamList) {
-            if (!(res.isActiveToThisDate(LocalDate.parse(dto.startDate)) && res.isActiveToThisDate(LocalDate.parse(dto.endDate)))) {
+            if(res.isActiveToThisDate(LocalDate.parse(dto.startDate)) || res.isActiveToThisDate(LocalDate.parse(dto.endDate))){
+            if(ProjectRoleReeng.valueOf(dto.projectRole).equals(ProjectRoleReeng.valueOf(res.getRole().toString()))){
+                if(ProjectRoleReeng.valueOf(res.getRole().toString()).equals(ProjectRoleReeng.TeamMember)){
                     msg = true;
-                } else if (ProjectRoleReeng.valueOf(dto.projectRole).equals(ProjectRoleReeng.TeamMember)){
-                msg = true;
-            } else if (ProjectRoleReeng.valueOf(dto.projectRole).equals(ProjectRoleReeng.ProjectManager) ||
-                    ProjectRoleReeng.valueOf(dto.projectRole).equals(ProjectRoleReeng.ProductOwner) ||
-                    ProjectRoleReeng.valueOf(dto.projectRole).equals(ProjectRoleReeng.ScrumMaster)){
-                msg = false;
+                } else {
+                    msg = false;
+                }
+            }
             }
             }
             return msg;
