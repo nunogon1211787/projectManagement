@@ -2,15 +2,19 @@ package switch2021.project.entities.valueObjects.vos;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import switch2021.project.applicationServices.iRepositories.TaskContainerID;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import java.util.Objects;
 
 @Getter
+@Setter
 @Embeddable
 @NoArgsConstructor
 public class SprintID implements ValueObject<SprintID>, TaskContainerID {
