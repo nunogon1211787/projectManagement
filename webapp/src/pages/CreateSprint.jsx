@@ -10,7 +10,7 @@ const postBody = {
   name: ""
 };
 
-const inputTypes = ["text"];
+const inputTypes = ["text", "text"];
 
 export default function CreateSprint() {
   const { state, dispatch } = useContext(AppContext);
