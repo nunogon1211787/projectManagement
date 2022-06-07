@@ -7,9 +7,13 @@ package switch2021.project.interfaceAdapters.controller;
 //import org.mockito.MockitoAnnotations;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import switch2021.project.applicationServices.service.ProjectService;
+import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.dto.UserStoryDTO;
 
 //import org.springframework.http.MediaType;
@@ -21,10 +25,10 @@ import switch2021.project.dtoModel.dto.UserStoryDTO;
 //import static org.junit.jupiter.api.Assertions.assertNotNull;
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 //
-//@AutoConfigureMockMvc
+@AutoConfigureMockMvc
 @SpringBootTest
 public class UserStoryControllerTest {
-//
+    //
 //    @Autowired
 //    private MockMvc mockMvc;
 //
@@ -63,7 +67,7 @@ public class UserStoryControllerTest {
 //    }
 //
     @Autowired
-UserStoryController ctrl;
+    UserStoryController ctrl;
 
 //    @Test
 //    void intTest(){
@@ -72,15 +76,24 @@ UserStoryController ctrl;
 //
 //        ctrl.showUserStoryRequested(test);
 //
-//    }
+
+    //    }
+    @Autowired
+    ProjectController projectController;
+    @Autowired
+    ProjectService service;
 
     @Test
     void createAndSaveUserStory() {
 
+        projectController.createProject(new ProjectDTO("avengers", "stuff", "entertaiment", "2028-12-12", "12",
+                "12000", "7","Fixed Cost", "customer"));
         UserStoryDTO dto = new UserStoryDTO("Project_2022_1", "As cenas I want cenas", 1, "cenas fixes", 1000);
+        UserStoryDTO refineDto = new UserStoryDTO("Project_2022_1", "As cenas I want", 3, "fixes", 1000);
+        String id = "Project_2022_1&As cenas I want cenas";
 
         ctrl.createAndSaveUserStory(dto);
-
+        ctrl.refineUserStory(id,refineDto);
     }
 }
 //

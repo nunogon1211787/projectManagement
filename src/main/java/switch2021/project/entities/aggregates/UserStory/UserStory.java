@@ -8,12 +8,15 @@ import switch2021.project.utils.Entity;
 import java.time.LocalDate;
 import java.util.Objects;
 
-
-@Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserStory implements Entity<UserStory> {
+
+    private static final String OPEN = "OPEN";
+    private static final String FINISHED = "FINISHED";
+    private static final String CANCELLED = "CANCELLED";
+    private static final String REFINED = "REFINED";
 
     /**
      * Attributes
@@ -22,11 +25,12 @@ public class UserStory implements Entity<UserStory> {
     private UsPriority priority;
     private Description description;
     private UsHour timeEstimate;
+    private String  usStatus;
 
     private UserStory parentUserStory;
     private LocalDate usStartDate; //US started to be worked on a sprint - we were able to determine the "age/pending"
     private LocalDate usEndDate; // It means it's "done"
-    private LocalDate usCancelled; //It means it's  "cancelled"
+    private LocalDate usRefined; //It means it's  "refined"
 
 
     /**
@@ -36,16 +40,10 @@ public class UserStory implements Entity<UserStory> {
         this.userStoryID = userStoryID;
         this.priority = priority;
         this.description = description;
+        this.usStatus = OPEN;
         this.timeEstimate = timeEstimate;
     }
 
-
-    /**
-     * Constructor User Story Refined
-     **/
-    public UserStory(UserStory parentUserStory) {
-        this.userStoryID = new UserStoryID(parentUserStory.userStoryID.toString() + " - Refined");
-    }
 
     /**
      * Update Methods
@@ -58,9 +56,30 @@ public class UserStory implements Entity<UserStory> {
         this.timeEstimate = usHour;
     }
 
+    public void startUserStory() {
+        this.usStartDate = LocalDate.now();
+    }
+
+    public void finishUserStory() {
+        this.usEndDate = LocalDate.now();
+        this.usStatus = FINISHED;
+    }
+
+    public void cancelUserStory() {
+        this.usEndDate = LocalDate.now();
+        this.usStatus = CANCELLED;
+    }
+
+    public void refinedUs() {
+        this.usRefined = LocalDate.now();
+        this.usStatus = REFINED;
+    }
+
+    public void assignParentUserStory(UserStory parent) {this.parentUserStory = parent;}
+
 
     /**
-     * Methods has - used in scrum board
+     * Validate methods - used in scrum board
      */
     public boolean hasCode(UserStoryID idUserStory) {
         return this.userStoryID.equals(idUserStory);

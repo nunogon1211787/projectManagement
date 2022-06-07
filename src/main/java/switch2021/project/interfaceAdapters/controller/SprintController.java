@@ -1,13 +1,16 @@
 package switch2021.project.interfaceAdapters.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import switch2021.project.dtoModel.dto.ErrorMessage;
-import switch2021.project.dtoModel.dto.NewSprintDTO;
-import switch2021.project.dtoModel.dto.OutputSprintDTO;
+import switch2021.project.dtoModel.dto.*;
 import switch2021.project.applicationServices.service.SprintService;
+import switch2021.project.entities.valueObjects.vos.UserStoryID;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -30,7 +33,7 @@ public class SprintController {
         ErrorMessage message = new ErrorMessage();
         if(dto.name == null || dto.name.isEmpty() || dto.projectID == null
                 || dto.projectID.isEmpty()) {
-            message.errorMessage = "Needs to provide Sprint Name or Project ID.";
+            message.errorMessage = "Must provide Sprint Name or Project ID.";
             return new ResponseEntity<>(message, HttpStatus.NOT_ACCEPTABLE);}
 
         OutputSprintDTO outPutSprintDTO;
@@ -42,6 +45,51 @@ public class SprintController {
         }
         return new ResponseEntity<>(outPutSprintDTO, HttpStatus.CREATED);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Object> addUserStoryToSprintBacklog(@PathVariable("id") String id,
+                                                              @RequestBody UserStoryIdDTO UsIdDto) {
+        ErrorMessage message = new ErrorMessage();
+        OutputSprintDTO sprintDTO;
+
+        try {
+            sprintDTO = sprintService.addUserStoryToSprintBacklog(id, UsIdDto);
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(sprintDTO, HttpStatus.OK);
+    }
+
+
+    /**
+     * Find All Sprints
+     */
+
+    @GetMapping
+    public ResponseEntity<Object> showSprints(){
+
+        CollectionModel<OutputSprintDTO> result;
+
+        try {
+            result = CollectionModel.of(sprintService.showAllSprints());
+
+            if(result.getContent().isEmpty()) {
+                ErrorMessage message = new ErrorMessage();
+                message.errorMessage = "Was not created any sprint yet!";
+                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
 }
 
 

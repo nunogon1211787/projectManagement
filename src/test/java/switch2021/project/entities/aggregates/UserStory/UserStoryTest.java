@@ -76,20 +76,16 @@ class UserStoryTest {
         when(timeEstimate.getUsHours()).thenReturn(5.0);
         //Act
         UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
-        userStory.setUsStartDate(LocalDate.now());
-        userStory.setUsEndDate(LocalDate.now());
-        userStory.setUsCancelled(LocalDate.now());
-        userStory.setParentUserStory(userStory);
+            userStory.refinedUs();
+
         //Assert
         assertEquals(1, userStory.getPriority().getPriorityUs());
         assertEquals("Make mock test", userStory.getDescription().getText());
         assertEquals(5.0, userStory.getTimeEstimate().getUsHours());
-        assertEquals(LocalDate.now(), userStory.getUsCancelled());
-        assertEquals(LocalDate.now(), userStory.getUsEndDate());
-        assertEquals(LocalDate.now(), userStory.getUsStartDate());
-        assertEquals(userStory, userStory.getParentUserStory());
-
-
+//        assertEquals(LocalDate.now(), userStory.getUsCancelled());
+//        assertEquals(LocalDate.now(), userStory.getUsEndDate());
+//        assertEquals(LocalDate.now(), userStory.getUsStartDate());
+//        assertEquals(userStory.getUserStoryID().getUsTitle(), userStory.getParentUserStory());
     }
 
     @Test

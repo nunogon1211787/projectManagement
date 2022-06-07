@@ -7,6 +7,7 @@ import switch2021.project.utils.ValueObject;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
+import java.util.Locale;
 import java.util.Objects;
 
 /**

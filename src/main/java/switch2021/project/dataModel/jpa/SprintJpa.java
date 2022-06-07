@@ -16,6 +16,10 @@ import java.util.List;
 @NoArgsConstructor
 public class SprintJpa {
     @EmbeddedId
+    @AttributeOverrides({
+            @AttributeOverride(name = "projectID", column = @Column(name = "ProjectID")),
+            @AttributeOverride(name = "sprintName.text", column = @Column(name = "SprintName"))
+    })
     private SprintID id;
     private String startDate;
     private String endDate;
@@ -26,6 +30,6 @@ public class SprintJpa {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.uSOfSprintJpaList = new ArrayList<>();
+        this.uSOfSprintJpaList = new ArrayList<UserStoryOfSprintJpa>();
     }
 }

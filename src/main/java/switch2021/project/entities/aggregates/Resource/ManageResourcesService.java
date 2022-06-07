@@ -72,6 +72,5 @@ public class ManageResourcesService {
         }
 
         return resourceProjects;
-
     }
 }

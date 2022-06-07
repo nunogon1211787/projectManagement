@@ -27,7 +27,7 @@ public class Project {
     private ProjectID projectCode;
     private Description projectName;
     private Description description;
-    private Typology typology;//TypologyID!!!!
+    private TypologyID typologyId;
     private ProjectStatusEnum projectStatus;
     private Customer customer;
     private BusinessSector businessSector;

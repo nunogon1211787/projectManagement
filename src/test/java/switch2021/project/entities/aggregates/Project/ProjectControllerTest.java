@@ -13,6 +13,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import switch2021.project.dtoModel.dto.ProjectDTO;
+import switch2021.project.dtoModel.dto.TypologyDTO;
+import switch2021.project.entities.aggregates.Typology.Typology;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -35,6 +37,9 @@ public class ProjectControllerTest {
     @Test
     void shouldReturnNewProjectAndOk() throws Exception {
         ProjectDTO projectDTO = new ProjectDTO();
+        TypologyDTO typologyDTO = new TypologyDTO();
+
+        typologyDTO.description = "fixed cost";
 
         projectDTO.projectName = "name";
         projectDTO.description = "description";
@@ -43,6 +48,16 @@ public class ProjectControllerTest {
         projectDTO.sprintDuration = "22";
         projectDTO.numberOfSprints = "33";
         projectDTO.budget = "11";
+        projectDTO.typology= "Fixed cost";
+        projectDTO.customer= "customer";
+
+        MvcResult resulttypo = mockMvc
+                .perform(MockMvcRequestBuilders.post("/typologies")
+                                 .contentType("application/json")
+                                 .content(objectMapper.writeValueAsString(typologyDTO))
+                                 .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andReturn();
 
         MvcResult result = mockMvc
                 .perform(MockMvcRequestBuilders.post("/projects")

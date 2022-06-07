@@ -16,9 +16,9 @@ class _TypologyIDTest {
         Description des = mock(Description.class);
         TypologyID id = new TypologyID(des);
         //Act
-        when(des.getText()).thenReturn("Test");
+        when(des.getText()).thenReturn("test");
         Description id_des = id.getDescription();
-        String expected_des = "Test";
+        String expected_des = "test";
         //Assert
         assertEquals(expected_des, id_des.getText());
     }
