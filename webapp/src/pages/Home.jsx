@@ -1,6 +1,9 @@
-export function Home(){
+import { Box, Heading } from "grommet";
 
-    return (
-        <h1>Welcome to Beaver APP</h1>
-    )
+export function Home() {
+  return (
+    <Box fill align="center" justify="center">
+      <Heading>Welcome to Beaver APP</Heading>
+    </Box>
+  );
 }

@@ -4,6 +4,7 @@ import Form from "../components/Form";
 import Table from "../components/Table";
 import AppContext from "../context/AppContext";
 import { navToForm } from "../context/Actions";
+import { Box } from "grommet";
 
 const postBody = {
   description: "",
@@ -23,9 +24,11 @@ export default function CreateUserProfile() {
   if (table) {
     return (
       <>
-        <h1>Profiles</h1>
-        <Table collections="profiles" />
-        <Button name="Create Profile" function={buttonNavigate} />
+        <Box fill align="center" justify="center">
+          <h1>Profiles</h1>
+          <Table collections="profiles" />
+          <Button name="Create Profile" function={buttonNavigate} />
+        </Box>
       </>
     );
   } else {

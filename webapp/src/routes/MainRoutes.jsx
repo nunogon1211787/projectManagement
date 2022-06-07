@@ -1,25 +1,106 @@
-import React from 'react';
-import { Route, Routes } from "react-router-dom";
-import CreateUserStory from '../pages/CreateUserStory';
-import CreateProfile from '../pages/CreateProfile';
-import CreateTypology from '../pages/CreateTypology';
-import CreateProject from '../pages/CreateProject';
-import { Home } from '../pages/Home';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import CreateProject from "../pages/CreateProject";
+import CreateUserStory from "../pages/CreateUserStory";
+import CreateProfile from "../pages/CreateProfile";
+import CreateTypology from "../pages/CreateTypology";
+import { Home } from "../pages/Home";
+import {
+  Projects,
+  OrderedList,
+  UserAdd,
+  Tasks,
+  History,
+  FingerPrint,
+  Services,
+  Group,
+  Grommet as GrommetIcon,
+} from "grommet-icons";
+
+import { Box, Grommet } from "grommet";
+
+import { theme } from "../theme";
+import { Sidebar } from "../components";
+
+const userSession = {
+  user: {
+    name: "Alan Souza",
+    thumbnail: "//s.gravatar.com/avatar/b226da5c619b18b44eb95c30be393953?s=80",
+  },
+  items: [
+    {
+      label: "Logout",
+      href: "#",
+    },
+  ],
+};
+
+const items = [
+  {
+    label: "Projects",
+    Icon: Projects,
+    path: "/projects",
+  },
+  {
+    label: "Users",
+    Icon: Group,
+    path: "/users",
+  },
+  {
+    label: "User Stories",
+    Icon: OrderedList,
+    path: "/userstories",
+  },
+  {
+    label: "Resources",
+    Icon: UserAdd,
+    path: "/resources",
+  },
+  {
+    label: "Sprints",
+    Icon: History,
+    path: "/sprints",
+  },
+  {
+    label: "Tasks",
+    Icon: Tasks,
+    path: "/tasks",
+  },
+  {
+    label: "Profiles",
+    Icon: FingerPrint,
+    path: "/profiles",
+  },
+  {
+    label: "Typologies",
+    Icon: Services,
+    path: "/typologies",
+  },
+];
 
 function MainRoute() {
   return (
-    // <Router>
-      <div>
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="userstories" element={<CreateUserStory />} />
-            <Route path="profiles" element={<CreateProfile />} />
-            <Route path="typologies" element={<CreateTypology />} />
-            <Route path="projects" element={<CreateProject />} />
-        </Routes>
-      </div>
-    // </Router>
-
+    <Router>
+      <Grommet theme={theme} full>
+        <Box direction="row" fill>
+          <Sidebar
+            appIcon={<GrommetIcon color="brand" />}
+            appName="Beaver App"
+            items={items}
+            userSession={userSession}
+          />
+          <Box flex>
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/userstories" component={CreateUserStory} />
+              <Route path="/profiles" component={CreateProfile} />
+              <Route path="/typologies" component={CreateTypology} />
+              <Route path="/projects" component={CreateProject} />
+            </Switch>
+          </Box>
+        </Box>
+      </Grommet>
+    </Router>
   );
 }
 
