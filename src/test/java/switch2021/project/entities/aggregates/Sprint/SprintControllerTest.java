@@ -1,7 +1,7 @@
 package switch2021.project.entities.aggregates.Sprint;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -14,7 +14,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import switch2021.project.dtoModel.dto.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -31,6 +32,7 @@ public class SprintControllerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
     }
+
 
     @Test
     void shouldReturnNewProjectAndOk() throws Exception {
@@ -96,7 +98,7 @@ public class SprintControllerTest {
         UserStoryIdDTO userStoryIdDTO = new UserStoryIdDTO();
         TypologyDTO typologyDTO = new TypologyDTO();
 
-        typologyDTO.description = "fixed cost";
+        typologyDTO.description = "fixed cost2";
 
 
         userStoryIdDTO.projectID = "Project_2022_1";
@@ -113,7 +115,7 @@ public class SprintControllerTest {
         projectDTO.sprintDuration = "22";
         projectDTO.numberOfSprints = "33";
         projectDTO.budget = "11";
-        projectDTO.typology = "fixed cost";
+        projectDTO.typology = "fixed cost2";
         projectDTO.customer = "customer";
 
         MvcResult resulttypo = mockMvc
