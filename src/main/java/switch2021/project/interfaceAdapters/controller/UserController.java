@@ -58,7 +58,6 @@ public class UserController {
 
         try {
             outputDTO = userService.findUserById(id);
-            outputDTO.add(linkTo(methodOn(UserController.class).getUser(outputDTO.email)).withSelfRel());
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();

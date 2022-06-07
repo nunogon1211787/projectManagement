@@ -7,34 +7,13 @@ import { navToForm } from "../context/Actions";
 import { Box } from "grommet";
 
 const postBody = {
-  projectName: "",
-  description: "",
-  businessSector: "",
-  typology: "",
-  customer: "",
-  startDate: "",
-  endDate: "",
-  numberOfSprints: "",
-  budget: "",
-  projectStatus: "",
-  sprintDuration: "",
+  projectID: "",
+  name: "",
 };
 
-const inputTypes = [
-  "text",
-  "text",
-  "text",
-  "text",
-  "text",
-  "date",
-  "date",
-  "number",
-  "number",
-  "text",
-  "number",
-];
+const inputTypes = ["text", "text"];
 
-export default function CreateProject() {
+export default function CreateSprint() {
   const { state, dispatch } = useContext(AppContext);
   const { navigation } = state;
   const { table, form } = navigation;
@@ -47,9 +26,9 @@ export default function CreateProject() {
     return (
       <>
         <Box fill align="center" justify="center">
-          <h1>Projects</h1>
-          <Table collections="projects" />
-          <Button name="Create Project" function={buttonNavigate} />
+          <h1>Sprints</h1>
+          <Table collections="sprints" />
+          <Button name="Create Sprint" function={buttonNavigate} />
         </Box>
       </>
     );
@@ -58,7 +37,7 @@ export default function CreateProject() {
       return (
         <>
           <Box fill align="center" justify="center">
-            <Form label={postBody} rules={inputTypes} collections="projects" />
+            <Form label={postBody} rules={inputTypes} collections="sprints" />
           </Box>
         </>
       );

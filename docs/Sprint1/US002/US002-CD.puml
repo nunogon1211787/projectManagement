@@ -1,63 +1,132 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-hide circle
 skinparam classAttributeIconSize 0
 
-title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
+title US002 - As Non-Registered User, I want to activate a just registered user account
 
-class CreateUserStoryUI {
+skinparam classAttributeIconSize 0
 
+'''''''''''''''''''''''''''''''
+package "Infrastructure" <<Rectangle>> #lightblue  {
+package "Route"{
+    class "UserRoute" as route << Component >>
+    }
+
+package "Persistence" {
+    interface "IUserJPARepository" as iUserRepositoryJPA << Interface >>
+    }
+}
+'''''''''''''''''''''''''''''''
+package "Interface Adapter" <<Rectangle>> #lightgreen {
+
+  package "Controllers" <<Folder>>{
+    class "UserController" as ctrl << Component >> {
+    +activateUser(idDTO)
+    }
+  }
+  package "Repositories" <<Folder>>{
+    class "UserRepository" as UserRepo << Repository >> {
+    + findUserByID(userID)
+    + update(opUser)
+    }
+  }
 }
 
-class CreateUserStoryController {
-    +getProjectListByUserEmail(String email)
-    +getProjectByCode(String code)
-    +createUserStory(status, priority, description)
+package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
+  package "App Service" <<Folder>>{
+    class "UserService" as service << Component >> {
+    +createAndSaveSystemUser(NewUserInfoDTO)
+    }
+  }
+  package "Repositories Interface" <<Folder>>{
+    interface "IUserRepo" as iUserRepo << Interface >>{
+    + findUserByID(userID)
+    + update(opUser)
+    }
+  }
+}
+'''''''''''''''''''''''''''''''
+package "DTO" <<Rectangle>> {
+  package "IDDTO" <<Folder>>{
+    class "idDTO" as idDto << Component >> {
+    - id : String
+    }
+  }
+
+  package "OutputUserDTO" <<Folder>>{
+    class "OutputUserDTO" as outDto << Component >> {
+    - userName : String
+    - email : String
+    - function : String
+    - photo : String
+    - isActive : String
+    - assignedIDProfiles : String []
+    }
+  }
+
+  package "UserMapper" <<Folder>>{
+    class "UserMapper" as mapper << Component >> {
+    + toDto(savedUser)
+    }
+  }
 }
 
-class Company {
-    +getProjectStore()
+package "Data Model" <<Rectangle>>{
+package "Assembler" as generalAssember {
+    class "UserJPAAssembler" as assembler <<Component>>{
+    +toDomain(foundUserJPA)
+    }
+    }
+package "JPA" as generalJPA {
+    class "UserJPA" as jpa {
+    }
+    }
 }
+'''''''''''''''''''''''''''''''
+package "Domain" <<Rectangle>> #burlywood{
+  package "UserAggregate" as SUAggregate <<Folder>>{
+    class "User" as user << Root >> {
+    - userName : Name
+    - photo : Photo
+    - encryptedPassword : Description
+    - function : Function
+    - isActive : boolean
+    - requestedProfiles : List<Request>
+    + SystemUser(systemUserID)
+    }
+  }
 
-class ProjectStore {
-+getProjectListByUserEmail(String email)
-+getProjectByCode(String code)
+  package "Value Object" as valueObject <<Folder>>{
+    class "UserID" as SUID << Value Object >> {
+    -email : Email
+    +SystemUserID(email)
+    }
+
 }
+'''''''''''''''''''''''''''''''
+Class UserRepo implements iUserRepo
 
-class Project {
--code : String
--productBacklog : ProductBacklog
-+getUserStoryStore()
-}
+route..d->ctrl
+UserRepo..>iUserRepositoryJPA
 
-class ProductBacklog {
--userStoryList : List<UserStory>
-+createUserStory(status, priority, description)
-+isValideUserStory(status, priority, description)
-+saveUserStory(us)
-+validateUserStory(us)
-}
+ctrl-d[hidden]->iUserRepo
+ctrl..d->service
 
-class UserStory {
-- userStoryStatus : UserStoryStatus
-- priority : int
-- description : String
-- id_UserStory : int
-- parentUserStory : UserStory
-+UserStory(status, priority,description)
-}
+UserRepo "1"*-"*" user
+UserRepo-d[hidden]->iUserRepo
 
-CreateUserStoryUI ..> CreateUserStoryController
+service..u>iUserRepo
+service..r>mapper
+service..r>idDto
+mapper..d>outDto
 
-CreateUserStoryController ..> Company
-CreateUserStoryController ..> ProjectStore
-CreateUserStoryController ..> Project
-CreateUserStoryController ..> ProductBacklog
+user "1"-d>"1"SUID: is identified by
 
-Company "1" o-- "1" ProjectStore: has
-ProjectStore "1" *-- "0..*" Project: has
-Project "1" -> "1" ProductBacklog
-ProductBacklog "1" -> "0..*" UserStory
+
+UserRepo .down.> jpa
+UserRepo .down.> assembler
+
+
 
 @enduml
