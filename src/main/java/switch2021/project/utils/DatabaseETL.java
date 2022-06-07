@@ -15,7 +15,10 @@ import switch2021.project.interfaceAdapters.controller.UserProfileController;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -110,22 +113,21 @@ public class DatabaseETL {
 
                 String projectName = row.getCell(1).getStringCellValue();
                 String description = row.getCell(2).getStringCellValue();
-                String business_sector = row.getCell(3).getStringCellValue();
-                String typologyID = row.getCell(4).getStringCellValue();
+                String businessSector = row.getCell(3).getStringCellValue();
+                String typology = row.getCell(4).getStringCellValue();
                 String customer = row.getCell(5).getStringCellValue();
-                Date startDate = row.getCell(6).getDateCellValue();
-                Double numberOfSprints = row.getCell(8).getNumericCellValue();
-                Double budget = row.getCell(9).getNumericCellValue();
-                Double sprintDuration = row.getCell(11).getNumericCellValue();
+                //String startDate = row.getCell(6).getStringCellValue();
+                String numberOfSprints = row.getCell(8).getStringCellValue();
+                String budget = row.getCell(9).getStringCellValue();
+                String sprintDuration = row.getCell(11).getStringCellValue();
+                String populateTypology = row.getCell(18).getStringCellValue();
 
-                String typology = row.getCell(18).getStringCellValue();
-
-                TypologyDTO typologyDTO = new TypologyDTO(typology);
+                TypologyDTO typologyDTO = new TypologyDTO(populateTypology);
                 typologyController.createTypology(typologyDTO);
 
-                /*ProjectDTO projectDTO = new ProjectDTO(projectName, description, business_sector, typologyID,
-                        customer, startDate, numberOfSprints, budget, sprintDuration);
-                projectController.createProject(projectDTO);*/
+                ProjectDTO projectDTO = new ProjectDTO(projectName, description, businessSector, "2021-03-01",
+                        numberOfSprints, budget, sprintDuration, typology, customer);
+                projectController.createProject(projectDTO);
             }
         }
     }

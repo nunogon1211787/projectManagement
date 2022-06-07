@@ -55,7 +55,7 @@ public class ProjectService {
 
         Project newProject;
 
-        if (iTypologyRepo.existsByTypologyId(new TypologyID(new Description(projDTO.typology.toLowerCase(Locale.ROOT))))) {
+        if (iTypologyRepo.existsByTypologyId(new TypologyID(new Description(projDTO.typology/*.toLowerCase(Locale.ROOT)*/)))) {
             newProject = iProjectFactory.createProject(projDTO);
             newProject.setProjectCode(new ProjectID("Project_" + LocalDate.now().getYear() + "_" + (projRepo.findAll().size() + 1)));
         }else {
