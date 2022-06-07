@@ -10,7 +10,11 @@ export default function Table(props) {
 
   //GET REQUEST TO API
   useEffect(() => {
-    const url = `${URL_API}/${props.collections}`;
+    let url =  `${URL_API}/${props.collections}`;
+
+   if(props.query !== undefined){
+     url = `${URL_API}/${props.collections}?${props.query}`
+   }
     const request = {};
     fetchCollections(url, request, dispatch);
     // eslint-disable-next-line

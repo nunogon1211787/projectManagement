@@ -28,7 +28,12 @@ public class ResourceFactoryReeng implements IResourceFactoryReeng {
     public Resource createResource(CreateResourceDTO resourceDTO){
 
         ResourceIDReeng resourceId = resourceID.create(resourceDTO.systemUserID, resourceDTO.projectId, resourceDTO.startDate);
-        ProjectRoleReeng projRole = ProjectRoleReeng.valueOf(resourceDTO.projectRole);
+        ProjectRoleReeng projRole;
+        if(resourceDTO.projectRole != null) {
+            projRole = ProjectRoleReeng.valueOf(resourceDTO.projectRole);
+        } else {
+            projRole = ProjectRoleReeng.TeamMember;
+        }
         CostPerHour coPeHo = costPerHour.create(resourceDTO.costPerHour);
         PercentageOfAllocation percOfAll = percentageOfAllocation.create(resourceDTO.percentageOfAllocation);
 

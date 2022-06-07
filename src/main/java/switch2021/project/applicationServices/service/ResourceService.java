@@ -58,8 +58,8 @@ public class ResourceService {
         if (!checkAllocation(dto)) {
             throw new IllegalArgumentException(("Is not valid to create - Allocation)"));
         }
-//        else if (!checkProjectRole(dto)) {
-//            throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));}
+        else if (!checkProjectRole(dto)) {
+            throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));}
             else {
             Resource newResource = iResourceFactory.createResource(dto);
 
