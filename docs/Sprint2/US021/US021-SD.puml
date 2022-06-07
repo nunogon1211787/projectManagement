@@ -19,7 +19,7 @@ participant "exception: \nException" as exc
 participant "updateDto : \n OutputUserStoryDTO" as outDto
 participant "response: \nResponseEntity" as json
 
-[o-> Route: Asks for a specific user story
+[o-> Route: Asks for change the priority of a user story
 Route -> Ctrl: estimateEffort(updateDTO)
 Ctrl -> Service: timeEffortEstimation(id, updateDTO)
 Service -> Service: createUserStoryIdByStringInputFromController(id)

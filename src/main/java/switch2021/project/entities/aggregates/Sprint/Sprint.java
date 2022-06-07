@@ -7,8 +7,10 @@ import switch2021.project.entities.valueObjects.vos.UserStoryOfSprint;
 import switch2021.project.utils.Entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -45,14 +47,15 @@ public class Sprint implements Entity<Sprint> {
     }
 
     public boolean hasSprintID(String sprID) {
-         return Objects.equals(this.sprintID.toString(), sprID);}
+        return Objects.equals(this.sprintID.toString(), sprID);
+    }
 
 
     /**
      * Check if this Sprint is the current Sprint
      */
     public boolean isCurrentSprint() {
-        if(this.endDate == null) {
+        if (this.endDate == null) {
             throw new NullPointerException();
         }
         return ((this.startDate.isBefore(endDate) || this.startDate.equals(endDate))
@@ -64,17 +67,26 @@ public class Sprint implements Entity<Sprint> {
      */
 
     public List<UserStoryOfSprint> getScrumBoardUserStoriesOfSprint() {
-        return this.scrumBoard.getUserStoriesOfSprint();
+        Optional<ScrumBoard> scrumBoard = Optional.ofNullable(this.scrumBoard);
+
+        List<UserStoryOfSprint> userStoryOfSprintList = new ArrayList<>();
+
+        if (scrumBoard.isPresent()) {
+            userStoryOfSprintList = scrumBoard.get().getUserStoriesOfSprint();
+        }
+        return userStoryOfSprintList;
     }
 
-/*    public UserStory getUsByIdFromScrumBoard(UserStoryID id){
-        return this.scrumBoard.getUserStory(id);
-    }
 
- */
+    public boolean saveUsInScrumBoard(UserStoryOfSprint userStoryOfSprint) {
+        Optional<ScrumBoard> optional = Optional.ofNullable(this.scrumBoard);
 
-    public boolean saveUsInScrumBoard(UserStoryOfSprint userStoryOfSprint){
-        scrumBoard.getUserStoriesOfSprint().add(userStoryOfSprint);
+        if (optional.isPresent()) {
+            scrumBoard.getUserStoriesOfSprint().add(userStoryOfSprint);
+        } else
+            scrumBoard = new ScrumBoard(new ArrayList<>());
+            scrumBoard.getUserStoriesOfSprint().add(userStoryOfSprint);
+
         return true;
     }
 

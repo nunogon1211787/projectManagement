@@ -3,10 +3,8 @@ package switch2021.project.dataModel.assembler;
 import org.springframework.stereotype.Component;
 import switch2021.project.dataModel.jpa.UserStoryJpa;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
-import switch2021.project.entities.valueObjects.vos.Description;
-import switch2021.project.entities.valueObjects.vos.UsHour;
-import switch2021.project.entities.valueObjects.vos.UsPriority;
-import switch2021.project.entities.valueObjects.vos.UserStoryID;
+import switch2021.project.entities.valueObjects.vos.*;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,24 +18,25 @@ public class UserStoryJpaAssembler {
         String description = userStory.getDescription().getText();
         double timeEstimate = userStory.getTimeEstimate().getUsHours();
 
+        String usStatus = userStory.getUsStatus();
         String startDate = null;
-        UserStoryJpa parentJpa = null;
+        UserStoryJpa parent = null;
         String endDate = null;
-        String cancelled = null;
+        String refined = null;
 
-        if(!(userStory.getParentUserStory() == null)) {
-            parentJpa = toData(userStory.getParentUserStory());
+        if(userStory.getParentUserStory() != null) {
+            parent = toData(userStory.getParentUserStory());
         }
-        if (!(userStory.getUsStartDate() == null)) {
+        if (userStory.getUsStartDate() != null) {
             startDate = userStory.getUsStartDate().toString();
         }
-        if(!(userStory.getUsEndDate() == null)) {
+        if(userStory.getUsEndDate() != null) {
             endDate = userStory.getUsEndDate().toString();
         }
-        if(!(userStory.getUsCancelled() == null)) {
-            cancelled = userStory.getUsCancelled().toString();
+        if(userStory.getUsRefined() != null) {
+            refined = userStory.getUsRefined().toString();
         }
-        return new UserStoryJpa(id, priority, description, timeEstimate, parentJpa, startDate, endDate, cancelled);
+        return new UserStoryJpa(id, priority, description, timeEstimate, usStatus, parent, startDate, endDate, refined);
     }
 
     public UserStory toDomain(UserStoryJpa usJpaSaved) {
@@ -46,24 +45,26 @@ public class UserStoryJpaAssembler {
         Description description = new Description(usJpaSaved.getDescription());
         UsHour timeEstimate = new UsHour(usJpaSaved.getTimeEstimate());
 
+        String usStatus = usJpaSaved.getUsStatus();
         LocalDate startDate = null;
         UserStory parent = null;
         LocalDate endDate = null;
-        LocalDate cancelled = null;
+        LocalDate refined = null;
 
-        if(!(usJpaSaved.getParentUserStory() == null)) {
+        if(usJpaSaved.getParentUserStory() != null) {
             parent = toDomain(usJpaSaved.getParentUserStory());
         }
-        if (!(usJpaSaved.getStartDate() == null)) {
+        if (usJpaSaved.getStartDate() != null) {
             startDate = LocalDate.parse(usJpaSaved.getStartDate());
         }
-        if(!(usJpaSaved.getEndDate() == null)) {
+        if(usJpaSaved.getEndDate() != null) {
             endDate = LocalDate.parse(usJpaSaved.getEndDate());
         }
-        if(!(usJpaSaved.getCancelled() == null)) {
-            cancelled = LocalDate.parse(usJpaSaved.getCancelled());
+        if(usJpaSaved.getRefined() != null) {
+            refined = LocalDate.parse(usJpaSaved.getRefined());
         }
-        return new UserStory(id, priority, description, timeEstimate, parent, startDate, endDate, cancelled);
+        return new UserStory(id, priority, description, timeEstimate, usStatus,
+                parent, startDate, endDate, refined);
     }
 
     public List<UserStory> toDomain (List<UserStoryJpa> userStoriesJpa) {

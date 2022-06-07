@@ -12,14 +12,23 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Table(name = "userStoriesOfSprint")
 public class UserStoryOfSprintJpa implements Serializable {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "projectID", column = @Column(name = "ProjectID")),
+            @AttributeOverride(name = "usTitle", column = @Column(name = "UsTitle"))
+    })
+    private UserStoryID userStoryId;
+    private String status;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "projectId", insertable = false, updatable = false)
     @JoinColumn(name= "text", insertable = false, updatable = false)
     private SprintJpa sprintJpa;
-    @Embedded
-    private UserStoryID userStoryId;
-    private String status;
 
     public UserStoryOfSprintJpa(UserStoryID userStoryId, String status, SprintJpa sprintJpa) {
         this.userStoryId = userStoryId;

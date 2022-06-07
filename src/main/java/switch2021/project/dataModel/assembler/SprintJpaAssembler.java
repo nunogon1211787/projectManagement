@@ -8,32 +8,45 @@ import switch2021.project.entities.valueObjects.vos.UserStoryOfSprint;
 import switch2021.project.entities.valueObjects.vos.enums.UserStoryOfSprintStatus;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class SprintJpaAssembler {
 
     public SprintJpa toData(Sprint sprint) {
+
         String startDate = null;
         String endDate = null;
+
         if (!(sprint.getStartDate() == null)) {
             startDate = sprint.getStartDate().toString();
         }
+
         if (!(sprint.getEndDate() == null)) {
             endDate = sprint.getEndDate().toString();
         }
+
         SprintJpa sprintJpa = new SprintJpa(sprint.getSprintID(), startDate, endDate);
 
-        List<UserStoryOfSprint> uSOfSprintList = sprint.getScrumBoardUserStoriesOfSprint();
-        for (UserStoryOfSprint uSOfSprint : uSOfSprintList) {
-            String status = null;
-            if (!(uSOfSprint.getUserStoryOfSprintStatus() == null)) {
-                status = uSOfSprint.getUserStoryOfSprintStatus().toString();
+        List<UserStoryOfSprint> UsOfSprintList = sprint.getScrumBoardUserStoriesOfSprint();
+        List<UserStoryOfSprintJpa> UsOfSprintListJpa = new ArrayList<>();
+
+        if (!UsOfSprintList.isEmpty()) {
+            for (UserStoryOfSprint uSOfSprint : UsOfSprintList) {
+                String status = null;
+
+                if (!(uSOfSprint.getUserStoryOfSprintStatus() == null)) {
+                    status = uSOfSprint.getUserStoryOfSprintStatus().toString();
+                }
+                UsOfSprintListJpa.add( new UserStoryOfSprintJpa(uSOfSprint.getUserStoryId(),
+                                                                                     status,
+                                                                                     sprintJpa));
+                sprintJpa.setUSOfSprintJpaList(UsOfSprintListJpa);
             }
-            UserStoryOfSprintJpa userStoryOfSprintJpa = new UserStoryOfSprintJpa(uSOfSprint.getUserStoryId(), status,
-                    sprintJpa);
-            sprintJpa.getUSOfSprintJpaList().add(userStoryOfSprintJpa);
         }
+
         return sprintJpa;
     }
 
@@ -55,7 +68,10 @@ public class SprintJpaAssembler {
                 status = UserStoryOfSprintStatus.valueOf(uSOfSprintJpa.getStatus());
             }
             UserStoryOfSprint userStoryOfSprint = new UserStoryOfSprint(uSOfSprintJpa.getUserStoryId(), status);
-            sprint.getScrumBoardUserStoriesOfSprint().add(userStoryOfSprint);
+
+            if (!sprint.getScrumBoardUserStoriesOfSprint().isEmpty()) {
+                sprint.getScrumBoardUserStoriesOfSprint().add(userStoryOfSprint);
+            }
         }
         return sprint;
     }
