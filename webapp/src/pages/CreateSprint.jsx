@@ -4,10 +4,11 @@ import Form from "../components/Form";
 import Table from "../components/Table";
 import AppContext from "../context/AppContext";
 import { navToForm } from "../context/Actions";
+import { Box } from "grommet";
 
 const postBody = {
   projectID: "",
-  name: ""
+  name: "",
 };
 
 const inputTypes = ["text", "text"];
@@ -24,16 +25,20 @@ export default function CreateSprint() {
   if (table) {
     return (
       <>
-        <h1>Sprints</h1>
-        <Table collections="sprints" />
-        <Button name="Create Sprint" function={buttonNavigate} />
+        <Box fill align="center" justify="center">
+          <h1>Sprints</h1>
+          <Table collections="sprints" />
+          <Button name="Create Sprint" function={buttonNavigate} />
+        </Box>
       </>
     );
   } else {
     if (form) {
       return (
         <>
-          <Form label={postBody} rules={inputTypes} collections="sprints" />
+          <Box fill align="center" justify="center">
+            <Form label={postBody} rules={inputTypes} collections="sprints" />
+          </Box>
         </>
       );
     }

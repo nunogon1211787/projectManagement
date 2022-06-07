@@ -4,6 +4,7 @@ import Form from "../components/Form";
 import Table from "../components/Table";
 import AppContext from "../context/AppContext";
 import { navToForm } from "../context/Actions";
+import { Box } from "grommet";
 
 const postBody = {
   projectName: "",
@@ -45,16 +46,20 @@ export default function CreateProject() {
   if (table) {
     return (
       <>
-        <h1>Projects</h1>
-        <Table collections="projects" />
-        <Button name="Create Project" function={buttonNavigate} />
+        <Box fill align="center" justify="center">
+          <h1>Projects</h1>
+          <Table collections="projects" />
+          <Button name="Create Project" function={buttonNavigate} />
+        </Box>
       </>
     );
   } else {
     if (form) {
       return (
         <>
-          <Form label={postBody} rules={inputTypes} collections="projects" />
+          <Box fill align="center" justify="center">
+            <Form label={postBody} rules={inputTypes} collections="projects" />
+          </Box>
         </>
       );
     }

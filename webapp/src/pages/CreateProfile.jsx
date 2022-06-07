@@ -35,7 +35,9 @@ export default function CreateUserProfile() {
     if (form) {
       return (
         <>
-          <Form label={postBody} rules={inputTypes} collections="profiles" />
+          <Box fill align="center" justify="center">
+            <Form label={postBody} rules={inputTypes} collections="profiles" />
+          </Box>
         </>
       );
     }
