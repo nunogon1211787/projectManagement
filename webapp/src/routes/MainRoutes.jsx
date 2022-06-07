@@ -5,6 +5,8 @@ import CreateUserStory from "../pages/CreateUserStory";
 import CreateProfile from "../pages/CreateProfile";
 import CreateTypology from "../pages/CreateTypology";
 import { Home } from "../pages/Home";
+import CreateSprint from '../pages/CreateSprint';
+import RegisterUser from '../pages/RegisterUser';
 import {
   Projects,
   OrderedList,
@@ -96,6 +98,8 @@ function MainRoute() {
               <Route path="/profiles" component={CreateProfile} />
               <Route path="/typologies" component={CreateTypology} />
               <Route path="/projects" component={CreateProject} />
+                <Route path="sprints" component={CreateSprint} />
+                <Route path="users" component={RegisterUser} />
             </Switch>
           </Box>
         </Box>

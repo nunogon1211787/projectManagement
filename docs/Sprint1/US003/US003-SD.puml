@@ -1,6 +1,6 @@
 @startuml
 
-title US003 - "As Visitor, I want to send a request to the administrator to assign him/her a given profile."
+title US003 - As Visitor, I want to send a request to the administrator to assign him/her a given profile
 
 autoactivate on
 autonumber

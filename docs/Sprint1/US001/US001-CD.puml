@@ -7,7 +7,13 @@ skinparam classAttributeIconSize 0
 
 '''''''''''''''''''''''''''''''
 package "Infrastructure" <<Rectangle>> #lightblue  {
-class "RegisterUserRoute" as route << Component >>
+package "Route"{
+    class "RegisterUserRoute" as route << Component >>
+    }
+
+package "Persistence" {
+    interface "IUserRepositoryJPA" as iUserRepositoryJPA << Interface >>
+    }
 }
 '''''''''''''''''''''''''''''''
 package "Interface Adapter" <<Rectangle>> #lightgreen {
@@ -18,7 +24,7 @@ package "Interface Adapter" <<Rectangle>> #lightgreen {
     }
   }
   package "Repositories" <<Folder>>{
-    class "UserRepo" as SUrepo << Repository >> {
+    class "UserRepository" as SUrepo << Repository >> {
     + save(newUser)
     + existsByEmail(email)
     }
@@ -29,7 +35,7 @@ package "Interface Adapter" <<Rectangle>> #lightgreen {
 '''''''''''''''''''''''''''''''
 package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
   package "App Service" <<Folder>>{
-    class "RegisterUserService" as service << Component >> {
+    class "UserService" as service << Component >> {
     +createAndSaveSystemUser(NewUserInfoDTO)
     }
   }
@@ -37,12 +43,6 @@ package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
     interface "IUserRepo" as ISUrepo << Interface >>{
     + save(newUser)
     + existsByEmail(email)
-    }
-  }
-
-  package "Factory Interface" <<Folder>>{
-    interface "IUserFactory" as ISUFact << Interface >>{
-    +createSystemUser(NewUserInfoDTO)
     }
   }
 }
@@ -65,15 +65,29 @@ package "DTO" <<Rectangle>> {
     - email : String
     - function : String
     - photo : String
-    - isActive : boolean
+    - isActive : String
+    - assignedIDProfiles : String []
     }
   }
 
   package "UserMapper" <<Folder>>{
     class "UserMapper" as mapper << Component >> {
-    + toDto(newUser)
+    + toDto(savedUser)
     }
   }
+}
+
+package "Data Model" <<Rectangle>>{
+package "Assembler" as generalAssember {
+    class "UserAssembler" as assembler <<Component>>{
+    +toData (user)
+    +toDomain(userJPA)
+    }
+    }
+package "JPA" as generalJPA {
+    class "UserJPA" as jpa {
+    }
+    }
 }
 '''''''''''''''''''''''''''''''
 package "Domain" <<Rectangle>> #burlywood{
@@ -98,6 +112,12 @@ package "Domain" <<Rectangle>> #burlywood{
     +createSystemUser(NewUserInfoDTO)
     }
   }
+  package "Factory Interface" as factoryInterface <<Folder>>{
+    interface "IUserFactory" as IUSerFactory <<Factory Interface>> {
+    +createSystemUser(NewUserInfoDTO)
+    }
+  }
+
   package "Value Object" as valueObject <<Folder>>{
     class "UserID" as SUID << Value Object >> {
     -email : Email
@@ -111,21 +131,21 @@ package "Domain" <<Rectangle>> #burlywood{
 }
 '''''''''''''''''''''''''''''''
 Class SUrepo implements ISUrepo
-Class SUFact implements ISUFact
+Class SUFact implements IUSerFactory
 
 route..d->ctrl
 route--[hidden]d->SUrepo
+SUrepo..>iUserRepositoryJPA
 
 ctrl-d[hidden]->ISUrepo
-ctrl-d[hidden]->ISUFact
+ctrl-d[hidden]->IUSerFactory
 ctrl..d->service : uses
-'ctrl..l>json: uses
-ctrl-d[hidden]->ISUFact
+ctrl-d[hidden]->IUSerFactory
 
 SUrepo "1"*-"*" SU
 SUrepo-d[hidden]->ISUrepo
 
-service..d>ISUFact : uses
+service..d>IUSerFactory : uses
 service..u>ISUrepo: uses
 service..r>mapper : uses
 service..r>infoDto : uses
@@ -135,11 +155,13 @@ SUFact..r>SU : uses
 SUFact..d>UPID : uses
 SUFact..d>SUID : uses
 
-'UP "1"-d>"1"UPID: is identified by
 SU "1"-d>"1"SUID: is identified by
 SU "*"-d>"1..*"UPID: is assigned
 factory-r[hidden]>SUAggregate
 factory-l[hidden]>valueObject
+
+SUrepo .right.> jpa
+SUrepo .right.> assembler
 
 
 

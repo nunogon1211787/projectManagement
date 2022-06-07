@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title System Sequence Diagram of US001 - As Non-Registered User, I want to register as an application user
+title US001 - As Non-Registered User, I want to register as an application user
 
 autoactivate on
 autonumber

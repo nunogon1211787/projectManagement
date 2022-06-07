@@ -6,12 +6,17 @@ import AppContext from "../context/AppContext";
 import { navToForm } from "../context/Actions";
 
 const postBody = {
-  description: "",
+  userName: "",
+  email: "",
+  function: "",
+  password: "",
+  passwordConfirmation: "",
+  photo: ""
 };
 
-const inputTypes = ["text"];
+const inputTypes = ["text", "text", "text", "text", "text", "text"];
 
-export default function CreateTypology() {
+export default function RegisterUser() {
   const { state, dispatch } = useContext(AppContext);
   const { navigation } = state;
   const { table, form } = navigation;
@@ -23,16 +28,16 @@ export default function CreateTypology() {
   if (table) {
     return (
       <>
-        <h1>Typologies</h1>
-        <Table collections="typologies" />
-        <Button name="Create Typology" function={buttonNavigate} />
+        <h1>User</h1>
+        <Table collections="users" />
+        <Button name="Register User" function={buttonNavigate} />
       </>
     );
   } else {
     if (form) {
       return (
         <>
-          <Form label={postBody} rules={inputTypes} collections="typologies" />
+          <Form label={postBody} rules={inputTypes} collections="users" />
         </>
       );
     }
