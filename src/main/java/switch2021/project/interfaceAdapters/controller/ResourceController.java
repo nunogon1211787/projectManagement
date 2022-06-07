@@ -61,6 +61,12 @@ public class ResourceController {
 
 //    }
 
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Object> deleteAResource(@PathVariable String id){
+//        ErrorMessage message = new ErrorMessage();
+//        Resource
+//        return new ResponseEntity<>(message, HttpStatus.OK);
+//    }
 
 }
 
