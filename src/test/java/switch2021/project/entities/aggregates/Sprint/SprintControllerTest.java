@@ -67,6 +67,7 @@ public class SprintControllerTest {
 
     }
 
+/*
 @Test //TODO Missing Get Method in controller
     void shouldReturnNotFound() throws Exception {
 
@@ -74,7 +75,7 @@ public class SprintControllerTest {
 
         //GET sprints/{id}
 
-/*        MvcResult result = mockMvc
+        MvcResult result = mockMvc
                 .perform(MockMvcRequestBuilders.get("/sprints/" + generatedCode)
                                  .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
@@ -82,8 +83,9 @@ public class SprintControllerTest {
 
         String resultContent = result.getResponse().getContentAsString();
         assertNotNull(resultContent);
-        assertEquals("{\"errorMessage\":\"Project does not exist\"}", resultContent);*/
+        assertEquals("{\"errorMessage\":\"Project does not exist\"}", resultContent);
     }
+*/
 
 
     @Test
