@@ -3,13 +3,19 @@ package switch2021.project.entities.aggregates.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import switch2021.project.applicationServices.service.UserService;
+import switch2021.project.dtoModel.dto.NewUserInfoDTO;
+import switch2021.project.dtoModel.dto.OutputUserDTO;
 import switch2021.project.entities.valueObjects.vos.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(SpringExtension.class)
+//@ExtendWith(SpringExtension.class)
+@SpringBootTest
 class UserTest {
 
     @Mock
@@ -26,6 +32,9 @@ class UserTest {
     UserProfileID userProfileIDDouble;
     @Mock
     Description descriptionDouble;
+
+    @Autowired
+    UserService registerUserService;
 
     @Test
     void itShouldCreateASystemUser() {
@@ -46,15 +55,33 @@ class UserTest {
     void itShouldNotCreateASystemUser() {
         //S.U.T. {SystemUser}
         assertThrows(IllegalArgumentException.class, () -> {
-        //Arrange
-        when(passwordDouble.getPwd()).thenReturn("Qwerty_1");
-        when(userProfileIDDouble.getUserProfileName()).thenReturn(descriptionDouble);
-        when(descriptionDouble.getText()).thenReturn("regular");
-        //Act
-        new User(idDouble, nameDouble, photoDouble, passwordDouble, passwordDouble,
-                functionDouble, userProfileIDDouble);
+            //Arrange
+            when(passwordDouble.getPwd()).thenReturn("Qwerty_1");
+            when(userProfileIDDouble.getUserProfileName()).thenReturn(descriptionDouble);
+            when(descriptionDouble.getText()).thenReturn("regular");
+            //Act
+            new User(idDouble, nameDouble, photoDouble, passwordDouble, passwordDouble,
+                    functionDouble, userProfileIDDouble);
         });
     }
+
+    @Test
+    void itShouldRegisterAUser() throws Exception {
+        //Arrange
+        NewUserInfoDTO dto = new NewUserInfoDTO();
+        dto.userName = "manuel";
+        dto.email = "manuel@beaver.com";
+        dto.password = "Qwerty_1";
+        dto.passwordConfirmation = "Qwerty_1";
+        dto.function = "tester";
+        dto.photo = "photo.png";
+        //Act
+        OutputUserDTO outDTO = registerUserService.createAndSaveUser(dto);
+        //Assert
+        assertEquals("manuel@beaver.com", outDTO.email);
+        assertEquals("False", outDTO.isActive);
+    }
+}
 /*
    @Test
     public void verifyEmail() {
@@ -1119,4 +1146,3 @@ class UserTest {
         assertEquals(1, testUser.getRequestedProfiles().size());
         assertEquals(1, testUser.getAssignedProfiles().size());
     }*/
-}

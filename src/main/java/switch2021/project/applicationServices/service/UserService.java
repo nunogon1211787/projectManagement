@@ -221,6 +221,7 @@ public class UserService {
         } else {
             return null;
         }
+        //user.activateStatus();
         userRepo.update(user);
         return userMapper.toDto(user);
     }
