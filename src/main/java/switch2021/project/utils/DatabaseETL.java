@@ -213,4 +213,30 @@ public class DatabaseETL {
             }
         }
     }*/
+    @PostConstruct
+    public void initUserStoriesTable () throws Exception{
+        // Load file from resources
+        InputStream is = cpr.getInputStream();
+        // Open Excel file
+        XSSFWorkbook workbook = new XSSFWorkbook(is);
+        // Get first Excel sheet aka Users
+        XSSFSheet worksheet = workbook.getSheetAt(7);
+
+        for (int index = 0; index < worksheet.getPhysicalNumberOfRows(); index++) {
+            if (index > 0) {
+                XSSFRow row = worksheet.getRow(index);
+
+
+                String projectID = row.getCell(0).getStringCellValue();
+                String title = row.getCell(1).getStringCellValue();
+                int priority = (int) row.getCell(5).getNumericCellValue();
+                String description = row.getCell(2).getStringCellValue();
+                double timeEstimate = row.getCell(7).getNumericCellValue();
+
+                UserStoryDTO userStoryDTO = new UserStoryDTO(projectID, title, priority, description, timeEstimate);
+                userStoryController.createAndSaveUserStory(userStoryDTO);
+            }
+        }
+    }
+
 }
