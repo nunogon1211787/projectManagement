@@ -27,7 +27,7 @@ public class ProjectDTO {
     public String sprintDuration;
 
     public ProjectDTO(String projectName, String description, String businessSector, String startDate,
-                      String numberOfSprints, String budget, String sprintDuration) {
+                      String numberOfSprints, String budget, String sprintDuration, String typology, String customer) {
         this.projectName = projectName;
         this.description = description;
         this.businessSector = businessSector;
@@ -35,5 +35,7 @@ public class ProjectDTO {
         this.numberOfSprints = numberOfSprints;
         this.budget = budget;
         this.sprintDuration = sprintDuration;
+        this.typology = typology;
+        this.customer = customer;
     }
 }
