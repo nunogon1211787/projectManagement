@@ -1,22 +1,24 @@
 package switch2021.project.applicationServices.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.applicationServices.iRepositories.ISprintRepo;
 import switch2021.project.applicationServices.iRepositories.IUserStoryRepo;
 import switch2021.project.dataModel.assembler.SprintJpaAssembler;
 import switch2021.project.dataModel.jpa.SprintJpa;
-import switch2021.project.dtoModel.dto.NewSprintDTO;
-import switch2021.project.dtoModel.dto.OutputSprintDTO;
-import switch2021.project.dtoModel.dto.UserStoryIdDTO;
+import switch2021.project.dtoModel.dto.*;
 import switch2021.project.dtoModel.mapper.SprintMapper;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
+import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.factories.factoryInterfaces.ISprintFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ISprintIDFactory;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.UserStoryOfSprintStatus;
 import switch2021.project.persistence.SprintJpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -88,5 +90,14 @@ public class SprintService {
         }
 
         return outputSprintDTO;
+    }
+
+    /**
+     * Find All Sprints
+     */
+
+    public CollectionModel<OutputSprintDTO> showAllSprints() {
+        List<Sprint> allSprints = sprintRepo.findAllSprints();
+        return sprintMapper.toCollectionDto(allSprints);
     }
 }
