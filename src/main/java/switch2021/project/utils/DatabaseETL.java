@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import switch2021.project.dtoModel.dto.*;
-import switch2021.project.interfaceAdapters.controller.ProjectController;
-import switch2021.project.interfaceAdapters.controller.TypologyController;
-import switch2021.project.interfaceAdapters.controller.UserController;
-import switch2021.project.interfaceAdapters.controller.UserProfileController;
+import switch2021.project.interfaceAdapters.controller.*;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -33,6 +30,8 @@ public class DatabaseETL {
     TypologyController typologyController;
     @Autowired
     ProjectController projectController;
+    @Autowired
+    UserStoryController userStoryController;
 
     ClassPathResource cpr = new ClassPathResource("data.xlsx");
 
@@ -128,6 +127,32 @@ public class DatabaseETL {
                 ProjectDTO projectDTO = new ProjectDTO(projectName, description, businessSector, "2021-03-01",
                         numberOfSprints, budget, sprintDuration, typology, customer);
                 projectController.createProject(projectDTO);
+            }
+        }
+    }
+
+    @PostConstruct
+    public void initUserStoriesTable () throws Exception{
+        // Load file from resources
+        InputStream is = cpr.getInputStream();
+        // Open Excel file
+        XSSFWorkbook workbook = new XSSFWorkbook(is);
+        // Get first Excel sheet aka Users
+        XSSFSheet worksheet = workbook.getSheetAt(7);
+
+        for (int index = 0; index < worksheet.getPhysicalNumberOfRows(); index++) {
+            if (index > 0) {
+                XSSFRow row = worksheet.getRow(index);
+
+
+                String projectID = row.getCell(0).getStringCellValue();
+                String title = row.getCell(1).getStringCellValue();
+                int priority = (int) row.getCell(5).getNumericCellValue();
+                String description = row.getCell(2).getStringCellValue();
+                double timeEstimate = row.getCell(7).getNumericCellValue();
+
+                UserStoryDTO userStoryDTO = new UserStoryDTO(projectID, title, priority, description, timeEstimate);
+                userStoryController.createAndSaveUserStory(userStoryDTO);
             }
         }
     }
