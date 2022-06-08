@@ -1,7 +1,7 @@
-/*
 package switch2021.project.entities.aggregates.Sprint;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -12,10 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import switch2021.project.dtoModel.dto.NewSprintDTO;
-import switch2021.project.dtoModel.dto.ProjectDTO;
-import switch2021.project.dtoModel.dto.UserStoryDTO;
-import switch2021.project.dtoModel.dto.UserStoryIdDTO;
+import switch2021.project.dtoModel.dto.*;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -35,6 +32,7 @@ public class SprintControllerTest {
     public void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
     }
+
 
     @Test
     void shouldReturnNewProjectAndOk() throws Exception {
@@ -59,7 +57,6 @@ public class SprintControllerTest {
 
         //GET sprints/{id}
 
-*/
 /*        MvcResult result2 = mockMvc
                 .perform(MockMvcRequestBuilders.get("/sprints/" + "Project_2022_1")
                                  .accept(MediaType.APPLICATION_JSON))
@@ -68,12 +65,12 @@ public class SprintControllerTest {
 
         String resultContent2 = result2.getResponse().getContentAsString();
         assertNotNull(resultContent2);
-        assertTrue(resultContent2.contains("Project_2022_1"));*//*
+        assertTrue(resultContent2.contains("Project_2022_1"));*/
 
     }
 
-    */
-/*@Test //TODO Missing Get Method in controller
+/*
+@Test //TODO Missing Get Method in controller
     void shouldReturnNotFound() throws Exception {
 
         String generatedCode = RandomStringUtils.randomAlphanumeric(10);
@@ -89,7 +86,8 @@ public class SprintControllerTest {
         String resultContent = result.getResponse().getContentAsString();
         assertNotNull(resultContent);
         assertEquals("{\"errorMessage\":\"Project does not exist\"}", resultContent);
-    }*//*
+    }
+*/
 
 
     @Test
@@ -98,6 +96,10 @@ public class SprintControllerTest {
                 "free", 2, "Teste", 12);
 
         UserStoryIdDTO userStoryIdDTO = new UserStoryIdDTO();
+        TypologyDTO typologyDTO = new TypologyDTO();
+
+        typologyDTO.description = "fixed cost2";
+
 
         userStoryIdDTO.projectID = "Project_2022_1";
         userStoryIdDTO.title = "As Queen i want to break free";
@@ -113,6 +115,16 @@ public class SprintControllerTest {
         projectDTO.sprintDuration = "22";
         projectDTO.numberOfSprints = "33";
         projectDTO.budget = "11";
+        projectDTO.typology = "fixed cost2";
+        projectDTO.customer = "customer";
+
+        MvcResult resulttypo = mockMvc
+                .perform(MockMvcRequestBuilders.post("/typologies")
+                                 .contentType("application/json")
+                                 .content(objectMapper.writeValueAsString(typologyDTO))
+                                 .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andReturn();
 
         MvcResult projeResult = mockMvc
                 .perform(MockMvcRequestBuilders.post("/projects")
@@ -147,7 +159,7 @@ public class SprintControllerTest {
 
 
         MvcResult result2 = mockMvc
-                .perform(MockMvcRequestBuilders.post("/sprints/Project_2022_1_Sprint")
+                .perform(MockMvcRequestBuilders.patch("/sprints/Project_2022_1_Sprint")
                                  .contentType("application/json")
                                  .content(objectMapper.writeValueAsString(userStoryIdDTO))
                                  .accept(MediaType.APPLICATION_JSON))
@@ -160,4 +172,3 @@ public class SprintControllerTest {
         assertTrue(resultContent.contains("\"projectID\":\"Project_2022_1\""));
     }
 }
-*/

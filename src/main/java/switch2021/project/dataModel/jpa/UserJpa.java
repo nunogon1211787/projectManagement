@@ -1,6 +1,7 @@
 package switch2021.project.dataModel.jpa;
 
 import lombok.*;
+import switch2021.project.entities.valueObjects.vos.Request;
 import switch2021.project.entities.valueObjects.vos.UserID;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
 import javax.persistence.*;
@@ -27,7 +28,7 @@ public class UserJpa {
     private List<UserProfileID> assignedIDProfiles;
     @ElementCollection
     @CollectionTable(name = "requests")
-    private List<RequestJpa> requests;
+    private List<Request/*Jpa*/> requests;
 
     public UserJpa(UserID email, String userName, String function, String photo, String password,
                    String isActive, List<UserProfileID> assignedIDProfiles) {

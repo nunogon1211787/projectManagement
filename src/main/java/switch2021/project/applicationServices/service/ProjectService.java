@@ -3,24 +3,27 @@ package switch2021.project.applicationServices.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
+import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.applicationServices.iRepositories.IResourceRepo;
 import switch2021.project.applicationServices.iRepositories.ITypologyRepo;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
-import switch2021.project.dtoModel.dto.*;
-import switch2021.project.entities.aggregates.Typology.Typology;
-import switch2021.project.entities.valueObjects.vos.*;
-import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
-import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
-import switch2021.project.applicationServices.iRepositories.IProjectRepo;
+import switch2021.project.dtoModel.dto.DateDTO;
+import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
+import switch2021.project.dtoModel.dto.OutputProjectDTO;
+import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.mapper.ProjectMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManageResourcesService;
 import switch2021.project.entities.aggregates.Resource.Resource;
+import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
+import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 
@@ -50,9 +53,14 @@ public class ProjectService {
 
     public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) throws Exception {
 
-        Project newProject = iProjectFactory.createProject(projDTO);
+        Project newProject;
 
-        newProject.setProjectCode(new ProjectID("Project_"+ LocalDate.now().getYear() + "_" + (projRepo.findAll().size()+1)));
+        if (iTypologyRepo.existsByTypologyId(new TypologyID(new Description(projDTO.typology/*.toLowerCase(Locale.ROOT)*/)))) {
+            newProject = iProjectFactory.createProject(projDTO);
+            newProject.setProjectCode(new ProjectID("Project_" + LocalDate.now().getYear() + "_" + (projRepo.findAll().size() + 1)));
+        }else {
+            throw new Exception("Typology does not exist");
+        }
 
         Optional<Project> savedProject = projRepo.save(newProject);
 
@@ -83,11 +91,11 @@ public class ProjectService {
             proj.setSprintDuration(new SprintDuration(Integer.parseInt(editProjectInfoDTO.sprintDuration)));
 
             proj.setProjectStatus(ProjectStatusEnum.valueOf(editProjectInfoDTO.projectStatus));
-            /*proj.setCustomer(new Customer(editProjectInfoDTO.customer, "email@email.pt", 123456789));*/
+            proj.setCustomer(new Customer(editProjectInfoDTO.customer));
             proj.setEndDate(LocalDate.parse(editProjectInfoDTO.endDate));
 
-            if(iTypologyRepo.existsByTypologyId(new TypologyID(new Description(editProjectInfoDTO.typology)))) {
-                proj.setTypology(new Typology(new TypologyID(new Description(editProjectInfoDTO.typology))));
+            if (iTypologyRepo.existsByTypologyId(new TypologyID(new Description(editProjectInfoDTO.typology)))) {
+                proj.setTypologyId(new TypologyID(new Description(editProjectInfoDTO.typology)));
             }
 
             Optional<Project> savedProject = projRepo.save(proj);

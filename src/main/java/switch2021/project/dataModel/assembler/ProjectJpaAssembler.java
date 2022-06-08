@@ -35,8 +35,8 @@ public class ProjectJpaAssembler {
         if (!(project.getEndDate() == null)) {
             endDate = project.getEndDate().toString();
         }
-        if (!(project.getTypology() == null)) {
-            typology = project.getTypology().getId_description().getDescription().getText();
+        if (!(project.getTypologyId() == null)) {
+            typology = project.getTypologyId().getDescription().getText();
         }
         if (!(project.getCustomer() == null)) {
             customer = project.getCustomer().getCustomerName().getText();
@@ -62,7 +62,7 @@ public class ProjectJpaAssembler {
         Budget budget = new Budget(projectJpa.getBudget());
 
         LocalDate endDate = null;
-        Typology typology = null;
+        TypologyID typology = null;
         Customer customer = null;
         ProjectStatusEnum status = null;
 
@@ -70,10 +70,10 @@ public class ProjectJpaAssembler {
             endDate = LocalDate.parse(projectJpa.getEndDate());
         }
         if (!(projectJpa.getTypology() == null)) {
-            typology = new Typology(new TypologyID(new Description(projectJpa.getTypology())));
+            typology = new TypologyID(new Description(projectJpa.getTypology()));
         }
         if (!(projectJpa.getCustomer() == null)) {
-            customer = new Customer(projectJpa.getCustomer(), "email@email.pt", 123456789);//TODO Change here
+            customer = new Customer(projectJpa.getCustomer());
         }
         if (!(projectJpa.getStatus() == null)) {
             status = ProjectStatusEnum.valueOf(projectJpa.getStatus());

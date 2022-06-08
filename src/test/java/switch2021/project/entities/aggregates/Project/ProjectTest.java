@@ -22,7 +22,7 @@ class ProjectTest {
     @Mock
     Description projectName;
     @Mock
-    Typology typology;
+    TypologyID typology;
     @Mock
     Customer customer;
     @Mock
@@ -156,9 +156,9 @@ class ProjectTest {
         //Act
         Project project = new Project(projectName, description, businessSector, startDate,
                                       numberOfSprints, sprintDuration, budget);
-        project.setTypology(typology);
+        project.setTypologyId(typology);
         //Assert
-        assertEquals(typology, project.getTypology());
+        assertEquals(typology, project.getTypologyId());
     }
 
     @Test

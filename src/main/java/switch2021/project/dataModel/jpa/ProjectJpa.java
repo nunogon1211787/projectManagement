@@ -26,7 +26,7 @@ public class ProjectJpa {
     private double budget;
     private String endDate;
     private String typology;
-    private String customer;  //TODO Change to OneToOne mapping since customer has other attributes
+    private String customer;
     private String status;
 
 

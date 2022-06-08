@@ -43,15 +43,13 @@ public class ProjectFactory implements switch2021.project.entities.factories.fac
         SprintDuration sprintDuration = sprintDurationF.create(Integer.parseInt(projectDTO.sprintDuration));
         Budget budget = budgetF.create(Integer.parseInt(projectDTO.budget));
 
-        if (date.isBefore(LocalDate.now())) {
-            throw new IllegalArgumentException("Project can´t start before today's date");
-        }
-
         Project project = new Project(name, description, businessSector, date, numberOfSprints,
                                       sprintDuration, budget);
 
-        if (projectDTO.getTypology() != null)
-            project.setTypology(new Typology(new TypologyID(new Description(projectDTO.getTypology()))));
+        project.setTypologyId((new TypologyID(new Description(projectDTO.getTypology()))));
+
+        project.setCustomer((new Customer(projectDTO.getCustomer())));
+
         if (projectDTO.getEndDate() != null)
             project.setEndDate(LocalDate.parse(projectDTO.getEndDate()));
 

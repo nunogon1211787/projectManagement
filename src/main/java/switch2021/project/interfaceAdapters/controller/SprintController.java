@@ -46,7 +46,7 @@ public class SprintController {
         return new ResponseEntity<>(outPutSprintDTO, HttpStatus.CREATED);
     }
 
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<Object> addUserStoryToSprintBacklog(@PathVariable("id") String id,
                                                               @RequestBody UserStoryIdDTO UsIdDto) {
         ErrorMessage message = new ErrorMessage();
