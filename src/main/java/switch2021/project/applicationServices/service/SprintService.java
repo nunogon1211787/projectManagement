@@ -64,9 +64,7 @@ public class SprintService {
     public OutputSprintDTO addUserStoryToSprintBacklog(String id, UserStoryIdDTO userStoryIdDTO) throws Exception {
         OutputSprintDTO outputSprintDTO = new OutputSprintDTO();
 
-        SprintID sprintID = new SprintID();
-        sprintID.setProjectID(new ProjectID("Project_2022_1")); //TODO hardcoded id
-        sprintID.setSprintName(new Description("Sprint"));
+        SprintID sprintID = new SprintID(id);
 
         Optional<Sprint> sprint = sprintRepo.findBySprintID(sprintID);
 
