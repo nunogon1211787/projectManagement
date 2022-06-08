@@ -7,10 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dtoModel.dto.*;
 import switch2021.project.applicationServices.service.SprintService;
-import switch2021.project.entities.valueObjects.vos.UserStoryID;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -25,7 +22,7 @@ public class SprintController {
     private SprintService sprintService;
 
     /**
-     * Methods
+     * Create Sprint
      **/
 
     @PostMapping
@@ -45,6 +42,10 @@ public class SprintController {
         }
         return new ResponseEntity<>(outPutSprintDTO, HttpStatus.CREATED);
     }
+
+    /**
+     * Add US to Sprint Backlog
+     **/
 
     @PostMapping("/{id}")
     public ResponseEntity<Object> addUserStoryToSprintBacklog(@PathVariable("id") String id,
@@ -88,6 +89,48 @@ public class SprintController {
         }
 
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    /**
+     * Find Sprint By ID
+     **/
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getSprintByID (@PathVariable("id") String id) {
+
+        OutputSprintDTO outputSprintDTO;
+
+        try {
+            outputSprintDTO = sprintService.findSprintByID(id);
+        } catch (Exception exception) {
+            ErrorMessage msg = new ErrorMessage();
+            msg.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(outputSprintDTO, HttpStatus.OK);
+    }
+
+
+    /**
+     * Delete Sprint
+     */
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteSprint (@PathVariable String id) {
+
+        ResponseMessage responseMessage = new ResponseMessage();
+
+        try {
+            sprintService.deleteSprint(id);
+            responseMessage.responseMessage = "Sprint Was delete successfully";
+        } catch (Exception exception) {
+            ErrorMessage msg = new ErrorMessage();
+            msg.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(responseMessage, HttpStatus.OK);
+
     }
 
 }

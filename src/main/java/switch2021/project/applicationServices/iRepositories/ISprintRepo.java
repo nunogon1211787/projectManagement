@@ -3,7 +3,6 @@ package switch2021.project.applicationServices.iRepositories;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.SprintID;
-
 import java.util.List;
 import java.util.Optional;
 
