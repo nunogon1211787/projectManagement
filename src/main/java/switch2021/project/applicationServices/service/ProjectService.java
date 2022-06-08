@@ -178,7 +178,7 @@ public class ProjectService {
 
     public void deleteProjectRequest(ProjectID id) throws Exception {
         if (!projRepo.deleteByProjectID(id)) {
-            throw new Exception("Project does not exist");
+            throw new Exception("Sprint does not exist");
         }
     }
 }

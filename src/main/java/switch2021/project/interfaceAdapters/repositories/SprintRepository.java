@@ -11,7 +11,6 @@ import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.SprintID;
 import switch2021.project.persistence.SprintJpaRepository;
 
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,7 @@ public class SprintRepository implements ISprintRepo {
         SprintJpa sprintJpa = assembler.toData(newSprint);
         Optional<Sprint> sprint = Optional.empty();
 
-        if (!sprintJpaRepository.existsById(sprintJpa.getId())) {
+        if (!sprintJpaRepository.existsById(sprintJpa.getSprintId())) {
             SprintJpa sprintJpaSaved = sprintJpaRepository.save(sprintJpa);
             sprint = Optional.of(assembler.toDomain(sprintJpaSaved));
         }
@@ -145,5 +144,6 @@ public class SprintRepository implements ISprintRepo {
         }
         return msg;
     }
+
 
 }
