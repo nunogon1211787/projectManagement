@@ -159,7 +159,7 @@ public class SprintControllerTest {
 
 
         MvcResult result2 = mockMvc
-                .perform(MockMvcRequestBuilders.patch("/sprints/Project_2022_1_Sprint")
+                .perform(MockMvcRequestBuilders.post("/sprints/Project_2022_1_Sprint")
                                  .contentType("application/json")
                                  .content(objectMapper.writeValueAsString(userStoryIdDTO))
                                  .accept(MediaType.APPLICATION_JSON))
@@ -169,6 +169,6 @@ public class SprintControllerTest {
         String result2Content = result2.getResponse().getContentAsString();
         assertNotNull(result2Content);
 
-        assertTrue(resultContent.contains("\"projectID\":\"Project_2022_1\""));
+        assertTrue(result2Content.contains("User story added to sprintbacklog"));
     }
 }

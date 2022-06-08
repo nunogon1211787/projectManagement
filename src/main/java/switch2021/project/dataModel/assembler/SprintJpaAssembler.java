@@ -10,7 +10,6 @@ import switch2021.project.entities.valueObjects.vos.enums.UserStoryOfSprintStatu
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class SprintJpaAssembler {
@@ -59,7 +58,7 @@ public class SprintJpaAssembler {
         if (!(sprintJpaSaved.getEndDate() == null)) {
             endDate = LocalDate.parse(sprintJpaSaved.getEndDate());
         }
-        Sprint sprint = new Sprint(sprintJpaSaved.getId(), startDate, endDate);
+        Sprint sprint = new Sprint(sprintJpaSaved.getSprintId(), startDate, endDate);
 
         List<UserStoryOfSprintJpa> uSOfSprintJpaList = sprintJpaSaved.getUSOfSprintJpaList();
         for (UserStoryOfSprintJpa uSOfSprintJpa : uSOfSprintJpaList) {

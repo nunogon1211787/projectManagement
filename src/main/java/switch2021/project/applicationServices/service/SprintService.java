@@ -1,22 +1,20 @@
 package switch2021.project.applicationServices.service;
 
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.applicationServices.iRepositories.ISprintRepo;
 import switch2021.project.applicationServices.iRepositories.IUserStoryRepo;
-import switch2021.project.dataModel.assembler.SprintJpaAssembler;
-import switch2021.project.dataModel.jpa.SprintJpa;
-import switch2021.project.dtoModel.dto.*;
+import switch2021.project.dtoModel.dto.NewSprintDTO;
+import switch2021.project.dtoModel.dto.OutputSprintDTO;
+import switch2021.project.dtoModel.dto.UserStoryIdDTO;
 import switch2021.project.dtoModel.mapper.SprintMapper;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
-import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.factories.factoryInterfaces.ISprintFactory;
-import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ISprintIDFactory;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.UserStoryOfSprintStatus;
-import switch2021.project.persistence.SprintJpaRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -66,9 +64,7 @@ public class SprintService {
     public OutputSprintDTO addUserStoryToSprintBacklog(String id, UserStoryIdDTO userStoryIdDTO) throws Exception {
         OutputSprintDTO outputSprintDTO = new OutputSprintDTO();
 
-        SprintID sprintID = new SprintID();
-        sprintID.setProjectID(new ProjectID("Project_2022_1")); //TODO hardcoded id
-        sprintID.setSprintName(new Description("Sprint"));
+        SprintID sprintID = new SprintID(id);
 
         Optional<Sprint> sprint = sprintRepo.findBySprintID(sprintID);
 
@@ -81,6 +77,8 @@ public class SprintService {
         if (sprint.isPresent() && userStory.isPresent()) {
             sprint.get().saveUsInScrumBoard(new UserStoryOfSprint(userStory.get().getUserStoryID(),
                                                                   UserStoryOfSprintStatus.Todo));
+
+            sprintRepo.deleteSprint(sprint.get().getSprintID());
 
             Optional<Sprint> savedSprint = sprintRepo.save(sprint.get());
 
@@ -102,4 +100,25 @@ public class SprintService {
         List<Sprint> allSprints = sprintRepo.findAllSprints();
         return sprintMapper.toCollectionDto(allSprints);
     }
+
+
+    public OutputSprintDTO showScrumBoard(String id) {
+
+        String[] values = id.split("_");
+        ProjectID projectID = new ProjectID(values[0] + values[1] + values[2]);
+        Description sprintName = new Description((values[3]));
+
+        SprintID sprintID = new SprintID(projectID, sprintName);
+
+        Optional<Sprint> sprint = sprintRepo.findBySprintID(sprintID);
+
+        return null;
+    }
+
+    public void deleteSprint(SprintID id) throws Exception {
+        if (!sprintRepo.deleteSprint(id)) {
+            throw new Exception("Project does not exist");
+        }
+    }
+
 }

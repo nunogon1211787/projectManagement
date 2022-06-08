@@ -111,8 +111,8 @@ public class ProjectController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteProjectRequest(@PathVariable String id) {
         ErrorMessage message = new ErrorMessage();
-        String[] x = id.split("_");
-        ProjectID projID = new ProjectID(x[2]);
+//        String[] x = id.split("_");
+        ProjectID projID = new ProjectID(id);
 
         try {
             service.deleteProjectRequest(projID);
