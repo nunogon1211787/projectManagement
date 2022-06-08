@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import switch2021.project.applicationServices.iRepositories.*;
 import switch2021.project.dtoModel.dto.OutputTaskDTO;
 import switch2021.project.dtoModel.dto.TaskDTO;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResourceIDFactory;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.factories.factoryInterfaces.ITaskFactory;
 import switch2021.project.dtoModel.mapper.TaskMapper;
@@ -13,71 +14,72 @@ import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.aggregates.Task.Task;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
-    public class TaskService {
+public class TaskService {
 
-        @Autowired
-        public ITaskFactory ITaskFactory;
+    @Autowired
+    private ITaskFactory ITaskFactory;
+    @Autowired
+    private TaskMapper taskMapper;
+    @Autowired
+    private ITaskRepo taskRepositoryInterface;
+    @Autowired
+    private IResourceRepo iResourceRepo;
+    @Autowired
+    private IResourceIDFactory resourceIDFactory;
+    @Autowired
+    private ISprintRepo iSprintRepo;
+    @Autowired
+    private IUserStoryRepo iUserStoryRepo;
 
-        @Autowired
-        public TaskMapper taskMapper;
 
-        @Autowired
-        public ITaskRepo taskRepositoryInterface;
+    /**
+     * Create and Save Task (US022)
+     */
+    public OutputTaskDTO createAndSaveTask(TaskDTO taskDTO) throws IllegalArgumentException {
+        ResourceIDReeng resId = createResourceIdByStringInputFromController(taskDTO.responsible);
+        TaskContainerID taskConId = returnTaskContainerID(taskDTO.taskContainerID);
 
-//        @Autowired
-        public IResourceRepo iResourceRepo;
-
-        @Autowired
-        public ISprintRepo iSprintRepo;
-
-        @Autowired
-        public IUserStoryRepo iUserStoryRepo;
-
-        @Autowired
-        public TaskService() {
+        if(!iResourceRepo.existsById(resId)) {
+            throw new IllegalArgumentException("This user is not associate to this project!");
         }
+        Task newTask = ITaskFactory.createTask(taskDTO, resId, taskConId);
+        Optional<Task> savedTask = taskRepositoryInterface.save(newTask);
 
-        public OutputTaskDTO createAndSaveTask(TaskDTO taskDTO) {
+        return savedTask.map(task -> taskMapper.toDto(task)).orElse(null);
+    }
 
-            String[] values = taskDTO.responsible.split("_");// user_project_startDate
 
+    /**
+     *
+     */
+    private TaskContainerID returnTaskContainerID(String taskContainerID) {
+        TaskContainerID z;
 
-            UserID sysUserID = new UserID(new Email(values[0]));
-            ProjectID projID = new ProjectID(values[1]);
-            LocalDate startDate = LocalDate.parse(values[2]);
+        UserStory y = iUserStoryRepo.findByUserStoryId(new UserStoryID(taskContainerID));
 
-            ResourceIDReeng resId = new ResourceIDReeng(sysUserID, projID, startDate);
-
-//            ResourceIDReeng resId = iResourceRepo.findById(taskDTO.responsible).getId();
-
-            TaskContainerID taskConId = returnTaskContainerID(taskDTO.taskContainerID);
-
-            Task newTask = ITaskFactory.createTask(taskDTO, resId, taskConId);
-
-            taskRepositoryInterface.save(newTask);
-
-            return taskMapper.model2Dto(newTask);
-        }
-
-        private TaskContainerID returnTaskContainerID(String taskContainerID){
-            TaskContainerID z;
-
-            Optional<UserStory> y = iUserStoryRepo.findByUserStoryId(new UserStoryID(taskContainerID));
-            if(y.isPresent()){
-                z = y.get().getUserStoryID();
-            }else{
-                Optional<Sprint> x = iSprintRepo.findBySprintID(new SprintID(taskContainerID));
-                if(x.isPresent()){
-                    z = x.get().getSprintID();
-                } else{
-                    throw new IllegalArgumentException("ID inválido");
-                }
+        if(y != null) {
+            z = y.getUserStoryID();
+        } else {
+            Optional<Sprint> x = iSprintRepo.findBySprintID(new SprintID(taskContainerID));
+            if (x.isPresent()) {
+                z = x.get().getSprintID();
+            } else {
+                throw new IllegalArgumentException("ID inválido");
             }
-            return z;
         }
+        return z;
+    }
 
+    private ResourceIDReeng createResourceIdByStringInputFromController(String id) {
+        String[] values = id.split("_");// user_project_startDate
+
+        String sysUserID = values[0];
+        String projID = values[1];
+        String startDate = values[2];
+
+        return resourceIDFactory.create(sysUserID, projID, startDate);
+    }
 }

@@ -55,23 +55,19 @@ public class UserProfileService {
      * Find a requested user profile
      */
 
-    public UserProfileDTO showUserProfileRequested(String id) throws Exception {
-
+    public UserProfileDTO showUserProfileRequested(String id) {
         UserProfileID profileId = factoryId.createUserProfileID(id);
 
         Optional<UserProfile> requested = userProfileRepositoryInterface.findByUserProfileID(profileId);
 
-        if(requested.isEmpty()){
-            throw new Exception("Profile does not exist.");
-        }
-
-        return userProfileMapper.toDto(requested.get());
+        return requested.map(userProfile -> userProfileMapper.toDto(userProfile))
+                .orElse(null);
     }
+
 
     /**
      * To edit a profile
      */
-
     public UserProfileDTO editARequestedUserProfile(String id, UserProfileDTO inDto) throws Exception {
 
         UserProfileID profileId = factoryId.createUserProfileID(id);

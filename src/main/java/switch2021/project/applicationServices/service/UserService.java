@@ -16,7 +16,6 @@ import switch2021.project.entities.valueObjects.vos.UserProfileID;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -24,7 +23,6 @@ public class UserService {
     /**
      * Attributes
      */
-
     @Autowired
     private IUserRepo userRepo;
     @Autowired
@@ -43,13 +41,11 @@ public class UserService {
      * Register User (US001)
      */
     public OutputUserDTO createAndSaveUser(NewUserInfoDTO infoDTO) throws Exception {
+        OutputUserDTO outputDTO;
         User newUser = userFactory.createUser(infoDTO);
 
-        Optional<User> savedUser = userRepo.save(newUser);
-        OutputUserDTO outputDTO;
-
-        if (savedUser.isPresent()) {
-            outputDTO = userMapper.toDto(savedUser.get());
+        if (!userRepo.existsById(newUser.getUserId())) {
+            outputDTO = userMapper.toDto(userRepo.save(newUser));
         } else {
             throw new Exception("System User Already exists!");
         }
@@ -61,9 +57,7 @@ public class UserService {
      * Find All Users
      */
     public CollectionModel<OutputUserDTO> findAllUsers() {
-
         List<User> usersList = userRepo.findAll();
-
         return userMapper.toCollectionDTO(usersList);
     }
 
@@ -71,27 +65,21 @@ public class UserService {
     /**
      * Find User, by ID
      */
-    public OutputUserDTO findUserById(String id) throws Exception {
+    public OutputUserDTO findUserById(String id) {
         UserID userID = userIDFactory.createUserID(id);
-        Optional<User> opUser = userRepo.findByUserId(userID);
 
-        if (opUser.isEmpty()) {
-            throw new Exception("User does not exists!");
-        }
-        return userMapper.toDto(opUser.get());
+        User user = userRepo.findByUserId(userID);
+
+        return userMapper.toDto(user);
     }
 
 
     /**
      * Search User By Parameters
      */
-    public List<OutputUserDTO> searchUsersByParams(SearchUserDTO inDto) {
-
+    public CollectionModel<OutputUserDTO> searchUsersByParams(SearchUserDTO inDto) {
         List<User> allFounded = new ArrayList<>();
-
         List<User> usersFounded = new ArrayList<>();
-
-        List<OutputUserDTO> usersFoundedDto = new ArrayList<>();
 
         if (!inDto.name.isEmpty() || !inDto.name.isBlank())
             allFounded.addAll(userRepo.findAllByNameContains(inDto.name));
@@ -102,7 +90,7 @@ public class UserService {
         if (!inDto.profile.isEmpty() || !inDto.profile.isBlank()) {
             UserProfileID profileId = profileIDFactory.createUserProfileID(inDto.profile);
             if (profileRepo.existsByUserProfileId(profileId)) {
-                allFounded.addAll(userRepo.findAllByUserProfileId(profileId));
+                allFounded.addAll(userRepo.findAllByUserProfileContains(profileId));
             } else {
                 throw new IllegalArgumentException("This user profile does not exist!");
             }
@@ -113,9 +101,7 @@ public class UserService {
                 usersFounded.add(user);
             }
         });
-
-        usersFounded.forEach(user -> usersFoundedDto.add(userMapper.toDto(user)));
-        return usersFoundedDto;
+        return userMapper.toCollectionDTO(usersFounded);
     }
 
 
@@ -124,21 +110,15 @@ public class UserService {
      */
     public OutputUserDTO updatePersonalData(String id, UpdateDataDTO updateDataDTO) {
         UserID userID = userIDFactory.createUserID(id);
-        Optional<User> opUser = userRepo.findByUserId(userID);
-        User user;
+        User user = userRepo.findByUserId(userID);
 
-        if (opUser.isPresent()) {
-            user = opUser.get();
-
-            if (updateDataDTO.newPassword != null && updateDataDTO.oldPassword != null) {
-                user.updatePassword(updateDataDTO.oldPassword, updateDataDTO.newPassword);
-            } else {
-                user.editPersonalData(updateDataDTO.userName, updateDataDTO.function, updateDataDTO.photo);
-            }
-            Optional<User> updatedUser = userRepo.update(user);
-            return userMapper.toDto(updatedUser.get());
-        } else
-            return null;
+        if (updateDataDTO.newPassword != null && updateDataDTO.oldPassword != null) {
+            user.updatePassword(updateDataDTO.oldPassword, updateDataDTO.newPassword);
+        } else {
+            user.editPersonalData(updateDataDTO.userName, updateDataDTO.function, updateDataDTO.photo);
+        }
+        User updatedUser = userRepo.save(user);
+        return userMapper.toDto(updatedUser);
     }
 
 
@@ -148,59 +128,47 @@ public class UserService {
     public OutputUserDTO assignUserProfile(String id, UpdateUserProfileDTO profileDTO) {
         UserID userID = userIDFactory.createUserID(id);
 
-        Optional<User> opUser = userRepo.findByUserId(userID);
-        User user;
+        User user = userRepo.findByUserId(userID);
 
-        if (opUser.isPresent()) {
-            user = opUser.get();
-
-            UserProfileID profileID = profileIDFactory.createUserProfileID(profileDTO.profileId);
-            //Validate if exist the profile
-            if(!profileRepo.existsByUserProfileId(profileID)) {
-                throw new IllegalArgumentException("This user profile does not exist!");
-            }
-            //Validate if the user has the user profile assigned
-            if(!user.hasProfile(profileID)) {
-                user.toAssignProfile(profileID);
-            } else {
-                throw new IllegalArgumentException("This user profile was already assigned!");
-            }
-            Optional<User> updatedUser = userRepo.update(user);
-            return userMapper.toDto(updatedUser.get());
-        } else
-            return null;
+        UserProfileID profileID = profileIDFactory.createUserProfileID(profileDTO.profileId);
+        //Validate if exist the profile
+        if (!profileRepo.existsByUserProfileId(profileID)) {
+            throw new IllegalArgumentException("This user profile does not exist!");
+        }
+        //Validate if the user has the user profile assigned
+        if (!user.hasProfile(profileID)) {
+            user.toAssignProfile(profileID);
+        } else {
+            throw new IllegalArgumentException("This user profile was already assigned!");
+        }
+        User updatedUser = userRepo.save(user);
+        return userMapper.toDto(updatedUser);
     }
 
     public OutputUserDTO removeUserProfile(String id, UpdateUserProfileDTO profileDTO) {
         UserID userID = userIDFactory.createUserID(id);
         UserProfileID profileID;
 
-        Optional<User> opUser = userRepo.findByUserId(userID);
-        User user;
+        User user = userRepo.findByUserId(userID);
 
-        if (opUser.isPresent()) {
-            user = opUser.get();
-
-            //Validate if the profile is Visitor, all Users must have the visitor Profile.
-            if(!profileDTO.profileId.equalsIgnoreCase("visitor")) {
-                profileID = profileIDFactory.createUserProfileID(profileDTO.profileId);
-            } else {
-                throw new IllegalArgumentException("The user profile 'Visitor' can not be removed!");
-            }
-            //Validate if exist the profile
-            if(!profileRepo.existsByUserProfileId(profileID)) {
-                throw new IllegalArgumentException("This user profile does not exist!");
-            }
-            //Validate if the user has the user profile assigned
-            if(user.hasProfile(profileID)){
-                user.removeProfile(profileID);
-            } else {
-                throw new IllegalArgumentException("This user profile was not assigned!");
-            }
-            Optional<User> updatedUser = userRepo.update(user);
-            return userMapper.toDto(updatedUser.get());
-        } else
-            return null;
+        //Validate if the profile is Visitor, all Users must have the visitor Profile.
+        if (!profileDTO.profileId.equalsIgnoreCase("visitor")) {
+            profileID = profileIDFactory.createUserProfileID(profileDTO.profileId);
+        } else {
+            throw new IllegalArgumentException("The user profile 'Visitor' can not be removed!");
+        }
+        //Validate if exist the profile
+        if (!profileRepo.existsByUserProfileId(profileID)) {
+            throw new IllegalArgumentException("This user profile does not exist!");
+        }
+        //Validate if the user has the user profile assigned
+        if (user.hasProfile(profileID)) {
+            user.removeProfile(profileID);
+        } else {
+            throw new IllegalArgumentException("This user profile was not assigned!");
+        }
+        User updatedUser = userRepo.save(user);
+        return userMapper.toDto(updatedUser);
     }
 
 
@@ -209,39 +177,24 @@ public class UserService {
      */
     public OutputUserDTO activateUser(String id) {
         UserID userID = userIDFactory.createUserID(id);
-        Optional<User> opUser = userRepo.findByUserId(userID);
-        User user;
+        User user = userRepo.findByUserId(userID);
 
-        if (opUser.isPresent()) {
-            user = opUser.get();
-        } else {
-            throw new IllegalArgumentException("This user does not exist");
+        if (!user.activateStatus()) {
+            throw new IllegalArgumentException("This user is already activated");
         }
-
-        //if (!user.activateStatus()) {
-            //throw new IllegalArgumentException("This user is already activated");
-        //}
-        user.activateStatus();
-        userRepo.update(user);
-        return userMapper.toDto(user);
+        User updatedUser = userRepo.save(user);
+        return userMapper.toDto(updatedUser);
     }
 
     public OutputUserDTO inactivateUser(String id) {
         UserID userID = userIDFactory.createUserID(id);
-        Optional<User> opUser = userRepo.findByUserId(userID);
-        User user;
+        User user = userRepo.findByUserId(userID);
 
-        if (opUser.isPresent()) {
-            user = opUser.get();
-
-            if (!user.inactivateStatus()) {
-                throw new IllegalArgumentException("This user is already inactivated");
-            }
-        } else {
-            return null;
+        if (!user.inactivateStatus()) {
+            throw new IllegalArgumentException("This user is already inactivated");
         }
-        userRepo.update(user);
-        return userMapper.toDto(user);
+        User updatedUser = userRepo.save(user);
+        return userMapper.toDto(updatedUser);
     }
 
 
@@ -252,20 +205,14 @@ public class UserService {
         UserID userID = userIDFactory.createUserID(id);
         UserProfileID profileID = profileIDFactory.createUserProfileID(requestDTO.getProfileId());
 
-        Optional<User> opUser = userRepo.findByUserId(userID);
-        User user;
+        User user = userRepo.findByUserId(userID);
 
-        if (opUser.isPresent()) {
-            user = opUser.get();
-            if (profileRepo.existsByUserProfileId(profileID)) {
-                user.createProfileRequest(profileID);
-            } else {
-                throw new IllegalArgumentException("This profile does not exist!");
-            }
+        if (profileRepo.existsByUserProfileId(profileID)) {
+            user.createProfileRequest(profileID);
         } else {
-            return false;
+            throw new IllegalArgumentException("This profile does not exist!");
         }
-        userRepo.update(user);
+        userRepo.save(user);
         return true;
     }
 
@@ -273,10 +220,8 @@ public class UserService {
     /**
      * Delete User
      */
-    public void deleteUser(String id) throws Exception {
+    public void deleteUser(String id) throws NullPointerException {
         UserID userID = userIDFactory.createUserID(id);
-        if (!userRepo.delete(userID)) {
-            throw new IllegalArgumentException("User does not exists!");
-        }
+        userRepo.delete(userID);
     }
 }

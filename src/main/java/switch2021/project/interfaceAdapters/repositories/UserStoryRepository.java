@@ -23,14 +23,15 @@ public class UserStoryRepository implements IUserStoryRepo {
 
 
     @Override
-    public Optional<UserStory> findByUserStoryId(UserStoryID userStoryID) {
-        Optional<UserStoryJpa> usJpa = jpaRepository.findById(userStoryID);
-        Optional<UserStory> result = Optional.empty();
+    public UserStory findByUserStoryId(UserStoryID userStoryID) throws NullPointerException {
+        Optional<UserStoryJpa> opUsJpa = jpaRepository.findById(userStoryID);
+        UserStory userStory = opUsJpa.map(userStoryJpa -> assembler.toDomain(userStoryJpa))
+                .orElse(null);
 
-        if (usJpa.isPresent()) {
-            result = Optional.of(assembler.toDomain(usJpa.get()));
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
         }
-        return result;
+        return userStory;
     }
 
     @Override
@@ -40,7 +41,6 @@ public class UserStoryRepository implements IUserStoryRepo {
 
     @Override
     public List<UserStory> findProductBacklog(String projectId) {
-
         List<UserStory> userStories = findAll();
         List<UserStory> produckBacklog = new ArrayList<>();
 
@@ -56,34 +56,25 @@ public class UserStoryRepository implements IUserStoryRepo {
     }
 
     @Override
-    public Optional<UserStory> save(UserStory newUserStory) {
+    public boolean existsUserStoryByID(UserStoryID id) {
+        return jpaRepository.existsById(id);
+    }
 
+    @Override
+    public UserStory save(UserStory newUserStory) {
         UserStoryJpa usJpa = assembler.toData(newUserStory);
-        Optional<UserStory> userStory = Optional.empty();
 
-        if (!jpaRepository.existsById(usJpa.getId())) {
-            UserStoryJpa usJpaSaved = jpaRepository.save(usJpa);
-            userStory = Optional.of(assembler.toDomain(usJpaSaved));
-        }
-        return userStory;
+        UserStoryJpa usJpaSaved = jpaRepository.saveAndFlush(usJpa);
+
+        return assembler.toDomain(usJpaSaved);
     }
 
     @Override
-    public Optional<UserStory> update(UserStory userStory) {
-        UserStoryJpa usJpa = assembler.toData(userStory);
+    public void deleteByUserStoryId(UserStoryID usId) throws NullPointerException {
 
-        UserStoryJpa usJpaSaved = jpaRepository.save(usJpa);
-
-        return Optional.of(assembler.toDomain(usJpaSaved));
-    }
-
-    @Override
-    public boolean deleteByUserStoryId(UserStoryID usId) {
-
-        if (jpaRepository.existsById(usId)) {
-            jpaRepository.deleteById(usId);
-            return true;
+        if (!jpaRepository.existsById(usId)) {
+            throw new NullPointerException("User Story does not exist");
         }
-        return false;
+        jpaRepository.deleteById(usId);
     }
 }

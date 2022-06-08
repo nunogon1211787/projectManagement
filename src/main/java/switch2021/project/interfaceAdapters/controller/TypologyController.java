@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dtoModel.dto.ErrorMessage;
+import switch2021.project.dtoModel.dto.ResponseMessage;
 import switch2021.project.dtoModel.dto.TypologyDTO;
 import switch2021.project.applicationServices.service.TypologyService;
 
@@ -23,49 +24,50 @@ public class TypologyController {
     @Autowired
     private TypologyService service;
 
+
     /**
      * Create a new Typology
      */
     @PostMapping
     public ResponseEntity<Object> createTypology(@RequestBody TypologyDTO inputDto) {
-        ErrorMessage message = new ErrorMessage();
+        TypologyDTO outputDto;
+
         if(inputDto.getDescription() == null || inputDto.getDescription().isEmpty()) {
+            ErrorMessage message = new ErrorMessage();
             message.errorMessage = "Needs to provide an acceptable argument";
             return new ResponseEntity<>(message ,HttpStatus.NOT_ACCEPTABLE);}
-
-        TypologyDTO outputDto;
         try {
-
             outputDto = service.createAndSaveTypology(inputDto);
-
         } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(outputDto, HttpStatus.CREATED);
     }
 
+
     /**
      * Find a requested Typology
      */
     @GetMapping("/{id}")
     public ResponseEntity<Object> findTypologyRequested(@PathVariable("id") String id) {
-        ErrorMessage message = new ErrorMessage();
+        TypologyDTO outputDto;
+
         if(id == null || id.isEmpty()) {
+            ErrorMessage message = new ErrorMessage();
             message.errorMessage = "Needs to provide an acceptable argument";
             return new ResponseEntity<>(message ,HttpStatus.NOT_ACCEPTABLE);}
-
-        TypologyDTO outputDto;
         try {
-
             outputDto = service.findTypologyRequested(id);
-
         } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(outputDto, HttpStatus.OK);
     }
+
 
     /**
      * Find all Typologies
@@ -73,10 +75,9 @@ public class TypologyController {
     @GetMapping
     public ResponseEntity<Object> findTypologyList() {
         CollectionModel<TypologyDTO> typologyDTOList;
+
         try {
-
             typologyDTOList = service.findAllTypologies();
-
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
@@ -90,21 +91,21 @@ public class TypologyController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteTypology(@PathVariable("id") String id) {
-        ErrorMessage message = new ErrorMessage();
+
         if(id == null || id.isEmpty()) {
-            message.errorMessage = "Needs to provide an acceptable argument";
-            return new ResponseEntity<>(message ,HttpStatus.NOT_ACCEPTABLE);}
+            ErrorMessage error = new ErrorMessage();
+            error.errorMessage = "Needs to provide an acceptable argument";
+            return new ResponseEntity<>(error ,HttpStatus.NOT_ACCEPTABLE);}
         try {
-
             service.deleteTypology(id);
-            message.errorMessage = "Typology successfully deleted.";
-
-            message.add(linkTo(methodOn(TypologyController.class).findTypologyList()).withRel("Collection"));
-
+            ResponseMessage response = new ResponseMessage();
+            response.responseMessage = "Typology successfully deleted.";
+            response.add(linkTo(methodOn(TypologyController.class).findTypologyList()).withRel("Collection"));
+            return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
         } catch (Exception exception) {
-            message.errorMessage = exception.getMessage();
-            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            ErrorMessage error = new ErrorMessage();
+            error.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(message, HttpStatus.ACCEPTED);
     }
 }

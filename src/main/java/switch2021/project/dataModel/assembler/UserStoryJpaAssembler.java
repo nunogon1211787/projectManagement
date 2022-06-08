@@ -4,10 +4,12 @@ import org.springframework.stereotype.Component;
 import switch2021.project.dataModel.jpa.UserStoryJpa;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.valueObjects.vos.*;
+import switch2021.project.entities.valueObjects.vos.enums.UserStoryStatus;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Component
 public class UserStoryJpaAssembler {
@@ -18,7 +20,7 @@ public class UserStoryJpaAssembler {
         String description = userStory.getDescription().getText();
         double timeEstimate = userStory.getTimeEstimate().getUsHours();
 
-        String usStatus = userStory.getUsStatus();
+        String usStatus = userStory.getUsStatus().toString();
         String startDate = null;
         UserStoryJpa parent = null;
         String endDate = null;
@@ -45,7 +47,7 @@ public class UserStoryJpaAssembler {
         Description description = new Description(usJpaSaved.getDescription());
         UsHour timeEstimate = new UsHour(usJpaSaved.getTimeEstimate());
 
-        String usStatus = usJpaSaved.getUsStatus();
+        UserStoryStatus usStatus = UserStoryStatus.valueOf(usJpaSaved.getUsStatus());
         LocalDate startDate = null;
         UserStory parent = null;
         LocalDate endDate = null;

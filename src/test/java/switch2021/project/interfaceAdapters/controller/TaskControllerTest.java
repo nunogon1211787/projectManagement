@@ -1,9 +1,15 @@
 package switch2021.project.interfaceAdapters.controller;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.ResponseEntity;
+import switch2021.project.dtoModel.dto.TaskDTO;
 import switch2021.project.dtoModel.mapper.TaskMapper;
 import switch2021.project.interfaceAdapters.repositories.TaskRepository;
 import switch2021.project.applicationServices.service.TaskService;
@@ -11,26 +17,28 @@ import switch2021.project.applicationServices.service.TaskService;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.mock;
 
+@AutoConfigureMockMvc
+@SpringBootTest
 class TaskControllerTest {
 
-    @InjectMocks
+    @Autowired
     TaskController controller;
 
-    @MockBean
+    @Autowired
     TaskService service;
 
-    @MockBean
+    @Autowired
     TaskRepository repository;
 
-    @MockBean
+    @Autowired
     TaskMapper mapperNew;
 
 
 
-    @BeforeEach
-    public void setUp() throws Exception {
-        MockitoAnnotations.openMocks(this);
-    }
+//    @BeforeEach
+//    public void setUp() throws Exception {
+//        MockitoAnnotations.openMocks(this);
+//    }
 //
 //    @Test
 //    void createAndSaveTaskControllerTest() {
@@ -81,7 +89,6 @@ class TaskControllerTest {
 //    @Test
 //    void createAndSaveTaskControllerTest3() {
 //        //Arrange
-//
 //        String name1 = "Paulo";
 //        String description1 = "Fazer coiso e tal";
 //        double effort1 = 12.0;
@@ -96,12 +103,9 @@ class TaskControllerTest {
 //        inputDTO.type = type1;
 //        inputDTO.responsible = res1;
 //        inputDTO.taskContainerID = taskC1;
-//
 //        //Act
 //        ResponseEntity<?> response = controller.createAndSaveTask(inputDTO);
-//
 //        //Assert
-////        assertEquals(response.getStatusCodeValue(), 201);
 //        assertThat(response.getStatusCodeValue()).isEqualTo(201);
 //
 //    }

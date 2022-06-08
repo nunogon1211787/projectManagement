@@ -2,6 +2,7 @@ package switch2021.project.entities.aggregates.UserStory;
 
 import lombok.*;
 import switch2021.project.entities.valueObjects.vos.*;
+import switch2021.project.entities.valueObjects.vos.enums.UserStoryStatus;
 
 import switch2021.project.utils.Entity;
 
@@ -13,11 +14,6 @@ import java.util.Objects;
 @AllArgsConstructor
 public class UserStory implements Entity<UserStory> {
 
-    private static final String OPEN = "OPEN";
-    private static final String FINISHED = "FINISHED";
-    private static final String CANCELLED = "CANCELLED";
-    private static final String REFINED = "REFINED";
-
     /**
      * Attributes
      **/
@@ -25,7 +21,7 @@ public class UserStory implements Entity<UserStory> {
     private UsPriority priority;
     private Description description;
     private UsHour timeEstimate;
-    private String  usStatus;
+    private UserStoryStatus  usStatus;
 
     private UserStory parentUserStory;
     private LocalDate usStartDate; //US started to be worked on a sprint - we were able to determine the "age/pending"
@@ -40,7 +36,7 @@ public class UserStory implements Entity<UserStory> {
         this.userStoryID = userStoryID;
         this.priority = priority;
         this.description = description;
-        this.usStatus = OPEN;
+        this.usStatus = UserStoryStatus.OPEN;
         this.timeEstimate = timeEstimate;
     }
 
@@ -58,21 +54,22 @@ public class UserStory implements Entity<UserStory> {
 
     public void startUserStory() {
         this.usStartDate = LocalDate.now();
+        this.usStatus = UserStoryStatus.IN_PROGRESS;
     }
 
     public void finishUserStory() {
         this.usEndDate = LocalDate.now();
-        this.usStatus = FINISHED;
+        this.usStatus = UserStoryStatus.FINISHED;
     }
 
     public void cancelUserStory() {
         this.usEndDate = LocalDate.now();
-        this.usStatus = CANCELLED;
+        this.usStatus = UserStoryStatus.CANCELED;
     }
 
     public void refinedUs() {
         this.usRefined = LocalDate.now();
-        this.usStatus = REFINED;
+        this.usStatus = UserStoryStatus.REFINED;
     }
 
     public void assignParentUserStory(UserStory parent) {this.parentUserStory = parent;}

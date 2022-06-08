@@ -5,4 +5,5 @@ import switch2021.project.dataModel.jpa.SprintJpa;
 import switch2021.project.entities.valueObjects.vos.SprintID;
 
 public interface SprintJpaRepository extends JpaRepository<SprintJpa, SprintID> {
+
 }
