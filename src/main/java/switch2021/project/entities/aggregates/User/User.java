@@ -189,10 +189,8 @@ public class User implements Entity<User> {
         //Can't be simplified because the status is a business rule
         if (this.isActive == false) {
             isActive = true;
-            return true;
-        } else {
-            return false;
         }
+        return isActive;
     }
 
     public boolean inactivateStatus() {

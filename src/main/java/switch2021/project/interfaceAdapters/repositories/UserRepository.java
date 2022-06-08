@@ -2,6 +2,7 @@ package switch2021.project.interfaceAdapters.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import switch2021.project.dataModel.jpa.UserJpa;
 import switch2021.project.dataModel.assembler.UserJpaAssembler;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
@@ -97,7 +98,8 @@ public class UserRepository implements IUserRepo {
     public Optional<User> update(User user) {
         UserJpa userJpa = userJpaAssembler.toData(user);
 
-        UserJpa savedUserJpa = userJpaRepository.save(userJpa);
+        UserJpa savedUserJpa = userJpaRepository.saveAndFlush(userJpa);
+        userJpaRepository.flush();
 
         return Optional.of(userJpaAssembler.toDomain(savedUserJpa));
     }
@@ -109,9 +111,10 @@ public class UserRepository implements IUserRepo {
         Optional<User> user = Optional.empty();
 
         if (!userJpaRepository.existsById(userJpa.getEmail())) {
-            UserJpa savedUserJpa = userJpaRepository.save(userJpa);
+            UserJpa savedUserJpa = userJpaRepository.saveAndFlush(userJpa);
             user = Optional.of(userJpaAssembler.toDomain(savedUserJpa));
         }
+        //userJpaRepository.sav();
         return user;
     }
 

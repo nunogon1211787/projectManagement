@@ -214,14 +214,14 @@ public class UserService {
 
         if (opUser.isPresent()) {
             user = opUser.get();
-
-            if (!user.activateStatus()) {
-                throw new IllegalArgumentException("This user is already activated");
-            }
         } else {
-            return null;
+            throw new IllegalArgumentException("This user does not exist");
         }
-        //user.activateStatus();
+
+        //if (!user.activateStatus()) {
+            //throw new IllegalArgumentException("This user is already activated");
+        //}
+        user.activateStatus();
         userRepo.update(user);
         return userMapper.toDto(user);
     }

@@ -10,7 +10,6 @@ import switch2021.project.dtoModel.dto.*;
 import switch2021.project.interfaceAdapters.controller.*;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
 import java.io.InputStream;
 
 
@@ -35,7 +34,7 @@ public class DatabaseETL {
     ClassPathResource cpr = new ClassPathResource("data.xlsx");
 
     @PostConstruct //runs after all beans are loaded
-    public void initUserTable() throws IOException {
+    public void initUserTable() throws Exception {
         // Load file from resources
         InputStream is = cpr.getInputStream();
         // Open Excel file
@@ -48,7 +47,6 @@ public class DatabaseETL {
 
                 XSSFRow row = worksheet.getRow(index);
 
-                //Integer id = (int) row.getCell(0).getNumericCellValue();
                 String userName = row.getCell(0).getStringCellValue();
                 String email = row.getCell(1).getStringCellValue();
                 String function = row.getCell(2).getStringCellValue();
@@ -64,7 +62,7 @@ public class DatabaseETL {
     }
 
     @PostConstruct
-    public void initProfilesTable() throws IOException {
+    public void initProfilesTable() throws Exception {
         InputStream is = cpr.getInputStream();
         XSSFWorkbook workbook = new XSSFWorkbook(is);
         // Get second Excel sheet aka Profiles
@@ -81,7 +79,7 @@ public class DatabaseETL {
     }
 
     @PostConstruct
-    public void initGlobalRolesTable() throws IOException {
+    public void initGlobalRolesTable() throws Exception {
         InputStream is = cpr.getInputStream();
         XSSFWorkbook workbook = new XSSFWorkbook(is);
         XSSFSheet worksheet = workbook.getSheetAt(2);
@@ -100,7 +98,7 @@ public class DatabaseETL {
     }
 
     @PostConstruct
-    public void initProjectsTable() throws IOException {
+    public void initProjectsTable() throws Exception {
         InputStream is = cpr.getInputStream();
         XSSFWorkbook workbook = new XSSFWorkbook(is);
         XSSFSheet worksheet = workbook.getSheetAt(3);
@@ -131,7 +129,7 @@ public class DatabaseETL {
     }
 
     @PostConstruct
-    public void initProjectTeamsTable() throws IOException {
+    public void initProjectTeamsTable() throws Exception {
         InputStream is = cpr.getInputStream();
         XSSFWorkbook workbook = new XSSFWorkbook(is);
         XSSFSheet worksheet = workbook.getSheetAt(5);
@@ -155,8 +153,8 @@ public class DatabaseETL {
         }
     }
 
-    /*@PostConstruct
-    public void initProjectSprintsTable() throws IOException {
+/*    @PostConstruct
+    public void initProjectSprintsTable() throws Exception {
         InputStream is = cpr.getInputStream();
         XSSFWorkbook workbook = new XSSFWorkbook(is);
         XSSFSheet worksheet = workbook.getSheetAt(6);
@@ -175,7 +173,7 @@ public class DatabaseETL {
     }*/
 
     @PostConstruct
-    public void initProjectBacklogTable() throws IOException {
+    public void initProjectBacklogTable() throws Exception {
         InputStream is = cpr.getInputStream();
         XSSFWorkbook workbook = new XSSFWorkbook(is);
         XSSFSheet worksheet = workbook.getSheetAt(8);
@@ -186,9 +184,11 @@ public class DatabaseETL {
 
                 String projectId = row.getCell(0).getStringCellValue();
                 String title = row.getCell(1).getStringCellValue();
-                String description = row.getCell(2).getStringCellValue();
+                int priority = (int) row.getCell(2).getNumericCellValue();
+                String description = row.getCell(3).getStringCellValue();
+                double timeEstimate = row.getCell(4).getNumericCellValue();
 
-                UserStoryDTO userStoryDTO = new UserStoryDTO(projectId, title, 0, description, 0);
+                UserStoryDTO userStoryDTO = new UserStoryDTO(projectId, title, priority, description, timeEstimate);
                 userStoryController.createAndSaveUserStory(userStoryDTO);
             }
         }
@@ -213,7 +213,8 @@ public class DatabaseETL {
             }
         }
     }*/
-    @PostConstruct
+
+/*    @PostConstruct
     public void initUserStoriesTable () throws Exception{
         // Load file from resources
         InputStream is = cpr.getInputStream();
@@ -238,5 +239,7 @@ public class DatabaseETL {
             }
         }
     }
+
+ */
 
 }
