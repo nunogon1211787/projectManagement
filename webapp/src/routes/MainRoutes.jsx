@@ -7,6 +7,8 @@ import CreateTypology from "../pages/CreateTypology";
 import { Home } from "../pages/Home";
 import CreateSprint from "../pages/CreateSprint";
 import RegisterUser from "../pages/RegisterUser";
+import CreateResource from '../pages/CreateResource';
+
 import {
   Projects,
   OrderedList,
@@ -100,6 +102,8 @@ function MainRoute() {
               <Route path="/projects" component={CreateProject} />
               <Route path="/sprints" component={CreateSprint} />
               <Route path="/users" component={RegisterUser} />
+              <Route path="/resources" component={CreateResource} />
+
             </Switch>
           </Box>
         </Box>

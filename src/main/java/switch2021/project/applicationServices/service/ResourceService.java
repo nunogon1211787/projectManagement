@@ -1,12 +1,15 @@
 package switch2021.project.applicationServices.service;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
-import switch2021.project.dtoModel.dto.CreateResourceDTO;
-import switch2021.project.dtoModel.dto.DateDTO;
-import switch2021.project.dtoModel.dto.IdDTO;
-import switch2021.project.dtoModel.dto.OutputResourceDTO;
+import switch2021.project.dataModel.jpa.ResourceIDJpa;
+import switch2021.project.dtoModel.dto.*;
 import switch2021.project.entities.factories.factoryInterfaces.IResourceFactoryReeng;
 import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.applicationServices.iRepositories.IResourceRepo;
@@ -14,10 +17,10 @@ import switch2021.project.dtoModel.mapper.ResourceMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManageResourcesService;
 import switch2021.project.entities.aggregates.Resource.Resource;
-import switch2021.project.entities.valueObjects.vos.Email;
-import switch2021.project.entities.valueObjects.vos.ProjectID;
-import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
-import switch2021.project.entities.valueObjects.vos.UserID;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResouceIDFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
+import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.interfaceAdapters.repositories.ProjectRepository;
 
 import java.time.LocalDate;
@@ -40,15 +43,21 @@ public class ResourceService {
     ManageResourcesService manageResourcesService;
     @Autowired
     private IResourceFactoryReeng iResourceFactory;
+    @Autowired
+    private IResouceIDFactory iResourceIDFactory;
+    @Autowired
+    private IProjectIDFactory iProjIDFactory;
+    @Autowired
+    private IUserIDFactory iUserIDFactory;
 
 
     public OutputResourceDTO createAndSaveResource(CreateResourceDTO dto){
 
         OutputResourceDTO response;
 
-        if(!checkSystemUserExists(dto)) {
+        if(!checkSystemUserExists(dto.getSystemUserID())) {
             throw new IllegalArgumentException(("SystemUser does not exist"));
-        } else if (!checkProjectExists(dto)) {
+        } else if (!checkProjectExists(dto.projectId)) {
             throw new IllegalArgumentException(("Project does not exist"));
         }
         else if (!checkDatesInsideProject(dto)) {
@@ -58,8 +67,8 @@ public class ResourceService {
         if (!checkAllocation(dto)) {
             throw new IllegalArgumentException(("Is not valid to create - Allocation)"));
         }
-//        else if (!checkProjectRole(dto)) {
-//            throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));}
+        else if (!checkProjectRole(dto)) {
+            throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));}
             else {
             Resource newResource = iResourceFactory.createResource(dto);
 
@@ -93,19 +102,37 @@ public class ResourceService {
         return resourcesDto;
     }
 
-    public void deleteResourceRequest(ResourceIDReeng id) throws Exception {
-        if(!resRepo.deleteByResourceID(id)){
+    public OutputResourceDTO showResource(String id) throws Exception {
+        ResourceIDReeng resID = createResourceIdByStringInputFromController(id);
+
+        if(!projRepo.existsById(resID.getProject())) {
+            throw new Exception("Project does not exist!");
+        }
+        if (!userRepo.existsById(resID.getUser())){
+            throw new Exception("System User does not exist!");
+        }
+        Optional<Resource> foundResource = resRepo.findById(resID);
+        return foundResource.map(resource -> map.model2Dto(resource)).orElse(null);
+    }
+
+    public void deleteResourceRequest(String id) throws Exception {
+        ResourceIDReeng resId = createResourceIdByStringInputFromController(id);
+
+        if(!resRepo.existsById(resId)){
             throw new Exception("Resource does not exist");
+        } else {
+            resRepo.deleteByResourceID(resId);
         }
     }
 
-    private boolean checkSystemUserExists(CreateResourceDTO dto){
-        UserID userID = new UserID(new Email(dto.systemUserID));
-        return this.userRepo.existsById(userID);
+    private boolean checkSystemUserExists(String userID){
+        UserID userId = iUserIDFactory.createUserID(userID);
+        return this.userRepo.existsById(userId);
     }
 
-    private boolean checkProjectExists(CreateResourceDTO dto){
-        return this.projRepo.existsById(new ProjectID(dto.projectId));
+    private boolean checkProjectExists(String projectId){
+        ProjectID projID = iProjIDFactory.create(projectId);
+        return this.projRepo.existsById(projID);
     }
 
     private boolean checkDatesInsideProject(CreateResourceDTO dto) {
@@ -132,5 +159,16 @@ public class ResourceService {
         ProjectID projID = new ProjectID(dto.projectId);
         List<Resource> projectTeamList = resRepo.findAllByProject(projID);
         return manageResourcesService.validateProjectRole(projectTeamList, dto);
+    }
+
+    /**
+     * Create User Story ID method
+     */
+    private ResourceIDReeng createResourceIdByStringInputFromController(String id) {
+        String[] x = id.split("&");
+        String userId = x[0];
+        String projectId = x[1];
+        String startDate = x[2];
+        return iResourceIDFactory.create(userId, projectId, startDate);
     }
 }

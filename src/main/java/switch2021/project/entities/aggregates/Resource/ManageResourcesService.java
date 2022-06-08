@@ -40,30 +40,31 @@ public class ManageResourcesService {
         }
         return msg;
     }
+
     public boolean validateProjectRole(List<Resource> projectTeamList, CreateResourceDTO dto) {
 
 
-        boolean msg = false;
+        boolean msg = true;
 
         for (Resource res : projectTeamList) {
-            if(res.isActiveToThisDate(LocalDate.parse(dto.startDate)) || res.isActiveToThisDate(LocalDate.parse(dto.endDate))){
-            if(ProjectRoleReeng.valueOf(dto.projectRole).equals(ProjectRoleReeng.valueOf(res.getRole().toString()))){
-                if(ProjectRoleReeng.valueOf(res.getRole().toString()).equals(ProjectRoleReeng.TeamMember)){
-                    msg = true;
-                } else {
-                    msg = false;
+            if (res.isActiveToThisDate(LocalDate.parse(dto.startDate)) || res.isActiveToThisDate(LocalDate.parse(dto.endDate))) {
+                if (ProjectRoleReeng.valueOf(dto.projectRole).equals(ProjectRoleReeng.valueOf(res.getRole().toString()))) {
+                    if (ProjectRoleReeng.valueOf(res.getRole().toString()).equals(ProjectRoleReeng.TeamMember)) {
+                        msg = true;
+                    } else {
+                        msg = false;
+                    }
                 }
             }
-            }
-            }
-            return msg;
         }
+        return msg;
+    }
 
     public List<ProjectID> listProjectsOfResources(List<Resource> currentUserResources) {
 
         List<ProjectID> resourceProjects = new ArrayList<>();
 
-        for (Resource res : currentUserResources){
+        for (Resource res : currentUserResources) {
 
             ProjectID projId = res.getId().getProject();
 
