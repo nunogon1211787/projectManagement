@@ -12,8 +12,6 @@ import java.util.List;
 class ScrumBoard implements Entity<ScrumBoard> {
 
     /** Class Attributes **/
-    private SprintID sprintID;
-
     private final List<UserStoryOfSprint> userStoriesOfSprint;
 
     protected ScrumBoard() {
@@ -76,14 +74,6 @@ class ScrumBoard implements Entity<ScrumBoard> {
 
     @Override
     public boolean sameIdentityAs(ScrumBoard other) {
-        return other != null && sprintID.sameValueAs(other.sprintID);
-    }
-
-    /**
-     * @return Hash code of sprint id.
-     */
-    @Override
-    public int hashCode() {
-        return sprintID.hashCode();
+        return false;
     }
 }

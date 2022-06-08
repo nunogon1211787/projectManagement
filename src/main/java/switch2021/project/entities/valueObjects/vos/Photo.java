@@ -15,8 +15,12 @@ public class Photo implements ValueObject<Photo> {
     private final List<String> possibleExtensions = Arrays.asList("jpg", "png");
 
     public Photo(String photo) {
-        validateExtension(photo);
-        this.extension = photo;
+        if (photo.isEmpty()) {
+            this.extension = "";
+        } else {
+            validateExtension(photo);
+            this.extension = photo;
+        }
     }
 
 

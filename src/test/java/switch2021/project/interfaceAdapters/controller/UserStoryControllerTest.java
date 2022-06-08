@@ -87,7 +87,7 @@ public class UserStoryControllerTest {
     void createAndSaveUserStory() {
 
         projectController.createProject(new ProjectDTO("avengers", "stuff", "entertaiment", "2028-12-12", "12",
-                "12000", "7"));
+                "12000", "7","Fixed Cost", "customer"));
         UserStoryDTO dto = new UserStoryDTO("Project_2022_1", "As cenas I want cenas", 1, "cenas fixes", 1000);
         UserStoryDTO refineDto = new UserStoryDTO("Project_2022_1", "As cenas I want", 3, "fixes", 1000);
         String id = "Project_2022_1&As cenas I want cenas";

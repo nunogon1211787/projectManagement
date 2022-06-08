@@ -38,6 +38,7 @@ public class SprintService {
     @Autowired
     private ISprintIDFactory iSprintIDFactory;
 
+
     /**
      * Create and Save a New Sprint
      */
@@ -69,11 +70,12 @@ public class SprintService {
      * @return Output DTO of Sprint
      * @throws Exception in case of missing parameter return
      */
+
     public OutputSprintDTO addUserStoryToSprintBacklog(String id, UserStoryIdDTO userStoryIdDTO) throws Exception {
         OutputSprintDTO outputSprintDTO = new OutputSprintDTO();
 
         SprintID sprintID = new SprintID();
-        sprintID.setProjectID(new ProjectID("Project_2022_1"));
+        sprintID.setProjectID(new ProjectID("Project_2022_1")); //TODO hardcoded id
         sprintID.setSprintName(new Description("Sprint"));
 
         Optional<Sprint> sprint = sprintRepo.findBySprintID(sprintID);

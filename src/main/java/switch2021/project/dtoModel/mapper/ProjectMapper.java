@@ -35,8 +35,8 @@ public class ProjectMapper {
             projDto.endDate = newProject.getEndDate().toString();
         }
 
-        if (newProject.getTypology() != null) {
-            projDto.typo = newProject.getTypology().getId_description().getDescription().getText();
+        if (newProject.getTypologyId() != null) {
+            projDto.typo = newProject.getTypologyId().getDescription().getText();
         }
 
         if (newProject.getCustomer() != null) {

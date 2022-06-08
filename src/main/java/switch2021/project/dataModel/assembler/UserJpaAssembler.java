@@ -1,12 +1,10 @@
 package switch2021.project.dataModel.assembler;
 
 import org.springframework.stereotype.Component;
-import switch2021.project.dataModel.jpa.RequestJpa;
 import switch2021.project.dataModel.jpa.UserJpa;
 import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.valueObjects.vos.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +20,8 @@ public class UserJpaAssembler {
         String password = user.getEncryptedPassword().getText();
         String isActive = user.isActive() ? "True" : "False";
         List<UserProfileID> userProfileIDList = user.getAssignedProfiles();
-
-        UserJpa userJpa =  new UserJpa(userId, userName, function, photo, password, isActive, userProfileIDList);
-
         List<Request> requestList = user.getRequestedProfiles();
+ /*
         for (Request request : requestList) {
             String requestDate = null;
             if (!(request.getRequestDate() == null)) {
@@ -33,8 +29,8 @@ public class UserJpaAssembler {
             }
             RequestJpa requestJpa = new RequestJpa(request.getProfileIdRequested(), requestDate);
             userJpa.getRequests().add(requestJpa);
-        }
-        return userJpa;
+        */
+        return new UserJpa(userId, userName, function, photo, password, isActive, userProfileIDList,requestList);
     }
 
     public List<UserJpa> toData(List<User> users) {
@@ -55,10 +51,9 @@ public class UserJpaAssembler {
         Description password = new Description(userJpa.getPassword());
         boolean isActive = userJpa.getIsActive().contains("True");
         List<UserProfileID> userProfileIDList = userJpa.getAssignedIDProfiles();
+        List<Request> requests = userJpa.getRequests();
 
-        User user =  new User(userID, userName, photo, password, function, isActive, userProfileIDList);
-
-        List<RequestJpa> requestJpaList = userJpa.getRequests();
+        /*List<RequestJpa> requestJpaList = userJpa.getRequests();
         for (RequestJpa requestJpa : requestJpaList) {
             LocalDate requestDate = null;
             if (!(requestJpa.getRequestDate() == null)) {
@@ -67,7 +62,9 @@ public class UserJpaAssembler {
             Request request = new Request(requestDate, requestJpa.getProfileIdRequested());
             user.getRequestedProfiles().add(request);
         }
-        return user;
+
+         */
+        return new User(userID, userName, photo, password, function, isActive, userProfileIDList, requests);
     }
 
     public List<User> toDomain(List<UserJpa> userJpas) {
