@@ -101,8 +101,8 @@ function MainRoute() {
               <Route path="/typologies" component={CreateTypology} />
               <Route path="/projects" component={CreateProject} />
               <Route path="/sprints" component={CreateSprint} />
-              <Route path="/users" component={RegisterUser} /><Route path="resources" element={<CreateResource />} />
-              <Route path="resources" element={<CreateResource />} />
+              <Route path="/users" component={RegisterUser} />
+              <Route path="/resources" component={CreateResource} />
 
             </Switch>
           </Box>
