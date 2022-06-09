@@ -10,8 +10,6 @@ import switch2021.project.dtoModel.dto.RequestDTO;
 import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.applicationServices.service.UserService;
 
-import java.util.List;
-
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -26,8 +24,6 @@ public class UserController {
      */
     @Autowired
     private UserService userService;
-    @Autowired
-    private ProjectService projectService;
 
 
     /**
@@ -39,7 +35,6 @@ public class UserController {
 
         try {
             outputDTO = userService.createAndSaveUser(newUserInfoDTO);
-
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
@@ -84,21 +79,12 @@ public class UserController {
         return new ResponseEntity<>(allUsersDto, HttpStatus.OK);
     }
 
-
-    @GetMapping("/{id}/projects") //TODO review method
-    public ResponseEntity<Object> showCurrentProjectsByUser(@PathVariable String id,
-                                                            @RequestParam("date") DateDTO dateDto) {
-        List<OutputProjectDTO> projectsDto = projectService.showCurrentProjectsByUser(id, dateDto);
-        return new ResponseEntity<>(projectsDto, HttpStatus.OK);
-    }
-
-
     /**
      * Show All User, By some Parameters (US004 and US024)
      */
     @PostMapping("/findBy")
     public ResponseEntity<Object> searchUsersByTypedParams(@RequestBody SearchUserDTO inDto) {
-        List<OutputUserDTO> usersFoundedDto;
+        CollectionModel<OutputUserDTO> usersFoundedDto;
 
         try {
             usersFoundedDto = userService.searchUsersByParams(inDto);
@@ -122,12 +108,6 @@ public class UserController {
 
         try {
             outputDTO = userService.updatePersonalData(id, updateDataDTO);
-
-            if (outputDTO == null) {
-                ErrorMessage message = new ErrorMessage();
-                message.errorMessage = "This User does not exist!";
-                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-            }
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
@@ -147,12 +127,6 @@ public class UserController {
 
         try {
             outputDTO = userService.assignUserProfile(id, profileDTO);
-
-            if (outputDTO == null) {
-                ErrorMessage message = new ErrorMessage();
-                message.errorMessage = "This User does not exist!";
-                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-            }
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
@@ -172,12 +146,6 @@ public class UserController {
 
         try {
             outputDTO = userService.removeUserProfile(id, profileDTO);
-
-            if (outputDTO == null) {
-                ErrorMessage message = new ErrorMessage();
-                message.errorMessage = "This User does not exist!";
-                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-            }
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
@@ -196,12 +164,6 @@ public class UserController {
 
         try {
             outputDTO = userService.activateUser(id);
-
-            if (outputDTO == null) {
-                ErrorMessage message = new ErrorMessage();
-                message.errorMessage = "This User does not exist!";
-                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-            }
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
@@ -220,12 +182,6 @@ public class UserController {
 
         try {
             outputDTO = userService.inactivateUser(id);
-
-            if (outputDTO == null) {
-                ErrorMessage message = new ErrorMessage();
-                message.errorMessage = "This User does not exist!";
-                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-            }
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
@@ -239,7 +195,7 @@ public class UserController {
      * Create a Request to assign a user profile to a user (US003)
      * >>>>>>>>>> Must be review how to assign this method to the ADM<<<<<<<<<<<<<
      */
-    @PatchMapping("/{id}/requests") //TODO fix error at JPA
+    @PatchMapping("/{id}/requests")
     public ResponseEntity<Object> requestUserProfile(@PathVariable String id,
                                                      @RequestBody RequestDTO requestDTO) {
         ResponseMessage response = new ResponseMessage();
@@ -274,9 +230,9 @@ public class UserController {
             response.responseMessage = "User was deleted successfully!";
             response.add(linkTo(methodOn(UserController.class).showAllUsers()).withRel("Collection"));
         } catch (Exception exception) {
-            ErrorMessage msg = new ErrorMessage();
-            msg.errorMessage = exception.getMessage();
-            return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

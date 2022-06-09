@@ -9,8 +9,6 @@ import switch2021.project.entities.aggregates.Typology.Typology;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Objects;

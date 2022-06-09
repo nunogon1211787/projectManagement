@@ -61,7 +61,6 @@ public class UserStoryController {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -86,7 +85,6 @@ public class UserStoryController {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -105,7 +103,6 @@ public class UserStoryController {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-
         return new ResponseEntity<>(userStory, HttpStatus.OK);
     }
 

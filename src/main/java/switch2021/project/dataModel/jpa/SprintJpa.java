@@ -20,14 +20,14 @@ public class SprintJpa {
             @AttributeOverride(name = "projectID", column = @Column(name = "ProjectID")),
             @AttributeOverride(name = "sprintName.text", column = @Column(name = "SprintName"))
     })
-    private SprintID id;
+    private SprintID sprintId;
     private String startDate;
     private String endDate;
     @OneToMany(mappedBy = "sprintJpa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UserStoryOfSprintJpa> uSOfSprintJpaList;
 
-    public SprintJpa(SprintID id, String startDate, String endDate) {
-        this.id = id;
+    public SprintJpa(SprintID sprintId, String startDate, String endDate) {
+        this.sprintId = sprintId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.uSOfSprintJpaList = new ArrayList<UserStoryOfSprintJpa>();

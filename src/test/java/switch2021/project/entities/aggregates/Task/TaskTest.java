@@ -16,72 +16,44 @@ class TaskTest {
 
     @MockBean
     Name name;
-
     @MockBean
     TaskID taskID;
-
     @MockBean
     Description description;
-
     @MockBean
     EffortEstimate effort;
-
     @MockBean
     ResourceIDReeng resID;
-
     @MockBean
     UserStoryID usID;
-
     @MockBean
     SprintID sprintID;
-
 
     @Test
     void CreateTaskWithSuccess() {
         //Arrange
         when(description.getText()).thenReturn("Fazer coiso e tal");
-
         //Act
         Task task = new Task(taskID, description, effort,
-                             TaskTypeEnum.Testing, resID);
-
+                             TaskTypeEnum.TESTING, resID);
         //Assert
         assertEquals(task.getDescription().getText(), "Fazer coiso e tal");
         assertNotNull(task);
     }
-
 
     @Test
     void TestingHasMethods() {
         //Arrange
         when(taskID.getTaskName()).thenReturn(name);
         when(name.getText()).thenReturn("Alberto");
-
-
         //Act
         Task task = new Task(taskID, description, effort,
-                             TaskTypeEnum.Testing, resID);
-
+                             TaskTypeEnum.TESTING, resID);
         //Assert
         assertTrue(task.hasName("Alberto"));
-        assertTrue(task.hasTaskTypeEnum("Testing"));
+        assertTrue(task.hasTaskTypeEnum("TESTING"));
         assertTrue(task.hasResponsible(resID));
         assertTrue(task.hasDescription(description));
     }
-
-    @Test
-    void GetStatusTest() {
-        //Arrange
-
-
-        //Act
-
-
-        //Assert
-
-
-    }
-
-
 
 }

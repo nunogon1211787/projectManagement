@@ -33,9 +33,7 @@ public class UserProfileController {
         CollectionModel<UserProfileDTO> outPutDTO;
 
         try {
-
             outPutDTO = createUserProfileService.showAllProfiles();
-
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
@@ -52,9 +50,12 @@ public class UserProfileController {
          UserProfileDTO outPutDTO;
 
          try {
-
              outPutDTO = createUserProfileService.showUserProfileRequested(id);
 
+             if(outPutDTO == null) {
+                 message.errorMessage = "Profile does not exist!";
+                 return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
+             }
          } catch (Exception exception) {
              message.errorMessage = exception.getMessage();
              return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
