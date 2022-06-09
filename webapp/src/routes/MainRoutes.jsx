@@ -4,10 +4,10 @@ import CreateProject from "../pages/CreateProject";
 import CreateUserStory from "../pages/CreateUserStory";
 import CreateProfile from "../pages/CreateProfile";
 import CreateTypology from "../pages/CreateTypology";
-import { Home } from "../pages/Home";
+import { Home } from "../pages";
 import CreateSprint from "../pages/CreateSprint";
 import RegisterUser from "../pages/RegisterUser";
-import CreateResource from '../pages/CreateResource';
+import CreateResource from "../pages/CreateResource";
 
 import {
   Projects,
