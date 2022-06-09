@@ -1,4 +1,32 @@
+import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { authToAPI } from "../context/Actions";
+import AppContext from "../context/AppContext";
+import { URL_API } from "../services/Service";
+
+const credentials = {
+  email: "",
+  password: "",
+};
+
 export default function Login() {
+  const { dispatch } = useContext(AppContext);
+
+  const [login, setLogin] = useState(credentials);
+  const navigate = useNavigate();
+
+  const authentication = () => {
+    const url = URL_API;
+    const request = {
+      method: "POST",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify(login),
+    };
+    authToAPI(url, request, dispatch);
+  };
+
   return (
     <div className="login-form-bg h-100">
       <div className="container h-100">
@@ -23,26 +51,49 @@ export default function Login() {
                     <div className="form-group">
                       <input
                         type="email"
-                        class="form-control"
+                        className="form-control"
                         placeholder="Email"
+                        onChange={(e) =>
+                          setLogin({ ...login, email: e.target.value })
+                        }
                       />
                     </div>
                     <div className="form-group">
                       <input
                         type="password"
-                        class="form-control"
+                        className="form-control"
                         placeholder="Password"
+                        onChange={(e) =>
+                          setLogin({ ...login, password: e.target.value })
+                        }
                       />
                     </div>
-                    <button className="btn login-form__btn submit w-100">
+                    <button
+                      className="btn login-form__btn submit w-100"
+                      type="button"
+                      onClick={() => authentication()}
+                    >
                       Sign In
                     </button>
                   </form>
                   <p className="mt-5 login-form__footer">
                     {" "}
-                    <a href="/users" className="text-primary">
+                    <button
+                      className="text-primary"
+                      style={{
+                        background: "none",
+                        backgroundColor: "none",
+                        border: "none",
+                        color: "#069",
+                        textDecoration: "none",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => {
+                        navigate("register", { replace: true });
+                      }}
+                    >
                       Register Account
-                    </a>{" "}
+                    </button>{" "}
                   </p>
                 </div>
               </div>

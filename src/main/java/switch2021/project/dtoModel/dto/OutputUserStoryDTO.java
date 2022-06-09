@@ -10,7 +10,8 @@ import switch2021.project.entities.valueObjects.vos.UsTitle;
 
 import java.time.LocalDate;
 
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Relation(collectionRelation = "User Stories")
@@ -26,6 +27,15 @@ public class OutputUserStoryDTO extends RepresentationModel<OutputUserStoryDTO> 
     public String parentUserStory;
     public String usStartDate;
     public String usEndDate;
-    public String usCancelled;
     public String usRefined;
+
+    public OutputUserStoryDTO(String id, int priority, String description, double timeEstimate,
+                              String usStartDate, String usEndDate) {
+        this.id = id;
+        this.priority = priority;
+        this.description = description;
+        this.timeEstimate = timeEstimate;
+        this.usStartDate = usStartDate;
+        this.usEndDate = usEndDate;
+    }
 }

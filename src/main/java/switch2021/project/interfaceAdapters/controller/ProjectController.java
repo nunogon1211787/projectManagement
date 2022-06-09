@@ -13,6 +13,8 @@ import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 
 
+import java.util.List;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -126,4 +128,11 @@ public class ProjectController {
         }
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
+
+//    @GetMapping("/{id}/projects") //TODO review method
+//    public ResponseEntity<Object> showCurrentProjectsByUser(@PathVariable String id,
+//                                                            @RequestParam("date") DateDTO dateDto) {
+//        List<OutputProjectDTO> projectsDto = service.showCurrentProjectsByUser(id, dateDto);
+//        return new ResponseEntity<>(projectsDto, HttpStatus.OK);
+//    }
 }

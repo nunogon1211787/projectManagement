@@ -71,11 +71,10 @@ public class SprintService {
         UserStoryID userStoryID = new UserStoryID(new ProjectID(userStoryIdDTO.projectID),
                                                   new UsTitle(userStoryIdDTO.title));
 
-        Optional<UserStory> userStory = usRepo.findByUserStoryId(userStoryID);
+        UserStory userStory = usRepo.findByUserStoryId(userStoryID);
 
-
-        if (sprint.isPresent() && userStory.isPresent()) {
-            sprint.get().saveUsInScrumBoard(new UserStoryOfSprint(userStory.get().getUserStoryID(),
+        if (sprint.isPresent()) {
+            sprint.get().saveUsInScrumBoard(new UserStoryOfSprint(userStory.getUserStoryID(),
                                                                   UserStoryOfSprintStatus.Todo));
 
             sprintRepo.deleteSprint(sprint.get().getSprintID());
@@ -95,7 +94,6 @@ public class SprintService {
     /**
      * Find All Sprints
      */
-
     public CollectionModel<OutputSprintDTO> showAllSprints() {
         List<Sprint> allSprints = sprintRepo.findAllSprints();
         return sprintMapper.toCollectionDto(allSprints);

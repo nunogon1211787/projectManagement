@@ -2,11 +2,11 @@ package switch2021.project.dtoModel.mapper;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Component;
+import switch2021.project.dtoModel.dto.*;
 import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
+import switch2021.project.interfaceAdapters.controller.ProjectController;
 import switch2021.project.interfaceAdapters.controller.UserController;
-import switch2021.project.dtoModel.dto.OutputUserDTO;
-import switch2021.project.dtoModel.dto.UpdateDataDTO;
 import switch2021.project.entities.aggregates.User.User;
 
 import java.util.ArrayList;
@@ -36,11 +36,30 @@ public class UserMapper {
                 .add(linkTo(methodOn(UserController.class).getUser(outputUserDTO.email)).withRel("Find by ID"))
                 //Collection Relation
                 .add(linkTo(methodOn(UserController.class).showAllUsers()).withRel("Collection"))
-                //Delete option
-                .add(linkTo(methodOn(UserController.class).deleteUser(outputUserDTO.email)).withRel("Delete"))
+                //Activation
+                .add(linkTo(methodOn(UserController.class).activateUser(outputUserDTO.getEmail())).withRel("Activate " +
+                        "User"))
+                //Inactivation
+                .add(linkTo(methodOn(UserController.class).inactivateUser(outputUserDTO.getEmail())).withRel(
+                        "Inctivate " +
+                                "User"))
+                //Assign Profile
+                .add(linkTo(methodOn(UserController.class).assignProfile(outputUserDTO.getEmail(),
+                        new UpdateUserProfileDTO())).withRel("Assign Profile"))
+                //Remove Profile
+                .add(linkTo(methodOn(UserController.class).removeProfile(outputUserDTO.getEmail(),
+                        new UpdateUserProfileDTO())).withRel("Remove Profile"))
+                //Search by Parameter
+                .add(linkTo(methodOn(UserController.class).searchUsersByTypedParams(new SearchUserDTO())).withRel(
+                        "Search by Paramenter"))
+                //Show Current Project
+//                .add(linkTo(methodOn(ProjectController.class).showCurrentProjectsByUser(outputUserDTO.getEmail(),
+//                        new DateDTO())).withRel("Current Project"))
                 //Update
                 .add(linkTo(methodOn(UserController.class).updatePersonalData(outputUserDTO.getEmail(),
-                        new UpdateDataDTO())).withRel("Edit"));
+                        new UpdateDataDTO())).withRel("Edit"))
+                //Delete option
+                .add(linkTo(methodOn(UserController.class).deleteUser(outputUserDTO.email)).withRel("Delete"));
         return outputUserDTO;
     }
 
@@ -48,7 +67,7 @@ public class UserMapper {
     public CollectionModel<OutputUserDTO> toCollectionDTO(List<User> userList) {
 
         CollectionModel<OutputUserDTO> users = CollectionModel.of(userList.stream()
-                .map(user -> toDto(user))
+                .map(this::toDto)
                 .collect(Collectors.toList()));
         //HATEOAS
         // Add Self Relation
@@ -65,15 +84,11 @@ public class UserMapper {
             profiles.add(new UserProfile(id));
         }
 
-        //TODO try to simplify this method
-        for (int i = 0; i < profileToString.length; i++) {
-            for (UserProfile profile : profiles) {
-                profileToString[i] = profile.getUserProfileId().getUserProfileName().getText();
-                i++;
-            }
-            break;
+        int i = 0;
+        for (UserProfile profile : profiles) {
+            profileToString[i] = profile.getUserProfileId().getUserProfileName().getText();
+            i++;
         }
-
         return profileToString;
     }
 }

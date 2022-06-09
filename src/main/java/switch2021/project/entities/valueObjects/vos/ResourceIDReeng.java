@@ -54,8 +54,8 @@ public class ResourceIDReeng implements ValueObject<ResourceIDReeng> {
 
     @Override
     public String toString() {
-        return  user + "_" +
-                project + "_" +
+        return  user + "&" +
+                project + "&" +
                 startDate;
     }
 }

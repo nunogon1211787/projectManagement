@@ -12,7 +12,7 @@ import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManageResourcesService;
 import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
-import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResouceIDFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResourceIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.interfaceAdapters.repositories.ProjectRepository;
@@ -41,7 +41,7 @@ public class ResourceService {
     @Autowired
     private IResourceFactoryReeng iResourceFactory;
     @Autowired
-    private IResouceIDFactory iResourceIDFactory;
+    private IResourceIDFactory iResourceIDFactory;
     @Autowired
     private IProjectIDFactory iProjIDFactory;
     @Autowired

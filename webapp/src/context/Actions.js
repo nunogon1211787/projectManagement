@@ -1,5 +1,34 @@
 import { makeHTTPRequest } from "../services/Service";
 
+// ACTIONS TO LOGIN
+
+export const FETCH_AUTH_SUCCESS = "FETCH_AUTH_SUCCESS";
+export const FETCH_AUTH_FAILURE = "FETCH_AUTH_FAILURE";
+
+export function authToAPI(url, request, dispatch) {
+  const success = (res) => dispatch(fetchAuthSuccess(res));
+  const failure = (err) => dispatch(fetchAuthFailure(err));
+  makeHTTPRequest(url, request, success, failure);
+}
+
+function fetchAuthSuccess(res) {
+  return {
+    type: FETCH_AUTH_SUCCESS,
+    payload: {
+      data: { ...res },
+    },
+  };
+}
+
+function fetchAuthFailure(err) {
+  return {
+    type: FETCH_AUTH_FAILURE,
+    payload: {
+      error: err,
+    },
+  };
+}
+
 // ACTIONS TO COLLECTIONS
 
 export const FETCH_COLLECTIONS_SUCCESS = "FETCH_COLLECTIONS_SUCCESS";
@@ -79,6 +108,8 @@ export function deleteDetails() {
 
 export const NAV_TO_FORM = "NAV_TO_FORM";
 export const NAV_TO_TABLE = "NAV_TO_TABLE";
+export const NAV_TO_DETAILS = "NAV_TO_DETAILS";
+export const NAV_TO_EDITDETAILS = "NAV_TO_EDITDETAILS";
 
 export function navToForm(dispatch) {
   dispatch(formTrue());
@@ -86,6 +117,14 @@ export function navToForm(dispatch) {
 
 export function navToTable(dispatch) {
   dispatch(tableTrue());
+}
+
+export function navToDetails(dispatch) {
+  dispatch(detailsTrue());
+}
+
+export function navToEditDetails(dispatch) {
+  dispatch(editDetailsTrue());
 }
 
 export function formTrue() {
@@ -97,5 +136,17 @@ export function formTrue() {
 export function tableTrue() {
   return {
     type: NAV_TO_TABLE,
+  };
+}
+
+export function detailsTrue() {
+  return {
+    type: NAV_TO_DETAILS,
+  };
+}
+
+export function editDetailsTrue() {
+  return {
+    type: NAV_TO_EDITDETAILS,
   };
 }
