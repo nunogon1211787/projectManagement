@@ -79,6 +79,8 @@ export function deleteDetails() {
 
 export const NAV_TO_FORM = "NAV_TO_FORM";
 export const NAV_TO_TABLE = "NAV_TO_TABLE";
+export const NAV_TO_DETAILS = "NAV_TO_DETAILS";
+export const NAV_TO_EDITDETAILS = "NAV_TO_EDITDETAILS";
 
 export function navToForm(dispatch) {
   dispatch(formTrue());
@@ -86,6 +88,14 @@ export function navToForm(dispatch) {
 
 export function navToTable(dispatch) {
   dispatch(tableTrue());
+}
+
+export function navToDetails(dispatch) {
+  dispatch(detailsTrue());
+}
+
+export function navToEditDetails(dispatch) {
+  dispatch(editDetailsTrue());
 }
 
 export function formTrue() {
@@ -97,5 +107,17 @@ export function formTrue() {
 export function tableTrue() {
   return {
     type: NAV_TO_TABLE,
+  };
+}
+
+export function detailsTrue() {
+  return {
+    type: NAV_TO_DETAILS,
+  };
+}
+
+export function editDetailsTrue() {
+  return {
+    type: NAV_TO_EDITDETAILS,
   };
 }
