@@ -15,11 +15,10 @@ participant "resFac : IResourceFactory" as resourceFactory
 participant "resRepo : IResourceRepo" as resourceStore
 participant "res : Resource" as resource
 participant " : ManageResourcesService" as domainService
-participant "map:ResourceMapper" as map
+participant "map : ResourceMapper" as map
 participant "outDto:OutputResourceDto" as outDto
 participant "exception : Exception" as exc
 participant "responseJson : ResponseEntity" as json
-participant "resource : Resource " as resource
 
 [o-> Route:  POST/resources(json)
 Route -> Ctrl: createResource (inDto)
@@ -27,26 +26,26 @@ note right Route: Json object was deserialize to a CreateResourceDto object
 Ctrl -> srv: createAndSaveResource (inDto)
 
 note over srv : The creation of these ids are hidden to simplify the diagram.
-srv -> srv: checkSystemUserExists(inDto)
+srv -> srv: checkSystemUserExists(inDto.systemUserID)
 srv -> userRepo: existsByID(systemUserID)
 userRepo --> srv: true
 deactivate
-srv -> srv: checkProjectExists(inDto)
-srv -> projectRepo: existsByID(projectID))
+srv -> srv: checkProjectExists(inDto.projectID)
+srv -> projectRepo: existsByID(projectID)
 projectRepo --> srv: true
 deactivate
-srv -> srv: checkDatesInsideProject(inDto)
+srv -> srv: checkDatesInsideProject(inDto.projectID)
 srv -> projectRepo: findByID(projectID))
 projectRepo --> srv: true
 deactivate
-srv -> srv: checkAllocation(inDto)
-srv -> userRepo: findAllByUser(systemUserId))
+srv -> srv: checkAllocation(inDto.systemUserID)
+srv -> userRepo: findAllByUser(systemUserId)
 userRepo --> srv: resource list
-srv -> domainService: validateAllocation(resource list, inDto)
+srv -> domainService: validateAllocation(resource list, inDto.startDate, inDto.endDate)
 domainService --> srv: true
 deactivate
-srv -> srv: checkProjectRole(inDto)
-srv -> projectRepo: findAllByProject(projectID))
+srv -> srv: checkProjectRole(inDto.projectID)
+srv -> projectRepo: findAllByProject(projectID)
 projectRepo --> srv: true
 deactivate
 alt if user and project exist
