@@ -26,19 +26,14 @@ public class AuthService {
 
     public OutputLoginDTO authentication(LoginDto login) throws Exception {
 
-        Optional<User> userLogged = repo.findByUserId(idFactory.createUserID(login.email));
+        User userLogged = repo.findByUserId(idFactory.createUserID(login.email));
 
-        if(userLogged.isPresent()){
+            if(userLogged.checkPassword(new Password(login.password))){
 
-            User logged = userLogged.get();
-
-            if(logged.checkPassword(new Password(login.password))){
-
-                OutputLoginDTO result = map.toDto(logged);
+                OutputLoginDTO result = map.toDto(userLogged);
 
                 return result;
             };
-        }
         throw new Exception("Username or Password invalid");
     }
 }
