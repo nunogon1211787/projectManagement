@@ -2,6 +2,8 @@ package switch2021.project.entities.valueObjects.vos;
 
 import lombok.Getter;
 
+import javax.persistence.Embeddable;
+
 @Getter
 public class PercentageOfAllocation {
 

@@ -1,17 +1,11 @@
 package switch2021.project.applicationServices.service;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
-import switch2021.project.dataModel.jpa.ResourceIDJpa;
 import switch2021.project.dtoModel.dto.*;
 import switch2021.project.entities.factories.factoryInterfaces.IResourceFactoryReeng;
-import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.applicationServices.iRepositories.IResourceRepo;
 import switch2021.project.dtoModel.mapper.ResourceMapper;
 import switch2021.project.entities.aggregates.Project.Project;
@@ -27,6 +21,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class ResourceService {
@@ -115,6 +112,36 @@ public class ResourceService {
         return foundResource.map(resource -> map.model2Dto(resource)).orElse(null);
     }
 
+    /**
+     * Consult a Project Team of a Project (US028)
+     */
+    public List <OutputResourceDTO> showProjectTeam(String projectId) throws Exception {
+        ProjectID projID = iProjIDFactory.create(projectId);
+    List<OutputResourceDTO> resourcesDto = new ArrayList<>();
+
+        if (!projRepo.existsById(projID)) {
+            throw new Exception("Project does not exist");
+        }
+
+        List<Resource> projectTeam = resRepo.findAllByProject(projID);
+        for(Resource res : projectTeam){
+
+            resourcesDto.add(map.model2Dto(res));
+        }
+        return resourcesDto;
+    }
+
+    public List<OutputResourceDTO> showAllResources() {
+        List<Resource> allResources = resRepo.findAll();
+        List<OutputResourceDTO> allResDto = new ArrayList<>();
+
+        for(Resource res : allResources){
+
+            allResDto.add(map.model2Dto(res));
+        }
+        return allResDto;
+    }
+
     public void deleteResourceRequest(String id) throws Exception {
         ResourceIDReeng resId = createResourceIdByStringInputFromController(id);
 
@@ -171,4 +198,5 @@ public class ResourceService {
         String startDate = x[2];
         return iResourceIDFactory.create(userId, projectId, startDate);
     }
+
 }
