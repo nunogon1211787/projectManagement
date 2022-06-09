@@ -1,5 +1,34 @@
 import { makeHTTPRequest } from "../services/Service";
 
+// ACTIONS TO LOGIN
+
+export const FETCH_AUTH_SUCCESS = "FETCH_AUTH_SUCCESS";
+export const FETCH_AUTH_FAILURE = "FETCH_AUTH_FAILURE";
+
+export function authToAPI(url, request, dispatch) {
+  const success = (res) => dispatch(fetchAuthSuccess(res));
+  const failure = (err) => dispatch(fetchAuthFailure(err));
+  makeHTTPRequest(url, request, success, failure);
+}
+
+function fetchAuthSuccess(res) {
+  return {
+    type: FETCH_AUTH_SUCCESS,
+    payload: {
+      data: { ...res },
+    },
+  };
+}
+
+function fetchAuthFailure(err) {
+  return {
+    type: FETCH_AUTH_FAILURE,
+    payload: {
+      error: err,
+    },
+  };
+}
+
 // ACTIONS TO COLLECTIONS
 
 export const FETCH_COLLECTIONS_SUCCESS = "FETCH_COLLECTIONS_SUCCESS";

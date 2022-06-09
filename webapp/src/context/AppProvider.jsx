@@ -3,6 +3,18 @@ import { Provider } from "./AppContext";
 import reducer from "./Reducer";
 
 const initialState = {
+  auth: {
+    loading: false,
+    error: null,
+    data: {
+      token: "",
+    },
+  },
+  login: {
+    user: null,
+    profile: null,
+    role: null,
+  },
   collection: {
     loading: true,
     error: null,
@@ -19,13 +31,6 @@ const initialState = {
     form: false,
   },
 };
-
-// const initialState = {
-//     loading: false,
-//     data: {
-//         token: ""
-//     }
-// };
 
 const AppProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);

@@ -7,6 +7,8 @@ import {
   DELETE_DETAILS,
   NAV_TO_FORM,
   NAV_TO_TABLE,
+  FETCH_AUTH_FAILURE,
+  FETCH_AUTH_SUCCESS,
 } from "./Actions";
 
 export default function reducer(state, action) {
@@ -84,6 +86,28 @@ export default function reducer(state, action) {
         navigation: {
           table: true,
           form: false,
+        },
+      };
+    case FETCH_AUTH_SUCCESS:
+      return {
+        ...state,
+        auth: {
+          loading: false,
+          error: null,
+          data: {
+            token: action.payload.data,
+          },
+        },
+      };
+    case FETCH_AUTH_FAILURE:
+      return {
+        ...state,
+        auth: {
+          loading: false,
+          error: action.payload.error,
+          data: {
+            token: "",
+          },
         },
       };
     default:

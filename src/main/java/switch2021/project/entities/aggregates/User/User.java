@@ -266,4 +266,7 @@ public class User implements Entity<User> {
         return userId.hashCode();
     }
 
+    public boolean checkPassword(Password password) {
+        return this.encryptedPassword.equals(encryptPassword(password));
+    }
 }
