@@ -1,0 +1,49 @@
+@startuml
+title US010 - As Authenticated User, i want to update its own data (e.g. photo, function,...)
+
+autoactivate on
+autonumber
+
+participant ":UpdatePersonalDataRoute" as route
+participant ":UserController" as Ctrl
+participant ":UpdatePersonalDataService" as service
+participant "user : IUserRepo" as iRepo
+participant ":User" as systemUser
+participant ":UserMapper" as mapper
+participant "outputUserDTO : \nOutputUserDTO" as outPutDTO
+
+[o-> route: PATCH/users/{ID}(json)
+
+route -> Ctrl: updatePersonalData(json)
+
+note right
+Change from json to dto hidden to simplify diagram
+end note
+
+Ctrl -> service: updatePersonalData\n(idDTO, updateDataDTO)
+note over service : The creation of the id are hidden to simplify the diagram.
+'note right
+'All the following objects were created with factories, but the process is hidden in SD to simplify
+'end note
+
+service -> iRepo: findByUserID(systemUserID)
+iRepo --> service: systemUser
+
+service -> systemUser: editPersonalData (updateDataDTO)
+
+note over systemUser : The changes of attributes are hidden to simplify the diagram .
+
+systemUser --> service: true
+
+service -> mapper: toDto(systemUser)
+mapper -> outPutDTO**: create()
+mapper --> service: outPutUserDTO
+service --> Ctrl: outPutUserDTO
+Ctrl --> route: outPutUserJSON
+note right
+Change from json to dto hidden to simplify diagram
+end note
+[<--route : Informs Operation Success
+
+
+@enduml

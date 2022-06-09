@@ -23,9 +23,7 @@ public class SprintMapper {
         String projectID = newSprint.getSprintID().getProjectID().getCode();
         String name = newSprint.getSprintID().getSprintName().getText();
 
-        OutputSprintDTO outputSprintDTO = new OutputSprintDTO(projectID, sprintID, name);
-
-        return outputSprintDTO;
+        return new OutputSprintDTO(projectID, sprintID, name);
     }
 
     public CollectionModel<OutputSprintDTO> toCollectionDto(List<Sprint> sprints) {

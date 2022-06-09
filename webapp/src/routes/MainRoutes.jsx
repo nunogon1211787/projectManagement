@@ -1,5 +1,14 @@
-import React, { useContext } from "react";
-import { Route, Routes } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import CreateProject from "../pages/CreateProject";
+import CreateUserStory from "../pages/CreateUserStory";
+import CreateProfile from "../pages/CreateProfile";
+import CreateTypology from "../pages/CreateTypology";
+import { Home } from "../pages/Home";
+import CreateSprint from "../pages/CreateSprint";
+import RegisterUser from "../pages/RegisterUser";
+import CreateResource from '../pages/CreateResource';
+
 import {
   Projects,
   OrderedList,
@@ -9,22 +18,13 @@ import {
   FingerPrint,
   Services,
   Group,
+  Grommet as GrommetIcon,
 } from "grommet-icons";
-import CreateProfile from "../pages/CreateProfile";
-import CreateProject from "../pages/CreateProject";
-import CreateSprint from "../pages/CreateSprint";
-import CreateUserStory from "../pages/CreateUserStory";
-import CreateTypology from "../pages/CreateTypology";
-import { Home } from "../pages/Home";
-import RegisterUser from "../pages/RegisterUser";
-import CreateResource from '../pages/CreateResource';
 
 import { Box, Grommet } from "grommet";
 
 import { theme } from "../theme";
-import Sidebar from "../components/Sidebar";
-import { ReactComponent as LogoIcon } from "../routes/beaver-svgrepo.svg";
-import AppContext from "../context/AppContext";
+import { Sidebar } from "../components";
 
 const userSession = {
   user: {
@@ -43,85 +43,73 @@ const items = [
   {
     label: "Projects",
     Icon: Projects,
-    path: "projects",
+    path: "/projects",
   },
   {
     label: "Users",
     Icon: Group,
-    path: "users",
+    path: "/users",
   },
   {
     label: "User Stories",
     Icon: OrderedList,
-    path: "userstories",
+    path: "/userstories",
   },
   {
     label: "Resources",
     Icon: UserAdd,
-    path: "resources",
+    path: "/resources",
   },
   {
     label: "Sprints",
     Icon: History,
-    path: "sprints",
+    path: "/sprints",
   },
   {
     label: "Tasks",
     Icon: Tasks,
-    path: "tasks",
+    path: "/tasks",
   },
   {
     label: "Profiles",
     Icon: FingerPrint,
-    path: "profiles",
+    path: "/profiles",
   },
   {
     label: "Typologies",
     Icon: Services,
-    path: "typologies",
+    path: "/typologies",
   },
 ];
 
 function MainRoute() {
-  const { state } = useContext(AppContext);
-  const { auth } = state;
-  const { data } = auth;
-
-  if (data.token === "") {
-    return (
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="register" element={<RegisterUser />} />
-      </Routes>
-    );
-  } else {
-    return (
-      // <Router>
+  return (
+    <Router>
       <Grommet theme={theme} full>
         <Box direction="row" fill>
           <Sidebar
-            appIcon={<LogoIcon />}
+            appIcon={<GrommetIcon color="brand" />}
             appName="Beaver App"
             items={items}
             userSession={userSession}
           />
           <Box flex>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="userstories" element={<CreateUserStory />} />
-              <Route path="profiles" element={<CreateProfile />} />
-              <Route path="typologies" element={<CreateTypology />} />
-              <Route path="projects" element={<CreateProject />} />
-              <Route path="sprints" element={<CreateSprint />} />
-              <Route path="users" element={<RegisterUser />} />
-              <Route path="resources" element={<CreateResource />} />
-            </Routes>
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/userstories" component={CreateUserStory} />
+              <Route path="/profiles" component={CreateProfile} />
+              <Route path="/typologies" component={CreateTypology} />
+              <Route path="/projects" component={CreateProject} />
+              <Route path="/sprints" component={CreateSprint} />
+              <Route path="/users" component={RegisterUser} />
+              <Route path="/resources" component={CreateResource} />
+
+            </Switch>
           </Box>
         </Box>
       </Grommet>
-      // </Router>
-    );
-  }
+    </Router>
+  );
 }
 
 export default MainRoute;

@@ -1,6 +1,8 @@
 import React from "react";
+
 import { Menu, Text } from "grommet";
-import { Avatar } from "./Avatar";
+
+import { Avatar } from "./";
 
 export const UserMenu = ({ user = {}, items = [], ...rest }) => (
   <Menu
