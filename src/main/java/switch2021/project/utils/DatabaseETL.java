@@ -6,6 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.dtoModel.dto.*;
 import switch2021.project.interfaceAdapters.controller.*;
 
@@ -18,18 +19,26 @@ public class DatabaseETL {
 
     @Autowired
     UserController userController;
+    //UserService userService;
     @Autowired
     UserProfileController userProfileController;
+    //UserProfileService userProfileService;
     @Autowired
     TypologyController typologyController;
+    //TypologyService typologyService;
     @Autowired
     ProjectController projectController;
     @Autowired
+    ProjectService projectService;
+    @Autowired
     ResourceController resourceController;
+    //ResourceService resourceService;
     @Autowired
     SprintController sprintController;
+    //SprintService sprintService;
     @Autowired
     UserStoryController userStoryController;
+    //UserStoryService userStoryService;
 
     ClassPathResource cpr = new ClassPathResource("data.xlsx");
 
@@ -153,7 +162,7 @@ public class DatabaseETL {
         }
     }
 
-/*    @PostConstruct
+    @PostConstruct
     public void initProjectSprintsTable() throws Exception {
         InputStream is = cpr.getInputStream();
         XSSFWorkbook workbook = new XSSFWorkbook(is);
@@ -163,14 +172,14 @@ public class DatabaseETL {
             if (index > 0) {
                 XSSFRow row = worksheet.getRow(index);
 
-                String projectId = row.getCell(0).getStringCellValue();
+                String code = row.getCell(0).getStringCellValue();
                 String name = row.getCell(1).getStringCellValue();
 
-                NewSprintDTO sprintDTO = new NewSprintDTO(projectId, name);
+                NewSprintDTO sprintDTO = new NewSprintDTO(code, name);
                 sprintController.createAndSaveSprint(sprintDTO);
             }
         }
-    }*/
+    }
 
     @PostConstruct
     public void initProjectBacklogTable() throws Exception {
@@ -182,21 +191,20 @@ public class DatabaseETL {
             if (index > 0) {
                 XSSFRow row = worksheet.getRow(index);
 
-                String projectId = row.getCell(0).getStringCellValue();
+                String code = row.getCell(0).getStringCellValue();
                 String title = row.getCell(1).getStringCellValue();
                 int priority = (int) row.getCell(2).getNumericCellValue();
                 String description = row.getCell(3).getStringCellValue();
                 double timeEstimate = row.getCell(4).getNumericCellValue();
 
-                UserStoryDTO userStoryDTO = new UserStoryDTO(projectId, title, priority, description, timeEstimate);
+                UserStoryDTO userStoryDTO = new UserStoryDTO(code, title, priority, description, timeEstimate);
                 userStoryController.createAndSaveUserStory(userStoryDTO);
             }
         }
     }
-
-
-/*    @PostConstruct
-    public void initSprintBacklogTable() throws IOException {
+/*
+    @PostConstruct
+    public void initSprintBacklogTable() throws Exception {
         InputStream is = cpr.getInputStream();
         XSSFWorkbook workbook = new XSSFWorkbook(is);
         XSSFSheet worksheet = workbook.getSheetAt(10);
@@ -213,33 +221,4 @@ public class DatabaseETL {
             }
         }
     }*/
-
-/*    @PostConstruct
-    public void initUserStoriesTable () throws Exception{
-        // Load file from resources
-        InputStream is = cpr.getInputStream();
-        // Open Excel file
-        XSSFWorkbook workbook = new XSSFWorkbook(is);
-        // Get first Excel sheet aka Users
-        XSSFSheet worksheet = workbook.getSheetAt(7);
-
-        for (int index = 0; index < worksheet.getPhysicalNumberOfRows(); index++) {
-            if (index > 0) {
-                XSSFRow row = worksheet.getRow(index);
-
-
-                String projectID = row.getCell(0).getStringCellValue();
-                String title = row.getCell(1).getStringCellValue();
-                int priority = (int) row.getCell(5).getNumericCellValue();
-                String description = row.getCell(2).getStringCellValue();
-                double timeEstimate = row.getCell(7).getNumericCellValue();
-
-                UserStoryDTO userStoryDTO = new UserStoryDTO(projectID, title, priority, description, timeEstimate);
-                userStoryController.createAndSaveUserStory(userStoryDTO);
-            }
-        }
-    }
-
- */
-
 }
