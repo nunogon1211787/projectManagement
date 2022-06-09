@@ -69,6 +69,7 @@ public class ResourceRepository implements IResourceRepo {
         List<Resource> projTeamList = new ArrayList<>();
 
         for(ResourceJpa resourceJpa : projTeamJpaList){
+
             if(resourceJpa.getId().getProject() == projectId) {
                 Resource res = assembler.toDomain(resourceJpa);
                 projTeamList.add(res);

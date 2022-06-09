@@ -24,8 +24,8 @@ public class ResourceMapper {
         resDto.role = res.getRole().toString();
         resDto.startDate = res.getId().getStartDate().toString();
         resDto.endDate = res.getEndDate().toString();
-        resDto.allocation = res.getAllocation().toString();
-        resDto.cost = res.getCost().toString();
+        resDto.allocation = res.getAllocation().getPercentage();
+        resDto.cost = res.getCost().getCost();
 
 ////        //Show a resource
 ////        resDto.add(linkTo(methodOn(ResourceController.class).showCurrentProjectTeam())

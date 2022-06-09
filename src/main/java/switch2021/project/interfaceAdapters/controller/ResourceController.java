@@ -84,12 +84,12 @@ public class ResourceController {
 
     @GetMapping("/projectTeam/{id}")
     public ResponseEntity<Object> showProjectTeam(@PathVariable("id") String idProject) {
-        CollectionModel<OutputResourceDTO> result;
+        List<OutputResourceDTO> result;
 
         try {
-            result = CollectionModel.of(srv.showProjectTeam(idProject));
+            result = srv.showProjectTeam(idProject);
 
-            if (result.getContent().isEmpty()) {
+            if (result.isEmpty()) {
                 ErrorMessage message = new ErrorMessage();
                 message.errorMessage = "There are no resources in this project";
                 return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);

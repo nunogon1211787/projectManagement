@@ -48,25 +48,21 @@ public class ResourceService {
     private IUserIDFactory iUserIDFactory;
 
 
-    public OutputResourceDTO createAndSaveResource(CreateResourceDTO dto){
+    public OutputResourceDTO createAndSaveResource(CreateResourceDTO dto) {
 
         OutputResourceDTO response;
 
-        if(!checkSystemUserExists(dto.getSystemUserID())) {
+        if (!checkSystemUserExists(dto.getSystemUserID())) {
             throw new IllegalArgumentException(("SystemUser does not exist"));
         } else if (!checkProjectExists(dto.projectId)) {
             throw new IllegalArgumentException(("Project does not exist"));
-        }
-        else if (!checkDatesInsideProject(dto)) {
+        } else if (!checkDatesInsideProject(dto)) {
             throw new IllegalArgumentException(("Dates are not inside project"));
-        }
-        else
-        if (!checkAllocation(dto)) {
+        } else if (!checkAllocation(dto)) {
             throw new IllegalArgumentException(("Is not valid to create - Allocation)"));
-        }
-        else if (!checkProjectRole(dto)) {
-            throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));}
-            else {
+        } else if (!checkProjectRole(dto)) {
+            throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));
+        } else {
             Resource newResource = iResourceFactory.createResource(dto);
 
             resRepo.save(newResource);
@@ -75,6 +71,7 @@ public class ResourceService {
 
         return response;
     }
+
     public List<OutputResourceDTO> showCurrentProjectTeam(IdDTO dto, DateDTO dateDto) {
 
         String projectId = dto.id;
@@ -85,13 +82,13 @@ public class ResourceService {
         ProjectID projectID = new ProjectID(projectId);
 //        // ------------- new ------------
 
-        if (projRepo.existsById(projectID)){
+        if (projRepo.existsById(projectID)) {
 
             List<Resource> resources = resRepo.findAllByProject(projectID);
 
             List<Resource> projectTeam = manageResourcesService.currentResourcesByDate(resources, LocalDate.parse(dateDto.date));
 
-            for(Resource res : projectTeam){
+            for (Resource res : projectTeam) {
 
                 resourcesDto.add(map.model2Dto(res));
             }
@@ -102,10 +99,10 @@ public class ResourceService {
     public OutputResourceDTO showResource(String id) throws Exception {
         ResourceIDReeng resID = createResourceIdByStringInputFromController(id);
 
-        if(!projRepo.existsById(resID.getProject())) {
+        if (!projRepo.existsById(resID.getProject())) {
             throw new Exception("Project does not exist!");
         }
-        if (!userRepo.existsById(resID.getUser())){
+        if (!userRepo.existsById(resID.getUser())) {
             throw new Exception("System User does not exist!");
         }
         Optional<Resource> foundResource = resRepo.findById(resID);
@@ -115,16 +112,16 @@ public class ResourceService {
     /**
      * Consult a Project Team of a Project (US028)
      */
-    public List <OutputResourceDTO> showProjectTeam(String projectId) throws Exception {
+    public List<OutputResourceDTO> showProjectTeam(String projectId) throws NullPointerException {
         ProjectID projID = iProjIDFactory.create(projectId);
-    List<OutputResourceDTO> resourcesDto = new ArrayList<>();
+        List<OutputResourceDTO> resourcesDto = new ArrayList<>();
 
         if (!projRepo.existsById(projID)) {
-            throw new Exception("Project does not exist");
+            throw new NullPointerException("Project does not exist");
         }
 
         List<Resource> projectTeam = resRepo.findAllByProject(projID);
-        for(Resource res : projectTeam){
+        for (Resource res : projectTeam) {
 
             resourcesDto.add(map.model2Dto(res));
         }
@@ -135,7 +132,7 @@ public class ResourceService {
         List<Resource> allResources = resRepo.findAll();
         List<OutputResourceDTO> allResDto = new ArrayList<>();
 
-        for(Resource res : allResources){
+        for (Resource res : allResources) {
 
             allResDto.add(map.model2Dto(res));
         }
@@ -145,19 +142,19 @@ public class ResourceService {
     public void deleteResourceRequest(String id) throws Exception {
         ResourceIDReeng resId = createResourceIdByStringInputFromController(id);
 
-        if(!resRepo.existsById(resId)){
+        if (!resRepo.existsById(resId)) {
             throw new Exception("Resource does not exist");
         } else {
             resRepo.deleteByResourceID(resId);
         }
     }
 
-    private boolean checkSystemUserExists(String userID){
+    private boolean checkSystemUserExists(String userID) {
         UserID userId = iUserIDFactory.createUserID(userID);
         return this.userRepo.existsById(userId);
     }
 
-    private boolean checkProjectExists(String projectId){
+    private boolean checkProjectExists(String projectId) {
         ProjectID projID = iProjIDFactory.create(projectId);
         return this.projRepo.existsById(projID);
     }
@@ -176,13 +173,13 @@ public class ResourceService {
         return msg;
     }
 
-    private boolean checkAllocation(CreateResourceDTO dto){
+    private boolean checkAllocation(CreateResourceDTO dto) {
         UserID sysUserId = new UserID(new Email(dto.systemUserID));
         List<Resource> resourceProjectsList = resRepo.findAllByUser(sysUserId);
         return manageResourcesService.validateAllocation(resourceProjectsList, dto);
     }
 
-    private boolean checkProjectRole(CreateResourceDTO dto){
+    private boolean checkProjectRole(CreateResourceDTO dto) {
         ProjectID projID = new ProjectID(dto.projectId);
         List<Resource> projectTeamList = resRepo.findAllByProject(projID);
         return manageResourcesService.validateProjectRole(projectTeamList, dto);
