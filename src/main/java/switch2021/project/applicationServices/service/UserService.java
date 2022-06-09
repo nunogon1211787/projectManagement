@@ -3,14 +3,16 @@ package switch2021.project.applicationServices.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import switch2021.project.applicationServices.iRepositories.IUserProfileRepo;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
 import switch2021.project.dtoModel.dto.*;
+import switch2021.project.dtoModel.mapper.UserMapper;
+import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.factories.factoryInterfaces.IUserFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserProfileIDFactory;
-import switch2021.project.dtoModel.mapper.UserMapper;
-import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.valueObjects.vos.UserID;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
 
@@ -136,6 +138,7 @@ public class UserService {
     /**
      * Update assigned profiles (US006)
      */
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
     public OutputUserDTO assignUserProfile(String id, UpdateUserProfileDTO profileDTO) {
         UserID userID = createUserIdByStringInputFromController(id);
         Optional<User> user = userRepo.findByUserId(userID);
