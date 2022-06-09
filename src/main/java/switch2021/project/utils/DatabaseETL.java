@@ -6,7 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-import switch2021.project.applicationServices.service.ProjectService;
+import switch2021.project.applicationServices.service.UserService;
 import switch2021.project.dtoModel.dto.*;
 import switch2021.project.interfaceAdapters.controller.*;
 
@@ -19,6 +19,8 @@ public class DatabaseETL {
 
     @Autowired
     UserController userController;
+    @Autowired
+    UserService userService;
     @Autowired
     UserProfileController userProfileController;
     @Autowired
@@ -36,7 +38,6 @@ public class DatabaseETL {
 
     @PostConstruct
     public void init() throws Exception {
-        initGlobalRolesTable();
         initUserTable();
         initProfilesTable();
         initProjectsTable();
@@ -44,6 +45,7 @@ public class DatabaseETL {
         initProjectTeamsTable();
         initProjectSprintsTable();
         initUs();
+        initGlobalRolesTable();
     }
 
     public void initUserTable() throws Exception {
@@ -103,6 +105,7 @@ public class DatabaseETL {
 
                 UpdateUserProfileDTO updateUserProfileDTO = new UpdateUserProfileDTO(profileId);
                 userController.assignProfile(id, updateUserProfileDTO);
+                //userService.assignUserProfile(id, updateUserProfileDTO);
             }
         }
     }
