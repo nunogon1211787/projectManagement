@@ -35,10 +35,11 @@ public class TypologyService {
      **/
     public TypologyDTO createAndSaveTypology(TypologyDTO inputDto) {
         Typology newTypo = this.iTypologyFactory.createTypology(inputDto);
-        if(!iTypologyRepo.save(newTypo)) {
+        if(iTypologyRepo.existsByTypologyId(newTypo.getId_description())) {
             throw new IllegalArgumentException("Typology already exists!");
         }
-        return mapper.modelToDto(newTypo);
+        Typology saved = iTypologyRepo.save(newTypo);
+        return mapper.modelToDto(saved);
     }
 
 
@@ -46,23 +47,15 @@ public class TypologyService {
      * Typology Find's Methods
      */
     public TypologyDTO findTypologyRequested(String id) {
-
         TypologyID typoId = factoryId.createId(new TypologyDTO(id));
 
-        Optional<Typology> outputTypology = iTypologyRepo.findByTypologyId(typoId);
+        Typology outputTypology = iTypologyRepo.findByTypologyId(typoId);
 
-        if(outputTypology.isEmpty()){
-            throw new IllegalArgumentException("Typology does not exist!");
-        }
-       return mapper.modelToDto(outputTypology.get());
+       return mapper.modelToDto(outputTypology);
     }
 
     public CollectionModel<TypologyDTO> findAllTypologies() {
         List<Typology> repositoryList = iTypologyRepo.findAll();
-
-//        if(repositoryList.isEmpty()) {
-//            throw new NullPointerException("Does not exists any Typology at this moment!");
-//        }
 
         return mapper.toCollectionModel(repositoryList);
     }
@@ -73,9 +66,6 @@ public class TypologyService {
      */
     public void deleteTypology(String id) {
         TypologyID typoId = factoryId.createId(new TypologyDTO(id));
-
-        if (!iTypologyRepo.deleteByTypologyId(typoId)) {
-            throw new IllegalArgumentException("Typology does not exists!");
-        }
+        iTypologyRepo.deleteByTypologyId(typoId);
     }
 }

@@ -29,6 +29,8 @@ const initialState = {
   navigation: {
     table: true,
     form: false,
+    details: false,
+    editDetails: false,
   },
 };
 

@@ -12,7 +12,8 @@ class TaskTypeEnumTest {
     @Test
     void getTaskTypesDescriptionEnums() {
         List<String> listaTypes = TaskTypeEnum.getTaskTypesDescriptionEnums();
-        List<String> listaTypes2 = List.of(new String[]{"Meeting", "Documentation", "Design", "Implementation", "Testing", "Deployment"});
+        List<String> listaTypes2 = List.of(new String[]{"MEETING", "DOCUMENTATION",
+                "DESIGN", "IMPLEMENTATION", "TESTING", "DEPLOYMENT"});
 
         assertEquals(listaTypes2, listaTypes );
     }
@@ -22,15 +23,15 @@ class TaskTypeEnumTest {
         TaskTypeEnum[] valoresType = TaskTypeEnum.values();
         TaskTypeEnum x = valoresType[1];
 
-        assertEquals(x, TaskTypeEnum.Documentation);
-        assertNotEquals(x, TaskTypeEnum.Design);
-        assertEquals(x.toString(), "Documentation");
+        assertEquals(x, TaskTypeEnum.DOCUMENTATION);
+        assertNotEquals(x, TaskTypeEnum.DESIGN);
+        assertEquals(x.toString(), "DOCUMENTATION");
     }
 
     @Test
     void valueOf() {
-        TaskTypeEnum x = TaskTypeEnum.valueOf("Documentation");
+        TaskTypeEnum x = TaskTypeEnum.valueOf("DOCUMENTATION");
 
-        assertEquals(x, TaskTypeEnum.Documentation);
+        assertEquals(x, TaskTypeEnum.DOCUMENTATION);
     }
 }

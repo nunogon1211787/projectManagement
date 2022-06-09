@@ -20,11 +20,13 @@ import java.util.Objects;
 @Setter
 public class Task implements Entity<Task> {
 
-    /*** Attributes*/
+    /**
+     * Attributes
+     */
     private TaskID idTask;
     private Description description;
     private TaskTypeEnum type;
-    private EffortEstimate effortEstimate;  // em horas
+    private EffortEstimate effortEstimate;  //in hours
     private LocalDate startDate;
     private LocalDate endDate;
     private ResourceIDReeng responsible;
@@ -32,18 +34,17 @@ public class Task implements Entity<Task> {
     private List<TaskID> precedenceList;
 
 
-
-    /*** Constructor */
-
+    /**
+     * Constructor
+     */
     public Task(TaskID taskID) {
         this.idTask = taskID;
         this.taskEffortList = new ArrayList<>();
-
     }
 
-        public Task(TaskID taskID, Description description,
-                    EffortEstimate effortEstimate, TaskTypeEnum type,
-                    ResourceIDReeng responsible) {
+    public Task(TaskID taskID, Description description,
+                EffortEstimate effortEstimate, TaskTypeEnum type,
+                ResourceIDReeng responsible) {
         this.idTask = taskID;
         this.description = description;
         this.effortEstimate = effortEstimate;
@@ -54,16 +55,20 @@ public class Task implements Entity<Task> {
 
 
     }
-/*
-    /*** Constructor with precedence list*/
 
-//    public TaskReeng(Name name, Description description, EffortEstimate effortEstimate, TaskTypeEnum type, Resource responsible, TaskContainerID taskContainerID, List<String> precedenceList) {
+    /**
+     * Constructor with precedence list
+     **/
+
+//    public TaskReeng(Name name, Description description, EffortEstimate effortEstimate, TaskTypeEnum type, Resource
+//    responsible, TaskContainerID taskContainerID, List<String> precedenceList) {
 //        new TaskReeng(name, description, effortEstimate, type, responsible, taskContainerID);
 //        this.precedenceList = Collections.unmodifiableList(precedenceList);
 //    }
 
-    /*** Methods to iterate with attributes */
-
+    /**
+     * Methods to iterate with attributes
+     */
     public boolean hasName(String taskName) {
         return Objects.equals(this.idTask.getTaskName().getText(), taskName);
     }
@@ -81,21 +86,22 @@ public class Task implements Entity<Task> {
     }
 
 
-    /*** Methods get */
-
+    /**
+     * Methods get
+     */
     public String getStatus() {
         String status = "Blocked";
         double x = getExecutionPercentage();
 
-        if(x == 0){
+        if (x == 0) {
             status = "Planned";
         }
 
-        if(x == 1){
+        if (x == 1) {
             status = "Finished";
         }
 
-        if(x > 0 && x < 1){
+        if (x > 0 && x < 1) {
             status = "Running";
         }
 
@@ -115,20 +121,30 @@ public class Task implements Entity<Task> {
     }
 
     private double effortInHours(TaskEffort effort) {
-        return (double) effort.getEffortHours().getEffortHours() + ((double) effort.getEffortMinutes().getEffortMinutes() / 60);
+        return (double) effort.getEffortHours().getEffortHours()
+                + ((double) effort.getEffortMinutes().getEffortMinutes() / 60);
     }
 
+
+    /**
+     * Methods Override
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return Objects.equals(idTask, task.idTask) && Objects.equals(description, task.description) && type == task.type && Objects.equals(effortEstimate, task.effortEstimate) && Objects.equals(startDate, task.startDate) && Objects.equals(endDate, task.endDate) && Objects.equals(responsible, task.responsible) && Objects.equals(taskEffortList, task.taskEffortList) && Objects.equals(precedenceList, task.precedenceList);
+        return Objects.equals(idTask, task.idTask) && Objects.equals(description, task.description)
+                && type == task.type && Objects.equals(effortEstimate, task.effortEstimate)
+                && Objects.equals(startDate, task.startDate) && Objects.equals(endDate, task.endDate)
+                && Objects.equals(responsible, task.responsible) && Objects.equals(taskEffortList, task.taskEffortList)
+                && Objects.equals(precedenceList, task.precedenceList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idTask, description, type, effortEstimate, startDate, endDate, responsible, taskEffortList, precedenceList);
+        return Objects.hash(idTask, description, type, effortEstimate, startDate, endDate, responsible,
+                taskEffortList, precedenceList);
     }
 
     @Override

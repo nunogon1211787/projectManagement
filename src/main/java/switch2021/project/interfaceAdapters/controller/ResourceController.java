@@ -52,6 +52,33 @@ public class ResourceController {
         return new ResponseEntity<>(resourcesDto, HttpStatus.OK);
 
     }
+
+    /**
+     * Find by id
+     *
+     * @return resource
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> showResourceRequested(@PathVariable("id") String id) {
+        ErrorMessage message = new ErrorMessage();
+        OutputResourceDTO newResource;
+
+        try {
+            newResource = srv.showResource(id);
+
+            if(newResource == null){
+                message.errorMessage = "Resource does not exist!";
+                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(newResource, HttpStatus.OK);
+    }
+
+
 //    @GetMapping
 //    public ResponseEntity<Object> showCurrentProjectsByUser(@RequestParam("user") IdDTO id, @RequestParam("date") DateDTO dateDto){
 //
@@ -61,6 +88,19 @@ public class ResourceController {
 
 //    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteAResource(@PathVariable String id){
+        ResponseMessage response = new ResponseMessage();
+        try {
+            srv.deleteResourceRequest(id);
+            response.responseMessage = "Resource was deleted successfully!";
+        } catch (Exception exception){
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }
 

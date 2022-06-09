@@ -15,18 +15,13 @@ import java.util.Objects;
 @AllArgsConstructor
 public class TaskID implements ValueObject<TaskID> {
 
-    /** Attributes */
-
+    /**
+     * Attributes
+     **/
     private TaskContainerID taskContainerID;
     @Embedded
     private Name taskName;
 
-//    public TaskID (TaskContainerID taskContainerID, Name name){
-//
-//        this.taskName = name;
-//        this.taskContainerID = taskContainerID;
-//
-//    }
 
     @Override
     public boolean equals(Object o) {

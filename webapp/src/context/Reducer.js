@@ -9,6 +9,8 @@ import {
   NAV_TO_TABLE,
   FETCH_AUTH_FAILURE,
   FETCH_AUTH_SUCCESS,
+  NAV_TO_DETAILS,
+  NAV_TO_EDITDETAILS,
 } from "./Actions";
 
 export default function reducer(state, action) {
@@ -78,6 +80,8 @@ export default function reducer(state, action) {
         navigation: {
           table: false,
           form: true,
+          details: false,
+          editDetails: false,
         },
       };
     case NAV_TO_TABLE:
@@ -86,6 +90,8 @@ export default function reducer(state, action) {
         navigation: {
           table: true,
           form: false,
+          details: false,
+          editDetails: false,
         },
       };
     case FETCH_AUTH_SUCCESS:
@@ -110,6 +116,26 @@ export default function reducer(state, action) {
           },
         },
       };
+      case NAV_TO_DETAILS:
+        return {
+          ...state,
+          navigation: {
+            table: false,
+            form: false,
+            details: true,
+            editDetails: false,
+          },
+        };
+        case NAV_TO_EDITDETAILS:
+        return {
+          ...state,
+          navigation: {
+            table: false,
+            form: false,
+            details: false,
+            editDetails: true,
+          },
+        };
     default:
       return state;
   }

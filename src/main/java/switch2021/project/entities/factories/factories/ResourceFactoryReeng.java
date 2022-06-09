@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import switch2021.project.dtoModel.dto.CreateResourceDTO;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ICostPerHourFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IPercOfAllocationFactory;
-import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResouceIDFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResourceIDFactory;
 import switch2021.project.entities.valueObjects.vos.CostPerHour;
 import switch2021.project.entities.valueObjects.vos.PercentageOfAllocation;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectRoleReeng;
@@ -19,7 +19,7 @@ import java.time.LocalDate;
 public class ResourceFactoryReeng implements IResourceFactoryReeng {
 
     @Autowired
-    private IResouceIDFactory resourceID;
+    private IResourceIDFactory resourceID;
     @Autowired
     private ICostPerHourFactory costPerHour;
     @Autowired
@@ -28,7 +28,12 @@ public class ResourceFactoryReeng implements IResourceFactoryReeng {
     public Resource createResource(CreateResourceDTO resourceDTO){
 
         ResourceIDReeng resourceId = resourceID.create(resourceDTO.systemUserID, resourceDTO.projectId, resourceDTO.startDate);
-        ProjectRoleReeng projRole = ProjectRoleReeng.valueOf(resourceDTO.projectRole);
+        ProjectRoleReeng projRole;
+        if(resourceDTO.projectRole != null) {
+            projRole = ProjectRoleReeng.valueOf(resourceDTO.projectRole);
+        } else {
+            projRole = ProjectRoleReeng.TeamMember;
+        }
         CostPerHour coPeHo = costPerHour.create(resourceDTO.costPerHour);
         PercentageOfAllocation percOfAll = percentageOfAllocation.create(resourceDTO.percentageOfAllocation);
 

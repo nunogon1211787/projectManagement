@@ -2,19 +2,36 @@ import { useContext, useEffect } from "react";
 import AppContext from "../context/AppContext";
 import { URL_API } from "../services/Service";
 import { fetchCollections } from "../context/Actions";
+import { navToDetails } from "../context/Actions";
+import Button from "../components/Button";
 
 export default function Table(props) {
   const { state, dispatch } = useContext(AppContext);
   const { collection } = state;
   const { loading, error, data } = collection;
+  
 
   //GET REQUEST TO API
   useEffect(() => {
-    const url = `${URL_API}/${props.collections}`;
+    let url =  `${URL_API}/${props.collections}`;
+
+   if(props.query !== undefined){
+     url = `${URL_API}/${props.collections}?${props.query}`
+   }
     const request = {};
     fetchCollections(url, request, dispatch);
     // eslint-disable-next-line
   }, []);
+
+  const buttonNavigateD = () => {
+    navToDetails(dispatch);
+  };
+
+  let buttonOpen = <Button name="Open Project" function={buttonNavigateD} />;
+  if (props.collections !== 'projects') {
+   buttonOpen = null;
+  }
+
 
   const handleOnClick = (id) => {};
 
@@ -28,7 +45,7 @@ export default function Table(props) {
         const collect = Object.keys(data[0]._embedded)[0];
         const header = Object.keys(data[0]._embedded[collect][0]);
         const response = data[0]._embedded[collect];
-
+        
         return (
           <>
             <div className="card bg-light">
@@ -75,9 +92,10 @@ export default function Table(props) {
                             }
                           })
                         }
-                      </tr>
+                            {buttonOpen} 
+                         </tr>
                     );
-                  })}
+                  })}                  
                 </tbody>
               </table>
             </div>

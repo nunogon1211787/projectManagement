@@ -17,6 +17,7 @@ import CreateUserStory from "../pages/CreateUserStory";
 import CreateTypology from "../pages/CreateTypology";
 import { Home } from "../pages/Home";
 import RegisterUser from "../pages/RegisterUser";
+import CreateResource from '../pages/CreateResource';
 
 import { Box, Grommet } from "grommet";
 
@@ -113,6 +114,7 @@ function MainRoute() {
               <Route path="projects" element={<CreateProject />} />
               <Route path="sprints" element={<CreateSprint />} />
               <Route path="users" element={<RegisterUser />} />
+              <Route path="resources" element={<CreateResource />} />
             </Routes>
           </Box>
         </Box>

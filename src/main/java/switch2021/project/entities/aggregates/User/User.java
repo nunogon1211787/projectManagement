@@ -94,9 +94,6 @@ public class User implements Entity<User> {
 
     /**
      * Password validate if passwords are equal and encrypt and assign it to the System User
-     *
-     * @param newPassword,newPasswordConfirmation [Password v.o.'s]
-     * @see #encryptPassword(Password)
      */
     private void assignValidatedPassword(Password newPassword, Password newPasswordConfirmation) {
         if (newPassword.equals(newPasswordConfirmation)) {
@@ -109,9 +106,6 @@ public class User implements Entity<User> {
 
     /**
      * Password encryption
-     *
-     * @param password [v.o.]
-     * @return v.o. Description(encrypted string)
      */
     private Description encryptPassword(Password password) {
         int codigoASCII;
@@ -189,10 +183,8 @@ public class User implements Entity<User> {
         //Can't be simplified because the status is a business rule
         if (this.isActive == false) {
             isActive = true;
-            return true;
-        } else {
-            return false;
         }
+        return isActive;
     }
 
     public boolean inactivateStatus() {
