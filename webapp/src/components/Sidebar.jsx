@@ -10,18 +10,14 @@ export default function Sidebar(props) {
   const { auth } = state;
   const { data } = auth;
 
-  console.log(data);
-
   const { appName, appIcon, items, userSession } = props;
   const navigate = useNavigate();
 
-  const showPermittedMenuButton = (Icon, label, path) => {
-    console.log(path);
-
-    if (Object.keys(data.token._links).includes(path)) {
-      return <MenuButton Icon={Icon} path={path} label={label} key={label} />;
-    }
-  };
+  // const showPermittedMenuButton = (Icon, label, path) => {
+  //   if (Object.keys(data.token._links).includes(path)) {
+  //     return <MenuButton Icon={Icon} path={path} label={label} key={label} />;
+  //   }
+  // };
 
   return (
     <>
@@ -42,11 +38,12 @@ export default function Sidebar(props) {
           {/* <Text size="xsmall">{appName}</Text> */}
         </Box>
         <Box flex overflow="auto">
-          {items.map(
-            ({ Icon, label, path }) =>
-              showPermittedMenuButton(Icon, label, path)
-            /* <MenuButton Icon={Icon} path={path} label={label} key={label} /> */
-          )}
+          {items.map(({ Icon, label, path }) => {
+            /* showPermittedMenuButton(Icon, label, path) */
+            return (
+              <MenuButton Icon={Icon} path={path} label={label} key={label} />
+            );
+          })}
         </Box>
         {props.userSession && (
           <UserMenu
