@@ -10,7 +10,6 @@ import switch2021.project.applicationServices.service.SprintService;
 import switch2021.project.entities.valueObjects.vos.Description;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.SprintID;
-import switch2021.project.entities.valueObjects.vos.UserStoryID;
 
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -46,6 +45,7 @@ public class SprintController {
         }
         return new ResponseEntity<>(outPutSprintDTO, HttpStatus.CREATED);
     }
+
 
     @PostMapping("/{id}")
     public ResponseEntity<Object> addUserStoryToSprintBacklog(@PathVariable("id") String id,
@@ -118,7 +118,6 @@ public class SprintController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteSprint (@PathVariable String id) {
-
         ResponseMessage responseMessage = new ResponseMessage();
 
         try {
@@ -134,25 +133,25 @@ public class SprintController {
     }
 
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteProjectRequest(@PathVariable String id) {
-        ErrorMessage message = new ErrorMessage();
-
-        String [] values = id.split("_");
-
-        SprintID sprintID = new SprintID(new ProjectID(values[0] + "_" + values[1] + "_" + values[2])  ,
-                                         new Description(values[3]));
-
-        try {
-            sprintService.deleteSprint(sprintID);
-            message.errorMessage = "Sprint was deleted successfully";
-
-        } catch (Exception exception) {
-            message.errorMessage = exception.getMessage();
-            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(message, HttpStatus.OK);
-    }
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Object> deleteProjectRequest(@PathVariable String id) {
+//        ErrorMessage message = new ErrorMessage();
+//
+//        String [] values = id.split("_");
+//
+//        SprintID sprintID = new SprintID(new ProjectID(values[0] + "_" + values[1] + "_" + values[2])  ,
+//                                         new Description(values[3]));
+//
+//        try {
+//            sprintService.deleteSprint(sprintID);
+//            message.errorMessage = "Sprint was deleted successfully";
+//
+//        } catch (Exception exception) {
+//            message.errorMessage = exception.getMessage();
+//            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+//        }
+//        return new ResponseEntity<>(message, HttpStatus.OK);
+//    }
 
 
 

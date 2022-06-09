@@ -1,6 +1,5 @@
 package switch2021.project.applicationServices.service;
 
-import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
@@ -9,18 +8,13 @@ import switch2021.project.applicationServices.iRepositories.IUserStoryRepo;
 import switch2021.project.dtoModel.dto.NewSprintDTO;
 import switch2021.project.dtoModel.dto.OutputSprintDTO;
 import switch2021.project.dtoModel.dto.UserStoryIdDTO;
-import switch2021.project.dtoModel.dto.*;
 import switch2021.project.dtoModel.mapper.SprintMapper;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.factories.factoryInterfaces.ISprintFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ISprintIDFactory;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.UserStoryOfSprintStatus;
-import switch2021.project.interfaceAdapters.controller.SprintController;
-import switch2021.project.interfaceAdapters.controller.UserController;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import java.util.List;
 import java.util.Optional;
 
@@ -120,13 +114,6 @@ public class SprintService {
         return null;
     }
 
-    public void deleteSprint(SprintID id) throws Exception {
-        if (!sprintRepo.deleteSprint(id)) {
-            throw new Exception("Project does not exist");
-        }
-    }
-
-
 
     /**
      * Find Sprint By ID
@@ -134,7 +121,6 @@ public class SprintService {
 
     public OutputSprintDTO findSprintByID(String id) throws Exception{
 
-        OutputSprintDTO outputSprintDTO = new OutputSprintDTO();
 
         SprintID sprintID = createSprintIDByStringInputFromController(id);
 
