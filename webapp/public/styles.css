@@ -7308,7 +7308,7 @@ body {
   box-sizing: border-box;
   position: relative;
   max-width: 100%;
-  padding: 2%;
+  'padding: 2%;
 }
 
 #main-wrapper {

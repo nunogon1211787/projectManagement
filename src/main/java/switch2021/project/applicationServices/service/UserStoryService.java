@@ -189,7 +189,7 @@ public class UserStoryService {
     public UserStoryID createUserStoryIdByStringInputFromController(String id) {
         String[] x = id.split("&");
         String pId = x[0];
-        String uTitle = x[1].replaceAll("%20", " ");
+        String uTitle = x[1];
         return usIdFactory.create(pId, uTitle);
     }
 }

@@ -90,7 +90,7 @@ public class ProjectService {
             proj.setBudget(new Budget(Integer.parseInt(editProjectInfoDTO.budget)));
             proj.setSprintDuration(new SprintDuration(Integer.parseInt(editProjectInfoDTO.sprintDuration)));
 
-            proj.setProjectStatus(ProjectStatusEnum.valueOf(editProjectInfoDTO.projectStatus));
+            proj.setProjectStatus(ProjectStatusEnum.valueOf(editProjectInfoDTO.projectStatus.toUpperCase()));
             proj.setCustomer(new Customer(editProjectInfoDTO.customer));
             proj.setEndDate(LocalDate.parse(editProjectInfoDTO.endDate));
 

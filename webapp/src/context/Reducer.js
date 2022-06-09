@@ -7,6 +7,8 @@ import {
   DELETE_DETAILS,
   NAV_TO_FORM,
   NAV_TO_TABLE,
+  NAV_TO_DETAILS,
+  NAV_TO_EDITDETAILS,
 } from "./Actions";
 
 export default function reducer(state, action) {
@@ -76,6 +78,8 @@ export default function reducer(state, action) {
         navigation: {
           table: false,
           form: true,
+          details: false,
+          editDetails: false,
         },
       };
     case NAV_TO_TABLE:
@@ -84,8 +88,30 @@ export default function reducer(state, action) {
         navigation: {
           table: true,
           form: false,
+          details: false,
+          editDetails: false,
         },
       };
+      case NAV_TO_DETAILS:
+        return {
+          ...state,
+          navigation: {
+            table: false,
+            form: false,
+            details: true,
+            editDetails: false,
+          },
+        };
+        case NAV_TO_EDITDETAILS:
+        return {
+          ...state,
+          navigation: {
+            table: false,
+            form: false,
+            details: false,
+            editDetails: true,          
+          },
+        };
     default:
       return state;
   }
