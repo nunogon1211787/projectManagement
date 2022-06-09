@@ -26,7 +26,7 @@ public class TypologyController {
 
 
     /**
-     * Create a new Typology
+     * Create a new Typology (US012)
      */
     @PostMapping
     public ResponseEntity<Object> createTypology(@RequestBody TypologyDTO inputDto) {
