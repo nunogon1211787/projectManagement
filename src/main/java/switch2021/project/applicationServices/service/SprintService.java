@@ -1,5 +1,6 @@
 package switch2021.project.applicationServices.service;
 
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,9 @@ import switch2021.project.dtoModel.mapper.SprintMapper;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.factories.factoryInterfaces.ISprintFactory;
-import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ISprintIDFactory;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.UserStoryOfSprintStatus;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -32,8 +33,6 @@ public class SprintService {
     private ISprintFactory sprintFactory;
     @Autowired
     private IUserStoryRepo usRepo;
-    @Autowired
-    private ISprintIDFactory iSprintIDFactory;
 
 
     /**
@@ -72,12 +71,7 @@ public class SprintService {
         UserStoryID userStoryID = new UserStoryID(new ProjectID(userStoryIdDTO.projectID),
                                                   new UsTitle(userStoryIdDTO.title));
 
-        Optional<UserStory> us = usRepo.findByUserStoryId(userStoryID);
-        UserStory userStory = us.flatMap(uStory -> us).orElse(null);
-
-        if(userStory == null) {
-            throw new NullPointerException("User story does not exist");
-        }
+        UserStory userStory = usRepo.findByUserStoryId(userStoryID);
 
         if (sprint.isPresent()) {
             sprint.get().saveUsInScrumBoard(new UserStoryOfSprint(userStory.getUserStoryID(),
@@ -119,46 +113,10 @@ public class SprintService {
         return null;
     }
 
-
-    /**
-     * Find Sprint By ID
-     */
-
-    public OutputSprintDTO findSprintByID(String id) throws Exception{
-
-
-        SprintID sprintID = createSprintIDByStringInputFromController(id);
-
-        Optional<Sprint> optionalSprint = sprintRepo.findBySprintID(sprintID);
-
-        if (optionalSprint.isEmpty()) {
-            throw new Exception("Sprint does not exist.");
-        }
-
-        return sprintMapper.toDTO(optionalSprint.get());
-    }
-
-    /**
-     * Delete Sprint
-     */
-
-    public void deleteSprint (String id) throws Exception{
-
-        SprintID sprintID = createSprintIDByStringInputFromController(id);
-
-        if(!sprintRepo.deleteSprint(sprintID)) {
-            throw new Exception("Sprint does not exist!");
+    public void deleteSprint(SprintID id) throws Exception {
+        if (!sprintRepo.deleteSprint(id)) {
+            throw new Exception("Project does not exist");
         }
     }
 
-
-    /**
-     * Create Sprint ID method
-     */
-    private SprintID createSprintIDByStringInputFromController(String id) {
-        String[] x = id.split("&");
-        String projectID = x[0];
-        String sprintName = x[1].replaceAll("%20", " ");
-        return iSprintIDFactory.create(projectID, sprintName);
-    }
 }

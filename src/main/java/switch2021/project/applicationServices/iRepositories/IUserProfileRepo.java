@@ -24,7 +24,7 @@ public interface IUserProfileRepo {
     /**
      * Save user story
      */
-    UserProfile save(UserProfile profile);
+    Optional<UserProfile> save(UserProfile profile);
 
     boolean existsByUserProfileId(UserProfileID userProfileID);
 

@@ -23,16 +23,15 @@ public class UserStoryRepository implements IUserStoryRepo {
 
 
     @Override
-    public Optional<UserStory> findByUserStoryId(UserStoryID userStoryID) {
+    public UserStory findByUserStoryId(UserStoryID userStoryID) throws NullPointerException {
         Optional<UserStoryJpa> opUsJpa = jpaRepository.findById(userStoryID);
+        UserStory userStory = opUsJpa.map(userStoryJpa -> assembler.toDomain(userStoryJpa))
+                .orElse(null);
 
-        if(opUsJpa.isPresent()) {
-            UserStoryJpa usJpa = opUsJpa.get();
-            UserStory userStory = assembler.toDomain(usJpa);
-
-            return Optional.of(userStory);
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
         }
-        return Optional.empty();
+        return userStory;
     }
 
     @Override

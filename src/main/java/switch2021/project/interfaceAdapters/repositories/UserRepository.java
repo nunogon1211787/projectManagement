@@ -20,20 +20,17 @@ public class UserRepository implements IUserRepo {
     @Autowired
     private UserJpaRepository userJpaRepository;
     @Autowired
-    private UserJpaAssembler assembler;
+    private UserJpaAssembler userJpaAssembler;
 
     @Override
-    public Optional<User> findByUserId(UserID userID) {
+    public User findByUserId(UserID userID) {
         Optional<UserJpa> foundUserJpa = userJpaRepository.findById(userID);
+        UserJpa found = foundUserJpa.flatMap(user -> foundUserJpa).orElse(null);
 
-        if (foundUserJpa.isPresent()) {
-            UserJpa userJpa = foundUserJpa.get();
-            User user = assembler.toDomain(userJpa);
-
-            return Optional.of(user);
-        } else {
-            return Optional.empty();
+        if (found == null) {
+            throw new NullPointerException("This User does not exist!");
         }
+        return userJpaAssembler.toDomain(found);
     }
 
     @Override
@@ -45,7 +42,7 @@ public class UserRepository implements IUserRepo {
             throw new NullPointerException("Was not found any user!");
         }
         userJpaList.forEach(userJpa -> userList
-                .add(assembler.toDomain(userJpa)));
+                .add(userJpaAssembler.toDomain(userJpa)));
 
         return userList;
     }
@@ -96,11 +93,11 @@ public class UserRepository implements IUserRepo {
 
     @Override
     public User save(User newUser) {
-        UserJpa userJpa = assembler.toData(newUser);
+        UserJpa userJpa = userJpaAssembler.toData(newUser);
 
         UserJpa savedUserJpa = userJpaRepository.saveAndFlush(userJpa);
 
-        return assembler.toDomain(savedUserJpa);
+        return userJpaAssembler.toDomain(savedUserJpa);
     }
 
     @Override

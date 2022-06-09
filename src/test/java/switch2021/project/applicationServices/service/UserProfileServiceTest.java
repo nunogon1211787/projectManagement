@@ -41,7 +41,7 @@ public class UserProfileServiceTest {
 
         //Arrange
         when(iUserProfileFactory.createUserProfile(userProfileDTO)).thenReturn(userProfile);
-        when(iUserProfileRepo.save(userProfile)).thenReturn(userProfile);
+        when(iUserProfileRepo.save(userProfile)).thenReturn(Optional.of(userProfile));
         when(userProfileMapper.toDto(userProfile)).thenReturn(userProfileDTO);
         //Act
         UserProfileDTO dto = createUserProfileService.createAndSaveUserProfile(userProfileDTO);
@@ -56,8 +56,7 @@ public class UserProfileServiceTest {
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             when(iUserProfileFactory.createUserProfile(userProfileDTO)).thenReturn(userProfile);
-            when(iUserProfileRepo.save(userProfile)).thenReturn(userProfile);
-            when(iUserProfileRepo.existsByUserProfileId(userProfile.getUserProfileId())).thenReturn(true);
+            when(iUserProfileRepo.save(userProfile)).thenReturn(Optional.empty());
             when(userProfileMapper.toDto(userProfile)).thenReturn(userProfileDTO);
             //Act
             createUserProfileService.createAndSaveUserProfile(userProfileDTO);

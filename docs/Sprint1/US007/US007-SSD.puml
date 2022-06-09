@@ -12,6 +12,7 @@ participant ":System" as System
 activate user
 
 user -> System: Asks to associate a human resource (user) to a project
+System -> System : create a human resource
 System --> user: Shows Information Success
 
 @enduml

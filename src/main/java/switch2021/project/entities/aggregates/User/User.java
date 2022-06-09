@@ -261,5 +261,4 @@ public class User implements Entity<User> {
     public boolean checkPassword(Password password) {
         return this.encryptedPassword.equals(encryptPassword(password));
     }
-
 }
