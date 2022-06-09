@@ -7,7 +7,7 @@ const initialState = {
     loading: false,
     error: null,
     data: {
-      token: "",
+      token: "1",
     },
   },
   login: {

@@ -78,15 +78,22 @@ export default function Login() {
                   </form>
                   <p className="mt-5 login-form__footer">
                     {" "}
-                    <a
-                      href="#"
+                    <button
                       className="text-primary"
+                      style={{
+                        background: "none",
+                        backgroundColor: "none",
+                        border: "none",
+                        color: "#069",
+                        textDecoration: "none",
+                        cursor: "pointer",
+                      }}
                       onClick={() => {
                         navigate("register", { replace: true });
                       }}
                     >
                       Register Account
-                    </a>{" "}
+                    </button>{" "}
                   </p>
                 </div>
               </div>
