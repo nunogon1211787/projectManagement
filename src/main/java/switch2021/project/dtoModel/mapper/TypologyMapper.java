@@ -34,10 +34,8 @@ public class TypologyMapper {
 
         //Add self relation
         result.add(linkTo(methodOn(TypologyController.class).findTypologyRequested(result.description)).withSelfRel());
-
         //Add collection relation
         result.add(linkTo(methodOn(TypologyController.class).findTypologyList()).withRel("Collection"));
-
         //Add delete option
         result.add(linkTo(methodOn(TypologyController.class).deleteTypology(result.description)).withRel("Delete"));
 
@@ -57,7 +55,7 @@ public class TypologyMapper {
     public CollectionModel<TypologyDTO> toCollectionModel(List<Typology> typologies){
 
         CollectionModel<TypologyDTO> result = CollectionModel.of(typologies.stream()
-                .map(typo -> modelToDto(typo))
+                .map(this::modelToDto)
                 .collect(Collectors.toList()));
 
         //Add HATEOAS to OUTPUT DTOs

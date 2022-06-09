@@ -2,7 +2,6 @@ package switch2021.project.interfaceAdapters.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import switch2021.project.dataModel.jpa.UserJpa;
 import switch2021.project.dataModel.assembler.UserJpaAssembler;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
@@ -24,14 +23,14 @@ public class UserRepository implements IUserRepo {
     private UserJpaAssembler userJpaAssembler;
 
     @Override
-    public Optional<User> findByUserId(UserID userID) {
+    public User findByUserId(UserID userID) {
         Optional<UserJpa> foundUserJpa = userJpaRepository.findById(userID);
+        UserJpa found = foundUserJpa.flatMap(user -> foundUserJpa).orElse(null);
 
-        if (foundUserJpa.isPresent()) {
-            User user = userJpaAssembler.toDomain(foundUserJpa.get());
-            return Optional.of(user);
-        } else
-            return Optional.empty();
+        if (found == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
+        return userJpaAssembler.toDomain(found);
     }
 
     @Override
@@ -39,16 +38,18 @@ public class UserRepository implements IUserRepo {
         List<UserJpa> userJpaList = userJpaRepository.findAll();
         List<User> userList = new ArrayList<>();
 
-        userJpaList.forEach(userJpa -> userList.add(userJpaAssembler.toDomain(userJpa)));
+        if (userJpaList.isEmpty()) {
+            throw new NullPointerException("Was not found any user!");
+        }
+        userJpaList.forEach(userJpa -> userList
+                .add(userJpaAssembler.toDomain(userJpa)));
 
         return userList;
     }
 
     @Override
     public List<User> findAllByNameContains(String name) {
-        List<UserJpa> usersJpa = userJpaRepository.findAll();
-        List<User> users = userJpaAssembler.toDomain(usersJpa);
-
+        List<User> users = findAll();
         List<User> usersByName = new ArrayList<>();
 
         for (User user : users) {
@@ -61,9 +62,7 @@ public class UserRepository implements IUserRepo {
 
     @Override
     public List<User> findAllByFunctionContains(String function) {
-        List<UserJpa> usersJpa = userJpaRepository.findAll();
-        List<User> users = userJpaAssembler.toDomain(usersJpa);
-
+        List<User> users = findAll();
         List<User> usersByFunction = new ArrayList<>();
 
         for (User user : users) {
@@ -75,10 +74,8 @@ public class UserRepository implements IUserRepo {
     }
 
     @Override
-    public List<User> findAllByUserProfileId(UserProfileID profile) {
-        List<UserJpa> usersJpa = userJpaRepository.findAll();
-        List<User> users = userJpaAssembler.toDomain(usersJpa);
-
+    public List<User> findAllByUserProfileContains(UserProfileID profile) {
+        List<User> users = findAll();
         List<User> usersByProfile = new ArrayList<>();
 
         for (User user : users) {
@@ -95,36 +92,20 @@ public class UserRepository implements IUserRepo {
     }
 
     @Override
-    public Optional<User> update(User user) {
-        UserJpa userJpa = userJpaAssembler.toData(user);
+    public User save(User newUser) {
+        UserJpa userJpa = userJpaAssembler.toData(newUser);
 
         UserJpa savedUserJpa = userJpaRepository.saveAndFlush(userJpa);
-        userJpaRepository.flush();
 
-        return Optional.of(userJpaAssembler.toDomain(savedUserJpa));
+        return userJpaAssembler.toDomain(savedUserJpa);
     }
 
     @Override
-    public Optional<User> save(User newUser) {
-
-        UserJpa userJpa = userJpaAssembler.toData(newUser);
-        Optional<User> user = Optional.empty();
-
-        if (!userJpaRepository.existsById(userJpa.getEmail())) {
-            UserJpa savedUserJpa = userJpaRepository.saveAndFlush(userJpa);
-            user = Optional.of(userJpaAssembler.toDomain(savedUserJpa));
-        }
-        //userJpaRepository.sav();
-        return user;
-    }
-
-    @Override
-    public boolean delete(UserID userID) {
-
-        if (userJpaRepository.existsById(userID)) {
+    public void delete(UserID userID) {
+        if (!userJpaRepository.existsById(userID)) {
+            throw new NullPointerException("User does not exists!");
+        } else {
             userJpaRepository.deleteById(userID);
-            return true;
         }
-        return false;
     }
 }

@@ -11,22 +11,17 @@ import switch2021.project.entities.valueObjects.vos.Name;
 @Component
 public class TaskIDFactory implements ITaskIDFactory {
 
-
+    /**
+     * Attributes
+     */
     private TaskContainerID taskContainerID;
-
     @Autowired
     private INameFactory taskName;
 
 
-
-    public TaskIDFactory() {}
-
-    public TaskIDFactory(TaskContainerID taskContainerID, INameFactory nameFactory) {
-        this.taskContainerID = taskContainerID;
-        this.taskName = nameFactory;
-    }
-
-
+    /**
+     * Method Create
+     */
     @Override
     public TaskID createTaskID(TaskContainerID taskContainerID, String name) {
         Name name2 = taskName.createName(name);

@@ -12,5 +12,4 @@ public enum ProjectStatusEnum {
     TRANSITION,
     WARRANTY,
     CLOSED
-
 }

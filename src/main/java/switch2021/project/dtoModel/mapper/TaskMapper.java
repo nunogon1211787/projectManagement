@@ -7,7 +7,7 @@ import switch2021.project.entities.aggregates.Task.Task;
 @Component
 public class TaskMapper {
 
-    public OutputTaskDTO model2Dto(Task task) {
+    public OutputTaskDTO toDto(Task task) {
 
         OutputTaskDTO taskDto = new OutputTaskDTO();
 
