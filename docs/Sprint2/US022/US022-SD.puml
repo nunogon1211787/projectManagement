@@ -6,7 +6,7 @@ autoactivate on
 autonumber
 
 participant ": CreateSprintRoute" as UI
-participant ": CreateSprintController" as Ctrl
+participant ": SprintController" as Ctrl
 participant ": CreateSprintService" as createSprintService
 participant ": ISprintFactory" as sprintFactory
 participant " newSprint : Sprint" as sprint
