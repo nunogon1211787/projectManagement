@@ -22,16 +22,17 @@ public class TypologyRepository implements ITypologyRepo {
 
 
     @Override
-    public Typology findByTypologyId(TypologyID typoId) {
+    public Optional<Typology> findByTypologyId(TypologyID typoId) {
         Optional<TypologyJpa> opTypology = jpaRepository.findById(typoId);
 
-        TypologyJpa typologyJpa = opTypology.flatMap(typoJpa -> opTypology)
-                .orElse(null);
+        if(opTypology.isPresent()) {
+            TypologyJpa typologyJpa = opTypology.get();
+            Typology typology = assembler.toDomain(typologyJpa);
 
-        if (typologyJpa == null) {
-            throw new NullPointerException("Typology does not exist!");
+            return Optional.of(typology);
+        } else {
+            return Optional.empty();
         }
-        return assembler.toDomain(typologyJpa);
     }
 
     @Override
@@ -44,9 +45,9 @@ public class TypologyRepository implements ITypologyRepo {
     public Typology save(Typology typology) {
         TypologyJpa typologyJpa = assembler.toData(typology);
 
-        TypologyJpa savedTypolyJpa = jpaRepository.saveAndFlush(typologyJpa);
+        TypologyJpa savedTypologyJpa = jpaRepository.saveAndFlush(typologyJpa);
 
-        return assembler.toDomain(savedTypolyJpa);
+        return assembler.toDomain(savedTypologyJpa);
     }
 
     @Override

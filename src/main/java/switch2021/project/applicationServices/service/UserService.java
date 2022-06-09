@@ -16,6 +16,7 @@ import switch2021.project.entities.valueObjects.vos.UserProfileID;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -66,11 +67,15 @@ public class UserService {
      * Find User, by ID
      */
     public OutputUserDTO findUserById(String id) {
-        UserID userID = userIDFactory.createUserID(id);
+        UserID userID = createUserIdByStringInputFromController(id);
+        Optional<User> user = userRepo.findByUserId(userID);
 
-        User user = userRepo.findByUserId(userID);
+        User found = user.flatMap(userFound -> user).orElse(null);
 
-        return userMapper.toDto(user);
+        if (found == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
+        return userMapper.toDto(found);
     }
 
 
@@ -109,15 +114,21 @@ public class UserService {
      * Update Personal Data and Change Password
      */
     public OutputUserDTO updatePersonalData(String id, UpdateDataDTO updateDataDTO) {
-        UserID userID = userIDFactory.createUserID(id);
-        User user = userRepo.findByUserId(userID);
+        UserID userID = createUserIdByStringInputFromController(id);
+        Optional<User> user = userRepo.findByUserId(userID);
+
+        User found = user.flatMap(userFound -> user).orElse(null);
+
+        if (found == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
 
         if (updateDataDTO.newPassword != null && updateDataDTO.oldPassword != null) {
-            user.updatePassword(updateDataDTO.oldPassword, updateDataDTO.newPassword);
+            found.updatePassword(updateDataDTO.oldPassword, updateDataDTO.newPassword);
         } else {
-            user.editPersonalData(updateDataDTO.userName, updateDataDTO.function, updateDataDTO.photo);
+            found.editPersonalData(updateDataDTO.userName, updateDataDTO.function, updateDataDTO.photo);
         }
-        User updatedUser = userRepo.save(user);
+        User updatedUser = userRepo.save(found);
         return userMapper.toDto(updatedUser);
     }
 
@@ -126,9 +137,14 @@ public class UserService {
      * Update assigned profiles (US006)
      */
     public OutputUserDTO assignUserProfile(String id, UpdateUserProfileDTO profileDTO) {
-        UserID userID = userIDFactory.createUserID(id);
+        UserID userID = createUserIdByStringInputFromController(id);
+        Optional<User> user = userRepo.findByUserId(userID);
 
-        User user = userRepo.findByUserId(userID);
+        User found = user.flatMap(userFound -> user).orElse(null);
+
+        if (found == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
 
         UserProfileID profileID = profileIDFactory.createUserProfileID(profileDTO.profileId);
         //Validate if exist the profile
@@ -136,20 +152,25 @@ public class UserService {
             throw new IllegalArgumentException("This user profile does not exist!");
         }
         //Validate if the user has the user profile assigned
-        if (!user.hasProfile(profileID)) {
-            user.toAssignProfile(profileID);
+        if (!found.hasProfile(profileID)) {
+            found.toAssignProfile(profileID);
         } else {
             throw new IllegalArgumentException("This user profile was already assigned!");
         }
-        User updatedUser = userRepo.save(user);
+        User updatedUser = userRepo.save(found);
         return userMapper.toDto(updatedUser);
     }
 
     public OutputUserDTO removeUserProfile(String id, UpdateUserProfileDTO profileDTO) {
-        UserID userID = userIDFactory.createUserID(id);
+        UserID userID = createUserIdByStringInputFromController(id);
         UserProfileID profileID;
+        Optional<User> user = userRepo.findByUserId(userID);
 
-        User user = userRepo.findByUserId(userID);
+        User found = user.flatMap(userFound -> user).orElse(null);
+
+        if (found == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
 
         //Validate if the profile is Visitor, all Users must have the visitor Profile.
         if (!profileDTO.profileId.equalsIgnoreCase("visitor")) {
@@ -162,12 +183,12 @@ public class UserService {
             throw new IllegalArgumentException("This user profile does not exist!");
         }
         //Validate if the user has the user profile assigned
-        if (user.hasProfile(profileID)) {
-            user.removeProfile(profileID);
+        if (found.hasProfile(profileID)) {
+            found.removeProfile(profileID);
         } else {
             throw new IllegalArgumentException("This user profile was not assigned!");
         }
-        User updatedUser = userRepo.save(user);
+        User updatedUser = userRepo.save(found);
         return userMapper.toDto(updatedUser);
     }
 
@@ -176,24 +197,36 @@ public class UserService {
      * Active and Inactive User (US002, US025 and US026)
      */
     public OutputUserDTO activateUser(String id) {
-        UserID userID = userIDFactory.createUserID(id);
-        User user = userRepo.findByUserId(userID);
+        UserID userID = createUserIdByStringInputFromController(id);
+        Optional<User> user = userRepo.findByUserId(userID);
 
-        if (!user.activateStatus()) {
+        User found = user.flatMap(userFound -> user).orElse(null);
+
+        if (found == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
+
+        if (!found.activateStatus()) {
             throw new IllegalArgumentException("This user is already activated");
         }
-        User updatedUser = userRepo.save(user);
+        User updatedUser = userRepo.save(found);
         return userMapper.toDto(updatedUser);
     }
 
     public OutputUserDTO inactivateUser(String id) {
-        UserID userID = userIDFactory.createUserID(id);
-        User user = userRepo.findByUserId(userID);
+        UserID userID = createUserIdByStringInputFromController(id);
+        Optional<User> user = userRepo.findByUserId(userID);
 
-        if (!user.inactivateStatus()) {
+        User found = user.flatMap(userFound -> user).orElse(null);
+
+        if (found == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
+
+        if (!found.inactivateStatus()) {
             throw new IllegalArgumentException("This user is already inactivated");
         }
-        User updatedUser = userRepo.save(user);
+        User updatedUser = userRepo.save(found);
         return userMapper.toDto(updatedUser);
     }
 
@@ -204,15 +237,20 @@ public class UserService {
     public boolean createAndAddRequest(String id, RequestDTO requestDTO) {
         UserID userID = userIDFactory.createUserID(id);
         UserProfileID profileID = profileIDFactory.createUserProfileID(requestDTO.getProfileId());
+        Optional<User> user = userRepo.findByUserId(userID);
 
-        User user = userRepo.findByUserId(userID);
+        User found = user.flatMap(userFound -> user).orElse(null);
+
+        if (found == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
 
         if (profileRepo.existsByUserProfileId(profileID)) {
-            user.createProfileRequest(profileID);
+            found.createProfileRequest(profileID);
         } else {
             throw new IllegalArgumentException("This profile does not exist!");
         }
-        userRepo.save(user);
+        userRepo.save(found);
         return true;
     }
 
@@ -223,5 +261,9 @@ public class UserService {
     public void deleteUser(String id) throws NullPointerException {
         UserID userID = userIDFactory.createUserID(id);
         userRepo.delete(userID);
+    }
+
+    private UserID createUserIdByStringInputFromController(String id) {
+        return userIDFactory.createUserID(id);
     }
 }

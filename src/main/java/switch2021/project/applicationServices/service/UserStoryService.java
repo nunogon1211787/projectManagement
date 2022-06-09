@@ -61,10 +61,15 @@ public class UserStoryService {
 
     public OutputUserStoryDTO showAUserStory(String id) {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
+        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(usId);
 
-        UserStory foundUs = iUserStoryRepo.findByUserStoryId(usId);
+        UserStory userStory = foundUs.flatMap(us -> foundUs).orElse(null);
 
-        return userStoryMapper.toDto(foundUs);
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
+        }
+
+        return userStoryMapper.toDto(userStory);
     }
 
     public CollectionModel<OutputUserStoryDTO> showAllUserStories() {
@@ -93,7 +98,13 @@ public class UserStoryService {
      */
     public OutputUserStoryDTO updateUSData(String id, UpdateUserStoryDTO updateDTO) {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
-        UserStory userStory = iUserStoryRepo.findByUserStoryId(usId);
+        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(usId);
+
+        UserStory userStory = foundUs.flatMap(us -> foundUs).orElse(null);
+
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
+        }
 
         if (updateDTO.priority != 0) {
             userStory.updatePriority(priorityFactory.create(updateDTO.getPriority()));
@@ -107,7 +118,13 @@ public class UserStoryService {
 
     public OutputUserStoryDTO startUserStory(String id) throws Exception {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
-        UserStory userStory = iUserStoryRepo.findByUserStoryId(usId);
+        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(usId);
+
+        UserStory userStory = foundUs.flatMap(us -> foundUs).orElse(null);
+
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
+        }
 
         if (userStory.getUsEndDate() != null) {
             throw new IllegalArgumentException("This User Story is already closed!");
@@ -123,7 +140,13 @@ public class UserStoryService {
 
     public OutputUserStoryDTO cancelUserStory(String id) throws Exception {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
-        UserStory userStory = iUserStoryRepo.findByUserStoryId(usId);
+        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(usId);
+
+        UserStory userStory = foundUs.flatMap(us -> foundUs).orElse(null);
+
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
+        }
 
         if (userStory.getUsEndDate() != null) {
             throw new IllegalArgumentException("This User Story is already closed!");
@@ -137,7 +160,13 @@ public class UserStoryService {
 
     public OutputUserStoryDTO finishUserStory(String id) throws IllegalArgumentException {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
-        UserStory userStory = iUserStoryRepo.findByUserStoryId(usId);
+        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(usId);
+
+        UserStory userStory = foundUs.flatMap(us -> foundUs).orElse(null);
+
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
+        }
 
         if (userStory.getUsEndDate() != null) {
             throw new IllegalArgumentException("This User Story is already closed!");
@@ -155,8 +184,14 @@ public class UserStoryService {
      */
     public CollectionModel<OutputUserStoryDTO> refineUserStory(String id, UserStoryDTO inDto) {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
-        UserStory userStory = iUserStoryRepo.findByUserStoryId(usId);
+        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(usId);
         List<UserStory> userStories = new ArrayList<>();
+
+        UserStory userStory = foundUs.flatMap(us -> foundUs).orElse(null);
+
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
+        }
 
         //Create new User Story
         UserStory refinedUs = iUserStoryFactory.createUserStory(inDto);

@@ -58,10 +58,10 @@ public class TaskService {
     private TaskContainerID returnTaskContainerID(String taskContainerID) {
         TaskContainerID z;
 
-        UserStory y = iUserStoryRepo.findByUserStoryId(new UserStoryID(taskContainerID));
+        Optional<UserStory> y = iUserStoryRepo.findByUserStoryId(new UserStoryID(taskContainerID));
 
-        if(y != null) {
-            z = y.getUserStoryID();
+        if(y.isPresent()) {
+            z = y.get().getUserStoryID();
         } else {
             Optional<Sprint> x = iSprintRepo.findBySprintID(new SprintID(taskContainerID));
             if (x.isPresent()) {

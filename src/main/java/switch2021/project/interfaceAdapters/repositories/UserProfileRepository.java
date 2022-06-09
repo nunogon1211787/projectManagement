@@ -2,9 +2,11 @@ package switch2021.project.interfaceAdapters.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import switch2021.project.dataModel.jpa.ProjectJpa;
 import switch2021.project.dataModel.jpa.UserProfileJpa;
 import switch2021.project.dataModel.assembler.UserProfileJpaAssembler;
 import switch2021.project.applicationServices.iRepositories.IUserProfileRepo;
+import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
 import switch2021.project.persistence.UserProfileJpaRepository;
@@ -14,24 +16,25 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-    public class UserProfileRepository implements IUserProfileRepo {
+public class UserProfileRepository implements IUserProfileRepo {
 
     @Autowired
     UserProfileJpaRepository userProfileJpaRepository;
-
     @Autowired
     UserProfileJpaAssembler assembler;
 
 
-    public Optional<UserProfile> findByUserProfileID (UserProfileID userProfileID) {
+    public Optional<UserProfile> findByUserProfileID(UserProfileID userProfileID) {
+        Optional<UserProfileJpa> opUPJpa = userProfileJpaRepository.findById(userProfileID);
 
-        Optional <UserProfileJpa> userProfileJpa = userProfileJpaRepository.findById(userProfileID);
-        Optional<UserProfile> userProfile = Optional.empty();
+        if (opUPJpa.isPresent()) {
+            UserProfileJpa upJpa = opUPJpa.get();
+            UserProfile uProfile = assembler.toDomain(upJpa);
 
-        if (userProfileJpa.isPresent()) {
-            userProfile = Optional.of(assembler.toDomain(userProfileJpa.get()));
+            return Optional.of(uProfile);
+        } else {
+            return Optional.empty();
         }
-        return userProfile;
     }
 
 
@@ -39,23 +42,19 @@ import java.util.Optional;
         List<UserProfileJpa> userProfileJpaList = userProfileJpaRepository.findAll();
         List<UserProfile> userProfileList = new ArrayList<>();
 
-        for (UserProfileJpa userProfileJpa: userProfileJpaList) {
+        for (UserProfileJpa userProfileJpa : userProfileJpaList) {
             userProfileList.add(assembler.toDomain(userProfileJpa));
         }
         return userProfileList;
     }
 
 
-    public Optional<UserProfile> save (UserProfile profile) {
-        Optional<UserProfile> result = Optional.empty();
+    public UserProfile save(UserProfile profile) {
+        UserProfileJpa userProfileJpa = assembler.toData(profile);
 
-        if(!userProfileJpaRepository.existsById(profile.getUserProfileId())) {
-            UserProfileJpa userProfileJpa = assembler.toData(profile);
-            UserProfileJpa saved = userProfileJpaRepository.save(userProfileJpa);
-            result = Optional.of(assembler.toDomain(saved));
-        }
+        UserProfileJpa saved = userProfileJpaRepository.saveAndFlush(userProfileJpa);
 
-        return result;
+        return assembler.toDomain(saved);
     }
 
 
@@ -63,13 +62,13 @@ import java.util.Optional;
         return userProfileJpaRepository.existsById(userProfileID);
     }
 
-    public boolean deleteById (UserProfileID userProfileID) {
 
-        if(userProfileJpaRepository.existsById(userProfileID)) {
+    public boolean deleteById(UserProfileID userProfileID) {
+
+        if (userProfileJpaRepository.existsById(userProfileID)) {
             userProfileJpaRepository.deleteById(userProfileID);
             return true;
         }
-
         return false;
     }
 }

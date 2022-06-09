@@ -35,6 +35,7 @@ public class TypologyService {
      **/
     public TypologyDTO createAndSaveTypology(TypologyDTO inputDto) {
         Typology newTypo = this.iTypologyFactory.createTypology(inputDto);
+
         if(iTypologyRepo.existsByTypologyId(newTypo.getId_description())) {
             throw new IllegalArgumentException("Typology already exists!");
         }
@@ -48,10 +49,16 @@ public class TypologyService {
      */
     public TypologyDTO findTypologyRequested(String id) {
         TypologyID typoId = factoryId.createId(new TypologyDTO(id));
+        Optional<Typology> opTypology = iTypologyRepo.findByTypologyId(typoId);
 
-        Typology outputTypology = iTypologyRepo.findByTypologyId(typoId);
+        Typology typology = opTypology.flatMap(typoJpa -> opTypology)
+                .orElse(null);
 
-       return mapper.modelToDto(outputTypology);
+        if (typology == null) {
+            throw new NullPointerException("Typology does not exist!");
+        }
+
+       return mapper.modelToDto(typology);
     }
 
     public CollectionModel<TypologyDTO> findAllTypologies() {

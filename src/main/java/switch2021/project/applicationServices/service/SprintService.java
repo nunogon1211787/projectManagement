@@ -72,7 +72,12 @@ public class SprintService {
         UserStoryID userStoryID = new UserStoryID(new ProjectID(userStoryIdDTO.projectID),
                                                   new UsTitle(userStoryIdDTO.title));
 
-        UserStory userStory = usRepo.findByUserStoryId(userStoryID);
+        Optional<UserStory> us = usRepo.findByUserStoryId(userStoryID);
+        UserStory userStory = us.flatMap(uStory -> us).orElse(null);
+
+        if(userStory == null) {
+            throw new NullPointerException("User story does not exist");
+        }
 
         if (sprint.isPresent()) {
             sprint.get().saveUsInScrumBoard(new UserStoryOfSprint(userStory.getUserStoryID(),

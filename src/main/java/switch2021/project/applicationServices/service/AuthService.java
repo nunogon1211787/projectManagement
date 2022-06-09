@@ -10,29 +10,30 @@ import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
 import switch2021.project.entities.valueObjects.vos.Password;
 
+import java.util.Optional;
+
 
 @Service
 public class AuthService {
 
     @Autowired
     IUserRepo repo;
-
     @Autowired
     IUserIDFactory idFactory;
-
     @Autowired
     LoginMapper map;
 
     public OutputLoginDTO authentication(LoginDto login) throws Exception {
+        Optional<User> logged = repo.findByUserId(idFactory.createUserID(login.email));
 
-        User userLogged = repo.findByUserId(idFactory.createUserID(login.email));
+        if (logged.isPresent()) {
+            User userLogged = logged.get();
 
-            if(userLogged.checkPassword(new Password(login.password))){
-
+            if (userLogged.checkPassword(new Password(login.password))) {
                 OutputLoginDTO result = map.toDto(userLogged);
-
                 return result;
-            };
+            }
+        }
         throw new Exception("Username or Password invalid");
     }
 }
