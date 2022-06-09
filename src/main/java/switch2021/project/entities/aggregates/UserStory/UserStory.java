@@ -2,8 +2,7 @@ package switch2021.project.entities.aggregates.UserStory;
 
 import lombok.*;
 import switch2021.project.entities.valueObjects.vos.*;
-import switch2021.project.entities.valueObjects.vos.enums.UserStoryStatus;
-
+import switch2021.project.entities.valueObjects.vos.enums.UserStoryStatusEnum;
 import switch2021.project.utils.Entity;
 
 import java.time.LocalDate;
@@ -21,7 +20,7 @@ public class UserStory implements Entity<UserStory> {
     private UsPriority priority;
     private Description description;
     private UsHour timeEstimate;
-    private UserStoryStatus  usStatus;
+    private UserStoryStatusEnum usStatus;
 
     private UserStory parentUserStory;
     private LocalDate usStartDate; //US started to be worked on a sprint - we were able to determine the "age/pending"
@@ -36,7 +35,7 @@ public class UserStory implements Entity<UserStory> {
         this.userStoryID = userStoryID;
         this.priority = priority;
         this.description = description;
-        this.usStatus = UserStoryStatus.OPEN;
+        this.usStatus = UserStoryStatusEnum.OPEN;
         this.timeEstimate = timeEstimate;
     }
 
@@ -54,25 +53,27 @@ public class UserStory implements Entity<UserStory> {
 
     public void startUserStory() {
         this.usStartDate = LocalDate.now();
-        this.usStatus = UserStoryStatus.IN_PROGRESS;
+        this.usStatus = UserStoryStatusEnum.IN_PROGRESS;
     }
 
     public void finishUserStory() {
         this.usEndDate = LocalDate.now();
-        this.usStatus = UserStoryStatus.FINISHED;
+        this.usStatus = UserStoryStatusEnum.FINISHED;
     }
 
     public void cancelUserStory() {
         this.usEndDate = LocalDate.now();
-        this.usStatus = UserStoryStatus.CANCELED;
+        this.usStatus = UserStoryStatusEnum.CANCELED;
     }
 
     public void refinedUs() {
         this.usRefined = LocalDate.now();
-        this.usStatus = UserStoryStatus.REFINED;
+        this.usStatus = UserStoryStatusEnum.REFINED;
     }
 
-    public void assignParentUserStory(UserStory parent) {this.parentUserStory = parent;}
+    public void assignParentUserStory(UserStory parent) {
+        this.parentUserStory = parent;
+    }
 
 
     /**
