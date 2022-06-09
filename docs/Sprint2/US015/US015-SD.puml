@@ -5,7 +5,6 @@ title US015 - As Director, I want to get a list of all projects
 
 autonumber
 
-actor Director as actor
 participant ": ShowAllProjectsRoute" as Route
 participant ": ProjectController" as Ctrl
 participant ": ShowAllProjectsService" as Srv
@@ -17,10 +16,9 @@ participant "allProjectsDto : List<ProjectDto>" as listDto
 participant "projDto : ProjectDto" as dto
 participant "allProjectsResponse : ResponseEntity" as json
 
-activate actor
 autoactivate on
 
-actor -> Route: GET /projects
+[o-> Route: GET/sprints(json)
 
 Route -> Ctrl: showAllProjects()
 
@@ -29,8 +27,8 @@ Ctrl -> Srv: showAllProjects()
 Srv -> store: findAll()
 
 store --> list**: create()
-
-store --> Srv: projects
+ref over store: [[US015-SD-JPA.puml]]
+store --> Srv: projectsJPA
 
 Srv --> listDto**: create()
 
@@ -58,7 +56,7 @@ note over Ctrl, json : The Controller uses the Response Entity class to create a
 
 Ctrl --> Route: allProjectsResponse
 
-Route --> actor: Show a list of all projects
+[<--Route : Informs Operation Success
 
 
 @enduml

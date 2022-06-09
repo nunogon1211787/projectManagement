@@ -7,7 +7,6 @@ autoactivate on
 autonumber
 
 participant ":CreateResourceIn\nAProjectRoute" as Route
-participant "inDto: \nCreateResourceDto" as dto
 participant ":Resource\nController" as Ctrl
 participant "srv:CreateResourceInAProjectService" as srv
 participant "sysUsRepo:ISystemUserRepo" as systemUserStore
@@ -61,11 +60,13 @@ domainService -> domainService: validateProjectRole(res, projectTeamList)
 deactivate
 domainService --> srv: validateNewResourceResult
 alt if the criteria of the allocation a resource in a project are met
-srv -> resourceStore: saveResult: save(res)
+srv -> resourceStore: resource: save(res)
+ref over resourceStore: [[US007-SD-JPA.puml]]
+
 deactivate
 
 alt if the new resource was successfully saved
-srv -> map : outDto: model2Dto(res)
+srv -> map : outDto: model2Dto(resource)
 map --> outDto** : create()
 deactivate
 

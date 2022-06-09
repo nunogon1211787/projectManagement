@@ -53,12 +53,6 @@ public class SprintService {
         } else {
             throw new Exception("Sprint already exists!");
         }
-
-        //HATEOAS
-        //Self Relation
-        outputSprintDTO.add(linkTo(methodOn(SprintController.class).getSprintByID(outputSprintDTO.sprintID)).withRel("Find by ID"));
-        //Collection Relation
-        outputSprintDTO.add(linkTo(methodOn(SprintController.class).showSprints()).withRel("Collection"));
         return outputSprintDTO;
     }
 
@@ -127,11 +121,6 @@ public class SprintService {
         if (optionalSprint.isEmpty()) {
             throw new Exception("Sprint does not exist.");
         }
-
-        //HATEOAS
-
-        //Delete
-        outputSprintDTO.add(linkTo(methodOn(SprintController.class).deleteSprint(id)).withRel("Delete"));
 
         return sprintMapper.toDTO(optionalSprint.get());
     }

@@ -1,0 +1,27 @@
+@startuml
+title US022 - As Project Manager, I want to create a sprint.
+
+autoactivate on
+autonumber
+
+participant ": ISprintRepo" as sprintRepo
+participant ": SprintJpaAssembler" as Assembler
+participant "sprintJPA : SprintJPA" as sprintJPA
+participant ": ISprintRepositoryJPA" as iSprintRepositoryJPA
+participant "savedData : Data" as Data
+participant "sprint : Sprint" as sprint
+
+[o-> sprintRepo: save(newSprint)
+sprintRepo -> Assembler : toData(newSprint)
+Assembler -> sprintJPA **: create ()
+Assembler --> sprintRepo : SprintJPA
+sprintRepo -> iSprintRepositoryJPA: save(sprintJPA)
+iSprintRepositoryJPA -> Data**: create(savedSprintJPA)
+iSprintRepositoryJPA --> sprintRepo : savedData
+sprintRepo -> Assembler: toDomain (savedData)
+Assembler -> sprint **: create()
+Assembler --> sprintRepo : sprint
+
+[<--sprintRepo: sprint
+
+@enduml

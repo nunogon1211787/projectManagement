@@ -8,7 +8,6 @@ autonumber
 
 
 participant ":CreateProjectRoute " as route
-participant "inDto: \nCreateProjectDTO " as inDto
 participant ":ProjectController " as controller
 participant ":CreateProjectService " as service
 participant ":ProjectFactory " as factory
@@ -37,6 +36,7 @@ factory -> project**: create(name, description, ...)
 factory --> service: newProject
 
 service -> store: savedProject = save(newProject)
+ref over store: [[US005-SD-JPA.puml]]
 note over store : Saving project in Repository returns a new project created by jpa assembler
 
 deactivate store
