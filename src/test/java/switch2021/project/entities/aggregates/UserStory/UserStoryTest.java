@@ -53,7 +53,8 @@ class UserStoryTest {
 //        //Act
 //        UserStory userStoryParent = new UserStory(userStory);
 //        //Assert
-//        assertEquals(userStory.getUserStoryID().toString() + " - Refined", userStoryParent.getUserStoryID().toString());
+//        assertEquals(userStory.getUserStoryID().toString() + " - Refined", userStoryParent.getUserStoryID()
+//        .toString());
 //    }
 
     @Test
@@ -76,16 +77,153 @@ class UserStoryTest {
         when(timeEstimate.getUsHours()).thenReturn(5.0);
         //Act
         UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
-            userStory.refinedUs();
+        userStory.refinedUs();
 
         //Assert
         assertEquals(1, userStory.getPriority().getPriorityUs());
         assertEquals("Make mock test", userStory.getDescription().getText());
         assertEquals(5.0, userStory.getTimeEstimate().getUsHours());
-//        assertEquals(LocalDate.now(), userStory.getUsCancelled());
-//        assertEquals(LocalDate.now(), userStory.getUsEndDate());
-//        assertEquals(LocalDate.now(), userStory.getUsStartDate());
-//        assertEquals(userStory.getUserStoryID().getUsTitle(), userStory.getParentUserStory());
+    }
+
+    @Test
+    @DisplayName("test to update priority")
+    public void updatePriority() {
+        //Arrange
+        UserStoryID usID = mock(UserStoryID.class);
+        ProjectID projID = mock(ProjectID.class);
+        UsTitle usTitle = mock(UsTitle.class);
+        UsPriority usPriority = mock(UsPriority.class);
+        UsPriority newUsPriority = mock(UsPriority.class);
+        Description description = mock(Description.class);
+        UsHour timeEstimate = mock(UsHour.class);
+
+        when(usID.getProjectID()).thenReturn(projID);
+        when(projID.getCode()).thenReturn("Project_2022_1");
+        when(usID.getUsTitle()).thenReturn(usTitle);
+        when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
+        when(usPriority.getPriorityUs()).thenReturn(1);
+        when(description.getText()).thenReturn("Make mock test");
+        when(timeEstimate.getUsHours()).thenReturn(5.0);
+
+        when(newUsPriority.getPriorityUs()).thenReturn(3);
+
+        //Act
+        UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
+        userStory.updatePriority(newUsPriority);
+
+        //Assert
+        assertEquals(3, userStory.getPriority().getPriorityUs());
+    }
+
+    @Test
+    @DisplayName("test to updateTimeEstimate")
+    public void updateTimeEstimate() {
+        //Arrange
+        UserStoryID usID = mock(UserStoryID.class);
+        ProjectID projID = mock(ProjectID.class);
+        UsTitle usTitle = mock(UsTitle.class);
+        UsPriority usPriority = mock(UsPriority.class);
+        Description description = mock(Description.class);
+        UsHour timeEstimate = mock(UsHour.class);
+        UsHour newTimeEstimate = mock(UsHour.class);
+
+        when(usID.getProjectID()).thenReturn(projID);
+        when(projID.getCode()).thenReturn("Project_2022_1");
+        when(usID.getUsTitle()).thenReturn(usTitle);
+        when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
+        when(usPriority.getPriorityUs()).thenReturn(1);
+        when(description.getText()).thenReturn("Make mock test");
+        when(timeEstimate.getUsHours()).thenReturn(5.0);
+
+        when(newTimeEstimate.getUsHours()).thenReturn(8.0);
+
+        //Act
+        UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
+        userStory.updateTimeEstimate(newTimeEstimate);
+
+        //Assert
+        assertEquals(8.0, userStory.getTimeEstimate().getUsHours());
+    }
+
+    @Test
+    @DisplayName("test to start User Story")
+    public void startUserStory() {
+        //Arrange
+        UserStoryID usID = mock(UserStoryID.class);
+        ProjectID projID = mock(ProjectID.class);
+        UsTitle usTitle = mock(UsTitle.class);
+        UsPriority usPriority = mock(UsPriority.class);
+        Description description = mock(Description.class);
+        UsHour timeEstimate = mock(UsHour.class);
+
+        when(usID.getProjectID()).thenReturn(projID);
+        when(projID.getCode()).thenReturn("Project_2022_1");
+        when(usID.getUsTitle()).thenReturn(usTitle);
+        when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
+        when(usPriority.getPriorityUs()).thenReturn(1);
+        when(description.getText()).thenReturn("Make mock test");
+        when(timeEstimate.getUsHours()).thenReturn(5.0);
+
+        //Act
+        UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
+        userStory.startUserStory();
+
+        //Assert
+        assertEquals(LocalDate.now(), userStory.getUsStartDate());
+    }
+
+    @Test
+    @DisplayName("test to finish UserStory")
+    public void finishUserStory() {
+        //Arrange
+        UserStoryID usID = mock(UserStoryID.class);
+        ProjectID projID = mock(ProjectID.class);
+        UsTitle usTitle = mock(UsTitle.class);
+        UsPriority usPriority = mock(UsPriority.class);
+        Description description = mock(Description.class);
+        UsHour timeEstimate = mock(UsHour.class);
+
+        when(usID.getProjectID()).thenReturn(projID);
+        when(projID.getCode()).thenReturn("Project_2022_1");
+        when(usID.getUsTitle()).thenReturn(usTitle);
+        when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
+        when(usPriority.getPriorityUs()).thenReturn(1);
+        when(description.getText()).thenReturn("Make mock test");
+        when(timeEstimate.getUsHours()).thenReturn(5.0);
+
+        //Act
+        UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
+        userStory.finishUserStory();
+
+        //Assert
+        assertEquals(LocalDate.now(), userStory.getUsEndDate());
+    }
+
+    @Test
+    @DisplayName("test to cancel UserStory")
+    public void cancelUserStory() {
+        //Arrange
+        UserStoryID usID = mock(UserStoryID.class);
+        ProjectID projID = mock(ProjectID.class);
+        UsTitle usTitle = mock(UsTitle.class);
+        UsPriority usPriority = mock(UsPriority.class);
+        Description description = mock(Description.class);
+        UsHour timeEstimate = mock(UsHour.class);
+
+        when(usID.getProjectID()).thenReturn(projID);
+        when(projID.getCode()).thenReturn("Project_2022_1");
+        when(usID.getUsTitle()).thenReturn(usTitle);
+        when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
+        when(usPriority.getPriorityUs()).thenReturn(1);
+        when(description.getText()).thenReturn("Make mock test");
+        when(timeEstimate.getUsHours()).thenReturn(5.0);
+
+        //Act
+        UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
+        userStory.cancelUserStory();
+
+        //Assert
+        assertEquals(LocalDate.now(), userStory.getUsEndDate());
     }
 
     @Test
@@ -132,7 +270,6 @@ class UserStoryTest {
         assertTrue(expected);
         assertFalse(expectedF);
         assertEquals(userStory.hasCode(usID), userStory2.hasCode(usID2));
-
     }
 
     @Test

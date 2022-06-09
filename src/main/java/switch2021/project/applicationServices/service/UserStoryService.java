@@ -46,8 +46,6 @@ public class UserStoryService {
      */
     public OutputUserStoryDTO createAndSaveUserStory(UserStoryDTO inDto) throws Exception {
         ProjectID projID = new ProjectID(inDto.projectID);
-//        String[] x = inDto.projectID.split("_");
-//        ProjectID projID = new ProjectID(x[2]);
         Optional<Project> project = iProjectRepo.findById(projID);
 
         if (project.isEmpty()) {
@@ -249,7 +247,7 @@ public class UserStoryService {
     /**
      * Create User Story ID method
      */
-    private UserStoryID createUserStoryIdByStringInputFromController(String id) {
+    public UserStoryID createUserStoryIdByStringInputFromController(String id) {
         String[] x = id.split("&");
         String pId = x[0];
         String uTitle = x[1].replaceAll("%20", " ");

@@ -10,13 +10,7 @@ import switch2021.project.dtoModel.dto.*;
 import switch2021.project.interfaceAdapters.controller.*;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
 import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 
 @Component
@@ -30,6 +24,10 @@ public class DatabaseETL {
     TypologyController typologyController;
     @Autowired
     ProjectController projectController;
+    @Autowired
+    ResourceController resourceController;
+    @Autowired
+    SprintController sprintController;
     @Autowired
     UserStoryController userStoryController;
 
@@ -49,7 +47,6 @@ public class DatabaseETL {
 
                 XSSFRow row = worksheet.getRow(index);
 
-                //Integer id = (int) row.getCell(0).getNumericCellValue();
                 String userName = row.getCell(0).getStringCellValue();
                 String email = row.getCell(1).getStringCellValue();
                 String function = row.getCell(2).getStringCellValue();
@@ -82,7 +79,7 @@ public class DatabaseETL {
     }
 
     @PostConstruct
-    public void initGlobalRolesTable() throws IOException {
+    public void initGlobalRolesTable() throws Exception {
         InputStream is = cpr.getInputStream();
         XSSFWorkbook workbook = new XSSFWorkbook(is);
         XSSFSheet worksheet = workbook.getSheetAt(2);
@@ -101,7 +98,7 @@ public class DatabaseETL {
     }
 
     @PostConstruct
-    public void initProjectsTable() throws IOException {
+    public void initProjectsTable() throws Exception {
         InputStream is = cpr.getInputStream();
         XSSFWorkbook workbook = new XSSFWorkbook(is);
         XSSFSheet worksheet = workbook.getSheetAt(3);
@@ -132,6 +129,92 @@ public class DatabaseETL {
     }
 
     @PostConstruct
+    public void initProjectTeamsTable() throws Exception {
+        InputStream is = cpr.getInputStream();
+        XSSFWorkbook workbook = new XSSFWorkbook(is);
+        XSSFSheet worksheet = workbook.getSheetAt(5);
+
+        for (int index = 0; index < worksheet.getPhysicalNumberOfRows(); index++) {
+            if (index > 0) {
+                XSSFRow row = worksheet.getRow(index);
+
+                String systemUserID = row.getCell(0).getStringCellValue();
+                String projectId = row.getCell(1).getStringCellValue();
+                String projectRole = row.getCell(2).getStringCellValue();
+                //String startDate = row.getCell(3).getStringCellValue();
+                //String endDate = row.getCell(4).getStringCellValue();
+                double costPerHour = row.getCell(5).getNumericCellValue();
+                double percentageOfAllocation = row.getCell(6).getNumericCellValue();
+
+                CreateResourceDTO resourceDTO = new CreateResourceDTO(systemUserID, projectId, projectRole, "2021-03" +
+                        "-02", "2021-06-28", costPerHour, percentageOfAllocation);
+                resourceController.createResource(resourceDTO);
+            }
+        }
+    }
+
+/*    @PostConstruct
+    public void initProjectSprintsTable() throws Exception {
+        InputStream is = cpr.getInputStream();
+        XSSFWorkbook workbook = new XSSFWorkbook(is);
+        XSSFSheet worksheet = workbook.getSheetAt(6);
+
+        for (int index = 0; index < worksheet.getPhysicalNumberOfRows(); index++) {
+            if (index > 0) {
+                XSSFRow row = worksheet.getRow(index);
+
+                String projectId = row.getCell(0).getStringCellValue();
+                String name = row.getCell(1).getStringCellValue();
+
+                NewSprintDTO sprintDTO = new NewSprintDTO(projectId, name);
+                sprintController.createAndSaveSprint(sprintDTO);
+            }
+        }
+    }*/
+
+    @PostConstruct
+    public void initProjectBacklogTable() throws Exception {
+        InputStream is = cpr.getInputStream();
+        XSSFWorkbook workbook = new XSSFWorkbook(is);
+        XSSFSheet worksheet = workbook.getSheetAt(8);
+
+        for (int index = 0; index < worksheet.getPhysicalNumberOfRows(); index++) {
+            if (index > 0) {
+                XSSFRow row = worksheet.getRow(index);
+
+                String projectId = row.getCell(0).getStringCellValue();
+                String title = row.getCell(1).getStringCellValue();
+                int priority = (int) row.getCell(2).getNumericCellValue();
+                String description = row.getCell(3).getStringCellValue();
+                double timeEstimate = row.getCell(4).getNumericCellValue();
+
+                UserStoryDTO userStoryDTO = new UserStoryDTO(projectId, title, priority, description, timeEstimate);
+                userStoryController.createAndSaveUserStory(userStoryDTO);
+            }
+        }
+    }
+
+
+/*    @PostConstruct
+    public void initSprintBacklogTable() throws IOException {
+        InputStream is = cpr.getInputStream();
+        XSSFWorkbook workbook = new XSSFWorkbook(is);
+        XSSFSheet worksheet = workbook.getSheetAt(10);
+
+        for (int index = 0; index < worksheet.getPhysicalNumberOfRows(); index++) {
+            if (index > 0) {
+                XSSFRow row = worksheet.getRow(index);
+
+                String projectId = row.getCell(0).getStringCellValue();
+                String name = row.getCell(1).getStringCellValue();
+                String title = row.getCell(2).getStringCellValue();
+                String usResult = row.getCell(3).getStringCellValue();
+
+            }
+        }
+    }*/
+
+/*    @PostConstruct
     public void initUserStoriesTable () throws Exception{
         // Load file from resources
         InputStream is = cpr.getInputStream();
@@ -156,5 +239,7 @@ public class DatabaseETL {
             }
         }
     }
+
+ */
 
 }

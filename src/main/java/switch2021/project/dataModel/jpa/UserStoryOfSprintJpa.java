@@ -26,8 +26,8 @@ public class UserStoryOfSprintJpa implements Serializable {
     private String status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "projectId", insertable = false, updatable = false)
-    @JoinColumn(name= "text", insertable = false, updatable = false)
+    @JoinColumn(name = "sprintProjId")
+    @JoinColumn(name= "sprintName")
     private SprintJpa sprintJpa;
 
     public UserStoryOfSprintJpa(UserStoryID userStoryId, String status, SprintJpa sprintJpa) {
