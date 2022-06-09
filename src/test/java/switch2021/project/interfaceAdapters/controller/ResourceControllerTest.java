@@ -24,50 +24,50 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class ResourceControllerTest {
 
-    @MockBean private ResourceService currentProjectTeamService;
-    @InjectMocks private ResourceController ctrl;
-
-    @BeforeEach
-    void TestConfiguration(){ MockitoAnnotations.openMocks(this); }
-
-    @Test
-    void showCurrentProjectTeamSuccess(){
-        //Arrange
-        IdDTO id = mock(IdDTO.class);
-        DateDTO date = mock(DateDTO.class);
-        OutputResourceDTO output1 = mock(OutputResourceDTO.class);
-        OutputResourceDTO output2 = mock(OutputResourceDTO.class);
-        OutputResourceDTO output3 = mock(OutputResourceDTO.class);
-        List<OutputResourceDTO> resources= new ArrayList<>(List.of(output1, output2, output3));
-
-        //Act
-        when(currentProjectTeamService.showCurrentProjectTeam(id, date)).thenReturn(resources);
-        ResponseEntity<Object> result = ctrl.showCurrentProjectTeam(id, date);
-        ResponseEntity<Object> expected = new ResponseEntity<>(resources, HttpStatus.OK);
-
-        //Assert
-        assertEquals(result, expected);
-
-    }
-
-    @Test
-    void showCurrentProjectTeamFail(){
-        //Arrange
-        IdDTO id = mock(IdDTO.class);
-        DateDTO date = mock(DateDTO.class);
-        OutputResourceDTO output1 = mock(OutputResourceDTO.class);
-        OutputResourceDTO output2 = mock(OutputResourceDTO.class);
-        OutputResourceDTO output3 = mock(OutputResourceDTO.class);
-        List<OutputResourceDTO> resources = new ArrayList<>(List.of(output1, output2, output3));
-        List<OutputResourceDTO> resources2 = new ArrayList<>(List.of(output1, output2, output1));
-
-        //Act
-        when(currentProjectTeamService.showCurrentProjectTeam(id, date)).thenReturn(resources);
-        ResponseEntity<Object> result = ctrl.showCurrentProjectTeam(id, date);
-        ResponseEntity<Object> expected = new ResponseEntity<>(resources2, HttpStatus.OK);
-
-        //Assert
-        assertNotEquals(result, expected);
-
-    }
+//    @MockBean private ResourceService currentProjectTeamService;
+//    @InjectMocks private ResourceController ctrl;
+//
+//    @BeforeEach
+//    void TestConfiguration(){ MockitoAnnotations.openMocks(this); }
+//
+//    @Test
+//    void showCurrentProjectTeamSuccess(){
+//        //Arrange
+//        IdDTO id = mock(IdDTO.class);
+//        DateDTO date = mock(DateDTO.class);
+//        OutputResourceDTO output1 = mock(OutputResourceDTO.class);
+//        OutputResourceDTO output2 = mock(OutputResourceDTO.class);
+//        OutputResourceDTO output3 = mock(OutputResourceDTO.class);
+//        List<OutputResourceDTO> resources= new ArrayList<>(List.of(output1, output2, output3));
+//
+//        //Act
+//        when(currentProjectTeamService.showCurrentProjectTeam(id, date)).thenReturn(resources);
+//        ResponseEntity<Object> result = ctrl.showCurrentProjectTeam(id, date);
+//        ResponseEntity<Object> expected = new ResponseEntity<>(resources, HttpStatus.OK);
+//
+//        //Assert
+//        assertEquals(result, expected);
+//
+//    }
+//
+//    @Test
+//    void showCurrentProjectTeamFail(){
+//        //Arrange
+//        IdDTO id = mock(IdDTO.class);
+//        DateDTO date = mock(DateDTO.class);
+//        OutputResourceDTO output1 = mock(OutputResourceDTO.class);
+//        OutputResourceDTO output2 = mock(OutputResourceDTO.class);
+//        OutputResourceDTO output3 = mock(OutputResourceDTO.class);
+//        List<OutputResourceDTO> resources = new ArrayList<>(List.of(output1, output2, output3));
+//        List<OutputResourceDTO> resources2 = new ArrayList<>(List.of(output1, output2, output1));
+//
+//        //Act
+//        when(currentProjectTeamService.showCurrentProjectTeam(id, date)).thenReturn(resources);
+//        ResponseEntity<Object> result = ctrl.showCurrentProjectTeam(id, date);
+//        ResponseEntity<Object> expected = new ResponseEntity<>(resources2, HttpStatus.OK);
+//
+//        //Assert
+//        assertNotEquals(result, expected);
+//
+//    }
 }

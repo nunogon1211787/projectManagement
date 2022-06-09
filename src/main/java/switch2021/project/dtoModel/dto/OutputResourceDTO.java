@@ -9,6 +9,6 @@ public class OutputResourceDTO extends RepresentationModel<OutputResourceDTO> {
     public String role;
     public String startDate;
     public String endDate;
-    public String allocation;
-    public String cost;
+    public double allocation;
+    public double cost;
 }

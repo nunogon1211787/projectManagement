@@ -1,12 +1,13 @@
 package switch2021.project.interfaceAdapters.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+//import org.springframework.web.bind.annotation.PostMapping;
+//import org.springframework.web.bind.annotation.RequestBody;
+//import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dtoModel.dto.*;
 import switch2021.project.applicationServices.service.ResourceService;
@@ -43,16 +44,63 @@ public class ResourceController {
         return new ResponseEntity<>(newResource, HttpStatus.CREATED);
     }
 
-
+    /**
+     * Find all Resources
+     */
     @GetMapping
-    public ResponseEntity<Object> showCurrentProjectTeam(@RequestParam("project") IdDTO dto, @RequestParam("date") DateDTO dateDto){
+    public ResponseEntity<Object> showAllResources(){
+        CollectionModel<OutputResourceDTO> result;
 
-        List<OutputResourceDTO> resourcesDto = srv.showCurrentProjectTeam(dto, dateDto);
+        try {
+            result = CollectionModel.of(srv.showAllResources());
 
-        return new ResponseEntity<>(resourcesDto, HttpStatus.OK);
+            if(result.getContent().isEmpty()) {
+                ErrorMessage message = new ErrorMessage();
+                message.errorMessage = "There are no resources yet!";
+                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
 
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+
+//    @GetMapping
+//    public ResponseEntity<Object> showCurrentProjectTeam(@RequestParam("project") IdDTO dto, @RequestParam("date") DateDTO dateDto){
+//
+//        List<OutputResourceDTO> resourcesDto = srv.showCurrentProjectTeam(dto, dateDto);
+//
+//        return new ResponseEntity<>(resourcesDto, HttpStatus.OK);
+//
+//    }
+
+    /**
+     * Consult a Project Team of a Project (US027)
+     */
+
+    @GetMapping("/projectTeam/{id}")
+    public ResponseEntity<Object> showProjectTeam(@PathVariable("id") String idProject) {
+        List<OutputResourceDTO> result;
+
+        try {
+            result = srv.showProjectTeam(idProject);
+
+            if (result.isEmpty()) {
+                ErrorMessage message = new ErrorMessage();
+                message.errorMessage = "There are no resources in this project";
+                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            }
+        } catch(Exception exception) {
+                ErrorMessage message = new ErrorMessage();
+                message.errorMessage = exception.getMessage();
+                return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+            }
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
     /**
      * Find by id
      *
