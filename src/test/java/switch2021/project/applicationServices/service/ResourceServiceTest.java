@@ -15,11 +15,14 @@ import static org.mockito.Mockito.mock;
 @SpringBootTest
 class ResourceServiceTest {
 
-    @MockBean IProjectRepo projRepo;
-    @MockBean IResourceRepo resRepo;
     @MockBean
-    ResourceMapper map;
-    @MockBean ManageResourcesService dsrv;
+    IProjectRepo iProjectRepo;
+    @MockBean
+    IResourceRepo iResourceRepo;
+    @MockBean
+    ResourceMapper resourceMapper;
+    @MockBean
+    ManageResourcesService manageResourcesService;
     @InjectMocks
     ResourceService srv;
 

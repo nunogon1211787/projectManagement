@@ -6,7 +6,6 @@ skinparam classAttributeIconSize 0
 title US005 - As a Director, I want to create/register a new project
 
 
-package "System" <<Rectangle>> {
 
 '-------------------INFRASTRUCTURE-----------------------'
 package "Infrastructure" <<Rectangle>>  #lightblue {
@@ -81,7 +80,7 @@ class "OutputProjectDTO" as outPutDTO <<component>>
 '-------------------OTHERS-------------------------------'
 class "ResponseEntity" as json <<Component>>
 
-}
+
 
 
 '-------------------RELATIONSHIPS------------------------'

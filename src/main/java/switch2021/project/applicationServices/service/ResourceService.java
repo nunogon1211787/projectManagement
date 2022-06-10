@@ -1,7 +1,6 @@
 package switch2021.project.applicationServices.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
 import switch2021.project.dtoModel.dto.*;
@@ -16,14 +15,11 @@ import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResour
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.interfaceAdapters.repositories.ProjectRepository;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class ResourceService {
