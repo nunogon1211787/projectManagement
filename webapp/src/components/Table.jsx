@@ -38,10 +38,10 @@ export default function Table(props) {
    buttonOpen = null;
   }
 
-    let buttonOpenUS = <Button name="Open" function={buttonNavigateUS}/>;
-    if (props.collections !== 'userstories') {
-        buttonOpenUS = null;
-    }
+    // let buttonOpenUS = <Button name="Open" function={buttonNavigateUS}/>;
+    // if (props.collections !== 'userstories') {
+    //     buttonOpenUS = null;
+    // }
 
     const handleOnClick = (id) => {
     };
