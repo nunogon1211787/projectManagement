@@ -69,17 +69,34 @@ public class ResourceController {
     }
 
 
-//    @GetMapping
-//    public ResponseEntity<Object> showCurrentProjectTeam(@RequestParam("project") IdDTO dto, @RequestParam("date") DateDTO dateDto){
-//
+    @GetMapping("/currentProjectTeam/{id}")
+    public ResponseEntity<Object> showCurrentProjectTeam(@PathVariable("id") String projectId){
+
+        List<OutputResourceDTO> result;
+
+        try {
+            result = srv.showCurrentProjectTeam(projectId);
+
+            if (result.isEmpty()) {
+                ErrorMessage message = new ErrorMessage();
+                message.errorMessage = "There are no resources in this project";
+                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+            }
+        } catch(Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
+
 //        List<OutputResourceDTO> resourcesDto = srv.showCurrentProjectTeam(dto, dateDto);
-//
+
 //        return new ResponseEntity<>(resourcesDto, HttpStatus.OK);
-//
-//    }
+
+    }
 
     /**
-     * Consult a Project Team of a Project (US027)
+     * Consult a Project Team of a Project (US028)
      */
 
     @GetMapping("/projectTeam/{id}")

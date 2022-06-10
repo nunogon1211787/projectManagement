@@ -28,14 +28,12 @@ public class OutputUserStoryDTO extends RepresentationModel<OutputUserStoryDTO> 
     public String usStartDate;
     public String usEndDate;
     public String usRefined;
+    public String status;
 
-    public OutputUserStoryDTO(String id, int priority, String description, double timeEstimate,
-                              String usStartDate, String usEndDate) {
+    public OutputUserStoryDTO(String id, int priority, String description, double timeEstimate) {
         this.id = id;
         this.priority = priority;
         this.description = description;
         this.timeEstimate = timeEstimate;
-        this.usStartDate = usStartDate;
-        this.usEndDate = usEndDate;
     }
 }

@@ -1,16 +1,25 @@
 package switch2021.project.applicationServices.service;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.applicationServices.iRepositories.IResourceRepo;
+import switch2021.project.dtoModel.dto.OutputResourceDTO;
 import switch2021.project.dtoModel.mapper.ResourceMapper;
 import switch2021.project.entities.aggregates.Resource.ManageResourcesService;
+import switch2021.project.entities.aggregates.Resource.Resource;
+import switch2021.project.entities.valueObjects.vos.ProjectID;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class ResourceServiceTest {
@@ -30,6 +39,8 @@ class ResourceServiceTest {
     void TestConfiguration(){
         MockitoAnnotations.openMocks(this);
     }
+
+
 
 //    @Test
 //    void getProjectTeamSuccess(){
@@ -58,6 +69,30 @@ class ResourceServiceTest {
 //
 //    @Test
 //    void withProjectIdNotFound(){
+//
+//    }
+//
+//    @Test
+//    void showProjectTeam() {
+//        ProjectID proj = mock(ProjectID.class) ;
+//        Resource res1 = mock(Resource.class) ;
+//        Resource res2 = mock(Resource.class) ;
+//        Resource res3 = mock(Resource.class) ;
+//
+//        List<Resource> projTeam = new ArrayList<>();
+//
+//        projTeam.add(res1);
+//        projTeam.add(res2);
+//        projTeam.add(res3);
+//
+//        when(projRepo.existsById(proj)).thenReturn(true);
+//        when(resRepo.findAllByProject(proj)).thenReturn(projTeam);
+//
+//
+//
+//        List<OutputResourceDTO> result = srv.showProjectTeam(proj.toString());
+//
+//        assertEquals();
 //
 //    }
 
