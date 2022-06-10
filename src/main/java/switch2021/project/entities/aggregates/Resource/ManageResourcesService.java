@@ -12,13 +12,13 @@ import java.util.List;
 @Component
 public class ManageResourcesService {
 
-    public List<Resource> currentResourcesByDate(List<Resource> resourcesInProject, LocalDate date) {
+    public List<Resource> currentResourcesByDate(List<Resource> resourcesInProject) {
 
         List<Resource> currentResources = new ArrayList<>();
 
         for (Resource res : resourcesInProject) {
 
-            if (res.isActiveToThisDate(date)) {
+            if (res.isActiveToThisDate(LocalDate.now())) {
                 currentResources.add(res);
             }
         }

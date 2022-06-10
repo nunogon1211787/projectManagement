@@ -37,7 +37,7 @@ export default function CreateResource() {
     return (
       <>
         <h1>Resources ? Project Team</h1>
-        <Table collections="resources" query="project=Project_2022_1&date=2022-12-13"/>
+        <Table collections="resources" query="Project_2022_1"/>
         <Button name="Create Resource" function={buttonNavigate} />
       </>
     );

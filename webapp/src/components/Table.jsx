@@ -15,13 +15,13 @@ export default function Table(props) {
     useEffect(() => {
         let url = `${URL_API}/${props.collections}`;
 
-        if (props.query !== undefined) {
-            url = `${URL_API}/${props.collections}?${props.query}`
-        }
-        const request = {};
-        fetchCollections(url, request, dispatch);
-        // eslint-disable-next-line
-    }, []);
+  //  if(props.query !== undefined){
+  //    url = `${URL_API}/${props.collections}/${props.query}`
+  //  }
+    const request = {};
+    fetchCollections(url, request, dispatch);
+    // eslint-disable-next-line
+  }, []);
 
     const buttonNavigateD = () => {
         navToDetails(dispatch);
