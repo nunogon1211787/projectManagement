@@ -17,7 +17,6 @@ import CreateUserStory from "../pages/CreateUserStory";
 import CreateTypology from "../pages/CreateTypology";
 import { Home } from "../pages/Home";
 import RegisterUser from "../pages/RegisterUser";
-import CreateResource from '../pages/CreateResource';
 
 import { Box, Grommet } from "grommet";
 
@@ -25,6 +24,7 @@ import { theme } from "../theme";
 import Sidebar from "../components/Sidebar";
 import { ReactComponent as LogoIcon } from "../routes/beaver-svgrepo.svg";
 import AppContext from "../context/AppContext";
+import CreateResource from "../pages/CreateResource";
 
 const userSession = {
   user: {
@@ -115,11 +115,12 @@ function MainRoute() {
                 <Route path="sprints" element={<CreateSprint />} />
                 <Route path="users" element={<RegisterUser />} />
                 <Route path="resources" element={<CreateResource />} />
+
               </Routes>
             </Box>
           </Box>
         </Grommet>
-        // </Router>
+        //  </Router>
     );
   }
 }

@@ -34,9 +34,9 @@ export default function Table(props) {
     return  <Button name="Open Project" singleId = {id} function={buttonNavigateD} />
 }
 
-  if (props.collections !== 'projects') {
-   buttonOpen = null;
-  }
+  // if (props.collections !== 'projects') {
+  //  buttonOpen = null;
+  // }
 
     // let buttonOpenUS = <Button name="Open" function={buttonNavigateUS}/>;
     // if (props.collections !== 'userstories') {
