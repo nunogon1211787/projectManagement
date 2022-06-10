@@ -178,6 +178,7 @@ public class UserService {
     /**
      * Active and Inactive User (US002, US025 and US026)
      */
+    @Transactional(propagation = Propagation.REQUIRED)
     public OutputUserDTO activateUser(String id) {
         UserID userID = userIDFactory.createUserID(id);
         User user = userRepo.findByUserId(userID);
