@@ -35,7 +35,6 @@ public class DatabaseETL {
 
     @PostConstruct
     public void init() throws Exception {
-        initGlobalRolesTable();
         initUserTable();
         initProfilesTable();
         initProjectsTable();
@@ -43,6 +42,7 @@ public class DatabaseETL {
         initProjectTeamsTable();
         initProjectSprintsTable();
         ChangeUsStatus();
+        initGlobalRolesTable();
     }
 
     public void initUserTable() throws Exception {

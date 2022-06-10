@@ -143,15 +143,14 @@ public class ProjectService {
         return projMapper.model2Dto(foundProject.get());
     }
 
-    public List<OutputProjectDTO> showCurrentProjectsByUser(String id, DateDTO dateDto) {
+    public List<OutputProjectDTO> showCurrentProjectsByUser(String UserId) {
         List<OutputProjectDTO> projectsDto = new ArrayList<>();
-        UserID userID = userIDFactory.createUserID(id);
+        UserID userID = userIDFactory.createUserID(UserId);
 
         if (userRepo.existsById(userID)) {
             List<Resource> userResources = resRepo.findAllByUser(userID);
 
-            List<Resource> currentUserResources = resService.currentResourcesByDate(userResources,
-                                                                                    LocalDate.parse(dateDto.date));
+            List<Resource> currentUserResources = resService.currentResourcesByDate(userResources);
 
             List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
 

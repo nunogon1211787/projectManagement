@@ -24,11 +24,12 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class ResourceControllerTest {
 
-//    @MockBean private ResourceService currentProjectTeamService;
-//    @InjectMocks private ResourceController ctrl;
-//
-//    @BeforeEach
-//    void TestConfiguration(){ MockitoAnnotations.openMocks(this); }
+
+    @MockBean private ResourceService currentProjectTeamService;
+    @InjectMocks private ResourceController ctrl;
+
+    @BeforeEach
+    void TestConfiguration(){ MockitoAnnotations.openMocks(this); }
 //
 //    @Test
 //    void showCurrentProjectTeamSuccess(){

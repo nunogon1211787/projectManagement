@@ -4,29 +4,40 @@ import { URL_API } from "../services/Service";
 import { fetchDetails } from "../context/Actions";
 import Button from "./Button";
 import { navToEditDetails } from "../context/Actions";
+
 export default function Details(props) {
   const { state, dispatch } = useContext(AppContext);
   const { details } = state;
   const { loading, error, data } = details;
+
   const buttonNavigateD = () => {
     navToEditDetails(dispatch);
   };
+
   useEffect(() => {
-    const url = `${URL_API}/${props.details}`;
+    let url = `${URL_API}/${props.details}`;
+
+    if(props.query !== undefined){
+      url = `${URL_API}/${props.details}?${props.query}`
+    }
     const request = {};
     fetchDetails(url, request, dispatch);
   }, []);
+
   const handleOnClick = (id) => {};
+
   if (loading === true) {
     return <h1>Loading ....</h1>;
   } else {
-    if (error !== null) {
+    if (error !== null && error !== undefined) {
+      console.log (error)
       return <h1>Error:{error}</h1>;
     } else {
-      if(data.length !== 0){
-        const headers = Object.keys(data[0]);
-        const body = Object.values(data[0]);
-        return (
+        if(data !== undefined){
+          const headers = Object.keys(data[0]);
+          const body = Object.values(data[0]);
+
+          return (
             <>
               <div className="card bg-light">
                 <table
@@ -65,8 +76,8 @@ export default function Details(props) {
                         return <td key={index}>{row}</td>;
                       }
                     })}
-                    <Button name="Edit Project" function={buttonNavigateD} />
-                    <Button name="Edit Project Team" function={buttonNavigateD} />;
+                    {/* <Button name="Edit Project" function={buttonNavigateD} />
+                    <Button name="Edit Project Team" function={buttonNavigateD} />; */}
 
                   </tr>
                   </tbody>
