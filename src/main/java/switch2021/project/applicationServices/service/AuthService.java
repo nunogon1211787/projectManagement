@@ -10,6 +10,7 @@ import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
 import switch2021.project.entities.valueObjects.vos.Password;
 
+import java.util.Optional;
 
 @Service
 public class AuthService {

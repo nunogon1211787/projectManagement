@@ -7,6 +7,8 @@ import {
   DELETE_DETAILS,
   NAV_TO_FORM,
   NAV_TO_TABLE,
+  FETCH_AUTH_FAILURE,
+  FETCH_AUTH_SUCCESS,
   NAV_TO_DETAILS,
   NAV_TO_EDITDETAILS,
 } from "./Actions";
@@ -48,7 +50,7 @@ export default function reducer(state, action) {
         details: {
           loading: false,
           error: null,
-          data: [...action.payload.data],
+          data: [action.payload.data],
           userid: state.details.userid,
         },
       };
@@ -78,7 +80,7 @@ export default function reducer(state, action) {
         navigation: {
           table: false,
           form: true,
-          details: false,
+          single: false,
           editDetails: false,
         },
       };
@@ -88,17 +90,42 @@ export default function reducer(state, action) {
         navigation: {
           table: true,
           form: false,
-          details: false,
+          single: false,
           editDetails: false,
+        },
+      };
+    case FETCH_AUTH_SUCCESS:
+      return {
+        ...state,
+        auth: {
+          loading: false,
+          error: null,
+          data: {
+            token: action.payload.data,
+          },
+        },
+      };
+    case FETCH_AUTH_FAILURE:
+      return {
+        ...state,
+        auth: {
+          loading: false,
+          error: action.payload.error,
+          data: {
+            token: "",
+          },
         },
       };
       case NAV_TO_DETAILS:
         return {
           ...state,
+          details: {
+            userid: action.payload.id,     
+          },
           navigation: {
             table: false,
             form: false,
-            details: true,
+            single: true,
             editDetails: false,
           },
         };
@@ -108,8 +135,8 @@ export default function reducer(state, action) {
           navigation: {
             table: false,
             form: false,
-            details: false,
-            editDetails: true,          
+            single: false,
+            editDetails: true,
           },
         };
     default:

@@ -72,21 +72,21 @@ public class ResourceService {
         return response;
     }
 
-    public List<OutputResourceDTO> showCurrentProjectTeam(IdDTO dto, DateDTO dateDto) {
+    public List<OutputResourceDTO> showCurrentProjectTeam(String projectId) {
 
-        String projectId = dto.id;
+//        String projectId = dto.id;
 
         List<OutputResourceDTO> resourcesDto = new ArrayList<>();
 
 //        // ------------- new ------------
-        ProjectID projectID = new ProjectID(projectId);
+        ProjectID projectID = iProjIDFactory.create(projectId);
 //        // ------------- new ------------
 
         if (projRepo.existsById(projectID)) {
 
             List<Resource> resources = resRepo.findAllByProject(projectID);
 
-            List<Resource> projectTeam = manageResourcesService.currentResourcesByDate(resources, LocalDate.parse(dateDto.date));
+            List<Resource> projectTeam = manageResourcesService.currentResourcesByDate(resources);
 
             for (Resource res : projectTeam) {
 

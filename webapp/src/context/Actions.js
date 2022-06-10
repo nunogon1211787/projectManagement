@@ -1,5 +1,34 @@
 import { makeHTTPRequest } from "../services/Service";
 
+// ACTIONS TO LOGIN
+
+export const FETCH_AUTH_SUCCESS = "FETCH_AUTH_SUCCESS";
+export const FETCH_AUTH_FAILURE = "FETCH_AUTH_FAILURE";
+
+export function authToAPI(url, request, dispatch) {
+  const success = (res) => dispatch(fetchAuthSuccess(res));
+  const failure = (err) => dispatch(fetchAuthFailure(err));
+  makeHTTPRequest(url, request, success, failure);
+}
+
+function fetchAuthSuccess(res) {
+  return {
+    type: FETCH_AUTH_SUCCESS,
+    payload: {
+      data: { ...res },
+    },
+  };
+}
+
+function fetchAuthFailure(err) {
+  return {
+    type: FETCH_AUTH_FAILURE,
+    payload: {
+      error: err,
+    },
+  };
+}
+
 // ACTIONS TO COLLECTIONS
 
 export const FETCH_COLLECTIONS_SUCCESS = "FETCH_COLLECTIONS_SUCCESS";
@@ -55,7 +84,7 @@ export function fetchDetailsSuccess(details) {
   return {
     type: FETCH_DETAILS_SUCCESS,
     payload: {
-      data: [...details],
+      data: { ...details},
     },
   };
 }
@@ -90,8 +119,8 @@ export function navToTable(dispatch) {
   dispatch(tableTrue());
 }
 
-export function navToDetails(dispatch) {
-  dispatch(detailsTrue());
+export function navToDetails(dispatch, singleId) {
+  dispatch(detailsTrue(singleId));
 }
 
 export function navToEditDetails(dispatch) {
@@ -110,9 +139,10 @@ export function tableTrue() {
   };
 }
 
-export function detailsTrue() {
+export function detailsTrue(singleId) {
   return {
     type: NAV_TO_DETAILS,
+    payload: {id: singleId},
   };
 }
 

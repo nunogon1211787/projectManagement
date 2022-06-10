@@ -15,7 +15,11 @@ export default function Details(props) {
   };
 
   useEffect(() => {
-    const url = `${URL_API}/${props.details}`;
+    let url = `${URL_API}/${props.details}`;
+
+    if(props.query !== undefined){
+      url = `${URL_API}/${props.details}?${props.query}`
+    }
     const request = {};
     fetchDetails(url, request, dispatch);
   }, []);
@@ -25,10 +29,11 @@ export default function Details(props) {
   if (loading === true) {
     return <h1>Loading ....</h1>;
   } else {
-    if (error !== null) {
+    if (error !== null && error !== undefined) {
+      console.log (error)
       return <h1>Error:{error}</h1>;
     } else {
-        if(data.length !== 0){
+        if(data !== undefined){
           const headers = Object.keys(data[0]);
           const body = Object.values(data[0]);
 
@@ -36,58 +41,54 @@ export default function Details(props) {
             <>
               <div className="card bg-light">
                 <table
-                  className="card-body table table-primary table-hover"
-                  style={{ margin: "1%", borderRadius: "10px" }}
-                >
+                    className="card-body table table-primary table-hover"
+                    style={{ margin: "1%", borderRadius: "10px" }}>
                   <thead>
-                    <tr style={{ textTransform: "uppercase" }} key="headers">
-                      {
-                        // eslint-disable-next-line
-                        headers.map((key, idx) => {
-                          if (key !== "_links") {
-                            return (
+                  <tr style={{ textTransform: "uppercase" }} key="headers">
+                    {
+                      // eslint-disable-next-line
+                      headers.map((key, idx) => {
+                        if (key !== "_links") {
+                          return (
                               <th
-                                key={idx}
-                                style={{ textTransform: "uppercase" }}
-                              >
+                                  key={idx}
+                                  style={{ textTransform: "uppercase" }}>
                                 {key}
                               </th>
-                            );
-                          }
-                        })
-                      }
-                    </tr>
+                          );
+                        }
+                      })
+                    }
+                  </tr>
                   </thead>
                   <tbody>
                   <tr
-                          key= "coisa"
-                        //   onClick={() => handleOnClick(id)}
-                          style={{
-                            cursor: "pointer",
-                            textTransform: "capitalize",
-                          }}
-                        >
+                      key= "coisa"
+                      //   onClick={() => handleOnClick(id)}
+                      style={{
+                        cursor: "pointer",
+                        textTransform: "capitalize",
+                      }}>
                     {body.map((row, index) => {
-                      
-                            // eslint-disable-next-line
-                            
-                              if (index !== body.length - 1) {
-                                return <td key={index}>{row}</td>;
-                              }                                                  
-                    })}
-                    <Button name="Edit Project" function={buttonNavigateD} />
-                    <Button name="Edit Project Team" function={buttonNavigateD} />;
 
-                    </tr>
+                      // eslint-disable-next-line
+                      if (index !== body.length - 1) {
+                        return <td key={index}>{row}</td>;
+                      }
+                    })}
+                    {/* <Button name="Edit Project" function={buttonNavigateD} />
+                    <Button name="Edit Project Team" function={buttonNavigateD} />; */}
+
+                  </tr>
                   </tbody>
                 </table>
               </div>
             </>
-          );
-        } else {
-          return <h1>No data ....</h1>;
-        }
+        );
+      } else {
+        return <h1>No data ....</h1>;
+      }
     }
-}
+  }
 
 }

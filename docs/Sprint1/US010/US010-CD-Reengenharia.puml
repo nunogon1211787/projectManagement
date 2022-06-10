@@ -1,0 +1,90 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'hide circle
+skinparam classAttributeIconSize 0
+
+title US010 - As Authenticated user, i want to update its own data (e.g. photo, function...)
+
+skinparam classAttributeIconSize 0
+
+package "Infrastructure" <<Rectangle>> #lightblue  {
+class "UpdatePersonalDataRoute" as route << Component >>
+}
+
+package "Interface Adapter" <<Rectangle>> #lightgreen {
+package "Controllers" <<Folder>>{
+class "UserController" as controller << Component >> {
++updatePersonalData(json)
+}
+}
+package "Repositories" <<Rectangle>>{
+class "UserRepository" as repository << Repository >> {
+-user : List<User>
++ findByUserID(userID)
+}
+}
+}
+package "Application Service API" <<Rectangle>> #lightpink{
+package "App Service" <<Folder>>{
+class "UpdatePersonalDataService" as service << Component >> {
++updatePersonalData(idDTO, updateDataDTO)
+}
+}
+package "Repositories Interface" <<Folder>>{
+interface "IUserRepository" as interfaceSystemUserRepo << Interface >>{
++ findByUserID(userID)
+}
+}
+}
+package "DTO" <<Rectangle>> {
+package "DTO " <<Folder>>{
+class "UpdateDataDTO" as dto << Component >> {
+- userName : String
+- function : String
+- photo : String
+- oldPassword : String
+- newPassword : String
+- newPasswordConfirmation : String
+}
+class "OutPutUserDTO" as outputUserDTO << Component >> {
+- userName : String
+- function : String
+- photo : String
+}
+class "IdDTO" as idDTO << Component >> {
+- id : String
+}
+}
+package "DTO" <<Folder>> {
+package "UserMapper" <<Folder>>{
+class "UserMapper" as mapper << Component >> {
++ toDto(user)
+}
+}
+}
+
+package "Domain" <<Rectangle>> #burlywood{
+package "Aggregate" <<Folder>>{
+class "User" as systemuser << Root >> {
+- userID : UserID
+- userName : Name
+- photo : Photo
+- password : Password
+- function : Function
+- isActive : false
++ editPersonalData(username, function, photo)
+}
+}
+
+route ..> controller
+controller ..> service
+service .right.> dto
+service ..> idDTO
+service ..|> interfaceSystemUserRepo
+repository ..> interfaceSystemUserRepo
+service ..> systemuser
+service .down.> mapper
+mapper ..> outputUserDTO
+
+@enduml

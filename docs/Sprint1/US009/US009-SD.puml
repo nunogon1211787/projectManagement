@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title US009 - As Product Owner, I want to create a user story and add it to the Product Backlog
+title US09 - As Product Owner, I want to create a user story and add it to the Product Backlog
 
 autoactivate on
 autonumber
