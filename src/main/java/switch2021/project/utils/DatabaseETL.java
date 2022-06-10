@@ -6,7 +6,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.dtoModel.dto.*;
 import switch2021.project.interfaceAdapters.controller.*;
 
@@ -43,7 +42,7 @@ public class DatabaseETL {
         initProjectBacklogTable();
         initProjectTeamsTable();
         initProjectSprintsTable();
-        initUs();
+        ChangeUsStatus();
     }
 
     public void initUserTable() throws Exception {
@@ -208,7 +207,7 @@ public class DatabaseETL {
         }
     }
 
-    public void initUs() throws Exception {
+    public void ChangeUsStatus() throws Exception {
         InputStream is = cpr.getInputStream();
         XSSFWorkbook workbook = new XSSFWorkbook(is);
         XSSFSheet worksheet = workbook.getSheetAt(8);
@@ -222,13 +221,12 @@ public class DatabaseETL {
                 String description = row.getCell(3).getStringCellValue();
                 double timeEstimate = row.getCell(4).getNumericCellValue();
                 String usStartDate = row.getCell(7).getStringCellValue();
-                String usEndDate = row.getCell(7).getStringCellValue();
+                String usEndDate = row.getCell(8).getStringCellValue();
                 String usID = row.getCell(6).getStringCellValue();
 
-
-                OutputUserStoryDTO outputUserStoryDTO = new OutputUserStoryDTO(usID, priority, description,
-                        timeEstimate, usStartDate, usEndDate);
-                userStoryController.startUserStory(outputUserStoryDTO.id);
+                UserStoryUpdateDTO userStoryUpdateDTO = new UserStoryUpdateDTO(priority, description, timeEstimate,
+                        usStartDate, usEndDate);
+                userStoryController.updateUserStoryPartially(usID, userStoryUpdateDTO);
 
             }
         }

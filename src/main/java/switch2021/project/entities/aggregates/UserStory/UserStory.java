@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserStory implements Entity<UserStory> {
