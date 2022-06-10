@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import AppContext from "../context/AppContext";
 import { URL_API } from "../services/Service";
 import { fetchCollections } from "../context/Actions";
@@ -7,7 +7,7 @@ import Button from "../components/Button";
 
 export default function Table(props) {
   const { state, dispatch } = useContext(AppContext);
-  const { collection } = state;
+  const { collection, details } = state;
   const { loading, error, data } = collection;
   
 
@@ -23,11 +23,17 @@ export default function Table(props) {
     // eslint-disable-next-line
   }, []);
 
-  const buttonNavigateD = () => {
-    navToDetails(dispatch);
+  const buttonNavigateD = (singleId) => {
+    console.log(singleId)
+    
+    navToDetails(dispatch, singleId);
   };
 
-  let buttonOpen = <Button name="Open Project" function={buttonNavigateD} />;
+  const buttonOpen = (id) =>{ 
+  
+    return  <Button name="Open Project" singleId = {id} function={buttonNavigateD} />
+}
+
   if (props.collections !== 'projects') {
    buttonOpen = null;
   }
@@ -75,6 +81,7 @@ export default function Table(props) {
                 <tbody>
                   {response.map((row, index) => {
                     const id = row[Object.keys(row)[0]];
+                
                     return (
                       <tr
                         key={index}
@@ -92,7 +99,7 @@ export default function Table(props) {
                             }
                           })
                         }
-                            {buttonOpen} 
+                            {buttonOpen(id)} 
                          </tr>
                     );
                   })}                  
@@ -107,3 +114,4 @@ export default function Table(props) {
     }
   }
 }
+

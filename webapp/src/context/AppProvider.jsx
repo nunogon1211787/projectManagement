@@ -21,7 +21,7 @@ const initialState = {
     data: [],
   },
   details: {
-    userid: 0,
+    userid: "",
     loading: false,
     error: null,
     data: [],
@@ -29,7 +29,7 @@ const initialState = {
   navigation: {
     table: true,
     form: false,
-    details: false,
+    single: false,
     editDetails: false,
   },
 };

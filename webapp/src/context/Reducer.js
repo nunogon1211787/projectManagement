@@ -50,7 +50,7 @@ export default function reducer(state, action) {
         details: {
           loading: false,
           error: null,
-          data: [...action.payload.data],
+          data: [action.payload.data],
           userid: state.details.userid,
         },
       };
@@ -80,7 +80,7 @@ export default function reducer(state, action) {
         navigation: {
           table: false,
           form: true,
-          details: false,
+          single: false,
           editDetails: false,
         },
       };
@@ -90,7 +90,7 @@ export default function reducer(state, action) {
         navigation: {
           table: true,
           form: false,
-          details: false,
+          single: false,
           editDetails: false,
         },
       };
@@ -119,10 +119,13 @@ export default function reducer(state, action) {
       case NAV_TO_DETAILS:
         return {
           ...state,
+          details: {
+            userid: action.payload.id,     
+          },
           navigation: {
             table: false,
             form: false,
-            details: true,
+            single: true,
             editDetails: false,
           },
         };
@@ -132,7 +135,7 @@ export default function reducer(state, action) {
           navigation: {
             table: false,
             form: false,
-            details: false,
+            single: false,
             editDetails: true,
           },
         };
