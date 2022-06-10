@@ -41,58 +41,54 @@ export default function Details(props) {
             <>
               <div className="card bg-light">
                 <table
-                  className="card-body table table-primary table-hover"
-                  style={{ margin: "1%", borderRadius: "10px" }}
-                >
+                    className="card-body table table-primary table-hover"
+                    style={{ margin: "1%", borderRadius: "10px" }}>
                   <thead>
-                    <tr style={{ textTransform: "uppercase" }} key="headers">
-                      {
-                        // eslint-disable-next-line
-                        headers.map((key, idx) => {
-                          if (key !== "_links") {
-                            return (
+                  <tr style={{ textTransform: "uppercase" }} key="headers">
+                    {
+                      // eslint-disable-next-line
+                      headers.map((key, idx) => {
+                        if (key !== "_links") {
+                          return (
                               <th
-                                key={idx}
-                                style={{ textTransform: "uppercase" }}
-                              >
+                                  key={idx}
+                                  style={{ textTransform: "uppercase" }}>
                                 {key}
                               </th>
-                            );
-                          }
-                        })
-                      }
-                    </tr>
+                          );
+                        }
+                      })
+                    }
+                  </tr>
                   </thead>
                   <tbody>
                   <tr
-                          key= "coisa"
-                        //   onClick={() => handleOnClick(id)}
-                          style={{
-                            cursor: "pointer",
-                            textTransform: "capitalize",
-                          }}
-                        >
+                      key= "coisa"
+                      //   onClick={() => handleOnClick(id)}
+                      style={{
+                        cursor: "pointer",
+                        textTransform: "capitalize",
+                      }}>
                     {body.map((row, index) => {
-                      
-                            // eslint-disable-next-line
-                            
-                              if (index !== body.length - 1) {
-                                return <td key={index}>{row}</td>;
-                              }                                                  
+
+                      // eslint-disable-next-line
+                      if (index !== body.length - 1) {
+                        return <td key={index}>{row}</td>;
+                      }
                     })}
                     {/* <Button name="Edit Project" function={buttonNavigateD} />
                     <Button name="Edit Project Team" function={buttonNavigateD} />; */}
 
-                    </tr>
+                  </tr>
                   </tbody>
                 </table>
               </div>
             </>
-          );
-        } else {
-          return <h1>No data ....</h1>;
-        }
+        );
+      } else {
+        return <h1>No data ....</h1>;
+      }
     }
-}
+  }
 
 }

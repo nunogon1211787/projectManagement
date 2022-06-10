@@ -1,36 +1,36 @@
 import { useContext, useEffect, useState } from "react";
 import AppContext from "../context/AppContext";
 import { URL_API } from "../services/Service";
-import { fetchCollections } from "../context/Actions";
-import { navToDetails } from "../context/Actions";
+import {fetchCollections} from "../context/Actions";
+import {navToDetails} from "../context/Actions";
 import Button from "../components/Button";
 
 export default function Table(props) {
   const { state, dispatch } = useContext(AppContext);
   const { collection, details } = state;
   const { loading, error, data } = collection;
-  
 
-  //GET REQUEST TO API
-  useEffect(() => {
-    let url =  `${URL_API}/${props.collections}`;
 
-   if(props.query !== undefined){
-     url = `${URL_API}/${props.collections}?${props.query}`
-   }
-    const request = {};
-    fetchCollections(url, request, dispatch);
-    // eslint-disable-next-line
-  }, []);
+    //GET REQUEST TO API
+    useEffect(() => {
+        let url = `${URL_API}/${props.collections}`;
+
+        if (props.query !== undefined) {
+            url = `${URL_API}/${props.collections}?${props.query}`
+        }
+        const request = {};
+        fetchCollections(url, request, dispatch);
+        // eslint-disable-next-line
+    }, []);
 
   const buttonNavigateD = (singleId) => {
     console.log(singleId)
-    
+
     navToDetails(dispatch, singleId);
   };
 
-  const buttonOpen = (id) =>{ 
-  
+  const buttonOpen = (id) =>{
+
     return  <Button name="Open Project" singleId = {id} function={buttonNavigateD} />
 }
 
@@ -38,8 +38,13 @@ export default function Table(props) {
    buttonOpen = null;
   }
 
+    let buttonOpenUS = <Button name="Open" function={buttonNavigateUS}/>;
+    if (props.collections !== 'userstories') {
+        buttonOpenUS = null;
+    }
 
-  const handleOnClick = (id) => {};
+    const handleOnClick = (id) => {
+    };
 
   if (loading === true) {
     return <h1>Loading ....</h1>;
@@ -81,7 +86,7 @@ export default function Table(props) {
                 <tbody>
                   {response.map((row, index) => {
                     const id = row[Object.keys(row)[0]];
-                
+
                     return (
                       <tr
                         key={index}
@@ -99,7 +104,7 @@ export default function Table(props) {
                             }
                           })
                         }
-                            {buttonOpen(id)} 
+                            {buttonOpen(id)}
                          </tr>
                     );
                   })}                  

@@ -89,37 +89,37 @@ function MainRoute() {
 
   if (data.token === "") {
     return (
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="register" element={<RegisterUser />} />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="register" element={<RegisterUser />} />
+        </Routes>
     );
   } else {
     return (
-      // <Router>
-      <Grommet theme={theme} full>
-        <Box direction="row" fill>
-          <Sidebar
-            appIcon={<LogoIcon />}
-            appName="Beaver App"
-            items={items}
-            userSession={userSession}
-          />
-          <Box flex>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="userstories" element={<CreateUserStory />} />
-              <Route path="profiles" element={<CreateProfile />} />
-              <Route path="typologies" element={<CreateTypology />} />
-              <Route path="projects" element={<CreateProject />} />
-              <Route path="sprints" element={<CreateSprint />} />
-              <Route path="users" element={<RegisterUser />} />
-              <Route path="resources" element={<CreateResource />} />
-            </Routes>
+        // <Router>
+        <Grommet theme={theme} full>
+          <Box direction="row" fill>
+            <Sidebar
+                appIcon={<LogoIcon />}
+                appName="Beaver App"
+                items={items}
+                userSession={userSession}
+            />
+            <Box flex>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="userstories" element={<CreateUserStory />} />
+                <Route path="profiles" element={<CreateProfile />} />
+                <Route path="typologies" element={<CreateTypology />} />
+                <Route path="projects" element={<CreateProject />} />
+                <Route path="sprints" element={<CreateSprint />} />
+                <Route path="users" element={<RegisterUser />} />
+                <Route path="resources" element={<CreateResource />} />
+              </Routes>
+            </Box>
           </Box>
-        </Box>
-      </Grommet>
-      // </Router>
+        </Grommet>
+        // </Router>
     );
   }
 }
