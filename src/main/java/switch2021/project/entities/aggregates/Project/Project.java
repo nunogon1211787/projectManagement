@@ -53,14 +53,12 @@ public class Project {
     /**
      * Method that checks if given code is this projects code
      * **/
-
     public boolean hasCode(String code) {
         String projCode = this.projectCode.getCode().toLowerCase(Locale.ROOT);
         return projCode.equals(code.toLowerCase(Locale.ROOT));
     }
 
     public boolean isActiveInThisDate(LocalDate date) {
-
         boolean result = false;
 
         if(this.startDate.isBefore(date) || this.startDate.isEqual(date)){
@@ -68,9 +66,7 @@ public class Project {
             if(this.endDate == null || this.endDate.isEqual(date) || this.endDate.isAfter(date)){
                 result = true;
             }
-
         }
-
         return result;
     }
 
