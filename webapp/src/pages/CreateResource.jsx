@@ -21,8 +21,8 @@ const inputTypes = [
   "text",
   "date",
   "date",
-  "number",
-  "number",
+  "numeric",
+  "numeric",
 ];
 
 export default function CreateResource() {
