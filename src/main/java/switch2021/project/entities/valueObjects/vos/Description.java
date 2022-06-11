@@ -9,7 +9,7 @@ import switch2021.project.utils.ValueObject;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-@ToString
+//@ToString
 @Getter
 @Setter
 @Embeddable

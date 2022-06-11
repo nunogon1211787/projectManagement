@@ -51,7 +51,7 @@ public class Resource implements Entity<Resource> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Resource that = (Resource) o;
-        return id.equals(that.id);
+        return sameIdentityAs(that);
     }
 
     @Override
@@ -61,6 +61,6 @@ public class Resource implements Entity<Resource> {
 
     @Override
     public boolean sameIdentityAs(Resource other) {
-        return false;
+        return other != null && this.id.sameValueAs(other.id);
     }
 }
