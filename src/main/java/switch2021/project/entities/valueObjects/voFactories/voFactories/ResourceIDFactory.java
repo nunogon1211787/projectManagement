@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResourceIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
-import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
+import switch2021.project.entities.valueObjects.vos.ResourceID;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.UserID;
 
@@ -23,10 +23,10 @@ public class ResourceIDFactory implements IResourceIDFactory {
     private IUserIDFactory userIDFactory;
 
     @Override
-    public ResourceIDReeng create(String systemUserID, String projID, String startDat) {
+    public ResourceID create(String systemUserID, String projID, String startDat) {
         UserID sysUserID = userIDFactory.createUserID(systemUserID);
         ProjectID projectID = projectIDFactory.create(projID);
         LocalDate startDate = LocalDate.parse(startDat);
-        return new ResourceIDReeng(sysUserID, projectID, startDate);
+        return new ResourceID(sysUserID, projectID, startDate);
     }
 }

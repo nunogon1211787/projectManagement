@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import switch2021.project.entities.valueObjects.vos.CostPerHour;
 import switch2021.project.entities.valueObjects.vos.PercentageOfAllocation;
+import switch2021.project.entities.valueObjects.vos.ResourceID;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectRoleReeng;
-import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
 import switch2021.project.utils.Entity;
 
 import java.time.LocalDate;
@@ -22,8 +22,7 @@ public class Resource implements Entity<Resource> {
     /**
      * Attributes
      **/
-
-    private ResourceIDReeng id;
+    private ResourceID id;
     private LocalDate endDate;
     private PercentageOfAllocation allocation;
     private CostPerHour cost;
@@ -32,18 +31,18 @@ public class Resource implements Entity<Resource> {
 
 
     public boolean isActiveToThisDate(LocalDate date) {
-
         boolean result = false;
 
         if(this.id.getStartDate().isBefore(date) || this.id.getStartDate().isEqual(date)){
-
             if(this.endDate.isEqual(date) || this.endDate.isAfter(date)){
                 result = true;
             }
-
         }
-
         return result;
+    }
+
+    public boolean hasProjectRole(String role) {
+        return this.role.equals(ProjectRoleReeng.valueOf(role));
     }
 
 

@@ -76,9 +76,6 @@ export default function Details(props) {
                         return <td key={index}>{row}</td>;
                       }
                     })}
-                    {/* <Button name="Edit Project" function={buttonNavigateD} />
-                    <Button name="Edit Project Team" function={buttonNavigateD} />; */}
-
                   </tr>
                   </tbody>
                 </table>

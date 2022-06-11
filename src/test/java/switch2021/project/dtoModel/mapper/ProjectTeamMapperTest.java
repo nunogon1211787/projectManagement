@@ -42,7 +42,7 @@ public class ProjectTeamMapperTest {
 
         //Act
         //create ResourceDto
-        ResourceDTO resourceDTOExp1 = projectTeamMapper.toDto(manuelbras);
+        DefineRoleOfResourceDTO resourceDTOExp1 = projectTeamMapper.toDto(manuelbras);
 
         //Asserts
         assertEquals("", resourceDTOExp1.getRole());
@@ -95,7 +95,7 @@ public class ProjectTeamMapperTest {
         List<Resource> projTeam = proj1.getProjectTeam().getProjectTeamList();
 
         //Act
-        List<ResourceDTO> resDtoList = projectTeamMapper.toDto(projTeam);
+        List<DefineRoleOfResourceDTO> resDtoList = projectTeamMapper.toDto(projTeam);
 
         //Asserts
         assertEquals("", resDtoList.get(0).getRole());
@@ -132,7 +132,7 @@ public class ProjectTeamMapperTest {
         manuelbras.setRole(company.getProjectRoleStore().getProjectRole("Team Member"));
 
         //Act
-        ResourceDTO resourceDto = projectTeamMapper1.toDto(manuelbras);
+        DefineRoleOfResourceDTO resourceDto = projectTeamMapper1.toDto(manuelbras);
 
         //Asserts
         assertNotNull(resourceDto.getRole());
