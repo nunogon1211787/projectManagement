@@ -9,7 +9,7 @@ class ResourceTest {
 //    void withDateBeforeStartDate() {
 //
 //        //Arrange
-//        ResourceIDReeng id = mock(ResourceIDReeng.class);
+//        ResourceID id = mock(ResourceID.class);
 //        PercentageOfAllocation all = mock(PercentageOfAllocation.class);
 //        CostPerHour costPerHour = mock(CostPerHour.class);
 //        ProjectRoleReeng projRole = null;
@@ -32,7 +32,7 @@ class ResourceTest {
 //    void withDateEqualStartDate() {
 //
 //        //Arrange
-//        ResourceIDReeng id = mock(ResourceIDReeng.class);
+//        ResourceID id = mock(ResourceID.class);
 //        ResourceReeng res = new ResourceReeng(id);
 //        LocalDate end = LocalDate.of(2022, 12, 31);
 //        res.setEndDate(end);
@@ -51,7 +51,7 @@ class ResourceTest {
 //    void withDateAfterStartDate() {
 //
 //        //Arrange
-//        ResourceIDReeng id = mock(ResourceIDReeng.class);
+//        ResourceID id = mock(ResourceID.class);
 //        ResourceReeng res = new ResourceReeng(id);
 //        LocalDate end = LocalDate.of(2022, 12, 31);
 //        res.setEndDate(end);
@@ -70,7 +70,7 @@ class ResourceTest {
 //    void withDateAfterEndDate() {
 //
 //        //Arrange
-//        ResourceIDReeng id = mock(ResourceIDReeng.class);
+//        ResourceID id = mock(ResourceID.class);
 //        ResourceReeng res = new ResourceReeng(id);
 //        LocalDate end = LocalDate.of(2022, 4, 30);
 //        res.setEndDate(end);
@@ -89,7 +89,7 @@ class ResourceTest {
 //    void withDateEqualEndDate() {
 //
 //        //Arrange
-//        ResourceIDReeng id = mock(ResourceIDReeng.class);
+//        ResourceID id = mock(ResourceID.class);
 //        ResourceReeng res = new ResourceReeng(id);
 //        LocalDate end = LocalDate.of(2022, 5, 2);
 //        res.setEndDate(end);

@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import switch2021.project.utils.Entity;
-import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
+import switch2021.project.entities.valueObjects.vos.ResourceID;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.TaskTypeEnum;
 
@@ -29,7 +29,7 @@ public class Task implements Entity<Task> {
     private EffortEstimate effortEstimate;  //in hours
     private LocalDate startDate;
     private LocalDate endDate;
-    private ResourceIDReeng responsible;
+    private ResourceID responsible;
     private List<TaskEffort> taskEffortList;
     private List<TaskID> precedenceList;
 
@@ -44,7 +44,7 @@ public class Task implements Entity<Task> {
 
     public Task(TaskID taskID, Description description,
                 EffortEstimate effortEstimate, TaskTypeEnum type,
-                ResourceIDReeng responsible) {
+                ResourceID responsible) {
         this.idTask = taskID;
         this.description = description;
         this.effortEstimate = effortEstimate;
@@ -77,7 +77,7 @@ public class Task implements Entity<Task> {
         return Objects.equals(this.type.toString(), taskType);
     }
 
-    public boolean hasResponsible(ResourceIDReeng resp) {
+    public boolean hasResponsible(ResourceID resp) {
         return Objects.equals(this.responsible, resp);
     }
 

@@ -47,7 +47,7 @@ public class TaskJpaAssembler {
             sprintName = ((SprintID) sprintOrUsID).getSprintName();
         }
 
-        ResourceIDReeng taskResponsibleID = task.getResponsible();
+        ResourceID taskResponsibleID = task.getResponsible();
         UserID userId = taskResponsibleID.getUser();
         String resourceStartDate = null;
         if (!(taskResponsibleID.getStartDate() == null)) {
@@ -95,7 +95,7 @@ public class TaskJpaAssembler {
         if (!(taskJpa.getResourceStartDate() == null)) {
             resourceStartDate = LocalDate.parse(taskJpa.getResourceStartDate());
         }
-        ResourceIDReeng responsible = new ResourceIDReeng(resourceUserID, projectID, resourceStartDate);
+        ResourceID responsible = new ResourceID(resourceUserID, projectID, resourceStartDate);
 
         return new Task(taskID,taskDescription,taskType,taskEffortEstimate,taskStartDate,taskEndDate,responsible,taskEffortList,taskPrecedenceList);
     }
