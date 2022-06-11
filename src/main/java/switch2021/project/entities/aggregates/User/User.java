@@ -235,6 +235,10 @@ public class User implements Entity<User> {
         return false;
     }
 
+    public boolean checkPassword(Password password) {
+        return this.encryptedPassword.equals(encryptPassword(password));
+    }
+
 
     /**
      * Override Methods
@@ -256,9 +260,5 @@ public class User implements Entity<User> {
     @Override
     public int hashCode() {
         return userId.hashCode();
-    }
-
-    public boolean checkPassword(Password password) {
-        return this.encryptedPassword.equals(encryptPassword(password));
     }
 }

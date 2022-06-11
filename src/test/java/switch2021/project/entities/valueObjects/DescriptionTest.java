@@ -73,35 +73,14 @@ class DescriptionTest {
         assertEquals(1000, description.getText().length());
     }
 
-//    @Test
-//    public void getMAX_DESCRIPTION_LENGTH() {
-//        //Arrange
-//        char[] data = new char[1000];
-//        Arrays.fill(data, 'a');
-//        String str = new String(data);
-//        Description test = new Description(str);
-//        //Act
-//        int length = test.getMAX_DESCRIPTION_LENGTH();
-//        //Assert
-//        assertEquals(length,test.getText().length());
-//    }
-
-//    @Test
-//    public void getMIN_DESCRIPTION_LENGTH() {
-//        //Arrange
-//        Description test = new Description("s");
-//        //Act
-//        int length = test.getMIN_DESCRIPTION_LENGTH();
-//        //Assert
-//        assertEquals(length,test.getText().length());
-//    }
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTestEqual() {
         //Arrange
         Description description = new Description("Test");
-        Description description2 = new Description("Test");
+        Description description2 = new Description();
+        description2.setText("Test");
         //Assert
         assertEquals(description, description2);
     }
@@ -112,19 +91,10 @@ class DescriptionTest {
     public void overrideTestNotEqual() {
         //Arrange
         Description description = new Description("Test1");
-        Description description3 = new Description("Test");
+        Description description3 = new Description();
         //Assert
-        assertNotEquals(description, null);
+        assertNotEquals(description, description3);
     }
-//
-//    @Test
-//    @DisplayName("Test override conditions for coverage purposes")
-//    public void overrideTestNull() {
-//        // Arrange
-//        Description description = new Description("Test");
-//        //Assert
-//        assertNotEquals(description, description3);
-//    }
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")

@@ -148,6 +148,7 @@ public class ResourceService {
     public OutputResourceDTO defineProjectRole(String id, DefineRoleOfResourceDTO dto) throws NullPointerException {
         ResourceID resID = createResourceIdByStringInputFromController(id);
         List<Resource> resourcesByProject = resRepo.findAllByProject(resID.getProject());
+
         Optional<Resource> opFoundResource = resRepo.findById(resID);
         Optional<Resource> opFoundByRole = showCurrentResourceByProjectRole(resourcesByProject,
                 dto.getRole(), LocalDate.parse(dto.getStartDate()));
@@ -168,7 +169,7 @@ public class ResourceService {
         return mapper.toDto(updateProjectRoleOfAResource(foundResource,dto));
     }
 
-    private Optional<Resource> showCurrentResourceByProjectRole (List<Resource> resources, String role, LocalDate date){
+    private Optional<Resource> showCurrentResourceByProjectRole (List<Resource> resources, String role, LocalDate date) {
 
         for(Resource res : resources) {
             if(res.hasProjectRole(role) && res.isActiveToThisDate(date)) {
@@ -179,10 +180,19 @@ public class ResourceService {
     }
 
     private Resource updateProjectRoleOfAResource (Resource oldResource, DefineRoleOfResourceDTO dto) {
+        Resource newResourceByRole = iResourceFactory.createResourceByAnotherResource(oldResource.getId(), dto);
+
+        checkDatesInsideProject(newResourceByRole.getId().getProject().getCode(),
+                newResourceByRole.getId().getStartDate().toString(),
+                newResourceByRole.getEndDate().toString());
+        checkAllocation(newResourceByRole.getId().getUser().getEmail().getEmailText(),
+                newResourceByRole.getId().getStartDate().toString(),
+                newResourceByRole.getEndDate().toString(),
+                newResourceByRole.getAllocation().getPercentage());
+
         oldResource.setEndDate(LocalDate.parse(dto.getStartDate()).minusDays(1));
         resRepo.save(oldResource);
 
-        Resource newResourceByRole = iResourceFactory.createResourceByAnotherResource(oldResource.getId(), dto);
         return resRepo.save(newResourceByRole);
     }
 
@@ -225,8 +235,8 @@ public class ResourceService {
         checkSystemUserExists(dto.systemUserID);
         checkProjectExists(dto.projectId);
         checkProjectRole(dto);
-        checkDatesInsideProject(dto);
-        checkAllocation(dto);
+        checkDatesInsideProject(dto.projectId, dto.startDate, dto.endDate);
+        checkAllocation(dto.systemUserID, dto.startDate, dto.endDate, dto.percentageOfAllocation);
     }
 
     private void checkSystemUserExists(String userID) throws IllegalArgumentException {
@@ -244,8 +254,8 @@ public class ResourceService {
         }
     }
 
-    private void checkDatesInsideProject(CreateResourceDTO dto) throws IllegalArgumentException {
-        ProjectID projID = iProjIDFactory.create(dto.projectId);
+    private void checkDatesInsideProject(String id, String startDate, String endDate) throws IllegalArgumentException {
+        ProjectID projID = iProjIDFactory.create(id);
         Optional<Project> opProject = projRepo.findById(projID);
 
         Project project = opProject.flatMap(pro -> opProject).orElse(null);
@@ -253,17 +263,19 @@ public class ResourceService {
         if (project == null) {
             throw new IllegalArgumentException(("Project does not exist!"));
         }
-        if (!project.isActiveInThisDate(LocalDate.parse(dto.startDate)) ||
-                !project.isActiveInThisDate(LocalDate.parse(dto.endDate))) {
+        if (!project.isActiveInThisDate(LocalDate.parse(startDate)) ||
+                !project.isActiveInThisDate(LocalDate.parse(endDate))) {
             throw new IllegalArgumentException(("Dates are not inside project!"));
         }
     }
 
-    private void checkAllocation(CreateResourceDTO dto) throws IllegalArgumentException {
-        UserID sysUserId = new UserID(new Email(dto.systemUserID));
+    private void checkAllocation(String email, String startDate,
+                                 String endDate, double percentageOfAllocation) throws IllegalArgumentException {
+        UserID sysUserId = new UserID(new Email(email));
         List<Resource> resourceAllocatedProjects = resRepo.findAllByUser(sysUserId);
 
-        if (!managementService.validateAllocation(resourceAllocatedProjects, dto)) {
+        if (!managementService.validateAllocation(resourceAllocatedProjects, startDate,
+                endDate, percentageOfAllocation)) {
             throw new IllegalArgumentException(("Is not valid to create - Allocation)"));
         }
     }
@@ -272,7 +284,7 @@ public class ResourceService {
         ProjectID projID = new ProjectID(dto.projectId);
         List<Resource> projectTeamList = resRepo.findAllByProject(projID);
 
-        if (!managementService.validateProjectRole(projectTeamList, dto)) {
+        if (!managementService.validateProjectRole(projectTeamList, dto.startDate, dto.endDate, dto.projectRole)) {
             throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));
         }
     }
