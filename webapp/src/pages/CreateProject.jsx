@@ -4,7 +4,7 @@ import Form from "../components/Form";
 import Table from "../components/Table";
 import AppContext from "../context/AppContext";
 import { Box } from "grommet";
-import { navToEditDetails, navToDetails, navToForm, navToTable } from "../context/Actions";
+import { navToEditDetails, navToDetails, navToForm, navToTable, navToProjectTeam, fetchCollections } from "../context/Actions";
 import Details from "../components/Details";
 import EditDetails from "../components/EditDetails";
 
@@ -55,8 +55,6 @@ export default function CreateProject() {
   };
 
   let projID = `projects/${userid}` ;
-
-  // let projID1 = "projects/Project_2022_2" ;
 
   if(table){
     return (
