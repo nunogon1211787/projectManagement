@@ -30,14 +30,14 @@ export default function Table(props) {
   };
 
   const buttonOpen = (id) =>{
-
-    return  <Button name="Open Project" singleId = {id} function={buttonNavigateD} />
+    if (props.collections === 'projects'){
+      return  <Button name="Open Project" singleId = {id} function={buttonNavigateD} />
 }
+    // if(props.collections === 'userstories'){
+    //   return <Button name="Open" function={buttonNavigateUS}/>
+    // }
 
-
-  // if (props.collections !== 'projects') {
-  //  buttonOpen = null;
-  // }
+}
 
     // let buttonOpenUS = <Button name="Open" function={buttonNavigateUS}/>;
     // if (props.collections !== 'userstories') {
@@ -105,6 +105,7 @@ export default function Table(props) {
                             }
                           })
                         }
+
                             {buttonOpen(id)}
                          </tr>
                     );
