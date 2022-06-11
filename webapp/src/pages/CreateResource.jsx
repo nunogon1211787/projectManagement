@@ -36,7 +36,7 @@ export default function CreateResource() {
   if (table) {
     return (
       <>
-        <h1>Resources ? Project Team</h1>
+        <h1>Project Team</h1>
         <Table collections="resources" query="Project_2022_1"/>
         <Button name="Create Resource" function={buttonNavigate} />
       </>
@@ -45,7 +45,7 @@ export default function CreateResource() {
     if (form){
       return (
         <>
-          <h1>Resources ? Project Team</h1>
+          <h1>Associate Resource</h1>
           <Form label={postBody} rules={inputTypes} collections="resources" />
         </>
       );
