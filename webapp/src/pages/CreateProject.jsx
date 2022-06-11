@@ -79,7 +79,6 @@ export default function CreateProject() {
             <h1>Project XPTO</h1>
             <Details details = {projID} />
             <Button name="Edit Project" function={buttonNavigateE} />
-            <Button name="Project Team"  />
             <Button name="Sprints"  />
             <Button name="Product Backlog"  />
             <Button name="Back to table" function={buttonNavigateT} />
