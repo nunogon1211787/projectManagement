@@ -14,6 +14,7 @@ import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.UserID;
 import switch2021.project.persistence.ResourceJpaRepository;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -79,6 +80,7 @@ public class ResourceRepository implements IResourceRepo {
     }
 
     @Override
+    @Transactional
     public Resource save(Resource newResource) {
         ResourceJpa resJpa = assembler.toData(newResource);
 
@@ -88,6 +90,7 @@ public class ResourceRepository implements IResourceRepo {
     }
 
     @Override
+    @Transactional
     public boolean deleteByResourceID(ResourceID id) {
         ResourceIDJpa resIdJpa = new ResourceIDJpa(id.getUser(), id.getProject(), id.getStartDate().toString());
 

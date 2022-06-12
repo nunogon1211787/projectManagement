@@ -79,7 +79,6 @@ export default function CreateProject() {
             <h1>Project XPTO</h1>
             <Details details = {projID} />
             <Button name="Edit Project" function={buttonNavigateE} />
-            <Button name="Project Team"  />
             <Button name="Sprints"  />
             <Button name="Product Backlog"  />
             <Button name="Back to table" function={buttonNavigateT} />
@@ -90,7 +89,7 @@ export default function CreateProject() {
           return (
             <>
               <h1>Edit Project</h1>
-              <EditDetails label={postBody} rules={inputTypes} details={projID} />
+              <EditDetails label={postBody} rules={inputTypes} details={projID} httpMethod="PUT" />
               <Button name="Back to table" function={buttonNavigateT} />
             </>
           )

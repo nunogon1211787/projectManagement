@@ -132,6 +132,9 @@ export default function reducer(state, action) {
         case NAV_TO_EDITDETAILS:
         return {
           ...state,
+          details: {
+            userid: action.payload.id,     
+          },
           navigation: {
             table: false,
             form: false,

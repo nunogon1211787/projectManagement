@@ -4,11 +4,14 @@ import { URL_API } from "../services/Service";
 import { fetchDetails } from "../context/Actions";
 import Button from "./Button";
 import { navToEditDetails } from "../context/Actions";
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Details(props) {
   const { state, dispatch } = useContext(AppContext);
   const { details } = state;
-  const { loading, error, data } = details;
+  const { userid, loading, error, data } = details;
+  const navigate = useNavigate();
 
   const buttonNavigateD = () => {
     navToEditDetails(dispatch);
@@ -25,6 +28,7 @@ export default function Details(props) {
   }, []);
 
   const handleOnClick = (id) => {};
+  
 
   if (loading === true) {
     return <h1>Loading ....</h1>;
@@ -36,6 +40,8 @@ export default function Details(props) {
         if(data !== undefined){
           const headers = Object.keys(data[0]);
           const body = Object.values(data[0]);
+
+          const buttonNavigateToProjectTeam2 = () => navigate("/resources",{state: {projId: body[0]}, replace: true})
 
           return (
             <>
@@ -79,6 +85,8 @@ export default function Details(props) {
                   </tr>
                   </tbody>
                 </table>
+                <Button name="Project Team" function={buttonNavigateToProjectTeam2} />
+                
               </div>
             </>
         );

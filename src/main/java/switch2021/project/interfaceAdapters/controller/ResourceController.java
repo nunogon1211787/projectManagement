@@ -46,7 +46,6 @@ public class ResourceController {
 
     /**
      * Find by id
-     *
      * @return resource
      */
     @GetMapping("/{id}")
@@ -55,12 +54,6 @@ public class ResourceController {
 
         try {
             newResource = service.showResourceRequested(id);
-
-            if (newResource == null) {
-                ErrorMessage message = new ErrorMessage();
-                message.errorMessage = "Resource does not exist!";
-                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-            }
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
@@ -79,12 +72,6 @@ public class ResourceController {
 
         try {
             result = CollectionModel.of(service.showAllResources());
-
-            if (result.getContent().isEmpty()) {
-                ErrorMessage message = new ErrorMessage();
-                message.errorMessage = "There are no resources yet!";
-                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-            }
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
@@ -119,12 +106,6 @@ public class ResourceController {
 
         try {
             result = service.showProjectTeam(idProject);
-
-            if (result.isEmpty()) {
-                ErrorMessage message = new ErrorMessage();
-                message.errorMessage = "There are no resources in this project";
-                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-            }
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
