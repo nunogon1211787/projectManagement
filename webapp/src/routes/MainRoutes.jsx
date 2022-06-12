@@ -17,7 +17,7 @@ import CreateUserStory from "../pages/CreateUserStory";
 import CreateTypology from "../pages/CreateTypology";
 import { Home } from "../pages/Home";
 import RegisterUser from "../pages/RegisterUser";
-import CreateResource from '../pages/CreateResource';
+import CreateResource from "../pages/CreateResource";
 
 import { Box, Grommet } from "grommet";
 
@@ -34,7 +34,11 @@ const userSession = {
   items: [
     {
       label: "Logout",
-      href: "#",
+      href: "/",
+    },
+    {
+      label: "Settings",
+      href: "/userSettings",
     },
   ],
 };

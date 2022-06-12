@@ -4,7 +4,7 @@ import Form from "../components/Form";
 import Table from "../components/Table";
 import AppContext from "../context/AppContext";
 import { navToForm } from "../context/Actions";
-import { Box } from "grommet";
+import { Box, Grid, Heading } from "grommet";
 
 const postBody = {
   projectID: "",
@@ -27,11 +27,23 @@ export default function CreateUserStory() {
 
   if (table) {
     return (
-      <Box fill align="center" justify="center">
-        <h1>User Story</h1>
-        <Table collections="userstories" />
-        <Button name="Create User Story" function={buttonNavigate} />
-      </Box>
+      <Grid
+        rows={["any CSS size", "any CSS size"]}
+        columns={["any CSS size", "any CSS size"]}
+        gap="small"
+        areas={[
+          { name: "header", start: [0, 0], end: [1, 0] },
+          { name: "main", start: [0, 1], end: [1, 1] },
+        ]}
+      >
+        <Box gridArea="header" align="center" justify="center">
+          <Heading>User Stories</Heading>
+          <Button name="Create User Story" function={buttonNavigate} />
+        </Box>
+        <Box gridArea="main">
+          <Table collections="userstories" />
+        </Box>
+      </Grid>
     );
   } else {
     if (form) {

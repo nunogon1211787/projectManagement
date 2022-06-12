@@ -24,8 +24,8 @@ export function Home() {
     );
   } else {
     return (
-      <Box flex align="center" justify="center">
-        <h1>Welcome to Beaver APP</h1>;
+      <Box fill align="center" justify="center">
+        <h1>Welcome to Beaver APP</h1>
       </Box>
     );
   }

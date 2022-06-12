@@ -1,8 +1,9 @@
 import React from "react";
 import { Menu, Text } from "grommet";
 import { Avatar } from "./Avatar";
+import { Logout } from "grommet-icons";
 
-export const UserMenu = ({ user = {}, items = [], ...rest }) => (
+export const UserMenu = ({ user = {}, items = [] }) => (
   <Menu
     dropAlign={{ bottom: "top" }}
     icon={false}
@@ -12,6 +13,5 @@ export const UserMenu = ({ user = {}, items = [], ...rest }) => (
       onClick: () => {}, // no-op
     }))}
     label={<Avatar name={user.name} url={user.thumbnail} />}
-    {...rest}
   />
 );

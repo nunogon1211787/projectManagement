@@ -9,15 +9,14 @@ export default function Table(props) {
   const { state, dispatch } = useContext(AppContext);
   const { collection } = state;
   const { loading, error, data } = collection;
-  
 
   //GET REQUEST TO API
   useEffect(() => {
-    let url =  `${URL_API}/${props.collections}`;
+    let url = `${URL_API}/${props.collections}`;
 
-   if(props.query !== undefined){
-     url = `${URL_API}/${props.collections}?${props.query}`
-   }
+    if (props.query !== undefined) {
+      url = `${URL_API}/${props.collections}?${props.query}`;
+    }
     const request = {};
     fetchCollections(url, request, dispatch);
     // eslint-disable-next-line
@@ -28,10 +27,9 @@ export default function Table(props) {
   };
 
   let buttonOpen = <Button name="Open Project" function={buttonNavigateD} />;
-  if (props.collections !== 'projects') {
-   buttonOpen = null;
+  if (props.collections !== "projects") {
+    buttonOpen = null;
   }
-
 
   const handleOnClick = (id) => {};
 
@@ -45,7 +43,7 @@ export default function Table(props) {
         const collect = Object.keys(data[0]._embedded)[0];
         const header = Object.keys(data[0]._embedded[collect][0]);
         const response = data[0]._embedded[collect];
-        
+
         return (
           <>
             <div className="card bg-light">
@@ -92,10 +90,10 @@ export default function Table(props) {
                             }
                           })
                         }
-                            {buttonOpen} 
-                         </tr>
+                        {buttonOpen}
+                      </tr>
                     );
-                  })}                  
+                  })}
                 </tbody>
               </table>
             </div>
