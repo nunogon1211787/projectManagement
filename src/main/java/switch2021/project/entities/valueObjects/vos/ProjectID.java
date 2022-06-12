@@ -28,7 +28,7 @@ public class ProjectID implements ValueObject<ProjectID> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProjectID that = (ProjectID) o;
-        return Objects.equals(code, that.code);
+        return this.sameValueAs(that);
     }
 
     @Override
@@ -38,6 +38,6 @@ public class ProjectID implements ValueObject<ProjectID> {
 
     @Override
     public boolean sameValueAs(ProjectID other) {
-        return false;
+        return this.code.equals(other.code);
     }
 }

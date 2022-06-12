@@ -1,29 +1,37 @@
 import Button from "../components/Button";
-import { useContext } from "react";
+import {useContext} from "react";
 import Form from "../components/Form";
 import Table from "../components/Table";
 import AppContext from "../context/AppContext";
-import { navToForm } from "../context/Actions";
+import { navToForm, navToTable } from "../context/Actions";
 import { Box, Grid, Heading } from "grommet";
 
 const postBody = {
-  projectID: "",
-  title: "",
-  priority: "",
-  description: "",
-  timeEstimate: "",
+    projectID: "",
+    title: "",
+    priority: "",
+    description: "",
+    timeEstimate: "",
 };
 
 const inputTypes = ["text", "text", "number", "text", "number"];
 
 export default function CreateUserStory() {
-  const { state, dispatch } = useContext(AppContext);
-  const { navigation } = state;
-  const { table, form } = navigation;
+    const {state, dispatch} = useContext(AppContext);
+    const {navigation} = state;
+    const {table, form, details} = navigation;
 
-  const buttonNavigate = () => {
-    navToForm(dispatch);
-  };
+    const buttonNavigate = () => {
+        navToForm(dispatch);
+    };
+
+    const buttonNavigateEdit = () => {
+        navToForm(dispatch);
+    };
+
+    const buttonNavigateBack = () => {
+        navToTable(dispatch);
+    };
 
   if (table) {
     return (
@@ -58,6 +66,18 @@ export default function CreateUserStory() {
           </Box>
         </>
       );
+    }else {
+        if (details) {
+            return (
+                <>
+                    <h1>User Story</h1>
+                    {/*{<Details details={usID}/>}*/}
+                    <Button name="Edit User Story" function={buttonNavigateEdit}/>
+                    <Button name="Back to user stories list" function={buttonNavigateBack}/>
+                </>
+            )
+
+        }
     }
   }
 }

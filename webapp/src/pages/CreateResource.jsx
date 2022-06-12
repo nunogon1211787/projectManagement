@@ -16,7 +16,15 @@ const postBody = {
   percentageOfAllocation: "",
 };
 
-const inputTypes = ["text", "text", "text", "date", "date", "number", "number"];
+const inputTypes = [
+  "text",
+  "text",
+  "text",
+  "date",
+  "date",
+  "numeric",
+  "numeric",
+];
 
 export default function CreateResource() {
   const { state, dispatch } = useContext(AppContext);
@@ -39,7 +47,7 @@ export default function CreateResource() {
           ]}
         >
           <Box gridArea="header" align="center" justify="center">
-            <Heading>Resources ? Project Team</Heading>
+            <Heading>Project Team</Heading>
             <Button name="Create Resource" function={buttonNavigate} />
           </Box>
           <Box gridArea="main">
@@ -55,7 +63,7 @@ export default function CreateResource() {
     if (form) {
       return (
         <>
-          <h1>Resources ? Project Team</h1>
+          <h1>Associate Resource</h1>
           <Form label={postBody} rules={inputTypes} collections="resources" />
         </>
       );

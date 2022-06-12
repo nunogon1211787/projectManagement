@@ -7,13 +7,12 @@ import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.applicationServices.iRepositories.IResourceRepo;
 import switch2021.project.applicationServices.iRepositories.ITypologyRepo;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
-import switch2021.project.dtoModel.dto.DateDTO;
 import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.mapper.ProjectMapper;
 import switch2021.project.entities.aggregates.Project.Project;
-import switch2021.project.entities.aggregates.Resource.ManageResourcesService;
+import switch2021.project.entities.aggregates.Resource.ManagementResourcesService;
 import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
@@ -23,7 +22,6 @@ import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 
@@ -45,7 +43,7 @@ public class ProjectService {
     @Autowired
     private IResourceRepo resRepo;
     @Autowired
-    private ManageResourcesService resService;
+    private ManagementResourcesService resService;
 
 
     public ProjectService() {
@@ -143,15 +141,14 @@ public class ProjectService {
         return projMapper.model2Dto(foundProject.get());
     }
 
-    public List<OutputProjectDTO> showCurrentProjectsByUser(String id, DateDTO dateDto) {
+    public List<OutputProjectDTO> showCurrentProjectsByUser(String UserId) {
         List<OutputProjectDTO> projectsDto = new ArrayList<>();
-        UserID userID = userIDFactory.createUserID(id);
+        UserID userID = userIDFactory.createUserID(UserId);
 
         if (userRepo.existsById(userID)) {
             List<Resource> userResources = resRepo.findAllByUser(userID);
 
-            List<Resource> currentUserResources = resService.currentResourcesByDate(userResources,
-                                                                                    LocalDate.parse(dateDto.date));
+            List<Resource> currentUserResources = resService.currentResourcesByDate(userResources);
 
             List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
 

@@ -22,43 +22,56 @@ public class ResourceController {
     /**
      * Attributes
      **/
-
     @Autowired
-    private ResourceService srv;
+    private ResourceService service;
 
 
     /**
-     * Create a Resource
+     * Create a Resource (US007)
      */
-
     @PostMapping
     public ResponseEntity<Object> createResource(@RequestBody CreateResourceDTO dto) {
-        ErrorMessage message = new ErrorMessage();
         OutputResourceDTO newResource;
+
         try {
-            newResource = srv.createAndSaveResource(dto);
+            newResource = service.createAndSaveResource(dto);
         } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(newResource, HttpStatus.CREATED);
     }
 
+
+    /**
+     * Find by id
+     * @return resource
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> showResourceRequested(@PathVariable("id") String id) {
+        OutputResourceDTO newResource;
+
+        try {
+            newResource = service.showResourceRequested(id);
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(newResource, HttpStatus.OK);
+    }
+
+
     /**
      * Find all Resources
      */
     @GetMapping
-    public ResponseEntity<Object> showAllResources(){
+    public ResponseEntity<Object> showAllResources() {
         CollectionModel<OutputResourceDTO> result;
 
         try {
-            result = CollectionModel.of(srv.showAllResources());
-
-            if(result.getContent().isEmpty()) {
-                ErrorMessage message = new ErrorMessage();
-                message.errorMessage = "There are no resources yet!";
-                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-            }
+            result = CollectionModel.of(service.showAllResources());
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
@@ -69,80 +82,62 @@ public class ResourceController {
     }
 
 
-//    @GetMapping
-//    public ResponseEntity<Object> showCurrentProjectTeam(@RequestParam("project") IdDTO dto, @RequestParam("date") DateDTO dateDto){
-//
-//        List<OutputResourceDTO> resourcesDto = srv.showCurrentProjectTeam(dto, dateDto);
-//
-//        return new ResponseEntity<>(resourcesDto, HttpStatus.OK);
-//
-//    }
-
-    /**
-     * Consult a Project Team of a Project (US027)
-     */
-
-    @GetMapping("/projectTeam/{id}")
-    public ResponseEntity<Object> showProjectTeam(@PathVariable("id") String idProject) {
-        List<OutputResourceDTO> result;
+    @GetMapping("/currentProjectTeam/{id}")
+    public ResponseEntity<Object> showCurrentProjectTeam(@PathVariable("id") String projectId) {
+        CollectionModel<OutputResourceDTO> resourcesFound;
 
         try {
-            result = srv.showProjectTeam(idProject);
-
-            if (result.isEmpty()) {
-                ErrorMessage message = new ErrorMessage();
-                message.errorMessage = "There are no resources in this project";
-                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-            }
-        } catch(Exception exception) {
-                ErrorMessage message = new ErrorMessage();
-                message.errorMessage = exception.getMessage();
-                return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-            }
-            return new ResponseEntity<>(result, HttpStatus.OK);
-        }
-    /**
-     * Find by id
-     *
-     * @return resource
-     */
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> showResourceRequested(@PathVariable("id") String id) {
-        ErrorMessage message = new ErrorMessage();
-        OutputResourceDTO newResource;
-
-        try {
-            newResource = srv.showResource(id);
-
-            if(newResource == null){
-                message.errorMessage = "Resource does not exist!";
-                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-            }
+            resourcesFound = service.showCurrentProjectTeam(projectId);
         } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
+        return new ResponseEntity<>(resourcesFound, HttpStatus.OK);
+    }
 
-        return new ResponseEntity<>(newResource, HttpStatus.OK);
+
+    /**
+     * Consult a Project Team of a Project (US028)
+     */
+    @GetMapping("/registerOfResources/{id}")
+    public ResponseEntity<Object> showRegisterOfResourcesInAProject(@PathVariable("id") String idProject) {
+        List<OutputResourceDTO> result;
+
+        try {
+            result = service.showProjectTeam(idProject);
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 
 //    @GetMapping
-//    public ResponseEntity<Object> showCurrentProjectsByUser(@RequestParam("user") IdDTO id, @RequestParam("date") DateDTO dateDto){
+//    public ResponseEntity<Object> showCurrentProjectsByUser(@RequestParam("user") IdDTO id, @RequestParam("date")
+//    DateDTO dateDto){
 //
-//        List<OutputProjectDTO> projectsDto = showAllCurrentProjectsByUserService.showCurrentProjectsByUser(id, dateDto);
+//        List<OutputProjectDTO> projectsDto = showAllCurrentProjectsByUserService.showCurrentProjectsByUser(id,
+//        dateDto);
 //
 //        return new ResponseEntity<>(projectsDto, HttpStatus.OK);
 
 //    }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteAResource(@PathVariable String id){
-        ResponseMessage response = new ResponseMessage();
+
+    /**
+     * Define the requested project role of a resource (US014 and US027)
+     */
+    @PatchMapping("/{id}")
+    public ResponseEntity<Object> defineProjectRoleOfAResource(@PathVariable String id,
+                                                               @RequestBody DefineRoleOfResourceDTO dto) {
+        OutputResourceDTO response;
+
         try {
-            srv.deleteResourceRequest(id);
-            response.responseMessage = "Resource was deleted successfully!";
-        } catch (Exception exception){
+            response = service.defineProjectRole(id, dto);
+        } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
@@ -150,5 +145,22 @@ public class ResourceController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+
+    /**
+     * Delete a Resource
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteAResource(@PathVariable String id) {
+        ResponseMessage response = new ResponseMessage();
+        try {
+            service.deleteResourceRequest(id);
+            response.responseMessage = "Resource was deleted successfully!";
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
 

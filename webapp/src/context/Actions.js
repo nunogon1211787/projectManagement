@@ -84,7 +84,7 @@ export function fetchDetailsSuccess(details) {
   return {
     type: FETCH_DETAILS_SUCCESS,
     payload: {
-      data: [...details],
+      data: { ...details},
     },
   };
 }
@@ -119,8 +119,8 @@ export function navToTable(dispatch) {
   dispatch(tableTrue());
 }
 
-export function navToDetails(dispatch) {
-  dispatch(detailsTrue());
+export function navToDetails(dispatch, singleId) {
+  dispatch(detailsTrue(singleId));
 }
 
 export function navToEditDetails(dispatch) {
@@ -139,9 +139,10 @@ export function tableTrue() {
   };
 }
 
-export function detailsTrue() {
+export function detailsTrue(singleId) {
   return {
     type: NAV_TO_DETAILS,
+    payload: {id: singleId},
   };
 }
 

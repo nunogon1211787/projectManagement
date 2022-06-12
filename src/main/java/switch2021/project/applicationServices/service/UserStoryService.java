@@ -1,5 +1,6 @@
 package switch2021.project.applicationServices.service;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.Attribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
@@ -7,6 +8,7 @@ import switch2021.project.applicationServices.iRepositories.IUserStoryRepo;
 import switch2021.project.dtoModel.dto.OutputUserStoryDTO;
 import switch2021.project.dtoModel.dto.UpdateUserStoryDTO;
 import switch2021.project.dtoModel.dto.UserStoryDTO;
+import switch2021.project.dtoModel.dto.UserStoryUpdateDTO;
 import switch2021.project.entities.factories.factoryInterfaces.IUserStoryFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUsHourFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUsPriorityFactory;
@@ -15,9 +17,10 @@ import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.dtoModel.mapper.UserStoryMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
-import switch2021.project.entities.valueObjects.vos.ProjectID;
-import switch2021.project.entities.valueObjects.vos.UserStoryID;
+import switch2021.project.entities.valueObjects.vos.*;
+import switch2021.project.entities.valueObjects.vos.enums.UserStoryStatusEnum;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -171,7 +174,7 @@ public class UserStoryService {
         //Add User Stories to show as response
         userStories.add(updated);
         return userStoryMapper.toCollectionDto(userStories);
-}
+    }
 
 
     /**
@@ -192,4 +195,30 @@ public class UserStoryService {
         String uTitle = x[1];
         return usIdFactory.create(pId, uTitle);
     }
+
+    public OutputUserStoryDTO updateUserStoryPartially(String id, UserStoryUpdateDTO userStoryUpdateDTO) {
+        UserStoryID userStoryID = createUserStoryIdByStringInputFromController(id);
+        UserStory userStory = iUserStoryRepo.findByUserStoryId(userStoryID);
+
+        userStory.setPriority(new UsPriority(userStoryUpdateDTO.priority));
+        userStory.setDescription(new Description(userStoryUpdateDTO.description));
+        userStory.setTimeEstimate(new UsHour(userStoryUpdateDTO.timeEstimate));
+        if(userStoryUpdateDTO.usStartDate != null && !userStoryUpdateDTO.usStartDate.isEmpty())
+            userStory.setUsStartDate(LocalDate.parse(userStoryUpdateDTO.usStartDate));
+        if(userStoryUpdateDTO.usEndDate != null && !userStoryUpdateDTO.usEndDate.isEmpty())
+            userStory.setUsEndDate(LocalDate.parse(userStoryUpdateDTO.usEndDate));
+
+        if (userStory.getUsEndDate() != null && userStory.getUsStartDate() != null) {
+           userStory.setUsStatus(UserStoryStatusEnum.FINISHED);
+        }
+        if (userStory.getUsStartDate() != null && userStory.getUsEndDate() == null) {
+            userStory.setUsStatus(UserStoryStatusEnum.IN_PROGRESS);
+
+        }
+
+        iUserStoryRepo.save(userStory);
+        return userStoryMapper.toDto(userStory);
+
+    }
 }
+

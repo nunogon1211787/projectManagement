@@ -17,7 +17,7 @@ export default function Button(props) {
           props.function === undefined
             ? ""
             : () => {
-                props.function();
+                props.function(props.singleId);
               }
         }
         type={props.type === undefined ? "button" : props.type}

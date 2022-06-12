@@ -38,7 +38,7 @@ class TaskRepositoryTest {
 //    @Test
 //    void createTaskSprint() {
 //
-//        ResourceIDReeng resourceIDReeng = new ResourceIDReeng(new UserID(new Email("manuelbras@beaver.com")), new ProjectID("Project_2022_1"), LocalDate.of(2022, 1, 1) );
+//        ResourceID resourceIDReeng = new ResourceID(new UserID(new Email("manuelbras@beaver.com")), new ProjectID("Project_2022_1"), LocalDate.of(2022, 1, 1) );
 //
 //        TaskContainerID taskContainerID = new SprintID("Project_2022_1_Sprint 1");
 //
@@ -67,7 +67,7 @@ class TaskRepositoryTest {
 //    @Test
 //    void createTaskSprint() {
 //
-//        ResourceIDReeng resourceIDReeng = new ResourceIDReeng(new SystemUserID(new Email("manuelbras@beaver.com")), new ProjectID("Project_2022_1"), LocalDate.of(2022, 1, 1) );
+//        ResourceID resourceIDReeng = new ResourceID(new SystemUserID(new Email("manuelbras@beaver.com")), new ProjectID("Project_2022_1"), LocalDate.of(2022, 1, 1) );
 //
 //        TaskContainerID taskContainerID = new SprintID("Project_2022_1_Sprint 1");
 //

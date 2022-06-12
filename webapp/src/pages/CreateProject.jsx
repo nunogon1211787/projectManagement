@@ -3,13 +3,8 @@ import { useContext } from "react";
 import Form from "../components/Form";
 import Table from "../components/Table";
 import AppContext from "../context/AppContext";
+import { navToEditDetails, navToDetails, navToForm, navToTable, navToProjectTeam, fetchCollections } from "../context/Actions";
 import { Box, Card, CardBody, CardHeader, Grid, Heading } from "grommet";
-import {
-  navToEditDetails,
-  navToDetails,
-  navToForm,
-  navToTable,
-} from "../context/Actions";
 import Details from "../components/Details";
 import EditDetails from "../components/EditDetails";
 
@@ -43,8 +38,9 @@ const inputTypes = [
 
 export default function CreateProject() {
   const { state, dispatch } = useContext(AppContext);
-  const { navigation } = state;
-  const { table, form, details, editDetails } = navigation;
+  const { navigation, details } = state;
+  const { table, form, single, editDetails } = navigation;
+  const {userid} = details;
 
   const buttonNavigateT = () => {
     navToTable(dispatch);
@@ -58,8 +54,7 @@ export default function CreateProject() {
     navToEditDetails(dispatch);
   };
 
-  // const projID = `projects/${ID}` ;
-  let projID1 = "projects/Project_2022_1";
+  let projID = `projects/${userid}` ;
 
   if (table) {
     return (
@@ -87,13 +82,14 @@ export default function CreateProject() {
         <Form label={postBody} rules={inputTypes} collections="projects" />
       );
     } else {
-      if (details) {
+      if (single) {
         return (
           <>
             <h1>Project XPTO</h1>
-            <Details details={projID1} />
+            <Details details = {projID} />
             <Button name="Edit Project" function={buttonNavigateE} />
-            <Button name="Associate Resource" />
+            <Button name="Sprints"  />
+            <Button name="Product Backlog"  />
             <Button name="Back to table" function={buttonNavigateT} />
           </>
         );
@@ -102,11 +98,7 @@ export default function CreateProject() {
           return (
             <>
               <h1>Edit Project</h1>
-              <EditDetails
-                label={postBody}
-                rules={inputTypes}
-                details={projID1}
-              />
+              <EditDetails label={postBody} rules={inputTypes} details={projID} />
               <Button name="Back to table" function={buttonNavigateT} />
             </>
           );

@@ -9,7 +9,7 @@ import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResour
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.factories.factoryInterfaces.ITaskFactory;
 import switch2021.project.dtoModel.mapper.TaskMapper;
-import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
+import switch2021.project.entities.valueObjects.vos.ResourceID;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.aggregates.Task.Task;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
@@ -39,7 +39,7 @@ public class TaskService {
      * Create and Save Task (US022)
      */
     public OutputTaskDTO createAndSaveTask(TaskDTO taskDTO) throws IllegalArgumentException {
-        ResourceIDReeng resId = createResourceIdByStringInputFromController(taskDTO.responsible);
+        ResourceID resId = createResourceIdByStringInputFromController(taskDTO.responsible);
         TaskContainerID taskConId = returnTaskContainerID(taskDTO.taskContainerID);
 
         if(!iResourceRepo.existsById(resId)) {
@@ -73,7 +73,7 @@ public class TaskService {
         return z;
     }
 
-    private ResourceIDReeng createResourceIdByStringInputFromController(String id) {
+    private ResourceID createResourceIdByStringInputFromController(String id) {
         String[] values = id.split("_");// user_project_startDate
 
         String sysUserID = values[0];

@@ -15,7 +15,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Service
 public class ResourceMapper {
 
-    public OutputResourceDTO model2Dto(Resource res) {
+    public OutputResourceDTO toDto(Resource res) {
 
         OutputResourceDTO resDto = new OutputResourceDTO();
 
@@ -47,17 +47,16 @@ public class ResourceMapper {
         return resDto;
     }
 
-//    public CollectionModel<OutputResourceDTO> toCollectionDto(List<Resource> resources) {
-//
-//        CollectionModel<OutputResourceDTO> result = CollectionModel.of(resources.stream()
-//                .map(this::model2Dto)
-//                .collect(Collectors.toList()));
-//
-//        //Add HATEOAS to OUTPUT DTOs
-//
-//        //Add self relation
-//        result.add(linkTo(methodOn(ResourceController.class).showAllResources()).withSelfRel());
-//
-//        return result;
-//    }
+    public CollectionModel<OutputResourceDTO> toCollectionDto(List<Resource> resourceList) {
+
+        CollectionModel<OutputResourceDTO> resources = CollectionModel.of(resourceList.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList()));
+
+        //Add HATEOAS to OUTPUT DTOs
+        //Add self relation
+        resources.add(linkTo(methodOn(ResourceController.class).showAllResources()).withSelfRel());
+
+        return resources;
+    }
 }

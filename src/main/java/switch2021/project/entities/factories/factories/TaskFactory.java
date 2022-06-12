@@ -9,7 +9,7 @@ import switch2021.project.applicationServices.iRepositories.IEffortEstimateFacto
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ITaskIDFactory;
 import switch2021.project.applicationServices.iRepositories.TaskContainerID;
 import switch2021.project.entities.factories.factoryInterfaces.ITaskFactory;
-import switch2021.project.entities.valueObjects.vos.ResourceIDReeng;
+import switch2021.project.entities.valueObjects.vos.ResourceID;
 import switch2021.project.entities.aggregates.Task.Task;
 import switch2021.project.entities.valueObjects.vos.enums.TaskTypeEnum;
 
@@ -30,7 +30,7 @@ public class TaskFactory implements ITaskFactory {
      * Create Method
      */
     @Override
-    public Task createTask(TaskDTO taskDTO, ResourceIDReeng responsible2, TaskContainerID taskContainerID) {
+    public Task createTask(TaskDTO taskDTO, ResourceID responsible2, TaskContainerID taskContainerID) {
 
         return new Task(taskID.createTaskID(taskContainerID, taskDTO.name),
                         description.createDescription(taskDTO.description),

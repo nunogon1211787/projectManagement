@@ -3,6 +3,8 @@ package switch2021.project.applicationServices.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import switch2021.project.applicationServices.iRepositories.IUserProfileRepo;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
 import switch2021.project.dtoModel.dto.*;
@@ -125,6 +127,7 @@ public class UserService {
     /**
      * Update assigned profiles (US006)
      */
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
     public OutputUserDTO assignUserProfile(String id, UpdateUserProfileDTO profileDTO) {
         UserID userID = userIDFactory.createUserID(id);
 
@@ -175,6 +178,7 @@ public class UserService {
     /**
      * Active and Inactive User (US002, US025 and US026)
      */
+    @Transactional(propagation = Propagation.REQUIRED)
     public OutputUserDTO activateUser(String id) {
         UserID userID = userIDFactory.createUserID(id);
         User user = userRepo.findByUserId(userID);

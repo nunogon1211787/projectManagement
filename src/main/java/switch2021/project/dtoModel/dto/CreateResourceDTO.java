@@ -7,6 +7,7 @@ import org.springframework.hateoas.RepresentationModel;
 @AllArgsConstructor
 @Getter
 public class CreateResourceDTO extends RepresentationModel<CreateResourceDTO> {
+
     public String systemUserID;
     public String projectId;
     public String projectRole;
@@ -14,6 +15,4 @@ public class CreateResourceDTO extends RepresentationModel<CreateResourceDTO> {
     public String endDate;
     public double costPerHour;
     public double percentageOfAllocation;
-
-
 }

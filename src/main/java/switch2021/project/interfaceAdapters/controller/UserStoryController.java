@@ -45,13 +45,13 @@ public class UserStoryController {
      * Find all user stories
      */
     @GetMapping
-    public ResponseEntity<Object> showAllUserStories(){
+    public ResponseEntity<Object> showAllUserStories() {
         CollectionModel<OutputUserStoryDTO> result;
 
         try {
             result = CollectionModel.of(service.showAllUserStories());
 
-            if(result.getContent().isEmpty()) {
+            if (result.getContent().isEmpty()) {
                 ErrorMessage message = new ErrorMessage();
                 message.errorMessage = "Was not created any user story yet!";
                 return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
@@ -75,7 +75,7 @@ public class UserStoryController {
         try {
             result = CollectionModel.of(service.consultProductBacklog(idProject));
 
-            if(result.getContent().isEmpty()) {
+            if (result.getContent().isEmpty()) {
                 ErrorMessage message = new ErrorMessage();
                 message.errorMessage = "Was not created any user story yet!";
                 return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
@@ -93,7 +93,7 @@ public class UserStoryController {
      * Find a requested user story
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Object> showUserStoryRequested(@PathVariable("id") String id){
+    public ResponseEntity<Object> showUserStoryRequested(@PathVariable("id") String id) {
         OutputUserStoryDTO userStory;
 
         try {
@@ -107,11 +107,29 @@ public class UserStoryController {
     }
 
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Object> updateUserStoryPartially(@PathVariable("id") String id,
+                                                           @RequestBody UserStoryUpdateDTO userStoryUpdateDTO) {
+        OutputUserStoryDTO userStory;
+        try {
+            userStory = service.updateUserStoryPartially(id, userStoryUpdateDTO);
+            return new ResponseEntity<>(userStory, HttpStatus.OK);
+        } catch (Exception error) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = error.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+
+
+    }
+
+
     /**
      * Update data of a User Story (US019 and US021)
      */
-    @PatchMapping("/{id}")
-    public ResponseEntity<Object> estimateEffort(@PathVariable("id") String id, @RequestBody UpdateUserStoryDTO effortDTO) {
+    @PatchMapping("/{id}/effort")
+    public ResponseEntity<Object> estimateEffort(@PathVariable("id") String id,
+                                                 @RequestBody UpdateUserStoryDTO effortDTO) {
         OutputUserStoryDTO userStory;
 
         try {
@@ -189,7 +207,7 @@ public class UserStoryController {
      * Delete a requested User Story
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteAUserStory(@PathVariable String id){
+    public ResponseEntity<Object> deleteAUserStory(@PathVariable String id) {
         ResponseMessage response = new ResponseMessage();
 
         try {

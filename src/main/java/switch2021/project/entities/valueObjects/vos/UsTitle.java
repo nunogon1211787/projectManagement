@@ -39,7 +39,7 @@ public class UsTitle implements ValueObject<UsTitle> {
         if (!usTitle.toUpperCase().startsWith("AS")) {
             throw new IllegalArgumentException("Title need to begin with - as");
         }
-        if (!usTitle.contains("want")) {
+        if (!usTitle.contains("want") && !usTitle.contains("Want")) {
             throw new IllegalArgumentException("Title don't contain the word want");
         }
     }
