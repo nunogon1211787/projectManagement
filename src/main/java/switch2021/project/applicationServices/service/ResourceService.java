@@ -3,9 +3,11 @@ package switch2021.project.applicationServices.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
 import switch2021.project.dtoModel.dto.*;
-import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 import switch2021.project.entities.factories.factoryInterfaces.IResourceFactoryReeng;
 import switch2021.project.applicationServices.iRepositories.IResourceRepo;
 import switch2021.project.dtoModel.mapper.ResourceMapper;
@@ -16,15 +18,12 @@ import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjec
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResourceIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
 import switch2021.project.entities.valueObjects.vos.*;
-import switch2021.project.entities.valueObjects.vos.enums.ProjectRoleReeng;
 import switch2021.project.interfaceAdapters.repositories.ProjectRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Service
 public class ResourceService {
@@ -33,7 +32,7 @@ public class ResourceService {
      * Attributes
      */
     @Autowired
-    private ProjectRepository projRepo;
+    private IProjectRepo projRepo;
     @Autowired
     private IResourceRepo resRepo;
     @Autowired
@@ -51,10 +50,13 @@ public class ResourceService {
     @Autowired
     private IUserIDFactory iUserIDFactory;
 
+    private String PROJECTNOTFOUND = "Project does not exist!";
+    private String USERNOTFOUND = "This User is not part of the project team!";
 
     /**
      * Create a Resource (US007)
      */
+    @Transactional(propagation = Propagation.REQUIRED)
     public OutputResourceDTO createAndSaveResource(CreateResourceDTO dto) {
         checkAllInputToCreateResource(dto);
 
@@ -76,7 +78,7 @@ public class ResourceService {
         ResourceID resID = createResourceIdByStringInputFromController(id);
 
         if (!projRepo.existsById(resID.getProject())) {
-            throw new Exception("Project does not exist!");
+            throw new Exception(PROJECTNOTFOUND);
         }
         if (!userRepo.existsById(resID.getUser())) {
             throw new Exception("This User does not exist!");
@@ -85,7 +87,7 @@ public class ResourceService {
         Resource resource = foundResource.flatMap(res -> foundResource).orElse(null);
 
         if (resource == null) {
-            throw new NullPointerException("This User is not part of the project team!");
+            throw new NullPointerException(USERNOTFOUND);
         }
 
         return mapper.toDto(resource);
@@ -95,7 +97,7 @@ public class ResourceService {
     /**
      * Consult a Project Team of a Project (US028)
      */
-    public CollectionModel<OutputResourceDTO> showCurrentProjectTeam(String projectId) throws NullPointerException {
+    public CollectionModel<OutputResourceDTO> showCurrentProjectTeam(String projectId) {
         checkProjectExists(projectId);
         ProjectID projectID = iProjIDFactory.create(projectId);
 
@@ -117,7 +119,7 @@ public class ResourceService {
         List<OutputResourceDTO> resourcesDto = new ArrayList<>();
 
         if (!projRepo.existsById(projID)) {
-            throw new NullPointerException("Project does not exist");
+            throw new NullPointerException(PROJECTNOTFOUND);
         }
         List<Resource> projectTeam = resRepo.findAllByProject(projID);
 
@@ -141,7 +143,7 @@ public class ResourceService {
         for (Resource res : allResources) {
             allResDto.add(mapper.toDto(res));
         }
-        if(allResDto.isEmpty()) {
+        if (allResDto.isEmpty()) {
             throw new NullPointerException("There are no resources yet!");
         }
         return allResDto;
@@ -151,7 +153,7 @@ public class ResourceService {
     /**
      * Define the requested project role of a resource (US014 and US027)
      */
-    public OutputResourceDTO defineProjectRole(String id, DefineRoleOfResourceDTO dto) throws NullPointerException {
+    public OutputResourceDTO defineProjectRole(String id, DefineRoleOfResourceDTO dto) {
         ResourceID resID = createResourceIdByStringInputFromController(id);
         List<Resource> resourcesByProject = resRepo.findAllByProject(resID.getProject());
 
@@ -163,29 +165,29 @@ public class ResourceService {
         Resource foundByRole = opFoundByRole.flatMap(res -> opFoundByRole).orElse(null);
 
         if (foundResource == null) {
-            throw new NullPointerException("This User is not part of the project team!");
+            throw new NullPointerException(USERNOTFOUND);
         }
-        if(foundByRole != null) {
+        if (foundByRole != null) {
             DefineRoleOfResourceDTO roleOfOldResourceDto = new DefineRoleOfResourceDTO("TeamMember",
                     dto.getStartDate(), foundByRole.getEndDate().toString(),
-                    foundByRole.getCost().getCost(),foundByRole.getAllocation().getPercentage());
+                    foundByRole.getCost().getCost(), foundByRole.getAllocation().getPercentage());
 
             updateProjectRoleOfAResource(foundByRole, roleOfOldResourceDto);
         }
-        return mapper.toDto(updateProjectRoleOfAResource(foundResource,dto));
+        return mapper.toDto(updateProjectRoleOfAResource(foundResource, dto));
     }
 
-    private Optional<Resource> showCurrentResourceByProjectRole (List<Resource> resources, String role, LocalDate date) {
+    private Optional<Resource> showCurrentResourceByProjectRole(List<Resource> resources, String role, LocalDate date) {
 
-        for(Resource res : resources) {
-            if(res.hasProjectRole(role) && res.isActiveToThisDate(date)) {
-             return Optional.of(res);
+        for (Resource res : resources) {
+            if (res.hasProjectRole(role) && res.isActiveToThisDate(date)) {
+                return Optional.of(res);
             }
         }
         return Optional.empty();
     }
 
-    private Resource updateProjectRoleOfAResource (Resource oldResource, DefineRoleOfResourceDTO dto) {
+    private Resource updateProjectRoleOfAResource(Resource oldResource, DefineRoleOfResourceDTO dto) {
         Resource newResourceByRole = iResourceFactory.createResourceByAnotherResource(oldResource.getId(), dto);
 
         checkDatesInsideProject(newResourceByRole.getId().getProject().getCode(),
@@ -205,11 +207,11 @@ public class ResourceService {
     /**
      * Delete a Resource
      */
-    public void deleteResourceRequest(String id) throws NullPointerException {
+    public void deleteResourceRequest(String id) {
         ResourceID resId = createResourceIdByStringInputFromController(id);
 
         if (!resRepo.existsById(resId)) {
-            throw new NullPointerException("This User is not part of the project team!");
+            throw new NullPointerException(USERNOTFOUND);
         } else {
             resRepo.deleteByResourceID(resId);
         }
@@ -227,11 +229,11 @@ public class ResourceService {
 
                 if (resource.getId().getStartDate().isAfter(res.getId().getStartDate())
                         && resource.getId().getStartDate().isBefore(res.getEndDate())) {
-                    throw new IllegalArgumentException("This User already is part of this project team!");
-                } else
-                if (resource.getId().getStartDate().isBefore(res.getId().getStartDate())
-                        && resource.getEndDate().isAfter(res.getId().getStartDate())) {
-                    throw new IllegalArgumentException("This User already is part of this project team!");
+
+                    if (resource.getId().getStartDate().isBefore(res.getId().getStartDate())
+                            && resource.getEndDate().isAfter(res.getId().getStartDate())) {
+                        throw new IllegalArgumentException("This User already is part of this project team!");
+                    }
                 }
             }
         }
@@ -245,14 +247,14 @@ public class ResourceService {
         checkAllocation(dto.systemUserID, dto.startDate, dto.endDate, dto.percentageOfAllocation);
     }
 
-    private void checkSystemUserExists(String userID) throws IllegalArgumentException {
+    private void checkSystemUserExists(String userID) {
         UserID userId = iUserIDFactory.createUserID(userID);
         if (!userRepo.existsById(userId)) {
-            throw new IllegalArgumentException(("This User does not exist!"));
+            throw new IllegalArgumentException((USERNOTFOUND));
         }
     }
 
-    private void checkProjectExists(String projectId) throws IllegalArgumentException {
+    private void checkProjectExists(String projectId) {
         ProjectID projID = iProjIDFactory.create(projectId);
 
         if (!projRepo.existsById(projID)) {
@@ -260,14 +262,14 @@ public class ResourceService {
         }
     }
 
-    private void checkDatesInsideProject(String id, String startDate, String endDate) throws IllegalArgumentException {
+    private void checkDatesInsideProject(String id, String startDate, String endDate) {
         ProjectID projID = iProjIDFactory.create(id);
         Optional<Project> opProject = projRepo.findById(projID);
 
         Project project = opProject.flatMap(pro -> opProject).orElse(null);
 
         if (project == null) {
-            throw new IllegalArgumentException(("Project does not exist!"));
+            throw new IllegalArgumentException((PROJECTNOTFOUND));
         }
         if (!project.isActiveInThisDate(LocalDate.parse(startDate)) ||
                 !project.isActiveInThisDate(LocalDate.parse(endDate))) {
@@ -276,7 +278,7 @@ public class ResourceService {
     }
 
     private void checkAllocation(String email, String startDate,
-                                 String endDate, double percentageOfAllocation) throws IllegalArgumentException {
+                                 String endDate, double percentageOfAllocation) {
         UserID sysUserId = new UserID(new Email(email));
         List<Resource> resourceAllocatedProjects = resRepo.findAllByUser(sysUserId);
 
