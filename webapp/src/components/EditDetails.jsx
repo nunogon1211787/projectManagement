@@ -4,8 +4,10 @@ import AppContext from "../context/AppContext";
 import { URL_API } from "../services/Service";
 import { navToDetails } from "../context/Actions";
 import Button from "./Button";
+import { useNavigate } from "react-router-dom";
 
 const initialFormData = {};
+
 
 export default function EditDetails(props) {
   const { dispatch } = useContext(AppContext);
@@ -17,19 +19,21 @@ export default function EditDetails(props) {
 
   const inputRules = props.rules;
 
+  const navigate = useNavigate();
+
   //GET REQUEST TO API
-  useEffect(() => {
-    const url = `${URL_API}/${props.details}`;
-    const request = {};
-    fetchDetails(url, request, dispatch);
-    // eslint-disable-next-line
-  }, []);
+  // useEffect(() => {
+  //   const url = `${URL_API}/${props.details}`;
+  //   const request = {};
+  //   fetchDetails(url, request, dispatch);
+  //   // eslint-disable-next-line
+  // }, []);
 
   function makePutRequest() {
-    const url = `${URL_API}/${props.collections}`;
+    const url = `${URL_API}/${props.details}`;
 
     const putRequest = {
-      method: "PUT",
+      method: props.httpMethod,
       headers: {
         "content-Type": "application/json",
       },
@@ -37,6 +41,7 @@ export default function EditDetails(props) {
     };
 
     fetchCollections(url, putRequest, dispatch);
+    navigate("/resources", {state: {projId: props.projID}})
   }
 
   const buttonNavigate = () => {
@@ -104,7 +109,7 @@ export default function EditDetails(props) {
           {inputs}
           <br />
           <Button name="save" type="submit" />
-          <Button name="return" function={buttonNavigate} />
+          {/* <Button name="return" function={buttonNavigate} /> */}
         </form>
       </div>
   );

@@ -1,14 +1,24 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Form from "../components/Form";
 import Table from "../components/Table";
 import Button from "../components/Button";
 import AppContext from "../context/AppContext";
-import { navToForm } from "../context/Actions";
+import { navToForm, initNavPage, navToTable } from "../context/Actions";
+import { useLocation } from "react-router-dom";
+import EditDetails from "../components/EditDetails";
 
 const postBody = {
-  projectID: "",
-  userID: "",
+  systemUserID: "",
+  projectId: "",
   projectRole: "",
+  startDate: "",
+  endDate: "",
+  costPerHour: "",
+  percentageOfAllocation: "",
+};
+
+const patchBody = {
+  role: "",
   startDate: "",
   endDate: "",
   costPerHour: "",
@@ -25,19 +35,47 @@ const inputTypes = [
   "numeric",
 ];
 
+const inputTypesPatch = [
+  "text",
+  "date",
+  "date",
+  "numeric",
+  "numeric",
+];
+
 export default function CreateResource() {
   const { state, dispatch } = useContext(AppContext);
-  const { navigation } = state;
-  const { table, form } = navigation;
+  const { navigation, details } = state;
+  const { table, form, editDetails } = navigation;
+  const {userid} = details;
+
+  const location = useLocation();
+
+  useEffect(() => {
+    initNavPage(dispatch);
+  
+  }, [])
+  
+
+  const resId = `resources/${userid}`;
+
+  const path = `resources/currentProjectTeam/${location.state.projId}`;
 
   const buttonNavigate = () => {
     navToForm(dispatch);
   }
+
+  const buttonNavigateT = () => {
+    navToTable(dispatch);
+  };
+
+  console.log(userid)
+
   if (table) {
     return (
       <>
         <h1>Project Team</h1>
-        <Table collections="resources" query="Project_2022_1"/>
+        <Table collections={path} />
         <Button name="Create Resource" function={buttonNavigate} />
       </>
     );
@@ -49,6 +87,17 @@ export default function CreateResource() {
           <Form label={postBody} rules={inputTypes} collections="resources" />
         </>
       );
+    } else {
+      if(editDetails){
+        return(
+          <>
+              <h1>Change Role</h1>
+              <EditDetails label={patchBody} rules={inputTypesPatch} details={resId} httpMethod="PATCH" projID={location.state.projId} />
+            
+              <Button name="Back to table" function={buttonNavigateT} />
+            </>
+        )
+      }
     }
   } 
 }

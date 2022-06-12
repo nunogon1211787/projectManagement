@@ -30,11 +30,6 @@ export default function Details(props) {
   const handleOnClick = (id) => {};
   
 
-  
-  const buttonNavigateToProjectTeam = () => navigate("/resources/currentProjectTeam/Project_2022_3",{})
-
-  const buttonNavigateToProjectTeam2 = () => navigate(`/resources/currentProjectTeam/${userid}`,{})
-
   if (loading === true) {
     return <h1>Loading ....</h1>;
   } else {
@@ -45,6 +40,8 @@ export default function Details(props) {
         if(data !== undefined){
           const headers = Object.keys(data[0]);
           const body = Object.values(data[0]);
+
+          const buttonNavigateToProjectTeam2 = () => navigate("/resources",{state: {projId: body[0]}, replace: true})
 
           return (
             <>
@@ -89,6 +86,7 @@ export default function Details(props) {
                   </tbody>
                 </table>
                 <Button name="Project Team" function={buttonNavigateToProjectTeam2} />
+                
               </div>
             </>
         );
