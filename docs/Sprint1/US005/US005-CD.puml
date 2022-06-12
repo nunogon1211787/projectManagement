@@ -9,43 +9,62 @@ title US005 - As a Director, I want to create/register a new project
 
 '-------------------INFRASTRUCTURE-----------------------'
 package "Infrastructure" <<Rectangle>>  #lightblue {
+package "Route" {
 class "CreateProjectRoute" as infra <<Component>>{
 }
 }
+package "Persistence" {
+interface "IProjectRepositoryJPA" as jpa <<Interface>>{
+}
+}
+}
+
+
+
+package "Data Model" <<Rectangle>>{
+class "ProjectJpaAssembler" as assemblerjpa <<Component>> {
++toData (project)
++toModel(projectJpa)
+}
+class "ProjectJpa" as projectJPA {
+-projectID: ProjectID
+}
+}
+
 
 
 '-------------------INTERFACE ADAPTERS-------------------'
 package Interface_Adapters <<Rectangle>> #lightgreen{
 package "Controllers" <<Rectangle>> {
 class "ProjectController" as Ctrl <<component>> {
-+createProject()
++createProject(json)
 }
 }
 package Repositories <<Rectangle>> {
 class "ProjectRepository" as projectRepo <<repository>> {
-+save()
-+existByProjectId()
++save(newProject)
++existByProjectId(projectID)
 }
 }
 }
 
 '-------------------APPLICATION SERVICE------------------'
-package Application_Service <<Rectangle>> #salmon {
+package Application_Service <<Rectangle>> #lightpink {
 package IFactories <<Rectangle>> {
 interface "IProjectFactory" as inter <<interface>>{
-+createProject()
++createProject(projectDTO)
 }
 }
 package IRepositories <<Rectangle>> {
 interface "IProjectRepo" as iRepo <<interface>>{
-save()
-existByProjectId()
++save(newProject)
++existByProjectId(projectID)
 }
 }
 
 package "App Service" <<Rectangle>> {
 class "CreateProjectService" as service <<service>> {
-+createAndSaveProject()
++createAndSaveProject(projectDTO)
 }
 }
 }
@@ -54,50 +73,83 @@ class "CreateProjectService" as service <<service>> {
 '-------------------DOMAIN-------------------------------'
 package Domain <<Rectangle>> #burlywood{
 package "Aggregates" <<Rectangle>> {
-class "Project" as project <<root>>
+class "Project" as project <<root>> {
+- projectName : Description;
+- description : Description;
+- businessSector : BusinessSector;
+- startDate : LocalDate
+- numberOfSprints : NumberOfSprints
+- sprintDuration : SprintDuration
+- budget : Budget
+- projectStatus : ProjectStatus
+}
 }
 package "Factories" <<Rectangle>> {
 class "ProjectFactory" as factory <<service>> {
-+createProject()
++createProject(projectDTO)
 }
 }
 package "Value Objects" <<Rectangle>> {
-class "ProjectId" as projId <<root>>
+class "ProjectID" as projId <<root>> {
+- code : String
++ projectID (code)
+}
 }
 }
 
 
 '-------------------DTO----------------------------------'
-package "DTO" <<Rectangle>> #lightgrey{
+package "DTO" <<Rectangle>>{
 class "ProjectMapper" as mapper <<component>> {
-+model2Dto()
++model2Dto(newProject)
 }
-class "CreateProjectDTO" as projectDTO <<component>>
-class "OutputProjectDTO" as outPutDTO <<component>>
+class "ProjectDTO" as projectDTO <<component>>{
+- code : String
+- projectName : String
+- description : String
+- businessSector : String
+- typology : String
+- customer : String
+- startDate : String
+- endDate : String
+- numberOfSprints : String
+- budget : String
+- projectStatus : String
+- sprintDuration : String
 }
-
-
-'-------------------OTHERS-------------------------------'
-class "ResponseEntity" as json <<Component>>
-
-
+class "OutputProjectDTO" as outPutDTO <<component>>{
+- code : String
+- projectName : String
+- description : String
+- customer : String
+- businessSector : String
+- typology : String
+- numberOfSprints : String
+- budget : String
+- status : String
+- startDate : String
+- endDate : String
+- sprintDuration : String
+}
+}
 
 
 '-------------------RELATIONSHIPS------------------------'
 infra ..> Ctrl
 Ctrl ..> service
-Ctrl .> json
 projectRepo ..|> iRepo
 service .l.> iRepo
 service ..> inter
 service .r.> mapper
 factory .u.|> inter
 factory .r.> project
-factory .l.> projectDTO
-service .r.> projectDTO
-mapper .u.> outPutDTO
+factory ..> projectDTO
+service ..> projectDTO
+mapper ..> outPutDTO
 Ctrl ..> outPutDTO
 project *--> projId
 
-
+projectRepo ..> jpa
+projectRepo ..> assemblerjpa
+projectRepo ..> projectJPA
 @enduml
