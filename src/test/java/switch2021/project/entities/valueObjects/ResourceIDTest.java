@@ -92,4 +92,67 @@ class ResourceIDTest {
         //Assert
         assertNotEquals(resourceID,expected);
     }
+
+    @Test
+    void equalsNull() {
+        //Arrange
+        UserID userID = mock(UserID.class);
+        ProjectID projectID = mock(ProjectID.class);
+        LocalDate startDate = LocalDate.parse("2022-10-12");
+        //Act
+        ResourceID resourceID = new ResourceID(userID,projectID,startDate);
+        ResourceID expected = new ResourceID();
+        //Assert
+        assertNotEquals(resourceID,expected);
+    }
+
+    @Test
+    void equalsObject() {
+        //Arrange
+        UserID userID = mock(UserID.class);
+        ProjectID projectID = mock(ProjectID.class);
+        LocalDate startDate = LocalDate.parse("2022-10-12");
+        //Act
+        ResourceID resourceID = new ResourceID(userID,projectID,startDate);
+        //Assert
+        assertNotEquals(resourceID,userID);
+    }
+
+    @Test
+    void equalsTrue() {
+        //Arrange
+        UserID userID = mock(UserID.class);
+        ProjectID projectID = mock(ProjectID.class);
+        LocalDate startDate = LocalDate.parse("2022-10-12");
+        //Act
+        ResourceID resourceID = new ResourceID(userID,projectID,startDate);
+        ResourceID expected = new ResourceID(userID,projectID,startDate);
+        //Assert
+        assertEquals(resourceID,expected);
+    }
+
+    @Test
+    void HashCodeTrue() {
+        //Arrange
+        UserID userID = mock(UserID.class);
+        ProjectID projectID = mock(ProjectID.class);
+        LocalDate startDate = LocalDate.parse("2022-10-12");
+        //Act
+        ResourceID resourceID = new ResourceID(userID,projectID,startDate);
+        ResourceID expected = new ResourceID(userID,projectID,startDate);
+        //Assert
+        assertEquals(resourceID.hashCode(),expected.hashCode());
+    }
+
+    @Test
+    void HashCodeFalse() {
+        //Arrange
+        UserID userID = mock(UserID.class);
+        ProjectID projectID = mock(ProjectID.class);
+        LocalDate startDate = LocalDate.parse("2022-10-12");
+        //Act
+        ResourceID resourceID = new ResourceID(userID,projectID,startDate);
+        //Assert
+        assertNotEquals(resourceID.hashCode(),projectID.hashCode());
+    }
 }

@@ -112,7 +112,7 @@ public class ResourceService {
     /**
      * Consult a Project Team of a Project (US028)
      */
-    public List<OutputResourceDTO> showProjectTeam(String projectId) throws NullPointerException {
+    public List<OutputResourceDTO> showProjectTeam(String projectId) {
         ProjectID projID = iProjIDFactory.create(projectId);
         List<OutputResourceDTO> resourcesDto = new ArrayList<>();
 
@@ -120,8 +120,11 @@ public class ResourceService {
             throw new NullPointerException("Project does not exist");
         }
         List<Resource> projectTeam = resRepo.findAllByProject(projID);
-        for (Resource res : projectTeam) {
 
+        for (Resource res : projectTeam) {
+            if (projectTeam.isEmpty()) {
+                throw new NullPointerException("There are no resources in this project!");
+            }
             resourcesDto.add(mapper.toDto(res));
         }
         return resourcesDto;
@@ -137,6 +140,9 @@ public class ResourceService {
 
         for (Resource res : allResources) {
             allResDto.add(mapper.toDto(res));
+        }
+        if(allResDto.isEmpty()) {
+            throw new NullPointerException("There are no resources yet!");
         }
         return allResDto;
     }

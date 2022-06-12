@@ -42,7 +42,7 @@ public class ResourceID implements ValueObject<ResourceID> {
         if (this == o) return true;
         if (!(o instanceof ResourceID)) return false;
         ResourceID that = (ResourceID) o;
-        return Objects.equals(getUser(), that.getUser()) && Objects.equals(getProject(), that.getProject()) && Objects.equals(getStartDate(), that.getStartDate());
+        return this.sameValueAs(that);
     }
 
     @Override

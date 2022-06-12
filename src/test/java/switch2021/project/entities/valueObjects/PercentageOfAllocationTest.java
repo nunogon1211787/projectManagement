@@ -4,8 +4,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.entities.valueObjects.vos.PercentageOfAllocation;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class PercentageOfAllocationTest {
 
@@ -66,4 +66,47 @@ public class PercentageOfAllocationTest {
         });
     }
 
+    @Test
+    public void equalsTrue() {
+        //Arrange
+        double percentage = 0.3;
+        //Act
+        PercentageOfAllocation percOfAllo = new PercentageOfAllocation(percentage);
+        PercentageOfAllocation expected = new PercentageOfAllocation(percentage);
+        //Assert
+        assertEquals(expected, percOfAllo);
+    }
+
+    @Test
+    public void hashCodeTrue() {
+        //Arrange
+        double percentage = 0.3;
+        //Act
+        PercentageOfAllocation percOfAllo = new PercentageOfAllocation(percentage);
+        PercentageOfAllocation expected = new PercentageOfAllocation(percentage);
+        //Assert
+        assertEquals(expected.hashCode(), percOfAllo.hashCode());
+    }
+
+    @Test
+    public void equalsFalse() {
+        //Arrange
+        double percentage = 0.3;
+        //Act
+        PercentageOfAllocation percOfAllo = new PercentageOfAllocation(percentage);
+        PercentageOfAllocation expected = new PercentageOfAllocation(1);
+        //Assert
+        assertNotEquals(expected, percOfAllo);
+    }
+
+    @Test
+    public void hashCodeFalse() {
+        //Arrange
+        double percentage = 0.3;
+        //Act
+        PercentageOfAllocation percOfAllo = new PercentageOfAllocation(percentage);
+        PercentageOfAllocation expected = new PercentageOfAllocation(1);
+        //Assert
+        assertNotEquals(expected.hashCode(), percOfAllo.hashCode());
+    }
 }

@@ -1,4 +1,4 @@
-package switch2021.project.entities.valueObjects;
+package switch2021.project.entities.valueObjects.voFactories;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
