@@ -35,7 +35,7 @@ export default function Details(props) {
   } else {
     if (error !== null && error !== undefined) {
       console.log (error)
-      return <h1>Error:{error}</h1>;
+      return <h1>{error}</h1>;
     } else {
         if(data !== undefined){
           const headers = Object.keys(data[0]);

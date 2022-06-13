@@ -73,7 +73,7 @@ export function fetchAddToCollections(url, request, dispatch) {
     }
 
   }
-  const failure = (err) => dispatch(fetchDetailsFailure(err.message));
+  const failure = (err) => dispatch(fetchDetailsFailure(err));
   makeHTTPRequest(url, request, success, failure);
 }
 
@@ -104,7 +104,7 @@ export const DELETE_DETAILS = "DELETE_DETAILS";
 
 export function fetchDetails(url, request, dispatch) {
   const success = (res) => dispatch(fetchDetailsSuccess(res));
-  const failure = (err) => dispatch(fetchDetailsFailure(err.message));
+  const failure = (err) => dispatch(fetchDetailsFailure(err));
   makeHTTPRequest(url, request, success, failure);
 }
 
