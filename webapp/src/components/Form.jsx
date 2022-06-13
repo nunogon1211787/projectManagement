@@ -1,8 +1,7 @@
 import { useState, useContext } from "react";
-import { fetchCollections } from "../context/Actions";
+import {fetchAddToCollections, navToTable} from "../context/Actions";
 import AppContext from "../context/AppContext";
 import { URL_API } from "../services/Service";
-import { navToTable } from "../context/Actions";
 import Button from "./Button";
 
 const initialFormData = {};
@@ -28,7 +27,7 @@ export default function Form(props) {
       body: JSON.stringify(formData),
     };
 
-    fetchCollections(url, postRequest, dispatch);
+    fetchAddToCollections(url, postRequest, dispatch);
   }
 
   const buttonNavigate = () => {
@@ -92,7 +91,10 @@ export default function Form(props) {
 
   return (
       <div className="card bg-light">
-        <form className="card-body" onSubmit={() => makePostRequest()}>
+        <form className="card-body" onSubmit={(e) => {
+            e.preventDefault()
+            makePostRequest()
+        }}>
           {inputs}
           <br />
           <Button name="create" type="submit" />
