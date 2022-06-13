@@ -111,6 +111,10 @@ export const NAV_TO_TABLE = "NAV_TO_TABLE";
 export const NAV_TO_DETAILS = "NAV_TO_DETAILS";
 export const NAV_TO_EDITDETAILS = "NAV_TO_EDITDETAILS";
 
+export function initNavPage(dispatch) {
+  dispatch(tableTrue())
+}
+
 export function navToForm(dispatch) {
   dispatch(formTrue());
 }

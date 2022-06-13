@@ -1,9 +1,9 @@
 import Button from "../components/Button";
-import { useContext } from "react";
+import {useContext, useEffect} from "react";
 import Form from "../components/Form";
 import Table from "../components/Table";
 import AppContext from "../context/AppContext";
-import { navToForm } from "../context/Actions";
+import { navToForm, initNavPage } from "../context/Actions";
 import { Box, Grid, Heading } from "grommet";
 
 const postBody = {
@@ -12,10 +12,16 @@ const postBody = {
 
 const inputTypes = ["text"];
 
+
 export default function CreateUserProfile() {
   const { state, dispatch } = useContext(AppContext);
   const { navigation } = state;
   const { table, form } = navigation;
+
+  useEffect(() => {
+      initNavPage(dispatch);
+
+  }, [])
 
   const buttonNavigate = () => {
     navToForm(dispatch);

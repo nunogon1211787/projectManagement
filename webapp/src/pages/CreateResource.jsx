@@ -1,14 +1,14 @@
-import { useContext } from "react";
+import {useContext, useEffect} from "react";
 import Form from "../components/Form";
 import Table from "../components/Table";
 import Button from "../components/Button";
 import AppContext from "../context/AppContext";
-import { navToForm } from "../context/Actions";
+import {initNavPage, navToForm} from "../context/Actions";
 import { Box, Grid, Heading } from "grommet";
 
 const postBody = {
-  projectID: "",
-  userID: "",
+  projectId: "",
+  systemUserId: "",
   projectRole: "",
   startDate: "",
   endDate: "",
@@ -30,6 +30,11 @@ export default function CreateResource() {
   const { state, dispatch } = useContext(AppContext);
   const { navigation } = state;
   const { table, form } = navigation;
+
+  useEffect(() => {
+    initNavPage(dispatch);
+
+  }, [])
 
   const buttonNavigate = () => {
     navToForm(dispatch);

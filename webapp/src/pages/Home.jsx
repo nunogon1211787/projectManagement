@@ -18,7 +18,7 @@ export function Home() {
     return (
       <Box flex align="center" justify="center">
         <Login />
-        <br></br>
+        <br/>
         {errorMessage()}
       </Box>
     );
@@ -29,6 +29,5 @@ export function Home() {
       </Box>
     );
   }
-}
 
 }

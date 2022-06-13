@@ -32,12 +32,12 @@ export default function Table(props) {
   const buttonOpen = (id) =>{
     if (props.collections === 'projects'){
       return  <Button name="Open Project" singleId = {id} function={buttonNavigateD} />
-}
+  }
     // if(props.collections === 'userstories'){
     //   return <Button name="Open" function={buttonNavigateUS}/>
     // }
 
-}
+  }
 
   const handleOnClick = (id) => {};
     // let buttonOpenUS = <Button name="Open" function={buttonNavigateUS}/>;

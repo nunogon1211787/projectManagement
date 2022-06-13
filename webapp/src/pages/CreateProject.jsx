@@ -1,9 +1,17 @@
 import Button from "../components/Button";
-import { useContext } from "react";
+import {useContext, useEffect} from "react";
 import Form from "../components/Form";
 import Table from "../components/Table";
 import AppContext from "../context/AppContext";
-import { navToEditDetails, navToDetails, navToForm, navToTable, navToProjectTeam, fetchCollections } from "../context/Actions";
+import {
+  navToEditDetails,
+  navToDetails,
+  navToForm,
+  navToTable,
+  navToProjectTeam,
+  fetchCollections,
+  initNavPage
+} from "../context/Actions";
 import { Box, Card, CardBody, CardHeader, Grid, Heading } from "grommet";
 import Details from "../components/Details";
 import EditDetails from "../components/EditDetails";
@@ -41,6 +49,11 @@ export default function CreateProject() {
   const { navigation, details } = state;
   const { table, form, single, editDetails } = navigation;
   const {userid} = details;
+
+  useEffect(() => {
+    initNavPage(dispatch);
+
+  }, [])
 
   const buttonNavigateT = () => {
     navToTable(dispatch);
