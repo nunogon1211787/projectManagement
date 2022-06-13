@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import AppContext from "../context/AppContext";
 import { URL_API } from "../services/Service";
-import {fetchCollections} from "../context/Actions";
+import {fetchCollections, navToEditDetails} from "../context/Actions";
 import {navToDetails} from "../context/Actions";
 import Button from "../components/Button";
 
@@ -9,7 +9,7 @@ export default function Table(props) {
   const { state, dispatch } = useContext(AppContext);
   const { collection, details } = state;
   const { loading, error, data } = collection;
-  
+
 
     //GET REQUEST TO API
     useEffect(() => {
@@ -29,22 +29,32 @@ export default function Table(props) {
     navToDetails(dispatch, singleId);
   };
 
+  const buttonNavigateEdit = (singleId) => {
+    console.log(singleId)
+
+    navToEditDetails(dispatch, singleId);
+  };
+
   const buttonOpen = (id) =>{
     if (props.collections === 'projects'){
       return  <Button name="Open Project" singleId = {id} function={buttonNavigateD} />
-  }
+} else {
+if (window.location.pathname === '/resources' ){
+  return  <Button name="Change Role" singleId = {id} function={buttonNavigateEdit} />
+}
     // if(props.collections === 'userstories'){
     //   return <Button name="Open" function={buttonNavigateUS}/>
     // }
 
   }
-
-  const handleOnClick = (id) => {};
+}
     // let buttonOpenUS = <Button name="Open" function={buttonNavigateUS}/>;
     // if (props.collections !== 'userstories') {
     //     buttonOpenUS = null;
     // }
 
+    const handleOnClick = (id) => {
+    };
 
   if (loading === true) {
     return <h1>Loading ....</h1>;
@@ -85,7 +95,13 @@ export default function Table(props) {
                 </thead>
                 <tbody>
                   {response.map((row, index) => {
-                    const id = row[Object.keys(row)[0]];
+                   let id = row[Object.keys(row)[0]];
+
+                    if(window.location.pathname === "/resources"){
+                      id = row[Object.keys(row)[0]] + "&" + row[Object.keys(row)[1]] + "&" + row[Object.keys(row)[3]];
+                      console.log(id)
+                    }
+
 
                     return (
                       <tr

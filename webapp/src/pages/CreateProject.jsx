@@ -111,7 +111,7 @@ export default function CreateProject() {
           return (
             <>
               <h1>Edit Project</h1>
-              <EditDetails label={postBody} rules={inputTypes} details={projID} />
+              <EditDetails label={postBody} rules={inputTypes} details={projID} httpMethod="PUT" />
               <Button name="Back to table" function={buttonNavigateT} />
             </>
           );

@@ -1,15 +1,25 @@
-import {useContext, useEffect} from "react";
+import { useContext, useEffect } from "react";
 import Form from "../components/Form";
 import Table from "../components/Table";
 import Button from "../components/Button";
 import AppContext from "../context/AppContext";
-import {initNavPage, navToForm} from "../context/Actions";
+import { navToForm, initNavPage, navToTable } from "../context/Actions";
+import { useLocation } from "react-router-dom";
+import EditDetails from "../components/EditDetails";
 import { Box, Grid, Heading } from "grommet";
 
 const postBody = {
+  systemUserID: "",
   projectId: "",
-  systemUserId: "",
   projectRole: "",
+  startDate: "",
+  endDate: "",
+  costPerHour: "",
+  percentageOfAllocation: "",
+};
+
+const patchBody = {
+  role: "",
   startDate: "",
   endDate: "",
   costPerHour: "",
@@ -26,19 +36,40 @@ const inputTypes = [
   "numeric",
 ];
 
+const inputTypesPatch = [
+  "text",
+  "date",
+  "date",
+  "numeric",
+  "numeric",
+];
+
 export default function CreateResource() {
   const { state, dispatch } = useContext(AppContext);
-  const { navigation } = state;
-  const { table, form } = navigation;
+  const { navigation, details } = state;
+  const { table, form, editDetails } = navigation;
+  const {userid} = details;
+
+  const location = useLocation();
 
   useEffect(() => {
     initNavPage(dispatch);
 
   }, [])
 
+
+  const resId = `resources/${userid}`;
+
+  const path = `resources/currentProjectTeam/${location.state.projId}`;
+
   const buttonNavigate = () => {
     navToForm(dispatch);
+  }
+
+  const buttonNavigateT = () => {
+    navToTable(dispatch);
   };
+
   if (table) {
     return (
       <>
@@ -57,7 +88,7 @@ export default function CreateResource() {
           </Box>
           <Box gridArea="main">
             <Table
-              collections="resources"
+                collections={path}
               query="project=Project_2022_1&date=2022-12-13"
             />
           </Box>
@@ -65,13 +96,24 @@ export default function CreateResource() {
       </>
     );
   } else {
-    if (form) {
+    if (form){
       return (
         <>
           <h1>Associate Resource</h1>
           <Form label={postBody} rules={inputTypes} collections="resources" />
         </>
       );
+    } else {
+      if(editDetails){
+        return(
+          <>
+              <h1>Change Role</h1>
+              <EditDetails label={patchBody} rules={inputTypesPatch} details={resId} httpMethod="PATCH" projID={location.state.projId} />
+
+              <Button name="Back to table" function={buttonNavigateT} />
+            </>
+        )
+      }
     }
-  }
+  } 
 }

@@ -114,7 +114,6 @@ export const NAV_TO_EDITDETAILS = "NAV_TO_EDITDETAILS";
 export function initNavPage(dispatch) {
   dispatch(tableTrue())
 }
-
 export function navToForm(dispatch) {
   dispatch(formTrue());
 }
@@ -127,8 +126,8 @@ export function navToDetails(dispatch, singleId) {
   dispatch(detailsTrue(singleId));
 }
 
-export function navToEditDetails(dispatch) {
-  dispatch(editDetailsTrue());
+export function navToEditDetails(dispatch, singleId) {
+  dispatch(editDetailsTrue(singleId));
 }
 
 export function formTrue() {
@@ -150,8 +149,9 @@ export function detailsTrue(singleId) {
   };
 }
 
-export function editDetailsTrue() {
+export function editDetailsTrue(singleId) {
   return {
     type: NAV_TO_EDITDETAILS,
+    payload: {id: singleId},
   };
 }

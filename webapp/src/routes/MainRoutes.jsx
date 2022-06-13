@@ -60,11 +60,6 @@ const items = [
     path: "userstories",
   },
   {
-    label: "Resources",
-    Icon: UserAdd,
-    path: "resources",
-  },
-  {
     label: "Sprints",
     Icon: History,
     path: "sprints",
