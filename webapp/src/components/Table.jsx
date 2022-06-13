@@ -66,7 +66,7 @@ if (window.location.pathname === '/resources' ){
         const collect = Object.keys(data[0]._embedded)[0];
         const header = Object.keys(data[0]._embedded[collect][0]);
         const response = data[0]._embedded[collect];
-        
+
         return (
           <>
             <div className="card bg-light">
@@ -100,9 +100,9 @@ if (window.location.pathname === '/resources' ){
                     if(window.location.pathname === "/resources"){
                       id = row[Object.keys(row)[0]] + "&" + row[Object.keys(row)[1]] + "&" + row[Object.keys(row)[3]];
                       console.log(id)
-                    } 
-                
-                  
+                    }
+
+
                     return (
                       <tr
                         key={index}
@@ -124,7 +124,7 @@ if (window.location.pathname === '/resources' ){
                             {buttonOpen(id)}
                          </tr>
                     );
-                  })}                  
+                  })}
                 </tbody>
               </table>
             </div>

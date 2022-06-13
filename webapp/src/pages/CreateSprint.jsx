@@ -1,10 +1,10 @@
 import Button from "../components/Button";
-import { useContext } from "react";
+import {useContext, useEffect} from "react";
 import Form from "../components/Form";
 import Table from "../components/Table";
 import AppContext from "../context/AppContext";
-import { navToForm } from "../context/Actions";
-import { Box } from "grommet";
+import {initNavPage, navToForm} from "../context/Actions";
+import { Box, Grid, Heading } from "grommet";
 
 const postBody = {
   projectID: "",
@@ -18,6 +18,11 @@ export default function CreateSprint() {
   const { navigation } = state;
   const { table, form } = navigation;
 
+    useEffect(() => {
+        initNavPage(dispatch);
+
+    }, [])
+
   const buttonNavigate = () => {
     navToForm(dispatch);
   };
@@ -25,11 +30,23 @@ export default function CreateSprint() {
   if (table) {
     return (
       <>
-        <Box fill align="center" justify="center">
-          <h1>Sprints</h1>
-          <Table collections="sprints" />
-          <Button name="Create Sprint" function={buttonNavigate} />
-        </Box>
+        <Grid
+          rows={["any CSS size", "any CSS size"]}
+          columns={["any CSS size", "any CSS size"]}
+          gap="small"
+          areas={[
+            { name: "header", start: [0, 0], end: [1, 0] },
+            { name: "main", start: [0, 1], end: [1, 1] },
+          ]}
+        >
+          <Box gridArea="header" align="center" justify="center">
+            <Heading>Sprints</Heading>
+            <Button name="Create Sprint" function={buttonNavigate} />
+          </Box>
+          <Box gridArea="main">
+            <Table collections="sprints" />
+          </Box>
+        </Grid>
       </>
     );
   } else {

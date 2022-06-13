@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import {
   Projects,
   OrderedList,
-  UserAdd,
   Tasks,
   History,
   FingerPrint,
@@ -17,6 +16,7 @@ import CreateUserStory from "../pages/CreateUserStory";
 import CreateTypology from "../pages/CreateTypology";
 import { Home } from "../pages/Home";
 import RegisterUser from "../pages/RegisterUser";
+import CreateResource from "../pages/CreateResource";
 
 import { Box, Grommet } from "grommet";
 
@@ -24,7 +24,6 @@ import { theme } from "../theme";
 import Sidebar from "../components/Sidebar";
 import { ReactComponent as LogoIcon } from "../routes/beaver-svgrepo.svg";
 import AppContext from "../context/AppContext";
-import CreateResource from "../pages/CreateResource";
 
 const userSession = {
   user: {
@@ -34,7 +33,11 @@ const userSession = {
   items: [
     {
       label: "Logout",
-      href: "#",
+      href: "/",
+    },
+    {
+      label: "Settings",
+      href: "/userSettings",
     },
   ],
 };
