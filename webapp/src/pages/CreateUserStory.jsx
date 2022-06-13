@@ -3,8 +3,11 @@ import {useContext, useEffect} from "react";
 import Form from "../components/Form";
 import Table from "../components/Table";
 import AppContext from "../context/AppContext";
-import {initNavPage, navToForm, navToTable} from "../context/Actions";
+import {initNavPage, navToEditDetails, navToForm, navToTable} from "../context/Actions";
 import { Box, Grid, Heading } from "grommet";
+import {useLocation} from "react-router-dom";
+import EditDetails from "../components/EditDetails";
+import Details from "../components/Details";
 
 const postBody = {
     projectID: "",
@@ -18,8 +21,14 @@ const inputTypes = ["text", "text", "number", "text", "number"];
 
 export default function CreateUserStory() {
     const {state, dispatch} = useContext(AppContext);
-    const {navigation} = state;
-    const {table, form, details} = navigation;
+    const {navigation, details} = state;
+    const {table, form, single, editDetails} = navigation;
+    const {userid} =  details;
+
+    const location = useLocation();
+    const path = `userstories/productBacklog/${location.state.projId}`;
+
+    let usID = `userstories/${userid}` ;
 
     useEffect(() => {
         initNavPage(dispatch);
@@ -32,7 +41,7 @@ export default function CreateUserStory() {
     };
 
     const buttonNavigateEdit = () => {
-        navToForm(dispatch);
+        navToEditDetails(dispatch);
     };
 
     const buttonNavigateBack = () => {
@@ -55,7 +64,7 @@ export default function CreateUserStory() {
           <Button name="Create User Story" function={buttonNavigate} />
         </Box>
         <Box gridArea="main">
-          <Table collections="userstories" />
+          <Table collections={path} />
         </Box>
       </Grid>
     );
@@ -73,16 +82,24 @@ export default function CreateUserStory() {
         </>
       );
     }else {
-        if (details) {
+        if (single) {
             return (
                 <>
-                    <h1>User Story</h1>
-                    {/*{<Details details={usID}/>}*/}
-                    <Button name="Edit User Story" function={buttonNavigateEdit}/>
+                    <Details details={usID}/>
                     <Button name="Back to user stories list" function={buttonNavigateBack}/>
                 </>
             )
 
+        }else {
+            if (editDetails) {
+                return (
+                    <>
+                        <h1>Edit User Story</h1>
+                        <EditDetails label={postBody} rules={inputTypes} details={usID} httpMethod="PUT"/>
+                        <Button name="Back to table" function={buttonNavigateBack}/>
+                    </>
+                );
+            }
         }
     }
   }

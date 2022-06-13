@@ -1,8 +1,8 @@
-import { useEffect, useState, useContext } from "react";
-import { fetchCollections, fetchDetails } from "../context/Actions";
+import { useState, useContext } from "react";
+import { fetchDetails } from "../context/Actions";
 import AppContext from "../context/AppContext";
 import { URL_API } from "../services/Service";
-import { navToDetails } from "../context/Actions";
+import { navToTable } from "../context/Actions";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
 
@@ -40,13 +40,12 @@ export default function EditDetails(props) {
       body: JSON.stringify(formData),
     };
 
-    fetchCollections(url, putRequest, dispatch);
-    navigate("/resources", {state: {projId: props.projID}})
-  }
+    fetchDetails(url, putRequest, dispatch);
+    navToTable(dispatch);
+    navigate("/resources", {state: {projId: props.projID}});
 
-  const buttonNavigate = () => {
-    navToDetails(dispatch);
-  };
+
+  }
 
   const inputs = inputLabel.map((txt, idx) => {
     if (defaultValues[idx] !== "") {
@@ -105,11 +104,12 @@ export default function EditDetails(props) {
 
   return (
       <div className="card bg-light">
-        <form className="card-body" onSubmit={() => makePutRequest()}>
+        <form className="card-body" onSubmit={(e) => {
+            makePutRequest()
+        }}>
           {inputs}
           <br />
           <Button name="save" type="submit" />
-          {/* <Button name="return" function={buttonNavigate} /> */}
         </form>
       </div>
   );
