@@ -5,6 +5,7 @@ import Table from "../components/Table";
 import AppContext from "../context/AppContext";
 import {initNavPage, navToForm} from "../context/Actions";
 import { Box, Grid, Heading } from "grommet";
+import {useLocation} from "react-router-dom";
 
 const postBody = {
   projectID: "",
@@ -17,6 +18,9 @@ export default function CreateSprint() {
   const { state, dispatch } = useContext(AppContext);
   const { navigation } = state;
   const { table, form } = navigation;
+
+    const location = useLocation();
+    const path = `sprints/sprintList/${location.state.projId}`;
 
     useEffect(() => {
         initNavPage(dispatch);
@@ -39,12 +43,12 @@ export default function CreateSprint() {
             { name: "main", start: [0, 1], end: [1, 1] },
           ]}
         >
-          <Box gridArea="header" align="center" justify="center">
+          <Box gridArea="header" direction="row" align="center" justify="center" gap="medium">
             <Heading>Sprints</Heading>
             <Button name="Create Sprint" function={buttonNavigate} />
           </Box>
           <Box gridArea="main">
-            <Table collections="sprints" />
+            <Table collections={path} />
           </Box>
         </Grid>
       </>

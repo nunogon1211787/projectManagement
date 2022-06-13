@@ -4,15 +4,11 @@ import Form from "../components/Form";
 import Table from "../components/Table";
 import AppContext from "../context/AppContext";
 import {
-  navToEditDetails,
-  navToDetails,
   navToForm,
   navToTable,
-  navToProjectTeam,
-  fetchCollections,
   initNavPage
 } from "../context/Actions";
-import { Box, Card, CardBody, CardHeader, Grid, Heading } from "grommet";
+import { Box, Grid, Heading } from "grommet";
 import Details from "../components/Details";
 import EditDetails from "../components/EditDetails";
 
@@ -63,10 +59,6 @@ export default function CreateProject() {
     navToForm(dispatch);
   };
 
-  const buttonNavigateE = () => {
-    navToEditDetails(dispatch);
-  };
-
   let projID = `projects/${userid}` ;
 
   if (table) {
@@ -98,11 +90,7 @@ export default function CreateProject() {
       if (single) {
         return (
           <>
-            <h1>Project XPTO</h1>
             <Details details = {projID} />
-            <Button name="Edit Project" function={buttonNavigateE} />
-            <Button name="Sprints"  />
-            <Button name="Product Backlog"  />
             <Button name="Back to table" function={buttonNavigateT} />
           </>
         );

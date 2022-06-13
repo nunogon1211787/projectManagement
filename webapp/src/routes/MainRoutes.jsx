@@ -2,9 +2,7 @@ import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import {
   Projects,
-  OrderedList,
   Tasks,
-  History,
   FingerPrint,
   Services,
   Group,
@@ -52,16 +50,6 @@ const items = [
     label: "Users",
     Icon: Group,
     path: "users",
-  },
-  {
-    label: "User Stories",
-    Icon: OrderedList,
-    path: "userstories",
-  },
-  {
-    label: "Sprints",
-    Icon: History,
-    path: "sprints",
   },
   {
     label: "Tasks",
