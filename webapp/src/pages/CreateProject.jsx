@@ -1,10 +1,18 @@
 import Button from "../components/Button";
-import { useContext } from "react";
+import {useContext, useEffect} from "react";
 import Form from "../components/Form";
 import Table from "../components/Table";
 import AppContext from "../context/AppContext";
-import { Box } from "grommet";
-import { navToEditDetails, navToDetails, navToForm, navToTable, navToProjectTeam, fetchCollections } from "../context/Actions";
+import {
+  navToEditDetails,
+  navToDetails,
+  navToForm,
+  navToTable,
+  navToProjectTeam,
+  fetchCollections,
+  initNavPage
+} from "../context/Actions";
+import { Box, Card, CardBody, CardHeader, Grid, Heading } from "grommet";
 import Details from "../components/Details";
 import EditDetails from "../components/EditDetails";
 
@@ -42,6 +50,11 @@ export default function CreateProject() {
   const { table, form, single, editDetails } = navigation;
   const {userid} = details;
 
+  useEffect(() => {
+    initNavPage(dispatch);
+
+  }, [])
+
   const buttonNavigateT = () => {
     navToTable(dispatch);
   };
@@ -56,21 +69,30 @@ export default function CreateProject() {
 
   let projID = `projects/${userid}` ;
 
-  if(table){
+  if (table) {
     return (
-      <>
-        <h1>Projects</h1>
-        <Table collections="projects" />
-        <Button name="Create Project" function={buttonNavigate} />
-
-      </>
+      <Grid
+        rows={["any CSS size", "any CSS size"]}
+        columns={["any CSS size", "any CSS size"]}
+        gap="small"
+        areas={[
+          { name: "header", start: [0, 0], end: [1, 0] },
+          { name: "main", start: [0, 1], end: [1, 1] },
+        ]}
+      >
+        <Box gridArea="header" align="center" justify="center">
+          <Heading>Projects</Heading>
+          <Button name="Create Project" function={buttonNavigate} />
+        </Box>
+        <Box gridArea="main">
+          <Table collections="projects" />
+        </Box>
+      </Grid>
     );
   } else {
     if (form) {
       return (
-        <>
-          <Form label={postBody} rules={inputTypes} collections="projects" />
-        </>
+        <Form label={postBody} rules={inputTypes} collections="projects" />
       );
     } else {
       if (single) {
@@ -83,7 +105,7 @@ export default function CreateProject() {
             <Button name="Product Backlog"  />
             <Button name="Back to table" function={buttonNavigateT} />
           </>
-        )
+        );
       } else {
         if (editDetails) {
           return (
@@ -92,9 +114,9 @@ export default function CreateProject() {
               <EditDetails label={postBody} rules={inputTypes} details={projID} httpMethod="PUT" />
               <Button name="Back to table" function={buttonNavigateT} />
             </>
-          )
+          );
         }
+      }
     }
-  }
   }
 }
