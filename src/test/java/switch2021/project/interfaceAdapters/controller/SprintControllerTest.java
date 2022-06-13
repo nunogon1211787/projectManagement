@@ -1,71 +1,58 @@
 package switch2021.project.interfaceAdapters.controller;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import switch2021.project.applicationServices.service.SprintService;
+import switch2021.project.dtoModel.dto.NewSprintDTO;
+import switch2021.project.dtoModel.dto.OutputSprintDTO;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-//@ExtendWith(SpringExtension.class)
+@AutoConfigureMockMvc
 @SpringBootTest
 public class SprintControllerTest {
-/*
+
+
     @Autowired
-    private SprintController sprintController;
+    private MockMvc mockMvc;
 
-    @Test //Integration Test
-    void itShouldRegisterAUserIntegration() {
-        //Arrange
-        NewSprintDTO dto = new NewSprintDTO();
-        dto.projectID = "maneloliveira";
-        dto.name = "maneloliveira@beaver.com";
-        //Act
-        ResponseEntity<Object> responseEntity = sprintController.createAndSaveSprint(dto);
-        //Assert
-        assertEquals(201, responseEntity.getStatusCodeValue());
+    @Autowired
+    private SprintService sprintService;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        MockitoAnnotations.openMocks(this);
     }
-    
- */
-
-
-//    @InjectMocks
-//    CreateSprintController createSprintController;
-//
-//    @Mock
-//    SprintService createSprintService;
-//    @Mock
-//    NewSprintDTO newSprintDTO;
-//    @Mock
-//    OutputSprintDTO outPutSprintDTO;
-//    @Mock
-//    MockHttpServletRequest mockHttpServletRequest;
-//
-//
-//    @Test
-//    @DisplayName("Test to create a sprint, with success")
-//    public void createSprint_Success() {
-//
-//        // Arrange
-//        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(mockHttpServletRequest));
-//        when(createSprintService.createAndSaveSprint(newSprintDTO)).thenReturn(outPutSprintDTO);
-//
-//        //Act
-//        ResponseEntity<Object> responseEntity = createSprintController.createAndSaveSprint(newSprintDTO);
-//
-//        //Assert
-//        assertEquals(responseEntity.getStatusCodeValue(), 201);
-//    }
 
 //    @Test
-//    @DisplayName("Create Sprint IT")
-//    public void createSprint(){
-//        //Arrange
-//        String project = "Project_2022_1";
-//        String name = "Sprint Name";
-//        NewSprintDTO dto = new NewSprintDTO(project, name);
-//        //Act
-//        ResponseEntity<Object> responseEntity = createSprintController.createAndSaveSprint(dto);
-//        //Assert
-//        assertEquals(201, responseEntity.getStatusCodeValue());
+//    public void shouldCreateSprint() throws Exception {
+//
+//        String projectID = "Project_2022_1";
+//        String sprintName = "Sprint Name";
+//
+//        NewSprintDTO newSprintDTO = new NewSprintDTO(projectID, sprintName);
+//
+//        OutputSprintDTO outputSprintDTO = new OutputSprintDTO();
+//
+//        MvcResult result = mockMvc
+//                .perform(MockMvcRequestBuilders.post("/sprints"))
+//                .andDo(sprintService.createAndSaveSprint(newSprintDTO))
+//                .andExpect(status().isCreated())
+//                .andReturn();
+//
+//        String content = result.getResponse().getContentAsString();
+//
+//        assertNotNull(content);
+//        assertEquals(sprintService.createAndSaveSprint(newSprintDTO), outputSprintDTO);
 //    }
 
 }
