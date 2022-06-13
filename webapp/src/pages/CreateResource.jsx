@@ -89,7 +89,6 @@ export default function CreateResource() {
           <Box gridArea="main">
             <Table
                 collections={path}
-                query="project=Project_2022_1&date=2022-12-13"
             />
           </Box>
         </Grid>
@@ -109,7 +108,6 @@ export default function CreateResource() {
           <>
               <h1>Change Role</h1>
               <EditDetails label={patchBody} rules={inputTypesPatch} details={resId} httpMethod="PATCH" projID={location.state.projId} />
-
               <Button name="Back to table" function={buttonNavigateT} />
           </>
         )

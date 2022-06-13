@@ -69,7 +69,15 @@ export function fetchAddToCollections(url, request, dispatch) {
     if(window.location.pathname === "/resources"){
       navToTable(dispatch)
     } else {
-      navToDetails(dispatch, id)
+      if(window.location.pathname === "/sprints"){
+        navToTable(dispatch)
+      } else {
+        if(window.location.pathname === "/userstories"){
+          navToTable(dispatch)
+        } else {
+          navToDetails(dispatch, id)
+        }
+      }
     }
 
   }

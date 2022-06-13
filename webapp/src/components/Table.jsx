@@ -34,10 +34,14 @@ export default function Table(props) {
   const buttonOpen = (id) =>{
     if (props.collections === 'projects'){
       return  <Button name="Open Project" singleId = {id} function={buttonNavigateD} />
-} else {
-if (window.location.pathname === '/resources' ){
-  return  <Button name="Change Role" singleId = {id} function={buttonNavigateEdit} />
-}
+    } else {
+      if (window.location.pathname === '/resources' ){
+      return  <Button name="Change Role" singleId = {id} function={buttonNavigateEdit} />
+    } else {
+        if(window.location.pathname === '/userstories') {
+          return <Button name="Open" singleId = {id} function={buttonNavigateD}/>
+        }
+      }
     // if(props.collections === 'userstories'){
     //   return <Button name="Open" function={buttonNavigateUS}/>
     // }
