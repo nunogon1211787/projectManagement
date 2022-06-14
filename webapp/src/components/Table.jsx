@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
 import AppContext from "../context/AppContext";
 import { URL_API } from "../services/Service";
-import {fetchCollections, navToEditDetails} from "../context/Actions";
-import {navToDetails} from "../context/Actions";
+import { fetchCollections, navToEditDetails } from "../context/Actions";
+import { navToDetails } from "../context/Actions";
 import Button from "../components/Button";
 
 export default function Table(props) {
@@ -11,13 +11,13 @@ export default function Table(props) {
   const { loading, error, data } = collection;
 
 
-    //GET REQUEST TO API
-    useEffect(() => {
-        let url = `${URL_API}/${props.collections}`;
+  //GET REQUEST TO API
+  useEffect(() => {
+    let url = `${URL_API}/${props.collections}`;
 
-  //  if(props.query !== undefined){
-  //    url = `${URL_API}/${props.collections}/${props.query}`
-  //  }
+    //  if(props.query !== undefined){
+    //    url = `${URL_API}/${props.collections}/${props.query}`
+    //  }
     const request = {};
     fetchCollections(url, request, dispatch);
     // eslint-disable-next-line
@@ -31,36 +31,41 @@ export default function Table(props) {
     navToEditDetails(dispatch, singleId);
   };
 
-  const buttonOpen = (id) =>{
-    if (props.collections === 'projects'){
-      return  <Button name="Open Project" singleId = {id} function={buttonNavigateD} />
-    } else {
-      if (window.location.pathname === '/resources' ){
-      return  <Button name="Change Role" singleId = {id} function={buttonNavigateEdit} />
-    } else {
-        if(window.location.pathname === '/userstories') {
-          return <Button name="Open" singleId = {id} function={buttonNavigateD}/>
-        }
-      }
-    // if(props.collections === 'userstories'){
-    //   return <Button name="Open" function={buttonNavigateUS}/>
-    // }
-
+  const buttonOpen = (id) => {
+    if (props.collections === 'projects') {
+      return <Button name="Open Project" singleId={id} function={buttonNavigateD} />
+    }
+    if (window.location.pathname === '/resources') {
+      return <Button name="Change Role" singleId={id} function={buttonNavigateEdit} />
+    }
+    if (window.location.pathname === '/userstories') {
+      return <Button name="Open" singleId={id} function={buttonNavigateD} />
+    }
+    if (props.collections === 'users') {
+      return <Button name="Open" singleId={id} function={buttonNavigateD} />
+    }
   }
-}
-    // let buttonOpenUS = <Button name="Open" function={buttonNavigateUS}/>;
-    // if (props.collections !== 'userstories') {
-    //     buttonOpenUS = null;
-    // }
+  // if(props.collections === 'userstories'){
+  //   return <Button name="Open" function={buttonNavigateUS}/>
+  // }
 
-    const handleOnClick = (id) => {
-    };
+
+
+
+
+  // let buttonOpenUS = <Button name="Open" function={buttonNavigateUS}/>;
+  // if (props.collections !== 'userstories') {
+  //     buttonOpenUS = null;
+  // }
+
+  const handleOnClick = () => {
+  };
 
   if (loading === true) {
     return <h1>Loading ....</h1>;
   } else {
     if (error !== null) {
-      return <h1 style={{color:"red"}}>{error}</h1>;
+      return <h1 style={{ color: "red" }}>{error}</h1>;
     } else {
       if (Object.keys(data[0])[0] === "_embedded") {
         const collect = Object.keys(data[0]._embedded)[0];
@@ -95,10 +100,13 @@ export default function Table(props) {
                 </thead>
                 <tbody>
                   {response.map((row, index) => {
-                   let id = row[Object.keys(row)[0]];
+                    let id = row[Object.keys(row)[0]];
 
-                    if(window.location.pathname === "/resources"){
+                    if (window.location.pathname === "/resources") {
                       id = row[Object.keys(row)[0]] + "&" + row[Object.keys(row)[1]] + "&" + row[Object.keys(row)[3]];
+                    }
+                    if (props.collections === "users") {
+                      id = row[Object.keys(row)[1]];
                     }
 
 
@@ -117,11 +125,14 @@ export default function Table(props) {
                             if (attr !== "_links") {
                               return <td key={idx}>{row[attr]}</td>;
                             }
+                            console.log("aqui" + id)
                           })
                         }
 
-                            {buttonOpen(id)}
-                         </tr>
+                        {buttonOpen(id)}
+                       
+                      </tr>
+
                     );
                   })}
                 </tbody>
