@@ -6,6 +6,7 @@ import AppContext from "../context/AppContext";
 import { navToForm, initNavPage, navToTable } from "../context/Actions";
 import { useLocation } from "react-router-dom";
 import EditDetails from "../components/EditDetails";
+import { Box, Grid, Heading } from "grommet";
 
 const postBody = {
   systemUserID: "",
@@ -53,9 +54,9 @@ export default function CreateResource() {
 
   useEffect(() => {
     initNavPage(dispatch);
-  
+
   }, [])
-  
+
 
   const resId = `resources/${userid}`;
 
@@ -69,14 +70,28 @@ export default function CreateResource() {
     navToTable(dispatch);
   };
 
-  console.log(userid)
-
   if (table) {
     return (
       <>
-        <h1>Project Team</h1>
-        <Table collections={path} />
-        <Button name="Create Resource" function={buttonNavigate} />
+        <Grid
+          rows={["any CSS size", "any CSS size"]}
+          columns={["any CSS size", "any CSS size"]}
+          gap="small"
+          areas={[
+            { name: "header", start: [0, 0], end: [1, 0] },
+            { name: "main", start: [0, 1], end: [1, 1] },
+          ]}
+        >
+          <Box gridArea="header" align="center" justify="center">
+            <Heading>Project Team</Heading>
+            <Button name="Create Resource" function={buttonNavigate} />
+          </Box>
+          <Box gridArea="main">
+            <Table
+                collections={path}
+            />
+          </Box>
+        </Grid>
       </>
     );
   } else {
@@ -93,9 +108,8 @@ export default function CreateResource() {
           <>
               <h1>Change Role</h1>
               <EditDetails label={patchBody} rules={inputTypesPatch} details={resId} httpMethod="PATCH" projID={location.state.projId} />
-            
               <Button name="Back to table" function={buttonNavigateT} />
-            </>
+          </>
         )
       }
     }

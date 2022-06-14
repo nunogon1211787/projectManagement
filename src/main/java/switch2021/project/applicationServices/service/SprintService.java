@@ -4,6 +4,7 @@ import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
+import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.applicationServices.iRepositories.ISprintRepo;
 import switch2021.project.applicationServices.iRepositories.IUserStoryRepo;
 import switch2021.project.dtoModel.dto.NewSprintDTO;
@@ -33,6 +34,8 @@ public class SprintService {
     private ISprintFactory sprintFactory;
     @Autowired
     private IUserStoryRepo usRepo;
+    @Autowired
+    private IProjectRepo projRepo;
 
 
     /**
@@ -100,6 +103,8 @@ public class SprintService {
     }
 
 
+
+
     public OutputSprintDTO showScrumBoard(String id) {
 
         String[] values = id.split("_");
@@ -119,4 +124,19 @@ public class SprintService {
         }
     }
 
+    public CollectionModel<OutputSprintDTO> showSprintsOfAProject(String projId) throws Exception {
+
+        if(projRepo.existsById(new ProjectID(projId))) {
+
+            List<Sprint> allSprintsOfAProject = sprintRepo.findAllByProjectID(new ProjectID(projId));
+
+            return sprintMapper.toCollectionDto(allSprintsOfAProject);
+
+        } else {
+
+            throw new Exception("Project does not exist");
+
+        }
+
+    }
 }

@@ -34,9 +34,10 @@ function fetchAuthFailure(err) {
 export const FETCH_COLLECTIONS_SUCCESS = "FETCH_COLLECTIONS_SUCCESS";
 export const FETCH_COLLECTIONS_FAILURE = "FETCH_COLLECTIONS_FAILURE";
 
+
 export function fetchCollections(url, request, dispatch) {
   const success = (res) => dispatch(fetchCollectionsSuccess(res));
-  const failure = (err) => dispatch(fetchCollectionsFailure(err.message));
+  const failure = (err) => dispatch(fetchCollectionsFailure(err));
   makeHTTPRequest(url, request, success, failure);
 }
 
@@ -58,6 +59,50 @@ function fetchCollectionsFailure(message) {
   };
 }
 
+// export const FETCH_ADD_TO_COLLECTIONS_SUCCESS = "FETCH_ADD_TO_COLLECTIONS_SUCCESS";
+// export const FETCH_ADD_TO_COLLECTIONS_FAILURE = "FETCH_ADD_TO_COLLECTIONS_FAILURE";
+
+export function fetchAddToCollections(url, request, dispatch) {
+  const success = (res) => {
+    dispatch(fetchDetailsSuccess(res));
+    let id = Object.values(res)[0]
+    if(window.location.pathname === "/resources"){
+      navToTable(dispatch)
+    } else {
+      if(window.location.pathname === "/sprints"){
+        navToTable(dispatch)
+      } else {
+        if(window.location.pathname === "/userstories"){
+          navToTable(dispatch)
+        } else {
+          navToDetails(dispatch, id)
+        }
+      }
+    }
+
+  }
+  const failure = (err) => dispatch(fetchDetailsFailure(err));
+  makeHTTPRequest(url, request, success, failure);
+}
+
+// function fetchAddToCollectionsSuccess(res) {
+//   return {
+//     type: FETCH_ADD_TO_COLLECTIONS_SUCCESS,
+//     payload: {
+//       data: { ...res },
+//     },
+//   };
+// }
+//
+// function fetchAddToCollectionsFailure(message) {
+//   return {
+//     type: FETCH_ADD_TO_COLLECTIONS_FAILURE,
+//     payload: {
+//       error: message,
+//     },
+//   };
+// }
+
 // ACTIONS TO DETAILS OF AN OBJECT FROM COLLETIONS
 
 export const FETCH_DETAILS_STARTED = "FETCH_DETAILS_STARTED";
@@ -67,7 +112,7 @@ export const DELETE_DETAILS = "DELETE_DETAILS";
 
 export function fetchDetails(url, request, dispatch) {
   const success = (res) => dispatch(fetchDetailsSuccess(res));
-  const failure = (err) => dispatch(fetchDetailsFailure(err.message));
+  const failure = (err) => dispatch(fetchDetailsFailure(err));
   makeHTTPRequest(url, request, success, failure);
 }
 
