@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import AppContext from "../context/AppContext";
 import { URL_API } from "../services/Service";
 import {fetchCollections, navToEditDetails} from "../context/Actions";
@@ -7,7 +7,7 @@ import Button from "../components/Button";
 
 export default function Table(props) {
   const { state, dispatch } = useContext(AppContext);
-  const { collection } = state;
+  const { collection, details } = state;
   const { loading, error, data } = collection;
 
 
@@ -33,7 +33,7 @@ export default function Table(props) {
 
   const buttonOpen = (id) =>{
     if (props.collections === 'projects'){
-      return  <Button name="Open Project" singleId = {id} function={buttonNavigateD} />
+      return  <Button name="Open" singleId = {id} function={buttonNavigateD} />
     } else {
       if (window.location.pathname === '/resources' ){
       return  <Button name="Change Role" singleId = {id} function={buttonNavigateEdit} />
@@ -79,13 +79,16 @@ export default function Table(props) {
                     {
                       // eslint-disable-next-line
                       header.map((key, idx) => {
-                        if (key !== "_links") {
+                        if (key !== "_links" && key !== "customer" && key !== "businessSector"
+                        && key !== "numberOfSprints" && key !== "budget" && key !== "sprintDuration"
+                        && key !== "endDate" && key !== "typo") {
+                          const result = key.replace(/[A-Z]/g, ' $&').trim();
                           return (
-                            <th
+                                                        <th
                               key={idx}
-                              style={{ textTransform: "uppercase" }}
+                              // style={{ textTransform: "uppercase" }}
                             >
-                              {key}
+                              {result}
                             </th>
                           );
                         }
@@ -99,23 +102,26 @@ export default function Table(props) {
 
                     if(window.location.pathname === "/resources"){
                       id = row[Object.keys(row)[0]] + "&" + row[Object.keys(row)[1]] + "&" + row[Object.keys(row)[3]];
-                    }
-
-
+                      console.log(id)
+                    } 
+                
+                  
                     return (
                       <tr
                         key={index}
                         onClick={() => handleOnClick(id)}
                         style={{
                           cursor: "pointer",
-                          textTransform: "capitalize",
+                          // textTransform: "capitalize",
                         }}
                       >
                         {
                           // eslint-disable-next-line
                           Object.keys(row).map((attr, idx) => {
-                            if (attr !== "_links") {
-                              return <td key={idx}>{row[attr]}</td>;
+                            if (attr !== "_links" && attr !== "customer" && attr !== "businessSector"
+                            && attr !== "numberOfSprints" && attr !== "budget" && attr !== "sprintDuration"
+                            && attr !== "endDate" && attr !== "typo") {
+                              return <td key={idx}>{Array.isArray(row[attr])?row[attr].join(", "):row[attr]}</td>;
                             }
                           })
                         }
@@ -123,7 +129,7 @@ export default function Table(props) {
                             {buttonOpen(id)}
                          </tr>
                     );
-                  })}
+                  })}                  
                 </tbody>
               </table>
             </div>

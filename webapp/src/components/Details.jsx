@@ -114,12 +114,13 @@ export default function Details(props) {
                           // eslint-disable-next-line
                           headers.map((key, idx) => {
                             if (key !== "_links") {
+                              const result = key.replace(/[A-Z]/g, ' $&').trim();
                               return (
                                   <tr style={{ textTransform: "uppercase" }} key={idx}>
                                   <th
                                       key={idx}
                                       style={{ textTransform: "uppercase" }}>
-                                    {key}
+                                    {result}
                                   </th>
                                   <td>{body[idx]}</td>
                                   </tr>
