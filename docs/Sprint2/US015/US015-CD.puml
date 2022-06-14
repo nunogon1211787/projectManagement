@@ -5,7 +5,7 @@ title US015 - As Director, I want to get a list of all projects
 
 skinparam classAttributeIconSize 0
 
-package "System" <<Rectangle>> {
+
 
 package "Infrastructure" <<Rectangle>> #lightblue  {
 class "ShowAllProjectsRoute" as route << Component >>
@@ -56,19 +56,14 @@ class "ProjectMapper" as map <<Component>> {
 class "ProjectDTO" as dto <<Component>>
 }
 
-class "ResponseEntity" as json <<Component>>
-
-}
 
 route .d.> ctrl
 ctrl .d..> srv
 srv .r.> repo
 repo <|.. store
-store "1"*----"*" proj
 proj "1"*-l-"1" pId
 srv .u.> map
 map .r.> dto
-ctrl .l.> json
 map ..> proj
 
 @enduml

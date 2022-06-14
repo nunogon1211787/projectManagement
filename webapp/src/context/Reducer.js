@@ -1,6 +1,8 @@
 import {
   FETCH_COLLECTIONS_SUCCESS,
   FETCH_COLLECTIONS_FAILURE,
+  // FETCH_ADD_TO_COLLECTIONS_SUCCESS,
+  // FETCH_ADD_TO_COLLECTIONS_FAILURE,
   FETCH_DETAILS_FAILURE,
   FETCH_DETAILS_STARTED,
   FETCH_DETAILS_SUCCESS,
@@ -132,6 +134,9 @@ export default function reducer(state, action) {
         case NAV_TO_EDITDETAILS:
         return {
           ...state,
+          details: {
+            userid: action.payload.id,     
+          },
           navigation: {
             table: false,
             form: false,

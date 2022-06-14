@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.applicationServices.iRepositories.ISprintRepo;
 import switch2021.project.dataModel.assembler.SprintJpaAssembler;
-import switch2021.project.dataModel.jpa.SprintJpa;
+import switch2021.project.datamodel.jpa.SprintJpa;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.SprintID;
@@ -130,6 +130,25 @@ public class SprintRepository implements ISprintRepo {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<Sprint> findAllByProjectID(ProjectID projectID) {
+        List<SprintJpa> allSprintsJpa = sprintJpaRepository.findAll();
+        List<SprintJpa> sprintsOfAProjectJpa = new ArrayList<>();
+
+        allSprintsJpa.forEach(sprintJpa -> {
+            if(sprintJpa.getSprintId().getProjectID().equals(projectID)){
+                sprintsOfAProjectJpa.add(sprintJpa);
+            }
+        });
+
+        List<Sprint> sprints = new ArrayList<>();
+
+        for (SprintJpa sprintJpa : sprintsOfAProjectJpa) {
+            sprints.add(assembler.toDomain(sprintJpa));
+        }
+        return sprints;
     }
 
     /**

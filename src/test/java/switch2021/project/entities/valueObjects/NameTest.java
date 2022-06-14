@@ -6,7 +6,6 @@ import switch2021.project.entities.aggregates.Typology.Typology;
 import switch2021.project.entities.valueObjects.vos.Description;
 import switch2021.project.entities.valueObjects.vos.Name;
 import switch2021.project.entities.valueObjects.vos.TypologyID;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class NameTest {
@@ -80,6 +79,17 @@ class NameTest {
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTest_2() {
         //Arrange
+        Name name = new Name("Test");
+        Name name1 = new Name("Test");
+        //Act and Assert
+        assertTrue(name.equals(name1));
+    }
+
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTest_3() {
+        //Arrange
         Name function = new Name("TestTest");
         Name function1 = new Name("Test");
         //Act and Assert
@@ -88,7 +98,7 @@ class NameTest {
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")
-    public void overrideTest_3() {
+    public void overrideTest_4() {
         //Arrange
         Name function = new Name("Test");
         Name function1 = null;

@@ -7,22 +7,18 @@ autoactivate on
 autonumber
 
 participant ":CreateResourceIn\nAProjectRoute" as Route
-participant "inDto: \nCreateResourceDto" as dto
 participant ":Resource\nController" as Ctrl
-participant "srv:CreateResourceInAProjectService" as srv
-participant "sysUsRepo:ISystemUserRepo" as systemUserStore
-participant "projRepo:IProjectRepo" as projectStore
-participant "resFac:IResourceFactory" as resourceFactory
-participant "resRepo:IResourceRepo" as resourceStore
+participant "srv : CreateResourceInAProjectService" as srv
+participant "sysUsRepo : ISystemUserRepo" as systemUserStore
+participant "projRepo : IProjectRepo" as projectStore
+participant "resFac : IResourceFactory" as resourceFactory
+participant "resRepo : IResourceRepo" as resourceStore
 participant "res : Resource" as resource
-participant "projectTeam: \n List<Resources>" as projectTeam
-participant "userResources: \n List<Resources>" as resourceProjects
-participant "project: Project" as project
-participant "dsrv:DomainService\nResourceValidation" as domainService
-participant "map:ResourceMapper" as map
-participant "outDto:OutputResourceDto" as outDto
-participant "exception :Exception" as exc
-participant "responseJson:ResponseEntity" as json
+participant "dsrv : ManageResourceService" as domainService
+participant "map : ResourceMapper" as map
+participant "outDto : OutputResourceDto" as outDto
+participant "exception : Exception" as exc
+participant "responseJson : ResponseEntity" as json
 
 [o-> Route:  POST/resources(json)
 Route -> Ctrl: createResource (inDto)
@@ -30,14 +26,36 @@ note right Route: Json object was deserialize to a CreateResourceDto object
 Ctrl -> srv: createAndSaveResource (inDto)
 
 note over srv : The creation of these ids are hidden to simplify the diagram.
-srv -> systemUserStore: findUserResult: \nexistsBySystemUserId(systemUserId)
-deactivate systemUserStore
-srv -> projectStore: project : findByProjectId(projectId)
-deactivate projectStore
+srv -> srv: checkSystemUserExists(inDto.systemUserID)
+srv -> systemUserStore: existsByID(systemUserID)
+systemUserStore --> srv: true
+deactivate srv
+srv -> srv: checkProjectExists(inDto.projectID)
+srv -> projectStore: existsByID(projectID)
+projectStore --> srv: true
+deactivate srv
+srv -> srv: checkDatesInsideProject(inDto.projectID)
+srv -> projectStore: findByID(projectID)
+projectStore --> srv: true
+deactivate srv
+srv -> srv: checkAllocation(inDto.projectID)
+srv -> resourceStore: findAllByUser(systemUserID)
+resourceStore --> srv: true
+srv -> domainService: validateAllocation(inDto)
+domainService --> srv: true
+deactivate srv
+srv -> srv: checkProjectRole(inDto)
+srv -> resourceStore: findAllByProject(projectID)
+resourceStore --> srv: true
+srv -> domainService: validateProjectRole(inDto)
+domainService --> srv: true
+deactivate srv
+
+
 alt if user and project exist
 srv -> resourceFactory: res: createResource(inDto)
 note over resourceFactory : All parameters (value objects) are instantiated in their own factory.
-resourceFactory -> resource**: createResource(resourceId, \nendDate, costPerHour, allocation)
+resourceFactory -> resource**: createResource(resourceId, \n endDate, costPerHour, allocation)
 opt if the request has a role
 note over resourceFactory : Chose a role to creation of the resource are optional
 resourceFactory -> resource :defineRole(role)
@@ -45,23 +63,9 @@ deactivate resourceFactory
 deactivate resource
 end
 
-srv -> resourceStore: projectTeam: findAllByProjectId(projectId)
-resourceStore-> projectTeam**: create()
-deactivate
-srv -> resourceStore: userResources: findAllBySystemUserId(systemUserId)
-resourceStore -> resourceProjects**: create()
-deactivate
-
-srv -> domainService: validateResourceCreation(project, res, projectTeamList, resourceProjectsList)
-domainService -> project: isInsideProjectPeriod(date)
-deactivate
-domainService -> domainService: validateAllocation(resourceProjectsList, res)
-deactivate
-domainService -> domainService: validateProjectRole(res, projectTeamList)
-deactivate
-domainService --> srv: validateNewResourceResult
 alt if the criteria of the allocation a resource in a project are met
 srv -> resourceStore: saveResult: save(res)
+ref over resourceStore: [[US007-SD-JPA.puml]]
 deactivate
 
 alt if the new resource was successfully saved
