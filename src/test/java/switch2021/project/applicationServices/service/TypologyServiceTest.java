@@ -72,7 +72,7 @@ public class TypologyServiceTest {
             when(dto.getDescription()).thenReturn("Fixed Cost");
             when(iTypologyFactory.createTypology(dto)).thenReturn(typo);
             when(iTypologyRepo.save(typo)).thenReturn(typo);
-            when(iTypologyRepo.existsByTypologyId(typo.getId_description())).thenReturn(true);
+            when(iTypologyRepo.existsByTypologyId(typo.getDescriptionID())).thenReturn(true);
             when(des.getText()).thenReturn("Fixed Cost");
             when(id.getDescription()).thenReturn(des);
             when(typo.hasID_Description(des.getText())).thenReturn(true);

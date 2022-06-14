@@ -21,24 +21,24 @@ public class Typology implements Entity<Typology> {
     /**
      * Typology attributes are composed of a description of the Typology.
      **/
-    private final TypologyID id_description;
+    private final TypologyID descriptionID;
 
 
     /**
      * Constructors of typology´s class. Creates a new typology instance.
      **/
     public Typology(TypologyID id) {
-        this.id_description = id;
+        this.descriptionID = id;
     }
 
 
     /**
      * Methods
      */
-    public TypologyID getId_description() {return this.id_description;}
+    public TypologyID getDescriptionID() {return this.descriptionID;}
 
     public boolean hasID_Description(String description) {
-        return this.id_description.hasDescription(description);
+        return this.descriptionID.hasDescription(description);
     }
 
 
@@ -55,11 +55,11 @@ public class Typology implements Entity<Typology> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id_description);
+        return Objects.hash(descriptionID);
     }
 
     @Override
     public boolean sameIdentityAs(Typology other) {
-        return other != null && this.id_description.sameValueAs(other.getId_description());
+        return other != null && this.descriptionID.sameValueAs(other.getDescriptionID());
     }
 }

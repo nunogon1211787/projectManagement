@@ -11,7 +11,7 @@ import java.util.List;
 public class TypologyJpaAssembler {
 
     public TypologyJpa toData(Typology typology) {
-        return new TypologyJpa(typology.getId_description());
+        return new TypologyJpa(typology.getDescriptionID());
     }
 
     public List<TypologyJpa> toData(List<Typology> typologies) {

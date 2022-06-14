@@ -6,6 +6,7 @@ import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.utils.Entity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -51,7 +52,7 @@ public class User implements Entity<User> {
         this.encryptedPassword = encryptedPassword;
         this.function = function;
         this.isActive = isActive;
-        this.assignedIdProfiles = assignedIdProfiles;
+        this.assignedIdProfiles = Collections.unmodifiableList(assignedIdProfiles);
         this.requestedProfiles = new ArrayList<>();
     }
 
@@ -181,7 +182,7 @@ public class User implements Entity<User> {
      */
     public boolean activateStatus() {
         //Can't be simplified because the status is a business rule
-        if (this.isActive == false) {
+        if (!this.isActive) {
             isActive = true;
         }
         return isActive;
@@ -189,7 +190,7 @@ public class User implements Entity<User> {
 
     public boolean inactivateStatus() {
         //Can't be simplified because the status is a business rule
-        if (this.isActive == true) {
+        if (this.isActive) {
             isActive = false;
             return true;
         } else {
