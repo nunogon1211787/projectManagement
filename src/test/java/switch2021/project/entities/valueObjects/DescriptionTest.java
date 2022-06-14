@@ -5,9 +5,7 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.entities.aggregates.Typology.Typology;
 import switch2021.project.entities.valueObjects.vos.Description;
 import switch2021.project.entities.valueObjects.vos.TypologyID;
-
 import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class DescriptionTest {
@@ -83,6 +81,16 @@ class DescriptionTest {
         description2.setText("Test");
         //Assert
         assertEquals(description, description2);
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTestEqual_Boolean() {
+        //Arrange
+        Description description = new Description("Test");
+        Description description2 = new Description("Test");
+        //Assert
+        assertTrue(description.equals(description2));
     }
 
 

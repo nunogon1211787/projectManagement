@@ -23,14 +23,4 @@ class Project #Yellow{
 -numberOfSprints
 }
 
-class Resource #Gold{
--startDate
--endDate
--CostPerHour
--Allocation
--Role
-}
-
-Resource "*" --> "1" Project: is allocated to
-
 @enduml
