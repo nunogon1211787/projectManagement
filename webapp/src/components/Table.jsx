@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import AppContext from "../context/AppContext";
 import { URL_API } from "../services/Service";
-import {fetchCollections, navToEditDetails} from "../context/Actions";
-import {navToDetails} from "../context/Actions";
+import { fetchCollections, navToEditDetails, navToDetails } from "../context/Actions";
 import Button from "../components/Button";
 
 export default function Table(props) {
@@ -10,10 +9,9 @@ export default function Table(props) {
   const { collection, details } = state;
   const { loading, error, data } = collection;
 
-
-    //GET REQUEST TO API
-    useEffect(() => {
-        let url = `${URL_API}/${props.collections}`;
+  //GET REQUEST TO API
+  useEffect(() => {
+    let url = `${URL_API}/${props.collections}`;
 
   //  if(props.query !== undefined){
   //    url = `${URL_API}/${props.collections}/${props.query}`
@@ -35,11 +33,11 @@ export default function Table(props) {
     if (props.collections === 'projects'){
       return  <Button name="Open" singleId = {id} function={buttonNavigateD} />
     } else {
-      if (window.location.pathname === '/resources' ){
-      return  <Button name="Change Role" singleId = {id} function={buttonNavigateEdit} />
-    } else {
-        if(window.location.pathname === '/userstories') {
-          return <Button name="Open" singleId = {id} function={buttonNavigateD}/>
+      if (window.location.pathname === '/resources') {
+        return <Button name="Change Role" singleId={id} function={buttonNavigateEdit} />
+      } else {
+        if (window.location.pathname === '/userstories') {
+          return <Button name="Open" singleId={id} function={buttonNavigateD} />
         }
       }
     // if(props.collections === 'userstories'){
@@ -53,14 +51,21 @@ export default function Table(props) {
     //     buttonOpenUS = null;
     // }
 
-    const handleOnClick = (id) => {
-    };
+  const handleOnClick = (id) => {
+    if (props.collections === 'projects' || window.location.pathname === '/userstories') {
+      return buttonNavigateD(id)
+    } else {
+      if (window.location.pathname === '/resources') {
+        return buttonNavigateEdit(id)
+      }
+    }
+  }
 
   if (loading === true) {
     return <h1>Loading ....</h1>;
   } else {
     if (error !== null) {
-      return <h1 style={{color:"red"}}>{error}</h1>;
+      return <h1 style={{ color: "red" }}>{error}</h1>;
     } else {
       if (Object.keys(data[0])[0] === "_embedded") {
         const collect = Object.keys(data[0]._embedded)[0];
@@ -102,10 +107,9 @@ export default function Table(props) {
 
                     if(window.location.pathname === "/resources"){
                       id = row[Object.keys(row)[0]] + "&" + row[Object.keys(row)[1]] + "&" + row[Object.keys(row)[3]];
-                      console.log(id)
-                    } 
-                
-                  
+                    }
+
+
                     return (
                       <tr
                         key={index}
@@ -129,7 +133,7 @@ export default function Table(props) {
                             {buttonOpen(id)}
                          </tr>
                     );
-                  })}                  
+                  })}
                 </tbody>
               </table>
             </div>
