@@ -6,9 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import switch2021.project.entities.valueObjects.vos.Description;
 import switch2021.project.entities.valueObjects.vos.Email;
-
 import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class EmailTest {

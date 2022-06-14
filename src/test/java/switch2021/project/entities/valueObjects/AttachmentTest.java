@@ -44,5 +44,91 @@ public class AttachmentTest {
         assertNotNull(attachment);
     }
 
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTest_1() {
+        //Arrange
+        String filename = "test.txt";
+        //Act
+        Attachment attachment = new Attachment(filename);
+        //Assert
+        assertEquals(attachment, attachment);
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTest_2() {
+        //Arrange
+        String filename = "test.txt";
+        //Act
+        Attachment attachment = new Attachment(filename);
+        Attachment attachment1 = new Attachment(filename);
+        //Assert
+        assertEquals(attachment, attachment1);
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTest_3() {
+        //Arrange
+        String filename1 = "test1.txt";
+        String filename2 = "test2.txt";
+        //Act
+        Attachment attachment = new Attachment(filename1);
+        Attachment attachment1 = new Attachment(filename2);
+         //Assert
+        assertNotEquals(attachment, attachment1);
+    }
+
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void overrideTest_4() {
+        //Arrange
+        String filename1 = "test1.txt";
+        //Act
+        Attachment attachment = new Attachment(filename1);
+        Attachment attachment1 = new Attachment(filename1);
+        //Assert
+        assertTrue(attachment.equals(attachment1));
+    }
+
+    @Test
+    @DisplayName("Test hashcode conditions for coverage purposes")
+    public void hashCodeSuccess() {
+        //Arrange
+        String filename = "Test.txt";
+        //Act
+        Attachment attachment = new Attachment(filename);
+        Attachment attachment1 = new Attachment(filename);
+        //Assert
+        assertEquals(attachment.hashCode(), attachment1.hashCode());
+    }
+
+    @Test
+    @DisplayName("Test hashcode conditions for coverage purposes")
+    public void hashCodeFail() {
+        //Arrange
+        String filename = "Test1.txt";
+        String filename1 = "Test2.txt";
+        //Act
+        Attachment attachment = new Attachment(filename);
+        Attachment attachment1 = new Attachment(filename1);
+        //Assert
+        assertNotEquals(attachment, attachment1);
+    }
+
+    @Test
+    @DisplayName("Test hashcode conditions for coverage purposes")
+    public void hashCodeNull() {
+        //Arrange
+        String filename = "Test1.txt";
+        //Act
+        Attachment attachment = new Attachment(filename);
+        Attachment attachment1 = null;
+        //Assert
+        assertNotEquals(attachment, attachment1);
+    }
+
 }
 

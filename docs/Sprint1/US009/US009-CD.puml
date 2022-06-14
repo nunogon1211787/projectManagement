@@ -14,7 +14,7 @@ class "CreateUserStoryRoute" as route << Component >>
 }
 
     package "Persistence" {
-    class "IUserProfileRepositoryJpa" as jpa <<Interface>>
+    interface "IUserStoryRepositoryJpa" as jpa <<Interface>>
     }
 }
 
