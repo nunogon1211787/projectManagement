@@ -2,10 +2,7 @@ import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import {
   Projects,
-  OrderedList,
-  UserAdd,
   Tasks,
-  History,
   FingerPrint,
   Services,
   Group,
@@ -17,6 +14,7 @@ import CreateUserStory from "../pages/CreateUserStory";
 import CreateTypology from "../pages/CreateTypology";
 import { Home } from "../pages/Home";
 import RegisterUser from "../pages/RegisterUser";
+import CreateResource from "../pages/CreateResource";
 
 import { Box, Grommet } from "grommet";
 
@@ -24,7 +22,6 @@ import { theme } from "../theme";
 import Sidebar from "../components/Sidebar";
 import { ReactComponent as LogoIcon } from "../routes/beaver-svgrepo.svg";
 import AppContext from "../context/AppContext";
-import CreateResource from "../pages/CreateResource";
 
 const userSession = {
   user: {
@@ -34,7 +31,11 @@ const userSession = {
   items: [
     {
       label: "Logout",
-      href: "#",
+      href: "/",
+    },
+    {
+      label: "Settings",
+      href: "/userSettings",
     },
   ],
 };
@@ -49,16 +50,6 @@ const items = [
     label: "Users",
     Icon: Group,
     path: "users",
-  },
-  {
-    label: "User Stories",
-    Icon: OrderedList,
-    path: "userstories",
-  },
-  {
-    label: "Sprints",
-    Icon: History,
-    path: "sprints",
   },
   {
     label: "Tasks",

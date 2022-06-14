@@ -1,8 +1,9 @@
-package switch2021.project.dataModel.jpa;
+package switch2021.project.datamodel.jpa;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import switch2021.project.dataModel.jpa.UserStoryOfSprintJpa;
 import switch2021.project.entities.valueObjects.vos.SprintID;
 
 import javax.persistence.*;

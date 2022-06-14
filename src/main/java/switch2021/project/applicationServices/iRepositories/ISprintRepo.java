@@ -1,6 +1,5 @@
 package switch2021.project.applicationServices.iRepositories;
 
-import switch2021.project.dataModel.jpa.SprintJpa;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.SprintID;
@@ -35,5 +34,6 @@ public interface ISprintRepo {
 
     boolean deleteSprint(SprintID sprintID);
 
+    List<Sprint> findAllByProjectID(ProjectID projectID);
 }
 

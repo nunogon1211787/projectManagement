@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import AppContext from "../context/AppContext";
 import { URL_API } from "../services/Service";
 import {fetchCollections, navToEditDetails} from "../context/Actions";
@@ -7,7 +7,7 @@ import Button from "../components/Button";
 
 export default function Table(props) {
   const { state, dispatch } = useContext(AppContext);
-  const { collection, details } = state;
+  const { collection } = state;
   const { loading, error, data } = collection;
 
 
@@ -24,24 +24,24 @@ export default function Table(props) {
   }, []);
 
   const buttonNavigateD = (singleId) => {
-    console.log(singleId)
-
     navToDetails(dispatch, singleId);
   };
 
   const buttonNavigateEdit = (singleId) => {
-    console.log(singleId)
-
     navToEditDetails(dispatch, singleId);
   };
 
   const buttonOpen = (id) =>{
     if (props.collections === 'projects'){
       return  <Button name="Open Project" singleId = {id} function={buttonNavigateD} />
-} else {
-if (window.location.pathname === '/resources' ){
-  return  <Button name="Change Role" singleId = {id} function={buttonNavigateEdit} />
-}
+    } else {
+      if (window.location.pathname === '/resources' ){
+      return  <Button name="Change Role" singleId = {id} function={buttonNavigateEdit} />
+    } else {
+        if(window.location.pathname === '/userstories') {
+          return <Button name="Open" singleId = {id} function={buttonNavigateD}/>
+        }
+      }
     // if(props.collections === 'userstories'){
     //   return <Button name="Open" function={buttonNavigateUS}/>
     // }
@@ -60,13 +60,13 @@ if (window.location.pathname === '/resources' ){
     return <h1>Loading ....</h1>;
   } else {
     if (error !== null) {
-      return <h1>Error:{error}</h1>;
+      return <h1 style={{color:"red"}}>{error}</h1>;
     } else {
       if (Object.keys(data[0])[0] === "_embedded") {
         const collect = Object.keys(data[0]._embedded)[0];
         const header = Object.keys(data[0]._embedded[collect][0]);
         const response = data[0]._embedded[collect];
-        
+
         return (
           <>
             <div className="card bg-light">
@@ -99,10 +99,9 @@ if (window.location.pathname === '/resources' ){
 
                     if(window.location.pathname === "/resources"){
                       id = row[Object.keys(row)[0]] + "&" + row[Object.keys(row)[1]] + "&" + row[Object.keys(row)[3]];
-                      console.log(id)
-                    } 
-                
-                  
+                    }
+
+
                     return (
                       <tr
                         key={index}
@@ -124,7 +123,7 @@ if (window.location.pathname === '/resources' ){
                             {buttonOpen(id)}
                          </tr>
                     );
-                  })}                  
+                  })}
                 </tbody>
               </table>
             </div>
