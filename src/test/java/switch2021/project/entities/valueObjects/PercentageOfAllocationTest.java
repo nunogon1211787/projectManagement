@@ -77,6 +77,19 @@ public class PercentageOfAllocationTest {
         assertEquals(expected, percOfAllo);
     }
 
+
+    @Test
+    public void equalsTrue_1() {
+        //Arrange
+        double percentage = 1;
+        //Act
+        PercentageOfAllocation percOfAllo = new PercentageOfAllocation(percentage);
+        PercentageOfAllocation expected = new PercentageOfAllocation(1);
+        //Assert
+        assertTrue(percOfAllo.equals(expected));
+    }
+
+
     @Test
     public void hashCodeTrue() {
         //Arrange
@@ -98,6 +111,18 @@ public class PercentageOfAllocationTest {
         //Assert
         assertNotEquals(expected, percOfAllo);
     }
+
+    @Test
+    public void equalsFalse_1() {
+        //Arrange
+        double percentage = 0.3;
+        //Act
+        PercentageOfAllocation percOfAllo = new PercentageOfAllocation(percentage);
+        PercentageOfAllocation expected = new PercentageOfAllocation(1);
+        //Assert
+        assertFalse(percOfAllo.equals(expected));
+    }
+
 
     @Test
     public void hashCodeFalse() {

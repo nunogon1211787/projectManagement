@@ -12,16 +12,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class PasswordTest {
 
-/*    @DisplayName("Password Success")
-    @Test
-    public void ValidPassword() {
-        //Arrange
-        Password pwd = new Password("Qwerty_1");
-        String pwdRes = pwd.getPwd();
-        //Assert
-        assertEquals("´ÚÈÕ×ÜÂ\u0094", pwdRes);
-    }
- */
 
     @DisplayName("Password Success - 2 numbers")
     @Test
@@ -67,27 +57,7 @@ public class PasswordTest {
     public void PasswordFailNoLowerCase() {
         assertThrows(IllegalArgumentException.class, () -> new Password("QWERTY_1"));
     }
-    /*
-        @DisplayName("Encrypt Password Success")
-        @Test
-        public void EncryptPasswordSuccess() {
-            //Arrange
-            Password pwd = new Password("Qwerty_1");
-            String pwdRes = pwd.getPwd();
-            //Assert
-            assertEquals("´ÚÈÕ×ÜÂ", pwdRes);
-        }
 
-        @DisplayName("Decrypt Password Success")
-        @Test
-        public void DecryptPasswordSuccess() {
-            //Arrange
-            Password pwd = new Password("Hellos_1");
-            String pwdRes = pwd.decryptPassword(pwd.getPwd());
-            //Assert
-            assertEquals("Hellos_1", pwdRes);
-        }
-    */
     @Test
     @DisplayName("Test override conditions for coverage purposes")
     public void overrideTests() {
