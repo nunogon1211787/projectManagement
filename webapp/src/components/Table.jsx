@@ -115,7 +115,7 @@ export default function Table(props) {
                           // eslint-disable-next-line
                           Object.keys(row).map((attr, idx) => {
                             if (attr !== "_links") {
-                              return <td key={idx}>{row[attr]}</td>;
+                              return <td key={idx}>{Array.isArray(row[attr])?row[attr].join(" , "):row[attr]}</td>;
                             }
                           })
                         }
