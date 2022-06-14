@@ -1,23 +1,22 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import AppContext from "../context/AppContext";
 import { URL_API } from "../services/Service";
-import { fetchCollections, navToEditDetails } from "../context/Actions";
-import { navToDetails } from "../context/Actions";
+import {fetchCollections, navToEditDetails} from "../context/Actions";
+import {navToDetails} from "../context/Actions";
 import Button from "../components/Button";
 
 export default function Table(props) {
   const { state, dispatch } = useContext(AppContext);
-  const { collection } = state;
+  const { collection, details } = state;
   const { loading, error, data } = collection;
-
 
   //GET REQUEST TO API
   useEffect(() => {
     let url = `${URL_API}/${props.collections}`;
 
-    //  if(props.query !== undefined){
-    //    url = `${URL_API}/${props.collections}/${props.query}`
-    //  }
+  //  if(props.query !== undefined){
+  //    url = `${URL_API}/${props.collections}/${props.query}`
+  //  }
     const request = {};
     fetchCollections(url, request, dispatch);
     // eslint-disable-next-line
@@ -58,14 +57,21 @@ export default function Table(props) {
   //     buttonOpenUS = null;
   // }
 
-  const handleOnClick = () => {
-  };
+  const handleOnClick = (id) => {
+    if (props.collections === 'projects' || window.location.pathname === '/userstories') {
+      return buttonNavigateD(id)
+    } else {
+      if (window.location.pathname === '/resources') {
+        return buttonNavigateEdit(id)
+      }
+    }
+  }
 
   if (loading === true) {
     return <h1>Loading ....</h1>;
   } else {
     if (error !== null) {
-      return <h1 style={{ color: "red" }}>{error}</h1>;
+      return <h1 style={{color:"red"}}>{error}</h1>;
     } else {
       if (Object.keys(data[0])[0] === "_embedded") {
         const collect = Object.keys(data[0]._embedded)[0];
@@ -84,13 +90,16 @@ export default function Table(props) {
                     {
                       // eslint-disable-next-line
                       header.map((key, idx) => {
-                        if (key !== "_links") {
+                        if (key !== "_links" && key !== "customer" && key !== "businessSector"
+                        && key !== "numberOfSprints" && key !== "budget" && key !== "sprintDuration"
+                        && key !== "endDate" && key !== "typo") {
+                          const result = key.replace(/[A-Z]/g, ' $&').trim();
                           return (
-                            <th
+                                                        <th
                               key={idx}
-                              style={{ textTransform: "uppercase" }}
+                              // style={{ textTransform: "uppercase" }}
                             >
-                              {key}
+                              {result}
                             </th>
                           );
                         }
@@ -100,9 +109,9 @@ export default function Table(props) {
                 </thead>
                 <tbody>
                   {response.map((row, index) => {
-                    let id = row[Object.keys(row)[0]];
+                   let id = row[Object.keys(row)[0]];
 
-                    if (window.location.pathname === "/resources") {
+                    if(window.location.pathname === "/resources"){
                       id = row[Object.keys(row)[0]] + "&" + row[Object.keys(row)[1]] + "&" + row[Object.keys(row)[3]];
                     }
                     if (props.collections === "users") {
@@ -116,23 +125,22 @@ export default function Table(props) {
                         onClick={() => handleOnClick(id)}
                         style={{
                           cursor: "pointer",
-                          textTransform: "capitalize",
+                          // textTransform: "capitalize",
                         }}
                       >
                         {
                           // eslint-disable-next-line
                           Object.keys(row).map((attr, idx) => {
-                            if (attr !== "_links") {
-                              return <td key={idx}>{row[attr]}</td>;
+                            if (attr !== "_links" && attr !== "customer" && attr !== "businessSector"
+                            && attr !== "numberOfSprints" && attr !== "budget" && attr !== "sprintDuration"
+                            && attr !== "endDate" && attr !== "typo") {
+                              return <td key={idx}>{Array.isArray(row[attr])?row[attr].join(", "):row[attr]}</td>;
                             }
-                            console.log("aqui" + id)
                           })
                         }
 
-                        {buttonOpen(id)}
-                       
-                      </tr>
-
+                            {buttonOpen(id)}
+                         </tr>
                     );
                   })}
                 </tbody>

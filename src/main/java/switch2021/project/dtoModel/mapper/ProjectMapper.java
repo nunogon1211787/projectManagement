@@ -54,7 +54,6 @@ public class ProjectMapper {
         projDto.add(linkTo(methodOn(ProjectController.class).deleteProjectRequest(projDto.code)).withRel("Delete"));
 
         //Edit a project
-
         projDto.add(linkTo(methodOn(ProjectController.class).updateProjectPartially(projDto.code,
                 new EditProjectInfoDTO())).withRel("Edit"));
 

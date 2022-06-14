@@ -3,7 +3,7 @@ package switch2021.project.entities.valueObjects;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.entities.valueObjects.vos.Hours;
-
+import switch2021.project.entities.valueObjects.vos.Minutes;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class HoursTest {
@@ -65,5 +65,98 @@ public class HoursTest {
         });
         //Assert
         assertTrue(exception.getMessage().equals("Not valid work time values." + "Hour interval: [" + 0 + " - " + 23 + "]"));
+    }
+
+    @DisplayName("Test override conditions for coverage purposes")
+    @Test
+    public void overrideTestEquals() {
+        //Arrange
+        Hours hours = new Hours(1);
+        Hours hours1 = new Hours(1);
+        //Assert
+        assertEquals(hours, hours1);
+    }
+
+
+    @DisplayName("Test override conditions for coverage purposes")
+    @Test
+    public void overrideTestNotEquals() {
+        //Arrange
+        Hours hours = new Hours(1);
+        Hours hours1 = new Hours(2);
+        //Assert
+        assertNotEquals(hours, hours1);
+    }
+
+    @DisplayName("Test override conditions for coverage purposes")
+    @Test
+    public void overrideTestClass() {
+        //Arrange
+        Minutes minutes = new Minutes(1);
+        Hours hours = new Hours(1);
+        //Assert
+        assertNotEquals(hours, minutes);
+    }
+
+
+    @DisplayName("Test override conditions for coverage purposes")
+    @Test
+    public void hashCodeTest() {
+        //Arrange
+        Hours hours = new Hours(1);
+        Hours hours1 = new Hours(1);
+        //Assert
+        assertEquals(hours.hashCode(), hours1.hashCode());
+    }
+
+
+    @DisplayName("Test override conditions for coverage purposes")
+    @Test
+    public void hashCodeTestFail() {
+        //Arrange
+        Hours hours = new Hours(1);
+        Hours hours1 = new Hours(11);
+        //Assert
+        assertNotEquals(hours.hashCode(), hours1.hashCode());
+    }
+
+    @DisplayName("Test override conditions for coverage purposes")
+    @Test
+    public void hashCodeTestClassFail() {
+        //Arrange
+        Hours hours = new Hours(1);
+        Minutes minutes = new Minutes(11);
+        //Assert
+        assertNotEquals(hours.hashCode(), minutes.hashCode());
+    }
+
+
+    @DisplayName("Test Same Value As")
+    @Test
+    public void sameValueAs() {
+        //Arrange
+        Hours hours = new Hours(1);
+        Hours hours1 = new Hours(1);
+        //Assert
+        assertTrue(hours.sameValueAs(hours1));
+    }
+
+    @Test
+    @DisplayName("Empty Constructor")
+    public void emptyConstructor() {
+        //Act
+        Hours hours = new Hours();
+        //Assert
+        assertEquals(0, hours.getEffortHours());
+    }
+
+    @Test
+    @DisplayName("Test to set Hours")
+    public void setHours() {
+        //Act
+        Hours hours = new Hours(2);
+        hours.setEffortHours(3);
+        //Assert
+        assertEquals(3, hours.getEffortHours());
     }
 }

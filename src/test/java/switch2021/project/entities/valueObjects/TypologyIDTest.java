@@ -8,7 +8,7 @@ import switch2021.project.entities.valueObjects.vos.TypologyID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class _TypologyIDTest {
+class TypologyIDTest {
 
     @Test
     public void getDescription_Success() {

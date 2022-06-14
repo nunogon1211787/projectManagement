@@ -13,7 +13,10 @@ export default function Button(props) {
     return (
       <button
         className="btn bg-primary"
-        onClick={() => {
+        onClick={
+          props.function === undefined
+            ? ""
+            : () => {
                 props.function(props.singleId);
               }
         }
