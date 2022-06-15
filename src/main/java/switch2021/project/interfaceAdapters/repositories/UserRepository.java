@@ -2,8 +2,8 @@ package switch2021.project.interfaceAdapters.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import switch2021.project.dataModel.jpa.UserJpa;
-import switch2021.project.dataModel.assembler.UserJpaAssembler;
+import switch2021.project.dataModel.JPA.UserJpa;
+import switch2021.project.dataModel.JPA.assembler.UserJpaAssembler;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
 import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.valueObjects.vos.UserID;

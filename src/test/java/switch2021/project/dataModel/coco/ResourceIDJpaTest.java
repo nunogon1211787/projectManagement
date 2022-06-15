@@ -1,6 +1,7 @@
-package switch2021.project.dataModel.jpa;
+package switch2021.project.dataModel.coco;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.dataModel.JPA.ResourceIDJpa;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.ResourceID;
 import switch2021.project.entities.valueObjects.vos.UserID;
