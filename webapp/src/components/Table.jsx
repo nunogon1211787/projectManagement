@@ -4,6 +4,7 @@ import { URL_API } from "../services/Service";
 import {fetchCollections, navToEditDetails} from "../context/Actions";
 import {navToDetails} from "../context/Actions";
 import Button from "../components/Button";
+import CreateResource from "../pages/CreateResource";
 
 export default function Table(props) {
   const { state, dispatch } = useContext(AppContext);

@@ -28,11 +28,11 @@ public class ProjectRepository implements IProjectRepo {
 
 
     @Override
-    public Optional<Project> save(Project newProject) {
+    public Project save(Project newProject) {
         ProjectJpa projectJpa = projectJpaAssembler.toJpaData(newProject);
 
         ProjectJpa savedProj = projectJpaRepository.save(projectJpa);
-        return Optional.of(projectJpaAssembler.toDomain(savedProj));
+        return projectJpaAssembler.toDomain(savedProj);
 
     }
 
