@@ -4,7 +4,6 @@ import { URL_API } from "../services/Service";
 import {fetchCollections, navToEditDetails} from "../context/Actions";
 import {navToDetails} from "../context/Actions";
 import Button from "../components/Button";
-import CreateResource from "../pages/CreateResource";
 
 export default function Table(props) {
   const { state, dispatch } = useContext(AppContext);
@@ -59,7 +58,7 @@ export default function Table(props) {
   // }
 
   const handleOnClick = (id) => {
-    if (props.collections === 'projects' || window.location.pathname === '/userstories') {
+    if (props.collections === 'projects' || window.location.pathname === '/userstories' || window.location.pathname === '/users') {
       return buttonNavigateD(id)
     } else {
       if (window.location.pathname === '/resources') {
@@ -93,7 +92,7 @@ export default function Table(props) {
                       header.map((key, idx) => {
                         if (key !== "_links" && key !== "customer" && key !== "businessSector"
                         && key !== "numberOfSprints" && key !== "budget" && key !== "sprintDuration"
-                        && key !== "endDate" && key !== "typo") {
+                        && key !== "endDate" && key !== "typo" && key !== "photo") {
                           const result = key.replace(/[A-Z]/g, ' $&').trim();
                           return (
                                                         <th
