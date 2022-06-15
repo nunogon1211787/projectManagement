@@ -7,15 +7,31 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.datasource.embedded.OutputStreamFactory;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import switch2021.project.applicationServices.service.ProjectService;
+import switch2021.project.dtoModel.dto.ErrorMessage;
+import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.dto.TypologyDTO;
 
+import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -30,6 +46,9 @@ class ProjectControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @MockBean
+    ProjectService service;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -130,5 +149,20 @@ class ProjectControllerTest {
         String resultContent = result.getResponse().getContentAsString();
         assertNotNull(resultContent);
         assertEquals("{\"errorMessage\":\"Project does not exist\"}", resultContent);
+    }
+
+    @Test
+    void getAllProjectSuccess() {
+
+        OutputProjectDTO test = mock(OutputProjectDTO.class);
+        OutputProjectDTO test2 = mock(OutputProjectDTO.class);
+        OutputProjectDTO test3 = mock(OutputProjectDTO.class);
+
+        when(service.showAllProjects()).thenReturn(CollectionModel.of(List.of(new OutputProjectDTO[]{test, test2, test3})));
+        ResponseEntity<?> response = ctrl.showAllProjects();
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+
+
     }
 }
