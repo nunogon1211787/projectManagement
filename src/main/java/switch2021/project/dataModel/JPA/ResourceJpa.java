@@ -1,4 +1,4 @@
-package switch2021.project.dataModel.jpa;
+package switch2021.project.dataModel.JPA;
 
 import lombok.*;
 

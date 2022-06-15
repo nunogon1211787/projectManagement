@@ -1,7 +1,6 @@
-package switch2021.project.dataModel.jpa;
+package switch2021.project.dataModel.JPA;
 
 import lombok.*;
-import switch2021.project.datamodel.jpa.SprintJpa;
 import switch2021.project.entities.valueObjects.vos.UserStoryID;
 
 import javax.persistence.*;

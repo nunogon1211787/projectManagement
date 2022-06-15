@@ -1,15 +1,11 @@
-package switch2021.project.dataModel.jpa;
+package switch2021.project.dataModel.coco;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.entities.aggregates.Resource.Resource;
-import switch2021.project.entities.valueObjects.vos.*;
-import switch2021.project.entities.valueObjects.vos.enums.ProjectRoleReeng;
-
-import java.time.LocalDate;
+import switch2021.project.dataModel.JPA.ResourceIDJpa;
+import switch2021.project.dataModel.JPA.ResourceJpa;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class ResourceJpaTest {
 

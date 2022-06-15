@@ -1,7 +1,7 @@
-package switch2021.project.dataModel.assembler;
+package switch2021.project.dataModel.JPA.assembler;
 
 import org.springframework.stereotype.Component;
-import switch2021.project.dataModel.jpa.UserStoryJpa;
+import switch2021.project.dataModel.JPA.UserStoryJpa;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.UserStoryStatusEnum;

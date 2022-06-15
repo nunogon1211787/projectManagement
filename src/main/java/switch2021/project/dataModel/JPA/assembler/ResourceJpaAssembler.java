@@ -1,8 +1,8 @@
-package switch2021.project.dataModel.assembler;
+package switch2021.project.dataModel.JPA.assembler;
 
 import org.springframework.stereotype.Component;
-import switch2021.project.dataModel.jpa.ResourceIDJpa;
-import switch2021.project.dataModel.jpa.ResourceJpa;
+import switch2021.project.dataModel.JPA.ResourceIDJpa;
+import switch2021.project.dataModel.JPA.ResourceJpa;
 import switch2021.project.entities.valueObjects.vos.ResourceID;
 import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.valueObjects.vos.*;

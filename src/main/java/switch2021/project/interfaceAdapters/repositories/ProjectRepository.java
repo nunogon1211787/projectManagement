@@ -4,12 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import switch2021.project.dataModel.jpa.ProjectJpa;
+import switch2021.project.dataModel.JPA.ProjectJpa;
 import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.persistence.ProjectJpaRepository;
-import switch2021.project.dataModel.assembler.ProjectJpaAssembler;
+import switch2021.project.dataModel.JPA.assembler.ProjectJpaAssembler;
 
 import java.util.ArrayList;
 import java.util.List;

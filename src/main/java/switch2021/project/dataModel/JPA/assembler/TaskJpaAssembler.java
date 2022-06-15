@@ -1,9 +1,9 @@
-package switch2021.project.dataModel.assembler;
+package switch2021.project.dataModel.JPA.assembler;
 
 
 import org.springframework.stereotype.Component;
 import switch2021.project.applicationServices.iRepositories.TaskContainerID;
-import switch2021.project.dataModel.jpa.TaskJpa;
+import switch2021.project.dataModel.JPA.TaskJpa;
 import switch2021.project.entities.aggregates.Task.Task;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.TaskTypeEnum;
