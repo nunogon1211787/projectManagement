@@ -45,16 +45,18 @@ export default function Details(props) {
             navToEditDetails(dispatch);
           };
 
-          const setHeading = () => {
-            switch(window.location.pathname){
-              case "/projects":
-                return "Project";
-              case "/userstories":
-                return "User Story";
-              default:
-                return "";
-            }
+        const setHeading = () => {
+          switch (window.location.pathname) {
+            case "/projects":
+              return "Project";
+            case "/userstories":
+              return "User Story";
+            case "/users":
+              return "User";
+            default:
+              return "";
           }
+        }
 
           const setButtons = () => {
             switch(window.location.pathname){
@@ -78,16 +80,18 @@ export default function Details(props) {
             }
           }
 
-          const setName = () => {
-            switch(window.location.pathname){
-              case "/projects":
-                return body[1];
-              case "/userstories":
-                return body[0].split("&")[1];
-              default:
-                return "";
-            }
+        const setName = () => {
+          switch (window.location.pathname) {
+            case "/projects":
+              return body[1];
+            case "/userstories":
+              return body[0].split("&")[1];
+              case "/users":
+                return body[0];
+            default:
+              return "";
           }
+        }
 
           return (
             <>
@@ -114,12 +118,13 @@ export default function Details(props) {
                           // eslint-disable-next-line
                           headers.map((key, idx) => {
                             if (key !== "_links") {
+                              const result = key.replace(/[A-Z]/g, ' $&').trim();
                               return (
                                   <tr style={{ textTransform: "uppercase" }} key={idx}>
                                   <th
                                       key={idx}
                                       style={{ textTransform: "uppercase" }}>
-                                    {key}
+                                    {result}
                                   </th>
                                   <td>{body[idx]}</td>
                                   </tr>

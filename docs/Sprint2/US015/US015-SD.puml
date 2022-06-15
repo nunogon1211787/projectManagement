@@ -1,64 +1,62 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title US015 - As Director, I want to get a list of all projects
-
 autonumber
-
-actor Director as actor
-participant ": ShowAllProjectsRoute" as Route
-participant ": ProjectController" as Ctrl
-participant ": ShowAllProjectsService" as Srv
-participant ": IRepositoryProject" as store
-participant "projects : List<Project>" as list
-participant "proj : Project" as proj
-participant ": ProjectMapper" as map
-participant "allProjectsDto : List<ProjectDto>" as listDto
-participant "projDto : ProjectDto" as dto
-participant "allProjectsResponse : ResponseEntity" as json
-
-activate actor
 autoactivate on
 
-actor -> Route: GET /projects
+participant ": ShowAllProjectsRouter" as Route
+participant ": ProjectController" as Ctrl
+participant ": ProjectService" as service
+participant ": IProjectRepo" as iProjectRepo
+participant ": ProjectJpaRepository" as projectJPARepository
+participant ": ProjectJPA" as projectJPA
+participant ": List<ProjectsJPA>" as list
+participant ": ProjectJPAAssembler" as assembler
+participant ": Project" as project
+participant ": List<Project>" as projectList
+participant ": ProjectMapper" as mapper
+participant ": OutPutProjectDTO" as outputDTO
 
+
+
+[o-> Route: GET (json)
+note right
+Change from json to dto hidden to simplify diagram
+end note
 Route -> Ctrl: showAllProjects()
-
-Ctrl -> Srv: showAllProjects()
-
-Srv -> store: findAll()
-
-store --> list**: create()
-
-store --> Srv: projects
-
-Srv --> listDto**: create()
-
-loop for all project (proj) in the list (projects)
-
-Srv -> list: get(i) : proj
-deactivate
-
-Srv -> map: model2Dto(proj)
-
-map --> dto**: create()
-
-map --> Srv : projDto
-
-Srv -> listDto: add(projDto): true
-deactivate
-
+Ctrl -> service: outPutProjectDTO = showAllProjects()
+service -> iProjectRepo: findAll()
+iProjectRepo -> projectJPARepository: findAll()
+loop ProjectJPA
+projectJPARepository -> projectJPA: project = getProject
 end
+projectJPA -> list ** : create()
+deactivate
+projectJPARepository --> iProjectRepo: projectJPAList
+alt for each projectJPA in the list
+iProjectRepo -> assembler: toDomain(projectJPA)
+loop Project
+assembler -> project: project = getProject
+end
+assembler --> iProjectRepo: project
+end
+project -> projectList ** : create()
+deactivate
+project --> iProjectRepo: projectList
+iProjectRepo --> service: projectList
+service -> mapper: toCollectionsDTO(projectList)
+mapper -> outputDTO ** : create()
+mapper --> service: outPutProjectDTO
+service --> Ctrl: outPutProjectDTO
 
-Srv --> Ctrl: allProjectsDto
-
-Ctrl --> json**: create(allProjectsDto)
-
-note over Ctrl, json : The Controller uses the Response Entity class to create a response in JSON format using the dto received from Service layer and defining the HTTP status.
-
-Ctrl --> Route: allProjectsResponse
-
-Route --> actor: Show a list of all projects
 
 
+
+
+
+
+
+
+Ctrl --> Route: response
+[<--Route : Shows the resource created
 @enduml

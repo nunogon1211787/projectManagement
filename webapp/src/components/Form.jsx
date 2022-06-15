@@ -61,6 +61,7 @@ export default function Form(props) {
           </>
       );
     } else {
+      
       return (
           <>
             <div className="mb-3">
@@ -74,8 +75,11 @@ export default function Form(props) {
                 {" "}
                 {txt}{" "}
               </label>
+              
               <input
+              
                   key={idx}
+                  
                   className="form-control"
                   type={inputRules[idx]}
                   name={txt}

@@ -1,11 +1,10 @@
 package switch2021.project.entities.aggregates.User;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import switch2021.project.applicationServices.service.UserService;
 import switch2021.project.dtoModel.dto.NewUserInfoDTO;
 import switch2021.project.dtoModel.dto.OutputUserDTO;
@@ -81,6 +80,83 @@ class UserTest {
         assertEquals("manuel@beaver.com", outDTO.email);
         assertEquals("False", outDTO.isActive);
     }
+
+    @Test
+    @DisplayName("Test same identity conditions for coverage purposes")
+    public void sameIdentityAsTrue() {
+        //Arrange
+        UserID userID = new UserID(new Email("Cris@xxx.pt"));
+        Name name = new Name("Cristiana");
+        Photo photo = new Photo("xxx.png");
+        Password password = new Password("Qwerty_1");
+        Function function = new Function("Dev");
+        UserProfileID userProfileID = new UserProfileID(new Description("Visitor"));
+        //Act
+        User user= new User(userID, name, photo, password, password,
+                function, userProfileID);
+        User user2= new User(userID, name, photo, password, password,
+                function, userProfileID);
+        //Assert
+        assertTrue(user.sameIdentityAs(user2));
+    }
+
+    @Test
+    @DisplayName("Test same identity conditions for coverage purposes")
+    public void sameIdentityAsFalse() {
+        //Arrange
+        UserID userID = new UserID(new Email("Cris@xxx.pt"));
+        UserID userID2 = new UserID(new Email("Dani@xxx.pt"));
+        Name name = new Name("Cristiana");
+        Photo photo = new Photo("xxx.png");
+        Password password = new Password("Qwerty_1");
+        Function function = new Function("Dev");
+        UserProfileID userProfileID = new UserProfileID(new Description("Visitor"));
+        //Act
+        User user= new User(userID, name, photo, password, password,
+                function, userProfileID);
+        User user2= new User(userID2, name, photo, password, password,
+                function, userProfileID);
+        //Assert
+        assertFalse(user.sameIdentityAs(user2));
+    }
+
+    @Test
+    @DisplayName("Test same identity conditions for coverage purposes")
+    public void sameIdentityAsNull() {
+        //Arrange
+        UserID userID = new UserID(new Email("Cris@xxx.pt"));
+        Name name = new Name("Cristiana");
+        Photo photo = new Photo("xxx.png");
+        Password password = new Password("Qwerty_1");
+        Function function = new Function("Dev");
+        UserProfileID userProfileID = new UserProfileID(new Description("Visitor"));
+        //Act
+        User user= new User(userID, name, photo, password, password,
+                function, userProfileID);
+        User user2= null;
+        //Assert
+        assertFalse(user.sameIdentityAs(user2));
+    }
+
+//    @Test
+//    void updatePassword(){
+//        //Arrange
+//        UserID userID = new UserID(new Email("Cris@xxx.pt"));
+//        Name name = new Name("Cristiana");
+//        Photo photo = new Photo("xxx.png");
+//        Password password = new Password("Qwerty_1");
+//        Function function = new Function("Dev");
+//        UserProfileID userProfileID = new UserProfileID(new Description("Visitor"));
+//        Password newPassword = new Password("Qwerty_2");
+//
+//        User user= new User(userID, name, photo, password, password,
+//                function, userProfileID);
+//        //Act
+//        user.updatePassword(password.getPwd(), newPassword.getPwd());
+//        //Assert
+//        assertEquals(newPassword, user.getEncryptedPassword());
+//
+//    }
 }
 /*
    @Test
@@ -123,7 +199,8 @@ class UserTest {
         Description description = mock(Description.class);
         when(profileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
-        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "Qwerty_1", "Qwerty_1", "photo.png", profileId);
+        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "Qwerty_1", "Qwerty_1", "photo
+        .png", profileId);
         //Act
         String emailCheck = "4321@isep.ipp.pt";
         //Assert
@@ -168,7 +245,8 @@ class UserTest {
         when(userProfile.getUserProfileId()).thenReturn(userProfileId);
         when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
-        SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
+        SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png",
+        userProfileId);
         //Act
         UserProfile newProfile = mock(UserProfile.class);
         UserProfileId newUserProfileId = mock(UserProfileId.class);
@@ -191,7 +269,8 @@ class UserTest {
             when(userProfile.getUserProfileId()).thenReturn(userProfileId);
             when(userProfileId.getUserProfileName()).thenReturn(description);
             when(description.getText()).thenReturn("Visitor");
-            SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
+            SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png",
+             userProfileId);
             //Act
             UserProfile newProfile = mock(UserProfile.class);
             UserProfileId newUserProfileId = mock(UserProfileId.class);
@@ -231,7 +310,8 @@ class UserTest {
         when(userProfile.getUserProfileId()).thenReturn(userProfileId);
         when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
-        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10", "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
+        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10", "Qwerty_1", "Qwerty_1", "photo
+        .png", userProfileId);
         //Act
         joana.updatePassword("Qwerty_1", "Qwerty_2", "Qwerty_2");
         Password pwdExp = new Password("Qwerty_2");
@@ -326,7 +406,8 @@ class UserTest {
         when(userProfile.getUserProfileId()).thenReturn(userProfileId);
         when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
+        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo,
+        userProfileId);
 
         List<UserProfileId> assignedProfileIdExpected = new ArrayList<>();
         assignedProfileIdExpected.add(userProfileId);
@@ -571,10 +652,13 @@ class UserTest {
         when(description.getText()).thenReturn("Visitor");
         Company company = new Company();
         //newUser and newUser2 are equals
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
-        SystemUser newUser2 = new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
+        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo,
+        userProfileId);
+        SystemUser newUser2 = new SystemUser(userName, email, function, password, passwordConfirmation, photo,
+        userProfileId);
         //newUser3 is different (different email)
-        SystemUser newUser3 = new SystemUser(userName, email2, function, password, passwordConfirmation, photo, userProfileId);
+        SystemUser newUser3 = new SystemUser(userName, email2, function, password, passwordConfirmation, photo,
+        userProfileId);
         //Assert
         assertNotSame(newUser, newUser2);
         assertEquals(newUser, newUser2);
@@ -598,7 +682,8 @@ class UserTest {
         when(userProfile.getUserProfileId()).thenReturn(userProfileId);
         when(userProfileId.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("Visitor");
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
+        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo,
+        userProfileId);
         assertFalse(newUser.isActive());
         //Act
         newUser.setActive(true);
@@ -781,7 +866,8 @@ class UserTest {
     void hasThisDataWithNameFail() {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.pt", "tester", "Querty_1", "Querty_1", "photo.png", pro.getUserProfileId());
+        SystemUser test = new SystemUser("Test", "xxxx@isep.pt", "tester", "Querty_1", "Querty_1", "photo.png", pro
+        .getUserProfileId());
         String name = "tesq";
         String email = "";
         String func = "";
@@ -885,7 +971,8 @@ class UserTest {
     void hasThisDataWithProfilesFail() {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
+        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png",
+        pro.getUserProfileId());
         String name = "";
         String email = "";
         String func = "";
@@ -899,7 +986,8 @@ class UserTest {
     void hasThisDataWithTwoParametersFail() {
         //Arrange
         UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
+        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png",
+        pro.getUserProfileId());
         String name = "test";
         String email = "axxx";
         String func = "";

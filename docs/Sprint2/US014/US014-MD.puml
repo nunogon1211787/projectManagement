@@ -1,43 +1,36 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-skinparam classAttributeIconSize 0
+
+'Layout Format---------------------------------------------
+left to right direction
 hide circle
+skinparam classAttributeIconSize 0
 
-title Domain Model excerpt - US014 - As Director, I want to define the Scrum Master of a project
+
+title Domain Model
 
 
-class Company{
-}
-class Project{
-}
-class Sprint{
+'Project Aggregate:--------------------------------------------------
+class Project #Yellow{
+-code
 -name
+-description
+-customer
+-businessSector
+-budget
+-sprintDuration
+-numberOfSprints
+}
+
+class Resource #Gold{
 -startDate
 -endDate
-}
-class ProjectTeam{
-}
-
-class Resource{
--startDate
--endDate
--role
--percentageOfAllocation
--costPerHour
+-CostPerHour
+-Allocation
+-Role
 }
 
-class ProjectRole{
--id
--name
-}
+Resource "*" --> "1" Project: is allocated to
 
-
-Company "1" -left-> "*" Project: contains
-Project "1" <-right- "1" ProjectTeam: belongs to
-
-ProjectTeam "1" <-- "*" Resource: belongs to
-ProjectRole "0..1" -left-> "*" Resource: has
-
-Project "1" <-right- "*" Sprint : is divided bt
 @enduml
