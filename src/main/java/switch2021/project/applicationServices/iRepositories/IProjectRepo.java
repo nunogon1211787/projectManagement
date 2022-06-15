@@ -23,7 +23,7 @@ public interface IProjectRepo {
     boolean existsById(ProjectID id);
 
     /**Save Projects Method**/
-   Optional<Project> save(Project newProject);
+   Project save(Project newProject);
 
     boolean deleteByProjectID(ProjectID id);
 

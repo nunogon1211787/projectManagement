@@ -55,25 +55,21 @@ public class ProjectService {
 
         if (iTypologyRepo.existsByTypologyId(new TypologyID(new Description(projDTO.typology/*.toLowerCase(Locale.ROOT)*/)))) {
             newProject = iProjectFactory.createProject(projDTO);
-            newProject.setProjectCode(new ProjectID("Project_" + LocalDate.now().getYear() + "_" + (projRepo.findAll().size() + 1)));
+            ProjectID projID = new ProjectID("Project_" + LocalDate.now().getYear() + "_" + (projRepo.findAll().size() + 1));
+
+            newProject.setProjectCode(projID);
         }else {
             throw new Exception("Typology does not exist");
         }
-
-        Optional<Project> savedProject = projRepo.save(newProject);
-
-        OutputProjectDTO projectDTO;
-
-        if (savedProject.isPresent()) {
-            projectDTO = projMapper.model2Dto(savedProject.get());
+        if (!projRepo.existsById(newProject.getProjectCode())) {
+            Project savedProject = projRepo.save(newProject);
+            return projMapper.model2Dto(savedProject);
         } else {
             throw new Exception("Project already exist.");
         }
-        return projectDTO;
     }
 
     public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) {
-//        String[] x = id.split("_");
         ProjectID projID = new ProjectID(id);
 
         Optional<Project> opProject = projRepo.findById(projID);
@@ -96,9 +92,9 @@ public class ProjectService {
                 proj.setTypologyId(new TypologyID(new Description(editProjectInfoDTO.typology)));
             }
 
-            Optional<Project> savedProject = projRepo.save(proj);
+            Project savedProject = projRepo.save(proj);
 
-            return savedProject.map(project -> projMapper.model2Dto(project)).orElse(null);
+            return projMapper.model2Dto(savedProject);
         }
 
         return null;
