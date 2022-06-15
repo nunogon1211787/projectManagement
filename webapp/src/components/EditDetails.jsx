@@ -42,75 +42,77 @@ export default function EditDetails(props) {
 
     fetchDetails(url, putRequest, dispatch);
     navToTable(dispatch);
-    navigate("/resources", {state: {projId: props.projID}});
+    navigate("/resources", { state: { projId: props.projID } });
 
 
   }
 
   const inputs = inputLabel.map((txt, idx) => {
     if (defaultValues[idx] !== "") {
+      const result = txt.replace(/[A-Z]/g, ' $&').trim();
       return (
-          <>
-            <div className="mb-3">
-              <label
-                  className="form-label"
-                  style={{
-                    display: "inline-block",
-                    textTransform: "capitalize",
-                  }}
-              >
-                {" "}
-                {txt}{" "}
-              </label>
-              <input
-                  key={idx}
-                  className="form-control"
-                  value={defaultValues[idx]}
-                  type={inputRules[idx]}
-                  name={txt}
-                  readOnly="true"
-              />
-            </div>
-          </>
+        <>
+          <div className="mb-3">
+            <label
+              className="form-label"
+              style={{
+                display: "inline-block",
+                textTransform: "capitalize",
+              }}
+            >
+              {" "}
+              {result}{" "}
+            </label>
+            <input
+              key={idx}
+              className="form-control"
+              value={defaultValues[idx]}
+              type={inputRules[idx]}
+              name={txt}
+              readOnly="true"
+            />
+          </div>
+        </>
       );
     } else {
+      const result = txt.replace(/[A-Z]/g, ' $&').trim();
       return (
-          <>
-            <div className="mb-3">
-              <label
-                  className="form-label"
-                  style={{
-                    display: "inline-block",
-                    textTransform: "capitalize",
-                  }}
-              >
-                {" "}
-                {txt}{" "}
-              </label>
-              <input
-                  key={idx}
-                  className="form-control"
-                  type={inputRules[idx]}
-                  name={txt}
-                  onChange={(e) =>
-                      setFormData({ ...formData, [e.target.name]: e.target.value })
-                  }
-              />
-            </div>
-          </>
+        <>
+          <div className="mb-3">
+            <label
+              className="form-label"
+              style={{
+                display: "inline-block",
+                textTransform: "capitalize",
+              }}
+            >
+              {" "}
+              {result}{" "}
+            </label>
+            <input
+              key={idx}
+              className="form-control"
+              type={inputRules[idx]}
+              name={txt}
+              onChange={(e) =>
+                setFormData({ ...formData, [e.target.name]: e.target.value })
+              }
+            />
+          </div>
+        </>
       );
     }
   });
 
   return (
-      <div className="card bg-light">
-        <form className="card-body" onSubmit={(e) => {
-            makePutRequest()
-        }}>
-          {inputs}
-          <br />
-          <Button name="save" type="submit" />
-        </form>
-      </div>
+    <div className="card bg-light">
+      <form className="card-body" onSubmit={(e) => {
+        makePutRequest()
+      }}>
+        {inputs}
+        <br />
+        <Button name="save" type="submit" />
+      </form>
+    </div>
   );
 }
