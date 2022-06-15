@@ -1,38 +1,34 @@
 package switch2021.project.interfaceAdapters.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.datasource.embedded.OutputStreamFactory;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import switch2021.project.applicationServices.service.ProjectService;
-import switch2021.project.dtoModel.dto.ErrorMessage;
+import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
-import switch2021.project.dtoModel.dto.TypologyDTO;
+import switch2021.project.entities.aggregates.Project.Project;
+import switch2021.project.entities.valueObjects.vos.Budget;
+import switch2021.project.entities.valueObjects.vos.Description;
+import switch2021.project.entities.valueObjects.vos.ProjectID;
+import switch2021.project.interfaceAdapters.repositories.ProjectRepository;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -44,43 +40,131 @@ class ProjectControllerTest {
     @MockBean
     ProjectService service;
 
+    @MockBean
+    ProjectRepository repo;
+
+
+
     @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
-    void testCreateProject() {
-
-        ProjectDTO test = new ProjectDTO();
-
-        test.projectName = "Project 2";
-        test.description = "Isto é um projecto test";
-        test.businessSector = "IT";
-        test.typology = "costfix";
-        test.customer = "Internal";
-        test.startDate = "2022-05-27";
-        test.endDate = "2022-06-27";
-        test.numberOfSprints = "1";
-        test.budget = "1000";
-        test.sprintDuration = "7";
-
-        ctrl.createProject(test);
-    }
-
 
     @Test
     void getAllProjectSuccess() {
-
         OutputProjectDTO test = mock(OutputProjectDTO.class);
         OutputProjectDTO test2 = mock(OutputProjectDTO.class);
         OutputProjectDTO test3 = mock(OutputProjectDTO.class);
-
         when(service.showAllProjects()).thenReturn(CollectionModel.of(List.of(new OutputProjectDTO[]{test, test2, test3})));
+
         ResponseEntity<?> response = ctrl.showAllProjects();
 
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
-
-
     }
+
+    @Test
+    void getAllProjectCatchException() {
+        ResponseEntity<?> response = ctrl.showAllProjects();
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
+    @SneakyThrows
+    @Test
+    void getProjectRequestedSuccess() {
+        OutputProjectDTO test = mock(OutputProjectDTO.class);
+        String x = "1";
+        when(test.getCode()).thenReturn(x);
+        when(service.showProject(x)).thenReturn(test);
+
+        ResponseEntity<?> response = ctrl.showProjectRequested(x);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+    @SneakyThrows
+    @Test
+    void getProjectRequestedCatchException() {
+        when(service.showProject(anyString())).thenThrow(Exception.class);
+
+        ResponseEntity<?> response = ctrl.showProjectRequested("1");
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
+    @SneakyThrows
+    @Test
+    void testCreateProject() {
+        ProjectDTO test = mock(ProjectDTO.class);
+        OutputProjectDTO outTest= mock(OutputProjectDTO.class);
+        when(service.createAndSaveProject(test)).thenReturn(outTest);
+
+        ResponseEntity<?> response = ctrl.createProject(test);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(201);
+    }
+
+    @SneakyThrows
+    @Test
+    void testCreateProjectException() {
+        ProjectDTO test = mock(ProjectDTO.class);
+        when(service.createAndSaveProject(test)).thenThrow(Exception.class);
+
+        ResponseEntity<?> response = ctrl.createProject(test);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
+    @SneakyThrows
+    @Test
+    void testUpdateProject() {
+        EditProjectInfoDTO test = mock(EditProjectInfoDTO.class);
+        OutputProjectDTO outTest= mock(OutputProjectDTO.class);
+        when(service.updateProjectPartially("1", test)).thenReturn(outTest);
+
+        ResponseEntity<?> response = ctrl.updateProjectPartially("1", test);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+
+    @Test
+    void testUpdateProjectException() {
+        EditProjectInfoDTO test = mock(EditProjectInfoDTO.class);
+        Project project = mock(Project.class);
+        Budget budget = mock(Budget.class);
+        doThrow(IllegalArgumentException.class).when(project).setBudget(budget);
+        when(service.updateProjectPartially(any(), any())).thenThrow(IllegalArgumentException.class);
+
+        ResponseEntity<?> response = ctrl.updateProjectPartially("1", test);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
+    @SneakyThrows
+    @Test
+    void testDeleteProject() {
+        ProjectDTO projDto = mock(ProjectDTO.class);
+        projDto.code = "1";
+        ctrl.createProject(projDto);
+
+        ResponseEntity<?> response = ctrl.deleteProjectRequest("1");
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+    @SneakyThrows
+    @Test
+    void testDeleteProjectException() {
+        ProjectID projId = new ProjectID("1");
+        doThrow(Exception.class).when(service).deleteProjectRequest(projId);
+
+        ResponseEntity<?> response = ctrl.deleteProjectRequest("1");
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
+
+
 }
