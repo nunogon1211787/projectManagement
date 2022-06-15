@@ -12,7 +12,6 @@ import switch2021.project.entities.aggregates.Typology.Typology;
 import switch2021.project.entities.valueObjects.vos.TypologyID;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TypologyService {
@@ -35,7 +34,7 @@ public class TypologyService {
      **/
     public TypologyDTO createAndSaveTypology(TypologyDTO inputDto) {
         Typology newTypo = this.iTypologyFactory.createTypology(inputDto);
-        if(iTypologyRepo.existsByTypologyId(newTypo.getId_description())) {
+        if(iTypologyRepo.existsByTypologyId(newTypo.getDescriptionID())) {
             throw new IllegalArgumentException("Typology already exists!");
         }
         Typology saved = iTypologyRepo.save(newTypo);

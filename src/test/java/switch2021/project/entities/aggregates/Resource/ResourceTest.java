@@ -21,7 +21,7 @@ class ResourceTest {
         CostPerHour costPerHour = mock(CostPerHour.class);
         ProjectRoleReeng projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
-        Resource res = new Resource(id, endDate, all, costPerHour,projRole);
+        Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         //Act
         Resource nullRes = new Resource();
         //Assert
@@ -36,7 +36,7 @@ class ResourceTest {
         CostPerHour costPerHour = mock(CostPerHour.class);
         ProjectRoleReeng projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
-        Resource res = new Resource(id, endDate, all, costPerHour,projRole);
+        Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         LocalDate end = LocalDate.of(2022, 12, 31);
         res.setEndDate(end);
         //Act
@@ -55,7 +55,7 @@ class ResourceTest {
         CostPerHour costPerHour = mock(CostPerHour.class);
         ProjectRoleReeng projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
-        Resource res = new Resource(id, endDate, all, costPerHour,projRole);
+        Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         LocalDate end = LocalDate.of(2022, 12, 31);
         res.setEndDate(end);
         //Act
@@ -74,7 +74,7 @@ class ResourceTest {
         CostPerHour costPerHour = mock(CostPerHour.class);
         ProjectRoleReeng projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
-        Resource res = new Resource(id, endDate, all, costPerHour,projRole);
+        Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         LocalDate end = LocalDate.of(2022, 12, 31);
         res.setEndDate(end);
         //Act
@@ -93,7 +93,7 @@ class ResourceTest {
         CostPerHour costPerHour = mock(CostPerHour.class);
         ProjectRoleReeng projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
-        Resource res = new Resource(id, endDate, all, costPerHour,projRole);
+        Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         LocalDate end = LocalDate.of(2022, 4, 30);
         res.setEndDate(end);
         //Act
@@ -112,7 +112,7 @@ class ResourceTest {
         CostPerHour costPerHour = mock(CostPerHour.class);
         ProjectRoleReeng projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
-        Resource res = new Resource(id, endDate, all, costPerHour,projRole);
+        Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         LocalDate end = LocalDate.of(2022, 5, 2);
         res.setEndDate(end);
         //Act
@@ -131,7 +131,7 @@ class ResourceTest {
         CostPerHour costPerHour = mock(CostPerHour.class);
         ProjectRoleReeng projRole = ProjectRoleReeng.TeamMember;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
-        Resource res = new Resource(id, endDate, all, costPerHour,projRole);
+        Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         //Assert
         assertTrue(res.hasProjectRole("TeamMember"));
     }
@@ -144,7 +144,7 @@ class ResourceTest {
         CostPerHour costPerHour = mock(CostPerHour.class);
         ProjectRoleReeng projRole = ProjectRoleReeng.TeamMember;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
-        Resource res = new Resource(id, endDate, all, costPerHour,projRole);
+        Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         //Assert
         assertFalse(res.hasProjectRole("ScrumMaster"));
     }
@@ -165,4 +165,111 @@ class ResourceTest {
         //Assert
         assertEquals(res, allRes);
     }
+
+    @Test
+    public void getInfo() {
+        //Arrange
+        ResourceID id = mock(ResourceID.class);
+        PercentageOfAllocation all = mock(PercentageOfAllocation.class);
+        CostPerHour costPerHour = mock(CostPerHour.class);
+        ProjectRoleReeng projRole = ProjectRoleReeng.TeamMember;
+        LocalDate endDate = LocalDate.of(2021, 12, 10);
+        //Act
+        Resource res = new Resource(id, endDate, all, costPerHour, projRole);
+        //Assert
+        assertEquals(id, res.getId());
+        assertEquals(endDate, res.getEndDate());
+        assertEquals(costPerHour, res.getCost());
+        assertEquals(projRole, res.getRole());
+        assertEquals(all, res.getAllocation());
+    }
+
+    @Test
+    public void sameIdentityAsTrue() {
+        //Arrange
+        ResourceID id = mock(ResourceID.class);
+        PercentageOfAllocation all = mock(PercentageOfAllocation.class);
+        CostPerHour costPerHour = mock(CostPerHour.class);
+        ProjectRoleReeng projRole = null;
+        LocalDate endDate = LocalDate.of(2021, 12, 10);
+        //Act
+        Resource res = new Resource(id, endDate, all, costPerHour, projRole);
+        Resource res2 = new Resource(id, endDate, all, costPerHour, projRole);
+        when(id.sameValueAs(id)).thenReturn(true);
+        //Assert
+        assertTrue(res.sameIdentityAs(res2));
+    }
+
+    @Test
+    public void sameIdentityAsFalse() {
+        //Arrange
+        ResourceID id = mock(ResourceID.class);
+        PercentageOfAllocation all = mock(PercentageOfAllocation.class);
+        CostPerHour costPerHour = mock(CostPerHour.class);
+        ProjectRoleReeng projRole = null;
+        LocalDate endDate = LocalDate.of(2021, 12, 10);
+        //Act
+        Resource res = new Resource(id, endDate, all, costPerHour, projRole);
+        Resource res2 = new Resource(id, endDate, all, costPerHour, projRole);
+        //Assert
+        assertFalse(res.sameIdentityAs(res2));
+    }
+
+    @Test
+    public void hashCodeSuccess() {
+        //Arrange
+        ResourceID id = mock(ResourceID.class);
+        PercentageOfAllocation all = mock(PercentageOfAllocation.class);
+        CostPerHour costPerHour = mock(CostPerHour.class);
+        ProjectRoleReeng projRole = null;
+        LocalDate endDate = LocalDate.of(2021, 12, 10);
+        //Act
+        Resource res = new Resource(id, endDate, all, costPerHour, projRole);
+        Resource res2 = new Resource(id, endDate, all, costPerHour, projRole);
+        //Assert
+        assertEquals(res.hashCode(), res2.hashCode());
+    }
+
+    @Test
+    public void hashCodeFail() {
+        //Arrange
+        ResourceID id = mock(ResourceID.class);
+        ResourceID id2 = mock(ResourceID.class);
+        PercentageOfAllocation all = mock(PercentageOfAllocation.class);
+        CostPerHour costPerHour = mock(CostPerHour.class);
+        ProjectRoleReeng projRole = null;
+        LocalDate endDate = LocalDate.of(2021, 12, 10);
+        //Act
+        Resource res = new Resource(id, endDate, all, costPerHour, projRole);
+        Resource res2 = new Resource(id2, endDate, all, costPerHour, projRole);
+        //Assert
+        assertNotEquals(res.hashCode(), res2.hashCode());
+    }
+
+    @Test
+    public void overrideTest() {
+        //Arrange
+        ResourceID id = mock(ResourceID.class);
+        ResourceID id2 = mock(ResourceID.class);
+        PercentageOfAllocation all = mock(PercentageOfAllocation.class);
+        CostPerHour costPerHour = mock(CostPerHour.class);
+        ProjectRoleReeng projRole = null;
+        LocalDate endDate = LocalDate.of(2021, 12, 10);
+        //Act
+        Resource res = new Resource(id, endDate, all, costPerHour, projRole);
+        Resource res2 = new Resource(id2, endDate, all, costPerHour, projRole);
+        Resource res3 = new Resource(id, endDate, all, costPerHour, projRole);
+
+        boolean expected = res.equals(res2);
+        boolean expected2 = res.equals(res);
+        //Assert
+        assertNotSame(res, res2);
+        assertEquals(res.getId(), res3.getId());
+        assertNotEquals(res.getId(), res2.getId());
+        assertFalse(expected);
+        assertTrue(expected2);
+
+
+    }
+
 }

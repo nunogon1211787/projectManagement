@@ -6,9 +6,7 @@ import switch2021.project.entities.aggregates.Typology.Typology;
 import switch2021.project.entities.valueObjects.vos.Description;
 import switch2021.project.entities.valueObjects.vos.Function;
 import switch2021.project.entities.valueObjects.vos.TypologyID;
-
 import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class FunctionTest {
@@ -92,6 +90,29 @@ class FunctionTest {
         assertNotEquals(function, test);
         assertEquals(function, function);
     }
+
+    @DisplayName("Test Same Value As")
+    @Test
+    public void sameValueAs() {
+        //Arrange
+        Function function = new Function("Function");
+        Function function1 = new Function("Function");
+        //Assert
+        assertTrue(function.sameValueAs(function1));
+    }
+
+
+    @DisplayName("Test override conditions for coverage purposes")
+    @Test
+    public void equalsTest_Boolean() {
+        //Arrange
+        Function function = new Function("Function");
+        Function function1 = new Function("Function");
+        //Assert
+        assertTrue(function.equals(function1));
+    }
+
+
 
     @Test
     @DisplayName("Test hashcode conditions for coverage purposes")

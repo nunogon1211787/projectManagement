@@ -2,8 +2,8 @@ package switch2021.project.interfaceAdapters.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import switch2021.project.dataModel.jpa.TypologyJpa;
-import switch2021.project.dataModel.assembler.TypologyJpaAssembler;
+import switch2021.project.dataModel.JPA.TypologyJpa;
+import switch2021.project.dataModel.JPA.assembler.TypologyJpaAssembler;
 import switch2021.project.applicationServices.iRepositories.ITypologyRepo;
 import switch2021.project.entities.aggregates.Typology.Typology;
 import switch2021.project.entities.valueObjects.vos.TypologyID;

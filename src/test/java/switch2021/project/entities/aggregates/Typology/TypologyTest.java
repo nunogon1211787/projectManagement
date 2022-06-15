@@ -19,7 +19,7 @@ public class TypologyTest {
         when(id.getDescription()).thenReturn(des);
         when(des.getText()).thenReturn("Test");
         //Assert
-        assertEquals("Test", typo.getId_description().getDescription().getText());
+        assertEquals("Test", typo.getDescriptionID().getDescription().getText());
     }
 
     @Test

@@ -30,10 +30,10 @@ public class TypologyMapperTest {
         list.add(typo2);
         list.add(typo3);
         list.add(typo4);
-        when(typo1.getId_description()).thenReturn(id);
-        when(typo2.getId_description()).thenReturn(id);
-        when(typo3.getId_description()).thenReturn(id);
-        when(typo4.getId_description()).thenReturn(id);
+        when(typo1.getDescriptionID()).thenReturn(id);
+        when(typo2.getDescriptionID()).thenReturn(id);
+        when(typo3.getDescriptionID()).thenReturn(id);
+        when(typo4.getDescriptionID()).thenReturn(id);
         when(id.getDescription()).thenReturn(des);
         when(des.getText()).thenReturn("Test");
         List<TypologyDTO> dto = mapper.modelToDto(list);
@@ -49,7 +49,7 @@ public class TypologyMapperTest {
         TypologyID id = mock(TypologyID.class);
         Description des = mock(Description.class);
         //Act
-        when(typo.getId_description()).thenReturn(id);
+        when(typo.getDescriptionID()).thenReturn(id);
         when(id.getDescription()).thenReturn(des);
         when(des.getText()).thenReturn("Test");
         TypologyDTO dto = mapper.modelToDto(typo);
@@ -65,7 +65,7 @@ public class TypologyMapperTest {
         TypologyID id = mock(TypologyID.class);
         Description des = mock(Description.class);
         //Act
-        when(typo.getId_description()).thenReturn(id);
+        when(typo.getDescriptionID()).thenReturn(id);
         when(id.getDescription()).thenReturn(des);
         when(des.getText()).thenReturn("Test");
         TypologyDTO dto = null;

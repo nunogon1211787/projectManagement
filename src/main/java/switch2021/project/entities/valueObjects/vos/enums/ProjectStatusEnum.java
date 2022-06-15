@@ -2,6 +2,9 @@ package switch2021.project.entities.valueObjects.vos.enums;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 public enum ProjectStatusEnum {
 
@@ -11,5 +14,16 @@ public enum ProjectStatusEnum {
     CONSTRUCTION,
     TRANSITION,
     WARRANTY,
-    CLOSED
+    CLOSED;
+
+    public static List<String> getProjectStatus() {
+
+        ProjectStatusEnum[] statusValues = ProjectStatusEnum.values();
+        List<String> projectStatusEnum = new ArrayList<>();
+
+        for (ProjectStatusEnum status : statusValues) {
+            projectStatusEnum.add(status.toString());
+        }
+        return projectStatusEnum;
+    }
 }

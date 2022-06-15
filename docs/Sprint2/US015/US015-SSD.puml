@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-title US015 System Sequence Diagram
+title US015 - As Director, I want to get a list of all projects
 
 autoactivate on
 autonumber
@@ -12,8 +12,7 @@ participant ":System" as System
 activate User
 
 User -> System: wants to get a list of all projects
-System->System: get the projects list
-deactivate System
+
 System-->User: return the list of all projects
 
 @enduml

@@ -4,8 +4,8 @@ package switch2021.project.interfaceAdapters.repositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.applicationServices.iRepositories.ITaskRepo;
-import switch2021.project.dataModel.assembler.TaskJpaAssembler;
-import switch2021.project.dataModel.jpa.TaskJpa;
+import switch2021.project.dataModel.JPA.assembler.TaskJpaAssembler;
+import switch2021.project.dataModel.JPA.TaskJpa;
 import switch2021.project.entities.aggregates.Task.Task;
 import switch2021.project.persistence.TaskJpaRepository;
 

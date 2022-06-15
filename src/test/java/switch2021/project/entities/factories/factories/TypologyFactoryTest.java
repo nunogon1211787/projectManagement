@@ -35,7 +35,7 @@ public class TypologyFactoryTest {
         when(dto.getDescription()).thenReturn("Test");
         when(idFactory.createId(dto)).thenReturn(id);
         //Assert
-        assertEquals(id, factory.createTypology(dto).getId_description());
+        assertEquals(id, factory.createTypology(dto).getDescriptionID());
     }
 
     @Test
@@ -47,6 +47,6 @@ public class TypologyFactoryTest {
         when(dto.getDescription()).thenReturn("Test");
         when(idFactory.createId(dto)).thenReturn(null);
         //Assert
-        assertNotEquals(id, factory.createTypology(dto).getId_description());
+        assertNotEquals(id, factory.createTypology(dto).getDescriptionID());
     }
 }
