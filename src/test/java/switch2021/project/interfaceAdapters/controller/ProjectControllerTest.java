@@ -1,8 +1,6 @@
 package switch2021.project.interfaceAdapters.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -18,13 +16,8 @@ import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.Budget;
-import switch2021.project.entities.valueObjects.vos.Description;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
-import switch2021.project.interfaceAdapters.repositories.ProjectRepository;
-
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.*;
@@ -40,11 +33,6 @@ class ProjectControllerTest {
     @MockBean
     ProjectService service;
 
-    @MockBean
-    ProjectRepository repo;
-
-
-
     @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
@@ -56,7 +44,8 @@ class ProjectControllerTest {
         OutputProjectDTO test = mock(OutputProjectDTO.class);
         OutputProjectDTO test2 = mock(OutputProjectDTO.class);
         OutputProjectDTO test3 = mock(OutputProjectDTO.class);
-        when(service.showAllProjects()).thenReturn(CollectionModel.of(List.of(new OutputProjectDTO[]{test, test2, test3})));
+        when(service.showAllProjects()).thenReturn(CollectionModel.of
+                (List.of(new OutputProjectDTO[]{test, test2, test3})));
 
         ResponseEntity<?> response = ctrl.showAllProjects();
 
@@ -128,7 +117,6 @@ class ProjectControllerTest {
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
 
-
     @Test
     void testUpdateProjectException() {
         EditProjectInfoDTO test = mock(EditProjectInfoDTO.class);
@@ -164,7 +152,5 @@ class ProjectControllerTest {
 
         assertThat(response.getStatusCodeValue()).isEqualTo(400);
     }
-
-
 
 }

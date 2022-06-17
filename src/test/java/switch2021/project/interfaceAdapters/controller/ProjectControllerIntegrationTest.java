@@ -1,5 +1,6 @@
 package switch2021.project.interfaceAdapters.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,14 +8,31 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import switch2021.project.applicationServices.service.ProjectService;
+import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.dto.TypologyDTO;
+import switch2021.project.dtoModel.mapper.ProjectMapper;
+import switch2021.project.entities.aggregates.Project.Project;
+import switch2021.project.entities.factories.factories.ProjectFactory;
+import switch2021.project.interfaceAdapters.repositories.ProjectRepository;
+import switch2021.project.interfaceAdapters.repositories.TypologyRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -30,11 +48,28 @@ class ProjectControllerIntegrationTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private ProjectService service;
+//
+//    @MockBean
+//    private TypologyRepository typoRepo;
+//
+//    @MockBean
+//    private ProjectFactory projFactory;
+//
+//    @MockBean
+//    private ProjectRepository projRepo;
+//
+//    @MockBean
+//    private ProjectMapper projMapper;
 
-    @BeforeEach
-    public void setUp() throws Exception {
-        MockitoAnnotations.openMocks(this);
-    }
+
+
+
+//    @BeforeEach
+//    public void setUp() throws Exception {
+//        MockitoAnnotations.openMocks(this);
+//    }
 
         @Test
         void shouldReturnNewProjectAndOk() throws Exception {
@@ -112,5 +147,47 @@ class ProjectControllerIntegrationTest {
             assertNotNull(resultContent);
             assertEquals("{\"errorMessage\":\"Project does not exist\"}", resultContent);
         }
+
+//    @Test
+//    void getAllProjectSuccessIntegrationCtrlAndService() {
+//        Project test = mock(Project.class);
+//        OutputProjectDTO test2 = mock(OutputProjectDTO.class);
+//        OutputProjectDTO test3 = mock(OutputProjectDTO.class);
+//        List<Project> projects = new ArrayList<>();
+//        projects.add(test);
+//        CollectionModel<OutputProjectDTO> x = (CollectionModel.of
+//                (List.of(new OutputProjectDTO[]{test2, test3})));
+//        when(projRepo.findAll()).thenReturn(projects);
+//        when(projMapper.toCollectionDto(projects)).thenReturn(x);
+//
+//        ResponseEntity<?> response = ctrl.showAllProjects();
+//
+//        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+//    }
+
+    @Test
+    void getAllProjectIntegrationCatchException() {
+        ResponseEntity<?> response = ctrl.showAllProjects();
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
+    @Test
+    void getAllProjectIntegration() {
+
+        ResponseEntity<?> response = ctrl.showAllProjects();
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+    @Test
+    void getAllProjectIntegrationService() {
+
+        CollectionModel<OutputProjectDTO> response = service.showAllProjects();
+
+        int x = response.getContent().size();
+
+        assertEquals(3, x);
+    }
 
 }
