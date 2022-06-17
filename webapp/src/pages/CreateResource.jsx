@@ -18,16 +18,6 @@ const postBody = {
   percentageOfAllocation: "",
 };
 
-const headerResource = {
-  "E-mail": "",
-  "Project": "",
-  "Role": "",
-  "Start Date": "",
-  "End Date": "",
-  "Cost Per Hour": "",
-  "Allocation": "",
-};
-
 const patchBody = {
   role: "",
   startDate: "",
@@ -35,7 +25,6 @@ const patchBody = {
   costPerHour: "",
   percentageOfAllocation: "",
 };
-
 
 const inputTypes = [
   "text",
@@ -99,7 +88,7 @@ export default function CreateResource() {
           </Box>
           <Box gridArea="main">
             <Table
-                collections={path} header= {headerResource}
+                collections={path}
             />
           </Box>
         </Grid>
