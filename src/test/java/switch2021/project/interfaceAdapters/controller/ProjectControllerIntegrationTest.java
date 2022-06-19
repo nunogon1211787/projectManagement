@@ -1,14 +1,10 @@
 package switch2021.project.interfaceAdapters.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.SneakyThrows;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,20 +15,11 @@ import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.dto.TypologyDTO;
-import switch2021.project.dtoModel.mapper.ProjectMapper;
-import switch2021.project.entities.aggregates.Project.Project;
-import switch2021.project.entities.factories.factories.ProjectFactory;
-import switch2021.project.interfaceAdapters.repositories.ProjectRepository;
-import switch2021.project.interfaceAdapters.repositories.TypologyRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -183,7 +170,7 @@ class ProjectControllerIntegrationTest {
     @Test
     void getAllProjectIntegrationService() {
 
-        CollectionModel<OutputProjectDTO> response = service.showAllProjects();
+        CollectionModel<OutputProjectDTO> response = service.getAllProjects();
 
         int x = response.getContent().size();
 
