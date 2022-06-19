@@ -95,15 +95,15 @@ public class ProjectController {
     @PatchMapping("/{id}")
     public ResponseEntity<Object> updateProjectPartially(@PathVariable("id") String id,
                                                          @RequestBody EditProjectInfoDTO editProjectInfoDTO) {
+        ErrorMessage message = new ErrorMessage();
         OutputProjectDTO outputProjectDTO;
         try {
             outputProjectDTO = service.updateProjectPartially(id, editProjectInfoDTO);
-            return new ResponseEntity<>(outputProjectDTO, HttpStatus.OK);
-        } catch (Exception error) {
-            ErrorMessage message = new ErrorMessage();
-            message.errorMessage = error.getMessage();
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
+        return new ResponseEntity<>(outputProjectDTO, HttpStatus.OK);
     }
 
 
@@ -119,9 +119,7 @@ public class ProjectController {
         try {
             service.deleteProjectRequest(projID);
             message.errorMessage = "Project was deleted successfully";
-
             message.add(linkTo(methodOn(ProjectController.class).showAllProjects()).withRel("Collection"));
-
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);

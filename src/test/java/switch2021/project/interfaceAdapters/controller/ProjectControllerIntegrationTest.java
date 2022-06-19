@@ -2,39 +2,31 @@ package switch2021.project.interfaceAdapters.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.datasource.embedded.OutputStreamFactory;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import switch2021.project.applicationServices.service.ProjectService;
-import switch2021.project.dtoModel.dto.ErrorMessage;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.dto.TypologyDTO;
-
-import java.util.List;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.MethodName.class)
 class ProjectControllerIntegrationTest {
 
     @Autowired
@@ -46,14 +38,18 @@ class ProjectControllerIntegrationTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private ProjectService service;
 
     @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
     }
 
+
+
         @Test
-        void shouldReturnNewProjectAndOk() throws Exception {
+        void ZshouldReturnNewProjectAndOk() throws Exception {
             ProjectDTO projectDTO = new ProjectDTO();
             TypologyDTO typologyDTO = new TypologyDTO();
 
@@ -69,13 +65,13 @@ class ProjectControllerIntegrationTest {
             projectDTO.typology = "Fixed cost";
             projectDTO.customer = "customer";
 
-            MvcResult resulttypo = mockMvc
-                    .perform(MockMvcRequestBuilders.post("/typologies")
-                            .contentType("application/json")
-                            .content(objectMapper.writeValueAsString(typologyDTO))
-                            .accept(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isCreated())
-                    .andReturn();
+//            MvcResult resulttypo = mockMvc
+//                    .perform(MockMvcRequestBuilders.post("/typologies")
+//                            .contentType("application/json")
+//                            .content(objectMapper.writeValueAsString(typologyDTO))
+//                            .accept(MediaType.APPLICATION_JSON))
+//                    .andExpect(status().isCreated())
+//                    .andReturn();
 
             MvcResult result = mockMvc
                     .perform(MockMvcRequestBuilders.post("/projects")
@@ -101,14 +97,15 @@ class ProjectControllerIntegrationTest {
             //GET projects/{id}
 
             MvcResult result2 = mockMvc
-                    .perform(MockMvcRequestBuilders.get("/projects/" + "Project_2022_1")
+                    .perform(MockMvcRequestBuilders.get("/projects/" + "Project_2022_4")
                             .accept(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())
                     .andReturn();
 
             String resultContent2 = result2.getResponse().getContentAsString();
             assertNotNull(resultContent2);
-            assertTrue(resultContent2.contains("Project_2022_1"));
+            assertTrue(resultContent2.contains("Project_2022_4"));
+
         }
 
         @Test
@@ -128,5 +125,47 @@ class ProjectControllerIntegrationTest {
             assertNotNull(resultContent);
             assertEquals("{\"errorMessage\":\"Project does not exist\"}", resultContent);
         }
+
+//    @Test
+//    void getAllProjectSuccessIntegrationCtrlAndService() {
+//        Project test = mock(Project.class);
+//        OutputProjectDTO test2 = mock(OutputProjectDTO.class);
+//        OutputProjectDTO test3 = mock(OutputProjectDTO.class);
+//        List<Project> projects = new ArrayList<>();
+//        projects.add(test);
+//        CollectionModel<OutputProjectDTO> x = (CollectionModel.of
+//                (List.of(new OutputProjectDTO[]{test2, test3})));
+//        when(projRepo.findAll()).thenReturn(projects);
+//        when(projMapper.toCollectionDto(projects)).thenReturn(x);
+//
+//        ResponseEntity<?> response = ctrl.showAllProjects();
+//
+//        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+//    }
+
+//    @Test
+//    void getAllProjectIntegrationCatchException() {
+//        ResponseEntity<?> response = ctrl.showAllProjects();
+//
+//        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+//    }
+
+    @Test
+    void getAllProjectIntegration() {
+
+        ResponseEntity<?> response = ctrl.showAllProjects();
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+    @Test
+    void AgetAllProjectIntegrationService() {
+
+        CollectionModel<OutputProjectDTO> response = service.showAllProjects();
+
+        int x = response.getContent().size();
+
+        assertEquals(3, x);
+    }
 
 }
