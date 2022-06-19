@@ -47,6 +47,8 @@ public class UserProfileService {
      */
     public CollectionModel<UserProfileDTO> showAllProfiles() {
 
+
+
         return userProfileMapper.toCollectionModel(userProfileRepositoryInterface.findAll());
 
     }

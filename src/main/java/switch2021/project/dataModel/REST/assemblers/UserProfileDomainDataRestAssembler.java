@@ -25,6 +25,19 @@ public class UserProfileDomainDataRestAssembler {
         return new UserProfile(userProfileID);
     }
 
+//    public UserProfileRestDTO toData(UserProfile userProfile) {
+//        return new UserProfileRestDTO(userProfile.getUserProfileId().getUserProfileName().getText());
+//    }
+//
+//    public CollectionModel<UserProfileRestDTO> toCollections(List<UserProfile> userProfiles) {
+//
+//        CollectionModel<UserProfileRestDTO> result = CollectionModel.of(userProfiles.stream()
+//                .map(this::toData)
+//                .collect(Collectors.toList()));
+//
+//        return result;
+//    }
+
     public List<UserProfile> toCollections(List<UserProfileRestDTO> userProfileRestDTO) {
 
         List<UserProfile> newList = new ArrayList<>();
