@@ -31,22 +31,25 @@ public class ProjectFactory implements IProjectFactory {
     @Autowired
     private IBudgetFactory budgetF;
 
+    @Autowired
+    private ITypologyIDFactory typologyIDFactory;
+
 
     @Override
     public Project createProject(ProjectDTO projectDTO) {
 
-        Description name = nameF.createDescription(projectDTO.projectName);
-        Description description = descF.createDescription(projectDTO.description);
-        BusinessSector businessSector = busSecF.createBusinessSector(projectDTO.businessSector);
-        LocalDate date = LocalDate.parse(projectDTO.startDate);
-        NumberOfSprints numberOfSprints = numberSprintsF.create(Integer.parseInt(projectDTO.numberOfSprints));
-        SprintDuration sprintDuration = sprintDurationF.create(Integer.parseInt(projectDTO.sprintDuration));
-        Budget budget = budgetF.create(Integer.parseInt(projectDTO.budget));
+        Description name = nameF.createDescription(projectDTO.getProjectName());
+        Description description = descF.createDescription(projectDTO.getDescription());
+        BusinessSector businessSector = busSecF.createBusinessSector(projectDTO.getBusinessSector());
+        LocalDate date = LocalDate.parse(projectDTO.getStartDate());
+        NumberOfSprints numberOfSprints = numberSprintsF.create(Integer.parseInt(projectDTO.getNumberOfSprints()));
+        SprintDuration sprintDuration = sprintDurationF.create(Integer.parseInt(projectDTO.getSprintDuration()));
+        Budget budget = budgetF.create(Integer.parseInt(projectDTO.getBudget()));
 
         Project project = new Project(name, description, businessSector, date, numberOfSprints,
                                       sprintDuration, budget);
 
-        project.setTypologyId((new TypologyID(new Description(projectDTO.getTypology()))));
+        project.setTypologyId((typologyIDFactory.createIdWithString(projectDTO.getTypology())));
 
         project.setCustomer((Customer.create(projectDTO.getCustomer())));
 

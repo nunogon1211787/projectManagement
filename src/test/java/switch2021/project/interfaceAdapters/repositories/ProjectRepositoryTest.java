@@ -7,8 +7,8 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import switch2021.project.dataModel.JPA.ProjectJpa;
-import switch2021.project.dataModel.JPA.assembler.ProjectJpaAssembler;
+import switch2021.project.datamodel.jpa.ProjectJpa;
+import switch2021.project.datamodel.jpa.assembler.ProjectJpaAssembler;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.persistence.ProjectJpaRepository;
@@ -115,7 +115,7 @@ public class ProjectRepositoryTest {
         when(projectJpaRepository.existsById(projId)).thenReturn(true);
 
         //Act
-        boolean result = projRepo.deleteByProjectID(projId);
+        boolean result = projRepo.delete(projId);
 
         //Assert
         assertTrue(result);
@@ -129,7 +129,7 @@ public class ProjectRepositoryTest {
         when(projectJpaRepository.existsById(projId)).thenReturn(false);
 
         //Act
-        boolean result = projRepo.deleteByProjectID(projId);
+        boolean result = projRepo.delete(projId);
 
         //Assert
         assertFalse(result);

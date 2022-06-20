@@ -72,13 +72,13 @@ public class ProjectService {
 
             newProject.setProjectCode(projID);
         } else {
-            throw new Exception("Typology does not exist");
+            throw new IllegalArgumentException("Typology does not exist");
         }
         if (!projRepo.existsById(newProject.getProjectCode())) {
             Project savedProject = projRepo.save(newProject);
             return projMapper.model2Dto(savedProject);
         } else {
-            throw new Exception("Project already exist.");
+            throw new IllegalArgumentException("Project already exist.");
         }
 
     }
@@ -86,10 +86,11 @@ public class ProjectService {
     private ProjectID generatedProjectId(){
         String format = "Project_" + LocalDate.now().getYear() + "_";
         int sequenceNumber = projRepo.findAll().size() + 1;
-        return projectIDFactory.create(format + sequenceNumber);
+        String id = format + sequenceNumber;
+        return projectIDFactory.create(id);
     }
 
-    public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) throws Exception {
+    public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) {
 
         ProjectID projID = projectIDFactory.create(id);
 
@@ -119,7 +120,7 @@ public class ProjectService {
             return projMapper.model2Dto(savedProject);
         }
 
-        throw new Exception("Project does not exist.");
+        throw new IllegalArgumentException("Project does not exist.");
     }
 
     public CollectionModel<OutputProjectDTO> getAllProjects() {
@@ -138,52 +139,53 @@ public class ProjectService {
 
     public OutputProjectDTO showProject(String id) throws Exception {
 
-        ProjectID projID = new ProjectID(id);
+        ProjectID projID = projectIDFactory.create(id);
 
         Optional<Project> foundProject = projRepo.findById(projID);
 
         if (foundProject.isEmpty()) {
-            throw new Exception("Project does not exist");
+            throw new IllegalArgumentException("Project does not exist");
         }
 
         return projMapper.model2Dto(foundProject.get());
     }
 
-    public List<OutputProjectDTO> showCurrentProjectsByUser(String UserId) {
-        List<OutputProjectDTO> projectsDto = new ArrayList<>();
+    public CollectionModel<OutputProjectDTO> showCurrentProjectsByUser(String UserId) {
+
         UserID userID = userIDFactory.createUserID(UserId);
 
         if (userRepo.existsById(userID)) {
+
             List<Resource> userResources = resRepo.findAllByUser(userID);
 
             List<Resource> currentUserResources = resService.currentResourcesByDate(userResources);
 
             List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
 
-            List<Project> projects = new ArrayList<>();
+            List<Project> projects = resourceProjects.stream().map(projectID ->
+                    projRepo.findById(projectID).get()
+            ).collect(Collectors.toList());
 
-            for (ProjectID projId : resourceProjects) {
+            List<OutputProjectDTO> projectsDto = projects.stream().map(project ->
+                    projMapper.model2Dto(project)
+            ).collect(Collectors.toList());
 
-                Project proj = projRepo.findById(projId).get();
+            return CollectionModel.of(projectsDto);
 
-                projects.add(proj);
-
-            }
-
-            for (Project proj : projects) {
-
-                OutputProjectDTO projDto = projMapper.model2Dto(proj);
-
-                projectsDto.add(projDto);
-
-            }
         }
-        return projectsDto;
+
+        throw new IllegalArgumentException("User dos not exist");
+
     }
 
-    public void deleteProjectRequest(ProjectID id) throws Exception {
-        if (!projRepo.deleteByProjectID(id)) {
-            throw new Exception("Project does not exist");
+    public boolean deleteProjectRequest(String id) {
+
+        ProjectID projectId = projectIDFactory.create(id);
+
+        if (!projRepo.delete(projectId)) {
+            throw new IllegalArgumentException("Project does not exist");
         }
+
+        return true;
     }
 }

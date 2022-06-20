@@ -300,7 +300,7 @@ class ProjectTest {
     }
 
     @Test
-    void isActiveInThisDateFalse() {
+    void isActiveInThisDateWithStartDateAfter() {
         //Arrange
         LocalDate startDate = LocalDate.now();
         Project project = new Project(projectName, description, businessSector, startDate,
@@ -310,6 +310,47 @@ class ProjectTest {
         boolean expected = project.isActiveInThisDate(LocalDate.now().minusDays(1));
         //Assert
         assertFalse(expected);
+    }
+
+    @Test
+    void isActiveInThisDateWithStartDateEqual() {
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        Project project = new Project(projectName, description, businessSector, startDate,
+                numberOfSprints
+                , sprintDuration, budget);
+        //Act
+        boolean expected = project.isActiveInThisDate(LocalDate.now());
+        //Assert
+        assertTrue(expected);
+    }
+
+    @Test
+    void isActiveInThisDateWithEndDateBefore() {
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        Project project = new Project(projectName, description, businessSector, startDate,
+                numberOfSprints
+                , sprintDuration, budget);
+        project.setEndDate(LocalDate.now().plusDays(10));
+        //Act
+        boolean expected = project.isActiveInThisDate(LocalDate.now().plusDays(20));
+        //Assert
+        assertFalse(expected);
+    }
+
+    @Test
+    void isActiveInThisDateWithEndDateAfter() {
+        //Arrange
+        LocalDate startDate = LocalDate.now();
+        Project project = new Project(projectName, description, businessSector, startDate,
+                numberOfSprints
+                , sprintDuration, budget);
+        //Act
+        project.setEndDate(LocalDate.now().plusDays(20));
+        boolean expected = project.isActiveInThisDate(LocalDate.now().plusDays(10));
+        //Assert
+        assertTrue(expected);
     }
 
     @Test

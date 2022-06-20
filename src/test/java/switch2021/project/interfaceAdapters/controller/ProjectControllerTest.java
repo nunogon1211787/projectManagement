@@ -145,12 +145,12 @@ class ProjectControllerTest {
     @SneakyThrows
     @Test
     void testDeleteProjectException() {
-        ProjectID projId = new ProjectID("1");
+        String projId = "1";
         doThrow(Exception.class).when(service).deleteProjectRequest(projId);
 
         ResponseEntity<?> response = ctrl.deleteProjectRequest("1");
 
-        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+        assertThat(response.getStatusCodeValue()).isEqualTo(404);
     }
 
 }
