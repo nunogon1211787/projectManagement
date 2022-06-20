@@ -219,7 +219,7 @@ class ProjectControllerIntegrationTest {
 
         OutputProjectDTO y = service.createAndSaveProject(x);
 
-        int xx = service.showAllProjects().getContent().size();
+        int xx = service.getAllProjects().getContent().size();
 
         assertEquals(4, xx);
     }
