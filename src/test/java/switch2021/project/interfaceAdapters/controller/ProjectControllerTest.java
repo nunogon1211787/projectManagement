@@ -44,7 +44,7 @@ class ProjectControllerTest {
         OutputProjectDTO test = mock(OutputProjectDTO.class);
         OutputProjectDTO test2 = mock(OutputProjectDTO.class);
         OutputProjectDTO test3 = mock(OutputProjectDTO.class);
-        when(service.showAllProjects()).thenReturn(CollectionModel.of
+        when(service.getAllProjects()).thenReturn(CollectionModel.of
                 (List.of(new OutputProjectDTO[]{test, test2, test3})));
 
         ResponseEntity<?> response = ctrl.showAllProjects();
