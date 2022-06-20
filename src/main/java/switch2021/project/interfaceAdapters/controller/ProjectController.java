@@ -13,8 +13,6 @@ import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 
 
-import java.util.List;
-
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -38,7 +36,7 @@ public class ProjectController {
         CollectionModel<OutputProjectDTO> allProjectsDto;
 
         try {
-            allProjectsDto = CollectionModel.of(service.showAllProjects());
+            allProjectsDto = CollectionModel.of(service.getAllProjects());
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();

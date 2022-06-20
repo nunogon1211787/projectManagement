@@ -161,7 +161,7 @@ class ProjectControllerIntegrationTest {
     @Test
     void AgetAllProjectIntegrationService() {
 
-        CollectionModel<OutputProjectDTO> response = service.showAllProjects();
+        CollectionModel<OutputProjectDTO> response = service.getAllProjects();
 
         int x = response.getContent().size();
 
