@@ -79,7 +79,7 @@ class ProjectControllerTest {
 
         ResponseEntity<?> response = ctrl.showProjectRequested("1");
 
-        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+        assertThat(response.getStatusCodeValue()).isEqualTo(404);
     }
 
     @SneakyThrows
