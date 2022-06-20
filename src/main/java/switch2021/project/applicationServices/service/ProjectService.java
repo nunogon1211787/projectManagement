@@ -3,10 +3,7 @@ package switch2021.project.applicationServices.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
-import switch2021.project.applicationServices.iRepositories.IProjectRepo;
-import switch2021.project.applicationServices.iRepositories.IResourceRepo;
-import switch2021.project.applicationServices.iRepositories.ITypologyRepo;
-import switch2021.project.applicationServices.iRepositories.IUserRepo;
+import switch2021.project.applicationServices.iRepositories.*;
 import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
@@ -20,9 +17,9 @@ import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Service
@@ -44,6 +41,8 @@ public class ProjectService {
     private IResourceRepo resRepo;
     @Autowired
     private ManagementResourcesService resService;
+    @Autowired
+    private IProjectWebRepository iProjectWebRepository;
     @Autowired
     private ITypologyIDFactory typologyIDFactory;
     @Autowired
@@ -72,7 +71,7 @@ public class ProjectService {
             ProjectID projID = generatedProjectId();
 
             newProject.setProjectCode(projID);
-        }else {
+        } else {
             throw new Exception("Typology does not exist");
         }
         if (!projRepo.existsById(newProject.getProjectCode())) {
@@ -123,11 +122,18 @@ public class ProjectService {
         throw new Exception("Project does not exist.");
     }
 
-    public CollectionModel<OutputProjectDTO> showAllProjects() {
+    public CollectionModel<OutputProjectDTO> getAllProjects() {
 
         List<Project> projects = projRepo.findAll();
+        List<Project> projectsWeb = iProjectWebRepository.findAll();
 
-        return projMapper.toCollectionDto(projects);
+        CollectionModel<OutputProjectDTO> outputProjectDTOS = projMapper.toCollectionDto(projectsWeb);
+        CollectionModel<OutputProjectDTO> outputProjectDTOS2= projMapper.toCollectionDto(projects);
+
+        List<OutputProjectDTO> newList = Stream.concat(outputProjectDTOS.getContent().stream(), outputProjectDTOS2.getContent().stream())
+                .collect(Collectors.toList());
+
+        return CollectionModel.of(newList);
     }
 
     public OutputProjectDTO showProject(String id) throws Exception {
@@ -177,7 +183,7 @@ public class ProjectService {
 
     public void deleteProjectRequest(ProjectID id) throws Exception {
         if (!projRepo.deleteByProjectID(id)) {
-            throw new Exception("Sprint does not exist");
+            throw new Exception("Project does not exist");
         }
     }
 }

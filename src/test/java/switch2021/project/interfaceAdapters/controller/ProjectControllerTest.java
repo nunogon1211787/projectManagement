@@ -1,22 +1,27 @@
 package switch2021.project.interfaceAdapters.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.commons.lang3.RandomStringUtils;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.ResponseEntity;
+import switch2021.project.applicationServices.service.ProjectService;
+import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
+import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
-import switch2021.project.dtoModel.dto.TypologyDTO;
+import switch2021.project.entities.aggregates.Project.Project;
+import switch2021.project.entities.valueObjects.vos.Budget;
+import switch2021.project.entities.valueObjects.vos.ProjectID;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -25,110 +30,127 @@ class ProjectControllerTest {
     @Autowired
     ProjectController ctrl;
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
+    @MockBean
+    ProjectService service;
 
     @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
     }
 
+
+    @Test
+    void getAllProjectSuccess() {
+        OutputProjectDTO test = mock(OutputProjectDTO.class);
+        OutputProjectDTO test2 = mock(OutputProjectDTO.class);
+        OutputProjectDTO test3 = mock(OutputProjectDTO.class);
+        when(service.getAllProjects()).thenReturn(CollectionModel.of
+                (List.of(new OutputProjectDTO[]{test, test2, test3})));
+
+        ResponseEntity<?> response = ctrl.showAllProjects();
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+    @Test
+    void getAllProjectCatchException() {
+        ResponseEntity<?> response = ctrl.showAllProjects();
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
+    @SneakyThrows
+    @Test
+    void getProjectRequestedSuccess() {
+        OutputProjectDTO test = mock(OutputProjectDTO.class);
+        String x = "1";
+        when(test.getCode()).thenReturn(x);
+        when(service.showProject(x)).thenReturn(test);
+
+        ResponseEntity<?> response = ctrl.showProjectRequested(x);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+    @SneakyThrows
+    @Test
+    void getProjectRequestedCatchException() {
+        when(service.showProject(anyString())).thenThrow(Exception.class);
+
+        ResponseEntity<?> response = ctrl.showProjectRequested("1");
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
+    @SneakyThrows
     @Test
     void testCreateProject() {
+        ProjectDTO test = mock(ProjectDTO.class);
+        OutputProjectDTO outTest= mock(OutputProjectDTO.class);
+        when(service.createAndSaveProject(test)).thenReturn(outTest);
 
-        ProjectDTO test = new ProjectDTO();
+        ResponseEntity<?> response = ctrl.createProject(test);
 
-        test.projectName = "Project 2";
-        test.description = "Isto é um projecto test";
-        test.businessSector = "IT";
-        test.typology = "costfix";
-        test.customer = "Internal";
-        test.startDate = "2022-05-27";
-        test.endDate = "2022-06-27";
-        test.numberOfSprints = "1";
-        test.budget = "1000";
-        test.sprintDuration = "7";
+        assertThat(response.getStatusCodeValue()).isEqualTo(201);
+    }
 
-        ctrl.createProject(test);
+    @SneakyThrows
+    @Test
+    void testCreateProjectException() {
+        ProjectDTO test = mock(ProjectDTO.class);
+        when(service.createAndSaveProject(test)).thenThrow(Exception.class);
+
+        ResponseEntity<?> response = ctrl.createProject(test);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
+    @SneakyThrows
+    @Test
+    void testUpdateProject() {
+        EditProjectInfoDTO test = mock(EditProjectInfoDTO.class);
+        OutputProjectDTO outTest= mock(OutputProjectDTO.class);
+        when(service.updateProjectPartially("1", test)).thenReturn(outTest);
+
+        ResponseEntity<?> response = ctrl.updateProjectPartially("1", test);
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
 
     @Test
-    void shouldReturnNewProjectAndOk() throws Exception {
-        ProjectDTO projectDTO = new ProjectDTO();
-        TypologyDTO typologyDTO = new TypologyDTO();
+    void testUpdateProjectException() {
+        EditProjectInfoDTO test = mock(EditProjectInfoDTO.class);
+        Project project = mock(Project.class);
+        Budget budget = mock(Budget.class);
+        doThrow(IllegalArgumentException.class).when(project).setBudget(budget);
+        when(service.updateProjectPartially(any(), any())).thenThrow(IllegalArgumentException.class);
 
-        typologyDTO.description = "fixed cost";
+        ResponseEntity<?> response = ctrl.updateProjectPartially("1", test);
 
-        projectDTO.projectName = "name";
-        projectDTO.description = "description";
-        projectDTO.businessSector = "sector";
-        projectDTO.startDate = "2028-12-12";
-        projectDTO.sprintDuration = "22";
-        projectDTO.numberOfSprints = "33";
-        projectDTO.budget = "11";
-        projectDTO.typology = "Fixed cost";
-        projectDTO.customer = "customer";
-
-        MvcResult resulttypo = mockMvc
-                .perform(MockMvcRequestBuilders.post("/typologies")
-                                 .contentType("application/json")
-                                 .content(objectMapper.writeValueAsString(typologyDTO))
-                                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated())
-                .andReturn();
-
-        MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.post("/projects")
-                                 .contentType("application/json")
-                                 .content(objectMapper.writeValueAsString(projectDTO))
-                                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated())
-                .andReturn();
-
-        String resultContent = result.getResponse().getContentAsString();
-        assertNotNull(resultContent);
-        assertTrue(resultContent.contains("\"projectName\":\"name\""));
-        assertTrue(resultContent.contains("\"description\":\"description\""));
-        assertTrue(resultContent.contains("businessSector\":\"sector"));
-        assertTrue(resultContent.contains("\"startDate\":\"2028-12-12\""));
-        assertTrue(resultContent.contains("\"numberOfSprints\":\"33\""));
-        assertTrue(resultContent.contains("budget\":\"11"));
-        assertTrue(resultContent.contains("status\":\"PLANNED"));
-        //assertEquals(objectMapper.writeValueAsString(projectDTO), resultContent); //O string retornado é diferente
-        // apesar de o objecto ser criado corretamente.
-
-
-        //GET projects/{id}
-
-        MvcResult result2 = mockMvc
-                .perform(MockMvcRequestBuilders.get("/projects/" + "Project_2022_1")
-                                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        String resultContent2 = result2.getResponse().getContentAsString();
-        assertNotNull(resultContent2);
-        assertTrue(resultContent2.contains("Project_2022_1"));
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
     }
 
+    @SneakyThrows
     @Test
-    void shouldReturnNotFound() throws Exception {
+    void testDeleteProject() {
+        ProjectDTO projDto = mock(ProjectDTO.class);
+        projDto.code = "1";
+        ctrl.createProject(projDto);
 
-        String generatedCode = RandomStringUtils.randomAlphanumeric(10);
+        ResponseEntity<?> response = ctrl.deleteProjectRequest("1");
 
-        //GET projects/{id}
-
-        MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get("/projects/" + generatedCode)
-                                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest())
-                .andReturn();
-
-        String resultContent = result.getResponse().getContentAsString();
-        assertNotNull(resultContent);
-        assertEquals("{\"errorMessage\":\"Project does not exist\"}", resultContent);
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
+
+    @SneakyThrows
+    @Test
+    void testDeleteProjectException() {
+        ProjectID projId = new ProjectID("1");
+        doThrow(Exception.class).when(service).deleteProjectRequest(projId);
+
+        ResponseEntity<?> response = ctrl.deleteProjectRequest("1");
+
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
 }

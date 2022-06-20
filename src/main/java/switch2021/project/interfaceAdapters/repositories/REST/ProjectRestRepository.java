@@ -9,48 +9,51 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.resources.ConnectionProvider;
-import switch2021.project.dataModel.REST.UserProfileRestDTO;
+import switch2021.project.dataModel.REST.ProjectRestDTO;
+
 import java.util.Collections;
 import java.util.List;
 
 
 @Repository
-public class UserProfileRestRepository {
+public class ProjectRestRepository {
 
-    public List<UserProfileRestDTO> findAll() {
+    public List<ProjectRestDTO> findAll() {
 
         WebClient webClient = WebClient.builder()
                 .baseUrl("http://localhost:8080")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .defaultUriVariables(Collections.singletonMap("url", "http://localhost:8080"))
-                .clientConnector( new ReactorClientHttpConnector( HttpClient.create(ConnectionProvider.newConnection())))
+                .clientConnector(new ReactorClientHttpConnector(HttpClient.create(ConnectionProvider.newConnection())))
                 .build();
-
-        UserProfileRestDTO userProfileRestDTO;
-
+        ProjectRestDTO projectRestDTO;
         try {
-            userProfileRestDTO = webClient
+            projectRestDTO = webClient
                     .get()
-                    .uri("/profiles/")
+                    .uri("/projects/")
                     .retrieve()
 
-                    .onStatus(HttpStatus::is4xxClientError, error -> { return Mono.empty(); })
+                    .onStatus(HttpStatus::is4xxClientError, error -> {
+                        return Mono.empty();
+                    })
 
-                    .bodyToMono(UserProfileRestDTO.class)
+                    .bodyToMono(ProjectRestDTO.class)
 
-                    .onErrorReturn( null )
+                    .onErrorReturn(null)
 
-                    .doOnError(throwable -> { System.out.println( throwable.getMessage() );} )
+                    .doOnError(throwable -> {
+                        System.out.println(throwable.getMessage());
+                    })
                     .block();
-        }
-        catch( Exception e) {
-            userProfileRestDTO = null;
+        } catch (Exception e) {
+            projectRestDTO = null;
         }
 
-        if(userProfileRestDTO != null)
-            return List.of(userProfileRestDTO);
+        if (projectRestDTO != null)
+            return List.of(projectRestDTO);
         else
             return
-            Collections.emptyList();
+                    Collections.emptyList();
     }
 }
+
