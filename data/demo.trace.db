@@ -20437,8 +20437,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:02 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:02:44 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -20472,11 +20472,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -20489,8 +20489,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:02 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:02:44 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -20524,11 +20524,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -20541,8 +20541,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:03 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:02:44 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -20576,11 +20576,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -20593,8 +20593,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:03 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:02:44 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -20628,11 +20628,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -20645,8 +20645,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:03 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:02:44 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -20680,11 +20680,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -20697,8 +20697,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:03 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:02:44 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -20732,11 +20732,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -20749,8 +20749,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:03 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:02:44 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -20784,11 +20784,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -20801,8 +20801,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:03 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:02:44 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -20836,11 +20836,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -20853,8 +20853,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:03 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:02:44 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -20888,11 +20888,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -20905,8 +20905,128 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:03 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:02:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.NullPointerException"; SQL statement:
+drop table if exists profiles CASCADE  [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.command.Command.executeUpdate(Command.java:259)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:228)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl.perform(SchemaDropperImpl.java:542)
+	at org.hibernate.internal.SessionFactoryImpl.close(SessionFactoryImpl.java:813)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.invokeProxyMethod(AbstractEntityManagerFactoryBean.java:519)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean$ManagedEntityManagerFactoryInvocationHandler.invoke(AbstractEntityManagerFactoryBean.java:734)
+	at com.sun.proxy.$Proxy124.close(Unknown Source)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.destroy(AbstractEntityManagerFactoryBean.java:653)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:213)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1161)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1106)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1075)
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:991)
+Caused by: java.lang.NullPointerException
+	at org.h2.mvstore.db.MVTable.doLock1(MVTable.java:211)
+	at org.h2.mvstore.db.MVTable.lock(MVTable.java:166)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:102)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:124)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:198)
+	at org.h2.command.Command.executeUpdate(Command.java:251)
+	... 24 more
+2022-06-20 12:02:45 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.NullPointerException"; SQL statement:
+drop table if exists profiles CASCADE  [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.command.Command.executeUpdate(Command.java:259)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:228)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl.perform(SchemaDropperImpl.java:542)
+	at org.hibernate.internal.SessionFactoryImpl.close(SessionFactoryImpl.java:813)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.invokeProxyMethod(AbstractEntityManagerFactoryBean.java:519)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean$ManagedEntityManagerFactoryInvocationHandler.invoke(AbstractEntityManagerFactoryBean.java:734)
+	at com.sun.proxy.$Proxy124.close(Unknown Source)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.destroy(AbstractEntityManagerFactoryBean.java:653)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:213)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1161)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1106)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1075)
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:991)
+Caused by: java.lang.NullPointerException
+	at org.h2.mvstore.db.MVTable.doLock1(MVTable.java:211)
+	at org.h2.mvstore.db.MVTable.lock(MVTable.java:166)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:102)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:124)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:198)
+	at org.h2.command.Command.executeUpdate(Command.java:251)
+	... 24 more
+2022-06-20 12:02:45 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.NullPointerException"; SQL statement:
+drop table if exists profiles CASCADE  [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.command.Command.executeUpdate(Command.java:259)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:228)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl.perform(SchemaDropperImpl.java:542)
+	at org.hibernate.internal.SessionFactoryImpl.close(SessionFactoryImpl.java:813)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.invokeProxyMethod(AbstractEntityManagerFactoryBean.java:519)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean$ManagedEntityManagerFactoryInvocationHandler.invoke(AbstractEntityManagerFactoryBean.java:734)
+	at com.sun.proxy.$Proxy124.close(Unknown Source)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.destroy(AbstractEntityManagerFactoryBean.java:653)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:213)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1161)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1106)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1075)
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:991)
+Caused by: java.lang.NullPointerException
+	at org.h2.mvstore.db.MVTable.doLock1(MVTable.java:211)
+	at org.h2.mvstore.db.MVTable.lock(MVTable.java:166)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:102)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:124)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:198)
+	at org.h2.command.Command.executeUpdate(Command.java:251)
+	... 24 more
+2022-06-20 12:07:42 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -20940,11 +21060,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -20957,8 +21077,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:03 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:07:42 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -20992,11 +21112,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -21009,8 +21129,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:03 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:07:42 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -21044,11 +21164,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -21061,8 +21181,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:03 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:07:42 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -21096,11 +21216,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -21113,8 +21233,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:03 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:07:43 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -21148,11 +21268,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -21165,8 +21285,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:03 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:07:43 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -21200,11 +21320,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -21217,8 +21337,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:04 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:07:43 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -21252,11 +21372,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -21269,8 +21389,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:04 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:07:43 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -21304,11 +21424,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -21321,8 +21441,8 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
-2022-06-20 18:04:04 database: flush
-org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+2022-06-20 12:07:43 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.get(DbException.java:194)
 	at org.h2.message.DbException.convert(DbException.java:347)
 	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:93)
@@ -21356,11 +21476,11 @@ org.h2.message.DbException: General error: "java.lang.IllegalStateException: The
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
 	at java.base/java.lang.Thread.run(Thread.java:834)
-Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]" [50000-200]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 33 more
-Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/user/Desktop/SWitCH/Projeto/projectg2/data/demo.mv.db [1.4.200/7]
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/david/New project/projectg2/data/demo.mv.db [1.4.200/7]
 	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:950)
 	at org.h2.mvstore.FileStore.open(FileStore.java:166)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:381)
@@ -21373,3 +21493,163 @@ Caused by: java.nio.channels.OverlappingFileLockException
 	at java.base/java.nio.channels.FileChannel.tryLock(FileChannel.java:1165)
 	at org.h2.mvstore.FileStore.open(FileStore.java:163)
 	... 28 more
+2022-06-20 12:07:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.NullPointerException"; SQL statement:
+drop table if exists profiles CASCADE  [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.command.Command.executeUpdate(Command.java:259)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:228)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl.perform(SchemaDropperImpl.java:542)
+	at org.hibernate.internal.SessionFactoryImpl.close(SessionFactoryImpl.java:813)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.invokeProxyMethod(AbstractEntityManagerFactoryBean.java:519)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean$ManagedEntityManagerFactoryInvocationHandler.invoke(AbstractEntityManagerFactoryBean.java:734)
+	at com.sun.proxy.$Proxy124.close(Unknown Source)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.destroy(AbstractEntityManagerFactoryBean.java:653)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:213)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1161)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1106)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1075)
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:991)
+Caused by: java.lang.NullPointerException
+	at org.h2.mvstore.db.MVTable.doLock1(MVTable.java:211)
+	at org.h2.mvstore.db.MVTable.lock(MVTable.java:166)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:102)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:124)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:198)
+	at org.h2.command.Command.executeUpdate(Command.java:251)
+	... 24 more
+2022-06-20 12:07:43 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.NullPointerException"; SQL statement:
+drop table if exists requests CASCADE  [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.command.Command.executeUpdate(Command.java:259)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:228)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl.perform(SchemaDropperImpl.java:542)
+	at org.hibernate.internal.SessionFactoryImpl.close(SessionFactoryImpl.java:813)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.invokeProxyMethod(AbstractEntityManagerFactoryBean.java:519)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean$ManagedEntityManagerFactoryInvocationHandler.invoke(AbstractEntityManagerFactoryBean.java:734)
+	at com.sun.proxy.$Proxy124.close(Unknown Source)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.destroy(AbstractEntityManagerFactoryBean.java:653)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:213)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1161)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1106)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1075)
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:991)
+Caused by: java.lang.NullPointerException
+	at org.h2.mvstore.db.MVTable.doLock1(MVTable.java:211)
+	at org.h2.mvstore.db.MVTable.lock(MVTable.java:166)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:102)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:124)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:198)
+	at org.h2.command.Command.executeUpdate(Command.java:251)
+	... 24 more
+2022-06-20 12:07:43 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.NullPointerException"; SQL statement:
+drop table if exists requests CASCADE  [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.command.Command.executeUpdate(Command.java:259)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:228)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl.perform(SchemaDropperImpl.java:542)
+	at org.hibernate.internal.SessionFactoryImpl.close(SessionFactoryImpl.java:813)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.invokeProxyMethod(AbstractEntityManagerFactoryBean.java:519)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean$ManagedEntityManagerFactoryInvocationHandler.invoke(AbstractEntityManagerFactoryBean.java:734)
+	at com.sun.proxy.$Proxy124.close(Unknown Source)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.destroy(AbstractEntityManagerFactoryBean.java:653)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:213)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1161)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1106)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1075)
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:991)
+Caused by: java.lang.NullPointerException
+	at org.h2.mvstore.db.MVTable.doLock1(MVTable.java:211)
+	at org.h2.mvstore.db.MVTable.lock(MVTable.java:166)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:102)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:124)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:198)
+	at org.h2.command.Command.executeUpdate(Command.java:251)
+	... 24 more
+2022-06-20 12:07:43 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.NullPointerException"; SQL statement:
+drop table if exists tasks_precedences CASCADE  [50000-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:505)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:194)
+	at org.h2.message.DbException.convert(DbException.java:347)
+	at org.h2.command.Command.executeUpdate(Command.java:259)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:228)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:201)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl.perform(SchemaDropperImpl.java:542)
+	at org.hibernate.internal.SessionFactoryImpl.close(SessionFactoryImpl.java:813)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.invokeProxyMethod(AbstractEntityManagerFactoryBean.java:519)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean$ManagedEntityManagerFactoryInvocationHandler.invoke(AbstractEntityManagerFactoryBean.java:734)
+	at com.sun.proxy.$Proxy124.close(Unknown Source)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.destroy(AbstractEntityManagerFactoryBean.java:653)
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:213)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:587)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:559)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1161)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:520)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1154)
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1106)
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1075)
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:991)
+Caused by: java.lang.NullPointerException
+	at org.h2.mvstore.db.MVTable.doLock1(MVTable.java:211)
+	at org.h2.mvstore.db.MVTable.lock(MVTable.java:166)
+	at org.h2.command.ddl.DropTable.prepareDrop(DropTable.java:102)
+	at org.h2.command.ddl.DropTable.update(DropTable.java:124)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:198)
+	at org.h2.command.Command.executeUpdate(Command.java:251)
+	... 24 more
