@@ -28,12 +28,12 @@ public class UserProfileController {
      * Find all profiles
      */
     @GetMapping
-    public ResponseEntity<Object> showAllProfiles(){
+    public ResponseEntity<Object> getAllProfiles(){
         ErrorMessage message = new ErrorMessage();
         CollectionModel<UserProfileDTO> outPutDTO;
 
         try {
-            outPutDTO = createUserProfileService.showAllProfiles();
+            outPutDTO = createUserProfileService.getAllProfiles();
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
@@ -118,7 +118,7 @@ public class UserProfileController {
             createUserProfileService.deleteARequestedUserProfile(id);
             message.errorMessage = "User profile successfully deleted";
 
-            message.add(linkTo(methodOn(UserProfileController.class).showAllProfiles()).withRel("Collection"));
+            message.add(linkTo(methodOn(UserProfileController.class).getAllProfiles()).withRel("Collection"));
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();

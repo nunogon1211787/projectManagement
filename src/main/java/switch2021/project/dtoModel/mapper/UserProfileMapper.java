@@ -26,7 +26,7 @@ public class UserProfileMapper {
         result.add(linkTo(methodOn(UserProfileController.class).showUserProfileRequested(result.description)).withSelfRel());
 
         //Add collection relation
-        result.add(linkTo(methodOn(UserProfileController.class).showAllProfiles()).withRel("Collection"));
+        result.add(linkTo(methodOn(UserProfileController.class).getAllProfiles()).withRel("Collection"));
 
         //Add edit option
         result.add(linkTo(methodOn(UserProfileController.class).editAUserProfile(result.description, result)).withRel("Edit"));
@@ -41,13 +41,13 @@ public class UserProfileMapper {
     public CollectionModel<UserProfileDTO> toCollectionModel(List<UserProfile> profiles){
 
          CollectionModel<UserProfileDTO> result = CollectionModel.of(profiles.stream()
-                .map(profile -> toDto(profile))
+                .map(this::toDto)
                 .collect(Collectors.toList()));
 
         //Add HATEOAS to OUTPUT DTOs
 
         //Add self relation
-        result.add(linkTo(methodOn(UserProfileController.class).showAllProfiles()).withSelfRel());
+        result.add(linkTo(methodOn(UserProfileController.class).getAllProfiles()).withSelfRel());
 
         return result;
     }

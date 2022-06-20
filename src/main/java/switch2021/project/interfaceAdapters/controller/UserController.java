@@ -5,10 +5,8 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import switch2021.project.dtoModel.dto.*;
-import switch2021.project.dtoModel.dto.RequestDTO;
-import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.applicationServices.service.UserService;
+import switch2021.project.dtoModel.dto.*;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -201,14 +199,9 @@ public class UserController {
         ResponseMessage response = new ResponseMessage();
 
         try{
-            if(userService.createAndAddRequest(id, requestDTO)) {
+            if(userService.createAndAddRequest(id, requestDTO))
                 response.responseMessage = "Creation of request profile was successfully!";
                 response.add(linkTo(methodOn(UserController.class).showAllUsers()).withRel("Collection"));
-            } else {
-                ErrorMessage msg = new ErrorMessage();
-                msg.errorMessage = "This User does not exist!";
-                return new ResponseEntity<>(msg, HttpStatus.BAD_REQUEST);
-            }
         } catch (Exception exception) {
             ErrorMessage msg = new ErrorMessage();
             msg.errorMessage = exception.getMessage();

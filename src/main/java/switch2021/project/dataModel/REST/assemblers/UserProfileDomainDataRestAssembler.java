@@ -6,9 +6,8 @@ import switch2021.project.dataModel.REST.UserProfileRestDTO;
 import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 import switch2021.project.entities.valueObjects.voFactories.voFactories.UserProfileIDFactory;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Component
@@ -18,6 +17,10 @@ public class UserProfileDomainDataRestAssembler {
     UserProfileIDFactory userProfileIDFactory;
 
 
+    /**
+     * @param userProfileRestDTO userProfileRestDTO
+     * @return userProfile
+     */
     public UserProfile toDomain(UserProfileRestDTO userProfileRestDTO) {
 
         UserProfileID userProfileID = userProfileIDFactory.createUserProfileID(userProfileRestDTO.getDescription());
@@ -25,26 +28,15 @@ public class UserProfileDomainDataRestAssembler {
         return new UserProfile(userProfileID);
     }
 
-//    public UserProfileRestDTO toData(UserProfile userProfile) {
-//        return new UserProfileRestDTO(userProfile.getUserProfileId().getUserProfileName().getText());
-//    }
-//
-//    public CollectionModel<UserProfileRestDTO> toCollections(List<UserProfile> userProfiles) {
-//
-//        CollectionModel<UserProfileRestDTO> result = CollectionModel.of(userProfiles.stream()
-//                .map(this::toData)
-//                .collect(Collectors.toList()));
-//
-//        return result;
-//    }
 
-    public List<UserProfile> toCollections(List<UserProfileRestDTO> userProfileRestDTO) {
+    /**
+     * @param userProfileRestDTO userProfileRestDTO
+     * @return List of User Profiles
+     */
 
-        List<UserProfile> newList = new ArrayList<>();
+    public List<UserProfile> toDomain(List<UserProfileRestDTO> userProfileRestDTO) {
 
-        userProfileRestDTO.forEach(uProfile -> newList.add(toDomain(uProfile)));
-
-        return newList;
+        return userProfileRestDTO.stream().map(this::toDomain).collect(Collectors.toList());
     }
 
 }
