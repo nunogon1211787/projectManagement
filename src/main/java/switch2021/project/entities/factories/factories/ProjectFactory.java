@@ -3,15 +3,15 @@ package switch2021.project.entities.factories.factories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import switch2021.project.dtoModel.dto.ProjectDTO;
+import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.*;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.aggregates.Project.Project;
-import switch2021.project.entities.aggregates.Typology.Typology;
 
 import java.time.LocalDate;
 
 @Component
-public class ProjectFactory implements switch2021.project.entities.factories.factoryInterfaces.IProjectFactory {
+public class ProjectFactory implements IProjectFactory {
 
     @Autowired
     private IDescriptionFactory nameF;
@@ -48,7 +48,7 @@ public class ProjectFactory implements switch2021.project.entities.factories.fac
 
         project.setTypologyId((new TypologyID(new Description(projectDTO.getTypology()))));
 
-        project.setCustomer((new Customer(projectDTO.getCustomer())));
+        project.setCustomer((Customer.create(projectDTO.getCustomer())));
 
         if (projectDTO.getEndDate() != null)
             project.setEndDate(LocalDate.parse(projectDTO.getEndDate()));

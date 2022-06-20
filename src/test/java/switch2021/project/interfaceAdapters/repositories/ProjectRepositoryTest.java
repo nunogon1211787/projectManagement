@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import switch2021.project.dataModel.JPA.assembler.ProjectJpaAssembler;
+import switch2021.project.datamodel.jpa.assembler.ProjectJpaAssembler;
 import switch2021.project.persistence.ProjectJpaRepository;
 
 import static org.mockito.Mockito.mock;

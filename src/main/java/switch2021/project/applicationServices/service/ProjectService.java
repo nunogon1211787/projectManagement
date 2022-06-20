@@ -15,7 +15,7 @@ import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManagementResourcesService;
 import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
-import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.*;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
@@ -44,18 +44,32 @@ public class ProjectService {
     private IResourceRepo resRepo;
     @Autowired
     private ManagementResourcesService resService;
+    @Autowired
+    private ITypologyIDFactory typologyIDFactory;
+    @Autowired
+    private IProjectIDFactory projectIDFactory;
+    @Autowired
+    private IDescriptionFactory descriptionFactory;
+    @Autowired
+    private INumberOfSprintsFactory numberOfSprintsFactory;
+    @Autowired
+    private IBudgetFactory budgetFactory;
+    @Autowired
+    private ISprintDurationFactory sprintDurationFactory;
 
 
-    public ProjectService() {
-    }
+    /**
+     * Methods to execute controller requests to Project Aggregate
+     */
+
 
     public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) throws Exception {
 
         Project newProject;
 
-        if (iTypologyRepo.existsByTypologyId(new TypologyID(new Description(projDTO.typology/*.toLowerCase(Locale.ROOT)*/)))) {
+        if (iTypologyRepo.existsByTypologyId(typologyIDFactory.createIdWithString(projDTO.getTypology().toLowerCase()))) {
             newProject = iProjectFactory.createProject(projDTO);
-            ProjectID projID = new ProjectID("Project_" + LocalDate.now().getYear() + "_" + (projRepo.findAll().size() + 1));
+            ProjectID projID = generatedProjectId();
 
             newProject.setProjectCode(projID);
         }else {
@@ -67,29 +81,38 @@ public class ProjectService {
         } else {
             throw new Exception("Project already exist.");
         }
+
     }
 
-    public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) {
-        ProjectID projID = new ProjectID(id);
+    private ProjectID generatedProjectId(){
+        String format = "Project_" + LocalDate.now().getYear() + "_";
+        int sequenceNumber = projRepo.findAll().size() + 1;
+        return projectIDFactory.create(format + sequenceNumber);
+    }
+
+    public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) throws Exception {
+
+        ProjectID projID = projectIDFactory.create(id);
 
         Optional<Project> opProject = projRepo.findById(projID);
-        Project proj;
 
         if (opProject.isPresent()) {
-            proj = opProject.get();
-            proj.setProjectName(new Description(editProjectInfoDTO.projectName));
-            proj.setDescription(new Description(editProjectInfoDTO.description));
-            proj.setStartDate(LocalDate.parse(editProjectInfoDTO.startDate));
-            proj.setNumberOfSprints(new NumberOfSprints(Integer.parseInt(editProjectInfoDTO.numberOfSprints)));
-            proj.setBudget(new Budget(Integer.parseInt(editProjectInfoDTO.budget)));
-            proj.setSprintDuration(new SprintDuration(Integer.parseInt(editProjectInfoDTO.sprintDuration)));
+            Project proj = opProject.get();
+            proj.setProjectName(descriptionFactory.createDescription(editProjectInfoDTO.getProjectName()));
+            proj.setDescription(descriptionFactory.createDescription(editProjectInfoDTO.getDescription()));
+            proj.setStartDate(LocalDate.parse(editProjectInfoDTO.getStartDate()));
+            proj.setNumberOfSprints(numberOfSprintsFactory.create(Integer.parseInt(editProjectInfoDTO.getNumberOfSprints())));
+            proj.setBudget(budgetFactory.create(Integer.parseInt(editProjectInfoDTO.getBudget())));
+            proj.setSprintDuration(sprintDurationFactory.create(Integer.parseInt(editProjectInfoDTO.getSprintDuration())));
 
-            proj.setProjectStatus(ProjectStatusEnum.valueOf(editProjectInfoDTO.projectStatus.toUpperCase()));
-            proj.setCustomer(new Customer(editProjectInfoDTO.customer));
-            proj.setEndDate(LocalDate.parse(editProjectInfoDTO.endDate));
+            proj.setProjectStatus(ProjectStatusEnum.valueOf(editProjectInfoDTO.getProjectStatus().toUpperCase()));
+            proj.setCustomer(Customer.create(editProjectInfoDTO.getCustomer()));
+            proj.setEndDate(LocalDate.parse(editProjectInfoDTO.getEndDate()));
 
-            if (iTypologyRepo.existsByTypologyId(new TypologyID(new Description(editProjectInfoDTO.typology)))) {
-                proj.setTypologyId(new TypologyID(new Description(editProjectInfoDTO.typology)));
+            TypologyID typoId = typologyIDFactory.createIdWithString(editProjectInfoDTO.getTypology().toLowerCase());
+
+            if (iTypologyRepo.existsByTypologyId(typoId)) {
+                proj.setTypologyId(typoId);
             }
 
             Project savedProject = projRepo.save(proj);
@@ -97,24 +120,7 @@ public class ProjectService {
             return projMapper.model2Dto(savedProject);
         }
 
-        return null;
-    }
-
-
-    private List<OutputProjectDTO> createProjectDTOList(List<Project> projects) {
-
-        List<OutputProjectDTO> allProjectsDto = new ArrayList<>();
-
-        for (Project proj : projects) {
-
-            OutputProjectDTO projDto = projMapper.model2Dto(proj);
-
-            allProjectsDto.add(projDto);
-
-        }
-
-        return allProjectsDto;
-
+        throw new Exception("Project does not exist.");
     }
 
     public CollectionModel<OutputProjectDTO> showAllProjects() {
@@ -125,7 +131,7 @@ public class ProjectService {
     }
 
     public OutputProjectDTO showProject(String id) throws Exception {
-//        String[] x = id.split("_");
+
         ProjectID projID = new ProjectID(id);
 
         Optional<Project> foundProject = projRepo.findById(projID);

@@ -1,10 +1,10 @@
-package switch2021.project.dataModel.JPA.assembler;
+package switch2021.project.datamodel.jpa.assembler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import switch2021.project.dataModel.JPA.ProjectJpa;
+import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
 import switch2021.project.entities.valueObjects.vos.*;
-import switch2021.project.entities.factories.factories.ProjectFactory;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class ProjectJpaAssembler {
 
     @Autowired
-    ProjectFactory factory;
+    IProjectFactory factory;
 
     public ProjectJpa toJpaData(Project project) {
 
@@ -72,7 +72,7 @@ public class ProjectJpaAssembler {
             typology = new TypologyID(new Description(projectJpa.getTypology()));
         }
         if (!(projectJpa.getCustomer() == null)) {
-            customer = new Customer(projectJpa.getCustomer());
+            customer = Customer.create(projectJpa.getCustomer());
         }
         if (!(projectJpa.getStatus() == null)) {
             status = ProjectStatusEnum.valueOf(projectJpa.getStatus());
