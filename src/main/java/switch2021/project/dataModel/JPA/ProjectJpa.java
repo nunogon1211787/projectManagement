@@ -1,4 +1,4 @@
-package switch2021.project.dataModel.JPA;
+package switch2021.project.datamodel.jpa;
 
 import lombok.*;
 import switch2021.project.entities.valueObjects.vos.ProjectID;

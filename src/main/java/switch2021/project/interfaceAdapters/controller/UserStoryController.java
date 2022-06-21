@@ -49,7 +49,7 @@ public class UserStoryController {
         CollectionModel<OutputUserStoryDTO> result;
 
         try {
-            result = CollectionModel.of(service.showAllUserStories());
+            result = service.showAllUserStories();
 
             if (result.getContent().isEmpty()) {
                 ErrorMessage message = new ErrorMessage();
@@ -73,7 +73,7 @@ public class UserStoryController {
         CollectionModel<OutputUserStoryDTO> result;
 
         try {
-            result = CollectionModel.of(service.consultProductBacklog(idProject));
+            result = service.consultProductBacklog(idProject);
 
             if (result.getContent().isEmpty()) {
                 ErrorMessage message = new ErrorMessage();
@@ -85,7 +85,7 @@ public class UserStoryController {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(result, HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 
