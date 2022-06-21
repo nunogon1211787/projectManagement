@@ -6,51 +6,50 @@ skinparam classAttributeIconSize 0
 title US008 - As a Project Manager i want to edit some project information
 
 
-package "System" <<Rectangle>> {
 
 '-------------------INFRASTRUCTURE-----------------------'
 package Infrastructure <<Rectangle>> #lightblue {
 
-package Routers <<Rectangle>> {
+package Routers {
 class "EditProjectRoute" as route <<Component>>
 }
 
-package "Persistence" <<Rectangle>> {
-    class "IProjectRepositoryJpa" as jpa <<Interface>>
+package "Persistence" {
+    interface "ProjectJpaRepository" as jpa <<Interface>>
     }
 
 }
 
 '-------------------INTERFACE ADAPTERS-------------------'
-package Interface_Adapters <<Rectangle>> #lightgreen{
+package InterfaceAdapters <<Rectangle>> #lightgreen{
 
-package Controllers <<Rectangle>> {
+package Controllers {
 class ProjectController <<component>> {
-+editProject()
++updateProjectPartially(editProjectInfoDTO)
 }
 }
 
-package Repositories <<Rectangle>> {
-class ProjectsRepository <<repository>> {
-+findByProjectId()
-+save()
+package Repositories {
+class ProjectRepository <<repository>> {
++findById(projID)
++save(proj)
 }
 }
 
 }
 
 '-------------------APPLICATION SERVICE------------------'
-package Application_Service <<Rectangle>> #salmon {
+package Application_Service <<Rectangle>> #lightpink {
 
-package IRepositories <<Rectangle>> {
+package IRepositories  {
 interface IProjectRepo <<interface>>{
-findByProjectId()
-save()
++ findByProjectId(projID)
++ save(proj)
 }
 }
 
-package App_Service <<Rectangle>> {
-class "EditProjectService" as srv <<service>> {
+package App_Service {
+class "ProjectService" as srv <<service>> {
 +editProject()
 }
 }
@@ -60,7 +59,7 @@ class "EditProjectService" as srv <<service>> {
 '-------------------DOMAIN-------------------------------'
 package Domain <<Rectangle>> #burlywood{
 
-package Aggregates <<Rectangle>> {
+package Aggregates {
 class Project <<root>> {
 -projectName
 -description
@@ -72,10 +71,11 @@ class Project <<root>> {
 -numberOfSprints
 -status
 -startDate
+-endDate
 }
 }
 
-package "Value Object" <<rectangle>>{
+package "Value Object" {
 class "ProjectId" as projId << Value Object >>{
 -code
 }
@@ -85,16 +85,49 @@ class "ProjectId" as projId << Value Object >>{
 
 '-------------------DTO----------------------------------'
 package DTO <<Rectangle>> #lightgrey{
+
+package "ProjectMapper" {
 class ProjectMapper <<component>> {
-+model2Dto()
++model2Dto(project)
 }
-class ProjectDTO <<component>>
+}
+package "OutputProjectDTO" {
+class OutputProjectDTO <<component>>{
+-projectName
+-description
+-customer
+-businessSector
+-typo
+-numberOfSprints
+-budget
+-status
+-startDate
+-endDate
+-sprintDuration
+}
+}
+package "EditProjectInfoDTO" {
+class EditProjectInfoDTO <<component>>{
+-code
+- projectName
+-description
+-customer
+-businessSector
+-typo
+-numberOfSprints
+-budget
+-status
+-startDate
+-endDate
+-sprintDuration
+}
+}
 }
 
 package "Data Model" <<Rectangle>>{
         class "ProjectJpaAssembler" as assemblerjpa <<Component>> {
-        +toData (project)
-        +toModel(projectJpa)
+        +toJpaData (proj)
+        +toDomain(savedProj)
         }
 
         class "projectJpa" as ProjJpa {
@@ -108,28 +141,26 @@ package "Data Model" <<Rectangle>>{
         -numberOfSprints
         -status
         -startDate
+        -endDate
         }
 }
 
-'-------------------OTHERS-------------------------------'
-class "ResponseEntity" as json <<Component>>
-
-}
 
 '-------------------RELATIONSHIPS------------------------'
 
 route ..> ProjectController
 ProjectController ..> srv
-ProjectController .r> json
 srv .> IProjectRepo
-srv .r.> ProjectMapper
+srv ..down> ProjectMapper
 srv ..> Project
-ProjectMapper .l> ProjectDTO
-ProjectsRepository ..> Project
-IProjectRepo <|.u. ProjectsRepository
-Project -r> projId
-ProjectsRepository ..> jpa
-ProjectsRepository ..> assemblerjpa
-ProjectsRepository ..> ProjJpa
+srv..down>EditProjectInfoDTO
+ProjectMapper .> OutputProjectDTO
+ProjectRepository ..> Project
+IProjectRepo <|.u. ProjectRepository
+Project -> projId
+ProjectRepository ..> jpa
+ProjectRepository ..> assemblerjpa
+ProjectRepository ..> ProjJpa
+'ProjectController..>OutputProjectDTO
 
 @enduml

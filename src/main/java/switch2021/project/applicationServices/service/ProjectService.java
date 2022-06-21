@@ -70,6 +70,10 @@ public class ProjectService {
         }
     }
 
+    /**
+    * US008
+     */
+
     public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) {
         ProjectID projID = new ProjectID(id);
 

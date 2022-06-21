@@ -1,9 +1,9 @@
 package switch2021.project.dtoModel.mapper;
 
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import switch2021.project.dtoModel.dto.OutputUserProfileDTO;
 import switch2021.project.interfaceAdapters.controller.UserProfileController;
-import switch2021.project.dtoModel.dto.UserProfileDTO;
 import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 
 import java.util.List;
@@ -27,23 +27,24 @@ public class UserProfileMapper {
 
         //Add collection relation
         result.add(linkTo(methodOn(UserProfileController.class).getAllProfiles()).withRel("Collection"));
+    public OutputUserProfileDTO toDTO(UserProfile newUserProfile) {
+        String description = newUserProfile.getUserProfileId().getUserProfileName().getText();
 
-        //Add edit option
-        result.add(linkTo(methodOn(UserProfileController.class).editAUserProfile(result.description, result)).withRel("Edit"));
+        OutputUserProfileDTO outputUserProfileDTO = new OutputUserProfileDTO(description);
 
-        //Add delete option
-        result.add(linkTo(methodOn(UserProfileController.class).deleteAUserProfile(result.description)).withRel("Delete"));
-
-        return result;
-
+        return outputUserProfileDTO;
     }
 
-    public CollectionModel<UserProfileDTO> toCollectionModel(List<UserProfile> profiles){
+    public CollectionModel<OutputUserProfileDTO> toCollectionDTO (List<UserProfile> userProfiles) {
 
+        CollectionModel <OutputUserProfileDTO> result = CollectionModel.of(userProfiles.stream()
+                .map(this::toDTO)
          CollectionModel<UserProfileDTO> result = CollectionModel.of(profiles.stream()
                 .map(this::toDto)
                 .collect(Collectors.toList()));
 
+        //HATEOAS - Get all UserProfiles
+        result.add(linkTo(methodOn(UserProfileController.class).showAllProfiles()).withSelfRel());
         //Add HATEOAS to OUTPUT DTOs
 
         //Add self relation
@@ -51,5 +52,4 @@ public class UserProfileMapper {
 
         return result;
     }
-
 }

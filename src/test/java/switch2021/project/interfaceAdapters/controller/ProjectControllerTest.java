@@ -41,115 +41,126 @@ class ProjectControllerTest {
 
     @Test
     void getAllProjectSuccess() {
+        //Arrange
         OutputProjectDTO test = mock(OutputProjectDTO.class);
         OutputProjectDTO test2 = mock(OutputProjectDTO.class);
         OutputProjectDTO test3 = mock(OutputProjectDTO.class);
         when(service.getAllProjects()).thenReturn(CollectionModel.of
                 (List.of(new OutputProjectDTO[]{test, test2, test3})));
-
+        //Act
         ResponseEntity<?> response = ctrl.showAllProjects();
-
+        //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
 
     @Test
     void getAllProjectCatchException() {
+        //Arrange
+        //Act
         ResponseEntity<?> response = ctrl.showAllProjects();
-
+        //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(400);
     }
 
     @SneakyThrows
     @Test
     void getProjectRequestedSuccess() {
+        //Arrange
         OutputProjectDTO test = mock(OutputProjectDTO.class);
         String x = "1";
         when(test.getCode()).thenReturn(x);
         when(service.showProject(x)).thenReturn(test);
-
+        //Act
         ResponseEntity<?> response = ctrl.showProjectRequested(x);
-
+        //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
 
     @SneakyThrows
     @Test
     void getProjectRequestedCatchException() {
+        //Arrange
         when(service.showProject(anyString())).thenThrow(Exception.class);
-
+        //Act
         ResponseEntity<?> response = ctrl.showProjectRequested("1");
-
+        //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(404);
     }
 
     @SneakyThrows
     @Test
     void testCreateProject() {
+        //Arrange
         ProjectDTO test = mock(ProjectDTO.class);
         OutputProjectDTO outTest= mock(OutputProjectDTO.class);
         when(service.createAndSaveProject(test)).thenReturn(outTest);
-
+        //Act
         ResponseEntity<?> response = ctrl.createProject(test);
-
+        //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(201);
     }
 
     @SneakyThrows
     @Test
     void testCreateProjectException() {
+        //Arrange
         ProjectDTO test = mock(ProjectDTO.class);
         when(service.createAndSaveProject(test)).thenThrow(Exception.class);
-
+        //Act
         ResponseEntity<?> response = ctrl.createProject(test);
-
+        //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(400);
     }
 
     @SneakyThrows
     @Test
     void testUpdateProject() {
+        //Arrange
         EditProjectInfoDTO test = mock(EditProjectInfoDTO.class);
         OutputProjectDTO outTest= mock(OutputProjectDTO.class);
         when(service.updateProjectPartially("1", test)).thenReturn(outTest);
-
+        //Act
         ResponseEntity<?> response = ctrl.updateProjectPartially("1", test);
-
+        //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
 
     @Test
     void testUpdateProjectException() {
+        //Arrange
         EditProjectInfoDTO test = mock(EditProjectInfoDTO.class);
         Project project = mock(Project.class);
         Budget budget = mock(Budget.class);
         doThrow(IllegalArgumentException.class).when(project).setBudget(budget);
         when(service.updateProjectPartially(any(), any())).thenThrow(IllegalArgumentException.class);
-
+        //Act
         ResponseEntity<?> response = ctrl.updateProjectPartially("1", test);
-
+        //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(400);
     }
 
     @SneakyThrows
     @Test
     void testDeleteProject() {
+        //Arrange
         ProjectDTO projDto = mock(ProjectDTO.class);
         projDto.code = "1";
         ctrl.createProject(projDto);
-
+        //Act
         ResponseEntity<?> response = ctrl.deleteProjectRequest("1");
-
+        //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
 
     @SneakyThrows
     @Test
     void testDeleteProjectException() {
+        //Arrange
         ProjectID projId = new ProjectID("1");
         doThrow(Exception.class).when(service).deleteProjectRequest(projId);
-
+        //Act
         ResponseEntity<?> response = ctrl.deleteProjectRequest("1");
-
+        //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(400);
     }
 

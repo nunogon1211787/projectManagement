@@ -9,7 +9,7 @@ participant ": IResourceRepo" as Repository
 participant ": ResourceJpaAssembler" as Assembler
 participant "resourceJPA : ResourceJpa" as resourceJPA
 participant ":IResourceRepositoryJpa" as Driver
-participant "savedData:Data" as Data
+participant "savedData : DBData" as Data
 participant "resource:Resource" as resource
 
 [o->Repository: save(newResource)

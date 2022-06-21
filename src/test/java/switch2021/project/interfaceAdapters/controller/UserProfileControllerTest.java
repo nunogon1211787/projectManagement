@@ -36,9 +36,6 @@ public class UserProfileControllerTest {
     }
 
 
-//    @Autowired
-//    UserProfileController userProfileController;
-
     @Test
     void shouldCreateAUserProfile() {
         // Arrange

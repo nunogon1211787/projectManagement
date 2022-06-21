@@ -24,7 +24,6 @@ public class ProjectController {
     @Autowired
     ProjectService service;
 
-
     /**
      * Find all projects
      *
@@ -109,7 +108,7 @@ public class ProjectController {
      * Delete project
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteProjectRequest(@PathVariable String id) {
+    public ResponseEntity<Object> deleteProjectRequest(@PathVariable("id") String id) {
         ErrorMessage message = new ErrorMessage();
 //        String[] x = id.split("_");
         ProjectID projID = new ProjectID(id);

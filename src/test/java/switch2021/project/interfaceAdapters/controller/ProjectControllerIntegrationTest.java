@@ -20,12 +20,10 @@ import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.dto.TypologyDTO;
-import switch2021.project.entities.aggregates.Project.Project;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -149,42 +147,46 @@ class ProjectControllerIntegrationTest {
 
     @Test
     void getAllProjectIntegration() {
-
+        //Arrange
+        //Act
         ResponseEntity<?> response = ctrl.showAllProjects();
-
+        //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
 
     @Test
     void AgetAllProjectIntegrationSize() {
-
+        //Arrange
+        //Act
         CollectionModel<OutputProjectDTO> response = service.getAllProjects();
-
         int x = response.getContent().size();
-
+        //Assert
         assertEquals(3, x);
     }
 
     @Test
     void getRequestedProjectIntegration() {
-
+        //Arrange
+        //Act
         ResponseEntity<?> response = ctrl.showProjectRequested("Project_2022_1");
-
+        //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
 
     @SneakyThrows
     @Test
     void getRequestedProjectIntegrationSpecific() {
-
+        //Arrange
+        //Act
         OutputProjectDTO x = service.showProject("Project_2022_1");
-
+        //Assert
         assertEquals("It doesn't matter", x.businessSector);
         assertEquals("8", x.numberOfSprints);
     }
 
     @Test
     void ZcreateProjectIntegration() {
+        //Arrange
         ProjectDTO x = new ProjectDTO();
         x.projectName = "Ze Manel";
         x.description = "Fazer cozido à Portuguesa";
@@ -196,15 +198,16 @@ class ProjectControllerIntegrationTest {
         x.projectStatus = "Planned";
         x.sprintDuration = "7";
         x.numberOfSprints = "10";
-
+        //Act
         ResponseEntity<?> response = ctrl.createProject(x);
-
+        //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(201);
     }
 
     @SneakyThrows
     @Test
     void CreateProjectIntegrationSize() {
+        //Arrange
         ProjectDTO x = new ProjectDTO();
         x.projectName = "Ze Manel";
         x.description = "Fazer cozido à Portuguesa";
@@ -216,22 +219,50 @@ class ProjectControllerIntegrationTest {
         x.projectStatus = "Planned";
         x.sprintDuration = "7";
         x.numberOfSprints = "10";
-
-        OutputProjectDTO y = service.createAndSaveProject(x);
-
+        //Act
+        service.createAndSaveProject(x);
         int xx = service.getAllProjects().getContent().size();
-
+        //Assert
         assertEquals(4, xx);
     }
 
     @SneakyThrows
     @Test
     void mockMvcTestFindProject() {
+        //Arrange
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get("/projects/project_2022_4")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andReturn();
+        //Act
+        String resultContent = result.getResponse( ).getContentAsString();
+        //Assert
+        assertNotNull(resultContent);
+        assertEquals("{\"errorMessage\":\"Project does not exist\"}", resultContent);
+    }
+
+    @SneakyThrows
+    @Test
+    void mockMvcTestShowAllProjects() {
+        //Arrange
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get("/projects")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+        //Act
+        String resultContent = result.getResponse( ).getContentAsString();
+        //Assert
+        assertNotNull(resultContent);
+        assertNull(result.getResponse().getErrorMessage());
+    }
+
+    @SneakyThrows
+    @Test
+    void mockMvcTestCreateProject() {
+        //Arrange
         ProjectDTO projectDTO = new ProjectDTO();
-        TypologyDTO typologyDTO = new TypologyDTO();
-
-        typologyDTO.description = "fixed cost";
-
         projectDTO.projectName = "name";
         projectDTO.description = "description";
         projectDTO.businessSector = "sector";
@@ -243,17 +274,33 @@ class ProjectControllerIntegrationTest {
         projectDTO.customer = "customer";
 
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get("/projects/project_2022_4")
+                .perform(MockMvcRequestBuilders.post("/projects")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(projectDTO))
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound())
+                .andExpect(status().isCreated())
                 .andReturn();
-
-        String resultContent = result.getResponse().getContentAsString();
+        //Act
+        String resultContent = result.getResponse( ).getContentAsString();
+        //Assert
         assertNotNull(resultContent);
-        assertEquals("{\"errorMessage\":\"Project does not exist\"}", resultContent);
-
-
+        assertNull(result.getResponse().getErrorMessage());
     }
+
+
+
+//        ProjectDTO projectDTO = new ProjectDTO();
+//        TypologyDTO typologyDTO = new TypologyDTO();
+//        typologyDTO.description = "fixed cost";
+//        projectDTO.projectName = "name";
+//        projectDTO.description = "description";
+//        projectDTO.businessSector = "sector";
+//        projectDTO.startDate = "2028-12-12";
+//        projectDTO.sprintDuration = "22";
+//        projectDTO.numberOfSprints = "33";
+//        projectDTO.budget = "11";
+//        projectDTO.typology = "Fixed cost";
+//        projectDTO.customer = "customer";
 
 
 }
