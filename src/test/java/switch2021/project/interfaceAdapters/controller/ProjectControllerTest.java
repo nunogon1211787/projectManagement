@@ -146,7 +146,7 @@ class ProjectControllerTest {
     @Test
     void testDeleteProjectException() {
         String projId = "1";
-        doThrow(Exception.class).when(service).deleteProjectRequest(projId);
+        doThrow(IllegalArgumentException.class).when(service).deleteProjectRequest(projId);
 
         ResponseEntity<?> response = ctrl.deleteProjectRequest("1");
 
