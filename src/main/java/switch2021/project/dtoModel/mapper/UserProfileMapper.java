@@ -1,9 +1,9 @@
 package switch2021.project.dtoModel.mapper;
 
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import switch2021.project.dtoModel.dto.OutputUserProfileDTO;
 import switch2021.project.interfaceAdapters.controller.UserProfileController;
-import switch2021.project.dtoModel.dto.UserProfileDTO;
 import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 
 import java.util.List;
@@ -12,44 +12,26 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-@Component
+@Service
 public class UserProfileMapper {
 
-    public UserProfileDTO toDto(UserProfile newUserProfile) {
-        String userProfileName = newUserProfile.getUserProfileId().getUserProfileName().getText();
+    public OutputUserProfileDTO toDTO(UserProfile newUserProfile) {
+        String description = newUserProfile.getUserProfileId().getUserProfileName().getText();
 
-        UserProfileDTO result = new UserProfileDTO(userProfileName);
+        OutputUserProfileDTO outputUserProfileDTO = new OutputUserProfileDTO(description);
 
-        //Add HATEOAS to OUTPUT DTOs
-
-        //Add self relation
-        result.add(linkTo(methodOn(UserProfileController.class).showUserProfileRequested(result.description)).withSelfRel());
-
-        //Add collection relation
-        result.add(linkTo(methodOn(UserProfileController.class).showAllProfiles()).withRel("Collection"));
-
-        //Add edit option
-        result.add(linkTo(methodOn(UserProfileController.class).editAUserProfile(result.description, result)).withRel("Edit"));
-
-        //Add delete option
-        result.add(linkTo(methodOn(UserProfileController.class).deleteAUserProfile(result.description)).withRel("Delete"));
-
-        return result;
-
+        return outputUserProfileDTO;
     }
 
-    public CollectionModel<UserProfileDTO> toCollectionModel(List<UserProfile> profiles){
+    public CollectionModel<OutputUserProfileDTO> toCollectionDTO (List<UserProfile> userProfiles) {
 
-         CollectionModel<UserProfileDTO> result = CollectionModel.of(profiles.stream()
-                .map(profile -> toDto(profile))
+        CollectionModel <OutputUserProfileDTO> result = CollectionModel.of(userProfiles.stream()
+                .map(this::toDTO)
                 .collect(Collectors.toList()));
 
-        //Add HATEOAS to OUTPUT DTOs
-
-        //Add self relation
+        //HATEOAS - Get all UserProfiles
         result.add(linkTo(methodOn(UserProfileController.class).showAllProfiles()).withSelfRel());
 
         return result;
     }
-
 }
