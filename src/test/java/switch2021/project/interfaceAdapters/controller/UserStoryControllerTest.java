@@ -51,12 +51,12 @@ public class UserStoryControllerTest {
     public void createAndSaveUSFail() {
         //Arrange
         UserStoryDTO dto = mock(UserStoryDTO.class);
-        Exception exception = mock(Exception.class);
+        Exception exception = mock(NullPointerException.class);
         when(service.createAndSaveUserStory(dto)).thenThrow(exception);
         HttpStatus expected = HttpStatus.BAD_REQUEST;
         //Act
         ResponseEntity<Object> result = controller.createAndSaveUserStory(dto);
-        //Asseert
+        //Assert
         assertEquals(expected, result.getStatusCode());
     }
 
