@@ -14,7 +14,7 @@ public class CustomerTest {
         //Arrange
         String customer = "Customer";
         //Act
-        Customer customer1 = new Customer(customer);
+        Customer customer1 = Customer.create(customer);
         //Assert
         assertEquals("Customer", customer1.getCustomerName().getText());
     }
@@ -25,7 +25,7 @@ public class CustomerTest {
         //Arrange
         String x = "Customer";
         //Act
-        Customer customer1 = new Customer(x);
+        Customer customer1 = Customer.create(x);
         //Assert
         assertNotEquals("Customer XPTO", customer1.getCustomerName().getText());
     }
@@ -35,7 +35,7 @@ public class CustomerTest {
     public void setCustomer() {
         //Arrange
         String customer = "Customer";
-        Customer customer1 = new Customer(customer);
+        Customer customer1 = Customer.create(customer);
         //Act
         String des = "IT";
         Description description = new Description(des);

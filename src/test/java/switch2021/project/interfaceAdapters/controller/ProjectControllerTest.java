@@ -156,12 +156,12 @@ class ProjectControllerTest {
     @Test
     void testDeleteProjectException() {
         //Arrange
-        ProjectID projId = new ProjectID("1");
-        doThrow(Exception.class).when(service).deleteProjectRequest(projId);
+        String projId = "1";
+        doThrow(IllegalArgumentException.class).when(service).deleteProjectRequest(projId);
         //Act
         ResponseEntity<?> response = ctrl.deleteProjectRequest("1");
         //Assert
-        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+        assertThat(response.getStatusCodeValue()).isEqualTo(404);
     }
 
 }

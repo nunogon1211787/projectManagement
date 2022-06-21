@@ -5,4 +5,6 @@ import switch2021.project.entities.valueObjects.vos.TypologyID;
 
 public interface ITypologyIDFactory {
     TypologyID createId(TypologyDTO inputDto);
+
+    TypologyID createIdWithString(String typoId);
 }

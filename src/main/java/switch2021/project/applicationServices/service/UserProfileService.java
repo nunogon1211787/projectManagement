@@ -4,14 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.applicationServices.iRepositories.IUserProfileRepo;
+import switch2021.project.applicationServices.iRepositories.IUserProfileWebRepository;
 import switch2021.project.dtoModel.dto.UserProfileDTO;
-import switch2021.project.entities.factories.factoryInterfaces.IUserProfileFactory;
-import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserProfileIDFactory;
 import switch2021.project.dtoModel.mapper.UserProfileMapper;
 import switch2021.project.entities.aggregates.UserProfile.UserProfile;
+import switch2021.project.entities.factories.factoryInterfaces.IUserProfileFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserProfileIDFactory;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Service
@@ -21,33 +25,51 @@ public class UserProfileService {
      * Attributes
      **/
     @Autowired
-    private IUserProfileRepo userProfileRepositoryInterface;
+    private IUserProfileRepo iUserProfileRepo;
     @Autowired
     private IUserProfileFactory iUserProfileFactory;
     @Autowired
     private IUserProfileIDFactory factoryId;
     @Autowired
     private UserProfileMapper userProfileMapper;
-
+    @Autowired
+    private IUserProfileWebRepository iUserProfileWebRepository;
 
     /**
      * Create and save a User Profile
      */
-    public UserProfileDTO createAndSaveUserProfile(UserProfileDTO dto) {
+    public UserProfileDTO createAndSaveUserProfile(UserProfileDTO dto) throws Exception {
 
         UserProfile newUserProfile = iUserProfileFactory.createUserProfile(dto);
-        if(userProfileRepositoryInterface.save(newUserProfile).isEmpty()){
-            throw new IllegalArgumentException("User Profile Already exists!");
+
+        Optional<UserProfile> userProfileSaved= iUserProfileRepo.save(newUserProfile);
+
+        UserProfileDTO outputUserProfileDTO;
+
+        if(userProfileSaved.isPresent()){
+            outputUserProfileDTO= userProfileMapper.toDTO(userProfileSaved.get());
         }
-        return userProfileMapper.toDto(newUserProfile);
+        else {
+            throw new Exception ("This User Profile already exists!");
+        }
+        return outputUserProfileDTO;
     }
 
     /**
      * To get all profiles
      */
-    public CollectionModel<UserProfileDTO> showAllProfiles() {
+    public CollectionModel<UserProfileDTO> getAllProfiles() {
 
-        return userProfileMapper.toCollectionModel(userProfileRepositoryInterface.findAll());
+        List<UserProfile> userProfileList = iUserProfileRepo.findAll();
+        List<UserProfile> userProfileWebList = iUserProfileWebRepository.findAll();
+
+        CollectionModel<UserProfileDTO> outputUserProfileList_DTO = userProfileMapper.toCollectionDTO(userProfileWebList);
+        CollectionModel<UserProfileDTO> outputUserProfileDTO_List = userProfileMapper.toCollectionDTO(userProfileList);
+
+        List<UserProfileDTO> newList = Stream.concat(outputUserProfileList_DTO.getContent().stream(), outputUserProfileDTO_List.getContent().stream())
+                .collect(Collectors.toList());
+
+        return CollectionModel.of(newList);
 
     }
 
@@ -55,15 +77,17 @@ public class UserProfileService {
      * Find a requested user profile
      */
 
-    public UserProfileDTO showUserProfileRequested(String id) {
-        UserProfileID profileId = factoryId.createUserProfileID(id);
+    public UserProfileDTO findUserProfileRequested(String id) throws Exception {
+        UserProfileID profileID = factoryId.createUserProfileID(id);
+       Optional<UserProfile> userProfile = iUserProfileRepo.findByUserProfileID(profileID);
 
-        Optional<UserProfile> requested = userProfileRepositoryInterface.findByUserProfileID(profileId);
+        if(userProfile.isEmpty()){
+            throw new Exception("We can not find the User Profile requested");
+        }
 
-        return requested.map(userProfile -> userProfileMapper.toDto(userProfile))
-                .orElse(null);
+        return userProfileMapper.toDTO(userProfile.get());
+
     }
-
 
     /**
      * To edit a profile
@@ -72,15 +96,15 @@ public class UserProfileService {
 
         UserProfileID profileId = factoryId.createUserProfileID(id);
 
-        Optional<UserProfile> requested = userProfileRepositoryInterface.findByUserProfileID(profileId);
+        Optional<UserProfile> requested = iUserProfileRepo.findByUserProfileID(profileId);
 
         if(requested.isEmpty()){
             throw new Exception("Profile does not exist.");
         }
 
-        userProfileRepositoryInterface.deleteById(profileId);
+        iUserProfileRepo.deleteById(profileId);
 
-        return createAndSaveUserProfile(inDto);
+        return createAndSaveUserProfile (inDto);
     }
 
     /**
@@ -90,7 +114,7 @@ public class UserProfileService {
 
         UserProfileID profileId = factoryId.createUserProfileID(id);
 
-        if(!userProfileRepositoryInterface.deleteById(profileId)){
+        if(!iUserProfileRepo.deleteById(profileId)){
             throw new Exception("User profile does not exist.");
         }
     }

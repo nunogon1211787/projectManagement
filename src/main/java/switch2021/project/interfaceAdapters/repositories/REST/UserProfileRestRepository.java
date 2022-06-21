@@ -20,9 +20,9 @@ public class UserProfileRestRepository {
     public List<UserProfileRestDTO> findAll() {
 
         WebClient webClient = WebClient.builder()
-                .baseUrl("http://localhost:8080")
+                .baseUrl("http://localhost:8090")
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .defaultUriVariables(Collections.singletonMap("url", "http://localhost:8080"))
+                .defaultUriVariables(Collections.singletonMap("url", "http://localhost:8090"))
                 .clientConnector( new ReactorClientHttpConnector( HttpClient.create(ConnectionProvider.newConnection())))
                 .build();
 

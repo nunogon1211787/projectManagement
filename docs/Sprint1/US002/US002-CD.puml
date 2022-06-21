@@ -10,11 +10,13 @@ skinparam classAttributeIconSize 0
 '''''''''''''''''''''''''''''''
 package "Infrastructure" <<Rectangle>> #lightblue  {
 package "Route"{
-    class "UserRoute" as route << Component >>
+    class "ActivateRegisterUserRoute" as route << Component >>
     }
 
 package "Persistence" {
-    interface "IUserJPARepository" as iUserRepositoryJPA << Interface >>
+    interface "IUserJPARepository" as iUserRepositoryJPA << Interface >>{
+    + saveAndFlush(userJPA)
+    }
     }
 }
 '''''''''''''''''''''''''''''''
@@ -28,7 +30,7 @@ package "Interface Adapter" <<Rectangle>> #lightgreen {
   package "Repositories" <<Folder>>{
     class "UserRepository" as UserRepo << Repository >> {
     + findUserByID(userID)
-    + update(opUser)
+    + save(user)
     }
   }
 }
@@ -36,13 +38,13 @@ package "Interface Adapter" <<Rectangle>> #lightgreen {
 package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
   package "App Service" <<Folder>>{
     class "UserService" as service << Component >> {
-    +createAndSaveSystemUser(NewUserInfoDTO)
+    +activateUser(user)
     }
   }
   package "Repositories Interface" <<Folder>>{
     interface "IUserRepo" as iUserRepo << Interface >>{
     + findUserByID(userID)
-    + update(opUser)
+    + save(user)
     }
   }
 }
@@ -76,10 +78,12 @@ package "Data Model" <<Rectangle>>{
 package "Assembler" as generalAssember {
     class "UserJPAAssembler" as assembler <<Component>>{
     +toDomain(foundUserJPA)
+    +toDomain(savedUserJPA)
     }
     }
 package "JPA" as generalJPA {
     class "UserJPA" as jpa {
+    + create()
     }
     }
 }

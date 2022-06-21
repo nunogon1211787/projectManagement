@@ -1,0 +1,142 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+'hide circle
+skinparam classAttributeIconSize 0
+
+title US010 - As Authenticated user, i want to update its own data (e.g. photo, function...)
+
+skinparam classAttributeIconSize 0
+
+package "Infrastructure" <<Rectangle>> #lightblue  {
+package "Route"{
+class "UpdatePersonalDataRoute" as route << Component >>
+}
+package "Persistence"{
+interface "UserJpaRepository" as iUserRepositoryJPA << Interface >>
+}
+}
+
+
+package "Interface Adapter" <<Rectangle>> #lightgreen {
+package "Controllers" <<Folder>>{
+class "UserController" as controller << Component >> {
++updatePersonalData(json)
+}
+}
+package "Repositories" {
+class "UserRepository" as repository << Repository >> {
++ findByUserId(userID)
++ save(user)
+}
+}
+}
+package "Application Service API" <<Rectangle>> #lightpink{
+package "App Service" <<Folder>>{
+class "UserService" as service << Component >> {
++updatePersonalData(updateDataDTO)
+}
+}
+package "IRepositories" <<Folder>>{
+interface "IUserRepo" as interfaceSystemUserRepo << Interface >>{
++ findByUserId(userID)
++ save(user)
+}
+}
+package IFactories {
+ interface "IUserIDFactory" as IUSerFactory <<Factory Interface>> {
+   +createUserID(id)
+    }
+ }
+}
+package "DTO" <<Rectangle>> {
+package "DTO " <<Folder>>{
+class "UpdateDataDTO" as dto << Component >> {
+- userName : String
+- function : String
+- photo : String
+- oldPassword : String
+- newPassword : String
+}
+class "OutPutUserDTO" as outputUserDTO << Component >> {
+- userName : String
+- email : String
+- function : String
+- photo : String
+- isActive : String
+- assignedIdProfiles : String []
+}
+}
+package "DTO" <<Folder>> {
+package "UserMapper" <<Folder>>{
+class "UserMapper" as mapper << Component >> {
++ toDto(updatedUser)
+}
+}
+}
+
+package "Data Model" <<Rectangle>>{
+package "Assembler" as generalAssember {
+    class "UserJpaAssembler" as assembler <<Component>>{
+    +toData(user)
+    +toDomain(updatedUserJpa)
+    }
+    }
+package "JPA" as generalJPA {
+    class "UserJPA" as jpa << Component >> {
+    - email : "UserID"
+    - userName : String
+    - function : String
+    - photo : String
+    - password : String
+    - isActive : String
+    - assignedIdProfiles : List<UserProfileID>
+    - requests : List<Resquest>
+    }
+    }
+}
+
+
+
+package "Domain" <<Rectangle>> #burlywood{
+package "Aggregate" <<Folder>>{
+class "User" as systemuser << Root >> {
+- userID : UserID
+- userName : Name
+- photo : Photo
+- password : Description
+- function : Function
+- isActive : false
+- assignedIdProfiles : List<UserProfileID>
+- requestedProfiles : List<Request>
++ editPersonalData(username, function, photo)
+}
+}
+ package "Factories" as factory <<Folder>>{
+    class "UserIDFactory" as SUFact << Factory >> {
+    +createUserID(id)
+    }
+    }
+   package "Value Object" as valueObject <<Folder>>{
+       class "UserID" as SUID << Value Object >> {
+       -email : Email
+       +SystemUserID(email)
+       }
+}
+repository..up>iUserRepositoryJPA
+route ..> controller
+controller ..> service
+service ..> dto
+service ..> interfaceSystemUserRepo
+repository ..|> interfaceSystemUserRepo
+service ..> IUSerFactory
+service ..> mapper
+mapper ..> outputUserDTO
+
+repository ..> jpa
+repository ..> assembler
+factory ..|>IUSerFactory
+SUID "1"*-->"1" systemuser : is identified by
+SUFact..>systemuser
+
+@enduml

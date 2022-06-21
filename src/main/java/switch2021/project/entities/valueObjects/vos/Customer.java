@@ -22,7 +22,11 @@ public class Customer {
      * Creates a new Customer instance.
      **/
 
-    public Customer(String customer) {
+    private Customer(String customer) {
         this.customerName = new Description(customer);
+    }
+
+    public static Customer create(String customer){
+        return new Customer(customer);
     }
 }

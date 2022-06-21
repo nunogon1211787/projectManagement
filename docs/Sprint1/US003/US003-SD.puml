@@ -5,15 +5,15 @@ title US003 - As Visitor, I want to send a request to the administrator to assig
 autoactivate on
 autonumber
 
-participant ": UserRoute" as UI
+participant ": SendProfileRequestRoute" as UI
 participant ": UserController" as Ctrl
 participant ": UserService" as Serv
 participant ": IUserRepo" as Repo
 participant "foundUserJpa: UserJpa" as FoundUser
 participant ": UserJpaAssembler" as Assembler
-participant "opUser: User" as Optional
-participant "profileRepo: UserProfileRepository" as ProfileRepo
-participant "userProfileJpaRepository: \n UserProfileJpaRepository" as DriverProfile
+participant "user: User" as Optional
+participant ": UserProfileRepository" as ProfileRepo
+participant ": UserProfileJpaRepository" as DriverProfile
 participant "newRequest : Request" as Request
 participant "userJpa: UserJpa" as UserJPA
 participant ":UserJpaRepository" as Driver
@@ -24,21 +24,21 @@ participant "response: ResponseEntity" as json
 
 
 [o-> UI: PATCH/users/{ID}/requests
-UI -> Ctrl: createAndAddRequest(Json)
-alt successful case
-    Ctrl -> Serv: createAndAddRequest(requestDto)
+note over UI: Change from json to dto hidden to simplify diagram
+UI -> Ctrl: createAndAddRequest(requestDTO)
+
+    Ctrl -> Serv: requestUserProfile(requestDto)
+    note over Serv: The VO (UserID, UserProfileID) creation was hidden to simplify the diagram
     Serv -> Repo: findByUserId(userID)
     Repo --> FoundUser**: create()
-    Repo -> Assembler: toDomain(foundUserJpa.get())
+    Repo -> Assembler: toDomain(foundUserJpa)
     Assembler --> Optional**: create()
-    return opUser
-    return opUser
-    alt successful case
+    return user
+    return user
         Serv -> ProfileRepo: existsByUserProfileId(userProfileID)
         ProfileRepo -> DriverProfile: existsById(userProfileID)
         return true
         return true
-    end
     Serv -> Optional: createProfileRequest(profileId)
     alt successful case
         Optional -> Request**: create(profileId)
@@ -46,9 +46,11 @@ alt successful case
     end
     deactivate Optional
     return true
-    Serv -> Repo: update(opUser)
-    Repo --> UserJPA**: create()
-    Repo -> Driver: save(userJpa)
+    Serv -> Repo: save(user)
+    Repo -> Assembler: toDomain(user)
+    Assembler --> UserJPA**: create()
+    Assembler --> Repo: userJpa
+    Repo -> Driver: saveAndFlush(userJpa)
     Driver --> SavedJpa**: create()
     return savedJpaUser
     Repo -> Assembler: toDomain(savedUserJpa)
@@ -56,7 +58,7 @@ alt successful case
     return savedUser
     return savedUser
     return true
-end
+
 Ctrl --> json**: create()
 return response
 return response

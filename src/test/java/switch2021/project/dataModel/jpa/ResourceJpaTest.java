@@ -1,10 +1,11 @@
-package switch2021.project.dataModel.coco;
+package switch2021.project.dataModel.jpa;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.dataModel.JPA.ResourceIDJpa;
 import switch2021.project.dataModel.JPA.ResourceJpa;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.mock;
 
 class ResourceJpaTest {
