@@ -161,7 +161,7 @@ class ProjectControllerTest {
         //Act
         ResponseEntity<?> response = ctrl.deleteProjectRequest("1");
         //Assert
-        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+        assertThat(response.getStatusCodeValue()).isEqualTo(404);
     }
 
 }

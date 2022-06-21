@@ -66,7 +66,7 @@ public class ProjectService {
 
         Project newProject;
 
-        if (iTypologyRepo.existsByTypologyId(typologyIDFactory.createIdWithString(projDTO.getTypology().toLowerCase()))) {
+        if (iTypologyRepo.existsByTypologyId(typologyIDFactory.createIdWithString(projDTO.getTypology()))) {
             newProject = iProjectFactory.createProject(projDTO);
             ProjectID projID = generatedProjectId();
 
@@ -113,7 +113,7 @@ public class ProjectService {
             proj.setCustomer(Customer.create(editProjectInfoDTO.getCustomer()));
             proj.setEndDate(LocalDate.parse(editProjectInfoDTO.getEndDate()));
 
-            TypologyID typoId = typologyIDFactory.createIdWithString(editProjectInfoDTO.getTypology().toLowerCase());
+            TypologyID typoId = typologyIDFactory.createIdWithString(editProjectInfoDTO.getTypology());
 
             if (iTypologyRepo.existsByTypologyId(typoId)) {
                 proj.setTypologyId(typoId);
