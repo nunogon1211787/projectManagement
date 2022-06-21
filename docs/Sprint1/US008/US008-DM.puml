@@ -4,7 +4,7 @@
 
 'Layout Format---------------------------------------------
 left to right direction
-hide circle
+'hide circle
 skinparam classAttributeIconSize 0
 
 
@@ -12,16 +12,18 @@ title Domain Model
 
 
 'Project Aggregate:--------------------------------------------------
-class Project #Yellow{
--name
+entity Project #Gold{
+-projectName
 -description
+-typologyId
+-projectStatus
 -customer
 -businessSector
+-numberOfSprints
 -budget
 -sprintDuration
--numberOfSprints
 -startDate
--status
+-endDate
 }
 
 @enduml

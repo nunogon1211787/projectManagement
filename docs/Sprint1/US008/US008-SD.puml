@@ -7,51 +7,50 @@ autoactivate on
 autonumber
 
 
-participant ":EditProjectRoute " as route
-participant "inDto: \nEditProjectDTO " as inDto
-participant ":ProjectController " as controller
-participant ":EditProjectService " as service
-participant ":IProjectRepo " as store
-participant ":ProjectMapper " as mapper
-participant "outputDTO: \nOutputProjectDTO " as dto
+participant ": EditProjectRoute " as route
+participant ": ProjectController " as controller
+participant ": ProjectService " as service
+participant ": IProjectRepo " as store
+participant ": ProjectMapper " as mapper
+participant "outputProjectDTO : \nOutputProjectDTO " as dto
 participant "exception: \nException" as exc
 participant "proj:Project " as project
 participant "response: \nResponseEntity" as json
 
 
 [o->  route: PATCH /projects/{id}
-route -> controller: editProject(inDto)
+route -> controller: updateProjectPartially\n(editProjectInfoDTO)
 
-note right route: Json object was deserialize to a EditProjectDto object
+note right route: Change from json to dto hidden to simplify diagram
 
-controller -> service: editProject(inDto)
+controller -> service: updateProjectPartially (editProjectInfoDTO)
 
-note over service : The creation of the id are hidden to simplify the diagram.
+note over service : The creation of the projID are hidden to simplify the diagram.
 
-service -> store: updateProjectPartially(projectId, editProjectInfoDTO)
+service -> store: findById(projID)
 
-ref over store: [[US008jpaGet-SD.puml]]
+ref over store: [[US008-SD-JPA-Project.puml]]
 
 store --> service: proj
 
 alt if project exist
 
-service -> project: editProjectInfo(inDto)
+service -> project: setProjectInfo(editProjectInfoDTO)
 
 note over project : The changes of attributes are hidden to simplify the diagram .
 
-project --> service : result
+project --> service : proj
 
 service -> store : save(proj)
 
-ref over store: [[US008jpaUpdate-SD.puml]]
-store --> service : proj
+ref over store: [[US008-SD-JPA-Save.puml]]
+store --> service : savedProj
 
-service -> mapper: model2DTO(proj)
+service -> mapper: model2DTO(savedProj)
 
-mapper -> dto**: model2DTO(proj)
+mapper -> dto**: create()
 
-mapper --> service: outputDto
+mapper --> service: outputProjectDTO
 
 else if project does not exist
 
@@ -59,9 +58,8 @@ service --> exc** : create(errorMessage)
 
 end
 
-service --> controller: outputDto
-
-controller --> json**: create(outputDto)
+service --> controller: outputProjectDTO
+controller --> json**: create(outputProjectDTO)
 
 controller --> route: response
 

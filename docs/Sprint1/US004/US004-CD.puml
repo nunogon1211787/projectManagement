@@ -5,15 +5,15 @@ title US004 - As Administrator, I want to search for users
 
 skinparam classAttributeIconSize 0
 
-package "System" <<Rectangle>> {
+
 
 package "Infrastructure" <<Rectangle>> #lightblue  {
-class "SearchUsersByParamsRoute" as route << Component >>
+class "SearchUsersByTypedParamsRoute" as route << Component >>
 }
 
 package "Interface Adapters" <<Rectangle>> #lightgreen {
 package "Controllers" <<rectangle>>{
-class "UsersController" as ctrl << Component >> {
+class "UserController" as ctrl << Component >> {
 +searchUsersByTypedParams()
 }
 }
@@ -108,7 +108,7 @@ class "SearchUserDto" as dataDto <<Component>>
 class "OutputUserDto" as dto <<Component>>
 }
 class "ResponseEntity" as json <<Component>>
-}
+
 
 route .d.> ctrl
 ctrl .d..> srv

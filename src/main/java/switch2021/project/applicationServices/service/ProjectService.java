@@ -90,6 +90,10 @@ public class ProjectService {
         return projectIDFactory.create(id);
     }
 
+    /**
+    * US008
+     */
+
     public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) {
 
         ProjectID projID = projectIDFactory.create(id);

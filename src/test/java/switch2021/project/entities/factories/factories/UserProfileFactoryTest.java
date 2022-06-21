@@ -44,8 +44,8 @@ public class UserProfileFactoryTest {
     public void createSprint_Success(){
         //Arrange
 
-        when(iDescriptionFactory.createDescription(userProfileDTO.description)).thenReturn(description);
-        when(iUserProfileIDFactory.createUserProfileID(userProfileDTO.description)).thenReturn(userProfileID);
+        when(iDescriptionFactory.createDescription(userProfileDTO.userProfileName)).thenReturn(description);
+        when(iUserProfileIDFactory.createUserProfileID(userProfileDTO.userProfileName)).thenReturn(userProfileID);
 
         //Act
         UserProfile userProfile = userProfileFactory.createUserProfile(userProfileDTO);

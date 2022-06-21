@@ -21,12 +21,12 @@ participant "response: \nResponseEntity" as json
 
 
 [o-> System: POST/userstories(json)
-System -> Ctrl: createUserStory(json)
+System -> Ctrl: createUserStory(userStoryDTO)
 note right
-Json object was deserialize to a CreateUserStoryDTO object
+Change from json to dto hidden to simplify diagram
 end note
-Ctrl -> appService: createAndSaveUserStory(inDto)
-appService -> factory:  createUserStory(inDto)
+Ctrl -> appService: createAndSaveUserStory(userStoryDTO)
+appService -> factory:  createUserStory(userStoryDTO)
 
 note over factory : All parameters (value objects) are instantiated in their own factories.
 
@@ -35,11 +35,11 @@ return newUserStory
 
 appService-> usStore: save(newUserStory)
 ref over usStore: [[US009-SD-JPA.puml]]
-return result
+return usSaved
 opt if the new userstory already exist
 appService --> exc** : create(errorMessage)
 end
-appService-> usMapper : toDto(newUserStory)
+appService-> usMapper : toDto(usSaved)
 usMapper-> outDto **:create()
 usMapper --> appService: outputUsDto
 appService --> Ctrl: outputUsDto

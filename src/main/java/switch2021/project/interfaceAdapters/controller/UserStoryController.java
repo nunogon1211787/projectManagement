@@ -27,11 +27,11 @@ public class UserStoryController {
      * Create a User Story (US009)
      */
     @PostMapping
-    public ResponseEntity<Object> createAndSaveUserStory(@RequestBody UserStoryDTO inDto) {
+    public ResponseEntity<Object> createAndSaveUserStory(@RequestBody UserStoryDTO userStoryDTO) {
         OutputUserStoryDTO newUserStory;
 
         try {
-            newUserStory = service.createAndSaveUserStory(inDto);
+            newUserStory = service.createAndSaveUserStory(userStoryDTO);
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();

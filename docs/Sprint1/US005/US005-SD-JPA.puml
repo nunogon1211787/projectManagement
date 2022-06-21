@@ -17,7 +17,7 @@ Repository -> Assembler : toData(newProject)
 Assembler -> projectJPA **: create ()
 Assembler --> Repository : ProjectJPA
 Repository -> Driver: save(projectJpa)
-Driver -> Data**: create(savedProjectJpa)
+Driver -> Data**: create()
 Driver --> Repository : savedData
 Repository -> Assembler: toDomain (savedData)
 Assembler -> project **: create()

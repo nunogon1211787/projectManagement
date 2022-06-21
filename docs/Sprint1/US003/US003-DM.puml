@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+'Layout Format---------------------------------------------
+left to right direction
+hide circle
+skinparam classAttributeIconSize 0
+
+
+title Domain Model
+
+class Profile #lightpink{
+-userProfileID
+}
+
+class SystemUser #lightyellow{
+-userName
+-photo
+-encryptedPassword
+-function
+-isActive
+}
+
+Profile "*" <-- "1" SystemUser
+
+@enduml

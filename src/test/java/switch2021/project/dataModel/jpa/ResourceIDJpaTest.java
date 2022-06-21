@@ -1,4 +1,4 @@
-package switch2021.project.dataModel.coco;
+package switch2021.project.dataModel.jpa;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.dataModel.JPA.ResourceIDJpa;

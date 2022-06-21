@@ -28,12 +28,12 @@ public class UserProfileController {
      * Find all profiles
      */
     @GetMapping
-    public ResponseEntity<Object> showAllProfiles(){
+    public ResponseEntity<Object> getAllProfiles(){
         ErrorMessage message = new ErrorMessage();
         CollectionModel<UserProfileDTO> outPutDTO;
 
         try {
-            outPutDTO = createUserProfileService.showAllProfiles();
+            outPutDTO = createUserProfileService.getAllProfiles();
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
@@ -50,12 +50,8 @@ public class UserProfileController {
          UserProfileDTO outPutDTO;
 
          try {
-             outPutDTO = createUserProfileService.showUserProfileRequested(id);
+             outPutDTO = createUserProfileService.findUserProfileRequested(id);
 
-             if(outPutDTO == null) {
-                 message.errorMessage = "Profile does not exist!";
-                 return new ResponseEntity<>(message,HttpStatus.NOT_FOUND);
-             }
          } catch (Exception exception) {
              message.errorMessage = exception.getMessage();
              return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
@@ -63,22 +59,19 @@ public class UserProfileController {
          return new ResponseEntity<>(outPutDTO, HttpStatus.OK);
      }
 
-
-
     /**
      * Create a User Profile
      */
     @PostMapping
-    public ResponseEntity<Object> createUserProfile(@RequestBody UserProfileDTO dto) {
+    public ResponseEntity<Object> createUserProfile(@RequestBody UserProfileDTO userProfileDTO) {
         ErrorMessage message = new ErrorMessage();
-        if(dto.description == null || dto.description.isEmpty()){
-            message.errorMessage = "User Profile Name cannot be empty.";
+        if(userProfileDTO.userProfileName == null || userProfileDTO.userProfileName.isEmpty()){
+            message.errorMessage = "User Profile Name can not be empty.";
             return new ResponseEntity<>(message, HttpStatus.NOT_ACCEPTABLE);
         }
         UserProfileDTO outPutDTO;
         try {
-
-            outPutDTO = createUserProfileService.createAndSaveUserProfile(dto);
+            outPutDTO = createUserProfileService.createAndSaveUserProfile(userProfileDTO);
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
@@ -118,7 +111,7 @@ public class UserProfileController {
             createUserProfileService.deleteARequestedUserProfile(id);
             message.errorMessage = "User profile successfully deleted";
 
-            message.add(linkTo(methodOn(UserProfileController.class).showAllProfiles()).withRel("Collection"));
+            message.add(linkTo(methodOn(UserProfileController.class).getAllProfiles()).withRel("Collection"));
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
