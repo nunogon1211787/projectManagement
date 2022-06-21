@@ -8,7 +8,8 @@ export function makeHTTPRequest(url, request, success, failure) {
               return Promise.reject(res);
          })
          .then((res) => res.json())
-         .then((res) => success(res))
+         .then((res) => {console.log(res)
+           success(res)})
          .catch((err) => {
               err.json().then((err) => {
                    failure(err.errorMessage);
