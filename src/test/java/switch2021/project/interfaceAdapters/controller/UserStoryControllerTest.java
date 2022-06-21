@@ -230,7 +230,7 @@ public class UserStoryControllerTest {
     }
 
     @Test
-    public void canselUSSuccess() {
+    public void cancelUSSuccess() {
         //Arrange
         String id = "Project_2022_1";
         OutputUserStoryDTO dto = mock(OutputUserStoryDTO.class);
