@@ -108,7 +108,7 @@ public class UserService {
 
 
     /**
-     * Update Personal Data and Change Password
+     * Update Personal Data and Change Password (US010 and US011)
      */
     public OutputUserDTO updatePersonalData(String id, UpdateDataDTO updateDataDTO) {
         UserID userID = userIDFactory.createUserID(id);

@@ -6,22 +6,22 @@ autonumber
 
 participant ": IUserStoryRepo" as Repository
 participant ": UserStoryJpaAssembler" as Assembler
-participant "userStoryJPA:UserStoryJpa" as USJPA
+participant "userStoryJpa : UserStoryJpa" as USJPA
 participant ":IUserStoryRepositoryJpa" as Driver
-participant "savedData:Data" as Data
-participant "userStory:UserStory" as US
+participant "savedDataJpa : DBData" as Data
+participant "usSaved : UserStory" as US
 
 [o->Repository: save(newUserStory)
 Repository -> Assembler : toData(newUserStory)
 Assembler -> USJPA **: create ()
-Assembler --> Repository : UserStoryJPA
+Assembler --> Repository : userStoryJpa
 Repository -> Driver: save(userStoryJpa)
-Driver -> Data**: create(savedUserStoryJpa)
-Driver --> Repository : savedData
-Repository -> Assembler: toDomain (savedData)
+Driver -> Data**: create()
+Driver --> Repository : savedDataJpa
+Repository -> Assembler: toDomain (savedDataJpa)
 Assembler -> US **: create()
-Assembler --> Repository :userStory
+Assembler --> Repository :usSaved
 
-[<--Repository: userStory
+[<--Repository: usSaved
 
 @enduml
