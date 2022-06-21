@@ -12,10 +12,10 @@ import switch2021.project.entities.factories.factoryInterfaces.IUserProfileFacto
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserProfileIDFactory;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @Service
@@ -66,10 +66,11 @@ public class UserProfileService {
         CollectionModel<UserProfileDTO> outputUserProfileList_DTO = userProfileMapper.toCollectionDTO(userProfileWebList);
         CollectionModel<UserProfileDTO> outputUserProfileDTO_List = userProfileMapper.toCollectionDTO(userProfileList);
 
-        List<UserProfileDTO> newList = Stream.concat(outputUserProfileList_DTO.getContent().stream(), outputUserProfileDTO_List.getContent().stream())
-                .collect(Collectors.toList());
+        Map mapProfiles = new HashMap();
+        mapProfiles.put("mine", outputUserProfileDTO_List);
+        mapProfiles.put("their", outputUserProfileList_DTO);
 
-        return CollectionModel.of(newList);
+        return (CollectionModel<UserProfileDTO>) mapProfiles;
 
     }
 
