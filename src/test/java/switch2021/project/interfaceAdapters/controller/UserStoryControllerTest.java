@@ -1,100 +1,330 @@
 package switch2021.project.interfaceAdapters.controller;
-//
-//
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import org.mockito.MockitoAnnotations;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import switch2021.project.applicationServices.service.ProjectService;
-import switch2021.project.dtoModel.dto.ProjectDTO;
-import switch2021.project.dtoModel.dto.UserStoryDTO;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 
-//import org.springframework.http.MediaType;
-//import org.springframework.test.web.servlet.MockMvc;
-//import org.springframework.test.web.servlet.MvcResult;
-//import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-//import switch2021.project.dtoModel.dto.UserStoryDTO;
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertNotNull;
-//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-//
-@AutoConfigureMockMvc
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import switch2021.project.applicationServices.service.UserStoryService;
+import switch2021.project.dtoModel.dto.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+
 @SpringBootTest
 public class UserStoryControllerTest {
-    //
-//    @Autowired
-//    private MockMvc mockMvc;
-//
-//    @Autowired
-//    private ObjectMapper objectMapper;
-//
-//    @BeforeEach
-//    public void setUp() throws Exception {
-//        MockitoAnnotations.openMocks(this);
-//    }
-//
-//    @Test
-//    void createNewUserStoryWithSuccess() throws Exception {
-//        String userStoryID ="Project_2022_1_As a PO, i want to test this string";
-//        String projectID = "Project_2022_1";
-//        String title = "As a PO, i want to test this string";
-//        int priority = 1;
-//        String description = "Make some tests";
-//        double timeEstimate = 5.0;
-//
-//        UserStoryDTO userStoryDTO = new UserStoryDTO(projectID, title, priority, description,timeEstimate);
-//
-//        MvcResult result = mockMvc
-//                .perform(MockMvcRequestBuilders.post("/userStories")
-//                        .contentType("application/json")
-//                        .content(objectMapper.writeValueAsString(userStoryDTO)) // or newCountryInfoMap
-//                        .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isCreated())
-//                .andReturn();
-//
-//        String resultContent = result.getResponse().getContentAsString();
-//        assertNotNull(resultContent);
-//        assertEquals(201, result.getResponse().getStatus());
-//
-//
-//    }
-//
-    @Autowired
-    UserStoryController ctrl;
 
-//    @Test
-//    void intTest(){
-//
-//        String test = "Project_2022_1&As%20fulano%20i%20want%20to%20teste";
-//
-//        ctrl.showUserStoryRequested(test);
-//
+    @MockBean
+    private UserStoryService service;
 
-    //    }
-    @Autowired
-    ProjectController projectController;
-    @Autowired
-    ProjectService service;
+    @InjectMocks
+    private UserStoryController controller;
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
-    void createAndSaveUserStory() {
+    public void createAndSaveUSSuccess() {
+        //Arrange
+        UserStoryDTO dto = mock(UserStoryDTO.class);
+        OutputUserStoryDTO outputDto = mock(OutputUserStoryDTO.class);
+        when(service.createAndSaveUserStory(dto)).thenReturn(outputDto);
+        ResponseEntity<Object> expected = new ResponseEntity<>(outputDto, HttpStatus.CREATED);
+        //Act
+        ResponseEntity<Object> result = controller.createAndSaveUserStory(dto);
+        //Assert
+        assertEquals(expected, result);
+    }
 
-        projectController.createProject(new ProjectDTO("avengers", "stuff", "entertaiment", "2028-12-12", "12",
-                "12000", "7","Fixed Cost", "customer"));
-        UserStoryDTO dto = new UserStoryDTO("Project_2022_1", "As cenas I want cenas", 1, "cenas fixes", 1000);
-        UserStoryDTO refineDto = new UserStoryDTO("Project_2022_1", "As cenas I want", 3, "fixes", 1000);
-        String id = "Project_2022_1&As cenas I want cenas";
+    @Test
+    public void createAndSaveUSFail() {
+        //Arrange
+        UserStoryDTO dto = mock(UserStoryDTO.class);
+        Exception exception = mock(Exception.class);
+        when(service.createAndSaveUserStory(dto)).thenThrow(exception);
+        HttpStatus expected = HttpStatus.BAD_REQUEST;
+        //Act
+        ResponseEntity<Object> result = controller.createAndSaveUserStory(dto);
+        //Asseert
+        assertEquals(expected, result.getStatusCode());
+    }
 
-        ctrl.createAndSaveUserStory(dto);
-        ctrl.refineUserStory(id,refineDto);
+    @Test
+    public void showAllUserStoriesSuccess() {
+        //Arrange
+        OutputUserStoryDTO dto1 = mock(OutputUserStoryDTO.class);
+        OutputUserStoryDTO dto2 = mock(OutputUserStoryDTO.class);
+        OutputUserStoryDTO dto3 = mock(OutputUserStoryDTO.class);
+        List<OutputUserStoryDTO> userStoriesDto = new ArrayList<>();
+        userStoriesDto.add(dto1);
+        userStoriesDto.add(dto2);
+        userStoriesDto.add(dto3);
+        CollectionModel<OutputUserStoryDTO> collection = CollectionModel.of(userStoriesDto);
+        when(service.showAllUserStories()).thenReturn(collection);
+        ResponseEntity<Object> expected = new ResponseEntity<>(collection, HttpStatus.OK);
+        //Act
+        ResponseEntity<Object> result = controller.showAllUserStories();
+        //Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void showAllUserStoriesEmpty() {
+        //Arrange
+        List<OutputUserStoryDTO> userStoriesDto = new ArrayList<>();
+        CollectionModel<OutputUserStoryDTO> collection = CollectionModel.of(userStoriesDto);
+        when(service.showAllUserStories()).thenReturn(collection);
+        HttpStatus expected = HttpStatus.NOT_FOUND;
+        //Act
+        ResponseEntity<Object> result = controller.showAllUserStories();
+        //Assert
+        assertEquals(expected, result.getStatusCode());
+    }
+
+    @Test
+    public void showAllUserStoriesFail() {
+        //Arrange
+        when(service.showAllUserStories()).thenReturn(null);
+        HttpStatus expected = HttpStatus.BAD_REQUEST;
+        //Act
+        ResponseEntity<Object> result = controller.showAllUserStories();
+        //Assert
+        assertEquals(expected, result.getStatusCode());
+    }
+
+    @Test
+    public void consultProductBacklogSuccess() throws Exception {
+        //Arrange
+        String projId = "Project_2022_1";
+        OutputUserStoryDTO dto1 = mock(OutputUserStoryDTO.class);
+        OutputUserStoryDTO dto2 = mock(OutputUserStoryDTO.class);
+        OutputUserStoryDTO dto3 = mock(OutputUserStoryDTO.class);
+        List<OutputUserStoryDTO> userStoriesDto = new ArrayList<>();
+        userStoriesDto.add(dto1);
+        userStoriesDto.add(dto2);
+        userStoriesDto.add(dto3);
+        CollectionModel<OutputUserStoryDTO> collection = CollectionModel.of(userStoriesDto);
+        when(service.consultProductBacklog(projId)).thenReturn(collection);
+        ResponseEntity<Object> expected = new ResponseEntity<>(collection, HttpStatus.OK);
+        //Act
+        ResponseEntity<Object> result = controller.consultProductBacklog(projId);
+        //Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void consultProductBacklogEmpty() throws Exception {
+        //Arrange
+        String projId = "Project_2022_1";
+        List<OutputUserStoryDTO> userStoriesDto = new ArrayList<>();
+        CollectionModel<OutputUserStoryDTO> collection = CollectionModel.of(userStoriesDto);
+        when(service.consultProductBacklog(projId)).thenReturn(collection);
+        HttpStatus expected = HttpStatus.NOT_FOUND;
+        //Act
+        ResponseEntity<Object> result = controller.consultProductBacklog(projId);
+        //Assert
+        assertEquals(expected, result.getStatusCode());
+    }
+
+    @Test
+    public void consultProductBacklogFail() throws Exception {
+        //Arrange
+        String projId = "Project_2022_1";
+        when(service.consultProductBacklog(projId)).thenReturn(null);
+        HttpStatus expected = HttpStatus.BAD_REQUEST;
+        //Act
+        ResponseEntity<Object> result = controller.consultProductBacklog(projId);
+        //Assert
+        assertEquals(expected, result.getStatusCode());
+    }
+
+    @Test
+    public void showUserStoryRequestedSuccess() {
+        //Arrange
+        String id = "Project_2022_1";
+        OutputUserStoryDTO dto = mock(OutputUserStoryDTO.class);
+        when(service.showAUserStory(id)).thenReturn(dto);
+        ResponseEntity<Object> expected = new ResponseEntity<>(dto, HttpStatus.OK);
+        //Act
+        ResponseEntity<Object> result = controller.showUserStoryRequested(id);
+        //Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void showUserStoryRequestedFail() {
+        //Arrange
+        String id = "Project_2022_1";
+        Exception exception = mock(NullPointerException.class);
+        when(service.showAUserStory(id)).thenThrow(exception);
+        HttpStatus expected = HttpStatus.BAD_REQUEST;
+        //Act
+        ResponseEntity<Object> result = controller.showUserStoryRequested(id);
+        //Assert
+        assertEquals(expected, result.getStatusCode());
+    }
+
+    @Test
+    public void estimateEffortSuccess() {
+        //Arrange
+        String id = "Project_2022_1";
+        UpdateUserStoryDTO updateDto = mock(UpdateUserStoryDTO.class);
+        OutputUserStoryDTO dto = mock(OutputUserStoryDTO.class);
+        when(service.updateUSData(id, updateDto)).thenReturn(dto);
+        ResponseEntity<Object> expected = new ResponseEntity<>(dto, HttpStatus.OK);
+        //Act
+        ResponseEntity<Object> result = controller.estimateEffort(id, updateDto);
+        //Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void estimateEffortFail() {
+        //Arrange
+        String id = "Project_2022_1";
+        UpdateUserStoryDTO updateDto = mock(UpdateUserStoryDTO.class);
+        Exception exception = mock(NullPointerException.class);
+        when(service.updateUSData(id, updateDto)).thenThrow(exception);
+        HttpStatus expected = HttpStatus.BAD_REQUEST;
+        //Act
+        ResponseEntity<Object> result = controller.estimateEffort(id, updateDto);
+        //Assert
+        assertEquals(expected, result.getStatusCode());
+    }
+
+    @Test
+    public void startUSSuccess() throws Exception {
+        //Arrange
+        String id = "Project_2022_1";
+        OutputUserStoryDTO dto = mock(OutputUserStoryDTO.class);
+        when(service.startUserStory(id)).thenReturn(dto);
+        ResponseEntity<Object> expected = new ResponseEntity<>(dto, HttpStatus.OK);
+        //Act
+        ResponseEntity<Object> result = controller.startUserStory(id);
+        //Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void startUsFail() throws Exception {
+        //Arrange
+        String id = "Project_2022_1";
+        Exception exception = mock(NullPointerException.class);
+        when(service.startUserStory(id)).thenThrow(exception);
+        HttpStatus expected = HttpStatus.BAD_REQUEST;
+        //Act
+        ResponseEntity<Object> result = controller.startUserStory(id);
+        //Assert
+        assertEquals(expected, result.getStatusCode());
+    }
+
+    @Test
+    public void canselUSSuccess() {
+        //Arrange
+        String id = "Project_2022_1";
+        OutputUserStoryDTO dto = mock(OutputUserStoryDTO.class);
+        when(service.cancelUserStory(id)).thenReturn(dto);
+        ResponseEntity<Object> expected = new ResponseEntity<>(dto, HttpStatus.OK);
+        //Act
+        ResponseEntity<Object> result = controller.cancelUserStory(id);
+        //Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void cancelUsFail() {
+        //Arrange
+        String id = "Project_2022_1";
+        Exception exception = mock(NullPointerException.class);
+        when(service.cancelUserStory(id)).thenThrow(exception);
+        HttpStatus expected = HttpStatus.BAD_REQUEST;
+        //Act
+        ResponseEntity<Object> result = controller.cancelUserStory(id);
+        //Assert
+        assertEquals(expected, result.getStatusCode());
+    }
+
+    @Test
+    public void finishUSSuccess() {
+        //Arrange
+        String id = "Project_2022_1";
+        OutputUserStoryDTO dto = mock(OutputUserStoryDTO.class);
+        when(service.finishUserStory(id)).thenReturn(dto);
+        ResponseEntity<Object> expected = new ResponseEntity<>(dto, HttpStatus.OK);
+        //Act
+        ResponseEntity<Object> result = controller.finishUserStory(id);
+        //Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void finishUsFail() {
+        //Arrange
+        String id = "Project_2022_1";
+        Exception exception = mock(NullPointerException.class);
+        when(service.finishUserStory(id)).thenThrow(exception);
+        HttpStatus expected = HttpStatus.BAD_REQUEST;
+        //Act
+        ResponseEntity<Object> result = controller.finishUserStory(id);
+        //Assert
+        assertEquals(expected, result.getStatusCode());
+    }
+
+    @Test
+    public void refineUSSuccess() {
+        //Arrange
+        String id = "Project_2022_1";
+        UserStoryDTO inDto = mock(UserStoryDTO.class);
+        OutputUserStoryDTO dto = mock(OutputUserStoryDTO.class);
+        OutputUserStoryDTO refinedDto = mock(OutputUserStoryDTO.class);
+        List<OutputUserStoryDTO> userStoriesDto = new ArrayList<>();
+        userStoriesDto.add(dto);
+        userStoriesDto.add(refinedDto);
+        CollectionModel<OutputUserStoryDTO> collection = CollectionModel.of(userStoriesDto);
+        when(service.refineUserStory(id, inDto)).thenReturn(collection);
+        ResponseEntity<Object> expected = new ResponseEntity<>(collection, HttpStatus.OK);
+        //Act
+        ResponseEntity<Object> result = controller.refineUserStory(id, inDto);
+        //Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void refineUSFail() {
+        //Arrange
+        String id = "Project_2022_1";
+        UserStoryDTO inDto = mock(UserStoryDTO.class);
+        Exception exception = mock(NullPointerException.class);
+        when(service.refineUserStory(id, inDto)).thenThrow(exception);
+        HttpStatus expected = HttpStatus.BAD_REQUEST;
+        //Act
+        ResponseEntity<Object> result = controller.refineUserStory(id, inDto);
+        //Assert
+        assertEquals(expected, result.getStatusCode());
+    }
+
+    @Test
+    public void deleteAUserStorySucess() {
+        //Arrange
+        String id = "Project_2022_1";
+        ResponseMessage responseMessage = mock(ResponseMessage.class);
+        ResponseEntity<Object> expected = new ResponseEntity<>(responseMessage, HttpStatus.OK);
+        //Act
+        ResponseEntity<Object> result = controller.deleteAUserStory(id);
+        //Assert
+        assertEquals(expected.getStatusCodeValue(), result.getStatusCodeValue());
     }
 }
-//
-//
+
+
