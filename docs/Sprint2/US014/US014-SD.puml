@@ -22,10 +22,10 @@ participant "response: \n ResponseEntity" as json
 autoactivate on
 
 [o-> Route: PATCH/{id} (json)
-Route -> Ctrl: defineProjectRoleOfProject \n (defineRoleOfResourceDTO)
 note right
 Change from json to dto hidden to simplify diagram
 end note
+Route -> Ctrl: defineProjectRoleOfProject \n (defineRoleOfResourceDTO)
 Ctrl -> service: defineRole(defineRoleOfResourceDTO)
 service -> service: createResourceIdByStringInputFromController(id)
 deactivate

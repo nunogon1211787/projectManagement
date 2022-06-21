@@ -14,7 +14,6 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class Project {
 
@@ -53,7 +52,7 @@ public class Project {
      * Method that checks if given code is this projects code
      * **/
     public boolean hasCode(String code) {
-        String projCode = this.projectCode.getCode().toLowerCase(Locale.ROOT);
+        String projCode = this.projectCode.getCode().toLowerCase();
         return projCode.equals(code.toLowerCase(Locale.ROOT));
     }
 
@@ -70,17 +69,16 @@ public class Project {
     }
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Project that = (Project) o;
-        return Objects.equals(projectCode, that.projectCode) && Objects.equals(projectName, that.projectName);
+        Project project = (Project) o;
+        return Objects.equals(projectCode, project.projectCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(projectCode, projectName);
+        return Objects.hash(projectCode);
     }
 }

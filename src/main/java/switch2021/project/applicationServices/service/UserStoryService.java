@@ -47,9 +47,9 @@ public class UserStoryService {
     /**
      * Create and save a User Story (US009)
      */
-    public OutputUserStoryDTO createAndSaveUserStory(UserStoryDTO inDto) throws Exception {
-        ProjectID projID = new ProjectID(inDto.projectID);
-        UserStory newUserStory = iUserStoryFactory.createUserStory(inDto);
+    public OutputUserStoryDTO createAndSaveUserStory(UserStoryDTO userStoryDTO) throws Exception {
+        ProjectID projID = new ProjectID(userStoryDTO.projectID);
+        UserStory newUserStory = iUserStoryFactory.createUserStory(userStoryDTO);
 
         if (!iProjectRepo.existsById(projID)) {
             throw new NullPointerException("Project does not exist");

@@ -24,7 +24,6 @@ public class ProjectController {
     @Autowired
     ProjectService service;
 
-
     /**
      * Find all projects
      *
@@ -109,18 +108,17 @@ public class ProjectController {
      * Delete project
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteProjectRequest(@PathVariable String id) {
+    public ResponseEntity<Object> deleteProjectRequest(@PathVariable("id") String id) {
         ErrorMessage message = new ErrorMessage();
-//        String[] x = id.split("_");
-        ProjectID projID = new ProjectID(id);
 
         try {
-            service.deleteProjectRequest(projID);
-            message.errorMessage = "Project was deleted successfully";
-            message.add(linkTo(methodOn(ProjectController.class).showAllProjects()).withRel("Collection"));
+            if(service.deleteProjectRequest(id)) {
+                message.errorMessage = "Project was deleted successfully";
+                message.add(linkTo(methodOn(ProjectController.class).showAllProjects()).withRel("Collection"));
+            }
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
-            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(message, HttpStatus.OK);
     }

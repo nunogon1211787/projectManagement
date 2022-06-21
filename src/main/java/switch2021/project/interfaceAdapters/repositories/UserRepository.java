@@ -25,12 +25,12 @@ public class UserRepository implements IUserRepo {
     @Override
     public User findByUserId(UserID userID) {
         Optional<UserJpa> foundUserJpa = userJpaRepository.findById(userID);
-        UserJpa found = foundUserJpa.flatMap(user -> foundUserJpa).orElse(null);
+        UserJpa userJpa = foundUserJpa.flatMap(user -> foundUserJpa).orElse(null);
 
-        if (found == null) {
+        if (userJpa == null) {
             throw new NullPointerException("This User does not exist!");
         }
-        return userJpaAssembler.toDomain(found);
+        return userJpaAssembler.toDomain(userJpa);
     }
 
     @Override

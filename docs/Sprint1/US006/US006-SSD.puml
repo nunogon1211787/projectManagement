@@ -8,11 +8,7 @@ autonumber
 actor "Administrator" as Administrator
 participant ":System" as System
 
-Administrator -> System: Start update profile
-return Show System User data
-Administrator -> System: Choose new profile
-return Show userProfileList
-Administrator -> System: Update profile assinged to a user account
+Administrator -> System: Update profile assigned to a user
 return Informs operation success
 
 @enduml

@@ -6,9 +6,8 @@ import switch2021.project.dataModel.REST.UserProfileRestDTO;
 import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 import switch2021.project.entities.valueObjects.voFactories.voFactories.UserProfileIDFactory;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Component
@@ -18,6 +17,10 @@ public class UserProfileDomainDataRestAssembler {
     UserProfileIDFactory userProfileIDFactory;
 
 
+    /**
+     * @param userProfileRestDTO userProfileRestDTO
+     * @return userProfile
+     */
     public UserProfile toDomain(UserProfileRestDTO userProfileRestDTO) {
 
         UserProfileID userProfileID = userProfileIDFactory.createUserProfileID(userProfileRestDTO.getDescription());
@@ -25,13 +28,15 @@ public class UserProfileDomainDataRestAssembler {
         return new UserProfile(userProfileID);
     }
 
-    public List<UserProfile> toCollections(List<UserProfileRestDTO> userProfileRestDTO) {
 
-        List<UserProfile> newList = new ArrayList<>();
+    /**
+     * @param userProfileRestDTO userProfileRestDTO
+     * @return List of User Profiles
+     */
 
-        userProfileRestDTO.forEach(uProfile -> newList.add(toDomain(uProfile)));
+    public List<UserProfile> toDomain(List<UserProfileRestDTO> userProfileRestDTO) {
 
-        return newList;
+        return userProfileRestDTO.stream().map(this::toDomain).collect(Collectors.toList());
     }
 
 }

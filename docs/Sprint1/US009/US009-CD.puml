@@ -14,57 +14,58 @@ class "CreateUserStoryRoute" as route << Component >>
 }
 
     package "Persistence" {
-    interface "IUserStoryRepositoryJpa" as jpa <<Interface>>
+    interface "UserStoryJpaRepository" as jpa <<Interface>>
     }
 }
 
 package "Interface Adapter" <<Rectangle>> #lightgreen {
 package "Controllers" <<Rectangle>>{
 class "UserStoryController" as ctrl << Component >> {
-+createUserStory(json)
++createUserStory(userStoryDTO)
 }
 }
 package "Repositories" <<Rectangle>>{
 class "UserStoryRepository" as store << Repository >> {
 -userStoryList : List<UserStory>
 + save(newUserStory)
-+ existsByUserStoryId(UserStoryID)
 }
 }
 }
 
 package "Application Service" <<Rectangle>> #lightpink{
 package "App Service" <<Rectangle>>{
-class "CreateUserStoryService" as service << Component >> {
-+createAndSaveUserStory(createUserStoryDTO)
+class "UserStoryService" as service << Component >> {
++createAndSaveUserStory(userStoryDTO)
 }
 }
 package "Repositories Interface" <<Rectangle>>{
 interface "IUserStoryRepo" as repo << Interface >>{
-save(newUserStory)
-existsByUserStoryId(UserStoryID)
++ save(newUserStory)
 }
 }
 package "Factory Interface" <<Rectangle>>{
 interface "IUserStoryFactory" as factoryInterface << Interface >>{
-createUserStory(createUserStoryDTO)
+createUserStory(userStoryDTO)
 }
 }
 }
 
 package "DTO" <<Rectangle>> {
 class "UserStoryMapper" as mapper << Component >> {
-+ toDto(newUserStory)
++ toDto(usSaved)
 }
 class "OutputUserStoryDTO" as outdto << Component >> {
-- userStoryID : String
-- projectID : String
-- title : String
+- id : String
 - priority : int
 - description : String
 - timeEstimate : double
+- parentUserStory : String
+- usStartDate : String
+- usEndDate : String
+- usRefined : String
+- status : String
 }
-class "CreateUserStoryDTO" as dto << Component >> {
+class "UserStoryDTO" as dto << Component >> {
 - projectID : String
 - title : String
 - priority : int
@@ -77,56 +78,61 @@ package "Domain" <<Rectangle>> #burlywood{
 package "Aggregate" <<Rectangle>>{
 class "UserStory" as userStory << Root >> {
 - userStoryID : UserStoryID
-- projectID : ProjectID
-- title : UsTitle
 - priority : UsPriority
 - description : Description
 - timeEstimate : UsHour
-+ UserStory(userStoryID)
+- usStatus : UserStoryStatusEnum
+- parentUserStory : UserStory
+- usStartDate : LocalDate
+- usEndDate : LocalDate
+- usRefined : LocalDate
++ UserStory(userStoryID, priority, description, timeEstimate)
 }
 }
 package "Factory" <<Rectangle>>{
 class "UserStoryFactory" as userStoryF << Factory >> {
-+createUserStory(createUserStoryDTO)
++createUserStory(inDto)
 }
 }
 package "Value Object" <<Rectangle>>{
 class "UserStoryID" as usID << Value Object >> {
 -projectID : ProjectID
 -usTitle : UsTitle
-+checkUsID(projectID, usTitle)
 }
 class "ProjectID" as projID << Value Object >> {
--rojectID : ProjectID
-+checkUsID()
+-projectID : ProjectID
 }
 class "UsTitle" as usTitle << Value Object >> {
-- title : UsTitle
-+checkUsID()
+- usTitle : UsTitle
 }
 class "Priority" as priority << Value Object >> {
 -priority : UsPriority
-+checkUsID()
 }
 class "Description" as desc << Value Object >> {
 -description : Description
-+checkUsID()
 }
 class "TimeEstimate" as time << Value Object >> {
 -timeEstimate : UsHour
-+checkUsID()
 }
 }
 }
 
   package "Data Model" <<Rectangle>>{
         class "UserStoryJpaAssembler" as assemblerjpa <<Component>> {
-        +toData (userStory)
-        +toModel(userStoryJpa)
+        +toData (newUserStory)
+        +toDomain(savedData)
         }
 
         class "UserStoryJpa" as USjpa {
-        -userProfileID: UserProfileID
+        - id : UserStoryID
+        - priority : int
+        - description : String
+        - timeEstimate : double
+        - usStatus : String
+        - parentUserStory : "UserStoryJpa"
+        - startDate : String
+        - endDate : String
+        - refined : String
         }
 
 
@@ -135,6 +141,7 @@ class "TimeEstimate" as time << Value Object >> {
 
 route ..> ctrl
 ctrl..> service
+ctrl..up>outdto
 store..|> repo
 service .r.> mapper
 service .r.> dto
@@ -153,6 +160,7 @@ userStoryF..up|>factoryInterface
 store ...> assemblerjpa
 store ...> USjpa
 store ..> jpa
+
 
 
 

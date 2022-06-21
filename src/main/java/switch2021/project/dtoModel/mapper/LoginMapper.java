@@ -1,7 +1,6 @@
 package switch2021.project.dtoModel.mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Component;
 import switch2021.project.dtoModel.dto.OutputLoginDTO;
 import switch2021.project.dtoModel.dto.UpdateDataDTO;
@@ -53,7 +52,7 @@ public class LoginMapper {
 
             //Check if this User can access resource Projects
             if(auth.getSeeAndEditProfiles().contains(profile.getUserProfileName().getText())){
-                dto.add(linkTo(methodOn(UserProfileController.class).showAllProfiles()).withRel("profiles").withType("GET"));
+                dto.add(linkTo(methodOn(UserProfileController.class).getAllProfiles()).withRel("profiles").withType("GET"));
             }
 
         }

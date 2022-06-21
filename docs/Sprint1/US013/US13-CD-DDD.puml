@@ -17,13 +17,17 @@ package "Route"{
 package "Interface Adapter" <<Rectangle>> #lightgreen{
 package "Controllers" <<Folder>>{
     class "UserProfileController" as ctrl <<Component>>{
-    +createUserProfile(json)
+     +createUserProfile(userProfileDTO)
+
+
     }
     }
     package "Repositories" <<Folder>>{
     class "UserProfileRepository" as uRepo <<Repository>>{
-    +save(newUserProfile)
-    +existsByDescription(description)
+
+    +save(profile)
+    +findByUserProfileID(userProfileID)
+
     }
 }
 }
@@ -33,26 +37,32 @@ package "DTO" <<Rectangle>>{
     -userProfileName: String
     }
 
-    class "UserProfileMapper" as mapper <<Component>> {
-    +toDto(newUserProfile)
+
+ class "OutputUserProfileDTO" as output <<Component>> {
+     - userProfileName: String
     }
+
+    class "UserProfileMapper" as mapper <<Component>> {
+    +toDTO(newUserProfile)
+    }
+
 }
 
 package "Application Service"<<Rectangle>> #implementation {
     package "App Service" {
         class "UserProfileService" as service <<Service>>{
-        +createAndSaveUserProfile(dto)
+        +createAndSaveUserProfile(userProfileDTO)
         }
     }
     package "Repositories Interface" {
         class "IUserProfileRepo" as iUserProfileRepo <<(I, Violet) Interface>> {
-            +save(newUserProfile)
-            +existsByDescription(description)
+             +save(profile)
+             +findByUserProfileID(userProfileID)
         }
     }
     package "User Profile Factory Interface" {
     class "IUserProfileFactory" as iUserProfileFactory <<(I, Violet) Interface>> {
-            +createUserProfile(dto)
+            +createUserProfile(userProfileDTO)
             }
     }
 }
@@ -60,7 +70,7 @@ package "Application Service"<<Rectangle>> #implementation {
 package "Domain" <<Rectangle>>#burlywood  {
     package "Factory" {
         class "UserProfileFactory" as userProfileFactory <<Factory>> {
-        +createUserProfile(dto)
+        +createUserProfile(userProfileDTO)
         }
 
         class "UserProfileIDFactory" as userProfileIDFactory <<Factory>> {
@@ -78,7 +88,7 @@ package "Domain" <<Rectangle>>#burlywood  {
     }
     package "Value Object"  {
         class "UserProfileID" as userProfileID <<Value Object>>{
-        +UserProfileID (description)
+        +UserProfileID (userProfileName)
         }
     }
 }
@@ -104,11 +114,11 @@ userProfileFactory ..|> iUserProfileFactory
 userProfileIDFactory ..|> iUserProfileIDFactory
 userProfileFactory ..> iUserProfileIDFactory
 userProfileFactory ..> userProfile
-userProfileFactory .down.> dto
 userProfileIDFactory ..> userProfileID
 uRepo ..> jpa
 uRepo ...> assemblerjpa
 uRepo ...> UPjpa
+mapper ..> output
 
 
 

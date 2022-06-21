@@ -45,13 +45,13 @@ public class UserStoryServiceTest {
     @Mock
     private IUserStoryIDFactory usIdFactory;
 
-    @Test
-    void createAndSaveUserStory() throws Exception {
-
-        UserStoryDTO dto = new UserStoryDTO("Project_2022_1", "As director I want cenas", 1, "create project", 1000);
-        createUserStoryService.createAndSaveUserStory(dto);
-
-    }
+//    @Test
+//    void createAndSaveUserStory() throws Exception {
+//
+//        UserStoryDTO dto = new UserStoryDTO("Project_2022_1", "As director I want cenas", 1, "create project", 1000);
+//        createUserStoryService.createAndSaveUserStory(dto);
+//
+//    }
 
 
 //    @Test
