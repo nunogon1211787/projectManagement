@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dtoModel.dto.ErrorMessage;
-import switch2021.project.dtoModel.dto.OutputUserProfileDTO;
 import switch2021.project.dtoModel.dto.UserProfileDTO;
 import switch2021.project.applicationServices.service.UserProfileService;
 
@@ -31,7 +30,7 @@ public class UserProfileController {
     @GetMapping
     public ResponseEntity<Object> getAllProfiles(){
         ErrorMessage message = new ErrorMessage();
-        CollectionModel<OutputUserProfileDTO> outPutDTO;
+        CollectionModel<UserProfileDTO> outPutDTO;
 
         try {
             outPutDTO = createUserProfileService.getAllProfiles();
@@ -48,7 +47,7 @@ public class UserProfileController {
      @GetMapping("/{id}")
      public ResponseEntity<Object> showUserProfileRequested(@PathVariable("id") String id){
          ErrorMessage message = new ErrorMessage();
-         OutputUserProfileDTO outPutDTO;
+         UserProfileDTO outPutDTO;
 
          try {
              outPutDTO = createUserProfileService.findUserProfileRequested(id);
@@ -70,7 +69,7 @@ public class UserProfileController {
             message.errorMessage = "User Profile Name can not be empty.";
             return new ResponseEntity<>(message, HttpStatus.NOT_ACCEPTABLE);
         }
-        OutputUserProfileDTO outPutDTO;
+        UserProfileDTO outPutDTO;
         try {
             outPutDTO = createUserProfileService.createAndSaveUserProfile(userProfileDTO);
 
@@ -87,7 +86,7 @@ public class UserProfileController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> editAUserProfile(@PathVariable("id") String id, @RequestBody UserProfileDTO dto){
         ErrorMessage message = new ErrorMessage();
-        OutputUserProfileDTO outPutDTO;
+        UserProfileDTO outPutDTO;
 
         try {
 
