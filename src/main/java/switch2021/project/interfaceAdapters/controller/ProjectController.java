@@ -32,7 +32,7 @@ public class ProjectController {
     @GetMapping
     public ResponseEntity<Object> showAllProjects() {
         ErrorMessage message = new ErrorMessage();
-        CollectionModel<OutputProjectDTO> allProjectsDto;
+        CollectionModel<PartialProjectDTO> allProjectsDto;
 
         try {
             allProjectsDto = CollectionModel.of(service.getAllProjects());
@@ -43,7 +43,6 @@ public class ProjectController {
         }
         return new ResponseEntity<>(allProjectsDto, HttpStatus.OK);
     }
-
 
     /**
      * Find by id

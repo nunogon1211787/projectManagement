@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
+import switch2021.project.dtoModel.dto.PartialProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.dto.TypologyDTO;
 
@@ -158,7 +159,7 @@ class ProjectControllerIntegrationTest {
     void AgetAllProjectIntegrationSize() {
         //Arrange
         //Act
-        CollectionModel<OutputProjectDTO> response = service.getAllProjects();
+        CollectionModel<PartialProjectDTO> response = service.getAllProjects();
         int x = response.getContent().size();
         //Assert
         assertEquals(3, x);

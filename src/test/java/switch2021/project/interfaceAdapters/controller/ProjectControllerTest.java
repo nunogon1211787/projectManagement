@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
+import switch2021.project.dtoModel.dto.PartialProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.Budget;
@@ -38,15 +39,14 @@ class ProjectControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-
     @Test
     void getAllProjectSuccess() {
         //Arrange
-        OutputProjectDTO test = mock(OutputProjectDTO.class);
-        OutputProjectDTO test2 = mock(OutputProjectDTO.class);
-        OutputProjectDTO test3 = mock(OutputProjectDTO.class);
+        PartialProjectDTO test = mock(PartialProjectDTO.class);
+        PartialProjectDTO test2 = mock(PartialProjectDTO.class);
+        PartialProjectDTO test3 = mock(PartialProjectDTO.class);
         when(service.getAllProjects()).thenReturn(CollectionModel.of
-                (List.of(new OutputProjectDTO[]{test, test2, test3})));
+                (List.of(new PartialProjectDTO[]{test, test2, test3})));
         //Act
         ResponseEntity<?> response = ctrl.showAllProjects();
         //Assert

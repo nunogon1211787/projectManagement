@@ -2,10 +2,14 @@ package switch2021.project.dtoModel.mapper;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Component;
+import switch2021.project.dtoModel.dto.PartialProjectDTO;
 import switch2021.project.interfaceAdapters.controller.ProjectController;
 import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.entities.aggregates.Project.Project;
+import switch2021.project.interfaceAdapters.controller.ResourceController;
+import switch2021.project.interfaceAdapters.controller.SprintController;
+import switch2021.project.interfaceAdapters.controller.UserStoryController;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -57,6 +61,18 @@ public class ProjectMapper {
         projDto.add(linkTo(methodOn(ProjectController.class).updateProjectPartially(projDto.code,
                 new EditProjectInfoDTO())).withRel("Edit"));
 
+        //View ProjectTeam
+        projDto.add(linkTo(methodOn(ResourceController.class).showRegisterOfResourcesInAProject(projDto.code))
+                .withRel("ProjectTeam"));
+
+        //View Sprints
+        projDto.add(linkTo(methodOn(SprintController.class).showSprintsOfAProject(projDto.code))
+                .withRel("Sprints"));
+
+        //View Backlog
+        projDto.add(linkTo(methodOn(UserStoryController.class).consultProductBacklog(projDto.code))
+                .withRel("Backlog"));
+
 
         return projDto;
     }
@@ -67,6 +83,36 @@ public class ProjectMapper {
                 .map(this::model2Dto)
                 .collect(Collectors.toList()));
 
+        result.add(linkTo(methodOn(ProjectController.class).showAllProjects()).withSelfRel());
+
+        return result;
+    }
+
+    /**
+     * Next two methods are for partial projects only, used to showAllProjects
+     */
+    public PartialProjectDTO model2Dto2(Project newProject) {
+
+        String code = newProject.getProjectCode().getCode();
+        String projectName = newProject.getProjectName().getText();
+        String description = newProject.getDescription().getText();
+        String status = newProject.getProjectStatus().name();
+        String startDate = newProject.getStartDate().toString();
+
+        PartialProjectDTO projDto = new PartialProjectDTO(code, projectName, description, startDate, status);
+
+        //Show a project
+        projDto.add(linkTo(methodOn(ProjectController.class).showProjectRequested(projDto.code))
+                .withSelfRel());
+
+        return projDto;
+    }
+
+    public CollectionModel<PartialProjectDTO> toCollectionDto2(List<Project> projects) {
+
+        CollectionModel<PartialProjectDTO> result = CollectionModel.of(projects.stream()
+                .map(this::model2Dto2)
+                .collect(Collectors.toList()));
 
         result.add(linkTo(methodOn(ProjectController.class).showAllProjects()).withSelfRel());
 

@@ -343,17 +343,17 @@ class ProjectServiceTest {
         //Arrange
         List<Project> projects = new ArrayList<>();
         List<Project> projectsWeb = new ArrayList<>();
-        CollectionModel<OutputProjectDTO> outDtoList = CollectionModel.empty();
-        CollectionModel<OutputProjectDTO> outDtoWebList = CollectionModel.empty();
+        CollectionModel<PartialProjectDTO> outDtoList = CollectionModel.empty();
+        CollectionModel<PartialProjectDTO> outDtoWebList = CollectionModel.empty();
 
         when(projRepo.findAll()).thenReturn(projects);
         when(iProjectWebRepository.findAll()).thenReturn(projectsWeb);
-        when(projMapper.toCollectionDto(projects)).thenReturn(outDtoList);
-        when(projMapper.toCollectionDto(projectsWeb)).thenReturn(outDtoWebList);
-        CollectionModel<OutputProjectDTO> expected = CollectionModel.empty();
+        when(projMapper.toCollectionDto2(projects)).thenReturn(outDtoList);
+        when(projMapper.toCollectionDto2(projectsWeb)).thenReturn(outDtoWebList);
+        CollectionModel<PartialProjectDTO> expected = CollectionModel.empty();
 
         //Act
-        CollectionModel<OutputProjectDTO> result = projectService.getAllProjects();
+        CollectionModel<PartialProjectDTO> result = projectService.getAllProjects();
         //Assert
         assertEquals(expected, result);
     }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import switch2021.project.applicationServices.iRepositories.*;
 import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
+import switch2021.project.dtoModel.dto.PartialProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.mapper.ProjectMapper;
 import switch2021.project.entities.aggregates.Project.Project;
@@ -127,15 +128,15 @@ public class ProjectService {
         throw new IllegalArgumentException("Project does not exist.");
     }
 
-    public CollectionModel<OutputProjectDTO> getAllProjects() {
+    public CollectionModel<PartialProjectDTO> getAllProjects() {
 
         List<Project> projects = projRepo.findAll();
         List<Project> projectsWeb = iProjectWebRepository.findAll();
 
-        CollectionModel<OutputProjectDTO> outputProjectDTOS = projMapper.toCollectionDto(projectsWeb);
-        CollectionModel<OutputProjectDTO> outputProjectDTOS2= projMapper.toCollectionDto(projects);
+        CollectionModel<PartialProjectDTO> partialProjectDTO= projMapper.toCollectionDto2(projectsWeb);
+        CollectionModel<PartialProjectDTO> partialProjectDTO2= projMapper.toCollectionDto2(projects);
 
-        List<OutputProjectDTO> newList = Stream.concat(outputProjectDTOS.getContent().stream(), outputProjectDTOS2.getContent().stream())
+        List<PartialProjectDTO> newList = Stream.concat(partialProjectDTO.getContent().stream(), partialProjectDTO2.getContent().stream())
                 .collect(Collectors.toList());
 
         return CollectionModel.of(newList);
