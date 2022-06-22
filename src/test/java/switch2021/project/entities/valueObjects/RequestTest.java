@@ -37,8 +37,10 @@ class RequestTest {
         User user = mock(User.class);
         UserProfileID profileId = mock(UserProfileID.class);
         //Act
-        Request req = new Request(profileId);
-        Request req2 = new Request(profileId);
+        Request req = new Request();
+        req.setProfileIdRequested(profileId);
+        req.setRequestDate(LocalDate.now());
+        Request req2 = new Request( LocalDate.now(), profileId);
         Request req3 = null;
         //Assert
         assertEquals(req, req2);
