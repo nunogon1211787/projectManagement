@@ -71,9 +71,6 @@ public class UserStoryRepository implements IUserStoryRepo {
     @Override
     public void deleteByUserStoryId(UserStoryID usId) throws NullPointerException {
 
-        if (!jpaRepository.existsById(usId)) {
-            throw new NullPointerException("User Story does not exist");
-        }
         jpaRepository.deleteById(usId);
     }
 }
