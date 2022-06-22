@@ -58,7 +58,10 @@ public class TaskService {
     private TaskContainerID returnTaskContainerID(String taskContainerID) {
         TaskContainerID z;
 
-        UserStory y = iUserStoryRepo.findByUserStoryId(new UserStoryID(taskContainerID));
+        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(new UserStoryID(taskContainerID));
+
+        UserStory y = foundUs.flatMap(us -> foundUs).orElse(null);
+
 
         if(y != null) {
             z = y.getUserStoryID();

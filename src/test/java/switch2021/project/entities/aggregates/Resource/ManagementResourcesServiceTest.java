@@ -1,11 +1,10 @@
 package switch2021.project.entities.aggregates.Resource;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.dtoModel.dto.CreateResourceDTO;
 import switch2021.project.entities.valueObjects.vos.PercentageOfAllocation;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.ResourceID;
-import switch2021.project.entities.valueObjects.vos.enums.ProjectRoleReeng;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectRole;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -266,9 +265,9 @@ class ManagementResourcesServiceTest {
         when(res2.isActiveToThisDate(LocalDate.parse(endDate))).thenReturn(true);
         when(res3.isActiveToThisDate(LocalDate.parse(startDate))).thenReturn(true);
         when(res3.isActiveToThisDate(LocalDate.parse(endDate))).thenReturn(true);
-        when(res1.getRole()).thenReturn(ProjectRoleReeng.valueOf(projectRole));
-        when(res2.getRole()).thenReturn(ProjectRoleReeng.valueOf(projectRole));
-        when(res3.getRole()).thenReturn(ProjectRoleReeng.valueOf(projectRole));
+        when(res1.getRole()).thenReturn(ProjectRole.valueOf(projectRole));
+        when(res2.getRole()).thenReturn(ProjectRole.valueOf(projectRole));
+        when(res3.getRole()).thenReturn(ProjectRole.valueOf(projectRole));
         when(res1.hasProjectRole(projectRole)).thenReturn(true);
         when(res2.hasProjectRole(projectRole)).thenReturn(true);
         when(res3.hasProjectRole(projectRole)).thenReturn(true);
@@ -297,9 +296,9 @@ class ManagementResourcesServiceTest {
         when(res2.isActiveToThisDate(LocalDate.parse(endDate))).thenReturn(true);
         when(res3.isActiveToThisDate(LocalDate.parse(startDate))).thenReturn(true);
         when(res3.isActiveToThisDate(LocalDate.parse(endDate))).thenReturn(true);
-        when(res1.getRole()).thenReturn(ProjectRoleReeng.valueOf("TeamMember"));
-        when(res2.getRole()).thenReturn(ProjectRoleReeng.valueOf("TeamMember"));
-        when(res3.getRole()).thenReturn(ProjectRoleReeng.valueOf(projectRole));
+        when(res1.getRole()).thenReturn(ProjectRole.valueOf("TeamMember"));
+        when(res2.getRole()).thenReturn(ProjectRole.valueOf("TeamMember"));
+        when(res3.getRole()).thenReturn(ProjectRole.valueOf(projectRole));
         when(res1.hasProjectRole(projectRole)).thenReturn(false);
         when(res2.hasProjectRole(projectRole)).thenReturn(false);
         when(res3.hasProjectRole(projectRole)).thenReturn(true);
@@ -328,9 +327,9 @@ class ManagementResourcesServiceTest {
         when(res2.isActiveToThisDate(LocalDate.parse(endDate))).thenReturn(true);
         when(res3.isActiveToThisDate(LocalDate.parse(startDate))).thenReturn(false);
         when(res3.isActiveToThisDate(LocalDate.parse(endDate))).thenReturn(false);
-        when(res1.getRole()).thenReturn(ProjectRoleReeng.valueOf("TeamMember"));
-        when(res2.getRole()).thenReturn(ProjectRoleReeng.valueOf("TeamMember"));
-        when(res3.getRole()).thenReturn(ProjectRoleReeng.valueOf(projectRole));
+        when(res1.getRole()).thenReturn(ProjectRole.valueOf("TeamMember"));
+        when(res2.getRole()).thenReturn(ProjectRole.valueOf("TeamMember"));
+        when(res3.getRole()).thenReturn(ProjectRole.valueOf(projectRole));
         when(res1.hasProjectRole(projectRole)).thenReturn(false);
         when(res2.hasProjectRole(projectRole)).thenReturn(false);
         when(res3.hasProjectRole(projectRole)).thenReturn(true);
@@ -359,9 +358,9 @@ class ManagementResourcesServiceTest {
         when(res2.isActiveToThisDate(LocalDate.parse(endDate))).thenReturn(true);
         when(res3.isActiveToThisDate(LocalDate.parse(startDate))).thenReturn(false);
         when(res3.isActiveToThisDate(LocalDate.parse(endDate))).thenReturn(false);
-        when(res1.getRole()).thenReturn(ProjectRoleReeng.valueOf(projectRole));
-        when(res2.getRole()).thenReturn(ProjectRoleReeng.valueOf(projectRole));
-        when(res3.getRole()).thenReturn(ProjectRoleReeng.valueOf(projectRole));
+        when(res1.getRole()).thenReturn(ProjectRole.valueOf(projectRole));
+        when(res2.getRole()).thenReturn(ProjectRole.valueOf(projectRole));
+        when(res3.getRole()).thenReturn(ProjectRole.valueOf(projectRole));
         when(res1.hasProjectRole(projectRole)).thenReturn(true);
         when(res2.hasProjectRole(projectRole)).thenReturn(true);
         when(res3.hasProjectRole(projectRole)).thenReturn(true);

@@ -1,6 +1,5 @@
 package switch2021.project.applicationServices.service;
 
-import org.apache.xmlbeans.impl.xb.xsdschema.Attribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
@@ -10,12 +9,12 @@ import switch2021.project.dtoModel.dto.UpdateUserStoryDTO;
 import switch2021.project.dtoModel.dto.UserStoryDTO;
 import switch2021.project.dtoModel.dto.UserStoryUpdateDTO;
 import switch2021.project.entities.factories.factoryInterfaces.IUserStoryFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUsHourFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUsPriorityFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserStoryIDFactory;
 import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.dtoModel.mapper.UserStoryMapper;
-import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.UserStoryStatusEnum;
@@ -40,6 +39,8 @@ public class UserStoryService {
     @Autowired
     private IUserStoryIDFactory usIdFactory;
     @Autowired
+    private IProjectIDFactory iProjectIDFactory;
+    @Autowired
     private IUsHourFactory usHourFactory;
     @Autowired
     private IUsPriorityFactory priorityFactory;
@@ -47,27 +48,32 @@ public class UserStoryService {
     /**
      * Create and save a User Story (US009)
      */
-    public OutputUserStoryDTO createAndSaveUserStory(UserStoryDTO userStoryDTO) throws Exception {
-        ProjectID projID = new ProjectID(userStoryDTO.projectID);
-        UserStory newUserStory = iUserStoryFactory.createUserStory(userStoryDTO);
+    public OutputUserStoryDTO createAndSaveUserStory(UserStoryDTO userStoryDTO) {
+        ProjectID projID = createProjectId(userStoryDTO.getProjectID());
 
         if (!iProjectRepo.existsById(projID)) {
             throw new NullPointerException("Project does not exist");
         }
+
+        UserStory newUserStory = iUserStoryFactory.createUserStory(userStoryDTO);
+
         if (iUserStoryRepo.existsUserStoryByID(newUserStory.getUserStoryID())) {
             throw new IllegalArgumentException("User story already exist.");
         }
         UserStory usSaved = iUserStoryRepo.save(newUserStory);
         return userStoryMapper.toDto(usSaved);
-
     }
 
     public OutputUserStoryDTO showAUserStory(String id) {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
+        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(usId);
 
-        UserStory foundUs = iUserStoryRepo.findByUserStoryId(usId);
+        UserStory userStory = foundUs.flatMap(us -> foundUs).orElse(null);
 
-        return userStoryMapper.toDto(foundUs);
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
+        }
+        return userStoryMapper.toDto(userStory);
     }
 
     public CollectionModel<OutputUserStoryDTO> showAllUserStories() {
@@ -80,12 +86,11 @@ public class UserStoryService {
      * Consult a Product Backlog of a Project (US018)
      */
     public CollectionModel<OutputUserStoryDTO> consultProductBacklog(String projectId) throws Exception {
-        ProjectID projID = new ProjectID(projectId);
+        ProjectID projID = createProjectId(projectId);
 
         if (!iProjectRepo.existsById(projID)) {
             throw new Exception("Project does not exist");
         }
-
         List<UserStory> productBacklog = iUserStoryRepo.findProductBacklog(projectId);
         return userStoryMapper.toCollectionDto(productBacklog);
     }
@@ -96,12 +101,17 @@ public class UserStoryService {
      */
     public OutputUserStoryDTO updateUSData(String id, UpdateUserStoryDTO updateDTO) {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
-        UserStory userStory = iUserStoryRepo.findByUserStoryId(usId);
+        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(usId);
 
-        if (updateDTO.priority != 0) {
+        UserStory userStory = foundUs.flatMap(us -> foundUs).orElse(null);
+
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
+        }
+        if (updateDTO.getPriority() != 0) {
             userStory.updatePriority(priorityFactory.create(updateDTO.getPriority()));
         }
-        if (updateDTO.timeEstimate != 0) {
+        if (updateDTO.getTimeEstimate() != 0) {
             userStory.updateTimeEstimate(usHourFactory.create(updateDTO.getTimeEstimate()));
         }
         UserStory updated = iUserStoryRepo.save(userStory);
@@ -110,7 +120,13 @@ public class UserStoryService {
 
     public OutputUserStoryDTO startUserStory(String id) throws Exception {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
-        UserStory userStory = iUserStoryRepo.findByUserStoryId(usId);
+        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(usId);
+
+        UserStory userStory = foundUs.flatMap(us -> foundUs).orElse(null);
+
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
+        }
 
         if (userStory.getUsEndDate() != null) {
             throw new IllegalArgumentException("This User Story is already closed!");
@@ -124,9 +140,15 @@ public class UserStoryService {
         return userStoryMapper.toDto(updated);
     }
 
-    public OutputUserStoryDTO cancelUserStory(String id) throws Exception {
+    public OutputUserStoryDTO cancelUserStory(String id) {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
-        UserStory userStory = iUserStoryRepo.findByUserStoryId(usId);
+        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(usId);
+
+        UserStory userStory = foundUs.flatMap(us -> foundUs).orElse(null);
+
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
+        }
 
         if (userStory.getUsEndDate() != null) {
             throw new IllegalArgumentException("This User Story is already closed!");
@@ -140,7 +162,13 @@ public class UserStoryService {
 
     public OutputUserStoryDTO finishUserStory(String id) throws IllegalArgumentException {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
-        UserStory userStory = iUserStoryRepo.findByUserStoryId(usId);
+        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(usId);
+
+        UserStory userStory = foundUs.flatMap(us -> foundUs).orElse(null);
+
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
+        }
 
         if (userStory.getUsEndDate() != null) {
             throw new IllegalArgumentException("This User Story is already closed!");
@@ -158,7 +186,13 @@ public class UserStoryService {
      */
     public CollectionModel<OutputUserStoryDTO> refineUserStory(String id, UserStoryDTO inDto) {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
-        UserStory userStory = iUserStoryRepo.findByUserStoryId(usId);
+        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(usId);
+
+        UserStory userStory = foundUs.flatMap(us -> foundUs).orElse(null);
+
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
+        }
         List<UserStory> userStories = new ArrayList<>();
 
         //Create new User Story
@@ -182,6 +216,10 @@ public class UserStoryService {
      */
     public void deleteAUserStory(String id) {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
+
+        if (!iUserStoryRepo.existsUserStoryByID(usId)) {
+            throw new NullPointerException("User Story does not exist");
+        }
         iUserStoryRepo.deleteByUserStoryId(usId);
     }
 
@@ -196,9 +234,22 @@ public class UserStoryService {
         return usIdFactory.create(pId, uTitle);
     }
 
+    /**
+     * Create Project ID method
+     */
+    public  ProjectID createProjectId(String projectId) {
+        return iProjectIDFactory.create(projectId);
+    }
+
     public OutputUserStoryDTO updateUserStoryPartially(String id, UserStoryUpdateDTO userStoryUpdateDTO) {
         UserStoryID userStoryID = createUserStoryIdByStringInputFromController(id);
-        UserStory userStory = iUserStoryRepo.findByUserStoryId(userStoryID);
+        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(userStoryID);
+
+        UserStory userStory = foundUs.flatMap(us -> foundUs).orElse(null);
+
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
+        }
 
         userStory.setPriority(new UsPriority(userStoryUpdateDTO.priority));
         userStory.setDescription(new Description(userStoryUpdateDTO.description));
@@ -213,12 +264,9 @@ public class UserStoryService {
         }
         if (userStory.getUsStartDate() != null && userStory.getUsEndDate() == null) {
             userStory.setUsStatus(UserStoryStatusEnum.IN_PROGRESS);
-
         }
-
         iUserStoryRepo.save(userStory);
         return userStoryMapper.toDto(userStory);
-
     }
 }
 

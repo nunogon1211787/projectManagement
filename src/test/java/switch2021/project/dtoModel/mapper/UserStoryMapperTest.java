@@ -1,7 +1,9 @@
 package switch2021.project.dtoModel.mapper;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockitoAnnotations;
 import switch2021.project.dtoModel.dto.OutputUserStoryDTO;
 import switch2021.project.entities.aggregates.UserStory.*;
 import switch2021.project.entities.valueObjects.vos.*;
@@ -12,6 +14,10 @@ import static org.mockito.Mockito.when;
 
 public class UserStoryMapperTest {
 
+    @BeforeEach
+    void TestConfiguration() {
+        MockitoAnnotations.openMocks(this);
+    }
 
     @Test
     @DisplayName("Transform newUserStory into DTO")

@@ -1,22 +1,23 @@
 import { useContext, useEffect, useState } from "react";
 import AppContext from "../context/AppContext";
 import { URL_API } from "../services/Service";
-import {fetchCollections, navToEditDetails} from "../context/Actions";
-import {navToDetails} from "../context/Actions";
+import { fetchCollections, navToEditDetails } from "../context/Actions";
+import { navToDetails } from "../context/Actions";
 import Button from "../components/Button";
+import { Box, Pagination } from "grommet";
 
 export default function Table(props) {
   const { state, dispatch } = useContext(AppContext);
-  const { collection, details } = state;
+  const { collection } = state;
   const { loading, error, data } = collection;
 
   //GET REQUEST TO API
   useEffect(() => {
     let url = `${URL_API}/${props.collections}`;
 
-  //  if(props.query !== undefined){
-  //    url = `${URL_API}/${props.collections}/${props.query}`
-  //  }
+    //  if(props.query !== undefined){
+    //    url = `${URL_API}/${props.collections}/${props.query}`
+    //  }
     const request = {};
     fetchCollections(url, request, dispatch);
     // eslint-disable-next-line
@@ -67,21 +68,31 @@ export default function Table(props) {
     }
   }
 
+  let dataLimit = 2;
+  const [sIndex, setSIndex] = useState(0)
+  const [eIndex, setEIndex] = useState(2)
+
   if (loading === true) {
     return <h1>Loading ....</h1>;
   } else {
     if (error !== null) {
-      return <h1 style={{color:"red"}}>{error}</h1>;
+      return <h1 style={{ color: "red" }}>{error}</h1>;
     } else {
       if (Object.keys(data[0])[0] === "_embedded") {
         const collect = Object.keys(data[0]._embedded)[0];
         const header = Object.keys(data[0]._embedded[collect][0]);
         const response = data[0]._embedded[collect];
 
+        let dataPage = response.slice(sIndex, eIndex);
+        const changePage = ({ startIndex, endIndex }) => {
+          setSIndex(startIndex);
+          setEIndex(endIndex);
+        }
         return (
           <>
             <div className="card bg-light">
-              <table
+              {/* <DataTable columns={headerTable} data={dataPage}/> */}
+              {<table
                 className="card-body table table-primary table-hover"
                 style={{ margin: "1%", borderRadius: "10px" }}
               >
@@ -91,13 +102,13 @@ export default function Table(props) {
                       // eslint-disable-next-line
                       header.map((key, idx) => {
                         if (key !== "_links" && key !== "customer" && key !== "businessSector"
-                        && key !== "numberOfSprints" && key !== "budget" && key !== "sprintDuration"
-                        && key !== "endDate" && key !== "typo" && key !== "photo") {
+                          && key !== "numberOfSprints" && key !== "budget" && key !== "sprintDuration"
+                          && key !== "endDate" && key !== "typo" && key !== "photo") {
                           const result = key.replace(/[A-Z]/g, ' $&').trim();
                           return (
-                                                        <th
+                            <th
                               key={idx}
-                              // style={{ textTransform: "uppercase" }}
+                            // style={{ textTransform: "uppercase" }}
                             >
                               {result}
                             </th>
@@ -108,10 +119,10 @@ export default function Table(props) {
                   </tr>
                 </thead>
                 <tbody>
-                  {response.map((row, index) => {
-                   let id = row[Object.keys(row)[0]];
+                  {dataPage.map((row, index) => {
+                    let id = row[Object.keys(row)[0]];
 
-                    if(window.location.pathname === "/resources"){
+                    if (window.location.pathname === "/resources") {
                       id = row[Object.keys(row)[0]] + "&" + row[Object.keys(row)[1]] + "&" + row[Object.keys(row)[3]];
                     }
                     if (props.collections === "users") {
@@ -132,19 +143,25 @@ export default function Table(props) {
                           // eslint-disable-next-line
                           Object.keys(row).map((attr, idx) => {
                             if (attr !== "_links" && attr !== "customer" && attr !== "businessSector"
-                            && attr !== "numberOfSprints" && attr !== "budget" && attr !== "sprintDuration"
-                            && attr !== "endDate" && attr !== "typo") {
-                              return <td key={idx}>{Array.isArray(row[attr])?row[attr].join(", "):row[attr]}</td>;
+                              && attr !== "numberOfSprints" && attr !== "budget" && attr !== "sprintDuration"
+                              && attr !== "endDate" && attr !== "typo") {
+                              return (
+                                <td key={idx}>{Array.isArray(row[attr]) ? row[attr].join(", ") : row[attr]}</td>
+                              );
                             }
                           })
                         }
-
-                            {buttonOpen(id)}
-                         </tr>
+                        {buttonOpen(id)}
+                      </tr>
                     );
                   })}
                 </tbody>
-              </table>
+              </table>}
+              <div>
+                <Box>
+                  <Pagination step={dataLimit} numberItems={response.length} onChange={changePage} alignSelf="center" />
+                </Box>
+              </div>
             </div>
           </>
         );
@@ -154,4 +171,3 @@ export default function Table(props) {
     }
   }
 }
-

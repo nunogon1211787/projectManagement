@@ -1,6 +1,5 @@
 package switch2021.project.dtoModel.mapper;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,7 +7,7 @@ import org.springframework.hateoas.CollectionModel;
 import switch2021.project.dtoModel.dto.OutputResourceDTO;
 import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.valueObjects.vos.*;
-import switch2021.project.entities.valueObjects.vos.enums.ProjectRoleReeng;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectRole;
 import switch2021.project.interfaceAdapters.controller.ResourceController;
 
 import java.time.LocalDate;
@@ -48,7 +47,7 @@ class ResourceMapperTest {
         when(email.getEmailText()).thenReturn("email");
         when(id.getProject()).thenReturn(project);
         when(project.getCode()).thenReturn("code");
-        when(resource.getRole()).thenReturn(ProjectRoleReeng.TeamMember);
+        when(resource.getRole()).thenReturn(ProjectRole.TeamMember);
         when(id.getStartDate()).thenReturn(startDate);
         when(resource.getEndDate()).thenReturn(endDate);
         when(resource.getAllocation()).thenReturn(allocation);

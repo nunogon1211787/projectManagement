@@ -11,7 +11,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import switch2021.project.dtoModel.dto.CreateResourceDTO;
 import switch2021.project.dtoModel.dto.DefineRoleOfResourceDTO;
 import switch2021.project.entities.aggregates.Resource.Resource;
-import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.*;
 
 import switch2021.project.entities.valueObjects.vos.*;
@@ -23,7 +22,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-public class ResourceFactoryReengTest {
+public class ResourceFactoryTest {
 
     @Mock
     private IUserIDFactory iUserIDFactory;
@@ -56,7 +55,7 @@ public class ResourceFactoryReengTest {
 
 
     @InjectMocks
-    ResourceFactoryReeng resourceFactoryReeng;
+    ResourceFactory resourceFactory;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -77,7 +76,7 @@ public class ResourceFactoryReengTest {
         createResourceDTO.startDate = date.toString();
         createResourceDTO.endDate = date.toString();
         //Act
-        Resource newResource = resourceFactoryReeng.createResource(createResourceDTO);
+        Resource newResource = resourceFactory.createResource(createResourceDTO);
         //Assert
         assertNotNull(newResource);
     }
