@@ -1,5 +1,6 @@
 package switch2021.project.applicationServices.service;
 
+import org.apache.commons.codec.Resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
@@ -92,7 +93,7 @@ public class ProjectService {
     }
 
     /**
-    * US008
+     * US008
      */
 
     public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) {
@@ -128,20 +129,21 @@ public class ProjectService {
         throw new IllegalArgumentException("Project does not exist.");
     }
 
-    public CollectionModel<PartialProjectDTO> getAllProjects() {
+    public Map<String, CollectionModel<PartialProjectDTO>>  getAllProjects() {
 
         List<Project> projects = projRepo.findAll();
         List<Project> projectsWeb = iProjectWebRepository.findAll();
 
-        CollectionModel<PartialProjectDTO> partialProjectDTO= projMapper.toCollectionDto2(projectsWeb);
-        CollectionModel<PartialProjectDTO> partialProjectDTO2= projMapper.toCollectionDto2(projects);
+        CollectionModel<PartialProjectDTO> outputProjectDTOS = projMapper.toCollectionDto2(projectsWeb, true);
+        CollectionModel<PartialProjectDTO> outputProjectDTOS2 = projMapper.toCollectionDto2(projects, false);
 
-        List<PartialProjectDTO> newList = Stream.concat(partialProjectDTO.getContent().stream(), partialProjectDTO2.getContent().stream())
-                .collect(Collectors.toList());
+        Map<String, CollectionModel<PartialProjectDTO>> mapProjects = new HashMap<>();
+        mapProjects.put("internalProjects", outputProjectDTOS2);
+        mapProjects.put("externalProjects", outputProjectDTOS);
 
-        return CollectionModel.of(newList);
+        return mapProjects;
     }
-
+    
     public OutputProjectDTO showProject(String id) throws Exception {
 
         ProjectID projID = projectIDFactory.create(id);
@@ -177,10 +179,9 @@ public class ProjectService {
 
             return CollectionModel.of(projectsDto);
 
-        }
+            }
 
         throw new IllegalArgumentException("User dos not exist");
-
     }
 
     public boolean deleteProjectRequest(String id) {

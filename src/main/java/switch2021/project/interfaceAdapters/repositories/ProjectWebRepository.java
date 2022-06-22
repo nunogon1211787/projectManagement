@@ -19,14 +19,6 @@ public class ProjectWebRepository implements IProjectWebRepository {
 
     @Override
     public List<Project> findAll() {
-//        List<ProjectRestDTO> projectRestDTO = projectRestRepository.findAll();
-//        List<Project> projectList = new ArrayList<>();
-//
-//        for (ProjectRestDTO projectRestDTO1 : projectRestDTO) {
-//            projectList.add(projectDomainDataRestAssembler.toDomain(projectRestDTO1));
-//        }
-//        List<Project> projectList =  projectDomainDataRestAssembler.toDomain(projectRestDTO);
-//
         return projectDomainDataRestAssembler.toDomain(projectRestRepository.findAll());
 
     }
