@@ -134,8 +134,8 @@ public class ProjectService {
         List<Project> projects = projRepo.findAll();
         List<Project> projectsWeb = iProjectWebRepository.findAll();
 
-        CollectionModel<PartialProjectDTO> outputProjectDTOS = projMapper.toCollectionDto(projectsWeb, true);
-        CollectionModel<PartialProjectDTO> outputProjectDTOS2 = projMapper.toCollectionDto(projects, false);
+        CollectionModel<PartialProjectDTO> outputProjectDTOS = projMapper.toCollectionDto2(projectsWeb, true);
+        CollectionModel<PartialProjectDTO> outputProjectDTOS2 = projMapper.toCollectionDto2(projects, false);
 
         Map<String, CollectionModel<PartialProjectDTO>> mapProjects = new HashMap<>();
         mapProjects.put("internalProjects", outputProjectDTOS2);

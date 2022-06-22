@@ -113,13 +113,16 @@ public class ProjectMapper {
         return projDto;
     }
 
-    public CollectionModel<PartialProjectDTO> toCollectionDto2(List<Project> projects) {
+    public CollectionModel<PartialProjectDTO> toCollectionDto2(List<Project> projects, boolean isExternal) {
 
         CollectionModel<PartialProjectDTO> result = CollectionModel.of(projects.stream()
                 .map(this::model2Dto2)
                 .collect(Collectors.toList()));
 
-        result.add(linkTo(methodOn(ProjectController.class).showAllProjects()).withSelfRel());
+        if(isExternal)
+            result.add(Link.of(ProjectRestRepository.ENDPOINT + ProjectRestRepository.COLLECTION));
+        else
+            result.add(linkTo(methodOn(ProjectController.class).getAllProjects()).withSelfRel());
 
         return result;
     }
