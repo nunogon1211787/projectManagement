@@ -1,5 +1,6 @@
 package switch2021.project.applicationServices.service;
 
+import org.apache.commons.codec.Resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
@@ -71,7 +72,7 @@ public class ProjectService {
     }
 
     /**
-    * US008
+     * US008
      */
 
     public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) {
@@ -122,22 +123,24 @@ public class ProjectService {
 
     }
 
-    public CollectionModel<OutputProjectDTO> getAllProjects() {
+    public Map<String, CollectionModel<OutputProjectDTO>> getAllProjects() {
 
         List<Project> projects = projRepo.findAll();
         List<Project> projectsWeb = iProjectWebRepository.findAll();
 
-        CollectionModel<OutputProjectDTO> outputProjectDTOS = projMapper.toCollectionDto(projectsWeb);
-        CollectionModel<OutputProjectDTO> outputProjectDTOS2= projMapper.toCollectionDto(projects);
+        CollectionModel<OutputProjectDTO> outputProjectDTOS = projMapper.toCollectionDto(projectsWeb, true);
+        CollectionModel<OutputProjectDTO> outputProjectDTOS2 = projMapper.toCollectionDto(projects, false);
 
-        List<OutputProjectDTO> newList = Stream.concat(outputProjectDTOS.getContent().stream(), outputProjectDTOS2.getContent().stream())
-                .collect(Collectors.toList());
+        Map<String, CollectionModel<OutputProjectDTO>> mapProjects = new HashMap<>();
+        mapProjects.put("internalProjects", outputProjectDTOS2);
+        mapProjects.put("externalProjects", outputProjectDTOS);
 
-        return CollectionModel.of(newList);
+        return mapProjects;
+
     }
 
+
     public OutputProjectDTO showProject(String id) throws Exception {
-//        String[] x = id.split("_");
         ProjectID projID = new ProjectID(id);
 
         Optional<Project> foundProject = projRepo.findById(projID);

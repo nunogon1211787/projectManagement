@@ -1,11 +1,13 @@
 package switch2021.project.dtoModel.mapper;
 
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 import switch2021.project.interfaceAdapters.controller.ProjectController;
 import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.entities.aggregates.Project.Project;
+import switch2021.project.interfaceAdapters.repositories.REST.ProjectRestRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,7 +50,7 @@ public class ProjectMapper {
                 .withSelfRel());
 
         //Show all projects
-        projDto.add(linkTo(methodOn(ProjectController.class).showAllProjects()).withRel("Collection"));
+        projDto.add(linkTo(methodOn(ProjectController.class).getAllProjects()).withRel("Collection"));
 
         //Delete
         projDto.add(linkTo(methodOn(ProjectController.class).deleteProjectRequest(projDto.code)).withRel("Delete"));
@@ -61,14 +63,16 @@ public class ProjectMapper {
         return projDto;
     }
 
-    public CollectionModel<OutputProjectDTO> toCollectionDto(List<Project> projects) {
+    public CollectionModel<OutputProjectDTO> toCollectionDto(List<Project> projects, boolean isExternal) {
 
         CollectionModel<OutputProjectDTO> result = CollectionModel.of(projects.stream()
                 .map(this::model2Dto)
                 .collect(Collectors.toList()));
 
-
-        result.add(linkTo(methodOn(ProjectController.class).showAllProjects()).withSelfRel());
+        if(isExternal)
+            result.add(Link.of(ProjectRestRepository.ENDPOINT + ProjectRestRepository.COLLECTION));
+        else
+            result.add(linkTo(methodOn(ProjectController.class).getAllProjects()).withSelfRel());
 
         return result;
     }

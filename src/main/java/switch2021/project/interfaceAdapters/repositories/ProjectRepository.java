@@ -54,16 +54,16 @@ public class ProjectRepository implements IProjectRepo {
 
     @Override
     public List<Project> findAll() {
-        List<ProjectJpa> setProjectJpa = projectJpaRepository.findAll();
+        List<ProjectJpa> projectJpaList = projectJpaRepository.findAll();
 
-        List<Project> setProject = new ArrayList<>();
+        List<Project> projectList = new ArrayList<>();
 
-        for (ProjectJpa projectJpa : setProjectJpa) {
+        for (ProjectJpa projectJpa : projectJpaList) {
             Project project = projectJpaAssembler.toDomain(projectJpa);
-            setProject.add(project);
+            projectList.add(project);
         }
 
-        return setProject;
+        return projectList;
     }
 
 
