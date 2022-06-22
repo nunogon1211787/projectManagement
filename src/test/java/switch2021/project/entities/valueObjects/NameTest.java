@@ -22,6 +22,17 @@ class NameTest {
     }
 
     @Test
+    public void nameConstructorSuccess2() {
+        //Arrange
+        Name actual = new Name("Zé António");
+        //Act
+        Name expected = new Name();
+        expected.setText("Zé António");
+        //Assert
+        assertEquals(expected.getText(), actual.getText());
+    }
+
+    @Test
     void checkNameEmpty() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
@@ -82,7 +93,7 @@ class NameTest {
         Name name = new Name("Test");
         Name name1 = new Name("Test");
         //Act and Assert
-        assertTrue(name.equals(name1));
+        assertEquals(name, name1);
     }
 
 

@@ -14,7 +14,8 @@ class TypologyIDTest {
     public void getDescription_Success() {
         //Arrange
         Description des = mock(Description.class);
-        TypologyID id = new TypologyID(des);
+        TypologyID id = new TypologyID();
+        id.setDescription(des);
         //Act
         when(des.getText()).thenReturn("test");
         Description id_des = id.getDescription();

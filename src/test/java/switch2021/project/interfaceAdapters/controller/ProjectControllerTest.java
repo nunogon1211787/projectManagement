@@ -13,12 +13,15 @@ import org.springframework.http.ResponseEntity;
 import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
+import switch2021.project.dtoModel.dto.PartialProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.Budget;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
-import java.util.List;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
@@ -38,17 +41,19 @@ class ProjectControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-
     @Test
     void getAllProjectSuccess() {
         //Arrange
-        OutputProjectDTO test = mock(OutputProjectDTO.class);
-        OutputProjectDTO test2 = mock(OutputProjectDTO.class);
-        OutputProjectDTO test3 = mock(OutputProjectDTO.class);
-        when(service.getAllProjects()).thenReturn(CollectionModel.of
-                (List.of(new OutputProjectDTO[]{test, test2, test3})));
+        Map<String, CollectionModel<PartialProjectDTO>> allProjectsDto = new HashMap<>();
+        PartialProjectDTO test = mock(PartialProjectDTO.class);
+        PartialProjectDTO test2 = mock(PartialProjectDTO.class);
+        PartialProjectDTO test3 = mock(PartialProjectDTO.class);
+        allProjectsDto.put("one", CollectionModel.of(List.of(test)));
+        allProjectsDto.put("two", CollectionModel.of(List.of(test2)));
+        allProjectsDto.put("three", CollectionModel.of(List.of(test3)));
+        when(service.getAllProjects()).thenReturn(allProjectsDto);
         //Act
-        ResponseEntity<?> response = ctrl.showAllProjects();
+        ResponseEntity<?> response = ctrl.getAllProjects();
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
@@ -57,9 +62,9 @@ class ProjectControllerTest {
     void getAllProjectCatchException() {
         //Arrange
         //Act
-        ResponseEntity<?> response = ctrl.showAllProjects();
+        ResponseEntity<?> response = ctrl.getAllProjects();
         //Assert
-        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
 
     @SneakyThrows
@@ -92,7 +97,7 @@ class ProjectControllerTest {
     void testCreateProject() {
         //Arrange
         ProjectDTO test = mock(ProjectDTO.class);
-        OutputProjectDTO outTest= mock(OutputProjectDTO.class);
+        OutputProjectDTO outTest = mock(OutputProjectDTO.class);
         when(service.createAndSaveProject(test)).thenReturn(outTest);
         //Act
         ResponseEntity<?> response = ctrl.createProject(test);
@@ -117,7 +122,7 @@ class ProjectControllerTest {
     void testUpdateProject() {
         //Arrange
         EditProjectInfoDTO test = mock(EditProjectInfoDTO.class);
-        OutputProjectDTO outTest= mock(OutputProjectDTO.class);
+        OutputProjectDTO outTest = mock(OutputProjectDTO.class);
         when(service.updateProjectPartially("1", test)).thenReturn(outTest);
         //Act
         ResponseEntity<?> response = ctrl.updateProjectPartially("1", test);

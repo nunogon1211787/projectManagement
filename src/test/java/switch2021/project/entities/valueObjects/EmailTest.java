@@ -324,8 +324,10 @@ class EmailTest {
     @Test
     public void equalsFailTest() {
         //Arrange
-        Email email = new Email("Test@gmail.com");
-        Email test = new Email("Test1@gmail.com");
+        Email email = new Email();
+        email.setEmailText("Test@gmail.com");
+        Email test = new Email();
+        test.setEmailText("Test1@gmail.com");
         //Assert
         assertNotEquals(test, email);
     }

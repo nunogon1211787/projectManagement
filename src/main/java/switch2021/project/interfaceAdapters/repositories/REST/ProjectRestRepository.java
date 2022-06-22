@@ -18,10 +18,13 @@ import java.util.List;
 @Repository
 public class ProjectRestRepository {
 
+    public static final String ENDPOINT = "http://localhost:8090";
+    public static final String COLLECTION = "/projects/";
+
     public List<ProjectRestDTO> findAll() {
 
         WebClient webClient = WebClient.builder()
-                .baseUrl("http://localhost:8090")
+                .baseUrl(ENDPOINT)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .defaultUriVariables(Collections.singletonMap("url", "http://localhost:8090"))
                 .clientConnector(new ReactorClientHttpConnector(HttpClient.create(ConnectionProvider.newConnection())))
@@ -30,7 +33,7 @@ public class ProjectRestRepository {
         try {
             projectRestDTO = webClient
                     .get()
-                    .uri("/projects/")
+                    .uri(COLLECTION)
                     .retrieve()
 
                     .onStatus(HttpStatus::is4xxClientError, error -> {

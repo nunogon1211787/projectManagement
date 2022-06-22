@@ -20,9 +20,7 @@ import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -343,17 +341,18 @@ class ProjectServiceTest {
         //Arrange
         List<Project> projects = new ArrayList<>();
         List<Project> projectsWeb = new ArrayList<>();
-        CollectionModel<OutputProjectDTO> outDtoList = CollectionModel.empty();
-        CollectionModel<OutputProjectDTO> outDtoWebList = CollectionModel.empty();
+        CollectionModel<PartialProjectDTO> outDtoList = CollectionModel.empty();
+        CollectionModel<PartialProjectDTO> outDtoWebList = CollectionModel.empty();
 
         when(projRepo.findAll()).thenReturn(projects);
         when(iProjectWebRepository.findAll()).thenReturn(projectsWeb);
-        when(projMapper.toCollectionDto(projects)).thenReturn(outDtoList);
-        when(projMapper.toCollectionDto(projectsWeb)).thenReturn(outDtoWebList);
-        CollectionModel<OutputProjectDTO> expected = CollectionModel.empty();
-
+        when(projMapper.toCollectionDto2(projects, false)).thenReturn(outDtoList);
+        when(projMapper.toCollectionDto2(projectsWeb, true)).thenReturn(outDtoWebList);
+        Map<String, CollectionModel<PartialProjectDTO>> expected = new HashMap<>();
+        expected.put("internalProjects", outDtoList);
+        expected.put("externalProjects", outDtoWebList);
         //Act
-        CollectionModel<OutputProjectDTO> result = projectService.getAllProjects();
+        Map<String, CollectionModel<PartialProjectDTO>> result = projectService.getAllProjects();
         //Assert
         assertEquals(expected, result);
     }

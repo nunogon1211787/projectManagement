@@ -1,6 +1,7 @@
 package switch2021.project.entities.valueObjects;
 
 import org.junit.jupiter.api.Test;
+import switch2021.project.entities.valueObjects.vos.Email;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.ResourceID;
 import switch2021.project.entities.valueObjects.vos.UserID;
@@ -8,7 +9,7 @@ import switch2021.project.entities.valueObjects.vos.UserID;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 class ResourceIDTest {
 
@@ -154,5 +155,23 @@ class ResourceIDTest {
         ResourceID resourceID = new ResourceID(userID,projectID,startDate);
         //Assert
         assertNotEquals(resourceID.hashCode(),projectID.hashCode());
+    }
+
+    @Test
+    void toStringSuccess() {
+        //Arrange
+        UserID userID = mock(UserID.class);
+        Email email = mock(Email.class);
+        ProjectID projectID = mock(ProjectID.class);
+        LocalDate startDate = LocalDate.parse("2022-10-12");
+        when(userID.getEmail()).thenReturn(email);
+        when(email.getEmailText()).thenReturn("zcd@gmail.com");
+        when(projectID.getCode()).thenReturn("Project_2022_1");
+        String expected = "zcd@gmail.com&Project_2022_1&2022-10-12";
+        ResourceID resourceID = new ResourceID(userID,projectID,startDate);
+        //Act
+        String result = resourceID.toString();
+        //Assert
+        assertEquals(expected, result);
     }
 }
