@@ -23,7 +23,7 @@ public class SprintJpa {
     private SprintID sprintId;
     private String startDate;
     private String endDate;
-    @OneToMany(mappedBy = "sprintJpa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sprintJpa", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<UserStoryOfSprintJpa> uSOfSprintJpaList;
 
     public SprintJpa(SprintID sprintId, String startDate, String endDate) {
