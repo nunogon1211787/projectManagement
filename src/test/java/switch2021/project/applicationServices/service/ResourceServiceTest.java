@@ -13,10 +13,9 @@ import switch2021.project.applicationServices.iRepositories.IUserRepo;
 //import switch2021.project.dtoModel.dto.CreateResourceDTO;
 //import switch2021.project.dtoModel.dto.OutputResourceDTO;
 import switch2021.project.dtoModel.mapper.ResourceMapper;
-import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManagementResourcesService;
 //import switch2021.project.entities.aggregates.Resource.Resource;
-import switch2021.project.entities.factories.factoryInterfaces.IResourceFactoryReeng;
+import switch2021.project.entities.factories.factoryInterfaces.IResourceFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResourceIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
@@ -44,7 +43,7 @@ class ResourceServiceTest {
     @MockBean
     private ManagementResourcesService manageSrv;
     @MockBean
-    private IResourceFactoryReeng resourceFactory;
+    private IResourceFactory resourceFactory;
     @MockBean
     private IResourceIDFactory resourceIDFactory;
     @MockBean

@@ -10,14 +10,14 @@ import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResour
 import switch2021.project.entities.valueObjects.vos.CostPerHour;
 import switch2021.project.entities.valueObjects.vos.PercentageOfAllocation;
 import switch2021.project.entities.valueObjects.vos.ResourceID;
-import switch2021.project.entities.valueObjects.vos.enums.ProjectRoleReeng;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectRole;
 import switch2021.project.entities.factories.factoryInterfaces.*;
 import switch2021.project.entities.aggregates.Resource.Resource;
 
 import java.time.LocalDate;
 
 @Component
-public class ResourceFactoryReeng implements IResourceFactoryReeng {
+public class ResourceFactory implements IResourceFactory {
 
     @Autowired
     private IResourceIDFactory resourceID;
@@ -29,12 +29,12 @@ public class ResourceFactoryReeng implements IResourceFactoryReeng {
     public Resource createResource(CreateResourceDTO resourceDTO) {
         ResourceID resourceId = resourceID.create(resourceDTO.systemUserID, resourceDTO.projectId,
                 resourceDTO.startDate);
-        ProjectRoleReeng projRole;
+        ProjectRole projRole;
 
         if (resourceDTO.projectRole != null) {
-            projRole = ProjectRoleReeng.valueOf(resourceDTO.projectRole);
+            projRole = ProjectRole.valueOf(resourceDTO.projectRole);
         } else {
-            projRole = ProjectRoleReeng.TeamMember;
+            projRole = ProjectRole.TeamMember;
         }
 
         CostPerHour coPeHo = costPerHour.create(resourceDTO.costPerHour);
@@ -49,7 +49,7 @@ public class ResourceFactoryReeng implements IResourceFactoryReeng {
                 dto.getStartDate());
         PercentageOfAllocation percOfAll = percentageOfAllocation.create(dto.getPercentageOfAllocation());
         CostPerHour coPeHo = costPerHour.create(dto.getCostPerHour());
-        ProjectRoleReeng role = ProjectRoleReeng.valueOf(dto.getRole());
+        ProjectRole role = ProjectRole.valueOf(dto.getRole());
 
         return new Resource(resourceId, LocalDate.parse(dto.getEndDate()), percOfAll, coPeHo, role);
     }

@@ -1,6 +1,5 @@
 package switch2021.project.interfaceAdapters.repositories;
 
-import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.dataModel.JPA.UserStoryJpa;
@@ -12,7 +11,6 @@ import switch2021.project.persistence.UserStoryJpaRepository;
 
 import java.util.*;
 
-@Getter
 @Repository
 public class UserStoryRepository implements IUserStoryRepo {
 
@@ -69,8 +67,5 @@ public class UserStoryRepository implements IUserStoryRepo {
     }
 
     @Override
-    public void deleteByUserStoryId(UserStoryID usId) throws NullPointerException {
-
-        jpaRepository.deleteById(usId);
-    }
+    public void deleteByUserStoryId(UserStoryID usId) { jpaRepository.deleteById(usId); }
 }

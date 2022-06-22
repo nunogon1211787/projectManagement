@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.hateoas.CollectionModel;
 import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.applicationServices.iRepositories.IUserStoryRepo;
@@ -43,21 +44,21 @@ public class UserStoryServiceTest {
     @InjectMocks
     UserStoryService service;
 
-    @Mock
+    @MockBean
     private IUserStoryFactory iUserStoryFactory;
-    @Mock
+    @MockBean
     private IUserStoryIDFactory usIdFactory;
-    @Mock
+    @MockBean
     private IUsHourFactory usHourFactory;
-    @Mock
+    @MockBean
     private IUsPriorityFactory priorityFactory;
-    @Mock
+    @MockBean
     private IProjectIDFactory projectIDFactory;
-    @Mock
+    @MockBean
     private IProjectRepo iProjectRepo;
-    @Mock
+    @MockBean
     private IUserStoryRepo repo;
-    @Mock
+    @MockBean
     private UserStoryMapper mapper;
 
     @BeforeEach
