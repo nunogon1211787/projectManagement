@@ -7,7 +7,7 @@ import lombok.Setter;
 import switch2021.project.entities.valueObjects.vos.CostPerHour;
 import switch2021.project.entities.valueObjects.vos.PercentageOfAllocation;
 import switch2021.project.entities.valueObjects.vos.ResourceID;
-import switch2021.project.entities.valueObjects.vos.enums.ProjectRoleReeng;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectRole;
 import switch2021.project.utils.Entity;
 
 import java.time.LocalDate;
@@ -26,7 +26,7 @@ public class Resource implements Entity<Resource> {
     private LocalDate endDate;
     private PercentageOfAllocation allocation;
     private CostPerHour cost;
-    private ProjectRoleReeng role;
+    private ProjectRole role;
 
 
 
@@ -42,7 +42,7 @@ public class Resource implements Entity<Resource> {
     }
 
     public boolean hasProjectRole(String role) {
-        return this.role.equals(ProjectRoleReeng.valueOf(role));
+        return this.role.equals(ProjectRole.valueOf(role));
     }
 
 

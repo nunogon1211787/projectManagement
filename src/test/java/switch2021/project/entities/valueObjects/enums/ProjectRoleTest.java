@@ -2,17 +2,17 @@ package switch2021.project.entities.valueObjects.enums;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.entities.valueObjects.vos.enums.ProjectRoleReeng;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectRole;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ProjectRoleReengTest {
+public class ProjectRoleTest {
 
     @DisplayName("Test to compare two lists of project roles values")
     @Test
     public void getProjectRoleReengDescription() {
         //Act
-        List<String> statusList1 = ProjectRoleReeng.getProjectRole();
+        List<String> statusList1 = ProjectRole.getProjectRole();
         List<String> statusList2 = List.of(new String[]{"ProjectManager", "ProductOwner", "ScrumMaster", "TeamMember"});
         //Assert
         assertEquals(statusList1, statusList2);
@@ -22,10 +22,10 @@ public class ProjectRoleReengTest {
     @Test
     public void value_ProjectManager() {
         //Act
-        ProjectRoleReeng[] status = ProjectRoleReeng.values();
-        ProjectRoleReeng projectManager = status[0];
+        ProjectRole[] status = ProjectRole.values();
+        ProjectRole projectManager = status[0];
         //Assert
-        assertEquals(projectManager, ProjectRoleReeng.ProjectManager);
+        assertEquals(projectManager, ProjectRole.ProjectManager);
 
     }
 
@@ -34,10 +34,10 @@ public class ProjectRoleReengTest {
     @Test
     public void value_ProductOwner() {
         //Act
-        ProjectRoleReeng[] status = ProjectRoleReeng.values();
-        ProjectRoleReeng productOwner = status[1];
+        ProjectRole[] status = ProjectRole.values();
+        ProjectRole productOwner = status[1];
         //Assert
-        assertEquals(productOwner, ProjectRoleReeng.ProductOwner);
+        assertEquals(productOwner, ProjectRole.ProductOwner);
 
     }
 
@@ -46,10 +46,10 @@ public class ProjectRoleReengTest {
     @Test
     public void value_ScrumMaster() {
         //Act
-        ProjectRoleReeng[] status = ProjectRoleReeng.values();
-        ProjectRoleReeng scrumMaster = status[2];
+        ProjectRole[] status = ProjectRole.values();
+        ProjectRole scrumMaster = status[2];
         //Assert
-        assertEquals(scrumMaster, ProjectRoleReeng.ScrumMaster);
+        assertEquals(scrumMaster, ProjectRole.ScrumMaster);
 
     }
 
@@ -58,10 +58,10 @@ public class ProjectRoleReengTest {
     @Test
     public void value_TeamMember() {
         //Act
-        ProjectRoleReeng[] status = ProjectRoleReeng.values();
-        ProjectRoleReeng teamMember = status[3];
+        ProjectRole[] status = ProjectRole.values();
+        ProjectRole teamMember = status[3];
         //Assert
-        assertEquals(teamMember, ProjectRoleReeng.TeamMember);
+        assertEquals(teamMember, ProjectRole.TeamMember);
 
     }
 
@@ -69,10 +69,10 @@ public class ProjectRoleReengTest {
     @Test
     public void value_Fail() {
         //Act
-        ProjectRoleReeng[] status = ProjectRoleReeng.values();
-        ProjectRoleReeng teamMember = status[3];
+        ProjectRole[] status = ProjectRole.values();
+        ProjectRole teamMember = status[3];
         //Assert
-        assertNotEquals(teamMember, ProjectRoleReeng.ScrumMaster);
+        assertNotEquals(teamMember, ProjectRole.ScrumMaster);
 
     }
 
@@ -81,9 +81,9 @@ public class ProjectRoleReengTest {
     @Test
     public void valueOf_ProjectManager() {
         //Act
-        ProjectRoleReeng projectRoleReeng = ProjectRoleReeng.valueOf("ProjectManager");
+        ProjectRole projectRole = ProjectRole.valueOf("ProjectManager");
         //Assert
-        assertEquals(projectRoleReeng, ProjectRoleReeng.ProjectManager);
+        assertEquals(projectRole, ProjectRole.ProjectManager);
     }
 
 
@@ -91,9 +91,9 @@ public class ProjectRoleReengTest {
     @Test
     public void valueOf_ProductOwner() {
         //Act
-        ProjectRoleReeng projectRoleReeng = ProjectRoleReeng.valueOf("ProductOwner");
+        ProjectRole projectRole = ProjectRole.valueOf("ProductOwner");
         //Assert
-        assertEquals(projectRoleReeng, ProjectRoleReeng.ProductOwner);
+        assertEquals(projectRole, ProjectRole.ProductOwner);
     }
 
 
@@ -101,9 +101,9 @@ public class ProjectRoleReengTest {
     @Test
     public void valueOf_ScrumMaster() {
         //Act
-        ProjectRoleReeng projectRoleReeng = ProjectRoleReeng.valueOf("ScrumMaster");
+        ProjectRole projectRole = ProjectRole.valueOf("ScrumMaster");
         //Assert
-        assertEquals(projectRoleReeng, ProjectRoleReeng.ScrumMaster);
+        assertEquals(projectRole, ProjectRole.ScrumMaster);
     }
 
 
@@ -112,9 +112,9 @@ public class ProjectRoleReengTest {
     @Test
     public void valueOf_TeamMember() {
         //Act
-        ProjectRoleReeng projectRoleReeng = ProjectRoleReeng.valueOf("TeamMember");
+        ProjectRole projectRole = ProjectRole.valueOf("TeamMember");
         //Assert
-        assertEquals(projectRoleReeng, ProjectRoleReeng.TeamMember);
+        assertEquals(projectRole, ProjectRole.TeamMember);
     }
 
 

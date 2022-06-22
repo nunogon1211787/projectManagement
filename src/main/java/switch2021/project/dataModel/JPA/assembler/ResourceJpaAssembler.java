@@ -6,7 +6,7 @@ import switch2021.project.dataModel.JPA.ResourceJpa;
 import switch2021.project.entities.valueObjects.vos.ResourceID;
 import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.valueObjects.vos.*;
-import switch2021.project.entities.valueObjects.vos.enums.ProjectRoleReeng;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectRole;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class ResourceJpaAssembler {
         LocalDate endDate = LocalDate.parse(resourceJpaSaved.getEndDate());
         PercentageOfAllocation percentageOfAllocation = new PercentageOfAllocation(resourceJpaSaved.getAllocation());
         CostPerHour costPerHour = new CostPerHour(resourceJpaSaved.getCost());
-        ProjectRoleReeng projectRole = ProjectRoleReeng.valueOf(resourceJpaSaved.getRole());
+        ProjectRole projectRole = ProjectRole.valueOf(resourceJpaSaved.getRole());
 
         return new Resource(id, endDate, percentageOfAllocation, costPerHour, projectRole);
     }

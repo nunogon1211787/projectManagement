@@ -54,7 +54,7 @@ public class UserProfileController {
 
          } catch (Exception exception) {
              message.errorMessage = exception.getMessage();
-             return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+             return  new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
          }
          return new ResponseEntity<>(outPutDTO, HttpStatus.OK);
      }
@@ -65,10 +65,6 @@ public class UserProfileController {
     @PostMapping
     public ResponseEntity<Object> createUserProfile(@RequestBody UserProfileDTO userProfileDTO) {
         ErrorMessage message = new ErrorMessage();
-        if(userProfileDTO.userProfileName == null || userProfileDTO.userProfileName.isEmpty()){
-            message.errorMessage = "User Profile Name can not be empty.";
-            return new ResponseEntity<>(message, HttpStatus.NOT_ACCEPTABLE);
-        }
         UserProfileDTO outPutDTO;
         try {
             outPutDTO = createUserProfileService.createAndSaveUserProfile(userProfileDTO);

@@ -3,7 +3,7 @@ package switch2021.project.entities.valueObjects.vos.enums;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum ProjectRoleReeng {
+public enum ProjectRole {
 
     ProjectManager,
     ProductOwner,
@@ -11,10 +11,10 @@ public enum ProjectRoleReeng {
     TeamMember;
 
     public static List<String> getProjectRole() {
-        ProjectRoleReeng[] projectRolesValues = ProjectRoleReeng.values();
+        ProjectRole[] projectRolesValues = ProjectRole.values();
         List<String> projectRoles = new ArrayList<>();
 
-        for (ProjectRoleReeng projectRoleEnum : projectRolesValues) {
+        for (ProjectRole projectRoleEnum : projectRolesValues) {
             projectRoles.add(projectRoleEnum.toString());
         }
         return projectRoles;
