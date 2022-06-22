@@ -13,7 +13,6 @@ import java.util.Objects;
 
 @Embeddable
 @NoArgsConstructor
-@ToString
 @Getter
 public class ResourceID implements ValueObject<ResourceID> {
 
@@ -52,8 +51,8 @@ public class ResourceID implements ValueObject<ResourceID> {
 
     @Override
     public String toString() {
-        return  user + "&" +
-                project + "&" +
-                startDate;
+        return  this.getUser().getEmail().getEmailText() + "&" +
+                this.getProject().getCode() + "&" +
+                this.getStartDate().toString();
     }
 }

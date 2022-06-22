@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dtoModel.dto.ErrorMessage;
-import switch2021.project.dtoModel.dto.OutputUserProfileDTO;
 import switch2021.project.dtoModel.dto.UserProfileDTO;
 import switch2021.project.applicationServices.service.UserProfileService;
 
@@ -29,12 +28,12 @@ public class UserProfileController {
      * Find all profiles
      */
     @GetMapping
-    public ResponseEntity<Object> showAllProfiles(){
+    public ResponseEntity<Object> getAllProfiles(){
         ErrorMessage message = new ErrorMessage();
-        CollectionModel<OutputUserProfileDTO> outPutDTO;
+        CollectionModel<UserProfileDTO> outPutDTO;
 
         try {
-            outPutDTO = createUserProfileService.showAllProfiles();
+            outPutDTO = createUserProfileService.getAllProfiles();
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
@@ -48,14 +47,14 @@ public class UserProfileController {
      @GetMapping("/{id}")
      public ResponseEntity<Object> showUserProfileRequested(@PathVariable("id") String id){
          ErrorMessage message = new ErrorMessage();
-         OutputUserProfileDTO outPutDTO;
+         UserProfileDTO outPutDTO;
 
          try {
              outPutDTO = createUserProfileService.findUserProfileRequested(id);
 
          } catch (Exception exception) {
              message.errorMessage = exception.getMessage();
-             return  new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+             return  new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
          }
          return new ResponseEntity<>(outPutDTO, HttpStatus.OK);
      }
@@ -66,11 +65,7 @@ public class UserProfileController {
     @PostMapping
     public ResponseEntity<Object> createUserProfile(@RequestBody UserProfileDTO userProfileDTO) {
         ErrorMessage message = new ErrorMessage();
-        if(userProfileDTO.userProfileName == null || userProfileDTO.userProfileName.isEmpty()){
-            message.errorMessage = "User Profile Name can not be empty.";
-            return new ResponseEntity<>(message, HttpStatus.NOT_ACCEPTABLE);
-        }
-        OutputUserProfileDTO outPutDTO;
+        UserProfileDTO outPutDTO;
         try {
             outPutDTO = createUserProfileService.createAndSaveUserProfile(userProfileDTO);
 
@@ -87,7 +82,7 @@ public class UserProfileController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> editAUserProfile(@PathVariable("id") String id, @RequestBody UserProfileDTO dto){
         ErrorMessage message = new ErrorMessage();
-        OutputUserProfileDTO outPutDTO;
+        UserProfileDTO outPutDTO;
 
         try {
 
@@ -112,7 +107,7 @@ public class UserProfileController {
             createUserProfileService.deleteARequestedUserProfile(id);
             message.errorMessage = "User profile successfully deleted";
 
-            message.add(linkTo(methodOn(UserProfileController.class).showAllProfiles()).withRel("Collection"));
+            message.add(linkTo(methodOn(UserProfileController.class).getAllProfiles()).withRel("Collection"));
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();

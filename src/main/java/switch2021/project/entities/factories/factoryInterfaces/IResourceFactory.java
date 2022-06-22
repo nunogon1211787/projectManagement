@@ -5,7 +5,7 @@ import switch2021.project.dtoModel.dto.DefineRoleOfResourceDTO;
 import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.valueObjects.vos.ResourceID;
 
-public interface IResourceFactoryReeng {
+public interface IResourceFactory {
 
     Resource createResource(CreateResourceDTO resourceDTO);
 

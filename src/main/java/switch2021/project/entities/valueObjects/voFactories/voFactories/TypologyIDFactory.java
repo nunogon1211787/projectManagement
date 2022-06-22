@@ -19,4 +19,10 @@ public class TypologyIDFactory implements ITypologyIDFactory {
         Description des = descFact.createDescription(inputDto.getDescription());
         return new TypologyID(des);
     }
+
+    @Override
+    public TypologyID createIdWithString(String typoId) {
+        Description des = descFact.createDescription(typoId);
+        return new TypologyID(des);
+    }
 }

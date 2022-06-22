@@ -12,12 +12,13 @@ class UserProfileIDTest {
 
     @Test
     @DisplayName("CreateUserProfile")
-    public void createUserProfileTest()
-    {
+    public void createUserProfileTest() {
         //Arrange
-       UserProfileID userProfile = new UserProfileID(new Description("Teste"));
-       //Assert
-       assertEquals("Teste", userProfile.getUserProfileName().getText());
+        Description des = new Description("Teste");
+        UserProfileID userProfile = new UserProfileID();
+        userProfile.setUserProfileName(des);
+        //Assert
+        assertEquals("Teste", userProfile.getUserProfileName().getText());
     }
 
     @Test
@@ -34,7 +35,7 @@ class UserProfileIDTest {
         UserProfileID description2 = new UserProfileID(new Description("Teste"));
         UserProfileID description3 = null;
         // Act
-        assertEquals(description,description2);
+        assertEquals(description, description2);
         assertNotEquals(description, description3);
     }
 

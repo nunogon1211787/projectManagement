@@ -25,6 +25,6 @@ public interface IProjectRepo {
     /**Save Projects Method**/
    Project save(Project newProject);
 
-    boolean deleteByProjectID(ProjectID id);
+    boolean delete(ProjectID id);
 
 }

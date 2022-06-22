@@ -4,10 +4,11 @@ import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.valueObjects.vos.UserStoryID;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IUserStoryRepo {
 
-    UserStory findByUserStoryId(UserStoryID userStoryID);
+    Optional<UserStory> findByUserStoryId(UserStoryID userStoryID);
 
     List<UserStory> findAll();
 

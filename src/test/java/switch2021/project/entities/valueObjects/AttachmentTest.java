@@ -74,8 +74,10 @@ public class AttachmentTest {
         String filename1 = "test1.txt";
         String filename2 = "test2.txt";
         //Act
-        Attachment attachment = new Attachment(filename1);
-        Attachment attachment1 = new Attachment(filename2);
+        Attachment attachment = new Attachment();
+        attachment.setExtension(filename1);
+        Attachment attachment1 = new Attachment();
+        attachment1.setExtension(filename2);
          //Assert
         assertNotEquals(attachment, attachment1);
     }
@@ -90,7 +92,7 @@ public class AttachmentTest {
         Attachment attachment = new Attachment(filename1);
         Attachment attachment1 = new Attachment(filename1);
         //Assert
-        assertTrue(attachment.equals(attachment1));
+        assertEquals(attachment, attachment1);
     }
 
     @Test

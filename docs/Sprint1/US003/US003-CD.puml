@@ -1,7 +1,7 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-hide circle
+'hide circle
 skinparam classAttributeIconSize 0
 
 title US003 - As Visitor, I want to send a request to the administrator to assign him/her a given profile
@@ -11,31 +11,32 @@ skinparam classAttributeIconSize 0
 '''''''''''''''''''''''''''''''
 package "Infrastructure" <<Rectangle>> #lightblue  {
 package "Route"{
-    class "UserRoute" as route << Component >>
+    class "SendProfileRequestRoute" as route << Component >>
     }
 
 package "Persistence" {
-    interface "IUserJPARepository" as iUserRepositoryJPA << Interface >>
+    interface "IUserProfileJPARepository" as iUserRepositoryJPA << Interface >>{
+    + existsById(userProfileID)
+    }
     }
 }
 '''''''''''''''''''''''''''''''
 package "Interface Adapter" <<Rectangle>> #lightgreen {
 
   package "Controllers" <<Folder>>{
-    class "UserController" as ctrl << Component >> {
+    class "UserProfileController" as ctrl << Component >> {
     +createAndAddRequest(requestDTO)
     }
   }
   package "Repositories" <<Folder>>{
     class "UserRepository" as UserRepo << Repository >> {
     + findUserByID(userID)
-    + update(opUser)
+    + save(user)
     }
   }
   package "Repositories" <<Folder>>{
     class "UserProfileRepository" as UserProfileRepo << Repository >> {
     + existsByUserProfileId(userProfileID)
-    + update(opUser)
     }
   }
 }
@@ -49,44 +50,35 @@ package "Application Service API/Use Case Service" <<Rectangle>> #lightpink{
   package "Repositories Interface" <<Folder>>{
     interface "IUserRepo" as iUserRepo << Interface >>{
     + findUserByID(userID)
-    + update(opUser)
+    + save(user)
     }
   }
+    package "Repositories Interface" <<Folder>>{
+      interface "IUserProfileRepo" as iUserProfileRepo << Interface >>{
+    + existsByUserProfileId(userProfileID)
+      }
+    }
 }
 '''''''''''''''''''''''''''''''
 package "DTO" <<Rectangle>> {
-  package "IDDTO" <<Folder>>{
-    class "idDTO" as idDto << Component >> {
-    - id : String
+
+  package "RequestDTO" <<Folder>>{
+    class "RequestDTO" as outDto << Component >> {
+    - profileID : String
     }
   }
 
-  package "OutputUserDTO" <<Folder>>{
-    class "OutputUserDTO" as outDto << Component >> {
-    - userName : String
-    - email : String
-    - function : String
-    - photo : String
-    - isActive : String
-    - assignedIDProfiles : String []
-    }
-  }
-
-  package "UserMapper" <<Folder>>{
-    class "UserMapper" as mapper << Component >> {
-    + toDto(savedUser)
-    }
-  }
 }
 
 package "Data Model" <<Rectangle>>{
-package "Assembler" as generalAssember {
+package "Assembler" as generalAssembler {
     class "UserJPAAssembler" as assembler <<Component>>{
     +toDomain(foundUserJPA)
     }
     }
 package "JPA" as generalJPA {
     class "UserJPA" as jpa {
+    + create()
     }
     }
 }
@@ -101,6 +93,7 @@ package "Domain" <<Rectangle>> #burlywood{
     - isActive : boolean
     - requestedProfiles : List<Request>
     + SystemUser(systemUserID)
+    +createProfileRequest(profileID)
     }
   }
 
@@ -110,6 +103,28 @@ package "Domain" <<Rectangle>> #burlywood{
     +SystemUserID(email)
     }
 
+        class "Request" as request << Value Object >> {
+        -date : LocalDate
+        -id : UserProfileID
+        +create(profileID)
+        }
+
 }
 
+
+route ..> ctrl
+ctrl .down.> service
+service ..|> iUserRepo
+iUserRepo ..> jpa
+service ..> UserProfileRepo
+UserProfileRepo ..> iUserRepositoryJPA
+service ..> user
+user ..> request
+user ..> SUID
+iUserRepo ..> assembler
+assembler ..> user
+assembler ..> jpa
+service ..|> iUserProfileRepo
+iUserRepo ..|> UserProfileRepo
+service .down.> outDto
 @enduml

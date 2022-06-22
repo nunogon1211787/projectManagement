@@ -2,7 +2,7 @@ package switch2021.project.entities.aggregates.Resource;
 
 import org.springframework.stereotype.Component;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
-import switch2021.project.entities.valueObjects.vos.enums.ProjectRoleReeng;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectRole;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class ManagementResourcesService {
         for (Resource res : projectTeamList) {
             if (res.isActiveToThisDate(LocalDate.parse(startDate)) || res.isActiveToThisDate(LocalDate.parse(endDate))) {
                 if (res.hasProjectRole(projectRole)) {
-                    msg = res.getRole().equals(ProjectRoleReeng.TeamMember);
+                    msg = res.getRole().equals(ProjectRole.TeamMember);
                 }
             }
         }

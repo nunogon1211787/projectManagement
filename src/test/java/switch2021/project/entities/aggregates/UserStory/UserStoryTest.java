@@ -3,6 +3,7 @@ package switch2021.project.entities.aggregates.UserStory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.entities.valueObjects.vos.*;
+import switch2021.project.entities.valueObjects.vos.enums.UserStoryStatusEnum;
 
 import java.time.LocalDate;
 
@@ -11,7 +12,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class UserStoryTest {
-
 
     @Test
     @DisplayName("Create User Story with success - using user story ID")
@@ -33,29 +33,62 @@ class UserStoryTest {
         assertEquals(usID, userStory.getUserStoryID());
     }
 
-//    @Test
-//    @DisplayName("Create User Story refined with success - using user story parent")
-//    void CreateUserStoryParentWithSuccess() {
-//        //Arrange
-//        UserStoryID usID = mock(UserStoryID.class);
-//        ProjectID projID = mock(ProjectID.class);
-//        UsTitle usTitle = mock(UsTitle.class);
-//        Description description = mock(Description.class);
-//        UsPriority usPriority = mock(UsPriority.class);
-//        UsHour timeEstimate = mock(UsHour.class);
-//        UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
-//
-//        when(usID.getProjectID()).thenReturn(projID);
-//        when(projID.getCode()).thenReturn("Project_2022_1");
-//        when(usID.getUsTitle()).thenReturn(usTitle);
-//        when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
-//        when(userStory.getUserStoryID().toString()).thenReturn("Project_2022_1_As a PO, i want to test this string");
-//        //Act
-//        UserStory userStoryParent = new UserStory(userStory);
-//        //Assert
-//        assertEquals(userStory.getUserStoryID().toString() + " - Refined", userStoryParent.getUserStoryID()
-//        .toString());
-//    }
+    @Test
+    @DisplayName("Create User Story refined with success - using user story parent")
+    void CreateUserStoryParentWithSuccess() {
+        //Arrange
+        UserStoryID usID = mock(UserStoryID.class);
+        ProjectID projID = mock(ProjectID.class);
+        UsTitle usTitle = mock(UsTitle.class);
+        Description description = mock(Description.class);
+        UsPriority usPriority = mock(UsPriority.class);
+        UsHour timeEstimate = mock(UsHour.class);
+        UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
+        UserStory parentUs = new UserStory(usID, usPriority, description, timeEstimate);
+        when(usID.getProjectID()).thenReturn(projID);
+        when(projID.getCode()).thenReturn("Project_2022_1");
+        when(usID.getUsTitle()).thenReturn(usTitle);
+        when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
+        when(userStory.getUserStoryID().toString()).thenReturn("Project_2022_1_As a PO, i want to test this string");
+        //Act
+        userStory.assignParentUserStory(parentUs);
+        //Assert
+        assertEquals(parentUs,userStory.getParentUserStory());
+    }
+
+    @Test
+    public void hasProjectIdSuccess() {
+        //Arrange
+        UserStoryID usID = mock(UserStoryID.class);
+        ProjectID projID = mock(ProjectID.class);
+        Description description = mock(Description.class);
+        UsPriority usPriority = mock(UsPriority.class);
+        UsHour timeEstimate = mock(UsHour.class);
+        UserStory userStory = new UserStory(usID, usPriority, description, timeEstimate);
+        when(usID.getProjectID()).thenReturn(projID);
+        when(projID.getCode()).thenReturn("Project_2022_1");
+        //Act and Assert
+        assertTrue(userStory.hasProjectId("Project_2022_1"));
+    }
+
+    @Test
+    public void hasProjectIdFail() {
+        //Arrange
+        UserStoryID usID = mock(UserStoryID.class);
+        ProjectID projID = mock(ProjectID.class);
+        Description description = mock(Description.class);
+        UsPriority usPriority = mock(UsPriority.class);
+        UsHour timeEstimate = mock(UsHour.class);
+        UserStory userStory = new UserStory();
+        userStory.setUserStoryID(usID);
+        userStory.setDescription(description);
+        userStory.setPriority(usPriority);
+        userStory.setTimeEstimate(timeEstimate);
+        when(usID.getProjectID()).thenReturn(projID);
+        when(projID.getCode()).thenReturn("Project_2022_3");
+        //Act and Assert
+        assertFalse(userStory.hasProjectId("Project_2022_1"));
+    }
 
     @Test
     @DisplayName("test to get information about object attributes")

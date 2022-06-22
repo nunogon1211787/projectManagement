@@ -3,15 +3,15 @@ package switch2021.project.entities.factories.factories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import switch2021.project.dtoModel.dto.ProjectDTO;
+import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.*;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.aggregates.Project.Project;
-import switch2021.project.entities.aggregates.Typology.Typology;
 
 import java.time.LocalDate;
 
 @Component
-public class ProjectFactory implements switch2021.project.entities.factories.factoryInterfaces.IProjectFactory {
+public class ProjectFactory implements IProjectFactory {
 
     @Autowired
     private IDescriptionFactory nameF;
@@ -31,24 +31,27 @@ public class ProjectFactory implements switch2021.project.entities.factories.fac
     @Autowired
     private IBudgetFactory budgetF;
 
+    @Autowired
+    private ITypologyIDFactory typologyIDFactory;
+
 
     @Override
     public Project createProject(ProjectDTO projectDTO) {
 
-        Description name = nameF.createDescription(projectDTO.projectName);
-        Description description = descF.createDescription(projectDTO.description);
-        BusinessSector businessSector = busSecF.createBusinessSector(projectDTO.businessSector);
-        LocalDate date = LocalDate.parse(projectDTO.startDate);
-        NumberOfSprints numberOfSprints = numberSprintsF.create(Integer.parseInt(projectDTO.numberOfSprints));
-        SprintDuration sprintDuration = sprintDurationF.create(Integer.parseInt(projectDTO.sprintDuration));
-        Budget budget = budgetF.create(Integer.parseInt(projectDTO.budget));
+        Description name = nameF.createDescription(projectDTO.getProjectName());
+        Description description = descF.createDescription(projectDTO.getDescription());
+        BusinessSector businessSector = busSecF.createBusinessSector(projectDTO.getBusinessSector());
+        LocalDate date = LocalDate.parse(projectDTO.getStartDate());
+        NumberOfSprints numberOfSprints = numberSprintsF.create(Integer.parseInt(projectDTO.getNumberOfSprints()));
+        SprintDuration sprintDuration = sprintDurationF.create(Integer.parseInt(projectDTO.getSprintDuration()));
+        Budget budget = budgetF.create(Integer.parseInt(projectDTO.getBudget()));
 
         Project project = new Project(name, description, businessSector, date, numberOfSprints,
                                       sprintDuration, budget);
 
-        project.setTypologyId((new TypologyID(new Description(projectDTO.getTypology()))));
+        project.setTypologyId((typologyIDFactory.createIdWithString(projectDTO.getTypology())));
 
-        project.setCustomer((new Customer(projectDTO.getCustomer())));
+        project.setCustomer((Customer.create(projectDTO.getCustomer())));
 
         if (projectDTO.getEndDate() != null)
             project.setEndDate(LocalDate.parse(projectDTO.getEndDate()));

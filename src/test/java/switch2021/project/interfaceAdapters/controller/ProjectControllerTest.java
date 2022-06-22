@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
+import switch2021.project.dtoModel.dto.PartialProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.Budget;
@@ -40,14 +41,13 @@ class ProjectControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
-
     @Test
     void getAllProjectSuccess() {
         //Arrange
-        Map<String, CollectionModel<OutputProjectDTO>> allProjectsDto = new HashMap<>();
-        OutputProjectDTO test = mock(OutputProjectDTO.class);
-        OutputProjectDTO test2 = mock(OutputProjectDTO.class);
-        OutputProjectDTO test3 = mock(OutputProjectDTO.class);
+        Map<String, CollectionModel<PartialProjectDTO>> allProjectsDto = new HashMap<>();
+        PartialProjectDTO test = mock(PartialProjectDTO.class);
+        PartialProjectDTO test2 = mock(PartialProjectDTO.class);
+        PartialProjectDTO test3 = mock(PartialProjectDTO.class);
         allProjectsDto.put("one", CollectionModel.of(List.of(test)));
         allProjectsDto.put("two", CollectionModel.of(List.of(test2)));
         allProjectsDto.put("three", CollectionModel.of(List.of(test3)));
@@ -161,12 +161,12 @@ class ProjectControllerTest {
     @Test
     void testDeleteProjectException() {
         //Arrange
-        ProjectID projId = new ProjectID("1");
-        doThrow(Exception.class).when(service).deleteProjectRequest(projId);
+        String projId = "1";
+        doThrow(IllegalArgumentException.class).when(service).deleteProjectRequest(projId);
         //Act
         ResponseEntity<?> response = ctrl.deleteProjectRequest("1");
         //Assert
-        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+        assertThat(response.getStatusCodeValue()).isEqualTo(404);
     }
 
 }

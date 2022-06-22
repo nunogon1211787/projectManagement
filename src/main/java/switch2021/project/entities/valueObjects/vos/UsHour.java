@@ -6,7 +6,6 @@ import switch2021.project.utils.ValueObject;
 
 import java.util.Objects;
 
-@ToString
 @Getter
 public class UsHour implements ValueObject<UsHour> {
 

@@ -52,7 +52,7 @@ public class LoginMapper {
 
             //Check if this User can access resource Projects
             if(auth.getSeeAndEditProfiles().contains(profile.getUserProfileName().getText())){
-                dto.add(linkTo(methodOn(UserProfileController.class).showAllProfiles()).withRel("profiles").withType("GET"));
+                dto.add(linkTo(methodOn(UserProfileController.class).getAllProfiles()).withRel("profiles").withType("GET"));
             }
 
         }

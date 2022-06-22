@@ -23,7 +23,9 @@ public class SprintIDTest {
         Description description = mock(Description.class);
         when(description.getText()).thenReturn("Sprint 1");
         //Act
-        SprintID sprintID = new SprintID(projectCode,description);
+        SprintID sprintID = new SprintID();
+        sprintID.setProjectID(projectCode);
+        sprintID.setSprintName(description);
         String expected = "Project_2022_1_Sprint 1";
         //Assert
         assertEquals(expected, sprintID.toString());
@@ -197,7 +199,7 @@ public class SprintIDTest {
         //Act
         SprintID sprintID = new SprintID(projectCode, description);
         //
-        assertTrue(sprintID.toString().equals(sprintID.toString()));
+        assertEquals(sprintID.toString(), sprintID.toString());
     }
 
     @DisplayName("Check If ProjectID is correct")

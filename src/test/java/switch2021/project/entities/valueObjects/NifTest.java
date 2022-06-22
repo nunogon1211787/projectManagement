@@ -44,9 +44,10 @@ class NifTest {
         //Arrange
         long num = 123456789;
         //Act
-        Nif test = new Nif(num);
+        Nif test = new Nif();
+        test.setNumber(num);
         //Assert
-        assertTrue(test.hasSameNif(num));
+        assertEquals(num, test.getNumber());
 
     }
 

@@ -8,12 +8,14 @@ import switch2021.project.dataModel.JPA.ResourceJpa;
 import switch2021.project.dataModel.JPA.assembler.ResourceJpaAssembler;
 import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.valueObjects.vos.*;
-import switch2021.project.entities.valueObjects.vos.enums.ProjectRoleReeng;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectRole;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 //
 @SpringBootTest
@@ -73,7 +75,7 @@ class ResourceJpaAssemblerTest {
         double cost = 500.00;
         CostPerHour costPerHour = mock(CostPerHour.class);
         String role = "TeamMember";
-        ProjectRoleReeng projectRole = ProjectRoleReeng.TeamMember;
+        ProjectRole projectRole = ProjectRole.TeamMember;
         Resource resource = mock(Resource.class);
         //Act
         when(id.getUser()).thenReturn(userID);
@@ -109,7 +111,7 @@ class ResourceJpaAssemblerTest {
         double cost = 500.00;
         CostPerHour costPerHour = mock(CostPerHour.class);
         String role = "TeamMember";
-        ProjectRoleReeng projectRole = ProjectRoleReeng.TeamMember;
+        ProjectRole projectRole = ProjectRole.TeamMember;
         Resource resource = mock(Resource.class);
         //Act
         when(id.getUser()).thenReturn(userID);
