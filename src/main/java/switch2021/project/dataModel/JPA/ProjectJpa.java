@@ -1,4 +1,4 @@
-package switch2021.project.datamodel.jpa;
+package switch2021.project.dataModel.JPA;
 
 import lombok.*;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
@@ -28,6 +28,5 @@ public class ProjectJpa {
     private String typology;
     private String customer;
     private String status;
-
 
 }
