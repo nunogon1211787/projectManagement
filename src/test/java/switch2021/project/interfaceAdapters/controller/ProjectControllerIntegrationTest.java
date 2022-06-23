@@ -231,6 +231,25 @@ class ProjectControllerIntegrationTest {
         assertEquals(4, mapProjects);
     }
 
+    @Test
+    void getCurrentProjectsByUserIntegration() {
+        //Arrange
+        //Act
+        ResponseEntity<?> response = ctrl.showCurrentProjectsByUser("jsz@mymail.com");
+        //Assert
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+    @Test
+    void getCurrentProjectsByUserIntegrationSize() {
+        //Arrange
+        //Act
+        int xx = service.showCurrentProjectsByUser("jsz@mymail.com").getContent().size();
+        //Assert
+        assertEquals(1,xx);
+    }
+
+
     @SneakyThrows
     @Test
     void mockMvcTestFindProject() {

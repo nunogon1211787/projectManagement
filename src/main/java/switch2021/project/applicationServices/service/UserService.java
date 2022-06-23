@@ -58,9 +58,14 @@ public class UserService {
     /**
      * Find All Users
      */
-    public CollectionModel<OutputUserDTO> findAllUsers() {
+//    public CollectionModel<OutputUserDTO> findAllUsers() {
+//        List<User> usersList = userRepo.findAll();
+//        return userMapper.toCollectionDTO(usersList);
+//    }
+
+    public CollectionModel<PartialUserDTO> findAllUsers() {
         List<User> usersList = userRepo.findAll();
-        return userMapper.toCollectionDTO(usersList);
+        return userMapper.toCollectionDTO2(usersList);
     }
 
 

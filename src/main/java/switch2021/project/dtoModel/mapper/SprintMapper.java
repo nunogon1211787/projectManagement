@@ -6,6 +6,7 @@ import switch2021.project.dtoModel.dto.OutputSprintDTO;
 import switch2021.project.dtoModel.dto.OutputUserStoryDTO;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
+import switch2021.project.interfaceAdapters.controller.ProjectController;
 import switch2021.project.interfaceAdapters.controller.SprintController;
 import switch2021.project.interfaceAdapters.controller.UserStoryController;
 
@@ -23,7 +24,12 @@ public class SprintMapper {
         String projectID = newSprint.getSprintID().getProjectID().getCode();
         String name = newSprint.getSprintID().getSprintName().getText();
 
-        return new OutputSprintDTO(projectID, sprintID, name);
+        OutputSprintDTO outputSprintDTO = new OutputSprintDTO(projectID, sprintID, name);
+
+        outputSprintDTO.add(linkTo(methodOn(SprintController.class).showSprintsOfAProject(outputSprintDTO.projectID))
+                .withRel("ShowProjectSprints"));
+
+        return outputSprintDTO;
     }
 
     public CollectionModel<OutputSprintDTO> toCollectionDto(List<Sprint> sprints) {

@@ -27,13 +27,13 @@ public class ResourceMapper {
         resDto.allocation = res.getAllocation().getPercentage();
         resDto.cost = res.getCost().getCost();
 
-////        //Show a resource
-////        resDto.add(linkTo(methodOn(ResourceController.class).showCurrentProjectTeam())
-////                .withSelfRel());
-//
-//        //Show all Resources in the project
-//        resDto.add(linkTo(methodOn(ResourceController.class).showCurrentProjectTeam(resDto.project).withRel("Collection"));
-//
+        //Show a resource
+        resDto.add(linkTo(methodOn(ResourceController.class).showResourceRequested(resDto.user))
+                .withSelfRel());
+
+        //Show all Resources in the project
+        resDto.add(linkTo(methodOn(ResourceController.class).showCurrentProjectTeam(resDto.project)).withRel("Collection"));
+
         //Delete
 
 //        resDto.add(linkTo(methodOn(ResourceController.class).
