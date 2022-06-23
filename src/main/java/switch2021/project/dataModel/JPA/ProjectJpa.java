@@ -28,5 +28,4 @@ public class ProjectJpa {
     private String typology;
     private String customer;
     private String status;
-
 }
