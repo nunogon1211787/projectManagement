@@ -1,6 +1,7 @@
 package switch2021.project.entities.valueObjects.vos;
 
 import lombok.Getter;
+import lombok.Setter;
 import switch2021.project.entities.valueObjects.vos.enums.UserStoryOfSprintStatus;
 import switch2021.project.utils.ValueObject;
 
@@ -12,15 +13,19 @@ public class UserStoryOfSprint implements ValueObject<UserStoryOfSprint> {
     /**
      * Attributes
      */
-    private UserStoryID userStoryId;
+    private final UserStoryID userStoryId;
+    @Setter
     private UserStoryOfSprintStatus userStoryOfSprintStatus;
+    private final String sprintName;
 
     /**
      * Constructor
      */
-    public UserStoryOfSprint(UserStoryID userStoryId, UserStoryOfSprintStatus userStoryOfSprintStatus) {
+    public UserStoryOfSprint(UserStoryID userStoryId, UserStoryOfSprintStatus userStoryOfSprintStatus,
+                             String sprintName) {
         this.userStoryId = userStoryId;
         this.userStoryOfSprintStatus = userStoryOfSprintStatus;
+        this.sprintName = sprintName;
     }
 
     /**

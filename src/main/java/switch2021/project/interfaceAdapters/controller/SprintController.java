@@ -157,10 +157,27 @@ public class SprintController {
     public  ResponseEntity<Object> showScrumBoard(@PathVariable("id") String id) {
 
         ErrorMessage message = new ErrorMessage();
-        OutputSprintDTO UsSprintDTO;
+        CollectionModel<UserStoryOfSprintDTO> UsSprintDTO;
 
         try {
             UsSprintDTO = sprintService.showScrumBoard(id);
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(UsSprintDTO, HttpStatus.OK);
+    }
+
+    @PatchMapping("/scrumBoard/{id}")
+    public  ResponseEntity<Object> changeStatusScrumBoard(@PathVariable("id") String id,
+                                                          @RequestBody UserStoryOfSprintDTO userStoryDTO) {
+        ErrorMessage message = new ErrorMessage();
+        UserStoryOfSprintDTO UsSprintDTO;
+
+        try {
+            UsSprintDTO = sprintService.changeStatusScrumBoard(id, userStoryDTO);
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
