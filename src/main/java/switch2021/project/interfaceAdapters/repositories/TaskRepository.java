@@ -4,9 +4,11 @@ package switch2021.project.interfaceAdapters.repositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.applicationServices.iRepositories.ITaskRepo;
-import switch2021.project.dataModel.JPA.assembler.TaskJpaAssembler;
 import switch2021.project.dataModel.JPA.TaskJpa;
+import switch2021.project.dataModel.JPA.assembler.TaskJpaAssembler;
 import switch2021.project.entities.aggregates.Task.Task;
+import switch2021.project.entities.valueObjects.vos.Description;
+import switch2021.project.entities.valueObjects.vos.TaskID;
 import switch2021.project.persistence.TaskJpaRepository;
 
 import java.util.ArrayList;
@@ -18,48 +20,45 @@ public class TaskRepository implements ITaskRepo {
 
     /*** Class Attributes **/
     @Autowired
-    private TaskJpaRepository jpaRepo;
+    private TaskJpaRepository taskJpaRepo;
     @Autowired
-    private TaskJpaAssembler assembler;
+    private TaskJpaAssembler taskJpaAssembler;
 
     /*** Class Methods **/
+    @Override
+    public Task save(Task newTask) {
+        TaskJpa taskJpa = taskJpaAssembler.toData(newTask);
+        TaskJpa savedTaskJpa = taskJpaRepo.saveAndFlush(taskJpa);
+        return taskJpaAssembler.toDomain(savedTaskJpa);
+    }
 
     @Override
-    public Optional<Task> save(Task newTask) {
-
-        TaskJpa taskJpa = assembler.toData(newTask);
-
-        TaskJpa savedTaskJpa = jpaRepo.save(taskJpa);
-
-        return Optional.of(assembler.toDomain(savedTaskJpa));
-    }
-
-
     public List<Task> findAll() {
-        List <TaskJpa> allTasks = jpaRepo.findAll();
+        List<TaskJpa> jpaTasks = taskJpaRepo.findAll();
+        List<Task> tasks = new ArrayList<>();
 
-        List <Task> finalListTask = new ArrayList<>();
-
-        for(TaskJpa task: allTasks){
-            finalListTask.add(assembler.toDomain(task));
+        for (TaskJpa taskJpa : jpaTasks) {
+            Task task = taskJpaAssembler.toDomain(taskJpa);
+            tasks.add(task);
         }
-
-        return finalListTask;
+        return tasks;
     }
 
-    public Task findById(String code) {
-        /*Optional<TaskJpa> task = jpaRepo.findById(new TaskIDJpa(code, new Name(code)));
+    @Override
+    public Optional<Task> findById(Description id) {
+        Optional<TaskJpa> opTaskJpa = taskJpaRepo.findById(id);
 
-        if(task.isPresent())
-        return assembler.toDomain(task.get());
-        else
+        if (opTaskJpa.isPresent()) {
+            TaskJpa taskJpa = opTaskJpa.get();
 
-         */
-            return null;
+            Task task = taskJpaAssembler.toDomain(taskJpa);
+            return Optional.of(task);
+        } else
+            return Optional.empty();
     }
 
-    public boolean existById(String id) {
-        return true;
-
+    @Override
+    public boolean existsById(Description id) {
+        return taskJpaRepo.existsById(id);
     }
 }

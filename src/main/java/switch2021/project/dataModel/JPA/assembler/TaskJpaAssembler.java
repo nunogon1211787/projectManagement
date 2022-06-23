@@ -32,8 +32,8 @@ public class TaskJpaAssembler {
         List<TaskID> taskPrecedenceList = task.getPrecedenceList();
         List<TaskEffort> taskEffortList = task.getTaskEffortList();
 
-        TaskID taskID = task.getIdTask();
-        Name taskName = taskID.getTaskName();
+        TaskID taskID = task.getTaskID();
+        Description taskName = taskID.getTaskName();
         TaskContainerID sprintOrUsID = taskID.getTaskContainerID();
         ProjectID projectID = null;
         UsTitle usTitle = null;
@@ -87,7 +87,7 @@ public class TaskJpaAssembler {
             sprintOrUsID = new UserStoryID(projectID, usTitle);
         }
 
-        Name taskName = taskJpa.getTaskName();
+        Description taskName = taskJpa.getTaskName();
         TaskID taskID = new TaskID(sprintOrUsID, taskName);
 
         UserID resourceUserID = taskJpa.getResourceUserID();
@@ -97,6 +97,7 @@ public class TaskJpaAssembler {
         }
         ResourceID responsible = new ResourceID(resourceUserID, projectID, resourceStartDate);
 
-        return new Task(taskID,taskDescription,taskType,taskEffortEstimate,taskStartDate,taskEndDate,responsible,taskEffortList,taskPrecedenceList);
+        return new Task(taskID, taskDescription, taskType, taskEffortEstimate, taskStartDate, taskEndDate,
+                responsible, taskEffortList, taskPrecedenceList);
     }
 }

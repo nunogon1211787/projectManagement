@@ -21,7 +21,7 @@ public class UserStoryIDTest {
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         //Act
         UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
-        String expected = "Project_2022_1_As a PO, i want to test this string";
+        String expected = "Project_2022_1&As a PO, i want to test this string";
         //Assert
         assertEquals(expected, userStoryId.toString());
     }
@@ -37,7 +37,7 @@ public class UserStoryIDTest {
         //Act
         UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
         boolean expected = userStoryId.toString().isEmpty();
-        boolean expected2 = userStoryId.toString().equalsIgnoreCase("Project_2022_1_As a PO, i want to test this string");
+        boolean expected2 = userStoryId.toString().equalsIgnoreCase("Project_2022_1&As a PO, i want to test this string");
         //Assert
         assertFalse(expected);
         assertTrue(expected2);

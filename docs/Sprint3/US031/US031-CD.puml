@@ -6,37 +6,49 @@ skinparam classAttributeIconSize 0
 
 title US031 - As Team Member, I want to create a task in a user story
 
-
-package System <<Rectangle>>{
-
+'-------------------INFRASTRUCTURE-----------------------'
 package Infrastructure <<Rectangle>> #lightblue {
+package "Route" {
 class "CreateUsTaskRoute" as route<<Component>>{
 }
 }
+package "Persistence" {
+interface "ITaskRepositoryJPA" as jpa <<Interface>>{
+}
+}
+}
 
+'-------------------INTERFACE ADAPTERS-------------------'
 package InterfaceAdapters <<Rectangle>> #lightgreen{
+package "Controllers" <<Rectangle>> {
 class "CreateUsTaskController" as ctrl <<Component>>{
 +createUsTask(CreateTaskDTO dto)
 }
-
-class "TaskStore" as store <<Repository>>{
--taskList: List<Task>
-+saveTask(Task task)
--validate()
--add()
+}
+package Repositories <<Rectangle>> {
+class "TaskRepository" as projectRepo <<repository>> {
++save(newTask)
++existByTaskId(taskID)
 }
 }
-
-package ApplicationService <<Rectangle>> #lightpink{
-interface "ITaskStore" as istore {
-+saveTask(Task task)
 }
 
+'-------------------APPLICATION SERVICE------------------'
+package Application_Service <<Rectangle>> #lightpink{
+package IRepositories <<Rectangle>> {
+interface "ITaskRepo" as iRepo <<interface>>{
++save(newTask)
++existByTaskId(taskID)
+}
+}
+package "App Service" <<Rectangle>> {
 class "CreateUsTaskService" as service <<Service>>{
 +createUsTask(taskDto)
 }
 }
+}
 
+'-------------------DOMAIN-------------------------------'
 package Domain <<Rectangle>> #burlywood{
 
 package Aggregates <<Rectangle>>{
@@ -91,7 +103,7 @@ class DataDto <<Component>> {
 +toDTO(Task task)
 }
 }
-}
+
 
 route .d.> ctrl
 

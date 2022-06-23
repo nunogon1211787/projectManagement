@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IDescriptionFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ISprintIDFactory;
-import switch2021.project.entities.valueObjects.vos.SprintID;
 import switch2021.project.entities.valueObjects.vos.Description;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
+import switch2021.project.entities.valueObjects.vos.SprintID;
 
 @Component
 public class SprintIDFactory implements ISprintIDFactory{
@@ -23,9 +23,9 @@ public class SprintIDFactory implements ISprintIDFactory{
     /**
      * Method
      */
-    public SprintID create(String p, String d) {
-        ProjectID projectID = projectIDFactory.create(p);
-        Description sprintName = descriptionFactory.createDescription(d);
+    public SprintID create(String code, String description) {
+        ProjectID projectID = projectIDFactory.create(code);
+        Description sprintName = descriptionFactory.createDescription(description);
         return new SprintID(projectID, sprintName);
     }
 
