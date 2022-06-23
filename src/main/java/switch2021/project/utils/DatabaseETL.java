@@ -247,11 +247,11 @@ public class DatabaseETL {
                 XSSFRow row = worksheet.getRow(index);
 
                 String projectId = row.getCell(0).getStringCellValue();
-                String name = row.getCell(1).getStringCellValue();
+                String sprintName = row.getCell(1).getStringCellValue();
                 String title = row.getCell(2).getStringCellValue();
                 String status = row.getCell(3).getStringCellValue();
 
-                String sprintId = projectId + "_" + name;
+                String sprintId = projectId + "_" + sprintName;
 
                 UserStoryIdDTO userStoryIdDTO = new UserStoryIdDTO();
                 userStoryIdDTO.title=title;
