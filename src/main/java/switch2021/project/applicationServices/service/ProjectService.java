@@ -13,6 +13,7 @@ import switch2021.project.dtoModel.mapper.ProjectMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManagementResourcesService;
 import switch2021.project.entities.aggregates.Resource.Resource;
+import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.*;
 import switch2021.project.entities.valueObjects.vos.*;
@@ -85,7 +86,7 @@ public class ProjectService {
 
     }
 
-    private ProjectID generatedProjectId(){
+    private ProjectID generatedProjectId() {
         String format = "Project_" + LocalDate.now().getYear() + "_";
         int sequenceNumber = projRepo.findAll().size() + 1;
         String id = format + sequenceNumber;
@@ -129,7 +130,7 @@ public class ProjectService {
         throw new IllegalArgumentException("Project does not exist.");
     }
 
-    public Map<String, CollectionModel<PartialProjectDTO>>  getAllProjects() {
+    public Map<String, CollectionModel<PartialProjectDTO>> getAllProjects() {
 
         List<Project> projects = projRepo.findAll();
         List<Project> projectsWeb = iProjectWebRepository.findAll();
@@ -143,7 +144,7 @@ public class ProjectService {
 
         return mapProjects;
     }
-    
+
     public OutputProjectDTO showProject(String id) throws Exception {
 
         ProjectID projID = projectIDFactory.create(id);
@@ -158,30 +159,27 @@ public class ProjectService {
     }
 
     public CollectionModel<OutputProjectDTO> showCurrentProjectsByUser(String UserId) {
+        UserID uId = userIDFactory.createUserID(UserId);
+        Optional<User> foundUser = userRepo.findByUserId(uId);
 
-        UserID userID = userIDFactory.createUserID(UserId);
+        User user = foundUser.flatMap(u -> foundUser).orElse(null);
 
-        if (userRepo.existsById(userID)) {
+        if (user == null) {
+            throw new NullPointerException("User dos not exist");
+        }
+        List<Resource> userResources = resRepo.findAllByUser(uId);
+        List<Resource> currentUserResources = resService.currentResourcesByDate(userResources);
+        List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
+        List<Project> projects = new ArrayList<>();
 
-            List<Resource> userResources = resRepo.findAllByUser(userID);
-
-            List<Resource> currentUserResources = resService.currentResourcesByDate(userResources);
-
-            List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
-
-            List<Project> projects = resourceProjects.stream().map(projectID ->
-                    projRepo.findById(projectID).get()
-            ).collect(Collectors.toList());
-
-            List<OutputProjectDTO> projectsDto = projects.stream().map(project ->
-                    projMapper.model2Dto(project)
-            ).collect(Collectors.toList());
-
-            return CollectionModel.of(projectsDto);
-
+        for (ProjectID x : resourceProjects) {
+            Optional<Project> y = projRepo.findById(x);
+            if (y.isEmpty()) {
+                throw new NullPointerException("User is not allocated in any project!");
             }
-
-        throw new IllegalArgumentException("User dos not exist");
+            projects.add(y.flatMap(z -> y).orElse(null));
+        }
+        return projMapper.toCollectionDto(projects, false);
     }
 
     public boolean deleteProjectRequest(String id) {

@@ -22,16 +22,14 @@ public class TypologyRepository implements ITypologyRepo {
 
 
     @Override
-    public Typology findByTypologyId(TypologyID typoId) {
+    public Optional<Typology> findByTypologyId(TypologyID typoId) {
         Optional<TypologyJpa> opTypology = jpaRepository.findById(typoId);
+        Optional <Typology> typology = Optional.empty();
 
-        TypologyJpa typologyJpa = opTypology.flatMap(typoJpa -> opTypology)
-                .orElse(null);
-
-        if (typologyJpa == null) {
-            throw new NullPointerException("Typology does not exist!");
+        if(opTypology.isPresent()) {
+            typology = Optional.of(assembler.toDomain(opTypology.get()));
         }
-        return assembler.toDomain(typologyJpa);
+        return typology;
     }
 
     @Override

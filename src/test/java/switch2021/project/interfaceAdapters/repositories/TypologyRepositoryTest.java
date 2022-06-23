@@ -1,142 +1,147 @@
-//package switch2021.project.interfaceAdapters.controller.repositories;
-// TODO REVIEW
-//import org.junit.jupiter.api.DisplayName;
-//import org.junit.jupiter.api.Test;
-//import switch2021.project.model.Typology.Typology;
-//import switch2021.project.model.valueObject.Description;
-//import switch2021.project.model.valueObject.TypologyID;
-//
-//
-//import java.util.List;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//import static org.mockito.Mockito.mock;
-//import static org.mockito.Mockito.when;
-//
-//
-///** >>>>>>>>>>>>>>>>>>REVIEW<<<<<<<<<<<<<<<<<<<< **/
-//
-//
-//public class TypologyRepositoryTest {
-//
-//    @DisplayName("Test typology Store populated and empty store - ")
-//    @Test
-//    public void typologySaveSuccess() {
-//        //Arrange
-//        TypologyRepository test = new TypologyRepository();
-//        Typology typo = mock(Typology.class);
-//        TypologyID id = mock(TypologyID.class);
-//        Description des = mock(Description.class);
-//        //Act
-//        when(typo.getId_description()).thenReturn(id);
-//        when(id.getDescription()).thenReturn(des);
-//        when(des.getText()).thenReturn("Test");
-//        //Assert
-//        assertTrue(test.saveTypology(typo));
-//    }
-//
-//    @DisplayName("Add and save several typologies at same time")
-//    @Test
-//    public void typologySaveFail() {
-//        //Arrange
-//        TypologyRepository test = new TypologyRepository();
-//        Typology typo = mock(Typology.class);
-//        Typology typo2 = mock(Typology.class);
-//        TypologyID id = mock(TypologyID.class);
-//        Description des = mock(Description.class);
-//        //Act
-//        when(typo.getId_description()).thenReturn(id);
-//        when(typo2.getId_description()).thenReturn(id);
-//        when(id.getDescription()).thenReturn(des);
-//        when(des.getText()).thenReturn("Test");
-//        test.saveTypology(typo);
-//        when(typo.hasID_Description(des.getText())).thenReturn(true);
-//        //Assert
-//        assertFalse(test.saveTypology(typo2));
-//    }
-//
-//    @Test
-//    public void getTypologyWithDescriptionTest() {
-//        //Arrange
-//        TypologyRepository typologyRepository = new TypologyRepository();
-//        Typology typo = mock(Typology.class);
-//        TypologyID id = mock(TypologyID.class);
-//        Description des = mock(Description.class);
-//        // Act
-//        when(typo.getId_description()).thenReturn(id);
-//        when(id.getDescription()).thenReturn(des);
-//        when(des.getText()).thenReturn("Time and Materials");
-//        when(id.hasDescription("Time and Materials")).thenReturn(true);
-//        typologyRepository.saveTypology(typo);
-//        //Assert
-//        assertNotNull(typologyRepository.findTypologyById("Time and Materials"));
-//    }
-//
-//    @Test
-//    public void getTypologyWithDescriptionNullTest() {
-//        //Arrange
-//        TypologyRepository typologyRepository = new TypologyRepository();
-//        // Act
-//        Typology nullTypology = typologyRepository.findTypologyById("Time and Materials");
-//        //Assert
-//        assertNull(nullTypology);
-//    }
-//
-//    @Test
-//    public void getTypologyListTest() {
-//        //Arrange
-//        TypologyRepository typologyRepository = new TypologyRepository();
-//        Typology typo1 = mock(Typology.class);
-//        Typology typo2 = mock(Typology.class);
-//        TypologyID id1 = mock(TypologyID.class);
-//        TypologyID id2 = mock(TypologyID.class);
-//        Description des1 = mock(Description.class);
-//        Description des2 = mock(Description.class);
-//        //Act
-//        when(typo1.getId_description()).thenReturn(id1);
-//        when(typo2.getId_description()).thenReturn(id2);
-//        when(id1.getDescription()).thenReturn(des1);
-//        when(id2.getDescription()).thenReturn(des2);
-//        when(des1.getText()).thenReturn("Test1");
-//        when(des2.getText()).thenReturn("Test2");
-//        typologyRepository.saveTypology(typo1);
-//        typologyRepository.saveTypology(typo2);
-//        List<Typology> list = typologyRepository.findAllTypology();
-//        //Assert
-//        assertEquals(2, list.size());
-//    }
-//
-//    @Test
-//    public void deleteTypologyTest() {
-//        //Arrange
-//        TypologyRepository typologyRepository = new TypologyRepository();
-//        Typology typo1 = mock(Typology.class);
-//        Typology typo2 = mock(Typology.class);
-//        Typology typo3 = mock(Typology.class);
-//        TypologyID id1 = mock(TypologyID.class);
-//        TypologyID id2 = mock(TypologyID.class);
-//        TypologyID id3 = mock(TypologyID.class);
-//        Description des1 = mock(Description.class);
-//        Description des2 = mock(Description.class);
-//        Description des3 = mock(Description.class);
-//        when(typo1.getId_description()).thenReturn(id1);
-//        when(typo2.getId_description()).thenReturn(id2);
-//        when(typo3.getId_description()).thenReturn(id3);
-//        when(id1.getDescription()).thenReturn(des1);
-//        when(id2.getDescription()).thenReturn(des2);
-//        when(id3.getDescription()).thenReturn(des3);
-//        when(des1.getText()).thenReturn("Test1");
-//        when(des2.getText()).thenReturn("Test2");
-//        when(des3.getText()).thenReturn("Test3");
-//        typologyRepository.saveTypology(typo1);
-//        typologyRepository.saveTypology(typo2);
-//        typologyRepository.saveTypology(typo3);
-//        //Act
-//        when(typo1.hasID_Description("Test3")).thenReturn(false);
-//        when(typo2.hasID_Description("Test3")).thenReturn(false);
-//        when(typo3.hasID_Description("Test3")).thenReturn(true);
-//        typologyRepository.deleteTypology("Test3");
-//        //Assert
-////        assertEquals(2, typologyRepository.getTypologyList().size());
-//    }
-//}
+package switch2021.project.interfaceAdapters.repositories;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import switch2021.project.dataModel.JPA.TypologyJpa;
+import switch2021.project.dataModel.JPA.assembler.TypologyJpaAssembler;
+import switch2021.project.entities.aggregates.Typology.Typology;
+import switch2021.project.entities.valueObjects.vos.TypologyID;
+import switch2021.project.persistence.TypologyJpaRepository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+
+@SpringBootTest
+public class TypologyRepositoryTest {
+
+    @MockBean
+    private TypologyJpaRepository jpaRepository;
+    @MockBean
+    private TypologyJpaAssembler assembler;
+    @InjectMocks
+    private TypologyRepository repository;
+
+    @BeforeEach
+    void TestConfiguration() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    public void findByTypologyIdSuccess() {
+        //Arrange
+        TypologyID id = mock(TypologyID.class);
+        TypologyJpa typoJpa = mock(TypologyJpa.class);
+        when(jpaRepository.findById(id)).thenReturn(Optional.of(typoJpa));
+        Typology typo = mock(Typology.class);
+        when(assembler.toDomain(typoJpa)).thenReturn(typo);
+        Optional<Typology> expected = Optional.of(typo);
+        //Act
+        Optional<Typology> result = repository.findByTypologyId(id);
+        //Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void findByTypologyIdNull() {
+        //Arrange
+        TypologyID id = mock(TypologyID.class);
+        when(jpaRepository.findById(id)).thenReturn(Optional.empty());
+        Optional<Typology> expected = Optional.empty();
+        //Act
+        Optional<Typology> result = repository.findByTypologyId(id);
+        //Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void findAll() {
+        TypologyJpa typoJpa1 = mock(TypologyJpa.class);
+        TypologyJpa typoJpa2 = mock(TypologyJpa.class);
+        List<TypologyJpa> jpas = new ArrayList<>();
+        jpas.add(typoJpa1);
+        jpas.add(typoJpa2);
+        when(jpaRepository.findAll()).thenReturn(jpas);
+        Typology typo1 = mock(Typology.class);
+        Typology typo2 = mock(Typology.class);
+        List<Typology> typos = new ArrayList<>();
+        typos.add(typo1);
+        typos.add(typo2);
+        when(assembler.toDomain(jpas)).thenReturn(typos);
+        //Act
+        List<Typology> result = repository.findAll();
+        //Assert
+        assertEquals(typos, result);
+    }
+
+
+    @DisplayName("Test typology Store populated and empty store - ")
+    @Test
+    public void typologySaveSuccess() {
+        //Arrange
+        Typology typo = mock(Typology.class);
+        TypologyJpa typoJpa = mock(TypologyJpa.class);
+        when(assembler.toData(typo)).thenReturn(typoJpa);
+        TypologyJpa savedTypoJpa = mock(TypologyJpa.class);
+        when(jpaRepository.saveAndFlush(typoJpa)).thenReturn(savedTypoJpa);
+        Typology savedTypo = mock(Typology.class);
+        when(assembler.toDomain(savedTypoJpa)).thenReturn(savedTypo);
+        //Act
+        Typology result = repository.save(typo);
+        //Assert
+        assertEquals(result, savedTypo);
+    }
+
+    @DisplayName("Add and save several typologies at same time")
+    @Test
+    public void typologySaveFail() {
+        //Arrange
+        Typology typo = mock(Typology.class);
+        TypologyJpa typoJpa = mock(TypologyJpa.class);
+        when(assembler.toData(typo)).thenReturn(typoJpa);
+        when(jpaRepository.saveAndFlush(typoJpa)).thenReturn(null);
+        //Act
+        Typology result = repository.save(typo);
+        //Assert
+        assertNull(result);
+    }
+
+    @Test
+    public void ExistByTypologyIdTrue() {
+        //Arrange
+        TypologyID id = mock(TypologyID.class);
+        when(jpaRepository.existsById(id)).thenReturn(true);
+        //Act and Assert
+        assertTrue(repository.existsByTypologyId(id));
+    }
+
+    @Test
+    public void ExistByTypologyIdFail() {
+        //Arrange
+        TypologyID id = mock(TypologyID.class);
+        when(jpaRepository.existsById(id)).thenReturn(false);
+        //Act and Assert
+        assertFalse(repository.existsByTypologyId(id));
+    }
+
+    @Test
+    public void deleteTypologyFail() {
+        //Assert
+        assertThrows(NullPointerException.class, () -> {
+            //Arrange
+            TypologyID id = mock(TypologyID.class);
+            when(jpaRepository.existsById(id)).thenReturn(false);
+            //Act
+            repository.deleteByTypologyId(id);
+        });
+    }
+}

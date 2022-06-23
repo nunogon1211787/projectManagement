@@ -41,20 +41,13 @@ public class UserMapper {
                         "User"))
                 //Inactivation
                 .add(linkTo(methodOn(UserController.class).inactivateUser(outputUserDTO.getEmail())).withRel(
-                        "Inctivate " +
-                                "User"))
+                        "Inactivate " + "User"))
                 //Assign Profile
                 .add(linkTo(methodOn(UserController.class).assignProfile(outputUserDTO.getEmail(),
                         new UpdateUserProfileDTO())).withRel("Assign Profile"))
                 //Remove Profile
                 .add(linkTo(methodOn(UserController.class).removeProfile(outputUserDTO.getEmail(),
                         new UpdateUserProfileDTO())).withRel("Remove Profile"))
-                //Search by Parameter
-                .add(linkTo(methodOn(UserController.class).searchUsersByTypedParams(new SearchUserDTO())).withRel(
-                        "Search by Paramenter"))
-                //Show Current Project
-//                .add(linkTo(methodOn(ProjectController.class).showCurrentProjectsByUser(outputUserDTO.getEmail(),
-//                        new DateDTO())).withRel("Current Project"))
                 //Update
                 .add(linkTo(methodOn(UserController.class).updatePersonalData(outputUserDTO.getEmail(),
                         new UpdateDataDTO())).withRel("Edit"))
@@ -83,12 +76,43 @@ public class UserMapper {
         for (UserProfileID id : user.getAssignedProfiles()) {
             profiles.add(new UserProfile(id));
         }
-
         int i = 0;
         for (UserProfile profile : profiles) {
             profileToString[i] = profile.getUserProfileId().getUserProfileName().getText();
             i++;
         }
         return profileToString;
+    }
+
+    /**
+     * Next two methods are for partial users only, used to showAllUsers
+     */
+
+    public PartialUserDTO toDto2(User user) {
+
+        String username = user.getUserName().getText();
+        String email = user.getUserId().getEmail().getEmailText();
+        String function = user.getFunction().getText();
+
+        PartialUserDTO partialUserDTO = new PartialUserDTO(username, email, function);
+
+        //Add HATEOAS to OutPut DTO
+                //Self Relation
+        partialUserDTO.add(linkTo(methodOn(UserController.class).getUser(partialUserDTO.email)).withRel("Find by ID"));
+        //Search by Parameter
+        partialUserDTO.add(linkTo(methodOn(UserController.class).searchUsersByTypedParams(new SearchUserDTO())).withRel(
+                "Search by Paramenter"));
+        return partialUserDTO;
+    }
+
+    public CollectionModel<PartialUserDTO> toCollectionDTO2(List<User> userList) {
+
+        CollectionModel<PartialUserDTO> users = CollectionModel.of(userList.stream()
+                .map(this::toDto2)
+                .collect(Collectors.toList()));
+        //HATEOAS
+        // Add Self Relation
+        users.add(linkTo(methodOn(UserController.class).showAllUsers()).withSelfRel());
+        return users;
     }
 }

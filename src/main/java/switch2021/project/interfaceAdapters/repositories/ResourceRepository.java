@@ -67,7 +67,7 @@ public class ResourceRepository implements IResourceRepo {
         List<ResourceJpa> systemUserProjectsJpa = new ArrayList<>();
 
         for (ResourceJpa resourceJpa : systemUserProjectsJpaList) {
-            if (resourceJpa.getId().getUser() == userId) {
+            if (resourceJpa.getId().getUser().equals(userId)) {
                 systemUserProjectsJpa.add(resourceJpa);
             }
         }
