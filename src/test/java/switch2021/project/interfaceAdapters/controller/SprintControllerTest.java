@@ -166,6 +166,13 @@ public class SprintControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
 
+        MvcResult scrumBoard = mockMvc
+                .perform(MockMvcRequestBuilders.get("/sprints/Project_2022_1_Sprint")
+                                 .contentType("application/json")
+                                 .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
         String result2Content = result2.getResponse().getContentAsString();
         assertNotNull(result2Content);
 

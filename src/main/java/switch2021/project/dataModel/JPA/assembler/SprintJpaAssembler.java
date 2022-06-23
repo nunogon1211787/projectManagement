@@ -27,26 +27,8 @@ public class SprintJpaAssembler {
             endDate = sprint.getEndDate().toString();
         }
 
-        SprintJpa sprintJpa = new SprintJpa(sprint.getSprintID(), startDate, endDate);
 
-        List<UserStoryOfSprint> UsOfSprintList = sprint.getScrumBoardUserStoriesOfSprint();
-        List<UserStoryOfSprintJpa> UsOfSprintListJpa = new ArrayList<>();
-
-        if (!UsOfSprintList.isEmpty()) {
-            for (UserStoryOfSprint uSOfSprint : UsOfSprintList) {
-                String status = null;
-
-                if (!(uSOfSprint.getUserStoryOfSprintStatus() == null)) {
-                    status = uSOfSprint.getUserStoryOfSprintStatus().toString();
-                }
-                UsOfSprintListJpa.add( new UserStoryOfSprintJpa(uSOfSprint.getUserStoryId(),
-                                                                                     status,
-                                                                                     sprintJpa));
-                sprintJpa.setUSOfSprintJpaList(UsOfSprintListJpa);
-            }
-        }
-
-        return sprintJpa;
+        return new SprintJpa(sprint.getSprintID(), startDate, endDate);
     }
 
     public Sprint toDomain(SprintJpa sprintJpaSaved) {
@@ -58,20 +40,8 @@ public class SprintJpaAssembler {
         if (!(sprintJpaSaved.getEndDate() == null)) {
             endDate = LocalDate.parse(sprintJpaSaved.getEndDate());
         }
-        Sprint sprint = new Sprint(sprintJpaSaved.getSprintId(), startDate, endDate);
 
-        List<UserStoryOfSprintJpa> uSOfSprintJpaList = sprintJpaSaved.getUSOfSprintJpaList();
-        for (UserStoryOfSprintJpa uSOfSprintJpa : uSOfSprintJpaList) {
-            UserStoryOfSprintStatus status = null;
-            if (!(uSOfSprintJpa.getStatus() == null)) {
-                status = UserStoryOfSprintStatus.valueOf(uSOfSprintJpa.getStatus());
-            }
-            UserStoryOfSprint userStoryOfSprint = new UserStoryOfSprint(uSOfSprintJpa.getUserStoryId(), status);
 
-            if (!sprint.getScrumBoardUserStoriesOfSprint().isEmpty()) {
-                sprint.getScrumBoardUserStoriesOfSprint().add(userStoryOfSprint);
-            }
-        }
-        return sprint;
+        return new Sprint(sprintJpaSaved.getSprintId(), startDate, endDate);
     }
 }

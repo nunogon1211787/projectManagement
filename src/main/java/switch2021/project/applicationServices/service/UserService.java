@@ -18,6 +18,7 @@ import switch2021.project.entities.valueObjects.vos.UserProfileID;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -73,10 +74,14 @@ public class UserService {
      * Find User, by ID
      */
     public OutputUserDTO findUserById(String id) {
-        UserID userID = userIDFactory.createUserID(id);
+        UserID userID = createUserIdByStringInputFromController(id);
+        Optional<User> foundUser = userRepo.findByUserId(userID);
 
-        User user = userRepo.findByUserId(userID);
+        User user = foundUser.flatMap(found -> foundUser).orElse(null);
 
+        if (user == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
         return userMapper.toDto(user);
     }
 
@@ -116,8 +121,14 @@ public class UserService {
      * Update Personal Data and Change Password (US010 and US011)
      */
     public OutputUserDTO updatePersonalData(String id, UpdateDataDTO updateDataDTO) {
-        UserID userID = userIDFactory.createUserID(id);
-        User user = userRepo.findByUserId(userID);
+        UserID userID = createUserIdByStringInputFromController(id);
+        Optional<User> foundUser = userRepo.findByUserId(userID);
+
+        User user = foundUser.flatMap(found -> foundUser).orElse(null);
+
+        if (user == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
 
         if (updateDataDTO.newPassword != null && updateDataDTO.oldPassword != null) {
             user.updatePassword(updateDataDTO.oldPassword, updateDataDTO.newPassword);
@@ -134,9 +145,14 @@ public class UserService {
      */
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
     public OutputUserDTO assignUserProfile(String id, UpdateUserProfileDTO profileDTO) {
-        UserID userID = userIDFactory.createUserID(id);
+        UserID userID = createUserIdByStringInputFromController(id);
+        Optional<User> foundUser = userRepo.findByUserId(userID);
 
-        User user = userRepo.findByUserId(userID);
+        User user = foundUser.flatMap(found -> foundUser).orElse(null);
+
+        if (user == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
 
         UserProfileID profileID = profileIDFactory.createUserProfileID(profileDTO.profileId);
         //Validate if exist the profile
@@ -154,10 +170,15 @@ public class UserService {
     }
 
     public OutputUserDTO removeUserProfile(String id, UpdateUserProfileDTO profileDTO) {
-        UserID userID = userIDFactory.createUserID(id);
+        UserID userID = createUserIdByStringInputFromController(id);
         UserProfileID profileID;
+        Optional<User> foundUser = userRepo.findByUserId(userID);
 
-        User user = userRepo.findByUserId(userID);
+        User user = foundUser.flatMap(found -> foundUser).orElse(null);
+
+        if (user == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
 
         //Validate if the profile is Visitor, all Users must have the visitor Profile.
         if (!profileDTO.profileId.equalsIgnoreCase("visitor")) {
@@ -185,8 +206,14 @@ public class UserService {
      */
     @Transactional(propagation = Propagation.REQUIRED)
     public OutputUserDTO activateUser(String id) {
-        UserID userID = userIDFactory.createUserID(id);
-        User user = userRepo.findByUserId(userID);
+        UserID userID = createUserIdByStringInputFromController(id);
+        Optional<User> foundUser = userRepo.findByUserId(userID);
+
+        User user = foundUser.flatMap(found -> foundUser).orElse(null);
+
+        if (user == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
 
         if (!user.activateStatus()) {
             throw new IllegalArgumentException("This user is already activated");
@@ -196,8 +223,14 @@ public class UserService {
     }
 
     public OutputUserDTO inactivateUser(String id) {
-        UserID userID = userIDFactory.createUserID(id);
-        User user = userRepo.findByUserId(userID);
+        UserID userID = createUserIdByStringInputFromController(id);
+        Optional<User> foundUser = userRepo.findByUserId(userID);
+
+        User user = foundUser.flatMap(found -> foundUser).orElse(null);
+
+        if (user == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
 
         if (!user.inactivateStatus()) {
             throw new IllegalArgumentException("This user is already inactivated");
@@ -211,10 +244,15 @@ public class UserService {
      * Create a Request to assign a user profile to a user (US003)
      */
     public boolean createAndAddRequest(String id, RequestDTO requestDTO) {
-        UserID userID = userIDFactory.createUserID(id);
+        UserID userID = createUserIdByStringInputFromController(id);
         UserProfileID profileID = profileIDFactory.createUserProfileID(requestDTO.getProfileId());
+        Optional<User> foundUser = userRepo.findByUserId(userID);
 
-        User user = userRepo.findByUserId(userID);
+        User user = foundUser.flatMap(found -> foundUser).orElse(null);
+
+        if (user == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
 
         if (profileRepo.existsByUserProfileId(profileID)) {
             user.createProfileRequest(profileID);
@@ -232,5 +270,9 @@ public class UserService {
     public void deleteUser(String id) throws NullPointerException {
         UserID userID = userIDFactory.createUserID(id);
         userRepo.delete(userID);
+    }
+
+    private UserID createUserIdByStringInputFromController(String id) {
+        return userIDFactory.createUserID(id);
     }
 }
