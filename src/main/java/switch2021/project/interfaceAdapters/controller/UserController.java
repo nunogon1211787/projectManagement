@@ -65,7 +65,7 @@ public class UserController {
      */
     @GetMapping
     public ResponseEntity<Object> showAllUsers() {
-        CollectionModel<OutputUserDTO> allUsersDto;
+        CollectionModel<PartialUserDTO> allUsersDto;
 
         try {
             allUsersDto = CollectionModel.of(userService.findAllUsers());

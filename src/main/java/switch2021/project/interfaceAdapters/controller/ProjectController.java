@@ -10,7 +10,6 @@ import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.dto.*;
 import switch2021.project.applicationServices.service.ProjectService;
-import switch2021.project.entities.valueObjects.vos.ProjectID;
 
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -65,7 +64,6 @@ public class ProjectController {
         return new ResponseEntity<>(newProject, HttpStatus.OK);
     }
 
-
     /**
      * Create Project - US005
      **/
@@ -84,7 +82,6 @@ public class ProjectController {
         return new ResponseEntity<>(newProject, HttpStatus.CREATED);
     }
 
-
     /**
      * Edit project - US008
      **/
@@ -101,7 +98,6 @@ public class ProjectController {
         }
         return new ResponseEntity<>(outputProjectDTO, HttpStatus.OK);
     }
-
 
     /**
      * Delete project
@@ -122,10 +118,18 @@ public class ProjectController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
-//    @GetMapping("/{id}/projects") //TODO review method
-//    public ResponseEntity<Object> showCurrentProjectsByUser(@PathVariable String id,
-//                                                            @RequestParam("date") DateDTO dateDto) {
-//        List<OutputProjectDTO> projectsDto = service.showCurrentProjectsByUser(id, dateDto);
-//        return new ResponseEntity<>(projectsDto, HttpStatus.OK);
-//    }
+    @GetMapping("/{id}/projects")
+    public ResponseEntity<Object> showCurrentProjectsByUser(@PathVariable("id") String id) {
+        ErrorMessage message = new ErrorMessage();
+        CollectionModel<OutputProjectDTO> allProjectsDto;
+
+        try{
+            allProjectsDto = service.showCurrentProjectsByUser(id);
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(allProjectsDto, HttpStatus.OK);
+    }
 }

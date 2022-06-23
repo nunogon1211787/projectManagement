@@ -12,6 +12,7 @@ import switch2021.project.dtoModel.mapper.ProjectMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManagementResourcesService;
 import switch2021.project.entities.aggregates.Resource.Resource;
+import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.*;
 import switch2021.project.entities.valueObjects.vos.*;
@@ -157,30 +158,37 @@ public class ProjectService {
 
     public CollectionModel<OutputProjectDTO> showCurrentProjectsByUser(String UserId) {
 
-        UserID userID = userIDFactory.createUserID(UserId);
+        UserID uId = userIDFactory.createUserID(UserId);
 
-        if (userRepo.existsById(userID)) {
+        User findUser = userRepo.findByUserId(uId);
 
-            List<Resource> userResources = resRepo.findAllByUser(userID);
+
+        if (userRepo.existsById(uId)) {
+
+            List<Resource> userResources = resRepo.findAllByUser(uId);
 
             List<Resource> currentUserResources = resService.currentResourcesByDate(userResources);
 
             List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
 
-            List<Project> projects = resourceProjects.stream().map(projectID ->
-                    projRepo.findById(projectID).get()
-            ).collect(Collectors.toList());
+            List<Project> projects = new ArrayList<>();
 
-            List<OutputProjectDTO> projectsDto = projects.stream().map(project ->
-                    projMapper.model2Dto(project)
-            ).collect(Collectors.toList());
+            for ( ProjectID x : resourceProjects) {
+                Optional<Project> y = projRepo.findById(x);
+                if(y.isEmpty()){
+                    throw new IllegalArgumentException("Num funciona");
+                }
 
-            return CollectionModel.of(projectsDto);
+                projects.add(y.flatMap(z -> y).orElse(null));
+
+            }
+
+            return projMapper.toCollectionDto(projects);
+
 
         }
 
         throw new IllegalArgumentException("User dos not exist");
-
     }
 
     public boolean deleteProjectRequest(String id) {
