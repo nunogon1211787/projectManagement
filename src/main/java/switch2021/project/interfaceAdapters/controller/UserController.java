@@ -47,12 +47,13 @@ public class UserController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Object> getUser(@PathVariable("id") String id) {
+        ErrorMessage message = new ErrorMessage();
         OutputUserDTO outputDTO;
 
         try {
             outputDTO = userService.findUserById(id);
+
         } catch (Exception exception) {
-            ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }

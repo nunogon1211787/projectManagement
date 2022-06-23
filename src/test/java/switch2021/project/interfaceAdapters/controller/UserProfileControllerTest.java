@@ -143,6 +143,28 @@ public class UserProfileControllerTest {
         assertThat(response.getStatusCodeValue()).isEqualTo(400);
     }
 
+    @SneakyThrows
+    @Test
+    void testDeleteProfile() {
+        //Arrange
+        doNothing().when(service).deleteARequestedUserProfile("1");
+        //Act
+        ResponseEntity<?> response = ctrl.deleteAUserProfile("1");
+        //Assert
+        assertThat(response.getStatusCodeValue()).isEqualTo(202);
+    }
+
+    @SneakyThrows
+    @Test
+    void testDeleteProfileException() {
+        //Arrange
+        doThrow(IllegalArgumentException.class).when(service).deleteARequestedUserProfile("1");
+        //Act
+        ResponseEntity<?> response = ctrl.deleteAUserProfile("1");
+        //Assert
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
 
 
 //    @Test

@@ -18,6 +18,7 @@ import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.Budget;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
+import switch2021.project.entities.valueObjects.vos.UserID;
 
 import java.util.HashMap;
 import java.util.List;
@@ -45,12 +46,6 @@ class ProjectControllerTest {
     void getAllProjectSuccess() {
         //Arrange
         Map<String, CollectionModel<PartialProjectDTO>> allProjectsDto = new HashMap<>();
-        PartialProjectDTO test = mock(PartialProjectDTO.class);
-        PartialProjectDTO test2 = mock(PartialProjectDTO.class);
-        PartialProjectDTO test3 = mock(PartialProjectDTO.class);
-        allProjectsDto.put("one", CollectionModel.of(List.of(test)));
-        allProjectsDto.put("two", CollectionModel.of(List.of(test2)));
-        allProjectsDto.put("three", CollectionModel.of(List.of(test3)));
         when(service.getAllProjects()).thenReturn(allProjectsDto);
         //Act
         ResponseEntity<?> response = ctrl.getAllProjects();
@@ -61,10 +56,11 @@ class ProjectControllerTest {
     @Test
     void getAllProjectCatchException() {
         //Arrange
+        doThrow(IllegalArgumentException.class).when(service).getAllProjects();
         //Act
         ResponseEntity<?> response = ctrl.getAllProjects();
         //Assert
-        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
     }
 
     @SneakyThrows
@@ -150,7 +146,7 @@ class ProjectControllerTest {
         //Arrange
         ProjectDTO projDto = mock(ProjectDTO.class);
         projDto.code = "1";
-        ctrl.createProject(projDto);
+        when(service.deleteProjectRequest(projDto.code)).thenReturn(true);
         //Act
         ResponseEntity<?> response = ctrl.deleteProjectRequest("1");
         //Assert
@@ -165,6 +161,30 @@ class ProjectControllerTest {
         doThrow(IllegalArgumentException.class).when(service).deleteProjectRequest(projId);
         //Act
         ResponseEntity<?> response = ctrl.deleteProjectRequest("1");
+        //Assert
+        assertThat(response.getStatusCodeValue()).isEqualTo(404);
+    }
+
+    @SneakyThrows
+    @Test
+    void testShowCurrentProjectByUser() {
+        //Arrange
+        String email = "jsz@mymail.com";
+        when(service.showCurrentProjectsByUser(email)).thenReturn(CollectionModel.empty());
+        //Act
+        ResponseEntity<?> response = ctrl.showCurrentProjectsByUser(email);
+        //Assert
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
+    @SneakyThrows
+    @Test
+    void testShowCurrentProjectByUserException() {
+        //Arrange
+        String projId = "1";
+        doThrow(IllegalArgumentException.class).when(service).showCurrentProjectsByUser(projId);
+        //Act
+        ResponseEntity<?> response = ctrl.showCurrentProjectsByUser("1");
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(404);
     }
