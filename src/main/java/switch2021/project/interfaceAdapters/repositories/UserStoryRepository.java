@@ -1,6 +1,5 @@
 package switch2021.project.interfaceAdapters.repositories;
 
-import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.dataModel.JPA.UserStoryJpa;
@@ -12,7 +11,6 @@ import switch2021.project.persistence.UserStoryJpaRepository;
 
 import java.util.*;
 
-@Getter
 @Repository
 public class UserStoryRepository implements IUserStoryRepo {
 
@@ -23,14 +21,13 @@ public class UserStoryRepository implements IUserStoryRepo {
 
 
     @Override
-    public UserStory findByUserStoryId(UserStoryID userStoryID) throws NullPointerException {
+    public Optional<UserStory> findByUserStoryId(UserStoryID userStoryID) {
         Optional<UserStoryJpa> opUsJpa = jpaRepository.findById(userStoryID);
-        UserStory userStory = opUsJpa.map(userStoryJpa -> assembler.toDomain(userStoryJpa))
-                .orElse(null);
+       Optional<UserStory> userStory = Optional.empty();
 
-        if (userStory == null) {
-            throw new NullPointerException("User story does not exist");
-        }
+       if(opUsJpa.isPresent()) {
+           userStory = Optional.of(assembler.toDomain(opUsJpa.get()));
+       }
         return userStory;
     }
 
@@ -70,11 +67,5 @@ public class UserStoryRepository implements IUserStoryRepo {
     }
 
     @Override
-    public void deleteByUserStoryId(UserStoryID usId) throws NullPointerException {
-
-        if (!jpaRepository.existsById(usId)) {
-            throw new NullPointerException("User Story does not exist");
-        }
-        jpaRepository.deleteById(usId);
-    }
+    public void deleteByUserStoryId(UserStoryID usId) { jpaRepository.deleteById(usId); }
 }

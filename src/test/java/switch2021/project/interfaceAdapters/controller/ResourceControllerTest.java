@@ -34,10 +34,10 @@ class ResourceControllerTest {
         CreateResourceDTO dto = new CreateResourceDTO("email@email.com","Project_2022_1","TeamMember",
                 "2022-01-12","2023-01-12",500,0.6);
         OutputResourceDTO output = mock(OutputResourceDTO.class);
-        //Act
         when(Service.createAndSaveResource(dto)).thenReturn(output);
-        ResponseEntity<Object> result = ctrl.createResource(dto);
         ResponseEntity<Object> expected = new ResponseEntity<>(output, HttpStatus.CREATED);
+        //Act
+        ResponseEntity<Object> result = ctrl.createResource(dto);
         //Assert
         assertEquals(result, expected);
     }
@@ -48,11 +48,11 @@ class ResourceControllerTest {
         CreateResourceDTO dto = new CreateResourceDTO("email@email.com","Project_2022_1","TeamMember",
                 "2022-01-12","2023-01-12",500,0.6);
         Exception exception = mock(IllegalArgumentException.class);
-        //Act
         when(exception.getLocalizedMessage()).thenReturn("test");
         when(Service.createAndSaveResource(dto)).thenThrow(exception);
-        ResponseEntity<Object> result = ctrl.createResource(dto);
         HttpStatus expected = HttpStatus.BAD_REQUEST;
+        //Act
+        ResponseEntity<Object> result = ctrl.createResource(dto);
         //Assert
         assertEquals(result.getStatusCode(), expected);
     }
@@ -62,10 +62,10 @@ class ResourceControllerTest {
         //Arrange
         String id = "mock(ResourceID.class)";
         OutputResourceDTO output = mock(OutputResourceDTO.class);
-        //Act
         when(Service.showResourceRequested(id)).thenReturn(output);
-        ResponseEntity<Object> result = ctrl.showResourceRequested(id);
         ResponseEntity<Object> expected = new ResponseEntity<>(output, HttpStatus.OK);
+        //Act
+        ResponseEntity<Object> result = ctrl.showResourceRequested(id);
         //Assert
         assertEquals(result, expected);
     }
@@ -75,11 +75,11 @@ class ResourceControllerTest {
         //Arrange
         String id = "mock(ResourceID.class)";
         Exception exception = mock(NullPointerException.class);
-        //Act
         when(exception.getLocalizedMessage()).thenReturn("test");
         when(Service.showResourceRequested(id)).thenThrow(exception);
-        ResponseEntity<Object> result = ctrl.showResourceRequested(id);
         HttpStatus expected = HttpStatus.BAD_REQUEST;
+        //Act
+        ResponseEntity<Object> result = ctrl.showResourceRequested(id);
         //Assert
         assertEquals(result.getStatusCode(), expected);
     }
@@ -94,10 +94,10 @@ class ResourceControllerTest {
         resources.add(output1);
         resources.add(output2);
         resources.add(output3);
-        //Act
         when(Service.showAllResources()).thenReturn(resources);
-        ResponseEntity<Object> result = ctrl.showAllResources();
         ResponseEntity<Object> expected = new ResponseEntity<>(CollectionModel.of(resources), HttpStatus.OK);
+        //Act
+        ResponseEntity<Object> result = ctrl.showAllResources();
         //Assert
         assertEquals(result, expected);
     }
@@ -106,11 +106,11 @@ class ResourceControllerTest {
     void showAllResourcesFail(){
         //Arrange
         Exception exception = mock(NullPointerException.class);
-        //Act
         when(exception.getLocalizedMessage()).thenReturn("test");
         when(Service.showAllResources()).thenThrow(exception);
-        ResponseEntity<Object> result = ctrl.showAllResources();
         HttpStatus expected = HttpStatus.BAD_REQUEST;
+        //Act
+        ResponseEntity<Object> result = ctrl.showAllResources();
         //Assert
         assertEquals(result.getStatusCode(), expected);
     }
@@ -126,10 +126,10 @@ class ResourceControllerTest {
         resources.add(output1);
         resources.add(output2);
         resources.add(output3);
-        //Act
         when(Service.showProjectTeam(id)).thenReturn(resources);
-        ResponseEntity<Object> result = ctrl.showRegisterOfResourcesInAProject(id);
         ResponseEntity<Object> expected = new ResponseEntity<>(resources, HttpStatus.OK);
+        //Act
+        ResponseEntity<Object> result = ctrl.showRegisterOfResourcesInAProject(id);
         //Assert
         assertEquals(result, expected);
     }
@@ -139,11 +139,11 @@ class ResourceControllerTest {
         //Arrange
         String id = "Project_2022_1";
         Exception exception = mock(NullPointerException.class);
-        //Act
         when(exception.getLocalizedMessage()).thenReturn("test");
         when(Service.showProjectTeam(id)).thenThrow(exception);
-        ResponseEntity<Object> result = ctrl.showRegisterOfResourcesInAProject(id);
         HttpStatus expected = HttpStatus.BAD_REQUEST;
+        //Act
+        ResponseEntity<Object> result = ctrl.showRegisterOfResourcesInAProject(id);
         //Assert
         assertEquals(result.getStatusCode(), expected);
     }
@@ -161,10 +161,10 @@ class ResourceControllerTest {
         resources.add(output1);
         resources.add(output2);
         resources.add(output3);
-        //Act
         when(Service.showCurrentProjectTeam(id)).thenReturn(CollectionModel.of(resources));
-        ResponseEntity<Object> result = ctrl.showCurrentProjectTeam(id);
         ResponseEntity<Object> expected = new ResponseEntity<>(CollectionModel.of(resources), HttpStatus.OK);
+        //Act
+        ResponseEntity<Object> result = ctrl.showCurrentProjectTeam(id);
         //Assert
         assertEquals(result, expected);
     }
@@ -174,11 +174,11 @@ class ResourceControllerTest {
         //Arrange
         String id = "Project_2022_1";
         Exception exception = mock(NullPointerException.class);
-        //Act
         when(exception.getLocalizedMessage()).thenReturn("test");
         when(Service.showCurrentProjectTeam(id)).thenThrow(exception);
-        ResponseEntity<Object> result = ctrl.showCurrentProjectTeam(id);
         HttpStatus expected = HttpStatus.BAD_REQUEST;
+        //Act
+        ResponseEntity<Object> result = ctrl.showCurrentProjectTeam(id);
         //Assert
         assertEquals(result.getStatusCode(), expected);
     }
@@ -189,10 +189,10 @@ class ResourceControllerTest {
         String id = "mock(ResourceID.class)";
         DefineRoleOfResourceDTO dto = mock(DefineRoleOfResourceDTO.class);
         OutputResourceDTO output = mock(OutputResourceDTO.class);
-        //Act
         when(Service.defineProjectRole(id, dto)).thenReturn(output);
-        ResponseEntity<Object> result = ctrl.defineProjectRoleOfAResource(id, dto);
         ResponseEntity<Object> expected = new ResponseEntity<>(output, HttpStatus.OK);
+        //Act
+        ResponseEntity<Object> result = ctrl.defineProjectRoleOfAResource(id, dto);
         //Assert
         assertEquals(result, expected);
     }
@@ -203,11 +203,11 @@ class ResourceControllerTest {
         String id = "mock(ResourceID.class)";
         DefineRoleOfResourceDTO dto = mock(DefineRoleOfResourceDTO.class);
         Exception exception = mock(NullPointerException.class);
-        //Act
         when(exception.getLocalizedMessage()).thenReturn("test");
         when(Service.defineProjectRole(id, dto)).thenThrow(exception);
-        ResponseEntity<Object> result = ctrl.defineProjectRoleOfAResource(id, dto);
         HttpStatus expected = HttpStatus.BAD_REQUEST;
+        //Act
+        ResponseEntity<Object> result = ctrl.defineProjectRoleOfAResource(id, dto);
         //Assert
         assertEquals(result.getStatusCode(), expected);
     }
@@ -216,9 +216,9 @@ class ResourceControllerTest {
     void deleteAResourceSuccess() {
         //Arrange
         String id = "mock(ResourceID.class)";
+        HttpStatus expected = HttpStatus.OK;
         //Act
         ResponseEntity<Object> result = ctrl.deleteAResource(id);
-        HttpStatus expected = HttpStatus.OK;
         //Assert
         assertEquals(result.getStatusCode(), expected);
     }

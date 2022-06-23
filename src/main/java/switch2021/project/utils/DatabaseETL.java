@@ -6,6 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+import switch2021.project.applicationServices.service.SprintService;
 import switch2021.project.dtoModel.dto.*;
 import switch2021.project.interfaceAdapters.controller.*;
 
@@ -43,6 +44,7 @@ public class DatabaseETL {
         initProjectSprintsTable();
         ChangeUsStatus();
         initGlobalRolesTable();
+        initSprintBacklogTable();
     }
 
     public void initUserTable() throws Exception {
@@ -179,8 +181,10 @@ public class DatabaseETL {
 
                 String projectId = row.getCell(0).getStringCellValue();
                 String name = row.getCell(1).getStringCellValue();
+                String startDate = row.getCell(2).getStringCellValue();
+                String sprintId = projectId + "_" + name;
 
-                NewSprintDTO sprintDTO = new NewSprintDTO(projectId, name);
+                NewSprintDTO sprintDTO = new NewSprintDTO(projectId, name, startDate);
                 sprintController.createAndSaveSprint(sprintDTO);
             }
         }
@@ -233,8 +237,7 @@ public class DatabaseETL {
     }
 
 
-/*    @PostConstruct
-    public void initSprintBacklogTable() throws IOException {
+    public void initSprintBacklogTable() throws Exception {
         InputStream is = cpr.getInputStream();
         XSSFWorkbook workbook = new XSSFWorkbook(is);
         XSSFSheet worksheet = workbook.getSheetAt(10);
@@ -244,11 +247,19 @@ public class DatabaseETL {
                 XSSFRow row = worksheet.getRow(index);
 
                 String projectId = row.getCell(0).getStringCellValue();
-                String name = row.getCell(1).getStringCellValue();
+                String sprintName = row.getCell(1).getStringCellValue();
                 String title = row.getCell(2).getStringCellValue();
-                String usResult = row.getCell(3).getStringCellValue();
+                String status = row.getCell(3).getStringCellValue();
+
+                String sprintId = projectId + "_" + sprintName;
+
+                UserStoryIdDTO userStoryIdDTO = new UserStoryIdDTO();
+                userStoryIdDTO.title=title;
+                userStoryIdDTO.projectID=projectId;
+
+                sprintController.addUserStoryToSprintBacklog(sprintId,userStoryIdDTO);
 
             }
         }
-    }*/
+    }
 }

@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.util.Objects;
 
-@ToString
 @Getter
 @Embeddable
 @NoArgsConstructor

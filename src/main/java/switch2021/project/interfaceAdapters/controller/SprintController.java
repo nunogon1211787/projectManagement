@@ -10,10 +10,8 @@ import switch2021.project.applicationServices.service.SprintService;
 import switch2021.project.entities.valueObjects.vos.Description;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.SprintID;
-import switch2021.project.entities.valueObjects.vos.UserStoryID;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -49,11 +47,11 @@ public class SprintController {
         return new ResponseEntity<>(outPutSprintDTO, HttpStatus.CREATED);
     }
 
+
     @PostMapping("/{id}")
     public ResponseEntity<Object> addUserStoryToSprintBacklog(@PathVariable("id") String id,
                                                               @RequestBody UserStoryIdDTO UsIdDto) {
         ErrorMessage message = new ErrorMessage();
-        OutputSprintDTO sprintDTO;
 
         try {
             sprintService.addUserStoryToSprintBacklog(id, UsIdDto);
@@ -92,6 +90,7 @@ public class SprintController {
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
 
     @GetMapping("/sprintList/{id}")
     public ResponseEntity<Object> showSprintsOfAProject(@PathVariable("id") String projId){
@@ -137,23 +136,56 @@ public class SprintController {
     }
 
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Object> startSprint(@PathVariable String id,
+                                              @RequestBody StartSprintDTO startSprintDTO) {
 
-/*    @GetMapping("/{id}")
+        ErrorMessage message = new ErrorMessage();
+
+        OutputSprintDTO outputSprintDTO;
+
+        try {
+            outputSprintDTO = sprintService.startSprint(id, startSprintDTO);
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(outputSprintDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
     public  ResponseEntity<Object> showScrumBoard(@PathVariable("id") String id) {
 
         ErrorMessage message = new ErrorMessage();
-        OutputSprintDTO sprintDTO;
+        CollectionModel<UserStoryOfSprintDTO> UsSprintDTO;
 
         try {
-            sprintDTO = sprintService.;
+            UsSprintDTO = sprintService.showScrumBoard(id);
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(sprintDTO, HttpStatus.OK);
-    }*/
+        return new ResponseEntity<>(UsSprintDTO, HttpStatus.OK);
+    }
+
+    @PatchMapping("/scrumBoard/{id}")
+    public  ResponseEntity<Object> changeStatusScrumBoard(@PathVariable("id") String id,
+                                                          @RequestBody UserStoryOfSprintDTO userStoryDTO) {
+        ErrorMessage message = new ErrorMessage();
+        UserStoryOfSprintDTO UsSprintDTO;
+
+        try {
+            UsSprintDTO = sprintService.changeStatusScrumBoard(id, userStoryDTO);
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(UsSprintDTO, HttpStatus.OK);
+    }
 }
 
 

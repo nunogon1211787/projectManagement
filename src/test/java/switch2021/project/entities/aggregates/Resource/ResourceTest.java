@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.entities.valueObjects.vos.CostPerHour;
 import switch2021.project.entities.valueObjects.vos.PercentageOfAllocation;
 import switch2021.project.entities.valueObjects.vos.ResourceID;
-import switch2021.project.entities.valueObjects.vos.enums.ProjectRoleReeng;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectRole;
 
 import java.time.LocalDate;
 
@@ -19,7 +19,7 @@ class ResourceTest {
         ResourceID id = mock(ResourceID.class);
         PercentageOfAllocation all = mock(PercentageOfAllocation.class);
         CostPerHour costPerHour = mock(CostPerHour.class);
-        ProjectRoleReeng projRole = null;
+        ProjectRole projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
         Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         //Act
@@ -34,7 +34,7 @@ class ResourceTest {
         ResourceID id = mock(ResourceID.class);
         PercentageOfAllocation all = mock(PercentageOfAllocation.class);
         CostPerHour costPerHour = mock(CostPerHour.class);
-        ProjectRoleReeng projRole = null;
+        ProjectRole projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
         Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         LocalDate end = LocalDate.of(2022, 12, 31);
@@ -53,7 +53,7 @@ class ResourceTest {
         ResourceID id = mock(ResourceID.class);
         PercentageOfAllocation all = mock(PercentageOfAllocation.class);
         CostPerHour costPerHour = mock(CostPerHour.class);
-        ProjectRoleReeng projRole = null;
+        ProjectRole projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
         Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         LocalDate end = LocalDate.of(2022, 12, 31);
@@ -72,7 +72,7 @@ class ResourceTest {
         ResourceID id = mock(ResourceID.class);
         PercentageOfAllocation all = mock(PercentageOfAllocation.class);
         CostPerHour costPerHour = mock(CostPerHour.class);
-        ProjectRoleReeng projRole = null;
+        ProjectRole projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
         Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         LocalDate end = LocalDate.of(2022, 12, 31);
@@ -91,7 +91,7 @@ class ResourceTest {
         ResourceID id = mock(ResourceID.class);
         PercentageOfAllocation all = mock(PercentageOfAllocation.class);
         CostPerHour costPerHour = mock(CostPerHour.class);
-        ProjectRoleReeng projRole = null;
+        ProjectRole projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
         Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         LocalDate end = LocalDate.of(2022, 4, 30);
@@ -110,7 +110,7 @@ class ResourceTest {
         ResourceID id = mock(ResourceID.class);
         PercentageOfAllocation all = mock(PercentageOfAllocation.class);
         CostPerHour costPerHour = mock(CostPerHour.class);
-        ProjectRoleReeng projRole = null;
+        ProjectRole projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
         Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         LocalDate end = LocalDate.of(2022, 5, 2);
@@ -129,7 +129,7 @@ class ResourceTest {
         ResourceID id = mock(ResourceID.class);
         PercentageOfAllocation all = mock(PercentageOfAllocation.class);
         CostPerHour costPerHour = mock(CostPerHour.class);
-        ProjectRoleReeng projRole = ProjectRoleReeng.TeamMember;
+        ProjectRole projRole = ProjectRole.TeamMember;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
         Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         //Assert
@@ -142,7 +142,7 @@ class ResourceTest {
         ResourceID id = mock(ResourceID.class);
         PercentageOfAllocation all = mock(PercentageOfAllocation.class);
         CostPerHour costPerHour = mock(CostPerHour.class);
-        ProjectRoleReeng projRole = ProjectRoleReeng.TeamMember;
+        ProjectRole projRole = ProjectRole.TeamMember;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
         Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         //Assert
@@ -155,7 +155,7 @@ class ResourceTest {
         ResourceID id = mock(ResourceID.class);
         PercentageOfAllocation all = mock(PercentageOfAllocation.class);
         CostPerHour costPerHour = mock(CostPerHour.class);
-        ProjectRoleReeng projRole = null;
+        ProjectRole projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
         Resource res = new Resource(id, endDate, all, costPerHour, projRole);
         Resource allRes = new Resource(res.getId(), res.getEndDate(), res.getAllocation(),
@@ -172,7 +172,7 @@ class ResourceTest {
         ResourceID id = mock(ResourceID.class);
         PercentageOfAllocation all = mock(PercentageOfAllocation.class);
         CostPerHour costPerHour = mock(CostPerHour.class);
-        ProjectRoleReeng projRole = ProjectRoleReeng.TeamMember;
+        ProjectRole projRole = ProjectRole.TeamMember;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
         //Act
         Resource res = new Resource(id, endDate, all, costPerHour, projRole);
@@ -190,7 +190,7 @@ class ResourceTest {
         ResourceID id = mock(ResourceID.class);
         PercentageOfAllocation all = mock(PercentageOfAllocation.class);
         CostPerHour costPerHour = mock(CostPerHour.class);
-        ProjectRoleReeng projRole = null;
+        ProjectRole projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
         //Act
         Resource res = new Resource(id, endDate, all, costPerHour, projRole);
@@ -206,7 +206,7 @@ class ResourceTest {
         ResourceID id = mock(ResourceID.class);
         PercentageOfAllocation all = mock(PercentageOfAllocation.class);
         CostPerHour costPerHour = mock(CostPerHour.class);
-        ProjectRoleReeng projRole = null;
+        ProjectRole projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
         //Act
         Resource res = new Resource(id, endDate, all, costPerHour, projRole);
@@ -221,7 +221,7 @@ class ResourceTest {
         ResourceID id = mock(ResourceID.class);
         PercentageOfAllocation all = mock(PercentageOfAllocation.class);
         CostPerHour costPerHour = mock(CostPerHour.class);
-        ProjectRoleReeng projRole = null;
+        ProjectRole projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
         //Act
         Resource res = new Resource(id, endDate, all, costPerHour, projRole);
@@ -237,7 +237,7 @@ class ResourceTest {
         ResourceID id2 = mock(ResourceID.class);
         PercentageOfAllocation all = mock(PercentageOfAllocation.class);
         CostPerHour costPerHour = mock(CostPerHour.class);
-        ProjectRoleReeng projRole = null;
+        ProjectRole projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
         //Act
         Resource res = new Resource(id, endDate, all, costPerHour, projRole);
@@ -253,7 +253,7 @@ class ResourceTest {
         ResourceID id2 = mock(ResourceID.class);
         PercentageOfAllocation all = mock(PercentageOfAllocation.class);
         CostPerHour costPerHour = mock(CostPerHour.class);
-        ProjectRoleReeng projRole = null;
+        ProjectRole projRole = null;
         LocalDate endDate = LocalDate.of(2021, 12, 10);
         //Act
         Resource res = new Resource(id, endDate, all, costPerHour, projRole);

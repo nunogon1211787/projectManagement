@@ -37,7 +37,7 @@ public class LoginMapper {
         for (UserProfileID profile : logged.getAssignedIdProfiles()){
             //Check if this User can access resource Projects
             if(auth.getSeeProjects().contains(profile.getUserProfileName().getText())){
-                dto.add(linkTo(methodOn(ProjectController.class).showAllProjects()).withRel("projects").withType("GET"));
+                dto.add(linkTo(methodOn(ProjectController.class).getAllProjects()).withRel("projects").withType("GET"));
             }
 
             //Check if this User can access resource Users

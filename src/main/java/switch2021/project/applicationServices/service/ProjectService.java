@@ -1,16 +1,19 @@
 package switch2021.project.applicationServices.service;
 
+import org.apache.commons.codec.Resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.applicationServices.iRepositories.*;
 import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
+import switch2021.project.dtoModel.dto.PartialProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.mapper.ProjectMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManagementResourcesService;
 import switch2021.project.entities.aggregates.Resource.Resource;
+import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.*;
 import switch2021.project.entities.valueObjects.vos.*;
@@ -83,7 +86,7 @@ public class ProjectService {
 
     }
 
-    private ProjectID generatedProjectId(){
+    private ProjectID generatedProjectId() {
         String format = "Project_" + LocalDate.now().getYear() + "_";
         int sequenceNumber = projRepo.findAll().size() + 1;
         String id = format + sequenceNumber;
@@ -91,7 +94,7 @@ public class ProjectService {
     }
 
     /**
-    * US008
+     * US008
      */
 
     public OutputProjectDTO updateProjectPartially(String id, EditProjectInfoDTO editProjectInfoDTO) {
@@ -127,18 +130,19 @@ public class ProjectService {
         throw new IllegalArgumentException("Project does not exist.");
     }
 
-    public CollectionModel<OutputProjectDTO> getAllProjects() {
+    public Map<String, CollectionModel<PartialProjectDTO>> getAllProjects() {
 
         List<Project> projects = projRepo.findAll();
         List<Project> projectsWeb = iProjectWebRepository.findAll();
 
-        CollectionModel<OutputProjectDTO> outputProjectDTOS = projMapper.toCollectionDto(projectsWeb);
-        CollectionModel<OutputProjectDTO> outputProjectDTOS2= projMapper.toCollectionDto(projects);
+        CollectionModel<PartialProjectDTO> outputProjectDTOS = projMapper.toCollectionDto2(projectsWeb, true);
+        CollectionModel<PartialProjectDTO> outputProjectDTOS2 = projMapper.toCollectionDto2(projects, false);
 
-        List<OutputProjectDTO> newList = Stream.concat(outputProjectDTOS.getContent().stream(), outputProjectDTOS2.getContent().stream())
-                .collect(Collectors.toList());
+        Map<String, CollectionModel<PartialProjectDTO>> mapProjects = new HashMap<>();
+        mapProjects.put("internalProjects", outputProjectDTOS2);
+        mapProjects.put("externalProjects", outputProjectDTOS);
 
-        return CollectionModel.of(newList);
+        return mapProjects;
     }
 
     public OutputProjectDTO showProject(String id) throws Exception {
@@ -155,31 +159,27 @@ public class ProjectService {
     }
 
     public CollectionModel<OutputProjectDTO> showCurrentProjectsByUser(String UserId) {
+        UserID uId = userIDFactory.createUserID(UserId);
+        Optional<User> foundUser = userRepo.findByUserId(uId);
 
-        UserID userID = userIDFactory.createUserID(UserId);
+        User user = foundUser.flatMap(u -> foundUser).orElse(null);
 
-        if (userRepo.existsById(userID)) {
-
-            List<Resource> userResources = resRepo.findAllByUser(userID);
-
-            List<Resource> currentUserResources = resService.currentResourcesByDate(userResources);
-
-            List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
-
-            List<Project> projects = resourceProjects.stream().map(projectID ->
-                    projRepo.findById(projectID).get()
-            ).collect(Collectors.toList());
-
-            List<OutputProjectDTO> projectsDto = projects.stream().map(project ->
-                    projMapper.model2Dto(project)
-            ).collect(Collectors.toList());
-
-            return CollectionModel.of(projectsDto);
-
+        if (user == null) {
+            throw new NullPointerException("User dos not exist");
         }
+        List<Resource> userResources = resRepo.findAllByUser(uId);
+        List<Resource> currentUserResources = resService.currentResourcesByDate(userResources);
+        List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
+        List<Project> projects = new ArrayList<>();
 
-        throw new IllegalArgumentException("User dos not exist");
-
+        for (ProjectID x : resourceProjects) {
+            Optional<Project> y = projRepo.findById(x);
+            if (y.isEmpty()) {
+                throw new NullPointerException("User is not allocated in any project!");
+            }
+            projects.add(y.flatMap(z -> y).orElse(null));
+        }
+        return projMapper.toCollectionDto(projects, false);
     }
 
     public boolean deleteProjectRequest(String id) {

@@ -5,11 +5,12 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.applicationServices.iRepositories.IProjectRepo;
-import switch2021.project.datamodel.jpa.ProjectJpa;
+import switch2021.project.dataModel.JPA.ProjectJpa;
+import switch2021.project.dataModel.JPA.assembler.ProjectJpaAssembler;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.persistence.ProjectJpaRepository;
-import switch2021.project.datamodel.jpa.assembler.ProjectJpaAssembler;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,20 +23,8 @@ public class ProjectRepository implements IProjectRepo {
 
     @Autowired
     ProjectJpaRepository projectJpaRepository;
-
     @Autowired
     ProjectJpaAssembler projectJpaAssembler;
-
-
-    @Override
-    public Project save(Project newProject) {
-        ProjectJpa projectJpa = projectJpaAssembler.toJpaData(newProject);
-
-        ProjectJpa savedProj = projectJpaRepository.save(projectJpa);
-        return projectJpaAssembler.toDomain(savedProj);
-
-    }
-
 
     @Override
     public Optional<Project> findById(ProjectID id) {
@@ -54,16 +43,16 @@ public class ProjectRepository implements IProjectRepo {
 
     @Override
     public List<Project> findAll() {
-        List<ProjectJpa> setProjectJpa = projectJpaRepository.findAll();
+        List<ProjectJpa> projectJpaList = projectJpaRepository.findAll();
 
-        List<Project> setProject = new ArrayList<>();
+        List<Project> projectList = new ArrayList<>();
 
-        for (ProjectJpa projectJpa : setProjectJpa) {
+        for (ProjectJpa projectJpa : projectJpaList) {
             Project project = projectJpaAssembler.toDomain(projectJpa);
-            setProject.add(project);
+            projectList.add(project);
         }
 
-        return setProject;
+        return projectList;
     }
 
 
@@ -76,6 +65,16 @@ public class ProjectRepository implements IProjectRepo {
         }
 
         return false;
+    }
+
+
+    @Override
+    public Project save(Project newProject) {
+        ProjectJpa projectJpa = projectJpaAssembler.toJpaData(newProject);
+
+        ProjectJpa savedProj = projectJpaRepository.save(projectJpa);
+        return projectJpaAssembler.toDomain(savedProj);
+
     }
 
 

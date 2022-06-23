@@ -26,6 +26,21 @@ public class UserStoryIDTest {
         assertEquals(expected, userStoryId.toString());
     }
 
+//    @Test
+//    @DisplayName("Validate that ID is correct")
+//    public void usIDSuccessWithString() {
+//        //Arrange
+//        ProjectID projectCode = mock(ProjectID.class);
+//        when(projectCode.getCode()).thenReturn("Project_2022_1");
+//        UsTitle usTitle = mock(UsTitle.class);
+//        when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
+//        //Act
+//        UserStoryID userStoryId = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
+//        UserStoryID expected = new UserStoryID(projectCode, usTitle);
+//        //Assert
+//        assertEquals(expected, userStoryId);
+//    }
+
     @Test
     @DisplayName("Validate that ID is correct- not empty")
     public void usIDSuccessCreated() {

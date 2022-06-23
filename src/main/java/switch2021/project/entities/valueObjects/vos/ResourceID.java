@@ -51,8 +51,8 @@ public class ResourceID implements ValueObject<ResourceID> {
 
     @Override
     public String toString() {
-        return user.getEmail().getEmailText() + "&" +
-                project.getCode() + "&" +
-                startDate.toString();
+        return  this.getUser().getEmail().getEmailText() + "&" +
+                this.getProject().getCode() + "&" +
+                this.getStartDate().toString();
     }
 }

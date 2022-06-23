@@ -23,14 +23,14 @@ public class UserRepository implements IUserRepo {
     private UserJpaAssembler userJpaAssembler;
 
     @Override
-    public User findByUserId(UserID userID) {
+    public Optional<User> findByUserId(UserID userID) {
         Optional<UserJpa> foundUserJpa = userJpaRepository.findById(userID);
-        UserJpa userJpa = foundUserJpa.flatMap(user -> foundUserJpa).orElse(null);
+        Optional<User> foundUser = Optional.empty();
 
-        if (userJpa == null) {
-            throw new NullPointerException("This User does not exist!");
+        if(foundUserJpa.isPresent()) {
+            foundUser = Optional.of(userJpaAssembler.toDomain(foundUserJpa.get()));
         }
-        return userJpaAssembler.toDomain(userJpa);
+        return foundUser;
     }
 
     @Override
