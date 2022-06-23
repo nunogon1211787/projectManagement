@@ -36,7 +36,7 @@ public class SprintControllerTest {
 
     @Test
     void shouldReturnNewProjectAndOk() throws Exception {
-        NewSprintDTO sprintDTO = new NewSprintDTO("Project_2022_1", "description");
+        NewSprintDTO sprintDTO = new NewSprintDTO("Project_2022_1", "description", "");
 
         MvcResult result = mockMvc
                 .perform(MockMvcRequestBuilders.post("/sprints")
@@ -104,7 +104,7 @@ public class SprintControllerTest {
         userStoryIdDTO.projectID = "Project_2022_1";
         userStoryIdDTO.title = "As Queen i want to break free";
 
-        NewSprintDTO sprintDTO = new NewSprintDTO("Project_2022_1", "Sprint");
+        NewSprintDTO sprintDTO = new NewSprintDTO("Project_2022_1", "Sprint", "");
 
         ProjectDTO projectDTO = new ProjectDTO();
 

@@ -12,5 +12,6 @@ public class NewSprintDTO extends RepresentationModel<NewSprintDTO> {
 
     public String projectID;
     public String name;
+    public String startDate;
 
 }

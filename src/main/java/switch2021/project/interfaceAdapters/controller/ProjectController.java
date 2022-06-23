@@ -12,6 +12,8 @@ import switch2021.project.dtoModel.dto.*;
 import switch2021.project.applicationServices.service.ProjectService;
 
 
+import java.util.Map;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -29,12 +31,12 @@ public class ProjectController {
      * @return List Projects
      */
     @GetMapping
-    public ResponseEntity<Object> showAllProjects() {
+    public ResponseEntity<Object> getAllProjects() {
         ErrorMessage message = new ErrorMessage();
-        CollectionModel<PartialProjectDTO> allProjectsDto;
+        Map<String,CollectionModel<PartialProjectDTO>> allProjectsDto;
 
         try {
-            allProjectsDto = CollectionModel.of(service.getAllProjects());
+            allProjectsDto = service.getAllProjects();
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
@@ -109,7 +111,7 @@ public class ProjectController {
         try {
             if(service.deleteProjectRequest(id)) {
                 message.errorMessage = "Project was deleted successfully";
-                message.add(linkTo(methodOn(ProjectController.class).showAllProjects()).withRel("Collection"));
+                message.add(linkTo(methodOn(ProjectController.class).getAllProjects()).withRel("Collection"));
             }
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();

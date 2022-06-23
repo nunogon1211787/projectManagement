@@ -89,6 +89,36 @@ public class UsPriorityTest {
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")
+    public void compareToTestZero() {
+        //Arrange
+        UsPriority usPriority = new UsPriority(1);
+        UsPriority usPriority1 = new UsPriority(1);
+        //Act and Assert
+        assertEquals(0, usPriority.compareTo(usPriority1));
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void compareToTestOne() {
+        //Arrange
+        UsPriority usPriority = new UsPriority(2);
+        UsPriority usPriority1 = new UsPriority(1);
+        //Act and Assert
+        assertEquals(1, usPriority.compareTo(usPriority1));
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void compareToTestMinusOne() {
+        //Arrange
+        UsPriority usPriority = new UsPriority(1);
+        UsPriority usPriority1 = new UsPriority(2);
+        //Act and Assert
+        assertEquals(-1, usPriority.compareTo(usPriority1));
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
     public void overrideTestFail_1() {
         //Arrange
         UsPriority usPriority = new UsPriority(1);

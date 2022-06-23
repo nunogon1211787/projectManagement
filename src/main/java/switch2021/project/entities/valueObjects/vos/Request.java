@@ -3,6 +3,7 @@ package switch2021.project.entities.valueObjects.vos;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import switch2021.project.utils.ValueObject;
 
 import javax.persistence.Embeddable;
@@ -12,6 +13,7 @@ import java.util.Objects;
 
 @Getter
 @Embeddable
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Request implements ValueObject<Request> {
