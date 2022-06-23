@@ -39,20 +39,13 @@ public class UserProfileService {
      * Create and save a User Profile
      */
     public UserProfileDTO createAndSaveUserProfile(UserProfileDTO dto) throws Exception {
-
         UserProfile newUserProfile = iUserProfileFactory.createUserProfile(dto);
 
-        Optional<UserProfile> userProfileSaved= iUserProfileRepo.save(newUserProfile);
-
-        UserProfileDTO outputUserProfileDTO;
-
-        if(userProfileSaved.isPresent()){
-            outputUserProfileDTO= userProfileMapper.toDTO(userProfileSaved.get());
-        }
-        else {
+        if(iUserProfileRepo.existsByUserProfileId(newUserProfile.getUserProfileId())) {
             throw new Exception ("This User Profile already exists!");
         }
-        return outputUserProfileDTO;
+        UserProfile userProfileSaved = iUserProfileRepo.save(newUserProfile);
+        return  userProfileMapper.toDTO(userProfileSaved);
     }
 
     /**
@@ -111,12 +104,12 @@ public class UserProfileService {
      * To delete a profile
      */
     public void deleteARequestedUserProfile(String id) throws Exception {
-
         UserProfileID profileId = factoryId.createUserProfileID(id);
 
-        if(!iUserProfileRepo.deleteById(profileId)){
+        if(!iUserProfileRepo.existsByUserProfileId(profileId)){
             throw new Exception("User profile does not exist.");
         }
+        iUserProfileRepo.deleteById(profileId);
     }
 }
 

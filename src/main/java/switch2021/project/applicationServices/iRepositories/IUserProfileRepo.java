@@ -10,13 +10,12 @@ import java.util.Optional;
 public interface IUserProfileRepo {
 
     /**
-     * The repository should be able to find a object through its identity.
+     * The repository should be able to find an object through its identity.
      */
     Optional<UserProfile> findByUserProfileID(UserProfileID userProfileID);
 
     /**
      * Finds all user profile
-     *
      * @return userProfileList if found, else {@code null}
      */
     List<UserProfile> findAll();
@@ -24,7 +23,7 @@ public interface IUserProfileRepo {
     /**
      * Save user profile
      */
-    Optional<UserProfile> save(UserProfile profile);
+    UserProfile save(UserProfile profile);
 
     boolean existsByUserProfileId(UserProfileID userProfileID);
 

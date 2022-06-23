@@ -12,8 +12,6 @@ import switch2021.project.dtoModel.mapper.UserProfileMapper;
 import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 import switch2021.project.entities.factories.factoryInterfaces.IUserProfileFactory;
 
-import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -40,7 +38,7 @@ public class UserProfileServiceTest {
     public void createAndSaveUserProfile() throws Exception {
         //Arrange
         when(iUserProfileFactory.createUserProfile(userProfileDTO)).thenReturn(userProfile);
-        when(iUserProfileRepo.save(userProfile)).thenReturn(Optional.of(userProfile));
+        when(iUserProfileRepo.save(userProfile)).thenReturn(userProfile);
         when(userProfileMapper.toDTO(userProfile)).thenReturn(userProfileDTO);
 
         //Act

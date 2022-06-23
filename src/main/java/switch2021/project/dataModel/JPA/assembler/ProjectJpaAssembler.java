@@ -1,8 +1,8 @@
-package switch2021.project.datamodel.jpa.assembler;
+package switch2021.project.dataModel.JPA.assembler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import switch2021.project.datamodel.jpa.ProjectJpa;
+import switch2021.project.dataModel.JPA.ProjectJpa;
 import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.aggregates.Project.Project;
