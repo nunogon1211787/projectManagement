@@ -2,9 +2,9 @@ package switch2021.project.dtoModel.mapper;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
-import switch2021.project.interfaceAdapters.controller.UserStoryController;
 import switch2021.project.dtoModel.dto.OutputUserStoryDTO;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
+import switch2021.project.interfaceAdapters.controller.UserStoryController;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,16 +19,24 @@ public class UserStoryMapper {
         OutputUserStoryDTO result = new OutputUserStoryDTO();
 
         result.id = newUserStory.getUserStoryID().toString();
+        result.projectID = newUserStory.getUserStoryID().getProjectID().getCode();
+        result.usTitle = newUserStory.getUserStoryID().getUsTitle().getTitleUs();
         result.priority = newUserStory.getPriority().getPriorityUs();
         result.description = newUserStory.getDescription().getText();
         result.timeEstimate = newUserStory.getTimeEstimate().getUsHours();
 
-        if(newUserStory.getParentUserStory() != null) {
+        if (newUserStory.getParentUserStory() != null) {
             result.parentUserStory = newUserStory.getParentUserStory().getUserStoryID().toString();
         }
-        if(newUserStory.getUsStartDate() != null) {result.usStartDate = newUserStory.getUsStartDate().toString();}
-        if(newUserStory.getUsEndDate() != null) {result.usEndDate = newUserStory.getUsEndDate().toString();}
-        if(newUserStory.getUsRefined() != null) {result.usRefined = newUserStory.getUsRefined().toString();}
+        if (newUserStory.getUsStartDate() != null) {
+            result.usStartDate = newUserStory.getUsStartDate().toString();
+        }
+        if (newUserStory.getUsEndDate() != null) {
+            result.usEndDate = newUserStory.getUsEndDate().toString();
+        }
+        if (newUserStory.getUsRefined() != null) {
+            result.usRefined = newUserStory.getUsRefined().toString();
+        }
 
 
         /*

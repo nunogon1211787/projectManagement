@@ -4,6 +4,7 @@ import org.springframework.hateoas.RepresentationModel;
 
 public class OutputResourceDTO extends RepresentationModel<OutputResourceDTO> {
 
+    public String resourceID;
     public String user;
     public String project;
     public String role;
