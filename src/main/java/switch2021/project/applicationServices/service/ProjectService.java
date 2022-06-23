@@ -162,17 +162,11 @@ public class ProjectService {
 
         UserID uId = userIDFactory.createUserID(UserId);
 
-        User findUser = userRepo.findByUserId(uId);
-
-
         if (userRepo.existsById(uId)) {
 
             List<Resource> userResources = resRepo.findAllByUser(uId);
-
             List<Resource> currentUserResources = resService.currentResourcesByDate(userResources);
-
             List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
-
             List<Project> projects = new ArrayList<>();
 
             for ( ProjectID x : resourceProjects) {
@@ -180,16 +174,10 @@ public class ProjectService {
                 if(y.isEmpty()){
                     throw new IllegalArgumentException("Num funciona");
                 }
-
                 projects.add(y.flatMap(z -> y).orElse(null));
-
             }
-
-            return projMapper.toCollectionDto(projects);
-
-
+            return projMapper.toCollectionDto(projects, false);
             }
-
         throw new IllegalArgumentException("User dos not exist");
     }
 
