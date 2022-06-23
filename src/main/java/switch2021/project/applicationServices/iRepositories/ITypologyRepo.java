@@ -4,14 +4,14 @@ import switch2021.project.entities.aggregates.Typology.Typology;
 import switch2021.project.entities.valueObjects.vos.TypologyID;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ITypologyRepo {
 
     /**
      * The repository should be able to find an object using given Identity.
-     * @return
      */
-    Typology findByTypologyId(TypologyID id);
+    Optional<Typology> findByTypologyId(TypologyID id);
 
 
     /**
@@ -22,7 +22,6 @@ public interface ITypologyRepo {
 
     /**
      * Save an object in the list of the repository.
-     * @return
      */
     Typology save(Typology typology);
 

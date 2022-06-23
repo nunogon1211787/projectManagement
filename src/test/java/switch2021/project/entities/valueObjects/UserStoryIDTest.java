@@ -36,7 +36,7 @@ public class UserStoryIDTest {
 //        when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
 //        //Act
 //        UserStoryID userStoryId = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
-//        UserStoryID expected = new UserStoryID(projectCode, usTitle);;
+//        UserStoryID expected = new UserStoryID(projectCode, usTitle);
 //        //Assert
 //        assertEquals(expected, userStoryId);
 //    }

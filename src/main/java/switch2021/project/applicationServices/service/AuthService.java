@@ -17,23 +17,21 @@ public class AuthService {
 
     @Autowired
     IUserRepo repo;
-
     @Autowired
     IUserIDFactory idFactory;
-
     @Autowired
     LoginMapper map;
 
     public OutputLoginDTO authentication(LoginDto login) throws Exception {
+        Optional<User> logged = repo.findByUserId(idFactory.createUserID(login.email));
 
-        User userLogged = repo.findByUserId(idFactory.createUserID(login.email));
+        if (logged.isPresent()) {
+            User userLogged = logged.get();
 
-            if(userLogged.checkPassword(new Password(login.password))){
-
-                OutputLoginDTO result = map.toDto(userLogged);
-
-                return result;
-            };
+            if (userLogged.checkPassword(new Password(login.password))) {
+                return map.toDto(userLogged);
+            }
+        }
         throw new Exception("Username or Password invalid");
     }
 }

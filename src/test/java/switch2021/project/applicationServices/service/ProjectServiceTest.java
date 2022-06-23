@@ -8,12 +8,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.hateoas.CollectionModel;
 import switch2021.project.applicationServices.iRepositories.*;
 import switch2021.project.dtoModel.dto.*;
 import switch2021.project.dtoModel.mapper.ProjectMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.*;
+import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.*;
 import switch2021.project.entities.valueObjects.vos.*;
@@ -26,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class ProjectServiceTest {
 
     @Mock
@@ -84,23 +86,23 @@ class ProjectServiceTest {
      */
 
     @Test
-    void createProjectWithTypoNotExist(){
+    void createProjectWithTypoNotExist() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
-           //Arrange
+            //Arrange
             ProjectDTO projDto = mock(ProjectDTO.class);
             TypologyID typoId = mock(TypologyID.class);
             String typo = "not exist";
             when(projDto.getTypology()).thenReturn(typo);
             when(typologyIDFactory.createIdWithString(typo)).thenReturn(typoId);
             when(iTypologyRepo.existsByTypologyId(typoId)).thenReturn(false);
-           //Act
+            //Act
             projectService.createAndSaveProject(projDto);
         });
     }
 
     @Test
-    void createProjectWhenProjectAlreadyExist(){
+    void createProjectWhenProjectAlreadyExist() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
@@ -167,18 +169,18 @@ class ProjectServiceTest {
      */
 
     @Test
-    void updateProjectWithProjectNotExist(){
+    void updateProjectWithProjectNotExist() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
-           //Arrange
-           String id = "not exist";
-           EditProjectInfoDTO dto = mock(EditProjectInfoDTO.class);
-           ProjectID projId = mock(ProjectID.class);
-           Optional<Project> opt = Optional.empty();
-           when(projectIDFactory.create(id)).thenReturn(projId);
-           when(projRepo.findById(projId)).thenReturn(opt);
-           //Act
-           projectService.updateProjectPartially(id, dto);
+            //Arrange
+            String id = "not exist";
+            EditProjectInfoDTO dto = mock(EditProjectInfoDTO.class);
+            ProjectID projId = mock(ProjectID.class);
+            Optional<Project> opt = Optional.empty();
+            when(projectIDFactory.create(id)).thenReturn(projId);
+            when(projRepo.findById(projId)).thenReturn(opt);
+            //Act
+            projectService.updateProjectPartially(id, dto);
         });
     }
 
@@ -337,7 +339,7 @@ class ProjectServiceTest {
      */
 
     @Test
-    void getAllProjectsSuccess(){
+    void getAllProjectsSuccess() {
         //Arrange
         List<Project> projects = new ArrayList<>();
         List<Project> projectsWeb = new ArrayList<>();
@@ -362,7 +364,7 @@ class ProjectServiceTest {
      */
 
     @Test
-    void getProjectWithProjectNotExist(){
+    void getProjectWithProjectNotExist() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
@@ -401,16 +403,17 @@ class ProjectServiceTest {
      */
 
     @Test
-    void getCurrentProjectsByUserNotExist(){
+    void getCurrentProjectsByUserNotExist() {
         //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-           //Arrange
+        assertThrows(NullPointerException.class, () -> {
+            //Arrange
             String id = "not exist";
+            Email email = mock(Email.class);
             UserID userID = mock(UserID.class);
-
-            when(userIDFactory.createUserID(id)).thenReturn(userID);
-            when(userRepo.existsById(userID)).thenReturn(false);
-           //Act
+            when(email.getEmailText()).thenReturn(id);
+            when(userID.getEmail()).thenReturn(email);
+            when(userRepo.findByUserId(userID)).thenReturn(Optional.empty());
+            //Act
             projectService.showCurrentProjectsByUser(id);
         });
     }
@@ -444,7 +447,7 @@ class ProjectServiceTest {
 //    }
 
     @Test
-    void deleteProjectNotExist(){
+    void deleteProjectNotExist() {
         //Assert
         assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
@@ -471,7 +474,6 @@ class ProjectServiceTest {
         //Assert
         assertTrue(result);
     }
-
 
 
 }

@@ -86,7 +86,7 @@ public class ProjectService {
 
     }
 
-    private ProjectID generatedProjectId(){
+    private ProjectID generatedProjectId() {
         String format = "Project_" + LocalDate.now().getYear() + "_";
         int sequenceNumber = projRepo.findAll().size() + 1;
         String id = format + sequenceNumber;
@@ -130,7 +130,7 @@ public class ProjectService {
         throw new IllegalArgumentException("Project does not exist.");
     }
 
-    public Map<String, CollectionModel<PartialProjectDTO>>  getAllProjects() {
+    public Map<String, CollectionModel<PartialProjectDTO>> getAllProjects() {
 
         List<Project> projects = projRepo.findAll();
         List<Project> projectsWeb = iProjectWebRepository.findAll();
@@ -144,7 +144,7 @@ public class ProjectService {
 
         return mapProjects;
     }
-    
+
     public OutputProjectDTO showProject(String id) throws Exception {
 
         ProjectID projID = projectIDFactory.create(id);
@@ -159,26 +159,27 @@ public class ProjectService {
     }
 
     public CollectionModel<OutputProjectDTO> showCurrentProjectsByUser(String UserId) {
-
         UserID uId = userIDFactory.createUserID(UserId);
+        Optional<User> foundUser = userRepo.findByUserId(uId);
 
-        if (userRepo.existsById(uId)) {
+        User user = foundUser.flatMap(u -> foundUser).orElse(null);
 
-            List<Resource> userResources = resRepo.findAllByUser(uId);
-            List<Resource> currentUserResources = resService.currentResourcesByDate(userResources);
-            List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
-            List<Project> projects = new ArrayList<>();
+        if (user == null) {
+            throw new NullPointerException("User dos not exist");
+        }
+        List<Resource> userResources = resRepo.findAllByUser(uId);
+        List<Resource> currentUserResources = resService.currentResourcesByDate(userResources);
+        List<ProjectID> resourceProjects = resService.listProjectsOfResources(currentUserResources);
+        List<Project> projects = new ArrayList<>();
 
-            for ( ProjectID x : resourceProjects) {
-                Optional<Project> y = projRepo.findById(x);
-                if(y.isEmpty()){
-                    throw new IllegalArgumentException("Num funciona");
-                }
-                projects.add(y.flatMap(z -> y).orElse(null));
+        for (ProjectID x : resourceProjects) {
+            Optional<Project> y = projRepo.findById(x);
+            if (y.isEmpty()) {
+                throw new NullPointerException("User is not allocated in any project!");
             }
-            return projMapper.toCollectionDto(projects, false);
-            }
-        throw new IllegalArgumentException("User dos not exist");
+            projects.add(y.flatMap(z -> y).orElse(null));
+        }
+        return projMapper.toCollectionDto(projects, false);
     }
 
     public boolean deleteProjectRequest(String id) {

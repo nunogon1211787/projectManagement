@@ -22,20 +22,8 @@ public class ProjectRepository implements IProjectRepo {
 
     @Autowired
     ProjectJpaRepository projectJpaRepository;
-
     @Autowired
     ProjectJpaAssembler projectJpaAssembler;
-
-
-    @Override
-    public Project save(Project newProject) {
-        ProjectJpa projectJpa = projectJpaAssembler.toJpaData(newProject);
-
-        ProjectJpa savedProj = projectJpaRepository.save(projectJpa);
-        return projectJpaAssembler.toDomain(savedProj);
-
-    }
-
 
     @Override
     public Optional<Project> findById(ProjectID id) {
@@ -76,6 +64,16 @@ public class ProjectRepository implements IProjectRepo {
         }
 
         return false;
+    }
+
+
+    @Override
+    public Project save(Project newProject) {
+        ProjectJpa projectJpa = projectJpaAssembler.toJpaData(newProject);
+
+        ProjectJpa savedProj = projectJpaRepository.save(projectJpa);
+        return projectJpaAssembler.toDomain(savedProj);
+
     }
 
 
