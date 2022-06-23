@@ -42,7 +42,7 @@ public class SprintID implements ValueObject<SprintID>, TaskContainerID {
 
     @Override
     public String toString() {
-        return projectID.getCode() + "_" +  sprintName.getText();
+        return projectID.getCode() + "&" +  sprintName.getText();
     }
 
     @Override

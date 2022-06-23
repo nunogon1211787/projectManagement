@@ -10,6 +10,6 @@ public class EffortEstimateFactory implements IEffortEstimateFactory {
 
     @Override
     public EffortEstimate create(double effort) {
-        return null;
+        return new EffortEstimate(effort);
     }
 }

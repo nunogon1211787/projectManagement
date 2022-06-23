@@ -57,7 +57,7 @@ public class UserStoryID implements ValueObject<UserStoryID>, TaskContainerID {
      **/
     @Override
     public String toString() {
-        return projectID.getCode() + "_" + usTitle.getTitleUs();
+        return projectID.getCode() + "&" + usTitle.getTitleUs();
     }
 
     @Override
