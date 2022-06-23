@@ -76,7 +76,7 @@ public class UserControllerTest {
     @Test
     void getUserException() {
         //Arrange
-        doThrow(IllegalArgumentException.class).when(service).findUserById(anyString());
+        doThrow(NullPointerException.class).when(service).findUserById(anyString());
         //Act
         ResponseEntity<?> response = ctrl.getUser("1");
         //Assert
