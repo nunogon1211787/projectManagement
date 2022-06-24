@@ -23,7 +23,7 @@ public class Task implements Entity<Task> {
     /**
      * Attributes
      */
-    private TaskID idTask;
+    private TaskID taskID;
     private Description description;
     private TaskTypeEnum type;
     private EffortEstimate effortEstimate;  //in hours
@@ -33,29 +33,21 @@ public class Task implements Entity<Task> {
     private List<TaskEffort> taskEffortList;
     private List<TaskID> precedenceList;
 
-
     /**
      * Constructor
      */
-    public Task(TaskID taskID) {
-        this.idTask = taskID;
-        this.taskEffortList = new ArrayList<>();
-    }
-
     public Task(TaskID taskID, Description description,
                 EffortEstimate effortEstimate, TaskTypeEnum type,
                 ResourceID responsible) {
-        this.idTask = taskID;
+        this.taskID = taskID;
         this.description = description;
         this.effortEstimate = effortEstimate;
         this.type = type;
         this.responsible = responsible;
         this.taskEffortList = new ArrayList<>();
         this.precedenceList = new ArrayList<>();
-
-
     }
-
+/*
     /**
      * Constructor with precedence list
      **/
@@ -70,7 +62,7 @@ public class Task implements Entity<Task> {
      * Methods to iterate with attributes
      */
     public boolean hasName(String taskName) {
-        return Objects.equals(this.idTask.getTaskName().getText(), taskName);
+        return Objects.equals(this.taskID.getTaskName().getText(), taskName);
     }
 
     public boolean hasTaskTypeEnum(String taskType) {
@@ -134,7 +126,7 @@ public class Task implements Entity<Task> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return Objects.equals(idTask, task.idTask) && Objects.equals(description, task.description)
+        return Objects.equals(taskID, task.taskID) && Objects.equals(description, task.description)
                 && type == task.type && Objects.equals(effortEstimate, task.effortEstimate)
                 && Objects.equals(startDate, task.startDate) && Objects.equals(endDate, task.endDate)
                 && Objects.equals(responsible, task.responsible) && Objects.equals(taskEffortList, task.taskEffortList)
@@ -143,7 +135,7 @@ public class Task implements Entity<Task> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(idTask, description, type, effortEstimate, startDate, endDate, responsible,
+        return Objects.hash(taskID, description, type, effortEstimate, startDate, endDate, responsible,
                 taskEffortList, precedenceList);
     }
 

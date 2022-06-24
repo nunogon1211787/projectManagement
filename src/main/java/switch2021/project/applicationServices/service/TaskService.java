@@ -1,88 +1,102 @@
 package switch2021.project.applicationServices.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.applicationServices.iRepositories.*;
 import switch2021.project.dtoModel.dto.OutputTaskDTO;
 import switch2021.project.dtoModel.dto.TaskDTO;
-import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResourceIDFactory;
-import switch2021.project.entities.valueObjects.vos.*;
-import switch2021.project.entities.factories.factoryInterfaces.ITaskFactory;
 import switch2021.project.dtoModel.mapper.TaskMapper;
-import switch2021.project.entities.valueObjects.vos.ResourceID;
+import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.aggregates.Task.Task;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
+import switch2021.project.entities.factories.factoryInterfaces.ITaskFactory;
+import switch2021.project.entities.valueObjects.vos.Description;
+import switch2021.project.entities.valueObjects.vos.SprintID;
+import switch2021.project.entities.valueObjects.vos.TaskID;
+import switch2021.project.entities.valueObjects.vos.UserStoryID;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class TaskService {
 
     @Autowired
-    private ITaskFactory ITaskFactory;
+    private ITaskFactory taskFactory;
     @Autowired
     private TaskMapper taskMapper;
     @Autowired
-    private ITaskRepo taskRepositoryInterface;
+    private ITaskRepo taskRepo;
     @Autowired
-    private IResourceRepo iResourceRepo;
+    private IResourceRepo resourceRepo;
     @Autowired
-    private IResourceIDFactory resourceIDFactory;
+    private ISprintRepo sprintRepo;
     @Autowired
-    private ISprintRepo iSprintRepo;
-    @Autowired
-    private IUserStoryRepo iUserStoryRepo;
-
-
+    private IUserStoryRepo userStoryRepo;
     /**
-     * Create and Save Task (US022)
+     * Create and Save Task (US031)
      */
-    public OutputTaskDTO createAndSaveTask(TaskDTO taskDTO) throws IllegalArgumentException {
-        ResourceID resId = createResourceIdByStringInputFromController(taskDTO.responsible);
-        TaskContainerID taskConId = returnTaskContainerID(taskDTO.taskContainerID);
-
-        if(!iResourceRepo.existsById(resId)) {
-            throw new IllegalArgumentException("This user is not associate to this project!");
+    public OutputTaskDTO createAndSaveTask(TaskDTO inputDTO) throws IllegalArgumentException {
+        if (taskRepo.existsById(new Description(inputDTO.taskName))) {
+            throw new IllegalArgumentException("Task already exist.");
         }
-        Task newTask = ITaskFactory.createTask(taskDTO, resId, taskConId);
-        Optional<Task> savedTask = taskRepositoryInterface.save(newTask);
 
-        return savedTask.map(task -> taskMapper.toDto(task)).orElse(null);
+        Task newTask = taskFactory.createTask(inputDTO);
+
+        if(!resourceRepo.existsById(newTask.getResponsible())) {
+            throw new IllegalArgumentException("This user is not associated to this project!");
+        }
+        TaskContainerID sprintOrUsID=newTask.getTaskID().getTaskContainerID();
+        if(sprintOrUsID instanceof SprintID){
+            validateSprint(((SprintID) sprintOrUsID));
+        }
+        if(sprintOrUsID instanceof UserStoryID) {
+            validateUserStory(((UserStoryID) sprintOrUsID));
+        }
+
+        Task savedTask = taskRepo.save(newTask);
+        return taskMapper.toDto(savedTask);
     }
 
+    public OutputTaskDTO getTaskById(String id) {
+        TaskID taskID = taskMapper.stringToId(id);
+        Optional<Task> optionalTask = taskRepo.findById(taskID.getTaskName());
 
-    /**
-     *
-     */
-    private TaskContainerID returnTaskContainerID(String taskContainerID) {
-        TaskContainerID z;
-
-        Optional<UserStory> foundUs = iUserStoryRepo.findByUserStoryId(new UserStoryID(taskContainerID));
-
-        UserStory y = foundUs.flatMap(us -> foundUs).orElse(null);
-
-
-        if(y != null) {
-            z = y.getUserStoryID();
-        } else {
-            Optional<Sprint> x = iSprintRepo.findBySprintID(new SprintID(taskContainerID));
-            if (x.isPresent()) {
-                z = x.get().getSprintID();
-            } else {
-                throw new IllegalArgumentException("ID inválido");
-            }
+        if (optionalTask.isEmpty()) {
+            throw new IllegalArgumentException("Task does not exist");
         }
-        return z;
+        return taskMapper.toDto(optionalTask.get());
     }
 
-    private ResourceID createResourceIdByStringInputFromController(String id) {
-        String[] values = id.split("_");// user_project_startDate
+    public CollectionModel<OutputTaskDTO> getAllTasks() {
+        List<Task> tasks = taskRepo.findAll();
+        CollectionModel<OutputTaskDTO> outputTaskDTOs= taskMapper.toCollectionDto(tasks);
+        return CollectionModel.of(outputTaskDTOs);
+    }
 
-        String sysUserID = values[0];
-        String projID = values[1];
-        String startDate = values[2];
+    private void validateSprint (SprintID sprintID){
+        Optional<Sprint> optionalSprint = sprintRepo.findBySprintID(sprintID);
+        Sprint sprint = optionalSprint.flatMap(sp -> optionalSprint).orElse(null);
 
-        return resourceIDFactory.create(sysUserID, projID, startDate);
+        if (sprint == null) {
+            throw new NullPointerException("Sprint doesn't exist");
+        }
+        if(sprint.getEndDate()!=null){
+            throw new IllegalArgumentException("sprint is ended");
+        }
+    }
+
+    private void validateUserStory (UserStoryID userStoryID){
+        Optional<UserStory> optionalUserStory = userStoryRepo.findByUserStoryId(userStoryID);
+        UserStory userStory = optionalUserStory.flatMap(us -> optionalUserStory).orElse(null);
+
+        if (userStory == null) {
+            throw new NullPointerException("User story does not exist");
+        }
+        if(userStory.getUsEndDate()!=null){
+            throw new IllegalArgumentException("User story is not open");
+        }
     }
 }

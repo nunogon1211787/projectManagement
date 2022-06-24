@@ -17,7 +17,7 @@ public class UsTitle implements ValueObject<UsTitle> {
     /**
      * Attributes
      **/
-    @Column(name = "title")
+    @Column(name = "US_title")
     private String titleUs; //As a //I want to
 
     /**

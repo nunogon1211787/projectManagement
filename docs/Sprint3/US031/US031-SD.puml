@@ -19,7 +19,7 @@ participant "TaskMapper" as mapper
 participant "outputDto \n: TaskDTO" as output
 
 
-[o-> UI: Post/tasks (json)
+[o-> UI: POST/tasks (json)
 
 UI -> Ctrl: createAndSave\nTask(json)
 

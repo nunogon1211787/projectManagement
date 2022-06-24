@@ -19,6 +19,7 @@ public class ResourceMapper {
 
         OutputResourceDTO resDto = new OutputResourceDTO();
 
+        resDto.resourceID = res.getId().toString();
         resDto.user = res.getId().getUser().getEmail().getEmailText();
         resDto.project = res.getId().getProject().getCode();
         resDto.role = res.getRole().toString();

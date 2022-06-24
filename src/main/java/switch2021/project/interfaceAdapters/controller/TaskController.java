@@ -2,6 +2,7 @@ package switch2021.project.interfaceAdapters.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,20 +19,49 @@ public class TaskController {
 
     /*** Attributes **/
     @Autowired
-    TaskService createTaskService;
+    TaskService taskService;
 
-    /*** Methods **/
+    /**
+     * Create Task - US031 and US032
+     **/
     @PostMapping
-    public ResponseEntity<Object> createAndSaveTask(@RequestBody TaskDTO dto) {
-        OutputTaskDTO newTask;
+    public ResponseEntity<Object> createTask(@RequestBody TaskDTO inputDTO) {
+        OutputTaskDTO outputDTO;
         try {
-            newTask = createTaskService.createAndSaveTask(dto);
+            outputDTO = taskService.createAndSaveTask(inputDTO);
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
+        return new ResponseEntity<>(outputDTO, HttpStatus.CREATED);
+    }
 
-        return new ResponseEntity<>(newTask, HttpStatus.CREATED);
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getById(@PathVariable("id") String id) {
+        OutputTaskDTO outputDTO;
+        try {
+            outputDTO = taskService.getTaskById(id);
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(outputDTO, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<Object> getAll() {
+        ErrorMessage message = new ErrorMessage();
+        CollectionModel<OutputTaskDTO> allTasksDto;
+
+        try {
+            allTasksDto = CollectionModel.of(taskService.getAllTasks());
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(allTasksDto, HttpStatus.OK);
     }
 }

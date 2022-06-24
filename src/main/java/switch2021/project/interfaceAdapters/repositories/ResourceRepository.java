@@ -1,7 +1,5 @@
 package switch2021.project.interfaceAdapters.repositories;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.applicationServices.iRepositories.IResourceRepo;
@@ -19,8 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Getter
-@Setter
 @Repository
 public class ResourceRepository implements IResourceRepo {
 
@@ -31,8 +27,7 @@ public class ResourceRepository implements IResourceRepo {
 
     @Override
     public Optional<Resource> findById(ResourceID resourceId) {
-        ResourceIDJpa idJpa = new ResourceIDJpa(resourceId.getUser(), resourceId.getProject(),
-                resourceId.getStartDate().toString());
+        ResourceIDJpa idJpa = assembler.toData(resourceId);
         Optional<ResourceJpa> resJpa = jpaRepository.findById(idJpa);
         Optional<Resource> result = Optional.empty();
 
@@ -92,7 +87,7 @@ public class ResourceRepository implements IResourceRepo {
     @Override
     @Transactional
     public boolean deleteByResourceID(ResourceID id) {
-        ResourceIDJpa resIdJpa = new ResourceIDJpa(id.getUser(), id.getProject(), id.getStartDate().toString());
+        ResourceIDJpa resIdJpa = assembler.toData(id);
 
         if (jpaRepository.existsById(resIdJpa)) {
             jpaRepository.deleteById(resIdJpa);

@@ -21,9 +21,11 @@ public class TaskJpa {
     @Embedded
     private UsTitle usTitle;
     @Embedded
+    @AttributeOverride(name = "text", column = @Column(name = "SprintName"))
     private Description sprintName;
     @EmbeddedId
-    private Name taskName;
+    @AttributeOverride(name = "text", column = @Column(name = "TaskName"))
+    private Description taskName;
     private String taskDescription;
     private String taskType;
     private double taskEffortEstimate;
