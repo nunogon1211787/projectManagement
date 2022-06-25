@@ -6,6 +6,7 @@ import switch2021.project.applicationServices.iRepositories.TaskContainerID;
 import switch2021.project.dataModel.JPA.TaskJpa;
 import switch2021.project.entities.aggregates.Task.Task;
 import switch2021.project.entities.valueObjects.vos.*;
+import switch2021.project.entities.valueObjects.vos.enums.TaskStatus;
 import switch2021.project.entities.valueObjects.vos.enums.TaskTypeEnum;
 
 import java.time.LocalDate;
@@ -20,6 +21,10 @@ public class TaskJpaAssembler {
         if (!(task.getType() == null)) {
             taskType = task.getType().toString();
         }
+        String taskStatus = null;
+        if (!(task.getStatus() == null)) {
+            taskStatus = task.getStatus().toString();
+        }
         double taskEffortEstimate = task.getEffortEstimate().getEffortHours();
         String taskStartDate = null;
         if (!(task.getStartDate() == null)) {
@@ -30,11 +35,11 @@ public class TaskJpaAssembler {
             taskEndDate = task.getEndDate().toString();
         }
         List<TaskID> taskPrecedenceList = task.getPrecedenceList();
-        List<TaskEffort> taskEffortList = task.getTaskEffortList();
+        List<TaskEffort> taskEffortList = task.getRegisteredEfforts();
 
-        TaskID taskID = task.getTaskID();
-        Description taskName = taskID.getTaskName();
-        TaskContainerID sprintOrUsID = taskID.getTaskContainerID();
+        String taskID = task.getTaskID().toString();
+        Description taskTitle = task.getTaskID().getTaskTitle();
+        TaskContainerID sprintOrUsID = task.getTaskID().getTaskContainerID();
         ProjectID projectID = null;
         UsTitle usTitle = null;
         Description sprintName = null;
@@ -53,12 +58,16 @@ public class TaskJpaAssembler {
         if (!(taskResponsibleID.getStartDate() == null)) {
             resourceStartDate = taskResponsibleID.getStartDate().toString();
         }
-        return new TaskJpa(projectID, usTitle, sprintName, taskName, taskDescription, taskType, taskEffortEstimate,
+        return new TaskJpa(taskID, projectID, usTitle, sprintName, taskTitle, taskDescription, taskType,taskStatus, taskEffortEstimate,
                 taskStartDate, taskEndDate, userId, resourceStartDate, taskEffortList, taskPrecedenceList);
     }
 
     public Task toDomain(TaskJpa taskJpa) {
         Description taskDescription = new Description(taskJpa.getTaskDescription());
+        TaskStatus taskStatus = null;
+        if (!(taskJpa.getTaskStatus() == null)) {
+            taskStatus = TaskStatus.valueOf(taskJpa.getTaskStatus());
+        }
         TaskTypeEnum taskType = null;
         if (!(taskJpa.getTaskType() == null)) {
             taskType = TaskTypeEnum.valueOf(taskJpa.getTaskType());
@@ -87,8 +96,8 @@ public class TaskJpaAssembler {
             sprintOrUsID = new UserStoryID(projectID, usTitle);
         }
 
-        Description taskName = taskJpa.getTaskName();
-        TaskID taskID = new TaskID(sprintOrUsID, taskName);
+        Description taskTitle = taskJpa.getTaskTitle();
+        TaskID taskID = new TaskID(sprintOrUsID, taskTitle);
 
         UserID resourceUserID = taskJpa.getResourceUserID();
         LocalDate resourceStartDate = null;
@@ -97,7 +106,7 @@ public class TaskJpaAssembler {
         }
         ResourceID responsible = new ResourceID(resourceUserID, projectID, resourceStartDate);
 
-        return new Task(taskID, taskDescription, taskType, taskEffortEstimate, taskStartDate, taskEndDate,
+        return new Task(taskID, taskDescription, taskType, taskStatus, taskEffortEstimate, taskStartDate, taskEndDate,
                 responsible, taskEffortList, taskPrecedenceList);
     }
 }

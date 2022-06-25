@@ -6,10 +6,11 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import switch2021.project.applicationServices.service.TaskService;
 import switch2021.project.dtoModel.dto.ErrorMessage;
 import switch2021.project.dtoModel.dto.OutputTaskDTO;
 import switch2021.project.dtoModel.dto.TaskDTO;
-import switch2021.project.applicationServices.service.TaskService;
+import switch2021.project.dtoModel.dto.TaskEffortDTO;
 
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -57,11 +58,42 @@ public class TaskController {
 
         try {
             allTasksDto = CollectionModel.of(taskService.getAllTasks());
-
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(allTasksDto, HttpStatus.OK);
     }
+
+    @GetMapping("/taskContainer/{id}")
+    public ResponseEntity<Object> getTasksByTaskContainerID(@PathVariable("id") String taskContainerID) {
+        ErrorMessage message = new ErrorMessage();
+        CollectionModel<OutputTaskDTO> taskContainerIDTasks;
+        try {
+            taskContainerIDTasks = CollectionModel.of(taskService.getAllTasksByTaskContainerID(taskContainerID));
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(taskContainerIDTasks, HttpStatus.OK);
+    }
+
+    /**
+     * Register Effort - US033
+     **/
+    @PatchMapping("/{id}/registerEffort")
+    public ResponseEntity<Object> registerEffort(@PathVariable("id") String id,
+                                                 @RequestBody TaskEffortDTO taskEffortDTO) {
+        OutputTaskDTO outputTaskDTO;
+
+        try {
+            outputTaskDTO = taskService.createAndAddEffort(id, taskEffortDTO);
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(outputTaskDTO, HttpStatus.OK);
+    }
+
 }

@@ -16,6 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskJpa {
+    @Id
+    private String taskID;
     @Embedded
     ProjectID projectID;
     @Embedded
@@ -23,11 +25,12 @@ public class TaskJpa {
     @Embedded
     @AttributeOverride(name = "text", column = @Column(name = "SprintName"))
     private Description sprintName;
-    @EmbeddedId
-    @AttributeOverride(name = "text", column = @Column(name = "TaskName"))
-    private Description taskName;
+    @Embedded
+    @AttributeOverride(name = "text", column = @Column(name = "TaskTitle"))
+    private Description taskTitle;
     private String taskDescription;
     private String taskType;
+    private String taskStatus;
     private double taskEffortEstimate;
     private String taskStartDate;
     private String taskEndDate;

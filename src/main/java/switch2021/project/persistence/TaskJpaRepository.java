@@ -6,5 +6,5 @@ import switch2021.project.entities.valueObjects.vos.Description;
 import switch2021.project.entities.valueObjects.vos.TaskID;
 
 
-public interface TaskJpaRepository extends JpaRepository<TaskJpa, Description> {
+public interface TaskJpaRepository extends JpaRepository<TaskJpa, String> {
 }

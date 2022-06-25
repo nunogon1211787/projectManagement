@@ -2,11 +2,16 @@ package switch2021.project.dtoModel.mapper;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.hateoas.CollectionModel;
 import switch2021.project.dtoModel.dto.OutputSprintDTO;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.valueObjects.vos.SprintID;
 import switch2021.project.entities.valueObjects.vos.Description;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -162,5 +167,26 @@ public class SprintMapperTest {
 
         //Assert
         assertEquals(outPutSprintDTO.getName(), "Sprint Name");
+    }
+
+    @Test
+            public void toCollection() {
+        //Arrange
+        SprintMapper sprintMapper = new SprintMapper();
+        Sprint sprint = mock(Sprint.class);
+        SprintID sprintID = mock(SprintID.class);
+        Description description = mock(Description.class);
+        ProjectID projectID = mock(ProjectID.class);
+        List<Sprint> sprints = new ArrayList<>();
+        sprints.add(sprint);
+        when(sprint.getSprintID()).thenReturn(sprintID);
+        when(sprintID.getSprintName()).thenReturn(description);
+        when(description.getText()).thenReturn("Sprint Name");
+        when(sprintID.getProjectID()).thenReturn(projectID);
+        when(projectID.getCode()).thenReturn("Project_2022_1");
+        //Act
+        CollectionModel<OutputSprintDTO> outPutSprintDTO = sprintMapper.toCollectionDto(sprints);
+        //Assert
+        assertEquals(1, outPutSprintDTO.getContent().size());
     }
 }
