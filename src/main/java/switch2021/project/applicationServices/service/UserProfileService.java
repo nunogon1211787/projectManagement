@@ -51,19 +51,19 @@ public class UserProfileService {
     /**
      * To get all profiles
      */
-    public CollectionModel<UserProfileDTO> getAllProfiles() {
+    public Map<String, CollectionModel<UserProfileDTO>> getAllProfiles() {
 
-        List<UserProfile> userProfileList = iUserProfileRepo.findAll();
-        List<UserProfile> userProfileWebList = iUserProfileWebRepository.findAll();
+        List<UserProfile> userProfiles = iUserProfileRepo.findAll();
+        List<UserProfile> userProfileWeb = iUserProfileWebRepository.findAll();
 
-        CollectionModel<UserProfileDTO> outputUserProfileList_DTO = userProfileMapper.toCollectionDTO(userProfileWebList);
-        CollectionModel<UserProfileDTO> outputUserProfileDTO_List = userProfileMapper.toCollectionDTO(userProfileList);
+        CollectionModel<UserProfileDTO> outputUserProfileList_DTO = userProfileMapper.toCollectionDTO(userProfileWeb, true);
+        CollectionModel<UserProfileDTO> outputUserProfileDTO_List = userProfileMapper.toCollectionDTO(userProfiles, false);
 
-        Map mapProfiles = new HashMap();
-        mapProfiles.put("mine", outputUserProfileDTO_List);
-        mapProfiles.put("their", outputUserProfileList_DTO);
+        Map<String, CollectionModel<UserProfileDTO>> mapProfiles = new HashMap<>();
+        mapProfiles.put("internalUserProfiles", outputUserProfileDTO_List);
+        mapProfiles.put("externalUserProfiles", outputUserProfileList_DTO);
 
-        return (CollectionModel<UserProfileDTO>) mapProfiles;
+        return mapProfiles;
 
     }
 

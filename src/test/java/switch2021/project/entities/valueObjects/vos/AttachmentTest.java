@@ -2,7 +2,6 @@ package switch2021.project.entities.valueObjects.vos;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.entities.valueObjects.vos.Attachment;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -97,12 +96,25 @@ public class AttachmentTest {
 
     @Test
     @DisplayName("Test hashcode conditions for coverage purposes")
-    public void hashCodeSuccess() {
+    public void hashCodeSuccess_1() {
         //Arrange
         String filename = "Test.txt";
         //Act
         Attachment attachment = new Attachment(filename);
         Attachment attachment1 = new Attachment(filename);
+        //Assert
+        assertEquals(attachment.hashCode(), attachment1.hashCode());
+    }
+
+    @Test
+    @DisplayName("Test hashcode conditions for coverage purposes")
+    public void hashCodeSuccess_2() {
+        //Arrange
+        String filename1 = "Test.txt";
+        String filename2 = "Test.txt";
+        //Act
+        Attachment attachment = new Attachment(filename1);
+        Attachment attachment1 = new Attachment(filename2);
         //Assert
         assertEquals(attachment.hashCode(), attachment1.hashCode());
     }

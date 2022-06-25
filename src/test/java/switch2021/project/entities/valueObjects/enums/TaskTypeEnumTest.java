@@ -23,15 +23,15 @@ class TaskTypeEnumTest {
         TaskTypeEnum[] valoresType = TaskTypeEnum.values();
         TaskTypeEnum x = valoresType[1];
 
-        assertEquals(x, TaskTypeEnum.DOCUMENTATION);
-        assertNotEquals(x, TaskTypeEnum.DESIGN);
-        assertEquals(x.toString(), "DOCUMENTATION");
+        assertEquals(TaskTypeEnum.DOCUMENTATION, x);
+        assertNotEquals(TaskTypeEnum.DESIGN, x);
+        assertEquals("DOCUMENTATION", x.toString());
     }
 
     @Test
     void valueOf() {
         TaskTypeEnum x = TaskTypeEnum.valueOf("DOCUMENTATION");
 
-        assertEquals(x, TaskTypeEnum.DOCUMENTATION);
+        assertEquals(TaskTypeEnum.DOCUMENTATION, x);
     }
 }

@@ -25,7 +25,7 @@ public class ProjectRoleTest {
         ProjectRole[] status = ProjectRole.values();
         ProjectRole projectManager = status[0];
         //Assert
-        assertEquals(projectManager, ProjectRole.ProjectManager);
+        assertEquals(ProjectRole.ProjectManager, projectManager);
 
     }
 
@@ -37,7 +37,7 @@ public class ProjectRoleTest {
         ProjectRole[] status = ProjectRole.values();
         ProjectRole productOwner = status[1];
         //Assert
-        assertEquals(productOwner, ProjectRole.ProductOwner);
+        assertEquals(ProjectRole.ProductOwner, productOwner);
 
     }
 
@@ -49,7 +49,7 @@ public class ProjectRoleTest {
         ProjectRole[] status = ProjectRole.values();
         ProjectRole scrumMaster = status[2];
         //Assert
-        assertEquals(scrumMaster, ProjectRole.ScrumMaster);
+        assertEquals(ProjectRole.ScrumMaster, scrumMaster);
 
     }
 
@@ -61,7 +61,7 @@ public class ProjectRoleTest {
         ProjectRole[] status = ProjectRole.values();
         ProjectRole teamMember = status[3];
         //Assert
-        assertEquals(teamMember, ProjectRole.TeamMember);
+        assertEquals(ProjectRole.TeamMember, teamMember);
 
     }
 
@@ -72,7 +72,7 @@ public class ProjectRoleTest {
         ProjectRole[] status = ProjectRole.values();
         ProjectRole teamMember = status[3];
         //Assert
-        assertNotEquals(teamMember, ProjectRole.ScrumMaster);
+        assertNotEquals(ProjectRole.ScrumMaster, teamMember);
 
     }
 
@@ -83,7 +83,7 @@ public class ProjectRoleTest {
         //Act
         ProjectRole projectRole = ProjectRole.valueOf("ProjectManager");
         //Assert
-        assertEquals(projectRole, ProjectRole.ProjectManager);
+        assertEquals(ProjectRole.ProjectManager, projectRole);
     }
 
 
@@ -93,7 +93,7 @@ public class ProjectRoleTest {
         //Act
         ProjectRole projectRole = ProjectRole.valueOf("ProductOwner");
         //Assert
-        assertEquals(projectRole, ProjectRole.ProductOwner);
+        assertEquals(ProjectRole.ProductOwner, projectRole);
     }
 
 
@@ -103,7 +103,7 @@ public class ProjectRoleTest {
         //Act
         ProjectRole projectRole = ProjectRole.valueOf("ScrumMaster");
         //Assert
-        assertEquals(projectRole, ProjectRole.ScrumMaster);
+        assertEquals(ProjectRole.ScrumMaster, projectRole);
     }
 
 
@@ -114,7 +114,7 @@ public class ProjectRoleTest {
         //Act
         ProjectRole projectRole = ProjectRole.valueOf("TeamMember");
         //Assert
-        assertEquals(projectRole, ProjectRole.TeamMember);
+        assertEquals(ProjectRole.TeamMember, projectRole);
     }
 
 

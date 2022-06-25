@@ -3,10 +3,6 @@ package switch2021.project.entities.valueObjects.vos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.entities.aggregates.Typology.Typology;
-import switch2021.project.entities.valueObjects.vos.Description;
-import switch2021.project.entities.valueObjects.vos.TypologyID;
-import switch2021.project.entities.valueObjects.vos.UsPriority;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UsPriorityTest {

@@ -4,9 +4,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import switch2021.project.entities.valueObjects.vos.Description;
-import switch2021.project.entities.valueObjects.vos.Email;
+
 import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EmailTest {
@@ -378,16 +378,6 @@ class EmailTest {
         assertEquals(email, email1);
     }
 
-/*    @Test
-    @DisplayName("Test to check Override Method.")
-    void overrideTest_Success_2(){
-        //Arrange
-        Email email = new Email("xpto@xpto.pt");
-        Email email1 = email;
-        //Act and Assert
-        assertTrue(email.equals(email1));
-    }
- */
 
     @Test
     @DisplayName("Test to check Override Method.")
@@ -452,5 +442,24 @@ class EmailTest {
         Email test = new Email("Test1@gmail.com");
         //Assert
         assertNotEquals(test.hashCode(), email.hashCode());
+    }
+
+    @Test
+    public void sameValueAsTest_1() {
+        //Arrange
+        Email email = new Email("Test@gmail.com");
+        Email test = new Email("Test1@gmail.com");
+        //Assert
+        assertFalse(test.sameValueAs(email));
+    }
+
+
+    @Test
+    public void sameValueAsTest_2() {
+        //Arrange
+        Email email = new Email("Test@gmail.com");
+        Email test = new Email("Test@gmail.com");
+        //Assert
+        assertTrue(test.sameValueAs(email));
     }
 }

@@ -12,15 +12,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import switch2021.project.applicationServices.service.UserProfileService;
-import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
-import switch2021.project.dtoModel.dto.OutputProjectDTO;
-import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.dto.UserProfileDTO;
-import switch2021.project.entities.aggregates.Project.Project;
-import switch2021.project.entities.valueObjects.vos.Budget;
-
-import java.util.List;
-
+import java.util.HashMap;
+import java.util.Map;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -45,11 +39,8 @@ public class UserProfileControllerTest {
     @Test
     void getAllProfilesSuccess() {
         //Arrange
-        UserProfileDTO test = mock(UserProfileDTO.class);
-        UserProfileDTO test2 = mock(UserProfileDTO.class);
-        UserProfileDTO test3 = mock(UserProfileDTO.class);
-        when(service.getAllProfiles()).thenReturn(CollectionModel.of
-                (List.of(new UserProfileDTO[]{test, test2, test3})));
+        Map<String, CollectionModel<UserProfileDTO>> profilesDTO = new HashMap<>();
+        when(service.getAllProfiles()).thenReturn(profilesDTO);
         //Act
         ResponseEntity<?> response = ctrl.getAllProfiles();
         //Assert

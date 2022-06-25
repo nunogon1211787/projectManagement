@@ -25,7 +25,7 @@ public class UserStoryResultTest {
         UserStoryResult[] status = UserStoryResult.values();
         UserStoryResult accepted = status[0];
         //Assert
-        assertEquals(accepted, UserStoryResult.ACCEPTED);
+        assertEquals(UserStoryResult.ACCEPTED, accepted);
     }
 
 
@@ -36,7 +36,7 @@ public class UserStoryResultTest {
         UserStoryResult[] status = UserStoryResult.values();
         UserStoryResult rejected = status[1];
         //Assert
-        assertEquals(rejected, UserStoryResult.REJECTED);
+        assertEquals(UserStoryResult.REJECTED, rejected);
     }
 
     @DisplayName("Test to get a specific value - Unfinished")
@@ -46,7 +46,7 @@ public class UserStoryResultTest {
         UserStoryResult[] status = UserStoryResult.values();
         UserStoryResult unfinished = status[2];
         //Assert
-        assertEquals(unfinished, UserStoryResult.UNFINISHED);
+        assertEquals(UserStoryResult.UNFINISHED, unfinished);
     }
 
 
@@ -57,7 +57,7 @@ public class UserStoryResultTest {
         UserStoryResult[] status = UserStoryResult.values();
         UserStoryResult unfinished = status[2];
         //Assert
-        assertNotEquals(unfinished, UserStoryResult.REJECTED);
+        assertNotEquals(UserStoryResult.REJECTED, unfinished);
     }
 
 
@@ -67,7 +67,7 @@ public class UserStoryResultTest {
         //Act
         UserStoryResult userStoryResult = UserStoryResult.valueOf("ACCEPTED");
         //Assert
-        assertEquals(userStoryResult, UserStoryResult.ACCEPTED);
+        assertEquals(UserStoryResult.ACCEPTED, userStoryResult);
     }
 
 
@@ -77,7 +77,7 @@ public class UserStoryResultTest {
         //Act
         UserStoryResult userStoryResult = UserStoryResult.valueOf("REJECTED");
         //Assert
-        assertEquals(userStoryResult, UserStoryResult.REJECTED);
+        assertEquals(UserStoryResult.REJECTED, userStoryResult);
     }
 
 
@@ -87,6 +87,6 @@ public class UserStoryResultTest {
         //Act
         UserStoryResult userStoryResult = UserStoryResult.valueOf("UNFINISHED");
         //Assert
-        assertEquals(userStoryResult, UserStoryResult.UNFINISHED);
+        assertEquals(UserStoryResult.UNFINISHED, userStoryResult);
     }
 }

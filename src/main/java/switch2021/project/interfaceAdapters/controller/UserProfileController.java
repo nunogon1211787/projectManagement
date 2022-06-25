@@ -5,10 +5,10 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import switch2021.project.applicationServices.service.UserProfileService;
 import switch2021.project.dtoModel.dto.ErrorMessage;
 import switch2021.project.dtoModel.dto.UserProfileDTO;
-import switch2021.project.applicationServices.service.UserProfileService;
-
+import java.util.Map;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -30,7 +30,7 @@ public class UserProfileController {
     @GetMapping
     public ResponseEntity<Object> getAllProfiles(){
         ErrorMessage message = new ErrorMessage();
-        CollectionModel<UserProfileDTO> outPutDTO;
+        Map<String, CollectionModel<UserProfileDTO>> outPutDTO;
 
         try {
             outPutDTO = createUserProfileService.getAllProfiles();

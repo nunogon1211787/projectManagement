@@ -2,10 +2,6 @@ package switch2021.project.entities.valueObjects.vos;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.entities.valueObjects.vos.Description;
-import switch2021.project.entities.valueObjects.vos.UserProfileID;
-
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserProfileIDTest {
@@ -37,6 +33,26 @@ class UserProfileIDTest {
         // Act
         assertEquals(description, description2);
         assertNotEquals(description, description3);
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void sameValueAs_True() {
+        // Arrange
+        UserProfileID description = new UserProfileID(new Description("Test"));
+        UserProfileID description2 = new UserProfileID(new Description("Test"));
+        // Act
+        assertTrue(description.sameValueAs(description2));
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void sameValueAs_False() {
+        // Arrange
+        UserProfileID description = new UserProfileID(new Description("Test"));
+        UserProfileID description2 = new UserProfileID(new Description("Test 1"));
+        // Act
+        assertFalse(description.sameValueAs(description2));
     }
 
 }

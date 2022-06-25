@@ -2,10 +2,6 @@ package switch2021.project.entities.valueObjects.vos;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.entities.valueObjects.vos.Description;
-import switch2021.project.entities.valueObjects.vos.Name;
-import switch2021.project.entities.valueObjects.vos.Photo;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PhotoTest {
@@ -88,5 +84,25 @@ public class PhotoTest {
         Name pwd1 = new Name("Test");
         //Act and Assert
         assertNotEquals(pwd.hashCode(),pwd1.hashCode());
+    }
+
+    @Test
+    @DisplayName("Test hashcode conditions for coverage purposes")
+    void sameValueAs_Success(){
+        //Arrange
+        Photo pwd = new Photo("Photo.png");
+        Photo pwd1 = new Photo("Photo.png");
+        //Act and Assert
+        assertTrue(pwd.sameValueAs(pwd1));
+    }
+
+    @Test
+    @DisplayName("Test hashcode conditions for coverage purposes")
+    void sameValueAs_False(){
+        //Arrange
+        Photo pwd = new Photo("Photo.png");
+        Photo pwd1 = new Photo("Photo1.png");
+        //Act and Assert
+        assertFalse(pwd.sameValueAs(pwd1));
     }
 }

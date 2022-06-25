@@ -1,15 +1,10 @@
 package switch2021.project.entities.valueObjects.vos;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.entities.valueObjects.vos.Email;
-import switch2021.project.entities.valueObjects.vos.ProjectID;
-import switch2021.project.entities.valueObjects.vos.ResourceID;
-import switch2021.project.entities.valueObjects.vos.UserID;
-
 import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class ResourceIDTest {
 
@@ -173,5 +168,32 @@ class ResourceIDTest {
         String result = resourceID.toString();
         //Assert
         assertEquals(expected, result);
+    }
+
+    @Test
+    void sameValueAs_True() {
+        //Arrange
+        UserID userID = mock(UserID.class);
+        ProjectID projectID = mock(ProjectID.class);
+        LocalDate startDate = LocalDate.parse("2022-10-12");
+        //Act
+        ResourceID resourceID = new ResourceID(userID,projectID,startDate);
+        ResourceID expected = new ResourceID(userID,projectID,startDate);
+        //Assert
+        assertTrue(resourceID.sameValueAs(expected));
+    }
+
+    @Test
+    void sameValueAs_False() {
+        //Arrange
+        UserID userID = mock(UserID.class);
+        ProjectID projectID = mock(ProjectID.class);
+        LocalDate startDate = LocalDate.parse("2022-10-12");
+        LocalDate date = LocalDate.parse("2022-10-13");
+        //Act
+        ResourceID resourceID = new ResourceID(userID,projectID,startDate);
+        ResourceID expected = new ResourceID(userID,projectID, date);
+        //Assert
+        assertFalse(resourceID.sameValueAs(expected));
     }
 }

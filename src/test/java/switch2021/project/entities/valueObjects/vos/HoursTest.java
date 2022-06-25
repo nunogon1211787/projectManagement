@@ -125,14 +125,24 @@ public class HoursTest {
     }
 
 
-    @DisplayName("Test Same Value As")
+    @DisplayName("Test Same Value As - True")
     @Test
-    public void sameValueAs() {
+    public void sameValueAs_1() {
         //Arrange
         Hours hours = new Hours(1);
         Hours hours1 = new Hours(1);
         //Assert
         assertTrue(hours.sameValueAs(hours1));
+    }
+
+    @DisplayName("Test Same Value As - False")
+    @Test
+    public void sameValueAs_2() {
+        //Arrange
+        Hours hours = new Hours(1);
+        Hours hours1 = new Hours(11);
+        //Assert
+        assertFalse(hours.sameValueAs(hours1));
     }
 
     @Test
