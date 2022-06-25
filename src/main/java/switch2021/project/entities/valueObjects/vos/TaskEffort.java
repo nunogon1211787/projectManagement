@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import switch2021.project.utils.ValueObject;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import java.util.Objects;
@@ -25,20 +27,23 @@ public class TaskEffort implements ValueObject<TaskEffort> {
     @Embedded
     private Date effortDate;
     @Embedded
+    @AttributeOverride(name = "text", column = @Column(name = "EffortComment"))
     private Description comment;
     @Embedded
+    @AttributeOverride(name = "extension", column = @Column(name = "EffortAttachment"))
     private Attachment attachment;
 
 
     /**
-     * Constructor (without SINGLETON)
+     * Constructor
      **/
-    public TaskEffort(int effortHours, int effortMinutes, Date effortDate, String comment, String attachment) {
+    public TaskEffort(Hours effortHours, Minutes effortMinutes, Date effortDate, Description comment,
+                      Attachment attachment) {
+        this.effortHours = effortHours;
+        this.effortMinutes = effortMinutes;
         this.effortDate = effortDate;
-        this.effortHours = new Hours(effortHours);
-        this.effortMinutes = new Minutes(effortMinutes);
-        this.comment = new Description(comment);
-        this.attachment = new Attachment(attachment);
+        this.comment = comment;
+        this.attachment = attachment;
     }
 
     /**
@@ -65,6 +70,11 @@ public class TaskEffort implements ValueObject<TaskEffort> {
     @Override
     public int hashCode() {
         return Objects.hash(effortHours, effortMinutes, effortDate, comment, attachment);
+    }
+
+    @Override
+    public String toString() {
+        return this.effortHours.getEffortHours() + "&" + this.effortMinutes.getEffortMinutes() + "&" + this.effortDate.getEffortDate().toString();
     }
 }
 

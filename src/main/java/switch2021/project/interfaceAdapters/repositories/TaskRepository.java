@@ -7,8 +7,6 @@ import switch2021.project.applicationServices.iRepositories.ITaskRepo;
 import switch2021.project.dataModel.JPA.TaskJpa;
 import switch2021.project.dataModel.JPA.assembler.TaskJpaAssembler;
 import switch2021.project.entities.aggregates.Task.Task;
-import switch2021.project.entities.valueObjects.vos.Description;
-import switch2021.project.entities.valueObjects.vos.TaskID;
 import switch2021.project.persistence.TaskJpaRepository;
 
 import java.util.ArrayList;
@@ -45,8 +43,21 @@ public class TaskRepository implements ITaskRepo {
     }
 
     @Override
-    public Optional<Task> findById(Description id) {
-        Optional<TaskJpa> opTaskJpa = taskJpaRepo.findById(id);
+    public List<Task> findAllByTaskContainerID(String taskContainerID) {
+        List<Task> allTasks = findAll();
+        List<Task> taskContainerIDTasks = new ArrayList<>();
+
+        for (Task task : allTasks) {
+            if (task.getTaskID().getTaskContainerID().toString().equals(taskContainerID)) {
+                taskContainerIDTasks.add(task);
+            }
+        }
+        return taskContainerIDTasks;
+    }
+
+    @Override
+    public Optional<Task> findById(String taskID) {
+        Optional<TaskJpa> opTaskJpa = taskJpaRepo.findById(taskID);
 
         if (opTaskJpa.isPresent()) {
             TaskJpa taskJpa = opTaskJpa.get();
@@ -58,7 +69,7 @@ public class TaskRepository implements ITaskRepo {
     }
 
     @Override
-    public boolean existsById(Description id) {
-        return taskJpaRepo.existsById(id);
+    public boolean existsById(String taskID) {
+        return taskJpaRepo.existsById(taskID);
     }
 }

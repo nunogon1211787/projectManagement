@@ -1,11 +1,10 @@
 package switch2021.project.dtoModel.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 public class TaskDTO {
     /**
      * Attributes
@@ -15,10 +14,8 @@ public class TaskDTO {
     public String usTitle;
     public String systemUserID;
     public String resourceStartDate;
-    public String taskName;
+    public String taskTitle;
     public String taskDescription;
     public double taskEffortEstimate;
     public String taskType;
-    //public String responsible;
-    //public String taskContainerID;
 }

@@ -19,12 +19,12 @@ public class TaskID implements ValueObject<TaskID> {
      **/
     private TaskContainerID taskContainerID;
     @Embedded
-    private Description taskName;
+    private Description taskTitle;
 
     @Override
     public boolean sameValueAs(TaskID other) {
         return other != null && this.taskContainerID.equals(other.taskContainerID)
-                && this.taskName.equals(other.taskName);
+                && this.taskTitle.equals(other.taskTitle);
     }
 
     @Override
@@ -37,11 +37,11 @@ public class TaskID implements ValueObject<TaskID> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(taskContainerID, taskName);
+        return Objects.hash(taskContainerID, taskTitle);
     }
 
     @Override
     public String toString() {
-        return taskContainerID.toString() + "&" + taskName.getText();
+        return taskContainerID.toString() + "&" + taskTitle.getText();
     }
 }

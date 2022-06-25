@@ -2,7 +2,7 @@ package switch2021.project.entities.factories.factories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import switch2021.project.applicationServices.iRepositories.IEffortEstimateFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IEffortEstimateFactory;
 import switch2021.project.applicationServices.iRepositories.TaskContainerID;
 import switch2021.project.dtoModel.dto.TaskDTO;
 import switch2021.project.entities.aggregates.Task.Task;
@@ -38,26 +38,12 @@ public class TaskFactory implements ITaskFactory {
         } else {
             taskContainerID= userStoryIDFactory.create(taskDTO.projectId,taskDTO.usTitle);
         }
-        TaskID taskID = taskIDFactory.createTaskID(taskContainerID, taskDTO.taskName);
-        /*String[] taskContainerIDValues = taskDTO.taskContainerID.split("_");
-        String projectID = taskContainerIDValues[0] + "_" + taskContainerIDValues[1] + "_" + taskContainerIDValues[2];
-        String sprintNameOrUsTitle = taskContainerIDValues[3];
-        TaskContainerID taskContainerID;
-        if (!sprintNameOrUsTitle.toUpperCase().startsWith("AS") || (!sprintNameOrUsTitle.contains("want") && !sprintNameOrUsTitle.contains("Want"))) {
-            taskContainerID = sprintIDFactory.create(projectID, sprintNameOrUsTitle);
-        } else {
-            taskContainerID = userStoryIDFactory.create(projectID, sprintNameOrUsTitle);
-        }
-        TaskID taskID = taskIDFactory.createTaskID(taskContainerID, taskDTO.name);*/
+        TaskID taskID = taskIDFactory.createTaskID(taskContainerID, taskDTO.taskTitle);
         Description description = descriptionFactory.createDescription(taskDTO.taskDescription);
         EffortEstimate effortEstimate = effortEstimateFactory.create(taskDTO.taskEffortEstimate);
         TaskTypeEnum taskType = TaskTypeEnum.valueOf(taskDTO.taskType);
-        /*String[] resourceIDValues = taskDTO.responsible.split("&");// userID&projectID&startDate
-        String systemUserID = resourceIDValues[0];
-        String projID = resourceIDValues[1];
-        String startDate = resourceIDValues[2];
-        ResourceID resourceID = resourceIDFactory.create(systemUserID, projID, startDate);*/
         ResourceID resourceID = resourceIDFactory.create(taskDTO.systemUserID, taskDTO.projectId, taskDTO.resourceStartDate);
+
         return new Task(taskID, description, effortEstimate, taskType, resourceID);
     }
 }
