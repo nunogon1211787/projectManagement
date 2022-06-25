@@ -23,8 +23,8 @@ interface "IProjectRepositoryJPA" as jpa <<Interface>>{
 
 package "Data Model" <<Rectangle>>{
 class "ProjectJpaAssembler" as assemblerjpa <<Component>> {
-+toData (project)
-+toModel(projectJpa)
++toJpaData (project)
++toDomain(projectJpa)
 }
 class "ProjectJpa" as projectJPA {
 -projectID: ProjectID

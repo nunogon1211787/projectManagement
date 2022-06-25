@@ -9,7 +9,7 @@ title Domain Model
 
 'Project Aggregate:--------------------------------------------------
 class UserProfile #Yellow{
-- description
+- userProfileId
 }
 
 @enduml

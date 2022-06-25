@@ -9,7 +9,7 @@ title US013 - "As Administrator, I want to create user profiles"
 
 participant ": IUserProfileRepository" as Repository
 participant ": UserProfileJpaAssembler" as Assembler
-participant "userProfileJPA:UserProfileJpa" as USJPA
+participant "userProfileJpa:UserProfileJpa" as USJPA
 participant ":IUserProfileRepositoryJpa" as Driver
 participant "savedData:Data" as Data
 participant "userProfile:UserProfile" as US
@@ -17,12 +17,12 @@ participant "userProfile:UserProfile" as US
 [o->Repository: save(newUserProfile)
 
 Repository -> Assembler : toData(newUserProfile)
-Assembler -> USJPA **: create ()
+Assembler --> USJPA **: create ()
 Assembler --> Repository : userProfileJPA
 Repository -> Driver: save(userProfileJpa)
-Driver -> Data**: create(savedUserProfileJpa)
+Driver --> Data**: create(savedUserProfileJpa)
 Driver --> Repository : savedData
-Repository -> Assembler: toModel (savedData)
+Repository -> Assembler: toDomain (savedData)
 Assembler -> US **: create()
 Assembler --> Repository :userProfile
 

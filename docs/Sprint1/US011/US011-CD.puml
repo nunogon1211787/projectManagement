@@ -1,53 +1,49 @@
 @startuml
-'https://plantuml.com/class-diagram
-
-'hide circle
+'https://plantuml.com/class-diagram'hide circle
 skinparam classAttributeIconSize 0
 
-title US010 - As Authenticated user, i want to update its own data (e.g. photo, function...)
+title US011 - As Authenticated User, i want to change his/her password
 
 skinparam classAttributeIconSize 0
 
-package "Infrastructure" <<Rectangle>> #lightblue  {
+
+package "InfraEstructure" <<Rectangle>> #lightblue {
 package "Route"{
-class "UpdatePersonalDataRoute" as route << Component >>
-}
-package "Persistence"{
-interface "UserJpaRepository" as iUserRepositoryJPA << Interface >>
-}
-}
+    class "ChangePassword" as route <<Component>>
+    }
 
+    package "Persistence" {
+    class "IUserJpa" as jpa <<Interface>>
+    }
+}
 
 package "Interface Adapter" <<Rectangle>> #lightgreen {
 package "Controllers" <<Folder>>{
 class "UserController" as controller << Component >> {
-+updatePersonalData(json)
-}
-}
-package "Repositories" {
-class "UserRepository" as repository << Repository >> {
-+ findByUserId(userID)
-+ save(user)
-}
-}
-}
-package "Application Service API" <<Rectangle>> #lightpink{
-package "App Service" <<Folder>>{
-class "UserService" as service << Component >> {
 +updatePersonalData(updateDataDTO)
 }
 }
-package "IRepositories" <<Folder>>{
-interface "IUserRepo" as interfaceSystemUserRepo << Interface >>{
-+ findByUserId(userID)
-+ save(user)
+package "Repositories" <<Folder>>{
+class "UserRepository" as repository << Repository >> {
++ findByUserID(userID)
++ save(newUser)
 }
 }
-package IFactories {
- interface "IUserIDFactory" as IUSerFactory <<Factory Interface>> {
-   +createUserID(id)
-    }
- }
+}
+
+package "Application Service API" <<Rectangle>> #lightpink{
+package "App Service" <<Folder>>{
+class "UserService" as service << Service >> {
++createAndSaveUser(infoDTO)
+}
+}
+
+package "Repositories Interface" <<Folder>>{
+interface "IUserRepository" as interfaceSystemUserRepo << Interface >>{
++ findByUserID(userID)
++save(newUser)
+}
+}
 }
 package "DTO" <<Rectangle>> {
 package "DTO " <<Folder>>{
@@ -63,17 +59,20 @@ class "OutPutUserDTO" as outputUserDTO << Component >> {
 - email : String
 - function : String
 - photo : String
-- isActive : String
-- assignedIdProfiles : String []
+- isActive: String
+- assignedIdProfiles: String[]
+
 }
+
 }
 package "DTO" <<Folder>> {
 package "UserMapper" <<Folder>>{
 class "UserMapper" as mapper << Component >> {
-+ toDto(updatedUser)
++ toDto(user)
 }
 }
 }
+
 
 package "Domain" <<Rectangle>> #burlywood{
 
@@ -200,21 +199,19 @@ package "Assembler" <<Folder>> {
         -assignedIDProfiles: List<UserProfileID>
         }
 
-repository..up>iUserRepositoryJPA
-route ..> controller
-controller ..> service
-service ..> dto
-service ..> interfaceSystemUserRepo
-repository ..|> interfaceSystemUserRepo
-service ..> IUSerFactory
-service ..> mapper
-mapper ..> outputUserDTO
 
-repository ..> jpa
-repository ..> assembler
-SUID "1"*-->"1" systemuser : is identified by
-SUFact..>systemuser
-userfactory ..|> iUserFactory
-service ..down.> iUserFactory
+route ..> controller
+repository..>jpa
+controller ..> service
+service .right.> dto
+service .down.> interfaceSystemUserRepo
+repository .|> interfaceSystemUserRepo
+userfactory ..down.|> iUserFactory
+service .left.> mapper
+mapper ..> outputUserDTO
+service ..> iUserFactory
+repository ..up.> assemblerjpa
+repository ..> ujpa
+
 
 @enduml

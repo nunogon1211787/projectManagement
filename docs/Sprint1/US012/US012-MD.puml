@@ -8,12 +8,8 @@ title Domain Model
 
 
 'Project Aggregate:--------------------------------------------------
-class SystemUser #Yellow{
-- name
-- function
-- password
-- photo
-- isActive
+class Typology #Yellow{
+- descriptionID
 }
 
 @enduml

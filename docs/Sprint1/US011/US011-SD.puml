@@ -7,12 +7,12 @@ autoactivate on
 autonumber
 
 
-participant ": UserRoute" as UI
-participant ": UserController" as Ctrl
-participant ": UserService" as service
-participant "userRepo: \n IUserRepo" as repo
-participant ": User" as user
-participant ": UserMapper" as mapper
+participant ":UserRoute" as UI
+participant ":UserController" as Ctrl
+participant ":UserService" as service
+participant ":IUserRepository" as repo
+participant ":User" as user
+participant ":UserMapper" as mapper
 participant " outputUserDTO: \n OutputUserDTO" as outdto
 
 
@@ -22,18 +22,14 @@ UI -> Ctrl: UpdatePersonalData(json)
 note right
 Change from json to dto hidden to simplify diagram
 end note
-Ctrl -> service : UpdatePersonalData(idDTO, updateDataDTO)
+Ctrl -> service : updatePersonalData(updateDataDTO)
 note over service : The creation of the id are hidden to simplify the diagram.
 
 service -> repo: findByUserID (userID)
+ref over repo: [[US11SD_JPA.puml]]
 repo --> service : user
-service->user: updatePersonalData(updateDataDTO)
+service->user: updatePassword(oldPassword,newPassword)
 note over user : The changes of attributes are hidden to simplify the diagram .
-
-'user -> user: validateOldPassword(oldPassword)
-'deactivate user
-'user -> user: updatePassword(oldPassword, newPassword,\n newPasswordConfirmation)
-'deactivate user
 user-->service : true
 
 service->mapper : toDto(user)

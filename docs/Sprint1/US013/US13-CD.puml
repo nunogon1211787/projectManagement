@@ -14,17 +14,18 @@ package "Route"{
     }
 }
 
+
+
 package "Interface Adapter" <<Rectangle>> #lightgreen{
 package "Controllers" <<Folder>>{
     class "UserProfileController" as ctrl <<Component>>{
      +createUserProfile(userProfileDTO)
-
-
     }
     }
+
+
     package "Repositories" <<Folder>>{
     class "UserProfileRepository" as uRepo <<Repository>>{
-
     +save(profile)
     +findByUserProfileID(userProfileID)
 
@@ -32,21 +33,25 @@ package "Controllers" <<Folder>>{
 }
 }
 
-package "DTO" <<Rectangle>>{
+package "DTO" <<Rectangle>>  {
+
+package "DTO " {
     class "UserProfileDTO" as dto <<Component>> {
     -userProfileName: String
     }
+}
 
 
- class "OutputUserProfileDTO" as output <<Component>> {
-     - userProfileName: String
-    }
-
+package "Mapper"{
     class "UserProfileMapper" as mapper <<Component>> {
     +toDTO(newUserProfile)
     }
+}
 
 }
+
+
+
 
 package "Application Service"<<Rectangle>> #implementation {
     package "App Service" {
@@ -59,12 +64,10 @@ package "Application Service"<<Rectangle>> #implementation {
              +save(profile)
              +findByUserProfileID(userProfileID)
         }
+
     }
-    package "User Profile Factory Interface" {
-    class "IUserProfileFactory" as iUserProfileFactory <<(I, Violet) Interface>> {
-            +createUserProfile(userProfileDTO)
-            }
-    }
+
+
 }
 
 package "Domain" <<Rectangle>>#burlywood  {
@@ -76,14 +79,25 @@ package "Domain" <<Rectangle>>#burlywood  {
         class "UserProfileIDFactory" as userProfileIDFactory <<Factory>> {
         +createUserProfileID(userProfileName)
         }
-        class "IUserProfileIDFactory" as iUserProfileIDFactory <<(I, Violet) Interface>> {
-        +createUserProfileID(userProfileName)
-        }
+
     }
+
+      package "Factory Interface" as factoryInterface <<Folder>>{
+
+          class "IUserProfileIDFactory" as iUserProfileIDFactory <<(I, Violet) Interface>> {
+                +createUserProfileID(userProfileName)
+                }
+
+          class "IUserProfileFactory" as iUserProfileFactory <<(I, Violet) Interface>> {
+                 +createUserProfile(userProfileDTO)
+                 }
+      }
+
 
     package "Aggregate" {
         class "UserProfile" as userProfile <<Root>>{
-            +UserProfile (userProfileID)
+         -userProfileId: UserProfileID
+         +UserProfile(userProfileId)
         }
     }
     package "Value Object"  {
@@ -94,12 +108,16 @@ package "Domain" <<Rectangle>>#burlywood  {
 }
 
     package "Data Model" <<Rectangle>>{
+    package "Assembler" <<Folder>> {
         class "UserProfileJpaAssembler" as assemblerjpa <<Component>> {
         +toData (userProfile)
-        +toModel(userProfileJpa)
+        +toDomain(userProfileJPA)
         }
+     }
 
-        class "UserProfileJpa" as UPjpa {
+
+    package "JPA" <<Folder>> {
+        class "UserProfileJpa" as UPjpa <<Component>> {
         -userProfileID: UserProfileID
         }
 
@@ -107,21 +125,18 @@ route ..> ctrl
 ctrl ..> service
 uRepo ..|> iUserProfileRepo
 service .left.> iUserProfileRepo
-service ..|> iUserProfileFactory
-service .down.> dto
+service ..> iUserProfileFactory
+service ...right.> dto
 service .down.> mapper
-userProfileFactory ..|> iUserProfileFactory
-userProfileIDFactory ..|> iUserProfileIDFactory
-userProfileFactory ..> iUserProfileIDFactory
-userProfileFactory ..> userProfile
-userProfileIDFactory ..> userProfileID
-uRepo ..> jpa
+userProfileFactory ..down|> iUserProfileFactory
+userProfileIDFactory ..down|> iUserProfileIDFactory
+userProfileFactory ..down> iUserProfileIDFactory
+userProfileFactory ..down> userProfile
+userProfileIDFactory ..down> userProfileID
 uRepo ...> assemblerjpa
 uRepo ...> UPjpa
-mapper ..> output
-
-
-
+iUserProfileFactory..>dto
+mapper .right..> dto
 
 
 @enduml

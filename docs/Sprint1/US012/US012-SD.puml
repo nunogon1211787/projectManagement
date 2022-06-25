@@ -7,19 +7,19 @@ autonumber
 
 participant ":CreateTypologyRoute" as Router
 participant ":TypologyController" as Controller
-participant ":CreateTypologyService" as Service
+participant ":TypologyService" as Service
 participant ":ITypologyFactory" as TypoFactory
 'participant "typoIDFact: ITypologyIDFactory" as IdFactory
 'participant "descFact:IDescriptionFactory" as DesFactory
 participant "newTypo: \nTypology" as Typology
 'participant "typologyID:TypologyID" as Id
 'participant "description:Description" as Description
-participant "iRepoTypology: \nITypologyRepo" as Repository
-participant "mapper: \nTypologyMapper" as Mapper
+participant ":ITypologyRepo" as Repository
+participant ":TypologyMapper" as Mapper
 participant "outputDto: \nTypologyDTO" as outputDTO
 
 [o-> Router: Post/typologies/(json)
-Router -> Controller: createTypology (json)
+Router -> Controller: createTypology (inputDto)
 note right
 Change from json to dto hidden to simplify diagram
 end note
@@ -28,25 +28,12 @@ Controller -> Service: createAndSaveTypology\n(inputDto)
 'note over Service: typoFact, repoTypo and mapper are parameters with @Autowired
 Service -> TypoFactory: createTypology(inputDto)
 note over TypoFactory : The creation of the id are hidden to simplify the diagram.
-
-'TypoFactory -> IdFactory: createId(inputDto)
-'note over TypoFactory: The typoIDFact is parameter with @Autowired
-'IdFactory -> DesFactory: createDescription(inputDto.description)
-'note over IdFactory: The descFact is parameter with @Autowired
-'DesFactory --> Description**: create(inputDto.description)
-'return description
-'IdFactory --> Id**: create(description)
-'return typologyID
-TypoFactory --> Typology**: create\n(typologyID)
+TypoFactory --> Typology**: create\n(descriptionID)
 return newTypo
-'alt successful case
-    Service -> Repository: save(newTypo)
-    'alt successful case
-      '  Repository -> Repository: existsByTypologyID(newTypo)
-      '  deactivate Repository
-    'end
+Service -> Repository: save(newTypo)
+ref over Repository: [[US12SD_JPA.puml]]
 return true
-'end
+
 Service -> Mapper: modelToDTO(newTypo)
 Mapper --> outputDTO**: create()
 return outputDto
