@@ -75,7 +75,7 @@ public class ResourceRepository implements IResourceRepo {
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public Resource save(Resource newResource) {
         ResourceJpa resJpa = assembler.toData(newResource);
 
@@ -85,7 +85,7 @@ public class ResourceRepository implements IResourceRepo {
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public boolean deleteByResourceID(ResourceID id) {
         ResourceIDJpa resIdJpa = assembler.toData(id);
 

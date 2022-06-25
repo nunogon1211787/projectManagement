@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,5 +22,5 @@ public class OutputUserDTO extends RepresentationModel<OutputUserDTO> {
     public String function;
     public String photo;
     public String isActive;
-    public String[] assignedIdProfiles;
+    public List<String> assignedIdProfiles;
 }

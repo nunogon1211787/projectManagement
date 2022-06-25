@@ -3,13 +3,10 @@ package switch2021.project.dtoModel.mapper;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Component;
 import switch2021.project.dtoModel.dto.*;
-import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
-import switch2021.project.interfaceAdapters.controller.ProjectController;
 import switch2021.project.interfaceAdapters.controller.UserController;
 import switch2021.project.entities.aggregates.User.User;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +23,7 @@ public class UserMapper {
         String function = user.getFunction().getText();
         String photo = user.getPhoto().getExtension();
         String active = user.isActive() ? "True" : "False";
-        String[] assignedIdProfiles = profilesToDTO(user);
+        List<String> assignedIdProfiles = profilesToDTO(user.getAssignedIdProfiles());
 
         OutputUserDTO outputUserDTO = new OutputUserDTO(username, email, function, photo, active, assignedIdProfiles);
 
@@ -69,26 +66,17 @@ public class UserMapper {
     }
 
     //Method to convert User Profile list in a String list of User Profiles
-    private String[] profilesToDTO(User user) {
-        ArrayList<UserProfile> profiles = new ArrayList<>();
-        String[] profileToString = new String[user.getAssignedProfiles().size()];
-
-        for (UserProfileID id : user.getAssignedProfiles()) {
-            profiles.add(new UserProfile(id));
-        }
-        int i = 0;
-        for (UserProfile profile : profiles) {
-            profileToString[i] = profile.getUserProfileId().getUserProfileName().getText();
-            i++;
-        }
-        return profileToString;
+    private List<String> profilesToDTO(List<UserProfileID> profiles) {
+        return profiles.stream()
+                .map(profileID -> profileID.getUserProfileName().getText())
+                .collect(Collectors.toList());
     }
 
     /**
      * Next two methods are for partial users only, used to showAllUsers
      */
 
-    public PartialUserDTO toDto2(User user) {
+    public PartialUserDTO toDtoPartial(User user) {
 
         String username = user.getUserName().getText();
         String email = user.getUserId().getEmail().getEmailText();
@@ -97,18 +85,21 @@ public class UserMapper {
         PartialUserDTO partialUserDTO = new PartialUserDTO(username, email, function);
 
         //Add HATEOAS to OutPut DTO
-                //Self Relation
-        partialUserDTO.add(linkTo(methodOn(UserController.class).getUser(partialUserDTO.email)).withRel("Find by ID"));
+        //Self Relation
+        partialUserDTO
+                .add(linkTo(methodOn(UserController.class).getUser(partialUserDTO.email))
+                .withRel("Find by ID"));
         //Search by Parameter
-        partialUserDTO.add(linkTo(methodOn(UserController.class).searchUsersByTypedParams(new SearchUserDTO())).withRel(
-                "Search by Paramenter"));
+        partialUserDTO
+                .add(linkTo(methodOn(UserController.class).searchUsersByTypedParams(new SearchUserDTO()))
+                .withRel("Search by Paramenter"));
         return partialUserDTO;
     }
 
-    public CollectionModel<PartialUserDTO> toCollectionDTO2(List<User> userList) {
+    public CollectionModel<PartialUserDTO> toCollectionDTOPartial(List<User> userList) {
 
         CollectionModel<PartialUserDTO> users = CollectionModel.of(userList.stream()
-                .map(this::toDto2)
+                .map(this::toDtoPartial)
                 .collect(Collectors.toList()));
         //HATEOAS
         // Add Self Relation

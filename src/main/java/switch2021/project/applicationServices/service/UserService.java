@@ -66,7 +66,7 @@ public class UserService {
 
     public CollectionModel<PartialUserDTO> findAllUsers() {
         List<User> usersList = userRepo.findAll();
-        return userMapper.toCollectionDTO2(usersList);
+        return userMapper.toCollectionDTOPartial(usersList);
     }
 
 
