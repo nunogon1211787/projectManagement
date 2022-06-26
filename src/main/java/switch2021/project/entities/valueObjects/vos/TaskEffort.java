@@ -1,5 +1,6 @@
 package switch2021.project.entities.valueObjects.vos;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import java.util.Objects;
 
 @Embeddable
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class TaskEffort implements ValueObject<TaskEffort> {
@@ -32,19 +34,6 @@ public class TaskEffort implements ValueObject<TaskEffort> {
     @Embedded
     @AttributeOverride(name = "extension", column = @Column(name = "EffortAttachment"))
     private Attachment attachment;
-
-
-    /**
-     * Constructor
-     **/
-    public TaskEffort(Hours effortHours, Minutes effortMinutes, Date effortDate, Description comment,
-                      Attachment attachment) {
-        this.effortHours = effortHours;
-        this.effortMinutes = effortMinutes;
-        this.effortDate = effortDate;
-        this.comment = comment;
-        this.attachment = attachment;
-    }
 
     /**
      * Override Methods

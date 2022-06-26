@@ -6,7 +6,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-import switch2021.project.applicationServices.service.SprintService;
 import switch2021.project.dtoModel.dto.*;
 import switch2021.project.interfaceAdapters.controller.*;
 
@@ -31,6 +30,8 @@ public class DatabaseETL {
     SprintController sprintController;
     @Autowired
     UserStoryController userStoryController;
+    @Autowired
+    TaskController taskController;
 
     ClassPathResource cpr = new ClassPathResource("data.xlsx");
 
@@ -45,6 +46,8 @@ public class DatabaseETL {
         ChangeUsStatus();
         initGlobalRolesTable();
         initSprintBacklogTable();
+        initTasksTable();
+        initEffortsTable();
     }
 
     public void initUserTable() throws Exception {
@@ -226,6 +229,7 @@ public class DatabaseETL {
                 double timeEstimate = row.getCell(4).getNumericCellValue();
                 String usStartDate = row.getCell(7).getStringCellValue();
                 String usEndDate = row.getCell(8).getStringCellValue();
+                if (usEndDate.equals("")) usEndDate = null;
                 String usID = row.getCell(6).getStringCellValue();
 
                 UserStoryUpdateDTO userStoryUpdateDTO = new UserStoryUpdateDTO(priority, description, timeEstimate,
@@ -254,11 +258,64 @@ public class DatabaseETL {
                 String sprintId = projectId + "_" + sprintName;
 
                 UserStoryIdDTO userStoryIdDTO = new UserStoryIdDTO();
-                userStoryIdDTO.title=title;
-                userStoryIdDTO.projectID=projectId;
+                userStoryIdDTO.title = title;
+                userStoryIdDTO.projectID = projectId;
 
-                sprintController.addUserStoryToSprintBacklog(sprintId,userStoryIdDTO);
+                sprintController.addUserStoryToSprintBacklog(sprintId, userStoryIdDTO);
 
+            }
+        }
+    }
+
+    public void initTasksTable() throws Exception {
+        InputStream is = cpr.getInputStream();
+        XSSFWorkbook workbook = new XSSFWorkbook(is);
+        XSSFSheet worksheet = workbook.getSheetAt(12);
+
+        for (int index = 0; index < worksheet.getPhysicalNumberOfRows(); index++) {
+            if (index > 0) {
+                XSSFRow row = worksheet.getRow(index);
+
+                String projectId = row.getCell(0).getStringCellValue();
+                String sprintName = row.getCell(1).getStringCellValue();
+                if (sprintName.equals("")) sprintName = null;
+                String usTitle = row.getCell(2).getStringCellValue();
+                if (usTitle.equals("")) usTitle = null;
+                String systemUserID = row.getCell(3).getStringCellValue();
+                String resourceStartDate = row.getCell(4).getStringCellValue();
+                String taskTitle = row.getCell(5).getStringCellValue();
+                String taskDescription = row.getCell(6).getStringCellValue();
+                double taskEffortEstimate = row.getCell(7).getNumericCellValue();
+                String taskType = row.getCell(8).getStringCellValue();
+
+                TaskDTO inputDTO = new TaskDTO(projectId, sprintName, usTitle, systemUserID, resourceStartDate,
+                        taskTitle, taskDescription, taskEffortEstimate, taskType);
+                taskController.createTask(inputDTO);
+            }
+        }
+    }
+
+    public void initEffortsTable() throws Exception {
+        InputStream is = cpr.getInputStream();
+        XSSFWorkbook workbook = new XSSFWorkbook(is);
+        XSSFSheet worksheet = workbook.getSheetAt(13);
+
+        for (int index = 0; index < worksheet.getPhysicalNumberOfRows(); index++) {
+            if (index > 0) {
+                XSSFRow row = worksheet.getRow(index);
+
+                int effortHours = (int) row.getCell(0).getNumericCellValue();
+                int effortMinutes = (int) row.getCell(1).getNumericCellValue();
+                String effortDate = row.getCell(2).getStringCellValue();
+                String comment = row.getCell(3).getStringCellValue();
+                if (comment.equals("")) comment = null;
+                String attachment = row.getCell(4).getStringCellValue();
+                if (attachment.equals("")) attachment = null;
+                String taskID = row.getCell(5).getStringCellValue();
+
+                TaskEffortDTO taskEffortDTO = new TaskEffortDTO(effortHours, effortMinutes, effortDate, comment,
+                        attachment);
+                taskController.registerEffort(taskID, taskEffortDTO);
             }
         }
     }

@@ -85,7 +85,8 @@ public class TaskService {
         return taskMapper.toCollectionDto(taskContainerIDTasks);
     }
 
-    public OutputTaskDTO createAndAddEffort(String taskID, TaskEffortDTO taskEffortDTO) throws IllegalArgumentException {
+    @Transactional(propagation = Propagation.REQUIRED, noRollbackFor = Exception.class)
+    public OutputTaskDTO createAndAddEffort(String taskID, TaskEffortDTO taskEffortDTO) {
         Task task = getTask(taskID);
         TaskEffort taskEffort = effortFactory.createTaskEffort(taskEffortDTO);
         task.toAddEffort(taskEffort);

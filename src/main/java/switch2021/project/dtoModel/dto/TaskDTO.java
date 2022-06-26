@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 public class TaskDTO {
     /**
      * Attributes

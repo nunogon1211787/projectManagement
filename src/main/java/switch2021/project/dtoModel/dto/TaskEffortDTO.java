@@ -1,7 +1,10 @@
 package switch2021.project.dtoModel.dto;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
 public class TaskEffortDTO {
     /**
      * Attributes
