@@ -1,1236 +1,669 @@
 package switch2021.project.entities.aggregates.User;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import switch2021.project.applicationServices.service.UserService;
-import switch2021.project.dtoModel.dto.NewUserInfoDTO;
-import switch2021.project.dtoModel.dto.OutputUserDTO;
 import switch2021.project.entities.valueObjects.vos.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-//@ExtendWith(SpringExtension.class)
 @SpringBootTest
 class UserTest {
-
-    @Mock
-    UserID idDouble;
-    @Mock
-    Name nameDouble;
-    @Mock
-    Photo photoDouble;
-    @Mock
-    Password passwordDouble;
-    @Mock
-    Function functionDouble;
-    @Mock
-    UserProfileID userProfileIDDouble;
-    @Mock
-    Description descriptionDouble;
-
-    @Autowired
-    UserService registerUserService;
 
     @Test
     void itShouldCreateASystemUser() {
         //S.U.T. {SystemUser}
         //Arrange
-        when(passwordDouble.getPwd()).thenReturn("Qwerty_1");
-        when(userProfileIDDouble.getUserProfileName()).thenReturn(descriptionDouble);
-        when(descriptionDouble.getText()).thenReturn("Visitor");
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
         //Act
-        User underTest = new User(idDouble, nameDouble, photoDouble, passwordDouble, passwordDouble,
-                functionDouble, userProfileIDDouble);
+        User underTest = new User(id, name, photo, password, password,
+                function, profileID);
         //Assert
         assertEquals("Visitor", underTest.getAssignedProfiles().get(0).getUserProfileName().getText());
         assertFalse(underTest.isActive());
     }
 
     @Test
+    public void assignInvalidPassword() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserID id = mock(UserID.class);
+            Name name = mock(Name.class);
+            Photo photo = mock(Photo.class);
+            Password password = mock(Password.class);
+            Password passwordConfirmation = mock(Password.class);
+            Function function = mock(Function.class);
+            Description description = mock(Description.class);
+            UserProfileID profileID = mock(UserProfileID.class);
+            when(password.getPwd()).thenReturn("xxxxx");
+            when(passwordConfirmation.getPwd()).thenReturn("ddddd");
+            when(profileID.getUserProfileName()).thenReturn(description);
+            when(description.getText()).thenReturn("Visitor");
+            //Act
+            new User(id, name, photo, password, passwordConfirmation, function, profileID);
+        });
+    }
+
+    @Test
     void itShouldNotCreateASystemUser() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            //S.U.T. {SystemUser}
+            //Arrange
+            UserID id = mock(UserID.class);
+            Name name = mock(Name.class);
+            Photo photo = mock(Photo.class);
+            Password password = mock(Password.class);
+            Function function = mock(Function.class);
+            Description description = mock(Description.class);
+            UserProfileID profileID = mock(UserProfileID.class);
+            when(password.getPwd()).thenReturn("Qwerty_1");
+            when(profileID.getUserProfileName()).thenReturn(description);
+            when(description.getText()).thenReturn("Regular");
+            //Act
+            new User(id, name, photo, password, password,
+                    function, profileID);
+        });
+    }
+
+    @Test
+    public void getAssignedProfiles() {
+        //Arrange
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Description password = mock(Description.class);
+        Function function = mock(Function.class);
+        Description desVisitor = mock(Description.class);
+        Description desDirector = mock(Description.class);
+        Description desUser = mock(Description.class);
+        UserProfileID visitor = mock(UserProfileID.class);
+        UserProfileID user = mock(UserProfileID.class);
+        UserProfileID director = mock(UserProfileID.class);
+        List<UserProfileID> assignedProfiles = new ArrayList<>();
+        assignedProfiles.add(visitor);
+        assignedProfiles.add(director);
+        assignedProfiles.add(user);
+        when(visitor.getUserProfileName()).thenReturn(desVisitor);
+        when(director.getUserProfileName()).thenReturn(desDirector);
+        when(user.getUserProfileName()).thenReturn(desUser);
+        when(desVisitor.getText()).thenReturn("Visitor");
+        when(desDirector.getText()).thenReturn("Director");
+        when(desUser.getText()).thenReturn("User");
+        User underTest = new User(id, name, photo, password, function, true, assignedProfiles);
+        //Act
+        List<UserProfileID> result = underTest.getAssignedIdProfiles();
+        //Assert
+        assertEquals(assignedProfiles, result);
+    }
+
+    @Test
+    public void getRequestedProfiles() {
+        //Arrange
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Description password = mock(Description.class);
+        Function function = mock(Function.class);
+        Request reqVisitor = mock(Request.class);
+        Request reqUser = mock(Request.class);
+        Request reqDirector = mock(Request.class);
+        List<UserProfileID> assignedProfiles = new ArrayList<>();
+        List<Request> requestedProfiles = new ArrayList<>();
+        requestedProfiles.add(reqVisitor);
+        requestedProfiles.add(reqUser);
+        requestedProfiles.add(reqDirector);
+        User underTest = new User(id, name, photo, password, function, true, assignedProfiles, requestedProfiles);
+        //Act
+        List<Request> result = underTest.getRequestedProfiles();
+        //Assert
+        assertEquals(requestedProfiles, result);
+    }
+
+    @Test
+    public void editPersonalData() {
+        //Arrange
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Name changeName = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Photo changePhoto = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Function changeFunction = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(changeName.getText()).thenReturn("Change Name");
+        when(changeFunction.getText()).thenReturn("Change Function");
+        when(changePhoto.getExtension()).thenReturn("ChangePhoto.png");
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        User underTest = new User(id, name, photo, password, password,
+                function, profileID);
+        //Act
+        underTest.editPersonalData("Change Name", "Change Function", "ChangePhoto.png");
+        //Assert
+        assertEquals("Change Name", underTest.getUserName().getText());
+        assertEquals("Change Function", underTest.getFunction().getText());
+        assertEquals("ChangePhoto.png", underTest.getPhoto().getExtension());
+    }
+
+    @Test
+    public void editPersonalData_AssignName() {
+        //Arrange
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Name changeName = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(changeName.getText()).thenReturn("Change Name");
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        User underTest = new User(id, name, photo, password, password,
+                function, profileID);
+        //Act
+        underTest.editPersonalData("Change Name", null, null);
+        //Assert
+        assertEquals("Change Name", underTest.getUserName().getText());
+    }
+
+    @Test
+    public void editPersonalData_AssignFunction() {
+        //Arrange
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Function changeFunction = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(changeFunction.getText()).thenReturn("Change Function");
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        User underTest = new User(id, name, photo, password, password,
+                function, profileID);
+        //Act
+        underTest.editPersonalData(null, "Change Function", null);
+        //Assert
+        assertEquals("Change Function", underTest.getFunction().getText());
+    }
+
+    @Test
+    public void editPersonalData_AssignPhoto() {
+        //Arrange
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Photo changePhoto = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        when(changePhoto.getExtension()).thenReturn("ChangePhoto.png");
+        User underTest = new User(id, name, photo, password, password,
+                function, profileID);
+        //Act
+        underTest.editPersonalData(null, null, "ChangePhoto.png");
+        //Assert
+        assertEquals("ChangePhoto.png", underTest.getPhoto().getExtension());
+    }
+
+    @Test
+    public void updatePasswordSuccess() {
+        //Arrange
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        User underTest = new User(id, name, photo, password, password, function, profileID);
+        User expected = new User(id, name, photo, password, password, function, profileID);
+        //Act
+        underTest.updatePassword("Qwerty_1", "Qwerty_3");
+        //Assert
+        assertNotEquals(expected, underTest);
+    }
+
+    @Test
+    public void updatePasswordFail() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Arrange
+            UserID id = mock(UserID.class);
+            Name name = mock(Name.class);
+            Photo photo = mock(Photo.class);
+            Password password = mock(Password.class);
+            Function function = mock(Function.class);
+            Description description = mock(Description.class);
+            UserProfileID profileID = mock(UserProfileID.class);
+            when(password.getPwd()).thenReturn("Qwerty_1");
+            when(profileID.getUserProfileName()).thenReturn(description);
+            when(description.getText()).thenReturn("Visitor");
+            User underTest = new User(id, name, photo, password, password, function, profileID);
+            //Act
+            underTest.updatePassword("Qwerty_4", "Qwerty_3");
+        });
+    }
+
+    @Test
+    public void createProfileRequest() {
+        //Arrange
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Description password = mock(Description.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(password.getText()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        List<UserProfileID> assignedProfiles = new ArrayList<>();
+        List<Request> requestedProfiles = new ArrayList<>();
+        User underTest = new User(id, name, photo, password, function, true, assignedProfiles, requestedProfiles);
+        //Act
+        underTest.createProfileRequest(profileID);
+        //Assert
+        assertEquals(1 ,underTest.getRequestedProfiles().size());
+    }
+
+    @Test
+    void activateStatusSuccess() {
         //S.U.T. {SystemUser}
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            when(passwordDouble.getPwd()).thenReturn("Qwerty_1");
-            when(userProfileIDDouble.getUserProfileName()).thenReturn(descriptionDouble);
-            when(descriptionDouble.getText()).thenReturn("regular");
-            //Act
-            new User(idDouble, nameDouble, photoDouble, passwordDouble, passwordDouble,
-                    functionDouble, userProfileIDDouble);
-        });
+        //Arrange
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        User underTest = new User(id, name, photo, password, password, function, profileID);
+        //Act
+        underTest.activateStatus();
+        //Assert
+        assertTrue(underTest.isActive());
     }
 
     @Test
-    void itShouldRegisterAUser() throws Exception {
+    void activateStatusFail() {
+        //S.U.T. {SystemUser}
         //Arrange
-        NewUserInfoDTO dto = new NewUserInfoDTO();
-        dto.userName = "manuel";
-        dto.email = "manuel@beaver.com";
-        dto.password = "Qwerty_1";
-        dto.passwordConfirmation = "Qwerty_1";
-        dto.function = "tester";
-        dto.photo = "photo.png";
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        User underTest = new User(id, name, photo, password, password, function, profileID);
+        underTest.activateStatus();
         //Act
-        OutputUserDTO outDTO = registerUserService.createAndSaveUser(dto);
+        underTest.activateStatus();
         //Assert
-        assertEquals("manuel@beaver.com", outDTO.email);
-        assertEquals("False", outDTO.isActive);
+        assertTrue(underTest.isActive());
     }
 
     @Test
-    @DisplayName("Test same identity conditions for coverage purposes")
-    public void sameIdentityAsTrue() {
+    void inactivateStatusSuccess() {
+        //S.U.T. {SystemUser}
         //Arrange
-        UserID userID = new UserID(new Email("Cris@xxx.pt"));
-        Name name = new Name("Cristiana");
-        Photo photo = new Photo("xxx.png");
-        Password password = new Password("Qwerty_1");
-        Function function = new Function("Dev");
-        UserProfileID userProfileID = new UserProfileID(new Description("Visitor"));
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        User underTest = new User(id, name, photo, password, password, function, profileID);
+        underTest.activateStatus();
         //Act
-        User user= new User(userID, name, photo, password, password,
-                function, userProfileID);
-        User user2= new User(userID, name, photo, password, password,
-                function, userProfileID);
+        underTest.inactivateStatus();
         //Assert
-        assertTrue(user.sameIdentityAs(user2));
+        assertFalse(underTest.isActive());
     }
 
     @Test
-    @DisplayName("Test same identity conditions for coverage purposes")
-    public void sameIdentityAsFalse() {
+    void inactivateStatusFail() {
+        //S.U.T. {SystemUser}
         //Arrange
-        UserID userID = new UserID(new Email("Cris@xxx.pt"));
-        UserID userID2 = new UserID(new Email("Dani@xxx.pt"));
-        Name name = new Name("Cristiana");
-        Photo photo = new Photo("xxx.png");
-        Password password = new Password("Qwerty_1");
-        Function function = new Function("Dev");
-        UserProfileID userProfileID = new UserProfileID(new Description("Visitor"));
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        User underTest = new User(id, name, photo, password, password, function, profileID);
         //Act
-        User user= new User(userID, name, photo, password, password,
-                function, userProfileID);
-        User user2= new User(userID2, name, photo, password, password,
-                function, userProfileID);
+        underTest.inactivateStatus();
         //Assert
-        assertFalse(user.sameIdentityAs(user2));
+        assertFalse(underTest.isActive());
     }
 
     @Test
-    @DisplayName("Test same identity conditions for coverage purposes")
-    public void sameIdentityAsNull() {
+    public void removeProfile() {
         //Arrange
-        UserID userID = new UserID(new Email("Cris@xxx.pt"));
-        Name name = new Name("Cristiana");
-        Photo photo = new Photo("xxx.png");
-        Password password = new Password("Qwerty_1");
-        Function function = new Function("Dev");
-        UserProfileID userProfileID = new UserProfileID(new Description("Visitor"));
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        User underTest = new User(id, name, photo, password, password, function, profileID);
         //Act
-        User user= new User(userID, name, photo, password, password,
-                function, userProfileID);
-        User user2= null;
+        underTest.removeProfile(profileID);
         //Assert
-        assertFalse(user.sameIdentityAs(user2));
+        assertEquals(0, underTest.getAssignedProfiles().size());
     }
 
-//    @Test
-//    void updatePassword(){
-//        //Arrange
-//        UserID userID = new UserID(new Email("Cris@xxx.pt"));
-//        Name name = new Name("Cristiana");
-//        Photo photo = new Photo("xxx.png");
-//        Password password = new Password("Qwerty_1");
-//        Function function = new Function("Dev");
-//        UserProfileID userProfileID = new UserProfileID(new Description("Visitor"));
-//        Password newPassword = new Password("Qwerty_2");
-//
-//        User user= new User(userID, name, photo, password, password,
-//                function, userProfileID);
-//        //Act
-//        user.updatePassword(password.getPwd(), newPassword.getPwd());
-//        //Assert
-//        assertEquals(newPassword, user.getEncryptedPassword());
-//
-//    }
+    @Test
+    public void isYourEmailTrue() {
+        //Arrange
+        Email email = mock(Email.class);
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(email.getEmailText()).thenReturn("test@test.test");
+        when(id.getEmail()).thenReturn(email);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        User underTest = new User(id, name, photo, password, password, function, profileID);
+        //Act and Assert
+        assertTrue(underTest.isYourEmail("test@test.test"));
+    }
+
+    @Test
+    public void isYourEmailFalse() {
+        //Arrange
+        Email email = mock(Email.class);
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(email.getEmailText()).thenReturn("test@test.test");
+        when(id.getEmail()).thenReturn(email);
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        User underTest = new User(id, name, photo, password, password, function, profileID);
+        //Act and Assert
+        assertFalse(underTest.isYourEmail("test@test.com"));
+    }
+
+    @Test
+    public void hasNameTrue() {
+        //Arrange
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(name.getText()).thenReturn("test");
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        User underTest = new User(id, name, photo, password, password, function, profileID);
+        //Act and Assert
+        assertTrue(underTest.hasName("test"));
+    }
+
+    @Test
+    public void hasNameFalse() {
+        //Arrange
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(name.getText()).thenReturn("test");
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        User underTest = new User(id, name, photo, password, password, function, profileID);
+        //Act and Assert
+        assertFalse(underTest.hasName("tester"));
+    }
+
+    @Test
+    public void hasFunctionTrue() {
+        //Arrange
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(function.getText()).thenReturn("tester");
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        User underTest = new User(id, name, photo, password, password, function, profileID);
+        //Act and Assert
+        assertTrue(underTest.hasFunction("tester"));
+    }
+
+    @Test
+    public void hasFunctionFalse() {
+        //Arrange
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(function.getText()).thenReturn("tester");
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        User underTest = new User(id, name, photo, password, password, function, profileID);
+        //Act and Assert
+        assertFalse(underTest.hasFunction("test"));
+    }
+
+    @Test
+    public void equalsTrue() {
+        //Arrange
+        Email email = mock(Email.class);
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(email.getEmailText()).thenReturn("test@test.test");
+        when(id.getEmail()).thenReturn(email);
+        when(function.getText()).thenReturn("tester");
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        when(id.sameValueAs(id)).thenReturn(true);
+        User result = new User(id, name, photo, password, password, function, profileID);
+        //Act
+        User expected = new User(id, name, photo, password, password, function, profileID);
+        //Assert
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void equalsFalse() {
+        //Arrange
+        Email email = mock(Email.class);
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(email.getEmailText()).thenReturn("test@test.test");
+        when(id.getEmail()).thenReturn(email);
+        when(function.getText()).thenReturn("tester");
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        when(id.sameValueAs(id)).thenReturn(false);
+        User result = new User(id, name, photo, password, password, function, profileID);
+        //Act
+        User expected = new User(id, name, photo, password, password, function, profileID);
+        //Assert
+        assertNotEquals(expected, result);
+    }
+
+    @Test
+    public void equalsNull() {
+        //Arrange
+        Email email = mock(Email.class);
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(email.getEmailText()).thenReturn("test@test.test");
+        when(id.getEmail()).thenReturn(email);
+        when(function.getText()).thenReturn("tester");
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        when(id.sameValueAs(id)).thenReturn(true);
+        User result = new User(id, name, photo, password, password, function, profileID);
+        //Act
+        User expected = null;
+        //Assert
+        assertNotEquals(expected, result);
+    }
+
+    @Test
+    public void equalsFalseClass() {
+        //Arrange
+        Email email = mock(Email.class);
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(email.getEmailText()).thenReturn("test@test.test");
+        when(id.getEmail()).thenReturn(email);
+        when(function.getText()).thenReturn("tester");
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        when(id.sameValueAs(id)).thenReturn(true);
+        //Act
+        User result = new User(id, name, photo, password, password, function, profileID);
+        //Assert
+        assertNotEquals(result, id);
+    }
+
+    @Test
+    public void hashCodeTrue() {
+        //Arrange
+        Email email = mock(Email.class);
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(email.getEmailText()).thenReturn("test@test.test");
+        when(id.getEmail()).thenReturn(email);
+        when(function.getText()).thenReturn("tester");
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        when(id.sameValueAs(id)).thenReturn(true);
+        User result = new User(id, name, photo, password, password, function, profileID);
+        //Act
+        User expected = new User(id, name, photo, password, password, function, profileID);
+        //Assert
+        assertEquals(expected.hashCode(), result.hashCode());
+    }
+
+    @Test
+    public void hashCodeFalse() {
+        //Arrange
+        Email email = mock(Email.class);
+        UserID id = mock(UserID.class);
+        Name name = mock(Name.class);
+        Photo photo = mock(Photo.class);
+        Password password = mock(Password.class);
+        Function function = mock(Function.class);
+        Description description = mock(Description.class);
+        UserProfileID profileID = mock(UserProfileID.class);
+        when(email.getEmailText()).thenReturn("test@test.test");
+        when(id.getEmail()).thenReturn(email);
+        when(function.getText()).thenReturn("tester");
+        when(password.getPwd()).thenReturn("Qwerty_1");
+        when(profileID.getUserProfileName()).thenReturn(description);
+        when(description.getText()).thenReturn("Visitor");
+        when(id.sameValueAs(id)).thenReturn(true);
+        //Act
+        User result = new User(id, name, photo, password, password, function, profileID);
+        //Assert
+        assertNotEquals(photo.hashCode(), result.hashCode());
+    }
 }
-/*
-   @Test
-    public void verifyEmail() {
-
-        //Arrange
-        UserProfileId profileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(profileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester", "Qwerty_1",
-                "Qwerty_1", "photo.png", profileId);
-        //Act
-        String emailCheck = "xxxx@isep.ipp.pt";
-        //Assert
-        assertTrue(test.isYourEmail(emailCheck));
-    }
-
-    @Test
-    public void verifyEmailSuccess() {
-
-        //Arrange
-        UserProfileId profileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(profileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        SystemUser test = new SystemUser("Test","xxkjbjsdaf@gndfsf.com", "tester", "Qwerty_1",
-                "Qwerty_1", "photo.png", profileId);
-        //Act
-        String emailCheck = "xx";
-        //Assert
-        assertTrue(test.isYourEmail(emailCheck));
-    }
-
-    @Test
-    public void verifyEmailFail() {
-
-        //Arrange
-        UserProfileId profileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(profileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        SystemUser joana = new SystemUser("Joana Silva", "1234@isep.ipp.pt", "Aluna", "Qwerty_1", "Qwerty_1", "photo
-        .png", profileId);
-        //Act
-        String emailCheck = "4321@isep.ipp.pt";
-        //Assert
-        assertFalse(joana.isYourEmail(emailCheck));
-    }
-
-    @Test
-    public void verifyUserNameSuccess() {
-
-        //Arrange
-        UserProfileId profileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(profileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        SystemUser test = new SystemUser("Te", "xxkjfnsd@alksda.com", "tester", "Querty_1",
-                "Querty_1", "photo.png", profileId);
-        //Act
-        String userName = "Te";
-        //Assert
-        assertTrue(test.hasName(userName));
-    }
-
-    @Test
-    public void verifyNameFail() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            UserProfileId profileId = mock(UserProfileId.class);
-            Description description = mock(Description.class);
-            when(profileId.getUserProfileName()).thenReturn(description);
-            when(description.getText()).thenReturn("Visitor");
-            new SystemUser(" ", "1234@isep.ipp.pt", "Aluna", "abcde", "abcde", "123_img", profileId);
-        });
-    }
-
-    @Test
-    public void UpdateProfile() {
-        //Arrange
-        UserProfile userProfile = mock(UserProfile.class);
-        UserProfileId userProfileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-        when(userProfileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png",
-        userProfileId);
-        //Act
-        UserProfile newProfile = mock(UserProfile.class);
-        UserProfileId newUserProfileId = mock(UserProfileId.class);
-        Description newDescription = mock(Description.class);
-        when(newProfile.getUserProfileId()).thenReturn(newUserProfileId);
-        when(newUserProfileId.getUserProfileName()).thenReturn(newDescription);
-        when(description.getText()).thenReturn("User");
-        // Assert
-        assertTrue(user.updateProfile(userProfile, newProfile));
-    }
-
-    @Test
-    public void UpdateProfileAlreadyExist() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            UserProfile userProfile = mock(UserProfile.class);
-            UserProfileId userProfileId = mock(UserProfileId.class);
-            Description description = mock(Description.class);
-            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-            when(userProfileId.getUserProfileName()).thenReturn(description);
-            when(description.getText()).thenReturn("Visitor");
-            SystemUser user = new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png",
-             userProfileId);
-            //Act
-            UserProfile newProfile = mock(UserProfile.class);
-            UserProfileId newUserProfileId = mock(UserProfileId.class);
-            Description newDescription = mock(Description.class);
-            when(newProfile.getUserProfileId()).thenReturn(newUserProfileId);
-            when(newUserProfileId.getUserProfileName()).thenReturn(newDescription);
-            when(newDescription.getText()).thenReturn("Visitor");
-            user.updateProfile(userProfile, newProfile);
-        });
-    }
-
-    @Test
-    public void NewUserWithProfileDifferentFromVisitor() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            UserProfile userProfile = mock(UserProfile.class);
-            UserProfileId userProfileId = mock(UserProfileId.class);
-            Description description = mock(Description.class);
-            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-            when(userProfileId.getUserProfileName()).thenReturn(description);
-            when(description.getText()).thenReturn("Notvisitor");
-            new SystemUser("xxx", "xxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "img_123", userProfileId);
-        });
-    }
-
-    @Test
-    public void verifyUpdateAndEncryptationOfPassword() {
-
-        //Test to verify if the oldpassword is updated by the newpassword, and this last one is
-        //stored in system user with the encryptation method.
-
-        //Arrange
-        UserProfile userProfile = mock(UserProfile.class);
-        UserProfileId userProfileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-        when(userProfileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10", "Qwerty_1", "Qwerty_1", "photo
-        .png", userProfileId);
-        //Act
-        joana.updatePassword("Qwerty_1", "Qwerty_2", "Qwerty_2");
-        Password pwdExp = new Password("Qwerty_2");
-
-        //Assert
-        assertEquals(pwdExp, joana.getPassword());
-    }
-
-    @Test
-    public void verifyOldPassword() {
-
-        //Test to verify if the oldpassword, stored in the system user, is equal or diferent from the
-        //password that came from User Interface (UI).
-        //Arrange
-        UserProfile userProfile = mock(UserProfile.class);
-        UserProfileId userProfileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-        when(userProfileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
-        //Act
-        assertFalse(joana.updatePassword("HElLO_02", "GOODBYE", "GOODBYE"));
-
-    }
-
-    @Test
-    public void setAllDataSuccess_2() {
-
-        //Arrange
-        UserProfile userProfile = mock(UserProfile.class);
-        UserProfileId userProfileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-        when(userProfileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
-        //Act and Assert
-        assertEquals("Joana", joana.getUserName().getNameF());
-    }
-
-
-    @Test
-    public void setAllDataSuccess_3() {
-
-        //Arrange
-        UserProfile userProfile = mock(UserProfile.class);
-        UserProfileId userProfileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-        when(userProfileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
-        //Act and Assert
-        assertEquals("Aluna_10", joana.getFunction().getText());
-    }
-
-
-    @Test
-    public void setAllDataSuccess_4() {
-
-        //Arrange
-        UserProfile userProfile = mock(UserProfile.class);
-        UserProfileId userProfileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-        when(userProfileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        SystemUser joana = new SystemUser("Joana", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
-        //Act and Assert
-        assertEquals("photo.png", joana.getPhoto().getExtension());
-    }
-
-
-    @Test
-    public void createSystemUserSuccess() {
-        //Arrange
-        String userName = "manueloliveira";
-        String email = "manueloliveira@beaver.com";
-        String password = "Qwerty_1";
-        String passwordConfirmation = "Qwerty_1";
-        String function = "teeee";
-        String photo = "photo.png";
-
-        UserProfile userProfile = mock(UserProfile.class);
-        UserProfileId userProfileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-        when(userProfileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo,
-        userProfileId);
-
-        List<UserProfileId> assignedProfileIdExpected = new ArrayList<>();
-        assignedProfileIdExpected.add(userProfileId);
-
-        Password passwordExpected = new Password("Qwerty_1");
-        //Assert
-        assertEquals(userName, newUser.getUserName().getNameF());
-        assertEquals(email, newUser.getUserId().getEmail().getEmail());
-        assertEquals(passwordExpected, newUser.getPassword());
-        assertEquals(function, newUser.getFunction().getText());
-        assertEquals(photo, newUser.getPhoto().getExtension());
-        assertFalse(newUser.isActive());
-        assertEquals(assignedProfileIdExpected, newUser.getAssignedProfiles());
-    }
-
-
-    @Test
-    public void createSystemUserFailUserNameIsEmpty() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            String userName = "";
-            String email = "manueloliveira@beaver.com";
-            String password = "ghi";
-            String passwordConfirmation = "ghi";
-            String function = "tester";
-            String photo = "photo";
-            UserProfile userProfile = mock(UserProfile.class);
-            UserProfileId userProfileId = mock(UserProfileId.class);
-            Description description = mock(Description.class);
-            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-            when(userProfileId.getUserProfileName()).thenReturn(description);
-            when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
-        });
-    }
-
-    @Test
-    public void createSystemUserFailUserNameIsShort() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            String userName = "";
-            String email = "manueloliveira@beaver.com";
-            String password = "ghi";
-            String passwordConfirmation = "ghi";
-            String function = "tester";
-            String photo = "photo";
-            UserProfile userProfile = mock(UserProfile.class);
-            UserProfileId userProfileId = mock(UserProfileId.class);
-            Description description = mock(Description.class);
-            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-            when(userProfileId.getUserProfileName()).thenReturn(description);
-            when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
-        });
-    }
-
-    @Test
-    public void createSystemUserFailEmailIsEmpty() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            String userName = "manueloliveira";
-            String email = "";
-            String password = "ghi";
-            String passwordConfirmation = "ghi";
-            String function = "tester";
-            String photo = "photo";
-            UserProfile userProfile = mock(UserProfile.class);
-            UserProfileId userProfileId = mock(UserProfileId.class);
-            Description description = mock(Description.class);
-            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-            when(userProfileId.getUserProfileName()).thenReturn(description);
-            when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
-        });
-    }
-
-    @Test
-    public void createSystemUserFailEmailIsShort() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            String userName = "manueloliveira";
-            String email = "m";
-            String password = "ghi";
-            String passwordConfirmation = "ghi";
-            String function = "tester";
-            String photo = "photo";
-            UserProfile userProfile = mock(UserProfile.class);
-            UserProfileId userProfileId = mock(UserProfileId.class);
-            Description description = mock(Description.class);
-            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-            when(userProfileId.getUserProfileName()).thenReturn(description);
-            when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
-        });
-    }
-
-    @Test
-    public void createSystemUserFailFunctionIsEmpty() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            String userName = "manueloliveira";
-            String email = "manueloliveira@beaver.com";
-            String password = "ghi";
-            String passwordConfirmation = "ghi";
-            String function = "";
-            String photo = "photo";
-            UserProfile userProfile = mock(UserProfile.class);
-            UserProfileId userProfileId = mock(UserProfileId.class);
-            Description description = mock(Description.class);
-            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-            when(userProfileId.getUserProfileName()).thenReturn(description);
-            when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
-        });
-    }
-
-    @Test
-    public void createSystemUserFailFunctionIsShort() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            String userName = "manueloliveira";
-            String email = "manueloliveira@beaver.com";
-            String password = "ghi";
-            String passwordConfirmation = "ghi";
-            String function = "t";
-            String photo = "photo";
-            UserProfile userProfile = mock(UserProfile.class);
-            UserProfileId userProfileId = mock(UserProfileId.class);
-            Description description = mock(Description.class);
-            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-            when(userProfileId.getUserProfileName()).thenReturn(description);
-            when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
-        });
-    }
-
-    @Test
-    public void createSystemUserFailPasswordIsEmpty() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            String userName = "manueloliveira";
-            String email = "manueloliveira@beaver.com";
-            String password = "";
-            String passwordConfirmation = "";
-            String function = "tester";
-            String photo = "photo";
-            UserProfile userProfile = mock(UserProfile.class);
-            UserProfileId userProfileId = mock(UserProfileId.class);
-            Description description = mock(Description.class);
-            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-            when(userProfileId.getUserProfileName()).thenReturn(description);
-            when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
-        });
-    }
-
-    @Test
-    public void createSystemUserFailPasswordIsShort() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            String userName = "manueloliveira";
-            String email = "manueloliveira@beaver.com";
-            String password = "g";
-            String passwordConfirmation = "g";
-            String function = "tester";
-            String photo = "photo";
-            UserProfile userProfile = mock(UserProfile.class);
-            UserProfileId userProfileId = mock(UserProfileId.class);
-            Description description = mock(Description.class);
-            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-            when(userProfileId.getUserProfileName()).thenReturn(description);
-            when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
-        });
-    }
-
-    @Test
-    public void createSystemUserFailWrongFunction() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            String userName = "manueloliveira";
-            String email = "manueloliveira@beaver.com";
-            String password = "ghi";
-            String passwordConfirmation = "ghi";
-            String function = "tester";
-            String photo = "photo";
-            UserProfile userProfile = mock(UserProfile.class);
-            UserProfileId userProfileId = mock(UserProfileId.class);
-            Description description = mock(Description.class);
-            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-            when(userProfileId.getUserProfileName()).thenReturn(description);
-            when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
-        });
-    }
-
-    @Test
-    public void createSystemUserFailPasswordsNotMatch() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            String userName = "manueloliveira";
-            String email = "m";
-            String password = "ghi";
-            String passwordConfirmation = "abc";
-            String function = "tester";
-            String photo = "photo";
-            UserProfile userProfile = mock(UserProfile.class);
-            UserProfileId userProfileId = mock(UserProfileId.class);
-            Description description = mock(Description.class);
-            when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-            when(userProfileId.getUserProfileName()).thenReturn(description);
-            when(description.getText()).thenReturn("Visitor");
-            new SystemUser(userName, email, function, password, passwordConfirmation, photo, userProfileId);
-        });
-    }
-
-    @Test
-    public void overrideAndHashCodeTest() {
-        //Arrange
-        String userName = "manueloliveira";
-        String email = "manueloliveira@beaver.com";
-        String password = "Qwerty_1";
-        String passwordConfirmation = "Qwerty_1";
-        String function = "tester";
-        String photo = "photo.png";
-        String email2 = "maneloliveira@beaver.com";
-        UserProfile userProfile = mock(UserProfile.class);
-        UserProfileId userProfileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-        when(userProfileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        Company company = new Company();
-        //newUser and newUser2 are equals
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo,
-        userProfileId);
-        SystemUser newUser2 = new SystemUser(userName, email, function, password, passwordConfirmation, photo,
-        userProfileId);
-        //newUser3 is different (different email)
-        SystemUser newUser3 = new SystemUser(userName, email2, function, password, passwordConfirmation, photo,
-        userProfileId);
-        //Assert
-        assertNotSame(newUser, newUser2);
-        assertEquals(newUser, newUser2);
-        assertEquals(newUser2.hashCode(), newUser2.hashCode());
-        assertNotEquals(newUser, newUser3);
-        assertNotEquals(newUser.hashCode(), newUser3.hashCode());
-    }
-
-    @Test
-    public void setActivateUser() {
-        //Arrange
-        String userName = "manueloliveira";
-        String email = "manueloliveira@beaver.com";
-        String password = "Qwerty_1";
-        String passwordConfirmation = "Qwerty_1";
-        String function = "tester";
-        String photo = "photo.png";
-        UserProfile userProfile = mock(UserProfile.class);
-        UserProfileId userProfileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-        when(userProfileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        SystemUser newUser = new SystemUser(userName, email, function, password, passwordConfirmation, photo,
-        userProfileId);
-        assertFalse(newUser.isActive());
-        //Act
-        newUser.setActive(true);
-        //Assert
-        assertTrue(newUser.isActive());
-    }
-
-    @Test
-    void hasThisDataWithAll() {
-        //Input
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test tester", "xxxx@isep.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
-        String name = "Test tester";
-        String email = "xxxx";
-        String func = "test";
-        int state = 0; // -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Result
-        assertTrue(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithoutAll() {
-        //Input
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Querty_1", "Querty_1", "photo.png", pro.getUserProfileId());
-        String name = "";
-        String email = "";
-        String func = "";
-        int state = -1; //-1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Result
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithNameSuccess() {
-        //Input
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
-        String name = "test";
-        String email = "";
-        String func = "";
-        int state = -1; //-1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Result
-        assertTrue(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithEmailSuccess() {
-        //Input
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test","xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
-        String name = "";
-        String email = "xxxx";
-        String func = "";
-        int state = -1; //-1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Result
-        assertTrue(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithFunctionSuccess() {
-        //Input
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
-        String name = "";
-        String email = "";
-        String func = "test";
-        int state = -1; //-1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Result
-        assertTrue(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithStateSuccess() {
-        //Input
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
-        String name = "";
-        String email = "";
-        String func = "";
-        int state = 0; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Result
-        assertTrue(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithProfilesSuccess() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
-        String name = "Test";
-        String email = "xxxx@isep.ipp.pt";
-        String func = "tester";
-        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>();// profileId
-        profiles.add(pro);
-        //Assert
-        assertTrue(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithTwoParametersSuccess() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
-        String name = "Test";
-        String email = "xxxx";
-        String func = "";
-        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertTrue(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithThreeParametersSuccess() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "Querty_1", "Querty_1", "photo.png", pro.getUserProfileId());
-        String name = "Test";
-        String email = "xxxx";
-        String func = "test";
-        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertTrue(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithFourParametersSuccess() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
-        String name = "Test";
-        String email = "xxxx";
-        String func = "test";
-        int state = 0; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertTrue(test.hasThisData(name, email, func, state, profiles));
-    }
-*/
-    /*
-    /**
-     * FAIL TESTS
-     */
-/*
-    @Test
-    void hasThisDataWithAllFail() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("test", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
-        String name = "lest";
-        String email = "xxxx";
-        String func = "test";
-        int state = 0; // -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithNameFail() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.pt", "tester", "Querty_1", "Querty_1", "photo.png", pro
-        .getUserProfileId());
-        String name = "tesq";
-        String email = "";
-        String func = "";
-        int state = -1; //-1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithEmailFail() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "Querty_1", "Querty_1", "photo.png", pro.getUserProfileId());
-        String name = "";
-        String email = "yxxx";
-        String func = "";
-        int state = -1; //-1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithFunctionFail() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "Querty_1", "Querty_1", "photo.png", pro.getUserProfileId());
-        String name = "";
-        String email = "";
-        String func = "tesq";
-        int state = -1; //-1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithStateFail() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Querty_1", "Querty_1", "photo.png", pro.getUserProfileId());
-        String name = "";
-        String email = "";
-        String func = "";
-        int state = 1; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithStateFail2() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
-        String name = "";
-        String email = "";
-        String func = "";
-        int state = 2; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithStateFail3() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
-        String name = "";
-        String email = "";
-        String func = "";
-        int state = -3; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithStateFail4() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
-        String name = "";
-        String email = "";
-        String func = "";
-        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithProfilesFail() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png",
-        pro.getUserProfileId());
-        String name = "";
-        String email = "";
-        String func = "";
-        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithTwoParametersFail() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester", "Qwerty_1", "Qwerty_1", "photo.png",
-        pro.getUserProfileId());
-        String name = "test";
-        String email = "axxx";
-        String func = "";
-        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithThreeParametersFail() {
-        //Arrange
-        Company company = new Company();
-        UserProfile visitor = company.getUserProfileStore().getUserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt",
-                "tester", "Qwerty_1", "Qwerty_1", "photo.png", visitor.getUserProfileId());
-
-        String name = "test";
-        String email = "xxxx";
-        String func = "aest";
-        int state = -1; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasThisDataWithFourParametersFail() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
-        String name = "test";
-        String email = "xxxx";
-        String func = "test";
-        int state = 1; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Assert
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    void hasAllProfilesInTheListContainsFalse() {
-        //Arrange
-        UserProfile pro = new UserProfile("Visitor");
-        UserProfile tes = new UserProfile("Director");
-        SystemUser test = new SystemUser("Test", "xxxx@isep.ipp.pt", "tester",
-                "Qwerty_1", "Qwerty_1", "photo.png", pro.getUserProfileId());
-        String name = "test";
-        String email = "xxxx";
-        String func = "test";
-        int state = 1; //isActiveUser : -1 == null / 0 == false / 1 == true
-        List<UserProfile> profiles = new ArrayList<>(); // profileId
-        //Act
-        profiles.add(tes);
-        //Assert
-        assertFalse(test.hasThisData(name, email, func, state, profiles));
-    }
-
-    @Test
-    public void activationUser() {
-        //Test to activate the user
-        //Arrange
-        UserProfile tes = new UserProfile("Visitor");
-        SystemUser ana = new SystemUser("Ana", "1211@isep.ipp.pt", "User_12",
-                "Qwerty_1", "Qwerty_1", "photo.png", tes.getUserProfileId());
-        //Act
-        ana.setActive(true);
-        //Assert
-        assertTrue(ana.isActive());
-    }
-
-    @Test
-    public void inactivationUser() {
-        //Test to inactivate the user
-        //Arrange
-        UserProfile tes = new UserProfile("Visitor");
-        SystemUser ana = new SystemUser("Ana", "1211@isep.ipp.pt", "User_12",
-                "Qwerty_1", "Qwerty_1", "photo.png", tes.getUserProfileId());
-        //Act
-        ana.setActive(false);
-        //Assert
-        assertFalse(ana.isActive());
-    }
-
-    @Test
-    public void setUserNameIsEmpty() {
-        //Arrange
-        UserProfile userProfile = mock(UserProfile.class);
-        UserProfileId userProfileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-        when(userProfileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        SystemUser teste = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
-        String originalValue = teste.getUserName().getNameF();
-        SystemUser teste3 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
-        String originalValue3 = teste.getUserName().getNameF();
-        SystemUser teste4 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
-        //Act
-        teste.setUserName("D");
-        teste3.setUserName("CDC");
-        teste4.setUserName("CD");
-        // Assert
-        assertNotEquals(originalValue, teste.getUserName().getNameF());
-        assertNotEquals(originalValue3, teste3.getUserName().getNameF());
-        assertEquals("CDC", teste3.getUserName().getNameF());
-        assertEquals("CD", teste4.getUserName().getNameF());
-    }
-
-    @Test
-    public void setFunction() {
-
-        //Arrange
-        UserProfile userProfile = mock(UserProfile.class);
-        UserProfileId userProfileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-        when(userProfileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        SystemUser teste = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
-        SystemUser teste2 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
-        SystemUser teste3 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
-        SystemUser teste4 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
-        SystemUser teste5 = new SystemUser("Cris", "112@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
-        //Act
-        teste.setFunction("Dop");
-        teste2.setFunction("Pop");
-        teste3.setFunction("CDC");
-        teste4.setFunction("CDg");
-        teste5.setFunction("CkG");
-        // Assert
-        assertEquals("Dop", teste.getFunction().getText());
-        assertEquals("Pop", teste2.getFunction().getText());
-        assertEquals("CDC", teste3.getFunction().getText());
-        assertEquals("CDg", teste4.getFunction().getText());
-        assertEquals("CkG", teste5.getFunction().getText());
-
-    }
-
-    @Test
-    public void setPhoto() {
-        //Arrange
-        UserProfile userProfile = mock(UserProfile.class);
-        UserProfileId userProfileId = mock(UserProfileId.class);
-        Description description = mock(Description.class);
-        when(userProfile.getUserProfileId()).thenReturn(userProfileId);
-        when(userProfileId.getUserProfileName()).thenReturn(description);
-        when(description.getText()).thenReturn("Visitor");
-        SystemUser teste = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
-        String originalValue = teste.getPhoto().getExtension();
-        SystemUser teste2 = new SystemUser("Cris", "1211770@isep.ipp.pt", "Aluna_10",
-                "Qwerty_1", "Qwerty_1", "photo.png", userProfileId);
-        String originalValue2 = teste.getPhoto().getExtension();
-        //Act
-        teste.setPhoto("photo1.jpg");
-        teste2.setPhoto("photo.png");
-        // Assert
-        assertEquals(originalValue2, teste2.getPhoto().getExtension());
-        assertNotEquals(originalValue, teste.getPhoto().getExtension());
-        assertEquals("photo1.jpg", teste.getPhoto().getExtension());
-    }
-
-    @Test
-    @DisplayName("create and save profile request with success")
-    void createAndSaveProfileRequestWithSuccess() {
-        //Arrange
-        UserProfile visitorProfile = mock(UserProfile.class);
-        UserProfileId visitorProfileId = mock(UserProfileId.class);
-        Description descriptionDouble = mock(Description.class);
-        when(visitorProfile.getUserProfileId()).thenReturn(visitorProfileId);
-        when(visitorProfileId.getUserProfileName()).thenReturn(descriptionDouble);
-        when(descriptionDouble.getText()).thenReturn("Visitor");
-        SystemUser testUser = new SystemUser("Manuel", "1211770@isep.ipp.pt", "Aluno",
-                "Qwerty_1", "Qwerty_1", "photo.png", visitorProfileId);
-
-        UserProfile regularProfile = mock(UserProfile.class);
-        UserProfileId regularProfileId = mock(UserProfileId.class);
-        Description descriptionDouble2 = mock(Description.class);
-        when(regularProfile.getUserProfileId()).thenReturn(regularProfileId);
-        when(regularProfileId.getUserProfileName()).thenReturn(descriptionDouble2);
-        when(descriptionDouble2.getText()).thenReturn("Regular User");
-        //Act
-        boolean hasCreated = testUser.createAndSaveProfileRequest(regularProfileId);
-        //Assert
-        assertTrue(hasCreated);
-        assertEquals(1, testUser.getRequestedProfiles().size());
-        assertEquals(1, testUser.getAssignedProfiles().size());
-    }
-
-    @Test
-    @DisplayName("create and save profile request - profile already assigned")
-    void createAndSaveProfileRequestFail() {
-        //Arrange
-        UserProfile visitorProfile = mock(UserProfile.class);
-        UserProfileId visitorProfileId = mock(UserProfileId.class);
-        Description descriptionDouble = mock(Description.class);
-        when(visitorProfile.getUserProfileId()).thenReturn(visitorProfileId);
-        when(visitorProfileId.getUserProfileName()).thenReturn(descriptionDouble);
-        when(descriptionDouble.getText()).thenReturn("Visitor");
-        SystemUser testUser = new SystemUser("Manuel", "1211770@isep.ipp.pt", "Aluno",
-                "Qwerty_1", "Qwerty_1", "photo.png", visitorProfileId);
-        //Act
-        boolean hasCreated = testUser.createAndSaveProfileRequest(visitorProfileId);
-        //Assert
-        assertFalse(hasCreated);
-        assertEquals(0, testUser.getRequestedProfiles().size());
-        assertEquals(1, testUser.getAssignedProfiles().size());
-    }
-
-    @Test
-    @DisplayName("create and save profile request - request already made")
-    void createAndSaveProfileRequestFail2() {
-        //Arrange
-        UserProfile visitorProfile = mock(UserProfile.class);
-        UserProfileId visitorProfileId = mock(UserProfileId.class);
-        Description descriptionDouble = mock(Description.class);
-        when(visitorProfile.getUserProfileId()).thenReturn(visitorProfileId);
-        when(visitorProfileId.getUserProfileName()).thenReturn(descriptionDouble);
-        when(descriptionDouble.getText()).thenReturn("Visitor");
-        SystemUser testUser = new SystemUser("Manuel", "1211770@isep.ipp.pt", "Aluno",
-                "Qwerty_1", "Qwerty_1", "photo.png", visitorProfileId);
-
-        UserProfile regularProfile = mock(UserProfile.class);
-        UserProfileId regularProfileId = mock(UserProfileId.class);
-        Description descriptionDouble2 = mock(Description.class);
-        when(regularProfile.getUserProfileId()).thenReturn(regularProfileId);
-        when(regularProfileId.getUserProfileName()).thenReturn(descriptionDouble2);
-        when(descriptionDouble2.getText()).thenReturn("Regular User");
-        testUser.createAndSaveProfileRequest(regularProfileId);
-        //Act
-        boolean hasCreated = testUser.createAndSaveProfileRequest(regularProfileId);
-        //Assert
-        assertFalse(hasCreated);
-        assertEquals(1, testUser.getRequestedProfiles().size());
-        assertEquals(1, testUser.getAssignedProfiles().size());
-    }*/

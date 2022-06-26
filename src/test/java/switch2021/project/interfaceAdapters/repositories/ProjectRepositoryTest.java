@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-//@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class ProjectRepositoryTest {
 
@@ -133,5 +132,23 @@ public class ProjectRepositoryTest {
 
         //Assert
         assertFalse(result);
+    }
+
+    @Test
+    public void existByIdTrue() {
+        //Arrange
+        ProjectID id = mock(ProjectID.class);
+        when(projectJpaRepository.existsById(id)).thenReturn(true);
+        //Act and Assert
+        assertTrue(projRepo.existsById(id));
+    }
+
+    @Test
+    public void existByIdFalse() {
+        //Arrange
+        ProjectID id = mock(ProjectID.class);
+        when(projectJpaRepository.existsById(id)).thenReturn(false);
+        //Act and Assert
+        assertFalse(projRepo.existsById(id));
     }
 }
