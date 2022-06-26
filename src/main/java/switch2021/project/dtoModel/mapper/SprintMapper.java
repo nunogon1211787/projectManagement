@@ -8,6 +8,7 @@ import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.interfaceAdapters.controller.ProjectController;
 import switch2021.project.interfaceAdapters.controller.SprintController;
+import switch2021.project.interfaceAdapters.controller.TaskController;
 import switch2021.project.interfaceAdapters.controller.UserStoryController;
 
 import java.util.List;
@@ -28,6 +29,8 @@ public class SprintMapper {
 
         outputSprintDTO.add(linkTo(methodOn(SprintController.class).showSprintsOfAProject(outputSprintDTO.projectID))
                 .withRel("ShowProjectSprints"));
+        //Show all tasks in the Sprint
+        outputSprintDTO.add(linkTo(methodOn(TaskController.class).getTasksByTaskContainerID(sprintID)).withRel("Show Tasks"));
 
         return outputSprintDTO;
     }
