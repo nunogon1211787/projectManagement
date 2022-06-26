@@ -7,9 +7,13 @@ import switch2021.project.dtoModel.dto.OutputTaskDTO;
 import switch2021.project.dtoModel.dto.TaskEffortDTO;
 import switch2021.project.entities.aggregates.Task.Task;
 import switch2021.project.entities.valueObjects.vos.*;
+import switch2021.project.interfaceAdapters.controller.TaskController;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class TaskMapper {
@@ -48,19 +52,41 @@ public class TaskMapper {
         if (task.getEndDate() != null) {
             outputTaskDTO.taskEndDate = task.getEndDate().toString();
         }
-        outputTaskDTO.registeredEfforts = effortsToString(task);
+        outputTaskDTO.registeredEfforts = effortsToDTO(task);
         outputTaskDTO.hoursSpent = Math.round(getHoursSpent(task.getRegisteredEfforts()) * 100.0) / 100.0;
         outputTaskDTO.percentageOfExecution =
                 Math.round(((outputTaskDTO.hoursSpent / outputTaskDTO.effortEstimate) * 100) * 10.0) / 10.0;
+        /*
+         * Add HATEOAS to OUTPUT DTO
+         */
+        //Add self relation
+        outputTaskDTO.add(linkTo(methodOn(TaskController.class).getById(outputTaskDTO.taskID)).withSelfRel());
+        //Add register effort
+        outputTaskDTO.add(linkTo(methodOn(TaskController.class).registerEffort(outputTaskDTO.taskID,
+                new TaskEffortDTO())).withRel("Register Effort"));
+        //Show all tasks in a Sprint/User Story
+        outputTaskDTO.add(linkTo(methodOn(TaskController.class).getTasksByTaskContainerID(sprintOrUsID.toString())).withRel("ShowFilteredTasks"));
 
         return outputTaskDTO;
     }
 
-    private List<TaskEffortDTO> effortsToString(Task task) {
+    public CollectionModel<OutputTaskDTO> toCollectionDto(List<Task> taskList) {
+        CollectionModel<OutputTaskDTO> tasks = CollectionModel.of(taskList.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList()));
+        /*
+         * Add HATEOAS to OUTPUT DTO COLLECTION
+         */
+        //Add self relation
+        tasks.add(linkTo(methodOn(TaskController.class).getAll()).withSelfRel());
+
+        return tasks;
+    }
+
+    private List<TaskEffortDTO> effortsToDTO(Task task) {
         return task.getRegisteredEfforts().stream()
                 .map(this::effortToDTO)
                 .collect(Collectors.toList());
-
     }
 
     public TaskEffortDTO effortToDTO(TaskEffort taskEffort) {
@@ -85,13 +111,5 @@ public class TaskMapper {
     private double effortInHours(TaskEffort effort) {
         return (double) effort.getEffortHours().getEffortHours()
                 + ((double) effort.getEffortMinutes().getEffortMinutes() / 60);
-    }
-
-    public CollectionModel<OutputTaskDTO> toCollectionDto(List<Task> tasks) {
-
-        CollectionModel<OutputTaskDTO> result = CollectionModel.of(tasks.stream()
-                .map(this::toDto)
-                .collect(Collectors.toList()));
-        return result;
     }
 }
