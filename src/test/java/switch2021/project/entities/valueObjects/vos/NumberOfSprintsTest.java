@@ -2,10 +2,6 @@ package switch2021.project.entities.valueObjects.vos;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.entities.valueObjects.vos.Hours;
-import switch2021.project.entities.valueObjects.vos.Minutes;
-import switch2021.project.entities.valueObjects.vos.NumberOfSprints;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class NumberOfSprintsTest {
@@ -59,6 +55,28 @@ public class NumberOfSprintsTest {
         NumberOfSprints numberOfSprints1 = new NumberOfSprints(1);
         //Assert
         assertEquals(numberOfSprints, numberOfSprints1);
+    }
+
+
+    @DisplayName("Test override conditions for coverage purposes")
+    @Test
+    public void overrideTestEquals_true() {
+        //Arrange
+        NumberOfSprints numberOfSprints = new NumberOfSprints(1);
+        NumberOfSprints numberOfSprints1 = new NumberOfSprints(1);
+        //Assert
+        assertTrue(numberOfSprints.equals(numberOfSprints1));
+    }
+
+    @DisplayName("Test override conditions for coverage purposes")
+    @Test
+    public void overrideTestEquals_null() {
+        //Arrange
+        NumberOfSprints numberOfSprints = new NumberOfSprints(1);
+        NumberOfSprints numberOfSprints1 = null;
+        //Assert
+        assertNotEquals(numberOfSprints, numberOfSprints1);
+        assertNull(numberOfSprints1);
     }
 
 

@@ -2,13 +2,7 @@ package switch2021.project.entities.valueObjects.vos;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.entities.valueObjects.vos.Description;
-import switch2021.project.entities.valueObjects.vos.Email;
-import switch2021.project.entities.valueObjects.vos.Name;
-import switch2021.project.entities.valueObjects.vos.UserID;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserIDTest {
 
@@ -45,5 +39,25 @@ public class UserIDTest {
         Name pwd1 = new Name("Test");
         //Act and Assert
         assertNotEquals(pwd.hashCode(),pwd1.hashCode());
+    }
+
+    @Test
+    @DisplayName("Same Value As - True")
+    void sameValueAs_False(){
+        //Arrange
+        UserID user1 = new UserID(new Email("oliveira@beaver.com"));
+        UserID user2 = new UserID(new Email("maria@beaver.com"));
+        //Act and Assert
+        assertFalse(user1.sameValueAs(user2));
+    }
+
+    @Test
+    @DisplayName("Same Value As - True")
+    void sameValueAs_True(){
+        //Arrange
+        UserID user1 = new UserID(new Email("oliveira@beaver.com"));
+        UserID user2 = new UserID(new Email("oliveira@beaver.com"));
+        //Act and Assert
+        assertTrue(user1.sameValueAs(user2));
     }
 }

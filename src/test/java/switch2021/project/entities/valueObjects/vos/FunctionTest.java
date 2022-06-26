@@ -3,10 +3,9 @@ package switch2021.project.entities.valueObjects.vos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.entities.aggregates.Typology.Typology;
-import switch2021.project.entities.valueObjects.vos.Description;
-import switch2021.project.entities.valueObjects.vos.Function;
-import switch2021.project.entities.valueObjects.vos.TypologyID;
+
 import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class FunctionTest {
@@ -93,12 +92,22 @@ class FunctionTest {
 
     @DisplayName("Test Same Value As")
     @Test
-    public void sameValueAs() {
+    public void sameValueAs_1() {
         //Arrange
         Function function = new Function("Function");
         Function function1 = new Function("Function");
         //Assert
         assertTrue(function.sameValueAs(function1));
+    }
+
+    @DisplayName("Test Same Value As")
+    @Test
+    public void sameValueAs_2() {
+        //Arrange
+        Function function = new Function("Function");
+        Function function1 = new Function("Function1");
+        //Assert
+        assertFalse(function.sameValueAs(function1));
     }
 
 

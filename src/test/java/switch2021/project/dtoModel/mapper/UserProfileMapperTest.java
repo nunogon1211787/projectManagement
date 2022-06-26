@@ -7,10 +7,8 @@ import switch2021.project.dtoModel.dto.UserProfileDTO;
 import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 import switch2021.project.entities.valueObjects.vos.Description;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -64,7 +62,7 @@ public class UserProfileMapperTest {
         List<UserProfile> profiles = new ArrayList<>();
         profiles.add(userProfile);
         //Act
-        CollectionModel<UserProfileDTO> result = userProfileMapper.toCollectionDTO(profiles);
+        CollectionModel<UserProfileDTO> result = userProfileMapper.toCollectionDTO(profiles, true);
         //Assert
         assertEquals(1, result.getContent().size());
     }

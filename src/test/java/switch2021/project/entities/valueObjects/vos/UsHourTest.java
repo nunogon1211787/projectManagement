@@ -3,9 +3,6 @@ package switch2021.project.entities.valueObjects.vos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.entities.aggregates.Typology.Typology;
-import switch2021.project.entities.valueObjects.vos.Description;
-import switch2021.project.entities.valueObjects.vos.TypologyID;
-import switch2021.project.entities.valueObjects.vos.UsHour;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -142,6 +139,16 @@ public class UsHourTest {
         UsHour usHour1 = new UsHour(3);
         //Act and Assert
         assertFalse(usHour.sameValueAs(usHour1));
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void sameValueAs_True() {
+        //Arrange
+        UsHour usHour = new UsHour(2);
+        UsHour usHour1 = new UsHour(2);
+        //Act and Assert
+        assertTrue(usHour.sameValueAs(usHour1));
     }
 }
 

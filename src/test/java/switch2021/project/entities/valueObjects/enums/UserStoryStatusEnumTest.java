@@ -26,7 +26,7 @@ public class UserStoryStatusEnumTest {
         UserStoryStatusEnum[] status = UserStoryStatusEnum.values();
         UserStoryStatusEnum open = status[0];
         //Assert
-        assertEquals(open, UserStoryStatusEnum.OPEN);
+        assertEquals(UserStoryStatusEnum.OPEN, open);
     }
 
 
@@ -37,7 +37,7 @@ public class UserStoryStatusEnumTest {
         UserStoryStatusEnum[] status = UserStoryStatusEnum.values();
         UserStoryStatusEnum in_progress = status[1];
         //Assert
-        assertEquals(in_progress, UserStoryStatusEnum.IN_PROGRESS);
+        assertEquals(UserStoryStatusEnum.IN_PROGRESS, in_progress);
     }
 
 
@@ -48,7 +48,7 @@ public class UserStoryStatusEnumTest {
         UserStoryStatusEnum[] status = UserStoryStatusEnum.values();
         UserStoryStatusEnum finished = status[2];
         //Assert
-        assertEquals(finished, UserStoryStatusEnum.FINISHED);
+        assertEquals(UserStoryStatusEnum.FINISHED, finished);
     }
 
 
@@ -59,7 +59,7 @@ public class UserStoryStatusEnumTest {
         UserStoryStatusEnum[] status = UserStoryStatusEnum.values();
         UserStoryStatusEnum canceled = status[3];
         //Assert
-        assertEquals(canceled, UserStoryStatusEnum.CANCELED);
+        assertEquals(UserStoryStatusEnum.CANCELED, canceled);
     }
 
 
@@ -70,7 +70,7 @@ public class UserStoryStatusEnumTest {
         UserStoryStatusEnum[] status = UserStoryStatusEnum.values();
         UserStoryStatusEnum refined = status[4];
         //Assert
-        assertEquals(refined, UserStoryStatusEnum.REFINED);
+        assertEquals(UserStoryStatusEnum.REFINED, refined);
     }
 
 
@@ -81,7 +81,7 @@ public class UserStoryStatusEnumTest {
         UserStoryStatusEnum[] status = UserStoryStatusEnum.values();
         UserStoryStatusEnum open = status[0];
         //Assert
-        assertNotEquals(open, UserStoryStatusEnum.REFINED);
+        assertNotEquals(UserStoryStatusEnum.REFINED, open);
     }
 
 
@@ -91,7 +91,7 @@ public class UserStoryStatusEnumTest {
         //Act
         UserStoryStatusEnum userStoryStatusEnum = UserStoryStatusEnum.valueOf("OPEN");
         //Assert
-        assertEquals(userStoryStatusEnum, UserStoryStatusEnum.OPEN);
+        assertEquals(UserStoryStatusEnum.OPEN, userStoryStatusEnum);
     }
 
 
@@ -101,7 +101,7 @@ public class UserStoryStatusEnumTest {
         //Act
         UserStoryStatusEnum userStoryStatusEnum = UserStoryStatusEnum.valueOf("IN_PROGRESS");
         //Assert
-        assertEquals(userStoryStatusEnum, UserStoryStatusEnum.IN_PROGRESS);
+        assertEquals(UserStoryStatusEnum.IN_PROGRESS, userStoryStatusEnum);
     }
 
 
@@ -111,7 +111,7 @@ public class UserStoryStatusEnumTest {
         //Act
         UserStoryStatusEnum userStoryStatusEnum = UserStoryStatusEnum.valueOf("FINISHED");
         //Assert
-        assertEquals(userStoryStatusEnum, UserStoryStatusEnum.FINISHED);
+        assertEquals(UserStoryStatusEnum.FINISHED, userStoryStatusEnum);
     }
 
 
@@ -121,7 +121,7 @@ public class UserStoryStatusEnumTest {
         //Act
         UserStoryStatusEnum userStoryStatusEnum = UserStoryStatusEnum.valueOf("CANCELED");
         //Assert
-        assertEquals(userStoryStatusEnum, UserStoryStatusEnum.CANCELED);
+        assertEquals(UserStoryStatusEnum.CANCELED, userStoryStatusEnum);
     }
 
 
@@ -131,6 +131,6 @@ public class UserStoryStatusEnumTest {
         //Act
         UserStoryStatusEnum userStoryStatusEnum = UserStoryStatusEnum.valueOf("REFINED");
         //Assert
-        assertEquals(userStoryStatusEnum, UserStoryStatusEnum.REFINED);
+        assertEquals(UserStoryStatusEnum.REFINED, userStoryStatusEnum);
     }
 }

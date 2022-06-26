@@ -1,7 +1,6 @@
 package switch2021.project.entities.valueObjects.vos;
 
 import org.junit.jupiter.api.Test;
-import switch2021.project.entities.valueObjects.vos.ProjectID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,6 +13,15 @@ class ProjectIDTest {
         ProjectID expected = new ProjectID("Project_2022_1");
         //Assert
         assertEquals(expected.getCode(), projectID.getCode());
+    }
+
+    @Test
+    void equalsProjectIDTrue_1() {
+        //Arrange//Act
+        ProjectID projectID = new ProjectID("Project_2022_1");
+        ProjectID expected = new ProjectID("Project_2022_1");
+        //Assert
+        assertTrue(projectID.equals(expected));
     }
 
     @Test

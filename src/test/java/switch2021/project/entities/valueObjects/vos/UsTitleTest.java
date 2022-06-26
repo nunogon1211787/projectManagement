@@ -3,10 +3,6 @@ package switch2021.project.entities.valueObjects.vos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.entities.aggregates.Typology.Typology;
-import switch2021.project.entities.valueObjects.vos.Description;
-import switch2021.project.entities.valueObjects.vos.TypologyID;
-import switch2021.project.entities.valueObjects.vos.UsTitle;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UsTitleTest {
@@ -136,5 +132,15 @@ public class UsTitleTest {
         UsTitle usTitle2 = new UsTitle("As a PO, i want to test");
         //Act and Assert
         assertFalse(usTitle.sameValueAs(usTitle2));
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void sameValueAs_True() {
+        //Arrange
+        UsTitle usTitle = new UsTitle("As a PO, i want to test");
+        UsTitle usTitle2 = new UsTitle("As a PO, i want to test");
+        //Act and Assert
+        assertTrue(usTitle.sameValueAs(usTitle2));
     }
 }

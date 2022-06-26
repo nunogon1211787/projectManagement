@@ -27,7 +27,7 @@ public class ProjectStatusEnumTest {
         ProjectStatusEnum[] status = ProjectStatusEnum.values();
         ProjectStatusEnum planned = status[0];
         //Assert
-        assertEquals(planned, ProjectStatusEnum.PLANNED);
+        assertEquals(ProjectStatusEnum.PLANNED, planned);
     }
 
 
@@ -38,7 +38,7 @@ public class ProjectStatusEnumTest {
         ProjectStatusEnum[] status = ProjectStatusEnum.values();
         ProjectStatusEnum inception = status[1];
         //Assert
-        assertEquals(inception, ProjectStatusEnum.INCEPTION);
+        assertEquals(ProjectStatusEnum.INCEPTION, inception);
     }
 
 
@@ -49,7 +49,7 @@ public class ProjectStatusEnumTest {
         ProjectStatusEnum[] status = ProjectStatusEnum.values();
         ProjectStatusEnum elaboration = status[2];
         //Assert
-        assertEquals(elaboration, ProjectStatusEnum.ELABORATION);
+        assertEquals(ProjectStatusEnum.ELABORATION, elaboration);
     }
 
 
@@ -60,7 +60,7 @@ public class ProjectStatusEnumTest {
         ProjectStatusEnum[] status = ProjectStatusEnum.values();
         ProjectStatusEnum construction = status[3];
         //Assert
-        assertEquals(construction, ProjectStatusEnum.CONSTRUCTION);
+        assertEquals(ProjectStatusEnum.CONSTRUCTION, construction);
     }
 
     @DisplayName("Test to get a specific value - Transition")
@@ -70,7 +70,7 @@ public class ProjectStatusEnumTest {
         ProjectStatusEnum[] status = ProjectStatusEnum.values();
         ProjectStatusEnum transition = status[4];
         //Assert
-        assertEquals(transition, ProjectStatusEnum.TRANSITION);
+        assertEquals(ProjectStatusEnum.TRANSITION, transition);
     }
 
 
@@ -81,7 +81,7 @@ public class ProjectStatusEnumTest {
         ProjectStatusEnum[] status = ProjectStatusEnum.values();
         ProjectStatusEnum warranty = status[5];
         //Assert
-        assertEquals(warranty, ProjectStatusEnum.WARRANTY);
+        assertEquals(ProjectStatusEnum.WARRANTY, warranty);
     }
 
 
@@ -92,7 +92,7 @@ public class ProjectStatusEnumTest {
         ProjectStatusEnum[] status = ProjectStatusEnum.values();
         ProjectStatusEnum closed = status[6];
         //Assert
-        assertEquals(closed, ProjectStatusEnum.CLOSED);
+        assertEquals(ProjectStatusEnum.CLOSED, closed);
     }
 
 
@@ -103,7 +103,7 @@ public class ProjectStatusEnumTest {
         ProjectStatusEnum[] status = ProjectStatusEnum.values();
         ProjectStatusEnum closed = status[0];
         //Assert
-        assertNotEquals(closed, ProjectStatusEnum.CLOSED);
+        assertNotEquals(ProjectStatusEnum.CLOSED, closed);
     }
 
 
@@ -113,7 +113,7 @@ public class ProjectStatusEnumTest {
         //Act
         ProjectStatusEnum projectStatusEnum = ProjectStatusEnum.valueOf("PLANNED");
         //Assert
-        assertEquals(projectStatusEnum, ProjectStatusEnum.PLANNED);
+        assertEquals(ProjectStatusEnum.PLANNED, projectStatusEnum);
     }
 
     @DisplayName("Test to valueOf - Inception")
@@ -122,7 +122,7 @@ public class ProjectStatusEnumTest {
         //Act
         ProjectStatusEnum projectStatusEnum = ProjectStatusEnum.valueOf("INCEPTION");
         //Assert
-        assertEquals(projectStatusEnum, ProjectStatusEnum.INCEPTION);
+        assertEquals(ProjectStatusEnum.INCEPTION, projectStatusEnum);
     }
 
     @DisplayName("Test to valueOf - Elaboration")
@@ -131,7 +131,7 @@ public class ProjectStatusEnumTest {
         //Act
         ProjectStatusEnum projectStatusEnum = ProjectStatusEnum.valueOf("ELABORATION");
         //Assert
-        assertEquals(projectStatusEnum, ProjectStatusEnum.ELABORATION);
+        assertEquals(ProjectStatusEnum.ELABORATION, projectStatusEnum);
     }
 
     @DisplayName("Test to valueOf - Construction")
@@ -140,7 +140,7 @@ public class ProjectStatusEnumTest {
         //Act
         ProjectStatusEnum projectStatusEnum = ProjectStatusEnum.valueOf("CONSTRUCTION");
         //Assert
-        assertEquals(projectStatusEnum, ProjectStatusEnum.CONSTRUCTION);
+        assertEquals(ProjectStatusEnum.CONSTRUCTION, projectStatusEnum);
     }
 
     @DisplayName("Test to valueOf - Transition")
@@ -149,7 +149,7 @@ public class ProjectStatusEnumTest {
         //Act
         ProjectStatusEnum projectStatusEnum = ProjectStatusEnum.valueOf("TRANSITION");
         //Assert
-        assertEquals(projectStatusEnum, ProjectStatusEnum.TRANSITION);
+        assertEquals(ProjectStatusEnum.TRANSITION, projectStatusEnum);
     }
 
 
@@ -159,7 +159,7 @@ public class ProjectStatusEnumTest {
         //Act
         ProjectStatusEnum projectStatusEnum = ProjectStatusEnum.valueOf("WARRANTY");
         //Assert
-        assertEquals(projectStatusEnum, ProjectStatusEnum.WARRANTY);
+        assertEquals(ProjectStatusEnum.WARRANTY, projectStatusEnum);
     }
 
 
@@ -169,7 +169,7 @@ public class ProjectStatusEnumTest {
         //Act
         ProjectStatusEnum projectStatusEnum = ProjectStatusEnum.valueOf("CLOSED");
         //Assert
-        assertEquals(projectStatusEnum, ProjectStatusEnum.CLOSED);
+        assertEquals(ProjectStatusEnum.CLOSED, projectStatusEnum);
     }
 
 }

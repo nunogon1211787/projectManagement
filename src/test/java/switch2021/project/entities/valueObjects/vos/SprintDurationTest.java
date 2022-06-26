@@ -2,10 +2,6 @@ package switch2021.project.entities.valueObjects.vos;
 
 import org.junit.jupiter.api.Test;
 import switch2021.project.entities.aggregates.Typology.Typology;
-import switch2021.project.entities.valueObjects.vos.Description;
-import switch2021.project.entities.valueObjects.vos.SprintDuration;
-import switch2021.project.entities.valueObjects.vos.TypologyID;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class SprintDurationTest {
@@ -115,11 +111,19 @@ class SprintDurationTest {
 
     @Test
     public void hashCodeTestFail() {
-        // Arrange
-        // Arrange
+        // Arrange + Act
         SprintDuration duration = new SprintDuration(15);
         SprintDuration duration2 = new SprintDuration(16);
         //Assert
         assertNotEquals(duration.hashCode(), duration2.hashCode());
+    }
+
+    @Test
+    public void sameValueAs_False() {
+        // Arrange + Act
+        SprintDuration duration = new SprintDuration(16);
+        SprintDuration duration2 = new SprintDuration(15);
+        //Assert
+        assertFalse(duration.sameValueAs(duration2));
     }
 }

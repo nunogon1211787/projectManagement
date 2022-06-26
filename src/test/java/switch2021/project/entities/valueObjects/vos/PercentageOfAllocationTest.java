@@ -66,7 +66,18 @@ public class PercentageOfAllocationTest {
     }
 
     @Test
-    public void equalsTrue() {
+    public void equalsTrue_0() {
+        //Arrange
+        double percentage = 0.3;
+        //Act
+        PercentageOfAllocation percOfAllo = new PercentageOfAllocation(percentage);
+        PercentageOfAllocation expected = new PercentageOfAllocation(percentage);
+        //Assert
+        assertEquals(expected, percOfAllo);
+    }
+
+    @Test
+    public void equalsTrue_1() {
         //Arrange
         double percentage = 0.3;
         //Act
@@ -78,14 +89,14 @@ public class PercentageOfAllocationTest {
 
 
     @Test
-    public void equalsTrue_1() {
+    public void equalsTrue_2() {
         //Arrange
         double percentage = 1;
         //Act
         PercentageOfAllocation percOfAllo = new PercentageOfAllocation(percentage);
         PercentageOfAllocation expected = new PercentageOfAllocation(1);
         //Assert
-        assertEquals(percOfAllo, expected);
+        assertTrue(percOfAllo.equals(expected));
     }
 
 

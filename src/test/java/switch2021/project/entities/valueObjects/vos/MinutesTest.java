@@ -128,15 +128,26 @@ public class MinutesTest {
     }
 
 
-    @DisplayName("Test Same Value As")
+    @DisplayName("Test Same Value As - True")
     @Test
-    public void sameValueAs() {
+    public void sameValueAs_1() {
         //Arrange
         Minutes minutes = new Minutes(1);
         Minutes minutes1 = new Minutes(1);
         //Assert
         assertTrue(minutes.sameValueAs(minutes1));
     }
+
+    @DisplayName("Test Same Value As - False")
+    @Test
+    public void sameValueAs_2() {
+        //Arrange
+        Minutes minutes = new Minutes(1);
+        Minutes minutes1 = new Minutes(11);
+        //Assert
+        assertFalse(minutes.sameValueAs(minutes1));
+    }
+
 
     @Test
     @DisplayName("Empty Constructor")

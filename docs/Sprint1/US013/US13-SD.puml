@@ -9,36 +9,24 @@ participant ": CreateUserProfileRouter" as System
 participant ": UserProfileController" as Ctrl
 participant ": CreateUserProfileService" as C1
 participant ": IUserProfileFactory" as C3
-'participant ":UserProfileDTO" as C2
-'participant ":IUserProfileIDFactory" as iFactory
-'participant "userProfileID:UserProfileID" as C4
-participant "newUserProfile: \nUserProfile" as newUserProfile
-participant ":IUserProfileRepo" as C5
+participant "userProfile: \nUserProfile" as newUserProfile
+participant ":IUserProfileRepository" as C5
 participant ":UserProfileMapper" as C6
 participant "outputDTO: \nUserProfileDTO" as C2.1
 
 
 [o-> System: POST/profiles (json)
-System -> Ctrl: createUserProfile(json)
+System -> Ctrl: createUserProfile(userProfileDTO)
 note right
 Change from json to dto hidden to simplify diagram
 end note
-Ctrl -> C1: createAndSaveUserProfile(dto)
+Ctrl -> C1: createAndSaveUserProfile(userProfileDTO)
 C1 -> C3: createUserProfile(dto)
 note over C3 : The changes of attributes are hidden to simplify the diagram
-'C3 -> C2 : name = getUserProfileName()
-'deactivate
-'C3 -> iFactory: create(name)
-'iFactory -> C4 **: create()
-'iFactory --> C3: userProfileID
-C3 -> newUserProfile **: create\n(userProfileID)
+C3 -> newUserProfile **: create\n(userProfileId)
 return newUserProfile
 C1 -> C5 : save (newUserProfile)
 ref over C5: [[US13SD_JPA.puml]]
-'C5 -> C5 : existsByDescription(userProfileName)
-'deactivate
-'C5 -> C5 : add(userProfileName)
-'deactivate
 return true
 C1 -> C6: toDTO(newUserProfile)
 C6 -> C2.1 **: create()

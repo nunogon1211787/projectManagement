@@ -3,9 +3,7 @@ package switch2021.project.entities.valueObjects.vos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.entities.aggregates.Typology.Typology;
-import switch2021.project.entities.valueObjects.vos.Description;
-import switch2021.project.entities.valueObjects.vos.Name;
-import switch2021.project.entities.valueObjects.vos.TypologyID;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class NameTest {
@@ -135,5 +133,25 @@ class NameTest {
         Typology function1 = new Typology(new TypologyID(new Description("Test")));
         //Act and Assert
         assertNotEquals(function.hashCode(), function1.hashCode());
+    }
+
+    @Test
+    @DisplayName("Same Value As - True")
+    public void sameValueAs_1() {
+        //Arrange
+        Name name = new Name("Test");
+        Name name1 = new Name("Test");
+        //Act and Assert
+        assertTrue(name.sameValueAs(name1));
+    }
+
+    @Test
+    @DisplayName("Same Value As - False")
+    public void sameValueAs_2() {
+        //Arrange
+        Name name = new Name("Test");
+        Name name1 = new Name("TestTest");
+        //Act and Assert
+        assertFalse(name.sameValueAs(name1));
     }
 }

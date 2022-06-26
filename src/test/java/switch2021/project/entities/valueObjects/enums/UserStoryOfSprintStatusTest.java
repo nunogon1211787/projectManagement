@@ -37,7 +37,7 @@ public class UserStoryOfSprintStatusTest {
         UserStoryOfSprintStatus[] status = UserStoryOfSprintStatus.values();
         UserStoryOfSprintStatus x = status[0];
         //Assert
-        assertEquals(x, UserStoryOfSprintStatus.Todo);
+        assertEquals(UserStoryOfSprintStatus.Todo, x);
     }
 
     @DisplayName("Test to get a specific values - In Progress")
@@ -47,7 +47,7 @@ public class UserStoryOfSprintStatusTest {
         UserStoryOfSprintStatus[] status = UserStoryOfSprintStatus.values();
         UserStoryOfSprintStatus x = status[1];
         //Assert
-        assertEquals(x, UserStoryOfSprintStatus.InProgress);
+        assertEquals(UserStoryOfSprintStatus.InProgress, x);
     }
 
     @DisplayName("Test to get a specific values - Done")
@@ -57,7 +57,7 @@ public class UserStoryOfSprintStatusTest {
         UserStoryOfSprintStatus[] status = UserStoryOfSprintStatus.values();
         UserStoryOfSprintStatus x = status[2];
         //Assert
-        assertEquals(x, UserStoryOfSprintStatus.Done);
+        assertEquals(UserStoryOfSprintStatus.Done, x);
     }
 
     @DisplayName("Test to get a specific values - Cancelled")
@@ -67,7 +67,7 @@ public class UserStoryOfSprintStatusTest {
         UserStoryOfSprintStatus[] status = UserStoryOfSprintStatus.values();
         UserStoryOfSprintStatus x = status[3];
         //Assert
-        assertEquals(x, UserStoryOfSprintStatus.Cancelled);
+        assertEquals(UserStoryOfSprintStatus.Cancelled, x);
     }
 
     @DisplayName("Test to get a specific values - Fail")
@@ -77,7 +77,7 @@ public class UserStoryOfSprintStatusTest {
         UserStoryOfSprintStatus[] status = UserStoryOfSprintStatus.values();
         UserStoryOfSprintStatus x = status[1];
         //Assert
-        assertNotEquals(x, UserStoryOfSprintStatus.Todo);
+        assertNotEquals(UserStoryOfSprintStatus.Todo, x);
     }
 
     @DisplayName("Test with ValueOf - Todo")
@@ -86,7 +86,7 @@ public class UserStoryOfSprintStatusTest {
         //Act
         UserStoryOfSprintStatus x = UserStoryOfSprintStatus.valueOf("Todo");
         //Assert
-        assertEquals(x, UserStoryOfSprintStatus.Todo);
+        assertEquals(UserStoryOfSprintStatus.Todo, x);
     }
 
     @DisplayName("Test with ValueOf - In Progress")
@@ -95,7 +95,7 @@ public class UserStoryOfSprintStatusTest {
         //Act
         UserStoryOfSprintStatus x = UserStoryOfSprintStatus.valueOf("InProgress");
         //Assert
-        assertEquals(x, UserStoryOfSprintStatus.InProgress);
+        assertEquals(UserStoryOfSprintStatus.InProgress, x);
     }
 
     @DisplayName("Test with ValueOf - Done")
@@ -104,7 +104,7 @@ public class UserStoryOfSprintStatusTest {
         //Act
         UserStoryOfSprintStatus x = UserStoryOfSprintStatus.valueOf("Done");
         //Assert
-        assertEquals(x, UserStoryOfSprintStatus.Done);
+        assertEquals(UserStoryOfSprintStatus.Done, x);
     }
 
     @DisplayName("Test with ValueOf - Cancelled")
@@ -113,7 +113,7 @@ public class UserStoryOfSprintStatusTest {
         //Act
         UserStoryOfSprintStatus x = UserStoryOfSprintStatus.valueOf("Cancelled");
         //Assert
-        assertEquals(x, UserStoryOfSprintStatus.Cancelled);
+        assertEquals(UserStoryOfSprintStatus.Cancelled, x);
     }
 
     @DisplayName("Test with ValueOf - Fail")
@@ -122,6 +122,6 @@ public class UserStoryOfSprintStatusTest {
         //Act
         UserStoryOfSprintStatus x = UserStoryOfSprintStatus.valueOf("Cancelled");
         //Assert
-        assertNotEquals(x, UserStoryOfSprintStatus.Todo);
+        assertNotEquals(UserStoryOfSprintStatus.Todo, x);
     }
 }

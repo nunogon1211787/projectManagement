@@ -12,10 +12,10 @@ import switch2021.project.entities.factories.factoryInterfaces.IUserProfileFacto
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserProfileIDFactory;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @Service
@@ -51,18 +51,19 @@ public class UserProfileService {
     /**
      * To get all profiles
      */
-    public CollectionModel<UserProfileDTO> getAllProfiles() {
+    public Map<String, CollectionModel<UserProfileDTO>> getAllProfiles() {
 
-        List<UserProfile> userProfileList = iUserProfileRepo.findAll();
-        List<UserProfile> userProfileWebList = iUserProfileWebRepository.findAll();
+        List<UserProfile> userProfiles = iUserProfileRepo.findAll();
+        List<UserProfile> userProfileWeb = iUserProfileWebRepository.findAll();
 
-        CollectionModel<UserProfileDTO> outputUserProfileList_DTO = userProfileMapper.toCollectionDTO(userProfileWebList);
-        CollectionModel<UserProfileDTO> outputUserProfileDTO_List = userProfileMapper.toCollectionDTO(userProfileList);
+        CollectionModel<UserProfileDTO> outputUserProfileList_DTO = userProfileMapper.toCollectionDTO(userProfileWeb, true);
+        CollectionModel<UserProfileDTO> outputUserProfileDTO_List = userProfileMapper.toCollectionDTO(userProfiles, false);
 
-        List<UserProfileDTO> newList = Stream.concat(outputUserProfileList_DTO.getContent().stream(), outputUserProfileDTO_List.getContent().stream())
-                .collect(Collectors.toList());
+        Map<String, CollectionModel<UserProfileDTO>> mapProfiles = new HashMap<>();
+        mapProfiles.put("internalUserProfiles", outputUserProfileDTO_List);
+        mapProfiles.put("externalUserProfiles", outputUserProfileList_DTO);
 
-        return CollectionModel.of(newList);
+        return mapProfiles;
 
     }
 

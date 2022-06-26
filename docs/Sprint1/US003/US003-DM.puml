@@ -10,7 +10,7 @@ skinparam classAttributeIconSize 0
 
 title Domain Model
 
-class Profile #lightpink{
+class UserProfile #lightpink{
 -userProfileID
 }
 
@@ -22,6 +22,6 @@ class SystemUser #lightyellow{
 -isActive
 }
 
-Profile "*" <-- "1" SystemUser
+UserProfile "*" <-- "1" SystemUser
 
 @enduml

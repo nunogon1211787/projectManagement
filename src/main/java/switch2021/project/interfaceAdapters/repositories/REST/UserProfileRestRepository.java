@@ -17,10 +17,13 @@ import java.util.List;
 @Repository
 public class UserProfileRestRepository {
 
+    public static final String ENDPOINT = "http://localhost:8090";
+    public static final String COLLECTION = "/profiles/";
+
     public List<UserProfileRestDTO> findAll() {
 
         WebClient webClient = WebClient.builder()
-                .baseUrl("http://localhost:8090")
+                .baseUrl(ENDPOINT)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .defaultUriVariables(Collections.singletonMap("url", "http://localhost:8090"))
                 .clientConnector( new ReactorClientHttpConnector( HttpClient.create(ConnectionProvider.newConnection())))
@@ -31,7 +34,7 @@ public class UserProfileRestRepository {
         try {
             userProfileRestDTO = webClient
                     .get()
-                    .uri("/profiles/")
+                    .uri(COLLECTION)
                     .retrieve()
 
                     .onStatus(HttpStatus::is4xxClientError, error -> { return Mono.empty(); })
@@ -40,7 +43,9 @@ public class UserProfileRestRepository {
 
                     .onErrorReturn( null )
 
-                    .doOnError(throwable -> { System.out.println( throwable.getMessage() );} )
+                    .doOnError(throwable -> {
+                        System.out.println( throwable.getMessage() );
+                    })
                     .block();
         }
         catch( Exception e) {

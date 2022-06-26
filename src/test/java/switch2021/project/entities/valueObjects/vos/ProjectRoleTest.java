@@ -2,7 +2,6 @@ package switch2021.project.entities.valueObjects.vos;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import switch2021.project.entities.valueObjects.vos.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -62,6 +61,16 @@ public class ProjectRoleTest {
         ProjectRole projectRole1 = new ProjectRole("Project Role");
         //Assert
         assertEquals(projectRole, projectRole1);
+    }
+
+    @DisplayName("Test override conditions for coverage purposes")
+    @Test
+    public void overrideTestEquals_True() {
+        //Arrange
+        ProjectRole projectRole = new ProjectRole("Project Role");
+        ProjectRole projectRole1 = new ProjectRole("Project Role");
+        //Assert
+        assertTrue(projectRole.equals(projectRole1));
     }
 
 
