@@ -49,7 +49,7 @@ public class TaskService {
     /**
      * Create and Save Task (US031)
      */
-    public OutputTaskDTO createAndSaveTask(TaskDTO inputDTO) throws IllegalArgumentException {
+    public OutputTaskDTO createAndSaveTask(TaskDTO inputDTO) {
         Task newTask = taskFactory.createTask(inputDTO);
 
         if (taskRepo.existsById(newTask.getTaskID().toString())) {
@@ -73,11 +73,15 @@ public class TaskService {
     @Transactional(propagation = Propagation.REQUIRED)
     public OutputTaskDTO getTaskById(String taskID) {
         Optional<Task> optionalTask = taskRepo.findById(taskID);
+        OutputTaskDTO outputTaskDTO = null;
 
+        if (optionalTask.isPresent()) {
+            outputTaskDTO = taskMapper.toDto(optionalTask.get());
+        }
         if (optionalTask.isEmpty()) {
             throw new IllegalArgumentException("Task does not exist");
         }
-        return taskMapper.toDto(optionalTask.get());
+        return outputTaskDTO;
     }
 
     public CollectionModel<OutputTaskDTO> getAllTasks() {
@@ -86,7 +90,7 @@ public class TaskService {
         return CollectionModel.of(outputTaskDTOs);
     }
 
-    public CollectionModel<OutputTaskDTO> getAllTasksByTaskContainerID(String taskContainerID) throws IllegalArgumentException {
+    public CollectionModel<OutputTaskDTO> getAllTasksByTaskContainerID(String taskContainerID) {
         checkTaskContainerID(taskContainerID);
 
         List<Task> taskContainerIDTasks = taskRepo.findAllByTaskContainerID(taskContainerID);
@@ -105,11 +109,15 @@ public class TaskService {
 
     private Task getTask(String taskID) {
         Optional<Task> optionalTask = taskRepo.findById(taskID);
+        Task task = null;
 
+        if (optionalTask.isPresent()) {
+            task = optionalTask.get();
+        }
         if (optionalTask.isEmpty()) {
             throw new IllegalArgumentException("Task does not exist");
         }
-        return optionalTask.get();
+        return task;
     }
 
     private void validateSprint(SprintID sprintID) {
