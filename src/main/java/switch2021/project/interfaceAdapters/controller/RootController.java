@@ -9,7 +9,7 @@ import switch2021.project.dtoModel.dto.ErrorMessage;
 import switch2021.project.dtoModel.dto.LoginDto;
 import switch2021.project.dtoModel.dto.OutputLoginDTO;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://localhost:8443")
 @RestController
 @RequestMapping("/")
 public class RootController {

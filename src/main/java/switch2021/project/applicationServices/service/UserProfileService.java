@@ -73,13 +73,19 @@ public class UserProfileService {
 
     public UserProfileDTO findUserProfileRequested(String id) throws Exception {
         UserProfileID profileID = factoryId.createUserProfileID(id);
-       Optional<UserProfile> userProfile = iUserProfileRepo.findByUserProfileID(profileID);
+        Optional<UserProfile> userProfile = iUserProfileRepo.findByUserProfileID(profileID);
+
+       UserProfileDTO dto = null;
+
+        if(userProfile.isPresent()){
+            dto = userProfileMapper.toDTO(userProfile.get());
+        }
 
         if(userProfile.isEmpty()){
             throw new Exception("We can not find the User Profile requested");
         }
 
-        return userProfileMapper.toDTO(userProfile.get());
+        return dto;
 
     }
 

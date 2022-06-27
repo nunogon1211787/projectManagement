@@ -28,7 +28,7 @@ public interface ISprintRepo {
 
     /** Save Sprint. */
 
-    Optional<Sprint> save(Sprint newSprint);
+    Sprint save(Sprint newSprint) throws Exception;
 
     /** Delete a Sprint. */
 

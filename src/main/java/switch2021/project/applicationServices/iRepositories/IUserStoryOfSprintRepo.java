@@ -13,7 +13,7 @@ public interface IUserStoryOfSprintRepo {
 
     List<UserStoryOfSprint> findAllUserStoriesBySprintID(SprintID sprintID);
 
-    Optional<UserStoryOfSprint> save(UserStoryOfSprint userStoryOfSprint);
+    UserStoryOfSprint save(UserStoryOfSprint userStoryOfSprint);
 
     boolean deleteUserStoryOfSprint(UserStoryID userStoryID);
 
