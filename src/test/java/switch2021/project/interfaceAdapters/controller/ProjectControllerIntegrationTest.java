@@ -37,6 +37,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestMethodOrder(MethodOrderer.MethodName.class)  /*this makes the tests on this class run by alphabetical order */
 class ProjectControllerIntegrationTest {
 
+    public static final String BASE_URL = "https://localhost:8443";
+    
     @Autowired
     ProjectController ctrl;
 
@@ -73,7 +75,7 @@ class ProjectControllerIntegrationTest {
         projectDTO.customer = "customer";
 
 //            MvcResult resulttypo = mockMvc
-//                    .perform(MockMvcRequestBuilders.post("/typologies")
+//                    .perform(MockMvcRequestBuilders.post(BASE_URL + "/typologies")
 //                            .contentType("application/json")
 //                            .content(objectMapper.writeValueAsString(typologyDTO))
 //                            .accept(MediaType.APPLICATION_JSON))
@@ -81,7 +83,7 @@ class ProjectControllerIntegrationTest {
 //                    .andReturn();
 
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.post("/projects")
+                .perform(MockMvcRequestBuilders.post(BASE_URL + "/projects")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(projectDTO))
                         .accept(MediaType.APPLICATION_JSON))
@@ -104,7 +106,7 @@ class ProjectControllerIntegrationTest {
         //GET projects/{id}
 
         MvcResult result2 = mockMvc
-                .perform(MockMvcRequestBuilders.get("/projects/" + "Project_2022_4")
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/projects/" + "Project_2022_4")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -123,7 +125,7 @@ class ProjectControllerIntegrationTest {
         //GET projects/{id}
 
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get("/projects/" + generatedCode)
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/projects/" + generatedCode)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andReturn();
@@ -255,7 +257,7 @@ class ProjectControllerIntegrationTest {
     void mockMvcTestFindProject() {
         //Arrange
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get("/projects/project_2022_4")
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/projects/project_2022_4")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andReturn();
@@ -271,7 +273,7 @@ class ProjectControllerIntegrationTest {
     void mockMvcTestShowAllProjects() {
         //Arrange
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get("/projects")
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/projects")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -298,7 +300,7 @@ class ProjectControllerIntegrationTest {
         projectDTO.customer = "customer";
 
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.post("/projects")
+                .perform(MockMvcRequestBuilders.post(BASE_URL + "/projects")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(projectDTO))
                         .accept(MediaType.APPLICATION_JSON))

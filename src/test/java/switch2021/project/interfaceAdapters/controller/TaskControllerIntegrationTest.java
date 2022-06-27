@@ -23,6 +23,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TaskControllerIntegrationTest {
+    public static final String BASE_URL = "https://localhost:8443";
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -51,7 +53,7 @@ public class TaskControllerIntegrationTest {
                 taskDescription, taskEffortEstimate, taskType);
         //Act
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.post("/tasks")
+                .perform(MockMvcRequestBuilders.post(BASE_URL + "/tasks")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(taskDTO))
                         .accept(MediaType.APPLICATION_JSON))
@@ -78,7 +80,7 @@ public class TaskControllerIntegrationTest {
         TaskDTO taskDTO = new TaskDTO(projectId, sprintName, usTitle, systemUserID, resourceStartDate, taskTitle,
                 taskDescription, taskEffortEstimate, taskType);
         //Act + Assert
-        mockMvc.perform(MockMvcRequestBuilders.post("/tasks")
+        mockMvc.perform(MockMvcRequestBuilders.post(BASE_URL + "/tasks")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(taskDTO))
                         .accept(MediaType.APPLICATION_JSON))
@@ -95,7 +97,7 @@ public class TaskControllerIntegrationTest {
         String id = projectId + "&" + sprintName + "&" + taskTitle;
         //Act
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get("/tasks/" + id)
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/tasks/" + id)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())//Assert
                 .andReturn();
@@ -112,7 +114,7 @@ public class TaskControllerIntegrationTest {
         String taskTitle = "daily";
         String id = projectId + "&" + sprintName + "&" + taskTitle;
         //Act + Assert
-        mockMvc.perform(MockMvcRequestBuilders.get("/tasks/" + id)
+        mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL + "/tasks/" + id)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())//Assert
                 .andReturn();
@@ -122,7 +124,7 @@ public class TaskControllerIntegrationTest {
     void shouldGetAllTask() throws Exception {
         //Act
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get("/tasks/")
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/tasks/")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())//Assert
                 .andReturn();
@@ -140,7 +142,7 @@ public class TaskControllerIntegrationTest {
         String id = projectId + "&" + sprintName;
         //Act
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get("/tasks/taskContainer/" + id)
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/tasks/taskContainer/" + id)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())//Assert
                 .andReturn();
@@ -159,7 +161,7 @@ public class TaskControllerIntegrationTest {
         String id = projectId + "&" + sprintName;
         //Act
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get("/tasks/taskContainer/" + id)
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/tasks/taskContainer/" + id)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())//Assert
                 .andReturn();
@@ -175,7 +177,7 @@ public class TaskControllerIntegrationTest {
         String sprintName = "sprint66"; //sprint doesn't exist
         String id = projectId + "&" + sprintName;
         //Act + Assert
-        mockMvc.perform(MockMvcRequestBuilders.get("/tasks/taskContainer/" + id)
+        mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL + "/tasks/taskContainer/" + id)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())//Assert
                 .andReturn();
@@ -189,7 +191,7 @@ public class TaskControllerIntegrationTest {
         String id = projectId + "&" + userStoryTitle;
         //Act
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get("/tasks/taskContainer/" + id)
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/tasks/taskContainer/" + id)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())//Assert
                 .andReturn();
@@ -209,7 +211,7 @@ public class TaskControllerIntegrationTest {
         String id = projectId + "&" + userStoryTitle;
         //Act
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get("/tasks/taskContainer/" + id)
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/tasks/taskContainer/" + id)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())//Assert
                 .andReturn();
@@ -225,7 +227,7 @@ public class TaskControllerIntegrationTest {
         String userStoryTitle = "as want US066"; //UserStory doesn't exist
         String id = projectId + "&" + userStoryTitle;
         //Act + Assert
-        mockMvc.perform(MockMvcRequestBuilders.get("/tasks/taskContainer/" + id)
+        mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL + "/tasks/taskContainer/" + id)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())//Assert
                 .andReturn();
@@ -247,7 +249,7 @@ public class TaskControllerIntegrationTest {
         String id = projectId + "&" + sprintName + "&" + taskTitle;
         //Act
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.patch("/tasks/" + id + "/registerEffort")
+                .perform(MockMvcRequestBuilders.patch(BASE_URL + "/tasks/" + id + "/registerEffort")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(taskEffortDTO))
                         .accept(MediaType.APPLICATION_JSON))
@@ -273,7 +275,7 @@ public class TaskControllerIntegrationTest {
         String taskTitle = "daily";
         String id = projectId + "&" + sprintName + "&" + taskTitle;
         //Act + Assert
-        mockMvc.perform(MockMvcRequestBuilders.patch("/tasks/" + id + "/registerEffort")
+        mockMvc.perform(MockMvcRequestBuilders.patch(BASE_URL + "/tasks/" + id + "/registerEffort")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(taskEffortDTO))
                         .accept(MediaType.APPLICATION_JSON))
@@ -296,7 +298,7 @@ public class TaskControllerIntegrationTest {
         String taskTitle = "daily";
         String id = projectId + "&" + sprintName + "&" + taskTitle;
         //Act + Assert
-        mockMvc.perform(MockMvcRequestBuilders.patch("/tasks/" + id + "/registerEffort")
+        mockMvc.perform(MockMvcRequestBuilders.patch(BASE_URL + "/tasks/" + id + "/registerEffort")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(taskEffortDTO))
                         .accept(MediaType.APPLICATION_JSON))
