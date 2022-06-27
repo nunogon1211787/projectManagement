@@ -181,7 +181,6 @@ public class User implements Entity<User> {
      * Activation Status Methods
      */
     public boolean activateStatus() {
-        //Can't be simplified because the status is a business rule
         if (!this.isActive) {
             isActive = true;
         }
@@ -189,7 +188,6 @@ public class User implements Entity<User> {
     }
 
     public boolean inactivateStatus() {
-        //Can't be simplified because the status is a business rule
         if (this.isActive) {
             isActive = false;
             return true;

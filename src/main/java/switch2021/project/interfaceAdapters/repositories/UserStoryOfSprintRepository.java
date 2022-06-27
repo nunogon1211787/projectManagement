@@ -36,11 +36,6 @@ public class UserStoryOfSprintRepository implements IUserStoryOfSprintRepo {
     }
 
     @Override
-    public Optional<UserStoryOfSprint> findByUserStoryByUsId(UserStoryID userStoryID) {
-        return Optional.empty();
-    }
-
-    @Override
     public List<UserStoryOfSprint> findAllUserStoriesBySprintID(SprintID sprintID) {
         List<UserStoryOfSprintJpa> userStoryOfSprintJpaList = userStoryOfSprintJpaRepository.findAll();
         List<UserStoryOfSprint> userStoryOfSprintList = new ArrayList<>();

@@ -20,7 +20,7 @@ public class Sprint implements Entity<Sprint> {
      * Attributes of Sprint
      **/
     private SprintID sprintID;
-    private ScrumBoard scrumBoard;
+    private List<UserStoryOfSprint> scrumBoard;
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -54,6 +54,7 @@ public class Sprint implements Entity<Sprint> {
     /**
      * Check if this Sprint is the current Sprint
      */
+
     public boolean isCurrentSprint() {
         if (this.endDate == null) {
             throw new NullPointerException();
@@ -62,33 +63,6 @@ public class Sprint implements Entity<Sprint> {
                 && (this.endDate.isAfter(startDate) || this.endDate.equals(startDate)));
     }
 
-    /**
-     * Methods to call methods from scrumBoard
-     */
-
-    public List<UserStoryOfSprint> getScrumBoardUserStoriesOfSprint() {
-        Optional<ScrumBoard> scrumBoard = Optional.ofNullable(this.scrumBoard);
-
-        List<UserStoryOfSprint> userStoryOfSprintList = new ArrayList<>();
-
-        if (scrumBoard.isPresent()) {
-            userStoryOfSprintList = scrumBoard.get().getUserStoriesOfSprint();
-        }
-        return userStoryOfSprintList;
-    }
-
-
-    public boolean saveUsInScrumBoard(UserStoryOfSprint userStoryOfSprint) {
-        Optional<ScrumBoard> optional = Optional.ofNullable(this.scrumBoard);
-
-        if (optional.isPresent()) {
-            scrumBoard.getUserStoriesOfSprint().add(userStoryOfSprint);
-        } else
-            scrumBoard = new ScrumBoard(new ArrayList<>());
-            scrumBoard.getUserStoriesOfSprint().add(userStoryOfSprint);
-
-        return true;
-    }
 
     @Override
     public boolean sameIdentityAs(Sprint other) {
