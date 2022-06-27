@@ -25,13 +25,13 @@ import static org.mockito.Mockito.when;
 public class ProjectRepositoryTest {
 
     @MockBean
-    ProjectJpaRepository projectJpaRepository;
+    private ProjectJpaRepository projectJpaRepository;
 
     @MockBean
-    ProjectJpaAssembler projectJpaAssembler;
+    private ProjectJpaAssembler projectJpaAssembler;
 
     @InjectMocks
-    ProjectRepository projRepo;
+    private ProjectRepository projRepo;
 
     @BeforeEach
     public void setUp() throws Exception {
