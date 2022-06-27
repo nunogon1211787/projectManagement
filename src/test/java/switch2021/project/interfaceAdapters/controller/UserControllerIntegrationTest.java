@@ -17,10 +17,13 @@ import switch2021.project.dtoModel.dto.NewUserInfoDTO;
 import switch2021.project.dtoModel.dto.RequestDTO;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 public class UserControllerIntegrationTest {
+
+    public static final String BASE_URL = "https://localhost:8443";
 
     @Autowired
     UserService userService;
@@ -46,7 +49,7 @@ public class UserControllerIntegrationTest {
         String photo = "ana.png";
         NewUserInfoDTO inputDTO = new NewUserInfoDTO(userName, email, function, password, password, photo);
         //Act
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/users")
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post(BASE_URL+"/users")
                         .contentType("application/json")
                         .content(mapper.writeValueAsString(inputDTO))
                         .accept(MediaType.APPLICATION_JSON))
@@ -87,7 +90,7 @@ public class UserControllerIntegrationTest {
     void inactivateUser() {
     }
 
-   /* @Test
+   @Test
     void requestUserProfile() throws Exception {
         //Arrange
         RequestDTO dto = new RequestDTO("Director");
@@ -99,7 +102,7 @@ public class UserControllerIntegrationTest {
         NewUserInfoDTO inputDTO = new NewUserInfoDTO(userName, email, function, password, password, photo);
         userService.createAndSaveUser(inputDTO);
         //Act
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.patch("/users/email123@beaver.com/requests")
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.patch(BASE_URL + "/users/email123@beaver.com/requests")
                         .contentType("application/json")
                         .content(mapper.writeValueAsString(dto))
                         .accept(MediaType.APPLICATION_JSON))
@@ -108,8 +111,6 @@ public class UserControllerIntegrationTest {
         assertEquals(200, result.getResponse().getStatus());
     }
 
-
-    */
 
     @Test
     void deleteUser() {
