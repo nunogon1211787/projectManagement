@@ -38,15 +38,14 @@ public class SprintRepository implements ISprintRepo {
     }
 
 
-    public Optional<Sprint> save(Sprint newSprint) {
+    public Sprint save(Sprint newSprint) throws Exception{
         SprintJpa sprintJpa = assembler.toData(newSprint);
-        Optional<Sprint> sprint = Optional.empty();
 
         if (!sprintJpaRepository.existsById(sprintJpa.getSprintId())) {
             SprintJpa sprintJpaSaved = sprintJpaRepository.save(sprintJpa);
-            sprint = Optional.of(assembler.toDomain(sprintJpaSaved));
+            return assembler.toDomain(sprintJpaSaved);
         }
-        return sprint;
+        throw  new Exception("Sprint already exists");
     }
 
     /**
