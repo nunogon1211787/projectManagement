@@ -32,7 +32,7 @@ public class ProjectMapper {
         String budget = Double.toString(newProject.getBudget().getBudgetVO());
         String status = newProject.getProjectStatus().name();
         String startDate = newProject.getStartDate().toString();
-        String sprintDuration = Integer.toString(newProject.getSprintDuration().getSprintDurationDays());
+        String sprintDuration = Long.toString(newProject.getSprintDuration().getSprintDurationDays());
 
         OutputProjectDTO projDto = new OutputProjectDTO(code, projectName, description, businessSector, startDate,
                 numberOfSprints, budget, status, sprintDuration);

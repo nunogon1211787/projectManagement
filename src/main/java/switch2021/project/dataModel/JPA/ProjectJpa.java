@@ -5,6 +5,7 @@ import switch2021.project.entities.valueObjects.vos.ProjectID;
 
 import javax.persistence.*;
 
+@EqualsAndHashCode
 @Getter
 @Setter
 @ToString
@@ -22,7 +23,7 @@ public class ProjectJpa {
     private String businessSector;
     private String startDate;
     private int numberOfSprints;
-    private int sprintDuration;
+    private long sprintDuration;
     private double budget;
     private String endDate;
     private String typology;

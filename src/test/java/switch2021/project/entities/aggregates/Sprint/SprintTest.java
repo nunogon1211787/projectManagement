@@ -5,7 +5,12 @@ import org.junit.jupiter.api.Test;
 import switch2021.project.entities.valueObjects.vos.Description;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.SprintID;
+import switch2021.project.entities.valueObjects.vos.UserStoryOfSprint;
+
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -91,15 +96,6 @@ public class SprintTest {
         });
     }
 
-//    @Test
-//    @DisplayName("Verification test of hasSprintID method")
-//    public void hasSprintIDTest() {
-//        SprintID sprintID = new SprintID("Project_2022_1_Sprint 1");
-//        Sprint sprint = new Sprint(sprintID);
-//        sprint.setSprintID(sprintID);
-//        assertTrue(sprint.hasSprintID("Project_2022_1_Sprint 1"));
-//    }
-
     @Test
     @DisplayName("Verification test of hasSprintID method")
     public void hasSprintIDTest_Fail() {
@@ -122,7 +118,7 @@ public class SprintTest {
         Sprint sprint3 = new Sprint(sprintID2);
         //Assert
         assertEquals(sprint.hashCode(), sprint2.hashCode());
-        assertTrue(sprint.equals(sprint));
+        assertEquals(sprint, sprint);
         assertNotEquals(sprint3.hashCode(), sprint2.hashCode());
         assertNotEquals(sprint3, sprint2);
     }
@@ -166,5 +162,6 @@ public class SprintTest {
         //Assert
         assertFalse(sprint1.sameIdentityAs(sprint2));
     }
+
 
 }

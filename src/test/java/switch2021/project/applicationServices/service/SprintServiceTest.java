@@ -1,71 +1,75 @@
 package switch2021.project.applicationServices.service;
 
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import switch2021.project.applicationServices.iRepositories.IProjectRepo;
+import switch2021.project.applicationServices.iRepositories.ISprintRepo;
+import switch2021.project.applicationServices.iRepositories.IUserStoryOfSprintRepo;
+import switch2021.project.applicationServices.iRepositories.IUserStoryRepo;
+import switch2021.project.dtoModel.dto.OutputSprintDTO;
+import switch2021.project.dtoModel.mapper.SprintMapper;
+import switch2021.project.dtoModel.mapper.UserStoryOfSprintMapper;
+import switch2021.project.entities.aggregates.Project.Project;
+import switch2021.project.entities.aggregates.Sprint.Sprint;
+import switch2021.project.entities.factories.factoryInterfaces.ISprintFactory;
+import switch2021.project.entities.valueObjects.vos.SprintDuration;
 
-@ExtendWith(SpringExtension.class)
+import java.util.Optional;
+
+@SpringBootTest
+@AutoConfigureMockMvc
 public class SprintServiceTest {
-/*
+
     @InjectMocks
-    SprintService createSprintService;
+    SprintService sprintService;
     @Mock
-    ISprintRepo iSprintRepo;
+    private ISprintRepo sprintRepo;
     @Mock
-    SprintMapper sprintMapper;
+    private SprintMapper sprintMapper;
     @Mock
-    ISprintFactory iSprintFactory;
+    private ISprintFactory sprintFactory;
     @Mock
-    Sprint sprint;
+    private IUserStoryRepo usRepo;
     @Mock
-    NewSprintDTO newSprintDTO;
+    private IProjectRepo projRepo;
     @Mock
-    OutputSprintDTO outPutSprintDTO;
+    private IUserStoryOfSprintRepo userStoryOfSprintRepo;
+    @Mock
+    private UserStoryOfSprintMapper userStoryOfSprintMapper;
+/*    @Mock
+    private Sprint sprint;
+    @Mock
+    private Optional<Sprint> savedSprint;
+    @Mock
+    private Optional<Project> savedProject;
+    @Mock
+    private OutputSprintDTO outputSprintDTO;
+    @Mock
+    private Project project;
+    @Mock
+    private SprintDuration sprintDurationClass;*/
 
 
+/*    @SneakyThrows
     @Test
-    @DisplayName("Test to create and save sprint - get SprintName")
-    public void createAndSaveSprint_SprintName() {
+    void createAndSaveSprint() {
+        NewSprintDTO newSprint = mock(NewSprintDTO.class);
+        String string = "Project_2022_1_1";
+        String date = "2022-01-01";
 
-        //Arrange
-        when(iSprintFactory.createSprint(newSprintDTO)).thenReturn(sprint);
-        when(iSprintRepo.save(sprint)).thenReturn(true);
-        when(sprintMapper.toDTO(sprint)).thenReturn(outPutSprintDTO);
-        //Act
-        OutputSprintDTO outPut = createSprintService.createAndSaveSprint(newSprintDTO);
-        //Assert
-        assertEquals(outPut.name,
-                createSprintService.createAndSaveSprint(newSprintDTO).name);
-    }
+        when(sprintFactory.createSprint(newSprint)).thenReturn(sprint);
+        when(sprintService.validateSprintStartDate(string, date)).thenCallRealMethod();
 
-    @Test
-    @DisplayName("Test to create and save sprint - get ProjectID")
-    public void createAndSaveSprint_ProjectID() {
+        when(sprintRepo.save(sprint)).thenReturn(savedSprint);
+        when(savedSprint.get()).thenReturn(sprint);
+        when(sprintMapper.toDTO(savedSprint.get())).thenReturn(outputSprintDTO);
 
-        //Arrange
-        when(iSprintFactory.createSprint(newSprintDTO)).thenReturn(sprint);
-        when(iSprintRepo.save(sprint)).thenReturn(true);
-        when(sprintMapper.toDTO(sprint)).thenReturn(outPutSprintDTO);
-        //Act
-        OutputSprintDTO outPut = createSprintService.createAndSaveSprint(newSprintDTO);
-        //Assert
-        assertEquals(outPut.projectID,
-                createSprintService.createAndSaveSprint(newSprintDTO).projectID);
-    }
+        OutputSprintDTO result = sprintService.createAndSaveSprint(newSprint);
 
-    @Test
-    @DisplayName("Test to create a repeated sprint")
-    public void createAndSaveRepeatedSprint() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-            //Arrange
-            when(iSprintFactory.createSprint(newSprintDTO)).thenReturn(sprint);
-            when(iSprintRepo.save(sprint)).thenReturn(false);
-            when(sprintMapper.toDTO(sprint)).thenReturn(outPutSprintDTO);
-            //Act
-            createSprintService.createAndSaveSprint(newSprintDTO);
-        });
-    }
+        assertEquals(outputSprintDTO, result);
+    }*/
 
- */
 }
 
