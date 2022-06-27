@@ -17,11 +17,8 @@ import switch2021.project.dtoModel.dto.PartialProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.Budget;
-import switch2021.project.entities.valueObjects.vos.ProjectID;
-import switch2021.project.entities.valueObjects.vos.UserID;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.*;
