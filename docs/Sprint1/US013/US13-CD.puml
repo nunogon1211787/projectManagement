@@ -137,6 +137,7 @@ uRepo ...> assemblerjpa
 uRepo ...> UPjpa
 iUserProfileFactory..>dto
 mapper .right..> dto
+uRepo ..>jpa
 
 
 @enduml
