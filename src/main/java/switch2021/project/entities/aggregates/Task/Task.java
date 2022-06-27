@@ -56,7 +56,7 @@ public class Task implements Entity<Task> {
         return Objects.equals(this.responsible, resp);
     }
 
-    public void toAddEffort(TaskEffort taskEffort) throws IllegalArgumentException {
+    public void toAddEffort(TaskEffort taskEffort) {
         if (this.registeredEfforts.isEmpty()) {
             this.status = TaskStatus.RUNNING;
             this.startDate = taskEffort.getEffortDate().getEffortDate();

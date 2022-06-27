@@ -12,7 +12,6 @@ import javax.persistence.Embedded;
 import java.util.Objects;
 
 @Getter
-@Setter
 @Embeddable
 @NoArgsConstructor
 public class UserStoryID implements ValueObject<UserStoryID>, TaskContainerID {

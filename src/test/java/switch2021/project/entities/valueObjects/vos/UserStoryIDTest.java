@@ -3,7 +3,6 @@ package switch2021.project.entities.valueObjects.vos;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.entities.aggregates.Typology.Typology;
-import switch2021.project.entities.valueObjects.vos.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -26,20 +25,22 @@ public class UserStoryIDTest {
         assertEquals(expected, userStoryId.toString());
     }
 
-//    @Test
-//    @DisplayName("Validate that ID is correct")
-//    public void usIDSuccessWithString() {
-//        //Arrange
-//        ProjectID projectCode = mock(ProjectID.class);
-//        when(projectCode.getCode()).thenReturn("Project_2022_1");
-//        UsTitle usTitle = mock(UsTitle.class);
-//        when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
-//        //Act
-//        UserStoryID userStoryId = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
-//        UserStoryID expected = new UserStoryID(projectCode, usTitle);
-//        //Assert
-//        assertEquals(expected, userStoryId);
-//    }
+    @Test
+    @DisplayName("Validate that ID is correct")
+    public void usIDSuccessWithString() {
+        //Arrange
+        ProjectID projectCode = mock(ProjectID.class);
+        when(projectCode.getCode()).thenReturn("1");
+        UsTitle usTitle = mock(UsTitle.class);
+        when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
+        //Act
+        UserStoryID userStoryId = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
+        String expectedProject = "1";
+        String expectedTitle = "As a PO, i want to test this string";
+        //Assert
+        assertEquals(expectedProject, userStoryId.getProjectID().getCode());
+        assertEquals(expectedTitle, userStoryId.getUsTitle().getTitleUs());
+    }
 
     @Test
     @DisplayName("Validate that ID is correct- not empty")
@@ -52,7 +53,8 @@ public class UserStoryIDTest {
         //Act
         UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
         boolean expected = userStoryId.toString().isEmpty();
-        boolean expected2 = userStoryId.toString().equalsIgnoreCase("Project_2022_1&As a PO, i want to test this string");
+        boolean expected2 = userStoryId.toString().equalsIgnoreCase("Project_2022_1&As a PO, i want to test this " +
+                "string");
         //Assert
         assertFalse(expected);
         assertTrue(expected2);
@@ -148,7 +150,7 @@ public class UserStoryIDTest {
         when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
         //Act
         UserStoryID userStoryId = new UserStoryID(projectCode, usTitle);
-        Typology budget1 =  new Typology(new TypologyID(new Description("Test")));
+        Typology budget1 = new Typology(new TypologyID(new Description("Test")));
         //Assert
         assertNotEquals(userStoryId, budget1);
     }
@@ -245,14 +247,54 @@ public class UserStoryIDTest {
         });
     }
 
-//    @Test
-//    @DisplayName("Validate that ID is correct")
-//    public void usIDSuccessString() {
-//        //Arrange
-//      UserStoryID userStoryID = new UserStoryID("Project_2022_1_As a PO, i want to test this string");
-//
-//        //Act & Assert
-//        assertEquals("Project_2022_1", userStoryID.getProjectID().getCode());
-//        assertEquals("As a PO, i want to test this string", userStoryID.getUsTitle().getTitleUs());
-//    }
+    @Test
+    @DisplayName("make test in same value as - true result")
+    public void sameValueAsTrue() {
+        // Arrange
+        ProjectID projectCode = mock(ProjectID.class);
+        when(projectCode.getCode()).thenReturn("Project_2022_1");
+        UsTitle usTitle = mock(UsTitle.class);
+        when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
+        UserStoryID userStoryID = new UserStoryID(projectCode, usTitle);
+        UserStoryID userStoryID2 = new UserStoryID(projectCode, usTitle);
+        //Act
+        boolean expected = userStoryID.sameValueAs(userStoryID2);
+        //Assert
+        assertTrue(expected);
+    }
+
+    @Test
+    @DisplayName("make test in same value as - false result")
+    public void sameValueAsFalse() {
+        // Arrange
+        ProjectID projectCode = mock(ProjectID.class);
+        when(projectCode.getCode()).thenReturn("Project_2022_1");
+        ProjectID projectCode2 = mock(ProjectID.class);
+        when(projectCode2.getCode()).thenReturn("Project_2022_2");
+        UsTitle usTitle = mock(UsTitle.class);
+        when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
+        UserStoryID userStoryID = new UserStoryID(projectCode, usTitle);
+        UserStoryID userStoryID2 = new UserStoryID(projectCode2, usTitle);
+        //Act
+        boolean expected = userStoryID.sameValueAs(userStoryID2);
+        //Assert
+        assertFalse(expected);
+    }
+
+    @Test
+    void overrideTestNullObject() {
+        //Arrange
+        ProjectID projectCode = mock(ProjectID.class);
+        when(projectCode.getCode()).thenReturn("Project_2022_1");
+        UsTitle usTitle = mock(UsTitle.class);
+        when(usTitle.getTitleUs()).thenReturn("As a PO, i want to test this string");
+        //Act
+        UserStoryID userStoryID = new UserStoryID(projectCode, usTitle);
+        UserStoryID userStoryID2 = null;
+        //Assert
+        assertNotEquals(userStoryID, userStoryID2);
+        assertNull(userStoryID2);
+
+    }
+
 }

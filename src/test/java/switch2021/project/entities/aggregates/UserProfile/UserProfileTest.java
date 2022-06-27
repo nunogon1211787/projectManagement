@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import switch2021.project.entities.valueObjects.vos.Description;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -40,18 +41,31 @@ public class UserProfileTest {
 
     @Test
     @DisplayName("HashCode Verification")
-    public void hashCodeTest() {
+    public void hashCodeSuccess() {
         //Arrange
-        Description description = new Description("Description");
-        Description description1 = new Description("Description 1");
-        UserProfileID userProfileID = new UserProfileID(description);
+        UserProfileID userProfileID = mock(UserProfileID.class);
         UserProfile userProfile = new UserProfile(userProfileID);
-        UserProfileID userProfileID1 = new UserProfileID(description1);
-        UserProfile userProfile1 = new UserProfile(userProfileID);
-        UserProfile userProfile2 = new UserProfile(userProfileID1);
+        UserProfile userProfile2 = new UserProfile(userProfileID);
+        //Act
+        int id1 = userProfile.hashCode();
+        int id2 = userProfile2.hashCode();
         //Assert
-        assertEquals(userProfile.hashCode(), userProfile1.hashCode());
-        assertNotEquals(userProfile2.hashCode(), userProfile1.hashCode());
+        assertEquals(id1, id2);
+    }
+
+    @Test
+    @DisplayName("HashCode Verification")
+    public void hashCodeFail() {
+        //Arrange
+        UserProfileID userProfileID = mock(UserProfileID.class);
+        UserProfileID userProfileID2 = mock(UserProfileID.class);
+        UserProfile userProfile = new UserProfile(userProfileID);
+        UserProfile userProfile2 = new UserProfile(userProfileID2);
+        //Act
+        int id1 = userProfile.hashCode();
+        int id2 = userProfile2.hashCode();
+        //Assert
+        assertNotEquals(id1, id2);
     }
 
     @Test
@@ -66,8 +80,49 @@ public class UserProfileTest {
         UserProfile userProfile1 = new UserProfile(userProfileID);
         UserProfile userProfile2 = new UserProfile(userProfileID1);
         //Assert
-        assertTrue(userProfile.equals(userProfile));
+        assertEquals(userProfile, userProfile);
         assertNotEquals(userProfile2, userProfile1);
+    }
+
+    @Test
+    @DisplayName("Override Verification")
+    public void overrideTestTrue() {
+        //Arrange
+        UserProfileID userProfileID = mock(UserProfileID.class);
+        UserProfile userProfile1 = new UserProfile(userProfileID);
+        UserProfile userProfile2 = new UserProfile(userProfileID);
+        //Act
+        when(userProfileID.sameValueAs(userProfileID)).thenReturn(true);
+        boolean expected = userProfile1.equals(userProfile2);
+        // Assert
+        assertTrue(expected);
+    }
+
+    @Test
+    @DisplayName("Override Verification")
+    public void overrideTestFalse() {
+        //Arrange
+        UserProfileID userProfileID = mock(UserProfileID.class);
+        UserProfileID userProfileID2 = mock(UserProfileID.class);
+        UserProfile userProfile1 = new UserProfile(userProfileID);
+        UserProfile userProfile2 = new UserProfile(userProfileID2);
+        //Act
+        boolean expected = userProfile1.equals(userProfile2);
+        // Assert
+        assertFalse(expected);
+    }
+
+    @Test
+    @DisplayName("Override Verification")
+    public void overrideTestNull() {
+        //Arrange
+        UserProfileID userProfileID = mock(UserProfileID.class);
+        UserProfile userProfile1 = new UserProfile(userProfileID);
+        UserProfile userProfile2 = null;
+        //Act
+        boolean expected = userProfile1.equals(userProfile2);
+        // Assert
+        assertFalse(expected);
     }
 
     @Test
@@ -79,8 +134,9 @@ public class UserProfileTest {
         UserProfile userProfile2 = new UserProfile(userProfileID);
         //Act
         when(userProfileID.sameValueAs(userProfileID)).thenReturn(true);
+        boolean expected = userProfile1.sameIdentityAs(userProfile2);
         //Assert
-        assertTrue(userProfile1.sameIdentityAs(userProfile2));
+        assertTrue(expected);
     }
 
     @Test
@@ -93,8 +149,9 @@ public class UserProfileTest {
         UserProfile userProfile2 = new UserProfile(userProfileID2);
         //Act
         when(userProfileID1.sameValueAs(userProfileID2)).thenReturn(false);
+        boolean expected = userProfile1.sameIdentityAs(userProfile2);
         //Assert
-        assertFalse(userProfile1.sameIdentityAs(userProfile2));
+        assertFalse(expected);
     }
 
     @Test
