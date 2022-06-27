@@ -196,6 +196,8 @@
 
                     <encoding>${project.build.sourceEncoding}</encoding>
 
+                    <forceJavacCompilerUse>true</forceJavacCompilerUse>
+
                 </configuration>
             </plugin>
 

@@ -44,8 +44,6 @@ public class SprintService {
     private IUserStoryOfSprintRepo userStoryOfSprintRepo;
     @Autowired
     private UserStoryOfSprintMapper userStoryOfSprintMapper;
-    @Autowired
-    private UserStoryOfSprintJpaAssembler userStoryOfSprintJpaAssembler;
 
     /**
      * Create and Save a New Sprint
@@ -213,9 +211,6 @@ public class SprintService {
                     && Objects.equals(userStoryOfSprint.getSprintName(),
                                       sprintID.getSprintName().getText())) {
 
-                /*userStoryOfSprintRepo.deleteUserStoryOfSprint(new UserStoryID(new ProjectID(userStoryDTO.projectId),
-                                                                              new UsTitle(userStoryDTO.usTitle)));*/
-
                 userStoryOfSprint.setUserStoryOfSprintStatus(UserStoryOfSprintStatus.valueOf(userStoryDTO.getStatus()));
 
                 Optional<UserStoryOfSprint> savedSprint = userStoryOfSprintRepo.save(userStoryOfSprint);
@@ -231,7 +226,7 @@ public class SprintService {
         throw new Exception("User Story not found");
     }
 
-    private long validateSprintStartDate(String id, String date) throws Exception {
+    public long validateSprintStartDate(String id, String date) throws Exception {
         String[] values = id.split("_");
         ProjectID projectID = new ProjectID(values[0] + "_" + values[1] + "_" + values[2]);
 
@@ -243,7 +238,7 @@ public class SprintService {
 
         long sprintDuration = foundProject.get().getSprintDuration().getSprintDurationDays();
 
-        if (foundProject.get().getStartDate().isAfter(LocalDate.parse(date))
+        if ( foundProject.get().getStartDate().isAfter(LocalDate.parse(date))
                 ||
                 foundProject.get().getEndDate() != null
                 ||

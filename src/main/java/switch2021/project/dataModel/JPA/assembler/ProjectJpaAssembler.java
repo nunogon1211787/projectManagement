@@ -23,7 +23,7 @@ public class ProjectJpaAssembler {
         String businessSector = project.getBusinessSector().getDescription().getText();
         String startDate = project.getStartDate().toString();
         int numberOfSprints = project.getNumberOfSprints().getNumberOfSprintsVO();
-        int sprintDuration = project.getSprintDuration().getSprintDurationDays();
+        long sprintDuration = project.getSprintDuration().getSprintDurationDays();
         double budget = project.getBudget().getBudgetVO();
 
         String endDate = null;

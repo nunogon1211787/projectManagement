@@ -15,6 +15,8 @@ import switch2021.project.entities.aggregates.Task.Task;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.factories.factoryInterfaces.ITaskFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IEffortFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ISprintIDFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserStoryIDFactory;
 import switch2021.project.entities.valueObjects.vos.SprintID;
 import switch2021.project.entities.valueObjects.vos.TaskEffort;
 import switch2021.project.entities.valueObjects.vos.UserStoryID;
@@ -39,11 +41,15 @@ public class TaskService {
     private IUserStoryRepo userStoryRepo;
     @Autowired
     private IEffortFactory effortFactory;
+    @Autowired
+    private ISprintIDFactory sprintIDFactory;
+    @Autowired
+    private IUserStoryIDFactory userStoryIDFactory;
 
     /**
      * Create and Save Task (US031)
      */
-    public OutputTaskDTO createAndSaveTask(TaskDTO inputDTO) throws IllegalArgumentException {
+    public OutputTaskDTO createAndSaveTask(TaskDTO inputDTO) {
         Task newTask = taskFactory.createTask(inputDTO);
 
         if (taskRepo.existsById(newTask.getTaskID().toString())) {
@@ -67,11 +73,15 @@ public class TaskService {
     @Transactional(propagation = Propagation.REQUIRED)
     public OutputTaskDTO getTaskById(String taskID) {
         Optional<Task> optionalTask = taskRepo.findById(taskID);
+        OutputTaskDTO outputTaskDTO = null;
 
+        if (optionalTask.isPresent()) {
+            outputTaskDTO = taskMapper.toDto(optionalTask.get());
+        }
         if (optionalTask.isEmpty()) {
             throw new IllegalArgumentException("Task does not exist");
         }
-        return taskMapper.toDto(optionalTask.get());
+        return outputTaskDTO;
     }
 
     public CollectionModel<OutputTaskDTO> getAllTasks() {
@@ -81,6 +91,8 @@ public class TaskService {
     }
 
     public CollectionModel<OutputTaskDTO> getAllTasksByTaskContainerID(String taskContainerID) {
+        checkTaskContainerID(taskContainerID);
+
         List<Task> taskContainerIDTasks = taskRepo.findAllByTaskContainerID(taskContainerID);
         return taskMapper.toCollectionDto(taskContainerIDTasks);
     }
@@ -97,11 +109,15 @@ public class TaskService {
 
     private Task getTask(String taskID) {
         Optional<Task> optionalTask = taskRepo.findById(taskID);
+        Task task = null;
 
+        if (optionalTask.isPresent()) {
+            task = optionalTask.get();
+        }
         if (optionalTask.isEmpty()) {
             throw new IllegalArgumentException("Task does not exist");
         }
-        return optionalTask.get();
+        return task;
     }
 
     private void validateSprint(SprintID sprintID) {
@@ -123,8 +139,24 @@ public class TaskService {
         if (userStory == null) {
             throw new NullPointerException("User story does not exist");
         }
-        if(userStory.getUsEndDate()!=null){
+        if (userStory.getUsEndDate() != null) {
             throw new IllegalArgumentException("User story is not open");
+        }
+    }
+
+    private void checkTaskContainerID(String taskContainerID) {
+        String[] x = taskContainerID.split("&");
+        String projectId = x[0];
+        String sprintNameOrUsTitle = x[1];
+
+        SprintID sprintID = sprintIDFactory.create(projectId, sprintNameOrUsTitle);
+        Optional<Sprint> optionalSprint = sprintRepo.findBySprintID(sprintID);
+        if (optionalSprint.isEmpty()) {
+            UserStoryID userStoryID = userStoryIDFactory.create(projectId, sprintNameOrUsTitle);
+            Optional<UserStory> optionalUserStory = userStoryRepo.findByUserStoryId(userStoryID);
+            if (optionalUserStory.isEmpty()) {
+                throw new IllegalArgumentException("Sprint/User Story does not exist");
+            }
         }
     }
 }

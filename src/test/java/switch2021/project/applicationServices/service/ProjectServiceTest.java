@@ -3,19 +3,19 @@ package switch2021.project.applicationServices.service;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.hateoas.CollectionModel;
 import switch2021.project.applicationServices.iRepositories.*;
-import switch2021.project.dtoModel.dto.*;
+import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
+import switch2021.project.dtoModel.dto.OutputProjectDTO;
+import switch2021.project.dtoModel.dto.PartialProjectDTO;
+import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.mapper.ProjectMapper;
 import switch2021.project.entities.aggregates.Project.Project;
-import switch2021.project.entities.aggregates.Resource.*;
-import switch2021.project.entities.aggregates.User.User;
+import switch2021.project.entities.aggregates.Resource.ManagementResourcesService;
 import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.*;
 import switch2021.project.entities.valueObjects.vos.*;
@@ -26,7 +26,6 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
 
 @SpringBootTest
 class ProjectServiceTest {
