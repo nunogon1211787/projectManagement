@@ -3,6 +3,7 @@ package switch2021.project.interfaceAdapters.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,26 +69,6 @@ public class SprintControllerTest {
         assertTrue(resultContent2.contains("Project_2022_1"));*/
 
     }
-
-/*
-@Test //TODO Missing Get Method in controller
-    void shouldReturnNotFound() throws Exception {
-
-        String generatedCode = RandomStringUtils.randomAlphanumeric(10);
-
-        //GET sprints/{id}
-
-        MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get("/sprints/" + generatedCode)
-                                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest())
-                .andReturn();
-
-        String resultContent = result.getResponse().getContentAsString();
-        assertNotNull(resultContent);
-        assertEquals("{\"errorMessage\":\"Project does not exist\"}", resultContent);
-    }
-*/
 
 
     @Test
@@ -177,5 +158,11 @@ public class SprintControllerTest {
         assertNotNull(result2Content);
 
         assertTrue(result2Content.contains("User story added to sprintbacklog"));
+    }
+
+    @Test
+    @DisplayName("Validate sprint start date")
+    void validateSprintStartDate() throws Exception {
+
     }
 }

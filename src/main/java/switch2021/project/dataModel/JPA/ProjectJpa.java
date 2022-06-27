@@ -23,7 +23,7 @@ public class ProjectJpa {
     private String businessSector;
     private String startDate;
     private int numberOfSprints;
-    private int sprintDuration;
+    private long sprintDuration;
     private double budget;
     private String endDate;
     private String typology;

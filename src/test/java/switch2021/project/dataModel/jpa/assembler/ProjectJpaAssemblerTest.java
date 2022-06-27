@@ -48,7 +48,7 @@ class ProjectJpaAssemblerTest {
 
         String projName = "x";
         int numberOfSprints = 1;
-        int sprintDuration = 7;
+        long sprintDuration = 7;
         double budget = 100;
         LocalDate endDate = LocalDate.now();
 
@@ -97,7 +97,7 @@ class ProjectJpaAssemblerTest {
 
         String projName = "x";
         int numberOfSprints = 1;
-        int sprintDuration = 7;
+        long sprintDuration = 7;
         double budget = 100;
         LocalDate endDate = LocalDate.now();
 
@@ -146,7 +146,7 @@ class ProjectJpaAssemblerTest {
 
         String projName = "x";
         int numberOfSprints = 1;
-        int sprintDuration = 7;
+        long sprintDuration = 7;
         double budget = 100;
         LocalDate endDate = LocalDate.now();
 
@@ -195,7 +195,7 @@ class ProjectJpaAssemblerTest {
 
         String projName = "x";
         int numberOfSprints = 1;
-        int sprintDuration = 7;
+        long sprintDuration = 7;
         double budget = 100;
         LocalDate endDate = LocalDate.now();
 
@@ -244,7 +244,7 @@ class ProjectJpaAssemblerTest {
 
         String projName = "x";
         int numberOfSprints = 1;
-        int sprintDuration = 7;
+        long sprintDuration = 7;
         double budget = 100;
         LocalDate endDate = LocalDate.now();
 
@@ -295,7 +295,7 @@ class ProjectJpaAssemblerTest {
 
         String ex = "x";
         int numberOfSprints = 1;
-        int sprintDuration = 7;
+        long sprintDuration = 7;
         double budget = 100;
 
         when(projJpa.getProjectCode()).thenReturn(projId);

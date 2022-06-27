@@ -4,9 +4,13 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.dtoModel.dto.UserStoryOfSprintDTO;
 import switch2021.project.entities.valueObjects.vos.UserStoryOfSprint;
+import switch2021.project.interfaceAdapters.controller.SprintController;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class UserStoryOfSprintMapper {
@@ -18,6 +22,12 @@ public class UserStoryOfSprintMapper {
         userStoryOfSprintDTO.usTitle = userStoryOfSprint.getUserStoryId().getUsTitle().getTitleUs();
         userStoryOfSprintDTO.sprintName =
                 userStoryOfSprintDTO.status = userStoryOfSprint.getUserStoryOfSprintStatus().toString();
+
+        String sprintId =
+                userStoryOfSprint.getUserStoryId().getProjectID().getCode() + "_" + userStoryOfSprint.getSprintName();
+
+        userStoryOfSprintDTO.add(linkTo(methodOn(SprintController.class).showScrumBoard(sprintId))
+                                    .withSelfRel());
 
         return userStoryOfSprintDTO;
     }

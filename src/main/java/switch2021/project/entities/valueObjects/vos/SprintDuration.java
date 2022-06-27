@@ -11,7 +11,7 @@ public class SprintDuration implements ValueObject<SprintDuration> {
     /**
      * Attribute
      **/
-    private final int sprintDurationDays;
+    private final long sprintDurationDays;
 
     /**
      * Constants -
@@ -23,7 +23,7 @@ public class SprintDuration implements ValueObject<SprintDuration> {
     /**
      * Constructor
      **/
-    public SprintDuration (int sprintDurationDays) {
+    public SprintDuration (long sprintDurationDays) {
         checkRules(sprintDurationDays);
         this.sprintDurationDays = sprintDurationDays;
     }
@@ -31,7 +31,7 @@ public class SprintDuration implements ValueObject<SprintDuration> {
     /**
      * Validate whether input parameter is within the permitted interval of days
      */
-    private void checkRules(int sprintDuration) {
+    private void checkRules(long sprintDuration) {
         if(sprintDuration < MIN || sprintDuration > MAX) {
             throw new NullPointerException("The sprint duration must be within " + MIN + " and " +  MAX + " days");
         }
