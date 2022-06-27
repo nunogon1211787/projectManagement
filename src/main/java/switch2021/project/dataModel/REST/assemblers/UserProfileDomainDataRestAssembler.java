@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import switch2021.project.dataModel.REST.UserProfileRestDTO;
 import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 import switch2021.project.entities.valueObjects.voFactories.voFactories.UserProfileIDFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserProfileIDFactory;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 public class UserProfileDomainDataRestAssembler {
 
     @Autowired
-    UserProfileIDFactory userProfileIDFactory;
+    IUserProfileIDFactory userProfileIDFactory;
 
 
     /**
