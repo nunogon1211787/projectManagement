@@ -1,7 +1,6 @@
 package switch2021.project.applicationServices.service;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
@@ -10,11 +9,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import switch2021.project.applicationServices.iRepositories.*;
 import switch2021.project.dtoModel.dto.OutputTaskDTO;
 import switch2021.project.dtoModel.dto.TaskDTO;
-import switch2021.project.dtoModel.dto.UserStoryDTO;
 import switch2021.project.dtoModel.mapper.TaskMapper;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.aggregates.Task.Task;
-import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.factories.factoryInterfaces.ITaskFactory;
 import switch2021.project.entities.valueObjects.vos.*;
