@@ -7,10 +7,8 @@ import switch2021.project.entities.valueObjects.vos.UserStoryOfSprint;
 import switch2021.project.utils.Entity;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @Getter
 @Setter

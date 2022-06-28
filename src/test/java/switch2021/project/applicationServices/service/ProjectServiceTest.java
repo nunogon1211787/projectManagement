@@ -14,6 +14,8 @@ import switch2021.project.dtoModel.mapper.ProjectMapper;
 import switch2021.project.dtoModel.mapper.StatusMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManagementResourcesService;
+import switch2021.project.entities.aggregates.Resource.Resource;
+import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.*;
 import switch2021.project.entities.valueObjects.vos.*;
@@ -418,34 +420,63 @@ class ProjectServiceTest {
         });
     }
 
-//    @Test
-//    void getCurrentProjectsByUserSuccess(){
-//        //Arrange
-//        String id = "not exist";
-//        UserID userID = mock(UserID.class);
-//        Resource resource = mock(Resource.class);
-//        ProjectID projId = mock(ProjectID.class);
-//        Project project = mock(Project.class);
-//        OutputProjectDTO dto = mock(OutputProjectDTO.class);
-//        List<Resource> userResources = List.of(resource);
-//        List<ProjectID> resourceProjects = List.of(projId);
-//        List<Project> projectList = List.of(project);
-//
-//        when(userIDFactory.createUserID(id)).thenReturn(userID);
-//        when(userRepo.existsById(userID)).thenReturn(true);
-//        when(resRepo.findAllByUser(userID)).thenReturn(userResources);
-//        when(resService.currentResourcesByDate(userResources)).thenReturn(userResources);
-//        when(resService.listProjectsOfResources(userResources)).thenReturn(resourceProjects);
-//        when(projRepo.findById(projId)).thenReturn(Optional.of(project));
-//        when(projMapper.toCollectionDto(projectList, false)).thenReturn(CollectionModel.of(List.of(dto)));
-//
-//        CollectionModel<OutputProjectDTO> expected = CollectionModel.of(List.of(dto));
-//
-//        //Act
-//        CollectionModel<OutputProjectDTO> result = projectService.showCurrentProjectsByUser(id);
-//        //Assert
-//        assertEquals(expected, result);
-//    }
+    @Test
+    void getCurrentProjectsByResourceProjectNotExist() {
+        //Assert
+        assertThrows(NullPointerException.class, () -> {
+            //Arrange
+            String id = "not exist";
+            UserID userID = mock(UserID.class);
+            User user = mock(User.class);
+            Resource resource = mock(Resource.class);
+            ProjectID projId = mock(ProjectID.class);
+            List<Resource> userResources = List.of(resource);
+            List<ProjectID> resourceProjects = List.of(projId);
+
+            when(userIDFactory.createUserID(id)).thenReturn(userID);
+            when(user.getUserId()).thenReturn(userID);
+            when(userRepo.findByUserId(userID)).thenReturn(Optional.of(user));
+            when(userRepo.existsById(userID)).thenReturn(true);
+            when(resRepo.findAllByUser(userID)).thenReturn(userResources);
+            when(resService.currentResourcesByDate(userResources)).thenReturn(userResources);
+            when(resService.listProjectsOfResources(userResources)).thenReturn(resourceProjects);
+            when(projRepo.findById(projId)).thenReturn(Optional.empty());
+            //Act
+            projectService.showCurrentProjectsByUser(id);
+        });
+    }
+
+    @Test
+    void getCurrentProjectsByUserSuccess() {
+        //Arrange
+        String id = "not exist";
+        UserID userID = mock(UserID.class);
+        User user = mock(User.class);
+        Resource resource = mock(Resource.class);
+        ProjectID projId = mock(ProjectID.class);
+        Project project = mock(Project.class);
+        OutputProjectDTO dto = mock(OutputProjectDTO.class);
+        List<Resource> userResources = List.of(resource);
+        List<ProjectID> resourceProjects = List.of(projId);
+        List<Project> projectList = List.of(project);
+
+        when(userIDFactory.createUserID(id)).thenReturn(userID);
+        when(user.getUserId()).thenReturn(userID);
+        when(userRepo.findByUserId(userID)).thenReturn(Optional.of(user));
+        when(userRepo.existsById(userID)).thenReturn(true);
+        when(resRepo.findAllByUser(userID)).thenReturn(userResources);
+        when(resService.currentResourcesByDate(userResources)).thenReturn(userResources);
+        when(resService.listProjectsOfResources(userResources)).thenReturn(resourceProjects);
+        when(projRepo.findById(projId)).thenReturn(Optional.of(project));
+        when(projMapper.toCollectionDto(projectList, false)).thenReturn(CollectionModel.of(List.of(dto)));
+
+        CollectionModel<OutputProjectDTO> expected = CollectionModel.of(List.of(dto));
+
+        //Act
+        CollectionModel<OutputProjectDTO> result = projectService.showCurrentProjectsByUser(id);
+        //Assert
+        assertEquals(expected, result);
+    }
 
     @Test
     void deleteProjectNotExist() {

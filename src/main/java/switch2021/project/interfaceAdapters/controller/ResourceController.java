@@ -117,7 +117,7 @@ public class ResourceController {
 
 //    @GetMapping
 //    public ResponseEntity<Object> showCurrentProjectsByUser(@RequestParam("user") IdDTO id, @RequestParam("date")
-//    DateDTO dateDto){
+//    StartSprintDTO dateDto){
 //
 //        List<OutputProjectDTO> projectsDto = showAllCurrentProjectsByUserService.showCurrentProjectsByUser(id,
 //        dateDto);
