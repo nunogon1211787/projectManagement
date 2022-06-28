@@ -18,10 +18,6 @@ public interface ISprintRepo {
 
     Optional<Sprint> findBySprintID(SprintID id);
 
-    /** Find a List Of All Sprints by Project ID. */
-
-    List<Sprint> findAllSprintsByProjectID(ProjectID projectID);
-
     /** Find the Current Sprint. */
 
     Sprint findCurrentSprint();
