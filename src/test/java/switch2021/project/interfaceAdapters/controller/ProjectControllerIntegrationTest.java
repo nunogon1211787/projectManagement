@@ -1,12 +1,14 @@
 package switch2021.project.interfaceAdapters.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javassist.runtime.Desc;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -17,13 +19,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.PartialProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.dto.TypologyDTO;
+import switch2021.project.entities.aggregates.Project.Project;
+import switch2021.project.entities.factories.factories.ProjectFactory;
+import switch2021.project.entities.valueObjects.vos.*;
 
+import java.time.LocalDate;
 import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -251,6 +258,22 @@ class ProjectControllerIntegrationTest {
         assertEquals(1,xx);
     }
 
+    @SneakyThrows
+    @Test
+    void getCurrentProjectsByUserIntegrationSizeDoNotHas() {
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/xxx@mymail.com/projects")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andReturn();
+
+        int x = result.getResponse().getStatus();
+        String body = result.getResponse().getContentAsString();
+        assertEquals(x,404);
+        assertNotNull(body);
+    }
+
 
     @SneakyThrows
     @Test
@@ -312,4 +335,38 @@ class ProjectControllerIntegrationTest {
         assertNotNull(resultContent);
         assertNull(result.getResponse().getErrorMessage());
     }
+
+    @SneakyThrows
+    @Test
+    void mockMvcTestDeleteProject() {
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/projects/Project_2022_1")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        int x = result.getResponse().getStatus();
+        String body = result.getResponse().getContentAsString();
+        assertEquals(x,200);
+        assertNotNull(body);
+    }
+
+    @SneakyThrows
+    @Test
+    void mockMvcTestDeleteProjectDoesNotExists()  {
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/projects/Project_2022_99999999")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andReturn();
+
+        int x = result.getResponse().getStatus();
+        String body = result.getResponse().getContentAsString();
+        assertEquals(x,404);
+        assertNotNull(body);
+    }
+
+
 }
