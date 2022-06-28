@@ -45,10 +45,10 @@ public class UserStoryMapper {
          */
 
         //Add self relation
-        result.add(linkTo(methodOn(UserStoryController.class).showUserStoryRequested(result.id)).withSelfRel());
+        result.add(linkTo(methodOn(UserStoryController.class).getUserStoryRequested(result.id)).withSelfRel());
 
         //Add collection relation
-        result.add(linkTo(methodOn(UserStoryController.class).showAllUserStories()).withRel("Collection"));
+        result.add(linkTo(methodOn(UserStoryController.class).getAllUserStories()).withRel("Collection"));
 
         //Add delete option
         result.add(linkTo(methodOn(UserStoryController.class).deleteAUserStory(result.id)).withRel("Delete"));
@@ -70,7 +70,7 @@ public class UserStoryMapper {
         //Add HATEOAS to OUTPUT DTOs
 
         //Add self relation
-        result.add(linkTo(methodOn(UserStoryController.class).showAllUserStories()).withSelfRel());
+        result.add(linkTo(methodOn(UserStoryController.class).getAllUserStories()).withSelfRel());
 
         return result;
     }

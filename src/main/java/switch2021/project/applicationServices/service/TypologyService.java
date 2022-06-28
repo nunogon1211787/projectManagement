@@ -4,14 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.applicationServices.iRepositories.ITypologyRepo;
-import switch2021.project.dataModel.JPA.TypologyJpa;
 import switch2021.project.dtoModel.dto.TypologyDTO;
-import switch2021.project.entities.factories.factoryInterfaces.ITypologyFactory;
-import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ITypologyIDFactory;
 import switch2021.project.dtoModel.mapper.TypologyMapper;
 import switch2021.project.entities.aggregates.Typology.Typology;
+import switch2021.project.entities.factories.factoryInterfaces.ITypologyFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ITypologyIDFactory;
 import switch2021.project.entities.valueObjects.vos.TypologyID;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +52,7 @@ public class TypologyService {
         Typology typology = opTypology.flatMap(typoJpa -> opTypology).orElse(null);
 
         if (typology == null) {
-            throw new NullPointerException("Typology does not exist!");
+            throw new IllegalArgumentException("Typology does not exist!");
         }
 
        return mapper.modelToDto(typology);
@@ -70,8 +68,11 @@ public class TypologyService {
     /**
      * Typology Delete's Methods
      */
-    public void deleteTypology(String id) {
+    public void deleteTypology(String id) throws Exception{
         TypologyID typoId = factoryId.createId(new TypologyDTO(id));
+        if(!iTypologyRepo.existsByTypologyId(typoId)){
+            throw new Exception("Typology does not exist!");
+        }
         iTypologyRepo.deleteByTypologyId(typoId);
     }
 }

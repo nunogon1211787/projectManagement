@@ -76,7 +76,7 @@ public class UserStoryService {
         return userStoryMapper.toDto(userStory);
     }
 
-    public CollectionModel<OutputUserStoryDTO> showAllUserStories() {
+    public CollectionModel<OutputUserStoryDTO> getAllUserStories() {
         List<UserStory> allUserStories = iUserStoryRepo.findAll();
         return userStoryMapper.toCollectionDto(allUserStories);
     }
@@ -218,7 +218,7 @@ public class UserStoryService {
         UserStoryID usId = createUserStoryIdByStringInputFromController(id);
 
         if (!iUserStoryRepo.existsUserStoryByID(usId)) {
-            throw new NullPointerException("User Story does not exist");
+            throw new IllegalArgumentException("User Story does not exist");
         }
         iUserStoryRepo.deleteByUserStoryId(usId);
     }

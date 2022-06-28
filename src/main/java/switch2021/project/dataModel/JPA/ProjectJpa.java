@@ -8,7 +8,6 @@ import javax.persistence.*;
 @EqualsAndHashCode
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "projects")

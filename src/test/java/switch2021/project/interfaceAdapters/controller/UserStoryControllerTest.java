@@ -71,10 +71,10 @@ public class UserStoryControllerTest {
         userStoriesDto.add(dto2);
         userStoriesDto.add(dto3);
         CollectionModel<OutputUserStoryDTO> collection = CollectionModel.of(userStoriesDto);
-        when(service.showAllUserStories()).thenReturn(collection);
+        when(service.getAllUserStories()).thenReturn(collection);
         ResponseEntity<Object> expected = new ResponseEntity<>(collection, HttpStatus.OK);
         //Act
-        ResponseEntity<Object> result = controller.showAllUserStories();
+        ResponseEntity<Object> result = controller.getAllUserStories();
         //Assert
         assertEquals(expected, result);
     }
@@ -84,10 +84,10 @@ public class UserStoryControllerTest {
         //Arrange
         List<OutputUserStoryDTO> userStoriesDto = new ArrayList<>();
         CollectionModel<OutputUserStoryDTO> collection = CollectionModel.of(userStoriesDto);
-        when(service.showAllUserStories()).thenReturn(collection);
+        when(service.getAllUserStories()).thenReturn(collection);
         HttpStatus expected = HttpStatus.NOT_FOUND;
         //Act
-        ResponseEntity<Object> result = controller.showAllUserStories();
+        ResponseEntity<Object> result = controller.getAllUserStories();
         //Assert
         assertEquals(expected, result.getStatusCode());
     }
@@ -95,10 +95,10 @@ public class UserStoryControllerTest {
     @Test
     public void showAllUserStoriesFail() {
         //Arrange
-        when(service.showAllUserStories()).thenReturn(null);
+        when(service.getAllUserStories()).thenReturn(null);
         HttpStatus expected = HttpStatus.BAD_REQUEST;
         //Act
-        ResponseEntity<Object> result = controller.showAllUserStories();
+        ResponseEntity<Object> result = controller.getAllUserStories();
         //Assert
         assertEquals(expected, result.getStatusCode());
     }
@@ -157,7 +157,7 @@ public class UserStoryControllerTest {
         when(service.showAUserStory(id)).thenReturn(dto);
         ResponseEntity<Object> expected = new ResponseEntity<>(dto, HttpStatus.OK);
         //Act
-        ResponseEntity<Object> result = controller.showUserStoryRequested(id);
+        ResponseEntity<Object> result = controller.getUserStoryRequested(id);
         //Assert
         assertEquals(expected, result);
     }
@@ -170,7 +170,7 @@ public class UserStoryControllerTest {
         when(service.showAUserStory(id)).thenThrow(exception);
         HttpStatus expected = HttpStatus.BAD_REQUEST;
         //Act
-        ResponseEntity<Object> result = controller.showUserStoryRequested(id);
+        ResponseEntity<Object> result = controller.getUserStoryRequested(id);
         //Assert
         assertEquals(expected, result.getStatusCode());
     }
