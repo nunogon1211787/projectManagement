@@ -59,8 +59,26 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
-    void getUser() {
+    void getUser() throws Exception {
+        //Arrange
+        RequestDTO dto = new RequestDTO("Director");
+        String userName = "Ana";
+        String email = "ana123@beaver.com";
+        String function = "PM";
+        String password = "HelloWorld2021!";
+        String photo = "ana.png";
+        NewUserInfoDTO inputDTO = new NewUserInfoDTO(userName, email, function, password, password, photo);
+        userService.createAndSaveUser(inputDTO);
+        //Act
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.patch(BASE_URL + "/users/ana123@beaver.com")
+                        .contentType("application/json")
+                        .content(mapper.writeValueAsString(dto))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andReturn();
+        //Assert
+        assertEquals(200, result.getResponse().getStatus());
     }
+
 
     @Test
     void showAllUsers() {

@@ -76,7 +76,7 @@ public class UserStoryService {
         return userStoryMapper.toDto(userStory);
     }
 
-    public CollectionModel<OutputUserStoryDTO> showAllUserStories() {
+    public CollectionModel<OutputUserStoryDTO> getAllUserStories() {
         List<UserStory> allUserStories = iUserStoryRepo.findAll();
         return userStoryMapper.toCollectionDto(allUserStories);
     }

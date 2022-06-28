@@ -1,6 +1,9 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+title US015 - As Director, I want to get a list of all projects
+
+
 autonumber
 autoactivate on
 
@@ -19,12 +22,12 @@ participant ": OutPutProjectDTO" as outputDTO
 
 
 
-[o-> Route: GET (json)
+[o-> Route: GET/projects (json)
 note right
 Change from json to dto hidden to simplify diagram
 end note
-Route -> Ctrl: showAllProjects()
-Ctrl -> service: outPutProjectDTO = showAllProjects()
+Route -> Ctrl: getAllProjects()
+Ctrl -> service: getAllProjects()
 service -> iProjectRepo: findAll()
 iProjectRepo -> projectJPARepository: findAll()
 loop ProjectJPA

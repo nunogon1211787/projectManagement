@@ -6,6 +6,8 @@ import switch2021.project.applicationServices.iRepositories.IProjectWebRepositor
 import switch2021.project.dataModel.REST.assemblers.ProjectDomainDataRestAssembler;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.interfaceAdapters.repositories.REST.ProjectRestRepository;
+
+import javax.net.ssl.SSLException;
 import java.util.List;
 
 @Repository
@@ -18,7 +20,7 @@ public class ProjectWebRepository implements IProjectWebRepository {
     ProjectDomainDataRestAssembler projectDomainDataRestAssembler;
 
     @Override
-    public List<Project> findAll() {
+    public List<Project> findAll() throws SSLException {
         return projectDomainDataRestAssembler.toDomain(projectRestRepository.findAll());
 
     }

@@ -45,7 +45,7 @@ public class TaskEffort implements ValueObject<TaskEffort> {
     }
 
     private void checkWorkTimeRules(int effortHours, int effortMinutes) {
-        if (effortHours == MINHOUR & effortMinutes == MINHOUR)
+        if (effortHours == MINHOUR && effortMinutes == MINHOUR)
             throw new IllegalArgumentException("Not valid work time values.");
     }
 
