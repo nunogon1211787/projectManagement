@@ -8,7 +8,7 @@ import org.springframework.hateoas.server.core.Relation;
 
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 @Relation(collectionRelation = "Profiles")
 public class UserProfileDTO extends RepresentationModel<UserProfileDTO> {
 

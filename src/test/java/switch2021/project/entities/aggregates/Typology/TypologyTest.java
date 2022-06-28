@@ -30,7 +30,7 @@ public class TypologyTest {
         //Act
         when(id.hasDescription("Test")).thenReturn(true);
         //Assert
-        assertTrue(typo.hasID_Description("Test"));
+        assertTrue(typo.hasDescriptionID("Test"));
     }
 
     @Test
@@ -41,7 +41,7 @@ public class TypologyTest {
         //Act
         when(id.hasDescription("Test")).thenReturn(false);
         //Assert
-        assertFalse(typo.hasID_Description("Fail"));
+        assertFalse(typo.hasDescriptionID("Fail"));
     }
 
     @Test
