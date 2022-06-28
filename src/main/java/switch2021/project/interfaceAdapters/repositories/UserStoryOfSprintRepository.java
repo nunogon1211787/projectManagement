@@ -49,12 +49,12 @@ public class UserStoryOfSprintRepository implements IUserStoryOfSprintRepo {
     }
 
     @Override
-    public Optional<UserStoryOfSprint> save(UserStoryOfSprint userStoryOfSprint) {
+    public UserStoryOfSprint save(UserStoryOfSprint userStoryOfSprint) {
         UserStoryOfSprintJpa userStoryOfSprintJpa = userStoryOfSprintJpaAssembler.toData(userStoryOfSprint);
-        Optional<UserStoryOfSprint> usSprint;
+        UserStoryOfSprint usSprint;
 
         UserStoryOfSprintJpa sprintJpaSaved = userStoryOfSprintJpaRepository.save(userStoryOfSprintJpa);
-        usSprint = Optional.of(userStoryOfSprintJpaAssembler.toDomain(sprintJpaSaved));
+        usSprint = userStoryOfSprintJpaAssembler.toDomain(sprintJpaSaved);
 
         return usSprint;
     }

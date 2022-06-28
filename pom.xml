@@ -175,6 +175,11 @@
             <artifactId>reactor-netty-http</artifactId>
             <version>1.0.7</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.5.0</version>
+        </dependency>
         <!-- End Tests for spring boot-->
 
     </dependencies>

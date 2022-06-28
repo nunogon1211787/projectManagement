@@ -7,25 +7,33 @@ autonumber
 title US011 - "As Authenticated User, i want to change his/her password"
 
 
-participant ": IUserRepository" as Repository
-participant ": UserJpaAssembler" as Assembler
-participant "userJpa:UserJpa" as USJPA
-participant ":IUserRepositoryJpa" as Driver
-participant "savedData:Data" as Data
-participant "user:User" as US
+@startuml
+'https://plantuml.com/sequence-diagram
 
-[o->Repository: findByUserID (userID)
+autoactivate on
+autonumber
 
-Repository -> Assembler : toData(user)
-Assembler --> USJPA **: create ()
-Assembler --> Repository : userJPA
-Repository -> Driver: save(userJpa)
-Driver --> Data**: create(savedUserJpa)
-Driver --> Repository : savedData
-Repository -> Assembler: toDomain (savedData)
-Assembler -> US **: create()
-Assembler --> Repository :user
+title US011 - As Authenticated User, i want to change his/her password
 
+
+participant ": IUserRepo" as Repository
+participant ": UserJpaRepository" as jpaRepo
+participant "userJpa : UserJpa" as Data
+participant ": UserJpaAssembler" as assembler
+participant " user: User" as user
+
+
+[o->Repository: findByUserId(userID)
+
+Repository -> jpaRepo : findById(userID)
+jpaRepo ->Data : findById(userID)
+deactivate jpaRepo
+Data--> Repository: foundUserJpa
+Repository->assembler: toDomain(foundUserJpa)
+assembler -> user**: create
+assembler --> Repository : user
 [<--Repository: user
+
+@enduml
 
 @enduml

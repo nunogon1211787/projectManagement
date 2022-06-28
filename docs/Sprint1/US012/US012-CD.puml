@@ -122,7 +122,7 @@ TypologyService -right..> repo
 TypologyService -down..> ITypologyFactory
 TypologyFactory -up[hidden]..> ITypologyFactory
 class TypologyFactory implements ITypologyFactory
-TypologyFactory -left..> Typology
+TypologyFactory -right..> Aggregate
 repo -up[hidden]..> TypologyRepository
 class TypologyRepository implements repo
 TypologyFactory -right..> ITypologyIDFactory

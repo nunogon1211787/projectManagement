@@ -102,7 +102,7 @@ public class ProjectService {
 
         ProjectID projID = projectIDFactory.create(id);
 
-        Optional<Project> opProject = projRepo.findById(projID);
+        Optional<Project>opProject = projRepo.findById(projID);
 
         if (opProject.isPresent()) {
             Project proj = opProject.get();
@@ -112,6 +112,7 @@ public class ProjectService {
             proj.setNumberOfSprints(numberOfSprintsFactory.create(Integer.parseInt(editProjectInfoDTO.getNumberOfSprints())));
             proj.setBudget(budgetFactory.create(Integer.parseInt(editProjectInfoDTO.getBudget())));
             proj.setSprintDuration(sprintDurationFactory.create(Integer.parseInt(editProjectInfoDTO.getSprintDuration())));
+
 
             proj.setProjectStatus(ProjectStatusEnum.valueOf(editProjectInfoDTO.getProjectStatus().toUpperCase()));
             proj.setCustomer(Customer.create(editProjectInfoDTO.getCustomer()));
