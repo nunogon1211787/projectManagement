@@ -1,9 +1,7 @@
 package switch2021.project.dtoModel.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @AllArgsConstructor
 public class TaskDTO {
     /**

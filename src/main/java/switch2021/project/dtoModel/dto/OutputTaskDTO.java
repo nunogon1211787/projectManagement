@@ -1,12 +1,10 @@
 package switch2021.project.dtoModel.dto;
 
-import lombok.NoArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
 import java.util.List;
 
-@NoArgsConstructor
 @Relation(collectionRelation = "Tasks")
 public class OutputTaskDTO extends RepresentationModel<OutputTaskDTO> {
 
