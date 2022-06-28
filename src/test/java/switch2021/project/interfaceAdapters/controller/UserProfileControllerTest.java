@@ -15,8 +15,10 @@ import switch2021.project.applicationServices.service.UserProfileService;
 import switch2021.project.dtoModel.dto.UserProfileDTO;
 
 import javax.net.ssl.SSLException;
+
 import java.util.HashMap;
 import java.util.Map;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -65,7 +67,7 @@ public class UserProfileControllerTest {
         //Arrange
         UserProfileDTO test = mock(UserProfileDTO.class);
         String x = "Fixe";
-        test.setUserProfileName(x);
+        test.userProfileName = x;
         when(service.findUserProfileRequested(x)).thenReturn(test);
         //Act
         ResponseEntity<?> response = ctrl.showUserProfileRequested(x);

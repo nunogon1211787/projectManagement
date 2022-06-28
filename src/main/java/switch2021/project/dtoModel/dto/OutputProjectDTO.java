@@ -2,11 +2,9 @@ package switch2021.project.dtoModel.dto;
 
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
-@NoArgsConstructor
 @Getter
 @Relation(collectionRelation = "Projects")
 public class OutputProjectDTO extends RepresentationModel<OutputProjectDTO> {
