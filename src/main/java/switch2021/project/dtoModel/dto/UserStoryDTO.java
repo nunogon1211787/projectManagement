@@ -5,6 +5,7 @@ import org.springframework.hateoas.RepresentationModel;
 
 @AllArgsConstructor
 @Getter
+@NoArgsConstructor
 public class UserStoryDTO extends RepresentationModel<UserStoryDTO> {
 
     /**
