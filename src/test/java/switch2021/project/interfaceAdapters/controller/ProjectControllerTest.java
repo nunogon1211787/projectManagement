@@ -18,6 +18,7 @@ import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.Budget;
 
+import javax.net.ssl.SSLException;
 import java.util.HashMap;
 import java.util.Map;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -40,7 +41,7 @@ class ProjectControllerTest {
     }
 
     @Test
-    void getAllProjectSuccess() {
+    void getAllProjectSuccess() throws SSLException {
         //Arrange
         Map<String, CollectionModel<PartialProjectDTO>> allProjectsDto = new HashMap<>();
         when(service.getAllProjects()).thenReturn(allProjectsDto);
@@ -51,7 +52,7 @@ class ProjectControllerTest {
     }
 
     @Test
-    void getAllProjectCatchException() {
+    void getAllProjectCatchException() throws SSLException {
         //Arrange
         doThrow(IllegalArgumentException.class).when(service).getAllProjects();
         //Act

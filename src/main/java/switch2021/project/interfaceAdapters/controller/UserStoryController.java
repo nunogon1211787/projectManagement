@@ -11,7 +11,7 @@ import switch2021.project.applicationServices.service.UserStoryService;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://localhost:8443")
 @RestController
 @RequestMapping("/userstories")
 public class UserStoryController {
@@ -45,11 +45,11 @@ public class UserStoryController {
      * Find all user stories
      */
     @GetMapping
-    public ResponseEntity<Object> showAllUserStories() {
+    public ResponseEntity<Object> getAllUserStories() {
         CollectionModel<OutputUserStoryDTO> result;
 
         try {
-            result = service.showAllUserStories();
+            result = service.getAllUserStories();
 
             if (result.getContent().isEmpty()) {
                 ErrorMessage message = new ErrorMessage();
@@ -93,7 +93,7 @@ public class UserStoryController {
      * Find a requested user story
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Object> showUserStoryRequested(@PathVariable("id") String id) {
+    public ResponseEntity<Object> getUserStoryRequested(@PathVariable("id") String id) {
         OutputUserStoryDTO userStory;
 
         try {
@@ -213,7 +213,7 @@ public class UserStoryController {
         try {
             service.deleteAUserStory(id);
             response.responseMessage = "User Story was deleted successfully";
-            response.add(linkTo(methodOn(UserStoryController.class).showAllUserStories()).withRel("Collection"));
+            response.add(linkTo(methodOn(UserStoryController.class).getAllUserStories()).withRel("Collection"));
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();

@@ -31,7 +31,6 @@ public class UserProfileServiceTest {
 
     @Autowired
     UserProfileService userProfileService;
-
     @MockBean
     IUserProfileRepo iUserProfileRepo;
     @MockBean
@@ -50,7 +49,6 @@ public class UserProfileServiceTest {
     public void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
     }
-
 
     @Test
     void createAndSaveUserProfileSuccess() throws Exception {
@@ -101,15 +99,15 @@ public class UserProfileServiceTest {
         List<UserProfile> userProfiles2 = new ArrayList<>();
         when(iUserProfileWebRepository.findAll()).thenReturn(userProfiles2);
 
-        CollectionModel<UserProfileDTO> outputUserProfileList_DTO = CollectionModel.empty();
-        when(userProfileMapper.toCollectionDTO(userProfiles, false)).thenReturn(outputUserProfileList_DTO);
+        CollectionModel<UserProfileDTO> outputUserProfileListIntern = CollectionModel.empty();
+        when(userProfileMapper.toCollectionDTO(userProfiles, false)).thenReturn(outputUserProfileListIntern);
 
-        CollectionModel<UserProfileDTO> outputUserProfileDTO_List = CollectionModel.empty();
-        when(userProfileMapper.toCollectionDTO(userProfiles, false)).thenReturn(outputUserProfileDTO_List);
+        CollectionModel<UserProfileDTO> outputUserProfileListExtern = CollectionModel.empty();
+        when(userProfileMapper.toCollectionDTO(userProfiles, false)).thenReturn(outputUserProfileListExtern);
 
         Map<String, CollectionModel<UserProfileDTO>> allProfilesDto = new HashMap<>();
-        allProfilesDto.put("internalUserProfiles", outputUserProfileList_DTO );
-//        allProfilesDto.put("externalUserProfiles", outputUserProfileDTO_List);
+        allProfilesDto.put("internalUserProfiles", outputUserProfileListIntern );
+//        allProfilesDto.put("externalUserProfiles", outputUserProfileListExtern);
         allProfilesDto.put("externalUserProfiles", null);  //while webclient not working use this line, when working use above line
         //Act
         Map<String, CollectionModel<UserProfileDTO>> result = userProfileService.getAllProfiles();
@@ -184,7 +182,7 @@ public class UserProfileServiceTest {
             UserProfileDTO inDTO = mock(UserProfileDTO.class);
             UserProfile userProfileSaved = mock(UserProfile.class);
             when(factoryId.createUserProfileID("ok")).thenReturn(profileID);
-            when(iUserProfileRepo.findByUserProfileID(profileID)).thenReturn(java.util.Optional.ofNullable(userProfile));
+            when(iUserProfileRepo.findByUserProfileID(profileID)).thenReturn(null);
             when(iUserProfileRepo.deleteById(profileID)).thenReturn(true);
             when(iUserProfileFactory.createUserProfile(inDTO)).thenReturn(userProfile);
             when(Objects.requireNonNull(userProfile).getUserProfileId()).thenReturn(profileID);

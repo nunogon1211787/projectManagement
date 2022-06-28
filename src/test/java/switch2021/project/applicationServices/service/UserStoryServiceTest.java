@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -15,7 +14,6 @@ import switch2021.project.dtoModel.dto.OutputUserStoryDTO;
 import switch2021.project.dtoModel.dto.UpdateUserStoryDTO;
 import switch2021.project.dtoModel.dto.UserStoryDTO;
 import switch2021.project.dtoModel.mapper.UserStoryMapper;
-import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.factories.factoryInterfaces.IUserStoryFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
@@ -178,7 +176,7 @@ public class UserStoryServiceTest {
         when(repo.findAll()).thenReturn(userStories);
         when(mapper.toCollectionDto(userStories)).thenReturn(collection);
         //Act
-        CollectionModel<OutputUserStoryDTO> result = service.showAllUserStories();
+        CollectionModel<OutputUserStoryDTO> result = service.getAllUserStories();
         //Assert
         assertEquals(collection, result);
     }

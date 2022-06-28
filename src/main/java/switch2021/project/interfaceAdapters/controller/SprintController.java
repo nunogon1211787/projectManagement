@@ -13,7 +13,7 @@ import switch2021.project.entities.valueObjects.vos.SprintID;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://localhost:8443")
 @RestController
 @RequestMapping("/sprints")
 public class SprintController {

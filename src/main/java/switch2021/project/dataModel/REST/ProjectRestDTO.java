@@ -2,39 +2,41 @@ package switch2021.project.dataModel.REST;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class ProjectRestDTO extends RepresentationModel<ProjectRestDTO> {
 
     /**
      * Attributes
      **/
-    public String code;
+    public String projectCode;
     public String projectName;
-    public String description;
-    public String businessSector;
-    public String typology;
-    public String customer;
+    public String projectDescription;
+    public String projectBusinessSector;
+    public String typologyDescription;
+    public String customerName;
     public String startDate;
     public String endDate;
-    public String numberOfSprints;
-    public String budget;
-    public String projectStatus;
-    public String sprintDuration;
+    public String projectNumberOfPlannedSprints;
+    public String projectBudget;
+    public String status;
+    public String projectSprintDuration;
 
-    public ProjectRestDTO(String projectName, String description, String businessSector, String startDate,
-                          String numberOfSprints, String budget, String sprintDuration, String typology,
-                          String customer) {
+    public ProjectRestDTO(String projectName, String projectDescription, String projectBusinessSector, String startDate,
+                          String projectNumberOfPlannedSprints, String projectBudget, String projectSprintDuration, String typologyDescription,
+                          String customerName) {
         this.projectName = projectName;
-        this.description = description;
-        this.businessSector = businessSector;
+        this.projectDescription = projectDescription;
+        this.projectBusinessSector = projectBusinessSector;
         this.startDate = startDate;
-        this.numberOfSprints = numberOfSprints;
-        this.budget = budget;
-        this.sprintDuration = sprintDuration;
-        this.typology = typology;
-        this.customer = customer;
+        this.projectNumberOfPlannedSprints = projectNumberOfPlannedSprints;
+        this.projectBudget = projectBudget;
+        this.projectSprintDuration = projectSprintDuration;
+        this.typologyDescription = typologyDescription;
+        this.customerName = customerName;
     }
 }
