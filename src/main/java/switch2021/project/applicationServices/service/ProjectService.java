@@ -19,6 +19,7 @@ import switch2021.project.entities.valueObjects.voFactories.voInterfaces.*;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
+import javax.net.ssl.SSLException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -130,7 +131,7 @@ public class ProjectService {
         throw new IllegalArgumentException("Project does not exist.");
     }
 
-    public Map<String, CollectionModel<PartialProjectDTO>> getAllProjects() {
+    public Map<String, CollectionModel<PartialProjectDTO>> getAllProjects() throws SSLException {
 
         List<Project> projects = projRepo.findAll();
         List<Project> projectsWeb = iProjectWebRepository.findAll();
