@@ -580,4 +580,22 @@ public class UserServiceTest {
             underTest.deleteUser(id);
         });
     }
+
+    @Test
+    void shouldReturnUserStatusList() {
+        //Arrange
+        List<User> userList = new ArrayList<>();
+        User user = mock(User.class);
+        userList.add(user);
+        List<OutputUserDTO> outputUserDTOList = new ArrayList<>();
+        OutputUserDTO outputUserDTO = mock(OutputUserDTO.class);
+        outputUserDTOList.add(outputUserDTO);
+        CollectionModel<OutputUserDTO> userDtoList = CollectionModel.of(outputUserDTOList);
+        when(userRepo.findAll()).thenReturn(userList);
+        when(userMapper.toCollectionDTO(userList)).thenReturn(userDtoList);
+        //Act
+        CollectionModel<OutputUserDTO> result = underTest.showUserStatus();
+        //Assert
+        assertEquals(userDtoList,result);
+    }
 }

@@ -211,4 +211,16 @@ public class UserService {
             throw new NullPointerException("This user profile does not exist!");
         }
     }
+
+    public CollectionModel<OutputUserDTO> showUserStatus() {
+        List<User> users = userRepo.findAll();
+        CollectionModel<OutputUserDTO> usersStatusList = userMapper.toCollectionDTO(users);
+        for(OutputUserDTO user : usersStatusList) {
+            user.assignedIdProfiles = new ArrayList<>();
+            user.function = "";
+        }
+
+        return usersStatusList;
+    }
+
 }

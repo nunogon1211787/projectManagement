@@ -9,11 +9,9 @@ import org.mockito.MockedStatic;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.hateoas.CollectionModel;
 import switch2021.project.applicationServices.iRepositories.*;
-import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
-import switch2021.project.dtoModel.dto.OutputProjectDTO;
-import switch2021.project.dtoModel.dto.PartialProjectDTO;
-import switch2021.project.dtoModel.dto.ProjectDTO;
+import switch2021.project.dtoModel.dto.*;
 import switch2021.project.dtoModel.mapper.ProjectMapper;
+import switch2021.project.dtoModel.mapper.StatusMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManagementResourcesService;
 import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
@@ -61,6 +59,8 @@ class ProjectServiceTest {
     private IBudgetFactory budgetFactory;
     @Mock
     private ISprintDurationFactory sprintDurationFactory;
+    @Mock
+    private StatusMapper statusMapper;
 
     private static MockedStatic<ProjectStatusEnum> statusEnum;
     private static MockedStatic<Customer> customer;
@@ -476,5 +476,18 @@ class ProjectServiceTest {
         assertTrue(result);
     }
 
+    @Test
+    void shouldGetProjectStatus() {
+        //Arrange
+        CollectionModel<OutputStatusDTO> outputProjectDTOS = CollectionModel.of(new ArrayList<>());
+        when(statusMapper.toCollectionDto(any())).thenReturn(outputProjectDTOS);
+        ProjectStatusEnum[] statusValues = {ProjectStatusEnum.PLANNED, ProjectStatusEnum.INCEPTION};
+
+        when(ProjectStatusEnum.values()).thenReturn(statusValues);
+        //Act
+        CollectionModel<OutputStatusDTO> result = projectService.getProjectStatus();
+        //Assert
+        assertEquals(outputProjectDTOS,result);
+    }
 
 }

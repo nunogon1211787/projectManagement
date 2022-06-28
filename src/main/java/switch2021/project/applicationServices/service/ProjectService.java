@@ -4,11 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.applicationServices.iRepositories.*;
-import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
-import switch2021.project.dtoModel.dto.OutputProjectDTO;
-import switch2021.project.dtoModel.dto.PartialProjectDTO;
-import switch2021.project.dtoModel.dto.ProjectDTO;
+import switch2021.project.dtoModel.dto.*;
 import switch2021.project.dtoModel.mapper.ProjectMapper;
+import switch2021.project.dtoModel.mapper.StatusMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManagementResourcesService;
 import switch2021.project.entities.aggregates.Resource.Resource;
@@ -24,7 +22,6 @@ import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 import javax.net.ssl.SSLException;
 import java.time.LocalDate;
 import java.util.*;
-
 
 
 @Service
@@ -60,6 +57,8 @@ public class ProjectService {
     private IBudgetFactory budgetFactory;
     @Autowired
     private ISprintDurationFactory sprintDurationFactory;
+    @Autowired
+    private StatusMapper statusMapper;
 
 
     /**
@@ -103,7 +102,7 @@ public class ProjectService {
 
         ProjectID projID = projectIDFactory.create(id);
 
-        Optional<Project>opProject = projRepo.findById(projID);
+        Optional<Project> opProject = projRepo.findById(projID);
 
         if (opProject.isPresent()) {
             Project proj = opProject.get();
@@ -194,5 +193,13 @@ public class ProjectService {
         }
 
         return true;
+    }
+
+    public CollectionModel<OutputStatusDTO> getProjectStatus() {
+        ProjectStatusEnum[] statusValues = ProjectStatusEnum.values();
+
+        List<ProjectStatusEnum> projectStatusEnum = new ArrayList<>(Arrays.asList(statusValues));
+
+        return statusMapper.toCollectionDto(projectStatusEnum);
     }
 }
