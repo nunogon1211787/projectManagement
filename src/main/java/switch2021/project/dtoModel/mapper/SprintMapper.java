@@ -3,13 +3,9 @@ package switch2021.project.dtoModel.mapper;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.dtoModel.dto.OutputSprintDTO;
-import switch2021.project.dtoModel.dto.OutputUserStoryDTO;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
-import switch2021.project.entities.aggregates.UserStory.UserStory;
-import switch2021.project.interfaceAdapters.controller.ProjectController;
 import switch2021.project.interfaceAdapters.controller.SprintController;
 import switch2021.project.interfaceAdapters.controller.TaskController;
-import switch2021.project.interfaceAdapters.controller.UserStoryController;
 
 import java.util.List;
 import java.util.stream.Collectors;

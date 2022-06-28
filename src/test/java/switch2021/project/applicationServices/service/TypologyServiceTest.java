@@ -79,7 +79,7 @@ public class TypologyServiceTest {
             when(iTypologyRepo.existsByTypologyId(typo.getDescriptionID())).thenReturn(true);
             when(des.getText()).thenReturn("Fixed Cost");
             when(id.getDescription()).thenReturn(des);
-            when(typo.hasID_Description(des.getText())).thenReturn(true);
+            when(typo.hasDescriptionID(des.getText())).thenReturn(true);
             typologyService.createAndSaveTypology(dto);
         });
     }
@@ -99,7 +99,7 @@ public class TypologyServiceTest {
             when(des.getText()).thenReturn("Fixed Cost");
             when(id.getDescription()).thenReturn(des);
             when(typo.getDescriptionID()).thenReturn(id);
-            when(typo.hasID_Description(des.getText())).thenReturn(true);
+            when(typo.hasDescriptionID(des.getText())).thenReturn(true);
             when(iTypologyRepo.findByTypologyId(id)).thenReturn(null);
             //Act
             typologyService.findTypologyRequested("Fixed Cost");
@@ -153,9 +153,9 @@ public class TypologyServiceTest {
         when(id.getDescription()).thenReturn(des);
         when(id1.getDescription()).thenReturn(des1);
         when(id2.getDescription()).thenReturn(des2);
-        when(typo.hasID_Description(des.getText())).thenReturn(false);
-        when(typo1.hasID_Description(des1.getText())).thenReturn(false);
-        when(typo2.hasID_Description(des2.getText())).thenReturn(false);
+        when(typo.hasDescriptionID(des.getText())).thenReturn(false);
+        when(typo1.hasDescriptionID(des1.getText())).thenReturn(false);
+        when(typo2.hasDescriptionID(des2.getText())).thenReturn(false);
         when(iTypologyRepo.findAll()).thenReturn(List.of(new Typology[]{typo, typo1, typo2}));
         when(typologyMapper.toCollectionModel(iTypologyRepo.findAll())).thenReturn(CollectionModel.of(List.of(new TypologyDTO[]{dto,
                 dto1, dto2})));
