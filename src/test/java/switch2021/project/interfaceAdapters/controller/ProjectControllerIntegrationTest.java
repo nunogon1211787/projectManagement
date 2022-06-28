@@ -39,7 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ProjectControllerIntegrationTest {
 
     public static final String BASE_URL = "https://localhost:8443";
-    
+
     @Autowired
     ProjectController ctrl;
 
@@ -167,9 +167,10 @@ class ProjectControllerIntegrationTest {
         //Arrange
         //Act
         Map<String, CollectionModel<PartialProjectDTO>> response = service.getAllProjects();
-        int mapProjectsSizeContent = response.get("internalProjects").getContent().size() + response.get("externalProjects").getContent().size();
+//        int mapProjectsSizeContent = response.get("internalProjects").getContent().size() + response.get("externalProjects").getContent().size();
+        int mapProjectsSizeContent = response.get("internalProjects").getContent().size();
         //Assert
-        assertEquals(4, mapProjectsSizeContent);
+        assertEquals(3, mapProjectsSizeContent);
     }
 
     @Test
