@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import switch2021.project.applicationServices.service.UserProfileService;
 import switch2021.project.dtoModel.dto.UserProfileDTO;
 
+import javax.net.ssl.SSLException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +41,7 @@ public class UserProfileControllerTest {
 
 
     @Test
-    void getAllProfilesSuccess() {
+    void getAllProfilesSuccess() throws SSLException {
         //Arrange
         Map<String, CollectionModel<UserProfileDTO>> profilesDTO = new HashMap<>();
         when(service.getAllProfiles()).thenReturn(profilesDTO);
@@ -50,7 +52,7 @@ public class UserProfileControllerTest {
     }
 
     @Test
-    void getAllProfilesCatchException() {
+    void getAllProfilesCatchException() throws SSLException {
         //Arrange
         when(service.getAllProfiles()).thenThrow();
         //Act
@@ -157,16 +159,4 @@ public class UserProfileControllerTest {
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(400);
     }
-
-
-
-//    @Test
-//    void shouldCreateAUserProfile() {
-//        // Arrange
-//        UserProfileDTO dto = new UserProfileDTO("regular");
-//        // Act
-//        ResponseEntity<Object> responseEntity = ctrl.createUserProfile(dto);
-//        // Assert
-//        assertEquals(201, responseEntity.getStatusCodeValue());
-//    }
 }

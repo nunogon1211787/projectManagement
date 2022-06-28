@@ -13,6 +13,6 @@ public class UserProfileRestDTO extends RepresentationModel<UserProfileRestDTO> 
     /**
      * Attribute
      */
-    private String description;
+    private String designation;
 
 }
