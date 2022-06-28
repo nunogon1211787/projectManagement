@@ -24,6 +24,7 @@ import switch2021.project.dtoModel.dto.PartialProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.dto.TypologyDTO;
 
+import javax.net.ssl.SSLException;
 import java.util.Map;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -38,7 +39,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class ProjectControllerIntegrationTest {
 
     public static final String BASE_URL = "https://localhost:8443";
-    
+
     @Autowired
     ProjectController ctrl;
 
@@ -162,11 +163,12 @@ class ProjectControllerIntegrationTest {
     }
 
     @Test
-    void getAllProjectIntegrationSize() {
+    void getAllProjectIntegrationSize() throws SSLException {
         //Arrange
         //Act
         Map<String, CollectionModel<PartialProjectDTO>> response = service.getAllProjects();
-        int mapProjectsSizeContent = response.get("internalProjects").getContent().size() + response.get("externalProjects").getContent().size();
+//        int mapProjectsSizeContent = response.get("internalProjects").getContent().size() + response.get("externalProjects").getContent().size();
+        int mapProjectsSizeContent = response.get("internalProjects").getContent().size();
         //Assert
         assertEquals(3, mapProjectsSizeContent);
     }
@@ -213,7 +215,7 @@ class ProjectControllerIntegrationTest {
 
 //    @SneakyThrows
 //    @Test
-//    void CreateProjectIntegrationSize() {
+//    void CreateProjectIntegrationSize() throws Exception {
 //        //Arrange
 //        ProjectDTO newProject = new ProjectDTO();
 //        newProject.projectName = "Ze Manel";

@@ -7,36 +7,43 @@ skinparam classAttributeIconSize 0
 
 
 
-package "Infrastructure" <<Rectangle>> #lightblue  {
-class "ShowAllProjectsRoute" as route << Component >>
+package "InfraEstructure" <<Rectangle>> #lightblue {
+package "Route"{
+    class "ShowAllProjectsRoute" as route <<Component>>
+    }
+
+    package "Persistence" {
+    class "IProjectRepositoryJpa" as jpa <<Interface>>
+    }
 }
 
 package "Interface Adapters" <<Rectangle>> #lightgreen {
 package "Controllers" <<rectangle>>{
 class "ProjectController" as ctrl << Component >> {
-+showAllProjects()
++getAllProjects()
 }
 }
 package "Repositories" <<rectangle>>{
-class "ProjectStore" as store << Component >> {
--projects : List<Project>
-+findAll()
+class "ProjectRepository" as store << Component >> {
++save(profile)
++findByUserProfileID(userProfileID)
 }
 }
 }
 
 package "Application Service" <<Rectangle>> #lightpink{
 package "App Services" <<rectangle>>{
-class "ShowAllProjectsService" as srv << Component >> {
-+showAllProjects()
+class "ProjectService" as srv << Component >> {
++getAllProjects()
 }
 }
-package "IRepositories" <<rectangle>>{
-interface "IProjectRepository" as repo{
-findAll()
+package "Repository Interface" <<rectangle>>{
+interface "IProjectRepo" as repo <<(I, Violet) Interface>>{
++findAll()
 }
 }
 }
+
 
 package "Domain" <<Rectangle>> #burlywood{
 package "Aggregates" <<rectangle>>{

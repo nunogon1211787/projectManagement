@@ -16,7 +16,8 @@ import switch2021.project.applicationServices.service.UserService;
 import switch2021.project.dtoModel.dto.NewUserInfoDTO;
 import switch2021.project.dtoModel.dto.RequestDTO;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -48,7 +49,7 @@ public class UserControllerIntegrationTest {
         String photo = "ana.png";
         NewUserInfoDTO inputDTO = new NewUserInfoDTO(userName, email, function, password, password, photo);
         //Act
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post(BASE_URL + "/users")
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post(BASE_URL+"/users")
                         .contentType("application/json")
                         .content(mapper.writeValueAsString(inputDTO))
                         .accept(MediaType.APPLICATION_JSON))
@@ -58,8 +59,26 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
-    void getUser() {
+    void getUser() throws Exception {
+        //Arrange
+        RequestDTO dto = new RequestDTO("Director");
+        String userName = "Ana";
+        String email = "ana123@beaver.com";
+        String function = "PM";
+        String password = "HelloWorld2021!";
+        String photo = "ana.png";
+        NewUserInfoDTO inputDTO = new NewUserInfoDTO(userName, email, function, password, password, photo);
+        userService.createAndSaveUser(inputDTO);
+        //Act
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.patch(BASE_URL + "/users/ana123@beaver.com")
+                        .contentType("application/json")
+                        .content(mapper.writeValueAsString(dto))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andReturn();
+        //Assert
+        assertEquals(200, result.getResponse().getStatus());
     }
+
 
     @Test
     void showAllUsers() {

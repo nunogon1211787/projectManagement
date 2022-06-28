@@ -176,7 +176,7 @@ public class UserStoryServiceTest {
         when(repo.findAll()).thenReturn(userStories);
         when(mapper.toCollectionDto(userStories)).thenReturn(collection);
         //Act
-        CollectionModel<OutputUserStoryDTO> result = service.showAllUserStories();
+        CollectionModel<OutputUserStoryDTO> result = service.getAllUserStories();
         //Assert
         assertEquals(collection, result);
     }
