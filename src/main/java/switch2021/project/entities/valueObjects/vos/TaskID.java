@@ -10,7 +10,6 @@ import javax.persistence.Embedded;
 import java.util.Objects;
 
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 public class TaskID implements ValueObject<TaskID> {
 

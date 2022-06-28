@@ -65,10 +65,7 @@ public class ProjectService {
     /**
      * Methods to execute controller requests to Project Aggregate
      */
-
-
     public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) throws Exception {
-
         Project newProject;
 
         if (iTypologyRepo.existsByTypologyId(typologyIDFactory.createIdWithString(projDTO.getTypology()))) {
