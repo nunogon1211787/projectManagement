@@ -155,16 +155,4 @@ public class UserProfileControllerTest {
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(400);
     }
-
-
-
-//    @Test
-//    void shouldCreateAUserProfile() {
-//        // Arrange
-//        UserProfileDTO dto = new UserProfileDTO("regular");
-//        // Act
-//        ResponseEntity<Object> responseEntity = ctrl.createUserProfile(dto);
-//        // Assert
-//        assertEquals(201, responseEntity.getStatusCodeValue());
-//    }
 }

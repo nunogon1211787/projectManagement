@@ -1,6 +1,7 @@
 package switch2021.project.applicationServices.service;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
@@ -16,6 +17,7 @@ import switch2021.project.entities.valueObjects.voFactories.voFactories.Typology
 import switch2021.project.entities.valueObjects.vos.Description;
 import switch2021.project.entities.valueObjects.vos.TypologyID;
 import java.util.List;
+import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
@@ -44,19 +46,21 @@ public class TypologyServiceTest {
     public void createAndSaveTypologySuccess() {
         //Arrange
         TypologyDTO dto = mock(TypologyDTO.class);
-        Description des = mock(Description.class);
+        Typology typology = mock(Typology.class);
         TypologyID id = mock((TypologyID.class));
-        Typology typo = mock(Typology.class);
+        TypologyDTO output = mock(TypologyDTO.class);
+        Typology saved = mock(Typology.class);
+
+        when(iTypologyFactory.createTypology(dto)).thenReturn(typology);
+        when(typology.getDescriptionID()).thenReturn(id);
+        when(iTypologyRepo.existsByTypologyId(id)).thenReturn(false);
+        when(factoryId.createIdWithString("Fixed Cost")).thenReturn(id);
+        when(iTypologyRepo.save(typology)).thenReturn(saved);
+        when(typologyMapper.modelToDto(saved)).thenReturn(output);
         //Act
-        when(dto.getDescription()).thenReturn("Fixed Cost");
-        when(iTypologyFactory.createTypology(dto)).thenReturn(typo);
-        when(iTypologyRepo.save(typo)).thenReturn(typo);
-        when(des.getText()).thenReturn("Fixed Cost");
-        when(id.getDescription()).thenReturn(des);
-        when(typo.hasID_Description(des.getText())).thenReturn(false);
-        when(typologyMapper.modelToDto(typo)).thenReturn(dto);
+        TypologyDTO res = typologyService.createAndSaveTypology(dto);
         //Assert
-        assertEquals("Fixed Cost", typologyService.createAndSaveTypology(dto).getDescription());
+        assertEquals(output, res);
     }
 
     @Test
@@ -102,26 +106,21 @@ public class TypologyServiceTest {
         });
     }
 
-//    @Test
-//    @DisplayName("Find Typology By ID, with Success")
-//    public void findByID() {
-//        //Arrange
-//        String id = "Fixed Cost";
-//        TypologyID typologyID = mock(TypologyID.class);
-//        TypologyDTO typologyDTO = mock(TypologyDTO.class);
-//        Typology typology = mock(Typology.class);
-//
-//        when(factoryId.createId(typologyDTO)).thenReturn(typologyID);
-//        when(iTypologyRepo.save(typology)).thenReturn(typology);
-//        when(iTypologyRepo.findByTypologyId(typologyID)).thenReturn(Optional.of(typology));
-//        when(typologyMapper.modelToDto(typology)).thenReturn(typologyDTO);
-//
-//        //Act
-//        TypologyDTO dto = typologyService.findTypologyRequested(id);
-//
-//        //Assert
-//        assertEquals(typologyDTO, dto);
-//    }
+    @DisplayName("Typology Non Exist")
+    @Test
+    void findTypologyNonExist() {
+        //Assert
+        assertThrows(Exception.class, () -> {
+            //Arrange
+            Typology typology = mock(Typology.class);
+            TypologyID typologyID = mock(TypologyID.class);
+            TypologyDTO typologyDTO = mock(TypologyDTO.class);
+            when(iTypologyRepo.findByTypologyId(typologyID)).thenReturn(Optional.of(typology));
+            when(typologyMapper.modelToDto(typology)).thenReturn(typologyDTO);
+            //Act
+            typologyService.findTypologyRequested("");
+        });
+    }
 
     @Test
     public void findAllTypology() {
@@ -162,6 +161,21 @@ public class TypologyServiceTest {
                 dto1, dto2})));
         //Assert
         assertEquals(3, typologyService.findAllTypologies().getContent().size());
+    }
+
+    @DisplayName("Delete Typology")
+    @Test
+    public void deleteTypology_Fail() {
+        //Assert
+        assertThrows(Exception.class, () -> {
+            //Arrange
+            String id = "Fixed Cost";
+            TypologyID typologyID = mock(TypologyID.class);
+            when(factoryId.createIdWithString("Fixed Cost")).thenReturn(typologyID);
+            when(iTypologyRepo.findByTypologyId(typologyID)).thenReturn(Optional.empty());
+            //Act
+            typologyService.deleteTypology(id);
+        });
     }
 
 }

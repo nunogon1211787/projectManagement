@@ -15,7 +15,8 @@ import org.springframework.hateoas.server.core.Relation;
  * Is used mappers for that to convert data between the DTO and any entity objects.
  */
 
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Relation(collectionRelation = "Typologies")

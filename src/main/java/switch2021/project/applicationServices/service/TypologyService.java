@@ -10,7 +10,6 @@ import switch2021.project.entities.aggregates.Typology.Typology;
 import switch2021.project.entities.factories.factoryInterfaces.ITypologyFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ITypologyIDFactory;
 import switch2021.project.entities.valueObjects.vos.TypologyID;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -69,8 +68,11 @@ public class TypologyService {
     /**
      * Typology Delete's Methods
      */
-    public void deleteTypology(String id) {
+    public void deleteTypology(String id) throws Exception{
         TypologyID typoId = factoryId.createId(new TypologyDTO(id));
+        if(!iTypologyRepo.existsByTypologyId(typoId)){
+            throw new Exception("Typology does not exist!");
+        }
         iTypologyRepo.deleteByTypologyId(typoId);
     }
 }

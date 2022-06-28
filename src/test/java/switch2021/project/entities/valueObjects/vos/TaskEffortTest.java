@@ -36,6 +36,31 @@ public class TaskEffortTest {
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")
+    public void taskEffort_NotEquals_1() {
+        //Arrange
+        Hours hours = mock(Hours.class);
+        when(hours.getEffortHours()).thenReturn(2);
+
+        Minutes minutes = mock(Minutes.class);
+        when(minutes.getEffortMinutes()).thenReturn(2);
+
+        Date date = mock(Date.class);
+        when(date.getEffortDate()).thenReturn(LocalDate.now());
+
+        Description description = mock(Description.class);
+        when(description.getText()).thenReturn("description");
+
+        Attachment attachment = mock(Attachment.class);
+        when(attachment.getExtension()).thenReturn("attachment");
+        //Act
+        TaskEffort taskEffort = new TaskEffort(hours, minutes, date, description, attachment);
+        String expected = "";
+        //Assert
+        assertNotEquals(expected, taskEffort.toString());
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
     public void taskEffort_Equals_2() {
         //Arrange
         Hours hours = mock(Hours.class);
@@ -61,6 +86,31 @@ public class TaskEffortTest {
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")
+    public void taskEffort_Null_1() {
+        //Arrange
+        Hours hours = mock(Hours.class);
+        when(hours.getEffortHours()).thenReturn(2);
+
+        Minutes minutes = mock(Minutes.class);
+        when(minutes.getEffortMinutes()).thenReturn(2);
+
+        Date date = mock(Date.class);
+        when(date.getEffortDate()).thenReturn(LocalDate.now());
+
+        Description description = mock(Description.class);
+        when(description.getText()).thenReturn("description");
+
+        Attachment attachment = mock(Attachment.class);
+        when(attachment.getExtension()).thenReturn("attachment");
+        //Act
+        TaskEffort taskEffort = new TaskEffort(hours, minutes, date, description, attachment);
+        TaskEffort taskEffort1 = null;
+        //Assert
+        assertNotEquals(taskEffort, taskEffort1);
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
     public void hashCode_1() {
         //Arrange
         Hours hours = mock(Hours.class);
@@ -80,6 +130,34 @@ public class TaskEffortTest {
         //Act
         TaskEffort taskEffort = new TaskEffort(hours, minutes, date, description, attachment);
         TaskEffort taskEffort1 = new TaskEffort();
+        //Assert
+        assertNotEquals(taskEffort.hashCode(), taskEffort1.hashCode());
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void hashCode_1_NotEquals() {
+        //Arrange
+        Hours hours = mock(Hours.class);
+        when(hours.getEffortHours()).thenReturn(2);
+
+        Minutes minutes = mock(Minutes.class);
+        when(minutes.getEffortMinutes()).thenReturn(2);
+
+        Minutes minutes1 = mock(Minutes.class);
+        when(minutes.getEffortMinutes()).thenReturn(22);
+
+        Date date = mock(Date.class);
+        when(date.getEffortDate()).thenReturn(LocalDate.now());
+
+        Description description = mock(Description.class);
+        when(description.getText()).thenReturn("description");
+
+        Attachment attachment = mock(Attachment.class);
+        when(attachment.getExtension()).thenReturn("attachment");
+        //Act
+        TaskEffort taskEffort = new TaskEffort(hours, minutes, date, description, attachment);
+        TaskEffort taskEffort1 = new TaskEffort(hours, minutes1, date, description, attachment);
         //Assert
         assertNotEquals(taskEffort.hashCode(), taskEffort1.hashCode());
     }
@@ -294,4 +372,27 @@ public class TaskEffortTest {
         assertEquals(effort.getAttachment(), attachment1);
     }
 
+    @Test
+    @DisplayName("Test to check Illegal Argument Exception")
+    public void notValidWorkTimeValue() {
+        //Assert
+        assertThrows(IllegalArgumentException.class, () -> {
+            //Assert
+            Hours hours = mock(Hours.class);
+            when(hours.getEffortHours()).thenReturn(0);
+
+            Minutes minutes = mock(Minutes.class);
+            when(minutes.getEffortMinutes()).thenReturn(0);
+
+            Date date = mock(Date.class);
+            when(date.getEffortDate()).thenReturn(LocalDate.now());
+            Description description = mock(Description.class);
+            when(description.getText()).thenReturn("description");
+            Attachment attachment = mock(Attachment.class);
+            when(attachment.getExtension()).thenReturn("attachment");
+            //Act
+            new TaskEffort(hours, minutes, date, description, attachment);
+
+    });
+}
 }
