@@ -13,6 +13,8 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import switch2021.project.applicationServices.service.UserProfileService;
 import switch2021.project.dtoModel.dto.UserProfileDTO;
+
+import javax.net.ssl.SSLException;
 import java.util.HashMap;
 import java.util.Map;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -37,7 +39,7 @@ public class UserProfileControllerTest {
 
 
     @Test
-    void getAllProfilesSuccess() {
+    void getAllProfilesSuccess() throws SSLException {
         //Arrange
         Map<String, CollectionModel<UserProfileDTO>> profilesDTO = new HashMap<>();
         when(service.getAllProfiles()).thenReturn(profilesDTO);
@@ -48,7 +50,7 @@ public class UserProfileControllerTest {
     }
 
     @Test
-    void getAllProfilesCatchException() {
+    void getAllProfilesCatchException() throws SSLException {
         //Arrange
         when(service.getAllProfiles()).thenThrow();
         //Act

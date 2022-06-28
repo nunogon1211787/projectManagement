@@ -19,6 +19,7 @@ import switch2021.project.entities.factories.factoryInterfaces.IUserProfileFacto
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserProfileIDFactory;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
 
+import javax.net.ssl.SSLException;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -92,7 +93,7 @@ public class UserProfileServiceTest {
     }
 
     @Test
-    void getAllUserProfileSuccess() {
+    void getAllUserProfileSuccess() throws SSLException {
         //Arrange
         List<UserProfile> userProfiles = new ArrayList<>();
         when(iUserProfileRepo.findAll()).thenReturn(userProfiles);
