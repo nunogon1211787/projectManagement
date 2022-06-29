@@ -180,21 +180,15 @@ public class User implements Entity<User> {
     /**
      * Activation Status Methods
      */
-    public boolean activateStatus() {
-        //Can't be simplified because the status is a business rule
+    public void activateStatus() {
         if (!this.isActive) {
-            isActive = true;
+            this.isActive = true;
         }
-        return isActive;
     }
 
-    public boolean inactivateStatus() {
-        //Can't be simplified because the status is a business rule
+    public void inactivateStatus() {
         if (this.isActive) {
             isActive = false;
-            return true;
-        } else {
-            return false;
         }
     }
 

@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 
 @Getter
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 public class UserStoryOfSprintDTO extends RepresentationModel<UserStoryOfSprintDTO> {
 

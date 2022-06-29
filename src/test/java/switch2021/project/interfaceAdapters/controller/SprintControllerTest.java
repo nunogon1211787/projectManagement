@@ -3,9 +3,11 @@ package switch2021.project.interfaceAdapters.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -18,9 +20,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+//@SpringBootTest
+//@AutoConfigureMockMvc
 public class SprintControllerTest {
+/*
+    public static final String URL_PATH = "https://localhost:8443";
 
     @Autowired
     private MockMvc mockMvc;
@@ -39,7 +43,7 @@ public class SprintControllerTest {
         NewSprintDTO sprintDTO = new NewSprintDTO("Project_2022_1", "description", "");
 
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.post("/sprints")
+                .perform(MockMvcRequestBuilders.post(URL_PATH + "/sprints")
                                  .contentType("application/json")
                                  .content(objectMapper.writeValueAsString(sprintDTO))
                                  .accept(MediaType.APPLICATION_JSON))
@@ -66,28 +70,8 @@ public class SprintControllerTest {
         String resultContent2 = result2.getResponse().getContentAsString();
         assertNotNull(resultContent2);
         assertTrue(resultContent2.contains("Project_2022_1"));*/
-
-    }
-
 /*
-@Test //TODO Missing Get Method in controller
-    void shouldReturnNotFound() throws Exception {
-
-        String generatedCode = RandomStringUtils.randomAlphanumeric(10);
-
-        //GET sprints/{id}
-
-        MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get("/sprints/" + generatedCode)
-                                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest())
-                .andReturn();
-
-        String resultContent = result.getResponse().getContentAsString();
-        assertNotNull(resultContent);
-        assertEquals("{\"errorMessage\":\"Project does not exist\"}", resultContent);
     }
-*/
 
 
     @Test
@@ -119,7 +103,7 @@ public class SprintControllerTest {
         projectDTO.customer = "customer";
 
         MvcResult resulttypo = mockMvc
-                .perform(MockMvcRequestBuilders.post("/typologies")
+                .perform(MockMvcRequestBuilders.post(URL_PATH + "/typologies")
                                  .contentType("application/json")
                                  .content(objectMapper.writeValueAsString(typologyDTO))
                                  .accept(MediaType.APPLICATION_JSON))
@@ -127,7 +111,7 @@ public class SprintControllerTest {
                 .andReturn();
 
         MvcResult projeResult = mockMvc
-                .perform(MockMvcRequestBuilders.post("/projects")
+                .perform(MockMvcRequestBuilders.post(URL_PATH + "/projects")
                                  .contentType("application/json")
                                  .content(objectMapper.writeValueAsString(projectDTO))
                                  .accept(MediaType.APPLICATION_JSON))
@@ -138,7 +122,7 @@ public class SprintControllerTest {
         assertNotNull(projContent);
 
         MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.post("/sprints")
+                .perform(MockMvcRequestBuilders.post(URL_PATH + "/sprints")
                                  .contentType("application/json")
                                  .content(objectMapper.writeValueAsString(sprintDTO))
                                  .accept(MediaType.APPLICATION_JSON))
@@ -148,7 +132,7 @@ public class SprintControllerTest {
         assertNotNull(resultContent);
 
         MvcResult resultUs = mockMvc
-                .perform(MockMvcRequestBuilders.post("/userstories")
+                .perform(MockMvcRequestBuilders.post(URL_PATH + "/userstories")
                                  .contentType("application/json")
                                  .content(objectMapper.writeValueAsString(createUserStoryDTO))
                                  .accept(MediaType.APPLICATION_JSON))
@@ -159,7 +143,7 @@ public class SprintControllerTest {
 
 
         MvcResult result2 = mockMvc
-                .perform(MockMvcRequestBuilders.post("/sprints/Project_2022_1_Sprint")
+                .perform(MockMvcRequestBuilders.post(URL_PATH + "/sprints/Project_2022_1_Sprint")
                                  .contentType("application/json")
                                  .content(objectMapper.writeValueAsString(userStoryIdDTO))
                                  .accept(MediaType.APPLICATION_JSON))
@@ -167,7 +151,14 @@ public class SprintControllerTest {
                 .andReturn();
 
         MvcResult scrumBoard = mockMvc
-                .perform(MockMvcRequestBuilders.get("/sprints/Project_2022_1_Sprint")
+                .perform(MockMvcRequestBuilders.get(URL_PATH + "/sprints/Project_2022_1_Sprint")
+                                 .contentType("application/json")
+                                 .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        MvcResult temp = mockMvc
+                .perform(MockMvcRequestBuilders.get(URL_PATH + "/users/status")
                                  .contentType("application/json")
                                  .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -178,4 +169,10 @@ public class SprintControllerTest {
 
         assertTrue(result2Content.contains("User story added to sprintbacklog"));
     }
+
+    @Test
+    @DisplayName("Validate sprint start date")
+    void validateSprintStartDate() throws Exception {
+
+    }*/
 }

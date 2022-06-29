@@ -28,13 +28,6 @@ public class UserStoryOfSprint implements ValueObject<UserStoryOfSprint> {
         this.sprintName = sprintName;
     }
 
-    /**
-     * Method to Have a User Story Of Sprint
-     */
-    public boolean hasUserStoryOfSprint(String userStoryOfSprint) {
-        return Objects.equals(this.userStoryOfSprintStatus.toString(), userStoryOfSprint);
-    }
-
     @Override
     public boolean sameValueAs(UserStoryOfSprint other) {
         return other != null && this.userStoryId.equals(other.userStoryId)

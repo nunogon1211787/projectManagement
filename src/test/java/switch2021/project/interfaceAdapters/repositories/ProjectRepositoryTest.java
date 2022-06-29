@@ -12,34 +12,32 @@ import switch2021.project.dataModel.JPA.assembler.ProjectJpaAssembler;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.persistence.ProjectJpaRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-//@ExtendWith(SpringExtension.class)
+
 @SpringBootTest
 public class ProjectRepositoryTest {
 
     @MockBean
-    ProjectJpaRepository projectJpaRepository;
+    private ProjectJpaRepository projectJpaRepository;
 
     @MockBean
-    ProjectJpaAssembler projectJpaAssembler;
+    private ProjectJpaAssembler projectJpaAssembler;
 
     @InjectMocks
-    ProjectRepository projRepo;
+    private ProjectRepository projRepo;
 
     @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
     }
 
-    //
+
     @DisplayName("Save success")
     @Test
     public void saveSuccess() {
@@ -133,5 +131,23 @@ public class ProjectRepositoryTest {
 
         //Assert
         assertFalse(result);
+    }
+
+    @Test
+    public void existByIdTrue() {
+        //Arrange
+        ProjectID id = mock(ProjectID.class);
+        when(projectJpaRepository.existsById(id)).thenReturn(true);
+        //Act and Assert
+        assertTrue(projRepo.existsById(id));
+    }
+
+    @Test
+    public void existByIdFalse() {
+        //Arrange
+        ProjectID id = mock(ProjectID.class);
+        when(projectJpaRepository.existsById(id)).thenReturn(false);
+        //Act and Assert
+        assertFalse(projRepo.existsById(id));
     }
 }

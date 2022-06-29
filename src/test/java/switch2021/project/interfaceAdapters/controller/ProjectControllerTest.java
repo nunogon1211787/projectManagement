@@ -11,15 +11,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import switch2021.project.applicationServices.service.ProjectService;
-import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
-import switch2021.project.dtoModel.dto.OutputProjectDTO;
-import switch2021.project.dtoModel.dto.PartialProjectDTO;
-import switch2021.project.dtoModel.dto.ProjectDTO;
+import switch2021.project.dtoModel.dto.*;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.Budget;
-import switch2021.project.entities.valueObjects.vos.ProjectID;
-import switch2021.project.entities.valueObjects.vos.UserID;
 
+import javax.net.ssl.SSLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +40,7 @@ class ProjectControllerTest {
     }
 
     @Test
-    void getAllProjectSuccess() {
+    void getAllProjectSuccess() throws SSLException {
         //Arrange
         Map<String, CollectionModel<PartialProjectDTO>> allProjectsDto = new HashMap<>();
         when(service.getAllProjects()).thenReturn(allProjectsDto);
@@ -54,7 +51,7 @@ class ProjectControllerTest {
     }
 
     @Test
-    void getAllProjectCatchException() {
+    void getAllProjectCatchException() throws SSLException {
         //Arrange
         doThrow(IllegalArgumentException.class).when(service).getAllProjects();
         //Act
@@ -189,4 +186,26 @@ class ProjectControllerTest {
         assertThat(response.getStatusCodeValue()).isEqualTo(404);
     }
 
+    @Test
+    public void getProjectStatusSuccess() {
+        //Arrange
+        OutputStatusDTO statusDTO = mock(OutputStatusDTO.class);
+        List<OutputStatusDTO> dtos = new ArrayList<>();
+        dtos.add(statusDTO);
+        when(service.getProjectStatus()).thenReturn(CollectionModel.of(dtos));
+        //Act
+        ResponseEntity<Object> result = ctrl.getProjectStatus();
+        //Assert
+        assertThat(result.getStatusCodeValue()).isEqualTo(200);
+    }
+
+    @Test
+    public void getProjectStatusFail() {
+        //Arrange
+        doThrow(IllegalArgumentException.class).when(service).getProjectStatus();
+        //Act
+        ResponseEntity<Object> result = ctrl.getProjectStatus();
+        //Assert
+        assertThat(result.getStatusCodeValue()).isEqualTo(404);
+    }
 }

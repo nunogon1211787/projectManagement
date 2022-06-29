@@ -12,20 +12,4 @@ public class SwitchApp /*implements CommandLineRunner*/ {
         SpringApplication.run(SwitchApp.class, args);
     }
 
-//    @Autowired
-//    private UserJpaRepository sURepository;
-//
-//    @Override
-//    public void run(String... args) throws Exception {
-//    }
-
-//    @Bean
-//    public CommandLineRunner app() {
-//        return (args) -> {
-//            this.sURepository.save(new UserJpa("Ramesh Fadatare", "ramesh@gmail.com", "tester", "photo.png"));
-//            this.sURepository.save(new UserJpa("Tom Cruise", "tom@gmail.com", "actor", "photo.png"));
-//            this.sURepository.save(new UserJpa("Tony Stark", "tony@gmail.com", "tester", "photo.png"));
-//
-//        };
-//    }
 }

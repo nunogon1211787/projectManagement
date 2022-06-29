@@ -35,6 +35,19 @@ public class UsTitleTest {
     }
 
     @Test
+    @DisplayName("Validate that tile contain the word want")
+    public void checkContainsWordWant() {
+        //Arrange
+        String usTitle = "As a PO, i want to test this string and I Want to test";
+        //Act
+        boolean expected = usTitle.contains("want");
+        boolean expected2 = usTitle.contains("Want");
+        //Assert
+        assertTrue(expected);
+        assertTrue(expected2);
+    }
+
+    @Test
     @DisplayName("Fail create title - don't begin with word as")
     public void usTitleDontBeginWithAs() {
         //Arrange
@@ -81,8 +94,10 @@ public class UsTitleTest {
     public void overrideTestNull() {
         //Arrange
         UsTitle usTitle = null;
+        UsTitle usTitle2 = new UsTitle("As a PO, i want to test this string");
         //Act and Assert
         assertNull(usTitle);
+        assertNotEquals(usTitle, usTitle2);
     }
 
     @Test
@@ -126,21 +141,25 @@ public class UsTitleTest {
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")
-    public void sameValueOf() {
+    public void sameValueFalse() {
         //Arrange
         UsTitle usTitle = new UsTitle("As a PO, i want to test this string");
         UsTitle usTitle2 = new UsTitle("As a PO, i want to test");
+        boolean equals = usTitle.equals(usTitle2);
         //Act and Assert
         assertFalse(usTitle.sameValueAs(usTitle2));
+        assertFalse(equals);
     }
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")
-    public void sameValueAs_True() {
+    public void sameValueAsTrue() {
         //Arrange
         UsTitle usTitle = new UsTitle("As a PO, i want to test");
         UsTitle usTitle2 = new UsTitle("As a PO, i want to test");
+        boolean equals = usTitle.equals(usTitle2);
         //Act and Assert
         assertTrue(usTitle.sameValueAs(usTitle2));
+        assertTrue(equals);
     }
 }

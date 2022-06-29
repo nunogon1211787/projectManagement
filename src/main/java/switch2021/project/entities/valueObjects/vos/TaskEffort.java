@@ -1,11 +1,9 @@
 package switch2021.project.entities.valueObjects.vos;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import switch2021.project.utils.ValueObject;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -14,7 +12,6 @@ import java.util.Objects;
 
 @Embeddable
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class TaskEffort implements ValueObject<TaskEffort> {
@@ -34,6 +31,22 @@ public class TaskEffort implements ValueObject<TaskEffort> {
     @Embedded
     @AttributeOverride(name = "extension", column = @Column(name = "EffortAttachment"))
     private Attachment attachment;
+    private static final int MINHOUR = 0;
+
+    public TaskEffort(Hours effortHours, Minutes effortMinutes, Date effortDate, Description comment,
+                      Attachment attachment) {
+        checkWorkTimeRules(effortHours, effortMinutes);
+        this.effortHours = effortHours;
+        this.effortMinutes = effortMinutes;
+        this.effortDate = effortDate;
+        this.comment = comment;
+        this.attachment = attachment;
+    }
+
+    private void checkWorkTimeRules(Hours effortHours, Minutes effortMinutes) {
+        if(effortHours.getEffortHours() == MINHOUR & effortMinutes.getEffortMinutes() == MINHOUR)
+            throw new IllegalArgumentException("Not valid work time values.");
+    }
 
     /**
      * Override Methods

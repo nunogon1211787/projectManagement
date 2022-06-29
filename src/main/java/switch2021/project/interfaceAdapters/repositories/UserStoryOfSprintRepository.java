@@ -1,6 +1,5 @@
 package switch2021.project.interfaceAdapters.repositories;
 
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.applicationServices.iRepositories.IUserStoryOfSprintRepo;
@@ -13,9 +12,7 @@ import switch2021.project.persistence.UserStoryOfSprintJpaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-@Getter
 @Repository
 public class UserStoryOfSprintRepository implements IUserStoryOfSprintRepo {
 
@@ -36,11 +33,6 @@ public class UserStoryOfSprintRepository implements IUserStoryOfSprintRepo {
     }
 
     @Override
-    public Optional<UserStoryOfSprint> findByUserStoryByUsId(UserStoryID userStoryID) {
-        return Optional.empty();
-    }
-
-    @Override
     public List<UserStoryOfSprint> findAllUserStoriesBySprintID(SprintID sprintID) {
         List<UserStoryOfSprintJpa> userStoryOfSprintJpaList = userStoryOfSprintJpaRepository.findAll();
         List<UserStoryOfSprint> userStoryOfSprintList = new ArrayList<>();
@@ -54,12 +46,12 @@ public class UserStoryOfSprintRepository implements IUserStoryOfSprintRepo {
     }
 
     @Override
-    public Optional<UserStoryOfSprint> save(UserStoryOfSprint userStoryOfSprint) {
+    public UserStoryOfSprint save(UserStoryOfSprint userStoryOfSprint) {
         UserStoryOfSprintJpa userStoryOfSprintJpa = userStoryOfSprintJpaAssembler.toData(userStoryOfSprint);
-        Optional<UserStoryOfSprint> usSprint;
+        UserStoryOfSprint usSprint;
 
         UserStoryOfSprintJpa sprintJpaSaved = userStoryOfSprintJpaRepository.save(userStoryOfSprintJpa);
-        usSprint = Optional.of(userStoryOfSprintJpaAssembler.toDomain(sprintJpaSaved));
+        usSprint = userStoryOfSprintJpaAssembler.toDomain(sprintJpaSaved);
 
         return usSprint;
     }

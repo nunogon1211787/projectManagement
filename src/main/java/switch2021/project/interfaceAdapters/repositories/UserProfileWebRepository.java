@@ -6,6 +6,8 @@ import switch2021.project.applicationServices.iRepositories.IUserProfileWebRepos
 import switch2021.project.dataModel.REST.assemblers.UserProfileDomainDataRestAssembler;
 import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 import switch2021.project.interfaceAdapters.repositories.REST.UserProfileRestRepository;
+
+import javax.net.ssl.SSLException;
 import java.util.List;
 
 @Repository
@@ -20,7 +22,7 @@ public class UserProfileWebRepository implements IUserProfileWebRepository {
     /**
      * @return List of User Profiles
      */
-    public List<UserProfile> findAll() {
+    public List<UserProfile> findAll() throws SSLException {
 
         return userProfileDomainDataRestAssembler.toDomain(userProfileRestRepository.findAll());
 

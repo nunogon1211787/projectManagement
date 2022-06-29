@@ -17,9 +17,8 @@ import switch2021.project.entities.valueObjects.vos.*;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 public class ResourceFactoryTest {
@@ -81,5 +80,29 @@ public class ResourceFactoryTest {
         assertNotNull(newResource);
     }
 
-
+    @Test
+    public void createResourceByAnotherResource() {
+        //Arrange
+        when(email.getEmailText()).thenReturn("test@test.test");
+        when(userID.getEmail()).thenReturn(email);
+        when(id.getUser()).thenReturn(userID);
+        when(projectID.getCode()).thenReturn("Project_2022_1");
+        when(id.getProject()).thenReturn(projectID);
+        when(defineRoleOfResourceDTO.getStartDate()).thenReturn("2022-12-12");
+        when(defineRoleOfResourceDTO.getEndDate()).thenReturn("2023-12-12");
+        when(iResourceIDFactory
+                .create(id.getUser().getEmail().getEmailText(),
+                        id.getProject().getCode(),
+                        defineRoleOfResourceDTO.getStartDate()))
+                .thenReturn(id);
+        when(iPercOfAllocationFactory.create(defineRoleOfResourceDTO.getPercentageOfAllocation()))
+                .thenReturn(percentageOfAllocation);
+        when(iCostPerHourFactory.create(defineRoleOfResourceDTO.getCostPerHour()))
+                .thenReturn(costPerHour);
+        when(defineRoleOfResourceDTO.getRole()).thenReturn("ScrumMaster");
+        //Act
+        Resource result = resourceFactory.createResourceByAnotherResource(id, defineRoleOfResourceDTO);
+        //Assert
+        assertEquals(id, result.getId());
+    }
 }

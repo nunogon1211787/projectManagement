@@ -4,6 +4,7 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.dtoModel.dto.OutputUserStoryDTO;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
+import switch2021.project.interfaceAdapters.controller.TaskController;
 import switch2021.project.interfaceAdapters.controller.UserStoryController;
 
 import java.util.List;
@@ -44,13 +45,16 @@ public class UserStoryMapper {
          */
 
         //Add self relation
-        result.add(linkTo(methodOn(UserStoryController.class).showUserStoryRequested(result.id)).withSelfRel());
+        result.add(linkTo(methodOn(UserStoryController.class).getUserStoryRequested(result.id)).withSelfRel());
 
         //Add collection relation
-        result.add(linkTo(methodOn(UserStoryController.class).showAllUserStories()).withRel("Collection"));
+        result.add(linkTo(methodOn(UserStoryController.class).getAllUserStories()).withRel("Collection"));
 
         //Add delete option
         result.add(linkTo(methodOn(UserStoryController.class).deleteAUserStory(result.id)).withRel("Delete"));
+
+        //Show all tasks in the User Story
+        result.add(linkTo(methodOn(TaskController.class).getTasksByTaskContainerID(result.id)).withRel("Show Tasks"));
 
         return result;
 
@@ -66,7 +70,7 @@ public class UserStoryMapper {
         //Add HATEOAS to OUTPUT DTOs
 
         //Add self relation
-        result.add(linkTo(methodOn(UserStoryController.class).showAllUserStories()).withSelfRel());
+        result.add(linkTo(methodOn(UserStoryController.class).getAllUserStories()).withSelfRel());
 
         return result;
     }

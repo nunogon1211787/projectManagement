@@ -7,7 +7,6 @@ import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.applicationServices.iRepositories.ISprintRepo;
 import switch2021.project.applicationServices.iRepositories.IUserStoryOfSprintRepo;
 import switch2021.project.applicationServices.iRepositories.IUserStoryRepo;
-import switch2021.project.dataModel.JPA.assembler.UserStoryOfSprintJpaAssembler;
 import switch2021.project.dtoModel.dto.*;
 import switch2021.project.dtoModel.mapper.SprintMapper;
 import switch2021.project.dtoModel.mapper.UserStoryOfSprintMapper;
@@ -15,6 +14,8 @@ import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.factories.factoryInterfaces.ISprintFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ISprintIDFactory;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.UserStoryOfSprintStatus;
 
@@ -45,31 +46,32 @@ public class SprintService {
     @Autowired
     private UserStoryOfSprintMapper userStoryOfSprintMapper;
     @Autowired
-    private UserStoryOfSprintJpaAssembler userStoryOfSprintJpaAssembler;
+    private IProjectIDFactory projectIDFactory;
+    @Autowired
+    private ISprintIDFactory sprintIDFactory;
 
     /**
      * Create and Save a New Sprint
      */
 
     public OutputSprintDTO createAndSaveSprint(NewSprintDTO inDTO) throws Exception {
+        ProjectID projID = projectIDFactory.create(inDTO.getProjectID());
+        if (!projRepo.existsById(projID)) {
+            throw new NullPointerException("Project does not exist");
+        }
         Sprint sprint = sprintFactory.createSprint(inDTO);
 
         if (!Objects.equals(inDTO.startDate, "")) {
-            String sprintId = inDTO.projectID + "_" + inDTO.name;
-            validateSprintStartDate(sprintId, inDTO.startDate); //TODO separar este método
+            String sprintId = inDTO.projectID + "&" + inDTO.name;
+            validateSprintStartDate(sprintId, inDTO.startDate);
             sprint.setStartDate(LocalDate.parse(inDTO.startDate));
         }
-
-        Optional<Sprint> sprintSaved = sprintRepo.save(sprint);
-
-        OutputSprintDTO outputSprintDTO;
-
-        if (sprintSaved.isPresent()) {
-            outputSprintDTO = sprintMapper.toDTO(sprintSaved.get());
-        } else {
-            throw new Exception("Sprint already exists!");
+        if (sprintRepo.existsSprintByID(sprint.getSprintID())) {
+            throw new IllegalArgumentException("Sprint already exist.");
         }
-        return outputSprintDTO;
+        Sprint sprintSaved = sprintRepo.save(sprint);
+
+        return sprintMapper.toDTO(sprintSaved);
     }
 
     /**
@@ -81,10 +83,13 @@ public class SprintService {
         return sprintMapper.toCollectionDto(allSprints);
     }
 
-    public void deleteSprint(SprintID id) throws Exception {
-        if (!sprintRepo.deleteSprint(id)) {
-            throw new Exception("Project does not exist");
+    public void deleteSprint(String id) {
+        SprintID sprintID = createSprintIdByStringInputFromController(id);
+
+        if (!sprintRepo.existsSprintByID(sprintID)) {
+            throw new NullPointerException("Sprint does not exist");
         }
+        sprintRepo.deleteSprint(sprintID);
     }
 
     public CollectionModel<OutputSprintDTO> showSprintsOfAProject(String projId) throws Exception {
@@ -119,21 +124,17 @@ public class SprintService {
 
         if (opSprint.isPresent()) {
 
-            opSprint.get().setStartDate(LocalDate.parse(dto.startDate));
-            opSprint.get().setEndDate(LocalDate.parse(dto.startDate).plusDays(sprintDuration));
+            opSprint.get().setStartDate(LocalDate.parse(dto.getStartDate()));
+            opSprint.get().setEndDate(LocalDate.parse(dto.getStartDate()).plusDays(sprintDuration));
 
             sprintRepo.deleteSprint(opSprint.get().getSprintID());
 
-            Optional<Sprint> savedSprint = sprintRepo.save(opSprint.get());
+            Sprint savedSprint = sprintRepo.save(opSprint.get());
 
-            if (savedSprint.isPresent()) {
-                return sprintMapper.toDTO(savedSprint.get());
-            } else {
-                throw new Exception("Sprint doesnt exist");
-            }
+            return sprintMapper.toDTO(savedSprint);
         }
 
-        return null;
+        throw new Exception("Sprint doesnt exist");
     }
 
     /**
@@ -147,8 +148,6 @@ public class SprintService {
 
     @Transactional
     public UserStoryOfSprintDTO addUserStoryToSprintBacklog(String id, UserStoryIdDTO userStoryIdDTO) throws Exception {
-        UserStoryOfSprintDTO userStoryOfSprintDTO = new UserStoryOfSprintDTO();
-
         SprintID sprintID = new SprintID(id);
 
         Optional<Sprint> sprint = sprintRepo.findBySprintID(sprintID);
@@ -165,19 +164,16 @@ public class SprintService {
         }
 
         if (sprint.isPresent()) {
-            Optional<UserStoryOfSprint> savedSprint =
+            UserStoryOfSprint savedSprint =
                     userStoryOfSprintRepo.save(new UserStoryOfSprint(userStory.getUserStoryID(),
                                                                      UserStoryOfSprintStatus.Todo,
                                                                      sprint.get().getSprintID().getSprintName().getText()));
 
-            if (savedSprint.isPresent()) {
-                userStoryOfSprintDTO = userStoryOfSprintMapper.toDTO(savedSprint.get());
-            }
+            return userStoryOfSprintMapper.toDTO(savedSprint);
         } else {
             throw new Exception("Sprint or User Story doesn't exist!");
         }
 
-        return userStoryOfSprintDTO;
     }
 
     public CollectionModel<UserStoryOfSprintDTO> showScrumBoard(String id) throws Exception {
@@ -196,7 +192,7 @@ public class SprintService {
     }
 
     public UserStoryOfSprintDTO changeStatusScrumBoard(String id, UserStoryOfSprintDTO userStoryDTO) throws Exception {
-        UserStoryOfSprintDTO userStoryOfSprintDTO = new UserStoryOfSprintDTO();
+        UserStoryOfSprintDTO userStoryOfSprintDTO;
         String[] values = id.split("_");
         ProjectID projectID = new ProjectID(values[0] + "_" + values[1] + "_" + values[2]);
         Description sprintName = new Description((values[3]));
@@ -207,22 +203,19 @@ public class SprintService {
 
         for (UserStoryOfSprint userStoryOfSprint : userStoryOfSprintList) {
             if (Objects.equals(userStoryOfSprint.getUserStoryId().getProjectID().getCode(),
-                               userStoryDTO.projectId)
+                               userStoryDTO.getProjectId())
                     && Objects.equals(userStoryOfSprint.getUserStoryId().getUsTitle().getTitleUs(),
-                                      userStoryDTO.usTitle)
+                                      userStoryDTO.getUsTitle())
                     && Objects.equals(userStoryOfSprint.getSprintName(),
                                       sprintID.getSprintName().getText())) {
 
-                /*userStoryOfSprintRepo.deleteUserStoryOfSprint(new UserStoryID(new ProjectID(userStoryDTO.projectId),
-                                                                              new UsTitle(userStoryDTO.usTitle)));*/
-
                 userStoryOfSprint.setUserStoryOfSprintStatus(UserStoryOfSprintStatus.valueOf(userStoryDTO.getStatus()));
 
-                Optional<UserStoryOfSprint> savedSprint = userStoryOfSprintRepo.save(userStoryOfSprint);
+                UserStoryOfSprint savedSprint = userStoryOfSprintRepo.save(userStoryOfSprint);
 
-                if (savedSprint.isPresent()) {
-                    userStoryOfSprintDTO = userStoryOfSprintMapper.toDTO(savedSprint.get());
-                }
+
+                userStoryOfSprintDTO = userStoryOfSprintMapper.toDTO(savedSprint);
+
 
                 return userStoryOfSprintDTO;
             }
@@ -231,9 +224,9 @@ public class SprintService {
         throw new Exception("User Story not found");
     }
 
-    private long validateSprintStartDate(String id, String date) throws Exception {
-        String[] values = id.split("_");
-        ProjectID projectID = new ProjectID(values[0] + "_" + values[1] + "_" + values[2]);
+    public long validateSprintStartDate(String id, String date) throws Exception {
+        String[] values = id.split("&");
+        ProjectID projectID = new ProjectID(values[0]);
 
         Optional<Project> foundProject = projRepo.findById(projectID);
 
@@ -243,16 +236,24 @@ public class SprintService {
 
         long sprintDuration = foundProject.get().getSprintDuration().getSprintDurationDays();
 
-        if (foundProject.get().getStartDate().isAfter(LocalDate.parse(date))
-                ||
-                foundProject.get().getEndDate() != null
-                ||
-                foundProject.get().getEndDate().isBefore(LocalDate.parse(date))) {
+        if (foundProject.get().getStartDate().isAfter(LocalDate.parse(date))) {
+            throw new Exception("Start date cant be before project start date");
 
-            return sprintDuration;
+        } else if (foundProject.get().getEndDate() != null
+                &&
+                foundProject.get().getEndDate().isBefore(LocalDate.parse(date))) {
+            throw new Exception("Start date cant be after project end date");
 
         } else {
-            throw new Exception("Start date outside of the project duration dates");
+            return sprintDuration;
         }
     }
+
+    public SprintID createSprintIdByStringInputFromController(String id) {
+        String[] x = id.split("&");
+        String projectID = x[0];
+        String sprintName = x[1];
+        return sprintIDFactory.create(projectID,sprintName);
+    }
+
 }

@@ -6,7 +6,7 @@ import switch2021.project.entities.valueObjects.vos.EffortEstimate;
 import switch2021.project.entities.valueObjects.vos.UsHour;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class effortEstimateTest {
+public class EffortEstimateTest {
 
     @DisplayName("Test to create an effortEstimate")
     @Test

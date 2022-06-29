@@ -12,7 +12,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://localhost:8443")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -244,5 +244,19 @@ public class UserController {
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/status")
+    public ResponseEntity<Object> getUserStatus() {
+        CollectionModel<OutputUserDTO> usersStatusDto;
+
+        try {
+            usersStatusDto = userService.showUserStatus();
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(usersStatusDto, HttpStatus.OK);
     }
 }

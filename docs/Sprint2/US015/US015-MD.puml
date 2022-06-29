@@ -13,14 +13,18 @@ title Domain Model
 
 'Project Aggregate:--------------------------------------------------
 class Project #Yellow{
--code
--name
--description
--customer
--businessSector
--budget
--sprintDuration
--numberOfSprints
+ -projectCode
+        -name
+        -description
+        -businessSector
+        -startDate
+        -numberOfSprints
+        -sprintDuration
+        -budget
+        -endDate
+        -typology
+        -customer
+        -status
 }
 
 @enduml

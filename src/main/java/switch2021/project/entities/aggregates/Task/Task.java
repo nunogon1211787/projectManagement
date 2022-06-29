@@ -2,7 +2,6 @@ package switch2021.project.entities.aggregates.Task;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.TaskStatus;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
@@ -56,7 +54,7 @@ public class Task implements Entity<Task> {
         return Objects.equals(this.responsible, resp);
     }
 
-    public void toAddEffort(TaskEffort taskEffort) throws IllegalArgumentException {
+    public void toAddEffort(TaskEffort taskEffort) {
         if (this.registeredEfforts.isEmpty()) {
             this.status = TaskStatus.RUNNING;
             this.startDate = taskEffort.getEffortDate().getEffortDate();

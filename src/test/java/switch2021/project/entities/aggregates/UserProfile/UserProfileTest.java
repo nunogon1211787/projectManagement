@@ -15,13 +15,13 @@ public class UserProfileTest {
     void ConstructorUserProfile_Success() {
         //Arrange
         UserProfileID userProfileID = mock(UserProfileID.class);
-        UserProfile userProfile = new UserProfile(userProfileID);
         Description description = mock(Description.class);
-        //Act
         when(userProfileID.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("User Profile");
+        //Act
+        UserProfile userProfile = new UserProfile(userProfileID);
         //Assert
-        assertEquals(userProfileID, userProfile.getUserProfileId());
+        assertEquals("User Profile", userProfile.getUserProfileId().getUserProfileName().getText());
     }
 
     @Test
@@ -29,11 +29,11 @@ public class UserProfileTest {
     void ConstructorUserProfile_Failure() {
         //Arrange
         UserProfileID userProfileID = mock(UserProfileID.class);
-        UserProfile userProfile = new UserProfile(userProfileID);
         Description description = mock(Description.class);
-        //Act
         when(userProfileID.getUserProfileName()).thenReturn(description);
         when(description.getText()).thenReturn("User Profile");
+        //Act
+        UserProfile userProfile = new UserProfile(userProfileID);
         //Assert
         assertNotEquals("Profile User", userProfile.getUserProfileId().getUserProfileName().getText());
     }
@@ -66,7 +66,7 @@ public class UserProfileTest {
         UserProfile userProfile1 = new UserProfile(userProfileID);
         UserProfile userProfile2 = new UserProfile(userProfileID1);
         //Assert
-        assertTrue(userProfile.equals(userProfile));
+        assertEquals(userProfile, userProfile1);
         assertNotEquals(userProfile2, userProfile1);
     }
 
