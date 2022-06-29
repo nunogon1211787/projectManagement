@@ -10,7 +10,7 @@ package "Route"{
     }
 
     package "Persistence" {
-    class "IUserProfileRepositoryJpa" as jpa <<Interface>>
+    interface "IUserProfileRepositoryJpa" as jpa <<Interface>>
     }
 }
 
@@ -18,6 +18,7 @@ package "Route"{
 
 package "Interface Adapter" <<Rectangle>> #lightgreen{
 package "Controllers" <<Folder>>{
+
     class "UserProfileController" as ctrl <<Component>>{
      +createUserProfile(userProfileDTO)
     }
@@ -121,23 +122,22 @@ package "Domain" <<Rectangle>>#burlywood  {
         -userProfileID: UserProfileID
         }
 
-route ..> ctrl
-ctrl ..> service
-uRepo ..|> iUserProfileRepo
+route ..up.> ctrl
+ctrl .d.> service
+uRepo ..d.|> iUserProfileRepo
 service .left.> iUserProfileRepo
 service ..> iUserProfileFactory
-service ...right.> dto
+service .d.> dto
 service .down.> mapper
 userProfileFactory ..down|> iUserProfileFactory
 userProfileIDFactory ..down|> iUserProfileIDFactory
 userProfileFactory ..down> iUserProfileIDFactory
-userProfileFactory ..down> userProfile
+userProfileFactory ..up> userProfile
 userProfileIDFactory ..down> userProfileID
-uRepo ...> assemblerjpa
-uRepo ...> UPjpa
-iUserProfileFactory..>dto
-mapper .right..> dto
-uRepo ..>jpa
+uRepo ..l.> assemblerjpa
+uRepo ..l.> UPjpa
+mapper ..l.> dto
+uRepo ..up.>jpa
 
 
 @enduml
