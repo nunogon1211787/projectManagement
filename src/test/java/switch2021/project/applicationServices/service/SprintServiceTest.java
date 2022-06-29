@@ -12,12 +12,15 @@ import switch2021.project.applicationServices.iRepositories.ISprintRepo;
 import switch2021.project.applicationServices.iRepositories.IUserStoryOfSprintRepo;
 import switch2021.project.dtoModel.dto.OutputSprintDTO;
 import switch2021.project.dtoModel.dto.StartSprintDTO;
+import switch2021.project.dtoModel.dto.UserStoryIdDTO;
 import switch2021.project.dtoModel.dto.UserStoryOfSprintDTO;
 import switch2021.project.dtoModel.mapper.SprintMapper;
 import switch2021.project.dtoModel.mapper.UserStoryOfSprintMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
+import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.valueObjects.vos.*;
+import switch2021.project.interfaceAdapters.repositories.UserStoryRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -127,9 +130,7 @@ public class SprintServiceTest {
     void showAllSprintsByProjectId_fail() {
         assertThrows(Exception.class, () -> {
             //Arrange
-            List<Sprint> expected = new ArrayList<>();
             when(projRepo.existsById(any())).thenReturn(false);
-
             //Act
             sprintService.showSprintsOfAProject("id");
         });
@@ -359,16 +360,31 @@ public class SprintServiceTest {
             UserStoryID userStoryID = mock(UserStoryID.class);
             ProjectID projectID = mock(ProjectID.class);
             UserStoryOfSprintDTO dto = mock(UserStoryOfSprintDTO.class);
-            UsTitle title = mock(UsTitle.class);
-
             when(userStoryOfSprintRepo.findAllUserStoriesBySprintID(any())).thenReturn(userStoryOfSprintList);
             when(userStoryOfSprint.getUserStoryId()).thenReturn(userStoryID);
             when(userStoryID.getProjectID()).thenReturn(projectID);
             when(projectID.getCode()).thenReturn(proj);
             when(dto.getProjectId()).thenReturn("not");
-
             //Act
             sprintService.changeStatusScrumBoard(sprintId, dto);
+        });
+    }
+
+    @Test
+    public void addUserStoryToSpringBacklogFail() {
+        //Assert
+        assertThrows(Exception.class, () -> {
+            //Arrange
+            String id = "idSprint";
+            SprintID sprintID = mock(SprintID.class);
+            UserStoryID usID = mock(UserStoryID.class);
+            UserStoryIdDTO inputDto = mock(UserStoryIdDTO.class);
+            UserStory userStory = mock(UserStory.class);
+            UserStoryRepository usRepo = mock(UserStoryRepository.class);
+            when(usRepo.findByUserStoryId(usID)).thenReturn(Optional.of(userStory));
+            when(sprintRepo.findBySprintID(sprintID)).thenReturn(Optional.empty());
+            //Act
+            sprintService.addUserStoryToSprintBacklog(id, inputDto);
         });
     }
 }

@@ -177,26 +177,12 @@ public class UserProfileServiceTest {
         //Assert
         assertThrows(Exception.class, () -> {
             //Arrange
-            UserProfile userProfile = mock(UserProfile.class);
             UserProfileID profileID = mock(UserProfileID.class);
-            UserProfileDTO outDTO = mock(UserProfileDTO.class);
             UserProfileDTO inDTO = mock(UserProfileDTO.class);
-            UserProfile userProfileSaved = mock(UserProfile.class);
             when(factoryId.createUserProfileID("ok")).thenReturn(profileID);
-            when(iUserProfileRepo.findByUserProfileID(profileID)).thenReturn(null);
-            when(iUserProfileRepo.deleteById(profileID)).thenReturn(true);
-            when(iUserProfileFactory.createUserProfile(inDTO)).thenReturn(userProfile);
-            when(Objects.requireNonNull(userProfile).getUserProfileId()).thenReturn(profileID);
-
-            when(iUserProfileRepo.existsByUserProfileId(profileID)).thenReturn(true);
-            when(iUserProfileRepo.save(userProfile)).thenReturn(userProfileSaved);
-            when(userProfileMapper.toDTO(userProfileSaved)).thenReturn(outDTO);
-
-            when(userProfileService.createAndSaveUserProfile(inDTO)).thenReturn(outDTO);
-
+            when(iUserProfileRepo.findByUserProfileID(profileID)).thenReturn(Optional.empty());
             //Act
             userProfileService.editARequestedUserProfile("ok", inDTO);
-
         });
     }
 
@@ -250,23 +236,4 @@ public class UserProfileServiceTest {
         //Assert
         assertEquals(dto.userProfileName, userProfileService.createAndSaveUserProfile(userProfileDTO).userProfileName);
     }
-
-/*    @Test
-    @DisplayName("Test to create a repeated user profile")
-    public void createAndSaveRepeatedUserProfile() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-
-            //Arrange
-            UserProfileDTO userProfileDTO = mock(UserProfileDTO.class);
-            OutputUserProfileDTO outputUserProfileDTO = mock(OutputUserProfileDTO.class);
-
-            when(iUserProfileFactory.createUserProfile(userProfileDTO)).thenReturn(userProfile);
-            when(iUserProfileRepo.save(userProfile)).thenReturn(Optional.empty());
-            when(userProfileMapper.toDTO(userProfile)).thenReturn(outputUserProfileDTO);
-
-            //Act
-            createUserProfileService.createAndSaveUserProfile(userProfileDTO);
-        });
-    }*/
 }

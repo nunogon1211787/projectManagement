@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
 import switch2021.project.dtoModel.dto.*;
+import switch2021.project.dtoModel.mapper.ProjectRoleMapper;
 import switch2021.project.entities.factories.factoryInterfaces.IResourceFactory;
 import switch2021.project.applicationServices.iRepositories.IResourceRepo;
 import switch2021.project.dtoModel.mapper.ResourceMapper;
@@ -18,6 +19,7 @@ import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjec
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResourceIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
 import switch2021.project.entities.valueObjects.vos.*;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectRole;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -38,6 +40,8 @@ public class ResourceService {
     private IUserRepo userRepo;
     @Autowired
     private ResourceMapper mapper;
+    @Autowired
+    private ProjectRoleMapper roleMapper;
     @Autowired
     private ManagementResourcesService managementService;
     @Autowired
@@ -308,4 +312,11 @@ public class ResourceService {
         return iResourceIDFactory.create(userId, projectId, startDate);
     }
 
+    /**
+     * Find Project Roles
+     */
+    public CollectionModel<OutputProjectRoleDTO> findProjectRoles() {
+        List<String> projectRoles = ProjectRole.getProjectRole();
+        return roleMapper.toCollectionDto(projectRoles);
+    }
 }
