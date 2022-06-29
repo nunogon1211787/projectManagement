@@ -49,8 +49,8 @@ public class ResourceService {
     @Autowired
     private IUserIDFactory iUserIDFactory;
 
-    private String PROJECTNOTFOUND = "Project does not exist!";
-    private String USERNOTFOUND = "This User is not part of the project team!";
+    private final String PROJECTNOTFOUND = "Project does not exist!";
+    private final String USERNOTFOUND = "This User is not part of the project team!";
 
     /**
      * Create a Resource (US007)

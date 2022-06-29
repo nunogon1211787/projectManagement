@@ -1,6 +1,5 @@
 package switch2021.project.applicationServices.service;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -45,6 +44,7 @@ public class UserProfileServiceTest {
     UserProfileDTO userProfileDTO;
     @MockBean
     IUserProfileWebRepository iUserProfileWebRepository;
+
     @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
