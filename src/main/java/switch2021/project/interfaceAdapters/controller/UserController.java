@@ -134,6 +134,21 @@ public class UserController {
             return new ResponseEntity<>(outputDTO, HttpStatus.OK);
     }
 
+    @PatchMapping("/{id}/assignProfiles")
+    public ResponseEntity<Object> assignProfiles(@PathVariable("id") String id,
+                                                @RequestBody UpdateUserProfilesDTO profileDTO) {
+        OutputUserDTO outputDTO;
+
+        try {
+            outputDTO = userService.assignUserProfiles(id, profileDTO);
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(outputDTO, HttpStatus.OK);
+    }
+
 
     /**
      * Remove a User Profiles (US006)

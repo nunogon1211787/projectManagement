@@ -169,6 +169,35 @@ public class UserService {
         return userMapper.toDto(updatedUser);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
+    public OutputUserDTO assignUserProfiles(String id, UpdateUserProfilesDTO profileDTO) {
+        UserID userID = createUserIdByStringInputFromController(id);
+        Optional<User> foundUser = userRepo.findByUserId(userID);
+
+        User user = foundUser.flatMap(found -> foundUser).orElse(null);
+
+        if (user == null) {
+            throw new NullPointerException("This User does not exist!");
+        }
+
+        user.clearProfiles();
+
+        for(String profile : profileDTO.profilesId){
+            UserProfileID profileID = profileIDFactory.createUserProfileID(profile);
+            //Validate if exist the profile
+            if (!profileRepo.existsByUserProfileId(profileID)) {
+                throw new IllegalArgumentException("This user profile does not exist!");
+            }
+
+            user.toAssignProfile(profileID);
+
+        }
+
+
+        User updatedUser = userRepo.save(user);
+        return userMapper.toDto(updatedUser);
+    }
+
     public OutputUserDTO removeUserProfile(String id, UpdateUserProfileDTO profileDTO) {
         UserID userID = createUserIdByStringInputFromController(id);
         UserProfileID profileID;

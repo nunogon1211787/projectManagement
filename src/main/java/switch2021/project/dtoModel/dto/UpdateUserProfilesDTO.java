@@ -7,17 +7,15 @@ import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
-import java.util.ArrayList;
-
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Relation(collectionRelation = "User")
-public class UpdateUserProfileDTO extends RepresentationModel<UpdateUserProfileDTO> {
+public class UpdateUserProfilesDTO extends RepresentationModel<UpdateUserProfilesDTO> {
 
     /**
      * Attributes
      **/
-    public String profileId;
+    public String[] profilesId;
 }

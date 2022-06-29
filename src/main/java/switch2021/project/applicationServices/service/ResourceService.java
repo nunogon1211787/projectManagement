@@ -283,7 +283,7 @@ public class ResourceService {
 
         if (!managementService.validateAllocation(resourceAllocatedProjects, startDate,
                 endDate, percentageOfAllocation)) {
-            throw new IllegalArgumentException(("Is not valid to create - Allocation)"));
+            throw new IllegalArgumentException(("Is not valid to create - Allocation"));
         }
     }
 
