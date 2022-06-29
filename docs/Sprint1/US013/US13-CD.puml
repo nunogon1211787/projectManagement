@@ -4,13 +4,13 @@ skinparam classAttributeIconSize 0
 
 title US013 - "As Administrator, I want to create user profiles."
 
-package "InfraEstructure" <<Rectangle>> #lightblue {
+package "Infrastructure" <<Rectangle>> #lightblue {
 package "Route"{
     class "CreateUserProfiles" as route <<Component>>
     }
 
     package "Persistence" {
-    class "IUserProfileRepositoryJpa" as jpa <<Interface>>
+    interface "IUserProfileRepositoryJpa" as jpa <<Interface>>
     }
 }
 
