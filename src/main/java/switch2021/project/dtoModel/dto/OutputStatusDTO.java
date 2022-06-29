@@ -12,7 +12,5 @@ public class OutputStatusDTO {
     /**
      * Attributes
      */
-
     public String status;
-
 }

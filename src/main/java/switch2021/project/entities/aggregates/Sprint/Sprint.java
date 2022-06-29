@@ -18,7 +18,7 @@ public class Sprint implements Entity<Sprint> {
      * Attributes of Sprint
      **/
     private SprintID sprintID;
-    private List<UserStoryOfSprint> scrumBoard;
+//    private List<UserStoryOfSprint> scrumBoard;
     private LocalDate startDate;
     private LocalDate endDate;
 
