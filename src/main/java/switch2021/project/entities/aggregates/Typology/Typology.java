@@ -37,7 +37,7 @@ public class Typology implements Entity<Typology> {
      */
     public TypologyID getDescriptionID() {return this.descriptionID;}
 
-    public boolean hasID_Description(String description) {
+    public boolean hasDescriptionID(String description) {
         return this.descriptionID.hasDescription(description);
     }
 

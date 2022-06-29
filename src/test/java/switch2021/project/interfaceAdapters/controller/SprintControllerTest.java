@@ -157,15 +157,17 @@ public class SprintControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
 
+        MvcResult temp = mockMvc
+                .perform(MockMvcRequestBuilders.get(URL_PATH + "/users/status")
+                                 .contentType("application/json")
+                                 .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
         String result2Content = result2.getResponse().getContentAsString();
         assertNotNull(result2Content);
 
         assertTrue(result2Content.contains("User story added to sprintbacklog"));
     }
 
-    @Test
-    @DisplayName("Validate sprint start date")
-    void validateSprintStartDate() throws Exception {
-
-    }
 }

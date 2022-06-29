@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import switch2021.project.dtoModel.dto.UserProfileDTO;
 import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 import switch2021.project.interfaceAdapters.controller.UserProfileController;
-import switch2021.project.interfaceAdapters.repositories.REST.ProjectRestRepository;
 import switch2021.project.interfaceAdapters.repositories.REST.UserProfileRestRepository;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,7 +47,7 @@ public class UserProfileMapper {
 
 
         if(isExternal)
-            result.add(Link.of(UserProfileRestRepository.ENDPOINT + ProjectRestRepository.COLLECTION));
+            result.add(Link.of(UserProfileRestRepository.ENDPOINT + UserProfileRestRepository.COLLECTION));
         else
         //HATEOAS - Get all UserProfiles
             result.add(linkTo(methodOn(UserProfileController.class).getAllProfiles()).withSelfRel());

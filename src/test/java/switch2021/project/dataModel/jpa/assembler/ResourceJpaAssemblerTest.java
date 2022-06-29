@@ -1,4 +1,4 @@
-package switch2021.project.dataModel.assembler;
+package switch2021.project.dataModel.jpa.assembler;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -34,17 +34,6 @@ public class ResourceMapper {
 
         //Show all Resources in the project
         resDto.add(linkTo(methodOn(ResourceController.class).showCurrentProjectTeam(resDto.project)).withRel("Collection"));
-
-        //Delete
-
-//        resDto.add(linkTo(methodOn(ResourceController.class).
-//        ).withRel("Delete"));
-
-//        //Edit a project
-//
-//        projDto.add(linkTo(methodOn(ProjectController.class).updateProjectPartially(projDto.code,
-//                new EditProjectInfoDTO())).withRel("Edit"));
-
         return resDto;
     }
 

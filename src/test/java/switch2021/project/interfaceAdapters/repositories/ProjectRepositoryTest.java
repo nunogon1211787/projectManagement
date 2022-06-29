@@ -12,33 +12,32 @@ import switch2021.project.dataModel.JPA.assembler.ProjectJpaAssembler;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.persistence.ProjectJpaRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 
 @SpringBootTest
 public class ProjectRepositoryTest {
 
     @MockBean
-    ProjectJpaRepository projectJpaRepository;
+    private ProjectJpaRepository projectJpaRepository;
 
     @MockBean
-    ProjectJpaAssembler projectJpaAssembler;
+    private ProjectJpaAssembler projectJpaAssembler;
 
     @InjectMocks
-    ProjectRepository projRepo;
+    private ProjectRepository projRepo;
 
     @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
     }
 
-    //
+
     @DisplayName("Save success")
     @Test
     public void saveSuccess() {

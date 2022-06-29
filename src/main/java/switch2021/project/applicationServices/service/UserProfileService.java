@@ -12,6 +12,7 @@ import switch2021.project.entities.factories.factoryInterfaces.IUserProfileFacto
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserProfileIDFactory;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
 
+import javax.net.ssl.SSLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class UserProfileService {
     /**
      * To get all profiles
      */
-    public Map<String, CollectionModel<UserProfileDTO>> getAllProfiles() {
+    public Map<String, CollectionModel<UserProfileDTO>> getAllProfiles() throws SSLException {
 
         List<UserProfile> userProfiles = iUserProfileRepo.findAll();
         List<UserProfile> userProfileWeb = iUserProfileWebRepository.findAll();

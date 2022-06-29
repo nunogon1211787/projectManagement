@@ -1,29 +1,27 @@
 package switch2021.project.applicationServices.service;
 
-import org.apache.commons.codec.Resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import switch2021.project.applicationServices.iRepositories.*;
-import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
-import switch2021.project.dtoModel.dto.OutputProjectDTO;
-import switch2021.project.dtoModel.dto.PartialProjectDTO;
-import switch2021.project.dtoModel.dto.ProjectDTO;
+import switch2021.project.dtoModel.dto.*;
 import switch2021.project.dtoModel.mapper.ProjectMapper;
+import switch2021.project.dtoModel.mapper.StatusMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManagementResourcesService;
 import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.aggregates.User.User;
 import switch2021.project.entities.factories.factoryInterfaces.IProjectFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.*;
-import switch2021.project.entities.valueObjects.vos.*;
+import switch2021.project.entities.valueObjects.vos.Customer;
+import switch2021.project.entities.valueObjects.vos.ProjectID;
+import switch2021.project.entities.valueObjects.vos.TypologyID;
+import switch2021.project.entities.valueObjects.vos.UserID;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
 import javax.net.ssl.SSLException;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @Service
@@ -59,15 +57,14 @@ public class ProjectService {
     private IBudgetFactory budgetFactory;
     @Autowired
     private ISprintDurationFactory sprintDurationFactory;
+    @Autowired
+    private StatusMapper statusMapper;
 
 
     /**
      * Methods to execute controller requests to Project Aggregate
      */
-
-
     public OutputProjectDTO createAndSaveProject(ProjectDTO projDTO) throws Exception {
-
         Project newProject;
 
         if (iTypologyRepo.existsByTypologyId(typologyIDFactory.createIdWithString(projDTO.getTypology()))) {
@@ -102,7 +99,7 @@ public class ProjectService {
 
         ProjectID projID = projectIDFactory.create(id);
 
-        Optional<Project>opProject = projRepo.findById(projID);
+        Optional<Project> opProject = projRepo.findById(projID);
 
         if (opProject.isPresent()) {
             Project proj = opProject.get();
@@ -193,5 +190,10 @@ public class ProjectService {
         }
 
         return true;
+    }
+
+    public CollectionModel<OutputStatusDTO> getProjectStatus() {
+        List<String> projectStatusEnum = ProjectStatusEnum.getProjectStatus();
+        return statusMapper.toCollectionDto(projectStatusEnum);
     }
 }

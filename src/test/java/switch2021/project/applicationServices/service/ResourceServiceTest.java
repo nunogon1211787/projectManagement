@@ -384,7 +384,7 @@ class ResourceServiceTest {
 //        //Arrange
 //        String projId = "Project_2022_1";
 //        ProjectID id = mock(ProjectID.class);
-//        DateDTO dateDto = mock(DateDTO.class);
+//        StartSprintDTO dateDto = mock(StartSprintDTO.class);
 //        Resource res = mock(Resource.class);
 //        OutputResourceDTO resDto = mock(OutputResourceDTO.class);
 //        List<Resource> resources = new ArrayList<>(List.of(res, res, res));

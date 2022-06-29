@@ -111,7 +111,7 @@ public class SprintServiceTest {
         List<Sprint> expected = new ArrayList<>();
         when(projRepo.existsById(any())).thenReturn(true);
         CollectionModel<OutputSprintDTO> expectedDto = CollectionModel.empty();
-        when(sprintRepo.findAllSprintsByProjectID(any())).thenReturn(expected);
+        when(sprintRepo.findAllByProjectID(any())).thenReturn(expected);
         when(sprintMapper.toCollectionDto(expected)).thenReturn(expectedDto);
 
         //Act
