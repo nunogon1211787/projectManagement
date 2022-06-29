@@ -230,11 +230,13 @@ public class SprintService {
 
         Optional<Project> foundProject = projRepo.findById(projectID);
 
-        if (foundProject.isEmpty()) {
-            throw new Exception("Project not found");
+        Project project = foundProject.flatMap(proj -> foundProject).orElse(null);
+
+        if (project == null) {
+            throw new IllegalArgumentException("Project does not exist");
         }
 
-        long sprintDuration = foundProject.get().getSprintDuration().getSprintDurationDays();
+        long sprintDuration = project.getSprintDuration().getSprintDurationDays();
 
         if (foundProject.get().getStartDate().isAfter(LocalDate.parse(date))) {
             throw new Exception("Start date cant be before project start date");
