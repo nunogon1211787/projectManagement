@@ -195,7 +195,7 @@ public class ResourceService {
         checkAllocation(newResourceByRole.getId().getUser().getEmail().getEmailText(),
                 newResourceByRole.getId().getStartDate().toString(),
                 newResourceByRole.getEndDate().toString(),
-                newResourceByRole.getAllocation().getPercentage());
+                (newResourceByRole.getAllocation().getPercentage()-oldResource.getAllocation().getPercentage()));
 
         oldResource.setEndDate(LocalDate.parse(dto.getStartDate()).minusDays(1));
         resRepo.save(oldResource);

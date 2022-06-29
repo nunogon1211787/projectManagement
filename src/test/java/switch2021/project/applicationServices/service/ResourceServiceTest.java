@@ -2,6 +2,7 @@ package switch2021.project.applicationServices.service;
 
 import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 //import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -12,13 +13,24 @@ import switch2021.project.applicationServices.iRepositories.IResourceRepo;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
 //import switch2021.project.dtoModel.dto.CreateResourceDTO;
 //import switch2021.project.dtoModel.dto.OutputResourceDTO;
+import switch2021.project.dtoModel.dto.OutputResourceDTO;
 import switch2021.project.dtoModel.mapper.ResourceMapper;
 import switch2021.project.entities.aggregates.Resource.ManagementResourcesService;
 //import switch2021.project.entities.aggregates.Resource.Resource;
+import switch2021.project.entities.aggregates.Resource.Resource;
 import switch2021.project.entities.factories.factoryInterfaces.IResourceFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResourceIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
+import switch2021.project.entities.valueObjects.vos.ProjectID;
+import switch2021.project.entities.valueObjects.vos.UserID;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 //import switch2021.project.entities.valueObjects.vos.ProjectID;
 //import switch2021.project.entities.valueObjects.vos.ResourceID;
 
@@ -151,5 +163,7 @@ class ResourceServiceTest {
 //        assertEquals();
 //
 //    }
+
+
 
 }
