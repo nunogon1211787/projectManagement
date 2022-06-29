@@ -35,20 +35,20 @@ public class ProjectDomainDataRestAssembler {
 
     public Project toDomain(ProjectRestDTO projectRestDTO) {
 
-        Description name = descriptionFactory.createDescription(projectRestDTO.projectName);
-        Description description = descriptionFactory.createDescription(projectRestDTO.projectDescription);
+        Description name = descriptionFactory.createDescription(projectRestDTO.getProjectName());
+        Description description = descriptionFactory.createDescription(projectRestDTO.getProjectDescription());
         BusinessSector businessSector =
-                businessSectorFactory.createBusinessSector(projectRestDTO.projectBusinessSector);
+                businessSectorFactory.createBusinessSector(projectRestDTO.getProjectBusinessSector());
         NumberOfSprints numberOfSprints =
-                numberOfSprintsFactory.create(Integer.parseInt(projectRestDTO.projectNumberOfPlannedSprints));
+                numberOfSprintsFactory.create(Integer.parseInt(projectRestDTO.getProjectNumberOfPlannedSprints()));
         SprintDuration sprintDuration;
         try {
 
-            sprintDuration = sprintDurationFactory.create(Integer.parseInt(projectRestDTO.projectSprintDuration));
+            sprintDuration = sprintDurationFactory.create(Integer.parseInt(projectRestDTO.getProjectSprintDuration()));
         } catch (NullPointerException sprintDurationException) {
             sprintDuration = sprintDurationFactory.create(15); //default spring number of days
         }
-        Budget budget = budgetFactory.create(Double.parseDouble(projectRestDTO.projectBudget));
+        Budget budget = budgetFactory.create(Double.parseDouble(projectRestDTO.getProjectBudget()));
         LocalDate startDate = LocalDate.parse(projectRestDTO.getStartDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
         Project project = new Project(name, description, businessSector, startDate, numberOfSprints, sprintDuration,

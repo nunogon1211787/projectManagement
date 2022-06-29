@@ -148,8 +148,6 @@ public class SprintService {
 
     @Transactional
     public UserStoryOfSprintDTO addUserStoryToSprintBacklog(String id, UserStoryIdDTO userStoryIdDTO) throws Exception {
-        UserStoryOfSprintDTO userStoryOfSprintDTO = new UserStoryOfSprintDTO();
-
         SprintID sprintID = new SprintID(id);
 
         Optional<Sprint> sprint = sprintRepo.findBySprintID(sprintID);

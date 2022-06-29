@@ -1,6 +1,5 @@
 package switch2021.project.interfaceAdapters.repositories;
 
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import switch2021.project.applicationServices.iRepositories.IUserStoryOfSprintRepo;
@@ -13,9 +12,7 @@ import switch2021.project.persistence.UserStoryOfSprintJpaRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-@Getter
 @Repository
 public class UserStoryOfSprintRepository implements IUserStoryOfSprintRepo {
 
