@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EditProjectInfoDTO {
 
-    public String code;
+//    public String code;
     public String projectName;
     public String description;
     public String businessSector;

@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Getter
-@Setter
 public class ProjectRepository implements IProjectRepo {
 
     @Autowired

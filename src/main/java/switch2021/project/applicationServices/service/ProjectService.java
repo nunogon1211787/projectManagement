@@ -193,10 +193,7 @@ public class ProjectService {
     }
 
     public CollectionModel<OutputStatusDTO> getProjectStatus() {
-        ProjectStatusEnum[] statusValues = ProjectStatusEnum.values();
-
-        List<ProjectStatusEnum> projectStatusEnum = new ArrayList<>(Arrays.asList(statusValues));
-
+        List<String> projectStatusEnum = ProjectStatusEnum.getProjectStatus();
         return statusMapper.toCollectionDto(projectStatusEnum);
     }
 }

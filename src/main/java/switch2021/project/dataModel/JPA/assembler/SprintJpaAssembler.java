@@ -1,15 +1,10 @@
 package switch2021.project.dataModel.JPA.assembler;
 
 import org.springframework.stereotype.Component;
-import switch2021.project.dataModel.JPA.UserStoryOfSprintJpa;
 import switch2021.project.dataModel.JPA.SprintJpa;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
-import switch2021.project.entities.valueObjects.vos.UserStoryOfSprint;
-import switch2021.project.entities.valueObjects.vos.enums.UserStoryOfSprintStatus;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class SprintJpaAssembler {
