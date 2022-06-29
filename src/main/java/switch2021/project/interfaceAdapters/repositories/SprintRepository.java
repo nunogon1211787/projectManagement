@@ -117,6 +117,11 @@ public class SprintRepository implements ISprintRepo {
         return allSprintsInAProject;
     }
 
+    @Override
+    public boolean existsSprintByID(SprintID id) {
+        return sprintJpaRepository.existsById(id);
+    }
+
     /**
      * Find Current Sprint Method
      **/

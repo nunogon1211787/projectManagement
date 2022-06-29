@@ -33,9 +33,9 @@ public class SprintID implements ValueObject<SprintID>, TaskContainerID {
     }
  
     public SprintID(String sprintIdString){
-        String [] values = sprintIdString.split("_");
-        this.projectID = new ProjectID(values[0]+"_"+values[1]+"_"+values[2]);
-        this.sprintName = new Description(values[3]);
+        String [] values = sprintIdString.split("&");
+        this.projectID = new ProjectID(values[0]);
+        this.sprintName = new Description(values[1]);
     }
 
     /** Override Methods */
