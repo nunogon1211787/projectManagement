@@ -8,6 +8,6 @@ port 2
 }
 
 1 -up- UI
-2 -- WebServerG5
+2 -right- WebServerG5
 
 @enduml
