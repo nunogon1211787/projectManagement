@@ -55,7 +55,6 @@ public class SprintController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
-
     /**
      * Find All Sprints
      */
@@ -105,6 +104,22 @@ public class SprintController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public  ResponseEntity<Object> showSprintById(@PathVariable("id") String id) {
+
+        ErrorMessage message = new ErrorMessage();
+        OutputSprintDTO outputSprintDTO;
+
+        try {
+            outputSprintDTO = sprintService.showSprintById(id);
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(outputSprintDTO, HttpStatus.OK);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteSprint(@PathVariable String id) {
@@ -138,7 +153,7 @@ public class SprintController {
         return new ResponseEntity<>(outputSprintDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/scrumBoard/{id}")
     public  ResponseEntity<Object> showScrumBoard(@PathVariable("id") String id) {
 
         ErrorMessage message = new ErrorMessage();

@@ -258,4 +258,18 @@ public class SprintService {
         return sprintIDFactory.create(projectID,sprintName);
     }
 
+    public OutputSprintDTO showSprintById (String id) throws Exception {
+        SprintID sprintID = new SprintID(id);
+
+        Optional<Sprint> opSprint = sprintRepo.findBySprintID(sprintID);
+
+        Sprint sprint = opSprint.flatMap(sprint1 -> opSprint).orElse(null);
+
+        if(sprint != null) {
+            return sprintMapper.toDTO(sprint);
+        }
+
+
+        else throw new Exception("Sprint doesnt exist");
+    }
 }
