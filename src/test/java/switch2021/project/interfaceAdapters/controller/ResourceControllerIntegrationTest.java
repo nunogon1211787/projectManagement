@@ -107,4 +107,141 @@ class ResourceControllerIntegrationTest {
 
         assertNotNull(x);
     }
+
+    @SneakyThrows
+    @Test
+    void deleteResource() {
+        //Arrange
+
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/resources/nel.m@mymail.com&Project_2022_3&2022-03-07")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String x = result.getResponse().getContentAsString();
+
+        assertNotNull(x);
+    }
+
+    @SneakyThrows
+    @Test
+    void deleteResourceFail() {
+        //Arrange
+
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/resources/nel.m@mymail.com&Project_2022_3&2022-03-09")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String x = result.getResponse().getContentAsString();
+
+        assertNotNull(x);
+    }
+
+    @SneakyThrows
+    @Test
+    void findProjectRoles() {
+        //Arrange
+
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/resources/roles")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String x = result.getResponse().getContentAsString();
+
+        assertNotNull(x);
+    }
+    @SneakyThrows
+    @Test
+    void getProjectTeamTrue() {
+        //Arrange
+
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/resources/registerOfResources/Project_2022_3")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String x = result.getResponse().getContentAsString();
+
+        assertNotNull(x);
+    }
+
+    @SneakyThrows
+    @Test
+    void getProjectTeamFail() {
+        //Arrange
+
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/resources/registerOfResources/Project_2022_999999")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String x = result.getResponse().getContentAsString();
+
+        assertNotNull(x);
+    }
+
+    @SneakyThrows
+    @Test
+    void getCurrentProjectTeamTrue() {
+        //Arrange
+
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/resources/currentProjectTeam/Project_2022_3")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String x = result.getResponse().getContentAsString();
+
+        assertNotNull(x);
+    }
+
+    @SneakyThrows
+    @Test
+    void getCurrentProjectTeamFail() {
+        //Arrange
+
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/resources/currentProjectTeam/Project_2022_999999")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String x = result.getResponse().getContentAsString();
+
+        assertNotNull(x);
+    }
+
+    @SneakyThrows
+    @Test
+    void showAllResourcesTrue() {
+        //Arrange
+
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/resources")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String x = result.getResponse().getContentAsString();
+
+        assertNotNull(x);
+    }
+
+
 }

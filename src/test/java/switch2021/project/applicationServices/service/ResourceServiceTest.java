@@ -441,4 +441,5 @@ class ResourceServiceTest {
         //Assert
         assertEquals(CollectionModel.of(dtos), result);
     }
+
 }
