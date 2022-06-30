@@ -1,6 +1,7 @@
 package switch2021.project.interfaceAdapters.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -77,7 +78,7 @@ public class TypologyControllerIntegrationTest {
         assertTrue(resultContent.contains("description\":\"Time and Materials"));
     }
 
-    @DisplayName("Create Typology")
+    @DisplayName("Should Not Create Typology")
     @Test
     public void shouldNotCreateTypology() throws Exception {
         //Arrange
@@ -109,7 +110,7 @@ public class TypologyControllerIntegrationTest {
         assertTrue(resultContent.contains("description\":\"Fixed Cost"));
     }
 
-    @DisplayName("Get Typology")
+    @DisplayName("Should Not Get Typology")
     @Test
     public void shouldNotGetTypology() throws Exception {
         //Arrange
@@ -135,6 +136,25 @@ public class TypologyControllerIntegrationTest {
         //Assert
         assertNotNull(resultContent);
         assertNull(result.getResponse().getErrorMessage());
+    }
+
+    @SneakyThrows
+    @DisplayName("Delete Typology")
+    @Test
+    void mockMvcTestDeleteTypology() {
+        //Arrange
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/typologies/Fixed cost")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isAccepted())
+                .andReturn();
+        //Act
+        int x = result.getResponse().getStatus();
+        String body = result.getResponse().getContentAsString();
+        //Assert
+        assertEquals(x,202);
+        assertNotNull(body);
     }
 
 }
