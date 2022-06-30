@@ -2,11 +2,9 @@ package switch2021.project.dataModel.jpa.assembler;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.mockito.InjectMocks;
+import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
+import org.mockito.junit.jupiter.MockitoExtension;
 import switch2021.project.dataModel.JPA.ProjectJpa;
 import switch2021.project.dataModel.JPA.assembler.ProjectJpaAssembler;
 import switch2021.project.entities.aggregates.Project.Project;
@@ -15,6 +13,8 @@ import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
 import java.time.LocalDate;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -81,7 +81,7 @@ class ProjectJpaAssemblerTest {
         ProjectJpa result = projJpaAssembler.toJpaData(proj);
 
         //Assert
-        assertEquals(result, expected);
+        assertTrue(new ReflectionEquals(expected).matches(result));
     }
 
     @Test
@@ -125,10 +125,11 @@ class ProjectJpaAssemblerTest {
         //Act
         ProjectJpa result = projJpaAssembler.toJpaData(proj);
         ProjectJpa expected = new ProjectJpa(projID, projName, "x", "x", endDate.toString(),
-                numberOfSprints, sprintDuration, budget, endDate.toString(), null, "x", status.toString());
+                                             numberOfSprints, sprintDuration, budget, endDate.toString(), null, "x",
+                                             status.toString());
 
         //Assert
-        assertEquals(result, expected);
+        assertTrue(new ReflectionEquals(expected).matches(result));
     }
 
     @Test
@@ -172,10 +173,11 @@ class ProjectJpaAssemblerTest {
         //Act
         ProjectJpa result = projJpaAssembler.toJpaData(proj);
         ProjectJpa expected = new ProjectJpa(projID, projName, "x", "x", endDate.toString(),
-                numberOfSprints, sprintDuration, budget, endDate.toString(), "x", null, status.toString());
+                                             numberOfSprints, sprintDuration, budget, endDate.toString(), "x", null,
+                                             status.toString());
 
         //Assert
-        assertEquals(result, expected);
+        assertTrue(new ReflectionEquals(expected).matches(result));
     }
 
     @Test
@@ -221,10 +223,11 @@ class ProjectJpaAssemblerTest {
         //Act
         ProjectJpa result = projJpaAssembler.toJpaData(proj);
         ProjectJpa expected = new ProjectJpa(projID, projName, "x", "x", endDate.toString(),
-                numberOfSprints, sprintDuration, budget, null, "x", "x", status.toString());
+                                             numberOfSprints, sprintDuration, budget, null, "x", "x",
+                                             status.toString());
 
         //Assert
-        assertEquals(result, expected);
+        assertTrue(new ReflectionEquals(expected).matches(result));
     }
 
     @Test
@@ -269,10 +272,11 @@ class ProjectJpaAssemblerTest {
         //Act
         ProjectJpa result = projJpaAssembler.toJpaData(proj);
         ProjectJpa expected = new ProjectJpa(projID, projName, "x", "x", endDate.toString(),
-                numberOfSprints, sprintDuration, budget, endDate.toString(), "x", "x", null);
+                                             numberOfSprints, sprintDuration, budget, endDate.toString(), "x", "x",
+                                             null);
 
         //Assert
-        assertEquals(result, expected);
+        assertTrue(new ReflectionEquals(expected).matches(result));
     }
 
 

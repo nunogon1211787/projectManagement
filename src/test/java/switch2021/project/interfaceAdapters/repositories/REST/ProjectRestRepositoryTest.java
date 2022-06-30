@@ -1,8 +1,16 @@
 package switch2021.project.interfaceAdapters.repositories.REST;
 
+import org.junit.jupiter.api.Test;
+import switch2021.project.dataModel.REST.ProjectRestDTO;
+
+import javax.net.ssl.SSLException;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 class ProjectRestRepositoryTest {
 
-//    //TODO
+    //TODO
 //    @Test
 //    void findAll() throws SSLException {
 //        //Arrange

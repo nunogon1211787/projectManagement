@@ -57,7 +57,7 @@ public class SprintTest {
     @DisplayName("Verification test if EndDate is set with failure")
     public void changeEndDateFail() {
         //Assert
-        SprintID sprintID = new SprintID("Project_2022_1_Sprint 1");
+        SprintID sprintID = new SprintID("Project_2022_1&Sprint 1");
         Sprint sprint = new Sprint(sprintID);
         sprint.changeEndDate(300);
         LocalDate endDate = sprint.getEndDate();
@@ -68,7 +68,7 @@ public class SprintTest {
     @Test
     @DisplayName("Verification test if is a current Sprint")
     public void isCurrentSprintFalseTest() {
-        SprintID sprintID = new SprintID("Project_2022_1_Sprint 1");
+        SprintID sprintID = new SprintID("Project_2022_1&Sprint 1");
         Sprint sprint = new Sprint(sprintID);
         sprint.setStartDate(LocalDate.of(2021, 1, 1));
         sprint.setEndDate(LocalDate.of(2020, 1, 1));
@@ -78,7 +78,7 @@ public class SprintTest {
     @Test
     @DisplayName("Verification test if is a current Sprint")
     public void isCurrentSprintTrueTest() {
-        SprintID sprintID = new SprintID("Project_2022_1_Sprint 1");
+        SprintID sprintID = new SprintID("Project_2022_1&Sprint 1");
         Sprint sprint = new Sprint(sprintID);
         sprint.setStartDate(LocalDate.of(2022, 1, 1));
         sprint.setEndDate(LocalDate.of(2022, 1, 15));
@@ -90,7 +90,7 @@ public class SprintTest {
     @DisplayName("Verification test if is a current Sprint")
     public void isCurrentSprintEndDateNullTest() {
         assertThrows(NullPointerException.class, () -> {
-            SprintID sprintID = new SprintID("Project_2022_1_Sprint 1");
+            SprintID sprintID = new SprintID("Project_2022_1&Sprint 1");
             Sprint sprint = new Sprint(sprintID);
             sprint.isCurrentSprint();
         });
@@ -100,10 +100,10 @@ public class SprintTest {
     @DisplayName("Verification test of hasSprintID method")
     public void hasSprintIDTest_Fail() {
         //Arrange
-        SprintID sprintID = new SprintID("Project_2022_1_Sprint 2");
+        SprintID sprintID = new SprintID("Project_2022_1&Sprint 2");
         Sprint sprint = new Sprint(sprintID);
         //Assert
-        assertFalse(sprint.hasSprintID("Project_2022_1_Sprint New"));
+        assertFalse(sprint.hasSprintID("Project_2022_1&Sprint New"));
     }
 
 
@@ -111,9 +111,9 @@ public class SprintTest {
     @DisplayName("HashCode Verification")
     public void hashCodeTest() {
         //Arrange
-        SprintID sprintID1 = new SprintID("Project_2022_1_Sprint 1");
+        SprintID sprintID1 = new SprintID("Project_2022_1&Sprint 1");
         Sprint sprint = new Sprint(sprintID1);
-        SprintID sprintID2 = new SprintID("Project_2022_1_Sprint 2");
+        SprintID sprintID2 = new SprintID("Project_2022_1&Sprint 2");
         Sprint sprint2 = new Sprint(sprintID1);
         Sprint sprint3 = new Sprint(sprintID2);
         //Assert

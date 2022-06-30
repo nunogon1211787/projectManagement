@@ -15,6 +15,7 @@ import switch2021.project.applicationServices.service.ResourceService;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -215,13 +216,25 @@ class ResourceControllerTest {
     }
 
     @Test
-    void deleteAResourceSuccess() {
+    public void getProjectRolesSuccess() {
         //Arrange
-        String id = "mock(ResourceID.class)";
-        HttpStatus expected = HttpStatus.OK;
+        OutputProjectRoleDTO roleDTO = mock(OutputProjectRoleDTO.class);
+        List<OutputProjectRoleDTO> dtos = new ArrayList<>();
+        dtos.add(roleDTO);
+        when(service.findProjectRoles()).thenReturn(CollectionModel.of(dtos));
         //Act
-        ResponseEntity<Object> result = ctrl.deleteAResource(id);
+        ResponseEntity<Object> result = ctrl.findProjectRoles();
         //Assert
-        assertEquals(result.getStatusCode(), expected);
+        assertThat(result.getStatusCodeValue()).isEqualTo(200);
+    }
+
+    @Test
+    public void getProjectRolesFail() {
+        //Arrange
+        doThrow(NullPointerException.class).when(service).findProjectRoles();
+        //Act
+        ResponseEntity<Object> result = ctrl.findProjectRoles();
+        //Assert
+        assertThat(result.getStatusCodeValue()).isEqualTo(400);
     }
 }
