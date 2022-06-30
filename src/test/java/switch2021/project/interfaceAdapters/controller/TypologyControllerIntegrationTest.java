@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -19,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class TypologyControllerIntegrationTest {
 
     public static final String BASE_URL = "https://localhost:8443";
@@ -98,7 +100,7 @@ public class TypologyControllerIntegrationTest {
     @Test
     public void shouldGetTypology() throws Exception {
         //Arrange
-        String id = "Fixed Cost";
+        String id = "Fixed cost";
         //Act
         MvcResult result = mockMvc
                 .perform(MockMvcRequestBuilders.get(BASE_URL + "/typologies/" + id)
@@ -107,7 +109,7 @@ public class TypologyControllerIntegrationTest {
                 .andReturn();
         String resultContent = result.getResponse().getContentAsString();
         //Assert
-        assertTrue(resultContent.contains("description\":\"Fixed Cost"));
+        assertTrue(resultContent.contains("description\":\"Fixed cost"));
     }
 
     @DisplayName("Should Not Get Typology")
@@ -138,23 +140,21 @@ public class TypologyControllerIntegrationTest {
         assertNull(result.getResponse().getErrorMessage());
     }
 
-//    @SneakyThrows
-//    @DisplayName("Delete Typology")
-//    @Test
-//    void mockMvcTestDeleteTypology() {
-//        //Arrange
-//        MvcResult result = mockMvc
-//                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/typologies/Fixed cost")
-//                        .contentType("application/json")
-//                        .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isAccepted())
-//                .andReturn();
-//        //Act
-//        int x = result.getResponse().getStatus();
-//        String body = result.getResponse().getContentAsString();
-//        //Assert
-//        assertEquals(x,202);
-//        assertNotNull(body);
-//    }
+
+    @DisplayName("Delete Typology")
+    @Test
+    void mockMvcTestDeleteTypology() throws Exception {
+        //Arrange
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/typologies/Fixed cost")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isAccepted()) //Assert
+                .andReturn();
+        //Act
+        String body = result.getResponse().getContentAsString();
+        //Assert
+        assertTrue(body.contains("\"responseMessage\":\"Typology successfully deleted.\""));
+    }
 
 }

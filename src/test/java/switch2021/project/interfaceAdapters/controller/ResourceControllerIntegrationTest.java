@@ -105,5 +105,4 @@ class ResourceControllerIntegrationTest {
 
         assertNotNull(result.getResponse().getContentAsString());
     }
-
 }
