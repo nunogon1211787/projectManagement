@@ -107,5 +107,4 @@ class ResourceControllerIntegrationTest {
 
         assertNotNull(x);
     }
-
 }

@@ -23,12 +23,12 @@ public class AuthService {
     LoginMapper map;
 
     public OutputLoginDTO authentication(LoginDto login) throws Exception {
-        Optional<User> logged = repo.findByUserId(idFactory.createUserID(login.email));
+        Optional<User> logged = repo.findByUserId(idFactory.createUserID(login.getEmail()));
 
         if (logged.isPresent()) {
             User userLogged = logged.get();
 
-            if (userLogged.checkPassword(new Password(login.password))) {
+            if (userLogged.checkPassword(new Password(login.getPassword()))) {
                 return map.toDto(userLogged);
             }
         }
