@@ -11,10 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import switch2021.project.dtoModel.dto.NewSprintDTO;
-import switch2021.project.dtoModel.dto.ProjectDTO;
-import switch2021.project.dtoModel.dto.StartSprintDTO;
-import switch2021.project.dtoModel.dto.UserStoryIdDTO;
+import switch2021.project.dtoModel.dto.*;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -308,7 +305,7 @@ public class SprintControllerIntegrationTest {
         assertTrue(resultContent.contains("Sprint does not exist"));
     }
 
-   /*@Test
+   @Test
     void shouldStartASprint() throws Exception {
         //Arrange
         String projID = "Project_2022_3";
@@ -334,6 +331,53 @@ public class SprintControllerIntegrationTest {
 
         String resultContent = result.getResponse().getContentAsString();
         assertNotNull(resultContent);
-        assertTrue(resultContent.contains("\"sprintID\":\"Project_2022_3\""));
-    }*/
+        //assertTrue(resultContent.contains("\"sprintID\":\"Project_2022_3\""));
+    }
+
+    @Test
+    void shouldShowScrumBoard() throws Exception {
+        //Arrange
+        String sprintID = "Project_2022_1&4";
+        //Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/sprints/"+ sprintID)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())//Assert
+                .andReturn();
+
+        String resultContent = result.getResponse().getContentAsString();
+        assertNotNull(resultContent);
+        assertTrue(resultContent.contains("\"usTitle\":\"as want US15\""));
+    }
+
+    @Test
+    void shouldChangeStatusScrumBoard() throws Exception {
+        //Arrange
+        String sprintID = "Project_2022_1&4";
+
+        String usTitle="as want US14";
+        String projectId="Project_2022_1";
+        String sprintName="4";
+        String status="Done";
+        UserStoryOfSprintDTO userStoryOfSprintDTO = new UserStoryOfSprintDTO();
+        userStoryOfSprintDTO.usTitle=usTitle;
+        userStoryOfSprintDTO.projectId=projectId;
+        userStoryOfSprintDTO.sprintName=sprintName;
+        userStoryOfSprintDTO.status=status;
+
+        //Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.patch(BASE_URL + "/sprints/scrumBoard/"+ sprintID)
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(userStoryOfSprintDTO))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())//Assert
+                .andReturn();
+
+        String resultContent = result.getResponse().getContentAsString();
+        assertNotNull(resultContent);
+        assertTrue(resultContent.contains("\"status\":\"Done\""));
+    }
+
+
 }

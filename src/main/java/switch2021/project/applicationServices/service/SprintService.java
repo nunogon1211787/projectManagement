@@ -118,7 +118,7 @@ public class SprintService {
 
         long sprintDuration = validateSprintStartDate(id, dto.getStartDate());
 
-        SprintID sprintID = new SprintID(id);
+        SprintID sprintID = createSprintIdByStringInputFromController(id);
 
         Optional<Sprint> opSprint = sprintRepo.findBySprintID(sprintID);
 
@@ -148,7 +148,7 @@ public class SprintService {
 
     @Transactional
     public UserStoryOfSprintDTO addUserStoryToSprintBacklog(String id, UserStoryIdDTO userStoryIdDTO) throws Exception {
-        SprintID sprintID = new SprintID(id);
+        SprintID sprintID = createSprintIdByStringInputFromController(id);
 
         Optional<Sprint> sprint = sprintRepo.findBySprintID(sprintID);
 
@@ -178,11 +178,7 @@ public class SprintService {
 
     public CollectionModel<UserStoryOfSprintDTO> showScrumBoard(String id) throws Exception {
         CollectionModel<UserStoryOfSprintDTO> dtoList;
-        String[] values = id.split("_");
-        ProjectID projectID = new ProjectID(values[0] + "_" + values[1] + "_" + values[2]);
-        Description sprintName = new Description((values[3]));
-
-        SprintID sprintID = new SprintID(projectID, sprintName);
+        SprintID sprintID = createSprintIdByStringInputFromController(id);
 
         List<UserStoryOfSprint> userStoryOfSprintList = userStoryOfSprintRepo.findAllUserStoriesBySprintID(sprintID);
 
@@ -193,11 +189,12 @@ public class SprintService {
 
     public UserStoryOfSprintDTO changeStatusScrumBoard(String id, UserStoryOfSprintDTO userStoryDTO) throws Exception {
         UserStoryOfSprintDTO userStoryOfSprintDTO;
-        String[] values = id.split("_");
+        SprintID sprintID = createSprintIdByStringInputFromController(id);
+        /*String[] values = id.split("_");
         ProjectID projectID = new ProjectID(values[0] + "_" + values[1] + "_" + values[2]);
         Description sprintName = new Description((values[3]));
 
-        SprintID sprintID = new SprintID(projectID, sprintName);
+        SprintID sprintID = new SprintID(projectID, sprintName);*/
 
         List<UserStoryOfSprint> userStoryOfSprintList = userStoryOfSprintRepo.findAllUserStoriesBySprintID(sprintID);
 
@@ -238,12 +235,12 @@ public class SprintService {
 
         long sprintDuration = project.getSprintDuration().getSprintDurationDays();
 
-        if (foundProject.get().getStartDate().isAfter(LocalDate.parse(date))) {
+        if (project.getStartDate().isAfter(LocalDate.parse(date))) {
             throw new Exception("Start date cant be before project start date");
 
-        } else if (foundProject.get().getEndDate() != null
+        } else if (project.getEndDate() != null
                 &&
-                foundProject.get().getEndDate().isBefore(LocalDate.parse(date))) {
+                project.getEndDate().isBefore(LocalDate.parse(date))) {
             throw new Exception("Start date cant be after project end date");
 
         } else {
