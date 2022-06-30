@@ -13,6 +13,7 @@ import switch2021.project.applicationServices.iRepositories.IResourceRepo;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
 import switch2021.project.dtoModel.dto.CreateResourceDTO;
 import switch2021.project.dtoModel.dto.OutputProjectRoleDTO;
+import switch2021.project.dtoModel.dto.DefineRoleOfResourceDTO;
 import switch2021.project.dtoModel.dto.OutputResourceDTO;
 import switch2021.project.dtoModel.dto.OutputStatusDTO;
 import switch2021.project.dtoModel.mapper.ProjectRoleMapper;
@@ -20,6 +21,7 @@ import switch2021.project.dtoModel.mapper.ResourceMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Resource.ManagementResourcesService;
 import switch2021.project.entities.aggregates.Resource.Resource;
+import switch2021.project.entities.factories.factories.ResourceFactory;
 import switch2021.project.entities.factories.factoryInterfaces.IResourceFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResourceIDFactory;
@@ -287,6 +289,22 @@ class ResourceServiceTest {
         });
     }
 
+    @Test
+    void ShowProjectTeamNoProject() {
+        //Assert
+        assertThrows(Exception.class, () -> {
+            //Arrange
+            ProjectID projID = mock(ProjectID.class);
+            when(projectIDFactory.create(anyString())).thenReturn(projID);
+            when(projRepo.existsById(projID)).thenReturn(false);
+            List<Resource> projectTeam = new ArrayList<>();
+            when(resRepo.findAllByProject(projID)).thenReturn(projectTeam);
+            OutputResourceDTO outDTO = mock(OutputResourceDTO.class);
+            when(mapper.toDto(any())).thenReturn(outDTO);
+            //Act
+            service.showProjectTeam("ok");
+        });
+    }
 
     @Test
     void getAllResourcesSuccess() {
@@ -319,6 +337,60 @@ class ResourceServiceTest {
             service.showAllResources();
         });
     }
+//
+//    @Test
+//    void defineProjectRoleSuccess() {
+//        String id = "tcz@mymail.com&Project_2022_3&2022-03-10";
+//        ProjectID projId = mock(ProjectID.class);
+//        DefineRoleOfResourceDTO dto = mock(DefineRoleOfResourceDTO.class);
+//
+//        String email = "tcz@mymail.com";
+//        String projid = "Project_2022_3";
+//        String data = "2022-03-10";
+//        String data2 = "2023-03-10";
+//        Double percentage = 0.9;
+//
+//        ResourceID resID = mock(ResourceID.class);
+//        when(iResourceIDFactory.create(email, projid, data)).thenReturn(resID);
+//
+//        List<Resource> resourcesByProject = new ArrayList<>();
+//        when(resRepo.findAllByProject(any())).thenReturn(resourcesByProject);
+//
+//        Resource opFoundResource = mock(Resource.class);
+//        when(resRepo.findById(resID)).thenReturn(Optional.of(opFoundResource));
+//
+//        Resource opFoundByRole = mock(Resource.class);
+//        when(opFoundResource.hasProjectRole(anyString())).thenReturn(true);
+//        when(opFoundResource.isActiveToThisDate(any())).thenReturn(true);
+//
+//        when(resourceFactory.createResourceByAnotherResource(resID,dto)).thenReturn(opFoundByRole);
+//
+//        when(projectIDFactory.create(id)).thenReturn(projId);
+//        Project opProject = mock(Project.class);
+//        when(projRepo.findById(projId)).thenReturn(Optional.of(opProject));
+//
+//        when(opProject.isActiveInThisDate(any())).thenReturn(true);
+//
+//        UserID userID = mock(UserID.class);
+//        List<Resource> resourceAllocatedProjects = new ArrayList<>();
+//        when(resRepo.findAllByUser(any())).thenReturn(resourceAllocatedProjects);
+//
+//
+//
+//        when(manageSrv.validateAllocation(resourceAllocatedProjects, data, data2, percentage)).thenReturn(true);
+//
+//        Resource expectedRes = mock(Resource.class);
+//
+//        when(resRepo.save(expectedRes)).thenReturn(expectedRes);
+//
+//        OutputResourceDTO expected = mock(OutputResourceDTO.class);
+//        when(mapper.toDto(expectedRes)).thenReturn(expected);
+//
+//        OutputResourceDTO result = service.defineProjectRole(id, dto);
+//
+//        assertEquals(expected, result);
+//
+//    }
 
     @Test
     void deleteResourceTestSuccess() {
