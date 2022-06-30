@@ -269,7 +269,6 @@ public class SprintService {
             return sprintMapper.toDTO(sprint);
         }
 
-
         else throw new Exception("Sprint doesnt exist");
     }
 }

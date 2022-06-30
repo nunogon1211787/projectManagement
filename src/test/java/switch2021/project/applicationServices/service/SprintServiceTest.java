@@ -18,8 +18,8 @@ import switch2021.project.dtoModel.mapper.SprintMapper;
 import switch2021.project.dtoModel.mapper.UserStoryOfSprintMapper;
 import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
-import switch2021.project.entities.valueObjects.voFactories.voFactories.SprintIDFactory;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
+import switch2021.project.entities.valueObjects.voFactories.voFactories.SprintIDFactory;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.interfaceAdapters.repositories.UserStoryRepository;
 
@@ -28,7 +28,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -90,7 +91,7 @@ public class SprintServiceTest {
         String projectID = "Project_2022_3";
         String sprintName = "Sprint6";
         SprintID sprintID = mock(SprintID.class);
-        when(sprintIDFactory.create(projectID,sprintName)).thenReturn(sprintID);
+        when(sprintIDFactory.create(projectID, sprintName)).thenReturn(sprintID);
         when(sprintRepo.existsSprintByID(sprintID)).thenReturn(true);
         //Act + Assert
         sprintService.deleteSprint(id);
@@ -107,7 +108,7 @@ public class SprintServiceTest {
             String projectID = "Project_2022_3";
             String sprintName = "Sprint20";
             SprintID sprintID = mock(SprintID.class);
-            when(sprintIDFactory.create(projectID,sprintName)).thenReturn(sprintID);
+            when(sprintIDFactory.create(projectID, sprintName)).thenReturn(sprintID);
             when(sprintRepo.existsSprintByID(sprintID)).thenReturn(false);
             //Act
             sprintService.deleteSprint(id);
@@ -393,6 +394,32 @@ public class SprintServiceTest {
             when(sprintRepo.findBySprintID(sprintID)).thenReturn(Optional.empty());
             //Act
             sprintService.addUserStoryToSprintBacklog(id, inputDto);
+        });
+    }
+
+    @Test
+    @SneakyThrows
+    @DisplayName("Show sprint by id success")
+    void showSprintById_success() {
+        //Arrange
+        Optional<Sprint> opSprint = Optional.of(sprint);
+        when(sprintRepo.findBySprintID(any())).thenReturn(opSprint);
+        when(sprintMapper.toDTO(sprint)).thenReturn(outputSprintDTO);
+        //Act
+        OutputSprintDTO result = sprintService.showSprintById("Project_2022_1&1");
+        //Assert
+        assertEquals(outputSprintDTO,result);
+    }
+
+    @Test
+    @SneakyThrows
+    @DisplayName("Show sprint by id fail")
+    void showSprintById_fail() {
+        assertThrows(Exception.class, () -> {
+            Optional<Sprint> opSprint = Optional.empty();
+            when(sprintRepo.findBySprintID(any())).thenReturn(opSprint);
+            //Act
+            sprintService.showSprintById("Project_2022_1&1");
         });
     }
 }
