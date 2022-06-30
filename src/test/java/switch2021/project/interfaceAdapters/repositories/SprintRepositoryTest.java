@@ -218,7 +218,7 @@ public class SprintRepositoryTest {
         when(sprintJpaAssembler.toDomain(any())).thenReturn(sprint);
         when(sprint.isCurrentSprint()).thenReturn(false);
         //Act
-        Sprint result = sprintRepository.findCurrentSprint();
+        sprintRepository.findCurrentSprint();
         });
     }
 
