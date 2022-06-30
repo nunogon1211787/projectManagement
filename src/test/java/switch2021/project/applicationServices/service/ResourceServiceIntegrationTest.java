@@ -6,30 +6,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
-import org.springframework.hateoas.Link;
-import switch2021.project.applicationServices.iRepositories.IProjectRepo;
-import switch2021.project.applicationServices.iRepositories.IResourceRepo;
-import switch2021.project.applicationServices.iRepositories.IUserRepo;
 import switch2021.project.dtoModel.dto.DefineRoleOfResourceDTO;
 import switch2021.project.dtoModel.dto.OutputResourceDTO;
-import switch2021.project.dtoModel.mapper.ProjectRoleMapper;
-import switch2021.project.dtoModel.mapper.ResourceMapper;
-import switch2021.project.entities.aggregates.Resource.ManagementResourcesService;
-import switch2021.project.entities.aggregates.Resource.Resource;
-import switch2021.project.entities.factories.factoryInterfaces.IResourceFactory;
-import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
-import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResourceIDFactory;
-import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
-import switch2021.project.entities.valueObjects.vos.Email;
-import switch2021.project.entities.valueObjects.vos.ProjectID;
-import switch2021.project.entities.valueObjects.vos.ResourceID;
-import switch2021.project.entities.valueObjects.vos.UserID;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -39,26 +19,6 @@ public class ResourceServiceIntegrationTest {
 
     @Autowired
     ResourceService service;
-    @Autowired
-    private IProjectRepo projRepo;
-    @Autowired
-    private IResourceRepo resRepo;
-    @Autowired
-    private IUserRepo userRepo;
-    @Autowired
-    private ResourceMapper mapper;
-    @Autowired
-    private ProjectRoleMapper roleMapper;
-    @Autowired
-    private ManagementResourcesService managementService;
-    @Autowired
-    private IResourceFactory iResourceFactory;
-    @Autowired
-    private IResourceIDFactory iResourceIDFactory;
-    @Autowired
-    private IProjectIDFactory iProjIDFactory;
-    @Autowired
-    private IUserIDFactory iUserIDFactory;
 
     @BeforeEach
     public void setUp() throws Exception {
