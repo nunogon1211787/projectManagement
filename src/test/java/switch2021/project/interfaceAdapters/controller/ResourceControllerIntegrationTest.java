@@ -103,7 +103,9 @@ class ResourceControllerIntegrationTest {
                 .andExpect(status().isBadRequest())
                 .andReturn();
 
-        assertNotNull(result.getResponse().getContentAsString());
+        String x = result.getResponse().getContentAsString();
+
+        assertNotNull(x);
     }
 
 }
