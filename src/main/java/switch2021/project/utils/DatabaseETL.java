@@ -255,7 +255,7 @@ public class DatabaseETL {
                 String title = row.getCell(2).getStringCellValue();
                 String status = row.getCell(3).getStringCellValue();
 
-                String sprintId = projectId + "_" + sprintName;
+                String sprintId = projectId + "&" + sprintName;
 
                 UserStoryIdDTO userStoryIdDTO = new UserStoryIdDTO();
                 userStoryIdDTO.title = title;

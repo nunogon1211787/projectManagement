@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import switch2021.project.dtoModel.dto.TypologyDTO;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -77,7 +78,7 @@ public class TypologyControllerIntegrationTest {
         assertTrue(resultContent.contains("description\":\"Time and Materials"));
     }
 
-    @DisplayName("Create Typology")
+    @DisplayName("Should Not Create Typology")
     @Test
     public void shouldNotCreateTypology() throws Exception {
         //Arrange
@@ -109,7 +110,7 @@ public class TypologyControllerIntegrationTest {
         assertTrue(resultContent.contains("description\":\"Fixed Cost"));
     }
 
-    @DisplayName("Get Typology")
+    @DisplayName("Should Not Get Typology")
     @Test
     public void shouldNotGetTypology() throws Exception {
         //Arrange
@@ -136,5 +137,24 @@ public class TypologyControllerIntegrationTest {
         assertNotNull(resultContent);
         assertNull(result.getResponse().getErrorMessage());
     }
+
+//    @SneakyThrows
+//    @DisplayName("Delete Typology")
+//    @Test
+//    void mockMvcTestDeleteTypology() {
+//        //Arrange
+//        MvcResult result = mockMvc
+//                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/typologies/Fixed cost")
+//                        .contentType("application/json")
+//                        .accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isAccepted())
+//                .andReturn();
+//        //Act
+//        int x = result.getResponse().getStatus();
+//        String body = result.getResponse().getContentAsString();
+//        //Assert
+//        assertEquals(x,202);
+//        assertNotNull(body);
+//    }
 
 }

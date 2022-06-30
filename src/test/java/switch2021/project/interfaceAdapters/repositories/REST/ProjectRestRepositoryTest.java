@@ -11,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProjectRestRepositoryTest {
 
     //TODO
-    @Test
-    void findAll() throws SSLException {
-        //Arrange
-        ProjectRestRepository repository = new ProjectRestRepository();
-        //Act
-        List<ProjectRestDTO> result = repository.findAll();
-        //Assert
-        assertTrue(result.isEmpty());
-    }
+//    @Test
+//    void findAll() throws SSLException {
+//        //Arrange
+//        ProjectRestRepository repository = new ProjectRestRepository();
+//        //Act
+//        List<ProjectRestDTO> result = repository.findAll();
+//        //Assert
+//        assertTrue(result.isEmpty());
+//    }
 }

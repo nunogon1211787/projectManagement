@@ -1,0 +1,29 @@
+@startuml
+
+title Physical View Level 2
+
+node "HTTP" as http {
+[FrontEnd]
+}
+
+node "localhost:" as localhost {
+rectangle Browser{
+[Frontend]
+}
+}
+
+node "Server" as server {
+[Backend]
+}
+
+node "DataBase Server" as db {
+[DataBase]
+}
+
+
+localhost -- server: https
+server -- db: https
+http -- localhost: https
+
+
+@enduml

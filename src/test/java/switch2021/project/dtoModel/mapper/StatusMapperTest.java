@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class StatusMapperTest {
     @Test
     void toDto() {
-        //Arrage
+        //Arrange
         String status = "status";
         StatusMapper mapper = new StatusMapper();
         //Act

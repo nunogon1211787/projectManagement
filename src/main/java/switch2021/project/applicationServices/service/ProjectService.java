@@ -150,11 +150,13 @@ public class ProjectService {
 
         Optional<Project> foundProject = projRepo.findById(projID);
 
-        if (foundProject.isEmpty()) {
+        Project project = foundProject.flatMap(proj -> foundProject).orElse(null);
+
+        if (project == null) {
             throw new IllegalArgumentException("Project does not exist");
         }
 
-        return projMapper.model2Dto(foundProject.get());
+        return projMapper.model2Dto(project);
     }
 
     public CollectionModel<OutputProjectDTO> showCurrentProjectsByUser(String UserId) {
