@@ -1,7 +1,6 @@
 package switch2021.project.interfaceAdapters.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,8 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import switch2021.project.dtoModel.dto.TypologyDTO;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -120,22 +120,22 @@ public class UserProfileControllerIntegrationTest {
         assertNull(result.getResponse().getErrorMessage());
     }
 
-    @SneakyThrows
-    @DisplayName("Delete User Profile")
-    @Test
-    void mockMvcTestDeleteUserProfile() {
-        //Arrange
-        MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/profiles/Visitor")
-                        .contentType("application/json")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isAccepted())
-                .andReturn();
-        //Act
-        int x = result.getResponse().getStatus();
-        String body = result.getResponse().getContentAsString();
-        //Assert
-        assertEquals(x,202);
-        assertNotNull(body);
-    }
+//    @SneakyThrows
+//    @DisplayName("Delete User Profile")
+//    @Test
+//    void mockMvcTestDeleteUserProfile() {
+//        //Arrange
+//        MvcResult result = mockMvc
+//                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/profiles/Visitor")
+//                        .contentType("application/json")
+//                        .accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isAccepted())
+//                .andReturn();
+//        //Act
+//        int x = result.getResponse().getStatus();
+//        String body = result.getResponse().getContentAsString();
+//        //Assert
+//        assertEquals(x,202);
+//        assertNotNull(body);
+//    }
 }
