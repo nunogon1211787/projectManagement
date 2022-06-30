@@ -342,6 +342,7 @@ class ProjectControllerIntegrationTest {
         String body = result.getResponse().getContentAsString();
         assertEquals(x,200);
         assertNotNull(body);
+        assertTrue(body.contains("Project was deleted successfully"));
     }
 
     @SneakyThrows
