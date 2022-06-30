@@ -207,6 +207,19 @@ public class SprintControllerIntegrationTest {
     }
 
     @Test
+    void shouldGetSprint() throws Exception {
+        //Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/sprints/Project_2022_1&1")
+                                 .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())//Assert
+                .andReturn();
+        //Assert
+        String resultContent = result.getResponse().getContentAsString();
+        assertTrue(resultContent.contains("sprintID\":\"Project_2022_1&1\""));
+    }
+
+    @Test
     void shouldGetSprintsOfAProject() throws Exception {
         //Arrange
         String projectID = "Project_2022_3";
@@ -303,6 +316,32 @@ public class SprintControllerIntegrationTest {
         //Assert
         String resultContent = result.getResponse().getContentAsString();
         assertTrue(resultContent.contains("Sprint does not exist"));
+    }
+
+    @Test
+    void shouldNotReturnSprint() throws Exception {
+        //Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/sprints/Project_2022_3&sprint200")
+                                 .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())//Assert
+                .andReturn();
+        //Assert
+        String resultContent = result.getResponse().getContentAsString();
+        assertTrue(resultContent.contains("Sprint doesnt exist"));
+    }
+
+    @Test
+    void shouldReturnSprint() throws Exception {
+        //Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/sprints/Project_2022_1&1")
+                                 .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())//Assert
+                .andReturn();
+        //Assert
+        String resultContent = result.getResponse().getContentAsString();
+        assertTrue(resultContent.contains("sprintID\":\"Project_2022_1&1\""));
     }
 
    @Test
