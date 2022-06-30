@@ -19,12 +19,12 @@ class "CreateUserStoryRoute" as route << Component >>
 }
 
 package "Interface Adapter" <<Rectangle>> #lightgreen {
-package "Controllers" <<Rectangle>>{
+package "Controllers" {
 class "UserStoryController" as ctrl << Component >> {
 +createUserStory(userStoryDTO)
 }
 }
-package "Repositories" <<Rectangle>>{
+package "Repositories" {
 class "UserStoryRepository" as store << Repository >> {
 -userStoryList : List<UserStory>
 + save(newUserStory)
@@ -33,17 +33,17 @@ class "UserStoryRepository" as store << Repository >> {
 }
 
 package "Application Service" <<Rectangle>> #lightpink{
-package "App Service" <<Rectangle>>{
+package "App Service" {
 class "UserStoryService" as service << Component >> {
 +createAndSaveUserStory(userStoryDTO)
 }
 }
-package "Repositories Interface" <<Rectangle>>{
+package "Repositories Interface" {
 interface "IUserStoryRepo" as repo << Interface >>{
 + save(newUserStory)
 }
 }
-package "Factory Interface" <<Rectangle>>{
+package "Factory Interface" {
 interface "IUserStoryFactory" as factoryInterface << Interface >>{
 createUserStory(userStoryDTO)
 }
@@ -75,7 +75,7 @@ class "UserStoryDTO" as dto << Component >> {
 }
 
 package "Domain" <<Rectangle>> #burlywood{
-package "Aggregate" <<Rectangle>>{
+package "Aggregate" {
 class "UserStory" as userStory << Root >> {
 - userStoryID : UserStoryID
 - priority : UsPriority
@@ -89,12 +89,12 @@ class "UserStory" as userStory << Root >> {
 + UserStory(userStoryID, priority, description, timeEstimate)
 }
 }
-package "Factory" <<Rectangle>>{
+package "Factory" {
 class "UserStoryFactory" as userStoryF << Factory >> {
 +createUserStory(inDto)
 }
 }
-package "Value Object" <<Rectangle>>{
+package "Value Object" {
 class "UserStoryID" as usID << Value Object >> {
 -projectID : ProjectID
 -usTitle : UsTitle

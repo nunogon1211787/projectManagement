@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 import switch2021.project.dataModel.REST.UserProfileRestDTO;
 import switch2021.project.entities.aggregates.UserProfile.UserProfile;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserProfileIDFactory;
+import switch2021.project.entities.valueObjects.vos.Description;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,9 +24,7 @@ public class UserProfileDomainDataRestAssembler {
      */
     public UserProfile toDomain(UserProfileRestDTO userProfileRestDTO) {
 
-        UserProfileID userProfileID = userProfileIDFactory.createUserProfileID(userProfileRestDTO.getDesignation());
-
-        return new UserProfile(userProfileID);
+        return new UserProfile(new UserProfileID(new Description(userProfileRestDTO.getDesignation())));
     }
 
 

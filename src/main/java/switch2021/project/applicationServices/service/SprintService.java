@@ -244,11 +244,13 @@ public class SprintService {
 
         Optional<Project> foundProject = projRepo.findById(projectID);
 
-        if (foundProject.isEmpty()) {
-            throw new Exception("Project not found");
+        Project project = foundProject.flatMap(proj -> foundProject).orElse(null);
+
+        if (project == null) {
+            throw new IllegalArgumentException("Project does not exist");
         }
 
-        long sprintDuration = foundProject.get().getSprintDuration().getSprintDurationDays();
+        long sprintDuration = project.getSprintDuration().getSprintDurationDays();
 
         if (foundProject.get().getStartDate().isAfter(LocalDate.parse(date))) {
             throw new Exception("Start date cant be before project start date");
@@ -270,4 +272,18 @@ public class SprintService {
         return sprintIDFactory.create(projectID,sprintName);
     }
 
+    public OutputSprintDTO showSprintById (String id) throws Exception {
+        SprintID sprintID = new SprintID(id);
+
+        Optional<Sprint> opSprint = sprintRepo.findBySprintID(sprintID);
+
+        Sprint sprint = opSprint.flatMap(sprint1 -> opSprint).orElse(null);
+
+        if(sprint != null) {
+            return sprintMapper.toDTO(sprint);
+        }
+
+
+        else throw new Exception("Sprint doesnt exist");
+    }
 }
