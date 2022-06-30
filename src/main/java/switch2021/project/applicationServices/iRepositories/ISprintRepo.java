@@ -3,6 +3,7 @@ package switch2021.project.applicationServices.iRepositories;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.SprintID;
+import switch2021.project.entities.valueObjects.vos.UserStoryID;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,10 +19,6 @@ public interface ISprintRepo {
 
     Optional<Sprint> findBySprintID(SprintID id);
 
-    /** Find a List Of All Sprints by Project ID. */
-
-    List<Sprint> findAllSprintsByProjectID(ProjectID projectID);
-
     /** Find the Current Sprint. */
 
     Sprint findCurrentSprint();
@@ -35,5 +32,7 @@ public interface ISprintRepo {
     boolean deleteSprint(SprintID sprintID);
 
     List<Sprint> findAllByProjectID(ProjectID projectID);
+
+    boolean existsSprintByID(SprintID id);
 }
 

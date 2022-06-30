@@ -14,6 +14,8 @@ import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.aggregates.UserStory.UserStory;
 import switch2021.project.entities.factories.factoryInterfaces.ISprintFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
+import switch2021.project.entities.valueObjects.voFactories.voInterfaces.ISprintIDFactory;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.UserStoryOfSprintStatus;
 
@@ -43,20 +45,30 @@ public class SprintService {
     private IUserStoryOfSprintRepo userStoryOfSprintRepo;
     @Autowired
     private UserStoryOfSprintMapper userStoryOfSprintMapper;
+    @Autowired
+    private IProjectIDFactory projectIDFactory;
+    @Autowired
+    private ISprintIDFactory sprintIDFactory;
 
     /**
      * Create and Save a New Sprint
      */
 
     public OutputSprintDTO createAndSaveSprint(NewSprintDTO inDTO) throws Exception {
+        ProjectID projID = projectIDFactory.create(inDTO.getProjectID());
+        if (!projRepo.existsById(projID)) {
+            throw new NullPointerException("Project does not exist");
+        }
         Sprint sprint = sprintFactory.createSprint(inDTO);
 
         if (!Objects.equals(inDTO.startDate, "")) {
-            String sprintId = inDTO.projectID + "_" + inDTO.name;
-            validateSprintStartDate(sprintId, inDTO.startDate); //TODO separar este método
+            String sprintId = inDTO.projectID + "&" + inDTO.name;
+            validateSprintStartDate(sprintId, inDTO.startDate);
             sprint.setStartDate(LocalDate.parse(inDTO.startDate));
         }
-
+        if (sprintRepo.existsSprintByID(sprint.getSprintID())) {
+            throw new IllegalArgumentException("Sprint already exist.");
+        }
         Sprint sprintSaved = sprintRepo.save(sprint);
 
         return sprintMapper.toDTO(sprintSaved);
@@ -71,11 +83,13 @@ public class SprintService {
         return sprintMapper.toCollectionDto(allSprints);
     }
 
-    public boolean deleteSprint(SprintID id) throws Exception {
-        if (!sprintRepo.deleteSprint(id)) {
-            throw new Exception("Project does not exist");
+    public void deleteSprint(String id) {
+        SprintID sprintID = createSprintIdByStringInputFromController(id);
+
+        if (!sprintRepo.existsSprintByID(sprintID)) {
+            throw new NullPointerException("Sprint does not exist");
         }
-        return true;
+        sprintRepo.deleteSprint(sprintID);
     }
 
     public CollectionModel<OutputSprintDTO> showSprintsOfAProject(String projId) throws Exception {
@@ -134,8 +148,6 @@ public class SprintService {
 
     @Transactional
     public UserStoryOfSprintDTO addUserStoryToSprintBacklog(String id, UserStoryIdDTO userStoryIdDTO) throws Exception {
-        UserStoryOfSprintDTO userStoryOfSprintDTO = new UserStoryOfSprintDTO();
-
         SprintID sprintID = new SprintID(id);
 
         Optional<Sprint> sprint = sprintRepo.findBySprintID(sprintID);
@@ -213,16 +225,18 @@ public class SprintService {
     }
 
     public long validateSprintStartDate(String id, String date) throws Exception {
-        String[] values = id.split("_");
-        ProjectID projectID = new ProjectID(values[0] + "_" + values[1] + "_" + values[2]);
+        String[] values = id.split("&");
+        ProjectID projectID = new ProjectID(values[0]);
 
         Optional<Project> foundProject = projRepo.findById(projectID);
 
-        if (foundProject.isEmpty()) {
-            throw new Exception("Project not found");
+        Project project = foundProject.flatMap(proj -> foundProject).orElse(null);
+
+        if (project == null) {
+            throw new IllegalArgumentException("Project does not exist");
         }
 
-        long sprintDuration = foundProject.get().getSprintDuration().getSprintDurationDays();
+        long sprintDuration = project.getSprintDuration().getSprintDurationDays();
 
         if (foundProject.get().getStartDate().isAfter(LocalDate.parse(date))) {
             throw new Exception("Start date cant be before project start date");
@@ -235,5 +249,26 @@ public class SprintService {
         } else {
             return sprintDuration;
         }
+    }
+
+    public SprintID createSprintIdByStringInputFromController(String id) {
+        String[] x = id.split("&");
+        String projectID = x[0];
+        String sprintName = x[1];
+        return sprintIDFactory.create(projectID,sprintName);
+    }
+
+    public OutputSprintDTO showSprintById (String id) throws Exception {
+        SprintID sprintID = new SprintID(id);
+
+        Optional<Sprint> opSprint = sprintRepo.findBySprintID(sprintID);
+
+        Sprint sprint = opSprint.flatMap(sprint1 -> opSprint).orElse(null);
+
+        if(sprint != null) {
+            return sprintMapper.toDTO(sprint);
+        }
+
+        else throw new Exception("Sprint doesnt exist");
     }
 }

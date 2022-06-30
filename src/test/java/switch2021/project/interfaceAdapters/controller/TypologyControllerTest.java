@@ -13,10 +13,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import switch2021.project.dtoModel.dto.TypologyDTO;
 import switch2021.project.applicationServices.service.TypologyService;
-import switch2021.project.interfaceAdapters.controller.TypologyController;
-
 import java.util.List;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -155,17 +152,6 @@ public class TypologyControllerTest {
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
 
-//    @Test
-//    public void findAllTypologies_EmptyList() {
-//        //Arrange
-//        MockHttpServletRequest request = new MockHttpServletRequest();
-//        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
-//        //Act
-//        when(service.findAllTypologies()).thenThrow(NullPointerException.class);
-//        ResponseEntity<?> response = controller.findTypologyList();
-//        //Assert
-//        assertThat(response.getStatusCodeValue()).isEqualTo(404);
-//    }
 
     @Test
     public void deleteTypology_TypologyDoesNotExist() {

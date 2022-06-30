@@ -1,52 +1,75 @@
 package switch2021.project.interfaceAdapters.repositories;
 
-import static org.mockito.Mockito.mock;
+import lombok.SneakyThrows;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.boot.test.context.SpringBootTest;
+import switch2021.project.dataModel.JPA.SprintJpa;
+import switch2021.project.dataModel.JPA.assembler.SprintJpaAssembler;
+import switch2021.project.entities.aggregates.Sprint.Sprint;
+import switch2021.project.entities.valueObjects.vos.ProjectID;
+import switch2021.project.entities.valueObjects.vos.SprintID;
+import switch2021.project.persistence.SprintJpaRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+
+@SpringBootTest
 public class SprintRepositoryTest {
-/*
+
+    @InjectMocks
+    SprintRepository sprintRepository;
+
+    @Mock
+    private SprintJpa sprintJpa;
+    @Mock
+    private Sprint sprint;
+    @Mock
+    private SprintJpaRepository sprintJpaRepository;
+    @Mock
+    private SprintJpaAssembler sprintJpaAssembler;
+    @Mock
+    private SprintID sprintID;
+    @Mock
+    private ProjectID projectID;
+
+
     @Test
+    @SneakyThrows
     @DisplayName("Save Sprint, with success")
     public void saveSprintSuccess() {
         //Arrange
-        SprintRepository sprintRepository = new SprintRepository();
-        Sprint sprint = mock(Sprint.class);
-        SprintID sprintID = mock(SprintID.class);
-        ProjectID projectID = mock(ProjectID.class);
-        Description description = mock(Description.class);
+        when(sprintJpaAssembler.toData(any())).thenReturn(sprintJpa);
+        when(sprintJpaRepository.existsById(any())).thenReturn(false);
+        when(sprintJpa.getSprintId()).thenReturn(sprintID);
+        when(sprintJpaRepository.save(any())).thenReturn(sprintJpa);
+        when(sprintJpaAssembler.toDomain(any())).thenReturn(sprint);
         //Act
-        when(sprint.getSprintID()).thenReturn(sprintID);
-        when(sprintID.getSprintName()).thenReturn(description);
-        when(description.getText()).thenReturn("Sprint Name");
-        when(sprintID.getProjectID()).thenReturn(projectID);
-        when(projectID.getCode()).thenReturn("Project_2022_1");
-        boolean saveSuccess = sprintRepository.save(sprint);
+        Sprint result = sprintRepository.save(sprint);
         //Assert
-        assertTrue(saveSuccess);
+        assertEquals(sprint,result);
     }
 
 
     @Test
+    @SneakyThrows
     @DisplayName("Save Sprint, with failure")
     public void saveSprintFailure(){
+        assertThrows(Exception.class, () -> {
         //Arrange
-        SprintRepository sprintRepository = new SprintRepository();
-        Sprint sprintA = mock(Sprint.class);
-        Sprint sprintB = mock(Sprint.class);
-        SprintID sprintID = mock(SprintID.class);
-        ProjectID projectID = mock(ProjectID.class);
-        Description description = mock(Description.class);
+        when(sprintJpaAssembler.toData(any())).thenReturn(sprintJpa);
+        when(sprintJpaRepository.existsById(any())).thenReturn(true);
+        when(sprintJpa.getSprintId()).thenReturn(sprintID);
         //Act
-        when(sprintA.getSprintID()).thenReturn(sprintID);
-        when(sprintB.getSprintID()).thenReturn(sprintID);
-        when(sprintID.getSprintName()).thenReturn(description);
-        when(description.getText()).thenReturn("Sprint Name");
-        when(sprintID.getProjectID()).thenReturn(projectID);
-        when(projectID.getCode()).thenReturn("Project_2022_1");
-        sprintRepository.save(sprintA);
-        when(sprintA.hasSprintID(sprintID.toString())).thenReturn(true);
-        boolean saveFailure = sprintRepository.save(sprintB);
-        //Assert
-        assertFalse(saveFailure);
+        sprintRepository.save(sprint);
+        });
     }
 
 
@@ -54,277 +77,150 @@ public class SprintRepositoryTest {
     @DisplayName("Test to search sprint by sprint id, with success")
     public void findSprintByID_Success() {
         //Arrange
-        SprintRepository sprintRepository = new SprintRepository();
-        Sprint sprint = mock(Sprint.class);
-        SprintID sprintID = mock(SprintID.class);
-        ProjectID projectID = mock(ProjectID.class);
-        Description description = mock(Description.class);
+        Optional<SprintJpa> optional = Optional.of(sprintJpa);
+        Optional<Sprint> optionalSprint = Optional.of(sprint);
+        when(sprintJpaRepository.findById(any())).thenReturn(optional);
+        when(sprintJpaAssembler.toDomain(any())).thenReturn(sprint);
         //Act
-        when(sprint.getSprintID()).thenReturn(sprintID);
-        when(sprintID.getProjectID()).thenReturn(projectID);
-        when(projectID.getCode()).thenReturn("Project_2022_1");
-        when(sprintID.getSprintName()).thenReturn(description);
-        when(description.getText()).thenReturn("Sprint Name");
-        when(sprint.hasSprintID("Project_2022_1_Sprint Name")).thenReturn(true);
-        sprintRepository.save(sprint);
+        Optional<Sprint> result = sprintRepository.findBySprintID(sprintID);
         //Assert
-        assertEquals(sprint, sprintRepository.findBySprintID("Project_2022_1_Sprint Name"));
+        assertEquals(optionalSprint,result);
     }
 
     @Test
     @DisplayName("Test to search sprint by sprint id, with failure")
     public void findSprintByID_Failure() {
         //Arrange
-        SprintRepository sprintRepository = new SprintRepository();
-        Sprint sprint = mock(Sprint.class);
-        SprintID sprintID = mock(SprintID.class);
-        ProjectID projectID = mock(ProjectID.class);
-        Description description = mock(Description.class);
+        Optional<SprintJpa> optional = Optional.empty();
+        Optional<Sprint> optionalSprint = Optional.empty();
+        when(sprintJpaRepository.findById(any())).thenReturn(optional);
         //Act
-        when(sprint.getSprintID()).thenReturn(sprintID);
-        when(sprintID.getProjectID()).thenReturn(projectID);
-        when(projectID.getCode()).thenReturn("Project_2022_1");
-        when(sprintID.getSprintName()).thenReturn(description);
-        when(description.getText()).thenReturn("Sprint Name");
-        when(sprint.hasSprintID("Project_2022_1_Sprint Name")).thenReturn(true);
-        sprintRepository.save(sprint);
+        Optional<Sprint> result = sprintRepository.findBySprintID(sprintID);
         //Assert
-        assertNotEquals(sprint, sprintRepository.findBySprintID("Project_2022_1_Sprint XPTO"));
+        assertEquals(optionalSprint,result);
+
     }
 
-    @Test
-    @DisplayName("Test to search sprint by sprint ID, null ID")
-    public void findSprintByID_Null() {
-        //Arrange
-        SprintRepository sprintRepository = new SprintRepository();
-        //Act
-        Sprint sprint = sprintRepository.findBySprintID("Project_2022_1_Sprint Name");
-        //Assert
-        assertNull(sprint);
-    }
 
     @Test
     @DisplayName("Test to search sprint list - find all sprints")
     public void findAllSprints() {
         //Arrange
-        SprintRepository sprintRepository = new SprintRepository();
-        Sprint sprint1 = mock(Sprint.class);
-        Sprint sprint2 = mock(Sprint.class);
-        Sprint sprint3 = mock(Sprint.class);
-        SprintID sprintID1 = mock(SprintID.class);
-        SprintID sprintID2 = mock(SprintID.class);
-        SprintID sprintID3 = mock(SprintID.class);
-        ProjectID projectID1 = mock(ProjectID.class);
-        ProjectID projectID2 = mock(ProjectID.class);
-        ProjectID projectID3 = mock(ProjectID.class);
-        Description description1 = mock(Description.class);
-        Description description2 = mock(Description.class);
-        Description description3 = mock(Description.class);
+        List<SprintJpa> sprintJpaList = new ArrayList<>();
+        List<Sprint> sprintList = new ArrayList<>();
+        sprintList.add(sprint);
+        sprintJpaList.add(sprintJpa);
+
+        when(sprintJpaRepository.findAll()).thenReturn(sprintJpaList);
+        when(sprintJpaAssembler.toDomain(any())).thenReturn(sprint);
         //Act
-        when(sprint1.getSprintID()).thenReturn(sprintID1);
-        when(sprintID1.getSprintName()).thenReturn(description1);
-        when(description1.getText()).thenReturn("Sprint One");
-        when(sprintID1.getProjectID()).thenReturn(projectID1);
-        when(projectID1.getCode()).thenReturn("Project_2022_1");
-        sprintRepository.save(sprint1);
-
-        when(sprint2.getSprintID()).thenReturn(sprintID2);
-        when(sprintID2.getSprintName()).thenReturn(description2);
-        when(description2.getText()).thenReturn("Sprint Two");
-        when(sprintID2.getProjectID()).thenReturn(projectID2);
-        when(projectID2.getCode()).thenReturn("Project_2022_2");
-        sprintRepository.save(sprint2);
-
-        when(sprint3.getSprintID()).thenReturn(sprintID3);
-        when(sprintID3.getSprintName()).thenReturn(description3);
-        when(description3.getText()).thenReturn("Sprint Three");
-        when(sprintID3.getProjectID()).thenReturn(projectID3);
-        when(projectID3.getCode()).thenReturn("Project_2022_3");
-        sprintRepository.save(sprint3);
+        List<Sprint> result = sprintRepository.findAllSprints();
         //Assert
-        assertEquals(3, sprintRepository.findAllSprints().size());
+        assertEquals(sprintList,result);
     }
 
     @Test
     @DisplayName("Test to delete a Sprint")
     public void deleteSprint() {
         //Arrange
-        SprintRepository sprintRepository = new SprintRepository();
-        Sprint sprint1 = mock(Sprint.class);
-        Sprint sprint2 = mock(Sprint.class);
-        Sprint sprint3 = mock(Sprint.class);
-        SprintID sprintID1 = mock(SprintID.class);
-        SprintID sprintID2 = mock(SprintID.class);
-        SprintID sprintID3 = mock(SprintID.class);
-        ProjectID projectID1 = mock(ProjectID.class);
-        ProjectID projectID2 = mock(ProjectID.class);
-        ProjectID projectID3 = mock(ProjectID.class);
-        Description description1 = mock(Description.class);
-        Description description2 = mock(Description.class);
-        Description description3 = mock(Description.class);
-
-        when(sprint1.getSprintID()).thenReturn(sprintID1);
-        when(sprintID1.getSprintName()).thenReturn(description1);
-        when(description1.getText()).thenReturn("Sprint One");
-        when(sprintID1.getProjectID()).thenReturn(projectID1);
-        when(projectID1.getCode()).thenReturn("Project_2022_1");
-        sprintRepository.save(sprint1);
-
-        when(sprint2.getSprintID()).thenReturn(sprintID2);
-        when(sprintID2.getSprintName()).thenReturn(description2);
-        when(description2.getText()).thenReturn("Sprint Two");
-        when(sprintID2.getProjectID()).thenReturn(projectID2);
-        when(projectID2.getCode()).thenReturn("Project_2022_2");
-        sprintRepository.save(sprint2);
-
-        when(sprint3.getSprintID()).thenReturn(sprintID3);
-        when(sprintID3.getSprintName()).thenReturn(description3);
-        when(description3.getText()).thenReturn("Sprint Three");
-        when(sprintID3.getProjectID()).thenReturn(projectID3);
-        when(projectID3.getCode()).thenReturn("Project_2022_3");
-        sprintRepository.save(sprint3);
+        when(sprintJpaRepository.existsById(any())).thenReturn(true);
+        doNothing().when(sprintJpaRepository).deleteById(any());
         //Act
-        when(sprint1.hasSprintID("Project_2022_1_Sprint One")).thenReturn(true);
-        when(sprint2.hasSprintID("Project_2022_2_Sprint Two")).thenReturn(true);
-        when(sprint3.hasSprintID("Project_2022_3_Sprint Three")).thenReturn(true);
-        sprintRepository.deleteSprint(sprint3);
+        boolean result = sprintRepository.deleteSprint(sprintID);
         //Assert
-        assertEquals(2, sprintRepository.getSprints().size());
+        assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("Test to delete a Sprint fail")
+    public void deleteSprint_fail() {
+        //Arrange
+        when(sprintJpaRepository.existsById(any())).thenReturn(false);
+        doNothing().when(sprintJpaRepository).deleteById(any());
+        //Act
+        boolean result = sprintRepository.deleteSprint(sprintID);
+        //Assert
+        assertFalse(result);
     }
 
     @Test
     @DisplayName("Test to search sprint list, by Project ID")
     public void findAllSprintsByProjectID() {
         //Arrange
-        SprintRepository sprintRepository = new SprintRepository();
-        Sprint sprint1 = mock(Sprint.class);
-        Sprint sprint2 = mock(Sprint.class);
-        Sprint sprint3 = mock(Sprint.class);
-        SprintID sprintID1 = mock(SprintID.class);
-        SprintID sprintID2 = mock(SprintID.class);
-        SprintID sprintID3 = mock(SprintID.class);
-        ProjectID projectID1 = mock(ProjectID.class);
-        ProjectID projectID2 = mock(ProjectID.class);
-        ProjectID projectID3 = mock(ProjectID.class);
-        Description description1 = mock(Description.class);
-        Description description2 = mock(Description.class);
-        Description description3 = mock(Description.class);
+        List<Sprint> sprintList = new ArrayList<>();
+        List<SprintJpa> sprintJpaList = new ArrayList<>();
+        sprintJpaList.add(sprintJpa);
+        sprintList.add(sprint);
+        when(sprint.getSprintID()).thenReturn(sprintID);
+        when(sprintID.getProjectID()).thenReturn(projectID);
+        when(projectID.getCode()).thenReturn("code");
+        when(sprintJpaRepository.findAll()).thenReturn(sprintJpaList);
+        when(sprintJpaAssembler.toDomain(any())).thenReturn(sprint);
         //Act
-        when(sprint1.getSprintID()).thenReturn(sprintID1);
-        when(sprintID1.getSprintName()).thenReturn(description1);
-        when(description1.getText()).thenReturn("Sprint One");
-        when(sprintID1.getProjectID()).thenReturn(projectID1);
-        when(projectID1.getCode()).thenReturn("Project_2022_1");
-        sprintRepository.save(sprint1);
-
-        when(sprint2.getSprintID()).thenReturn(sprintID2);
-        when(sprintID2.getSprintName()).thenReturn(description2);
-        when(description2.getText()).thenReturn("Sprint Two");
-        when(sprintID2.getProjectID()).thenReturn(projectID2);
-        when(projectID2.getCode()).thenReturn("Project_2022_1");
-        sprintRepository.save(sprint2);
-
-        when(sprint3.getSprintID()).thenReturn(sprintID3);
-        when(sprintID3.getSprintName()).thenReturn(description3);
-        when(description3.getText()).thenReturn("Sprint Three");
-        when(sprintID3.getProjectID()).thenReturn(projectID3);
-        when(projectID3.getCode()).thenReturn("Project_2022_2");
-        sprintRepository.save(sprint3);
+        List<Sprint> result = sprintRepository.findAllByProjectID(projectID);
         //Assert
-        assertEquals(2, sprintRepository.findAllSprintsByProjectID("Project_2022_1").size());
+        assertEquals(sprintList,result);
     }
 
     @Test
-    @DisplayName("Override Test")
-    public void overrideTest() {
+    @DisplayName("Test id sprint exists True")
+    public void existsBySprintId() {
         //Arrange
-        SprintRepository sprintRepository = new SprintRepository();
-        Sprint sprint1 = mock(Sprint.class);
-        Sprint sprint2 = mock(Sprint.class);
-        Sprint sprint3 = mock(Sprint.class);
-        SprintID sprintID1 = mock(SprintID.class);
-        SprintID sprintID2 = mock(SprintID.class);
-        SprintID sprintID3 = mock(SprintID.class);
-        ProjectID projectID1 = mock(ProjectID.class);
-        ProjectID projectID2 = mock(ProjectID.class);
-        ProjectID projectID3 = mock(ProjectID.class);
-        Description description1 = mock(Description.class);
-        Description description2 = mock(Description.class);
-        Description description3 = mock(Description.class);
+        List<SprintJpa> sprintJpaList = new ArrayList<>();
+        sprintJpaList.add(sprintJpa);
+        when(sprintJpaRepository.findAll()).thenReturn(sprintJpaList);
+        when(sprintJpaAssembler.toDomain(any())).thenReturn(sprint);
+        when(sprint.hasSprintID(any())).thenReturn(true);
         //Act
-        when(sprint1.getSprintID()).thenReturn(sprintID1);
-        when(sprintID1.getSprintName()).thenReturn(description1);
-        when(description1.getText()).thenReturn("Sprint One");
-        when(sprintID1.getProjectID()).thenReturn(projectID1);
-        when(projectID1.getCode()).thenReturn("Project_2022_1");
-        sprintRepository.save(sprint1);
-
-        when(sprint2.getSprintID()).thenReturn(sprintID2);
-        when(sprintID2.getSprintName()).thenReturn(description2);
-        when(description2.getText()).thenReturn("Sprint Two");
-        when(sprintID2.getProjectID()).thenReturn(projectID2);
-        when(projectID2.getCode()).thenReturn("Project_2022_1");
-        sprintRepository.save(sprint2);
-
-        when(sprint3.getSprintID()).thenReturn(sprintID3);
-        when(sprintID3.getSprintName()).thenReturn(description3);
-        when(description3.getText()).thenReturn("Sprint Three");
-        when(sprintID3.getProjectID()).thenReturn(projectID3);
-        when(projectID3.getCode()).thenReturn("Project_2022_2");
-        sprintRepository.save(sprint3);
-
+        boolean result = sprintRepository.existsBySprintID("sprintID");
         //Assert
-        assertEquals(sprint1, sprint1);
-        assertEquals(3, sprintRepository.getSprints().size());
+        assertTrue(result);
     }
 
     @Test
-    @DisplayName("HashCode Test")
-    public void hashCodeTest() {
+    @DisplayName("Test id sprint exists False")
+    public void existsBySprintId_notFound() {
         //Arrange
-        SprintRepository sprintRepository = new SprintRepository();
-        Sprint sprint1 = mock(Sprint.class);
-        Sprint sprint2 = mock(Sprint.class);
-        Sprint sprint3 = mock(Sprint.class);
-        SprintID sprintID1 = mock(SprintID.class);
-        SprintID sprintID2 = mock(SprintID.class);
-        SprintID sprintID3 = mock(SprintID.class);
-        ProjectID projectID1 = mock(ProjectID.class);
-        ProjectID projectID2 = mock(ProjectID.class);
-        ProjectID projectID3 = mock(ProjectID.class);
-        Description description1 = mock(Description.class);
-        Description description2 = mock(Description.class);
-        Description description3 = mock(Description.class);
+        List<SprintJpa> sprintJpaList = new ArrayList<>();
+        sprintJpaList.add(sprintJpa);
+        when(sprintJpaRepository.findAll()).thenReturn(sprintJpaList);
+        when(sprintJpaAssembler.toDomain(any())).thenReturn(sprint);
+        when(sprint.hasSprintID(any())).thenReturn(false);
         //Act
-        when(sprint1.getSprintID()).thenReturn(sprintID1);
-        when(sprintID1.getSprintName()).thenReturn(description1);
-        when(description1.getText()).thenReturn("Sprint One");
-        when(sprintID1.getProjectID()).thenReturn(projectID1);
-        when(projectID1.getCode()).thenReturn("Project_2022_1");
-        sprintRepository.save(sprint1);
-
-        when(sprint2.getSprintID()).thenReturn(sprintID2);
-        when(sprintID2.getSprintName()).thenReturn(description2);
-        when(description2.getText()).thenReturn("Sprint Two");
-        when(sprintID2.getProjectID()).thenReturn(projectID2);
-        when(projectID2.getCode()).thenReturn("Project_2022_1");
-        sprintRepository.save(sprint2);
-
-        when(sprint3.getSprintID()).thenReturn(sprintID3);
-        when(sprintID3.getSprintName()).thenReturn(description3);
-        when(description3.getText()).thenReturn("Sprint Three");
-        when(sprintID3.getProjectID()).thenReturn(projectID3);
-        when(projectID3.getCode()).thenReturn("Project_2022_2");
-        sprintRepository.save(sprint3);
-
-        List<Sprint> list = sprintRepository.findAllSprints();
-
+        boolean result = sprintRepository.existsBySprintID("sprintID");
         //Assert
-        assertEquals(sprint1.hashCode(), sprint1.hashCode());
-        assertNotEquals(sprint2.hashCode(), sprint3.hashCode());
-        assertEquals(list.hashCode(), list.hashCode());
+        assertFalse(result);
     }
 
- */
+    @Test
+    @DisplayName("Test find current sprint")
+    public void findCurrentSprint() {
+        //Arrange
+        List<SprintJpa> sprintJpaList = new ArrayList<>();
+        sprintJpaList.add(sprintJpa);
+        when(sprintJpaRepository.findAll()).thenReturn(sprintJpaList);
+        when(sprintJpaAssembler.toDomain(any())).thenReturn(sprint);
+        when(sprint.isCurrentSprint()).thenReturn(true);
+        //Act
+        Sprint result = sprintRepository.findCurrentSprint();
+        //Assert
+        assertEquals(sprint,result);
+    }
+
+    @Test
+    @DisplayName("Test find current sprint, no current sprint")
+    public void findCurrentSprint_fail() {
+        assertThrows(Exception.class, () -> {
+        //Arrange
+        List<SprintJpa> sprintJpaList = new ArrayList<>();
+        sprintJpaList.add(sprintJpa);
+        when(sprintJpaRepository.findAll()).thenReturn(sprintJpaList);
+        when(sprintJpaAssembler.toDomain(any())).thenReturn(sprint);
+        when(sprint.isCurrentSprint()).thenReturn(false);
+        //Act
+        sprintRepository.findCurrentSprint();
+        });
+    }
+
 }
 

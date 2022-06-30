@@ -1,6 +1,5 @@
 package switch2021.project.applicationServices.service;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,6 +18,7 @@ import switch2021.project.entities.factories.factoryInterfaces.IUserProfileFacto
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserProfileIDFactory;
 import switch2021.project.entities.valueObjects.vos.UserProfileID;
 
+import javax.net.ssl.SSLException;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,6 +45,7 @@ public class UserProfileServiceTest {
     UserProfileDTO userProfileDTO;
     @MockBean
     IUserProfileWebRepository iUserProfileWebRepository;
+
     @BeforeEach
     public void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
@@ -92,7 +93,7 @@ public class UserProfileServiceTest {
     }
 
     @Test
-    void getAllUserProfileSuccess() {
+    void getAllUserProfileSuccess() throws SSLException {
         //Arrange
         List<UserProfile> userProfiles = new ArrayList<>();
         when(iUserProfileRepo.findAll()).thenReturn(userProfiles);
@@ -176,26 +177,12 @@ public class UserProfileServiceTest {
         //Assert
         assertThrows(Exception.class, () -> {
             //Arrange
-            UserProfile userProfile = mock(UserProfile.class);
             UserProfileID profileID = mock(UserProfileID.class);
-            UserProfileDTO outDTO = mock(UserProfileDTO.class);
             UserProfileDTO inDTO = mock(UserProfileDTO.class);
-            UserProfile userProfileSaved = mock(UserProfile.class);
             when(factoryId.createUserProfileID("ok")).thenReturn(profileID);
-            when(iUserProfileRepo.findByUserProfileID(profileID)).thenReturn(null);
-            when(iUserProfileRepo.deleteById(profileID)).thenReturn(true);
-            when(iUserProfileFactory.createUserProfile(inDTO)).thenReturn(userProfile);
-            when(Objects.requireNonNull(userProfile).getUserProfileId()).thenReturn(profileID);
-
-            when(iUserProfileRepo.existsByUserProfileId(profileID)).thenReturn(true);
-            when(iUserProfileRepo.save(userProfile)).thenReturn(userProfileSaved);
-            when(userProfileMapper.toDTO(userProfileSaved)).thenReturn(outDTO);
-
-            when(userProfileService.createAndSaveUserProfile(inDTO)).thenReturn(outDTO);
-
+            when(iUserProfileRepo.findByUserProfileID(profileID)).thenReturn(Optional.empty());
             //Act
             userProfileService.editARequestedUserProfile("ok", inDTO);
-
         });
     }
 
@@ -206,7 +193,7 @@ public class UserProfileServiceTest {
             //Arrange
             UserProfileID profileID = mock(UserProfileID.class);
             UserProfileDTO outDTO = mock(UserProfileDTO.class);
-            outDTO.setUserProfileName("ok");
+            outDTO.userProfileName="ok";
             when(factoryId.createUserProfileID("ok")).thenReturn(profileID);
             when(iUserProfileRepo.existsByUserProfileId(profileID)).thenReturn(true);
             when(iUserProfileRepo.deleteById(profileID)).thenReturn(true);
@@ -222,7 +209,7 @@ public class UserProfileServiceTest {
             //Arrange
             UserProfileID profileID = mock(UserProfileID.class);
             UserProfileDTO outDTO = mock(UserProfileDTO.class);
-            outDTO.setUserProfileName("ok");
+            outDTO.userProfileName="ok";
             when(factoryId.createUserProfileID("ok")).thenReturn(profileID);
             when(iUserProfileRepo.existsByUserProfileId(profileID)).thenReturn(false);
             when(iUserProfileRepo.deleteById(profileID)).thenReturn(true);
@@ -249,23 +236,4 @@ public class UserProfileServiceTest {
         //Assert
         assertEquals(dto.userProfileName, userProfileService.createAndSaveUserProfile(userProfileDTO).userProfileName);
     }
-
-/*    @Test
-    @DisplayName("Test to create a repeated user profile")
-    public void createAndSaveRepeatedUserProfile() {
-        //Assert
-        assertThrows(IllegalArgumentException.class, () -> {
-
-            //Arrange
-            UserProfileDTO userProfileDTO = mock(UserProfileDTO.class);
-            OutputUserProfileDTO outputUserProfileDTO = mock(OutputUserProfileDTO.class);
-
-            when(iUserProfileFactory.createUserProfile(userProfileDTO)).thenReturn(userProfile);
-            when(iUserProfileRepo.save(userProfile)).thenReturn(Optional.empty());
-            when(userProfileMapper.toDTO(userProfile)).thenReturn(outputUserProfileDTO);
-
-            //Act
-            createUserProfileService.createAndSaveUserProfile(userProfileDTO);
-        });
-    }*/
 }

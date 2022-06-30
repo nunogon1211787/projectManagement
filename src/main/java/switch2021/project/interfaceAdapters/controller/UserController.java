@@ -230,4 +230,18 @@ public class UserController {
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @GetMapping("/status")
+    public ResponseEntity<Object> getUserStatus() {
+        CollectionModel<OutputUserDTO> usersStatusDto;
+
+        try {
+            usersStatusDto = userService.showUserStatus();
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(usersStatusDto, HttpStatus.OK);
+    }
 }

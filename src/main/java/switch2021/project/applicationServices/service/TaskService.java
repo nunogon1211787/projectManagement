@@ -109,15 +109,11 @@ public class TaskService {
 
     private Task getTask(String taskID) {
         Optional<Task> optionalTask = taskRepo.findById(taskID);
-        Task task = null;
 
         if (optionalTask.isPresent()) {
-            task = optionalTask.get();
+            return optionalTask.get();
         }
-        if (optionalTask.isEmpty()) {
-            throw new IllegalArgumentException("Task does not exist");
-        }
-        return task;
+        throw new IllegalArgumentException("Task does not exist");
     }
 
     private void validateSprint(SprintID sprintID) {

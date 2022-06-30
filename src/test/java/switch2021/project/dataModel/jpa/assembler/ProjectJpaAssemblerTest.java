@@ -2,32 +2,25 @@ package switch2021.project.dataModel.jpa.assembler;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.junit.jupiter.api.Assertions.*;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
-
+import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
+import org.mockito.junit.jupiter.MockitoExtension;
 import switch2021.project.dataModel.JPA.ProjectJpa;
 import switch2021.project.dataModel.JPA.assembler.ProjectJpaAssembler;
 import switch2021.project.entities.aggregates.Project.Project;
-import switch2021.project.entities.factories.factories.ProjectFactory;
 import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
 import java.time.LocalDate;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
 class ProjectJpaAssemblerTest {
-
-
-    @Mock
-    ProjectFactory projFac;
-
 
     @InjectMocks
     ProjectJpaAssembler projJpaAssembler;
@@ -43,7 +36,7 @@ class ProjectJpaAssemblerTest {
         SprintDuration sprDur = mock(SprintDuration.class);
         Budget bud = mock(Budget.class);
         TypologyID typoId = mock(TypologyID.class);
-        Customer cust = mock(Customer.class);
+        Customer customer = mock(Customer.class);
         ProjectStatusEnum status = ProjectStatusEnum.PLANNED;
 
         String projName = "x";
@@ -59,8 +52,8 @@ class ProjectJpaAssemblerTest {
         when(busSec.getDescription()).thenReturn(desc);
         when(proj.getTypologyId()).thenReturn(typoId);
         when(typoId.getDescription()).thenReturn(desc);
-        when(proj.getCustomer()).thenReturn(cust);
-        when(cust.getCustomerName()).thenReturn(desc);
+        when(proj.getCustomer()).thenReturn(customer);
+        when(customer.getCustomerName()).thenReturn(desc);
         when(desc.getText()).thenReturn(projName);
         when(proj.getStartDate()).thenReturn(endDate);
         when(proj.getNumberOfSprints()).thenReturn(numbSpr);
@@ -71,14 +64,24 @@ class ProjectJpaAssemblerTest {
         when(bud.getBudgetVO()).thenReturn(budget);
         when(proj.getEndDate()).thenReturn(endDate);
         when(proj.getProjectStatus()).thenReturn(status);
-
+        ProjectJpa expected = new ProjectJpa();
+        expected.setProjectCode(projID);
+        expected.setName(projName);
+        expected.setDescription("x");
+        expected.setBusinessSector("x");
+        expected.setEndDate(endDate.toString());
+        expected.setNumberOfSprints(numberOfSprints);
+        expected.setSprintDuration(sprintDuration);
+        expected.setBudget(budget);
+        expected.setStartDate(endDate.toString());
+        expected.setTypology("x");
+        expected.setCustomer("x");
+        expected.setStatus(status.toString());
         //Act
         ProjectJpa result = projJpaAssembler.toJpaData(proj);
-        ProjectJpa expected = new ProjectJpa(projID, projName, "x", "x", endDate.toString(),
-                numberOfSprints, sprintDuration, budget, endDate.toString(), "x", "x", status.toString());
 
         //Assert
-        assertEquals(result, expected);
+        assertTrue(new ReflectionEquals(expected).matches(result));
     }
 
     @Test
@@ -91,8 +94,7 @@ class ProjectJpaAssemblerTest {
         NumberOfSprints numbSpr = mock(NumberOfSprints.class);
         SprintDuration sprDur = mock(SprintDuration.class);
         Budget bud = mock(Budget.class);
-        TypologyID typoId = mock(TypologyID.class);
-        Customer cust = mock(Customer.class);
+        Customer customer = mock(Customer.class);
         ProjectStatusEnum status = ProjectStatusEnum.PLANNED;
 
         String projName = "x";
@@ -107,9 +109,8 @@ class ProjectJpaAssemblerTest {
         when(proj.getBusinessSector()).thenReturn(busSec);
         when(busSec.getDescription()).thenReturn(desc);
         when(proj.getTypologyId()).thenReturn(null);
-//        when(typoId.getDescription()).thenReturn(desc);
-        when(proj.getCustomer()).thenReturn(cust);
-        when(cust.getCustomerName()).thenReturn(desc);
+        when(proj.getCustomer()).thenReturn(customer);
+        when(customer.getCustomerName()).thenReturn(desc);
         when(desc.getText()).thenReturn(projName);
         when(proj.getStartDate()).thenReturn(endDate);
         when(proj.getNumberOfSprints()).thenReturn(numbSpr);
@@ -124,10 +125,11 @@ class ProjectJpaAssemblerTest {
         //Act
         ProjectJpa result = projJpaAssembler.toJpaData(proj);
         ProjectJpa expected = new ProjectJpa(projID, projName, "x", "x", endDate.toString(),
-                numberOfSprints, sprintDuration, budget, endDate.toString(), null, "x", status.toString());
+                                             numberOfSprints, sprintDuration, budget, endDate.toString(), null, "x",
+                                             status.toString());
 
         //Assert
-        assertEquals(result, expected);
+        assertTrue(new ReflectionEquals(expected).matches(result));
     }
 
     @Test
@@ -141,7 +143,6 @@ class ProjectJpaAssemblerTest {
         SprintDuration sprDur = mock(SprintDuration.class);
         Budget bud = mock(Budget.class);
         TypologyID typoId = mock(TypologyID.class);
-        Customer cust = mock(Customer.class);
         ProjectStatusEnum status = ProjectStatusEnum.PLANNED;
 
         String projName = "x";
@@ -158,7 +159,6 @@ class ProjectJpaAssemblerTest {
         when(proj.getTypologyId()).thenReturn(typoId);
         when(typoId.getDescription()).thenReturn(desc);
         when(proj.getCustomer()).thenReturn(null);
-//        when(cust.getCustomerName()).thenReturn(desc);
         when(desc.getText()).thenReturn(projName);
         when(proj.getStartDate()).thenReturn(endDate);
         when(proj.getNumberOfSprints()).thenReturn(numbSpr);
@@ -173,10 +173,11 @@ class ProjectJpaAssemblerTest {
         //Act
         ProjectJpa result = projJpaAssembler.toJpaData(proj);
         ProjectJpa expected = new ProjectJpa(projID, projName, "x", "x", endDate.toString(),
-                numberOfSprints, sprintDuration, budget, endDate.toString(), "x", null, status.toString());
+                                             numberOfSprints, sprintDuration, budget, endDate.toString(), "x", null,
+                                             status.toString());
 
         //Assert
-        assertEquals(result, expected);
+        assertTrue(new ReflectionEquals(expected).matches(result));
     }
 
     @Test
@@ -190,7 +191,7 @@ class ProjectJpaAssemblerTest {
         SprintDuration sprDur = mock(SprintDuration.class);
         Budget bud = mock(Budget.class);
         TypologyID typoId = mock(TypologyID.class);
-        Customer cust = mock(Customer.class);
+        Customer customer = mock(Customer.class);
         ProjectStatusEnum status = ProjectStatusEnum.PLANNED;
 
         String projName = "x";
@@ -206,8 +207,8 @@ class ProjectJpaAssemblerTest {
         when(busSec.getDescription()).thenReturn(desc);
         when(proj.getTypologyId()).thenReturn(typoId);
         when(typoId.getDescription()).thenReturn(desc);
-        when(proj.getCustomer()).thenReturn(cust);
-        when(cust.getCustomerName()).thenReturn(desc);
+        when(proj.getCustomer()).thenReturn(customer);
+        when(customer.getCustomerName()).thenReturn(desc);
         when(desc.getText()).thenReturn(projName);
         when(proj.getStartDate()).thenReturn(endDate);
         when(proj.getNumberOfSprints()).thenReturn(numbSpr);
@@ -222,10 +223,11 @@ class ProjectJpaAssemblerTest {
         //Act
         ProjectJpa result = projJpaAssembler.toJpaData(proj);
         ProjectJpa expected = new ProjectJpa(projID, projName, "x", "x", endDate.toString(),
-                numberOfSprints, sprintDuration, budget, null, "x", "x", status.toString());
+                                             numberOfSprints, sprintDuration, budget, null, "x", "x",
+                                             status.toString());
 
         //Assert
-        assertEquals(result, expected);
+        assertTrue(new ReflectionEquals(expected).matches(result));
     }
 
     @Test
@@ -239,8 +241,7 @@ class ProjectJpaAssemblerTest {
         SprintDuration sprDur = mock(SprintDuration.class);
         Budget bud = mock(Budget.class);
         TypologyID typoId = mock(TypologyID.class);
-        Customer cust = mock(Customer.class);
-        ProjectStatusEnum status = null;
+        Customer customer = mock(Customer.class);
 
         String projName = "x";
         int numberOfSprints = 1;
@@ -255,8 +256,8 @@ class ProjectJpaAssemblerTest {
         when(busSec.getDescription()).thenReturn(desc);
         when(proj.getTypologyId()).thenReturn(typoId);
         when(typoId.getDescription()).thenReturn(desc);
-        when(proj.getCustomer()).thenReturn(cust);
-        when(cust.getCustomerName()).thenReturn(desc);
+        when(proj.getCustomer()).thenReturn(customer);
+        when(customer.getCustomerName()).thenReturn(desc);
         when(desc.getText()).thenReturn(projName);
         when(proj.getStartDate()).thenReturn(endDate);
         when(proj.getNumberOfSprints()).thenReturn(numbSpr);
@@ -271,10 +272,11 @@ class ProjectJpaAssemblerTest {
         //Act
         ProjectJpa result = projJpaAssembler.toJpaData(proj);
         ProjectJpa expected = new ProjectJpa(projID, projName, "x", "x", endDate.toString(),
-                numberOfSprints, sprintDuration, budget, endDate.toString(), "x", "x", null);
+                                             numberOfSprints, sprintDuration, budget, endDate.toString(), "x", "x",
+                                             null);
 
         //Assert
-        assertEquals(result, expected);
+        assertTrue(new ReflectionEquals(expected).matches(result));
     }
 
 
@@ -282,16 +284,9 @@ class ProjectJpaAssemblerTest {
     void toDomain() {
         ProjectJpa projJpa = mock(ProjectJpa.class);
         ProjectID projId = mock(ProjectID.class);
-        Description desc = mock(Description.class);
-        TypologyID typoId = mock(TypologyID.class);
         ProjectStatusEnum status = ProjectStatusEnum.PLANNED;
-        Customer cust = mock(Customer.class);
-        BusinessSector busSec = mock(BusinessSector.class);
-        NumberOfSprints numbSpr = mock(NumberOfSprints.class);
-        SprintDuration sprDur = mock(SprintDuration.class);
-        Budget bud = mock(Budget.class);
-        LocalDate startDate = LocalDate.of(2022,1,1);
-        LocalDate endDate = LocalDate.of(2022,12,12);
+        LocalDate startDate = LocalDate.of(2022, 1, 1);
+        LocalDate endDate = LocalDate.of(2022, 12, 12);
 
         String ex = "x";
         int numberOfSprints = 1;
@@ -313,12 +308,10 @@ class ProjectJpaAssemblerTest {
 
         //Act
         Project result = projJpaAssembler.toDomain(projJpa);
-        Project expected = new Project(projId, desc, desc, typoId, status,
-                cust, busSec, numbSpr, bud, sprDur,startDate, endDate);
 
         //Assert
         assertEquals(projId, result.getProjectCode());
-        assertEquals( "x", result.getProjectName().getText());
+        assertEquals("x", result.getProjectName().getText());
 
     }
 }

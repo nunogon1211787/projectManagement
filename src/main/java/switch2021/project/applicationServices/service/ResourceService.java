@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.applicationServices.iRepositories.IUserRepo;
 import switch2021.project.dtoModel.dto.*;
+import switch2021.project.dtoModel.mapper.ProjectRoleMapper;
 import switch2021.project.entities.factories.factoryInterfaces.IResourceFactory;
 import switch2021.project.applicationServices.iRepositories.IResourceRepo;
 import switch2021.project.dtoModel.mapper.ResourceMapper;
@@ -18,6 +19,7 @@ import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjec
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResourceIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
 import switch2021.project.entities.valueObjects.vos.*;
+import switch2021.project.entities.valueObjects.vos.enums.ProjectRole;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -39,6 +41,8 @@ public class ResourceService {
     @Autowired
     private ResourceMapper mapper;
     @Autowired
+    private ProjectRoleMapper roleMapper;
+    @Autowired
     private ManagementResourcesService managementService;
     @Autowired
     private IResourceFactory iResourceFactory;
@@ -49,8 +53,8 @@ public class ResourceService {
     @Autowired
     private IUserIDFactory iUserIDFactory;
 
-    private String PROJECTNOTFOUND = "Project does not exist!";
-    private String USERNOTFOUND = "This User is not part of the project team!";
+    private final String PROJECTNOTFOUND = "Project does not exist!";
+    private final String USERNOTFOUND = "This User is not part of the project team!";
 
     /**
      * Create a Resource (US007)
@@ -195,7 +199,7 @@ public class ResourceService {
         checkAllocation(newResourceByRole.getId().getUser().getEmail().getEmailText(),
                 newResourceByRole.getId().getStartDate().toString(),
                 newResourceByRole.getEndDate().toString(),
-                newResourceByRole.getAllocation().getPercentage());
+                (newResourceByRole.getAllocation().getPercentage()-oldResource.getAllocation().getPercentage()));
 
         oldResource.setEndDate(LocalDate.parse(dto.getStartDate()).minusDays(1));
         resRepo.save(oldResource);
@@ -308,4 +312,11 @@ public class ResourceService {
         return iResourceIDFactory.create(userId, projectId, startDate);
     }
 
+    /**
+     * Find Project Roles
+     */
+    public CollectionModel<OutputProjectRoleDTO> findProjectRoles() {
+        List<String> projectRoles = ProjectRole.getProjectRole();
+        return roleMapper.toCollectionDto(projectRoles);
+    }
 }

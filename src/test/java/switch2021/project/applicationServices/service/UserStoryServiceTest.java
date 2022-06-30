@@ -25,13 +25,13 @@ import switch2021.project.entities.valueObjects.vos.UsHour;
 import switch2021.project.entities.valueObjects.vos.UsPriority;
 import switch2021.project.entities.valueObjects.vos.UserStoryID;
 
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -494,7 +494,7 @@ public class UserStoryServiceTest {
     @Test
     public void deleteAUserStoryFail() {
         //Assert
-        assertThrows(NullPointerException.class, () -> {
+        assertThrows(IllegalArgumentException.class, () -> {
             //Arrange
             String id = "Project_2022_1&As fulano i want to teste";
             UserStoryID usId = mock(UserStoryID.class);

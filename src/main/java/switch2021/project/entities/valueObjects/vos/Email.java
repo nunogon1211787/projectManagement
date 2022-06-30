@@ -60,7 +60,7 @@ public class Email implements ValueObject<Email> {
     private void checkAtSignAndDot(String y) {
 
         if (!y.contains("@")) {
-            throw new IllegalArgumentException("The email must have at sign.");
+            throw new IllegalArgumentException("The email must have @ sign.");
         } else if (y.split("@").length > 2) {
             throw new IllegalArgumentException("The email cannot have two or more at sign.");
         } else if(y.indexOf("@") == 0 || y.indexOf("@") == y.length() - 1){

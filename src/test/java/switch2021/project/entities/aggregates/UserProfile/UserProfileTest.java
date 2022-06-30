@@ -25,6 +25,18 @@ public class UserProfileTest {
     }
 
     @Test
+    @DisplayName("Constructor Test Integration, with success")
+    void IntegrationTestConstructorUserProfile_Success() {
+        //Arrange
+        UserProfileID userProfileID = new UserProfileID(new Description("User Profile"));
+        //Act
+        UserProfile userProfile = new UserProfile(userProfileID);
+        //Assert
+        assertEquals ("User Profile", userProfile.getUserProfileId().getUserProfileName().getText());
+    }
+
+
+    @Test
     @DisplayName("Constructor Test, with failure")
     void ConstructorUserProfile_Failure() {
         //Arrange

@@ -23,13 +23,10 @@ import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.PartialProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.dto.TypologyDTO;
-
 import javax.net.ssl.SSLException;
 import java.util.Map;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -253,6 +250,22 @@ class ProjectControllerIntegrationTest {
         assertEquals(1,xx);
     }
 
+    @SneakyThrows
+    @Test
+    void getCurrentProjectsByUserIntegrationSizeDoNotHas() {
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/xxx@mymail.com/projects")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andReturn();
+
+        int x = result.getResponse().getStatus();
+        String body = result.getResponse().getContentAsString();
+        assertEquals(x,404);
+        assertNotNull(body);
+    }
+
 
     @SneakyThrows
     @Test
@@ -314,4 +327,39 @@ class ProjectControllerIntegrationTest {
         assertNotNull(resultContent);
         assertNull(result.getResponse().getErrorMessage());
     }
+
+    @SneakyThrows
+    @Test
+    void mockMvcTestDeleteProject() {
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/projects/Project_2022_1")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        int x = result.getResponse().getStatus();
+        String body = result.getResponse().getContentAsString();
+        assertEquals(x,200);
+        assertNotNull(body);
+        assertTrue(body.contains("Project was deleted successfully"));
+    }
+
+    @SneakyThrows
+    @Test
+    void mockMvcTestDeleteProjectDoesNotExists()  {
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/projects/Project_2022_99999999")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andReturn();
+
+        int x = result.getResponse().getStatus();
+        String body = result.getResponse().getContentAsString();
+        assertEquals(x,404);
+        assertNotNull(body);
+    }
+
+
 }

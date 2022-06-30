@@ -180,19 +180,15 @@ public class User implements Entity<User> {
     /**
      * Activation Status Methods
      */
-    public boolean activateStatus() {
+    public void activateStatus() {
         if (!this.isActive) {
-            isActive = true;
+            this.isActive = true;
         }
-        return isActive;
     }
 
-    public boolean inactivateStatus() {
+    public void inactivateStatus() {
         if (this.isActive) {
             isActive = false;
-            return true;
-        } else {
-            return false;
         }
     }
 

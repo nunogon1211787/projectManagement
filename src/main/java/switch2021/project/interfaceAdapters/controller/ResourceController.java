@@ -4,10 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import switch2021.project.dtoModel.dto.*;
 import switch2021.project.applicationServices.service.ResourceService;
@@ -117,7 +113,7 @@ public class ResourceController {
 
 //    @GetMapping
 //    public ResponseEntity<Object> showCurrentProjectsByUser(@RequestParam("user") IdDTO id, @RequestParam("date")
-//    DateDTO dateDto){
+//    StartSprintDTO dateDto){
 //
 //        List<OutputProjectDTO> projectsDto = showAllCurrentProjectsByUserService.showCurrentProjectsByUser(id,
 //        dateDto);
@@ -155,6 +151,22 @@ public class ResourceController {
         try {
             service.deleteResourceRequest(id);
             response.responseMessage = "Resource was deleted successfully!";
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    /**
+     * Find Project Roles
+     */
+    @GetMapping("/roles")
+    public ResponseEntity<Object> findProjectRoles() {
+        CollectionModel<OutputProjectRoleDTO> response;
+        try{
+            response = service.findProjectRoles();
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();

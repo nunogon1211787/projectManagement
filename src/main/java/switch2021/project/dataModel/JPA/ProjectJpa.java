@@ -5,10 +5,8 @@ import switch2021.project.entities.valueObjects.vos.ProjectID;
 
 import javax.persistence.*;
 
-@EqualsAndHashCode
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "projects")

@@ -6,9 +6,9 @@ title US024 - As Administrator, I want to get a list all user accounts and their
 autoactivate on
 autonumber
 
-actor "Director" as actor
+
 participant ":GetAllUsersAndTheirStatusRoute" as route
-participant ":GetAllUsersAndTheirStatusController" as ctrl
+participant ":UserController" as ctrl
 participant ":GetAllUsersAndTheirStatusService" as srv
 participant ":IRepositorySystemUser" as repo
 participant "users :List<SystemUser>" as list
@@ -23,7 +23,7 @@ participant ":UserWithStatusJson" as json
 activate actor
 autoactivate on
 
-actor -> route : GET /users?showStatus=true
+[o-> route : GET /users?showStatus=true
 route -> ctrl : getAllUsersWithStatus()
 ctrl -> map: data2Dto(data)
 map --> dataDto**: create()

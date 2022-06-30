@@ -291,7 +291,15 @@ public class UserControllerTest {
         assertThat(response.getStatusCodeValue()).isEqualTo(400);
     }
 
-
+    @Test
+    void getUserStatus() {
+        //Arrange
+        when(service.showUserStatus()).thenReturn(CollectionModel.of(List.of(new OutputUserDTO[]{})));
+        //Act
+        ResponseEntity <Object> response = ctrl.getUserStatus();
+        //
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
 
 
 
