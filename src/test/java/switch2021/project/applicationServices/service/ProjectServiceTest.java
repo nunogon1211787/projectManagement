@@ -12,10 +12,7 @@ import org.mockito.MockedStatic;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.hateoas.CollectionModel;
 import switch2021.project.applicationServices.iRepositories.*;
-import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
-import switch2021.project.dtoModel.dto.OutputProjectDTO;
-import switch2021.project.dtoModel.dto.PartialProjectDTO;
-import switch2021.project.dtoModel.dto.ProjectDTO;
+import switch2021.project.dtoModel.dto.*;
 import switch2021.project.dtoModel.mapper.ProjectMapper;
 import switch2021.project.dtoModel.mapper.StatusMapper;
 import switch2021.project.entities.aggregates.Project.Project;
@@ -479,7 +476,7 @@ class ProjectServiceTest {
         CollectionModel<OutputProjectDTO> expected = CollectionModel.of(List.of(dto));
 
         //Act
-        CollectionModel<OutputProjectDTO> result = projectService.showCurrentProjectsByUser(id);
+        CollectionModel<OutputProjectDTO> result = projectService.getCurrentProjectsByUser(id);
         //Assert
         assertEquals(expected, result);
     }
