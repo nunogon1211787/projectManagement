@@ -168,9 +168,9 @@ class ProjectControllerTest {
     void testShowCurrentProjectByUser() {
         //Arrange
         String email = "jsz@mymail.com";
-        when(service.showCurrentProjectsByUser(email)).thenReturn(CollectionModel.empty());
+        when(service.getCurrentProjectsByUser(email)).thenReturn(CollectionModel.empty());
         //Act
-        ResponseEntity<?> response = ctrl.showCurrentProjectsByUser(email);
+        ResponseEntity<?> response = ctrl.getCurrentProjectsByUser(email);
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
@@ -180,9 +180,9 @@ class ProjectControllerTest {
     void testShowCurrentProjectByUserException() {
         //Arrange
         String projId = "1";
-        doThrow(IllegalArgumentException.class).when(service).showCurrentProjectsByUser(projId);
+        doThrow(IllegalArgumentException.class).when(service).getCurrentProjectsByUser(projId);
         //Act
-        ResponseEntity<?> response = ctrl.showCurrentProjectsByUser("1");
+        ResponseEntity<?> response = ctrl.getCurrentProjectsByUser("1");
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(404);
     }

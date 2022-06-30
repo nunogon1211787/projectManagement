@@ -1,7 +1,6 @@
 package switch2021.project.dataModel.REST.assemblers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 import switch2021.project.dataModel.REST.ProjectRestDTO;
 import switch2021.project.entities.aggregates.Project.Project;
@@ -12,6 +11,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.lang.Long.parseLong;
 
 @Component
 public class ProjectDomainDataRestAssembler {
@@ -41,19 +42,19 @@ public class ProjectDomainDataRestAssembler {
                 businessSectorFactory.createBusinessSector(projectRestDTO.projectBusinessSector);
         NumberOfSprints numberOfSprints =
                 numberOfSprintsFactory.create(Integer.parseInt(projectRestDTO.projectNumberOfPlannedSprints));
-        SprintDuration sprintDuration;
-        try {
-
-            sprintDuration = sprintDurationFactory.create(Integer.parseInt(projectRestDTO.projectSprintDuration));
-        } catch (NullPointerException sprintDurationException) {
-            sprintDuration = sprintDurationFactory.create(15); //default spring number of days
-        }
+        SprintDuration sprintDuration = new SprintDuration(projectRestDTO.getProjectSprintDuration());
+//        SprintDuration sprintDuration;
+//        try {
+//            sprintDuration = sprintDurationFactory.create(Integer.parseInt(projectRestDTO.projectSprintDuration));
+//        } catch (NullPointerException sprintDurationException) {
+//            sprintDuration = sprintDurationFactory.create(15); //default spring number of days
+//        }
         Budget budget = budgetFactory.create(Double.parseDouble(projectRestDTO.projectBudget));
         LocalDate startDate = LocalDate.parse(projectRestDTO.getStartDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
         Project project = new Project(name, description, businessSector, startDate, numberOfSprints, sprintDuration,
                 budget);
-        project.setProjectCode(new ProjectID("Project_" + LocalDate.now().getYear() + "_" + projectRestDTO.getProjectCode()));
+        project.setProjectCode(new ProjectID(projectRestDTO.getProjectCode()));
         return project;
 
     }

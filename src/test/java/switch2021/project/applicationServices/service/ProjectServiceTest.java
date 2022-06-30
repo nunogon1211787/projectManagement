@@ -1,5 +1,8 @@
 package switch2021.project.applicationServices.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +12,7 @@ import org.mockito.MockedStatic;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.hateoas.CollectionModel;
 import switch2021.project.applicationServices.iRepositories.*;
+import switch2021.project.dataModel.REST.ProjectRestDTO;
 import switch2021.project.dtoModel.dto.EditProjectInfoDTO;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
 import switch2021.project.dtoModel.dto.PartialProjectDTO;
@@ -414,7 +418,7 @@ class ProjectServiceTest {
             when(userID.getEmail()).thenReturn(email);
             when(userRepo.findByUserId(userID)).thenReturn(Optional.empty());
             //Act
-            projectService.showCurrentProjectsByUser(id);
+            projectService.getCurrentProjectsByUser(id);
         });
     }
 
@@ -475,6 +479,5 @@ class ProjectServiceTest {
         //Assert
         assertTrue(result);
     }
-
 
 }

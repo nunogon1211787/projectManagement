@@ -1,6 +1,5 @@
 package switch2021.project.applicationServices.service;
 
-import org.apache.commons.codec.Resources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
@@ -22,8 +21,6 @@ import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 import javax.net.ssl.SSLException;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @Service
@@ -160,7 +157,7 @@ public class ProjectService {
         return projMapper.model2Dto(foundProject.get());
     }
 
-    public CollectionModel<OutputProjectDTO> showCurrentProjectsByUser(String UserId) {
+    public CollectionModel<OutputProjectDTO> getCurrentProjectsByUser(String UserId) {
         UserID uId = userIDFactory.createUserID(UserId);
         Optional<User> foundUser = userRepo.findByUserId(uId);
 
