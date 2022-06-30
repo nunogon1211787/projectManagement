@@ -236,7 +236,7 @@ class ProjectControllerIntegrationTest {
     void getCurrentProjectsByUserIntegration() {
         //Arrange
         //Act
-        ResponseEntity<?> response = ctrl.showCurrentProjectsByUser("jsz@mymail.com");
+        ResponseEntity<?> response = ctrl.getCurrentProjectsByUser("jsz@mymail.com");
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
@@ -245,7 +245,7 @@ class ProjectControllerIntegrationTest {
     void getCurrentProjectsByUserIntegrationSize() {
         //Arrange
         //Act
-        int xx = service.showCurrentProjectsByUser("jsz@mymail.com").getContent().size();
+        int xx = service.getCurrentProjectsByUser("jsz@mymail.com").getContent().size();
         //Assert
         assertEquals(1,xx);
     }

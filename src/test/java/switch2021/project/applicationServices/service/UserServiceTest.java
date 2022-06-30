@@ -61,9 +61,11 @@ public class UserServiceTest {
         UserID userID = mock(UserID.class);
         when(newUser.getUserId()).thenReturn(userID);
         when(userRepo.existsById(userID)).thenReturn(false);
+
         User savedUser = mock(User.class);
         when(userRepo.save(newUser)).thenReturn(savedUser);
         OutputUserDTO outputUserDTO = mock(OutputUserDTO.class);
+
         when(userMapper.toDto(savedUser)).thenReturn(outputUserDTO);
         //Act
         OutputUserDTO result = underTest.createAndSaveUser(infoDTO);

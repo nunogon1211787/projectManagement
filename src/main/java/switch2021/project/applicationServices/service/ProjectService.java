@@ -159,7 +159,7 @@ public class ProjectService {
         return projMapper.model2Dto(project);
     }
 
-    public CollectionModel<OutputProjectDTO> showCurrentProjectsByUser(String UserId) {
+    public CollectionModel<OutputProjectDTO> getCurrentProjectsByUser(String UserId) {
         UserID uId = userIDFactory.createUserID(UserId);
         Optional<User> foundUser = userRepo.findByUserId(uId);
 
