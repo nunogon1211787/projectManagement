@@ -106,6 +106,20 @@ public class SprintService {
         }
     }
 
+    public CollectionModel<OutSprintDTO> showSprintsInProject(String projId) throws Exception {
+
+        if (projRepo.existsById(new ProjectID(projId))) {
+
+            List<Sprint> allSprintsOfAProject = sprintRepo.findAllByProjectID(new ProjectID(projId));
+
+            return sprintMapper.toCollectionsDto(allSprintsOfAProject);
+
+        } else {
+
+            throw new Exception("Project does not exist");
+        }
+    }
+
     /**
      * Start a Sprint
      *

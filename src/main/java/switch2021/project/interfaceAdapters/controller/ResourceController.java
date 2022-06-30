@@ -10,7 +10,7 @@ import switch2021.project.applicationServices.service.ResourceService;
 
 import java.util.List;
 
-@CrossOrigin(origins = "https://localhost:8443")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/resources")
 public class ResourceController {

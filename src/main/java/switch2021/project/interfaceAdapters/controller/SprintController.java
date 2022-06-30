@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import switch2021.project.applicationServices.service.SprintService;
 import switch2021.project.dtoModel.dto.*;
 
-@CrossOrigin(origins = "https://localhost:8443")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/sprints")
 public class SprintController {
@@ -96,6 +96,28 @@ public class SprintController {
                 message.errorMessage = "Was not created any sprint yet!";
                 return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
             }
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/sprintsList/{id}")
+    public ResponseEntity<Object> showSprintsInProject(@PathVariable("id") String projId){
+
+        CollectionModel<OutSprintDTO> result;
+
+        try {
+            result = sprintService.showSprintsInProject(projId);
+
+//            if(result.getContent().isEmpty()) {
+//                ErrorMessage message = new ErrorMessage();
+//                message.errorMessage = "Was not created any sprint yet!";
+//                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+//            }
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();

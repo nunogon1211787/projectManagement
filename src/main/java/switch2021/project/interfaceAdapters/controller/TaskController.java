@@ -13,7 +13,7 @@ import switch2021.project.dtoModel.dto.TaskDTO;
 import switch2021.project.dtoModel.dto.TaskEffortDTO;
 
 
-@CrossOrigin(origins = "https://localhost:8443")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {

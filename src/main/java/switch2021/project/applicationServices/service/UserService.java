@@ -130,14 +130,7 @@ public class UserService {
 
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
     public OutputUserDTO assignUserProfiles(String id, UpdateUserProfilesDTO profileDTO) {
-        UserID userID = createUserIdByStringInputFromController(id);
-        Optional<User> foundUser = userRepo.findByUserId(userID);
-
-        User user = foundUser.flatMap(found -> foundUser).orElse(null);
-
-        if (user == null) {
-            throw new NullPointerException("This User does not exist!");
-        }
+        User user = getUser(id);
 
         user.clearProfiles();
 
