@@ -34,16 +34,17 @@ function Categories() {
   };
 
   useEffect(() => {
-    if (Object.keys(columns).length === 0) {
+    setColumns(columnsFromBackend);
+
+    if (Object.keys(location.state.data).length !== 0) {
       // eslint-disable-next-line
       itemsFromBackend.map((us) => {
         Object.values(columnsFromBackend)
-          .find(
-            (category) => category.name.replace(/\s/g, "") === us.content.status
-          )
-          .items.push({ id: us.id, content: us.content.usTitle });
+            .find(
+                (category) => category.name.replace(/\s/g, "") === us.content.status
+            )
+            .items.push({id: us.id, content: us.content.usTitle});
       });
-
       setColumns(columnsFromBackend);
     }
     // eslint-disable-next-line
