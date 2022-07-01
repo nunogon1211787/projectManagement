@@ -10,7 +10,9 @@ import switch2021.project.applicationServices.iRepositories.IUserRepo;
 import switch2021.project.dtoModel.dto.LoginDto;
 import switch2021.project.dtoModel.dto.OutputLoginDTO;
 import switch2021.project.dtoModel.mapper.LoginMapper;
+import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.aggregates.User.User;
+import switch2021.project.entities.valueObjects.voFactories.voFactories.PasswordFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
 import switch2021.project.entities.valueObjects.vos.Email;
 import switch2021.project.entities.valueObjects.vos.Password;
@@ -30,6 +32,8 @@ class AuthServiceTest {
     private IUserIDFactory idFactory;
     @MockBean
     private LoginMapper mapper;
+    @MockBean
+    PasswordFactory passwordFactory;
     @InjectMocks
     private AuthService authService;
 
@@ -52,5 +56,28 @@ class AuthServiceTest {
            //Act
            authService.authentication(loginDto);
        });
+    }
+
+    @Test
+    void authenticationFail() {
+        //Assert
+        assertThrows(Exception.class, () -> {
+            //Arrange
+            LoginDto login = mock(LoginDto.class);
+            when(login.getEmail()).thenReturn("test@test.test");
+            UserID id = mock(UserID.class);
+            when(idFactory.createUserID(login.email)).thenReturn(id);
+            User user = mock(User.class);
+            Optional<User> logged = Optional.of(user);
+            when(repo.findByUserId(id)).thenReturn(logged);
+            User userLogged = mock(User.class);
+            when(logged.get()).thenReturn(userLogged);
+
+            when(login.getPassword()).thenReturn("Test-12");
+            Password userPassword = mock(Password.class);
+            when(passwordFactory.createPassword("Test-10")).thenReturn(userPassword);
+            //Act
+            authService.authentication(login);
+        });
     }
 }

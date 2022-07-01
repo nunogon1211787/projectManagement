@@ -2,7 +2,9 @@ package switch2021.project.entities.valueObjects.vos;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -214,7 +216,7 @@ public class TaskEffortTest {
 
     @Test
     @DisplayName("Test override conditions for coverage purposes")
-    public void sameValueAs_False() {
+    public void sameValueAs_attachmentFalse() {
         //Arrange
         Hours hours = mock(Hours.class);
         when(hours.getEffortHours()).thenReturn(2);
@@ -232,10 +234,122 @@ public class TaskEffortTest {
         when(attachment.getExtension()).thenReturn("attachment");
 
         Attachment attachment1 = mock(Attachment.class);
-        when(attachment.getExtension()).thenReturn("attachment 1");
+        when(attachment1.getExtension()).thenReturn("attachment 1");
         //Act
         TaskEffort taskEffort = new TaskEffort(hours, minutes, date, description, attachment);
         TaskEffort taskEffort1 = new TaskEffort(hours, minutes, date, description, attachment1);
+        //Assert
+        assertFalse(taskEffort.sameValueAs(taskEffort1));
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void sameValueAs_descriptionFalse() {
+        //Arrange
+        Hours hours = mock(Hours.class);
+        when(hours.getEffortHours()).thenReturn(2);
+
+        Minutes minutes = mock(Minutes.class);
+        when(minutes.getEffortMinutes()).thenReturn(2);
+
+        Date date = mock(Date.class);
+        when(date.getEffortDate()).thenReturn(LocalDate.now());
+
+        Description description = mock(Description.class);
+        when(description.getText()).thenReturn("description");
+        Description description1 = mock(Description.class);
+        when(description1.getText()).thenReturn("description1");
+
+        Attachment attachment = mock(Attachment.class);
+        when(attachment.getExtension()).thenReturn("attachment");
+
+        //Act
+        TaskEffort taskEffort = new TaskEffort(hours, minutes, date, description, attachment);
+        TaskEffort taskEffort1 = new TaskEffort(hours, minutes, date, description1, attachment);
+        //Assert
+        assertFalse(taskEffort.sameValueAs(taskEffort1));
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void sameValueAs_dateFalse() {
+        //Arrange
+        Hours hours = mock(Hours.class);
+        when(hours.getEffortHours()).thenReturn(2);
+
+        Minutes minutes = mock(Minutes.class);
+        when(minutes.getEffortMinutes()).thenReturn(2);
+
+        Date date = mock(Date.class);
+        when(date.getEffortDate()).thenReturn(LocalDate.now());
+        Date date1 = mock(Date.class);
+        when(date1.getEffortDate()).thenReturn(LocalDate.now().plusDays(1));
+
+        Description description = mock(Description.class);
+        when(description.getText()).thenReturn("description");
+
+        Attachment attachment = mock(Attachment.class);
+        when(attachment.getExtension()).thenReturn("attachment");
+
+        //Act
+        TaskEffort taskEffort = new TaskEffort(hours, minutes, date, description, attachment);
+        TaskEffort taskEffort1 = new TaskEffort(hours, minutes, date1, description, attachment);
+        //Assert
+        assertFalse(taskEffort.sameValueAs(taskEffort1));
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void sameValueAs_minutesFalse() {
+        //Arrange
+        Hours hours = mock(Hours.class);
+        when(hours.getEffortHours()).thenReturn(2);
+
+        Minutes minutes = mock(Minutes.class);
+        when(minutes.getEffortMinutes()).thenReturn(2);
+        Minutes minutes1 = mock(Minutes.class);
+        when(minutes1.getEffortMinutes()).thenReturn(3);
+
+        Date date = mock(Date.class);
+        when(date.getEffortDate()).thenReturn(LocalDate.now());
+
+        Description description = mock(Description.class);
+        when(description.getText()).thenReturn("description");
+
+        Attachment attachment = mock(Attachment.class);
+        when(attachment.getExtension()).thenReturn("attachment");
+
+        //Act
+        TaskEffort taskEffort = new TaskEffort(hours, minutes, date, description, attachment);
+        TaskEffort taskEffort1 = new TaskEffort(hours, minutes1, date, description, attachment);
+        //Assert
+        assertFalse(taskEffort.sameValueAs(taskEffort1));
+    }
+
+    @Test
+    @DisplayName("Test override conditions for coverage purposes")
+    public void sameValueAs_hoursFalse() {
+        //Arrange
+        Hours hours = mock(Hours.class);
+        when(hours.getEffortHours()).thenReturn(2);
+        Hours hours1 = mock(Hours.class);
+        when(hours1.getEffortHours()).thenReturn(3);
+
+        Minutes minutes = mock(Minutes.class);
+        when(minutes.getEffortMinutes()).thenReturn(2);
+
+        Date date = mock(Date.class);
+        when(date.getEffortDate()).thenReturn(LocalDate.now());
+
+        Description description = mock(Description.class);
+        when(description.getText()).thenReturn("description");
+
+        Attachment attachment = mock(Attachment.class);
+        when(attachment.getExtension()).thenReturn("attachment");
+
+        //Act
+        TaskEffort taskEffort = new TaskEffort(hours, minutes, date, description, attachment);
+        TaskEffort taskEffort1 = new TaskEffort(hours1, minutes, date, description, attachment);
         //Assert
         assertFalse(taskEffort.sameValueAs(taskEffort1));
     }

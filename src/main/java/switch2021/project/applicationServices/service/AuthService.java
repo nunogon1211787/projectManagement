@@ -7,6 +7,7 @@ import switch2021.project.dtoModel.dto.LoginDto;
 import switch2021.project.dtoModel.dto.OutputLoginDTO;
 import switch2021.project.dtoModel.mapper.LoginMapper;
 import switch2021.project.entities.aggregates.User.User;
+import switch2021.project.entities.valueObjects.voFactories.voFactories.PasswordFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
 import switch2021.project.entities.valueObjects.vos.Password;
 
@@ -21,6 +22,8 @@ public class AuthService {
     IUserIDFactory idFactory;
     @Autowired
     LoginMapper map;
+    @Autowired
+    PasswordFactory passwordFactory;
 
     public OutputLoginDTO authentication(LoginDto login) throws Exception {
         Optional<User> logged = repo.findByUserId(idFactory.createUserID(login.getEmail()));
@@ -28,7 +31,7 @@ public class AuthService {
         if (logged.isPresent()) {
             User userLogged = logged.get();
 
-            if (userLogged.checkPassword(new Password(login.getPassword()))) {
+            if (userLogged.checkPassword(passwordFactory.createPassword(login.getPassword()))) {
                 return map.toDto(userLogged);
             }
         }

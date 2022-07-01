@@ -138,6 +138,30 @@ public class TypologyControllerTest {
     }
 
     @Test
+    public void getTypologyById_EmptyId() {
+        //Arrange
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        String id = "";
+        //Act
+        ResponseEntity<?> response = controller.findTypologyRequested(id);
+        //Assert
+        assertThat(response.getStatusCodeValue()).isEqualTo(406);
+    }
+
+    @Test
+    public void getTypologyById_nullId() {
+        //Arrange
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        String id = null;
+        //Act
+        ResponseEntity<?> response = controller.findTypologyRequested(id);
+        //Assert
+        assertThat(response.getStatusCodeValue()).isEqualTo(406);
+    }
+
+    @Test
     public void findAllTypologies() {
         //Arrange
         MockHttpServletRequest request = new MockHttpServletRequest();
@@ -203,4 +227,28 @@ public class TypologyControllerTest {
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(406);
     }
+    @Test
+    public void deleteTypologyFail_EmptyId() {
+        //Arrange
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        String id = "";
+        //Act
+        ResponseEntity<?> response = controller.deleteTypology(id);
+        //Assert
+        assertThat(response.getStatusCodeValue()).isEqualTo(406);
+    }
+
+    @Test
+    public void deleteTypologyFail_nullId() {
+        //Arrange
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        String id = null;
+        //Act
+        ResponseEntity<?> response = controller.deleteTypology(id);
+        //Assert
+        assertThat(response.getStatusCodeValue()).isEqualTo(406);
+    }
+
 }

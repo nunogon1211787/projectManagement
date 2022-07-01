@@ -44,7 +44,7 @@ public class SprintControllerTest {
     }
 
     @Test
-    void showAllResourcesFail() {
+    void showAllSprintsFail() {
         //Act
         assertThrows(Exception.class, () -> {
             //Arrange
@@ -57,13 +57,24 @@ public class SprintControllerTest {
     }
 
     @Test
-    void shouldShowSprintsFail() {
+    void shouldFailtToShowSprints() {
         //Arrange
         when(sprintService.showAllSprints()).thenReturn(CollectionModel.empty());
         //Act
         ResponseEntity<?> response = underTest.showSprints();
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(404);
+
+    }
+
+    @Test
+    void shouldFailtToShowSprints2() {
+        //Arrange
+        when(sprintService.showAllSprints()).thenReturn(null);
+        //Act
+        ResponseEntity<?> response = underTest.showSprints();
+        //Assert
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
 
     }
 
