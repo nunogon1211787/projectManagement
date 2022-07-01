@@ -14,15 +14,11 @@ rectangle Browser{
 
 node "Server" as server {
 [Backend]
-}
-
-node "DataBase Server" as db {
 [DataBase]
 }
 
 
 localhost -- server: https
-server -- db: https
 http -- localhost: https
 
 

@@ -6,6 +6,7 @@ import switch2021.project.utils.ValueObject;
 import java.util.Objects;
 
 @Getter
+
 public class SprintDuration implements ValueObject<SprintDuration> {
 
     /**
@@ -28,6 +29,12 @@ public class SprintDuration implements ValueObject<SprintDuration> {
         this.sprintDurationDays = sprintDurationDays;
     }
 
+    /**
+     * Constructor for WebProjects
+     **/
+    public SprintDuration (String sprintDurationDays) {
+        this.sprintDurationDays = Long.parseLong(sprintDurationDays);
+    }
     /**
      * Validate whether input parameter is within the permitted interval of days
      */

@@ -29,6 +29,7 @@ Route -> Ctrl: defineProjectRoleOfProject \n (defineRoleOfResourceDTO)
 Ctrl -> service: defineRole(defineRoleOfResourceDTO)
 service -> service: createResourceIdByStringInputFromController(id)
 deactivate
+note over service : All parameters (value objects) are instantiated in their own factories.
 service -> iResourceRepo: findAllByProject(resourceID.getProject)
 iResourceRepo -> resourceJPARepository: findAll()
 loop ResourceJPA

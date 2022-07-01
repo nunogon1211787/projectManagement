@@ -1,5 +1,8 @@
 package switch2021.project.applicationServices.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -416,7 +419,7 @@ class ProjectServiceTest {
             when(userID.getEmail()).thenReturn(email);
             when(userRepo.findByUserId(userID)).thenReturn(Optional.empty());
             //Act
-            projectService.showCurrentProjectsByUser(id);
+            projectService.getCurrentProjectsByUser(id);
         });
     }
 
@@ -442,7 +445,7 @@ class ProjectServiceTest {
             when(resService.listProjectsOfResources(userResources)).thenReturn(resourceProjects);
             when(projRepo.findById(projId)).thenReturn(Optional.empty());
             //Act
-            projectService.showCurrentProjectsByUser(id);
+            projectService.getCurrentProjectsByUser(id);
         });
     }
 
@@ -473,7 +476,7 @@ class ProjectServiceTest {
         CollectionModel<OutputProjectDTO> expected = CollectionModel.of(List.of(dto));
 
         //Act
-        CollectionModel<OutputProjectDTO> result = projectService.showCurrentProjectsByUser(id);
+        CollectionModel<OutputProjectDTO> result = projectService.getCurrentProjectsByUser(id);
         //Assert
         assertEquals(expected, result);
     }

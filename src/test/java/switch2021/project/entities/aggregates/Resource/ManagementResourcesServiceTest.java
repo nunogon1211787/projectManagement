@@ -1,6 +1,8 @@
 package switch2021.project.entities.aggregates.Resource;
 
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
+import switch2021.project.entities.aggregates.Project.Project;
 import switch2021.project.entities.valueObjects.vos.PercentageOfAllocation;
 import switch2021.project.entities.valueObjects.vos.ProjectID;
 import switch2021.project.entities.valueObjects.vos.ResourceID;
@@ -417,4 +419,40 @@ class ManagementResourcesServiceTest {
         List<ProjectID> expected = new ArrayList<>();
         assertEquals(expected, result);
     }
+
+    @Test
+    void validateAllocationIsActiveTothisDateFalseAndAllocationFalse2() {
+        //Arrange
+        ManagementResourcesService dsrv = new ManagementResourcesService();
+        Project proj = mock(Project.class);
+        List<Resource> initial = new ArrayList<>();
+        Resource res1 = mock(Resource.class);
+        Resource res2 = mock(Resource.class);
+        Resource res3 = mock(Resource.class);
+        initial.add(res1);
+        initial.add(res2);
+        initial.add(res3);
+        String startDate = "2022-12-22";
+        String endDate = "2023-12-22";
+        PercentageOfAllocation allocation1 = mock(PercentageOfAllocation.class);
+        PercentageOfAllocation allocation2 = mock(PercentageOfAllocation.class);
+        PercentageOfAllocation allocation3 = mock(PercentageOfAllocation.class);
+        //Act
+        when(res1.isActiveToThisDate(LocalDate.parse(startDate))).thenReturn(true);
+        when(res1.isActiveToThisDate(LocalDate.parse(endDate))).thenReturn(true);
+        when(res2.isActiveToThisDate(LocalDate.parse(startDate))).thenReturn(true);
+        when(res2.isActiveToThisDate(LocalDate.parse(endDate))).thenReturn(true);
+        when(res3.isActiveToThisDate(LocalDate.parse(startDate))).thenReturn(true);
+        when(res3.isActiveToThisDate(LocalDate.parse(endDate))).thenReturn(true);
+        when(res1.getAllocation()).thenReturn(allocation1);
+        when(res2.getAllocation()).thenReturn(allocation2);
+        when(res3.getAllocation()).thenReturn(allocation3);
+        when(allocation1.getPercentage()).thenReturn(0.4);
+        when(allocation2.getPercentage()).thenReturn(0.2);
+        when(allocation3.getPercentage()).thenReturn(0.2);
+        //Assert
+        assertFalse(dsrv.validateAllocation(initial,startDate,endDate,0.3));
+    }
+
+
 }

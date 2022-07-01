@@ -29,7 +29,7 @@ public class ManagementResourcesService {
         boolean msg = false;
 
         for (Resource res : resourceProjectsList) {
-            if (res.isActiveToThisDate(LocalDate.parse(startDate)) && res.isActiveToThisDate(LocalDate.parse(endDate))) {
+            if (res.isActiveToThisDate(LocalDate.parse(startDate)) || res.isActiveToThisDate(LocalDate.parse(endDate))) {
                 sum = sum + res.getAllocation().getPercentage();
             }
         }

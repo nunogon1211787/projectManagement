@@ -25,6 +25,7 @@ package "Interface Adapter" <<Rectangle>> #lightgreen {
   }
   package "Repositories" <<Folder>>{
     class "UserRepository" as SUrepo << Repository >> {
+    -usersList : List<User>
     + save(newUser)
     + existsByEmail(email)
     }

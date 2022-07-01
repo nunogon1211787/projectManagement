@@ -12,7 +12,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 import switch2021.project.dataModel.REST.UserProfileRestDTO;
-
 import javax.net.ssl.SSLException;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +21,7 @@ import java.util.List;
 public class UserProfileRestRepository {
 
     public static final String ENDPOINT = "https://vs866.dei.isep.ipp.pt:8443/switchproject-1.0-SNAPSHOT/api";
-    public static final String COLLECTION = "/profiles/Director";
+    public static final String COLLECTION = "/profiles";
 
     public List<UserProfileRestDTO> findAll() throws SSLException {
 
@@ -38,7 +37,7 @@ public class UserProfileRestRepository {
                 .defaultUriVariables(Collections.singletonMap("url", ENDPOINT))
                 .build();
 
-        UserProfileRestDTO userProfileRestDTO;
+       Mono<List<UserProfileRestDTO>> userProfileRestDTO;
 
         try {
             userProfileRestDTO = webClient
@@ -50,22 +49,23 @@ public class UserProfileRestRepository {
                         return Mono.empty();
                     })
 
-                    .bodyToMono(UserProfileRestDTO.class)
+                    .bodyToFlux(UserProfileRestDTO.class)
 
                     .onErrorReturn(null)
 
                     .doOnError(throwable -> {
                         System.out.println(throwable.getMessage());
                     })
-                    .block();
+                    .collectList()
+                    .log();
         } catch (Exception e) {
             userProfileRestDTO = null;
         }
 
         if (userProfileRestDTO != null)
-            return List.of(userProfileRestDTO);
+            return userProfileRestDTO.block();
         else
             return
-                    Collections.emptyList();
+                    Collections.EMPTY_LIST;
     }
 }

@@ -179,17 +179,17 @@ public class SprintController {
     public  ResponseEntity<Object> showScrumBoard(@PathVariable("id") String id) {
 
         ErrorMessage message = new ErrorMessage();
-        CollectionModel<UserStoryOfSprintDTO> UsSprintDTO;
+        CollectionModel<UserStoryOfSprintDTO> uSOfSprintDTOS;
 
         try {
-            UsSprintDTO = sprintService.showScrumBoard(id);
+            uSOfSprintDTOS = sprintService.showScrumBoard(id);
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(UsSprintDTO, HttpStatus.OK);
+        return new ResponseEntity<>(uSOfSprintDTOS, HttpStatus.OK);
     }
 
     @GetMapping("/scrumboard/{id}")

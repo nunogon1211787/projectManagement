@@ -212,7 +212,7 @@ public class ResourceService {
         checkAllocation(newResourceByRole.getId().getUser().getEmail().getEmailText(),
                 newResourceByRole.getId().getStartDate().toString(),
                 newResourceByRole.getEndDate().toString(),
-                newResourceByRole.getAllocation().getPercentage());
+                (newResourceByRole.getAllocation().getPercentage()-oldResource.getAllocation().getPercentage()));
 
         oldResource.setEndDate(LocalDate.parse(dto.getStartDate()).minusDays(1));
         resRepo.save(oldResource);
@@ -256,11 +256,11 @@ public class ResourceService {
     }
 
     private void checkAllInputToCreateResource(CreateResourceDTO dto) {
-        checkSystemUserExists(dto.systemUserID);
-        checkProjectExists(dto.projectId);
+        checkSystemUserExists(dto.getSystemUserID());
+        checkProjectExists(dto.getProjectId());
         checkProjectRole(dto);
-        checkDatesInsideProject(dto.projectId, dto.startDate, dto.endDate);
-        checkAllocation(dto.systemUserID, dto.startDate, dto.endDate, dto.percentageOfAllocation);
+        checkDatesInsideProject(dto.getProjectId(), dto.getStartDate(), dto.getEndDate());
+        checkAllocation(dto.getSystemUserID(), dto.getStartDate(), dto.getEndDate(), dto.getPercentageOfAllocation());
     }
 
     private void checkSystemUserExists(String userID) {
@@ -305,10 +305,10 @@ public class ResourceService {
     }
 
     private void checkProjectRole(CreateResourceDTO dto) throws IllegalArgumentException {
-        ProjectID projID = new ProjectID(dto.projectId);
+        ProjectID projID = new ProjectID(dto.getProjectId());
         List<Resource> projectTeamList = resRepo.findAllByProject(projID);
 
-        if (!managementService.validateProjectRole(projectTeamList, dto.startDate, dto.endDate, dto.projectRole)) {
+        if (!managementService.validateProjectRole(projectTeamList, dto.getStartDate(), dto.getEndDate(), dto.getProjectRole())) {
             throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));
         }
     }

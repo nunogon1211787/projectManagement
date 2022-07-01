@@ -11,7 +11,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
@@ -20,11 +19,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
-import switch2021.project.dtoModel.dto.PartialProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.dto.TypologyDTO;
-import javax.net.ssl.SSLException;
-import java.util.Map;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -58,9 +55,6 @@ class ProjectControllerIntegrationTest {
     @Test
     void shouldReturnNewProjectAndOk() throws Exception {
         ProjectDTO projectDTO = new ProjectDTO();
-        TypologyDTO typologyDTO = new TypologyDTO();
-
-        typologyDTO.description = "fixed cost";
 
         projectDTO.projectName = "name";
         projectDTO.description = "description";
@@ -71,14 +65,6 @@ class ProjectControllerIntegrationTest {
         projectDTO.budget = "11";
         projectDTO.typology = "Fixed cost";
         projectDTO.customer = "customer";
-
-//            MvcResult resulttypo = mockMvc
-//                    .perform(MockMvcRequestBuilders.post(BASE_URL + "/typologies")
-//                            .contentType("application/json")
-//                            .content(objectMapper.writeValueAsString(typologyDTO))
-//                            .accept(MediaType.APPLICATION_JSON))
-//                    .andExpect(status().isCreated())
-//                    .andReturn();
 
         MvcResult result = mockMvc
                 .perform(MockMvcRequestBuilders.post(BASE_URL + "/projects")
@@ -149,26 +135,26 @@ class ProjectControllerIntegrationTest {
 //
 //        assertThat(response.getStatusCodeValue()).isEqualTo(200);
 //    }
-
-    @Test
-    void getAllProjectIntegration() {
-        //Arrange
-        //Act
-        ResponseEntity<?> response = ctrl.getAllProjects();
-        //Assert
-        assertThat(response.getStatusCodeValue()).isEqualTo(200);
-    }
-
-    @Test
-    void getAllProjectIntegrationSize() throws SSLException {
-        //Arrange
-        //Act
-        Map<String, CollectionModel<PartialProjectDTO>> response = service.getAllProjects();
-//        int mapProjectsSizeContent = response.get("internalProjects").getContent().size() + response.get("externalProjects").getContent().size();
-        int mapProjectsSizeContent = response.get("internalProjects").getContent().size();
-        //Assert
-        assertEquals(3, mapProjectsSizeContent);
-    }
+//
+//    @Test
+//    void getAllProjectIntegration() {
+//        //Arrange
+//        //Act
+//        ResponseEntity<?> response = ctrl.getAllProjects();
+//        //Assert
+//        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+//    }
+//
+//    @Test
+//    void getAllProjectIntegrationSize() throws SSLException {
+//        //Arrange
+//        //Act
+//        Map<String, CollectionModel<PartialProjectDTO>> response = service.getAllProjects();
+////        int mapProjectsSizeContent = response.get("internalProjects").getContent().size() + response.get("externalProjects").getContent().size();
+//        int mapProjectsSizeContent = response.get("internalProjects").getContent().size();
+//        //Assert
+//        assertEquals(3, mapProjectsSizeContent);
+//    }
 
     @Test
     void getRequestedProjectIntegration() {
@@ -236,7 +222,7 @@ class ProjectControllerIntegrationTest {
     void getCurrentProjectsByUserIntegration() {
         //Arrange
         //Act
-        ResponseEntity<?> response = ctrl.showCurrentProjectsByUser("jsz@mymail.com");
+        ResponseEntity<?> response = ctrl.getCurrentProjectsByUser("jsz@mymail.com");
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
@@ -245,7 +231,7 @@ class ProjectControllerIntegrationTest {
     void getCurrentProjectsByUserIntegrationSize() {
         //Arrange
         //Act
-        int xx = service.showCurrentProjectsByUser("jsz@mymail.com").getContent().size();
+        int xx = service.getCurrentProjectsByUser("jsz@mymail.com").getContent().size();
         //Assert
         assertEquals(1,xx);
     }
@@ -283,21 +269,21 @@ class ProjectControllerIntegrationTest {
         assertEquals("{\"errorMessage\":\"Project does not exist\"}", resultContent);
     }
 
-    @SneakyThrows
-    @Test
-    void mockMvcTestShowAllProjects() {
-        //Arrange
-        MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get(BASE_URL + "/projects")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn();
-        //Act
-        String resultContent = result.getResponse().getContentAsString();
-        //Assert
-        assertNotNull(resultContent);
-        assertNull(result.getResponse().getErrorMessage());
-    }
+//    @SneakyThrows
+//    @Test
+//    void mockMvcTestShowAllProjects() {
+//        //Arrange
+//        MvcResult result = mockMvc
+//                .perform(MockMvcRequestBuilders.get(BASE_URL + "/projects")
+//                        .accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//        //Act
+//        String resultContent = result.getResponse().getContentAsString();
+//        //Assert
+//        assertNotNull(resultContent);
+//        assertNull(result.getResponse().getErrorMessage());
+//    }
 
     @SneakyThrows
     @Test
@@ -342,6 +328,7 @@ class ProjectControllerIntegrationTest {
         String body = result.getResponse().getContentAsString();
         assertEquals(x,200);
         assertNotNull(body);
+        assertTrue(body.contains("Project was deleted successfully"));
     }
 
     @SneakyThrows

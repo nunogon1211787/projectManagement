@@ -11,10 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import switch2021.project.dtoModel.dto.NewSprintDTO;
-import switch2021.project.dtoModel.dto.ProjectDTO;
-import switch2021.project.dtoModel.dto.StartSprintDTO;
-import switch2021.project.dtoModel.dto.UserStoryIdDTO;
+import switch2021.project.dtoModel.dto.*;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -272,7 +269,7 @@ public class SprintControllerIntegrationTest {
         ProjectDTO projectDTO = new ProjectDTO(projectName, description, businessSector, startDate, numberOfSprints,
                 budget,
                 sprintDuration, typology, customer);
-        //Act
+
         mockMvc.perform(MockMvcRequestBuilders.post(BASE_URL + "/projects")
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(projectDTO))
@@ -309,7 +306,7 @@ public class SprintControllerIntegrationTest {
     @Test
     void shouldNotDeleteSprintUnknown() throws Exception {
         //Arrange
-        String sprintID = "Project_2022_3&sprint20";
+        String sprintID = "Project_2022_3&sprint29";
         //Act
         MvcResult result = mockMvc
                 .perform(MockMvcRequestBuilders.delete(BASE_URL + "/sprints/" + sprintID)
@@ -321,11 +318,37 @@ public class SprintControllerIntegrationTest {
         assertTrue(resultContent.contains("Sprint does not exist"));
     }
 
-   /*@Test
+    @Test
+    void shouldNotReturnSprint() throws Exception {
+        //Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/sprints/Project_2022_3&sprint200")
+                                 .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())//Assert
+                .andReturn();
+        //Assert
+        String resultContent = result.getResponse().getContentAsString();
+        assertTrue(resultContent.contains("Sprint doesnt exist"));
+    }
+
+    @Test
+    void shouldReturnSprint() throws Exception {
+        //Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/sprints/Project_2022_1&1")
+                                 .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())//Assert
+                .andReturn();
+        //Assert
+        String resultContent = result.getResponse().getContentAsString();
+        assertTrue(resultContent.contains("sprintID\":\"Project_2022_1&1\""));
+    }
+
+   @Test
     void shouldStartASprint() throws Exception {
         //Arrange
         String projID = "Project_2022_3";
-        String name = "sprint17";
+        String name = "sprint19";
         String startDate = "";
         NewSprintDTO sprintDTO = new NewSprintDTO(projID, name, startDate);
         //Act
@@ -347,6 +370,127 @@ public class SprintControllerIntegrationTest {
 
         String resultContent = result.getResponse().getContentAsString();
         assertNotNull(resultContent);
-        assertTrue(resultContent.contains("\"sprintID\":\"Project_2022_3\""));
-    }*/
+        assertTrue(resultContent.contains("\"sprintID\":\"Project_2022_3&sprint17\""));
+    }
+
+    @Test
+    void shouldNotStartASprintUnknown() throws Exception {
+        //Arrange
+        String projID = "Project_2022_3";
+        String name = "sprint20";
+        String startDate = "";
+        NewSprintDTO sprintDTO = new NewSprintDTO(projID, name, startDate);
+        //Act
+        mockMvc.perform(MockMvcRequestBuilders.post(BASE_URL + "/sprints")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(sprintDTO))
+                .accept(MediaType.APPLICATION_JSON));
+
+        String sprintID = "Project_2022_3&sprint30";
+        StartSprintDTO startSprintDTO = new StartSprintDTO("2022-06-30");
+        //Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.patch(BASE_URL + "/sprints/" + sprintID)
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(startSprintDTO))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())//Assert
+                .andReturn();
+
+        String resultContent = result.getResponse().getContentAsString();
+        assertTrue(resultContent.contains("Sprint doesnt exist"));
+    }
+
+
+
+    @Test
+    void shouldShowScrumBoard() throws Exception {
+        //Arrange
+        String sprintID = "Project_2022_1&4";
+        //Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/sprints/scrumBoard/"+ sprintID)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())//Assert
+                .andReturn();
+
+        String resultContent = result.getResponse().getContentAsString();
+        assertNotNull(resultContent);
+        assertTrue(resultContent.contains("\"usTitle\":\"as want US15\""));
+    }
+
+    @Test
+    void shouldNotShowScrumBoardOfUnknownSprint() throws Exception {
+        //Arrange
+        String sprintID = "Project_2022_1&10";
+        //Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/sprints/scrumBoard/"+ sprintID)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())//Assert
+                .andReturn();
+
+        String resultContent = result.getResponse().getContentAsString();
+        assertNotNull(resultContent);
+        assertTrue(resultContent.contains("Sprint does not exist!"));
+    }
+
+    @Test
+    void shouldChangeStatusScrumBoard() throws Exception {
+        //Arrange
+        String sprintID = "Project_2022_1&4";
+
+        String usTitle="as want US14";
+        String projectId="Project_2022_1";
+        String sprintName="4";
+        String status="Done";
+        UserStoryOfSprintDTO userStoryOfSprintDTO = new UserStoryOfSprintDTO();
+        userStoryOfSprintDTO.usTitle=usTitle;
+        userStoryOfSprintDTO.projectId=projectId;
+        userStoryOfSprintDTO.sprintName=sprintName;
+        userStoryOfSprintDTO.status=status;
+
+        //Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.patch(BASE_URL + "/sprints/scrumBoard/"+ sprintID)
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(userStoryOfSprintDTO))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())//Assert
+                .andReturn();
+
+        String resultContent = result.getResponse().getContentAsString();
+        assertNotNull(resultContent);
+        assertTrue(resultContent.contains("\"status\":\"Done\""));
+    }
+
+    @Test
+    void shouldNotChangeStatusScrumBoardOfUnknownSprint() throws Exception {
+        //Arrange
+        String sprintID = "Project_2022_1&10";
+
+        String usTitle="as want US14";
+        String projectId="Project_2022_1";
+        String sprintName="10";
+        String status="Done";
+        UserStoryOfSprintDTO userStoryOfSprintDTO = new UserStoryOfSprintDTO();
+        userStoryOfSprintDTO.usTitle=usTitle;
+        userStoryOfSprintDTO.projectId=projectId;
+        userStoryOfSprintDTO.sprintName=sprintName;
+        userStoryOfSprintDTO.status=status;
+
+        //Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.patch(BASE_URL + "/sprints/scrumBoard/"+ sprintID)
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(userStoryOfSprintDTO))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())//Assert
+                .andReturn();
+
+        String resultContent = result.getResponse().getContentAsString();
+        assertNotNull(resultContent);
+        assertTrue(resultContent.contains("Sprint does not exist!"));
+    }
+
 }
