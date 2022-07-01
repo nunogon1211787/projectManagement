@@ -55,9 +55,6 @@ class ProjectControllerIntegrationTest {
     @Test
     void shouldReturnNewProjectAndOk() throws Exception {
         ProjectDTO projectDTO = new ProjectDTO();
-        TypologyDTO typologyDTO = new TypologyDTO();
-
-        typologyDTO.description = "fixed cost";
 
         projectDTO.projectName = "name";
         projectDTO.description = "description";
@@ -68,14 +65,6 @@ class ProjectControllerIntegrationTest {
         projectDTO.budget = "11";
         projectDTO.typology = "Fixed cost";
         projectDTO.customer = "customer";
-
-//            MvcResult resulttypo = mockMvc
-//                    .perform(MockMvcRequestBuilders.post(BASE_URL + "/typologies")
-//                            .contentType("application/json")
-//                            .content(objectMapper.writeValueAsString(typologyDTO))
-//                            .accept(MediaType.APPLICATION_JSON))
-//                    .andExpect(status().isCreated())
-//                    .andReturn();
 
         MvcResult result = mockMvc
                 .perform(MockMvcRequestBuilders.post(BASE_URL + "/projects")

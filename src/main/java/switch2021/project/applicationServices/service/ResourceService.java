@@ -287,15 +287,15 @@ public class ResourceService {
 
         if (!managementService.validateAllocation(resourceAllocatedProjects, startDate,
                 endDate, percentageOfAllocation)) {
-            throw new IllegalArgumentException(("Is not valid to create - Allocation)"));
+            throw new IllegalArgumentException(("Is not valid to create - Allocation"));
         }
     }
 
     private void checkProjectRole(CreateResourceDTO dto) throws IllegalArgumentException {
-        ProjectID projID = new ProjectID(dto.projectId);
+        ProjectID projID = new ProjectID(dto.getProjectId());
         List<Resource> projectTeamList = resRepo.findAllByProject(projID);
 
-        if (!managementService.validateProjectRole(projectTeamList, dto.startDate, dto.endDate, dto.projectRole)) {
+        if (!managementService.validateProjectRole(projectTeamList, dto.getStartDate(), dto.getEndDate(), dto.getProjectRole())) {
             throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));
         }
     }
