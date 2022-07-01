@@ -31,7 +31,7 @@ public class TaskEffort implements ValueObject<TaskEffort> {
     @Embedded
     @AttributeOverride(name = "extension", column = @Column(name = "EffortAttachment"))
     private Attachment attachment;
-    private static final int MINHOUR = 0;
+    private static final int MINTIME = 0;
 
     public TaskEffort(Hours effortHours, Minutes effortMinutes, Date effortDate, Description comment,
                       Attachment attachment) {
@@ -44,7 +44,7 @@ public class TaskEffort implements ValueObject<TaskEffort> {
     }
 
     private void checkWorkTimeRules(Hours effortHours, Minutes effortMinutes) {
-        if(effortHours.getEffortHours() == MINHOUR & effortMinutes.getEffortMinutes() == MINHOUR)
+        if(effortHours.getEffortHours() == MINTIME && effortMinutes.getEffortMinutes() == MINTIME)
             throw new IllegalArgumentException("Not valid work time values.");
     }
 

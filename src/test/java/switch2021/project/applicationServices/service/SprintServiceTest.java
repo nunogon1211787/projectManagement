@@ -28,8 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -80,21 +79,6 @@ public class SprintServiceTest {
         //Assert
         assertEquals(expectedDto, result);
 
-    }
-
-    @Test
-    @SneakyThrows
-    @DisplayName("DeleteSprint success")
-    void deleteSprints_success() {
-        //Arrange
-        String id = "Project_2022_3&Sprint6";
-        String projectID = "Project_2022_3";
-        String sprintName = "Sprint6";
-        SprintID sprintID = mock(SprintID.class);
-        when(sprintIDFactory.create(projectID, sprintName)).thenReturn(sprintID);
-        when(sprintRepo.existsSprintByID(sprintID)).thenReturn(true);
-        //Act + Assert
-        sprintService.deleteSprint(id);
     }
 
     @Test
@@ -151,17 +135,44 @@ public class SprintServiceTest {
     void showScrumBoard_success() {
         //Arrange
         SprintID id = mock(SprintID.class);
-        String string_id = "Project_2022_1_1";
+        String sprintID = "Project_2022_1&1";
+        String proj = "Project_2022_1";
+        when(sprintIDFactory.create(proj, "1")).thenReturn(id);
+        Description descriptionID = mock(Description.class);
+        when(id.getSprintName()).thenReturn(descriptionID);
+        when(descriptionID.getText()).thenReturn("1");
+        when(sprintRepo.existsSprintByID(id)).thenReturn(true);
+
         List<UserStoryOfSprint> usList = new ArrayList<>();
         CollectionModel<UserStoryOfSprintDTO> expectedDto = CollectionModel.empty();
         when(userStoryOfSprintRepo.findAllUserStoriesBySprintID(id)).thenReturn(usList);
         when(userStoryOfSprintMapper.toCollectionDTO(any())).thenReturn(expectedDto);
 
         //Act
-        CollectionModel<UserStoryOfSprintDTO> result = sprintService.showScrumBoard(string_id);
+        CollectionModel<UserStoryOfSprintDTO> result = sprintService.showScrumBoard(sprintID);
 
         //Arrange
         assertEquals(expectedDto, result);
+    }
+
+    @Test
+    @SneakyThrows
+    @DisplayName("Show all Sprints by ProjectId fail")
+    void showScrumBoard_fail() {
+        //Assert
+        assertThrows(NullPointerException.class, () -> {
+            //Arrange
+            SprintID id = mock(SprintID.class);
+            String sprintID = "Project_2022_1&20";
+            String proj = "Project_2022_1";
+            when(sprintIDFactory.create(proj, "1")).thenReturn(id);
+            Description descriptionID = mock(Description.class);
+            when(id.getSprintName()).thenReturn(descriptionID);
+            when(descriptionID.getText()).thenReturn("1");
+            when(sprintRepo.existsSprintByID(id)).thenReturn(true);
+            //Act
+            sprintService.showScrumBoard(sprintID);
+        });
     }
 
     @Test
@@ -322,38 +333,66 @@ public class SprintServiceTest {
     }
 
     @Test
-    @SneakyThrows
+    //@SneakyThrows
     @DisplayName("Change scrum board category success")
-    void changeScrumBoardCategory_success() {
+    void changeScrumBoardCategory_success() throws Exception {
         //Arrange
-        String sprintId = "Project_2020_1_1";
+        String id = "Project_2022_1&1";
+        UserStoryOfSprintDTO userStoryDTO = mock(UserStoryOfSprintDTO.class);
+        SprintID sprintID = mock(SprintID.class);
         String proj = "Project_2022_1";
+        when(sprintIDFactory.create(proj, "1")).thenReturn(sprintID);
+        Description descriptionID = mock(Description.class);
+        when(sprintID.getSprintName()).thenReturn(descriptionID);
+        when(descriptionID.getText()).thenReturn("1");
+        when(sprintRepo.existsSprintByID(sprintID)).thenReturn(true);
         List<UserStoryOfSprint> userStoryOfSprintList = new ArrayList<>();
+
         userStoryOfSprintList.add(userStoryOfSprint);
         UserStoryID userStoryID = mock(UserStoryID.class);
         ProjectID projectID = mock(ProjectID.class);
-        UserStoryOfSprintDTO dto = mock(UserStoryOfSprintDTO.class);
         UsTitle title = mock(UsTitle.class);
 
-        when(userStoryOfSprintRepo.findAllUserStoriesBySprintID(any())).thenReturn(userStoryOfSprintList);
+        when(userStoryOfSprintRepo.findAllUserStoriesBySprintID(sprintID)).thenReturn(userStoryOfSprintList);
         when(userStoryOfSprint.getUserStoryId()).thenReturn(userStoryID);
         when(userStoryID.getProjectID()).thenReturn(projectID);
         when(projectID.getCode()).thenReturn(proj);
-        when(dto.getProjectId()).thenReturn(proj);
+        when(userStoryDTO.getProjectId()).thenReturn(proj);
         when(userStoryID.getUsTitle()).thenReturn(title);
         when(title.getTitleUs()).thenReturn("title");
-        when(dto.getUsTitle()).thenReturn("title");
+        when(userStoryDTO.getUsTitle()).thenReturn("title");
         when(userStoryOfSprint.getSprintName()).thenReturn("1");
-        when(dto.getStatus()).thenReturn("Todo");
+        when(userStoryDTO.getStatus()).thenReturn("Todo");
         doNothing().when(userStoryOfSprint).setUserStoryOfSprintStatus(any());
         when(userStoryOfSprintRepo.save(any())).thenReturn(userStoryOfSprint);
         when(userStoryOfSprintMapper.toDTO(userStoryOfSprint)).thenReturn(userStoryOfSprintDTO);
 
         //Act
-        UserStoryOfSprintDTO result = sprintService.changeStatusScrumBoard(sprintId, dto);
+        UserStoryOfSprintDTO result = sprintService.changeStatusScrumBoard(id, userStoryDTO);
 
         //Assert
         assertEquals(userStoryOfSprintDTO, result);
+    }
+
+    @Test
+    @SneakyThrows
+    @DisplayName("Change scrum board category fail no sprint")
+    void changeScrumBoardCategory_sprintFail() {
+        //Assert
+        assertThrows(Exception.class, () -> {
+            //Arrange
+            String id = "Project_2022_1&1";
+            UserStoryOfSprintDTO userStoryDTO = mock(UserStoryOfSprintDTO.class);
+            SprintID sprintID = mock(SprintID.class);
+            String proj = "Project_2022_1";
+            when(sprintIDFactory.create(proj, "1")).thenReturn(sprintID);
+            Description descriptionID = mock(Description.class);
+            when(sprintID.getSprintName()).thenReturn(descriptionID);
+            when(descriptionID.getText()).thenReturn("1");
+            when(sprintRepo.existsSprintByID(sprintID)).thenReturn(false);
+            //Act
+            sprintService.changeStatusScrumBoard(id, userStoryDTO);
+        });
     }
 
     @Test
@@ -362,8 +401,10 @@ public class SprintServiceTest {
     void changeScrumBoardCategory_fail() {
         assertThrows(Exception.class, () -> {
             //Arrange
-            String sprintId = "Project_2020_1_1";
+            String sprintId = "Project_2020_1&1";
             String proj = "Project_2022_1";
+            SprintID sprintID = mock(SprintID.class);
+            when(sprintIDFactory.create("Project_2022_1", "1")).thenReturn(sprintID);
             List<UserStoryOfSprint> userStoryOfSprintList = new ArrayList<>();
             userStoryOfSprintList.add(userStoryOfSprint);
             UserStoryID userStoryID = mock(UserStoryID.class);
