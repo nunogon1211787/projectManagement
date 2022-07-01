@@ -197,11 +197,17 @@ public class User implements Entity<User> {
      * Update user profiles methods
      */
     public void toAssignProfile(UserProfileID profileID) {
-        this.assignedIdProfiles.add(profileID);
+
+            this.assignedIdProfiles.add(profileID);
+
     }
 
     public void removeProfile(UserProfileID profileID) {
         this.assignedIdProfiles.remove(profileID);
+    }
+
+    public void clearProfiles(){
+        this.assignedIdProfiles = new ArrayList<>();
     }
 
 

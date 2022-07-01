@@ -25,6 +25,7 @@ public class UserStoryMapper {
         result.priority = newUserStory.getPriority().getPriorityUs();
         result.description = newUserStory.getDescription().getText();
         result.timeEstimate = newUserStory.getTimeEstimate().getUsHours();
+        result.status = newUserStory.getUsStatus().name();
 
         if (newUserStory.getParentUserStory() != null) {
             result.parentUserStory = newUserStory.getParentUserStory().getUserStoryID().toString();

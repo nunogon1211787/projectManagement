@@ -113,6 +113,19 @@ public class ResourceService {
         return mapper.toCollectionDto(projectTeam);
     }
 
+    public CollectionModel<OutputResourceDTO> getCurrentProjectTeam(String projectId) {
+        checkProjectExists(projectId);
+        ProjectID projectID = iProjIDFactory.create(projectId);
+
+        List<Resource> resources = resRepo.findAllByProject(projectID);
+        List<Resource> projectTeam = managementService.currentResourcesByDate(resources);
+
+//        if (projectTeam.isEmpty()) {
+//            throw new NullPointerException("There are no resources in this project!");
+//        }
+        return mapper.toCollectionDto(projectTeam);
+    }
+
 
     /**
      * Consult a Project Team of a Project (US028)
