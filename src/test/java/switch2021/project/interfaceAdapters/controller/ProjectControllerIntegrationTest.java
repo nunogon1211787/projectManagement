@@ -11,7 +11,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
@@ -20,11 +19,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import switch2021.project.applicationServices.service.ProjectService;
 import switch2021.project.dtoModel.dto.OutputProjectDTO;
-import switch2021.project.dtoModel.dto.PartialProjectDTO;
 import switch2021.project.dtoModel.dto.ProjectDTO;
 import switch2021.project.dtoModel.dto.TypologyDTO;
-import javax.net.ssl.SSLException;
-import java.util.Map;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -149,26 +146,26 @@ class ProjectControllerIntegrationTest {
 //
 //        assertThat(response.getStatusCodeValue()).isEqualTo(200);
 //    }
-
-    @Test
-    void getAllProjectIntegration() {
-        //Arrange
-        //Act
-        ResponseEntity<?> response = ctrl.getAllProjects();
-        //Assert
-        assertThat(response.getStatusCodeValue()).isEqualTo(200);
-    }
-
-    @Test
-    void getAllProjectIntegrationSize() throws SSLException {
-        //Arrange
-        //Act
-        Map<String, CollectionModel<PartialProjectDTO>> response = service.getAllProjects();
-//        int mapProjectsSizeContent = response.get("internalProjects").getContent().size() + response.get("externalProjects").getContent().size();
-        int mapProjectsSizeContent = response.get("internalProjects").getContent().size();
-        //Assert
-        assertEquals(3, mapProjectsSizeContent);
-    }
+//
+//    @Test
+//    void getAllProjectIntegration() {
+//        //Arrange
+//        //Act
+//        ResponseEntity<?> response = ctrl.getAllProjects();
+//        //Assert
+//        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+//    }
+//
+//    @Test
+//    void getAllProjectIntegrationSize() throws SSLException {
+//        //Arrange
+//        //Act
+//        Map<String, CollectionModel<PartialProjectDTO>> response = service.getAllProjects();
+////        int mapProjectsSizeContent = response.get("internalProjects").getContent().size() + response.get("externalProjects").getContent().size();
+//        int mapProjectsSizeContent = response.get("internalProjects").getContent().size();
+//        //Assert
+//        assertEquals(3, mapProjectsSizeContent);
+//    }
 
     @Test
     void getRequestedProjectIntegration() {
@@ -283,21 +280,21 @@ class ProjectControllerIntegrationTest {
         assertEquals("{\"errorMessage\":\"Project does not exist\"}", resultContent);
     }
 
-    @SneakyThrows
-    @Test
-    void mockMvcTestShowAllProjects() {
-        //Arrange
-        MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get(BASE_URL + "/projects")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn();
-        //Act
-        String resultContent = result.getResponse().getContentAsString();
-        //Assert
-        assertNotNull(resultContent);
-        assertNull(result.getResponse().getErrorMessage());
-    }
+//    @SneakyThrows
+//    @Test
+//    void mockMvcTestShowAllProjects() {
+//        //Arrange
+//        MvcResult result = mockMvc
+//                .perform(MockMvcRequestBuilders.get(BASE_URL + "/projects")
+//                        .accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//        //Act
+//        String resultContent = result.getResponse().getContentAsString();
+//        //Assert
+//        assertNotNull(resultContent);
+//        assertNull(result.getResponse().getErrorMessage());
+//    }
 
     @SneakyThrows
     @Test
