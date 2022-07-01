@@ -243,11 +243,11 @@ public class ResourceService {
     }
 
     private void checkAllInputToCreateResource(CreateResourceDTO dto) {
-        checkSystemUserExists(dto.systemUserID);
-        checkProjectExists(dto.projectId);
+        checkSystemUserExists(dto.getSystemUserID());
+        checkProjectExists(dto.getProjectId());
         checkProjectRole(dto);
-        checkDatesInsideProject(dto.projectId, dto.startDate, dto.endDate);
-        checkAllocation(dto.systemUserID, dto.startDate, dto.endDate, dto.percentageOfAllocation);
+        checkDatesInsideProject(dto.getProjectId(), dto.getStartDate(), dto.getEndDate());
+        checkAllocation(dto.getSystemUserID(), dto.getStartDate(), dto.getEndDate(), dto.getPercentageOfAllocation());
     }
 
     private void checkSystemUserExists(String userID) {
