@@ -179,7 +179,9 @@ public class SprintService {
     public CollectionModel<UserStoryOfSprintDTO> showScrumBoard(String id) throws Exception {
         CollectionModel<UserStoryOfSprintDTO> dtoList;
         SprintID sprintID = createSprintIdByStringInputFromController(id);
-
+        if (!sprintRepo.existsSprintByID(sprintID)) {
+            throw new NullPointerException("Sprint does not exist!");
+        }
         List<UserStoryOfSprint> userStoryOfSprintList = userStoryOfSprintRepo.findAllUserStoriesBySprintID(sprintID);
 
         dtoList = userStoryOfSprintMapper.toCollectionDTO(userStoryOfSprintList);
@@ -190,12 +192,9 @@ public class SprintService {
     public UserStoryOfSprintDTO changeStatusScrumBoard(String id, UserStoryOfSprintDTO userStoryDTO) throws Exception {
         UserStoryOfSprintDTO userStoryOfSprintDTO;
         SprintID sprintID = createSprintIdByStringInputFromController(id);
-        /*String[] values = id.split("_");
-        ProjectID projectID = new ProjectID(values[0] + "_" + values[1] + "_" + values[2]);
-        Description sprintName = new Description((values[3]));
-
-        SprintID sprintID = new SprintID(projectID, sprintName);*/
-
+        if (!sprintRepo.existsSprintByID(sprintID)) {
+            throw new NullPointerException("Sprint does not exist!");
+        }
         List<UserStoryOfSprint> userStoryOfSprintList = userStoryOfSprintRepo.findAllUserStoriesBySprintID(sprintID);
 
         for (UserStoryOfSprint userStoryOfSprint : userStoryOfSprintList) {
