@@ -113,6 +113,19 @@ public class ResourceService {
         return mapper.toCollectionDto(projectTeam);
     }
 
+    public CollectionModel<OutputResourceDTO> getCurrentProjectTeam(String projectId) {
+        checkProjectExists(projectId);
+        ProjectID projectID = iProjIDFactory.create(projectId);
+
+        List<Resource> resources = resRepo.findAllByProject(projectID);
+        List<Resource> projectTeam = managementService.currentResourcesByDate(resources);
+
+//        if (projectTeam.isEmpty()) {
+//            throw new NullPointerException("There are no resources in this project!");
+//        }
+        return mapper.toCollectionDto(projectTeam);
+    }
+
 
     /**
      * Consult a Project Team of a Project (US028)
@@ -224,19 +237,36 @@ public class ResourceService {
     /**
      * Validation Methods
      */
+//    private void checkIfUserIsPartOfProjectTeam(Resource resource) {
+//        List<Resource> resources = resRepo.findAllByProject(resource.getId().getProject());
+//
+//        for (Resource res : resources) {
+//            if (res.getId().getUser().equals(resource.getId().getUser())) {
+//
+//                if (resource.getId().getStartDate().isAfter(res.getId().getStartDate())
+//                        && resource.getId().getStartDate().isBefore(res.getEndDate())) {
+//
+//                    if (resource.getId().getStartDate().isBefore(res.getId().getStartDate())
+//                            && resource.getEndDate().isAfter(res.getId().getStartDate())) {
+//                        throw new IllegalArgumentException("This User already is part of this project team!");
+//                    }
+//                }
+//            }
+//        }
+//    }
+
     private void checkIfUserIsPartOfProjectTeam(Resource resource) {
         List<Resource> resources = resRepo.findAllByProject(resource.getId().getProject());
 
         for (Resource res : resources) {
             if (res.getId().getUser().equals(resource.getId().getUser())) {
 
-                if (resource.getId().getStartDate().isAfter(res.getId().getStartDate())
-                        && resource.getId().getStartDate().isBefore(res.getEndDate())) {
-
-                    if (resource.getId().getStartDate().isBefore(res.getId().getStartDate())
-                            && resource.getEndDate().isAfter(res.getId().getStartDate())) {
+                if (resource.getId().getStartDate().isAfter(res.getId().getStartDate().minusDays(1))
+                        && resource.getId().getStartDate().isBefore(res.getEndDate().plusDays(1)) ||
+                        resource.getEndDate().isAfter(res.getId().getStartDate().minusDays(1))
+                        && resource.getEndDate().isBefore(res.getEndDate().plusDays(1))){
                         throw new IllegalArgumentException("This User already is part of this project team!");
-                    }
+
                 }
             }
         }

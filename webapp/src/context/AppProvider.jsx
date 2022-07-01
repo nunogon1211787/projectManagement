@@ -7,13 +7,10 @@ const initialState = {
     loading: false,
     error: null,
     data: {
-      token: "1",
+      token: "",
+      userName: "",
+      email: "",
     },
-  },
-  login: {
-    user: null,
-    profile: null,
-    role: null,
   },
   collection: {
     loading: true,
@@ -25,12 +22,6 @@ const initialState = {
     loading: false,
     error: null,
     data: [],
-  },
-  navigation: {
-    table: true,
-    form: false,
-    single: false,
-    editDetails: false,
   },
 };
 

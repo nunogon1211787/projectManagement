@@ -46,11 +46,11 @@ iUserProfileWebRepository --> service: userProfilesListWeb
 service -> userProfileMapper: toCollectionDTO(userProfilesListWeb)
 userProfileMapper -> dtoX**: create()
 userProfileMapper --> service: outputUserProfileList_DTO
-service -> service: generateMap( outputUserProfileDTO_List, outputUserProfileList_DTO)
+service -> service: generateMap( outputUserProfileDTO_List, \noutputUserProfileList_DTO)
 
-service --> Ctrl: CollectionModel<UserProfileDTO>
+service --> Ctrl: CollectionModel\n<UserProfileDTO>
 deactivate
-[<--Ctrl : Shows both User's Profiles List
+[<--Ctrl : Shows both \nUser's Profiles List
 
 
 

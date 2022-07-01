@@ -10,10 +10,7 @@ import org.springframework.hateoas.CollectionModel;
 import switch2021.project.applicationServices.iRepositories.IProjectRepo;
 import switch2021.project.applicationServices.iRepositories.ISprintRepo;
 import switch2021.project.applicationServices.iRepositories.IUserStoryOfSprintRepo;
-import switch2021.project.dtoModel.dto.OutputSprintDTO;
-import switch2021.project.dtoModel.dto.StartSprintDTO;
-import switch2021.project.dtoModel.dto.UserStoryIdDTO;
-import switch2021.project.dtoModel.dto.UserStoryOfSprintDTO;
+import switch2021.project.dtoModel.dto.*;
 import switch2021.project.dtoModel.mapper.SprintMapper;
 import switch2021.project.dtoModel.mapper.UserStoryOfSprintMapper;
 import switch2021.project.entities.aggregates.Project.Project;
@@ -53,6 +50,8 @@ public class SprintServiceTest {
     private Sprint sprint;
     @Mock
     private OutputSprintDTO outputSprintDTO;
+    @Mock
+    private OutSprintDTO outSprintDTO;
     @Mock
     private Project project;
     @Mock
@@ -445,11 +444,11 @@ public class SprintServiceTest {
         //Arrange
         Optional<Sprint> opSprint = Optional.of(sprint);
         when(sprintRepo.findBySprintID(any())).thenReturn(opSprint);
-        when(sprintMapper.toDTO(sprint)).thenReturn(outputSprintDTO);
+        when(sprintMapper.model2DTO(sprint)).thenReturn(outSprintDTO);
         //Act
-        OutputSprintDTO result = sprintService.showSprintById("Project_2022_1&1");
+        OutSprintDTO result = sprintService.showSprintById("Project_2022_1&1");
         //Assert
-        assertEquals(outputSprintDTO,result);
+        assertEquals(outSprintDTO,result);
     }
 
     @Test

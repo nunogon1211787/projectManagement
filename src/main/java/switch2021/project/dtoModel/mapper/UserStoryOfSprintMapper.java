@@ -32,9 +32,31 @@ public class UserStoryOfSprintMapper {
         return userStoryOfSprintDTO;
     }
 
+    public UserStoryOfSprintDTO model2DTO(UserStoryOfSprint userStoryOfSprint) {
+        UserStoryOfSprintDTO userStoryOfSprintDTO = new UserStoryOfSprintDTO();
+
+        userStoryOfSprintDTO.projectId = userStoryOfSprint.getUserStoryId().getProjectID().getCode();
+        userStoryOfSprintDTO.usTitle = userStoryOfSprint.getUserStoryId().getUsTitle().getTitleUs();
+        userStoryOfSprintDTO.sprintName = userStoryOfSprint.getSprintName();
+        userStoryOfSprintDTO.status = userStoryOfSprint.getUserStoryOfSprintStatus().toString();
+
+        String sprintId =
+                userStoryOfSprint.getUserStoryId().getProjectID().getCode() + "_" + userStoryOfSprint.getSprintName();
+
+        userStoryOfSprintDTO.add(linkTo(methodOn(SprintController.class).showScrumBoard(sprintId))
+                .withSelfRel());
+
+        return userStoryOfSprintDTO;
+    }
+
 
     public CollectionModel<UserStoryOfSprintDTO> toCollectionDTO(List<UserStoryOfSprint> userStoryOfSprintList) {
 
         return CollectionModel.of(userStoryOfSprintList.stream().map(this::toDTO).collect(Collectors.toList()));
+    }
+
+    public CollectionModel<UserStoryOfSprintDTO> model2CollectionDTO(List<UserStoryOfSprint> userStoryOfSprintList) {
+
+        return CollectionModel.of(userStoryOfSprintList.stream().map(this::model2DTO).collect(Collectors.toList()));
     }
 }
