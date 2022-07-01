@@ -1,33 +1,39 @@
-import Login from "./Login";
-import { Box } from "grommet";
-import { useContext } from "react";
-import AppContext from "../context/AppContext";
+// import { Input } from "antd";
+// import { UserOutlined } from "@ant-design/icons";
+// import { useNavigate } from "react-router-dom";
 
-export function Home() {
-  const { state, dispatch } = useContext(AppContext);
-  const { auth } = state;
-  const { data, error } = auth;
+// const { Search } = Input;
 
-  const errorMessage = () => {
-    if (error !== null) {
-      return <p style={{ color: "red" }}>{error}</p>;
-    }
-  };
+const Home = () => {
+  // const navigate = useNavigate();
 
-  if (data.token === "") {
-    return (
-      <Box flex align="center" justify="center">
-        <Login />
-        <br/>
-        {errorMessage()}
-      </Box>
-    );
-  } else {
-    return (
-      <Box fill align="center" justify="center">
-        <h1>Welcome to Beaver APP</h1>
-      </Box>
-    );
-  }
+  // const onSearch = (value) => {
+  //   navigate("users", {
+  //     state: { search: value },
+  //     replace: true,
+  //   });
+  // };
 
-}
+  // const searchUsers = () => {
+  //   return (
+  //     <Search
+  //       prefix={<UserOutlined />}
+  //       style={{
+  //         width: 300,
+  //       }}
+  //       placeholder="Search for User Here"
+  //       onSearch={onSearch}
+  //       enterButton
+  //     />
+  //   );
+  // };
+
+  return (
+    <>
+      <h1>Home</h1>
+      {/* {searchUsers()} */}
+    </>
+  );
+};
+
+export default Home;
