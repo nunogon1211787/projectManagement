@@ -168,6 +168,19 @@ public class UserControllerTest {
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
 
+    @SneakyThrows
+    @Test
+    void testAssignProfiles() {
+        //Arrange
+        UpdateUserProfilesDTO test = mock(UpdateUserProfilesDTO.class);
+        OutputUserDTO test2 = mock(OutputUserDTO.class);
+        when(service.assignUserProfiles("1", test)).thenReturn(test2);
+        //Act
+        ResponseEntity<?> response = ctrl.assignProfiles("1", test);
+        //Assert
+        assertThat(response.getStatusCodeValue()).isEqualTo(200);
+    }
+
     @Test
     void testAssignProfileException() {
         //Arrange
@@ -175,6 +188,17 @@ public class UserControllerTest {
         when(service.assignUserProfile(any(), any())).thenThrow(IllegalArgumentException.class);
         //Act
         ResponseEntity<?> response = ctrl.assignProfile("1", test);
+        //Assert
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
+    @Test
+    void testAssignProfilesException() {
+        //Arrange
+        UpdateUserProfilesDTO test = mock(UpdateUserProfilesDTO.class);
+        when(service.assignUserProfiles(any(), any())).thenThrow(IllegalArgumentException.class);
+        //Act
+        ResponseEntity<?> response = ctrl.assignProfiles("54", test);
         //Assert
         assertThat(response.getStatusCodeValue()).isEqualTo(400);
     }

@@ -106,7 +106,7 @@ function Categories() {
 
         if (foundUs.status !== category.name.replace(/\s/g, "")) {
           const url = `${URL_API}/sprints/scrumBoard/${
-            foundUs.projectId + "_" + foundUs.sprintName
+            foundUs.projectId + "&" + foundUs.sprintName
           }`;
 
           const body = {

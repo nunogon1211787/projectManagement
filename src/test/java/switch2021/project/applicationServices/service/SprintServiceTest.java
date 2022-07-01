@@ -118,6 +118,24 @@ public class SprintServiceTest {
 
     @Test
     @SneakyThrows
+    @DisplayName("Show all Sprints by ProjectId")
+    void showAllSprintsByProjectId_success2() {
+        //Arrange
+        List<Sprint> expected = new ArrayList<>();
+        when(projRepo.existsById(any())).thenReturn(true);
+        CollectionModel<OutSprintDTO> expectedDto = CollectionModel.empty();
+        when(sprintRepo.findAllByProjectID(any())).thenReturn(expected);
+        when(sprintMapper.toCollectionsDto(expected)).thenReturn(expectedDto);
+
+        //Act
+        CollectionModel<OutSprintDTO> result = sprintService.showSprintsInProject("id");
+
+        //Assert
+        assertEquals(expectedDto, result);
+    }
+
+    @Test
+    @SneakyThrows
     @DisplayName("Show all sprints fail")
     void showAllSprintsByProjectId_fail() {
         assertThrows(Exception.class, () -> {
@@ -125,6 +143,18 @@ public class SprintServiceTest {
             when(projRepo.existsById(any())).thenReturn(false);
             //Act
             sprintService.showSprintsOfAProject("id");
+        });
+    }
+
+    @Test
+    @SneakyThrows
+    @DisplayName("Show all sprints fail")
+    void showAllSprintsByProjectId_fail2() {
+        assertThrows(Exception.class, () -> {
+            //Arrange
+            when(projRepo.existsById(any())).thenReturn(false);
+            //Act
+            sprintService.showSprintsInProject("id");
         });
     }
 
@@ -149,6 +179,32 @@ public class SprintServiceTest {
 
         //Act
         CollectionModel<UserStoryOfSprintDTO> result = sprintService.showScrumBoard(sprintID);
+
+        //Arrange
+        assertEquals(expectedDto, result);
+    }
+
+    @Test
+    @SneakyThrows
+    @DisplayName("Show all Sprints by ProjectId")
+    void showScrumBoard_success2() {
+        //Arrange
+        SprintID id = mock(SprintID.class);
+        String sprintID = "Project_2022_1&1";
+        String proj = "Project_2022_1";
+        when(sprintIDFactory.create(proj, "1")).thenReturn(id);
+        Description descriptionID = mock(Description.class);
+        when(id.getSprintName()).thenReturn(descriptionID);
+        when(descriptionID.getText()).thenReturn("1");
+        when(sprintRepo.existsSprintByID(id)).thenReturn(true);
+
+        List<UserStoryOfSprint> usList = new ArrayList<>();
+        CollectionModel<UserStoryOfSprintDTO> expectedDto = CollectionModel.empty();
+        when(userStoryOfSprintRepo.findAllUserStoriesBySprintID(id)).thenReturn(usList);
+        when(userStoryOfSprintMapper.model2CollectionDTO(any())).thenReturn(expectedDto);
+
+        //Act
+        CollectionModel<UserStoryOfSprintDTO> result = sprintService.showScrumBoardOfSprint(sprintID);
 
         //Arrange
         assertEquals(expectedDto, result);

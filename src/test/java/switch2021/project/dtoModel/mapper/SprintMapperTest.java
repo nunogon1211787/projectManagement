@@ -3,6 +3,7 @@ package switch2021.project.dtoModel.mapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.hateoas.CollectionModel;
+import switch2021.project.dtoModel.dto.OutSprintDTO;
 import switch2021.project.dtoModel.dto.OutputSprintDTO;
 import switch2021.project.entities.aggregates.Sprint.Sprint;
 import switch2021.project.entities.valueObjects.vos.SprintID;
@@ -188,5 +189,26 @@ public class SprintMapperTest {
         CollectionModel<OutputSprintDTO> outPutSprintDTO = sprintMapper.toCollectionDto(sprints);
         //Assert
         assertEquals(1, outPutSprintDTO.getContent().size());
+    }
+
+    @Test
+    public void toCollections() {
+        //Arrange
+        SprintMapper sprintMapper = new SprintMapper();
+        Sprint sprint = mock(Sprint.class);
+        SprintID sprintID = mock(SprintID.class);
+        Description description = mock(Description.class);
+        ProjectID projectID = mock(ProjectID.class);
+        List<Sprint> sprints = new ArrayList<>();
+        sprints.add(sprint);
+        when(sprint.getSprintID()).thenReturn(sprintID);
+        when(sprintID.getSprintName()).thenReturn(description);
+        when(description.getText()).thenReturn("Sprint Name");
+        when(sprintID.getProjectID()).thenReturn(projectID);
+        when(projectID.getCode()).thenReturn("Project_2022_1");
+        //Act
+        CollectionModel<OutSprintDTO> outSprintDTO = sprintMapper.toCollectionsDto(sprints);
+        //Assert
+        assertEquals(1, outSprintDTO.getContent().size());
     }
 }

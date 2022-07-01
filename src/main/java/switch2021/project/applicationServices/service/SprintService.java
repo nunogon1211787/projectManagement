@@ -205,12 +205,12 @@ public class SprintService {
 
     public CollectionModel<UserStoryOfSprintDTO> showScrumBoardOfSprint(String id) throws Exception {
         CollectionModel<UserStoryOfSprintDTO> dtoList;
-        String[] values = id.split("&");
+        /*String[] values = id.split("&");
         ProjectID projectID = new ProjectID(values[0]);
         Description sprintName = new Description((values[1]));
 
-        SprintID sprintID = new SprintID(projectID, sprintName);
-
+        SprintID sprintID = new SprintID(projectID, sprintName);*/
+        SprintID sprintID = createSprintIdByStringInputFromController(id);
         List<UserStoryOfSprint> userStoryOfSprintList = userStoryOfSprintRepo.findAllUserStoriesBySprintID(sprintID);
 
         dtoList = userStoryOfSprintMapper.model2CollectionDTO(userStoryOfSprintList);
