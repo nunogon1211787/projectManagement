@@ -124,19 +124,6 @@ public class ResourceController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-
-//    @GetMapping
-//    public ResponseEntity<Object> showCurrentProjectsByUser(@RequestParam("user") IdDTO id, @RequestParam("date")
-//    StartSprintDTO dateDto){
-//
-//        List<OutputProjectDTO> projectsDto = showAllCurrentProjectsByUserService.showCurrentProjectsByUser(id,
-//        dateDto);
-//
-//        return new ResponseEntity<>(projectsDto, HttpStatus.OK);
-
-//    }
-
-
     /**
      * Define the requested project role of a resource (US014 and US027)
      */

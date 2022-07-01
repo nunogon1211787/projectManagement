@@ -21,7 +21,7 @@ participant "response: \n ResponseEntity" as json
 
 autoactivate on
 
-[o-> Route: PATCH/{id} (json)
+[o-> Route: PATCH/resources/{id} (json)
 Route -> Ctrl: defineProjectRoleOfProject \n (defineRoleOfResourceDTO)
 note right
 Change from json to dto hidden to simplify diagram
@@ -35,7 +35,7 @@ loop ResourceJPA
 resourceJPARepository -> resourceJPA: resourceJPA.getProjectID
 return resourceJPA list
 end
-resourceJPARepository --> mapper: toDomain (resourceJPA list)
+resourceJPARepository -> mapper: toDomain (resourceJPA list)
 loop ResourceJPA
 mapper -> resource: resourceJPA.getProjectID
 return resource list
@@ -49,6 +49,7 @@ note right
 Change from resourceID to resourceIDJPA hidden to simplify diagram
 end note
 resourceJPARepository --> iResourceRepo: resourceJPA
+
 iResourceRepo -> assembler: toDomain(resourceJPA)
 assembler --> iResourceRepo: resource
 iResourceRepo --> service: resource
