@@ -65,6 +65,7 @@ class UserProfileDomainDataRestAssemblerTest {
         when(businessSectorFactory.createBusinessSector(dto.getProjectBusinessSector())).thenReturn(businessSector);
         when(numberOfSprintsFactory.create(Integer.parseInt(dto.getProjectNumberOfPlannedSprints())))
                 .thenReturn(numberOfSprints);
+        when(numberOfSprints.getNumberOfSprintsVO()).thenReturn(3);
         when(sprintDurationFactory.create(Integer.parseInt(dto.getProjectSprintDuration()))).thenReturn(sprintDuration);
         when(budgetFactory.create(Double.parseDouble(dto.getProjectBudget()))).thenReturn(budget);
         List<ProjectRestDTO> dtos = new ArrayList<>();

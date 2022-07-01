@@ -243,11 +243,11 @@ public class ResourceService {
     }
 
     private void checkAllInputToCreateResource(CreateResourceDTO dto) {
-        checkSystemUserExists(dto.systemUserID);
-        checkProjectExists(dto.projectId);
+        checkSystemUserExists(dto.getSystemUserID());
+        checkProjectExists(dto.getProjectId());
         checkProjectRole(dto);
-        checkDatesInsideProject(dto.projectId, dto.startDate, dto.endDate);
-        checkAllocation(dto.systemUserID, dto.startDate, dto.endDate, dto.percentageOfAllocation);
+        checkDatesInsideProject(dto.getProjectId(), dto.getStartDate(), dto.getEndDate());
+        checkAllocation(dto.getSystemUserID(), dto.getStartDate(), dto.getEndDate(), dto.getPercentageOfAllocation());
     }
 
     private void checkSystemUserExists(String userID) {
@@ -287,15 +287,15 @@ public class ResourceService {
 
         if (!managementService.validateAllocation(resourceAllocatedProjects, startDate,
                 endDate, percentageOfAllocation)) {
-            throw new IllegalArgumentException(("Is not valid to create - Allocation)"));
+            throw new IllegalArgumentException(("Is not valid to create - Allocation"));
         }
     }
 
     private void checkProjectRole(CreateResourceDTO dto) throws IllegalArgumentException {
-        ProjectID projID = new ProjectID(dto.projectId);
+        ProjectID projID = new ProjectID(dto.getProjectId());
         List<Resource> projectTeamList = resRepo.findAllByProject(projID);
 
-        if (!managementService.validateProjectRole(projectTeamList, dto.startDate, dto.endDate, dto.projectRole)) {
+        if (!managementService.validateProjectRole(projectTeamList, dto.getStartDate(), dto.getEndDate(), dto.getProjectRole())) {
             throw new IllegalArgumentException(("Is not valid to create - ProjectRole"));
         }
     }

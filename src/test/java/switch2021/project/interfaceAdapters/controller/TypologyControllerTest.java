@@ -152,6 +152,18 @@ public class TypologyControllerTest {
         assertThat(response.getStatusCodeValue()).isEqualTo(200);
     }
 
+    @Test
+    public void findAllTypologiesFail() {
+        //Arrange
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+        //Act
+        when(service.findAllTypologies()).thenThrow(NullPointerException.class);
+        ResponseEntity<Object> response = controller.findTypologyList();
+        //Assert
+        assertThat(response.getStatusCodeValue()).isEqualTo(400);
+    }
+
 
     @Test
     public void deleteTypology_TypologyDoesNotExist() {

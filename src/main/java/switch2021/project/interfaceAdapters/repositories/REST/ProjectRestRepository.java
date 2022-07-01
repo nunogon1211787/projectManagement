@@ -22,7 +22,7 @@ import java.util.List;
 public class ProjectRestRepository {
 
     public static final String ENDPOINT = "https://vs866.dei.isep.ipp.pt:8443/switchproject-1.0-SNAPSHOT/api";
-    public static final String COLLECTION = "/projects/A0001";
+    public static final String COLLECTION = "/projects";
 
 
     public List<ProjectRestDTO> findAll() throws SSLException {
@@ -39,9 +39,9 @@ public class ProjectRestRepository {
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .defaultUriVariables(Collections.singletonMap("url", ENDPOINT))
                 .build();
-        ProjectRestDTO projectRestDTO;
+        Mono<List<ProjectRestDTO>> projectRestDTOList;
         try {
-            projectRestDTO = webClient
+            projectRestDTOList = webClient
                     .get()
                     .uri(ENDPOINT + COLLECTION)
                     .retrieve()
@@ -50,23 +50,23 @@ public class ProjectRestRepository {
                         return Mono.empty();
                     })
 
-                    .bodyToMono(ProjectRestDTO.class)
+                    .bodyToFlux(ProjectRestDTO.class)
 
                     .onErrorReturn(null)
 
                     .doOnError(throwable -> {
                         System.out.println(throwable.getMessage());
                     })
-                    .block();
+                    .collectList()
+                    .log();
         } catch (Exception e) {
-            projectRestDTO = null;
+            projectRestDTOList = null;
         }
 
-        if (projectRestDTO != null)
-            return List.of(projectRestDTO);
+        if (projectRestDTOList != null)
+            return projectRestDTOList.block();
         else
-            return
-                    Collections.emptyList();
+            return Collections.EMPTY_LIST;
     }
 }
 

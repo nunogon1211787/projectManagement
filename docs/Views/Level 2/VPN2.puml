@@ -13,7 +13,8 @@ participant "DataBase" as db
 ui -> fe: Find All Projects
 fe -> be: Find All Projects
 be -> db: Find All Projects
-[o-> be:
+'request from G5 group
+[o-> be: Get All Projects
 
 
 

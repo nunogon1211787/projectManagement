@@ -10,12 +10,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import switch2021.project.dtoModel.dto.TypologyDTO;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -103,22 +100,22 @@ public class UserProfileControllerIntegrationTest {
                 .andExpect(status().isNotFound())
                 .andReturn();
     }
-
-    @DisplayName("Get All User Profiles")
-    @Test
-    void mockMvcTestShowAllUserProfiles() throws Exception {
-        //Arrange
-        MvcResult result = mockMvc
-                .perform(MockMvcRequestBuilders.get(BASE_URL + "/profiles")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn();
-        //Act
-        String resultContent = result.getResponse().getContentAsString();
-        //Assert
-        assertNotNull(resultContent);
-        assertNull(result.getResponse().getErrorMessage());
-    }
+//
+//    @DisplayName("Get All User Profiles")
+//    @Test
+//    void mockMvcTestShowAllUserProfiles() throws Exception {
+//        //Arrange
+//        MvcResult result = mockMvc
+//                .perform(MockMvcRequestBuilders.get(BASE_URL + "/profiles")
+//                        .accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//        //Act
+//        String resultContent = result.getResponse().getContentAsString();
+//        //Assert
+//        assertNotNull(resultContent);
+//        assertNull(result.getResponse().getErrorMessage());
+//    }
 
 //    @SneakyThrows
 //    @DisplayName("Delete User Profile")

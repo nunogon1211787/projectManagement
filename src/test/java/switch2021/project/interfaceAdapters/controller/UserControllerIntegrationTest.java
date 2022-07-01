@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -21,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class UserControllerIntegrationTest {
 
     public static final String BASE_URL = "https://localhost:8443";
@@ -79,35 +81,6 @@ public class UserControllerIntegrationTest {
         assertEquals(200, result.getResponse().getStatus());
     }
 
-
-    @Test
-    void showAllUsers() {
-    }
-
-    @Test
-    void searchUsersByTypedParams() {
-    }
-
-    @Test
-    void updatePersonalData() {
-    }
-
-    @Test
-    void assignProfile() {
-    }
-
-    @Test
-    void removeProfile() {
-    }
-
-    @Test
-    void activateUser() {
-    }
-
-    @Test
-    void inactivateUser() {
-    }
-
    @Test
     void requestUserProfile() throws Exception {
         //Arrange
@@ -131,7 +104,31 @@ public class UserControllerIntegrationTest {
 
 
     @Test
-    void deleteUser() {
+    void deleteUser() throws Exception {
+        //Arrange
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/users/nel.m@mymail.com")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()) //Assert
+                .andReturn();
+        //Act
+        String body = result.getResponse().getContentAsString();
+        //Assert
+        assertTrue(body.contains("\"responseMessage\":\"User was deleted successfully!\""));
+    }
+
+    @Test
+    void deleteUserFail() throws Exception {
+        //Arrange and Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/users/testfail@mymail.com")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest()) //Assert
+                .andReturn();
+        //Assert
+        assertTrue(result.getResponse().getContentAsString().contains("\"errorMessage\":\"This User does not exist!\""));
     }
 
 }

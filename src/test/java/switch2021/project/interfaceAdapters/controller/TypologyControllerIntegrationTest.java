@@ -141,20 +141,20 @@ public class TypologyControllerIntegrationTest {
     }
 
 
-//    @DisplayName("Delete Typology")
-//    @Test
-//    void mockMvcTestDeleteTypology() throws Exception {
-//        //Arrange
-//        MvcResult result = mockMvc
-//                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/typologies/Fixed cost")
-//                        .contentType("application/json")
-//                        .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isAccepted()) //Assert
-//                .andReturn();
-//        //Act
-//        String body = result.getResponse().getContentAsString();
-//        //Assert
-//        assertTrue(body.contains("\"responseMessage\":\"Typology successfully deleted.\""));
-//    }
+    @DisplayName("Delete Typology")
+    @Test
+    void mockMvcTestDeleteTypology() throws Exception {
+        //Arrange
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.delete(BASE_URL + "/typologies/Fixed cost")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isAccepted()) //Assert
+                .andReturn();
+        //Act
+        String body = result.getResponse().getContentAsString();
+        //Assert
+        assertTrue(body.contains("\"responseMessage\":\"Typology successfully deleted.\""));
+    }
 
 }

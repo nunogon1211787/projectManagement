@@ -4,16 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -21,15 +16,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import switch2021.project.applicationServices.service.ResourceService;
 import switch2021.project.dtoModel.dto.CreateResourceDTO;
 import switch2021.project.dtoModel.dto.DefineRoleOfResourceDTO;
-import switch2021.project.dtoModel.dto.OutputResourceDTO;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -71,6 +59,60 @@ class ResourceControllerIntegrationTest {
                 .andReturn();
 
         assertNotNull(result.getResponse().getContentAsString());
+    }
+
+    @SneakyThrows
+    @Test
+    void createResourceFailAllocation() {
+        //Arrange
+        CreateResourceDTO dto = new CreateResourceDTO("tdc@mymail.com", "Project_2022_3", "TeamMember",
+                "2022-03-10", "2023-01-12", 500, 0.1);
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.post(BASE_URL + "/resources")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(dto))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())//Assert
+                .andReturn();
+        //Act
+        String body = result.getResponse().getContentAsString();
+        assertTrue(body.contains("\"errorMessage\":\"Is not valid to create - Allocation\""));
+    }
+
+    @SneakyThrows
+    @Test
+    void createResourceFailDates() {
+        //Arrange
+        CreateResourceDTO dto = new CreateResourceDTO("tdc@mymail.com", "Project_2022_3", "TeamMember",
+                "2020-03-10", "2023-01-12", 500, 0.1);
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.post(BASE_URL + "/resources")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(dto))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())//Assert
+                .andReturn();
+        //Act
+        String body = result.getResponse().getContentAsString();
+        assertTrue(body.contains("\"errorMessage\":\"Dates are not inside project!\""));
+    }
+
+    @SneakyThrows
+    @Test
+    void createResourceFailProjectNotExist() {
+        //Arrange
+        CreateResourceDTO dto = new CreateResourceDTO("tdc@mymail.com", "Project_2022_53", "TeamMember",
+                "2020-03-10", "2023-01-12", 500, 0.1);
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.post(BASE_URL + "/resources")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(dto))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())//Assert
+                .andReturn();
+        //Act
+        String body = result.getResponse().getContentAsString();
+        assertTrue(body.contains("\"errorMessage\":\"Project does not exist!\""));
     }
 
     @SneakyThrows
