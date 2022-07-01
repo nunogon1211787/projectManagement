@@ -418,7 +418,7 @@ public class SprintControllerIntegrationTest {
     void shouldStartASprint() throws Exception {
         //Arrange
         String projID = "Project_2022_3";
-        String name = "sprint19";
+        String name = "sprint17";
         String startDate = "";
         NewSprintDTO sprintDTO = new NewSprintDTO(projID, name, startDate);
         //Act
