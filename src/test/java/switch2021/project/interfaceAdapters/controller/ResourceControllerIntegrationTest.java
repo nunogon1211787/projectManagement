@@ -270,6 +270,40 @@ class ResourceControllerIntegrationTest {
 
     @SneakyThrows
     @Test
+    void getCurrentProjectTeamTrue2() {
+        //Arrange
+
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/resources/currentprojectTeam/Project_2022_3")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String x = result.getResponse().getContentAsString();
+
+        assertNotNull(x);
+    }
+
+    @SneakyThrows
+    @Test
+    void getCurrentProjectTeamFail2() {
+        //Arrange
+
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/resources/currentprojectTeam/Project_2022_999999")
+                        .contentType("application/json")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        String x = result.getResponse().getContentAsString();
+
+        assertNotNull(x);
+    }
+
+    @SneakyThrows
+    @Test
     void showAllResourcesTrue() {
         //Arrange
 
