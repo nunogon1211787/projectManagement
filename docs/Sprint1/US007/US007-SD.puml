@@ -8,52 +8,52 @@ autonumber
 
 participant ":CreateResourceIn\nAProjectRoute" as Route
 participant ":Resource\nController" as Ctrl
-participant "srv : CreateResourceInAProjectService" as srv
-participant "sysUsRepo : ISystemUserRepo" as systemUserStore
-participant "projRepo : IProjectRepo" as projectStore
-participant "resFac : IResourceFactory" as resourceFactory
-participant "resRepo : IResourceRepo" as resourceStore
+participant ": ResourceService" as srv
+participant ": ISystemUserRepo" as systemUserStore
+participant " : IProjectRepo" as projectStore
+participant " : IResourceFactory" as resourceFactory
+participant " : IResourceRepo" as resourceStore
 participant "res : Resource" as resource
-participant "dsrv : ManageResourceService" as domainService
+participant " : ManageResourceService" as domainService
 participant "map : ResourceMapper" as map
 participant "outDto : OutputResourceDto" as outDto
 participant "exception : Exception" as exc
 participant "responseJson : ResponseEntity" as json
 
-[o-> Route:  POST/resources(json)
-Route -> Ctrl: createResource (inDto)
+[o-> Route:  POST/resources/{id} (json)
+Route -> Ctrl: createAndSaveResource (dto)
 note right Route: Json object was deserialize to a CreateResourceDto object
-Ctrl -> srv: createAndSaveResource (inDto)
+Ctrl -> srv: createAndSaveResource (dto)
 
 note over srv : The creation of these ids are hidden to simplify the diagram.
-srv -> srv: checkSystemUserExists(inDto.systemUserID)
+srv -> srv: checkSystemUserExists(dto.systemUserID)
 srv -> systemUserStore: existsByID(systemUserID)
 systemUserStore --> srv: true
 deactivate srv
-srv -> srv: checkProjectExists(inDto.projectID)
+srv -> srv: checkProjectExists(dto.projectID)
 srv -> projectStore: existsByID(projectID)
 projectStore --> srv: true
 deactivate srv
-srv -> srv: checkDatesInsideProject(inDto.projectID)
+srv -> srv: checkDatesInsideProject(dto.projectID)
 srv -> projectStore: findByID(projectID)
 projectStore --> srv: true
 deactivate srv
-srv -> srv: checkAllocation(inDto.projectID)
+srv -> srv: checkAllocation(dto.projectID)
 srv -> resourceStore: findAllByUser(systemUserID)
 resourceStore --> srv: true
 srv -> domainService: validateAllocation(inDto)
 domainService --> srv: true
 deactivate srv
-srv -> srv: checkProjectRole(inDto)
+srv -> srv: checkProjectRole(dto)
 srv -> resourceStore: findAllByProject(projectID)
 resourceStore --> srv: true
-srv -> domainService: validateProjectRole(inDto)
+srv -> domainService: validateProjectRole(dto)
 domainService --> srv: true
 deactivate srv
 
 
 alt if user and project exist
-srv -> resourceFactory: res: createResource(inDto)
+srv -> resourceFactory: res: createResource(dto)
 note over resourceFactory : All parameters (value objects) are instantiated in their own factory.
 resourceFactory -> resource**: createResource(resourceId, \n endDate, costPerHour, allocation)
 opt if the request has a role
