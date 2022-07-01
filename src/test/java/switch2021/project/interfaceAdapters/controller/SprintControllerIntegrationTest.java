@@ -289,6 +289,74 @@ public class SprintControllerIntegrationTest {
     }
 
     @Test
+    void shouldGetSprintsOfAProject2() throws Exception {
+        //Arrange
+        String projectID = "Project_2022_3";
+        //Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/sprints/sprintsList/" + projectID)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())//Assert
+                .andReturn();
+
+        String resultContent = result.getResponse().getContentAsString();
+        assertNotNull(resultContent);
+        assertTrue(resultContent.contains("sprintID\":\"Project_2022_3&sprint6\""));
+        assertTrue(resultContent.contains("sprintID\":\"Project_2022_3&sprint12\""));
+    }
+
+    @Test
+    void shouldNotGetSprintsOfAnUnknownProject2() throws Exception {
+        //Arrange
+        String projectID = "Project_2022_5";
+        //Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/sprints/sprintsList/" + projectID)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())//Assert
+                .andReturn();
+
+        String resultContent = result.getResponse().getContentAsString();
+        assertNotNull(resultContent);
+        assertTrue(resultContent.contains("Project does not exist"));
+    }
+
+    @Test
+    void shouldGetNoSprintsOfAProjectThatDontHaveSprints2() throws Exception {
+        //Arrange
+        //create new Project
+        String projectName = "Dummy 04";
+        String description = "Just another dummy project";
+        String businessSector = "It doesn't matter";
+        String startDate = "2022-06-20";
+        String sprintDuration = "14";
+        String numberOfSprints = "5";
+        String budget = "100000";
+        String typology = "Fixed cost";
+        String customer = "XPTO, SA";
+
+        ProjectDTO projectDTO = new ProjectDTO(projectName, description, businessSector, startDate, numberOfSprints,
+                budget,
+                sprintDuration, typology, customer);
+
+        mockMvc.perform(MockMvcRequestBuilders.post(BASE_URL + "/projects")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(projectDTO))
+                .accept(MediaType.APPLICATION_JSON));
+        //Project created: Project_2022_4
+        String projectID = "Project_2022_4";
+        //Act
+        MvcResult result = mockMvc
+                .perform(MockMvcRequestBuilders.get(BASE_URL + "/sprints/sprintsList/" + projectID)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())//Assert
+                .andReturn();
+
+        String resultContent = result.getResponse().getContentAsString();
+        assertNotNull(resultContent);
+    }
+
+    @Test
     void shouldDeleteSprint() throws Exception {
         //Arrange
         String sprintID = "Project_2022_3&sprint10";

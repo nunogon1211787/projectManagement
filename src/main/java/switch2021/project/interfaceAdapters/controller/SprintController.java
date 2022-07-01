@@ -112,11 +112,6 @@ public class SprintController {
         try {
             result = sprintService.showSprintsInProject(projId);
 
-//            if(result.getContent().isEmpty()) {
-//                ErrorMessage message = new ErrorMessage();
-//                message.errorMessage = "Was not created any sprint yet!";
-//                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-//            }
         } catch (Exception exception) {
             ErrorMessage message = new ErrorMessage();
             message.errorMessage = exception.getMessage();
