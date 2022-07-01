@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
+import java.util.ArrayList;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor

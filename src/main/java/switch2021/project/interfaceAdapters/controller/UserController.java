@@ -12,7 +12,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
-@CrossOrigin(origins = "https://localhost:8443")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -132,6 +132,21 @@ public class UserController {
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
             return new ResponseEntity<>(outputDTO, HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}/assignProfiles")
+    public ResponseEntity<Object> assignProfiles(@PathVariable("id") String id,
+                                                @RequestBody UpdateUserProfilesDTO profileDTO) {
+        OutputUserDTO outputDTO;
+
+        try {
+            outputDTO = userService.assignUserProfiles(id, profileDTO);
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(outputDTO, HttpStatus.OK);
     }
 
 

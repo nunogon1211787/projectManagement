@@ -1,6 +1,7 @@
 package switch2021.project.applicationServices.service;
 
 import lombok.SneakyThrows;
+import org.apache.tomcat.jni.Local;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -26,12 +27,11 @@ import switch2021.project.entities.factories.factoryInterfaces.IResourceFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IProjectIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IResourceIDFactory;
 import switch2021.project.entities.valueObjects.voFactories.voInterfaces.IUserIDFactory;
-import switch2021.project.entities.valueObjects.vos.ProjectID;
-import switch2021.project.entities.valueObjects.vos.ResourceID;
-import switch2021.project.entities.valueObjects.vos.UserID;
+import switch2021.project.entities.valueObjects.vos.*;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectRole;
 import switch2021.project.entities.valueObjects.vos.enums.ProjectStatusEnum;
 
+import java.time.LocalDate;
 import java.util.*;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -88,6 +88,7 @@ class ResourceServiceTest {
 //        when(dto.getPercentageOfAllocation()).thenReturn(percentage);
 //        when(dto.getProjectRole()).thenReturn(role);
 //
+//
 //        UserID userId = mock(UserID.class);
 //        when(userIDFactory.createUserID(email)).thenReturn(userId);
 //        when(userRepo.existsById(userId)).thenReturn(true);
@@ -101,7 +102,7 @@ class ResourceServiceTest {
 //        projectTeamList.add(x);
 //        when(resRepo.findAllByProject(projID)).thenReturn(projectTeamList);
 //
-//        when(manageSrv.validateProjectRole(projectTeamList, data, data2, role)).thenReturn(true);
+//        when(manageSrv.validateProjectRole(projectTeamList, dto.getStartDate(), dto.getEndDate(), dto.getProjectRole())).thenReturn(true);
 //
 //        Project project = mock(Project.class);
 //        when(projRepo.findById(projID)).thenReturn(Optional.of(project));
@@ -111,7 +112,7 @@ class ResourceServiceTest {
 //        List<Resource> resourceAllocatedProjects = new ArrayList<>();
 //        when(resRepo.findAllByUser(userId)).thenReturn(resourceAllocatedProjects);
 //
-//        when(manageSrv.validateAllocation(projectTeamList, data, data2, percentage)).thenReturn(true);
+//        when(manageSrv.validateAllocation(projectTeamList, dto.getStartDate(), dto.getEndDate(), percentage)).thenReturn(true);
 //
 //        Resource newResource = mock(Resource.class);
 //        ResourceID id = mock(ResourceID.class);
@@ -139,6 +140,7 @@ class ResourceServiceTest {
 //
 //
 //    }
+
 
     @SneakyThrows
     @Test
@@ -441,4 +443,5 @@ class ResourceServiceTest {
         //Assert
         assertEquals(CollectionModel.of(dtos), result);
     }
+
 }

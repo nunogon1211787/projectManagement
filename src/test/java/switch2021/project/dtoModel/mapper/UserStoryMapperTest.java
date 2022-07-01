@@ -9,6 +9,7 @@ import org.springframework.hateoas.CollectionModel;
 import switch2021.project.dtoModel.dto.OutputUserStoryDTO;
 import switch2021.project.entities.aggregates.UserStory.*;
 import switch2021.project.entities.valueObjects.vos.*;
+import switch2021.project.entities.valueObjects.vos.enums.UserStoryStatusEnum;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class UserStoryMapperTest {
         when(description.getText()).thenReturn("Make Test");
         when(newUserStory.getTimeEstimate()).thenReturn(timeEstimate);
         when(timeEstimate.getUsHours()).thenReturn(5.0);
+        when(newUserStory.getUsStatus()).thenReturn(UserStoryStatusEnum.OPEN);
 
         OutputUserStoryDTO outputUserStoryDTO = mapper.toDto(newUserStory);
 
@@ -72,6 +74,7 @@ public class UserStoryMapperTest {
         UsTitle usTitle = mock(UsTitle.class);
         UsPriority usPriority = mock(UsPriority.class);
         UsHour timeEstimate = mock(UsHour.class);
+
         //Act
         when(newUserStory.getUserStoryID()).thenReturn(userStoryID);
         when(userStoryID.getProjectID()).thenReturn(projectID);
@@ -84,6 +87,7 @@ public class UserStoryMapperTest {
         when(description.getText()).thenReturn("Make Test");
         when(newUserStory.getTimeEstimate()).thenReturn(timeEstimate);
         when(timeEstimate.getUsHours()).thenReturn(5.0);
+        when(newUserStory.getUsStatus()).thenReturn(UserStoryStatusEnum.OPEN);
 
         OutputUserStoryDTO outputUserStoryDTO = mapper.toDto(newUserStory);
 
@@ -115,6 +119,7 @@ public class UserStoryMapperTest {
         when(description.getText()).thenReturn("Make Test");
         when(newUserStory.getTimeEstimate()).thenReturn(timeEstimate);
         when(timeEstimate.getUsHours()).thenReturn(5.0);
+        when(newUserStory.getUsStatus()).thenReturn(UserStoryStatusEnum.OPEN);
 
         OutputUserStoryDTO outputUserStoryDTO = mapper.toDto(newUserStory);
 
@@ -145,6 +150,7 @@ public class UserStoryMapperTest {
         when(description.getText()).thenReturn("Make Test");
         when(newUserStory.getTimeEstimate()).thenReturn(timeEstimate);
         when(timeEstimate.getUsHours()).thenReturn(5.0);
+        when(newUserStory.getUsStatus()).thenReturn(UserStoryStatusEnum.OPEN);
 
         OutputUserStoryDTO outputUserStoryDTO = mapper.toDto(newUserStory);
 
@@ -185,6 +191,7 @@ public class UserStoryMapperTest {
         when(parent.getTimeEstimate()).thenReturn(timeEstimate);
         when(timeEstimate.getUsHours()).thenReturn(5.0);
         when(newUserStory.getParentUserStory()).thenReturn(parent);
+        when(newUserStory.getUsStatus()).thenReturn(UserStoryStatusEnum.OPEN);
         List<UserStory> userStories = new ArrayList<>();
         userStories.add(newUserStory);
         //Act

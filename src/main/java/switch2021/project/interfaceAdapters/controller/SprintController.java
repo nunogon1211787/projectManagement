@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import switch2021.project.applicationServices.service.SprintService;
 import switch2021.project.dtoModel.dto.*;
 
-@CrossOrigin(origins = "https://localhost:8443")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/sprints")
 public class SprintController {
@@ -104,11 +104,33 @@ public class SprintController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/sprintsList/{id}")
+    public ResponseEntity<Object> showSprintsInProject(@PathVariable("id") String projId){
+
+        CollectionModel<OutSprintDTO> result;
+
+        try {
+            result = sprintService.showSprintsInProject(projId);
+
+//            if(result.getContent().isEmpty()) {
+//                ErrorMessage message = new ErrorMessage();
+//                message.errorMessage = "Was not created any sprint yet!";
+//                return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+//            }
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public  ResponseEntity<Object> showSprintById(@PathVariable("id") String id) {
 
         ErrorMessage message = new ErrorMessage();
-        OutputSprintDTO outputSprintDTO;
+        OutSprintDTO outputSprintDTO;
 
         try {
             outputSprintDTO = sprintService.showSprintById(id);
@@ -157,10 +179,27 @@ public class SprintController {
     public  ResponseEntity<Object> showScrumBoard(@PathVariable("id") String id) {
 
         ErrorMessage message = new ErrorMessage();
+        CollectionModel<UserStoryOfSprintDTO> uSOfSprintDTOS;
+
+        try {
+            uSOfSprintDTOS = sprintService.showScrumBoard(id);
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(uSOfSprintDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping("/scrumboard/{id}")
+    public  ResponseEntity<Object> showScrumBoardOfSprint(@PathVariable("id") String id) {
+
+        ErrorMessage message = new ErrorMessage();
         CollectionModel<UserStoryOfSprintDTO> UsSprintDTO;
 
         try {
-            UsSprintDTO = sprintService.showScrumBoard(id);
+            UsSprintDTO = sprintService.showScrumBoardOfSprint(id);
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();

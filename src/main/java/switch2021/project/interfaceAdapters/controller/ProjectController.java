@@ -18,7 +18,7 @@ import java.util.Map;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-@CrossOrigin(origins = "https://localhost:8443")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/projects")
 public class ProjectController {
@@ -121,13 +121,16 @@ public class ProjectController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
+    /**
+     * US017     */
+
     @GetMapping("/{id}/projects")
-    public ResponseEntity<Object> showCurrentProjectsByUser(@PathVariable("id") String id) {
+    public ResponseEntity<Object> getCurrentProjectsByUser(@PathVariable("id") String id) {
         ErrorMessage message = new ErrorMessage();
         CollectionModel<OutputProjectDTO> allProjectsDto;
 
         try{
-            allProjectsDto = service.showCurrentProjectsByUser(id);
+            allProjectsDto = service.getCurrentProjectsByUser(id);
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);

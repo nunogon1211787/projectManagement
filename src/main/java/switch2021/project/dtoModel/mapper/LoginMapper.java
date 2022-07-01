@@ -25,7 +25,8 @@ public class LoginMapper {
 
         OutputLoginDTO dto = new OutputLoginDTO();
 
-        dto.username = logged.getUserId().getEmail().getEmailText();
+        dto.email = logged.getUserId().getEmail().getEmailText();
+        dto.username = logged.getUserName().getText();
         dto.token = "authenticated";
 
         //Add HATEOAS to user edit your own information
