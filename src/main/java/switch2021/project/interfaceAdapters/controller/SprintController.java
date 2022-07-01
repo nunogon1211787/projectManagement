@@ -130,7 +130,7 @@ public class SprintController {
     public  ResponseEntity<Object> showSprintById(@PathVariable("id") String id) {
 
         ErrorMessage message = new ErrorMessage();
-        OutputSprintDTO outputSprintDTO;
+        OutSprintDTO outputSprintDTO;
 
         try {
             outputSprintDTO = sprintService.showSprintById(id);
@@ -183,6 +183,23 @@ public class SprintController {
 
         try {
             UsSprintDTO = sprintService.showScrumBoard(id);
+
+        } catch (Exception exception) {
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(UsSprintDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("/scrumboard/{id}")
+    public  ResponseEntity<Object> showScrumBoardOfSprint(@PathVariable("id") String id) {
+
+        ErrorMessage message = new ErrorMessage();
+        CollectionModel<UserStoryOfSprintDTO> UsSprintDTO;
+
+        try {
+            UsSprintDTO = sprintService.showScrumBoardOfSprint(id);
 
         } catch (Exception exception) {
             message.errorMessage = exception.getMessage();

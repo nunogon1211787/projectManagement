@@ -205,6 +205,21 @@ public class SprintService {
         return dtoList;
     }
 
+    public CollectionModel<UserStoryOfSprintDTO> showScrumBoardOfSprint(String id) throws Exception {
+        CollectionModel<UserStoryOfSprintDTO> dtoList;
+        String[] values = id.split("&");
+        ProjectID projectID = new ProjectID(values[0]);
+        Description sprintName = new Description((values[1]));
+
+        SprintID sprintID = new SprintID(projectID, sprintName);
+
+        List<UserStoryOfSprint> userStoryOfSprintList = userStoryOfSprintRepo.findAllUserStoriesBySprintID(sprintID);
+
+        dtoList = userStoryOfSprintMapper.model2CollectionDTO(userStoryOfSprintList);
+
+        return dtoList;
+    }
+
     public UserStoryOfSprintDTO changeStatusScrumBoard(String id, UserStoryOfSprintDTO userStoryDTO) throws Exception {
         UserStoryOfSprintDTO userStoryOfSprintDTO;
         String[] values = id.split("_");
@@ -272,7 +287,7 @@ public class SprintService {
         return sprintIDFactory.create(projectID,sprintName);
     }
 
-    public OutputSprintDTO showSprintById (String id) throws Exception {
+    public OutSprintDTO showSprintById (String id) throws Exception {
         SprintID sprintID = new SprintID(id);
 
         Optional<Sprint> opSprint = sprintRepo.findBySprintID(sprintID);
@@ -280,7 +295,7 @@ public class SprintService {
         Sprint sprint = opSprint.flatMap(sprint1 -> opSprint).orElse(null);
 
         if(sprint != null) {
-            return sprintMapper.toDTO(sprint);
+            return sprintMapper.model2DTO(sprint);
         }
 
 

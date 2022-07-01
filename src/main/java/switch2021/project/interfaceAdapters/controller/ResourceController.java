@@ -92,6 +92,20 @@ public class ResourceController {
         return new ResponseEntity<>(resourcesFound, HttpStatus.OK);
     }
 
+    @GetMapping("/currentprojectTeam/{id}")
+    public ResponseEntity<Object> getCurrentProjectTeam(@PathVariable("id") String projectId) {
+        CollectionModel<OutputResourceDTO> resourcesFound;
+
+        try {
+            resourcesFound = service.getCurrentProjectTeam(projectId);
+        } catch (Exception exception) {
+            ErrorMessage message = new ErrorMessage();
+            message.errorMessage = exception.getMessage();
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(resourcesFound, HttpStatus.OK);
+    }
+
 
     /**
      * Consult a Project Team of a Project (US028)
